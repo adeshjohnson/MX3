@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>ivr_voices</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ivr_voices</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--NEW VOICE-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivrvoices/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ivr[voice]</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ivr[description]</td>
+	<td>test voice</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IVR Voice created</td>
+	<td></td>
+</tr>
+<!--UPDATE VOICE-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivrvoices/edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>voice[description]</td>
+	<td>test voice_update</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IVR Voice updated</td>
+	<td></td>
+</tr>
+<!--INSERT NEW SOUND FILE-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivrvoices/edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=New Sound File</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='description' and @name='description' and @value='']</td>
+	<td>Test_sound_file</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/wav/test_Front_Left.wav</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Upload file']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Sound file was uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>description_141</td>
+	<td>Test_sound_file</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>path_141</td>
+	<td>Front_Left</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=size_141</td>
+	<td>138.80 Kb</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>path_141</td>
+	<td>${Front_Left}</td>
+</tr>
+<!--When record is was not found. -->
+<tr>
+	<td>open</td>
+	<td>/billing/ivrvoices/edit/999</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ivr voice was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivrvoices/update/999</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ivr voice was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr_sound_files/create/999</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivrvoices/edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ivr voice was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivrvoices/update</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ivr voice was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr_sound_files/create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--INSER SOUND FILE-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivrvoices/edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=New Sound File</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/wav/test_cepstral_2.wav</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#add_new_sound_file &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Sound file was uploaded</td>
+	<td></td>
+</tr>
+<!--Pirmmą kartą panaudojamas failas-->
+<tr>
+	<td>click</td>
+	<td>link=New Sound File</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/wav/test_cepstral_2.mp3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#add_new_sound_file &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Sound file was uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=New Sound File</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/wav/test_Front_Left.wav</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#add_new_sound_file &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Sound file was uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivrvoices/edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=New Sound File</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/wav/test_cepstral_2.wav</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>Test_sound_file_wov</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#add_new_sound_file &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Sound file was uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=path_145</td>
+	<td>cepstralwav</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=New Sound File</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/wav/test_cepstral_2.mp3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#add_new_sound_file &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Sound file was uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=path_146</td>
+	<td>cepstralmp</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=path_145</td>
+	<td>${cepstralwav}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=path_146</td>
+	<td>${cepstralmp}</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>id=path_145</td>
+	<td>${cepstralmp}</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>id=path_146</td>
+	<td>${cepstralwav}</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ivr_name</td>
+	<td>IVRs</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=block_name</td>
+	<td>first_block</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>IVR created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=change_action_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=change_action_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=change_action_1</td>
+	<td>label=Change Voice</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=change_action_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=action_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=action_1</td>
+	<td>silence en es ru fr zn vn pt_br it de he test</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=action_1</td>
+	<td>label=test</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=action_1</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=change_action_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=change_action_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=change_action_2</td>
+	<td>label=Playback</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=change_action_2</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=action_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>silence en es ru fr zn vn pt_br it de he test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=action_2</td>
+	<td>label=test</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=action_2</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=action_sound_files_2</td>
+	<td>${Front_Left} ${cepstralwav} ${cepstralmp}</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=action_sound_files_2</td>
+	<td>label=${cepstralwav}</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=action_sound_files_2</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>id=action_sound_files_2</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=action_sound_files_2</td>
+	<td>${Front_Left} ${cepstralwav} ${cepstralmp}</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=action_sound_files_2</td>
+	<td>${cepstralwav}</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_name</td>
+	<td>AutoDialer</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_hour</td>
+	<td>label=02</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_minute</td>
+	<td>label=03</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_hour</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_minute</td>
+	<td>label=58</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_max_retries</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_callerid</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Campaign was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_actions/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=action_type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Action added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/action_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/wav/test_cepstral_2.mp3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=data_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=data_1</td>
+	<td>adcepstralmp</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Action added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/action_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/wav/test_cepstral_2.wav</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=data_2</td>
+	<td>adcepstralwav</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=data_1</td>
+	<td>${adcepstralmp}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=data_2</td>
+	<td>${adcepstralwav}</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_actions/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=data_3</td>
+	<td>silence1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/action_edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/wav/test_Front_Left.wav</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=data_3</td>
+	<td>test_Front_Left.wav</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Sound_file_addet</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=data2_10</td>
+	<td>/home/mor/public/ad_sounds/${adcepstralmp}</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=data2_11</td>
+	<td>/home/mor/public/ad_sounds/${adcepstralwav}</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=data2_8</td>
+	<td>/home/mor/public/ivr_voices/test/${cepstralwav}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=data2_9</td>
+	<td>/home/mor/public/ivr_voices/test/${cepstralmp}</td>
+</tr>
+</tbody></table>
+</body>
+</html>

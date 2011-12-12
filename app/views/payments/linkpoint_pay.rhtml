@@ -1,0 +1,27 @@
+<% if @enabled.to_i == 1 %>
+  <div align="right"><%= image_tag("logo/cards.png",  :style => 'border-style:none', :title => "Credit cards") %></div>
+  <% form_tag(Linkpoint::Notification.get_ipn_url(Confline.get_value("Linkpoint_Test").to_i), :id=>"lpform") do %>
+    <%= linkpoint_setup(nil, @amount_with_vat, Confline.get_value("Linkpoint_StoreID"),
+      :item_name => session[:company] + " balance update",
+      :response_url => @linkpoint_ipn,
+      :currency => @currency,
+      :tax => (@amount_with_vat - @amount),
+      :subtotal => @amount,
+      :custom => @user.id,
+      :payment => @payment.id,
+      :user_id => @user.id,
+      :first_name => @user.first_name,
+      :last_name => @user.last_name,
+      :username => @user.username)
+  %>
+    <%= _('Please_press_here_to_pay')%>* <%= nice_number(@amount) %> <%= @currency %>
+    <br><br>
+    <%= submit_tag _('Pay'), :disable_with=>_('Processing..') %>
+  <% end %>
+  <br>
+  <div class = "simple">
+    *<%= _('Your_VAT') %>: <%= @vat.to_s + "%. " %><%= _('Total_amount_to_pay')%>: <%= nice_number(@amount_with_vat) %> <%= @currency %>
+  </div>
+<% else %>
+  <%=_('LinkPoint_disabled')%>
+<% end %>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.98" />
+<title>tariffs_import_separator</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tariffs_import_separator</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>aaa</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff[purpose]_user_wholesale</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/2527_short.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<!--tikrinama ar nesiulo "-" kaip separatoriaus-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Your configuration (which by system analysis does not match with imported file) : Column Separator , and Decimal Separator . </td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Column Separator ; and Decimal Separator ;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=sep_row_1_0</td>
+	<td>&quot;Afghanistan - Fixed &quot;</td>
+</tr>
+</tbody></table>
+</body>
+</html>

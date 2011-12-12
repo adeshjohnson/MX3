@@ -1,0 +1,256 @@
+<% if session[:usertype] == "admin" or (session[:usertype] == "accountant" or session[:usertype] == "reseller" and @device.user_id != session[:user_id]) %>
+  <b><%= b_user + _('User') %>:</b> <%= link_nice_user(@user)  %><br />
+  <b><%= b_device + _('Device') %>:</b> <%= link_nice_device @device %><br />
+<% else %>
+  <b><%= b_device + _('Device') %>:</b> <%= user_link_nice_device(@device) %><br />
+<% end %>
+
+<% if session[:usertype] == "admin" %>
+  <%= link_to b_extlines + _('Extlines'), {:action => "device_extlines", :id => @device.id}  %>
+<% end %>
+<br /><br />
+
+<b><%= _('Call_state') %></b>: <%= print_cf_type(@cf_type) %><br />
+
+<% if params[:cft] == "no_answer"%>
+  <br />
+  <br />
+  <% form_tag :action => 'callflow_edit', :id => @device.id, :whattodo=>'change_device_timeout', :cft=>"no_answer" do %>
+
+    <table width="100%" class="maintable">
+      <tr>
+        <th align="center" width="40%"><%= _('Option') %></th>
+        <th align="center" width="50%"><%= _('Data') %></th>
+      </tr>
+      <tr>
+        <td><%= _('Device_timeout')%></td>
+        <td align="center" ><%= text_field_tag('device_timeout', @device.timeout , "class" => "input")%> <%= submit_tag _('Change'), :title => _('Change') %> </td>
+      </tr>
+    </table>
+
+  <% end %>
+<% end %>
+<br />
+<br />
+<table width="100%" class="maintable">
+  <tr>
+    <th align="center" width="10%"><%= _('Priority') %></th> 
+    <th align="center" width="40%"><%= _('Action') %></th> 
+    <th align="center" width="50%"><%= _('Data') %></th> 
+  </tr>
+
+  <% i = 0 %>
+  <% for cf in @cfs %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <td align="center">        <%= cf.priority %> </td>
+      <td align="center">
+        <br />
+        <% form_tag :action => 'callflow_edit', :id => @device.id, :cf => cf.id, :cft => @cf_type do %>
+          <%= hidden_field_tag 'whattodo', "change_action"  %>
+          <select name="cf_action" >
+            <option value="empty" <%= "selected" if cf.action == "empty"%>> <%= _('Empty') %> </option>
+            <option value="forward" <%= "selected" if cf.action == "forward"%>> <%= _('Forward') %> </option>
+            <option value="voicemail" <%= "selected" if cf.action == "voicemail"%>> <%= _('VoiceMail') %> </option>
+            <% if @cf_type == "before_call" and @device.device_type != "FAX" and @fax_enabled == 1 %>
+              <option value="fax_detect" <%= "selected" if cf.action == "fax_detect"%>> <%= _('Fax_detect') %> </option>
+            <% end %>
+          </select>
+          <%= submit_tag _('Change'), :title => _('Change') %>
+        <% end %>
+
+        <% if cf.action == "forward" %>
+          <br />
+          <%= _('Forward') + " " + b_forward %>
+          <%= cf.data    if cf.data2 == "external"%>
+          <% if cf.data2 == "local"
+            dev = Device.find(cf.data)%>
+            <%= dev.device_type + "/" + dev.name    %>
+          <% end%>
+          <% if cf.data2 == "sip_uri"
+            sip_uri_string = "SIP" + ": " + cf.data.to_s + "@" + cf.data4.to_s
+            sip_uri_string += ":" + cf.data3.to_s if cf.data3.to_s.length > 0
+          %>
+
+            <%=  sip_uri_string  %>
+          <% end%>
+        <% end %>
+
+        <% if cf.action == "voicemail" %>
+          <%= b_voicemail %>
+          <br />
+          <br />
+        <% end %>
+
+      </td>
+      <td align="left">
+
+        <% if cf.action == "forward" %>
+          <% form_tag :action => 'callflow_edit', :id => @device.id, :cf => cf.id, :cft => @cf_type do %>
+            <%= hidden_field_tag 'whattodo', "change_local_device"  %>
+            <table class="simple" border="0" style="margin: 0px;">
+              <tr>
+                <td colspain = 3 class="border_disabled"><b><%= _('Forward_to') %>: </b></td>
+              </tr>
+              <tr>
+                <td  class="border_disabled"><%= radio_button_tag('cf_data', '5', checked = ( cf.data2.to_s == "local" or cf.data2.to_s == "" ) ) %> </td>
+                <td class="border_disabled">
+                  <%= _('Local_device') %>:
+
+                  <% dev_id = ""
+                  dev_id = cf.data.to_i if cf.data2 == "local" %>
+
+                </td>
+                <td class="border_disabled">
+                  <select name="device_id" >
+                    <option value="" <%= "selected" if dev_id == ""%>> <%= _('__Select_device__') %> </option>
+                    <% for dev in @devices %>
+                      <%   descr = ""
+                      descr = dev.description if dev.description%>
+                      <% if @device.id != dev.id %>
+                        <option value= <%= dev.id.to_s %> <%= "selected" if dev.id == dev_id %>> <%= dev.device_type.to_s + "/" + dev.name.to_s  + " - " + descr.to_s %> </option>
+                      <% end %>
+                    <% end %>
+                  </select>
+
+                </td>
+              </tr>
+              <tr>
+                <td  class="border_disabled"><%= radio_button_tag('cf_data', '6', checked = (cf.data2.to_s == "external" ) ) %> </td>
+                <td class="border_disabled" >
+                  <% cf.data2 == "external" ? external = cf.data : external = "" %>
+                  <%= _('External_number')%>:
+                </td>
+                <td class="border_disabled" > <%= text_field_tag 'ext_number', external, "class" => "input", :size => "20", :maxlength => "20"  %>
+
+                </td>
+              </tr>
+
+
+              <!--
+
+                         <tr>
+                  <td  class="border_disabled">
+              <%= radio_button_tag('cf_data', '7', checked = (cf.data2.to_s == "sip_uri" ) ) %>
+            </td>
+
+                          <td class="border_disabled" >
+
+              <% spi = ""
+              if cf.data2 == "sip_uri"
+                spi = cf.data.split(/[@:]/)
+              end
+            %>
+
+              <%= _('SIP_URI')%> :
+
+
+                          </td>
+
+                          <td class="border_disabled" >
+
+               <table width="100%" class="maintable">
+                           <tr>
+                             <td  class="border_disabled" ></td>
+                             <th><%= _('Username')%></th>
+                             <th>&nbsp;&nbsp;&nbsp;<%= _('Host')%></th>
+                             <th>&nbsp;&nbsp;<%= _('Port')%></th>
+                           </tr>
+                           <tr>
+                             <td class="border_disabled" > <%= _('Sip')%> : </td>
+                             <td> <%= text_field_tag 'username', spi[0], "class" => "input", :maxlength => "15", :size => "30"  %></td>
+                             <td>@<%= text_field_tag 'host',spi[1], "class" => "input",  :maxlength => "20"  %></td>
+                             <td>:<%= text_field_tag 'port', spi[2], "class" => "input", :maxlength => "5", :size => "4"  %></td>
+                           </tr>
+                         </table>
+
+                         </td>
+                        </tr>
+
+              -->
+              <tr> <td colspan = 3 class="border_disabled"></td></tr>
+              <tr> <td colspan = 3 class="border_disabled"></td></tr>
+              <tr> <td colspan = 3 class="border_disabled"></td></tr>
+              <tr><td colspan = 3 class="border_disabled"><b><%= _('With_CallerID') %>: </b></td></tr>
+              <tr>
+                <td  class="border_disabled"><%= radio_button_tag('cf_data3', '1', checked = (cf.data3.to_i == 1) ) %> </td>
+                <td  class="border_disabled"> <%= _('From_device')%>:</td>
+                <td  class="border_disabled"><%= cid_number(@device.callerid)  %></td>
+              </tr>
+              <tr>
+                <td  class="border_disabled" colspain = 2><%= radio_button_tag('cf_data3', '2', checked = (cf.data3.to_i == 2) ) %></td>
+                <td  class="border_disabled"><%= _('Same_as_comes_unchanged')  %></td>
+              </tr>
+              <tr>
+                <td  class="border_disabled">
+                  <% if @dids.size > 0 %>
+                    <%= radio_button_tag('cf_data3', '3', checked = (cf.data3.to_i == 3) ) %>
+                  <% end %>
+                </td>
+                <td  class="border_disabled"> <%= _('From_DID')%>:</td>
+                <td  class="border_disabled">
+                  <% if @dids.size > 0 %>
+                    <select name="did_id" >
+                      <% for did in @dids %>
+                        <option value= <%= did.id %> <%= "selected" if did.id == cf.data4.to_i%> > <%= did.did %> </option>
+                      <% end %>
+                    </select>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <td  class="border_disabled"><%= radio_button_tag('cf_data3', '4', checked = (cf.data3.to_i == 4) ) %></td>
+                <td  class="border_disabled"> <%= _('Custom')%>:</td>
+                <td  class="border_disabled">
+                <%if cf.data3 == 4 %>
+                  <%= text_field_tag 'cf_data4', cf.data4.to_s , "class" => "input", :size => "20", :maxlength => "20"  %>
+                  <%else%>
+                  <%= text_field_tag 'cf_data4', '' , "class" => "input", :size => "20", :maxlength => "20"  %>
+                  <%end%>
+                </td>
+              </tr>
+            </table>
+            <br />
+            <%= submit_tag _('Change'), :disable_with=>_('Processing..') %>
+          <% end %>
+
+
+
+
+
+          <br />
+
+        <% end %>
+
+
+
+        <% if cf.action == "fax_detect"%>
+          <br />
+
+          <% form_tag :action => 'callflow_edit', :id => @device.id, :cf => cf.id, :cft => @cf_type do %>
+            <%= hidden_field_tag 'whattodo', "change_fax_device"  %>
+            <%= _('Fax_device') %>:
+
+            <% dev_id = ""
+            dev_id = cf.data.to_i if cf.data2 == "fax" %>
+
+
+            <select name="device_id" >
+              <option value="" <%= "selected" if dev_id == ""%>> <%= _('__Select_device__') %> </option>
+              <% for dev in @fax_devices %>
+                <%   descr = ""
+                descr = dev.description if dev.description%>
+                <option value= <%= dev.id %> <%= "selected" if dev.id == dev_id%>> <%= dev.device_type + "/" + dev.name  + " - " + descr%> </option>
+              <% end %>
+            </select>
+            <%= image_submit_tag 'icons/check.png', :title => _('Change') %>
+          <% end %>
+          <br />
+        <% end %>
+      </td>
+    </tr>
+    <% i += 1%>
+  <% end %>
+</table>
+
+<br /><br />
+<%= link_to b_back + _('Back_to_Device_Call_Flow'), :action => "callflow", :id => @device.id %>

@@ -1,0 +1,2471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>security</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">security</td></tr>
+</thead><tbody>
+<!--===101===-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_test/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_timeperiod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/terminators</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariffs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--=========-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_cause_codes_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/load_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/calls_per_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/load_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/faxes_list/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/prefix_finder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/first_activity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<!--trying to delete other user's user-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/destroy/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--===google maps===-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/google_maps</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--ivr-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_voice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_timeperiod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new_timeperiod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--terminators-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/terminators</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--subscriptions-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--invoices-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--/stats/resellers-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--admins call list-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/0?calltype=answered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--clis-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--groups-->
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/members/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--import data-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_clear</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--calling cards====-->
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--SMS-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariffs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/provider_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcrs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rates/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--calls-->
+<tr>
+	<td>open</td>
+	<td>/billing/calls/summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--stats-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/show_user_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/calls_by_scr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/calls_per_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/load_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--payments-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--pemissions-->
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/groups_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--==various==-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_addons</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/day_setup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/rerating</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--=====================-->
+<!--===reseller====-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_test/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_timeperiod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/terminators</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/c2c/c2c_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariffs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--------------------->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_cause_codes_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/load_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/calls_per_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/load_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/faxes_list/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/prefix_finder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/first_activity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<!--/billing/servers check-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<!--trying to delete other user's user-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<!--===google maps===-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/google_maps</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--ivr-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_voice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_timeperiod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new_timeperiod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--terminators-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/terminators</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--subscriptions-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--/stats/resellers-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--admins call list-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/0?calltype=answered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--clis-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--groups-->
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/members/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--import data-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_clear</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--calling cards====-->
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--c2c_invoices-->
+<tr>
+	<td>open</td>
+	<td>/billing/c2c/c2c_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/c2c/generate_c2c_invoices?postpaid=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/c2c/generate_c2c_invoices?postpaid=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--SMS-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariffs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/provider_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcrs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rates/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/sms_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/sms_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--calls-->
+<tr>
+	<td>open</td>
+	<td>/billing/calls/summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--stats-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/show_user_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_user</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/calls_by_scr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/calls_per_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/load_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/google_maps</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--pemissions-->
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/groups_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--various-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_addons</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/day_setup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/rerating</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--===accountant===-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_test/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_timeperiod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/terminators</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/c2c/c2c_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariffs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!------------------->
+<tr>
+	<td>open</td>
+	<td>/billing/servers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<!--trying to delete other user's user-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<!--===google maps===-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/google_maps</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--ivr-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_voice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_timeperiod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new_timeperiod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--terminators-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/terminators</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--subscriptions-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--invoices-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--/stats/resellers-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--admins call list-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/0?calltype=answered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--clis-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--groups-->
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/members/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--import data-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_clear</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--calling cards====-->
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--c2c_invoices-->
+<tr>
+	<td>open</td>
+	<td>/billing/c2c/c2c_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/c2c/generate_c2c_invoices?postpaid=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/c2c/generate_c2c_invoices?postpaid=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--SMS-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariffs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/provider_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcrs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rates/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/sms_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--calls-->
+<tr>
+	<td>open</td>
+	<td>/billing/calls/summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--pemissions-->
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/groups_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<!--various-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_addons</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/day_setup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/rerating</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+</tbody></table>
+</body>
+</html>

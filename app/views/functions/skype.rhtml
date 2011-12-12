@@ -1,0 +1,23 @@
+<% if @skype_providers and @skype_providers.size > 0 %>
+
+	<%= _('Default_Skype_Provider_explained') %>: 
+
+	<br><br>
+
+
+	<% form_tag :action => 'skype_change_default_provider' do%>
+		<% for prv in @skype_providers%>
+			<%= radio_button_tag('skype_provider', prv.id, prv.id.to_i == @default_skype_provider.to_i ) %> <%= print_tech prv.name%> (<%= h(prv.login.to_s)%>)
+			<br>
+		<% end %>
+		<br><br>
+		<%= submit_tag _('Change_Default_Provider'), :disable_with=>_('Processing..')%>
+	<% end %>	  
+			  
+<% else %>
+
+	<%= b_exclamation + _('Default_Skype_Provider_empty_explained') %>
+	<br><br>
+	<%= b_providers + link_to(_('Providers'), :controller => "providers", :action => "list")%>
+
+<% end %>

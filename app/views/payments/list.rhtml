@@ -1,0 +1,195 @@
+<script type="text/javascript">
+  //<![CDATA[
+  Event.observe(window, 'load', function() {
+  var stype = $('s_ptype');
+
+  Event.observe(stype, "change", function(evt) {
+  if (stype.value == "Card") {
+  Element.setStyle($("card_details"), {display: "inline"});
+  $$("#card_details input").each(function(el) {
+  el.disabled = false;
+  });
+  } else {
+  Element.setStyle($("card_details"), {display: "none"});
+  $$("#card_details input").each(function(el) {
+  el.disabled = true;
+  });
+  }
+  });
+
+  });
+
+  //]]>
+</script>
+<table width="100%">
+  <tr>
+    <% if  @allow_edit %>
+      <td><%= link_to b_add + _('Add_manual_payment'), :action => "manual_payment" %> <%= link_to b_csv + _('Payments_to_CSV'), :action => 'payments_csv', :s_username=>@search_username, :s_fname=>@search_fname, :s_lname=>@search_lname, :s_type=>@search_ptype, :s_min=>@search_amount_min, :s_max=>@search_amount_max,  :s_curr=>@search_pcurr %></td>
+    <% end %>
+
+    <td align="right">
+      <% if not @payments.empty? %>
+        <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<% form_tag :action => 'list' do %>
+  <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+    <br/>
+    <table width="100%" class="simple">
+      <tr>
+        <td>
+          <%= _('Username') %>: <%= text_field_tag 's_username', @options[:s_username], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('first_name') %>: <%= text_field_tag 's_first_name', @options[:s_first_name], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('last_name') %>: <%= text_field_tag 's_last_name', @options[:s_last_name], "class" => "input", :size => "15", :maxlength => "30"  %>
+
+          <%= _('Amount_between') %>: <%= text_field_tag 's_amount_min', @options[:s_amount_min], "class" => "input", :size => "7", :maxlength => "10"  %> -
+          <%= text_field_tag 's_amount_max', @options[:s_amount_max], "class" => "input", :size => "7", :maxlength => "10"  %>
+
+          <%= _('Currency') %>:
+          <select name="s_currency" >
+            <option value="" selected>&nbsp;</option>
+            <% for ps in @payment_currencies%>
+              <option value=<%= ps["pcurr"] %> <%= "selected" if ps["pcurr"] == @options[:s_currency] %>> <%= ps["pcurr"] %> </option>
+            <% end %>
+          </select>
+
+          <br/><br/>
+
+          <%= _('From') %>: <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+          &nbsp;&nbsp;<%= _('to') %>: <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+          <br/><br/>
+          <%= _('Type') %>:
+          <select id="s_ptype" name="s_paymenttype" >
+            <option value="" selected>&nbsp;</option>
+            <% for ps in @payment_types%>
+              <option value=<%= ps["ptype"] %> <%= "selected" if ps["ptype"] == @options[:s_paymenttype] %>> <%= ps["ptype"].capitalize if ps["ptype"]%> </option>
+            <% end %>
+          </select>
+          &nbsp;&nbsp;         <%= _('Status') %>:
+          <select id="s_completed" name="s_completed" >
+            <option value="" <%=' selected ' if @options[:s_completed] == ""%>><%=_('All')%></option>
+            <option value="1" <%=' selected ' if @options[:s_completed] == '1'%>><%=_('Completed')%></option>
+            <option value="0" <%=' selected ' if @options[:s_completed] == '0'%>><%=_('Not_Completed')%></option>
+          </select>
+
+          <span id="card_details" style="<%= "display: none" unless @options[:s_paymenttype].eql?("Card") %>">
+            <%= _('Card_number') %>: <%= text_field_tag 's_number', @options[:s_number], "class" => "input", :size => 15 %>
+            <%= _('Card') %> <%= _('Pin') %>: <%= text_field_tag 's_pin', @options[:s__pin], "class" => "input", :size => 5 %>
+          </span>
+
+          <%= _('Transaction_ID') %>: <%= text_field_tag 's_transaction', @options[:s_transaction], "class" => "input", :size => "20", :maxlength => "30"  %>
+          <br/><br/>
+
+          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
+        </td>
+        <td align="right">
+          <%= link_to b_cross + _('Clear_search'), :action => 'list', :clear=>1 if @search == 1 %>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>
+<br/>
+<% if @total_pages > 1 %>
+  <%= render :partial => "page_select_header_payments" %>
+  <br/>
+<% end %>
+
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('User') %>/<%= _('Card') %> (<%= _('Pin') %>)</th>
+    <th align="left"><%= _('Email/Payer') %></th>
+    <th align="left"><%= _('Transaction_ID') %></th>
+    <th align="center"><%= _('Date') %></th>
+    <th align="center"><%= _('Confirm_date') %></th>
+    <th align="center"><%= _('Type') %></th>
+    <th align="right"><%= _('Amount') %></th>
+    <th align="right"><%= _('Fee') %></th>
+    <th align="right"><%= _('Amount_with_VAT') %></th>
+    <th align="center"><%= _('Currency') %></th>
+    <th align="center"><%= _('Completed') %>*</th>
+    <% if @allow_edit %>
+      <th align="center"><%= _('Confirmed_question_admin') %></th>
+      <th></th>
+      <th></th>
+    <% end %>
+  </tr>
+  <% @payments.each_with_index{ |payment, i| %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <% completed = _('Yes')
+      if  payment.completed.to_i == 0
+        completed = _('No')
+        completed += " (" + payment.pending_reason + ")" if payment.pending_reason
+      end %>
+
+      <td id="user_<%= payment.id %>" align="left">
+        <% if payment.card == 0 %>
+          <% user = User.find(:first, :conditions => ["id = ?", payment.user_id]) if !payment.user_id.blank? %>
+          <% if user  %>
+            <%= link_nice_user(user) %>
+          <% end %>
+        <% else %>
+          <% if Card.find_by_id(payment.user_id) %>
+            <%= link_to "#{payment.number} (#{payment.pin})", { :controller => "cards", :action => "show", :id => payment.card_id } %>
+          <% else %>
+            <%= _('Batch_card_sale') %>
+          <% end %>
+        <% end %>
+
+      </td>
+      <td id="email_<%= payment.id %>" align="left"><%= payment.paymenttype == "gateways_authorize_net" ? payment.payer_first_name.to_s+" "+payment.payer_last_name.to_s : payment.payer_email %></td>
+      <td id="transaction_<%= payment.id %>" align="left"><%= payment.transaction_id %></td>
+      <td id="date_added_<%= payment.id %>" align="center"><%= nice_date_time payment.date_added %></td>
+      <td id="shipped_at_<%= payment.id %>" align="center"><%= nice_date_time payment.shipped_at %></td>
+      <td id="paymenttype_<%= payment.id %>" align="center">
+        <%= payment.paymenttype.capitalize if payment.paymenttype %>
+        <% if payment.paymenttype.to_s == "voucher" and voucher = payment.voucher %>
+          <%= " (" + voucher.tag.to_s + ")" %>
+        <% end %>
+      </td>
+      <td id="amount_<%= payment.id %>" align="right"><%=  nice_number(payment.payment_amount) %></td>
+      <td id="fee_<%= payment.id %>" align="right"><%= nice_number(payment.fee) %></td>
+      <% digits = (payment.paymenttype == "invoice" and payment.invoice) ? nice_invoice_number_digits(payment.invoice.invoice_type) : 0 %>
+      <td id="amout_with_tax_<%= payment.id %>" align="right"><%= nice_number(payment.payment_amount_with_vat(digits)) %></td>
+      <td id="currency_<%= payment.id %>" align="center"><%= payment.currency %></td>
+      <td id="completed_<%= payment.id %>" align="center"><%= completed %></td>
+      <% if @allow_edit %>
+        <td id="confirm_<%=payment.id %>" align="center">
+          <% if !payment.completed? and payment.pending_reason == "Waiting for confirmation" %>
+            <%= link_to( b_cross, {:action => 'confirm_payment', :id => payment.id }, :confirm => _('Are_you_sure'), :method => :post, :id => "confirm_link_#{payment.id}") %>
+          <% else %>
+            <%= b_check %>
+          <% end %>
+        </td>
+        <td align="center">
+          <%=  render :partial => "payment_description", :locals=>{:payment=>payment}%>
+        </td>
+        <td id="delete_<%= payment.id %>" align="center">
+          <%= link_to( b_delete, {:action => 'delete_payment', :id => payment.id }, :confirm => _('Are_you_sure'), :method => :post, :id=>"delete_link_#{payment.id}") if payment.paymenttype == "manual" %>
+        </td>
+      <% end %>
+    </tr>
+  <% } %>
+
+  <tr>
+    <th id="total" align="left" colspan="6"><%= _('Total') %>:</th>
+    <th id="total_amount" align="right"><%= nice_number @total_amaunt %>(<%= current_user.currency.name %>)</th>
+    <th id="total_fee" align="right"><%= nice_number @total_fee %>(<%= current_user.currency.name %>)</th>
+    <th id="total_with_tax" align="right"><%= nice_number @total_amaunt_with_vat %>(<%= current_user.currency.name %>)</th>
+    <th align="center" colspan="5"></th>
+  </tr>
+
+  <tr>
+    <th id="total_completed" align="left" colspan="6"><%= _('Total') %> (<%= _('Completed') %>):</th>
+    <th id="total_amount_completed" align="right"><%= nice_number @total_amaunt_completed %>(<%= current_user.currency.name %>)</th>
+    <th id="total_fee_completed" align="right"><%= nice_number @total_fee_completed %>(<%= current_user.currency.name %>)</th>
+    <th id="total_with_tax_completed" align="right"><%= nice_number @total_amaunt_with_vat_completed %>(<%= current_user.currency.name %>)</th>
+    <th align="center" colspan="5"></th>
+  </tr>
+</table>
+<br/>
+<br/>
+<div class="simple">*<%=  _('Paypal_payment_not_completed_explained') %></div>

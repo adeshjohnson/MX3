@@ -1,0 +1,12 @@
+<div id="process-list">
+</div>
+<%= periodically_call_remote(:update => 'process-list',
+  :url => { :action => :tx_status },
+  :frequency => 3,
+  :loading => "Element.show('spinner');",
+  :complete=> "Element.hide('spinner');")%>
+
+<div class="separator">&nbsp;</div>
+
+<%= link_to b_back + _('Back_to_store'), :action => "index" %>
+    

@@ -1,0 +1,1777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>default_device</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">default_device</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Default User saved</td>
+	<td></td>
+</tr>
+<!--turn off email sending-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>send_email_to_user_after_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>send_email_to_admin_after_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--enter details for default device-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[dtmfmode]</td>
+	<td>label=info</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>device[works_not_logged]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_timeout</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>trunk_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>call_limit</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>canreinvite_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[nat]_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>qualify_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[trustrpid]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[sendrpid]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>insecure_invite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[t38pt_udptl]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[promiscredir]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[progressinband]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[videosupport]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[allow_duplicate_calls]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[tell_balance]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[tell_time]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device[tell_rtime_when_left]</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device[repeat_rtime_every]</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>process_sipchaninfo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>save_call_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[fake_ring]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[enable_mwi]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>grace_time</td>
+	<td>76</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--#====create user=======-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>!!!!1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_first_name</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_last_name</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_clientid</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>address_email</td>
+	<td>admin@example.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Device']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Device']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[device_type]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Technology: H323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>device_timeout</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>call_limit</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[allow_duplicate_calls]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>device[works_not_logged]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>trunk_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[tell_balance]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[tell_time]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[tell_rtime_when_left]</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[repeat_rtime_every]</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[fake_ring]_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[enable_mwi]_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>save_call_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>grace_time</td>
+	<td>76</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User deleted</td>
+	<td></td>
+</tr>
+<!--login as accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Test_accountant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group was created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name</td>
+	<td>Test_accountant</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Callingcard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Subscription</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Disabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Read</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Write</td>
+	<td></td>
+</tr>
+<!--Assign first set of permissions-->
+<tr>
+	<td>click</td>
+	<td>callingcard_pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>callingcard_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_edit_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_edit_opt_2_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_edit_opt_3_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_edit_opt_4_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_password_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>voicemail_password_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_create_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>manage_dids_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>manage_subscriptions_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tariff_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_create_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_create_opt_2_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_create_opt_3_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_create_opt_4_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_create_opt_5_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_create_opt_6_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_create_opt_7_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_create_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>see_financial_data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoices_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>payments_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>services_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>vouchers_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<!--Assign group to accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>address_email</td>
+	<td>accountant@example.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+	<td></td>
+</tr>
+<!--Login as accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--as accountant create/delete device/user-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>!!!!1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_first_name</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_last_name</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_clientid</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>address_email</td>
+	<td>admin@example.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Device']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Device']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>device[device_type]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[device_type]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Technology: H323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>device_timeout</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[allow_duplicate_calls]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>device[works_not_logged]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>trunk_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[tell_balance]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[tell_time]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[tell_rtime_when_left]</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[repeat_rtime_every]</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[fake_ring]_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>save_call_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User deleted</td>
+	<td></td>
+</tr>
+<!--LOGIN AS reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Default User saved</td>
+	<td></td>
+</tr>
+<!--UPDATE'ing default device settings...-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<!--register/delete new user/device-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>!!!!1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_first_name</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_last_name</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_clientid</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>address_email</td>
+	<td>admin@example.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Device']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[device_type]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Technology: H323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>device_timeout</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[allow_duplicate_calls]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>device[works_not_logged]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>trunk_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[tell_balance]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[tell_time]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[tell_rtime_when_left]</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[repeat_rtime_every]</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[fake_ring]_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>save_call_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User deleted</td>
+	<td></td>
+</tr>
+<!--TESTS FOR NEWLY REGISTERED USERS-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--register new user-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=here</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>!!!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password2</td>
+	<td>!!!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>first_name</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>last_name</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email</td>
+	<td>example@example.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Registration succesful</td>
+	<td></td>
+</tr>
+<!--LOGIN AS ADMIN-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>login_username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>40000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>device_timeout</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[device_type]_sip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[allow_duplicate_calls]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>device[works_not_logged]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>trunk_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[tell_balance]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[tell_rtime_when_left]</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[repeat_rtime_every]</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[fake_ring]_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>process_sipchaninfo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>save_call_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[dtmfmode]</td>
+	<td>info</td>
+</tr>
+<!--Checking for default voicemail password-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<!--jei voicemail password tuscias:-->
+<tr>
+	<td>verifyValue</td>
+	<td>vm_psw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>vm_psw</td>
+	<td></td>
+</tr>
+<!--check for recordings section edit/save-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[record_forced]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[recording_to_email]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[recording_keep]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device[recording_email]</td>
+	<td>example@example.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>device[record_forced]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[record_forced]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[recording_to_email]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[recording_keep]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[recording_email]</td>
+	<td>example@example.com</td>
+</tr>
+<!--Checking whether reseller can access default device-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--===SECURITY TEST====-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device_update</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!--//========-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device_update</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!--//============-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device_update</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

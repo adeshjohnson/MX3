@@ -1,0 +1,26 @@
+<% form_tag :action => :make_select do %>
+<p><label for="tables"><%= _('Table') %></label><br/>
+  <%= select_tag("table", options_for_select(@tables.map{|t| [t, t]}, @table)) %>
+</p>
+<p><label for="id"><%= _('ID') %></label><br/>
+  <%= text_field_tag 'id' %>
+</p>
+<p><%= submit_tag 'select', :disable_with=>_('Processing..'), :id => 'search_devices_all' %></p<
+<% end %>
+
+<%if @select%>
+  <table width="50%" class="maintable">
+    <tr>
+      <th align="left"><%= _('Field') %></th>
+      <th align="left"><%= _('Value') %></th>
+    </tr>
+    <% @table.singularize.titleize.gsub(' ', '').constantize.content_columns.each_with_index { |column, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td align="left"><%= column.name %></td>
+        <td align="left" id="<%=column.name%>_value"><%= @select.send(column.name) %></td>
+      </tr>
+    <% } %>
+  </table>
+<%else%>
+<p>Not found</p>
+<%end%>

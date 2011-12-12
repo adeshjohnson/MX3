@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>dialer_display_rate</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">dialer_display_rate</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Allow devices to check rate over HTTP:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>devices_check_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_9']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>api_login_redirect_to_main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/4?st=L</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate249</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=admin&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>0.0#Lithuania proper#370</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=admin&amp;prefix=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>Empty prefix</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=&amp;prefix=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>Empty prefix</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=weer&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>User not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>10.0#Lithuania proper#370</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=37</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>Prefix was not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=admin&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>0.0#Lithuania proper#370</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>10.0#Lithuania proper#370</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=L</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate249</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=user_reseller&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>6.0#Lithuania proper#370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=admin&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>0.0#Lithuania proper#370</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=user_reseller&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>6.0#Lithuania proper#370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=accountant&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>0.0#Lithuania proper#370</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>10.0#Lithuania proper#370</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=admin&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>0.0#Lithuania proper#370</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=user_reseller&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>6.0#Lithuania proper#370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=101&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>0.0#Lithuania proper#370</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>10.0#Lithuania proper#370</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=admin&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>0.0#Lithuania proper#370</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=user_reseller&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>6.0#Lithuania proper#370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//body</td>
+	<td>10.0#Lithuania proper#370</td>
+</tr>
+</tbody></table>
+</body>
+</html>

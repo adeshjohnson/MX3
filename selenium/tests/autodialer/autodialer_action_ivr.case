@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.163" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ivr_name</td>
+	<td>ivrname</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>block_name</td>
+	<td>ivrblockname</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>campaign_name</td>
+	<td>campaignname</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Campaign was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td[@id='actions_1']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>actions_1</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_1</td>
+	<td>campaignname</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>type_1</td>
+	<td>simple</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[@id='enabled_1']/div</td>
+	<td>Stopped</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_actions/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>action_type</td>
+	<td>PLAY WAIT IVR</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_type</td>
+	<td>label=IVR</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Action added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/user_campaigns</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>actions_1</td>
+	<td>1</td>
+</tr>
+</tbody></table>
+</body>
+</html>

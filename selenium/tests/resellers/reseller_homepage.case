@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>reseller_homepage</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">reseller_homepage</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings_logo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>logo</td>
+	<td>/home/mor/selenium/files/pics/reseller_logo.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Logo uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>reseller_company</td>
+	<td>reseller_company</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>reseller_company_email</td>
+	<td>reseller_email</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>reseller_version</td>
+	<td>reseller_version</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>reseller_copyright_title</td>
+	<td>reseller_title</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>frontpage_text</td>
+	<td>reseller_front_page_text</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>registration_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>show_logo_on_register_page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>hide_registration_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeValue</td>
+	<td>reseller_homepage_url2</td>
+	<td>homepage</td>
+</tr>
+<tr>
+	<td>storeValue</td>
+	<td>reseller_registration_url2</td>
+	<td>registration</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt=&quot;Mor_logo&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>${homepage}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt=&quot;Logo_3&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//a[@href=&quot;/billing${registration}&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>reseller_title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>reseller_version</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=here</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Sign up</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>reseller_front_page_text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt=&quot;Logo_3&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//a[@href=&quot;/billing${registration}&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>reseller_title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>reseller_version</td>
+	<td></td>
+</tr>
+<!--Disable reseller settings-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>registration_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>show_logo_on_register_page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>hide_registration_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt=&quot;Mor_logo&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>${homepage}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@alt=&quot;Logo_3&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@alt=&quot;Mor_logo&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//a[@href=&quot;/billing${registration}&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>reseller_title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>reseller_version</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_2']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Show Advanced Rates for users:</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

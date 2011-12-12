@@ -1,0 +1,13 @@
+<table class = "maintable" width="100%">
+  <!-- UPPER LINE OF HEADER -->
+  <tr>
+    <%= ordered_list_header("users.first_name","customer_orig","Terminator", @options)%>
+    <%= ordered_list_header("users.first_name","customer_orig","Toral_Calls", @options)%>
+  </tr>
+  <!-- TABLE DATA -->
+
+  <% @terminator_lines.each_with_index {  |row, i| %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+    </tr>
+  <% } %>
+</table>

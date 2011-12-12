@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/various_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37060011230</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37060011233</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37060011238</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37060011248</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37093042422</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=s_did</td>
+	<td></td>
+</tr>
+<!--PART OF THE DID-->
+<tr>
+	<td>type</td>
+	<td>id=s_did</td>
+	<td>630</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011230</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011233</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011238</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011248</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37093042422</td>
+	<td></td>
+</tr>
+<!--SPLITED DID-->
+<tr>
+	<td>type</td>
+	<td>id=s_did</td>
+	<td>370 600 11 233</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011230</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011233</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011238</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011248</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37093042422</td>
+	<td></td>
+</tr>
+<!--DID-->
+<tr>
+	<td>type</td>
+	<td>id=s_did</td>
+	<td>37060011233</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011230</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011233</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011238</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011248</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37093042422</td>
+	<td></td>
+</tr>
+<!--NEW LINE-->
+<!--<tr> 	<td>type</td> 	<td>id=s_did</td> 	<td>370600<br />11238</td> </tr> <tr> 	<td>waitForValue</td> 	<td>id=s_did</td> 	<td>37060011238</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextNotPresent</td> 	<td>37060011230</td> 	<td></td> </tr> <tr> 	<td>waitForTextNotPresent</td> 	<td>37060011233</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>link=Manual</td> 	<td></td> </tr> <tr> 	<td>waitForTextNotPresent</td> 	<td>37060011248</td> 	<td></td> </tr> <tr> 	<td>waitForTextNotPresent</td> 	<td>37063042438</td> 	<td></td> </tr> <tr> 	<td>waitForTextNotPresent</td> 	<td>37093042422</td> 	<td></td> </tr> <tr> 	<td>verifyText</td> 	<td>id=did_28</td> 	<td>37060011238</td> </tr>-->
+<tr>
+	<td>type</td>
+	<td>id=s_did</td>
+	<td>370 60011233</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011230</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011233</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011238</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011248</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37093042422</td>
+	<td></td>
+</tr>
+<!--SYMBOL IN DID-->
+<tr>
+	<td>type</td>
+	<td>id=s_did</td>
+	<td>370a60011233</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011230</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011233</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011238</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011248</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37093042422</td>
+	<td></td>
+</tr>
+<!--ALL DIDS-->
+<tr>
+	<td>type</td>
+	<td>id=s_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011225</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011238</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011252</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37093042422</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=s_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_did</td>
+	<td>37060011233</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_language</td>
+	<td>label=en</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011230</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011238</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011248</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37093042422</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011233</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_provider</td>
+	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=System Admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011223</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011237</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011246</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_17</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_31</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_39</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>en</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=language_36</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=language_1</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=language_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=Test Accountant</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_status</td>
+	<td>label=Closed</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011230</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011238</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011248</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37093042422</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011252</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_provider</td>
+	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=s_user</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_status</td>
+	<td>label=Active</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=s_device</td>
+	<td>All IAX2/101 FAX/102 IAX2/1002</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_device</td>
+	<td>label=FAX/102</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011230</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011238</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011248</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37093042422</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_provider</td>
+	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_device</td>
+	<td>label=IAX2/1002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011224</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011225</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011226</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status_15</td>
+	<td>Active</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_15</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=device_15</td>
+	<td>IAX2/1002</td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011230</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011238</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011248</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37093042422</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>IAX2/108</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>SIP/109</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_device</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=s_device</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_language</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=s_language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=s_user</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_provider</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=s_provider</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_status</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=s_status</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=s_device</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=language_14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=language_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=language_26</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,2244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>recordings_addon</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">recordings_addon</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device_id</td>
+	<td>label=IAX2/103</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>device_id</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device_id</td>
+	<td>IAX2/103</td>
+</tr>
+<!--======================-->
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device_id</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--check for 6 recordings-->
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_5</td>
+	<td>2009-01-02 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_6</td>
+	<td>2009-01-02 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_4</td>
+	<td>2009-01-02 00:00:02</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_3</td>
+	<td>2009-01-02 00:00:02</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_1</td>
+	<td>2009-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_2</td>
+	<td>2009-01-01 00:00:04</td>
+</tr>
+<!--"Test user #1" - 4 recordings should be visible -->
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='user_id']/option[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_1</td>
+	<td>2009-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_2</td>
+	<td>2009-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_6</td>
+	<td>2009-01-02 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_8</td>
+	<td></td>
+</tr>
+<!--Select device "IAX2/1002" - 2 recordings should be visible -->
+<tr>
+	<td>select</td>
+	<td>device_id</td>
+	<td>label=IAX2/1002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_5</td>
+	<td>2009-01-02 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_6</td>
+	<td>2009-01-02 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_8</td>
+	<td></td>
+</tr>
+<!--Unselect user/device -->
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=All</td>
+</tr>
+<!--Source "101" - 2 recordings -->
+<tr>
+	<td>type</td>
+	<td>s_source</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device_id</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_1</td>
+	<td>2009-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_2</td>
+	<td>2009-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_6</td>
+	<td></td>
+</tr>
+<!--Source "", Destination "37063042438" - 5 recordings -->
+<tr>
+	<td>type</td>
+	<td>s_source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_destination</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>rec_date_time_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_3</td>
+	<td>2009-01-02 00:00:02</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_4</td>
+	<td>2009-01-02 00:00:02</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_5</td>
+	<td>2009-01-02 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_6</td>
+	<td>2009-01-02 00:00:04</td>
+</tr>
+<!--/recordings/edit_recording/5 enter comment, save, check if present-->
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/edit_recording/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>recording_comment</td>
+	<td>testing comments</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_comment_5</td>
+	<td>testing comments</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Recording updated</td>
+	<td></td>
+</tr>
+<!--==/recordings/list_users -->
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_users</td>
+	<td></td>
+</tr>
+<!--Test all search fields one by one -->
+<!--*username-->
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_username</td>
+	<td>Admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=System Admin</td>
+	<td></td>
+</tr>
+<!--*first_name-->
+<tr>
+	<td>type</td>
+	<td>s_username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_first_name</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<!--*last name-->
+<tr>
+	<td>type</td>
+	<td>s_first_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_last_name</td>
+	<td>Admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=System Admin</td>
+	<td></td>
+</tr>
+<!--==Test all fields in table if they are saved by pressing on Update-->
+<tr>
+	<td>click</td>
+	<td>recording_enabled_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>recording_forced_enabled_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>recording_hdd_quota_0</td>
+	<td>0.0002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>recordings_email_0</td>
+	<td>example@example.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Users updated</td>
+	<td></td>
+</tr>
+<!--^testing changed values whether they have been changed-->
+<tr>
+	<td>verifyChecked</td>
+	<td>recording_enabled_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>recording_forced_enabled_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>recording_hdd_quota_0</td>
+	<td>0.0002</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>recordings_email_0</td>
+	<td>example@example.com</td>
+</tr>
+<!--==/billing/recordings/list/2 -->
+<!--*  Test Source and Destination search options -->
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_source</td>
+	<td>37046246362</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_5</td>
+	<td>2009-01-02 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_comment_5</td>
+	<td>testing comments</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_6</td>
+	<td>2009-01-02 00:00:04</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_destination</td>
+	<td>123123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_1</td>
+	<td>2009-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_2</td>
+	<td>2009-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_source</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_1</td>
+	<td>2009-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_date_time_2</td>
+	<td>2009-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_comment_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_comment_2</td>
+	<td></td>
+</tr>
+<!--Test Edit, leave comment, check if present -->
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/edit_recording/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>recording_comment</td>
+	<td>testing comments2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Recording updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_comment_1</td>
+	<td>testing comments2</td>
+</tr>
+<!--/devices/device_edit/2 -->
+<!--granting user the permissions-->
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>recording_enabled_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Users updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>recording_enabled_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>recording_enabled_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>recording_forced_enabled_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Users updated</td>
+	<td></td>
+</tr>
+<!--* Check for present Recordings section with all elements, try if all of them can be saved -->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[record_forced]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[recording_to_email]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[recording_email]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[recording_keep]_0</td>
+	<td></td>
+</tr>
+<!--^changing values and checking...-->
+<tr>
+	<td>click</td>
+	<td>device[record_forced]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[recording_to_email]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device[recording_email]</td>
+	<td>example@example.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[recording_keep]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_secret</td>
+	<td>1012323232323</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[record_forced]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[recording_to_email]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[recording_email]</td>
+	<td>example@example.com</td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[recording_keep]_1</td>
+	<td></td>
+</tr>
+<!--==/billing/users/edit/2 -->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>recording_forced_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user[recording_hdd_quota]</td>
+	<td>0.0001</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_recordings_email</td>
+	<td></td>
+</tr>
+<!--changing values-->
+<tr>
+	<td>click</td>
+	<td>recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>recording_forced_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user[recording_hdd_quota]</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_recordings_email</td>
+	<td>example@example.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User's settings succesfully changed: Test User #1</td>
+	<td></td>
+</tr>
+<!--verifying values-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>recording_forced_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user[recording_hdd_quota]</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_recordings_email</td>
+	<td>example@example.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User's settings succesfully changed: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<!--===Login 101/101-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--/users/personal_details -->
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1.3962 Mb/5.0000 Mb ( 27.9245 % Taken)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_recordings_email</td>
+	<td>example@example.com</td>
+</tr>
+<!--/devices/user_device_edit/2-->
+<!--Check for present Recordings section with all elements -->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[record]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>device[recording_to_email]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[recording_email]</td>
+	<td>example@example.com</td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>device[recording_keep]_0</td>
+	<td></td>
+</tr>
+<!--^changing values and checking...-->
+<tr>
+	<td>click</td>
+	<td>device[record]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[recording_to_email]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device[recording_email]</td>
+	<td>example@example.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[recording_keep]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[record]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[recording_to_email]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[recording_email]</td>
+	<td>example@example.com</td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[recording_keep]_1</td>
+	<td></td>
+</tr>
+<!--/recordings/list_recordings -->
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--======================-->
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-02 00:00:04</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-02 00:00:02</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-01 00:00:04</td>
+	<td></td>
+</tr>
+<!--Test Source/Destination/Clear Search fields in Search -->
+<tr>
+	<td>type</td>
+	<td>s_source</td>
+	<td>37046246362</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-02 00:00:04</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-02 00:00:02</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>2009-01-01 00:00:04</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_destination</td>
+	<td>123123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>2009-01-02 00:00:04</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>2009-01-02 00:00:02</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-01 00:00:04</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>date_from_year</td>
+	<td></td>
+</tr>
+<!--Login admin/admin -->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--/users/edit/2 -->
+<!--^Leave "Allow to use recording functionality" UNchecked for this user-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<!--Login 101/101 -->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--*/users/personal_details -->
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>user_recordings_email</td>
+	<td></td>
+</tr>
+<!--*/devices/user_device_edit/2-->
+<!--^Check for NOT present Recordings section -->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>device[recording_email]</td>
+	<td></td>
+</tr>
+<!--Login reseller/reseller -->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--/billing/users/edit/5 -->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>user_recordings_email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>recording_forced_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_recording_hdd_quota</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_recordings_email</td>
+	<td>test@emai.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>recording_forced_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_recording_hdd_quota</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Mb (425.2578 Kb or 4.1529% Taken)</td>
+	<td></td>
+</tr>
+<!--/billing/devices/device_edit/7 -->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>device[recording_email]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[record_forced]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>device[record_forced]_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[recording_to_email]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>device[recording_to_email]_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device[recording_email]</td>
+	<td>test@email.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[recording_keep]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>device[recording_keep]_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_secret</td>
+	<td>1012323232323</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[record_forced]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[recording_to_email]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[recording_email]</td>
+	<td>test@email.com</td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[recording_keep]_1</td>
+	<td></td>
+</tr>
+<!------ Deleting recording as admin ------>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device_id</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='rec_delete_link_5']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='rec_delete_link_4']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Recording deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//a[@id='rec_delete_link_8']/img</td>
+	<td></td>
+</tr>
+<!------ Deleting recording as 101 ------>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-02 00:00:02</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-01 00:00:04</td>
+	<td></td>
+</tr>
+<!--check for correct filtering by source and by destination-->
+<tr>
+	<td>type</td>
+	<td>s_source</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-01 00:00:04</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>2009-01-02 00:00:02</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_destination</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-02 00:00:02</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>2009-01-01 00:00:04</td>
+	<td></td>
+</tr>
+<!--deleting-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Recording deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//a[@id='rec_delete_link_8']/img</td>
+	<td></td>
+</tr>
+<!-----/recordings/list_recordings -->
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_recordings</td>
+	<td></td>
+</tr>
+<!--!!EDITED-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Recording deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>2009-01-01 00:00:04</td>
+	<td></td>
+</tr>
+<!--####SECURITY ########-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!---- trying to delete other user's  recordings-->
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/destroy_recording/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td></td>
+	<td>smart</td>
+</tr>
+<!----------------------------------->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!---- trying to delete other user's  recordings-->
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/destroy_recording/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td></td>
+	<td>smart</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>recording_enabled_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Users updated</td>
+	<td></td>
+</tr>
+<!--As admin in device settings mark device to be recorded, as user in device mark as not to record, go to /billing/recordings/setup and check - recording should be marked as YES-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>recording_enabled_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Users updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[record_forced]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[recording_to_email]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[recording_keep]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device[recording_email]</td>
+	<td>example@example.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[record]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[recording_to_email]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[recording_keep]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/setup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/setup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>4</td>
+	<td></td>
+</tr>
+<!--Check link on users/list-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>recordings_link_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_src_6</td>
+	<td>37046246362</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_src_1</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_src_2</td>
+	<td>101</td>
+</tr>
+<!--Check if used space percent is show correctly-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Mb (1.3020 Mb or 26.0407% Taken)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_recording_hdd_quota</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Mb (1.3020 Mb Taken)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_recording_hdd_quota</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Mb (1.3020 Mb or 26.0407% Taken)</td>
+	<td></td>
+</tr>
+<!--failed recordings-->
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>rec_play_link_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rec_status_3</td>
+	<td>Recording failed</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Test recordings for resellers user-->
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=18</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=18</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_7</td>
+	<td>2010-02-18 00:00:01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_7</td>
+	<td>00:01:28</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.4153 Mb/10.0000 Mb ( 4.1529 % Taken)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_recordings_email</td>
+	<td>test@emai.com</td>
+</tr>
+</tbody></table>
+</body>
+</html>

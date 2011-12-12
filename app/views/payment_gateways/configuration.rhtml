@@ -1,0 +1,137 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "accordion.js" %>
+  <script type="text/javascript">
+    Event.observe(window, 'load', function() {
+    <% if Confline.get_value("Disallow_Email_Editing") == "1" %>
+      var enabled = true;
+    <% else %>
+      var enabled = false;
+    <% end %>
+    //   console.log(enabled);
+    //   console.log(window);
+    $$(".integrations_payment_confirmation").each(function(opt) {
+    var el = opt.up(2).select(".confirm_message").first();
+    //       console.log(el);
+    if (enabled && opt.value == "suspicious") {
+    el.setStyle({display: 'inline'});
+    }
+
+    if (opt.value == "none") {
+    opt.up(3).select(".notification").first().disabled = true;
+    }
+
+    Event.observe(opt, 'change', function() {
+    //        console.log(opt);
+    //        console.log(opt.value);
+    if (enabled && opt.value == "suspicious") {
+    el.setStyle({display: 'inline'});
+    } else {
+    el.setStyle({display: 'none'});
+    }
+    if (opt.value == "suspicious" || opt.value == "all") {
+    opt.up(3).select(".notification").first().disabled = false;
+    } else {
+    var elm = opt.up(3).select(".notification").first();
+    elm.disabled = true;
+    elm.checked = false;
+    }
+    });
+
+    });
+
+
+    var wsw = $("gateways_paypal_PayPal_Custom_redirect");
+    if (!wsw.checked) {
+    $$(".gateways_input_field_custom").each(function(el) {
+    if (el != wsw) {
+    el.disabled = true;
+    }
+    });
+    }
+
+    Event.observe(wsw, 'click', function() {
+    $$(".gateways_input_field_custom").each(function(el) {
+    if (wsw.checked) {
+    if (el != wsw) {
+    el.disabled = false;
+    }
+    } else {
+    if (el != wsw) {
+    el.disabled = true;
+    }
+    }
+    });
+    });
+
+    });
+ function disable_field(checkbox_id, field_id){
+    //     console.log('gggggggg:'+checkbox_id+' fffffffffff:'+field_id);
+    if($(checkbox_id).checked == '1'){
+    $(field_id).disabled = false;
+    //        console.log(1111);
+    } else {
+    $(field_id).disabled = true;
+    $(field_id).value = '0';
+    //        console.log(2222);
+    }
+    }
+  </script>
+<% end %>
+
+<div id="settings" class="accordion">
+  <% if @gateways.size > 0 %>
+    <% @gateways.display_form do |gatewayengine, helper| %>
+    <%# =gatewayengine.post_to%>
+      <form action='<%= Web_Dir+'/payment_gateways/'+gatewayengine.post_to %>' method='post' enctype="multipart/form-data" onsubmit="console.log('YRAAAAAAAAA');">
+        <% for engine, gateways in gatewayengine.gateways %>
+          <% for name, gateway in gateways %>
+            <% if (!gateway.settings['testing']) || (gateway.settings['testing'] && Confline.get_value("test_production_environment") == "true") %>
+              <div class="accordion-toggle <%= "error" if gateway.errors.size > 0 %>">
+                <%= gateway_logo(gateway) %>
+                <%= gateway.settings['name'] %>
+              </div>
+              <div class="accordion-content">
+                <table>
+                  <% gateway.errors.each{ |field, error| %>
+                    <tr style="color: red">
+                      <td><strong><%= _("gateway_#{field}") %></strong></td>
+                      <td><%= _(error) %></td>
+                    </tr>
+                  <% } %>
+                  <% default_currency = gateway.settings['default_currency'] %>
+                  <% unless default_currency.blank? %>
+                    <tr>
+                      <td class="default_currency"><strong>Default currency</strong></td>
+                      <td><%= default_currency %></td>
+                    </tr>
+                  <% end %>
+                  <% gateway.each_field_for(:config) do |field_name, options| %>
+                    <tr>
+                      <td class="name"><%= helper.label(gateway.engine, gateway.gateway, field_name, options) %></td>
+                      <td><%= helper.input(gateway, field_name, options) %></td>
+                    </tr>
+                  <% end %>
+                  <% if engine == "integrations" %>
+                    <tr><td colspan="2">&nbsp;</td></tr>
+                    <tr>
+                      <td colspan="2" style="text-align: center">
+                        <span class="confirm_message" style="display: none">
+                          <%= b_info %>
+                          <strong><%=_('Payment_security_disallow_email_editing')%></strong>
+                        </span>
+                      </td>
+                    </tr>
+                  <% end %>
+                </table>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+        <br />
+        <%= submit_tag _('Save_changes') %>
+      </form>
+    <% end %>
+  <% else %>
+    <h3 style="color: red"><%= _("disabled_gateways") %></h3>
+  <% end %>
+</div>

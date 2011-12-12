@@ -1,0 +1,34 @@
+<br>
+
+<table width="100%" class="maintable">
+
+<% day = @day %>
+
+  <tr>
+    <th align="left"><%= _('Year') %></th> 
+    <th align="left"><%= _('Month') %></th> 
+    <th align="left"><%= _('Day') %></th>    
+    <th align="left"><%= _('Type') %></th> 
+    <th align="left"><%= _('Description') %></th> 
+    <th ></th>
+  </tr>
+
+<% form_tag :action => 'day_update', :id => day.id  do %>
+  <tr class="row1">
+    <td align="left">       <%= select_year(day.date.year, :start_year => Date.today.year - 5, :end_year => Date.today.year + 1)  %> </td>
+    <td align="left">        <%= select_month(day.date.month, :use_month_numbers => true) %> </td>
+    <td align="left">        <%= select_day(day.date.day) %> </td>    
+    <td align="left">        
+        <select name="daytype" > 
+            <option value="FD" <%= "selected" if day.daytype == "FD" %>> <%= _('Free_day') %> </option>
+            <option value="WD" <%= "selected" if day.daytype == "WD" %>> <%= _('Work_day') %> </option>
+        </select>
+    </td>    
+    <td align="left">        <%= text_field_tag 'description', day.description, "class" => "input", :size => "30", :maxlength => "40"  %> </td>    
+    <td align="center" ><%= image_submit_tag 'icons/edit.png', :title => _('Edit') %></td>
+    
+ </tr>
+<% end %>
+</table>
+
+<br><br>

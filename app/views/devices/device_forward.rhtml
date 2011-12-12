@@ -1,0 +1,34 @@
+<% if session[:usertype] == "admin" %>
+    <b><%= b_user + _('User') %>:</b> <%= link_nice_user(@user) %><br>
+<% end %>
+
+<div class="nb"><%= _('Device') %> <%= @device.name %> 
+
+<% if @device.forward_to !=0 %>
+    <%= _('forwarded_to') %>
+    <% dev = Device.find(@device.forward_to)%>
+    <%= dev.name %> (<%= dev.user.first_name %> <%= dev.user.last_name %>)
+<% else %>
+    <%= _('nowhere_forwarded') %>
+<% end  %>
+</div>
+
+<br><br>
+<% form_tag(:action => 'try_to_forward_device', :id => @device) do %>
+<div class="nb"><%= _('Forward_to') %>:
+
+<select name="select_fwd">
+
+    <option value="0"><%= _('nowhere_forwarded') %></option>
+    
+    <% for dev in @devices %>
+
+        <% if dev.user and dev != @device%>        
+            <option value="<%= dev.id %>"> <%= dev.name %> - <%= dev.user.first_name %> <%= dev.user.last_name %>  </option>
+        <% end %>
+
+    <% end %>
+  <%= submit_tag _('to_forward'), :disable_with=>_('Processing..') %>
+</select>
+</div>
+<% end %>

@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.119" />
+<title>cdr_rerating</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">cdr_rerating</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/rerating/calls_with_prefix_afg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tariff_name</td>
+	<td>tariff93</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tariff[purpose]_user_wholesale</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Tariff was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tariff_name</td>
+	<td>tariff933</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tariff[purpose]_user_wholesale</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Tariff was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/6?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_2</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/7?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_2</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_8</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_tariff_id</td>
+	<td>label=Wholesale - tariff93</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>prefix93</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>9330</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>93</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>44</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/rerating</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=September</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_hour</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=20</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_hour</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_minute</td>
+	<td>label=58</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>test_tariff_id</td>
+	<td>label=tariff933 (Wholesale)</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=rerating_testing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Total calls:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rerating completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=old_billsec</td>
+	<td>00:01:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=old_pp</td>
+	<td>19.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=old_res</td>
+	<td>8.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=old_up</td>
+	<td>9.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=new_pp</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=new_res</td>
+	<td>0.0000</td>
+</tr>
+<!--<tr> 	<td>verifyText</td> 	<td>id=new_up</td> 	<td>16.6667</td> </tr>-->
+<tr>
+	<td>verifyText</td>
+	<td>id=diff_pp</td>
+	<td>-19.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=diff_res</td>
+	<td>-8.0000</td>
+</tr>
+<!--<tr> 	<td>verifyText</td> 	<td>id=diff_up</td> 	<td>7.6667</td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_tariff_id</td>
+	<td>label=Wholesale - tariff933</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/rerating</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=September</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_hour</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=20</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_hour</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_minute</td>
+	<td>label=58</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>test_tariff_id</td>
+	<td>label=tariff933 (Wholesale)</td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=rerating_testing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Total calls:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rerating completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=old_billsec</td>
+	<td>00:01:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=old_pp</td>
+	<td>19.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=old_res</td>
+	<td>8.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=old_up</td>
+	<td>9.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=new_pp</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=new_res</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=new_up</td>
+	<td>16.6667</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=diff_pp</td>
+	<td>-19.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=diff_res</td>
+	<td>-8.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=diff_up</td>
+	<td>7.6667</td>
+</tr>
+</tbody></table>
+</body>
+</html>

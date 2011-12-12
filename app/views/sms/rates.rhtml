@@ -1,0 +1,42 @@
+<%= render :partial => 'letter_select_header' %>
+<% if @total_pages > 1 %>
+  <br>
+  <%= render :partial => 'page_select_header' %>
+<% end %>
+<br>
+<% form_tag :action => :rates_update, :id => @tariff.id, :st => @st, :page => @page do %>
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left"><%= _('Direction') %></th>
+      <th align="left"><%= _('Prefix') %></th>
+      <th align="left"><%= _('Subcode') %></th>
+      <th align="left"><%= _('Name') %></th>
+      <th align="center"><%= _('Price') %></th>
+      <th></th>
+    </tr>
+
+    <% @rates.each_with_index{ |r, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <% dst =r.destination -%>
+        <% dir = dst.direction if dst -%>
+        <td id="dir_name_<%= r.id  %>"><%= draw_flag dir.code %> <%= h(dir.name) %></td>
+        <td id="dst_prefix_<%= r.id  %>"><%= h(dst.prefix) %></td>
+        <td id="dst_subcode_<%= r.id  %>"><%= h(dst.subcode) %></td>
+        <td id="dst_name_<%= r.id  %>"><%= h(dst.name) if dst.name %></td>
+        <td id="price_<%= r.id  %>" align="center"><%= text_field_tag("rate[id_#{r.id}][price]", r.price, {:size => "8", :id => "rate_#{r.id}_price"} ) %></td>
+        <td id="delete_<%= r.id  %>" align="center"><%= link_to b_delete, { :action => 'rate_destroy', :id => r.id, :tariff => @tariff.id, :st => @st, :page => @page}, {:confirm => _('Are_you_sure'), :method => :post, :id=> "delete_link_"+r.id.to_s} %></td>
+      </tr>
+    <% } %>
+    <tr>
+      <th colspan="6" align="right"><%= submit_tag _('Update'), :disable_with=>_('Processing..') %></th>
+    </tr>
+  </table>
+  <br>
+<% end %>
+  
+<% if @total_pages > 1 %>
+  <br>
+  <%= render :partial => 'page_select_header' %>
+<% end %>
+<br />
+<%= link_to b_add + _('New_rate'), :action => 'rate_new', :id => @tariff.id, :st => @st %>

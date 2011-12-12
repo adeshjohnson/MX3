@@ -1,0 +1,76 @@
+<% if show_recordings? %>
+<% if ["admin", "accountant", "reseller"].include?(session[:usertype]) %>
+  <% if @device
+    record = @device.record
+    record_forced = @device.record_forced
+    recording_to_email = @device.recording_to_email
+    recording_email = @device.recording_email
+    recording_keep = @device.recording_keep
+  else
+    record =  Confline.get_value("Default_device_record", session[:user_id])
+    record_forced = Confline.get_value("Default_device_record_forced", session[:user_id])
+    recording_to_email = Confline.get_value("Default_device_recording_to_email", session[:user_id])
+    recording_email = Confline.get_value("Default_device_recording_email", session[:user_id])
+    recording_keep = Confline.get_value("Default_device_recording_keep", session[:user_id])
+  end
+%>
+  <tr>
+    <td height="20" colspan="2"></td>
+  </tr>
+
+  <tr>
+    <td colspan="2" class="bottom_border">
+      <b><%= b_record + _('Recordings') %></b>
+    </td>
+  </tr>
+  <tr>
+    <td height="10" colspan="2"></td>
+  </tr>
+  <% if !["admin", "reseller"].include?(session[:usertype]) %>
+    <% if (rec_active?) %>
+        <tr>
+          <td><%= _('Record_calls_for_this_device') %>:</td>
+          <td>
+            <%= radio_button_tag('device[record]', 0, record.to_i == 0) %> <%= _('No') %>
+            <%= radio_button_tag('device[record]', 1, record.to_i == 1) %> <%= _('Yes') %>
+          </td>
+        </tr>
+      <% end %>
+  <% else %>
+
+    <tr>
+      <td><%= _('Record_calls_for_this_device') %>:</td>
+      <td>
+        <%= radio_button_tag('device[record_forced]', 0, record_forced.to_i == 0 ) %> <%= _('No') %>
+        <%= radio_button_tag('device[record_forced]', 1, record_forced.to_i == 1 ) %> <%= _('Yes') %>
+      </td>
+    </tr>
+
+  <% end %>
+
+  <% if (rec_active?) %>
+      <% if @user.recording_enabled.to_i == 1 or (session[:usertype] == "admin" or session[:usertype] == "accountant")%>
+        <tr>
+          <td> <%= _('Send_Recording_to_Email') %>: </td>
+          <td>
+            <%= radio_button_tag('device[recording_to_email]', 0, recording_to_email.to_i == 0) %> <%= _('No') %>
+            <%= radio_button_tag('device[recording_to_email]', 1, recording_to_email.to_i == 1) %> <%= _('Yes') %>
+          </td>
+        </tr>
+        <tr>
+          <td> <%= _('Recordings_Email') %>: </td>
+          <td align="left">
+            <%= text_field_tag 'device[recording_email]', recording_email.to_s, "class" => "input", :size => "25", :maxlength => "50" %>
+          </td>
+        </tr>
+        <tr>
+          <td> <%= _('Keep_Recordings_on_HDD_after_sent_to_email') %>: </td>
+          <td>
+            <%= radio_button_tag('device[recording_keep]', 0, recording_keep.to_i == 0) %> <%= _('No') %>
+            <%= radio_button_tag('device[recording_keep]', 1, recording_keep.to_i == 1) %> <%= _('Yes') %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

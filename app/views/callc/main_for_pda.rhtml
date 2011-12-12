@@ -1,0 +1,29 @@
+
+<center>
+  <p>
+    <label for="body" valign="Top"> 
+      <%= _('hello') %>, <%= @username %>
+    </label>
+  </p>
+  <% if sms_active? %>
+    <% if session[:sms_service_active].to_i == 1 %>
+      <p>
+        <label for="body" valign="Top">
+
+          <% form_tag(:controller=>'sms' , :action => 'sms') do %>
+            <%= submit_tag _('Send_sms'), :disable_with=>_('Processing..')%>
+          <% end %>
+        </label>
+      </p>
+    <%end%>       
+  <% end %>      
+  <p>
+    <label for="body" valign="Top"> 
+      <% form_tag(:action => 'logout') do %>
+        <%= submit_tag _('logout'), :disable_with=>_('Processing..')%>
+      <% end %>
+    </label>
+  </p>
+</center> 
+
+

@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>call_stats</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">call_stats</td></tr>
+</thead><tbody>
+<!--Test aggregate ir summary reports-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Create terminator-->
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test_terminator</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>provider_link_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider assigned</td>
+	<td></td>
+</tr>
+<!--Aggregate report-->
+<!--...by prefix-->
+<tr>
+	<td>open</td>
+	<td>/billing/calls/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_billed_orig</td>
+	<td>4.0000 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_billed_term</td>
+	<td>4.0000 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_duration</td>
+	<td>00:02:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_answ_calls</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_calls</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_acd</td>
+	<td>00:00:35</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_ast</td>
+	<td>100.0000 %</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Lithuania MOB Lithuania mobile (3706)</td>
+	<td></td>
+</tr>
+<!--...by direction-->
+<tr>
+	<td>click</td>
+	<td>destination_grouping_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Lithuania MOB</td>
+	<td></td>
+</tr>
+<!--......Test all params-->
+<tr>
+	<td>select</td>
+	<td>originator</td>
+	<td>label=System Admin</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>terminator</td>
+	<td>label=test_terminator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Records: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Pages: 0</td>
+	<td></td>
+</tr>
+<!--Summaty report-->
+<tr>
+	<td>open</td>
+	<td>/billing/calls/summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>term_calls</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>term_exact_min</td>
+	<td>00:02:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>term_amount</td>
+	<td>4.0000 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>orig_calls</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>orig_exact_min</td>
+	<td>00:02:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>orig_amount</td>
+	<td>4.0000 USD</td>
+</tr>
+<!--Check profit values-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/profit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_total_self_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:35</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:02:20</td>
+	<td></td>
+</tr>
+<!--show_user_stats-->
+<!--ACD-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/show_user_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>user_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_user</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>user_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_user</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_time</td>
+	<td>00:00:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_2_time</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_3_time</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_calls</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_2_calls</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_3_calls</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_calls</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_time</td>
+	<td>00:01:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_acd</td>
+	<td>00:00:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_2_acd</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_3_acd</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_acd</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_asr</td>
+	<td>100.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_2_asr</td>
+	<td>100.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_3_asr</td>
+	<td>100.0000 %</td>
+</tr>
+<!--export call list to csv-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Outgoing</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/0?call_type=all&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-01 00:00:01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>hgc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>hgc</td>
+	<td>label=2 - No route to specified transit network (nat</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No calls...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>hgc</td>
+	<td>label=16 - Normal call clearing. This cause indicate</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/0?call_type=all&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1&amp;hgc=331</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&quot;50&quot; profit: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/0?call_type=all&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1&amp;hgc=332</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>&quot;50&quot; profit: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=System Admin</td>
+	<td></td>
+</tr>
+<!--description-->
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IAX2/103/Test Device for Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_11']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>items_per_page</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Originator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[4]/tbody/tr[2]/td[1]</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[4]/tbody/tr[2]/td[1]</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Originator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[4]/tbody/tr[2]/td[1]</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/calls_per_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/calls_per_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_calls</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_duration</td>
+	<td>00:01:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_asr</td>
+	<td>0.0000%</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_failed</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_failed_percent</td>
+	<td>100.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_user_price</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_provider_price</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_margi</td>
+	<td>50.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_markup</td>
+	<td>100.0000 %</td>
+</tr>
+</tbody></table>
+</body>
+</html>

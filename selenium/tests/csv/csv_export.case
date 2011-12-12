@@ -1,0 +1,1185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>csv_export</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">csv_export</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--check admin's calls #1-->
+<!--outgoing-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/global_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>load_csv_from_remote_mysql</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/0?call_type=answered&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price3: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>m1: &quot;50&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>profit: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/0?call_type=answered&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=incoming&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price3: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>profit: &quot;3&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37046246362</td>
+	<td></td>
+</tr>
+<!--RESELLER CALLS-->
+<!--outgoing-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/3?call_type=answered&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price3: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>m1: &quot;75&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>profit: &quot;3&quot;</td>
+	<td></td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/3?call_type=answered&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=incoming&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price3: &quot;3&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>profit: &quot;7&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37046246362</td>
+	<td></td>
+</tr>
+<!--USER CALLS-->
+<!--outgoing-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/2?call_type=answered&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price3: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>m1: &quot;66.6666666666667&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>profit: &quot;2&quot;</td>
+	<td></td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/2?call_type=answered&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=incoming&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price3: &quot;2&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>profit: &quot;5&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37046246362</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2006</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats?csv=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>prefix: &quot;3706&quot;</td>
+	<td></td>
+</tr>
+<!--LOGIN AS RESELLER-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--===DELETING temporary folder-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/test_file_upload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@name='commit' and @value='Delete all files']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Delete all files']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Files deleted</td>
+	<td></td>
+</tr>
+<!--outgoing-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/3?call_type=all&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price3: &quot;4&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>m1: &quot;0&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>profit: &quot;0&quot;</td>
+	<td></td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/3?call_type=all&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=incoming&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>direction: Lithuania Lithuania mobile MOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>did_price3: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<!--Check Reseller's users calls-->
+<!--outgoing-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/5?call_type=answered&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price3: &quot;4&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>m1: &quot;20&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>profit: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/5?call_type=answered&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=incoming&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>direction: Lithuania Lithuania mobile MOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>did_price3: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<!--Login as 101/101-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--===DELETING temporary folder-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/test_file_upload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Delete all files']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Files deleted</td>
+	<td></td>
+</tr>
+<!--outgoing-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/2?call_type=all&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>user_price3: &quot;3&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>duration: &quot;30&quot;</td>
+	<td></td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/2?call_type=answered&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=incoming&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>user_price3: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>duration: &quot;30&quot;</td>
+	<td></td>
+</tr>
+<!--Login as user_reseller/user_reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--outgoing-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/5?call_type=all&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>user_price3: &quot;5&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>duration: &quot;50&quot;</td>
+	<td></td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/5?call_type=all&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=incoming&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>user_price3: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>duration: &quot;50&quot;</td>
+	<td></td>
+</tr>
+<!--not exits-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/555?call_type=all&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=incoming&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User not found</td>
+	<td></td>
+</tr>
+<!--Set minimal non-archive size-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--...Prividers calls-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>csv_file_size</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls_to_csv/1?call_type=all&amp;date_from=2008-02-02+00%3A00%3A00&amp;date_till=2010-02-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>.csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>csv_file_size</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls_to_csv/1?call_type=all&amp;date_from=2008-02-02+00%3A00%3A00&amp;date_till=2010-02-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>.tar.gz</td>
+	<td></td>
+</tr>
+<!--...User calls-->
+<!--......As admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/0?call_type=all&amp;date_from=2008-02-02+00%3A00%3A00&amp;date_till=2010-02-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>.tar.gz</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>csv_file_size</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/0?call_type=all&amp;date_from=2008-02-02+00%3A00%3A00&amp;date_till=2010-02-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>.csv</td>
+	<td></td>
+</tr>
+<!--......As user-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/2?call_type=all&amp;date_from=2008-02-02+00%3A00%3A00&amp;date_till=2010-02-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>.csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>csv_file_size</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/2?call_type=all&amp;date_from=2008-02-02+00%3A00%3A00&amp;date_till=2010-02-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>.tar.gz</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/3?calltype=answered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>reseller_calls_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/3?date_from=2010-02-03+00%3A00%3A00&amp;date_till=2010-02-03+23%3A59%3A59&amp;reseller=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>.tar.gz</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>-outgoing-USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/3?date_from=2006-02-03+00%3A00%3A00&amp;date_till=2010-02-03+23%3A59%3A59&amp;reseller=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>disposition: ANSWERED</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>dst: &quot;37063042438&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/2?calltype=answered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>reseller_calls_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/5?calltype=answered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>reseller_calls_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/3?date_from=2006-02-03+00%3A00%3A00&amp;date_till=2010-02-03+23%3A59%3A59&amp;reseller=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>csv_separator</td>
+	<td>;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>csv_decimal</td>
+	<td>,</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/2?call_type=answered&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price3: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>m1: &quot;66,666666666667&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls_to_csv/1?call_type=all&amp;date_from=2008-02-02+00%3A00%3A00&amp;date_till=2010-02-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>billsec: &quot;30&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>m1: &quot;66,666666666667&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>profit: &quot;2&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/2?call_type=answered&amp;date_from=2007-01-01+00%3A00%3A00&amp;date_till=2007-01-02+23%3A59%3A59&amp;direction=incoming&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>src: 37046246362 (Test)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls_to_csv/1?call_type=all&amp;date_from=2007-01-01+00%3A00%3A00&amp;date_till=2010-02-02+23%3A59%3A59&amp;direction=incoming&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>src: 37046246362 (Test)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/global_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>load_csv_from_remote_mysql</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>load_csv_from_remote_mysql</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cannot download CSV file from DB server</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/5?calltype=answered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>reseller_calls_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/3?date_from=2006-02-03+00%3A00%3A00&amp;date_till=2010-02-03+23%3A59%3A59&amp;reseller=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/global_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>load_csv_from_remote_mysql</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/country_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_hour</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[2]/table/tbody/tr[2]/td[1]</td>
+	<td>Lithuania</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[2]/table/tbody/tr[3]/td[1]</td>
+	<td>United States</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/country_stats?csv=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Lithuania</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>MOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>calls: &quot;7&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>billsec: &quot;290&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>selfcost: &quot;15&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>price: &quot;25&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>profit: &quot;10&quot;</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

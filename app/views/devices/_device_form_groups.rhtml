@@ -1,0 +1,35 @@
+            <% if @device
+              device_callgroup=@device.callgroup
+              device_pickupgroup=@device.pickupgroup
+            else
+              device_callgroup=Confline.get_value("Default_device_callgroup", session[:user_id])
+              device_pickupgroup=Confline.get_value("Default_device_pickupgroup", session[:user_id])
+            end
+          %>
+            <tr><td height="20"></td></tr>
+
+            <tr>
+              <td class="bottom_border">
+                <b><%= _('Groups') %></b>
+              </td>
+            </tr>
+            <tr><td height="10"></td></tr>
+            <tr>
+              <td valign="top">
+
+                <table class="simple">
+
+                  <tr>
+                    <td> <%= _('Call_Group') %>:   </td>
+                    <td> <%= text_field_tag 'callgroup', device_callgroup, "class" => "input" %>  </td>
+                  </tr>
+
+                  <tr>
+                    <td> <%= _('Pickup_Group') %>:   </td>
+                    <td> <%= text_field_tag 'pickupgroup', device_pickupgroup, "class" => "input" %>  </td>
+                  </tr>
+
+                </table>
+
+              </td>
+            </tr>

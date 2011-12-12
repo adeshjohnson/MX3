@@ -1,0 +1,105 @@
+<%= _('File_size') %>: <%= session[:file_size] %> <%= _('bytes') %>
+<br />
+<br />
+<%= _("Rate_day_type") %>: <%= {"all" => _("All"), "wd" => _("Work_Days"), "fd" => _("Free_Days")}[session[:imp_date_day_type]]  %>
+<br />
+<br />
+<%= _('Update_destination_names_from_file') %>: <%= session[:imp_update_dest_names].to_i == 1 ? _("Yes") : _("No") %>
+<br />
+<br />
+<b><%= _('First_file_lines') %>:</b>
+<br />
+<br />
+<table class="maintable" width="100%">
+  <tr>
+    <th><%= _('Prefix') %>/<%= _('NPANXX') %></th>
+    <th align = "right"><%= _('Rate') %></th>
+    <th><%= _('Subcode') %></th>
+    <th align = "right"><%= _('Connection_Fee') %></th>
+    <th align = "right"><%= _('Increment') %></th>
+    <th align = "right"><%= _('Min_time') %></th>
+    <th><%= _('Destination') %>/<%= _('OCN_Name') %></th>
+    <th><%= _('City') %></th>
+    <th><%= _('Country') %>/<%= _('Direction') %></th>
+    <th><%= _('Country_code') %></th>
+    <th><%= _('State') %></th>
+    <th><%= _('LATA') %></th>
+    <th><%= _('Class') %>/<%= _('Tier') %></th>
+    <th><%= _('OCN') %></th>
+  </tr>
+
+  <% tl = 0 %>
+  <% if session[:file] %>
+    <% for line in session[:file].to_s %>
+
+      <% if tl < 20%>
+        <% arr = line.split(@sep) %>
+        <% if arr[session[:imp_prefix]].to_i > 0 %>
+          <tr class="row<%= (tl % 2 + 1).to_s %>">
+
+            <td> <%= arr[session[:imp_prefix]] if session[:imp_prefix] >= 0 %>    </td>
+            <td align = "right"> <%= arr[session[:imp_rate]] if session[:imp_rate] >= 0 %>    </td>
+            <td> <%= arr[session[:imp_subcode]] if session[:imp_subcode] >= 0 %>    </td>
+            <td align = "right">
+              <% if session[:manual_connection_fee].length > 0%>
+                <%= session[:manual_connection_fee] %>
+              <% else %>
+                <%= arr[session[:imp_connection_fee]] if session[:imp_connection_fee] >= 0 %>
+              <% end%>
+            </td>
+            <td align = "right">
+              <% if session[:manual_increment].length > 0%>
+                <%= session[:manual_increment] %>
+              <% else %>
+                <%= arr[session[:imp_inc]] if session[:imp_inc] >= 0 %>
+              <% end%>
+            </td>
+
+            <td align = "right">
+              <% if session[:manual_min_time].length > 0%>
+                <%= session[:manual_min_time] %>
+              <% else %>
+                <%= arr[session[:imp_mint]] if session[:imp_mint] >= 0 %>
+              <% end%>
+            </td>
+
+            <td> <%= arr[session[:imp_dst]] if session[:imp_dst] >= 0 %>    </td>
+            <td> <%= arr[session[:imp_city]] if session[:imp_city] >= 0 %>    </td>
+            <td> <%= arr[session[:imp_country]] if session[:imp_country] >= 0 %>    </td>
+            <td> <%= arr[session[:imp_cc]] if session[:imp_cc] >= 0 %>    </td>
+            <td> <%= arr[session[:imp_state]] if session[:imp_state] >= 0 %>    </td>
+            <td> <%= arr[session[:imp_lata]] if session[:imp_lata] >= 0 %>    </td>
+            <td> <%= arr[session[:imp_tier]] if session[:imp_tier] >= 0 %>    </td>
+            <td> <%= arr[session[:imp_ocn]] if session[:imp_ocn] >= 0 %>    </td>
+          </tr>
+        <% end %>
+      <% end %>
+      <% tl += 1 %>
+    <% end %>
+  <% end %>
+</table>
+
+<br />
+<b><%= _('Total_file_lines') %>: <%= session[:file_lines] %></b>
+<br />
+<br />
+<table>
+  <tr>
+    <td>
+      <% form_tag( {:action => 'import_csv', :step => "2"}) do %>
+        <%= submit_tag(  _('Back'), :disable_with=>_('Processing..')  )%>
+      <% end %>
+    </td>
+
+    <td width="20"></td>
+    <% if session[:imp_prefix] >= 0 and session[:imp_rate] >= 0 %>
+      <td>
+        <% form_tag( {:action => 'import_csv', :step => "4"}) do %>
+          <%= submit_tag(  _('Confirm_columns'), :disable_with=>_('Processing..')  )%>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+</table>
+<br />
+<%= _('Next_step') + ": " + _('Analysis')%>

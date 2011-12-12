@@ -1,0 +1,93 @@
+<table width="100%">
+  <tr>
+    <td align="left">
+    	<%= b_bullet_green + _('OK') %>
+    	<%= b_bullet_yellow + _('LAGGED') %>
+    	<%= b_bullet_red + _('UNREACHABLE') %>
+    	<%= b_bullet_black + _('UNKNOWN') %>
+    	<%= b_bullet_white + _('Unmonitored') %>
+    </td>
+    <td align="right">
+        <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+    </td>
+  </tr>
+</table>
+
+
+<% form_tag :action => 'devices_all' do %>
+  <div id="search_details" <%= "style='display:none;'" if !@search %>>
+    <br />
+    <table width="100%" class="simple">
+      <tr>
+        <td>
+          <%= _('Description') %>: <%= text_field_tag('s_description', @options[:search_description], "class" => "input", :size => "15", :maxlength => "30")  %>
+          <%= _('Extension') %>: <%= text_field_tag 's_extension', @options[:search_extension], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('Username') %>: <%= text_field_tag 's_username', @options[:search_username], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('CLI') %>: <%= text_field_tag 's_cli', @options[:search_cli], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('PIN') %>: <%= text_field_tag 's_pin', @options[:search_pin], "class" => "input", :size => "15", :maxlength => "255", :disabled => !!@options[:search_pinless] %>
+          <%= _('Pinless') + '?' %> <%= check_box_tag 's_pinless', @options[:search_pinless], !!@options[:search_pinless], :onclick => "if($(s_pinless).checked) { $(s_pin).disabled = true; $(s_pin).value = '' } else { $(s_pin).disabled = false; }" %>
+
+          <%= submit_tag _('Search'), :disable_with=>_('Processing..'), :id => 'search_devices_all' %>
+        </td>
+        <td align="right">
+          <%= link_to b_cross + _('Clear_search'), :action => 'devices_all', :clean => 1 if @search %>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <br />
+<% end %>
+
+<%= page_select_header(@options[:page], @total_pages) if @total_pages > 1%>
+<br />
+
+<table width="100%" class="maintable">
+  <tr>
+    <th id="id_header" align="left"> <%= ordered_list_header("devices.id","acc","Acc", @options) %> </th>
+    <th id="reg_status" align="left">  </th>
+    <th id="user_header" align="left"> <%= ordered_list_header("nice_user","user","User", @options) %> </th>
+    <th id="descriptio_header" align="left"> <%= ordered_list_header("devices.description", "description" ,"Description", @options) %> </th>
+    <th id="pin_header" align="center"> <%= ordered_list_header("devices.pin", "pin", "PIN", @options) %> </th>
+    <th id="device_type_header" align="center" colspan=2> <%= ordered_list_header("devices.device_type", "type", "Type", @options) %> </th>
+    <th id="extension_header" align="left"> <%= ordered_list_header("devices.extension", "extension", "Extension", @options) %> </th>
+    <th id="name_header" align="left"> <%= ordered_list_header("devices.name", "username", "Username", @options) %> </th>
+    <th id="secret_header" align="left"> <%= ordered_list_header("devices.secret","secret","Password", @options) %> </th>
+    <th id="calledid_header" align="left"> <%= ordered_list_header("devices.callerid", "cid", "CallerID", @options) %> </th>
+    <th id="callflow_header" align="center"> <%= _('Call_Flow') %> </th>
+    <%# unless session[:usertype] == 'reseller'%>
+      <th id="did_header" align="center">	<%= _('Dids') %> </th>
+    <%# end %>
+    <th id="cli_header" align="center">	<%= _('CLIs') %> </th>
+    <th id="view_header"> </th>
+    <th id="edit_header"> </th>
+    <th id="delete_header"> </th>
+  </tr>
+  <% users_cache = {} -%>
+  <% @devices.each_with_index { |device, i| -%>
+    <% device.user = users_cache[device.user_id] ||= device.user -%>
+    <% device.user.owner = users_cache[device.user.owner_id] ||= device.user.owner -%>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <td id="id_<%= device.id %>"><%= device.id %></td>
+      <td id="status_<%= device.id %>" align="center"> <%= device_reg_status(device) %> </td>
+      <td id="user_<%= device.id %>"><%= link_nice_device_user(device) %></td>
+      <td id="description_<%= device.id %>"><%= device.description %></td>
+      <td id="pin_<%= device.id %>"><%= device.pin %></td>
+      <td id="device_pic_<%= device.id %>" align="center"><%= nice_device_pic(device) %></td>
+      <td id="device_type_<%= device.id %>"><%= print_tech(device.device_type) %></td>
+
+      <td id="extension_<%= device.id %>"><%= device.extension %></td>
+
+      <td id="name_<%= device.id %>"><%= device.name %></td>
+      <td id="secret_<%= device.id %>"><%= device.secret %></td>
+      <td id="calledid_<%= device.id %>"><%= h device.callerid %></td>
+      <td id="callflow_<%= device.id %>" align="center"><%= link_to b_callflow, {:action => "callflow", :id => device.id}, {:id => "callflow_link_"+ device.id.to_s} %></td>
+      <%# unless session[:usertype] == 'reseller'%>
+        <td id="did_<%= device.id %>" align="center"><%= link_to b_did, {:action => "device_dids", :id => device.id}, {:id => "did_link_"+ device.id.to_s} %></td>
+      <%# end %>
+      <td id="cli_<%= device.id %>" align="center"><%= link_to b_cli , {:action => "device_clis", :id => device.id}, {:id => "cli_link_"+ device.id.to_s} %></td>
+      <td id="view_<%= device.id %>" align="center"><%= link_to b_view, {:action => "device_all_details", :id => device.id}, {:id => "view_link_"+ device.id.to_s} %></td>
+      <td id="edit_<%= device.id %>" align="center"><%= link_to b_edit, {:action => "device_edit", :id => device.id} , {:id => "edit_link_"+ device.id.to_s} %></td>
+      <td id="delete_<%= device.id %>" align="center"><%= link_to b_delete, { :action => 'destroy', :id => device.id }, {:confirm => _('are_you_sure'), :method => :post, :id => "delete_link_"+ device.id.to_s} %></td>
+    </tr>
+  <% } -%>
+</table>

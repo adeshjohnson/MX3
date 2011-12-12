@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>active_calls</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">active_calls</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>active_calls_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>active_calls_link</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>active_calls_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>show_active_calls_for_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Active Calls:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>active_calls_link</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>active_calls_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>active_calls_link</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>active_calls_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>active_calls_link</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>active_calls_interval</td>
+	<td>-9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>active_calls_interval</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>active_calls_interval</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>active_calls_interval</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>active_calls_interval</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>active_calls_interval</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>active_calls_interval</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>active_calls_interval</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/active_call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>duration_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=status_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Philippines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td[@id=&quot;status_0&quot;]/span[@class='icon bullet_green']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td[@id=&quot;status_2&quot;]/span[@class='icon bullet_yellow']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>link=Status</td>
+	<td>Status</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Source (Caller)</td>
+	<td>Source (Caller)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Destination (Callee)</td>
+	<td>Destination (Callee)</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//td[@id=&quot;status_0&quot;]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_10']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>active_calls_show_server</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>active_calls_show_server</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>active_calls_show_server</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Server</td>
+	<td>Server</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=2</td>
+	<td>2</td>
+</tr>
+<!--neiseina istestuoti, test sistemoje testas luzta del kas keliu seknudziu perkrovimo, lokaliai ne-->
+<!--<tr> 	<td>waitForElementPresent</td> 	<td>link=Duration</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>link=Duration</td> 	<td></td> </tr> <tr> 	<td>waitForText</td> 	<td>dst_4</td> 	<td>63727007886&nbsp;&nbsp;Philippines FIX Philippines proper</td> </tr> <tr> 	<td>waitForText</td> 	<td>dst_5</td> 	<td>63727007887&nbsp;&nbsp;Philippines FIX Philippines proper</td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>//img[@alt='Bullet_arrow_up']</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>link=Duration</td> 	<td></td> </tr> <tr> 	<td>waitForText</td> 	<td>dst_0</td> 	<td>63727007887&nbsp;&nbsp;Philippines FIX Philippines proper</td> </tr> <tr> 	<td>waitForText</td> 	<td>dst_1</td> 	<td>63727007886&nbsp;&nbsp;Philippines FIX Philippines proper</td> </tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Start time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Start time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>answer_time_0</td>
+	<td>exact:14:49:42</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>answer_time_1</td>
+	<td>exact:14:49:40</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Start time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>answer_time_4</td>
+	<td>exact:14:49:40</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>answer_time_5</td>
+	<td>exact:14:49:42</td>
+</tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>common_prov</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/active_call_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tariff_name</td>
+	<td>testinis_tariff</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tariff[purpose]_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>test_provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>common_prov</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=common_prov</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=test_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=test_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>page_title</td>
+	<td>Edit Provider: test_provider</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>new_window</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Hangup</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

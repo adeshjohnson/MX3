@@ -1,0 +1,1089 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<!--fails in 2012 october 13-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--sql-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/payments/payments</td>
+	<td></td>
+</tr>
+<!--verify list-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=September</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_minute</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_minute</td>
+	<td>label=47</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Transaction ID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>transaction_10</td>
+	<td>3456754123457653</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>transaction_17</td>
+	<td>3456754123457653</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amount_11</td>
+	<td>9.5600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amount_12</td>
+	<td>9.5600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>fee_11</td>
+	<td>0.4400</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>fee_12</td>
+	<td>0.4400</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_11</td>
+	<td>15.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_12</td>
+	<td>15.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_10</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_11</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_12</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_13</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_14</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_15</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_16</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_17</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_17</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_18</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_19</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount</td>
+	<td>113.3600(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount_completed</td>
+	<td>54.6800(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_fee</td>
+	<td>4.4000(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_fee_completed</td>
+	<td>2.2000(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_with_tax</td>
+	<td>147.0000(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_with_tax_completed</td>
+	<td>68.0000(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//th</td>
+	<td>User/Card (PIN)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//th[2]</td>
+	<td>Email/Payer</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[@id='user_13']/a</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=email_13</td>
+	<td>Jonas Jonaitis</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[@id='user_14']/a</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=email_14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=September</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_minute</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_minute</td>
+	<td>label=47</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Transaction ID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>transaction_21</td>
+	<td>3456754123457653</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_20</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_21</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount</td>
+	<td>116.6800(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount_completed</td>
+	<td>53.5600(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_fee</td>
+	<td>3.0800(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_fee_completed</td>
+	<td>1.3200(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_with_tax</td>
+	<td>161.0000(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_with_tax_completed</td>
+	<td>69.0000(USD)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--chenge view-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_11']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>hide_non_completed_payments_for_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_11']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>hide_non_completed_payments_for_user</td>
+	<td>on</td>
+</tr>
+<!--verify list-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=September</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_minute</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_minute</td>
+	<td>label=47</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amount_12</td>
+	<td>9.5600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>fee_12</td>
+	<td>0.4400</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_12</td>
+	<td>15.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_10</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_12</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_14</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_16</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>No (Unnotified payment)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_18</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_19</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount</td>
+	<td>64.2400(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount_completed</td>
+	<td>54.6800(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_fee</td>
+	<td>2.6400(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_fee_completed</td>
+	<td>2.2000(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_with_tax</td>
+	<td>87.0000(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_with_tax_completed</td>
+	<td>68.0000(USD)</td>
+</tr>
+<!--edit configuration with test informations-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='settings']/form/div[9]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=gateways_authorize_net_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_authorize_net_login</td>
+	<td>3Dacu3L6v</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_authorize_net_password</td>
+	<td>436vr9FYam95YsC8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_authorize_net_min_amount</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_authorize_net_max_amount</td>
+	<td>55555</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='settings']/form/div[11]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>gateways_paypal_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_paypal_login</td>
+	<td>Log In</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_paypal_signature</td>
+	<td>Parasas</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_paypal_password</td>
+	<td>Sunset12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_paypal_min_amount</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_paypal_max_amount</td>
+	<td>555</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>gateways_paypal_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--do payment authorize.net-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/authorize_net</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_authorize_net_first_name</td>
+	<td>kolmisoft_test_account</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_authorize_net_last_name</td>
+	<td>kolmisoft_test_account</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_authorize_net_year</td>
+	<td>label=2021</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_authorize_net_number</td>
+	<td>4111111111111111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_authorize_net_verification_value</td>
+	<td>1120</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_authorize_net_amount</td>
+	<td>80</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment was unsuccessful, details from gateway: The merchant login ID or password is invalid or the account is inactive</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/paypal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_first_name</td>
+	<td>System</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_last_name</td>
+	<td>Admin</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gateways_paypal_year</td>
+	<td>label=2021</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gateways_paypal_month</td>
+	<td>label=08</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_number</td>
+	<td>4111111111111111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_verification_value</td>
+	<td>1111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_amount</td>
+	<td>80</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment was unsuccessful, details from gateway: Security header is not valid</td>
+	<td></td>
+</tr>
+<!--verify list-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=September</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_minute</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_minute</td>
+	<td>label=47</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>System Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amount_12</td>
+	<td>9.5600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>fee_12</td>
+	<td>0.4400</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_12</td>
+	<td>15.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_10</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_12</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_14</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_16</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>No (Unnotified payment)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_18</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_19</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No (Failed)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>transaction_27</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>transaction_28</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=September</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_minute</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_minute</td>
+	<td>label=47</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Transaction ID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>transaction_21</td>
+	<td>3456754123457653</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>No (Unnotified payment)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_21</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount</td>
+	<td>63.1200(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount_completed</td>
+	<td>53.5600(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_fee</td>
+	<td>1.7600(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_fee_completed</td>
+	<td>1.3200(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_with_tax</td>
+	<td>95.0000(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_with_tax_completed</td>
+	<td>69.0000(USD)</td>
+</tr>
+</tbody></table>
+</body>
+</html>

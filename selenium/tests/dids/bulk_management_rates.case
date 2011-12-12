@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>bulk_management_rates</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">bulk_management_rates</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--# CREATE DIDs-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Here you can add DID interval:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>100000000000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>100000001000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>document.forms[1].elements[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID interval was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>100000000991</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>100000001000</td>
+</tr>
+<!--Neleidzia iskart priskirti useriui-->
+<!--<tr> 	<td>select</td> 	<td>id=user</td> 	<td>label=Test User #1</td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>id=device</td> 	<td></td> </tr> <tr> 	<td>select</td> 	<td>id=device</td> 	<td>label=IAX2/1002</td> </tr>-->
+<tr>
+	<td>click</td>
+	<td>id=did_action_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=option[value=&quot;2&quot;]</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;2&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=s_device</td>
+	<td>All IAX2/101 FAX/102 IAX2/1002</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_device</td>
+	<td>label=IAX2/1002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>10 DIDs were updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>100000000973</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>100000000990</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=did_action_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Quick Forwards Dial Plan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=fovard_pd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dial Plan assigned to DIDs interval</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>100000000955</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>100000000993</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=did_action_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Possible choices:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=user_id</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reserve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DIDs quantity: 39</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>100000000951</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>100000000959</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=did_action_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>100000000951 - 100000000959</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prate</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=irate</td>
+	<td>202</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=orate</td>
+	<td>202</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=status</td>
+	<td>DID interval rate updated</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DIDs quantity: 9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>100000000951</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>100000001000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=did_action_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DIDs quantity: 7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prate</td>
+	<td>02</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=irate</td>
+	<td>022</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=orate</td>
+	<td>022</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID interval rate updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DIDs quantity: 7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>100000000851</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>100000000899</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=did_action_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID interval: 100000000851 - 100000000899</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=did_7</td>
+	<td>100000000004</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>49 DIDs were updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>100000000845</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>100000000932</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=did_action_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DIDs quantity: 49</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prate</td>
+	<td>04</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=irate</td>
+	<td>04</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=orate</td>
+	<td>03</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID interval rate updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>100000000845</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>100000000932</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=did_action_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DIDs quantity: 88</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prate</td>
+	<td>08</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=irate</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=orate</td>
+	<td>03</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID interval rate updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>100000000845</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>100000000932</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=did_action_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DIDs quantity: 49</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prate</td>
+	<td>04</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=irate</td>
+	<td>04</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=orate</td>
+	<td>03</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID interval rate updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/did_rates/850</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=rate_2542</td>
+	<td>8.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=rate_2544</td>
+	<td>8.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=rate_2543</td>
+	<td>3.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/did_rates/862</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=rate_2578</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=rate_2580</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=rate_2579</td>
+	<td>3.0</td>
+</tr>
+</tbody></table>
+</body>
+</html>

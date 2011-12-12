@@ -1,0 +1,48 @@
+<script type="text/javascript">
+  Event.observe(window, 'load', function() {
+    var minutes = $('monitoring_period_in_past_type_minutes');
+    var hours = $('monitoring_period_in_past_type_hours');
+    var days = $('monitoring_period_in_past_type_days');
+
+    adjustPeriod(minutes, hours, days);
+
+    $$(".period_select").each(function(opt) {
+      Event.observe(opt, 'click', function() {
+        adjustPeriod(minutes, hours, days);
+      });
+    });
+  });
+  
+  function adjustPeriod(minutes, hours, days) {
+    if (minutes.checked) {
+      $$(".period_minutes").first().disabled = false;
+      $$(".period_hours").first().disabled = true;
+      $$(".period_days").first().disabled = true;
+    }
+    if (hours.checked) {
+      $$(".period_minutes").first().disabled = true;
+      $$(".period_hours").first().disabled = false;
+      $$(".period_days").first().disabled = true;
+    }
+    if (days.checked) {
+      $$(".period_minutes").first().disabled = true;
+      $$(".period_hours").first().disabled = true;
+      $$(".period_days").first().disabled = false;
+    }
+  }
+</script>
+<td>
+  <%= form.period_select :period_in_past %>
+</td>
+<td class="center">
+  <%= form.text_field :amount, :class => "input", :size => 10, :id => "amount" %>
+  <%= hidden_field_tag "default_currency", Currency.get_default.name, :id => "default_currency" %>
+</td>
+<td>
+  <%= form.radio_button :block, true, :id => "will_be_blocked" %> <%= _('Block') %><br/>
+  <%= form.radio_button :block, false, :id => "will_not_be_blocked" %> <%= _('Do_not_block') %><br/>
+</td>
+<td>
+  <%= form.radio_button :email, true, :id => "will_be_sent" %> <%= _('Send') %><br/>
+  <%= form.radio_button :email, false, :id => "will_not_be_sent" %> <%= _('Do_not_send') %><br/>
+</td>

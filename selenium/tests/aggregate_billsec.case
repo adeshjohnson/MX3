@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>aggregate_billsec</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">aggregate_billsec</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/aggregate_billsec_zero</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test_terminator</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>provider_link_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_hour</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_hour</td>
+	<td>label=02</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dir_name_0</td>
+	<td>Lithuania MOB Lithuania mobile (3706)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>duration_0</td>
+	<td>00:01:40</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>00:00:00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<!--Visual-->
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_11 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=global_number_decimal</td>
+	<td>label=;</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Default Number Decimal:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>global_number_decimal</td>
+	<td>. , ;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=global_number_decimal</td>
+	<td>label=;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_hour</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_hour</td>
+	<td>label=02</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[2]/tbody/tr[3]/td[4]</td>
+	<td>2;0000 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_billed_orig</td>
+	<td>2;0000 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[2]/tbody/tr[3]/td[5]</td>
+	<td>1;0000 USD</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=total_billed_term</td>
+	<td>1;0000 USD</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//td[11]</td>
+	<td>100;0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[11]</td>
+	<td>100;0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_ast</td>
+	<td>100;0000 %</td>
+</tr>
+</tbody></table>
+</body>
+</html>

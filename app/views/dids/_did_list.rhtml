@@ -1,0 +1,39 @@
+<table width="100%" class="maintable">
+  <tr>
+    <th><%= _('Start_Time') %></th>
+    <th><%= _('End_Time') %></th>
+    <th align="left"><%= _('Rate') %></th>
+    <th align="left"><%= _('Connection_Fee') %></th>
+    <th align="left"><%= _('Increment') %></th>    
+    <th align="left"><%= _('Min_Time') %></th>
+    <% if @allow_edit %>
+      <th></th>
+    <% end %>
+  </tr>
+  <% dids_list.each_with_index{ |dr, i| %>
+    <% if @allow_edit %>
+      <% form_tag :action => 'edit_rate', :id => dr.id do %>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <td id="start_time_<%= dr.id %>" align="center"><%= nice_time2(dr.start_time) %></td>
+          <td id="end_time_<%= dr.id %>" align="center"><%= nice_time2(dr.end_time) %></td>
+          <td><%= text_field_tag 'rate', dr.rate, "class" => "input", :size => "5", :maxlength => "14", :id=>"rate_#{dr.id}"%></td>
+          <td><%= text_field_tag 'con_fee', dr.connection_fee, "class" => "input", :size => "5", :maxlength => "14" , :id=>"con_fee_#{dr.id }"%></td>
+          <td><%= text_field_tag 'inc', dr.increment_s, "class" => "input", :size => "5", :maxlength => "14", :id=>"increment_#{dr.id}"%></td>
+          <td><%= text_field_tag 'min_time', dr.min_time, "class" => "input", :size => "5", :maxlength => "14", :id=>"min_time_#{dr.id}"  %></td>
+          <td align="center">   <%= image_submit_tag 'icons/edit.png', :title => _('Edit') %>  </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <% if @allow_read%>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <td id="start_time_<%= dr.id %>" align="center"><%= nice_time2(dr.start_time) %></td>
+          <td id="end_time_<%= dr.id %>" align="center"><%= nice_time2(dr.end_time) %></td>
+          <td id="rate_<%= dr.id %>"><%= dr.rate %></td>
+          <td id="con_fee_<%= dr.id %>"><%= dr.connection_fee %></td>
+          <td id="increment_<%= dr.id %>"><%= dr.increment_s%></td>
+          <td id="min_time_<%= dr.id %>"><%= dr.min_time %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  <% } %>
+</table>

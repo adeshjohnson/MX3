@@ -1,0 +1,74 @@
+
+
+<table width="100%"  class="bordered">
+  <tr>
+    <td width="50%" align="center">
+
+
+      <!-- ampie script-->
+      <div id="flashcontent33"><strong>You need to upgrade your Flash Player</strong></div>
+      <script type="text/javascript">
+        // <![CDATA[
+        var so = new SWFObject("<%= Web_Dir %>/swf/ampie.swf", "ampie", "450", "250", "9", "#FFFFFF");
+        so.addVariable("path", "<%= Web_Dir %>/swf/");
+        so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/ampie_3.xml"));
+        so.addVariable("chart_data",  escape(<%=  @Calls_graph %>));
+        so.addVariable("additional_chart_settings",  encodeURI("<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('Hangup_cause_codes') %></b>]]></text></label></labels></settings>"));
+        so.write("flashcontent33");
+        // ]]>
+      </script>
+      <!-- end of ampie script -->
+
+      <br />
+    </td>
+
+    <td align="center">
+      <!-- amline script-->
+
+      <br />
+      <div id="flashcontent7"><strong>You need to upgrade your Flash Player</strong></div>
+      <script type="text/javascript">
+        // <![CDATA[
+        var so = new SWFObject("<%= Web_Dir %>/swf/amline.swf", "amline", "370", "277", "8", "#FFFFFF");
+        so.addVariable("path", "<%= Web_Dir %>/swf/");
+        so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/amline4.xml"));
+        so.addVariable("chart_data",  escape("<%=   @hangupcusecode_graph %>"));
+        so.addVariable("additional_chart_settings", encodeURI("<settings><labels><label><x>0</x><y>10</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('Hangup_cause_codes') %></b>]]></text></label></labels></settings>"));
+        so.write("flashcontent7");
+        // ]]>
+      </script>
+      <!-- end of amline script -->
+    </td>
+
+
+
+  </tr>
+  <tr>
+
+  <table width="100%" class="maintable" >
+    <tr>
+      <th align="left">        <%= _('Cause_code') %>    </th>
+      <th align="left">       <%= _('Description') %>    </th>
+      <th align="right">        <%= _('Total_calls') %>  </th>
+      <th align="right">           </th>
+      <th align="center">    <%= _('Calls') %>       </th>
+    </tr>
+    <%@calls.each_with_index{|c,i|%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td align="left"> <%= c.hc_code.to_s %>      </td>
+        <td align="left"> <%= c.description.to_s %>      </td>
+        <td align="right"> <%=  c.calls.to_i.to_s  %>      </td>
+        <td align="right"> <%= nice_number (c.calls.to_f / @calls_size.to_f) * 100 %> %      </td>
+        <td align="center">
+          <%=  link_to b_call, :action=>"last_calls_stats", :s_call_type=>'all', :s_provider=>@provider_id, :s_country=>@code, :s_hgc=>c.id, :s_user=>@user_id, :s_device=>@device_id %>
+        </td>
+      </tr>
+    <%}%>
+
+  </table>
+
+</tr>
+
+</table>
+
+<br />

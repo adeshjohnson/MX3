@@ -1,0 +1,45 @@
+<table class="simple" width="100%">
+  <%= settings_string(_('Items_Per_Page'), 'items_per_page',"Items_Per_Page") %>
+  <tr>
+    <td></td>
+    <td><b><%= _('Default_Date_Format')%>:</b></td>
+    <td>
+      <select name='date_format'>
+        <% sdf = Confline.get_value('Date_format', 0).to_s %>
+        <% for df in $date_formats %>
+          <option value='<%= df %>' <%= 'selected' if df == sdf %>>
+            <%= h df.to_s.delete('%') %>
+          </option>
+        <% end %>
+      </select>
+    </td>
+  </tr>
+  <%= settings_string(_('Nice_Number_Digits'), 'nice_number_digits', "Nice_Number_Digits") %>
+  <%= setting_boolean(_('Hide_Quick_Stats'), 'hide_quick_stats', "Hide_quick_stats") %>
+  <%= setting_boolean(_('Hide_device_passwords_for_users'), 'hide_device_passwords_for_users', "Hide_Device_Passwords_For_Users") %>
+  <%= setting_boolean(_('Hide_HELP_banner'), 'hide_help_banner', "Hide_HELP_banner") %>
+  <%= setting_boolean(_('Hide_Iwantto'), 'hide_iwantto', "Hide_Iwantto") %>
+  <%= setting_boolean(_('Hide_manual_link'), 'hide_manual_link', "Hide_Manual_Link") %>
+  <%= setting_boolean(_('Show_logo_on_register_page'), 'show_logo_on_register_page', "Show_logo_on_register_page") %>
+  <%= setting_boolean(_('Show_Full_Src'), 'show_full_src', "Show_Full_Src") %>
+  <%= setting_boolean(_('Hide_payment_options_for_postpaid_users'), 'hide_payment_options_for_postpaid_users', "Hide_payment_options_for_postpaid_users") %>
+  <%= setting_boolean(_('Show_advanced_Device_settings'), 'show_advanced_device_settings', "Show_advanced_Device_settings") %>
+  <%= setting_boolean(_('Hide_non_completed_payments_for_user'), 'hide_non_completed_payments_for_user', "Hide_non_completed_payments_for_user") %>
+  <%= setting_boolean(_('Show_only_main_page'), 'show_only_main_page', "Show_only_main_page") %>
+  <%= setting_boolean(_('Show_forgot_password'), 'show_forgot_password', "Show_forgot_password") %>
+  <%= setting_boolean(_('Hide_recordings_for_all_users'), 'hide_recordings_for_all_users', "Hide_recordings_for_all_users") %>
+  <tr>
+    <td></td>
+    <td><b><%= _('Default_Number_Decimal')%>:</b></td>
+    <td>
+      <select name='global_number_decimal'>
+        <% sdf = Confline.get_value('Global_Number_Decimal', 0).to_s %>
+        <% for df in $decimal_formats %>
+          <option value='<%= df %>' <%= 'selected' if df == sdf %>>
+            <%= h df.to_s%>
+          </option>
+        <% end %>
+      </select>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.165" />
+<title>callerid_presentation</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">callerid_presentation</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--verify default device-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incoming Call CallerID Presentation:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device[calleridpres]</td>
+	<td>None Presentation Allowed, Not Screened Presentation Allowed, Passed Screen Presentation Allowed, Failed Screen Presentation Allowed, Network Number Presentation Prohibited, Not Screened Presentation Prohibited, Passed Screen Presentation Prohibited, Failed Screen Presentation Prohibited, Network Number Number Unavailable</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>device[calleridpres]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incoming Call CallerID Presentation</td>
+	<td></td>
+</tr>
+<!--new device-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>device</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incoming Call CallerID Presentation:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device[calleridpres]</td>
+	<td>None Presentation Allowed, Not Screened Presentation Allowed, Passed Screen Presentation Allowed, Failed Screen Presentation Allowed, Network Number Presentation Prohibited, Not Screened Presentation Prohibited, Passed Screen Presentation Prohibited, Failed Screen Presentation Prohibited, Network Number Number Unavailable</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>device[calleridpres]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incoming Call CallerID Presentation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[calleridpres]</td>
+	<td>label=Presentation Prohibited, Passed Screen</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Presentation Prohibited, Passed Screen</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<!--device edit-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device[calleridpres]</td>
+	<td>None Presentation Allowed, Not Screened Presentation Allowed, Passed Screen Presentation Allowed, Failed Screen Presentation Allowed, Network Number Presentation Prohibited, Not Screened Presentation Prohibited, Passed Screen Presentation Prohibited, Failed Screen Presentation Prohibited, Network Number Number Unavailable</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>device[calleridpres]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incoming Call CallerID Presentation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[calleridpres]</td>
+	<td>label=Number Unavailable</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Number Unavailable</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_name</td>
+	<td>104wertyuioliukyjmhntgrfb</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_secret</td>
+	<td>104dcetryhunjmmmmktmryjnthegrbfvdc</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<!--verify is it saved-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Number Unavailable</td>
+</tr>
+<!--verify is it saved-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Presentation Prohibited, Passed Screen</td>
+</tr>
+<!--edit default device-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[calleridpres]</td>
+	<td>label=Presentation Allowed, Failed Screen</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Presentation Allowed, Failed Screen</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Presentation Allowed, Failed Screen</td>
+</tr>
+<!--verify is it not changed-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Number Unavailable</td>
+</tr>
+<tr>
+	<td>verifyNotSelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Presentation Allowed, Failed Screen</td>
+</tr>
+<!--verify is it not changed and change-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Presentation Prohibited, Passed Screen</td>
+</tr>
+<tr>
+	<td>verifyNotSelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Presentation Allowed, Failed Screen</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[calleridpres]</td>
+	<td>label=Presentation Prohibited, Network Number</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Presentation Prohibited, Network Number</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<!--new device-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>device2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incoming Call CallerID Presentation:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device[calleridpres]</td>
+	<td>None Presentation Allowed, Not Screened Presentation Allowed, Passed Screen Presentation Allowed, Failed Screen Presentation Allowed, Network Number Presentation Prohibited, Not Screened Presentation Prohibited, Passed Screen Presentation Prohibited, Failed Screen Presentation Prohibited, Network Number Number Unavailable</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>device[calleridpres]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incoming Call CallerID Presentation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Presentation Allowed, Failed Screen</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[calleridpres]</td>
+	<td>label=Presentation Allowed, Not Screened</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Presentation Allowed, Not Screened</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<!--verify-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Presentation Allowed, Not Screened</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>device[calleridpres]</td>
+	<td>Presentation Prohibited, Network Number</td>
+</tr>
+</tbody></table>
+</body>
+</html>

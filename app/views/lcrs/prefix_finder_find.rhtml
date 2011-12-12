@@ -1,0 +1,6 @@
+<% if @results and @results.length > 0 %>
+  <%= draw_flag(@dest.direction_code)%> <%= @results %>
+<% else %>
+  <br />
+<% end %>
+<%=  hidden_field 'test_rezult', '' %>

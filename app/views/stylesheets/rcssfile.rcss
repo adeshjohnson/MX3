@@ -1,0 +1,357 @@
+body { 
+  font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif; 
+/*  font: bold smaller sans-serif;  */ 
+  background-color: <%= @background_color %>;  
+/*  background: white right bottom url("../images/logo/kolmisoft.jpg");*/
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
+  margin:0;padding:0;
+}
+
+
+/* TEXT
+------------------------------------*/
+
+.bold_green {
+	color: <%= @usual_text_font_color %>;
+	text-decoration: <%= @usual_text_font_style1 %>;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:<%= @usual_text_font_size %>;
+/*	margin-left: 1px;	*/
+	font-weight:<%= @usual_text_font_style3 %>;
+        font-style:<%= @usual_text_font_style2 %>;
+        	 
+}
+
+.bold_red {
+	color: #E81818;
+	text-decoration: <%= @usual_text_font_style1 %>;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+/*	margin-left: 1px;	*/
+	font-weight:<%= @usual_text_font_style3 %>;
+        font-style:<%= @usual_text_font_style2 %>;
+}
+
+/* TABLES
+----------------------------------------------- */
+
+.simple 
+{ 
+    font-size: <%=@usual_text_highlighted_text_size %>
+    color: 	<%=@usual_text_highlighted_text_color %>; 
+} 
+
+.simple a {
+	color: <%=@usual_text_highlighted_text_color %>; 
+	text-decoration: none;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: <%= @usual_text_highlighted_text_size %>;   
+	margin-left: 3px;	
+}
+.simple a:hover {
+	color:<%=@usual_text_highlighted_text_color %>; 
+	background-color: <%= @first_3_rows_color %>;
+	text-decoration: none;
+}
+.simple a img {
+	border: 0px solid;
+}
+
+
+
+.top_border 
+{ 
+    border-top: 1px black solid; 
+    padding: 4px; 
+    font-size:<%= @usual_text_highlighted_text_size %>;   
+} 
+
+.bottom_border 
+{ 
+    border-bottom: 1px black solid; 
+    padding: 4px; 
+    font-size: 10px;
+} 
+
+/* ##### foter - header ##### */
+.page_title {
+    text-decoration: <%= @header_footer_font_style1 %>;
+    font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;   
+    background: white url("../images/design/background3.jpg"); 
+    color: <%= @header_footer_font_color%>; 
+    font-size: <%=@header_footer_font_size   %>; 
+    font-weight: <%= @header_footer_font_style3%>; 
+     font-style: <%= @header_footer_font_style2%>;
+}
+
+.maintable, .infotable {
+	border-collapse: collapse;
+}
+
+.maintable tr:hover {
+	background-color: <%= @first_3_rows_color %>;
+}
+
+tr.row1 {
+	background-color: <%= @row1_color %>;  
+}
+tr.row2 {
+	background-color: <%=  @row2_color %>;  
+}
+tr.red {
+	background-color: #FF3939;
+}
+tr.yellow {
+	background-color: #FDFEA4;
+}
+
+.bordered{
+	border: 1px solid #D4D0C8;
+}
+
+.maintable td.n_disabled {
+	color: #BBBBBB;
+}
+tr.sel {
+	background-color: <%= @first_3_rows_color %>;
+}
+
+.maintable th, .maintable td {
+	border: 1px solid #D4D0C8;
+        
+}
+
+/* ##### table ##### */
+.maintable th {
+    text-decoration: <%=@usual_text_highlighted_text_style1 %>;
+    background: white url("../images/design/background6.jpg");
+    color: <%=  @usual_text_highlighted_text_color %>;
+    font-size: <%= @usual_text_highlighted_text_size %>;
+font-weight: <%= @usual_text_highlighted_text_style3%>; 
+     font-style: <%= @usual_text_highlighted_text_style2%>;
+}
+
+.maintable th.catname {
+	padding-top: 1em;
+	background-color: #fff;
+	border: 0;
+}
+/* ##### table text ##### */
+.maintable td {
+ text-decoration: <%= @usual_text_font_style1 %>;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  color: <%= @usual_text_font_color %>;
+  font-size: <%=  @usual_text_font_size %>;
+  font-weight: <%= @usual_text_font_style3%>; 
+     font-style: <%= @usual_text_font_style2%>;
+ 
+}
+
+.maintable td.red {
+  color: #FF0000;
+  font-weight: bold;  
+  font-size: <%=  @usual_text_font_size %>;
+}
+
+.maintable td.black {
+   color: #000000;
+  font-size: <%=  @usual_text_font_size %>;
+}
+
+.nb {
+  font-size: 11px;
+  font-weight: normal;
+}
+
+
+
+.maintable img.ir {
+	float: right;
+	margin: .3em .2em 0 0;
+}
+
+.maintable .r, .maintable .g, .maintable .b {
+	text-align: right;
+}
+
+.maintable a, .infotable a, #navbar a, #status a {
+	text-decoration: none;
+}
+
+.maintable a:hover, .infotable a:hover, #navbar a:hover, #status a:hover {
+	text-decoration: none;
+}
+
+.infotable th, .infotable td {
+	border: 1px solid #ccc;
+}
+
+.infotable th {
+	text-align: left;
+	background-color: #eee;
+}
+
+.infotable img {
+	vertical-align: middle;
+}
+
+td.n_disabled {
+	color: #BBBBBB;
+}
+
+/* LINKS 
+------------------------------------*/
+
+a {
+	color: #000000;
+	text-decoration: none;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+/*	margin-left: 1px;	*/
+/*	font-weight: bold;	 */
+}
+a:hover {
+	color: #FFFFFF;
+	background-color: #AA0000;
+	text-decoration: none;
+}
+a img {
+	border: 0px solid;
+}
+
+
+/* PAGE ELEMENTS 
+----------------------------------------------*/
+
+.input {
+    font-family:        Verdana, Geneva, sans-serif;
+    font-size: 10px;
+    color: #000000;
+    background-color: #FFFFFF;
+    border:solid 1px #d0d0d0;
+
+}
+
+input {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+
+select {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+
+textarea {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+
+/* NOTICE 
+------------------------------------------------------*/
+
+#notice {
+/*    border: 2px solid red;*/
+    padding: 0.7em;
+    margin-bottom: 1em;
+    background-color: #D62131;
+    background: white url("../images/design/background4.jpg");
+    font: bold smaller sans-serif;
+    font-size: 13px;
+    color: #FFFFFF;
+}
+
+/* ERROR
+------------------------------------------------------*/
+
+#error {
+/*    border: 2px solid red;*/
+    padding: 0.7em;
+    margin-bottom: 1em;
+    background-color: #D62131;
+    background: white url("../images/design/background4.jpg");
+    font: bold smaller sans-serif;
+    font-size: 13px;
+    color: #FFFFFF;
+}
+
+/* STATUS
+------------------------------------------------------*/
+
+#status {
+/*    border: 2px solid red;*/
+    padding: 0.7em;
+    margin-bottom: 1em;
+    background-color: #D62131;
+    background: white url("../images/design/background7.jpg");
+    font: bold smaller sans-serif;
+    font-size: 13px;
+    color: #FFFFFF;
+}
+
+
+/* NEW SKIN
+-----------------------------------------------------*/
+
+#ddnav{background-color:#312e2e;height:30px;}
+#topbck{background-color:#fff;background-image:url(../images/design/topbck.gif);background-repeat:repeat-x;height:24px;}
+#footerbck{background-image:url(../images/design/footerbck.gif);background-repeat:repeat-x;clear:both;height:21px;margin:0;padding:0;}
+
+#footerbox{
+    font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif; 
+     color:#fff;
+    background-color:#312e2e;
+    height:30px;
+    line-height:30px !important;
+    font-size: 9px;  
+    position: relative;
+    
+}
+.left-element {
+   position: absolute;
+   font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif; 
+    color:#fff;
+    background-color:#312e2e;
+    height:30px;
+    line-height:30px !important;
+    font-size: 9px; 
+   left: 0;
+   width: 50%;
+   }
+.right-element {
+   position: absolute;
+   font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif; 
+    color:#fff;
+    background-color:#312e2e;
+    height:30px;
+    line-height:30px !important;
+    font-size: 9px; 
+   right: 10px;
+   width: 30%;
+   margin:0px;
+   text-align: right; /* depends on element width */
+   }
+   
+#footerbox a:hover{text-decoration:none;color:#fff;border:none;	background-color: #312e2e;}
+#footerbox a:link{text-decoration:none;color:#fff;border:none;}
+#footerbox a:active,
+#footerbox a:visited{text-decoration:none;color:#aaa;border:none;}
+#footerbox img {vertical-align:middle;}   
+
+
+.page_title_new {
+    font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;   
+    color: #FFFFFF;	
+    font-size: 16px;
+	font-weight: bold;
+	padding:0.3em;
+}
+
+
+.left_menu{border:1px solid #dadada;background:#fff url(../images/design/box.gif) repeat-x left top;margin:0 0 10px;padding:10px;}
+.main_window{border:1px solid #dadada;background:#fff url(../images/design/box.gif) repeat-x left top;margin:0 0 10px;padding:10px;}
+
+
+

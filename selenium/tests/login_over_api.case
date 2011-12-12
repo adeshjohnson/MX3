@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>login_over_api</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">login_over_api</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_9']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>api_login_redirect_to_main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>api_login_redirect_to_main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>api_login_redirect_to_main</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_9']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>api_login_redirect_to_main</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/login?u=admin&amp;p=admin1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title_icon</td>
+	<td>Start page</td>
+</tr>
+</tbody></table>
+</body>
+</html>

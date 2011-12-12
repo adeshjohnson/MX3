@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>user_rename_phone_call_booth</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">user_rename_phone_call_booth</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/callshop/test_callshop</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>Test_user_rename</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_usertype</td>
+	<td>label=user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_first_name</td>
+	<td>Test_user_</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_last_name</td>
+	<td>rename</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Call booths</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>new_member</td>
+	<td>label=Test_user_rename - Test_user_ rename</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test_user_rename</td>
+	<td>Test_user_rename</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>gusertype-6</td>
+	<td>phone (call booth)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/change_position/1?direction=up&amp;member_id= 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>firstname-0</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/change_position/1?direction=down&amp;member_id=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>firstname-0</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

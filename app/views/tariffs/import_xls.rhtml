@@ -1,0 +1,14 @@
+<br>
+<%= link_nice_tariff(@tariff)%>
+<% if @step == 1 %>
+  <br />
+  <%= _('Tariff_import_step_1_1_xls') %>:
+  <br />
+  <br />
+  <% form_tag( {:action => 'import_xls', :step => "2"}, {:multipart => "true"}, {:id => "files"}) do %>
+    <%= _('Upload') %>: <%= file_field_tag "file" %>
+    <%= submit_tag(  _('Upload_file'), :disable_with=>_('Processing..')  )%>
+  <% end %>
+  <br />
+  <%= _('Next_step') + ": " + _('Column_assignment')%>
+<% end %>

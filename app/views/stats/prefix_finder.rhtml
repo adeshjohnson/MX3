@@ -1,0 +1,39 @@
+<b><%= _("Type_Prefix_To_Get_Destination") %></b>:
+<%= text_field_tag :search, "", "class" => "input" %>
+<%= observe_field("search",
+  :update   => :results,
+  :frequency => 0.5,
+  :with => "prefix",
+  :url      => { :action => "prefix_finder_find"},
+  :loading => "Element.show('spinner');Element.toggle('spinner2');",
+  :complete=> "Element.hide('spinner');Element.toggle('spinner2');") %>
+<br />
+<br />
+<div id="results"><br /></div>
+<br />
+<br />
+<b><%= _("Type_Country") %></b>:
+<%= text_field_tag :country_search, "", "class" => "input"  %>
+<%= observe_field("country_search",
+  :update   => :country_results,
+  :frequency => 0.5,
+  :with => "prefix",
+  :url      => { :action => "prefix_finder_find_country"},
+  :loading => "Element.show('spinner');Element.toggle('spinner2');",
+  :complete=> "Element.hide('spinner');Element.toggle('spinner2');") %>
+<div id="country_results"></div>
+
+<br />
+<br />
+<b><%= _("Type_number_To_Get_Rate") %></b>:
+<%= text_field_tag :rate_search, "", "class" => "input" %>
+<%= observe_field("rate_search",
+  :update   => :rate_results,
+  :frequency => 0.5,
+  :with => "prefix",
+  :url      => { :action => "rate_finder_find"},
+  :loading => "Element.show('spinner');Element.toggle('spinner2');",
+  :complete=> "Element.hide('spinner');Element.toggle('spinner2');") %>
+<br />
+<br />
+<div id="rate_results"></div>

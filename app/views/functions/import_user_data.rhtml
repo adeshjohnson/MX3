@@ -1,0 +1,112 @@
+
+<%= link_to b_csv + _('Import_Users_From_CSV') , :action => "import_user_data_users" %>
+<br />
+<%= link_to b_csv + _('Import_Devices_From_CSV') , :action => "import_user_data_devices" %>
+<br />
+<%= link_to b_csv + _('Import_DID_From_CSV') , :action => "import_user_data_dids" %>
+<br />
+<%= link_to b_delete + _('Clear_Temporary_Information'), {:action => 'import_user_data_clear' }, :confirm => _('are_you_sure') %>
+<br />
+<br />
+<% if @users.size > 0 %>
+  <%= _("Imported_users") %>:
+  <br />
+  <br />
+  <table width="100%" class="maintable">
+         <tr>
+      <th align="left">        <%= _('Acc') %>    </th>
+      <th align="left">        <%= _('Username') %>    </th>
+      <th align="left">        <%= _('usertype') %>    </th>
+      <th align="left">        <%= _('User') %>    </th>
+      <th align="left">        <%= _('Account_type') %>    </th>
+      <th align="right">        <%= _('Balance') %>    </th>
+      <th align="center">        <% _('is_logged') %>    </th>
+      <th colspan=8></th>
+
+    </tr>
+
+    <% i = 0 %>
+    <% for @user in @users %>
+
+
+      <% if @user.blocked.to_i == 0 %>
+        <% text_class="n" %>
+      <% else %>
+        <% text_class="n_disabled" %>
+      <% end %>
+
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="temporary_id_<%= @user.id %>" align="left" class="<%= text_class %>"> <%= h @user.temporary_id %>      </td>
+        <td id="username_<%= @user.id %>" align="left" class="<%= text_class %>"> <%= h @user.username %>      </td>
+        <td id="usertype_<%= @user.id %>" align="left" class="<%= text_class %>"> <%= h @user.usertype %>      </td>
+        <td id="first_name_<%= @user.id %>" align="left" class="<%= text_class %>"> <%= in_place_editor_field :user, :first_name %> <%= in_place_editor_field :user, :last_name %>      </td>
+
+        <td id="prepaid_<%= @user.id %>" align="left" class="<%= text_class %>">
+          <%= _('Prepaid') if @user.postpaid != 1 %>  <%= _('Postpaid') if @user.postpaid == 1 %>
+        </td>
+        <td align="right" class="<%= text_class %>"> <%= nice_number @user.balance %>      </td>
+
+        <td id="bocked_<%= @user.id %>" align="center">
+          <% if @user.blocked.to_i == 0 %>
+            <%= b_online if @user.logged == 1%>  <%= b_offline if @user.logged != 1%>
+          <% else %>
+            <%= image_tag('icons/exclamation.png', :title => _('User_is_blocked') )  %>
+          <% end %>
+        </td>
+
+        <td id="call_list_<%= @user.id %>" align="center"><%=   link_to b_call , :controller => "stats", :action => "call_list", :id => @user, :calltype => "answered" %> </td>
+
+        <% if session[:usertype] == "admin" %>
+          <td id="login_as_<%= @user.id %>" align="center"><%= link_to b_login_as, { :controller => "functions", :action => 'login_as_execute', :user => @user }, :confirm => _('are_you_sure'), :method => :post if @user.id != 0 %></td>
+        <% end %>
+        <td id="devices_<%= @user.id %>" align="center"><%= link_to b_device , :controller => 'devices', :action => 'show_devices', :id => @user.id, :return_to_controller=>"functions", :return_to_action=>"import_user_data" %></td>
+        <% if session[:usertype] == "admin" %>
+          <td id="crates_<%= @user.id %>" align="center"><%= link_to b_crates, :controller => 'users', :action => 'custom_rates', :id => @user.id if @user.tariff and @user.tariff.purpose == "user"%></td>
+          <td id="subscriptions_<%= @user.id %>" align="center"><%= link_to b_subscriptions, :controller => 'services', :action => 'subscriptions_list', :id => @user.id %></td>
+        <% end %>
+        <td id="edit_<%= @user.id %>" align="center"><%= link_to b_edit,:controller => 'users', :action => 'edit', :id => @user , :return_to_controller=>"functions", :return_to_action=>"import_user_data" %></td>
+        <% if session[:usertype] == "admin" or session[:usertype] == "accountant" %>
+          <td id="hide_<%= @user.id %>" align="center"><%= link_to b_hide, {:controller => 'users', :action => 'hide', :id => @user}, :confirm => _('are_you_sure'), :method => "post" if @user.id != 0 %></td>
+        <% end %>
+        <td id="delete_<%= @user.id %>" align="center"><%= link_to b_delete, {:controller => 'users', :action => 'destroy', :id => @user, :return_to_controller=>"functions", :return_to_action=>"import_user_data" }, :confirm => _('are_you_sure'), :method => "post" if @user.id != 0 %></td>
+      </tr>
+      <% i += 1%>
+    <% end %>
+  </table>
+  <br />
+  <br />
+<% end %>
+
+<% if @devices.size > 0 %>
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left"> <%= _('Acc') %> </th>
+      <th align="left"> <%= _('Description') %> </th>
+      <th align="left"> <%= _('PIN') %> </th>
+      <th align="center" colspan="2">        <%= _('Type') %> </th>
+      <th align="left"> <%= _('Extension') %> </th>
+      <th align="left"> <%= _('Username') %> </th>
+      <th align="left"> <%= _('Password') %> </th>
+      <th align="left"> <%= _('CallerIDs') %>  </th>
+      <th align="left">  </th>
+      <th>    </th>
+      <th>    </th>
+    </tr>
+    <% @devices.each_with_index{ |device, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="id_<%= device.id %>"><%= device.id %></td>
+        <td id="primary_<%= device.id %>"><%= b_primary_device if @user and device.id == @user.primary_device_id %><%= device.description %></td>
+        <td id="pin_<%= device.id %>"><%= device.pin %></td>
+        <td id="pic_<%= device.id %>" align="center"><%= nice_device_pic device %></td>
+        <td id="tech_<%= device.id %>"><%= print_tech device.device_type %></td>
+        <td id="extension_<%= device.id %>"><%= device.extension %></td>
+        <td id="name_<%= device.id %>"><%= device.name %></td>
+        <td id="secret_<%= device.id %>"><%= device.secret %></td>
+        <td id="callerid_<%= device.id %>"><%= h device.callerid %></td>
+        <td id="regseconds_<%= device.id %>" align="center"><%= nice_date_time(Time.at(device.regseconds)) %></td>
+        <td id="delete_<%= device.id %>"align="center"><%= link_to b_delete, {:controller => 'devices', :action => 'destroy', :id => device.id, :return_to_controller=>"functions", :return_to_action=>"import_user_data" }, :confirm => _('are_you_sure'), :method => :post %></td>
+      </tr>
+    <% } %>
+  </table>
+  <br><br>
+<% end %>

@@ -1,0 +1,76 @@
+<% if @device
+  vm = @device.voicemail_box
+  device_voicemail_active = @device.voicemail_active
+  device_voicemail_box = @device.voicemail_box
+  device_voicemail_box_email = vm.email
+  device_voicemail_box_password = vm.password
+  fullname = vm.fullname
+  device_enable_mwi = @device.enable_mwi
+else
+  device_voicemail_active = Confline.get_value("Default_device_voicemail_active", session[:user_id])
+  device_voicemail_box = Confline.get_value("Default_device_voicemail_box", session[:user_id])
+  device_voicemail_box_email = Confline.get_value("Default_device_voicemail_box_email", session[:user_id])
+  device_voicemail_box_password = Confline.get_value("Default_device_voicemail_box_password", session[:user_id])
+  fullname = ""
+  device_enable_mwi = Confline.get_value("Default_device_enable_mwi", session[:user_id])
+end
+%>
+
+<tr><td height="20"></td></tr>
+
+<tr>
+  <td class="bottom_border">
+    <b><%= b_voicemail + _('VoiceMail') %></b>
+  </td>
+</tr>
+<tr><td height="10"></td></tr>
+<tr>
+  <td valign="top">
+    <% unless fullname.blank? %>
+      <%= hidden_field_tag("vm_fullname",  fullname) %>
+    <% end %>
+    <table class="simple">
+      <!--                            <tr>
+                          <td> <%= _('Activated') %>?:   </td>
+                          <td>
+      <%= radio_button_tag('device[voicemail_active]', 0, checked = (device_voicemail_active.to_i == 0) ) %> <%= _('No') %>
+      <%= radio_button_tag('device[voicemail_active]', 1, checked = (device_voicemail_active.to_i == 1) ) %> <%= _('Yes') %>
+                          </td>
+                       </tr>
+      -->
+
+      <% if device_voicemail_box or device_voicemail_box.to_i == 1 %>
+        <tr>
+          <td id="voicemail_email_name"><%= _('Email') %>:</td>
+          <td id="voicemail_email_value"><%= text_field_tag 'vm_email', device_voicemail_box_email, "class" => "input" %></td>
+        </tr>
+        <% if session[:usertype] == "accountant" %>
+          <% if session[:acc_voicemail_password].to_i > 0 %>
+            <tr>
+              <td id="voicemail_password_name"><%= _('Password') %>:</td>
+              <% if session[:acc_voicemail_password].to_i == 1 %>
+                <td id="voicemail_password_value"><%= device_voicemail_box_password %></td>
+              <% end %>
+
+              <% if session[:acc_voicemail_password].to_i == 2 %>
+                <td id="voicemail_password_value"><%= text_field_tag 'vm_psw', device_voicemail_box_password, "class" => "input" %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td><%= _('Password') %>:</td>
+            <td><%= text_field_tag 'vm_psw', device_voicemail_box_password, "class" => "input" %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      <tr <%= tooltip(_('MWI_enable'), _('MWI_Explanation')) %> >
+        <td><%= _('MWI_enable') %>:</td>
+        <td>
+          <%= radio_button_tag('device[enable_mwi]', 0, checked = (device_enable_mwi.to_i == 0) ) %> <%= _('No') %>
+          <%= radio_button_tag('device[enable_mwi]', 1, checked = (device_enable_mwi.to_i == 1) ) %> <%= _('Yes') %>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>

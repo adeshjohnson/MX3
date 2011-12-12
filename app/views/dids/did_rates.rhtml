@@ -1,0 +1,45 @@
+<b><%= _('DID') %>: <%= @did.did %></b>
+<br />
+<br />
+<b><%= _('Current_status') %>: <%= @did.status.capitalize %></b><br />
+<br />
+
+<% if @did.user and @did.status != "free" and not @did.dialplan%>
+  <%= b_user + _('Assigned_to_user') %>: <%= @did.user.first_name + " " + @did.user.last_name %><br />
+<% end %>
+
+<% if @did.status != "free" and @did.dialplan%>
+  <%= _('Assigned_to_dial_plan') %>: <%= @did.dialplan.name%><br />
+<% end %>
+
+<% if @did.device%>
+  <%= b_device + _('Assigned_to_device') %>: <%= @did.device.device_type + "/" + @did.device.name %><br />
+<% end %>
+
+<% if @did.status == "closed"%>
+  <br /><%= _('Reserved_for_user_till') %>: <%= nice_date_time @did.closed_till %><br />
+<% end %>
+<% unless current_user.usertype == "reseller" %>
+  <br />
+  <br />
+  <%= _('DID_Provider_rate_explained') %>
+  <br />
+  <br />
+  <%= render :partial => "did_list", :locals => {:dids_list => @did_prov_rates}%>
+<% end %>
+<br />
+<br />
+<%= _('DID_incoming_rate_explained') %>
+<br />
+<br />
+<%= render :partial => "did_list", :locals => {:dids_list => @did_incoming_rates}%>
+<%# unless current_user.usertype == "reseller" %>
+  <br />
+  <br />
+  <%= _('DID_owner_rate_explained') %>
+  <br />
+  <br />
+  <%= render :partial => "did_list", :locals => {:dids_list => @did_owner_rates }%>
+<%# end %>
+<br />
+<% link_to b_add + _('New_did_rate'), :action => 'didrate_new', :id => @did.id %>

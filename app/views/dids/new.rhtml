@@ -1,0 +1,55 @@
+<br />
+<table class="maintable" width="100%">
+  <tr class="row1">
+    <td>
+      <% form_tag(:action => 'confirm_did') do %>
+        <br />
+        <%= _('DID_add_extended') %>:
+        <br />
+        <br />
+        <b><%= _('DID') %>:</b>
+        <%= text_field 'did', 'did', "class" => "input" %>
+        <br />
+        <br />
+        <% if see_providers_in_dids? %>
+          <b><%= _('Provider') %>:</b>
+          <%= select_tag("did[provider_id]", options_for_select(@providers.map{|p| [p.name, p.id] }), {:id => "did_provider_id_1"})  %>
+          <br />
+          <br />
+        <%end%>
+        <%= hidden_field_tag('amount', "one", {:id => "amount_one"}) %>
+        <%= submit_tag _('Create') , :disable_with=>_('Processing..')%>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<br />
+<br />
+
+<table class="maintable" width="100%">
+  <tr class="row1">
+    <td>
+      <% form_tag(:action => 'confirm_did') do%>
+        <br />
+        <%= _('DID_interval_extended') %>:
+        <br />
+        <br />
+        <b><%= _('DID_interval') %>:</b>
+        <%= text_field_tag 'did_start', '', "class" => "input"   %>
+        -
+        <%= text_field_tag 'did_end', '', "class" => "input"   %>
+        <br />
+        <br />
+        <%if see_providers_in_dids? %>
+          <b><%= _('Provider') %>:</b>
+          <%= select_tag("did[provider_id]", options_for_select(@providers.map{|p| [p.name, p.id] }), {:id => "did_provider_id_2"})  %>
+          <br />
+          <br />
+        <%end%>
+        <%= hidden_field_tag('amount', "interval", {:id => "amount_interval"}) %>
+        <%= submit_tag _('Create') , :disable_with=>_('Processing..')%>
+      <% end %>
+    </td>
+  </tr>
+</table>

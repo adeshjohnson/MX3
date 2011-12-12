@@ -1,0 +1,50 @@
+<table class="simple" width="100%">
+  <tr>
+    <td width="30"></td>
+    <td colspan="2">
+      <% settings_group(_("Fax"),"dhtmlgoodies_tab_functionality_fax",720, 60 ){ %>
+        <%= setting_group_boolean(_('Fax_Device_Enabled'), 'fax_device_enabled', "Fax_Device_Enabled") %>
+        <%= settings_group_text(_('Email_Fax_From_Sender'), 'email_fax_from_sender', "Email_Fax_From_Sender", {:size => "35", :maxlength => "50"}) %>
+      <% } %>
+    </td>
+  </tr>
+  <%= settings_empty_row %>
+  <%= settings_empty_row %>
+  <tr>
+    <td width="30"></td>
+    <td colspan="2">
+      <% settings_group(_("CSV"),"dhtmlgoodies_tab_functionality_csv",720, 80 ){ %>
+        <%= settings_group_text(_('CSV_Separator'), 'csv_separator', "CSV_Separator") %>
+        <%= settings_group_text(_('CSV_Decimal'), 'csv_decimal', "CSV_Decimal") %>
+        <%= settings_group_number(_('CSV_File_size'), 'csv_file_size', "CSV_File_size", {:sufix => "KB"}) %>
+      <% } %>
+    </td>
+  </tr>
+  <%= settings_empty_row %>
+  <%= settings_empty_row %>
+  <tr>
+    <td width="30"></td>
+    <td colspan="2">
+      <% settings_group(_("Activecalls"),"dhtmlgoodies_tab_functionality_active_calls",720, 120 ){ %>
+        <%= settings_group_number(_('Maximum_Active_Calls'), 'active_calls_max', "Active_Calls_Maximum_Calls") %>
+        <%= settings_group_number(_('Active_Calls_Refresh_Interval'), 'active_calls_interval', "Active_Calls_Refresh_Interval") %>
+        <%= setting_group_boolean(_('Show_Active_Calls_for_Users'), 'show_active_calls_for_users', "Show_Active_Calls_for_Users") %>
+        <%= setting_group_boolean(_('Active_Calls_Show_Server'), 'active_calls_show_server', "Active_Calls_Show_Server") %>
+        <%= setting_group_boolean(_('Active_Calls_Show_DID'), 'active_calls_show_did', "Active_Calls_Show_DID") %>
+      <% } %>
+    </td>
+  </tr>
+  <%= settings_empty_row %>
+  <%= settings_empty_row %>
+  <tr>
+    <td width="30"></td>
+    <td colspan="2">
+      <% settings_group(_("Tariffs")+"/"+_("Rates"),"dhtmlgoodies_tab_functionality_tariffs",720, 100 ){ %>
+        <%= setting_group_boolean(_('Show_rates_for_users'), 'show_rates_for_users', "Show_rates_for_users") %>
+        <%= setting_group_boolean(_('Show_Rates_without_Tax'), 'show_rates_without_tax', "Show_Rates_Without_Tax") %>
+        <%= setting_group_boolean(_('Show_advanced_rates_for_users'), 'show_advanced_rates_for_users', "Show_Advanced_Rates_For_Users") %>
+        <%= setting_group_boolean(_('Show_zero_rates_in_LCR_tariff_export'), 'show_zero_rates_in_LCR_tariff_export', "Show_zero_rates_in_LCR_tariff_export") %>
+      <% } %>
+    </td>
+  </tr>
+</table>

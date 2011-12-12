@@ -1,0 +1,31 @@
+<table width="100%" class="simple">
+
+  <tr class="row2">
+    <th align="left"><%= _('Details') %></th>
+    <td align="right" ></td>
+  </tr>
+
+  <tr class="row1">
+    <td align="left"><%= b_user + _('user') %>:</td>
+    <td align="right" id="user"><%= link_nice_user_if_own(user) %></td>
+  </tr>
+
+  <tr class="row2">
+    <td align="left"><%= b_device + _('Device') %>:</td>
+    <td align="right" id="device"><%= device.device_type %>/<%= device.name %></td>
+  </tr>
+
+  <tr class="row1">
+    <td align="left"><%= b_call + _('Destination') %>:</td>
+    <td align="right" id="dest"><%= @dst %></td>
+  </tr>
+
+  <tr class="row2">
+    <td align="left"><%= b_date + _('Call_Time') %>:</td>
+    <td align="right" id="call_time"><%= nice_date_time(session_from_datetime) %> (<%= {"WD" => _("Workday"), "FD" => _('Freeday')}[daytype] %>)</td>
+  </tr>
+  <tr class="row2">
+    <td align="left"><%=  _('Allow_loss_calls') %>:</td>
+    <td align="right" id="user"><%= user.allow_loss_calls.to_i == 1 ? _('Yes') : _('No') %></td>
+  </tr>
+</table>

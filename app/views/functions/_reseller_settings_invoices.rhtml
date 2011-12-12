@@ -1,0 +1,148 @@
+<div id="dhtmlgoodies_tabView2">
+  <div class="dhtmlgoodies_aTab">
+    <br />
+    <br />
+    <table class="simple" width="100%">
+      <tr>
+        <td width="30"></td>
+        <td>      <b><%= _('Invoice_Number_Start')%>:</b>                </td>
+        <td>      <%= text_field_tag('invoice_number_start', Confline.get_value("Invoice_Number_Start", @user_id) , "class" => "input", :size => "35", :maxlength => "50") %>                </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>      <b><%= _('Invoice_Number_Length')%>:</b>                 </td>
+        <td>      <%= text_field_tag('invoice_number_length', Confline.get_value("Invoice_Number_Length", @user_id) , "class" => "input", :size => "35", :maxlength => "50" )%>                </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><b><%= _('Invoice_Number_Type')%>:</b></td>
+        <td>
+          <% inv_num_type = Confline.get_value("Invoice_Number_Type", @user_id).to_i %>
+          <%= radio_button_tag('invoice_number_type', '1', (inv_num_type == 1) ) %> INV000000001
+          <%= radio_button_tag('invoice_number_type', '2', (inv_num_type == 2) ) %> INV070601
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><b><%= _('Invoice_Period_Start_Day')%>:</b></td>
+        <td>
+          <% inv_period_start_day = Confline.get_value("Invoice_Period_Start_Day", @user_id).to_i  %>
+          <select name="invoice_period_start_day" >
+            <% for i in 1..31 do%>
+                <option value=<%= good_date(i) %> <%= "selected" if inv_period_start_day == i %>> <%= good_date(i) %></option>
+              <% end %>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <b><%= _('Invoice_Show_Calls_In_Detailed')%>:</b>
+          </td>
+          <td>
+            <% show_detailed = Confline.get_value("Invoice_Show_Calls_In_Detailed", @user_id).to_i %>
+            <%= check_box_tag 'invoice_show_calls_in_detailed', "1", checked = show_detailed == 1 %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _("Show_balance_line") %>:</b></td>
+          <td><%= check_box_tag "invoice_show_balance_line", "1", (Confline.get_value("Invoice_Show_Balance_Line", @user_id).to_i == 1) %></td>
+        </tr>
+        <%= setting_boolean(_('Short_file_name'), 'invoice_short_file_name', "Invoice_Short_File_Name", session[:user_id]) %>
+        <tr>
+          <td></td>
+          <td><b><%= _('Invoice_Address_Format')%>:</b></td>
+          <td>
+            <% inv_address_format = Confline.get_value("Invoice_Address_Format", @user_id).to_i %>
+            <%= radio_button_tag('invoice_address_format', '1', (inv_address_format == 1) ) %> 1
+            <%= radio_button_tag('invoice_address_format', '2', (inv_address_format == 2) ) %> 2
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Invoice_Address1')%>:</b></td>
+          <td><%= text_field_tag('invoice_address1', Confline.get_value("Invoice_Address1", @user_id) , "class" => "input", :size => "35", :maxlength => "30")%></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Invoice_Address2')%>:</b></td>
+          <td><%= text_field_tag('invoice_address2', Confline.get_value("Invoice_Address2", @user_id) , "class" => "input", :size => "35", :maxlength => "30" )%></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Invoice_Address3')%>:</b></td>
+          <td><%= text_field_tag('invoice_address3', Confline.get_value("Invoice_Address3", @user_id) , "class" => "input", :size => "35", :maxlength => "30" )%></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Invoice_Address4')%>:</b></td>
+          <td><%= text_field_tag('invoice_address4', Confline.get_value("Invoice_Address4", @user_id) , "class" => "input", :size => "35", :maxlength => "30" )%></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Invoice_Bank_Details_Line1')%>:</b></td>
+          <td><%= text_field_tag('invoice_bank_details_line1', Confline.get_value("Invoice_Bank_Details_Line1", @user_id) , "class" => "input", :size => "35", :maxlength => "30" )%></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Invoice_Bank_Details_Line2')%>:</b></td>
+          <td><%= text_field_tag('invoice_bank_details_line2', Confline.get_value("Invoice_Bank_Details_Line2", @user_id) , "class" => "input", :size => "35", :maxlength => "30" )%></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Invoice_Bank_Details_Line3')%>:</b></td>
+          <td><%= text_field_tag('invoice_bank_details_line3', Confline.get_value("Invoice_Bank_Details_Line3", @user_id) , "class" => "input", :size => "35", :maxlength => "30" )%></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Invoice_Bank_Details_Line4')%>:</b></td>
+          <td><%= text_field_tag('invoice_bank_details_line4', Confline.get_value("Invoice_Bank_Details_Line4", @user_id) , "class" => "input", :size => "35", :maxlength => "30" )%></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Invoice_Bank_Details_Line5')%>:</b></td>
+          <td><%= text_field_tag('invoice_bank_details_line5', Confline.get_value("Invoice_Bank_Details_Line5", @user_id) , "class" => "input", :size => "35", :maxlength => "80" )%></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Invoice_Balance_Line')%>:</b></td>
+          <td><%= text_field_tag('invoice_balance_line', Confline.get_value("Invoice_Balance_Line", @user_id) , "class" => "input", :size => "35", :maxlength => "70" )%></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Invoice_End_Title')%>:</b></td>
+          <td><%= text_field_tag('invoice_end_title', Confline.get_value("Invoice_End_Title", @user_id) , "class" => "input", :size => "35", :maxlength => "60" )%></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td <%=tooltip(_('Invoice_Page_Limit'), _('Invoice_Page_Limit_explanation')) %> ><b><%= _('Invoice_Page_Limit')%>:</b>                 </td>
+          <td><%= text_field_tag('invoice_page_limit', Confline.get_value("Invoice_page_limit", @user_id) , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dhtmlgoodies_aTab">
+      <br />
+      <table class="simple" width="100%">
+        <tr>
+          <td></td>
+          <td><b><%= _('Show_additional_details_on_separate_page')%>:</b></td>
+          <td>
+            <%=  check_box_tag 'show_additional_details_on_separate_page_check', 1, Confline.get_value("Invoice_show_additional_details_on_separate_page", @user_id).to_i == 1 %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Additional_details')%>:</b></td>
+          <td><%= text_area_tag('show_additional_details_on_separate_page_details', Confline.get_value2("Invoice_show_additional_details_on_separate_page", @user_id) , "class" => "input", :cols => "45", :rows => "35" )%></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <% content_for :scripts do %>
+    <%invoice_tabs = [_("Settings"), _("Additional")] %>
+    <script type="text/javascript">
+      initTabs('dhtmlgoodies_tabView2', Array('<%= invoice_tabs.join("', '")  %>'),0,585,520);
+    </script>
+  <% end %>

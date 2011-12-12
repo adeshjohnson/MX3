@@ -1,0 +1,6 @@
+<% form_tag( :action => 'create') do %>
+  <%= render :partial => 'timeperiod' %>
+  <%= submit_tag _('Create') , :disable_with=>_('Processing..')%>
+<% end %>
+
+<br />

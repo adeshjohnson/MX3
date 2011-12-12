@@ -1,0 +1,48 @@
+<%= error_messages_for 'card' %>
+
+<!--[form:card]-->
+
+<p><label for="card_number"><%= _('Number') %></label><br/>
+<%= text_field 'card', 'number', "class" => "input"   %></p>
+
+<p><label for="card_name"><%= _('Name') %></label><br/>
+<%= text_field 'card', 'name', "class" => "input"   %></p>
+
+<% if session[:usertype] == "accountant" %>
+  <% if session[:acc_callingcard_pin].to_i > 0%>
+    <p><label for="card_pin"><%= _('PIN') %></label><br/>
+      <% if session[:acc_callingcard_pin].to_i == 1%>
+        <%= @card.pin %>
+      <% end %>
+
+      <% if session[:acc_callingcard_pin].to_i == 2%>
+        <%= text_field 'card', 'pin', "class" => "input"   %>
+      <% end %>
+    </p>
+  <% end %>
+<% else %>
+  <p><label for="card_pin"><%= _('PIN') %></label><br/><%= text_field 'card', 'pin', "class" => "input"   %></p>
+<% end %>
+
+  <p><label for="card_callerid"><%= _('CallerID_for_pinless_dialing') %></label><br/><%= text_field 'card', 'callerid', "class" => "input"   %></p>
+
+<p><label for="card_balance"><%= _('Balance') %>: </label>
+<label for="card_balance"><%= nice_number(@card.balance) %></label></p><br/>
+
+<p><label for="card_sold"><%= _('Sold') %>?</label>&nbsp;
+<%= image_tag 'icons/cross.png', :title => _('Unsold') if @card.sold ==0 %>
+<%= image_tag 'icons/check.png', :title => _('Sold') if @card.sold == 1 %></p>
+
+<p><label for="card_first_use"><%= _('First_use') %></label><br/>
+<%= datetime_select 'card', 'first_use'  %></p>
+
+<p><label for="card_daily_charge_paid_till"><%= _('Daily_charge_paid_till') %></label><br/>
+<%= datetime_select 'card', 'daily_charge_paid_till'  %></p>
+
+<p><label for="card_sold"><%= _('Language') %></label><br/>
+<%= text_field 'card', 'language', :size => 10, "class" => "input"  %></p>
+
+<p><label for="card_user"><%= _('Distributor') %></label><br/>
+<%= select_tag("card[user_id]", options_for_select([["None", -1]] + @users.map{|user| [nice_user(user), user.id]}, @card.user_id)) %>
+</p>
+  <!--[eoform:card]-->

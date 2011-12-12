@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title><%= session[:admin_browser_title] %></title>
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag "dtree" %>
+    <%= javascript_include_tag "tab-view" %>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <%= stylesheet_link_tag "mor" %>
+    <%= stylesheet_link_tag "dtree" %>
+      <%= stylesheet_link_tag "tab-view" %>
+  </head>
+  <body>
+    <div id="ddnav" style="position:relative;">
+      <div class="page_title_new">
+        <% if @page_title %> 
+          <b>&nbsp;</b><%= image_tag('icons/' + @page_icon, :title => @page_title) if @page_icon %>&nbsp;<%= @page_title %>    
+
+        <% end %> 
+      </div>
+      <div style="position:absolute; top:7px; right:10px;">
+        <%= image_tag("ajax-loader.gif",
+         # :align => 'absmiddle', << validatoriui sitas nepatinka 
+          :style => 'vertical-align: middle;',
+          :border=> 0,
+          :id => "spinner",
+          :style=>"display: none;") %>
+      </div>     
+    </div>
+
+    <div id="topbck">
+    </div>
+    <%= @content_for_layout %>
+    <div id="footerbck">
+    </div>
+
+    <div id="footerbox">
+      <div class="left-element">  
+        <% if session[:version] and session[:copyright_title]%>                   
+                &nbsp;&nbsp;<%= session[:version] %> <%= session[:copyright_title] %>
+        <% end %>                        
+        <%  nice_date_time(Time.now) %>
+        <% session[:usertype] %>&nbsp;
+      </div>
+      <% if session[:usertype] == "admin" %>
+        <div class="right-element">
+          <a style="" href="http://wiki.kolmisoft.com/index.php/MOR_PRO_Manual" target="_blank"><%= image_tag('icons/pdf.png', :title => _('Manual') ) %> Manual</a>
+        </div>
+      <% end %>       
+    </div>		
+  </body>
+</html>

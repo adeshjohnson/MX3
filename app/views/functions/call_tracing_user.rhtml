@@ -1,0 +1,320 @@
+<% status, global_status, reason = 1, 1, 0 %>
+<table width="70%">
+  <tr>
+    <td>
+      <table width="100%" class="maintable call_tracing_info">
+
+        <tr class="row2">
+          <th class="title"><%= b_user + _('user') %>:</th>
+          <th class="name"><%= link_nice_user_if_own(@user) %></th>
+          <th class="status"><%= _('Status') %></th>
+          <th  class="explanation"><%= _('Explanation') %></th>
+        </tr>
+
+        <tr class="row1">
+          <td align="left"><%= _('Blocked') %>?</td>
+          <td align="right" id="blocked">
+            <% if @user.blocked? %>
+              <%= _('Yes') %>
+              <% status, global_status = 0, 0 %>
+            <% else %>
+              <%= _('No') %>
+            <% end %>
+          </td>
+          <td align="center" id="blocket_status"> <%= status == 1 ? b_check : b_cross %></td>
+          <td align="center" id="blocket_explanation" > <%= _('CT_blocked') if status == 0%></td>
+        </tr>
+
+        <tr class="row2">
+          <td ><%= b_money + _('Balance') %>:</td>
+          <td id="balance" align="right"><%= nice_number(@user.balance) %> <%= current_user.currency.name %></td>
+          <td colspan=2></td>
+        </tr>
+
+        <tr class="row1">
+          <td><%= b_money + _('Credit') %>:</td>
+          <td id="credit" align="right"><%= (nice_number(@user.credit) + " " + current_user.currency.name)  if @user.credit != -1 and @user.postpaid == 1%> <%= _('Unlimited') if @user.credit == -1  and @user.postpaid == 1%> <%= "0.00 " + current_user.currency.name if @user.postpaid == 0%></td>
+          <td colspan=2></td>
+        </tr>
+
+        <%
+        status = 1
+        status, global_status, reason = 0, 0, 1 if @user.postpaid == 0 and @user.balance <= 0
+        status, global_status, reason = 0, 0, 2 if @user.postpaid == 1 and @user.credit != -1 and @user.balance + @user.credit <= 0
+      %>
+
+        <tr class="row2">
+          <td><%= _('User_type') %>:</td>
+          <td id="usertype" align="right"><%= _('Prepaid') if @user.postpaid != 1%> <%= _('Postpaid') if @user.postpaid == 1%></td>
+          <td id="usertype_status" align="center"> <%= status == 1 ? b_check : b_cross %></td>
+          <td id="usertype_explanation" align="center"> <%= _('CT_finances_prepaid') if reason == 1 and status == 0 %><%= _('CT_finances_postpaid') if reason == 2  and status == 0%></td>
+        </tr>
+
+        <tr class="row1">
+          <td align="left"><%= b_view + _('Tariff') %>:</td>
+          <td id="tariff" align="right" width="20%"><%= link_nice_tariff_if_own(@u_tariff) %></td>
+          <td colspan=2></td>
+        </tr>
+
+        <tr class="row2">
+          <td align="left"><%= b_view + _('Tariff_type') %>:</td>
+          <td id="tariff_type" align="right" width="20%"><%= _('Retail') if @u_tariff.purpose == "user" %><%= _('Wholesale') if @u_tariff.purpose == "user_wholesale" %></td>
+          <td colspan=2></td>
+        </tr>
+
+        <%
+        status = 1
+        u_rates_size = @u_tariff.rates.size
+        status, global_status = 0, 0 if u_rates_size == 0
+      %>
+
+        <tr class="row1">
+          <td><%= b_rates + _('Total_rates') %>:</td>
+          <td id="total_rates" align="right"><%= u_rates_size %> </td>
+          <td id="total_rates_status" align="center"> <%= status == 1 ? b_check : b_cross %></td>
+          <td id="total_rates_explanation" align="center"> <%= _('CT_user_tariff_no_rates') if status == 0  %></td>
+        </tr>
+
+        <%
+        status = 1
+        dev_count = @devices.count
+        if  dev_count == 0
+          status, global_status = 0, 0
+        end
+      %>
+
+        <tr class="row2">
+          <td><%= b_device + _('Total_devices') %>:</td>
+          <td id="total_devices" align="right"><%= link_show_devices_if_own(@user, :text => dev_count) %> </td>
+          <td id="total_devices_status" align="center"> <%= status == 1 ? b_check : b_cross %></td>
+          <td id="total_devices_explanation" align="center"> <%= _('CT_user_no_devices') if status == 0  %></td>
+        </tr>
+
+        <tr class="row1">
+          <td><%=  _('Allow_loss_calls') %>:</td>
+          <td id="allow_loss_calls" align="right"><%= _('Yes') if @user.allow_loss_calls == 1 %><%= _('No') if @user.allow_loss_calls == 0 %> </td>
+          <td align="center" colspan=2> </td>
+        </tr>
+
+      </table>
+
+      <br />
+      <br />
+
+      <% if @reseller %>
+        <table class="call_tracing_info maintable">
+
+          <tr class="row2">
+            <th class="title" id="reseller"><%= b_reseller + _('Reseller') %>:</th>
+            <th class="name" id="reseller_name"><%= link_nice_user_if_own(@reseller) %></th>
+            <th class="status" id="reseller_status"><%= _('Status') %></th>
+            <th class="explanation" id="reseller_explanation"><%= _('Explanation') %></th>
+          </tr>
+
+
+          <tr class="row1">
+            <td class="title"><%=  _('Allow_loss_calls') %>:</td>
+            <td class="name"id="reseller_allow_loss_calls" class="name"><%= @reseller.allow_loss_calls.to_i == 1 ? _('Yes') : _('No') %></td>
+            <td colspan=2></td>
+          </tr>
+
+          <tr class="row2">
+            <td class="title"><%= b_view + _('Tariff') %>:</td>
+            <td class="name" id="reseller_tariff" align="right" width="20%"><%= link_nice_tariff_if_own(@r_tariff) %></td>
+            <td colspan=2></td>
+          </tr>
+
+          <tr class="row1">
+            <td class="title"><%= b_view + _('Tariff_type') %>:</td>
+            <td class="name" id="reseller_tariff_type"><%= _('Retail') if @r_tariff.purpose == "user" %><%= _('Wholesale') if @r_tariff.purpose == "user_wholesale" %></td>
+            <td colspan=2></td>
+          </tr>
+          <%
+          status = 1
+          r_rates_size = @r_tariff.rates.size
+          status, global_status = 0, 0 if r_rates_size == 0
+        %>
+
+          <tr class="row2">
+            <td class="title"><%= b_rates + _('Total_rates') %>:</td>
+            <td class="name" id="total_reseller_rates"><%= r_rates_size %> </td>
+            <td class="status" id="total_reseller_rates_status"> <%= status == 1 ? b_check : b_cross %></td>
+            <td class="explanation" id="total_reseller_rates_explanation"> <%= _('CT_reseller_tariff_no_rates') if status == 0  %></td>
+          </tr>
+        </table>
+
+        <br />
+        <br />
+      <% end %>
+
+      <% unless @hide_lcrs_and_providers %>
+        <table width="100%" class="maintable">
+          <tr class="row2">
+            <th align="left"><%= b_lcr + _('LCR') %>:</th>
+            <th id="lcr" align="right" width="20%"><%= link_nice_lcr_if_own(@lcr) %></th>
+            <th width="10%" align="center"><%= _('Status') %></th>
+            <th width="50%"><%= _('Explanation') %></th>
+          </tr>
+        <% end %>
+
+
+        <%
+        status = 1
+        lcr_prov_size = @lcr_providers.size
+        status, global_status = 0, 0 if  lcr_prov_size == 0
+      %>
+        <% unless @hide_lcrs_and_providers %>
+          <tr class="row1">
+            <td><%= b_providers + _('Total_providers') %>:</td>
+            <td id="total_providers" align="right"><%= lcr_prov_size %> </td>
+            <td id="total_providers_status" align="center"> <%= status == 1 ? b_check : b_cross %> </td>
+            <td id="total_providers_explanation" align="center"> <%= _('CT_lcr_no_providers') if status == 0  %></td>
+          </tr>
+        <% else %>
+          <% flash.now[:notice] = _('CT_lcr_no_providers') if status == 0 %>
+        <% end %>
+        <%
+        status = 1
+        lcr_prov_size = @lcr_active_providers.size
+        status, global_status = 0, 0 if lcr_prov_size == 0
+      %>
+        <% unless @hide_lcrs_and_providers %>
+          <tr class="row2">
+            <td><%= b_providers + _('Total_active_providers') %>:</td>
+            <td id="total_active_providers" align="right"><%= lcr_prov_size %> </td>
+            <td id="total_active_providers_status" align="center"> <%= status == 1 ? b_check : b_cross %></td>
+            <td id="total_active_providers_explanation" align="center"> <%= _('CT_lcr_no_active_providers') if status == 0  %></td>
+          </tr>
+        <% else %>
+          <% flash.now[:notice] = _('CT_lcr_no_active_providers') if status == 0 %>
+        <% end %>
+
+        <% if status == 1%>
+          <%
+          status, rates = 1, 0
+          for prov in @lcr_active_providers
+            tariff = prov.tariff
+            if prov and tariff
+              rates += tariff.rates.size
+            end
+          end
+          status, global_status = 0, 0 if  rates == 0
+        %>
+          <% unless @hide_lcrs_and_providers %>
+            <tr class="row1">
+              <td><%= b_rates + _('At_least_one_provider_has_rates') %>:</td>
+              <td id="provider_has_rates" align="right"><%= _('Yes') if status == 1%> <%= _('No') if status == 0%></td>
+              <td id="provider_has_rates_status" align="center"> <%= status == 1 ? b_check : b_cross %></td>
+              <td id="provider_has_rates_explanation"  align="center"> <%= _('CT_lcr_all_providers_empty') if status == 0  %></td>
+            </tr>
+          <% else %>
+            <% flash.now[:notice] = _('CT_lcr_all_providers_empty')  if status == 0%>
+          <% end %>
+        <% end %>
+        <% unless @hide_lcrs_and_providers %>
+        </table>
+
+        <br />
+        <br />
+
+
+        <table width="100%" class="maintable">
+          <tr class="row2">
+            <th align="left"><%= b_provider + _('Provider') %>/ID</th>
+            <th align="left"><%=  b_view + _('Tariff') %></th>
+            <th align="right"><%= b_rates + _('Total_rates') %></th>
+            <th align="center"><%= _('Status') %></th>
+          </tr>
+        <% end %>
+        <%
+        one_bad_provider, i = 0, 0
+        for prov in @lcr_providers
+           @disabled = false 
+          status = 1
+          if reseller? and prov.user_id != current_user.id
+            data = CommonUseProvider.find(:first,:conditions =>" reseller_id = #{current_user.id} AND provider_id = #{prov.id}",:include=>[:tariff] )
+            tariff = data.tariff if data
+          else
+            tariff = prov.tariff
+          end
+          if tariff and tariff.rates.size > 0
+            one_bad_provider, status = 1, 0 if  u_rates_size == 0
+          else
+            one_bad_provider, status = 1, 0
+          end
+        %>
+          <% if prov.active?(@lcr.id) == 0 %>
+            <% @disabled = true %>
+          <% end %>
+
+          <% unless @hide_lcrs_and_providers %>
+            <% @disabled ? text_class="n_disabled" : text_class="n" -%>
+            <tr class=<%= "row" + i.to_s %>>
+              <td align="left" id="privider_id_<%=prov.id%>" class="<%= text_class %>"><%= link_nice_provider_if_own(prov) %></td>
+              <td align="left" id="privider_tariff_<%=prov.id%>" class="<%= text_class %>">
+                <% if tariff %>
+                  <% if  tariff.purpose == 'user'%>
+                    <%=  link_to(tariff.name,:controller => "tariffs", :action => 'user_rates_list', :id => tariff.id) %>
+                  <% else %>
+                    <%= link_to(tariff.name, :controller => "tariffs", :action => "rates_list", :id => tariff.id) %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td align="right" id="privider_rates_<%=prov.id%>" class="<%= text_class %>"><%= u_rates_size %></td>
+              <td align="center" id="privider_status_<%=prov.id%>" class="<%= text_class %>"> <%= b_check if status == 1%> <%= b_exclamation if status == 0%></td>
+            </tr>
+            <% i+=1 %>
+          <% end %>
+        <% end %>
+
+        <% unless @hide_lcrs_and_providers %>
+        </table>
+
+        <br />
+        <table width="100%" class="simple">
+          <tr class="row2">
+            <td align="left" id="CT_provider_tariff_no_rates"><%= b_exclamation + _('CT_provider_tariff_no_rates') if one_bad_provider == 1%>     </td>
+          </tr>
+        </table>
+
+        <br />
+        <br />
+      <% end %>
+      <% if global_status == 1 %>
+
+        <div id="status2">
+          <%= _('CT_User_Good_status') %>
+        </div>
+        <br/>
+
+        <% form_tag :action => 'call_tracing_device', :user => @user.id do %>
+          <table width="70%" class="simple">
+            <tr class="row1">
+              <td align="left"><%= _('Select_device') %>:</td>
+              <td><%= select_tag("device", options_for_select(@devices.map{|dev| [dev.device_type + "/" + dev.name, dev.id]})) %></td>
+            </tr>
+
+            <tr class="row1">
+              <td align="left"><b><%= _('Destination') %>:</b></td>
+              <td><%= text_field_tag 'destination', "", "class" => "input", :size => "20", :maxlength => "30"  %></td>
+            </tr>
+
+            <tr class="row1">
+              <td align="left">   <%= _('Call_Time') %>: </td>
+              <td><%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %></td>
+            </tr>
+          </table>
+
+          <br />
+          <div id="error">
+            <%= submit_tag _('Press_this_button_to_continue')+ " >>", :disable_with=>_('Processing..') if @devices.count > 0 %>
+          </div>
+
+        <% end %>
+
+      <% else %>
+        <div id="error"> <%= _('CT_User_Bad_status') %> </div>
+      <% end %>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,29 @@
+<%if @cardgroups and @cardgroups.size.to_i > 0%>
+  <% for cg in @cardgroups %>
+    <div class="catalogentry">
+      <%= image_tag "cards/#{cg.image}",  :style => 'border-style:none', :title => cg.name, :size => "150x100" %>
+
+      <h3><%= h(cg.name) %></h3>
+      <%= h(cg.description) %>
+      <br><br>
+
+      <div><%= _('Price') %>: <span class="catalogprice">
+          <% if Confline.get_value("CCShop_show_values_without_VAT_for_user").to_i == 1 %>
+            <%= nice_number cg.price %> <%= session[:default_currency]%>
+          <% else %>
+            <%= nice_number(cg.price + cg.get_tax.count_tax_amount(cg.price))%> <%= session[:default_currency]%>
+          <% end %>
+        </span></div>
+      <br>
+      <% form_tag :action => "add_to_cart", :id => cg do %>
+        <%= text_field("cards", "amount", :size => "2", :maxlength => "4", :value => "1", :class => "input") %>
+        <%= submit_tag(  _('Add_to_cart'), :disable_with=>_('Processing..'))%>
+      <% end %>
+    </div>
+    <div class="separator">&nbsp;</div>
+  <% end %>
+
+  <%= link_to b_cart + _("Show_my_cart"), :action => "display_cart" %>
+<%else%>
+  <div style="width: 500px;"></div>
+<%end%>

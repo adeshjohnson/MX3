@@ -1,0 +1,50 @@
+<%= link_to b_add + _('New_Voice'), :action => 'new' %>
+<br />
+<br />
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _("IVR_voice")%></th>
+    <th align="left"><%= _("Description")%></th>
+    <th align="center"><%= _("Created_At")%></th>
+    <th align="left"></th>
+    <th align="left"></th>
+  </tr>
+<% @voices.each_with_index { |voice, index| %>
+  <tr class="row<%= index%2+1 %>">
+    <td align="left"><%= voice.voice %></td>
+    <td align="left"><%= voice.description %></td>
+    <td align="center"><%= nice_date_time(voice.created_at) %></td>
+    <td align="center"><%= link_to b_edit, :action => 'edit', :id => voice.id %></td>
+    <td align="center"><%= link_to b_delete, { :action => 'destroy', :id => voice.id }, :confirm => _('are_you_sure'), :method => "post" if voice.readonly.to_i == 0 %></td>
+  </tr> 
+<% } %>
+</table>
+<br />
+<br />
+
+<table class = 'maintable'>
+  <tr>
+    <% if @sounds.size > 0%> 
+      <th>
+      </th>
+    <% end %>
+    <% for voice in @voices do %>
+      <th><%= voice.voice %></th>
+    <% end %>
+  </tr>  
+  
+  <% @sounds.each_with_index {|sound, index| %>
+    <tr class="row<%= index%2+1 %>">
+      <th><%= sound['path'] %>:</th>
+      <% for voice in @voices do%>
+        <td align="center">
+          <% if IvrSoundFile.find(:first, :conditions => "path = '#{sound['path']}' and ivr_voice_id = #{voice.id}" ) %>
+            <%= b_check %>
+          <% else %>
+            <%= b_cross %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% } %>
+</table>

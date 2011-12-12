@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.105" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--new dids-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>3726111234445</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>3726111234450</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>document.forms[1].elements[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>37261112373</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>37261112388</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>document.forms[1].elements[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--new dialplans-->
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan_name</td>
+	<td>dialplanas1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ivr_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan_name</td>
+	<td>dialplanas2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ivr_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan_name</td>
+	<td>dialplanas3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ivr_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan_name</td>
+	<td>dialplanas4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ivr_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan_name</td>
+	<td>dialplanas5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ivr_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan_name</td>
+	<td>dialplanas6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ivr_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan_name</td>
+	<td>dialplanas7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ivr_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan_name</td>
+	<td>dialplanas8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ivr_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan_name</td>
+	<td>dialplanas9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ivr_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<!--assign dids-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/24</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/18</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/21</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dp_id']</td>
+	<td>label=dialplanas8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+<!--verify-->
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=3726111234448</td>
+	<td>3726111234448</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=37261112375</td>
+	<td>37261112375</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=37261112382</td>
+	<td>37261112382</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=3726111234449</td>
+	<td>3726111234449</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=3726111234446</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Edit: 3726111234446</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Current status: Active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Allow this DID to be assigned to other users/dialplans</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

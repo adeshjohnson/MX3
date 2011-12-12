@@ -1,0 +1,22 @@
+<b><%=  _('Default_currency_change_note') %></b>
+<br /><br />
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Currency') %></th> 
+    <th align="left"><%= _('Description') %></th> 
+    <th></th>
+  </tr>
+  <%if @currs and @currs.size.to_i > 0%>
+    <% @currs.each_with_index{|curr, i|%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td align="left" id="cur_name_<%=curr.id%>"><%= curr.name%></td>
+        <td align="left" id="cur_full_name_<%=curr.id%>"><%= curr.full_name%></td>
+        <td align="center">
+          <%= link_to b_check, {:action => 'currencies_change_default', :id => curr.id, :ok =>1, :title => _('Disable')}, :confirm => _('Are_you_sure'), :method => :post  if curr.id ==1%>
+          <%= link_to b_cross, {:action => 'currencies_change_default', :id => curr.id, :ok =>1, :title => _('Enable')}, :confirm => _('Are_you_sure'), :method => :post  if curr.id > 1%>
+        </td>
+      </tr>
+    <% }%>
+  <%end%>
+</table>
+

@@ -1,0 +1,51 @@
+<%= link_to b_add+_('New_Role'), :action => 'role_new' %><br />
+<%= link_to b_add+_('New_Right'), :action => 'right_new' %><br />
+<%= link_to b_add+_('Action_Finder'), :action => 'action_finder' %><br />
+<%= link_to b_add+_('Generate_Permission_Dump'), :action => 'dump_permissions' %><br />
+<% y = 0 %>
+<% x = 0 %>
+<br />
+<br />
+<% form_tag :action => "permissions_save" do %>
+  <table class="maintable" width = "100%">
+    <tr>
+      <th><%= _("Action") %></th>
+      <% @roles.each{|role| %>
+        <th><%= role.name %><%= link_to b_delete, { :action => 'role_destroy', :id => role.id }, :confirm => _('are_you_sure'), :method => "post" if role.name != "admin" %></th>
+      <% } %>
+    </tr>
+    <% old = "" %>
+    <% @rights.each_with_index { | right, i| %>
+      <% if old != right.controller %>
+        <tr>
+          <% if old == "" %>
+          <th colspan="<%=  1+@roles.size %>"><%= right.controller %>_controller</th>
+          <% else  %>
+            <th><%= right.controller %>_controller</th>
+            <% @roles.each{|role| %>
+              <th><%= role.name %></th>
+            <% } %>
+          <% end %>
+        </tr>
+        <% old = right.controller %>
+      <% end %>
+      <tr <%= right.saved.to_s == "1" ? " class='red'" : "class='row" + (i % 2 + 1).to_s + "'" %>>
+        <td><%= link_to(b_delete, { :action => 'right_destroy', :id => right.id }, :confirm => _('are_you_sure'), :method =>"post") %><%= _(right.description)%></td>
+        <% @roles.each { |role| %>
+          <% rr = right.role_rights.collect{|rr| rr if rr.role_id == role.id}.compact[0]%>
+          <% unless rr
+            rr = RoleRight.new(:right_id => right.id, :role_id => role.id, :permission => 0)
+            rr.permission = 1 if role.name == "admin" or role.name == "accountant" or role.name == "reseller" or role.name == "user"
+            rr.save
+            MorLog.my_debug("RoleRight for '#{role.name}' on '#{right.description}' was created")
+          end
+        %>
+          <td><%=check_box_tag("Setting_#{rr.role_id}_#{rr.right_id}", 1, rr.permission == 1, {})%></td>
+        <% } %>
+      </tr>
+    <% } %>
+
+  </table>
+  <br />
+  <%= submit_tag _('Update'), :disable_with=>_('Processing..') %>
+<% end %>

@@ -1,0 +1,1341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.119" />
+<title>tar_imp_update_old_method</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tar_imp_update_old_method</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--WITH DESTINATIONS-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1?step=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/usa_tariff_with_other_tariff_and_subcode.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=Prefix</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=Price</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>destination_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>country_code_id</td>
+	<td>label=Code</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=state_id</td>
+	<td>label=State</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=lata_id</td>
+	<td>label=LATA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tier_id</td>
+	<td>label=Class</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=ocn_id</td>
+	<td>label=OCN</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.484</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.484</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States Florida</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>4567</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>DFH</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States Dzordzoja</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Teksasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Meinas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kazkaz</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Nezine Kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dar Kazkaaaas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.2560</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.1770</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Albania Mobile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Albania Mobile Eagle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ALBANIA Mobile FONE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ALB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>AFG</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3556</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35567</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>129</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>124</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=destinations_to_create</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[4]/tbody/tr[2]/td[2]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[4]/tbody/tr[3]/td[2]</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Created destinations: 13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[5]/tbody/tr/td[2]</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rates updated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New rates created: 23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[5]/tbody/tr[3]/td[2]</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/1?st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States Florida</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States Dzordzoja</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Teksasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Meinas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kazkaz</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Nezine Kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dar Kazkaaaas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>125</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>129</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[8]/td[6]</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[13]/td[6]</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[7]/td[10]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>Florida</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[12]/td[10]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>Kanzasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate successfully deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Albania Tirane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Albania mobile-AMC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Albania mobile-Vodafone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Afghanistan mobile-Roshan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35541</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35544</td>
+	<td></td>
+</tr>
+<!--DO NOT SELECT DESTINATION-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1?step=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/usa_tariff_with_other_tariff_and_subcode.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=Prefix</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=Price</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>country_code_id</td>
+	<td>label=Code</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=state_id</td>
+	<td>label=State</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=lata_id</td>
+	<td>label=LATA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tier_id</td>
+	<td>label=Class</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=ocn_id</td>
+	<td>label=OCN</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>United States Florida</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>United States Dzordzoja</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Teksasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Meinas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kazkaz</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Nezine Kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dar Kazkaaaas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>125</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>129</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.1770</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.2560</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>ALBANIA Mobile FONE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Albania Mobile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Albania Mobile Eagle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ALB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>AFG</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3556</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35567</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>129</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>124</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=destinations_to_create</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[4]/tbody/tr[2]/td[2]</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[4]/tbody/tr[3]/td[2]</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Created destinations: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates updated: 22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New rates created: 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/1?st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States Florida</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States Dzordzoja</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States Kanzasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Teksasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Meinas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kazkaz</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Nezine Kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dar Kazkaaaas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>125</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>129</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[8]/td[6]</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[13]/td[6]</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Albania Mobile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Albania Tirane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Albania mobile-Vodafone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35541</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35544</td>
+	<td></td>
+</tr>
+<!--BAD DESTINATION-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/localization/delete_all_destinations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1?step=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/usa_tariff_with_other_tariff_and_subcode.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=Prefix</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=Price</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>24</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>24 bad destination(s)(Press here to get the list)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=destinations_to_create</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[4]/tbody/tr[2]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[4]/tbody/tr[3]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[5]/tbody/tr[2]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[5]/tbody/tr[3]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/1?st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//tr[8]/td[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//tr[13]/td[6]</td>
+	<td></td>
+</tr>
+<!--nieko neikele nes bad destination-->
+<!--WITHOUT DESTINATION-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/localization/delete_all_destinations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1?step=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/usa_tariff_with_other_tariff_and_subcode.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>update_dest_names</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=Prefix</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=Price</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>destination_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>country_code_id</td>
+	<td>label=Code</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=state_id</td>
+	<td>label=State</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=lata_id</td>
+	<td>label=LATA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tier_id</td>
+	<td>label=Class</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=ocn_id</td>
+	<td>label=OCN</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.484</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.484</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States Florida</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States Dzordzoja</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Teksasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Meinas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kazkaz</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Nezine Kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dar Kazkaaaas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Albania Mobile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Albania Mobile Eagle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.2560</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ALBANIA Mobile FONE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ALB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>AFG</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3556</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35567</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>129</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>124</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=destinations_to_create</td>
+	<td>24</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=destinations_to_update</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[4]/tbody/tr[3]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[4]/tbody/tr[4]/td[2]</td>
+	<td>24</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[5]/tbody/tr/td[2]</td>
+	<td>24</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[5]/tbody/tr[2]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[5]/tbody/tr[3]/td[2]</td>
+	<td>24</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/1?st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States Florida</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States Dzordzoja</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Teksasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Meinas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kazkaz</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Nezine Kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dar Kazkaaaas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>125</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>129</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[6]/td[6]</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[12]/td[6]</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Albania Mobile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Albania Mobile Eagle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ALBANIA Mobile FONE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ALB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35541</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35544</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

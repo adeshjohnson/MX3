@@ -1,0 +1,1066 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.163" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<!--currencies-->
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>icon_chech_curr_upd_disable_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<!--USD-->
+<tr>
+	<td>type</td>
+	<td>exchange_rate</td>
+	<td>0.5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>icon_cross_curr_upd_enable_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>icon_chech_curr_upd_disable_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<!--ALL-->
+<tr>
+	<td>type</td>
+	<td>exchange_rate</td>
+	<td>0.25</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>icon_cross_curr_upd_enable_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>icon_cross_curr_active_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>icon_chech_curr_disable_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>icon_chech_curr_upd_disable_144</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<!--KZT-->
+<tr>
+	<td>type</td>
+	<td>exchange_rate</td>
+	<td>0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>icon_cross_curr_upd_enable_144</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>icon_cross_curr_upd_enable_144</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>icon_cross_curr_active_144</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>icon_cross_curr_active_144</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login reseller-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--user prepaid-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_postpaid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td></td>
+</tr>
+<!--reseller default currency-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user[currency_id]</td>
+	<td>label=ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--manual payment-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User: User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Amount with TAX: 50.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_5</td>
+	<td>0.0000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>a_w_v_c_t_5</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>a_w_v_5</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_balance_5</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>exchange_rate_5</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_5</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>p_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User: User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Amount with TAX: 50.0000 EUR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_5</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>exchange_rate_5</td>
+	<td>2.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>a_w_v_c_t_5</td>
+	<td>25.0000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>a_w_v_5</td>
+	<td>25.0000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_balance_5</td>
+	<td>37.5000 ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_5</td>
+	<td>37.5000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>p_currency</td>
+	<td>label=ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User: User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Amount with TAX: 50.0000 ALL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_5</td>
+	<td>37.5000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>a_w_v_5</td>
+	<td>50.0000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_balance_5</td>
+	<td>87.5000 ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>servname</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>service_servicetype_one_time_fee</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>30.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>price_2</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New service</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>servname2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>service_servicetype_periodic_fee</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>45.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>price_3</td>
+	<td>45.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New service</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>servname3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>service_servicetype_flat_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>10.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_quantity</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>price_4</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_5</td>
+	<td>87.5000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_balance_value</td>
+	<td>87.5000 ALL</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>-50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User: User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Amount with TAX: -50.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_5</td>
+	<td>87.5000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>exchange_rate_5</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>a_w_v_c_t_5</td>
+	<td>-12.5000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>a_w_v_5</td>
+	<td>-12.5000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_balance_5</td>
+	<td>75.0000 ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_5</td>
+	<td>75.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_5</td>
+	<td>75.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>warning_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user[warning_email_balance]</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>user[warning_email_balance]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user[warning_email_balance]</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_value</td>
+	<td>6.0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax2_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_value</td>
+	<td>25.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_name</td>
+	<td>t1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax3_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3_value</td>
+	<td>10.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3_name</td>
+	<td>t2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4_value</td>
+	<td>30.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4_name</td>
+	<td>t3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax4_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>p_currency</td>
+	<td>label=KZT</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User: User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Amount with TAX: 134.0625 KZT</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_5</td>
+	<td>75.0000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>exchange_rate_5</td>
+	<td>0.4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>a_w_v_c_t_5</td>
+	<td>335.1562 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>a_w_v_5</td>
+	<td>125.0000 ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_balance_5</td>
+	<td>200.0000 ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_10</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_11</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_12</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_13</td>
+	<td>-50.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_14</td>
+	<td>134.0625</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_with_tax</td>
+	<td>410.1562(ALL)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>currency_10</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>currency_11</td>
+	<td>EUR</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>currency_12</td>
+	<td>ALL</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>currency_14</td>
+	<td>KZT</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>currency_13</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_1</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_2</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_3</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_4</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_5</td>
+	<td>125.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_1</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_2</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_3</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_4</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_5</td>
+	<td>335.1562</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_wat</td>
+	<td>410.1562</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>full_price</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_total_price_1</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_name_1</td>
+	<td>Manual Payment(50.0 USD)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>full_price</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_total_price_2</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_name_2</td>
+	<td>Manual Payment(50.0 EUR)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>full_price</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_total_price_3</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_name_3</td>
+	<td>Manual Payment</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>full_price</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_total_price_4</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_name_4</td>
+	<td>Manual Payment(-50.0 USD)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>125.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>full_price</td>
+	<td>335.1562</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_total_price_5</td>
+	<td>335.1562</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_name_5</td>
+	<td>Manual Payment(50.0 KZT)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/5?&amp;test=1</td>
+	<td></td>
+</tr>
+<!--rodo prepaid price_with_vat: "1340.625", nes rodo USD, bet valiuta neparasyta-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>prepaid price_with_vat: &quot;1340.625&quot;</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>providers2</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">providers2</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--* Should not allow to update provider configuration if one of asterisk servers is not reachable (IAX2, SIP providers)-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_hostname</td>
+	<td>192.168.0.254</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>192.168.0.254</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<!--* IAX2-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>authuser</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>grace_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>grace_time</td>
+	<td>70</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Configuration error.</td>
+	<td></td>
+</tr>
+<!--With multiple servers if both are OK-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_hostname</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_hostname</td>
+	<td>127.0.0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>127.0.0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_type</td>
+	<td>secondary</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_maxcalllimit</td>
+	<td>500</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ami_username</td>
+	<td>mor</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ami_secret</td>
+	<td>morsecret</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_comment</td>
+	<td>secondary system</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_providers/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<!--With multiple servers if one is bogus-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_hostname</td>
+	<td>192.168.0.253</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>192.168.0.253</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>grace_time</td>
+	<td>70</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Configuration error.</td>
+	<td></td>
+</tr>
+<!--PAI-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>eeeee</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=add_to_servers[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server_1: 127.0.0.1|127.0.0.1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server_3: 192.168.0.253|192.168.0.253</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>provider[use_p_asserted_identity]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider[use_p_asserted_identity]_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[use_p_asserted_identity]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>grace_time</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--add with same name-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>eeeee</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider[use_p_asserted_identity]_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider[use_p_asserted_identity]_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[use_p_asserted_identity]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>authuser</td>
+	<td>test_authuser</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>grace_time</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server_1: 127.0.0.1|127.0.0.1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server_3: 192.168.0.253|192.168.0.253</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=add_to_servers[1]</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=add_to_servers[3]</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider[use_p_asserted_identity]_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>authuser</td>
+	<td>test_authuser</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=add_to_servers[1]</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=add_to_servers[3]</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=add_to_servers[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please select server</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=add_to_servers[3]</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>provider[use_p_asserted_identity]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providercodecs_sort?1&amp;codec_id=999999999</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>grace_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>grace_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td></td>
+	<td>duration is less</td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>grace_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>testes</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[tech]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>grace_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>grace_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td></td>
+	<td>duration is less</td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>grace_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[hidden]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>provider[hidden]</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id_1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>link=New Provider</td>
+	<td>New Provider</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>ani_2</td>
+	<td>eeeee</td>
+</tr>
+</tbody></table>
+</body>
+</html>

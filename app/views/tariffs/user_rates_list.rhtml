@@ -1,0 +1,114 @@
+<table width="100%">
+  <tr>
+    <td><%= link_nice_tariff_retail(@tariff)%></td>
+    <td align="right" nowrap><%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')")  %></td>
+  </tr>
+</table>
+
+
+<% form_tag :action => 'user_rates_list', :id=>@tariff.id do %>
+  <div id="search_details" <%= "style='display:none;'" if @search.to_i == 0 %>>
+    <br />
+    <table width="100%" class="simple">
+      <tr>
+        <td>
+          <%= _('Prefix') %>: <%= text_field_tag 's_prefix', @s_prefix, "class" => "input", :size => "10", :maxlength => "30"  %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
+        </td>
+        <td align="right">
+          <%  if @search == 1%>
+            <%= link_to b_cross + _('Clear_search'), :action => 'user_rates_list', :id=>@tariff.id%>
+          <%end%>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>
+<br />
+<%= render :partial => 'letter_select_header' if @s_prefix.blank?%>
+<br />
+<%= header = page_select_header(@options[:page], @options[:total_pages], {:st=>@st, :s_prefix=>@s_prefix}) %>
+<% form_tag :action => 'user_rates_update', :id => @tariff.id, :page => @options[:page], :st=>@st, :s_prefix=>@s_prefix do %>
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left"><%= _('Name') %></th>
+      <th align="left"><%= _('Type') %></th>
+      <th align="center"><%= _('Destinations') %></th>
+      <th align="center"><%= _('Rate') %>  (<%= @tariff.currency%>)</th>
+      <th align="center"><%= _('Round_by') %></th>
+      <th></th>
+      <% if @can_edit == true %>
+        <% if @allow_edit %>
+          <th></th>
+        <% end %>
+      <% end %>
+    </tr>
+    <% if @res and @res.size.to_i > 0 %>
+      <% @res.each_with_index { |res, i| %>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <%
+
+          if res['rate_id'].blank?
+            rate_id = i
+          else
+            rate = nil
+            @rates_list.each{|r| rate = r if r.id == res['rate_id'].to_i}
+            #rate = Rate.find(:first, :conditions=>['rates.id=?',res['rate_id'].to_i], :include=>[:aratedetails, :tariff, :destinationgroup])
+            rate_id =  res['rate_id'].to_i
+          end
+          show_rr = true
+
+          if res['arates_size'].to_i == 0
+            if res['round'].to_s == ''
+              res['round'] = 1
+            end
+          else
+            if res['arates_size'].to_i != 1 #and res['artype'].to_s != "minute"
+              show_rr = false
+            end
+          end
+        %>
+          <td id="name_<%= rate_id %>" <%=nice_rates_tolltip(rate) if rate%>><%= draw_flag_by_code res["flag"].to_s %> <%=h res["name"].to_s %></td>
+          <td id="dest_type_<%= rate_id %>"><%=h res['desttype'] %><% res['dg_id']%></td>
+          <td id="directions_<%= rate_id %>" align="center"><%= link_to b_view + _('View'), :controller => :destination_groups, :action => :destinations, :id => res['dg_id'] %> (<%= res['destinations'] %>)</td>
+          <% if show_rr %>
+            <% if @can_edit == true %>
+              <td id="price_<%= rate_id %>" align="center"><%= text_field_tag "rate"+res['dg_id'].to_s, res['price'].to_s, "class" => "input", "size" => "8"   %></td>
+              <td id="round_<%= rate_id %>" align="center"><%= text_field_tag "round"+res['dg_id'].to_s, res['round'].to_i, "class" => "input", "size" => "3"   %>s <% res['arates_size'].to_i %></td>
+            <%else%>
+              <td id="price_<%= rate_id %>" align="center"><%=  res['price'].to_s %></td>
+              <td id="round_<%= rate_id %>" align="center"><%= res['round'].to_i  %>s <% res['arates_size'].to_i %></td>
+            <% end %>
+          <% else%>
+            <td id="price_<%= rate_id %>" colspan = "2" align="center"><%= _('Check_advanced_rates') + b_forward %></td>
+          <% end %>
+
+          <td id="rates_<%= rate_id %>" align="center"><%= link_to b_rates, {:action => 'user_arates_full', :id => @tariff.id, :dg => res['dg_id'].to_i}, {:id => "rates_link_"+rate_id.to_s} %> </td>
+          <% if @can_edit == true %>
+            <% if @allow_edit %>
+              <% if res['price'].to_s != '' %>
+                <td id="delete_rate_<%= rate_id %>" align="center"><%= link_to b_delete, { :action => 'user_rate_destroy', :id => res['rate_id'].to_i, :page => @options[:page], :st=>@st, :s_prefix=>@s_prefix }, :confirm => 'Are you sure?', :method => :post, :id=> "delete_rate_link_"+rate_id.to_s %></td>
+              <% else %>
+                <td id="delete_rate_<%= rate_id %>" ></td>
+              <% end %>
+            <% end %>
+          <% end %>
+        </tr>
+      <% } %>
+    <% end %>
+    <% if @can_edit == true %>
+      <% if @allow_edit %>
+        <tr>
+          <th colspan="7" align="right"><%= submit_tag _('Update') , :disable_with=>_('Processing..')%></th>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+<% end %>
+<br/>
+<br/>
+<%= header %>

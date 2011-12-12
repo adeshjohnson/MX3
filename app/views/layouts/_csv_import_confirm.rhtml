@@ -1,0 +1,75 @@
+<b><%= b_exclamation + _('CSV_Import_Delimiter_explanation')%></b>
+<br></br>
+<br></br>
+<b><%=_('You_have_to_set_same_delimiters_in_your_system') %> : </b>
+<%=  _('COLUMN_SEPARATOR') + " "+ sep.to_s + " " + _('and') + " "+_('DECIMAL_SEPARATOR') + " "+ dec.to_s %>
+<br></br>
+<br></br>
+<% form_tag( {:action => action_to, :step => "2" }.merge(opts) ) do %>
+  <%=hidden_field_tag :sepn, sep1.to_s%>
+  <%=hidden_field_tag :decn, dec1.to_s if return_type == 2%>
+  <table>
+    <tr>
+      <td><%=_('We_suggest_import_file_with') %>:</td>
+      <td><%= radio_button_tag 'use_suggestion', '1', true, :onclick => "new Ajax.Updater('sep_results', '#{Web_Dir}/functions/check_separator?sepn=#{sep1}&min_collum_size=#{min_collum_size}'+'&custom='+document.getElementById('use_suggestion_1').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});"%><%=  _('COLUMN_SEPARATOR') + " "+ sep1.to_s %>  <%= _('and') + " "+_('DECIMAL_SEPARATOR') + " "+ dec1.to_s  if return_type == 2%></td>
+    </tr>
+    <tr>
+      <td><%=_('Custom_import_file_csv')%>:</td>
+      <td><%= radio_button_tag 'use_suggestion', '2', false, :onclick => "new Ajax.Updater('sep_results', '#{Web_Dir}/functions/check_separator?min_collum_size=#{min_collum_size}&sepn=' + document.getElementById('sepn2').value +'&custom='+document.getElementById('use_suggestion_2').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});"%>
+        <%=_('COLUMN_SEPARATOR')%>&nbsp;&nbsp;<%=text_field_tag :sepn2, sep1.to_s, :size=>5, :class=>"imput", :onclick=>"get_radio_value(document.getElementById('use_suggestion_2'));"%>
+        <script type="text/javascript">
+          //<![CDATA[
+          new Form.Element.Observer('sepn2', 1, function(element, value) {
+            new Ajax.Updater(
+            'sep_results',
+            '<%=Web_Dir.to_s%>/functions/check_separator',
+            {
+              parameters: {
+                "min_collum_size" : <%=min_collum_size.to_s%>,
+                "sepn" : value,
+                "sepn2" : '<%=  sep1.to_s %>',
+                "custom" : escape(get_radio_value(document.getElementById('use_suggestion_2')))
+              },
+              asynchronous:true,
+              evalScripts:true,
+              onComplete:function(request){Element.hide('spinner');},
+              onLoading:function(request){Element.show('spinner');}});
+          })
+        
+        //]]>
+        </script>
+        <%=_('DECIMAL_SEPARATOR')%>&nbsp;&nbsp;<%=text_field_tag :decn2, dec1.to_s , :size=>5, :class=>"imput"%>
+      </td>
+    </tr>
+  </table>
+  <script type="text/javascript">
+  function get_radio_value(radioObj)
+  {
+    radioObj.checked = (radioObj.value == 2);
+    if(radioObj.checked)
+      return radioObj.value;
+    else
+      return "0";
+  }
+  </script>
+  <br></br><br></br>
+
+  <span id="sep_results">
+    <%= submit_tag (  _('Continue_file_import')+" >>" , :disable_with=>_('Processing..') ) if !disable_next%>
+    <br></br><br></br>
+    <table width="100%" class="maintable">
+      <tr>
+        <th><%=_('Column')%>&nbsp; 1</th>
+        <th><%=_('Column')%>&nbsp; 2</th>
+        <th><%=_('Column')%>&nbsp; 3</th>
+      </tr>
+      <% fl.each_with_index{|f, i|%>
+        <tr class="row<%= (i % 2 + 1).to_s %>" >
+          <td id="sep_row_1_<%=i%>"><%=f[0]%></td>
+          <td id="sep_row_2_<%=i%>"><%=f[1]%></td>
+          <td id="sep_row_3_<%=i%>"><%=f[2]%></td>
+        </tr>
+      <%}%>
+    </table>
+  </span>
+<%end%>

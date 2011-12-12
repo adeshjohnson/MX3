@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=return_url</td>
+	<td>url1</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>${url1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=paypal_custom_redirect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Option to manually set return address from successful or canceled PayPal payment. If not checked, system will use default address. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>id=paypal_custom_redirect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=return_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Set return address after successful payment. If not set, system will use ${url1}billing/payments/personal_payments </td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>id=return_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//div[@id='tabViewdhtmlgoodies_tabView1_1']/table/tbody/tr[14]/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Set return address after canceled payment. If not set, system will use ${url1}billing/callc/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//div[@id='tabViewdhtmlgoodies_tabView1_1']/table/tbody/tr[14]/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=paypal_custom_redirect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=paypal_custom_redirect</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_return_url</td>
+	<td>billing/groups/list</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_cancel_url</td>
+	<td>/billing/functions/settings_payments</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=form &gt; table &gt; tbody &gt; tr &gt; td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=paypal_cancel_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=paypal_cancel_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_cancel_url</td>
+	<td>billing/functions/settings_payments</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=paypal_custom_redirect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Option to manually set return address from successful or canceled PayPal payment. If not checked, system will use default address. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>id=paypal_custom_redirect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=return_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Set return address after successful payment. If not set, system will use ${url1}billing/payments/personal_payments </td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>id=return_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//div[@id='tabViewdhtmlgoodies_tabView1_1']/table/tbody/tr[14]/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Set return address after canceled payment. If not set, system will use ${url1}billing/callc/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//div[@id='tabViewdhtmlgoodies_tabView1_1']/table/tbody/tr[14]/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=paypal_return_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_return_url</td>
+	<td>myngtrbvfbilling/groups/list</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=paypal_cancel_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_cancel_url</td>
+	<td>,765/.ymutrebilling/functions/settings_payments</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_return_url</td>
+	<td>.,/.myngtrbvfbilling/groups/list</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=paypal_return_url</td>
+	<td>.,/.myngtrbvfbilling/groups/list</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=paypal_cancel_url</td>
+	<td>,765/.ymutrebilling/functions/settings_payments</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=return_url</td>
+	<td>url2</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>${url2}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=paypal_custom_redirect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Option to manually set return address from successful or canceled PayPal payment. If not checked, system will use default address. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>id=paypal_custom_redirect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=return_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Set return address after successful payment. If not set, system will use ${url2}billing/payments/personal_payments </td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>id=return_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//div[@id='tabViewdhtmlgoodies_tabView1_0']/table/tbody/tr[12]/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Set return address after canceled payment. If not set, system will use ${url2}billing/callc/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//div[@id='tabViewdhtmlgoodies_tabView1_0']/table/tbody/tr[12]/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=paypal_custom_redirect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=paypal_custom_redirect</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_return_url</td>
+	<td>billing/groups/list</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_cancel_url</td>
+	<td>/billing/functions/settings_payments</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=form &gt; table &gt; tbody &gt; tr &gt; td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=paypal_cancel_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=paypal_cancel_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_cancel_url</td>
+	<td>billing/functions/settings_payments</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=paypal_custom_redirect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Option to manually set return address from successful or canceled PayPal payment. If not checked, system will use default address. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>id=paypal_custom_redirect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=return_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Set return address after successful payment. If not set, system will use ${url2}billing/payments/personal_payments </td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>id=return_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//div[@id='tabViewdhtmlgoodies_tabView1_0']/table/tbody/tr[12]/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Set return address after canceled payment. If not set, system will use ${url2}billing/callc/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//div[@id='tabViewdhtmlgoodies_tabView1_0']/table/tbody/tr[12]/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=paypal_return_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_return_url</td>
+	<td>myngtrbvfbilling/groups/list</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=paypal_cancel_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_cancel_url</td>
+	<td>,765/.ymutrebilling/functions/settings_payments</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_return_url</td>
+	<td>.,/.myngtrbvfbilling/groups/list</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=paypal_return_url</td>
+	<td>.,/.myngtrbvfbilling/groups/list</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=paypal_cancel_url</td>
+	<td>,765/.ymutrebilling/functions/settings_payments</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.164" />
+<title>tariff_reseller</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tariff_reseller</td></tr>
+</thead><tbody>
+<!--testing whether reseller can import tarrifs-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--Login as reseller-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<!--set csv settings-->
+<tr>
+	<td>type</td>
+	<td>csv_separator</td>
+	<td>,</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>csv_decimal</td>
+	<td>.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!-- clean -->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete all rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<!--import tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please select file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/big.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/rates_small_with_header.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=Prefix</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=Rate(EUR)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=Connection Fee(EUR)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=Increment</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=Minimal Time</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>destination_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>country_id</td>
+	<td>label=Direction</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>country_code_id</td>
+	<td>label=Country code</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>subcode</td>
+	<td>label=Subcode</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>No destinations were created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Congratulations, successfully imported CSV file!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New rates created: 8</td>
+	<td></td>
+</tr>
+<!--Check if reseller can transform tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>csv_separator</td>
+	<td>;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tariff_name</td>
+	<td>test_for_manage</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tariff[purpose]_user_wholesale</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Tariff was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>country_id</td>
+	<td>label=&quot;Country&quot;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New rates created: 11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Congratulations, successfully imported CSV file!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/511</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_511</td>
+	<td>1.2600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>connection_fee_511</td>
+	<td>0.0700</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Make user retail tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add_percent</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add_confee_amount</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add_confee_percent</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Tariff created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td[@id='rates_7']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='rates_link_522']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='View']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>artype_238</td>
+	<td>label=event</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_7</td>
+	<td>test_for_manage + 1 + 1%</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td[@id='rates_7']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_522</td>
+	<td>Check advanced rates</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='rates_link_522']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='View']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>//input[@id='price_237']</td>
+	<td>2.1114</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>price</td>
+	<td>2.2826</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Make wholesale Tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add_amount</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add_percent</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add_confee_amount</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add_confee_percent</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Tariff created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Add amount: 3.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_8</td>
+	<td>test_for_manage + 3.0 + 3.0%</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td[@id='rates_8']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/tariffs/rate_details/524')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_522</td>
+	<td>4.3878</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>connection_fee_522</td>
+	<td>4.2328</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Destinations CSV</td>
+	<td>Destinations CSV</td>
+</tr>
+<!--do not expand this test-->
+</tbody></table>
+</body>
+</html>

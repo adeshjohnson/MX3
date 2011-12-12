@@ -1,0 +1,42 @@
+<%= render :partial => 'letter_select_header' %>
+<br />
+<%if admin?%>
+<%= link_to_function(b_edit + _('Bulk_management'), "Element.toggle('search_details')") %>
+<br />
+<div id="search_details" style='display:none;'>
+<br />
+  <%= render :partial => "bulk_form" %>
+</div>
+<br />
+<%end%>
+
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Name') %></th>
+    <th align="left"><%= _('Type') %></th>
+    <th align="center"><%= _('Destinations') %></th>
+    <th></th>
+    <th></th>  
+    <th></th> 
+  </tr>
+
+<% i = 0 %>     
+<% for dg in @destinationgroups %>
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+
+    <td><%= draw_flag_by_code dg.flag %> <%=h dg.name %></td>
+    <td><%=h dg.desttype %></td>
+
+    <td align="center"><%= link_to b_view + _('View'), :action => 'destinations', :id => dg.id %> (<%= dg.destinations.size %>)</td>
+    <td align="center"><%= link_to b_chart_bar, :action => 'stats', :id => dg.id %></td>
+    <td align="center"><%= link_to b_edit, :action => 'edit', :id => dg.id %></td>
+    <td align="center"><%= link_to b_delete, { :action => 'destroy', :id => dg.id }, :confirm => _('Are_you_sure'), :method => :post %></td>
+  </tr>
+   
+  <% i += 1%>    
+<% end %>
+</table>
+
+<br />
+
+<%= link_to b_add + _('New_destination_group'), :action => 'new' %>

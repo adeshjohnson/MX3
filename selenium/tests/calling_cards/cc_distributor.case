@@ -1,0 +1,1431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--CARD EDIT-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=card[user_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=card[user_id]</td>
+	<td>None System Admin Test Accountant Test Reseller Test User #1</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=card[user_id]</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card[user_id]</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Distributor : Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=card[user_id]</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Distributor : Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Edit card</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=card[user_id]</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card[user_id]</td>
+	<td>label=Test Accountant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Distributor : Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=card[user_id]</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Distributor : Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User settings: Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=1&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#sold_3 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#sold_3 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_3</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_1</td>
+	<td>Distributor</td>
+</tr>
+<!--BATCH MANAGEMENT-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>1111111004</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>1111111017</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Change distributor :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=distributor</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=distributor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=user_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_id</td>
+	<td>None System Admin Test Accountant Test Reseller Test User #1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card interval : 1111111004 - 1111111017</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Active cards : 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Disabled cards : 14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Action : Change distributor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Distributor changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_5</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_6</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_9</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_13</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_17</td>
+	<td>Test User #1</td>
+</tr>
+<!--CARD EDIT-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card[user_id]</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=1&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#sold_19 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_19</td>
+	<td>Test Reseller</td>
+</tr>
+<!--VERIFY BALANCE-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=balance_0</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=balance_4</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=balance_3</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=balance_2</td>
+	<td>0.0000</td>
+</tr>
+<!--FAKE FORM TO USER_RESELLER-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/fake_form?path_to_action=/billing/cards/update/20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_1</td>
+	<td>card[number]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_1</td>
+	<td>1111111019</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_2</td>
+	<td>card[name]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_2</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_2</td>
+	<td>Fake Card</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_3</td>
+	<td>card[pin]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_3</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_3</td>
+	<td>7484</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_4</td>
+	<td>card[callerid]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_4</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_5</td>
+	<td>card[first_use(1i)]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_5</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_5</td>
+	<td>2011</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_6</td>
+	<td>card[first_use(2i)]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_6</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_6</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_7</td>
+	<td>card[first_use(3i)]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_7</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_7</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_8</td>
+	<td>card[first_use(4i)]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_8</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_8</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_9</td>
+	<td>card[first_use(5i)]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_9</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_9</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_10</td>
+	<td>card[daily_charge_paid_till(1i)]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_10</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_10</td>
+	<td>2011</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_11</td>
+	<td>card[daily_charge_paid_till(2i)]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_11</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_11</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_12</td>
+	<td>card[daily_charge_paid_till(2i)]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_12</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_12</td>
+	<td>24</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_13</td>
+	<td>card[daily_charge_paid_till(4i)]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_13</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_13</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_14</td>
+	<td>card[daily_charge_paid_till(5i)]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_14</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_14</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_15</td>
+	<td>card[language]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_15</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_15</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_16</td>
+	<td>card[user_id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_16</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_16</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Distributor : User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=1&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_3</td>
+	<td>1111111002</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_3</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_10</td>
+	<td>1111111009</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_10</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_19</td>
+	<td>1111111018</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_19</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_20</td>
+	<td>1111111019</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_20</td>
+	<td></td>
+</tr>
+<!--2. First use, Dayly charge paid til datos rodomos, kai paprastai priskiriama kortelė, ju nerodo kai kortelės priskirtos batch management-->
+<!--VERIFY USER RESELLER-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Calling Cards</td>
+	<td></td>
+</tr>
+<!--7. Nors ir neturi priskirto card useris, reseller useris gali įeiti i /card/user_list ir batch management-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/user_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Batch management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=number_20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/bullk_for_activate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=start_number</td>
+	<td>1111111019</td>
+</tr>
+<!--VERIFY USER 101-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=spersonal_menu21</td>
+	<td>Calling Cards</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/user_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=s_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=s_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=s_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=s_balance_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=s_balance_max</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=s_sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=s_language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Batch management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_8</td>
+	<td>1111111007</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>6930</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=balance_8</td>
+	<td>10.0840</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#sold_8 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/bullk_for_activate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>1111111007</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>1111111016</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=buy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card interval : 1111111007 - 1111111016</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Active cards : 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Disabled cards : 10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Action : Activate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card is activated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/bullk_for_activate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>1111111004</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>1111111011</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=disable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card interval : 1111111004 - 1111111011</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Active cards : 5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Disabled cards : 3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Action : Disable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card is deactivated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#sold_8 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<!--SEARCH-->
+<tr>
+	<td>select</td>
+	<td>name=s_sold</td>
+	<td>label=Yes</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=number_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_min</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_max</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_max</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=KolmiSoft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=number_14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_max</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_number</td>
+	<td>1111111012</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=number_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=number_14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=s_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>name=s_sold</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#sold_7 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#sold_7 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cards are activated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=img[alt=&quot;Check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cards are deactivated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#sold_7 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#sold_15 &gt; a &gt; img[alt=&quot;Check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cards are deactivated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#sold_15 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_min</td>
+	<td>rdf ėre</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_max</td>
+	<td>esg er gv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=number_9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=number_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=number_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=number_16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_name</td>
+	<td>rtfghj</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=number_9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=number_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=number_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=number_16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_number</td>
+	<td>111111101</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_sold</td>
+	<td>label=Yes</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_13</td>
+	<td>1111111012</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_14</td>
+	<td>1111111013</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_16</td>
+	<td>1111111015</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_17</td>
+	<td>1111111016</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=number_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=number_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=number_15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_pin</td>
+	<td>^&amp;*(</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_sold</td>
+	<td>label=No</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=number_9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=number_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=number_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=number_16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=1&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

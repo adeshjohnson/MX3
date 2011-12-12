@@ -1,0 +1,82 @@
+<% if @tariff.purpose == "user"%>
+  <%if Confline.get_value("Show_Advanced_Rates_For_Users", @user.owner_id).to_i == 1 %>
+    <%= render :partial => "user_rates_retail_detailed" %>
+  <% else %>
+    <%= render :partial => "user_rates_retail" %>
+  <% end %>
+<% else %>
+  <% if @tariff.purpose == "user_wholesale"%>
+    <%= b_currency + _('Currency') %>: <b><%= session[:show_currency] %></b>
+    <br>
+    <% if @dgroups.size > 0 %>
+      <%= link_to b_pdf + _('Export_to_PDF'), :action => "generate_personal_wholesale_rates_pdf", :id => @tariff.id%>
+      &nbsp;
+      <%= link_to b_csv + _('Export_to_CSV'), :action => "generate_personal_wholesale_rates_csv", :id => @tariff.id%>
+    <% end %>
+    <br>
+    <br>
+    <%= render :partial => 'letter_select_header' %>
+    <% if @total_pages > 1 %>
+      <br>
+      <%= render :partial => 'page_select_header' %>
+    <% end %>
+    <br>
+    <table width="100%" class="maintable">
+      <tr>
+        <th align="left"><%= _('Direction') %></th>
+        <% if @use_lata %>
+          <th align="left"><%= _('NPANXX') %></th>
+          <th align="left"><%= _('City') %></th>
+          <th align="left"><%= _('State') %></th>
+          <th align="left"><%= _('LATA') %></th>
+          <th align="left"><%= _('Class') %></th>
+          <th align="left"><%= _('OCN') %></th>
+          <th align="left"><%= _('OCN_Name') %></th>
+        <% else %>
+          <th align="left"><%= _('Prefix') %></th>
+          <th align="left"><%= _('Subcode') %></th>
+          <th align="left"><%= _('Name') %></th>
+        <% end %>
+        <th  colspan=2 align="center"><%= _('Rate') %> </th>
+        <th colspan=2 align="center"><%= _('Connection_Fee') %></th>
+        <th align="center"><%= _('Increment') %> </th>
+      </tr>
+      <%if @ratesd and @ratesd.size.to_i > 0 %>
+        <% @ratesd.each_with_index{ |rate, i| %>
+          <tr class="row<%= (i % 2 + 1).to_s %>" id ="rate_<%=rate.rate_id%>">
+            <td><%= draw_flag rate.code %> <%= rate.dname %></td>
+            <% if @use_lata %>
+              <td><%= rate.prefix %></td>
+              <td><%= rate.city %></td>
+              <td><%= rate.state %></td>
+              <td><%= rate.lata %></td>
+              <td><%= rate.tier %></td>
+              <td><%= rate.ocn %></td>
+              <td><%= rate.name %></td>
+            <% else %>
+              <td><%= rate.prefix %></td>
+              <td><%= rate.subcode %></td>
+              <td><%= rate.name%></td>
+            <% end %>
+            <td align="center" id ="e_rate_<%=rate.rate_id%>"><%= nice_number rate.erate %></td><% Tax %>
+            <td align="center"><%= nice_number(@user.get_tax.count_tax_amount(rate.erate.to_f) + rate.erate.to_f)%></td>
+            <td align="center" id ="c_fee_<%=rate.rate_id%>"><%= nice_number rate.conee%></td>
+            <td align="center"><%= nice_number(@user.get_tax.count_tax_amount(rate.conee.to_f)+ rate.conee.to_f)%></td>
+            <td align="center" id ="inc_<%=rate.rate_id%>"><%= rate.increment_s%></td>
+          </tr>
+        <% } %>
+      <%end%>
+    </table>
+
+    <% if @total_pages > 1 %>
+      <br />
+      <%= render :partial => 'page_select_header' %>
+    <% end %>
+
+    <br />
+  <%else%>
+    <%= link_to b_pdf + _('Export_to_PDF'), :action => "generate_personal_wholesale_rates_pdf" %>
+    &nbsp;
+    <%= link_to b_csv + _('Export_to_CSV'), :action => "generate_personal_wholesale_rates_csv" %>
+  <%end%>
+<% end %>

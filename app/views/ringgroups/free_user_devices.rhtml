@@ -1,0 +1,7 @@
+<% if @free_devices and @free_devices.size.to_i > 0 %>
+<td><%= _('Device') %>:</td>
+<td><%= select_tag("device_id", options_for_select(@free_devices.map{|dev| ["#{nice_device(dev, {:image => false})}#{ (" - " + dev.description.to_s) if dev.description.to_s.length > 0 }", dev.id]}, '@did.device_id'), :class=>"ringgroup_select")  %></span>
+  &nbsp;&nbsp;<span onclick="new Ajax.Updater('new_ajax_devices', '<%=Web_Dir%>/ringgroups/assign_device?id=<%=@ringgroup.id%>&device_id=' + document.getElementById('device_id').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});" ><%=b_add%> <%=_('Add_this_Device')%></span></td>
+<%else%>
+  <td colspan="2"><%=_('No_Devices_aviable_to_add')%></td>
+<% end %>

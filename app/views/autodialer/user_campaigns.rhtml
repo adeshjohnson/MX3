@@ -1,0 +1,81 @@
+
+<table class="maintable" width="100%">
+  <tr>
+    <th align="left"><%= _('Name') %></th>
+    <th align="left"><%= _('Type') %></th>
+    <th align="center"><%= _('Status') %></th>
+    <th align="center"><%= _('Start_time') %></th>
+    <th align="center"><%= _('Stop_time') %></th>    
+    <th align="center"><%= _('Numbers') %></th>  
+    <th align="center"><%= _('Dialed') %></th>  
+    <th align="center"><%= _('Completed') %></th>            
+    <th align="center"><%= _('Time') %></th>  
+    <th align="center"><%= _('Price') %></th>  
+    <th align="center"><%= _('Actions') %></th>  
+    <th></th>
+    <th align="center"><%= _('Stats') %></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @total_numbers = @total_dialed = @total_completed = @total_time = @total_price = 0 -%>
+
+  <% @campaigns.each_with_index { |camp, i| %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <%
+      numbers = camp.adnumbers
+      @total_numbers += numbers.size
+      executed_numbers = camp.executed_numbers_count
+      @total_dialed += executed_numbers.to_i
+      completed_numbers = camp.completed_numbers_count
+      @total_completed += completed_numbers.to_i
+      billsec = camp.completed_numbers_user_billsec
+      @total_time += billsec.to_i
+      price = camp.user_price
+      @total_price += price.to_f
+    %>
+      <td id="name_<%= camp.id %>" align="left"><%= camp.name %></td>
+      <td id="type_<%= camp.id %>" align="left"><%= camp.campaign_type %></td>
+      <% form_tag :action => 'campaign_change_status', :id => camp.id do %>
+        <td id="enabled_<%= camp.id %>" align="center" nowrap>
+          <% if camp.status == "enabled"%>
+            <div class="bold_green"><%= _('Active') %>
+              <%= image_submit_tag 'icons/stop.png', :title => _('Stop') %>
+            </div>
+          <% else %>
+            <div class="bold_red"><%= _('Stopped') %>
+              <%= image_submit_tag 'icons/play.png', :title => _('Start') %>
+            </div>
+          <% end %>
+        </td>
+      <% end %>
+      <td id="start_time_<%= camp.id %>" align="center"><%= nice_time2 camp.start_time %></td>
+      <td id="stop_time_<%= camp.id %>" align="center"><%= nice_time2 camp.stop_time %></td>
+      <td id="campaign_numbers_<%= camp.id %>" align="center"><%= link_to b_details, :action => 'campaign_numbers', :id => camp.id %><%= numbers.size.to_s %></td>
+      <td id="execute_numbers_<%= camp.id %>" align="center"><%= executed_numbers.to_s %></td>
+      <td id="complete_numbers_<%= camp.id %>" align="center"><%= completed_numbers %></td>
+      <td id="billsec_<%= camp.id %>" align="center"><%= nice_time billsec %></td>
+      <td id="price_<%= camp.id %>" align="center"><%= nice_number price %></td>
+      <td id="actions_<%= camp.id %>" align="center"><%= link_to b_actions, :action => 'campaign_actions', :id => camp.id %> <%= camp.adactions.size %></td>
+      <td id="redial_<%= camp.id %>" align="center"><%= link_to _('Redial_all_failed_calls'), { :action => 'redial_all_failed_calls', :id => camp.id }, :confirm => _('Are_you_sure'), :method => :post %></td>
+      <td id="stats_<%= camp.id %>" align="center"><%= link_to b_call_stats, :action => 'campaign_statistics', :campaign_id => camp.id %></td>
+      <td id="edit_<%= camp.id %>" align="center"><%= link_to b_edit, :action => 'campaign_edit', :id => camp.id %></td>
+      <td id="delete_<%= camp.id %>" align="center"><%= link_to b_delete, { :action => 'campaign_destroy', :id => camp.id }, :confirm => _('Are_you_sure'), :method => :post %></td>
+    </tr>
+  <% } %>
+
+  <tr>
+    <th id="total" align="left" colspan=5>  <%= _('Total') %>:</th>
+    <th id="total_numbers" align="center"><%= @total_numbers %></th>
+    <th id="total_dialed" align="center"><%= @total_dialed %></th>
+    <th id="total_complete" align="center"><%= @total_completed %></th>
+    <th id="total_time" align="center"><%= nice_time @total_time %></th>
+    <th id="total_price" align="center"><%= nice_number @total_price %></th>
+    <th align="left"></th>
+    <th align="left"></th>
+    <th align="left"></th>
+    <th align="left"></th>
+    <th align="left"></th>
+  </tr>
+</table>
+<br />
+<%= link_to b_add + _('Add_campaign'), :action => 'campaign_new' %>

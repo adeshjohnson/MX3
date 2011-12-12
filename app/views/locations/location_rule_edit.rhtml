@@ -1,0 +1,79 @@
+<b><%= _('Location') + ": " +@rule.location.name %></b>
+<br /><br />
+
+<table width="100%" class="maintable">
+  <tr>
+    <th align="center"><%= _('Enabled') %>?</th> 
+    <th align="left"><%= _('Name') %></th> 
+    <th align="left"><%= _('Cut') %></th> 
+    <th align="left"><%= _('Add') %></th> 
+    <th align="right"><%= _('Min_len') %></th> 
+    <th align="right"><%= _('Max_len') %></th>  
+<!---    <th align="right"><%= _('Lr_type') %></th>   --->
+
+    <% if @rule.lr_type == "dst" %>
+      <th  align="left"> <%= _('Tariff')%> </th>
+      <th  align="left"> <%= _('Lcr')%> </th>
+      <th align="center"><%= _('Route_to_Did') %></th>
+      <th align="left" <%= tooltip(_('Change_Calls_owner'), _('Change_User_Device_to_this_Device_explained')) %> ><%= _('Change_calls_owner') %></th>
+    <% end %>
+    <th></th>
+  </tr>
+
+  <tr class="row1">
+    <% form_tag :action => 'location_rule_change_status', :id => @rule.id do %>
+      <td align="center">
+        <%= image_submit_tag 'icons/check.png', :title => _('Disable') if @rule.enabled == 1 %>
+        <%= image_submit_tag 'icons/cross.png', :title => _('Enable') if @rule.enabled == 0 %>
+      </td>
+    <% end %>
+    <% form_tag :action => 'location_rule_update', :id => @rule.id do %>
+      <td align="left">       <%= text_field_tag 'name', @rule.name, "class" => "input", :size => "25", :maxlength => "40"  %> </td>
+      <td align="left">        <%= text_field_tag 'cut', @rule.cut, "class" => "input", :size => "10", :maxlength => "20"  %> </td>
+      <td align="left">        <%= text_field_tag 'add', @rule.add, "class" => "input", :size => "10", :maxlength => "20"  %> </td>
+      <td align="right">        <%= text_field_tag 'minlen', @rule.minlen, "class" => "input", :size => "5", :maxlength => "5"  %> </td>
+      <td align="right">        <%= text_field_tag 'maxlen', @rule.maxlen, "class" => "input", :size => "5", :maxlength => "5"  %> </td>
+  <!---    <td align="right">        <%= text_field_tag 'lr_type', @rule.lr_type, "class" => "input", :size => "5", :maxlength => "5"  %> </td> --->
+      <% if @rule.lr_type == "dst" %>
+        <td align="left">
+          <select name="tariff" <%= "disabled" if @tariffs.size < 1 %> >
+            <option value="<%= nil %>"><%= " " %> </option>
+            <% for tariff in @tariffs %>
+              <option value="<%= tariff.id %>" <%= "selected" if @rule.tariff_id == tariff.id %>><%= tariff.name %> </option>
+            <% end %>
+          </select>
+        </td>
+        <td align="left">
+          <select name="lcr" <%= "disabled" if @lcrs.size < 1 %> >
+            <option value="<%= nil %>"><%= " " %> </option>
+            <% for lcr in @lcrs %>
+              <option value="<%= lcr.id %>" <%= "selected" if @rule.lcr_id == lcr.id %>> <%= lcr.name %> </option>
+            <% end %>
+          </select>
+        </td>
+        <td align="left">
+          <select name="did" <%= "disabled" if @dids.size < 1 %> >
+            <option value="<%= nil %>"><%= " " %> </option>
+            <% for did in @dids %>
+              <option value="<%= did.id %>" <%="selected" if did.id == @rule.did_id%>><%= nice_did_with_dialplan(did) %> </option>
+            <% end %>
+          </select>
+        </td>
+        <td align="left">
+          <select name="user" id="s_user" onchange="new Ajax.Updater('user_devices_77', '<%=Web_Dir%>/devices/cli_user_devices?add=-1&id=&id='+this.value+'&did='+this.value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});" >
+            <option value="-1"><%= _('Select_user')%> </option>
+            <%for user  in @users%>
+              <option value="<%= user.id %>" <%=  'selected' if @rule.device and user.id == @rule.device.user_id%> ><%= nice_user(user)%> </option>
+            <%end%>
+          </select>
+            <%=hidden_field_tag 'device_id_from_js', @rule.device_id %>
+          <span id = 'user_devices_77'><%= select_tag("s_device", options_for_select([[_('Select_device'), "-1"]] + @devices.map{|dev| [nice_device(dev, {:image => false}) ,dev.id.to_s ]}, @rule.device_id.to_s)) if @devices and @devices.size.to_i > 0%></span>
+        </td>
+      <% end %>
+      <td align="center">     <%= submit_tag _('Edit'), :disable_with=>_('Processing..') %></td>
+    </tr>
+  <% end %>
+
+</table>
+
+<br /><br />

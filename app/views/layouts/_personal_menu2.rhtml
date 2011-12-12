@@ -1,0 +1,33 @@
+<script type="text/javascript">
+  personal_menu = new dTree('personal_menu');
+  personal_menu.config.inOrder=true;
+  personal_menu.add(0,-1,'<%= _('PERSONAL') %>');
+  personal_menu.add(1,0,'<%= _('Start_page') %>','<%= Web_Dir %>/callc/main');
+  <% if Confline.get_value("Hide_quick_stats").to_i == 1 %>
+    personal_menu.add(2,0,'<%= _('Quick_stats') %>','<%= Web_Dir %>/callc/show_quick_stats');
+  <% end %>
+  personal_menu.add(3,0,'<%= _('Details') %>','<%= Web_Dir %>/users/personal_details');
+  personal_menu.add(4,3,'<%= _('Personal') %>','<%= Web_Dir %>/users/personal_details');
+  <% if session[:show_rates_for_users].to_i == 1 or session[:usertype].to_s == 'admin'%>
+    personal_menu.add(5,3,'<%= _('Rates') %>','<%= Web_Dir %>/tariffs/user_rates');
+  <%end%>
+  personal_menu.add(6,0,'<%= _('Devices') %>','<%= Web_Dir %>/devices/user_devices');
+  personal_menu.add(7,0,'<%= _('PhoneBook') %>','<%= Web_Dir %>/phonebooks/list');
+  personal_menu.add(8,0,'<%= _('Quick_Forwards') %>','<%= Web_Dir %>/dids/quickforwarddids');
+  personal_menu.add(9,0,'<%= _('Payments') %>','<%= Web_Dir %>/payments/personal_payments');
+  personal_menu.add(10,0,'<%= _('Invoices') %>','<%= Web_Dir %>/accounting/user_invoices');
+  personal_menu.add(11,0,'<%= _('Calls') %>','<%= Web_Dir %>/stats/last_calls_stats');
+  personal_menu.add(12,0,'<%= _('CLIs') %>','<%= Web_Dir %>/devices/user_device_clis');
+  <% if sms_active? and (session[:sms_service_active].to_i == 1 or session[:usertype] == 'admin'  )%>
+    personal_menu.add(13,0,'<%= _('Sms') %>','<%= Web_Dir %>/sms/sms_list');
+    personal_menu.add(14,13,'<%= _('Send') %>','<%= Web_Dir %>/sms/sms');
+    <% if session[:show_rates_for_users].to_i == 1 or session[:usertype].to_s == 'admin'%>
+      personal_menu.add(15,13,'<%= _('Rates') %>','<%= Web_Dir %>/sms/user_rates');
+    <%end%>
+  <% end %>
+  <% if cc_active? and current_user.cards.size.to_i > 0 %>
+    personal_menu.add(16,0,'<%= _('Calling_cards') %>','<%= Web_Dir %>/cards/user_list');
+  <% end %>
+  personal_menu.add(17,0,'<%= _('Logout') %>','<%= Web_Dir %>/callc/logout');
+  $("personal_menu_div").innerHTML = personal_menu.toString();
+</script>

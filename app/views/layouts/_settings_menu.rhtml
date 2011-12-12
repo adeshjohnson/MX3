@@ -1,0 +1,77 @@
+<script type="text/javascript">
+  settings_menu = new dTree('settings_menu');
+  settings_menu.config.inOrder=true;
+  settings_menu.add(0,-1,'<%= _('SETTINGS') %>');
+  settings_menu.add(1,0,'<%= _('Setup') %>');
+  settings_menu.add(2,1,'<%= _('Settings') %>','<%= Web_Dir %>/functions/settings');
+  settings_menu.add(3,2,'<%= _('Default_user') %>','<%= Web_Dir %>/users/default_user');
+  settings_menu.add(4,2,'<%= _('Default_device') %>','<%= Web_Dir %>/devices/default_device');
+  settings_menu.add(5,2,'<%= _('Payments') %>','<%= Web_Dir %>/functions/settings_payments');
+  settings_menu.add(6,2,'<%= _('Logo') %>','<%= Web_Dir %>/functions/settings_logo');
+  settings_menu.add(7,2,'<%= _('Translations') %>','<%= Web_Dir %>/functions/translations');
+  settings_menu.add(8,2,'<%= _('Currencies') %>','<%= Web_Dir %>/currencies/currencies');
+  settings_menu.add(9,2,'<%= _('Accountant_permissions') %>','<%= Web_Dir %>/permissions/list?group_type=accountant');
+  settings_menu.add(10,2,'<%= _('Pbx_functions') %>','<%= Web_Dir %>/pbx_functions/list');
+  settings_menu.add(11,2,'<%= _('Cron_actions') %>','<%= Web_Dir %>/cron_actions');
+  <% if (rec_active?) or (cc_active?) %>
+    settings_menu.add(12,2,'<%= _('Addons') %>','<%= Web_Dir %>/functions/settings_addons');
+  <% end %>
+  settings_menu.add(13,1,'<%= _('Emails') %>','<%= Web_Dir %>/emails/list');
+  settings_menu.add(14,1,'<%= _('Backups') %>','<%= Web_Dir %>/backups/backup_manager');
+  settings_menu.add(15,1,'<%= _('Integrity_check') %>','<%= Web_Dir %>/functions/integrity_check');
+
+
+  settings_menu.add(117,0,'<%= _('Billing') %>');
+  settings_menu.add(118,117,'<%= _('Asterisk_Servers') %>','<%= Web_Dir %>/servers/list');
+  settings_menu.add(119,117,'<%= _('Providers') %>','<%= Web_Dir %>/providers/list');
+  settings_menu.add(120,119,'<%= _('Terminators') %>','<%= Web_Dir %>/terminators/list');
+  settings_menu.add(121,119,'<%= _('Hidden') %>','<%= Web_Dir %>/providers/list?s_hidden=1');
+  settings_menu.add(122,117,'<%= _('LCR') %>','<%= Web_Dir %>/lcrs/list');
+  settings_menu.add(123,117,'<%= _('Tariffs') %>','<%= Web_Dir %>/tariffs/list');
+  settings_menu.add(124,123,'<%= _('Day_setup') %>','<%= Web_Dir %>/tariffs/day_setup');
+  settings_menu.add(125,117,'<%= _('Directions') %>','<%= Web_Dir %>/directions/list');
+  settings_menu.add(126,125,'<%= _('Groups') %>','<%= Web_Dir %>/destination_groups/list');
+
+  settings_menu.add(127,117,'<%= _('DIDs') %>','<%= Web_Dir %>/dids/list');
+  settings_menu.add(128,127,'<%= _('Dial_Plans') %>','<%= Web_Dir %>/dialplans/dialplans');
+  settings_menu.add(129,127,'<%= _('Quickforwards_Rules') %>','<%= Web_Dir %>/quickforwards_rules/list');
+  settings_menu.add(130,127,'<%= _('Pbx_functions') %>','<%= Web_Dir %>/functions/pbx_functions');
+  settings_menu.add(131,130,'<%= _('Ring_Groups') %>','<%= Web_Dir %>/ringgroups');
+  settings_menu.add(132,130,'<%= _('VoiceMail') %>','<%= Web_Dir %>/functions/settings_vm');
+  settings_menu.add(133,130,'<%= _('PhoneBook') %>','<%= Web_Dir %>/phonebooks/list');
+  settings_menu.add(134,127,'<%= _('IVR') %>');
+  settings_menu.add(135,134,'<%= _('Voices') %>','<%= Web_Dir %>/ivrvoices');
+  settings_menu.add(136,134,'<%= _('Timeperiods') %>','<%= Web_Dir %>/ivr_time_periods');
+  settings_menu.add(137,134,'<%= _('IVRs') %>','<%= Web_Dir %>/ivr');
+
+  settings_menu.add(150,117,'<%= _('CDR') %>');
+  settings_menu.add(151,150,'<%= _('Import') %>','<%= Web_Dir %>/cdr/import_csv');
+  settings_menu.add(152,150,'<%= _('Rerating') %>','<%= Web_Dir %>/cdr/rerating');
+  settings_menu.add(153,117,'<%= _('Functions') %>');
+  settings_menu.add(154,153,'<%= _('Localization') %>','<%= Web_Dir %>/locations/localization');
+  settings_menu.add(155,153,'<%= _('Call_Tracing') %>','<%= Web_Dir %>/functions/call_tracing');
+
+
+  settings_menu.add(234,0,'<%= _('Accounting') %>');
+  settings_menu.add(235,234,'<%= _('Services') %>','<%= Web_Dir %>/services/list');
+  settings_menu.add(236,235,'<%= _('Subscriptions') %>','<%= Web_Dir %>/services/subscriptions');
+  settings_menu.add(237,234,'<%= _('Invoices') %>','<%= Web_Dir %>/accounting/invoices')
+  settings_menu.add(238,234,'<%= _('Payments') %>','<%= Web_Dir %>/payments/list');
+  settings_menu.add(239,234,'<%= _('Vouchers') %>','<%= Web_Dir %>/vouchers/vouchers');
+
+  settings_menu.add(340,0,'<%= _('Users') %>','<%= Web_Dir %>/users/list');
+  settings_menu.add(341,340,'<%= _('Hidden') %>','<%= Web_Dir %>/users/hidden');
+  settings_menu.add(342,340,'<%= _('Devices') %>','<%= Web_Dir %>/devices/devices_all');
+  settings_menu.add(343,342,'<%= _('CLIs') %>','<%= Web_Dir %>/devices/clis');
+
+
+  settings_menu.add(344,340,'<%= _('Import') %>','<%= Web_Dir %>/functions/import_user_data');
+  <% if show_recordings? %>
+    <% if !defined?(REC_Active) or (defined?(REC_Active) and REC_Active == 0) %>
+      settings_menu.add(345,340,'<%= _('Recordings') %>','<%= Web_Dir %>/recordings/setup','', '', '<%= Web_Dir %>/images/dtree/musicfolder.gif');
+    <% end %>
+  <% end %>
+  settings_menu.add(347,340,'<%= _('Login_as') %>','<%= Web_Dir %>/functions/login_as');
+
+  $("settings_menu_div").innerHTML = settings_menu.toString();
+</script>

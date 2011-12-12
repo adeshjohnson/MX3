@@ -1,0 +1,64 @@
+<table width="100%">
+  <tr>
+    <td>
+        <%= link_to b_groups + _('Batch_management'), :action => 'bullk_for_activate' %>
+    </td>
+    <td align="right">
+      <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+    </td>
+  </tr>
+</table>
+
+<% form_tag :action => params[:action] do %>
+  <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+    <br />
+
+    <%= _('Number') %>: <%= text_field_tag 's_number', @options[:s_number], "class" => "input", :size => "15" %>
+    <%= _('Name') %>: <%= text_field_tag 's_name', @options[:s_name], "class" => "input", :size => "15"  %>
+    <%= _('PIN') %>: <%= text_field_tag 's_pin', @options[:s_pin], "class" => "input", :size => "15"  %>
+    <%= _('Balance_between') %>: <%= text_field_tag 's_balance_min',@options[:s_balance_min], "class" => "input", :size => "7", :maxlength => "10"  %> -
+    <%= text_field_tag 's_balance_max', @options[:s_balance_max], "class" => "input", :size => "7", :maxlength => "10"  %>
+
+   &nbsp;&nbsp;<%= _('Active') %>?:
+    <select name="s_sold" >
+      <option value="all" selected> <%= _('All') %> </option>
+      <option value="yes" <%= "selected" if @options[:s_sold] == "yes"%>> <%= _('Yes') %> </option>
+      <option value="no" <%= "selected" if @options[:s_sold] == "no"%>> <%= _('No') %> </option>
+
+    </select>
+    &nbsp;&nbsp;<%= _('Language') %>:
+    <%= text_field_tag 's_language', @options[:s_language], "class" => "input", :size => "10", :maxlength => "10"  %>
+    &nbsp;&nbsp;<%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
+  </div>
+<span style="float:right;"><%= link_to b_cross + _('Clear_search'), :action => params[:action], :clean=>1%></span>
+<% end %>
+<br />
+<%=page_select_header(@options[:page], @total_pages, @options)%>
+<br />
+<table class="maintable" width="100%">
+  <tr>
+    <th align="left"><%=nice_list_order("number", _('Number'), @options)%></th>
+    <th align="left"><%=nice_list_order("name", _('Name'), @options)%></th>
+    <th align="left"><%=nice_list_order("pin", _('PIN'), @options)%></th>
+    <th align="right"><%=nice_list_order("balance", _('Balance') + " (#{_('Without_VAT')}) ", @options)%><%= current_user.currency.name %></th>
+    <th align="center"><%=nice_list_order("first_use", _('First_use'), @options)%></th>
+    <th align="center"><%=nice_list_order("sold", _('Activate/Deactivate'), @options)%></th>
+    <th align="center"><%=nice_list_order("language", _('Language'), @options)%></th>
+    <th></th>
+  </tr>
+
+  <% @cards.each_with_index { |@card, i| %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <td id="number_<%= @card.id %>" align="left"><%= @card.number %></td>
+      <td id="name_<%= @card.id %>" align="left"><%= @card.name %></td>
+      <td id="pin_<%= @card.id %>" align="left"><%= @card.pin %></td>
+      <td id="balance_<%= @card.id %>" align="right"><%= nice_number @card.balance %></td>
+      <td id="first_use_<%= @card.id %>" align="center"><%= nice_date_time @card.first_use %></td>
+      <td id="sold_<%= @card.id %>" align="center"><%= link_to @card.sold == 1 ? b_check : b_cross, {:action=>:card_active, :id=>@card.id}, {:confirm => _('Are_you_sure'), :method => :post} %></td>
+      <td id="lang_<%= @card.id %>" align="center"><%= @card.language %></td>
+      <td id="calls_<%= @card.id %>" align="center"><%= link_to(b_call, {:controller => 'stats', :action => 'cc_call_list', :id => @card}, {:id =>"calls_link_"+ @card.id.to_s}) %> (<%= @card.calls.count %>)</td>
+    </tr>
+  <% } %>
+</table>
+<br />
+<%=page_select_header(@options[:page], @total_pages,  @options)%>

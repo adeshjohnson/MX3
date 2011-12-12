@@ -1,0 +1,6 @@
+<% form_tag :action => "role_create" do%>
+  <%= _("New_Role") %>:<br /><br />
+  <%= _("Name")%>:<%= text_field "role", "name", "class" => "input"%><br /><br />
+  <%= submit_tag _('Create'), :disable_with=>_('Processing..') %>
+<% end%>
+<br />

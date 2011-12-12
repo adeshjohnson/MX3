@@ -1,0 +1,4 @@
+<b><%= link_to([b_provider, _('Provider'), ": ", @provider.name].join(), {:controller => :providers, :action => :edit, :id => @provider.id}) %></b>
+<br />
+<%= render :partial => "provider_rules", :locals =>{:name => _('Provider_rules_dst'), :rules => @rules_dst, :provider => @provider, :type => "dst"} %>
+<%= render :partial => "provider_rules", :locals =>{:name => _('Provider_rules_src'), :rules => @rules_src, :provider => @provider, :type => "src"} %>

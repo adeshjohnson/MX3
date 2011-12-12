@@ -1,0 +1,7 @@
+
+<% form_tag(:action => 'lcr_create') do %>
+  <%= render :partial => 'lcr_form' %>
+  <%= submit_tag _('Create'), :disable_with=>_('Processing..') %>
+<% end %>
+
+<br><br>    

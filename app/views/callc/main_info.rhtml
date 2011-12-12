@@ -1,0 +1,227 @@
+<table class="nb" width="100%">
+  <tr>
+    <td width="50%" valign="top">
+      <br />
+      <%= _('hello') %>, <%= @username %>
+      <br />
+      <br />
+
+      <%= session[:frontpage_text].to_s %>
+
+      <% if sms_active? && Confline.get_value("Send_SMS_from_Front_page").to_i == 1 && current_user.can_send_sms?%>
+        <br />
+        <br />
+        <br />
+        <br />
+        <%= session[:frontpage_sms_text] %>
+        <br />
+        <%= render "/sms/sms"  %>
+      <%end%>
+
+      <% if @user.postpaid == 0 or (@user.postpaid == 1 and Confline.get_value("Hide_payment_options_for_postpaid_users", 0).to_i == 0) %>
+
+        <% if  @pp_enabled == 1 or @wm_enabled == 1 or  @vouch_enabled == 1 or @lp_enabled == 1 or @cp_enabled == 1 or @ob_enabled == 1 %>
+          <br />
+          <br />
+          <br />
+          <br />
+          <%= _('We_accept') %>:
+        <% end %>
+
+        <% if  @vouch_enabled == 1%>
+          <br />
+          <br />
+          <%= link_to image_tag("logo/vouchers_logo.png",  :style => 'border-style:none', :title => "Vouchers"), :controller => "vouchers", :action => "voucher_use" %>
+        <% end %>
+
+        <% if @pp_enabled == 1 %>
+          <br />
+          <br />
+          <%= link_to image_tag("logo/paypal_logo.gif",  :style => 'border-style:none', :title => "PayPal", :width => '190'), :controller => "payments", :action => "paypal" %>
+        <% end %>
+
+        <% if @wm_enabled == 1%>
+          <br />
+          <br />
+          <%= link_to image_tag("logo/webmoney_logo.gif",  :style => 'border-style:none', :title=>"WebMoney", :width => '190'), :controller=>"payments", :action => "webmoney" %>
+        <% end %>
+
+        <% if @lp_enabled == 1%>
+          <br />
+          <br />
+          <%= link_to image_tag("logo/linkpoint_logo.jpg",  :style => 'border-style:none', :title=>"LinkPoint", :width => '190'), :controller=>"payments", :action => "linkpoint" %>
+        <% end %>
+
+        <% if  @cp_enabled == 1 %>
+          <br />
+          <br />
+          <%= link_to image_tag("logo/cyberplat_logo.gif",  :style => 'border-style:none', :title => "Cyberplat") + image_tag("logo/cyberplat_logo.jpg",  :style => 'border-style:none', :title => "Cyberplat"), :controller => "payments", :action => "cyberplat" %>
+        <% end %>
+
+        <% if  @ob_enabled == 1 %>
+          <br />
+          <br />
+          <table>
+            <tr>
+              <td>
+                <%= link_to image_tag("logo/ouroboros_logo.jpg",  :style => 'border-style:none', :title => "Ouroboros", :width => '190') , :controller => "payments", :action => "ouroboros" %>
+              </td>
+            </tr>
+            <%if @ob_link_name.to_s != "" and @ob_link_url.to_s != ""%>
+              <tr>
+                <td align="center">
+                  <a href="<%= nice_web(@ob_link_url.to_s)%>" target="cont"><%= @ob_link_name.to_s %></a>
+                </td>
+              </tr>
+            <%end%>
+          </table>
+        <% end %>
+
+        <% if payment_gateway_active? %>
+          <% @engine = GatewayEngine.find(:enabled, {:for_user => current_user.id}).enabled_by(current_user.owner_id) %>
+          <% if @engine.size > 0 %>
+            <% test_env = Confline.get_value("test_production_environment") %>
+            <table>
+              <% @engine.enabled_by(current_user.owner_id).gateways.each do |engine, gateways| %>
+                <% gateways.each do |name, gateway| %>
+                  <% if test_env == "true" %>
+                    <% if gateway.settings['testing'] %>
+                      <tr>
+                        <td>
+                          <br />
+                          <br />
+                          <%= gateway_link(name, engine, gateway) %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  <% else %>
+                    <% unless gateway.settings['testing'] %>
+                      <tr>
+                        <td>
+                          <br />
+                          <br />
+                          <%=  gateway_link(name, engine, gateway) %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </table>
+          <% end %>
+        <%end%>
+      <% end %>
+
+    </td>
+
+    <td valign="middle">
+
+      <%    if Confline.get_value("Hide_quick_stats").to_i == 0	%>
+        <b><%= _('Quick_stats') %></b><br /><br />
+        <table class="nb" width="50%">
+          <tr>
+            <th class="bottom_border" align="left" colspan=2> <%= _('This_month') %>: </th>
+          </tr>
+          <tr>
+            <td><%= _('Calls') %>:</td>
+            <td><%= @quick_stats[0] %> </td>
+          </tr>
+          <tr>
+            <td><%= _('Duration') %>:</td>
+            <td><%= nice_time @quick_stats[1] %> </td>
+          </tr>
+          <% if session[:usertype] == "admin" or session[:usertype] == "reseller"%>
+            <tr>
+              <td><%= _('Selfcost') %>:</td>
+              <td><%= nice_number(@quick_stats[2].to_f) %></td>
+            </tr>
+            <tr>
+              <td><%= _('Cost') %>:</td>
+              <td><%= nice_number(@quick_stats[3].to_f) %></td>
+            </tr>
+            <tr>
+              <td><%= _('Profit') %>:</td>
+              <td><%= nice_number(@quick_stats[3].to_f - @quick_stats[2].to_f) %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td style="height: 10px"></td>
+          </tr>
+          <tr>
+            <th class="bottom_border" align="left" colspan=2>                     <%= _('This_day') %>:                </th>
+          </tr>
+          <tr>
+            <td><%= _('Calls') %>:</td>
+            <td><%= @quick_stats[4] %> </td>
+          </tr>
+          <tr>
+            <td><%= _('Duration') %>:</td>
+            <td><%= nice_time @quick_stats[5] %> </td>
+          </tr>
+          <% if session[:usertype] == "admin" or session[:usertype] == "reseller"%>
+            <tr>
+              <td><%= _('Selfcost') %>:</td>
+              <td><%= nice_number(@quick_stats[6].to_f) %></td>
+            </tr>
+            <tr>
+              <td><%= _('Cost') %>:</td>
+              <td><%= nice_number(@quick_stats[7].to_f) %></td>
+            </tr>
+            <tr>
+              <td><%= _('Profit') %>:</td>
+              <td><%= nice_number(@quick_stats[7].to_f  - @quick_stats[6].to_f) %></td>
+            </tr>
+          <% end %>
+
+          <% if session[:usertype] != "admin" %>
+            <tr>
+              <td style="height: 10 px"></td>
+            </tr>
+            <tr>
+              <th class="bottom_border" align="left" colspan=2> <%= _('Finances') %>: </th>
+            </tr>
+            <tr>
+              <td><%= _('Account') %>:</td>
+              <td><%= _('Postpaid') if @user.postpaid == 1%> <%= _('Prepaid') if @user.postpaid != 1%></td>
+            </tr>
+            <tr>
+              <td><%= _('Balance') %>:</td>
+              <td><%= nice_number(@user.balance.to_f) %> <%= session[:default_currency] %> <%= "(" + nice_number(@user.get_tax.apply_tax(@user.balance.to_f)) + " " + session[:default_currency] + " "+  _('With_TAX')  + ")" if @user.get_tax.sum_tax.to_f != 0.to_f %></td>
+            </tr>
+            <% if @user.postpaid == 1%>
+              <tr>
+                <td><%= _('Credit') %>:</td>
+                <td><%= _('Unlimited') if @user.credit == -1%> <%= nice_number @user.credit if @user.credit != -1%></td>
+              </tr>
+            <% end %>
+          <% end %>
+
+          <% if allow_manage_providers? %>
+            <tr>
+              <td style="height: 10px"></td>
+            </tr>
+            <tr>
+              <th class="bottom_border" align="left" colspan=2> <%= _('Now') %>: </th>
+            </tr>
+            <tr>
+              <td><%= _('Active_Calls') %>:</td>
+              <td>
+                <div id="active_calls_count"><%= link_to(Activecall.count_for_user(current_user), {:controller=> "stats", :action => "active_calls"},{:id => "active_calls_link"}) %></div>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+        <% if allow_manage_providers? %>
+          <%= periodically_call_remote(:update => 'active_calls_count',
+            :url => { :controller => "stats",  :action => "active_calls_count" },
+            :frequency => session[:active_calls_refresh_interval] ,
+            :loading => "Element.show('spinner');",
+            :complete=> "Element.hide('spinner');") %>
+        <% end %>
+
+      <% end %>
+
+    </td>
+  </tr>
+</table>
+<% @temp %>

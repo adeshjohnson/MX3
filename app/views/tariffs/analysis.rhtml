@@ -1,0 +1,71 @@
+
+<br>
+
+<% form_tag :action => 'analysis2' do %>
+
+
+<table width="50%" class="maintable">
+
+  <tr>
+    <th align="left" colspan=4><%= _('For_providers') %> - <%= _('Inbound_traffic') %></th>
+  </tr>
+
+  <tr>
+    <th align="left" width="50%"><%= _('Name') %></th>
+    <th align="center"><%= _('Rates') %></th>
+    <th align="center"><%= _('Currency') %></th>
+    <th width="10%"></th>   
+  </tr>
+
+<% i = 0 %>     
+<% for tariff in @prov_tariffs %>
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+  <% rates = Rate.find(:all, :conditions => "tariff_id = '#{tariff.id}' AND destination_id != 0") %>
+    <td width="50%"><%=h tariff.name %></td>
+    <td align="center"><%= link_to b_rates + _('Rates'), :action => 'rates_list', :id => tariff %> (<%= rates.size %>)</td>    
+    <td align="center"><%= tariff.currency %></td>
+    <td align="center"><%= check_box_tag 't'+tariff.id.to_s, value = "1", checked = false %></td>
+  </tr>
+  <% i += 1%>    
+<% end %>
+
+
+  <tr>
+    <th align="left" colspan=4><%= _('User_wholesale_tariffs') %> - <%= _('Outbound_traffic') %></th>
+  </tr>
+
+  <tr>
+    <th align="left" width="50%"><%= _('Name') %></th>
+    <th align="center"><%= _('Rates') %></th>    
+    <th align="center"><%= _('Currency') %></th>
+    <th width="10%"></th>       
+  </tr>
+
+<% i = 0 %>     
+<% for tariff in @user_wholesale_tariffs %>
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+  <% rates = tariff.rates %>
+    <td><%=h tariff.name %></td>
+    <td align="center"><%= link_to b_rates + _('Rates'), :action => 'rates_list', :id => tariff %> (<%= rates.size %>)</td>      
+    <td align="center"><%= tariff.currency %></td>
+    <td align="center"><%= check_box_tag 't'+tariff.id.to_s, value = "1", checked = false %></td>
+  </tr>
+  <% i += 1%>    
+<% end %>
+</table>
+
+<br><br>
+
+<%= _('Currency') %>:
+<select name="currency" >
+<% for curr in @currs %>
+    <option value="<%= curr.name %>" ><%= curr.name %></option>    
+<% end %>
+</select>
+
+
+<br><br>
+	<%= submit_tag _('Select'), :disable_with=>_('Processing..')%>
+
+<br>
+<% end %>

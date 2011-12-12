@@ -1,0 +1,37 @@
+<% row_count = 0%>
+<br />
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Name') %></th> 
+    <th align="left"></th> 
+    <th align="left"></th>
+  </tr>
+
+  <tr <%= @destinations_without_dg.size > 0 ? "class='red'" : "class='row#{row_count%2+1}'"%> >
+    <td align="left">        <%= _('Destinations_without_Destination_Groups') %> </td>
+    <td align="right">        <%= @destinations_without_dg.size %> </td>
+    <td align="center" id="fix_dest">        <%= link_to b_fix + _('Fix'), :controller => "destination_groups", :action => "destinations_to_dg" if @destinations_without_dg.size > 0 %> </td>
+  </tr>
+  <% row_count+=1%>
+
+  <tr <%= @dialplans.size > 0 ? "class='red'" : "class='row#{row_count%2+1}'"%> >
+    <td align="left">        <%= _('Dialplans_Not_Updated') %> </td>
+    <td align="right">        <%= @dialplans.size %> </td>
+    <td align="center" id="fix_dialpl">        <%= link_to b_fix + _('Fix'), :controller => "dids", :action => "reformat_dialplans" if @dialplans.size > 0 %> </td>
+  </tr>
+  <tr <%= @actions.size > 0 ? "class='red'" : "class='row#{row_count%2+1}'"%> >
+    <td align="left">        <%= _('Actions_errors') %> </td>
+    <td align="right">        <%= @actions.size %> </td>
+    <td align="center" id="fix_actions">        <%= link_to b_fix + _('Fix'), :controller => "stats", :action => "action_log", :s_int_ch => 1 if @actions.size > 0 %> </td>
+  </tr>
+  <tr <%= @devices.size > 0 ? "class='red'" : "class='row#{row_count%2+1}'"%> >
+    <td align="left">        <%= _('Devices_with_weak_password') %> </td>
+    <td align="right">        <%= @devices.size %> </td>
+    <td align="center" id="fix_devices">        <%= link_to b_fix + _('Fix'), :controller => "devices", :action => "devices_weak_passwords" if @devices.size > 0 %> </td>
+  </tr>
+  <tr <%= @users.size > 0 ? "class='red'" : "class='row#{row_count%2+1}'"%> >
+    <td align="left">        <%= _('Users_with_weak_password') %> </td>
+    <td align="right">        <%= @users.size %> </td>
+    <td align="center" id="fix_devices">        <%= link_to b_fix + _('Fix'), :controller => "users", :action => "users_weak_passwords" if @users.size > 0 %> </td>
+  </tr>
+</table>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>autodialer2</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">autodialer2</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>campaign_name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/import_numbers_from_file/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/valid_numbers.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_2</td>
+	<td>37011111111</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/import_numbers_from_file/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/invalid_numbers.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--* validate that invalid number didnt get inserted-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0 out of 1 numbers were imported</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>number_3</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

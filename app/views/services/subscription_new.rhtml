@@ -1,0 +1,48 @@
+<div class="nb"><%= b_user + _('user') %>: <%= nice_user(@user) %></div>
+<br>
+<% form_tag :action => 'subscription_create', :id => @user.id, :added => Time.now do %>
+  <table width="100%" class="simple">
+    <tr>
+      <td> <%= _('Service')  %>:   </td>
+      <td>    
+       <select name="subscription[service_id]" id="subscription_service_id" onchange="change_date_selector(this.value);" >
+          <% for serv in @services %>
+            <option value=<%= serv.id %>> <%= serv.name %>, <%= _('Price') %>: <%= serv.price %> </option>
+          <% end %>                      
+        </select>             
+      </td>  
+    </tr>
+    <tr>
+      <td><%= _('Memo')  %>:</td>
+      <td><%= text_field_tag 'subscription[memo]', "", "class" => "input", :size => "50", :maxlength => "150" , :id =>'subscription_memo' %></td>  
+    </tr>
+    <tr>
+      <td> <%= _('Date')  %>:</td>
+      <td> <%= nice_date_time Time.now %></td>          
+    </tr>
+    <tr>
+      <td> <%= _('Activation_start')  %></td>
+      <td> <%= select_datetime(Time.now, :end_year => Date.today.year+10, :prefix => "activation_start", :use_month_numbers => false) %></td>  
+    </tr>
+    <tr id="activation_end">
+      <td> <%= _('Activation_end')  %></td>
+      <td> <%= select_datetime(Time.now, :end_year => Date.today.year+10, :prefix => "activation_end", :use_month_numbers => false) %></td>  
+    </tr>
+  </table>
+  <%= hidden_field_tag 'subscription[added]', Time.now, {:id => 'subscription_added' } %>        
+  <br>
+  <%= submit_tag _("Add"), :disable_with=>_('Processing..') %>
+<% end %>
+  <script type="text/javascript">
+    function change_date_selector(val) {
+      
+      var one_time_fees = new Array(<%= @services.collect{|s| s.id if s.servicetype == "one_time_fee"}.compact.join(",")%>);
+      if (one_time_fees.indexOf(val) == -1) {
+        $('activation_end').style.display = '';
+      }
+      else {
+        $('activation_end').style.display = 'none';
+      }
+    }
+    change_date_selector(<%= @services[0].id if @services.size > 0 %>);
+  </script>

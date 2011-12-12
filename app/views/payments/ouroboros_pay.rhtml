@@ -1,0 +1,42 @@
+<% if @enabled == 1 %>
+  <div align="right">
+    <%= image_tag("logo/ouroboros_logo.jpg",  :style => 'border-style:none', :title => "Ouroboros") %>
+  </div>
+  <% ouroboros_form_tag do %>
+    <%= ouroboros_setup({
+        :mch_code => @merchant_code.to_s,
+        :amount => @payment.amount.to_s,
+        :order_id => @payment.id.to_s,
+        :return_url => @ouroboros_return_url.to_s,
+        :accept_url => @ouroboros_accept_url.to_s,
+        :cancel_url => @ouroboros_cancel_url.to_s,
+        :lang => @lang.to_s,
+        :currency => @currency.to_s,
+        :customer_name => @user.first_name,
+        :customer_surname => @user.last_name,
+        :customer_address => @address.address,
+        :customer_city => @address.city,
+        :customer_country => @direction.to_s,
+        :description => @description.to_s,
+        :payment_policy => @policy.join(","),
+        :secret_key => @secret_key.to_s
+      }) %>
+    <%= _('Please_press_here_to_pay')%>* <%= nice_number @amount %> <%= @currency %>
+    <br><br>
+    <%= submit_tag _('Pay'), :disable_with=>_('Processing..') %>
+    <br>
+    <br>
+    <div class = "simple">
+      *<%= _('Your_VAT') %>: <%= @vat %>%. <%= _('Total_amount_to_pay')%>: <%= nice_number @amount_with_vat %> <%= @currency %>
+    </div>
+  <% end %>
+<% else %>
+  <%=_('Ouroboros_disabled')%>
+<% end %>
+
+
+
+
+
+
+

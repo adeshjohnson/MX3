@@ -1,0 +1,183 @@
+<table width="100%" >
+  <tr>
+    <td valign="top">
+      <p class='ringgroup_class' style="margin-top:3px;"><%= _('Ring_Group_name') %>: <%= text_field_tag 'dialplan[name]', @dialplan.name, "class" => "input", :size => "30", :maxlength => "50"  %></p>
+
+      <p class='ringgroup_class' style="margin-top:10px;"><%= _('Comment') %>: <%= text_field_tag 'ringgroup[comment]', @ringgroup.comment, "class" => "input", :size => "55"%></p>
+      <br />
+      <br />
+      <% if params[:action].to_s != 'new' and params[:action].to_s != 'create' %>
+        <p class='ringgroup_class' style="margin-top:-2px;"><%= _('This_Ring_Group_will_be_reached_by_such_DIDs') %>:
+
+        <div id="new_ajax_did" style="font-size:11px;padding:3px;">
+          <% dids = @dialplan.dids %>
+          <div class="ringgroup_items" style="padding-left:4px;">
+            <%if dids.size.to_i > 0%>
+              <% for did in dids  %>
+                <%= link_to did.did,  :controller=>:dids, :action => "edit", :id => did.id %><br />
+              <% end %>
+            <%else%>
+              <%= link_to b_warning + _('Assign_DID'), {:controller=>:dids, :action =>:list}, :id=>"dp_not_assign_#{@dialplan.id}"%>
+            <%end%>
+          </div>
+          <div style="margin-top:2px;">
+            <b ><%=link_to_function(b_add + _('Add_new_DID'), "Element.toggle('add_new_did')")%></b>
+            <div id="add_new_did" style='display:none; margin-top:2px;padding-left:4px;' class="ringgroup_items">
+              <% if @free_dids and @free_dids.size.to_i > 0 %>
+                <%= _('DID') %>:
+                <select name="did_id" id="did_id">
+                  <% for d in @free_dids %>
+                    <option value=<%= d.id %>> <%= d.did %> </option>
+                  <% end %>
+                </select>
+                <span onclick="new Ajax.Updater('new_ajax_did', '<%=Web_Dir%>/dialplans/did_assign_to_dp?id=<%=@dialplan.id%>&ringgroup=1&did_id=' + document.getElementById('did_id').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');Update_dids();}, onLoading:function(request){Element.show('spinner');}});Delete_did_options();" ><%=b_add%> <%=_('Add_this_DID')%></span>
+              <%else%>
+                <%=_('No_Dids_aviable_to_add')%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        </p>
+      <%end%>
+      <br/>
+
+      <p class='ringgroup_class' style="margin-top:3px;"><%= _('This_Ring_Group_will_be_reached_by_such_local_extension') %>: <%= text_field_tag 'dialplan[data2]', @dialplan.data2, "class" => "input", :size => "5", :maxlength => "50"  , :onchange=>"Update_extlines();"%></p>
+      <br />
+      <% if params[:action].to_s != 'new' and params[:action].to_s != 'create'%>
+        <p class='ringgroup_class' style="margin-top:5px;"><%= _('Will_ring_these_devices') %>:
+        <div id="new_ajax_devices" style="margin-top:5px;"><%= render :partial => 'devices' %></div>
+        </p>
+      <%end%>
+
+      <p class='ringgroup_class' style="margin-top:25px;"><%= _('Ring_Time_(how_long_device_will_ring)') %>: <%= text_field_tag 'ringgroup[timeout]', @ringgroup.timeout, "class" => "input", :size => "2", :maxlength => "50"  , :onchange=>"Update_extlines();"%> <%=_('seconds')%></p>
+
+      <p class='ringgroup_class' style="margin-top:13px;"><%= _('Options_to_use_when_dialing_(Advanced)') %>: <%= text_field_tag 'ringgroup[options]', @ringgroup.options, "class" => "input", :size => "25", :maxlength => "50" , :onchange=>"Update_extlines();" %></p>
+
+      <p class='ringgroup_class' style="margin-top:13px;"><%= _('Dialing_Strategy') %>: <%= select_tag 'ringgroup[strategy]', options_for_select([[_('ringall'), 1]], @ringgroup.strategy.to_s ) %></p>
+
+      <p class='ringgroup_class' style="margin-top:13px;"><%= _('CallerID_prefix') %>: <%= text_field_tag 'ringgroup[cid_prefix]', @ringgroup.cid_prefix, "class" => "input", :size => "20", :maxlength => "50"  , :onchange=>"Update_extlines();" %></p>
+
+      <p class='ringgroup_class' style="margin-top:13px;"><%= _('Route_to_DID_if_No_Answer') %>:
+        <select name="ringgroup[did_id]" id="ringgroup[did_id]" onchange="Show_did(this.value);Update_extlines();">
+          <option value='0' <%= 'selected' if @ringgroup.did_id.to_i == 0 %> > <%= _('None') %> </option>
+          <% for d in @dids %>
+            <option value='<%= d.id %>' <%= 'selected' if @ringgroup.did_id.to_i == d.id %>> <%= d.did %> </option>
+          <% end %>
+        </select>
+      </p>
+      <%if params[:action].to_s != 'new' and params[:action].to_s != 'create'%>
+        <p class='ringgroup_class' style="margin-top:18px;"><%= submit_tag _('Update') , :disable_with=>_('Processing..')%></p>
+      <%end%>
+    </td>
+    <td valign="top" >
+      <% if params[:action].to_s != 'new' and params[:action].to_s != 'create' %>
+        <div  class="ringgroup_items" style="font-weight: bold;text-align:center;">
+          <br />
+          <p class='ringgroup_class'><%=b_call%> <%=_('Call')%></p>
+          <p class='ringgroup_class'><%=b_down%></p>
+
+          <div style="float: left;text-align:right;width: 190px;"><%=_('Dids')%>:&nbsp;&nbsp;</div>
+          <div class="ringgroup_items2" id ="show_dids" style="float: left;text-align:left;" >
+            <%if @dialplan.dids.size.to_i > 0%>
+              <% for did in @dialplan.dids  %>
+                <%= link_to did.did,  :controller=>:dids, :action => "edit", :id => did.id %><br/>
+              <% end %>
+            <%end%>
+          </div>
+          <div style="clear: both;margin-bottom:4px;"></div>
+
+          <p class='ringgroup_class'><%=b_down%></p>
+          <p class='ringgroup_class'><%=_('Local_Extension')%>: <span class="ringgroup_items2"><%=@dialplan.data2%></span></p>
+          <p class='ringgroup_class'><%=b_down%></p>
+
+          <div style="float: left;text-align:right;width: 190px;"><%=_('Ring_Devices')%>:&nbsp;&nbsp;</div>
+          <div class="ringgroup_items2" id ="show_devices" style="float: left;text-align:left;font-weight:normal;">
+            <ul style="list-style-type: none;margin:2px;padding-left: 0px;font-size:10px;">
+              <%if @devices.size.to_i > 0%>
+                <% for dev in @devices   %>
+                  <li style="height: 17px;"><%= link_nice_device(dev) %></li>
+                <% end %>
+              <%end%>
+            </ul>
+          </div>
+          <div style="clear: both;margin-bottom:4px;"></div>
+
+          <p class='ringgroup_class'><%=b_down%></p>
+          <p class='ringgroup_class'><%=_('If_none_device_answers_in')%> <span class="ringgroup_items2" ><%=@ringgroup.timeout%></span> <%=_('seconds')%></p>
+          <p class='ringgroup_class' id="show_did3"><%=b_down%></p>
+          <p class='ringgroup_class' id="show_did2"><span id="did_value3"><%=_('DID')%>:<span class="ringgroup_items2" id="did_value"><%=@ringgroup.did.did if @ringgroup.did%></span></span>
+            <span id="did_value2" style="display:none;"><%=b_cross + _('Call_end')%></span></p>
+          <br />
+        </div>
+        <br />
+        <p class='ringgroup_class' style="font-weight: bold;font-size:12px;"><%=link_to_function(b_extlines + _('Show_Extension_lines'), "Element.toggle('show_extlines')")%></p>
+
+        <div id="show_extlines"  class="ringgroup_items" style="display:none;font-size:10px;" >
+          <p style="padding-left: 10px;">
+            <%for ext in @extlines%>
+              exten =>  <%= ext.exten %>,<%= ext.priority %>,<%= ext.app %>(<%= ext.appdata %>)
+              <br/>
+            <%end%>
+          </p>
+        </div>
+      <%end%>
+    </td>
+  </tr>
+</table>
+
+<% if params[:action].to_s != 'new' and params[:action].to_s != 'create' %>
+  <script type="text/javascript">
+    function Update_devices() {
+    new Ajax.Updater('show_devices', '<%=Web_Dir%>/ringgroups/show_devices/<%=@ringgroup.id%>', {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}})
+    Update_extlines();
+    }
+    function Update_dids() {
+    new Ajax.Updater('show_dids', '<%=Web_Dir%>/ringgroups/show_dids/<%=@ringgroup.id%>', {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}})
+    Update_extlines();
+    }
+    function Update_extlines() {
+    var elt = document.getElementById("ringgroup[did_id]");
+    new Ajax.Updater('show_extlines', '<%=Web_Dir%>/ringgroups/show_extlines/<%=@ringgroup.id%>?prefix=' +document.getElementById('ringgroup[cid_prefix]').value + '&did=' + elt.options[elt.selectedIndex].text + '&timeout=' + document.getElementById('ringgroup[timeout]').value + '&options=' + document.getElementById('ringgroup[options]').value + '&exten=' + document.getElementById('dialplan[data2]').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}})
+    }
+
+    function Show_did(value) {
+
+    var select = document.getElementById("did_id");
+
+    for (var i=0, option; option = select.options[i]; i++)
+    {
+    if (option.value == value){
+    option.disabled = true;
+    option.selected = false;}
+    else{
+    option.disabled = false;
+    }
+    }
+    $('did_value2').style.display = '';
+    $('did_value3').style.display = 'none';
+    if (value != 0) {
+
+    $('did_value2').style.display = 'none';
+    $('did_value3').style.display = '';
+    var elt2 = document.getElementById("ringgroup[did_id]");
+    $('did_value').innerHTML = elt2.options[elt2.selectedIndex].text;
+
+    }
+
+    }
+
+    function Delete_did_options(){
+    var select3 = document.getElementById("ringgroup[did_id]");
+
+    for (var i=0, option; option = select3.options[i]; i++)
+    {
+    if (option.value == document.getElementById('did_id').value){
+    option.remove();
+    }
+    }
+    }
+
+    Show_did('<%= @ringgroup.did_id.to_i %>');
+  </script>
+<%end%>

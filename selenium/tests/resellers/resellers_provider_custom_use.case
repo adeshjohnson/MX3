@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>resellers_provider_custom_use</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">resellers_provider_custom_use</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>own_providers</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>test_p</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>provider[common_use]_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=test_p SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>sys_ani_2</td>
+	<td>test_p</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>SIP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>server_ip_2</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New LCR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lcr_name</td>
+	<td>aaa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td[@id='providers_2']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//option[@value='2']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>//option[@value='2']</td>
+	<td>test_p - SIP/0.0.0.0</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>select_prov</td>
+	<td>label=test_p</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>SIP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>server_ip_2</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_2</td>
+	<td>test_p</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tech_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_name_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>lcr[order]</td>
+	<td>label=Priority</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td[@id='providers_2']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>SIP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>server_ip_2</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_2</td>
+	<td>test_p</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tech_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_name_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Change Order</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>item_2</td>
+	<td>test_p</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>SIP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>server_ip_2</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>lcr[order]</td>
+	<td>label=Percent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td[@id='providers_2']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>SIP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>server_ip_2</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_2</td>
+	<td>test_p</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tech_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_name_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Change Percent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>test_p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>SIP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>server_ip_2</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_rules/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title_icon</td>
+	<td>Providers</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title_icon</td>
+	<td>Providers</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title_icon</td>
+	<td>Providers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>sys_ani_2</td>
+	<td>test_p</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/hide/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title_icon</td>
+	<td>Providers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>sys_ani_2</td>
+	<td>test_p</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_test/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title_icon</td>
+	<td>Providers</td>
+</tr>
+</tbody></table>
+</body>
+</html>

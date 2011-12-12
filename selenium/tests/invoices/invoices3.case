@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>invoices3</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">invoices3</td></tr>
+</thead><tbody>
+<!--Test start-end time-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/invoice_start_end_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_issue_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_issue_month</td>
+	<td>label=May</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_issue_day</td>
+	<td>label=4</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotEditable</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_quantity_1</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/1?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>quantity: &quot;5&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_hour</td>
+	<td>label=12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_minute</td>
+	<td>label=12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_hour</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_minute</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invoice deleted: INV1010011</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_issue_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_issue_month</td>
+	<td>label=May</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_issue_day</td>
+	<td>label=4</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_quantity_3</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/2?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>quantity: &quot;5&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_issue_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_issue_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_issue_day</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Issue date</td>
+	<td>Issue date</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>inv_issue_3</td>
+	<td>2010-01-11</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>inv_issue_2</td>
+	<td>2011-05-04</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Magnifier']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Issue date:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>s_issue_date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_issue_date</td>
+	<td>label=2010-01-11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>inv_issue_3</td>
+	<td>2010-01-11</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>inv_issue_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_quantity_5</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/3?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>quantity: &quot;2&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invoice deleted: INV1010021</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_postpaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_quantity_7</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/4?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>quantity: &quot;2&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/caller_id_did_id_set_zero</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/4?&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>total =&gt; 12.3226</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

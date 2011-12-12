@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>use_subscriptions</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">use_subscriptions</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/users/users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_new/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=subscription_service_id</td>
+	<td>label=Test_periodic_service, Price: 10.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=subscription_memo</td>
+	<td>azsdxcfgvbhjdfcgv</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_year</td>
+	<td>label=2014</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_end_year</td>
+	<td>label=2018</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Subscription added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_subscription</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=subscription_memo</td>
+	<td>asdfghjkl</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_end_year</td>
+	<td>label=2019</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Subscription added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=type_3</td>
+	<td>login</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=type_4</td>
+	<td>Subscription_added</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=type_5</td>
+	<td>Subscription_added</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=target_4</td>
+	<td>Subscription (18)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=target_5</td>
+	<td>Subscription (19)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=data_4</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=data_5</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=data2_4</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=data2_5</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions_list/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Destroy subscription for postpaid user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=delete_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Subscription deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Destroy subscription for postpaid user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=delete_disable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Subscription disabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#destroy_link_19 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Destroy subscription for postpaid user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=delete_return_money_whole</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Subscription deleted and money returned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=type_6</td>
+	<td>Subscription_deleted</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=type_8</td>
+	<td>Subscription_deleted_and_return_money_whole</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=type_7</td>
+	<td>Subscription_disabled</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=target_6</td>
+	<td>Subscription (1)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=target_8</td>
+	<td>Subscription (19)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=target_7</td>
+	<td>Subscription (18)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=data_6</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=data_8</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=data_7</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=data2_6</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=data2_8</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=data2_7</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_new/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=subscription_memo</td>
+	<td>asdrftghyu</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_year</td>
+	<td>label=2016</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_end_year</td>
+	<td>label=2018</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Subscription added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_new/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=subscription_memo</td>
+	<td>fyumstrhngf</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_year</td>
+	<td>label=2016</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_end_year</td>
+	<td>label=2018</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Subscription added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_postpaid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=credit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions_list/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Destroy Subscription for prepaid user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=delete_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Subscription deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Destroy Subscription for prepaid user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=delete_return_money_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Subscription deleted and money returned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Destroy Subscription for prepaid user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=delete_return_money_whole</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Subscription deleted and money returned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=type_14</td>
+	<td>Subscription_deleted_and_return_money_month</td>
+</tr>
+</tbody></table>
+</body>
+</html>

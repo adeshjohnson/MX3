@@ -1,0 +1,212 @@
+<tr>
+  <td colspan="2" height="20"></td>
+</tr>
+<tr <%= tooltip(_('Advanced'), _('Advanced_Options_Notice')) %>>
+  <td colspan="2" class="bottom_border">
+    <b><%= _('Advanced') %></b>
+  </td>
+</tr>
+<tr>
+  <td colspan="2" height="10"></td>
+</tr>
+<% if @device_type == "SIP" %>
+  <% if @device
+    device_fromuser = @device.fromuser
+    device_fromdomain = @device.fromdomain
+    device_trustrpid = @device.trustrpid
+    device_sendrpid = @device.sendrpid
+    device_t38pt_udptl = @device.t38pt_udptl
+    device_promiscredir = @device.promiscredir
+    device_progressinband = @device.progressinband
+    device_videosupport = @device.videosupport
+    device_allow_duplicate_calls = @device.allow_duplicate_calls
+    device_use_ani_for_cli = @device.use_ani_for_cli ? 1 : 0
+  else
+    device_fromuser = Confline.get_value("Default_device_fromuser", session[:user_id])
+    device_fromdomain = Confline.get_value("Default_device_fromdomain", session[:user_id])
+    device_trustrpid = Confline.get_value("Default_device_trustrpid", session[:user_id])
+    device_sendrpid =Confline.get_value("Default_device_sendrpid", session[:user_id])
+    device_t38pt_udptl = Confline.get_value("Default_device_t38pt_udptl", session[:user_id])
+    device_promiscredir = Confline.get_value("Default_device_promiscredir", session[:user_id])
+    device_progressinband = Confline.get_value("Default_device_progressinband", session[:user_id])
+    device_videosupport = Confline.get_value("Default_device_videosupport", session[:user_id])
+    device_allow_duplicate_calls = Confline.get_value("Default_device_allow_duplicate_calls", session[:user_id])
+    device_use_ani_for_cli = Confline.get_value("Default_device_use_ani_for_cli",session[:user_id]).to_i
+  end
+%>
+  <% if @device_type != "Virtual" %>
+    <tr>
+      <td> <%= _('Fromuser') %>:   </td>
+      <td> <%= text_field_tag 'fromuser', device_fromuser, "class" => "input" %>  </td>
+    </tr>
+    <tr>
+      <td> <%= _('Fromdomain') %>:   </td>
+      <td> <%= text_field_tag 'fromdomain', device_fromdomain, "class" => "input" %>  </td>
+    </tr>
+    <tr>
+      <td> <%= _('Trustrpid') %>:   </td>
+      <td>
+        <%= radio_button_tag('device[trustrpid]', 'no', checked = (device_trustrpid == 'no') ) %> <%= _('No') %>
+        <%= radio_button_tag('device[trustrpid]', 'yes', checked = (device_trustrpid == 'yes') ) %> <%= _('Yes') %>
+      </td>
+    </tr>
+    <tr>
+      <td> <%= _('Sendrpid') %>:   </td>
+      <td>
+        <%= radio_button_tag('device[sendrpid]', 'no', checked = (device_sendrpid == 'no') ) %> <%= _('No') %>
+        <%= radio_button_tag('device[sendrpid]', 'yes', checked = (device_sendrpid == 'yes') ) %> <%= _('Yes') %>
+      </td>
+    </tr>
+    <% if @device %>
+      <tr>
+        <td> <%= _('Insecure') %>:   </td>
+        <td>
+          <%= _("Port") %>: <%= check_box_tag 'insecure_port', value = "1", (checked = @device.insecure.include?("port") if @device.insecure)%>
+          <%= _("Invite") %>: <%= check_box_tag 'insecure_invite', value = "1", (checked = @device.insecure.include?("invite") if @device.insecure)%>
+        </td>
+      </tr>
+    <% else %>
+      <% conf = Confline.find(:first, :conditions => "name = 'Default_device_insecure' and owner_id  = 0 ") %>
+      <tr>
+        <td><%= _('Insecure') %>:</td>
+        <td>
+          <%= _("Port") %>: <%= check_box_tag 'insecure_port', value = "1", (checked = conf.value.include?("port")  if conf and conf.value)%>
+          <%= _("Invite") %>: <%= check_box_tag 'insecure_invite', value = "1", (checked = conf.value.include?("invite")  if conf and conf.value)%>
+        </td>
+      </tr>
+    <% end %>
+
+    <% if session[:usertype] != "reseller" %>
+      <tr>
+        <td><%= _('T38_Support') %>:</td>
+        <td>
+          <%= radio_button_tag('device[t38pt_udptl]', 'no', checked = (device_t38pt_udptl == 'no') ) %> <%= _('No') %>
+          <%= radio_button_tag('device[t38pt_udptl]', 'yes', checked = (device_t38pt_udptl == 'yes') ) %> <%= _('Yes') %>
+        </td>
+      </tr>
+      <tr <%= tooltip(_('SIP_302_Reinvite_Support'), _('SIP_302_Reinvite_Support_Explanation')) %>>
+        <td><%= b_exclamation + _('SIP_302_Reinvite_Support') %>:</td>
+        <td>
+          <%= radio_button_tag('device[promiscredir]', 'no', checked = (device_promiscredir == 'no') ) %> <%= _('No') %>
+          <%= radio_button_tag('device[promiscredir]', 'yes', checked = (device_promiscredir == 'yes') ) %> <%= _('Yes') %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+<% end %>
+<%
+if @device
+  device_progressinband = @device.progressinband
+  device_videosupport = @device.videosupport
+  device_allow_duplicate_calls = @device.allow_duplicate_calls
+  device_fake_ring = @device.fake_ring
+  device_grace_time =@device.grace_time
+  lang = @device.language.to_s.blank? ? 'en' : @device.language
+  device_use_ani_for_cli = @device.use_ani_for_cli ? 1 : 0
+  device_calleridpres = @device.calleridpres.to_s
+  change_failed_code_to = @device.change_failed_code_to.to_i
+  #allow_grandstreams = @device.allow_grandstreams.to_i
+  forward_did = @device.forward_did_id.to_i
+
+else
+  device_progressinband = Confline.get_value("Default_device_progressinband", session[:user_id])
+  device_videosupport = Confline.get_value("Default_device_videosupport", session[:user_id])
+  device_allow_duplicate_calls = Confline.get_value("Default_device_allow_duplicate_calls", session[:user_id])
+  device_fake_ring = Confline.get_value("Default_device_fake_ring", session[:user_id])
+  device_grace_time =Confline.get_value("Default_device_grace_time", session[:user_id])
+  lang = Confline.get_value("Default_device_language", session[:user_id]).to_s.blank? ? 'en' : Confline.get_value("Default_device_language", session[:user_id])
+  device_use_ani_for_cli = Confline.get_value("Default_device_use_ani_for_cli",session[:user_id]).to_i
+  device_calleridpres = Confline.get_value("Default_device_calleridpres",session[:user_id]).to_s
+  change_failed_code_to = Confline.get_value("Default_device_change_failed_code_to",session[:user_id]).to_i
+  #allow_grandstreams = Confline.get_value("Default_device_allow_grandstreams",session[:user_id]).to_i
+end
+
+%>
+<% if @device_type != "Virtual" %>
+  <tr <%= tooltip(_('Grace_Time'), _('Grace_Time_Explanation')) %>>
+    <td> <%= _('Grace_Time') %>:   </td>
+    <td> <%= text_field_tag 'grace_time', device_grace_time, :size => 5, "class" => "input" %> s</td>
+  </tr>
+  <tr>
+    <td> <%= _('Progressinband') %>:   </td>
+    <td>
+      <%= radio_button_tag('device[progressinband]', 'no', checked = (device_progressinband.to_s == 'no') ) %> <%= _('No') %>
+      <%= radio_button_tag('device[progressinband]', 'yes', checked = (device_progressinband.to_s == 'yes') ) %> <%= _('Yes') %>
+      <%= radio_button_tag('device[progressinband]', 'never', checked = (device_progressinband.to_s == 'never') ) %> <%= _('Never') %>
+    </td>
+  </tr>
+  <tr>
+    <td><%= _('Video_support') %>:</td>
+    <td>
+      <%= radio_button_tag('device[videosupport]', 'no', checked = (device_videosupport == 'no') ) %> <%= _('No') %>
+      <%= radio_button_tag('device[videosupport]', 'yes', checked = (device_videosupport == 'yes') ) %> <%= _('Yes') %>
+    </td>
+  </tr>
+  <tr>
+    <td><%= _('Allow_duplicate_calls') %>:</td>
+    <td>
+      <%= radio_button_tag('device[allow_duplicate_calls]', '0', checked = (device_allow_duplicate_calls.to_i == 0) ) %> <%= _('No') %>
+      <%= radio_button_tag('device[allow_duplicate_calls]', '1', checked = (device_allow_duplicate_calls.to_i == 1) ) %> <%= _('Yes') %>
+    </td>
+  </tr>
+  <tr <%= tooltip(_('Fake_Ring'), _('Fake_Ring_Explanation')) %>>
+    <td><%= _('Fake_Ring') %>:</td>
+    <td>
+      <%= radio_button_tag('device[fake_ring]', '0', checked = (device_fake_ring.to_i == 0) ) %> <%= _('No') %>
+      <%= radio_button_tag('device[fake_ring]', '1', checked = (device_fake_ring.to_i == 1) ) %> <%= _('Yes') %>
+    </td>
+  </tr>
+  <tr <%= tooltip(_('Language'), _('Device_Language_Explanation')) %>>
+    <td><%= _('Language') %>:</td>
+    <td>
+      <%= text_field_tag 'device[language]', lang, :size => 10, "class" => "input"  %>
+    </td>
+  </tr>
+<%end%>
+<tr <%= tooltip(_('Use_ANI_if_available_fo_CallerID'),h( _('ANI_Explanation'))) %> >
+  <td><%= _('Use_ANI_if_available_fo_CallerID') %>:</td>
+  <td>
+    <%= radio_button_tag('device[use_ani_for_cli]', '0', checked = (device_use_ani_for_cli.to_i == 0) ) %> <%= _('No') %>
+    <%= radio_button_tag('device[use_ani_for_cli]', '1', checked = (device_use_ani_for_cli.to_i == 1) ) %> <%= _('Yes') %>
+  </td>
+</tr>
+<tr <%= tooltip(_('Incoming_Call_CallerID_Presentation'),h( _('Calleridpres_Explanation'))) %> >
+  <td><%= _('Incoming_Call_CallerID_Presentation') %>:</td>
+  <td>
+    <%= select_tag 'device[calleridpres]', options_for_select([[_('None', nil)]]+Device.calleridpresentation, device_calleridpres.to_s ) %>
+  </td>
+</tr>
+<% if @device_type != "Virtual" %>
+  <tr <%= tooltip(_('Change_Failed_Code_To'),h( _('Change_Failed_Code_To_Explanation'))) %> >
+    <td><%= _('Change_Failed_Code_To') %>:</td>
+    <td>
+      <%= render :partial => '/layouts/hgc_end_select', :locals=>{:select_field_tag=>"device[change_failed_code_to]", :filed_value=> change_failed_code_to} %>
+    </td>
+  </tr>
+  <!---
+  <%# http://trac.kolmisoft.com/trac/ticket/4236
+  if call_shop_active? %>
+
+    <tr <%#= tooltip(_('Allow_grandstreams'),h( _('Allow_grandstreams_Explanation'))) %> >
+      <td><%#= _('Allow_grandstreams') %>:</td>
+      <td>
+  <%#= radio_button_tag('device[allow_grandstreams]', '0', (allow_grandstreams.to_i == 0) ) %> <%#= _('No') %>
+  <%#= radio_button_tag('device[allow_grandstreams]', '1', (allow_grandstreams.to_i == 1) ) %> <%#= _('Yes') %>
+      </td>
+    </tr>
+  <%#end%>
+  --->
+<%end%>
+<% if @device %>
+  <tr>
+    <td><%= _('Forward_DID') %>:</td>
+    <td>
+      <select name="forward_did" id="forward_did">
+        <option value="-1"><%=  _('None')%> </option>
+        <% for d in @all_dids %>
+          <option value=<%= d.id %> <%= "selected" if  d.id == forward_did %>> <%= d.did %> </option>
+        <% end %>
+      </select>
+    </td>
+  </tr>
+<% end %>

@@ -1,0 +1,1007 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://test3.marsassolutions.com/" />
+<title>cdr_import_re</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">cdr_import_re</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>CDR Import</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>sreseller_menu24</td>
+	<td>CDR Import</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/cdr_by_cli.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=calldate_id</td>
+	<td>label=Date</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=src_number_id</td>
+	<td>label=Source</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dst_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=billsec_id</td>
+	<td>label=Billsec</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=Clid</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>* - Indicates required fields </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-05 10:06:09</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[12]/td[4]</td>
+	<td>234567655</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[15]/td[6]</td>
+	<td>942473279</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[10]/td[7]</td>
+	<td>34943665997</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[11]/td[9]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No Providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please select server</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Provider IAX2/22.33.44.55:4569</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>sreseller_menu24</td>
+	<td>CDR Import</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/cdr_by_cli.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=calldate_id</td>
+	<td>label=Date</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=src_number_id</td>
+	<td>label=Source</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dst_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=billsec_id</td>
+	<td>label=Billsec</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=Clid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-05 10:06:09</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[12]/td[4]</td>
+	<td>234567655</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[15]/td[6]</td>
+	<td>942473279</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[10]/td[7]</td>
+	<td>34943665997</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[11]/td[9]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import_type_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device_id</td>
+	<td>label=IAX2/105</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[2]/tbody/tr[2]/td[2]</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Import completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider[common_use]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<!--sql-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/delete_from_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/cdr_by_cli.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=calldate_id</td>
+	<td>label=Date</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=src_number_id</td>
+	<td>label=Source</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dst_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=billsec_id</td>
+	<td>label=Billsec</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=Clid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-05 10:06:09</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[12]/td[4]</td>
+	<td>234567655</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[15]/td[6]</td>
+	<td>942473279</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[10]/td[7]</td>
+	<td>34943665997</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[11]/td[9]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No Providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>provider_tariff</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff[purpose]_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Tariff was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/cdr_by_cli.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=calldate_id</td>
+	<td>label=Date</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=src_number_id</td>
+	<td>label=Source</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dst_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=billsec_id</td>
+	<td>label=Billsec</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=Clid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-05 10:06:09</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[12]/td[4]</td>
+	<td>234567655</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[15]/td[6]</td>
+	<td>942473279</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[10]/td[7]</td>
+	<td>34943665997</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[11]/td[9]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id</td>
+	<td>label=IAX2/105</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import_type_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[2]/tbody/tr[2]/td[2]</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Next step: Import CDR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Congratulations, successfully imported CSV file!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/cdr_by_cli2.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=calldate_id</td>
+	<td>label=Date</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=src_number_id</td>
+	<td>label=Source</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dst_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=billsec_id</td>
+	<td>label=Billsec</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=Clid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-05 10:06:09</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id</td>
+	<td>label=IAX2/105</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import_type_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[2]/tbody/tr[2]/td[2]</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Next step: Import CDR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Congratulations, successfully imported CSV file!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_calls</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imported_calls</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination is not numerical value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Billsec is not numerical value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invalid calldate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination is not numerical value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CDR exist in db match caldate dst src</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CDR exist in db match caldate dst src</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

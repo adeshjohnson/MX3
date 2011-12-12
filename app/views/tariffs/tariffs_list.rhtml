@@ -1,0 +1,36 @@
+<%= link_nice_tariff(@tariff)%>
+
+<table width="100%">
+<tr><td width="50%" valign="top">
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('User') %></th> 
+  </tr>
+<% i = 0 %>   
+<% for user in @user %> 
+<tr class="row<%= (i % 2 +1).to_s %>">
+<td align="left"><%= link_nice_user(user) %></td>
+</tr>
+    <% i += 1%>   
+<% end %>
+  </table>
+</td>
+
+<td width="50%" valign="top">
+<table width="90%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Cardgroup') %></th>   
+  </tr>
+<% i = 0 %>   
+<% for cardgroup in @cardgroup %> 
+<tr class="row<%= (i % 2 +1).to_s %>">
+<td align="left"><%= link_nice_group(cardgroup)%></td>
+</tr>
+    <% i += 1%>   
+<% end %>
+</table>
+</td>
+
+</tr>
+
+</table>

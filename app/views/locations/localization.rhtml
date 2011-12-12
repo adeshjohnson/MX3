@@ -1,0 +1,42 @@
+<% if reseller? %>
+  <% form_tag :action => 'import_admins_locations' do %>
+    <table width="100%">
+      <tr><td align="left" ><%= submit_tag _("Create_same_rules_as_Admins"), :confirm => _('Are_you_sure'), :method => :post, :disable_with=>_('Processing..')%></td>
+      </tr>
+    </table>
+    <br/>
+  <% end %>
+<% end %>
+<% form_tag :action => 'location_add' do %> 
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left"><%= _('Location') %></th>
+      <th align="center"><%= _('Rules') %></th>
+      <th align="center"><%= _('Devices') %></th>
+      <!--    <th></th>-->
+      <th></th>
+    </tr>
+    <%  @locations.each_with_index { |loc, i| %>
+      <% devices = loc.devices.count %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id ="name_<%= loc.id %>" align="left"><%= loc.name %></td>
+        <td id ="rule_<%= loc.id %>" align="center"><%= link_to b_rules, :action => 'location_rules', :id => loc.id %> (<%= loc.locationrules.size %>)</td>
+        <td id ="view_<%= loc.id %>" align="center"><%= link_to b_view, :action => 'location_devices', :id => loc.id %> (<%= devices %>)</td>
+    <!--    <td align="center"><%= link_to b_edit, :action => 'location_edit', :id => loc.id %></td> -->
+        <td id ="delete_<%= loc.id %>" align="center">
+    <%#Ticket 3459 do not delete last localization%>
+          <% if @locations.size > 1  %>
+            <%= link_to(b_delete, { :action => 'location_destroy', :id => loc.id }, {:confirm => _('Are_you_sure'), :method => :post, :id => "delete_link_#{loc.id}"}) if devices == 0 and (loc.id != 1 and loc.name != "Default location") %>
+          <% end %>
+        </td>
+      </tr>
+    <% } %>
+    <tr>
+      <th align="left">
+        <%= text_field_tag 'name', "", "class" => "input", :size => "19", :maxlength => "50"  %>
+        <%= image_submit_tag 'icons/add.png', :title => _('Add') %>
+      </th>
+      <th colspan=3> </th>
+    </tr>
+  </table>
+<% end %>

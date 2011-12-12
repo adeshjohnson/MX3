@@ -1,0 +1,113 @@
+<table width="100%">
+  <tr>
+    <td>
+      <% if @allow_edit %>
+        <%= link_to(b_add + _('Add_vouchers'), {:action => 'voucher_new'}, {:id => "add_vouchers_link"}) %> &nbsp;&nbsp; <%= link_to b_edit + _('Bulk_management'), :action=>'bulk_management'%> &nbsp;&nbsp;
+      <% end %>
+      <% if @vouchers.size > 0 %>
+        <%= link_to b_csv + _('Export_to_CSV'), :action => "vouchers", :csv=>1  %>
+      <% end %>
+    </td>
+    <td align="right">
+      <% if not @vouchers.empty? %>
+        <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<% form_tag :action => 'vouchers' do %>
+  <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+    <br/>
+
+    <table width="100%" class="simple">
+      <tr>
+        <td>
+          <% selections = [[_('All'), "all"],[_('Yes'), "yes"],[_('No'), "no"]] %>
+          <%= _('Usable') %>?: <%= select_tag("s_usable", options_for_select(selections, @options[:s_usable])) %>
+          <%= _('Active') %>?: <%= select_tag("s_active", options_for_select(selections, @options[:s_active])) %>
+          <%= _('Number') %>: <%= text_field_tag 's_number', @options[:s_number], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('Tag') %>: <%= text_field_tag 's_tag',  @options[:s_tag], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('Credit_between') %>: <%= text_field_tag 's_credit_min', @options[:s_credit_min], "class" => "input", :size => "7", :maxlength => "10"  %> -
+          <%= text_field_tag 's_credit_max', @options[:s_credit_max], "class" => "input", :size => "7", :maxlength => "10"  %>
+          <%= _('Currency') %>:
+          <select name="s_curr" >
+            <option value="" selected>&nbsp;</option>
+            <% for ps in @currencies%>
+              <option value=<%= ps["curr"] %> <%= "selected" if ps["curr"] == @options[:s_curr] %>> <%= ps["curr"] %> </option>
+            <% end %>
+          </select>
+          <br/><br/>
+          <%= _('Use_date') %>:
+          <%= select_tag("s_use_date", options_for_select([[" ", ""]] + @use_dates.map{|ps|[ps["udate"], ps["udate"]] unless ps["udate"].blank? }.compact, @options[:s_use_date]))  %>
+          <%= _('Active_till') %>:
+          <%= select_tag("s_active_till", options_for_select([[" ", ""]] + @active_tills.map{|ps| [ps["atill"][0..9], ps["atill"][0..9]]}.compact, @options[:s_active_till])) %>
+          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
+        </td>
+        <td align="right">
+          <%= link_to b_cross + _('Clear_search'), :action => 'vouchers', :clean=>1 if @search == 1 %>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>
+<br/>
+
+<%= page_select_header(@options[:page], @total_pages , @options)  %>
+
+<table width="100%" class="maintable">
+  <tr>
+    <th align="center"><%= _('Usable') %>?</th>
+    <th align="center"><%= _('Active') %>?</th>
+    <th align="left"><%= _('Number') %></th>
+    <th align="left"><%= _('Tag') %></th>
+    <% if can_see_finances? -%>
+      <th align="right"><%= _('Credit') %></th>
+      <th align="right"><%= _('Credit_with_VAT') %></th>
+      <th align="right"><%= _('Currency') %></th>
+    <% end %>
+    <th align="center"><%= _('Use_date') %></th>
+    <th align="center"><%= _('Active_till') %></th>
+    <th align="right"><%= _('User') %></th>
+    <% if @allow_edit %>
+      <th></th>
+    <% end %>
+  </tr>
+  <% @vouchers.each_with_index{ |v, i|%>
+    <% user = (v.user_id.to_i == -1 ? nil : v.user)%>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <td id="usable_<%= v.id %>" align="center">
+        <%= b_cross(:id=> "cross_"+v.id.to_s) if !v.is_usable?%>
+        <%= b_check(:id=> "chech_"+v.id.to_s) if v.is_usable?%>
+      </td>
+      <td id="avtive_<%= v.id %>" align="center">
+        <% if @allow_edit %>
+          <% form_tag :action => 'voucher_active', :interval =>2, :vaction=>@action, :id => v.id, :page=>@page do %>
+            <%= image_submit_tag 'icons/check.png', :title => _('Deactivate'), :id => "deactivate_link_"+v.id.to_s if v.active.to_i == 1 %>
+            <%= image_submit_tag 'icons/cross.png', :title => _('Activate'), :id => "activate_link_"+v.id.to_s if  v.active.to_i == 0 %>
+          <% end %>
+        <% else %>
+          <%= image_tag("icons/check.png") if v.active.to_i == 1  %>
+          <%= image_tag("icons/cross.png") if v.active.to_i == 0  %>
+        <% end %>
+      </td>
+      <td id="number_<%= v.id %>" align="left"> <%= v.number %> </td>
+      <td id="tag_<%= v.id %>" align="left"> <%= v.tag %> </td>
+      <% if can_see_finances? -%>
+        <td id="credit_without_tax_<%= v.id %>" align="right"> <%= nice_number v.count_credit_with_vat %> </td>
+        <td id="credit_with_tax_<%= v.id %>" align="right"> <%= nice_number v.credit_with_vat %> </td>
+        <td id="currency_<%= v.id %>" align="right"> <%= v.currency %> </td>
+      <% end %>
+      <td id="use_date_<%= v.id %>" align="center"> <%= nice_date_time v.use_date if v.use_date %> </td>
+      <td id="active_till_<%= v.id %>" align="center"> <%= nice_date v.active_till if v.active_till %> </td>
+      <td id="user_<%= v.id %>" align="right"> <%= nice_user(user) if user%> </td>
+      <% if @allow_edit %>
+        <td id="delete_<%= v.id %>" align="center">
+          <% if @allow_edit and !v.is_used?-%>
+            <%= link_to b_delete, { :action => 'voucher_delete', :id => v.id }, :confirm => _('Are_you_sure'), :method => :post, :id => "delete_link_#{v.id}" %>
+          <% end -%>
+        </td>
+      <% end %>
+    </tr>
+  <% } %>
+</table>

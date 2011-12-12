@@ -1,0 +1,128 @@
+<b><%= _('Destination') %>:</b> <%= draw_flag_by_code @dgroup.flag %> <%= @dgroup.name %> <%= @dgroup.desttype %>
+<br>
+<br>
+<br>
+
+
+<% if @WDFD %>
+  <table class='simple' width="100%">
+    <tr>
+      <td>            <b><%= _('Rate_details_for_WDFD') %>:</b>        </td>
+    </tr>
+  </table>
+  <br>
+  <% @st_arr.each_with_index { |t, i| %>
+    <table width="100%" class="maintable">
+      <tr>
+        <th colspan=6 align="left">        <b><%= _('Time_period') %>:</b> <%= t %> - <%= @et_arr[i] %>    </th>
+      </tr>
+    </table>
+
+    <table width="100%" class="maintable">
+      <tr>
+        <th align="left"><%= _('From') %></th>
+        <th align="center"><%= _('Duration') %></th>
+        <th align="center"><%= _('Type') %></th>
+        <th align="center"><%= _('Round_by') %></th>
+        <th align="center"><%= _('Rate') %></th>
+        <th align="center"><%= _('Rate_with_VAT') %></th>
+      </tr>
+      <% @ards.each { |ard, ii| %>
+        <% if nice_time2(ard.start_time) == t and ard.daytype == ""%>
+          <tr class="row<%= (ii % 2 + 1).to_s %>">
+            <% ard.duration == -1 ? duration = "∞" : duration = ard.duration -%>
+            <td align="left"><%= ard.from %></td>
+            <td align="center"><%= duration if ard.artype == "minute"%></td>
+            <td align="center"><%= ard.artype %></td>
+            <td align="center"><%= ard.round  if ard.artype == "minute"%></td>
+            <td align="center"><%= nice_number ard.price %></td>
+            <td align="center"><%= nice_number(@tax.count_tax_amount(ard.price)+ard.price) %></td>
+          </tr>
+        <% end %>
+      <% } %>
+    </table>
+    <br>
+  <% } %>
+<% else %>
+  <table class='simple' width="100%">
+    <tr>
+      <td>            <b><%= _('Rate_details_for_WD') %>:</b>        </td>
+    </tr>
+  </table>
+  <br>
+  <% @Wst_arr.each_with_index { |t, i| %>
+    <table width="100%" class="maintable">
+      <tr>
+        <th colspan=6 align="left">        <b><%= _('Time_period') %>:</b> <%= t %> - <%= @Wet_arr[i] %>    </th>
+      </tr>
+    </table>
+    <table width="100%" class="maintable">
+      <tr>
+        <th align="left"><%= _('From') %></th>
+        <th align="center"><%= _('Duration') %></th>
+        <th align="center"><%= _('Type') %></th>
+        <th align="center"><%= _('Round_by') %></th>
+        <th align="center"><%= _('Rate') %></th>
+        <th align="center"><%= _('Rate_with_VAT') %></th>
+      </tr>
+      <% @ards.each_with_index { |ard, ii| %>
+        <% if nice_time2(ard.start_time) == t and ard.daytype == "WD"%>
+          <tr class="row<%= (ii % 2 + 1).to_s %>">
+            <%  ard.duration == -1 ? duration = "∞" : duration = ard.duration -%>
+            <td align="left"><%= ard.from %></td>
+            <td align="center"><%= duration if ard.artype == "minute"%></td>
+            <td align="center"><%= ard.artype %></td>
+            <td align="center"><%= ard.round  if ard.artype == "minute"%></td>
+            <td align="center"><%= nice_number ard.price %></td>
+            <td align="center"><%= nice_number(@tax.count_tax_amount(ard.price) + ard.price) %></td>
+          </tr>
+        <% end %>
+      <% } %>
+    </table>
+    <br>
+  <% } %>
+  <br>
+  <br>
+    
+  <table class='simple' width="100%">
+    <tr>
+      <td>            <b><%= _('Rate_details_for_FD') %>:</b>        </td>
+    </tr>
+  </table>
+  <br>
+
+  <% @Fst_arr.each_with_index { |t, i| %>
+    <table width="100%" class="maintable">
+      <tr>
+        <th colspan=6 align="left">        <b><%= _('Time_period') %>:</b> <%= t %> - <%= @Fet_arr[i] %>    </th>
+      </tr>
+    </table>
+    <table width="100%" class="maintable">
+      <tr>
+        <th align="left"><%= _('From') %></th>
+        <th align="center"><%= _('Duration') %></th>
+        <th align="center"><%= _('Type') %></th>
+        <th align="center"><%= _('Round_by') %></th>
+        <th align="center"><%= _('Rate') %></th>
+        <th align="center"><%= _('Rate_with_VAT') %></th>
+      </tr>
+
+      <%  @ards.each_with_index { |ard, ii| %>
+        <% if nice_time2(ard.start_time) == t and ard.daytype == "FD"%>
+          <tr class="row<%= (ii % 2 + 1).to_s %>">
+            <%  ard.duration == -1 ? duration = "∞" : duration = ard.duration -%>
+            <td align="left"><%= ard.from %></td>
+            <td align="center"><%= duration if ard.artype == "minute"%></td>
+            <td align="center"><%= ard.artype %></td>
+            <td align="center"><%= ard.round  if ard.artype == "minute"%></td>
+            <td align="center"><%= nice_number ard.price %></td>
+            <td align="center"><%= nice_number(@tax.count_tax_amount(ard.price)+ard.price) %></td>
+          </tr>
+        <% end %>
+      <% } %>
+    </table>
+    <br>
+  <% } %>
+<% end %>
+<br>
+<br>

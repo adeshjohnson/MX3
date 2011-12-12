@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>servers</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">servers</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Create new server. Check if ID's cannot be the same.-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_hostname</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_type</td>
+	<td>main2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_maxcalllimit</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ami_username</td>
+	<td>ami_user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ami_secret</td>
+	<td>ami_secr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>port</td>
+	<td>5061</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_comment</td>
+	<td>second serv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>server_id_2</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Server ID collision</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>server_id_2</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Check']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Check']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--Set default server in default devices.-->
+<!--...SIP-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[server_id]</td>
+	<td>label=ID: 1, IP: 127.0.0.1 (second serv)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[server_id]</td>
+	<td>ID: 1, IP: 127.0.0.1 (second serv)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>TEST</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[server_id]</td>
+	<td>ID: 1, IP: 127.0.0.1 (second serv)</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>device[server_id]</td>
+	<td>1</td>
+</tr>
+<!--...H323-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[server_id]</td>
+	<td>ID: 1, IP: 127.0.0.1 (second serv)</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>device[server_id]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>TEST</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[server_id]</td>
+	<td>ID: 1, IP: 127.0.0.1 (second serv)</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>device[server_id]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[server_id]</td>
+	<td>label=ID: 2, IP: 127.0.0.1 (main system)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[server_id]</td>
+	<td>ID: 2, IP: 127.0.0.1 (main system)</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>device[server_id]</td>
+	<td>2</td>
+</tr>
+<!--When editing server_id devices server id should change -->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_id</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[server_id]</td>
+	<td>ID: 5, IP: 127.0.0.1 (second serv)</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>device[server_id]</td>
+	<td>5</td>
+</tr>
+<!--Do not let delete server if it has assigned devices.-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_link_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server was not deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server has assigned devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[server_id]</td>
+	<td>label=ID: 2, IP: 127.0.0.1 (main system)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_link_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Server deleted</td>
+	<td></td>
+</tr>
+<!--create some servers-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_hostname</td>
+	<td>127.0.0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>127.0.0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_type</td>
+	<td>main22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_maxcalllimit</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ami_username</td>
+	<td>ami_user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ami_secret</td>
+	<td>ami_secr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>port</td>
+	<td>5062</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_comment</td>
+	<td>second serv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>server_id_3</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_hostname</td>
+	<td>127.0.0.3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>127.0.0.3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_type</td>
+	<td>main23</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_maxcalllimit</td>
+	<td>1003</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ami_username</td>
+	<td>ami_user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ami_secret</td>
+	<td>ami_secr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>port</td>
+	<td>5063</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_comment</td>
+	<td>third serv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>server_id_4</td>
+	<td>3</td>
+</tr>
+<!--Check if only admin can change default server-->
+<!--...Accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!--...Reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>device[server_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device[server_id]</td>
+	<td>ID: 1, IP: 127.0.0.2 (second serv) ID: 2, IP: 127.0.0.1 (main system) ID: 3, IP: 127.0.0.3 (third serv)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[server_id]</td>
+	<td>label=ID: 1, IP: 127.0.0.2 (second serv)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[server_id]</td>
+	<td>ID: 1, IP: 127.0.0.2 (second serv)</td>
+</tr>
+</tbody></table>
+</body>
+</html>

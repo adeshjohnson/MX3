@@ -1,0 +1,193 @@
+<%= error_messages_for 'user' %>
+<table width="100%">
+  <tr>
+    <td valign="top">
+      <table>
+        <tr>
+          <td colspan="2" class="bottom_border"><b><%= _('General') %></b></td>
+        </tr>
+        <tr><td height="10" colspan="2"></td></tr>
+        <tr>
+          <td valign="top" colspan="2">
+            <table class="simple">
+              <tr>
+                <td> <%= _('username') %>:   </td>
+                <td><%= @user.username %> </td>
+              </tr>
+              <tr>
+                <td> <%= _('secret') %>:   </td>
+                <td> <%= password_field 'password', 'password', "class" => "input" %> </td>
+              </tr>
+              <tr>
+                <td> <%= _('Balance') %>:   </td>
+                <td id="balnace"> <%= nice_number(@user.balance) %> <%= current_user.currency.name%></td>
+              </tr>
+              <% if @user.postpaid == 1 %>
+                <tr>
+                  <td> <%= _('Credit') %>:   </td>
+                  <td> <%= nice_number(@user.balance) + " " + current_user.currency.name if @user.credit != -1%>  <%= _('Unlimited') if @user.credit == -1%>  </td>
+                </tr>
+              <% end %>
+              <tr>
+                <td> <%= _('Account_type') %>:   </td>
+                <% @user.postpaid == 1 ? at = _('Postpaid'): at = _('Prepaid') %>
+                <td><%= at %></td>
+              </tr>
+              <% if Confline.get_value("Devices_Check_Ballance").to_i == 1%>
+                <tr>
+                  <td><%= _("Link_to_check_balance")%>:</td>
+                  <td><%= h("#{Web_URL}#{Web_Dir}/api/simple_balance/#{@user.get_hash}")%></td>
+                </tr>
+              <% end %>
+              <%unless user?%>
+                <tr>
+                  <td><%= _('Default_currency') %>:</td>
+                  <td><%= select_tag('user[currency_id]', options_for_select(Currency.get_active.collect{|t| [t.name, t.id]}, @user.try(:currency_id) ))  %></td>
+                </tr>
+                <tr>
+                  <td><%= _('Time_zone') %>:</td>
+                  <td><%= select_tag('user[time_zone]', options_for_select(User.get_zones, @user.try(:time_zone) ))  %></td>
+                </tr>
+              <%end%>
+              <%if monitorings_addon_active? and current_user.show_active_calls?  %>
+                <tr <%= tooltip(_('ChanSpy_Device'), _('ChanSpy_Device_Explanation')) %> >
+                  <td><%= _('ChanSpy_Device') %>:</td>
+                  <td><%= select_tag('user[spy_device_id]', options_for_select([[_('Not_selected'), "0"]] +  @devices.collect{|t| [nice_device(t, {:image => false}), t.id]}, @user.try(:spy_device_id) ))  %></td>
+                </tr>
+              <%end%>
+            </table>
+
+          </td>
+        </tr>
+        <tr><td height="10" colspan="2"></td></tr>
+
+        <tr>
+          <td colspan="2" class="bottom_border"><b><%= _('Warning_Balance_Email') %></b></td>
+        </tr>
+        <tr><td height="10" colspan="2"></td></tr>
+        <tr>
+          <td valign="top" colspan="2">
+            <table class="simple">
+              <tr>
+                <td><b> <%= _('Active') %>:</b></td>
+                <td><%= check_box_tag 'warning_email_active', "1", (@user.warning_email_active.to_i == 1) %></td>
+              </tr>
+              <tr>
+                <td><b><%=  _('Balance') %>:</b></td>
+                <td><%= text_field('user', 'warning_email_balance', "class" => "input", :size => "35", :maxlength => "255")%></td>
+              </tr>
+              <tr>
+                <td colspan="4"><%=radio_button_tag("user[warning_email_hour]", "-1", (@user.warning_email_hour.to_i == -1))%> <%=_('Only_once_as_balance_drops_below_set_value')%></td>
+              </tr>
+              <tr>
+                <td colspan="4"><%=radio_button_tag("user[warning_email_hour]", "0", (@user.warning_email_hour.to_i > -1))%> <%=_('Every_day_at')%> : <%=select_hour(@user.warning_email_hour.to_i == -1 ? 0 : @user.warning_email_hour, :field_name => 'user_warning_email_hour')%><%=_('hour')%></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <%if !current_user.owner.reseller_allow_providers_tariff? %>
+          <tr>
+            <td height="10" colspan="2"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="bottom_border"><b><%= _('Invoice') %></b></td>
+          </tr>
+          <tr><td height="10" colspan="2"></td></tr>
+          <tr>
+            <td valign="top" colspan="2">
+              <%= render :partial => 'user_invoices_form' %>
+            </td>
+          </tr>
+        <%end%>
+      </table>
+    </td>
+    <td valign="top">
+      <table>
+        <tr>
+          <td colspan="2" class="bottom_border"><b><%= _('Details') %></b></td>
+        </tr>
+        <tr><td height="10" colspan="2"></td></tr>
+        <tr>
+          <td valign="top">
+
+            <table class="simple">
+              <tr>
+                <td> <%= _('first_name') %>/<%= _('Company_name') %>:   </td>
+                <td> <%= text_field 'user', 'first_name', "class" => "input"  %> </td>
+              </tr>
+              <tr>
+                <td> <%= _('last_name') %>:   </td>
+                <td> <%= text_field 'user', 'last_name', "class" => "input"  %> </td>
+              </tr>
+              <tr>
+                <td> <%= _('Company_Personal_ID') %>:   </td>
+                <td> <%= text_field 'user', 'clientid', "class" => "input"  %> </td>
+              </tr>
+              <tr>
+                <td> <%= _('Agreement_number') %>:   </td>
+                <td>  <%= @user.agreement_number  %></td>
+              </tr>
+              <tr>
+                <td> <%= _('Agreement_date') %>:   </td>
+                <% ad = @user.agreement_date
+                ad= Time.now if !ad  %>
+                <td><%= nice_date(ad) %></td>
+              </tr>
+              <tr>
+                <td> <%= _('Country_of_Taxation') %>:   </td>
+                <td> <div class="nb">
+                    <select name="user[taxation_country]" >
+                      <% for country in @countries %>
+                        <option value="<%= country.id %>" <%= "selected" if @user.taxation_country == country.id if @user.taxation_country %>> <%= h(country.name[0,22]) %> </option>
+                      <% end %>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td> <%= _('VAT_Reg_number') %>:   </td>
+                <td> <%= text_field 'user', 'vat_number', "class" => "input"  %> </td>
+              </tr>
+              <tr><td height="20"></td></tr>
+              <tr>
+                <td colspan="2" class="bottom_border">
+                  <b><%= _('Registration_address') %></b>
+                </td>
+              </tr>
+              <tr>
+                <td height="10"></td>
+              </tr>
+              <%= render :partial => 'address_form' %>
+            </table>
+          </td>
+        </tr>
+        <% if rec_active? and @user.recording_enabled.to_i == 1 %>
+          <tr>
+            <td height="20" colspan="2"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="bottom_border"><b><%= b_record + _('Recordings') %></b></td>
+          </tr>
+          <tr>
+            <td valign="top" colspan="2">
+              <table class="simple">
+                <tr>
+                  <td height="10"></td>
+                </tr>
+                <tr>
+                  <td> <%= _('HDD_Quota') %>:   </td>
+                  <td><%= nice_number(@total_recordings_size.to_f/1048576) %> <%= _('Mb')%>/<%= nice_number(@user.recording_hdd_quota.to_f/1048576) %> <%= _('Mb')%> ( <%= @user.recording_hdd_quota.to_f == 0.0 ? "100" : nice_number((@total_recordings_size.to_f/@user.recording_hdd_quota.to_f)*100) %> % <%= _('Taken')%>)</td>
+                </tr>
+                <tr>
+                  <td><%= _('Email_for_deleted_Recordings') %>:</td>
+                  <td><%= text_field('user', 'recordings_email', "class" => "input", :size => "35", :maxlength => "255")%></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </td>
+  </tr>
+</table>
+<!--[eoform:user]-->

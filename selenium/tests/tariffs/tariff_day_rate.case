@@ -1,0 +1,1200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.164" />
+<title>tariff_day_rate</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tariff_day_rate</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete all rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<!--Test rate import with different day_type settings. -->
+<!--...Set settings-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>csv_separator</td>
+	<td>;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--...ALL->WD sequence-->
+<!--......Import ALL rates-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_day_type</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>213</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1.26</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Created destinations: 9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates updated: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New rates created: 20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates (20)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/503</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_503</td>
+	<td>1.2600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>connection_fee_503</td>
+	<td>0.0700</td>
+</tr>
+<!--......Import WD rates-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria_2.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_day_type</td>
+	<td>label=Work Days</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2.26</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Created destinations: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates updated: 20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New rates created: 0</td>
+	<td></td>
+</tr>
+<!--......Check if imported correctly-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates (20)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/503</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_523</td>
+	<td>2.2600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>connection_fee_523</td>
+	<td>1.0700</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete all rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>All rates deleted</td>
+	<td></td>
+</tr>
+<!--... FD -> WD sequence-->
+<!--......Import FD rates-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_day_type</td>
+	<td>label=Free Days</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Created destinations: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates updated: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New rates created: 20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates (20)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/523</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_543</td>
+	<td>1.2600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>connection_fee_543</td>
+	<td>0.0700</td>
+</tr>
+<!--......Import WD rates-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria_2.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_day_type</td>
+	<td>label=Work Days</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Created destinations: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates updated: 20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria_5.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_day_type</td>
+	<td>label=Work Days</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Created destinations: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates updated: 20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<!--......Check if imported correctly-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates (20)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/523</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_563</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_543</td>
+	<td>1.2600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>connection_fee_563</td>
+	<td>1.0700</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>connection_fee_543</td>
+	<td>0.0700</td>
+</tr>
+<!------WD+FD-> All-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria_2.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_day_type</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Created destinations: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates updated: 20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New rates created: 0</td>
+	<td></td>
+</tr>
+<!--......Check if imported correctly-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates (20)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/523</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>For Work Days:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_563</td>
+	<td>2.2600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>connection_fee_563</td>
+	<td>1.0700</td>
+</tr>
+<!-----DELETE-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete all rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>All rates deleted</td>
+	<td></td>
+</tr>
+<!--... FD -> ALL sequence-->
+<!--......Import FD rates-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_day_type</td>
+	<td>label=Free Days</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Created destinations: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates updated: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New rates created: 20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates (20)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/543</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_583</td>
+	<td>1.2600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>connection_fee_583</td>
+	<td>0.0700</td>
+</tr>
+<!--......Import ALL rates-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria_2.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_day_type</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Created destinations: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates updated: 20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New rates created: 0</td>
+	<td></td>
+</tr>
+<!--......Check if imported correctly-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates (20)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/543</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_583</td>
+	<td>2.2600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>connection_fee_583</td>
+	<td>1.0700</td>
+</tr>
+<!--Check if error is shown when importing rate with multiple prefixes-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_with_multiprefix_lines.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>use_suggestion_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sepn2</td>
+	<td>;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>decn2</td>
+	<td>.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Code&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please check prefix format in CSV. Press here for more info</td>
+	<td></td>
+</tr>
+<!--do not expand this test-->
+</tbody></table>
+</body>
+</html>

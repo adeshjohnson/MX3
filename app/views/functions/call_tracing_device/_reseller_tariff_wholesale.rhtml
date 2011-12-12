@@ -1,0 +1,49 @@
+<% rates.sort!{|a, b| (
+    rez = 0
+    if a['rate'] and b['rate']
+      rez = (a['rate'].to_f <=> b['rate'].to_f)
+    else
+      rez = -1 if a['rate']
+      rez = 1 if b['rate']
+    end
+    rez
+  )}  %>
+
+<table width="100%" class="maintable">
+  <tr class="row2">
+    <th align="center"><%= _('Time') %></th>
+    <th align="right"><%=_('Increment') %></th>
+    <th align="right"><%= _('Min_time') %></th>
+    <th align="right"><%= _('Connection_Fee') %></th>
+    <th align="right"><%= _('Rate')%> (<%= current_user.currency.name%>/min)</th>
+  </tr>
+
+  <% for r in rates %>
+    <% eap = r['rate'].to_f / exchange_rate.to_f
+    @max_reseller_arate = eap if @max_reseller_arate < eap %>
+    <tr class="row2">
+      <td align="center" id="reseller_time"><%= nice_time2(r['start_time']) %>-<%= nice_time2(r['end_time']) %></td>
+      <td align="right" id="reseller_increment"><%= r['increment_s'] %></td>
+      <td align="right" id="reseller_min_time"><%= r['min_time'] %></td>
+      <td align="right" id="reseller_cf"><%= r['cf'] %></td>
+      <td align="right" id="reseller_rate">
+        <%= long_nice_number eap %>
+        <% if reseller.allow_loss_calls == 0 and eap > @max_user_arate %>
+          <%= b_cross %>
+          <% @exp_res += 1 %>
+        <% else %>
+          <% @cheap_res += 1%>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+
+</table>
+
+<% if not rates.empty? %>
+  <table width="100%" class="simple">
+    <tr class="row2">
+      <th align="left"><%= b_check + _('CT_These_rates_will_be_used_to_calculate_call_price') %>     </th>
+    </tr>
+  </table>
+<% end %>

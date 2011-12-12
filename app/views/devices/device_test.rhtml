@@ -1,0 +1,20 @@
+<% if @success.to_i == 1 -%>
+  <center>
+    <div id="status"> 
+      <%= _('Connection_test_passed') %>: <%= @device.name %> <br>
+    </div>
+  </center>
+<% else -%>
+  <center>
+    <div id="error">
+      <% if !@message.blank? -%>
+        <%= _("Message")%>: <%= @message %>
+      <% end -%>
+      <% if defined?(@device) -%>
+        <%= _("Device") %>: <%= @device.name %><br>
+        <%= _('IP') %>: <%= @device.ipaddr%><br>
+        <%= _('Port') %>: <%= @device.port %><br>
+      <% end -%>
+    </div>
+  </center>
+<% end -%>

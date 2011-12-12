@@ -1,0 +1,134 @@
+<%= javascript_include_tag "wz_tooltip" %>
+<table width="100%">
+  <tr>
+    <td class="nb">
+      <div align="left" class="nb">
+        <% form_tag(:action => 'loss_making_calls') do %>
+          <%= _('From') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+          &nbsp;&nbsp;<%= _('to') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+
+          &nbsp;&nbsp; <%= _('Reseller') %>:
+          <select name="reseller_id" >
+            <option value=<%= '-1'%> <%= "selected" if !@reseller %>> <%= _('All') %></option>
+            <% for reseller in @resellers %>
+              <option value=<%= reseller.id%> <%if @reseller%><%= "selected" if reseller.id == @reseller.id %> <%end%>> <%= nice_user(reseller) %> </option>
+            <%end%>
+          </select>
+            &nbsp;&nbsp;<%= submit_tag _('Change_date'), :disable_with=>_('Processing..')%>
+          <% end %>
+       
+      </div>
+    </td>
+  </tr>
+</table>
+
+<br/>
+
+<% if @calls.size > 0 %>
+
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="center">		  &nbsp;<%= _('date') %>	    </th>
+      <th align="left">		  <%= _('called_to') %>	    </th>
+      <th align="left">		  <%= _('Destination') %>	    </th>
+      <th align="center">		  <%= _('Duration') %>	    </th>
+      <% if can_see_finances? %>
+        <th align="right">		  <%= _('User_rate') %>	    </th>
+        <th align="right">		  <%= _('Provider_rate') %>	    </th>
+        <th align="right">		  <%= _('Difference') %>	    </th>
+        <th align="right">		  <%= _('User_price') %>	    </th>
+        <th align="right">		  <%= _('Provider_price') %>	    </th>
+        <th align="right">		  <%= _('Loss') %>	    </th>
+      <% end %>
+      <th align="right">		  <%= _('User') + " - " + _('Device')%>	    </th>
+      <% if session[:usertype] == "admin" %>
+        <th></th>
+      <% end %>
+    </tr>
+
+    <% @calls.each_with_index { |call, i| %>
+      <% prov = call.provider %>
+      <% text_class="n" %>
+      <% @dest = Destination.find(:first, :conditions => ["prefix = ?", call.prefix]) -%>
+      <% @dest && @dest.name ? dest_name = @dest.name : dest_name = "" -%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="calldate_<%= call.id %>" class="<%= text_class %>"  align="center"><%= nice_date_time(call.calldate)%></td>
+        <td id="call_to_<%= call.id %>" class="<%= text_class %>"><%= call.dst %></td>
+        <td id="dest_<%= call.id %>" class="<%= text_class %>"><%= @dest.direction.name + " " + dest_name + " " + @dest.subcode if @dest %></td>
+        <!-- duration -->
+        <td id="billsec_<%= call.id %>" class="<%= text_class %>" align="center">
+          <%if call.billsec.to_i == 0%>
+            <%= nice_time(call.real_billsec) %>
+          <%else%>
+            <%= nice_time(call.billsec) %>
+          <%end%>
+        </td>
+        <!-- user rate -->
+        <% if can_see_finances? %>
+          <td id="user_rate_<%= call.id %>" class="<%= text_class %>"  align="right">
+            <% @dg = Destinationgroup.find_by_sql("SELECT destinationgroups.* FROM destinationgroups, destinations WHERE destinationgroups.id = destinations.destinationgroup_id AND destinations.prefix = '#{call.prefix}'") if call.prefix %>
+            <% if @dg && @dg[0] && prov && call.user%>
+              <%= link_to nice_number(call.user_rate), :controller => "tariffs", :action => "user_arates_full", :id => call.user.tariff, :dg => @dg[0]["id"] %>
+            <% else %>
+              <%= nice_number(call.user_rate) %>
+            <% end %>
+          </td>
+
+
+          <% if prov %>
+            <% sql = "SELECT rates.* FROM rates JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix=SUBSTRING('#{call.prefix}', 1, LENGTH(destinations.prefix))) as A ON (A.id = rates.destination_id)  WHERE rates.tariff_id = '#{prov.tariff_id}'"%>
+            <% @rate = Rate.find_by_sql(sql) %>
+          <% end %>
+
+          <td id="provider_rate_<%= call.id %>" class="<%= text_class %>"  align="right">
+            <% if @rate && @rate[0] %>
+              <%= link_to nice_number(call.provider_rate), :controller => "tariffs", :action => "rate_details", :id => @rate[0]["id"] %>
+            <% else %>
+              <%= nice_number(call.provider_rate) %>
+            <% end %>
+          </td>
+
+          <td id="difference_<%= call.id %>" class="<%= text_class %>"  align="right"><%= nice_number(call.provider_rate - call.user_rate) %></td>
+          <td id="user_price_<%= call.id %>" class="<%= text_class %>"  align="right"><%= nice_number(call.user_price) %></td>
+          <td id="provider_price_<%= call.id %>" class="<%= text_class %>"  align="right"><%= nice_number(call.provider_price) %></td>
+          <td id="loss_<%= call.id %>" class="<%= text_class %>"  align="right"><%= nice_number(call.provider_price - call.user_price) %></td>
+        <% end %>
+        <% user = call.user
+        device = call.device%>
+        <td id="device_<%= call.id %>" class="<%= text_class %>"  align="right">
+          <% if user && device %>
+            <%= user.first_name + " " + user.last_name + " - " %>
+            <%= device.device_type + "/" + device.name %>
+          <% end %>
+        </td>
+        <% if session[:usertype] == "admin" %>
+          <td align="right" >
+            <% if call.getDebugInfo != nil %>
+              <%= image_tag('icons/cog.png', :border => 0, :onmouseover=> "Tip(\'"+format_debug_info(call.getDebugInfo)+"\')", :onmouseout => "UnTip()" ) %>
+            <% end %>
+          </td>
+        <% end%>
+      </tr>
+    <% } %>
+    <tr>
+      <th align="left"> &nbsp;<%= _('Total') %>:</th>
+      <th></th>
+      <th></th>
+      <th id="total_duration" align="center"><%= nice_time @total_calls[0].total_duration.to_i %></th>
+      <% if can_see_finances? %>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th id="total_loss" align="right"><%= nice_number @total_calls[0].total_loss.to_f %></th>
+      <% end %>
+      <% if session[:usertype] == "admin" %>
+        <th></th>
+      <% end%>
+      <th></th>
+    </tr>
+  </table>
+<% else %>
+  <%= _('you_have_no_calls') %>
+<% end%>

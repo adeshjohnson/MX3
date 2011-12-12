@@ -1,0 +1,25 @@
+<table width="50%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Name') %></th>
+    <th align="left"><%= _('context') %></th>
+    <th align="left"><%= _('Extension') %></th>
+    <th align="left"><%= _('Priority') %></th>
+    <th align="left"><%= _('Pf_type') %></th>
+    <% if reseller_active? %>
+      <th align="center"><%= _('Allow_to_resellers') %>?</th>
+    <% end %>
+
+  </tr>
+  <%  @pbx_functions.each_with_index { |p, i| %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <td id ="name_<%= p.id %>" align="left"><%=h p.name %></td>
+      <td id ="context_<%= p.id %>" align="left"><%=h p.context %></td>
+      <td id ="extension_<%= p.id %>" align="left"><%=h p.extension %></td>
+      <td id ="priority_<%= p.id %>" align="left"><%=h p.priority %></td>
+      <td id ="pf_type_<%= p.id %>" align="left"><%=h p.pf_type %></td>
+      <% if reseller_active? %>
+        <td id ="allow_<%= p.id %>" align="center"><%= link_to (p.allow_resellers.to_i == 1 ? b_check : b_cross), {:action=>:set_allow, :id=>p.id},  {:confirm => _('Are_you_sure'), :method => :post, :id => "allow_for_reseller_#{p.id}"} %></td>
+      <% end %>
+    </tr>
+  <% } %>
+</table>

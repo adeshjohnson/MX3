@@ -1,0 +1,126 @@
+<div class="nb"><%= b_user + _('user') %>: <%= link_nice_user(@user) %></div>
+<br />
+<%= page_select_header(@page, @total_pages) %>
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left">        <%= _('Acc') %>      </th>
+    <th align="left">              </th>
+    <th align="left">        <%= _('Description') %>      </th>
+    <% if !(session[:usertype] == "accountant" and session[:acc_device_pin].to_i == 0)%>
+      <th align="left">        <%= _('PIN') %>      </th>
+    <% end %>
+    <th align="center" colspan="2">        <%= _('Type') %>      </th>
+    <th align="left">        <%= _('Extension') %>      </th>
+    <th align="left">        <%= _('Username') %>      </th>
+    <% if !(session[:usertype] == "accountant" and session[:acc_device_password].to_i == 0)%>
+      <th align="left">        <%= _('Password') %>      </th>
+    <% end %>
+    <th align="left">        <%= _('CallerID') %>      </th>
+    <% if session[:usertype] == "admin" or session[:usertype] == "reseller"%>
+      <th align="center">        <%= _('Call_Flow') %>      </th>
+    <% end %>
+    <% if session[:usertype] == "admin" or session[:usertype] == "reseller" %>
+      <th align="center">        <%= _('Dids') %>      </th>
+    <% end %>
+    <th align="center">        <%= _('CLIs') %>      </th>
+    <% if session[:usertype] == "admin" %>
+      <th></th>
+      <th></th>
+    <% elsif session[:usertype] == "reseller" %>
+      <th></th>
+    <% end %>
+    <th>    </th>
+    <% if @allow_edit %>
+      <th>    </th>
+    <% end  %>
+  </tr>
+
+  <% @devices.each_with_index{ | device, i| %>
+    <% provider = device.provider %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <td id="id_<%= device.id %>"><%= device.id %></td>
+      <td id="status_<%= device.id %>" align="center"><%= device_reg_status(device) %></td>
+      <td id="description_<%= device.id %>"><%= b_primary_device if device.id == @user.primary_device_id %><%= device.description %></td>
+      <% if !(session[:usertype] == "accountant" and session[:acc_device_pin].to_i == 0)%>
+        <td id="pin_<%= device.id %>"><%= device.pin if device.device_type != "Skype"%></td>
+      <% end %>
+      <td id="pic_<%= device.id %>" align="center"><%= nice_device_pic device %></td>
+      <td id="type_<%= device.id %>"><%= print_tech device.device_type %></td>
+      <td id="extension_<%= device.id %>"><%= device.extension %></td>
+      <td id="name_<%= device.id %>"><%= device.name  if device.device_type == "SIP" or device.device_type == "IAX2"or device.device_type == "Skype" %></td>
+      <% if !(session[:usertype] == "accountant" and session[:acc_device_password].to_i == 0)%>
+        <td id="secret_<%= device.id %>"><%= device.secret  if device.device_type == "SIP" or device.device_type == "IAX2"  %></td>
+      <% end %>
+      <td id="callerid_<%= device.id %>"><%= h device.callerid %></td>
+      <% if session[:usertype] == "admin"  or session[:usertype] == "reseller"%>
+        <td id="callflow_<%= device.id %>" align="center"><%= link_to(b_callflow, {:action => "callflow", :id => device.id}, {:id=> "callflow_link_" + device.id.to_s}) %></td>
+      <% end %>
+      <% if session[:usertype] == "admin" or session[:usertype] == "reseller"%>
+        <td id="did_<%= device.id %>" align="center">
+          <%= link_to(b_did, {:action => "device_dids", :id => device.id}, {:id => "did_link_" + device.id.to_s}) %>
+        </td>
+      <% end %>
+      <td id="cli_<%= device.id %>" align="center">
+        <%= link_to(b_cli , {:action => "device_clis", :id => device.id}, {:id => "cli_link_" + device.id.to_s}) if device.device_type != "Skype"%>
+      </td>
+      <% if session[:usertype] == "admin"  %>
+        <td id="recordings_<%= device.id %>" align="center"><%= link_to b_music, {:controller => 'recordings', :action => 'show', :show_rec => device.id}, {:title => _('Recordings', :id=>"recordings_link_" + device.id.to_s)} %></td>
+      <% end %>
+      <% if session[:usertype] == "admin" or session[:usertype] == "reseller"%>
+        <td id="all_details_<%= device.id %>" align="center">
+          <%= link_to(b_view, {:action => "device_all_details", :id => device.id},{:id => "all_details_link_" + device.id.to_s}) %>
+        </td>
+      <% end %>
+      <td id="edit_<%= device.id %>" align="center">
+        <% if not provider%>
+          <%= link_to(b_edit, {:action => "device_edit", :id => device.id}, {:id=> "edit_link_" + device.id.to_s}) %>
+        <% else %>
+          <%= link_to(b_edit, {:controller => "providers", :action => "edit", :id => provider.id}, {:id=> "edit_link_" + device.id.to_s}) %>
+        <% end %>
+      </td>
+      <% if @allow_edit %>
+        <td id="destroy_<%= device.id %>" align="center">
+          <%= if device.provider
+                link_to(b_unassign(:title => _('Unassign_provider')), { :controller => 'providers', :action => 'unassign', :id => device.provider.id }, {:confirm => _('are_you_sure'), :method => :post, :id => "unassign_link_" + device.provider.id.to_s})
+              else
+                link_to(b_delete, { :action => 'destroy', :id => device.id }, {:confirm => _('are_you_sure'), :method => :post, :id => "destroy_link_" + device.id.to_s})
+              end%>
+        </td>
+      <% end %>
+    </tr>
+  <% } %>
+</table>
+<br />
+
+<% if !(session[:usertype] == "accountant" and session[:acc_device_create].to_i == 0 or session[:acc_device_create].to_i == 1) %>
+  <%= link_to b_add + _('Add_new_device'), :controller => 'devices', :action => "new", :user_id => @user.id, :return_to_controller=>@return_controller, :return_to_action => @return_action %>
+  <br />
+  <br />
+<% end %>
+<br />
+<% if @provdevices and not @provdevices.empty? and allow_manage_providers? %>
+  <%= link_to_function(b_add + _('Assign_Provider'), "Element.toggle('addprov_details')") %>
+<% end %>
+
+<% form_tag :action => 'assign_provider', :id => @user.id do %>
+  <div id="addprov_details" <%= "style='display:none;'" %>>
+    <br />
+    <table width="100%" class="simple">
+      <tr>
+        <td>
+          <% if @provdevices %>
+            <select name="provdevice"  >
+              <% for device in @provdevices %>
+                <% provider = device.provider %>
+                <% if provider %>
+                  <option value="<%= device.id %>" > <%= provider.name %> - <%= device.device_type %>/<%= device.ipaddr %></option>
+                <% end %>
+              <% end %>
+            </select>
+          <% end %>
+          <%= submit_tag _('Assign'), :disable_with=>_('Processing..')%>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>

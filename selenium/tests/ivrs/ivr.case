@@ -1,0 +1,1099 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>ivr</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ivr</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--go to pbx functions-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/pbx_functions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>ext</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ext</td>
+	<td>*99</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Dial Local</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>type_id</td>
+	<td>label=Dial Local</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>PBX function created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID assigned to Dial Plan: Dial Local</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<!--verify changes-->
+<tr>
+	<td>verifyText</td>
+	<td>status_1</td>
+	<td>Active</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dialplan_1</td>
+	<td>Dial Local (pbxfunction)</td>
+</tr>
+<!--Creating IVR voices-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivrvoices/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ivr[voice]</td>
+	<td>ivr_en</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ivr[description]</td>
+	<td>a</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IVR Voice created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivrvoices/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=New Sound File</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//div[@id='add_new_sound_file']/input[1]</td>
+	<td>win_sound</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/test_Windows.wav</td>
+</tr>
+<!--...File input and conversion takes lot of time.-->
+<tr>
+	<td>click</td>
+	<td>//input[@name='commit' and @value='Upload file']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>120000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Sound file was uploaded</td>
+	<td></td>
+</tr>
+<!--creating a new time period-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr_time_periods/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>period_name</td>
+	<td>testinis</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Time Period created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>testinis</td>
+	<td></td>
+</tr>
+<!--creating new IVR-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ivr_name</td>
+	<td>dial_user</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IVR created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>action_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>action_1</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>change_action_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSomethingSelected</td>
+	<td>change_action_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_2</td>
+	<td>label=Playback</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>change_action_2</td>
+	<td>Playback</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>change_action_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_3</td>
+	<td>label=Transfer To</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>change_action_3</td>
+	<td>Transfer To</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>action_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>action_3</td>
+	<td>IVR</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_3</td>
+	<td>label=DID</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>action_3</td>
+	<td>DID</td>
+</tr>
+<tr>
+	<td>waitForSelectedValue</td>
+	<td>action_param_3</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>action_param_3</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>change_action_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>change_action_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_4</td>
+	<td>label=Hangup</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>action_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>action_4</td>
+	<td>Busy</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>change_action_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>change_action_5</td>
+	<td>Delay</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_5</td>
+	<td>label=Debug</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>action_5</td>
+	<td>New_Block_was_reached.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>change_action_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_6</td>
+	<td>label=Set Accountcode</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>action_6</td>
+	<td>System Admin - IAX2/103</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_6</td>
+	<td>label=User Resellers - IAX2/105</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>action_6</td>
+	<td>User Resellers - IAX2/105</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>change_action_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSomethingSelected</td>
+	<td>change_action_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_7</td>
+	<td>label=Change Voice</td>
+</tr>
+<tr>
+	<td>waitForSomethingSelected</td>
+	<td>action_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#exclamation_4 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#exclamation_5 &gt; img[alt=&quot;Exclamation&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#exclamation_6 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#exclamation_7 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>css=#exclamation_7 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>This action will not be taken, because call will be transferred out of this IVR with 'Transfer To' action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>css=#exclamation_7 &gt; img</td>
+	<td></td>
+</tr>
+<!--==create new block-->
+<tr>
+	<td>click</td>
+	<td>link=Add new Block</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_name</td>
+	<td>New Block</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>block_name</td>
+	<td>block2</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>last_changed</td>
+	<td>block_name:block2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>change_action_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>change_action_9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSomethingSelected</td>
+	<td>change_action_9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_9</td>
+	<td>label=Hangup</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>change_action_9</td>
+	<td>Hangup</td>
+</tr>
+<!--==make 2 extensions of previously created blocks-->
+<!--ext_blockt -  a hack to cause a delay in selenium...-->
+<tr>
+	<td>click</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>ext_blockt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>ext_block0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>ext_block1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectOptions</td>
+	<td>ext_blockt</td>
+	<td>*New_Block,block2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ext_block0</td>
+	<td>label=block2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ext_block1</td>
+	<td>label=New_Block</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>change_action_10</td>
+	<td></td>
+</tr>
+<!--Test timeout digits and respons-->
+<tr>
+	<td>type</td>
+	<td>block_timeout_digits</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>block_timeout_response</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_timeout_response</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>block_timeout_digits</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_timeout_digits</td>
+	<td>11</td>
+</tr>
+<!--add new actions-->
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=change_action_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=change_action_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=change_action_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=change_action_14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=change_action_15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=change_action_16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=change_action_17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=change_action_18</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>css=#exclamation_12 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>css=#exclamation_13 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>css=#exclamation_14 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>css=#exclamation_15 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>css=#exclamation_16 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>css=#exclamation_17 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>css=#exclamation_18 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=change_action_11</td>
+	<td>label=Transfer To</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#change_action_11 &gt; option[value=&quot;Transfer To&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action_param_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#exclamation_12 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#exclamation_13 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>css=#exclamation_14 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>css=#exclamation_15 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>css=#exclamation_16 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>css=#exclamation_17 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>css=#exclamation_18 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>css=#exclamation_18 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>This action will not be taken, because call will be transferred out of this IVR with 'Transfer To' action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>css=#exclamation_18 &gt; img</td>
+	<td></td>
+</tr>
+<!--creating new dial plan-->
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan_name</td>
+	<td>Dial local with audio</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dialplan[data2]']</td>
+	<td>label=dial_user</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>document.forms[3].elements[6]</td>
+	<td>label=testinis</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[1]/td[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<!--creating new did-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_did</td>
+	<td>22222</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID was successfully created</td>
+	<td></td>
+</tr>
+<!--Edit DID-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//form[3]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID assigned to Dial Plan: Dial local with audio</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_3</td>
+	<td>Active</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dialplan_3</td>
+	<td>Dial local with audio (ivr)</td>
+</tr>
+<!--Test IVR destroy-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IVR is in use</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IVR not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<!--Check if table with block list exists and works-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=block2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='block_name']</td>
+	<td>block2</td>
+</tr>
+<!--Check if add block is working-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/add_block?block_id=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IVR block was not found</td>
+	<td></td>
+</tr>
+<!--Verify block refresh.-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/refresh_edit_window?block_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IVR Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/refresh_edit_window?block_id=111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Block was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>change_action_1</td>
+	<td>Delay</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>change_action_2</td>
+	<td>Playback</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>change_action_3</td>
+	<td>Transfer To</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>change_action_4</td>
+	<td>Hangup</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>change_action_5</td>
+	<td>Debug</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>change_action_6</td>
+	<td>Set Accountcode</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>change_action_7</td>
+	<td>Change Voice</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>action_1</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>action_2</td>
+	<td>silence</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>action_3</td>
+	<td>DID</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>action_5</td>
+	<td>New_Block_was_reached.</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>action_6</td>
+	<td>User Resellers - IAX2/105</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>action_7</td>
+	<td>silence</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>action_sound_files_2</td>
+	<td>silence1.wav</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>action_param_3</td>
+	<td>37063042438 (active)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=block2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_name</td>
+	<td>block2</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>change_action_8</td>
+	<td>Delay</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>change_action_9</td>
+	<td>Hangup</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>change_action_10</td>
+	<td>Delay</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>action_8</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>action_9</td>
+	<td>Busy</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>action_10</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MOR 0.8</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

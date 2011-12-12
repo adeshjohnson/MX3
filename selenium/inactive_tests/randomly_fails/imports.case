@@ -1,0 +1,1575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>imports</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">imports</td></tr>
+</thead><tbody>
+<!--Testas luzta del senu rails ir fcgi, todel iskeltas, kol bus atnaujintas mor'as i rails3-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/check_separator?min_collum_size=2&amp;sepn=;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please select file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<!--Set default tax before importing-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_6']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>total_tax</td>
+	<td>Total_tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1name</td>
+	<td>First-tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2name</td>
+	<td>Second-tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3name</td>
+	<td>Third-tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4name</td>
+	<td>Forth-tax</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax2active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax3active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax4active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3value</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4value</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--USER DATA-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/user_data.csv</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>include</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>temp_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>temp_id</td>
+	<td>label=38</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>username</td>
+	<td>label=38</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>password</td>
+	<td>label=11420471-2-03</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>first_name</td>
+	<td>label=Lajosmizse</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>last_name</td>
+	<td>label=Lajosmizse</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>personal_id</td>
+	<td>label=csorba@csorba-rt.hu</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>country</td>
+	<td>label=Lajosmizse</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>email</td>
+	<td>label=csorba@csorba-rt.hu</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>username_8</td>
+	<td>2138</td>
+</tr>
+<!--IMPORTING DEVICES-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Import Devices from CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/device_data.csv</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>include</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>temp_device_id</td>
+	<td>label=38</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>temp_user_id</td>
+	<td>label=38</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device_type</td>
+	<td>label=sip</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>extension</td>
+	<td>label=asd dsa u.12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>username</td>
+	<td>label=7ewfw@sip.example.com</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>password</td>
+	<td>label=76824435</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>host</td>
+	<td>label=dynamic</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>cli_name</td>
+	<td>label=38</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>cli_number</td>
+	<td>label=3676586421</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<!--Importing DIDs-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Import DIDs from CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/dids.csv</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>include</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>temp_user_id</td>
+	<td>label=38</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>temp_device_id</td>
+	<td>label=38</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>did</td>
+	<td>label=37067531061</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider</td>
+	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DIDs created</td>
+	<td></td>
+</tr>
+<!--USER DATA bad seperators-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/user_data2.csv</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>include</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>temp_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotSelectedLabel</td>
+	<td>temp_id</td>
+	<td>label=388</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/user_data2.csv</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>include</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>use_suggestion</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>temp_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>temp_id</td>
+	<td>label=388</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>username</td>
+	<td>label=388</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>password</td>
+	<td>label=11420471-2-03</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>first_name</td>
+	<td>label=Lajosmizse</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>last_name</td>
+	<td>label=Lajosmizse</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>personal_id</td>
+	<td>label=csorba@csorba-rt.hu</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>country</td>
+	<td>label=Lajosmizse</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>email</td>
+	<td>label=csorba@csorba-rt.hu</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>username_8</td>
+	<td>2138</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>username_10</td>
+	<td>21388</td>
+</tr>
+<!--import devices whit ; seperator-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Import Devices from CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/device_data2.csv</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>include</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotSelectedLabel</td>
+	<td>temp_device_id</td>
+	<td>label=388</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/device_data2.csv</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>include</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>use_suggestion</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>temp_device_id</td>
+	<td>label=388</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>temp_user_id</td>
+	<td>label=388</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device_type</td>
+	<td>label=sip</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>extension</td>
+	<td>label=asd dsa u.128</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>username</td>
+	<td>label=7ewfw@sip.example.com</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>password</td>
+	<td>label=76824435</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>host</td>
+	<td>label=dynamic</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>cli_name</td>
+	<td>label=388</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>cli_number</td>
+	<td>label=3676586421</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/10?return_to_action=import_user_data&amp;return_to_controller=functions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>extension_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>extension_12</td>
+	<td>jkl lkj u.128</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>extension_12</td>
+	<td>jkl lkj u.128</td>
+</tr>
+<!--confirm view test-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/user_data2.csv</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>include</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>use_suggestion_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>use_suggestion_2</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>sepn2</td>
+	<td>;</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>decn2</td>
+	<td>/</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>sep_row_1_0</td>
+	<td>388</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>sep_row_2_0</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>sep_row_3_0</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>use_suggestion_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sepn2</td>
+	<td>-</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>n2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='n2']/div</td>
+	<td>Not enough columns - select correct Column Separator</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>sep_row_1_0</td>
+	<td>388;2;0;&quot;NULL&quot;;&quot;NULL&quot;;TRUE;&quot;11420471</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>sep_row_2_0</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>use_suggestion_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>sep_row_1_0</td>
+	<td>388</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>sep_row_1_0</td>
+	<td>388</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sepn2</td>
+	<td>-</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>sep_row_1_0</td>
+	<td>388</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sepn2</td>
+	<td>_</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>n2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Not enough columns - select correct Column Separator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<!--Import tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>increment_id</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Created destinations: 9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New rates created: 20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Congratulations, successfully imported CSV file!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria_3.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>use_suggestion_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sepn2</td>
+	<td>æ</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>notice</td>
+	<td>Not enough columns - select correct Column Separator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sepn2</td>
+	<td>.</td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>notice</td>
+	<td>Not enough columns - select correct Column Separator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sepn2</td>
+	<td>†</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>notice</td>
+	<td>Not enough columns - select correct Column Separator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sepn2</td>
+	<td>/</td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>notice</td>
+	<td>Not enough columns - select correct Column Separator</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>increment_id</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Created destinations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria_4.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>use_suggestion_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>sepn2</td>
+	<td>\</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>increment_id</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Created destinations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/Rates-USD.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>update_dest_names</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>update_dest_names</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>update_dest_names</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=Prefix</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=Rate(USD)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>destination_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=Connection Fee(USD)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=Increment</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=Minimal Time</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>country_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>country_code_id</td>
+	<td>label=Country code</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>subcode</td>
+	<td>label=Subcode</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>increment_id</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td>Confirm columns</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[@id='destinations_to_update']/b</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Created destinations: 0<br />Destination names updated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rates updated: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>New rates created: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/prefix_finder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>search</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Lietuvos kodas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tariff_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tariff_name</td>
+	<td>zzvzdgv</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tariff[purpose]_user_wholesale</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/Rates-USD.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>update_dest_names</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

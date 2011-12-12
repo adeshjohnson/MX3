@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.163" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/active_calls_pop_up</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Sound&quot;]</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>verifyElementPresent</td> 	<td>//div[@id='active_calls']/table/tbody/tr[3]/td[7]/a/img</td> 	<td></td> </tr> <tr> 	<td>verifyElementPresent</td> 	<td>//div[@id='active_calls']/table/tbody/tr[4]/td[7]/a/img</td> 	<td></td> </tr> <tr> 	<td>verifyElementPresent</td> 	<td>//div[@id='active_calls']/table/tbody/tr[4]/td[7]/a/img</td> 	<td></td> </tr> <tr> 	<td>verifyElementPresent</td> 	<td>//div[@id='active_calls']/table/tbody/tr[5]/td[7]/a/img</td> 	<td></td> </tr> <tr> 	<td>verifyElementPresent</td> 	<td>//div[@id='active_calls']/table/tbody/tr[6]/td[7]/a/img</td> 	<td></td> </tr> <tr> 	<td>verifyElementPresent</td> 	<td>//div[@id='active_calls']/table/tbody/tr[7]/td[7]/a/img</td> 	<td></td> </tr> <tr> 	<td>verifyElementPresent</td> 	<td>//div[@id='active_calls']/table/tbody/tr[8]/td[7]/a/img</td> 	<td></td> </tr>-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='active_calls']/table/tbody/tr[10]/td[7]</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>verifyElementPresent</td> 	<td>//div[@id='active_calls']/table/tbody/tr[10]/td[7]/a/img</td> 	<td></td> </tr> <tr> 	<td>verifyElementPresent</td> 	<td>//div[@id='active_calls']/table/tbody/tr[11]/td[7]/a/img</td> 	<td></td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>user[currency_id]</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//td[@id='status_0']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Server</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tariff_name</td>
+	<td>naujastarifas</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tariff[currency]</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_tariff_id</td>
+	<td>label=Retail - naujastarifas</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//td[@id='status_0']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Server</td>
+	<td></td>
+</tr>
+<!--Tikrinama valiuta, del active calls persikrovimo dingsta valiuta-->
+<!--<tr> 	<td>waitForTextPresent</td> 	<td>USD</td> 	<td></td> </tr>-->
+<tr>
+	<td>mouseOver</td>
+	<td>//td[@id='status_1']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Server</td>
+	<td></td>
+</tr>
+<!--Tikrinama valiuta, del active calls persikrovimo dingsta valiuta-->
+<!--<tr> 	<td>waitForTextPresent</td> 	<td>USD</td> 	<td></td> </tr>-->
+<tr>
+	<td>mouseOver</td>
+	<td>//td[@id='status_2']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Server</td>
+	<td></td>
+</tr>
+<!--Tikrinama valiuta, del active calls persikrovimo dingsta valiuta-->
+<!--<tr> 	<td>waitForTextPresent</td> 	<td>USD</td> 	<td></td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>306984327349</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>306984327347</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>306984327348</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID (37063042438)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Information&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>css=img[alt=&quot;Information&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Can not spy virtual device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>css=img[alt=&quot;Information&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/active_calls/delete_from_active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>306984327349</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>306984327347</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>306984327348</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>DID (37063042438)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/active_call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>306984327347</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID (37063042438)</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

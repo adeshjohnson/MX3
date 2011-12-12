@@ -1,0 +1,65 @@
+<table width="100%" class="simple">
+    <tr>
+        <td><%= b_date + nice_date_time(session_from_date) + " - " + nice_date_time(session_till_date)%></td>
+        <td align="right">
+            <% if not @users.empty? %>
+                <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+            <% end %>
+        </td>
+    </tr>
+</table>
+
+
+<% form_tag :action => 'faxes' do %>
+<div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+<br>
+      <%= _('From') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+     &nbsp;&nbsp;<%= _('to') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+     &nbsp;&nbsp;<%= submit_tag _('Change_date'), :disable_with=>_('Processing..')%>
+</div>
+<% end %>
+
+<br>
+
+<% if not @users.empty? %>
+
+
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Name') %></th> 
+    <th align="right"><%= _('Received') %></th> 
+    <th align="right"><%= _('Corrupted') %></th> 
+    <th align="right"><%= _('Mistaken') %></th>   
+    <th align="right"><%= _('Total') %></th>       
+    <th align="right"><%= _('Size_on_HDD') %> (<%= _('MB') %>)</th>           
+  </tr>
+<% i = 0 %>     
+<% for user in @users %>
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+    <td align="left">         <%= link_nice_user user %> </td>
+    <td align="right">        <%= link_to @received[i], :action => "faxes_list", :id => user.id, :fstatus => "good" %> </td>
+    <td align="right">        <%= link_to @corrupted[i], :action => "faxes_list", :id => user.id, :fstatus => "pdf_size_0" %> </td>
+    <td align="right">        <%= link_to @mistaken[i], :action => "faxes_list", :id => user.id, :fstatus => "no_tif" %> </td>    
+    <td align="right">        <%= link_to @total[i], :action => "faxes_list", :id => user.id %> </td>   
+    <td align="right">        <%= nice_number @size_on_hdd[i] %> </td>   
+ </tr>
+    <% i += 1%>   
+<% end %>
+
+  <tr>
+    <th align="left"><%= _('Total') %>:</th> 
+    <th align="right"><%= @t_received %></th> 
+    <th align="right"><%= @t_corrupted %></th> 
+    <th align="right"><%= @t_mistaken %></th>   
+    <th align="right"><%= @t_total %></th>       
+    <th align="right"><%= nice_number @t_size_on_hdd %></th>           
+  </tr>
+
+</table>
+
+
+<% else %>
+
+    <%= _('No_data') %>
+
+<% end %>

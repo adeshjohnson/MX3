@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>call_shop2</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">call_shop2</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/callshop/test_callshop</td>
+	<td></td>
+</tr>
+<!--#tikrinu pavadinimus-->
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<!--#18. Members->Phone boots(dabar jau Call booths)-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call booths</td>
+	<td></td>
+</tr>
+<!--#30. Call hop->Call shop-->
+<tr>
+	<td>verifyText</td>
+	<td>page_title_icon</td>
+	<td>Call Shops</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Call hops</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Members</td>
+	<td></td>
+</tr>
+<!--#31. Edit Group -> Edit Call Shop-->
+<tr>
+	<td>open</td>
+	<td>/billing/groups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title_icon</td>
+	<td>Edit Call Shop</td>
+</tr>
+<!--#33. Group was not found -> Call shop was not found-->
+<tr>
+	<td>open</td>
+	<td>/billing/groups/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call Shop was not found</td>
+	<td></td>
+</tr>
+<!--#34. Dont_be_so_smart -> Don't be so smart-->
+<tr>
+	<td>open</td>
+	<td>/billing/groups/remove_member?group=1&amp;user=20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--#buvau radusi nepataisyta, bet atkartoti nepavyko-->
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Dont_be_so_smart</td>
+	<td></td>
+</tr>
+<!-------->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>Test_user_1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>Test_user_11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>group_name</td>
+	<td>Test_shop</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/members/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>new_member</td>
+	<td>label=Test_user_1 -</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Make this user a manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call booth was successfully added</td>
+	<td></td>
+</tr>
+<!--#35. add same user with direct link-->
+<tr>
+	<td>open</td>
+	<td>/billing/groups/add_member?group=2&amp;user=6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!-------->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>Test_user_2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>Test_user_21</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/members/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>new_member</td>
+	<td>label=Test_user_2 -</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Call booth was not added<br />* Call Shop can have only one manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>Test_user_1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>Test_user_11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--#39. PREPAID 2 skaiciai po kablelio-->
+<tr>
+	<td>click</td>
+	<td>css=#booth-7 a.start-session</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>invoice_invoice_type_prepaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_balance</td>
+	<td>2.5678</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>PREPAID (2.57)</td>
+	<td></td>
+</tr>
+<!--Ispejimas useriui del multiple devices for call booth-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>teset_device1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>teset_device2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User in Call Shop can have only one Device, creating more is dangerous</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>teset_device3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User in Call Shop can have only one Device, creating more is dangerous</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

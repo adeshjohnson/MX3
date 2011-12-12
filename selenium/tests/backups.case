@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>backups</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">backups</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_manager</td>
+	<td></td>
+</tr>
+<!--create backup-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New Backup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comment</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Backup created</td>
+	<td></td>
+</tr>
+<!--verify backup-->
+<tr>
+	<td>verifyText</td>
+	<td>type_1</td>
+	<td>manual</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>comment_1</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>download_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Database_go']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>restore_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Database_refresh']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>destroy_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<!--verify action-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>type_4</td>
+	<td>backup_created</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>data_4</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_4</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>data2_4</td>
+	<td>0</td>
+</tr>
+<!--make difference, create email-->
+<tr>
+	<td>open</td>
+	<td>/billing/emails/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_name</td>
+	<td>testinis</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_subject</td>
+	<td>testinis</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Email was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_testinis</td>
+	<td>testinis</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>subject_testinis</td>
+	<td>testinis</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>emails_testinis</td>
+	<td>0</td>
+</tr>
+<!--restore-->
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Database_refresh']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Backup restored</td>
+	<td></td>
+</tr>
+<!--verifay action-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>type_4</td>
+	<td>backup_restored</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>data_4</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>data2_4</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_4</td>
+	<td>System Admin</td>
+</tr>
+<!--verify email-->
+<tr>
+	<td>open</td>
+	<td>/billing/emails/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>name_testinis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>subject_testinis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>emails_testinis</td>
+	<td></td>
+</tr>
+<!--delete-->
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Backup deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>type_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>comment_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>download_1</td>
+	<td></td>
+</tr>
+<!--deleting not existing backup-->
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_destroy/1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Backup not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<!--trying to restore not existing backup-->
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_restore/100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Backup not found</td>
+	<td></td>
+</tr>
+<!--trying to download not existing backup-->
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_download/100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Backup not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<!--101/101-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_download/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_restore/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!--reseller/reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_download/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_restore/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!--accountant/accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_download/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_restore/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!--auto backup-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>hour</td>
+	<td>back_time</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>shedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>backup_month</td>
+	<td>label=Every month</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>backup_month_day</td>
+	<td>label=Every day</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>backup_week_day</td>
+	<td>label=Every day</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>hour</td>
+	<td>label=${back_time}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/hourly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>To fast.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Mission complete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='edit_link_1']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>type_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>did_assigned_to_dp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>type_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>type_2</td>
+	<td>auto</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>back_restore_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Backup restored</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>type_21</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>did_assigned_to_dp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>type_21</td>
+	<td>backup_restored</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<table class="maintable" width="100%">
+  <tr>
+    <th><%= _("Prefix") %></th>
+    <th><%= _("Old_Name") %></th>
+    <th><%= _("New_Name") %></th>
+  </tr>
+  <% if  @dst and @dst.size.to_i > 0%>
+    <%if @csv2.to_i == 0%>
+      <% @dst.each_with_index{ |dst, i| %>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <td><%= dst[0] %></td>
+          <td><%= dst[1][:old_name] %></td>
+          <td><%= dst[1][:new_name] %></td>
+        </tr>
+      <% } %>
+    <%else%>
+      <% @dst.each_with_index{ |row, i| %>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <td><%= row["prefix"].to_s  %></td>
+          <td><%= row['dest_name'].to_s  %></td>
+          <td><%= row["new_name"].to_s  %></td>
+        </tr>
+      <% } %>
+    <%end%>
+  <%end%>
+</table>

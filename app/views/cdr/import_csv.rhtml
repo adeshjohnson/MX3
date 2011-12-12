@@ -1,0 +1,443 @@
+
+<% if @step == 0 %>
+  <br />
+  <%= _('CDR_import_from_CSV') %>:
+  <br />
+  <br />
+
+  <% form_tag({:action => 'import_csv', :step => "1"}, {:multipart => "true"}, {:id => "files"}) do %>
+    <%= _('Upload') %>: <%= file_field_tag "file" %>
+    <%= submit_tag( _('Upload_file'), :disable_with=>_('Processing..')  )%>
+  <% end %>
+
+  <br />
+  <br />
+  <%= _('Next_step') + ": " + _('Column_assignment')%>
+<% end %>
+
+<% if @step == 2 %>
+  <% @fl = [] if !@fl %>
+  <%= _('File_size') %>: <%= session[:file_size] %> <%= _('bytes') %>
+  <br />
+  <br />
+  <b><%= _('First_file_lines') %>:</b><br /><br />
+  <% flines = []
+  tl = 0 %>
+  <% for line in session[:file] %>
+    <% flines << line if tl < 5%>
+    <% tl += 1 %>
+  <% end %>
+  <% flines << "...." if tl > 5 %>
+
+  <%= text_area_tag "body", flines, :size => "150x10", :class => "input" %>
+
+  <br />
+  <b><%= _('Total_file_lines') %>: <%= session[:file_lines] %> </b>
+
+
+  <br />
+  <br />
+  <br />
+  <% form_tag( {:action => 'import_csv', :step => 3}) do %>
+    <table class="maintable" width="70%">
+      <tr>
+        <th><%= _('Value') %></th>
+        <th><%= _('Select_from_CSV_file') %></th>
+      </tr>
+      <tr>
+        <td height="20" colspan="2">
+          <b><%= _('Date') %>/<%= _('Time') %></b>
+        </td>
+      </tr>
+      <tr class="row1">
+        <td>  <%= _('Date') %>/<%= _('Time') %> *</td>
+        <td>
+          <div class="nb" align="center">
+            <select name="calldate_id" >
+              <option value="-1">&nbsp;</option>
+              <% i = 0 %>
+              <% for l in @fl %>
+                <option value="<%= i %>" <%= "selected" if session[:cdr_import_csv2] and session[:cdr_import_csv2][:imp_calldate] == i %>> <%= clean_value l %> </option>
+                <% i += 1 %>
+              <% end %>
+            </select>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td height="20" colspan="2">
+          <b><%= _('Source') %></b>
+        </td>
+      </tr>
+
+      <tr class="row1">
+        <td>   <%= _('CLID') %>  </td>
+        <td>
+          <div class="nb" align="center">
+            <select name="clid_id" >
+              <% i = 0 %>
+              <option value="-1">&nbsp;</option>
+              <% for l in @fl %>
+                <option value="<%= i %>" <%= "selected" if session[:cdr_import_csv2] and session[:cdr_import_csv2][:imp_clid] == i %>> <%= clean_value l %> </option>
+                <% i += 1 %>
+              <% end %>
+            </select>
+          </div>
+        </td>
+
+      </tr>
+      <tr class="row">
+        <td>   <%= _('Src_name') %>  </td>
+        <td>
+          <div class="nb" align="center">
+            <select name="src_name_id" >
+              <% i = 0 %>
+              <option value="-1">&nbsp;</option>
+              <% for l in @fl %>
+                <option value="<%= i %>" <%= "selected" if session[:cdr_import_csv2] and session[:cdr_import_csv2][:imp_src_name] == i %>> <%= clean_value l %> </option>
+                <% i += 1 %>
+              <% end %>
+            </select>
+          </div>
+        </td>
+
+      </tr>
+      <tr class="row1">
+        <td>   <%= _('Src_number') %></td>
+        <td>
+          <div class="nb" align="center">
+            <select name="src_number_id" >
+              <option value="-1">&nbsp;</option>
+              <% i = 0 %>
+              <% for l in @fl %>
+                <option value="<%= i %>" <%= "selected" if session[:cdr_import_csv2] and session[:cdr_import_csv2][:imp_src_number] == i %>> <%= clean_value l %> </option>
+                <% i += 1 %>
+              <% end %>
+            </select>
+          </div>
+        </td>
+
+      </tr>
+      <tr>
+        <td height="20" colspan="2">
+          <b><%= _('Other') %></b>
+        </td>
+      </tr>
+      <tr class="row1">
+        <td>   <%= _('Dst') %>  *</td>
+        <td>
+          <div class="nb" align="center">
+            <select name="dst_id" >
+              <option value="-1">&nbsp;</option>
+              <% i = 0 %>
+              <% for l in @fl %>
+                <option value="<%= i %>" <%= "selected" if session[:cdr_import_csv2] and session[:cdr_import_csv2][:imp_dst] == i %>> <%= clean_value l %> </option>
+                <% i += 1 %>
+              <% end %>
+            </select>
+          </div>
+        </td>
+
+      </tr>
+      <tr>
+        <td>   <%= _('Duration') %>  </td>
+        <td>
+          <div class="nb" align="center">
+            <select name="duration_id" >
+              <option value="-1">&nbsp;</option>
+              <% i = 0 %>
+              <% for l in @fl %>
+                <option value="<%= i %>" <%= "selected" if session[:cdr_import_csv2] and session[:cdr_import_csv2][:imp_duration] == i %>> <%= clean_value l %> </option>
+                <% i += 1 %>
+              <% end %>
+            </select>
+          </div>
+        </td>
+
+      </tr>
+      <tr class="row1">
+        <td>   <%= _('Billsec') %>  *</td>
+        <td>
+          <div class="nb" align="center">
+            <select name="billsec_id" >
+              <option value="-1">&nbsp;</option>
+              <% i = 0 %>
+              <% for l in @fl %>
+                <option value="<%= i %>" <%= "selected" if session[:cdr_import_csv2] and session[:cdr_import_csv2][:imp_billsec] == i %>> <%= clean_value l %> </option>
+                <% i += 1 %>
+              <% end %>
+            </select>
+          </div>
+        </td>
+
+      </tr>
+
+      <tr class="row">
+        <td><%= _('Disposition') %></td>
+        <td>
+          <div class="nb" align="center">
+            <select name="disposition_id" >
+              <option value="-1">&nbsp;</option>
+              <% i = 0 %>
+              <% for l in @fl %>
+                <option value="<%= i %>" <%= "selected" if session[:cdr_import_csv2] and session[:cdr_import_csv2][:imp_disposition] == i %>> <%= clean_value  l %> </option>
+                <% i += 1 %>
+              <% end %>
+            </select>
+          </div>
+        </td>
+
+      </tr>
+      <tr class="row1">
+        <td>   <%= _('Accountcode') %>  </td>
+        <td>
+          <div class="nb" align="center">
+            <select name="accountcode_id" >
+              <option value="-1">&nbsp;</option>
+              <% i = 0 %>
+              <% for l in @fl %>
+                <option value="<%= i %>" <%= "selected" if session[:cdr_import_csv2] and session[:cdr_import_csv2][:imp_accountcode] == i %>> <%= clean_value l %> </option>
+                <% i += 1 %>
+              <% end %>
+            </select>
+          </div>
+        </td>
+
+      </tr>
+
+
+
+    </table>
+    <br />
+     * -  <%=  _('p_Required_Fields')%>
+    <br />
+    <br />
+    <%= submit_tag(  _('Assign_columns'), :disable_with=>_('Processing..')  )%>
+  <% end %>
+  <br />
+  <br />
+  <%= _('Next_step') + ": " + _('Column_confirmation')%>
+<% end %>
+
+
+<% if @step == 3 %>
+
+
+  <%= _('File_size') %>: <%= session[:file_size] %> <%= _('bytes') %><br />
+
+  <br />
+  <b>    <%= _('First_file_lines') %>:</b><br /><br />
+
+  <table class="maintable" width="100%">
+    <tr>
+      <th>  <%= _('Date') %>/<%= _('Time') %>  </th>
+      <th>  <%= _('Date') %>  </th>
+      <th>  <%= _('Time') %>  </th>
+      <th>  <%= _('CLID') %>  </th>
+      <th>  <%= _('Src_name') %>  </th>
+      <th>  <%= _('Src_number') %> </th>
+      <th>  <%= _('Dst') %>  </th>
+      <th>  <%= _('Duration') %> </th>
+      <th>  <%= _('Billsec') %>  </th>
+      <th>  <%= _('Disposition') %>  </th>
+      <th>  <%= _('Accountcode') %>  </th>
+    </tr>
+
+
+
+    <% tl = 0 %>
+    <% for line in session[:file] %>
+
+      <% if tl < 20%>
+        <% arr = line.split(@sep) %>
+        <tr class="row<%= (tl % 2 + 1).to_s %>">
+
+          <td> <%= clean_value arr[session[:cdr_import_csv2][:imp_calldate]].to_s.gsub(@dec,".") if session[:cdr_import_csv2][:imp_calldate] >= 0 %>    </td>
+          <td> <%= clean_value arr[session[:cdr_import_csv2][:imp_date]].to_s.gsub(@dec,".") if session[:cdr_import_csv2][:imp_date] >= 0 %>    </td>
+          <td> <%= clean_value arr[session[:cdr_import_csv2][:imp_time]].to_s.gsub(@dec,".") if session[:cdr_import_csv2][:imp_time] >= 0 %>    </td>
+          <td> <%= clean_value arr[session[:cdr_import_csv2][:imp_clid]].to_s.gsub(@dec,".") if session[:cdr_import_csv2][:imp_clid] >= 0 %>    </td>
+          <td> <%= clean_value arr[session[:cdr_import_csv2][:imp_src_name]].to_s.gsub(@dec,".") if session[:cdr_import_csv2][:imp_src_name] >= 0 %>    </td>
+          <td> <%= clean_value arr[session[:cdr_import_csv2][:imp_src_number]].to_s.gsub(@dec,".") if session[:cdr_import_csv2][:imp_src_number] >= 0 %>    </td>
+          <td> <%= clean_value arr[session[:cdr_import_csv2][:imp_dst]].to_s.gsub(@dec,".") if session[:cdr_import_csv2][:imp_dst] >= 0 %>    </td>
+          <td> <%= clean_value arr[session[:cdr_import_csv2][:imp_duration]].to_s.gsub(@dec,".") if session[:cdr_import_csv2][:imp_duration] >= 0 %>    </td>
+          <td> <%= clean_value arr[session[:cdr_import_csv2][:imp_billsec]].to_s.gsub(@dec,".") if session[:cdr_import_csv2][:imp_billsec] >= 0 %>    </td>
+          <td> <%= clean_value arr[session[:cdr_import_csv2][:imp_disposition]].to_s.gsub(@dec,".") if session[:cdr_import_csv2][:imp_disposition] >= 0 %>    </td>
+          <td> <%= clean_value arr[session[:cdr_import_csv2][:imp_accountcode]].to_s.gsub(@dec,".") if session[:cdr_import_csv2][:imp_accountcode] >= 0 %>    </td>
+        </tr>
+
+      <% end %>
+      <% tl += 1 %>
+
+
+    <% end %>
+
+  </table>
+
+  <br />
+  <b>    <%= _('Total_file_lines') %>: <%= session[:file_lines] %> </b>
+
+  <br /><br />
+
+  <table>
+    <tr>
+
+      <td>
+        <% form_tag( {:action => 'import_csv', :step => "2"}) do %>
+          <%= submit_tag(  _('Back'), :disable_with=>_('Processing..')  )%>
+        <% end %>
+      </td>
+
+      <td width="20"></td>
+      <% if (session[:cdr_import_csv2][:imp_calldate] >= 0 or  (session[:cdr_import_csv2][:imp_date] >= 0 and session[:cdr_import_csv2][:imp_time] >= 0))  and session[:cdr_import_csv2][:imp_dst] >= 0 and session[:cdr_import_csv2][:imp_billsec] >= 0 %>
+        <td>
+          <% form_tag( {:action => 'import_csv', :step => "4"}) do %>
+            <%= submit_tag  _('Confirm_columns'), :id=>"conf", :disable_with=>_('Processing..')%>
+          <% end %>
+        </td>
+      <% end %>
+
+    </tr>
+  </table>
+  <br />
+  <br />
+  <%= _('Next_step') + ": " + _('Select_details')%>
+
+<% end %>
+
+
+
+
+<% if @step == 4 %>
+
+  <% form_tag( {:action => 'import_csv', :step => "5"}) do %>
+    <table>
+      <tr>
+        <td colspan="2"><%= _('Select_provider') %>:</td>
+        <td><select name="provider">
+            <% for prov in @providers %>
+              <option value="<%= prov.id %>" > <%= prov.name %> </option>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td width="200"><%= radio_button_tag('import_type', '0') %> <%= _('Import_by_user') %></td>
+        <td><%= _('Select_user') %>:</td>
+        <td><select name="user" id="user" >
+            <option value="-1"><%= _('Select_user')%> </option>
+            <%for user  in @users%>
+              <option value="<%= user.id %>"><%= nice_user(user)%> </option>
+            <%end%>
+          </select>
+          <%= observe_field("user", :update   => "user_devices", :url=> { :controller=>"devices", :action => "cli_user_devices" }, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
+          <span id = 'user_devices'></span></td>
+      </tr>
+      <tr>
+        <td><%= radio_button_tag('import_type', '1') %> <%= _('Import_by_CallerID') %></td>
+        <td><%=_('Create_CallerID') %>: </td>
+        <td><%= check_box_tag 'create_callerid', "1" %></td>
+      </tr>
+    </table>
+    <br />
+    <%= submit_tag(  _('Proceed'), :disable_with=>_('Processing..') )%>
+  <% end%>
+  <table>
+    <tr>
+      <td>
+      </td>
+    </tr>
+  </table>
+  <br />
+  <br />
+
+  <%= _('Next_step') + ": " + _('Analysis')%>
+
+<% end %>
+
+
+<% if @step == 5 %>
+  <%= render :partial => "analize"  %>
+  <br /><br />
+  <% form_tag( {:action => 'import_csv', :step => @new_step}) do %>
+    <%= submit_tag(  _('Proceed'), :disable_with=>_('Processing..') ) %>
+  <% end %>
+  <% str = @new_step.to_i == 9 ? _('Import_CDR') : _('Fix_clis') %>
+  <br />
+  <br />
+  <%= _('Next_step') + ": " + str %>
+<% end %>
+
+<%if @step == 6%>
+
+  <%= render :partial => "analize"  %><br /><br />
+  <%= render :partial => "bad_cdrs"  %><br /><br />
+  <% form_tag( {:action => 'import_csv', :step => @next_step}) do %>
+    <%= submit_tag(  _('Proceed'), :disable_with=>_('Processing..') ) %>
+  <%end%>
+  <% str = @new_step.to_i == 9 ? _('Import_CDR') :  _('Create_clis') %>
+  <br />
+  <br />
+  <%= _('Next_step') + ": " + str%>
+<%end%>
+
+<%if @step == 7%>
+  <% form_tag( {:action => 'import_csv', :step => "8"}) do %>
+    <%= render :partial => "analize"  %>
+    <br /><br />
+    <%= submit_tag(  _('Proceed'), :disable_with=>_('Processing..') ) %>
+  <%end%>
+  <br />
+  <br />
+  <%= _('Next_step') + ": " + _('Assigne_clis')%>
+<%end%>
+
+<%if @step == 8%>
+  <% form_tag( {:action => 'import_csv', :step => "9"}) do %>
+    <%= render :partial => "analize"  %><br /><br />
+    <%= render :partial => "new_cli"  %><br /><br />
+    <%= submit_tag(  _('Proceed'), :disable_with=>_('Processing..') ) %>
+  <%end%>
+  <br />
+  <br />
+  <%= _('Next_step') + ": " + _('Import_CDR')%>
+<%end%>
+
+<% if @step == 9 %>
+  <table class="maintable" width="50%">
+    <tr class="row0">
+      <td width="50%"><%= _('Total_CDRs') %></td>
+      <td id="total_calls" align="right" width="15%"><b><%= @cdr_analize[:cdr_in_csv_file] %></b></td>
+    </tr>
+    <tr class="row1">
+      <td width="50%"><%= _('Imported_CDRs') %></td>
+      <td id="imported_calls" align="right" width="15%"><b><%= @total_cdrs %></b></td>
+    </tr>
+    <tr class="row0">
+      <td width="50%"><%= _('Not_Imported_CDRs') %></td>
+      <td id="failed_calls" align="right" width="15%"><b><%=  @cdr_analize[:cdr_in_csv_file]  - @total_cdrs%></b></td>
+    </tr>
+    <tr class="row1">
+      <td width="50%"><%= _('Run_Time') %> </td>
+      <td id="run_time" align="right" width="15%"><b><%= nice_time(@run_time) %></b> </td>
+    </tr>
+    <tr class="row0">
+      <td width="50%"><%= _('Time_per_CDR') %></td>
+      <td id="run_time_for_call" align="right" width="15%"><b><%= (@total_cdrs == 0) ? "0" : nice_number(@run_time/ @total_cdrs) %> s </b></td>
+    </tr>
+    <% if @errors and @errors.size > 0 %>
+      <tr class="row1">
+        <td id="errors" colspan="2"><b><%= _('There_were_errors') %></b></td>
+      </tr>
+      <% @errors.each_with_index { |err, i|%>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <td id="error_msg_<%= i %>" align="left"><%= nice_cdr_import_error(err['nice_error']) %></td>
+          <td id="error_<%= i %>" align="right"><%= err["col_#{session[:cdr_import_csv2][:imp_calldate]}"] %></td>
+        </tr>
+      <% } %>
+    <% end %>
+  </table>
+  <br />
+  <b><%= _('Congratulations_csv_import') %>!</b>
+
+<% end %>
+

@@ -1,0 +1,76 @@
+<div class="form_background">
+  <% form_tag(:action => 'confirm_did_action') do %>
+    <table>
+      <tr>
+        <td colspan="2"><b><%= _('Which_DIDs') %>:</b></td>
+      </tr>
+      <tr>
+        <td class="indented_form_row" colspan="2"> <b><%= _('DID_interval') %>:</b><%= text_field_tag 'did_start', @from, "class" => "input"   %> - <%= text_field_tag 'did_end', @till, "class" => "input"   %><br /></td>
+      </tr>
+      <tr>
+        <td class="indented_form_row" colspan="2">
+          <b><%= _('User') %>: </b>
+          <%= select_tag("user", options_for_select([[_('All'), "" ]] + @users.map{|u| [h(nice_user(u)), u.id.to_s]}, @search_user.to_s))  %>
+          &nbsp;&nbsp;<b><%= _('Device') %>:</b>
+          <span id ="device_search_list_span">
+            <%= select_tag("device", options_for_select([[_('All'), ""]] +@devices.map{|d| [nice_device(d, {:image => false}), d.id.to_s]}, @search_device.to_s ))  %>
+          </span>
+          <%= observe_field("user", :update => "device_search_list_span",:with => "user_id", :url=> {:controller=> "devices", :action => "ajax_get_user_devices", :field_id => "device", :default => @search_device.to_i, :all => true, :fax => true}, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"><b><%= _('What_to_do') %>:</b></td>
+      </tr>
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td class="border_disabled indented_form_row small_cell"><label for="did_action_1"><b><%= _('Update') %></b></label></td>
+              <td class="border_disabled" ><%= radio_button_tag('did_action', '1', (@did_action.to_i == 1 )) %> </td>
+            </tr>
+
+            <% unless reseller? %>
+              <tr>
+                <td class="border_disabled indented_form_row small_cell"><label for="did_action_2"><b><%= _('Delete') %></b></label></td>
+                <td class="border_disabled" > <%= radio_button_tag('did_action', '2', (@did_action.to_i == 2 ) ) %></td>
+              </tr>
+
+
+              <tr>
+                <td class="border_disabled indented_form_row small_cell" ><label for="did_action_3"><b><%= _('Manage_rates') %></b></label></td>
+                <td class="border_disabled" ><%= radio_button_tag('did_action', '3', (@did_action.to_i == 3 ) ) %></td>
+              </tr>
+            <% end %>
+              
+            <% unless reseller? %>
+              <tr>
+                <td class="border_disabled indented_form_row small_cell" ><label for="did_action_4"><b><%= _('Add_to_Trunk') %></b></label></td>
+                <% if @trunk.to_i > 0%>
+                  <td class="border_disabled" ><%= radio_button_tag('did_action', '4', (@did_action.to_i == 4 )) %></td>
+                <%else%>
+                  <td class="border_disabled" ><%= radio_button_tag('did_action', '4', (@did_action.to_i == 4 ), :disabled => true) %><%= _('No_trunks')%></td>
+                <%end%>
+              </tr>
+            <% end %>
+
+            <tr>
+              <td class="border_disabled indented_form_row small_cell"><label for="did_action_5"><b><%= _('Add_to_user') %></b></label></td>
+              <td class="border_disabled" ><%= radio_button_tag('did_action', '5', (@did_action.to_i == 3 ) ) %></td>
+            </tr>
+
+            <%unless reseller?%>
+              <tr>
+                <td class="border_disabled indented_form_row small_cell"><label for="did_action_6"><b><%= _('Assign_DialPlan') %></b></label></td>
+                <td class="border_disabled" ><%= radio_button_tag('did_action', '6', (@did_action.to_i == 6 ) ) %></td>
+              </tr>
+            <%end%>
+
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"><%= submit_tag _('Change'), :disable_with=>_('Processing..') %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>

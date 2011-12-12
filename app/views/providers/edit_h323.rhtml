@@ -1,0 +1,14 @@
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left" style ="white-space:nowrap; width: 10%"><%= link_to b_rules + _('Rules'), :action => 'provider_rules', :id => @provider %></th>
+    <th align="left" style ="white-space:nowrap; width: 10%"><%= link_to b_call + _('Calls'), :controller => "stats", :action => 'providers_calls', :id => @provider %></th>
+     <th  style ="width: 100%"></th>
+  </tr>
+</table>
+<br />
+
+<% form_tag(:action => 'update', :id => @provider) do %>
+  <%= render :partial => 'form_h323' %>
+  <%= submit_tag _('Edit'), :disable_with=>_('Processing..') %>
+<% end %>
+<br />

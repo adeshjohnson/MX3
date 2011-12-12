@@ -1,0 +1,11 @@
+<%= error_messages_for 'destination' %>
+<table>
+  <tr>
+    <td><%= draw_flag @direction.code %></td>
+    <td><%= @direction.name %></td>
+  </tr>
+</table>
+<% form_tag(:action => 'create', :id => @direction.id ) do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag _('Create'), :disable_with=>_('Processing..') %>
+<% end %>

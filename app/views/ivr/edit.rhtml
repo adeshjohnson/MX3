@@ -1,0 +1,21 @@
+<% if request.env['HTTP_USER_AGENT'].scan(/[Ff]irefox|Namoroka/).size == 0 %>
+  <%= _("IVR_editing_is_only_supported_on_Firefox")%>:
+  <br />
+  <br />
+  <a href="http://www.mozilla.com/firefox?from=sfx&uid=0&t=307"><img border="0" alt="Spreadfirefox Affiliate Button" src="http://sfx-images.mozilla.org/affiliates/Buttons/firefox3/200x32_best-yet.png" /></a>
+  <style type="text/css">
+    div#edit_window{
+      visibility: hidden
+    }
+  </style>
+<% else %>
+  <% if request.env["HTTP_USER_AGENT"].to_s.scan("MSIE_EE").size == 0 %>
+    <%= render :partial => 'ivr_edit' %>
+    <br />
+    <br />
+    <%= link_to b_back + _('back'), :action => :index %>
+
+    <%= javascript_include_tag "wz_tooltip" %>
+    <%= javascript_include_tag "excanvas" %>
+  <% end %>
+<% end %>

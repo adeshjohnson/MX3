@@ -1,0 +1,47 @@
+<%
+if @device
+  device_tell_balance = @device.tell_balance
+  device_tell_time = @device.tell_time
+  device_tell_rtime_when_left = @device.tell_rtime_when_left
+  device_repeat_rtime_every = @device.repeat_rtime_every
+else
+  device_tell_balance = Confline.get_value("Default_device_tell_balance", session[:user_id])
+  device_tell_time = Confline.get_value("Default_device_tell_time", session[:user_id])
+  device_tell_rtime_when_left = Confline.get_value("Default_device_tell_rtime_when_left", session[:user_id])
+  device_repeat_rtime_every = Confline.get_value("Default_device_repeat_rtime_every", session[:user_id])
+end
+%>
+<tr>
+  <td colspan="2" height="20"></td>
+</tr>
+<tr>
+  <td colspan="2" class="bottom_border">
+    <b><%= _('Tell_options') %></b>
+  </td>
+</tr>
+<tr>
+  <td colspan="2" height="10"></td>
+</tr>
+<tr>
+  <td> <%= _('Tell_balance') %>:   </td>
+  <td>
+    <%= radio_button_tag('device[tell_balance]', 0, checked = (device_tell_balance.to_i == 0) ) %> <%= _('No') %>
+    <%= radio_button_tag('device[tell_balance]', 1, checked = (device_tell_balance.to_i == 1) ) %> <%= _('Yes') %>
+  </td>
+</tr>
+  <tr>
+    <td><%= _('Tell_time') %>:</td>
+    <td>
+      <%= radio_button_tag('device[tell_time]', 0, checked = (device_tell_time.to_i == 0) ) %> <%= _('No') %>
+      <%= radio_button_tag('device[tell_time]', 1, checked = (device_tell_time.to_i == 1) ) %> <%= _('Yes') %>
+    </td>
+  </tr>
+
+  <tr>
+    <td> <%= _('Tell_remaining_time_when_left') %>:   </td>
+    <td align="left"> <%= text_field_tag 'device[tell_rtime_when_left]', device_tell_rtime_when_left, "class" => "input", :size => "5", :maxlength => "4" %>  s</td>
+  </tr>
+  <tr>
+    <td> <%= _('Repeat_remaining_time_every') %>:   </td>
+    <td align="left"> <%= text_field_tag 'device[repeat_rtime_every]', device_repeat_rtime_every, "class" => "input", :size => "5", :maxlength => "4" %>  s</td>
+  </tr>

@@ -1,0 +1,85 @@
+ 
+<% form_tag :action => 'server_update', :id => @server do %>
+   
+   
+     <table width="40%">
+    <tr>
+        <td valign="top" >
+           <table>
+                   <tr>
+                     <td colspan="2" class="bottom_border">
+                         <b><%= _('General') %></b>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td height="10"></td>
+                   </tr> 
+                   <tr>
+                     <td valign="top"> 
+                         <table class="simple">
+                            <tr>
+                                <td> <%= _('ID') %>   </td>
+                                <td><%= text_field_tag('server_id', @server.server_id, "class" => "input") %> </td>
+                             </tr>
+                            <tr>
+                                <td> <%= _('Hostname') %>   </td>
+                                <td> <%= text_field_tag('server_hostname', @server.hostname, "class" => "input") %> </td>
+                             </tr>
+                             <tr>
+                                <td> <%= _('Server_IP') %>  </td>
+                                <td> <%= text_field_tag('server_ip', @server.server_ip, "class" => "input") %>  </td>
+                             </tr> 
+                             <tr>
+                                <td> <%= _('Url') %>  </td>
+                                <td> <%= text_field_tag('server_url', @server.stats_url, "class" => "input") %>  </td>
+                             </tr> 
+                             <tr>
+                                <td> <%= _('Type') %> </td>
+                                <td> <%= text_field_tag('server_type',@server.server_type, "class" => "input") %>  </td>
+                             </tr> 
+                             <tr>
+                                <td> <%= _('Max_call_limit')%>  </td>
+                                <td> <%= text_field_tag('server_maxcalllimit', @server.maxcalllimit, "class" => "input") %>  </td>
+                             </tr> 
+                             <tr>
+                                <td> <%= _('AMI_Username')%>  </td>
+                                <td> <%= text_field_tag('server_ami_username', @server.ami_username, "class" => "input") %>  </td>
+                             </tr> 
+                             <tr>
+                                <td> <%= _('AMI_Secret')%>  </td>
+                                <td> <%= text_field_tag('server_ami_secret', @server.ami_secret, "class" => "input") %>  </td>
+                             </tr> 
+                             <tr>
+                                <td> <%= _('Port')%>  </td>
+                                <td> <%= text_field_tag('server_port', @server.port, "class" => "input") %>  </td>
+                             </tr> 
+                             <tr>
+                                <td> <%= _('Comment')%>  </td>
+                                <td> <%= text_field_tag('server_comment', @server.comment, "class" => "input") %>  </td>
+                             </tr> 
+                             <tr>
+                                <td> <%= _('Ssh_username')%>  </td>
+                                <td> <%= text_field_tag('server_ssh_username', @server.ssh_username, "class" => "input") %>  </td>
+                             </tr> 
+                             <tr>
+                                <td> <%= _('Ssh_secret')%>  </td>
+                                <td> <%= text_field_tag('server_ssh_secret', @server.ssh_secret, "class" => "input") %>  </td>
+                             </tr> 
+                            <tr>
+                                <td> <%= _('Ssh_port')%>  </td>
+                                <td> <%= text_field_tag('server_ssh_port', @server.ssh_port, "class" => "input") %> </td>
+                             </tr> 
+                        
+                      </table>
+                 </td>
+               </tr>
+            </table>
+         
+         </td>
+     </tr>
+   </table>
+
+       <%= submit_tag _('Change') %>
+<%#, :disable_with=>_('Processing..')%>
+
+ <%end%>

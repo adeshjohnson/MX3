@@ -1,0 +1,19 @@
+<%= error_messages_for 'destination' %>
+
+<% form_tag({:action => 'update', :id => @destination}, {:id => "destination_form"}) do %>
+  <%= render :partial => 'form' %>
+  <br />
+  <br />
+  <%= submit_tag _('Update'), :disable_with=>_('Processing..') %>
+<% end %>
+
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    Event.observe('destination_form', 'submit', function(event) {
+      var origin_direction = '<%=  @destination.direction_code %>';
+      if(origin_direction !=  $("destination_direction_code").value){
+        if (!confirm('<%= _("Are you sure?") %>')) { Event.stop(event); }
+      }
+    });
+  </script>
+<% end %>

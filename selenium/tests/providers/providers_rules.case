@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.165" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_rules/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Rule1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=image]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please fill all fields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=image]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please fill all fields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Rule1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=image]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please fill all fields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Rule1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=image]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_rule_edit/1?providerrule_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please fill all fields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>cut</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>add</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_rule_edit/1?providerrule_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please fill all fields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_rules/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[2]/th[7]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please fill all fields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[2]/th[2]/input</td>
+	<td>Rule2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[2]/th[7]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please fill all fields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[2]/th[2]/input</td>
+	<td>Rule2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[2]/th[5]/input</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[2]/th[6]/input</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[2]/th[7]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please fill all fields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[2]/th[2]/input</td>
+	<td>Rule2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[2]/th[5]/input</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[2]/th[6]/input</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[2]/th[3]/input</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[2]/th[7]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//table[2]/tbody/tr[3]/th[2]/input</td>
+	<td>Rule3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//table[2]/tbody/tr[3]/th[4]/input</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//table[2]/tbody/tr[3]/th[5]/input</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//table[2]/tbody/tr[3]/th[6]/input</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//table[2]/tbody/tr[3]/th[7]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Rule4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//th[7]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Rule5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>444</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>02</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//th[7]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>!@#$%3erfre4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>#@$FQEq43</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>#$TFGQT#$f44</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>#$FQ3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>34#$$</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//th[7]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[4]/th[2]/input</td>
+	<td>@#$%We54444442</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[4]/th[3]/input</td>
+	<td>$%55qer54</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[4]/th[4]/input</td>
+	<td>#%$2twg54</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[4]/th[5]/input</td>
+	<td>54gr#</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[4]/th[6]/input</td>
+	<td>%r5t%</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[4]/th[7]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[5]/th[2]/input</td>
+	<td>Rule6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[5]/th[3]/input</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[5]/th[4]/input</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[5]/th[5]/input</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//tr[5]/th[6]/input</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[5]/th[7]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_rule_edit/1?providerrule_id=8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please fill all fields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>cut</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>add</td>
+	<td>370</td>
+</tr>
+</tbody></table>
+</body>
+</html>

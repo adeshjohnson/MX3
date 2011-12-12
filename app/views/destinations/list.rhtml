@@ -1,0 +1,58 @@
+
+<table>
+  <tr>
+    <td><%= draw_flag @direction.code %></td>
+    <td><%= @direction.name %></td>
+  </tr>
+</table>
+
+<br>
+
+<% if @total_pages > 1 %>
+  <br>
+  <%= render :partial => "page_select_header" %>
+<% end %>
+
+<br>
+
+
+<table width="100%" class="maintable">
+  <tr>
+
+    <th align="left"><%= _('Prefix') %></th>
+    <th align="left"><%= _('Code') %></th>
+    <th align="left"><%= _('Name') %></th>
+    <th align="left"><%= _('Destination_group') %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+
+  </tr>
+
+  <% i = 0 %>
+  <%if @destinations and @destinations.size.to_i > 0%>
+    <% for destination in @destinations %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td><%= destination.prefix %></td>
+        <td><%= destination.subcode %></td>
+        <td><%= destination.name %></td>
+        <td>
+          <% if destination.dg_name %>
+            <%= destination.dg_name %> <%= destination.desttype %>
+          <% else %>
+            <%= _('Not_assigned') %>
+          <% end %>
+        </td>
+
+        <td align="center"><%= link_to b_edit, :action => 'edit', :id => destination, :page =>@page %></td>
+        <td align="center"><%= link_to b_chart_bar, :action => 'stats', :id => @direction.id, :des_id => destination.id %></td>
+        <td align="center"><%= link_to b_delete, { :action => 'destroy', :id => destination }, :confirm => _('Are_you_sure'), :method => :post %></td>
+      </tr>
+      <% i += 1%>
+    <% end %>
+  <%end%>
+</table>
+
+<br />
+
+<%= link_to b_add + _('New_destination'), :action => 'new', :id => @direction %>

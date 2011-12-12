@@ -1,0 +1,83 @@
+<br />
+<br />
+<table class="simple" width="100%">
+  <tr>
+    <td width="30"></td>
+    <td><b><%= _('Email_Sending_Enabled')%>:</b></td>
+    <td><%= check_box_tag 'email_sending_enabled', "1", Confline.get_value("Email_Sending_Enabled").to_i == 1 %></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><b><%= _('Email_Smtp_Server')%>:</b></td>
+    <td><%= text_field_tag('email_smtp_server', Confline.get_value("Email_Smtp_Server") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+  </tr>
+  <% # do not show email domain, because default param is set  %>
+<%#*<tr>%>
+<%#*<td></td>%>
+<%#*<td><b><%= _('Email_Domain')%>
+<%#*:</b></td>%>
+<%#*<td><%= text_field_tag('email_domain', Confline.get_value("Email_Domain") , "class" => "input", :size => "35", :maxlength => "50" )%>
+<%#*</td>%>
+<%#*</tr>%>
+  <tr>
+    <td></td>
+    <td><b><%= _('Port')%>:</b></td>
+    <td><%=  text_field_tag('email_port', Confline.get_value("Email_port").to_s , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><b><%= _('Email_Login')%>:</b></td>
+    <td><%= text_field_tag('email_login', Confline.get_value("Email_Login") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><b><%= _('Email_Password')%>:</b></td>
+    <td><%= text_field_tag('email_password', Confline.get_value("Email_Password") , "class" => "input", :size => "35", :maxlength => "50", :onChange => "validate_password();")%><span id="email_message">&nbsp;&nbsp;<%= b_exclamation %><%= _("Notice_email_password_fax_emails_problem") %></span></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><b><%= _('Email_Batch_Size')%>:</b></td>
+    <td><%= text_field_tag('email_batch_size', Confline.get_value("Email_Batch_Size") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><b><%= _('From')%>:</b></td>
+    <td><%=  text_field_tag('email_from', Confline.get_value("Email_from") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><b><%= _('Testing_email_sending') %>:</b></td>
+    <td>
+      <% # if sending disabled show message %>
+      <% if !Confline.get_value("Email_Sending_Enabled").blank? %>
+        <% # if main params missing: server, port, login, password show message %>
+        <% if !Confline.get_value("Email_Smtp_Server").blank? and !Confline.get_value("Email_port").blank?  and !Confline.get_value("Email_Login").blank?  and !Confline.get_value("Email_Password").blank? %>
+          <% # if email missing show message %>
+          <% admin = current_user -%>
+          <% if !admin.email.blank? %>
+            <%= link_to _('Press_to_test')+ " " + b_email_send+ " (" + _('Test_email_will_be_sent_to') + ": " + admin.email.to_s + ")"   , {:action=>'send_test_email'}, {:id => "email_test_link"} %>
+          <%else%>
+            <%=link_to _('Cannot_send_test_email_because_your_email_address_is_empty'), :controller=>:users, :action=>:edit, :id=>session[:user_id] %>
+          <%end%>
+        <%else%>
+          <%= _('Cannot_send_test_email_because_main_parameters_empty') %>
+        <% end %>
+      <%else%>
+        <%= _('Cannot_send_test_email_because_sending_disabled') %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    function validate_password(){
+    var reg_exp = /^[a-zA-Z0-9]*$/;
+    if($("email_password").value.search(reg_exp) == -1) {
+    $("email_message").show();
+    } else {
+    $("email_message").hide();
+    }
+    }
+    validate_password();
+  </script>
+<% end %>

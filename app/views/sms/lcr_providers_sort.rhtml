@@ -1,0 +1,16 @@
+<b>LCR: <%= @lcr.name%></b>
+<br />
+<br />
+<%= _("Drag_To_Change_Order") %>
+<br />
+<br />
+<ul id="sortable_list" style="list-style-type: none;margin-left: 0px;padding-left: 0px;">
+  <% for item in @items do%>
+    <li id = "item_<%= item.id %>">
+      <%= image_submit_tag 'icons/check.png', :title => _('Disable') if @lcr.sms_provider_active(item.id) %>
+      <%= image_submit_tag 'icons/cross.png', :title => _('Enable') if not @lcr.sms_provider_active(item.id) %>
+      <%= item.name%>:<%= item.provider_type %>:<%= item.sms_tariff.name %></li>
+  <% end %>
+</ul>  
+<%= sortable_element('sortable_list', :update => 'items', :url => {:action => :providers_sort_save, :id => @lcr.id}) %>
+<br />

@@ -1,0 +1,50 @@
+<b><%= b_view + _('Tariff') %>:</b> <%= link_to @tariff.name, :action => "rates_list", :id => @tariff.id, :st => @destination.direction.name[0,1] %>
+<br>
+<b><%= b_currency + _('Currency') %>:</b> <%=  @tariff.currency %>
+
+
+<br><br>
+
+    <%= draw_flag @destination.direction.code %> <%= @destination.direction.name %>
+    <%= @destination.prefix %> <%= @destination.subcode %>
+
+<br><br><br>
+
+<table width="100%" class="maintable">
+
+  <tr>
+
+    <th><%= _('Start_Time') %></th>
+    <th><%= _('End_Time') %></th>
+    <th align="right"><%= _('Rate') %> </th>
+    <th align="right"><%= _('Connection_Fee') %></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+
+<% i = 0 %>     
+<% for rd in @rate_details %>
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+    <td align="center"><%=  nice_time2(rd.start_time) %></td>
+    <td align="center"><%=  nice_time2(rd.end_time) %></td>
+    <td align="right"><%= rd.sms_rate %></td>    
+    <td align="right"><%= rd.connection_fee %></td>    
+           
+
+    <td align="center"><%= link_to b_edit, :action => 'ratedetail_edit', :id => rd %></td>
+    <td align="center"><%= link_to b_delete, { :action => 'ratedetail_destroy', :id => rd, :rate => @rate.id}, :confirm => _('Are_you_sure'), :method => :post if i == (@rate_details.size - 1) %></td>
+  </tr>
+  <% i += 1%>    
+<% end %>
+
+</table>
+
+
+
+<br /><br>
+
+<% link_to b_add + _('New_rate_detail'), :action => 'ratedetail_new', :id => @rate.id %>
+
+<br><br>

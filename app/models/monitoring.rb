@@ -1,0 +1,171 @@
+class Monitoring < ActiveRecord::Base
+  has_and_belongs_to_many :users
+
+  # Period in past type to differentiate between minutes hours and days
+  attr_writer :period_in_past_type
+  # This is set if we're updating monitoring for single user. That means we need to create a new one and make one association.
+  attr_accessor :user
+  # Used to differentiate between new record and existent one
+  attr_accessor :existent_record
+
+  MONITORING_TYPES = {
+    1 => 'Monitoring_call_price_sum_over_past_period'
+  }.freeze
+
+  validate do |monitoring|
+    monitoring.amount_must_be_greater_than_zero
+    monitoring.period_must_be_greater_than_thirty_minutes
+    monitoring.must_have_at_least_one_action
+  end
+ 
+  def before_create
+    !self.is_duplicate? if !self.user_type.to_s.blank?
+  end
+
+  def before_update
+    !self.is_duplicate?
+  end
+
+  def after_create
+    self.associate
+    self.reload
+    self.add_monitoring_action('create')
+  end
+
+  def after_update
+    self.reload
+    self.add_monitoring_action('update')
+  end
+
+
+  def add_monitoring_action(act)
+    case act
+    when 'create'
+      typ = 'created'
+    when 'update'
+      typ = 'updated'
+    when 'destroy'
+      typ = 'destroyed'
+    end
+    Action.add_action_hash(User.current,
+      { :action => "monitoring_#{act}",
+        :data => "Monitoring #{typ}",
+        :data2 => "period: #{self.parse_period} | limit: #{self.amount} #{Currency.get_default.name}",
+        :data3 => "email: #{self.email} | block: #{self.block} | users: #{( self.users.any? ) ? self.users.map(&:username).join(" ") : _(self.user_type.capitalize).downcase}",
+        :target_id => self.id,
+        :target_type => "monitoring"
+      })
+  end
+
+  # we should ensure monitoring uniqueness (validation does not fit here by design)
+  def self.new_or_existent_from_params(params)
+    monit = new(params)
+
+    if existent = find(:first, {:conditions => { :period_in_past => monit.period_in_past, :mtype => monit.mtype, :block => monit.block, :email => monit.email, :amount => monit.amount, :user_type => monit.user_type }})
+      existent.existent_record = true
+      existent.user = monit.user
+      return existent
+    else
+      monit.existent_record = false
+      return monit
+    end
+  end
+
+  def parse_period
+    case self.period_in_past_type
+    when "minutes"
+      _("Thirty_minutes")
+    when "hours"
+      "#{self.period_in_past / 60} #{_('Hour_hours')}"
+    when "days"
+      "#{self.period_in_past / 1440} #{_('Day_days')}"
+    end
+  end
+
+  def is_duplicate?
+    typ = self.user_type.to_s.blank? ? " IS " : ' = '
+    if Monitoring.find(:first, {:conditions =>["period_in_past=? AND mtype=? AND block=? AND email=? AND amount=? AND user_type#{typ}? AND id!=?",  self.period_in_past, self.mtype,  self.block,  self.email,  self.amount, self.user_type, self.id]})
+      return true
+    else
+      return false
+    end
+  end
+
+  def amount_must_be_greater_than_zero
+    if !self.amount or self.amount <= 0.0
+      errors.add(:amount, _('Amount_must_be_greater_than_zero'))
+      return false
+    end
+  end
+
+  def period_must_be_greater_than_thirty_minutes
+    if !self.period_in_past or self.period_in_past < 30
+      errors.add(:amount, _('Period_must_be_greater_than_thirty_minutes'))
+      return false
+    end
+  end
+
+  def must_have_at_least_one_action
+    if !self.email and !self.block
+      errors.add_to_base(_('Monitoring_must_either_be_blocking_or_notifying'))
+      return false
+    end
+  end
+
+  def period_in_past_type
+    # if period is in minutes (less than 1 hour)
+    @period_in_past_type ||= if period_in_past.blank? or period_in_past < 60
+      "minutes"
+      # if period is in hours (between 1 and 23hours)
+    elsif period_in_past >= 60 and period_in_past < 1380
+      "hours"
+      # if period is in days (more than 23 hours)
+    else
+      "days"
+    end
+  end
+
+  def after_initialize
+    self.mtype = 1 # monitoring type: calls price sum in past period, change me when new monitoring types will be added!
+  end
+
+  # associates or deassociates user with monitoring
+  def associate
+    # we were adding new monitoring system-wide
+    if user_type.blank?
+      user = User.find_by_id(@user)
+      user.monitorings << self unless user.monitorings.include?(self)
+    end
+  end
+
+  def destroy_or_deassociate(user = nil)
+    # means we delete monitoring for all users
+    if user.blank?
+      self.destroy
+      # means that we deassociate single user with monitoring
+    else
+      self.users.delete(User.find_by_id(user))
+      # if there are no users left destory monitoring
+      if self.users.empty?
+        self.destroy
+      end
+    end
+  end
+
+  def monitoring_type
+    MONITORING_TYPES[mtype]
+  end
+
+  def block_user?
+    block
+  end
+
+  def send_email?
+    email
+  end
+
+  def existent?
+    @existent_record
+  end
+
+end

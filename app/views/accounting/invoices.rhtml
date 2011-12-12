@@ -1,0 +1,221 @@
+<table width="100%">
+  <tr>
+    <td>
+      <% if @allow_edit %>
+        <%= link_to b_generate + _('Generate_invoices'), {:action => "generate_invoices"}, :id=>"link_generate_invoices" %>&nbsp;
+        <%= link_to b_generate + _('Recalculate_invoices'), {:action => "invoices_recalculation"}, :id=>"link_invoices_recalculaion" %>&nbsp;
+      <% end %>
+      <%= link_to_function( b_email_send + _('Send_invoices'), "Element.toggle('invoices_details')", :id=>"link_send_invoices") if Confline.get_value("Email_Sending_Enabled").to_i == 1%>
+      <%= link_to b_csv + _('Export_to_CSV'),  {:action => :invoices, :to_csv=>1}, :id=>"invoices_to_csv" %>
+    </td>
+    <td align="right">
+      <% if @invoices and not @invoices.empty? %>
+        <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+
+<% form_tag(:action => 'invoices') do %>
+  <div id="search_details" <%= "style='display:none;'" if @search == 0 %> >
+    <br />
+
+    <table width="100%" class="simple">
+      <tr>
+        <td>
+          <%= _('Username') %>: <%= text_field_tag 's_username', @options[:s_username], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('first_name') %>: <%= text_field_tag 's_first_name', @options[:s_fname], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('last_name') %>: <%= text_field_tag 's_last_name', @options[:s_lname], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('Number') %>: <%= text_field_tag 's_number', @options[:s_number], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <br />
+          <br />
+          <%= _('Period_start') %>:
+          <select name="s_period_start" >
+            <option value="" selected>&nbsp;</option>
+            <% for ps in @period_starts%>
+              <option value=<%= ps["period_start"] %> <%= "selected" if ps["period_start"] == @options[:s_period_start] %>> <%= nice_date(ps["period_start"]) %> </option>
+            <% end %>
+          </select>
+          <%= _('Period_end') %>:
+          <select name="s_period_end" >
+            <option value="" selected>&nbsp;</option>
+            <% for ps in @period_ends%>
+              <option value=<%= ps["period_end"] %> <%= "selected" if ps["period_end"] == @options[:s_period_end] %>> <%= nice_date(ps["period_end"]) %> </option>
+            <% end %>
+          </select>
+          <%= _('Issue_date') %>:
+          <select name="s_issue_date">
+            <option value="" selected>&nbsp;</option>
+            <% for ps in @issue_dates%>
+              <option value=<%= ps["issue_date"] %> <%= "selected" if ps["issue_date"] == @options[:s_issue_date] %>> <%= nice_date(ps["issue_date"]) %> </option>
+            <% end %>
+          </select>
+          <%= _('Invoice_sent_by_mail') %>:
+          <select name="s_sent_email" >
+            <option value="" <%= "selected" if '' == @options[:s_sent_email].to_s %>> <%= _('any')%></option>
+            <option value="1" <%= "selected" if '1' == @options[:s_sent_email].to_s %>> <%= _('sent')%></option>
+            <option value="0" <%= "selected" if '0' == @options[:s_sent_email].to_s %>> <%= _('not_sent')%> </option>
+          </select>
+          <%= _('Invoice_sent_manually') %>:
+          <select name="s_sent_manually" >
+            <option value="" <%= "selected" if '' == @options[:s_sent_manually].to_s %>> <%= _('any')%></option>
+            <option value="1" <%= "selected" if '1' == @options[:s_sent_manually].to_s %>> <%= _('sent')%></option>
+            <option value="0" <%= "selected" if '0' == @options[:s_sent_manually].to_s %>> <%= _('not_sent')%> </option>
+          </select>
+          <%= _('Paid') %>:
+          <select name="s_paid" >
+            <option value="" <%= "selected" if '' == @options[:s_paid].to_s %>> <%= _('all')%></option>
+            <option value="1" <%= "selected" if '1' == @options[:s_paid].to_s %>> <%= _('yes')%></option>
+            <option value="0" <%= "selected" if '0' == @options[:s_paid].to_s %>> <%= _('no')%> </option>
+          </select>
+          <%= _('Invoice_type') %>:
+          <select name="s_invoice_type" >
+            <option value="" <%= "selected" if '' == @options[:s_ivnoice_type].to_s %>> <%= _('all')%></option>
+            <option value="postpaid" <%= "selected" if 'postpaid' == @options[:s_ivnoice_type].to_s %>> <%= _('Postpaid')%></option>
+            <option value="prepaid" <%= "selected" if 'prepaid' == @options[:s_ivnoice_type].to_s %>> <%= _('Prepaid')%> </option>
+          </select>
+          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
+        </td>
+        <td align="right">
+          <%= link_to b_cross + _('Clear_search'), :action => 'invoices', :clear => true if @search == 1 %>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>
+
+<% form_tag(:action => 'send_invoices') do %>
+  <div id="invoices_details" <%= "style='display:none;'" if @send_invoices == 0  or Confline.get_value("Email_Sending_Enabled").to_i == 1%> >
+    <br />
+    <table width="100%" class="simple">
+      <tr>
+        <td>
+          <%= _('Username') %>: <%= text_field_tag 's_username', @sent_options[:s_username], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('first_name') %>: <%= text_field_tag 's_first_name', @sent_options[:s_fname], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('last_name') %>: <%= text_field_tag 's_last_name', @sent_options[:s_lname], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('Number') %>: <%= text_field_tag 's_number', @sent_options[:s_number], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <br />
+          <br />
+          <%= _('Period_start') %>:
+          <select name="s_period_start" >
+            <option value="" selected>&nbsp;</option>
+            <% for ps in @period_starts%>
+              <option value=<%= ps["period_start"] %> <%= "selected" if ps["period_start"] == @sent_options[:s_period_start] %>> <%= nice_date(ps["period_start"]) %> </option>
+            <% end %>
+          </select>
+          <%= _('Period_end') %>:
+          <select name="s_period_end" >
+            <option value="" selected>&nbsp;</option>
+            <% for ps in @period_ends%>
+              <option value=<%= ps["period_end"] %> <%= "selected" if ps["period_end"] == @sent_options[:s_period_end] %>> <%= nice_date(ps["period_end"]) %> </option>
+            <% end %>
+          </select>
+          <%= _('Issue_date') %>:
+          <select name="s_issue_date">
+            <option value="" selected>&nbsp;</option>
+            <% for ps in @issue_dates%>
+              <option value=<%= ps["issue_date"] %> <%= "selected" if ps["issue_date"] == @sent_options[:s_issue_date] %>> <%= nice_date(ps["issue_date"]) %> </option>
+            <% end %>
+          </select>
+          <%= _('Invoice_sent_by_mail') %>:
+          <select name="s_sent_email" >
+            <option value="" <%= "selected" if '' == @sent_options[:s_sent_email].to_s %>> <%= _('any')%></option>
+            <option value="1" <%= "selected" if '1' == @sent_options[:s_sent_email].to_s %>> <%= _('sent')%></option>
+            <option value="0" <%= "selected" if '0' == @sent_options[:s_sent_email].to_s %>> <%= _('not_sent')%> </option>
+          </select>
+          <%= _('Invoice_sent_manually') %>:
+          <select name="s_sent_manually" >
+            <option value="" <%= "selected" if '' == @sent_options[:s_sent_manually].to_s %>> <%= _('any')%></option>
+            <option value="1" <%= "selected" if '1' == @sent_options[:s_sent_manually].to_s %>> <%= _('sent')%></option>
+            <option value="0" <%= "selected" if '0' == @sent_options[:s_sent_manually].to_s %>> <%= _('not_sent')%> </option>
+          </select>
+          <%= _('Paid') %>:
+          <select name="s_paid" >
+            <option value="" <%= "selected" if '' == @sent_options[:s_paid].to_s %>> <%= _('all')%></option>
+            <option value="1" <%= "selected" if '1' == @sent_options[:s_paid].to_s %>> <%= _('yes')%></option>
+            <option value="0" <%= "selected" if '0' == @sent_options[:s_paid].to_s %>> <%= _('no')%> </option>
+          </select>
+          <%= _('Invoice_type') %>:
+          <select name="s_invoice_type" >
+            <option value="" <%= "selected" if '' == @sent_options[:s_ivnoice_type].to_s %>> <%= _('all')%></option>
+            <option value="postpaid" <%= "selected" if 'postpaid' == @sent_options[:s_ivnoice_type].to_s %>> <%= _('Postpaid')%></option>
+            <option value="prepaid" <%= "selected" if 'prepaid' == @sent_options[:s_ivnoice_type].to_s %>> <%= _('Prepaid')%> </option>
+          </select>
+          <%= submit_tag(_('Send_Invoices_over_Email_to_Users'), :confirm => _('Are_you_sure_you_want_to_sent_invoices_by_email'), :disable_with=>_('Processing..')) %>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>
+
+<br />
+<%= page_select_header(@options[:page], @total_pages) %>
+
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= ordered_list_header("users.first_name","user","User", @options) %></th>
+    <th align="left"><%= ordered_list_header("invoices.number", "number" ,"Number", @options) %></th>
+    <th align="left"><%= ordered_list_header("invoices.invoice_type", "invoice_type" ,"Invoice_type", @options) %></th>
+    <th align="center"><%= ordered_list_header("invoices.period_start", "period_start" ,"Period_start", @options) %></th>
+    <th align="center"><%= ordered_list_header("invoices.period_end", "period_end" ,"Period_end", @options) %></th>
+    <th align="center"><%= ordered_list_header("invoices.issue_date", "issue_date" ,"Issue_date", @options) %></th>
+    <th align="center"><%= ordered_list_header("invoices.sent_email", "sent_email" ,"Invoice_sent", @options) %></th>
+    <th align="center"><%= ordered_list_header("invoices.sent_manually", "sent_manually" ,"Invoice_sent_manually", @options) %></th>
+    <% if can_see_finances? -%>
+      <th align="center"><%= ordered_list_header("invoices.paid", "paid" ,"Paid", @options) %></th>
+      <th align="center"><%= ordered_list_header("invoices.paid_date", "paid_date" ,"Paid_date", @options) %></th>
+      <th align="right"><%= ordered_list_header("invoices.price", "price" ,"Price", @options) %> (<%= session[:show_currency] %>)</th>
+      <th align="right"><%= _('Price_with_VAT') %> (<%= session[:show_currency] %>)</th>
+    <% end -%>
+    <th align="center"><%= _('Details') %></th>
+    <% if @allow_edit %>
+      <th></th>
+    <% end %>
+  </tr>
+  <% @invoices.each_with_index { |inv, i| %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <% user = inv.user -%>
+      <td id="user_<%= inv.id %>" align="left"> <%= link_nice_user(user) if user%> </td>
+      <td id="inv_number_<%= inv.id %>" align="left"> <%= inv.number %> </td>
+      <td id="inv_type_<%= inv.id %>"  align="left"> <%= inv.invoice_type.to_s.capitalize %>  </td>
+      <td id="inv_period_start_<%= inv.id %>" align="center"> <%= nice_date(inv.period_start, 0) %> </td>
+      <td id="inv_period_end_<%= inv.id %>" align="center"> <%= nice_date(inv.period_end, 0)  %> </td>
+      <td id="inv_issue_<%= inv.id %>"align="center"> <%= nice_date(inv.issue_date, 0) %> </td>
+
+      <td id="sent_email_<%= inv.id %>" align="center">
+        <%= image_tag 'icons/cross.png', :title => _('Not_send'), :id=>"image_not_sent_"+inv.id.to_s if inv.sent_email == 0 %>
+        <%= image_tag 'icons/check.png', :title => _('Sent_email'), :id=>"image_sent_"+inv.id.to_s if inv.sent_email == 1 %>
+      </td>
+      <td id="sent_manually_<%= inv.id %>" align="center">
+        <%= image_tag 'icons/cross.png', :title => _('Not_send'), :id=>"image_not_sent_manually_"+inv.id.to_s if inv.sent_manually == 0 %>
+        <%= image_tag 'icons/check.png', :title => _('Sent_manually'), :id=>"image_sent_manually_"+inv.id.to_s  if inv.sent_manually == 1 %>
+      </td>
+      <% if can_see_finances? -%>
+        <td id="paid_<%= inv.id %>" align="center">
+          <%= image_tag 'icons/cross.png', :title => _('Unpaid'), :id=>"image_not_paid_"+inv.id.to_s  if inv.paid == 0 %>
+          <%= image_tag 'icons/check.png', :title => _('Paid'), :id=>"image_paid_"+inv.id.to_s  if inv.paid == 1 %>
+        </td>
+
+        <td id="inv_paid_date_<%= inv.id %>" align="center"> <%= nice_date_time inv.paid_date if inv.paid == 1 %> </td>
+        <td id="inv_price_<%= inv.id %>" align="right"> <%= nice_invoice_number(inv.converted_price(@ex), inv.invoice_type) %> </td>
+        <td id="inv_full_price_<%= inv.id %>" align="right"> <%= nice_invoice_number(inv.price_with_tax(:ex=>@ex, :precision => nice_invoice_number_digits(inv.invoice_type)), inv.invoice_type) %> </td>
+        <td id="details_<%= inv.id %>" align="center"><%= link_to b_details, {:action => 'invoice_details', :id => inv.id, :currency=>user.currency.name}, :id=>"details_link_"+inv.id.to_s  %></td>
+      <% end -%>
+      <% if @allow_edit %>
+        <td id="delete_<%= inv.id %>" align="center"><%= link_to b_delete, { :action => 'invoice_delete', :id => inv.id }, :id=>"delete_link_"+inv.id.to_s , :confirm => _('Are_you_sure'), :method => :post %></td>
+      <% end %>
+    </tr>
+  <% } %>
+  <tr>
+    <th align="left" colspan="10"><%= _('Total')  + " :" if can_see_finances?%></th>
+    <% if can_see_finances? -%>
+      <th align="right" id="total"><%= nice_number((@tot_in2.to_f))  %></th>
+      <th align="right" id="total_wat"><%= nice_number(@tot_in_wat.to_f ) %></th>
+    <%  end -%>
+    <th align="center"></th>
+    <th></th>
+  </tr>
+</table>
+<br />
+<%= page_select_header(@options[:page], @total_pages,{}, {:id_prefix => "page2_"}) %>

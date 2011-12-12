@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>invoice_recalculation</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">invoice_recalculation</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<!--* invoice recalculation-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>price</td>
+	<td>old_price</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>price</td>
+	<td>old_price_101</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_new/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_hour</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_hour</td>
+	<td>label=23</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_minute</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#recalculate a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoice sum was sucessfully recalculated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>144.0000</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>${old_price}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Arrow_refresh&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invoice sum was sucessfully recalculated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>${old_price_101}</td>
+	<td></td>
+</tr>
+<!--Set settings for invoice generation.-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_number_start</td>
+	<td>INV</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_number_length</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_number_type_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prepaid_invoice_number_start</td>
+	<td>INV</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prepaid_invoice_number_length</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>prepaid_invoice_number_type_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--With good data-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>Test_flatrate</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>service_servicetype_flat_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_quantity</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Service was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_new/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>subscription_service_id</td>
+	<td>Test_flatrate, Price: 20.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=subscription_memo</td>
+	<td>Test flatrate memo</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_hour</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_hour</td>
+	<td>label=23</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_minute</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Subscription added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#recalculate a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoice sum was sucessfully recalculated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>${old_price_101}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=price</td>
+	<td>344.2258</td>
+</tr>
+</tbody></table>
+</body>
+</html>

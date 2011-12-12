@@ -1,0 +1,16 @@
+<%if @invoice  %>
+<tr class='slide'>
+  <td colspan='10'>
+    <% form_for :url => { :controller => "callshop", :action => "update", :id => params[:id], :format => "json" } do |form| %>
+      <div class="comment">
+        <strong><%= _('Comment') %></strong><br/>
+        <span class="field-wrap">
+          <textarea id="invoice_comment" name="invoice[comment]"><%= @invoice.comment %></textarea>
+        </span><br/>
+        <input type="submit" value="<%= _('Update_comment') %>" class="comment-update" />
+        <input type="hidden" value="<%= @invoice.id %>" name="invoice_id" id="invoice_id" />
+      </div>
+    <% end %>
+  </td>
+</tr>
+<%end%>

@@ -1,0 +1,1582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>stats</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">stats</td></tr>
+</thead><tbody>
+<!--Login as admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Creata hacking attempt by going to /billing/callc/logout-->
+<!--Action log-->
+<!--...Verify that all search fields are being stored-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=System Admin</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_type</td>
+	<td>label=login</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>processed</td>
+	<td>label=not reviewed</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>user_id</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>action_type</td>
+	<td>login</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>processed</td>
+	<td>0</td>
+</tr>
+<!--...Verify values-->
+<tr>
+	<td>verifyText</td>
+	<td>type_3</td>
+	<td>login</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=System Admin</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>cross_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_3</td>
+	<td>System Admin</td>
+</tr>
+<!--Verify select time-->
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_hour</td>
+	<td>label=23</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_minute</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_type</td>
+	<td>label=test_time</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>type_1</td>
+	<td>test_time</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>type_2</td>
+	<td>test_time</td>
+</tr>
+<!--Verify select time-->
+<tr>
+	<td>open</td>
+	<td>billing/stats/first_activity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2006</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-01 00:00:01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-01 00:00:02</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-01 00:00:03</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-01-01 00:00:04</td>
+	<td></td>
+</tr>
+<!--pagination-->
+<tr>
+	<td>open</td>
+	<td>billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>items_per_page</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/stats/first_activity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>page_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>page_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/stats/first_activity?page=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>page_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/stats/first_activity?page=-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>page_1</td>
+	<td></td>
+</tr>
+<!--show_user_stats-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/show_user_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_from_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_from_minute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_till_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_till_minute</td>
+	<td></td>
+</tr>
+<!-- warning balance action-->
+<!--
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>warning_email_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>warning_email_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_warning_email_balance</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>warning_email_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>warning_email_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>address_email</td>
+	<td>kolmitest@gmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_warning_email_balance</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>warning_email_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>warning_email_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_warning_email_balance</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/hourly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Mission complete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_type</td>
+	<td>label=warning_balance_send</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>type_17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_type</td>
+	<td>label=error</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>type_15</td>
+	<td>error</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cant_send_email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2006</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Billsec</td>
+	<td></td>
+</tr>
+-->
+<!--hangupcase-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_cause_codes_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_calls?direction=-1&amp;hid=331&amp;provider_id=-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37046246362</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_calls?direction=-1&amp;provider_id=-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37046246362</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_cause_codes_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2006</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=21</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_calls?direction=-1&amp;provider_id=-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hangup cause code was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_calls?direction=-1&amp;hid=331&amp;provider_id=-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>7046246362</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_cause_codes_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>s_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_user</td>
+	<td>label=System Admin</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>s_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0000 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_device</td>
+	<td>label=IAX2/103</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0000 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_calls?device_id=5&amp;direction=-1&amp;hid=331&amp;provider_id=-1&amp;s_user=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>123123</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_calls_to_csv?code=16&amp;destination=-1&amp;device_id=5&amp;provider_id=-1&amp;s_user=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>123123</td>
+	<td></td>
+</tr>
+<!--Quick stats TAX-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_value</td>
+	<td>40</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>tax2_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_name</td>
+	<td>tax2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User's settings succesfully changed: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Application_key']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0000 USD (168.0000 USD With TAX)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>tax2_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Application_key']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>100.0000 USD (100.0000 USD With TAX)</td>
+	<td></td>
+</tr>
+<!--providers_calls_to_csv-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--date fix-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/show_user_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Create accountant group.-->
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Test_accountant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2005</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=21</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_price_27</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls_to_csv/1?call_type=all&amp;date_from=2005-02-01+00%3A00%3A00&amp;date_till=2011-02-01+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price3: &quot;1&quot; billsec: &quot;50&quot; m1: &quot;75&quot; profit: &quot;3&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>disposition: ANSWERED dst: &quot;123123&quot; calldate: 2009-01-01 00:00:01 user_price3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls/1?call_type=all&amp;direction=outgoing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Change type']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_price_16</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls_to_csv/1?call_type=all&amp;date_from=2005-02-01+00%3A00%3A00&amp;date_till=2011-02-01+23%3A59%3A59&amp;direction=incoming&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price3: &quot;4&quot; billsec: &quot;50&quot; m1: &quot;0&quot; profit: &quot;0&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>ANSWERED dst: &quot;123123&quot; calldate: 2009-01-01 00:00:01 user_price3:</td>
+	<td></td>
+</tr>
+<!--action_log user-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>user_log_link_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>user_log_link_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>action_type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>System Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>user_log_link_5</td>
+	<td></td>
+</tr>
+<!--accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>user_log_link_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>user_log_link_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>user_log_link_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>action_type</td>
+	<td></td>
+</tr>
+<!--user-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_type</td>
+	<td>label=hacking_attempt</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>{&quot;action&quot;=&gt;&quot;user_device_edit&quot;, &quot;id&quot;=&gt;&quot;5&quot;, &quot;controller&quot;=&gt;&quot;devices&quot;}</td>
+	<td></td>
+</tr>
+<!--users_finances-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/users_finances</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>user_id_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>s_balance_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_balance_min</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_balance_max</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>user_id_2</td>
+	<td></td>
+</tr>
+<!--prefix finder-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/prefix_finder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>search</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Destination group : Lithuania</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Destination group : Lithuania</td>
+	<td></td>
+</tr>
+<!--active calls-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>duration_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>duration_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>active_calls_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>active_calls_link</td>
+	<td>4</td>
+</tr>
+<!--Test users_finances pagination-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/users_finances</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=4</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_id_0</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_id_4</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/users_finances</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=4</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_id_4</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_id_0</td>
+	<td>System Admin</td>
+</tr>
+<!--last calls-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>items_per_page</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>1111111020</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>1111111021</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Ok']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=card_27</td>
+	<td>Card/#1111111021</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Card/#1111111021</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test_cardgroup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//p[3]</td>
+	<td>Balance (Without TAX): 10.0840</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Daily charge paid till:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Language :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=p</td>
+	<td>Number: 1111111021</td>
+</tr>
+<!--* prevent bogus access-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls_order</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls_show</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls_order</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter your Username and Password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls_show</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter your Username and Password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=dst_22</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=card_27</td>
+	<td>Card/#1111111021</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Card/#1111111021</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

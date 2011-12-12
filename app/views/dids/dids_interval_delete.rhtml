@@ -1,0 +1,67 @@
+<%= render :partial => "bulk_management_header"  %>
+<% unless @dids.size.to_i < 1 %>
+  <% form_tag({:action => 'delete'}.merge(@opts)) do %>
+    <%= hidden_field_tag 'status', "provider", {:id => "status_provider"} %>
+    <table class="maintable" width="100%">
+      <tr>
+        <th align="left"><%= _('Provider') %></th>
+      </tr>
+      <tr class="row1">
+        <td>
+          <br />
+          <b><%= _('By_provider') %>:</b>
+          <%= select_tag("did[provider_id]", options_for_select(@providers.map{|p| [p.name, p.id]}), {:id => "provider_id"})  %>
+          <br />
+          <br />
+          <%= submit_tag _('OK'), :disable_with=>_('Processing..') %><br />
+        </td>
+      </tr>
+    </table>
+  <% end %>
+  <br />
+  <br />
+  <% form_tag({:action => 'delete'}.merge(@opts)) do %>
+    <%= hidden_field_tag 'status', "delete", {:id => "status_delete"} %>
+    <table class="maintable" width="100%">
+      <tr>
+        <th align="left">    <%= _('Make_dids') %>:</th>
+      </tr>
+      <tr class="row1">
+        <td>
+          <br />
+          <table class="simple">
+            <tr>
+              <td>
+                <label for="dids_action_1"><b><%= _('Free')%>:</b></label>
+              </td>
+              <td>
+                <%= radio_button_tag( 'dids_action', "1") %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="dids_action_2"><b><%= _('Terminate')%>:</b></label>
+              </td>
+              <td>
+                <%= radio_button_tag('dids_action', "2") %>
+                <br />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="dids_action_4"><b><%= _('Closed')%>:</b></label>
+              </td>
+              <td>
+                <%= radio_button_tag('dids_action',  "4") %>
+                <br />
+              </td>
+            </tr>
+          </table>
+          <br /><%= submit_tag _('OK'), :disable_with=>_('Processing..') %><br />
+        </td>
+      </tr>
+    </table>
+  <% end %>
+<% else %>
+  <% flash[:notice] = _('No_DID_found_Please_check_interval') %>
+<% end %>

@@ -1,0 +1,32 @@
+<%= javascript_include_tag 'swfobject' %>
+<b><%= _('Provider') %></b>:
+<b> <%= @provider.name %></b>
+<br />
+<br />
+
+<div align="left" class="nb">
+  <% form_tag(:action => 'providers_stats') do %>
+    <%= _('From') %>: <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+    &nbsp;&nbsp;<%= _('to') %>: <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+    &nbsp;&nbsp;<%= _('Prefix') %>: <%= text_field_tag :search, @s_prefix, "class" => "input" %>
+    <%= observe_field("search",
+      :update   => :results,
+      :frequency => 0.5,
+      :with => "prefix",
+      :url      => { :action => "prefix_finder_find"},
+      :loading => "Element.show('spinner');",
+      :complete=> "Element.hide('spinner');") %>&nbsp;&nbsp;
+
+    <span id="results" ><% if @results and @results.length > 0 %>
+        <%= draw_flag(@flag) if @flag%> <%= @results %>
+      <% end %></span>
+    <br />
+    <br />
+    <%= submit_tag _('Change_Details'), :disable_with=>_('Processing..')%>
+  <% end %>
+</div>
+
+<br />
+<div id="table">
+  <%= render :partial => "prv_stats" %>
+</div>

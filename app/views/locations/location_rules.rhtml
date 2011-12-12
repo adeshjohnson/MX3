@@ -1,0 +1,262 @@
+<% if  @location.user_id != current_user.id %>
+
+  <div id="error">
+    These rules will replace your current rules!
+  </div>
+<% end %>
+
+<br/>
+<b><%= _('Location') + ": " %>
+  <% if @location.name != 'Global' %>
+    <%=  @location.name %>
+  <% else %>
+    <%= 'Default location' %>
+  <% end %></b>
+<br/><br/>
+<b><%= _('Destination_rules') %> </b>
+<br/><br/>
+
+<table width="100%" class="maintable">
+  <tr>
+    <% if  @location.user_id == current_user.id %>
+      <th align="center"><%= _('Enabled') %>?</th>
+    <% end %>
+    <th align="left"><%= _('Name') %></th> 
+    <th align="left"><%= _('Cut') %></th> 
+    <th align="left"><%= _('Add') %></th> 
+    <th align="right"><%= _('Min_len') %></th> 
+    <th align="right"><%= _('Max_len') %></th>
+    <% if @location.user_id == current_user.id %>
+      <th align="left" <%= tooltip(_('Change_User_Tariff_to_this_Tariff'), _('Change_User_Tariff_to_this_Tariff_explained')) %> ><%= _('Change_User_Tariff_to_this_Tariff') %></th>
+      <%if allow_manage_providers?%>
+        <th align="left" <%= tooltip(_('Change_User_LCR_to_this_LCR'), _('Change_User_LCR_to_this_LCR_explained')) %> ><%= _('Change_User_LCR_to_this_LCR') %></th>
+        <th align="center"><%= _('Route_to_Did') %></th>
+      <%end%>
+      <th align="left" <%= tooltip(_('Change_Calls_owner'), _('Change_User_Device_to_this_Device_explained')) %> ><%= _('Change_calls_owner') %></th>
+      <th></th>
+      <th></th>
+    <% end %>
+  </tr>
+
+  <%@rules_dst.each_with_index {|rule,i|%>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <% if  @location.user_id == current_user.id %>
+        <% form_tag :action => 'location_rule_change_status', :id => rule.id do %>
+          <td align="center" id="status_<%=rule.id%>">
+            <%= image_submit_tag 'icons/check.png', :title => _('Disable'), :id=>"enable_1"  if rule.enabled == 1 %>
+            <%= image_submit_tag 'icons/cross.png', :title => _('Enable'), :id=>"enable_0" if rule.enabled == 0 %>
+          </td>
+        <% end %>
+      <%end%>
+      <td align="left" id="name_<%=rule.id%>"><%= rule.name %> </td>
+      <td align="left" id="cut_<%=rule.id%>"><%= rule.cut %> </td>
+      <td align="left" id="add_<%=rule.id%>"><%= rule.add %> </td>
+      <td align="right" id="minlen_<%=rule.id%>"><%= rule.minlen %> </td>
+      <td align="right" id="maxlen_<%=rule.id%>"><%= rule.maxlen %> </td>
+      <% if @location.user_id == current_user.id %>
+        <td align="left" id="tariff_<%=rule.id%>"><%= rule.tariff.name  if rule.tariff %></td>
+        <%if allow_manage_providers?%>
+          <td align="left" id="lcr_<%=rule.id%>"><% lcr = rule.lcr %><%= lcr.name if lcr %></td>
+          <td id ="did_<%= rule.id %>" align="center"><%= link_to rule.did.did, :controller=>:dids, :action => "edit", :id => rule.did_id if rule.did  %> </td>
+        <%end%>
+        <td align="left" id="tariff_<%=rule.id%>">
+          <%if rule.device%>
+            <%if rule.device.user.owner_id == correct_owner_id%>
+              <%= link_nice_device(rule.device)  %>
+            <%else%>
+              <%= nice_device(rule.device)  %>
+            <%end%>
+          <%end%>
+        </td>
+        <td align="center"><%= link_to b_edit, {:action => "location_rule_edit", :id => rule.id}, :id=>"edit_#{rule.id}" %></td>
+        <td align="center"><%= link_to b_delete, { :action => 'location_rule_destroy', :id => rule.id }, :id=>"delete_#{rule.id}",:confirm => _('Are_you_sure'), :method => :post %>       </td>
+      </tr>
+    <%  end %>
+  <% } %>
+
+  <% if  @location.user_id == current_user.id %>
+    <% form_tag({:action => 'location_rule_add', :lr_type=>"dst"}, {:name=>"test_1", :id=>"test_1"}) do %>
+      <tr>
+        <%= hidden_field_tag 'location_id',  @location.id  %>
+        <th align="left"> <%= _('Add')  %>:</th>
+        <th align="left"><%= text_field_tag 'name', "", "class" => "input", :size => "25", :maxlength => "50"  %>        </th>
+        <th align="left"><%= text_field_tag 'cut', "", "class" => "input", :size => "10", :maxlength => "20"  %>        </th>
+        <th align="left"><%= text_field_tag 'add', "", "class" => "input", :size => "10", :maxlength => "20"  %>        </th>
+        <th align="right"><%= text_field_tag 'minlen', "", "class" => "input", :size => "15", :maxlength => "15"  %>        </th>
+        <th align="right"><%= text_field_tag 'maxlen', "", "class" => "input", :size => "15", :maxlength => "15"  %>        </th>
+        <th align="left">
+          <select name="tariff" <%= "disabled" if @tariffs.size < 1 %> >
+            <option value="<%= nil %>"><%= " " %> </option>
+            <% for tariff in @tariffs %>
+              <option value="<%= tariff.id %>"><%= tariff.name %> </option>
+            <% end %>
+          </select>
+        </th>
+        <%if allow_manage_providers?%>
+          <th align="left">
+            <select name="lcr" <%= "disabled" if @lcrs.size < 1 %> >
+              <option value="<%= nil %>"><%= " " %> </option>
+              <% for lcr in @lcrs %>
+                <option value="<%= lcr.id %>"> <%= lcr.name %> </option>
+              <% end %>
+            </select>
+          </th>
+
+          <th align="left">
+            <select name="did" <%= "disabled" if @dids.size < 1 %> >
+              <option value="<%= nil %>"><%= " " %> </option>
+              <% for did in @dids %>
+                <option value="<%= did.id %>"><%= nice_did_with_dialplan(did) %> </option>
+              <% end %>
+            </select>
+          </th>
+        <% end %>
+        <th align="left">
+          <select name="user" id="s_user" onchange="new Ajax.Updater('user_devices_77', '<%=Web_Dir%>/devices/cli_user_devices?add=-1&id=&id='+this.value+'&did='+this.value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});" >
+            <option value="-1"><%= _('Select_user')%> </option>
+            <%for user  in @users%>
+              <option value="<%= user.id %>"><%= nice_user(user)%> </option>
+            <%end%>
+          </select>
+          <%=hidden_field_tag 'device_id_from_js'%>
+          <span id = 'user_devices_77'></span>
+        </th>
+        <th colspan=2 align="center"><%= image_submit_tag 'icons/add.png', :title => _('Add'), :id =>"add_location_rule" %></th>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<% if @location.id != 1 and session[:usertype] != 'reseller'%>
+
+  <br/><br/>
+  <b><%= _('Global_destination_rules') %> </b>
+  <br/><br/>
+
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="center"><%= _('Enabled') %></th>
+      <th align="left"><%= _('Name') %></th>
+      <th align="left"><%= _('Cut') %></th>
+      <th align="left"><%= _('Add') %></th>
+      <th align="right"><%= _('Min_len') %></th>
+      <th align="right"><%= _('Max_len') %></th>
+
+    </tr>
+    <% i = 0 %>
+    <% for rule in @grules_dst %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td align="center">
+          <%= b_check if rule.enabled == 1 %>
+          <%= b_cross if rule.enabled == 0 %>
+        </td>
+        <td align="left">        <%= rule.name %> </td>
+        <td align="left">        <%= rule.cut %> </td>
+        <td align="left">        <%= rule.add %> </td>
+        <td align="right">        <%= rule.minlen %> </td>
+        <td align="right">        <%= rule.maxlen %> </td>
+
+      </tr>
+      <% i += 1%>
+    <% end %>
+
+  </table>
+
+<% end %>
+<br/><br/>
+<hr/>
+<br/><br/>
+<b><%= _('CallerID_rules') %> </b>
+<br/><br/>
+<table width="100%" class="maintable">
+  <tr>
+    <% if  @location.user_id == current_user.id %>
+      <th align="center"><%= _('Enabled') %>?</th>
+    <% end %>
+    <th align="left"><%= _('Name') %></th>
+    <th align="left"><%= _('Cut') %></th>
+    <th align="left"><%= _('Add') %></th>
+    <th align="right"><%= _('Min_len') %></th>
+    <th align="right"><%= _('Max_len') %></th>
+    <% if  @location.user_id == current_user.id %>
+      <th></th>
+      <th></th>
+    <% end %>
+  </tr>
+  <% i = 0 %>
+  <% for rule in @rules_src %>
+
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <% if  @location.user_id == current_user.id %>
+        <% form_tag :action => 'location_rule_change_status', :id => rule.id do %>
+          <td align="center">
+            <%= image_submit_tag 'icons/check.png', :title => _('Disable') if rule.enabled == 1 %>
+            <%= image_submit_tag 'icons/cross.png', :title => _('Enable') if rule.enabled == 0 %>
+          </td>
+        <% end %>
+      <% end %>
+      <td align="left">        <%= rule.name %> </td>
+      <td align="left">        <%= rule.cut %> </td>
+      <td align="left">        <%= rule.add %> </td>
+      <td align="right">        <%= rule.minlen %> </td>
+      <td align="right">        <%= rule.maxlen %> </td>
+      <% if  @location.user_id == current_user.id %>
+        <td align="center">	<%= link_to b_edit, :action => "location_rule_edit", :id => rule.id %>		</td>
+        <td align="center">   <%= link_to b_delete, { :action => 'location_rule_destroy', :id => rule.id }, :confirm => _('Are_you_sure'), :method => :post %>       </td>
+      <% end %>
+    </tr>
+    <% i += 1%>
+  <% end %>
+
+
+  <% if  @location.user_id == current_user.id %>
+    <% form_tag :action => 'location_rule_add', :lr_type=>"src" do %>
+      <tr>
+        <%= hidden_field_tag 'location_id',  @location.id  %>
+        <th align="left"> <%= _('Add')  %>:</th>
+        <th align="left"><%= text_field_tag 'name', "", "class" => "input", :size => "25", :maxlength => "50"  %>        </th>
+        <th align="left"><%= text_field_tag 'cut', "", "class" => "input", :size => "10", :maxlength => "20"  %>        </th>
+        <th align="left"><%= text_field_tag 'add', "", "class" => "input", :size => "10", :maxlength => "20"  %>        </th>
+        <th align="right"><%= text_field_tag 'minlen', "", "class" => "input", :size => "15", :maxlength => "15"  %>        </th>
+        <th align="right"><%= text_field_tag 'maxlen', "", "class" => "input", :size => "15", :maxlength => "15"  %>        </th>
+        <th align="center" colspan="2"><%= image_submit_tag 'icons/add.png', :title => _('Add') %></th>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<% if @location.id != 1 and session[:usertype] != 'reseller' %>
+  <br/><br/>
+  <b><%= _('Global_callerID_rules') %> </b>
+  <br/><br/>
+
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="center"><%= _('Enabled') %></th>
+      <th align="left"><%= _('Name') %></th>
+      <th align="left"><%= _('Cut') %></th>
+      <th align="left"><%= _('Add') %></th>
+      <th align="right"><%= _('Min_len') %></th>
+      <th align="right"><%= _('Max_len') %></th>
+    </tr>
+    <% i = 0 %>
+    <% for rule in @grules_src %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td align="center">
+          <%= b_check if rule.enabled == 1 %>
+          <%= b_cross if rule.enabled == 0 %>
+        </td>
+        <td align="left">        <%= rule.name %> </td>
+        <td align="left">        <%= rule.cut %> </td>
+        <td align="left">        <%= rule.add %> </td>
+        <td align="right">        <%= rule.minlen %> </td>
+        <td align="right">        <%= rule.maxlen %> </td>
+      </tr>
+      <% i += 1%>
+    <% end %>
+
+  </table>
+
+<% end %>
+
+<br/><br/>

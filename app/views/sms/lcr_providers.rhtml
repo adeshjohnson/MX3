@@ -1,0 +1,57 @@
+<b>LCR: <%= @lcr.name%></b>
+<br />
+<br />
+<b>Order: <%= @lcr.order.to_s.capitalize%></b>
+<br />
+<br />
+<% if@lcr.order.to_s == "priority" %>
+  <%= link_to b_lcr + _('Change_Order'), :action => "lcr_providers_sort", :id => params[:id]%>
+  <br />
+  <br />
+<% end %>
+
+<table width="100%" class="maintable">
+  <tr>
+    <th align="center" width="5%"><%= _('Active') %>?</th>
+    <th align="left"><%= _('Provider') %></th>
+    <th align="left"><%= _('Tech') %></th>
+    <th align="left"><%= _('Tariff') %></th>
+    <th></th>
+  </tr>
+
+  <% @providers.each_with_index{ |prov, i| %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <% sms_tariff = prov.sms_tariff %>
+      <% form_tag :action => 'lcr_provider_change_status', :id => @lcr.id, :prov => prov.id do %>
+        <td align="center">
+          <%= image_submit_tag 'icons/check.png', :title => _('Disable') if @lcr.sms_provider_active(prov.id) %>
+          <%= image_submit_tag 'icons/cross.png', :title => _('Enable') if not @lcr.sms_provider_active(prov.id) %>
+        </td>
+      <% end %>
+      <td><%= prov.name %></td>
+      <td><%= prov.provider_type %></td>
+      <td><%= sms_tariff.name if sms_tariff %></td>
+      <td align="center"><%= link_to b_delete, { :action => 'remove_lcr_provider', :id => @lcr, :prov => prov }, :confirm => _('Are_you_sure'), :method => :post %></td>
+    </tr>
+    <% i += 1%>
+  <% } %>
+</table>
+
+<br />
+
+<% form_tag(:action => 'try_to_add_provider', :id => @lcr) do %>
+  <div class="nb"><%= b_add + _('Add_provider') %>:
+    <select name="select_prov" <%= "disabled" if @other_providers.size == 0 %> >
+      <option value="0"><%= _('Select_provider') %></option>
+      <% for prov in @other_providers %>
+        <option value="<%= prov.id %>"> <%= prov.name %> </option>
+      <% end %>
+        
+      <% if @other_providers.size == 0 %>
+        <%= submit_tag( _('Add'), :disabled => "1" , :disable_with=>_('Processing..'))  %>
+      <% else %>
+        <%= submit_tag _('Add') , :disable_with=>_('Processing..') %>
+      <% end %>
+    </select>
+  </div>
+<% end %>

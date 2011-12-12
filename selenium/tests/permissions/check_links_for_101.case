@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.105" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Currencies</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_addons</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Addon Settings</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>CLIs</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Import user data</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Aggregate</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Call Shops</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Resellers</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Users</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Aggregate</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/calls_by_scr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title_icon</td>
+	<td>Calls by Source</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/calls_per_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title_icon</td>
+	<td>Calls per Day</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/load_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Load Stats</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Summary</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/first_activity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>First activity</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_cause_codes_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Stats by HangupCause codes</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/prefix_finder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Dynamic search</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Subscriptions</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Invoices</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/resellers/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title_icon</td>
+	<td>Settings</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<%= _('Add_manual_payment_notice2') %>:
+<br />
+<br />
+<br />
+<% form_tag :action => 'manual_payment_finish', :id => @sub do %>
+
+  <b><%= b_user + _('User') %></b>:
+  <%= nice_user(@user) %>
+  <br />
+  <b><%= b_money + (@am_typ.to_s == "amount" ? _('Amount') : _('Amount_with_VAT') )  %></b>:
+
+  <% if @am_typ.to_s == "amount" %>
+    <%= nice_number @curr_amount%>
+  <% else %>
+    <%= nice_number @curr_real_amount%>
+  <% end %>
+
+  <%= @curr%>
+  <br /><br />
+  <hr />
+  <br />
+  <table class='simple' width=50%>
+    <tr>
+      <td> <%= _('Current_balance') %>:</td>
+      <td id="balance_<%=@user.id%>"> <%= nice_number @user.balance%> <%= current_user.currency.name %> </td>
+    </tr>
+    <% if @curr != current_user.currency.name %>
+      <tr>
+        <td>    <%= _('Exchange_rate') %> <%= current_user.currency.name %>/<%= @curr %>:</td>
+        <td id="exchange_rate_<%=@user.id%>"> <%= @exchange_rate %> </td>
+      </tr>
+      <tr>
+        <td>   <%= _('Amount_with_VAT_converted_to') %> <%= current_user.currency.name %>: </td>
+        <td id="a_w_v_c_t_<%=@user.id%>"><%= nice_number @real_amount %> <%= current_user.currency.name %></td>
+      </tr>
+    <% end %>
+
+    <tr>
+      <td>   <%= _('Amount_without_VAT') %>: </td>
+      <td id="a_w_v_<%=@user.id%>" > <%= nice_number @amount %> <%= current_user.currency.name %></td>
+    </tr>
+    <tr>
+      <td>   <%= _('New_user_balance') %>: </td>
+      <td id="new_balance_<%=@user.id%>"> <%= nice_number @user.balance + @amount %> <%= current_user.currency.name %></td>
+    </tr>
+    <tr>
+      <td>   <%= _('Description') %>: </td>
+      <td id="description_<%=@user.id%>"> <%= @description %></td>
+    </tr>
+  </table>
+  <br />
+  <br />
+  <%= hidden_field_tag 'user', @user.id  %>
+  <%= hidden_field_tag 'amount', @curr_amount  %>
+  <%= hidden_field_tag 'p_currency', @curr  %>
+  <%= hidden_field_tag 'real_amount', @curr_real_amount %>
+  <%= hidden_field_tag 'description', @description %>
+  <%= submit_tag _('Confirm'), :disable_with=>_('Processing..')%>
+<% end %>

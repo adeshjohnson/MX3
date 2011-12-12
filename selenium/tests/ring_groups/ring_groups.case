@@ -1,0 +1,1590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--create-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>1234567890</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>1234567893</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#edit_link_3 &gt; img[alt=&quot;Edit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id</td>
+	<td>label=FAX/102 - Test FAX device</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Assign']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#edit_link_5 &gt; img[alt=&quot;Edit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ring Group name:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Comment:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>This Ring Group will be reached by such local extension:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ring Time (how long device will ring): seconds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Options to use when dialing (Advanced):</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dialing Strategy: ringall</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CallerID Prefix:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Route to DID if No Answer:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>dialplan[name]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>ringgroup[comment]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>dialplan[data2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>ringgroup[timeout]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>ringgroup[options]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>ringgroup[strategy]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>ringgroup[cid_prefix]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>ringgroup[did_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>ringgroup[did_id]</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[name]</td>
+	<td>RGname</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[comment]</td>
+	<td>Komentaras</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[data2]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[timeout]</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[options]</td>
+	<td>Pasirinkimas</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>ringgroup[strategy]</td>
+	<td>ringall</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[cid_prefix]</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37093042422</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Make DID free']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[name]</td>
+	<td>RGname</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[comment]</td>
+	<td>Komentaras</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[data2]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[timeout]</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[options]</td>
+	<td>Pasirinkimas</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>ringgroup[strategy]</td>
+	<td>ringall</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[cid_prefix]</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=ringgroup[did_id]</td>
+	<td>label=1234567891</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>ringgroup[did_id]</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ring Group was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ring Group name:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Comment:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>This Ring Group will be reached by such DIDs:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assign DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>This Ring Group will be reached by such local extension:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Will ring these devices:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assign Device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ring Time (how long device will ring): seconds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Options to use when dialing (Advanced):</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dialing Strategy: ringall</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CallerID Prefix:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Route to DID if No Answer:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DIDs:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Local Extension: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ring Devices:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If none device answers in 20 seconds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID:1234567891</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>dialplan[name]</td>
+	<td>RGname</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ringgroup[comment]</td>
+	<td>Komentaras</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>dialplan[data2]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ringgroup[timeout]</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ringgroup[options]</td>
+	<td>Pasirinkimas</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ringgroup[cid_prefix]</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Accessible over DIDs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ring Time (s)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Options</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Strategy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CallerID Prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID if no aswer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dp_not_assign_2</td>
+	<td>Assign DID</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>dp_not_assign_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>This Dial Plan cannot be accessed because no DID is assigned to it</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[2]/td[3]</td>
+	<td>RGname</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[2]/td[4]</td>
+	<td>Komentaras</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[6]</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[7]</td>
+	<td>Pasirinkimas</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[8]</td>
+	<td>ringall</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[9]</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[10]</td>
+	<td>1234567891</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//a[@id='edit_link_1']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//a[@id='delete_link_1']/img</td>
+	<td></td>
+</tr>
+<!--edit-->
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ring Group name:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Comment:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>This Ring Group will be reached by such DIDs:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assign DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>This Ring Group will be reached by such local extension:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Will ring these devices:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assign Device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ring Time (how long device will ring): seconds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Options to use when dialing (Advanced):</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dialing Strategy: ringall</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CallerID Prefix:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Route to DID if No Answer:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DIDs:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Local Extension: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ring Devices:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If none device answers in 20 seconds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID:1234567891</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>dialplan[name]</td>
+	<td>RGname</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ringgroup[comment]</td>
+	<td>Komentaras</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>dialplan[data2]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ringgroup[timeout]</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ringgroup[options]</td>
+	<td>Pasirinkimas</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ringgroup[cid_prefix]</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[name]</td>
+	<td>RGname2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[comment]</td>
+	<td>Komentaras labai ilgas</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[data2]</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[timeout]</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[options]</td>
+	<td>Pasirinkimas numeris du</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[cid_prefix]</td>
+	<td>370600</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ringgroup[did_id]</td>
+	<td>label=1234567890</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>ringgroup[did_id]</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ring Group was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DIDs:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Local Extension: 100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ring Devices:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If none device answers in 50 seconds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID:1234567890</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>dialplan[name]</td>
+	<td>RGname2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ringgroup[comment]</td>
+	<td>Komentaras labai ilgas</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>dialplan[data2]</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ringgroup[timeout]</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ringgroup[options]</td>
+	<td>Pasirinkimas numeris du</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ringgroup[cid_prefix]</td>
+	<td>370600</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>ringgroup[did_id]</td>
+	<td>1234567890</td>
+</tr>
+<!--assign did-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ring Group dialplan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>//select[@name='dp_id']</td>
+	<td>100 - RGname2</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td/form[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID assigned to Dial Plan: RGname2</td>
+	<td></td>
+</tr>
+<!--verify-->
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='show_dids']/a</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='show_dids']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Edit: 37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=37063042438</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Edit: 37063042438</td>
+	<td></td>
+</tr>
+<!--add device-->
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>s_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>s_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device_id</td>
+	<td>label=IAX2/1002</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>device_id</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>device_id</td>
+	<td>IAX2/1002</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[@id='user_free_devices']/td[2]/span/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>IAX2/1002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt='Device']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Drag&amp;Drop to change priority</td>
+	<td></td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>ringgroup[did_id]</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ring Group was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=IAX2/1002</td>
+	<td>IAX2/1002</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=37063042438</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Edit: 37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=IAX2/1002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device configuration</td>
+	<td></td>
+</tr>
+<!--verify-->
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ring Devices:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=IAX2/1002</td>
+	<td>IAX2/1002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=IAX2/1002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device configuration</td>
+	<td></td>
+</tr>
+<!--dids-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>37060012345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>37060012350</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID interval was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=commit]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=image]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID assigned to Dial Plan: Quick Forward DIDs DP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Terminate']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID terminated</td>
+	<td></td>
+</tr>
+<!--verify-->
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>item_4</td>
+	<td>IAX2/1002</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Show Extension lines</td>
+	<td>Show Extension lines</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Show Extension lines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>link=Show Extension lines</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>exten</td>
+	<td></td>
+</tr>
+<!--assign dids-->
+<tr>
+	<td>click</td>
+	<td>link=Add new DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>did_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>did_id</td>
+	<td>label=37060012348</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>did_id</td>
+	<td>37060012348</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>37060012347</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='add_new_did']/span/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=37060012348</td>
+	<td>37060012348</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>did_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>did_id</td>
+	<td>label=37060012350</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>did_id</td>
+	<td>37060012350</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='add_new_did']/span/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=37060012350</td>
+	<td>37060012350</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>s_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_user</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[@id='user_free_devices']/td[2]/span/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>item_6</td>
+	<td>IAX2/104</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>s_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_user</td>
+	<td>label=System Admin</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device_id</td>
+	<td>label=IAX2/103 - Test Device for Admin</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>device_id</td>
+	<td>IAX2/103 - Test Device for Admin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[@id='user_free_devices']/td[2]/span/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>item_5</td>
+	<td>IAX2/103</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ring Group was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37060012348</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37060012350</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>dp_dids_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IAX2/1002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IAX2/104</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IAX2/103</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[name]</td>
+	<td>#$%TRew435</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[comment]</td>
+	<td>#$%Tr435tr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[data2]</td>
+	<td>$5t5tr4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[timeout]</td>
+	<td>$%t45t</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[options]</td>
+	<td>#$@TYG45tw4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[cid_prefix]</td>
+	<td>Q#$T%GTERFQW$3</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>ringgroup[did_id]</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ring Group was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[data2]</td>
+	<td>10000000000000000000000000000000000000000000000000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[cid_prefix]</td>
+	<td>@#$%^&amp;*^%$#@!1345</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>ringgroup[did_id]</td>
+	<td>label=37060012350</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=ringgroup[did_id]</td>
+	<td>label=37060012346</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[options]</td>
+	<td>FRT%$4444444tr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[timeout]</td>
+	<td>wtr</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>ringgroup[did_id]</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Name can not be blank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>ringgroup[did_id]</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Enter extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[data2]</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>ringgroup[did_id]</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Name can not be blank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[name]</td>
+	<td>RGname</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[data2]</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>ringgroup[did_id]</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ring Group was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@id='did_value2']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call end</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>RGname2 (ringgroup)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=RGname2 (ringgroup)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Edit Ring Group</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

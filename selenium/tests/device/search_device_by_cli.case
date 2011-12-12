@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>search_device_by_cli</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">search_device_by_cli</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/cli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=s_cli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_cli</td>
+	<td>371</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=user_2</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=description_2</td>
+	<td>Test Device #1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_cli</td>
+	<td>381</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=user_5</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_cli</td>
+	<td>379</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=user_3</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=description_3</td>
+	<td>Test FAX device</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_cli</td>
+	<td>2344</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_cli</td>
+	<td>sdfgh</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_cli</td>
+	<td>#@$%^&amp;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_cli</td>
+	<td>37</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_cli</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_cli</td>
+	<td>379374</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_cli</td>
+	<td>37937400</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_cli</td>
+	<td>37</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_extension</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_4</td>
+	<td>1002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_extension</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_username</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_description</td>
+	<td>fOr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Device #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test FAX device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Device for Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Device for Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_description</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_username</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_cli</td>
+	<td>371</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>101</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

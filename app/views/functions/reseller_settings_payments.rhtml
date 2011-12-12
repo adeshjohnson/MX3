@@ -1,0 +1,257 @@
+<% form_tag :action => 'reseller_settings_payments_change' do %>
+
+  <table height="470">
+    <tr>
+      <td valign="top">
+        <div id="dhtmlgoodies_tabView1">
+
+          <div class="dhtmlgoodies_aTab">
+            <br /><br />
+            <table class="simple" width="100%">
+              <tr>
+                <td width="30"></td>
+                <td>      <b><%= _('Paypal_Enabled')%>:</b>                </td>
+                <td>      <%= check_box_tag 'reseller_paypal_enabled', value = "1", checked = Confline.get_value("Paypal_Enabled", session[:user_id]).to_i == 1 %>                 </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>      <b><%= _('PayPal_Email')%>:</b>                 </td>
+                <td>      <%= text_field_tag('reseller_paypal_email', Confline.get_value("PayPal_Email", session[:user_id]) , "class" => "input", :size => "35", :maxlength => "50" )%>                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>      <b><%= _('Paypal_Default_Currency')%>:</b>                 </td>
+                <td>
+                  <select name="reseller_paypal_default_currency" <%= "disabled" if @currencies.size < 1 %> >
+                    <% for curr in @currencies %>
+                      <option value="<%= curr.name %>" <%= "selected" if @ppcurr == curr.name %>> <%= curr.name %> </option>
+                    <% end %>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>      <b><%= _('PayPal_User_Pays_Transfer_Fee')%>:</b>                 </td>
+                <td>      <%= check_box_tag 'paypal_user_pays_transfer_fee', value = "1", Confline.get_value("PayPal_User_Pays_Transfer_Fee", session[:user_id]).to_i == 1 %>                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>      <b><%= _('PayPal_Default_Amount')%>:</b>                 </td>
+                <td>      <%= text_field_tag('reseller_paypal_default_amount', Confline.get_value("PayPal_Default_Amount", session[:user_id]) , "class" => "input", :size => "35", :maxlength => "50" )%>                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>      <b><%= _('PayPal_Min_Amount')%>:</b>                 </td>
+                <td>      <%= text_field_tag('reseller_paypal_min_amount', Confline.get_value("PayPal_Min_Amount", session[:user_id]) , "class" => "input", :size => "35", :maxlength => "50" )%>                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>
+                  <b><%= _('Payment_Confirmation')%>:</b>
+                </td>
+                <td id="confirmation">
+                  <%= select_tag("reseller_paypal_payment_confirmation", options_for_select([[_('gateway_not_required'), 'none'], [_('gateway_required_for_suspicious_payments'), 'suspicious'], [_('gateway_required_for_all_payments'), 'all']], Confline.get_value("PayPal_Payment_Confirmation", current_user.id))) %>
+
+                  <script type="text/javascript">
+                    Event.observe(window, 'load', function() {
+                    var el = $("confirm_message");
+                    var opt = $("reseller_paypal_payment_confirmation");
+
+                    <% if Confline.get_value("Disallow_Email_Editing", current_user.id) == "1" %>
+                      var enabled = true;
+                    <% else %>
+                      var enabled = false;
+                    <% end %>
+
+                    if (enabled && opt.value == "suspicious") {
+                    el.setStyle({display: 'inline'});
+                    }
+
+                    if (opt.value == "none") {
+                    $("reseller_paypal_email_notification").disabled = true;
+                    }
+
+                    Event.observe(opt, 'change', function() {
+                    if (enabled && opt.value == "suspicious") {
+                    el.setStyle({display: 'inline'});
+                    } else {
+                    el.setStyle({display: 'none'});
+                    }
+                    if (opt.value == "suspicious" || opt.value == "all") {
+                    $("reseller_paypal_email_notification").disabled = false;
+                    } else {
+                    $("reseller_paypal_email_notification").disabled = true;
+                    $("reseller_paypal_email_notification").checked = false;
+                    }
+                    });
+                    });
+                  </script>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <%= setting_boolean(_('PayPal_Email_Notification'), 'reseller_paypal_email_notification', 'PayPal_Email_Notification', session[:user_id]) %>
+                <%= hidden_field_tag("reseller_paypal_email_notification", "0", {:id => "hidden"}) %>
+              </tr>
+              <tr <%= tooltip(_('PayPal_Custom_redirect'), _('PayPal_Custom_redirect_Explanation'))%>>
+                <td></td>
+                <td>
+                  <b><%=  _('PayPal_Custom_redirect')%>: </b>
+                </td>
+                <td>
+                  <%= check_box_tag 'paypal_custom_redirect', value = "1", checked = confline("PayPal_Custom_redirect",session[:user_id]).to_i == 1 %>
+                </td>
+              </tr>
+              <script type="text/javascript">
+                //<![CDATA[
+                Event.observe(window, 'load', function() {
+                var wsw = $('paypal_custom_redirect');
+
+                if (!wsw.checked) {
+                $$("#return_url input").each(function(el) {
+                if (el != wsw) {
+                el.disabled = true;
+                }
+                });
+                }
+
+                Event.observe(wsw, 'click', function() {
+                $$("#return_url input").each(function(el) {
+                if (wsw.checked) {
+                if (el != wsw) {
+                el.disabled = false;
+                }
+                } else {
+                if (el != wsw) {
+                el.disabled = true;
+                }
+                }
+                });
+                });
+
+                });
+                //]]>
+              </script>
+              <tr <%= tooltip(_('Paypal_return_url'), _('Paypal_return_url_Explanation'))%>>
+                <td></td>
+                <td>
+                  <b><%= _('Paypal_return_url')%>:</b>
+                </td>
+                <td id="return_url">
+                  <%=  Web_URL %>/ <%= text_field_tag('paypal_return_url', Confline.get_value("Paypal_return_url",session[:user_id]) , "class" => "input", :size => "20", :maxlength => "50" )%>
+                </td>
+              </tr>
+              <tr <%= tooltip(_('Paypal_cancel_url'), _('Paypal_cancel_url_Explanation'))%>>
+                <td></td>
+                <td>
+                  <b><%= _('Paypal_cancel_url')%>:</b>
+                </td>
+                <td id="return_url">
+                  <%=  Web_URL %>/ <%= text_field_tag('paypal_cancel_url', Confline.get_value("Paypal_cancel_url",session[:user_id]) , "class" => "input", :size => "20", :maxlength => "50" )%>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>      <b><%= _('PayPal_Test')%>:</b>                 </td>
+                <td>      <%= check_box_tag 'reseller_paypal_test', value = "1", checked = Confline.get_value("PayPal_Test", session[:user_id]).to_i == 1 %>                </td>
+              </tr>
+              <tr>
+                <td colspan="2">&nbsp;</td>
+              </tr>
+              <tr class="nb">
+                <td></td>
+                <td colspan=2>
+                  <span id="confirm_message" style="display: none"><%= b_info %>
+                    <strong><%=_('Payment_security_disallow_email_editing')%></strong></span>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="dhtmlgoodies_aTab">
+            <br /><br />
+            <table class="simple" width="100%">
+              <tr>
+                <td width="30"></td>
+                <td>      <b><%= _('Enabled')%>:</b>                </td>
+                <td>      <%= check_box_tag 'reseller_webmoney_enabled', value = "1", checked = Confline.get_value("WebMoney_Enabled", session[:user_id]).to_i == 1 %>                 </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><b><%= _('WebMoney_Gateway')%>:</b></td>
+                <td><%= select_tag("webmoney_gateway", options_for_select([[_("Russian"), 0],[_("English"), 1]], Confline.get_value("WebMoney_Gateway", session[:user_id]).to_i)) %></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>      <b><%= _('WebMoney_Purse')%>:</b>                 </td>
+                <td>      <%= text_field_tag('reseller_webmoney_purse', Confline.get_value("WebMoney_Purse", session[:user_id]) , "class" => "input", :size => "35", :maxlength => "20" )%>                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>      <b><%= _('WebMoney_Currency')%>:</b>                 </td>
+                <td>
+                  <select name="reseller_webmoney_default_currency" <%= "disabled" if @currencies.size < 1 %> >
+                    <% for curr in @currencies %>
+                      <option value="<%= curr.name %>" <%= "selected" if @wppcurr == curr.name %>> <%= curr.name %> </option>
+                    <% end %>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>      <b><%= _('Default_Amount')%>:</b>                 </td>
+                <td>      <%= text_field_tag('reseller_webmoney_default_amount', Confline.get_value("WebMoney_Default_Amount", session[:user_id]) , "class" => "input", :size => "35", :maxlength => "50" )%>                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>      <b><%= _('Min_Amount')%>:</b>                 </td>
+                <td>      <%= text_field_tag('reseller_webmoney_min_amount', Confline.get_value("WebMoney_Min_Amount", session[:user_id]) , "class" => "input", :size => "35", :maxlength => "50" )%>                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>      <b><%= _('Test')%>:</b>                 </td>
+                <td>      <%= check_box_tag 'reseller_webmoney_test', value = "1", checked = Confline.get_value("WebMoney_Test", session[:user_id]).to_i == 1 %>                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>      <b><%= _('WebMoney_SIM_MODE')%>:</b>                 </td>
+                <td>
+                  <select name = "reseller_webmoney_sim_mode">
+                    <option value ="0" <%="selected" if @selected_mode == 0%>>0 - All sucessfull.</option>
+                    <option value ="1" <%="selected" if @selected_mode == 1%>>1 - All fail.</option>
+                    <option value ="2" <%="selected" if @selected_mode == 2%>>2 - 80% - success; 20% - fail.</option>
+                  </select>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <% if session[:vouchers_enabled].to_i  == 1%>
+            <div class="dhtmlgoodies_aTab">
+              <br /><br />
+              <table class="simple" width="100%">
+                <tr>
+                  <td width="30"></td>
+                  <td>      <b><%= _('Vouchers_Enabled')%>:</b>                </td>
+                  <td>      <%= check_box_tag 'vouchers_enabled', value = "1", checked = Confline.get_value("Vouchers_Enabled", session[:user_id]).to_i == 1 %>                 </td>
+                </tr>
+                <%= setting_boolean(_('Disable_Card_with_same_Number_as_Voucher_if_Voucher_is_used?'), 'voucher_card_disable', "Voucher_Card_Disable", session[:user_id])  %>
+              </table>
+            </div>
+          <%end%>
+        </div>
+        <script type="text/javascript">
+  <% g_t = ['PayPal', 'WebMoney'] %>
+  <% g_t << ['Vouchers'] if session[:vouchers_enabled].to_i == 1%>
+
+          initTabs('dhtmlgoodies_tabView1',Array(<%=gateway_tabs(g_t)%>),0,550,400);
+        </script>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= submit_tag _('Save_changes'), :disable_with=>_('Processing..')%>
+      </td>
+    </tr>
+  </table>
+
+<% end %>

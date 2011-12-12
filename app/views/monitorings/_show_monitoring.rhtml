@@ -1,0 +1,40 @@
+<% for monitoring in monitorings %>
+  <tr id="monit-<%=monitoring.id%>" class="center">
+    <td class="active">
+      <%= link_to activity_indicator(monitoring.active), { :action => :update, :id => monitoring.id, :monitoring => { :active => !monitoring.active } } %>
+    </td>
+    <td class="period">
+      <%= format_period(monitoring.period_in_past) %>
+    </td>
+    <td class="amount">
+      <%= monitoring.amount %>
+    </td>
+    <td class="block">
+      <%= block_user(monitoring) %>
+    </td>
+    <td class="email">
+      <%= send_admin_email(monitoring) %>
+    </td>
+    <td class="log">
+      <%= link_to b_user_log, {:controller => "stats", :action => "action_log", :target_type => "monitoring", :target_id => monitoring.id}, :id=>"log_link_#{monitoring.id.to_s}" %>
+    </td>
+    <td class="edit">
+      <% if personal %>
+      <%= link_to b_edit, { :action => 'edit', :id => monitoring, :user_id=>user }, :id=>"edit_link_#{monitoring.id.to_s}" %>
+      <%else%>
+      <%= link_to b_edit, { :action => 'edit', :id => monitoring }, :id=>"edit_link_#{monitoring.id.to_s}" %>
+      <%end%>
+    </td>
+    <td class="destroy">
+      <% if personal %>
+        <% if monitoring.users.size > 1 %>
+          <%= link_to b_delete, { :action => 'destroy', :id => monitoring, :user => @user.id }, :id=>"delete_link_#{monitoring.id.to_s}", :confirm => _('Are_you_sure_remove_monitoring', monitoring.users.map(&:username).join(",")), :method => "post" %>
+        <% else %>
+          <%= link_to b_delete, { :action => 'destroy', :id => monitoring, :user => @user.id }, :id=>"delete_link_#{monitoring.id.to_s}", :confirm => _('Are_you_sure'), :method => "post" %>
+        <% end %>
+      <% else %>
+        <%= link_to b_delete, { :action => 'destroy', :id => monitoring, :user => @user.id }, :id=>"delete_link_#{monitoring.id.to_s}", :confirm => _('Are_you_sure_remove_monitoring', _(monitoring.user_type.capitalize).downcase), :method => "post" %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

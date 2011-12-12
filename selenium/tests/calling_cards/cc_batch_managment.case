@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.119" />
+<title>cc_batch_managment</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">cc_batch_managment</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--new card group-->
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_name</td>
+	<td>Grupele</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>price_with_vat</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_setup_fee</td>
+	<td>10.0</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card group was successfully created</td>
+	<td></td>
+</tr>
+<!--new cards-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>0000000001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>0000000007</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cards created: 7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Batch management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Grupele</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>0000000005</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>0000000007</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>buy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card interval : 0000000005 - 0000000007</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>quantity</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>300.0000 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tax_Tax</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_tax</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>300.0000 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cards bought</td>
+	<td></td>
+</tr>
+<!--set currencies-->
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>icon_chech_curr_upd_disable_16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Currency update disabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/edit/16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>exchange_rate</td>
+	<td>2.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=image]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Currency details updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>icon_cross_curr_upd_enable_16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Currency update enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>icon_cross_curr_active_16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Currency enabled</td>
+	<td></td>
+</tr>
+<!--change default currency-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user[currency_id]</td>
+	<td>label=BOB</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user[currency_id]</td>
+	<td>BOB</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Personal details changed</td>
+	<td></td>
+</tr>
+<!--buy cards-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Grupele</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>0000000001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>0000000004</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>buy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card interval : 0000000001 - 0000000004</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>quantity</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>800.0000 BOB</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tax_Tax</td>
+	<td>0.0000 BOB</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_tax</td>
+	<td>0.0000 BOB</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>800.0000 BOB</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cards bought</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Balance (Without TAX) BOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_23</td>
+	<td>200.0000</td>
+</tr>
+<!--payments list-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amount_10</td>
+	<td>300.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amount_11</td>
+	<td>800.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>currency_10</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>currency_11</td>
+	<td>BOB</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount</td>
+	<td>1400.0000(BOB)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_with_tax</td>
+	<td>1400.0000(BOB)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount_completed</td>
+	<td>1400.0000(BOB)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_with_tax_completed</td>
+	<td>1400.0000(BOB)</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

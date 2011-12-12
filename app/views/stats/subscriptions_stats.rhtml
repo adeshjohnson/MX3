@@ -1,0 +1,50 @@
+<div align="left" class="nb">
+
+  <% form_tag :action => 'subscriptions_stats' do %>
+    <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+    <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+    &nbsp;&nbsp;<%= submit_tag _('Change'), :disable_with=>_('Processing..')%>
+  <% end %>
+</div>
+
+<br />
+<br />
+<%if @res%>
+  <table>
+    <tr>
+      <td><%= _('Subscriptions')%> : </td>
+      <td><%= @res[0]['sub_size'].to_i%></td>
+    </tr>
+    <tr>
+      <td><%= _('In_first_day_subscriptions')%> : </td>
+      <td><%= @res2[0]['sub_size'].to_i%>&nbsp;&nbsp;<%= link_to b_view, :action=> "subscriptions_first_day", :date=>@date_from %></td>
+    </tr>
+  </table>
+<%end%>
+
+<br />
+<br />
+
+<%if @res3%>
+  <br>
+  <% if @total_pages > 1 %>
+    <br>
+    <%= render :partial => "page_select_header" %>
+  <% end %>
+  <br>
+
+  <table width="100%" class="maintable">
+    <tr>
+      <th><%= _('User') %></th>
+    </tr>
+    <% @res3.each_with_index { |r, i| %>
+      <tr>
+        <%if r['first_name'].length + r['last_name'].length > 0 %>
+          <td><%=link_to r['first_name'].to_s + ' ' + r['last_name'].to_s, :controller => "users", :action => "edit", :id =>r['id'], :return_to_controller=>'stats', :return_to_action=>'subscriptions_stats' %></td>
+        <%else%>
+          <td><%= link_to r['username'],:controller => "users", :action => "edit", :id => r['id'], :return_to_controller=>'stats', :return_to_action => 'subscriptions_stats'%></td>
+        <%end%>
+      </tr>
+    <% } %>
+  </table>
+<%end%>

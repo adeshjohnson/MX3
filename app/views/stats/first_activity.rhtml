@@ -1,0 +1,45 @@
+<% form_tag :action => 'first_activity' do %>
+     <%= _('From') %>:  <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+  &nbsp;&nbsp;<%= _('to') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+  &nbsp;&nbsp;<%= submit_tag _('Change_date'), :disable_with=>_('Processing..')%>
+<% end %>
+
+ 
+<br />
+<br />
+<%= page_select_header(@page, @total_pages )  %>
+
+<table width="100%" class="maintable">
+<tr>
+  <th align="center"><%= _('Date')%></th>
+  <th><%= _('User')%></th>
+ <!-- <th align="right" ><%#_('Subscriptions')%></th> -->
+</tr>
+<%i=0%>
+<%# sb =0%>
+<% for r in @res %>
+  <tr class="row<%= (i % 2 + 1).to_s %>" >
+      <td align="center" id="calldate_<%= r['user_id'] %>"><%= nice_date_time(r['calldate'])%></td>
+    <%if (!r['first_name'].to_s.blank? or !r['last_name'].to_s.blank?) or !r['username'].to_s.blank?%>
+          <%if r['first_name'].to_s.length + r['last_name'].to_s.length > 0%>
+        <td id="user_<%= r['user_id'] %>"><%=  r['first_name'].to_s + " " + r['last_name'].to_s  %></td>
+      <%else%>
+        <td id="user_<%= r['user_id'] %>"><%=  r['username'].to_s %></td>
+      <%end%>
+  <%else%>
+      <td id="user_<%= r['user_id'] %>"><%= r['user_id'] %></td>
+    <%end%>
+    <%#sb += r['sb'].to_i%>
+      <!--
+    <td align="right" id="sb_<%# r['user_id'] %>"><%# r['sb'].to_i%></td>
+      -->
+  </tr>
+  <%i=i+1%>
+<%end%>
+  <!--
+<tr>
+  <th colspan="2"><%# _('Total')%> : </th>
+  <th align="right" > <%# sb.to_i %> </th>
+</tr>
+  -->
+</table>

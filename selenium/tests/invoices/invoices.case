@@ -1,0 +1,3058 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>invoices</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">invoices</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<!--Set taxex for all users-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>total_tax</td>
+	<td>Total_tax_name</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1name</td>
+	<td>First-tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2name</td>
+	<td>Second-tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3name</td>
+	<td>Third-tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4name</td>
+	<td>Forth-tax</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax2active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax3active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax4active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3value</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4value</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tabTabdhtmlgoodies_tabView1_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Apply to all Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Taxes set</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Test_accountant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoices_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>see_financial_data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<!-- #### SECOND invoice number type -->
+<!--Update invoice number settings-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prepaid_invoice_number_start</td>
+	<td>INV</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prepaid_invoice_number_length</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>prepaid_invoice_number_type_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_number_start</td>
+	<td>INV</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_number_length</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_number_type_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--date fix-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/show_user_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Check when  number is 9 and when pases 9-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_number_type_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_number_start</td>
+	<td>INV</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_number_length</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<!--Login as admin and check numbering.-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Invoices for 1 day.-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>value=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Generating invoices for period: 2009-01-01 - 2009-01-01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<!--prepaid-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_postpaid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test User #1</td>
+	<td></td>
+</tr>
+<!--Invoices for 10 days.-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>value=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Generating invoices for period: 2009-01-01 - 2009-01-10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<!--Invoices for 40 days.-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>value=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Generating invoices for period: 2009-01-01 - 2009-02-10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<!--Generate additional invoice to check if number is correct.-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_postpaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<!--Verify invoice-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_start_2</td>
+	<td>2009-01-01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_end_2</td>
+	<td>2009-01-01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_start_3</td>
+	<td>2009-01-01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_end_3</td>
+	<td>2009-01-10</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_start_4</td>
+	<td>2009-01-01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_end_4</td>
+	<td>2009-02-10</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_number_5</td>
+	<td>INV09010104</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_number_6</td>
+	<td>INV09010105</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_number_2</td>
+	<td>INV09010101</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_number_3</td>
+	<td>INV09010102</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_number_4</td>
+	<td>INV09010103</td>
+</tr>
+<!--Manual payment should be marked as paid.-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>value=2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>p_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New user balance:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Current balance:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>12.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>value=2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>p_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New user balance:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Current balance:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>12.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<!--Verify that payment invoice is marked as paid-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>inv_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>inv_number_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>inv_number_2</td>
+	<td>number</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>inv_number_3</td>
+	<td>${number}</td>
+</tr>
+<!--View invoice details-->
+<!--...as ADMIN-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>image_not_paid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>details_link_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number</td>
+	<td>INV09010101</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>invoice_type</td>
+	<td>Postpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>period_start</td>
+	<td>2009-01-01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>period_end</td>
+	<td>2009-01-01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>full_price</td>
+	<td>9.4380</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_name_2</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_quantity_2</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_price_2</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_total_price_2</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>create_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>image_not_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>image_paid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>inv_paid_date_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>details_link_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Check']</td>
+	<td></td>
+</tr>
+<!--......Verify generated payment-->
+<!--......# This is a hack to get date set to today. -->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>nice_date</td>
+	<td>datapilna</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>paymenttype_12</td>
+	<td>Invoice</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amount_12</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>fee_12</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_12</td>
+	<td>9.4380</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_12</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount</td>
+	<td>29.0000(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_fee</td>
+	<td>0.0000(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_with_tax</td>
+	<td>54.7404(USD)</td>
+</tr>
+<!--## CHECK IF NUMBERS ARE ROUNDED CORRECTLY-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>prepaid_invoice_number_digits</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>invoice_number_digits</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_type_5</td>
+	<td>Postpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_5</td>
+	<td>6.00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_5</td>
+	<td>11.32</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>details_link_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>6.00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>full_price</td>
+	<td>11.32</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/user_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_5</td>
+	<td>6.00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_with_vat_5</td>
+	<td>11.32</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>details_link_5</td>
+	<td></td>
+</tr>
+<!--from api-->
+<!--admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/invoices?u=admin&amp;p=admin1&amp;from=1230760800&amp;till=1234303200&amp;file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>6.0000</td>
+	<td></td>
+</tr>
+<!--reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/invoices?u=reseller&amp;p=reseller1&amp;from=1230760800&amp;till=1234303200&amp;file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>//invoice[1]/product[1]/price</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>//invoice[1]/product[2]/price</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//invoice[1]/product[1]/price</td>
+	<td>11.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//product[2]/price</td>
+	<td>13.0000</td>
+</tr>
+<!--user-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/invoices?u=101&amp;p=1011&amp;from=1230760800&amp;till=1234303200&amp;file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//invoice[2]/product/price</td>
+	<td>11.0000</td>
+</tr>
+<!--accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/invoices?u=accountant&amp;p=accountant1&amp;from=1230760800&amp;till=1234303200&amp;file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>6.0000</td>
+	<td></td>
+</tr>
+<!--pdf generate-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/5?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_pdf/5?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/5?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ok</td>
+	<td></td>
+</tr>
+<!--did_inc_calls in invoices-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_price_10</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_total_price_10</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/9?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_pdf/9?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>billsec: &quot;20&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>calls: &quot;1&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>dst: &quot;37063042438&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/9?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ok</td>
+	<td></td>
+</tr>
+<!--paging-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>items_per_page</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_1</td>
+	<td>1 2 3 4 5</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices?page=-2&amp;s_first_name=&amp;s_issue_date=&amp;s_ivnoice_type=&amp;s_last_name=&amp;s_mail=&amp;s_manually=&amp;s_number=&amp;s_paid=&amp;s_period_end=&amp;s_period_start=&amp;s_username=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_1</td>
+	<td>1 2 3 4 5</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices?page=200&amp;s_first_name=&amp;s_issue_date=&amp;s_ivnoice_type=&amp;s_last_name=&amp;s_mail=&amp;s_manually=&amp;s_number=&amp;s_paid=&amp;s_period_end=&amp;s_period_start=&amp;s_username=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_5</td>
+	<td>1 2 3 4 5</td>
+</tr>
+<!--pdf_generation_test-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/test_pdf_generation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>PDF test passed</td>
+	<td></td>
+</tr>
+<!--Check invoices when user has no address and no tax.-->
+<!--...Create user-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/create_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>OK</td>
+	<td></td>
+</tr>
+<!--new-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>reseller2no_adr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>reseller2no_adr1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_usertype</td>
+	<td>label=reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--...Assign invoice-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_new/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>subscription_memo</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_year</td>
+	<td>label=2014</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_month</td>
+	<td>label=March</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_month</td>
+	<td>label=March</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_day</td>
+	<td>label=4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_day</td>
+	<td>label=4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_hour</td>
+	<td>label=09</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_hour</td>
+	<td>label=09</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_minute</td>
+	<td>label=34</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_minute</td>
+	<td>label=34</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Subscription added</td>
+	<td></td>
+</tr>
+<!--Generate invoice-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=reseller2no_adr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<!--...Verify invoice-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>10.00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>full_price</td>
+	<td>18.88</td>
+</tr>
+<!--......Generate simple pdf-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/11?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ok</td>
+	<td></td>
+</tr>
+<!--......Generate detailed pdf-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_pdf/11?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ok</td>
+	<td></td>
+</tr>
+<!--TEST INVOICE GENERATION FOR PREPAID USER-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>test_service</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>service_servicetype_periodic_fee</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>2.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Service was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_new/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>subscription_service_id</td>
+	<td>label=test_service, Price: 2.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>subscription_memo</td>
+	<td>test_service_for_101</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_month</td>
+	<td>label=September</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_day</td>
+	<td>label=28</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_hour</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_minute</td>
+	<td>label=35</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_day</td>
+	<td>label=28</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_hour</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_minute</td>
+	<td>label=35</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Subscription added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=September</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=28</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=28</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-09-28 - 2009-10-28</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_start_12</td>
+	<td>2009-09-28</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_end_12</td>
+	<td>2009-10-28</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_issue_12</td>
+	<td>${datapilna}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_12</td>
+	<td>12.04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_12</td>
+	<td>22.71</td>
+</tr>
+<!--//=======-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>i1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>i2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>i4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>i3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<!--
+<tr>
+	<td>click</td>
+	<td>link_send_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Send Invoices over Email to Users']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to send invoices by email?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices sent: 1</td>
+	<td></td>
+</tr>
+-->
+<!--//=====================-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>test1</td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>tax2_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>tax3_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>tax4_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>compound_tax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount_with_tax</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>a_w_v_8</td>
+	<td>25.0000 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<!--NO USER ADDRESS GENERATE PDF-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=September</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=28</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=28</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=reseller2no_adr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/1?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>postpaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_pdf/1?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Prepaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/1?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Prepaid</td>
+	<td></td>
+</tr>
+<!--test parametrer-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_csv/1?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_csv/1?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>7.55</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_destinations_csv/1?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States</td>
+	<td></td>
+</tr>
+<!--Test if error on not existing invoice-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/11111?c2c=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoice not found</td>
+	<td></td>
+</tr>
+<!--Test invoice search and ordering.-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>items_per_page</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<!--...Search-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>reseller2no_adr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_number_11</td>
+	<td>INV09010106</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_number_13</td>
+	<td>INV09092802</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_start_13</td>
+	<td>2009-09-28</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_start_11</td>
+	<td>2009-01-01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_end_13</td>
+	<td>2009-10-28</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_end_11</td>
+	<td>2009-01-31</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_issue_13</td>
+	<td>${datapilna}</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>image_not_sent_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>image_not_sent_manually_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>image_not_paid_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>image_paid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_type_9</td>
+	<td>Postpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_type_3</td>
+	<td>Prepaid</td>
+</tr>
+<!--......Username-->
+<tr>
+	<td>type</td>
+	<td>s_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>reseller2no_adr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<!--......First_name-->
+<tr>
+	<td>type</td>
+	<td>s_username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_first_name</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>reseller2no_adr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<!--......Last_name-->
+<tr>
+	<td>type</td>
+	<td>s_first_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_last_name</td>
+	<td>Res</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>reseller2no_adr</td>
+	<td></td>
+</tr>
+<!--......Number-->
+<tr>
+	<td>type</td>
+	<td>s_last_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_number</td>
+	<td>INV09010106</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_number_11</td>
+	<td>INV09010106</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INV09092802</td>
+	<td></td>
+</tr>
+<!--......Period_start-->
+<tr>
+	<td>type</td>
+	<td>s_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_period_start</td>
+	<td>label=2009-09-28</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_start_12</td>
+	<td>2009-09-28</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>inv_period_start_10</td>
+	<td></td>
+</tr>
+<!--......Period_end-->
+<tr>
+	<td>select</td>
+	<td>s_period_start</td>
+	<td>label=regexp:\s</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_period_end</td>
+	<td>label=2009-10-28</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_end_12</td>
+	<td>2009-10-28</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>inv_period_end_10</td>
+	<td></td>
+</tr>
+<!--......Issue_date-->
+<!--......Invoice_sent_email-->
+<tr>
+	<td>select</td>
+	<td>s_period_end</td>
+	<td>label=regexp:\s</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_sent_email</td>
+	<td>label=sent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>image_not_sent_12</td>
+	<td></td>
+</tr>
+<!--
+<tr>
+	<td>verifyElementPresent</td>
+	<td>image_sent_38</td>
+	<td></td>
+</tr>
+-->
+<!--......Invoice_sent_manually-->
+<tr>
+	<td>select</td>
+	<td>s_sent_email</td>
+	<td>label=any</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_sent_manually</td>
+	<td>label=sent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>image_not_sent_manually_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>image_sent_manually_2</td>
+	<td></td>
+</tr>
+<!--......Invoice_paid-->
+<tr>
+	<td>select</td>
+	<td>s_sent_manually</td>
+	<td>label=any</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_paid</td>
+	<td>label=yes</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>image_not_paid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>image_paid_2</td>
+	<td></td>
+</tr>
+<!--......Invoice type-->
+<tr>
+	<td>select</td>
+	<td>s_paid</td>
+	<td>label=all</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_invoice_type</td>
+	<td>label=Postpaid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_type_13</td>
+	<td>Postpaid</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>inv_type_3</td>
+	<td></td>
+</tr>
+<!--...Ordering-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_number_13</td>
+	<td>INV09092802</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>inv_number_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_number_9</td>
+	<td>INV08010101</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Invoice type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_type_12</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Invoice type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_type_13</td>
+	<td>Postpaid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Period start</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_start_8</td>
+	<td>${datapilna}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Period start</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_start_9</td>
+	<td>2008-01-01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Period end</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_end_8</td>
+	<td>${datapilna}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Period end</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_period_end_9</td>
+	<td>2008-01-01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_issue_2</td>
+	<td>${datapilna}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_issue_2</td>
+	<td>${datapilna}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Invoice sent</td>
+	<td></td>
+</tr>
+<!--
+<tr>
+	<td>verifyText</td>
+	<td>image_sent_38</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Invoice sent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>image_not_sent_11</td>
+	<td></td>
+</tr>
+-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Invoice sent manually</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>image_sent_manually_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Invoice sent manually</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>image_not_sent_manually_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>image_paid_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>image_not_paid_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>inv_paid_date_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_paid_date_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_6</td>
+	<td>24.00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_9</td>
+	<td>3.00</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>invoices_to_csv</td>
+	<td></td>
+</tr>
+<!--invoices to csv-->
+<!--admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices?to_csv=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>9,System Admin,3.00,2.67,5.67</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>12,Test User #1,12.04,10.67,22.71</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>5,System Admin,6.00,5.32,11.32</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>6,Test Reseller,24.00,21.31,45.31</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>1,User Resellers,5.00,4.44,9.44</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices?order_by=price&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_9</td>
+	<td>5.67</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_9</td>
+	<td>3.00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_5</td>
+	<td>11.32</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_5</td>
+	<td>6.00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_6</td>
+	<td>45.31</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_6</td>
+	<td>24.00</td>
+</tr>
+<!--reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_1</td>
+	<td>7.55</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_1</td>
+	<td>4.00</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>invoices_to_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices?to_csv=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1,User Resellers,4.00,3.55,7.55</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>System Admin</td>
+	<td></td>
+</tr>
+<!--accountant -->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices?to_csv=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>'ID'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>'User'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>'Amount (USD)'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>'Tax'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>'Amount with Tax (USD)'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>9,System Admin,3.00,2.67,5.67</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>12,Test User #1,12.04,10.67,22.71</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>5,System Admin,6.00,5.32,11.32</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>6,Test Reseller,24.00,21.31,45.31</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices?order_by=price&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_9</td>
+	<td>5.67</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_9</td>
+	<td>3.00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_5</td>
+	<td>11.32</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_5</td>
+	<td>6.00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_full_price_6</td>
+	<td>45.31</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inv_price_6</td>
+	<td>24.00</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_delete/31</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

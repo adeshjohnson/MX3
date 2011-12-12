@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>api_check_action_log</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">api_check_action_log</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>aaaaaaaaaaaaaaaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>aaaaaaaaaaaaaaaaaaaa1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=vm_email</td>
+	<td>aa@aa.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_name</td>
+	<td>bbbbbbbbbbbbbb</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_number</td>
+	<td>123456789</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=6&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;test=1&amp;hash=29e93212610eb053970d2892a08c37e371f37fff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>link=Clear search</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=type_22</td>
+	<td>device_created</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=SIP/1001</td>
+	<td>SIP/1001</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>verifyText</td> 	<td>id=type_24</td> 	<td>Device sent to Asterisk</td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>name=device[devicegroup_id]</td>
+	<td>primary</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=cid_name</td>
+	<td>bbbbbbbbbbbbbb</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=cid_number</td>
+	<td>123456789</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=vm_email</td>
+	<td>aa@aa.com</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=aaaaaaaaaaaaaaaaaaaa</td>
+	<td>aaaaaaaaaaaaaaaaaaaa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=aaaaaaaaaaaaaaaaaaaa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=user_primary_device_id</td>
+	<td>SIP/1001</td>
+</tr>
+</tbody></table>
+</body>
+</html>

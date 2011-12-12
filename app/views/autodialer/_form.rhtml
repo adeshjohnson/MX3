@@ -1,0 +1,66 @@
+<%= error_messages_for 'campaign' %>
+
+
+<table class="simple">
+  <tr>
+    <td> <%= _('Name') %>:   </td>
+    <td> <%= text_field 'campaign', 'name', "class" => "input"   %></td>
+  </tr>
+
+  <tr>
+    <td> <%= _('Type') %>:   </td>
+    <td>
+      <select name="campaign[campaign_type]" > 
+        <% for type in @ctypes %>
+          <option value=<%= type %>> <%= type %> </option>
+        <% end %>
+      </select>
+    </td>
+  </tr>   
+
+  <tr>
+    <td> <%= _('Start_time') %>:   </td>
+    <td> <%= select_time(Time.mktime(Time.now.year, Time.now.month, Time.now.day, @from_hour, @from_min), :prefix => "time_from") %></td>
+  </tr>
+
+  <tr>
+    <td> <%= _('Stop_time') %>:   </td>
+    <td> <%= select_time(Time.mktime(Time.now.year, Time.now.month, Time.now.day, @till_hour, @till_min), :prefix => "time_till") %></td>
+  </tr>
+
+  <tr>
+    <td> <%= _('Max_retries') %>:   </td>
+    <td> <%= text_field 'campaign', 'max_retries', "class" => "input"   %></td>
+  </tr>
+
+  <tr>
+    <td> <%= _('Retry_time') %>:   </td>
+    <td> <%= text_field 'campaign', 'retry_time', "class" => "input"   %>
+      <span <%= tooltip(_('Retry_time'), _('Retry_time_Explanation'))%> > <%= b_info %> </span>
+    </td>
+  </tr>
+
+  <tr>
+    <td> <%= _('Wait_time') %>:   </td>
+    <td> <%= text_field 'campaign', 'wait_time', "class" => "input"   %> 
+      <span <%= tooltip(_('Wait_time'), _('Wait_time_Explanation'))%> > <%= b_info %> </span>
+    </td>
+  </tr>
+
+  <tr>
+    <td> <%= _('Device') %>:   </td>
+    <td>
+      <select name="campaign[device_id]" > 
+        <% for dev in @devices %>
+          <option value='<%= dev.id%>' <%= 'selected' if dev.id == @campaign.device_id %>> <%= nice_device(dev) %> </option>
+        <% end %>
+      </select>
+    </td>
+  </tr>   
+
+  <tr>
+    <td> <%= _('CallerID') %>:   </td>
+    <td> <%= text_field 'campaign', 'callerid', "class" => "input"   %></td>
+  </tr>
+
+</table>

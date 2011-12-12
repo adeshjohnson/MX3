@@ -1,0 +1,22 @@
+
+<b><%=_('Cards_were_not_created')%>:</b>
+<br></br>
+<br></br>
+<table class="maintable" width="100%">
+  <tr>
+    <th align="left"><%= _('Field') %></th>
+    <th align="left"><%= _('Error')%></th>
+  </tr>
+  <%if cards%>
+    <% cards.each_with_index { |card, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <%card.errors.each{ |field, error|%>
+          <td id="field_<%=card.number%>_<%=field%>"><strong><%=field%></strong></td>
+          <td id="error_<%=card.number%>"><%=error%></td>
+        <%}%>
+      </tr>
+    <% } %>
+  <%end%>
+</table>
+<br></br>
+<%= button_to _('Ok'), {:action=>:list, :cg=>cg} %>

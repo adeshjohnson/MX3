@@ -1,0 +1,2 @@
+module DestinationGroupsHelper
+end

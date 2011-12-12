@@ -1,0 +1,22 @@
+
+<% form_tag(:action => 'update_tariff_for_users') do %>
+  
+<%= _('From')%> : 
+<select name="tariff_from" > 
+ <% for tariff in @tariffs %>
+ <option value="<%= tariff.id %>"> <%= tariff.name %> </option>
+ <% end %>
+ </select>
+
+<%= _('To')%> : 
+<select name="tariff_to" > 
+ <% for tariff in @tariffs %>
+ <option value="<%= tariff.id %>"> <%= tariff.name %> </option>
+ <% end %>
+ </select>
+ 
+
+  <%= submit_tag _('Change'), :disable_with=>_('Processing..') %>
+<% end %>
+
+<br><br> 

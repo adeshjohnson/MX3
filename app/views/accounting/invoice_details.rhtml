@@ -1,0 +1,194 @@
+<% type = @invoice.invoice_type -%>
+<table width="100%">
+  <tr>
+    <td>
+      <% form_tag :action => 'pay_invoice', :id => @invoice.id  do %>
+        <table width="95%" class="maintable">
+          <tr class="row2">
+            <th align="left"><%= _('User') %>:</th>
+            <td id="user" align="right"> <%= link_nice_user(@user) %> </td>
+          </tr>
+
+          <tr class="row1">
+            <th align="left"><%= _('Invoice_number') %>:</th>
+            <td id="number" align="right"> <%= @invoice.number %> </td>
+          </tr>
+
+          <tr class="row2">
+            <th align="left"><%= _('Invoice_type') %>:</th>
+            <td id="invoice_type" align="right"> <%= @invoice.invoice_type.to_s.capitalize %>  </td>
+          </tr>
+
+          <tr class="row1">
+            <th align="left"><%= _('Period_start') %>:</th>
+            <td id="period_start" align="right"> <%= nice_date(@invoice.period_start, 0) %> </td>
+          </tr>
+
+          <tr class="row2">
+            <th align="left"><%= _('Period_end') %>:</th>
+            <td id="period_end" align="right"> <%= nice_date(@invoice.period_end, 0) %> </td>
+          </tr>
+
+          <tr class="row1">
+            <th align="left"><%= _('Issue_date') %>:</th>
+            <td id="issue_date" align="right"> <%= nice_date(@invoice.issue_date, 0) %> </td>
+          </tr>
+
+          <tr class="row2">
+            <th align="left"><%= _('Paid') %>:</th>
+            <td id="paid" align="right">
+              <%= image_submit_tag 'icons/cross.png', :title => _('Mark_as_paid'), :id=>"image_not_paid" if @invoice.paid == 0 %>
+              <%= image_submit_tag 'icons/check.png', :title => _('Mark_as_unpaid'), :id=>"image_paid" if @invoice.paid == 1 %>
+            </td>
+          </tr>
+          <% if @invoice.paid == 0 %>
+            <tr class="row1">
+              <th align="left"><%= _('Create_payment_for_completed_invoice') %>:</th>
+              <td id="create_payment_td" align="right"> <%= check_box_tag 'create_payment', "1", false  %> </td>
+            </tr>
+          <% end %>
+          <tr class="row1">
+            <th align="left"><%= _('Invoice_sent_manually') %>:</th>
+            <td id="manually" align="right">
+              <%= link_to(b_cross, :action => 'sent_invoice', :id => @invoice.id , :status=>"manually", :title => _('Mark_as_sent')) if @invoice.sent_manually == 0 %>
+              <%= link_to(b_check, :action => 'sent_invoice', :id => @invoice.id , :status=>"manually", :title => _('Mark_as_not_send')) if @invoice.sent_manually == 1 %>
+            </td>
+          </tr>
+          <% if @invoice.paid == 1 %>
+            <tr class="row2">
+              <th align="left"><%= _('Paid_date') %>:</th>
+              <td id="paid_date" align="right"><%= nice_date_time @invoice.paid_date if @invoice.paid == 1 %> </td>
+            </tr>
+          <% end %>
+          <tr class="row1">
+            <th align="left"><%= _('Price') %>  (<%= session[:show_currency] %>):</th>
+            <td id="price" align="right">        <%= nice_invoice_number(@invoice.converted_price(@ex), type) %> </td>
+          </tr>
+          <tr class="row2">
+            <th align="left"><%= _('Price_with_VAT') %>  (<%= session[:show_currency] %>):</th>
+            <td id="full_price" align="right"> <%= nice_invoice_number(@invoice.price_with_tax(:ex=>@ex, :precision => nice_invoice_number_digits(type)), type) %> </td>
+          </tr>
+            <tr class="row2">
+              <th align="left"><%= _('Recalculate_invoice') %>:</th>
+              <td id="recalculate" align="right">
+                <% if @invoice.paid != 1 %>
+                  <%= link_to b_refresh, { :action => "invoice_recalculate", :id => @invoice.id }, :method => :post, :confirm => _("Are_you_sure") %>
+                <% else %>
+                  <%= _('Invoice_already_paid') %>
+                <% end %>
+              </td>
+            </tr>
+        </table>
+      <% end %>
+    </td>
+    <td rowspan="3" valign="top" align="right">
+      <table width="95%" class="maintable">
+        <tr>
+          <th align="left">  </th>
+          <th align="center"> <%= _('PDF') %> (<%= session[:show_currency] %>)</th>
+          <th align="center"> <%= _('CSV') %> (<%= session[:show_currency] %>)</th>
+        </tr>
+        <tr class="row1">
+          <th align="left"><%= _('Invoice') %>:</th>
+          <td align="center">
+            <% form_tag :action => 'generate_invoice_pdf', :id => @invoice.id  do %>
+              <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice')%>
+            <% end %>
+          </td>
+          <td align="center">
+            <% form_tag :action => 'generate_invoice_csv', :id => @invoice.id  do %>
+              <%= image_submit_tag 'icons/excel.png', :title => _('Invoice') %>
+            <% end %>
+          </td>
+        </tr>
+        <tr class="row2">
+          <th align="left"><%= _('Invoice_detailed') %>:</th>
+          <td align="center">
+            <% form_tag :action => 'generate_invoice_detailed_pdf', :id => @invoice.id  do %>
+              <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_detailed') %>
+            <% end %>
+          </td>
+          <td align="center">
+            <% form_tag :action => 'generate_invoice_detailed_csv', :id => @invoice.id  do %>
+              <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_detailed') %>
+            <% end %>
+          </td>
+        </tr>
+        <% if @user.usertype != "reseller" %>
+            <tr class="row1">
+              <th align="left"><%= _('Invoice_by_CallerID') %>:</th>
+
+              <td align="center">
+                <% form_tag :action => 'generate_invoice_by_cid_pdf', :id => @invoice.id  do %>
+                  <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_by_CallerID') %>
+                <% end %>
+              </td>
+              <td align="center">
+                <% form_tag :action => 'generate_invoice_by_cid_csv', :id => @invoice.id  do %>
+                  <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_by_CallerID') %>
+                <% end %>
+              </td>
+            </tr>
+            <tr class="row2">
+              <th align="left"><%= _('Invoice_destinations') %>:</th>
+              <td align="center">
+              </td>
+
+              <td align="center">
+                <% form_tag :action => 'generate_invoice_destinations_csv', :id => @invoice.id do %>
+                  <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_destinations') %>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+      <% if ["admin", "accountant"].include?(session[:usertype]) or session[:user_id] == @invoice.user.owner_id %>
+        <br><br>
+        <% form_tag :action=> :comment_invoice, :id => @invoice.id do%>
+          <table width="95%">
+            <tr>
+              <td><b><%= _("Comment") %>:</b></td>
+            </tr>
+            <tr>
+              <td><%= text_area(:invoice, :comment, {:rows => 5,:style => "width: 100%;", :class => "input" }) %></td>
+            </tr>
+            <tr>
+              <td><%= submit_tag(_("Update_Comment"), :disable_with=>_('Processing..')) %></td>
+            </tr>
+          </table>
+        <% end %>
+      <% end %>
+    <td>
+  </tr>
+  <tr>
+    <td height="20"></td>
+  </tr>
+  <tr>
+    <td>
+      <table width="95%" class="maintable">
+        <tr>
+          <th align="left"><%= _('Service') %></th>
+          <th align="right"><%= _('Quantity') %></th>
+          <th align="right"><%= _('Unit_Price') %> (<%= session[:show_currency] %>)</th>
+          <th align="right"><%= _('Line_Total') %> (<%= session[:show_currency] %>)</th>
+        </tr>
+        <% @invoice_invoicedetails.each_with_index{ |id, i| %>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <%
+            qt = ""
+            tp = id.converted_price(@ex)
+            if id.quantity
+              qt = id.quantity
+              tp = id.converted_price(@ex) if id.price and id.invdet_type > 0
+            end
+          %>
+            <td id="id_name_<%= id.id %>" align="left"> <%= id.name %> </td>
+            <td id="id_quantity_<%= id.id %>"align="right"> <%= qt %> </td>
+            <td id="id_price_<%= id.id %>"align="right"> <%= nice_number(id.converted_price(@ex)) %> </td>
+            <td id="id_total_price_<%= id.id %>"align="right"> <%= nice_number(tp) %> </td>
+          </tr>
+        <% } %>
+      </table>
+    </td>
+  </tr>
+</table>

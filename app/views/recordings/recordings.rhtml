@@ -1,0 +1,57 @@
+<div class="nb"><%= b_date + @date_from.to_s + " - " + @date_till.to_s %> <br></div>
+
+<% if @search_source.to_s != "" %>
+  <div class="nb"><%= _("Source") + " : " + @search_source.to_s %> <br></div>
+<% end %>
+
+<% if @search_destination.to_s != "" %>
+  <div class="nb"><%= _("Destination") + " : " + @search_destination.to_s %> <br></div>
+<% end %>
+
+<table width="100%" class="simple">
+  <tr>
+    <td align="right">
+      <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+    </td>
+  </tr>
+</table>
+
+<% form_tag :action => params[:action] do %>
+  <div id="search_details" <%= "style='display:none;'" if @search.to_s == "0" %>>
+    <%= hidden_field_tag 'search_on', 1  %>
+    <table>
+      <tr>
+        <td>
+          <%= _('From') %>: <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+          &nbsp;&nbsp;
+          <%= _('to') %>: <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= _("Source")%>: <%= text_field_tag 's_source', @search_source, "class" => "input", :size => "25", :maxlength => "50"  %>
+          &nbsp;&nbsp;
+          <%= _("Destination")%>: <%= text_field_tag 's_destination', @search_destination, "class" => "input", :size => "25", :maxlength => "50"  %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= _("User")%>: <%= select_tag("user_id", options_for_select([[_("All"), "all"]]+@users.map{|u| [nice_user(u), u.id.to_s]}, @user.to_s ||= 'all')) %>
+          &nbsp;&nbsp;
+          <%= _("Device")%>:
+          <span id ="search_device_div">
+            <%= select_tag("device_id", options_for_select([[_("All"), "all"]]+@devices.map{|d| [nice_device_no_pic(d), d.id.to_s]}, @device.to_s ||= 'all')) %>
+          </span>
+          <%=  observe_field("user_id", :frequency => 0.5, :url=> {:controller=> "devices", :action => "get_user_devices",}, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');", :update => :search_device_div) %>
+        </td>
+      </tr>
+    </table>
+
+    <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
+
+    <% link_to b_cross + _('Clear_search'), :action => 'list' if @search.to_i == 1 %>
+  </div>
+  <br>
+<% end %>
+<br>
+<%= render :partial => "recordings_list" %>

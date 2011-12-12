@@ -1,0 +1,36 @@
+<% if @total_pages > 1 %>
+  <br>
+  <%= render :partial => "page_select_header" %>
+  <br>
+<% end %>
+
+<div align="center">
+  <table width="100%" class="maintable" >
+    <tr>
+      <th align="left">        <%= _('Date') %>    </th>
+      <th align="left">        <%= _('User') %>    </th>
+      <th align="left">        <%= _('Username') %>    </th>
+      <th align="left">        <%= _('usertype') %>    </th>
+      <th align="left">        <%= _('Email') %>    </th>
+    </tr>
+    <% @actions.each_with_index { |action, i| -%>
+      <% user = User.find(:first, :include => [:address], :conditions => ["users.id = ?", action.data]) -%>
+    
+      <% if user %>
+        <% address = user.address -%>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <td  id="date_<%= action.id %>"> <%= nice_date_time(action.date) %></td>
+          <td  id="niceuser_<%= action.id %>"> <%= nice_user(user)%></td>
+          <td  id="username_<%= action.id %>"> <%= user.username.to_s %></td>
+          <td  id="usertype_<%= action.id %>"> <%= user.usertype.to_s %></td>
+          <td  id="email_<%= action.id %>"> <%= address.email.to_s if address %></td>
+        </tr>
+      <%else%>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <td  id="date_<%= action.id %>"> <%= nice_date_time(action.date) %></td>
+          <td  id="not_found_<%= action.id %>" colspan="4"> <%= _('User_not_found')%></td>
+        </tr>
+      <% end -%>
+    <% } -%>
+  </table>
+</div>

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://test3.marsassolutions.com/" />
+<title>webmoney_payment</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">webmoney_payment</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_2 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=webmoney_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=webmoney_purse</td>
+	<td>Z331407319215</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=webmoney_test</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>webmoney_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=webmoney_test</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_2 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=webmoney_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=webmoney_purse</td>
+	<td>Z331407319215</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=webmoney_test</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=webmoney_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=webmoney_test</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_2']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=webmoney_test</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>name=webmoney_sim_mode</td>
+	<td>0 - All sucessfull.</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/webmoney</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please press here to pay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>KolmiSoft balance update</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_2 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=webmoney_sim_mode</td>
+	<td>label=2 - 80% - success; 20% - fail.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>name=webmoney_sim_mode</td>
+	<td>2 - 80% - success; 20% - fail.</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/webmoney</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please press here to pay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>KolmiSoft balance update</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_2 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=webmoney_sim_mode</td>
+	<td>label=1 - All fail.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_2 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>name=webmoney_sim_mode</td>
+	<td>1 - All fail.</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/webmoney</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please press here to pay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>KolmiSoft balance update</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

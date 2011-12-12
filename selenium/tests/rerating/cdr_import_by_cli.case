@@ -1,0 +1,1502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" " />
+<title>cdr_import_by_cli</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">cdr_import_by_cli</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/cdr_by_cli.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=status</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=calldate_id</td>
+	<td>label=Date</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=Clid</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=src_name_id</td>
+	<td>label=Source</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=billsec_id</td>
+	<td>label=Billsec</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dst_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total file lines: 19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>* - Indicates required fields </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total file lines: 19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=status</td>
+	<td>Columns assigned</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import_type_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=create_callerid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Next step: Fix CLI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[2]/tbody/tr[2]/td[2]</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[3]</td>
+	<td>3 Bad CDRs</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr/td[2]</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr[2]/td[2]</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr[3]/td[2]</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]/b</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Fix CLI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[2]/tbody/tr[2]/td[2]</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[3]</td>
+	<td>3 Bad CDRs</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr/td[2]</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[2]/td[2]/b</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr[3]/td[2]</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]/b</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cdr_cli_8</td>
+	<td>999999999999999999999999999999</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#action_8 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cdr_cli_15</td>
+	<td>8888888888888888888888</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#action_15 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=cdr_cli_15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[2]/tbody/tr[2]/td[2]</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[3]</td>
+	<td>1 Bad CDRs</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr/td[2]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr[2]/td[2]</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr[3]/td[2]</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]/b</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Assigne CLI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_1</td>
+	<td>label=System Admin</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id_1</td>
+	<td>label=IAX2/103</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=select_device_1</td>
+	<td>IAX2/103</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_2</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=device_id_2</td>
+	<td>All IAX2/104</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=select_device_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=select_device_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_3</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id_3</td>
+	<td>label=IAX2/101</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_4</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id_4</td>
+	<td>label=FAX/102</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_5</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=device_id_5</td>
+	<td>All IAX2/104</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=select_device_1</td>
+	<td>IAX2/103</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=select_device_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=select_device_3</td>
+	<td>IAX2/101</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=select_device_4</td>
+	<td>FAX/102</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id_5</td>
+	<td>label=IAX2/104</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=select_device_5</td>
+	<td>IAX2/104</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_6</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;3&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=device_id_6</td>
+	<td>All IAX2/104</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id_6</td>
+	<td>label=IAX2/104</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=select_device_6</td>
+	<td>IAX2/104</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_7</td>
+	<td>label=System Admin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;0&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id_7</td>
+	<td>label=IAX2/103</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=select_device_7</td>
+	<td>IAX2/103</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Import completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#total_calls &gt; b</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#imported_calls &gt; b</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#failed_calls &gt; b</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Congratulations, successfully imported CSV file!</td>
+	<td></td>
+</tr>
+<!--sql-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/delete_from_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/cdr_by_cli.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=status</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=calldate_id</td>
+	<td>label=Date</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=Clid</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=src_name_id</td>
+	<td>label=Source</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=billsec_id</td>
+	<td>label=Billsec</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dst_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total file lines: 19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total file lines: 19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=status</td>
+	<td>Columns assigned</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import_type_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=create_callerid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Next step: Fix CLI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[2]/tbody/tr[2]/td[2]</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[3]</td>
+	<td>3 Bad CDRs</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr/td[2]</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr[2]/td[2]</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr[3]/td[2]</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]/b</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Fix CLI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[2]/tbody/tr[2]/td[2]</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[3]</td>
+	<td>3 Bad CDRs</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr/td[2]</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[2]/td[2]/b</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr[3]/td[2]</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]/b</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cdr_cli_8</td>
+	<td>999999999999999999999999999999</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cdr_cli_15</td>
+	<td>8888888888888888888888</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#action_8 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#action_15 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=cdr_cli_15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Create CLI: 8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[2]/tbody/tr[2]/td[2]</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[3]</td>
+	<td>1 Bad CDRs</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr/td[2]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr[2]/td[2]</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr[3]/td[2]</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]/b</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Assigne CLI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_9</td>
+	<td>label=System Admin</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id_9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id_9</td>
+	<td>label=IAX2/103</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=select_device_9</td>
+	<td>IAX2/103</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_10</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=select_device_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=select_device_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_11</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id_11</td>
+	<td>label=IAX2/101</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_12</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id_12</td>
+	<td>label=FAX/102</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_13</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>id=user_devices_13</td>
+	<td>No devices</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Import completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#total_calls &gt; b</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#imported_calls &gt; b</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#failed_calls &gt; b</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Congratulations, successfully imported CSV file!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/cdr_by_cli2.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=status</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=calldate_id</td>
+	<td>label=Date</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=Clid</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=src_name_id</td>
+	<td>label=Source</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=billsec_id</td>
+	<td>label=Billsec</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dst_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total file lines: 8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Total file lines: 8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import_type_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=create_callerid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[2]/tbody/tr[2]/td[2]</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[3]</td>
+	<td>5 Bad CDRs</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr/td[2]</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr[2]/td[2]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]/b</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr[4]/td[2]</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Fix CLI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination is not numerical value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Billsec is not numerical value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invalid calldate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination is not numerical value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td>Do not import duplicates: CDR exist in db match caldate dst src</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=cdr_cli_1</td>
+	<td>Clid</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=cdr_cli_3</td>
+	<td>234567</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=cdr_cli_4</td>
+	<td>234567</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=cdr_cli_5</td>
+	<td>234567</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=cdr_cli_6</td>
+	<td>234567666</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cdr_dst_5</td>
+	<td>87654321</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#action_5 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=dst_5</td>
+	<td>87654321</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=dst_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=cdr_cli_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Create CLI: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=date_13</td>
+	<td>999999999999999999999999999999</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=date_15</td>
+	<td>234567677</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Import completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#total_calls &gt; b</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imported_calls</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=failed_calls</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination is not numerical value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Billsec is not numerical value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invalid calldate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination is not numerical value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CDR exist in db match caldate dst src</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/cdr_by_cli2.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=status</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=calldate_id</td>
+	<td>label=Date</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=regexp:\s</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=src_name_id</td>
+	<td>label=Source</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=billsec_id</td>
+	<td>label=Billsec</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dst_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total file lines: 8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[8]/td[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import_type_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create_callerid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please select CLID commun</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=Clid</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=calldate_id</td>
+	<td>label=regexp:\s</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=src_name_id</td>
+	<td>label=regexp:\s</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dst_id</td>
+	<td>label=regexp:\s</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=billsec_id</td>
+	<td>label=regexp:\s</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please select columns</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=Clid</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=src_name_id</td>
+	<td>label=regexp:\s</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=calldate_id</td>
+	<td>label=regexp:\s</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please select columns</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=Clid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

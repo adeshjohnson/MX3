@@ -1,0 +1,1877 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>payment_gateways</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">payment_gateways</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/paypal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Sorry, there is no gateway enabled by that name.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/bogus/pay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--should be able to set correct settings-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=page_title</td>
+	<td>Payment gateways</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_login</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_min_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>gateways_bogus_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>gateways_bogus_test</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>gateways_bogus_min_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>gateways_bogus_login</td>
+	<td>abc</td>
+</tr>
+<!--should not be able to set errorenous settings-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_login</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_min_amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_max_amount</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_login</td>
+	<td>abcdef</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_min_amount</td>
+	<td>gh</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_max_amount</td>
+	<td>ee</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>gateways_bogus_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>gateways_bogus_test</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>gateways_bogus_min_amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>gateways_bogus_max_amount</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>gateways_bogus_login</td>
+	<td>abc</td>
+</tr>
+<!--should log payment attempt if proper amount is specified (currency custom, tax set)-->
+<!--* set dollar exch. rate to know value for later assertion-->
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/edit/2</td>
+	<td></td>
+</tr>
+<!--* default currency - USD-->
+<tr>
+	<td>type</td>
+	<td>exchange_rate</td>
+	<td>0.7387</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_min_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>integrations_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--* set user tax to known value for later assertion-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/integrations/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>integrations_bogus_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_amount</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>2.71</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>2.98</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please press here to pay</td>
+	<td></td>
+</tr>
+<!--* verify payment present in personal payments-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/personal_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Unnotified payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//tr[@class=&quot;row1&quot;]</td>
+	<td></td>
+</tr>
+<!--should not log payment attempt and display error message if errorenous amount is specified-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_min_amount</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/integrations/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>integrations_bogus_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_amount</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment was unsuccessful, details from gateway:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>must be numeric</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment was unsuccessful</td>
+	<td></td>
+</tr>
+<!--should display minimum/maximum amount if set in configuration-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>integrations_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_login</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_min_amount</td>
+	<td>1.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_max_amount</td>
+	<td>3.0</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>integrations_bogus_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/integrations/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Minimum amount:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Maximum amount:</td>
+	<td></td>
+</tr>
+<!--should not display minimum amount if not set in configuration-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>integrations_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_login</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_min_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_max_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>integrations_bogus_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/prepare/integration/bogus_int</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Minimum amount:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Maximum amount:</td>
+	<td></td>
+</tr>
+<!--should not display minimum amount if it is set to zero in configuration-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>integrations_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_login</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_min_amount</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_max_amount</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>integrations_bogus_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/integrations/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Minimum amount:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Maximum amount:</td>
+	<td></td>
+</tr>
+<!--should display correct amount with tax when tax is specified-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/integrations/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>integrations_bogus_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>1.00</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>1.10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please press here to pay</td>
+	<td></td>
+</tr>
+<!--should display correct amount without tax if tax is not specified-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/integrations/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>integrations_bogus_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>1.00</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>1.00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please press here to pay</td>
+	<td></td>
+</tr>
+<!--should display proper amout if payment currency is the same as default gateway currency-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/integrations/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>integrations_bogus_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>10.00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please press here to pay</td>
+	<td></td>
+</tr>
+<!--should display proper amout if payment currency differs from default gateway currency-->
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>exchange_rate</td>
+	<td>0.7387</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/integrations/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>integrations_bogus_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>13.54</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--should not display gateways if owner has disabled it-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_login</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_min_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Payment gateways</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--should display gateways if owner has enabled them-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_login</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_min_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Re_permission</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>payment_gateways_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>sms_addon_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>calling_cards_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>call_shop_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment gateways</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>gateways_bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--* should accept and log regular payments without tax-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_login</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_password</td>
+	<td>def</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_min_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_first_name</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_last_name</td>
+	<td>def</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_year</td>
+	<td>label=2019</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_month</td>
+	<td>label=08</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_number</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_verification_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>1.00</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>1.00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment was successful</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>payment: Bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User successfully payed using Bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1.0 USD | with tax: 1.0 USD | sent: 1.0 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/personal_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Gateways bogus</td>
+	<td></td>
+</tr>
+<!--* should accept and log regular payments with tax-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_login</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_password</td>
+	<td>def</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_min_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_first_name</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_last_name</td>
+	<td>def</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_year</td>
+	<td>label=2018</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_month</td>
+	<td>label=04</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_number</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_verification_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>1.00</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>1.10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment was successful</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>payment: Bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User successfully payed using Bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1.0 USD | with tax: 1.1 USD | sent: 1.1 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/personal_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Gateways bogus</td>
+	<td></td>
+</tr>
+<!--* should log failed payments-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_first_name</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_last_name</td>
+	<td>def</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_year</td>
+	<td>label=2015</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_month</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_number</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_verification_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Forced failure</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>payment: Bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User failed to pay using Bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>reason: Bogus Gateway: Forced failure</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/personal_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No (Failed)</td>
+	<td></td>
+</tr>
+<!--* should allow to pay if minimum currency constraint is satisfied (with currency conversion!) using integration gateways-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>integrations_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_login</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_min_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>integrations_bogus_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/integrations/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_amount</td>
+	<td>0.75</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>integrations_bogus_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>using &quot;Bogus&quot;.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1.13 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.75 EUR</td>
+	<td></td>
+</tr>
+<!--* should allow to pay if minimum currency constraint is satisfied (with currency conversion!) using regular gateways-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_login</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_min_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_first_name</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_last_name</td>
+	<td>def</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_month</td>
+	<td>label=08</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_number</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_verification_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_amount</td>
+	<td>0.76</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>1.03</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>1.13</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment was successful</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>sent: 1.14 USD</td>
+	<td></td>
+</tr>
+<!--* try to make payment as a user-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_first_name</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_last_name</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_year</td>
+	<td>label=2020</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_month</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_number</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_verification_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_amount</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>6.77</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>7.45</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment was successful</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/personal_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>5.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>5.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>with tax: 5.5 EUR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>sent: 7.45 USD</td>
+	<td></td>
+</tr>
+<!--* configure account for reseller, make payment with his user-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_login</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_min_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_first_name</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_last_name</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_month</td>
+	<td>label=08</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_number</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_verification_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_amount</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>without_tax_field</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>with_tax_field</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>20.31</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>22.34</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment was successful</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/personal_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>15.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>15.0000</td>
+	<td></td>
+</tr>
+<!--* verify pay'ing by GET prevention-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/bogus/pay</td>
+	<td></td>
+</tr>
+<!--gal test sistemoj ne visada 'Don't be so smart...' issivercia-->
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+</tbody></table>
+</body>
+</html>

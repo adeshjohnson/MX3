@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>payment_gateways_tax_excluded</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">payment_gateways_tax_excluded</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--#Default settings.-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>google_checkout_google_checkout_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>integrations_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_bogus_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>ideal_ideal_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/payments/delete_tax_excluded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User's settings succesfully changed:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/integrations/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>integrations_bogus_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>10.00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>11.00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>11.0 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amount_10</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_10</td>
+	<td>11.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_10</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>10.00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>11.00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/ideal/ideal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ideal_ideal_amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ideal_ideal_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>10.00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>11.00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/google_checkout/google_checkout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>google_checkout_google_checkout_amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>google_checkout_google_checkout_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>10.00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>11.00</td>
+	<td></td>
+</tr>
+<!--#Set exclude tax.-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>google_checkout_google_checkout_tax_in_amount</td>
+	<td>label=Excluded</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>integrations_bogus_tax_in_amount</td>
+	<td>label=Excluded</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_tax_in_amount</td>
+	<td>label=Excluded</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ideal_ideal_tax_in_amount</td>
+	<td>label=Excluded</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/integrations/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>integrations_bogus_amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>integrations_bogus_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>9.09</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>10.00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>10.0 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amount_11</td>
+	<td>9.0909</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_11</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/bogus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_bogus_amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gateways_bogus_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>9.09</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>10.00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/ideal/ideal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ideal_ideal_amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ideal_ideal_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>9.09</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>10.00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/google_checkout/google_checkout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>google_checkout_google_checkout_amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>google_checkout_google_checkout_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>9.09</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>10.00</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

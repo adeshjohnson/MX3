@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>cardgroups</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">cardgroups</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/cardgroups/edit/2')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>cardgroup_name</td>
+	<td>Test_cardgroup_test_1</td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>ghost_min_perc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>ghost_balance_perc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>cardgroup_use_external_function_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>ghost_min_perc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>ghost_balance_perc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>cardgroup_use_external_function_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>ghost_min_perc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>ghost_balance_perc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>cardgroup_use_external_function_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card group was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>ghost_min_perc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>ghost_balance_perc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>cardgroup_use_external_function_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>cardgroup_use_external_function_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card group was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>ghost_min_perc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>ghost_balance_perc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>cardgroup_use_external_function_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Use external script</td>
+	<td></td>
+</tr>
+<!--check export-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>0000000001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>0000000009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cards created: 9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_22</td>
+	<td>0000000001</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_30</td>
+	<td>0000000009</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/cards_to_csv/2?file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&quot;0000000001&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&quot;0000000009&quot;</td>
+	<td></td>
+</tr>
+<!--check yes/no-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>s_sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//option[@value='no']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_sold</td>
+	<td>label=No</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=sold_22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_sold</td>
+	<td>label=Yes</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=sold_22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_sold</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=sold_22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Money']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>The card was sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=sold_22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Check']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_sold</td>
+	<td>label=No</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=sold_22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>//img[@alt='Check']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_sold</td>
+	<td>label=Yes</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=sold_22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Check']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>//img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_sold</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>card_callerid</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>card_callerid</td>
+	<td>234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list/22?cg=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>s_callerid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CallerID:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_callerid</td>
+	<td>234</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_sold</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>callerid_23</td>
+	<td>234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_callerid</td>
+	<td>234</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_sold</td>
+	<td>label=Yes</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>callerid_23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_callerid</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>callerid_22</td>
+	<td>1234</td>
+</tr>
+</tbody></table>
+</body>
+</html>

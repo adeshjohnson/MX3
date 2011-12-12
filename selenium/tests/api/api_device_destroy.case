@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>api</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">api</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>free</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Can't delete device - it has calls. You can only hide device's user. Why is that and how to do that - please read in manual.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;s_user=0&amp;device=123&amp;hash=7231f4386f58b131b079775673dff9aae165dd6c</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=123&amp;hash=7231f4386f58b131b079775673dff9aae165dd6c&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;s_user=0&amp;device=8&amp;hash=a95b461ed7abd736b96ab5859691fa46c8b6f046</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=8&amp;hash=a95b461ed7abd736b96ab5859691fa46c8b6f046&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device was deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=7&amp;hash=a95b461ed7abd736b96ab5859691fa46c8b6f046&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;s_user=0&amp;device=7&amp;hash=c1b046000bef3cde3ab96dc8f51d516878a29432</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=7&amp;hash=c1b046000bef3cde3ab96dc8f51d516878a29432&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=101&amp;p=1011&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Can't delete device - it has calls. You can only hide device's user. Why is that and how to do that - please read in manual.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=101&amp;p=1011&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Can't delete device - it has calls. You can only hide device's user. Why is that and how to do that - please read in manual.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=101&amp;p=1011&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Can't delete device - it has calls. You can only hide device's user. Why is that and how to do that - please read in manual.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=101&amp;p=1011&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Can't delete device - it has calls. You can only hide device's user. Why is that and how to do that - please read in manual.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=101&amp;p=1011&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Can't delete device - it has calls. You can only hide device's user. Why is that and how to do that - please read in manual.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=101&amp;p=1011&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;device=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

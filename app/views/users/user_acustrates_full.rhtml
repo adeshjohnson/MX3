@@ -1,0 +1,155 @@
+<b><%= _('Destination') %>:</b> <%= draw_flag_by_code @dgroup.flag %> <%= @dgroup.name %> <%= @dgroup.desttype %>
+
+
+<br><br><br>
+
+<% if @WDFD %>
+
+<table class='simple' width="100%">
+    <tr>
+        <td>            <b><%= _('Rate_details_for_WDFD') %>:</b>        </td>
+        <td align="right"> <%= link_to b_check + _('Split_to_WDFD'), :action => 'ard_manage', :id => @rate.id, :rdaction => "SPLIT" %></td>
+    </tr>
+</table>
+
+<br>
+
+<table width="100%" class="maintable">
+
+  <tr>
+
+    <th><%= _('Start_Time') %></th>
+    <th><%= _('End_Time') %></th>
+    <th align="center"><%= _('Details') %></th>
+    <th></th>
+  </tr>
+
+
+<% i = 0 %>     
+<% for t in @st_arr %>
+<% form_tag :action => 'user_ard_time_edit',  :id => @rate, :daytype => "" do %>
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+    <td align="center"><%=  t %></td>
+    <td align="center">
+        
+        <%= hidden_field_tag 'st', t %>
+        <%= hidden_field_tag 'dt', "" %>
+        <%= @et_arr[i] if @et_arr[i] != "23:59:59"%>
+        <%= select_time(Time.mktime('2000', '01', '01', '23','59','59'), :include_seconds => true) if @et_arr[i] == "23:59:59"  %>
+        <%= image_submit_tag 'icons/edit.png'  if @et_arr[i] == "23:59:59"%>
+    </td>
+    <td align="center"><%= link_to b_view, :action => 'user_acustrates', :id => @rate, :st => t, :dt => "" %></td>    
+
+
+    <td align="center"><%= link_to b_delete, { :action => 'artg_destroy', :id => @rate, :st => t, :dt => ""}, :confirm => _('Are_you_sure'), :method => :post  if @et_arr[i] == "23:59:59"  and i>0%></td>
+  </tr>
+<% end %>  
+  <% i += 1%>    
+<% end %>
+
+
+</table>
+
+<% else %>
+
+<table class='simple' width="100%">
+    <tr>
+        <td>            <b><%= _('Rate_details_for_WD') %>:</b>        </td>
+        <td align="right"> <%= link_to b_check + _('Combine_to_WDFD'), :action => 'ard_manage', :id => @rate.id, :rdaction => "COMB_WD" %></td>
+    </tr>
+</table>
+
+<br>
+
+
+<table width="100%" class="maintable">
+
+  <tr>
+
+    <th><%= _('Start_Time') %></th>
+    <th><%= _('End_Time') %></th>
+    <th align="center"><%= _('Details') %></th>
+    <th></th>
+  </tr>
+
+
+<% i = 0 %>     
+<% for t in @Wst_arr %>
+<% form_tag :action => 'user_ard_time_edit',  :id => @rate, :daytype => "WD" do %>
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+    <td align="center"><%=  t %></td>
+    <td align="center">
+        <%= hidden_field_tag 'st', t %>
+        <%= hidden_field_tag 'dt', "WD" %>
+        <%= @Wet_arr[i] if @Wet_arr[i] != "23:59:59"%>
+        <%= select_time(Time.mktime('2000', '01', '01', '23','59','59'), :include_seconds => true) if @Wet_arr[i] == "23:59:59"  %>    
+        <%= image_submit_tag 'icons/edit.png'  if @Wet_arr[i] == "23:59:59"%>
+    </td>
+    <td align="center"><%= link_to b_view, :action => 'user_acustrates', :id => @rate, :st => t, :dt => "WD" %></td>    
+
+
+    <td align="center"><%= link_to b_delete, { :action => 'artg_destroy', :id => @rate, :st => t, :dt => "WD"}, :confirm => _('Are_you_sure'), :method => :post  if @Wet_arr[i] == "23:59:59"  and i>0%></td>
+  </tr>
+  <% end %>
+  <% i += 1%>    
+<% end %>
+
+
+
+
+
+</table>
+
+<br><br><br>
+
+<table class='simple' width="100%">
+    <tr>
+        <td>            <b><%= _('Rate_details_for_FD') %>:</b>        </td>
+        <td align="right"> <%= link_to b_check + _('Combine_to_WDFD'), :action => 'ard_manage', :id => @rate.id, :rdaction => "COMB_FD" %></td>
+    </tr>
+</table>
+
+<br>
+
+<table width="100%" class="maintable">
+
+  <tr>
+
+    <th><%= _('Start_Time') %></th>
+    <th><%= _('End_Time') %></th>
+    <th align="center"><%= _('Details') %></th>
+    <th></th>
+  </tr>
+
+
+<% i = 0 %>     
+<% for t in @Fst_arr %>
+<% form_tag :action => 'user_ard_time_edit',  :id => @rate, :daytype => "FD" do %>
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+    <td align="center"><%=  t %></td>
+    <td align="center">
+        <%= hidden_field_tag 'st', t %>
+        <%= hidden_field_tag 'dt', "FD" %>
+        <%= @Fet_arr[i] if @Fet_arr[i] != "23:59:59"%>
+        <%= select_time(Time.mktime('2000', '01', '01', '23','59','59'), :include_seconds => true) if @Fet_arr[i] == "23:59:59"  %>    
+        <%= image_submit_tag 'icons/edit.png'  if @Fet_arr[i] == "23:59:59"%>
+    </td>
+    <td align="center"><%= link_to b_view, :action => 'user_acustrates', :id => @rate, :st => t, :dt => "FD" %></td>   
+
+
+    <td align="center"><%= link_to b_delete, { :action => 'artg_destroy', :id => @rate, :st => t, :dt => "FD"}, :confirm => _('Are_you_sure'), :method => :post  if @Fet_arr[i] == "23:59:59" and i>0%></td>
+  </tr>
+  <% end %>
+  <% i += 1%>    
+<% end %>
+
+
+
+
+
+</table>
+
+
+<% end %>
+
+<br /><br>

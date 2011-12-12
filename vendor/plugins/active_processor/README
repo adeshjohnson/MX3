@@ -1,0 +1,421 @@
+= PaymentGateways / ActiveProcessor =
+
+== Configuration ==
+
+=== Environment ===
+
+ActiveProcessor is configured using environment.rb file or environments/$active_environment.rb file. In case configuration is missing in these files, vendor/plugins/active_processor/
+
+{{{
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+
+    ActiveProcessor.configure do |config|
+      config.host = HOST
+      config.translate_func = lambda {|s| Localization::_t(s, ActiveProcessor.configuration.language )}
+      config.currency_exchange = lambda {|c1, c2| Currency.count_exchange_rate(c1, c2)}
+      config.calculate_tax = lambda{ |u,a| User.find(:first, :conditions => { :id => u }).get_tax.apply_tax(a) }
+    end
+  end
+}}}
+
+This line should only be used in test/development environment.
+{{{
+ActiveMerchant::Billing::Base.mode = :test
+}}}
+
+Configuration parameters:
+
+* '''config_file''' - path to configuration file.
+  
+  Configuration example: {{{'File.dirname(__FILE__)+"/../../gateway_config.yml"'}}}
+
+  Standard value:  {{{'File.dirname(__FILE__)+"/../../gateway_config.yml"'}}}
+* '''translate_func''' - translation function, closure with argument.
+  
+  Configuration example: {{{'lamda { |phrase| t(phrase) }'}}}
+  
+  Standard value: {{{'lamda { |phrase| t(phrase) }'}}}
+* '''currency_exchange''' - closure with two arguments. Should return the coefficient (multiplier) between two currencies.
+
+  Configuration example: {{{'lambda {|c1, c2| Currency.count_exchange_rate(c1, c2)}'}}}
+
+  Standard value: {{{'lambda {|c1, c2| 1.0}'}}}
+* '''currency_calc_url''' - url to action which calculate amount with tax. Default value should not be changed for good.
+
+  Standard value: {{{'/active_processor/currencies/calculate'}}}
+* '''calculate_tax''' - function (closure) with two arguments which calculate amount with tax for specified user.
+
+  Configuration example: {{{'lambda{ |u,a| User.find(:first, :conditions => { :id => u }).get_tax.apply_tax(a) }'}}}
+
+  Standard value: {{{'lambda{ |u,a| a}'}}}
+* '''host''' - the url to which the payer returns after successful payment. Uses rails url_for helper format!
+
+  Configuration example: {{{'http://192.168.0.10'}}}
+
+  Standard value: {{{'HOST'}}}
+
+  '''Pay attention''': HOST (constant) means that the same address will be used as the one which is specified in Web_URL.
+
+* '''language''': - currently active language. Should be changed, when we change active language.
+
+  Nustatymo pvz: {{{'lt'}}}
+
+  Standartinė reikšmė: {{{'en'}}}
+
+=== gateway_config.yml ===
+
+Here we configure the fields for specific gateways. Configuration values are:
+
+* '''gateway_form_fields''' - in this section we specify the fields used for default payment gateways (not integration ones). Should not be changed by default.
+
+* '''gateway_config_fields''' - in this section we specify the configuration fields that are used for default payment gateway configuration. Sometimes we have to change some fields for authentication: paypal uses API key, others use user+login.
+
+* '''integration_config_fields''' - configuration form fields for integration gateways. Usually requires no change.
+
+* '''integration_form_fields''' - payment form fields for integration gateways. Usually requires no change.
+
+* '''enabled''' - here we specify enabled gateways of each type.
+
+* '''gateways''' - configuration for specific gateway groups/gateways.
+
+Field configuration example:
+
+{{{
+login:
+  as: "string"
+  position: 2
+  for: "authentication"
+password:
+  as: "string"
+  position: 3
+  for: "authentication"
+min_amount:
+  as: "float"
+  position: 5
+  validates:
+    with: !ruby/regexp '/^[0-9]*(\.?|\,?)[0-9]*$/'
+    message: "gateway_error_numeric"
+}}}
+
+Field configuration details:
+
+* Field options:
+  * '''as''' - field type. Possible values: "input_field", "text", "check_box", "select", "hidden_field", "separator", "card_select". Field type affects functionality and validation.
+  * '''position''' - here we specify form field order.
+  * '''html_options''' - a hash of html_options which will be passed to rails helper method. You can sepcify default value here.
+  * '''validates''' - consists of two sub-values: regexp and message. We specify ruby regexp to which our value should comply and message which will be displayed if it does not.
+  * '''for''' - if set to "authentication" will be sent to gateway on authentication (for regular gateways only, integration gateways and google checkout uses login only).
+* Gateway is described using:
+ * settings:
+    * default_currency. Standard gateway currency. We will convert the amount and currency specified in payment form to this currency using internal function specified in configuration.translate_func.
+    * tax_inclusive. For integration gateways only. Should we include tax in the amount which is sent to gateway (== true) or send tax as a separate param (==false). Paypal accepts it as a separate param whereas 2checkout and possibly the majority of other gateways do not, so this setting should probably be set to true most of the times.
+    * testing. Should this gateway be enabled only in testing mode. Should be false most of the times. 'Bogus' gateways should be set to true here.
+ * We can specify which default fields (configuration->fields) should be exlcuded using - configuration->excludes and which should be included using - configuration->includes.
+   "Includes" uses the same format as described above. "Excludes" section can look like this:  'excludes: [login, password]'.
+
+'''Pay attention'''. To include a new gateway you should configure it as follows (this is minimum amount of configuration needed to make it work properly):
+
+{{{
+enabled:
+  gateways: [authorize_net]
+gateways:
+    gateway:
+      authorize_net:
+        settings:
+          default_currency: "USD"
+          testing: false
+        configuration:
+          fields:
+            <<: *gateway_config_fields
+          includes:
+          excludes:
+        form:
+          fields:
+            <<: *gateway_form_fields
+          includes:
+          excludes:
+}}}
+
+Of course, in case we specify aliases to gateway_config_fields and gateway_form_fields they should be described somewhere above this section in gateway_config.yml.
+
+'''Warning''': gateway names from groups 'gateways' and 'integrations' should match class names in ActiveMerchant. That is: if ActiveMerchant's gateway class name is AuthorizeNet, then the gateway name in gateway_config.yml should be authorize_net. How do you check this? In Rails console:
+
+{{{
+>> "authorize_net".classify
+=> "AuthorizeNet"
+}}}
+
+== Using the plugin ==
+
+=== Configuration (environment) ===
+
+Plugin should be activated by setting PG_Active = 1 in environment.rb file. Gateway configuration can then be accessed using menu. 
+
+=== Configuration (interface) ===
+
+In case there are no gateways enabled in configuration, an error message will be displayed in configuration window.
+
+=== Gateway Engine / Hooks ===
+
+You should specify gateway engine model in your application like so (this is minimum example):
+
+{{{
+class GatewayEngine
+  include ActiveProcessor::GatewayEngine
+end
+}}}
+
+GatewayEngine model should include various hooks that get called during gateway initialization/querying and various other actions. For example let's set gateway configuration from our local database (by using Conflines model):
+
+{{{
+  def on_find # method names should be self-explanatory
+    @gateways.each { |engine, gateways|
+      gateways.each { |name, gateway|
+        gateway.each_field_for(:config) { |field, options|
+          gateway.set(:config, { field => Confline.by_params(engine, name, field, @user) })
+        }
+      }
+    }
+  end
+}}}
+
+There are lots of hooks, and they can be seen in active_processor/lib/active_processor/gateway_engine.rb.
+
+Also, we can specify filters, which can be used to filter gateway result set, for example:
+
+{{{
+class GatewayEngine
+  include ActiveProcessor::GatewayEngine
+
+  filter :enabled_by, lambda { |rec, user| Confline.by_params(rec.engine, rec.gateway, "enabled", user) != "1" }
+end
+
+# and usage:
+GatewayEngine.find(:first, {:engine => :gateways, :gateway => :authorize_net, :for_user => 1 }).enabled_by(0)
+}}}
+
+Will return empty result set if authorize_net was disabled in configuration and:
+
+{{{
+GatewayEngine.find(:first, {:engine => :gateways, :gateway => :authorize_net, :for_user => 1 }).enabled_by(0).query
+}}}
+
+Will return nil.
+
+Also, you can specify configuration for advanced fields, like:
+
+{{{
+field :gateways, :form, :with_tax, { :as => 'input_field', :position => 120, :html_options => { :size => 10, :disabled => "disabled", :class => "input" }, :after => lambda{|g| " in #{g.settings['default_currency']}" } }
+}}}
+
+This field will be renderded for "gateways" engine, in payment form with name "with_tax". After the field the default currency for current gateway will be shown. Field class method accepts :before and :after arguments and expects them to be closures with one argument (which will be gateway instance).
+
+=== Usage syntax (DSL) ===
+
+To get specific enabled gateway for some user:
+{{{
+GatewayEngine.find(:first, {:engine => :gateways, :gateway => :authorize_net, :for_user => 0 }).query
+}}}
+
+You can also get all enabled gateways like so:
+{{{
+@engine = GatewayEngine.find(:enabled)
+}}}
+
+..and later query one of them
+{{{
+@gateway = @engine.query({:engine => :gateways, :gateway => :authorize_net})
+}}}
+
+..and later interact with it:
+{{{
+@gateway.display_name
+@gateway.supported_cardtypes
+}}}
+
+..or update its configuration like so:
+{{{
+@engine.update_with(:config, {'gateways' => {'authorize_net' => { 'payment_message' => 'hi!' } }}) # pay attention to @engine.update_with
+}}}
+
+and access its internal class (ActiveMerchant interface):
+{{{
+@gateway.instance.display_name # pay attention to .instance
+}}}
+
+=== Extending functionality ===
+
+The default controller for most of the plugins actions is located in active_processor/app/controllers/active_processor/base_controller.rb. In case you need to change or extend plugin's functionality the best idea would be to extend payment engine's controller (located in active_processor/app/controllers/active_processor/*) or implementation file's (located in active_processor/lib/active_processor/payment_engines/*) by using inheritance.
+
+See more in How to section.
+
+== How to.. ==
+
+=== Add gateway/configuration to system ===
+
+1. Find wether it is supported by ActiveMerchant (http://activemerchant.rubyforge.org). In case it is not supported, it's your bad day, you'll have to implement it.
+
+2. If it is supported we determine from class name wether it is a regular gateway or integration.
+
+3. Specify it's configuration in gateway_config.yml (see above for example).
+
+4. Restart the server.
+
+5. Turn this gateway on for some user.
+
+6. Configure the gateway according to details from gateway.
+
+7. Try to use it!
+
+=== How to add gateway that is not supported by ActiveMerchant and it is not possible to extend it ===
+
+1. See example for Google Checkout in source files.
+
+2. Find or write a library for that specific gateway.
+
+3. Name it as a separate engine, e.g. "AdvancedPayment"
+
+3. Implement controller for "AdvancedPayment", see google_checkout_controller.rb for example. It should inherit from base_controller. Override what is necessary.
+
+4. Create a file that specifies engine behaviour. See lib/active_processor/payment_engines/google_checkout.rb for example. 
+
+5. Create necessary hooks in gateway_engine.rb model if necessary.
+
+6. Test it.
+
+=== How to disable gateway for the whole system ===
+
+1. Remove it from gateway_config.yml. Enabled section is sufficient for that.
+
+=== Delete gateway ===
+
+1. Remove it from enabled section in gateway_config.yml.
+
+2. Remove it from gateways section in gateway_config.yml.
+
+3. Delete every value from database which matches this pattern "#{engine}_#{name}_*" for all the users.
+
+=== How to run unit tests ===
+
+1. Testing requires additional libraries: 'shoulda' and 'mocha'. You'll have to install them.
+
+2. Go to plugin's root folder, run 'rake'.
+
+=== How to measure test coverage ===
+
+1. Get rcov library (tested with version 0.9.8).
+
+2. Go to plugin's root folder, run 'rake rcov:unit'. 
+
+3. Check coverage/index.html.
+
+== DB ==
+=== Structure ===
+{{{
++-------------------+--------------+------+-----+---------+----------------+
+| Field             | Type         | Null | Key | Default | Extra          |
++-------------------+--------------+------+-----+---------+----------------+
+| id                | int(11)      | NO   | PRI | NULL    | auto_increment |
+| paymenttype       | varchar(255) | YES  |     | NULL    |                |
+| amount            | double       | NO   |     | 0       |                |
+| currency          | varchar(5)   | NO   |     | USD     |                |
+| email             | varchar(255) | YES  |     | NULL    |                |
+| date_added        | datetime     | YES  |     | NULL    |                |
+| completed         | tinyint(4)   | NO   |     | 0       |                |
+| transaction_id    | varchar(255) | YES  |     | NULL    |                |
+| shipped_at        | datetime     | YES  |     | NULL    |                |
+| fee               | double       | YES  |     | 0       |                |
+| gross             | double       | YES  |     | 0       |                |
+| first_name        | varchar(255) | YES  |     | NULL    |                |
+| last_name         | varchar(255) | YES  |     | NULL    |                |
+| payer_email       | varchar(255) | YES  |     | NULL    |                |
+| residence_country | varchar(255) | YES  |     | NULL    |                |
+| payer_status      | varchar(255) | YES  |     | NULL    |                |
+| tax               | double       | YES  |     | 0       |                |
+| user_id           | int(11)      | YES  |     | NULL    |                |
+| pending_reason    | varchar(255) | YES  |     | NULL    |                |
+| vat_percent       | double       | NO   |     | 0       |                |
+| owner_id          | int(11)      | YES  |     | 0       |                |
+| card              | tinyint(4)   | YES  |     | 0       |                |
+| hash              | varchar(32)  | YES  |     | NULL    |                |
+| bill_nr           | varchar(255) | YES  |     | NULL    |                |
++-------------------+--------------+------+-----+---------+----------------+
+}}}
+=== What goes where ===
+
+'''Regular gateways (we stay in the same page)''':
+
+* When we press 'confirm' (before communicating with gateway):
+  * user_id = the ID of the paying user (current_user.id).
+  * paymenttype = unhumanized gateway name, i.e. authorize_net.
+  * amount = the amount that was specified in payment form.
+  * currency = the currency that was specified in payment form.
+  * pending_reason = "Unnotified payment".
+  * owner_id = the owner id of the paying user.
+  * completed = 0.
+  * first_name = the first name that was specified in the payment form.
+  * last_name = the last name that was specified in the payment form.
+  * date_added = current time (Time.now).
+* In case of successful transaction with the gateway:
+  * tax = calculated tax.
+  * gross = amount with tax.
+  * completed = 1.
+  * shipped_at = Time.now
+  * pending_reason = "Completed"
+  * hash = authorization code from the gateway.
+* In case of communication with gateway failure:
+  * pending_reason = response message of the error that was sent by the gateway.
+
+'''Integration gateway''''
+
+* When we fill the amount and press confirm:
+  * user_id = paying user id (current_user.id).
+  * paymenttype = unhumanized gateway name, i.e. authorize_net.
+  * gross = amount with tax.
+  * amount = the amount that was specified in payment form.
+  * currency = the currency that was specified in the form.
+  * pending_reason = "Unnotified payment".
+  * owner_id = the owner id of the paying user.
+  * completed = 0.
+  * date_added = current time (Time.now).
+* After we receive the IPN message:
+  * transaction_id = transaction id from the gateway.
+  * tax = 0 or the one that was received from the gateway.
+  * completed = 1
+  * shipped_at = Time.now
+  * hash = transaction id from the gateway.
+  * pending_reason = "Completed"
+
+== Ending notes! ==
+
+* For some gateways you should specify IPN url in the gateway configuration panel. For example in "2checkout" panel you should go to: Account -> Site Management -> URLs -> Approved URL and write:
+
+{{{
+http://hostas:portas/billing/payment_gateways/integrations/symbolic_gateway_name/notify
+}}}
+
+I.e.:
+{{{
+http://127.0.0.1/billing/payment_gateways/integrations/two_checkout/notify
+}}}
+
+* For some gateways you should specify pending URL (what happens if gateway cannot process the payment instantly). Pending URL is specified similarly to IPN url:
+
+{{{
+http://host:port/billing/payment_gateways/integrations/gateway_symbolic_name/pending
+http://127.0.0.1/billing/payment_gateways/integrations/two_checkout/pending
+}}}
+
+This applies to Google Checkout also. To set IPN you should: log in (as seller, of course), go to: settings -> integration and set API callback URL to:
+{{{
+http://host:port/billing/payment_gateways/google_checkout/google_checkout/notify
+}}}
+
+and set radio button to 'Notifications as XML'.
+
+<unconfirmed url>
+In case the user reaches pending url, this is logged in action log. This transaction will be marked as pending. In case we receive some kind of notice from the gateway (?????), administrator will have to add the amount to users balance. There is no information of how the notice will be sent. If it will be sent to return URL everything should be ok :)
+</unconfirmed url>
+
+* '''PAY ATTENTION''' you should specify the same default currency for the gateway correctly (check it's system). You might encouter unexpected behaviour if it's done otherwise.

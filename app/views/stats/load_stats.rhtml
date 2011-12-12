@@ -1,0 +1,83 @@
+<%= javascript_include_tag 'swfobject' %>
+
+<div align="left" class="nb">
+  <% form_tag(:action => 'load_stats') do%>
+    <%= _('Date') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+
+    <br/><br/>
+    <%= _('Direction') %>:
+    <select name="s_direction" >
+      <option value="-1" <%= "selected" if @options[:s_direction].to_i == -1%>> <%= _('All') %> </option>
+      <option value="outgoing" <%= "selected" if @options[:s_direction] == "outgoing"%>> <%= _('Outgoing') %> </option>
+      <option value="incoming" <%= "selected" if @options[:s_direction] == "incoming"%>> <%= _('Incoming') %> </option>
+      <option value="mixed" <%= "selected" if @options[:s_direction] == "mixed"%>> <%= _('Mixed') %> </option>
+    </select>
+    <%if current_user.usertype != 'reseller'%>
+      &nbsp;&nbsp;<%= _('Server')%>: <select name="s_server">
+        <option value="-1" <%= "selected" if @options[:s_server].to_i == -1%>><%= _('All')%></option>
+        <% for serv in @servers%>
+          <option value="<%= serv.id%>" <%= "selected" if @options[:s_server].to_i == serv.id%>><%= serv.hostname %></option>
+        <%end%>
+      </select>
+    <%end%>
+    &nbsp;&nbsp;<%= _('Provider')%>: <select name="s_provider">
+      <option value="-1" <%= "selected" if @options[:s_provider].to_i == -1%>><%= _('All')%></option>
+      <% for prov in @providers%>
+        <option value="<%= prov.id%>" <%= "selected" if @options[:s_provider].to_i == prov.id%>><%= prov.name%></option>
+      <%end%>
+    </select>
+    <%if current_user.usertype != 'reseller'%>
+      &nbsp;&nbsp;<%= _('DID')%>: <select name="s_did">
+        <option value="-1" <%= "selected" if @options[:s_did].to_i == -1%>><%= _('All')%></option>
+        <% for did in @dids%>
+          <option value="<%= did.id%>" <%= "selected" if @options[:s_did].to_i == did.id%>><%= did.did%></option>
+        <%end%>
+      </select>
+    <%end%>
+    &nbsp;&nbsp;<%= _('User') %>:
+    <select name="s_user" id="s_user" >
+      <option value="-1" <%= "selected" if @options[:s_user] == nil or (@options[:s_user].to_i == -1) %>><%= _('All')%> </option>
+      <%for user  in @users%>
+        <option value="<%= user.id %>" <%= "selected" if @options[:s_user].to_i == user.id.to_i %>><%= nice_user(user)%> </option>
+      <%end%>
+    </select>
+    <%= observe_field("s_user", :update   => "user_devices", :url=> { :controller=>"devices", :action => "cli_user_devices" }, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
+
+
+    <%=      "<span id = 'user_devices'>" %>
+
+    <%=       "</span>" %>
+<% if current_user == 'admin' %>
+   &nbsp;&nbsp;<%= _('Reseller') %>:
+    <select name="s_reseller" id="s_reseller" >
+      <option value="-1" <%= "selected" if @options[:s_reseller] == nil or (@options[:s_reseller].to_i == -1) %>><%= _('All')%> </option>
+      <%for reseller  in @resellers%>
+        <option value="<%= reseller.id %>" <%= "selected" if @options[:s_reseller].to_i == reseller.id.to_i %>><%= nice_user(reseller)%> </option>
+      <%end%>
+    </select>
+   <%end%>
+    &nbsp;&nbsp;<br/><%= submit_tag _('Change'), :disable_with=>_('Processing..')%>
+  <% end %>
+</div>
+
+<!-- amline script-->
+<br/>
+<br/>
+
+<table >
+  <tr><td >
+      <div id="flashcontent7"><strong>You need to upgrade your Flash Player</strong></div>
+      <script type="text/javascript">
+        // <![CDATA[
+        var so = new SWFObject("<%= Web_Dir %>/swf/amline.swf", "amline", "800", "400", "6", "#FFFFFF");
+        so.addVariable("path", "<%= Web_Dir %>/swf/");
+        so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/amline7.xml"));
+        so.addVariable("chart_data",  escape("<%=   @Call_answered_graph %>"));
+        so.addVariable("additional_chart_settings", encodeURI("<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('Load_stats') %></b>]]></text></label></labels></settings>"));
+        so.write("flashcontent7");
+        // ]]>
+      </script>
+      <!-- end of amline script -->
+    </td>
+  </tr>
+</table>

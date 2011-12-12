@@ -1,0 +1,85 @@
+
+<% form_tag :action => 'pbx_function_update', :id => @dialplan.id do %>
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left" style="width: 10%"><%= _('Extension') %></th>
+      <th align="left" style="width: 20%"><%= _('Dialplan_name') %></th>
+      <th align="left" style="width: 20%"><%= _('Pbx_function') %></th>
+      <th align="left" class="j_currency"><%= _('Currency') %></th>
+      <th align="left" class="j_device"><%= _('Call_will_be_billed_to_User/Device') %></th>
+      <th align="left" class="j_language"><%= _('Language') %></th>
+      <th align="center" class="j_user"><%= _('User') %>/<%= _('Card') %></th>
+      <th align="left" class="j_sound_file" style="width: 40%"><%=_('Sound_file')%></th>
+      <th style="width: 10%"></th>
+    </tr>
+    <tr class="row1">
+      <td align="left"><%= text_field_tag 'dialplan[ext]', @dialplan.data2, "class" => "input", :size => "10", :maxlength => "15"  %></td>
+
+      <td align="left"><%= text_field_tag 'dialplan[name]', @dialplan.name, "class" => "input", :size => "20", :maxlength => "30"  %></td>
+      <td align="left">
+        <select id="dp_type" name="dialplan[type_id]" <%= "onchange=\"Disab(this.value);\"" %>>
+          <% for pf in @pbxfunctions %>
+            <option value="<%=pf.id %>" <%= "selected" if pf.id == @dialplan.data1.to_i %>> <%= pf.name %> </option>
+          <% end %>
+        </select>
+      </td>
+
+      <td class="j_currency" style="width: 10%" align="left">
+        <select id="currency_tell_balance" name="dialplan[currency]" >
+          <% for curr in @currency %>
+            <option value="<%=curr.name %>" <%= "selected" if curr.name == @dialplan.data3 %>> <%= curr.name %> </option>
+          <% end %>
+        </select>
+      </td>
+
+      <td  class="j_device" style="width: 15%" align="left" NOWRAP>
+        <%= _("User") %>:
+        <%= select_tag("s_user", options_for_select( @users.map{|u| [nice_user(u), u.id.to_s]}, @dialplan.data5.to_s)) %>
+      </td>
+
+      <td class="j_language" style="width: 15%" align="left">
+        <%= text_field_tag 'dialplan[language]', @dialplan.data4, "class" => "input", :size => "10", :maxlength => "30", :id => "language_tell_balance"  %>
+      </td>
+      <td class="j_user" style="width: 15%" align="center">
+        <%= radio_button_tag('dialplan[data5]', "user", checked = (@dialplan.data5 == 'user'), :id => "user_tell_balance" ) %> <%= _('User') %>
+        <%= radio_button_tag('dialplan[data5]', "card", checked = (@dialplan.data5 == 'card'), :id => "card_tell_balance" ) %> <%= _('Card') %>
+      </td>
+      <td class="j_sound_file" style="width: 40%" align="left">
+        <%= select_sound_file(@dialplan, "sound_file_id", nil, :include_blank => true) %>
+      </td>
+      <td align="center" colspan=2><%= image_submit_tag 'icons/edit.png', :title => _('Edit') %></td>
+    </tr>
+  </table>
+<% end %>
+<br />
+
+<script type="text/javascript">
+  function Disab(val) {
+  // alert(val);
+  $$('.j_currency').each(function(el) {Element.setStyle(el, {display: 'none'});});
+  $$('.j_device').each(function(el) {Element.setStyle(el, {display: 'none'});});
+  $$('.j_language').each(function(el) {Element.setStyle(el, {display: 'none'});});
+  $$('.j_user').each(function(el) {Element.setStyle(el, {display: 'none'});});
+  $$('.j_sound_file').each(function(el) {Element.setStyle(el, {display: 'none'});});
+  $$('.j_other').each(function(el) {Element.setStyle(el, {display: 'none'});});
+  if(val==1) {
+  $$('.j_currency').each(function(el) {Element.setStyle(el, {display: 'table-cell',  width: '10%'});});
+  $$('.j_language').each(function(el) {Element.setStyle(el, {display: 'table-cell',  width: '15%'});});
+  $$('.j_user').each(function(el) {Element.setStyle(el, {display: 'table-cell',  width: '15%'});});
+  }
+  if(val==2) {
+  $$('.j_currency').each(function(el) {Element.setStyle(el, {display: 'table-cell',  width: '20%'});});
+  $$('.j_language').each(function(el) {Element.setStyle(el, {display: 'table-cell',  width: '20%'});});
+  }
+  if(val==4) {
+  $$('.j_sound_file').each(function(el) {Element.setStyle(el, {display: 'table-cell'});});
+  }
+  if(val==8) {
+  $$('.j_device').each(function(el) {Element.setStyle(el, {display: 'table-cell'});});
+  }
+  if(val!=4 && val!=1 && val!=2) {
+  $$('.j_other').each(function(el) {Element.setStyle(el, {display: 'table-cell'});});
+  }
+  }
+  Disab('<%=@dialplan.data1%>')
+</script>

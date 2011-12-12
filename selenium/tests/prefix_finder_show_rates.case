@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/1?st=L</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_5786</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_12505</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ratedetail_rate</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/1?st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_19976</td>
+	<td>21</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/240</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ratedetail_rate</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ratedetail_rate</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/261</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ratedetail_rate</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/491</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ratedetail_rate</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/4?st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate448</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=th &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate17</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=th &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/prefix_finder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>search</td>
+	<td>3706</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Lithuania MOB Lithuania mobile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Lithuania MOB Lithuania mobile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination group : Lithuania</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 15.0 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/prefix_finder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>search</td>
+	<td>355</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Albania FIX Albania proper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Albania FIX Albania proper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination group : Albania</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 0.0 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff for Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 0.0 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/prefix_finder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>search</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>United States FIX USA proper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States FIX USA proper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination group : United States</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 10.0 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff for Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 3.0 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/prefix_finder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>search</td>
+	<td>1945</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>United States NGN USA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States NGN USA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination group : United States</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 21.0 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/prefix_finder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>search</td>
+	<td>54</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Argentina FIX Argentina proper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Argentina FIX Argentina proper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination group : Argentina</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 18.0 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff for Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 5.0 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_search</td>
+	<td>3706</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=rate_search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Tariff (prefix: 3706)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 15 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff for Users (prefix: 370)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 0 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Enter Number to get Rate:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=rate_search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_search</td>
+	<td>37060334569</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=rate_search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Tariff (prefix: 370603) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 16 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff for Users (prefix: 370) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 0 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_search</td>
+	<td>37060534569</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=rate_search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Tariff (prefix: 3706) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 15 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff for Users (prefix: 370) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 0 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_search</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=rate_search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Tariff (prefix: 1) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 10 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff + 0.1 (prefix: 1) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 23 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff for Users (prefix: 1) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 3 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_search</td>
+	<td>1945</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=rate_search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Tariff (prefix: 1945) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 21 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff + 0.1 (prefix: 1) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 23 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff for Users (prefix: 1) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 3 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_search</td>
+	<td>12458765432</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=rate_search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Tariff (prefix: 1) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 10 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff + 0.1 (prefix: 1) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 23 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff for Users (prefix: 1) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 3 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_search</td>
+	<td>194598765432</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=rate_search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Tariff (prefix: 1945) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 21 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff + 0.1 (prefix: 1) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 23 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff for Users (prefix: 1) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 3 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_search</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=rate_search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>NO RESULTS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_search</td>
+	<td>54</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=rate_search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Tariff (prefix: 54) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 18 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff + 0.1 (prefix: 54) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 33 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff for Users (prefix: 54) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 5 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_search</td>
+	<td>549876543213456</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=rate_search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Tariff (prefix: 54) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 18 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff + 0.1 (prefix: 54) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 33 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff for Users (prefix: 54) :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 5 (USD)</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

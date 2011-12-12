@@ -1,0 +1,29 @@
+<% form_tag(:action => 'update', :id => @user, :return_action => @return_action, :return_controller => @return_controller) do %>
+
+  <%= render :partial => 'form' %>
+
+  <% if @allow_edit %>
+    <script type="text/javascript">
+      action="<%= params[:action] %>";
+      start_val=<%= @user.tariff_id %>;
+      function submit_message(tariff_id) {
+        if((action == "edit") && (tariff_id!=start_val)){
+          $('confirm_with_message').style.display = 'inline';
+          $('confirm_without_message').style.display = 'none';
+        }
+        else{
+          $('confirm_without_message').style.display = 'inline';
+          $('confirm_with_message').style.display = 'none';
+        }
+      }
+    </script>
+    <div id='confirm_with_message' style='display: none;' >
+      <%= submit_tag(_('Change'),{:confirm => _("Are you sure?"), :disable_with=>_('Processing..')}) %>
+    </div>
+
+    <br>
+    <div id='confirm_without_message'style='display: inline;' >
+      <%= submit_tag _('Change'), :disable_with=>_('Processing..') %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,33 @@
+<br>
+<% form_tag(:action => 'speeddial_add_new', :id => @card) do %>
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left"><%= _('Name') %></th>
+      <th align="left"><%= _('Number') %></th>
+      <th align="left"><%= _('Speed_Dial') %></th>
+      <th align="center"><%= _('Created_at') %></th>
+      <th align="center"><%= _('Updated_at') %></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @sp.each_with_index{ |ph, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="name_<%= ph.id %>" align="left"><%= ph.name %></td>
+        <td id="number_<%=ph.id %>" align="left"><%= ph.number %></td>
+        <td id="speeddial_<%= ph.id %>" align="left"><%= ph.speeddial %></td>
+        <td id="added_<%= ph.id %>" align="center"><%= nice_date_time ph.added %></td>
+        <td id="updated_at_<%= ph.id %>" align="center"><%= nice_date_time ph.updated_at %></td>
+        <td id="edit_<%= ph.id %>" align="center"><%= link_to b_edit, {:action => 'speeddial_edit', :id => ph}, {:id => "edit_link_#{ph.id }"} %></td>
+        <td id="delete_<%= ph.id %>" align="center"><%= (link_to b_delete, { :action => 'speeddial_destroy', :id => ph }, {:confirm => _('Are_you_sure'), :method => :post, :id => "delete_link_#{ph.id }"})  %></td>
+      </tr>
+    <% } %>
+    <tr>
+      <th align="left"><%= text_field_tag 'name', "", "class" => "input", :size => "30", :maxlength => "50"  %></th>
+      <th align="left"><%= text_field_tag 'number', "", "class" => "input", :size => "19", :maxlength => "50"  %></th>
+      <th align="left"><%= text_field_tag 'speeddial', "", "class" => "input", :size => "19", :maxlength => "50"  %></th>
+      <th align="center"> </th>
+      <th align="center"> </th>
+      <th align="center" colspan=2><%= image_submit_tag 'icons/add.png',:id=>"speeddial_add", :title => _('Add') %> </th>
+    </tr>
+  </table>
+<% end %>

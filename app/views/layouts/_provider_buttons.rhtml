@@ -1,0 +1,47 @@
+<% if defined?(type)
+  col = (type == "header" ? "th" : "td")
+else
+  col = "td"
+end
+%>
+<% if defined?(provider) and !provider.new_record? %>
+  <<%= col %> id="test_<%= provider.id %>" align="center" <%=@n_class%>>
+  <%= link_to(b_test, {:action => 'provider_test', :id => provider}, {:popup => ['new_window', 'height=200,width=400'], :id => "test_link_"+provider.id.to_s}) if provider.tech == "SIP" and provider.server_ip.to_s.length > 0 %>
+  </<%= col %>>
+
+  <<%= col %> id="rules_<%= provider.id %>" align="center" <%=@n_class%>>
+  <%= link_to b_rules, {:action => 'provider_rules', :id => provider} , {:id => "rules_link_"+provider.id.to_s} %>
+  </<%= col %>>
+
+  <<%= col %> id="calls_<%= provider.id %>" align="center" <%=@n_class%>>
+  <%= link_to b_call, {:controller => "stats", :action => 'last_calls_stats', :s_provider => provider}, {:id => "calls_link_"+provider.id.to_s} %>
+  </<%= col %>>
+
+  <<%= col %> id="hide_<%= provider.id %>_<%= provider.hidden.to_i%>" align="center" <%=@n_class%>>
+  <%= link_to((provider.hidden.to_i == 1 ? b_unhide : b_hide), { :action => 'hide', :id => provider }, {:id=>"hide_link_"+provider.id.to_s, :confirm => _('are_you_sure'), :method => "post"})%>
+  </<%= col %>>
+
+  <<%= col %> id="edit_<%= provider.id %>" align="center" <%=@n_class%>>
+  <%= link_to b_edit, {:action => 'edit', :id => provider}, {:id => "edit_link_"+provider.id.to_s} %>
+  </<%= col %>>
+
+  <<%= col %> id="delete_<%= provider.id %>" align="center" <%=@n_class%>>
+  <%  if !reseller? and defined?(provider_used_by_resellers) and provider_used_by_resellers and provider_used_by_resellers.include?(provider) %>
+    <%= b_exclamation({"onMouseOver" => "Tip('#{_("Provider_is_used_by_reseller")}')", "onmouseout" => "UnTip();"}) %>
+  <% else %>
+    <%= link_to b_delete, { :action => 'destroy', :id => provider }, :confirm => _('Are_you_sure'), :method => :post, :id => "delete_link_"+provider.id.to_s %>
+  <% end %>
+  </<%= col %>>
+
+   <<%= col %> id="unassign_<%= provider.id %>" align="center" <%=@n_class%>>
+  <% if provider.device and provider.device.user %>
+    <%= link_to b_unassign(:title => _('Unassign_user') + ': ' + nice_user(provider.device.user)), { :controller => 'providers', :action => 'unassign', :id => provider }, :confirm => _('Are_you_sure'), :method => :post, :id => "unassign_link_"+provider.id.to_s %>
+  <% else #in case provider isnt signed to any device there shouln't be option to unassign it, if there is no devicess assignet column wil be very narow%>
+   &nbsp;
+  <% end %>
+  </<%= col %>>
+
+  <% if col == "th" %>
+    <th style="width: 100%"></th>
+  <% end %>
+<% end %>

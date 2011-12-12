@@ -1,0 +1,164 @@
+<%= error_messages_for 'provider' %>
+
+<!--[form:provider]-->
+
+<table style="width:50%;">
+  <tr>
+    <td valign="top">
+      <table class="simple" style="width:100%;" >
+        <tr>
+          <td colspan="2" class="bottom_border">
+            <b><%= _('General') %></b>
+          </td>
+        </tr>
+        <tr><td style="height:10px;"></td></tr>
+        <tr>
+          <td> <%= _('Name') %>:   </td>
+          <td><%= text_field 'provider', 'name', "class" => "input" %> </td>
+        </tr>
+        <tr><td style="height:5px;"></td></tr>
+        <tr>
+          <td> <%= _('Tariff') %>:  </td>
+          <td><%= collection_select("provider", "sms_tariff_id" , @tariffs, "id", "name") %> </td>
+        </tr>
+        <tr>
+          <td> <%= _('Provider_type') %>:  </td>
+          <td><select id='prov_type' name="provider[provider_type]" <%= "onchange=\"Disab(this.value);\"" %> >
+              <option value="sms_email" <%='selected' if @provider.provider_type.to_s == 'sms_email'%>  ><%= _('sms_email') %></option>
+              <option value="clickatell" <%='selected' if @provider.provider_type.to_s == 'clickatell'%> ><%= _('clickatell') %></option>
+            </select>
+          </td>
+        </tr>
+        <!--- EMAIL SMS  -->
+        <tr id="e_sd">
+          <td> <%= _('Domain') %>:   </td>
+          <td> <%= text_field 'provider', 'sms_provider_domain', "class" => "input"   %></td>
+        </tr>
+        <tr id="e_us">
+          <td> <%= _('Use_subject') %>:   </td>
+          <% if @provider%>
+            <td>  <%= check_box_tag 'provider[use_subject]', value = "1", (checked = @provider.use_subject.to_i == 1) %></td>
+          <%else%>
+            <td>  <%= check_box_tag 'provider[use_subject]', value = "1" %></td>
+          <%end%>
+        </tr>
+        <!---<tr id="e_subject">
+            <td> <%# _('Subject') %>:   </td>
+            <td> <%# text_field 'provider', 'sms_subject', "class" => "input"   %></td>
+         </tr>-->
+        <tr id="e_wt">
+          <td> <%= _('Email_wait_time') %>:   </td>
+          <td> <%= text_field 'provider', 'sms_email_wait_time', "class" => "input"   %> min </td>
+        </tr>
+        <tr id="e_wfge">
+          <td> <%= _('Wait_for_good_email') %>:   </td>
+          <% if @provider%>
+            <td>  <%= check_box_tag 'provider[wait_for_good_email]', value = "1", (checked = @provider.wait_for_good_email.to_i == 1) %></td>
+          <%else%>
+            <td>  <%= check_box_tag 'provider[wait_for_good_email]', value = "1" %></td>
+          <%end%>
+        </tr>
+        <tr id="e_egk">
+          <td> <%= _('Email_good_keywords') %>:   </td>
+          <td> <%= text_field 'provider', 'email_good_keywords', "class" => "input"   %></td>
+        </tr>
+        <tr id="e_wfbe">
+          <td> <%= _('Wait_for_bad_email') %>:   </td>
+          <% if @provider%>
+            <td>  <%= check_box_tag 'provider[wait_for_bad_email]', value = "1", (checked = @provider.wait_for_bad_email.to_i == 1) %></td>
+          <%else%>
+            <td>  <%= check_box_tag 'provider[wait_for_bad_email]', value = "1" %></td>
+          <%end%>
+        </tr>
+        <tr id="e_ebk">
+          <td> <%= _('Email_bad_keywords') %>:   </td>
+          <td> <%= text_field 'provider', 'email_bad_keywords', "class" => "input"   %></td>
+        </tr>
+        <tr id="e_tocu">
+          <td> <%= _('Time_out_charge_user') %>:   </td>
+          <% if @provider%>
+            <td>  <%= check_box_tag 'provider[time_out_charge_user]', value = "1", (checked = @provider.time_out_charge_user.to_i == 1) %></td>
+          <%else%>
+            <td>  <%= check_box_tag 'provider[time_out_charge_user]', value = "1" %></td>
+          <%end%>
+        </tr>
+        <tr id="e_nkcu">
+          <td> <%= _('Nan_keywords_charge_user') %>:   </td>
+          <% if @provider%>
+            <td>  <%= check_box_tag 'provider[nan_keywords_charge_user]', value = "1", (checked = @provider.nan_keywords_charge_user.to_i == 1) %></td>
+          <%else%>
+            <td>  <%= check_box_tag 'provider[nan_keywords_charge_user]', value = "1" %></td>
+          <%end%>
+        </tr>
+        <tr id="e_psr">
+          <td> <%= _('Pay_sms_receiver') %>:   </td>
+          <% if @provider%>
+            <td>  <%= check_box_tag 'provider[pay_sms_receiver]', value = "1", (checked = @provider.pay_sms_receiver.to_i == 1) %></td>
+          <%else%>
+            <td>  <%= check_box_tag 'provider[pay_sms_receiver]', value = "1" %></td>
+          <%end%>
+        </tr>
+        <!--- clickatell SMS  -->
+        <tr id="c_login">
+          <td> <%= _('Login') %>:   </td>
+          <td> <%= text_field 'provider', 'login', "class" => "input"   %></td>
+        </tr>
+        <tr id="c_password">
+          <td> <%= _('Password') %>:   </td>
+          <td> <%= text_field 'provider', 'password', "class" => "input"   %></td>
+        </tr>
+        <tr id="c_ai">
+          <td> <%= _('Api_id') %>:   </td>
+          <td> <%= text_field 'provider', 'api_id', "class" => "input"   %></td>
+        </tr>
+        <tr id="c_from">
+          <td> <%= _('From') %>:   </td>
+          <td> <%= text_field 'provider', 'sms_from', "class" => "input"   %></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  function Disab(val) {
+  $('c_from').style.display = 'none';
+  $('c_ai').style.display = 'none';
+  $('c_password').style.display = 'none';
+  $('c_login').style.display = 'none';
+  $('e_psr').style.display = 'none';
+  $('e_nkcu').style.display = 'none';
+  $('e_tocu').style.display = 'none';
+  $('e_ebk').style.display = 'none';
+  $('e_wfbe').style.display = 'none';
+  $('e_egk').style.display = 'none';
+  $('e_wfge').style.display = 'none';
+  $('e_wt').style.display = 'none';
+  $('e_us').style.display = 'none';
+  $('e_sd').style.display = 'none';
+  if(val=="sms_email") {
+  $('e_psr').style.display = '';
+  $('e_nkcu').style.display = '';
+  $('e_tocu').style.display = '';
+  $('e_ebk').style.display = '';
+  $('e_wfbe').style.display = '';
+  $('e_egk').style.display = '';
+  $('e_wfge').style.display = '';
+  $('e_wt').style.display = '';
+  $('e_us').style.display = '';
+  $('e_sd').style.display = '';
+  }
+  if(val=='clickatell') {
+  $('c_from').style.display = '';
+  $('c_ai').style.display = '';
+  $('c_password').style.display = '';
+  $('c_login').style.display = '';
+  }
+  }
+  Disab('<%= params[:action] == "provider_new" ? "sms_email"  : @provider.provider_type.to_s %>')
+</script>
+<br />
+
+
+<!--[eoform:provider]-->
+

@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.163" />
+<title>reseller_last_calls</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">reseller_last_calls</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>proforrspro2</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>proforrspro3</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>proforrspro4</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>rspro1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>rspro</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_usertype</td>
+	<td>label=reseller</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=rspro</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=proforrspro2 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=rspro</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=proforrspro3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=rspro</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=proforrspro4 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>rspro</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>rspro1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tariff_name</td>
+	<td>rsprotariff</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tariff[purpose]_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_name_2</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_name_3</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_name_4</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>proforrspro5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>proforrspro6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>proforrspro7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/resellers/reseller_last_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>rspro</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>rspro1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_107</td>
+	<td>105</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_107</td>
+	<td>105</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_107</td>
+	<td>proforrspro5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_rate_107</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_price_107</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_rate_107</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_price_107</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_106</td>
+	<td>104</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_106</td>
+	<td>proforrspro4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_rate_106</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_price_106</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_rate_106</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_price_106</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_104</td>
+	<td>102</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_104</td>
+	<td>proforrspro2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_rate_104</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_price_104</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_rate_104</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_price_104</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_108</td>
+	<td>106</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_108</td>
+	<td>proforrspro6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_rate_108</td>
+	<td>7.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_price_108</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_rate_108</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_price_108</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_111</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_111</td>
+	<td>proforrspro7</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_rate_111</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_price_111</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_rate_111</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_price_111</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_105</td>
+	<td>103</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_105</td>
+	<td>proforrspro3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_rate_105</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_price_105</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_rate_105</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_price_105</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_provider_price</td>
+	<td>42.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_reseller_price</td>
+	<td>24.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_user_price</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats?pdf=1?&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>OK</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats?csv=1?&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price: &quot;6&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_rate: &quot;4&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>reseller_price: &quot;4&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>reseller_rate: &quot;3&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_rate: &quot;6&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price: &quot;4&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_rate: &quot;7&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price: &quot;20&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_rate: &quot;3&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>provider_price: &quot;4&quot;</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,935 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.165" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>commonusepro1</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>commonusepro2</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>commonusepro3</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>document.forms[0].elements['commit'][1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=commonusepro1 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=commonusepro2 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=commonusepro3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tariff_name</td>
+	<td>protar</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tariff[purpose]_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Tariff was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>pro1</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>pro2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>pro3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>terminatorius</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Terminator created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider_id</td>
+	<td>label=commonusepro1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider_id</td>
+	<td>label=commonusepro2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider_id</td>
+	<td>label=commonusepro3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider_id</td>
+	<td>label=pro1 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider_id</td>
+	<td>label=pro2 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider_id</td>
+	<td>label=pro3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[2]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[2]/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[2]/td[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>SIP</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[3]</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[4]</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[6]/td[2]</td>
+	<td>SIP</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[6]/td[3]</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[6]/td[4]</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[6]/td[4]</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[7]/td[2]</td>
+	<td>SIP</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[7]/td[3]</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[7]/td[4]</td>
+	<td>5060</td>
+</tr>
+<!--Create terminator without provider, with one provider and theres allready one with 6 providers. and verify number of providers.-->
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[7]/td[5]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Provider removed</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>terminator 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Terminator created</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>terminator 3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Terminator created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/providers/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Provider assigned</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=providers_2</td>
+	<td>(0)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=providers_1</td>
+	<td>(5)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=providers_3</td>
+	<td>(1)</td>
+</tr>
+<!--Test aggregate and summary weather user is informed if selected terminator doesnt have any providers-->
+<tr>
+	<td>open</td>
+	<td>/billing/calls/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=terminator</td>
+	<td>label=terminatorius</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>There isn't any provider assigned to any terminator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=originator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=terminator</td>
+	<td>label=terminator 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td></td>
+	<td>There isn't any provider assigned to any terminator</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=terminator</td>
+	<td>label=terminator 3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>There isn't any provider assigned to any terminator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=terminator</td>
+	<td>label=terminatorius</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>There isn't any provider assigned to any terminator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=originator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=terminator</td>
+	<td>label=terminator 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td></td>
+	<td>There isn't any provider assigned to any terminator</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=terminator</td>
+	<td>label=terminator 3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>There isn't any provider assigned to any terminator</td>
+	<td></td>
+</tr>
+<!--In order to test if no one has any assigned providers, we need to unassign all assigned providers-->
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/providers/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Provider removed</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[6]/td[5]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Provider removed</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[5]/td[5]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Provider removed</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[4]/td[5]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Provider removed</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[3]/td[5]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Provider removed</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Provider removed</td>
+</tr>
+<!--Test aggregate and summary weather user is notified if 'Any' terminator doesnt  have any provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/calls/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=terminator</td>
+	<td>label=Any</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>There isn't any provider assigned to any terminator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=terminator</td>
+	<td>label=Any</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>There isn't any provider assigned to any terminator</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

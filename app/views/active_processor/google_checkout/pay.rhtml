@@ -1,0 +1,9 @@
+<br />
+<div class="simple">
+  <%= _('Please_press_here_to_pay') %>
+  <strong>
+    <%= round_to_cents(@gateway.payment.amount.to_i/100.0) %> <%= @gateway.payment.currency %>
+  </strong>
+  <%= _('Using') %>
+  <%= link_to image_tag("logo/google_buy.gif"), @gateway.redirect_url %>
+</div>

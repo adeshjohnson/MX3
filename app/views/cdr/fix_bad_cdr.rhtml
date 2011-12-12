@@ -1,0 +1,37 @@
+<%if @error%>
+  <%if @cdr and @cdr[0]%>
+    <%if @cdr[0]['do_not_import'].to_i == 0%>
+      <td id="cli_<%=@cdr[0]['id']%>" align="center"><%= text_field_tag "cdr_cli_#{@cdr[0]['id']}", @cdr[0]["col_#{session[:cdr_import_csv2][:imp_clid]}"] , "class" => "input" %></td>
+      <td id="date_<%=@cdr[0]['id']%>" align="center"><%= text_field_tag "calldate_#{@cdr[0]['id']}", @cdr[0]["col_#{session[:cdr_import_csv2][:imp_calldate]}"], "class" => "input" %></td>
+      <td id="dst_<%=@cdr[0]['id']%>" align="center"><%= text_field_tag "cdr_dst_#{@cdr[0]['id']}", @cdr[0]["col_#{session[:cdr_import_csv2][:imp_dst]}"] , "class" => "input" %></td>
+      <td id="billsec_<%=@cdr[0]['id']%>" align="center"><%= text_field_tag "cdr_billsec_#{@cdr[0]['id']}", @cdr[0]["col_#{session[:cdr_import_csv2][:imp_billsec]}"] , "class" => "input" %></td>
+      <td id="error_<%=@cdr[0]['id']%>" align="center"><%= nice_cdr_import_error(@cdr[0]["nice_error"]) %></td>
+      <td id="action_<%=@cdr[0]['id']%>" align="center">
+        <span onclick="new Ajax.Updater('bad_crd_<%=@cdr[0]['id']%>', '<%=Web_Dir%>/cdr/fix_bad_cdr/<%=@cdr[0]['id']%>?cli=' + escape($('cdr_cli_<%=@cdr[0]['id']%>').value) +'&dst=' + escape($('cdr_dst_<%=@cdr[0]['id']%>').value) +'&calldate=' + escape($('calldate_<%=@cdr[0]['id']%>').value) +'&billsec=' + escape($('cdr_billsec_<%=@cdr[0]['id']%>').value), {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});" > <%=b_add%> </span>
+        <span onclick="new Ajax.Updater('bad_crd_<%=@cdr[0]['id']%>', '<%=Web_Dir%>/cdr/not_import_bad_cdr/<%=@cdr[0]['id']%>', {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});" > <%=b_delete%> </span>
+      </td>
+    <%else%>
+      <td id="cli_<%=@cdr[0]['id']%>" align="center"><%= @cdr[0]["col_#{session[:cdr_import_csv2][:imp_clid]}"] %></td>
+      <td id="date_<%=@cdr[0]['id']%>" align="center"><%=  @cdr[0]["col_#{session[:cdr_import_csv2][:imp_calldate]}"]%></td>
+      <td id="dst_<%=@cdr[0]['id']%>" align="center"><%= @cdr[0]["col_#{session[:cdr_import_csv2][:imp_dst]}"] %></td>
+      <td id="billsec_<%=@cdr[0]['id']%>" align="center"><%= @cdr[0]["col_#{session[:cdr_import_csv2][:imp_billsec]}"] %></td>
+      <td id="error_<%=@cdr[0]['id']%>" align="center"></td>
+      <td id="action_<%=@cdr[0]['id']%>" align="center"><%=_('This_cdr_wil_not_imported')%></td>
+    <%end%>
+
+  <%else%>
+    <td colspan="7" align="center"><%=  @error  %></td>
+  <%end%>
+<%else%>
+  <td id="cli_<%=@cdr[0]['id']%>" align="center"><%= @cdr[0]["col_#{session[:cdr_import_csv2][:imp_clid]}"] %></td>
+  <td id="date_<%=@cdr[0]['id']%>" align="center"><%=  @cdr[0]["col_#{session[:cdr_import_csv2][:imp_calldate]}"]%></td>
+  <td id="dst_<%=@cdr[0]['id']%>" align="center"><%= @cdr[0]["col_#{session[:cdr_import_csv2][:imp_dst]}"] %></td>
+  <td id="billsec_<%=@cdr[0]['id']%>" align="center"><%= @cdr[0]["col_#{session[:cdr_import_csv2][:imp_billsec]}"] %></td>
+  <td id="error_<%=@cdr[0]['id']%>" align="center"></td>
+  <td id="action_<%=@cdr[0]['id']%>" align="center">
+    <%if @cdr[0]['do_not_import'].to_i == 0%>
+      <span onclick="new Ajax.Updater('bad_crd_<%=@cdr[0]['id']%>', '<%=Web_Dir%>/cdr/not_import_bad_cdr/<%=@cdr[0]['id']%>', {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});" > <%=b_delete%> </span>
+    <%else%>
+      <%=_('This_cdr_wil_not_imported')%>
+    <%end%></td>
+<%end%>

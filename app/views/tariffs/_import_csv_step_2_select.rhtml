@@ -1,0 +1,10 @@
+<td>
+  <div class="nb" align="center">
+    <select name="<%= name %>" >
+      <option value="-1">&nbsp;</option>
+      <% @fl.each_with_index{ |l, i| %>
+        <option value="<%= i %>" <%= "selected" if session[name] == i %>><%= l.blank? ? "&nbsp;" : l %></option>
+      <% } %>
+    </select>
+  </div>
+</td>

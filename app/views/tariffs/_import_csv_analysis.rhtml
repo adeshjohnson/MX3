@@ -1,0 +1,86 @@
+<b><%= _('Parameters') %></b>
+<table class="maintable" width="50%">
+  <tr class="row1" width="">
+    <td width="50%"><%= _("Rate_day_type") %></td>
+    <td align="right" width="15%"><%= {"all" => _("All"), "wd" => _("Work_Days"), "fd" => _("Free_Days")}[session[:imp_date_day_type]]  %>         </td>
+    <td width="35%"></td>
+  </tr>
+</table>
+<br />
+<b><%= _('DB_analysis') %></b>
+<table class="maintable" width="50%">
+  <tr class="row1" width="">
+    <td width="50%">            <%= _('Directions_in_DB') %>        </td>
+    <td align="right" width="15%">     <%= session[:directions_in_db] %>          </td>
+    <td width="35%"></td>
+  </tr>
+  <tr>
+    <td>                <%= _('Destinations_in_DB') %>  </td>
+    <td align="right">            <%= session[:destinations_in_db] %>          </td>
+    <td></td>
+  </tr>
+  <tr class="row1">
+    <td>                <%= _('Tariff_rates') %>        </td>
+    <td align="right">         <%= session[:tariff_rates] %>          </td>
+    <td></td>
+  </tr>
+</table>
+<br />
+<b><%= _('CSV_file_analysis') %></b>
+<table class="maintable" width="50%">
+  <tr class="row1">
+    <td width="50%">                <%= _('File_size') %>    </td>
+    <td align="right" width="15%">     <%= session[:file_size] %>            </td>
+    <td width="35%" align="center"> <%= _('bytes') %></td>
+  </tr>
+  <tr>
+    <td>                <%= _('Total_file_lines') %>   </td>
+    <td align="right">     <%= session[:file_lines] %>         </td>
+    <td></td>
+  </tr>
+  <tr class="row1">
+    <td>                <%= _('Destinations_in_csv_file') %>    </td>
+    <td align="right">     <%= session[:destinations_in_csv_file] %>            </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>                <%= _('Existing_destinations_in_csv_file') %>   </td>
+    <td align="right">     <%= session[:existing_destinations_in_csv_file] %>         </td>
+    <td></td>
+  </tr>
+  <%unless reseller?%>
+    <tr class="row1">
+      <td><%= _('New_destinations_in_csv_file') %></td>
+      <td align="right"><%= session[:new_destinations_in_csv_file] %></td>
+      <td align="center"><%= session[:bad_destinations] %> <%= _('bad_dst') %><%= link_to "(#{_('Press_here_to_get_list')})", {:action => "bad_rows_from_csv"}, :popup => true  %></td>
+    </tr>
+  <%end%>
+</table>
+<br />
+<b><%= _('To_do') %></b>
+<table class="maintable" width="50%">
+  <%unless reseller?%>
+    <tr class="row1">
+      <td width="50%"><%= _('Destinations_to_create') %> </td>
+      <td id="destinations_to_create" align="right" width="15%"><b><%= session[:destinations_to_create] %> </b></td>
+      <td align="center" width="35%"><%= _('Step') %> 5 <%= link_to "(#{_('Press_here_to_get_list')})", {:action => "dst_to_create_from_csv"}, :popup => true if session[:destinations_to_create].to_i > 0 %></td>
+    </tr>
+    <% if session[:imp_update_dest_names].to_i == 1 %>
+      <tr class="row1">
+        <td width="50%"><%= _('Destination_names_to_update') %></td>
+        <td id="destinations_to_update" align="right" width="15%"><b><%= session[:destinations_to_update].to_i %> </b></td>
+        <td align="center" width="35%"><%= _('Step') %> 5 <%= link_to "(#{_('Press_here_to_get_list')})", {:action => "dst_to_update_from_csv"}, :popup => true if session[:destinations_to_update].to_i > 0 %></td>
+      </tr>
+    <% end %>
+  <%end%>
+  <tr>
+    <td>                <%= _('Rates_to_update') %> </td>
+    <td align="right"> <b><%= session[:rates_to_update] %></b></td>
+    <td align="center">    <%= _('Step') %> <%= reseller? ? 5 : 6 %></td>
+  </tr>
+    <tr class="row1">
+      <td>                <%= _('New_rates_to_create') %> </td>
+      <td align="right">     <b><%= session[:new_rates_to_create] %></b></td>
+      <td align="center">    <%= _('Step') %> <%= reseller? ? 6 : 7 %></td>
+    </tr>
+</table>

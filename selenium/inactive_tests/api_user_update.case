@@ -1,0 +1,2097 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>api_user_update</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">api_user_update</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--admin -> admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=3&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=6&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=3&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=4&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=4&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=qwertyui&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=3&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=6&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Tariff not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=3&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=status</td>
+	<td>User was updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_first_name</td>
+	<td>api_reseller</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_last_name</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_clientid</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_agreement_number</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_language</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_vat_number</td>
+	<td>6432</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_accounting_number</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_address</td>
+	<td>parko</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_postcode</td>
+	<td>2222</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_city</td>
+	<td>vilnius</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_county</td>
+	<td>lietuva</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=recording_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_recording_hdd_quota</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=user_recordings_email</td>
+	<td>aaa@kkk.lt</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i4</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=cyberplat_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=warning_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=sound_file</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_blocked_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=own_providers</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=allow_loss_calls</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=credit</td>
+	<td>1.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=3&amp;u28=0&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=3&amp;u28=0&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_link_3</td>
+	<td>api_reseller 6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=username_3</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=usetype_3</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=postpaid_3</td>
+	<td>Postpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=balance_3</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#logged_3 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=tax2_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=tax3_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=tax4_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax1_value</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax2_value</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax3_value</td>
+	<td>5.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax4_value</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=block_at_date_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=agr_date_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=agr_date_month</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=agr_date_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=user[taxation_country]</td>
+	<td>label=Japan</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=address[direction_id]</td>
+	<td>label=Bangladesh</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=recording_forced_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user[currency_id]</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user[time_zone]</td>
+	<td>label=(GMT-11:00) International Date Line West, Midway Island, Samoa</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;-11&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_tariff_id</td>
+	<td>label=Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;4&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=block_at_date_month</td>
+	<td>label=4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=block_at_date_day</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=block_at_conditional</td>
+	<td>label=3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=warning_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user[warning_email_hour]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sound_file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_warning_balance_sound_file_id</td>
+	<td>label=de/cc_enter_pin.wav</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user[warning_email_balance]</td>
+	<td>0.45</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_postpaid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=cyberplat_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=block_conditional_use</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_address</td>
+	<td>aaaaaaaaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_postcode</td>
+	<td>ssssssssssss</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_city</td>
+	<td>ddddddddddddddd</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_county</td>
+	<td>ffffffffffffffff</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_state</td>
+	<td>gggggggggggggg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_phone</td>
+	<td>ghhhhhhhhhhhhhh</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_mob_phone</td>
+	<td>tyyyyyyyyyyyyy</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_fax</td>
+	<td>rrrrrrrrrrrrr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_email</td>
+	<td>ttttttttttttt@ttttttttt.er</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax4_name</td>
+	<td>tttttttttttttt</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax3_name</td>
+	<td>rrrrrrrrrrrrrrr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax2_name</td>
+	<td>eeeeeeeeeeeeeeeeee</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_accounting_number</td>
+	<td>wwwwwwwwwwwwwwww</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_vat_number</td>
+	<td>rrrrrrrrrrrrrr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_language</td>
+	<td>ttttttttt</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_clientid</td>
+	<td>yyyyyyyyyyyyyy</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_call_limit</td>
+	<td>0545</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=ignore_global_monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_recording_hdd_quota</td>
+	<td>0.00045</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_recordings_email</td>
+	<td>adsfg@SDF.asd</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=4&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=4&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=user_usertype</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=user_lcr_id</td>
+	<td>Primary</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=user_tariff_id</td>
+	<td>Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_balance_value</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=credit</td>
+	<td>unlimited</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_postpaid_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_hidden_2</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_postpaid_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_hidden_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=allow_loss_calls</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_call_limit</td>
+	<td>545</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=ignore_global_monitorings</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=user[currency_id]</td>
+	<td>EUR</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=user[time_zone]</td>
+	<td>(GMT-11:00) International Date Line West, Midway Island, Samoa</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=user[spy_device_id]</td>
+	<td>Not selected</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_blocked_2</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=block_at_date_year</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=block_at_date_month</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=block_at_date_day</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>name=block_at_conditional</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=block_conditional_use</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=warning_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_generate_invoice</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user[warning_email_hour]_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=sound_file</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=user_warning_balance_sound_file_id</td>
+	<td>de/cc_enter_pin.wav</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i3</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i5</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i7</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i6</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i8</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=show_zero_calls</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=cyberplat_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_first_name</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_last_name</td>
+	<td>Accountant</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_clientid</td>
+	<td>yyyyyyyyyyyyyy</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_agreement_number</td>
+	<td>0000000002</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=agr_date_year</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=agr_date_month</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=agr_date_day</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_language</td>
+	<td>ttttttttt</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>name=user[taxation_country]</td>
+	<td>Japan</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_vat_number</td>
+	<td>rrrrrrrrrrrrrr</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_accounting_number</td>
+	<td>wwwwwwwwwwwwwwww</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax1_name</td>
+	<td>Tax</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax2_name</td>
+	<td>eeeeeeeeeeeeeeeeee</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax3_name</td>
+	<td>rrrrrrrrrrrrrrr</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax4_name</td>
+	<td>tttttttttttttt</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=total_tax_name</td>
+	<td>Tax</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax2_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax3_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax4_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=compound_tax</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax1_value</td>
+	<td>23.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax2_value</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax3_value</td>
+	<td>5.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax4_value</td>
+	<td>6.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_address</td>
+	<td>aaaaaaaaaaaaa</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_postcode</td>
+	<td>ssssssssssss</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_city</td>
+	<td>ddddddddddddddd</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_county</td>
+	<td>ffffffffffffffff</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_state</td>
+	<td>gggggggggggggg</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_phone</td>
+	<td>ghhhhhhhhhhhhhh</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_mob_phone</td>
+	<td>tyyyyyyyyyyyyy</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_fax</td>
+	<td>rrrrrrrrrrrrr</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_email</td>
+	<td>ttttttttttttt@ttttttttt.er</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>name=address[direction_id]</td>
+	<td>Bangladesh</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=recording_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=recording_forced_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_recording_hdd_quota</td>
+	<td>0.0004</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_recordings_email</td>
+	<td>adsfg@SDF.asd</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=4&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Username has already been taken</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=4&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=qwertyui&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_username</td>
+	<td>qwertyui</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=user_usertype</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=credit</td>
+	<td>1.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_postpaid_2</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_hidden_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=allow_loss_calls</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_call_limit</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=own_providers</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=ignore_global_monitorings</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=user[time_zone]</td>
+	<td>(GMT-11:00) International Date Line West, Midway Island, Samoa</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_blocked_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=warning_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user[warning_email_hour]_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>00</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=sound_file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=user_warning_balance_sound_file_id</td>
+	<td>silence/silence6.wav</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_generate_invoice</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i3</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i4</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=show_zero_calls</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=cyberplat_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_first_name</td>
+	<td>api_reseller</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_last_name</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_last_name</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_clientid</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_agreement_number</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=agr_date_year</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=agr_date_month</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=agr_date_day</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_language</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>name=user[taxation_country]</td>
+	<td>Angola</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_vat_number</td>
+	<td>6432</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_accounting_number</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax1_name</td>
+	<td>Tax</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax2_name</td>
+	<td>eeeeeeeeeeeeeeeeee</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax3_name</td>
+	<td>rrrrrrrrrrrrrrr</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax4_name</td>
+	<td>tttttttttttttt</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=total_tax_name</td>
+	<td>Tax</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax2_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax3_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax4_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=compound_tax</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax1_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax2_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax3_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax4_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_address</td>
+	<td>parko</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_postcode</td>
+	<td>2222</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_city</td>
+	<td>vilnius</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_county</td>
+	<td>lietuva</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_state</td>
+	<td>gggggggggggggg</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>name=address[direction_id]</td>
+	<td>Bangladesh</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_phone</td>
+	<td>ghhhhhhhhhhhhhh</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_mob_phone</td>
+	<td>867788776</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_fax</td>
+	<td>rrrrrrrrrrrrr</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_email</td>
+	<td>ttttttttttttt@ttttttttt.er</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=recording_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=recording_forced_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_recording_hdd_quota</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_recordings_email</td>
+	<td>aaa@kkk.lt</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_hidden_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_usertype</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=499</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;u15=0&amp;u25=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=4&amp;u15=0&amp;u25=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=5&amp;u15=1&amp;u25=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=400&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=qwertyui&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=499&amp;hash=ee6c57cda72d6d96ea2e60f93c04377fa18cc85a&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;p=a34567n1&amp;user_id=499&amp;hash=ee6c57cda72d6d96ea2e60f93c04377fa18cc85a&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=101&amp;p=1011&amp;user_id=2&amp;u15=0&amp;u25=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=101&amp;p=1011&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=101&amp;p=1011&amp;user_id=4&amp;u15=0&amp;u25=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=101&amp;p=1011&amp;user_id=5&amp;u15=1&amp;u25=0&amp;hash=d303ad2eaef52ff1993350cf96ca3fecbadf78ce&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=101&amp;p=1011&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;hash=60fc593f766e7412c1059da8847ef755cef541a3&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=6&amp;p=aaaaa&amp;user_id=2&amp;u15=0&amp;u25=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=6&amp;p=aaaaa&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=6&amp;p=aaaaa&amp;user_id=4&amp;u15=0&amp;u25=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=6&amp;p=aaaaa&amp;user_id=5&amp;u15=1&amp;u25=0&amp;hash=d303ad2eaef52ff1993350cf96ca3fecbadf78ce&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=6&amp;p=aaaaa&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;hash=60fc593f766e7412c1059da8847ef755cef541a3&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=user_reseller&amp;p=user_reseller1&amp;user_id=2&amp;u15=0&amp;u25=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=user_reseller&amp;p=user_reseller1&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=user_reseller&amp;p=user_reseller1&amp;user_id=4&amp;u15=0&amp;u25=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=user_reseller&amp;p=user_reseller1&amp;user_id=5&amp;u15=1&amp;u25=0&amp;hash=d303ad2eaef52ff1993350cf96ca3fecbadf78ce&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=user_reseller&amp;p=user_reseller1&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;hash=60fc593f766e7412c1059da8847ef755cef541a3&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=2&amp;u15=0&amp;u25=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=4&amp;u15=0&amp;u25=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=5&amp;u15=1&amp;u25=0&amp;hash=d303ad2eaef52ff1993350cf96ca3fecbadf78ce&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;hash=60fc593f766e7412c1059da8847ef755cef541a3&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>aaaaa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_postpaid_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_blocked_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_2_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_3_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_4_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_5_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_6_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_7_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=manage_subscriptions_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=services_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=payments_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=monitorings_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoices_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=manage_dids_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callingcard_pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callingcard_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=cli_ivr_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_edit_opt_2_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_edit_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_edit_opt_3_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_edit_opt_4_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_password_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=voicemail_password_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_create_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=vouchers_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=2&amp;u15=0&amp;u25=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=4&amp;u15=0&amp;u25=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=5&amp;u15=1&amp;u25=0&amp;hash=d303ad2eaef52ff1993350cf96ca3fecbadf78ce&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;hash=60fc593f766e7412c1059da8847ef755cef541a3&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,1378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+
+
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<!--create new resellers-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>antrasreseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>11111111</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_usertype</td>
+	<td>label=reseller</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user_usertype</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<!--//-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>treciasreseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>11111111</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_usertype</td>
+	<td>label=reseller</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user_usertype</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<!--create DID's-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>37060012345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>37060012350</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>document.forms[1].elements[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID interval was successfully created</td>
+	<td></td>
+</tr>
+<!--assign DIDs to test reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reserve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reserve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reserve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reserve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<!--let own providers-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<!--reseller login-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--create new IVR-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ivr_name</td>
+	<td>aaaaaaaaaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>block_name</td>
+	<td>bbbbbbbbbbbbbb</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>IVR created</td>
+	<td></td>
+</tr>
+<!--create new dial plan-->
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IVR Dial Plan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan_name</td>
+	<td>ccccccccccc</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dialplan[data7]</td>
+	<td>label=aaaaaaaaaaaaaa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ivr_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<!--assign DID-->
+<tr>
+	<td>waitForText</td>
+	<td>i_dp_dids_2</td>
+	<td>Assign DID</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID assigned to Dial Plan: ccccccccccc</td>
+	<td></td>
+</tr>
+<!--create new dial plan 2-->
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IVR Dial Plan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan_name</td>
+	<td>dddddddddddd</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dialplan[data7]</td>
+	<td>label=aaaaaaaaaaaaaa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ivr_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<!--assign DID 2-->
+<tr>
+	<td>verifyText</td>
+	<td>i_dp_dids_3</td>
+	<td>Assign DID</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dp_id</td>
+	<td>label=dddddddddddd</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID assigned to Dial Plan: dddddddddddd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>aaaaaaaaaaaaaa</td>
+	<td></td>
+</tr>
+<!--admin login-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--do not let own providers-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<!--reseller login-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--checking resellers without own providers-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>IVRs</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>IVR Name:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Edit IVR</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>canvas_graph</td>
+	<td></td>
+</tr>
+<!--delete-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--reseller 2 login-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>antrasreseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>11111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--checking reseller 2 with own providers-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title</td>
+	<td>IVRs</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IVR not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Edit IVR</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>canvas_graph</td>
+	<td></td>
+</tr>
+<!--delete-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IVR not found</td>
+	<td></td>
+</tr>
+<!--reseller 3 login-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>treciasreseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>11111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--checking resellers 3 without own providers-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>IVRs</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>IVR Name:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Edit IVR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>canvas_graph</td>
+	<td></td>
+</tr>
+<!--delete-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--admin login-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--let own providers-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<!--reseller login-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--check-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>aaaaaaaaaaaaaa</td>
+	<td></td>
+</tr>
+<!--edit-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>ivr_name</td>
+	<td>aaaaaaaaaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ivr_name</td>
+	<td>kitas vardas</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>ivr_name</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>ivr_name</td>
+	<td>kitas vardas</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ivr_name</td>
+	<td>kitas vardas</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_name</td>
+	<td>bbbbbbbbbbbbbb</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_name</td>
+	<td>bbbbbbbbbbbbbb</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>block_name</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>block_name</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_name</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_name</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>block_name</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>block_name</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>block_name</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>block_name</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_name</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_name</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>block_name</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_name</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_name</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=block_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=block_name</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Back</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=bloko vardas 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=bloko vardas 1</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>block_timeout_response</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>block_timeout_response</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>block_timeout_response</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_timeout_response</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_timeout_response</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>block_timeout_digits</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>block_timeout_digits</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>block_timeout_digits</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_timeout_digits</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_timeout_digits</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>block_name</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>block_name</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>block_name</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=block_timeout_response</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=block_timeout_digits</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=bloko vardas 1</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>link=bloko vardas 1</td>
+	<td>focus</td>
+</tr>
+<!--new block-->
+<tr>
+	<td>click</td>
+	<td>link=Add new Block</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=bloko vardas 1</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_name</td>
+	<td>New Block</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>block_name</td>
+	<td>blokas numeris 2</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>block_name</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_name</td>
+	<td>blokas numeris 2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_name</td>
+	<td>blokas numeris 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>block_timeout_response</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>block_timeout_response</td>
+	<td></td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>block_timeout_response</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_timeout_response</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_timeout_response</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>block_timeout_digits</td>
+	<td>311</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>block_timeout_digits</td>
+	<td>311</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>block_timeout_digits</td>
+	<td>311</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_timeout_digits</td>
+	<td>311</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_timeout_digits</td>
+	<td>311</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>block_name</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>block_name</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>block_name</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=block_name</td>
+	<td>blokas numeris 2</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=blokas numeris 2</td>
+	<td>blokas numeris 2</td>
+</tr>
+<!--check-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>kitas vardas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=bloko vardas 1</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=bloko vardas 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>ivr_name</td>
+	<td>kitas vardas</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>block_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_name</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_name</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>block_timeout_response</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_timeout_response</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=bloko vardas 1</td>
+	<td>bloko vardas 1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=blokas numeris 2</td>
+	<td>blokas numeris 2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=blokas numeris 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_name</td>
+	<td>blokas numeris 2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ivr_name</td>
+	<td>kitas vardas</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>block_timeout_response</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_timeout_response</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_timeout_digits</td>
+	<td>311</td>
+</tr>
+<!--delete-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>IVR is in use</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dial Plan deleted: ccccccccccc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dial Plan deleted: dddddddddddd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>IVR Deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>kitas vardas</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

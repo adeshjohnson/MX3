@@ -1,0 +1,44 @@
+
+<div class="nb"><%= b_user + _('user') %>: <%= @user.first_name %> <%= @user.last_name %></div>
+<br>
+
+<% form_tag :action => 'subscription_update', :id => @sub,  :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device=>@search_device, :s_date_from=> @search_date_from, :s_date_till=>@search_date_till, :page=>@page, :back=>@back do %>
+
+
+<table width="100%" class="simple">
+
+  <tr>
+        <td> <%= _('Service')  %>   </td>
+        <td> <%= @sub.service.name %>   </td>  
+  </tr>
+  <tr>
+        <td> <%= _('Price')  %>   </td>
+        <td> <%= nice_number @sub.service.price %> <%= session[:default_currency]%>  </td>  
+  </tr>
+  <tr>
+        <td> <%= _('Memo')  %>:   </td>
+        <td> <%= text_field_tag 'memo', @sub.memo, "class" => "input", :size => "50", :maxlength => "150"   %>   </td>  
+                
+  </tr>
+  <tr>
+        <td> <%= _('Added')  %>   </td>
+        <td> <%= nice_date_time @sub.added %>   </td>  
+  </tr>
+  <tr>
+        <td> <%= _('Activation_start')  %>   </td>
+        <td> <%= select_datetime(@sub.activation_start, :start_year => Date.today.year-1, :end_year => Date.today.year+10, :prefix => "activation_start", :use_month_numbers => false) %>   </td>  
+  </tr>
+  <tr>
+        <td> <%= _('Activation_end')  %>   </td>
+        <td> <%= select_datetime(@sub.activation_end, :start_year => Date.today.year-1, :end_year => Date.today.year+10, :prefix => "activation_end", :use_month_numbers => false) %>   </td>  
+  </tr>
+
+
+</table>
+
+
+<br>
+  <%= submit_tag _('Edit'), :disable_with=>_('Processing..') %>
+<% end %>
+<br>
+

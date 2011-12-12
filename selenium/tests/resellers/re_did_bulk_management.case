@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>37060012345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>37060012350</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>document.forms[1].elements[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reserve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reserve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_3</td>
+	<td>Reserved</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_4</td>
+	<td>Free</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_5</td>
+	<td>Free</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_6</td>
+	<td>Free</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_7</td>
+	<td>Free</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_8</td>
+	<td>Reserved</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_3</td>
+	<td>37060012345</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_8</td>
+	<td>37060012350</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>37060012345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>37060012350</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>did_action_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>37060012345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>37060012350</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>did_action_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2 DIDs were updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_3</td>
+	<td>Reserved</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_4</td>
+	<td>Free</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_5</td>
+	<td>Free</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_6</td>
+	<td>Free</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_7</td>
+	<td>Free</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_8</td>
+	<td>Reserved</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_3</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_8</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/did_rates/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>rate_4</td>
+	<td>3.0</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>con_fee_4</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>increment_4</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>min_time_4</td>
+	<td>60</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>rate_5</td>
+	<td>3.0</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>con_fee_5</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>increment_5</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>min_time_5</td>
+	<td>60</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>rate_6</td>
+	<td>3.0</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>con_fee_6</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>increment_6</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>min_time_6</td>
+	<td>60</td>
+</tr>
+</tbody></table>
+</body>
+</html>
