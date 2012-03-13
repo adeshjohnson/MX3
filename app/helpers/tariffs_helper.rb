@@ -1,3 +1,0 @@
-module TariffsHelper
-
-end

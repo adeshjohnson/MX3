@@ -1,2 +1,0 @@
-module QuickforwardsRulesHelper
-end

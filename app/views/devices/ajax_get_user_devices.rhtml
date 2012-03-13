@@ -1,6 +1,0 @@
-<%if @user.to_i != -1%>
-  <%= " &nbsp;&nbsp;" +  _('Devices') + ":" if @add_name%>
-  <% opt_map = @devices.map{|d| [nice_device_no_pic(d), d.id]} %>
-    <% opt_map = [[_("All"), "all"]]+ opt_map if @add_all -%>
-    <%= select_tag(params[:field_id] ? params[:field_id] : "s_device", options_for_select(opt_map, (@add_all ? '' : @default))) %>
-  <%end%>

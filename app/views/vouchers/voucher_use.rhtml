@@ -1,9 +1,0 @@
-<div align="right"><%=     image_tag ("logo/vouchers_logo.png",  :style => 'border-style:none', :title => "Vouchers") %></div>
-
-
-<% form_tag :action => 'voucher_status' do %>
-    <%= _('Enter_voucher_number') %>: <%= text_field_tag 'number', "", "class" => "input", :size => confline("Voucher_Number_Length").to_i + 5, :maxlength => confline("Voucher_Number_Length").to_i  %>
-    <br><br>
-    <%= submit_tag _('Confirm'), :disable_with=>_('Processing..') %>
-<% end %>
-

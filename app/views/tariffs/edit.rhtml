@@ -1,9 +1,0 @@
-<%= link_nice_tariff(@tariff)%>
-<% form_tag(:action => 'update', :id => @tariff) do %>
-  <%= render :partial => 'form' %>
-  <br><br>
-  <%= submit_tag _('Edit'), :disable_with=>_('Processing..') %>
-<% end %>
-
-<br><br>
-

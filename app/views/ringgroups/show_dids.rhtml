@@ -1,5 +1,0 @@
-<%if @dialplan.dids.size.to_i > 0%>
-  <% for did in @dialplan.dids  %>
-    <%= link_to did.did, :controller=>:dids, :action => :edit, :id => did.id %><br />
-  <% end %>
-<%end%>
