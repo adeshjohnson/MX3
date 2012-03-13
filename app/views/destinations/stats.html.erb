@@ -1,0 +1,17 @@
+<%= javascript_include_tag 'swfobject' %>
+<b> <%= draw_flag @direction.code %> <%=@direction.name %> </b> <br />
+<b><%= _('Prefix') %></b>:<%=@destination.prefix %> 
+<br />
+<br />
+<div class="nb">
+ <%= form_tag(:action => 'stats', :id => @direction.id, :des_id => @destination.id) do %>
+     <%= _('From') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+     &nbsp;&nbsp;<%= _('to') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+     &nbsp;&nbsp;<%= submit_tag _('Change_date'), :disable_with=>_('Processing..')%>
+<% end %>
+</div>
+<br />
+<br />
+<div id="table">
+    <%= render :partial => "/directions/std_stats" %>
+</div>

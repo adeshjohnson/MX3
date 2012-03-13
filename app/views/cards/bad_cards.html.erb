@@ -1,0 +1,22 @@
+<table class="maintable" width="100%">
+  <% i =0 %>
+
+  <% if @rows %>
+    <% @rows.each_with_index{|row, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <% row.each{|r| %>
+          <%if r[0].include?('col_')%>
+        <td id="<%=r[0]%>_<%=i%>">
+              <%= r[1] %>
+            </td>
+          <%end%>
+        <% } %>
+        <td id="error_<%=i%>">
+          <b>
+            <%= nice_card_import_error(row['nice_error'].to_i)%>
+          </b>
+        </td>
+      </tr>
+    <% } %>
+  <% end %>
+</table>

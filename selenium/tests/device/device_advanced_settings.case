@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.51" />
+<title>device_advanced_settings</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">device_advanced_settings</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Allowed addresses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Mask</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tabViewdhtmlgoodies_tabView1_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_11']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Show advanced Device settings:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>show_advanced_device_settings</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>show_advanced_device_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>show_advanced_device_settings</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_11']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>show_advanced_device_settings</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_secret</td>
+	<td>1034asdfbm</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Allowed addresses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Mask</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ip1</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>mask1</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ip2</td>
+	<td>0.0.1.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>mask2</td>
+	<td>8.8.8.8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ip2</td>
+	<td>0.0.1.1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>mask2</td>
+	<td>8.8.8.8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ip3</td>
+	<td>vvgdgreg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>mask3</td>
+	<td>grgerg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Allowed IP is not valid</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

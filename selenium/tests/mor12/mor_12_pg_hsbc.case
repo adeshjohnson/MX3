@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>mor_12_pg_hsbc</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">mor_12_pg_hsbc</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='settings']/form/div[15]</td>
+	<td>HSBC</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='settings']/form/div[15]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_enabled</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_xml_url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=gateways_hsbc_secure_epayments_tax_in_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=gateways_hsbc_secure_epayments_tax_in_amount</td>
+	<td>Included Excluded</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_min_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_max_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=gateways_hsbc_secure_epayments_payment_confirmation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=gateways_hsbc_secure_epayments_payment_confirmation</td>
+	<td>Not required Required for all payments</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=gateways_hsbc_secure_epayments_default_geteway_currency</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=gateways_hsbc_secure_epayments_default_geteway_currency</td>
+	<td>USD EUR</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_payment_notification</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_logo_image</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=gateways_hsbc_secure_epayments_logo_image</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=gateways_hsbc_secure_epayments_logo_image</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_test</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=gateways_hsbc_secure_epayments_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_login</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_client_id</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_password</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_xml_url</td>
+	<td>rtfgyhujikojiuyt</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gateways_hsbc_secure_epayments_tax_in_amount</td>
+	<td>label=Excluded</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_min_amount</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_max_amount</td>
+	<td>222</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gateways_hsbc_secure_epayments_payment_confirmation</td>
+	<td>label=Required for all payments</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gateways_hsbc_secure_epayments_default_geteway_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=gateways_hsbc_secure_epayments_payment_notification</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=gateways_hsbc_secure_epayments_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_logo_image</td>
+	<td>/home/mor/selenium/files/pics/reseller_logo.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='settings']/form/div[15]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_login</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_client_id</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_password</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_xml_url</td>
+	<td>rtfgyhujikojiuyt</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=gateways_hsbc_secure_epayments_tax_in_amount</td>
+	<td>Excluded</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_min_amount</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_max_amount</td>
+	<td>222</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=gateways_hsbc_secure_epayments_payment_confirmation</td>
+	<td>Required for all payments</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=gateways_hsbc_secure_epayments_default_geteway_currency</td>
+	<td>EUR</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_payment_notification</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_test</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_logo_image</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_login</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_client_id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_password</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_xml_url</td>
+	<td>rrrrrrrrrrrrrrrrrrrrr</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gateways_hsbc_secure_epayments_tax_in_amount</td>
+	<td>label=Included</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_min_amount</td>
+	<td>2r</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_max_amount</td>
+	<td>222r</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gateways_hsbc_secure_epayments_payment_confirmation</td>
+	<td>label=Not required</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gateways_hsbc_secure_epayments_default_geteway_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>An error occurred while saving gateway configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.accordion-toggle.error</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>must be numeric and positive</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_min_amount</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_max_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=gateways_hsbc_secure_epayments_payment_notification</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=gateways_hsbc_secure_epayments_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='settings']/form/div[15]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_login</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_client_id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_xml_url</td>
+	<td>rrrrrrrrrrrrrrrrrrrrr</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=gateways_hsbc_secure_epayments_tax_in_amount</td>
+	<td>Included</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_min_amount</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_max_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=gateways_hsbc_secure_epayments_payment_confirmation</td>
+	<td>Not required</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=gateways_hsbc_secure_epayments_default_geteway_currency</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_payment_notification</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_test</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/hsbc_secure_epayments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>HSBC Secure ePayments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_first_name</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_last_name</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_number</td>
+	<td>1234567890765432</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gateways_hsbc_secure_epayments_year</td>
+	<td>label=2020</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gateways_hsbc_secure_epayments_month</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_verification_value</td>
+	<td>2134</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_name</td>
+	<td>System</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_address1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_address2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_city</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_state</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_country</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_zip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_phone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_amount</td>
+	<td>3245</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment was unsuccessful, details from gateway:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>or other card data is invalid, please double check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_address</td>
+	<td>wertyu</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_postcode</td>
+	<td>ertyu</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_city</td>
+	<td>retyui</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_county</td>
+	<td>ertyui</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_state</td>
+	<td>e4rt5yui</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_phone</td>
+	<td>e4r5t6y7ui</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_mob_phone</td>
+	<td>er5t6y7u</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_fax</td>
+	<td>567yuio</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_clientid</td>
+	<td>tyui</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_language</td>
+	<td>t6y7uio</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_vat_number</td>
+	<td>rtyuio</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_accounting_number</td>
+	<td>rtyuio</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/hsbc_secure_epayments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_first_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_last_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=gateways_hsbc_secure_epayments_type</td>
+	<td>Visa Master American express Switch Solo Maestro</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=gateways_hsbc_secure_epayments_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=gateways_hsbc_secure_epayments_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_verification_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_name</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_address1</td>
+	<td>wertyu</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_address2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_city</td>
+	<td>retyui</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_state</td>
+	<td>e4rt5yui</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_country</td>
+	<td>Lithuania</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_zip</td>
+	<td>ertyu</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_phone</td>
+	<td>e4r5t6y7ui</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_hsbc_secure_epayments_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=gateways_hsbc_secure_epayments_currency</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Amount without tax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total amount that will be charged (with tax)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment was unsuccessful, details from gateway:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>or other card data is invalid, please double check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>must be positive and higher or equal to the minimum amount (if any)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_amount</td>
+	<td>56ytgf</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>must be numeric and positive</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

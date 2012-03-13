@@ -1,0 +1,101 @@
+<% length = 1 %>
+<% length += 2 if @allow_read %>
+<% length += 1 if @allow_manage %>
+<% length -= 2 if !can_see_finances? %>
+
+<% if @allow_manage == true and can_see_finances? %>
+<table width="100%">
+  <tr>
+    <td>	
+      <%= link_to b_add + _('New_cardgroup'), :action => 'new' %>
+    </td>
+    <td align="right">
+      <%= link_to_function(b_search + _('Search_for_cards_in_cardgroups'), "Element.toggle('search_details')") %>
+    </td>
+  </tr>
+</table>
+<% end %>
+<%= form_tag :action => "search" do %>
+  <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+    <br/>
+    <%= hidden_field_tag 'search_on', 1  %>
+
+    <%= _('Number') %>: <%= text_field_tag 's_number', @options["s_number"], "class" => "input", :size => "15"  %>
+    <%= _('PIN') %>: <%= text_field_tag 's_pin', @options["s_pin"], "class" => "input", :size => "15"  %>
+    <%= _('CallerID') %>: <%= text_field_tag 's_caller_id', @options[:s_caller_id], "class" => "input", :size => "15" %>
+    <%= _('Balance_between') %>: <%= text_field_tag 's_balance_min',@options["s_balance_min"], "class" => "input", :size => "7", :maxlength => "10"  %> -
+    <%= text_field_tag 's_balance_max', @options["s_balance_max"], "class" => "input", :size => "7", :maxlength => "10"  %>
+
+    &nbsp;&nbsp;<%= _('Sold') %>?:
+    <select name="s_sold" >
+      <option value="all" selected> <%= _('All') %> </option>
+      <option value="yes" <%= "selected" if @options["s_sold"] == "yes"%>> <%= _('Yes') %> </option>
+      <option value="no" <%= "selected" if @options["s_sold"] == "no"%>> <%= _('No') %> </option>
+
+    </select>
+
+    &nbsp;&nbsp;<%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
+  </div>
+<% end %>
+
+<br/>
+<% for cg in @cardgroups %>
+  <%= form_tag :action => 'cards_to_csv', :id => cg.id do %>
+    <table class="maintable" width="100%">
+      <tr class="row2">
+        <td id="picture_<%=cg.id%>" align="center" width="10%" rowspan=4><%= image_tag "cards/#{cg.image}", :style => 'border-style:none', :title => cg.name, :size => "150x100" %> </td>
+        <th id="name_column_<%=cg.id%>" align="left" colspan=2><%= _('Name') %></th>
+        <th id="description_column_<%=cg.id%>" align="left" colspan=<%= length %>><%= _('Description') %></th>
+        <th id="num_length_column_<%=cg.id%>" align="center" colspan=3><%= _('Number_length')+ "/" +_('Pin_length') %></th>
+      </tr>
+
+      <tr class="row1">
+        <td id="name_<%=cg.id%>" align="left" colspan=2><%=h cg.name %></td>
+        <td id="description_<%=cg.id%>" align="left" colspan=<%= length %>><%= cg.description[0..100] %></td>
+        <td id="num_pin_length_<%=cg.id%>" align="center" colspan=3><%= cg.number_length.to_s + "/" + cg.pin_length.to_s %></td>
+      </tr>
+
+      <tr>
+        <th id="tariff_<%=cg.id%>" align="left"><%= _('Tariff') %></th>
+        <th id="lcr_<%=cg.id%>" align="left"><%= _('LCR') %></th>
+        <% if can_see_finances? -%>
+          <th id="price_<%=cg.id%>" align="right"><%= _('Price') %> <%= current_user.currency.name%></th>
+          <th id="without_vat_<%=cg.id%>" align="right"><%= _('Without_VAT') %> <%= current_user.currency.name%></th>
+        <% end -%>
+        <% if @allow_read == true %>
+          <th id="cards_<%=cg.id%>" align="center"><%= _('Cards') %></th>
+          <th id="details_<%=cg.id%>" align="center"><%= _('Details') %></th>
+          <th></th>
+        <% end %>
+        <% if @allow_manage == true %>
+          <th></th>
+          <th></th>
+        <% end %>
+      </tr>
+
+      <tr class="row1">
+        <td id="tariff_name_<%=cg.id%>" align="left"><%=h cg.tariff.name if cg.tariff %></td>
+        <td id="lcr_name_<%=cg.id%>" align="left"><%=h cg.lcr.name if cg.lcr%></td>
+        <% if can_see_finances? -%>
+          <td id="count_tax_amount_<%=cg.id%>" align="right"><%= nice_number(cg.price + cg.get_tax.count_tax_amount(cg.price)) %></td>
+          <td id="price_usd_<%=cg.id%>" align="right"><%= nice_number cg.price %></td>
+        <% end -%>
+
+        <% if @allow_read == true %>
+          <td id="cards_size_<%=cg.id%>" align="center"><%= link_to(b_view + "(" + cg.cards.size.to_s + ")", { :controller => "cards", :action => "list", :cg => cg, :clean=>1}, :id=>'cards_img_'+cg.id.to_s )%></td>
+          <td id="b_details_<%=cg.id%>" align="center"><%= link_to b_details, { :action => 'show', :id => cg }, :id => 'details_img_'+cg.id.to_s %></td>
+          <td id="excel_icon_<%=cg.id%>" align="center"><%= image_submit_tag 'icons/excel.png', :title => _('Cards'), :id=>'excel_img_'+cg.id.to_s %></td>
+        <% end %>
+
+        <% if @allow_manage == true %>
+          <td id="edit_icon_<%=cg.id%>" align="center"><%= link_to b_edit, { :action => 'edit', :id => cg }, :id => 'edit_img_'+cg.id.to_s %></td>
+          <td id="destroy_icon_<%=cg.id%>" align="center"><%= link_to b_delete, { :action => 'destroy', :id => cg }, :id => 'destroy_img_'+cg.id.to_s, :confirm => _('Are_you_sure'), :method => :post %></td>
+        <% end %>
+      </tr>
+    </table>
+  <% end %>
+  <br/>
+<% end %>
+
+
+

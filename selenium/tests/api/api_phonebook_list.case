@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<!--Login as administrator-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Enable MOR API-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--Calculate hash and send phonebooks command with incorrect hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=admin&amp;p=admin1&amp;user_id=2&amp;test=1&amp;hash=da4b9237bacccdf19c0760cab7aec4a835901</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--Verify that no one has any phonebooks-->
+<!--User 101-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=101&amp;p=1011&amp;user_id=2&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No Phonebooks</td>
+	<td></td>
+</tr>
+<!--Reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=reseller&amp;p=reseller1&amp;user_id=3&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No Phonebooks</td>
+	<td></td>
+</tr>
+<!--Admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=admin&amp;p=admin1&amp;user_id=0&amp;test=1&amp;hash=60fc593f766e7412c1059da8847ef755cef541a3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No Phonebooks</td>
+	<td></td>
+</tr>
+<!--Acountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=accountant&amp;p=accountant1&amp;user_id=4&amp;test=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No Phonebooks</td>
+	<td></td>
+</tr>
+<!--Login as user 101  and create phonebooks for him-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>&lt;sd&gt;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>32</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>5432</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Added</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>&lt;test&gt;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>5435</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>67</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Added</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>hmmmm</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Added</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--User has 3 phonebooks, no one else should see these phonebooks, except admin can explisitly select his users phonebooks-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=101&amp;p=1011&amp;user_id=2&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&lt;sd&gt; 5432 32 &lt;test&gt; 5435 67 hmmmm 345 12</td>
+	<td></td>
+</tr>
+<!--Reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=reseller&amp;p=reseller1&amp;user_id=3&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No Phonebooks</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=reseller&amp;p=reseller1&amp;user_id=2&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--Admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=admin&amp;p=admin1&amp;user_id=0&amp;test=1&amp;hash=60fc593f766e7412c1059da8847ef755cef541a3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No Phonebooks</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=admin&amp;p=admin1&amp;user_id=2&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&lt;sd&gt; 5432 32 &lt;test&gt; 5435 67 hmmmm 345 12</td>
+	<td></td>
+</tr>
+<!--Acountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=accountant&amp;p=accountant1&amp;user_id=4&amp;test=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No Phonebooks</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=accountant&amp;p=accountant1&amp;user_id=0&amp;test=1&amp;hash=60fc593f766e7412c1059da8847ef755cef541a3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No Phonebooks</td>
+	<td></td>
+</tr>
+<!--Login as reseller  and create phonebooks for him-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>www</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>444</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>444</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Added</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>rrrr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Added</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>tttttt</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>678</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>789</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--Reseller gets his phonebooks, admin doesnt have any, but can see his users(reseller in this case) phonebooks-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=reseller&amp;p=reseller1&amp;user_id=3&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>rrrr 11 11 tttttt 678 789 www 444 444</td>
+	<td></td>
+</tr>
+<!--Admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=admin&amp;p=admin1&amp;user_id=0&amp;test=1&amp;hash=60fc593f766e7412c1059da8847ef755cef541a3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No Phonebooks</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=admin&amp;p=admin1&amp;user_id=3&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>rrrr 11 11 tttttt 678 789 www 444 444</td>
+	<td></td>
+</tr>
+<!--Acountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=accountant&amp;p=accountant1&amp;user_id=4&amp;test=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No Phonebooks</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=accountant&amp;p=accountant1&amp;user_id=3&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>rrrr 11 11 tttttt 678 789 www 444 444</td>
+	<td></td>
+</tr>
+<!--Get users 543 phonebooks command , should fail, because that user does not exist-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=admin&amp;p=admin1&amp;user_id=543&amp;test=1&amp;hash=778a387f3ef3bf66153f0039a1e92677205cd2ce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--Login as administrator-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Create phonebooks-->
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>aaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>2222</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Added</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>cccc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>3456</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Added</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--Get admins phonebooks-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=admin&amp;p=admin1&amp;user_id=0&amp;test=1&amp;hash=60fc593f766e7412c1059da8847ef755cef541a3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>aaaa 1234 2222 cccc 3456 11</td>
+	<td></td>
+</tr>
+<!--Get admin's users phonebooks-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=admin&amp;p=admin1&amp;user_id=2&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>aaaa 1234 2222 cccc 3456 11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=admin&amp;p=admin1&amp;user_id=3&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>aaaa 1234 2222 cccc 3456 11</td>
+	<td></td>
+</tr>
+<!--Get resellers users phonebooks and he sees only admins phonebooks-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=user_reseller&amp;p=user_reseller1&amp;user_id=5&amp;test=1&amp;hash=d303ad2eaef52ff1993350cf96ca3fecbadf78ce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>aaaa 1234 2222 cccc 3456 11</td>
+	<td></td>
+</tr>
+<!--Login as reseller's user-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Create reseler user's phonebooks-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>ppp</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>0000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>5674</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Added</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>bbbb</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>097</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>45</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Added</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--Get resellers users phonebooks sees not only admins phonebooks, but his own as well-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=user_reseller&amp;p=user_reseller1&amp;user_id=5&amp;test=1&amp;hash=d303ad2eaef52ff1993350cf96ca3fecbadf78ce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>aaaa 1234 2222 bbbb 097 45 cccc 3456 111 ppp 0000 5674</td>
+	<td></td>
+</tr>
+<!--As reseller get reseller's users phonebooks-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=reseller&amp;p=reseller1&amp;user_id=5&amp;test=1&amp;hash=d303ad2eaef52ff1993350cf96ca3fecbadf78ce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>aaaa 1234 2222 bbbb 097 45 cccc 3456 111 ppp 0000 5674</td>
+	<td></td>
+</tr>
+<!--As admin you can not get resellers users phonebooks, because it's not admins user-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=admin&amp;p=admin1&amp;user_id=5&amp;test=1&amp;hash=d303ad2eaef52ff1993350cf96ca3fecbadf78ce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--Check wheter resellers user 101 cannot see admins, resellers or each others phonebooks. they can se only admin's and their own phonebooks-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=user_reseller&amp;p=user_reseller1&amp;user_id=0&amp;test=1&amp;hash=60fc593f766e7412c1059da8847ef755cef541a3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>aaaa 1234 2222 bbbb 097 45 cccc 3456 111 ppp 0000 5674</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=user_reseller&amp;p=user_reseller1&amp;user_id=3&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>aaaa 1234 2222 bbbb 097 45 cccc 3456 111 ppp 0000 5674</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=user_reseller&amp;p=user_reseller1&amp;user_id=2&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>aaaa 1234 2222 bbbb 097 45 cccc 3456 111 ppp 0000 5674</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=101&amp;p=1011&amp;user_id=0&amp;test=1&amp;hash=60fc593f766e7412c1059da8847ef755cef541a3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&lt;sd&gt; 5432 32 &lt;test&gt; 5435 67 aaaa 1234 2222 cccc 3456 111 hmmmm 345 12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=101&amp;p=1011&amp;user_id=3&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&lt;sd&gt; 5432 32 &lt;test&gt; 5435 67 aaaa 1234 2222 cccc 3456 111 hmmmm 345 12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=101&amp;p=1011&amp;user_id=1&amp;test=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&lt;sd&gt; 5432 32 &lt;test&gt; 5435 67 aaaa 1234 2222 cccc 3456 111 hmmmm 345 12</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

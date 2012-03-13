@@ -1,0 +1,65 @@
+<%if @country%>
+  <b> <%=_('Country')%> : </b>
+  <%= @country.name%>
+  <br/>
+<%end%>
+<%if @provider%>
+  <b> <%=_('Provider')%> : </b>
+  <%= @provider.name%>
+  <br/>
+<%end%>
+<%if @direction%>
+  <b> <%=_('Direction')%> : </b>
+  <%= @direction %>
+  <br/>
+<%end%>
+<%if @user%>
+  <b> <%=_('User')%> : </b>
+  <%= nice_user(@user)%>
+  <br/>
+<%end%>
+<br/>
+<br/>
+
+<div align="left" class="nb">
+  <%= form_tag(:action => 'calls_per_day') do %>
+    <%= _('From') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+    &nbsp;&nbsp;<%= _('to') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+    &nbsp;&nbsp;<%= _('Country') %>: <select name="country_id" >
+      <option value=<%= '-1'%> <%= "selected" if !@country %>> <%= _('All') %></option>
+        <% for country in @countries %>
+        <option value=<%= country.id%> <%if @country%><%= "selected" if country.id == @country.id %> <%end%>> <%= h(country.name) %> </option>
+      <% end %>
+    </select>
+
+    &nbsp;&nbsp;<%= _('Provider') %>: <select name="provider_id" >
+      <option value=<%= '-1'%> <%= "selected" if !@provider %>> <%= _('All') %></option>
+        <% for provider in @providers %>
+        <option value=<%= provider.id%> <%if @provider%><%= "selected" if provider.id == @provider.id %> <%end%>> <%= provider.name %> </option>
+      <% end %>
+    </select>
+    &nbsp;&nbsp;<%= _('Direction') %>: <select name="direction" >
+      <option value=<%= '-1'%> <%= "selected" if !@direction %>> <%= _('All') %></option>
+      <option value=<%= 'Outgoing'%> <%if @direction%><%= "selected" if 'Outgoing' == @direction.to_s %> <%end%>> <%= _('Outgoing') %> </option>
+      <option value=<%= 'Incoming'%> <%if @direction%><%= "selected" if 'Incoming' == @direction.to_s %> <%end%>> <%= _('Incoming') %> </option>
+    </select>
+    &nbsp;&nbsp;<%= _('User') %>: <select name="user_id" >
+      <option value=<%= '-1'%> <%= "selected" if !@user %>> <%= _('All') %></option>
+        <% for user in @users %>
+        <option value=<%= user.id%> <%if @user%><%= "selected" if user.id == @user.id %> <%end%>> <%= nice_user(user) %> </option>
+      <% end %>
+    </select>
+     &nbsp;&nbsp;<%= _('Reseller') %>: <select name="reseller_id" >
+      <option value=<%= '-1'%> <%= "selected" if !@reseller %>> <%= _('All') %></option>
+        <% for reseller in @resellers %>
+        <option value=<%= reseller.id%> <%if @reseller%><%= "selected" if reseller.id == @reseller.id %> <%end%>> <%= nice_user(reseller) %> </option>
+      <% end %>
+    </select>
+    &nbsp;&nbsp;<%= submit_tag _('Change_date'), :disable_with=>_('Processing..')%>
+  <% end %>
+</div>
+
+<br/>
+<div id="table">
+  <%= render :partial => "list_calls_per_day" %>
+</div>

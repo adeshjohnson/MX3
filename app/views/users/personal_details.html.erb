@@ -1,0 +1,7 @@
+<%= form_tag(:action => 'update_personal_details', :id => @user) do %>
+  <%= render :partial => 'personal_form' %>
+  <br>
+  <br>
+  <%= submit_tag _('Change') , :disable_with=>_('Processing..')%>
+<% end %>
+<br>

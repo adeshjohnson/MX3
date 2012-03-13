@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<!--Login as admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify that quick stats are shown in main page, and there's no link to quick stats-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>quick_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>id=spersonal_menu2</td>
+	<td>Quick stats</td>
+</tr>
+<!--Login as reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify that quick stats are shown in main page, and there's no link to quick stats-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>quick_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>id=spersonal_menu2</td>
+	<td>Quick stats</td>
+</tr>
+<!--Login as user-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify that quick stats are shown in main page, and there's no link to quick stats-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>quick_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>id=spersonal_menu2</td>
+	<td>Quick stats</td>
+</tr>
+<!--Login as accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify that quick stats are shown in main page, and there's no link to quick stats-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>quick_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>id=spersonal_menu2</td>
+	<td>Quick stats</td>
+</tr>
+<!--Login as admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Set hide quick stats and verify that option is named 'Hide Quick Stats in Start page'-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_11 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hide Quick Stats in Start page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=hide_quick_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--Verify that thers new menu item 'Quick stats' and that quick stats are shown-->
+<tr>
+	<td>verifyText</td>
+	<td>id=spersonal_menu2</td>
+	<td>Quick stats</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=spersonal_menu2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>quick_stats</td>
+	<td></td>
+</tr>
+<!--Verify that quick stats are not shown in main page-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>quick_stats</td>
+	<td></td>
+</tr>
+<!--Login as reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify that thers new menu item 'Quick stats' and that quick stats are shown-->
+<tr>
+	<td>verifyText</td>
+	<td>id=spersonal_menu2</td>
+	<td>Quick stats</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=spersonal_menu2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>quick_stats</td>
+	<td></td>
+</tr>
+<!--Verify that quick stats are not shown in main page-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>quick_stats</td>
+	<td></td>
+</tr>
+<!--Login as user-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify that thers new menu item 'Quick stats' and that quick stats are shown-->
+<tr>
+	<td>verifyText</td>
+	<td>id=spersonal_menu2</td>
+	<td>Quick stats</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=spersonal_menu2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>quick_stats</td>
+	<td></td>
+</tr>
+<!--Verify that quick stats are not shown in main page-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>quick_stats</td>
+	<td></td>
+</tr>
+<!--Login as user-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify that thers new menu item 'Quick stats' and that quick stats are shown-->
+<tr>
+	<td>verifyText</td>
+	<td>id=spersonal_menu2</td>
+	<td>Quick stats</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=spersonal_menu2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>quick_stats</td>
+	<td></td>
+</tr>
+<!--Verify that quick stats are not shown in main page-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>quick_stats</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

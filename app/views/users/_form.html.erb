@@ -1,0 +1,772 @@
+<% credit = nice_credit(@user) %>
+<% if defined?(@user) and !@user.new_record? and params[:action] != "default_user" %>
+  <table>
+    <tr>
+      <%= render :partial => "/layouts/user_buttons", :locals => {:user => @user} %>
+    </tr>
+  </table>
+<% end %>
+<table width="100%">
+  <tr>
+    <td valign="top">
+      <table>
+        <tr>
+          <td colspan="2" class="bottom_border"><b><%= _('General') %></b></td>
+        </tr>
+        <tr>
+          <td colspan="2" height="10"></td>
+        </tr>
+        <tr>
+          <td valign="top" colspan="2">
+            <table class="simple">
+              <tr>
+                <td width="150"> <%= _('username') %>:   </td>
+                <td><%= text_field 'user', 'username', "class" => "input" %> </td>
+              </tr>
+              <% if params[:controller] == "users" and params[:action] == "default_user"%>
+                <tr>
+                  <td> <%= _('Default_Password_length') %>:   </td>
+                  <td> <%= text_field_tag('password_length', @password_length.to_i, "class" => "input") %> </td>
+                </tr>
+              <% else %>
+                <% if current_user.is_accountant? %>
+                  <% if session[:acc_user_create_opt_1].to_i == 2 and not @user.is_admin? %>
+                    <tr>
+                      <td> <%= _('secret') %>:   </td>
+                      <td> <%= password_field 'password', 'password', "class" => "input" %> </td>
+                    </tr>
+                  <% end %>
+                <% else %>
+                  <tr>
+                    <td> <%= _('secret') %>:   </td>
+                    <td> <%= password_field 'password', 'password', "class" => "input" %> </td>
+                  </tr>
+                <% end %>
+              <% end %>
+              <tr>
+                <% if @user.id != 0 %>
+                  <%  if !(current_user.is_accountant? and session[:acc_user_create_opt_2].to_i == 0)%>
+                    <td><%= _('usertype') %>:</td>
+                  <% end %>
+                <% end %>
+                <td>
+                  <% if params[:action] == "default_user" %>
+                    <strong>user</strong> <input type="hidden" name="user[usertype]" value="user"/>
+                  <% else %>
+                    <% if !(current_user.is_accountant? and session[:acc_user_create_opt_2].to_i == 0) %>
+                      <% if params[:action] != "new" and params[:action] != "create" and (not current_user.is_admin? and !(current_user.is_accountant? and session[:acc_user_create_opt_2].to_i == 2)) %>
+                        <%= @user.usertype %>
+                      <% else %>
+                        <% if @user.id == 0 %>
+                          <input type="hidden" name="user[usertype]" value="admin"/>
+                        <% else %>
+                          <% if !(current_user.is_accountant? and session[:acc_user_create_opt_2].to_i != 2 )%>
+                            <select id ="user_usertype" name="user[usertype]" <%= "onchange='Reseller(this.value); #{"Disab(this.value);" if current_user.is_admin? } '" %>>
+                              <% if @user.usertype != "reseller" or (params[:action] == "create" or params[:action] == "new" or params[:action] == "default_user") %>
+                                <option value="user" <%= "selected" if @user.usertype == "user" %>> user </option>
+                                <% if current_user.is_admin? or @user.is_accountant? %>
+                                  <option value="accountant" <%= "selected" if @user.is_accountant? %> > accountant </option>
+                                <% end %>
+                              <% end %>
+                              <% if reseller_active? and (current_user.is_admin? or current_user.is_accountant?) and (params[:action] == "create" or @user.is_user? or @user.is_reseller?) %>
+                                <option value="reseller" <%= "selected" if @user.is_reseller? %> > reseller </option>
+                              <% end %>
+                            </select>&nbsp;
+                            <% if current_user.is_admin? or (current_user.is_accountant? and @allow_edit)%>
+                              <% if @groups and @groups.size > 0 %>
+                                <%= select_tag("accountant_type_invalid", options_for_select(@groups.map{|group| [group.name, group.id.to_i]}, @user.acc_group_id.to_i), {:id => "accountant_type_select"})  %>
+                              <% else %>
+                                <div id="accountant_type_select"> <%= b_exclamation %> <%= link_to _('You_have_to_create_accountant_group'), :controller => 'permissions', :action => 'list', :group_type => 'accountant' %> </div>
+                              <% end %>
+                              <% if @groups_resellers and @groups_resellers.size > 0 %>
+                                <%= select_tag("accountant_type_invalid", options_for_select(@groups_resellers.map{|group| [group.name, group.id.to_i]}, @user.acc_group_id.to_i), {:id => "reseller_type_select"})  %>
+                              <% else %>
+                                <div id="reseller_type_select"> <%= b_exclamation %> <%= link_to _('You_have_to_create_reseller_group'), :controller => 'permissions', :action => 'list', :group_type => 'reseller' %> </div>
+                              <% end %>
+                              <script type="text/javascript">
+                                function Disab(val) {
+                                var commit = $('commit')
+                                switch(val){
+                                case "accountant" :
+                                $('accountant_type_select').style.display = 'inline';
+                                $('accountant_type_select').name = 'accountant_type';
+                                $('reseller_type_select').style.display = 'none';
+                                $('reseller_type_select').name = 'accountant_type_invalid';
+                                if(commit != null){
+                                if($('accountant_type_select').tagName.toLowerCase() != 'select'){
+                                commit.disabled = true;
+                                }else{
+                                commit.disabled = false;
+                                }
+                                }
+                                break;
+                                case "reseller" :
+                                $('reseller_type_select').style.display = 'inline';
+                                $('reseller_type_select').name = 'accountant_type';
+                                $('accountant_type_select').style.display = 'none';
+                                $('accountant_type_select').name = 'accountant_type_invalid';
+                                if(commit != null){
+                                if($('reseller_type_select').tagName.toLowerCase() != 'select'){
+                                commit.disabled = true;
+                                }else{
+                                commit.disabled = false;
+                                }
+                                }
+                                break;
+                                default :
+                                $('accountant_type_select').style.display = 'none';
+                                $('reseller_type_select').style.display = 'none';
+                                if(commit != null){
+                                commit.disabled = false;
+                                }
+                                }
+                                }
+                                Disab('<%= @user.usertype %>');
+                              </script>
+                            <% end %>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+
+              <% if current_user.is_admin? or (current_user.is_accountant? and session[:acc_user_create_opt_3] > 0 ) or allow_manage_providers? %>
+                <tr>
+                  <td> <%= _('LCR') %>:   </td>
+                  <td>
+                    <% if current_user.is_admin? or (current_user.is_accountant? and session[:acc_user_create_opt_3] == 2) or allow_manage_providers?%>
+                      <select name="user[lcr_id]" id="user_lcr_id" <%= "disabled" if not @lcrs %> >
+                        <% for lcr in @lcrs %>
+                          <option value="<%= lcr.id %>" <%= "selected" if @user.lcr_id.to_i == lcr.id if @user.lcr %>> <%= lcr.name %> </option>
+                        <% end %>
+                      </select>
+                    <% else %>
+                      <% lc = @lcrs.select{ |lcr_tmp| lcr_tmp.id == @user.lcr_id }%>
+                      <% if lc and lc[0] and lc[0].class == Lcr %>
+                        <%= lc[0].name %>
+                      <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+
+              <% if !(current_user.is_accountant? and session[:acc_user_create_opt_4] == 0)%>
+
+                <tr>
+                  <td> <%= _('Tariff') %>:   </td>
+                  <td>
+                    <% if !(current_user.is_accountant? and (session[:acc_user_create_opt_4] == 1 or session[:acc_user_create_opt_4] == 0))%>
+                      <select name="user[tariff_id]" id="user_tariff_id" <%= "disabled" if @tariffs.size < 1 %> <%= "onchange=\"submit_message(this.value);\"" if params[:action] == "edit"%>>
+                        <% for tariff in @tariffs %>
+                          <option value="<%= tariff.id %>" <%= "selected" if @user.tariff_id.to_i == tariff.id if @user.tariff%>> <%= _('Retail') + " - " if tariff.purpose == "user" %><%= _('Wholesale') + " - " if tariff.purpose == "user_wholesale" %><%= tariff.name %> </option>
+                        <% end %>
+                      </select>
+                    <% else %>
+                      <% tar = @tariffs.select{|tariff| tariff.id.to_i == @user.tariff_id.to_i} %>
+                      <% if tar and tar[0] and tar[0].class == Tariff %>
+                        <%= tar[0].name.to_s %>
+                      <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+
+              <% if !(current_user.is_accountant? and session[:acc_user_create_opt_5].to_i != 2) and can_see_finances? %>
+                <tr <%= tooltip(_('Balance'), _('Balance_user_edit_explanation')) %>>
+                  <td id="set_balance_name"><%= _('Balance') %>:</td>
+                  <td id ="user_balance_value">
+                    <% if @user.new_record? %>
+                      <%= text_field 'user', 'balance', "class" => "input", :size => "10", :maxlength => "20"    %> <%= current_user.currency.name %>
+                    <% else %>
+                      <%= nice_number @user.balance %> <%= current_user.currency.name %>
+                    <% end %>
+                    <%=hidden_field('b_f', @user.frozen_balance)%>
+                  </td>
+                </tr>
+                <tr id="credit-row" <%= 'style="display: none;"' if @user.prepaid? %>>
+                  <td id="set_credit_name"><%= _('Credit') %>:</td>
+                  <td> <% text_field 'user', 'credit', "class" => "input" %>
+                    <%= text_field_tag 'credit', credit, "class" => "input", :size => "10", :maxlength => "10"  %>
+                    <%= _('Unlimited') %>? <%= check_box_tag 'unlimited', "1", (@user.credit_unlimited?) %>
+                  </td>
+                </tr>
+                <%if mor_11_extend?%>
+                  <tr id="minimal_charge_value_row" <%= 'style="display: none;"' if @user.prepaid? %>>
+                    <td id="minimal_charge_name"><%= _('Minimal Charge for Calls') %>:</td>
+                    <td> <% text_field 'user', 'credit', "class" => "input" %>
+                      <%= text_field_tag 'minimal_charge_value', @user.minimal_charge, "class" => "input", :min => 0, :size => "10", :maxlength => "10"  %>
+                      <%= _('Enabled') %>? <%= check_box_tag 'minimal_charge_enabled', 'minimal_charge_enabled', @user.minimal_charge_enabled? %> </td>
+                  </tr>
+                  <tr id="minimal_charge_date_row"  <%= 'style="display: none;"' if @user.prepaid? %>>
+                    <td> <%= _("Minimal_charge_for_calls_date") %>:</td>
+                    <td> 
+                      <%= select_year((@user.minimal_charge_enabled? ? @user.minimal_charge_start_at : Date.today),:end_year => Date.today.year+1, :prefix => 'minimal_charge_date') %>
+                      <%= select_month((@user.minimal_charge_enabled? ? @user.minimal_charge_start_at : Date.today), :use_month_numbers => true, :prefix => 'minimal_charge_date') %>
+                    </td>
+                  </tr>
+                <%end%>
+              <% else %>
+                <% if current_user.is_accountant? and session[:acc_user_create_opt_5] == 1 %>
+                  <tr>
+                    <td id="set_balance_name"><%= _('Balance') %>:</td>
+                    <td id ="user_balance_value"> <%= nice_number @user.balance %> <%= session[:default_currency] %> </td>
+                  </tr>
+                  <tr id="credit-row" <%= 'style="display: none;"' if @user.prepaid? %>>
+                    <td id="set_credit_name"><%= _('Credit') %>:</td>
+                    <td>
+                      <%= nice_credit(@user) %>
+                      <% if not @user.credit_unlimited? %>
+                        <br/>
+                        <%= _('Unlimited') %>?
+                        <%= @user.credit_unlimited? ? b_check(:id => "1") : b_cross(:id => "1") %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+              <script type="text/javascript">
+                function isDecimal(event){
+                  var regex = /[0-9]/;
+                  var value = $('minimal_charge_value').value;
+                  if(regex.test(value)){
+                    return true;
+                  }else{
+                    return false;
+                  }
+                }
+
+                function set_minimal_charge_controls(disable){
+                  $('minimal_charge_value').disabled = disable;
+                  $('minimal_charge_date_year').disabled = disable;
+                  $('minimal_charge_date_month').disabled = disable;
+                }
+                //<![CDATA[
+                Event.observe(window, 'load', function() {
+                Event.observe($('user_postpaid_1'), 'click', function() {
+                Element.setStyle('credit-row', {display: 'table-row'});
+                <%if mor_11_extend?%>
+                  Element.setStyle('minimal_charge_value_row', {display: 'table-row'});
+                  Element.setStyle('minimal_charge_date_row', {display: 'table-row'});
+                <% end %>
+                });
+                Event.observe($('user_postpaid_2'), 'click', function() {
+                Element.setStyle('credit-row', {display: 'none'});
+                <%if mor_11_extend?%>
+                  Element.setStyle('minimal_charge_value_row', {display: 'none'});
+                  Element.setStyle('minimal_charge_date_row', {display: 'none'});
+                <% end %>
+                });
+
+                if($('minimal_charge_enabled').checked){
+                  set_minimal_charge_controls(false);
+                }else{
+                  set_minimal_charge_controls(true);
+                }
+                <%if mor_11_extend?%>
+                  Event.observe($('minimal_charge_enabled'), 'change', function() {
+                    if($('minimal_charge_enabled').checked){
+                      set_minimal_charge_controls(false);
+                    }else{
+                      set_minimal_charge_controls(true);
+                      $('minimal_charge_value').value = 0
+                    }
+                  });
+
+                  Event.observe($('minimal_charge_value'), 'onkeypress', isDecimal);
+                <% end %>
+                });
+                //]]>
+              </script>
+              <% if !(current_user.is_accountant? and session[:acc_user_create_opt_6].to_i != 2) %>
+                <tr>
+                  <td> <%= radio_button_tag('user[postpaid]', '1', (@user.postpaid?), {:id => "user_postpaid_1"}) %> <%= _('Postpaid') %> </td>
+                  <td> <%= radio_button_tag('user[postpaid]', '0', (@user.prepaid?), {:id => "user_postpaid_2"} ) %> <%= _('Prepaid') %> </td>
+                </tr>
+                <% if current_user.is_admin? or current_user.is_accountant? %>
+                  <tr>
+                    <td> <%= radio_button_tag('user[hidden]', '0', (@user.hidden == 0), {:id => "user_hidden_1"}) %> <%= _('Not_hidden') %> </td>
+                    <td> <%= radio_button_tag('user[hidden]', '1', (@user.hidden == 1), {:id => "user_hidden_2"} ) %> <%= _('Hidden') %> </td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <% if current_user.is_accountant? and session[:acc_user_create_opt_6].to_i == 1 %>
+                  <tr>
+                    <td> <%= @user.postpaid? ? b_check(:id => "2") : b_cross(:id => "2") %> <%= _('Postpaid') %> </td>
+                    <td> <%= @user.prepaid? ? b_check(:id => "3") : b_cross(:id => "3") %> <%= _('Prepaid') %> </td>
+                  </tr>
+                  <tr>
+                    <td> <%= @user.hidden == 0 ? b_check(:id => "4") : b_cross(:id => "4") %> <%= _('Not_hidden') %> </td>
+                    <td> <%= @user.hidden == 1 ? b_check(:id => "5") : b_cross(:id => "5") %> <%= _('Hidden') %> </td>
+                  </tr>
+                <% end %>
+              <% end %>
+              <% if !['default_user', 'new', 'create'].include?(params[:action]) and current_user.is_admin? or current_user.is_accountant? %>
+                <tr>
+                  <td> <%= _('Primary_device') %>:   </td>
+                  <td>
+                    <select name="user[primary_device_id]" id="user_primary_device_id" <%= "disabled" if @user.devices.size < 1 %> >
+                      <% for device in @user.devices %>
+                        <option value="<%= device.id %>" <%= "selected" if @user.primary_device_id == device.id %>> <%= device.device_type  + "/" + device.name %> </option>
+                      <% end %>
+                    </select>
+                  </td>
+                </tr>
+              <% end %>
+
+              <tr>
+                <td> <%= _('Allow_loss_calls') %>:   </td>
+                <td><%= check_box_tag 'allow_loss_calls', "1", (@user.allow_loss_calls == 1) %></td>
+              </tr>
+
+              <% if current_user.is_admin? or (current_user.is_accountant? and session[:acc_user_create_opt_7].to_i == 2) or current_user.is_reseller?%>
+                <tr>
+                  <td id="set_call_limit_name"><%= _('Call_limit') %>:</td>
+                  <td><%= text_field 'user', 'call_limit', "class" => "input", :size => "9", :maxlength => "10" %>  ( <%= _('Call_limit_notice') %> *)</td>
+                </tr>
+              <% else %>
+                <% if current_user.is_accountant? and session[:acc_user_create_opt_7].to_i == 1 %>
+                  <tr>
+                    <td id="set_call_limit_name"><%= _('Call_limit') %>:</td>
+                    <td><%= @user.call_limit %>  ( <%= _('Call_limit_notice') %> *)</td>
+                  </tr>
+                <% end %>
+              <% end %>
+              <% if reseller_pro_active? and ((params[:action].to_s == 'edit' and reseller_active?) or params[:action] == "create" or params[:action] == "new") and (current_user.is_admin? or current_user.is_accountant?)%>
+                <tr id ="reseller_providers">
+                  <td><%=_('Allow_to_have_own_providers') %>:</td>
+                  <td><%= check_box_tag 'own_providers', "1", (@user.own_providers == 1) %></td>
+                </tr>
+              <% end %>
+              <% if monitoring_enabled_for(current_user) %>
+                <tr id ="global_monitorings">
+                  <td><%=_('Ignore_Global_Monitorings') %>:</td>
+                  <td><%= check_box_tag 'ignore_global_monitorings', "1", (@user.ignore_global_monitorings.to_i == 1) %></td>
+                </tr>
+              <% end %>
+              <tr id ="def_currency">
+                <td><%=_('Default_currency') %>:</td>
+                <td><%= select_tag('user[currency_id]', options_for_select(Currency.get_active.collect{|t| [t.name, t.id]}, @user.try(:currency_id) ))  %></td>
+              </tr>
+              <tr>
+                <td><%= _('Time_zone') %>:</td>
+                <td><%= select_tag('user[time_zone]', options_for_select(User.get_zones, @user.try(:time_zone) ))  %></td>
+              </tr>
+              <%if admin? or reseller? and current_user.quickforwards_rules.size.to_i > 0 %>
+                <tr id ="quickforwards_rule">
+                  <td><%=_('Quickforwards_Rule') %>:</td>
+                  <td><%= select_tag('user[quickforwards_rule_id]', options_for_select(current_user.quickforwards_rules.collect{|t| [t.name, t.id]}, @user.try(:quickforwards_rule_id) ))  %></td>
+                </tr>
+              <%end%>
+              <%if monitorings_addon_active? and (params[:action] == 'edit' or params[:action] == 'update') and current_user.show_active_calls? and not @chanspy_disabled %>
+                <tr <%= tooltip(_('ChanSpy_Device'), _('ChanSpy_Device_Explanation')) %> >
+                  <td><%= _('ChanSpy_Device') %>:</td>
+                  <td><%= select_tag('user[spy_device_id]', options_for_select([[_('Not_selected'), "0"]] +  @devices.collect{|t| [nice_device(t, {:image => false}), t.id]}, @user.try(:spy_device_id) ))  %></td>
+                </tr>
+              <%end%>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" height="10"></td>
+        </tr>
+
+        <tr>
+          <td colspan="2" class="bottom_border"><b><%= _('Blocking') %></b></td>
+        </tr>
+        <tr>
+          <td colspan="2" height="10"></td>
+        </tr>
+        <tr>
+          <td valign="top" colspan="2">
+            <table class="simple">
+              <tr>
+                <td> <%= radio_button_tag('user[blocked]', '0', (@user.blocked == 0), {:id => "user_blocked_1"} ) %> <%= _('Not_blocked') %> </td>
+                <td> <%= radio_button_tag('user[blocked]', '1', (@user.blocked == 1), {:id => "user_blocked_2"} ) %> <%= _('Blocked') %> </td>
+              </tr>
+              <tr>
+                <td> <%= _('Block_at') %>:   </td>
+                <% ad = @user.block_at %>
+                <td>  <%= select_date(ad, :start_year => Date.today.year, :end_year => Date.today.year+2, :prefix => "block_at_date", :use_month_numbers => true) %></td>
+              </tr>
+
+              <tr>
+                <td> <%= _('Block_at_conditional') %>:   </td>
+                <% ad = @user.block_at_conditional %>
+                <td>
+                  <table>
+                    <tr><td>
+                        <select name="block_at_conditional" >
+                          <% for day in 1..31 %>
+                            <option value="<%= day %>" <%= "selected" if ad.to_i == day.to_i %>> <%= day %> </option>
+                          <% end %>
+                        </select></td><td><%=_('Use')%>?
+                        <%= check_box_tag 'block_conditional_use', "1", @user.block_conditional_use.to_i == 1 %></td></tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" height="10"></td>
+        </tr>
+
+        <tr>
+          <td colspan="2" class="bottom_border"><b><%= _('Warning_Balance') %></b></td>
+        </tr>
+        <tr>
+          <td colspan="2" height="10"></td>
+        </tr>
+        <script type="text/javascript">
+          //<![CDATA[
+          Event.observe(window, 'load', function() {
+          var wsw = $('warning_active');
+
+          if (!wsw.checked) {
+          $$("#warning select, #warning input").each(function(el) {
+          if (el != wsw) {
+          el.disabled = true;
+          }
+          });
+          }
+
+          Event.observe(wsw, 'click', function() {
+          $$("#warning select, #warning input").each(function(el) {
+          if (wsw.checked) {
+          if (el != wsw) {
+          el.disabled = false;
+          }
+          } else {
+          if (el != wsw) {
+          el.disabled = true;
+          }
+          }
+          });
+          });
+
+          });
+          //]]>
+        </script>
+        <tr>
+          <td valign="top" colspan="2" id="warning">
+            <table class="simple">
+              <tr>
+                <td><%= _('Active') %>: <%= check_box_tag 'warning_email_active', "1", (@user.warning_email_active.to_i == 1), :id => "warning_active" %> </td>
+              </tr>
+              <tr>
+                <td id="email_balance_name"><%=  _('Send_email_when_balance_drops_lower_then') %>:</td>
+                <td>
+                  <%if @user%>
+                    <%= text_field_tag('user[warning_email_balance]', nice_number(@user.warning_email_balance), "class" => "input", :size => "5", :maxlength => "15")%>
+                  <%else%>
+                    <%= text_field('user', 'warning_email_balance', "class" => "input", :size => "5", :maxlength => "15")%>
+                  <%end%>
+                  <%= current_user.currency.name %></td>
+
+              </tr>
+              <tr>
+                <td colspan="4"><%=radio_button_tag("user[warning_email_hour]", "-1", (@user.warning_email_hour.to_i == -1))%> <%=_('Only_once_as_balance_drops_below_set_value')%></td>
+              </tr>
+              <tr>
+                <td colspan="4"><%=radio_button_tag("user[warning_email_hour]", "0", (@user.warning_email_hour.to_i > -1))%> <%=_('Every_day_at')%> : <%=select_hour(@user.warning_email_hour.to_i == -1 ? 0 : @user.warning_email_hour.to_i, :field_name => 'user_warning_email_hour')%><%=_('hour')%></td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <%= check_box("user", "warning_balance_call", {:id => "sound_file"})%>
+                  <%= _("Play_before_every_call") %>
+                  <%= select_sound_file(@user, "warning_balance_sound_file_id") %>
+                </td>
+              </tr>
+            </table>
+            <%=hidden_field_tag('email_warning_sent_test', @user.warning_email_sent.to_i )%>
+          </td>
+        </tr>
+
+<%#KRISTINA let all resellers set params%>
+<%#unless current_user.reseller_allow_providers_tariff?%>
+        <tr>
+          <td colspan="2" height="10"></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="bottom_border"><b><%= _('Invoices') %></b></td>
+        </tr>
+        <tr>
+          <td colspan="2" height="10"></td>
+        </tr>
+        <tr>
+          <td valign="top" colspan="2">
+            <%= render :partial => 'user_invoices_form' %>
+          </td>
+        </tr>
+<%#end%>
+        <tr>
+          <td colspan="2" height="10"></td>
+        </tr>
+
+        <% if session[:usertype].to_s != "reseller"%>
+          <tr>
+            <td colspan="2" class="bottom_border"><b><%= _('Payments') %></b></td>
+          </tr>
+          <tr>
+            <td colspan="2" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="top" colspan="2">
+              <table class="simple">
+                <tr>
+                  <td> <%= _('Cyberplat') %>:</td>
+                  <td> <%= check_box_tag 'cyberplat_active', "1", @user.cyberplat_active.to_i == 1 %> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        <% end %>
+        <% if @user.usertype == "user" and !current_user.reseller_allow_providers_tariff?%>
+          <tr>
+            <td colspan="2" height="10"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="bottom_border"><b><%= _('Privacy') %></b></td>
+          </tr>
+          <tr>
+            <td colspan="2" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="top" colspan="2">
+              <table class="simple">
+                <tr>
+                  <td> <%= _('Use_Global_Privacy_Settings') %>:</td>
+                  <td> <%= check_box_tag 'privacy[global]', "1", @user.attributes["hide_destination_end"].to_i == -1, {:id => "privacy_global", :onChange => "adjust_privacy();"} %> </td>
+                </tr>
+                <tr>
+                  <td colspan=2><%= _('Hide_last_3_digits_of_Destinations_in') %>:</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><b><%= _("Yes") %>/<%= _("No") %></b></td>
+                </tr>
+                <% hide_dest = @user.hide_destination_end
+                def_hide_dest = Confline.get_value("Hide_Destination_End", @user.owner_id).to_i -%>
+                <tr>
+                  <td><b><%= _("GUI") %></b></td>
+                  <td><%= radio_button_tag("privacy[gui]", "1", checked_possition?(hide_dest, 1), {:id => "privacy_gui_1"})  %>
+                    <%= radio_button_tag("privacy[gui]", "0", !checked_possition?(hide_dest, 1), {:id => "privacy_gui_0"}) %></td>
+                </tr>
+                <tr>
+                  <td><b><%= _("CSV") %></b></td>
+                  <td><%= radio_button_tag("privacy[csv]", "2",  checked_possition?(hide_dest, 2), {:id => "privacy_csv_2"})  %>
+                    <%= radio_button_tag("privacy[csv]", "0", !checked_possition?(hide_dest, 2), {:id => "privacy_csv_0"}) %></td>
+                </tr>
+                <tr>
+                  <td><b><%= _("PDF") %></b></td>
+                  <td><%= radio_button_tag("privacy[pdf]", "4",  checked_possition?(hide_dest, 3), {:id => "privacy_pdf_4"})  %>
+                    <%= radio_button_tag("privacy[pdf]", "0", !checked_possition?(hide_dest, 3), {:id => "privacy_pdf_0"}) %></td>
+                </tr>
+              </table>
+              <script type="text/javascript">
+                function disable_values(disable){
+                ["privacy_gui_1", "privacy_gui_0", "privacy_csv_2", "privacy_csv_2", "privacy_csv_0", "privacy_pdf_4", "privacy_pdf_0"].forEach(function(field) { $(field).disabled = disable; });
+                }
+
+                function adjust_values(gui, csv, pdf){
+                [["gui",1, gui], ["csv", 2, csv], ["pdf", 4, pdf]].forEach(function(option) { if (option[2]){$("privacy_"+option[0]+"_"+option[1]).checked = true;} else {$("privacy_"+ option[0]+"_0").checked = true;}});
+                }
+
+                function adjust_privacy(){
+                var def_gui = <%=checked_possition?(def_hide_dest, 1) %>;
+                var def_csv = <%=checked_possition?(def_hide_dest, 2) %>;
+                var def_pdf = <%=checked_possition?(def_hide_dest, 3) %>;
+                var gui = <%=checked_possition?(hide_dest, 1) %>;
+                var csv = <%=checked_possition?(hide_dest, 2) %>;
+                var pdf = <%=checked_possition?(hide_dest, 3) %>;
+
+                if ($("privacy_global").checked){
+                disable_values(true);
+                adjust_values(def_gui, def_csv, def_pdf);
+                } else{
+                disable_values(false);
+                adjust_values(gui, csv, pdf);
+                }
+                }
+                adjust_privacy();
+              </script>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </td>
+    <td valign="top">
+      <table>
+        <tr>
+          <td colspan="2" class="bottom_border"><b><%= _('Details') %></b></td>
+        </tr>
+        <tr><td height="10" colspan="2"></td></tr>
+        <tr>
+          <td valign="top" colspan="2">
+
+            <table class="simple">
+              <tr>
+                <td> <%= _('first_name') %>/<%= _('Company_name') %>:   </td>
+                <td> <%= text_field 'user', 'first_name', "class" => "input"  %> </td>
+              </tr>
+              <tr>
+                <td> <%= _('last_name') %>:   </td>
+                <td> <%= text_field 'user', 'last_name', "class" => "input"  %> </td>
+              </tr>
+              <tr>
+                <td> <%= _('Company_Personal_ID') %>:   </td>
+                <td> <%= text_field 'user', 'clientid', "class" => "input"  %> </td>
+              </tr>
+              <tr>
+                <td> <%= _('Agreement_number') %>:   </td>
+                <td>  <%= text_field 'user', 'agreement_number', "class" => "input"  %></td>
+              </tr>
+              <%if params[:action].to_s != "default_user"%>
+                <tr>
+                  <td> <%= _('Agreement_date') %>:   </td>
+                  <% ad = @user.agreement_date
+                  ad= Time.now if !ad  %>
+                  <td>  <%= select_date(ad, :end_year => Date.today.year+1, :prefix => "agr_date", :use_month_numbers => true) %></td>
+                </tr>
+              <%end%>
+              <tr>
+                <td> <%= _('Language') %>:   </td>
+                <td>  <%= text_field 'user', 'language', "class" => "input"  %></td>
+              </tr>
+              <tr>
+                <td> <%= _('Country_of_Taxation') %>:   </td>
+                <td> <div class="nb">
+                    <select name="user[taxation_country]" >
+                      <% for country in @countries %>
+                        <%
+                        comp_country = @default_country_id
+                        comp_country = @user.taxation_country  if @user.taxation_country
+                      %>
+                        <option value="<%= country.id %>" <%= "selected" if  country.id == comp_country %>> <%= h(country.name[0,22]) %> </option>
+                      <% end %>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td> <%= _('VAT_Reg_number') %>:   </td>
+                <td> <%= text_field 'user', 'vat_number', "class" => "input"  %> </td>
+              </tr>
+              <tr>
+                <td> <%= _('Accounting_number') %>:   </td>
+                <td> <%= text_field 'user', 'accounting_number', "class" => "input"  %> </td>
+              </tr>
+              <tr>
+                <td height="20"></td>
+              </tr>
+              <tr>
+                <td colspan="2" class="bottom_border">
+                  <b><%= _('Taxes') %></b>
+                </td>
+              </tr>
+              <tr>
+                <td height="10"></td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <%= render :partial => 'tax_form' %>
+                </td>
+              </tr>
+              <tr>
+                <td height="20"></td>
+              </tr>
+              <tr>
+                <td colspan="2" class="bottom_border">
+                  <b><%= _('Registration_address') %></b>
+                </td>
+              </tr>
+              <tr>
+                <td height="10"></td>
+              </tr>
+              <%= render :partial => 'address_form' %>
+            </table>
+          </td>
+        </tr>
+        <% if rec_active? %>
+          <% if show_recordings? %>
+            <tr id="rc_1">
+              <td height="10" colspan="2"></td>
+            </tr>
+            <tr id="rc_2">
+              <td colspan="2" class="bottom_border"><b><%= b_record + _('Recordings') %></b></td>
+            </tr>
+            <tr id="rc_3">
+              <td height="10" colspan="2" ></td>
+            </tr>
+            <tr id="rc_4">
+              <td colspan="2">
+                <table class="simple">
+                  <tr>
+                    <td> <%= _('Allow_to_use_recording_functionality') %>:</td>
+                    <td> <%= check_box_tag 'recording_enabled', "1",(@user.recording_enabled.to_i == 1 ) %> </td>
+                  </tr>
+                  <tr>
+                    <td> <%= _('Forced_record_calls_for_this_user') %>:</td>
+                    <td> <%= check_box_tag 'recording_forced_enabled', "1",(@user.recording_forced_enabled.to_i == 1 ) %> </td>
+                  </tr>
+                  <tr>
+                    <td> <%= _('HDD_Quota') %>:   </td>
+                    <td><%= text_field_tag('user[recording_hdd_quota]', nice_number(@user.recording_hdd_quota.to_f/1048576), "class" => "input", :size => "10", :maxlength => "255", :onchange=>"count_percent(this.value);", :id => "user_recording_hdd_quota")%> <%= _('Mb')%> (<%= nice_bytes(@total_recordings_size)%><span id="recording_percent"></span> <%= _('Taken')%>)</td>
+                  </tr>
+                  <tr>
+                    <td> <%= _('Send_deleted_recordings_to_this_email') %>:   </td>
+                    <td><%= text_field('user', 'recordings_email', "class" => "input", :size => "35", :maxlength => "255")%></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
+    </td>
+  </tr>
+</table>
+<% if current_user.is_accountant? and session[:acc_user_create_opt_5].to_i != 2 %>
+  <%= hidden_field_tag('unlimited', (@user.credit_unlimited? ? "1": "0")) %>
+  <%= hidden_field_tag('credit', credit) %>
+<% end %>
+<% if rec_active? %>
+  <% if show_recordings? %>
+    <script type="text/javascript">
+      function count_percent(val) {
+      var now = <%=@total_recordings_size.to_i %> ;
+      if(val != 0){
+      $("recording_percent").innerHTML = " "+"<%=_("Or")%>"+" "+ (now/(val*1048576)*100).toFixed(<%= session[:nice_number_digits] %>) + "%";
+      }
+      else {
+      $("recording_percent").innerHTML = "";
+      }
+      }
+      count_percent(<%= @user.recording_hdd_quota.to_f/1048576 %>);
+    </script>
+  <% end %>
+<% end %>
+<% if current_user.is_admin? or current_user.is_accountant?%>
+  <script type="text/javascript">
+    function Reseller(val) {
+    if($('reseller_providers')){
+    $('reseller_providers').style.display = 'none';
+    }
+    $('reseller_type_select').style.display = 'none';
+    $('accountant_type_select').style.display = 'none';
+    if(val=='reseller'){
+    if($('reseller_providers')){
+    $('reseller_providers').style.display = '';
+    }
+    Disab('reseller');
+    }
+    if(val=='accountant'){
+    Disab('accountant');
+    }
+
+    }
+    Reseller('<%= @user.usertype %>');
+  </script>
+<%end%>

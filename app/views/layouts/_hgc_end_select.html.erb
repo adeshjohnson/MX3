@@ -1,0 +1,8 @@
+<select name="<%= select_field_tag %>" >
+  <%ar = Hangupcausecode.end_array%>
+  <% ar.each{|hgc| %>
+    <%unless hgc.blank?%>
+      <option value='<%=ar.index(hgc)%>' <%= "selected" if filed_value.to_i == ar.index(hgc) %>> <%=hgc%> </option>
+    <%end%>
+  <%}%>
+</select>

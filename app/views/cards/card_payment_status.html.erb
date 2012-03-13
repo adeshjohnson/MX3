@@ -1,0 +1,48 @@
+<b><%=_('Card_group') %></b> : <%=@cg.name%>
+<b><br><%= _('Card') %></b>:<%= @card.number %>
+<br>
+<br>
+<br>
+
+<%= form_tag :action => 'card_payment_finish', :cg => @cg.id, :id => @card do %>
+  <br>
+  <b><%= b_money + _('Amount_with_VAT') %></b>:
+  <%= nice_number @amount%> <%= @curr%>
+  <br>
+  <br>
+  <hr>
+  <br>
+  <table class='simple' width=50%>
+    <tr>
+      <td> <%= _('Current_balance') %>:</td>
+      <td id="current_balance"> <%= nice_number @card.balance%> <%= current_user.currency.name %> </td>
+    </tr>
+    <% if @curr != current_user.currency.name %>
+      <tr>
+        <td>    <%= _('Exchange_rate') %> <%= current_user.currency.name %>/<%= @curr %>:</td>
+        <td id="exchange_rate"> <%= @exchange_rate %> </td>
+      </tr>
+      <tr>
+        <td>   <%= _('Amount_with_VAT_converted_to') %> <%= current_user.currency.name %>: </td>
+        <td id="converted_amount"><%= nice_number @converted_amount %> <%= current_user.currency.name %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>   <%= _('Amount_without_VAT') %>: </td>
+      <td id="amount_without_tax"> <%= nice_number @real_amount %> <%= current_user.currency.name %></td>
+    </tr>
+    <tr>
+      <td>   <%= _('New_card_balance') %>: </td>
+      <td id="new_balance"> <%= nice_number @card.balance + @real_amount %> <%= current_user.currency.name %></td>
+    </tr>
+  </table>
+  <br>
+  <br>
+  <%= hidden_field_tag 'user', @card.id  %>
+  <%= hidden_field_tag 'amount', @amount  %>
+  <%= hidden_field_tag 'currency', @curr  %>
+  <%= hidden_field_tag 'real_amount', @real_amount  %>
+  <%= submit_tag _('Confirm'), :disable_with=>_('Processing..')%>
+<% end %>
+<br>
+<br>

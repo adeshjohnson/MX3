@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.163" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>address_email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_3']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Cannot send test email because your(admin) email address is empty</td>
+	<td>Cannot send test email because your(admin) email address is empty</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>address_email</td>
+	<td>test@kolmisoft.com</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>address_email</td>
+	<td>test@kolmisoft.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_3']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>email_sending_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_3']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>email_smtp_server</td>
+	<td>smtp.gmail.com</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>email_port</td>
+	<td>25</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>email_login</td>
+	<td>kolmitest998</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>email_password</td>
+	<td>kolmisoft9</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>email_test_link</td>
+	<td>Press to test (Test email will be sent to: test@kolmisoft.com)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_smtp_server</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_3']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='tabViewdhtmlgoodies_tabView1_3']/table/tbody/tr[8]/td[3]</td>
+	<td>Cannot send test email because main parameters are empty</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_smtp_server</td>
+	<td>smtp.gmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_3']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='tabViewdhtmlgoodies_tabView1_3']/table/tbody/tr[8]/td[3]</td>
+	<td>Cannot send test email because main parameters are empty</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_port</td>
+	<td>25</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_3']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='tabViewdhtmlgoodies_tabView1_3']/table/tbody/tr[8]/td[3]</td>
+	<td>Cannot send test email because main parameters are empty</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_login</td>
+	<td>kolmitest998</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<!--check with 7 symbols after dot-->
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=paypal_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_email</td>
+	<td>a@a.comcomh</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=notice</td>
+	<td>Wrong format of Email Address</td>
+</tr>
+<!--check with 6 symbols after dot-->
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=paypal_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_email</td>
+	<td>a@a.comcom</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+</tbody></table>
+</body>
+</html>

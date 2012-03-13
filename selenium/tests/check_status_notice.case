@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<!--There is no ID-->
+<tr>
+	<td>clickAndWait</td>
+	<td>edit_img_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_setup_fee</td>
+	<td>1555</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_daily_charge</td>
+	<td>0.1555</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>tax3_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>tax2_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>tax4_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status</td>
+	<td>Card group was successfully updated</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Check available Cards (not sold)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>0000000001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>0000000020</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status</td>
+	<td>Cards created: 20</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='delete_link_41']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status</td>
+	<td>Card was deleted</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>card_pin</td>
+	<td>743413</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>card_callerid</td>
+	<td>145646314</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>card_first_use_1i</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status</td>
+	<td>Card was successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New card group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card group was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card Group must have name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_name</td>
+	<td>ohoho</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_description</td>
+	<td>rstgzthnerdtfgh</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>tax2_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>tax3_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>tax4_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status</td>
+	<td>Card group was successfully created</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Generate new Cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>8546</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>464</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Bad number length, should be: 10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>0000000001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>0000000020</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status</td>
+	<td>Cards created: 1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Ok']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Details']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>card_pin</td>
+	<td>66381315531</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status</td>
+	<td>Card was successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<!--There is no ID-->
+<tr>
+	<td>clickAndWait</td>
+	<td>destroy_img_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status</td>
+	<td>Card group deleted</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status</td>
+	<td>Card group deleted</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card Group not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card Group must have name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_name</td>
+	<td>pakeistas</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>cardgroup_use_external_function_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_name</td>
+	<td>ssssssssss</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3_name</td>
+	<td>aaaaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4_name</td>
+	<td>fffffffffffff</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_valid_after_first_use</td>
+	<td>54</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status</td>
+	<td>Card group was successfully updated</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Check available Cards (not sold)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>card_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>card_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>card_callerid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>card_first_use_1i</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>card_daily_charge_paid_till_1i</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>card_daily_charge_paid_till_2i</td>
+	<td>label=July</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>card_first_use_2i</td>
+	<td>label=May</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status</td>
+	<td>Card was successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=2&amp;s_sold=no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Card can not be deleted</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Card Group can not be deleted</td>
+</tr>
+</tbody></table>
+</body>
+</html>

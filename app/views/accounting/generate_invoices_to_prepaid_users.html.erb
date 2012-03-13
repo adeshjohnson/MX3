@@ -1,0 +1,13 @@
+<%= _('Please_select_month_to_generate_invoices_for_prepaid_users') %>:
+
+<br><br>
+
+<div align="left" class="nb">
+ <%= form_tag :action => 'generate_invoices_status_for_prepaid_users' do %>
+     <%= select_year(Date.today, :start_year => Date.today.year-5, :end_year => Date.today.year + 1) %>
+     <%= select_month(Date.today) %>
+     <%= _('Period_start_day') %>: <%= confline("Invoice_Period_Start_Day") %>&nbsp;&nbsp;
+ 
+     &nbsp;&nbsp;<%= submit_tag _('Generate'), :disable_with=>_('Processing..')%>
+<% end %>
+</div>

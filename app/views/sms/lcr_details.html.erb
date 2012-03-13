@@ -1,0 +1,19 @@
+<b> <%= _("LCR")%> : <%= @lcr.name %></b>
+<br />
+<br />
+
+<table width="100%">
+  <tr><td width="50%" valign="top">
+      <table width="900%" class="maintable">
+        <tr>
+          <th align="left"><%= _('User') %></th>
+        </tr>
+        <% @user.each_with_index {|user, i| %>
+          <tr class="row<%= (i % 2 +1).to_s %>">
+            <td align="left"><%= link_nice_user(user) %></td>
+          </tr>
+        <% } %>
+      </table>
+    </td>
+  </tr>
+</table>

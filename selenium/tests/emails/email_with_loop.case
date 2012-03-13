@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>email_with_loop</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">email_with_loop</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_body</td>
+	<td>&lt;%= cc_purchase_details %&gt;&lt;% for a to b %&gt;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Email was not updated: wrong email variables were used in email body, please consult our wiki</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_body</td>
+	<td>&lt;%= cc_purchase_details %&gt;<br />&lt;% for a to b %&gt;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_name</td>
+	<td>aaaaaaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_subject</td>
+	<td>bbbbbbbbbbbbbbbbbbbbb</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>email[format]_plain</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Email was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_body</td>
+	<td>&lt;%= cc_purchase_details %&gt;<br />&lt;% for a to b %&gt;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_name</td>
+	<td>aaaaaaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_subject</td>
+	<td>bbbbbbbbbbbbbbbbbbbbb</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>email[format]_html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Email was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/email_with_loop</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_test_loop_mail</td>
+	<td>test_loop_mail</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

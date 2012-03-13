@@ -1,0 +1,57 @@
+
+<div align="left" class="nb">
+ <%= form_tag(:action => 'new_calls') do %>
+     <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+     <% select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+     &nbsp;&nbsp;<%= submit_tag _('Change_date'), :disable_with=>_('Processing..')%>
+<% end %>
+</div>
+
+<br>
+<div align="center">
+<table width="100%" class="maintable" %>
+  <tr>
+
+    <th align="left">        <%= _('Username') %>    </th>
+    <th align="left">        <%= _('first_name') %>    </th>
+    <th align="left">        <%= _('last_name') %>   </th>
+    <th align="right">        <%= _('New_calls') %>    </th>
+    <th></th>
+  </tr>
+
+
+<% tc = 0 %>
+<% i = 0 %>
+<% for user in @users %>
+    <% nc = user.new_calls(session_from_date).size %>
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+
+    <td> <%= user.username %>      </td>
+    <td> <%= user.first_name %>      </td>
+    <td> <%= user.last_name %>      </td>
+    <td align="right"> <%= nc %>      </td>
+
+
+    <td align="center"><%= link_to(b_view + _('List'), :action=>"last_calls_stats", :s_call_type=>'answered', :s_user=>user.id) if nc > 0 %></td>
+  </tr>
+<% tc += nc %>
+<% i += 1%>
+<% end %>
+
+  <tr>
+
+    <th align="left"> <%= _('Total') %>:      </th>
+    <th align="left"> <%= @users.size %></th>
+    <th></th>
+    <th align="right"> <%= tc %>      </th>
+    <th></th>
+
+
+  </tr>
+
+</table>
+</div>
+
+
+<br />
+

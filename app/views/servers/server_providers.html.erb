@@ -1,0 +1,66 @@
+<%= b_server + _('Server')%>  : <b><%=@server.hostname %> / <%=@server.server_ip %></b>
+<br />
+<br />
+
+<table width="100%" class="maintable">
+  <tr>
+    <th id="id_num" align="left"><%= _('ID') %></th>
+    <th id="provider" align="left"><%= _('Provider') %></th>
+    <th id="tech" align="left"><%= _('Tech') %></th>
+    <th id="channel" align="left"><%= _('Channel') %></th>
+    <th id="login" align="left"><%= _('Login') %></th>
+    <th id="password" align="left"><%= _('Password') %></th>
+    <th id="hostname_server_ip" align="left"><%= _('Hostname') + "/" + _('Server_IP') %></th>
+    <th id="tariff" align="left"><%= _('Tariff') %></th>
+    <th id="rules" align="center"><%= _('Rules') %></th>
+    <th id="calls" align="center"><%= _('Calls') %></th>
+    <th></th>
+   
+  </tr>
+
+<% i = 0 %>   
+<% for prov in @server.providers %>
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+
+    <td id="prov_id"><%= h prov.id %></td>
+    <td id="prov_ani_<%=prov.id%>"><%= b_provider_ani if prov.ani == 1%><%= link_to prov.name, :controller => "providers",:action => 'edit', :id => prov.id %></td>
+    <td id="prov_tech_<%=prov.id%>"><%= print_tech prov.tech %></td>
+    <td id="prov_channel_<%=prov.id%>"><%= h prov.channel %></td>
+    <td id="prov_login_<%=prov.id%>"><%= h prov.login %></td>
+    <td id="prov_password_<%=prov.id%>"><%= h prov.password %></td>
+    <td id="prov_server_ip_<%=prov.id%>"><%= h prov.server_ip %></td>
+    <td id="prov_tariff_<%=prov.id%>"><%= h prov.tariff.name if  prov.tariff %></td>
+    <td id="prov_rules_<%=prov.id%>" align="center"><%= link_to b_rules,  :controller => "providers", :action => 'provider_rules', :id => prov %></td>
+    <td id="prov_calls_<%=prov.id%>" align="center"><%= link_to b_call, :controller => "stats", :action => 'providers_calls', :id => prov %></td>
+   
+    
+    <td align="center"><%= link_to b_delete, {:action => 'delete', :id => prov, :sid=>@server.id}, :confirm => _('Are_you_sure'), :method => :post %></td>
+  </tr>
+  <% i += 1%>  
+<% end %>
+
+</table>
+
+<br /><br />
+
+<% if @providers.size > 0 %>
+<table width="100%">
+    <tr>
+        <%= b_provider + _('Add_provider')%>  : 
+          <br />
+        <td id="add_provider"> <%= form_tag :action => 'add_provider_to_server', :id=>@server.id do %>
+         <select name="provider_add" > 
+            <% for prov in @providers %>
+                <option value=<%= prov.id %>> <%=  prov.name%> </option>
+            <% end %>
+        </select>
+        <%= image_submit_tag 'icons/add.png', :title => _('Add'), :id =>'Add_new_id' %>
+       <% end %>
+      </td> 
+    </tr>
+</table>
+<br /><br />
+<% end %>
+
+
+<br />

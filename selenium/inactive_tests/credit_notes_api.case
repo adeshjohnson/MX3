@@ -1,0 +1,2744 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>testas</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_login_redirect_to_main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_allow_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--Grand accountant variuos permissions to create, edit, update, view credit notes-->
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>group1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>all necesary permissions</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Group was created</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>group2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Group was created</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>group3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Group was created</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>group4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Group was created</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Edit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoices_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Group was updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit_link_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoices_manage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Group was updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoices_manage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Group was updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit_link_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoices_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Group was updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<!--Verify that response to incorect has is ok-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;test=1&amp;hash=11111111111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Incorrect hash</td>
+</tr>
+<!--Verify that response to incorrect login is ok-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admi&amp;user_id=2&amp;test=1&amp;hash=c857cb96bbc8428f6c7ec80d6700859ae1de1173</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Bad login</td>
+</tr>
+<!--Verify that response if user was not found(user exists but owner is another user) is ok-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=5&amp;price=77&amp;issue_date=1300040000&amp;test=1&amp;hash=6931829e1191e97dff9a76883f4864d2336999a9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>css=error</td>
+	<td>User was not found</td>
+</tr>
+<!--Verify that response if user was not found(user does not exist) is ok-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=100&amp;price=77&amp;issue_date=1300040000&amp;test=1&amp;hash=4eebd31230e812307125a6d1e4c8aed4eccf2929</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>css=error</td>
+	<td>User was not found</td>
+</tr>
+<!--Verify that ordenery user cannot create credit notes and response is ok-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=user&amp;p=user&amp;user_id=2&amp;test=1&amp;hash=c857cb96bbc8428f6c7ec80d6700859ae1de1173</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Bad login</td>
+</tr>
+<!--Try to create few credit notes for admin's users, send commands without necesary parameters-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=admin&amp;p=admin1&amp;price=23&amp;issue_date=1300040000&amp;comment=comment1&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>User was not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=3&amp;issue_date=1300040000&amp;number=123&amp;test=1&amp;hash=722dc966fe7446eb6ad575daa956311753ce04ac</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Credit note was not created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=2&amp;price=100&amp;comment=comment2&amp;number=10&amp;test=1&amp;hash=e806b5baa15f9a08ab027094ad6eaaa0362b28b3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Credit note was not created</td>
+</tr>
+<!--Try to create few credit notes for admin's users, send commands with malformed necesary parameters-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=admin&amp;p=admin1&amp;price=23&amp;user_id=sdfasd&amp;issue_date=1330040000comment=comment1&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>User was not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=admin&amp;p=admin1&amp;price=wefh&amp;user_id=3&amp;issue_date=1350040000&amp;number=123&amp;test=1&amp;hash=722dc966fe7446eb6ad575daa956311753ce04ac</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>Credit note was created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=admin&amp;p=admin1&amp;issue_date=sadfasd&amp;user_id=2&amp;price=100&amp;comment=comment2&amp;number=10&amp;test=1&amp;hash=e806b5baa15f9a08ab027094ad6eaaa0362b28b3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Credit note was not created</td>
+</tr>
+<!--Create few credit notes for admin's users, send variuos(extra) valid parameters-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=3&amp;price=23&amp;issue_date=1350044000&amp;comment=comment1&amp;test=1&amp;hash=7843823941fca74449cbff5d042838d0122bf340</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>Credit note was created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=3&amp;price=32&amp;issue_date=1350440000&amp;number=123&amp;test=1&amp;hash=722dc966fe7446eb6ad575daa956311753ce04ac</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>Credit note was created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=2&amp;price=100&amp;issue_date=1351040000&amp;comment=comment2&amp;number=10&amp;test=1&amp;hash=e806b5baa15f9a08ab027094ad6eaaa0362b28b3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>Credit note was created</td>
+</tr>
+<!--Create few credit notes for reseller's user-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;price=77&amp;issue_date=1350140000&amp;test=1&amp;hash=6931829e1191e97dff9a76883f4864d2336999a9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>Credit note was created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;price=88&amp;issue_date=1350040900&amp;test=1&amp;hash=6931829e1191e97dff9a76883f4864d2336999a9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>Credit note was created</td>
+</tr>
+<!--Create few credit notes for admin's users, but when logged in as accountant and send only necesary params. Accountant has all permissions to create credit note-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=accountant&amp;p=accountant1&amp;user_id=2&amp;price=77&amp;issue_date=1330040000&amp;test=1&amp;hash=c857cb96bbc8428f6c7ec80d6700859ae1de1173</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>Credit note was created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=accountant&amp;p=accountant1&amp;user_id=3&amp;price=88&amp;issue_date=1340040000&amp;test=1&amp;hash=7843823941fca74449cbff5d042838d0122bf340</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>Credit note was created</td>
+</tr>
+<!--Try to create few credit notes for admin's users, but when logged in as accountant, but send only necesary params. Accountant has Incoice manage Write/Read, financial data read permissions, so he cannot create any credit notes-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=accountant&amp;p=accountant1&amp;user_id=2&amp;price=77&amp;issue_date=1330040000&amp;test=1&amp;hash=c857cb96bbc8428f6c7ec80d6700859ae1de1173</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Bad login</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=accountant&amp;p=accountant1&amp;user_id=3&amp;price=88&amp;issue_date=1340040000&amp;test=1&amp;hash=7843823941fca74449cbff5d042838d0122bf340</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Bad login</td>
+</tr>
+<!--Try to create few credit notes for admin's users, but when logged in as accountant, but send only necesary params. Accountant has Incoice manage Write/Read, financial data read permissions, so he cannot create any credit notes-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=accountant&amp;p=accountant1&amp;user_id=2&amp;price=77&amp;issue_date=1330040000&amp;test=1&amp;hash=c857cb96bbc8428f6c7ec80d6700859ae1de1173</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Bad login</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=accountant&amp;p=accountant1&amp;user_id=3&amp;price=88&amp;issue_date=1340040000&amp;test=1&amp;hash=7843823941fca74449cbff5d042838d0122bf340</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Bad login</td>
+</tr>
+<!--Try to create few credit notes for admin's users, but when logged in as accountant, but send only necesary params. Accountant has Incoice manage Write/Read, financial data read permissions, so he cannot create any credit notes-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=accountant&amp;p=accountant1&amp;user_id=2&amp;price=77&amp;issue_date=1330040000&amp;test=1&amp;hash=c857cb96bbc8428f6c7ec80d6700859ae1de1173</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Bad login</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_create?u=accountant&amp;p=accountant1&amp;user_id=3&amp;price=88&amp;issue_date=1340040000&amp;test=1&amp;hash=7843823941fca74449cbff5d042838d0122bf340</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Bad login</td>
+</tr>
+<!--List all created credit notes-->
+<!--Admin should be able to see all credit notes that were created by him self and accountant, there should be 6 unpaid credit notes. prices are 0.0, 23.0, 32.0, 10.0, 77.0, 88.0-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=admin&amp;p=admin1&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>3 Fri Oct 12 14:06:40 +0300 2012 123 0.0 0.0 3 Fri Oct 12 15:13:20 +0300 2012 comment1 23.0 23.0 3 Wed Oct 17 05:13:20 +0300 2012 123 32.0 32.0 2 Wed Oct 24 03:53:20 +0300 2012 10 comment2 100.0 100.0 2 Fri Feb 24 01:33:20 +0200 2012 77.0 77.0 3 Mon Jun 18 20:20:00 +0300 2012 88.0 88.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>23.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>32.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>77.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>88.0 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=admin&amp;p=admin1&amp;user_id=3&amp;test=1&amp;hash=7843823941fca74449cbff5d042838d0122bf340</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>23.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td> 32.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>88.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=admin&amp;p=admin1&amp;credit_note_id=4&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2 Wed Oct 24 03:53:20 +0300 2012 10 comment2 100.0 100.0</td>
+	<td></td>
+</tr>
+<!--Though admin cannot see information about other users credit notes-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=admin&amp;p=admin1&amp;user_id=5&amp;test=1&amp;hash=6931829e1191e97dff9a76883f4864d2336999a9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=credit_notes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=admin&amp;p=admin1&amp;credit_note_id=6&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=credit_notes</td>
+	<td></td>
+</tr>
+<!--Reseller should be able to see only his own users credit notes. he created 2 credit notes they prices are 77, 88-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=reseller&amp;p=reseller1&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>5 Sat Oct 13 17:53:20 +0300 2012 77.0 77.0 5 Fri Oct 12 14:21:40 +0300 2012 88.0 88.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=reseller&amp;p=reseller1&amp;credit_note_id=6&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>5 Fri Oct 12 14:21:40 +0300 2012 88.0 88.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=reseller&amp;p=reseller1&amp;credit_note_id=1&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=credit_notes</td>
+	<td></td>
+</tr>
+<!--Accountant without can see finances cannot see financial data-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Fri Oct 12 14:06:40 +0300 2012 123 3 Fri Oct 12 15:13:20 +0300 2012 comment1 3 Wed Oct 17 05:13:20 +0300 2012 123 2 Wed Oct 24 03:53:20 +0300 2012 10 comment2 2 Fri Feb 24 01:33:20 +0200 2012 3 Mon Jun 18 20:20:00 +0300 2012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=pay_date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;user_id=3&amp;test=1&amp;hash=7843823941fca74449cbff5d042838d0122bf340</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Fri Oct 12 14:06:40 +0300 2012 123 3 Fri Oct 12 15:13:20 +0300 2012 comment1 3 Wed Oct 17 05:13:20 +0300 2012 123 3 Mon Jun 18 20:20:00 +0300 2012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=pay_date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=4&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2 Wed Oct 24 03:53:20 +0300 2012 10 comment2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=pay_date</td>
+	<td></td>
+</tr>
+<!--Accountant as admin should not see information about other users credit notes-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;user_id=5&amp;test=1&amp;hash=6931829e1191e97dff9a76883f4864d2336999a9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=credit_notes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=6&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=credit_notes</td>
+	<td></td>
+</tr>
+<!--Change accountants rights-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Fri Oct 12 14:06:40 +0300 2012 123 3 Fri Oct 12 15:13:20 +0300 2012 comment1 3 Wed Oct 17 05:13:20 +0300 2012 123 2 Wed Oct 24 03:53:20 +0300 2012 10 comment2 2 Fri Feb 24 01:33:20 +0200 2012 3 Mon Jun 18 20:20:00 +0300 2012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=pay_date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;user_id=3&amp;test=1&amp;hash=7843823941fca74449cbff5d042838d0122bf340</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Fri Oct 12 14:06:40 +0300 2012 123 3 Fri Oct 12 15:13:20 +0300 2012 comment1 3 Wed Oct 17 05:13:20 +0300 2012 123 3 Mon Jun 18 20:20:00 +0300 2012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=pay_date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=4&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2 Wed Oct 24 03:53:20 +0300 2012 10 comment2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=pay_date</td>
+	<td></td>
+</tr>
+<!--Accountant as admin should not see information about other users credit notes-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;user_id=5&amp;test=1&amp;hash=6931829e1191e97dff9a76883f4864d2336999a9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=credit_notes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=6&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=credit_notes</td>
+	<td></td>
+</tr>
+<!--Change accountants rights, he should be able to see financial data-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Fri Oct 12 14:06:40 +0300 2012 123 0.0 0.0 3 Fri Oct 12 15:13:20 +0300 2012 comment1 23.0 23.0 3 Wed Oct 17 05:13:20 +0300 2012 123 32.0 32.0 2 Wed Oct 24 03:53:20 +0300 2012 10 comment2 100.0 100.0 2 Fri Feb 24 01:33:20 +0200 2012 77.0 77.0 3 Mon Jun 18 20:20:00 +0300 2012 88.0 88.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=pay_date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;user_id=3&amp;test=1&amp;hash=7843823941fca74449cbff5d042838d0122bf340</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Fri Oct 12 14:06:40 +0300 2012 123 0.0 0.0 3 Fri Oct 12 15:13:20 +0300 2012 comment1 23.0 23.0 3 Wed Oct 17 05:13:20 +0300 2012 123 32.0 32.0 3 Mon Jun 18 20:20:00 +0300 2012 88.0 88.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=pay_date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=4&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2 Wed Oct 24 03:53:20 +0300 2012 10 comment2 100.0 100.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=pay_date</td>
+	<td></td>
+</tr>
+<!--Accountant as admin should not see information about other users credit notes-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;user_id=5&amp;test=1&amp;hash=6931829e1191e97dff9a76883f4864d2336999a9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=credit_notes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=6&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=credit_notes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Fri Oct 12 14:06:40 +0300 2012 123 0.0 0.0 3 Fri Oct 12 15:13:20 +0300 2012 comment1 23.0 23.0 3 Wed Oct 17 05:13:20 +0300 2012 123 32.0 32.0 2 Wed Oct 24 03:53:20 +0300 2012 10 comment2 100.0 100.0 2 Fri Feb 24 01:33:20 +0200 2012 77.0 77.0 3 Mon Jun 18 20:20:00 +0300 2012 88.0 88.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=pay_date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;user_id=3&amp;test=1&amp;hash=7843823941fca74449cbff5d042838d0122bf340</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Fri Oct 12 14:06:40 +0300 2012 123 0.0 0.0 3 Fri Oct 12 15:13:20 +0300 2012 comment1 23.0 23.0 3 Wed Oct 17 05:13:20 +0300 2012 123 32.0 32.0 3 Mon Jun 18 20:20:00 +0300 2012 88.0 88.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=pay_date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=4&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2 Wed Oct 24 03:53:20 +0300 2012 10 comment2 100.0 100.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=pay_date</td>
+	<td></td>
+</tr>
+<!--Accountant as admin should not see information about other users credit notes-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;user_id=5&amp;test=1&amp;hash=6931829e1191e97dff9a76883f4864d2336999a9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=credit_notes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=6&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=credit_notes</td>
+	<td></td>
+</tr>
+<!--There are few posible error mesages that might raise when trying to update credit note-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=user&amp;p=user1&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--Admin should have rights to update credit note comment or set note as paid or unpaid-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin1&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Wed Oct 17 05:13:20 +0300 2012 123 32.0 32.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Wed Oct 17 05:13:20 +0300 2012 123 updated_comment 32.0 32.0</td>
+	<td></td>
+</tr>
+<!--Update credit note status. Verify that amount is added and subtracted from balance-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>32.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>32.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<!--But admin shoud not have rights to update not his own users credit notes-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=5&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<!--Accountant should not be able to update status if he does not have sufficient privileges-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Wed Oct 17 05:13:20 +0300 2012 123 updated_comment 32.0 32.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Wed Oct 17 05:13:20 +0300 2012 123 updated_comment 32.0 32.0</td>
+	<td></td>
+</tr>
+<!--Update credit note status. Verify that amount is added and subtracted from balance-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>32.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>32.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<!--Change accountants rights, he should be able to see financial data, but should not be able to edit it-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Wed Oct 17 05:13:20 +0300 2012 123 updated_comment 32.0 32.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Wed Oct 17 05:13:20 +0300 2012 123 updated_comment 32.0 32.0</td>
+	<td></td>
+</tr>
+<!--Update credit note status. Verify that amount is added and subtracted from balance-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<!--Change accountants rights, he should be able to see financial data, but should not be able to edit it-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Wed Oct 17 05:13:20 +0300 2012 123 updated_comment 32.0 32.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Wed Oct 17 05:13:20 +0300 2012 123 updated_comment 32.0 32.0</td>
+	<td></td>
+</tr>
+<!--Update credit note status. Verify that amount is added and subtracted from balance-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td> 0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<!--Change accountants rights, he should be not able to see or edit financial data-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Wed Oct 17 05:13:20 +0300 2012 123 updated_comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Wed Oct 17 05:13:20 +0300 2012 123 updated_comment</td>
+	<td></td>
+</tr>
+<!--Update credit note status. Verify that amount is added and subtracted from balance-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td> 0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<!--Change accountants rights, he should be able to see financial data, but should not be able to edit it-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Wed Oct 17 05:13:20 +0300 2012 123 updated_comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;comment=updated_comment&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_notes?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 Wed Oct 17 05:13:20 +0300 2012 123 updated_comment</td>
+	<td></td>
+</tr>
+<!--Update credit note status. Verify that amount is added and subtracted from balance-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td> 0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<!--Update resellers users credit note status. Verify that amount is added and subtracted from balance-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=reseller&amp;p=reseller1&amp;credit_note_id=5&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=reseller&amp;p=reseller1&amp;credit_note_id=5&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>77.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=reseller&amp;p=reseller1&amp;credit_note_id=5&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>77.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=reseller&amp;p=reseller1&amp;credit_note_id=5&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<!--But reseller shoud not have rights to update not his own users credit notes-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=reseller&amp;p=reseller1&amp;credit_note_id=1&amp;status=unpaid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<!--Verify that response to incorect has is ok-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=admin&amp;p=admin1&amp;test=1&amp;hash=11111111111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Incorrect hash</td>
+</tr>
+<!--Verify that response to incorrect login is ok-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=admin&amp;p=admi&amp;credit_note_id=2&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Bad login</td>
+</tr>
+<!--Verify that response if credit note was not found(credit exists but owner is another user) is ok-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=admin&amp;p=admin1&amp;credit_note_id=6&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Credit note was not found</td>
+</tr>
+<!--Verify that response if credit note was not found(note does not exist) is ok-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=admin&amp;p=admin1&amp;credit_note_id=100&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<!--Verify that ordinery user cannot delete credit notes and response is ok-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=user&amp;p=user&amp;credit_note_id=2&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Bad login</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Try to delete fithout specifieing credit note-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_delete?u=admin&amp;p=admin1&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<!--Delete admins users credit notes, verify that user balance changes only if paid credit note is deleted-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>32.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_delete?u=admin&amp;p=admin1&amp;credit_note_id=2&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>32.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_delete?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<!--Delete resellers created credit notes, verify that user balance changes only if paid credit note is deleted-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_update?u=reseller&amp;p=reseller1&amp;credit_note_id=5&amp;status=paid&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>77.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_delete?u=reseller&amp;p=reseller1&amp;credit_note_id=6&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>77.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_delete?u=reseller&amp;p=reseller1&amp;credit_note_id=5&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD </td>
+	<td></td>
+</tr>
+<!--Verify that reseller cannot delete other users credit notes-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_delete?u=reseller&amp;p=reseller1&amp;credit_note_id=8&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Credit note was not found</td>
+</tr>
+<!--Verify that response to incorect has is ok-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=accountant&amp;p=accountant1&amp;test=1&amp;hash=11111111111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Incorrect hash</td>
+</tr>
+<!--Verify that response to incorrect login is ok-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=accountant&amp;p=admi&amp;credit_note_id=2&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=error</td>
+	<td>Bad login</td>
+</tr>
+<!--Login as admin to assign group to reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Change accountants rights, he should be able to see financial data, but should not be able to edit it-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<!--Try to delete admins users credit note-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=accountant&amp;p=accountant1&amp;credit_note_id=8&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--Change accountants rights, he should be able to see financial data, but should not be able to edit it-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<!--Try to delete admins users credit note-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=accountant&amp;p=accountant1&amp;credit_note_id=7&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--Change accountants rights, he should be able to see financial data, but should not be able to edit it-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<!--Try to delete admins users credit note-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=accountant&amp;p=accountant1&amp;credit_note_id=4&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--Change accountants rights, he should be able to see financial data, but should not be able to edit it-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=group1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<!--Delete admins users credit note-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=accountant&amp;p=accountant1&amp;credit_note_id=1&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was deleted</td>
+	<td></td>
+</tr>
+<!--Verify that response if credit note was not found(note does not exist) is ok-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=accountant&amp;p=accountant1&amp;credit_note_id=100&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<!--Try to delete without specifieing credit note-->
+<tr>
+	<td>open</td>
+	<td>billing/api/credit_note_delete?u=accountant&amp;p=accountant1&amp;test=1&amp;hash=30d0f117301d1f5cfbe27045206c0c2de95e2ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

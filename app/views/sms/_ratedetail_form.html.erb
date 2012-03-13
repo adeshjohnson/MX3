@@ -1,0 +1,43 @@
+<br>
+
+<!--[form:ratedetail]-->
+
+<table class='simple' width=50%>
+<tr>
+
+<td><b><label for="ratedetail_start_time"><%= _('Start_Time') %>:</label> </b> </td>
+<!-- <% text_field 'ratedetail', 'start_time', "class" => "input", "disabled" => true    %></p> -->
+<td><%=  nice_time2 @ratedetail.start_time %> </td>
+
+</tr>
+
+<tr>
+<td> <b><label for="ratedetail_end_time"><%= _('End_Time') %>:</label></b> </td>
+<td>
+<% if @etedit %>
+    <br/><%= text_field 'ratedetail', 'end_time', "class" => "input"   %>
+<% else %>
+    <%=  nice_time2 @ratedetail.end_time %>
+<% end %>
+</td>
+</tr>
+
+<tr>
+<td><b><label for="ratedetail_rate"><%= _('Rate') %>:</label></b></td>
+<td><%= text_field 'ratedetail', 'sms_rate', "class" => "input"   %></td>
+
+</tr>
+
+<tr>
+
+
+<td><b><label for="ratedetail_connection_fee"><%= _('Connection_Fee') %>:</label></b></td>
+<td><%= text_field 'ratedetail', 'connection_fee', "class" => "input"   %></td>
+
+</tr>
+
+</table>
+<br>
+
+<!--[eoform:ratedetail]-->
+

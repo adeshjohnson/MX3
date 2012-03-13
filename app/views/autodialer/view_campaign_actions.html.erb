@@ -1,0 +1,16 @@
+<table class="maintable" width="100%">
+  <tr>
+    <th align="left">  <%= _('Priority') %>  </th>
+    <th align="center">  <%= _('Action') %>  </th>
+    <th align="right">  <%= _('Data') %>  </th>
+  </tr>
+  <% i = 0 %>
+  <% for action in @actions%>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <td align="left">  <%= action.priority %>      </td>
+      <td align="center">  <%= action.action %>      </td>
+      <td align="right">  <%= action.data %>      </td>        
+    </tr>
+    <% i += 1 %>
+  <% end %>
+</table>

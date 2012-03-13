@@ -1,0 +1,3512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>mor_12_financial_statements</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">mor_12_financial_statements</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--SQL-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<!--set api settings-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_login_redirect_to_main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_allow_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/main</td>
+	<td></td>
+</tr>
+<!--MENU-->
+<tr>
+	<td>verifyText</td>
+	<td>id=ssettings_menu50</td>
+	<td>Credit notes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=ssettings_menu51</td>
+	<td>Financial statements</td>
+</tr>
+<!--Set Eur =0.5-->
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=icon_chech_curr_upd_disable_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Currency update disabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=exchange_rate</td>
+	<td>0.5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Currency details updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=icon_cross_curr_upd_enable_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Currency update enabled</td>
+	<td></td>
+</tr>
+<!--FINANCIAL STATEMENTS-->
+<!--VERIFY FIELDS-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/financial_statements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payments include information about credit notes and invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Information&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=payment_status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=user_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=EUR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_paid</td>
+	<td>Paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_unpaid</td>
+	<td>Unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>count_1</td>
+	<td>Count</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_with_vat_1</td>
+	<td>Price with TAX (USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_1</td>
+	<td>Price (USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>count_2</td>
+	<td>Count</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_with_vat_2</td>
+	<td>Price with TAX (USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_2</td>
+	<td>Price (USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>credit_notes</td>
+	<td>Credit notes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>invoices</td>
+	<td>Invoices</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>payments</td>
+	<td>Payments</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_credit_notes_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_credit_notes_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_credit_notes_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_credit_notes_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_credit_notes_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_credit_notes_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invoices generated: 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=inv_price_2</td>
+	<td>27.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=inv_price_1</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total</td>
+	<td>454.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=inv_full_price_2</td>
+	<td>27.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=inv_full_price_1</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_wat</td>
+	<td>454.0968</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/financial_statements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=date_from_year</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=date_till_year</td>
+	<td>2013</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=date_from_month</td>
+	<td>January</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=date_from_day</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=date_till_month</td>
+	<td>December</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=date_till_day</td>
+	<td>31</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_count</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price_with_vat</td>
+	<td>454.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price</td>
+	<td>454.0968</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_count</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price_with_vat</td>
+	<td>454.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price</td>
+	<td>454.0968</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/financial_statements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_count</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price_with_vat</td>
+	<td>454.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price</td>
+	<td>454.0968</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/payments/payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>3456754123457653</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/financial_statements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=date_from_year</td>
+	<td>2009</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=date_till_year</td>
+	<td>2013</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price_with_vat</td>
+	<td>68.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price</td>
+	<td>54.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price_with_vat</td>
+	<td>79.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price</td>
+	<td>58.6800</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/1?currency=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=image_not_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=image_paid_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/financial_statements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price_with_vat</td>
+	<td>27.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price</td>
+	<td>27.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price_with_vat</td>
+	<td>68.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price</td>
+	<td>54.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price_with_vat</td>
+	<td>79.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price</td>
+	<td>58.6800</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price_with_vat</td>
+	<td>27.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price</td>
+	<td>27.0000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=Paid</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price_with_vat</td>
+	<td>68.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price</td>
+	<td>54.6800</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=unpaid_credit_notes_price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=payment_status</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=user_id</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=Paid</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price_with_vat</td>
+	<td>68.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price</td>
+	<td>54.6800</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=Unpaid</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test Accountant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>status_unpaid</td>
+	<td>Paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>unpaid_invoices_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>unpaid_invoices_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>unpaid_invoices_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user[currency_id]</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Personal details changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/financial_statements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Price with TAX (EUR)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Price (EUR)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price_with_vat</td>
+	<td>213.5484</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price</td>
+	<td>213.5484</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price_with_vat</td>
+	<td>13.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price</td>
+	<td>13.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price_with_vat</td>
+	<td>34.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price</td>
+	<td>27.3400</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price_with_vat</td>
+	<td>39.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price</td>
+	<td>29.3400</td>
+</tr>
+<!--PayPal settings-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=paypal_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_email</td>
+	<td>aistea_1310389388_biz@gmail.com</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=paypal_default_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=paypal_user_pays_transfer_fee</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=paypal_payment_confirmation</td>
+	<td>label=Required for all payments</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/paypal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please press here to pay* 10.0000 EUR</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/financial_statements</td>
+	<td></td>
+</tr>
+<!--USER-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--MENU-->
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Credit notes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=spersonal_menu7</td>
+	<td>Financial statements</td>
+</tr>
+<!--FINANCIAL STATEMENTS-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/financial_statements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payments include information about credit notes and invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Information&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=payment_status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=user_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=EUR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_paid</td>
+	<td>Paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status_unpaid</td>
+	<td>Unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>count_1</td>
+	<td>Count</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_with_vat_1</td>
+	<td>Price with TAX (USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_1</td>
+	<td>Price (USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>count_2</td>
+	<td>Count</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_with_vat_2</td>
+	<td>Price with TAX (USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_2</td>
+	<td>Price (USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>credit_notes</td>
+	<td>Credit notes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>invoices</td>
+	<td>Invoices</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>payments</td>
+	<td>Payments</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_credit_notes_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_credit_notes_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_credit_notes_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_credit_notes_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_credit_notes_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_credit_notes_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price_with_vat</td>
+	<td>68.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price</td>
+	<td>54.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price_with_vat</td>
+	<td>79.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price</td>
+	<td>58.6800</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/1?currency=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=image_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_not_paid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_2 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView2_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=prepaid_invoice_number_type_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_postpaid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoice_type_prepaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/financial_statements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price_with_vat</td>
+	<td>76.7742</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price</td>
+	<td>76.7742</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_count</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price_with_vat</td>
+	<td>227.0484</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price</td>
+	<td>227.0484</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/financial_statements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=page_title</td>
+	<td>Financial statements</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price_with_vat</td>
+	<td>153.5484</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_invoices_price</td>
+	<td>153.5484</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_invoices_price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price_with_vat</td>
+	<td>68.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paid_payments_price</td>
+	<td>54.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price_with_vat</td>
+	<td>79.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=unpaid_payments_price</td>
+	<td>58.6800</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--#hash 1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2&amp;status=unpaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
+</tr>
+<!--#hash 2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash2</td>
+</tr>
+<!--#hash 3-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=3&amp;date_till=1418428799</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash3</td>
+</tr>
+<!--#hash 4-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?date_from=1199145600&amp;date_till=1418428799</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash4</td>
+</tr>
+<!--#hash 5-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=3&amp;date_from=1199145600&amp;date_till=1418428799</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash5</td>
+</tr>
+<!--#hash 6-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash6</td>
+</tr>
+<!--#hash 7-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=5&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash7</td>
+</tr>
+<!--#hash 8-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash8</td>
+</tr>
+<!--#hash 9-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=3&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash9</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#hash 1-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?user_id=2&amp;status=unpaid&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#hash 1-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=admin&amp;p=admin1&amp;user_id=2&amp;status=unpaid&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+<!--#hash 2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=admin&amp;p=admin1&amp;user_id=5&amp;test=1&amp;hash=${hash2}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<!--#hash 3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=admin&amp;p=admin1&amp;user_id=3&amp;date_till=1418428799&amp;test=1&amp;hash=${hash3}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<!--#hash 4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=admin&amp;p=admin1&amp;date_from=1199145600&amp;date_till=1418428799&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price</td>
+	<td>54.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price_with_vat</td>
+	<td>68.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>78.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>99.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price</td>
+	<td>153.5484</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price_with_vat</td>
+	<td>153.5484</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>454.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>454.0968</td>
+</tr>
+<!--#hash 5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=admin&amp;p=admin1&amp;user_id=3&amp;date_from=1199145600&amp;date_till=1418428799&amp;test=1&amp;hash=${hash5}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>27.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>27.0000</td>
+</tr>
+<!--#hash 6-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=admin&amp;p=admin1&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>78.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>99.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>454.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>454.0968</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>paid</td>
+	<td></td>
+</tr>
+<!--#hash 7-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=admin&amp;p=admin1&amp;user_id=5&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash7}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<!--#hash 8-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=admin&amp;p=admin1&amp;user_id=2&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>58.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>79.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+<!--#hash 9-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=admin&amp;p=admin1&amp;user_id=3&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>27.0000</td>
+</tr>
+<!--#hash 4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=reseller&amp;p=reseller1&amp;date_from=1199145600&amp;date_till=1418428799&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price</td>
+	<td>53.5600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price_with_vat</td>
+	<td>69.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>63.1200</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>92.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<!--#hash 5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=reseller&amp;p=reseller1&amp;user_id=3&amp;date_from=1199145600&amp;date_till=1418428799&amp;test=1&amp;hash=${hash5}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<!--#hash 6-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=reseller&amp;p=reseller1&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>63.1200</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>92.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>paid</td>
+	<td></td>
+</tr>
+<!--#hash 7-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=reseller&amp;p=reseller1&amp;user_id=5&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash7}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>63.1200</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>92.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>0</td>
+</tr>
+<!--#hash 8-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=reseller&amp;p=reseller1&amp;user_id=2&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<!--#hash 9-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=reseller&amp;p=reseller1&amp;user_id=3&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<!--#hash 4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=accountant&amp;p=accountant1&amp;date_from=1199145600&amp;date_till=1418428799&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#hash 5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=accountant&amp;p=accountant1&amp;user_id=3&amp;date_from=1199145600&amp;date_till=1418428799&amp;test=1&amp;hash=${hash5}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#hash 6-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=accountant&amp;p=accountant1&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#hash 7-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=accountant&amp;p=accountant1&amp;user_id=5&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash7}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#hash 8-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=accountant&amp;p=accountant1&amp;user_id=2&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#hash 9-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=accountant&amp;p=accountant1&amp;user_id=3&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#hash 4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=101&amp;p=1011&amp;date_from=1199145600&amp;date_till=1418428799&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price</td>
+	<td>54.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price_with_vat</td>
+	<td>68.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>79.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price</td>
+	<td>153.5484</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price_with_vat</td>
+	<td>153.5484</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+<!--#hash 5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=101&amp;p=1011&amp;user_id=3&amp;date_from=1199145600&amp;date_till=1418428799&amp;test=1&amp;hash=${hash5}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price</td>
+	<td>54.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price_with_vat</td>
+	<td>68.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>79.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price</td>
+	<td>153.5484</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price_with_vat</td>
+	<td>153.5484</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+<!--#hash 6-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=101&amp;p=1011&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>58.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>79.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+<!--#hash 7-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=101&amp;p=1011&amp;user_id=5&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash7}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>79.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+<!--#hash 8-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=101&amp;p=1011&amp;user_id=2&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>79.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+<!--#hash 9-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=101&amp;p=1011&amp;user_id=3&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>79.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+<!--#hash 4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=user_reseller&amp;p=user_reseller1&amp;date_from=1199145600&amp;date_till=1418428799&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price</td>
+	<td>53.5600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price_with_vat</td>
+	<td>69.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>63.1200</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>92.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<!--#hash 5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=user_reseller&amp;p=user_reseller1&amp;user_id=3&amp;date_from=1199145600&amp;date_till=1418428799&amp;test=1&amp;hash=${hash5}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price</td>
+	<td>53.5600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price_with_vat</td>
+	<td>69.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>63.1200</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>92.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<!--#hash 6-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=user_reseller&amp;p=user_reseller1&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>63.1200</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>92.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<!--#hash 7-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=user_reseller&amp;p=user_reseller1&amp;user_id=5&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash7}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>63.1200</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>92.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<!--#hash 8-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=user_reseller&amp;p=user_reseller1&amp;user_id=2&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>63.1200</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>92.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<!--#hash 9-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=user_reseller&amp;p=user_reseller1&amp;user_id=3&amp;date_from=1199145600&amp;date_till=1418428799&amp;status=unpaid&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/count</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>63.1200</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>92.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; status</td>
+	<td>paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>345,6780</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=image_not_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=image_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>34,56780</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=image_not_paid</td>
+	<td></td>
+</tr>
+<!--#hash 9-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2&amp;date_from=1199145600&amp;date_till=1418428799</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash9</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#hash 1-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/financial_statements?u=admin&amp;p=admin1&amp;user_id=2&amp;date_from=1199145600&amp;date_till=1418428799&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price</td>
+	<td>744.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price_with_vat</td>
+	<td>758.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price</td>
+	<td>58.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[2]/price_with_vat</td>
+	<td>79.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;credit_notes&quot;] &gt; price</td>
+	<td>690690.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;credit_notes&quot;] &gt; price_with_vat</td>
+	<td>690690.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price</td>
+	<td>6868.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[4]/price_with_vat</td>
+	<td>6868.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price</td>
+	<td>153.5484</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;invoices&quot;] &gt; price_with_vat</td>
+	<td>153.5484</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[6]/price</td>
+	<td>427.0968</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//statement[6]/price_with_vat</td>
+	<td>427.0968</td>
+</tr>
+</tbody></table>
+</body>
+</html>

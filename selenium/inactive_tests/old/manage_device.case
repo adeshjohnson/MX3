@@ -1,0 +1,1363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>manage_device</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">manage_device</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!-----as admin-->
+<!--create sip-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--edit sip-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--deleting sip-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[4]/td[16]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--create iax-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_iax2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--update iax-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete iax-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[4]/td[16]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<!--create h323-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--update h323-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete h323-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[4]/td[16]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--create zap-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_zap</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--update zap-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete zap-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[4]/td[16]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--create virtual-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_virtual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--edit virtual-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete virtual-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[4]/td[16]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--create fax-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_fax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--update fax-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete fax-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[4]/td[16]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--#==========-->
+<!--login as reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Application_key']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Logged as: Test Reseller</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/5</td>
+	<td></td>
+</tr>
+<!--create sip-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--edit sip-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--deleting sip-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--create iax-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_iax2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--update iax-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete iax-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<!--create h323-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--update h323-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete h323-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--create zap-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_zap</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--update zap-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete zap-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--create virtual-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_virtual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--edit virtual-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete virtual-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--create fax--
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<!--čia kažkodėl nėra faxo kaip device, jo neduoda pasirinkit.-->
+<!--
+<tr>
+	<td>click</td>
+	<td>device[device_type]_fax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--update fax-->
+<!--
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete fax-->
+<!--<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--#=============-->
+<!--login as accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/groups_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Group was created</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_13_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_18_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_8_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_10_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_9_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_11_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_12_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_14_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_15_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_17_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_20_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_21_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_19_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_2_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_3_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_4_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_5_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_6_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_7_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>right_16_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Group was updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[4]/td[9]/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Logged as: Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/4</td>
+	<td></td>
+</tr>
+<!--create sip-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--edit sip-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--deleting sip-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--create iax-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_iax2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--update iax-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete iax-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<!--create h323-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--update h323-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete h323-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--create zap-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_zap</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--update zap-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete zap-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--create virtual-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_virtual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--edit virtual-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete virtual-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--create fax-->
+<!--<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>!!!</td>
+</tr>
+<!--NEGALIMA PASIRINKTI FAX-->
+<!--<tr>
+	<td>click</td>
+	<td>device[device_type]_fax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device created.</td>
+</tr>
+<!--update fax-->
+<!--<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--delete fax-->
+<!--<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device deleted.</td>
+</tr>
+<!--#==============-->
+<!--Login as user-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/login_as_execute?user=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Logged as: Test User #1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>Test Device #11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--REGISTERING NEW USER AND CHECKING WHETHER he has a default device id assigned-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=here</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>asdfff</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>asdasd</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password2</td>
+	<td>asdasd</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>first_name</td>
+	<td>asd</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>last_name</td>
+	<td>asd</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email</td>
+	<td>asd@asd.lr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>notice</td>
+	<td>Registration succesful</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt='Star']</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

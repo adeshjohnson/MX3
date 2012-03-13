@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>tar_imp_with_same_prefix_newm</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tar_imp_with_same_prefix_newm</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/same_prefix.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=prefix_id</td>
+	<td>label=Prefix</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=rate_id</td>
+	<td>label=Price</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=connection_fee_id</td>
+	<td>label=Fee</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=increment_id</td>
+	<td>label=Incr</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=min_time_id</td>
+	<td>label=Time</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=destination_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=country_code_id</td>
+	<td>label=Code</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=state_id</td>
+	<td>label=State</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=lata_id</td>
+	<td>label=LATA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tier_id</td>
+	<td>label=Class</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=ocn_id</td>
+	<td>label=OCN</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imp_prefix_3</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imp_prefix_5</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imp_prefix_12</td>
+	<td>9360</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imp_prefix_13</td>
+	<td>9360</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imp_prefix_15</td>
+	<td>3556</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imp_prefix_17</td>
+	<td>3556</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=dest_to_create</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=r_to_update</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=new_r_to_create</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Created destinations: 4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rates updated: 6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>New rates created: 6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Fix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Destinations not assigned to Destination Groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Destinations updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/same_prefix.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=prefix_id</td>
+	<td>label=Prefix</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=rate_id</td>
+	<td>label=Price</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=connection_fee_id</td>
+	<td>label=Fee</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=increment_id</td>
+	<td>label=Incr</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=min_time_id</td>
+	<td>label=Time</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=destination_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=country_code_id</td>
+	<td>label=Code</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=state_id</td>
+	<td>label=State</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=lata_id</td>
+	<td>label=LATA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tier_id</td>
+	<td>label=Class</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=ocn_id</td>
+	<td>label=OCN</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imp_prefix_3</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imp_prefix_5</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imp_prefix_12</td>
+	<td>9360</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imp_prefix_13</td>
+	<td>9360</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imp_prefix_15</td>
+	<td>3556</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=imp_prefix_17</td>
+	<td>3556</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Confirm columns']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

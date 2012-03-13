@@ -1,0 +1,116 @@
+<%= link_to b_back + _('back'), :action => 'dialplans' %>
+<br />
+<br />
+<b><%= _("Extlines_For")%> : <%= @dp.name %></b>
+<br />
+<br />
+<table class="maintable" width="100%">
+  <% i = 0 %>  
+	<% for ext in @extlines %>
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+		<td>
+			[<%= ext.context %>] exten => <%= ext.exten %>,<%= ext.priority %>,<%= ext.app %>(<%= ext.appdata %>)
+		</td>
+	</tr>
+     <% i += 1%> 	
+	<% end %>
+</table>  
+<% if @ivr1 %>
+    <br />
+    <br />
+      <b><%= _("Extlines_For_Ivr")%> : <%= @ivr1.name %></b>
+  <% for block1 in @ivr1_blocks do%>
+    <br />
+    <br />
+      &nbsp;&nbsp;<b><%= _("Extlines_For_Block")%> : <%= block1.name %></b>
+    <br /> 
+    <br />
+    <% @extlines = Extline.find(:all, :conditions => "context = 'ivr_block#{block1.id}'", :order => "exten ASC, priority ASC")%>
+    <table class="maintable" width="100%">
+    <% i = 0 %>  
+      <% for ext1 in @extlines %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td>
+          [<%= ext1.context %>] exten => <%= ext1.exten %>,<%= ext1.priority %>,<%= ext1.app %>(<%= ext1.appdata %>)
+        </td>
+      </tr>
+         <% i += 1%> 	
+      <% end %>
+    </table>
+  <% end %>
+<% end %>
+
+<% if @ivr2 %>
+    <br />
+    <br />
+      <b><%= _("Extlines_For_Ivr")%> : <%= @ivr2.name %></b>
+  <% for block2 in @ivr2_blocks do%>
+    <br />
+    <br />
+      &nbsp;&nbsp;<b><%= _("Extlines_For_Block")%> : <%= block2.name %></b>
+    <br /> 
+    <br />
+    <% @extlines = Extline.find(:all, :conditions => "context = 'ivr_block#{block2.id}'", :order => "exten ASC, priority ASC")%>
+   <table class="maintable" width="100%">
+    <% i = 0 %>  
+      <% for ext2 in @extlines %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td>
+          [<%= ext2.context %>] exten => <%= ext2.exten %>,<%= ext2.priority %>,<%= ext2.app %>(<%= ext2.appdata %>)
+        </td>
+      </tr>
+      <% i += 1%> 	
+      <% end %>
+    </table>
+  <% end %>
+<% end %>
+
+<% if @ivr3 %>
+    <br />
+    <br />
+      <b><%= _("Extlines_For_Ivr")%> : <%= @ivr3.name %></b>
+  <% for block3 in @ivr3_blocks do%>
+    <br />
+    <br />
+      &nbsp;&nbsp;<b><%= _("Extlines_For_Block")%> : <%= block3.name %></b>
+    <br /> 
+    <br />
+    <% @extlines = Extline.find(:all, :conditions => "context = 'ivr_block#{block3.id}'", :order => "exten ASC, priority ASC")%>
+   <table class="maintable" width="100%">
+    <% i = 0 %>  
+      <% for ext3 in @extlines %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td>
+          [<%= ext3.context %>] exten => <%= ext3.exten %>,<%= ext3.priority %>,<%= ext3.app %>(<%= ext3.appdata %>)
+        </td>
+      </tr>
+         <% i += 1%> 	
+      <% end %>
+    </table>
+  <% end %>
+<% end %>
+
+<% if @ivr4 %>
+    <br />
+    <br />
+      <b><%= _("Extlines_For_Ivr")%> : <%= @ivr4.name %></b>
+  <% for block4 in @ivr4_blocks do%>
+    <br />
+    <br />
+      &nbsp;&nbsp;<b><%= _("Extlines_For_Block")%> : <%= block4.name %></b>
+    <br /> 
+    <br />
+    <% @extlines = Extline.find(:all, :conditions => "context = 'ivr_block#{block4.id}'", :order => "exten ASC, priority ASC")%>
+   <table class="maintable" width="100%">
+    <% i = 0 %>  
+      <% for ext4 in @extlines %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td>
+          [<%= ext4.context %>] exten => <%= ext4.exten %>,<%= ext4.priority %>,<%= ext4.app %>(<%= ext4.appdata %>)
+        </td>
+      </tr>
+         <% i += 1%> 	
+      <% end %>
+    </table>
+  <% end %>
+<% end %>

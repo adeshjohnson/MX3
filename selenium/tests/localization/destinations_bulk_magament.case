@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix_bulk</td>
+	<td>!@#$%^&amp;</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>destination_destinationgroup_id</td>
+	<td>Not assigned</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Action was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix_bulk</td>
+	<td>12345676543</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>destination_destinationgroup_id</td>
+	<td>Not assigned</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Action was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix_bulk</td>
+	<td>asdfghnedserdsfvaer</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>destination_destinationgroup_id</td>
+	<td>Not assigned</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Action was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix_bulk</td>
+	<td>asdfghnedserdsfvaer</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>destination_destinationgroup_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>destination_destinationgroup_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//option[@value='15']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>destination_destinationgroup_id</td>
+	<td>label=Antarctica FIX</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>destination_destinationgroup_id</td>
+	<td>Antarctica FIX</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reassign']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title</td>
+	<td>Bulk management</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//p[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//p[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//p[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No destinations found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix_bulk</td>
+	<td>12345675432</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>destination_destinationgroup_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>destination_destinationgroup_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//option[@value='15']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>destination_destinationgroup_id</td>
+	<td>label=Antarctica FIX</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>destination_destinationgroup_id</td>
+	<td>Antarctica FIX</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reassign']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title</td>
+	<td>Bulk management</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//p[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//p[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//p[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No destinations found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix_bulk</td>
+	<td>!@#$#@#$%</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>destination_destinationgroup_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>destination_destinationgroup_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//option[@value='15']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>destination_destinationgroup_id</td>
+	<td>label=Antarctica FIX</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>destination_destinationgroup_id</td>
+	<td>Antarctica FIX</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reassign']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title</td>
+	<td>Bulk management</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//p[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//p[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//p[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No destinations found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title</td>
+	<td>Directions</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix_bulk</td>
+	<td>35%</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>destination_destinationgroup_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>destination_destinationgroup_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//option[@value='1']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>destination_destinationgroup_id</td>
+	<td>label=Afghanistan FIX</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reassign']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination group: Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35054 Gibraltar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>351601 Portugal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>352021 Luxembourg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3531550 Ireland</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>354649 Iceland</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3568 Malta</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3584544 Finland</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt='Back']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//input[@value='Reassign']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title</td>
+	<td>Directions</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix_bulk</td>
+	<td>355%</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>destination_destinationgroup_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>destination_destinationgroup_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//option[@value='1']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>destination_destinationgroup_id</td>
+	<td>label=Afghanistan FIX</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reassign']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination group: Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>355 Albania</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35544 Albania</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Back</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//input[@value='Reassign']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Reassign']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destinations: 12 assigned to - Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/destinations/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Albania</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>355</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35544</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

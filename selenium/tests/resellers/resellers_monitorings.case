@@ -1,0 +1,2353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>monitorings</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">monitorings</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--permissions-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<!--verify and set permissions-->
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/12?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_monitorings</td>
+	<td>Monitorings</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=disabled_monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=read_monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=write_monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=monitorings_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=monitorings_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=monitorings_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=monitorings_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<!--* global monitoring add-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ADDONS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=sreseller_menu_addons1</td>
+	<td>Monitorings</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#monitorings_link_5 &gt; img[alt=&quot;Magnifier&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#monitorings_link_5 &gt; img[alt=&quot;Magnifier&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Monitoring call price sum over past period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>//th[8]</td>
+	<td>Log</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=bellow_monitoringamount</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=above_monitoringamount</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Drops bellow</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Increases more</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=bellow_monitoringamount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>will be less than 33 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=above_monitoringamount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>will be higher than 33 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//thead/tr/th[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>If user's call price sum over specified period will be higher/less than this amount monitoring will take action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//thead/tr/th[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_sent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Monitoring created successfully. Applied to all users.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-1 td.period</td>
+	<td>30 minutes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-1 td.amount</td>
+	<td>33.0</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<!--new users-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>user_reseller2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>user</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<!--* verify that it was created for all users-->
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-1 td.period</td>
+	<td>30 minutes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-1 td.amount</td>
+	<td>33.0</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-1 td.period</td>
+	<td>30 minutes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-1 td.amount</td>
+	<td>33.0</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User not found</td>
+	<td></td>
+</tr>
+<!--* verify that personal monitoring gets deleted from single user only-->
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_link_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure that you want to remove this monitoring? It will be removed for user_reseller,user_reseller2 users.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Monitoring deleted successfully</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-2 td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-2 td.amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-2 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-2 td.email img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-2 td.period</td>
+	<td>30 minutes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-2 td.amount</td>
+	<td>33.0</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-2 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-2 td.email img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-2 td.period</td>
+	<td>30 minutes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-2 td.amount</td>
+	<td>33.0</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-2 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-2 td.email img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<!--* verify that globally deleted monitoring  will be removed for all users-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>css=#monit-1 td.period</td>
+	<td>30 minutes</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>css=#monit-1 td.amount</td>
+	<td>33.0</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>css=#monit-1 td.period</td>
+	<td>30 minutes</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>css=#monit-1 td.amount</td>
+	<td>33.0</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<!--* verify monitoring creation validations-->
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Amount must be greater than zero</td>
+	<td></td>
+</tr>
+<!--* verify that chosen values persiste on form error-->
+<tr>
+	<td>click</td>
+	<td>monitoring_period_in_past_type_days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>monitoring_period_in_past_days</td>
+	<td>label=12</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_sent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>monitoring_user_type_prepaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>monitoring_period_in_past_type_days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>monitoring_period_in_past_days</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>will_be_sent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>monitoring_user_type_prepaid</td>
+	<td></td>
+</tr>
+<!--* verify monitoring creation for different user types-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_postpaid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>prepaid_user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>prepaid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--* for prepaid-->
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>66</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>monitoring_user_type_prepaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-3 td.period</td>
+	<td>30 minutes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-3 td.amount</td>
+	<td>66.0</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-3 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-3 td.email img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-3 td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-3 td.amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-3 td.block img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-3 td.email img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<!--* for postpaid-->
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>99</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>monitoring_user_type_postpaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-4 td.period</td>
+	<td>30 minutes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-4 td.amount</td>
+	<td>99.0</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-4 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-4 td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-4 td.amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-4 td.block img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<!--* verify that we can create monitoring for single user-->
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>new_entry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>monitoring_period_in_past_type_hours</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>111</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_sent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-5 td.period</td>
+	<td>1 Hour(s)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-5 td.amount</td>
+	<td>111.0</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-5 td.email img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-5 td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-5 td.amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-5 td.block img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-5 td.email img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-5 td.period</td>
+	<td>1 Hour(s)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-5 td.amount</td>
+	<td>111.0</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-5 td.email img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<!--* verify that we cannot create montioring which is taking no action-->
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>222</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Monitoring must either be blocking or notifying or both</td>
+	<td></td>
+</tr>
+<!--* verify monitoring edit for single user-->
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>222</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Monitoring updated successfully. Applied to 1 users.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-5 td.period</td>
+	<td>1 Hour(s)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-5 td.amount</td>
+	<td>222.0</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-5 td.email img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<!--* after editing it should be applied to the same user-->
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-5 td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-5 td.amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-5 td.block img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-5 td.email img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<!--* it should stay associated with same amount of users-->
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Monitoring updated successfully. Applied to postpaid users.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-4 td.period</td>
+	<td>30 minutes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#monit-4 td.amount</td>
+	<td>123.0</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-4 td.block img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<!--* verify activation/deactivation-->
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-2 td.active img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-2 td.active img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/update/2?monitoring%5Bactive%5D=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-2 td.active img[title=&quot;cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-2 td.active img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<!--admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--* verify logging-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Monitoring created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Monitoring updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Monitoring destroyed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-3 &gt; td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-4 &gt; td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-5 &gt; td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Monitoring was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Edit monitoring</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Monitoring call price sum over past period</td>
+	<td></td>
+</tr>
+<!--* verify accountant access-->
+<!--* no permission-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!--* read permission-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>monitorings_manage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_edit_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_edit_opt_2_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_edit_opt_3_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_edit_opt_4_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_password_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=voicemail_password_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_create_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=manage_dids_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoices_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=payments_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=services_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_2_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_3_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_4_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_5_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_6_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_7_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Monitoring was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/update/3?monitoring%5Bactive%5D=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Monitoring was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<!--* write permission-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>monitorings_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Monitoring call price sum over past period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Monitoring was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/update/3?monitoring%5Bactive%5D=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Monitoring was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Monitoring created successfully. Applied to all users.</td>
+	<td></td>
+</tr>
+<!--* verify other user permissions-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!--* prevent bogus association-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_postpaid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>monitoring_user_type_prepaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Monitoring created successfully. Applied to prepaid users.</td>
+	<td></td>
+</tr>
+<!--duplicate edit-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#edit_link_7 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>monitoring_user_type_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=monitoring_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Such monitoring already exists, users were associated. Applied to all users.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>33.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Monitoring call price sum over past period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=monitoring_period_in_past_type_minutes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>222</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_sent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#edit_link_8 &gt; img[alt=&quot;Edit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>monitoring_period_in_past_type_hours</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Such monitoring already exists, users were associated. Applied to 1 users.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Edit monitoring for user: User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=prepaid_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_username</td>
+	<td>prepaid_user</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>monitoring_user_type_single</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=prepaid_user</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>This monitoring will be applied to prepaid_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>70</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=prepaid_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_username</td>
+	<td>prepaid_user</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>ignore_global_monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ignore_global_monitorings</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>ignore_global_monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>ignore_global_monitorings</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>ignore_global_monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ignore_global_monitorings</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/fake_form?path_to_action=/billing/monitorings/create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_1</td>
+	<td>monitoring_period_in_past_type_days</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_1</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_2</td>
+	<td>monitoring_period_in_past_type_hours</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_2</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_2</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_3</td>
+	<td>monitoring_period_in_past_type_minutes</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_3</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_3</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_4</td>
+	<td>monitoring[monitoring_type]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_4</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_4</td>
+	<td>bellow</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_5</td>
+	<td>monitoring[email]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_5</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_5</td>
+	<td>true</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_6</td>
+	<td>monitoring[amount]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_6</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_6</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_7</td>
+	<td>monitoring[block]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_7</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_7</td>
+	<td>true</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_8</td>
+	<td>monitoring[user_type]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_8</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_8</td>
+	<td>single</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_9</td>
+	<td>user[id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=c_9</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_9</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Failed to create monitoring</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//tr[@id='monit-6']/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-3 &gt; td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#monit-7 &gt; td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-10 &gt; td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//tr[@id='monit-6']/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//tr[@id='monit-6']/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-10 &gt; td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//tr[@id='monit-6']/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//tr[@id='monit-6']/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-3 &gt; td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-7 &gt; td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=#monit-10 &gt; td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/12?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=monitorings_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>ADDONS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Monitorings</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

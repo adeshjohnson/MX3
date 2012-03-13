@@ -1,0 +1,392 @@
+<% @exp_prov = @cheap_prov = @exp_res = @cheap_res = @max_user_arate = @max_reseller_arate = @exp_user = @cheap_user = 0
+@call_errors = false
+%>
+
+<table width="70%">
+  <tr>
+    <td>
+      <!-- USER TABLE -->
+      <%= render :partial => "/functions/call_tracing_device/user", :locals => {:user => @user, :device => @device, :daytype => @daytype}  %>
+
+      <br />
+      <br />
+      <!-- LOCALIZATION TABLE -->
+      <%= render( :partial => "/functions/call_tracing_device/localization",
+        :locals => {:location => @device.location.name, :loc_rule => @loc_rule, :loc_cut => @loc_cut, :loc_add => @loc_add, :loc_dst => @loc_dst, :direction_name => @direction_name,
+          :old_lcr => @old_lcr, :new_lcr => @new_lcr, :old_u_tariff => @old_u_tariff, :u_tariff => @u_tariff,:old_device => @old_device, :new_device => @new_device, :destination_group_name => @destination_group_name}) %>
+
+      <br />
+      <br />
+
+      <% if @old_lcr_before_partials and !@hide_lcrs_and_providers %>
+        <table width="100%" class="simple">
+
+          <tr class="row2">
+            <th align="left"><%= b_lcr + _('LCR_Partials') %></th>
+            <th align="right" width="20%"><%=  %></th>
+          </tr>
+
+          <tr class="row1">
+            <td><%= _('LCR_changed_from') %> <b><%= link_nice_lcr_if_own(@old_lcr_before_partials) %></b> <%= _('to') %>:</td>
+            <td align="right"><%= link_nice_lcr_if_own(@lcr) %> </td>
+          </tr>
+
+          <tr class="row2">
+            <td><%= _('Prefix') %>:</td>
+            <td align="right"> <%= @lcr_partials_prefix %> </td>
+          </tr>
+
+        </table>
+
+        <br />
+        <br />
+      <% end %>
+      <!-- USER TARIFF TABLE -->
+      <%= render :partial => "/functions/call_tracing_device/tariff", :locals => {:user => @user, :tariff => @u_tariff, :rates => @res_user, :destination_group => @dgroup, :user_type => "user"} %>
+
+      <% if @u_tariff.purpose == "user" and @res_user[0]%>
+        <br />
+        <!-- USER RETAIL TARIFF RATES TABLE -->
+        <%= render :partial => "/functions/call_tracing_device/user_tariff_retail", :locals => {:user => @user, :exchange_rate => @u_tariff.exchange_rate(current_user.currency.name).to_f , :rates => @res_user , :crates => @res_cuser, :user_type => "user",:reseller_rates => @res_reseller} %>
+      <% end  %>
+
+      <% if  @u_tariff.purpose == "user_wholesale" and @res_user[0]%>
+        <br />
+        <!-- RESELLER WHOLESALE TARIFF RATES TABLE -->
+        <%= render :partial => "/functions/call_tracing_device/user_tariff_wholesale", :locals => {:user => @user, :exchange_rate => @u_tariff.exchange_rate(current_user.currency.name).to_f, :rates => @res_user, :user_type => "user",:reseller_rates => @res_reseller } %>
+      <% end %>
+      <% if @exp_user > 0 and @user.allow_loss_calls == 0 %>
+        <% @call_errors = true %>
+        <br />
+        <div id="error"> <%= b_cross + _('User_makes_loss_call') %> </div>
+      <% end %>
+      <% if @res_user.empty?%>
+        <table width="100%" class="simple">
+          <tr class="row2">
+            <th align="left"><%= b_exclamation + _('CT_No_User_rates') %>     </th>
+          </tr>
+        </table>
+      <% end %>
+
+
+      <% if  @res_cuser[0]%>
+        <table width="100%" class="simple">
+
+          <tr class="row2">
+            <th align="left"><%= b_rates + _('Custom_rates') %></th>
+            <td align="right" ></td>
+          </tr>
+
+          <tr class="row1">
+            <td align="left"><%= _('Prefix') %>:</td>
+            <td align="right"  id="c_prefix"><%= @res_cuser[0]['prefix'] if @res_cuser[0]%></td>
+          </tr>
+
+          <tr class="row2">
+            <td align="left"><%= _('Destination_group') %>:</td>
+            <td align="right" id="c_dg"><%= (draw_flag_by_code(@cdgroup.flag) + " " + @cdgroup.name + " " + @cdgroup.desttype) if @cdgroup%></td>
+          </tr>
+
+        </table>
+      <% end %>
+
+      <% if @res_cuser.size > 0%>
+        <br />
+
+        <table width="100%" class="maintable">
+          <tr class="row2">
+            <th align="center" ><%= _('Time') %></th>
+            <th align="right"><%= _('From') %></th>
+            <th align="right"><%=_('Duration') %></th>
+            <th align="right"><%= _('Type') %></th>
+            <th align="right"><%= _('Round') %></th>
+            <th align="right"><%= _('Price') %>/min (<%= current_user.currency.name%>)</th>
+          </tr>
+
+          <% for r in @res_cuser%>
+            <tr class="row2">
+              <% @max_user_arate = r['acprice'].to_f if @max_user_arate < r['acprice'].to_f %>
+              <td align="center" id="time"><%= nice_time2(r['start_time']) %>-<%= nice_time2(r['end_time']) %></td>
+              <td align="right" id="acfrom"><%= r['acfrom'] %></td>
+              <td align="right" id="acdur"><%= r['acdur'] if  r['acdur'].to_i != -1 %><%= "∞" if  r['acdur'].to_i == -1 %></td>
+              <td align="right" id="actype"><%= r['actype'] %></td>
+              <td align="right" id="acround"><%= r['acround'] %></td>
+              <td align="right" id="acprice"><%= long_nice_number r['acprice'].to_f%></td>
+            </tr>
+          <% end %>
+        </table>
+
+        <table width="100%" class="simple">
+          <tr class="row2">
+            <th align="left"><%= b_check + _('CT_These_rates_will_be_used_to_calculate_call_price') %>     </th>
+          </tr>
+        </table>
+
+      <% else %>
+
+        <table width="100%" class="simple">
+          <tr class="row2">
+            <th align="left"><%= b_exclamation + _('CT_No_Custom_rates') if @u_tariff.purpose == "user" %>     </th>
+          </tr>
+        </table>
+
+      <% end %>
+
+      <% if @res_cuser.size == 0 and @res_user.size == 0%>
+        <br />
+        <div id="error"> <%= _('CT_No_rates_to_handle_this_call') %> </div>
+      <% end %>
+
+      <br />
+      <br />
+
+      <% if @reseller and !reseller? %>
+        <%
+        # Resellers best price
+        @max_reseller_arate = 0
+        # Expensive reseller prices
+        @exp_res= 0
+        # Cheap reseller prices
+        @cheap_res = 0
+      %>
+        <!-- RESELLER TABLE -->
+        <%= render :partial => "/functions/call_tracing_device/reseller", :locals => {:reseller => @reseller}  %>
+        <br />
+        <!-- RESELLER TARIFF TABLE -->
+        <%= render :partial => "/functions/call_tracing_device/tariff", :locals => {:user => @reseller, :tariff => @r_tariff, :rates => @res_reseller, :destination_group => @dgroup_reseller, :user_type => "reseller"} %>
+
+        <% if @r_tariff.purpose == "user" and @res_reseller[0]%>
+          <!-- RESELLER RETAIL TARIFF RATES TABLE -->
+          <br />
+          <%= render :partial => "/functions/call_tracing_device/reseller_tariff_retail", :locals => {:reseller => @reseller, :exchange_rate => @r_tariff.exchange_rate(current_user.currency.name).to_f, :rates => @res_reseller, :crates => @res_creseller} %>
+        <% end  %>
+
+        <% if  @r_tariff.purpose == "user_wholesale" and @res_reseller[0]%>
+          <!-- RESELLER WHOLESALE TARIFF RATES TABLE -->
+          <br />
+          <%= render :partial => "/functions/call_tracing_device/reseller_tariff_wholesale", :locals => {:reseller => @reseller, :exchange_rate => @r_tariff.exchange_rate(current_user.currency.name).to_f, :rates => @res_reseller} %>
+        <% end %>
+
+        <% if @res_reseller.empty?%>
+          <table width="100%" class="simple">
+            <tr class="row2">
+              <th align="left"><%= b_exclamation + _('CT_No_User_rates') %>     </th>
+            </tr>
+          </table>
+        <% end %>
+
+        <% if  @res_creseller[0]%>
+          <table width="100%" class="simple">
+
+            <tr class="row2">
+              <th align="left"><%= b_rates + _('Custom_rates') %></th>
+              <td align="right" ></td>
+            </tr>
+
+            <tr class="row1">
+              <td align="left"><%= _('Prefix') %>:</td>
+              <td align="right"  id="c_prefix"><%= @res_creseller[0]['prefix'] if @res_creseller[0]%></td>
+            </tr>
+
+            <tr class="row2">
+              <td align="left"><%= _('Destination_group') %>:</td>
+              <td align="right" id="c_dg"><%= (draw_flag_by_code(@cdgroup.flag) + " " + @cdgroup.name + " " + @cdgroup.desttype) if @cdgroup%></td>
+            </tr>
+
+          </table>
+        <% end %>
+
+        <% if @res_creseller.size > 0%>
+          <br />
+
+          <table width="100%" class="maintable">
+            <tr class="row2">
+              <th align="center" ><%= _('Time') %></th>
+              <th align="right"><%= _('From') %></th>
+              <th align="right"><%=_('Duration') %></th>
+              <th align="right"><%= _('Type') %></th>
+              <th align="right"><%= _('Round') %></th>
+              <th align="right"><%= _('Price') %>/min (<%= current_user.currency.name%>)</th>
+            </tr>
+
+            <% for r in @res_creseller%>
+              <tr class="row2">
+                <% @max_reseller_arate = r['acprice'].to_f if @max_user_arate < r['acprice'].to_f %>
+                <td align="center" id="time"><%= nice_time2(r['start_time']) %>-<%= nice_time2(r['end_time']) %></td>
+                <td align="right" id="acfrom"><%= r['acfrom'] %></td>
+                <td align="right" id="acdur"><%= r['acdur'] if  r['acdur'].to_i != -1 %><%= "∞" if  r['acdur'].to_i == -1 %></td>
+                <td align="right" id="actype"><%= r['actype'] %></td>
+                <td align="right" id="acround"><%= r['acround'] %></td>
+                <td align="right" id="acprice"><%= long_nice_number r['acprice'].to_f%></td>
+              </tr>
+            <% end %>
+          </table>
+
+          <table width="100%" class="simple">
+            <tr class="row2">
+              <th align="left"><%= b_check + _('CT_These_rates_will_be_used_to_calculate_call_price') %>     </th>
+            </tr>
+          </table>
+
+        <% else %>
+
+          <table width="100%" class="simple">
+            <tr class="row2">
+              <th align="left"><%= b_exclamation + _('CT_No_Custom_rates') if @r_tariff.purpose == "user" %>     </th>
+            </tr>
+          </table>
+
+        <% end %>
+
+        <% if @res_creseller.size == 0 and @res_reseller.size == 0%>
+          <br />
+          <div id="error"> <%= _('CT_No_rates_to_handle_this_call') %> </div>
+        <% end %>
+        <br />
+        <br />
+        <% if @cheap_res == 0 and @user.allow_loss_calls == 0 %>
+          <% @call_errors = true %>
+          <br />
+          <div id="error"> <%= b_cross + _('CT_Reseller_higher_rate_then_user') %> </div>
+        <% end %>
+
+        <% #We should user resellers rate to compare against admin providers. Store User rate in Resellers variable (just in case). %>
+        <% @max_user_arate = @max_reseller_arate %>
+        <% @user = @reseller %>
+      <% end %>
+
+      <% unless @hide_lcrs_and_providers %>
+        <!-- USER  TABLE -->
+        <%= render :partial => "/functions/call_tracing_device/lcr", :locals => {:user => @user, :lcr => @lcr, :not_disabled_prov => @not_disabled_prov, :res_prov_size => @res_prov.size } %>
+        <br />
+      <% end %>
+
+<%##3260 check if there are any active providers in lcr.%>
+      <%  if @not_disabled_prov == 0 %>
+        <% @call_errors = true %>
+        <% flash.now[:notice] = _('No_active_providers_found') %>
+      <% end %>
+
+      <% unless @hide_lcrs_and_providers %>
+        <table width="100%" class="maintable">
+          <tr class="row2">
+            <th align="left"><%= b_providers + _('Provider') %>/ID</th>
+
+            <th align="right"><%=_('Cut') %></th>
+            <th align="right"><%=_('Add') %></th>
+            <th align="right"><%=_('Dial_string') %></th>
+
+            <th align="right"><%=_('Conn_Fee') %></th>
+            <th align="right"><%= _('Min_time') %></th>
+            <th align="right"><%= _('Round') %></th>
+            <th align="right"><%= _('Price') %>/min (<%=  current_user.currency.name%>)</th>
+          </tr>
+        <% end %>
+        <% @res_prov.sort!{|a, b| (
+            rez = 0
+            if a['rate'] and a['prefix'] and b['rate'] and b['prefix']
+              rez = (a['rate'].to_f / a['e_rate'].to_f <=> b['rate'].to_f / b['e_rate'].to_f)
+            else
+              rez = -1 if a['rate'] and a['prefix']
+              rez = 1 if b['rate'] and b['prefix']
+            end
+            rez
+          )}  %>
+        <% @res_prov.each_with_index { |r, i|%>
+          <% unless @hide_lcrs_and_providers %>
+            <% prov = Provider.find_by_id(r['providers_id']) %>
+            <% @disabled = false %>
+            <% if prov.active?(@lcr.id) == 0 %>
+              <% @disabled = true %>
+            <% end %>
+            <% @loss  = (r['prefix'].to_s.length > 0 and @user.allow_loss_calls == 0 and (r['rate'].to_f / r['e_rate'].to_f) > @max_user_arate)%>
+            <% @exp_prov += 1 if @loss and !@disabled %>
+            <% @cheap_prov += 1 if @user.allow_loss_calls == 0 and (r['rate'].to_f / r['e_rate'].to_f) <= @max_user_arate and r['rate'] and r['prefix']%>
+            <% @disabled ? text_class="n_disabled" : text_class="n" -%>
+            <tr class=<%= "row" + i.to_s %>
+            <%  if (not r['rate'] or not r['prefix']) and !@disabled %>
+              <%=  tooltip(_('Provider'), _('CT_No_tariff_explanation')) %>
+            <% elsif (r['rate'] and r['prefix']) and @disabled %>
+              <%=  tooltip(_('Provider'), _('CT_Not_active_explanation')) %>
+            <% elsif (not r['rate'] or not r['prefix']) and @disabled%>
+              <%=  tooltip(_('Provider'), _('CT_No_tariff_not_active_explanation')) %>
+            <% end %>
+                >
+              <td align="left" id="provider_id_<%=r['providers_id']%>"  class="<%= text_class %>"><%= b_help_grey if @disabled %><%= prov ? link_nice_provider_if_own(prov) : r['prov_name'].to_s + "/" + r['providers_id'].to_s %></td>
+              <td align="right" id="cut_<%=r['providers_id']%>"  class="<%= text_class %>"><%= r['cut'] %></td>
+              <td align="right" id="add_<%=r['providers_id']%>"  class="<%= text_class %>"><%= r['add'] %></td>
+              <td align="right" id="dial_string_<%=r['providers_id']%>"  class="<%= text_class %>"><%= dial_string(prov, @loc_dst, r['cut'], r['add']) %></td>
+              <td align="right" id="cf_<%=r['providers_id']%>"  class="<%= text_class %>"><%= r['cf'] %></td>
+              <td align="right" id="min_time_<%=r['providers_id']%>"  class="<%= text_class %>"><%= r['min_time'] %></td>
+              <td align="right" id="round_<%=r['providers_id']%>"  class="<%= text_class %>"><%= r['increment_s'] %></td>
+              <td align="right" id="price_<%=r['providers_id']%>"  class="<%= text_class %>">
+                <%= long_nice_number(r['rate'].to_f / r['e_rate'].to_f) if r['rate'] and r['prefix'] %>
+                <%= b_exclamation if not r['rate'] or not r['prefix']%>
+                <%= b_cross if @loss %>
+              </td>
+            </tr>
+          <% end %>
+
+        <% } %>
+        <% unless @hide_lcrs_and_providers %>
+        </table>
+  <%#check if prov rate is higher%>
+        <% if @exp_prov > 0 and @user.allow_loss_calls == 0 %>
+          <% @call_errors = true %>
+          <br />
+          <%if @user.usertype == "reseller"%>
+            <div id="error"> <%=  b_cross + _('CT_Provider_higher_rate_then_resellers') %> </div>
+          <% else %>
+            <div id="error"> <%=  b_cross + _('CT_Provider_higher_rate_then_user') %> </div>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if @res_prov.size != @active_prov %>
+        <% unless @hide_lcrs_and_providers %>
+          <br />
+          <table width="100%" class="simple">
+            <tr class="row2">
+              <td align="left"><%= b_exclamation + _('CT_Provider_has_no_rates_explanation') %>     </td>
+            </tr>
+            <tr>
+              <td align="left"><%=  b_help_grey + _('CT_Provider_is_not_active') %>     </td>
+            </tr>
+          </table>
+        <% end %>
+
+        <% if @exp_prov > 0 and @user.allow_loss_calls == 0 %>
+          <% @call_errors = true %>
+          <br />
+          <div id="error"> <%=  b_cross + _('CT_Provider_higher_rate_then_user') %> </div>
+        <% end %>
+
+
+        <% if @active_prov == 0%>
+          <% @call_errors = true %>
+          <% unless @hide_lcrs_and_providers %>
+            <br />
+            <div id="error"> <%= _('CT_No_Providers_to_handle_this_call') %> </div>
+          <% else %>
+            <% flash.now[:notice] = _('CT_No_Providers_to_handle_this_call') %>
+          <% end %>
+        <% end %>
+
+        <% if @active_prov > 0 and @user.allow_loss_calls == 0 and @cheap_prov == 0%>
+          <% unless @hide_lcrs_and_providers %>
+            <br />
+            <div id="error"> <%= _('CT_No_@cheap_providers') %> </div>
+          <% else %>
+            <% flash.now[:notice] = _('CT_No_@cheap_providers') %>
+          <% end %>
+          <% @active_prov = 0 %>
+        <% end %>
+      <% end %>
+
+      <% if @call_errors == false and (@res_cuser.size > 0 or @res_user.size > 0) %>
+        <br />
+        <div id="status"> <%= _('CT_Call_will_go_through') %> </div>
+      <% end %>
+    </td>
+  </tr>
+</table>

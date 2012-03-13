@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<!--Login as admin and enable mor api-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--Create phonebook-->
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>phonebook1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Added</td>
+	<td></td>
+</tr>
+<!--Check if one cannot edit phonebook with incorect hash-->
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;phonebook_id=2&amp;test=1&amp;hash=invalid_ask23u23o</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--Try to edit phonebook but do not supply phonebook's id-->
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;test=1&amp;hash=e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Phonebook was not found</td>
+	<td></td>
+</tr>
+<!--Try to edit non existing phonebook-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?u=admin&amp;p=admin1&amp;phonebook_id=100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;phonebook_id=100&amp;test=1&amp;hash=4a1069b7711e1374dac5eee130a771cef40f9b98</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Phonebook was not found</td>
+	<td></td>
+</tr>
+<!--Edit admins phopnebook, but nothing has been changed so we should verify that-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;phonebook_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>bc2f114099d16656d37e45fd9e8744cb9386d462</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;phonebook_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;phonebook_id=1&amp;test=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Phonebook saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_1</td>
+	<td>phonebook1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_1</td>
+	<td>111</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=speeddial_1</td>
+	<td>111</td>
+</tr>
+<!--Edit admins phopnebook-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;phonebook_id=1&amp;name=phonebook2&amp;number=222&amp;speeddial=222&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>291c26fff79c4c652495c5b20312aede20d8bc67</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;phonebook_id=1&amp;name=phonebook2&amp;number=222&amp;speeddial=222&amp;test=1&amp;hash=291c26fff79c4c652495c5b20312aede20d8bc67</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Phonebook saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_1</td>
+	<td>phonebook2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_1</td>
+	<td>222</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=speeddial_1</td>
+	<td>222</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=4&amp;name=phonebook8&amp;number=88&amp;speeddial=88</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>68bc975f9773138b262dc5fdfcdab60d947b32cb</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?u=accountant&amp;p=accountant1&amp;phonebook_id=2&amp;name=phonebook4&amp;number=444&amp;speeddial=444</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>6b697851ea915cb6a5e94a22621300e84da8b51b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?u=reseller&amp;p=reseller1&amp;phonebook_id=3&amp;name=phonebook6&amp;number=666&amp;speeddial=666</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>fe2532c8b6b0a04fa8610bb666614a821f269b85</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=4&amp;name=phonebook8&amp;number=dfg&amp;speeddial=dfg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>623e667d1e54a8023f11ff8349e6e258df880116</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=4&amp;number=33d4&amp;speeddial=9.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>639e09da3b9c31fc9d682c392f17b7cf6c9d6cb9</td>
+	<td></td>
+</tr>
+<!--Login as accountant and create phonebook-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>phonebook3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>333</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>333</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Added</td>
+</tr>
+<!--Verify that accountant cannot edit admins phonebook-->
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=accountant&amp;p=accountant1&amp;phonebook_id=1&amp;test=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<!--Edit accountant's phonebook-->
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=accountant&amp;p=accountant1&amp;phonebook_id=2&amp;name=phonebook4&amp;number=444&amp;speeddial=444&amp;test=1&amp;hash=6b697851ea915cb6a5e94a22621300e84da8b51b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Phonebook saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_2</td>
+	<td>phonebook4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_2</td>
+	<td>444</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=speeddial_2</td>
+	<td>444</td>
+</tr>
+<!--Login as reseller and create phonebook-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>phonebook5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>555</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>555</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Added</td>
+</tr>
+<!--Verify that reseller cannot edit admin's or accountant's phonebooks-->
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=reseller&amp;p=reseller1&amp;phonebook_id=1&amp;test=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=reseller&amp;p=reseller1&amp;phonebook_id=2&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<!--Edit reseller's phonebook-->
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=reseller&amp;p=reseller1&amp;phonebook_id=3&amp;name=phonebook6&amp;number=666&amp;speeddial=666&amp;test=1&amp;hash=fe2532c8b6b0a04fa8610bb666614a821f269b85</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Phonebook saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_3</td>
+	<td>phonebook6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_3</td>
+	<td>666</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=speeddial_3</td>
+	<td>666</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<!---->
+<!--Login as reseller's user and create phonebook-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_name</td>
+	<td>phonebook7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_number</td>
+	<td>777</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phonebook_speeddial</td>
+	<td>777</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_phonebook</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Added</td>
+</tr>
+<!--Verify that reseller's user cannot edit admin's, resellers or accountant's phonebooks-->
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=1&amp;test=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=2&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=3&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<!--Edit reseller user's phonebook-->
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=4&amp;name=phonebook8&amp;number=88&amp;speeddial=88&amp;test=1&amp;hash=68bc975f9773138b262dc5fdfcdab60d947b32cb</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Phonebook saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_4</td>
+	<td>phonebook8</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number_4</td>
+	<td>88</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=speeddial_4</td>
+	<td>88</td>
+</tr>
+<!--Try to set speed dial and number to not numeri values-->
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=4&amp;name=phonebook8&amp;number=dfg&amp;speeddial=dfg&amp;test=1&amp;hash=623e667d1e54a8023f11ff8349e6e258df880116</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Phonebook was not saved SpeedDial must be numeric Phonebook number must be numeric</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=4&amp;number=33d4&amp;speeddial=9.0&amp;test=1&amp;hash=639e09da3b9c31fc9d682c392f17b7cf6c9d6cb9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Phonebook was not saved SpeedDial must be numeric Phonebook number must be numeric</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

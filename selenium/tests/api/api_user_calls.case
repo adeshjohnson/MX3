@@ -1,0 +1,1993 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_10']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>api_secret_key</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--#hash1 user_id=not_found-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?s_user=121&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
+</tr>
+<!--#hash2 user_id=not_found-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?s_user=-121&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash2</td>
+</tr>
+<!--#hash3 user_id=not_found-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?s_user=AEygh&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash3</td>
+</tr>
+<!--#hash 4 just period_start-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=2&amp;period_start=1204883298&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash4</td>
+</tr>
+<!--#hash 5 in some period and user_not found-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=121&amp;period_start=1204883298&amp;period_end=1331113561&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash5</td>
+</tr>
+<!--#hash 6 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash6</td>
+</tr>
+<!--#hash 7 api for 101 find one day calls-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=2&amp;period_start=1321228800&amp;period_end=1321315199&amp;s_call_type=all&amp;s_device=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash7</td>
+</tr>
+<!--#hash 8 without user_id find one day calls-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?period_start=1320364800&amp;period_end=132045119&amp;s_call_type=all&amp;s_device=4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash8</td>
+</tr>
+<!--#hash 9 api for reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash9</td>
+</tr>
+<!--#hash 10 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash10</td>
+</tr>
+<!--#hash 11 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash11</td>
+</tr>
+<!--#hash 12 api for accountant-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=busy&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash12</td>
+</tr>
+<!--#hash 13 api for accountant-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash13</td>
+</tr>
+<!--#hash 14 full api for admin-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash14</td>
+</tr>
+<!--sql-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/various_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/calls_fix_delta</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#hash1 user_id=not_found-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_calls?s_user=121&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<!--#hash1 user_id=not_found-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=121&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--#hash2 user_id=not_found-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=-121&amp;test=1&amp;hash=${hash2}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--#hash3 user_id=not_found-->
+<!--2. Jei user_id nurodomas raidės- tada gražinami duomenys kad paieška buvo vygdoma user_id=0 ir nieko nerasta - turėtų mesti pranešimą kad user not found ar pan-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=AEygh&amp;test=1&amp;hash=${hash3}</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>waitForTextPresent</td> 	<td>User was not found</td> 	<td></td> </tr>-->
+<!--#hash 4 just period_start-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1204883298&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=period_start</td>
+	<td>2008-03-07 11:48:18</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=calldate2</td>
+	<td>2009-01-01 00:00:02</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<!--#hash 5 in some period and user_not found-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=121&amp;period_start=1204883298&amp;period_end=1331113561&amp;test=1&amp;hash=${hash5}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--#hash 6 full api for 101-->
+<!--1. Kai išvardinti visi punktai paieškos ir nenurodita username ir password, api metodas numeta į login puslapį - galėtu kaip ir su hash 1 mesti dont be so smart ar kažką tokio-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<!--#hash 6 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<!--#hash 6 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=period_start</td>
+	<td>2008-03-07 11:48:18</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=period_end</td>
+	<td>2012-03-07 11:46:01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_direction</td>
+	<td>outgoing</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=calldate2</td>
+	<td>2009-01-02 00:00:02</td>
+</tr>
+<!--#hash 7 api for 101 find one day calls-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1321228800&amp;period_end=1321315199&amp;s_call_type=all&amp;s_device=2&amp;test=1&amp;hash=${hash7}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_direction</td>
+	<td>outgoing</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=calldate2</td>
+	<td>2011-11-14 16:00:01</td>
+</tr>
+<!--#hash 8 without user_id find one day calls-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;period_start=1320364800&amp;period_end=132045119&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<!--2. Jei user_id nurodomas neegzistuojantis arba visai nenurodytas - tada gražinami duomenys kad paieška buvo vygdoma user_id=0 ir nieko nerasta - turėtų mesti pranešimą kad user not found ar pan-->
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_direction</td>
+	<td>outgoing</td>
+</tr>
+<!--#hash 9 api for reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=period_start</td>
+	<td>2011-11-02 01:59:59</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=period_end</td>
+	<td>2011-12-01 01:59:59</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<!--#hash 10 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>324a</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_direction</td>
+	<td>outgoing</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<!--#hash 11 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1&amp;hash=${hash11}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_direction</td>
+	<td>outgoing</td>
+</tr>
+<!--#hash 12 api for accountant-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=busy&amp;test=1&amp;hash=${hash12}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>busy</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_direction</td>
+	<td>outgoing</td>
+</tr>
+<!--#hash 13 api for accountant-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>answered</td>
+</tr>
+<!--#hash 14 full api for admin-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<!--#hash 6 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--#hash 9 api for reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<!--#hash 10 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>324a</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<!--#hash 11 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1&amp;hash=${hash11}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_direction</td>
+	<td>outgoing</td>
+</tr>
+<!--#hash 13 api for accountant-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--#hash 14 full api for admin-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--#hash 6 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=101&amp;p=1011&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=period_start</td>
+	<td>2008-03-07 11:48:18</td>
+</tr>
+<!--#hash 9 api for reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=101&amp;p=1011&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=userid</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>USD</td>
+</tr>
+<!--#hash 10 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=101&amp;p=1011&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=userid</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>16</td>
+</tr>
+<!--#hash 13 api for accountant-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=101&amp;p=1011&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=userid</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>13</td>
+</tr>
+<!--#hash 14 full api for admin-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=101&amp;p=1011&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<!--#hash 6 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>user_reseller</td>
+</tr>
+<!--#hash 9 api for reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=userid</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>11</td>
+</tr>
+<!--#hash 10 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>USD</td>
+</tr>
+<!--#hash 11 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1&amp;hash=${hash11}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>USD</td>
+</tr>
+<!--#hash 13 api for accountant-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=userid</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>7</td>
+</tr>
+<!--#hash 14 full api for admin-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>18</td>
+</tr>
+<!--#hash 6 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=accountant&amp;p=accountant1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=userid</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>4</td>
+</tr>
+<!--#hash 9 api for reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=accountant&amp;p=accountant1&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=userid</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>0</td>
+</tr>
+<!--#hash 10 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=accountant&amp;p=accountant1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=userid</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>11</td>
+</tr>
+<!--#hash 13 api for accountant-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=accountant&amp;p=accountant1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>answered</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>USD</td>
+</tr>
+<!--#hash 14 full api for admin-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=accountant&amp;p=accountant1&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>23</td>
+</tr>
+<!--NUO MOR 9-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--#hash 15 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=5&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=7&amp;s_provider=11&amp;s_did=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash15</td>
+</tr>
+<!--#hash 16 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash16</td>
+</tr>
+<!--#hash 17 api for accountant-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;s_hgc=15&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash17</td>
+</tr>
+<!--#hash 18 full api for admin-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;s_destination=3706&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash18</td>
+</tr>
+<!--#hash 19 api for reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=2&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;order_by=time&amp;order_desc=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash19</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--3. Nenurodyta kad paieška vyksta ir pagal tokius laukus kaip s_provider, s_hgc, s_did, s_destination... be to nors direction nuo mor 9 nebefunkcionuoja paieškoje, jį vistiek rodo-->
+<!--#hash 15 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=5&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=7&amp;s_provider=11&amp;s_did=0&amp;test=1&amp;hash=${hash15}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>7</td>
+</tr>
+<!--#hash 16 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1&amp;hash=${hash16}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<!--#hash 17 api for accountant-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;s_hgc=15&amp;test=1&amp;hash=${hash17}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>answered</td>
+</tr>
+<!--#hash 18 full api for admin-->
+<!--4. Kažkodėl nuo mor10 vykdant paiešką pagal destination(prefix) netsižvelgia į tai kas nustayta-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;s_destination=3706&amp;test=1&amp;hash=${hash18}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<!--#hash 19 api for reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;order_by=time&amp;order_desc=1&amp;test=1&amp;hash=${hash19}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=calldate2</td>
+	<td>2011-11-23 09:00:01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//call[2]/calldate2</td>
+	<td>2011-11-17 12:00:01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//call[3]/calldate2</td>
+	<td>2011-11-16 15:00:01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//call[8]/calldate2</td>
+	<td>2011-11-11 17:00:01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//call[16]/calldate2</td>
+	<td>2011-11-08 11:00:01</td>
+</tr>
+<!--NUO MOR10-->
+<!--RSPRO-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<!--#hash 20 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_provider=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash20</td>
+</tr>
+<!--#hash 21 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;s_provider=12&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash21</td>
+</tr>
+<!--#hash 22 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_provider=1&amp;only_did=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash22</td>
+</tr>
+<!--#hash 23 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;only_did=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash23</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_various_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#hash 20 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_provider=1&amp;test=1&amp;hash=${hash20}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--#hash 21 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;s_provider=12&amp;test=1&amp;hash=${hash21}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=userid</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_user</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_device</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>RSPRO_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>common_use_provider</td>
+	<td></td>
+</tr>
+<!--#hash 22 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_provider=1&amp;only_did=1&amp;test=1&amp;hash=${hash22}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--#hash 23 api for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;only_did=1&amp;test=1&amp;hash=${hash23}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>9</td>
+</tr>
+<!--#hash 22 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_provider=1&amp;only_did=1&amp;test=1&amp;hash=${hash22}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=total_calls</td>
+	<td>4</td>
+</tr>
+</tbody></table>
+</body>
+</html>

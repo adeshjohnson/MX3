@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>tariff_rates_list</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tariff_rates_list</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/login/hfttv7bcqt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#rates_1 &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/1?st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=destination_236</td>
+	<td>Uganda</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=prefix_236</td>
+	<td>256</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=subcode_236</td>
+	<td>FIX</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=city_236</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=state_236</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=lata_236</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tier_236</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=ocn_236</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_236</td>
+	<td>Uganda proper</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=details_img_236</td>
+	<td>Details</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=details_img_236</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=connection_fee_236</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=start_time_236</td>
+	<td>00:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=end_time_236</td>
+	<td>23:59:59</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>ratedetail_edit_236</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/236</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/2?st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=details_img_488</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Edit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/488</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Tariff for Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/2?st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Direction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>NPANXX/Prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Subcode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Uganda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>256</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>FIX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#details_img_491 &gt; img[alt=&quot;Details&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start Time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:00:00:00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_491</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/2?st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//th[2]</td>
+	<td>NPANXX/Prefix</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//th[3]</td>
+	<td>Subcode</td>
+</tr>
+</tbody></table>
+</body>
+</html>

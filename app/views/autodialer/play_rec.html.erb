@@ -1,0 +1,8 @@
+<div class="nb"><%= b_play + _('Playing') %>: <%= @filename2.to_s+".wav" %></div>
+
+<br><br>
+
+<div class="nb"><%= link_to b_download + _('Download'), @Adaction_Folder+@filename2.to_s+".wav" %></div>
+
+
+<EMBED SRC=<%= @Adaction_Folder + @filename2.to_s %>.wav WIDTH=1 HEIGHT=1 HIDDEN="true" AUTOSTART="true" LOOP="false"></EMBED>

@@ -1,0 +1,96 @@
+<br />
+<%= form_tag(:action => 'reconfigure_globals', :type => "devices") do %>
+  <%= submit_tag _('change_all_phone_extlines') , :disable_with=>_('Processing..')%>
+<% end  %>
+
+<!--
+<%= form_tag(:action => 'reconfigure_globals', :type => "outgoing_extensions") do %>
+  <%= submit_tag _('change_extlines_for_calling_out') , :disable_with=>_('Processing..')%>
+<% end %>
+-->
+
+<br />
+<br />
+
+<%= link_to b_cog + _('Permissions'), :controller => "functions", :action => "permissions" %><br />
+
+<br />
+<%= form_tag(:controller => "functions", :action => "get_not_translated") do %>
+  <select name="language">
+    <% for item in Translation.find(:all, :order => 'position ASC') %>
+      <option value="<%= item.short_name %>" <%= "selected" if item.short_name == "en" %>> <%= item.name %> </option>
+
+    <% end %>
+  </select>
+  <br />
+  <%= submit_tag _('Translations') , :disable_with=>_('Processing..')%>
+<% end %>
+
+<!--
+<br /><br />
+<%= form_tag(:action => 'exchange_user_to_reseller_calls_table_values') do %>
+  <%= submit_tag _('Exchange_user_to_reseller_calls_table_values'), :confirm => _("Are you sure?"), :disable_with=>_('Processing..')%>
+<% end  %>
+-->
+<br />
+<br />
+<%= _("Convert_paypal_payments")  %><br />
+<br />
+<%= form_tag(:controller => "payments", :action => 'fix_paypal_payments') do %>
+  <%= _('From') %>: <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+  &nbsp;&nbsp;<%= _('to') %>: <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+  <br />
+  <%= submit_tag(_('Fix_paypal'), :confirm => _("Are you sure?"), :disable_with=>_('Processing..'))  %>
+<% end %>
+<br />
+This converts old paypal paymens this way:<br />
+1. if gross > 0 (newer payments)<br />
+&nbsp;&nbsp;a. payment.amount = payment.gross - payment.tax  <br />
+2. if gross == 0 (very old payments)<br />
+&nbsp;&nbsp;a. payment.amount = payment.gross.to_f<br />
+&nbsp;&nbsp;b. payment.gross = payment.amount.to_f - payment.tax.to_f
+
+<br />
+<br />
+<%= form_tag(:controller => "callc", :action => "global_settings_save") do %>
+  <b><%= _('Mysql_On_Remote_Server')%>:</b><%= check_box_tag 'load_csv_from_remote_mysql', "1", Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1 %>
+  <br />
+  <%= submit_tag(_('Update'), :disable_with=>_('Processing..'))  %>
+<% end %>
+<br />
+<br />
+<%= form_tag(:controller => :callc, :action => :global_change_timeout) do %>
+  <table>
+    <tr>
+      <td>TIMEOUT(response)</td>
+      <td> <%= text_field_tag("timeout_response", @timeout_response.to_i) %></td>
+    </tr>
+    <tr>
+      <td>TIMEOUT(digit)</td>
+      <td> <%= text_field_tag("timeout_digit", @timeout_digit.to_i) %></td>
+    </tr>
+  </table>
+  <%= submit_tag(_('Update'), :disable_with=>_('Processing..'))  %>
+<% end %>
+
+<br />
+<br />
+<%= form_tag(:controller => :callc, :action => :global_change_fax_path_setup) do %>
+  <b><%= _('Fax_path')%>:</b><%= text_field_tag("fax2email_folder", Confline.get_value('Fax2Email_Folder').to_s,  :size => "30", :maxlength => "50") %>
+  <br />
+  <%= submit_tag(_('Update'), :disable_with=>_('Processing..'))  %>
+<% end %>
+<br />
+<br />
+<%= form_tag(:controller => :callc, :action => :global_change_confline) do %>
+  <b><%= _('Heartbeat IP')%>:</b><%= text_field_tag("heartbeat_ip", Confline.get_value('Heartbeat_IP').to_s,  :size => "30", :maxlength => "50") %>
+  <br />
+  <%= submit_tag(_('Update'), :disable_with=>_('Processing..'))  %>
+<% end %>
+
+
+<br />
+<br />
+<%= form_tag(:action => :global_set_tz) do %>
+  <%= submit_tag _('Change_Time_zone_to_default_system'), :confirm => _("Are you sure?") , :disable_with=>_('Processing..')%>
+<% end  %>

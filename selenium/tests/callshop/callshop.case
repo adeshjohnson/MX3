@@ -1,0 +1,1648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>callshop</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">callshop</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/callshop/test_callshop</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/callshop/callshop_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<!--* create callshop-->
+<tr>
+	<td>open</td>
+	<td>/billing/groups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>group_name</td>
+	<td>callshop</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call Shop was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/members/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>new_member</td>
+	<td>label=cs_manager - Callshop manager #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Make this user a manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call booth was successfully added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>new_member</td>
+	<td>label=cs_user1 - Callshop user 1 #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call booth was successfully added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>new_member</td>
+	<td>label=cs_user2 - Callshop user 2 #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call booth was successfully added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>new_member</td>
+	<td>label=cs_user3 - Callshop user 3 #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call booth was successfully added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--* verify access to non existent callshop-->
+<tr>
+	<td>open</td>
+	<td>/billing/callshop/show/99</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call Shop was not found or there are no phone booths assigned. Please add more phone booths.</td>
+	<td></td>
+</tr>
+<!--* verify access without authentication-->
+<tr>
+	<td>open</td>
+	<td>/billing/callshop/show/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to manage this Call Shop</td>
+	<td></td>
+</tr>
+<!--* verify access with regular callshop user-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>cs_user1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>cs_user11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callshop/show/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to manage this Call Shop</td>
+	<td></td>
+</tr>
+<!--* verify access with regular callshop user-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>cs_manager</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>cs_manager</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Manager view</td>
+	<td></td>
+</tr>
+<!--* import calls-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/callshop/callshop_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/437</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ratedetail_rate</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>cs_manager</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>cs_manager</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//tr[@id='booth-7']/td[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tr[@id='booth-7']/td[6]</td>
+	<td>Philippines</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>63727007889</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>komentaras</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>//tr[@id='booth-7']/td[5]</td>
+	<td>2.0</td>
+</tr>
+<!--* cancel functionality-->
+<tr>
+	<td>click</td>
+	<td>link=End</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//tr[@id='booth-7']/td[10]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[@id='booth-7']/td[10]/div/div/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//tr[@id='booth-7']/td[10]/div/div</td>
+	<td></td>
+</tr>
+<!--* reserve booth-->
+<tr>
+	<td>click</td>
+	<td>css=#booth-8 a.start-session</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>invoice_invoice_type_prepaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_balance</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_comment</td>
+	<td>test comment</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>komentaras</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>test comment</td>
+	<td></td>
+</tr>
+<!--* release reserved booth-->
+<tr>
+	<td>click</td>
+	<td>css=#booth-8 a.end-session</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Money to return 5.00 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='End Session']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.question</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=End</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#booth-7 a.end-session</td>
+	<td></td>
+</tr>
+<!--* release occupied booth-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>calls_made</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>money_return</td>
+	<td>10.00 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>call_price</td>
+	<td>10.00 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>money_balance</td>
+	<td>0.00 USD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_comment</td>
+	<td>komentaras updated</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='End Session and Generate Invoice']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.question</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tr[@id='booth-7']/td[9]</td>
+	<td>komentaras</td>
+</tr>
+<tr>
+	<td>waitForNotText</td>
+	<td>//tr[@id='booth-7']/td[9]</td>
+	<td>komentaras</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>css=td.status &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Free booths: 3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=span.occupied</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=tr.reserved</td>
+	<td></td>
+</tr>
+<!--* reserve and release partly paid postpaid booth-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Reseller_permission</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>calling_cards_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>call_shop_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>sms_addon_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>payment_gateways_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/callshop/callshop_calls_postpaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>cs_manager</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>cs_manager</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>postpaid komentaras</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#booth-7 a.end-session</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.question</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>partial_payment_received</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>pending_payment</td>
+	<td>80</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='End Session and Generate Invoice']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.question</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tr[@id='booth-7']/td[9]</td>
+	<td>postpaid komentaras</td>
+</tr>
+<tr>
+	<td>waitForNotText</td>
+	<td>//tr[@id='booth-7']/td[9]</td>
+	<td>postpaid komentaras</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=tr.occupied</td>
+	<td></td>
+</tr>
+<!--* reserve and release fully paid postpaid booth-->
+<tr>
+	<td>click</td>
+	<td>css=#booth-8 a.start-session</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>invoice_invoice_type_postpaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_invoice_type_postpaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_comment</td>
+	<td>postpaid fully paid</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>invoice_comment</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>postpaid fully paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#booth-8 a.end-session</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_comment</td>
+	<td>postpaid fully paid updated</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='End Session']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.question</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tr[@id='booth-8']/td[9]</td>
+	<td>postpaid fully paid</td>
+</tr>
+<tr>
+	<td>waitForNotText</td>
+	<td>//tr[@id='booth-8']/td[9]</td>
+	<td>postpaid fully paid</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=tr.reserved</td>
+	<td></td>
+</tr>
+<!--* verify invoice view-->
+<tr>
+	<td>open</td>
+	<td>/billing/callshop/invoices/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#10 td.status</td>
+	<td>Partly paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#10 td.user_type</td>
+	<td>postpaid</td>
+</tr>
+<!--* update partly paid invoice-->
+<tr>
+	<td>click</td>
+	<td>css=#10 a.edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>full_payment_received</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Update invoice']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callshop/invoices/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#10 td.status</td>
+	<td>Paid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#10 td.amount</td>
+	<td>15.00 USD</td>
+</tr>
+<!--* update prepaid comment-->
+<tr>
+	<td>click</td>
+	<td>css=#1 a.edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_comment</td>
+	<td>comm</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Update invoice']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callshop/invoices/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#1 td.comment</td>
+	<td>comm</td>
+</tr>
+<!--* check reseller callshop creation-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New Call Shop</td>
+	<td></td>
+</tr>
+<!--* create callshop-->
+<tr>
+	<td>open</td>
+	<td>/billing/groups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>group_name</td>
+	<td>reseller_callshop</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call Shop was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>reseller_booth</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>reseller_booth1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_10</td>
+	<td>reseller_booth</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/members/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>new_member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>new_member</td>
+	<td>user_reseller - User Resellers</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Make this user a manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call booth was successfully added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>new_member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call booth was successfully added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Free booths: 1</td>
+	<td></td>
+</tr>
+<!--* verify group edit permissions-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/members/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart</td>
+	<td></td>
+</tr>
+<!--* verify login as functionality-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/login_as_execute?user=6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Free booths: 3</td>
+	<td></td>
+</tr>
+<!--* verify comment updating-->
+<tr>
+	<td>click</td>
+	<td>css=#booth-8 a.start-session</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_balance</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_comment</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=tr.reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>123</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#booth-8 a.comm-edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=tr.slide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_comment</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=tr.slide input.comment-update</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>abc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>123</td>
+	<td></td>
+</tr>
+<!--* verify language setting-->
+<tr>
+	<td>storeText</td>
+	<td>css=#invoices a</td>
+	<td>invoicestxt</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>${invoicestxt}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>group[translation_id]</td>
+	<td>label=Spanish</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>cs_manager</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>cs_manager1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>${invoicestxt}</td>
+	<td></td>
+</tr>
+<!--* verify that we cannot add admin/reseller to callshop (no login would be possible otherwise)-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>cs_user_extra</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>cs_user_extra1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_tariff_id</td>
+	<td>label=Wholesale - Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='2']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#delete-0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>group_name</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>group_description</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call Shop was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call booth count</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/members/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotSelectedLabel</td>
+	<td>new_member</td>
+	<td>admin - System Admin</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call Shop was successfully deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>group_name</td>
+	<td>test1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call Shop was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/groups/members/5')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Make this user a manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>gusertype-2</td>
+	<td>manager</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>chooseCancelOnNextConfirmation</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Make this user a manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>gusertype-2</td>
+	<td>phone (call booth)</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total members : 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new booth:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>chooseCancelOnNextConfirmation</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Make this user a manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call booth was successfully added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>gusertype-2</td>
+	<td>phone (call booth)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>gusertype-11</td>
+	<td>phone (call booth)</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div/table.1.4</td>
+	<td>Change user type</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div/table.2.4</td>
+	<td>Change user type</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Change user type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>gusertype-2</td>
+	<td>manager</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>gusertype-11</td>
+	<td>phone (call booth)</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div/table.1.4</td>
+	<td>Change user type</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div/table.2.4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Username:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Password:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/members/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>login_as_link_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Manager view</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Free booths: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Start</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_invoice_type_prepaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>invoice_balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_balance</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=span.balance-value.green</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=span.balance-value.green</td>
+	<td>PREPAID (5.00)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_balance_value</td>
+	<td>5.0000 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td[@id='booths_5']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>login_as_link_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callshop/release_booth?full_payment=true&amp;id=5&amp;user_id=2&amp;comment=''&amp;balance=130</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoice not found</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title><%= session[:admin_browser_title] %></title>
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag "dtree" %>
+    <%= javascript_include_tag "tab-view" %>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <%= stylesheet_link_tag "mor" %> 
+    <%= stylesheet_link_tag "dtree" %>
+    <%= stylesheet_link_tag "tab-view" %>
+  </head>
+  <body>
+<center>
+    <table width="100%">
+      <tr> 
+        <td height="5"></td> 
+      </tr>
+      <tr>
+        <td>
+          <table width="100%">
+	    <tr>
+              <td valign="top">
+                <% if session[:logo_picture]%>
+                 <%= image_tag session[:logo_picture] %>
+                <% end %>
+              </td>
+                    <% if session[:login] == true %>
+                      <td align="right" class="nb" valign="bottom">
+                        <%= session[:username] %> <% link_to _('logoff'), :controller => "callc", :action => "logout" %> 
+                      </td>
+					<% end %>
+	    </tr>
+          </table>
+        
+      </tr>
+    </table>
+    <div id="ddnav">
+      <% if @page_title %> 
+        <div class="page_title_new">
+          <b>&nbsp;</b><%= image_tag('icons/' + @page_icon, :title => @page_title) if @page_icon %>&nbsp;<%= @page_title %>     
+        </div>
+     <% end %> 
+   </div>
+    <div id="topbck"></div>
+
+  
+  <table width="100%">
+    <tr>
+      <td>
+      <table width="100%" height=400>
+	<tr valign="top"><tr valign="top">
+
+
+		
+			<td align="left" class="main_window" >
+
+
+                <% if @Show_Currency_Selector%>
+                    <%= currency_selector%>
+                <% else %>    
+                    <br>
+                <% end %>
+                
+			   <% if flash[:notice] -%>
+			       <div id="notice"> <%= flash[:notice] %> </div>
+			       <br>
+			   <% end %>                
+
+				<div class="nb"><center><%= yield %></center></div>
+			</td>
+
+			<td></td>
+			
+		</tr>
+	</table>
+
+  </td></tr>
+
+<tr>
+<td>
+<% if session[:usertype] == "admin" %>
+<table width="100%">
+    <tr>
+        <td>
+            <% #dump session %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <% #dump params %>
+        </td>
+    </tr>
+</table>
+<% end %>
+</td>
+</tr>
+
+</table>
+
+</td>
+</tr>
+
+</table>
+
+
+<div id="footerbck"></div>
+	<div id="footerbox">
+	 <div class="left-element">
+	     
+	                        <% if session[:version] and session[:copyright_title]%>                   
+	                            &nbsp;&nbsp;<%= session[:version] %> <%= session[:copyright_title] %>
+	                        <% end %>
+	 
+	                       
+	                        <% nice_date_time(Time.now) %><% session[:usertype] %>&nbsp;
+	                       
+	                      </div>
+	
+	
+             
+</div>
+</center>
+</body>
+
+</html>

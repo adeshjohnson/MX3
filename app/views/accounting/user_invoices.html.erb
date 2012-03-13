@@ -1,0 +1,32 @@
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('User') %></th>
+    <th align="left"><%= _('Number') %></th>
+    <th><%= _('Period_start') %></th>
+    <th><%= _('Period_end') %></th>
+    <th><%= _('Issue_date') %></th>
+    <th align="center"><%= _('Paid') %></th>
+    <th><%= _('Paid_date') %></th>
+    <th align="right"><%= _('Price') %></th>
+    <th align="right"><%= _('Price_with_VAT') %></th>
+    <th align="center"><%= _('Details') %></th>
+  </tr>
+  <% @invoices.each_with_index{ |inv, i| %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <% user = inv.user -%>
+      <td id="user_<%= inv.id %>" align="left">        <%= user.first_name + " " + user.last_name %> </td>
+      <td id="number_<%= inv.id %>" align="left">        <%= inv.number %> </td>
+      <td id="period_start_<%= inv.id %>" align="center">        <%= nice_date(inv.period_start, 0) %> </td>
+      <td id="period_end_<%= inv.id %>" align="center">        <%= nice_date(inv.period_end, 0)  %> </td>
+      <td id="issue_date_<%= inv.id %>" align="center">        <%= nice_date(inv.issue_date, 0) %> </td>
+      <td id="paid_<%= inv.id %>"align="center">
+        <%= b_cross if inv.paid == 0 %>
+        <%= b_check if inv.paid == 1 %>
+      </td>
+      <td id="paid_date_<%= inv.id %>" align="center"> <%= nice_date_time inv.paid_date if inv.paid == 1 %> </td>
+      <td id="price_<%= inv.id %>" align="right"> <%= nice_invoice_number(inv.price, inv.invoice_type) %> </td>
+      <td id="price_with_vat_<%= inv.id %>" align="right"> <%= nice_invoice_number(inv.price_with_tax(:precision => nice_invoice_number_digits(inv.invoice_type)), inv.invoice_type) %> </td>
+      <td id="details_<%= inv.id %>" align="center"><%= link_to(b_details, {:action => 'user_invoice_details', :id => inv.id}, :id => "details_link_" + inv.id.to_s ) %></td>
+    </tr>
+  <% } %>
+</table>

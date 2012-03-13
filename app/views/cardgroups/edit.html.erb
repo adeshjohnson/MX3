@@ -1,0 +1,31 @@
+
+<%= form_tag(:action => 'update', :id => @cardgroup) do %>
+  <%= render :partial => 'form' %>
+  <br> 
+  <%= submit_tag _('Edit'), :disable_with=>_('Processing..') %>
+<% end %>
+
+<br>
+<%= form_tag({:action=>'upload_card_image', :id => @cardgroup}, :multipart => true) do%>
+  <table  width="70%" class="simple">
+    <tr>
+      <th align="left"><%= _('Card_image') %></th> 
+    </tr>
+    <tr>
+      <td><%= file_field_tag "Card_image" %></td>
+    </tr>
+    <tr>
+      <td><%= submit_tag _('Upload'), :disable_with=>_('Processing..')%></td>
+    </tr>
+  </table>
+<% end %>
+<br>
+<br>
+<% if @c_image %>
+  <b><%= @c_image %></b>
+  <br>
+  <br>
+  <%= image_tag @c_image , :alt => 'Card_iamge' %>
+<% end %>
+<br>
+

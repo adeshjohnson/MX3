@@ -1,0 +1,43 @@
+<%= link_to b_refresh + _('Update_currencies_from_web'), :action=>'update_currencies_rates', :all=>1%>
+<br />
+<br /><br />
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Currency') %></th> 
+    <th align="left"><%= _('Description') %></th> 
+    <th align="right"><%= _('Exchange_rate') %> (<%= session[:default_currency] %>/?)</th> 
+    <th align="center"><%= _('Last_update') %></th> 
+    <th align="center"><%= _('Active') %>?</th> 
+    <th align="center"><%= _('Update') %>?</th> 
+    <th></th>
+    <th></th>
+  </tr>
+  <%if @currs and @currs.size.to_i > 0%>
+    <% @currs.each_with_index{|curr, i|%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td align="left" id="cur_name_<%=curr.id%>"><%= h(curr.name)%></td>
+        <td align="left" id="cur_full_name_<%=curr.id%>"><%= h(curr.full_name)%></td>
+        <td id ="<%= curr.name.to_s %>_exchange_rate" align="right"><%= curr.exchange_rate%></td>
+        <td align="center"><%= nice_date_time curr.last_update %></td>
+        <%if curr.id != 1%>
+          <td align="center"><%= link_to curr.active ==0 ? b_cross({:title=>_('Enable'), :id=>'curr_active_'+curr.id.to_s}) : b_check({:title=>_('Disable'), :id=>'curr_disable_'+curr.id.to_s}), :action => 'currencies_change_status', :id=>curr.id%></td>
+          <td align="center"><%= link_to curr.curr_update ==0 ? b_cross({:title=>_('Enable'), :id=>'curr_upd_enable_'+curr.id.to_s}) : b_check({:title=>_('Disable'), :id=>'curr_upd_disable_'+curr.id.to_s}), :action => 'currencies_change_update_status', :id=>curr.id%></td>
+          <td align="center"><%= link_to curr.curr_update != 1 ? b_edit : _('Yahoo'), curr.curr_update != 1 ? {:action => 'edit', :id => curr.id} : {:action=> 'update_currencies_rates', :id => curr.id}, :id=>'cur_edit_'+curr.id.to_s%></td>
+          <%if curr.curr_edit != 1%>
+            <td align="center"><%= link_to b_delete, { :action => 'destroy', :id => curr.id }, :confirm => _('Are_you_sure'), :method => :post, :id=>'destroy_'+curr.id.to_s if curr.id != 1 %><%= _('Default') if curr.id == 1%></td>
+          <%else%>
+            <td></td>
+          <%end%>
+        <%else%>
+          <td align="center"> <%= image_submit_tag 'icons/check.png' %></td>
+          <td align="center"> <%= image_submit_tag 'icons/cross.png' %></td>
+          <td></td>
+          <td></td>
+        <%end%>
+      </tr>
+    <% }%>
+  <%end%>
+</table>
+<br />
+<br />
+<%= link_to b_edit + _('Default_currency'), :action => 'change_default' %>

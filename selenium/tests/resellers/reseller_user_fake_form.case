@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.137" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/fake_form?path_to_action=/billing/users/update/5?return_action=list&amp;return_controller=users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/fake_form?path_to_action=/billing/users/update/5?return_action=list&amp;return_controller=users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_1</td>
+	<td>show_zero_calls</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>c_26</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_2</td>
+	<td>return_controller</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_2</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_2</td>
+	<td>users</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_3</td>
+	<td>unlimited</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_3</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_3</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_4</td>
+	<td>block_at_conditional</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_4</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_4</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_5</td>
+	<td>warning_email_active</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_5</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_5</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_6</td>
+	<td>agr_date[year]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_6</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_6</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_7</td>
+	<td>agr_date[month]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_7</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_7</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_8</td>
+	<td>agr_date[day]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_8</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_8</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_9</td>
+	<td>tax1_value</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_9</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_9</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_10</td>
+	<td>credit</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_10</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_10</td>
+	<td>unlimited</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_11</td>
+	<td>tax1_name</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_11</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_11</td>
+	<td>Tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_12</td>
+	<td>total_tax_name</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_12</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_12</td>
+	<td>Tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_13</td>
+	<td>tax4_name</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_13</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_14</td>
+	<td>compound_tax</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_14</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_14</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_15</td>
+	<td>id </td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_15</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_15</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_16</td>
+	<td>tax3_name</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_16</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_17</td>
+	<td>tax2_name</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_17</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_18</td>
+	<td>tax2_value</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_18</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_18</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_19</td>
+	<td>block_at_date[year]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_19</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_19</td>
+	<td>2009</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_20</td>
+	<td>block_at_date[month]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_20</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_20</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_21</td>
+	<td>block_at_date[day]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_21</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_21</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_22</td>
+	<td>privacy </td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_22</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_22</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_23</td>
+	<td>tax3_value</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_23</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_23</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_24</td>
+	<td>b_f</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_24</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_24</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_25</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_25</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_25</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_26</td>
+	<td>tax4_value</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_26</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_26</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

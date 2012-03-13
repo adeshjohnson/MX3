@@ -1,0 +1,124 @@
+<% if @dgroup %>
+  <b><%= _('Destination') %>:</b> <%= draw_flag_by_code @dgroup.flag %> <%= @dgroup.name %> <%= @dgroup.desttype %>
+<% end %>
+<br /><br />
+<b><%= _('Day') %>:</b> <%= _('Work_day') if @dt == "WD"%><%= _('Free_day') if @dt == "FD"%><%= _('Work_day_and_Free_day') if @dt == ""%>
+<br /><br />
+<b><%= _('Time') %>:</b> <%= @st %> - <%= @et %>
+<br /><br />
+
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('From') %></th>
+    <th align="center"><%= _('Duration') %></th>
+    <th align="center"><%= _('Type') %></th>
+    <th align="center"><%= _('Round_by') %></th>
+    <th align="center"><%= _('Rate') %> (<%= @tariff.currency%>)</th>
+    <% if @can_edit == true %>
+      <% if @allow_edit %>
+        <th></th>
+        <th></th>
+      <% end %>
+    <% end %>
+  </tr>
+
+  <% @ards.each_with_index{ |ard, i| %>
+    <% if i != (@ards.size - 1) %>
+      <%= form_tag :action => 'user_rate_update', :id => ard.id , :rate=>1 do %>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <% ard.duration == -1 ? duration = "∞" : duration = ard.duration -%>
+          <td id="from_<%= ard.id %>" align="left"><%= ard.from %></td>
+          <td id="duration_<%= ard.id %>" align="center"><%= duration if ard.artype == "minute"%></td>
+          <td id="type_<%= ard.id %>" align="center"><%= ard.artype %></td>
+          <% if @can_edit == true %>
+            <td id="round_<%= ard.id %>" align="center"><%= text_field_tag "round_#{ard.id}", ard.round, "class" => "input", :size => "3", :maxlength => "4" if ard.artype == "minute"%></td>
+            <td id="price_<%= ard.id %>" align="center"><%= text_field_tag "price_#{ard.id}", ard.price, "class" => "input", :size => "8", :maxlength => "10"  %></td>
+            <td id="edit_<%= ard.id %>" align="center">
+              <% if @allow_edit %>
+                <%= image_submit_tag 'icons/edit.png', :title => _('Edit') %>
+              <%end%>
+            </td>
+            <td></td>
+          <%  else %>
+            <td id="round_<%= ard.id %>" align="center"><%=  ard.round %></td>
+            <td id="price_<%= ard.id %>" align="center"><%=  ard.price %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+
+    <% if i == (@ards.size - 1) %>
+      <%= form_tag :action => 'user_rate_update', :id => ard.id do %>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <%
+          duration = ard.duration
+          duration = "∞" if ard.duration == -1
+          duration = "" if ard.artype == "event"
+          ard.artype == "event" ? round = "" : round = ard.round -%>
+          <td id="from_<%= ard.id %>" align="left"><%= ard.from %></td>
+          <% if @can_edit == true %>
+            <td id="duration_<%= ard.id %>" align="center">
+              <%= text_field_tag 'duration', duration, "class" => "input", :size => "4", :maxlength => "6", :id => "duration" %> <%= _('Infinity') %>?
+              <%= check_box_tag 'infinity',  "1", ard.duration == -1, :id => "check_box" %>
+            </td>
+            <td id="type_<%= ard.id %>" align="center">
+              <select id="artype_<%= ard.id %>" name="artype" >
+                <option value="minute" <%= "selected" if ard.artype == "minute" %>> <%= _('minute') %></option>
+                <option value="event" <%= "selected" if ard.artype == "event" %>> <%= _('event') %></option>
+              </select>
+            </td>
+            
+            <td id="round_<%= ard.id %>" align="center"><%= text_field_tag 'round', round, "class" => "input", :size => "3", :maxlength => "4"  %></td>
+            <td id="price_<%= ard.id %>" align="center"><%= text_field_tag 'price', ard.price, "class" => "input", :size => "8", :maxlength => "10"  %></td>
+            <%if mor_11_extend?%>
+              <td id="ghost_percent_<%= ard.id %>" align="center"><%= text_field_tag "ghost_percent_#{ard.id}", ard.ghost_percent, "class" => "input", :size => "8", :maxlength => "10"  %></td>
+            <%end%>
+
+            <% if @allow_edit %>
+              <td id="edit_<%= ard.id %>" align="center"> <%= image_submit_tag 'icons/edit.png', :title => _('Edit') %></td>
+              <% if i > 0 %>
+                <td id="delete_<%= ard.id %>" align="center"><%= link_to b_delete, {:action => 'user_rate_delete', :id => ard.id}, {:confirm => 'Are you sure?', :method => :post, :id => "delete_link"+ard.id.to_s } %> </td>
+              <% else %>
+                <td></td>
+              <% end %>
+              <%= hidden_field_tag 'from', ard.from %>
+            <% end %>
+          <% else %>
+            <td id="duration_<%= ard.id %>" align="center"><%= duration %> </td>
+            <td id="type_<%= ard.id %>" align="center"><%= ard.artype %></td>
+            <td id="round_<%= ard.id %>" align="center"><%=  round %></td>
+            <td id="price_<%= ard.id %>" align="center"><%=  ard.price %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+
+    <% i += 1%>
+  <% } %>
+  <% if @can_edit == true %>
+    <% if @can_add %>
+      <%= form_tag :action => 'user_rate_add', :id => @rate, :dt => @dt, :st => @st, :et => @et do %>
+        <tr>
+          <th id="add_from" align="left"><%= @from %></th>
+          <%= hidden_field_tag 'from', @from %>
+          <th id="add_duration" align="center">
+            <%= text_field_tag 'duration', "∞", "class" => "input", :size => "4", :maxlength => "6", :id => "add_duration_input" %> <%= _('Infinity') %>?
+            <%= check_box_tag 'infinity',  "1", 1 , :id => "add_check_box" %>
+          </th>
+          <th id="add_type" align="center">
+            <select name="artype" >
+              <option value="minute" selected > <%= _('minute') %></option>
+              <option value="event"> <%= _('event') %></option>
+            </select>
+          </th>
+          <th align="center"><%= text_field_tag 'round', "1", "class" => "input", :size => "3", :maxlength => "4" %>s</th>
+          <th align="center"><%= text_field_tag 'price', "0", "class" => "input", :size => "8", :maxlength => "10" %></th>
+          <% if @can_edit == true %>
+            <th align="center"> <%= image_submit_tag 'icons/add.png', :title => _('Add'), :id => "add_img" %></th>
+            <th></th>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+</table>

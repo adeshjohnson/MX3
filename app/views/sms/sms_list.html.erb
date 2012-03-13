@@ -1,0 +1,46 @@
+<%= javascript_include_tag "wz_tooltip" %>
+
+<% if @total_pages > 1 %>
+  <br />
+  <%= render :partial => "page_select_header" %>
+<% end %>
+
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Send_date') %></th>
+    <th align="left"><%= _('Status') %></th>
+    <th align="left"><%= _('Status_code') %></th>
+    <th align="left"><%= _('Number') %></th>
+    <th align="right"><%= _('Rate') %> (<%= current_user.currency.name %>)</th>
+    <th align="right"><%= _('Quantity') %></th>
+    <th align="right"><%= _('Price') %> (<%= current_user.currency.name %>)</th>
+  </tr>
+
+  <%if @sms%>
+    <% @sms.each_with_index{ |sms, i| %>
+      <%
+      if sms.prefix != nil
+        if destination = sms.destination
+          if direction = destination.direction
+            direction_name = direction.name
+            direction_code = direction.code
+          end
+        end
+      end %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="date_<%= sms.id %>" align="left"><%= nice_date_time(sms.sending_date) %></td>
+        <td id="status_<%= sms.id %>" class="n" align="left" <%= "onmouseover=\"Tip(\' #{(sms.sms_status_code_tip).to_s} \')\" onmouseout = \"UnTip()\"" %>><%=  sms.sms_status_code  %></td>
+        <td id="dest_<%= sms.id %>" align="left"><%= direction_name if direction_name %> <%= draw_flag(direction_code) if direction_code %></td>
+        <td id="number_<%= sms.id %>" align="left"><%= sms.number %></td>
+        <td id="user_rate_<%= sms.id %>" align="right"><%= nice_number(sms.user_rate) %></td>
+        <td id="quantity_<%= sms.id %>" align="right"><%= nice_number(sms.user_price.to_f/sms.user_rate.to_f).to_i %></td>
+        <td id="price_<%= sms.id %>" align="right"><%= nice_number(sms.user_price) %></td>
+      </tr>
+    <% } %>
+    <tr>
+      <th align="left" colspan='5'><%= _('Total') %></th>
+      <th id="total_sms" align="right"><%= @t_sms %></th>
+      <th id="total_price" align="right"><%= nice_number(@t_sms_price) %> </th>
+    </tr>
+  <% end %>
+</table>

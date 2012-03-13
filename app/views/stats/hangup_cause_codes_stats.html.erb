@@ -1,0 +1,46 @@
+<%= javascript_include_tag 'swfobject' %>
+
+
+<b><%= _('Country') %></b>:
+<b> <%= @country.name if @country %></b>
+<br/>
+<b><%= _('Provider') %></b>:
+<b> <%= @provider.name if @provider %></b>
+<br/>
+<br/>
+<div align="left" class="nb">
+  <%= form_tag(:action => 'hangup_cause_codes_stats') do %>
+    <%= _('From') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+    &nbsp;&nbsp;<%= _('to') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+    &nbsp;&nbsp;<%= _('Country') %>: <select name="country_id" >
+      <option value=<%= '-1'%> <%= "selected" if !@country %>> <%= _('All') %></option>
+      <% for country in @countries %>
+        <option value=<%= country.id%> <%if @country%><%= "selected" if country.id == @country.id %> <%end%>> <%= country.name %> </option>
+      <% end %>
+    </select>
+    &nbsp;&nbsp;<%= _('Provider') %>: <select name="provider_id" >
+      <option value=<%= '-1'%> <%= "selected" if !@provider %>> <%= _('All') %></option>
+      <% for provider in @providers %>
+        <option value=<%= provider.id%> <%if @provider%><%= "selected" if provider.id == @provider.id %> <%end%>> <%= provider.name %> </option>
+      <% end %>
+    </select>
+    &nbsp;&nbsp;<%= _('User') %>:<%= select_tag("s_user", options_for_select([[_('All'), -1]] + @users.map{|usr| [nice_user(usr), usr.id]}, @user_id.to_i)) %>
+    <%= observe_field("s_user", :update => "user_devices", :with => "user_id", :frequency => 0.5, :url=> {:controller=> "devices", :action => "ajax_get_user_devices", :default => @device_id.to_i, :all => true, :fax => true, :name=> true}, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
+    <span id = 'user_devices'>
+      <%if @user_id.to_i != -1 %>
+        <% opt_map = @user.devices.map{|d| [nice_device_no_pic(d), d.id]} %>
+        <% opt_map = [[_("All"), "all"]]+ opt_map -%>
+        &nbsp;&nbsp;<%= _('Devices') %>:<%= select_tag("s_device", options_for_select(opt_map, @device_id.to_i)) %>
+      <%end%>
+    </span>
+    &nbsp;&nbsp;<%= submit_tag _('Change'), :disable_with=>_('Processing..')%>
+  <% end %>
+</div>
+<br/>
+<div id="table">
+  <%= render :partial => "hangup_stats" %>
+</div>
+
+
+
+

@@ -1,0 +1,19 @@
+<b><%=_('Card_group') %> </b> : <%=@cg.name%> <%= link_to b_edit, :action => 'edit', :id => @cg.id %> <%= link_to b_details, :action => 'show', :id => @cg.id %>
+
+<br><br>
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Prefix') %></th> 
+    <th align="left"><%= _('Percent') %></th> 
+    <th align="center"><%= _('Confirm') %></th> 
+  </tr>
+
+<%= form_tag :action => 'gmp_update', :id => @gmp.id do %>
+  <tr class="row1">
+    <td align="left"><%= text_field_tag 'prefix', @gmp.prefix, "class" => "input" , :size => "10", :maxlength => "10"%></td>   	
+    <td align="left"><%= text_field_tag 'percent', @gmp.percent, "class" => "input" , :size => "10", :maxlength => "10"%>%</td> 
+    <td id="edit" align="center"><%= image_submit_tag 'icons/check.png', :title => _('Add_new')  %></td>	
+ </tr>
+<% end %>
+
+</table>

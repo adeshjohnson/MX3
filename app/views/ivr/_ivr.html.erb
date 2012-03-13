@@ -1,0 +1,12 @@
+<table class="simple">
+  <tr>
+    <td width="30"></td>
+    <td><b><%= _('IVR_Name')%>:</b>                </td>
+    <td><%= text_field_tag('ivr_name', @ivr ? @ivr.name.to_s : "", "class" => "input", :size => "35", :maxlength => "50") %></td>            
+  </tr>
+  <tr>
+    <td width="30"></td>
+    <td><b><%= _('First_Block_Name')%>:</b>                </td>
+    <td><%= text_field_tag('block_name', @block ? @block.name.to_s : "" , "class" => "input", :size => "35", :maxlength => "50") %></td>            
+  </tr>
+</table>

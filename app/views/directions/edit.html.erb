@@ -1,0 +1,6 @@
+
+<%= form_tag(:action => 'update', :id => @direction) do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag _('Edit'), :disable_with=>_('Processing..') %>
+<% end %>
+

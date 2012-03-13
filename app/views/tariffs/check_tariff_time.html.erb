@@ -1,0 +1,46 @@
+<% unless flash[:notice_2].blank? -%>
+  <div id="notice"><%= flash[:notice_2] %></div>
+  <br />
+<% end -%>
+<div id="tariff_time_select">
+  <%= _("Rate_day_type") %>: <%= select_tag("rate_day_type", options_for_select(@rate_type, session[:imp_date_day_type]), :onchange=>"check_values();")  %>
+  <%= _("From") %>:
+  <select id="time_from_hour" name="time_from[hour]" onchange="check_values();">
+    <%24.times { |i|%>
+    <% ii =  i < 10 ? "0#{i}" : i%>
+      <option value="<%= ii %>" <%='selected' if ii.to_s == @f_h.to_s %>><%= ii %></option>
+    <%}%>
+  </select>
+  <select id="time_from_minute" name="time_from[minute]" onchange="check_values();">
+    <%60.times { |i|%>
+        <% ii =  i < 10 ? "0#{i}" : i%>
+      <option value="<%=ii %>" <%='selected' if ii.to_s == @f_m.to_s %>><%=ii%></option>
+    <%}%>
+  </select>
+  <select id="time_from_second" name="time_from[second]" onchange="check_values();">
+    <%60.times { |i|%>
+    <% ii =  i < 10 ? "0#{i}" : i%>
+      <option value="<%= ii %>" <%='selected' if ii.to_s == @f_s.to_s %>><%= ii %></option>
+    <%}%>
+  </select>
+
+  <%= _("Till") %>:
+  <select id="time_till_hour" name="time_till[hour]" onchange="check_values();">
+    <%24.times { |i|%>
+    <% ii =  i < 10 ? "0#{i}" : i%>
+      <option value="<%=ii %>" <%='selected' if ii.to_s == @t_h.to_s %>><%= ii %></option>
+    <%}%>
+  </select>
+  <select id="time_till_minute" name="time_till[minute]" onchange="check_values();">
+    <%60.times { |i|%>
+    <% ii =  i < 10 ? "0#{i}" : i%>
+      <option value="<%= ii %>" <%='selected' if ii.to_s == @t_m.to_s %>><%= ii %></option>
+    <%}%>
+  </select>
+  <select id="time_till_second" name="time_till[second]" onchange="check_values();">
+    <%60.times { |i|%>
+    <% ii =  i < 10 ? "0#{i}" : i%>
+      <option value="<%= ii %>" <%='selected' if ii.to_s == @t_s.to_s %>><%= ii %></option>
+    <%}%>
+  </select>
+</div>

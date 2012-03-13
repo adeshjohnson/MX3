@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>resres</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user[currency_id]</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=warning_email_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=warning_email_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_warning_email_balance</td>
+	<td>156</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user[warning_email_hour]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=user[warning_email_hour]_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>label=21</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=i1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=i2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=i3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=i4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_first_name</td>
+	<td>Test test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_last_name</td>
+	<td>Reseller test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_clientid</td>
+	<td>12345</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=user[taxation_country]</td>
+	<td>label=Ivory Cost</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_vat_number</td>
+	<td>2345678</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_address</td>
+	<td>asdfghjytre</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_postcode</td>
+	<td>34567</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_city</td>
+	<td>asdxfcgvhj</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_county</td>
+	<td>asdfgh</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_state</td>
+	<td>erdtfgyhvjgjb</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=address[direction_id]</td>
+	<td>label=Ivory Cost</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_phone</td>
+	<td>87654321</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_mob_phone</td>
+	<td>23456789</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_fax</td>
+	<td>7654321</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_email</td>
+	<td>test_reseller@email.te</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Personal details changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=user[currency_id]</td>
+	<td>EUR</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=warning_email_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_warning_email_balance</td>
+	<td>156</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user[warning_email_hour]_-1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user[warning_email_hour]_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>21</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i3</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=i4</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_first_name</td>
+	<td>Test test</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_last_name</td>
+	<td>Reseller test</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_clientid</td>
+	<td>12345</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>name=user[taxation_country]</td>
+	<td>Ivory Cost</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=user_vat_number</td>
+	<td>2345678</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_address</td>
+	<td>asdfghjytre</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_postcode</td>
+	<td>34567</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_city</td>
+	<td>asdxfcgvhj</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_county</td>
+	<td>asdfgh</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_state</td>
+	<td>erdtfgyhvjgjb</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_phone</td>
+	<td>87654321</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_mob_phone</td>
+	<td>23456789</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_fax</td>
+	<td>7654321</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=address_email</td>
+	<td>test_reseller@email.te</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>name=address[direction_id]</td>
+	<td>Ivory Cost</td>
+</tr>
+</tbody></table>
+</body>
+</html>

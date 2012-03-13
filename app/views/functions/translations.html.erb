@@ -1,0 +1,63 @@
+<div id="items">
+  <br />
+  <table width="100%">
+    <tr>
+      <td>  <b><%= h _('Sorting_translations') %></b>  </td>
+      <td>  <b><%= h _('Activating_translations') %></b>  </td>
+    </tr>
+    <tr>
+      <td>
+        <table>
+          <tr>
+            <td>
+              <br />
+              <ul id="sortable_list" style="list-style-type: none;margin-left: 0px;padding-left: 0px;">
+                <% for item in @items %>
+                    <% item.active.to_i == 0 ? style = "color: #BBBBBB;" : style = ""
+                       translation = item.translation %>
+                    <li id="item_<%= item.id %>" style="height: 18px; <%= style %>">
+                      <%
+                         flag = image_tag("flags/#{translation.flag}.jpg",  :style => 'border-style:none', :title => translation.name)
+                         native_name = ""
+                         native_name += " / " + translation.native_name if translation.native_name.length > 0 %>
+                      <%= flag + " " + translation.name + native_name %>
+                    </li>
+                <% end %>
+              </ul>
+
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td>
+        <table>
+          <% for tr in @items %>
+              <tr>
+                <td>
+                  <%
+                     translation = tr.translation
+                     tr.active.to_i == 0 ? style = "color: #BBBBBB;" : style = ""
+                     flag = image_tag("flags/#{translation.flag}.jpg",  :style => 'border-style:none', :title => translation.name)
+                     native_name = ""
+                     native_name += " / " + translation.native_name if translation.native_name.length > 0 %>
+                  <%#= link_to_remote(flag + " " + translation.name + native_name, {:update => 'items', :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');", :url => {:action => "translations_change_status", :id => tr.id}}, {:style => "#{style}", :id=> "translation_#{translation.id}_#{tr.active}"}) %>
+                  <a style="<%=style%>" onclick="new Ajax.Updater('items', '<%=Web_Dir%>/functions/translations_change_status/<%=tr.id%>', {asynchronous:true, evalScripts:true }); return false;" href="#">
+                    <%= flag + " " + translation.name + native_name %>
+                  </a>
+
+                  <a href="#" onclick="new Ajax.Updater('posts', '<%=Web_Dir%>/functions/translations_change_status/<%=tr.id%>', {asynchronous:true, evalScripts:true});return false;">Delete this post</a>
+                </td>
+              </tr>
+          <% end %>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <%= link_to(b_refresh + _('Refresh_translations') , :action => "translations_refresh")%>
+  <br />
+  <br />
+
+</div>
+
+<%= sortable_element('sortable_list', :update => 'items', :url => {:action => :translations_sort}, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>

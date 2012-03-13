@@ -1,0 +1,45 @@
+
+
+<p>
+  <label for="tariff_name"><%= _('Name') %></label>:
+  <%= text_field 'tariff', 'name', "class" => "input"   %>
+</p>
+
+<p>
+  <label for="tariff_currency"><%= _('Currency') %></label>:
+  <select name="tariff[currency]" >
+    <% for curr in @currs %>
+      <option value="<%= curr.name %>" <%= "selected" if @tariff.currency == curr.name%>><%= curr.name %></option>
+    <% end %>
+  </select>
+</p>
+
+<% if @no_edit_purpose %>
+  <br />
+  <br />
+  <%= _('Purpose') %>:  <%= @tariff.purpose   %>
+<% else %>
+  <% if allow_manage_providers_tariffs? %>
+    <br />
+    <br />
+    <hr />
+    <br />
+    <%= b_info + _('Provider_tariffs_explained') %>
+    <br />
+    <br />
+    <%= radio_button_tag('tariff[purpose]', 'provider', true ) %> <%= _('Providers') %>
+    <br />
+    <br />
+    <hr />
+    <br />
+    <%= b_info + _('User_tariffs_explained') %>
+  <% end %>
+  <br />
+  <br />
+
+  <%= radio_button_tag('tariff[purpose]', 'user', session[:usertype] == "reseller" ) %> <%= _('User_retail') %>
+  <% if @user_wholesale_enabled %>
+    <br />
+    <%= radio_button_tag('tariff[purpose]', 'user_wholesale', checked = false ) %> <%= _('User_wholesale') %>
+  <% end %>
+<% end %>

@@ -1,0 +1,1049 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>call_tracing</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">call_tracing</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--check ADMIN-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=System Admin (0)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>blocked</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>blocket_status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>credit</td>
+	<td>Unlimited</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>usertype</td>
+	<td>Postpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff</td>
+	<td>Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_type</td>
+	<td>Wholesale</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_rates</td>
+	<td>251</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_devices</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>allow_loss_calls</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_providers</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_active_providers</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_has_rates</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>privider_id_1</td>
+	<td>Test Provider/1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>privider_tariff_1</td>
+	<td>Test Tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>privider_rates_1</td>
+	<td>251</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>privider_status_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>SUCCESS!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device</td>
+	<td>IAX2/103</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dest</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>call_time</td>
+	<td>2009-01-01 00:00:00 (Work Day)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>location</td>
+	<td>Global</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>localized_destination</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>direction</td>
+	<td>United States</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_0</td>
+	<td>Test Tariff for Users/Wholesale</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>currency_0</td>
+	<td>USD (1.0000)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prefix_0</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate</td>
+	<td>0.000000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>increment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>min_time</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>cf</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_grouped_by</td>
+	<td>Price</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prividers_for_this_call</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>active_providers_for_this_call</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>allow_loss_calls</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_id_1</td>
+	<td>Test Provider/1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>cut_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>add_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dial_string_1</td>
+	<td>IAX2\prov1\123</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>cf_1</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>min_time_1</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>round_1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_1</td>
+	<td>0.000000</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination group:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=direction_group</td>
+	<td>United States</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Direction:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=direction</td>
+	<td>United States</td>
+</tr>
+<!--...H323 DEVICE-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?user_id=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<!--......No IP-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=System Admin (0)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device</td>
+	<td>label=H323/1001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>H323 device must have IP address to make calls.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Everything is OK for now</td>
+	<td></td>
+</tr>
+<!--......Wrong port-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>host</td>
+	<td>192.168.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>port</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=System Admin (0)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device</td>
+	<td>label=H323/1001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>H323 device port is not 1720.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>SUCCESS!</td>
+	<td></td>
+</tr>
+<!--......OK-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>host</td>
+	<td>192.168.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>port</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=System Admin (0)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device</td>
+	<td>label=H323/1001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>notice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>SUCCESS!</td>
+	<td></td>
+</tr>
+<!--check user-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=Test User #1 (2)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>blocked</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Unlimited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>usertype</td>
+	<td>Postpaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff</td>
+	<td>Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_type</td>
+	<td>Wholesale</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_rates</td>
+	<td>251</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_devices</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>allow_loss_calls</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_providers</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_active_providers</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_has_rates</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>privider_id_1</td>
+	<td>Test Provider/1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>privider_tariff_1</td>
+	<td>Test Tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>privider_rates_1</td>
+	<td>251</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>privider_status_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device</td>
+	<td>label=IAX2/101</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter destination</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>SUCCESS!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device</td>
+	<td>IAX2/101</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dest</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dest</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>call_time</td>
+	<td>2009-01-01 00:00:00 (Work Day)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>location</td>
+	<td>Global</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>localized_destination</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>direction</td>
+	<td>United States</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_2</td>
+	<td>Test Tariff for Users/Wholesale</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>currency_2</td>
+	<td>USD (1.0000)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate</td>
+	<td>0.000000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>increment</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>min_time</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>cf</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_id_1</td>
+	<td>Test Provider/1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dial_string_1</td>
+	<td>IAX2\prov1\1234</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>cf_1</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>min_time_1</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>round_1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_1</td>
+	<td>0.000000</td>
+</tr>
+<!--next user device-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=Test User #1 (2)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device</td>
+	<td>label=FAX/102</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12314</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>SUCCESS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device</td>
+	<td>FAX/102</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=direction</td>
+	<td>United States</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=direction_group</td>
+	<td>United States</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/edit/448</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dg_name</td>
+	<td>United States Edited</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Destination group was succesfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=Test User #1 (2)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device</td>
+	<td>label=IAX2/1002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>SUCCESS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device</td>
+	<td>IAX2/1002</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dest</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=direction</td>
+	<td>United States</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=direction_group</td>
+	<td>United States Edited</td>
+</tr>
+<!--check for errors-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=Test Reseller (3)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='3']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_users_header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>reseller_users_header</td>
+	<td>Resellers' Users:</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>reseller_user</td>
+	<td>None User Resellers (5)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=User Resellers (5)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNALL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=Test Accountant (4)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_devices</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=Test Reseller (3)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_rates</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider removed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=Test User #1 (2)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_providers</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_active_providers</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ERROR</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<% type = @invoice.invoice_type %>
+<table width="100%">
+  <tr>
+    <td>
+      <table width="95%" class="maintable">
+
+        <tr class="row2">
+          <th align="left"><%= _('User') %>:</th>
+          <td id="user" align="right"> <%= @user.first_name + " " + @user.last_name%> </td>
+        </tr>
+
+        <tr class="row1">
+          <th align="left"><%= _('Invoice_number') %>:</th>
+          <td id="number" align="right"> <%= @invoice.number %> </td>
+        </tr>
+
+        <tr class="row2">
+          <th align="left"><%= _('Period_start') %>:</th>
+          <td id="period_start" align="right"><%= nice_date(@invoice.period_start, 0) %> </td>
+        </tr>
+
+        <tr class="row1">
+          <th align="left"><%= _('Period_end') %>:</th>
+          <td id="period_end" align="right">        <%= nice_date(@invoice.period_end, 0) %> </td>
+        </tr>
+
+        <tr class="row2">
+          <th align="left"><%= _('Issue_date') %>:</th>
+          <td id="issue_date" align="right">        <%= nice_date(@invoice.issue_date, 0) %> </td>
+        </tr>
+
+        <tr class="row1">
+          <th align="left"><%= _('Paid') %>:</th>
+
+          <td id="paid" align="right">
+            <%= b_cross if @invoice.paid == 0 %>
+            <%= b_check if @invoice.paid == 1 %>
+          </td>
+
+        </tr>
+
+        <tr class="row2">
+          <th align="left"><%= _('Paid_date') %>:</th>
+          <td id="paid_date" align="right">        <%= nice_date_time @invoice.paid_date if @invoice.paid == 1 %> </td>
+        </tr>
+
+        <tr class="row1">
+          <th align="left"><%= _('Price') %>:</th>
+          <td id="price" align="right">        <%= nice_invoice_number(@invoice.price, type) %> </td>
+        </tr>
+
+        <tr class="row2">
+          <th align="left"><%= _('Price_with_VAT') %></th>
+          <td id="price_with_vat" align="right"><%= nice_invoice_number(@invoice.price_with_tax(:precision => nice_invoice_number_digits(type)), type) %> </td>
+        </tr>
+
+      </table>
+
+    </td>
+    <td valign="top" align="right">
+
+      <table width="95%" class="maintable">
+
+        <tr>
+          <th align="left"> <%= _('Generate') %>: </th>
+          <th align="center"> <%= _('PDF') %> </th>
+          <th align="center"> <%= _('CSV') %> </th>
+        </tr>
+
+        <tr class="row1">
+          <th align="left"><%= _('Invoice') %>:</th>
+          <td align="center">
+            <%= form_tag :action => 'generate_invoice_pdf', :id => @invoice.id  do %>
+              <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice') %>
+            <% end %>
+          </td>
+
+          <td align="center">
+            <%= form_tag :action => 'generate_invoice_csv', :id => @invoice.id  do %>
+              <%= image_submit_tag 'icons/excel.png', :title => _('Invoice') %>
+            <% end %>
+          </td>
+        </tr>
+
+        <tr class="row2">
+          <th align="left"><%= _('Invoice_detailed') %>:</th>
+          <td align="center">
+            <%= form_tag :action => 'generate_invoice_detailed_pdf', :id => @invoice.id  do %>
+              <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_detailed') %>
+            <% end %>
+          </td>
+
+          <td align="center">
+            <%= form_tag :action => 'generate_invoice_detailed_csv', :id => @invoice.id  do %>
+              <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_detailed') %>
+            <% end %>
+          </td>
+        </tr>
+
+        <tr class="row1">
+          <th align="left"><%= _('Invoice_by_CallerID') %>:</th>
+          <td align="center">
+            <%= form_tag :action => 'generate_invoice_by_cid_pdf', :id => @invoice.id  do %>
+              <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_by_CallerID') %>
+            <% end %>
+          </td>
+          <td align="center">
+            <%= form_tag :action => 'generate_invoice_by_cid_csv', :id => @invoice.id  do %>
+              <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_by_CallerID') %>
+            <% end %>
+          </td>
+        </tr>
+
+        <!--
+        <% if @user.usertype != "reseller" %>
+                            <tr class="row1">
+                              <th align="left"><%= _('Invoice_CDR') %>:</th>
+
+                                        <td align="center">
+          <%= form_tag :action => 'generate_invoice_cdr_pdf', :id => @invoice.id  do %>
+            <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_CDR') %>
+          <% end %>
+                                        </td>
+
+
+
+                                        <td align="center">
+          <%= form_tag :action => 'generate_invoice_cdr_csv', :id => @invoice.id  do %>
+            <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_CDR') %>
+          <% end %>
+                                        </td>
+
+                           </tr>
+        <% end %>
+        -->
+
+      </table>
+
+  </tr>
+
+  <tr><td height="20"></td></tr>
+
+  <tr>
+    <td>
+
+      <table width="95%" class="maintable">
+        <tr>
+          <th align="left"><%= _('Service') %></th>
+          <th align="right"><%= _('Quantity') %></th>
+          <th align="right"><%= _('Unit_Price') %></th>
+          <th align="right"><%= _('Line_Total') %></th>
+        </tr>
+        <% @invoice_invoicedetails.each_with_index { |id, i| %>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <%
+            qt = ""
+            tp = id.price
+            if id.quantity
+              qt = id.quantity
+              tp = qt * id.price if id.invdet_type > 0
+            end -%>
+            <td id="name_<%= id.id %>" align="left"> <%= id.name %> </td>
+            <td id="quantity_<%= id.id %>" align="right"> <%= qt %> </td>
+            <td id="price_<%= id.id %>" align="right"> <%= nice_number(id.price) %> </td>
+            <td id="total_price_<%= id.id %>" align="right"> <%= nice_number(tp) %> </td>
+          </tr>
+        <% } -%>
+      </table>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,25 @@
+
+
+<table width="100%">
+ <tr><td class="nb">
+
+<div align="left" class="nb">
+     <%= _('From') %>: <%= nice_date_time(@date_from) %>
+     &nbsp;&nbsp;<%= _('to') %>: <%= nice_date_time(@date_till) %>
+</div>
+<br>
+
+<!---
+ <%= form_tag(:action => 'call_list', :calltype => @call_type) do %>
+     <%= _('From') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+     &nbsp;&nbsp;     <%= _('to') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+     &nbsp;&nbsp;<%= submit_tag _('change_date'), :disable_with=>_('Processing..')%>
+<% end %>
+--->
+ </td>
+ <td class="nb">
+    <%= _('total_calls') %>: <b><%= @calls.size %></b>
+ </td></tr>
+</table>
+
+

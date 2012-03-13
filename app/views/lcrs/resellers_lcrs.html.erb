@@ -1,0 +1,16 @@
+<table class='maintable' width='80%'>
+  <tr>
+    <th><%= _('ID') %></th>
+    <th><%= _('Name') %></th>
+    <th><%= _('Order') %></th>
+    <th><%= _('Clone') %></th>
+  </tr>
+  <% @lcrs.each do |lcr| %>
+    <tr>
+      <td><%= lcr.id %></td>
+      <td><%= lcr.name %></td>
+      <td><%= lcr.order %></td>
+      <td><%= check_box_tag "lcr[#{lcr.id}]", false %></td>
+    </tr>
+  <% end %>
+</table>

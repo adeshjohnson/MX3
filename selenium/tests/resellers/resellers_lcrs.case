@@ -1,0 +1,2805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>resellers_lcrs</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">resellers_lcrs</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>own_providers</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New LCR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lcr_name</td>
+	<td>test_admins_lcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_2</td>
+	<td>test_admins_lcr</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>own_providers</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>own_providers</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<!--Admin's LCR for Resellers-->
+<!--pasikeite funkcionalumas-->
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>verifyText</td> 	<td>name_1</td> 	<td>DEFAULT LCR</td> </tr> <tr> 	<td>verifyText</td> 	<td>order_1</td> 	<td>price</td> </tr> <tr> 	<td>verifyText</td> 	<td>providers_1</td> 	<td></td> </tr> <tr> 	<td>verifyText</td> 	<td>destinations_1</td> 	<td></td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/details/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No available LCR for user. Please create LCR and assign it to user. Otherwise this user will be unable to call.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user_lcr_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_lcr_id</td>
+	<td></td>
+</tr>
+<!------------------>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lcr_name</td>
+	<td>test_re_lcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>order_3</td>
+	<td>price</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_3</td>
+	<td>test_re_lcr</td>
+</tr>
+<!--try open admins lcr-->
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start page</td>
+	<td></td>
+</tr>
+<!------------->
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>lcr[order]</td>
+	<td>label=Percent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>order_3</td>
+	<td>percent</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>lcr[order]</td>
+	<td>label=Priority</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>order_3</td>
+	<td>priority</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/details/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>LCR : test_re_lcr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No providers available. Please create at least one.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/details_by_destinations/3?no_direction=true</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new destinations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>country</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>country</td>
+	<td>label=Algeria</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>213 - FIX Algeria proper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>pre</td>
+	<td>label=21320 - FIX Algeria Algeri</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='new_provider']/table/tbody/tr[2]/td[3]/select</td>
+	<td>label=test_re_lcr (priority)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='new_provider']/table/tbody/tr[2]/td[3]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new destinations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>country</td>
+	<td>label=Albania</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>355 - FIX Albania proper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>pre</td>
+	<td>label=35538 - MOB Albania Mobile</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='new_provider']/table/tbody/tr[2]/td[3]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/details_by_destinations/3?no_direction=true</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_2</td>
+	<td>Albania</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>lname_2</td>
+	<td>test_re_lcr</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_3</td>
+	<td>Algeria</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>lname_3</td>
+	<td>test_re_lcr</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tariff_name</td>
+	<td>test_t_for_re</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tariff[currency]</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tariff[purpose]_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_6</td>
+	<td>test_t_for_re</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>test_prov_for_re</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider_tariff_id</td>
+	<td>test_t_for_re</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>ani_2</td>
+	<td>test_prov_for_re</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_name_2</td>
+	<td>test_t_for_re</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>test_prov_for_re2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider_tariff_id</td>
+	<td>test_t_for_re</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>select_prov</td>
+	<td>label=test_prov_for_re - SIP/0.0.0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=test_prov_for_re</td>
+	<td>test_prov_for_re</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_name_2</td>
+	<td>test_t_for_re</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider disabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>select_prov</td>
+	<td>label=test_prov_for_re2 - SIP/0.0.0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>priority_2</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>priority_3</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>providers_3</td>
+	<td>Providers (2)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>test resellers user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>testreseller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_lcr_id</td>
+	<td>label=test_re_lcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_6</td>
+	<td>test resellers user</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_lcr_id</td>
+	<td>label=test_re_lcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<!--check lcrs user-->
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/details/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=test resellers user</td>
+	<td>test resellers user</td>
+</tr>
+<!--check if admin can not see-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>providers_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/details/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have no permission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_0</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/details_by_destinations/3?no_direction=true</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>ResellerAAAAA</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>ResellerAAAAA1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_usertype</td>
+	<td>label=reseller</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>own_providers</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_7</td>
+	<td>ResellerAAAAA</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>ResellerAAAAA</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>ResellerAAAAA1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>providers_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/details/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No available tariffs for user. Please create tariff and assign it to user. Otherwise this user will be unable to call.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/details_by_destinations/3?no_direction=true</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Tariffs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/remove_provider/3?prov=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_sort/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/destroy/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start page</td>
+	<td></td>
+</tr>
+<!--ar neistryne-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>tariff_name_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!--fake form-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>test resellers user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>testreseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/fake_form?path_to_action=/billing/users/update/6?return_action=list&amp;return_controller=users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_1</td>
+	<td>user[username]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_1</td>
+	<td>test resellers user</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>c_73</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_2</td>
+	<td>password[password]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_2</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_2</td>
+	<td>test resellers user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_3</td>
+	<td>user[lcr_id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_3</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_3</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_4</td>
+	<td>user[tariff_id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_4</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_4</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_5</td>
+	<td>b_f[0.0]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_5</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_5</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_6</td>
+	<td>credit</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_6</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_6</td>
+	<td>unlimited</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_7</td>
+	<td>unlimited</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_7</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_7</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_8</td>
+	<td>user[postpaid]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_8</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_8</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_9</td>
+	<td>allow_loss_calls</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_9</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_9</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_10</td>
+	<td>user[call_limit]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_10</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_10</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_11</td>
+	<td>user[blocked]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_11</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_11</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_12</td>
+	<td>block_at_date[year]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_12</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_12</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_13</td>
+	<td>block_at_date[month]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_13</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_13</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_14</td>
+	<td>block_at_date[day]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_14</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_14</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_15</td>
+	<td>block_at_conditional</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_15</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_15</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_16</td>
+	<td>block_conditional_use</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_16</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_16</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_17</td>
+	<td>warning_email_active</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_17</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_17</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_18</td>
+	<td>user[warning_email_balance]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_18</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_18</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_19</td>
+	<td>user[warning_email_hour]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_19</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_19</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_20</td>
+	<td>date[user_warning_email_hour]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_20</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_20</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_21</td>
+	<td>user[warning_balance_call]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_21</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_21</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_22</td>
+	<td>user[warning_balance_sound_file_id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_22</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_22</td>
+	<td>125</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_23</td>
+	<td>user[generate_invoice]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_23</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_23</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_24</td>
+	<td>i1</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_24</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_24</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_25</td>
+	<td>i2</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_25</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_25</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_26</td>
+	<td>i3</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_26</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_26</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_27</td>
+	<td>i4</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_27</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_27</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_28</td>
+	<td>i5</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_28</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_28</td>
+	<td>32</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_29</td>
+	<td>i7</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_29</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_29</td>
+	<td>128</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_30</td>
+	<td>i6</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_30</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_30</td>
+	<td>64</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_31</td>
+	<td>show_zero_calls</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_31</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_31</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_32</td>
+	<td>privacy[global]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_32</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_32</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_33</td>
+	<td>privacy[gui]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_33</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_33</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_34</td>
+	<td>privacy[csv]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_34</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_34</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_35</td>
+	<td>privacy[pdf]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_35</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_35</td>
+	<td>1</td>
+</tr>
+<!--details-->
+<tr>
+	<td>type</td>
+	<td>c_36</td>
+	<td>user[first_name]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_36</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_36</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_37</td>
+	<td>user[last_name]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_37</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_37</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_38</td>
+	<td>user[clientid]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_38</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_38</td>
+	<td>4444444</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_39</td>
+	<td>user[agreement_number]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_39</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_39</td>
+	<td>0000000005</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_40</td>
+	<td>agr_date[year]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_40</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_40</td>
+	<td>2011</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_41</td>
+	<td>agr_date[month]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_41</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_41</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_42</td>
+	<td>agr_date[day]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_42</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_42</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_43</td>
+	<td>user[language]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_43</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_43</td>
+	<td>aaaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_44</td>
+	<td>user[taxation_country]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_44</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_44</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_45</td>
+	<td>user[vat_number]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_45</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_45</td>
+	<td>11111111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_46</td>
+	<td>user[accounting_number]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_46</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_46</td>
+	<td>11111111</td>
+</tr>
+<!--taxes-->
+<tr>
+	<td>type</td>
+	<td>c_47</td>
+	<td>tax1_name</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_47</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_47</td>
+	<td>aaaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_48</td>
+	<td>tax1_value</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_48</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_48</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_49</td>
+	<td>tax2_name</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_49</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_49</td>
+	<td>aaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_50</td>
+	<td>tax2_enabled</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_50</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_50</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_51</td>
+	<td>tax2_value</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_51</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_51</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_52</td>
+	<td>tax3_name</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_52</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_52</td>
+	<td>aaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_53</td>
+	<td>tax3_enabled</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_53</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_53</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_54</td>
+	<td>tax3_value</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_54</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_54</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_55</td>
+	<td>tax4_name</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_55</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_55</td>
+	<td>aaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_56</td>
+	<td>tax4_enabled</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_56</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_56</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_57</td>
+	<td>tax4_value</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_57</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_57</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_58</td>
+	<td>total_tax_name</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_58</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_58</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_59</td>
+	<td>compound_tax</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_59</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_59</td>
+	<td>0</td>
+</tr>
+<!--reg adress-->
+<tr>
+	<td>type</td>
+	<td>c_60</td>
+	<td>address[address]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_60</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_60</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_61</td>
+	<td>address[postcode]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_61</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_61</td>
+	<td>aaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_62</td>
+	<td>address[city]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_62</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_62</td>
+	<td>aaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_63</td>
+	<td>address[county]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_63</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_63</td>
+	<td>aaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_64</td>
+	<td>address[state]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_64</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_64</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_65</td>
+	<td>address[direction_id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_65</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_65</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_66</td>
+	<td>address[phone]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_66</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_66</td>
+	<td>333333</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_67</td>
+	<td>address[mob_phone]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_67</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_67</td>
+	<td>456456456</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_68</td>
+	<td>address[fax]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_68</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_68</td>
+	<td>456456456</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_69</td>
+	<td>address[email]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_69</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_69</td>
+	<td>aaa@aaa.com</td>
+</tr>
+<!--rec-->
+<tr>
+	<td>type</td>
+	<td>c_70</td>
+	<td>recording_enabled</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_70</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_70</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_71</td>
+	<td>recording_forced_enabled</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_71</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_71</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_72</td>
+	<td>user[recording_hdd_quota]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_72</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_72</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_73</td>
+	<td>user[recordings_email]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_73</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_73</td>
+	<td>aaa@aaa.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_lcr_id</td>
+	<td>test_re_lcr</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_username</td>
+	<td>test resellers user</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user_tariff_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_tariff_id</td>
+	<td>Retail - tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_balance_value</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>credit</td>
+	<td>Unlimited</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>unlimited</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_postpaid_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>allow_loss_calls</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_call_limit</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_blocked_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>block_conditional_use</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>warning_active</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_first_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_last_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_clientid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_agreement_number</td>
+	<td>0000000004</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_vat_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>user_accounting_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax1_name</td>
+	<td>TAX</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax1_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax2_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax3_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax4_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>total_tax_name</td>
+	<td>TAX</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax2_enabled</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax3_enabled</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax4_enabled</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax2_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax3_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax4_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>compound_tax</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>address_address</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>address_postcode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>address_city</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>address_county</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>address_state</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>address_phone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>address_mob_phone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>address_fax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>address_email</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

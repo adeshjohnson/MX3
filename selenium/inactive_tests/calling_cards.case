@@ -1,0 +1,3233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>calling_cards</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">calling_cards</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Action was not found</td>
+	<td></td>
+</tr>
+<!--Set taxes for ADMIN-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_5 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>total_tax</td>
+	<td>Total_tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1name</td>
+	<td>First-tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2name</td>
+	<td>Second-tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3name</td>
+	<td>Third-tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4name</td>
+	<td>Forth-tax</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax2active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax3active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax4active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3value</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4value</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>compound_tax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tabTabdhtmlgoodies_tabView1_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Apply to all Calling Cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Taxes set</td>
+	<td></td>
+</tr>
+<!--Execute test-->
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_name</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_description</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=price_with_vat</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_setup_fee</td>
+	<td>1.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_daily_charge</td>
+	<td>1.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_pin_length</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_number_length</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=6</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card group was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>123456789</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>123456799</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cards created: 11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>123456789</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>123456799</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Money']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>4.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>The card was sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Money']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>card_pin</td>
+	<td>12345</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/destroy/23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card was deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/import_csv?cg=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please select file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dial Plans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[name]</td>
+	<td>12345678901</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dialplan_number_pin_length</td>
+	<td>label=10 / 4</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dialplan[data7]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dialplan[data3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dialplan[data4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<!--=CCSHOP=-->
+<tr>
+	<td>open</td>
+	<td>/billing/ccshop</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>login_num</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_num</td>
+	<td>123456789</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_pin</td>
+	<td>12345</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ccshop/card_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>First use:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ccshop/speeddials</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>policija</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>number</td>
+	<td>112</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>speeddial</td>
+	<td>03</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>speeddial_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>policija</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>112</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>03</td>
+	<td></td>
+</tr>
+<!--speeddial-->
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>number</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>speeddial</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>speeddial_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>SpeedDial can only consist of 2 or more digits</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ccshop/speeddial_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>phonebook_speeddial</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>SpeedDial can only consist of 2 or more digits</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ccshop/speeddial_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_link_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ccshop/speeddial_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ccshop/speeddial_destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--==Calling cards for resellers===-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Reseller_permission</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>calling_cards_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>call_shop_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>sms_addon_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>payment_gateways_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_type_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//option[@value='1']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>reseller_type_select</td>
+	<td>Reseller_permission</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/login_as_execute?user=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Logged as</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card groups</td>
+	<td></td>
+</tr>
+<!--========================-->
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_name</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_description</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=price_with_vat</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_setup_fee</td>
+	<td>1.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_daily_charge</td>
+	<td>1.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_pin_length</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_number_length</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=6</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>2.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_name</td>
+	<td>mokestis</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax2_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_value</td>
+	<td>3.2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card group was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>123456800</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>123456811</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cards created: 12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>123456800</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>123456811</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Money']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>4.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>The card was sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Money']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/33</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>card_pin</td>
+	<td>12345678</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/destroy/34</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card was deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/import_csv?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please select file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>lcr_id</td>
+	<td>1</td>
+</tr>
+<!--Testing whether accountant can delete a calling card created by other user-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/destroy/40</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<!--Create new cardgroup and later test if LCR is set correctly.-->
+<!--Creating addtional card group for dropdown box duplicates check....-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_name</td>
+	<td>asd</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_description</td>
+	<td>asd</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<!--!! CHECK for duplicate options, like  10 / 4 , 10 / 4-->
+<tr>
+	<td>storeSelectOptions</td>
+	<td>dialplan_number_pin_length</td>
+	<td>a</td>
+</tr>
+<!--setting "9 / 5,10 / 4" in next line does not work on test server, but works on IDE, "9 / 510 / 4" works on test server but does not work on IDE, why?-->
+<tr>
+	<td>verifyExpression</td>
+	<td>${a}</td>
+	<td>9 / 510 / 4</td>
+</tr>
+<!--Create LCR and assign it to reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lcr_name</td>
+	<td>Test_LCR</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>edit_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_lcr_id</td>
+	<td>label=Test_LCR</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<!--As reseller confirm that LCR has changed-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>lcr_id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>compound_tax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card group was successfully updated</td>
+	<td></td>
+</tr>
+<!--####create card group as accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--setting correct accountant permissions-->
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>asd</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group was created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/2?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>callingcard_pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>callingcard_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>see_financial_data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<!--assigning accountant to the group-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+	<td></td>
+</tr>
+<!--Login as accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_name</td>
+	<td>accountant_group</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_description</td>
+	<td>accountant_group</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card group was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/show</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card was not found</td>
+	<td></td>
+</tr>
+<!--bachmnet manage test -->
+<!--ADMIN-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--buy-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>1111111000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>1111111002</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>buy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>card_interval</td>
+	<td>Card interval : 1111111000 - 1111111002</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>active_cards</td>
+	<td>Active cards : 0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>disabled_cards</td>
+	<td>Disabled cards : 3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>action</td>
+	<td>Action : Buy</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>quantity</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>30.2521 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tax_First-tax</td>
+	<td>3.0252 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tax_Second-tax</td>
+	<td>3.3277 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tax_Third-tax</td>
+	<td>7.3210 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tax_Forth-tax</td>
+	<td>13.1778 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_tax</td>
+	<td>26.8518 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>57.1039 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cards bought</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Check']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Check']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Check']</td>
+	<td></td>
+</tr>
+<!--disable-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>1111111002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>1111111001</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>disable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>card_interval</td>
+	<td>Card interval : 1111111001 - 1111111002</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>active_cards</td>
+	<td>Active cards : 2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>disabled_cards</td>
+	<td>Disabled cards : 0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>action</td>
+	<td>Action : Disable</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cards were successfully disabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<!--delete-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>1111111002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>1111111001</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>card_interval</td>
+	<td>Card interval : 1111111001 - 1111111002</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>active_cards</td>
+	<td>Active cards : 0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>disabled_cards</td>
+	<td>Disabled cards : 2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>action</td>
+	<td>Action : Delete</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cards were successfully deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>1111111002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>1111111001</td>
+	<td></td>
+</tr>
+<!--reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--buy-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>123456800</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>123456805</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>buy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>card_interval</td>
+	<td>Card interval : 123456800 - 123456805</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>active_cards</td>
+	<td>Active cards : 1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>disabled_cards</td>
+	<td>Disabled cards : 4</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>email</td>
+	<td>test_reseller@email.test</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>quantity</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>15.1850 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tax_Tax</td>
+	<td>0.3189 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tax_mokestis</td>
+	<td>0.4961 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_tax</td>
+	<td>0.8150 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>16.0000 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cards bought</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/35</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Check']</td>
+	<td></td>
+</tr>
+<!--disable-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>123456805</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>123456800</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>disable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>card_interval</td>
+	<td>Card interval : 123456800 - 123456805</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>active_cards</td>
+	<td>Active cards : 5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>disabled_cards</td>
+	<td>Disabled cards : 0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>action</td>
+	<td>Action : Disable</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cards were successfully disabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/35</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<!--delete-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>123456802</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>123456805</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>123456800</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>card_interval</td>
+	<td>Card interval : 123456800 - 123456805</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>active_cards</td>
+	<td>Active cards : 0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>disabled_cards</td>
+	<td>Disabled cards : 5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>action</td>
+	<td>Action : Delete</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cards were successfully deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>123456802</td>
+	<td></td>
+</tr>
+<!--verifay TAX-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/card_pay/39?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>send_invoices</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>3.7962 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tax_Tax</td>
+	<td>0.0797 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tax_mokestis</td>
+	<td>0.1240 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_tax</td>
+	<td>0.2038 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>4.0000 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>The card was sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_39</td>
+	<td>3.7962</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_name</td>
+	<td>test2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=price_with_vat</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>10.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>total_tax_name</td>
+	<td>Tax_total</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=( Add cards)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>1234567891</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>1234567892</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cards created: 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/card_pay/45?cg=7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>send_invoices</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>90.9091 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_tax</td>
+	<td>9.0909 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>100.0000 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>The card was sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_45</td>
+	<td>90.9091</td>
+</tr>
+<!--card_buy-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/card_buy/444?cg=322</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card Group not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/card_buy/4?xxg=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card Group not found</td>
+	<td></td>
+</tr>
+<!--cardgroup_edit-->
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/344444</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card Group not found</td>
+	<td></td>
+</tr>
+<!--check permissions-->
+<!--reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>calling_cards_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>call_shop_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>sms_addon_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>payment_gateways_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_addons</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_1']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>CCShop_show_values_without_VAT_for_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/upload_card_image/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/destroy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/cards_to_csv/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<!--accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/2?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>callingcard_pin_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>callingcard_manage_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/upload_card_image/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/destroy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/cards_to_csv/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--Check if cards to csv workds-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/cards_to_csv/1?file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>PIN</td>
+	<td></td>
+</tr>
+<!--ghost minute per destination-->
+<!--add-->
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/show/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/gmp_list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>percent</td>
+	<td>110</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>110.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/gmp_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>percent</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Bad percent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>percent</td>
+	<td>110</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/gmp_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>percent</td>
+	<td>10000.001</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Record updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>10000.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/gmp_destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Record deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/gmp_destroy/9999999</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Record not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Card_image</td>
+	<td>/home/mor/selenium/files/pics/big_test_image.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Upload']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Image file is too big</td>
+	<td></td>
+</tr>
+<!--admin check-->
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/show/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--card generation-->
+<!--admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>123456802</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>123456820</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cards created: 13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>field_123456806_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>field_123456807_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>field_123456808_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>field_123456809_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>field_123456810_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>field_123456811_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>error_123456806</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>error_123456811</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Ok']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_addons</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>CCShop_show_values_without_VAT_for_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/1?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>calling_cards_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>call_shop_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>sms_addon_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>payment_gateways_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_name</td>
+	<td>test_cc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>price_with_vat</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cardgroup_number_length</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>start_number</td>
+	<td>123456802</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>end_number</td>
+	<td>123456825</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cards created: 5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>field_123456806_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>field_123456807_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>field_123456808_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>field_123456809_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>field_123456810_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>field_123456811_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//input[@value='Ok']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Ok']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>balance_60</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>number_60</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/cc_call_list/22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID Price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>4.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>4.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/gmp_list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prefix</td>
+	<td>379</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=percent</td>
+	<td>23.25</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=percent_2</td>
+	<td>23.25 %</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=percent</td>
+	<td>10000.041</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prefix</td>
+	<td>9340</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=percent_3</td>
+	<td>10000.0 %</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=percent</td>
+	<td>9.987</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prefix</td>
+	<td>3706</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prefix</td>
+	<td>9320</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=percent</td>
+	<td>0.9876599</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=percent</td>
+	<td>23.234567</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prefix</td>
+	<td>73</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prefix</td>
+	<td>37633</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=percent</td>
+	<td>100.444444</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<!--Manau turėtų būti arba fiksuotas skaitmenų kiekis po kablelio arba spauzdintų visus kiek yra parašytą. Nes dabar spausdina iš viso 6 skaitmenis ir nesvarbu kurioje vietoje kablelis-->
+<tr>
+	<td>verifyText</td>
+	<td>id=percent_7</td>
+	<td>100.444 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=percent_6</td>
+	<td>23.2346 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=percent_5</td>
+	<td>0.98766 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=percent_4</td>
+	<td>9.987 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=percent_3</td>
+	<td>10000.0 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=percent_2</td>
+	<td>23.25 %</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_ghost_min_perc</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>ghost_min_perc</td>
+	<td>Default: 0.0000 %</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_ghost_min_perc</td>
+	<td>55.55</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>ghost_min_perc</td>
+	<td>Default: 55.5500 %</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_ghost_min_perc</td>
+	<td>66.666</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>ghost_min_perc</td>
+	<td>Default: 66.6660 %</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_ghost_min_perc</td>
+	<td>66666666.666666</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>ghost_min_perc</td>
+	<td>Default: 66666666.6667 %</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_ghost_min_perc</td>
+	<td>-66.666666</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>ghost_min_perc</td>
+	<td>Default: -66.6667 %</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_ghost_min_perc</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>ghost_min_perc</td>
+	<td>Default: 100.0000 %</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_11 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=global_number_decimal</td>
+	<td>label=,</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_ghost_min_perc</td>
+	<td>55,55</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Neišsaugo reikšmių po kablelio, kai skirtuką rašai "," ar ";". Kai skirtukas "." viskas tvarkoje-->
+<tr>
+	<td>verifyText</td>
+	<td>ghost_min_perc</td>
+	<td>Default: 55,5500 %</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_11 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=global_number_decimal</td>
+	<td>label=;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_ghost_min_perc</td>
+	<td>55;55</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>ghost_min_perc</td>
+	<td>Default: 55;5500 %</td>
+</tr>
+<!--Neišsaugo reikšmių po kablelio, kai skirtuką rašai "," ar ";". Kai skirtukas "." viskas tvarkoje-->
+</tbody></table>
+</body>
+</html>

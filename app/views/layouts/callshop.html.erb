@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="lt" id="cs">
+  <head>
+    <title><%= _('Call_shop') %></title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <%= stylesheet_link_tag "callshop", :media => "all" %>
+  </head>
+  <body>
+
+    <div id="header" class="container_24 clearfix">
+      <ul class="grid_16 suffix_5">
+        <%= raw tab_for(_("Manager_view"), { :action => "show", :id => @cshop.id }, { :id => "manager", :title => _('Callshop_manager_view') }) %>
+        <%= raw tab_for(_("Invoices"), { :action => "invoices", :id => @cshop.id }, { :id => "invoices", :title => _('Callshop_invoices') }) %>
+
+        <% if false and ["show", "show_v2"].include?(params[:action])  %>
+          <!-- Enable this only when thete is someting to show in "Information about a number" -->
+          <%= raw content_tag(:li, link_to("<span class='icon'></span>" + _("About_a_Number"), "" ), { :id => "number", :title => _('Information_about_number') }) %>
+        <% end %>
+
+        <% if Rails.env == "development" && ["show", "show_v2"].include?(params[:action])  %>
+          <li id="toggle-updating">
+            <a href="" class="running"><span class='icon'></span><%= _("Toggle_updating") %></a>
+          </li>
+        <% end %>
+        <%= raw tab_for(_("Rate_search"), { :action => "rate_search", :id => @cshop.id }, { :id => "rate_search", :title => _('Callshop_rate_search') }) %>
+      </ul>
+
+      <div class="grid_3">
+        <ul class="clearfix">
+          <%= raw tab_for(_("Logout"), { :controller => "callc", :action => "logout" }, { :id => "logout", :class => "right", :title => _('Callshop_logout') }) %>
+        </ul>
+      </div>
+    </div>
+    <%= javascript_include_tag "jquery-1.4.2.min.js" %>
+
+    <%= yield :scripts %>
+
+    <div id="content" class="container_24">
+      <%= yield %>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+      /* eyecandy */
+      $('input[type=text], textarea').live('focusin focusout', function(ev) {
+      if (ev.type == "focusin") {
+      $(this).parent('span.field-wrap').animate({ borderColor: '#77acd7' }, 200);
+      }
+      if (ev.type == "focusout") {
+      $(this).parent('span.field-wrap').animate({ borderColor: '#AAAAAA' }, 200);
+      }
+      });
+
+      /* row highlight */
+      $("table tbody tr").each(function(row, el) {
+      $(el).mouseover(function() {
+      $(this).addClass('over');
+      });
+
+      $(el).mouseout(function() {
+      $(this).removeClass('over');
+      });
+      });
+      });
+    </script>
+    <% if false and ["show", "show_v2"].include?(params[:action])  %>
+      <%= javascript_include_tag "jquery-ui-1.8.5.custom.min.js" %>
+      <script type="text/javascript">
+        var number_info = {
+        "i18n" : {
+        "number" : "<%= _("Number") %>",
+        "button_ok" : "<%= _("Check") %>",
+        "button_cancel" : "<%= _("Close") %>",
+        "enter_number" : "<%= _("Please_enter_number") %>"
+        },
+        "url" : {
+        "number_info_path" : "<%= url_for(:controller => "callshop", :action =>"get_number_data") %>",
+        "prefix" : "<%= Web_Dir %>"
+        }
+        }
+      </script>
+      <!-- Enable this only when thete is someting to show in "Information about a number" -->
+      <%= javascript_include_tag "callshop/about_number.js" %>
+    <% end %>
+
+  </body>
+</html>

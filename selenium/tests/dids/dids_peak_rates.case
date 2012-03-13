@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/index/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=page_title</td>
+	<td>DID rates</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID: 37093042422</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Current status: Reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assigned to user: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider's rate. This rate is paid to or by provider for using this DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>For Work Days and Free Days:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Split to Work Days and Free Days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//a[contains(@href, '/billing/did_rates/manage/2?rdaction=SPLIT')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//a[contains(@href, '/billing/did_rates/manage/3?rdaction=SPLIT')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Incoming rate. This rate is paid by user who calls this DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Owner rate. This rate is paid by owner of this DID if somebody is calling to this DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Split to Work Days and Free Days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate details splited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=td &gt; b</td>
+	<td>For Work Days:</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>For Free Days:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>For Free Days:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_4</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Split to Work Days and Free Days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[5]/tbody/tr/td/b</td>
+	<td>For Work Days:</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[7]/tbody/tr/td/b</td>
+	<td>For Free Days:</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Split to Work Days and Free Days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[9]/tbody/tr/td/b</td>
+	<td>For Work Days:</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[11]/tbody/tr/td/b</td>
+	<td>For Free Days:</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/index/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_rate</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_connection_fee</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_increment_s</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_min_time</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_rate</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_connection_fee</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_increment_s</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_min_time</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_rate</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_connection_fee</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_increment_s</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_min_time</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/999999</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/index/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/did_rates/manage/9?rdaction=SPLIT')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>For Work Days:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//table[5]/tbody/tr/td/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[7]/tbody/tr/td/b</td>
+	<td>For Free Days:</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_9</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_10</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=connection_fee_9</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=connection_fee_10</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=increment_s_9</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=increment_s_10</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=min_time_9</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=min_time_10</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Split to Work Days and Free Days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=rate_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_7</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_11</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=connection_fee_7</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=connection_fee_11</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=increment_s_7</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=increment_s_11</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=min_time_7</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=min_time_11</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/did_rates/manage/10?rdaction=COMB_FD')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//a[contains(@href, '/billing/did_rates/manage/10?rdaction=SPLIT')]</td>
+	<td>Split to Work Days and Free Days</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_10</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=connection_fee_10</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=increment_s_10</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=min_time_10</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Combine to Work Days and Free Days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Split to Work Days and Free Days</td>
+	<td>Split to Work Days and Free Days</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_7</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=connection_fee_7</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=increment_s_7</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=min_time_7</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/did_rates/manage/8?rdaction=SPLIT')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//a[contains(@href, '/billing/did_rates/manage/12?rdaction=COMB_FD')]</td>
+	<td>Combine to Work Days and Free Days</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>For Work Days:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>For Free Days:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_end_time</td>
+	<td>14:59:59</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=end_time_12</td>
+	<td>14:59:59</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=end_time_13</td>
+	<td>23:59:59</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_12</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_13</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=connection_fee_12</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=connection_fee_13</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=increment_s_12</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=increment_s_13</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=min_time_12</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=min_time_13</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_rate</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_connection_fee</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_increment_s</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_min_time</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=page_title</td>
+	<td>Edit Did rates: 37063042438</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_end_time</td>
+	<td>11:59:59</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=end_time_12</td>
+	<td>11:59:59</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=end_time_13</td>
+	<td>23:59:59</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>id=end_time_12</td>
+	<td>14:59:59</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/did_rates/manage/12?rdaction=COMB_FD')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate details combined</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//a[contains(@href, '/billing/did_rates/manage/12?rdaction=SPLIT')]</td>
+	<td>Split to Work Days and Free Days</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=end_time_12</td>
+	<td>11:59:59</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=end_time_13</td>
+	<td>23:59:59</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_12</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_13</td>
+	<td>7.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=connection_fee_12</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=connection_fee_13</td>
+	<td>7.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=increment_s_12</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=increment_s_13</td>
+	<td>7.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=min_time_12</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=min_time_13</td>
+	<td>7.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/index/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/fake_form?path_to_action=/billing/did_rates/update/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_1</td>
+	<td>did_rate[end_time]</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_1</td>
+	<td>22:22:22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_2</td>
+	<td>did_rate[rate]</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_2</td>
+	<td>0.0001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_3</td>
+	<td>did_rate[connection_fee]</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_3</td>
+	<td>0.003</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_4</td>
+	<td>did_rate[increment_s]</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_4</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_5</td>
+	<td>did_rate[min_time]</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_5</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

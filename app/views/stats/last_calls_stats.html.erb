@@ -1,0 +1,9 @@
+<%= javascript_include_tag "wz_tooltip" %>
+<div>
+  <span><%= b_currency + _('Currency') %>: <%= session[:show_currency]%></span>
+  <br />
+  <%= b_call + _('total_calls') %>: <b><%= @total_calls %></b>
+</div>
+<br />
+<% assigned_partials = {"admin"=> "admin", "accountant" => "admin", "reseller" => "reseller", "user" => "user"} -%>
+<%= render :partial => "last_calls_stats_#{assigned_partials[session[:usertype].to_s]}" %>

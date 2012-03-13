@@ -1,0 +1,14 @@
+
+<br><br>
+<!---
+<%= form_tag(:action => 'realtime_stats') do %>
+  <%= _('Time_to_call_per_day') %>:
+  <%= text_field 'rt' , 'calltime_per_day', "size" => 2, :class => "input", :maxlength => "3", :value => @ttcpd  %> h.
+  <%= submit_tag _('Change'), :disable_with=>_('Processing..')%>
+<% end %>
+--->
+
+<%= link_to b_call + _('more_calltime_made_users'), { :action => "show_ranks", :id => "duration" }, :popup => true %>
+<br>
+<br>
+<%= link_to b_call + _('Active_Calls'), :controller => "stats", :action => "active_calls" %>

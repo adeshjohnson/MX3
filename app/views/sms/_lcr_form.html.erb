@@ -1,0 +1,12 @@
+<!--[form:lcr]-->
+<p><label for="lcr_name"><%= _('Name') %></label><br/>
+<%= text_field 'lcr', 'name', "class" => "input"   %></p>
+
+<p><label for="lcr_order"><%= _('Order') %></label><br/>
+<select name="lcr[order]">
+    <option value="price" <%= 'selected' if @lcr.order == "price" %> ><%= _('Price') %></option>   
+    <option value="priority" <%= 'selected' if @lcr.order == "priority" %>><%= _('Priority') %></option>    
+</select>
+
+<!--[eoform:lcr]-->
+

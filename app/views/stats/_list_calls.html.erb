@@ -1,0 +1,269 @@
+<% if @calls.size > 0 %> 
+
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left">      &nbsp;<%= _('date') %>      </th>
+      <th align="left">      <%= _('called_from') %>      </th>
+      <th align="left">      <%= _('called_to') %>      </th>
+      <% if @show_destination %>
+        <th align="left">      <%= _('Destination') %>      </th>
+      <% end %>
+      <% if session[:usertype] == "admin" %>
+        <th align="left">      <%= _('Provider') %>      </th>
+      <% end %>
+      <th align="center">
+        <% if @call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all"%>
+          <%= _('duration') %>
+        <% else %>
+          <%= _('holdtime')%>
+        <% end %>
+      </th>
+      <% if @call_type != "answered" %>
+        <th align="right"> <%= _('hangup_cause') %> </th>
+      <% end %>
+      <% if not (@call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all")%>
+        <th> <%= _('processed') %> </th>
+        <% if session[:usertype] == "admin"%>
+          <% if @direction == "incoming"  %>
+            <% if session[:usertype] == "admin"%>
+              <th align="right"> <%= _('Provider_price') %> </th>
+              <th align="right"> <%= _('Incoming_price') %> </th>
+              <th align="right"> <%= _('Owner_price') %> </th>
+              <th align="right"> <%= _('Profit') %> </th>
+            <% end %>
+            <th></th>
+          <%else%>
+            <th align="right"> <%= _('Price') %>  </th>
+            <th align="right"> <%= _('Provider_price') %> </th>
+            <th align="right"> <%= _('Profit') %> </th>
+            <th align="right"> <%= _('Margin') %> </th>
+            <th align="right"> <%= _('Markup') %> </th>
+            <th></th>
+          <% end %>
+        <% end %>
+      <% else %>
+        <% if @user.show_billing_info == 1  and session[:usertype] == "user"  %>
+          <th align="right"> <%= _('Price') %> </th>
+        <% end %>
+        <% if session[:usertype] == "admin" or  session[:usertype] == "reseller"%>
+          <% if @direction == "incoming"  %>
+            <% if session[:usertype] == "admin"%>
+              <th align="right"> <%= _('Provider_price') %>  </th>
+              <th align="right"> <%= _('Incoming_price') %>  </th>
+              <th align="right"> <%= _('Owner_price') %>  </th>
+              <th align="right"> <%= _('Profit') %> </th>
+            <% else %>
+              <th align="right"> <%= _('Price') %> </th>
+
+            <% end %>
+          <% else %>
+            <th align="right"> <%= _('Price') %></th>
+            <th align="right"> <%= _('Provider_price') %> </th>
+            <th align="right"> <%= _('Profit') %> </th>
+            <th align="right"> <%= _('Margin') %> </th>
+            <th align="right"> <%= _('Markup') %> </th>
+          <% end %>
+        <% end %>
+
+        <% if session[:usertype] == "admin" %>
+          <th></th>
+        <% end %>
+
+      <% end %>
+    </tr>
+    <!-- Calls -->
+    <% @calls.each_with_index{ |call, i| %>
+
+      <% call.processed == 0 ? text_class="n" : text_class="n_disabled" %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="calldate_<%= call.id %>" class="<%= text_class %>"><%= nice_date_time(call.calldate) %></td>
+        <td id="src_<%= call.id %>" class="<%= text_class %>"><%= nice_src(call) %></td>
+        <td id="dst_<%= call.id %>" class="<%= text_class %>"><%= call.dst %></td>
+        <% if @show_destination %>
+          <td id="direction_<%= call.id %>" class="<%= text_class %>">
+            <%= call.direction_name if call.direction_name %>
+            <% if call.destination_name.to_s.length > 0%>
+              &nbsp;&nbsp;
+              <%= call.destination_subcode %> <%= call.destination_name %>
+            <% end %>
+          </td>
+        <% end %>
+        <% if session[:usertype] == "admin" %>
+          <td id="provider_<%= call.id %>" class="<%= text_class %>"><%= call.provider_name if call.provider_name %></td>
+        <% end %>
+        <td id="billsec_<%= call.id %>" class="<%= text_class %>" align="center">
+          <% if @call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all"%>
+
+            <%  if @direction == "incoming" %>
+              <%= nice_time(call.did_billsec.to_i) %>
+            <%  else %>
+              <%= nice_time(call.nice_billsec.to_i) %>
+            <%  end %>
+
+          <% else %>
+            <%= nice_time call.duration %>
+          <% end %>
+        </td>
+
+        <% if @call_type != "answered" %>
+          <td id="disposition_<%= call.id %>" class="<%= text_class %>"  align="right" <%= "onmouseover=\"Tip(\'" + get_hangup_cause_message(call.hangupcause) + "\')\" onmouseout = \"UnTip()\"" if call.disposition != "ANSWERED" and call.hangupcause %>>
+            <%= call.disposition %>
+            <%= " (" + call.hangupcause.to_s + ")" %>
+          </td>
+        <% end %>
+
+        <% if not (@call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all")%>
+          <%= form_tag(:action => 'call_list', :calltype => @call_type) do %>
+            <td id="processed_<%= call.id %>" align="center" valign="middle" class="<%= text_class %>">
+              <%= hidden_field_tag "processed", call.id %>
+              <% if call.processed == 0 %>
+                <%= submit_tag _('processed'), :disable_with=>_('Processing..')%>
+              <% else %>
+                <%= submit_tag _('cancel'), :disable_with=>_('Processing..')%>
+              <% end %>
+            </td>
+          <%end%>
+        <% else %>
+
+          <% if session[:usertype] == "user" %>
+
+            <% if  @user.show_billing_info == 1 and call.disposition == "ANSWERED"%>
+              <% if @direction != "incoming"  %>
+                <td id="rate_<%= call.id %>" align="right">  <%= nice_number( @curr_rate[call.id]) %></td>
+              <% else %>
+                <td id="rate_<%= call.id %>" align="right">  <%= nice_number(@curr_rate2[call.id].to_f)%></td>
+              <% end %>
+            <% else %>
+              <td id="rate_<%= call.id %>" align="right"> <%= nice_number(0) %> </td>
+            <% end %>
+
+          <% end %>
+
+        <% end %>
+
+        <% if session[:usertype] == "admin"  or session[:usertype] == "reseller" %>
+
+          <% if @direction == "incoming"  %>
+            <% if session[:usertype] == "admin" %>
+              <td id="prov_date_<%= call.id %>" align="right" ><%= nice_number(@curr_prov_rate2[call.id]) %> </td>
+              <td id="inc_rate_<%= call.id %>" align="right" ><%= nice_number(@curr_inc_rate[call.id].to_f) %> </td>
+              <td id="rate2_<%= call.id %>" align="right" ><%= nice_number(@curr_rate2[call.id].to_f)%>  </td>
+              <td id="rate_sum_<%= call.id %>" align="right" ><%= nice_number(@curr_rate2[call.id].to_f +  @curr_prov_rate2[call.id].to_f + @curr_inc_rate[call.id].to_f )%> </td>
+            <% else %>
+              <td id="rate2_<%= call.id %>" align="right" ><%= nice_number(@curr_rate2[call.id].to_f)%>  </td>
+            <% end %>
+          <% else %>
+
+            <%if call.billsec.to_i > 0 %>
+
+              <!-- price -->
+              <td id="rate_<%= call.id %>" align="right" ><%= nice_number( @curr_rate[call.id].to_f) %>      </td>
+            <% else %>
+              <td align="right" > </td>
+            <% end %>
+
+            <%if call.provider_price.to_f > 0 %>
+              <!-- provider price -->
+              <td id="prov_rate_<%= call.id %>" align="right" ><%= nice_number( @curr_prov_rate[call.id].to_f) %>      </td>
+            <% else%>
+              <td id="prov_rate_<%= call.id %>" align="right" > </td>
+            <% end %>
+
+
+            <%if call.billsec.to_i > 0 %>
+              <!-- profit -->
+              <td id="profit_<%= call.id %>" align="right" ><%= nice_number( @curr_rate[call.id].to_f - @curr_prov_rate[call.id].to_f) %>      </td>
+              <td id="margin_<%= call.id %>" align="right" ><%= nice_number((( @curr_rate[call.id].to_f - @curr_prov_rate[call.id].to_f)/ @curr_rate[call.id].to_f) *100).to_s + " %" if @curr_rate[call.id].to_f != 0 %></td>
+              <td id="markup_<%= call.id %>" align="right" ><%= nice_number((( @curr_rate[call.id].to_f / @curr_prov_rate[call.id].to_f) *100)-100).to_s + " %"  if @curr_prov_rate[call.id].to_f != 0 %></td>
+
+            <% else%>
+
+              <td id="profit_<%= call.id %>" align="right" > </td>
+              <td id="margin_<%= call.id %>" align="right" > </td>
+              <td id="markup_<%= call.id %>" align="right" > </td>
+            <%end%>
+          <%end%>
+        <%end%>
+
+        <% if session[:usertype] == "admin"%>
+          <td align="center" >
+          	<%= link_to(b_call_info, {:controller => "calls", :action => "call_info" , :id => call.id}, {:id => "callinfo_link_#{call.id}"}) if call %>
+            <% if call.getDebugInfo != nil %>
+              <%= image_tag('icons/cog.png', :border => 0, :onmouseover=> "Tip(\'"+format_debug_info(call.getDebugInfo)+"\')", :onmouseout => "UnTip()" ) %>
+            <% end %>			
+          </td>
+        <% end%>
+      </tr>
+    <% } %>
+
+    <!-- Totals -->
+
+    <tr>
+      <th align="left">      &nbsp;<%= _('Total') %>:      </th>
+      <th></th>
+      <th></th>
+      <% if @show_destination %>
+        <th align="left"></th>
+      <% end %>
+      <% if session[:usertype] == "admin" %>
+        <th></th>
+      <% end %>
+
+      <th id="total_billsec" align="center">
+        <% if @call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all"%>
+          <%= nice_time @total_billsec %>
+        <% else %>
+          <%= nice_time @total_duration %>
+        <% end %>
+      </th>
+
+      <% if @call_type != "answered" %>
+        <th align="right">  </th>
+      <% end %>
+
+      <% if @call_type == "missed" or @call_type == "missed_inc" or @call_type == "missed_inc_all"%>
+        <th></th>
+      <% else %>
+
+        <% if session[:usertype] == "user" %>
+          <% if @user.show_billing_info == 1 %>
+            <% if @direction == "incoming"  %>
+              <th id="total_price" align="right"> <%= nice_number( @total_price2 ) %> </th>
+            <% else %>
+              <th id="total_price" align="right"> <%= nice_number( @total_price ) %> </th>
+            <% end%>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if session[:usertype] == "admin"  or session[:usertype] == "reseller" %>
+        <% if @direction == "incoming"  %>
+          <% if session[:usertype] == "admin" %>
+            <th id="total_prov_price" align="right" ><%= nice_number @total_inc_prov_price %></th>
+            <th id="total_inc_price" align="right" ><%= nice_number(@total_inc_price ) %> </th>
+            <th id="total_price2" align="right" ><%= nice_number(@total_price2)%>  </th>
+            <th id="total_profit" align="right" ><%= nice_number(@total_profit)%> </th>
+          <% else %>
+            <th id="total_price2" align="right" ><%= nice_number(@total_price2)%>  </th>
+          <% end %>
+        <% else %>
+          <th id="total_price" align="right" ><%= nice_number(@total_price.to_f) %></th>
+          <th id="total_prov_price" align="right" ><%= nice_number(@total_prov_price) %></th>
+          <th id="total_profit" align="right" ><%= nice_number(@total_profit) %></th>
+          <th id="total_margin" align="right" ><%= nice_number(((@total_price.to_f - @total_prov_price.to_f)/ @total_price.to_f) *100).to_s + " %" if @total_price.to_f != 0%></th>
+          <th id="total_markup" align="right" ><%= nice_number(((@total_price.to_f / @total_prov_price.to_f) *100)-100).to_s + " %" if @total_prov_price.to_f != 0 %></th>
+        <% end %>
+      <% end %>
+
+      <% if session[:usertype] == "admin"%>
+        <th></th>
+      <% end %>
+
+    </tr>
+  </table>
+
+<% else %>
+  <br>
+  <%= _('No_calls') %>...
+<% end%>
+

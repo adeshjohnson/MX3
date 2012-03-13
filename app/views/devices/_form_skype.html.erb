@@ -1,0 +1,149 @@
+<br />
+<%= b_info + _('Skype_Device_explained') %>
+<br />
+<br />
+<table width="100%">
+  <tr>
+    <td valign="top">
+      <table class="simple">
+        <tr>
+          <td colspan="2" class="bottom_border">
+            <b><%= _('General') %></b>
+          </td>
+        </tr>
+        <tr><td height="10"></td></tr>
+        <tr>
+          <td> <%= _('Accountcode') %>:   </td>
+          <td><%= @device.accountcode  if @device %> </td>
+        </tr>
+        <tr>
+          <td> <%= _('Description') %>:   </td>
+          <td><%= text_field 'device', 'description', "class" => "input" %> </td>
+        </tr>
+
+        <% if @device_type != "Virtual"%>
+          <% if @default.to_i != 1 %>
+            <% if !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_1] != 2 ) and session[:usertype] != "reseller"%>
+              <tr>
+                <td id="extension_name"><%= _('extension') %>:</td>
+                <td id="extension_value"><%= text_field_tag 'device[extension]', @extension, "class" => "input" , :id=>"device_extension" %></td>
+              </tr>
+            <% else %>
+              <% if session[:usertype] == "accountant" and session[:acc_device_edit_opt_1] == 1 or session[:usertype] == "reseller"%>
+                <tr>
+                  <td id="extension_name"><%= _('extension') %>:</td>
+                  <td id="extension_value"><%= @extension %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <tr>
+          <td> <%= _('Tech') %>: </td>
+          <td> <b><%= b_skype + @device_type %></b>   </td>
+        </tr>
+        <tr>
+          <td height="5"></td>
+        </tr>
+        <%
+        if @device
+          timeout = @device.timeout
+          max_timeout = @device.max_timeout
+        else
+          timeout = Confline.get_value("Default_device_timeout", session[:user_id])
+          max_timeout = Confline.get_value("Default_device_max_timeout", session[:user_id])
+        end                              %>
+        <tr>
+          <td> <%= _('Ringing_Timeout') %>:   </td>
+          <td><%= text_field_tag 'device_timeout', timeout, "class" => "input" , :size => "5", :maxlength => "4" %> <%= _('seconds') %> </td>
+        </tr>
+        <tr <%= tooltip(_('Call_Timeout'), _('Call_Timeout_Explanation')) %>>
+          <td> <%= _('Call_Timeout') %>:   </td>
+          <td><%= text_field_tag 'max_timeout', max_timeout, "class" => "input" , :size => "5", :maxlength => "4" %> <%= _('seconds') %> </td>
+        </tr>
+      <% if @device
+        device_ani = @device.ani
+        device_istrunk = @device.istrunk
+        #device_record = @device.record
+        dev_call_limit = @device.call_limit
+        device_server = @device.server_id # if session[:usertype] == 'admin'
+      else
+        device_ani = Confline.get_value("Default_device_ani", session[:user_id]).to_i
+        device_istrunk = Confline.get_value("Default_device_istrunk", session[:user_id])
+        device_server = Confline.get_value("Default_device_server_id", session[:user_id])
+        if session[:usertype] == 'admin'
+          device_record = Confline.get_value("Default_device_record", session[:user_id])
+
+        else
+          device_record = 0
+        end
+        dev_call_limit = Confline.get_value("Default_device_call_limit", session[:user_id])
+      end
+    %>
+      <% if session[:usertype] == "admin" or session[:usertype] == "reseller" or (session[:usertype] == "accountant" and session[:acc_user_create_opt_7].to_i == 1) %>
+        <tr>
+          <td> <%= _('Call_limit') %>:   </td>
+          <td>
+            <%= text_field_tag 'call_limit', dev_call_limit, "class" => "input", :size => "9", :maxlength => "10" %>  ( <%= _('Call_limit_notice') %> *)
+          </td>
+        </tr>
+<%# if session[:usertype] == "admin"%>
+        <tr>
+          <td> <%= b_server + _('Server') %>:   </td>
+          <td>
+            <select name="device[server_id]" >
+              <% for ser in @servers %>
+                <option value=<%= ser.server_id %> <%= "selected" if device_server.to_i == ser.server_id %>> ID: <%= ser.server_id %>, IP: <%= ser.server_ip %> (<%= ser.comment%>) </option>
+              <% end %>
+            </select>
+          </td>
+        </tr>
+<%# end %>
+      <% else %>
+        <% if session[:usertype] == "accountant" and session[:acc_user_create_opt_7].to_i == 1 %>
+          <tr>
+            <td id="set_call_limit_name"><%= _('Call_limit') %>:</td>
+            <td><%= dev_call_limit %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      <%
+      if @device
+        save_call_log = @device.save_call_log
+        lang = @device.language.to_s.blank? ? 'en' : @device.language
+      else
+        save_call_log = Confline.get_value("Default_device__save_call_log", session[:user_id])
+        lang = Confline.get_value("Default_device_language", session[:user_id]).to_s.blank? ? 'en' : Confline.get_value("Default_device_language", session[:user_id])
+      end
+    %>
+        <tr>
+          <td><%= _('Save_Call_Log') %>:</td>
+          <td><%= check_box_tag 'save_call_log', "1", save_call_log.to_i == 1 %></td>
+        </tr>
+        <tr <%= tooltip(_('Language'), _('Device_Language_Explanation')) %>>
+          <td><%= _('Language') %>:</td>
+          <td>
+          <%= text_field_tag 'device[language]', lang, :size => 10, "class" => "input"  %>
+          </td>
+        </tr>
+        <tr><td height="20"></td></tr>
+        <tr>
+          <td class="bottom_border" colspan=2>
+            <b><%= _('Authentication') %></b>
+          </td>
+        </tr>
+        <tr><td height="10"></td></tr>
+        <tr>
+<%# not change , this is the variable Rename%>
+          <td id="username_name"><%= _('Skype_Name') %>:</td>
+          <td id="username_value"><%= text_field 'device', 'name', "class" => "input" %></td>
+        </tr>
+      <%= hidden_field_tag 'device[extension]', @extension, "class" => "input" , :id=>"device_extension" %>
+      <%= hidden_field_tag 'device[repeat_rtime_every]', '60', "class" => "input" %>
+      <%= hidden_field_tag 'device[tell_rtime_when_left]', '60', "class" => "input" %>
+      <% @owner = @user.owner_id if !@owner %>
+      <%= render :partial => "device_recordings"%>
+      </table>
+    </td>
+  </tr>
+</table>

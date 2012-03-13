@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>device_username</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">device_username</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Default User saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_name</td>
+	<td>103@#$%^&amp;*</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device username must consist only of digits and letters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_name</td>
+	<td>103werwer</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_secret</td>
+	<td>103werwer</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Name and password cannot be equal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_name</td>
+	<td>103werwer</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_secret</td>
+	<td>12345678</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_name</td>
+	<td>asd098sad@khjsdk098.lkasdh</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_name</td>
+	<td>aa$</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>H323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_1']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Allow to create user and device with matching username and password:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>allow_registration_username_passwords_in_devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>allow_registration_username_passwords_in_devices</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_registration_username_passwords_in_devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>allow_registration_username_passwords_in_devices</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=here</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testtt</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password2</td>
+	<td>testtt</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>first_name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>last_name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email</td>
+	<td>a@a.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_type_iax2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Password is too short</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testttee</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password2</td>
+	<td>testttee</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Thank you for registering!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=KolmiSoft</td>
+	<td>KolmiSoft</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>IAX2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Username: test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Password: testttee</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=here</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>test2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testttaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password2</td>
+	<td>testttaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>first_name</td>
+	<td>test2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>last_name</td>
+	<td>test2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email</td>
+	<td>a2@a.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_type_sip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Thank you for registering!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=KolmiSoft</td>
+	<td>KolmiSoft</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SIP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Username: test2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Password: testttaa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=test test</td>
+	<td>test test</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_8</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>secret_8</td>
+	<td>testttee</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=test2 test2</td>
+	<td>test2 test2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_9</td>
+	<td>test2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>secret_9</td>
+	<td>testttaa</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>allow_short_passwords_in_devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>allow_short_passwords_in_devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>allow_short_passwords_in_devices</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=here</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>test3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>testtt</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password2</td>
+	<td>testtt</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>first_name</td>
+	<td>test3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>last_name</td>
+	<td>test3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email</td>
+	<td>a3@a.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_type_iax2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>Password is too short</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Registration succesful</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IAX2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>test3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>testtt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=test3 test3</td>
+	<td>test3 test3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_10</td>
+	<td>test3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>secret_10</td>
+	<td>testtt</td>
+</tr>
+</tbody></table>
+</body>
+</html>

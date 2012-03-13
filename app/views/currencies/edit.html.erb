@@ -1,0 +1,16 @@
+<br/>
+<table width="50%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Description') %></th>
+    <th align="left"><%= _('Exchange_rate') %> (<%= session[:default_currency] %>/?)</th>
+    <th></th>
+  </tr>
+<%= form_tag :action => 'update', :id => @currency.id do %>
+  <tr class="row1">     
+        <td align="left"><%= text_field_tag 'full_name', @currency.full_name, "class" => "input", :size => "30", :maxlength => "30"  %></td>
+        <td align="left"><%= text_field_tag 'exchange_rate', @currency.exchange_rate, "class" => "input", :size => "20", :maxlength => "20", :disabled => (@currency.id == 1) %></td>    
+        <td align="center" colspan=2><%= image_submit_tag 'icons/edit.png', :title => _('Edit') %></td>
+    </tr>
+<% end %>
+</table>
+

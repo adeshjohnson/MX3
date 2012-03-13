@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=provider_add</td>
+	<td>label=Provider_for_admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=Add_new_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Provider_for_admin</td>
+	<td>Provider_for_admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=prov_tech_5</td>
+	<td>SIP</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=prov_channel_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=prov_login_5</td>
+	<td>Provider_for_admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=prov_password_5</td>
+	<td>please_change</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=prov_server_ip_5</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=prov_tariff_5</td>
+	<td>Provider_admin_tariff</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Page_white_gear&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Call&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_rules/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=dst_new_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=dst_new_cut</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=dst_new_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=dst_new_minlen</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=dst_new_maxlen</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=src_new_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=src_new_cut</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=src_new_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=src_new_minlen</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=src_new_maxlen</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dst_new_name</td>
+	<td>Vardas</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dst_new_cut</td>
+	<td>80</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dst_new_add</td>
+	<td>54</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dst_new_minlen</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dst_new_maxlen</td>
+	<td>346</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=dst_add_new_img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=src_new_name</td>
+	<td>normal1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=src_new_cut</td>
+	<td>90</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=src_new_add</td>
+	<td>6140</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=src_new_minlen</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=src_new_maxlen</td>
+	<td>55</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=src_add_new_img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>css=#prov_enable_2_1 &gt; form &gt; input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_2</td>
+	<td>normal1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=cut_2</td>
+	<td>90</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=add_2</td>
+	<td>6140</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=minlen_2</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=maxlen_2</td>
+	<td>55</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=maxlen_1</td>
+	<td>346</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=minlen_1</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=add_1</td>
+	<td>54</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=cut_1</td>
+	<td>80</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_1</td>
+	<td>Vardas</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_rule_edit/5?providerrule_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cut</td>
+	<td>000987</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=add</td>
+	<td>#%$2twg54</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's calls: Provider_for_admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Providers deleted</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

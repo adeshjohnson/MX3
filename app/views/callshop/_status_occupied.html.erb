@@ -1,0 +1,29 @@
+<% invoice = user.cs_invoices.first %>
+<% active_calls = user.activecalls.first %>
+<%if active_calls and invoice%>
+  <tr id="booth-<%=user.id%>" class="booth occupied booth-<%=user.id%>">
+    <td class="status"><span></span></td>
+    <td class="num"><%= index + 1 %></td>
+    <td class="created_at"><%= nice_date_time(invoice.created_at) %></td>
+    <td class="duration"><%= nice_time(active_calls.try(:duration)) %></td>
+    <td class="user_rate"><%= active_calls.try(:user_rate) %></td>
+    <td class="country"><%= active_calls.try(:destination).try(:direction).try(:name) %></td>
+    <td class="number"><%= active_calls.try(:dst) %></td>
+    <td class="balance">
+      <% if user.prepaid? %>
+        <span class="balance-value <%= ((user.balance - invoice.call_price) < 0.0) ? "red" : "green" %>"><%= _(user.user_type).upcase %> (<%= sprintf("%.2f", user.balance.to_f) %>)</span>
+        <a href="" class="topup topup-prepaid" title="<%= _('Adjust_user_balance')%>">&nbsp;</a>
+      <% else %>
+        <span class="balance-value <%= (invoice.call_price > 0.0) ? "red" : "green" %>"><%= _(user.user_type).upcase %> (<%= sprintf("%.2f", user.balance.to_f) %>)</span>
+      <% end %>
+    </td>
+    <td class="comment">
+      <%= h(invoice.comment) %><%= link_to "&nbsp;", "", {:class => "comm-edit", :title => _('Update_comment')} %>
+    </td>
+    <td class="session last">
+      <div class="btn">
+        <a class="end-session" href=""><%= _('End') %></a>
+      </div>
+    </td>
+  </tr>
+<% end %>

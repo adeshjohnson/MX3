@@ -1,0 +1,72 @@
+<%= javascript_include_tag "wz_tooltip" %>
+
+<table width="100%">
+ <tr><td class="nb">
+
+<div align="left" class="nb">
+ <%= form_tag(:action => 'providers_calls', :call_type => @options[:call_type], :direction => @options[:direction]) do %>
+   <%= _('From') %>: <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+   &nbsp;&nbsp;<%= _('to') %>: <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+   &nbsp;&nbsp;<%= submit_tag _('Change_date'), :disable_with=>_('Processing..')%>
+<% end %>
+</div>
+
+ </td>
+
+<td class="nb" align="right">
+    <%= b_currency + _('Currency') %>: <b><%= session[:show_currency] %></b>
+</td></tr>
+ 
+
+ <tr>
+ <td class="nb">
+
+<%= form_tag :action => 'providers_calls' do %>
+
+     <%= _('Direction') %>: 
+     <select name="direction" > 
+        <option value="outgoing" selected> <%= _('Outgoing') %> </option>
+        <option value="incoming" <%= "selected" if @options[:direction] == "incoming"%>> <%= _('Incoming') %> </option>
+
+    </select>
+
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('Status') %>: 
+     <select name="call_type" > 
+        <option value="all" selected> <%= _('All') %> </option>
+        <option value="ANSWERED" <%= "selected" if @options[:call_type] == "ANSWERED"%>> <%= _('Answered') %> </option>
+        <option value="NO ANSWER" <%= "selected" if @options[:call_type] == "NO ANSWER"%>> <%= _('No_Answer') %> </option>
+        <option value="FAILED" <%= "selected" if @options[:call_type] == "FAILED"%>> <%= _('Failed') %> </option>                
+        <option value="BUSY" <%= "selected" if @options[:call_type] == "BUSY"%>> <%= _('Busy') %> </option>  
+        <option value="MISSED" <%= "selected" if @options[:call_type] == "MISSED"%>> <%= _('Missed') %> </option> 
+    </select>
+ &nbsp;&nbsp;<%= submit_tag _('Change_type'), :disable_with=>_('Processing..')%>
+<% end %>
+
+ </td>
+<td class="nb" align="right">
+    <%= _('total_calls') %>: <b><%= @total_calls %></b>
+ </td></tr>
+ 
+    <tr>
+    <td><% @sel_call_type %> </td>
+  </tr>
+</table>
+
+ <% if @calls.size > 0 %>
+   <%= link_to b_pdf + _('Export_to_PDF'), :action => "providers_calls_to_pdf", :id => @provider.id, :date_from => session_from_datetime, :date_till => session_till_datetime, :call_type => @options[:call_type], :direction => @options[:direction] %>
+   &nbsp;
+     <%= link_to b_csv + _('Export_to_CSV'), :action => "providers_calls_to_csv", :id => @provider.id, :date_from => session_from_datetime, :date_till => session_till_datetime, :call_type => @options[:call_type], :direction => @options[:direction] %>
+ <% end %>
+ <br> 
+ <br>
+<% if @options[:total_pages] > 1 %>
+  <%= page_select_header(@options[:page], @options[:total_pages]) %>
+  <br>
+<% end %>
+
+<%= render :partial => "providers_calls" %>
+
+<% if @options[:total_pages] > 1 %>
+  <br>
+  <%= page_select_header(@options[:page], @options[:total_pages]) %>
+<% end %>

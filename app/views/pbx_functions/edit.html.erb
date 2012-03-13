@@ -1,0 +1,4 @@
+<%= form_tag(:action => 'update', :id => @pbx_function) do%>
+  <%= render :partial => 'form' %>
+  <%= submit_tag _('Change'), :disable_with=>_('Processing..') %>
+<% end %>

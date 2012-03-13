@@ -1,0 +1,54 @@
+<% unless @destination.new_record?
+  destinationgroup ||= @destination.destinationgroup
+  if destinationgroup
+    select_options = [[destinationgroup.name + " " + destinationgroup.desttype , destinationgroup.id]]
+  else
+    select_options = [[_('Not_assigned'), ""]]
+  end
+%>
+  <% content_for :scripts do %>
+    <script type="text/javascript">
+      var directions = $j("#destination_direction_code");
+      var orig_direction = '<%= @direction.code %>';
+      var directions_path = '<%= [Web_Dir, "/directions/list.json"].map{|d| d unless d.blank?}.compact.join("") %>';
+      directions.click(
+      function(){ mor_functions["populateSelect"](directions_path, directions, orig_direction); }
+    );
+
+      var dg = $j("#destination_destinationgroup_id");
+      var orig_dg = '<%= select_options[0] %>';
+      var dg_path = '<%= [Web_Dir, "/destination_groups/list_json"].map{|d| d unless d.blank?}.compact.join("") %>';
+      dg.click(
+      function(){ mor_functions["populateSelect"](dg_path, dg, orig_dg); }
+    );
+    </script>
+  <% end %>
+  <p>
+    <%= _('Directions') %>
+    <br/>
+    <%= select_tag("destination[direction_code]", options_for_select([[@direction.name, @direction.code]]), {:id => "destination_direction_code", :style => "width : 250px"})%>
+  </p>
+
+  <p>
+    <%= _('Destination_groups') %>
+    <br/>
+    <%= select_tag("destination[destinationgroup_id]",options_for_select( select_options), {:id => "destination_destinationgroup_id", :style => "width : 250px"})%>
+  </p>
+<% end %>
+<p>
+  <%= _('Prefix') %>
+  <br />
+  <%= text_field 'destination', 'prefix', "class" => "input", :disabled => (params[:action] != 'new') %>
+</p>
+<p>
+  <%= _('Code') %>
+  <br />
+  <%= radio_button_tag('destination[subcode]', 'FIX', @destination.subcode == "FIX" ) %> FIX
+  <%= radio_button_tag('destination[subcode]', 'MOB', @destination.subcode == "MOB" ) %> MOB
+  <%= radio_button_tag('destination[subcode]', 'NGN', @destination.subcode == "NGN" ) %> NGN
+</p>
+<p>
+  <%= _('Name') %>
+  <br/>
+  <%= text_field 'destination', 'name', "class" => "input"   %>
+</p>

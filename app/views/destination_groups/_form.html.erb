@@ -1,0 +1,13 @@
+<p><%= _('Name') %><br/>
+<%= text_field 'dg', 'name', "class" => "input"   %></p>
+
+<p><label for="dg_type"><%= _('Type') %></label><br/>
+<select name="dg[desttype]" >
+    <option value=""  <%= "selected" if @dg.desttype == ""%>><%= _('none') %></option>   
+    <option value="FIX"  <%= "selected" if @dg.desttype == "FIX"%>>FIX</option>   
+    <option value="MOB" <%= "selected" if @dg.desttype == "MOB"%>>MOB</option>       
+    <option value="NGN" <%= "selected" if @dg.desttype == "NGN"%>>NGN</option>    
+</select>
+
+<p><%= _('Flag') %><br/>
+<%= text_field 'dg', 'flag', "class" => "input"   %></p>

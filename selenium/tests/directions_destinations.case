@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>directions_destinations</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">directions_destinations</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/new/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination_prefix</td>
+	<td>93</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination_name</td>
+	<td>testinis</td>
+</tr>
+<!--1. Kuriant nauja destination prefix laukelis yra disablintas (nors su selenium reikšmę įrašo(tipo fake form), bet neišsaugo)-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destinations exists and belongs to Direction : Afghanistan</td>
+	<td></td>
+</tr>
+<!--==create destinatio-->
+<tr>
+	<td>type</td>
+	<td>destination_prefix</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination_name</td>
+	<td>testinis</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination was successfully created</td>
+	<td></td>
+</tr>
+<!--==EDIT destination==-->
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/edit/20043?page=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination_name</td>
+	<td>testinis_</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination was successfully updated!</td>
+	<td></td>
+</tr>
+<!--==DELETE newly created destination==-->
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/destroy/20043</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Destination deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Direction not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination deleted</td>
+	<td></td>
+</tr>
+<!--== Create new Destination====-->
+<tr>
+	<td>open</td>
+	<td>/billing/directions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>direction_name</td>
+	<td>testinis</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>direction_code</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Direction was successfully created</td>
+	<td></td>
+</tr>
+<!--====EDIT direction======-->
+<tr>
+	<td>open</td>
+	<td>/billing/directions/edit/255</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>direction_code</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Direction was successfully updated</td>
+	<td></td>
+</tr>
+<!--==Delete direction===-->
+<tr>
+	<td>clickAndWait</td>
+	<td>destroy_img255</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Direction : testinis deleted</td>
+	<td></td>
+</tr>
+<!--==Create destination group====-->
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dg_name</td>
+	<td>testas</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dg[desttype]</td>
+	<td>label=MOB</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dg_flag</td>
+	<td>LT</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--==Edit destination group==-->
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/edit/583</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dg_flag</td>
+	<td>LV</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination group was succesfully updated</td>
+	<td></td>
+</tr>
+<!--===Delete destination group===-->
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/list?st=T</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>destroy_img583</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination group deleted: testas MOB</td>
+	<td></td>
+</tr>
+<!--==add to destinatiion group==-->
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/new/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination_prefix</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination_name</td>
+	<td>testas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/dg_new_destinations/1?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>123456</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destinations added</td>
+	<td></td>
+</tr>
+<!--==Delete from destination group==================-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination deleted</td>
+	<td></td>
+</tr>
+<!--Checking for correct autoassignment-->
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/new/123</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination_prefix</td>
+	<td>3706304</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination_name</td>
+	<td>32456</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>destination[subcode]_mob</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/integrity_check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/destinations_to_dg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>subcode20045_mob</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>subcode20045_mob</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>subcode20044_fix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destinations updated</td>
+	<td></td>
+</tr>
+<!--Test destination save fail.-->
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/new/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination not created</td>
+	<td></td>
+</tr>
+<!--Test if no crash on destination_create-->
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Direction not found</td>
+	<td></td>
+</tr>
+<!--* verify destination group display in destination edit interface-->
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/new/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination_prefix</td>
+	<td>333</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination_name</td>
+	<td>testinis</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Not assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dg_name</td>
+	<td>testas</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dg[desttype]</td>
+	<td>label=MOB</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dg_flag</td>
+	<td>LT</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/dg_new_destinations/1?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destinations added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Not assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Afghanistan FIX</td>
+	<td></td>
+</tr>
+<!--* verify correct destination deletion/pagination-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_11']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>items_per_page</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/edit/7?page=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotEditable</td>
+	<td>destination_prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/list/1?page=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>xpath=//b/a[contains(child::text(), '4')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>9320</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>9320</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>xpath=//b/a[contains(child::text(), '4')]</td>
+	<td></td>
+</tr>
+<!--* test edge case if we're deleting from last page it deletes to NEW last page (n-1)-->
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/list/1?page=18</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>xpath=//b/a[contains(child::text(), '18')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>xpath=//b/a[contains(child::text(), '17')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>direction_name</td>
+	<td>zzzzz</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>direction_code</td>
+	<td>+3789</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destinations (0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/destinations/list/256')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>notice</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

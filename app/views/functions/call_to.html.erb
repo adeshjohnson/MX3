@@ -1,0 +1,24 @@
+<html>
+<head>
+    <%= stylesheet_link_tag "mor" %>   
+</head>
+
+<body OnLoad='compt=setTimeout("self.close();",5000)'>
+	
+	<br><br>
+	
+	<table class="simple">
+		<tr>
+			<td>
+				<% if @error.to_s.length > 0 %>
+					<%= @error %>
+				<% else%>
+					<%= b_call+_('Dialing')%> <%= @number %>...				
+				<% end %>
+			</td>
+		</tr>
+	</table>		
+
+	
+</body>
+</html>

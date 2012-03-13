@@ -1,0 +1,73 @@
+
+<table width="100%">
+  <tr>
+    <td valign="top" align="center">
+      <table class="simple">
+        <tr>
+          <td>
+            <b><%= _('Thank_you_for_registering') %>!</b>
+          </td>
+        </tr>
+        <tr>
+          <td height="20"></td>
+        </tr>
+
+        <% if @send_email_to_user  == 1 %>
+          <tr>
+            <td>
+              <%= _('Email_with_details_sent_to') %>: <%= @user.address.email %>
+            </td>
+          </tr>
+          <tr><td height="20"></td></tr>
+        <% end %>
+        <% if @device %>
+          <tr>
+            <td><%= _('You_can_configure_your_device_with_following_settings') %>*:</td>
+          </tr>
+          <tr><td height="10"></td></tr>
+          <tr>
+            <td>
+              <table class="simple" width="100%">
+                <tr>
+                  <td><%= _('Device_type') %>:</td>
+                  <td id="device_type"><%= @device.device_type %></td>
+                </tr>
+                <tr>
+                  <td><%= _('Username') %>:</td>
+                  <td id="username"><%= @device.username %></td>
+                </tr>
+                <tr>
+                  <td><%= _('Password') %>:</td>
+                  <td id="secret"><%= @device.secret %></td>
+                </tr>
+                <tr>
+                  <td><%= _('PIN') %>:</td>
+                  <td id="pin"><%= @device.pin %></td>
+                </tr>
+                <tr>
+                  <td><%= _('Server_IP') %>:</td>
+                  <td id="server_ip"><%= Confline.get_value("Asterisk_Server_IP", 0) %></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        <% end %>
+        <tr><td height="20"></td></tr>
+
+        <tr>
+          <td>
+            <b><%= _('You_can_login') %> <%= link_to _('here'), :action => "login", :id=>@user.owner.uniquehash %></b>
+          </td>
+        </tr>
+        <tr>
+          <td height="20"></td>
+        </tr>
+
+        <tr>
+          <td><b>*<%= _('Registration_notice') %></b></td>
+        </tr>
+        <tr><td height="20"></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>

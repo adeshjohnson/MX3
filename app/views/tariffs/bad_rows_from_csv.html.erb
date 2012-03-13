@@ -1,0 +1,51 @@
+
+<table class="maintable" width="100%">
+  <% i =0 %>
+
+  <% if @rows %>
+
+    <%  if @csv2.to_i == 0 %>
+
+
+      <% @rows.each{|row| %>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <% for r in row %>
+            <td>
+              <%= r %>
+            </td>
+            <td>
+              <b>
+                <%= "No Country Code from CSV" if @status[i] == 10 %>
+                <%= "Bad Country Code from CSV" if @status[i] == 11 %>
+                <%= "Duplicate Field" if @status[i] == 12 %>
+              </b>
+            </td>
+          <% end %>
+          <% i += 1 %>
+        </tr>
+      <% } %>
+
+    <%else%>
+      <% @rows.each{|row| %>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <% row.each{|r| %>
+          <%if r[0].include?('col_')%>
+            <td>
+              <%= r[1] %>
+            </td>
+            <%end%>
+          <% } %>
+          <td>
+            <b>
+              <%= "No Country Code from CSV" if row['nice_error'].to_i == 10 %>
+              <%= "Bad Country Code from CSV" if row['nice_error'].to_i == 11 %>
+              <%= "Duplicate Field" if row['nice_error'].to_i == 12 %>
+              <%= "Prefix is invalid" if row['nice_error'].to_i == 13 %>
+              <%= "New Destinations is disabled" if row['nice_error'].to_i == 14 %>
+            </b>
+          </td>
+        </tr>
+      <% } %>
+    <%end%>
+  <% end %>
+</table>

@@ -1,0 +1,106 @@
+<div align="left" class="nb">
+  <%= form_tag :action => 'dids' do %>
+    <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+    <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+    &nbsp;&nbsp;
+
+    <%= _('Users') %> :
+    <select name="user_id" >
+      <option value="-1" <%= "selected" if @user_id.to_i == -1 %> > <%= _('All') %> </option>
+      <% for user in @users %>
+        <option value="<%= user.id %>" <%= "selected" if @user_id.to_i == user.id.to_i %>><%= user.username + " - " + user.first_name + " " + user.last_name %></option>
+      <% end %>
+    </select>
+    &nbsp;&nbsp; <%= _('Providers') %> :
+    <select name="provider_id" >
+      <option value="-1" <%= "selected" if @provider_id == -1 %>> <%= _('All') %> </option>
+      <% for prov in @providers %>
+        <option value="<%= prov.id %>"
+                <%= "selected" if prov.id.to_i == @provider_id.to_i %>> <%= prov.name %>
+        </option>
+      <% end %>
+    </select>
+    &nbsp;&nbsp;<%= submit_tag _('Change'), :disable_with=>_('Processing..')%>
+  <% end %>
+</div>
+
+<br>
+<% if @total_pages > 1 %>
+  <br>
+  <%= render :partial => "page_select_header_dids", :user => @user_id, :provider =>@provider_id %>
+<% end %>
+<br>
+<table width="100%" class="maintable" >
+  <tr>
+    <% if @user_id2.to_i == -1 %>
+      <th> <%= _('User') %></th>
+    <%end%>
+    <th> <%= _('DIDs') %></th>
+    <th align="center"> <%= _('Date') %></th>    
+    <th> <%= _('Provider') %></th>
+    <th> <%= _('Comment') %></th>
+    <th align="right"> <%= _('Calls') %></th>
+    <% if can_see_finances? -%>
+      <%  if @direction.to_s == "outgoing" %>
+        <th align="right"> <%= _('Provider_price') %></th>
+        <th align="right"> <%= _('User_price') %></th>
+        <th align="right"> <%= _('Profit') %></th>
+      <% else %>
+        <th align="right"> <%= _('Incoming_price') %></th>
+        <th align="right"> <%= _('Owner_price') %></th>
+        <th align="right"> <%= _('Provider_price') %></th>
+        <th align="right"> <%= _('Profit') %></th>
+      <% end -%>
+    <% end -%>
+  </tr>
+
+  <% @res.each_with_index { |r, i|%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <% if @user_id2.to_i == -1 %>
+          <%if (r['first_name'].length + r['last_name'].length).to_i > 0 %>
+            <td align="left"> <%= link_to r['first_name'].to_s + " " + r['last_name'].to_s,  :controller => "users", :action => "edit", :id => r['user_id'] %></td>
+          <% else -%>
+            <td align="left"> <%=link_to  r['username'],  :controller => "users", :action => "edit", :id => r['user_id'] %></td>
+          <% end -%>
+        <% end -%>
+        <td id="did_<%=r['id']%>" align="left"> <%= r['did'] %></td>
+        <td id="date_<%=r['id']%>" align="center"> <%= nice_date_time(r['date']) %></td>
+        <td id="name_<%=r['id']%>" align="left"> <%= r['name'] %></td>
+        <td id="comment_<%=r['id']%>" align="left"> <%= r['comment'] %></td>
+        <td id="calls_<%=r['id']%>" align="right"><%= r['calls_size'] %></td>
+        <% if can_see_finances? -%>
+          <%if @direction.to_s == "outgoing"%>
+            <td id="did_prov_price_<%=r['id']%>" align="right"> <%= nice_number r['did_prov_price'] %></td>
+            <td id="did_price_<%=r['id']%>" align="right"> <%= nice_number r['did_price'] %></td>
+            <td id="did_profit_<%=r['id']%>" align="right"> <%= nice_number(r['did_price'].to_f - r['did_prov_price'].to_f )%></td>
+          <%else%>
+            <td id="did_inc_price_<%=r['id']%>" align="right"> <%= nice_number(r['did_inc_price'])%></td>
+            <td id="did_price_<%=r['id']%>" align="right"> <%= nice_number r['did_price'] %></td>
+            <td id="did_prov_price_<%=r['id']%>" align="right"> <%= nice_number r['did_prov_price'] %></td>
+            <td id="did_profit_<%=r['id']%>" align="right"> <%= nice_number(r['did_price'].to_f + r['did_prov_price'].to_f + r['did_inc_price'].to_f )%></td>
+          <%  end -%>
+        <% end -%>
+      </tr>
+    <% } -%>
+    <tr>
+      <% if @user_id2.to_i == -1 %>
+        <th colspan="5"> <%= _('Total') %> :</th>
+      <%else%>
+        <th colspan="4"> <%= _('Total') %> :</th>
+      <%end%>
+      <th id="dids_total_calls" align="right"> <%= @dids_total_calls %></th>
+      <% if can_see_finances? -%>
+        <%if @direction.to_s == "outgoing"%>
+          <th id="dids_total_price_provider" align="right"> <%= nice_number @dids_total_price_provider %></th>
+          <th id="dids_total_price" align="right"> <%= nice_number @dids_total_price %></th>
+          <th id="dids_total_profit" align="right"> <%= nice_number @dids_total_profit %></th>
+        <%else%>
+
+          <th id="dids_total_inc_price" align="right"> <%= nice_number @dids_total_inc_price %></th>
+          <th id="dids_total_price" align="right"> <%= nice_number @dids_total_price %></th>
+          <th id="dids_total_price_provider" align="right"> <%= nice_number @dids_total_price_provider %></th>
+          <th id="dids_total_profit" align="right"> <%= nice_number @dids_total_profit %></th>
+        <% end -%>
+      <% end -%>
+    </tr>
+  </table>

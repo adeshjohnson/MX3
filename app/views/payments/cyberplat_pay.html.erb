@@ -1,0 +1,21 @@
+<% if @enabled == 1 and @user_enabled == 1 %>
+  <div align="right"><a href="http://www.cyberplat.ru" target="_blank"><%= image_tag("logo/cyberplat_logo.gif",  :style => 'border-style:none', :title => "Cyberplat") %></a></div>
+
+  <%= form_tag(@submit_url) do %>
+    <%= cyberplat_setup @payment_id, @amount_with_vat, Confline.get_value("Cyberplat_Default_Currency", @user.owner_id), @user.first_name, @user.last_name, @user.email, Confline.get_value("Cyberplat_ShopIP", @user.owner_id), @cyberplat_result_url, {:paymentdetails => "Balance update", :language => @language } %>
+    <% MorLog.my_debug(@language)%>
+    <%= _('Please_press_here_to_pay')%>* <%= nice_number @amount %> <%= @cp_default_curr%> <%= _("This_Is_Equal_To")%> <%= nice_number @user_amount %> <%= @user_curr%>
+    <br><br>
+    <%= submit_tag _('Pay'), :disable_with=>_('Processing..') %>
+	  
+  <% end %>
+
+  <br>
+  <div class = "simple">*<%= _('Your_VAT') %>: <%= @vat %>%. <%= _('Transaction_fee') %>: <%= @fee %>%. <%= _('Total_amount_to_pay')%>: <%= nice_number @amount_with_vat %> <%= @cp_default_curr %></div>
+<% else %>
+  <% if @user_enabled == 0 and @enabled == 1 and !@disabled_message.empty? %>
+    <%= @disabled_message %>
+  <% else %>
+    <%=_('Cyberplat_disabled')%>
+  <% end %>
+<% end %>

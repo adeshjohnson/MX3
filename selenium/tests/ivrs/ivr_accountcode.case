@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ivr_name</td>
+	<td>IVRs</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=block_name</td>
+	<td>Pirmas blokas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>IVR created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=block_name</td>
+	<td>Pirmas blokas</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Add new Action</td>
+	<td>Add new Action</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=change_action_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=change_action_1</td>
+	<td>Delay</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=change_action_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=change_action_1</td>
+	<td>label=Set Accountcode</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=change_action_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>id=change_action_1</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=change_action_1</td>
+	<td>Set Accountcode</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=action_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=action_1</td>
+	<td>Test User #1 - IAX2/101 Test User #1 - FAX/102 Test User #1 - IAX2/1002 System Admin - IAX2/103 Test Reseller - IAX2/104 User Resellers - IAX2/105</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=action_1</td>
+	<td>label=Test User #1 - FAX/102</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=action_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>id=action_1</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=action_1</td>
+	<td>Test User #1 - FAX/102</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=change_action_1</td>
+	<td>Set Accountcode</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=action_1</td>
+	<td>Test User #1 - FAX/102</td>
+</tr>
+<!--sql-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=table</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=ivr_actions</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=data1_value</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=action_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=action_1</td>
+	<td>label=Test Reseller - IAX2/104</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=action_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>id=action_1</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=action_1</td>
+	<td>Test Reseller - IAX2/104</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=action_1</td>
+	<td>Test Reseller - IAX2/104</td>
+</tr>
+<!--sql-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=table</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=ivr_actions</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=data1_value</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=action_1</td>
+	<td>label=Test User #1 - FAX/102</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=action_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>id=action_1</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=action_1</td>
+	<td>Test User #1 - FAX/102</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=change_action_1</td>
+	<td>Set Accountcode</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=action_1</td>
+	<td>Test User #1 - FAX/102</td>
+</tr>
+<!--sql-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=table</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=ivr_actions</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=data1_value</td>
+	<td>3</td>
+</tr>
+</tbody></table>
+</body>
+</html>

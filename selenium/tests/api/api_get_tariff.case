@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>api_login</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">api_login</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_9']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>api_allow_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>api_secret_key</td>
+	<td>123450</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--hash-->
+<!--#1 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<!--#2 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;tariff_id=22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
+	<td></td>
+</tr>
+<!--#3 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;tariff_id=22222</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>10c7329056bda7077ba354de6781c5ea1c4e9a2b</td>
+	<td></td>
+</tr>
+<!--#4 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;tariff_id=14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>10ff9cb27171a0ff3e0e2f0708e76a2391b173b7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<!--own tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_name</td>
+	<td>Retail_admin_tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=purpose</td>
+	<td>user</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>EGP</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=destination_group_name</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=duration</td>
+	<td>Infinity</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=round_by</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_rate</td>
+	<td>0.567</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=start_time</td>
+	<td>00:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=end_time</td>
+	<td>23:59:59</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=from</td>
+	<td>1</td>
+</tr>
+<!--#2 hash-->
+<!--user_reseller tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_name</td>
+	<td>Wholesale_wres_user_tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=purpose</td>
+	<td>user_wholesale</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>CRC</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=direction</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Afghanistan proper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Afghanistan Kandahar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>93 FIX AFG 0.4832 0.0000 1 0 00:00:00 23:59:59</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=from</td>
+	<td></td>
+</tr>
+<!--#4 hash-->
+<!--user_reseller tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;p=wholesale_reseller1&amp;tariff_id=14&amp;test=1&amp;hash=10ff9cb27171a0ff3e0e2f0708e76a2391b173b7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No tariff found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Retail_admin_tariff</td>
+	<td></td>
+</tr>
+<!--#2 hash-->
+<!--user_reseller tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;p=wholesale_reseller1&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_name</td>
+	<td>Wholesale_wres_user_tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=purpose</td>
+	<td>user_wholesale</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>CRC</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=direction</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Afghanistan proper 93 FIX AFG 0.4832 0.0000 1 0 00:00:00 23:59:59</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<!--own tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;p=wholesale_reseller1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_name</td>
+	<td>Wholesale_res_tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=purpose</td>
+	<td>user_wholesale</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>NLG</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=direction</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Afghanistan Afghanistan proper 93 FIX AFG 0.7120 0.0000 1 0 00:00:00 23:59:59</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<!--own tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=retail_accountant&amp;p=retail_accountant1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_name</td>
+	<td>Retail_acc_tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=purpose</td>
+	<td>user</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>CRC</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=destination_group_name</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_rate</td>
+	<td>0.533</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=from</td>
+	<td>1</td>
+</tr>
+<!--#1 hash-->
+<!--own tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=wholesale_wrspro_user&amp;p=wholesale_wrspro_user1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_name</td>
+	<td>Wholesale_wrspro_user_tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=purpose</td>
+	<td>user_wholesale</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=direction</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Afghanistan proper 93 FIX AFG 0.4733 0.0000 1 0 00:00:00 23:59:59</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<!--own tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=retail_user&amp;p=retail_user1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_name</td>
+	<td>Retail_user_tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=purpose</td>
+	<td>user</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=destination_group_name</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=duration</td>
+	<td>Infinity</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_rate</td>
+	<td>0.4023</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=from</td>
+	<td>1</td>
+</tr>
+<!--#1 hash-->
+<!--own tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=wholesale_accountant&amp;p=wholesale_accountant1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_name</td>
+	<td>Wholesale_acc_tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>CRC</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=direction</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Afghanistan proper 93 FIX AFG 0.6890 0.0000</td>
+	<td></td>
+</tr>
+<!--#2 hash-->
+<!--user_reseller tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=retail_accountant&amp;p=retail_accountant1&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_name</td>
+	<td>Retail_acc_tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=purpose</td>
+	<td>user</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>CRC</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=destination_group_name</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_rate</td>
+	<td>0.533</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=tariff_name</td>
+	<td>Wholesale_wres_user_tariff</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=purpose</td>
+	<td>user_wholesale</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=subcode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=tariff_rate</td>
+	<td>0.4832</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=from</td>
+	<td>1</td>
+</tr>
+<!--#2 hash-->
+<!--user_reseller tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=wholesale_wrspro_user&amp;p=wholesale_wrspro_user1&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_name</td>
+	<td>Wholesale_wrspro_user_tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=purpose</td>
+	<td>user_wholesale</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=direction</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Afghanistan proper 93 FIX AFG 0.4733 0.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=tariff_name</td>
+	<td>Wholesale_wres_user_tariff</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=tariff_rate</td>
+	<td>0.4832</td>
+</tr>
+<!--#2 hash-->
+<!--user_reseller tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=retail_user&amp;p=retail_user1&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_name</td>
+	<td>Retail_user_tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=purpose</td>
+	<td>user</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>NLG</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=destination_group_name</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=destination_group_type</td>
+	<td>MOB</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=type</td>
+	<td>minute</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_rate</td>
+	<td>0.4023</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=tariff_name</td>
+	<td>Wholesale_wres_user_tariff</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=purpose</td>
+	<td>user_wholesale</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=subcode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=tariff_rate</td>
+	<td>0.4832</td>
+</tr>
+<!--#2 hash-->
+<!--user_reseller tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=wholesale_accountant&amp;p=wholesale_accountant1&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tariff_name</td>
+	<td>Wholesale_acc_tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=purpose</td>
+	<td>user_wholesale</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=direction</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=con_fee</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Afghanistan proper 93 FIX AFG 0.6890 0.0000 1 0 00:00:00 23:59:59</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=tariff_name</td>
+	<td>Wholesale_wres_user_tariff</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=tariff_rate</td>
+	<td>0.4832</td>
+</tr>
+<!--incorrect hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;p=wholesale_reseller1&amp;test=1&amp;hash=5b1d5b1569de26f6srydtuea5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--bad login-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=wholesale_rrrrreseller&amp;p=wholesale_reseller1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#3 hash-->
+<!--no tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;p=wholesale_reseller1&amp;tariff_id=22222&amp;test=1&amp;hash=10c7329056bda7077ba354de6781c5ea1c4e9a2b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No tariff found</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/callc/logout</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>login_username</td> 	<td>admin</td> </tr> <tr> 	<td>type</td> 	<td>login_psw</td> 	<td>admin1</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>verifyTextPresent</td> 	<td>Succesfully logged in</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/tariffs/import_csv2/15</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=file</td> 	<td>/home/mor/selenium/files/csv/very_big.csv</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>File uploaded</td> 	<td></td> </tr> <tr> 	<td>select</td> 	<td>name=prefix_id</td> 	<td>label=Prefix</td> </tr> <tr> 	<td>select</td> 	<td>name=rate_id</td> 	<td>label=Rate/min</td> </tr> <tr> 	<td>select</td> 	<td>name=connection_fee_id</td> 	<td>label=Connection Unit</td> </tr> <tr> 	<td>select</td> 	<td>name=increment_id</td> 	<td>label=Effective Date</td> </tr> <tr> 	<td>select</td> 	<td>name=min_time_id</td> 	<td>label=Effective Time</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Columns assigned</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>xpath=(//input[@name='commit'])[2]</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Analysis completed</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Created destinations: 45074</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForText</td> 	<td>id=status</td> 	<td>Rates updated: 3</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>New rates created: 52750</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>link=Fix</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Destinations not assigned to Destination Groups</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>css=input[type=&quot;submit&quot;]</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>This step is dangerous! Make sure you know what you are doing.</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>css=input[type=&quot;submit&quot;]</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Destinations assigned</td> 	<td></td> </tr> <!--#5 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;tariff_id=15</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>waitForTextPresent</td> 	<td>784a244b4a33fed28b40d40b38b4484fd81f32ab</td> 	<td></td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;tariff_id=15&amp;test=1&amp;hash=784a244b4a33fed28b40d40b38b4484fd81f32ab</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=tariff_name</td>
+	<td>Wholesale_admin_tariff</td>
+</tr>
+-->
+</tbody></table>
+</body>
+</html>

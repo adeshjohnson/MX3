@@ -1,0 +1,1781 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>common_use_providers</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">common_use_providers</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>saddons_menu7</td>
+	<td>Common Use Providers</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>Provider Test Tariff</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Tariff was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=page_title</td>
+	<td>Common Use Providers</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=select_reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=select_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=select_tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=select_reseller</td>
+	<td>Select reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=select_provider</td>
+	<td>Select provider</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=select_tariff</td>
+	<td>Select tariff Retail - Test Tariff + 0.1 Wholesale - Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Provider Test Tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>reseller2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>reseller21</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_usertype</td>
+	<td>label=reseller</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_first_name</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_last_name</td>
+	<td>#2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>reseller3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>reseller31</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_usertype</td>
+	<td>label=reseller</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_first_name</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_last_name</td>
+	<td>#3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>reseller4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>reseller41</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_usertype</td>
+	<td>label=reseller</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_first_name</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_last_name</td>
+	<td>#4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>Test Provider #2</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>Test Provider #3</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>Test Provider #4</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=select_reseller</td>
+	<td>Select reseller Test Reseller #2 Test Reseller #3</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Provider #4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=select_provider</td>
+	<td>Select provider Test Provider #2 SIP/0.0.0.0:5060 Test Provider #3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Reseller #2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=Test Provider #2 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_1</td>
+	<td>Test Reseller #2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_1</td>
+	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_1</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Reseller #3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=Test Provider #3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Wholesale - Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_2</td>
+	<td>Test Reseller #3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_2</td>
+	<td>Test Provider #3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_2</td>
+	<td>Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=select_reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=select_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=select_tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=select_reseller</td>
+	<td>Test Reseller #2 Test Reseller #3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=select_provider</td>
+	<td>Test Provider #2 SIP/0.0.0.0:5060 Test Provider #3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=select_tariff</td>
+	<td>Retail - Test Tariff + 0.1 Wholesale - Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Provider Test Tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Reseller #3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=Test Provider #3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Wholesale - Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record with these parameters already exists</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Reseller #3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Wholesale - Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_1</td>
+	<td>Test Reseller #3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_2</td>
+	<td>Test Reseller #3</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=select_reseller</td>
+	<td>Test Reseller #2 Test Reseller #3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=select_provider</td>
+	<td>Test Provider #2 SIP/0.0.0.0:5060 Test Provider #3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=select_tariff</td>
+	<td>Retail - Test Tariff + 0.1 Wholesale - Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Reseller #2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=Test Provider #2 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/edit/2000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Commmon Use Provider not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/destroy/2000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/custom_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller21</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>reseller5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>reseller51</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_usertype</td>
+	<td>label=reseller</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_first_name</td>
+	<td>Test Reselleraitis</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_last_name</td>
+	<td>#5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>Test Provider #5</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>reseller6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>reseller61</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_usertype</td>
+	<td>label=reseller</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_first_name</td>
+	<td>Test Reselleriukas</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_last_name</td>
+	<td>#6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>Test Provider #6</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Reselleraitis #5</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=Test Provider #6 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You must select all three parameters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Reselleraitis #5</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=Test Provider #6 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Reselleriukas #6</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=Test Provider #5 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Wholesale - Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=jaddons_menu6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=saddons_menu7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=Test Provider #3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=reseller_16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=provider_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=tariff_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=page_1</td>
+	<td>1 2 3 4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_4</td>
+	<td>Test Reselleriukas #6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_4</td>
+	<td>Test Provider #5 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_4</td>
+	<td>Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=nice_user_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_4</td>
+	<td>Test Reselleriukas #6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_4</td>
+	<td>Test Provider #5 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_4</td>
+	<td>Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Reselleraitis #5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=reseller_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=reseller_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_13</td>
+	<td>Test Reselleraitis #5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_12</td>
+	<td>Test Provider #3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_12</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_1</td>
+	<td>Test Reseller #3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_1</td>
+	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_1</td>
+	<td>Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=reseller_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=reseller_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_10</td>
+	<td>Test Reseller #3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_10</td>
+	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_10</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_5</td>
+	<td>Test Reseller #2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_5</td>
+	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_5</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=reseller_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=reseller_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_7</td>
+	<td>Test Reseller #2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_7</td>
+	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_7</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=reseller_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=reseller_13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=reseller_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=reseller_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=nice_user_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_5</td>
+	<td>Test Reseller #2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_5</td>
+	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_5</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_1</td>
+	<td>Test Reseller #3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_1</td>
+	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_1</td>
+	<td>Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_9</td>
+	<td>Test Reseller #3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_9</td>
+	<td>Test Provider #5 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_9</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_3</td>
+	<td>Test Reselleraitis #5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_3</td>
+	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_3</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_13</td>
+	<td>Test Reselleraitis #5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_13</td>
+	<td>Test Provider #5 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_13</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_15</td>
+	<td>Test Reselleriukas #6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_15</td>
+	<td>Test Provider #3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_15</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_16</td>
+	<td>Test Reselleriukas #6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_16</td>
+	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_16</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=tariff_name_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_1</td>
+	<td>Test Reseller #3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_1</td>
+	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_1</td>
+	<td>Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_16</td>
+	<td>Test Reselleriukas #6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_16</td>
+	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_16</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=provider_name_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_1</td>
+	<td>Test Reseller #3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_1</td>
+	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_1</td>
+	<td>Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_2</td>
+	<td>Test Reseller #2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_2</td>
+	<td>Test Provider #3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_2</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_12</td>
+	<td>Test Reselleraitis #5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_12</td>
+	<td>Test Provider #3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_12</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_4</td>
+	<td>Test Reselleriukas #6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_4</td>
+	<td>Test Provider #5 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_4</td>
+	<td>Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_13</td>
+	<td>Test Reselleraitis #5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_13</td>
+	<td>Test Provider #5 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_13</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_7</td>
+	<td>Test Reseller #2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_7</td>
+	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_7</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=reseller_16</td>
+	<td>Test Reselleriukas #6</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=provider_16</td>
+	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_16</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_11 &gt; img[alt=Delete]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=page_1</td>
+	<td>1 2 3</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers/destroy/14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<%= _('File_size') %>: <%= session[:file_size] %> <%= _('bytes') %><br />
+<br />
+<b><%= _('First_file_lines') %>:</b>
+<br />
+<br />
+<% tl = 0 %>
+<% for line in session[:file].to_s %>
+  <%= line + "<br />" if tl < 5%>
+  <% tl += 1 %>
+<% end %>
+<%= "....<br />" if tl > 5 %>
+<br />
+<%- #session[:file_lines] = (tl - 1) -%>
+<b><%= _('Total_file_lines') %>: <%= session[:file_lines] %> </b>
+<br />
+<br />
+<br />
+<%action = params[:action] == 'import_csv' ? 'import_csv' : 'import_csv2' %>
+<%= form_tag :action => action, :step => "3" do %>
+  <div id="tariff_time_select">
+    <%= _("Rate_day_type") %>: <%= select_tag("rate_day_type", options_for_select([[_("All"), "all"], [_("Work_Days"), "wd"], [_("Free_Days"), "fd"]], session[:imp_date_day_type]), :onchange=>"check_values();")  %>
+    <%= _("From") %>:
+    <select id="time_from_hour" name="time_from[hour]" onchange="check_values();">
+      <%24.times { |i|%>
+        <option value="<%= i < 10 ? "0#{i}" : i %>" <%='selected' if i.to_s == 00 %>><%= i < 10 ? "0#{i}" : i %></option>
+      <%}%>
+    </select>
+    <select id="time_from_minute" name="time_from[minute]" onchange="check_values();">
+      <%60.times { |i|%>
+        <option value="<%= i < 10 ? "0#{i}" : i %>" <%='selected' if i.to_s == 00 %>><%= i < 10 ? "0#{i}" : i %></option>
+      <%}%>
+    </select>
+    <select id="time_from_second" name="time_from[second]" onchange="check_values();">
+      <%60.times { |i|%>
+        <option value="<%= i < 10 ? "0#{i}" : i %>" <%='selected' if i.to_s == 00 %>><%= i < 10 ? "0#{i}" : i %></option>
+      <%}%>
+    </select>
+
+    <%= _("Till") %>:
+    <select id="time_till_hour" name="time_till[hour]" onchange="check_values();">
+      <%24.times { |i|%>
+        <option value="<%= i < 10 ? "0#{i}" : i %>" selected="selected"><%= i < 10 ? "0#{i}" : i %></option>
+      <%}%>
+    </select>
+    <select id="time_till_minute" name="time_till[minute]" onchange="check_values();">
+      <%60.times { |i|%>
+        <option value="<%= i < 10 ? "0#{i}" : i %>" selected="selected"><%= i < 10 ? "0#{i}" : i %></option>
+      <%}%>
+    </select>
+    <select id="time_till_second" name="time_till[second]" onchange="check_values();">
+      <%60.times { |i|%>
+        <option value="<%= i < 10 ? "0#{i}" : i %>" selected="selected"><%= i < 10 ? "0#{i}" : i %></option>
+      <%}%>
+    </select>
+  </div>
+
+  <script type="text/javascript">
+    function check_values()
+    {
+      //<![CDATA[
+
+      new Ajax.Updater(
+      'tariff_time_select',
+      '<%=Web_Dir.to_s%>/tariffs/check_tariff_time',
+      {
+        parameters: {
+          "id" : <%=@tariff.id.to_s%>,
+          "rate_day_type" : document.getElementById('rate_day_type').value,
+          "time_from_hour" : document.getElementById('time_from_hour').value,
+          "time_from_minute" : document.getElementById('time_from_minute').value,
+          "time_from_second" : document.getElementById('time_from_second').value,
+          "time_till_hour" : document.getElementById('time_till_hour').value,
+          "time_till_minute" : document.getElementById('time_till_minute').value,
+          "time_till_second" : document.getElementById('time_till_second').value
+        },
+        asynchronous:true,
+        evalScripts:true,
+        onComplete:function(request){Element.hide('spinner');},
+        onLoading:function(request){Element.show('spinner');}})
+
+      //]]>
+    }
+    Event.observe(window, 'load', function() {check_values();})
+  </script>
+
+
+  <br />
+  <% if admin?  %>
+    <%= _('Update_destination_names_from_file') %>: <%= check_box_tag("update_dest_names", 1, false) %>
+    <br />
+  <% end %>
+  <br />
+  <table class="maintable" width="70%">
+    <tr>
+      <th id="value_column"><%= _('Value') %></th>
+      <th id="select_from_csv_file_column"><%= _('Select_from_CSV_file') %></th>
+      <th id="enter_manually_column"><%= _('Enter_manually') %></th>
+      <th id="default_column"><%= _('Default') %></th>
+    </tr>
+    <tr class="row1">
+      <td>   <%= _('Prefix') %>/<%= _('NPANXX') %>  </td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "prefix_id", :value => :imp_prefix} %>
+      <td></td>
+      <td id="prefix_npanxx_value"></td>
+    </tr>
+    <tr>
+      <td>   <%= _('Rate') %>  </td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "rate_id", :value => :imp_rate} %>
+      <td></td>
+      <td id="rate_value"></td>
+    </tr>
+    <tr class="row1">
+      <td>   <%= _('Connection_Fee') %>  </td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "connection_fee_id", :value => :imp_connection_fee} %>
+      <td align="center"><%= text_field_tag 'manual_connection_fee', "", "class" => "input", :size => "8", :maxlength => "8"  %></td>
+      <td id="connection_fee_value" align="center">0</td>
+    </tr>
+    <tr>
+      <td>   <%= _('Increment') %>  </td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "increment_id", :value => :imp_inc} %>
+      <td align="center"><%= text_field_tag 'manual_increment', "", "class" => "input", :size => "8", :maxlength => "8"  %></td>
+      <td id="increment_value" align="center">1</td>
+    </tr>
+    <tr class="row1">
+      <td>   <%= _('Min_time') %>  </td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "min_time_id", :value => :imp_mint} %>
+      <td align="center"><%= text_field_tag 'manual_min_time', "", "class" => "input", :size => "8", :maxlength => "8"  %></td>
+      <td id="min_time_value" align="center">0</td>
+    </tr>
+    <% if mor_11_extend? %>
+      <tr class="row1">
+        <td>   <%= _('Ghost_percent') %>  </td>
+        <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "ghost_percent_id", :value => :imp_ghost_percent} %>
+        <td align="center"><%= text_field_tag 'manual_ghost_percent', "", "class" => "input", :size => "8", :maxlength => "8"  %></td>
+        <td id="ghost_percent_value" align="center">0</td>
+      </tr>
+    <%end%>
+    <tr>
+      <td>   <%= _('Destination') %>/<%= _('OCN_Name') %>  </td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "destination_id", :value => :imp_dst} %>
+      <td></td>
+      <td id="destination_ocn_name_value"></td>
+    </tr>
+    <tr class="row1">
+      <td>   <%= _('City') %>  </td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "city_id", :value => :imp_city} %>
+      <td></td>
+      <td id="city_value"></td>
+    </tr>
+    <tr>
+      <td>   <%= _('Country') %>/<%= _('Direction') %>  </td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "country_id", :value => :imp_country} %>
+      <td></td>
+      <td id="country_value"></td>
+    </tr>
+    <tr class="row1">
+      <td>   <%= _('Country_code') %>  </td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "country_code_id", :value => :imp_cc} %>
+      <td></td>
+      <td id="country_code_value"></td>
+    </tr>
+    <tr class="row2">
+      <td>   <%= _('Subcode') %>  </td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "subcode", :value => :imp_subcode} %>
+      <td></td>
+      <td id="subcode_value" align="center">NGN</td>
+    </tr>
+    <tr>
+      <th height="20" colspan="4" align="left">
+        <b><%= _('USA_specifics') %></b>
+      </th>
+    </tr>
+    <tr class="row1">
+      <td>   <%= _('State') %>  </td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "state_id", :value => :imp_state} %>
+      <td></td>
+      <td id="state_value"></td>
+    </tr>
+    <tr>
+      <td>   <%= _('LATA') %>  </td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "lata_id", :value => :imp_state} %>
+      <td></td>
+      <td id="lata_value"></td>
+    </tr>
+    <tr class="row1">
+      <td>   <%= _('Class') %>/<%= _('Tier') %>  </td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "tier_id", :value => :imp_tier} %>
+      <td></td>
+      <td id="class_tier_value"></td>
+    </tr>
+    <tr>
+      <td><%= _('OCN') %></td>
+      <%= render :partial => "import_csv_step_2_select" , :locals => {:name => "ocn_id", :value => :imp_ocn} %>
+      <td></td>
+      <td id="ocn_value"></td>
+    </tr>
+  </table>
+  <br />
+  <%= submit_tag( _('Assign_columns'), :disable_with=>_('Processing..'), :id => "submit_button"  )%>
+<% end %>
+<br />
+<%= _('Next_step') + ": " + _('Column_confirmation')%>

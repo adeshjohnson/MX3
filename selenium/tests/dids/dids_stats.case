@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>dids_stats</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">dids_stats</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/various_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=user_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=provider_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<!--1. User dropdown default reikšmė turėtų būti All-->
+<tr>
+	<td>select</td>
+	<td>name=user_id</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011221</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_14</td>
+	<td>37060011224</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=calls_14</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_inc_price_14</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_price_14</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_prov_price_14</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_profit_14</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_29</td>
+	<td>37060011239</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=calls_29</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_inc_price_29</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_price_29</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_prov_price_29</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_profit_29</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_23</td>
+	<td>37060011233</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=calls_23</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_inc_price_23</td>
+	<td>14.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_price_23</td>
+	<td>28.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_prov_price_23</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_profit_23</td>
+	<td>42.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=dids_total_calls</td>
+	<td>60</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=dids_total_inc_price</td>
+	<td>122.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=dids_total_price</td>
+	<td>228.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=dids_total_price_provider</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=dids_total_profit</td>
+	<td>360.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_prov_price_23</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=did_prov_price_23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=user_id</td>
+	<td>label=101 - Test User #1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=provider_id</td>
+	<td>label=RSPRO_provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060011240</td>
+	<td></td>
+</tr>
+<!--2. Nėra clear search mygtuko-->
+<tr>
+	<td>select</td>
+	<td>name=provider_id</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>37060011226</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_16</td>
+	<td>37060011226</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_14</td>
+	<td>37060011224</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_15</td>
+	<td>37060011225</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=calls_16</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=calls_14</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=calls_15</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=dids_total_calls</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_inc_price_16</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_inc_price_14</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_inc_price_15</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=dids_total_inc_price</td>
+	<td>26.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_price_16</td>
+	<td>40.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_price_14</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_price_15</td>
+	<td>8.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=dids_total_price</td>
+	<td>52.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_prov_price_16</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_prov_price_14</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_prov_price_15</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=dids_total_price_provider</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_profit_16</td>
+	<td>60.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_profit_14</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_profit_15</td>
+	<td>12.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!---->
+
+</tbody></table>
+</body>
+</html>

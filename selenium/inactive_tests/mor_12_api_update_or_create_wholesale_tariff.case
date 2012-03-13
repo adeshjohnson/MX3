@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_8 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_login_redirect_to_main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_allow_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--#hash1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
+</tr>
+<!--#hash2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash2</td>
+</tr>
+<!--#hash3-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=123</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash3</td>
+</tr>
+<!--#hash4-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=11&amp;name=updated_tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash4</td>
+</tr>
+<!--#hash5-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=111&amp;name=new tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash5</td>
+</tr>
+<!--#hash6-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=#$^(&amp;name=new tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash6</td>
+</tr>
+<!--#hash7-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=112&amp;name=new tariff re</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash7</td>
+</tr>
+<!--#hash8-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=113&amp;name=new tariff acc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash8</td>
+</tr>
+<!--#hash9-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=114&amp;currency=ALL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash9</td>
+</tr>
+<!--#hash10-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=115&amp;currency=EUR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash10</td>
+</tr>
+<!--#hash11-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=6&amp;currency=EUR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash11</td>
+</tr>
+<!--#hash12-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=8&amp;currency=EUR&amp;name=belen kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash12</td>
+</tr>
+<!--#hash13-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=8&amp;currency=EUR&amp;name=belen kas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash13</td>
+</tr>
+<!--#hash14-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=24&amp;currency=EUR&amp;name=belen kas rspro</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash14</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>API Requests are disabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=admin&amp;p=admin1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>API Requests are disabled</td>
+	<td></td>
+</tr>
+<!--#hash1-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?id=11&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<!--#hash1-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=admin&amp;p=admin1&amp;id=11&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<!--#hash2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=admin&amp;p=admin1&amp;id=22&amp;test=1&amp;hash=${hash2}</td>
+	<td></td>
+</tr>
+<!--#hash3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=admin&amp;p=admin1&amp;id=123&amp;test=1&amp;hash=${hash3}</td>
+	<td></td>
+</tr>
+<!--#hash4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=admin&amp;p=admin1&amp;id=11&amp;name=updated_tariff&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<!--#hash5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=admin&amp;p=admin1&amp;id=111&amp;name=new tariff&amp;test=1&amp;hash=${hash5}</td>
+	<td></td>
+</tr>
+<!--#hash6-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=admin&amp;p=admin1&amp;id=#$^(&amp;name=new tariff&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<!--#hash9-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=admin&amp;p=admin1&amp;id=114&amp;currency=ALL&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<!--#hash10-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=admin&amp;p=admin1&amp;id=115&amp;currency=EUR&amp;test=1&amp;hash=${hash10}</td>
+	<td></td>
+</tr>
+<!--#hash11-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=admin&amp;p=admin1&amp;id=6&amp;currency=EUR&amp;test=1&amp;hash=${hash11}</td>
+	<td></td>
+</tr>
+<!--#hash12-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=admin&amp;p=admin1&amp;id=8&amp;currency=EUR&amp;name=belen kas&amp;test=1&amp;hash=${hash12}</td>
+	<td></td>
+</tr>
+<!--#hash13-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=admin&amp;p=admin1&amp;id=8&amp;currency=EUR&amp;name=belen kas&amp;test=1&amp;hash=${hash13}</td>
+	<td></td>
+</tr>
+<!--#hash14-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=admin&amp;p=admin1&amp;id=24&amp;currency=EUR&amp;name=belen kas rspro&amp;test=1&amp;hash=${hash14}</td>
+	<td></td>
+</tr>
+<!--#hash7-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=wholesale_rspro&amp;p=wholesale_rspro1&amp;id=112&amp;name=new tariff re&amp;test=1&amp;hash=${hash7}</td>
+	<td></td>
+</tr>
+<!--#hash8-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/wholesale_api?u=accountant&amp;p=accountant1&amp;id=113&amp;name=new tariff acc&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

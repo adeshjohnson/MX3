@@ -1,0 +1,15 @@
+<% if @enabled == 1%>
+  <div align="right">
+    <%= image_tag("logo/ouroboros_logo.jpg",  :style => 'border-style:none', :title => "Ouroboros") %>
+  </div>
+  <% if @error == 0 %>
+    <%= _("Payment_successful")%>
+    <br>
+    <br>
+    <%= render :partial => 'payment' %>
+  <% else %>
+    <%= _("Payment_was_not_successful")%>
+  <% end %>
+<% else %>
+  <%=_('Ouroboros_disabled')%>
+<% end %>

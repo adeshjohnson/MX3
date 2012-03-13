@@ -1,0 +1,1453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>vouchers</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">vouchers</td></tr>
+</thead><tbody>
+<!--Login as admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Test settings for taxes.-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tabTabdhtmlgoodies_tabView1_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>total_tax</td>
+	<td>Total_tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1name</td>
+	<td>First-tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2name</td>
+	<td>Second-tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3name</td>
+	<td>Third-tax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4name</td>
+	<td>Forth-tax</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>tax2active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>tax3active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>tax4active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3value</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4value</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tabTabdhtmlgoodies_tabView1_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Apply to all Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Taxes set</td>
+	<td></td>
+</tr>
+<!--Enable vouchers.-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>vouchers_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--Create new Vouchers.-->
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/vouchers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Add vouchers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//a[contains(@href, '/billing/vouchers/bulk_management')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add vouchers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>total_tax_name</td>
+	<td>Total_tax</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax1_name</td>
+	<td>First-tax</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax1_value</td>
+	<td>10.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax4_value</td>
+	<td>30.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount_total</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tag</td>
+	<td>Voucher</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>credit</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Time should be in future</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>credit_without_tax_2</td>
+	<td>10.5955</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>credit_with_tax_2</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>credit_without_tax_11</td>
+	<td>10.5955</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>credit_with_tax_11</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>number_2</td>
+	<td>voucher_number</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Vouchers created</td>
+	<td></td>
+</tr>
+<!--Use voucher-->
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/voucher_use</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>number</td>
+	<td>${voucher_number}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number</td>
+	<td>${voucher_number}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>credit_with_tax</td>
+	<td>20.0000 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>credit_without_tax</td>
+	<td>10.5955 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_before</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_after</td>
+	<td>10.5955 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Voucher used to update balance. Thank you!</td>
+	<td></td>
+</tr>
+<!--Verify that user balance was updated.-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_0</td>
+	<td>10.5955</td>
+</tr>
+<!--Verify payment-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_10</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_10</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>credit_without_tax_10</td>
+	<td></td>
+</tr>
+<!--Delete voucher-->
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/vouchers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_link_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Voucher deleted</td>
+	<td></td>
+</tr>
+<!--...Verify that payment is deleted-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>amout_with_tax_10</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>completed_10</td>
+	<td>Yes</td>
+</tr>
+<!--Vouchers bulk management-->
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/vouchers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>deactivate_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Vouchers deactivated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>activate_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>activate_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Vouchers activated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>deactivate_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>deactivate_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>deactivate_link_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>v_tag</td>
+	<td>label=Voucher</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_min</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_max</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>v_atill</td>
+	<td>label=2012-12-31</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>vaction_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Vouchers quantity:9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Vouchers activated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>deactivate_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>deactivate_link_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>v_tag</td>
+	<td>label=Voucher</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_min</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_max</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>v_atill</td>
+	<td>label=2012-12-31</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>vaction_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Vouchers quantity:9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Vouchers interval deleted</td>
+	<td></td>
+</tr>
+<!--check inteval in blank-->
+<!--activate-->
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_min</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_max</td>
+	<td>200</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>vaction_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//b[2]</td>
+	<td>Credit between: 100 - 200</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No vouchers were found to activate</td>
+	<td></td>
+</tr>
+<!--deactivate-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/vouchers/bulk_management')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_min</td>
+	<td>200</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_max</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>vaction_deactive</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//b[2]</td>
+	<td>Credit between: 200 - 100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No vouchers were found to deactivate</td>
+	<td></td>
+</tr>
+<!--delete-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/vouchers/bulk_management')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_min</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_max</td>
+	<td>234</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>vaction_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//b[2]</td>
+	<td>Credit between: 123 - 234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No vouchers were found to delete</td>
+	<td></td>
+</tr>
+<!--verifay interval-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/vouchers/bulk_management')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_min</td>
+	<td>asd</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_max</td>
+	<td>asd</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>vaction_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//b[2]</td>
+	<td>Credit between: 0 - 0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No vouchers were found to delete</td>
+	<td></td>
+</tr>
+<!--verifay or settings are saved when credit is not entered-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add vouchers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount_total</td>
+	<td>aaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tag</td>
+	<td>aaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_name</td>
+	<td>aa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_name</td>
+	<td>aa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3_name</td>
+	<td>aa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4_name</td>
+	<td>aa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>total_tax_name</td>
+	<td>aa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3_value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4_value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>credit</td>
+	<td>aaa</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=March</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>amount_total</td>
+	<td>aaa</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter credit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tag</td>
+	<td>aaa</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax1_value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax2_value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax3_value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax4_value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>credit</td>
+	<td>aaa</td>
+</tr>
+<tr>
+	<td>verifySelectOptions</td>
+	<td>currency</td>
+	<td>USD,EUR</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax1_name</td>
+	<td>aa</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax2_name</td>
+	<td>aa</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax3_name</td>
+	<td>aa</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>tax4_name</td>
+	<td>aa</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>total_tax_name</td>
+	<td>aa</td>
+</tr>
+<!--reseller user voucher-->
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/voucher_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount_total</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tag</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>credit</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2014</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Vouchers created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>number_12</td>
+	<td>res_user_v</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_3</td>
+	<td>0.0000</td>
+</tr>
+<!--reseller user-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=balance</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/voucher_use</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>number</td>
+	<td>${res_user_v}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>credit_with_tax</td>
+	<td>100.0000 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Voucher used to update balance. Thank you!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/personal_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>paymenttype_12</td>
+	<td>Voucher</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amount_12</td>
+	<td>52.9773</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_12</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>currency_12</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>52.9773 USD</td>
+	<td></td>
+</tr>
+<!--reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/personal_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>paymenttype_11</td>
+	<td>Voucher</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amount_11</td>
+	<td>52.9773</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_11</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_12</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>paymenttype_12</td>
+	<td>Voucher (1)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amount_12</td>
+	<td>52.9773</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_12</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_12</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>52.9773 USD</td>
+	<td></td>
+</tr>
+<!--admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_11</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>paymenttype_11</td>
+	<td>Voucher</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amount_11</td>
+	<td>52.9773</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>amout_with_tax_11</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>currency_11</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance_3</td>
+	<td>52.9773</td>
+</tr>
+<!--delete-->
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_min</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>v_credit_max</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Vouchers quantity:0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No vouchers were found to delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/voucher_delete/999</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Voucher not found</td>
+	<td></td>
+</tr>
+<!--reseller voucher link-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@alt='Vouchers_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt='Vouchers_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_2']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>vouchers_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt='Vouchers_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>vouchers_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@alt='Vouchers_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@alt='Vouchers_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>vouchers_enabled</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

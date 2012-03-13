@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_9']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>api_login_redirect_to_main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>api_allow_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=3&amp;u=admin&amp;p=admin1&amp;balance=100&amp;test=1&amp;hash=dafc45ee7d4238faac1cb386d67a36e49e2637cf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2&amp;u=admin&amp;p=admin1&amp;balance=50&amp;test=1&amp;hash=e38cb00866f2aa06aea55c01ad4da4a119fc3b26</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=4&amp;u=admin&amp;p=admin1&amp;balance=1000&amp;test=1&amp;hash=1ec035dfd5a07df5d6a82f54d7080933314b7b95</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=0&amp;u=admin&amp;p=admin1&amp;balance=10&amp;test=1&amp;hash=56bae7f44ac3e284433d38eacba713b2f97186c2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=3&amp;u=admin&amp;p=admin1&amp;balance=10&amp;test=1&amp;hash=d45d56174471a1ca493c463f4b3b1c61542f5a7b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=3&amp;u=admin&amp;p=admin1&amp;balance=100&amp;hash=e07e891eaf55d93cbb744688527ef130af64d24e&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//status</td>
+	<td>User balance updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=2&amp;u=admin&amp;p=admin1&amp;balance=50.0&amp;hash=649eca7462c3ddde60694602bc239e323f11ab16&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//status</td>
+	<td>User balance updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=4&amp;u=admin&amp;p=admin1&amp;balance=1000.0&amp;hash=794bf06e08656eebc1d1774e9619233a5dac1c09&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//status</td>
+	<td>User balance updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=0&amp;u=admin&amp;p=admin1&amp;balance=10.0&amp;hash=6f0d91aac6e2864107af265b6eb3193e41e9f54e&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//status</td>
+	<td>User balance updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=3&amp;u=admin&amp;p=admin1&amp;balance=10.0&amp;hash=684e0d765660a15b0bf6da6c9d115df2bf02c438&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//status</td>
+	<td>User balance updated</td>
+</tr>
+<!--check-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_balance_value</td>
+	<td>50.0000 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_balance_value</td>
+	<td>1000.0000 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_balance_value</td>
+	<td>10.0000 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_balance_value</td>
+	<td>110.0000 USD</td>
+</tr>
+<!--reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=5&amp;u=reseller&amp;p=reseller1&amp;balance=500&amp;test=1&amp;hash=ae56b6e632f2b66914bd4e35f2594e8e1917df20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=3&amp;u=reseller&amp;p=reseller1&amp;balance=500&amp;test=1&amp;hash=0b30b90c6bb66af5e22c5317b1f925d55b18922c</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2&amp;u=reseller&amp;p=reseller1&amp;balance=500&amp;test=1&amp;hash=582c70dec473036fc48429cacccb5f0149d38bb1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=4&amp;u=reseller&amp;p=reseller1&amp;balance=500&amp;test=1&amp;hash=bda59c8899c3880ab0d2fbd5fd47c23a1897d44e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=0&amp;u=reseller&amp;p=reseller1&amp;balance=500&amp;test=1&amp;hash=77d5df3eab5a6a63dff0c6c45ddb2bb5d4f3524d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=5&amp;u=admin&amp;p=admin1&amp;balance=500&amp;test=1&amp;hash=ae56b6e632f2b66914bd4e35f2594e8e1917df20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=3&amp;u=reseller&amp;p=reseller1&amp;balance=500&amp;hash=6c71295f791dfab3fc9f8e92547fa5be5a416de8&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//error</td>
+	<td>User was not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=2&amp;u=reseller&amp;p=reseller1&amp;balance=500&amp;hash=2e47e2b05159661fd3603e3fb54ca7d4c30d7836&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//error</td>
+	<td>User was not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=4&amp;u=reseller&amp;p=reseller1&amp;balance=500&amp;hash=adbbd80c92899c6debbebda29c11ab8ce6c24035&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//error</td>
+	<td>User was not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=0&amp;u=reseller&amp;p=reseller1&amp;balance=500&amp;hash=b872d9c2c93cf4ce8eb824ac2554900323e9f6ff&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//error</td>
+	<td>User was not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=5&amp;u=reseller&amp;p=reseller1&amp;balance=500&amp;hash=d4ed5aa92b7528fc31b0568b4ccfe588e92bd5ce&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//status</td>
+	<td>User balance updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=5&amp;u=admin&amp;p=admin1&amp;balance=500&amp;hash=d4ed5aa92b7528fc31b0568b4ccfe588e92bd5ce&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//error</td>
+	<td>User was not found</td>
+</tr>
+<!--check-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_balance_value</td>
+	<td>50.0000 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_balance_value</td>
+	<td>1000.0000 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_balance_value</td>
+	<td>10.0000 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_balance_value</td>
+	<td>110.0000 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_balance_value</td>
+	<td>500.0000 USD</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,4892 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base"" />
+<title>providers</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">providers</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--PROVIDERS-->
+<!--SIP-->
+<!--create-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>SIP_provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[tech]_sip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<!--edit SIP-->
+<!--check current values-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Login/Username:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_name</td>
+	<td>SIP_provider</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[dtmfmode]</td>
+	<td>rfc2833</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[location_id]</td>
+	<td>Global</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>provider[ani]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_timeout</td>
+	<td>60</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_call_limit</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_login</td>
+	<td>SIP_provider</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>registration_notice</td>
+	<td>Registration can be used when at least Username is entered</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>registration_notice</td>
+	<td>Registration can be used when at least Username is entered</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_login</td>
+	<td>SIP_provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>registration_notice</td>
+	<td>Registration can be used when at least Username is entered</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_password</td>
+	<td>please_change</td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_reg_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>cid_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>cid_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>canreinvite_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device_nat_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>qualify_time</td>
+	<td>2000</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>qualify_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>fromuser</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>fromdomain</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[trustrpid]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[sendrpid]_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>insecure_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>insecure_invite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[t38pt_udptl]_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[promiscredir]_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device_progressinband_never</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[videosupport]_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[allow_duplicate_calls]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>provider[interpret_noanswer_as_failed]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>provider[interpret_busy_as_failed]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[fake_ring]_0</td>
+	<td>on</td>
+</tr>
+<!--modifying values-->
+<tr>
+	<td>select</td>
+	<td>device[dtmfmode]</td>
+	<td>label=auto</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[ani]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_timeout</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_call_limit</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cid_name</td>
+	<td>11111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cid_number</td>
+	<td>1111111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>0.0.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_ipaddr</td>
+	<td>0.0.0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_port</td>
+	<td>5061</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>canreinvite_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_nat_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>qualify_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>qualify_time</td>
+	<td>2001</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[trustrpid]_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[sendrpid]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>insecure_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>insecure_invite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[t38pt_udptl]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[promiscredir]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device_progressinband_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[videosupport]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[allow_duplicate_calls]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>provider[interpret_noanswer_as_failed]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>provider[interpret_busy_as_failed]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>device[fake_ring]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<!--Checking again for modified values-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_name</td>
+	<td>SIP_provider</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[dtmfmode]</td>
+	<td>auto</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[location_id]</td>
+	<td>Global</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>provider[ani]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_timeout</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_call_limit</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_reg_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>cid_name</td>
+	<td>11111</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>cid_number</td>
+	<td>1111111</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>0.0.0.1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_port</td>
+	<td>5061</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>canreinvite_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device_nat_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>qualify_time</td>
+	<td>2000</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>qualify_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>fromuser</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>fromdomain</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>device[trustrpid]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>device[sendrpid]_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>insecure_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>insecure_invite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>device[t38pt_udptl]_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>device[promiscredir]_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>device_progressinband_never</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>device[videosupport]_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>device[allow_duplicate_calls]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>provider[interpret_noanswer_as_failed]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>provider[interpret_busy_as_failed]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[fake_ring]_1</td>
+	<td>on</td>
+</tr>
+<!--...change and verify register line-->
+<tr>
+	<td>type</td>
+	<td>provider_login</td>
+	<td>login</td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForEditable</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>reg_register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>reg_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_reg_extension</td>
+	<td>reg_extension</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>reg_register</td>
+	<td>register =&gt; login:@0.0.0.1:5061/reg_extension</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_login</td>
+	<td>test_login</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>reg_register</td>
+	<td>register =&gt; test_login:@0.0.0.1:5061/reg_extension</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_password</td>
+	<td>test_password</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>reg_register</td>
+	<td>register =&gt; test_login:test_password@0.0.0.1:5061/reg_extension</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>reg_register</td>
+	<td>register =&gt; test_login:test_password@127.0.0.1:5061/reg_extension</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_port</td>
+	<td>9999</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>reg_register</td>
+	<td>register =&gt; test_login:test_password@127.0.0.1:9999/reg_extension</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>reg_line</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>reg_register</td>
+	<td>register =&gt;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_reg_line</td>
+	<td>new_regline</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>reg_register</td>
+	<td>register =&gt; new_regline</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>reg_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>reg_register</td>
+	<td>register =&gt; test_login:test_password@127.0.0.1:9999/</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_reg_extension</td>
+	<td>reg_extension</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>reg_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reg_register</td>
+	<td>register =&gt; test_login:test_password@127.0.0.1:9999/reg_extension</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>reg_line</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>reg_register</td>
+	<td>register =&gt;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_reg_line</td>
+	<td>new_regline</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>reg_register</td>
+	<td>register =&gt; new_regline</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>reg_line</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reg_register</td>
+	<td>register =&gt; new_regline</td>
+</tr>
+<!--delete provider (SIP)-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_link_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider deleted</td>
+	<td></td>
+</tr>
+<!--ZAP-->
+<!--create-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>ZAP_provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[tech]_zap</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<!--edit zap-->
+<!--check current values-->
+<tr>
+	<td>verifyValue</td>
+	<td>provider_name</td>
+	<td>ZAP_provider</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[dtmfmode]</td>
+	<td>rfc2833</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[location_id]</td>
+	<td>Global</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>provider[ani]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_timeout</td>
+	<td>60</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_call_limit</td>
+	<td>0</td>
+</tr>
+<!--modifying values-->
+<tr>
+	<td>select</td>
+	<td>device[dtmfmode]</td>
+	<td>label=auto</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[ani]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_timeout</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_call_limit</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<!--Checking again for modified values-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_name</td>
+	<td>ZAP_provider</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[dtmfmode]</td>
+	<td>auto</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[location_id]</td>
+	<td>Global</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>provider[ani]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_timeout</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_call_limit</td>
+	<td>100</td>
+</tr>
+<!--delete provider (SIP)-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider deleted</td>
+	<td></td>
+</tr>
+<!--IAX2-->
+<!--create-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>IAX2_provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[tech]_iax2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<!--edit IAX2-->
+<!--check current values-->
+<tr>
+	<td>verifyValue</td>
+	<td>provider_name</td>
+	<td>IAX2_provider</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[dtmfmode]</td>
+	<td>rfc2833</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[location_id]</td>
+	<td>Global</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>provider[ani]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_timeout</td>
+	<td>60</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_call_limit</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_login</td>
+	<td>IAX2_provider</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_password</td>
+	<td>please_change</td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_reg_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>cid_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>cid_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>0.0.0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_port</td>
+	<td>4569</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>canreinvite_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device_nat_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>qualify_time</td>
+	<td>2000</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>qualify_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device_progressinband_never</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[videosupport]_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[allow_duplicate_calls]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>provider[interpret_noanswer_as_failed]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>provider[interpret_busy_as_failed]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[fake_ring]_0</td>
+	<td>on</td>
+</tr>
+<!--modifying values-->
+<tr>
+	<td>select</td>
+	<td>device[dtmfmode]</td>
+	<td>label=auto</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[ani]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_timeout</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_call_limit</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cid_name</td>
+	<td>11111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cid_number</td>
+	<td>1111111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>0.0.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_ipaddr</td>
+	<td>0.0.0.3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_port</td>
+	<td>5061</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>canreinvite_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_nat_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>qualify_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>qualify_time</td>
+	<td>2001</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_progressinband_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[videosupport]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[allow_duplicate_calls]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[interpret_noanswer_as_failed]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[interpret_busy_as_failed]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[fake_ring]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<!--Checking again for modified values-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_name</td>
+	<td>IAX2_provider</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[dtmfmode]</td>
+	<td>auto</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[location_id]</td>
+	<td>Global</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>provider[ani]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_timeout</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_call_limit</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_reg_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>cid_name</td>
+	<td>11111</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>cid_number</td>
+	<td>1111111</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>0.0.0.1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_port</td>
+	<td>5061</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>canreinvite_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device_nat_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>qualify_time</td>
+	<td>2000</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>qualify_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>device_progressinband_never</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>device[videosupport]_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>device[allow_duplicate_calls]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>provider[interpret_noanswer_as_failed]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>provider[interpret_busy_as_failed]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[fake_ring]_1</td>
+	<td>on</td>
+</tr>
+<!--delete provider (SIP)-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_link_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider deleted</td>
+	<td></td>
+</tr>
+<!--H323-->
+<!--create-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>H323_provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[tech]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<!--edit SIP-->
+<!--check current values-->
+<tr>
+	<td>verifyValue</td>
+	<td>provider_name</td>
+	<td>H323_provider</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[dtmfmode]</td>
+	<td>rfc2833</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[location_id]</td>
+	<td>Global</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>provider[ani]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_timeout</td>
+	<td>60</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_call_limit</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_port</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[faststart]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[h245tunneling]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>device[allow_duplicate_calls]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>provider[interpret_noanswer_as_failed]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>provider[interpret_busy_as_failed]_0</td>
+	<td></td>
+</tr>
+<!--modifying values-->
+<tr>
+	<td>select</td>
+	<td>device[dtmfmode]</td>
+	<td>label=inband</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[ani]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_timeout</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_call_limit</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_port</td>
+	<td>5061</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[allow_duplicate_calls]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[interpret_noanswer_as_failed]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[interpret_busy_as_failed]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[fake_ring]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<!--Checking again for modified values-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_name</td>
+	<td>H323_provider</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[dtmfmode]</td>
+	<td>inband</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>device[location_id]</td>
+	<td>Global</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>provider[ani]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_timeout</td>
+	<td>61</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_call_limit</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_port</td>
+	<td>5061</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[faststart]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>device[h245tunneling]_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[speex]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>device[allow_duplicate_calls]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>provider[interpret_noanswer_as_failed]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotChecked</td>
+	<td>provider[interpret_busy_as_failed]_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device[fake_ring]_1</td>
+	<td>on</td>
+</tr>
+<!--...change and verify network related settings-->
+<tr>
+	<td>click</td>
+	<td>hostname_ip_hostname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>hostname_ip_hostname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>provider_server_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>device_ipaddr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>hostname_ip_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_ipaddr</td>
+	<td>0.0.0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>provider_server_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>device_ipaddr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_hostname</td>
+	<td>127.879.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>127.456.0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Configuration error. Please consult this help link.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<!--delete provider -->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_link_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Configuration error. Please consult this help link.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[@id='active_1']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//td[@id='active_1']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_link_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_hostname</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--TERMINATORS-->
+<!--create-->
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test_terminator</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Terminator created</td>
+	<td></td>
+</tr>
+<!--edit-->
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>terminator_name</td>
+	<td>test_terminator2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Terminator updated</td>
+	<td></td>
+</tr>
+<!--delete-->
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--SERVERS-->
+<!--create-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_hostname</td>
+	<td>127.0.0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>127.0.0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_type</td>
+	<td>secondary</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_maxcalllimit</td>
+	<td>300</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ami_username</td>
+	<td>mor</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ami_secret</td>
+	<td>morsecret</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_comment</td>
+	<td>secondary</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server created</td>
+	<td></td>
+</tr>
+<!--edit-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ssh_secret</td>
+	<td>asd</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>server_id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>server_hostname</td>
+	<td>127.0.0.2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>server_ip</td>
+	<td>127.0.0.2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>server_type</td>
+	<td>secondary</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>server_maxcalllimit</td>
+	<td>300</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>server_ami_username</td>
+	<td>mor</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>server_ami_secret</td>
+	<td>morsecret</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>server_port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>server_comment</td>
+	<td>secondary</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>server_ssh_username</td>
+	<td>root</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>server_ssh_port</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>server_ssh_secret</td>
+	<td>asd</td>
+</tr>
+<!--delete server-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<!--some security mechanism is implement, so deleting by direct links is not possible-->
+<tr>
+	<td>clickAndWait</td>
+	<td>id=delete_link_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server deleted</td>
+	<td></td>
+</tr>
+<!--===========-->
+<!--Assign/unnasign Providers to Terminator -->
+<!--create provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>SIP_provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[tech]_sip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<!--create terminator-->
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test_terminator</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Terminator created</td>
+	<td></td>
+</tr>
+<!--assigning providers to terminators-->
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/providers/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider removed</td>
+	<td></td>
+</tr>
+<!--#check for internal error when trying to delete already deleted provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/provider_remove/2?provider_id=6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--#=================-->
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/provider_remove/2?provider_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--Assign/unnasign Providers to Server -->
+<!--assign-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider added</td>
+	<td></td>
+</tr>
+<!--unassign-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Providers deleted</td>
+	<td></td>
+</tr>
+<!--Create User, assign Providers to User -->
+<!--create user-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>!!!!!!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password_password</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_first_name</td>
+	<td>!!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_last_name</td>
+	<td>!!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_clientid</td>
+	<td>!!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>address_email</td>
+	<td>xxx@example.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User succesfully created</td>
+	<td></td>
+</tr>
+<!--assign provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Device']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>addprov_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Assign Provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--unassign provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/destroy/13</td>
+	<td></td>
+</tr>
+<!--testing ip addres validation-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>hostname_ip_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>aaa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hostname is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>hostname_ip_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>22.33.44.55</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>dynamic</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>dynamic</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>hostname_ip_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>aaa.lt</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>aaa.lt</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>192.168.0.2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>192.168.0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>192.168.0.2se</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hostname is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>192.168.0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>192.168.0de.2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hostname is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>192.168.0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>www.go.go.go.lt/zz</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hostname is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>192.168.0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>www.go.lt/id?lll=8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hostname is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>192.168.0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>192.168.0.02</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hostname is not valid</td>
+	<td></td>
+</tr>
+<!--h323-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[tech]_h323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>H323_pr_test</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider[server_ip]</td>
+	<td>0.0.0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>server_ip_7</td>
+	<td>0.0.0.1</td>
+</tr>
+<!--port test-->
+<!--blank-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<!--no numbers-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_port</td>
+	<td>123qwe7987987</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_port</td>
+	<td></td>
+</tr>
+<!--numbers-->
+<tr>
+	<td>type</td>
+	<td>provider_port</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_port</td>
+	<td></td>
+</tr>
+<!--Test provider hostname/ip/dynamic selection-->
+<!--...Hostname-->
+<tr>
+	<td>click</td>
+	<td>hostname_ip_hostname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>provider_server_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>device_ipaddr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_port</td>
+	<td>9999</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>hostname_ip_hostname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>provider_server_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>device_ipaddr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_port</td>
+	<td>9999</td>
+</tr>
+<!--...Hostname/IP-->
+<tr>
+	<td>click</td>
+	<td>hostname_ip_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>provider_server_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>device_ipaddr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_ipaddr</td>
+	<td>127.0.0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_port</td>
+	<td>9999</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>hostname_ip_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>provider_server_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>device_ipaddr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device_ipaddr</td>
+	<td>127.0.0.2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_port</td>
+	<td>9999</td>
+</tr>
+<!--blank-->
+<tr>
+	<td>type</td>
+	<td>device_ipaddr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hostname/IP is blank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>hostname_ip_ip</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hostname/IP is blank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>hostname_ip_ip</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device_ipaddr</td>
+	<td>127.0.0.2</td>
+</tr>
+<!--...Dynamic-->
+<tr>
+	<td>click</td>
+	<td>hostname_ip_dynamic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>provider_server_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>device_ipaddr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>hostname_ip_dynamic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>provider_server_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>device_ipaddr</td>
+	<td></td>
+</tr>
+<!--test for not existing terminator delete (test agaist internal error)-->
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/edit/100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Terminator not found</td>
+	<td></td>
+</tr>
+<!--Trying to destroy provider via direct link-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--Trying to open non-existing server-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_providers/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not found</td>
+	<td></td>
+</tr>
+<!--set minimum items per page-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>items_per_page</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--testing page selection-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_1</td>
+	<td>1 2 3 4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_2</td>
+	<td>1 2 3 4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_14</td>
+	<td>2009-01-02 00:00:02</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_13</td>
+	<td>2009-01-02 00:00:01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_16</td>
+	<td>2009-01-02 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_15</td>
+	<td>2009-01-02 00:00:03</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls/1?page=1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_4</td>
+	<td>1 2 3 4</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls/1?page=-1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_1</td>
+	<td>1 2 3 4</td>
+</tr>
+<!--testing last page -->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_2</td>
+	<td>1 2 3 4</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=page_0</td>
+	<td>You have no calls</td>
+</tr>
+<!--provider_test-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tech_1</td>
+	<td>IAX2</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>test_link_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tech_6</td>
+	<td>SIP</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>test_link_6</td>
+	<td></td>
+</tr>
+<!--bad ip-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>111.11.111.11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Lightning']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>new_window</td>
+	<td>60000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=new_window</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>error</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Connection test failed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider: SIP_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Message: Connection failed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IP: 111.11.111.11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Port: 5060</td>
+	<td></td>
+</tr>
+<!--good ip-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<!--1. ip_authentication.case testas praeina, sukuria du vienodais port ir ip providerius adminui, o testas providers.case neleidžia provider kurio id=6 ip pakeisti į 127.0.0.1-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Lightning']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>new_window</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=new_window</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Connection test passed!: SIP_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Server: MOR Softswitch (127.0.0.1)</td>
+	<td></td>
+</tr>
+<!--No INTERNAL ERROR-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_test/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_test/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not found</td>
+	<td></td>
+</tr>
+<!--============-->
+<!--testing asterisk server ip field-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>!@#$%^&amp;*(()</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_secret</td>
+	<td>12345678</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cannot connect to Asterisk Server Click here for more info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>hostname_ip_hostname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>registration_notice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Registration can be used when at least Username is entered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_login</td>
+	<td>test</td>
+</tr>
+<!--check for register checkbox-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>hostname_ip_dynamic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>When Provider is Dynamic, it is not allowed to register to it</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>hostname_ip_hostname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>provider_reg_line</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>reg_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_reg_extension</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>add_to_servers[1]</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Configuration error.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Server updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>provider_reg_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_reg_extension</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>reg_line</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_reg_line</td>
+	<td>1234123412341</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>provider_reg_line</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_reg_line</td>
+	<td>1234123412341</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>provider_reg_line</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<!--server error-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_hostname</td>
+	<td>74.51.38.184</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ssh_port</td>
+	<td>3720</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>74.51.38.184</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--uzkomentuota kol pavyks pataisyti-->
+<!--<tr> 	<td>open</td> 	<td>/billing/providers/edit/1</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>exception_info_link</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Configuration error.</td> 	<td></td> </tr>-->
+<!--HIDE TEST-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>hd_test</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider[hidden]</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=hd_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>select_prov</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>select_prov</td>
+	<td>label=hd_test - SIP/0.0.0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>did[provider_id]</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_1</td>
+	<td>hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>did[provider_id]</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>document.forms[1].elements[2]</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_provider</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_devices/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>hd_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/calls_by_scr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider_id</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/load_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_provider</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider_id</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_cause_codes_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider_id</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_calls?device_id=-1&amp;direction=-1&amp;hid=331&amp;provider_id=-1&amp;s_user=-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider_id</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>hd_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_cause_codes_stats?back=1&amp;country_id=-1&amp;provider_id=8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>provider_id</td>
+	<td>hd_test</td>
+</tr>
+<!--hide-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list?page=2&amp;s_hidden=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>ani_8</td>
+	<td>hd_test</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>hide_8_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Contrast']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider is hidden</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>hide_8_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>ani_8</td>
+	<td>hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=hd_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=hd_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>select_prov</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_link_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider removed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>select_prov</td>
+	<td>label=hd_test - SIP/0.0.0.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>did[provider_id]</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=hd_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>did[provider_id]</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>document.forms[1].elements[2]</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>s_provider</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_devices/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>hd_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/calls_by_scr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>provider_id</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/load_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>s_provider</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>provider_id</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_cause_codes_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>provider_id</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@alt='Call']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_calls?device_id=-1&amp;direction=-1&amp;hid=331&amp;provider_id=-1&amp;s_user=-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>provider_id</td>
+	<td>label=hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>hd_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/hangup_cause_codes_stats?back=1&amp;country_id=-1&amp;provider_id=8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotValue</td>
+	<td>provider_id</td>
+	<td>hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list?s_hidden=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>ani_8</td>
+	<td>hd_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>hide_link_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=New Provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>hd2_test</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[tech]_zap</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>provider[hidden]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list?s_hidden=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>s_tech</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_tech</td>
+	<td>label=Zap</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>tech_9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>hide_9_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>clear_search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list?clear=1&amp;s_hidden=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=2</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list?page=2&amp;s_hidden=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>ani_9</td>
+	<td>hd2_test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>hd2_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>hide_6_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>hide_9_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>hide_6_1</td>
+	<td></td>
+</tr>
+<!--unhide-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list?s_hidden=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>hide_link_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>hide_8_0</td>
+	<td></td>
+</tr>
+<!------- test that exception doesn't redirect-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/raise_exception/Errno::ENETUNREACH</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Configuration error. Please consult this help link.</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

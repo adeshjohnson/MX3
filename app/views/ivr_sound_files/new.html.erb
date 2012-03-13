@@ -1,0 +1,12 @@
+<%= form_tag( {:action => 'create', :id => @id}, {:multipart => "true"}) do %>
+  <% MorLog.my_debug("ID: "+@id.to_s)%>
+  <b><%= _('Description')%>:</b>
+  <%= text_field_tag('description', "" , "class" => "input", :size => "35", :maxlength => "255" )%>
+  <br />
+  <br />
+  <b><%= _('Upload') %></b>: <%= file_field_tag "file" %>
+  <br />  
+  <br /> 
+<%= submit_tag(_('Upload_file'), :disable_with=>_('Processing..'))%>
+<% end %>
+<br />

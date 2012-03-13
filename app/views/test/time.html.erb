@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Time values</title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td id="year"><%= @time.year %></td>
+        <td id="month"><%= @time.month %></td>
+        <td id="month"><%= @time.month %></td>
+        <td id="day"><%= @time.day %></td>
+        <td id="nice_time"><%= nice_date_time(@time) %></td>
+        <td id="nice_date"><%= nice_date(@time) %></td>
+        <td id="hour"><%= @time.hour %></td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td id="server_ip"><%= Web_URL %></td>
+        <td id="server_dir"><%= Web_Dir %></td>
+      </tr>
+    </table>
+  </body>
+</html>

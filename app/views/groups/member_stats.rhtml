@@ -1,0 +1,56 @@
+<%= b_members + _('Total_members') %>: <b><%= @group.users.size %></b>
+
+<br><br>
+
+<div align="center">
+<table width="100%" class="maintable">
+
+    <tr>
+        <th align="left">            <%= _('Username') %>     </th>
+        <th align="left">            <%= _('Member') %>      </th>
+      
+        <th align="center">            <%= _('Sales_this_month') %>        </th>
+        <th align="center">            <%= _('Sales_this_month_planned') %>        </th>
+        <th align="center">            <%= _('Calltime_normative') %> (h)        </th>
+        <th align="center">            <%= _('Show_in_realtime_stats') %>?        </th>
+        <th align="center">            <%= _('Forwards') %>        </th>
+    </tr>
+
+<%= form_tag(:action => 'member_stats_update', :id => @group.id) do %>
+<% i = 0 %>
+<% for member in @group.users %>
+
+
+    <tr class="row<%= (i % 2 + 1).to_s %>">            
+        <td>            <%= member.username %>     </td>
+        <td>            <%= member.first_name %> <%= member.last_name %>      </td>
+        <td align="center">     <%= text_field_tag "sales_this_month_#{member.id}", member.sales_this_month, "class" => "input", "size" => "5", "maxlength" => "5" %>      </td>
+        <td align="center">     <%= text_field_tag "sales_this_month_planned_#{member.id}", member.sales_this_month_planned, "class" => "input", "size" => "5", "maxlength" => "5" %>      </td>
+        <td align="center">     <%= text_field_tag "calltime_normative_#{member.id}", member.calltime_normative, "class" => "input", "size" => "5", "maxlength" => "5" %>      </td>
+        <td align="center">     <%= check_box_tag "show_in_realtime_stats_#{member.id}", value = "1", checked = member.show_in_realtime_stats == 1%>               </td>
+
+		<td align="center">
+			<% for cf in member.forwards_before_call  %>
+				<% dev = Device.find(cf.data) %>
+				<%= b_forward + nice_user(dev.user) + " " + nice_device(dev) %><br>
+			<% end %>
+		</td>
+
+    </tr>   
+    
+    <%= hidden_field_tag "member", member.id %>      
+
+
+  <% i += 1%>
+<% end %>
+
+    <tr>
+        <th align="right" colspan=7><%= submit_tag _('Update'), :disable_with=>_('Processing..')   %></th>
+    </tr>
+
+
+<% end %> 
+
+
+</table>
+</div>

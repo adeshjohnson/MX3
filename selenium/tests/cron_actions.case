@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.163" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<!--if this test breaks verify dates because it cant be in the past-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--create cron settings-->
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cron_setting_name</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_hour</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_hour</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cron_setting_description</td>
+	<td>asdfghjklqwertyuiopzxcvbnm</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Setting not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter correct period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_year</td>
+	<td>label=2019</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_year</td>
+	<td>label=2021</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Setting saved</td>
+	<td></td>
+</tr>
+<!--verify-->
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_1</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>action_1</td>
+	<td>change_tariff</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>user_1</td>
+	<td></td>
+</tr>
+<!--edit-->
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cron_setting_name</td>
+	<td>pakeistas vardas</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting[action]</td>
+	<td>label=Change provider tariff</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting[provider_target_id]</td>
+	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting[provider_to_target_id]</td>
+	<td>label=Test Tariff bad currency</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting[periodic_type]</td>
+	<td>label=Weekly</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_year</td>
+	<td>label=2016</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cron_setting_description</td>
+	<td>naujas apibudinimas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Setting updeted</td>
+	<td></td>
+</tr>
+<!--verify-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>pakeistas vardas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>change_provider_tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Provider</td>
+	<td></td>
+</tr>
+<!--create second cron settings-->
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cron_setting_name</td>
+	<td>bbbbbb</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>cron_setting[target_id]</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>cron_setting[periodic_type]</td>
+	<td>label=Monthly</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_year</td>
+	<td>label=2016</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_hour</td>
+	<td>label=04</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_year</td>
+	<td>label=2016</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_day</td>
+	<td>label=5</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_hour</td>
+	<td>label=08</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cron_setting_description</td>
+	<td>aHSZjtykr,xcfgvkcyxresrxd,xtxmdktydk,dyf</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>cron_setting[to_target_id]</td>
+	<td>label=Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--create third cron settings-->
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cron_setting_name</td>
+	<td>ccccccccccccccccc</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>cron_setting[target_id]</td>
+	<td>label=Test Accountant</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>cron_setting[to_target_id]</td>
+	<td>label=Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>cron_setting[periodic_type]</td>
+	<td>label=Free days</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_year</td>
+	<td>label=2019</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_hour</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_year</td>
+	<td>label=2019</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_hour</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_1</td>
+	<td>pakeistas vardas</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_2</td>
+	<td>bbbbbb</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_3</td>
+	<td>ccccccccccccccccc</td>
+</tr>
+<!--verify is it not change now-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=provider_tariff_id</td>
+	<td>Test Tariff</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>user_tariff_id</td>
+	<td>Wholesale - Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>user_tariff_id</td>
+	<td>Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>user_tariff_id</td>
+	<td>Wholesale - Test Tariff for Users</td>
+</tr>
+<!--import mysql with new cron actions-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/cron_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/hourly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div/b</td>
+	<td>Mission complete</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_1</td>
+	<td>pakeistas vardas</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_2</td>
+	<td>bbbbbb</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_3</td>
+	<td>ccccccccccccccccc</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_121</td>
+	<td>Geras</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_122</td>
+	<td>Geriau</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_123</td>
+	<td>Gerai</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_124</td>
+	<td>Name</td>
+</tr>
+<!--verify-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=provider_tariff_id</td>
+	<td>Test Tariff bad currency</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>user_tariff_id</td>
+	<td>Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>user_tariff_id</td>
+	<td>Wholesale - Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>user_tariff_id</td>
+	<td>Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=Edit]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

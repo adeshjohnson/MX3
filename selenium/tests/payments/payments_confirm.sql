@@ -1,0 +1,3 @@
+INSERT INTO `payments`
+(`id`, `paymenttype`, `amount`, `currency`, `email`, `date_added`         , `completed`, `transaction_id`,`shipped_at`         , `fee`, `gross`, `first_name`, `last_name`, `payer_email`, `residence_country`, `payer_status`, `tax`, `user_id`, `pending_reason`, `vat_percent`, `owner_id`, `card`, `hash`, `bill_nr`) VALUES
+(10,    'paypal',         10.50,      'USD',    NULL, '2010-04-18 00:00:01',           0,             NULL,'2010-04-18 00:00:02', 0.6  , 10     , NULL        , NULL       , NULL         , NULL               , NULL          , 0    , 0        , 'Waiting for confirmation'            , 0            , 0         , 2     , NULL  ,  NULL    );

@@ -1,0 +1,58 @@
+<div id = "edit_window">
+  <table class = "simple" width = 100%>
+    <tr>
+      <td width = "40%" valign="top">
+        <table class = "simpletable" width = 100%>
+          <tr>
+            <td align="left">
+              <div id="ivr_name_div"><b><%= _("Ivr_Name") %></b> <%= text_field_tag('ivr[name]', @ivr ? @ivr.name.to_s : "" ,"id"=> "ivr_name", "class" => "input", :size => "40", :maxlength => "250") %></div>
+            </td>
+          </tr>
+        </table>
+        <%= observe_field("ivr_name", :url=> { :action => "update_ivr_name", :id => @ivr.id }, :loading => "Element.show('spinner');", :complete=> ";Element.hide('spinner');", :with=>"data") %>
+        <table class = "simpletable" width = 100%>
+          <tr>
+            <% if @block.id != @ivr.start_block_id %>
+              <td align="left"><%= link_to_remote(b_delete+_("Remove_This_Block"), :url => { :action => "add_block" , :block_id => @block.id, :rm=>'true' }, :update => "edit_window", :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');")%></td>
+            <% end %>
+            <th align="<%= @block.id != @ivr.start_block_id ? 'center' : 'left' %>"><%= link_to b_extlines + _('Extlines') , :action => "ivr_extlines", :block_id => @block.id %></th>
+            <th align="right"><%= link_to_remote(b_add + _("Add_New_Block"), :url => { :action => "add_block" , :block_id => @block.id }, :update => "edit_window" , :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');")%></th>
+          </tr>
+        </table>
+        <input type="hidden" id="last_changed" name="last_changed" value="<%= @block.name.to_s if @block %>" />
+        <table class = "maintable" width = 100%>
+          <tr>
+            <th><b><%= _('Block_Name')%>:</b></th>
+            <th><b><%= _('Timeout_Response')%>:</b></th>
+            <th><b><%= _('Timeout_Digits')%>:</b></th>
+          </tr>
+          <tr>
+            <td><div id = "block_name_div"><%= text_field_tag('block[name]', @block ? @block.name.to_s : "" ,  "id" => "block_name","class" => "input", :maxlength => "50") %></div></td>
+            <td><div id = "block_timeout_response_div"><%= text_field_tag('block[timeout_response]', @block ? @block.timeout_response.to_s : "" , "id" => "block_timeout_response", "class" => "input", :maxlength => "50") %></div></td>
+            <td><div id = "block_timeout_digits_div"><%= text_field_tag('block[timeout_digits]', @block ? @block.timeout_digits.to_s : "" , "id" => "block_timeout_digits", "class" => "input", :maxlength => "50") %></div></td>
+          </tr>
+        </table>
+        <%= observe_field("block_name",             :url=> { :action => "update_block_name",             :id => @block.id }, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');#{last_changed("block_name")}",             :with=>"data") %>
+        <%= observe_field("block_timeout_response", :url=> { :action => "update_block_timeout_response", :id => @block.id }, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');#{last_changed("block_timeout_response")}", :with=>"data") %>
+        <%= observe_field("block_timeout_digits",   :url=> { :action => "update_block_timeout_digits",   :id => @block.id }, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');#{last_changed("block_name")}",             :with=>"data") %>
+
+        <div id = "action_selector">
+          <%= render :partial => 'ivr_action_selector' %>
+        </div>
+        <br />
+        <div id = "extensions_selector">
+          <%= render :partial => 'ivr_extension_selector' %>
+        </div>
+        <br />
+        <div id="all_blocks">
+          <%= render :partial => 'all_blocks' %>
+        </div>
+      </td>
+      <td width = "60%" valign="top">
+        <div id = "block_list">
+          <%= render :partial => 'block_list' %>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

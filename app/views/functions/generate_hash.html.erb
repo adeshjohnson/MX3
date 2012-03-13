@@ -1,0 +1,30 @@
+<%= form_tag(:action => 'generate_hash') do %>
+  <table>
+    <tr>
+      <td id="link"> <%= _('Link') %>:   </td>
+      <td id="link_value"><%= text_field_tag 'link', @api_link, :size => '150' %> </td>
+      <td><%= submit_tag _('Generate') , :disable_with=>_('Processing..')%></td>
+    </tr>
+  </table>
+<% end %>
+<% if @system_hash %>
+  <table class='maintable' width='100%'>
+    <% @hash_param_order.each do |hash_param| %>
+       <% if @query_values.has_key?(hash_param.to_sym) %>
+         <tr>
+           <td> <%= hash_param %> </td>
+           <td> <%= @query_values[hash_param.to_sym] %> </td>
+         </tr>
+       <% end %>
+    <% end %>
+    <tr>
+      <td> <%= _('API key') %> </td>
+      <td> <%= Confline.get_value('API_Secret_Key') %> </td>
+    </tr>
+    <tr>
+      <td> <%= _("Generated_hash") %> </td>
+      <td> <%= @system_hash %> </td>
+    </tr>
+  <table>
+  <%= b_info + _('Parameters_are_in_the_same_order_as_when_hash_was_generated') %>.
+<% end %>

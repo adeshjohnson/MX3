@@ -1,0 +1,310 @@
+
+
+<%= form_tag :action => 'create', :id => @dp do %>
+
+
+  <% if calling_cards_active? %>
+    <% if @cardgroups.size.to_i > 0 %>
+      <br /><br />
+      <b><%= _('Calling_cards_dialplan')  %></b>
+      <br /><br />
+
+      <table class="maintable" width="100%">
+        <tr>
+          <th align="left"><%= _('Name') %></th>
+          <th align="right"><%= _('Number_length') %> / <%= _('Pin_length') %></th>
+          <th align="center"><%= _('Ask_only_pin') %></th>
+          <th align="center"><%= _('Pinless') %></th>
+          <th align="center"><%= _('Tell_time') %></th>
+          <th align="center"><%= _('Tell_seconds') %></th>
+          <th align="center"><%= _('Tell_balance') %></th>
+          <% if mor_11_extend? %>
+            <th align="center"><%= _('Tell_balance_after_call') %></th>
+          <% end %>
+          <th align="right"><%= _('Ask_numberpin_times') %></th>
+          <th align="right"><%= _('Ask_dst_times') %></th>
+          <th align="center" <%= nice_end_ivr_tooltip%>><%= _('End_IVR') %></th>
+          <% if mor_11_extend? %>
+            <th align="right"><%= _('If_Card_balance_lower_than') %></th>
+            <th align="center"><%= _('Balance_IVR') %></th>
+          <% end %>
+          <th></th>
+        </tr>
+
+        <tr class="row1">
+ 
+          <%= hidden_field_tag 'dialplan[dptype]', "callingcard"  %>
+          <td align="left"> <%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "30", :maxlength => "50", :id => "name_1"  %></td>
+          <td align="right"><select name="dialplan_number_pin_length" id = "name_1">
+              <% for card in @cardgroups %>
+                <option value=<%= card.id %>> <%=  card.number_length%> / <%= card.pin_length %> </option>
+              <% end %>
+            </select>
+          </td>
+          <td align="center"> <%= check_box_tag 'dialplan[data7]', value = "1", false, :id => "dialplan_data_7" %></td>
+          <td align="center"> <%= check_box_tag 'dialplan[data8]', value = "1", false, :id => "dialplan_data_8" %></td>
+          <td align="center"> <%= check_box_tag 'dialplan[data3]', value = "1", false, :id => "dialplan_data_3" %></td>
+          <td align="center"> <%= check_box_tag 'tell_seconds',value = "1", false, :id => "tell_sec" %></td>
+          <td align="center"> <%= check_box_tag 'dialplan[data4]', value = "1", false, :id => "dialplan_data_4" %></td>
+          <% if mor_11_extend? %>
+            <td align="center"> <%= check_box_tag 'dialplan[data10]', value = "1", false, :id => "dialplan_data_10" %></td>
+          <% end %>
+          <td align="right"> <%= text_field_tag 'dialplan[data5]', @dp_data5, "class" => "input", :size => "10", :maxlength => "10" , :id => "dialplan_data_5" %></td>
+          <td align="right"> <%= text_field_tag 'dialplan[data6]', @dp_data6, "class" => "input", :size => "10", :maxlength => "10", :id => "dialplan_data_6"  %></td>
+          <td align="center"> <select name ="end_ivr">
+              <%@end_ivr.each_with_index{|val,index|%>
+                <option value=<%= index %> <%= 'selected' if @dp.data9.to_i == (index+1)%>  > <%= val %> </option>
+              <% }%>
+            </select>
+          </td>
+          <% if mor_11_extend? %>
+            <td align="right"><%= text_field_tag 'dialplan[data11]', @dp.data11, "class" => "input", :size => "10", :maxlength => "10", :disabled => (@balance_ivrs.size.to_i == 0) %></td>
+            <td align="center">
+              <select name="dialplan[data12]" id="ivr_balance">
+                <%if @balance_ivrs and @balance_ivrs.size.to_i > 0%>
+                <% for ivr in @balance_ivrs %>
+                  <option value=<%= ivr.id %> <%= 'selected' if @dp.data12.to_i == ivr.id and @dp.data11 != '0' %> > <%=  ivr.name %> </option>
+                <% end %>
+                  <%end%>
+              </select>
+            </td>
+          <% end %>
+          <td align="center"><%= image_submit_tag 'icons/add.png', :title => _('Add'), :id=>"add_calling_card" %></td>
+        </tr>
+
+      </table>
+      <script type="text/javascript">
+        //<![CDATA[
+        Event.observe(window, 'load', function() {
+
+        if (!$('dialplan_data_3').checked) {
+        $('tell_sec').disabled = true;
+        }
+        });
+
+        Event.observe($('dialplan_data_3'), 'click', function() {
+        if ($('dialplan_data_3').checked) { $('tell_sec').disabled = false; }
+        else {$('tell_sec').disabled = true; }
+        }
+        );
+
+        if (Boolean(parseFloat($('dialplan[data11]').value))) {
+          $('ivr_balance').show();
+        }else{
+          $('ivr_balance').hide();
+        }  
+
+        Event.observe($('dialplan[data11]'), 'change', function() {
+          if (Boolean(parseFloat($('dialplan[data11]').value))) {
+            $('ivr_balance').show();
+          }else{
+            $('ivr_balance').hide();
+          }  
+        }
+        );
+
+
+        //]]>
+      </script>
+    <% else %>
+      <%= b_info + _('To_be_able_to_cc_dialplan_cardgroup_has_to_be_created') %>
+    <% end %>
+  <% end %>
+
+
+<% end %>
+
+<br /><br /><br />
+
+<%= form_tag :action => 'create', :id => @dp do %>
+
+  <b><%= _('Authorization_by_pin_dialplan')  %></b>
+  <br /><br />
+
+  <table class="maintable" width="100%">
+    <tr>
+
+      <th align="left"><%= _('Name') %></th>
+      <th align="center"><%= _('Use_ANI') %>?</th>
+      <th align="right"><%= _('Ask_numberpin_times') %></th>
+      <th align="right"><%= _('Ask_dst_times') %></th>
+      <% if mor_11_extend? %>
+        <th align="right"><%= _('Tell_balance_after_entering_destination') %></th>
+      <% end %>
+      <th align="center" <%= tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation')) %>><%= _('Save_original_CallerID') %></th>
+      <% if mor_11_extend? and calling_cards_active? %>
+        <th align="center"><%= _('Use_calling_card') %></th>
+      <% end %>
+      <th align="center"<%= tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation')) %>><%= _('Default_device') %></th>
+      <th></th>
+
+
+    </tr>
+
+    <tr class="row1">
+
+      <%= hidden_field_tag 'dialplan[dptype]', "authbypin"  %>
+      <td align="left"> <%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "30", :maxlength => "50", :id => "name_2"  %></td>
+      <td align="center"> <%= check_box_tag 'dialplan[data3]',1, value = "1", :id=> 'data3', :autocomplete => 'off'%></td>
+      <td align="right"> <%= text_field_tag 'dialplan[data1]', @dp_data1, "class" => "input", :size => "10", :maxlength => "10", :id => "data1"  %> </td>
+      <td align="right"> <%= text_field_tag 'dialplan[data2]', @dp_data2, "class" => "input", :size => "10", :maxlength => "10", :id => "data2"  %></td>
+      <% if mor_11_extend? %>
+        <td align="right"> <%= check_box_tag 'dialplan[data6]', 1, @dp.data6 == "1",  {:id => "data6"}%></td>
+      <% end %>
+      <td align="center" <%= tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation')) %>><%= check_box_tag 'dialplan[data4]', 1, false,  {:id => "data4"} %></td>
+      <% if mor_11_extend? and calling_cards_active? %>
+        <td align="center"> 
+          <span id="dialplan_data_7">
+           <%= select_tag("dialplan[data7]",options_for_select([[_('Not_used'), "0"]]+ @cc_dialplans.map{|dialplan| [dialplan.name, dialplan.id]},:selected => _('Not_used')), :id => 'cc_dialplan') if @cc_dialplans %>
+          </span>
+        </td>
+      <% end %>
+      <td align="center">
+        <%= select_tag("user" ,options_for_select([[_('Not_used'), ""]]+ @users.map{|user| [ "#{nice_user(user)} (#{user.id })", user.id]},:selected => "#{@users_used.id.to_s}")) %>
+        <span id="users_device"> </span>
+      </td>
+      <td align="center"> <%= image_submit_tag 'icons/add.png', :title => _('Add'), :id=>"dp_PIN_add" %></td>
+    </tr>
+
+  </table>
+<% end  %>
+
+<%= observe_field("user",
+  :update => "users_device",
+  :with => "id",
+  :url=> {:controller=> :dialplans, :action => :dialplans_device_ajax},
+  :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
+
+<br /><br /><br />
+<% if callback_active? %>
+  <%= form_tag :action => 'create', :id => @dp do %>
+
+    <b><%= _('Callback_dialplan')  %></b>
+    <br /><br />
+
+
+    <% if @cbdids.size > 0 %>
+
+      <table class="maintable" width="100%">
+        <tr>
+          <th id="name" align="left"><%= _('Name') %></th>
+          <th id="did_on_callback" align="left"><%= _('DID_on_Callback') %></th>
+          <th id="hangup_cause_codes" align="left" <%=tooltip(_('Hangup_cause_codes'), _('How_to_terminate_Callback_initiation_Call_(ISDN/SIP)'))%>><%= _('Hangup_cause_codes') %></th>
+          <th id="wait_time" align="right" <%=tooltip(_('Wait_Time') + " (s)", _('How_many_seconds_to_wait_after_initiation_call_to_callback'))%> ><%= _('Wait') %> (s)</th>
+          <th id="initial_callback_device" align="left"><%= _('Initial_callback_device') %></th>
+          <th id="ask_for_card" align="center" <%= tooltip(_('Ask_card_data_after_callback'), _('Ask_card_data_after_callback_explanation')) %>><%= _('Ask_for_Card') %>?</th>
+          <th></th>
+        </tr>
+
+        <tr class="row1">
+
+          <%= hidden_field_tag 'dialplan[dptype]', "callback"  %>
+
+          <td align="left"> <%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "30", :maxlength => "50", :id=>"callback_dp_name"  %></td>
+          <td align="left">
+            <select name="dialplan[data1]" >
+              <% for did in @cbdids %>
+                <option value=<%= did.id %> <%= "selected" if @dp.data1.to_i == did.id %>> <%= did.did%> - <%= did.dialplan.name %> </option>
+              <% end %>
+            </select>
+          </td>
+          <td align="left" > <%= render :partial => '/layouts/hgc_end_select', :locals=>{:select_field_tag=>"dialplan[data6]", :filed_value=>@dp.data6.to_i} %> </td>
+          <td align="right"> <%= text_field_tag 'dialplan[data2]', @dp.data2, "class" => "input", :size => "10", :maxlength => "10"  %></td>
+          <td align="left">
+            <select name="dialplan[data3]" >
+              <% for device in @cbdevices %>
+                <option value=<%= device.id %> <%= "selected" if @dp.data3.to_i == device.id %>> <%= device.description%> <%= nice_device(device) %> </option>
+              <% end %>
+            </select>
+          </td>
+          <td align="center" <%= tooltip(_('Ask_card_data_after_callback'), _('Ask_card_data_after_callback_explanation')) %>> <%= check_box_tag 'dialplan[data4]', value = "1", checked = (@dp.data4 == "1"), :id=>'callback_dialplan[data4]_'+@dp.id.to_s %></td>
+          <td align="center"> <%= image_submit_tag 'icons/add.png', :title => _('Add'), :id=>"cb_add" %></td>
+        </tr>
+
+      </table>
+
+    <% else %>
+
+      <%= _('No_available_dialplans') %>
+
+    <% end %>
+    <br />
+    <br />
+    <br />
+  <% end  %>
+<%end%>
+
+<b><%= _('IVR_dialplan')  %></b>
+<br />
+<br />
+<br />
+<%= form_tag( :action => 'create', :id => @dp ) do %>
+  <% @create = true %>
+  <%= hidden_field_tag 'dialplan[dptype]', "ivr"  %>
+  <%= render :partial => 'dialplan' %>
+<% end %>
+
+<br />
+<br />
+<%= javascript_include_tag "jquery-1.4.2.min.js" %>
+<script type="text/javascript" >
+  $.noConflict();
+
+  jQuery(function() {
+  var wsw = jQuery('#data3:checked');
+  if (wsw.val() == undefined) {
+  jQuery('#user').css('display', "none");
+  jQuery('#users_device').css('display', "none");
+  }
+  });
+
+  jQuery('#data3').click(function() {
+  var wsw = jQuery('#data3:checked');
+
+  if (wsw.val() == 1) {
+  jQuery('#user').css('display', "");
+  jQuery('#users_device').css('display', "");
+  $('cc_dialplan').show()
+  } else {
+  jQuery('#user').css('display', "none");
+  jQuery('#users_device').css('display', "none");
+  $('cc_dialplan').hide()
+  $('cc_dialplan').checked = false;
+  }
+  });
+</script>
+
+<% if mor_11_extend? %>
+  <b><%= _('Quickforward_dialplan')  %></b>
+  <br />
+  <br />
+  <%= form_tag( :action => 'create', :id => @dp ) do %>
+    <%= hidden_field_tag 'dialplan[dptype]', "quickforwarddids"  %>
+    <table class="maintable" width="100%">
+      <tr>
+        <th align="left" id="quickforward_dp_name"><%= _('Name') %></th>
+        <th align="center"id="quickforward_dp_user"><%= _('User') %></th>
+        <th align="center"id="quickforward_dp_device"><%= _('Device') %></th>
+        <th align="center"id="quickforward_dp_diversion"><%= _('Use_diversion_instead_of_callerid') %></th>
+        <th></th>
+      </tr>
+      <tr>
+        <td align="left"><%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "30", :maxlength => "50", :id=>"quickforward_dp_name"  %></td>
+        <td align="center">
+          <%= select_tag("quickforwards_user" ,options_for_select([[_('Not_used'), ""]]+ @users.map{|user| [ "#{nice_user(user)} (#{user.id })", user.id]})) %>
+        </td>
+        <td align="center">
+          <span id="quickforwards_device"></span>
+        </td>
+        <td align="center"><%= check_box_tag 'dialplan[data10]', 1, @dp.data10 == "1", {:id => "data10", :onclick => "$('quickforwards_user').disabled = this.checked;if($('quickforwards_device').hasChildNodes()){$('quickforwards_device').childNodes[1].disabled = this.checked;}"}%></td>
+        <td align="center"><%= image_submit_tag 'icons/add.png', :title => _('Add'), :id=>"cb_add" %></td>
+      </tr>
+    </table>
+  <% end %>
+<% end %>
+<%= observe_field("quickforwards_user",
+  :update => "quickforwards_device",
+  :with => "id",
+  :url=> {:controller=> :dialplans, :action => :dialplans_device_ajax},
+  :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
+

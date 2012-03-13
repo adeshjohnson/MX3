@@ -1,0 +1,25 @@
+<div class="nb"><%= b_user + _('User') %>: <%= link_nice_user(@user) %></div>
+<br/>
+
+<% if session[:usertype] == "admin" or session[:usertype] == "reseller" %>
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left" nowrap width="10%"><%= link_to b_callflow + _('Callflow'), :action => "callflow", :id => @device.id %></th>
+      <th align="left" nowrap width="10%"><%= link_to b_did + _('DIDs') , :action => "device_dids", :id => @device.id %></th>
+      <% if session[:usertype] == "admin"%>
+      <th align="left" nowrap width="15%"><%= link_to b_extlines + _('Extlines') , :action => "device_extlines", :id => @device.id %></th>
+      <% end %>
+      <th align="left" nowrap width="10%"><%= link_to b_view + _('Device_details') , :action => "device_all_details", :id => @device.id %></th>
+      <th width="100%"></th>
+    </tr>
+  </table>
+<% end %>
+<br/>
+
+<%= form_tag(:action => 'device_update', :id => @device.id) do %>
+  <%= render :partial => 'form_skype' %>
+  <br/>
+  <% if can_see_finances? -%>
+    <%= submit_tag _('update'), :disable_with=>_('Processing..') %>
+  <% end -%>
+<% end %>

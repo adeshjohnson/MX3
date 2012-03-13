@@ -1,0 +1,235 @@
+<table width="70%" class="simple">
+  <tr class="row1">
+    <th align="left" id="name_row"><%= _('Name') %></th>
+    <td align="right" id="name">        <%= text_field 'cardgroup', 'name', "class" => "input"   %> </td>
+  </tr>
+
+  <tr class="row1">
+    <th align="left" id="description_row"><%= _('Description') %></th>
+    <td align="right" id="description">    <%= text_area 'cardgroup', 'description', "class" => "input", "cols" => 50, "rows" => 5 %>     </td>
+  </tr>
+  <% if can_see_finances? %>
+    <tr class="row1">
+      <th align="left" id="price_with_vat_row"><%= _('Price_with_VAT') %> </th>
+      <td align="right" id="price_with_vat">      <%= text_field_tag 'price_with_vat',  nice_number(@price_with_vat) ,  "class" => "input"   %>   </td>
+    </tr>
+
+    <tr class="row1">
+      <th align="left" id="setup_fee_row"><%= _('Setup_fee') %></th>
+      <td align="right" id="setup_fee">     <%= text_field 'cardgroup', 'setup_fee', "class" => "input"   %>    </td>
+    </tr>
+  <% end %>
+  <tr class="row1">
+    <th align="left" id="use_external_script_row">
+      <%= b_exclamation({"onMouseOver" => "Tip('#{_("Use_external_script")} - #{_("Use_external_script_explained")}')", "onmouseout" => "UnTip();"}) %>
+      <%= _('Use_external_script') %>
+    </th>
+    <td align="right" id="use_external_script">
+      <%= radio_button("cardgroup", "use_external_function", 0, {"onChange" => "toggle_ghost_fields()"}) %> <%= _("No") %>
+      <%= radio_button("cardgroup", "use_external_function", 1, {"onChange" => "toggle_ghost_fields()"}) %> <%= _("Yes") %>
+    </td>
+  </tr>
+  <tr class="row1">
+    <th align="left" id="ghost_min_perc_row">
+      <%= _('Ghost_min_perc') %>
+      (<%= link_to b_details + _('Custom'), :action => 'gmp_list', :id => @cardgroup.id %>)
+    </th>
+    <td align="right" id="ghost_min_perc">
+      <%= _('Default')  %>:
+      <%= text_field 'cardgroup', 'ghost_min_perc', "class" => "input", :size => "10", :maxlength => "15"    %> %
+    </td>
+  </tr>
+
+  <tr class="row1">
+    <th align="left" id="ghost_balance_perc_row">
+      <%= _('Ghost_balance_perc') %>
+    </th>
+    <td align="right" id="ghost_balance_perc">
+      <%= text_field 'cardgroup', 'ghost_balance_perc', "class" => "input", :size => "10", :maxlength => "15"    %> %
+    </td>
+  </tr>
+  <% if can_see_finances? %>
+    <tr class="row1" id="daily_charge_row">
+      <th align="left"><%= _('Daily_charge') %></th>
+      <td align="right" id="daily_charge">    <%= text_field 'cardgroup', 'daily_charge', "class" => "input"   %>     </td>
+    </tr>
+    <tr class="row1">
+      <th align="left" id="currency_row"><%= _('Currency') %></th>
+      <td align="right" id="currency"><%=Currency.get_default.name%></td>
+    </tr>
+    <tr class="row1">
+      <th align="left" id="tell_cents_row"><%= _('Tell_cents') %></th>
+      <td align="right" id="tell_cents">
+        <%= radio_button_tag("cardgroup[tell_cents]", 0, @cardgroup.tell_cents == false) %> <%= _("No") %>
+        <%= radio_button_tag("cardgroup[tell_cents]", 1, @cardgroup.tell_cents == true) %> <%= _("Yes") %>
+      </td>
+    </tr>
+    <tr class="row1">
+      <th align="left" id="tell_balance_in_currency_row"><%= _('Tell_balance_in_currency') %></th>
+      <td align="right" id="tell_balance_in_currency"><%= select('cardgroup','tell_balance_in_currency', @currencies.collect {|p| [ p.name, p.name ] } ) %></td>
+    </tr>
+  <% end %>
+  <% if session[:usertype] == "admin" or session[:usertype] == "accountant" or (current_user.reseller_allow_providers_tariff?) %>
+    <tr class="row1">
+      <th align="left" id="lcr_row"><%= _('LCR') %></th>
+      <td align="right" id="lcr">
+        <select name="cardgroup[lcr_id]" <%= "disabled" if @lcrs.size < 1 %> >
+          <% for lcr in @lcrs %>
+            <option value="<%= lcr.id %>" <%= "selected" if @cardgroup.lcr.id.to_i == lcr.id.to_i if @cardgroup.lcr%>> <%= lcr.name %> </option>
+          <% end %>
+        </select>
+      </td>
+    </tr>
+  <% end %>
+
+  <tr class="row1">
+    <th align="left" id="tariff_row"><%= _('Tariff') %></th>
+    <td align="right" id="tariff">
+      <select name="cardgroup[tariff_id]" <%= "disabled" if @tariffs.size < 1 %> >
+        <% for tariff in @tariffs %>
+          <option value="<%= tariff.id %>" <%= "selected" if @cardgroup.tariff.id == tariff.id if @cardgroup.tariff%>> <%= tariff.name %> </option>
+        <% end %>
+      </select>
+    </td>
+  </tr>
+
+  <tr class="row1">
+    <th align="left" id="location_row"><%= _('Location') %></th>
+    <td align="right" id="location">                                        <select name="cardgroup[location_id]" >
+        <% for loc in @locations %>
+          <option value=<%= loc.id %> <%= "selected" if @cardgroup.location_id == loc.id %>> <%= loc.name %> </option>
+        <% end %>
+      </select>     </td>
+  </tr>
+
+  <% if params[:action] != "edit"%>
+
+    <tr class="row1">
+      <th align="left" id="number_length_row"><%= _('Number_length') %></th>
+      <td align="right" id="number_length">    <%= text_field 'cardgroup', 'number_length', "class" => "input"   %>     </td>
+    </tr>
+
+    <tr class="row1">
+      <th align="left" id="pin_length_row"><%= _('Pin_length') %></th>
+      <td align="right" id="pin_length">    <%= text_field 'cardgroup', 'pin_length', "class" => "input"   %>     </td>
+    </tr>
+
+  <% end %>
+
+  <tr class="row1">
+    <th align="left" id="valid_from_row"><%= _('Valid_from') %></th>
+    <%if @year_from%>
+      <td align="right" id="valid_from"><%= select_date(Time.mktime(@year_from, @month_from, @day_from), :end_year => Date.today.year+4, :prefix => "date_from") %>   </td>
+    <%else%>
+      <td align="right" id="valid_from"><%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+4, :prefix => "date_from") %>   </td>
+    <%end%>
+  </tr>
+
+
+  <tr class="row1">
+    <th align="left" id="valid_till_row"><%= _('Valid_till') %></th>
+    <%if @year_till%>
+      <td align="right" id="valid_till">   <%= select_date(Time.mktime(@year_till.to_i, @month_till, @day_till), :end_year => Date.today.year+4, :prefix => "date_till") %>     </td>
+    <%else%>
+      <td align="right" id="valid_till">   <%= select_date(Time.mktime(session[:year_till].to_i + 1, session[:month_till], session[:day_till]), :end_year => Date.today.year+4, :prefix => "date_till") %>     </td>
+    <%end%>
+  </tr>
+
+  <tr class="row1">
+    <th align="left" id="valid_after_first_use_row"><%= _('Valid_after_first_use') %></th>
+    <td align="right" id="valid_after_first_use">    <%= text_field 'cardgroup', 'valid_after_first_use', "class" => "input", :size => "5", :maxlength => "4"   %> <%= _('days') %>     </td>
+  </tr>
+
+  <tr class="row1">
+    <th align="left" id="allow_loss_calls_row"><%= _('Allow_loss_calls') %></th>
+    <td align="right" id="allow_loss_calls"><%= check_box_tag 'allow_loss_calls', "1", (@cardgroup.allow_loss_calls == 1) %></td>
+  </tr>
+  <tr class="row1" <%= tooltip(_('Deny_to_double_use_a_Card_with_Pinless_dialing_when_Card_is_assigned_to_some_CallerID'), _('solo_pinless_explanation')) %>>
+    <th align="left" id="deny_double_use_a_card_row"><%= _('Deny_to_double_use_a_Card_with_Pinless_dialing_when_Card_is_assigned_to_some_CallerID') %></th>
+    <td align="right" id="deny_double_use_a_card">
+      <%= radio_button_tag("cardgroup[solo_pinless]", 0, @cardgroup.solo_pinless == false) %> <%= _("No") %>
+      <%= radio_button_tag("cardgroup[solo_pinless]", 1, @cardgroup.solo_pinless == true) %> <%= _("Yes") %>
+    </td>
+  </tr>
+  <tr class="row1">
+    <th align="left" id="disable_voucher_row"><%= _('Disable_Voucher_with_same_Number_as_Card_if_Card_is_used?') %></th>
+    <td align="right" id="disable_voucher"><%= check_box_tag 'disable_voucher', "1", (@cardgroup.disable_voucher) %></td>
+  </tr>
+</table>
+<br />
+<% tax = @cardgroup.get_tax %>
+<b><%= _("Taxes")%>:</b>
+<br />
+<br />
+<table width="70%" class="simple">
+  <tr class="row1">
+    <th align="left"><%= _("Tax_Name")%></th>
+    <th align="center"><%= _("Enabled")%>?</th>
+    <th align="right"><%= _("Value")%></th>
+  </tr>
+  <tr class="row1">
+    <th align="left"><%= text_field_tag 'tax1_name', tax.tax1_name, "class" => "input" , :size => "25", :maxlength => "255"%></th>
+    <td align="center">
+    </td>
+    <td align="right">
+      <%= text_field_tag 'tax1_value', tax.tax1_value.to_f, "class" => "input" , :size => "5", :maxlength => "10"%>%
+    </td>
+
+  </tr>
+  <tr class="row1">
+    <th align="left"><%= text_field_tag 'tax2_name', tax.tax2_name, "class" => "input" , :size => "25", :maxlength => "255"%></th>
+    <td align="center">
+      <%= check_box_tag 'tax2_enabled', "1", (tax.tax2_enabled.to_i == 1) %>
+    </td>
+    <td align="right">
+      <%= text_field_tag 'tax2_value', tax.tax2_value.to_f, "class" => "input" , :size => "5", :maxlength => "10"%>%
+    </td>
+  </tr>
+  <tr class="row1">
+    <th align="left"><%= text_field_tag 'tax3_name', tax.tax3_name, "class" => "input" , :size => "25", :maxlength => "255"%></th>
+    <td align="center">
+      <%= check_box_tag 'tax3_enabled', "1", (tax.tax3_enabled.to_i == 1)%>
+    </td>
+    <td align="right">
+      <%= text_field_tag 'tax3_value', tax.tax3_value.to_f, "class" => "input" , :size => "5", :maxlength => "10"%>%
+    </td>
+  </tr>
+  <tr class="row1">
+    <th align="left"><%= text_field_tag 'tax4_name', tax.tax4_name, "class" => "input" , :size => "25", :maxlength => "255"%></th>
+    <td align="center">
+      <%= check_box_tag 'tax4_enabled', "1", (tax.tax4_enabled.to_i == 1) %>
+    </td>
+    <td align="right">
+      <%= text_field_tag 'tax4_value', tax.tax4_value.to_f, "class" => "input" , :size => "5", :maxlength => "10" %>%
+    </td>
+  </tr>
+  <tr class="row1">
+    <th align="left"><%= text_field_tag 'total_tax_name', tax.total_tax_name, "class" => "input" , :size => "25", :maxlength => "255"%></th>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr class="row1">
+    <th align="left"><%= _("Compound_tax") %></th>
+    <td align="center"><%= check_box_tag 'compound_tax', "1", tax.compound_tax.to_i == 1%></td>
+    <td></td>
+  </tr>
+</table>
+<%= hidden_field_tag(:lcr_id, @cardgroup.lcr.id ) if !@cardgroup.new_record? %>
+<script type="text/javascript">
+  function toggle_ghost_fields(){
+  if($("cardgroup_use_external_function_1").checked == true){
+  <%= visual_effect(:fade, "ghost_min_perc") %>
+  <%= visual_effect(:fade, "ghost_balance_perc") %>
+  }else{
+  <%= visual_effect(:appear, "ghost_min_perc") %>
+  <%= visual_effect(:appear, "ghost_balance_perc") %>
+  }
+  }
+
+  if($("cardgroup_use_external_function_1").checked == true){
+  $('ghost_min_perc').hide()
+  $('ghost_balance_perc').hide()
+  }
+
+
+</script>

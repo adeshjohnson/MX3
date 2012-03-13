@@ -1,0 +1,73 @@
+<% @letter_select_header_id = nil %>
+<% if @dgroups.size > 0 %>
+  <%= link_to b_pdf + _('Export_to_PDF'), :action => "generate_personal_rates_pdf", :id => @tariff.id%>
+  &nbsp;
+  <%= link_to b_csv + _('Export_to_CSV'), :action => "generate_personal_rates_csv", :id => @tariff.id%>
+<% end %>
+<br>
+<br>
+<%= render :partial => 'letter_select_header' %>
+<br>
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Name') %></th>
+    <th align="left"><%= _('Type') %></th>
+    <th align="center"><%= _('Destinations') %></th>
+    <% if @show_rates_without_tax.to_i == 1  %>
+      <th align="center"><%= _('Rate') %> (<%= session[:show_currency]%>)</th>
+    <% end %>
+    <th align="center"><%= _('Rate_with_VAT') %> (<%= session[:show_currency]%>)</th>
+  </tr>
+  <% @dgroups.each_with_index { |dg, i| %>
+      <%
+      show_rr = true
+      price = 0.0
+
+      #check for custom rates
+      crate = Customrate.find(:first, :conditions => ["user_id = ? AND destinationgroup_id = ?",session[:user_id], dg.id ])
+
+      if crate
+        arates = crate.acustratedetails
+        arates_size = arates.size
+      else
+        rate = dg.rate(@tariff.id)
+        if rate
+          arates = rate.aratedetails
+          arates_size = arates.size
+        else
+          arates = []
+          arates_size = 0
+        end
+      end
+
+      exchange_rate = @exchange_rate
+      exchange_rate = @cust_exchange_rate if crate
+
+      if arates_size == 0
+        price = 0
+      else
+        if arates_size.to_i == 1 and arates[0].artype.to_s == "minute"
+          price = arates[0].price
+        else
+          (arates_size.to_i >= 1 and arates[1] and arates[1].artype.to_s == "minute") ? price = arates[1].price : show_rr = false
+        end
+      end
+    %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <td id="name_<%=dg.id.to_s%>" ><%= draw_flag_by_code(dg.flag) %>&nbsp;<%=h(dg.name) %></td>
+      <td id="type_<%=dg.id.to_s%>" ><%=h(dg.desttype) %></td>
+      <td id="view_img_<%=dg.id.to_s%>" align="center"><%= link_to b_view + _('View'), {:controller => :destination_groups, :action => :dg_list_user_destinations, :id => dg.id}, :popup => true %></td>
+      <% if show_rr %>
+        <% if @show_rates_without_tax.to_i == 1  %>
+          <td align="center"><%= nice_number_currency(price, exchange_rate) if arates_size > 0%></td>
+        <% end %>
+        <td align="center"><%= nice_number_currency(@user.get_tax.count_tax_amount(price) + price, exchange_rate) if arates.size > 0%></td>
+      <% else%>
+        <td colspan="2" align="center"><%= link_to b_rates + _('Check_advanced_rates'), :action => 'user_advrates', :id => dg.id %> </td>
+      <% end %>
+    </tr>
+  <% } %>
+</table>
+<br>
+<br>
+<%= render :partial => 'letter_select_header' %>

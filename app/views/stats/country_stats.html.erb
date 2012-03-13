@@ -1,0 +1,137 @@
+<%= javascript_include_tag 'swfobject' %>
+
+<div align="left" class="nb">
+  <%= b_info + _('Incoming_calls_are_not_included_in_country_stats') %>.
+  <%= form_tag :action => 'country_stats' do %>
+    <%= _('From') %>: <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+    &nbsp;&nbsp;
+    <%= _('to') %>: <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+    &nbsp;&nbsp;
+    <%=_('User')%> :
+    <select name="user_id" >
+      <option value="-1" <%= " selected " if @user_id.to_i == -1 %>> <%= _('All') %> </option>
+      <% for user in @users %>
+        <option value=<%= user.id %> <%= " selected " if user.id.to_i == @user_id.to_i %>> <%= user.username + " - " + user.first_name + " " + user.last_name %> </option>
+      <% end %>
+    </select>
+    &nbsp;&nbsp;<%= submit_tag _('Change'), :disable_with=>_('Processing..')%>
+  <% end %>
+
+</div>
+<br />
+<br />
+
+
+<table width="100%">
+  <tr>
+    <td align="center">
+      <!-- ampie script-->
+      <div id="flashcontent1"><strong>You need to upgrade your Flash Player</strong></div>
+      <script type="text/javascript">
+        // <![CDATA[
+        var so = new SWFObject("<%= Web_Dir %>/swf/ampie.swf", "ampie", "450", "250", "9", "#FFFFFF");
+        so.addVariable("path", "<%= Web_Dir %>/swf/");
+        so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/ampie_1.xml"));
+        so.addVariable("chart_data", escape(<%=  @longest_time %>));
+        so.addVariable("additional_chart_settings", encodeURI("<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('Countries_call_time') %></b>]]></text></label></settings>"));
+        so.write("flashcontent1");
+        // ]]>
+      </script>
+      <!-- end of ampie script -->
+    </td>
+    <% if can_see_finances? %>
+      <td align="center">
+        <!-- ampie script-->
+        <div id="flashcontent2"><strong>You need to upgrade your Flash Player</strong></div>
+        <script type="text/javascript">
+          // <![CDATA[
+          var so = new SWFObject("<%= Web_Dir %>/swf/ampie.swf", "ampie", "450", "250", "9", "#FFFFFF");
+          so.addVariable("path", "<%= Web_Dir %>/swf/");
+          so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/ampie_2.xml"));
+          so.addVariable("chart_data", escape(<%=  @profit %>));
+          so.addVariable("additional_chart_settings", encodeURI("<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('Countries_profit') %></b>]]></text></label></settings>"));
+          so.write("flashcontent2");
+          // ]]>
+        </script>
+        <!-- end of ampie script -->
+
+      </td>
+
+    <% end -%>
+  </tr>
+  <% if can_see_finances? %>
+    <tr align="center">
+      <td>
+        <!-- ampie script-->
+        <div id="flashcontent3"><strong>You need to upgrade your Flash Player</strong></div>
+        <script type="text/javascript">
+          // <![CDATA[
+          var so = new SWFObject("<%= Web_Dir %>/swf/ampie.swf", "ampie", "450", "250", "9", "#FFFFFF");
+          so.addVariable("path", "<%= Web_Dir %>/swf/");
+          so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/ampie_4.xml"));
+          so.addVariable("chart_data", escape(<%=  @incomes %>));
+          so.addVariable("additional_chart_settings", encodeURI("<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('Countries_incomes') %></b>]]></text></label></settings>"));
+          so.write("flashcontent3");
+          // ]]>
+        </script>
+        <!-- end of ampie script -->
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<p><%= link_to b_csv + _('Export_to_csv'), :action=>:country_stats, :csv=>1 %></p>
+<br />
+
+<div align="center">
+  <table width="100%" class="maintable" >
+         <tr>
+      <th align="left">        <%= _('Direction') %>    </th>
+      <th align="left">        <%= _('Type') %>    </th>
+      <th align="right">        <%= _('Calls') %>   </th>
+      <th align="center">        <%= _('Time') %>    </th>
+      <% if can_see_finances? -%>
+        <th align="right">        <%= _('Price') %>    </th>
+        <th align="right">        <%= _('User_price') %>    </th>
+        <th align="right">        <%= _('Profit') %>    </th>
+      <% end -%>
+      <%if current_user.usertype !='reseller'%>
+        <th align="center">    </th>
+      <%end%>
+    </tr>
+
+    <% @calls.each_with_index{ |c, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="name_<%=c.id%>" align="left"> <%= draw_flag c.dg_flag %> <%=  c.dg_name %>      </td>
+        <td id="type_<%=c.id%>" align="left"> <%=  c.dg_type %>      </td>
+        <td id="calls_<%=c.id%>" align="right"> <%=  c.calls %>      </td>
+        <td id="billsec_<%=c.id%>" align="center"> <%=  nice_time c.billsec %>      </td>
+        <% if can_see_finances? -%>
+          <td id="selfcost_<%=c.id%>" align="right"> <%=  nice_number c.selfcost %>      </td>
+          <td id="price_<%=c.id%>" align="right"> <%=  nice_number c.price %>      </td>
+          <td id="new_price_<%=c.id%>" align="right"> <%=  nice_number(c.price.to_f - c.selfcost.to_f)  %>      </td>
+        <% end -%>
+        <%if current_user.usertype !='reseller'%>
+          <td id="logins_<%=c.id%>" align="center"> <%= link_to  b_logins, { :action => 'hangup_cause_codes_stats', :provider_id =>-1, :country_code=>c.dg_flag, :back=>2 , :direction_code => c.direction_code }, :id=>"logins_img"+c.id.to_s%></td>
+        <%end%>
+      </tr>
+    <% } %>
+    <tr>
+      <th id="total" align="left">        <%= _('Total') %>:    </th>
+      <th align="left">          </th>
+      <th id="calls" align="right">        <%= @calls_all[0].calls %>   </th>
+      <th id="billsec" align="center">      <%= nice_time @calls_all[0].billsec %>    </th>
+      <% if can_see_finances? -%>
+        <th id="selfcost" align="right">        <%= nice_number @calls_all[0].selfcost %>    </th>
+        <th id="price" align="right">        <%= nice_number @calls_all[0].price %>    </th>
+        <th id="calls_profit" align="right">        <%= nice_number @calls_all[0].calls_profit %>    </th>
+      <% end -%>
+      <%if current_user.usertype !='reseller'%>
+        <th align="right">            </th>
+      <%end%>
+    </tr>
+  </table>
+</div>
+<br />
+<% @user_id %>

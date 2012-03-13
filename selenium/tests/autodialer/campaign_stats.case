@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=sstatistics_menu15</td>
+	<td>Campaign Stats</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_statistics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_from_minute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=date_till_minute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=campaign_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=campaign_id</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Choose campaign</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_hour</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_hour</td>
+	<td>label=04</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_minute</td>
+	<td>label=56</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Choose campaign</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_name</td>
+	<td>Campaign No 1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_hour</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_hour</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_minute</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_max_retries</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_retry_time</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_wait_time</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_callerid</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Campaign was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter retry time higher or equal to 60</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_name</td>
+	<td>Campaign No 1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_hour</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_hour</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_minute</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_max_retries</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_retry_time</td>
+	<td>60</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_wait_time</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_callerid</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Campaign was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter wait time higher or equal to 30</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_name</td>
+	<td>Campaign No 1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_hour</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_hour</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_minute</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_max_retries</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_retry_time</td>
+	<td>65</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_wait_time</td>
+	<td>35</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_callerid</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Campaign was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_statistics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=campaign_id</td>
+	<td>label=Campaign No 1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No numbers in campaign Campaign No 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/import_numbers_from_file/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/valid_numbers.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_2</td>
+	<td>37011111111</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/user_campaigns</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Chart_bar&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//th[13]</td>
+	<td>Stats</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Chart_bar&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=campaign_id</td>
+	<td>label=Campaign No 1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No calls with campaign Campaign No 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tr.row1 &gt; td</td>
+	<td>Campaign No 1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_numbers</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dialed_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Campaign name:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total numbers:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dialed:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Completed:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total call time:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total call time longer than 10s:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/calls_now_for_campaign.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_name</td>
+	<td>Campaign No 2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_hour</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_hour</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_minute</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_max_retries</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_retry_time</td>
+	<td>65</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_wait_time</td>
+	<td>35</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_callerid</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=campaign[device_id]</td>
+	<td>label=IAX2/108</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Campaign was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#stats_2 &gt; a &gt; img[alt=&quot;Chart_bar&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#stats_2 &gt; a &gt; img[alt=&quot;Chart_bar&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Campaign Stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_numbers</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dialed_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>completed_value</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_call_time</td>
+	<td>1088</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_call_longer_than_10</td>
+	<td>1078</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calls_answered</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calls_no_answer</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calls_busy</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calls_failed</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>all_calls</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>answered_percent</td>
+	<td>36%</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>no_answer_percent</td>
+	<td>18%</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>busy_percent</td>
+	<td>18%</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>failed_percent</td>
+	<td>27%</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>all_calls_percent</td>
+	<td>100%</td>
+</tr>
+</tbody></table>
+</body>
+</html>

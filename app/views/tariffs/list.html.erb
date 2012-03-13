@@ -1,0 +1,229 @@
+<% action = session[:tariff_csv_import_value].to_i  == 1 ? 'import_csv2' : 'import_csv'%>
+
+<%# temporary, for clients to be able to work without crashing their servers %>
+<% action = 'import_csv2' %>
+
+
+<table width="100%">
+  <tr>
+    <% if @allow_manage == true %>
+      <td align="left" width="100%">
+        <%= link_to b_add + _('New_tariff'), :action => 'new' %>
+      </td>
+    <% end %>
+    <!--
+            <td align="right" nowrap>
+    <%= link_to b_csv + _('Tariff_analysis'), :action => 'analysis' if session[:usertype] == "admin" %>
+            </td>
+    -->
+    <td align="right" nowrap>
+      <%= link_to b_csv + _('Destinations_CSV'), :action => 'destinations_csv' %>
+    </td>
+    <% if session[:usertype] == "admin" or  session[:usertype] == "reseller" %>
+      <td align="right" nowrap>
+        <%= link_to b_edit + _('Change_tariff_for_users'), :action => 'change_tariff_for_users'  %>
+      </td>
+      <td align="right" nowrap>
+          <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')")  %>
+        </td>
+    <%end%>
+  </tr>
+</table>
+<br />
+<%= form_tag :action => 'list' do %>
+  <div id="search_details" <%= "style='display:none;'" if @search.to_i == 0 %>>
+    <br />
+    <table width="100%" class="simple">
+      <tr>
+        <td>
+          <%= _('Prefix') %>: <%= text_field_tag 's_prefix', @s_prefix, "class" => "input", :size => "10", :maxlength => "30"  %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
+        </td>
+        <td align="right">
+          <%  if @search == 1%>
+            <%= link_to b_cross + _('Clear_search'), :action => 'list'%>
+          <%end%>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>
+<br />
+<% if allow_manage_providers_tariffs? %>
+
+  <br /><br />
+  <b><%= _('For_providers') %></b> - <%= _('Inbound_traffic') %>
+  <br /><br />
+  <%= b_info + _('Provider_tariffs_explained') %>
+
+  <br /><br />
+
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left"><%= _('Name') %></th>
+      <th align="center"><%= _('Currency') %></th>
+      <th align="center" colspan="5"><%= _('Rates') %></th>
+      <!--    <th></th> -->
+      <% if @allow_manage == true %>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      <% end %>
+    </tr>
+
+    <% @prov_tariffs.each_with_index{ |tariff, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <%# rates_size = Rate.count(:all, :conditions => "tariff_id = '#{tariff.id}' AND destination_id != 0") %>
+        <td id="name_<%= tariff.id %>" <%=nice_tariff_rates_tolltip(tariff, @des_id, @des_id_d)%>><%=h tariff.name %></td>
+        <td id="currency_<%= tariff.id %>" align="center"><%= tariff.currency %></td>
+        <td id="rates_<%= tariff.id %>" align="center"><%= link_to b_rates + _('Rates'), :action => 'rates_list', :id => tariff %> (<%= @tr[tariff.id] %>)</td>
+        <% if @allow_manage == true %>
+          <td id="import_csv_<%= tariff.id %>" align="center"><%= link_to b_csv + _('Import_CSV'), :action => action, :id => tariff %></td>
+      <!--    <td align="center"><%= link_to b_csv + _('Import_XLS'), :action => 'import_xls', :id => tariff %></td> -->
+          <td id="delete_rates_<%= tariff.id %>" align="center"><%= link_to b_rates_delete + _('Delete_all_rates'), {:action => 'delete_all_rates', :id => tariff }, :confirm => 'Are you sure?', :method => :post  if  @tr[tariff.id] > 0%></td>
+          <td id="maker_retail_<%= tariff.id %>" align="center"><%= link_to b_make_tariff + _('Make_user_retail_tariff'), :action => 'make_user_tariff', :id => tariff if @tr[tariff.id] > 0%></td>
+          <td id="make_wholesale_<%= tariff.id %>" align="center"><%= link_to b_make_tariff + _('Make_wholesale_tariff'), :action => 'make_user_tariff_wholesale', :id => tariff if @tr[tariff.id] > 0%></td>
+        <% end %>
+        <td id="rates_pdf_<%= tariff.id %>" align="center">
+          <%= form_tag :action => 'generate_provider_rates_pdf', :id => tariff.id do %>
+            <%= image_submit_tag 'icons/pdf.png', :title => _('Providers_rates') %>
+          <% end %>
+        </td>
+          
+        <td id="rates_csv_<%= tariff.id %>" align="center">
+          <%= form_tag :action => 'generate_providers_rates_csv', :id => tariff.id do %>
+            <%= image_submit_tag 'icons/excel.png', :title => _('Providers_rates') %>
+          <% end %>
+        </td>
+        <td id="tariffs_list_<%= tariff.id %>" align="center"><%= link_to b_details, :action => 'tariffs_list', :id => tariff.id %></td>
+          <% if @allow_manage == true %>
+          <td id="edit_<%= tariff.id %>" align="center"><%= link_to b_edit, {:action => 'edit', :id => tariff}, {:id => "edit_link_#{tariff.id}"} %></td>
+          <td id="delete_<%= tariff.id %>" align="center"><%= link_to b_delete, { :action => 'destroy', :id => tariff }, :confirm => 'Are you sure?', :method => :post, :id => "delete_link_#{tariff.id}" %></td>
+        <% end %>
+      </tr>
+    <% } %>
+  </table>
+
+  <br />
+
+  <br /><br /><br />
+  <hr>
+  <br /><br /><br />
+
+
+  <br />
+  <b><%= _('For_users') %></b> - <%= _('Outbound_traffic') %>
+  <br /><br />
+  <%= b_info + _('User_tariffs_explained') %>
+
+  <br /><br /><br />
+
+<% end %>
+
+<b><%= _('Retail_tariffs') %></b>
+<br /><br />
+
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Name') %></th>
+    <th align="center"><%= _('Currency') %></th>
+    <th align="center" colspan="2"><%= _('Rates') %></th>
+    <th></th>
+    <th></th>
+    <% if @allow_manage == true %>
+      <th></th>
+      <th></th>
+      <th></th>
+    <% end %>
+
+  </tr>
+
+  <% @user_tariffs.each_with_index{ |tariff, i| %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <td id="name_<%= tariff.id %>" <%=nice_tariff_rates_tolltip(tariff, @des_id, @des_id_d)%> ><%=h tariff.name %></td>
+      <td id="currency_<%= tariff.id %>" align="center"><%= tariff.currency %></td>
+      <td id="rates_<%= tariff.id %>" align="center"><%= link_to b_rates + _('Rates'), :action => 'user_rates_list', :id => tariff %></td>
+      <% if @allow_manage == true %>
+        <td id="delete_all_rates_<%= tariff.id %>" align="center"><%= link_to b_rates_delete + _('Delete_all_rates'), {:action => 'delete_all_rates', :id => tariff }, :confirm => 'Are you sure?', :method => :post %></td>
+      <% end %>
+      <td id="rates_pdf_<%= tariff.id %>" align="center">
+        <%= form_tag :action => 'generate_user_rates_pdf', :id => tariff.id do %>
+          <%= image_submit_tag 'icons/pdf.png', :title => _('Users_rates') %>
+        <% end %>
+      </td>
+
+      <td id="rates_csv_<%= tariff.id %>" align="center">
+        <%= form_tag :action => 'generate_user_rates_csv', :id => tariff.id do %>
+          <%= image_submit_tag 'icons/excel.png', :title => _('Users_rates') %>
+        <% end %>
+      </td>
+
+      <td id="details_<%= tariff.id %>" align="center"><%= link_to b_details, :action => 'tariffs_list', :id => tariff.id %></td>
+
+        <% if @allow_manage == true %>
+        <td id="edit_<%= tariff.id %>" align="center"><%= link_to b_edit, {:action => 'edit', :id => tariff}, {:id => "edit_link_#{tariff.id}"} %></td>
+        <td id="delete_<%= tariff.id %>" align="center"><%= link_to b_delete, { :action => 'destroy', :id => tariff }, :confirm => 'Are you sure?', :method => :post, :id => "delete_link_#{tariff.id}"%></td>
+      <% end %>
+    </tr>
+  <% } %>
+</table>
+
+<% if @user_wholesale_enabled %>
+  <br /><br />
+  <b><%= _('Wholesale_tariffs') %></b>
+  <br /><br />
+
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left"><%= _('Name') %></th>
+      <th align="center"><%= _('Currency') %></th>
+      <th align="center" colspan="4"><%= _('Rates') %></th>
+      <% if @allow_manage == true %>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      <% end %>
+    </tr>
+
+    <% @user_wholesale_tariffs.each_with_index { |tariff, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <%# rates_size = Rate.count(:all, :conditions => "tariff_id = '#{tariff.id}' AND destination_id != 0") %>
+        <td id="name_<%= tariff.id %>" <%=nice_tariff_rates_tolltip(tariff, @des_id, @des_id_d)%>><%=h tariff.name %></td>
+        <td id="currency_<%= tariff.id %>" align="center"><%= tariff.currency %></td>
+        <td id="rates_<%= tariff.id %>" align="center"><%= link_to b_rates + _('Rates'), :action => 'rates_list', :id => tariff %> (<%= @tr[tariff.id] %>)</td>
+        <% if @allow_manage == true %>
+          <td id="import_csv_<%= tariff.id %>" align="center"><%= link_to b_csv + _('Import_CSV'), :action => action, :id => tariff %></td>
+          <td id="delete_all_rates_<%= tariff.id %>" align="center"><%= link_to b_rates_delete + _('Delete_all_rates'), {:action => 'delete_all_rates', :id => tariff }, :confirm => 'Are you sure?', :method => :post  if @tr[tariff.id] > 0 %></td>
+          <td id="make_retail_<%= tariff.id %>" align="center"><%= link_to b_make_tariff + _('Make_user_retail_tariff'), :action => 'make_user_tariff', :id => tariff if @tr[tariff.id] > 0 %></td>
+          <td id="make_wholesale_<%= tariff.id %>" align="center"><%= link_to b_make_tariff + _('Make_wholesale_tariff'), :action => 'make_user_tariff_wholesale', :id => tariff if @tr[tariff.id] > 0 %></td>
+        <% end %>
+
+        <td id="rates_pdf_<%= tariff.id %>" align="center">
+          <%= form_tag :action => 'generate_provider_rates_pdf', :id => tariff.id do %>
+            <%= image_submit_tag 'icons/pdf.png', :title => _('User_wholesale_rates') %>
+          <% end %>
+        </td>
+
+        <td id="rates_csv_<%= tariff.id %>" align="center">
+          <%= form_tag :action => 'generate_providers_rates_csv', :id => tariff.id do %>
+            <%= image_submit_tag 'icons/excel.png', :title => _('User_wholesale_rates') %>
+          <% end %>
+        </td>
+        <td id="tariff_details_<%= tariff.id %>" align="center"><%= link_to b_details, :action => 'tariffs_list', :id => tariff.id %></td>
+          <% if @allow_manage == true %>
+          <td id="edit_<%= tariff.id %>" align="center"><%= link_to b_edit, {:action => 'edit', :id => tariff} , {:id => "edit_link_#{tariff.id}"} %></td>
+          <td id="delete_<%= tariff.id %>" align="center"><%= link_to b_delete, { :action => 'destroy', :id => tariff }, :confirm => 'Are you sure?', :method => :post, :id => "delete_link_#{tariff.id}"  %></td>
+        <% end %>
+      </tr>
+    <% } %>
+  </table>
+<% end %>

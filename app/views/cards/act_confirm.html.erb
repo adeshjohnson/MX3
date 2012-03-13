@@ -1,0 +1,61 @@
+<b><%= _('Card_group') %></b>: <%= link_to @cg.name, :controller => "cardgroups", :action => "show", :id => @cg %>
+<%= form_tag :action => 'act2', :cg => @cg.id, :start => @start_num, :end => @end_num, :activate_i => @activate, :user=>@u_id do %>
+  <br/>
+  <br/>
+  <table class="simple" width="70%">
+    <tr>
+      <td id="card_interval"><b><%= _('Card_interval') %></b> : <%=@start_num%> - <%=@end_num%> <br/><br/></td>
+    </tr>
+    <tr>
+      <td id="active_cards"><b><%= _('Active_cards') %></b> : <%=@list2%> <br/><br/></td>
+    </tr>
+    <tr>
+      <td id="disabled_cards"><b><%= _('Disabled_cards') %></b> : <%=@list%> <br/><br/></td>
+    </tr>
+    <tr>
+      <td id="action"><b><%= _('Action') %></b> : <%=@a_name%> <br/><br/></td>
+    </tr>
+  </table>
+
+  <br/>
+  <% if @activate == 3%>
+    <hr/>
+    <br/>
+    <br/>
+    <table class='simple' width=50%>
+      <tr>
+        <td colspan="2"><%= _('Email') %></td>
+        <td><%= text_field_tag 'email', @user.address.email, "class" => "input", :size => "35", :maxlength => "255"  %></td>
+      </tr>
+      <tr>
+        <td colspan="2"> <%= _('Quantity') %>:</td>
+        <td id="quantity"> <%= @list %></td>
+      </tr>
+      <tr>
+        <td colspan="2"> <%= _('Price') %>:</td>
+        <td id="price"> <%= nice_number(@real_price) %> <%= current_user.currency.name %> </td>
+      </tr>
+      <% @taxes.each { |tax|%>
+        <tr>
+          <td colspan="2"> <%= tax[:name] %> (<%= nice_number(tax[:value]) %> %):</td>
+          <td id="tax_<%=tax[:name]%>">   <%= nice_number(tax[:tax]) %> <%= current_user.currency.name %> </td>
+        </tr>
+      <% } %>
+      <tr>
+        <td colspan="2">   <%= @total_tax_name %>: </td>
+        <td id="total_tax"><%= nice_number(@cg.get_tax.count_tax_amount(@real_price)) %> <%= current_user.currency.name %> </td>
+      </tr>
+      <tr>
+        <td colspan="2"> <%= _('Total_Price') %>:</td>
+        <td id="total_price"> <%= nice_number(@real_price + @cg.get_tax.count_tax_amount(@real_price)) %> <%= current_user.currency.name %> </td>
+      </tr>
+    </table>
+    <br/>
+    <br/>
+  <% end %>
+
+  <%= submit_tag _('Confirm') , :disable_with=>_('Processing..')%>
+<% end  %>
+
+<br/>
+<br/>

@@ -1,0 +1,47 @@
+<table class = "maintable" width = '100%'>
+  <tr>
+    <th colspan="3"><b><%= _('Actions') %>:</b></th>
+  </tr>
+  <% if @actions %>
+    <% t_to = 0 %>
+    <% @actions.each_with_index { |action, index| %>
+      <tr class="row<%= index%2+1 %>">
+        <td>
+          <%= link_to_remote b_delete, :url => { :action => 'add_ivr_action', :block_id => @block.id, :id => action.id, :rm=>'true' }, :confirm => _('are_you_sure'), :update => "action_selector", :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');" %>
+        </td>
+        <td NOWRAP>
+          <span id="exclamation_<%=action.id%>" style="display:<%=t_to.to_i == 1 ? "''": 'none'%>;" <%= tooltip(_('Transfer_To_explanation'), _('This_action_will_not_be_taken_because_call_will_be_transferred_out_of_this_IVR_with_Transfer_To_action')) %> ><%=b_exclamation%></span>
+          <% t_to = 1 if action.name.to_s == 'Transfer To'  %>
+          <%= pos_action_select(action, $pos_actions, {:sounds => @ivr_sound_files, :voices => @ivr_voices}) %>
+        </td>
+        <td width = '100%'>
+          <div id = "action_params_<%= action.id %>"><%= proper_params(action) %></div>
+        </td>
+      </tr>
+    <% } %>
+
+    <script type="text/javascript">
+      function view_extension(val, id) {
+      <%  iv = IvrAction.find(:first, :conditions => ["ivr_block_id = ? AND name = 'Transfer To'",@block.id ], :order =>"id asc")%>
+      var t_to_id = <%= iv ?  iv.id : 10000 %>;
+      if(val=="Transfer To" && id < t_to_id) {
+ 	t_to_id = id;
+ 	}
+      var act_size = <%= 100 %>;
+      for (i=1;i<=act_size;i++)
+      {
+      if($('exclamation_'+i)){
+      $('exclamation_'+i).style.display = 'none';
+      if(i > t_to_id) {
+      $('exclamation_'+i).style.display = '';
+      }
+      }
+      }
+      }
+    </script>
+
+  <% end %>
+  <tr>
+    <td colspan="3"><%= link_to_remote b_add + _("Add_New_Action"), :url => { :action => "add_ivr_action" , :block_id => @block.id }, :update => "action_selector" , :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');" %></td>
+  </tr>
+</table>

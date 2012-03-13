@@ -1,0 +1,21 @@
+<% if !@notice.blank? %>
+  <div id ="n2"><div id="notice"><%= @notice %></div></div>
+  <br />
+<%else%>
+  <%= submit_tag (  _('Continue_file_import')+" >>", :disable_with=>_('Processing..')  )%>
+  <br></br><br></br>
+<%end%>
+<table width="100%" class="maintable">
+  <tr>
+    <th><%=_('Column')%>&nbsp; 1</th>
+    <th><%=_('Column')%>&nbsp; 2</th>
+    <th><%=_('Column')%>&nbsp; 3</th>
+  </tr>
+  <% @fl.each_with_index{|f, i|%>
+    <tr class="row<%= (i % 2 + 1).to_s %>" >
+      <td id="sep_row_1_<%=i%>"><%=f[0]%></td>
+      <td id="sep_row_2_<%=i%>"><%=f[1]%></td>
+      <td id="sep_row_3_<%=i%>"><%=f[2]%></td>
+    </tr>
+  <%}%>
+</table>

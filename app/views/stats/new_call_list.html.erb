@@ -1,0 +1,62 @@
+
+<table width="100%">
+  <tr>
+    <% if @select_date %>
+      <td class="nb">
+
+        <%= form_tag(:action => 'call_list', :calltype => @call_type) do %>
+          <%= _('From') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+          &nbsp;&nbsp;     <%= _('to') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+          &nbsp;&nbsp;<%= submit_tag _('change_date'), :disable_with=>_('Processing..')%>
+        <% end %>
+      </td>
+    <% end %>
+    <td class="nb">
+      <%= _('total_calls') %>: <b><%= @calls.size %></b>
+    </td></tr>
+</table>
+
+
+
+<% if @calls.size > 0 %>
+  <table width="100%" class="maintable">
+    <tr>
+      <th>&nbsp;<%= _('date') %></th>
+      <th><%= _('called_from') %></th>
+      <th><%= _('called_to') %></th>
+      <th align="center">
+        <% if @call_type != "missed" %>
+          <%= _('duration') %>
+        <% else %>
+          <%= _('holdtime')%>
+        <% end %>
+      </th>
+      <th align="right"><%= _('hangup_cause') %></th>
+      <% if @call_type == "missed" %>
+        <th><%= _('processed') %></th>
+      <% end %>
+    </tr>
+
+    <% @calls.each_with_index{ |call, i| %>
+      <% call.processed == 0 ? text_class="n" : text_class="n_disabled" -%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="calldate_<%= call.id %>" class="<%= text_class %>" textcolor="#FFFFFF"><%= nice_date_time(call.calldate)%></td>
+        <td id="src_<%= call.id %>" class="<%= text_class %>"><%= nice_src(call) %></td>
+        <td id="dst_<%= call.id %>" class="<%= text_class %>"><%= hide_dst_for_user(current_user, "gui", call.dst.to_s) %></td>
+        <td id="billsec_<%= call.id %>" class="<%= text_class %>" align="center"><% @call_type != "missed" ? nice_time(call.billsec) : nice_time(call.duration) %></td>
+        <td id="_<%= call.id %>" class="<%= text_class %>"  align="right"><%= call.disposition %></td>
+        <% if @call_type == "missed" %>
+          <%= form_tag(:action => 'call_list', :calltype => "missed") do %>
+            <td align="center" valign="middle" class="<%= text_class %>">
+              <%= hidden_field_tag "processed", call.id %>
+              <% call.processed == 0 ? submit_tag(_('processed'), :disable_with=>_('Processing..')) : submit_tag(_('cancel'), :disable_with=>_('Processing..'))%>
+            </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% } %>
+  </table>
+<% else %>
+  <%= _('you_have_no_calls') %>
+<% end%>
+

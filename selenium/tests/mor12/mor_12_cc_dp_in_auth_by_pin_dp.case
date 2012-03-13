@@ -1,0 +1,1235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>mor_12_tell_balance</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">mor_12_tell_balance</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//form[2]/table/tbody/tr/th[7]</td>
+	<td>Use Calling Card</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=cc_dialplan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=cc_dialplan</td>
+	<td>Not used</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name_1</td>
+	<td>ccdp_for_useANI</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dialplan_data_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dialplan_data_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tell_sec</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dialplan_data_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=end_ivr</td>
+	<td>label=End IVR #2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_calling_card</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID assigned to Dial Plan: ccdp_for_useANI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//form[2]/table/tbody/tr/th[7]</td>
+	<td>Use Calling Card</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=cc_dialplan</td>
+	<td>Not used ccdp_for_useANI</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name_2</td>
+	<td>apdp_with_ccdp</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=data3</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=data3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=data3</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=data3</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>id=cc_dialplan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>id=user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//form[2]/table/tbody/tr/th[7]</td>
+	<td>Use Calling Card</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//form[2]/table/tbody/tr/th[8]</td>
+	<td>Default Device</td>
+</tr>
+<!--<tr> 	<td>refresh</td> 	<td></td> 	<td></td> </tr> <tr> 	<td>waitForValue</td> 	<td>id=data3</td> 	<td>on</td> </tr>-->
+<tr>
+	<td>uncheck</td>
+	<td>id=data3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=data3</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>id=data3</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=cc_dialplan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=data3</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>id=data3</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>refresh</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=cc_dialplan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name_2</td>
+	<td>apdp_with_ccdp</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cc_dialplan</td>
+	<td>label=ccdp_for_useANI</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=cc_dialplan</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=cc_dialplan</td>
+	<td>ccdp_for_useANI</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=dp_PIN_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#ap_dp_data7_3 &gt; img[alt=&quot;Check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#cc_dp_delete_2 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cannot delete Dial Plan. It is assigned to DID(s)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=dialplan[data7]</td>
+	<td>ccdp_for_useANI</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=cc_dp_name_2</td>
+	<td>ccdp_for_useANI</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#cc_dp_delete_2 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan is associated with other dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=dialplan[data7]</td>
+	<td>ccdp_for_useANI</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=dialplan[data7]</td>
+	<td>label=Not used</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dialplan[data4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dial Plan successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#cc_dp_delete_2 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dial Plan deleted: ccdp_for_useANI</td>
+	<td></td>
+</tr>
+<!--dialplans/dialplans neatvaizduojamas ccdp, jis turėtų būti priešais default device-->
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name_1</td>
+	<td>žiogelis</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_calling_card</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name_1</td>
+	<td>gremėzdas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_calling_card</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>verifyText</td> 	<td>id=cc_dialplan</td> 	<td>Not used ccdp_for_useANI žiogelis gremėzdas</td> </tr>-->
+<tr>
+	<td>select</td>
+	<td>id=cc_dialplan</td>
+	<td>label=gremėzdas</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Reseller (3)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=users_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=users_device</td>
+	<td>label=IAX2/104</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=data6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=data4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=data1</td>
+	<td>89</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=data2</td>
+	<td>89</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name_2</td>
+	<td>test_dialplans</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=dp_PIN_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=ap_dp_data5_6</td>
+	<td>IAX2/104</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#diaplan_edit_6 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>//select[@id='dialplan[data7]']</td>
+	<td>gremėzdas</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=dialplan[data7]</td>
+	<td>label=žiogelis</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=System Admin (0)</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>name=users_device</td>
+	<td>Not used IAX2/103</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=users_device</td>
+	<td>label=IAX2/103</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dial Plan successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#diaplan_delete_3 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dial Plan deleted: apdp_with_ccdp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=dialplan[data7]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>res</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Group was created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/1?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=calling_cards_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>acc</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Group was created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/2?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callingcard_pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callingcard_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=manage_dids_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Information&quot;]</td>
+	<td></td>
+</tr>
+<!--#5235 (BUG in CC dielplan)-->
+<tr>
+	<td>verifyText</td>
+	<td>id=cc_dialplan</td>
+	<td>Not used</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>cardgroup</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=price_with_vat</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_setup_fee</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_daily_charge</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_number_length</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_pin_length</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card group was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Calling Cards Dial Plan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name_1</td>
+	<td>ccdp_for_useANI_re</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dialplan_data_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dialplan_data_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=end_ivr</td>
+	<td>label=End IVR #2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_calling_card</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name_2</td>
+	<td>jkytujmygtredf</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dialplan_data_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=cc_dialplan</td>
+	<td>Not used ccdp_for_useANI_re</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cc_dialplan</td>
+	<td>label=ccdp_for_useANI_re</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=dp_PIN_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#ap_dp_data7_8 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#cc_dp_delete_7 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan is associated with other dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=dialplan[data7]</td>
+	<td>ccdp_for_useANI_re</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=dialplan[data7]</td>
+	<td>label=Not used</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dial Plan successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#cc_dp_delete_7 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dial Plan deleted: ccdp_for_useANI_re</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/fake_form?path_to_action=/billing/dialplans/update/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_1</td>
+	<td>dialplan[name]</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_1</td>
+	<td>FakeFormName</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_2</td>
+	<td>dialplan[data3]</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_2</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_3</td>
+	<td>dialplan[data1]</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_3</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_4</td>
+	<td>dialplan[data2]</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_4</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_5</td>
+	<td>dialplan[data6]</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_5</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_6</td>
+	<td>dialplan[data7]</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_6</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_7</td>
+	<td>dialplan[data4]</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_7</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=c_8</td>
+	<td>user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=n_c_8</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>cc_dialplan</td>
+	<td>Not used</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name_2</td>
+	<td>not_use_cc</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dialplan_data_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dialplan_data_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=dp_PIN_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#ap_dp_data7_9 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>xpath=(//select[@name='dp_id'])[2]</td>
+	<td>label=test_dialplans</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=assign_to_dp_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=status</td>
+	<td>DID assigned to Dial Plan: test_dialplans</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#diaplan_delete_6 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cannot delete Dial Plan. It is assigned to DID(s)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#cc_dp_delete_5 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dial Plan deleted: gremėzdas</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

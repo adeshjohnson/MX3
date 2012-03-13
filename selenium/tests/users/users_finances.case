@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.98" />
+<title>users_finances</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">users_finances</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/payments/payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td></td>
+	<td></td>
+</tr>
+<!--prepaid-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_postpaid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<!--add payments-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=6</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add manual payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add manual payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add manual payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_amount</td>
+	<td>153.3600(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_amount_completed</td>
+	<td>94.6800(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_with_tax</td>
+	<td>187.0000(USD)</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=total_with_tax_completed</td>
+	<td>108.0000(USD)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_27</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_28</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_29</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/users_finances</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>total_balance</td>
+	<td>40.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount</td>
+	<td>153.3600</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=user_id_0</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=user_credit_0</td>
+	<td>Unlimited</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=user_id_2</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=user_credit_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_amount_0</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_amount_2</td>
+	<td>133.3600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_amount_3</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_amount_4</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_completed</td>
+	<td>label=Completed</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>total_balance</td>
+	<td>40.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount</td>
+	<td>94.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_amount_0</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_amount_2</td>
+	<td>74.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_amount_3</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_completed</td>
+	<td>label=Not Completed</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>total_balance</td>
+	<td>40.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_amount</td>
+	<td>58.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_amount_0</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_amount_2</td>
+	<td>58.6800</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_amount_3</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_credit_0</td>
+	<td>Unlimited</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_credit_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_credit_3</td>
+	<td>Unlimited</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_credit_4</td>
+	<td>Unlimited</td>
+</tr>
+</tbody></table>
+</body>
+</html>

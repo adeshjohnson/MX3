@@ -1,0 +1,55 @@
+<table  width="50%">
+  <tr class="row1">
+    <td>
+      <%= form_tag(:action => 'vouchers_create') do %>
+        <table class="simple" width="100%">
+          <tr>
+            <th align="left">           <%= _('Here_you_can_add_many_vouchers') %>:      </th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <td> <b><%= _('Amount') %>:</b> </td>
+            <td></td>
+            <td>    <%= text_field_tag 'amount_total', @amaunt, "class" => "input"   %> </td>
+          </tr>
+          <tr>
+            <td> <b><%= _('Tag') %>:</b> </td>
+            <td></td>
+            <td>    <%= text_field_tag 'tag', @tag, "class" => "input"   %> </td>
+          </tr>
+          <%= render :partial => "/accounting/tax_form", :locals => {:tax => @tax} %>
+          <tr>
+            <td> <b><%= _('Credit_with_VAT') %>:</b> </td>
+            <td></td>
+            <td>    <%= text_field_tag 'credit', @credit, "class" => "input"   %> </td>
+          </tr>
+          <tr>
+            <td><b><%= _('Currency') %>:</b>    </td>
+            <td></td>
+            <td>
+              <select name="currency" >
+                <% for curr in @currencies %>
+                  <option value="<%= curr.name %>" <%= " selected " if curr.name == @curr %>> <%= curr.name %> </option>
+                <% end %>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td> <b><%= _('Active_till') %>:</b> </td>
+            <td></td>
+            <td>
+              <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :start_year => Date.today.year-1, :end_year => Date.today.year+4, :prefix => "date_from", :use_month_numbers => false) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= hidden_field_tag 'amount', "many" %>
+              <%= submit_tag _('Create'), :disable_with=>_('Processing..') %>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+    </td>
+  </tr>
+</table>

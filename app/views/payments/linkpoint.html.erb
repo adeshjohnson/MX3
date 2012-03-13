@@ -1,0 +1,10 @@
+<div align="right"><%= image_tag("logo/linkpoint_logo.jpg",  :style => 'border-style:none', :title => "LinkPoint") %></div>
+
+<%= form_tag :action => 'linkpoint_pay' do %>
+    <%= _('Please_enter_amount_to_update_your_balance') %>*: <%= text_field_tag 'amount', Confline.get_value("Linkpoint_Default_Amount"), "class" => "input", :size => "8", :maxlength => "8"  %> <%= @currency %>
+    <br><br>
+    <%= submit_tag _('Confirm'), :disable_with=>_('Processing..') %>
+<% end %>
+
+<br>
+<div class = "simple">*<%= _('Minimum_amount') %>: <%= nice_number Confline.get_value("Linkpoint_Min_Amount") %> <%= @currency %></div>

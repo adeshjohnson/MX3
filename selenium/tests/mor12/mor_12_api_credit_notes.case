@@ -1,0 +1,1904 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<!--set api settings-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_login_redirect_to_main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_allow_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--CREATE-->
+<!--# hash 1 - user_id=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
+</tr>
+<!--# hash 2 - user_id=2 price=-32-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2&amp;price=-23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash2</td>
+</tr>
+<!--# hash 3 - user_id=3 price=20-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=3&amp;price=20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash3</td>
+</tr>
+<!--# hash 4 - user_id=2 issue_date='2012-01-01 23:23:23'-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2&amp;issue_date=1330594129</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash4</td>
+</tr>
+<!--# hash 5 - user_id=4 price=20 number=5-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=4&amp;price=20&amp;number=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash5</td>
+</tr>
+<!--# hash 6 - user_id=3 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2&amp;price=20&amp;comment=labas vakaras</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash6</td>
+</tr>
+<!--# hash 7 - user_id=0 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=0&amp;price=20&amp;comment=labas vakaras issue_date=1330594129</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash7</td>
+</tr>
+<!--# hash 8 - user_id=3 price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash8</td>
+</tr>
+<!--# hash 9 - user_id=0 price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=0&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash9</td>
+</tr>
+<!--# hash 10 - user_id=3 price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=3&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash10</td>
+</tr>
+<!--# hash 11 - user_id=4 price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=4&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash11</td>
+</tr>
+<!--# hash 12 - user_id=5 price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=5&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash12</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--# hash 1 - user_id=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?user_id=2&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 1 - user_id=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=2&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not created</td>
+	<td></td>
+</tr>
+<!--# hash 2 - user_id=2 price=-32-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=2&amp;price=-23&amp;test=1&amp;hash=${hash2}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not created</td>
+	<td></td>
+</tr>
+<!--# hash 3 - user_id=3 price=20-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=3&amp;price=20&amp;test=1&amp;hash=${hash3}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not created</td>
+	<td></td>
+</tr>
+<!--# hash 4 - user_id=2 issue_date='2012-01-01 23:23:23'-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=2&amp;issue_date=1330594129&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not created</td>
+	<td></td>
+</tr>
+<!--# hash 5 - user_id=4 price=20 number=5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=4&amp;price=20&amp;number=5&amp;test=1&amp;hash=${hash5}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not created</td>
+	<td></td>
+</tr>
+<!--# hash 6 - user_id=3 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=2&amp;price=20&amp;comment=labas vakaras&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not created</td>
+	<td></td>
+</tr>
+<!--# hash 7 - user_id=0 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=0&amp;price=20&amp;comment=labas vakaras issue_date=1330594129&amp;test=1&amp;hash=${hash7}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--# hash 8 - user_id=2 price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=2&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was created</td>
+	<td></td>
+</tr>
+<!--# hash 9 - user_id=0 price=20 comment=labas vakaras   issue_date=  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=0&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--# hash 10 - user_id=3 price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=3&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash10}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was created</td>
+	<td></td>
+</tr>
+<!--# hash 11 - user_id=4 price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=4&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash11}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was created</td>
+	<td></td>
+</tr>
+<!--# hash 12 - user_id=5 price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=5&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash12}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--incorect hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=2&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--OTHER USERS-->
+<!--RESELLER-->
+<!--# hash 10 - user_id=3 price=20-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=reseller&amp;p=reseller1&amp;user_id=3&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash10}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--# hash 11 - user_id=4 price=20 number=5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=reseller&amp;p=reseller1&amp;user_id=4&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash11}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--# hash 8 - user_id=3 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=reseller&amp;p=reseller1&amp;user_id=2&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--# hash 9 - user_id=0 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=reseller&amp;p=reseller1&amp;user_id=0&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--# hash 12 - user_id=5 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash12}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was created</td>
+	<td></td>
+</tr>
+<!--101-->
+<!--# hash 10 - user_id=3 price=20-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=101&amp;p=1011&amp;user_id=3&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash10}</td>
+	<td></td>
+</tr>
+<!--2. Virtoje dont be so smart gaunu bad login-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 11 - user_id=4 price=20 number=5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=101&amp;p=1011&amp;user_id=4&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash11}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 8 - user_id=2 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=101&amp;p=1011&amp;user_id=2&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 9 - user_id=0 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=101&amp;p=1011&amp;user_id=0&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 12 - user_id=5 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=101&amp;p=1011&amp;user_id=5&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash12}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--USER_RESELLER-->
+<!--# hash 10 - user_id=3 price=20-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=user_reseller&amp;p=user_reseller1&amp;user_id=3&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash10}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 11 - user_id=4 price=20 number=5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=user_reseller&amp;p=user_reseller1&amp;user_id=4&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash11}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 8 - user_id=2 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=user_reseller&amp;p=user_reseller1&amp;user_id=2&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 9 - user_id=0 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=user_reseller&amp;p=user_reseller1&amp;user_id=0&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 12 - user_id=5 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=user_reseller&amp;p=user_reseller1&amp;user_id=5&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash12}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--ACCOUNTANT-->
+<!--# hash 10 - user_id=3 price=20-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=accountant&amp;p=accountant1&amp;user_id=3&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash10}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 11 - user_id=4 price=20 number=5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=accountant&amp;p=accountant1&amp;user_id=4&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash11}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 8 - user_id=2 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=accountant&amp;p=accountant1&amp;user_id=2&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 9 - user_id=0 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=accountant&amp;p=accountant1&amp;user_id=0&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 12 - user_id=5 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=accountant&amp;p=accountant1&amp;user_id=5&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash12}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_2</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_3</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_2</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_3</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_1</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_2</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_3</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_1</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_full_price_2</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_full_price_3</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_full_price_1</td>
+	<td>20.0</td>
+</tr>
+<!--# hash 13 - user_id=4 price=-*&^ comment='656y' w6y "we6hrds"  issue_date='2012-01-01 23:23:23'  number=abc-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=4&amp;price=-*&amp;^&amp;comment='656y' w6y &quot;we6hrds&quot;&amp;issue_date=1330594129&amp;number=abc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash13</td>
+</tr>
+<!--# hash 14 - user_id=3 price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=3&amp;price=20&amp;comment=labas vakaras&amp;issue_date=&amp;^%$#&amp;number=-2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash14</td>
+</tr>
+<!--# hash 15 - user_id=-4 price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=-4&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash15</td>
+</tr>
+<!--# hash 16 - user_id=XXX price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=XXX&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash16</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--# hash 13 - user_id=4 price=-*&^ comment='656y' w6y "we6hrds"  issue_date='2012-01-01 23:23:23'  number=abc-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=4&amp;price=-*&amp;^&amp;comment='656y' w6y &quot;we6hrds&quot;&amp;issue_date=1330594129&amp;number=abc&amp;test=1&amp;hash=${hash13}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was created</td>
+	<td></td>
+</tr>
+<!--# hash 14 - user_id=3 price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<!--<tr> 	<td>open</td> 	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=3&amp;price=20&amp;comment=labas vakaras&amp;issue_date=&amp;^%$#&amp;number=2&amp;test=1&amp;hash=${hash14}</td> 	<td></td> </tr>-->
+<!--# hash 15 - user_id=-4 price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=-4&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash15}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<!--# hash 16 - user_id=XXX price=20 comment=labas vakaras   issue_date='2012-01-01 23:23:23'  number=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_create?u=admin&amp;p=admin1&amp;user_id=XXX&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash16}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_4</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_4</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_4</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_full_price_4</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--# hash 17 credit_note_id=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash17</td>
+</tr>
+<!--# hash 18 credit_note_id=-2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=-2&amp;status=paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash18</td>
+</tr>
+<!--# hash 19 credit_note_id=&^TT-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=&amp;^TT&amp;status=paid&amp;comment=labas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash19</td>
+</tr>
+<!--# hash 20 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=3&amp;status=paid&amp;comment=labas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash20</td>
+</tr>
+<!--# hash 21 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=4&amp;status=paid&amp;comment=labas re</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash21</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--# hash 12 - user_id=5 price=20 comment=labas vakaras-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=reseller&amp;p=reseller1&amp;user_id=5&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=2&amp;test=1&amp;hash=${hash12}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<!--# hash 17 credit_note_id=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?credit_note_id=2&amp;test=1&amp;hash=${hash17}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 17 credit_note_id=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=2&amp;test=1&amp;hash=${hash17}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<!--# hash 18 credit_note_id=-2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=-2&amp;status=paid&amp;test=1&amp;hash=${hash18}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<!--# hash 19 credit_note_id=&^TT-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=&amp;^TT&amp;status=paid&amp;comment=labas&amp;test=1&amp;hash=${hash19}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<!--# hash 20 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;status=paid&amp;comment=labas&amp;test=1&amp;hash=${hash20}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 21 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=accountant&amp;p=accountant1&amp;credit_note_id=4&amp;status=paid&amp;comment=labas re&amp;test=1&amp;hash=${hash21}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 20 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=101&amp;p=1011&amp;credit_note_id=3&amp;status=paid&amp;comment=labas&amp;test=1&amp;hash=${hash20}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 21 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=101&amp;p=1011&amp;credit_note_id=4&amp;status=paid&amp;comment=labas re&amp;test=1&amp;hash=${hash21}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 20 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=user_reseller&amp;p=user_reseller1&amp;credit_note_id=3&amp;status=paid&amp;comment=labas&amp;test=1&amp;hash=${hash20}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 21 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=user_reseller&amp;p=user_reseller1&amp;credit_note_id=4&amp;status=paid&amp;comment=labas re&amp;test=1&amp;hash=${hash21}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 20 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=reseller&amp;p=reseller1&amp;credit_note_id=3&amp;status=paid&amp;comment=labas&amp;test=1&amp;hash=${hash20}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<!--# hash 21 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=4&amp;status=paid&amp;comment=labas re&amp;test=1&amp;hash=${hash21}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=image_paid_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=image_paid_4</td>
+	<td></td>
+</tr>
+<!--# hash 20 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;status=paid&amp;comment=labas&amp;test=1&amp;hash=${hash20}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<!--# hash 21 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=4&amp;status=paid&amp;comment=labas re&amp;test=1&amp;hash=${hash21}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<!--# hash 21 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=reseller&amp;p=reseller1&amp;credit_note_id=4&amp;status=paid&amp;comment=labas re&amp;test=1&amp;hash=${hash21}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_paid_3</td>
+	<td></td>
+</tr>
+<!--# hash 22 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=2&amp;user_id=6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash22</td>
+</tr>
+<!--# hash 23 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=4&amp;user_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash23</td>
+</tr>
+<!--# hash 24 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=3&amp;status=unpaid&amp;comment=labas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash24</td>
+</tr>
+<!--# hash 25 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=4&amp;status=unpaid&amp;comment=labas re</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash25</td>
+</tr>
+<!--# hash 26 credit_note_id=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash26</td>
+</tr>
+<!--# hash 27 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=4&amp;user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash27</td>
+</tr>
+<!--# hash 28 credit_note_id=#$%^-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=#$%^&amp;user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash28</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_paid_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--# hash 1 - user_id=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_notes?u=admin&amp;p=admin1&amp;user_id=2&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=user_id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=comment</td>
+	<td>labas vakaras</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price_with_vat</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=number</td>
+	<td>2</td>
+</tr>
+<!--# hash 22 credit_note_id=2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_notes?u=admin&amp;p=admin1&amp;credit_note_id=2&amp;user_id=6&amp;test=1&amp;hash=${hash22}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=user_id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=comment</td>
+	<td>labas vakaras</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price_with_vat</td>
+	<td>20.0</td>
+</tr>
+<!--# hash 23 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_notes?u=admin&amp;p=admin1&amp;credit_note_id=4&amp;user_id=5&amp;test=1&amp;hash=${hash23}</td>
+	<td></td>
+</tr>
+<!--1 credit_notes, negaunu pranešimo, kad nerastas id -->
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>not</td>
+	<td></td>
+</tr>
+<!--# hash 26 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_notes?u=admin&amp;p=admin1&amp;credit_note_id=2&amp;test=1&amp;hash=${hash26}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=user_id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=comment</td>
+	<td>labas vakaras</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=number</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=price_with_vat</td>
+	<td>20.0</td>
+</tr>
+<!--# hash 27 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_notes?u=admin&amp;p=admin1&amp;credit_note_id=4&amp;user_id=2&amp;test=1&amp;hash=${hash27}</td>
+	<td></td>
+</tr>
+<!--1 credit_notes, negaunu pranešimo, kad nerastas id -->
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>not</td>
+	<td></td>
+</tr>
+<!--# hash 28 credit_note_id=4-->
+<!--<tr> 	<td>open</td> 	<td>/billing/api/credit_notes?u=admin&amp;p=admin1&amp;credit_note_id=#$%^&amp;user_id=2&amp;test=1&amp;hash=${hash28}</td> 	<td></td> </tr>-->
+<!--# hash 24 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;status=unpaid&amp;comment=labas&amp;test=1&amp;hash=${hash24}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<!--# hash 25 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_update?u=reseller&amp;p=reseller1&amp;credit_note_id=4&amp;status=unpaid&amp;comment=labas re&amp;test=1&amp;hash=${hash25}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_not_paid_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_3</td>
+	<td></td>
+</tr>
+<!--# hash 29 credit_note_id=#$%^-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=#$%^&amp;user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash29</td>
+</tr>
+<!--# hash 30 credit_note_id=2.5-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=2,5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash30</td>
+</tr>
+<!--# hash 31 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash31</td>
+</tr>
+<!--# hash 32 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?credit_note_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash32</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--# hash 29 credit_note_id=#$%^-->
+<!--<tr> 	<td>open</td> 	<td>/billing/api/credit_notes?u=admin&amp;p=admin1&amp;credit_note_id=#$%^&amp;user_id=2&amp;test=1&amp;hash=${hash29}</td> 	<td></td> </tr>-->
+<!--# hash 30 credit_note_id=2.5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=user_reseller&amp;p=user_reseller1&amp;credit_note_id=2,5&amp;test=1&amp;hash=${hash30}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 31 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=user_reseller&amp;p=user_reseller1&amp;credit_note_id=3&amp;test=1&amp;hash=${hash31}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 32 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=user_reseller&amp;p=user_reseller1&amp;credit_note_id=4&amp;test=1&amp;hash=${hash32}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 30 credit_note_id=2.5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=101&amp;p=1011&amp;credit_note_id=2,5&amp;test=1&amp;hash=${hash30}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 31 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=101&amp;p=1011&amp;credit_note_id=3&amp;test=1&amp;hash=${hash31}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 32 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=101&amp;p=1011&amp;credit_note_id=4&amp;test=1&amp;hash=${hash32}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 30 credit_note_id=2.5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=accountant&amp;p=accountant1&amp;credit_note_id=2,5&amp;test=1&amp;hash=${hash30}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 31 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=accountant&amp;p=accountant1&amp;credit_note_id=3&amp;test=1&amp;hash=${hash31}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--# hash 32 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=accountant&amp;p=accountant1&amp;credit_note_id=4&amp;test=1&amp;hash=${hash32}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_not_paid_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_3</td>
+	<td></td>
+</tr>
+<!--# hash 30 credit_note_id=2.5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=admin&amp;p=admin1&amp;credit_note_id=2,5&amp;test=1&amp;hash=${hash30}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was deleted</td>
+	<td></td>
+</tr>
+<!--# hash 31 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=admin&amp;p=admin1&amp;credit_note_id=3&amp;test=1&amp;hash=${hash31}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was deleted</td>
+	<td></td>
+</tr>
+<!--# hash 32 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=admin&amp;p=admin1&amp;credit_note_id=4&amp;test=1&amp;hash=${hash32}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<!--# hash 30 credit_note_id=2.5-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=reseller&amp;p=reseller1&amp;credit_note_id=2,5&amp;test=1&amp;hash=${hash30}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<!--# hash 31 credit_note_id=3-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=reseller&amp;p=reseller1&amp;credit_note_id=3&amp;test=1&amp;hash=${hash31}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was not found</td>
+	<td></td>
+</tr>
+<!--# hash 32 credit_note_id=4-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/credit_note_delete?u=reseller&amp;p=reseller1&amp;credit_note_id=4&amp;test=1&amp;hash=${hash32}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note was deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=image_not_paid_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=image_not_paid_3</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

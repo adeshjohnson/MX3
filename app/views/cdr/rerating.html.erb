@@ -1,0 +1,254 @@
+
+<% if @step == 1 %>
+  <b><%= _('Select_details_for_CDR_rerating') %>:</b>
+  <br />
+  <br />
+  <div align="left" class="nb">
+    <%= form_tag(:action => 'rerating', :step => 2) do %>
+      <%= _('From') %>:
+      <%= select_datetime(Time.mktime(*session_from_datetime_array), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+      &nbsp;&nbsp;
+      <%= _('to') %>:
+      <%= select_datetime(Time.mktime(*session_till_datetime_array), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+      &nbsp;&nbsp;
+      <br />
+      <br />
+      <%= _('Select_user') %>:
+      <% reseller_cache = {} %>
+      <select name="user">
+        <option value="-1" <%= "selected" if session[:rerating_user_id].to_i == -1 %>> <%= _('All_Users') %></option>
+        <% for user in @users %>
+          <option value="<%= user.id %>" <%= "selected" if user.id == session[:rerating_user_id].to_i %>>
+            <%= nice_user(user) %>
+            <% if user.owner_id.to_i > 0 %>
+              <% reseller = reseller_cache[user.owner_id.to_s] ||= user.owner %>
+              <% if reseller %>
+                (<%= _('Reseller') %>: <%= nice_user(reseller) %>)
+              <% end %>
+            <% end %>
+          </option>
+        <% end %>
+      </select>
+
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <hr/>
+
+      <br />
+      <br />
+
+      <%= b_info + _('Rerating_testing_notification') %><br/><br/>
+      <%= b_testing + _('Testing_mode') %>: <%= check_box_tag 'rerating_testing', value = "1", checked = session[:rerating_testing].to_i == 1 %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= _('Tariff_for_User') %>:
+      <select name="test_tariff_id">
+        <% for tariff in @tariffs %>
+          <option value="<%= tariff.id %>" <%= "selected" if session[:rerating_testing_tariff_id].to_i == tariff.id %>>
+            <%= tariff.name %> (<%= _('Retail') if tariff.purpose == "user" %><%= _('Wholesale') if tariff.purpose != "user"%>)
+          </option>
+        <% end %>
+      </select>
+      <br />
+      <br />
+      <br />
+      <%= submit_tag _('Proceed'), :disable_with=>_('Processing..')%>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @step == 2 %>
+  <table width="100%" class="nb">
+    <tr>
+      <td colspan=2>
+        <b><%= b_user + _('user') %>:</b>
+        <% if @user_id == -1 %>
+          <%= _('All_Users') %>
+        <% else %>
+          <%= nice_user(@user) %>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan=2>
+        <b><%= b_date + _('Time_period') %>:</b> <%= session_from_datetime %> - <%= session_till_datetime %>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan=2>
+        <b><%= b_testing + _('Testing_mode') %>:</b> <%= b_check if session[:rerating_testing].to_i == 1 %><%= b_cross if session[:rerating_testing].to_i == 0 %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+
+        <b><%= b_call + _('Total_calls') %>:</b> <%= @total_calls %>
+      </td>
+
+      <td align="right">
+        <% if @total_calls > 0 and @user_id != -1 %>
+          <%= link_to b_pdf + _('Export_to_PDF'), :controller => "stats", :action => "call_list_to_pdf", :id => @user_id, :date_from => session_from_datetime, :date_till => session_till_datetime, :call_type => "answered" %>
+          &nbsp;
+          <%= link_to b_csv + _('Export_to_CSV'), :controller => "stats", :action => "call_list_to_csv", :id => @user_id, :date_from => session_from_datetime, :date_till => session_till_datetime, :call_type => "answered" %>
+        <% end %>
+
+      </td>
+    </tr>
+
+
+    <tr><td height=5></td></tr>
+
+
+    <% if @total_calls > 0 %>
+      <tr>
+        <td>
+
+          <table width="50%" class="simple">
+
+            <% if @user_id == -1 %>
+
+              <tr>
+                <td>            <b><%= _('Total_users_with_calls') %>:</b> </td>
+                <td> <%= @users_with_calls %>        </td>
+              </tr>
+
+            <% end %>
+
+            <tr>
+              <td>            <b><%= _('Total_time') %>:</b> </td>
+              <td id="total_time_value"> <%= nice_time @billsec %>        </td>
+            </tr>
+            <tr>
+              <td>            <b><%= _('Total_provider_price') %>:</b> </td>
+              <td id="provider_price"><%= nice_number @provider_price %>        </td>
+            </tr>
+            <tr>
+              <td>            <b><%= _('Total_reseller_price') %>:</b> </td>
+              <td id="reseller_price_value"><%= nice_number @reseller_price %>        </td>
+            </tr>
+            <tr>
+              <td>            <b><%= _('Total_user_price') %>:</b> </td>
+              <td id="user_price_value"><%= nice_number @user_price %>        </td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+
+      <tr><td height=15></td></tr>
+
+      <tr>
+        <td>
+          <%= form_tag :action => 'rerating', :step => 3, :user => @user_id, :billsec => @billsec, :pprice => @provider_price, :price => @user_price, :rprice => @reseller_price do %>
+            <%= submit_tag _('Rerate'), :disable_with=>_('Processing..')%>
+          <% end %>
+        </td>
+      </tr>
+
+      <br/>
+    <% end %>
+    <tr>
+      <td>
+        <br/><%= link_to b_back + _('Back'), :action => "rerating", :step => 1 %>
+      </td>
+    </tr>
+  </table>
+
+
+
+<% end %>
+
+
+
+<% if @step == 3 %>
+
+  <table width="100%" class="nb">
+    <tr>
+      <td colspan=2>
+        <b><%= b_user + _('user') %>:</b>
+        <% if @user_id == -1 %>
+          <%= _('All_Users') %> (<%= @total_users %>)
+        <% else %>
+          <%= nice_user(@user) %>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan=2>
+        <b><%= b_date + _('Time_period') %>:</b> <%= session_from_datetime %> - <%= session_till_datetime %>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan=2>
+        <b><%= b_testing + _('Testing_mode') %>:</b> <%= b_check if session[:rerating_testing].to_i == 1 %><%= b_cross if session[:rerating_testing].to_i == 0 %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+
+        <b><%= b_call + _('Total_calls') %>:</b> <%= @total_calls %>
+      </td>
+
+      <td align="right">
+        <% if @total_calls > 0 and @user_id != -1 %>
+          <%= link_to b_pdf + _('Export_to_PDF'), :controller => "stats", :action => "call_list_to_pdf", :id => @user.id, :date_from => session_from_datetime, :date_till => session_till_datetime, :call_type => "answered" %>
+          &nbsp;
+          <%= link_to b_csv + _('Export_to_CSV'), :controller => "stats", :action => "call_list_to_csv", :id => @user.id, :date_from => session_from_datetime, :date_till => session_till_datetime, :call_type => "answered" %>
+        <% end %>
+
+      </td>
+    </tr>
+
+    <tr><td height=5></td></tr>
+
+    <% if @total_calls > 0 %>
+      <tr>
+        <td>
+          <table width="80%" class="maintable">
+            <tr>
+              <th>       </th>
+              <th align="center">  <%= _('Prior_rerating') %>     </th>
+              <th align="center">  <%= _('After_rerating') %>     </th>
+              <th align="center">  <%= _('Difference') %>     </th>
+            </tr>
+            <tr class="row1">
+              <td>            <b><%= _('Total_time') %>:</b> </td>
+              <td id="old_billsec" align="center"> <%= nice_time @old_billsec %>        </td>
+              <td id="new_billsec" align="center"> <%= nice_time @billsec %>        </td>
+              <td align="center"> -        </td>
+            </tr>
+            <tr>
+              <td>            <b><%= _('Total_provider_price') %>:</b> </td>
+              <td id="old_pp" align="center"><%= nice_number @old_provider_price %>        </td>
+              <td id="new_pp" align="center"><%= nice_number @provider_price %>        </td>
+              <td id="diff_pp" align="center"><%= nice_number(@provider_price - @old_provider_price) %>        </td>
+            </tr>
+            <tr>
+              <td>            <b><%= _('Total_reseller_price') %>:</b> </td>
+              <td id="old_res" align="center"><%= nice_number @old_reseller_price %>        </td>
+              <td id="new_res" align="center"><%= nice_number @reseller_price %>        </td>
+              <td id="diff_res" align="center"><%= nice_number(@reseller_price - @old_reseller_price) %>        </td>
+            </tr>
+            <tr class="row1">
+              <td>            <b><%= _('Total_user_price') %>:</b> </td>
+              <td id="old_up" align="center"><%= nice_number @old_user_price %>        </td>
+              <td id="new_up" align="center"><%= nice_number @user_price %>        </td>
+              <td id="diff_up" align="center"><%= nice_number(@user_price-@old_user_price) %>        </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <br/><%= link_to b_back + _('Back'), :action => "rerating", :step => 1 %>
+
+<% end %>

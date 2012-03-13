@@ -1,0 +1,70 @@
+<% if  @notice%>
+  <div id="notice"><%= @notice %> </div>
+<%end%>
+
+
+<b><%=_('Are_you_sure')%></b> 
+<br />
+<%if @amount == "one"%>
+  <table  width="100%">
+    <tr >
+      <td>
+        <%= form_tag(:action => 'create', :did => @did, :provider=>@provider.id) do %>
+
+          <br /><b><%= _('DID') %>:</b>
+          <%= @did.to_s   %>
+          <%= hidden_field_tag 'amount', "one" %>
+
+          <%if see_providers_in_dids? %>
+            <br /><br />
+            <b><%= _('Provider') %>:</b>
+            <%= @provider.name%>
+          <%end%>
+          <br /><br />
+          <%if @notice%>
+            <%= submit_tag(_('ok'), :confirm => _('Are_you_sure'), :method => :post, :disable_with=>_('Processing..'))  %>
+          <%else%>
+            <%= submit_tag _('ok'), :disable_with=>_('Processing..') %>
+          <%end%>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+
+
+<%else%>
+
+
+  <table  width="100%">
+    <tr >
+      <td>
+        <%= form_tag(:action => 'create',:provider=>@provider.id, :did_start=>@start, :did_end=>@end) do %>
+
+          <br /><b><%= _('DID_interval') %>:</b>
+          <%= @start   %>
+          -
+          <%= @end   %>
+          <%if see_providers_in_dids? %>
+            <br /><br />
+            <b><%= _('Provider') %>:</b>
+            <%= @provider.name%>
+          <%end%>
+          <br /><br />
+
+          <%= hidden_field_tag 'amount', "interval" %>
+
+          <%if @notice%>
+            <%= submit_tag(_('ok'), :confirm => _('Are_you_sure'), :method => :post, :disable_with=>_('Processing..')) %>
+          <%else%>
+            <%= submit_tag _('ok'), :disable_with=>_('Processing..') %>
+          <%end%>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+
+<%end%>
+
+
+<br /><br />
+

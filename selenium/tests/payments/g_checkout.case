@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>google_checkout_google_checkout_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>google_checkout_google_checkout_min_amount</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>google_checkout_google_checkout_max_amount</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>google_checkout_google_checkout_default_geteway_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>google_checkout_google_checkout_merchant_id</td>
+	<td>626212006849603</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>google_checkout_google_checkout_merchant_key</td>
+	<td>bRI6h4ViLh9mTkdD0xqI7w</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>google_checkout_google_checkout_use_sandbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/payments/g_checkout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/google_checkout/google_checkout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>google_checkout_google_checkout_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>google_checkout_google_checkout_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>google_checkout_google_checkout_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>without_tax_field</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>4.00</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>4.00</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>google_checkout_google_checkout_amount</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>without_tax_field</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>with_tax_field</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>6.77</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>6.77</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>google_checkout_google_checkout_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>without_tax_field</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>4.00</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>4.00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>min_currency</td>
+	<td>4.0000 USD without tax (if any)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>max_currency</td>
+	<td>100.0000 USD without tax (if any)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please press here to pay 4.0 USD using</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/google_checkout/google_checkout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>google_checkout_google_checkout_amount</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>google_checkout_google_checkout_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>without_tax_field</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>4.00</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>4.00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>google_checkout_google_checkout_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>without_tax_field</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>5.42</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>5.42</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please press here to pay 5.42 USD using</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/google_checkout/google_checkout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>google_checkout_google_checkout_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>google_checkout_google_checkout_amount</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>without_tax_field</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>100.00</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>100.00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>google_checkout_google_checkout_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>without_tax_field</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>100.00</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>100.00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please press here to pay 100.0 USD using</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/google_checkout/google_checkout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>google_checkout_google_checkout_amount</td>
+	<td>200</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>google_checkout_google_checkout_currency</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>without_tax_field</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>100.00</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>100.00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>google_checkout_google_checkout_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>google_checkout_google_checkout_amount</td>
+	<td>200</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>without_tax_field</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>without_tax_field</td>
+	<td>100.00</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>with_tax_field</td>
+	<td>100.00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Google_buy']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//strong</td>
+	<td>100.0 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>p_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>new_balance_0</td>
+	<td>13.5404 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//td[@id='user_11']/a</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>paymenttype_11</td>
+	<td>Google_checkout</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>amount_11</td>
+	<td>5.4100</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>completed_11</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>paymenttype_14</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>amount_14</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>completed_14</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>total_amount</td>
+	<td>222.9204(USD)</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>total_fee</td>
+	<td>0.0000(USD)</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>total_with_tax</td>
+	<td>222.9204(USD)</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>total_amount_completed</td>
+	<td>13.5404(USD)</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>total_fee_completed</td>
+	<td>0.0000(USD)</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>total_with_tax_completed</td>
+	<td>13.5404(USD)</td>
+</tr>
+</tbody></table>
+</body>
+</html>

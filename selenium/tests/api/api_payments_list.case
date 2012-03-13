@@ -1,0 +1,1111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>api_payments_list</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">api_payments_list</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/payments/payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_8']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=allow_api</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=allow_get_api</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?s_user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?s_user_id=2&amp;test=1&amp;hash=a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#2 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?s_user_id=ęėd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>7c4a8d09ca3762af61e59520943dc26494f8941b</td>
+	<td></td>
+</tr>
+<!--#3 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?s_user_id=2&amp;s_from=1199145600&amp;s_till=1325376000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>1b8f3ede1da9178f1063c106622e927488402d1e</td>
+	<td></td>
+</tr>
+<!--#4 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?s_user_id=2&amp;s_from=1199145600&amp;s_till=1325376000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>1b8f3ede1da9178f1063c106622e927488402d1e</td>
+	<td></td>
+</tr>
+<!--#5 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?&amp;s_from=1199145600&amp;s_till=1325376000&amp;s_paymenttype=ouroboros</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>74939a4c2956c44db0eb5559456156581ef83fc4</td>
+	<td></td>
+</tr>
+<!--#6 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?&amp;s_from=1293840000&amp;s_till=1325376000&amp;s_amount_max=13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>424b7620c1c96c0741fcb69e9bbeefcde19adcfd</td>
+	<td></td>
+</tr>
+<!--#7 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?&amp;s_from=1293840000&amp;s_till=1325376000&amp;s_completed=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>65632d4d4dab79b383bae510a0c2637650062ae7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<!--BAD LOGIN-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?s_user_id=2&amp;test=1&amp;hash=a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<!--BAD LOGIN-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=admin1&amp;p=admin1&amp;s_user_id=2&amp;test=1&amp;hash=a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<!--JUST USER_ID-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=admin&amp;p=admin1&amp;s_user_id=2&amp;test=1&amp;hash=a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Payments list</td>
+</tr>
+<!--#1 hash-->
+<!--INCORECT HASH-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=admin&amp;p=admin1&amp;s_user_id=3&amp;test=1&amp;hash=a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<!--INCORECT HASH-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=admin&amp;p=admin1&amp;s_user_id=ęėd&amp;test=1&amp;hash=a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--#2 hash-->
+<!--BAD ID-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=admin&amp;p=admin1&amp;s_user_id=ęėd&amp;test=1&amp;hash=7c4a8d09ca3762af61e59520943dc26494f8941b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--#3 hash-->
+<!--INFO FROM TILL-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=admin&amp;p=admin1&amp;s_user_id=2&amp;s_from=1199145600&amp;s_till=1325376000&amp;test=1&amp;hash=1b8f3ede1da9178f1063c106622e927488402d1e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payments list Test User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Payments list</td>
+</tr>
+<!--#4 hash-->
+<!--INFO FROM TILL-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=admin&amp;p=admin1&amp;s_user_id=2&amp;s_from=1199145600&amp;s_till=1325376000&amp;test=1&amp;hash=1b8f3ede1da9178f1063c106622e927488402d1e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pagename</td>
+	<td>Payments list</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=user</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=payer</td>
+	<td>payer@email.lt</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=transaction_id</td>
+	<td>3456754123457653</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=date</td>
+	<td>2011-04-18 00:00:01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=confirm_date</td>
+	<td>2011-04-18 00:00:02</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=confirm_date</td>
+	<td>2011-04-18 00:00:02</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=type</td>
+	<td>Paypal</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=amount</td>
+	<td>9.5600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=fee</td>
+	<td>0.4400</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=amount_with_tax</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=completed</td>
+	<td>Completed</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=confirmed_by_admin</td>
+	<td>Yes</td>
+</tr>
+<!--#5 hash-->
+<!--INFO FROM TILL OUROBOROS-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=admin&amp;p=admin1&amp;s_from=1199145600&amp;s_till=1325376000&amp;s_paymenttype=ouroboros&amp;test=1&amp;hash=74939a4c2956c44db0eb5559456156581ef83fc4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=user</td>
+	<td>Batch Card sale</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ouroboros</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Paypal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Gateways_authorize_net</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Linkpoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Google_checkout</td>
+	<td></td>
+</tr>
+<!--#6 hash-->
+<!--INFO FROM TILL MAX 13-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=admin&amp;p=admin1&amp;s_from=1293840000&amp;s_till=1325376000&amp;s_amount_max=13&amp;test=1&amp;hash=424b7620c1c96c0741fcb69e9bbeefcde19adcfd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=user</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>2009</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[2]/amount_with_tax</td>
+	<td>12.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=amount_with_tax</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[2]/type</td>
+	<td>Gateways_authorize_net</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=type</td>
+	<td>Paypal</td>
+</tr>
+<!--#7 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=admin&amp;p=admin1&amp;s_from=1293840000&amp;s_till=1325376000&amp;s_completed=0&amp;test=1&amp;hash=65632d4d4dab79b383bae510a0c2637650062ae7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=completed</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[2]/completed</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[3]/completed</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[4]/completed</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[5]/completed</td>
+	<td>No ()</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//payment[6]/completed</td>
+	<td></td>
+</tr>
+<!--SET SOME NEW INFO-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Accountant</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>13.5</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=p_currency</td>
+	<td>label=NLG</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Amount with TAX: 13.5000 NLG</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount_with_tax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount_with_tax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_with_tax</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=p_currency</td>
+	<td>label=CRC</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Amount with TAX: 15.0000 CRC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount_with_tax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_with_tax</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=p_currency</td>
+	<td>label=EGP</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Amount with TAX: 4.0000 EGP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<!--#8 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?&amp;s_from=1293840000&amp;s_till=1325376000&amp;s_transaction=1234567899098765432&amp;s_currency=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>03075378dcb0105a2f6e84983c2587ae830a1564</td>
+	<td></td>
+</tr>
+<!--#9 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?&amp;s_from=1199145600&amp;s_amount_min=13&amp;s_amount_max=18&amp;s_first_name=Test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>320eebd1a8633baf0383ab1b6f12bb112340b2f3</td>
+	<td></td>
+</tr>
+<!--#10 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?&amp;s_from=1199145600&amp;s_user_id=5&amp;s_till=1325376000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>8298dfcc1d2b899e2947e2a1c03692ab03539e1f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#8 hash-->
+<!--INFO FROM TILL TRANSACTION-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=admin&amp;p=admin1&amp;s_from=1293840000&amp;s_till=1325376000&amp;s_transaction=1234567899098765432&amp;s_currency=USD&amp;test=1&amp;hash=03075378dcb0105a2f6e84983c2587ae830a1564</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=transaction_id</td>
+	<td>1234567899098765432</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=type</td>
+	<td>Gateways_authorize_net</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>3456754123457653</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>EUR</td>
+	<td></td>
+</tr>
+<!--#9 hash-->
+<!--INFO FROM TILL MIN MAX FIRST NAME-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=admin&amp;p=admin1&amp;s_from=1199145600&amp;s_amount_min=13&amp;s_amount_max=18&amp;s_first_name=Test&amp;test=1&amp;hash=320eebd1a8633baf0383ab1b6f12bb112340b2f3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=user</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[2]/currency</td>
+	<td>NLG</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>CRC</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=amount</td>
+	<td>15.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[2]/amount_with_tax</td>
+	<td>13.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[2]/amount</td>
+	<td>13.5000</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//payment[3]/amount</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<!--RESELLER -> 101-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=reseller&amp;p=reseller1&amp;s_user_id=2&amp;s_from=1199145600&amp;s_till=1325376000&amp;test=1&amp;hash=1b8f3ede1da9178f1063c106622e927488402d1e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<!--101->101-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=101&amp;p=1011&amp;s_user_id=2&amp;s_from=1199145600&amp;s_till=1325376000&amp;test=1&amp;hash=1b8f3ede1da9178f1063c106622e927488402d1e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[5]/transaction_id</td>
+	<td>3456754123457653</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[8]/payer</td>
+	<td>payer@email.lt</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[10]/amount_with_tax</td>
+	<td>19.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[10]/currency</td>
+	<td>EUR</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[7]/type</td>
+	<td>Google_checkout</td>
+</tr>
+<!--#1 hash-->
+<!--USER_RESELLER -> 101-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=user_reseller&amp;p=user_reseller1&amp;s_user_id=2&amp;s_from=1199145600&amp;s_till=1325376000&amp;test=1&amp;hash=1b8f3ede1da9178f1063c106622e927488402d1e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=user</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=type</td>
+	<td>Gateways_authorize_net</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=currency</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[6]/fee</td>
+	<td>0.4400</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[6]/amount</td>
+	<td>9.5600</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[6]/user</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//payment[3]/type</td>
+	<td>Paypal</td>
+</tr>
+<!--#1 hash-->
+<!--ACCOUNATNT -> 101-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=accountant&amp;p=accountant1&amp;s_user_id=2&amp;s_from=1199145600&amp;s_till=1325376000&amp;test=1&amp;hash=1b8f3ede1da9178f1063c106622e927488402d1e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--#10 hash-->
+<!--ADMIN -> USER_RESELLER-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=admin&amp;p=admin1&amp;s_from=1199145600&amp;s_user_id=5&amp;s_till=1325376000&amp;test=1&amp;hash=8298dfcc1d2b899e2947e2a1c03692ab03539e1f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--#10 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=reseller&amp;p=reseller1&amp;s_from=1199145600&amp;s_user_id=5&amp;s_till=1325376000&amp;test=1&amp;hash=8298dfcc1d2b899e2947e2a1c03692ab03539e1f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=user</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=type</td>
+	<td>Gateways_authorize_net</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2011-04-18 00:00:02</td>
+	<td></td>
+</tr>
+<!--#10 hash-->
+<!--101 -> USER RESELLER FROM-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=101&amp;p=1011&amp;s_from=1199145600&amp;s_user_id=5&amp;s_till=1325376000&amp;test=1&amp;hash=8298dfcc1d2b899e2947e2a1c03692ab03539e1f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=user</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=payer</td>
+	<td>payer@email.lt</td>
+</tr>
+<!--#10 hash-->
+<!--USER_RESELLER -> USER_RESELLER-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=user_reseller&amp;p=user_reseller1&amp;s_from=1199145600&amp;s_user_id=5&amp;s_till=1325376000&amp;test=1&amp;hash=8298dfcc1d2b899e2947e2a1c03692ab03539e1f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=user</td>
+	<td>User Resellers</td>
+</tr>
+<!--#10 hash-->
+<!--BAD LOGIN ACCOUNTANT -> USER_RESELLER-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=accountant&amp;p=acountant1&amp;s_from=1199145600&amp;s_user_id=5&amp;s_till=1325376000&amp;test=1&amp;hash=8298dfcc1d2b899e2947e2a1c03692ab03539e1f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#10 hash-->
+<!--ACCOUNTANT -> USER_RESELLER-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=accountant&amp;p=accountant1&amp;s_from=1199145600&amp;s_user_id=5&amp;s_till=1325376000&amp;test=1&amp;hash=8298dfcc1d2b899e2947e2a1c03692ab03539e1f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--MORE USERS-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<!--#11 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?&amp;s_from=1199145600&amp;s_user_id=0&amp;s_till=1325376000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>4d85b56049d1666626dbc98002b90f6c4c45aa1d</td>
+	<td></td>
+</tr>
+<!--#12 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?&amp;s_from=1199145600&amp;s_user_id=3&amp;s_till=1325376000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>207cea98e54dcbe980321b81e8cd6455d008d7ae</td>
+	<td></td>
+</tr>
+<!--#13 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?&amp;s_from=1199145600&amp;s_user_id=4&amp;s_till=1325376000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>9c32834a0bb9213304e42c35fcdec56f61c9aeeb</td>
+	<td></td>
+</tr>
+<!--#14 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?&amp;s_from=1199145600&amp;s_user_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>3ff8a58d9b57cdeb8e85aabea6076ab895f5761c</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#10 hash-->
+<!--retail_rres_user -> USER_RESELLER-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=retail_rres_user&amp;p=retail_rres_user1&amp;s_from=1199145600&amp;s_user_id=5&amp;test=1&amp;hash=b5440754c30b7178455d9369818666908e152cae</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<!--retail_user -> 101-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=retail_user&amp;p=retail_user1&amp;s_user_id=2&amp;s_from=1199145600&amp;s_till=1325376000&amp;test=1&amp;hash=a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<!--#13 hash-->
+<!--retail_accountant -> ACCOUNTANT-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=retail_accountant&amp;p=retail_accountant1&amp;s_from=1199145600&amp;s_user_id=4&amp;s_till=1325376000&amp;test=1&amp;hash=9c32834a0bb9213304e42c35fcdec56f61c9aeeb</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payments list</td>
+	<td></td>
+</tr>
+<!--#14 hash-->
+<!--retail_accountant -> ACCOUNTANT-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=retail_accountant&amp;p=retail_accountant1&amp;s_from=1199145600&amp;s_user_id=4&amp;test=1&amp;hash=3ff8a58d9b57cdeb8e85aabea6076ab895f5761c</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Accountant</td>
+	<td></td>
+</tr>
+<!--#14 hash-->
+<!--wholesale_accountant -> ACCOUNTANT-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=wholesale_accountant&amp;p=wholesale_accountant1&amp;s_from=1199145600&amp;s_user_id=4&amp;test=1&amp;hash=3ff8a58d9b57cdeb8e85aabea6076ab895f5761c</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--#12 hash-->
+<!--wholesale_rspro -> reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=wholesale_rspro&amp;p=wholesale_rspro1&amp;s_from=1199145600&amp;s_user_id=3&amp;s_till=1325376000&amp;test=1&amp;hash=207cea98e54dcbe980321b81e8cd6455d008d7ae</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<!--#11 hash-->
+<!--wholesale_rspro -> admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/payments_list?u=wholesale_rspro&amp;p=wholesale_rspro1&amp;s_from=1199145600&amp;s_user_id=0&amp;s_till=1325376000&amp;test=1&amp;hash=4d85b56049d1666626dbc98002b90f6c4c45aa1d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

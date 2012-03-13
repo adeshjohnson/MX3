@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>default_currency</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">default_currency</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>icon_chech_curr_upd_disable_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>icon_cross_curr_upd_enable_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>icon_chech_curr_upd_disable_19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>icon_cross_curr_upd_enable_19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>USD_exchange_rate</td>
+	<td>1.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>EUR_exchange_rate</td>
+	<td>0.73853104</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>GBP_exchange_rate</td>
+	<td>1.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>BRL_exchange_rate</td>
+	<td>1.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>icon_chech_curr_upd_disable_18</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>icon_cross_curr_upd_enable_19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>icon_cross_curr_upd_enable_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/change_default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#enable_19 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Currencies rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>EUR_exchange_rate</td>
+	<td>0.73853104</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>GBP_exchange_rate</td>
+	<td>1.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>BRL_exchange_rate</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>icon_cross_curr_upd_enable_19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>icon_chech_curr_upd_disable_18</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>USD_exchange_rate</td>
+	<td>1.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

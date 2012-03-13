@@ -1,0 +1,10 @@
+<% if @dirs != nil %>
+  <ul>
+    <% for dir in @dirs do %>
+        <% dst = Destination.find(:first, :conditions => "direction_code = '#{dir.code}'", :order => "LENGTH(prefix)")%>
+        <% if dst %>
+          <li><%= draw_flag(dst.direction_code)  %> <%= dir.name %> - <%= dst.prefix %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>

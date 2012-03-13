@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='settings']/form/div[11]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_paypal_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_paypal_signature</td>
+	<td>adminas</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_paypal_password</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_paypal_payment_notification</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/paypal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_number</td>
+	<td>98765432</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_amount</td>
+	<td>65</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment was unsuccessful, details from gateway:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/paypal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_number</td>
+	<td>987</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>98765432</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Authorize_net_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_authorize_net_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_authorize_net_login</td>
+	<td>3Dacu3L6v</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_authorize_net_password</td>
+	<td>436vr9FYam95YsC8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_authorize_net_min_amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways_authorize_net_max_amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_authorize_net_payment_notification</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>gateways_authorize_net_billing_address_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/authorize_net</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_authorize_net_number</td>
+	<td>1234567890</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_authorize_net_amount</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment was unsuccessful, details from gateway:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/authorize_net</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_authorize_net_number</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>1234567890</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

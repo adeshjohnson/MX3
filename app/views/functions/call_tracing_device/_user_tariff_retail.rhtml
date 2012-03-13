@@ -1,0 +1,40 @@
+<table width="100%" class="maintable">
+  <tr class="row2">
+    <th align="center"><%= _('Time') %></th>
+    <th align="right"><%= _('From') %></th>
+    <th align="right"><%=_('Duration') %></th>
+    <th align="right"><%= _('Type') %></th>
+    <th align="right"><%= _('Round') %></th>
+    <th align="right"><%= _('Price') %>/min (<%= current_user.currency.name%>)</th>
+  </tr>
+
+  <% for r in rates %>
+    <tr class="row2">
+      <% eap = r['aprice'].to_f / exchange_rate.to_f
+      @max_user_arate = eap if @max_user_arate < eap %>
+      <td align="center" id="start_time"><%= nice_time2(r['start_time']) %>-<%= nice_time2(r['end_time']) %></td>
+      <td align="right" id="afrom"><%= r['afrom'] %></td>
+      <td align="right" id="adur"><%= r['adur'] if  r['adur'].to_i != -1 %><%= "∞" if  r['adur'].to_i == -1 %></td>
+      <td align="right" id="atype"><%= r['atype'] %></td>
+      <td align="right" id="around"><%= r['around'] %></td>
+      <td align="right" id="price"><%= long_nice_number(eap) %>
+        <%if reseller_rates and reseller_rates.first%>
+          <% if user.allow_loss_calls == 0 and  (reseller_rates.first['rate'].to_i > @max_user_arate or  reseller_rates.first['aprice'].to_i > @max_user_arate) %>
+            <%= b_cross %>
+            <% @exp_user += 1 %>
+          <% else %>
+            <% @cheap_user += 1%>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<% if not crates[0]%>
+  <table width="100%" class="simple">
+    <tr class="row2">
+      <th align="left"><%= b_check + _('CT_These_rates_will_be_used_to_calculate_call_price') %></th>
+    </tr>
+  </table>
+<% end %>

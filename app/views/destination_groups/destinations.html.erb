@@ -1,0 +1,52 @@
+
+<table class="simple">
+  <tr>
+    <td id="dest_group"><b><%= _('Destinations_group') %></b>:</td>
+    <td id="dest_group_info"><%= draw_flag_by_code @destgroup.flag %> <%= @destgroup.name %> <%= @destgroup.desttype %></td>
+  </tr>
+</table>
+
+<br />
+
+<table width="100%" class="maintable">
+  <tr>
+
+    <th align="left"><%= _('Direction') %></th>
+    <th align="left"><%= _('Details') %></th>
+    <th align="left"><%= _('Prefix') %></th>
+    <th align="left"><%= _('Code') %></th>
+    <%if admin? or accountant?%>
+      <th></th>
+      <th></th>
+    <%end%>
+  </tr>
+
+  <% i = 0 %>
+  <% for destination in @destinations %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <td id="dir_<%=i%>"><%= draw_flag destination.direction.code if destination.direction %> <%= destination.direction.name if destination.direction %></td>
+      <td id="name_<%=i%>"><%= destination.name %></td>
+      <td id="prefix_<%=i%>"><%= destination.prefix %></td>
+      <td id="subcode_<%=i%>"><%= destination.subcode %></td>
+      <%if admin? or accountant?%>
+        <td align="center"><%= link_to b_chart_bar, { :action => 'dg_destination_stats',:id => destination, :dg_id => @destgroup.id }, :id => "chart_img_"+i.to_s %></td>
+        <td align="center">
+          <% if session[:usertype] == "admin" %>
+            <%= link_to b_delete, { :action => :dg_destination_delete, :id => destination.id, :dg_id => @destgroup.id }, :id => "delete_img_"+i.to_s, :confirm => _('Are_you_sure'), :method => :post %>
+          <% end %>
+        </td>
+      <%end%>
+    </tr>
+    <% i += 1%>
+  <% end %>
+</table>
+
+<br />
+
+<% if session[:usertype] == "admin" %>
+
+  <%= link_to b_add + _('New_destinations'), :action => 'dg_new_destinations', :id => @destgroup, :st => @destgroup.name[0,1] %>
+
+  <br /><br />
+
+<% end %>    

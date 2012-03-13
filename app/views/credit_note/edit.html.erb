@@ -1,0 +1,64 @@
+
+        <table width="95%" class="maintable">
+          <tr class="row2">
+            <th align="left"><%= _('User') %>:</th>
+            <td id="user" align="right"> <%= @link_to_user ? link_nice_user(@note.user) : nice_user(@note.user) %> </td>
+          </tr>
+          <tr class="row1">
+            <th align="left"><%= _('Number') %>:</th>
+            <td id="number" align="right"> <%= @note.number %> </td>
+          </tr>
+          <tr class="row2">
+            <th align="left"><%= _('Issue_date') %>:</th>
+            <td id="issue_date" align="right"> <%= nice_date_time @note.issue_date, 0 %> </td>
+          </tr>
+          <% if @can_view_finances %>
+            <tr class="row1">
+              <th align="left"><%= _('Paid') %>:</th>
+              <td id="paid" align="right">
+                <% if @link_to_finances %>
+                  <% if @note.paid? %>
+                    <%= form_tag :action => 'unpay', :id => @note.id do %>
+                      <%= image_submit_tag 'icons/check.png', :title => _('Mark_as_unpaid'), :id=>"image_paid" %>
+                    <% end %>
+                  <% else %>
+                    <%= form_tag :action => 'pay', :id => @note.id do %>
+                      <%= image_submit_tag 'icons/cross.png', :title => _('Mark_as_paid'), :id=>"image_not_paid" %>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <% if @note.paid? %>
+                     <%= b_check :title => _('Unpaid'), :id=>"image_paid" %>
+                  <% else %>
+                     <%= b_cross :title => _('Paid'), :id=>"image_not_paid" %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+            <% if @note.paid? %>
+              <tr class="row2">
+                <th align="left"><%= _('Paid_date') %>:</th>
+                <td id="paid_date" align="right"><%= nice_date_time @note.pay_date if @note.paid? %> </td>
+              </tr>
+            <% end %>
+            <tr class="row1">
+              <th align="left"><%= _('Price') %>  (<%= session[:show_currency] %>):</th>
+              <td id="price" align="right"> <%= @note.price %> </td>
+            </tr>
+            <tr class="row2">
+              <th align="left"><%= _('Price_with_VAT') %>  (<%= session[:show_currency] %>):</th>
+              <td id="full_price" align="right"> <%= @note.price_with_vat %> </td>
+            </tr>
+          <% end %>
+        </table>
+  <%= form_tag :action => 'update', :id => @note.id do %>
+    <table width="95%" >
+      <tr>
+        <td> <%= _("Comment") %>: </td>          
+      </tr>
+      <tr>
+        <td><%= text_area_tag :comment, @note.comment, :rows => 5, :style => "width: 100%;", :class => "input" %></td>
+      </tr>
+    </table>
+    <%= submit_tag _('Update_comment'), :method => :post, :disable_with=>_('Processing..')%>
+  <% end %>

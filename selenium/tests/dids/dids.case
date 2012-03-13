@@ -1,0 +1,1822 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>dids</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">dids</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/personal_dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title_icon</td>
+	<td>DIDs</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>You're not authorized</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/personal_dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title_icon</td>
+	<td>DIDs</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>You're not authorized</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--==CREATE DID==-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=New DID</td>
+	<td>New DID</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_did</td>
+	<td>37067531066</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_did</td>
+	<td>dkdkdkdkdkdkdkdkdkdkdkd</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID is not E.164 compatible.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID was not created!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_did</td>
+	<td>8888888888yh</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID was not created!</td>
+	<td></td>
+</tr>
+<!--===EDIT DID===-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>edit_link_1</td>
+	<td></td>
+</tr>
+<!--...Check user order-->
+<tr>
+	<td>verifyText</td>
+	<td>//select[@name='user_id']/option[1]</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//select[@name='user_id']/option[4]</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did[comment]</td>
+	<td>asd</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did[call_limit]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did[language]</td>
+	<td>ru</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>did[call_limit]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>did[comment]</td>
+	<td>asd</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>did[language]</td>
+	<td>ru</td>
+</tr>
+<!--===RESERVE DID===-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reserve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Make DID free']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<!--==ASSIGN DID TO DIAL PLAN===-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID assigned to Dial Plan: Quick Forward DIDs DP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_language</td>
+	<td>eng</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_call_limit</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_comment</td>
+	<td>ver</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Details changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>did_language</td>
+	<td>eng</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>did_call_limit</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>did_comment</td>
+	<td>ver</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>s_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Make DID free']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<!--==TERMINATE DID==-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Terminate']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID terminated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<!--===create a range of dids==-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>37067531050</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>37067531059</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID interval was successfully created</td>
+	<td></td>
+</tr>
+<!--===rates====-->
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/index/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Edit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=did_rate_end_time</td>
+	<td>23:59:59</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_rate</td>
+	<td>1.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_connection_fee</td>
+	<td>2.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_increment_s</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_min_time</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_1</td>
+	<td>1.1000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=connection_fee_1</td>
+	<td>2.2000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=increment_s_1</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=min_time_1</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=did_rate_rate</td>
+	<td>1.1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=did_rate_connection_fee</td>
+	<td>2.2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=did_rate_increment_s</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=did_rate_min_time</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_rate</td>
+	<td>1.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_connection_fee</td>
+	<td>1.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_increment_s</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_min_time</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=did_rate_rate</td>
+	<td>1.1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=did_rate_connection_fee</td>
+	<td>1.1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=did_rate_increment_s</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=did_rate_min_time</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_rate</td>
+	<td>1.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_connection_fee</td>
+	<td>2.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_increment_s</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_min_time</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate_3</td>
+	<td>1.1000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=connection_fee_3</td>
+	<td>2.2000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=increment_s_3</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=min_time_3</td>
+	<td>1.0000</td>
+</tr>
+<!--===BULK update===-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>37067531050</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>37067531059</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>did_action_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did[language]</td>
+	<td>ru</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Details changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reserve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Make DID free']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=language_4</td>
+	<td>ru</td>
+</tr>
+<!--Bulk editf-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>37067531050</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>37067531059</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>did_action_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>dids_action_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ok_button2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID terminated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Terminated</td>
+	<td></td>
+</tr>
+<!--==Test DID search===-->
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_did</td>
+	<td>37067531051</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_5</td>
+	<td>37067531051</td>
+</tr>
+<!--==DID device==-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Make DID free']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reserve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device_id</td>
+	<td>label=IAX2/1002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Details changed</td>
+	<td></td>
+</tr>
+<!--TESTING DID AS ACCOUNTANT-->
+<!--creating accountant group-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Make DID free']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>dsa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group was created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/1?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>manage_dids_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<!--Assigning accountant to group-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>address_email</td>
+	<td>asd@asd.lr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device_id</td>
+	<td>label=IAX2/1002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Assign']</td>
+	<td></td>
+</tr>
+<!--/billing/dids/list press on Search, select any user, press Search - make sure it works-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>s_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37067531050</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>37067531066</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>37067531056</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>37067531051</td>
+	<td></td>
+</tr>
+<!--testing dids as accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/dids_usage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Current DID Usage</td>
+	<td></td>
+</tr>
+<!--testing did search-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>s_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_4</td>
+	<td>37067531050</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_3</td>
+	<td>37067531066</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_8</td>
+	<td>37067531054</td>
+</tr>
+<!--search by did-->
+<tr>
+	<td>type</td>
+	<td>s_did</td>
+	<td>37067531050</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_4</td>
+	<td>37067531050</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>did_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>did_8</td>
+	<td></td>
+</tr>
+<!--search by provider-->
+<tr>
+	<td>type</td>
+	<td>s_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_provider</td>
+	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_4</td>
+	<td>37067531050</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_3</td>
+	<td>37067531066</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_8</td>
+	<td>37067531054</td>
+</tr>
+<!--search by language-->
+<tr>
+	<td>select</td>
+	<td>s_language</td>
+	<td>label=ru</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_4</td>
+	<td>37067531050</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_13</td>
+	<td>37067531059</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>did_3</td>
+	<td></td>
+</tr>
+<!--search by status free-->
+<tr>
+	<td>select</td>
+	<td>s_language</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_status</td>
+	<td>label=Free</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>did_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>did_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_3</td>
+	<td>37067531066</td>
+</tr>
+<!--search by status terminated-->
+<tr>
+	<td>select</td>
+	<td>s_language</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_status</td>
+	<td>label=Terminated</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>did_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>did_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_6</td>
+	<td>37067531052</td>
+</tr>
+<!--search by status active-->
+<tr>
+	<td>select</td>
+	<td>s_language</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_status</td>
+	<td>label=Active</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_7</td>
+	<td>37067531053</td>
+</tr>
+<!--search by user: admin-->
+<tr>
+	<td>select</td>
+	<td>s_status</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_language</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_user</td>
+	<td>label=System Admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_8</td>
+	<td>37067531054</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>did_4</td>
+	<td></td>
+</tr>
+<!--search by user: 101-->
+<tr>
+	<td>select</td>
+	<td>s_user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>waitForSelectOptions</td>
+	<td>s_device</td>
+	<td>All,IAX2/101,FAX/102,IAX2/1002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>did_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_4</td>
+	<td>37067531050</td>
+</tr>
+<!--search by device-->
+<tr>
+	<td>select</td>
+	<td>s_user</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>s_user</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_device</td>
+	<td>label=IAX2/1002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_4</td>
+	<td>37067531050</td>
+</tr>
+<!--...search by user device-->
+<tr>
+	<td>select</td>
+	<td>s_user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>waitForSelectOptions</td>
+	<td>s_device</td>
+	<td>All,IAX2/101,FAX/102,IAX2/1002</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_device</td>
+	<td>label=FAX/102</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>s_user</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>s_device</td>
+	<td>3</td>
+</tr>
+<!--Check if no crash when no param on confirm_did-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/confirm_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_user</td>
+	<td>label=All</td>
+</tr>
+<!--EDIT DID FOR REDIRECT ERROR-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_comment</td>
+	<td>asd</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Details changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Make DID free']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID assigned to Dial Plan: Quick Forward DIDs DP</td>
+	<td></td>
+</tr>
+<!--Check if user is not changet when editing DID-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Make DID free']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reserve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assigned to user: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_comment</td>
+	<td>test_did</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Details changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assigned to user: Test User #1</td>
+	<td></td>
+</tr>
+<!--Personal dids pagination-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>items_per_page</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/personal_dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=2</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_3</td>
+	<td>37067531066</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=did_8</td>
+	<td>37067531054</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=2</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_10</td>
+	<td>37067531056</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_13</td>
+	<td>37067531059</td>
+</tr>
+<!--create blank-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID was not created!</td>
+	<td></td>
+</tr>
+<!--server error-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_hostname</td>
+	<td>127.0.0.3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ip</td>
+	<td>127.0.0.3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_ssh_port</td>
+	<td>334</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>server_port</td>
+	<td>5063</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Make DID free']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID assigned to Dial Plan: Quick Forward DIDs DP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Make DID free']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<!--* Prevent nonexistent did rate editing-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit_rate/10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>DID rate edited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rate was not found</td>
+	<td></td>
+</tr>
+<!--* Prevent did rate editing without specified ID-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>DID rate edited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rate was not found</td>
+	<td></td>
+</tr>
+<!--* Check if we preserve did search options-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>s_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_provider</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_status</td>
+	<td>label=Terminated</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>s_status</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_user</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>s_device</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>delete_link_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_link_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<!--* preserve params if we go to another page and then back-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=s_status</td>
+	<td>Terminated</td>
+</tr>
+<!--* check with pagination-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>items_per_page</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=s_status</td>
+	<td>Terminated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list?page=2&amp;s_did=&amp;s_language=&amp;s_provider=&amp;s_status=terminated&amp;s_user=</td>
+	<td></td>
+</tr>
+<!--* in case we miss some parameters-->
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=s_status</td>
+	<td>Terminated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list?page=2&amp;s_language=&amp;s_provider=&amp;s_status=terminated&amp;s_user=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=s_status</td>
+	<td>Terminated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list?page=2&amp;s_status=terminated</td>
+	<td></td>
+</tr>
+<!--DID default language-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_did</td>
+	<td>3333333</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>did_language</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

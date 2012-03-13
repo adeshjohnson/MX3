@@ -1,0 +1,1312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://trunk" />
+<title>cli</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">cli</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Default User saved</td>
+	<td></td>
+</tr>
+<!--main window for cli-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>22222</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>22222</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comment</td>
+	<td>22222</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>222223</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>email_callback</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>banned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI deleted: 222223</td>
+	<td></td>
+</tr>
+<!--manage cli for some users device-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_clis/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>3333</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>3333</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>email_callback</td>
+	<td>label=Use for Email Callback</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>banned</td>
+	<td>label=Banned</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comment</td>
+	<td>3333</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Check']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>33334</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>33334</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comment</td>
+	<td>33334</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>email_callback</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>banned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI deleted: 33334</td>
+	<td></td>
+</tr>
+<!--manage own cli-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>55555</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>55555</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comment</td>
+	<td>55555</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>email_callback</td>
+	<td>label=Use for Email Callback</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>555556</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>555556</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comment</td>
+	<td>555556</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>email_callback</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>banned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI deleted: 555556</td>
+	<td></td>
+</tr>
+<!--login as reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>login_username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Default User saved</td>
+	<td></td>
+</tr>
+<!--manage cli for some of users device-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_clis/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>1111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>1111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comment</td>
+	<td>1111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>11112</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>11112</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comment</td>
+	<td>11112</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>email_callback</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI deleted: 11112</td>
+	<td></td>
+</tr>
+<!--manage own device for reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>2222</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>2222</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>email_callback</td>
+	<td>label=Use for Email Callback</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comment</td>
+	<td>2222</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>22223</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>222233</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>email_callback</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI deleted: 22223</td>
+	<td></td>
+</tr>
+<!--login as simple user 101-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>login_username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--manage his own cli-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>2222</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>2222</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>email_callback</td>
+	<td>label=Use for Email Callback</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>comment</td>
+	<td>2222</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>22223</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>222233</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>email_callback</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=IAX2/101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>device_description</td>
+	<td>Test Device #1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI deleted: 22223</td>
+	<td></td>
+</tr>
+<!--signup-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/signup_start/hfttv7bcqt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>cli_test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password2</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>first_name</td>
+	<td>cli_test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>last_name</td>
+	<td>cli_test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>vat_number</td>
+	<td>cli_test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>client_id</td>
+	<td>cli_test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>address</td>
+	<td>cli_test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>state</td>
+	<td>cli_test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>county</td>
+	<td>cli_test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>city</td>
+	<td>cli_test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>postcode</td>
+	<td>cli_test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>phone</td>
+	<td>370006</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>mob_phone</td>
+	<td>+37000688888</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>fax</td>
+	<td>123456789</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email</td>
+	<td>test3241234@kolm1234123isoft.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Registration succesful</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=here</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_clis/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>cli_7</td>
+	<td>37000688888</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>cli_8</td>
+	<td>370006</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>cli_9</td>
+	<td>123456789</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>description_7</td>
+	<td>Mobile Phone</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>description_8</td>
+	<td>Phone</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>description_9</td>
+	<td>Fax</td>
+</tr>
+<!--* trying to delete nonexistent cli device-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_delete/9999</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CallerID not found</td>
+	<td></td>
+</tr>
+<!--Verify that reseller cannot delete Admins CLI-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_device_delete/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/change_email_callback_status_device/9?device_id=5&amp;email_callback=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_clis/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>cli_9</td>
+	<td>123456789</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>calback_9</td>
+	<td></td>
+</tr>
+<!--* validate CLI uniqueness-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>37000688888</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=System Admin</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Such CLI exists</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>370006</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Such CLI exists</td>
+	<td></td>
+</tr>
+<!--* user's cli uniqueness-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>22222</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>orig</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>22222</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>duplicate</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Such CLI exists</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>22223</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>some other cli</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_user_edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>22222</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--* device clis uniquness-->
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>22222</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>Dupe</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Such CLI exists</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td>370006</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Such CLI exists</td>
+	<td></td>
+</tr>
+<!--* validate CLI uniqueness on registration (phone)-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/signup_start/hfttv7bcqt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>cli_test11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password2</td>
+	<td>cli_test11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>first_name</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>last_name</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>vat_number</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>client_id</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>address</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>state</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>county</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>city</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>postcode</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>phone</td>
+	<td>370006</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email</td>
+	<td>tes12341234t@kol23451g5misoft.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User with such phone number already exists</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>phone</td>
+	<td>3700061</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>mob_phone</td>
+	<td>37000688888</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User with such mobile phone number already exists</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>phone</td>
+	<td>3700061</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>mob_phone</td>
+	<td>37000688889</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>fax</td>
+	<td>123456789</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User with such fax number already exists</td>
+	<td></td>
+</tr>
+<!--Check if unable to save empty CLI.-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CLI was not created</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

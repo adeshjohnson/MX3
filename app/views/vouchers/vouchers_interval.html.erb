@@ -1,0 +1,22 @@
+<b><%= _('Vouchers_tag_interval') %>: <%= @tag.to_s %> </b><br/>
+<b><%= _('Credit_between') %>: <%= @credit_min.to_s %> - <%= @credit_max.to_s %> </b><br/>
+<b><%= _('Active') %>:  <%= @active.to_s %>  </b><br/>
+<b><%= _('Active_till') %>:  <%= nice_date_time(@atill.to_time) if !@atill.to_s.blank?%>  </b><br/>
+<%if @vouchers%>
+  <%= _('Vouchers_quantity')%>:<%= @vouchers.size.to_i %>
+<%else%>
+  <%= _('Vouchers_quantity')%>: 0
+<%end%>
+<br/>
+<br/>
+<%if @action.to_s == 'delete'%>
+  <%= form_tag(:action => 'voucher_delete', :interval =>1) do %>
+    <p><%= submit_tag _('OK') , :disable_with=>_('Processing..')%></p>
+  <% end %>
+<%end%>
+
+<%if @action.to_s != 'delete'%>
+  <%= form_tag(:action => 'voucher_active', :interval =>1, :vaction=>@action) do %>
+    <p><%= submit_tag _('OK'), :disable_with=>_('Processing..') %></p>
+  <% end %>
+<%end%>

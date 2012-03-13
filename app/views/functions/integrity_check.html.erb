@@ -1,0 +1,49 @@
+<% row_count = 0%>
+<br />
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Name') %></th> 
+    <th align="left"></th> 
+    <th align="left"></th>
+  </tr>
+
+  <tr <%= @destinations_without_dg.size > 0 ? "class='red'" : "class='row#{row_count%2+1}'"%> >
+    <td align="left" id="destinations_without_dg">        <%= _('Destinations_without_Destination_Groups') %> </td>
+    <td align="right" id="destinations_without_dg_size">        <%= @destinations_without_dg.size %> </td>
+    <td align="center" id="fix_dest">        <%= link_to b_fix + _('Fix'), :controller => "destination_groups", :action => "destinations_to_dg" if @destinations_without_dg.size > 0 %> </td>
+  </tr>
+  <% row_count+=1%>
+
+  <tr <%= @dialplans.size > 0 ? "class='red'" : "class='row#{row_count%2+1}'"%> >
+    <td align="left" id="dialplans_not_updated">        <%= _('Dialplans_Not_Updated') %> </td>
+    <td align="right" id="dialplans_not_updated_size">        <%= @dialplans.size %> </td>
+    <td align="center" id="fix_dialpl">        <%= link_to b_fix + _('Fix'), :controller => "dids", :action => "reformat_dialplans" if @dialplans.size > 0 %> </td>
+  </tr>
+  <tr <%= @actions.size > 0 ? "class='red'" : "class='row#{row_count%2+1}'"%> >
+    <td align="left" id="actions_errors">        <%= _('Actions_errors') %> </td>
+    <td align="right" id="actions_errors_size">        <%= @actions.size %> </td>
+    <td align="center" id="fix_actions">        <%= link_to b_fix + _('Fix'), :controller => "stats", :action => "action_log", :s_int_ch => 1 if @actions.size > 0 %> </td>
+  </tr>
+  <tr <%= @devices.size > 0 ? "class='red'" : "class='row#{row_count%2+1}'"%> >
+    <td align="left" id="devices_with_weak_password">        <%= _('Devices_with_weak_password') %> </td>
+    <td align="right" id="devices_with_weak_password_size">        <%= @devices.size %> </td>
+    <td align="center" id="fix_devices">        <%= link_to b_fix + _('Fix'), :controller => "devices", :action => "devices_weak_passwords" if @devices.size > 0 %> </td>
+  </tr>
+  <tr <%= @users.size > 0 ? "class='red'" : "class='row#{row_count%2+1}'"%> >
+    <td align="left" id="users_with_weak_password">        <%= _('Users_with_weak_password') %> </td>
+    <td align="right" id="users_with_weak_password_size">        <%= @users.size %> </td>
+    <td align="center" id="fix_devices">        <%= link_to b_fix + _('Fix'), :controller => "users", :action => "users_weak_passwords" if @users.size > 0 %> </td>
+  </tr>
+  <% if @default_user_warning %>
+    <tr class='red'>
+      <td align="left" id="default_user_warning">  <%= _('Default_user_warning') %>: <%= _('Default_user_is_set_to_postpaid_and_allowed_loss_calls') %></td>
+      <td align="right" id="default_user_warning_size">  <%= @default_users_erors.size.to_i %></td>
+      <td align="center" id="fix_default_user"> <%= link_to b_fix + _('Fix'), :controller => "users", :action => "default_user_errors_list" %> </td>
+    </tr>
+  <% end %>
+  <tr <%= @users_postpaid_and_loss_calls.size > 0 ? "class='red'" : "class='row#{row_count%2+1}'"%> >
+    <td align="left" id="allow_loss_calls">        <%= _('User_is_set_to_postpaid_and_allowed_loss_calls') %> </td>
+    <td align="right" id="pospaid_and_loss_calls_size">        <%= @users_postpaid_and_loss_calls.size %> </td>
+    <td align="center" id="fix_devices">        <%= link_to b_fix + _('Fix'), :controller => "users", :action => "users_postpaid_and_allowed_loss_calls" if @users_postpaid_and_loss_calls.size > 0 %> </td>
+  </tr>
+</table>

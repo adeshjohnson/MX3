@@ -1,0 +1,1026 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>resellers_call_tracing</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">resellers_call_tracing</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ratedetail_rate</td>
+	<td>0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate1</td>
+	<td>0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate2</td>
+	<td>0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate473</td>
+	<td>0.2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=th &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_postpaid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_blocked_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Lightning']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title_icon</td>
+	<td>Call Tracing</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ERROR! Call cannot be made. Please check for errors!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>blocked</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td[@id='usertype_status']/img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td[@id='total_rates_status']/img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td[@id='total_devices_status']/img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td[@id='blocket_status']/img[@alt='Cross']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>usertype</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_rates</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_devices</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>blocket_explanation</td>
+	<td>User will not be able to dial-out because he is blocked</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>usertype_explanation</td>
+	<td>Prepaid user's balance should be greater then 0 to allow him to dial-out</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_rates_explanation</td>
+	<td>User's tariff has no rates - no calls are possible</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_devices_explanation</td>
+	<td>User has no devices. He will not be able to dial out.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff</td>
+	<td>tariff</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_type</td>
+	<td>Retail</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>balance</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_blocked_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_postpaid_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Lightning']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>blocked</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td[@id='blocket_status']/img[@alt='Check']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>blocket_explanation</td>
+	<td>User will not be able to dial-out because he is blocked</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>usertype</td>
+	<td>Postpaid</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>usertype_explanation</td>
+	<td>Prepaid user's balance should be greater then 0 to allow him to dial-out</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#total_rates_status &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#total_devices_status &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>ERROR! Call cannot be made. Please check for errors!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>Device_for_resellers_user</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_iax2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Lightning']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_devices</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td[@id='total_devices_status']/img[@alt='Check']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>total_devices_explanation</td>
+	<td>User has no devices. He will not be able to dial out.</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>ERROR! Call cannot be made. Please check for errors!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate473</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=unlimited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=unlimited</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Lightning']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_rates</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td[@id='total_devices_status']/img[@alt='Check']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>total_rates_explanation</td>
+	<td>User's tariff has no rates - no calls are possible</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status2</td>
+	<td>Everything is OK for now. Please select other details to proceed</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device</td>
+	<td>IAX2/1001</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>destination</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_from_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_from_minute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>93909876</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_hour</td>
+	<td>label=02</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_minute</td>
+	<td>label=02</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device</td>
+	<td>IAX2/1001</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dest</td>
+	<td>93909876</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>call_time</td>
+	<td>2010-02-01 02:02:00 (Work Day)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>location</td>
+	<td>Default location</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>localized_destination</td>
+	<td>93909876</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>direction</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_5</td>
+	<td>tariff/Retail</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>currency_5</td>
+	<td>USD (1.0000)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prefix_5</td>
+	<td>9390</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>destination_group_5</td>
+	<td>Afghanistan NGN</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>start_time</td>
+	<td>00:00:00-23:59:59</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>afrom</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>adur</td>
+	<td>∞</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>atype</td>
+	<td>minute</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>around</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>10.000000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>These rates will be used to calculate call price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No custom rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>own_providers</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call Tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=User Resellers (5)</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>commit</td>
+	<td>Proceed</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title</td>
+	<td>Call Tracing</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tariff_name</td>
+	<td>provider-tariff</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tariff[purpose]_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_2</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lcr_name</td>
+	<td>re_lcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[tech]_iax2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_tariff_id</td>
+	<td>provider-tariff</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>select_prov</td>
+	<td>label=provider - IAX2/0.0.0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/details_by_destinations/2?no_direction=true</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new destinations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>country</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>country</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>pre</td>
+	<td>93 - FIX Afghanistan proper</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='new_provider']/table/tbody/tr[2]/td[3]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Lightning']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>status2</td>
+	<td>Everything is OK for now. Please select other details to proceed</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device</td>
+	<td>IAX2/1001</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>destination</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_from_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_from_minute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>93909876</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_hour</td>
+	<td>label=02</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_minute</td>
+	<td>label=02</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device</td>
+	<td>IAX2/1001</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dest</td>
+	<td>93909876</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>call_time</td>
+	<td>2010-02-01 02:02:00 (Work Day)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>location</td>
+	<td>Default location</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>localized_destination</td>
+	<td>93909876</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>direction</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_5</td>
+	<td>tariff/Retail</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>currency_5</td>
+	<td>USD (1.0000)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prefix_5</td>
+	<td>9390</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>destination_group_5</td>
+	<td>Afghanistan NGN</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>start_time</td>
+	<td>00:00:00-23:59:59</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>afrom</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>adur</td>
+	<td>∞</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>atype</td>
+	<td>minute</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>around</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price</td>
+	<td>10.000000</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>5.000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>These rates will be used to calculate call price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No custom rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

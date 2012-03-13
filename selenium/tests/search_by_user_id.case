@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.163" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--open users list and check-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_0</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_4</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_3</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_2</td>
+	<td>Test User #1</td>
+</tr>
+<!--search admin-->
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_id</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_0</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_4</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_3</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_2</td>
+	<td>Test User #1</td>
+</tr>
+<!--search something-->
+<tr>
+	<td>type</td>
+	<td>s_id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_0</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_4</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_3</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_2</td>
+	<td>Test User #1</td>
+</tr>
+<!--search 101-->
+<tr>
+	<td>type</td>
+	<td>s_id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_0</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_4</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_3</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_2</td>
+	<td>Test User #1</td>
+</tr>
+<!--search reseller-->
+<tr>
+	<td>type</td>
+	<td>s_id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_0</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_4</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_3</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_2</td>
+	<td>Test User #1</td>
+</tr>
+<!--search accountant-->
+<tr>
+	<td>type</td>
+	<td>s_id</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_0</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_4</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_3</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_2</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--open users list and check-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>aaaaaa1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>bbbbbb</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>bbbbbb1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>cccccc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>cccccc1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--open users list and check-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_6</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_7</td>
+	<td>bbbbbb</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_8</td>
+	<td>cccccc</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_5</td>
+	<td>User Resellers</td>
+</tr>
+<!--search aaaaaa-->
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>s_id</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_6</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_7</td>
+	<td>bbbbbb</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_8</td>
+	<td>cccccc</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_5</td>
+	<td>User Resellers</td>
+</tr>
+<!--search something-->
+<tr>
+	<td>type</td>
+	<td>s_id</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_6</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_7</td>
+	<td>bbbbbb</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_8</td>
+	<td>cccccc</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_5</td>
+	<td>User Resellers</td>
+</tr>
+<!--search bbbbbb-->
+<tr>
+	<td>type</td>
+	<td>s_id</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_6</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_7</td>
+	<td>bbbbbb</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_8</td>
+	<td>cccccc</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_5</td>
+	<td>User Resellers</td>
+</tr>
+<!--search cccccc-->
+<tr>
+	<td>type</td>
+	<td>s_id</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_6</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_7</td>
+	<td>bbbbbb</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_8</td>
+	<td>cccccc</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_5</td>
+	<td>User Resellers</td>
+</tr>
+<!--search User Reseller-->
+<tr>
+	<td>type</td>
+	<td>s_id</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_6</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_7</td>
+	<td>bbbbbb</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>user_link_8</td>
+	<td>cccccc</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_link_5</td>
+	<td>User Resellers</td>
+</tr>
+</tbody></table>
+</body>
+</html>

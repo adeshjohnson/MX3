@@ -1,0 +1,16 @@
+<br />
+<%= form_tag :action => "create" do %>
+  <table class = "simpletable">
+    <tr>
+      <th><%= _("Short_Name") %>:</th>
+      <td><%= text_field_tag('ivr[voice]', "" , "class" => "input", :size => "35", :maxlength => "10" )%></td>
+    </tr>
+    <tr>
+      <th><%= _("Description") %>:</th>
+      <td><%= text_field_tag("ivr[description]", "" , "class" => "input", :size => "35", :maxlength => "255" )%></td>
+    </tr>
+  </table>
+  <br />
+  <%= submit_tag _('Create') , :disable_with=>_('Processing..')%>
+<% end %>
+<br />

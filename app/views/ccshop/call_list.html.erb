@@ -1,0 +1,67 @@
+<table width="100%">
+  <tr>
+    <td class="nb">
+      <%= _('total_calls') %>: <b><%= @calls.size %></b>
+  </td></tr>
+</table>
+<br>
+<% show_price = (Confline.get_value("CCShop_show_values_without_VAT_for_user").to_i == 1) %>
+<% if @calls.size > 0 %>
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="center">		  &nbsp;<%= _('date') %>	    </th>
+      <th align="left">		  <%= _('called_from') %>	    </th>
+      <th align="left">		  <%= _('called_to') %>	    </th>
+      <th align="left">		  <%= _('Destinations') %>	    </th>
+      <th align="left">		   <%= _('hangup_cause') %>	    </th>
+      <th align="center">
+        <% if @call_type != "missed" %>
+          <%= _('duration') %>
+        <% else %>
+          <%= _('holdtime')%>
+        <% end %>
+      </th>
+      <%  if show_price %>
+        <th align="right"> 		  <%= _('Price') %>    </th>
+      <%end%>
+      <th align="right"> <%= _('Price_with_VAT') %></th>
+    </tr>
+    <% @calls.each_with_index { |call, i| -%>
+      <% call.processed == 0 ? text_class="n" : text_class="n_disabled" -%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td class="<%= text_class %>" align="center"><%= h(call.calldate.strftime("%Y-%m-%d %H:%M:%S")) %></td>
+        <td class="<%= text_class %>"><%= h(call.clid) %></td>
+        <td class="<%= text_class %>"><%= h(call.localized_dst) %></td>
+        <% dest = Destination.find(:first, :conditions => ["prefix = ?", call.prefix]) %>
+        <td class="<%= text_class %>">
+          <% if dest %>
+            <%= dest.direction.name if dest.direction %>  <%= dest.subcode %> <%= dest.name %>
+          <% end %>
+        </td>
+        <td class="<%= text_class %>"  align="left"><%= call.disposition %></td>
+        <td class="<%= text_class %>" align="center"><%= nice_time call.billsec %></td>
+        <%if show_price %>
+          <td class="<%= text_class %>" align="right"><%= nice_number(call.user_price) %></td>
+        <% end %>
+        <td class="<%= text_class %>" align="right"><%= nice_number(call.user_price.to_f + @cg.get_tax.count_tax_amount(call.user_price.to_f)) %></td>
+      </tr>
+    <% } %>
+    <tr>
+      <th align="left">		  &nbsp;<%= _('Total') %>:	    </th>
+      <th>    </th>
+      <th>    </th>
+      <th>    </th>
+      <th align="right">	</th>
+      <th align="center">
+        <%= nice_time @total_billsec %>
+      </th>
+      <%if confline("CCShop_show_values_without_VAT_for_user").to_i == 1%>
+        <th align="right"> <%= @total_price %>	</th>
+      <%end%>
+      <th align="right"> <%= @total_price_with_vat %>	</th>
+    </tr>
+  </table>
+<% else %>
+  <%= _('you_have_no_calls') %>
+<% end%>
+

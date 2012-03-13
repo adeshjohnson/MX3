@@ -1,0 +1,1675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>flatrate</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">flatrate</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Set settings for invoice generation.-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_number_start</td>
+	<td>INV</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>invoice_number_length</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_number_type_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prepaid_invoice_number_start</td>
+	<td>INV</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prepaid_invoice_number_length</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>prepaid_invoice_number_type_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--Create service and assign destinations-->
+<!--Test with errors.-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>service_servicetype_flat_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_quantity</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Service must have name</td>
+	<td></td>
+</tr>
+<!--///// TODO  test with more errors-->
+<!--With good data-->
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>Test_flatrate</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>service_servicetype_flat_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_quantity</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Service was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test_flatrate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>servicetype_2</td>
+	<td>Flat-Rate</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>20.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<!--Try to open non exsisting destination-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/destinations/888888</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Service not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/destinations/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>search_1</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Lithuania FIX Lithuania proper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>prefix_find_submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Flat-Rate Destination created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new destinations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>search_1</td>
+	<td>3706</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Lithuania MOB Lithuania mobile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>enabled_1</td>
+	<td>label=Exclude</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>prefix_find_submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Flat-Rate Destination created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new destinations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>search_1</td>
+	<td>37065</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Lithuania MOB Lithuania mobile-Bite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>prefix_find_submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Flat-Rate Destination created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new destinations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Lithuania</td>
+</tr>
+<tr>
+	<td>waitForSelectedValue</td>
+	<td>pre</td>
+	<td>3708</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>enabled</td>
+	<td>label=Include</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>pre</td>
+	<td>label=37037 - FIX Lithuania Kaunas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>country_find_submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Flat-Rate Destination created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dest_prefix_3</td>
+	<td>37037</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dest_name_3</td>
+	<td>Lithuania Kaunas</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>flat_dest_active_3</td>
+	<td>Included</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new destinations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Lithuania</td>
+</tr>
+<tr>
+	<td>waitForSelectedValue</td>
+	<td>pre</td>
+	<td>3708</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>enabled</td>
+	<td>label=Exclude</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>pre</td>
+	<td>label=370462 - FIX Lithuania Klaipeda</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>country_find_submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Flat-Rate Destination created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dest_prefix_4</td>
+	<td>370462</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dest_name_4</td>
+	<td>Lithuania Klaipeda</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>flat_dest_active_4</td>
+	<td>Excluded</td>
+</tr>
+<!--check pop up-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/destination_prefixes/2?direction=LTU</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Service: Test_flatrate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Lithuania Special Services</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>370</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>37065</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>37064</td>
+	<td></td>
+</tr>
+<!--Test Services CRUD-->
+<!--...Create-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New service</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>Crud_service</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>service_servicetype_flat_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_quantity</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Service was successfully created</td>
+	<td></td>
+</tr>
+<!--...Read-->
+<tr>
+	<td>verifyText</td>
+	<td>name_3</td>
+	<td>Crud_service</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>servicetype_3</td>
+	<td>Flat-Rate</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_3</td>
+	<td>11.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>quantity_3</td>
+	<td>22</td>
+</tr>
+<!--...Update-->
+<tr>
+	<td>clickAndWait</td>
+	<td>edit_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>Updated_Crud_service</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_quantity</td>
+	<td>222</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Service was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_3</td>
+	<td>Updated_Crud_service</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>servicetype_3</td>
+	<td>Flat-Rate</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>price_3</td>
+	<td>111.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>quantity_3</td>
+	<td>222</td>
+</tr>
+<!--...Delete-->
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Service deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<!--Assign flatrate to user-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>subscriptions_link_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>add_subscription</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>subscription_memo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>subscription_memo</td>
+	<td>Test flatrate memo.</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>subscription_service_id</td>
+	<td>label=Test_flatrate, Price: 20.0</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_month</td>
+	<td>label=May</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_day</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_day</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Subscription CRUD-->
+<!--...Create-->
+<tr>
+	<td>clickAndWait</td>
+	<td>add_subscription</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>subscription_service_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>subscription_service_id</td>
+	<td>label=Test_periodic_service, Price: 10.0</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>subscription_service_id</td>
+	<td>label=Test_flatrate, Price: 20.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>subscription_memo</td>
+	<td>Crud memo</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_start_day</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_day</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--...Read-->
+<tr>
+	<td>verifyText</td>
+	<td>service_name_link_3</td>
+	<td>Test_flatrate</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>memo_3</td>
+	<td>Crud memo</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>activation_start_3</td>
+	<td>2009-06-01 00:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>service_price_3</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>activation_end_3</td>
+	<td>2009-06-30 23:59:59</td>
+</tr>
+<!--...Update-->
+<tr>
+	<td>clickAndWait</td>
+	<td>edit_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>memo</td>
+	<td>Updated Crud memo</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_end_year</td>
+	<td>label=2021</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_month</td>
+	<td>label=July</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_day</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>memo_3</td>
+	<td>Updated Crud memo</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>activation_end_3</td>
+	<td>2021-07-31 23:59:59</td>
+</tr>
+<!--...Delete-->
+<tr>
+	<td>clickAndWait</td>
+	<td>destroy_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>delete_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Subscription deleted</td>
+	<td></td>
+</tr>
+<!--Invoice generation for postpaid user-->
+<!--...Less than 1 month-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link_generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<!--...1 month-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link_generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=30</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<!--...More than 1 month-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link_generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=May</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<!--...Verify invoices-->
+<!--......Less than 1 month-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_name_2</td>
+	<td>Test_flatrate - Test flatrate memo.</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id_quantity_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_price_2</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_total_price_2</td>
+	<td>20.0000</td>
+</tr>
+<!--......1 month-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_name_4</td>
+	<td>Test_flatrate - Test flatrate memo.</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id_quantity_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_price_4</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_total_price_4</td>
+	<td>20.0000</td>
+</tr>
+<!--......More than 1 month-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_name_6</td>
+	<td>Test_flatrate - Test flatrate memo.</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id_quantity_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_price_6</td>
+	<td>40.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_total_price_6</td>
+	<td>40.0000</td>
+</tr>
+<!--When user is prepaid-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>edit_link_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_postpaid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User's settings succesfully changed: Test User #1</td>
+	<td></td>
+</tr>
+<!--delete-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invoice deleted: INV000001</td>
+	<td></td>
+</tr>
+<!--Invoice generation for prepaid user-->
+<!--...Less than 1 month-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link_generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<!--delete-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invoice deleted: INV000002</td>
+	<td></td>
+</tr>
+<!--...1 month-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link_generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=30</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<!--delete-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invoice deleted: INV000003</td>
+	<td></td>
+</tr>
+<!--...More than 1 month-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link_generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=May</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<!--...Verify invoices-->
+<!--......Less than 1 month-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_name_8</td>
+	<td>Test_flatrate - Test flatrate memo.</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id_quantity_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_price_8</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_total_price_8</td>
+	<td>20.0000</td>
+</tr>
+<!--......1 month-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_name_10</td>
+	<td>Test_flatrate - Test flatrate memo.</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id_quantity_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_price_10</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_total_price_10</td>
+	<td>20.0000</td>
+</tr>
+<!--......More than 1 month-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_name_12</td>
+	<td>Test_flatrate - Test flatrate memo.</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id_quantity_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_price_12</td>
+	<td>40.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id_total_price_12</td>
+	<td>40.0000</td>
+</tr>
+<!--Test if time left is displayed correctly-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>getEval</td>
+	<td>selenium.browserbot.getCurrentWindow().document.getElementById('activation_end_year').selectedIndex = 4;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>getEval</td>
+	<td>selenium.browserbot.getCurrentWindow().document.getElementById('activation_end_month').selectedIndex = 11;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>time_left_2</td>
+	<td>950</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>time_left_2</td>
+	<td>950</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions_list/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>time_left_2</td>
+	<td>950</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/user_subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>time_left_2</td>
+	<td>950</td>
+</tr>
+<!--===security===-->
+<!--101-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!--reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title_icon</td>
+	<td>Subscriptions</td>
+</tr>
+<!--accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!--Test if no error when destination is deleted.-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/destinations/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new destinations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>search_1</td>
+	<td>1242557</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>results</td>
+	<td>Bahamas MOB Bahamas mobile</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>prefix_find_submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Flat-Rate Destination created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dest_prefix_5</td>
+	<td>1242557</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/destroy/390</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Direction not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/list/16?page=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/destinations/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>dest_prefix_5</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

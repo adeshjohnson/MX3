@@ -1,0 +1,15 @@
+<table class = "maintable">
+  <tr>
+    <th><%= _('Translation_Code') %></th>
+    <th><%= _('From_File') %></th>
+  </tr>
+  <% for str in @new_lang do%>
+  <tr>
+    <td>l.store '<%= str %>', ''</td>
+    <td><%= File.expand_path(@files[str].to_s) if @files[str] %></td>
+  </tr>
+  <% end %>
+</table>
+<% for str in @new_lang do%>
+  l.store '<%= str %>', '<%= str.gsub('_', ' ') %>' <br />
+  <% end %>

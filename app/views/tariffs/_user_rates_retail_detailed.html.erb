@@ -1,0 +1,29 @@
+<% view = b_view%>
+
+<%= render :partial => 'letter_select_header' %>
+<br>
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('Name') %></th>
+    <th align="left"><%= _('Type') %></th>
+    <th align="center"><%= _('Destinations') %></th>
+    <th align="center"><%= _('Rate') %>s (<%= session[:show_currency]%>)</th>
+  </tr>
+  <% @dgroups.each_with_index { |dg, i| %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <% arates_size = Aratedetail.count(
+        :joins =>"LEFT JOIN (rates) ON rates.id = aratedetails.rate_id",
+        :conditions =>["rates.tariff_id = ? AND rates.destinationgroup_id = ?",@tariff.id, dg.id ] )
+      if arates_size == 0
+        arates_size = Acustratedetail.count(
+          :joins => "LEFT JOIN customrates ON (customrates.id = acustratedetails.customrate_id)",
+          :conditions => ["customrates.user_id = ? AND customrates.destinationgroup_id = ?",session[:user_id], dg.id])
+      end %>
+      <td><%= draw_flag_by_code(dg.flag) %>&nbsp;<%=h(dg.name) %></td>
+      <td><%=h(dg.desttype) %></td>
+      <td id="view_img_<%=dg.id.to_s%>" align="center"><%= link_to(view + _('View'), {:controller => :destination_groups, :action => :dg_list_user_destinations, :id => dg.id}, {:popup => true}) %></td>
+      <td id="details_img_<%=dg.id.to_s%>" align="center"><%= link_to(view + _('Details'), {:action => 'user_rates_detailed', :id => dg.id}) if arates_size > 0%></td>
+    </tr>
+  <% } %>
+</table>
+<%= render :partial => 'letter_select_header' %>

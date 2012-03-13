@@ -1,0 +1,25 @@
+<%= form_tag :action => :create do %>
+  <%= hidden_field_tag(:group_type, params[:group_type] )  %>
+  <table class='maintable' width="100%">
+    <tr>
+      <th align="left"><%= _('Name')%></th>
+      <th align="left"><%= _('Description')%></th>
+      <th align="center"></th>
+      <th align="center"></th>
+    </tr>
+    <% @groups.each_with_index { |group, i|%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="name_<%= group.id %>" align="left"><%= h group.name %></td>
+        <td id="description_<%= group.id %>" align="left" <%= tooltip(_('Description'), h(group.description.to_s)) %> ><%= h group.description.to_s[0..30] %></td>
+        <td id="edit_<%= group.id %>" align="center"><%= link_to(b_edit, {:action => 'edit', :id => group.id, :group_type=> params[:group_type]}, {:id => "edit_link_" + group.id.to_s}) %></td>
+        <td id="delete_<%= group.id %>" align="center"><%= link_to(b_delete, { :action => 'destory', :id => group.id, :group_type=> params[:group_type]}, {:confirm => _('Are_you_sure'), :id => "delete_link_" + group.id.to_s}) %></td>
+      </tr>
+    <% } %>
+    <tr>
+      <th align="left"><%= text_field_tag("name", ""  , "class" => "input", :maxlength => "255" ) %></th>
+      <th align="left"><%= text_field_tag("description", ""  , "class" => "input", :maxlength => "555") %></th>
+      <th align="center"></th>
+      <th align="center"><%= image_submit_tag 'icons/add.png', :title => _('Create_Group') %></th>
+    </tr>
+  </table>
+<% end %>

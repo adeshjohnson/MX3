@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>location_rules</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">location_rules</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tariff</td>
+	<td>label=Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>lcr</td>
+	<td>label=Primary</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<!--duplicate add-->
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tariff</td>
+	<td>label=Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>lcr</td>
+	<td>label=Primary</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rule was not created</td>
+	<td></td>
+</tr>
+<!---------->
+<tr>
+	<td>verifyText</td>
+	<td>name_2</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>cut_2</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>add_2</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>maxlen_2</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>tariff_2</td>
+	<td>Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>lcr_2</td>
+	<td>Primary</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>enable_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>enable_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rule disabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>enable_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rule enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='edit_2']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tariff</td>
+	<td>label=Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<!----------------->
+<!--dup edit-->
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test4534</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>234636</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>3461234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>124634</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>123466</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tariff</td>
+	<td>label=Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>lcr</td>
+	<td>label=Primary</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='edit_3']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tariff</td>
+	<td>label=Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rule was not updated</td>
+	<td></td>
+</tr>
+<!------------------->
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rule deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>delete_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_add?lr_type=dst</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>test3</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Location not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/localization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test_location</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tariff</td>
+	<td>label=Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>lcr</td>
+	<td>label=Primary</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tariff</td>
+	<td>label=Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>lcr</td>
+	<td>label=Primary</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rule was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>minlen</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>maxlen</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tariff</td>
+	<td>label=Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>lcr</td>
+	<td>label=Primary</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='edit_5']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name_5</td>
+	<td>test2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.forms[3].elements[1]</td>
+	<td>test3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.forms[3].elements[2]</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.forms[3].elements[3]</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.forms[3].elements[4]</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.forms[3].elements[5]</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//th[7]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.forms[4].elements[1]</td>
+	<td>test4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.forms[4].elements[2]</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.forms[4].elements[3]</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.forms[4].elements[4]</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.forms[4].elements[5]</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//th[7]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule must be unique</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.forms[4].elements[1]</td>
+	<td>test5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//th[7]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cut and Add cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>test6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cut and Add cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/252</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ratedetail_rate</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>test3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cut</td>
+	<td>5678</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=add</td>
+	<td>93</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=minlen</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=maxlen</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tariff</td>
+	<td>label=Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id_2</td>
+	<td>label=IAX2/1002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=owner_7</td>
+	<td>IAX2/1002</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_secret</td>
+	<td>103szdxfcg bhjjnk</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_devices/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=select_location_id_5</td>
+	<td>label=test_location</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device location changed and moved to another group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination</td>
+	<td>567822345678</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=location</td>
+	<td>test_location</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=applied_rule</td>
+	<td>test3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=cut</td>
+	<td>5678</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=add</td>
+	<td>93</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=localized_destination</td>
+	<td>9322345678</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=direction</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=direction_group</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_changed_from</td>
+	<td>Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=device_changed_from</td>
+	<td>IAX2/1002</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate</td>
+	<td>5.000000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=price_1</td>
+	<td>0.000000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tariff</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination</td>
+	<td>567822345678</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=location</td>
+	<td>test_location</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=applied_rule</td>
+	<td>test3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=cut</td>
+	<td>5678</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=add</td>
+	<td>93</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=localized_destination</td>
+	<td>9322345678</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=direction</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=direction_group</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=device_changed_from</td>
+	<td>IAX2/1002</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate</td>
+	<td>5.000000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=price_1</td>
+	<td>0.000000</td>
+</tr>
+</tbody></table>
+</body>
+</html>

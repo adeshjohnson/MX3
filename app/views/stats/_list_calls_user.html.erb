@@ -1,0 +1,107 @@
+<% if @calls.size > 0 %> 
+
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left">      &nbsp;<%= _('date') %>      </th>
+      <th align="left">      <%= _('called_from') %>      </th>
+      <th align="left">      <%= _('called_to') %>      </th>
+      <% if @show_destination %>
+        <th align="left">      <%= _('Destination') %>      </th>
+      <% end %>
+
+      <th align="center">
+        <%= _('duration') %>
+      </th>
+
+
+      <% if @call_type != "answered" %>
+        <th align="right"> <%= _('hangup_cause') %> </th>
+      <% end %>
+      <% if @user.show_billing_info == 1  and session[:usertype] == "user"  %>
+        <th align="right"> <%= _('Price') %> </th>
+      <% end %>
+    </tr>
+    <!-- Calls -->
+
+    <% @calls.each_with_index{ |call, i| %>
+      <% call.processed == 0 ? text_class="n" : text_class="n_disabled"%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="calldate_<%= call.id %>" class="<%= text_class %>"><%= nice_date_time(call.calldate) %></td>
+        <td id="src_<%= call.id %>" class="<%= text_class %>"><%= nice_src(call) %></td>
+        <td id="dst_<%= call.id %>" class="<%= text_class %>"><%= hide_dst_for_user(current_user, "gui", call.dst.to_s) %></td>
+        <% if @show_destination %>
+          <td id="dir_<%= call.id %>" class="<%= text_class %>">
+            <%= call.direction_name if call.direction_name %>
+            <% if call.destination_name.to_s.length > 0%>
+              &nbsp;&nbsp;
+              <%= call.destination_subcode %> <%= call.destination_name %>
+            <% end %>
+          </td>
+        <% end %>
+
+        <td id="billsec_<%= call.id %>" class="<%= text_class %>" align="center">
+          <%  if @direction == "incoming" %>
+            <%= nice_time(call.did_billsec.to_i) %>
+          <%  else %>
+            <%= nice_time(call.nice_billsec.to_i) %>
+          <%  end %>
+        </td>
+
+        <% if @call_type != "answered" %>
+          <td id="disposition_<%= call.id %>"><%= call.disposition %></td>
+        <% end %>
+
+        <% if session[:usertype] == "user" %>
+
+          <% if  @user.show_billing_info == 1 and call.disposition == "ANSWERED"%>
+            <% if @direction != "incoming"  %>
+              <td id="rate_<%= call.id %>" align="right">  <%= nice_number( @curr_rate[call.id]) %></td>
+            <% else %>
+              <td id="rate_<%= call.id %>" align="right">  <%= nice_number(@curr_rate2[call.id].to_f)%></td>
+            <% end %>
+          <% else %>
+            <td id="rate_<%= call.id %>" align="right"> <%= nice_number(0) %> </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% } %>
+
+
+
+    <!-- Totals -->
+
+    <tr>
+      <th align="left">      &nbsp;<%= _('Total') %>:      </th>
+      <th></th>
+      <th></th>
+      <% if @show_destination %>
+        <th align="left"></th>
+      <% end %>
+
+      <th id="total_duration" align="center">
+        <%= nice_time @total_billsec %>
+      </th>
+
+      <% if @call_type != "answered" %>
+        <th id="total_hangup" align="right">  </th>
+      <% end %>
+
+      <% if session[:usertype] == "user" %>
+        <% if @user.show_billing_info == 1 %>
+          <% if @direction == "incoming"  %>
+            <th id="total_price2" align="right"> <%= nice_number( @total_price2 ) %> </th>
+          <% else %>
+            <th id="total_price" align="right"> <%= nice_number( @total_price ) %> </th>
+          <% end%>
+        <% end %>
+      <% end %>
+
+    </tr>
+  </table>
+
+
+<% else %>
+  <br>
+  <%= _('No_calls') %>...
+<% end%>
+

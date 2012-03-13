@@ -1,0 +1,30 @@
+<% if @enabled == 1 and @user_enabled == 1 %>
+
+  <div align="right"><a href="http://www.cyberplat.ru" target="_blank"><%= image_tag("logo/cyberplat_logo.gif",  :style => 'border-style:none', :title => "Cyberplat") %></a></div>
+
+  <%= form_tag :action => 'cyberplat_pay', :id => params[:id] do %>
+      <%= radio_button_tag('cp_language', 'en', checked = true ) %> <%= _("English") %><br />
+      <%= radio_button_tag('cp_language', 'ru') %> <%= _("Russian") %><br />
+      <%= _('Please_enter_amount_to_update_your_balance') %>*: <%= text_field_tag 'amount', Confline.get_value("Cyberplat_Default_Amount", @user.owner_id), "class" => "input", :size => "8", :maxlength => "8"  %> <%= @currency %> 
+      <select name="user_currency" <%= "disabled" if @currencies.size < 1 %> > 
+        <% for curr in @currencies %>
+          <option value="<%= curr.name %>" <%= "selected" if @ppcurr == curr.name %>> <%= curr.name %> </option>
+        <% end %>
+      </select>
+      <br><br>
+      <%= submit_tag _('Confirm'), :disable_with=>_('Processing..') %>
+  <% end %>
+
+  <br>
+  <div class = "simple">*<%= _('Minimum_amount') %>: <%= nice_number Confline.get_value("Cyberplat_Min_Amount", @user.owner_id) %> 
+   </div>
+  <br />
+  <br />
+  <%= Confline.get_value2("Cyberplat_Crap", @user.owner_id)%>
+<% else %>
+  <% if @user_enabled == 0 and @enabled == 1 and !@disabled_message.empty? %>
+    <%= @disabled_message %>
+  <% else %>
+    <%=_('Cyberplat_disabled')%>
+  <% end %>
+<% end %>

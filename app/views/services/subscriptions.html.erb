@@ -1,0 +1,86 @@
+<table width="100%">
+  <tr>
+    <td align="right">
+      <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+    </td>
+  </tr>
+</table>
+<%= form_tag :action => 'subscriptions' do %>
+  <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+    <br />
+    <table width="100%" class="simple">
+      <tr>
+        <td>
+          <%= _('From') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+          &nbsp;&nbsp;<%= _('Till') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+          <%= _('Memo') %>: <%= text_field_tag 's_memo', @search_memo, "class" => "input", :size => "10", :maxlength => "30"  %>
+          <%=_('Service')%>:
+          <%= select_tag("s_service", options_for_select([[_('All'), -1]] + @services.map{|serv| [serv.name, serv.id]}, @search_service.to_i)) %>
+          <%= _('User') %>:
+          <select name="s_user" id="s_user" >
+            <option value="-1" <%= "selected" if @search_user == nil or (@search_user.to_i == -1) %>><%= _('All')%> </option>
+            <%for user in @users%>
+              <option value="<%= user.id %>" <%= "selected" if @search_user.to_i == user.id.to_i %>><%= link_nice_user(user)%> </option>
+            <% end %>
+          </select>
+          <%= observe_field("s_user", :frequency => 0.5, :update   => "user_devices", :url=> {:controller=>"devices", :action => "cli_user_devices" }, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
+
+          <%= "<div id = 'user_devices'>" %>
+          <%= "</div>" %>
+          <br />
+          <br />
+          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
+        </td>
+        <td align="right">
+          <%if @search == 1%>
+            <%= link_to b_cross + _('Clear_search'), :action => 'subscriptions'%>
+          <%end%>
+        </td>
+      </tr>
+    </table>
+    <br />
+  </div>
+<% end %>
+
+<% if @total_pages > 1 %>
+  <br />
+  <%= render :partial => "page_select_header" %>
+<% end %>
+
+<br />
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%=_('User')%></th>
+    <th align="left"><%=_('Device')%></th>
+    <th align="left"><%=_('Service')%></th>
+    <th align="center"><%=_('From')%></th>
+    <th align="center"><%=_('Till')%></th>
+    <th align="center"><%= _('Time_left')%></th>
+    <th align="left"><%=_('Memo')%></th>
+    <% if @allow_edit%>
+      <th></th>
+      <th></th>
+      <th></th>
+    <% end %>
+  </tr>
+  <% @subs.each_with_index{ |sub, i| %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <td id="user_<%= sub.id %>" align="left"><%= nice_user(sub)%></td>
+      <% if sub.device_id != nil %>
+        <td id="device_<%= sub.id %>" align="left"><%= nice_device(sub)%></td>
+      <%else%>
+        <td id="device_<%= sub.id %>"></td>
+      <%end%>
+      <td id="name_<%= sub.id %>" align="left"><%= sub.serv_name%></td>
+      <td id="activation_start_<%= sub.id %>" align="center"><%= nice_date_time sub.activation_start %></td>
+      <td id="activation_end_<%= sub.id %>" align="center"><%= nice_date_time sub.activation_end %></td>
+      <td id="time_left_<%= sub.id %>" align="right"> <%= sub.time_left if sub.service.servicetype == "flat_rate" %></td>
+      <td id="memo_<%= sub.id %>" align="left"> <%= sub.memo[0..50] if sub.memo%> </td>
+      <% if @allow_edit %>
+        <td id="subscriptions_<%= sub.id %>" align="center"><%= link_to b_subscriptions, :controller => 'services', :action => 'subscriptions_list', :id =>sub.user_id, :back=>"subscriptions", :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device=>@search_device, :s_date_from=> @search_date_from, :s_date_till=>@search_date_till, :page=>@page %></td>
+        <td id="edit_<%= sub.id %>" align="center"><%= link_to b_edit, :action => 'subscription_edit', :id => sub.id, :back=>"subscriptions", :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device=>@search_device, :s_date_from=> @search_date_from, :s_date_till=>@search_date_till, :page=>@page %></td>
+        <td id="delete_<%= sub.id %>" align="center"><%= link_to b_delete, { :action => 'subscription_confirm_destroy', :id => sub.id, :back=>"subscriptions", :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device=>@search_device, :s_date_from=> @search_date_from, :s_date_till=>@search_date_till, :page=>@page }%></td>
+      <% end %>
+    </tr>
+  <% } %>
+</table>

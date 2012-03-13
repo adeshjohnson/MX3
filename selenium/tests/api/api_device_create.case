@@ -1,0 +1,1444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>api_device_create</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">api_device_create</td></tr>
+</thead><tbody>
+<!--Login as administrator-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Enable MOR API-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Calculate hash and send device_create command with incorrect hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=accountant&amp;p=accountant1&amp;user_id=3&amp;description=desription1&amp;pin=4211113&amp;test=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=5&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c644000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--Send device_create command with correct hash.  invalid device group was specified, because theres still no shuch group. device shouldnt be created-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=5&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>77ad690270295ee5f8e1c4c7ec0deb0ea8a6789e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=5&amp;test=1&amp;hash=77ad690270295ee5f8e1c4c7ec0deb0ea8a6789e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device group invalid</td>
+	<td></td>
+</tr>
+<!--Try to create device with  invalid device group. device shouldnt be created-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=invalidine</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>34b79e8a4882f89efba393a0f0eb54f6d7391932</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=invalidine&amp;test=1&amp;hash=34b79e8a4882f89efba393a0f0eb54f6d7391932</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device group invalid</td>
+	<td></td>
+</tr>
+<!--Try to create device for user Test User #1 and specify gevice_group that is reseller's-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;description=desription1&amp;pin=12345&amp;devicegroup_id=asdafs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>63e9957670860e5fdd53ba4aa8032136d5fada2c</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;description=desription1&amp;pin=12345&amp;devicegroup_id=asdafs&amp;test=1&amp;hash=63e9957670860e5fdd53ba4aa8032136d5fada2c</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device group invalid</td>
+	<td></td>
+</tr>
+<!--Do not specify any device group when creating device for user Test User #1. Device can be reated without group.-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;description=desription1&amp;pin=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>6e79d4a82f68102f43be11d873177f47817f84df</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;description=desription1&amp;pin=3&amp;test=1&amp;hash=6e79d4a82f68102f43be11d873177f47817f84df</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>desription1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_pin</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=device[devicegroup_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device[device_type]_sip</td>
+	<td>on</td>
+</tr>
+<!--Try to create device for user Reseller and specify device_group that is reseller's, but dont specify type. it should default to SIP-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=3&amp;description=desription9&amp;pin=1&amp;devicegroup_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>5658514553920d9c4c1e97ebdd73f3918ae574af</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=3&amp;description=desription9&amp;pin=1&amp;devicegroup_id=1&amp;test=1&amp;hash=5658514553920d9c4c1e97ebdd73f3918ae574af</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>desription9</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_pin</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test Reseller</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=device[devicegroup_id]</td>
+	<td>primary</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device[device_type]_sip</td>
+	<td>on</td>
+</tr>
+<!--Create new IAX2 device for User Test #1. were not sending device group, but device must be created without device group-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;description=desription2&amp;type=IAX2&amp;pin=33333333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1c66d91d96215b2c7f23de143de14b2ac83272d2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;description=desription2&amp;type=IAX2&amp;pin=33333333&amp;test=1&amp;hash=1c66d91d96215b2c7f23de143de14b2ac83272d2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>desription2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_pin</td>
+	<td>33333333</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=device[devicegroup_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device[device_type]_iax2</td>
+	<td>on</td>
+</tr>
+<!--Create device group for user Test Reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/device_group_new/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device Group created</td>
+	<td></td>
+</tr>
+<!--As admin create new SIP device  for user User Test #1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;type=SIP&amp;description=desription1&amp;pin=12333&amp;devicegroup_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>c7c7863a37fadaf23473aeef823c7916f93c3ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;type=SIP&amp;description=desription1&amp;pin=12333&amp;devicegroup_id=4&amp;test=1&amp;hash=c7c7863a37fadaf23473aeef823c7916f93c3ac0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>desription1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_pin</td>
+	<td>12333</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=device[devicegroup_id]</td>
+	<td>Please change</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device[device_type]_sip</td>
+	<td>on</td>
+</tr>
+<!--As admin create new H323 device  for user User Test #1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;type=H323&amp;description=desription1&amp;pin=12355&amp;devicegroup_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>183780fabede91ebf5aab01b5074c6cb28a3af77</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;type=H323&amp;description=desription1&amp;pin=12355&amp;devicegroup_id=4&amp;test=1&amp;hash=183780fabede91ebf5aab01b5074c6cb28a3af77</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>desription1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_pin</td>
+	<td>12355</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=device[devicegroup_id]</td>
+	<td>Please change</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>H323</td>
+	<td></td>
+</tr>
+<!--As admin create new FAX device  for user User Test #1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;type=FAX&amp;description=desription1&amp;pin=12366&amp;devicegroup_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>318fce896bf3c552ef2b3a638e0d28f7d41026a3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;type=FAX&amp;description=desription1&amp;pin=12366&amp;devicegroup_id=4&amp;test=1&amp;hash=318fce896bf3c552ef2b3a638e0d28f7d41026a3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>desription1</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_pin</td>
+	<td>12366</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=device[devicegroup_id]</td>
+	<td>Please change</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device[device_type]_fax</td>
+	<td>on</td>
+</tr>
+<!--As admin create new ZAP device  for user User Test #1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;type=ZAP&amp;description=desription14&amp;pin=12367&amp;devicegroup_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>8a0a15e0c517b86747b634a81924ce8057f86a92</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;type=ZAP&amp;description=desription14&amp;pin=12367&amp;devicegroup_id=4&amp;test=1&amp;hash=8a0a15e0c517b86747b634a81924ce8057f86a92</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>desription14</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_pin</td>
+	<td>12367</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=device[devicegroup_id]</td>
+	<td>Please change</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device[device_type]_zap</td>
+	<td>on</td>
+</tr>
+<!--As admin create new virtual device  for user User Test #1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;type=Virtual&amp;description=desription15&amp;pin=12377&amp;devicegroup_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0e84d89276ba167e264db177d3c855fbdd4a25a4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;type=Virtual&amp;description=desription15&amp;pin=12377&amp;devicegroup_id=4&amp;test=1&amp;hash=0e84d89276ba167e264db177d3c855fbdd4a25a4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>desription15</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_pin</td>
+	<td>12377</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=device[devicegroup_id]</td>
+	<td>Please change</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device[device_type]_virtual</td>
+	<td>on</td>
+</tr>
+<!--As admin try to create new invalid SIPIAX2 device  for user User Test #1, we should gracefully fail.-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;type=SIPIAX2&amp;description=desription1&amp;pin=13888&amp;devicegroup_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>9aa6bf4d7134a2e118ad45ef6ad4d7d460ce1032</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;type=SIPIAX2&amp;description=desription1&amp;pin=13888&amp;devicegroup_id=4&amp;test=1&amp;hash=9aa6bf4d7134a2e118ad45ef6ad4d7d460ce1032</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device type invalid</td>
+	<td></td>
+</tr>
+<!--As admin create new virtual device  for user User Test #1, with invalid group_id. we should gracefully fail-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;type=Virtual&amp;description=desription1&amp;pin=22377&amp;devicegroup_id=400</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>f23e81953ab4e7f9dbbd434b6af5d20cd8f88541</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;type=Virtual&amp;description=desription1&amp;pin=22377&amp;devicegroup_id=400&amp;test=1&amp;hash=f23e81953ab4e7f9dbbd434b6af5d20cd8f88541</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device group invalid</td>
+	<td></td>
+</tr>
+<!--As admin create new pinless H323 device  for user User Test #1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;type=H323&amp;description=descriptionpinless&amp;pin= &amp;devicegroup_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>33412c1516dbe905dcbb54e0963618ffcc82a64c</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;type=H323&amp;description=descriptionpinless&amp;pin= &amp;devicegroup_id=4&amp;test=1&amp;hash=33412c1516dbe905dcbb54e0963618ffcc82a64c</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>descriptionpinless</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=device[devicegroup_id]</td>
+	<td>Please change</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>H323</td>
+	<td></td>
+</tr>
+<!--As admin create IAX2 device with random generated pin -->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;type=IAX2&amp;description=randompin&amp;devicegroup_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>9de679910dc0c19ed65ab47b582fc41fd25a96cc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;type=IAX2&amp;description=randompin&amp;devicegroup_id=4&amp;test=1&amp;hash=9de679910dc0c19ed65ab47b582fc41fd25a96cc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>randompin</td>
+</tr>
+<!--<tr>
+	<td>verifyValue</td>
+	<td>id=device_pin</td>
+	<td>[0-9]+</td>
+</tr>-->
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>name=device[devicegroup_id]</td>
+	<td>Please change</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IAX2</td>
+	<td></td>
+</tr>
+<!--Device cannot be created, because pin is all ready in use-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;type=Fax&amp;description=desription15&amp;pin=12377&amp;devicegroup_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2480a42c14b544307f64b32edabad854c08d5040</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;type=Fax&amp;description=desription15&amp;pin=12377&amp;devicegroup_id=4&amp;test=1&amp;hash=2480a42c14b544307f64b32edabad854c08d5040</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>PIN is already used</td>
+	<td></td>
+</tr>
+<!--Device cannot be created, because pin is all ready in use-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;type=Fax&amp;description=desription15&amp;pin=asd44&amp;devicegroup_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>e673f5055f283f96835867f9d2abfc05bf13a6e3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;type=Fax&amp;description=desription15&amp;pin=asd44&amp;devicegroup_id=4&amp;test=1&amp;hash=e673f5055f283f96835867f9d2abfc05bf13a6e3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>PIN must be numeric</td>
+	<td></td>
+</tr>
+<!--Device cannot be created, because admin pass is incorrect-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=67&amp;type=Fax&amp;devicegroup_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1b3221522fe8d31ae2f73cbf242474a18347e5c9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=67&amp;type=Fax&amp;devicegroup_id=4&amp;test=1&amp;hash=1b3221522fe8d31ae2f73cbf242474a18347e5c9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<!--Device cannot be created, becausethere is no such user hacker-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=hacker&amp;p=admin1&amp;user_id=67&amp;type=Fax&amp;devicegroup_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1b3221522fe8d31ae2f73cbf242474a18347e5c9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=hacker&amp;p=admin1&amp;user_id=67&amp;type=Fax&amp;devicegroup_id=4&amp;test=1&amp;hash=1b3221522fe8d31ae2f73cbf242474a18347e5c9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--hash for reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>e91cd5fc7932f6b4d1f7d4e01be4def495205787</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=invalidine</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>0b93574d0f708e0dd946a388b4cbec781ba4b0c3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=invalidine</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>0b93574d0f708e0dd946a388b4cbec781ba4b0c3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=desription1&amp;pin=12345&amp;devicegroup_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>96ca58e8d0093842580db3f25ad2bc26e6c5d32d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=desription1&amp;pin=9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>e2a787f1973b43abddf6418d9c59361a6c5fee72</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=desription2&amp;type=IAX2&amp;pin=33333343</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1cc7c00545d3e55a3540a281bf64c0fc8afb0003</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;type=SIP&amp;description=desription1&amp;pin=42333&amp;devicegroup_id=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>79a333c2c05e5e62cb0d0eaa0f9a5452e39a3d36</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;type=ZAP&amp;description=desription14&amp;pin=1236111&amp;devicegroup_id=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>83c025f7416176c183e5a25759b46c2ae0c9a0f5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;type=Virtual&amp;description=desription45&amp;pin=2346333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2a06b742a7d36030e77b7d00670f5b3c024efbfe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;type=Virtual&amp;description=desription1&amp;pin=423300&amp;devicegroup_id=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>327a3eac04f67eee846a13706e59b57dcc8fb161</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=101&amp;p=1011&amp;user_id=2&amp;type=SIP&amp;description=desription1&amp;pin=421111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>901a264097d77d16f23b7303560c720de7b5828e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=user_reseller&amp;p=user_reseller1&amp;user_id=5&amp;type=SIP&amp;description=desription1&amp;pin=42000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>f698e37b39ae601808309a39dca4d73062278085</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=0&amp;type=SIP&amp;description=SIP1&amp;pin=4233350</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>c11bc4fc05e97461644ed65cf80d2fa20e17c2be</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=accountant&amp;p=accountant1&amp;user_id=4&amp;description=desription1&amp;pin=4211113</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>e3816d25d6799513ea5db228352dc36894caa42a</td>
+	<td></td>
+</tr>
+<!--Login as reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--MOR API is already enabled-->
+<!--Calculate hash and send device_create command with incorrect hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=2&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=5&amp;test=1&amp;hash=e91cd5fc7932f6b4d1f7d4e01be4def495205787</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--Send device_create command with correct hash.  invalid device group was specified, because theres still no shuch group. device shouldnt be created-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=5&amp;test=1&amp;hash=e91cd5fc7932f6b4d1f7d4e01be4def495205787</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device group invalid</td>
+	<td></td>
+</tr>
+<!--Try to create device with  invalid device group. device shouldnt be created-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=invalidine&amp;test=1&amp;hash=0b93574d0f708e0dd946a388b4cbec781ba4b0c3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device group invalid</td>
+	<td></td>
+</tr>
+<!--Try to create device for reseller's user and specify gevice_group that is Test User's-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=desription1&amp;pin=12345&amp;devicegroup_id=4&amp;test=1&amp;hash=96ca58e8d0093842580db3f25ad2bc26e6c5d32d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device group invalid</td>
+	<td></td>
+</tr>
+<!--Do not specify any device group when creating device for reseller's user. Device can be created without group.-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=desription1&amp;pin=9&amp;test=1&amp;hash=e2a787f1973b43abddf6418d9c59361a6c5fee72</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/18</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>desription1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device_pin_value</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=User Resellers</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device[device_type]_sip</td>
+	<td>on</td>
+</tr>
+<!--Create new IAX2 device for reseller's user. were not sending device group, but device must be created without device group-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=desription2&amp;type=IAX2&amp;pin=33333343&amp;test=1&amp;hash=1cc7c00545d3e55a3540a281bf64c0fc8afb0003</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>desription2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>device_pin_value</td>
+	<td>33333343</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=User Resellers</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device[device_type]_iax2</td>
+	<td>on</td>
+</tr>
+<!--As reseller create new SIP device  for user reseller's user, without group or with users device group-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;type=SIP&amp;description=desription1&amp;pin=42333&amp;devicegroup_id=3&amp;test=1&amp;hash=79a333c2c05e5e62cb0d0eaa0f9a5452e39a3d36</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>desription1</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>42333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=User Resellers</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device[device_type]_sip</td>
+	<td>on</td>
+</tr>
+<!--As reseller cannot create new ZAP-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;type=ZAP&amp;description=desription14&amp;pin=1236111&amp;devicegroup_id=3&amp;test=1&amp;hash=83c025f7416176c183e5a25759b46c2ae0c9a0f5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device type invalid</td>
+	<td></td>
+</tr>
+<!--Reseller cannot create new Virtual device, cause he doesnt have permissions-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;type=Virtual&amp;description=desription45&amp;pin=2346333&amp;test=1&amp;hash=2a06b742a7d36030e77b7d00670f5b3c024efbfe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device type invalid</td>
+	<td></td>
+</tr>
+<!--login as admin and give privilegdes to create virtual devices-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/resellers/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=resellers_allow_use_virtual_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--Login as reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--As reseller create new SIP device  for user reseller's user, without group or with users device group-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;type=Virtual&amp;description=desription1&amp;pin=423300&amp;devicegroup_id=3&amp;test=1&amp;hash=327a3eac04f67eee846a13706e59b57dcc8fb161</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/21</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_description</td>
+	<td>desription1</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>423300</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=User Resellers</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device[device_type]_virtual</td>
+	<td>on</td>
+</tr>
+<!--Admin or reseler user shouldnt have permissions to create device-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=101&amp;p=1011&amp;user_id=2&amp;type=SIP&amp;description=desription1&amp;pin=421111&amp;test=1&amp;hash=901a264097d77d16f23b7303560c720de7b5828e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=user_reseller&amp;p=user_reseller1&amp;user_id=5&amp;type=SIP&amp;description=desription1&amp;pin=42000&amp;test=1&amp;hash=f698e37b39ae601808309a39dca4d73062278085</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<!--reseller cannot create device for admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=0&amp;type=SIP&amp;description=SIP1&amp;pin=4233350&amp;test=1&amp;hash=c11bc4fc05e97461644ed65cf80d2fa20e17c2be</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<!--Accountant can create device only if he has apropriate permissions-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=accountant&amp;p=accountant1&amp;user_id=4&amp;description=desription1&amp;pin=4211113&amp;test=1&amp;hash=e3816d25d6799513ea5db228352dc36894caa42a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>dont be so smart</td>
+	<td></td>
+</tr>
+<!--Login as administrator and set accountant permissions to create device-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Accountant_permissions</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Group was created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/1?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_create_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=accountant&amp;p=accountant1&amp;user_id=2&amp;description=desription1&amp;pin=43</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>d259cadf3dd3544f175fe1dbc69c70fd85f7ee73</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--Now accountant can create a device-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=accountant&amp;p=accountant1&amp;user_id=2&amp;description=desription1&amp;pin=43&amp;test=1&amp;hash=d259cadf3dd3544f175fe1dbc69c70fd85f7ee73</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=id_22</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=description_22</td>
+	<td>desription1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=type_22</td>
+	<td>SIP</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=extension_22</td>
+	<td>1016</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_22</td>
+	<td>1016</td>
+</tr>
+</tbody></table>
+</body>
+</html>

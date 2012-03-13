@@ -1,0 +1,4788 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>call_prices</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">call_prices</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Test_accountant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>see_financial_data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<!--setting the period-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/show_user_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--checking the values-->
+<!--sysadm calls...-->
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[3]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[7]</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[8]</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[9]</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[10]</td>
+	<td>50.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[11]</td>
+	<td>100.0000 %</td>
+</tr>
+<!--test reseller calls..-->
+<tr>
+	<td>clickAndWait</td>
+	<td>user_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_user</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>user_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_user</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[3]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[6]</td>
+	<td>100.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[7]</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[8]</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[9]</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[10]</td>
+	<td>75.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[11]</td>
+	<td>300.0000 %</td>
+</tr>
+<!--Test user #1-->
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[3]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[6]</td>
+	<td>100.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[7]</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[8]</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[9]</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[10]</td>
+	<td>66.6667 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[11]</td>
+	<td>200.0000 %</td>
+</tr>
+<!--Checking "Total:" row values-->
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[6]/th[3]</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[6]/th[7]</td>
+	<td>9.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[6]/th[8]</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[6]/th[9]</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[6]/th[10]</td>
+	<td>66.6667 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[6]/th[11]</td>
+	<td>200.0000 %</td>
+</tr>
+<!--checking /billing/stats/call_list/0?calltype=answered values-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/0?calltype=answered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_9</td>
+	<td>00:00:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_9</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_rate_9</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>profit_9</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>margin_9</td>
+	<td>50.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>markup_9</td>
+	<td>100.0000 %</td>
+</tr>
+<!--checking "Total:" row values..-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_margin</td>
+	<td>50.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_markup</td>
+	<td>100.0000 %</td>
+</tr>
+<!--==search===-->
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_13</td>
+	<td>00:00:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_date_13</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inc_rate_13</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate2_13</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_sum_13</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_sum_16</td>
+	<td>9.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate2_16</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inc_rate_16</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_date_16</td>
+	<td>4.0000</td>
+</tr>
+<!-----Total:------>
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:02:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_inc_price</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>24.0000</td>
+</tr>
+<!--/billing/stats/call_list/3?calltype=answered-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/3?calltype=answered</td>
+	<td></td>
+</tr>
+<!--outgoing...-->
+<tr>
+	<td>verifyText</td>
+	<td>billsec_11</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_11</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_rate_11</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>profit_11</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>margin_11</td>
+	<td>75.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>markup_11</td>
+	<td>300.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_margin</td>
+	<td>75.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_markup</td>
+	<td>300.0000 %</td>
+</tr>
+<!--RESELLER /billing/stats/call_list/3?calltype=answered-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/3?calltype=answered</td>
+	<td></td>
+</tr>
+<!--outgoing-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Outgoing</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_11</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_11</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_rate_11</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>profit_11</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>margin_11</td>
+	<td>75.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>markup_11</td>
+	<td>300.0000 %</td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_15</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_date_15</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inc_rate_15</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate2_15</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_sum_15</td>
+	<td>7.0000</td>
+</tr>
+<!----"Total:"  row-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_inc_price</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>7.0000</td>
+</tr>
+<!--Test User #1-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/2?calltype=answered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<!----Outgoing---->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Outgoing</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_10</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_10</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_rate_10</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>profit_10</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>margin_10</td>
+	<td>66.6667 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>markup_10</td>
+	<td>200.0000 %</td>
+</tr>
+<!-----Total--- row's values check-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_margin</td>
+	<td>66.6667 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_markup</td>
+	<td>200.0000 %</td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_14</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_date_14</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inc_rate_14</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate2_14</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_sum_14</td>
+	<td>5.0000</td>
+</tr>
+<!---- Total-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_inc_price</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>5.0000</td>
+</tr>
+<!--Login as Reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--/billing/stats/show_user_stats-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/show_user_stats</td>
+	<td></td>
+</tr>
+<!--setting the period-->
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--checking values-->
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[2]</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[3]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[4]</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[5]</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[6]</td>
+	<td>100.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[7]</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[8]</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[9]</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[10]</td>
+	<td>20.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[11]</td>
+	<td>25.0000 %</td>
+</tr>
+<!--"Total:" row..-->
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[2]</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[3]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[4]</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[5]</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[7]</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[8]</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[9]</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[10]</td>
+	<td>20.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[11]</td>
+	<td>25.0000 %</td>
+</tr>
+<!--/billing/stats/call_list/5?calltype=answered-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/5?calltype=answered</td>
+	<td></td>
+</tr>
+<!--outgoing-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_12</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_rate_12</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>profit_12</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>margin_12</td>
+	<td>20.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>markup_12</td>
+	<td>25.0000 %</td>
+</tr>
+<!----Total-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_margin</td>
+	<td>20.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_markup</td>
+	<td>25.0000 %</td>
+</tr>
+<!----incoming-->
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_16</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate2_16</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>1.0000</td>
+</tr>
+<!--checking if NOT PRESENT-->
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Provider price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Incoming price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Owner price</td>
+	<td></td>
+</tr>
+<!--/billing/stats/call_list-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<!--setting the period-->
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<!--outgoing-->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Outgoing</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_11</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_11</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_rate_11</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>profit_11</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>margin_11</td>
+	<td>0.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>markup_11</td>
+	<td>0.0000 %</td>
+</tr>
+<!----Total-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_margin</td>
+	<td>0.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_markup</td>
+	<td>0.0000 %</td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_15</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate2_15</td>
+	<td>1.0000</td>
+</tr>
+<!----Total:-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>1.0000</td>
+</tr>
+<!--Login as 101/101-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--/stats/call_list-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Outgoing</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<!--outgoing-->
+<tr>
+	<td>verifyText</td>
+	<td>billsec_10</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_10</td>
+	<td>3.0000</td>
+</tr>
+<!--Total-->
+<tr>
+	<td>verifyText</td>
+	<td>total_duration</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>3.0000</td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_14</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_14</td>
+	<td>1.0000</td>
+</tr>
+<!----Total---->
+<tr>
+	<td>verifyText</td>
+	<td>total_duration</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>1.0000</td>
+</tr>
+<!--Login as resellers' user (user_reseller) -->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Outgoing</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--outgoing-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_12</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_12</td>
+	<td>5.0000</td>
+</tr>
+<!--Total-->
+<tr>
+	<td>verifyText</td>
+	<td>total_duration</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>5.0000</td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_16</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_16</td>
+	<td>1.0000</td>
+</tr>
+<!--Total-->
+<tr>
+	<td>verifyText</td>
+	<td>total_duration</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>1.0000</td>
+</tr>
+<!--====DOUBLE PRICES=============-->
+<!--login as root-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Setting EUR not to update and making its exchange rate to 2-->
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/currencies/currencies_change_update_status/2')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>exchange_rate</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Currency details updated</td>
+	<td></td>
+</tr>
+<!--check now everything x2-->
+<!--==============================-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/show_user_stats?currency=EUR</td>
+	<td></td>
+</tr>
+<!--setting the period-->
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--checking the values-->
+<!--sysadm calls...-->
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[3]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[7]</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[8]</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[9]</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[10]</td>
+	<td>50.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[11]</td>
+	<td>100.0000 %</td>
+</tr>
+<!--test reseller calls..-->
+<tr>
+	<td>clickAndWait</td>
+	<td>user_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_user</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>user_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_user</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[3]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[6]</td>
+	<td>100.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[7]</td>
+	<td>8.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[8]</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[9]</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[10]</td>
+	<td>75.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[4]/td[11]</td>
+	<td>300.0000 %</td>
+</tr>
+<!--Test user #1-->
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[3]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[6]</td>
+	<td>100.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[7]</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[8]</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[9]</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[10]</td>
+	<td>66.6667 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[11]</td>
+	<td>200.0000 %</td>
+</tr>
+<!--Checking "Total:" row values-->
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[6]/th[3]</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[6]/th[7]</td>
+	<td>18.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[6]/th[8]</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[6]/th[9]</td>
+	<td>12.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[6]/th[10]</td>
+	<td>66.6667 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[6]/th[11]</td>
+	<td>200.0000 %</td>
+</tr>
+<!--checking /billing/stats/call_list/0?calltype=answered values-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/0?calltype=answered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_9</td>
+	<td>00:00:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_9</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_rate_9</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>profit_9</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>margin_9</td>
+	<td>50.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>markup_9</td>
+	<td>100.0000 %</td>
+</tr>
+<!--checking "Total:" row values..-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_margin</td>
+	<td>50.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_markup</td>
+	<td>100.0000 %</td>
+</tr>
+<!--==search===-->
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_13</td>
+	<td>00:00:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_date_13</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inc_rate_13</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate2_13</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_sum_13</td>
+	<td>6.0000</td>
+</tr>
+<!-----Total:------>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:02:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_inc_price</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>8.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>48.0000</td>
+</tr>
+<!--/billing/stats/call_list/3?calltype=answered-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/3?calltype=answered</td>
+	<td></td>
+</tr>
+<!--outgoing...-->
+<tr>
+	<td>verifyText</td>
+	<td>billsec_11</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_11</td>
+	<td>8.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_rate_11</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>profit_11</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>margin_11</td>
+	<td>75.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>markup_11</td>
+	<td>300.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>8.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_margin</td>
+	<td>75.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_markup</td>
+	<td>300.0000 %</td>
+</tr>
+<!--RESELLER /billing/stats/call_list/3?calltype=answered-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/3?calltype=answered</td>
+	<td></td>
+</tr>
+<!--outgoing-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Outgoing</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_11</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_11</td>
+	<td>8.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_rate_11</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>profit_11</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>margin_11</td>
+	<td>75.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>markup_11</td>
+	<td>300.0000 %</td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_15</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_date_15</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inc_rate_15</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate2_15</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_sum_15</td>
+	<td>14.0000</td>
+</tr>
+<!----"Total:"  row-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_inc_price</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>14.0000</td>
+</tr>
+<!--Test User #1-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/2?calltype=answered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<!----Outgoing---->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Outgoing</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_10</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_10</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_rate_10</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>profit_10</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>margin_10</td>
+	<td>66.6667 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>markup_10</td>
+	<td>200.0000 %</td>
+</tr>
+<!-----Total--- row's values check-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_margin</td>
+	<td>66.6667 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_markup</td>
+	<td>200.0000 %</td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_14</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_date_14</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>inc_rate_14</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate2_14</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_sum_14</td>
+	<td>10.0000</td>
+</tr>
+<!---- Total-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_inc_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>10.0000</td>
+</tr>
+<!--Login as Reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--/billing/stats/show_user_stats-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/show_user_stats</td>
+	<td></td>
+</tr>
+<!--setting the period-->
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--checking values-->
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[2]</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[3]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[4]</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[5]</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[6]</td>
+	<td>100.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[7]</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[8]</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[9]</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[10]</td>
+	<td>20.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[2]/td[11]</td>
+	<td>25.0000 %</td>
+</tr>
+<!--"Total:" row..-->
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[2]</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[3]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[4]</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[5]</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[7]</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[8]</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[9]</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[10]</td>
+	<td>20.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/th[11]</td>
+	<td>25.0000 %</td>
+</tr>
+<!--/billing/stats/call_list/5?calltype=answered-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/5?calltype=answered</td>
+	<td></td>
+</tr>
+<!--outgoing-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_12</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_rate_12</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>profit_12</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>margin_12</td>
+	<td>20.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>markup_12</td>
+	<td>25.0000 %</td>
+</tr>
+<!----Total-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_margin</td>
+	<td>20.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_markup</td>
+	<td>25.0000 %</td>
+</tr>
+<!----incoming-->
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_16</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate2_16</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>1.0000</td>
+</tr>
+<!--checking if NOT PRESENT-->
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Provider price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Incoming price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Owner price</td>
+	<td></td>
+</tr>
+<!--/billing/stats/call_list-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<!--setting the period-->
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<!--outgoing-->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Outgoing</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_11</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_11</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>prov_rate_11</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>profit_11</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>margin_11</td>
+	<td>0.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>markup_11</td>
+	<td>0.0000 %</td>
+</tr>
+<!----Total-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_prov_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_profit</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_margin</td>
+	<td>0.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_markup</td>
+	<td>0.0000 %</td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_15</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate2_15</td>
+	<td>1.0000</td>
+</tr>
+<!----Total:-->
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>1.0000</td>
+</tr>
+<!--Login as 101/101-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--/stats/call_list-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Outgoing</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<!--outgoing-->
+<tr>
+	<td>verifyText</td>
+	<td>billsec_10</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_10</td>
+	<td>3.0000</td>
+</tr>
+<!--Total-->
+<tr>
+	<td>verifyText</td>
+	<td>total_duration</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>3.0000</td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_14</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_14</td>
+	<td>1.0000</td>
+</tr>
+<!----Total---->
+<tr>
+	<td>verifyText</td>
+	<td>total_duration</td>
+	<td>00:00:30</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>1.0000</td>
+</tr>
+<!--Login as resellers' user (user_reseller) -->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Outgoing</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--outgoing-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_12</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_12</td>
+	<td>5.0000</td>
+</tr>
+<!--Total-->
+<tr>
+	<td>verifyText</td>
+	<td>total_duration</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price</td>
+	<td>5.0000</td>
+</tr>
+<!--incoming-->
+<tr>
+	<td>select</td>
+	<td>direction</td>
+	<td>label=Incoming</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_16</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>rate_16</td>
+	<td>1.0000</td>
+</tr>
+<!--Total-->
+<tr>
+	<td>verifyText</td>
+	<td>total_duration</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_price2</td>
+	<td>1.0000</td>
+</tr>
+<!--RESSELLER USER CALL PRICES-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/profit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--WHEN NO CALLS WERE MADE-->
+<tr>
+	<td>verifyText</td>
+	<td>number_total_calls</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_answer_calls</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_no_ans_calls</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_busy_calls</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_erro_calls</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_total_call_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_total_self_price</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_avg_profit_per_min</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_calls_profit</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_total_profit</td>
+	<td>0.0000</td>
+</tr>
+<!--WHEN CALLS ARE MADE-->
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_id</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Change user']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_total_calls</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_answer_calls</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_total_call_price</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_total_self_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_calls_profit</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_avg_profit_per_min</td>
+	<td>1.2000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>avg_profit_per_call</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>avg_profit_per_day</td>
+	<td>0.0058</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>avg_profit_per_user</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_total_profit</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>number_total_profit</td>
+	<td>1.0000</td>
+</tr>
+<!--CHECKING GRAPH-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/all_users_detailed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>outgoing_calls</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>incoming_calls</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>all_calls</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>answered_o</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>no_answer_o</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>busy_o</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>failed_o</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>all_calls_o</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>all_calls_i</td>
+	<td>4</td>
+</tr>
+<!--bottom-->
+<tr>
+	<td>verifyText</td>
+	<td>row_0_calls</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_1_calls</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_2_calls</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_calls</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_billsec</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_1_billsec</td>
+	<td>00:02:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_2_billsec</td>
+	<td>00:02:20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_billsec</td>
+	<td>00:04:40</td>
+</tr>
+<!--checking whether data in /billing/stats/show_user_stats  is equal in /billing/stats/user_stats/xxx-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/show_user_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>user_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_user</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>user_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>row_0_user</td>
+	<td>System Admin</td>
+</tr>
+<!--admin-->
+<tr>
+	<td>storeText</td>
+	<td>row_0_calls</td>
+	<td>admin_calls</td>
+</tr>
+<!--accountant-->
+<tr>
+	<td>storeText</td>
+	<td>row_1_calls</td>
+	<td>accountant_calls</td>
+</tr>
+<!--reseller-->
+<tr>
+	<td>storeText</td>
+	<td>row_2_calls</td>
+	<td>reseller_calls</td>
+</tr>
+<!--Test user-->
+<tr>
+	<td>storeText</td>
+	<td>row_3_calls</td>
+	<td>user_calls</td>
+</tr>
+<!--verify values in separe pages for each user-->
+<!--admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/user_stats/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>incoming_calls</td>
+	<td>${admin_calls}</td>
+</tr>
+<!--reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/user_stats/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>incoming_calls</td>
+	<td>${reseller_calls}</td>
+</tr>
+<!--user-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/user_stats/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>incoming_calls</td>
+	<td>${user_calls}</td>
+</tr>
+<!--===RERATING===-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<!--provider | rate=1-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/1?st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Quick add new Rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Quick add new Rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix</td>
+	<td>1231</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>price</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add Rate']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/rerating</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=User Resellers (Reseller: Test Reseller)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rerating completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>old_pp</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_pp</td>
+	<td>0.8333</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>diff_pp</td>
+	<td>-0.1667</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>old_res</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_res</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>diff_res</td>
+	<td>-4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>old_up</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_up</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>diff_up</td>
+	<td>-5.0000</td>
+</tr>
+<!--retail-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/4?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Quick add new Rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Lithuania (FIX Lithuania proper)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>price</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Add Rate']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate was added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/rerating</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=User Resellers (Reseller: Test Reseller)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>old_pp</td>
+	<td>0.8333</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_pp</td>
+	<td>0.8333</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>diff_pp</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>old_res</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_res</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>diff_res</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>old_up</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_up</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>diff_up</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rerating completed</td>
+	<td></td>
+</tr>
+<!--user | rate-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/tariffs_list/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/2?st=L</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/391</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/391</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ratedetail_rate</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>cut 123#</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cut</td>
+	<td>123#</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/rerating</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>old_pp</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_pp</td>
+	<td>0.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>diff_pp</td>
+	<td>-0.5000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>old_res</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_res</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>diff_res</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>old_up</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_up</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>diff_up</td>
+	<td>-3.0000</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rerating completed</td>
+	<td></td>
+</tr>
+<!--reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/rerating</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rerating completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>old_pp</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_pp</td>
+	<td>0.6667</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>diff_pp</td>
+	<td>-0.3333</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>old_res</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_res</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>diff_res</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>old_up</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>new_up</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>diff_up</td>
+	<td>-4.0000</td>
+</tr>
+<!--===last_calls_stats==-->
+<!--reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Šiaip iš vis 101 neturėtų būti matomas-->
+<tr>
+	<td>verifyText</td>
+	<td>calldate_22</td>
+	<td>2010-02-18 00:00:01</td>
+</tr>
+<!--101-->
+<tr>
+	<td>verifyText</td>
+	<td>src_22</td>
+	<td>37046246362</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dst_22</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>duration_22</td>
+	<td>00:00:50</td>
+</tr>
+<!--Kiekviena dieną keičias, neaišku kaip  išties yra, nes su DB nesutampa-->
+<!--<tr> 	<td>verifyText</td> 	<td>user_price_22</td> 	<td>9.0000</td> </tr>-->
+<tr>
+	<td>verifyText</td>
+	<td>disposition_22</td>
+	<td>BUSY</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_22</td>
+	<td>2010-02-18 00:00:01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_22</td>
+	<td>37046246362</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dst_22</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>duration_22</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>disposition_22</td>
+	<td>BUSY</td>
+</tr>
+<!--<tr> 	<td>verifyText</td> 	<td>rate_22</td> 	<td>9.0000</td> </tr>-->
+<tr>
+	<td>verifyText</td>
+	<td>calldate_23</td>
+	<td>2008-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_23</td>
+	<td>37046246362</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dst_23</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>duration_23</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>disposition_23</td>
+	<td>ANSWERED</td>
+</tr>
+<!--<tr> 	<td>verifyText</td> 	<td>rate_23</td> 	<td>9.0000</td> </tr>-->
+<!--accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_16</td>
+	<td>2009-01-02 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_16</td>
+	<td>37046246362</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dst_16</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_16</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>disposition_16</td>
+	<td>ANSWERED (16)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>server_id_16</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_rate_16</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_price_16</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_16</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_rate_16</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_price_16</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_rate_16</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_price_16</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_16</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_prov_price_16</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_inc_price_16</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_price_16</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_15</td>
+	<td>2009-01-02 00:00:03</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_15</td>
+	<td>37046246362</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dst_15</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_15</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>disposition_15</td>
+	<td>ANSWERED (16)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>server_id_15</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_rate_15</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_price_15</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_rate_15</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_price_15</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_15</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_rate_15</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_price_15</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_15</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_prov_price_15</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_inc_price_15</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_price_15</td>
+	<td>1.0000</td>
+</tr>
+<!--admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_16</td>
+	<td>2009-01-02 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_16</td>
+	<td>37046246362</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dst_16</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_16</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>disposition_16</td>
+	<td>ANSWERED (16)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>server_id_16</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_rate_16</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_price_16</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_16</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_rate_16</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_price_16</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_16</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_rate_16</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_price_16</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_16</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_prov_price_16</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_inc_price_16</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_price_16</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_15</td>
+	<td>2009-01-02 00:00:03</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_15</td>
+	<td>37046246362</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dst_15</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>billsec_15</td>
+	<td>00:00:40</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>disposition_15</td>
+	<td>ANSWERED (16)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>server_id_15</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_rate_15</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>provider_price_15</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_rate_15</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_price_15</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_rate_15</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>reseller_price_15</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_15</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_rate_15</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_price_15</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_15</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_prov_price_15</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_inc_price_15</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>did_price_15</td>
+	<td>1.0000</td>
+</tr>
+<!--user_reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_26</td>
+	<td>2010-03-17 00:00:01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_26</td>
+	<td>2010-03-17 00:00:01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_24</td>
+	<td>2010-02-18 00:00:01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>calldate_12</td>
+	<td>2009-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>src_26</td>
+	<td>37046246362</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>dst_26</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>duration_26</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>disposition_26</td>
+	<td>ANSWERED</td>
+</tr>
+<!--<tr> 	<td>verifyText</td> 	<td>rate_26</td> 	<td>6.0000</td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/show_user_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

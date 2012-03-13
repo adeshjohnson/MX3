@@ -1,0 +1,200 @@
+<%= form_tag :action => params[:action] do %>
+  <div id="search_details" <%= "style='display:none;'" if @options[:search_on] == 0 %>>
+    <span style="text-align: right;FLOAT: right; ">
+      <%= link_to b_cross + _('Clear_search'), :action => 'last_calls_stats', :clear=>1%>
+    </span>
+    <br />
+    <%= hidden_field_tag 'search_on', 1  %>
+
+    <%= _('From') %>: <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+    &nbsp;&nbsp;
+    <%= _('to') %>: <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+    <br />
+    <br />
+    <%= _("User") %>:
+    <%= select_tag("s_user", options_for_select([[_('All'), "all"]] + @users.map{|u| [nice_user(u), u.id.to_s]}, @options[:s_user].to_s)) %>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= _('Device') %>:
+    <span id="s_device_span"><%= select_tag("s_device", options_for_select([[_('All'), "all"]] + @devices.map{|dev| [nice_device(dev, {:image => false}) ,dev.id.to_s ]}, @options[:s_device].to_s)) %></span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= _("DID") %>:
+    <%= select_tag("s_did", options_for_select([[_('All'), "all"]] + @dids.map{|d| [d.did, d.id.to_s]}, @options[:s_did].to_s)) %>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br />
+    <br />
+    <%= _('Status') %>:
+    <% call_types = [[_('All'), "all"], [_('Answered'), "answered"], [_('No_Answer'), "no answer"], [_('Failed'), "failed"], [_('Busy'), "busy"]] %>
+    <%= select_tag("s_call_type", options_for_select(call_types, @options[:s_call_type].to_s))  %>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= _("Destination")%>:
+    <%= text_field_tag("s_destination", h(@options[:s_destination].to_s))%>
+
+    <% if Confline.get_value('Show_HGC_for_Resellers').to_i == 1  %>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('hangup_cause') %>:
+      <%= select_tag("s_hgc", options_for_select([[_('All'), 0]]+@hgcs.map{|h| [h.clean_description[0..45], h.id]}, @options[:s_hgc].to_i))  %>
+    <%end%>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br />
+    <br />
+    <%if current_user.reseller_allow_providers_tariff?%>
+      <%= _('Provider') %>:
+      <%= select_tag("s_provider", options_for_select([[_('All'), 0]]+@providers.map{|p| [p.name, p.id]}, @options[:s_provider].to_i))  %>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%end%>
+    <%= _('Caller_ID') %>:
+    <%= text_field_tag("s_caller_id", h(@options[:s_caller_id].to_s))%>
+    <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
+    <%= observe_field("s_user", :update => "s_device_span",:with => "user_id", :url=> {:controller=> "devices", :action => "get_devices_for_search"}, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
+  </div>
+<% end %>
+<br />
+<% if @calls.size > 0 %>
+  <%= link_to b_csv + _('Export_to_CSV'), :action => :last_calls_stats, :csv=>1%>&nbsp;&nbsp;
+  <%= link_to b_pdf + _('Export_to_PDF'), :action => :last_calls_stats, :pdf=>1%>
+<% end %>
+<br /><br />
+<%=page_select_header(@options[:page], @total_pages, nil, @options)%>
+
+<% if @calls and @calls.size > 0 %>
+  <table width="100%" class="maintable">
+    <tr>
+      <th rowspan="2" align="center">&nbsp;<%=nice_list_order('time',_('Time') , @options)%></th>
+      <th rowspan="2" align="left"><%=nice_list_order('src',_('called_from'), @options)%></th>
+      <th rowspan="2" align="left"><%=nice_list_order('dst',_('called_to'), @options)%></th>
+      <!--<th align="left" rowspan=2><%=nice_list_order('prefix',_('Prefix_used'), @options)%></th>-->
+      <th rowspan="2" align="center">
+        <% if @call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all"%>
+          <%=nice_list_order('nice_billsec', _('Duration'), @options)%>
+        <% else %>
+          <%= _('holdtime')%>
+        <% end %>
+      </th>
+
+      <% if @call_type != "answered" %>
+        <th rowspan="2"  align="left"><%=nice_list_order('hgc', _('hangup_cause'), @options)%></th>
+      <% end %>
+      <%if current_user.reseller_allow_providers_tariff?%>
+        <th align="center" colspan=3> <%= _('Provider') %> </th>
+      <%end%>
+      <th align="center" colspan=2><%= _('Selfcost') %></th>
+      <th align="center" colspan=3><%= _('User') %></th>
+      <th align="center" > <%= _('DID') %> </th>
+      <th align="left" rowspan="2"><%= _('Profit') %></th>
+
+      <% if not (@call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all")%>
+        <th rowspan="2"> 		  <%= _('processed') %>	    </th>
+      <% end %>
+    </tr>
+
+    <% unless not (@call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all")%>
+      <tr>
+        <%if current_user.reseller_allow_providers_tariff?%>
+          <th align="left"><%=nice_list_order('p_name', _('Name'), @options)%></th>
+          <% if can_see_finances? -%>
+            <th align="left"><%=nice_list_order('p_rate', _('Rate'), @options)%></th>
+            <th align="left"><%=nice_list_order('p_price', _('Price'), @options)%></th>
+          <% end -%>
+        <%end%>
+        <th align="left"><%=nice_list_order('r_rate', _('Rate') , @options)%></th>
+        <th align="left"><%=nice_list_order('r_price', _('Price'), @options)%></th>
+        <th align="left"><%=nice_list_order('user',  _('Name'), @options)%></th>
+        <th align="left"><%=nice_list_order('u_rate', _('Rate') , @options)%></th>
+        <th align="left"><%=nice_list_order('u_price', _('Price'), @options)%></th>
+        <th align="left"><%=nice_list_order('number', _('Number'), @options)%></th>
+      </tr>
+    <% end %>
+    <% @calls.each_with_index { |call, i| %>
+      <% call_user = call.user
+      card = call.card_id > 0 ? call.card : nil
+      call_provider = call.provider
+      did = Did.find(:first, :conditions => ["id = ?", call.did_id.to_i ]) %>
+      <%  call.processed == 0 ? text_class="n" : text_class="n_disabled" -%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="calldate_<%= call.id %>" class="<%= text_class %>" align="center"><%= nice_date_time call.calldate %></td>
+        <td id="src_<%= call.id %>" class="<%= text_class %>"><%= h(nice_src(call)) %></td>
+
+        <% if @show_destination %>
+          <%= show_call_dst(call, text_class) %>
+        <% end %>
+        <%= call_duration(call, text_class, @call_type )%>
+
+        <% if @call_type != "answered" %>
+          <td id="disposition_<%= call.id %>" <%= "onmouseover=\"Tip(\'" + get_hangup_cause_message(call.hangupcause) + "\')\" onmouseout = \"UnTip()\"" if call.hangupcause and Confline.get_value('Show_HGC_for_Resellers').to_i == 1%> >
+            <%= call.disposition %>
+            <%= " (" + call.hangupcause.to_s + ")" if Confline.get_value('Show_HGC_for_Resellers').to_i == 1 and session[:usertype] == 'reseller' %>
+          </td>
+        <% end %>
+
+
+        <% unless not (@call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all")%>
+
+          <%if current_user.reseller_allow_providers_tariff?%>
+            <td id="provider_<%= call.id %>" class="<%= text_class %>"><%= call_provider.name if call_provider %></td>
+            <% if can_see_finances? -%>
+              <td id="provider_rate_<%= call.id %>" class="<%= text_class %>" align="left"><%= nice_number(call.provider_rate_exrate) %></td>
+              <td id="provider_price_<%= call.id %>" class="<%= text_class %>" align="left"><%= nice_number(call.provider_price_exrate) %></td>
+            <% end -%>
+          <%end%>
+          <td id="reseller_rate_<%= call.id %>" class="<%= text_class %>" align="left"><%= nice_number(call.reseller_rate_exrate) %></td>
+          <td id="reseller_price_<%= call.id %>" class="<%= text_class %>" align="left">
+            <%# price =  call.reseller_price_exrate.to_f + call.did_price_exrate.to_f + call.did_inc_price_exrate.to_f %>
+            <%= nice_number(call.reseller_price_exrate.to_f) %>
+          </td>
+
+          <% if card %>
+             <td id="card_<%= call.id %>" class="<%= text_class %>"><%= nice_card(card)  %></td>
+          <% else %>
+             <td id="user_<%= call.id %>" class="<%= text_class %>"><%= nice_user(call_user) if call_user and [call_user.id, call_user.owner_id].include?(current_user.id) %></td>
+          <% end %>
+
+          <td id="user_rate_<%= call.id %>" class="<%= text_class %>" align="left"><%= nice_number(call.user_rate_exrate) %></td>
+          <td id="user_price_<%= call.id %>" class="<%= text_class %>" align="left">
+            <%# price =  call.user_price_exrate.to_f + call.did_price_exrate.to_f + call.did_inc_price_exrate.to_f %>
+            <%= nice_number(call.user_price_exrate.to_f) %>
+          </td>
+          <td id="did_<%= call.id %>" class="<%= text_class %>" align="left"><%= did.did if did %></td>
+          <td id="profit_<%= call.id %>" class="<%= text_class %>" align="left">
+            <%= nice_number(call.profit) %>
+          </td>
+        <% end %>
+      </tr>
+    <% } %>
+
+    <tr>
+      <th id="total" align="left" colspan="2"><%= _("Total") %>:</th>
+      <% if @show_destination %>
+        <th></th>
+      <% end %>
+      <th id="total_billsec" align="center"><%= nice_time(@total_calls_stats.total_duration) %></th>
+
+      <% if @call_type != "answered" %>
+        <th></th>
+      <% end %>
+
+
+      <% unless not (@call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all")%>
+        <%if current_user.reseller_allow_providers_tariff? %>
+          <th></th>
+          <% if can_see_finances? -%>
+            <th></th>
+            <th id="total_provider_price" align="left"><%= nice_number(@total_calls_stats.total_provider_price) %></th>
+          <% end -%>
+        <%end%>
+        <th></th>
+        <th id="total_reseller_price" align="left"><%= nice_number(@total_calls_stats.total_reseller_price_with_dids) %></th>
+        <th></th>
+        <th></th>
+        <th id="total_user_price" align="left"><%= nice_number(@total_calls_stats.total_user_price_with_dids) %></th>
+      <% end %>
+      <th></th>
+      <th id="total_profit"  align="left">
+        <%= nice_number(@total_calls_stats.total_profit) %>
+      </th>
+    </tr>
+  </table>
+  <br />
+  <%= page_select_header(@options[:page], @total_pages, nil, @options)%>
+<% else %>
+  <br />
+  <%= _('No_calls') %>...
+<% end%>

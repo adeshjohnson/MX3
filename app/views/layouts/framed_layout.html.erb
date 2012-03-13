@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title><%=  session[:admin_browser_title] %></title>
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag "dtree" %>
+    <%= javascript_include_tag "tab-view" %>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <%= stylesheet_link_tag "mor" %>
+    <%= stylesheet_link_tag "dtree" %>
+    <%= stylesheet_link_tag "tab-view" %>
+
+
+    <%= yield :head %>
+  </head>
+  <body>
+	<%= javascript_include_tag "wz_tooltip" %>    
+    <table width="100%">
+      <tr>
+        <td style="height: 5px"></td>
+      </tr>
+      <tr>
+        <td>
+          <table width="100%">
+            <tr>
+              <td valign="top">
+                <% if session[:logo_picture] %>
+                  <% unless session[:logo_picture].blank? %>
+                    <%= link_to(image_tag(session[:logo_picture]), {:controller => "/callc", :action => "main"}, {:id => "company_logo", :title => session[:company]}) %>
+                  <% end %>
+                <% else %>
+                  <% if Confline.get_value("Show_logo_on_register_page", 0).to_i == 1 %>
+                    <%= link_to(image_tag(Confline.get_value("Logo_Picture", 0)), {:controller => "/callc", :action => "main"}, {:id => "company_logo", :title => Confline.get_value("Company", 0)}) %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td>
+                <table width="100%">
+                  <tr>
+                    <td align="right" class="nb">
+                      <% if session[:login] == true %>
+                        <% name = '' %>
+                        <% if (session[:first_name].to_s.length + session[:last_name].to_s.length) > 0 %>
+                          <% name = "<b>#{session[:first_name].titleize} #{session[:last_name].titleize}</b>" %>
+                        <% end %>
+                        <%= link_to name + "(#{session[:username]})", :controller => :users, :action => :personal_details, :id=>session[:user_id] %>  <%= link_to _('Logout'), :controller => "callc", :action => "logout" %>
+                      <% end %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" valign="bottom">
+                      <div id="flag_list_div"><%= flag_list %></div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+      <tr> <td style="height: 5 px"></td>
+      </tr>
+    </table>
+    <div id="ddnav" style="position:relative;">
+      <div id="page_title_icon" class="page_title_new">
+        <% if @page_title %>
+          <b>&nbsp;</b><%= image_tag('icons/' + @page_icon, :title => @page_title) if @page_icon %>&nbsp;<%= @page_title %>
+
+        <% end %>
+      </div>
+      <div style="position:absolute; top:7px; right:10px;">
+        <%= image_tag("ajax-loader.gif",
+          # :align => 'absmiddle', << validatoriui sitas nepatinka
+          :style => 'vertical-align: middle;',
+          :border=> 0,
+          :id => "spinner",
+          :style=>"display: none;") %>
+
+        <% if @help_link and session[:usertype] == "admin" and session[:help_link].to_i == 0%>
+          &nbsp;<a href="<%= @help_link %>" target="_blank"><%= image_tag('icons/help.png', :title => _('Get_help_about_this_page')) %></a>
+        <% end %>
+      </div>
+    </div>
+    <div id="topbck"></div>
+    <table width="100%">
+      <tr>
+        <td>
+          <table style="width: 100%; height: 600px">
+            <tr valign="top">
+              <% if session[:login] == true %>
+                <td></td>
+                <td class="left_menu" width="170">
+                  <% if session[:usertype] == "admin"%>
+                    <% if session[:integrity_check] == 1  %>
+                      <table class = 'error_table'>
+                        <tr>
+                          <td><%= _("System_May_Not_Be_Working_Propertly") %>.<br /><%= _("Please_Check_System_Integrity_Here") %>:</td>
+                        </tr>
+                        <tr>
+                          <td><%= link_to _("Integrity_Check") , :controller=> "functions", :action=>"integrity_check" %></td>
+                        </tr>
+                      </table>
+                      <br />
+                    <% end %>
+                    <br />
+                    <div class="tree_menu" id ="settings_menu_div"></div>
+                    <% content_for :scripts do %>
+                      <%= render :partial => "layouts/settings_menu"  %>
+                    <% end  %>
+                  <% end %>
+
+                  <% if session[:usertype] == "admin" %>
+                    <div class="tree_menu" id ="addons_menu_div"></div>
+                    <% content_for :scripts do %>
+                      <%= render :partial => "layouts/addons_menu"  %>
+                    <% end  %>
+                  <% end %>
+
+                  <% if session[:usertype] == "admin" or session[:usertype] == "accountant" %>
+                    <div class="tree_menu" id ="statistics_menu_div"></div>
+                    <% content_for :scripts do %>
+                      <%= render :partial => "layouts/statistics_menu"  %>
+                    <% end  %>
+                  <% end %>
+
+                  <% if session[:usertype] == "reseller" and rs_active? %>
+                    <div class="tree_menu" id ="reseller_menu_div"></div>
+                    <div class="tree_menu" id ="reseller_menu_addons_div"></div>
+                    <% content_for :scripts do %>
+                      <%= render :partial => "layouts/reseller_menu"  %>
+                    <% end  %>
+                  <% end %>
+
+                  <% if current_user.reseller_allow_providers_tariff? and session[:usertype] == "reseller" and rs_active? %>
+                    <div class="tree_menu" id ="reseller_statistics_menu_div"></div>
+                    <% content_for :scripts do %>
+                      <%= render :partial => "layouts/reseller_statistics_menu"  %>
+                    <% end  %>
+                  <% end %>
+
+                  <% if session[:usertype] == "accountant" %>
+                    <div class="tree_menu" id ="accountant_menu_div"></div>
+                    <% content_for :scripts do %>
+                      <%= render :partial => "layouts/accountant_menu"  %>
+                    <% end  %>
+                  <% end %>
+
+                  <div class="tree_menu" id ="personal_menu_div"></div>
+                  <% content_for :scripts do %>
+                    <%if current_user.usertype == 'user' and (current_user.owner and current_user.owner.reseller_allow_providers_tariff?)%>
+                      <%= render :partial => "layouts/personal_menu2"  %>
+                    <%else%>
+                      <%= render :partial => "layouts/personal_menu"  %>
+                    <%end%>
+                  <% end  %>
+
+                </td>
+              <% end %>
+              <td>
+              </td>
+              <td align="left" class="main_window">
+                <% if @Show_Currency_Selector%>
+                  <% if params[:controller].to_s == "tariffs" and params[:action].to_s == "user_rates" %>
+                    <%= currency_selector(true)%>
+                  <% else %>
+                    <%= currency_selector%>
+                  <% end %>
+                <% else %>
+                  <br />
+                <% end %>
+                <% if flash[:notice] -%>
+                  <div id="notice"><%= flash[:notice] %></div>
+                  <br />
+                <% end -%>
+                <% if flash[:status] -%>
+                  <div id="status"><%= flash[:status] %></div>
+                  <br />
+                <% end -%>
+                <div class="nb">
+                  <%= yield %>
+                </div>
+              </td>
+              <td>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <!--
+      <tr>
+        <td>
+      <% if session[:usertype] == "admin" %>
+                        <table width="100%">
+                          <tr>
+                            <td>
+                              >><% #session.model.updated_at %><<
+        <% #dump session %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+        <% #dump params %>
+                            </td>
+                          </tr>
+                        </table>
+      <% end %>
+      </td>
+      </tr>
+      -->
+    </table>
+
+    <div id="footerbck"></div>
+    <div id="footerbox">
+      <div class="left-element">
+        <% if session[:version] and session[:copyright_title]%>
+          &nbsp;&nbsp;<%= session[:version] %> <%= session[:copyright_title] %>
+        <%else%>
+          <%if Confline.get_value("Show_logo_on_register_page", 0).to_i == 1%>
+            &nbsp;&nbsp;<%= Confline.get_value("Version", 0) %> <%= Confline.get_value("Copyright_Title", 0) %>
+          <%end%>
+        <% end %>
+        <% nice_date_time(Time.now) %>
+        <% session[:usertype] %>&nbsp;
+      </div>
+      <% if session[:usertype] == "admin" and session[:hide_manual_link].to_i != 1%>
+        <div class="right-element"><a style="" href="http://wiki.kolmisoft.com/index.php/MOR_Manual" target="_blank"><%= image_tag('icons/pdf.png', :title => _('Manual') ) %> Manual</a></div>
+      <% end %>
+    </div>
+
+    <% if @help_link and session[:usertype] == "admin" and session[:help_link].to_i == 1 %>
+      <div class="help_link"><a href="<%= @help_link %>" target="_blank"><%= image_tag('help_banner.png',  :title => _('Help_Banner_Notification') ) %></a></div>
+    <% end %>
+
+    <%= javascript_include_tag "jquery-1.4.2.min.js" %>
+    <script type="text/javascript">
+      $j = jQuery.noConflict();
+    </script>
+    <%= javascript_include_tag "mor/mor.js" %>
+
+    <%= yield :scripts %>
+  </body>
+</html>

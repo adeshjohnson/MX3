@@ -1,0 +1,21 @@
+<%= form_tag :action => :card_active_bulk, :start => @start_num, :end => @end_num, :activate_i => @activate do %>
+  <br/>
+  <br/>
+  <table class="simple" width="70%">
+    <tr>
+      <td id="card_interval"><b><%= _('Card_interval') %></b> : <%=@start_num%> - <%=@end_num%> <br/><br/></td>
+    </tr>
+    <tr>
+      <td id="active_cards"><b><%= _('Active_cards') %></b> : <%=@list2%> <br/><br/></td>
+    </tr>
+    <tr>
+      <td id="disabled_cards"><b><%= _('Disabled_cards') %></b> : <%=@list%> <br/><br/></td>
+    </tr>
+    <tr>
+      <td id="action"><b><%= _('Action') %></b> : <%=@a_name%> <br/><br/></td>
+    </tr>
+  </table>
+  <br/>
+  <br/>
+  <%= submit_tag _('Confirm') , :disable_with=>_('Processing..')%>
+<% end  %>

@@ -1,0 +1,419 @@
+<b><%= _('DID') %>: <%= @did.did %></b>
+<br />
+<br />
+<b><%= _('Current_status') %>: <%= @did.status.capitalize.capitalize %>
+</b>
+<br />
+
+<% if @did.status != "free" and @did.dialplan%>
+  <%= _('Assigned_to_dial_plan') %>: <%= @did.dialplan.name%><br />
+<% end %>
+
+<% if @did.user and @did.status != "free" %>
+  <%= b_user + _('Assigned_to_user') %>: <%= link_nice_user(@did.user) %><br />
+<% end %>
+
+<% if @did.device%>
+  <%= b_device + _('Assigned_to_device') %>: <%= link_nice_device @did.device %><br />
+<% end %>
+
+<% if @did.status == "closed"%>
+  <br /><%= _('Reserved_for_user_till') %>: <%= nice_date_time @did.closed_till %><br />
+<% end %>
+
+<br />
+<br />
+<b><%= _('Possible_choices') %>:</b>
+<br />
+<br />
+
+<%= form_tag(:action => 'update', :id => @did) do %>
+  <%= hidden_field_tag 'status', "provider" %>
+  <table class="maintable" width="50%">
+    <tr>
+      <th align="left">    <%= _('Details') %>    </th>
+    </tr>
+    <tr class="row1">
+      <td>
+        <br />
+        <br />
+        <table cellpadding="2" cellspacing="2">
+          <% if current_user.usertype == 'accountant' or allow_manage_providers_tariffs? %>
+            <tr>
+              <td><%= _('DID') %>:</td>
+              <td><%= text_field_tag 'did[did]', @did.did, "class" => "input", :size => "50", :id=>"did_did" %></td>
+            </tr>
+            <tr <%= tooltip(_('DID_Provider'), _('DID_Provider_Explanation')) %>>
+              <td>
+                <% provider_id = @did.provider_id%>
+                <strong><%= _('Provider') %>:</strong>
+              </td>
+              <td>
+                <select name="did[provider_id]" >
+                  <%if @providers and @providers.size.to_i > 0%>
+                    <% for p in @providers %>
+                      <option value=<%= p.id %> <%= "selected" if p.id == provider_id %>> <%= p.name %> </option>
+                    <% end %>
+                  <%end%>
+                </select> <%= b_help %>
+              </td>
+            </tr>
+          <%end%>
+          <% if @did.dialplan_id > 0 %>
+            <tr>
+              <td><strong><%= _('Owner') %>:</strong></td>
+              <td><select name="user_id" id="user_id" >
+                  <% for user in @free_users %>
+                    <option value="<%= user.id %>" <%= "selected" if user.id == @did.user_id %>> <%= nice_user(user) %> </option>
+                  <% end %>
+                </select>
+              </td>
+            </tr>
+          <% end  %>
+          <tr>
+            <td><strong><%= _('Language') %>:</strong></td>
+            <td><%= text_field_tag 'did[language]', @did.language, "class" => "input", :size => "5", :maxlength => "10", :id =>"did_language" %></td>
+          </tr>
+          <% unless current_user.usertype == 'reseller' %>
+            <tr>
+              <td><strong><%= _('Call_limit') %>:</strong></td>
+              <td><%= text_field_tag 'did[call_limit]', @did.call_limit, "class" => "input", :size => "5", :id=>"did_call_limit" %></td>
+            </tr>
+          <%end%>
+          <tr>
+            <td><strong><%= _('Comment') %>:</strong></td>
+            <td>
+              <% if current_user.usertype == 'reseller' %>
+                <%= text_field_tag 'did[reseller_comment]', @did.reseller_comment, "class" => "input", :size => "50", :id => "did_comment" %>
+              <%else%>
+                <%= text_field_tag 'did[comment]', @did.comment, "class" => "input", :size => "50", :id => "did_comment" %>
+              <%end%>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong><%= _('Sound_file') %>:</strong></td>
+            <td><%= select_sound_file(@did, "sound_file_id", nil, {:include_blank => true}) %></td>
+          </tr>
+          <% unless current_user.usertype == 'reseller' %>
+            <tr <%= tooltip(_('Grace_Time'), _('Grace_Time_Explanation')) %>>
+              <td><strong><%= _('Grace_Time') %>:</strong></td>
+              <td> <%= text_field_tag 'did[grace_time]', @did.grace_time, :size => 5, "class" => "input" %> s</td>
+            </tr>
+            <tr <%= tooltip(_('Timeout_Digit'), _('Timeout_Digits_Explanation')) %>>
+              <td><strong><%= _('Timeout_Digit') %>:</strong></td>
+              <td> <%= text_field_tag 'did[t_digit]', @did.t_digit, :size => 5, "class" => "input" %> s</td>
+            </tr>
+            <tr <%= tooltip(_('Timeout_Response'), _('Timeout_Response_Explanation')) %>>
+              <td><strong><%= _('Timeout_Response') %>:</strong></td>
+              <td> <%= text_field_tag 'did[t_response]', @did.t_response, :size => 5, "class" => "input" %> s</td>
+            </tr>
+          <% end %>
+          <tr>
+            <td><strong><%= _('CallerID_Name_Prefix') %>:</strong></td>
+            <td> <%= text_field_tag 'did[cid_name_prefix]', @did.cid_name_prefix, :size => 20,:maxlength => "20", "class" => "input" %> </td>
+          </tr>
+
+
+          <tr <%= tooltip(_('Grace_Time'), _('Grace_Time_Explanation')) if current_user.usertype != 'reseller'%>>
+            <td><%= submit_tag _('Change'), :disable_with=>_('Processing..') %></td>
+            <td>&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <%= observe_field("user_id", :update => "device_list_span",:with => "user_id", :url=> {:controller=> "devices", :action => "ajax_get_user_devices", :default => @did.device_id}, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');" ) if current_user.usertype != 'reseller'%>
+  <br />
+<% end %>
+
+
+<% if @choice_free %>
+  <%= form_tag(:action => 'update', :id => @did) do %>
+    <%= hidden_field_tag 'status', "free" %>
+    <table class="maintable" width="50%">
+      <tr>
+        <th align="left">    <%= @did.reseller and !reseller? ? _('Unassign_from_Reseller') : _('Make_did_free') %>    </th>
+      </tr>
+      <tr class="row1">
+        <td>
+          <br /><%= b_check + _('Make_did_free_expanded') %><br /><br />
+          <%if @did.reseller and !reseller?%>
+            <%= submit_tag _('Unassign_from_Reseller'),{:confirm => _("Are you sure?"), :disable_with=>_('Processing..')} %><br />
+          <%else%>
+            <%= submit_tag _('Make_did_free'), :disable_with=>_('Processing..') %><br />
+          <%end%>
+        </td>
+      </tr>
+    </table>
+    <br />
+  <% end%>
+<% end %>
+
+
+<% if @choice_reserved %>
+  <%= form_tag(:action => 'update', :id => @did) do %>
+    <%= hidden_field_tag 'status', "reserved" %>
+    <table class="maintable" width="50%">
+      <tr>
+        <th align="left">    <%= _('Reserve_did_for_user') %>    </th>
+      </tr>
+      <tr class="row1">
+        <td>
+          <br /><%= _('Reserve_did_for_user_expanded') %><br /><br />
+
+          <% if @free_users.size > 0 %>
+            <%= b_user %>
+            <%= select_tag("user_id", options_for_select(@free_users.map{|user| [nice_user(user), user.id]})) %>
+            <br />
+            <br />
+            <%= submit_tag(_('Reserve'), :disable_with=>_('Processing..')) %><br />
+          <% else%>
+            <%= _('No_free_users') %><br /><br />
+          <% end %>
+        </td>
+      </tr>
+    </table>
+    <br />
+  <% end %>
+<% end %>
+
+<% if @choice_active and @did.dialplan_id == 0 %>
+  <%= form_tag(:action => 'update', :id => @did) do %>
+    <%= hidden_field_tag 'status', "active" %>
+    <table class="maintable" width="50%">
+      <tr>
+        <th align="left"> <%= b_device %>   <%= _('Assign_did_to_device') %>    </th>
+      </tr>
+      <tr class="row1">
+        <td>
+          <br /><%= _('Assign_did_to_device_expanded') %>:<br /><br />
+
+          <% if @free_devices.size > 0 %>
+
+            <%= b_device %>
+            <%= select_tag("device_id", options_for_select(@free_devices.map{|dev| ["#{nice_device(dev, {:image => false})}#{ (" - " + dev.description.to_s) if dev.description.to_s.length > 0 }", dev.id]}, @did.device_id))  %>
+            <br /><br />
+            <%= submit_tag(_('Assign'), :disable_with=>_('Processing..')) %><br />
+          <% else%>
+            <%= _('No_free_devices') %><br /><br />
+          <% end %>
+        </td>
+      </tr>
+    </table>
+    <br />
+  <% end %>
+  <% if !reseller? or @reseller_can_assing_to_trunk %>
+    <%= form_tag(:action => 'update', :id => @did) do %>
+      <%= hidden_field_tag 'status', "active" %>
+      <table class="maintable" width="50%">
+        <tr>
+          <th align="left"> <%= b_trunk %>   <%= _('Assign_did_to_Trunk') %>    </th>
+        </tr>
+        <tr class="row1">
+          <td>
+            <br /><%= _('Assign_did_to_trunk_expanded') %><br /><br />
+
+            <% if @available_trunks.size > 0 %>
+
+
+              <%= b_trunk %>
+              <select name="device_id" >
+                <% for dev in @available_trunks %>
+                  <option value="<%= dev.id %>"  <%= "selected" if dev.id.to_i == @did.device_id.to_i%>> <%= nice_user(dev.user) %> - <%= nice_device(dev) %><%= " - " + dev.description.to_s if dev.description.to_s.length > 0 %> </option>
+                <% end %>
+              </select>
+
+              <br /><br />
+              <%= submit_tag(_('Assign'), :disable_with=>_('Processing..')) %><br />
+            <% else%>
+              <%= _('No_free_trunks_for_did') %><br /><br />
+            <% end %>
+          </td>
+        </tr>
+      </table>
+      <br />
+    <% end %>
+  <% end %>
+
+<% end %>
+
+<% if @choice_closed  and @did.dialplan_id == 0 %>
+  <%= form_tag(:action => 'update', :id => @did) do %>
+    <%= hidden_field_tag 'status', "closed" %>
+    <table class="maintable" width="50%">
+      <tr>
+        <th align="left">    <%= _('Stop_did_subscription_for_user') %>    </th>
+      </tr>
+      <tr class="row1">
+        <td>
+
+          <% days_for_did_close = Confline.get_value("Days_for_did_close",0).to_i %>
+
+          <br /><%= b_cross + _('Days_to_reserve_did_to_user') %>: <%= days_for_did_close %><br />
+          <%= _('User_will_be_able_to_return_this_did_till') %>: <%= nice_date_time (Time.now + days_for_did_close.days) %><br /><br />
+          <%= submit_tag _('Stop'), :disable_with=>_('Processing..') %><br />
+        </td>
+      </tr>
+    </table>
+    <br />
+  <% end %>
+<% end %>
+
+<% if @choice_free_dp %>
+
+  <table class="maintable" width="50%">
+    <tr>
+      <th align="left">    <%= _('Assign_to_dialplan') %>    </th>
+    </tr>
+    <tr class="row1">
+      <td>
+        <br /><%= b_forward %><%= _('Assign_to_dialplan_extended') %><br /><br />
+
+        <%if calling_cards_active?%>
+          <% if not @ccdps.empty? %>
+            <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
+              <b><%= _('Calling_cards_dialplan') %>:</b>
+              <select name="dp_id" >
+                <% for dp in @ccdps %>
+                  <option value=<%= dp.id %>> <%= dp.name %> </option>
+                <% end %>
+              </select>
+              <%= image_submit_tag 'icons/check.png', :title => _('Assign') %>
+            <% end %>
+          <% end %>
+
+        <%end%>
+
+        <% if not @abpdps.empty? %>
+          <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
+            <b><%= _('Authorization_by_pin_dialplan') %>:</b>
+            <select name="dp_id" >
+              <% for dp in @abpdps %>
+                <option value=<%= dp.id %>> <%= dp.name %> </option>
+              <% end %>
+            </select>
+            <%= image_submit_tag 'icons/check.png', :title => _('Assign'), :id=>"assign_to_dp_pin" %>
+          <% end %>
+        <% end %>
+
+
+        <% if callback_active? and not @cbdps.empty? %>
+          <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
+            <b><%= _('Callback_dialplan') %>:</b>
+            <select name="dp_id" >
+              <% for dp in @cbdps %>
+                <option value=<%= dp.id %>> <%= dp.name %> </option>
+              <% end %>
+            </select>
+            <%= image_submit_tag 'icons/check.png', :title => _('Assign') , :id=>"assign_to_dp_callback"%>
+          <% end %>
+        <% end %>
+
+
+        <% if not @qfddps.empty? %>
+          <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
+            <b><%= _('Quick_Forwards_dialplan') %></b>
+            <select name="dp_id" >
+              <% for dp in @qfddps %>
+                <option value=<%= dp.id %>> <%= dp.name %> </option> 
+              <% end %>
+            </select>
+            <%= image_submit_tag 'icons/check.png', :title => _('Assign') %>
+          <% end %>
+          <br />
+        <% end %>
+
+
+        <% if not @pbxfdps.empty? %>
+          <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
+            <b><%= _('PBX_Functions_dialplan') %></b>
+            <select name="dp_id" >
+              <% for dp in @pbxfdps %>
+                <option value=<%= dp.id %>> <%= dp.data2 %> - <%= dp.pbxfunction.name if dp.pbxfunction %> </option>
+              <% end %>
+            </select>
+            <%= image_submit_tag 'icons/check.png', :title => _('Assign') %>
+          <% end %>
+          <br />
+        <% end %>
+
+        <% if @ivrs.size > 0 %>
+          <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
+            <b><%= _('Ivr_Dialplan') %></b>
+            <select name="dp_id" >
+              <% for dp in @ivrs %>
+                <option value=<%= dp.id %>><%= dp.name %> </option>
+              <% end %>
+            </select>
+            <%= image_submit_tag 'icons/check.png', :title => _('Assign') %>
+          <% end %>
+          <br />
+        <% end %>
+
+        <% if not @ringdps.empty? %>
+          <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
+            <b><%= _('Ring_Group_dialplan') %></b>
+            <select name="dp_id" >
+              <% for dp in @ringdps %>
+                <option value=<%= dp.id %>> <%= dp.data2 %> - <%= dp.name %> </option>
+              <% end %>
+            </select>
+            <%= image_submit_tag 'icons/check.png', :title => _('Assign') %>
+          <% end %>
+          <br />
+        <% end %>
+
+        <%unless reseller?%>
+          <!--
+          <% if @vm_extension.to_s.length > 0 %>
+            <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
+                                                                                                                      <b><%= _('Voicemail') %></b>
+              <%= hidden_field_tag 'dp_id', "voicemail"  %>
+              <%= image_submit_tag 'icons/check.png', :title => _('Assign') %>
+            <% end %>
+                                                                          <br />
+          <% end %>
+          -->
+        <%end%>
+      </td>
+    </tr>
+  </table>
+  <br />  <br />
+<% end %>
+
+<% if @choice_active_dp %>
+  <%= form_tag(:action => 'update', :id => @did) do %>
+    <%= hidden_field_tag 'status', "free", :id => "status_free" %>
+    <table class="maintable" width="50%">
+      <tr>
+        <th align="left">    <%= _('Make_did_free') %>    </th>
+      </tr>
+      <tr class="row1">
+        <td id="make_did_free">
+          <br /><%= b_check + _('Make_did_free_expanded') %><br /><br />
+          <%= submit_tag _('Make_did_free'), :disable_with=>_('Processing..') %><br />
+        </td>
+      </tr>
+    </table>
+    <br />
+  <% end%>
+<% end %>
+
+<% if @choice_terminated and !reseller? %>
+  <%= form_tag(:action => 'update', :id => @did) do %>
+    <%= hidden_field_tag 'status', "terminated" %>
+    <table class="maintable" width="50%">
+      <tr>
+        <th align="left">    <%= _('Terminate_did') %>    </th>
+      </tr>
+      <tr class="row1">
+        <td>
+          <br /><%= b_cross %><%= _('Disable_did_expanded') %><br /><br />
+          <%= submit_tag _('Terminate'), :disable_with=>_('Processing..') %><br />
+        </td>
+      </tr>
+    </table>
+    <br />
+  <% end %>
+<% end %>

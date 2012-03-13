@@ -1,0 +1,174 @@
+<%= javascript_include_tag "wz_tooltip" %>
+<table width="100%">
+  <tr>
+    <td>
+      <% unless session[:usertype] == "accountant" and session[:acc_manage_dids_opt_1] != 2 %>
+        <% if allow_manage_dids? %>
+          <%= link_to b_add + _('New_did'), :action => 'new' %> &nbsp;&nbsp;
+        <%end%>
+        <%= link_to b_edit + _('Bulk_management'), :action=>'bulk_management'%> &nbsp;&nbsp;
+      <% end %>
+      <% unless current_user.usertype == "reseller" %>
+        <%= link_to b_csv + _('Export_to_csv'), :action=>'dids_export_to_csv'%>
+      <% end %>
+
+    </td>
+    <td align="right">
+      <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+    </td>
+  </tr>
+</table>
+
+<%= form_tag :action => params[:action]  do %>
+  <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+    <table width="100%" class="simple">
+      <tr>
+        <td>
+          <%= hidden_field_tag 'search_on', 1  %>
+          <%= _('DID') %>: <%= text_field_tag 's_did', @search_did, "class" => "input", :size => "20", :maxlength => "30"  %>
+
+          <% unless current_user.usertype == "reseller" %>
+            &nbsp;&nbsp;<%= _('Provider') %>:
+            <select id="s_provider" name="s_provider" >
+              <option value="" selected> <%= _('All') %></option>
+              <% for provider in @providers %>
+                <option value='<%= provider.id %>' <%= "selected" if @search_provider.to_i == provider.id %>> <%= h(provider.name) %> </option>
+              <% end %>
+            </select>
+          <% end %>
+
+          &nbsp;&nbsp;<%= _('Language') %>:
+          <select id="s_language" name="s_language" >
+            <option value="all" selected> <%= _('All') %></option>
+            <% for lang in @languages %>
+              <option value="<%= lang['language'] %>" <%= "selected" if @search_language == lang['language'] %>> <%= lang['language'] %> </option>
+            <% end %>
+          </select>
+
+          &nbsp;&nbsp;<%= _('Status') %>:
+          <select id="s_status" name="s_status" >
+            <option id="s_status_all" value=""> <%= _('All') %> </option>
+            <option id="s_status_free" value="free" <%= "selected" if @search_status == "free"%>> <%= _('Free') %> </option>
+            <option id="s_status_rese" value="reserved" <%= "selected" if @search_status == "reserved"%>> <%= _('Reserved') %> </option>
+            <option id="s_status_acti" value="active" <%= "selected" if @search_status == "active"%>> <%= _('Active') %> </option>
+            <option id="s_status_clos" value="closed" <%= "selected" if @search_status == "closed"%>> <%= _('Closed') %> </option>
+            <option id="s_status_term" value="terminated" <%= "selected" if @search_status == "terminated"%>> <%= _('Terminated') %> </option>
+          </select>
+          <br />
+          <br />
+          <%= _('User') %>: <%= select_tag("s_user", options_for_select([[_('All'), "" ]] + @users.map{|u| [h(nice_user(u)), u.id.to_s]}, @search_user.to_s))  %>
+          &nbsp;&nbsp;<%= _('Device') %>:
+          <span id ="device_list_span">
+            <%= select_tag("s_device", options_for_select([[_('All'), ""]] +@devices.map{|d| [nice_device(d, {:image => false}), d.id.to_s]}, @search_device.to_s ))  %>
+          </span>
+          <%= observe_field("s_user", :update => "device_list_span",:with => "user_id", :url=> {:controller=> "devices", :action => "ajax_get_user_devices", :default => @search_device.to_i, :all => true, :fax => true}, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
+          &nbsp;&nbsp;<%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>
+<br />
+
+<%= render :partial => "page_select_header" if @total_pages > 1%>
+<%= "<br>"  if @total_pages > 1%>
+
+<table class="maintable" width="100%">
+  <tr>
+    <th align="left"><%= _('DID') %></th>
+    <% unless current_user.usertype == "reseller" %>
+      <th align="left" <%= tooltip(_('DID_Provider'), _('DID_Provider_Explanation')) %>><%= _('Provider') %></th>
+    <% end %>
+    <th align="left"><%= _('Language') %></th>
+    <th align="center"><%= _('Status') %></th>
+    <% unless current_user.usertype == "reseller" %>
+      <th align="left"><%= _('Reseller') %></th>
+    <% end %>
+    <th align="left"><%= _('Owner') %></th>
+    <th align="left"><%= _('Device') %></th>
+<%# unless current_user.usertype == "reseller" %>
+    <th align="left"><%= _('Dialplan') %></th>
+<%# end %>
+    <th align="left"><%= _('Simultaneous_Call_limit') %></th>
+    <th align="left"><%= _('Comment') %></th>
+    <% if @show_did_rates%>
+      <th align="center"><%= _('Rates') %></th>
+    <% end %>
+    <% unless session[:usertype] == "accountant" and session[:acc_manage_dids_opt_1] != 2 %>
+      <th> </th>
+      <% unless current_user.usertype == "reseller" %>
+        <th> </th>
+      <% end %>
+    <% end %>
+  </tr>
+
+  <% @dids.each_with_index{ |did, i| %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <%
+      text_class="n"
+      did.provider_id != 0 ? provider  = did.provider : provider = nil
+      if ['Reserved', 'Terminated', 'Active'].include?(did.status.capitalize)
+        user = did.user
+        device = did.device
+      else
+        did.user_id != 0 ? user = did.user : user = nil
+        did.device_id != 0 ? device = did.device : device = nil
+      end
+      -%>
+
+      <td id="did_<%= did.id %>" align="left"> <%= did.did %></td>
+      <% unless current_user.usertype == "reseller" %>
+        <% if session[:usertype] == "accountant" %>
+          <td id="provider_<%= did.id %>" align="left"> <%= provider.name if provider%> </td>
+        <% else %>
+          <td id="provider_<%= did.id %>"  align="left"> <%= link_to provider.name, :controller => "providers", :action => "edit", :id => did.provider_id if provider %> </td>
+        <% end %>
+      <%end%>
+      <td id="language_<%= did.id %>"align="left"> <%= did.language %></td>
+      <td id="status_<%= did.id %>" align="center"> <%= if did.reseller_id > 0 and !reseller? then 'Reserved' else did.status.capitalize end%></td>
+      <% unless current_user.usertype == "reseller" %>
+        <td id="reseller_<%= did.id %>" align="left"><%= did_reseller_info(did)%></td>
+      <% end %>
+      <td id="user_<%= did.id %>" align="left"><%= did_user_info(did, user)%></td>
+      <td id="device_<%= did.id %>" align="left"><%= format_device(did, device, ((current_user.usertype == 'reseller' and did.reseller_id.to_i > 0) or (current_user.usertype != 'reseller' and did.reseller_id.to_i == 0) ? 1 : 0)) %></td>
+  <%# unless current_user.usertype == "reseller" %>
+      <% if current_user.usertype == 'accountant' %>
+        <td id="dialplan_<%= did.id %>" align="left"><%= did.dialplan.name + " (" + did.dialplan.dptype + ")" if did.dialplan %></td>
+      <%  else %>
+        <td id="dialplan_<%= did.id %>" align="left"><%= format_dialplan(did) %></td>
+      <% end %>
+  <%# end %>
+      <td id="call_litmit_<%= did.id %>" align="left"><%= show_call_limit(did) %></td>
+      <% if current_user.usertype == "reseller"  %>
+        <td id="comment_<%= did.id %>" class="<%= text_class %>"  align="left" <%= "onmouseover=\"Tip(\' #{(did.reseller_comment).to_s} \')\" onmouseout = \"UnTip()\"" if did.reseller_comment %>><%= did.reseller_comment.to_s[0,25] if did.reseller_comment %></td>
+
+      <% else %>
+        <td id="comment_<%= did.id %>" class="<%= text_class %>"  align="left" <%= "onmouseover=\"Tip(\' #{(did.comment).to_s} \')\" onmouseout = \"UnTip()\"" if did.comment %>><%= did.comment.to_s[0,25] if did.comment %></td>
+      <% end %>
+      <% if @show_did_rates%>
+        <td id="rates_<%= did.id %>" align="center"> <%= link_to(b_rates + _('Rates'), {:controller=>:did_rates, :action => :index, :id => did}, {:id=> "rates_link_"+did.id.to_s}) %></td>
+      <% end %>
+
+      <% unless session[:usertype] == "accountant" and session[:acc_manage_dids_opt_1] != 2 %>
+        <td id="edit_<%= did.id %>" align="center"><%= link_to(b_edit, {:action => 'edit', :id => did} ,{:id=> "edit_link_"+did.id.to_s})%></td>
+        <% unless current_user.usertype == "reseller" %>
+          <% if did.status == "terminated" 
+               did.find_if_used_in_calls == false ? can_delete = false : can_delete = true 
+             else 
+               can_delete = true 
+             end %>
+          <td id="delete_<%= did.id %>" align="center" <%= tooltip(_('Cannot_delete_did'), _('Cannot_delete_did_associated_with_calls')) if not can_delete %>>
+            <% if did.status == "terminated" and can_delete %>
+             <%= link_to(b_delete, { :action => 'destroy', :id => did }, {:confirm => 'Are you sure?', :method => :post, :id=> "delete_link_"+did.id.to_s}) %></td>
+          <% elsif not can_delete %>
+             <%= b_exclamation %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+  <% } %>
+</table>
+<br />
+<%= render :partial => "page_select_header" if @total_pages > 1%>
+
+<%= iwantto_list(@iwantto_links) %>

@@ -1,0 +1,58 @@
+<b><%=_('Card_group') %> </b> : <%=@cg.name%>
+<br>
+<b><br><%= _('Card') %></b> : <%= @card.number %>
+<br>
+<br>
+<% if @card.sold == 1 %>
+  <%= form_tag :action => 'card_payment_status', :cg => @cg.id, :id => @card do %>
+    <table class="maintable" width="100%">
+      <tr>
+        <th align="left"><%= _('Fill_Card_Ballance') %> </th>
+      </tr>
+      <tr class="row1">
+        <td>  
+            <br>
+            <b><%= b_money + _('Amount_with_VAT') %></b>:
+            <%= text_field_tag 'amount', "", "class" => "input", :size => "10", :maxlength => "10"  %>
+            <br>
+            <br>
+            <b><%= b_currency + _('Currency') %></b>:
+            <select name="currency" >
+            <% for curr in @currs %>
+              <option value="<%= curr.name %>" ><%= curr.name %></option>    
+            <% end %>
+            </select>
+            <br>
+            <br>
+            <%= submit_tag _('Proceed'), :disable_with=>_('Processing..') %>
+            <br>
+            <br>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+<% end %>
+  
+<% if @card.sold == 0%>
+  <%= form_tag :action => 'card_buy', :cg => @cg.id, :id => @card do %>
+    <br>
+    <br>
+    <table class="maintable" width="100%">
+      <tr>
+        <th align="left"><%= _('Buy_Card') %> </th>
+      </tr>
+      <tr class="row1">
+        <td>
+           
+            <br>
+            <br>
+            <%= submit_tag _('Buy'), :disable_with=>_('Processing..')%>
+            <br>
+            <br>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+<% end %>
+<br>
+<br>

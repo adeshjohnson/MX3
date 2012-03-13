@@ -1,0 +1,86 @@
+<b><%= _('Current_DID_Usage') %></b>:
+<br><br>
+<table class="maintable" width="50%">
+
+	<tr class="row1">
+		<th><%=_('DIDs')%></th>
+  		<th align="right"><%=_('Number_of_dids')%></th>
+	</tr>
+
+	<tr class="row2">
+		<td><%=_('Free')%></td>
+  		<td align="right"><%= @free %></td>
+	</tr>
+
+	<tr class="row1">
+		<td><%=_('Reserved')%></td>
+  		<td align="right"><%= @reserved %></td>
+	</tr>
+
+	<tr class="row2">
+		<td><%=_('Active')%></td>
+  		<td align="right"><%= @active %></td>
+	</tr>
+
+	<tr class="row1">
+		<td><%=_('Closed')%></td>
+  		<td align="right"><%= @closed %></td>
+	</tr>
+
+	<tr class="row2">
+		<td><%=_('Terminated')%></td>
+  		<td align="right"><%= @terminated %></td>
+	</tr>
+
+
+</table>
+
+<br><br><br>
+<b><%= _('Search_Historical_DID_Usage') %></b>:
+<br><br>
+
+<div align="left" class="nb">
+
+ <%= form_tag :action => 'dids_usage' do %>
+     <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+     <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+     &nbsp;&nbsp;<%= submit_tag _('Change_date'), :disable_with=>_('Processing..')%>
+<% end %>
+</div>
+<br>
+<br>
+<table class="maintable" width="50%">
+<tr>
+  <th><%=_('Actions_with_DIDs')%></th>
+  <th align="right"><%=_('Number_of_dids')%></th>
+</tr>
+<tr class="row2">
+  <td><%=_('Activated')%></td>
+  <td align="right"><%=@did_assigned%></td>
+</tr>
+<tr class="row1">
+  <td><%=_('Closed')%></td>
+  <td align="right"><%=@did_closed%></td>
+</tr>
+<tr class="row2">
+  <td><%=_('Freed')%></td>
+  <td align="right"><%=@did_made_available%></td>
+</tr>
+<tr class="row1">
+  <td><%=_('Reserved')%></td>
+  <td align="right"><%=@did_reserved%></td>
+</tr>
+<tr class="row2">
+  <td><%=_('Terminated')%></td>
+  <td align="right"><%=@did_terminated%></td>
+</tr>
+<tr class="row1">
+<td><%=_('Created')%></td>
+  <td align="right"><%=@did_created%></td>
+</tr>
+<tr class="row2">
+    <td><%=_('Deleted')%></td>
+  <td align="right"><%=@did_deleted%></td>
+</tr>
+</table>
+

@@ -1,0 +1,7 @@
+<div class="nb"><%= b_user + _('User') %>: <%= link_nice_user(@user) %></div>
+<br />
+
+<%= form_tag :action => 'create', :user_id => @user.id do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag _('Create'), :disable_with=>_('Processing..') %>
+<% end %>

@@ -1,0 +1,49 @@
+<% (defined?(no_checkboxes) and no_checkboxes == true) ? show = false : show = true -%>
+<div id="search_header">
+  <%= form_tag :controller=> params[:controller], :action => params[:action] do %>
+    <table class="bordered">
+      <tr>
+        <td>
+          <table class= "simple">
+            <tr>
+              <td><%= _("From")%></td>
+              <td><%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %></td>
+            </tr>
+            <tr>
+              <td><%= _("Till")%></td>
+              <td><%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %></td>
+            </tr>
+            <tr>
+              <td><%= _("Cardgroup")%></td>
+              <td>
+                <select name = "cardgroup">
+                  <option value="any" <%= "selected" if @options[:cardgroup] == "any" %> ><%= _("Any")%></option>
+                  <% @cardgroups.each { |c| %>
+                    <option value="<%= c.id %>" <%= "selected" if c.id.to_i == @options[:cardgroup].to_i%> ><%= c.name %> </option>
+                  <% } %>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><%= _("Prefix")%></td>
+              <td><%= text_field_tag('prefix', @options[:prefix], "class" => "input") %></td>
+            </tr>
+            <% if show %>
+              <tr>
+                <td colspan="5">
+                  <%= _("Group_By_Prefix")%>:
+                  <%= radio_button_tag "destination_grouping", 1, @options[:destination_grouping].to_i == 1  %>
+                  <%= _("Group_By_Direction")%>:
+                  <%= radio_button_tag "destination_grouping", 2, @options[:destination_grouping].to_i == 2  %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </td>
+        <td valign="top">
+          <%= submit_tag(_("Search"), :disable_with=>_('Processing..')) -%>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+</div>

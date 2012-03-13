@@ -1,0 +1,55 @@
+
+
+<% if not @direction %>
+  <br><br><br>
+  <div class="nb" align = "center">
+    <%= b_exclamation + _('There_is_no_such_prefix_in_db') %>: <%= @prefix%>
+  </div>
+<% end %>
+
+<table width=100%>
+  <tr>
+    <td align = "center">
+
+      <table width=90%>
+        <tr>
+          <td align = "left">
+            <% if @message.to_s.length > 0 %>
+              <%= @message  %>
+            <% else %>
+              <div class="nb">
+                <% if @direction %>
+                  <b><%= _('Service') %>: <%= h @service.name %></b><br>
+                  <b><%= _('Direction') %>: <%=  draw_flag(@direction.code) + " "+h(@direction.name.to_s) %></b><br>
+                <% end %>
+              </div>
+              <br>
+              <table class="maintable" width="100%">
+                <% if @total_pages > 1 %>
+                  <tr>
+                    <td colspan="3"><%= page_select_header(@page, @total_pages, {:id => @service.id, :direction => @direction.code}) %></td>
+                  <tr>
+                <% end %>
+                <% @destinations.each_with_index{ |destination, i|%>
+                  <tr class="row<%= (i % 2 + 1).to_s %>">
+                    <td><%= destination.prefix %></td>
+                    <td><%= destination.subcode %></td>
+                    <td><%= h destination.name %></td>
+                  </tr>
+                <% } %>
+                <% if @total_pages > 1 %>
+                  <tr>
+                    <br>
+                    <td colspan="3"><%= page_select_header(@page, @total_pages, {:id => @service.id, :direction => @direction.code}) %></td>
+                  <tr>
+                <% end  %>
+              </table>
+            <% end  %>
+          </td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+</table>
+<br>

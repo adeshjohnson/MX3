@@ -1,0 +1,108 @@
+<b><%= b_user + _('User') + ":</b> " +  @user.first_name + " " + @user.last_name %>
+<br><br>
+<b><%= _('Destination') %>:</b> <%= draw_flag_by_code @dgroup.flag %> <%= @dgroup.name %> <%= @dgroup.desttype %>
+<br><br>
+<b><%= _('Day') %>:</b> <%= _('Work_day') if @dt == "WD"%><%= _('Free_day') if @dt == "FD"%><%= _('Work_day_and_Free_day') if @dt == ""%>
+<br><br>
+<b><%= _('Time') %>:</b> <%= @st %> - <%= @et %>
+<br><br>
+
+<table width="100%" class="maintable">
+  <tr>
+    <th align="left"><%= _('From') %></th>
+    <th align="center"><%= _('Duration') %></th>
+    <th align="center"><%= _('Type') %></th>
+    <th align="center"><%= _('Round_by') %></th>
+    <th align="center"><%= _('Rate') %> (<%= session[:default_currency] %>)</th>
+    <th></th>    
+    <th></th>  
+  </tr>
+
+<% i = 0 %>     
+<% for ard in @ards %>
+
+<% if i != (@ards.size - 1) %>   
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+
+    <% 
+        duration = ard.duration
+        duration = "∞" if ard.duration == -1
+     %>
+
+    <td align="left"><%= ard.from %></td>
+    <td align="center"><%= duration if ard.artype == "minute"%></td>
+    <td align="center"><%= ard.artype %></td>
+    <td align="center"><%= ard.round  if ard.artype == "minute"%></td>
+    <td align="center"><%= ard.price %></td>  
+
+    <td></td>
+    <td></td>
+
+  </tr>
+<% end %>   
+
+<% if i == (@ards.size - 1) %>    
+ <%= form_tag :action => 'user_custom_rate_update', :id => ard.id do %>
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+
+    <% 
+        duration = ard.duration
+        duration = "∞" if ard.duration == -1
+        duration = "" if ard.artype == "event"
+        round = ard.round
+        round = "" if ard.artype == "event"
+     %>
+
+    <td align="left"><%= ard.from %></td>
+        <%= hidden_field_tag 'from', ard.from %>    
+    <td align="center">
+        <%= text_field_tag 'duration', duration, "class" => "input", :size => "4", :maxlength => "6"  %> <%= _('Infinity') %>? 
+        <%= check_box_tag 'infinity', value = "1", checked = ard.duration == -1 %>
+    </td>
+    <td align="center">
+         <select name="artype" > 
+               <option value="minute" <%= "selected" if ard.artype == "minute" %>> <%= _('minute') %></option>
+               <option value="event" <%= "selected" if ard.artype == "event" %>> <%= _('event') %></option>
+         </select>
+    </td>
+    <td align="center"><%= text_field_tag 'round', round, "class" => "input", :size => "3", :maxlength => "4"  %></td>
+    <td align="center"><%= text_field_tag 'price', ard.price, "class" => "input", :size => "8", :maxlength => "10"  %></td>            
+    <td align="center"> <%= image_submit_tag 'icons/edit.png', :title => _('Edit'), :id=>"edit_" + ard.id.to_s %></td>
+  <% if i > 0 %>
+    <td align="center"><%= link_to b_delete, :action => 'user_custom_rate_delete', :id => ard.id %> </td>
+  <% else %>
+    <td></td>
+  <% end %>
+  </tr>
+ <% end %>  
+<% end %> 
+   
+  <% i += 1%>    
+<% end %>
+
+<% if @can_add %>
+ <%= form_tag :action => 'user_custom_rate_add', :id => @customrate.id, :dt => @dt, :st => @st, :et => @et do %>
+    <tr>
+        <th align="left"><%= @from %></th>
+        <%= hidden_field_tag 'from', @from %>
+        <th align="center">
+             <%= text_field_tag 'duration', "∞", "class" => "input", :size => "4", :maxlength => "6"  %> <%= _('Infinity') %>? 
+             <%= check_box_tag 'infinity', value = "1", checked = 1 %>
+        </th>
+        <th align="center">
+             <select name="artype" > 
+                   <option value="minute" "selected" > <%= _('minute') %></option>
+                   <option value="event"> <%= _('event') %></option>
+             </select>
+        </th>            
+        <th align="center"><%= text_field_tag 'round', "1", "class" => "input", :size => "3", :maxlength => "4"  %>s</th>
+        <th align="center"><%= text_field_tag 'price', "0", "class" => "input", :size => "8", :maxlength => "10"  %></th>            
+        <th align="center"> <%= image_submit_tag 'icons/add.png', :title => _('Add'), :id =>"Add_" + @customrate.id.to_s %></th>
+        <th></th>
+    </tr>
+ <% end %>    
+<% end %>
+
+</table>
+
+<br><br>

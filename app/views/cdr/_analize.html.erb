@@ -1,0 +1,72 @@
+<b><%= _('DB_analysis') %></b>
+<table class="maintable" >
+  <tr class="row1">
+    <td id="calls_in_db" width="50%"><%= _('Calls_in_DB') %></td>
+    <td id="calls_in_db_value" width="15%" align="right"><%= @cdr_analize[:calls_in_db].to_i %></td>
+    <td width="35%"></td>
+  </tr>
+  <tr>
+    <td id="clis_in_db" width="50%"><%= _('Clis_in_DB') %></td>
+    <td id="clis_in_db_value" width="15%" align="right"><%= @cdr_analize[:clis_in_db] %></td>
+    <td width="35%"></td>
+  </tr>
+</table>
+<br />
+<b><%= _('CSV_file_analysis') %></b>
+<table class="maintable" >
+  <tr class="row1">
+    <td id="cdr_file_size" width="50%"><%= _('File_size') %></td>
+    <td id="cdr_file_size_value" width="15%" align="right"><%= session[:cdr_file_size] %></td>
+    <td id="cdr_file_size_unit" width="35%" align="center"><%= _('bytes') %></td>
+  </tr>
+  <tr>
+    <td id="file_lines" width="50%"><%= _('Total_file_lines') %>   </td>
+    <td id="file_lines_number" width="15%" align="right"><%= @cdr_analize[:file_lines] %></td>
+    <td width="35%"></td>
+  </tr>
+  <tr class="row1">
+    <td id="cdr_in_csv_file" width="50%"><%= _('CDRs_in_file') %></td>
+    <td id="cdr_in_csv_file_number" width="15%" align="right"><%= @cdr_analize[:cdr_in_csv_file] %></td>
+    <td width="35%"></td>
+  </tr>
+  <%unless session[:cdr_import_csv2][:import_user]%>
+    <tr>
+      <td id="existing_clis" width="50%"><%= _('Existing_clis_in_csv_file') %></td>
+      <td id="existing_clis_number" width="15%" align="right"><%= @cdr_analize[:existing_clis_in_csv_file] %></td>
+      <td width="35%"></td>
+    </tr>
+    <tr class="row1">
+      <td id="new_clis" width="50%"><%= _('New_clis_in_csv_file') %></td>
+      <td id="new_clis_number" width="15%" align="right"><%= @cdr_analize[:new_clis_in_csv_file] %></td>
+      <td id="new_bad_clis" width="35%" align="center"><%= @cdr_analize[:bad_clis] %> <%= _('bad_clis') %></td>
+    </tr>
+  <%end%>
+</table>
+<br />
+<b><%= _('To_do') %></b>
+<table class="maintable" >
+  <%unless session[:cdr_import_csv2][:import_user]%>
+    <tr class="row1">
+      <td id="fix_cdrs" width="50%"><%= _('Fix_cdrs') %> </td>
+      <td id="fix_cdrs_value" width="15%" align="right"><b><%= @cdr_analize[:bad_clis] %></b></td>
+      <td id="fix_cdrs_step" width="35%" align="center" width="35%"><%= _('Step') %> 6 </td>
+    </tr>
+    <%if session[:cdr_import_csv2][:create_callerid].to_i == 1%>
+      <tr class="row1">
+        <td id="clis_to_create" width="50%"><%= _('Clis_to_create') %></td>
+        <td id="clis_to_create_value" width="15%" align="right"><b><%= @cdr_analize[:new_clis_to_create] %></b></td>
+        <td id="clis_to_create_step" width="35%" align="center" width="35%"><%= _('Step') %> 7 </td>
+      </tr>
+      <tr>
+        <td id="assigne_clis" width="50%"><%= _('Assigne_clis') %> </td>
+        <td id="assigne_clis_value" width="15%" align="right"><b><%= @cdr_analize[:clis_to_assigne] %></b></td>
+        <td id="assigne_clis_step" width="35%" align="center"><%= _('Step') %> 8 </td>
+      </tr>
+    <%end%>
+  <%end%>
+  <tr class="row1">
+    <td id="cdrs_to_insert" width="50%"><%= _('Insert_cdr_in_db') %></td>
+    <td id="cdrs_to_insert_value" width="15%" align="right"><b><%= @cdr_analize[:cdrs_to_insert] %></b></td>
+    <td id="cdrs_to_insert_step" width="35%" align="center"><%= _('Step') %> 9 </td>
+  </tr>
+</table>

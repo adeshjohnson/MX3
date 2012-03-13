@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<!--admin login-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>saddons_menu20</td>
+	<td>Skype</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>In order to be able to dial to any Skype Accounts (configured in the system as Skype Devices) please create at least one Skype Provider.</td>
+	<td></td>
+</tr>
+<!--add skype provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>SkypeProvider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[tech]_skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--check-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt='Skype']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>prov_ind_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>prov_ind_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>prov_ind_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_login</td>
+	<td>SkypeProvider</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider not saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Skype provider must have Skype Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>codec[gsm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>prov_ind_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>codec[g723]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>prov_ind_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>codec[g726]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>prov_ind_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>codec[ilbc]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>prov_ind_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>codec[lpc10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>prov_ind_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>prov_ind_9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>prov_ind_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>codec[adpcm]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>prov_ind_9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>codec[slin]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>prov_ind_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>codec[h261]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//li[@id='item_12']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>codec[h263]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//li[@id='item_13']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>codec[h263p]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//li[@id='item_14']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>codec[h264]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//li[@id='item_17']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--/billing/functions/skype-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/skype</td>
+	<td></td>
+</tr>
+<!--change without checking provider-->
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Default Skype Provider changed</td>
+	<td></td>
+</tr>
+<!--new default provider_2-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>skype_provider_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--check, it is saved?-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Default Skype Provider changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>skype_provider_2</td>
+	<td>on</td>
+</tr>
+<!--create second provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>darvienas</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider[tech]_skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--check default provider_2 saved?-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>skype_provider_3</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>skype_provider_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>commit</td>
+	<td>Change Default Provider</td>
+</tr>
+<!--change default provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>skype_provider_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Default Skype Provider changed</td>
+	<td></td>
+</tr>
+<!--check, it is saved?-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>skype_provider_3</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>skype_provider_2</td>
+	<td>off</td>
+</tr>
+<!--edit skype provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_name</td>
+	<td>SkypeProviderNew</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>provider_tariff_id</td>
+	<td>label=Test Tariff bad currency</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_login</td>
+	<td>naujausias</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[alaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[ulaw]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>codec[g729]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--check, it is saved?-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_name</td>
+	<td>SkypeProviderNew</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>provider_login</td>
+	<td>naujausias</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>provider_tariff_id</td>
+	<td>Test Tariff bad currency</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>codec[alaw]</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>codec[ulaw]</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>codec[g729]</td>
+	<td>on</td>
+</tr>
+<!--reseller login-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--checking for abilities-->
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Skype</td>
+	<td>Skype</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Skype</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>skype_provider_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Edit Provider: SkypeProviderNew</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Providers</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/destroy/3</td>
+	<td></td>
+</tr>
+<!--admin login-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--check, it is not deleted?-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>ani_2</td>
+	<td>SkypeProviderNew</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//a[@id='delete_link_2']/img</td>
+	<td></td>
+</tr>
+<!--delete skype providers-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='delete_link_2']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='delete_link_3']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>In order to be able to dial to any Skype Accounts (configured in the system as Skype Devices) please create at least one Skype Provider.</td>
+	<td></td>
+</tr>
+<!--create skype devices for admin-->
+<!--first-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>apibudinimas</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--second-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>apibidinimas kitas</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--third-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>na ir dar vienas</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device[device_type]_skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--//-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@alt='Skype']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>description_12</td>
+	<td>na ir dar vienas</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td[@id='pic_12']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>description_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>secret_10</td>
+	<td></td>
+</tr>
+<!--edit device-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_timeout</td>
+	<td>120</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_extension</td>
+	<td>wertyui</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>na ir dar vienas ir pakeistas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--check-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>description_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>description_12</td>
+	<td>na ir dar vienas ir pakeistas</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>extension_12</td>
+	<td>wertyui</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name_12</td>
+	<td></td>
+</tr>
+<!--delete-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='destroy_link_10']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<!--check-->
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>description_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>name_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>secret_10</td>
+	<td></td>
+</tr>
+<!--reseller login-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--resellers abilities-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>page_title</td>
+	<td>Devices</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>description_11</td>
+	<td>apibudinimas</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>description_5</td>
+	<td>Test Device for Admin</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/destroy/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

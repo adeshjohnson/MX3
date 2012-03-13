@@ -1,0 +1,47 @@
+<table class = 'maintable'>
+  <th colspan="2"><%= _('Payment_Details')%></th>
+  <tr>
+    <th align="left"><%= _('Payment_Type') %></th>
+    <td align="left"><%= @payment.paymenttype.to_s.capitalize %> </td>
+  </tr>
+  <tr>
+    <th align="left"><%= _('Transaction_ID') %></th>
+    <td align="right"><%= @payment.transaction_id %> </td>
+  </tr>
+  <tr>
+    <th align="left"><%= _('Order_ID') %></th>
+    <td align="right"><%= @payment.id %> </td>
+  </tr>
+  <tr>
+    <th align="left"><%= _('User') %></th>
+    <td align="left"><%= @payment.first_name.to_s+" "+@payment.last_name.to_s %> </td>
+  </tr>
+  <tr>
+    <th align="left"><%= _('Amount') %></th>
+    <td align="right"><%= nice_number_currency(@payment.amount) %> <%= @payment.currency %> </td>
+  </tr>
+  <tr>
+    <th align="left"><%= _('Tax') %></th>
+    <td align="right"><%= nice_number_currency(@payment.tax) %> <%= @payment.currency %></td>
+  </tr>
+  <tr>
+    <th align="left"><%= _('Fee') %></th>
+    <td align="right"><%= nice_number_currency(@payment.fee) %> <%= @payment.currency %> </td>
+  </tr>
+  <tr>
+    <th align="left"><%= _('Gross') %></th>
+    <td align="right"><%= nice_number_currency(@payment.gross) %> <%= @payment.currency %></td>
+  </tr>
+  <tr>
+    <th align="left"><%= _('Ordered_at') %></th>
+     <td align="center"><%= nice_date_time @payment.date_added %></td>
+  </tr>
+  <tr>
+    <th align="left"><%= _('Shipped_at') %></th>
+    <td align="center"><%= nice_date_time @payment.shipped_at %></td>  
+  </tr>
+</table>
+
+
+    
+    

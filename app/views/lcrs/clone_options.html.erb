@@ -1,0 +1,27 @@
+<%= form_tag :controller => :lcrs, :action => :clone_lcrs do %>
+<div id='reseller_select_options'>
+  <table>
+    <tr>
+      <td><%= _('Original_lcr_reseller') %>:</td>
+      <td>
+        <select id='select_reseller_a' name='resellerA' onchange="if(this.value!=0){new Ajax.Updater('clone_to_reseller', '<%=Web_Dir %>/lcrs/resellers_with_common_providers/'+ this.value, {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});new Ajax.Updater('lcr_list', '<%=Web_Dir %>/lcrs/resellers_lcrs/'+ this.value, {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}}) };">
+          <% if @resellers.nil? or @resellers.empty? %>
+            <option value='0'> <%= _('No_resellers_were_found') %>
+          <% else %>
+            <option value='0'> <%= _('Select_reseller') %> </option>
+            <% @resellers.each do |reseller| %>
+              <option value=<%= "#{reseller.id}" %>> <%= nice_user reseller %> </option>
+            <% end %>
+          <% end %>
+        </select>
+      </td>
+      <td><%= _('Cloned_lcr_reseller') %>:</td>
+      <td id='clone_to_reseller'>
+        <select width="100" name='resellerB'><option width="100px"></option></select>
+      </td>
+    <tr>
+  </table>
+  <%= submit_tag _('Clone'), :disable_with=>_('Processing..'), :disabled => true, :id => 'clone_button'%>
+  <br />
+  <div id='lcr_list'></div>
+<% end %>

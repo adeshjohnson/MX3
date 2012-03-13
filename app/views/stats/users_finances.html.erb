@@ -1,0 +1,88 @@
+<table width="100%">
+  <tr>
+    <td></td>
+    <td align="right">
+      <% if @users %>
+        <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<%= form_tag :action => 'users_finances' do %>
+  <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+    <br />
+    <table width="100%" class="simple">
+      <tr>
+        <td>
+          <%= _('Username') %>: <%= text_field_tag 's_username', @options[:s_username], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('first_name') %>: <%= text_field_tag 's_fname', @options[:s_fname], "class" => "input", :size => "15", :maxlength => "30"  %>
+          <%= _('last_name') %>: <%= text_field_tag 's_lname', @options[:s_lname], "class" => "input", :size => "15", :maxlength => "30"  %>
+
+          <%= _('Type') %>:
+          <select name="s_type" >
+            <option value="all" <%= "selected"if @options[:s_type] == "" %>> <%= _('All') %> </option>
+            <option value="postpaid" <%= "selected" if @options[:s_type] == "postpaid"%>> <%= _('Postpaid') %> </option>
+            <option value="prepaid" <%= "selected" if @options[:s_type] == "prepaid"%>> <%= _('Prepaid') %> </option>
+          </select>
+          <span style ="white-space: nowrap;">
+            <%= _('Balance_between') %>: <%= text_field_tag 's_balance_min', @options[:s_balance_min], "class" => "input", :size => "7", :maxlength => "10"  %> -
+            <%= text_field_tag 's_balance_max', @options[:s_balance_max], "class" => "input", :size => "7", :maxlength => "10"  %>
+          </span>
+          &nbsp;&nbsp;<%= _('Status') %>:
+          <select id="s_completed" name="s_completed" >
+            <option value="" <%=' selected ' if @options[:s_completed] == ""%>><%=_('All')%></option>
+            <option value="1" <%=' selected ' if @options[:s_completed] == '1'%>><%=_('Completed')%></option>
+            <option value="0" <%=' selected ' if @options[:s_completed] == '0'%>><%=_('Not_Completed')%></option>
+          </select>
+          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
+        </td>
+        <td align="right">
+          <%= link_to(b_cross + _('Clear_search'), {:action => 'users_finances', :clear=> 1}, {}) if @search == 1 %>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>
+
+<br />
+<%= page_select_header(@options[:page], @total_pages) %>
+<div align="center">
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left">        <%= _('User') %>    </th>
+      <th align="left">        <%= _('Type') %>    </th>
+      <% if can_see_finances? %>
+        <th align="right">        <%= _('Balance') %> (<%= session[:default_currency]%>)   </th>
+        <th align="right">        <%= _('Credit') %> (<%= session[:default_currency]%>)    </th>
+        <th align="right">        <%= _('Payments') %>    </th>
+        <th align="right">        <%= _('Amount') %> (<%= session[:default_currency]%>)    </th>
+      <% end %>
+    </tr>
+    <% @users.each_with_index{ |user, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td align="left" id="user_id_<%=user.id%>"> <%= nice_user(user) %> </td>
+        <td align="left" id="user_type_<%=user.id%>"> <%= _('Postpaid') if user.postpaid == 1%><%= _('Prepaid') if user.postpaid == 0%></td>
+        <% if can_see_finances? %>
+          <td align="right" id="user_balance_<%=user.id%>"> <%= nice_number user.balance %> </td>
+          <td align="right" id="user_credit_<%=user.id%>"> <%= nice_number user.credit if user.credit != (-1) and user.postpaid.to_i != 0%><%= _('Unlimited') if user.credit == (-1) and user.postpaid.to_i != 0%> </td>
+          <td align="right" id="user_payments_<%=user.id%>"> <%= @payment_size[user.id] %></td>
+          <td align="right" id="user_amount_<%=user.id%>"> <%= nice_number @amounts[user.id] %></td>
+        <% end %>
+      </tr>
+    <% } %>
+    <% if can_see_finances? %>
+      <tr>
+        <th align="left">        <%= _('Total') %>:    </th>
+        <th align="left">          </th>
+        <th align="right" id="total_balance">        <%= nice_number @total_balance %>   </th>
+        <th align="right" id="total_credit">        <%= nice_number @total_credit %>   </th>
+        <th align="right" id="total_payments">        <%= @total_payments %>    </th>
+        <th align="right" id="total_amount">        <%= nice_number @total_amount %>    </th>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<br />
+<%= page_select_header(@options[:page], @total_pages, {}, {:id_prefix => "page_down_"}) %>

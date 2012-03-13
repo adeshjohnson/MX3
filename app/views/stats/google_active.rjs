@@ -1,0 +1,65 @@
+if session[:google_active]==1 
+  @map = Variable.new("map")
+  @devices = Variable.new("devices")
+  @providers = Variable.new("providers")
+  @servers = Variable.new("servers")
+  # page << @map.clear_overlays
+  page << "try{"
+  page << @map.clear_overlays()
+  page << "} catch(e){"
+  page << @map.clear_overlays()
+  page << "}"
+  
+   if session[:google_devices] == 1
+    page << @devices.deactivate
+    page << @devices.activate
+  else 
+    page << @devices.deactivate
+  end
+  if session[:google_providers] == 1
+    page << @providers.deactivate
+    page << @providers.activate
+  else 
+    page << @providers.deactivate
+  end
+  if session[:google_servers] == 1
+    page << @servers.deactivate
+    page << @servers.activate
+  else
+    page << @servers.deactivate
+  end
+  
+  if @calls
+    for call in @calls  
+      if call.src_device and call.src_device_id.to_i != 0
+        loc = Iplocation.get_location(call.src_device.ipaddr)
+      else 
+        loc = Iplocation.new
+      end
+      if loc.longitude == 0 and loc.latitude == 0
+        loc = Iplocation.get_location(Server.find(:first, :conditions => "server_id = 1").server_ip)
+      end 
+      loc2 = Iplocation.get_location(call.prefix, 1)
+      if loc.longitude != 0 and loc.latitude != 0 and loc2.latitude != 0 and loc2.longitude != 0
+        device = call.src_device
+        provider = call.provider
+        tool_tip = _("Caller")+":<br / >"+link_nice_device(device)
+        tool_tip += "<br />"+link_nice_user(device.user)
+        page << "map.addOverlay(" +GMarker.new([loc.latitude.to_f, loc.longitude.to_f], :icon => @act_icon ,:title => nice_device_no_pic(device), :info_window => tool_tip).to_javascript+");"
+        city = ""
+        city = loc2.city.to_s if loc2.city and loc2.city != ""
+        tool_tip = _("Country")+": " +loc2.country.to_s
+        tool_tip += "<br />"+city if city != ""
+        tool_tip +="<br />"+_("Provider")+": "+provider.name if provider
+        #tool_tip +="<br />"+_("Prefix")+": " +call.prefix 
+        tool_tip +="<br />"+_("Number")+": " +call.dst if call.dst
+        tool_tip +="<br />"+_("Duration")+": "+nice_time(Time.now - call.start_time).to_s+"<br />. "
+        
+        page << "map.addOverlay("+GMarker.new([loc2.latitude.to_f, loc2.longitude.to_f] ,:title => city.to_s+" "+call.dst , :info_window => tool_tip).to_javascript+");"
+        page << "line = new GPolyline([new GLatLng(#{loc.latitude},#{loc.longitude}),new GLatLng(#{loc2.latitude},#{loc2.longitude})], '#ff0000',3,1.0);"
+        page << "map.addOverlay(line);"    
+      end
+    end
+  end 
+  @headers["Content-Type"] = "text/javascript; charset=utf-8"
+end

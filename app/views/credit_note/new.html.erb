@@ -1,0 +1,29 @@
+<%= form_tag :action => 'create' do %>
+  <%= _('Issue_date') %>: <%= select_datetime(@note.issue_date, :end_year => Date.today.year+1, :prefix => "issue_date") %>
+  <br />
+  <br />
+  <table>
+    <% if @users and @users.size > 0%>
+      <tr>
+        <td><%= _("User")%>: </td>
+        <td><%= select("user", "id", @users.map {|u| [nice_user(u),u.id]}) if @users %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td> <%= _("Number") %>: </td>
+      <td><%= text_field_tag 'number', @note.number, "class" => "input", :size => "15", :maxlength => "30"  %></td>
+    </tr>
+    <tr>
+      <td> <%= _("Price") %>: </td>
+      <td><%= text_field_tag 'price', @note.price, "class" => "input", :size => "15", :maxlength => "30"  %></td>
+    </tr>
+    <tr>
+      <td> <%= _("Comment") %>: </td>
+      <td><%= text_area_tag :comment, @note.comment, :rows => 5,:style => "width: 100%;", :class => "input" %> </td>
+    </tr>
+  </table >
+  <br />
+  <% if @users %>
+    <%= submit_tag _('Create'), :method => :post, :disable_with=>_('Processing..')%>
+  <% end %>
+<% end %>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>payment_ideal</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">payment_ideal</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--should be able to set correct settings-->
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ideal_ideal_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ideal_ideal_merchant_id</td>
+	<td>mecgant_123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ideal_ideal_passphrase</td>
+	<td>the_passphrase</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ideal_ideal_description</td>
+	<td>payment description</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ideal_ideal_min_amount</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ideal_ideal_max_amount</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways[ideal][ideal][private_key_file]</td>
+	<td>/home/mor/selenium/files/certificates/private_key.pem</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways[ideal][ideal][private_certificate_file]</td>
+	<td>/home/mor/selenium/files/certificates/private_certificate.cer</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways[ideal][ideal][ideal_certificate_file]</td>
+	<td>/home/mor/selenium/files/certificates/private_certificate.cer</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ideal_ideal_merchant_id</td>
+	<td>mecgant_123</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ideal_ideal_passphrase</td>
+	<td>the_passphrase</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ideal_ideal_description</td>
+	<td>payment description</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ideal_ideal_min_amount</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ideal_ideal_max_amount</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//img[@title='Certificate exists']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ideal_ideal_min_amount</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ideal_ideal_max_amount</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>An error occurred while saving gateway configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Ideal_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Minimum amount is bigger than maximum amount.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways[ideal][ideal][private_key_file]</td>
+	<td>/home/mor/selenium/files/csv/autodailer_numbers.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>An error occurred while saving gateway configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Ideal_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please check your Private key file and your passphrase</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways[ideal][ideal][ideal_certificate_file]</td>
+	<td>/home/mor/selenium/files/csv/autodailer_numbers.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>An error occurred while saving gateway configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Ideal_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please upload valid iDeal certificate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways[ideal][ideal][private_certificate_file]</td>
+	<td>/home/mor/selenium/files/csv/autodailer_numbers.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>An error occurred while saving gateway configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Ideal_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please check Private certificate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ideal_ideal_passphrase</td>
+	<td>aaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>gateways[ideal][ideal][private_key_file]</td>
+	<td>/home/mor/selenium/files/certificates/private_key.pem</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Ideal_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please check your Private key file and your passphrase</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/ideal/ideal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>ideal_ideal_currency</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/change_default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#enable_3 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Currencies rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/ideal/ideal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>ideal_ideal_currency</td>
+	<td>ALL</td>
+</tr>
+</tbody></table>
+</body>
+</html>

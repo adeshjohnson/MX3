@@ -1,0 +1,7756 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<!--Follow the link to note list-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<!--Verify there is menu option for credit notes-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Credit notes</td>
+	<td></td>
+</tr>
+<!--Verify there is link to create new note-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Create credit note</td>
+	<td></td>
+</tr>
+<!--Follow the link and create credit note-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<!--Verify that you can create credit note just for certais users, you can not select reseller users etc-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>System Admin Test Accountant Test Reseller Test User #1</td>
+	<td></td>
+</tr>
+<!--TODO: fake form and try to create credit note for reseller user(id=5), should fail to find such user -->
+<tr>
+	<td>select</td>
+	<td>id=issue_date_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=comment</td>
+	<td>comment 1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note created</td>
+</tr>
+<!--Note was created, verify that data is correct-->
+<tr>
+	<td>verifyText</td>
+	<td>link=Test Reseller</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=issue_date</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=price</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=full_price</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=comment</td>
+	<td>comment 1</td>
+</tr>
+<!--Note should be unpaid-->
+<tr>
+	<td>verifyValue</td>
+	<td>id=image_not_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Paid date</td>
+	<td></td>
+</tr>
+<!--Edit comment-->
+<tr>
+	<td>type</td>
+	<td>id=comment</td>
+	<td>comment 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note changed</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=comment</td>
+	<td>comment 2</td>
+</tr>
+<!--Check what balance user has and what are his tax settings -->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax1_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax2_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax3_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax4_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD</td>
+	<td></td>
+</tr>
+<!--Set note as paid and verify that payment was created and price was added to user balance-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=image_not_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=image_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paymenttype_10</td>
+	<td>Credit note</td>
+</tr>
+<!--TODO: kaip patikrinti date_added_10 kai jis dinamiskai nusistato-->
+<tr>
+	<td>verifyText</td>
+	<td>link=Test Reseller</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_10</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_10</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=currency_10</td>
+	<td>USD</td>
+</tr>
+<!--Create note without number and comment, they are not mandatory -->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_hour</td>
+	<td>label=07</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_day</td>
+	<td>label=7</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note created</td>
+</tr>
+<!--Note was created, verify that data is correct-->
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=issue_date</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=price</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=full_price</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=comment</td>
+	<td></td>
+</tr>
+<!--Verify that those two notes are correctly shown in list. there has to be links to users, links to note details and delete note.-->
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list</td>
+	<td></td>
+</tr>
+<!--There should be links to edit and delete notes. Notice that paid note should be checked and have paid date-->
+<tr>
+	<td>verifyText</td>
+	<td>link=Test Reseller</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_1</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date1</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_paid_1</td>
+	<td></td>
+</tr>
+<!--TODO: kaip patikrinti pay date kai jis dinamiskai nusistato-->
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_full_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Details&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<!--Not paid note should be marked with cross and cannot have paid date set-->
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date2</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_paid_date_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_2</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_full_price_2</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#details_link_2 &gt; img[alt=&quot;Details&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#delete_link_2 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<!--Set page limit to 1, so that it would be clear whether ordering works well-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--Verify that we can sort table by user, number, status, issue date, paid date, price-->
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test Reseller</td>
+	<td>Test Reseller</td>
+</tr>
+<!--Order ASC/DESC by number-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_1</td>
+	<td>100</td>
+</tr>
+<!--Order ASC/DESC by issue date-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date2</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date1</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<!--Order ASC/DESC by paid-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_paid_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_2</td>
+	<td></td>
+</tr>
+<!--Order ASC/DESC by paid date-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_paid_date_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<!--TODO: kaip patikrinti pay date kai jis dinamiskai nusistato-->
+<!--Order ASC/DESC by price without taxs-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_2</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<!--Verify that user cannot supply invalid parameter to order resultset, but if he does ordering is done by default parameter - username-->
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list?order_by=user&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Error</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list?order_by=username&amp;order_desc=igli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Error</td>
+	<td></td>
+</tr>
+<!--Verify that pageing works, if page number is more than there are pages we should be redirected to last page. if it is less than 1 - redirect to first page-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?order_by=price&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_2</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_2</td>
+	<td>1000.0</td>
+</tr>
+<!--Set page limit to 10, so that we could see everything in one page-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--Verify that search function works corectly-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=paid_date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=paid_date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--We can filter by partial string(LIKE 'XXX%'-->
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<!--Verify that spaces are stripper-->
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td></td>
+</tr>
+<!--We can filter by partial string(LIKE 'XXX%'-->
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td>Test U</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<!--Verify that spaces are stripper-->
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td>Test U</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<!--We can filter by partial string(LIKE 'XXX%'-->
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td>Re</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<!--Verify that spaces are stripper-->
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td>Re</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<!--Verify that search by status works, by default 'All' should be select and select setting should be saved in session-->
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>payment_status</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_paid_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=Paid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_paid_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>payment_status</td>
+	<td>Paid</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=Unpaid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>payment_status</td>
+	<td>Unpaid</td>
+</tr>
+<!--Verify that selected value is saved in session-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>payment_status</td>
+	<td>Unpaid</td>
+</tr>
+<!--Verify that filtering by price works, if nothing is input there should not be any filter applied for price.-->
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_2</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_2</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>100.01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_2</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td>1000.01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_2</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_2</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td>999.99</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_2</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>100.01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_2</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_2</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_1</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_2</td>
+	<td>1000.0</td>
+</tr>
+<!--Verify that supplied values are saved in session-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=amount_min</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=amount_max</td>
+	<td>1000</td>
+</tr>
+<!--Verify that filtering by issue date works fine-->
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_day</td>
+	<td>label=4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_day</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date2</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date1</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_day</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date2</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date1</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<!--Verify that issue date is saved in session-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_year</td>
+	<td>2011</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_month</td>
+	<td>December</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_day</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_till_year</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_till_month</td>
+	<td>December</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_day</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date2</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date1</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<!--Verify that pay date filter ignores notes that were not paid if status is 'All' -->
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_year</td>
+	<td>label=2006</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=paid_date_from_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=image_paid_1</td>
+	<td></td>
+</tr>
+<!--Verify that when we delete unpaid note, users balance does not change.-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_link_2 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD</td>
+	<td></td>
+</tr>
+<!--Verify that when we delete paid note, note price is subtracted from users balance and payment is deleted-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=paid_date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<!--Verify that search menu is show only if some search option is selected. and if so there has to be clear button.-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_year</td>
+	<td>2006</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>paid_date_from_year</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=Unpaid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Clear_search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--TODO: Verify that if i one tries to access credit note that does not exist, he is redirected to list. do not know how to check url-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/edit/333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/destroy/X</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/update/-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<!--TODO: Verify that if i one tries to access credit note is created by another user, he is redirected to list. do not know how to check url-->
+<!--Create notes so that we could test accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_hour</td>
+	<td>label=07</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_day</td>
+	<td>label=7</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_month</td>
+	<td>label=May</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_hour</td>
+	<td>label=07</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_day</td>
+	<td>label=7</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>500</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note created</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=image_not_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_paid</td>
+	<td></td>
+</tr>
+<!--Set settings so that accountant could/could not see invoices/financial data-->
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>accountant group 1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>accountant group cannot see credit notes</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group was created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>accountant group 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>accountant group cannot see finances</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group was created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group was created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>accountant group 3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>accountant group can see finances</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group was created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>accountant group 4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>accountant group can edit finances</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group was created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#edit_link_1 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoices_manage_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Group was updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#edit_link_1 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoices_manage_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Group was updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#edit_link_2 &gt; img[alt=&quot;Edit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoices_manage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_manage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Group was updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#edit_link_3 &gt; img[alt=&quot;Edit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoices_manage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Group was updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#edit_link_4 &gt; img[alt=&quot;Edit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoices_manage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_5_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Group was updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=accountant group 1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<!--Login as accountant that he cannot see financial data, set note as paid/unpaid or create new notes.-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hello, Test Accountant</td>
+	<td></td>
+</tr>
+<!--Verify there is no menu option for credit notes, because he cannot see nor invoices nor credit notes, and user can not reach pages through link-->
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Credit notes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/update/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/pay/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/unpay/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/destroy/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<!--Login as admin and set accountant's permissions, so that he could see credit notes but could note see financial data, set paid/unpaid, create new notes, but should be able to edit comment-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=accountant group 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<!--Login as accountant that he cannot see financial data, set note as paid/unpaid or create new notes.-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hello, Test Accountant</td>
+	<td></td>
+</tr>
+<!--Verify there is menu option for credit notes, because he can see invoices-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Credit notes</td>
+	<td></td>
+</tr>
+<!--Verify that accountant cannot create new credit notes, because he cannot see financial data-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Create credit note</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<!--Verify that accountant cannot delete credit note-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Create credit note</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/destroy/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<!--Verify that accountant with these permissions cannot search by financial data-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=paid_date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=paid_date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=paid_date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=paid_date_till_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=paid_date_till_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=paid_date_from_day</td>
+	<td></td>
+</tr>
+<!--Verify that accountant with these permissions can search by username, first name, last name and issue date.-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=first_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=last_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_till_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_till_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_till_day</td>
+	<td></td>
+</tr>
+<!--TODO: check whether search works-->
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--We can filter by partial string(LIKE 'XXX%'-->
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<!--Verify that spaces are stripper-->
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td></td>
+</tr>
+<!--We can filter by partial string(LIKE 'XXX%'-->
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td>Test U</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<!--Verify that spaces are stripper-->
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td>Test U</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<!--We can filter by partial string(LIKE 'XXX%'-->
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td>Re</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<!--Verify that spaces are stripper-->
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td>Re</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<!--Verify that search by status cannot work even if user fakes form-->
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?status=paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_4</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_3</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?status=unpaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_4</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_3</td>
+	<td>Test User #1</td>
+</tr>
+<!--Verify that filtering by price does not work, because user does not have rights to view financial data-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?amount_min=50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_4</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_3</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?amount_min=100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_4</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_3</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?amount_min=100.01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_4</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_3</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?amount_max=1000.01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_4</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_3</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?amount_max=1000&amp;amount_min=1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_4</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_3</td>
+	<td>Test User #1</td>
+</tr>
+<!--Verify that filtering by issue date works fine-->
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_day</td>
+	<td>label=4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_day</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date4</td>
+	<td>2010-01-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date3</td>
+	<td>2009-05-07 07:00:00</td>
+</tr>
+<!--Verify that issue date is saved in session-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_year</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_month</td>
+	<td>January</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_day</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_till_year</td>
+	<td>2011</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_till_month</td>
+	<td>December</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_till_day</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date4</td>
+	<td>2010-01-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date3</td>
+	<td>2009-05-07 07:00:00</td>
+</tr>
+<!--Verify that we cannot see columns that user has no rigths to view-->
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Paid date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=delete_note</td>
+	<td></td>
+</tr>
+<!--Set page limit to 1, so that it would be clear whether ordering works well-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--Login as accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify that user cannot supply invalid parameter to order resultset, but if he does ordering is done by default parameter - username-->
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list?order_by=user&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Error</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list?order_by=username&amp;order_desc=igli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Error</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list?order_by=price&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=user_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list?order_by=pay_date&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=user_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list?order_by=status&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=user_4</td>
+	<td></td>
+</tr>
+<!--Verify that we can sort table by user, number, status, issue date, paid date, price-->
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_3</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_4</td>
+	<td>Test Reseller</td>
+</tr>
+<!--Order ASC/DESC by number-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_3</td>
+	<td></td>
+</tr>
+<!--Number in test data is the same so there is no point in ordering by number-->
+<!--Order ASC/DESC by issue date-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date3</td>
+	<td>2009-05-07 07:00:00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date4</td>
+	<td>2010-01-07 07:00:00</td>
+</tr>
+<!--Verify that pageing works, if page number is more than there are pages we should be redirected to last page. if it is less than 1 - redirect to first page-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_3</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_4</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_3</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_4</td>
+	<td>Test Reseller</td>
+</tr>
+<!--Set page limit to 10, so that we could see everything in one page-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--Login back as accoutant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify that accountant with these permissions can see user, number, issue date, details.-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=note_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<!--Verify that accountant with these privileges can only see username(but cannot see link to that user), number, issue date and comment. NO financial data-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>exact:User:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:Number:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Issue date:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>exact:Paid:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Paid date:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Price (USD):</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Price with TAX (USD):</td>
+	<td></td>
+</tr>
+<!--Verify that accountant can edit comment-->
+<tr>
+	<td>type</td>
+	<td>id=comment</td>
+	<td>comment 1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note changed</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/pay/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/unpay/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<!--Login as admin and set accountant's permissions, so that he could see credit notes but could note see financial data, set paid/unpaid, create new notes, but should be able to edit comment-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=accountant group 3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<!--Login as accountant that he cannot see financial data, set note as paid/unpaid or create new notes.-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hello, Test Accountant</td>
+	<td></td>
+</tr>
+<!--Verify there is menu option for credit notes, because he can see invoices-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Credit notes</td>
+	<td></td>
+</tr>
+<!--Verify that accountant cannot create new credit notes, because he cannot edit financial data-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Create credit note</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<!--Verify that accountant cannot delete credit note-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Create credit note</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/destroy/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<!--Verify that accountant with these permissions can search by financial data-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=paid_date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=paid_date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=paid_date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=paid_date_till_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=paid_date_till_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=paid_date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=first_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=last_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_till_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_till_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_till_day</td>
+	<td></td>
+</tr>
+<!--TODO: check whether search works-->
+<!--Verify that there are all available columns including financial data-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Paid date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=note_details</td>
+	<td></td>
+</tr>
+<!--Verify that user cannot see link to delete credit note-->
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=delete_note</td>
+	<td></td>
+</tr>
+<!--Verify that accountant can see links to users, because he has manage users write permission-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<!--Verify whether accountant can see finacial data-->
+<tr>
+	<td>verifyText</td>
+	<td>id=image_paid_4</td>
+	<td></td>
+</tr>
+<!--TODO: how to check for pai date that is set dynamicaly-->
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_4</td>
+	<td>500.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_full_price_4</td>
+	<td>500.0</td>
+</tr>
+<!--Verify that accountant can view accountant financial data but cannot see links to chage it. But can see link to user's edit-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:Number:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Issue date:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:Paid:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=icon_chech_image_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Paid date:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Price (USD):</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Price with TAX (USD):</td>
+	<td></td>
+</tr>
+<!--Verify that accountant can edit comment, but still cannot change note status.-->
+<tr>
+	<td>type</td>
+	<td>id=comment</td>
+	<td>comment 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note changed</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/pay/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/unpay/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<!--Login as admin and set accountant's permissions, so that he could see credit notes but could note see financial data, set paid/unpaid, create new notes, but should be able to edit comment-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Grant accountant all right necesary to manage credit notes-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=accountant group 4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+</tr>
+<!--Login as accountant that he cannot see financial data, set note as paid/unpaid or create new notes.-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify there is menu option for credit notes-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Credit notes</td>
+	<td></td>
+</tr>
+<!--Follow the link to note list-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<!--???Verify that accountant with see financial data can delete credit notes and check user balance changes-->
+<tr>
+	<td>verifyText</td>
+	<td>id=delete_note</td>
+	<td>Delete</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<!--Verify there is link to create new note-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Create credit note</td>
+	<td></td>
+</tr>
+<!--Follow the link and create credit note-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<!--Verify that you can create credit note just for certais users, you can not select reseller users etc-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>System Admin Test Accountant Test Reseller Test User #1</td>
+	<td></td>
+</tr>
+<!--TODO: fake form and try to create credit note for reseller user(id=5), should fail to find such user -->
+<tr>
+	<td>select</td>
+	<td>id=issue_date_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=comment</td>
+	<td>comment 1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note created</td>
+</tr>
+<!--Note was created, verify that data is correct-->
+<tr>
+	<td>verifyText</td>
+	<td>link=Test Reseller</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=issue_date</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=price</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=full_price</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=comment</td>
+	<td>comment 1</td>
+</tr>
+<!--Note should be unpaid-->
+<tr>
+	<td>verifyValue</td>
+	<td>id=image_not_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Paid date</td>
+	<td></td>
+</tr>
+<!--Edit comment-->
+<tr>
+	<td>type</td>
+	<td>id=comment</td>
+	<td>comment 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note changed</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=comment</td>
+	<td>comment 2</td>
+</tr>
+<!--Check what balance user has and what are his tax settings -->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax1_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax2_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax3_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax4_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>500.0000 USD</td>
+	<td></td>
+</tr>
+<!--Set note as paid and verify that payment was created and price was added to user balance-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=image_not_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=image_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>600.0000 USD</td>
+	<td></td>
+</tr>
+<!--Create note without number and comment, they are not mandatory -->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_hour</td>
+	<td>label=07</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_day</td>
+	<td>label=7</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note created</td>
+</tr>
+<!--Note was created, verify that data is correct-->
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=issue_date</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=price</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=full_price</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=comment</td>
+	<td></td>
+</tr>
+<!--Verify that those two notes are correctly shown in list. there has to be links to users, links to note details and delete note.-->
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list</td>
+	<td></td>
+</tr>
+<!--There should be links to edit and delete notes. Notice that paid note should be checked and have paid date. Not paid note should be marked with cross and cannot have paid date set-->
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date6</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_paid_date_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_6</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_full_price_6</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#details_link_6 &gt; img[alt=&quot;Details&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#delete_link_6 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<!--Set page limit to 1, so that it would be clear whether ordering works well-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--Login as accountant that he cannot see financial data, set note as paid/unpaid or create new notes.-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify that we can sort table by user, number, status, issue date, paid date, price-->
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test User #1</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Test Reseller</td>
+	<td>Test Reseller</td>
+</tr>
+<!--Order ASC/DESC by number. There are four notes, theyr numbers '', '' and 100-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_5</td>
+	<td>100</td>
+</tr>
+<!--Order ASC/DESC by issue date. there are four credit notes, they were issued in 2009, 2010, 2012, 2011-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date3</td>
+	<td>2009-05-07 07:00:00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date5</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<!--Order ASC/DESC by paid. there are two paid and two unpaid notes-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_paid_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_3</td>
+	<td></td>
+</tr>
+<!--Order ASC/DESC by paid date. there are two paid and two unpaid notes-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_paid_date_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<!--TODO: kaip patikrinti pay date kai jis dinamiskai nusistato-->
+<!--Order ASC/DESC by price without taxes. there are four notes, theyr priices are 50, 500, 100, 1000-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_3</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_6</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<!--Verify that user cannot supply invalid parameter to order resultset, but if he does ordering is done by default parameter - username-->
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list?order_by=user&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Error</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list?order_by=username&amp;order_desc=igli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Error</td>
+	<td></td>
+</tr>
+<!--Verify that pageing works, if page number is more than there are pages we should be redirected to last page. if it is less than 1 - redirect to first page-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?order_by=price&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_4</td>
+	<td>500.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_6</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_3</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_6</td>
+	<td>1000.0</td>
+</tr>
+<!--Set page limit to 10, so that we could see everything in one page-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--Login as accountant that he cannot see financial data, set note as paid/unpaid or create new notes.-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<!--Verify that accountant with these permissions can search by financial data-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=paid_date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=paid_date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=paid_date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=paid_date_till_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=paid_date_till_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=paid_date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=first_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=last_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_till_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_till_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=issue_date_till_day</td>
+	<td></td>
+</tr>
+<!--TODO: check whether search works-->
+<!--Verify that there are all available columns including financial data-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Paid date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=price_with_vat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=note_details</td>
+	<td></td>
+</tr>
+<!--Verify that user can see link to delete credit note-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=delete_note</td>
+	<td></td>
+</tr>
+<!--Verify that search function works corectly-->
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=paid_date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=paid_date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--We can filter by partial string(LIKE 'XXX%'-->
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<!--Verify that spaces are stripper-->
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td></td>
+</tr>
+<!--We can filter by partial string(LIKE 'XXX%'-->
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td>Test U</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<!--Verify that spaces are stripper-->
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td>Test U</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<!--We can filter by partial string(LIKE 'XXX%'-->
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td>Re</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<!--Verify that spaces are stripper-->
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td>Re</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<!--Verify that search by status works, by default 'All' should be select and select setting should be saved in session-->
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>payment_status</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_paid_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_paid_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_not_paid_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_not_paid_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=Paid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_paid_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_paid_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=image_not_paid_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=image_not_paid_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>payment_status</td>
+	<td>Paid</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=Unpaid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=image_paid_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=image_paid_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_not_paid_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_not_paid_6</td>
+	<td></td>
+</tr>
+<!--Verify that selected value is saved in session-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>payment_status</td>
+	<td>Unpaid</td>
+</tr>
+<!--Verify that filtering by price works, if nothing is input there should not be any filter applied for price.-->
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_5</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_4</td>
+	<td>500.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_3</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_6</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_5</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_4</td>
+	<td>500.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_3</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_6</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td>100.01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_5</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_4</td>
+	<td>500.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_3</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_6</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td>1000.01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_5</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_4</td>
+	<td>500.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_3</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_6</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_5</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_4</td>
+	<td>500.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_3</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_6</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td>999.99</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_5</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_4</td>
+	<td>500.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_3</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_6</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>100.01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_5</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_4</td>
+	<td>500.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_3</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_6</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_5</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_4</td>
+	<td>500.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_3</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_6</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_5</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_4</td>
+	<td>500.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_3</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_6</td>
+	<td>1000.0</td>
+</tr>
+<!--Verify that supplied values are saved in session-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=amount_min</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=amount_max</td>
+	<td>1000</td>
+</tr>
+<!--Verify that filtering by issue date works fine-->
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_day</td>
+	<td>label=4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_day</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date6</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date4</td>
+	<td>2010-01-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date3</td>
+	<td>2009-05-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date5</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_day</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date6</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date4</td>
+	<td>2010-01-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date3</td>
+	<td>2009-05-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date5</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<!--Verify that issue date is saved in session-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_year</td>
+	<td>2011</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_month</td>
+	<td>December</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_day</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_till_year</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_till_month</td>
+	<td>December</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_day</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date6</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date4</td>
+	<td>2010-01-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date3</td>
+	<td>2009-05-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date5</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<!--Verify that pay date filter ignores notes that were not paid if status is 'All' -->
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_year</td>
+	<td>label=2006</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=paid_date_from_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_not_paid_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=image_not_paid_6</td>
+	<td></td>
+</tr>
+<!--Verify that when we delete unpaid note, users balance does not change.-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_link_6 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD</td>
+	<td></td>
+</tr>
+<!--Verify that when we delete paid note, note price is subtracted from users balance and payment is deleted-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=paid_date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>600.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_link_5 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>500.0000 USD</td>
+	<td></td>
+</tr>
+<!--Verify that search menu is show only if some search option is selected. and if so there has to be clear button.-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_year</td>
+	<td>2006</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>paid_date_from_year</td>
+	<td>2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=Unpaid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Clear_search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--TODO: Verify that if i one tries to access credit note that does not exist, he is redirected to list. do not know how to check url-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/edit/333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/destroy/X</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/update/-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/pay/-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/unpay/-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<!--TODO: Verify that if i one tries to access credit note is created by another user, he is redirected to list. do not know how to check url-->
+<!--Verify that user cannot supply invalid parameter to order resultset-->
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list?order_by=user&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list?order_by=username&amp;order_desc=igli</td>
+	<td></td>
+</tr>
+<!--Login as reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify there is menu option for credit notes-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Credit notes</td>
+	<td></td>
+</tr>
+<!--Follow the link to note list-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<!--Verify there is link to create new note-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Create credit note</td>
+	<td></td>
+</tr>
+<!--Follow the link and create credit note-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<!--Verify that you can create credit note just for certais users, you can not select reseller users etc-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User Resellers</td>
+	<td></td>
+</tr>
+<!--TODO: fake form and try to create credit note for reseller user(id=5), should fail to find such user -->
+<tr>
+	<td>select</td>
+	<td>id=issue_date_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=comment</td>
+	<td>comment 1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note created</td>
+</tr>
+<!--Note was created, verify that data is correct-->
+<tr>
+	<td>verifyText</td>
+	<td>link=User Resellers</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=issue_date</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=price</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=full_price</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=comment</td>
+	<td>comment 1</td>
+</tr>
+<!--Note should be unpaid-->
+<tr>
+	<td>verifyValue</td>
+	<td>id=image_not_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Paid date</td>
+	<td></td>
+</tr>
+<!--Edit comment-->
+<tr>
+	<td>type</td>
+	<td>id=comment</td>
+	<td>comment 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note changed</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=comment</td>
+	<td>comment 2</td>
+</tr>
+<!--Check what balance user has and what are his tax settings -->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax1_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax2_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax3_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=tax4_value</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD</td>
+	<td></td>
+</tr>
+<!--Set note as paid and verify that payment was created and price was added to user balance-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=image_not_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=image_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paymenttype_13</td>
+	<td>Credit note</td>
+</tr>
+<!--TODO: kaip patikrinti date_added_10 kai jis dinamiskai nusistato-->
+<tr>
+	<td>verifyText</td>
+	<td>link=User Resellers</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_13</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_13</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=currency_13</td>
+	<td>USD</td>
+</tr>
+<!--Create note without number and comment, they are not mandatory -->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_hour</td>
+	<td>label=07</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_day</td>
+	<td>label=7</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note created</td>
+</tr>
+<!--Note was created, verify that data is correct-->
+<tr>
+	<td>verifyText</td>
+	<td>link=User Resellers</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=issue_date</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=price</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=full_price</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=comment</td>
+	<td></td>
+</tr>
+<!--Verify that those two notes are correctly shown in list. there has to be links to users, links to note details and delete note.-->
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list</td>
+	<td></td>
+</tr>
+<!--There should be links to edit and delete notes. Notice that paid note should be checked and have paid date-->
+<tr>
+	<td>verifyText</td>
+	<td>link=User Resellers</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_7</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date7</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_paid_7</td>
+	<td></td>
+</tr>
+<!--TODO: kaip patikrinti pay date kai jis dinamiskai nusistato-->
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_full_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Details&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<!--Not paid note should be marked with cross and cannot have paid date set-->
+<tr>
+	<td>verifyText</td>
+	<td>link=User Resellers</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date8</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_paid_date_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_8</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_full_price_8</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#details_link_8 &gt; img[alt=&quot;Details&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#delete_link_8 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<!--Set page limit to 1, so that it would be clear whether ordering works well-->
+<!--Login as admin to change item number per page-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--Login as reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify that we can sort table by user, number, status, issue date, paid date, price-->
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_7</td>
+	<td>100</td>
+</tr>
+<!--It is meaningles to test ordering by user if there is only one user-->
+<!--Order ASC/DESC by number-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_number_7</td>
+	<td>100</td>
+</tr>
+<!--Order ASC/DESC by issue date-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date8</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Issue date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date7</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<!--Order ASC/DESC by paid-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_paid_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_8</td>
+	<td></td>
+</tr>
+<!--Order ASC/DESC by paid date-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_paid_date_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Paid date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=note_paid_date_7</td>
+	<td></td>
+</tr>
+<!--Order ASC/DESC by price without taxs-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_8</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<!--Verify that user cannot supply invalid parameter to order resultset, but if he does ordering is done by default parameter - username-->
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list?order_by=user&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Error</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/credit_note/list?order_by=username&amp;order_desc=igli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Error</td>
+	<td></td>
+</tr>
+<!--Verify that pageing works, if page number is more than there are pages we should be redirected to last page. if it is less than 1 - redirect to first page-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?order_by=price&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_8</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list?page=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_8</td>
+	<td>1000.0</td>
+</tr>
+<!--Login as admin to change item number per page-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--Login as reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Verify that search function works corectly-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=paid_date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=paid_date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--We can filter by partial string(LIKE 'XXX%'-->
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>Us</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>User</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<!--Verify that spaces are stripper-->
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>User</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td></td>
+</tr>
+<!--We can filter by partial string(LIKE 'XXX%'-->
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td>Us</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<!--Verify that spaces are stripper-->
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td>User</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<!--We can filter by partial string(LIKE 'XXX%'-->
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td>Re</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<!--Verify that spaces are stripper-->
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td>Re</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<!--Verify that search by status works, by default 'All' should be select and select setting should be saved in session-->
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>payment_status</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_paid_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=Paid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_paid_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=image_not_paid_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>payment_status</td>
+	<td>Paid</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=Unpaid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=image_paid_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=User Resellers</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>payment_status</td>
+	<td>Unpaid</td>
+</tr>
+<!--Verify that selected value is saved in session-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>payment_status</td>
+	<td>Unpaid</td>
+</tr>
+<!--Verify that filtering by price works, if nothing is input there should not be any filter applied for price.-->
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_8</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_8</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>100.01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_8</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td>1000.01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_8</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_8</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td>999.99</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_8</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>100.01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_8</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_price_8</td>
+	<td>1000.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_7</td>
+	<td>100.0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_price_8</td>
+	<td>1000.0</td>
+</tr>
+<!--Verify that supplied values are saved in session-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=amount_min</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=amount_max</td>
+	<td>1000</td>
+</tr>
+<!--Verify that filtering by issue date works fine-->
+<tr>
+	<td>type</td>
+	<td>id=amount_max</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_day</td>
+	<td>label=4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_day</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date8</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date7</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_day</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date8</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date7</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<!--Verify that issue date is saved in session-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_year</td>
+	<td>2011</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_month</td>
+	<td>December</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_day</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_till_year</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_till_month</td>
+	<td>December</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_day</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=note_issue_date8</td>
+	<td>2011-12-07 07:00:00</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=note_issue_date7</td>
+	<td>2012-01-02 14:00:00</td>
+</tr>
+<!--Verify that pay date filter ignores notes that were not paid if status is 'All' -->
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_from_year</td>
+	<td>label=2006</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=paid_date_from_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=image_not_paid_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>id=image_paid_7</td>
+	<td></td>
+</tr>
+<!--Verify that when we delete unpaid note, users balance does not change.-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_link_8 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0000 USD</td>
+	<td></td>
+</tr>
+<!--Verify that when we delete paid note, note price is subtracted from users balance and payment is deleted-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=paid_date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Credit note deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>100.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<!--Verify that search menu is show only if some search option is selected. and if so there has to be clear button.-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>issue_date_from_year</td>
+	<td>2006</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>paid_date_from_year</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=payment_status</td>
+	<td>label=Unpaid</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Clear_search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--TODO: Verify that if i one tries to access credit note that does not exist, he is redirected to list. do not know how to check url-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/edit/333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/destroy/X</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/update/-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<!--Verify that reseller cannot see admin's credit notes, but event if he woult try, he would be redirected to list-->
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/update/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/destroy/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/unpay/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/pay/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/new</td>
+	<td></td>
+</tr>
+<!--Create credit note to verify that no other system user cann access it-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=issue_date_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=comment</td>
+	<td>comment 1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Credit note created</td>
+</tr>
+<!--Login as admin and verify that he cannot view or edit reseller's notes-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/update/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/destroy/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/unpay/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/pay/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<!--Login as accountant and verify that he cannot view or edit reseller's notes-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/update/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/destroy/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/unpay/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/pay/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Credit note not found</td>
+</tr>
+<!--Login as user and verify that nor he can see link to credit notes, nor he can access then in any way-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Credit notes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/update/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/destroy/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/unpay/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/pay/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/credit_note/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>Don't be so smart...</td>
+</tr>
+</tbody></table>
+</body>
+</html>

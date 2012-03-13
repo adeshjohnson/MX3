@@ -1,0 +1,10 @@
+<% if !@destination %>
+  <%= _("Prefix_was_not_found")%>
+<% else %>
+  <% if @destination[:rate_id] %> 
+    <%= _("Rate_already_set")+ ": " +@destination[:des_prefix].to_s+ " - "+ draw_flag(@destination[:dir_code].to_s)+" " + @destination[:dir_name].to_s + " (" + @destination[:des_subcode].to_s+ " "+  @destination[:des_name].to_s+")" %> 
+  <% else %>
+    <%= @destination[:des_prefix].to_s+ " - "+ draw_flag(@destination[:dir_code].to_s)+" " + @destination[:dir_name].to_s + " (" + @destination[:des_subcode].to_s+" " +  @destination[:des_name].to_s+")" %> 
+  <% end %>
+<% end %>
+

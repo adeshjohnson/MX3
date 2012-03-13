@@ -1,0 +1,34 @@
+<%if @country%>
+  <b> <%=_('Country')%> : </b><%= @country.name%>
+  <br>
+<%end%>
+<%if @provider%>
+  <b> <%=_('Provider')%> : </b><%= @provider.name%>
+<%end%>
+<br>
+<br>
+
+<div align="left" class="nb">
+  <%= form_tag(:action => 'calls_by_scr') do %>
+    <%= _('From') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+    &nbsp;&nbsp;<%= _('to') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+    &nbsp;&nbsp;<%= _('Country') %>: <select name="country_id" >
+      <option value=<%= '-1'%> <%= "selected" if !@country %>> <%= _('All') %>
+        <% for country in @countries %>
+        <option value=<%= country.id%> <%if @country%><%= "selected" if country.id == @country.id %> <%end%>> <%= country.name %> </option>
+      <% end %>
+    </select>
+    &nbsp;&nbsp;<%= _('Provider') %>: <select name="provider_id" >
+      <option value=<%= '-1'%> <%= "selected" if !@provider %>> <%= _('All') %>
+        <% for provider in @providers %>
+        <option value=<%= provider.id%> <%if @provider%><%= "selected" if provider.id == @provider.id %> <%end%>> <%= provider.name %> </option>
+      <% end %>
+    </select>
+    &nbsp;&nbsp;<%= submit_tag _('Change_date'), :disable_with=>_('Processing..')%>
+  <% end %>
+</div>
+
+<br>
+<div id="table">
+  <%= render :partial => "scr_calls" %>
+</div>

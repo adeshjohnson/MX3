@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>erp_settings</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">erp_settings</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=saddons_menu22</td>
+	<td>ERP</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/erp/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=page_title</td>
+	<td>ERP settings</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>ERP login:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>ERP password:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>ERP domain:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=erp_login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=erp_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=erp_domain</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=erp_login</td>
+	<td>login</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=erp_password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=erp_domain</td>
+	<td>domain</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=erp_login</td>
+	<td>login</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=erp_password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=erp_domain</td>
+	<td>domain</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:example: https://example.voiperp.com</td>
+	<td></td>
+</tr>
+<!--Prisijungimas blogais duomenimis-->
+<!--<tr> 	<td>click</td> 	<td>id=saddons_menu22</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>An Error Was Encountered</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Domain &quot;domain&quot; was not found. Please check domain name</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/erp/settings</td> 	<td></td> </tr>-->
+<!--Prisijungimas su gerais duomenimis-->
+<!--<tr> 	<td>type</td> 	<td>id=erp_login</td> 	<td>voiperp_testing@kolmisoft.com</td> </tr> <tr> 	<td>type</td> 	<td>id=erp_password</td> 	<td>pass</td> </tr> <tr> 	<td>type</td> 	<td>id=erp_domain</td> 	<td>aiste</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Settings saved</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>id=saddons_menu22</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=erp_login</td> 	<td>voiperp_testing@kolmisoft.com</td> </tr> <tr> 	<td>type</td> 	<td>id=erp_password</td> 	<td>pass</td> </tr> <tr> 	<td>type</td> 	<td>id=erp_domain</td> 	<td>http://aiste.voiperp.com</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Settings saved</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>id=saddons_menu22</td> 	<td></td> </tr>-->
+<!---->
+</tbody></table>
+</body>
+</html>

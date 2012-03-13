@@ -1,0 +1,1109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<!--Test to verify that global location rules does NOT apply if user belongs to some other location than global and he dials to destination that has some rule set for his location, in that case location rules are applied. to test this scenario we need to do call tracking for user and reseller.-->
+<!--loggin as admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--Allready there's wholesale tariff set - Test Tariff for Users. for it two rates has to be set, so that call could be traced.-->
+<!--a rate for American Samoa 1684 FIX is edited and set to 0.9-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/255</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ratedetail_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ratedetail_rate</td>
+	<td>0.9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<!--a rate for Argentina 54 FIX is edited and set to 0.1-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/261</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ratedetail_rate</td>
+	<td>0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<!--global and 'other' locations are needed for this test, there's allready global location, so add one new-->
+<tr>
+	<td>open</td>
+	<td>/billing/locations/localization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>vilnius</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Location added</td>
+	<td></td>
+</tr>
+<!--new location has no destination rules, except for global destination rules. to test weather global or 'other' destination rules will aplly for same prefix, we need to create 'other' and global destination rules with same 'cut', 'min', 'max' settings and differend 'add' setting(easyer to verify witch location rules were applied).-->
+<!--edit global location and create destination rule for 000987 prefix, add Argentina 54 FIX prefix and select 'Test Tariff for Users' tariff that has 54 prefix rate set-->
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cut</td>
+	<td>000987</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=add</td>
+	<td>54</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tariff</td>
+	<td>label=Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<!--edit 'other' location and create destination rule for 000987 prefix and add American Samoa 1684 prefix-->
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>dfghb</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cut</td>
+	<td>000987</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=add</td>
+	<td>1684</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<!--Test user #1, has his tariff set to 'Test Tariff for Users' and device IAX/101 that's location is set to global. do call tracking for this users device IAX2/101 and remote destination that has perfix 000987-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test User #1 (2)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination</td>
+	<td>000987345678</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--As expected if device's location is set to global, global location rules will apply - according to it prefix 000987 wil be cut and 54 added. Rates set to Argentina 54 Fix will be applied.-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=device</td>
+	<td>IAX2/101</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=dest</td>
+	<td>000987345678</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=location</td>
+	<td>Global</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=cut</td>
+	<td>000987</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>54</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>54</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=add</td>
+	<td>54</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Tariff changed from Test Tariff for Users to:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate</td>
+	<td>0.100000</td>
+</tr>
+<!--edit IAX2/101 device's properties and set it's location to recently created 'vilnius'-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=device[location_id]</td>
+	<td>label=vilnius</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_name</td>
+	<td>10133</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_secret</td>
+	<td>10122dfgh</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<!--after changing location do call tracing once more for same user, his device and same destination.-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test User #1 (2)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination</td>
+	<td>000987345678</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--it is expected that if device has some other location than global. and some rule for 'other' location applies for dialed destination it's tariff will be applied. in this case devices location is 'vilnius' and it has a rule to cut perfix 000987, to add 1684 and apply 'WHAT RULE????'-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=device</td>
+	<td>IAX2/10133</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=dest</td>
+	<td>000987345678</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=location</td>
+	<td>vilnius</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=cut</td>
+	<td>000987</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=add</td>
+	<td>1684</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=rate</td>
+	<td>0.900000</td>
+</tr>
+<!--Create 2 rates so that reseller could do call tracing for him self(prefixes are 2442 and 16842)-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate7</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate8</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate11</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=th &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<!--Create 2 tariffs so that reseller could do call tracing-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ratedetail_rate</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ratedetail_rate</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rate detail was successfully updated</td>
+	<td></td>
+</tr>
+<!--logging in as reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Logoff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--creating retail tariffs for Afganistan fix(2USD) and Aruba fix(7USD), without it reseller couldn't call-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate1</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate21</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=th &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=rate1</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=rate21</td>
+	<td>7</td>
+</tr>
+<!--Create same locations as Admin's locations-->
+<tr>
+	<td>open</td>
+	<td>/billing/locations/localization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>kaunas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Location added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff[purpose]_user_wholesale</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>test tariff</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Tariff was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/6?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=commit</td>
+	<td>Add rates</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_6</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_141</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>destination rule 1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cut</td>
+	<td>000987</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=add</td>
+	<td>9340</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cut</td>
+	<td>000987</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=add</td>
+	<td>297</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=User Resellers (5)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=commit</td>
+	<td>Press this button to continue &gt;&gt;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination</td>
+	<td>00098732345678</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ERROR! None of the providers can be used to handle this call - no one has rates for current destination!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>IAX2/105</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00098732345678</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00098732345678</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Default location</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Int. prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>297</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Aruba</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=price</td>
+	<td>7.000000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=device[location_id]</td>
+	<td>label=kaunas</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_secret</td>
+	<td>105556555656</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=User Resellers (5)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=commit</td>
+	<td>Press this button to continue &gt;&gt;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination</td>
+	<td>00098732345678</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ERROR! None of the providers can be used to handle this call - no one has rates for current destination!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>IAX2/105</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>00098732345678</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>kaunas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>destination rule 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=direction</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=price</td>
+	<td>2.000000</td>
+</tr>
+<!--User does call tracing for him self-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=commit</td>
+	<td>Press this button to continue &gt;&gt;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination</td>
+	<td>000987455678</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=device</td>
+	<td>IAX2/104</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_3</td>
+	<td>Test Tariff for Users/Wholesale</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=currency_3</td>
+	<td>USD (1.0000)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=prefix_3</td>
+	<td>54</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+</tr>
+<!--Now logout and login as admin to change reseller device's location-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=device[location_id]</td>
+	<td>label=vilnius</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_secret</td>
+	<td>3456784445</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Device's settings updated</td>
+</tr>
+<!--Again login as reseler and check call tracing, this time other rules should be applied-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Succesfully logged in</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination</td>
+	<td>000987345678</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=commit</td>
+	<td>Press this button to continue &gt;&gt;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=tariff_3</td>
+	<td>Test Tariff + 0.1/Retail</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=price</td>
+	<td>5.000000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=prefix_3</td>
+	<td>1684</td>
+</tr>
+<!--loggin as admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_name</td>
+	<td>102awe</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_secret</td>
+	<td>102trdhgfbdsdgbrstrvf</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_devices/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>select_location_id_3</td>
+	<td>label=vilnius</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>select_location_id_3</td>
+	<td>vilnius</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>FAX/102</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device location changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>FAX/102</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>select_location_id_5</td>
+	<td>label=vilnius</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>select_location_id_5</td>
+	<td>vilnius</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=IAX2/103</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device location was not changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Name and password cannot be equal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=IAX2/103</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_devices/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>FAX/102</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

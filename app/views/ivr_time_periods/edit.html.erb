@@ -1,0 +1,6 @@
+<%= form_tag( :action => 'update', :id => @period.id) do %>
+  <%= render :partial => 'timeperiod' %>
+  <%= submit_tag _('Update'), :disable_with=>_('Processing..') %>
+<% end %>
+
+<br>

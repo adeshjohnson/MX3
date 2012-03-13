@@ -1,0 +1,17 @@
+
+<%= _('Logo_settings') %>
+<table>
+  <%= form_tag({:action=>'reseller_settings_logo_save'}, :multipart => true) do%>
+    <tr>
+      <td><%= file_field_tag "logo" %></td>
+    </tr>
+    <tr>
+      <td><%= submit_tag _('Upload_logo'), :disable_with=>_('Processing..')%></td>
+    </tr>
+  <% end %>
+</table>
+<br />
+<br />
+<% if @logo %>
+  <%= image_tag @logo , :alt => 'Logo' %>
+<% end %>

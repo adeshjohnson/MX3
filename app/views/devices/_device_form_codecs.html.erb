@@ -1,0 +1,47 @@
+<tr>
+  <td colspan="2" class="bottom_border">
+    <b><%= _('Codecs') %></b> &nbsp; (<%= _('Drag_and_drop') %>)
+  </td>
+</tr>
+<tr>
+  <td colspan="2" height="10"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table class="simple" id="cod_cod" style="list-style-type: none;margin-left: 0px;padding-left: 0px;">
+      <tr>
+        <td><div  class="simple"><%= _('Audio') %></div></td>
+      </tr>
+      <% if @device_type == "FAX" %>
+        <tr>
+          <td>
+            <%= render :partial => "/devices/device_codecs", :locals => {:device => @device, :codecs=>@audio_codecs[0,2], :ctype=>"audio"} %>
+            <%= sortable_element('audio_sortable_list', :tag => 'li', :update => 'audio_items', :url => {:controller=>:devices, :ctype=>"audio", :action => :devicecodecs_sort, :id=>params[:action] != 'default_device' ? @device.id : -1}) %>
+          </td>
+        </tr>
+      <%else%>
+        <tr>
+          <td>
+            <%= render :partial => "/devices/device_codecs", :locals => {:device => @device, :codecs=>@audio_codecs, :ctype=>"audio"} %>
+            <%= sortable_element('audio_sortable_list', :tag => 'li', :update => 'audio_items', :url => {:controller=>:devices, :ctype=>"audio", :action => :devicecodecs_sort, :id=> params[:action] != 'default_device' ? @device.id : -1}) %>
+          </td>
+        </tr>
+      <%end%>
+    </table>
+  </td>
+  <% if not @device_type == "FAX" %>
+    <td valign="top">
+      <table class="simple">
+        <tr>
+          <td><div class="simple"><%= _('Video') %></div></td>
+        </tr>
+        <tr>
+          <td>
+            <%= render :partial => "/devices/device_codecs", :locals => {:device => @device, :codecs=>@video_codecs, :ctype=>"video"} %>
+            <%= sortable_element('video_sortable_list', :tag => 'li', :update => 'video_items', :url => {:controller=>:devices, :ctype=>"video", :action => :devicecodecs_sort, :id=> params[:action] != 'default_device' ? @device.id : -1}) %>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <%end%>
