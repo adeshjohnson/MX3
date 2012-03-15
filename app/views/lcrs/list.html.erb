@@ -36,6 +36,7 @@
     <th align="center"><%=_('Make_Tariff_from_LCR_Providers_to_CSV')%></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @lcrs.each_with_index{ |lcr, i| %>
@@ -48,6 +49,7 @@
     <td align="center" id="destinations_<%=lcr.id%>"><%= link_to b_actions, :action => 'details_by_destinations', :id => lcr.id,    :no_direction => true %></td>
     <td align="center" id="usage_<%=lcr.id%>"><%= link_to b_details, :action => 'details', :id => lcr.id %></td>
     <td align="center" id="make_tariff_<%=lcr.id%>"><%= link_to b_csv, {:action => :make_tariff, :id => lcr.id}, :id=>"lcr_make_tariff_#{lcr.id}" if providers and providers.size.to_i > 0 %></td>
+    <td align="center" id="clone_lcr_<%=lcr.id%>"><%= link_to b_copy({:title=>_('Lcr_copy')}), {:action => :lcr_clone, :id => lcr.id}, :id=>"lcr_clone_id_#{lcr.id}" %></td>
     <td align="center" id="edit_<%=lcr.id%>"><%= link_to b_edit, {:action => 'edit', :id => lcr.id}, :id=>"lcr_edit_#{lcr.id}" %></td>
     <td align="center" id="destroy_<%=lcr.id%>"><%= link_to b_delete, { :action => 'destroy', :id => lcr.id }, :id=>"lcr_destroy_#{lcr.id}", :confirm => _('Are_you_sure'), :method => :post %></td>
   </tr>

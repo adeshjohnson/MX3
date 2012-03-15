@@ -13,7 +13,7 @@ class IvrVoice< ActiveRecord::Base
     for sound in self.ivr_sound_files do
       sound.destroy_with_file
     end
-    Audio.rm_sound_file(Confline.get_value("IVR_Voice_Dir")+voice)
+    Audio.rm_sound_file(Confline.get_value("IVR_Voice_Dir")+voice) if !voice.to_s.blank?
     self.destroy
   end
 

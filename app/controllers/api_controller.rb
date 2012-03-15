@@ -3080,6 +3080,8 @@ class ApiController < ApplicationController
         date_from = Time.at(@values[:date_from].to_i).to_date.to_s(:db)
         date_till = Time.at(@values[:date_till].to_i).to_date.to_s(:db)
       end
+      date_from = Date.today.to_s(:db) if !date_from
+      date_till = Time.now.tomorrow.to_s(:db) if !date_till
       if ['paid', 'unpaid', 'all'].include? @values[:status]
         status = @values[:status]
       else
@@ -3118,8 +3120,13 @@ class ApiController < ApplicationController
               doc.statement("type" => type) {
                 doc.status(data.status)
                 doc.count(data.count)
-                doc.price(nice_number(data.price))
-                doc.price_with_vat(nice_number(data.price_with_vat))
+                if type == 'invoices'
+                  doc.price(nice_number(data.price))
+                  doc.price_with_vat(nice_number(data.price_with_vat))
+                else
+                  doc.price(nice_number(data.price  * count_exchange_rate(@current_user.currency.name, default_currency_name)))
+                  doc.price_with_vat(nice_number(data.price_with_vat  * count_exchange_rate(@current_user.currency.name, default_currency_name)))
+                end
               }
             }
           }
@@ -3576,9 +3583,7 @@ class ApiController < ApplicationController
             card = Card.find(:first, :conditions => {:callerid => values[:callerid]})
             if  !card or (card and card.cardgroup.owner_id == @current_user.get_correct_owner_id)
               if card
-                #3   * We find card1 by callerid and cardgroup2 by cardgroup_id, then we check If card1.cardgroup != cardgroup2, then we create card_n in cardgroup2 , card_n.callerid = Caller_id, card_n.balance = amount + card1.balance, card_n.sold , card1.disable
-                logger.fatal "I%%%%%%%%%%%%%%%%%%%%%%%%3%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-                logger.fatal values.to_yaml
+
                 if values[:cardgroup_id]
                   cardgroup = Cardgroup.find(:first, :conditions => {:id => values[:cardgroup_id], :owner_id => @current_user.get_correct_owner_id})
                 else
@@ -3586,6 +3591,9 @@ class ApiController < ApplicationController
                 end
                 if   cardgroup
                   if  cardgroup.id != card.cardgroup_id
+                    #3   * We find card1 by callerid and cardgroup2 by cardgroup_id, then we check If card1.cardgroup != cardgroup2, then we create card_n in cardgroup2 , card_n.callerid = Caller_id, card_n.balance = amount + card1.balance, card_n.sold , card1.disable
+                    logger.fatal "I%%%%%%%%%%%%%%%%%%%%%%%%3%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+                    logger.fatal values.to_yaml
                     original_balance = card.balance
                     card.add_to_balance(card.balance * -1)
                     card.disable
@@ -3713,7 +3721,7 @@ class ApiController < ApplicationController
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
 
     cg = Cardgroup.find(:first, :include => [:tariff, :lcr, :location, :tax], :conditions => ["cardgroups.id = ? and cardgroups.owner_id = ?", @values[:id], @current_user.get_correct_owner_id])
-    cards_size = @values[:quantity].to_i == 0 ? 1 : @values[:quantity].to_i
+    cards_size = @values[:quantity].to_i < 1 ? 1 : @values[:quantity].to_i
     if cg
       cards = cg.cards.find(:all, :conditions => {:sold => 0}, :limit => cards_size, :order => "rand()")
       if cards

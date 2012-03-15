@@ -1493,6 +1493,9 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
   def financial_statements
 
+    @page_title = _('Financial_statements')
+    @page_icon = "view.png"
+
     if not mor_11_extend?
       dont_be_so_smart                                                           
       redirect_to :controller => :callc, :action => :main and return false

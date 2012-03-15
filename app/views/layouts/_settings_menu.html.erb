@@ -29,7 +29,7 @@
   settings_menu.add(120,119,'<%= _('Terminators') %>','<%= Web_Dir %>/terminators/list');
   settings_menu.add(121,119,'<%= _('Hidden') %>','<%= Web_Dir %>/providers/list?s_hidden=1');
   settings_menu.add(122,117,'<%= _('LCR') %>','<%= Web_Dir %>/lcrs/list');
-  <% if current_user.is_admin? %>
+  <% if current_user.is_admin? and reseller_pro_active? %>
     settings_menu.add(156,122,'<%= _('Copy_LCR') %>','<%= Web_Dir %>/lcrs/clone_options');
   <% end %>
   settings_menu.add(123,117,'<%= _('Tariffs') %>','<%= Web_Dir %>/tariffs/list');

@@ -18,31 +18,31 @@ module ApplicationHelper
 
   def draw_flag(country_code)
     unless country_code.blank?
-      image_tag("flags/" + country_code.to_s.downcase + ".jpg",  :style => 'border-style:none', :title => country_code.to_s.upcase)
+      image_tag("flags/" + country_code.to_s.downcase + ".jpg", :style => 'border-style:none', :title => country_code.to_s.upcase)
     end
   end
 
   def draw_flag_by_code(flag)
     unless flag.blank?
-      image_tag("flags/" + flag + ".jpg",  :style => 'border-style:none', :title => flag.upcase)
+      image_tag("flags/" + flag + ".jpg", :style => 'border-style:none', :title => flag.upcase)
     end
   end
 
   def nice_time2(time)
     format = session[:time_format].to_s.blank? ? "%H:%M:%S" : session[:time_format].to_s
-    t = time.respond_to?(:strftime) ? time :  ('2000-01-01 ' + time.to_s).to_time
-    t.strftime(format .to_s) if time
+    t = time.respond_to?(:strftime) ? time : ('2000-01-01 ' + time.to_s).to_time
+    t.strftime(format.to_s) if time
   end
 
   def nice_date_time(time, options={})
     if time
       if options
-        format  = options[:date_time_format].to_s.blank? ? "%Y-%m-%d %H:%M:%S" : options[:date_time_format].to_s
+        format = options[:date_time_format].to_s.blank? ? "%Y-%m-%d %H:%M:%S" : options[:date_time_format].to_s
       else
-        format  = session[:date_time_format].to_s.blank? ? "%Y-%m-%d %H:%M:%S" : session[:date_time_format].to_s
+        format = session[:date_time_format].to_s.blank? ? "%Y-%m-%d %H:%M:%S" : session[:date_time_format].to_s
       end
       t = time.respond_to?(:strftime) ? time : time.to_time
-      d = t.strftime(format .to_s)
+      d = t.strftime(format.to_s)
     end
     d
   end
@@ -50,9 +50,9 @@ module ApplicationHelper
   def nice_date(date, options={})
     if date
       if options
-        format  = options[:date_format].to_s.blank? ? "%Y-%m-%d" : options[:date_format].to_s
+        format = options[:date_format].to_s.blank? ? "%Y-%m-%d" : options[:date_format].to_s
       else
-        format  = session[:date_format].to_s.blank? ? "%Y-%m-%d" : session[:date_format].to_s
+        format = session[:date_format].to_s.blank? ? "%Y-%m-%d" : session[:date_format].to_s
       end
       t = date.respond_to?(:strftime) ? date : date.to_time
       d = t.strftime(format.to_s)
@@ -63,16 +63,16 @@ module ApplicationHelper
   def nice_number(number, options = {})
     n = "0.00"
     if options[:nice_number_digits]
-      n = sprintf("%0.#{options[:nice_number_digits]}f",number.to_f) if number
+      n = sprintf("%0.#{options[:nice_number_digits]}f", number.to_f) if number
       if options[:change_decimal]
-        n = n.gsub('.',options[:global_decimal])
+        n = n.gsub('.', options[:global_decimal])
       end
     else
       session[:nice_number_digits] ||= Confline.get_value("Nice_Number_Digits").to_i
       session[:nice_number_digits] ||= 2
-      n = sprintf("%0.#{session[:nice_number_digits]}f",number.to_f) if number
+      n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_f) if number
       if session[:change_decimal]
-        n = n.gsub('.',session[:global_decimal])
+        n = n.gsub('.', session[:global_decimal])
       end
     end
     n
@@ -80,9 +80,9 @@ module ApplicationHelper
 
   def long_nice_number(number)
     n = ""
-    n = sprintf("%0.6f",number) if number
+    n = sprintf("%0.6f", number) if number
     if session[:change_decimal]
-      n = n.gsub('.',session[:global_decimal])
+      n = n.gsub('.', session[:global_decimal])
     end
     n
   end
@@ -105,9 +105,9 @@ module ApplicationHelper
     session[:nice_number_digits] ||= Confline.get_value("Nice_Number_Digits").to_i
     session[:nice_number_digits] ||= 2
     bytes = 0 unless bytes
-    n = sprintf("%0.#{session[:nice_number_digits]}f",bytes.to_f)+" "+sufix[sufix_pos]
+    n = sprintf("%0.#{session[:nice_number_digits]}f", bytes.to_f)+" "+sufix[sufix_pos]
     if session[:change_decimal]
-      n = n.gsub('.',session[:global_decimal])
+      n = n.gsub('.', session[:global_decimal])
     end
     n
   end
@@ -115,9 +115,9 @@ module ApplicationHelper
   def nice_number_currency(number, exchange_rate = 1)
     number = number * exchange_rate.to_f if number
     n = ""
-    n = sprintf("%0.#{session[:nice_number_digits]}f",number) if number
+    n = sprintf("%0.#{session[:nice_number_digits]}f", number) if number
     if session[:change_decimal]
-      n = n.gsub('.',session[:global_decimal])
+      n = n.gsub('.', session[:global_decimal])
     end
     n
   end
@@ -127,7 +127,7 @@ module ApplicationHelper
   def nice_src(call, options={})
     value = Confline.get_value("Show_Full_Src")
     srt = call.clid.split(' ')
-    name =  srt[0..-2].join(' ').to_s.delete('"')
+    name = srt[0..-2].join(' ').to_s.delete('"')
     number = call.src.to_s
     if options[:pdf].to_i == 0
       session[:show_full_src] ||= value
@@ -144,7 +144,7 @@ module ApplicationHelper
     MorLog.my_debug("Use of nice_cid(cid) is deprecated user nice_src(call) instead.")
     cid = cid.to_s.split(/"\s*/).to_s
     if cid.length > 0
-      cid = cid[0,cid.index('<')]
+      cid = cid[0, cid.index('<')]
     end
     cid
   end
@@ -152,21 +152,21 @@ module ApplicationHelper
   # converting caller id like "name" <11> to 11
   def cid_number(cid)
     if cid and cid.index('<') and cid.index('>')
-      cid = cid[cid.index('<')+1,cid.index('>') - cid.index('<') - 1]
+      cid = cid[cid.index('<')+1, cid.index('>') - cid.index('<') - 1]
     else
       cid = ""
     end
     cid
   end
 
-  def  date_time(string)
+  def date_time(string)
     year = string[0..3]
     mont = string[4..5]
     day = string[6..7]
     hour = string[8..9]
     minute = string[10..11]
-    secunde  = string[12..13]
-    out= year + "-" +  mont + "-" +  day + " " + hour + ":" + minute + ":" +  secunde
+    secunde = string[12..13]
+    out= year + "-" + mont + "-" + day + " " + hour + ":" + minute + ":" + secunde
   end
 
   def session_from_date
@@ -231,7 +231,7 @@ module ApplicationHelper
   end
 
   def b_unassign(options={})
-    opts =  {:title => _('Unasssign user')}.merge(options)
+    opts = {:title => _('Unasssign user')}.merge(options)
     #TODO:get sutable icon, maybe user_delete
     image_tag('icons/user_delete.png', :title => opts[:title]) + " "
   end
@@ -334,6 +334,11 @@ module ApplicationHelper
     image_tag('icons/check.png', {:title => "check"}.merge(options)) + " "
   end
 
+  def b_copy(options ={})
+    options[:id] = "icon_chech_"+options[:id].to_s if options[:id]
+    image_tag('icons/page_copy.png', {:title => _('copy')}.merge(options)) + " "
+  end
+
   def b_csv
     image_tag('icons/excel.png', :title => _('CSV')) + " "
   end
@@ -380,64 +385,64 @@ module ApplicationHelper
   end
 
   def b_cart
-    image_tag('icons/cart.png', :title => _('Cart') ) + " "
+    image_tag('icons/cart.png', :title => _('Cart')) + " "
   end
 
   def b_bullet_white
-    image_tag('icons/bullet_white.png', :title => "" ) + " "
+    image_tag('icons/bullet_white.png', :title => "") + " "
   end
 
   def b_bullet_green
-    image_tag('icons/bullet_green.png', :title => "" ) + " "
+    image_tag('icons/bullet_green.png', :title => "") + " "
   end
 
   def b_bullet_red
-    image_tag('icons/bullet_red.png', :title => "" ) + " "
+    image_tag('icons/bullet_red.png', :title => "") + " "
   end
 
   def b_bullet_yellow
-    image_tag('icons/bullet_yellow.png', :title => "" ) + " "
+    image_tag('icons/bullet_yellow.png', :title => "") + " "
   end
 
   def b_bullet_grey
-    image_tag('icons/control_blank.png', :title => "" ) + " "
+    image_tag('icons/control_blank.png', :title => "") + " "
   end
 
   def b_help_grey
-    image_tag('icons/help_grey.png', :title => "" ) + " "
+    image_tag('icons/help_grey.png', :title => "") + " "
   end
 
   def b_blue_bullet
-    image_tag('icons/bullet_blue.png', :title => "" ) + " "
+    image_tag('icons/bullet_blue.png', :title => "") + " "
   end
 
   def b_bullet_black
-    image_tag('icons/bullet_black.png', :title => "" ) + " "
+    image_tag('icons/bullet_black.png', :title => "") + " "
   end
 
   def b_black_bullet
-    image_tag('icons/bullet_black.png', :title => "" ) + " "
+    image_tag('icons/bullet_black.png', :title => "") + " "
   end
 
 
   def b_cart_go
-    image_tag('icons/cart_go.png', :title => "" ) + " "
+    image_tag('icons/cart_go.png', :title => "") + " "
   end
 
   def b_cart_empty
-    image_tag('icons/cart_delete.png', :title => "" ) + " "
+    image_tag('icons/cart_delete.png', :title => "") + " "
   end
 
   def b_cart_checkout
-    image_tag('icons/cart_edit.png', :title => "" ) + " "
+    image_tag('icons/cart_edit.png', :title => "") + " "
   end
 
   def b_help
-    image_tag('icons/help.png', :title => "" ) + " "
+    image_tag('icons/help.png', :title => "") + " "
   end
 
   def b_money
-    image_tag('icons/money.png', :title => _('Add_manual_payment') ) + " "
+    image_tag('icons/money.png', :title => _('Add_manual_payment')) + " "
   end
 
   def b_groups
@@ -485,72 +490,72 @@ module ApplicationHelper
   end
 
   def b_date
-    image_tag('icons/date.png', :title =>  "") + " "
+    image_tag('icons/date.png', :title => "") + " "
   end
 
   def b_call
-    image_tag('icons/call.png', :title =>  "") + " "
+    image_tag('icons/call.png', :title => "") + " "
   end
 
   def b_cardgroup
-    image_tag('icons/page_white_stack.png', :title =>  "") + " "
+    image_tag('icons/page_white_stack.png', :title => "") + " "
   end
 
   def b_call_info
-    image_tag('icons/information.png', :title =>  _('Call_info')) + " "
+    image_tag('icons/information.png', :title => _('Call_info')) + " "
   end
 
   def b_trunk
-    image_tag('icons/trunk.png', :title =>  _('Trunk')) + " "
+    image_tag('icons/trunk.png', :title => _('Trunk')) + " "
   end
 
   def b_trunk_ani
-    image_tag('icons/trunk_ani.png', :title =>  _('Trunk_with_ANI')) + " "
+    image_tag('icons/trunk_ani.png', :title => _('Trunk_with_ANI')) + " "
   end
 
   def b_rates_delete
-    image_tag('icons/coins_delete.png', :title =>  _('Rates_delete')) + " "
+    image_tag('icons/coins_delete.png', :title => _('Rates_delete')) + " "
   end
 
   def b_make_tariff
-    image_tag('icons/application_add.png', :title =>  _('Make_tariff')) + " "
+    image_tag('icons/application_add.png', :title => _('Make_tariff')) + " "
   end
 
   def b_provider
-    image_tag('icons/provider.png', :title =>  _('Provider')) + " "
+    image_tag('icons/provider.png', :title => _('Provider')) + " "
   end
 
   def b_skype
-    image_tag('icons/skype.png', :title =>  _('Skype')) + " "
+    image_tag('icons/skype.png', :title => _('Skype')) + " "
   end
 
   def b_currency
-    image_tag('icons/money_dollar.png', :title =>  _('Currency')) + " "
+    image_tag('icons/money_dollar.png', :title => _('Currency')) + " "
   end
 
   def b_cli
-    image_tag('icons/cli.png', :title =>  _('CLI')) + " "
+    image_tag('icons/cli.png', :title => _('CLI')) + " "
   end
 
   def b_did
-    image_tag('icons/did.png', :title =>  _('DID')) + " "
+    image_tag('icons/did.png', :title => _('DID')) + " "
   end
 
   def b_tracing
-    image_tag('icons/lightning.png', :title =>  _('Tracing')) + " "
+    image_tag('icons/lightning.png', :title => _('Tracing')) + " "
   end
 
   def b_testing
-    image_tag('icons/lightning.png', :title =>  _('Testing')) + " "
+    image_tag('icons/lightning.png', :title => _('Testing')) + " "
   end
 
 
   def b_lcr
-    image_tag('icons/arrow_switch.png', :title =>  _('LCR')) + " "
+    image_tag('icons/arrow_switch.png', :title => _('LCR')) + " "
   end
 
   def b_ivr
-    image_tag('icons/arrow_divide.png', :title =>  _('IVR')) + " "
+    image_tag('icons/arrow_divide.png', :title => _('IVR')) + " "
   end
 
   def b_exclamation(options = {})
@@ -562,36 +567,36 @@ module ApplicationHelper
   end
 
   def b_extlines
-    image_tag('icons/asterisk.png', :title =>  _('Extlines')) + " "
+    image_tag('icons/asterisk.png', :title => _('Extlines')) + " "
   end
 
   def b_online
-    image_tag('icons/status_online.png', :title =>  _('Logged_in_to_GUI')) + " "
+    image_tag('icons/status_online.png', :title => _('Logged_in_to_GUI')) + " "
   end
 
   def b_offline
-    image_tag('icons/status_offline.png', :title =>  _('Not_Logged_in_to_GUI')) + " "
+    image_tag('icons/status_offline.png', :title => _('Not_Logged_in_to_GUI')) + " "
   end
 
   def b_search(options = {})
-    opts = {:title =>  _('Search')}.merge(options)
+    opts = {:title => _('Search')}.merge(options)
     image_tag('icons/magnifier.png', opts) + " "
   end
 
   def b_callflow
-    image_tag('icons/cog_go.png', :title =>  _('Call_Flow')) + " "
+    image_tag('icons/cog_go.png', :title => _('Call_Flow')) + " "
   end
 
   def b_voicemail
-    image_tag('icons/voicemail.png', :title =>  _('Voicemail')) + " "
+    image_tag('icons/voicemail.png', :title => _('Voicemail')) + " "
   end
 
   def b_warning
-    image_tag('icons/error.png', :title =>  _('Warning')) + " "
+    image_tag('icons/error.png', :title => _('Warning')) + " "
   end
 
   def b_rules
-    image_tag('icons/page_white_gear.png', :title =>  _('Provider_rules')) + " "
+    image_tag('icons/page_white_gear.png', :title => _('Provider_rules')) + " "
   end
 
   def b_empty
@@ -599,44 +604,44 @@ module ApplicationHelper
   end
 
   def b_login_as(options = {})
-    opts = {:title =>  _('Login_as')}.merge(options)
+    opts = {:title => _('Login_as')}.merge(options)
     image_tag('icons/application_key.png', opts) + " "
   end
 
   def b_call_tracing
-    image_tag('icons/lightning.png', :title =>  _('Call_Tracing')) + " "
+    image_tag('icons/lightning.png', :title => _('Call_Tracing')) + " "
   end
 
   def b_test
-    image_tag('icons/lightning.png', :title =>  _('Test')) + " "
+    image_tag('icons/lightning.png', :title => _('Test')) + " "
   end
 
   def b_primary_device
-    image_tag('icons/star.png', :title =>  _('Primary_device')) + " "
+    image_tag('icons/star.png', :title => _('Primary_device')) + " "
   end
 
   def b_email_send
-    image_tag('icons/email_go.png', :title =>  _('Send')) + " "
+    image_tag('icons/email_go.png', :title => _('Send')) + " "
   end
 
   def b_fax
-    image_tag('icons/printer.png', :title =>  _('Fax')) + " "
+    image_tag('icons/printer.png', :title => _('Fax')) + " "
   end
 
   def b_email
-    image_tag('icons/email.png', :title =>  _('Email')) + " "
+    image_tag('icons/email.png', :title => _('Email')) + " "
   end
 
   def b_refresh
-    image_tag('icons/arrow_refresh.png', :title =>  _('Refresh')) + " "
+    image_tag('icons/arrow_refresh.png', :title => _('Refresh')) + " "
   end
 
   def b_hide
-    image_tag('icons/contrast.png', :title =>  _('Hide')) + " "
+    image_tag('icons/contrast.png', :title => _('Hide')) + " "
   end
 
   def b_unhide
-    image_tag('icons/contrast.png', :title =>  _('Unhide')) + " "
+    image_tag('icons/contrast.png', :title => _('Unhide')) + " "
   end
 
   def b_logins
@@ -648,15 +653,15 @@ module ApplicationHelper
   end
 
   def b_integrity_check
-    image_tag('icons/lightning.png', :title =>  _('Integrity_check')) + " "
+    image_tag('icons/lightning.png', :title => _('Integrity_check')) + " "
   end
 
   def b_fix
-    image_tag('icons/wrench.png', :title =>  _('Fix')) + " "
+    image_tag('icons/wrench.png', :title => _('Fix')) + " "
   end
 
   def b_virtual_device
-    image_tag('icons/virtual_device.png', :title =>  _('Virtual_Device')) + " "
+    image_tag('icons/virtual_device.png', :title => _('Virtual_Device')) + " "
   end
 
   def b_cog
@@ -664,20 +669,20 @@ module ApplicationHelper
   end
 
   def b_book
-    image_tag('icons/book.png', :title =>  _('Phonebook')) + " "
+    image_tag('icons/book.png', :title => _('Phonebook')) + " "
   end
 
 
   def b_restore
-    image_tag('icons/database_refresh.png', :title =>  _('Restore')) + " "
+    image_tag('icons/database_refresh.png', :title => _('Restore')) + " "
   end
 
   def b_download
-    image_tag('icons/database_go.png', :title =>  _('Download')) + " "
+    image_tag('icons/database_go.png', :title => _('Download')) + " "
   end
 
   def b_user_log
-    image_tag('icons/report_user.png', :title =>  _('User_log')) + " "
+    image_tag('icons/report_user.png', :title => _('User_log')) + " "
   end
 
   def b_active(value)
@@ -704,7 +709,7 @@ module ApplicationHelper
 
   def print_tech(tech)
     if tech
-      tech = Confline.get_value("Change_Zap_to") if tech.downcase  == "zap" and Confline.get_value("Change_Zap").to_i == 1
+      tech = Confline.get_value("Change_Zap_to") if tech.downcase == "zap" and Confline.get_value("Change_Zap").to_i == 1
     else
       tech = ""
     end
@@ -742,8 +747,8 @@ module ApplicationHelper
 
   def nice_device_type(device, options = {})
     opts = {
-      :image => true,
-      :tach => true
+        :image => true,
+        :tach => true
     }.merge(options)
     d = []
     d << nice_device_pic(device) if opts[:image] == true
@@ -754,14 +759,14 @@ module ApplicationHelper
 
   def nice_device(device, options = {})
     opts = {
-      :image => true,
-      :tech => true
+        :image => true,
+        :tech => true
     }.merge(options)
     d = ""
     if device
       d = nice_device_type(device, opts) + "/"
       d += device.name if !device.username.blank? and device.device_type != "FAX"
-      d += device.extension if device.device_type == "FAX"  or device.name.length == 0 or device.username.blank?
+      d += device.extension if device.device_type == "FAX" or device.name.length == 0 or device.username.blank?
     end
 
     d
@@ -772,7 +777,7 @@ module ApplicationHelper
     if (device)
       d = print_tech device.device_type + "/"
       d += device.name if device.device_type != "FAX"
-      d += device.extension if device.device_type == "FAX"  or device.name.length == 0
+      d += device.extension if device.device_type == "FAX" or device.name.length == 0
     end
     d
   end
@@ -787,7 +792,7 @@ module ApplicationHelper
 
     d += print_tech dev_type + "/"
     d += dev_name if dev_type != "FAX"
-    d += dev_extension if dev_type == "FAX"  or dev_name.length == 0
+    d += dev_extension if dev_type == "FAX" or dev_name.length == 0
     if options[:link] == true and options[:device_id].to_i > 0
       d = link_to d, :controller => "devices", :action => "device_edit", :id => options[:device_id].to_i
     end
@@ -867,7 +872,7 @@ module ApplicationHelper
   end
 
   def link_user_gray(user, options = {})
-    link_to b_user_gray({:title=> options[:title]}), {:controller => "users", :action => "edit", :id => user.id}.merge(options.except(:title))
+    link_to b_user_gray({:title => options[:title]}), {:controller => "users", :action => "edit", :id => user.id}.merge(options.except(:title))
   end
 
   def link_nice_group(group)
@@ -935,7 +940,7 @@ module ApplicationHelper
       for tr in session[:tr_arr]
         title = tr.name
         title += "/#{tr.native_name}" if tr.native_name.length > 0
-        fl += "<a href='?lang=" + tr.short_name + "'> " + image_tag("flags/#{tr.flag}.jpg",  :style => 'border-style:none', :title => title) + "</a>"
+        fl += "<a href='?lang=" + tr.short_name + "'> " + image_tag("flags/#{tr.flag}.jpg", :style => 'border-style:none', :title => title) + "</a>"
       end
     end
     fl
@@ -948,11 +953,11 @@ module ApplicationHelper
   end
 
   def reminder_finder()
-    @reminders = CcReminder.find(:all, :conditions=>"start_time < '#{nice_date_time(Time.now)}' and user_id ='#{session[:user_id]}'")
+    @reminders = CcReminder.find(:all, :conditions => "start_time < '#{nice_date_time(Time.now)}' and user_id ='#{session[:user_id]}'")
     #my_debug @reminders.to_yaml
     code =""
     if @reminders.size.to_i > 0
-      code = link_to _('YOU_HAVE A_REMINDER') + " !!!!!!!!!! ", :controller => "callcenter", :action=>"reminders", :rem => @reminders
+      code = link_to _('YOU_HAVE A_REMINDER') + " !!!!!!!!!! ", :controller => "callcenter", :action => "reminders", :rem => @reminders
     end
     code
   end
@@ -994,10 +999,10 @@ module ApplicationHelper
 
   def clean_value_all(value)
     cv = value.to_s
-    while cv[0,1] == "\"" or cv[0] == "'" do
+    while cv[0, 1] == "\"" or cv[0] == "'" do
       cv = cv[1..cv.length]
     end
-    while cv[cv.length-1,1] == "\"" or cv[cv.length-1,1] == "'" do
+    while cv[cv.length-1, 1] == "\"" or cv[cv.length-1, 1] == "'" do
       cv = cv[0..cv.length-2]
     end
     cv
@@ -1025,40 +1030,40 @@ module ApplicationHelper
 
   def client_form(client)
     @direction = Direction.find(:all)
-    @address = Addres.find(:first, :conditions=>"id='#{client.address_id}'")
+    @address = Addres.find(:first, :conditions => "id='#{client.address_id}'")
     code = ""
     code += '
     <table class = "maintable">
   <tr>
-    <th colspan="2"><b>' +  _("Client_Info") + '</b></th>
+    <th colspan="2"><b>' + _("Client_Info") + '</b></th>
   </tr>
   <tr>
     <th> ' + _("First_Name") + '</th>
     <td> '
-    code+=  text_field_tag('first_name', client.first_name , "class" => "input", :size => "35", :maxlength => "50")
+    code+= text_field_tag('first_name', client.first_name, "class" => "input", :size => "35", :maxlength => "50")
     code+= '</td>
   </tr>
   <tr>
     <th>' + _("Last_Name") + '</th>
     <td>'
-    code+= text_field_tag('last_name', client.last_name , "class" => "input", :size => "35", :maxlength => "50")
+    code+= text_field_tag('last_name', client.last_name, "class" => "input", :size => "35", :maxlength => "50")
     code+= '</td>
   </tr>
   <tr>
-    <th>' +  _("Client_ID") + '</th>
-    <td>' + text_field_tag('clientid', client.clientid , "class" => "input", :size => "35", :maxlength => "50") + '</td>
+    <th>' + _("Client_ID") + '</th>
+    <td>' + text_field_tag('clientid', client.clientid, "class" => "input", :size => "35", :maxlength => "50") + '</td>
   </tr>
   <tr>
     <th>' + _("Agreement_Number") + '</th>
-    <td>' + text_field_tag('agreement_number', client.agreement_number , "class" => "input", :size => "35", :maxlength => "50")  +'</td>
+    <td>' + text_field_tag('agreement_number', client.agreement_number, "class" => "input", :size => "35", :maxlength => "50") +'</td>
   </tr>
   <tr>
     <th>' + _("Agreement_Date") +'</th>
-    <td>' + text_field_tag('agreement_date', client.agreement_date , "class" => "input", :size => "35", :maxlength => "50") + '</td>
+    <td>' + text_field_tag('agreement_date', client.agreement_date, "class" => "input", :size => "35", :maxlength => "50") + '</td>
   </tr>
   <tr>
     <th>' + _("VAT_Number") + '</th>
-    <td>' + text_field_tag('vat_number', client.vat_number , "class" => "input", :size => "35", :maxlength => "50") + '</td>
+    <td>' + text_field_tag('vat_number', client.vat_number, "class" => "input", :size => "35", :maxlength => "50") + '</td>
   </tr>
   <tr>
     <th colspan="2"><b>' + _("Address") +'</b></th>
@@ -1075,39 +1080,39 @@ module ApplicationHelper
   </tr>
   <tr>
     <th>#{_("State")}</th>
-    <td>#{ text_field_tag('state', @address.state , "class" => "input", :size => "35", :maxlength => "50") }</td>
+    <td>#{ text_field_tag('state', @address.state, "class" => "input", :size => "35", :maxlength => "50") }</td>
   </tr>
   <tr>
     <th>#{ _("County")}</th>
-    <td>#{ text_field_tag('county', @address.county , "class" => "input", :size => "35", :maxlength => "50") }</td>
+    <td>#{ text_field_tag('county', @address.county, "class" => "input", :size => "35", :maxlength => "50") }</td>
   </tr>
   <tr>
     <th>#{ _("City")}</th>
-    <td>#{ text_field_tag('city', @address.city , "class" => "input", :size => "35", :maxlength => "50") }</td>
+    <td>#{ text_field_tag('city', @address.city, "class" => "input", :size => "35", :maxlength => "50") }</td>
   </tr>
   <tr>
     <th>#{ _("Postcode")}</th>
-    <td>#{ text_field_tag('postcode', @address.postcode , "class" => "input", :size => "35", :maxlength => "50") }</td>
+    <td>#{ text_field_tag('postcode', @address.postcode, "class" => "input", :size => "35", :maxlength => "50") }</td>
   </tr>
   <tr>
     <th>#{ _("Address")}</th>
-    <td>#{ text_field_tag('address', @address.address , "class" => "input", :size => "35", :maxlength => "50") }</td>
+    <td>#{ text_field_tag('address', @address.address, "class" => "input", :size => "35", :maxlength => "50") }</td>
   </tr>
   <tr>
     <th>#{ _("Phone")}</th>
-    <td>#{ text_field_tag('phone', @address.phone , "class" => "input", :size => "35", :maxlength => "50") }</td>
+    <td>#{ text_field_tag('phone', @address.phone, "class" => "input", :size => "35", :maxlength => "50") }</td>
   </tr>
   <tr>
     <th>#{ _("Mob_Phone")}</th>
-    <td>#{ text_field_tag('mob_phone', @address.mob_phone , "class" => "input", :size => "35", :maxlength => "50") }</td>
+    <td>#{ text_field_tag('mob_phone', @address.mob_phone, "class" => "input", :size => "35", :maxlength => "50") }</td>
   </tr>
   <tr>
     <th>#{ _("Fax")}</th>
-    <td>#{ text_field_tag('fax', @address.fax , "class" => "input", :size => "35", :maxlength => "50") }</td>
+    <td>#{ text_field_tag('fax', @address.fax, "class" => "input", :size => "35", :maxlength => "50") }</td>
   </tr>
   <tr>
     <th>#{_("Email")}</th>
-    <td>#{ text_field_tag('email', @address.email , "class" => "input", :size => "35", :maxlength => "50") }</td>
+    <td>#{ text_field_tag('email', @address.email, "class" => "input", :size => "35", :maxlength => "50") }</td>
   </tr>
 </table>"
 
@@ -1117,7 +1122,7 @@ module ApplicationHelper
 
   def nice_web(string)
     if string.include?("http//") or string.include?("http://") or string.include?("https//") or string.include?("https://")
-      web =  string
+      web = string
     else
       web = 'http://' + string.to_s
     end
@@ -1147,28 +1152,28 @@ module ApplicationHelper
 
   def sortable_list_header(true_col_name, col_header_name, options)
     link_to(
-      (b_sort_desc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 1).to_s+
-        (b_sort_asc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 0).to_s+
-        col_header_name, :action => params[:action], :order_by => true_col_name   .to_s, :order_desc=>(options[:order_by].to_s == true_col_name ? 1 - options[:order_desc] : 1))
+        (b_sort_desc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 1).to_s+
+            (b_sort_asc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 0).to_s+
+            col_header_name, :action => params[:action], :order_by => true_col_name.to_s, :order_desc => (options[:order_by].to_s == true_col_name ? 1 - options[:order_desc] : 1))
   end
 
   def remote_sortable_list_header(true_col_name, col_header_name, options)
     link_to_remote(
-      (b_sort_desc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 1).to_s +
-        (b_sort_asc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 0).to_s +
-        col_header_name,
-      {:update => options[:update],
-        :url => {:controller=> options[:controller].to_s, :action => options[:action].to_s, :order_by => true_col_name.to_s, :order_desc=>(options[:order_by].to_s == true_col_name ? 1 - options[:order_desc] : 1)},
-        :loading => "Element.show('spinner');",
-        :complete=> "Element.hide('spinner');"},{:class => "sortable_column_header"})
+        (b_sort_desc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 1).to_s +
+            (b_sort_asc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 0).to_s +
+            col_header_name,
+        {:update => options[:update],
+         :url => {:controller => options[:controller].to_s, :action => options[:action].to_s, :order_by => true_col_name.to_s, :order_desc => (options[:order_by].to_s == true_col_name ? 1 - options[:order_desc] : 1)},
+         :loading => "Element.show('spinner');",
+         :complete => "Element.hide('spinner');"}, {:class => "sortable_column_header"})
   end
 
   def nice_list_order(user_col_name, col_header_name, options, params_sort={})
     order_dir = (options[:order_desc].to_i == 1 ? 0 : 1)
     link_to(
-      (b_sort_desc if options[:order_desc].to_i== 1 and user_col_name.downcase == options[:order_by].to_s).to_s+
-        (b_sort_asc if options[:order_desc].to_i== 0 and user_col_name.downcase == options[:order_by].to_s).to_s+
-        _(col_header_name.to_s), {:action => params[:action], :order_by => user_col_name, :order_desc=> order_dir}.merge(params_sort), {:id => "#{user_col_name}_#{order_dir}"} )
+        (b_sort_desc if options[:order_desc].to_i== 1 and user_col_name.downcase == options[:order_by].to_s).to_s+
+            (b_sort_asc if options[:order_desc].to_i== 0 and user_col_name.downcase == options[:order_by].to_s).to_s+
+            _(col_header_name.to_s), {:action => params[:action], :order_by => user_col_name, :order_desc => order_dir}.merge(params_sort), {:id => "#{user_col_name}_#{order_dir}"})
   end
 
   def link_nice_tariff_if_own(tariff)
@@ -1185,10 +1190,10 @@ module ApplicationHelper
 
   def link_nice_tariff_simple(tariff)
     if tariff.purpose == 'user'
-      link_to tariff.name, :controller=>"tariffs", :action=>"user_rates_list", :id=>tariff.id, :st=>"A"
+      link_to tariff.name, :controller => "tariffs", :action => "user_rates_list", :id => tariff.id, :st => "A"
     elsif tariff.purpose == 'user_wholesale'
-      link_to tariff.name, :controller=>"tariffs", :action=>"rates_list", :id=>tariff.id, :st=>"A"
-    end 
+      link_to tariff.name, :controller => "tariffs", :action => "rates_list", :id => tariff.id, :st => "A"
+    end
   end
 
   def nice_provider(provider)
@@ -1210,13 +1215,13 @@ module ApplicationHelper
 
   def link_nice_tariff(tariff)
     out = "<b>#{_('Tariff')}: </b>"
-    out += link_to tariff.name, :controller=>"tariffs", :action=>"rates_list", :id=>tariff.id, :st=>"A"
+    out += link_to tariff.name, :controller => "tariffs", :action => "rates_list", :id => tariff.id, :st => "A"
     out += "<br><br>"
   end
 
   def link_nice_tariff_retail(tariff)
     out = "<b>#{_('Tariff')}: </b>"
-    out += link_to tariff.name, :controller=>"tariffs", :action=>"user_rates_list", :id=>tariff.id, :st=>"A"
+    out += link_to tariff.name, :controller => "tariffs", :action => "user_rates_list", :id => tariff.id, :st => "A"
     out += "<br><br>"
   end
 
@@ -1225,7 +1230,7 @@ module ApplicationHelper
   end
 
   def link_nice_lcr(lcr)
-    link_to(nice_lcr(lcr), :controller => :lcrs, :action => :edit, :id=>lcr.id)
+    link_to(nice_lcr(lcr), :controller => :lcrs, :action => :edit, :id => lcr.id)
   end
 
   def link_nice_lcr_if_own(lcr)
@@ -1250,19 +1255,19 @@ module ApplicationHelper
   end
 
   def sanitize_to_id(name)
-    name.to_s.gsub(']','').gsub(/[^-a-zA-Z0-9:.]/, "_")
+    name.to_s.gsub(']', '').gsub(/[^-a-zA-Z0-9:.]/, "_")
   end
 
   def ordered_list_header(true_col_name, user_col_name, col_header_name, options)
     link_to(
-      (b_sort_desc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 1).to_s+
-        (b_sort_asc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 0).to_s+
-        _(col_header_name.to_s), :action => params[:action], :order_by => user_col_name.to_s, :order_desc=>(options[:order_by].to_s == true_col_name ? 1 - options[:order_desc] : 1))
+        (b_sort_desc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 1).to_s+
+            (b_sort_asc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 0).to_s+
+            _(col_header_name.to_s), :action => params[:action], :order_by => user_col_name.to_s, :order_desc => (options[:order_by].to_s == true_col_name ? 1 - options[:order_desc] : 1))
   end
 
   # suformuoja tabų pavadinimus javascriptui
   def gateway_tabs(gateway_names)
-    gateway_names.collect{|gw| gw.inspect }.join(",")
+    gateway_names.collect { |gw| gw.inspect }.join(",")
   end
 
   def gateways_enabled
@@ -1270,7 +1275,7 @@ module ApplicationHelper
   end
 
   def gateways_enabled_for(user)
-    defined?(PG_Active) and PG_Active == 1 and user and ["reseller","admin"].include?(user.usertype)
+    defined?(PG_Active) and PG_Active == 1 and user and ["reseller", "admin"].include?(user.usertype)
   end
 
   def gateway_logo(gateway, html_options = {})
@@ -1284,7 +1289,7 @@ module ApplicationHelper
     if external == "true" # external payments have no menu, so show only logo IMG.
       return gateway_logo(gateway, {:style => 'border-style:none', :title => name.to_s.gsub("_", " ").capitalize})
     else
-      return link_to(gateway_logo(gateway, {:style => 'border-style:none', :title => name.to_s.gsub("_", " ").capitalize}) , {:controller => "payment_gateways/#{engine}/#{name}" }, { :id => "#{engine}_#{name}"})
+      return link_to(gateway_logo(gateway, {:style => 'border-style:none', :title => name.to_s.gsub("_", " ").capitalize}), {:controller => "payment_gateways/#{engine}/#{name}"}, {:id => "#{engine}_#{name}"})
     end
   end
 
@@ -1295,7 +1300,7 @@ module ApplicationHelper
       out << b_help + _('I_want_to')+ ":" + "<br>"
       out << "<ul class='iwantto_help'>"
 
-      links.each{|arr| out << "<li><a href='#{arr[1].to_s}' target='_blank'>#{_(arr[0])}</a></li>"}
+      links.each { |arr| out << "<li><a href='#{arr[1].to_s}' target='_blank'>#{_(arr[0])}</a></li>" }
       out << "</ul>"
     end
     out.join("\n")
@@ -1304,11 +1309,11 @@ module ApplicationHelper
   def select_sound_file(object, method, value = nil, html_options = {})
     html_options.delete(:include_blank) ? select_options = [[_("None"), ""]] : select_options = []
     if reseller? and !current_user.reseller_allow_providers_tariff?
-      select_options += IvrSoundFile.find(:all, :include => [:ivr_voice]).collect{ |sf| ["#{sf.ivr_voice.voice}/#{sf.path}", sf.id] }.sort
+      select_options += IvrSoundFile.find(:all, :include => [:ivr_voice]).collect { |sf| ["#{sf.ivr_voice.voice}/#{sf.path}", sf.id] }.sort
     else
-      select_options += IvrSoundFile.find(:all, :include => [:ivr_voice], :conditions=>{:user_id=>correct_owner_id}).collect{ |sf| ["#{sf.ivr_voice.voice}/#{sf.path}", sf.id] }.sort
+      select_options += IvrSoundFile.find(:all, :include => [:ivr_voice], :conditions => {:user_id => correct_owner_id}).collect { |sf| ["#{sf.ivr_voice.voice}/#{sf.path}", sf.id] }.sort
     end
-    select(object.class.to_s.downcase, method, select_options, { :selected => (value) ? value : object.send(method) }, html_options)
+    select(object.class.to_s.downcase, method, select_options, {:selected => (value) ? value : object.send(method)}, html_options)
   end
 
   def hide_device_passwords_for_users
@@ -1324,7 +1329,7 @@ module ApplicationHelper
 
 =end
   def settings_group_line(name, tip='', &block)
-    cont =  ["<tr #{tip}>"]
+    cont = ["<tr #{tip}>"]
     cont << "<td width='30%'><b>#{name}:</b></td>"
     cont << "<td>"
     cont << block.call
@@ -1354,19 +1359,20 @@ conf_name - name of confline that will be represented by checkbox.
 =end
 
   def setting_boolean(name, prop_name, conf_name, owner_id = 0, html_options = {})
-    settings_group_line(name, html_options[:tip]){
+    settings_group_line(name, html_options[:tip]) {
       check_box_tag(prop_name.to_s, '1', Confline.get_value(conf_name.to_s, owner_id).to_i == 1, html_options)
     }
   end
 
   def settings_field(type, name, owner_id = 0, html_options = {})
     case type
-    when :boolean then
-      setting_boolean(_(name), name.downcase, name, owner_id, html_options)
-    else
-      settings_group_line("UNKNOWN TYPE", html_options[:tip]){}
+      when :boolean then
+        setting_boolean(_(name), name.downcase, name, owner_id, html_options)
+      else
+        settings_group_line("UNKNOWN TYPE", html_options[:tip]) {}
     end
   end
+
 =begin
  name -      text that will be dislpayed near text field
  prop_name - form variable name
@@ -1374,14 +1380,14 @@ conf_name - name of confline that will be represented by checkbox.
 =end
 
   def settings_string(name, prop_name, conf_name, owner_id = 0, html_options = {})
-    settings_group_line(name, html_options[:tip]){
-      text_field_tag(prop_name.to_s, Confline.get_value(conf_name.to_s, owner_id).to_s , {"class" => "input", :size => "35", :maxlength => "50"}.merge(html_options) )
+    settings_group_line(name, html_options[:tip]) {
+      text_field_tag(prop_name.to_s, Confline.get_value(conf_name.to_s, owner_id).to_s, {"class" => "input", :size => "35", :maxlength => "50"}.merge(html_options))
     }
   end
 
   def icon(name, options = {})
     opts = {:class => "icon " + name.to_s.downcase}.merge(options)
-    content_tag(:span,"", opts)
+    content_tag(:span, "", opts)
   end
 
   def active_call_bullet(call)
@@ -1394,7 +1400,7 @@ conf_name - name of confline that will be represented by checkbox.
   end
 
   def can_view_forgot_password?
-    Confline.get_value("Email_Sending_Enabled", 0).to_i == 1 and !Confline.get_value("Email_Smtp_Server",0).to_s.blank? and Confline.get_value("Show_forgot_password", session[:owner_id].to_i).to_i == 1
+    Confline.get_value("Email_Sending_Enabled", 0).to_i == 1 and !Confline.get_value("Email_Smtp_Server", 0).to_s.blank? and Confline.get_value("Show_forgot_password", session[:owner_id].to_i).to_i == 1
   end
 
   def link_show_devices_if_own(user, options = {})
@@ -1423,7 +1429,7 @@ conf_name - name of confline that will be represented by checkbox.
 =end
   def nice_user_tooltip(user)
     if user
-      user_details =  "<b>#{_('Tariff')}:</b> #{user.try(:tariff_name)} <br> <b>#{_('LCR')}:</b> #{user.try(:lcr_name)}<br> <b>#{_('Credit')}:</b> #{nice_credit(user)}"
+      user_details = "<b>#{_('Tariff')}:</b> #{user.try(:tariff_name)} <br> <b>#{_('LCR')}:</b> #{user.try(:lcr_name)}<br> <b>#{_('Credit')}:</b> #{nice_credit(user)}"
       address_details = "<br> <b>#{_('Country')}:</b> #{user.try(:county)}<br> <b>#{_('City')}:</b> #{user.try(:city)}"
       tooltip('User details', (user_details + address_details).html_safe)
     end
@@ -1432,18 +1438,18 @@ conf_name - name of confline that will be represented by checkbox.
   def nice_tariff_rates_tolltip(tariff, dest_id, dest_id_d)
     if dest_id and dest_id.size.to_i > 0
       unless tariff.purpose == 'user'
-        rates = Rate.find(:all, :conditions=>["tariff_id = ? AND destination_id IN (#{dest_id.join(',')})", tariff.id], :include=>[:ratedetails, :destination])
+        rates = Rate.find(:all, :conditions => ["tariff_id = ? AND destination_id IN (#{dest_id.join(',')})", tariff.id], :include => [:ratedetails, :destination])
         string = ''
-        rates.each{|r|
-          r.ratedetails.each{ |rr|
+        rates.each { |r|
+          r.ratedetails.each { |rr|
             string << "#{r.destination.prefix} : #{nice_time2 rr.start_time} - #{nice_time2 rr.end_time} => #{rr.rate} (#{tariff.currency}) <br />" }
         }
       else
         if dest_id_d and dest_id_d.size.to_i > 0
-          rates = Rate.find(:all, :conditions=>["tariff_id = ? AND destinationgroup_id IN (#{dest_id_d.join(',')})", tariff.id], :include=>[:aratedetails, :destinationgroup])
+          rates = Rate.find(:all, :conditions => ["tariff_id = ? AND destinationgroup_id IN (#{dest_id_d.join(',')})", tariff.id], :include => [:aratedetails, :destinationgroup])
           string = ''
-          rates.each{|r|
-            r.aratedetails.each{ |rr|
+          rates.each { |r|
+            r.aratedetails.each { |rr|
               string << "#{r.destinationgroup.name} : #{nice_time2 rr.start_time} - #{nice_time2 rr.end_time}, #{rr.artype} => #{rr.price} (#{tariff.currency}) <br />" }
           }
         end
@@ -1455,13 +1461,13 @@ conf_name - name of confline that will be represented by checkbox.
   def nice_rates_tolltip(rate)
     string = ""
     unless rate.tariff.purpose == 'user'
-      rate.ratedetails.each{ |rr|
+      rate.ratedetails.each { |rr|
         if rate.destination
           string << "#{rate.destination.prefix} : #{nice_time2 rr.start_time} - #{nice_time2 rr.end_time} => #{rr.rate} (#{rate.tariff.currency}) <br />"
         end
       }
     else
-      rate.aratedetails.each{ |rr|
+      rate.aratedetails.each { |rr|
         if rate.destinationgroup
           string << "#{rate.destinationgroup.name} : #{nice_time2 rr.start_time} - #{nice_time2 rr.end_time}, #{rr.artype} => #{rr.price} (#{rate.tariff.currency}) <br />"
         end
@@ -1469,9 +1475,9 @@ conf_name - name of confline that will be represented by checkbox.
     end
     tooltip(rate.tariff.name, string)
   end
-  
+
   def nice_end_ivr_tooltip
-    tooltip(_('End_IVR'),_('End_ivr_explanation'))
+    tooltip(_('End_IVR'), _('End_ivr_explanation'))
 
   end
 
@@ -1481,48 +1487,47 @@ conf_name - name of confline that will be represented by checkbox.
     out
   end
 
-	def device_reg_status(device)
-		
-		out = ""
-		icon = ""
-		
-		device.reg_status = device.reg_status.to_s
+  def device_reg_status(device)
+
+    out = ""
+    icon = ""
+
+    device.reg_status = device.reg_status.to_s
 
 
-
-		if device.reg_status.length == 0
-			return out
-		end 
-
-		
-		if device.reg_status[0..1] == "OK"
-			icon = 'icons/bullet_green.png'
-		end 
-
-		if device.reg_status == "Unmonitored"
-			icon = 'icons/bullet_white.png'
-		end 
-
-		if device.reg_status == "UNKNOWN"
-			icon = 'icons/bullet_black.png'
-		end 
-
-		if device.reg_status[0..5] == "LAGGED"
-			icon = 'icons/bullet_yellow.png'
-		end 
-
-		if device.reg_status == "UNREACHABLE"
-			icon = 'icons/bullet_red.png'
-		end 
-
-		out = image_tag(icon, :title => device.reg_status )
-
-		out
-	end
+    if device.reg_status.length == 0
+      return out
+    end
 
 
-	def spy_channel_icon(channel, id)
-		link_to image_tag('icons/sound.png', :title => _('Spy_Channel')), { :controller => "functions", :action => "spy_channel", :id=>id, :channel => channel}, :popup => ['new_window', 'height=40,width=300']
+    if device.reg_status[0..1] == "OK"
+      icon = 'icons/bullet_green.png'
+    end
+
+    if device.reg_status == "Unmonitored"
+      icon = 'icons/bullet_white.png'
+    end
+
+    if device.reg_status == "UNKNOWN"
+      icon = 'icons/bullet_black.png'
+    end
+
+    if device.reg_status[0..5] == "LAGGED"
+      icon = 'icons/bullet_yellow.png'
+    end
+
+    if device.reg_status == "UNREACHABLE"
+      icon = 'icons/bullet_red.png'
+    end
+
+    out = image_tag(icon, :title => device.reg_status)
+
+    out
+  end
+
+
+  def spy_channel_icon(channel, id)
+    link_to image_tag('icons/sound.png', :title => _('Spy_Channel')), {:controller => "functions", :action => "spy_channel", :id => id, :channel => channel}, :popup => ['new_window', 'height=40,width=300']
   end
 
   def nice_card(card)
@@ -1552,18 +1557,18 @@ conf_name - name of confline that will be represented by checkbox.
   end
 
   def call_list_pdf_link(opt={})
-    link_to b_pdf + _('Export_to_PDF'), :action => :last_calls_stats, :pdf=>1
+    link_to b_pdf + _('Export_to_PDF'), :action => :last_calls_stats, :pdf => 1
   end
 
   def nice_did_rate_explain(type)
     case type
-    when 'incoming'
-      _('DID_incoming_rate_explained')
-    when 'provider'
-      _('DID_Provider_rate_explained')
-    when 'owner'
-      _('DID_owner_rate_explained')
+      when 'incoming'
+        _('DID_incoming_rate_explained')
+      when 'provider'
+        _('DID_Provider_rate_explained')
+      when 'owner'
+        _('DID_owner_rate_explained')
     end
   end
-  
+
 end

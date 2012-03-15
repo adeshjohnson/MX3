@@ -4329,6 +4329,11 @@ Localization.define('en') do |l|
   l.store 'Quickforward_dialplan', 'Quickforward Dial Plan'
   l.store 'New_credit_note', 'New Credit Note'
   l.store 'Credit_note', 'Credit Note'
+  l.store 'Financial_statements', 'Financial statements'
+  l.store 'Lcr_copied', 'Lcr copied'
+  l.store 'Lcr_not_copied', 'Lcr not copied'
+  l.store 'copy', 'copy'
+  l.store 'Lcr_copy', 'Lcr copy'
 
   #  l.store '', ''
   #  l.store '', ''

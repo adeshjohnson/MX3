@@ -3,15 +3,15 @@ class LcrsController < ApplicationController
 
   layout "callc"
 
-  before_filter :check_post_method, :only=>[:remove_provider, :destroy, :create, :update, :lcrpartial_destroy, :update_lcrpartial]
+  before_filter :check_post_method, :only => [:remove_provider, :destroy, :create, :update, :lcrpartial_destroy, :update_lcrpartial]
 
 
   before_filter :check_localization
   before_filter :authorize
   before_filter :providers_enabled_for_reseller?
-  before_filter :find_lcr_from_id, :only=>[:make_tariff, :details, :provider_change_status, :remove_provider, :try_to_add_provider, :providers_sort_save, :providers_sort, :providers_percent, :provider_change_status, :edit, :update, :destroy, :details_by_destinations, :providers_list, :try_to_add_failover_provider]
-  before_filter :find_lcr_partial_from_id, :only=>[:lcrpartial_destroy,:lcrpartial_edit, :update_lcrpartial]
-  before_filter :check_owner, :only=>[:make_tariff, :details, :provider_change_status, :remove_provider, :try_to_add_provider, :providers_sort_save, :providers_sort, :providers_percent, :provider_change_status, :edit, :update, :destroy, :details_by_destinations, :providers_list, :try_to_add_failover_provider]
+  before_filter :find_lcr_from_id, :only => [:lcr_clone, :make_tariff, :details, :provider_change_status, :remove_provider, :try_to_add_provider, :providers_sort_save, :providers_sort, :providers_percent, :provider_change_status, :edit, :update, :destroy, :details_by_destinations, :providers_list, :try_to_add_failover_provider]
+  before_filter :find_lcr_partial_from_id, :only => [:lcrpartial_destroy, :lcrpartial_edit, :update_lcrpartial]
+  before_filter :check_owner, :only => [:make_tariff, :details, :provider_change_status, :remove_provider, :try_to_add_provider, :providers_sort_save, :providers_sort, :providers_percent, :provider_change_status, :edit, :update, :destroy, :details_by_destinations, :providers_list, :try_to_add_failover_provider]
 
   def list
     @page_title = _('LCR')
@@ -22,8 +22,8 @@ class LcrsController < ApplicationController
     session[:lcrs_list_options] ? @options = session[:lcrs_list_options] : @options = {}
 
     # search
-    params[:page]  ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page])
-    params[:s_name]   ? @options[:s_name] = params[:s_name].to_s     : (params[:clean]) ? @options[:s_name] = ""   : (@options[:s_name])? @options[:s_name] = session[:lcrs_list_options][:s_name] : @options[:s_name] = ""
+    params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page])
+    params[:s_name] ? @options[:s_name] = params[:s_name].to_s : (params[:clean]) ? @options[:s_name] = "" : (@options[:s_name]) ? @options[:s_name] = session[:lcrs_list_options][:s_name] : @options[:s_name] = ""
 
     # order
     params[:order_desc] ? @options[:order_desc] = params[:order_desc].to_i : (@options[:order_desc] = 0 if !@options[:order_desc])
@@ -41,9 +41,9 @@ class LcrsController < ApplicationController
     # page params
     @lcrs_size = current_user.load_lcrs(:all, arr).size.to_i
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
-    @total_pages = ( @lcrs_size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@lcrs_size.to_f / session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
-    @fpage = ((@options[:page] -1 ) * session[:items_per_page]).to_i
+    @fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
     @search = @options[:s_name].blank? ? 0 : 1
 
@@ -64,7 +64,7 @@ class LcrsController < ApplicationController
     @page_title = _('LCR_new')
     @page_icon = "add.png"
 
-    @lcr = Lcr.new(params[:lcr].merge!({:user_id=>current_user.id}))
+    @lcr = Lcr.new(params[:lcr].merge!({:user_id => current_user.id}))
     if @lcr.save
       flash[:status] = _('Lcr_was_successfully_created')
       redirect_to :action => 'list'
@@ -86,9 +86,9 @@ class LcrsController < ApplicationController
     @page_icon = "edit.png"
 
     @old_lcr = @lcr.clone
-    if @lcr.update_attributes(params[:lcr].reject{|k,v| k == 'user_id'})
+    if @lcr.update_attributes(params[:lcr].reject { |k, v| k == 'user_id' })
       if  @old_lcr.order != @lcr.order and @lcr.order == "priority"
-        Lcrprovider.find(:all, :select => "lcrproviders.*", :joins => "RIGHT JOIN providers ON (providers.id = lcrproviders.provider_id)", :conditions => ["lcr_id = ?", @lcr.id]).each_with_index {  |provider, i|
+        Lcrprovider.find(:all, :select => "lcrproviders.*", :joins => "RIGHT JOIN providers ON (providers.id = lcrproviders.provider_id)", :conditions => ["lcr_id = ?", @lcr.id]).each_with_index { |provider, i|
           provider.priority = i
           provider.save
         }
@@ -119,12 +119,12 @@ class LcrsController < ApplicationController
     @page_icon = "view.png"
     @lcrs = @lcr
     owner_id = correct_owner_id
-    if ['reseller','accountant','admin'].include?(current_user.usertype) and (@lcr.user_id != current_user.id and @lcr.id != current_user.lcr_id)
+    if ['reseller', 'accountant', 'admin'].include?(current_user.usertype) and (@lcr.user_id != current_user.id and @lcr.id != current_user.lcr_id)
       dont_be_so_smart
       redirect_to :controller => "callc", :action => "main" and return false
     end
-    @user = User.find(:all, :conditions => ["lcr_id = ? AND owner_id =?", @lcrs.id, owner_id] )
-    @cardgroup = Cardgroup.find(:all, :conditions => ["lcr_id = ? AND owner_id =?", @lcrs.id, owner_id] )
+    @user = User.find(:all, :conditions => ["lcr_id = ? AND owner_id =?", @lcrs.id, owner_id])
+    @cardgroup = Cardgroup.find(:all, :conditions => ["lcr_id = ? AND owner_id =?", @lcrs.id, owner_id])
   end
 
   #in before filter : @lcr
@@ -138,7 +138,7 @@ class LcrsController < ApplicationController
     @phrase = request.raw_post || request.query_string
     @phrase = @phrase.gsub("=", "")
     if  @phrase.to_s != "no_directiontrue" and @phrase != nil
-      @direction = Direction.find(:first, :conditions=>["code= ?", params[:dir]])
+      @direction = Direction.find(:first, :conditions => ["code= ?", params[:dir]])
     else
       @direction = Direction.find(:first)
     end
@@ -149,11 +149,11 @@ class LcrsController < ApplicationController
       @dest = Destination.find(:first, :conditions => ["prefix = ? ", params[:search].to_s])
       unless @dest
         flash[:notice] = _("Prefix_not_found")
-        redirect_to :action => 'details_by_destinations' , :id => params[:id], :no_direction => true and return false
+        redirect_to :action => 'details_by_destinations', :id => params[:id], :no_direction => true and return false
       end
-      @lp = LcrPartial.new({:prefix => params[:search], :main_lcr_id => params[:id], :lcr_id => params[:lcr], :user_id=>current_user.id})
+      @lp = LcrPartial.new({:prefix => params[:search], :main_lcr_id => params[:id], :lcr_id => params[:lcr], :user_id => current_user.id})
 
-      if @lp.duplicate_partials == 0  #search for same prefix in lcr_partials
+      if @lp.duplicate_partials == 0 #search for same prefix in lcr_partials
         @lp.save
         flash[:status] = _("Saved")
       else
@@ -164,15 +164,15 @@ class LcrsController < ApplicationController
       flash[:notice] = _("Prefix_error")
     end
 
-    redirect_to :action => :details_by_destinations , :id => params[:id], :no_direction => true
+    redirect_to :action => :details_by_destinations, :id => params[:id], :no_direction => true
   end
 
   def prefix_finder_find
     @phrase = params[:prefix]
     @dest = Destination.find(
-      :first,
-      :conditions => ["prefix = SUBSTRING(? , 1, LENGTH(destinations.prefix))", @phrase],
-      :order => "LENGTH(destinations.prefix) DESC"
+        :first,
+        :conditions => ["prefix = SUBSTRING(? , 1, LENGTH(destinations.prefix))", @phrase],
+        :order => "LENGTH(destinations.prefix) DESC"
     ) if @phrase != ''
     @results = ""
     @direction = nil
@@ -185,12 +185,12 @@ class LcrsController < ApplicationController
 
   def prefix_finder_find_country
     @phrase = params[:prefix]
-    @direction = Direction.find(:first, :conditions=>["code= ?", @phrase])
+    @direction = Direction.find(:first, :conditions => ["code= ?", @phrase])
     render(:layout => false)
   end
 
   def lcrpartial_destinations
-    @lcrp = LcrPartial.find(:first, :conditions=>['id=? AND user_id =?', params[:lcrp], current_user.id])
+    @lcrp = LcrPartial.find(:first, :conditions => ['id=? AND user_id =?', params[:lcrp], current_user.id])
     unless @lcrp
       flash[:notice] = _('LcrPartial_was_not_found')
       redirect_to :action => :list and return false
@@ -226,12 +226,12 @@ class LcrsController < ApplicationController
   #in before filter : @lp
   def update_lcrpartial
     @dest = Destination.find(
-      :first,
-      :conditions => "prefix = '#{params[:prefix]}'"
+        :first,
+        :conditions => "prefix = '#{params[:prefix]}'"
     )
     unless @dest
       flash[:notice] = _("Prefix_not_found")
-      redirect_to :action => 'lcrpartial_edit' , :id => @lp.id and return false
+      redirect_to :action => 'lcrpartial_edit', :id => @lp.id and return false
     end
     @lp.main_lcr_id = params[:main_lcr]
     @lp.lcr_id = params[:lcr]
@@ -241,7 +241,7 @@ class LcrsController < ApplicationController
     else
       flash[:notice] = _('Lcrpartial_not_saved')
     end
-    redirect_to :action => 'lcrpartial_edit' , :id => @lp.id
+    redirect_to :action => 'lcrpartial_edit', :id => @lp.id
   end
 
   #in before filter : @lp
@@ -249,25 +249,25 @@ class LcrsController < ApplicationController
     lcr_id = @lp.main_lcr_id
     @lp.destroy
     flash[:status] = _('Destination_deleted')
-    redirect_to :action => 'details_by_destinations' , :id => lcr_id, :no_direction => true
+    redirect_to :action => 'details_by_destinations', :id => lcr_id, :no_direction => true
   end
 
   #in before filter : @lcr
   def providers_list
-    @page_title = _('Providers_for_LCR')# + ": " + @lcr.name
+    @page_title = _('Providers_for_LCR') # + ": " + @lcr.name
     @page_icon = "provider.png"
 
     @providers = @lcr.providers("asc")
 
-    @all_providers = current_user.providers.find(:all, :include=> [:device, :tariff])
+    @all_providers = current_user.providers.find(:all, :include => [:device, :tariff])
     if current_user.usertype == 'reseller'
       if @all_providers
         #ticket 3906
         #@all_providers += Provider.find(:all, :conditions => "common_use = 1", :order => "name ASC")
         @all_providers += Provider.find(:all, :conditions => "common_use = 1 AND id IN (SELECT provider_id FROM common_use_providers where reseller_id = #{current_user.id})", :order => "name ASC")
       else
-       # @all_providers = Provider.find(:all, :conditions => "common_use = 1", :order => "name ASC")
-       @all_providers = Provider.find(:all, :conditions => "common_use = 1 AND id IN (SELECT provider_id FROM common_use_providers where reseller_id = #{current_user.id})", :order => "name ASC")
+        # @all_providers = Provider.find(:all, :conditions => "common_use = 1", :order => "name ASC")
+        @all_providers = Provider.find(:all, :conditions => "common_use = 1 AND id IN (SELECT provider_id FROM common_use_providers where reseller_id = #{current_user.id})", :order => "name ASC")
       end
     end
     @other_providers = []
@@ -279,17 +279,17 @@ class LcrsController < ApplicationController
 
   #in before filter : @lcr
   def providers_percent
-    @page_title = _('Providers_for_LCR')# + ": " + @lcr.name
+    @page_title = _('Providers_for_LCR') # + ": " + @lcr.name
     @page_icon = "provider.png"
 
     @providers = @lcr.providers("asc")
     sum = 0.to_f
     if params[:pr].to_i == 2
-      params.each{|key, value| sum += value.to_f.abs if key.match("prov_")}
+      params.each { |key, value| sum += value.to_f.abs if key.match("prov_") }
       if sum.to_i == 100.to_i
-        params.each{| key, value|
+        params.each { |key, value|
           if key.match("prov_")
-            @lcrpr = Lcrprovider.find(:first , :conditions => ["provider_id = ? AND lcr_id= ?", key.to_s.strip.delete("prov_").to_i, @lcr.id ])
+            @lcrpr = Lcrprovider.find(:first, :conditions => ["provider_id = ? AND lcr_id= ?", key.to_s.strip.delete("prov_").to_i, @lcr.id])
             if @lcrpr
               @lcrpr.percent = value.to_f.abs * 100
               @lcrpr.save
@@ -297,7 +297,7 @@ class LcrsController < ApplicationController
           end
         }
         flash[:status] = _('Percent_changed')
-        redirect_to :action => 'providers_list' , :id=>@lcr.id
+        redirect_to :action => 'providers_list', :id => @lcr.id
       else
         flash[:notice] = _('Is_not_100%')
       end
@@ -307,6 +307,7 @@ class LcrsController < ApplicationController
     #
 
   end
+
   #in before filter : @lcr
   def providers_sort
     @page_title = _('Change_Order') + ": " + @lcr.name
@@ -325,7 +326,7 @@ class LcrsController < ApplicationController
   #in before filter : @lcr
   def providers_sort_save
     params[:sortable_list].each_index do |i|
-      item = Lcrprovider.find(:first, :conditions => "provider_id = #{params[:sortable_list][i]} AND lcr_id = #{@lcr.id}" )
+      item = Lcrprovider.find(:first, :conditions => "provider_id = #{params[:sortable_list][i]} AND lcr_id = #{@lcr.id}")
       unless item
         flash[:notice] = _('Lcrprovider_was_not_found')
         redirect_to :action => :list and return false
@@ -344,7 +345,7 @@ class LcrsController < ApplicationController
     prov_id = params[:select_prov]
 
     if prov_id != "0"
-      @prov = Provider.find(:first, :conditions=>['id = ? AND (user_id = ? OR common_use = 1)', prov_id, current_user.id])
+      @prov = Provider.find(:first, :conditions => ['id = ? AND (user_id = ? OR common_use = 1)', prov_id, current_user.id])
       unless @prov
         flash[:notice] = _('Provider_was_not_found')
         redirect_to :action => :list and return false
@@ -363,7 +364,7 @@ class LcrsController < ApplicationController
     prov_id = params[:select_prov]
 
     if prov_id != "0"
-      @prov = Provider.find(:first, :conditions=>['id = ? AND (user_id = ? OR common_use = 1)', prov_id, current_user.id])
+      @prov = Provider.find(:first, :conditions => ['id = ? AND (user_id = ? OR common_use = 1)', prov_id, current_user.id])
       unless @prov
         flash[:notice] = _('Provider_was_not_found')
         redirect_to :action => :list and return false
@@ -433,82 +434,109 @@ class LcrsController < ApplicationController
           flash[:notice] = _('Specify_both_resellers')
           redirect_to :controller => "lcrs", :action => "clone_options" and return false
         end
-        selected_lcrs = params[:lcr].map { |key,value| key.to_i }
+        selected_lcrs = params[:lcr].map { |key, value| key.to_i }
         selected_lcrs.reject! { |lcr_id| lcr_id == 0 }
         if selected_lcrs.size > 0
           if Lcr.clone_lcrs(resellerA[0], resellerB[0], selected_lcrs)
-            flash[:status] = _('Selecte_LCRs_cloned') 
+            flash[:status] = _('Selecte_LCRs_cloned')
           else
             flash[:notice] = _("Failed_to_clone_LCR's")
           end
           redirect_to :controller => "lcrs", :action => "clone_options" and return false
 
         else
-          flash[:notice] = _('Specify_at_least_one_LCR') 
+          flash[:notice] = _('Specify_at_least_one_LCR')
           redirect_to :controller => "lcrs", :action => "clone_options" and return false
         end
       else
-        flash[:notice] = _('Specify_both_resellers_and_at_least_one_LCR') 
+        flash[:notice] = _('Specify_both_resellers_and_at_least_one_LCR')
         redirect_to :controller => "lcrs", :action => "clone_options" and return false
       end
-    else 
-       dont_be_so_smart
-       redirect_to :controller => "callc", :action => "main" and return false
-     end
-  end 
+    else
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
+  end
 
   def clone_options
     if current_user.is_admin?
-      @resellers = User.find(:all, :conditions => ["usertype = 'reseller' AND hidden = 0"])  
+      @resellers = User.find(:all, :conditions => ["usertype = 'reseller' AND hidden = 0"])
     else
-       dont_be_so_smart
-       redirect_to :controller => "callc", :action => "main" and return false
-     end
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
   end
 
   def clone_resellers_lcrs
-     if current_user.is_admin?
-       @resellers = User.find(:all, :conditions => ["usertype = 'reseller' AND hidden = 0"])  
-     else
-       dont_be_so_smart
-       redirect_to :controller => "callc", :action => "main" and return false
-     end
+    if current_user.is_admin?
+      @resellers = User.find(:all, :conditions => ["usertype = 'reseller' AND hidden = 0"])
+    else
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
   end
 
   def resellers_lcrs
-     if current_user.is_admin?
-       reseller_id = params[:id].to_i
-       @lcrs = Lcr.find(:all, :conditions => ["user_id = #{reseller_id}"]) 
-       render :layout => false 
-     else
-       dont_be_so_smart
-       redirect_to :controller => "callc", :action => "main" and return false
-     end
+    if current_user.is_admin?
+      reseller_id = params[:id].to_i
+      @lcrs = Lcr.find(:all, :conditions => ["user_id = #{reseller_id}"])
+      render :layout => false
+    else
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
   end
 
   def resellers_with_common_providers
-     if current_user.is_admin?
+    if current_user.is_admin?
       reseller_id = params[:id]
       resellerA = User.find(:all, :conditions => ["id = #{reseller_id}"])[0]
       @resellers = resellerA.resellers_with_common_providers
       render :layout => false
     else
-       dont_be_so_smart
-       redirect_to :controller => "callc", :action => "main" and return false
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
     end
+  end
+
+  def lcr_clone
+    if mor_11_extend?
+      ln = @lcr.clone
+      ln.name = 'Clone: ' + ln.name + ' ' + Time.now.to_s(:db)
+      if ln.save
+        for p in @lcr.lcrproviders
+          pn = p.clone
+          pn.lcr_id = ln.id
+          pn.save
+        end
+        for l in @lcr.lcr_partials
+          lp = l.clone
+          lp.lcr_id = ln.id
+          lp.save
+        end
+        flash[:status] = _('Lcr_copied')
+      else
+        flash_errors_for(_('Lcr_not_copied'), ln)
+      end
+      redirect_to :action => 'list' and return false
+    else
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
+
   end
 
   private
 
   def check_owner
-    if ['reseller','admin', 'accountant'].include?(current_user.usertype) and @lcr.user_id != correct_owner_id
+    if ['reseller', 'admin', 'accountant'].include?(current_user.usertype) and @lcr.user_id != correct_owner_id
       dont_be_so_smart
       redirect_to :controller => "callc", :action => "main" and return false
     end
   end
 
   def find_lcr_from_id
-    @lcr =Lcr.find(:first, :conditions=>['id=?',params[:id]])
+    @lcr =Lcr.find(:first, :conditions => ['id=?', params[:id]])
     unless @lcr
       flash[:notice] = _('Lcr_was_not_found')
       redirect_to :action => :list and return false
@@ -516,7 +544,7 @@ class LcrsController < ApplicationController
   end
 
   def find_lcr_partial_from_id
-    @lp = LcrPartial.find(:first, :conditions=>['id=? AND user_id =?',params[:id], current_user.id])
+    @lp = LcrPartial.find(:first, :conditions => ['id=? AND user_id =?', params[:id], current_user.id])
     unless @lp
       flash[:notice] = _('LcrPartial_was_not_found')
       redirect_to :action => :list and return false
