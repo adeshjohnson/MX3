@@ -1174,6 +1174,501 @@
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Accountant</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/personal_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paymenttype_20</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_20</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=fee_20</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_20</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=completed_20</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User Resellers </td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>13.5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User Resellers </td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User Resellers </td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>25</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/personal_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paymenttype_25</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paymenttype_24</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paymenttype_23</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_25</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_24</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_23</td>
+	<td>13.5000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_12 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=hide_non_completed_payments_for_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=hide_non_completed_payments_for_user</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/personal_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paymenttype_20</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_20</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=fee_20</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_20</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=completed_20</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/personal_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paymenttype_25</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paymenttype_24</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=paymenttype_23</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_25</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_24</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_23</td>
+	<td>13.5000</td>
+</tr>
 </tbody></table>
 </body>
 </html>
