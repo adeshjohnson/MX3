@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://trunk" />
+<link rel="selenium.base" href="" />
 <title>device_duplicate_username</title>
 </head>
 <body>
@@ -51,6 +51,7 @@
 	<td>Default User saved</td>
 	<td></td>
 </tr>
+<!--CHECK SETTINGS-->
 <tr>
 	<td>open</td>
 	<td>/billing/functions/settings</td>
@@ -66,6 +67,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--CREATE TEST DEVICE-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
@@ -96,6 +98,7 @@
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
+<!--REGISTER NEW USER-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/signup_start/hfttv7bcqt</td>
@@ -166,6 +169,7 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
+<!--VERIFY DEVICE-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/show_devices/6</td>
@@ -186,6 +190,7 @@
 	<td>name_9</td>
 	<td>1001</td>
 </tr>
+<!--VERIFY DEVICE-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/9</td>
@@ -201,6 +206,7 @@
 	<td>codec[g729]</td>
 	<td></td>
 </tr>
+<!--VERIFY DEVICE DETAILS-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_all_details/9</td>
@@ -211,6 +217,7 @@
 	<td>username_value</td>
 	<td>1001</td>
 </tr>
+<!--CREATE TEST DEVICE 2-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
@@ -226,6 +233,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--VERIFY DEVICE DETAILS-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_all_details/10</td>
@@ -236,6 +244,7 @@
 	<td>username_value</td>
 	<td>1003</td>
 </tr>
+<!--VERIFY DEVICE-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/10</td>
@@ -251,6 +260,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--CREATE TEST DEVICE 3-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
@@ -266,6 +276,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--VERIFY DEVICE DETAILS-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_all_details/11</td>
@@ -276,6 +287,7 @@
 	<td>username_value</td>
 	<td>1003</td>
 </tr>
+<!--VERIFY DEVICE-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/11</td>
@@ -291,6 +303,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--UNCHECK SETTINGS-->
 <tr>
 	<td>open</td>
 	<td>/billing/functions/settings</td>
@@ -306,6 +319,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--CREATE TEST DEVICE 4-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
@@ -321,6 +335,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--VERIFY DEVICE DETAILS-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_all_details/12</td>
@@ -331,6 +346,7 @@
 	<td>username_value</td>
 	<td>1003</td>
 </tr>
+<!--VERIFY DEVICE-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/12</td>
@@ -346,6 +362,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--CREATE TEST DEVICE 4-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
@@ -361,6 +378,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--VERIFY DEVICE DETAILS-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_all_details/13</td>
@@ -371,6 +389,7 @@
 	<td>username_value</td>
 	<td>1003</td>
 </tr>
+<!--VERIFY DEVICE-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/13</td>
@@ -386,6 +405,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--VERIFY DEVICE-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/5</td>
@@ -410,6 +430,124 @@
 	<td>verifyTextPresent</td>
 	<td>Device's settings updated</td>
 	<td></td>
+</tr>
+<!--CHECK SETTING-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_4 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Do not allow duplicate device user names:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=disalow_duplicate_device_usernames</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=disalow_duplicate_device_usernames</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--VERIFY DEVICES-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_10</td>
+	<td>1003</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_11</td>
+	<td>1003</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_12</td>
+	<td>1004</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_13</td>
+	<td>1004</td>
+</tr>
+<!--VERIFY DEVICE-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device not updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Device Username must be unique</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_name</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device Username must be unique</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_name</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_11</td>
+	<td>admin</td>
 </tr>
 </tbody></table>
 </body>
