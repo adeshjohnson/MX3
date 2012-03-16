@@ -1595,6 +1595,111 @@
 	<td>Edit Ring Group</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>Virtual_device</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device[device_type]_virtual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=s_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;3&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id</td>
+	<td>label=Virtual/1001 - Virtual_device</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//span[@onclick=&quot;new Ajax.Updater('new_ajax_devices', '/billing/ringgroups/assign_device?id=2&amp;device_id=' + document.getElementById('device_id').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=item_8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ring Group was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Show Extension lines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>exten =&gt; $5t5tr4,2,Dial(Local/1001@mor_local|0|#$@TYG45tw4) </td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
