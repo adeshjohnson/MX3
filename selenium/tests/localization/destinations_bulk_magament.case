@@ -546,6 +546,206 @@
 	<td>35544</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.nb &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=destination_prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=destination_prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destination name:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=destination_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_prefix</td>
+	<td>355[1,5,4]%</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_name</td>
+	<td>Laba diena</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>refix: 355[1,5,4]%</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Destinations quantity: 7 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35541 Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35542 Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35543 Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35544 Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35545 Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>35546 Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3554 Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Destinations were renamed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/destination_groups/destinations/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>Laba diena</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[6]/td[2]</td>
+	<td>Laba diena</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[9]/td[2]</td>
+	<td>Laba diena</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.nb &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=destination_prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_prefix</td>
+	<td>šųū</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_name</td>
+	<td>ėįšųū</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No destinations found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.nb &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=destination_prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_prefix</td>
+	<td>1346%</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_name</td>
+	<td>asdfghjkl;lkjhgfds</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No destinations found</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
