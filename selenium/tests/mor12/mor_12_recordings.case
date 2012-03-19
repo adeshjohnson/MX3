@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.95" />
+<link rel="selenium.base" href="" />
 <title>mor_12_recordings</title>
 </head>
 <body>
@@ -76,8 +76,11 @@
 	<td>css=#tabTabdhtmlgoodies_tabView1_11 &gt; span</td>
 	<td></td>
 </tr>
-<!--1. Nėra vertimo Show_recordings_with_zero_billsec:-->
-<!--<tr> 	<td>verifyTextPresent</td> 	<td>Show recordings with zero billsec:</td> 	<td></td> </tr>-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Show recordings with zero billsec:</td>
+	<td></td>
+</tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>id=show_recordings_with_zero_billsec</td>
@@ -168,7 +171,6 @@
 	<td>2010-05-18 00:00:01</td>
 	<td></td>
 </tr>
-<!--2. Įjungus settingą, recordingas vistiek nerodo play ženkliuko kai bilsec=0(real_bilsec irgi 0)-->
 <tr>
 	<td>verifyText</td>
 	<td>id=rec_play_16</td>
@@ -186,17 +188,27 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>id=rec_status_15</td>
+	<td>css=#rec_play_link_15 &gt; img[alt=&quot;Play&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>id=rec_status_14</td>
+	<td>id=rec_play_link_14</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>id=rec_status_13</td>
+	<td>css=#rec_play_link_13 &gt; img[alt=&quot;Play&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#rec_play_link_3 &gt; img[alt=&quot;Play&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#rec_play_link_4 &gt; img[alt=&quot;Play&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -212,6 +224,31 @@
 <tr>
 	<td>verifyText</td>
 	<td>id=rec_download_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#rec_download_15 &gt; a &gt; img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=rec_download_14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#rec_download_13 &gt; a &gt; img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#rec_download_3 &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#rec_download_4 &gt; a &gt; img[alt=&quot;Database_go&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -254,7 +291,71 @@
 	<td>id=show_recordings_with_zero_billsec</td>
 	<td>off</td>
 </tr>
-
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2010-05-18 00:00:01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Recording failed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call status: BUSY </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Call status: FAILED </td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
