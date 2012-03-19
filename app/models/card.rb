@@ -240,6 +240,27 @@ class Card < ActiveRecord::Base
     end
   end
 
+
+  def sell_from_bach(email, currency, user_id)
+    if self.sold?
+      errors.add(:sold, 'Cannot sell already sold card')
+      return false
+    else
+      self.sold = true
+      if self.save
+        p = Payment.add_for_card(self, self.balance, currency, user_id)
+        p.email = email
+        if p.save
+          return true
+        else
+          return false
+        end
+      else
+        return false
+      end
+    end
+  end
+
 =begin
   Check whether the card is sold or not. Before thinking about selling the card
   should check whether it is not sold at this moment, cause no one can sell already

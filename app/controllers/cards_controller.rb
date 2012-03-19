@@ -218,19 +218,17 @@ class CardsController < ApplicationController
       @email = params[:email].to_s
 
       gross = 0
-      list.each{ |card|
-        gross += card.balance
-        card.sold = 1
-        card.save
-      }
+        list.each{ |card|
+          card.sell_from_bach(@email, session[:default_currency], current_user.id)
+        }
 
-      tax = @cg.get_tax.count_tax_amount(gross)
-      currency = current_user.currency.name
-      if list.size > 1
-        Payment.create(:paymenttype => "manual", :amount => tax+gross, :currency => currency, :email => @email, :completed => 1, :date_added => creation_time, :shipped_at => creation_time, :fee => 0, :gross => gross, :payer_email => @email, :tax => tax, :owner_id => session[:user_id], :card => 1)
-      else
-        Payment.create(:paymenttype => "manual", :amount => tax+gross, :currency => currency, :email => @email, :completed => 1, :date_added => creation_time, :shipped_at => creation_time, :fee => 0, :gross => gross, :payer_email => @email, :tax => tax, :owner_id => session[:user_id], :card => 1, :user_id => list.first.id)
-      end
+      #      tax = @cg.get_tax.count_tax_amount(gross)
+      #      currency = current_user.currency.name
+      #      if list.size > 1
+      #        Payment.create(:paymenttype => "manual", :amount => tax+gross, :currency => currency, :email => @email, :completed => 1, :date_added => creation_time, :shipped_at => creation_time, :fee => 0, :gross => gross, :payer_email => @email, :tax => tax, :owner_id => session[:user_id], :card => 1)
+      #      else
+      #        Payment.create(:paymenttype => "manual", :amount => tax+gross, :currency => currency, :email => @email, :completed => 1, :date_added => creation_time, :shipped_at => creation_time, :fee => 0, :gross => gross, :payer_email => @email, :tax => tax, :owner_id => session[:user_id], :card => 1, :user_id => list.first.id)
+      #      end
     when 4:
         cards = Card.find(:all, :conditions => ["number >= ? AND number <= ?  AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id,  @cg.id])
       for card in cards
@@ -298,17 +296,7 @@ class CardsController < ApplicationController
     @card.save
 
 
-    paym = Payment.new
-    paym.paymenttype = 'Card'
-    paym.amount = amount
-    paym.currency = currency
-    paym.date_added = Time.now
-    paym.shipped_at = Time.now
-    paym.completed = 1
-    paym.user_id = @card.id
-    paym.card = 1
-    paym.owner_id = current_user.id
-    paym.save
+    Payment.add_for_card(@card, amount, currency, current_user.id)
 
     flash[:status] = _('Payment_added')
     redirect_to :action => 'list', :cg => @cg and return false
