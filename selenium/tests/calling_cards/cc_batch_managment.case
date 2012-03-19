@@ -340,43 +340,103 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>amount_10</td>
-	<td>300.0000</td>
+	<td>id=amount_10</td>
+	<td>100.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>amount_11</td>
-	<td>800.0000</td>
+	<td>id=amount_11</td>
+	<td>100.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>currency_10</td>
+	<td>id=amount_12</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_13</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_14</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_15</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_16</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_amount</td>
+	<td>2200.0000(BOB)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_amount_completed</td>
+	<td>2200.0000(BOB)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_10</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_11</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_12</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_13</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_14</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_15</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_16</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_with_tax</td>
+	<td>2200.0000(BOB)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_with_tax_completed</td>
+	<td>2200.0000(BOB)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=currency_10</td>
 	<td>USD</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>currency_11</td>
-	<td>BOB</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>total_amount</td>
-	<td>1400.0000(BOB)</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>total_with_tax</td>
-	<td>1400.0000(BOB)</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>total_amount_completed</td>
-	<td>1400.0000(BOB)</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>total_with_tax_completed</td>
-	<td>1400.0000(BOB)</td>
+	<td>id=currency_11</td>
+	<td>USD</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -455,7 +515,12 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>12 Cards were successfully deleted</td>
+	<td>7 Cards were successfully deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>5 Cards were not deleted</td>
 	<td></td>
 </tr>
 <tr>
@@ -506,6 +571,21 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Cards were not deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Card can not be deleted</td>
 	<td></td>
 </tr>
 </tbody></table>
