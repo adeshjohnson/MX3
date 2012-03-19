@@ -93,7 +93,7 @@ class RecordingsController < ApplicationController
     @total_pages = Recording.count(:all, :conditions=>"DATE(datetime) BETWEEN '#{session_from_date}' AND '#{session_till_date}' AND (src_device_id = '#{@device.id}' OR dst_device_id = '#{@device.id}')")
     @total_pages = @total_pages / session[:items_per_page]
     @page_select_options = {:action=>'show', :controller=>"recordings", :show_rec=>@s_dev}
-    @show_recordings_with_zero_billsec = Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1
+    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend? )
   end
 
   def play_rec
@@ -191,6 +191,7 @@ class RecordingsController < ApplicationController
       :s_source => @search_source,
       :s_destination => @search_destination
     }
+    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend? )
   end
 
 
@@ -250,6 +251,7 @@ class RecordingsController < ApplicationController
       :s_destination => @search_destination
     }
     @search = params[:clear].to_i if params[:clear]
+    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend? )
   end
 =begin rdoc
   Recording edit action for admin and reseller.
@@ -457,7 +459,7 @@ class RecordingsController < ApplicationController
     
     @server_path = get_server_path(1)
     @remote_server_path = get_server_path(0)
-  
+    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend? )
   end
  
 =begin  rdoc

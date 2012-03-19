@@ -4334,6 +4334,7 @@ Localization.define('en') do |l|
   l.store 'Lcr_not_copied', 'Lcr not copied'
   l.store 'copy', 'copy'
   l.store 'Lcr_copy', 'Lcr copy'
+  l.store 'Show_recordings_with_zero_billsec', 'Show recordings with zero billsec'
 
   #  l.store '', ''
   #  l.store '', ''
