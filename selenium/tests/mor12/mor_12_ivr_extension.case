@@ -207,22 +207,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,1,NoOp(IVR_BLOCK_1_REACHED)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,2,Set(TIMEOUT(digit)=3)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,3,Set(TIMEOUT(response)=10)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,4,Goto(mor_local|s0s0s0s0s0s0|1)</td>
 	<td></td>
 </tr>
@@ -377,12 +377,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,4,Goto(mor_local|s0s0s0s0s0s0|1)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,5,Goto(mor_local|10101010101|1)</td>
 	<td></td>
 </tr>
@@ -417,12 +417,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,4,Goto(mor_local|riririririririririririr|1)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,5,Goto(mor_local|10101010101|1)</td>
 	<td></td>
 </tr>
@@ -611,7 +611,7 @@
 	<td>IVR created</td>
 	<td></td>
 </tr>
-<!--Testuojamas rikiavimas tr/td palikti specialiai-->
+<!--Testuojamas rikiavimas tr/td palikti specialiai, nes n4ra puslapiavimo-->
 <tr>
 	<td>verifyText</td>
 	<td>css=tr.row1 &gt; td</td>
@@ -652,6 +652,7 @@
 	<td>//tr[9]/td</td>
 	<td>zaaaivrs</td>
 </tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/functions/settings</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>css=#tabTabdhtmlgoodies_tabView1_11 &gt; span</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=items_per_page</td> 	<td>1</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Settings saved</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/ivr</td> 	<td></td> </tr>-->
 </tbody></table>
 </body>
 </html>
