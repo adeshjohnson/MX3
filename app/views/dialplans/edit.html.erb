@@ -240,7 +240,7 @@
         <%= hidden_field_tag 'dialplan[dptype]', "quickforwarddids"  %>
         <td align="left"><%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "30", :maxlength => "50", :id=>"quickforward_dp_name"  %></td>
         <td align="center">
-          <%= select_tag("quickforwards_user" ,options_for_select([[_('Not_used'), ""]]+ @users.map{|user| [ "#{nice_user(user)} (#{user.id })", user.id]}, @selected_user_id), {:disabled => (@selected_user_id == '')}) %>
+          <%= select_tag("quickforwards_user" ,options_for_select([[_('Not_used'), ""]]+ @users.map{|user| [ "#{nice_user(user)} (#{user.id })", user.id]}, @selected_user_id), {:disabled => (@selected_user_id == ''), :onchange=>'set_devices(this.value);'}) %>
         </td>
         <td align="center">
           <span id="quickforwards_device"> </span>
@@ -250,20 +250,18 @@
       </tr>
     </table>
   <% end %>
-  <script type="text/javascript">
-    $.noConflict();
+    <script type="text/javascript">
+        $.noConflict();
+        function set_devices(value){
+            new Ajax.Updater('quickforwards_device', '<%=Web_Dir%>/dialplans/dialplans_device_ajax/'+ value + '?device_id=<%=@dp.data3%>', {asynchronous:true, evalScripts:true});
+            if($('data10').checked){
+                $('quickforwards_device').style.display = 'none';
+            }else{
+                $('quickforwards_device').style.display = '';
+            }
 
-    new Ajax.Updater('quickforwards_device',
-  '<%= url_for(
-    :controller=> :dialplans,
-    :action => :dialplans_device_ajax,
-    :id => @selected_user_id,
-    :device_id => @dp.data3) %>', {asynchronous:true, evalScripts:true})
-  </script>
-  <%= observe_field("quickforwards_user",
-   :update => "quickforwards_device",
-   :with => "id",
-   :url=> {:controller=> :dialplans, :action => :dialplans_device_ajax, :device_id => @dp.data3},
-   :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
+        }
+        set_devices(<%=  @selected_user_id%>);
+    </script>
 
 <% end %>
