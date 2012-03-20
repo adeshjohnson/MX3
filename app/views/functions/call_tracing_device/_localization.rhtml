@@ -59,7 +59,7 @@
     <% if old_device %>
      <tr class="row2">
       <td><%= _('Device_changed_from') %> <b><%= old_device.device_type %>/<%= old_device.name %></b> <%= _('to') %>:</td>
-      <td align="right" id="device_changed_from"><%= new_device.device_type %>/<%= new_device.name %> </td>
+      <td align="right" id="device_changed_from"><%= new_device.device_type if new_device %>/<%= new_device.name if new_device %> </td>
     </tr>
     <%end%>
 </table>
