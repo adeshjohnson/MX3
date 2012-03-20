@@ -207,20 +207,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>[ivr_block1] exten =&gt; s,1,NoOp(IVR_BLOCK_1_REACHED)</td>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
 	<td></td>
 </tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>[ivr_block1] exten =&gt; s,2,Set(TIMEOUT(digit)=3)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>[ivr_block1] exten =&gt; s,3,Set(TIMEOUT(response)=10)</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>waitForTextPresent</td> 	<td>[ivr_block1] exten =&gt; s,1,NoOp(IVR_BLOCK_1_REACHED)</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>[ivr_block1] exten =&gt; s,2,Set(TIMEOUT(digit)=3)</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>[ivr_block1] exten =&gt; s,3,Set(TIMEOUT(response)=10)</td> 	<td></td> </tr>-->
 <tr>
 	<td>waitForTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,4,Goto(mor_local|s0s0s0s0s0s0|1)</td>
@@ -611,7 +602,7 @@
 	<td>IVR created</td>
 	<td></td>
 </tr>
-<!--Testuojamas rikiavimas tr/td palikti specialiai, nes n4ra puslapiavimo-->
+<!--Testuojamas rikiavimas tr/td palikti specialiai, nes nėra puslapiavimo-->
 <tr>
 	<td>verifyText</td>
 	<td>css=tr.row1 &gt; td</td>
