@@ -1,11 +1,14 @@
 # -*- encoding : utf-8 -*-
 class Did < ActiveRecord::Base
+
   belongs_to :device
   belongs_to :user
   has_many :didrates
   belongs_to :dialplan
   belongs_to :provider
   has_many :activecalls
+  has_many :calls
+  has_many :first_call, :class_name => 'Call', :foreign_key => 'did_id', :limit=>1
 
   validates_uniqueness_of :did, :message => _("DID_must_be_unique")
   validates_presence_of :did, :message => _("Enter_DID")
@@ -246,7 +249,7 @@ class Did < ActiveRecord::Base
   *boolean* - true if did has no associated calls with it, else returns false
 =end
   def find_if_used_in_calls
-    Call.count(:conditions =>"did_id = #{self.id}").to_i == 0
+    Call.where("did_id = #{self.id}").first ? true : false
   end
 
 end

@@ -769,7 +769,7 @@ module ApplicationHelper
       d += device.extension if device.device_type == "FAX" or device.name.length == 0 or device.username.blank?
     end
 
-    d
+    d.html_safe
   end
 
   def nice_device_no_pic(device)

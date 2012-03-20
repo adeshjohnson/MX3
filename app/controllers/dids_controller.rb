@@ -97,7 +97,7 @@ class DidsController < ApplicationController
     @show_did_rates = !(session[:usertype] == "accountant" and session[:acc_manage_dids_opt_1] == 0 or reseller?)
 
     iend = session[:items_per_page] * (@page-1)
-    @dids = Did.find(:all,:include=>[:user, :device, :provider, :dialplan], :conditions => [cond.join(" AND ")].concat(var), :order => "dids.did ASC", :limit => session[:items_per_page], :offset => iend)
+    @dids = Did.includes([:user, :device, :provider, :dialplan]).where([cond.join(" AND ")].concat(var)).order("dids.did ASC").limit(session[:items_per_page]).offset(iend).all
     @search = (var.size > 0 ? 1 : 0)
   end
 
