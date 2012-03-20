@@ -15,12 +15,12 @@ class Card < ActiveRecord::Base
 
   def validate_number_length
     self.number.length == self.cardgroup.number_length.to_i
-    errors.add _('Bad_number_length_should_be') + ": " + self.cardgroup.number_length.to_s
+    errors.add(:number, _('Bad_number_length_should_be') + ": " + self.cardgroup.number_length.to_s)
   end
 
   def validate_pin_length
     self.pin.length == self.cardgroup.pin_length
-    errors.add _('Bad_pin_length_should_be') + ": " + self.cardgroup.number_length.to_s
+    errors.add(:pin, _('Bad_pin_length_should_be') + ": " + self.cardgroup.number_length.to_s)
   end
 
   def self.search(user_id, conditions, options)

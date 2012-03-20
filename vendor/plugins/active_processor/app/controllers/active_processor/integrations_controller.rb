@@ -76,7 +76,7 @@ class ActiveProcessor::IntegrationsController < ActiveProcessor::BaseController
                 :transaction_id => notify.transaction_id,
                 :completed => 1,
                 :shipped_at => Time.now,
-                :hash => notify.transaction_id,
+                :payment_hash => notify.transaction_id,
                 :pending_reason => "Completed"
               })
 
@@ -96,7 +96,7 @@ class ActiveProcessor::IntegrationsController < ActiveProcessor::BaseController
                 :transaction_id => notify.transaction_id,
                 :payer_email => notify.payer_email,
                 :pending_reason => "Waiting for confirmation",
-                :hash => notify.transaction_id
+                :payment_hash => notify.transaction_id
               })
 
               Action.add_action_hash(payment.user_id,

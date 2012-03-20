@@ -275,7 +275,7 @@ class ApiController < ApplicationController
 
   def payments_list
 
-    allow, values = MorAPI::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
 
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8", :standalone => "yes"
@@ -577,7 +577,7 @@ class ApiController < ApplicationController
 =end
 
   def user_details
-    allow, values =MorAPI::check_params_with_all_keys(params, request)
+    allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
 
@@ -654,7 +654,7 @@ class ApiController < ApplicationController
         end
       else
         doc.error("User was not found")
-        MorAPI::create_error_action(params, request, 'API : User not found by login and password')
+        MorApi.create_error_action(params, request, 'API : User not found by login and password')
       end
     else
       doc.error("Incorrect hash")
@@ -1003,7 +1003,7 @@ class ApiController < ApplicationController
 
 
   def get_tariff
-    allow, values = MorAPI::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     #doc = Builder::XmlMarkup.new( :target => out_string = "", :indent => 2 )
 
     #doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
@@ -1411,7 +1411,7 @@ class ApiController < ApplicationController
 
   def user_calls
 
-    allow, values =MorAPI::check_params_with_all_keys(params, request)
+    allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow == true
@@ -1510,7 +1510,7 @@ class ApiController < ApplicationController
         end
       else
         doc.error('Dont be so smart')
-        MorAPI::create_error_action(params, request, 'API : User not found by login and password')
+        MorApi.create_error_action(params, request, 'API : User not found by login and password')
       end
     else
       doc.error("Incorrect hash")
@@ -1528,7 +1528,7 @@ class ApiController < ApplicationController
 =end
 
   def ma_activate
-    allow, values =MorAPI::check_params_with_all_keys(params, request)
+    allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     users = []
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
@@ -1726,7 +1726,7 @@ class ApiController < ApplicationController
               render :text => text.to_s
             else
               tariff = user.tariff
-              err = ["MorAPI::Rate error: rate not found"]
+              err = ["MorApi.Rate error: rate not found"]
               err << "  >> Destination: ID:'#{destination.id}' Name: #{destination.name}, Prefix:#{destination.prefix}"
               err << "  >> Tariff: ID:#{tariff.id} Name:'#{tariff.name}' Purpose:'#{tariff.purpose}'" if tariff
               err << "  >> Rate: ID:#{rate.id}" if rate
@@ -1736,19 +1736,19 @@ class ApiController < ApplicationController
               render :text => _("Rate_was_not_found") # Rate not found
             end
           else
-            MorLog.my_debug("MorAPI::Rate error: destination/prefix was not found")
+            MorLog.my_debug("MorApi.Rate error: destination/prefix was not found")
             render :text => _("Prefix_not_found") # Destination/prefix not found
           end
         else
-          MorLog.my_debug("MorAPI::Rate error: user was not found")
+          MorLog.my_debug("MorApi.Rate error: user was not found")
           render :text => _("User_not_found") # User not found
         end
       else
-        MorLog.my_debug("MorAPI::Rate error: prefix is blank")
+        MorLog.my_debug("MorApi.Rate error: prefix is blank")
         render :text => _("Empty_prefix") # empty prefix
       end
     else
-      MorLog.my_debug("MorAPI::Rate error: Feature is disabled")
+      MorLog.my_debug("MorApi.Rate error: Feature is disabled")
       render :text => _("Feature_Disabled")
     end
   end
@@ -1822,7 +1822,7 @@ class ApiController < ApplicationController
 =end
 
   def user_balance_change
-    allow, values =MorAPI::check_params_with_all_keys(params, request)
+    allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow == true
@@ -1947,7 +1947,7 @@ class ApiController < ApplicationController
 
 
   def user_update_api
-    allow, values =MorAPI::check_params_with_all_keys(params, request)
+    allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow == true
@@ -2065,7 +2065,7 @@ class ApiController < ApplicationController
 
   def device_destroy
 
-    allow, values =MorAPI::check_params_with_all_keys(params, request)
+    allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow == true
@@ -2354,7 +2354,7 @@ class ApiController < ApplicationController
   end
 
   def wholesale_tariff
-    allow, values = MorAPI::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow == true
@@ -2698,7 +2698,7 @@ class ApiController < ApplicationController
 
   def device_create
 
-    allow, values = MorAPI::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow == true
@@ -2761,7 +2761,7 @@ class ApiController < ApplicationController
   #====================================== Phonebooks =======================================
 
   def phonebooks
-    allow, values = MorAPI::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow == true
@@ -2806,7 +2806,7 @@ class ApiController < ApplicationController
 
 
   def phonebook_edit
-    allow, values = MorAPI::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow == true
@@ -2858,7 +2858,7 @@ class ApiController < ApplicationController
   /api/credit_notes?u=user&p=user1&user_id=YYY
 =end
   def credit_notes
-    allow, values = MorAPI::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow == true
@@ -2921,7 +2921,7 @@ class ApiController < ApplicationController
   /api/credit_note_update?u=user&p=user1&credit_note_id=XXX
 =end
   def credit_note_update
-    allow, values = MorAPI::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow == true
@@ -2971,7 +2971,7 @@ class ApiController < ApplicationController
   /api/credit_note_delete?u=user&p=user1&credit_note_id=XXX
 =end
   def credit_note_delete
-    allow, values = MorAPI::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow == true
@@ -3017,7 +3017,7 @@ class ApiController < ApplicationController
   note that is issue_date must be specified, if not we dont event try to save note(cause it would crash)
 =end
   def credit_note_create
-    allow, values = MorAPI::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow == true
@@ -3143,7 +3143,7 @@ class ApiController < ApplicationController
 
 
   def create_payment
-    allow, values = MorAPI::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
 
@@ -3232,7 +3232,7 @@ class ApiController < ApplicationController
   +amount+ - float. If amount is not supplied it defaults to 0, and no payment will be added.
 =end
   def cc_by_cli_old
-    allow, values = MorAPI::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow
@@ -3699,7 +3699,7 @@ class ApiController < ApplicationController
         doc.number_length(cg.number_length)
       }
     else
-      doc = API.return_error("Cardgroup was not found", doc)
+      doc = MorApi.return_error("Cardgroup was not found", doc)
     end
 
     send_xml_data(out_string, params[:test].to_i)
@@ -3760,22 +3760,22 @@ class ApiController < ApplicationController
                 doc.currency(Currency.get_default.name)
               }
             else
-              doc = API.return_error("Card error", doc)
+              doc = MorApi.return_error("Card error", doc)
             end
           end
         }
       else
-        doc = API.return_error("Free cards was not found", doc)
+        doc = MorApi.return_error("Free cards was not found", doc)
       end
     else
-      doc = API.return_error("Cardgroup was not found", doc)
+      doc = MorApi.return_error("Cardgroup was not found", doc)
     end
 
     send_xml_data(out_string, params[:test].to_i)
   end
 
   def get_version
-    allow, values = MorAPI::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow
@@ -3814,7 +3814,7 @@ class ApiController < ApplicationController
 
   def check_allow_api
     if Confline.get_value("Allow_API").to_i != 1
-      send_xml_data(API.return_error('API Requests are disabled'), params[:test].to_i)
+      send_xml_data(MorApi.return_error('API Requests are disabled'), params[:test].to_i)
     end
   end
 
@@ -3826,7 +3826,7 @@ class ApiController < ApplicationController
 
   def check_send_method
     if request.get? and Confline.get_value("Allow_GET_API").to_i != 1
-      send_xml_data(API.return_error('GET Requests are disabled'), params[:test].to_i)
+      send_xml_data(MorApi.return_error('GET Requests are disabled'), params[:test].to_i)
     end
   end
 
@@ -3878,7 +3878,7 @@ class ApiController < ApplicationController
 =end
   def log_access
     MorLog.my_debug(" ********************** API ACCESS : #{params[:action]} **********************", 1)
-    MorLog.my_debug request.request_uri.to_s
+    MorLog.my_debug request.url.to_s
     MorLog.my_debug request.remote_addr.to_s
     MorLog.my_debug request.remote_ip
   end
@@ -3921,7 +3921,7 @@ class ApiController < ApplicationController
   def find_current_user_for_api
     @current_user = check_user(params[:u], params[:p])
     unless @current_user
-      send_xml_data(API.return_error('Bad login'), params[:test].to_i)
+      send_xml_data(MorApi.return_error('Bad login'), params[:test].to_i)
       return false
     end
   end
@@ -3929,22 +3929,22 @@ class ApiController < ApplicationController
 
   def check_mor_11_extend
     unless mor_11_extend?
-      send_xml_data(API.return_error('Dont be so smart'), params[:test].to_i)
+      send_xml_data(MorApi.return_error('Dont be so smart'), params[:test].to_i)
       return false
     end
   end
 
   def check_api_parrams_with_hash
-    allow, @values = MorAPI::check_params_with_all_keys(params, request)
+    allow, @values = MorApi.check_params_with_all_keys(params, request)
     if allow != true
-      send_xml_data(API.return_error('Incorrect hash'), params[:test].to_i)
+      send_xml_data(MorApi.return_error('Incorrect hash'), params[:test].to_i)
       return false
     end
   end
 
   def check_calling_card_addon
     if !calling_cards_active? or @current_user.is_user? or (@current_user.is_accountant? and !@current_user.accountant_allow_read('callingcard_manage')) or (@current_user.is_reseller? and !@current_user.reseller_allow_read('calling_cards'))
-      send_xml_data(API.return_error('Dont be so smart'), params[:test].to_i)
+      send_xml_data(MorApi.return_error('Dont be so smart'), params[:test].to_i)
       return false
     end
   end

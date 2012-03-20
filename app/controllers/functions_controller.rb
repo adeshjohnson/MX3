@@ -2960,7 +2960,7 @@ Sets default tax values for users or cardgroups
         rescue
           flash[:notice] = "failed to parse uri #{@api_link}"
         end
-        dummy, ret, @hash_param_order = API::check_params_with_all_keys(@query_values, dummy)
+        dummy, ret, @hash_param_order = MorApi.check_params_with_all_keys(@query_values, dummy)
         @system_hash = ret[:system_hash]
       end
     else

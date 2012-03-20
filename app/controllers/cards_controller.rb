@@ -195,13 +195,13 @@ class CardsController < ApplicationController
     action = params[:activate_i].to_i
     user_id = get_user_id()
     case(action)
-    when 0:
+    when 0
         cards = Card.find(:all, :conditions => ["number >= ? AND number <= ? AND sold = 1 AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id,  @cg.id])
       for card in cards
         card.sold = 0
         card.save
       end
-    when 2:
+    when 2
         cards_deleted = 0
       cards_not_deleted = 0
       cards = Card.find(:all, :conditions => ["number >= ? AND number <= ? AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id,  @cg.id] )
@@ -212,7 +212,7 @@ class CardsController < ApplicationController
           cards_not_deleted += 1
         end
       end
-    when 3:
+    when 3
         creation_time = Time.now
       list = Card.find(:all, :conditions => ["number >= ? and number <= ? and sold = 0 AND owner_id = ? AND cardgroup_id = ? ", start_num,end_num, user_id, @cg.id ])
       @email = params[:email].to_s
@@ -229,7 +229,7 @@ class CardsController < ApplicationController
       #      else
       #        Payment.create(:paymenttype => "manual", :amount => tax+gross, :currency => currency, :email => @email, :completed => 1, :date_added => creation_time, :shipped_at => creation_time, :fee => 0, :gross => gross, :payer_email => @email, :tax => tax, :owner_id => session[:user_id], :card => 1, :user_id => list.first.id)
       #      end
-    when 4:
+    when 4
         cards = Card.find(:all, :conditions => ["number >= ? AND number <= ?  AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id,  @cg.id])
       for card in cards
         card.user_id = params[:user].to_i
@@ -237,9 +237,12 @@ class CardsController < ApplicationController
       end
     end
     case(action)
-    when 0 : flash[:status] = _('Cards_were_successfully_disabled')
-    when 1 : flash[:status] = _('Cards_were_successfully_activated')
-    when 2 :
+      when 0
+        flash[:status] = _('Cards_were_successfully_disabled')
+      when 1
+        flash[:status] = _('Cards_were_successfully_activated')
+      when 2
+
         if cards_deleted == 0
         flash[:notice] = _('Cards_were_not_deleted')
       else
@@ -248,8 +251,10 @@ class CardsController < ApplicationController
           flash[:status] += '<br>' + cards_not_deleted.to_s + ' ' + _('Cards_were_not_deleted')
         end
       end
-    when 3 : flash[:status] = _('Cards_were_successfully_bought')
-    when 4 : flash[:status] = _('Distributor_changed')
+      when 3
+        flash[:status] = _('Cards_were_successfully_bought')
+      when 4
+        flash[:status] = _('Distributor_changed')
     end
 
     redirect_to :action => 'list', :cg => @cg and return false
@@ -810,14 +815,14 @@ class CardsController < ApplicationController
     action = params[:activate_i].to_i
 
     case(action)
-    when 0:
+    when 0
         cards = Card.find(:all, :conditions => ["number >= ? AND number <= ? AND sold = 1 AND user_id = ? ", start_num, end_num, current_user.id])
       for card in cards
         card.sold = 0
         card.save
         Action.add_action_hash(current_user, {:action=>"Card activation", :data=>card.sold.to_i, :target_id=>card.id, :target_type=>"Card"})
       end
-    when 1:
+    when 1
         cards = Card.find(:all, :conditions => ["number >= ? AND number <= ? AND sold = 0 AND user_id = ? ", start_num, end_num, current_user.id])
       for card in cards
         card.sold = 1

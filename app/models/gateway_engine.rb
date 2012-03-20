@@ -133,7 +133,7 @@ class GatewayEngine
           :completed => 1,
           :shipped_at => Time.now,
           :pending_reason => "Completed",
-          :hash => gateway.payment.response.authorization,
+          :payment_hash => gateway.payment.response.authorization,
           :transaction_id => gateway.payment.response.params["transaction_id"].to_i
         })
 
@@ -153,7 +153,7 @@ class GatewayEngine
           :gross => gateway.payment.orig_with_tax,
           :completed => 0,
           :pending_reason => "Waiting for confirmation",
-          :hash => gateway.payment.response.authorization
+          :payment_hash => gateway.payment.response.authorization
         })
 
       Action.add_action_hash(@user,
@@ -187,7 +187,7 @@ class GatewayEngine
           :completed => 0,
           :shipped_at => Time.now,
           :pending_reason => "Failed",
-          :hash => gateway.payment.response.message ,
+          :payment_hash => gateway.payment.response.message ,
           :transaction_id => gateway.payment.response.params["transaction_id"].to_i
         })
 
@@ -203,7 +203,7 @@ class GatewayEngine
           :completed => 0,
           :shipped_at => Time.now,
           :pending_reason => "Failed",
-          :hash => "" ,
+          :payment_hash => "" ,
           :transaction_id => 0
         })
 

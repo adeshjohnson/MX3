@@ -296,7 +296,7 @@ class PaymentsController < ApplicationController
                 @payment.user_id = @user.id
                 @payment.date_added = Time.now if not @payment.date_added
                 #@payment.residence_country = notify.country
-                @payment.hash = notify.approval_code
+                @payment.payment_hash = notify.approval_code
                 @payment.save
                 if @test == 0
                   @user.balance += sprintf("%.2f", (@payment.gross.to_f * Currency.count_exchange_rate(@payment.currency, Currency.find(1).name))).to_f
@@ -606,7 +606,7 @@ class PaymentsController < ApplicationController
     insert = []
     insert_header = "INSERT INTO payments (`id`, `tax`, `completed`, `paymenttype`, `shipped_at`, `hash`, `pending_reason`, `amount`, `transaction_id`, `card`, `owner_id`, `fee`, `gross`, `user_id`, `vat_percent`, `last_name`, `bill_nr`, `currency`, `date_added`, `payer_status`, `payer_email`, `residence_country`, `email`, `first_name`)"
     @payments.each{|payment|
-      insert << "(#{payment.id},#{payment.tax},#{payment.completed},'#{payment.paymenttype}','#{payment.shipped_at.to_s(:db) if payment.shipped_at}','#{payment.hash}','#{payment.pending_reason}',#{payment.amount},'#{payment.transaction_id}',#{payment.card},#{payment.owner_id},#{payment.fee},#{payment.gross},#{payment.user_id},#{payment.vat_percent},'#{payment.last_name}',#{payment.bill_nr},'#{payment.currency}','#{payment.date_added.to_s(:db) if payment.date_added}', '#{payment.payer_status}','#{payment.payer_email}','#{payment.residence_country}','#{payment.email}','#{payment.first_name}')".gsub("''", "NULL").gsub(",,", ",NULL,")
+      insert << "(#{payment.id},#{payment.tax},#{payment.completed},'#{payment.paymenttype}','#{payment.shipped_at.to_s(:db) if payment.shipped_at}','#{payment.payment_hash}','#{payment.pending_reason}',#{payment.amount},'#{payment.transaction_id}',#{payment.card},#{payment.owner_id},#{payment.fee},#{payment.gross},#{payment.user_id},#{payment.vat_percent},'#{payment.last_name}',#{payment.bill_nr},'#{payment.currency}','#{payment.date_added.to_s(:db) if payment.date_added}', '#{payment.payer_status}','#{payment.payer_email}','#{payment.residence_country}','#{payment.email}','#{payment.first_name}')".gsub("''", "NULL").gsub(",,", ",NULL,")
       if payment.gross.to_f == 0.0
         payment.gross = payment.amount.to_f - payment.tax.to_f
       else
@@ -928,7 +928,7 @@ class PaymentsController < ApplicationController
                   @payment.transaction_id = params[:LMI_SYS_TRANS_NO]
                   @payment.shipped_at = Time.now
                   @payment.payer_email = params[:LMI_PAYER_PURSE]
-                  @payment.hash = params[:LMI_HASH]
+                  @payment.payment_hash = params[:LMI_HASH]
                   @payment.bill_nr = params[:LMI_SYS_INVS_NO]
                   @payment.pending_reason = ''
                   @payment.save
@@ -1233,8 +1233,8 @@ class PaymentsController < ApplicationController
       @retry_count =       Confline.get_value("Ouroboros_Retry_Count", @user.owner_id)
       @completition =      Confline.get_value("Ouroboros_Completion",@user.owner_id )
       @completition_over = Confline.get_value("Ouroboros_Completion_Over", @user.owner_id)
-      @policy = Ouroboros::OuroborosPayment.format_policy(@ob_max_amount, @retry_count, @completition, @completition_over)
-      @amount = Ouroboros::OuroborosPayment.format_amount(params[:amount], @ob_min_amount, @ob_max_amount)
+      @policy = OuroborosPayment.format_policy(@ob_max_amount, @retry_count, @completition, @completition_over)
+      @amount = OuroborosPayment.format_amount(params[:amount], @ob_min_amount, @ob_max_amount)
 
       @ouroboros_return_url = Web_URL + Web_Dir + "/payments/ouroboros_result"
       @ouroboros_cancel_url = Web_URL + Web_Dir + "/callc/main"
@@ -1288,7 +1288,7 @@ class PaymentsController < ApplicationController
               @payment.transaction_id = params[:tid]
               @payment.shipped_at = Time.now
               @payment.payer_email = @user.email
-              @payment.hash = params[:signature]
+              @payment.payment_hash = params[:signature]
               @payment.pending_reason = ''
               @payment.save
               MorLog.my_debug("Ouroboros payment : payment - #{@payment.id}", 1) if @payment

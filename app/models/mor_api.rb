@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
-class MorAPI
-  def MorAPI::check_params_with_key(params, request)
+class MorApi
+  def MorApi.check_params_with_key(params, request)
     ret = {}
     ret[:user_id] = params[:user_id].to_i           if params[:user_id] and params[:user_id].to_s !~ /[^0-9]/ and params[:user_id].to_i >= 0
     ret[:request_hash] = params[:hash].to_s         if params[:hash] and params[:hash].to_s.length == 40
@@ -41,19 +41,19 @@ class MorAPI
     ret[:calltype] = 'no answer' if ret[:calltype] == 'no_answer'
     ret[:balance] = params[:balance].to_f
     unless ret[:system_hash].to_s == ret[:request_hash]
-      API::create_error_action(params, request, 'API : Incorrect hash')
+      MorApi.create_error_action(params, request, 'API : Incorrect hash')
     end
       
     return ret[:system_hash].to_s == ret[:request_hash], ret
   end
 
-  def MorAPI::create_error_action(params, request, name)
-    Action.create({:user_id=>-1, :date=>Time.now(), :action=>'error', :data=>name, :data2=>(request ? request.request_uri.to_s[0..255] : ''), :data3 => (request ? request.remote_addr : ''), :data4 => params.inspect.to_s[0..255]})
+  def MorApi.create_error_action(params, request, name)
+    Action.create({:user_id=>-1, :date=>Time.now(), :action=>'error', :data=>name, :data2=>(request ? request.url.to_s[0..255] : ''), :data3 => (request ? request.remote_addr : ''), :data4 => params.inspect.to_s[0..255]})
   end
 
 
 
-  def MorAPI::check_params_with_all_keys(params, request)
+  def MorApi.check_params_with_all_keys(params, request)
     MorLog.my_debug params.to_yaml
     ret = {}
     ret[:user_id] = params[:user_id].to_i           if params[:user_id] and params[:user_id].to_s !~ /[^0-9]/ and params[:user_id].to_i >= 0
@@ -67,7 +67,7 @@ class MorAPI
     ret[:monitoring_id] = params[:monitoring_id].to_s if params[:monitoring_id] and (params[:monitoring_id] !~ /[^0-9]/)
     ret[:users] = params[:users].to_s if params[:users] and (params[:users] =~ /^postpaid$|^prepaid$|^all$|^[0-9,]+$/)
     ret[:block] = params[:block].to_s if params[:block] and (params[:block] =~ /true|false/)
-    ret[:email] = params[:email].to_s if params[:email] and (params[:email] =~ /true|false/)
+    ret[:email] = params[:email].to_s if params[:email] #and (params[:email] =~ /true|false/)
     ret[:mtype] = params[:mtype].to_s if params[:mtype] and (params[:mtype] !~ /[^0-9]/)
     ret[:tariff_id] = params[:tariff_id].to_i if params[:tariff_id] and (params[:tariff_id].to_s !~ /[^0-9]/)
     ret[:only_did] = params[:only_did].to_i if params[:only_did] and (params[:only_did].to_s !~ /[^0-9]/)
@@ -99,7 +99,8 @@ class MorAPI
     }
 
     ret[:key] = Confline.get_value("API_Secret_Key").to_s
-
+    MorLog.my_debug ret.to_yaml
+    MorLog.my_debug "****************************************************8"
     #for future: notice - users should generate hash in same order.
     string = ""
 
@@ -122,7 +123,7 @@ class MorAPI
 
 
     unless ret[:system_hash].to_s == ret[:request_hash]
-      API::create_error_action(params, request, 'API : Incorrect hash')
+      MorApi.create_error_action(params, request, 'API : Incorrect hash')
     end
 
     return ret[:system_hash].to_s == ret[:request_hash], ret, hash_param_order
@@ -141,7 +142,7 @@ class MorAPI
   or
   +xml object+ 
 =end
-  def MorAPI.return_error(string, doc = nil)
+  def MorApi.return_error(string, doc = nil)
     if doc
       doc.status{doc.error(string)}
       return doc
