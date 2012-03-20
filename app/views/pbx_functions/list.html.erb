@@ -18,7 +18,7 @@
       <td id ="priority_<%= p.id %>" align="left"><%=h p.priority %></td>
       <td id ="pf_type_<%= p.id %>" align="left"><%=h p.pf_type %></td>
       <% if reseller_active? %>
-        <td id ="allow_<%= p.id %>" align="center"><%= link_to (p.allow_resellers.to_i == 1 ? b_check : b_cross), {:action=>:set_allow, :id=>p.id},  {:confirm => _('Are_you_sure'), :method => :post, :id => "allow_for_reseller_#{p.id}"} %></td>
+        <td id ="allow_<%= p.id %>" align="center"><%= link_to((p.allow_resellers.to_i == 1 ? b_check : b_cross), {:action=>:set_allow, :id=>p.id},  {:confirm => _('Are_you_sure'), :method => :post, :id => "allow_for_reseller_#{p.id}"}) %></td>
       <% end %>
     </tr>
   <% } %>

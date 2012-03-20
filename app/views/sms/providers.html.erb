@@ -1,6 +1,6 @@
 <table width="100%">
   <tr>
-    <td><%= link_to (b_add + _('New_provider')), :action => 'provider_new' %></td>
+    <td><%= link_to((b_add + _('New_provider')), :action => 'provider_new') %></td>
     <td align="right">
       <% if not @providers.empty? %>
         <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>

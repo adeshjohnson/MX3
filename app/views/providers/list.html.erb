@@ -1,8 +1,8 @@
 <table width="100%">
   <tr>
     <%if @options[:s_hidden].to_i == 0 %>
-      <td nowrap><%= link_to (b_add + _('New_provider')), :action => 'new' %></td>
-      <td nowrap><% link_to (b_add + _('New_H323_Provider')), :action => 'provider_new' %></td>
+      <td nowrap><%= link_to((b_add + _('New_provider')), :action => 'new') %></td>
+      <td nowrap><% link_to((b_add + _('New_H323_Provider')), :action => 'provider_new') %></td>
     <%end%>
     <td align="right" width="100%">
       <% if not @providers.empty? %>

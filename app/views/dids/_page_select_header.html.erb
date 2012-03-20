@@ -36,15 +36,15 @@
 <table class='page_title2' width="100%">
     <tr>
         <td align = "center">
-            <%= link_to ("<<", {:action => params[:action], :id => @page_select_header_id, :page => back100, :s_did => @search_did, :s_provider => @search_provider, :s_language => @search_language, :s_status => @search_status, :s_user => @search_user, :s_device => @seach_device}, {:title => "-100"}) if back100 %>
-            <%= link_to ("<", {:action => params[:action], :id => @page_select_header_id, :page => back10, :s_did => @search_did, :s_provider => @search_provider, :s_language => @search_language, :s_status => @search_status, :s_user => @search_user, :s_device => @seach_device}, {:title => "-20"}) if back10 %>
+            <%= link_to("<<", {:action => params[:action], :id => @page_select_header_id, :page => back100, :s_did => @search_did, :s_provider => @search_provider, :s_language => @search_language, :s_status => @search_status, :s_user => @search_user, :s_device => @seach_device}, {:title => "-100"}) if back100 %>
+            <%= link_to("<", {:action => params[:action], :id => @page_select_header_id, :page => back10, :s_did => @search_did, :s_provider => @search_provider, :s_language => @search_language, :s_status => @search_status, :s_user => @search_user, :s_device => @seach_device}, {:title => "-20"}) if back10 %>
             <% for p in pstart..pend %>
                 <%= "<b>" if p == @page%>
                     <%= link_to p, :action => params[:action], :id => @page_select_header_id, :page => p, :s_did => @search_did, :s_provider => @search_provider, :s_language => @search_language, :s_status => @search_status, :s_user => @search_user, :s_device => @seach_device%>
                 <%= "</b>" if p == @page%>
             <% end %>
-            <%= link_to (">", {:action => params[:action], :id => @page_select_header_id, :page => forw10, :s_did => @search_did, :s_provider => @search_provider, :s_language => @search_language, :s_status => @search_status, :s_user => @search_user, :s_device => @seach_device}, {:title => "+20"}) if forw10 %>
-            <%= link_to (">>", {:action => params[:action], :id => @page_select_header_id, :page => forw100, :s_did => @search_did, :s_provider => @search_provider, :s_language => @search_language, :s_status => @search_status, :s_user => @search_user, :s_device => @seach_device}, {:title => "+100"}) if forw100 %>
+            <%= link_to(">", {:action => params[:action], :id => @page_select_header_id, :page => forw10, :s_did => @search_did, :s_provider => @search_provider, :s_language => @search_language, :s_status => @search_status, :s_user => @search_user, :s_device => @seach_device}, {:title => "+20"}) if forw10 %>
+            <%= link_to(">>", {:action => params[:action], :id => @page_select_header_id, :page => forw100, :s_did => @search_did, :s_provider => @search_provider, :s_language => @search_language, :s_status => @search_status, :s_user => @search_user, :s_device => @seach_device}, {:title => "+100"}) if forw100 %>
         </td>
     </tr>
 </table>

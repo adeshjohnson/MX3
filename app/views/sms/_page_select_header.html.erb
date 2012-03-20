@@ -36,15 +36,15 @@
 <table class='page_title2' width="100%">
     <tr>
         <td align = "center">
-            <%= link_to ("<<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back100}, {:title => "-100"}) if back100 %>
-            <%= link_to ("<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back10}, {:title => "-10"}) if back10 %>
+            <%= link_to("<<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back100}, {:title => "-100"}) if back100 %>
+            <%= link_to("<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back10}, {:title => "-10"}) if back10 %>
             <% for p in pstart..pend %>
                 <%= "<b>" if p == @page%>
                     <%= link_to p, :action => params[:action], :id => @page_select_header_id, :st => @st, :page => p%>
                 <%= "</b>" if p == @page%>
             <% end %>
-            <%= link_to (">", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw10}, {:title => "+10"}) if forw10 %>
-            <%= link_to (">>", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw100}, {:title => "+100"}) if forw100 %>
+            <%= link_to(">", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw10}, {:title => "+10"}) if forw10 %>
+            <%= link_to(">>", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw100}, {:title => "+100"}) if forw100 %>
         </td>
     </tr>
 </table>

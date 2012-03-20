@@ -160,7 +160,7 @@
         </td>
       <% end %>
       <td align="center">
-        <%= select_tag("user" ,options_for_select([[_('Not_used'), ""]]+ @users.map{|user| [ "#{nice_user(user)} (#{user.id })", user.id]},:selected => "#{@users_used.id.to_s}")) %>
+        <%= select_tag("user" ,options_for_select([[_('Not_used'), ""]]+ @users.map{|user| [ "#{nice_user(user)} (#{user.id })", user.id]},:selected => "#{@users_used.class.to_s == 'String' ? @users_used : @users_used.id.to_s}")) %>
         <span id="users_device"> </span>
       </td>
       <td align="center"> <%= image_submit_tag 'icons/add.png', :title => _('Add'), :id=>"dp_PIN_add" %></td>

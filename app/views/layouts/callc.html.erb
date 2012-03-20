@@ -153,7 +153,7 @@
               <% end %>
               <td>
               </td>
-              <td align="left" class="main_window">
+              <td align="left" class="main_window" style='height: 500px'>
                 <% if @Show_Currency_Selector%>
                   <% if params[:controller].to_s == "tariffs" and params[:action].to_s == "user_rates" %>
                     <%= currency_selector(true).html_safe%>
