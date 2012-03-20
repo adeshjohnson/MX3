@@ -79,6 +79,7 @@
   var so = new SWFObject("<%= Web_Dir %>/swf/amcolumn.swf", "amcolumn", "200", "150", "8", "#FFFFFF");
         so.addVariable("path", "<%= Web_Dir %>/swf/");
        	so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/amcolumn_2.xml"));
+        so.addParam("wmode", "transparent");
 		so.addVariable("chart_data",  escape("<%=  @Login_graph[i]%>"));
 		so.write("flashcontent<%= i %>");
   // ]]>

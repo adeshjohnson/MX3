@@ -32,20 +32,21 @@
         var so = new SWFObject("<%= Web_Dir %>/swf/ampie.swf", "ampie", "450", "250", "9", "#FFFFFF");
         so.addVariable("path", "<%= Web_Dir %>/swf/");
         so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/pie3.xml"));
+        so.addParam("wmode", "transparent");
         so.addVariable("chart_data", escape(<%=  @Calls_graph %>));
         so.addVariable("additional_chart_settings", escape("<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b></b>]]></text></label></settings>"));
         so.write("flashcontent1");
         // ]]>
       </script>
       <!-- end of ampie script -->
-      <br>
+      <br />
     </td>
 
   </tr>
 
 </table>
 
-<br>
+<br />
 
 
 
@@ -58,8 +59,8 @@
         <tr>
 
           <td align="center">
-            <br>
-            <br>
+            <br />
+            <br />
             <!-- amcolumn script-->
             <div id="flashcontent5"><strong>You need to upgrade your Flash Player</strong></div>
             <script type="text/javascript">
@@ -67,6 +68,7 @@
               var so = new SWFObject("<%= Web_Dir %>/swf/amcolumn.swf", "amcolumn", "370", "277", "8", "#FFFFFF");
               so.addVariable("path", "<%= Web_Dir %>/swf/");
               so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/amcolumn_3.xml"));
+              so.addParam("wmode", "transparent");
               so.addVariable("chart_data",  escape("<%= @Avg_Calltime_graph %>"));
               so.addVariable("additional_chart_settings", encodeURI("<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('avg_call_time')+" (s)" %></b>]]></text></label></settings>"));
               so.write("flashcontent5");
@@ -81,14 +83,15 @@
 
           <td align="center">
             <!-- amline script-->
-            <br>
-            <br>
+            <br />
+            <br />
             <div id="flashcontent6"><strong>You need to upgrade your Flash Player</strong></div>
             <script type="text/javascript">
               // <![CDATA[
               var so = new SWFObject("<%= Web_Dir %>/swf/amline.swf", "amline", "370", "277", "8", "#FFFFFF");
               so.addVariable("path", "<%= Web_Dir %>/swf/");
               so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/amline1.xml"));
+              so.addParam("wmode", "transparent");
               so.addVariable("chart_data",  escape("<%=  @Asr_graph %>"));
               so.addVariable("additional_chart_settings", encodeURI("<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('ASR') + " : " +  @asr_calls.to_s + " %" %></b>]]></text></label></settings>"));
               so.write("flashcontent6");
@@ -100,14 +103,15 @@
           <% if can_see_finances? -%>
             <td align="center">
               <!-- amline script-->
-              <br>
-              <br>
+              <br />
+              <br />
               <div id="flashcontent7"><strong>You need to upgrade your Flash Player</strong></div>
               <script type="text/javascript">
                 // <![CDATA[
                 var so = new SWFObject("<%= Web_Dir %>/swf/amline.swf", "amline", "370", "277", "8", "#FFFFFF");
                 so.addVariable("path", "<%= Web_Dir %>/swf/");
                 so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/amline3.xml"));
+                so.addParam("wmode", "transparent");
                 so.addVariable("chart_data",  escape("<%=   @Profit_graph %>"));
                 so.addVariable("additional_chart_settings", encodeURI("<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('Profit') %></b>]]></text></label></labels><chart><graphs><graph><title>aaaaaa</title></graph><graph><title>aaaaaa</title></graph></settings>"));
                 so.write("flashcontent7");

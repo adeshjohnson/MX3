@@ -86,7 +86,7 @@ function read_show_hide_menus() {
         $j(".header_spacer").hide();
         $j("#slide").hover(
             function () {
-                $j(this).animate({ width:"210px", display:"table-cell"}, 0);
+                $j(this).animate({ width:"220px", display:"table-cell"}, 0);
             },
             function () {
                 $j(this).animate({ width:"8px" }, 0);

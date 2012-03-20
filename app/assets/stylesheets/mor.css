@@ -840,20 +840,45 @@ span.icon.application_side_contract{background-position: -176px 0px;}
 span.icon.help{background-position: -192px 0px;}
 
 #slide {
-background: url("/assets/design/box.gif") repeat-x scroll left top #FFFFFF;
-position: fixed;
-overflow: scroll;
-padding: 1px;
-width: 8px;
-left: 0px;
-height: 100%;
-top: 0px;
-z-index: 11;
+    background: url("/assets/design/box.gif") repeat-x scroll left top #FFFFFF;
+    position: fixed;
+    overflow: auto;
+    width: 8px;
+    left: 0px;
+    height: 100%;
+    top: 0px;
+    z-index: 11;
+    padding-bottom: 5px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #slide span {
-left: 10px;
-position: relative;
-padding-left: 10px;
-bottom: 20px;
+    left: 10px;
+    top: 5px;
+    position: relative;
+    padding-left: 10px;
+    bottom: 20px;
+}
+
+.chrome #slide {
+    background: url("/assets/design/box.gif") repeat-x scroll left top #FFFFFF;
+    position: fixed;
+    overflow: auto;
+    width: 8px;
+    left: 0px;
+    height: 100%;
+    top: 0px;
+    z-index: 11;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.chrome #slide span {
+    left: 10px;
+    top: 5px;
+    position: absolute;
+    padding-left: 10px;
+    bottom: 20px;
 }

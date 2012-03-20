@@ -86,6 +86,7 @@
   var so = new SWFObject("<%= Web_Dir %>/swf/ampie.swf", "ampie", "450", "250", "9", "#FFFFFF");
         so.addVariable("path", "<%= Web_Dir %>/swf/");
        	so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/pie1.xml"));
+        so.addParam("wmode", "transparent");
 		so.addVariable("chart_data", <%=  @Out_in_calls_graph %>);
 		so.addVariable("additional_chart_settings", "<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b></b>]]></text></label></labels></settings>");
 		so.write("flashcontent1");
@@ -103,6 +104,7 @@
   var so = new SWFObject("<%= Web_Dir %>/swf/ampie.swf", "ampie", "450", "250", "9", "#FFFFFF");
         so.addVariable("path", "<%= Web_Dir %>/swf/");
        	so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/pie2.xml"));
+        so.addParam("wmode", "transparent");
 		so.addVariable("chart_data", <%=  @Out_in_calls_graph2 %>);
 		so.addVariable("additional_chart_settings", "<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b></b>]]></text></label></labels></settings>");
 		so.write("flashcontent2");
@@ -134,6 +136,7 @@
   var so = new SWFObject("<%= Web_Dir %>/swf/amcolumn.swf", "amcolumn", "370", "277", "8", "#FFFFFF");
         so.addVariable("path", "<%= Web_Dir %>/swf/");
        	so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/amcolumn_1.xml"));
+        so.addParam("wmode", "transparent");
 		so.addVariable("chart_data",  escape("<%= @Calls_graph %>"));
 		so.addVariable("additional_chart_settings", escape("<settings></settings>"));
 		so.addVariable("additional_chart_settings", "<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('Calls') %></b>]]></text></label></labels></settings>");
@@ -153,6 +156,7 @@
   var so = new SWFObject("<%= Web_Dir %>/swf/amcolumn.swf", "amcolumn", "370", "277", "8", "#FFFFFF");
         so.addVariable("path", "<%= Web_Dir %>/swf/");
        	so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/amcolumn_1.xml"));
+        so.addParam("wmode", "transparent");
 		so.addVariable("chart_data",  escape("<%= @Calltime_graph %>"));
 	        so.addVariable("additional_chart_settings", "<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('Duration')+" (min)" %></b>]]></text></label></labels></settings>");
 		so.write("flashcontent4");
@@ -170,6 +174,7 @@
   var so = new SWFObject("<%= Web_Dir %>/swf/amcolumn.swf", "amcolumn", "370", "277", "8", "#FFFFFF");
         so.addVariable("path", "<%= Web_Dir %>/swf/");
        	so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/amcolumn_1.xml"));
+        so.addParam("wmode", "transparent");
 		so.addVariable("chart_data",  escape("<%= @Avg_Calltime_graph %>"));
 	        so.addVariable("additional_chart_settings", "<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('avg_call_time')+" (s)" %></b>]]></text></label></labels></settings>");
 		so.write("flashcontent5");
