@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>mor_12_generate_hash</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">mor_12_generate_hash</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/generate_hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=ssettings_menu16</td>
+	<td>Generate hash</td>
+</tr>
+<!--1. Reikalingas page_title-->
+<tr>
+	<td>type</td>
+	<td>name=link</td>
+	<td>user_id=2&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--2. failed to parse -->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>failed to parse uri user_id=2&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=table.maintable &gt; tbody &gt; tr &gt; td</td>
+	<td>API key</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[2]/table/tbody/tr/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[2]/table/tbody/tr[2]/td</td>
+	<td>Generated hash</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>da39a3ee5e6b4b0d3255bfef95601890afd80709</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Note that parameters are shown in the same order as they were when generating hash. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_8 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabViewdhtmlgoodies_tabView1_8']/table/tbody/tr[7]/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_login_redirect_to_main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_allow_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_allow_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_payment_confirmation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/generate_hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=link</td>
+	<td>user_id=2&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=link</td>
+	<td>id=1&amp;quantity=2&amp;email=aisteaisteb@gmail.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>failed to parse uri id=1&amp;quantity=2&amp;email=aisteaisteb@gmail.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=link</td>
+	<td>http://127.0.0.1/billing/api/cc_by_cli?u=admin&amp;p=admin1&amp;cardgroup_id=1&amp;callerid=4444&amp;amount=100&amp;pin=7856</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[2]/table/tbody/tr/td[2]</td>
+	<td>7856</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>4444</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[6]/td[2]</td>
+	<td>118f394ea0b031da71270d528fdfd7464e24d799</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=table.maintable &gt; tbody &gt; tr &gt; td</td>
+	<td>pin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[2]/table/tbody/tr[2]/td</td>
+	<td>amount</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[2]/table/tbody/tr[3]/td</td>
+	<td>callerid</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td</td>
+	<td>cardgroup_id</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td</td>
+	<td>API key</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[6]/td</td>
+	<td>Generated hash</td>
+</tr>
+<!-- 3. sugeneravus naują hash išlieka ankščiau išmesta klaida-->
+<tr>
+	<td>type</td>
+	<td>name=link</td>
+	<td>http://127.0.0.1/billing/api/cc_by_cli?u=admin&amp;p=admin1&amp;cardgroup_id=1&amp;callerid=7777&amp;amount=50&amp;pin=222</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>222</td>
+	<td></td>
+</tr>
+<!--4. Lenteliai reikia normalių id-->
+<tr>
+	<td>verifyText</td>
+	<td>css=table.maintable &gt; tbody &gt; tr &gt; td</td>
+	<td>pin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div/table/tbody/tr[2]/td</td>
+	<td>amount</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td</td>
+	<td>cardgroup_id</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td</td>
+	<td>API key</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[6]/td</td>
+	<td>Generated hash</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div/table/tbody/tr/td[2]</td>
+	<td>222</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>7777</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[6]/td[2]</td>
+	<td>f5a2f4661e2618e18db8110cefd248c1ed7c2524</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/generate_hash</td>
+	<td></td>
+</tr>
+<!--5. kiti useriai(ne adminas) norėdami patekti į hash generavimo puslapį, patenka į tuščią langą. Gal reikėtų kokį pranešimą įdėti...-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/generate_hash</td>
+	<td></td>
+</tr>
+<!--5. kiti useriai(ne adminas) norėdami patekti į hash generavimo puslapį, patenka į tuščią langą. Gal reikėtų kokį pranešimą įdėti...-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/generate_hash</td>
+	<td></td>
+</tr>
+<!--5. kiti useriai(ne adminas) norėdami patekti į hash generavimo puslapį, patenka į tuščią langą. Gal reikėtų kokį pranešimą įdėti...-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/generate_hash</td>
+	<td></td>
+</tr>
+<!--5. kiti useriai(ne adminas) norėdami patekti į hash generavimo puslapį, patenka į tuščią langą. Gal reikėtų kokį pranešimą įdėti...-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/generate_hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=link</td>
+	<td>http://127.0.0.1/billing/api/buy_card_from_callingroup?u=admin&amp;p=admin1&amp;id=1&amp;quantity=2&amp;email=aisteaisteb@gmail.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>quantity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>API key</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Generated hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>email_hash</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=link</td>
+	<td>http://127.0.0.1/billing/api/buy_card_from_callingroup?u=admin&amp;p=admin1&amp;id=1&amp;quantity=2&amp;email=-5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>waitForTextNotPresent</td> 	<td>${email_hash}</td> 	<td></td> </tr>-->
+</tbody></table>
+</body>
+</html>
