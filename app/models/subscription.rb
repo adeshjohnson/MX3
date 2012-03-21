@@ -82,13 +82,17 @@ class Subscription < ActiveRecord::Base
         total_price += service.price
         total_price += service.price/last_day_of_month2.day * (end_date.day)
       end
-    when "one_time_fee"
+      when "one_time_fee"
+        logger.fatal       "one_time_fee"
+        logger.fatal       "#{activation_start} >= #{period_start} and #{activation_start} <= #{period_end}"
       if activation_start >= period_start and activation_start <= period_end
         total_price = service.price
       end
     when "periodic_fee"
       start_date, end_date = subscription_period(period_start, period_end)
       days_used =  end_date - start_date
+      logger.fatal       "periodic_fee"
+      logger.fatal       "#{start_date.month} == #{end_date.month} and #{start_date.year} == #{end_date.year}"
       if start_date.month == end_date.month and start_date.year == end_date.year
         total_days = start_date.to_time.end_of_month.day
         total_price = service.price / total_days * (days_used+1)

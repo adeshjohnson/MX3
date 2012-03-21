@@ -35,14 +35,14 @@ require 'smtp_tls'
   def sent_my_email(email_to, email_from, email, assigns = {})
     load_settings
     email_builder = ActionView::Base.new(nil,assigns)
-    email_from = Confline.get_value("Email_from") if email_from.blank?
-    recipients email_to
-    subject    email.subject
-    from       "#{email_from} <#{email_from}>"
-    content_type "text/#{email.format.to_s}"
-    body email_builder.render(
-      :inline => email.body,
-      :locals => assigns
+    email_from = email_from.blank? ? Confline.get_value("Email_from") : email_from
+
+    mail(:to => email_to, :subject => email.subject,
+         :from=> '"' + email_from + '"'+ ' <' + email_from + '>',
+         :body=>email_builder.render(
+             :inline => nice_body(email.body),
+             :locals => assigns),
+         :content_type=>"text/#{email.format.to_s}"
     )
   end
 
@@ -55,37 +55,41 @@ require 'smtp_tls'
  * +:file+ - content of the file.
 =end
 
-  def sent_with_attachments(email_to, email_from, email, attachments = [], assigns = {})
+  def sent_with_attachments(email_to, email_from, email, my_attachments = [], assigns = {})
     load_settings
     email_builder = ActionView::Base.new(nil,assigns)
-    recipients email_to
-    subject    email.subject
-    from       "#{email_from} <#{email_from}>"
-    content_type "text/#{email.format.to_s}"
-    body email_builder.render(
-      :inline => email.body,
-      :locals => assigns
+    email_from = email_from.blank? ? Confline.get_value("Email_from") : email_from
+  #  attachments.each {|attach|
+   #   attachment :content_type => attach[:content_type], :filename =>attach[:filename] do |a|
+   #     a.body = attach[:file]
+   #   end
+   # }
+
+    if my_attachments and my_attachments.size.to_i > 0
+      my_attachments.each {|attach|
+        attachments[attach[:filename]] = attach[:file]
+      }
+    end
+
+    mail(:to => email_to, :subject =>  email.subject,
+         :from=> "#{email_from} <#{email_from}>",
+         :body=>email_builder.render(
+             :inline => nice_body(email.body),
+             :locals => assigns),
+         :content_type=>"text/#{email.format.to_s}"
     )
-    attachments.each {|attach|
-      attachment :content_type => attach[:content_type], :filename =>attach[:filename] do |a|
-        a.body = attach[:file]
-      end
-    }
   end
 
 
   def sent_sms(email_to, number, email_from, email, assigns = {})
     load_settings
-    #    MorLog.my_debug("email_to = #{email_to}, number = #{number}, email_from = #{email_from}, email = #{email.id}, assigns = #{assigns.to_yaml}")
     email_builder = ActionView::Base.new(nil,assigns)
-    #    email_from = Confline.get_value("Email_from")
-    recipients email_to
-    subject    number
-    from       "#{email_from} <#{email_from}>"
-    content_type "text/#{email.format.to_s}"
-    body email_builder.render(
-      :inline => email.body,
-      :locals => assigns
+    mail(:to => email_to, :subject => number,
+         :from=> "#{email_from} <#{email_from}>",
+         :body=>email_builder.render(
+             :inline => nice_body(email.body),
+             :locals => assigns),
+         :content_type=>"text/#{email.format.to_s}"
     )
   end
 
