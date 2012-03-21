@@ -2660,12 +2660,12 @@ GROUP BY terminators.id;").map { |t| t.id }
     time + time_offset.hour
   end
 
-  class << self # Class methods
-    alias :all_columns :columns
-    def columns
-      all_columns.reject {|c| c.name == 'time_zone'}
-    end
-  end
+  #class << self # Class methods
+  #  alias :all_columns :columns
+  #  def columns
+  #    all_columns.reject {|c| c.name == 'time_zone'}
+  #  end
+  #end
 
   def self.time_zone
     self[:time_zone]

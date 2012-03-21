@@ -430,7 +430,7 @@ class UsersController < ApplicationController
     end
      
 
-    if @user.valid? and @user.create
+    if @user.valid? and User.create(@user.attributes)
       if @user.usertype == "reseller"
         @user.create_reseller_conflines
         @user.create_reseller_emails
