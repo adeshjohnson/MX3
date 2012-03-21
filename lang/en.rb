@@ -4317,7 +4317,7 @@ Localization.define('en') do |l|
   l.store 'VAT_checking_for_EU_companies_explanation', 'System will check VAT number with site: http://ec.europa.eu/taxation_customs/vies/vieshome.do'
   l.store 'Allow_VAT_blank_for_EU_companies', 'Allow blank VAT for EU companies'
   l.store 'VAT_blank_for_EU_companies', 'blank VAT for EU companies'
-  l.store 'VAT_blank_for_EU_companies_explanation', 'Registration will not pass with blank VAT number from EU companies.'
+  l.store 'VAT_blank_for_EU_companies_explanation', 'Registration will pass with blank VAT number from EU companies.'
   l.store 'Please_fill_field_TAX_Registration_Number', 'Please fill field TAX Registration Number'
   l.store 'TAX_Registration_Number_is_not_valid', 'TAX Registration Number is not valid'
   l.store 'Create_more_users_if_you_need_to_add_more_call_booths_(phones)', 'Create more users if you need to add more call booths (phones)'

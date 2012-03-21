@@ -32,7 +32,7 @@ window.onload = function() {
           </tr>
           <tr>
             <td align="left"> <%= _('Device_type') %>:   </td>
-            <td align="left"">    
+            <td align="left">
                 <%= radio_button_tag('device_type', "SIP", checked = "1") %> SIP
                 <%= radio_button_tag('device_type', "IAX2", checked =  (session[:reg_device_type] == "IAX2")) %> IAX2
                 </td>
@@ -61,7 +61,7 @@ window.onload = function() {
             <td align="left"> <%= text_field_tag 'client_id', session[:reg_client_id], "class" => "input", :size => "30", :maxlength => "40"  %> </td>
           </tr>
           <tr>
-            <td align="left"> <%= _('VAT_Reg_number') %>:   </td>
+            <td align="left"> <%= _('VAT_Reg_number') %>:<%= ' *   ' if @vat_necessary%> || <%= @vat_necessary %>  </td>
             <td align="left"> <%= text_field_tag 'vat_number', session[:reg_vat_number], "class" => "input", :size => "30", :maxlength => "40"  %> </td>
           </tr>
           <tr>

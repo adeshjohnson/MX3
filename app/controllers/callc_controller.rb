@@ -551,6 +551,7 @@ class CallcController < ApplicationController
       session[:version] = Confline.get_value("Version", @owner.id)
       session[:copyright_title] = Confline.get_value("Copyright_Title", @owner.id)
     end
+    @vat_necessary =  Confline.get_value("Registration_Enable_VAT_checking").to_i == 1 && Confline.get_value("Registration_allow_vat_blank").to_i == 0
   end
 
   def signup_end
