@@ -471,18 +471,25 @@ class CdrController < ApplicationController
             one_old_reseller_price += call.reseller_price.to_f
 
             provider = providers_cache["p_#{call.provider_id}".to_sym] ||= Provider.find(:first, :include => [:tariff], :conditions => ["providers.id = ?", call.provider_id])
-            call = call.count_cdr2call_details(provider.tariff, @user, test_tariff_id) if provider and call.user_id
+            if provider.user_id == current_user.get_corrected_owner_id
+              call = call.count_cdr2call_details(provider.tariff, @user, test_tariff_id) if provider and call.user_id
 
-            if testing == 0
-              call.save
+              if testing == 0
+                call.save
+              end
+
+              one_user_price += call.user_price.to_f
+              one_reseller_price += call.reseller_price.to_f
+
+              @billsec += call.billsec
+              @provider_price += call.provider_price.to_f
+            else
+              one_user_price += 0.to_f
+              one_reseller_price += 0.to_f
+
+              @billsec += call.billsec
+              @provider_price += 0.to_f
             end
-
-            one_user_price += call.user_price.to_f
-            one_reseller_price += call.reseller_price.to_f
-
-            @billsec += call.billsec
-            @provider_price += call.provider_price.to_f
-
           end
 
           @reseller_price += one_reseller_price
