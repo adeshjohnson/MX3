@@ -110,34 +110,36 @@
   </div>
 <% end %>
 
-<%= _('Failover_provider') %>: <%= @lcr.failover_provider ? @lcr.failover_provider.name : _('Do_not_use') %>
+<% if mor_11_extend? %>
+  <%= _('Failover_provider') %>: <%= @lcr.failover_provider ? @lcr.failover_provider.name : _('Do_not_use') %>
 
-<%= form_tag(:action => 'try_to_add_failover_provider', :id => @lcr) do %>
-  <div class="nb"><%= b_add + _('Add_failover_provider') %>:
-    <select name="select_prov" <%= "disabled" if @other_providers.size == 0 %> >
-      <option value="0"><%= _('Do_not_use_failover_provider') %></option>
-      <% for prov in @other_providers %>
-        <% device = prov.device %>
-        <option value="<%= prov.id %>" > <%= prov.name %>
-          <%  if admin? or (reseller? and prov.user_id == current_user.id) %>
-            -
-            <% if prov.tech != "Skype" %>
-              <%= prov.tech %>/<%= prov.server_ip %>
-            <% else %>
-              <%= prov.tech %>/<%= prov.login %>
-            <% end %>
-          <%end%>
-        </option>
+  <%= form_tag(:action => 'try_to_add_failover_provider', :id => @lcr) do %>
+    <div class="nb"><%= b_add + _('Add_failover_provider') %>:
+      <select name="select_prov" <%= "disabled" if @other_providers.size == 0 %> >
+        <option value="0"><%= _('Do_not_use_failover_provider') %></option>
+        <% for prov in @other_providers %>
+          <% device = prov.device %>
+          <option value="<%= prov.id %>" > <%= prov.name %>
+            <%  if admin? or (reseller? and prov.user_id == current_user.id) %>
+              -
+              <% if prov.tech != "Skype" %>
+                <%= prov.tech %>/<%= prov.server_ip %>
+              <% else %>
+                <%= prov.tech %>/<%= prov.login %>
+              <% end %>
+            <%end%>
+          </option>
+        <% end %>
+      </select>
+
+      <% if @other_providers.size == 0 %>
+        <%= submit_tag( _('Add'), :disabled => "1" , :disable_with=>_('Processing..'))  %>
+      <% else %>
+        <%= submit_tag _('Add') , :disable_with=>_('Processing..') %>
       <% end %>
-    </select>
 
-    <% if @other_providers.size == 0 %>
-      <%= submit_tag( _('Add'), :disabled => "1" , :disable_with=>_('Processing..'))  %>
-    <% else %>
-      <%= submit_tag _('Add') , :disable_with=>_('Processing..') %>
-    <% end %>
-
-  </div>
+    </div>
+  <% end %>
 <% end %>
 
 
