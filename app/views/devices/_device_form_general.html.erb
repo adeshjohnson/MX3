@@ -311,7 +311,7 @@
             <tr>
               <td colspan=2>
                 <br />
-                <%= render :partial => 'pdffaxemails' %>
+                <%= render :partial => 'pdffaxemails' if params[:action] != 'default_device' %>
               </td>
             </tr>
           <%end%>
