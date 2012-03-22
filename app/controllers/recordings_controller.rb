@@ -77,6 +77,10 @@ class RecordingsController < ApplicationController
 
     #calls2recordings
     change_date
+
+    from_t = session[:current_user_time_from]
+    till_t = session[:current_user_time_till]
+
     @page = 1
     @page = params[:page].to_i if params[:page]
     @from = ((@page-1) * session[:items_per_page]).to_i
@@ -85,12 +89,12 @@ class RecordingsController < ApplicationController
     #@recs = Recording.find(:all, :conditions => ["SUBSTRING(datetime,1,10) BETWEEN ? AND ? AND (src_device_id = ? OR dst_device_id = ?)",session_from_date,session_till_date, @device.id, @device.id], :order => "datetime DESC")
 
     #    sql = "SELECT * FROM recordings WHERE SUBSTRING(datetime,1,10) BETWEEN '#{session_from_date}' AND '#{session_till_date}' AND (src_device_id = '#{@device.id}' OR dst_device_id = '#{@device.id}') ORDER BY datetime DESC "
-    sql = "SELECT recordings.*, providers.name AS provider_name FROM recordings LEFT JOIN calls ON recordings.call_id = calls.id LEFT JOIN providers ON providers.id = calls.provider_id WHERE DATE(recordings.datetime) BETWEEN '#{session_from_date}' AND '#{session_till_date}' AND (recordings.src_device_id = '#{@device.id}' OR recordings.dst_device_id = '#{@device.id}') ORDER BY recordings.datetime DESC LIMIT #{@from}, #{@to}"
+    sql = "SELECT recordings.*, providers.name AS provider_name FROM recordings LEFT JOIN calls ON recordings.call_id = calls.id LEFT JOIN providers ON providers.id = calls.provider_id WHERE DATE(recordings.datetime) BETWEEN '#{from_t}' AND '#{till_t}' AND (recordings.src_device_id = '#{@device.id}' OR recordings.dst_device_id = '#{@device.id}') ORDER BY recordings.datetime DESC LIMIT #{@from}, #{@to}"
 
     my_debug sql
     
     @recs = Recording.find_by_sql(sql)
-    @total_pages = Recording.count(:all, :conditions=>"DATE(datetime) BETWEEN '#{session_from_date}' AND '#{session_till_date}' AND (src_device_id = '#{@device.id}' OR dst_device_id = '#{@device.id}')")
+    @total_pages = Recording.count(:all, :conditions=>"DATE(datetime) BETWEEN '#{from_t}' AND '#{till_t}' AND (src_device_id = '#{@device.id}' OR dst_device_id = '#{@device.id}')")
     @total_pages = @total_pages / session[:items_per_page]
     @page_select_options = {:action=>'show', :controller=>"recordings", :show_rec=>@s_dev}
     @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend? )

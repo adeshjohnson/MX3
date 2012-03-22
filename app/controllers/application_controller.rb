@@ -470,6 +470,15 @@ class ApplicationController < ActionController::Base
     if Time.parse(session_from_datetime) > Time.parse(session_till_datetime)
       flash[:notice] = _("Date_from_greater_thant_date_till")
     end
+    current_user_session_time
+  end
+
+  def current_user_session_time
+    cust_from = Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from])
+    cust_till = Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till])
+
+    session[:current_user_time_from]=current_user.system_time(cust_from)
+    session[:current_user_time_till]=current_user.system_time(cust_till)
   end
 
   def change_date_no_offset
