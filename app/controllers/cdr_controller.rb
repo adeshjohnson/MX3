@@ -464,14 +464,15 @@ class CdrController < ApplicationController
           one_old_user_price = 0
           one_reseller_price = 0
           one_old_reseller_price = 0
+          one_old_provider_price = 0
 
           for call in @calls
             provider = providers_cache["p_#{call.provider_id}".to_sym] ||= Provider.find(:first, :include => [:tariff], :conditions => ["providers.id = ?", call.provider_id])
-            if provider and provider.user_id == current_user.get_corrected_owner_id
+            if provider and  provider.user_id == current_user.get_corrected_owner_id
 
               one_old_user_price += call.user_price.to_f
               one_old_reseller_price += call.reseller_price.to_f
-
+              one_old_provider_price += call.provider_price.to_f
 
               call = call.count_cdr2call_details(provider.tariff, @user, test_tariff_id) if provider and call.user_id
 
@@ -487,6 +488,7 @@ class CdrController < ApplicationController
             else
               one_user_price += 0.to_f
               one_reseller_price += 0.to_f
+              one_old_provider_price += 0.to_f
 
               @billsec += call.billsec
               @provider_price += 0.to_f
@@ -495,6 +497,10 @@ class CdrController < ApplicationController
 
           @reseller_price += one_reseller_price
           @user_price += one_user_price
+
+          @old_provider_price +=  one_old_provider_price.to_f
+          @old_reseller_price += one_old_reseller_price.to_f
+          @old_user_price += one_old_user_price.to_f
 
           #update prepaid user balance  (why only prepaid? - postpaid should be also edited)
           #if @user.postpaid == 0
