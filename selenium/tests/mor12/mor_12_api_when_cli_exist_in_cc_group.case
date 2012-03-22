@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.95" />
+<link rel="selenium.base" href="" />
 <title>mor_12_api_when_cli_exist_in_cc_group</title>
 </head>
 <body>
@@ -991,7 +991,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>css=id</td>
-	<td>8</td>
+	<td>12</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -1004,19 +1004,19 @@
 	<td>20.1681</td>
 </tr>
 <tr>
-	<td>verifyNotText</td>
+	<td>verifyText</td>
 	<td>css=callerid</td>
 	<td>6666</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>css=pin</td>
-	<td>6930</td>
+	<td>3996</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>css=number</td>
-	<td>1111111007</td>
+	<td>1111111011</td>
 </tr>
 <!--hash #7, cg=3, cli=7777, amount=50, pin=${pin3}-->
 <tr>
@@ -1032,7 +1032,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>css=id</td>
-	<td>24</td>
+	<td>30</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -1045,7 +1045,7 @@
 	<td>0.0000</td>
 </tr>
 <tr>
-	<td>verifyNotText</td>
+	<td>verifyText</td>
 	<td>css=callerid</td>
 	<td>7777</td>
 </tr>
@@ -1157,7 +1157,7 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>css=#sold_30 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td>css=#sold_24 &gt; img[alt=&quot;Cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1173,7 +1173,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>id=balance_8</td>
-	<td>20.1681</td>
+	<td>0.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -1183,11 +1183,11 @@
 <tr>
 	<td>verifyText</td>
 	<td>id=balance_12</td>
-	<td>0.0000</td>
+	<td>20.1681</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>css=#sold_12 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td>css=#sold_8 &gt; img[alt=&quot;Cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1539,7 +1539,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>css=id</td>
-	<td>24</td>
+	<td>30</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -1550,6 +1550,11 @@
 	<td>verifyText</td>
 	<td>css=balance</td>
 	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=callerid</td>
+	<td>7777</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1913,6 +1918,28 @@
 	<td>css=body</td>
 	<td>hashre1</td>
 </tr>
+<!--hash #10cli=4444, amount=100-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?callerid=4444&amp;amount=100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash10</td>
+</tr>
+<!--hash #11 cli=4444, amount=100, pin=7856(card=1)-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?callerid=4444&amp;amount=100&amp;pin=7856</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash11</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -1963,7 +1990,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>css=id</td>
-	<td>31</td>
+	<td>33</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -1976,14 +2003,14 @@
 	<td>26.6667</td>
 </tr>
 <tr>
-	<td>verifyNotText</td>
+	<td>verifyText</td>
 	<td>css=callerid</td>
 	<td>08080808</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>css=number</td>
-	<td>1111111114</td>
+	<td>1111111116</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -2022,13 +2049,110 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=balance_31</td>
-	<td>26.6667</td>
+	<td>id=callerid_33</td>
+	<td>08080808</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>id=balance_33</td>
+	<td>26.6667</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=balance_31</td>
 	<td>0.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--hash #10cli=4444, amount=100-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/cc_by_cli?u=admin&amp;p=admin1&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=${hash10}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=balance</td>
+	<td>310.0840</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=callerid</td>
+	<td>4444</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=pin</td>
+	<td>7856</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=number</td>
+	<td>1111111000</td>
+</tr>
+<!--hash #11 cli=4444, amount=100, pin=7856(card=1)-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/cc_by_cli?u=admin&amp;p=admin1&amp;callerid=4444&amp;amount=100&amp;pin=7856&amp;test=1&amp;hash=${hash11}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>PIN number not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=1&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[@id='number_1']</td>
+	<td>1111111000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[@id='pin_1']</td>
+	<td>7856</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=callerid_1</td>
+	<td>4444</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[@id='balance_1']</td>
+	<td>310.0840</td>
 </tr>
 </tbody></table>
 </body>
