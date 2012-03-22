@@ -72,6 +72,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Add new Action</td>
 	<td></td>
@@ -82,14 +87,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>id=action_1</td>
-	<td></td>
+	<td>waitForSelectOptions</td>
+	<td>id=change_action_1</td>
+	<td>Playback,Change Voice,Delay,Hangup,Transfer To,Debug,Set Accountcode,Change CallerID (Number)</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=option[value=&quot;Transfer To&quot;]</td>
 	<td></td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=change_action_1</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -107,9 +117,29 @@
 	<td>blur</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForSelectedLabel</td>
+	<td>id=change_action_1</td>
+	<td>Transfer To</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>id=action_1</td>
-	<td>IVR DID Device Block Extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectOptions</td>
+	<td>id=action_1</td>
+	<td>IVR,DID,Device,Block,Extension</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=option[value=&quot;Extension&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=action_1</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -137,11 +167,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>id=action_param_1</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyValue</td>
 	<td>id=action_param_1</td>
 	<td>1</td>
@@ -152,34 +177,9 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>id=action_param_1</td>
-	<td>s0s0s0s0s0s0</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=action_param_1</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=action_param_1</td>
-	<td>blur</td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
+	<td>focus</td>
 	<td>id=action_param_1</td>
 	<td></td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=action_param_1</td>
-	<td>w</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -187,6 +187,16 @@
 	<td>s0s0s0s0s0s0</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=action_param_1</td>
+	<td>s0s0s0s0s0s0</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=action_param_1</td>
+	<td>s0s0s0s0s0s0</td>
+</tr>
+<tr>
 	<td>keyUp</td>
 	<td>id=action_param_1</td>
 	<td>w</td>
@@ -195,6 +205,21 @@
 	<td>fireEvent</td>
 	<td>id=action_param_1</td>
 	<td>blur</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=action_param_1</td>
+	<td>s0s0s0s0s0s0</td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -211,7 +236,31 @@
 	<td>link=Manual</td>
 	<td></td>
 </tr>
-<!--<tr> 	<td>waitForTextPresent</td> 	<td>[ivr_block1] exten =&gt; s,1,NoOp(IVR_BLOCK_1_REACHED)</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>[ivr_block1] exten =&gt; s,2,Set(TIMEOUT(digit)=3)</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>[ivr_block1] exten =&gt; s,3,Set(TIMEOUT(response)=10)</td> 	<td></td> </tr>-->
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,1,NoOp(IVR_BLOCK_1_REACHED)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,2,Set(TIMEOUT(digit)=3)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,3,Set(TIMEOUT(response)=10)</td>
+	<td></td>
+</tr>
 <tr>
 	<td>waitForTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,4,Goto(mor_local|s0s0s0s0s0s0|1)</td>
@@ -238,14 +287,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>id=action_2</td>
-	<td></td>
+	<td>waitForSelectOptions</td>
+	<td>id=change_action_2</td>
+	<td>Playback,Change Voice,Delay,Hangup,Transfer To,Debug,Set Accountcode,Change CallerID (Number)</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=#change_action_2 &gt; option[value=&quot;Transfer To&quot;]</td>
 	<td></td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=change_action_2</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -263,9 +317,24 @@
 	<td>blur</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForSelectedLabel</td>
+	<td>id=change_action_2</td>
+	<td>Transfer To</td>
+</tr>
+<tr>
+	<td>waitForSelectOptions</td>
 	<td>id=action_2</td>
-	<td>IVR DID Device Block Extension</td>
+	<td>IVR,DID,Device,Block,Extension</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#action_2 &gt; option[value=&quot;Extension&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=action_2</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -283,14 +352,14 @@
 	<td>blur</td>
 </tr>
 <tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=action_2</td>
+	<td>Extension</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>id=action_param_2</td>
 	<td></td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=action_param_2</td>
-	<td>w</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -298,7 +367,27 @@
 	<td>1</td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>keyDown</td>
+	<td>id=action_param_2</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>id=action_param_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=action_param_2</td>
+	<td>0101010101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=action_param_2</td>
+	<td>0101010101</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
 	<td>id=action_param_2</td>
 	<td>0101010101</td>
 </tr>
@@ -313,49 +402,24 @@
 	<td>blur</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=action_param_2</td>
+	<td>0101010101</td>
+</tr>
+<tr>
 	<td>refreshAndWait</td>
 	<td></td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>id=action_param_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=action_param_1</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=action_param_2</td>
-	<td>10101010101</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=action_param_2</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=action_param_2</td>
-	<td>blur</td>
-</tr>
-<tr>
 	<td>waitForValue</td>
 	<td>id=action_param_2</td>
-	<td>10101010101</td>
-</tr>
-<tr>
-	<td>verifyValue</td>
-	<td>id=action_param_2</td>
-	<td>10101010101</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=action_param_2</td>
-	<td>blur</td>
+	<td>0101010101</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -363,8 +427,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>IVR Extlines</td>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
 	<td></td>
 </tr>
 <tr>
@@ -374,7 +448,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>[ivr_block1] exten =&gt; s,5,Goto(mor_local|10101010101|1)</td>
+	<td>[ivr_block1] exten =&gt; s,5,Goto(mor_local|0101010101|1)</td>
 	<td></td>
 </tr>
 <tr>
@@ -388,7 +462,22 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>focus</td>
+	<td>id=action_param_1</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
+	<td>id=action_param_1</td>
+	<td>riririririririririririr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=action_param_1</td>
+	<td>riririririririririririr</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
 	<td>id=action_param_1</td>
 	<td>riririririririririririr</td>
 </tr>
@@ -403,8 +492,43 @@
 	<td>blur</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=action_param_1</td>
+	<td>riririririririririririr</td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=action_param_1</td>
+	<td>riririririririririririr</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/ivr/ivr_extlines?block_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
 	<td></td>
 </tr>
 <tr>
@@ -414,7 +538,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>[ivr_block1] exten =&gt; s,5,Goto(mor_local|10101010101|1)</td>
+	<td>[ivr_block1] exten =&gt; s,5,Goto(mor_local|0101010101|1)</td>
 	<td></td>
 </tr>
 <tr>
@@ -464,145 +588,20 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/ivr/new</td>
+	<td>/billing/test/load_delta_sql/sql/ivr_list</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=ivr_name</td>
-	<td>aaaaivrs</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>IVR created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/ivr/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=ivr_name</td>
-	<td>baaaivrs</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>IVR created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/ivr/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=ivr_name</td>
-	<td>abaaivrs</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>IVR created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/ivr/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=ivr_name</td>
-	<td>zaaaivrs</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>IVR created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/ivr/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=ivr_name</td>
-	<td>aaaaiv rs</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>IVR created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/ivr/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=ivr_name</td>
-	<td>!&amp; aaaaivrs</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>IVR created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/ivr/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=ivr_name</td>
-	<td>aaa aivrs</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>IVR created</td>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
 	<td></td>
 </tr>
 <!--Testuojamas rikiavimas tr/td palikti specialiai, nes nėra puslapiavimo-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
 <tr>
 	<td>verifyText</td>
 	<td>css=tr.row1 &gt; td</td>

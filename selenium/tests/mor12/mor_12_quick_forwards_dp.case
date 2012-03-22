@@ -219,6 +219,7 @@
 	<td>id=cb_add</td>
 	<td></td>
 </tr>
+<!--CREATE NEW ONE-->
 <tr>
 	<td>clickAndWait</td>
 	<td>id=cb_add</td>
@@ -235,9 +236,14 @@
 	<td>qf_dp</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>verifySelectOptions</td>
 	<td>id=quickforwards_user</td>
-	<td>Not used System Admin (0) Test Accountant (4) Test Reseller (3) Test User #1 (2)</td>
+	<td>Not used,System Admin (0),Test Accountant (4),Test Reseller (3),Test User #1 (2)</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=quickforwards_user</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -255,14 +261,24 @@
 	<td>blur</td>
 </tr>
 <tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=quickforwards_user</td>
+	<td>Test User #1 (2)</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>waitForSelectOptions</td>
 	<td>name=users_device</td>
-	<td>Not used IAX2/101 FAX/102 IAX2/1002</td>
+	<td>Not used,IAX2/101,FAX/102,IAX2/1002</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#quickforwards_device &gt; #users_device &gt; option[value=&quot;3&quot;]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -285,12 +301,22 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>verifyNotEditable</td>
+	<td>fireEvent</td>
+	<td>id=data10</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=data10</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>waitForNotEditable</td>
 	<td>id=quickforwards_user</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotEditable</td>
+	<td>waitForNotEditable</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
@@ -355,6 +381,16 @@
 	<td>qf_dp2</td>
 </tr>
 <tr>
+	<td>verifySelectOptions</td>
+	<td>id=quickforwards_user</td>
+	<td>Not used,System Admin (0),Test Accountant (4),Test Reseller (3),Test User #1 (2)</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=quickforwards_user</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=quickforwards_user</td>
 	<td>label=Test Accountant (4)</td>
@@ -370,12 +406,27 @@
 	<td>blur</td>
 </tr>
 <tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=quickforwards_user</td>
+	<td>Test Accountant (4)</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>waitForSelectOptions</td>
+	<td>name=users_device</td>
+	<td>Not used</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#quickforwards_device &gt; #users_device &gt; option</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
 	<td>name=users_device</td>
 	<td>Not used</td>
 </tr>
@@ -395,24 +446,9 @@
 	<td>qf_dp2</td>
 </tr>
 <tr>
-	<td>keyDown</td>
+	<td>verifySelectOptions</td>
 	<td>id=quickforwards_user</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=quickforwards_user</td>
-	<td>label=System Admin (0)</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=quickforwards_user</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=quickforwards_user</td>
-	<td>blur</td>
+	<td>Not used,System Admin (0),Test Accountant (4),Test Reseller (3),Test User #1 (2)</td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -433,6 +469,11 @@
 	<td>fireEvent</td>
 	<td>id=quickforwards_user</td>
 	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=quickforwards_user</td>
+	<td>System Admin (0)</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -440,9 +481,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>name=users_device</td>
 	<td>Not used</td>
+</tr>
+<tr>
+	<td>waitForSelectOptions</td>
+	<td>name=users_device</td>
+	<td>Not used,IAX2/103</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -547,9 +593,19 @@
 	<td>off</td>
 </tr>
 <tr>
-	<td>verifyEditable</td>
+	<td>waitForEditable</td>
 	<td>id=quickforwards_user</td>
 	<td></td>
+</tr>
+<tr>
+	<td>verifySelectOptions</td>
+	<td>id=quickforwards_user</td>
+	<td>Not used,System Admin (0),Test Accountant (4),Test Reseller (3),Test User #1 (2)</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=quickforwards_user</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -567,24 +623,29 @@
 	<td>blur</td>
 </tr>
 <tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=quickforwards_user</td>
+	<td>Test User #1 (2)</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>id=users_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectOptions</td>
+	<td>id=users_device</td>
+	<td>Not used,IAX2/101,FAX/102,IAX2/1002</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#users_device &gt; option[value=&quot;4&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=users_device</td>
 	<td>label=IAX2/1002</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=quickforwards_user</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=quickforwards_user</td>
-	<td>blur</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -602,21 +663,20 @@
 	<td></td>
 </tr>
 <tr>
-	<td>refreshAndWait</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForValue</td>
 	<td>name=dialplan[name]</td>
 	<td>qf_dp2</td>
+</tr>
+<tr>
+	<td>verifySelectOptions</td>
+	<td>id=quickforwards_user</td>
+	<td>Not used,System Admin (0),Test Accountant (4),Test Reseller (3),Test User #1 (2)</td>
 </tr>
 <tr>
 	<td>waitForSelectedLabel</td>
 	<td>id=quickforwards_user</td>
 	<td>System Admin (0)</td>
 </tr>
-<!--šio device dropdowno neranda testinė sistema-->
 <tr>
 	<td>waitForSelectedLabel</td>
 	<td>id=users_device</td>
@@ -643,12 +703,12 @@
 	<td>on</td>
 </tr>
 <tr>
-	<td>verifyNotEditable</td>
+	<td>waitForNotEditable</td>
 	<td>id=quickforwards_user</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotEditable</td>
+	<td>waitForNotEditable</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
@@ -898,9 +958,14 @@
 	<td>qf_dp_re</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>verifySelectOptions</td>
 	<td>id=quickforwards_user</td>
-	<td>Not used Test Reseller (3) User Resellers (5)</td>
+	<td>Not used,Test Reseller (3),User Resellers (5)</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=quickforwards_user</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -918,14 +983,24 @@
 	<td>blur</td>
 </tr>
 <tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=quickforwards_user</td>
+	<td>Test Reseller (3)</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>waitForSelectOptions</td>
 	<td>name=users_device</td>
-	<td>Not used IAX2/104</td>
+	<td>Not used,IAX2/104</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=option[value=&quot;6&quot;]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -948,12 +1023,12 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>verifyNotEditable</td>
+	<td>waitForNotEditable</td>
 	<td>id=quickforwards_user</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotEditable</td>
+	<td>waitForNotEditable</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
@@ -1018,6 +1093,16 @@
 	<td>qf_dp2</td>
 </tr>
 <tr>
+	<td>verifySelectOptions</td>
+	<td>id=quickforwards_user</td>
+	<td>Not used,Test Reseller (3),User Resellers (5)</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=quickforwards_user</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=quickforwards_user</td>
 	<td>label=Test Reseller (3)</td>
@@ -1033,12 +1118,27 @@
 	<td>blur</td>
 </tr>
 <tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=quickforwards_user</td>
+	<td>Test Reseller (3)</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>waitForSelectOptions</td>
+	<td>name=users_device</td>
+	<td>Not used,IAX2/104</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#quickforwards_device &gt; #users_device &gt; option</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
 	<td>name=users_device</td>
 	<td>Not used</td>
 </tr>
@@ -1058,6 +1158,16 @@
 	<td>qf_dp2</td>
 </tr>
 <tr>
+	<td>verifySelectOptions</td>
+	<td>id=quickforwards_user</td>
+	<td>Not used,Test Reseller (3),User Resellers (5)</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=quickforwards_user</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=quickforwards_user</td>
 	<td>label=Test Reseller (3)</td>
@@ -1073,8 +1183,23 @@
 	<td>blur</td>
 </tr>
 <tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=quickforwards_user</td>
+	<td>Test Reseller (3)</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>name=users_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectOptions</td>
+	<td>name=users_device</td>
+	<td>Not used,IAX2/104</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=option[value=&quot;6&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1098,6 +1223,16 @@
 	<td>qf_dp2</td>
 </tr>
 <tr>
+	<td>verifySelectOptions</td>
+	<td>id=quickforwards_user</td>
+	<td>Not used,Test Reseller (3),User Resellers (5)</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=quickforwards_user</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=quickforwards_user</td>
 	<td>label=User Resellers (5)</td>
@@ -1113,8 +1248,23 @@
 	<td>blur</td>
 </tr>
 <tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=quickforwards_user</td>
+	<td>User Resellers (5)</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>name=users_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectOptions</td>
+	<td>name=users_device</td>
+	<td>Not used,IAX2/105</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=option[value=&quot;7&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1238,6 +1388,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifySelectOptions</td>
+	<td>id=quickforwards_user</td>
+	<td>Not used,Test Reseller (3),User Resellers (5)</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=quickforwards_user</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=quickforwards_user</td>
 	<td>label=Test Reseller (3)</td>
@@ -1253,8 +1413,23 @@
 	<td>blur</td>
 </tr>
 <tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=quickforwards_user</td>
+	<td>Test Reseller (3)</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>id=users_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectOptions</td>
+	<td>id=users_device</td>
+	<td>Not used,IAX2/104</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=option[value=&quot;6&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1288,6 +1463,11 @@
 	<td>qf_dp2</td>
 </tr>
 <tr>
+	<td>verifySelectOptions</td>
+	<td>id=quickforwards_user</td>
+	<td>Not used,Test Reseller (3),User Resellers (5)</td>
+</tr>
+<tr>
 	<td>verifySelectedLabel</td>
 	<td>id=quickforwards_user</td>
 	<td>User Resellers (5)</td>
@@ -1297,16 +1477,15 @@
 	<td>id=data10</td>
 	<td>off</td>
 </tr>
-<!--šio device dropdowno neranda testinė sistema-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>id=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForSelectOptions</td>
 	<td>id=users_device</td>
-	<td></td>
+	<td>Not used,IAX2/105</td>
 </tr>
 <tr>
 	<td>waitForSelectedLabel</td>
@@ -1354,12 +1533,12 @@
 	<td>on</td>
 </tr>
 <tr>
-	<td>verifyNotEditable</td>
+	<td>waitForNotEditable</td>
 	<td>id=quickforwards_user</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotEditable</td>
+	<td>waitForNotEditable</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
