@@ -2,6 +2,7 @@
 <html>
   <head>
     <title><%=  session[:admin_browser_title] %></title>
+    <script type="text/javascript">var mor_web_dir = '<%=Web_Dir%>';</script>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", :debug=>true %>
     <%= csrf_meta_tags %>
@@ -9,6 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
   <body>
+
     <%= javascript_include_tag "wz_tooltip" %>
     <table width="100%">
       <tr class="header_spacer">

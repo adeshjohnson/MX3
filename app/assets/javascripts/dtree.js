@@ -22,6 +22,7 @@
 
 
 
+
 // Node object
 
 function Node(id, pid, name, url, title, target, icon, iconOpen, open) {
@@ -86,33 +87,33 @@ function dTree(objName) {
 
 	this.icon = {
 
-		root				: '<%=Web_Dir%>/assets/dtree/base.gif',
+		root				: mor_web_dir + '/assets/dtree/base.gif',
 
-		folder			: '<%=Web_Dir%>/assets/dtree/folder.gif',
+		folder			: mor_web_dir + '/assets/dtree/folder.gif',
 
-		folderOpen	: '<%=Web_Dir%>/assets/dtree/folderopen.gif',
+		folderOpen	: mor_web_dir + '/assets/dtree/folderopen.gif',
 
-		node				: '<%=Web_Dir%>/assets/dtree/page.gif',
+		node				: mor_web_dir + '/assets/dtree/page.gif',
 
-		empty				: '<%=Web_Dir%>/assets/dtree/empty.gif',
+		empty				: mor_web_dir + '/assets/dtree/empty.gif',
 
-		line				: '<%=Web_Dir%>/assets/dtree/line.gif',
+		line				: mor_web_dir + '/assets/dtree/line.gif',
 
-		join				: '<%=Web_Dir%>/assets/dtree/join.gif',
+		join				: mor_web_dir + '/assets/dtree/join.gif',
 
-		joinBottom	: '<%=Web_Dir%>/assets/dtree/joinbottom.gif',
+		joinBottom	: mor_web_dir + '/assets/dtree/joinbottom.gif',
 
-		plus				: '<%=Web_Dir%>/assets/dtree/plus.gif',
+		plus				: mor_web_dir + '//assets/dtree/plus.gif',
 
-		plusBottom	: '<%=Web_Dir%>/assets/dtree/plusbottom.gif',
+		plusBottom	: mor_web_dir + '/assets/dtree/plusbottom.gif',
 
-		minus				: '<%=Web_Dir%>/assets/dtree/minus.gif',
+		minus				: mor_web_dir + '/assets/dtree/minus.gif',
 
-		minusBottom	: '<%=Web_Dir%>/assets/dtree/minusbottom.gif',
+		minusBottom	: mor_web_dir + '/assets/dtree/minusbottom.gif',
 
-		nlPlus			: '<%=Web_Dir%>/assets/dtree/nolines_plus.gif',
+		nlPlus			: mor_web_dir + '/assets/dtree/nolines_plus.gif',
 
-		nlMinus			: '<%=Web_Dir%>/assets/dtree/nolines_minus.gif'
+		nlMinus			: mor_web_dir + '/assets/dtree/nolines_minus.gif'
 
 	};
 
