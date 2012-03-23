@@ -1,6 +1,6 @@
 <br>
 
-<%= b_info + _('Server_notice') %>
+<%= raw b_info + _('Server_notice').html_safe %>
 
 <br><br>
 <%= form_tag :action => 'server_add' do %>

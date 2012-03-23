@@ -58,7 +58,7 @@
   <br /><br />
   <b><%= _('For_providers') %></b> - <%= _('Inbound_traffic') %>
   <br /><br />
-  <%= b_info + _('Provider_tariffs_explained') %>
+  <%= b_info + _('Provider_tariffs_explained').html_safe %>
 
   <br /><br />
 
@@ -120,7 +120,7 @@
   <br />
   <b><%= _('For_users') %></b> - <%= _('Outbound_traffic') %>
   <br /><br />
-  <%= b_info + _('User_tariffs_explained') %>
+  <%= b_info + _('User_tariffs_explained').html_safe %>
 
   <br /><br /><br />
 

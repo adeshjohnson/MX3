@@ -1,0 +1,66 @@
+<% if !@hide_locations %>
+<table width="100%" class="simple">
+
+  <tr class="row2">
+    <th align="left"><%= _('Localization') %></th>
+    <th align="right" width="20%"></th>
+  </tr>
+
+
+  <tr class="row1">
+    <td><%= _('Location') %>:</td>
+    <td align="right" id="location"><%= location %> </td>
+  </tr>
+
+  <tr class="row2">
+    <td><%= _('Applied_rule') %>:</td>
+    <td align="right" id="applied_rule"><%=  loc_rule %> </td>
+  </tr>
+
+  <tr class="row1">
+    <td><%= _('Cut') %>:</td>
+    <td align="right" id="cut"><%=  loc_cut %> </td>
+  </tr>
+
+  <tr class="row2">
+    <td><%= _('Add') %>:</td>
+    <td align="right" id="add"><%= loc_add %> </td>
+  </tr>
+
+  <tr class="row1">
+    <td><%= _('Localized_destination') %>:</td>
+    <td align="right" id="localized_destination"><%= loc_dst %> </td>
+  </tr>
+
+  <tr class="row2">
+    <td><%= _('Direction') %>:</td>
+    <td align="right" id="direction"><%= direction_name %> </td>
+  </tr>
+
+  <tr class="row1">
+    <td><%= _('Destination_group') %>:</td>
+    <td align="right" id="direction_group"><%= destination_group_name %> </td>
+  </tr>
+
+  <% if old_lcr %>
+    <tr class="row2">
+      <td><%= _('LCR_changed_from') %> <b><%= old_lcr.name %></b> <%= _('to') %>:</td>
+      <td id="lcr_changed_from_to" align="right"><%= new_lcr.name %> </td>
+    </tr>
+  <% end %>
+
+  <% if old_u_tariff %>
+    <tr class="row1">
+      <td><%= _('Tariff_changed_from') %> <b><%= old_u_tariff.name %></b> <%= _('to') %>:</td>
+      <td align="right" id="tariff_changed_from"><%= u_tariff.name %> </td>
+    </tr>
+  <% end %>
+
+    <% if old_device %>
+     <tr class="row2">
+      <td><%= _('Device_changed_from') %> <b><%= old_device.device_type %>/<%= old_device.name %></b> <%= _('to') %>:</td>
+      <td align="right" id="device_changed_from"><%= new_device.device_type if new_device %>/<%= new_device.name if new_device %> </td>
+    </tr>
+    <%end%>
+</table>
+<%end%>

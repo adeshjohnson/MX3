@@ -24,9 +24,7 @@
             <% end %>
           </select>
           <%= observe_field("s_user", :frequency => 0.5, :update   => "user_devices", :url=> {:controller=>"devices", :action => "cli_user_devices" }, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
-
-          <%= "<div id = 'user_devices'>" %>
-          <%= "</div>" %>
+          <div id = 'user_devices'></div>
           <br />
           <br />
           <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
@@ -44,7 +42,7 @@
 
 <% if @total_pages > 1 %>
   <br />
-  <%= render :partial => "page_select_header" %>
+  <%=raw  render :partial => "page_select_header" %>
 <% end %>
 
 <br />

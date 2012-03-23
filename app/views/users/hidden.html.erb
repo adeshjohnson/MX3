@@ -78,25 +78,25 @@
       <th colspan=14></th>
     </tr>
 
-    <% @users.each_with_index{ |@user, i| %>
-      <% @user.blocked.to_i == 0 ? text_class="n" : text_class="n_disabled" %>
+    <% @users.each_with_index{ |user, i| %>
+      <% user.blocked.to_i == 0 ? text_class="n" : text_class="n_disabled" %>
 
       <tr class="row<%= (i % 2 + 1).to_s %>">
-        <td id="id_<%= @user.id %>" align="left" class="<%= text_class %>"> <%= h @user.id %>      </td>
-        <td id="username_<%= @user.id %>" align="left" class="<%= text_class %>"> <%= h @user.username %>      </td>
+        <td id="id_<%= user.id %>" align="left" class="<%= text_class %>"> <%= h user.id %>      </td>
+        <td id="username_<%= user.id %>" align="left" class="<%= text_class %>"> <%= h user.username %>      </td>
         <%if ['admin', 'accountant'].include?(current_user.usertype)%>
-          <td id="usertype_<%= @user.id %>" align="left" class="<%= text_class %>"> <%= h @user.usertype %>      </td>
+          <td id="usertype_<%= user.id %>" align="left" class="<%= text_class %>"> <%= h user.usertype %>      </td>
         <% end %>
-        <td id="name_<%= @user.id %>" align="left" class="<%= text_class %>"> <%= in_place_editor_field :user, :first_name %> <%= in_place_editor_field :user, :last_name %>      </td>
+        <td id="name_<%= user.id %>" align="left" class="<%= text_class %>"> <%= user.first_name %> <%= user.last_name %>      </td>
 
-        <td id="postpaid_<%= @user.id %>" align="left" class="<%= text_class %>">
-          <%= _('Prepaid') if @user.postpaid != 1 %>  <%= _('Postpaid') if @user.postpaid == 1 %>
+        <td id="postpaid_<%= user.id %>" align="left" class="<%= text_class %>">
+          <%= _('Prepaid') if user.postpaid != 1 %>  <%= _('Postpaid') if user.postpaid == 1 %>
         </td>
         <% if can_see_finances? -%>
-          <td id="balance_<%= @user.id %>" align="right" class="<%= text_class %>"> <%= nice_number @user.balance %> </td>
+          <td id="balance_<%= user.id %>" align="right" class="<%= text_class %>"> <%= nice_number user.balance %> </td>
         <% end -%>
 
-        <%= render :partial => "/layouts/user_buttons", :locals => {:user => @user} %>
+        <%= render :partial => "/layouts/user_buttons", :locals => {:user => user} %>
       </tr>
     <% } %>
   </table>

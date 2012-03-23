@@ -39,9 +39,9 @@
             <%= link_to("<<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back100, :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device=>@search_device}, {:title => "-100"}) if back100 %>
             <%= link_to("<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back10, :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device=>@search_device}, {:title => "-20"}) if back10 %>
             <% for p in pstart..pend %>
-                <%= "<b>" if p == @page%>
+                <%=raw  "<b>" if p == @page%>
                     <%= link_to p, :action => params[:action], :id => @page_select_header_id, :st => @st, :page => p, :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device=>@search_device%>
-                <%= "</b>" if p == @page%>
+                <%=raw  "</b>" if p == @page%>
             <% end %>
             <%= link_to(">", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw10, :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device=>@search_device}, {:title => "+20"}) if forw10 %>
             <%= link_to(">>", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw100, :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device=>@search_device}, {:title => "+100"}) if forw100 %>

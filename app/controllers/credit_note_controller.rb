@@ -176,8 +176,7 @@ private
   +credit_note_count+ number of notes that were found for current user
 =end
   def credit_notes_count
-    condition = credit_note_conditions
-    CreditNote.count(:all, :include => :user, :conditions => condition.join(' AND '))
+    CreditNote.includes(:user).where(credit_note_conditions.join(' AND ')).all.size
   end
 
 =begin
@@ -209,9 +208,9 @@ private
 =end
   def credit_note_conditions
     if current_user.is_accountant?
-      condition = ["owner_id IN (0, #{current_user.id})"]
+      condition = ["users.owner_id IN (0, #{current_user.id})"]
     elsif current_user.is_reseller? or current_user.is_admin?
-      condition = ["owner_id = #{current_user.id}"]
+      condition = ["users.owner_id = #{current_user.id}"]
     end
     
     options = search_options

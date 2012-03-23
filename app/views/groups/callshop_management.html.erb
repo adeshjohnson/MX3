@@ -1,0 +1,107 @@
+<div align="left" class="nb">
+ <%= form_tag(:action => 'callshop_management') do %>
+     <%= _('From') %>: <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+     &nbsp;&nbsp;<%= _('to') %>: <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+     &nbsp;&nbsp;<%= submit_tag _('Change_date'), :disable_with=>_('Processing..')%>
+<% end %>
+</div>
+
+<br>
+
+<div align="center">
+<table width="100%" class="maintable" %>
+  <tr>
+
+    <th align="left">        <%= _('Username') %>    </th>
+    <th align="left">        <%= _('User') %>    </th>
+    <th align="center">        <%= _('Postpaid') %>    </th>
+    <th align="right">        <%= _('Balance') %>    </th>    
+    <th align="right">        <%= _('Credit') %>    </th>    
+    <th align="right">   <%= _('Calls') %>  </th>
+    <th align="center">   <%= _('Duration') %>  </th>
+    <th align="center">  <%= _('Login') %> </th>
+    <th align="center" >  <%= _('Login_Duration') %> </th>
+
+    <th align="left">     </th>
+    <th align="left">     </th>
+    <th align="left">     </th>
+  </tr>
+
+<%
+    @t_balance = 0
+    @t_credit = 0
+    @t_calls = 0
+    @t_billsec = 0
+%>
+    
+
+<% i = 0 %>  
+<% for member in @group.simple_users %>
+
+    <% if member.logged == 1 %>
+      	<% text_class="n" %>
+    <% else %>
+      	<% text_class="n_disabled" %>    
+    <% end %>
+
+  <tr class="row<%= (i % 2 + 1).to_s %>">
+
+     <td class="<%= text_class %>"> <%= member.username %>   </td>    
+     <td class="<%= text_class %>"> <%= member.first_name %> <%= member.last_name %>       </td>
+     
+     <td class="<%= text_class %>" align="center"> <%= _('Yes') if member.postpaid == 1%><%= _('No') if member.postpaid == 0 %>      </td>      
+     <td class="<%= text_class %>" align="right"> <%= nice_number member.balance %>      </td>     
+     <td class="<%= text_class %>" align="right"> <%= nice_number member.credit if member.credit != (-1)%><%= _('Unlimited') if member.credit == (-1)%>      </td>     
+     
+     <td align="right" class="<%= text_class %>">   <%= @calls[i] %>  </td>
+     <td align="center" class="<%= text_class %>">  <%= nice_time @durations[i] %>    </td>
+
+    <%
+        @t_balance += member.balance
+        @t_credit += member.credit if member.credit != (-1)
+        @t_calls += @calls[i]
+        @t_billsec += @durations[i]
+    %>
+
+<% lld = member.last_login.date if member.last_login %>
+     <td align="center" class="<%= text_class %>"> <%= link_to nice_date_time(lld), {:controller => "stats", :action => "call_list_from_link", :id => member.id, :call_type => "answered", :date_from => lld.strftime("%Y-%m-%d %H:%M:%S"), :date_till =>"time_now", :show_dst => "1"}, {:title => _('Calls_from_this_time_till_now')} if member.logged == 1 and member.last_login %>   </td>
+     <td align="center" class="<%= text_class %>"> <%= nice_time(Time.now - member.last_login.date) if member.logged == 1 and member.last_login %>   </td>
+    
+<%= form_tag(:action => 'callshop_management') do %>
+	    <td align="center" valign="middle" class="<%= text_class %>">
+
+   <%= hidden_field_tag "member", member.id %>
+
+    <% if member.logged == 1 %>
+      	<%= submit_tag _('Logout'), :disable_with=>_('Processing..')%>
+      	<%= hidden_field_tag "laction", "logout" %>
+    <% else %>
+      	<%= submit_tag _('Login'), :disable_with=>_('Processing..')%>
+      	<%= hidden_field_tag "laction", "login" %>    
+    <% end %>
+
+	    </td>
+<% end %> 
+     <td align="center" class="<%= text_class %>"> <%= link_to  _('Calls_in_period'), :controller =>  "stats", :action => "call_list", :id => member.id, :calltype => "answered", :show_dst => "1", :date_from=>@date_from, :date_till=>@date_till  %>   </td>        
+
+     <td align="center" class="<%= text_class %>"> <%= link_to b_chart_bar + _('Logins'), :controller =>  "stats", :action => "user_logins", :id => member.id %>   </td>        
+
+   </tr>
+<% i += 1%>  
+<% end %>
+
+
+    <tr>
+        <th align="left">  <%= _('Total') %>:      </th>
+        <th align="center">    </th>
+        <th align="center">    </th>
+        <th align="right">  <%= nice_number @t_balance %>      </th>
+        <th align="right">  <%= nice_number @t_credit %>      </th>
+        <th align="right">  <%=  @t_calls %>      </th>
+        <th align="center">  <%= nice_time @t_billsec %>      </th>
+
+        <th align="center" colspan=5>      </th>
+    </tr>
+
+</table>
+</div>
