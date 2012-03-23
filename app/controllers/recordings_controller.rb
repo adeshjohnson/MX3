@@ -240,10 +240,10 @@ class RecordingsController < ApplicationController
     conditions_var += [@user.id,@user.id]
 
 
-    @size = Recording.count(:conditions =>  [conditions_str.join(' AND ')] +conditions_var).to_i
+    @size = Recording.where([conditions_str.join(' AND ')] +conditions_var).count.to_i
     @items_per_page = Confline.get_value("Items_Per_Page").to_i
     @total_pages = (@size.to_f / @items_per_page.to_f).ceil
-    @recordings = Recording.find(:all,:include => :call, :conditions =>  [conditions_str.join(' AND ')] +conditions_var, :limit => @items_per_page, :offset => (@page-1)*@items_per_page, :order => "calldate DESC")
+    @recordings = Recording.includes(:call).where([conditions_str.join(' AND ')] +conditions_var).limit(@items_per_page).offset((@page-1)*@items_per_page).order("calls.calldate DESC").all
     @page_select_params = {
       :s_source => @search_source,
       :s_destination => @search_destination

@@ -1152,9 +1152,9 @@ module ApplicationHelper
 
   def sortable_list_header(true_col_name, col_header_name, options)
     link_to(
-        (b_sort_desc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 1).to_s+
+        ((b_sort_desc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 1).to_s+
             (b_sort_asc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 0).to_s+
-            col_header_name, :action => params[:action], :order_by => true_col_name.to_s, :order_desc => (options[:order_by].to_s == true_col_name ? 1 - options[:order_desc] : 1))
+            col_header_name).html_safe, :action => params[:action], :order_by => true_col_name.to_s, :order_desc => (options[:order_by].to_s == true_col_name ? 1 - options[:order_desc] : 1))
   end
 
   def remote_sortable_list_header(true_col_name, col_header_name, options)
@@ -1170,10 +1170,10 @@ module ApplicationHelper
 
   def nice_list_order(user_col_name, col_header_name, options, params_sort={})
     order_dir = (options[:order_desc].to_i == 1 ? 0 : 1)
-    link_to(
-        ((b_sort_desc if options[:order_desc].to_i== 1 and user_col_name.downcase == options[:order_by].to_s).to_s+
-            (b_sort_asc if options[:order_desc].to_i== 0 and user_col_name.downcase == options[:order_by].to_s).to_s+
-            _(col_header_name.to_s)).html_safe, {:action => params[:action], :order_by => user_col_name, :order_desc => order_dir}.merge(params_sort), {:id => "#{user_col_name}_#{order_dir}"})
+    raw link_to(
+        ((b_sort_desc if options[:order_desc].to_i== 1 and user_col_name.downcase == options[:order_by].to_s).to_s.html_safe+
+            (b_sort_asc if options[:order_desc].to_i== 0 and user_col_name.downcase == options[:order_by].to_s).to_s.html_safe+
+            _(col_header_name.to_s.html_safe)).html_safe, {:action => params[:action], :order_by => user_col_name, :order_desc => order_dir}.merge(params_sort), {:id => "#{user_col_name}_#{order_dir}"})
   end
 
   def link_nice_tariff_if_own(tariff)

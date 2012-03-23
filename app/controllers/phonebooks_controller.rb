@@ -16,12 +16,6 @@ class PhonebooksController < ApplicationController
     render :action => 'list'
   end
 
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-    :redirect_to => { :action => :list },
-    :add_flash => { :notice => Localization._('Dont_be_so_smart'),
-    :params => {:dont_be_so_smart => true}}
-
   def list
     @page_title = _('PhoneBook')
     @page_icon = "book.png"

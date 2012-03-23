@@ -25,9 +25,9 @@
           <%= link_to(_("First"), {:action => params[:action], :page => 1}, {:title => _("First_Page")}) if pstart > 1%>
           <%= link_to("-10", {:action => params[:action], :page => back10}, {:title => "-20"}) if back10 %>
           <% for p in pstart..pend %>
-            <%= "<b>" if p == @options[:page]%>
+            <%=raw "<b>" if p == @options[:page]%>
               <%= link_to p, :action => params[:action], :page => p%>
-            <%= "</b>" if p == @options[:page]%>
+            <%=raw "</b>" if p == @options[:page]%>
           <% end %>
           <%= link_to("+10", {:action => params[:action], :page => forw10}, {:title => "+20"}) if forw10 %>
           <%= link_to(_("Last"), {:action => params[:action], :page => @total_pages}, {:title => _("Last_Page")}) if pend < @total_pages%>

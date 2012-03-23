@@ -684,8 +684,8 @@ class Call < ActiveRecord::Base
       cond << 'calls.reseller_id = ? ' ; var << options[:s_reseller]
     end
 
-    if options[:s_direction.to_i] != -1
-      case options[:s_direction.to_s].to_s
+    if options[:s_direction] != -1
+      case options[:s_direction].to_s
       when "outgoing"
         cond << 'did_id= 0'
       when "incoming"

@@ -30,7 +30,7 @@
   <% i += 1 %>
 <% end %>
 
-<% form_for :phonebook, @phonebook, :url => { :action => 'add_new' } do |f| %>
+<%= form_for @phonebook, :url => { :action => 'add_new' } do |f| %>
   <tr>
     <th align="left">
       <%= f.text_field 'name', "class" => "input", :size => "30", :maxlength => "50"  %>

@@ -43,10 +43,7 @@
     </select>
     <%= observe_field("s_user", :update   => "user_devices", :url=> { :controller=>"devices", :action => "cli_user_devices" }, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
 
-
-    <%=      "<span id = 'user_devices'>" %>
-
-    <%=       "</span>" %>
+<span id = 'user_devices'></span>
 <% if current_user == 'admin' %>
    &nbsp;&nbsp;<%= _('Reseller') %>:
     <select name="s_reseller" id="s_reseller" >
