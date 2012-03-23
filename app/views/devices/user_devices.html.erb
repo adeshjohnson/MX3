@@ -19,7 +19,7 @@
       <% user = device.user -%>
       <td id="id_<%= device.id.to_s %>" align="left"><%= device.id %></td>
       <td id="description_<%= device.id.to_s %>" align="left"><%= b_primary_device if device.id == user.primary_device_id %><%= device.description %></td>
-      <td id="type_<%= device.id.to_s %>" align="center"><%= nice_device_type device %></td>
+      <td id="type_<%= device.id.to_s %>" align="center"><%=raw  nice_device_type device %></td>
       <td id="pin_<%= device.id.to_s %>" align="center"><%= device.pin %></td>
       <td id="extension_<%= device.id.to_s %>" align="left"><%= device.extension %></td>
       <td id="name_<%= device.id.to_s %>" align="left"><%= device.name %></td>

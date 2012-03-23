@@ -2693,7 +2693,7 @@ Variables: (Names marked with * are required)
   private
 
   def store_location
-    session[:return_to] = request.request_uri
+    session[:return_to] = request.url
   end
 
   def redirect_back_or_default(default = 'callc/main')

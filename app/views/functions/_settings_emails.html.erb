@@ -55,7 +55,7 @@
           <% # if email missing show message %>
           <% admin = current_user -%>
           <% if !admin.email.blank? %>
-            <%= link_to _('Press_to_test')+ " " + b_email_send+ " (" + _('Test_email_will_be_sent_to') + ": " + admin.email.to_s + ")"   , {:action=>'send_test_email'}, {:id => "email_test_link"} %>
+            <%=raw  link_to( (_('Press_to_test')+ " " + b_email_send+ " (" + _('Test_email_will_be_sent_to') + ": " + admin.email.to_s + ")").html_safe   , {:action=>'send_test_email'}, {:id => "email_test_link"}) %>
           <%else%>
             <%=link_to _('Cannot_send_test_email_because_your_email_address_is_empty'), :controller=>:users, :action=>:edit, :id=>session[:user_id] %>
           <%end%>

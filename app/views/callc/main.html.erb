@@ -6,14 +6,14 @@
       <br />
       <br />
 
-      <%= session[:frontpage_text].to_s %>
+      <%= raw session[:frontpage_text].to_s.html_safe %>
 
       <% if sms_active? && Confline.get_value("Send_SMS_from_Front_page").to_i == 1 && current_user.can_send_sms?%>
         <br />
         <br />
         <br />
         <br />
-        <%= session[:frontpage_sms_text] %>
+        <%= raw session[:frontpage_sms_text].to_s.html_safe %>
         <br />
         <%= render "/sms/sms"  %>
       <%end%>

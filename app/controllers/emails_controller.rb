@@ -89,9 +89,7 @@ class EmailsController < ApplicationController
     @page_title = _('Emails')
     @page_icon = "email.png"
 
-    @emails = Email.find(:all,
-      :conditions =>["owner_id= ? and (callcenter='0' or callcenter is null)", session[:user_id]],
-      :joins => "LEFT JOIN (SELECT data, data2, COUNT(*) as emails FROM actions WHERE action = 'email_sent' GROUP BY data2) as actions ON (emails.id = actions.data2)")
+    @emails = Email.select('*').where(["owner_id= ? and (callcenter='0' or callcenter is null)", session[:user_id]]).joins("LEFT JOIN (SELECT data, data2, COUNT(*) as emails FROM actions WHERE action = 'email_sent' GROUP BY data2) as actions ON (emails.id = actions.data2)").all
     @email_sending_enabled = Confline.get_value("Email_Sending_Enabled", 0).to_i == 1
     if @emails.size.to_i == 0 and session[:usertype] == "reseller"
       user=User.find(session[:user_id])

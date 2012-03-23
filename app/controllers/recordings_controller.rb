@@ -18,9 +18,9 @@ class RecordingsController < ApplicationController
   before_filter :authorize
 
   def index
-    redirect_to :action => 'list_recordings' and return false        
+    redirect_to :action => :list_recordings and return false
   end
-  
+
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy_recording, :destroy, :update, :update_recordings, :list_users_update  ],
     :redirect_to => { :controller=>:callc, :action => :main},

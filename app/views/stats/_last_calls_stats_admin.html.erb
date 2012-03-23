@@ -64,13 +64,13 @@
 <% if  @calls and @calls.size > 0 %>
   <table width="100%" class="maintable">
     <tr>
-      <th align="center" rowspan=2> &nbsp;<%=nice_list_order('time',_('Time') , @options)%></th>
-      <th align="left" rowspan=2><%=nice_list_order('src',_('called_from'), @options)%></th>
-      <th align="left" rowspan=2><%=nice_list_order('dst',_('called_to'), @options)%></th>
-      <!--<th align="left" rowspan=2><%=nice_list_order('prefix',_('Prefix_used'), @options)%></th>-->
-      <th align="center" rowspan=2><%=nice_list_order('nice_billsec', _('Duration'), @options)%></th>
-      <th align="left" rowspan=2> <%=nice_list_order('hgc', _('hangup_cause'), @options)%> </th>
-      <th align="left" rowspan=2> <%=nice_list_order('server', _('Server'), @options)%> </th>
+      <th align="center" rowspan=2> &nbsp;<%=raw nice_list_order('time',_('Time') , @options).html_safe%></th>
+      <th align="left" rowspan=2><%=raw nice_list_order('src',_('called_from'), @options)%></th>
+      <th align="left" rowspan=2><%=raw nice_list_order('dst',_('called_to'), @options)%></th>
+      <!--<th align="left" rowspan=2><%=raw nice_list_order('prefix',_('Prefix_used'), @options)%></th>-->
+      <th align="center" rowspan=2><%=raw nice_list_order('nice_billsec', _('Duration'), @options)%></th>
+      <th align="left" rowspan=2> <%=raw nice_list_order('hgc', _('hangup_cause'), @options)%> </th>
+      <th align="left" rowspan=2> <%=raw nice_list_order('server', _('Server'), @options)%> </th>
       <th align="center" colspan=<%= colspan %>>		  <%= _('Provider') %> </th>
       <% if (rs_active?) %>
         <th align="center" colspan=<%= colspan %>>		  <%= _('Reseller') %> </th>
@@ -87,28 +87,28 @@
       <% end %>
     </tr>
     <tr>
-      <th align="left"><%=nice_list_order('p_name', _('Name'), @options)%></th>
+      <th align="left"><%= raw nice_list_order('p_name', _('Name'), @options)%></th>
       <% if can_see_finances? -%>
-        <th align="left"><%=nice_list_order('p_rate', _('Rate'), @options)%></th>
-        <th align="left"><%=nice_list_order('p_price', _('Price'), @options)%></th>
+        <th align="left"><%=raw nice_list_order('p_rate', _('Rate'), @options)%></th>
+        <th align="left"><%= raw nice_list_order('p_price', _('Price'), @options)%></th>
       <% end -%>
       <% if (rs_active?) %>
-        <th align="left"><%=nice_list_order('reseller',  _('Name'), @options)%></th>
+        <th align="left"><%= raw nice_list_order('reseller',  _('Name'), @options)%></th>
         <% if can_see_finances? -%>
-          <th align="left"><%=nice_list_order('r_rate', _('Rate') , @options)%></th>
-          <th align="left"><%=nice_list_order('r_price', _('Price'), @options)%></th>
+          <th align="left"><%= raw nice_list_order('r_rate', _('Rate') , @options)%></th>
+          <th align="left"><%= raw nice_list_order('r_price', _('Price'), @options)%></th>
         <% end -%>
       <% end -%>
-      <th align="left"><%=nice_list_order('user',  _('Name'), @options)%></th>
+      <th align="left"><%= raw nice_list_order('user',  _('Name'), @options)%></th>
       <% if can_see_finances? -%>
-        <th align="left"><%=nice_list_order('u_rate', _('Rate') , @options)%></th>
-        <th align="left"><%=nice_list_order('u_price', _('Price'), @options)%></th>
+        <th align="left"><%= raw nice_list_order('u_rate', _('Rate') , @options)%></th>
+        <th align="left"><%= raw nice_list_order('u_price', _('Price'), @options)%></th>
       <% end -%>
-      <th align="left"><%=nice_list_order('number', _('Number'), @options)%></th>
+      <th align="left"><%= raw nice_list_order('number', _('Number'), @options)%></th>
       <% if can_see_finances? %>
-        <th align="left"><%=nice_list_order('d_provider',_('Provider'), @options)%></th>
-        <th align="left"><%=nice_list_order('d_inc',_('Incoming'), @options)%></th>
-        <th align="left"><%=nice_list_order('d_owner', _('Owner'), @options)%></th>
+        <th align="left"><%= raw nice_list_order('d_provider',_('Provider'), @options)%></th>
+        <th align="left"><%= raw nice_list_order('d_inc',_('Incoming'), @options)%></th>
+        <th align="left"><%= raw nice_list_order('d_owner', _('Owner'), @options)%></th>
       <% else %>
         <th></th>
         <th></th>
@@ -127,12 +127,12 @@
       did = Did.find(:first, :conditions => ["id = ?", call.did_id.to_i]) -%>
       <tr class="row<%= (i % 2 + 1).to_s %>">
         <td id="calldate_<%= call.id %>" class="<%= text_class %>" align="center"><%= nice_date_time call.calldate %></td>
-        <td id="src_<%= call.id %>" class="<%= text_class %>"><%= h(nice_src(call)) %></td>
+        <td id="src_<%= call.id %>" class="<%= text_class %>"><%= nice_src(call) %></td>
         <% if @show_destination %>
-          <%= show_call_dst(call, text_class) %>
+          <%=raw show_call_dst(call, text_class) %>
         <% end %>
         <td id="billsec_<%= call.id %>" class="<%= text_class %>" align="center"><%= nice_time(call.nice_billsec) %></td>
-        <td id="disposition_<%= call.id %>" class="<%= text_class %>"  align="left" <%= "onmouseover=\"Tip(\'" + get_hangup_cause_message(call.hangupcause) + "\')\" onmouseout = \"UnTip()\"" if call.hangupcause %>>
+        <td id="disposition_<%= call.id %>" class="<%= text_class %>"  align="left" <%=raw "onmouseover=\"Tip(\'" + get_hangup_cause_message(call.hangupcause) + "\')\" onmouseout = \"UnTip()\"" if call.hangupcause %>>
           <%= call.disposition %><%= " (" + call.hangupcause.to_s + ")" if call.hangupcause %>
         </td>
         <td id="server_id_<%= call.id %>" class="<%= text_class %>" align = "left"><%= call.server_id %></td>
@@ -174,7 +174,7 @@
         <td id="callinfo_<%= call.id %>" align="center"><%= link_to(b_call_info, {:controller => "calls", :action => "call_info" , :id => call.id}, {:id => "callinfo_link_#{call.id}"}) if call %></td>
         <td id="debug_info_<%= call.id %>" align="center" >
           <% if call.getDebugInfo != nil %>
-            <%= image_tag('icons/cog.png', :border => 0, :onmouseover=> "Tip(\'"+format_debug_info(call.getDebugInfo)+"\')", :onmouseout => "UnTip()" ) %>
+            <%= raw image_tag('icons/cog.png', :border => 0, :onmouseover=> "Tip(\'"+format_debug_info(call.getDebugInfo)+"\')", :onmouseout => "UnTip()" ) %>
           <% end %>
         </td>
       </tr>

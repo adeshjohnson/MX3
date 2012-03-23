@@ -579,7 +579,7 @@ in before filter : tariff (:find_tariff_from_id)
 
     @addresses = Phonebook.find(:all, :conditions=>["user_id=?", session[:user_id]])
 
-    if  @request.env["HTTP_X_MOBILE_GATEWAY"]
+    if  request.env["HTTP_X_MOBILE_GATEWAY"]
       respond_to do |format|
         format.wml { render :action => 'sms.wml.builder'}
         #format.html
