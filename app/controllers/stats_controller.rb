@@ -3103,7 +3103,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     if params[:prefix]
       @phrase = params[:prefix].to_s.gsub(/[^\d]/, '') if params[:prefix]
       phrase = []
-      arr = @phrase.split('') if   @phrase
+      arr = @phrase.to_s.split('') if   @phrase
       arr.size.times { |i| phrase << arr[0..i].join() }
 
       @dest = Destination.find(:all, :conditions => "prefix in (#{phrase.join(",")})", :order => "prefix desc") if phrase.size>0
@@ -3812,7 +3812,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
   def active_calls_longer_error(calls)
     for call in calls
       ba = Thread.new { active_calls_longer_error_send_email(call["user_id"].to_s, call["provider_id"].to_s, call["server_id"].to_s) }
-      #ba.join kam ji cia joininti?
+     # ba.join #kam ji cia joininti?
       MorLog.my_debug "active_calls_longer_error"
     end
   end

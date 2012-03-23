@@ -64,7 +64,7 @@
 <br />
 
 <h3><%= _('New_monitoring') %></h3>
-<% form_for :monitoring, @monitoring, :url => { :action => 'create' }, :builder => MonitoringFormBuilder do |f| %>
+<%= form_for @monitoring, :url => { :action => 'create' }, :builder => MonitoringFormBuilder do |f| %>
   <table width="100%" class="monitoring" cellspacing="0" cellpadding="0">
     <thead>
       <tr>

@@ -118,7 +118,7 @@
           <%= prov.provider_type%>
         <%end%>
       </td>
-      <td id="test_<%= prov.id %>" align="center"><%= link_to prov.test_login, "http://api.clickatell.com/http/auth?api_id=#{prov.api_id}&user=#{prov.login}&password=#{prov.password}", :target => "_blank", :id => "test_link_"+prov.id.to_s if prov.provider_type.to_s != "sms_email"%></td>
+      <td id="test_<%= prov.id %>" align="center"><%= link_to prov.test_login.html_safe, "http://api.clickatell.com/http/auth?api_id=#{prov.api_id}&user=#{prov.login}&password=#{prov.password}", :target => "_blank", :id => "test_link_"+prov.id.to_s if prov.provider_type.to_s != "sms_email"%></td>
       <td id="edit_<%= prov.id %>" align="center"><%= link_to b_edit, {:action => 'provider_edit', :id => prov}, :id => "edit_link_"+prov.id.to_s %></td>
       <td id="destroy_<%= prov.id %>" align="center"><%= link_to b_delete, { :action => 'provider_destroy', :id => prov }, :confirm => _('Are_you_sure'), :method => :post, :id => "delete_link_"+prov.id.to_s %></td>
     </tr>

@@ -17,7 +17,7 @@ class ResellersController < ApplicationController
     @page_title = _('Settings')
     @page_icon = 'cog.png'
     @settings = @@settings
-    @providers = current_user.providers(:all, :conditions=>['hidden=?',0], :order => "name ASC")
+    @providers = current_user.providers(:conditions=>['hidden=?',0], :order => "name ASC")
   end
   
   def settings_change

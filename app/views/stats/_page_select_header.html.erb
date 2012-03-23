@@ -39,9 +39,9 @@
             <%= link_to("<<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back100, :call_type => @call_type, :direction => @direction, :device => @sel_device_id, :date=>@date, :action_type=>@action, :user_id => @user_id, :processed=>@processed, :provider_id=>@s_provider}, {:title => "-100"}) if back100 %>
             <%= link_to("<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back10, :call_type => @call_type, :direction => @direction, :device => @sel_device_id, :date=>@date, :action_type=>@action, :user_id => @user_id, :processed=>@processed, :provider_id=>@s_provider}, {:title => "-20"}) if back10 %>
             <% for p in pstart..pend %>
-                <%= "<b>" if p == @page%>
+                <%= raw "<b>" if p == @page%>
                     <%= link_to p, :action => params[:action], :id => @page_select_header_id, :st => @st, :page => p, :call_type => @call_type, :direction => @direction, :device => @sel_device_id, :date=>@date, :action_type=>@action, :user_id => @user_id, :processed=>@processed, :provider_id=>@s_provider%>
-                <%= "</b>" if p == @page%>
+                <%=raw "</b>" if p == @page%>
             <% end %>
             <%= link_to(">", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw10, :call_type => @call_type, :direction => @direction, :device => @sel_device_id, :date=>@date, :action_type=>@action, :user_id => @user_id, :processed=>@processed, :provider_id=>@s_provider}, {:title => "+20"}) if forw10 %>
             <%= link_to(">>", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw100, :call_type => @call_type, :direction => @direction, :device => @sel_device_id, :date=>@date, :action_type=>@action, :user_id => @user_id, :processed=>@processed, :provider_id=>@s_provider}, {:title => "+100"}) if forw100 %>

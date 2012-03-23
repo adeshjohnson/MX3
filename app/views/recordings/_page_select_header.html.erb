@@ -39,9 +39,9 @@
             <%= link_to("<<", {:action => params[:action],:page => back100}.merge(@page_select_params), {:title => "-100"}) if back100 %>
             <%= link_to("<", {:action => params[:action], :page => back10}.merge(@page_select_params), {:title => "-20"}) if back10 %>
             <% for p in pstart..pend %>
-                <%= "<b>" if p == @page %>
+                <%=raw "<b>" if p == @page %>
                     <%= link_to p, {:action => params[:action], :page => p}.merge(@page_select_params) %>
-                <%= "</b>" if p == @page%>
+                <%=raw "</b>" if p == @page%>
             <% end %>
             <%= link_to(">", {:action => params[:action], :page => forw10}.merge(@page_select_params), {:title => "+20"}) if forw10 %>
             <%= link_to(">>", {:action => params[:action],:page => forw100}.merge(@page_select_params), {:title => "+100"}) if forw100 %>
