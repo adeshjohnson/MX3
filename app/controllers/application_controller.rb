@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
 
   # addons
   helper_method :callback_active?, :call_shop_active?, :reseller_active?, :payment_gateway_active?, :calling_cards_active?, :sms_active?, :recordings_addon_active?, :monitorings_addon_active?, :skp_active?
-  helper_method :allow_pg_extension, :erp_active?, :admin?, :reseller?, :user?, :accountant?, :reseller_pro_active?, :show_recordings?, :mor_11_extend?
+  helper_method :allow_pg_extension, :erp_active?, :admin?, :reseller?, :user?, :accountant?, :reseller_pro_active?, :show_recordings?, :mor_11_extend?, :ast_18?
   before_filter :set_charset
   before_filter :set_current_user
   # before_filter :set_timezone
@@ -2887,6 +2887,11 @@ Variables: (Names marked with * are required)
   def mor_11_extend?
     params[:controller].to_s == 'api' ?  1 == Confline.get_value("MOR_11_extend", 0).to_i :  1 == session[:mor_11_extend].to_i
   end
+
+  def ast_18?
+    (defined?(AST_18) and AST_18.to_i == 1)
+  end
+
 
   def allow_pg_extension(name)
     name == 'HSBC' ? mor_11_extend? : true

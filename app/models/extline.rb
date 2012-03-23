@@ -3,7 +3,13 @@ class Extline < ActiveRecord::Base
 
   #creating extension by parameters
   def self.mcreate(context, priority, app, appdata, extension, device_id)
-    ext = self.new(:context => context, :exten => extension, :priority => priority, :app => app, :appdata => appdata, :device_id => device_id)
+   if (defined?(AST_18) and AST_18.to_i == 1)
+      sep = ','
+      rappdata = appdata.to_s.gsub('|', ',')
+    else
+      rappdata = appdata
+    end
+    ext = self.new(:context => context, :exten => extension, :priority => priority, :app => app, :appdata => rappdata, :device_id => device_id)
     ext.save		
     ext
   end
