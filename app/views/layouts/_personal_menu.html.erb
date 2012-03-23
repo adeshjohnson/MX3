@@ -29,10 +29,10 @@ ii = i - 5%>
 
     personal_menu.add(12,10,'<%= _('Last_calls').downcase.capitalize %>','<%= Web_Dir %>/stats/last_calls_stats');
     personal_menu.add(13,10,'<%= _('Missed_calls') %>','<%= Web_Dir %>/stats/missed_calls');
-    personal_menu.add(14,10,'<%= _('Graphs') %>','<%= Web_Dir %>/stats/user_stats','', '', '<%= Web_Dir %>/images/dtree/chart.gif');
+    personal_menu.add(14,10,'<%= _('Graphs') %>','<%= Web_Dir %>/stats/user_stats','', '', '<%= Web_Dir %>/assets/dtree/chart.gif');
     <% if rec_active? %>
       <% if show_recordings? %>
-        personal_menu.add(15,10,'<%= _('Recordings') %>','<%= Web_Dir %>/recordings/list_recordings','', '', '<%= Web_Dir %>/images/dtree/musicfolder.gif');
+        personal_menu.add(15,10,'<%= _('Recordings') %>','<%= Web_Dir %>/recordings/list_recordings','', '', '<%= Web_Dir %>/assets/dtree/musicfolder.gif');
       <% end %>
     <% end %>
   <% end %>

@@ -103,7 +103,7 @@ function dTree(objName) {
 
 		joinBottom	: mor_web_dir + '/assets/dtree/joinbottom.gif',
 
-		plus				: mor_web_dir + '//assets/dtree/plus.gif',
+		plus				: mor_web_dir + '/assets/dtree/plus.gif',
 
 		plusBottom	: mor_web_dir + '/assets/dtree/plusbottom.gif',
 

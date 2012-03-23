@@ -52,7 +52,7 @@
   reseller_menu.add(62,60,'<%= _('Hidden') %>','<%= Web_Dir %>/users/hidden');
 
   reseller_menu.add(80,0,'<%= _('Calls') %>','<%= Web_Dir %>/stats/last_calls_stats');
-  reseller_menu.add(81,80,'<%= _('Graphs') %>','<%= Web_Dir %>/stats/reseller_all_user_stats','', '', '<%= Web_Dir %>/images/dtree/chart.gif');
+  reseller_menu.add(81,80,'<%= _('Graphs') %>','<%= Web_Dir %>/stats/reseller_all_user_stats','', '', '<%= Web_Dir %>/assets/dtree/chart.gif');
 
   <% if session[:show_active_calls_for_users] == 1 or allow_manage_providers? %>
     reseller_menu.add(82,80,'<%= _('Active_calls') %>','<%= Web_Dir %>/stats/active_calls');

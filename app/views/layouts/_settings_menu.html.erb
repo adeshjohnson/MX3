@@ -80,7 +80,7 @@
   settings_menu.add(344,340,'<%= _('Import') %>','<%= Web_Dir %>/functions/import_user_data');
   <% if show_recordings? %>
     <% if !defined?(REC_Active) or (defined?(REC_Active) and REC_Active == 0) %>
-      settings_menu.add(345,340,'<%= _('Recordings') %>','<%= Web_Dir %>/recordings/setup','', '', '<%= Web_Dir %>/images/dtree/musicfolder.gif');
+      settings_menu.add(345,340,'<%= _('Recordings') %>','<%= Web_Dir %>/recordings/setup','', '', '<%= Web_Dir %>/assets/dtree/musicfolder.gif');
     <% end %>
   <% end %>
   settings_menu.add(347,340,'<%= _('Login_as') %>','<%= Web_Dir %>/functions/login_as');

@@ -57,7 +57,7 @@
 
     <% if rec_active? %>
       <% if show_recordings? %>
-        addons_menu.add(<%= i %>,<%= si %>,'<%= _('Recordings') %>','<%= Web_Dir %>/recordings/recordings','', '', '<%= Web_Dir %>/images/dtree/musicfolder.gif', '<%= Web_Dir %>/images/dtree/musicfolder.gif');
+        addons_menu.add(<%= i %>,<%= si %>,'<%= _('Recordings') %>','<%= Web_Dir %>/recordings/recordings','', '', '<%= Web_Dir %>/assets/dtree/musicfolder.gif', '<%= Web_Dir %>/images/dtree/musicfolder.gif');
         <% i += 1 %>
         addons_menu.add(<%= i %>,<%= i-1 %>,'<%= _('users') %>','<%= Web_Dir %>/recordings/list_users');
         <% i += 1 %>
