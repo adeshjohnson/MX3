@@ -2258,7 +2258,7 @@ GROUP BY terminators.id;").map { |t| t.id }
         else
           #set to current datetime, when saveing model, it should cause error
           #because when minimal charge is disabled datetime should be disabled
-          self.minimal_charge_start_at = DateTime::now
+          self.minimal_charge_start_at = Date.new(Time.now.year, Time.now.month, 1)
         end
       end
     end
