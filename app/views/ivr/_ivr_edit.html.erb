@@ -5,7 +5,7 @@
         <table class = "simpletable" width = 100%>
           <tr>
             <td align="left">
-              <div id="ivr_name_div"><b><%= _("Ivr_Name") %></b> <%= text_field_tag('ivr[name]', @ivr ? @ivr.name.to_s : "" ,"id"=> "ivr_name", "class" => "input", :size => "40", :maxlength => "250") %></div>
+              <div id="ivr_name_div"><b><%= _("Ivr_Name") %></b> <%=raw  text_field_tag('ivr[name]', @ivr ? @ivr.name.to_s : "" ,"id"=> "ivr_name", "class" => "input", :size => "40", :maxlength => "250") %></div>
             </td>
           </tr>
         </table>
@@ -37,20 +37,20 @@
         <%= observe_field("block_timeout_digits",   :url=> { :action => "update_block_timeout_digits",   :id => @block.id }, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');#{last_changed("block_name")}",             :with=>"data") %>
 
         <div id = "action_selector">
-          <%= render :partial => 'ivr_action_selector' %>
+          <%=raw render :partial => 'ivr_action_selector' %>
         </div>
         <br />
         <div id = "extensions_selector">
-          <%= render :partial => 'ivr_extension_selector' %>
+          <%=raw render :partial => 'ivr_extension_selector' %>
         </div>
         <br />
         <div id="all_blocks">
-          <%= render :partial => 'all_blocks' %>
+          <%=raw render :partial => 'all_blocks' %>
         </div>
       </td>
       <td width = "60%" valign="top">
         <div id = "block_list">
-          <%= render :partial => 'block_list' %>
+          <%=raw render :partial => 'block_list' %>
         </div>
       </td>
     </tr>

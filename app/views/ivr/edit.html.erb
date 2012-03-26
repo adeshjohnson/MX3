@@ -10,7 +10,7 @@
   </style>
 <% else %>
   <% if request.env["HTTP_USER_AGENT"].to_s.scan("MSIE_EE").size == 0 %>
-    <%= render :partial => 'ivr_edit' %>
+    <%= raw render :partial => 'ivr_edit' %>
     <br />
     <br />
     <%= link_to b_back + _('back'), :action => :index %>

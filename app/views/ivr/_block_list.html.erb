@@ -30,8 +30,8 @@
     var canvas = document.getElementById("canvas_graph");
     if (canvas.getContext) {
       var ctx = canvas.getContext("2d");
-      <%= clear_text() %> 
-      <%= draw_block(@block, 170,20, "ctx","div_space") %>        
+      <%=raw clear_text().html_safe %>
+      <%=raw draw_block(@block, 170,20, "ctx","div_space").html_safe %>
       <% for exten in @block.ivr_extensions do %>
         <% if exten.exten.to_i != 0 or exten.exten == "0"
           pos = exten.exten.to_i
@@ -54,7 +54,7 @@
             ctx.drawImage(left , 333 ,<%= 20+(pos%7)*29 %>, 16,29  );
           <% end %>
         <% else %>
-          <%= draw_block(exten.goto_ivr_block, pos/7*360-10, pos%7*29+20, "ctx","div_space", true) %>
+          <%=raw draw_block(exten.goto_ivr_block, pos/7*360-10, pos%7*29+20, "ctx","div_space", true).html_safe %>
         <% end %>  
 
       <% end %>
@@ -79,7 +79,7 @@
         <% y = 250 - 210*Math.cos(alfa*i.to_f*Math::PI.to_f/180.to_f)%>
         <% posx[block.id] = x %>
         <% posy[block.id] = y %>
-        <%= draw_block_icon(block, x-8, y-8 , "ctx2","div_space2") %>
+        <%=raw draw_block_icon(block, x-8, y-8 , "ctx2","div_space2") %>
         <% i += 1 %>
       <% end %>
       <% red_lenght = 20 %>
@@ -106,12 +106,12 @@
             ctx2.strokeStyle = 'rgb(255,0,0)';
             ctx2.lineWidth = 1;
             ctx2.beginPath();
-            ctx2.moveTo(<%= posx[ext.goto_ivr_block_id].to_i %>, <%= posy[ext.goto_ivr_block_id].to_i %>);
-            ctx2.lineTo(<%= (posx[ext.goto_ivr_block_id].to_i - (x1*p).to_i) %>, <%= (posy[ext.goto_ivr_block_id].to_i - (y1*p).to_i)%>);
-            ctx2.moveTo(<%= posx[ext.goto_ivr_block_id].to_i - (x1*8/l)  %>, <%= posy[ext.goto_ivr_block_id].to_i  - (y1*8/l) %>);
-            ctx2.lineTo(<%= xBase - (red_lenght*xNormalUnitDelta).round   %>, <%= yBase - (red_lenght*yNormalUnitDelta) %>);
-            ctx2.moveTo(<%= posx[ext.goto_ivr_block_id].to_i - (x1*8/l) %>, <%= posy[ext.goto_ivr_block_id].to_i  - (y1*8/l)%>);
-            ctx2.lineTo(<%= xBase + (red_lenght*xNormalUnitDelta).round  %>, <%= yBase + (red_lenght *yNormalUnitDelta).round %>);
+            ctx2.moveTo(<%=raw posx[ext.goto_ivr_block_id].to_i %>, <%=raw  posy[ext.goto_ivr_block_id].to_i %>);
+            ctx2.lineTo(<%=raw (posx[ext.goto_ivr_block_id].to_i - (x1*p).to_i) %>, <%=raw  (posy[ext.goto_ivr_block_id].to_i - (y1*p).to_i)%>);
+            ctx2.moveTo(<%=raw  posx[ext.goto_ivr_block_id].to_i - (x1*8/l)  %>, <%=raw  posy[ext.goto_ivr_block_id].to_i  - (y1*8/l) %>);
+            ctx2.lineTo(<%=raw  xBase - (red_lenght*xNormalUnitDelta).round   %>, <%=raw  yBase - (red_lenght*yNormalUnitDelta) %>);
+            ctx2.moveTo(<%=raw  posx[ext.goto_ivr_block_id].to_i - (x1*8/l) %>, <%=raw  posy[ext.goto_ivr_block_id].to_i  - (y1*8/l)%>);
+            ctx2.lineTo(<%=raw  xBase + (red_lenght*xNormalUnitDelta).round  %>, <%=raw  yBase + (red_lenght *yNormalUnitDelta).round %>);
             ctx2.stroke();              
           <% end %>
         <% end %>
@@ -121,8 +121,8 @@
           ctx2.strokeStyle = 'rgb(170,170,170)';
           ctx2.lineWidth = 1;
           ctx2.beginPath();
-          ctx2.moveTo(<%= posx[block.id] %>, <%= posy[block.id] %>);
-          ctx2.lineTo(<%= posx[ext.goto_ivr_block_id] %>, <%= posy[ext.goto_ivr_block_id] %>)
+          ctx2.moveTo(<%=raw  posx[block.id] %>, <%=raw  posy[block.id] %>);
+          ctx2.lineTo(<%=raw  posx[ext.goto_ivr_block_id] %>, <%=raw  posy[ext.goto_ivr_block_id] %>)
           ctx2.stroke();
         <% end %>
       <% end %>

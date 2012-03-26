@@ -22,4 +22,4 @@
       <% observers << observe_field("ext_block"+ext, :frequency => 0.5, :url=> { :action => "extension_block", :id => @block.id, :ext => ext }, :loading => "Element.show('spinner')", :complete=> "Element.hide('spinner');#{last_changed("ext_block#{ext}")}", :with => "'data=' + value") %>
     <% } %>
   </table>
-  <%= observers.join("\n") %>
+  <%=raw observers.join("\n").html_safe %>
