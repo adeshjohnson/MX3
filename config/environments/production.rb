@@ -16,7 +16,7 @@ Mor::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false #turi buti false
+  config.assets.compile = true #turi buti false
 
   # Generate digests for assets URLs
   config.assets.digest = true    # buvo true
