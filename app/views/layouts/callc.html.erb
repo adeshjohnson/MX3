@@ -189,7 +189,7 @@
     <div id="footerbox">
       <div class="left-element">
         <% if session[:version] and session[:copyright_title]%>
-          &nbsp;&nbsp;<%= session[:version] %> <%= session[:copyright_title] %>
+          &nbsp;&nbsp;<%=raw session[:version] %> <%=raw session[:copyright_title] %>
         <%else%>
           <%if Confline.get_value("Show_logo_on_register_page", 0).to_i == 1%>
             &nbsp;&nbsp;<%= Confline.get_value("Version", 0) %> <%= Confline.get_value("Copyright_Title", 0) %>
