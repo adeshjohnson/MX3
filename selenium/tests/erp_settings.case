@@ -127,10 +127,109 @@
 	<td></td>
 </tr>
 <!--Prisijungimas blogais duomenimis-->
-<!--<tr> 	<td>click</td> 	<td>id=saddons_menu22</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>An Error Was Encountered</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Domain &quot;domain&quot; was not found. Please check domain name</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/erp/settings</td> 	<td></td> </tr>-->
+<tr>
+	<td>click</td>
+	<td>id=saddons_menu22</td>
+	<td></td>
+</tr>
+<!--Klaida: dabar kai domain blogas mane nuveda į tuščią baltą langą, ankčiau metė pranešimus, kad domain not faund, norėtūsi kad taip būtų ir toliau.-->
+<!--<tr> 	<td>waitForTextPresent</td> 	<td>An Error Was Encountered</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Domain &quot;domain&quot; was not found. Please check domain name</td> 	<td></td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/erp/settings</td>
+	<td></td>
+</tr>
 <!--Prisijungimas su gerais duomenimis-->
-<!--<tr> 	<td>type</td> 	<td>id=erp_login</td> 	<td>voiperp_testing@kolmisoft.com</td> </tr> <tr> 	<td>type</td> 	<td>id=erp_password</td> 	<td>pass</td> </tr> <tr> 	<td>type</td> 	<td>id=erp_domain</td> 	<td>aiste</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Settings saved</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>id=saddons_menu22</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=erp_login</td> 	<td>voiperp_testing@kolmisoft.com</td> </tr> <tr> 	<td>type</td> 	<td>id=erp_password</td> 	<td>pass</td> </tr> <tr> 	<td>type</td> 	<td>id=erp_domain</td> 	<td>http://aiste.voiperp.com</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Settings saved</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>id=saddons_menu22</td> 	<td></td> </tr>-->
-<!---->
+<tr>
+	<td>type</td>
+	<td>id=erp_login</td>
+	<td>voiperp_testing@kolmisoft.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=erp_password</td>
+	<td>pass</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=erp_domain</td>
+	<td>aiste</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=saddons_menu22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=erp_login</td>
+	<td>voiperp_testing@kolmisoft.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=erp_password</td>
+	<td>pass</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=erp_domain</td>
+	<td>http://vm17.voiperp.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=saddons_menu22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>id=saddons_menu22</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>openWindow</td>
+	<td>http://vm17.voiperp.com/</td>
+	<td>erp</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>erp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>windowFocus</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Latest events:</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
