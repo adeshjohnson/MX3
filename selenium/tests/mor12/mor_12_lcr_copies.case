@@ -124,7 +124,7 @@
 	<td>off</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>check</td>
 	<td>id=lcr[3]</td>
 	<td></td>
 </tr>
@@ -139,7 +139,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>waitForValue</td>
+	<td>id=lcr[3]</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>uncheck</td>
 	<td>id=lcr[3]</td>
 	<td></td>
 </tr>
@@ -231,7 +236,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>waitForValue</td>
+	<td>id=lcr[2]</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
 	<td>id=lcr[2]</td>
 	<td></td>
 </tr>
@@ -384,7 +394,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>verifyValue</td>
+	<td>id=lcr[2]</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
 	<td>id=lcr[2]</td>
 	<td></td>
 </tr>
@@ -531,7 +546,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>verifyValue</td>
+	<td>id=lcr[2]</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
 	<td>id=lcr[2]</td>
 	<td></td>
 </tr>
@@ -641,6 +661,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Page_copy&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#lcr_clone_id_4 &gt; img[alt=&quot;Page_copy&quot;]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/lcrs/providers_list/3</td>
 	<td></td>
@@ -738,6 +768,346 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Page_copy&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Page_copy&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Clone: Primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=order_5</td>
+	<td>price</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=providers_5</td>
+	<td>Providers (1)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=id_5</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#lcr_clone_id_5 &gt; img[alt=&quot;Page_copy&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=img[alt=&quot;Page_copy&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#lcr_clone_id_5 &gt; img[alt=&quot;Page_copy&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Clone: Clone: Primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=order_6</td>
+	<td>price</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=providers_6</td>
+	<td>Providers (1)</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=clone_lcr_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lcr_name</td>
+	<td>newLCR</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lcr_first_provider_percent_limit</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>LCR was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=name_1</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider removed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>xpath=(//select[@name='select_prov'])[2]</td>
+	<td>label=common_use_provider - SIP/0.0.0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Failover provider added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Failover provider: common_use_provider </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lcr_destroy_5 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>LCR was sucsessfully deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>xpath=(//select[@name='select_prov'])[2]</td>
+	<td>label=Provider_for_admin - SIP/0.0.0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Failover provider added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Failover provider: Provider_for_admin </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#delete_link_5 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Failover provider: Do not use </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>wholesale_rspro</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>wholesale_rspro1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#lcr_clone_id_4 &gt; img[alt=&quot;Page_copy&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Clone: rrspro_primary_LCR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lcr_destroy_7 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>LCR was sucsessfully deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Failover provider: Do not use </td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>xpath=(//select[@name='select_prov'])[2]</td>
+	<td>label=Provider common use</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Failover provider added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Failover provider: Provider common use </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Failover provider unassigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Failover provider: Do not use </td>
 	<td></td>
 </tr>
 </tbody></table>

@@ -183,6 +183,31 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=users</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=minimal_charge_start_at_value</td>
+	<td>Tue Jan 01 00:00:00 +0200 2008</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/users/edit/2</td>
 	<td></td>
 </tr>
@@ -874,7 +899,7 @@
 <tr>
 	<td>select</td>
 	<td>id=minimal_charge_date_month</td>
-	<td>label=1</td>
+	<td>label=2</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -904,7 +929,7 @@
 <tr>
 	<td>waitForSelectedLabel</td>
 	<td>id=minimal_charge_date_month</td>
-	<td>1</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1200,6 +1225,31 @@
 	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=users</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=minimal_charge_start_at_value</td>
+	<td>Fri Feb 01 00:00:00 +0200 2008</td>
 </tr>
 <tr>
 	<td>open</td>
