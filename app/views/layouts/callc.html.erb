@@ -4,7 +4,7 @@
     <title><%=  session[:admin_browser_title] %></title>
     <script type="text/javascript">var mor_web_dir = '<%=Web_Dir%>';</script>
     <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", :debug=>true %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield :head %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
