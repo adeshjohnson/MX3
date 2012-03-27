@@ -43,7 +43,7 @@
 			obj.className='tabInactive';
 			var img = obj.getElementsByTagName('IMG')[0];
 			if(img.src.indexOf('tab_')==-1)img = obj.getElementsByTagName('IMG')[1];
-			img.src = '../images/tabs/tab_right_inactive.gif';
+			img.src = '../assets/tabs/tab_right_inactive.gif';
 			document.getElementById('tabView' + parentId_div + activeTabIndex[parentId]).style.display='none';
 		}
 		
@@ -52,7 +52,7 @@
 		thisObj.className='tabActive';
 		var img = thisObj.getElementsByTagName('IMG')[0];
 		if(img.src.indexOf('tab_')==-1)img = thisObj.getElementsByTagName('IMG')[1];
-		img.src = '../images/tabs/tab_right_active.gif';
+		img.src = '../assets/tabs/tab_right_active.gif';
 		
 		document.getElementById('tabView' + parentId_div + tabIndex).style.display='block';
 		activeTabIndex[parentId] = tabIndex;
@@ -100,7 +100,7 @@
 			this.className='inactiveTabOver';
 			var img = this.getElementsByTagName('IMG')[0];
 			if(img.src.indexOf('tab_')<=0)img = this.getElementsByTagName('IMG')[1];
-			img.src = '../images/tabs/tab_right_over.gif'; 
+			img.src = '../assets/tabs/tab_right_over.gif';
 		}
 		
 	}
@@ -110,7 +110,7 @@
 			this.className='tabInactive';
 			var img = this.getElementsByTagName('IMG')[0];
 			if(img.src.indexOf('tab_')<=0)img = this.getElementsByTagName('IMG')[1];
-			img.src = '../images/tabs/tab_right_inactive.gif';
+			img.src = '../assets/tabs/tab_right_inactive.gif';
 		}
 		
 	}
@@ -177,7 +177,7 @@
 			
 			if(closeButtonArray[no]){
 				var closeButton = document.createElement('IMG');
-				closeButton.src = '../images/tabs/close.gif';
+				closeButton.src = '../assets/tabs/close.gif';
 				closeButton.height = closeImageHeight + 'px';
 				closeButton.width = closeImageHeight + 'px';
 				closeButton.setAttribute('height',closeImageHeight);
@@ -198,7 +198,7 @@
 			
 			var img = document.createElement('IMG');
 			img.valign = 'bottom';
-			img.src = '../images/tabs/tab_right_inactive.gif';
+			img.src = '../assets/tabs/tab_right_inactive.gif';
 			// IE5.X FIX
 			if((navigatorVersion && navigatorVersion<6) || (MSIE && !strictDocType)){
 				img.style.styleFloat = 'none';
