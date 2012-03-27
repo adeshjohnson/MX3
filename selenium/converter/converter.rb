@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# encoding: utf-8
 require 'rexml/document'
 # MAYBE useless function
 class String
@@ -15,27 +16,41 @@ end
 class Base
   #  attr_reader :options
   @@options ={
-    :global_timeout => 60000,
-    :receiver => "@selenium",
-    :header =>
-      "require 'rubygems'
+      :global_timeout => 60000,
+      :receiver => "@selenium",
+      :header =>
+          "# encoding: utf-8
+require 'rubygems'
 require 'selenium'
 require 'test/unit'
+gem 'selenium-client'
+require 'selenium/client'
 
 class NewTest < Test::Unit::TestCase
   def setup
     @verification_errors = []
-    if $selenium
-      @selenium = $selenium
-    else
-      @selenium = Selenium::SeleniumDriver.new(\"localhost\", 4444, \"*chrome\", \"${baseURL}\", 10000);
-      @selenium.start
-    end
+    #if $selenium
+     # @selenium = $selenium
+    #else
+     # @selenium = Selenium::SeleniumDriver.new(\"localhost\", 4444, \"*chrome\", \"${baseURL}\", 10000);
+     # @selenium.start
+    #end
+@selenium = Selenium::Client::Driver.new( \
+      :host => \"localhost\",
+      :port => 4444,
+      :browser => \"*chrome\",
+      :url => \"${baseURL}\",
+      :timeout_in_second => 10000)
+
+    @selenium.start_new_browser_session
     @selenium.set_context(\"${test_name}\")
   end
 
   def teardown
-    @selenium.stop unless $selenium
+   # @selenium.stop unless $selenium
+@selenium.close_current_browser_session
+  #  assert_equal [], @verification_errors
+
     @verification_errors.each {|e| puts '\n\n' + e.class.to_s + ' >>>>>>>> ' + e.to_s + '\n'
     puts e.backtrace
     }
@@ -43,12 +58,12 @@ class NewTest < Test::Unit::TestCase
   end
 
   def test_${test_name}",
-    :footer =>
-      "  end\nend",
-    :host => "http://localhost:3000",
-    :indent => 2,
-    :initialIdents => 4,
-    :debug => 0
+      :footer =>
+          "  end\nend",
+      :host => "http://localhost:3000",
+      :indent => 2,
+      :initialIdents => 4,
+      :debug => 0
   }
   def Base.debug= (debug)
     @@options[:debug]= debug
@@ -78,10 +93,10 @@ class NewTest < Test::Unit::TestCase
 
   def Base.verify(statement)
     return "begin\n" +
-      " "*Base.options[:indent] + statement + "\n" +
-      "rescue Test::Unit::AssertionFailedError\n" +
-      " "*Base.options[:indent] + "@verification_errors << $!\n" +
-      "end"
+        " "*Base.options[:indent] + statement + "\n" +
+        "rescue Exception=>e\n" +
+        " "*Base.options[:indent] + "@verification_errors << e\n" +
+        "end"
   end
 
   def Base.deb(msg)
@@ -163,9 +178,9 @@ class Command < Base
     #    string = string[1..-1][0..-2]
 
     replaces = {"["=>"\\[", "]"=>"\\]",
-      "("=>"\\(", ")"=>"\\)",
-      "^"=>"\\^", "$"=>"\\$", "."=>  "\\.", "|"=>"\\|",
-      "?"=>"\\?", "+"=>"\\+", "&gt;"=>">" , "\/"=> "\\/"}
+                "("=>"\\(", ")"=>"\\)",
+                "^"=>"\\^", "$"=>"\\$", "."=>  "\\.", "|"=>"\\|",
+                "?"=>"\\?", "+"=>"\\+", "&gt;"=>">" , "\/"=> "\\/"}
 
     string = string.gsub_by_array(replaces).gsub("*", ".*")[1..-1][0..-2]
     string = "/^[\\s\\S]{0,1}#{string}$/"
@@ -195,204 +210,192 @@ class Command < Base
 
     line = Base.options[:receiver]+"."
     case @command
-    when "pause"
-      line = "sleep #{@target.to_i/1000}"
-    when "open"
-      line += "open #{@target}"
-    when "goBack"
-      line = "@selenium.go_back"
-    when "type"
-      line += "type #{@target}, #{@value}"
-    when "typeKeys"
-      line += "type_keys #{@target}, #{@value}"
-    when "click"
-      line += "click #{@target}"
-    when "clickAt"
-      line += "click_at #{@target}, #{@value}"
-    when "dragAndDropToObject"
-      line += "drag_and_drop_to_object #{@target}, #{@value}"
-    when "waitForPageToLoad"
-      line += "wait_for_page_to_load #{@target}"
-    when "select"
-      line += "select #{@target}, #{@value}"
-    when "selectWindow"
-      line += "select_window #{@target}"
-    when "selectFrame"
-      line += "select_frame #{@target}"
-    when "mouseOver"
-      line += "mouse_over #{@target}"
-    when "mouseOut"
-      line += "mouse_out #{@target}"
-    when "mouseMove"
-      line += "mouse_move #{@target}"
-    when "keyUp"
-      line += "key_up #{@target}, #{@value}"
-    when "keyDown"
-      line += "key_down #{@target}, #{@value}"
-    when "chooseCancelOnNextConfirmation"
-      line += "choose_cancel_on_next_confirmation"
-    when "verifyAlertPresent"
-      line = "begin\n    assert @selenium.is_alert_present\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyAlertNotPresent"
-      line = "begin\n    assert !@selenium.is_alert_present\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyTable"
-      line = "begin\n    assert_equal #{@value}, @selenium.get_table(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyNotTable"
-      line = "begin\n    assert_equal #{@value}, !@selenium.get_table(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyText"
-      line ="begin\n    assert_equal #{@value}, @selenium.get_text(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyTextPresent"
-      line ="begin\n     assert @selenium.is_text_present(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyTextNotPresent"
-      line = "begin\n    assert !@selenium.is_text_present(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "assertText"
-      line = "assert_equal #{@value}, @selenium.get_text(#{@target})"
-    when "assertTextPresent"
-      line = "assert @selenium.is_text_present(#{@value})"
-    when "assertTable"
-      line = "assert_equal #{@value}, @selenium.get_table(#{@target})"
-    when "assertValue"
-      line = "assert_equal #{@value}, @selenium.get_value(#{@target})"
-    when "assertConfirmation"
-      line = "assert_equal #{@target}, @selenium.get_confirmation"
-    when "verifyElementPresent"
-      line = "begin\n    assert @selenium.is_element_present(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyElementNotPresent"
-      line = "begin\n    assert !@selenium.is_element_present(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyValue"
-      line = "begin\n    assert_equal #{@value}, @selenium.get_value(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifySelectOptions"
-      line = "begin\n    assert #{sanitize_for_regexp(@value)} =~ @selenium.get_select_options(#{@target}).join(\",\")\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyNotSelectOptions"
-      line = "begin\n    assert_not_equal #{@value}, @selenium.get_select_options(#{@target}).join(\",\")\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "assertChecked"
-      line = "assert @selenium.is_checked(#{@target})"
-    when "waitForElementPresent"
-      line = "assert !60.times{ break if (@selenium.is_element_present(#{@target}) rescue false); sleep 1 }"
-    when "waitForElementNotPresent"
-      line = "assert !60.times{ break unless (@selenium.is_element_present(#{@target}) rescue false); sleep 1 }"
-    when "waitForTable"
-      line = "assert !60.times{ break if (#{@value} == @selenium.get_table(#{@target}) rescue false); sleep 1 }"
-    when "openWindow"
-      line += "open_window #{@target}, #{@value}"
-    when "waitForPopUp"
-      line += "wait_for_pop_up #{@target}, #{@value}"
-    when "selectPopUp"
-      line += "select_pop_up #{@target}"
-    when "waitForValue"
-      line = "assert !60.times{ break if (#{@value} == @selenium.get_value(#{@target}) rescue false); sleep 1 }"
-    when "waitForText"
-      line = "assert !60.times{ break if (#{sanitize_for_regexp(@value)} =~ @selenium.get_text(#{@target}) rescue false); sleep 1 }"
-    when "waitForTextPresent"
-      line = "assert !60.times{ break if (@selenium.is_text_present(#{@target}) rescue false); sleep 1 }"
-    when "waitForTextNotPresent"
-      line = "assert !60.times{ break unless (@selenium.is_text_present(#{@target}) rescue true); sleep 1 }"
-    when "waitForSelectedLabel"
-      line = "assert !60.times{ break if (#{@value} == @selenium.get_selected_label(#{@target}) rescue false); sleep 1 }"
-    when "waitForSelectedValue"
-      line = "assert !60.times{ break if (#{@value} == @selenium.get_selected_value(#{@target}) rescue false); sleep 1 }"
-    when "waitForSelectedIndex"
-      line = "assert !60.times{ break if (#{@value} == @selenium.get_selected_index(#{@target}) rescue false); sleep 1 }"
-    when "waitForSelectOptions"
-      line = "assert !60.times{ break if (#{sanitize_for_regexp(@value)} =~ @selenium.get_select_options(#{@target}).join(\",\") rescue false); sleep 1 }"
-    when "waitForNotSelectOptions"
-      line = "assert !60.times{ break unless (#{sanitize_for_regexp(@value)} =~ @selenium.get_select_options(#{@target}).join(\",\") rescue true); sleep 1 }"
-    when "waitForSomethingSelected"
-      line = "assert !60.times{ break if (@selenium.is_something_selected(#{@target}) rescue false); sleep 1 }"
-    when "waitForEditable"
-      line = "assert !60.times{ break if (@selenium.is_editable(#{@target}) rescue false); sleep 1 }"
-    when "waitForNotEditable"
-      line = "assert !60.times{ break unless (@selenium.is_editable(#{@target}) rescue true); sleep 1 }"
-    when "waitForVisible"
-      line = "assert !60.times{ break if (@selenium.is_visible(#{@target}) rescue false); sleep 1 }"
-    when "waitForNotVisible"
-      line = "assert !60.times{ break unless (@selenium.is_visible(#{@target}) rescue true); sleep 1 }"
-    when "waitForChecked"
-      line = "assert !60.times{ break if (@selenium.is_checked(#{@target}) rescue false); sleep 1 }"
-    when "verifyNotValue"
-      line = "begin\n    assert_not_equal #{@value}, @selenium.get_value(#{@target})\nrescue Test::Unit::AssertionFailedError\n        @verification_errors << $!\nend"
-    when "verifyNotText"
-      line = "begin\n    assert_not_equal #{@value}, @selenium.get_text(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "store"
-      line = "#{@value} = #{@target}"
-    when "storeSelectOptions"
-      line = "#{@value.gsub(/\"/, "")} = @selenium.get_select_options(#{@target})"
-    when "storeSelectedValue"
-      line = "#{@value.gsub(/\"/, "")} = @selenium.get_selected_value(#{@target})"
-    when "verifyExpression"
-      target = @target.gsub(/[${}]/,"")
-      line = "begin\n    assert_equal #{@value}, @selenium.get_expression(#{target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyVisible"
-      line = "begin\n    assert @selenium.is_visible(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyNotVisible"
-      line = "begin\n    assert !@selenium.is_visible(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyNotEditable"
-      line = "begin\n    assert !@selenium.is_editable(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "uncheck"
-      line += "uncheck #{@target}"
-    when "check"
-      line += "check #{@target}"
-    when "fireEvent"
-      line = "@selenium.fire_event #{@target}, #{@value}"
-    when "focus"
-      line = "@selenium.focus #{@target}"
-    when "keyPress"
-      line = " @selenium.key_press #{@target}, #{@value}"
-    when "verifyEditable"
-      line = "begin    \nassert @selenium.is_editable(#{@target})\nrescue Test::Unit::AssertionFailedError    \n@verification_errors << $!\nend"
-    when "verifyNotChecked"
-      line = "begin\n    assert !@selenium.is_checked(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifySelectedLabel"
-      line = "begin\n    assert_equal #{@value}, @selenium.get_selected_label(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyNotSelectedLabel"
-      line = "begin\n    assert_not_equal #{@value}, @selenium.get_selected_label(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifySelectedValue"
-      line = "begin\n    assert_equal #{@value}, @selenium.get_selected_value(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "verifyCursorPosition"
-      line = "begin\n    assert_equal #{@value}, @selenium.get_cursor_position(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "assertNotChecked"
-      line = "assert !@selenium.is_checked(#{@target})"
-    when "verifyChecked"
-      line = "begin\n    assert @selenium.is_checked(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "assertElementPresent"
-      line = "assert @selenium.is_element_present(#{@target})"
-    when "assertElementNotPresent"
-      line = "assert !@selenium.is_element_present(#{@target})"
-    when "storeText"
-      line = "#{@value.gsub(/\"/, "")} = @selenium.get_text(#{@target})"
-    when "storeValue"
-      line = "#{@value.gsub(/\"/, "")} = @selenium.get_value(#{@target})"
-    when "storeElementPresent"
-      line = "#{@value.gsub(/\"/, "")} = @selenium.is_element_present(#{@target})"
-    when "verifyNotExpression"
-      line = "begin\n    assert_not_equal #{@value}, @selenium.get_expression(#{@target})\nrescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\nend"
-    when "getEval"
-      line = "@selenium.get_eval(#{@target})"
-    when "dragAndDrop"
-      line = "@selenium.drag_and_drop #{@target}, #{@value}"
-    when "storeElementPositionLeft"
-      line = "I_position = @selenium.get_element_position_left(#{@target})"
-    when "waitForElementPositionLeft"
-      line = "assert !60.times{ break if (I_position == @selenium.get_element_position_left(#{@target}) rescue false); sleep 1 }"
-    when "verifySelected"
-      line = "begin\n    assert_equal #{@value}, @selenium.get_selected_label(#{@target})\n    rescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\n    end"
-    when "waitForNotText"
-      line = "assert !60.times{ break unless (#{sanitize_for_regexp(@value)} == @selenium.get_text(#{@target})  rescue false); sleep 1 }"
-    when 'close'
-      line = "@selenium.select_window #{@target}"
-    when "waitForNotValue"
-      line = "assert !60.times{ break unless (#{@value} == @selenium.get_value(#{@target}) rescue true); sleep 1 }"
-    when "assertAlert"
-      line = "assert_equal #{@value}, @selenium.get_alert"
-    when "answerOnNextPrompt"
-      line = "@selenium.answer_on_next_prompt #{@target}"
-    when "assertPromptPresent"
-      line = "assert @selenium.is_prompt_present"
-    when "refresh"
-      line = "@selenium.refresh"
-    else
-      line = "flunk \"Unknown command #{@command}(#{@target}, #{@value})\""
-      puts line
+      when "pause"
+        line = "sleep #{@target.to_i/1000}"
+      when "open"
+        line += "open #{@target}"
+      when "goBack"
+        line = "@selenium.go_back"
+      when "type"
+        line += "type #{@target}, #{@value}"
+      when "typeKeys"
+        line += "type_keys #{@target}, #{@value}"
+      when "click"
+        line += "click #{@target}"
+      when "clickAt"
+        line += "click_at #{@target}, #{@value}"
+      when "dragAndDropToObject"
+        line += "drag_and_drop_to_object #{@target}, #{@value}"
+      when "waitForPageToLoad"
+        line += "wait_for_page_to_load #{@target}"
+      when "select"
+        line += "select #{@target}, #{@value}"
+      when "selectWindow"
+        line += "select_window #{@target}"
+      when "selectFrame"
+        line += "select_frame #{@target}"
+      when "mouseOver"
+        line += "mouse_over #{@target}"
+      when "mouseOut"
+        line += "mouse_out #{@target}"
+      when "keyUp"
+        line += "key_up #{@target}, #{@value}"
+      when "chooseCancelOnNextConfirmation"
+        line += "choose_cancel_on_next_confirmation"
+      when "verifyAlertPresent"
+        line = "begin\n    assert @selenium.is_alert_present\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyAlertNotPresent"
+        line = "begin\n    assert !@selenium.is_alert_present\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyTable"
+        line = "begin\n    assert_equal #{@value}, @selenium.get_table(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyNotTable"
+        line = "begin\n    assert_equal #{@value}, !@selenium.get_table(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyText"
+        line ="begin\n    assert_equal #{@value}, @selenium.get_text(#{@target}).force_encoding('UTF-8') \nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyTextPresent"
+        line ="begin\n     assert @selenium.is_text_present(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyTextNotPresent"
+        line = "begin\n    assert !@selenium.is_text_present(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "assertText"
+        line = "assert_equal #{@value}, @selenium.get_text(#{@target}).force_encoding('UTF-8') "
+      when "assertTable"
+        line = "assert_equal #{@value}, @selenium.get_table(#{@target})"
+      when "assertValue"
+        line = "assert_equal #{@value}, @selenium.get_value(#{@target})"
+      when "assertConfirmation"
+        line = "assert_equal #{@target}, @selenium.get_confirmation"
+      when "verifyElementPresent"
+        line = "begin\n    assert @selenium.is_element_present(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyElementNotPresent"
+        line = "begin\n    assert !@selenium.is_element_present(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyValue"
+        line = "begin\n    assert_equal #{@value}, @selenium.get_value(#{@target}).force_encoding('UTF-8') \nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifySelectOptions"
+        line = "begin\n    assert #{sanitize_for_regexp(@value)} =~ @selenium.get_select_options(#{@target}).join(\",\")\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyNotSelectOptions"
+        line = "begin\n    assert_not_equal #{@value}, @selenium.get_select_options(#{@target}).join(\",\")\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "assertChecked"
+        line = "assert @selenium.is_checked(#{@target})"
+      when "waitForElementPresent"
+        line = "assert !60.times{ break if (@selenium.is_element_present(#{@target}) rescue false); sleep 1 }"
+      when "waitForElementNotPresent"
+        line = "assert !60.times{ break unless (@selenium.is_element_present(#{@target}) rescue false); sleep 1 }"
+      when "openWindow"
+        line += "open_window #{@target}, #{@value}"
+      when "waitForPopUp"
+        line += "wait_for_pop_up #{@target}, #{@value}"
+      when "waitForValue"
+        line = "assert !60.times{ break if (#{@value} == @selenium.get_value(#{@target}) rescue false); sleep 1 }"
+      when "waitForTable"
+        line = "assert !60.times{ break if (#{@value} == @selenium.get_table(#{@target}) rescue false); sleep 1 }"
+      when "waitForText"
+        line = "assert !60.times{ break if (#{sanitize_for_regexp(@value)} =~ @selenium.get_text(#{@target}).force_encoding('UTF-8')  rescue false); sleep 1 }"
+      when "waitForNotText"
+        line = "assert !60.times{ break unless (#{sanitize_for_regexp(@value)} == @selenium.get_text(#{@target}).force_encoding('UTF-8')  rescue false); sleep 1 }"
+      when "waitForTextPresent"
+        line = "assert !60.times{ break if (@selenium.is_text_present(#{@target}) rescue false); sleep 1 }"
+      when "waitForTextNotPresent"
+        line = "assert !60.times{ break unless (@selenium.is_text_present(#{@target}) rescue true); sleep 1 }"
+      when "waitForSelectedLabel"
+        line = "assert !60.times{ break if (#{@value} == @selenium.get_selected_label(#{@target}) rescue false); sleep 1 }"
+      when "waitForSelectedValue"
+        line = "assert !60.times{ break if (#{@value} == @selenium.get_selected_value(#{@target}) rescue false); sleep 1 }"
+      when "waitForSelectedIndex"
+        line = "assert !60.times{ break if (#{@value} == @selenium.get_selected_index(#{@target}) rescue false); sleep 1 }"
+      when "waitForSelectOptions"
+        line = "assert !60.times{ break if (#{sanitize_for_regexp(@value)} =~ @selenium.get_select_options(#{@target}).join(\",\") rescue false); sleep 1 }"
+      when "waitForSomethingSelected"
+        line = "assert !60.times{ break if (@selenium.is_something_selected(#{@target}) rescue false); sleep 1 }"
+      when "waitForEditable"
+        line = "assert !60.times{ break if (@selenium.is_editable(#{@target}) rescue false); sleep 1 }"
+      when "waitForNotEditable"
+        line = "assert !60.times{ break unless (@selenium.is_editable(#{@target}) rescue true); sleep 1 }"
+      when "waitForVisible"
+        line = "assert !60.times{ break if (@selenium.is_visible(#{@target}) rescue false); sleep 1 }"
+      when "waitForNotVisible"
+        line = "assert !60.times{ break unless (@selenium.is_visible(#{@target}) rescue true); sleep 1 }"
+      when "waitForChecked"
+        line = "assert !60.times{ break if (@selenium.is_checked(#{@target}) rescue false); sleep 1 }"
+      when "verifyNotValue"
+        line = "begin\n    assert_not_equal #{@value}, @selenium.get_value(#{@target})\nrescue Exception=>e\n        @verification_errors << e\nend"
+      when "verifyNotText"
+        line = "begin\n    assert_not_equal #{@value}, @selenium.get_text(#{@target}).force_encoding('UTF-8') \nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "store"
+        line = "#{@value} = #{@target}"
+      when "storeSelectOptions"
+        line = "#{@value.gsub(/\"/, "")} = @selenium.get_select_options(#{@target})"
+      when "storeSelectedValue"
+        line = "#{@value.gsub(/\"/, "")} = @selenium.get_selected_value(#{@target})"
+      when "verifyExpression"
+        target = @target.gsub(/[${}]/,"")
+        line = "begin\n    assert_equal #{@value}, @selenium.get_expression(#{target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyVisible"
+        line = "begin\n    assert @selenium.is_visible(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyNotVisible"
+        line = "begin\n    assert !@selenium.is_visible(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyNotEditable"
+        line = "begin\n    assert !@selenium.is_editable(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "uncheck"
+        line += "uncheck #{@target}"
+      when "check"
+        line += "check #{@target}"
+      when "fireEvent"
+        line = "@selenium.fire_event #{@target}, #{@value}"
+      when "focus"
+        line = "@selenium.focus #{@target}"
+      when "keyPress"
+        line = "@selenium.key_press #{@target}, #{@value}"
+      when "verifyEditable"
+        line = "begin    \nassert @selenium.is_editable(#{@target})\nrescue Exception=>e    \n@verification_errors << e\nend"
+      when "verifyNotChecked"
+        line = "begin\n    assert !@selenium.is_checked(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifySelectedLabel"
+        line = "begin\n    assert_equal #{@value}, @selenium.get_selected_label(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyNotSelectedLabel"
+        line = "begin\n    assert_not_equal #{@value}, @selenium.get_selected_label(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifySelectedValue"
+        line = "begin\n    assert_equal #{@value}, @selenium.get_selected_value(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "verifyCursorPosition"
+        line = "begin\n    assert_equal #{@value}, @selenium.get_cursor_position(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "assertNotChecked"
+        line = "assert !@selenium.is_checked(#{@target})"
+      when "verifyChecked"
+        line = "begin\n    assert @selenium.is_checked(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "assertElementPresent"
+        line = "assert @selenium.is_element_present(#{@target})"
+      when "assertElementNotPresent"
+        line = "assert !@selenium.is_element_present(#{@target})"
+      when "storeText"
+        line = "#{@value.gsub(/\"/, "")} = @selenium.get_text(#{@target}).force_encoding('UTF-8') "
+      when "storeValue"
+        line = "#{@value.gsub(/\"/, "")} = @selenium.get_value(#{@target})"
+      when "verifyNotExpression"
+        line = "begin\n    assert_not_equal #{@value}, @selenium.get_expression(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "getEval"
+        line = "@selenium.get_eval(#{@target})"
+      when "dragAndDrop"
+        line = "@selenium.drag_and_drop #{@target}, #{@value}"
+      when "storeElementPositionLeft"
+        line = "I_position = @selenium.get_element_position_left(#{@target})"
+      when "waitForElementPositionLeft"
+        line = "assert !60.times{ break if (I_position == @selenium.get_element_position_left(#{@target}) rescue false); sleep 1 }"
+      when "verifySelected"
+        line = "begin\n    assert_equal #{@value}, @selenium.get_selected_label(#{@target})\n    rescue Test::Unit::AssertionFailedError\n    @verification_errors << $!\n    end"
+      when "waitForNotValue"
+        line = "assert !60.times{ break unless (#{@value} == @selenium.get_value(#{@target}) rescue true); sleep 1 }"
+      when 'close'
+        line = "@selenium.select_window #{@target}"
+      when "assertAlert"
+        line = "assert_equal #{@target}, @selenium.get_alert"
+      when "answerOnNextPrompt"
+        line = "@selenium.answer_on_next_prompt #{@target}"
+      when "assertPromptPresent"
+        line = "assert @selenium.is_prompt_present"
+      when "refresh"
+        line = "@selenium.refresh"
+      else
+        line = "flunk \"Unknown command #{@command}(#{@target}, #{@value})\""
+        puts line
     end
 
     # example: assert /^Are you sure[\s\S]$/ =~ @selenium.get_confirmation
@@ -446,6 +449,7 @@ class Converter < Base
     output = File.new(output_name, "w")
 
     doc = REXML::Document.new(file)
+    #puts doc
     test_name = doc.elements["/html/head/title"][0].to_s.gsub(/[^a-zA-Z0-9_]/, "")
     output.puts(Base.options[:header].gsub("${baseURL}", Base.options[:host]).gsub("${test_name}", test_name))
 
@@ -469,6 +473,7 @@ class Converter < Base
 
 
   def Converter.convert_element(element)
+    #puts element
     if !element or element.to_s.length == 0
       return ""
     end
@@ -478,20 +483,22 @@ class Converter < Base
     e1 = Converter.clear_tags(a[1].to_s.strip)
     e2 = Converter.clear_tags(a[2].to_s.strip)
     return "" if method.length == 0
+    #puts method.scan(/AndWait$/)
     if method.scan(/AndWait$/).size > 0
       method = method.gsub(/AndWait$/, "")
       ret += Command.new("waitForPageToLoad", Base.options[:global_timeout] ).format_command+"\n"
     end
-    ret = Command.new(method, e1, e2).format_command+"\n" + ret
+    ret = [Command.new(method, e1, e2).format_command+"\n" + ret]
+    #puts ret
     return ret
   end
 
   def Converter.verify(statement)
     return "begin\n" +
-      " "*Base.options[:indent] + statement + "\n" +
-      "rescue Test::Unit::AssertionFailedError\n" +
-      " "*Base.options[:indent] + "@verification_errors << $!\n" +
-      "end"
+        " "*Base.options[:indent] + statement + "\n" +
+        "rescue Exception=>e\n" +
+        " "*Base.options[:indent] + "@verification_errors << e\n" +
+        "end"
   end
 
   def Converter.clear_tags(text)
