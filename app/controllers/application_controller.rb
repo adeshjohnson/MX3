@@ -1537,13 +1537,13 @@ class ApplicationController < ActionController::Base
       session[:time_zone_offset] = Confline.get_value('System_time_zone_ofset').to_i
     else
       sql = 'select HOUR(timediff(now(),convert_tz(now(),@@session.time_zone,\'+00:00\'))) as u;'
-      logger.fatal "ddddddddddddddddddddddddddddddd"
+      #logger.fatal "ddddddddddddddddddddddddddddddd"
       z = ActiveRecord::Base.connection.select_all(sql)[0]['u']
-      logger.fatal "ddddddddddddddddddddddddddddddd"
+     # logger.fatal "ddddddddddddddddddddddddddddddd"
       t = z.to_s.to_i
-      logger.fatal "ddddddddddddddddddddddddddddddd"
+      #logger.fatal "ddddddddddddddddddddddddddddddd"
       Confline.set_value('System_time_zone_offset', t.to_i, 0)
-      logger.fatal "ddddddddddddddddddddddddddddddd"
+     # logger.fatal "ddddddddddddddddddddddddddddddd"
       session[:time_zone_offset] = Confline.get_value('System_time_zone_ofset').to_i
     end
     logger.fatal session[:time_zone_offset].to_i
