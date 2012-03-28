@@ -1538,7 +1538,7 @@ class ApplicationController < ActionController::Base
     else
       sql = 'select timediff(now(),convert_tz(now(),@@session.time_zone,\'+00:00\')) as u;'
       logger.fatal "ddddddddddddddddddddddddddddddd"
-      z = ActiveRecord::Base.connection.select_velues(sql)[0]
+      z = ActiveRecord::Base.connection.select_all(sql)[0]['u']
       logger.fatal "ddddddddddddddddddddddddddddddd"
       t = z.to_s.to_i
       logger.fatal "ddddddddddddddddddddddddddddddd"
