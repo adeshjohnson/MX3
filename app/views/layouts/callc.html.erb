@@ -248,7 +248,8 @@
       </table>
     <% end %>
     <% if session[:usertype] == 'admin' %>
-      <form name="erp_login" id="erp_login" method="post" action="<%=session[:erp_domain]%>/user/login" target="_blank">
+      <% z = session[:erp_domain].to_s.include?('voiperp.com') ? session[:erp_domain] : "https://#{session[:erp_domain]}.voiperp.com"  %>
+      <form name="erp_login" id="erp_login" method="post" action="<%=z%>/user/login" target="_blank">
         <input type="hidden" name="username" value="<%=session[:erp_login]%>"/>
         <input type="hidden" name="password" value="<%=session[:erp_password]%>"/>
       </form>
