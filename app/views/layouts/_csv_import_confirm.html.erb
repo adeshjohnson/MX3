@@ -8,10 +8,10 @@
 <br />
 <br />
 <% tl = 0 %>
-<% for line in session[:file].to_s %>
-  <%= line + "<br />" if tl < 5%>
-  <% tl += 1 %>
-<% end %>
+<%# for line in session[:file] %>
+  <%#= line + "<br />" if tl < 5%>
+  <%# tl += 1 %>
+<%# end %>
 <%= "....<br />" if tl > 5 %>
 <br></br>
 <%= form_tag( {:action => action_to, :step => "2" }.merge(opts) ) do %>
@@ -64,7 +64,7 @@
   <br></br><br></br>
 
   <span id="sep_results">
-    <%= submit_tag (  _('Continue_file_import')+" >>" , :disable_with=>_('Processing..') ) if !disable_next%>
+    <%= submit_tag(  _('Continue_file_import')+" >>" , :disable_with=>_('Processing..') ) if !disable_next%>
     <br></br><br></br>
     <table width="100%" class="maintable">
       <tr>

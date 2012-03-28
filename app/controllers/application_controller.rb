@@ -2089,7 +2089,7 @@ Variables: (Names marked with * are required)
           Confline.set_value("Last_Crash_Exception_Class", exception_class, 0)
 
           unless params[:this_is_fake_exception].to_s == "YES"
-            subject = "#{ExceptionNotifier.email_prefix} Exception. ID: #{id.to_s}"
+            subject = "#{ExceptionNotifier_email_prefix} Exception. ID: #{id.to_s}"
             time = Confline.get_value("Last_Crash_Exception_Time", 0)
             if time and !time.blank? and (Time.now - time.to_time) > 1.minute
               MorLog.my_debug("Crash email NOT sent : Time.now #{Time.now.to_s(:db)} - Last_Crash_Exception_Time #{time}")
@@ -2556,7 +2556,7 @@ Variables: (Names marked with * are required)
       disable_next = true if colums_size.size.to_i < min_collum_size.to_i
       flash[:notice] = nil
       flash[:status] = _('Please_confirm_column_delimiter_and_decimal_delimiter')
-      render :partial => "layouts/csv_import_confirm", :locals => {:sep=>sep, :dec=>dec, :sep1=>sep1, :dec1=>dec1, :return_type=>return_type.to_i, :action_to =>params[:action].to_s, :fl=>objc, :min_collum_size=>min_collum_size, :disable_next=>disable_next, :opts => opts }, :layout=>true and return false
+      render :partial => "layouts/csv_import_confirm", :locals => {:sep=>sep, :dec=>dec, :sep1=>sep1, :dec1=>dec1, :return_type=>return_type.to_i, :action_to =>params[:action].to_s, :fl=>objc, :min_collum_size=>min_collum_size, :disable_next=>disable_next, :opts => opts } and return false
     end
     true
   end

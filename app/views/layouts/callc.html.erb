@@ -61,7 +61,7 @@
       <div id="page_title_icon" class="page_title_new">
         <% if @page_title %>
           <span id="page_title">
-            <b>&nbsp;</b><%= image_tag('icons/' + @page_icon, :title => @page_title) if @page_icon %>&nbsp;<%= @page_title %>
+            <b>&nbsp;</b><%= image_tag('icons/' + @page_icon, :title => @page_title) if @page_icon %>&nbsp;<%=raw  @page_title.html_safe %>
           </span>
         <% end %>
         <% if @help_link and session[:usertype] == "admin" and session[:help_link].to_i == 0%>
