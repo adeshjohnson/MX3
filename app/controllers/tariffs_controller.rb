@@ -2886,7 +2886,7 @@ class TariffsController < ApplicationController
   # before_filter : user; tariff
   def generate_personal_wholesale_rates_csv
     filename = "Rates-#{(session[:show_currency]).to_s}.csv"
-    file = @tariff.generate_personal_wholesale_rates_csv(session)
+    file = @tariff.generate_providers_rates_csv(session)
     testable_file_send(file, filename, 'text/csv; charset=utf-8; header=present')
   end
 
