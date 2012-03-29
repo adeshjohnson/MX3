@@ -2088,8 +2088,8 @@ Localization.define('en') do |l|
   l.store 'New_Timeperiod', 'New Time Period'
   l.store 'New_Voice', 'New Voice'
   l.store 'Ivr_Name', 'IVR Name'
-  l.store 'System_May_Not_Be_Working_Propertly', 'System may not be working properly'
-  l.store 'Please_Check_System_Integrity_Here', 'Please check System Integrity here'
+  l.store 'System_May_Not_Be_Working_Propertly', 'Some of configuration needs your attention'
+  l.store 'Please_Check_System_Integrity_Here', 'Please click here to see it'
   l.store 'Integrity_Check', 'Integrity Check'
   l.store 'Voices', 'Voices'
   l.store 'Timeperiods', 'Time Periods'
@@ -4335,6 +4335,7 @@ Localization.define('en') do |l|
   l.store 'copy', 'copy'
   l.store 'Lcr_copy', 'Lcr copy'
   l.store 'Show_recordings_with_zero_billsec', 'Show recordings with zero billsec'
+  l.store 'for_more_details_click_here', 'for more details click here'
 
   #  l.store '', ''
   #  l.store '', ''
