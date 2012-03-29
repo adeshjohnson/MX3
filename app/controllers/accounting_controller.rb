@@ -1719,6 +1719,8 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     invoice.invoicedetails.destroy_all # we'll add new details
 
     period_start_with_time, period_end_with_time = invoice.period_start.to_time, invoice.period_end.to_time.change(:hour => 23, :min => 59, :sec => 59, :usec => 999999.999)
+    period_start = invoice.period_start.to_time
+    period_end = invoice.period_end.to_time.change(:hour => 23, :min => 59, :sec => 59, :usec => 999999.999)
 
     ind_ex = ActiveRecord::Base.connection.select_all("SHOW INDEX FROM calls")
 
@@ -1735,8 +1737,22 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     MorLog.my_debug("  Total subscriptions this period: #{total_subscriptions}")
 
 
+    # -- Minimal charge -----
+    # Minimal charge is counted for whole month(s), but only for postpaid users. To get a
+    # better understang of what is a 'whole month' look at month_difference method
+    minimal_charge_amount = 0
+    if mor_11_extend? and user.postpaid?
+      if user.add_on_minimal_charge? period_end
+        if user.minimal_charge_start_at < period_start
+          month_diff = ApplicationController.month_difference(period_start, period_end)
+        else
+          month_diff = ApplicationController.month_difference(user.minimal_charge_start_at, period_end)
+        end
+        minimal_charge_amount = month_diff * user.minimal_charge
+      end
+    end
     # check if we should generate invoice
-    if (outgoing_calls_price > 0) or (outgoing_calls_by_users_price > 0) or (incoming_received_calls_price > 0) or (incoming_made_calls_price > 0) or (total_subscriptions > 0)
+    if (outgoing_calls_price > 0) or (outgoing_calls_by_users_price > 0) or (incoming_received_calls_price > 0) or (incoming_made_calls_price > 0) or (total_subscriptions > 0) or (minimal_charge_amount > 0)
       MorLog.my_debug("    Generating invoice....")
 
       tax = user.get_tax.clone
@@ -1766,6 +1782,14 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
       #        invoice.invoicedetails.create(:name => _('Incoming_made_calls'), :price => incoming_made_calls_price.to_f, :quantity => incoming_made_calls, :invdet_type => 0)
       #        price += incoming_made_calls_price.to_f
       #      end
+
+      if mor_11_extend? and user.postpaid?
+        #if minimal charge is set for the user. and for this period
+        #calculated price is less than minimal charge, then we should recalculate price
+        if price < minimal_charge_amount
+          price = minimal_charge_amount
+        end
+      end
 
       MorLog.my_debug("    Invoice price without subscriptions: #{price.to_s}", 1)
 
