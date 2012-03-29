@@ -2550,7 +2550,7 @@ Variables: (Names marked with * are required)
 
     5.times{|num| objc[num] = f[num].to_s.split(sep1)}
 
-    line = 2
+    line = 1
     line = opts[:line] if opts[:line]
     colums_size =  f[line].to_s.split(params[:sepn2]) if params[:sepn2]
     colums_size =  f[line].to_s.split(sep1) if !params[:sepn2]

@@ -2620,9 +2620,17 @@ Sets default tax values for users or cardgroups
               device.callerid = "\"#{cli_name}\"<#{cli_number}>"
               device.save
               device.accountcode = device.id
-              device.save
+              if device.save
               a=configure_extensions(device.id, :current_user=>current_user)
               return false if !a
+              else
+                @error_array << arr
+                msq = ''
+                device.errors.each{ |key, value|
+                  msq += "<br> * #{_(value)}"
+                } if device.respond_to?(:errors)
+                @msg_array << msq
+              end
             else
               @error_array << arr
               @msg_array << err
@@ -2902,7 +2910,7 @@ Sets default tax values for users or cardgroups
       arr = file.split("\n")
       @fl = []
       5.times{|num| @fl[num] = arr[num].to_s.split(sep)}
-      if  @fl[2].size.to_i < params[:min_collum_size].to_i
+      if  @fl[1].size.to_i < params[:min_collum_size].to_i
         @notice = _('Not_enough_columns_check_csv_separators')
       end
       render :layout => false
