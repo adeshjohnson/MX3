@@ -682,14 +682,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>107.0000</td>
-	<td></td>
+	<td>verifyText</td>
+	<td>id=inv_full_price_3</td>
+	<td>300.0000</td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>707.0000</td>
-	<td></td>
+	<td>verifyText</td>
+	<td>id=inv_full_price_1</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=inv_full_price_2</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=inv_full_price_4</td>
+	<td>102.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_wat</td>
+	<td>702.0000</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -789,7 +804,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>id=inv_price_4</td>
-	<td>107.0000</td>
+	<td>102.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -1354,7 +1369,97 @@
 <tr>
 	<td>verifyText</td>
 	<td>id=inv_price_9</td>
-	<td>89.0000</td>
+	<td>115.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_minimal_charge</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices_recalculation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=12</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invoices recalculated: 4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=inv_price_3</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=inv_price_1</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=inv_price_2</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=inv_price_9</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=inv_price_4</td>
+	<td>210.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=inv_price_5</td>
+	<td>840.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total</td>
+	<td>1750.0000</td>
 </tr>
 </tbody></table>
 </body>
