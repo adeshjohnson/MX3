@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/users.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Column assignment </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* - These fields are necessary for registration </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=temp_id</td>
+	<td>label=id</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=username</td>
+	<td>label=username</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=password</td>
+	<td>label=password</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=first_name</td>
+	<td>label=first_name</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=last_name</td>
+	<td>label=last_name</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=country</td>
+	<td>label=country</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=email</td>
+	<td>label=email</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tr.row2 &gt; td</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=tr.row1 &gt; td</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>vardenis</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>jonas</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]</td>
+	<td>petras</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Total file lines: 3 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Errors: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter valid email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_link_6</td>
+	<td>jonas jonaitis</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_link_7</td>
+	<td>petras petraitis</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=users</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=username_value</td>
+	<td>jonas</td>
+</tr>
+<!--no temporary_id-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/devices.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=temp_device_id</td>
+	<td>label=id</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=temp_user_id</td>
+	<td>label=user_id</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=device_type</td>
+	<td>label=type</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=extension</td>
+	<td>label=ext</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=username</td>
+	<td>label=username</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=password</td>
+	<td>label=password</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=host</td>
+	<td>label=host</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=cli_name</td>
+	<td>label=cli_name</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=cli_number</td>
+	<td>label=cli_number</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Total file lines: 4 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Errors: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Password is too short</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
