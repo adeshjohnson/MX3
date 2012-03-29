@@ -205,6 +205,7 @@ class Invoice < ActiveRecord::Base
     n = 15 - items.size.to_i
     n.times { items << [' ', '', '', ''] } if n > 0
 
+    items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => [:top]}, {:text => self.nice_invoice_number(user.converted_minimal_charge(ex).to_f, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}] if user.minimal_charge_enabled?
     items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => [:top]}, {:text => self.nice_invoice_number(self.converted_price(ex).to_f, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}]
 
     items_t, up_string, tax_amount, price_with_tax = tax_items(ex, nc, nice_number_hash, 1)
@@ -317,9 +318,11 @@ class Invoice < ActiveRecord::Base
 
     if options[:show_avg_rate] == 1
       n.times { items <<  [' ', '', '', '', '', ''] } if n > 0
+      items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_f))]      if user.minimal_charge_enabled?
       items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(self.converted_price(ex)))]
     else
       n.times { items <<  [' ', '', '', '', '']  } if n > 0
+      items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_f))]       if user.minimal_charge_enabled?
       items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(self.converted_price(ex)))]
     end
     items_t, up_string, tax_amount, price_with_tax = tax_items(ex, nc, nice_number_hash, 2, options[:show_avg_rate])

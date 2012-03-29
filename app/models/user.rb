@@ -2962,6 +2962,13 @@ GROUP BY terminators.id;").map { |t| t.id }
     self.minimal_charge != 0
   end
 
+
+  # converted attributes for user in given currency exrate
+  def converted_minimal_charge(exr)
+    b = read_attribute(:minimal_charge)
+    b.to_f * exr.to_f
+  end
+
 =begin
   Check whether minimal charge should be added to invoice. answer depends on whether
   minimal charge is enabled and whether invoice period is greater than setting when
