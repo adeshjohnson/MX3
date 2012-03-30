@@ -46,6 +46,11 @@
 	<td>//body</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/calls_fix_delta</td>
+	<td></td>
+</tr>
 <!--Set taxex for all users-->
 <tr>
 	<td>open</td>
@@ -1115,12 +1120,12 @@
 <tr>
 	<td>verifyText</td>
 	<td>inv_price_5</td>
-	<td>5.00</td>
+	<td>13.00</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>inv_full_price_5</td>
-	<td>9.44</td>
+	<td>24.54</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1130,12 +1135,12 @@
 <tr>
 	<td>verifyText</td>
 	<td>price</td>
-	<td>5.00</td>
+	<td>13.00</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>full_price</td>
-	<td>9.44</td>
+	<td>24.54</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1145,12 +1150,12 @@
 <tr>
 	<td>verifyText</td>
 	<td>price_5</td>
-	<td>5.00</td>
+	<td>13.00</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>price_with_vat_5</td>
-	<td>9.44</td>
+	<td>24.54</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1213,12 +1218,12 @@
 <tr>
 	<td>verifyText</td>
 	<td>//invoice[1]/product[1]/price</td>
-	<td>10.0000</td>
+	<td>13.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>//product[2]/price</td>
-	<td>12.0000</td>
+	<td>11.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -1233,7 +1238,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>//invoice[2]/product/price</td>
-	<td>4.0000</td>
+	<td>5.0000</td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
@@ -1259,7 +1264,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>//invoice[2]/product/price</td>
-	<td>10.0000</td>
+	<td>13.0000</td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
@@ -1407,12 +1412,12 @@
 <tr>
 	<td>verifyText</td>
 	<td>id_price_10</td>
-	<td>3.0000</td>
+	<td>8.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>id_total_price_10</td>
-	<td>3.0000</td>
+	<td>8.0000</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -2233,7 +2238,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>7.55</td>
+	<td>9.44</td>
 	<td></td>
 </tr>
 <tr>
@@ -2878,7 +2883,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>inv_price_6</td>
-	<td>22.00</td>
+	<td>24.00</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2888,7 +2893,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>inv_price_9</td>
-	<td>3.00</td>
+	<td>8.00</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -2904,7 +2909,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>9,System Admin,3.00,2.67,5.67</td>
+	<td>9,System Admin,8.00,7.11,15.11 </td>
 	<td></td>
 </tr>
 <tr>
@@ -2914,12 +2919,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>5,System Admin,5.00,4.44,9.44</td>
+	<td>5,System Admin,13.00,11.54,24.54</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>6,Test Reseller,22.00,19.52,41.52</td>
+	<td>6,Test Reseller,24.00,21.31,45.31</td>
 	<td></td>
 </tr>
 <tr>
@@ -2935,22 +2940,22 @@
 <tr>
 	<td>verifyText</td>
 	<td>inv_full_price_9</td>
-	<td>5.67</td>
+	<td>15.11</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>inv_price_9</td>
-	<td>3.00</td>
+	<td>8.00</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>inv_full_price_5</td>
-	<td>9.44</td>
+	<td>24.54</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>inv_price_5</td>
-	<td>5.00</td>
+	<td>13.00</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2960,12 +2965,12 @@
 <tr>
 	<td>verifyText</td>
 	<td>inv_full_price_6</td>
-	<td>41.52</td>
+	<td>45.31</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>inv_price_6</td>
-	<td>22.00</td>
+	<td>24.00</td>
 </tr>
 <!--reseller-->
 <tr>
@@ -2996,12 +3001,12 @@
 <tr>
 	<td>verifyText</td>
 	<td>inv_full_price_1</td>
-	<td>7.55</td>
+	<td>9.44</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>inv_price_1</td>
-	<td>4.00</td>
+	<td>5.00</td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
@@ -3015,7 +3020,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>1,User Resellers,4.00,3.55,7.55</td>
+	<td>1,User Resellers,5.00,4.44,9.44</td>
 	<td></td>
 </tr>
 <tr>
@@ -3081,7 +3086,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>9,System Admin,3.00,2.67,5.67</td>
+	<td>9,System Admin,8.00,7.11,15.11</td>
 	<td></td>
 </tr>
 <tr>
@@ -3091,12 +3096,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>5,System Admin,5.00,4.44,9.44</td>
+	<td>5,System Admin,13.00,11.54,24.54</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>6,Test Reseller,22.00,19.52,41.52</td>
+	<td>6,Test Reseller,24.00,21.31,45.31</td>
 	<td></td>
 </tr>
 <tr>
@@ -3112,22 +3117,22 @@
 <tr>
 	<td>verifyText</td>
 	<td>inv_full_price_9</td>
-	<td>5.67</td>
+	<td>15.11</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>inv_price_9</td>
-	<td>3.00</td>
+	<td>8.00</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>inv_full_price_5</td>
-	<td>9.44</td>
+	<td>24.54</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>inv_price_5</td>
-	<td>5.00</td>
+	<td>13.00</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3137,12 +3142,12 @@
 <tr>
 	<td>verifyText</td>
 	<td>inv_full_price_6</td>
-	<td>41.52</td>
+	<td>45.31</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>inv_price_6</td>
-	<td>22.00</td>
+	<td>24.00</td>
 </tr>
 <tr>
 	<td>open</td>
