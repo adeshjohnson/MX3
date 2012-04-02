@@ -27,7 +27,7 @@
         <%= format_monitoring_type(monitoring.monitoring_type) %>
       </td>
       <td class="amount">
-        <%= monitoring.amount %>
+        <%= monitoring.amount if ['above','bellow'].include? monitoring.monitoring_type %>
       </td>
       <td class="block">
         <%= block_user(monitoring) %>

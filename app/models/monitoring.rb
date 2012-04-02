@@ -107,17 +107,19 @@ class Monitoring < ActiveRecord::Base
   end
 
   def amount_must_be_greater_than_zero
-    if !self.amount or self.amount <= 0.0
+    if ['above', 'bellow'].include? self.monitoring_type and (!self.amount or self.amount <= 0.0)
       errors.add(:amount, _('Amount_must_be_greater_than_zero'))
       return false
+    else
+      return true
     end
   end
 
   def monitoring_type_must_be_specified
-    unless ['above', 'bellow'].include? self.monitoring_type
+    unless ['above', 'bellow', 'simultaneous'].include? self.monitoring_type
       errors.add(:amount, _('Choose_monitoring_type'))
       return false
-    end
+    end 
   end
 
   def period_must_be_greater_than_thirty_minutes
@@ -129,7 +131,7 @@ class Monitoring < ActiveRecord::Base
 
   def must_have_at_least_one_action
     if !self.email and !self.block
-      errors.add_to_base(_('Monitoring_must_either_be_blocking_or_notifying'))
+      errors.add(:block, _('Monitoring_must_either_be_blocking_or_notifying'))
       return false
     end
   end
@@ -188,6 +190,33 @@ class Monitoring < ActiveRecord::Base
 
   def existent?
     @existent_record
+  end
+
+  def simultaneous_calls
+    find_all_users_sql = self.owner_id == 0 ? '' : " AND users.owner_id = #{self.owner_id} "
+
+    if user_type && user_type =~ /postpaid|prepaid/ # monitoring for postpaids and prepaids
+      users = User.find(:all,
+        :select => 'callsA.dst dst, callA.calldate calldateA, callsA.src srcA, callsB.calldate calldateB, callsB.dst dstB',
+        :conditions => ["callsA.calldate between callsB.calldate and callsB.calldate + INTERVAL callsB.duration SECOND AND callsA.uniqueid != callsB.uniqueid AND users.blocked = 0 AND users.postpaid = ? AND users.ignore_global_monitorings = 0 #{find_all_users_sql}", ((self.user_type == "postpaid") ? 1 : 0) ],
+        :group => 
+        :joins => "JOIN calls callsA ON (callsA.user_id = users.id AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))
+                   JOIN calls callsB ON (callsA.dst = callsB.dst AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
+    elsif user_type && user_type =~ /all/ # monitoring for all users
+      users = User.find(:all,
+        :select => 'callsA.dst dst, callA.calldate calldateA, callsA.src srcA, callsB.calldate calldateB, callsB.dst dstB',
+        :conditions => ["callsA.calldate between callsB.calldate and callsB.calldate + INTERVAL callsB.duration SECOND AND callsA.uniqueid != callsB.uniqueid AND users.blocked = 0 AND users.ignore_global_monitorings = 0 #{find_all_users_sql}"],
+        :group => "users.id",
+        :joins => "JOIN calls callsA ON (callsA.user_id = users.id AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))
+                   JOIN calls callsB ON (callsA.dst = callsB.dst AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
+    else # monitoring for individual users
+      users = User.find(:all,
+        :select => 'callsA.dst dst, callA.calldate calldateA, callsA.src srcA, callsB.calldate calldateB, callsB.dst dstB',
+        :conditions => ["callsA.calldate between callsB.calldate and callsB.calldate + INTERVAL callsB.duration SECOND AND callsA.uniqueid != callsB.uniqueid AND users.blocked = 0 AND users.ignore_global_monitorings = 0 #{find_all_users_sql}", self.id],
+        :joins => "JOIN calls callsA ON (callsA.user_id = users.id AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))
+                   JOIN calls callsB ON (callsA.dst = callsB.dst AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
+    end
+    return users
   end
 
 end

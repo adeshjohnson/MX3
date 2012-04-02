@@ -3,7 +3,7 @@
   <%str=[] ; @m_users.each{|u| str << nice_user(u)};  s = str.size.to_i > 1 ? 's' :''  %>
   <%= _('for_user'+s) + ': ' + str.join('; ') %>
 <%end%></h3>
-<% form_for :monitoring, @monitoring, :url => { :action => 'update', :id => @monitoring.id }, :builder => MonitoringFormBuilder do |f| %>
+<%= form_for @monitoring, :url => { :action => 'update', :id => @monitoring.id }, :builder => MonitoringFormBuilder do |f| %>
   <table width="100%" class="monitoring" cellspacing="0" cellpadding="0">
     <thead>
       <tr>

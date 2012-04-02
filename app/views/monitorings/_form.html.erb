@@ -40,6 +40,7 @@
   <div class="center"><%= _('than') %>
   <%= form.text_field :amount, :class => "input", :size => 10, :id => "amount" %></div>
   <%= hidden_field_tag "default_currency", Currency.get_default.name, :id => "default_currency" %>
+  <%= form.radio_button :monitoring_type, 'simultaneous', :id => "simultaneous_calls" %> <%= _('Simultaneous_calls') %><br/>
 </td>
 <td>
   <%= form.radio_button :block, true, :id => "will_be_blocked" %> <%= _('Block') %><br/>

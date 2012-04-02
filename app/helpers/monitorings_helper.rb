@@ -37,8 +37,12 @@ module MonitoringsHelper
   def format_monitoring_type(type)
     if type == 'bellow'
       _('Drops_bellow')
-    else
+    elsif type == 'above'
       _('Increases_more')
+    elsif type == 'simultaneous'
+      _('Simultaneous_calls')
+    else
+      _('Specify_how_to_format_monitoring_type') 
     end
   end
 
