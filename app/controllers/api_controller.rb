@@ -3472,7 +3472,7 @@ class ApiController < ApplicationController
                     doc.status("ok")
                     doc.device_id(device.id)
                     doc.user_id(device.user_id)
-                    doc.new_balance(device.user.blance)
+                    doc.new_balance(device.user.balance)
                   }
                 else
                   doc.error("Failed to make transaction")
@@ -3582,7 +3582,7 @@ class ApiController < ApplicationController
                 doc.status("ok")
                 doc.device_id(device.id)
                 doc.user_id(device.user_id)
-                doc.new_balance(device.user.blance)
+                doc.new_balance(device.user.balance)
               }
             else
               doc.error("Failed to make transaction")
