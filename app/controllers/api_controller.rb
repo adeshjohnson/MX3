@@ -3468,7 +3468,12 @@ class ApiController < ApplicationController
               if card_by_pin.save
                 if device.user.add_to_balance(card_by_pin.balance)
                   card_by_pin.add_to_balance(card_by_pin.balance * -1)
-                  respond_to_successful_card_operation(doc, card_by_pin)
+                  doc.response {
+                    doc.status("ok")
+                    doc.device_id(device.id)
+                    doc.user_id(device.user_id)
+                    doc.new_balance(device.user.blance)
+                  }
                 else
                   doc.error("Failed to make transaction")
                 end
@@ -3575,6 +3580,9 @@ class ApiController < ApplicationController
             if device.user.add_to_balance(values[:amount].to_f)
               doc.response {
                 doc.status("ok")
+                doc.device_id(device.id)
+                doc.user_id(device.user_id)
+                doc.new_balance(device.user.blance)
               }
             else
               doc.error("Failed to make transaction")
