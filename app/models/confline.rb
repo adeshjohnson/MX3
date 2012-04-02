@@ -46,7 +46,8 @@ class Confline < ActiveRecord::Base
     cl = Confline.find(:first, :conditions => ["name = ? and owner_id = ?", name, id])
     if cl
       if cl.value.to_s != value.to_s
-        Action.add_action_hash(User.current.id, {:action=>"Confline changed", :target_id=>cl.id, :target_type=>'confline', :data=>cl.value.to_s, :data2=>value.to_s, :data4=>name})
+        u = User.current ? User.current.id : -1
+        Action.add_action_hash(u, {:action=>"Confline changed", :target_id=>cl.id, :target_type=>'confline', :data=>cl.value.to_s, :data2=>value.to_s, :data4=>name})
       end
       cl.value = value
       cl.save

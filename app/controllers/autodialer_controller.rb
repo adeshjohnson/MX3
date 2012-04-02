@@ -447,9 +447,9 @@ class AutodialerController < ApplicationController
           ine = 0
           #create string fo column chart
           @Calls_graph = ""
-          while ine <= index -1
+          while ine <= index - 1
             @Calls_graph +=@a_date[ine].to_s  + ";" + @a_calls[ine].to_s + "\\n"
-            ine=ine +1
+            ine= ine + 1
           end
         else
           flash[:notice] = _('No_calls_with_campaign') + @campaing_stat.name
