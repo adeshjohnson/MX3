@@ -4337,6 +4337,7 @@ Localization.define('en') do |l|
   l.store 'Show_recordings_with_zero_billsec', 'Show recordings with zero billsec'
   l.store 'for_more_details_click_here', 'for more details click here'
   l.store 'Simultaneous_calls', 'Simultaneous calls'
+  l.store 'failed_to_parse_uri', 'Failed to parse uri'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

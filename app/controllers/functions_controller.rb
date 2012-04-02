@@ -2959,21 +2959,23 @@ Sets default tax values for users or cardgroups
   end
 
   def generate_hash
+    @page_title = _('Generate_hash')     
     if current_user.is_admin?
       @api_link = params[:link].to_s
       if not @api_link.blank?
         @query_values = Hash.new
         begin
           CGI::parse(URI.parse(@api_link).query).each { |key, value | @query_values[key.to_sym] = value[0]}
+          flash[:notice] = nil 
         rescue
-          flash[:notice] = "failed to parse uri #{@api_link}"
+          flash[:notice] = _("failed_to_parse_uri") + ' ' + @api_link  
         end
         dummy, ret, @hash_param_order = MorApi.check_params_with_all_keys(@query_values, dummy)
         @system_hash = ret[:system_hash]
       end
     else
       dont_be_so_smart
-      redirect_to :controller => 'main', :action => 'callc'
+      redirect_to :controller => 'callc', :action => 'main'
     end
   end
 

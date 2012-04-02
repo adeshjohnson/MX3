@@ -12,18 +12,18 @@
     <% @hash_param_order.each do |hash_param| %>
        <% if @query_values.has_key?(hash_param.to_sym) %>
          <tr>
-           <td> <%= hash_param %> </td>
-           <td> <%= @query_values[hash_param.to_sym] %> </td>
+           <td id=<%="param_#{hash_param}"%>> <%= hash_param %> </td>
+           <td id=<%="param_value_#{hash_param}"%>> <%= @query_values[hash_param.to_sym] %> </td>
          </tr>
        <% end %>
     <% end %>
     <tr>
       <td> <%= _('API key') %> </td>
-      <td> <%= Confline.get_value('API_Secret_Key') %> </td>
+      <td id="secret_key"> <%= Confline.get_value('API_Secret_Key') %> </td>
     </tr>
     <tr>
       <td> <%= _("Generated_hash") %> </td>
-      <td> <%= @system_hash %> </td>
+      <td id="system_hash"> <%= @system_hash %> </td>
     </tr>
   <table>
   <%= b_info + _('Parameters_are_in_the_same_order_as_when_hash_was_generated') %>.
