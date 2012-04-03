@@ -74,16 +74,17 @@ class Lcr < ActiveRecord::Base
 
   def add_provider(prov)
     if self.order.to_s == "percent"
-      @pr = Lcrprovider.find(:first, :conditions=>["lcr_id = ?", self.id], :order=>"percent asc")
-      if @pr
-        proc = @pr.percent.to_i / 2.to_i
-        @pr.percent % 2 == 1 ? i = 1 : i = 0
-        @pr.percent = proc.to_i + i.to_i
-        @pr.save
+      @prs = Lcrprovider.find(:all, :conditions=>["lcr_id = ?", self.id])
+      if @prs
+        lcr_percent = 10000 / (@prs.size + 1)
+        for pr in @prs 
+          pr.percent = lcr_percent
+          pr.save
+        end
       else
-        proc = 10000
+        lcr_percent = 10000
       end
-      Lcrprovider.create({:lcr_id=>id, :provider_id=>prov.id.to_i, :percent=>proc.to_i})
+      Lcrprovider.create({:lcr_id=>id, :provider_id=>prov.id.to_i, :percent=>lcr_percent})
     else
       lprov = Lcrprovider.find(:first, :conditions=>["lcr_id = ?", self.id], :order=>"priority desc")
       Lcrprovider.create({:lcr_id=>id, :provider_id=>prov.id.to_i, :priority=>(lprov ? lprov.priority.to_i + 1 : 1)})
@@ -94,11 +95,13 @@ class Lcr < ActiveRecord::Base
     if self.order.to_s == "percent"
       @pr2 = Lcrprovider.find(:first, :conditions=>["lcr_id = ? AND provider_id = ?",self.id.to_s,  prov_id.to_s])
       if @pr2
-        @pr = Lcrprovider.find(:first, :conditions=>["lcr_id = ? AND id != ?", self.id.to_s, @pr2.id], :order=>"percent desc")
-
-        if @pr
-          @pr.percent =@pr.percent.to_f + @pr2.percent.to_f
-          @pr.save
+        @prs = Lcrprovider.find(:all, :conditions=>["lcr_id = ? AND id != ?", self.id.to_s, @pr2.id])
+        if @prs.size > 0
+          lcr_percent = 10000 / @prs.size 
+          for pr in @prs
+            pr.percent = lcr_percent 
+            pr.save
+          end
         end
       end
     end
