@@ -4338,6 +4338,7 @@ Localization.define('en') do |l|
   l.store 'for_more_details_click_here', 'for more details click here'
   l.store 'Simultaneous_calls', 'Simultaneous calls'
   l.store 'failed_to_parse_uri', 'Failed to parse uri'
+  l.store 'Call_over_quick_forward_did', 'Call over quick forward did' 
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

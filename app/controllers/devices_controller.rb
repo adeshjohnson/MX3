@@ -363,6 +363,8 @@ class DevicesController < ApplicationController
     if not @new_device and  @device.device_type != "FAX"
       params[:device][:tell_rtime_when_left]=params[:device][:tell_rtime_when_left].to_s.strip
       params[:device][:repeat_rtime_every]=params[:device][:repeat_rtime_every].to_s.strip
+      params[:device][:qf_tell_time] = params[:device][:qf_tell_time].to_i
+      params[:device][:qf_tell_balance] = params[:device][:qf_tell_balance].to_i
     end
 
     #============================= end  ============================================================
