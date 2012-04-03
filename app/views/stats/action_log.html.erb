@@ -110,7 +110,7 @@
       </td>
       <% if r['action'].match("did")%>
         <% did = Did.find_by_id(r['data'].to_i)%>
-        <td><%=link_to did.did ,:controller=>"dids", :action=>"edit", :id=> h(r['data']), :back_controller =>"stats", :back_action=>"action_log" if did%></td>
+        <td id="data_<%=r['id'] %>"><%=link_to did.did ,:controller=>"dids", :action=>"edit", :id=> h(r['data']), :back_controller =>"stats", :back_action=>"action_log" if did%></td>
       <% else %>
         <td id="data_<%=r['id'] %>"><%= h(r['data'].to_s) %> </td>
       <% end %>

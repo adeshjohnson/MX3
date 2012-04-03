@@ -458,28 +458,28 @@
       <% if tl < 20 and tl != 0-@include.to_i %>
         <% arr = line.split(@sep) %>
         <tr class="row<%= (tl % 2 + 1).to_s %>">
-          <td> <%= clean_value_all arr[session[:imp_user_temp_id]].to_s.gsub(@dec,".") if session[:imp_user_temp_id] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_username]].to_s if session[:imp_user_username] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_password]].to_s if session[:imp_user_password] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_first_name]].to_s if session[:imp_user_first_name] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_last_name]].to_s if session[:imp_user_last_name] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_personal_id]].to_s if session[:imp_user_personal_id] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_vat_reg_number]].to_s.gsub(@dec,".") if session[:imp_user_vat_reg_number] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_balance]].to_s.gsub(@dec,".") if session[:imp_user_balance] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_credit]].to_s.gsub(@dec,".") if session[:imp_user_credit] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_credit_unlimited]].to_s.gsub(@dec,".") if session[:imp_user_credit_unlimited] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_lcr]].to_s.gsub(@dec,".") if session[:imp_user_lcr] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_tariff]].to_s.gsub(@dec,".") if session[:imp_user_tariff] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_payment_type]].to_s.gsub(@dec,".") if session[:imp_user_payment_type] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_address]].to_s if session[:imp_user_address] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_postcode]].to_s if session[:imp_user_postcode] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_city]].to_s if session[:imp_user_city] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_country]].to_s if session[:imp_user_country] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_state]].to_s if session[:imp_user_state] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_phone]].to_s.gsub(@dec,".") if session[:imp_user_phone] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_mob_phone]].to_s.gsub(@dec,".") if session[:imp_user_mob_phone] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_fax]].to_s.gsub(@dec,".") if session[:imp_user_fax] >= 0 %>    </td>
-          <td> <%= clean_value_all arr[session[:imp_user_email]].to_s if session[:imp_user_email] >= 0 %>    </td>
+          <td id="user_temp_id_<%=tl%>"> <%= clean_value_all arr[session[:imp_user_temp_id]].to_s.gsub(@dec,".") if session[:imp_user_temp_id] >= 0 %>    </td>
+          <td id="user_username_<%=tl%>"> <%= clean_value_all arr[session[:imp_user_username]].to_s if session[:imp_user_username] >= 0 %>    </td>
+          <td id="user_pasword_<%=tl%>"> <%= clean_value_all arr[session[:imp_user_password]].to_s if session[:imp_user_password] >= 0 %>    </td>
+          <td id="user_f_name_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_first_name]].to_s if session[:imp_user_first_name] >= 0 %>    </td>
+          <td id="user_l_name_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_last_name]].to_s if session[:imp_user_last_name] >= 0 %>    </td>
+          <td id="user_personal_id_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_personal_id]].to_s if session[:imp_user_personal_id] >= 0 %>    </td>
+          <td id="user_vat_nr_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_vat_reg_number]].to_s.gsub(@dec,".") if session[:imp_user_vat_reg_number] >= 0 %>    </td>
+          <td id="user_balance_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_balance]].to_s.gsub(@dec,".") if session[:imp_user_balance] >= 0 %>    </td>
+          <td id="user_credit_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_credit]].to_s.gsub(@dec,".") if session[:imp_user_credit] >= 0 %>    </td>
+          <td id="user_credit_unlimited_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_credit_unlimited]].to_s.gsub(@dec,".") if session[:imp_user_credit_unlimited] >= 0 %>    </td>
+          <td id="user_lcr_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_lcr]].to_s.gsub(@dec,".") if session[:imp_user_lcr] >= 0 %>    </td>
+          <td id="user_tariff_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_tariff]].to_s.gsub(@dec,".") if session[:imp_user_tariff] >= 0 %>    </td>
+          <td id="user_payment_type_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_payment_type]].to_s.gsub(@dec,".") if session[:imp_user_payment_type] >= 0 %>    </td>
+          <td id="user_address_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_address]].to_s if session[:imp_user_address] >= 0 %>    </td>
+          <td id="user_postcode_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_postcode]].to_s if session[:imp_user_postcode] >= 0 %>    </td>
+          <td id="user_city_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_city]].to_s if session[:imp_user_city] >= 0 %>    </td>
+          <td id="user_country_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_country]].to_s if session[:imp_user_country] >= 0 %>    </td>
+          <td id="user_state_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_state]].to_s if session[:imp_user_state] >= 0 %>    </td>
+          <td id="user_phone_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_phone]].to_s.gsub(@dec,".") if session[:imp_user_phone] >= 0 %>    </td>
+          <td id="user_mob_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_mob_phone]].to_s.gsub(@dec,".") if session[:imp_user_mob_phone] >= 0 %>    </td>
+          <td id="user_fax_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_fax]].to_s.gsub(@dec,".") if session[:imp_user_fax] >= 0 %>    </td>
+          <td id="user_email_<%=tl%>" > <%= clean_value_all arr[session[:imp_user_email]].to_s if session[:imp_user_email] >= 0 %>    </td>
         </tr>
       <% end %>
       <% tl += 1 %>
@@ -532,14 +532,14 @@
       <% for line in @error_array %>
         <% arr = line.split(@sep) %>
         <tr class="row<%= (tl % 2 + 1).to_s %>">
-          <td> <%= clean_value_all(arr[session[:imp_user_temp_id]].to_s) if session[:imp_user_temp_id] >= 0 %>    </td>
-          <td> <%= clean_value_all(arr[session[:imp_user_username]].to_s) if session[:imp_user_username] >= 0 %>    </td>
-          <td> <%= clean_value_all(arr[session[:imp_user_password]].to_s)  if session[:imp_user_password] >= 0 %>    </td>
-          <td> <%= clean_value_all(arr[session[:imp_user_first_name]].to_s) if session[:imp_user_first_name] >= 0 %>    </td>
-          <td> <%= clean_value_all(arr[session[:imp_user_last_name]].to_s) if session[:imp_user_last_name] >= 0 %>    </td>
-          <td> <%= clean_value_all(arr[session[:imp_user_country]].to_s) if session[:imp_user_country] >= 0 %>    </td>
-          <td> <%= clean_value_all(arr[session[:imp_user_email]].to_s) if session[:imp_user_email] >= 0 %>    </td>
-          <td> <%= @msg_array[tl]%> </td>
+          <td id="e_ti_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_temp_id]].to_s) if session[:imp_user_temp_id] >= 0 %>    </td>
+          <td id="e_uu_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_username]].to_s) if session[:imp_user_username] >= 0 %>    </td>
+          <td id="e_up_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_password]].to_s)  if session[:imp_user_password] >= 0 %>    </td>
+          <td id="e_ufn_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_first_name]].to_s) if session[:imp_user_first_name] >= 0 %>    </td>
+          <td id="e_uln_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_last_name]].to_s) if session[:imp_user_last_name] >= 0 %>    </td>
+          <td id="e_c_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_country]].to_s) if session[:imp_user_country] >= 0 %>    </td>
+          <td id="e_email_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_email]].to_s) if session[:imp_user_email] >= 0 %>    </td>
+          <td id="e_message_<%=tl%>"> <%= @msg_array[tl]%> </td>
         </tr>
         <% tl += 1 %>
       <% end %>
@@ -567,14 +567,14 @@
       <% for line in @warn_array %>
         <% arr = line.split(@sep) %>
         <tr class="row<%= (tl % 2 + 1).to_s %>">
-          <td> <%= clean_value_all(arr[session[:imp_user_temp_id]].to_s) if session[:imp_user_temp_id] >= 0 %>    </td>
-          <td> <%= clean_value_all(arr[session[:imp_user_username]].to_s) if session[:imp_user_username] >= 0 %>    </td>
-          <td> <%= clean_value_all(arr[session[:imp_user_password]].to_s)  if session[:imp_user_password] >= 0 %>    </td>
-          <td> <%= clean_value_all(arr[session[:imp_user_first_name]].to_s) if session[:imp_user_first_name] >= 0 %>    </td>
-          <td> <%= clean_value_all(arr[session[:imp_user_last_name]].to_s) if session[:imp_user_last_name] >= 0 %>    </td>
-          <td> <%= clean_value_all(arr[session[:imp_user_country]].to_s) if session[:imp_user_country] >= 0 %>    </td>
-          <td> <%= clean_value_all(arr[session[:imp_user_email]].to_s) if session[:imp_user_email] >= 0 %>    </td>
-          <td> <%= @warn_msg[tl]%> </td>
+          <td id="w_ti_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_temp_id]].to_s) if session[:imp_user_temp_id] >= 0 %>    </td>
+          <td id="w_uu_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_username]].to_s) if session[:imp_user_username] >= 0 %>    </td>
+          <td id="w_up_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_password]].to_s)  if session[:imp_user_password] >= 0 %>    </td>
+          <td id="w_ufn_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_first_name]].to_s) if session[:imp_user_first_name] >= 0 %>    </td>
+          <td id="w_uln_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_last_name]].to_s) if session[:imp_user_last_name] >= 0 %>    </td>
+          <td id="w_c_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_country]].to_s) if session[:imp_user_country] >= 0 %>    </td>
+          <td id="w_e_<%=tl%>"> <%= clean_value_all(arr[session[:imp_user_email]].to_s) if session[:imp_user_email] >= 0 %>    </td>
+          <td id="w_msg_<%=tl%>"> <%= @warn_msg[tl]%> </td>
         </tr>
         <% tl += 1 %>
       <% end %>
