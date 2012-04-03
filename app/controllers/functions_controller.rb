@@ -704,7 +704,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       if @user_owner.is_reseller? and @user_owner.is_allow_manage_providers? and prov.common_use == 1
         #t=Tariff.find_by_id(current_user.tariff_id)
         data =  CommonUseProvider.find(:first,:conditions =>" reseller_id = #{@user_owner.id} AND provider_id = #{prov.id}",:include=>[:tariff] )
-        t = data.tariff
+        t = data.tariff if data
         unless t
           flash[:notice] = _('Tariff_not_found')
           redirect_to :action => 'call_tracing' and return false
