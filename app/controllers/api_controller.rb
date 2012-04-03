@@ -1428,7 +1428,7 @@ class ApiController < ApplicationController
         end
 
         if @user_logged.usertype.to_s == "reseller"
-          user = User.find(:first, :conditions => ["id=? and owner_id =?", @options[:s_user], @user_logged.id]) if @options[:s_user] != "all" and !@options[:s_user].blank?
+          user = User.find(:first, :conditions => ["id=? and owner_id =?", @options[:s_user], @user_logged.id]) if @options[:s_user] =~ /^[0-9]+$/ 
           user = @user_logged if @options[:s_user].to_i == @user_logged.id.to_i
           device = Device.find_by_id(@options[:s_device]) if @options[:s_device] != "all" and !@options[:s_device].blank?
           if Confline.get_value('Show_HGC_for_Resellers').to_i == 1
@@ -1449,7 +1449,7 @@ class ApiController < ApplicationController
         end
 
         if ["admin", "accountant"].include?(@user_logged.usertype.to_s)
-          user = User.find_by_id(@options[:s_user]) if @options[:s_user] != "all" and !@options[:s_user].blank?
+          user = User.find_by_id(@options[:s_user]) if @options[:s_user] =~ /^[0-9]+$/ 
           device = Device.find_by_id(@options[:s_device]) if @options[:s_device] != "all" and !@options[:s_device].blank?
           did = Did.find_by_id(@options[:s_did]) if @options[:s_did] != "all" and !@options[:s_did].blank?
           hgc = Hangupcausecode.find_by_id(@options[:s_hgc]) if @options[:s_hgc].to_i > 0
@@ -1484,7 +1484,10 @@ class ApiController < ApplicationController
               doc.show_user(@options[:s_user])
               doc.show_device(@options[:s_device])
               doc.show_status(@options[:s_call_type])
-              doc.show_direction(@options[:s_direction])
+              doc.show_provider(@options[:s_provider]) if !@options[:s_provider].blank? 
+ 	      doc.show_hgc(@options[:s_hgc]) if !@options[:s_hgc].blank? 
+ 	      doc.show_did(@options[:s_did]) if !@options[:s_did].blank? 
+ 	      doc.show_destination(@options[:s_destination]) if !@options[:s_destination].blank? 
               if calls and calls.size.to_i > 0
                 doc.calls {
                   for call in calls
