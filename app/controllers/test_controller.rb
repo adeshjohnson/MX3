@@ -135,7 +135,7 @@ class TestController < ApplicationController
   end
   
   def test_api
-    allow , values =API::check_params_with_all_keys(params, request)
+    allow , values = MorApi.check_params_with_all_keys(params, request)
     render :text => values[:system_hash]
   end
 
