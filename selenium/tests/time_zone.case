@@ -62,6 +62,16 @@
 	<td>//body</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/global_time_zone_plus_two</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
 <!--ADMIN GMT+00:00-->
 <tr>
 	<td>open</td>
@@ -1574,13 +1584,26 @@
 	<td>//div[@id='table']/table/tbody/tr[2]/td[2]</td>
 	<td>2</td>
 </tr>
-<!--<tr> 	<td>verifyText</td> 	<td>//div[@id='table']/table/tbody/tr[3]/td[2]</td> 	<td>3</td> </tr>-->
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[3]/td[2]</td>
+	<td>3</td>
+</tr>
 <tr>
 	<td>verifyText</td>
 	<td>//div[@id='table']/table/tbody/tr[4]/td[2]</td>
 	<td>5</td>
 </tr>
-<!--<tr> 	<td>verifyText</td> 	<td>//div[@id='table']/table/tbody/tr[5]/td[2]</td> 	<td>3</td> </tr> <tr> 	<td>verifyText</td> 	<td>id=total_calls</td> 	<td>13</td> </tr>-->
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='table']/table/tbody/tr[5]/td[2]</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_calls</td>
+	<td>13</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
