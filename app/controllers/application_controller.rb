@@ -2889,7 +2889,8 @@ Variables: (Names marked with * are required)
   end
 
   def mor_11_extend?
-    params[:controller].to_s == 'api' ?  1 == Confline.get_value("MOR_11_extend", 0).to_i :  1 == session[:mor_11_extend].to_i
+   # params[:controller].to_s == 'api' ?  1 == Confline.get_value("MOR_11_extend", 0).to_i :  1 == session[:mor_11_extend].to_i
+    true
   end
 
   def ast_18?
