@@ -368,7 +368,11 @@ class AutodialerController < ApplicationController
     year, month, day = last_day_month('till')
     @edate = Time.mktime(year,month,day)
     @campaign_id = params[:campaign_id] ? params[:campaign_id].to_i : -1
-    @campaigns = Campaign.find(:all)
+    #ticket #5472 campaigns.owner_id seems to be 0 all the time, maybe it's 
+    #representing owner of the user that created campaign. 
+    #seems that campaigns.user_id is representing creator/owner of the campaign
+    campaign_owner_id = ((@current_user.is_admin?  or @current_user.is_accountant?) ? 0 : @current_user.id)
+    @campaigns = Campaign.find(:all, :conditions => "user_id = #{campaign_owner_id}")
     @Calltime_graph =""
     @answered_percent = @no_answer_percent = @failed_percent = @busy_percent = 0
     @calls_busy = @calls_failed = @calls_no_answer = @calls_answered = 0
