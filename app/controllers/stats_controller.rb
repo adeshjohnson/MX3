@@ -55,10 +55,10 @@ class StatsController < ApplicationController
     sql_get = "SELECT COUNT(A.users_id) as users, SUM(A.balance) as balance, SUM(A.calls) as calls, SUM(sum_duration) as sum_duration, SUM(price) as price, SUM( provider_price)as provider_price, SUM(reseller_price) as reseller_price
     FROM (SELECT users.id as 'users_id', users.balance as 'balance', B.calls as 'calls', B.sum_duration as 'sum_duration', B.price as 'price', B.provider_price as 'provider_price', B.reseller_price as 'reseller_price'
     FROM users
-    LEFT JOIN (SELECT providers.common_use, users.id as 'users_id', users.balance as 'balance', COUNT( calls.id ) AS 'calls', sum( IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) ) ) AS 'sum_duration', SUM( calls.user_price ) AS 'price', SUM( #{provider_prices}) AS 'provider_price', SUM( calls.reseller_price ) AS 'reseller_price'
+    LEFT JOIN (SELECT users.id as 'users_id', users.balance as 'balance', COUNT( calls.id ) AS 'calls', sum( IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) ) ) AS 'sum_duration', SUM( calls.user_price ) AS 'price', SUM( #{provider_prices}) AS 'provider_price', SUM( calls.reseller_price ) AS 'reseller_price'
     FROM users
     LEFT JOIN calls ON (calls.user_id = users.id)
-    LEFT JOIN providers ON calls.provider_id = providers.id
+    #{'LEFT JOIN providers ON calls.provider_id = providers.id ' if session[:usertype] == "reseller" and current_user.own_providers.to_i == 1}
     WHERE calldate BETWEEN '" + session_from_datetime + "' AND '" + session_till_datetime + "' #{caller_type} AND disposition = 'ANSWERED'
     GROUP BY users.id
     ORDER BY users.first_name ASC) AS B ON (users.id = B.users_id)
@@ -92,17 +92,16 @@ class StatsController < ApplicationController
     IF ((price-#{price_by})/price IS  NOT NULL,(price-#{price_by})/price,0) AS'margin',
     IF (price/#{price_by} IS NOT NULL, (price/#{price_by}*100)-100, 0) as 'markup'
     FROM users
-    LEFT JOIN (SELECT providers.common_use, users.id AS 'user_id', COUNT(calls.id) as 'calls', sum(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) AS 'sum_duration', SUM(calls.user_price) AS 'price', calls.provider_id as 'provider_id', SUM( #{provider_prices}) AS 'provider_price', SUM(calls.reseller_price) AS 'reseller_price'
-    FROM users LEFT JOIN calls ON (calls.user_id = users.id)
-    LEFT JOIN providers ON calls.provider_id = providers.id
+    LEFT JOIN (SELECT calls.user_id AS 'user_id', COUNT(calls.id) as 'calls', sum(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) AS 'sum_duration', SUM(calls.user_price) AS 'price', SUM( #{provider_prices}) AS 'provider_price', SUM(calls.reseller_price) AS 'reseller_price'
+    FROM calls
+    #{'LEFT JOIN providers ON calls.provider_id = providers.id ' if session[:usertype] == "reseller" and current_user.own_providers.to_i == 1}
     WHERE disposition = 'ANSWERED' AND calldate BETWEEN \'" + session_from_datetime + "' AND '" + session_till_datetime + "' #{caller_type}
-    GROUP BY users.id
-    ORDER BY users.first_name ASC) AS B   ON (B.user_id = users.id)
+    GROUP BY calls.user_id) AS B   ON (B.user_id = users.id)
 
-    LEFT JOIN (SELECT users.id as 'user_id', COUNT(calls.id) as 'all_calls'
-    FROM calls, users
-    WHERE  calls.user_id = users.id AND calldate BETWEEN \'" + session_from_datetime + "' AND '" + session_till_datetime + "' #{caller_type}
-    GROUP BY users.id) AS A ON (A.user_id = users.id)
+    LEFT JOIN (SELECT calls.user_id as 'user_id', COUNT(calls.id) as 'all_calls'
+    FROM calls
+    WHERE calldate BETWEEN \'" + session_from_datetime + "' AND '" + session_till_datetime + "' #{caller_type}
+    GROUP BY calls.user_id) AS A ON (A.user_id = users.id)
     WHERE users.hidden = 0 AND users.owner_id = '#{@owner_id}'
     ORDER BY #{@options[:order]}
     LIMIT #{istart},#{session[:items_per_page]};"
