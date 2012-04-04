@@ -33,7 +33,23 @@ class IvrController < ApplicationController
     @page_icon = "play.png"
     @help_link = "http://wiki.kolmisoft.com/index.php/IVR_system"
 
-    @ivrs = current_user.ivrs.find(:all, :order => " name ASC")
+    if session[:ivr_index] and session[:ivr_index][:page].to_i > 0
+      session_page_no = session[:ivr_index][:page]
+    else
+      session_page_no = 1
+    end
+
+    @options = {}
+    @options[:page] = ((params[:page].to_i < 1) ? session_page_no : params[:page].to_i)
+    @total_ivrs = current_user.ivrs.count()
+    @total_pages = ( @total_ivrs.to_f / session[:items_per_page].to_f).ceil
+    @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
+    fpage = ((@options[:page] - 1) * session[:items_per_page]).to_i
+ 
+    session[:ivr_index] = {} unless session[:ivr_index]
+    session[:ivr_index][:page] = @options[:page]
+
+    @ivrs = current_user.ivrs.find(:all, :order => " name ASC", :offset => fpage.to_i, :limit => session[:items_per_page].to_i)
 
   end
 

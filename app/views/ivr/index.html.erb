@@ -1,6 +1,7 @@
 <%= link_to b_add + _('New_IVR'), :action => 'new' %>
 <br />
 <br />
+<%=page_select_header(@options[:page], @total_pages, nil, @options)%>
 <table class = "maintable" width = "100%">
   <tr>
     <th align="left"><%= _("Name")%></th>
