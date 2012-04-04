@@ -18,11 +18,11 @@
        <% end %>
     <% end %>
     <tr>
-      <td> <%= _('API key') %> </td>
+      <td id="api_key"> <%= _('API key') %> </td>
       <td id="secret_key"> <%= Confline.get_value('API_Secret_Key') %> </td>
     </tr>
     <tr>
-      <td> <%= _("Generated_hash") %> </td>
+      <td id="generate_hash"> <%= _("Generated_hash") %> </td>
       <td id="system_hash"> <%= @system_hash %> </td>
     </tr>
   <table>
