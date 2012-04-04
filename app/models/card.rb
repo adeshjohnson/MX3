@@ -8,10 +8,14 @@ class Card < ActiveRecord::Base
   belongs_to :user
   validates_uniqueness_of :number, :scope => :cardgroup_id
   validates_uniqueness_of :pin, :message => _('PIN_is_already_taken')
-  validates_uniqueness_of :callerid, :allow_nil => true, :if => lambda { |card| !card.callerid.blank?}, :message => _('Callerid_must_be_unique')
+  validates_uniqueness_of :callerid, :if => :validate_caller_id, :message => _('Callerid_must_be_unique')
 
   before_save :validate_pin_length, :validate_number_length, :card_before_save
   before_create :card_before_create
+
+  def validate_caller_id
+    callerid and !callerid.to_s.blank?
+  end
 
   def validate_number_length
     self.number.length == self.cardgroup.number_length.to_i

@@ -385,7 +385,7 @@ class CardsController < ApplicationController
 
       flash[:status] = _('Cards_created') + ": " + cards_created.to_s
       if @cards_with_errors.size.to_i > 0
-        render :partial => "new_cards", :locals => {:cards=>@cards_with_errors, :cg=>@cg}, :layout=>true and return false
+        render "_new_cards", :locals => {:cards=>@cards_with_errors, :cg=>@cg}, :layout=>true and return false
       else
         redirect_to :action => 'list', :cg => @cg and return false
       end
