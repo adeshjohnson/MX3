@@ -141,7 +141,6 @@
       <th align="left"><%= _('Add') %></th>
       <th align="right"><%= _('Min_len') %></th>
       <th align="right"><%= _('Max_len') %></th>
-
     </tr>
     <% i = 0 %>
     <% for rule in @grules_dst %>
@@ -178,7 +177,11 @@
     <th align="left"><%= _('Add') %></th>
     <th align="right"><%= _('Min_len') %></th>
     <th align="right"><%= _('Max_len') %></th>
-    <% if  @location.user_id == current_user.id %>
+    <% if @location.user_id == current_user.id %>
+      <th align="left" <%= tooltip(_('Change_User_Tariff_to_this_Tariff'), _('Change_User_Tariff_to_this_Tariff_explained')) %> ><%= _('Change_User_Tariff_to_this_Tariff') %></th>
+      <%if allow_manage_providers?%>
+        <th align="left" <%= tooltip(_('Change_User_LCR_to_this_LCR'), _('Change_User_LCR_to_this_LCR_explained')) %> ><%= _('Change_User_LCR_to_this_LCR') %></th>
+      <%end%>
       <th></th>
       <th></th>
     <% end %>
@@ -201,6 +204,10 @@
       <td align="right">        <%= rule.minlen %> </td>
       <td align="right">        <%= rule.maxlen %> </td>
       <% if  @location.user_id == current_user.id %>
+        <td align="left" id="tariff_<%=rule.id%>"><%= rule.tariff.name  if rule.tariff %></td>
+        <%if allow_manage_providers?%>
+          <td align="left" id="lcr_<%=rule.id%>"><% lcr = rule.lcr %><%= lcr.name if lcr %></td>
+        <%end%>
         <td align="center">	<%= link_to b_edit, { :action => "location_rule_edit", :id => rule.id }, :id=>"edit_#{rule.id}" %>		</td>
         <td align="center">   <%= link_to b_delete, { :action => 'location_rule_destroy', :id => rule.id }, :id=>"delete_#{rule.id}", :confirm => _('Are_you_sure'), :method => :post %>       </td>
       <% end %>
@@ -219,6 +226,26 @@
         <th align="left"><%= text_field_tag 'add', "", "class" => "input", :size => "10", :maxlength => "20"  %>        </th>
         <th align="right"><%= text_field_tag 'minlen', "", "class" => "input", :size => "15", :maxlength => "15"  %>        </th>
         <th align="right"><%= text_field_tag 'maxlen', "", "class" => "input", :size => "15", :maxlength => "15"  %>        </th>
+        <% if  @location.user_id == current_user.id %>
+          <th align="left">
+            <select name="tariff" <%= "disabled" if @tariffs.size < 1 %> >
+              <option value="<%= nil %>"><%= " " %> </option>
+              <% for tariff in @tariffs %>
+                <option value="<%= tariff.id %>"><%= tariff.name %> </option>
+              <% end %>
+            </select>
+          </th>
+          <%if allow_manage_providers?%>
+            <th align="left">
+              <select name="lcr" <%= "disabled" if @lcrs.size < 1 %> >
+                <option value="<%= nil %>"><%= " " %> </option>
+                <% for lcr in @lcrs %>
+                  <option value="<%= lcr.id %>"> <%= lcr.name %> </option>
+                <% end %>
+              </select>
+           </th>
+          <%end%> 
+        <%end%>
         <th align="center" colspan="2"><%= image_submit_tag 'icons/add.png', :title => _('Add') %></th>
       </tr>
     <% end %>

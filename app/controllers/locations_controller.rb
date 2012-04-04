@@ -33,7 +33,7 @@ class LocationsController < ApplicationController
     else
       @users = User.find(:all, :select=>"users.*, #{SqlExport.nice_user_sql}", :joins=>"JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group=>'users.id')
     end
-    @rules = @location.locationrules(:all, :include=>[:device])
+    @rules = @location.locationrules(:include=>[:device])
 
     if Confline.get_value("User_Wholesale_Enabled").to_i == 0
       cond = " AND purpose = 'user' "

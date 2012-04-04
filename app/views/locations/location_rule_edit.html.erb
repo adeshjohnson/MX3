@@ -11,11 +11,13 @@
     <th align="right"><%= _('Max_len') %></th>  
 <!---    <th align="right"><%= _('Lr_type') %></th>   --->
 
-    <% if @rule.lr_type == "dst" %>
+    <% if @rule.lr_type == "dst" or @rule.lr_type == "src" %>
       <th  align="left"> <%= _('Tariff')%> </th>
       <%if allow_manage_providers?%>
-      <th  align="left"> <%= _('Lcr')%> </th>
+        <th  align="left"> <%= _('Lcr')%> </th>
       <%end%>
+    <%end%>
+    <% if @rule.lr_type == "dst" %>
       <th align="center"><%= _('Route_to_Did') %></th>
       <th align="left" <%= tooltip(_('Change_Calls_owner'), _('Change_User_Device_to_this_Device_explained')) %> ><%= _('Change_calls_owner') %></th>
     <% end %>
@@ -36,7 +38,7 @@
       <td align="right">        <%= text_field_tag 'minlen', @rule.minlen, "class" => "input", :size => "5", :maxlength => "5"  %> </td>
       <td align="right">        <%= text_field_tag 'maxlen', @rule.maxlen, "class" => "input", :size => "5", :maxlength => "5"  %> </td>
   <!---    <td align="right">        <%= text_field_tag 'lr_type', @rule.lr_type, "class" => "input", :size => "5", :maxlength => "5"  %> </td> --->
-      <% if @rule.lr_type == "dst" %>
+      <% if @rule.lr_type == "dst" or @rule.lr_type == "src" %>
         <td align="left">
           <select name="tariff" <%= "disabled" if @tariffs.size < 1 %> >
             <option value="<%= nil %>"><%= " " %> </option>
@@ -55,6 +57,8 @@
           </select>
         </td>
         <%end%>
+      <%end%>
+      <% if @rule.lr_type == "dst"%> 
         <td align="left">
           <select name="did" <%= "disabled" if @dids.size < 1 %> >
             <option value="<%= nil %>"><%= " " %> </option>
