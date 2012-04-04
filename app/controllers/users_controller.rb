@@ -431,14 +431,7 @@ class UsersController < ApplicationController
      
 
     if @user.valid? and User.create(@user.attributes)
-      if @user.usertype == "reseller"
-        @user.create_reseller_conflines
-        @user.create_reseller_emails
-      end
-      devgroup = Devicegroup.new
-      devgroup.init_primary(@user.id, "primary", @user.address_id)
 
-      Action.add_action_hash(session[:user_id], {:target_id => @user.id, :target_type => "user", :action => "user_created"})
       flash[:status] = _('user_created')
       redirect_to :action => 'list' and return false
     else

@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   before_create :user_before_create
   before_destroy :user_before_destroy
 
-  after_create :after_create_localization
+  after_create :after_create_localization, :after_create_user
   after_save :after_create_localization, :check_address
 
   def after_create_localization
@@ -90,7 +90,17 @@ class User < ActiveRecord::Base
           create_reseller_localization
         end
       end
+      create_reseller_conflines
+      create_reseller_emails
     end
+  end
+
+
+  def after_create_user
+    devgroup = Devicegroup.new
+    devgroup.init_primary(id, "primary", address_id)
+
+    Action.add_action_hash(owner_id, {:target_id => id, :target_type => "user", :action => "user_created"})
   end
 
   def check_address
