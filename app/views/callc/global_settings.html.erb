@@ -94,3 +94,13 @@ This converts old paypal paymens this way:<br />
 <%= form_tag(:action => :global_set_tz) do %>
   <%= submit_tag _('Change_Time_zone_to_default_system'), :confirm => _("Are you sure?") , :disable_with=>_('Processing..')%>
 <% end  %>
+
+
+
+<br />
+<br />
+<% form_tag(:action => :set_tz_to_users) do %>
+    <b><%=_('add_time_to_tz')%>:</b><%= text_field_tag("add_time", 0,  :size => "30", :maxlength => "50") %>
+    <br />
+    <%= submit_tag _('Change_Time_zone_to_all_users'), :confirm => _("Are you sure?") , :disable_with=>_('Processing..')%>
+<% end  %>

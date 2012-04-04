@@ -536,6 +536,13 @@ class CallcController < ApplicationController
     redirect_to :action => "global_settings" and return false
   end
 
+  def set_tz_to_users
+    sql = "UPDATE users SET time_zone = ((time_zone + #{params[:add_time].to_f}) % 24);"
+    ActiveRecord::Base.connection.execute(sql)
+    flash[:status] = _("Time_zone_for_users_add_value") + " + #{params[:add_time].to_f} "
+    redirect_to :action => "global_settings" and return false
+  end
+
   def debug
   end
 
@@ -657,14 +664,24 @@ class CallcController < ApplicationController
         #======================== System time ofset =====================================
         sql = "select timediff(now(),convert_tz(now(),@@session.time_zone,'+00:00'));"
         z = ActiveRecord::Base.connection.select_value(sql)
+        MorLog.my_debug("GET global time => #{z.to_yaml}", 1)
         t = z.to_i
+        old_tz= Confline.get_value('System_time_zone_ofset')
+        if t.to_i != old_tz.to_i and Confline.get_value('System_time_zone_daylight_savings').to_i == 1
+          # ========================== System time ofset update users ================================
+          diff = t.to_i - old_tz.to_i
+          sql = "UPDATE users SET time_zone = ((time_zone + #{diff.to_f}) % 24);;"
+          ActiveRecord::Base.connection.execute(sql)
+          MorLog.my_debug("System time ofset update users", 1)
+        end
         Confline.set_value('System_time_zone_ofset', t.to_i, 0)
+        MorLog.my_debug("confline => #{Confline.get_value('System_time_zone_ofset')}", 1)
         #======================== Devices  =====================================
         check_devices_for_accountcode
         # ========================== Cleaning session table ================================
         sql = "DELETE FROM sessions where sessions.updated_at < '#{(Time.now - 5.hour).to_s(:db)}'; "
         ActiveRecord::Base.connection.delete(sql)
-        my_debug("Sessions cleaned")
+        MorLog.my_debug("Sessions cleaned", 1)
       }
     end
 

@@ -4338,7 +4338,11 @@ Localization.define('en') do |l|
   l.store 'for_more_details_click_here', 'for more details click here'
   l.store 'Simultaneous_calls', 'Simultaneous calls'
   l.store 'failed_to_parse_uri', 'Failed to parse uri'
-  l.store 'Call_over_quick_forward_did', 'Call over quick forward did' 
+  l.store 'Call_over_quick_forward_did', 'Call over quick forward did'
+  l.store 'Time_zone_for_users_add_value', 'Time zone for users add value'
+  l.store 'add_time_to_tz', 'add time to time zone'
+  l.store 'Change_Time_zone_to_all_users', 'Change Time zone to all users'
+  l.store 'System_time_zone_daylight_savings', 'System time zone daylight savings'
   l.store 'Aggregate_statistics', 'Aggregate statistics' 
 
   #  l.store '', ''
