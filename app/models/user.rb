@@ -2366,13 +2366,13 @@ GROUP BY terminators.id;").map { |t| t.id }
 
     #provider = params[:provider].to_i
 
-    tax = tax_from_params
+    tax = Tax.create(tax_from_params)
 
     unless tax
       assign_default_tax
     end
 
-    tax.update_attributes(tax)
+    tax.update_attributes(tax_from_params)
     tax.save
 
     if is_reseller?
