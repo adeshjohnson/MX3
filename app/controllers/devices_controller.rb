@@ -883,7 +883,7 @@ class DevicesController < ApplicationController
   def cli_edit
     @page_title = _('CLI_edit')
     @page_icon = 'edit.png'
-    @all_ivrs = Ivr.find(:all)
+    @all_ivrs = Ivr.all
     @device = @cli.device
     #  check_owner_for_device(@device.user)
     @user = @device.user
@@ -2088,7 +2088,7 @@ class DevicesController < ApplicationController
   def check_cli_owner(cli)
     device = cli.device
     user = device.user if device
-    unless user and user.owner_id == correct_owner_id or user.id == session[:user_id]
+    unless user and (user.owner_id == correct_owner_id or user.id == session[:user_id])
       dont_be_so_smart
       redirect_to :controller=>:callc, :action =>:main and return false
     end
