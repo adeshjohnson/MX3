@@ -94,10 +94,10 @@ class User < ActiveRecord::Base
   end
 
   def check_address
-    unless self.address
+    unless address
       a = Address.create()
-      self.address_id = a.id
-      self.save
+      address_id = a.id
+      save
     end
   end
 
@@ -158,30 +158,30 @@ class User < ActiveRecord::Base
   end
 
   def user_before_save
-    if self.address and self.address.email.to_s.length > 0 and !Email.address_validation(self.address.email)
+    if address and address.email.to_s.length > 0 and !Email.address_validation(address.email)
       errors.add(:email, _("Please_enter_correct_email"))
       return false
     end
 
-    if self.recordings_email.to_s.length > 0 and !Email.address_validation(self.recordings_email)
+    if recordings_email.to_s.length > 0 and !Email.address_validation(recordings_email)
       errors.add(:email, _("Please_enter_correct_recordings_email"))
       return false
     end
 
     if usertype.to_s != 'reseller'
-      self.own_providers = 0
+      own_providers = 0
     end
 
   end
 
   def user_before_create
 
-    if self.password == Digest::SHA1.hexdigest('')
+    if password == Digest::SHA1.hexdigest('')
       errors.add(:password, _("Please_enter_password"))
       return false
     end
 
-    if self.password == Digest::SHA1.hexdigest(username)
+    if password == Digest::SHA1.hexdigest(username)
       errors.add(:password, _("Please_enter_password_not_equal_to_username"))
       return false
     end
@@ -196,40 +196,40 @@ class User < ActiveRecord::Base
 
   def default_translation
     if is_admin? or is_reseller?
-      trans = self.user_translations.find(:first, :include => [:translation], :conditions => "user_translations.active = 1", :order => 'user_translations.position ASC')
+      trans = user_translations.find(:first, :include => [:translation], :conditions => "user_translations.active = 1", :order => 'user_translations.position ASC')
       unless trans
-        return self.owner.default_translation
+        return owner.default_translation
       else
         return trans.translation
       end
     else
-      return self.owner.default_translation
+      return owner.default_translation
     end
   end
 
   def active_translations
     if is_admin? or is_reseller?
-      trans = self.user_translations.find(:all, :include => [:translation], :conditions => "user_translations.active = 1", :order => 'user_translations.position ASC')
+      trans = user_translations.find(:all, :include => [:translation], :conditions => "user_translations.active = 1", :order => 'user_translations.position ASC')
       unless trans and trans.size != 0
-        return self.owner.active_translations
+        return owner.active_translations
       else
         return trans.collect(&:translation)
       end
     else
-      return self.owner.active_translations
+      return owner.active_translations
     end
   end
 
   def all_translations
     if is_admin? or is_reseller?
-      trans = self.user_translations.find(:all, :include => [:translation])
+      trans = user_translations.find(:all, :include => [:translation])
       unless trans and trans.size != 0
-        return self.owner.active_translations.collect(&:translation)
+        return owner.active_translations.collect(&:translation)
       else
         return trans.collect(&:translation)
       end
     else
-      return self.owner.active_translations.collect(&:translation)
+      return owner.active_translations.collect(&:translation)
     end
   end
 
@@ -237,19 +237,19 @@ class User < ActiveRecord::Base
     ut = user_translations
     unless ut and ut.size != 0
       clone_owner_translations
-      return self.user_translations(true)
+      return user_translations(true)
     end
     ut
   end
 
   def clone_owner_translations
-    UserTranslation.find(:all, :conditions => ["user_id = ?", self.owner_id]).each do |ut|
-      UserTranslation.create(:user_id => self.id, :translation_id => ut.translation_id, :position => ut.position, :active => ut.active)
+    UserTranslation.find(:all, :conditions => ["user_id = ?", owner_id]).each do |ut|
+      UserTranslation.create(:user_id => id, :translation_id => ut.translation_id, :position => ut.position, :active => ut.active)
     end
   end
 
   def hide_destination_end
-    attributes["hide_destination_end"] == -1 ? Confline.get_value("Hide_Destination_End", self.owner_id).to_i : attributes["hide_destination_end"]
+    attributes["hide_destination_end"] == -1 ? Confline.get_value("Hide_Destination_End", owner_id).to_i : attributes["hide_destination_end"]
   end
 
 =begin
@@ -294,15 +294,15 @@ class User < ActiveRecord::Base
   end
 
   def fax_devices
-    Device.find(:all, :conditions => "user_id = #{self.id} AND device_type = 'FAX' AND name not like 'mor_server_%'")
+    Device.find(:all, :conditions => "user_id = #{id} AND device_type = 'FAX' AND name not like 'mor_server_%'")
   end
 
   def reseller_users
-    User.find(:all, :select => "*, #{SqlExport.nice_user_sql}", :conditions => "owner_id = #{self.id}", :order => "nice_user ASC")
+    User.find(:all, :select => "*, #{SqlExport.nice_user_sql}", :conditions => "owner_id = #{id}", :order => "nice_user ASC")
   end
 
   def owner
-    @attributes["owner"] ||= User.find(:first, :conditions => ["id = ?", self.owner_id])
+    @attributes["owner"] ||= User.find(:first, :conditions => ["id = ?", owner_id])
   end
 
   def owner= (owner)
@@ -310,11 +310,11 @@ class User < ActiveRecord::Base
   end
 
   def all_calls
-    Call.find(:all, :conditions => "user_id = '#{self.id}'")
+    Call.find(:all, :conditions => "user_id = '#{id}'")
   end
 
   def groups
-    Group.find_by_sql ["SELECT groups.* FROM groups, usergroups WHERE groups.id = usergroups.group_id AND usergroups.user_id = ? ORDER BY groups.name ASC", self.id]
+    Group.find_by_sql ["SELECT groups.* FROM groups, usergroups WHERE groups.id = usergroups.group_id AND usergroups.user_id = ? ORDER BY groups.name ASC", id]
   end
 
 
@@ -375,8 +375,8 @@ class User < ActiveRecord::Base
 
     # -------- handle resellers ---------
     reseller_sql = ""
-    #if self.usertype == "reseller"
-    #reseller_sql = " OR calls.reseller_id = #{self.id} "
+    #if usertype == "reseller"
+    #reseller_sql = " OR calls.reseller_id = #{id} "
     #end
 
 
@@ -402,9 +402,9 @@ class User < ActiveRecord::Base
     # -------- retrieve calls -----------
     sql = ""
     if direction == "incoming" #incoming calls
-      sql = "SELECT #{ find.join(',') } FROM calls #{from.join(' ')} JOIN devices ON (devices.id = calls.dst_device_id) LEFT JOIN dids ON (calls.did_id = dids.id) WHERE (calls.card_id = 0 AND (((devices.user_id = #{self.id}) OR (dids.user_id = #{self.id})) #{reseller_sql} )#{call_type_sql} #{device_sql} #{hgc_sql} AND ((calldate BETWEEN '#{date_from.to_s}' AND '#{date_till.to_s}')))  ORDER BY #{order_by} #{order} #{ 'LIMIT ' + options[:offset].to_s + ', ' + options[:limit].to_s if (options[:limit] and options[:offset])};"
+      sql = "SELECT #{ find.join(',') } FROM calls #{from.join(' ')} JOIN devices ON (devices.id = calls.dst_device_id) LEFT JOIN dids ON (calls.did_id = dids.id) WHERE (calls.card_id = 0 AND (((devices.user_id = #{id}) OR (dids.user_id = #{id})) #{reseller_sql} )#{call_type_sql} #{device_sql} #{hgc_sql} AND ((calldate BETWEEN '#{date_from.to_s}' AND '#{date_till.to_s}')))  ORDER BY #{order_by} #{order} #{ 'LIMIT ' + options[:offset].to_s + ', ' + options[:limit].to_s if (options[:limit] and options[:offset])};"
     else # outgoing calls
-      sql = "SELECT #{ find.join(',') } FROM calls #{from.join(' ')} WHERE (calls.card_id = 0 AND (calls.user_id = #{self.id} #{reseller_sql}) #{call_type_sql} #{device_sql} #{hgc_sql} AND ((calldate BETWEEN '#{date_from.to_s}' AND '#{date_till.to_s}'))) ORDER BY #{order_by} #{order} #{ 'LIMIT ' + options[:offset].to_s + ', ' + options[:limit].to_s if (options[:limit] and options[:offset]) };"
+      sql = "SELECT #{ find.join(',') } FROM calls #{from.join(' ')} WHERE (calls.card_id = 0 AND (calls.user_id = #{id} #{reseller_sql}) #{call_type_sql} #{device_sql} #{hgc_sql} AND ((calldate BETWEEN '#{date_from.to_s}' AND '#{date_till.to_s}'))) ORDER BY #{order_by} #{order} #{ 'LIMIT ' + options[:offset].to_s + ', ' + options[:limit].to_s if (options[:limit] and options[:offset]) };"
     end
     Call.find_by_sql(sql)
   end
@@ -451,7 +451,7 @@ class User < ActiveRecord::Base
     # -------- handle resellers ---------
     reseller_sql = ""
     #if usertype == "reseller"
-    #reseller_sql = " OR calls.reseller_id = #{self.id} "
+    #reseller_sql = " OR calls.reseller_id = #{id} "
     #end
 
     # -------- retrieve calls -----------
@@ -468,7 +468,7 @@ class User < ActiveRecord::Base
           SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_price')}, 0)) AS 'total_did_price',
           SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_prov_price')}, 0)) AS 'total_did_prov_price',
           SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_inc_price')}, 0)) AS 'total_did_inc_price'
-          FROM calls JOIN devices ON (devices.id = calls.dst_device_id) LEFT JOIN dids ON (calls.did_id = dids.id) WHERE (calls.card_id = 0 AND (devices.user_id = #{self.id} OR (dids.user_id = #{self.id}) )#{call_type_sql} #{device_sql} #{hgc_sql} AND ((calldate BETWEEN '#{date_from.to_s}' AND '#{date_till.to_s}')));"
+          FROM calls JOIN devices ON (devices.id = calls.dst_device_id) LEFT JOIN dids ON (calls.did_id = dids.id) WHERE (calls.card_id = 0 AND (devices.user_id = #{id} OR (dids.user_id = #{id}) )#{call_type_sql} #{device_sql} #{hgc_sql} AND ((calldate BETWEEN '#{date_from.to_s}' AND '#{date_till.to_s}')));"
       #MorLog.my_debug(sql)
       calls = Call.find_by_sql(sql)
     else
@@ -484,7 +484,7 @@ class User < ActiveRecord::Base
           SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_price')}, 0)) AS 'total_did_price',
           SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_prov_price')}, 0)) AS 'total_did_prov_price',
           SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_inc_price')}, 0)) AS 'total_did_inc_price'
-          FROM calls WHERE (calls.card_id = 0 AND (calls.user_id = #{self.id} #{reseller_sql}) #{call_type_sql} #{device_sql} #{hgc_sql} AND ((calldate BETWEEN '#{date_from.to_s}' AND '#{date_till.to_s}')));")
+          FROM calls WHERE (calls.card_id = 0 AND (calls.user_id = #{id} #{reseller_sql}) #{call_type_sql} #{device_sql} #{hgc_sql} AND ((calldate BETWEEN '#{date_from.to_s}' AND '#{date_till.to_s}')));")
     end
     calls[0]
   end
@@ -506,7 +506,7 @@ class User < ActiveRecord::Base
 
   def total_calls(type, date_from, date_till)
     t_calls = 0
-    for dev in self.devices
+    for dev in devices
       t_calls += dev.total_calls(type, date_from, date_till)
     end
     t_calls
@@ -514,7 +514,7 @@ class User < ActiveRecord::Base
 
   def total_duration(type, date_from, date_till)
     t_duration = 0
-    for dev in self.devices
+    for dev in devices
       t_duration += dev.total_duration(type, date_from, date_till)
     end
     t_duration
@@ -523,7 +523,7 @@ class User < ActiveRecord::Base
 
   def total_billsec(type, date_from, date_till)
     t_billsec = 0
-    for dev in self.devices
+    for dev in devices
       t_billsec += dev.total_billsec(type, date_from, date_till)
     end
     t_billsec
@@ -531,8 +531,8 @@ class User < ActiveRecord::Base
 
   def manager_in_groups
     groups = []
-    #my_debug "self.groups.size: "+self.groups.size.to_s
-    for group in self.groups
+    #my_debug "groups.size: "+groups.size.to_s
+    for group in groups
       groups << group if group.gusertype(self) == "manager"
       #my_debug "group.gusertype(self): "+group.gusertype(self).to_s
     end
@@ -541,7 +541,7 @@ class User < ActiveRecord::Base
 
 
   def last_login
-    Action.find(:first, :conditions => ["user_id = ? AND action = 'login'", self.id], :order => "date DESC")
+    Action.find(:first, :conditions => ["user_id = ? AND action = 'login'", id], :order => "date DESC")
   end
 
 
@@ -550,7 +550,7 @@ class User < ActiveRecord::Base
 
     sql =
         'SELECT users.id, users.calltime_normative as \'normative\', COUNT(distinct calls.id) as \'calls\', SUM(calls.duration) as \'duration\'' +
-            'FROM users join devices on (users.id = devices.user_id AND users.id = '+ self.id.to_s + ') left join calls on ((calls.src_device_id = devices.id OR calls.dst_device_id = devices.id)' +
+            'FROM users join devices on (users.id = devices.user_id AND users.id = '+ id.to_s + ') left join calls on ((calls.src_device_id = devices.id OR calls.dst_device_id = devices.id)' +
             'AND calls.calldate BETWEEN \'' + date_s + ' 00:00:00\' AND \'' + date_s + ' 23:59:59\') AND disposition = \'ANSWERED\''+
             'GROUP BY users.id, users.calltime_normative'
 
@@ -571,7 +571,7 @@ class User < ActiveRecord::Base
     #
     #    sql =
     #      'SELECT A.* FROM (SELECT calls.* FROM calls, devices WHERE calls.calldate BETWEEN \'' + date_s + ' 00:00:00\' AND \''+ date_s +' 23:59:59\' ' +
-    #      'AND calls.src_device_id = devices.id AND devices.user_id  = \'' + self.id.to_s + '\' AND calls.disposition = \'ANSWERED\') as A ' +
+    #      'AND calls.src_device_id = devices.id AND devices.user_id  = \'' + id.to_s + '\' AND calls.disposition = \'ANSWERED\') as A ' +
     #      'left join calls on (calls.dst = A.dst AND calls.calldate < \'' + date_s + ' 00:00:00\')' +
     #      'GROUP BY A.dst HAVING COUNT(distinct calls.id) = 0 ORDER BY A.calldate DESC'
     #
@@ -588,11 +588,11 @@ class User < ActiveRecord::Base
 
         'SELECT SUM(calls.duration) * 100 / (B.total_days * users.calltime_normative * 3600) AS \'percent\' '+
 
-            'FROM calls join devices ON ((calls.src_device_id = devices.id OR calls.dst_device_id = devices.id) AND devices.user_id = \'' + self.id.to_s + '\') join users ON (users.id = devices.user_id) join ' +
+            'FROM calls join devices ON ((calls.src_device_id = devices.id OR calls.dst_device_id = devices.id) AND devices.user_id = \'' + id.to_s + '\') join users ON (users.id = devices.user_id) join ' +
 
             ' (SELECT COUNT(A.days) AS \'total_days\' ' +
             '       FROM (SELECT SUBSTRING(calls.calldate,1,10) AS \'days\' ' +
-            '           FROM calls join devices ON ((calls.src_device_id = devices.id OR calls.dst_device_id = devices.id) AND devices.user_id = \'' + self.id.to_s + '\') ' +
+            '           FROM calls join devices ON ((calls.src_device_id = devices.id OR calls.dst_device_id = devices.id) AND devices.user_id = \'' + id.to_s + '\') ' +
             '           WHERE calls.calldate BETWEEN \'' + date_s + '-01 00:00:00\' AND \'' + date_s + '-31 23:59:59\' AND calls.disposition = \'ANSWERED\' ' +
             '           GROUP BY SUBSTRING(calls.calldate,1,10)) 	AS A ) 	AS B ' +
 
@@ -611,9 +611,9 @@ class User < ActiveRecord::Base
     end
 
     #saving to temporary table
-    self.month_plan_perc = mn
-    self.month_plan_updated = Time.now
-    self.save
+    month_plan_perc = mn
+    month_plan_updated = Time.now
+    save
 
     mn.to_i.to_s
   end
@@ -621,29 +621,29 @@ class User < ActiveRecord::Base
 
   def this_months_normative
 
-    self.month_plan_perc
+    month_plan_perc
 
   end
 
 
   def primary_device_group
-    Devicegroup.find(:first, :conditions => "user_id = #{self.id}", :order => "added ASC")
+    Devicegroup.find(:first, :conditions => "user_id = #{id}", :order => "added ASC")
   end
 
 
   def destroy_everything
 
-    if self.payments.size == 0 and self.all_calls.size == 0 and self.dids.size == 0 and self.invoices.size == 0 and self.vouchers.size == 0 and self.reseller_users.size == 0
+    if payments.size == 0 and all_calls.size == 0 and dids.size == 0 and invoices.size == 0 and vouchers.size == 0 and reseller_users.size == 0
       #flash[:notice] = 'Cant_delete_user_it_has_payments'
       #redirect_to :controller => "users", :action => 'list'
 
-      conflines = Confline.find(:all, :conditions => ["owner_id = '#{self.id}'"])
+      conflines = Confline.find(:all, :conditions => ["owner_id = '#{id}'"])
       for conf in conflines
         conf.destroy
       end
 
 
-      for dev in self.devices
+      for dev in devices
         if dev.provider
           dev.user_id = -1
           dev.save
@@ -652,23 +652,23 @@ class User < ActiveRecord::Base
         end
       end
 
-      for devgr in self.devicegroups
+      for devgr in devicegroups
         devgr.destroy_everything
       end
 
-      self.address.destroy if self.address
-      self.destroy
+      address.destroy if address
+      destroy
 
     end
   end
 
   def email
-    addr = self.address
+    addr = address
     addr ? addr.email.to_s : ""
   end
 
   def forwards_before_call
-    Callflow.find_by_sql("SELECT callflows.* FROM callflows JOIN devices ON (devices.user_id = #{self.id} AND callflows.device_id = devices.id) WHERE action = 'forward' AND cf_type = 'before_call' AND data2 = 'local';")
+    Callflow.find_by_sql("SELECT callflows.* FROM callflows JOIN devices ON (devices.user_id = #{id} AND callflows.device_id = devices.id) WHERE action = 'forward' AND cf_type = 'before_call' AND data2 = 'local';")
   end
 
 =begin
@@ -676,110 +676,110 @@ class User < ActiveRecord::Base
 =end
 
   def create_reseller_conflines
-    resellers_device_location = Confline.get_value("Default_device_location_id", self.id)
-    if self.usertype == "reseller"
-      #sql = "DELETE FROM conflines WHERE owner_id = #{self.id}"
+    resellers_device_location = Confline.get_value("Default_device_location_id", id)
+    if usertype == "reseller"
+      #sql = "DELETE FROM conflines WHERE owner_id = #{id}"
       #ActiveRecord::Base.connection.execute(sql)
-      Confline.delete_all("owner_id = #{self.id}")
-      Confline.new_confline('Company', Confline.get_value('Company'), self.id)
-      Confline.new_confline('Company_Email', Confline.get_value('Company_Email'), self.id)
-      Confline.new_confline('Version', Confline.get_value('Version'), self.id)
-      Confline.new_confline('Copyright_Title', Confline.get_value('Copyright_Title'), self.id)
-      Confline.new_confline('Admin_Browser_Title', Confline.get_value('Admin_Browser_Title'), self.id)
-      Confline.new_confline('Logo_Picture', Confline.get_value('Logo_Picture'), self.id)
-      Confline.new_confline('Show_Rates_Without_Tax', "0", self.id)
+      Confline.delete_all("owner_id = #{id}")
+      Confline.new_confline('Company', Confline.get_value('Company'), id)
+      Confline.new_confline('Company_Email', Confline.get_value('Company_Email'), id)
+      Confline.new_confline('Version', Confline.get_value('Version'), id)
+      Confline.new_confline('Copyright_Title', Confline.get_value('Copyright_Title'), id)
+      Confline.new_confline('Admin_Browser_Title', Confline.get_value('Admin_Browser_Title'), id)
+      Confline.new_confline('Logo_Picture', Confline.get_value('Logo_Picture'), id)
+      Confline.new_confline('Show_Rates_Without_Tax', "0", id)
       #payments
-      Confline.new_confline('Paypal_Default_Currency', Confline.get_value('Paypal_Default_Currenc'), self.id)
-      Confline.new_confline('WebMoney_Default_Currency', Confline.get_value('WebMoney_Default_Currency'), self.id)
-      Confline.new_confline('WebMoney_SIM_MODE', Confline.get_value('WebMoney_SIM_MODE'), self.id)
-      Confline.new_confline('Paypal_Enabled', Confline.get_value('Paypal_Enabled'), self.id)
-      Confline.new_confline('PayPal_Email', Confline.get_value('PayPal_Email'), self.id)
-      Confline.new_confline('Paypal_Default_Currency', Confline.get_value('Paypal_Default_Currency'), self.id)
-      Confline.new_confline('PayPal_Default_Amount', Confline.get_value('PayPal_Default_Amount'), self.id)
-      Confline.new_confline('PayPal_Min_Amount', Confline.get_value('PayPal_Min_Amount'), self.id)
-      Confline.new_confline('PayPal_Test', Confline.get_value('PayPal_Test'), self.id)
-      Confline.new_confline('WebMoney_Enabled', Confline.get_value('WebMoney_Enabled'), self.id)
-      Confline.new_confline('WebMoney_Purse', Confline.get_value('WebMoney_Purse'), self.id)
-      Confline.new_confline('WebMoney_Default_Amount', Confline.get_value('WebMoney_Default_Amount'), self.id)
-      Confline.new_confline('WebMoney_Min_Amount', Confline.get_value('WebMoney_Min_Amount'), self.id)
-      Confline.new_confline('WebMoney_Test', Confline.get_value('WebMoney_Test'), self.id)
+      Confline.new_confline('Paypal_Default_Currency', Confline.get_value('Paypal_Default_Currenc'), id)
+      Confline.new_confline('WebMoney_Default_Currency', Confline.get_value('WebMoney_Default_Currency'), id)
+      Confline.new_confline('WebMoney_SIM_MODE', Confline.get_value('WebMoney_SIM_MODE'), id)
+      Confline.new_confline('Paypal_Enabled', Confline.get_value('Paypal_Enabled'), id)
+      Confline.new_confline('PayPal_Email', Confline.get_value('PayPal_Email'), id)
+      Confline.new_confline('Paypal_Default_Currency', Confline.get_value('Paypal_Default_Currency'), id)
+      Confline.new_confline('PayPal_Default_Amount', Confline.get_value('PayPal_Default_Amount'), id)
+      Confline.new_confline('PayPal_Min_Amount', Confline.get_value('PayPal_Min_Amount'), id)
+      Confline.new_confline('PayPal_Test', Confline.get_value('PayPal_Test'), id)
+      Confline.new_confline('WebMoney_Enabled', Confline.get_value('WebMoney_Enabled'), id)
+      Confline.new_confline('WebMoney_Purse', Confline.get_value('WebMoney_Purse'), id)
+      Confline.new_confline('WebMoney_Default_Amount', Confline.get_value('WebMoney_Default_Amount'), id)
+      Confline.new_confline('WebMoney_Min_Amount', Confline.get_value('WebMoney_Min_Amount'), id)
+      Confline.new_confline('WebMoney_Test', Confline.get_value('WebMoney_Test'), id)
       #Default_device
-      Confline.new_confline('Default_device_type', Confline.get_value("Default_device_type", 0), self.id)
-      Confline.new_confline("Default_device_dtmfmode", Confline.get_value("Default_device_dtmfmode", 0), self.id)
-      Confline.new_confline("Default_device_works_not_logged", Confline.get_value("Default_device_works_not_logged", 0), self.id)
+      Confline.new_confline('Default_device_type', Confline.get_value("Default_device_type", 0), id)
+      Confline.new_confline("Default_device_dtmfmode", Confline.get_value("Default_device_dtmfmode", 0), id)
+      Confline.new_confline("Default_device_works_not_logged", Confline.get_value("Default_device_works_not_logged", 0), id)
       #set device location id to resellers default location id if exists or use admins Global location id
       if resellers_device_location
-        Confline.new_confline("Default_device_location_id", resellers_device_location, self.id)
+        Confline.new_confline("Default_device_location_id", resellers_device_location, id)
       else
-        Confline.new_confline("Default_device_location_id", Confline.get_value("Default_device_location_id", 0), self.id)
+        Confline.new_confline("Default_device_location_id", Confline.get_value("Default_device_location_id", 0), id)
       end
 
-      Confline.new_confline("Default_device_timeout", Confline.get_value("Default_device_timeout", 0), self.id)
-      Confline.new_confline("Default_device_record", Confline.get_value("Default_device_record", 0), self.id)
-      Confline.new_confline("Default_device_call_limit", Confline.get_value("Default_device_call_limit", 0), self.id)
-      Confline.new_confline("Default_device_nat", Confline.get_value("Default_device_nat", 0), self.id)
-      Confline.new_confline("Default_device_voicemail_active", Confline.get_value("Default_device_voicemail_active", 0), self.id)
-      Confline.new_confline("Default_device_trustrpid", Confline.get_value("Default_device_trustrpid", 0), self.id)
-      Confline.new_confline("Default_device_sendrpid", Confline.get_value("Default_device_sendrpid", 0), self.id)
-      Confline.new_confline("Default_device_t38pt_udptl", Confline.get_value("Default_device_t38pt_udptl", 0), self.id)
-      Confline.new_confline("Default_device_promiscredir", Confline.get_value("Default_device_promiscredir", 0), self.id)
-      Confline.new_confline("Default_device_progressinband", Confline.get_value("Default_device_progressinband", 0), self.id)
-      Confline.new_confline("Default_device_videosupport", Confline.get_value("Default_device_videosupport", 0), self.id)
-      Confline.new_confline("Default_device_allow_duplicate_calls", Confline.get_value("Default_device_allow_duplicate_calls", 0), self.id)
-      Confline.new_confline("Default_device_tell_balance", Confline.get_value("Default_device_tell_balance", 0), self.id)
-      Confline.new_confline("Default_device_tell_time", Confline.get_value("Default_device_tell_time", 0), self.id)
-      Confline.new_confline("Default_device_tell_rtime_when_left", Confline.get_value("Default_device_tell_rtime_when_left", 0), self.id)
-      Confline.new_confline("Default_device_repeat_rtime_every", Confline.get_value("Default_device_repeat_rtime_every", 0), self.id)
-      Confline.new_confline("Default_device_permits", Confline.get_value("Default_device_permits", 0), self.id)
-      Confline.new_confline("Default_device_qualify", Confline.get_value("Default_device_qualify", 0), self.id)
-      Confline.new_confline("Default_device_host", Confline.get_value("Default_device_host", 0), self.id)
-      Confline.new_confline("Default_device_ipaddr", Confline.get_value("Default_device_ipaddr", 0), self.id)
-      Confline.new_confline("Default_device_port", Confline.get_value("Default_device_port", 0), self.id)
-      Confline.new_confline("Default_device_regseconds", Confline.get_value("Default_device_regseconds", 0), self.id)
-      Confline.new_confline("Default_device_canreinvite", Confline.get_value("Default_device_canreinvite", 0), self.id)
-      Confline.new_confline("Default_device_canreinvite", Confline.get_value("Default_device_canreinvite", 0), self.id)
-      Confline.new_confline("Default_device_istrunk", Confline.get_value("Default_device_istrunk", 0), self.id)
-      Confline.new_confline("Default_device_ani", Confline.get_value("Default_device_ani", 0), self.id)
-      Confline.new_confline("Default_device_callgroup", Confline.get_value("Default_device_callgroup", 0), self.id)
-      Confline.new_confline("Default_device_pickupgroup", Confline.get_value("Default_device_pickupgroup", 0), self.id)
-      Confline.new_confline("Default_device_fromuser", Confline.get_value("Default_device_fromuser", 0), self.id)
-      Confline.new_confline("Default_device_fromuser", Confline.get_value("Default_device_fromdomain", 0), self.id)
-      Confline.new_confline("Default_device_insecure", Confline.get_value("Default_device_insecure", 0), self.id)
-      Confline.new_confline("Default_device_process_sipchaninfo", Confline.get_value("Default_device_process_sipchaninfo", 0), self.id)
-      Confline.new_confline("Default_device_voicemail_box_email", Confline.get_value("Default_device_voicemail_box_email", 0), self.id)
-      Confline.new_confline("Default_device_voicemail_box_password", Confline.get_value("Default_device_voicemail_box_password", 0), self.id)
-      Confline.new_confline("Default_device_fake_ring", Confline.get_value("Default_device_fake_ring", 0), self.id)
-      Confline.new_confline("Default_device_save_call_log", Confline.get_value("Default_device_save_call_log", 0), self.id)
-      Confline.new_confline("Default_device_use_ani_for_cli", Confline.get_value("Default_device_use_ani_for_cli", 0), self.id)
+      Confline.new_confline("Default_device_timeout", Confline.get_value("Default_device_timeout", 0), id)
+      Confline.new_confline("Default_device_record", Confline.get_value("Default_device_record", 0), id)
+      Confline.new_confline("Default_device_call_limit", Confline.get_value("Default_device_call_limit", 0), id)
+      Confline.new_confline("Default_device_nat", Confline.get_value("Default_device_nat", 0), id)
+      Confline.new_confline("Default_device_voicemail_active", Confline.get_value("Default_device_voicemail_active", 0), id)
+      Confline.new_confline("Default_device_trustrpid", Confline.get_value("Default_device_trustrpid", 0), id)
+      Confline.new_confline("Default_device_sendrpid", Confline.get_value("Default_device_sendrpid", 0), id)
+      Confline.new_confline("Default_device_t38pt_udptl", Confline.get_value("Default_device_t38pt_udptl", 0), id)
+      Confline.new_confline("Default_device_promiscredir", Confline.get_value("Default_device_promiscredir", 0), id)
+      Confline.new_confline("Default_device_progressinband", Confline.get_value("Default_device_progressinband", 0), id)
+      Confline.new_confline("Default_device_videosupport", Confline.get_value("Default_device_videosupport", 0), id)
+      Confline.new_confline("Default_device_allow_duplicate_calls", Confline.get_value("Default_device_allow_duplicate_calls", 0), id)
+      Confline.new_confline("Default_device_tell_balance", Confline.get_value("Default_device_tell_balance", 0), id)
+      Confline.new_confline("Default_device_tell_time", Confline.get_value("Default_device_tell_time", 0), id)
+      Confline.new_confline("Default_device_tell_rtime_when_left", Confline.get_value("Default_device_tell_rtime_when_left", 0), id)
+      Confline.new_confline("Default_device_repeat_rtime_every", Confline.get_value("Default_device_repeat_rtime_every", 0), id)
+      Confline.new_confline("Default_device_permits", Confline.get_value("Default_device_permits", 0), id)
+      Confline.new_confline("Default_device_qualify", Confline.get_value("Default_device_qualify", 0), id)
+      Confline.new_confline("Default_device_host", Confline.get_value("Default_device_host", 0), id)
+      Confline.new_confline("Default_device_ipaddr", Confline.get_value("Default_device_ipaddr", 0), id)
+      Confline.new_confline("Default_device_port", Confline.get_value("Default_device_port", 0), id)
+      Confline.new_confline("Default_device_regseconds", Confline.get_value("Default_device_regseconds", 0), id)
+      Confline.new_confline("Default_device_canreinvite", Confline.get_value("Default_device_canreinvite", 0), id)
+      Confline.new_confline("Default_device_canreinvite", Confline.get_value("Default_device_canreinvite", 0), id)
+      Confline.new_confline("Default_device_istrunk", Confline.get_value("Default_device_istrunk", 0), id)
+      Confline.new_confline("Default_device_ani", Confline.get_value("Default_device_ani", 0), id)
+      Confline.new_confline("Default_device_callgroup", Confline.get_value("Default_device_callgroup", 0), id)
+      Confline.new_confline("Default_device_pickupgroup", Confline.get_value("Default_device_pickupgroup", 0), id)
+      Confline.new_confline("Default_device_fromuser", Confline.get_value("Default_device_fromuser", 0), id)
+      Confline.new_confline("Default_device_fromuser", Confline.get_value("Default_device_fromdomain", 0), id)
+      Confline.new_confline("Default_device_insecure", Confline.get_value("Default_device_insecure", 0), id)
+      Confline.new_confline("Default_device_process_sipchaninfo", Confline.get_value("Default_device_process_sipchaninfo", 0), id)
+      Confline.new_confline("Default_device_voicemail_box_email", Confline.get_value("Default_device_voicemail_box_email", 0), id)
+      Confline.new_confline("Default_device_voicemail_box_password", Confline.get_value("Default_device_voicemail_box_password", 0), id)
+      Confline.new_confline("Default_device_fake_ring", Confline.get_value("Default_device_fake_ring", 0), id)
+      Confline.new_confline("Default_device_save_call_log", Confline.get_value("Default_device_save_call_log", 0), id)
+      Confline.new_confline("Default_device_use_ani_for_cli", Confline.get_value("Default_device_use_ani_for_cli", 0), id)
 
       #------------ codecs ----------------
 
       for codec in Codec.find(:all)
-        Confline.new_confline("Default_device_codec_#{codec.name}", Confline.get_value("Default_device_codec_#{codec.name}", 0), self.id)
+        Confline.new_confline("Default_device_codec_#{codec.name}", Confline.get_value("Default_device_codec_#{codec.name}", 0), id)
       end
-      Confline.new_confline("Default_device_cid_name", Confline.get_value("Default_device_cid_name", 0), self.id)
-      Confline.new_confline("Default_device_cid_number", Confline.get_value("Default_device_cid_number", 0), self.id)
+      Confline.new_confline("Default_device_cid_name", Confline.get_value("Default_device_cid_name", 0), id)
+      Confline.new_confline("Default_device_cid_number", Confline.get_value("Default_device_cid_number", 0), id)
 
-      Confline.new_confline("CSV_Separator", Confline.get_value("CSV_Separator", 0), self.id)
-      Confline.new_confline("CSV_Decimal", Confline.get_value("CSV_Decimal", 0), self.id)
+      Confline.new_confline("CSV_Separator", Confline.get_value("CSV_Separator", 0), id)
+      Confline.new_confline("CSV_Decimal", Confline.get_value("CSV_Decimal", 0), id)
 
       # ---------- emails -----------------
-      self.create_reseler_emails
+      create_reseler_emails
     end
 
 
   end
 
   def create_reseler_emails
-    Confline.new_confline("Email_Batch_Size", Confline.get_value("Email_Batch_Size", 0).to_i, self.id)
-    Confline.new_confline("Email_from", Confline.get_value("Email_from", 0).to_s, self.id)
-    Confline.new_confline("Email_Smtp_Server", Confline.get_value("Email_Smtp_Server", 0), self.id)
-    Confline.new_confline("Email_Domain", Confline.get_value("Email_Domain", 0), self.id)
-    Confline.new_confline("Email_Login", Confline.get_value("Email_Login", 0), self.id)
-    Confline.set_value2("Email_Login", 1, self.id)
-    Confline.new_confline("Email_Password", Confline.get_value("Email_Password", 0), self.id)
-    Confline.set_value2("Email_Password", 1, self.id)
-    Confline.new_confline("Email_port", Confline.get_value("Email_port", 0), self.id)
+    Confline.new_confline("Email_Batch_Size", Confline.get_value("Email_Batch_Size", 0).to_i, id)
+    Confline.new_confline("Email_from", Confline.get_value("Email_from", 0).to_s, id)
+    Confline.new_confline("Email_Smtp_Server", Confline.get_value("Email_Smtp_Server", 0), id)
+    Confline.new_confline("Email_Domain", Confline.get_value("Email_Domain", 0), id)
+    Confline.new_confline("Email_Login", Confline.get_value("Email_Login", 0), id)
+    Confline.set_value2("Email_Login", 1, id)
+    Confline.new_confline("Email_Password", Confline.get_value("Email_Password", 0), id)
+    Confline.set_value2("Email_Password", 1, id)
+    Confline.new_confline("Email_port", Confline.get_value("Email_port", 0), id)
   end
 
   def User.exists_resellers_confline_settings(id)
@@ -802,7 +802,7 @@ class User < ActiveRecord::Base
       em.body = email.body
       em.template =1
       em.date_created = Time.now.to_s
-      em.owner_id = self.id
+      em.owner_id = id
       em.save
     end
   end
@@ -815,29 +815,29 @@ class User < ActiveRecord::Base
     end
     emails = Email.find(:all,
                         :select => "emails.*",
-                        :joins => "LEFT JOIN (select * from emails where owner_id = #{self.id} and template =1) as b ON (b.name = emails.name)",
+                        :joins => "LEFT JOIN (select * from emails where owner_id = #{id} and template =1) as b ON (b.name = emails.name)",
                         :conditions => "emails.owner_id = 0 AND emails.template = 1 AND b.id IS NULL AND (emails.name != 'recording_new' AND emails.name != 'recording_delete')")
     for email in emails
-      MorLog.my_debug("FIXING RESELLER EMAILS: #{self.id} Email not found: #{email.id}")
+      MorLog.my_debug("FIXING RESELLER EMAILS: #{id} Email not found: #{email.id}")
       em = Email.new()
       em.name = email.name
       em.subject = email.subject
       em.body = email.body
       em.template =1
       em.date_created = Time.now.to_s
-      em.owner_id = self.id
+      em.owner_id = id
       em.save
     end
 
   end
 
   def check_default_user_conflines
-    if self.usertype == "reseller"
+    if usertype == "reseller"
 
       conflines = Confline.find(:all, :conditions => "name LIKE 'Default_device%' AND owner_id = 0")
       for confline in conflines
-        if not Confline.find(:first, :conditions => "name = '#{confline.name}' AND owner_id = #{self.id}")
-          Confline.new_confline(confline.name, confline.value, self.id)
+        if not Confline.find(:first, :conditions => "name = '#{confline.name}' AND owner_id = #{id}")
+          Confline.new_confline(confline.name, confline.value, id)
         end
       end
 
@@ -857,10 +857,10 @@ class User < ActiveRecord::Base
 =end
 
   def get_hash
-    return(self.uniquehash) if (self.uniquehash and self.uniquehash.length > 0)
-    self.uniquehash = ApplicationController::random_password(10)
-    self.save
-    return self.uniquehash
+    return(uniquehash) if (uniquehash and uniquehash.length > 0)
+    uniquehash = ApplicationController::random_password(10)
+    save
+    return uniquehash
   end
 
   #debug
@@ -873,13 +873,13 @@ class User < ActiveRecord::Base
   end
 
   def get_owner()
-    owner = User.find(self.owner_id)
+    owner = User.find(owner_id)
     return owner
   end
 
 
   def primary_device
-    Device.find(:first, :conditions => ["id = ?", self.primary_device_id])
+    Device.find(:first, :conditions => ["id = ?", primary_device_id])
   end
 
 
@@ -895,7 +895,7 @@ class User < ActiveRecord::Base
     day_selfcost = 0
     day_cost = 0
 
-    if self.usertype == "admin"
+    if usertype == "admin"
 
       # ---- month ----
 
@@ -929,16 +929,16 @@ class User < ActiveRecord::Base
 
     end
 
-    if self.usertype == "reseller"
+    if usertype == "reseller"
 
       # ---- month ----
 
       # calls from reseller
-      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59';"
+      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE user_id = #{id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59';"
       res = ActiveRecord::Base.connection.select_all(sql_res)
 
       #calls from reseller users
-      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE reseller_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59';"
+      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE reseller_id = #{id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59';"
       res2 = ActiveRecord::Base.connection.select_all(sql_res2)
 
       month_calls = res[0]['calls_count'].to_i + res2[0]['calls_count'].to_i
@@ -949,11 +949,11 @@ class User < ActiveRecord::Base
       # ---- day ----
 
       # calls from reseller
-      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59';"
+      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE user_id = #{id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59';"
       res = ActiveRecord::Base.connection.select_all(sql_res)
 
       #calls from reseller users
-      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE reseller_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59';"
+      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE reseller_id = #{id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59';"
       res2 = ActiveRecord::Base.connection.select_all(sql_res2)
 
       day_calls = res[0]['calls_count'].to_i + res2[0]['calls_count'].to_i
@@ -963,12 +963,12 @@ class User < ActiveRecord::Base
 
     end
 
-    if self.usertype != "admin" and self.usertype != "reseller"
+    if usertype != "admin" and usertype != "reseller"
 
       # ---- month ----
 
       # calls from user
-      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59';"
+      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE user_id = #{id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59';"
       res = ActiveRecord::Base.connection.select_all(sql_res)
 
       month_calls = res[0]['calls_count'].to_i
@@ -979,7 +979,7 @@ class User < ActiveRecord::Base
       # ---- day ----
 
       # calls from user
-      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59';"
+      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE user_id = #{id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59';"
       res = ActiveRecord::Base.connection.select_all(sql_res)
 
       day_calls = res[0]['calls_count'].to_i
@@ -999,14 +999,14 @@ class User < ActiveRecord::Base
 
     total_calls = 0
     calls_price = 0
-    zero_calls_sql = self.invoice_zero_calls_sql
+    zero_calls_sql = invoice_zero_calls_sql
     up = SqlExport.user_price_sql
-    #val = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.src_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{self.id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
-    val = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls WHERE disposition = 'ANSWERED' and calls.user_id = #{self.id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
-    val2 = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.dst_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{self.id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
-    #MorLog.my_debug("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.src_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{self.id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};", 1)
-    MorLog.my_debug("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls WHERE disposition = 'ANSWERED' and calls.user_id = #{self.id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};", 1)
-    MorLog.my_debug("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.dst_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{self.id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};", 1)
+    #val = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.src_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
+    val = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls WHERE disposition = 'ANSWERED' and calls.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
+    val2 = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.dst_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
+    #MorLog.my_debug("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.src_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};", 1)
+    MorLog.my_debug("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls WHERE disposition = 'ANSWERED' and calls.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};", 1)
+    MorLog.my_debug("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.dst_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};", 1)
 
     if val
       total_calls += val[0]['calls'].to_i
@@ -1034,7 +1034,7 @@ class User < ActiveRecord::Base
            LEFT JOIN users ON (devices.user_id = users.id)
            WHERE disposition = 'ANSWERED'
            and (calls.reseller_id = #{id} or users.owner_id = #{id})
-           AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{self.invoice_zero_calls_sql(SqlExport.reseller_price_sql)}"
+           AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{invoice_zero_calls_sql(SqlExport.reseller_price_sql)}"
     res = ActiveRecord::Base.connection.select_all(sql)
 
     if res[0]
@@ -1095,7 +1095,7 @@ class User < ActiveRecord::Base
   def subscriptions_in_period(period_start, period_end)
     period_start = period_start.to_s(:db) if period_start.class == Time or period_start.class == Date
     period_end = period_end.to_s(:db) if period_end.class == Time or period_end.class == Date
-    subs = Subscription.find(:all, :include => [:service], :conditions => ["(? BETWEEN activation_start AND activation_end OR ? BETWEEN activation_start AND activation_end OR (activation_start > ? AND activation_end < ?)) AND subscriptions.user_id = ?", period_start, period_end, period_start, period_end, self.id])
+    subs = Subscription.find(:all, :include => [:service], :conditions => ["(? BETWEEN activation_start AND activation_end OR ? BETWEEN activation_start AND activation_end OR (activation_start > ? AND activation_end < ?)) AND subscriptions.user_id = ?", period_start, period_end, period_start, period_end, id])
     subs
   end
 
@@ -1103,8 +1103,8 @@ class User < ActiveRecord::Base
   # gets parameters for CSV file
   def csv_params
 
-    owner_id = self.owner_id
-    owner_id = self.id if self.usertype == "reseller"
+    owner_id = owner_id
+    owner_id = id if usertype == "reseller"
     sep = Confline.get_value("CSV_Separator", owner_id).to_s
     dec = Confline.get_value("CSV_Decimal", owner_id).to_s
 
@@ -1119,10 +1119,10 @@ class User < ActiveRecord::Base
 
 
   def create_default_device(options={})
-    owner_id =self.owner_id
+    owner_id =owner_id
 
     fextension = options[:free_ext]
-    device = Device.new({:user_id => self.id, :devicegroup_id => options[:dev_group].to_i, :context => "mor_local", :device_type => options[:device_type].to_s, :extension => fextension, :pin => options[:pin].to_s, :secret => options[:secret].to_s})
+    device = Device.new({:user_id => id, :devicegroup_id => options[:dev_group].to_i, :context => "mor_local", :device_type => options[:device_type].to_s, :extension => fextension, :pin => options[:pin].to_s, :secret => options[:secret].to_s})
     device.description = options[:description] if options[:description]
     device.device_ip_authentication_record = options[:device_ip_authentication_record] if options[:device_ip_authentication_record]
     device.username = options[:username] ? options[:username] : fextension
@@ -1230,10 +1230,10 @@ class User < ActiveRecord::Base
       pass = random_digit_password(4) if pass.to_s.length == 0
 
       email = Confline.get_value("Default_device_voicemail_box_email", owner_id)
-      address = self.address
+      address = address
       email = address.email if address and address.email.to_s.size > 0
       device.update_cid(Confline.get_value("Default_device_cid_name", owner_id), Confline.get_value("Default_device_cid_number", owner_id), false)
-      self.primary_device_id = device.id
+      primary_device_id = device.id
       # configure_extensions(device.id)
     end
 
@@ -1250,21 +1250,21 @@ class User < ActiveRecord::Base
         :save => true
     }.merge(opt)
     if !tax or tax == {}
-      if self.owner_id == 0
+      if owner_id == 0
         new_tax = Confline.get_default_tax(0)
       else
-        new_tax = User.find_by_id(self.owner_id).get_tax.clone
+        new_tax = User.find_by_id(owner_id).get_tax.clone
       end
     else
       new_tax = Tax.new(tax)
     end
-    self.tax = new_tax
-    self.tax.save if options[:save] == true
-    self.save if options[:save] == true
+    tax = new_tax
+    tax.save if options[:save] == true
+    save if options[:save] == true
   end
 
   def assign_default_tax2
-    owner = self.owner_id
+    owner = owner_id
     tax ={
         :tax1_enabled => 1,
         :tax2_enabled => Confline.get_value2("Tax_2", owner).to_i,
@@ -1284,7 +1284,7 @@ class User < ActiveRecord::Base
 
     tax[:total_tax_name] = "TAX" if tax[:total_tax_name].blank?
     tax[:tax1_name] = tax[:total_tax_name].to_s if tax[:tax1_name].blank?
-    self.assign_default_tax(tax, {:save => true})
+    assign_default_tax(tax, {:save => true})
   end
 
 
@@ -1298,8 +1298,8 @@ class User < ActiveRecord::Base
   end
 
   def get_tax
-    self.assign_default_tax if self.tax.nil?
-    self.tax
+    assign_default_tax if tax.nil?
+    tax
   end
 
   def user_type
@@ -1327,11 +1327,11 @@ class User < ActiveRecord::Base
         changed = 1
         sub_price = sub.price_for_period(period_start_with_time, period_end_with_time)
 
-        Action.new(:user_id => self.id, :target_id => sub.id, :target_type => "subscription", :date => Time.now, :action => "subscription_paid", :data => "#{time.year}-#{time.month}", :data2 => sub_price).save
+        Action.new(:user_id => id, :target_id => sub.id, :target_type => "subscription", :date => Time.now, :action => "subscription_paid", :data => "#{time.year}-#{time.month}", :data2 => sub_price).save
 
         # if setting does not allow dropping bellow zero and balance got bellow 0
         setting_disallow_balance_drop_below_zero = Confline.get_value("Disallow_prepaid_user_balance_drop_below_zero", owner_id)
-        balance_left = self.balance - sub_price
+        balance_left = balance - sub_price
         if user_type == "prepaid" and balance_left.to_f < 0.to_f and setting_disallow_balance_drop_below_zero.to_i == 1
           # and block user
           MorLog.my_debug("  Blocking prepaid user and sending email")
@@ -1341,19 +1341,19 @@ class User < ActiveRecord::Base
           b += sub_price
         end
 
-        MorLog.my_debug("  Paying subscription: #{sub.service.name} Price: #{sub_price} balance left #{self.balance}")
+        MorLog.my_debug("  Paying subscription: #{sub.service.name} Price: #{sub_price} balance left #{balance}")
         all_data << {:price => sub_price, :subscription => sub, :msg => "Paid now"}
         Payment.subscription_payment(self, sub_price)
 
         # what is the purpose of this Action? It marks subscription as paid for next month and ruins the billing!
-        # Action.new(:user_id => self.id, :target_id => sub.id, :target_type =>"subscription", :date => Time.now, :action => "subscription_paid", :data => "#{Time.now.year}-#{Time.now.month}", :data2=>sub_price).save
+        # Action.new(:user_id => id, :target_id => sub.id, :target_type =>"subscription", :date => Time.now, :action => "subscription_paid", :data => "#{Time.now.year}-#{Time.now.month}", :data2=>sub_price).save
       else
         MorLog.my_debug("  Service already paid: #{sub.service.name}")
         #all_data << {:price => 0, :price_with_tax => 0, :subscription => sub, :msg => "Alraedy payed"}
       end
     }
-    self.balance -= b
-    if self.postpaid? and (self.balance + self.credit < 0) and not self.credit_unlimited?
+    balance -= b
+    if postpaid? and (balance + credit < 0) and not credit_unlimited?
       changed = 1
       MorLog.my_debug("  Blocking postpaid user and sending email")
       block_and_send_email
@@ -1367,14 +1367,14 @@ class User < ActiveRecord::Base
 
   def user_calls_to_csv(options={})
     options[:hide_finances] ||= false
-    sep, dec = self.csv_params
+    sep, dec = csv_params
 
     disposition = []
     if options[:direction] == "incoming"
-      disposition << " ((devices.user_id = #{self.id} )  OR (dids.user_id = #{self.id}))"
+      disposition << " ((devices.user_id = #{id} )  OR (dids.user_id = #{id}))"
       disposition << " calls.dst_device_id = #{options[:device].id} " if options[:device]
     else
-      disposition << " calls.user_id = #{self.id}"
+      disposition << " calls.user_id = #{id}"
       disposition << " calls.src_device_id = #{options[:device].id} " if options[:device]
     end
 
@@ -1400,7 +1400,7 @@ class User < ActiveRecord::Base
 
     select = []
     select2 = []
-    format = Confline.get_value('Date_format', self.owner_id).gsub('M', 'i')
+    format = Confline.get_value('Date_format', owner_id).gsub('M', 'i')
     select2 << SqlExport.nice_date('calldate', {:reference => 'calldate', :format => format, :tz => options[:tx]})
     select2 << "src, dst, direction"
     select2 << "prov_name" if options[:usertype] == "admin"
@@ -1473,7 +1473,7 @@ class User < ActiveRecord::Base
     jn << "LEFT JOIN dids ON (calls.did_id = dids.id)" if options[:direction] == "incoming"
     jn << "LEFT JOIN providers ON (providers.id = calls.provider_id)" if options[:usertype] == "admin"
 
-    filename = "CDR-#{self.id.to_s.gsub(" ", "_")}-#{options[:date_from].gsub(" ", "_").gsub(":", "_")}-#{options[:date_till].gsub(" ", "_").gsub(":", "_")}-#{Time.now().to_f.to_s.gsub(".", "")}-#{options[:direction]}-#{show_currency}"
+    filename = "CDR-#{id.to_s.gsub(" ", "_")}-#{options[:date_from].gsub(" ", "_").gsub(":", "_")}-#{options[:date_till].gsub(" ", "_").gsub(":", "_")}-#{Time.now().to_f.to_s.gsub(".", "")}-#{options[:direction]}-#{show_currency}"
 
     sql = "SELECT * "
     if options[:test] != 1
@@ -1483,7 +1483,7 @@ class User < ActiveRecord::Base
         LINES TERMINATED BY '#{"\\n"}' "
     end
     disp = disposition.join(" AND ")
-    disp = "(#{disp}) OR (calls.reseller_id = #{self.id} AND calldate BETWEEN '#{options[:date_from]}' AND '#{options[:date_till]}')" if options[:reseller].to_i == 1
+    disp = "(#{disp}) OR (calls.reseller_id = #{id} AND calldate BETWEEN '#{options[:date_from]}' AND '#{options[:date_till]}')" if options[:reseller].to_i == 1
 
     sql += " FROM ("+
         "SELECT #{select2.join(" , ")}  FROM
@@ -1510,8 +1510,8 @@ class User < ActiveRecord::Base
     cond << " disposition = '#{options[:call_type]}' " if options[:call_type] != "all"
     cond << " calls.hangupcause = #{options[:hgc].code} " if options[:hgc]
 
-    cond << "(calls.reseller_id = '#{self.id}' OR devices.user_id = '#{self.id}')" if self.usertype=='reseller'
-    cond << "devices.user_id = '#{self.id}'" if self.usertype=='user'
+    cond << "(calls.reseller_id = '#{id}' OR devices.user_id = '#{id}')" if usertype=='reseller'
+    cond << "devices.user_id = '#{id}'" if usertype=='user'
 
     jn = []
     jn << 'LEFT JOIN users ON (calls.user_id = users.id)'
@@ -1519,23 +1519,23 @@ class User < ActiveRecord::Base
     jn << 'LEFT JOIN providers ON (calls.provider_id = providers.id)'
     jn << 'LEFT JOIN dids ON (calls.did_id = dids.id)'
     jn << 'LEFT JOIN cards ON (calls.card_id = cards.id)'
-    jn << 'JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id)' if self.usertype!='admin' and self.usertype != "accountant"
-    jn2 = 'JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id)' if self.usertype!='admin' and self.usertype != "accountant"
-    select = self.usertype=='reseller' ? ' DISTINCT calls.*' : 'calls.*'
+    jn << 'JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id)' if usertype!='admin' and usertype != "accountant"
+    jn2 = 'JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id)' if usertype!='admin' and usertype != "accountant"
+    select = usertype=='reseller' ? ' DISTINCT calls.*' : 'calls.*'
 
     if options[:csv] == 1
       s =[]
-      format = Confline.get_value('Date_format', self.owner_id).gsub('M', 'i')
-      s << SqlExport.nice_date('calldate', {:reference => 'calldate', :format => format, :tz => self.time_zone})
+      format = Confline.get_value('Date_format', owner_id).gsub('M', 'i')
+      s << SqlExport.nice_date('calldate', {:reference => 'calldate', :format => format, :tz => time_zone})
       s << "calls.src"
       options[:usertype] == 'user' ? s << hide_dst_for_user_sql(self, "csv", "calls.dst", {:as => "dst"}) : s << "calls.dst"
       s << "IF(calls.billsec = 0, IF(calls.real_billsec = 0, 0, calls.real_billsec) ,calls.billsec)"
-      if self.usertype != 'user' or (Confline.get_value('Show_HGC_for_Resellers').to_i == 1 and self.usertype == 'reseller')
+      if usertype != 'user' or (Confline.get_value('Show_HGC_for_Resellers').to_i == 1 and usertype == 'reseller')
         s << "CONCAT(calls.disposition, '(', calls.hangupcause, ')')"
       else
         s << 'calls.disposition'
       end
-      if self.usertype == "admin" or self.usertype == "accountant"
+      if usertype == "admin" or usertype == "accountant"
         s << "calls.server_id"
         s << "IF(providers.name IS NULL, '', providers.name)"
         s << "IF(calls.provider_rate IS NULL, 0, calls.provider_rate), IF(calls.provider_price IS NULL, 0, calls.provider_price)" if options[:can_see_finances]
@@ -1549,16 +1549,16 @@ class User < ActiveRecord::Base
         s << "IF(dids.did IS NULL, '' , dids.did)"
         s << "IF(calls.did_prov_price IS NULL, 0, #{SqlExport.replace_price('calls.did_prov_price')}), IF(calls.did_inc_price IS NULL, 0, #{SqlExport.replace_price('calls.did_inc_price')}), IF(calls.did_price IS NULL, 0 , #{SqlExport.replace_price('calls.did_price')})" if options[:can_see_finances]
       end
-      if self.show_billing_info == 1 and options[:can_see_finances]
-        if self.usertype == 'reseller'
+      if show_billing_info == 1 and options[:can_see_finances]
+        if usertype == 'reseller'
           s << "IF(calls.reseller_price != 0 , IF(calls.reseller_price IS NULL, 0, #{SqlExport.replace_price('calls.reseller_price')}), IF(calls.did_price IS NULL, 0, #{SqlExport.replace_price('calls.did_price')}))"
         end
-        if self.usertype == 'user'
+        if usertype == 'user'
           s << "IF(calls.user_price != 0 , IF(calls.user_price IS NULL, 0, #{SqlExport.replace_price('calls.user_price')}), IF(calls.did_price IS NULL, 0, #{SqlExport.replace_price('calls.did_price')}))"
         end
       end
-      filename = "Last_calls-#{self.id.to_s.gsub(" ", "_")}-#{options[:from].gsub(" ", "_").gsub(":", "_")}-#{options[:till].gsub(" ", "_").gsub(":", "_")}-#{Time.now().to_i}"
-      sep, dec = self.csv_params
+      filename = "Last_calls-#{id.to_s.gsub(" ", "_")}-#{options[:from].gsub(" ", "_").gsub(":", "_")}-#{options[:till].gsub(" ", "_").gsub(":", "_")}-#{Time.now().to_i}"
+      sep, dec = csv_params
       sql = "SELECT * "
       if options[:test] != 1
         sql += " INTO OUTFILE '/tmp/#{filename}.csv'
@@ -1583,19 +1583,19 @@ class User < ActiveRecord::Base
   end
 
   def update_voicemail_boxes
-    device_ids = Device.find(:all, :select => "id", :conditions => ["user_id = ?", self.id]).map(&:id)
-    VoicemailBox.update_all(["fullname = ?", [self.first_name.to_s, self.last_name.to_s].join(" ")], "device_id in (#{device_ids.join(", ")})") if device_ids.size > 0
+    device_ids = Device.find(:all, :select => "id", :conditions => ["user_id = ?", id]).map(&:id)
+    VoicemailBox.update_all(["fullname = ?", [first_name.to_s, last_name.to_s].join(" ")], "device_id in (#{device_ids.join(", ")})") if device_ids.size > 0
   end
 
-  def self.check_users_balance
+  def check_users_balance
     User.update_all("warning_email_sent = '0'", "warning_email_active = '1' AND warning_email_sent = '1' AND balance > warning_email_balance")
   end
 
   def get_invoices_status
-    invoice = self.send_invoice_types
+    invoice = send_invoice_types
 
     if (invoice % 2) ==1
-      if self.prepaid?
+      if prepaid?
         prepaid = "Prepaid_"
       else
         prepaid= ""
@@ -1636,11 +1636,11 @@ class User < ActiveRecord::Base
   end
 
   def find_all_for_select(options = {})
-    User.find_all_for_select(self.id, options)
+    User.find_all_for_select(id, options)
   end
 
   def activecalls
-    Activecall.find(:all, :joins => "LEFT JOIN devices ON activecalls.src_device_id = devices.id OR activecalls.dst_device_id = devices.id LEFT JOIN users ON devices.user_id = users.id", :conditions => ["devices.user_id = ?", self.id])
+    Activecall.find(:all, :joins => "LEFT JOIN devices ON activecalls.src_device_id = devices.id OR activecalls.dst_device_id = devices.id LEFT JOIN users ON devices.user_id = users.id", :conditions => ["devices.user_id = ?", id])
   end
 
   def booth_status
@@ -1661,7 +1661,7 @@ class User < ActiveRecord::Base
     Activecall.find(
         :all,
         :joins => "LEFT JOIN devices ON activecalls.src_device_id = devices.id OR activecalls.dst_device_id = devices.id LEFT JOIN users ON devices.user_id = users.id",
-        :conditions => ["devices.user_id = ? AND start_time > ? #{"AND answer_time IS NOT NULL" if options[:ongoing]}", self.id, time.strftime("%Y-%m-%d %H:%M:%S")])
+        :conditions => ["devices.user_id = ? AND start_time > ? #{"AND answer_time IS NOT NULL" if options[:ongoing]}", id, time.strftime("%Y-%m-%d %H:%M:%S")])
   end
 
   def active_booth_calls
@@ -1673,26 +1673,26 @@ class User < ActiveRecord::Base
 
   def can_send_sms?
     out = true
-    if self.sms_service_active == 0 or not self.sms_tariff or not self.sms_lcr
+    if sms_service_active == 0 or not sms_tariff or not sms_lcr
       out = false
     end
     out
   end
 
   def reseller_allow_providers_tariff?
-    self.is_reseller? and own_providers == 1
+    is_reseller? and own_providers == 1
   end
 
   def is_allow_manage_providers?
-    self.is_admin? or self.reseller_allow_providers_tariff?
+    is_admin? or reseller_allow_providers_tariff?
   end
 
   def can_own_providers?
-    self.own_providers == 1
+    own_providers == 1
   end
 
   def load_lcrs(*arr)
-    if self.is_accountant?
+    if is_accountant?
       if arr[1] and arr[1].include?(:conditions)
         arr[1][:conditions] += ' AND user_id = 0 '
       else
@@ -1700,7 +1700,7 @@ class User < ActiveRecord::Base
       end
       Lcr.find(*arr)
     else
-      if !own_providers? and self.is_reseller?
+      if !own_providers? and is_reseller?
         if arr[1] and arr[1].include?(:conditions)
           arr[1][:conditions] += " AND id = #{lcr_id} "
         else
@@ -1728,9 +1728,9 @@ class User < ActiveRecord::Base
     logger.fatal params[:time_zone]
     if ['reseller', 'user'].include?(usertype)
       allow_params = [:time_zone, :spy_device_id, :currency_id, :password, :warning_email_balance, :warning_email_hour, :first_name, :last_name, :clientid, :taxation_country, :vat_number, :acc_group_id]
-      allow_params += [:accounting_number, :generate_invoice, :username, :tariff_id, :postpaid, :call_limit, :blocked, :agreement_number, :language, :warning_balance_sound_file_id, :warning_balance_call, :quickforwards_rule_id] if usertype == 'reseller' and id.to_i != self.id.to_i
-      allow_params += [:lcr_id] if params[:lcr_id] and reseller_allow_providers_tariff? and id.to_i != self.id.to_i and User.current.load_lcrs(:first, :conditions => "id = #{params[:lcr_id]}")
-      unless self.check_for_own_providers
+      allow_params += [:accounting_number, :generate_invoice, :username, :tariff_id, :postpaid, :call_limit, :blocked, :agreement_number, :language, :warning_balance_sound_file_id, :warning_balance_call, :quickforwards_rule_id] if usertype == 'reseller' and id.to_i != id.to_i
+      allow_params += [:lcr_id] if params[:lcr_id] and reseller_allow_providers_tariff? and id.to_i != id.to_i and User.current.load_lcrs(:first, :conditions => "id = #{params[:lcr_id]}")
+      unless check_for_own_providers
         allow_params +=[:recording_hdd_quota, :recordings_email, :hide_destination_end, :cyberplat_active,]
       end
       return params.reject { |key, value| !allow_params.include?(key.to_sym) }
@@ -1740,7 +1740,7 @@ class User < ActiveRecord::Base
   end
 
   def load_providers(*arr)
-    if self.is_reseller?
+    if is_reseller?
       if arr[1] and arr[1].include?(:conditions)
         arr[1][:conditions] += " AND (user_id = #{id} OR (common_use = 1 and providers.id IN (SELECT provider_id FROM common_use_providers where reseller_id = #{id})))"
       else
@@ -1754,7 +1754,7 @@ class User < ActiveRecord::Base
 
   # also counts providers for terminator
   def load_terminators
-    if self.is_reseller?
+    if is_reseller?
       Terminator.find_by_sql("SELECT terminators.*, count(providers.id) AS providers_size
 FROM terminators
 LEFT JOIN providers ON (providers.terminator_id = terminators.id)
@@ -1770,7 +1770,7 @@ GROUP BY terminators.id;")
   end
 
   def load_terminator(term_id)
-    if self.is_reseller?
+    if is_reseller?
       Terminator.find_by_sql("SELECT terminators.* FROM terminators
 WHERE terminators.id = #{term_id} AND (terminators.user_id = #{id} OR terminators.id IN
 (SELECT terminator_id FROM providers WHERE providers.common_use = 1))
@@ -1781,7 +1781,7 @@ LIMIT 1;")[0]
   end
 
   def load_terminators_ids
-    if self.is_reseller?
+    if is_reseller?
       Terminator.find_by_sql("SELECT terminators.id
 FROM terminators
 LEFT JOIN providers ON (providers.terminator_id = terminators.id)
@@ -1794,7 +1794,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
   def check_for_own_providers
     o = false
-    if self.reseller_allow_providers_tariff? or (usertype == 'user' and self.owner and self.owner.reseller_allow_providers_tariff?)
+    if reseller_allow_providers_tariff? or (usertype == 'user' and owner and owner.reseller_allow_providers_tariff?)
       o = true
     end
     return o
@@ -1810,7 +1810,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
     arr[1][:order] = 'nice_user'
 
-    if self.is_reseller?
+    if is_reseller?
       if arr[1] and arr[1].include?(:conditions)
         arr[1][:conditions] += " AND (user_id = #{id} AND hidden = 0)"
       else
@@ -1824,7 +1824,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def load_users_devices(*arr)
-    if self.is_reseller?
+    if is_reseller?
       arr[1][:joins] ||= ""
       arr[1][:joins] += "LEFT JOIN users ON (devices.user_id = users.id)"
       arr[1][:select] = "devices.*"
@@ -1840,7 +1840,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def load_dids(*arr)
-    if self.is_reseller?
+    if is_reseller?
       if arr[1] and arr[1].include?(:conditions)
         arr[1][:conditions] += " AND (dids.reseller_id = #{id})"
       else
@@ -1951,9 +1951,9 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def fix_when_is_rendering
-    self.balance = balance * User.current.currency.exchange_rate.to_f
-    self.credit = credit * User.current.currency.exchange_rate.to_f if credit != -1
-    self.warning_email_balance = warning_email_balance * User.current.currency.exchange_rate.to_f
+    balance = balance * User.current.currency.exchange_rate.to_f
+    credit = credit * User.current.currency.exchange_rate.to_f if credit != -1
+    warning_email_balance = warning_email_balance * User.current.currency.exchange_rate.to_f
   end
 
 
@@ -1970,7 +1970,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def load_tariffs
-    owner = self.get_correct_owner_id
+    owner = get_correct_owner_id
 
     #@sms_tariffs = SmsTariff.find(:all, :conditions => "(tariff_type = 'user') AND owner_id = '#{owner}' ", :order => "tariff_type ASC, name ASC")
     if Confline.get_value("User_Wholesale_Enabled").to_i == 0
@@ -2194,7 +2194,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def update_from_edit(params, current_user, tax_from_params, monitoring_a, rec_a, api = 0)
-    user_old = self.clone
+    user_old = clone
 
     if api == 1
       invoice = 0
@@ -2206,7 +2206,7 @@ GROUP BY terminators.id;").map { |t| t.id }
       invoice += params[:i6].to_i if params[:i6]
       invoice += params[:i7].to_i if params[:i7]
       invoice += params[:i8].to_i if params[:i8]
-      self.send_invoice_types = invoice if params[:i1] or params[:i2] or params[:i3] or params[:i4] or params[:i5] or params[:i6] or params[:i7] or params[:i8]
+      send_invoice_types = invoice if params[:i1] or params[:i2] or params[:i3] or params[:i4] or params[:i5] or params[:i6] or params[:i7] or params[:i8]
     else
       i1=params[:i1]
       i2=params[:i2]
@@ -2217,28 +2217,28 @@ GROUP BY terminators.id;").map { |t| t.id }
       i7=params[:i7]
       i8=params[:i8]
       invoice = i1.to_i+i2.to_i+i3.to_i+i4.to_i+i5.to_i+i6.to_i+i7.to_i+i8.to_i
-      self.send_invoice_types = invoice
+      send_invoice_types = invoice
     end
 
-    self.update_attributes(current_user.safe_attributtes(params[:user], self.id))
+    update_attributes(current_user.safe_attributtes(params[:user], id))
 
-    Action.add_action_hash(current_user.id, {:action => 'user_edited', :target_id => self.id, :target_type => "user"})
+    Action.add_action_hash(current_user.id, {:action => 'user_edited', :target_id => id, :target_type => "user"})
     if api == 1
       if params[:unlimited] and params[:unlimited].to_i == 1
-        self.credit = -1
+        credit = -1
       else
-        self.credit = params[:credit].to_f if params[:credit]
-        self.credit = 0 if self.credit < 0 if params[:credit]
+        credit = params[:credit].to_f if params[:credit]
+        credit = 0 if credit < 0 if params[:credit]
       end
     else
       if params[:unlimited].to_i == 1 and params[:user][:postpaid] == 1
-        self.credit = -1
+        credit = -1
       else
-        self.credit = params[:credit].to_f
-        self.credit = 0 if self.credit < 0
+        credit = params[:credit].to_f
+        credit = 0 if credit < 0
       end
 
-      if self.postpaid? and Confline.mor_11_extended?
+      if postpaid? and Confline.mor_11_extended?
         #prepaid user cannot have minimal charge enabled
         #if minimal charge is 0 it means it is disabled
         #so if minimal charge is not numeric or was not even supplied we convert
@@ -2247,136 +2247,136 @@ GROUP BY terminators.id;").map { |t| t.id }
         #so no need to check for that either.
         #but minimal charge daytime must be supplied if minimal charge is enabled.
         #if it is disabled set datetime to nil
-        self.minimal_charge = params[:minimal_charge_value].to_i
+        minimal_charge = params[:minimal_charge_value].to_i
         if params[:user][:postpaid] == 0
-          self.minimal_charge = 0
-          self.minimal_charge_start_at = nil
+          minimal_charge = 0
+          minimal_charge_start_at = nil
         elsif params[:minimal_charge_value].to_i != 0 and params[:minimal_charge_date]
           year = params[:minimal_charge_date][:year].to_i
           month = params[:minimal_charge_date][:month].to_i
-          self.minimal_charge_start_at = Date.new(year, month, 1)
+          minimal_charge_start_at = Date.new(year, month, 1)
         elsif params[:minimal_charge_value].to_i == 0
-          self.minimal_charge_start_at = nil
+          minimal_charge_start_at = nil
         else
           #set to current datetime, when saveing model, it should cause error
           #because when minimal charge is disabled datetime should be disabled
-          self.minimal_charge_start_at = Date.new(Time.now.year, Time.now.month, 1)
+          minimal_charge_start_at = Date.new(Time.now.year, Time.now.month, 1)
         end
       end
     end
 
     if self and user_old
-      if self.tariff_id.to_i != user_old.tariff_id.to_i
+      if tariff_id.to_i != user_old.tariff_id.to_i
         tariff = nil
-        tariff = Tariff.find(:first, :conditions => ["id = ?", self.tariff_id.to_i]) if self and self.tariff_id.to_i > 0
+        tariff = Tariff.find(:first, :conditions => ["id = ?", tariff_id.to_i]) if self and tariff_id.to_i > 0
         !tariff ? tariff_name = "" : tariff_name = tariff.name
 
         tariff_old = nil
         tariff_old = Tariff.find(:first, :conditions => ["id = ?", user_old.tariff_id.to_i]) if user_old and user_old.tariff_id.to_i > 0
         !tariff_old ? tariff_old_name = "" : tariff_old_name = tariff_old.name
 
-        Action.add_action_hash(current_user.id, {:action => 'user_tariff_changed', :target_id => self.id, :target_type => "user", :data => tariff_old_name, :data2 => tariff_name})
+        Action.add_action_hash(current_user.id, {:action => 'user_tariff_changed', :target_id => id, :target_type => "user", :data => tariff_old_name, :data2 => tariff_name})
       end
 
-      if user_old.user_type != self.user_type
-        Action.add_action_hash(current_user.id, {:action => 'user_type_change_to', :target_id => self.id, :target_type => "user", :data => self.user_type})
+      if user_old.user_type != user_type
+        Action.add_action_hash(current_user.id, {:action => 'user_type_change_to', :target_id => id, :target_type => "user", :data => user_type})
       end
 
-      if user_old.postpaid != self.postpaid
-        Action.add_action_hash(current_user.id, {:action => 'postpaid_change_to', :target_id => self.id, :target_type => "user", :data => self.postpaid})
+      if user_old.postpaid != postpaid
+        Action.add_action_hash(current_user.id, {:action => 'postpaid_change_to', :target_id => id, :target_type => "user", :data => postpaid})
       end
 
-      if user_old.credit != self.credit
-        Action.add_action_hash(current_user.id, {:action => 'user_credit_change', :target_id => self.id, :target_type => "user", :data => user_old.credit, :data2 => self.credit})
+      if user_old.credit != credit
+        Action.add_action_hash(current_user.id, {:action => 'user_credit_change', :target_id => id, :target_type => "user", :data => user_old.credit, :data2 => credit})
       end
 
-      if user_old.lcr_id != self.lcr_id
-        Action.add_action_hash(current_user.id, {:action => 'user_lcr_change', :target_id => self.id, :target_type => "user", :data => user_old.lcr_id, :data2 => self.lcr_id})
+      if user_old.lcr_id != lcr_id
+        Action.add_action_hash(current_user.id, {:action => 'user_lcr_change', :target_id => id, :target_type => "user", :data => user_old.lcr_id, :data2 => lcr_id})
       end
 
-      self.update_voicemail_boxes if (user_old.first_name != self.first_name) or (user_old.last_name != self.last_name)
+      update_voicemail_boxes if (user_old.first_name != first_name) or (user_old.last_name != last_name)
     end
 
-    self.password = Digest::SHA1.hexdigest(params[:password][:password]) if params[:password] and !params[:password][:password].blank?
+    password = Digest::SHA1.hexdigest(params[:password][:password]) if params[:password] and !params[:password][:password].blank?
 
     if api == 1
       if params[:agr_date][:year] and params[:agr_date][:month] and params[:agr_date][:day]
-        self.agreement_date = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
+        agreement_date = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
       end
     else
-      self.agreement_date = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
+      agreement_date = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
     end
 
     if api == 1
       if params[:block_at_date][:year] and params[:block_at_date][:month] and params[:block_at_date][:day]
-        self.block_at = params[:block_at_date][:year].to_s + "-" + params[:block_at_date][:month].to_s + "-" + params[:block_at_date][:day].to_s
+        block_at = params[:block_at_date][:year].to_s + "-" + params[:block_at_date][:month].to_s + "-" + params[:block_at_date][:day].to_s
       end
     else
-      self.block_at = params[:block_at_date][:year].to_s + "-" + params[:block_at_date][:month].to_s + "-" + params[:block_at_date][:day].to_s
+      block_at = params[:block_at_date][:year].to_s + "-" + params[:block_at_date][:month].to_s + "-" + params[:block_at_date][:day].to_s
     end
 
 
     if api == 1
-      self.block_at_conditional = params[:block_at_conditional].to_i if  params[:block_at_conditional]
+      block_at_conditional = params[:block_at_conditional].to_i if  params[:block_at_conditional]
     else
-      self.block_at_conditional = params[:block_at_conditional].to_i
+      block_at_conditional = params[:block_at_conditional].to_i
     end
 
 
     if api == 1
-      self.allow_loss_calls = params[:allow_loss_calls].to_i if params[:allow_loss_calls]
+      allow_loss_calls = params[:allow_loss_calls].to_i if params[:allow_loss_calls]
     else
-      self.allow_loss_calls = params[:allow_loss_calls].to_i
+      allow_loss_calls = params[:allow_loss_calls].to_i
     end
 
     if api == 1
-      self.warning_email_active = params[:warning_email_active].to_i if params[:warning_email_active]
+      warning_email_active = params[:warning_email_active].to_i if params[:warning_email_active]
     else
-      self.warning_email_active = params[:warning_email_active].to_i
+      warning_email_active = params[:warning_email_active].to_i
     end
 
     if api == 1
       if params[:warning_email_balance]
-        if self.warning_email_balance.to_f != params[:warning_email_balance].to_f
-          self.warning_email_sent = 0
+        if warning_email_balance.to_f != params[:warning_email_balance].to_f
+          warning_email_sent = 0
         end
       end
     else
-      if self.warning_email_balance.to_f != params[:warning_email_balance].to_f
-        self.warning_email_sent = 0
+      if warning_email_balance.to_f != params[:warning_email_balance].to_f
+        warning_email_sent = 0
       end
     end
 
     if api == 1
-      self.invoice_zero_calls = params[:show_zero_calls].to_i if params[:show_zero_calls]
+      invoice_zero_calls = params[:show_zero_calls].to_i if params[:show_zero_calls]
     else
-      self.invoice_zero_calls = params[:show_zero_calls].to_i
+      invoice_zero_calls = params[:show_zero_calls].to_i
     end
 
 
-    #self.provider = params[:provider].to_i
+    #provider = params[:provider].to_i
 
     tax = tax_from_params
 
-    unless self.tax
-      self.assign_default_tax
+    unless tax
+      assign_default_tax
     end
 
-    self.tax.update_attributes(tax)
-    self.tax.save
+    tax.update_attributes(tax)
+    tax.save
 
-    if self.is_reseller?
+    if is_reseller?
       if api == 1
-        self.own_providers = params[:own_providers].to_i if params[:own_providers]
+        own_providers = params[:own_providers].to_i if params[:own_providers]
       else
-        self.own_providers = params[:own_providers].to_i
+        own_providers = params[:own_providers].to_i
       end
 
     end
 
     # this piece of code is not necessary because following code changes lcr_id for all user of reseller
     #change LCR for all users of reseller
-    if self.is_reseller? and own_providers.to_i == 0
+    if is_reseller? and own_providers.to_i == 0
 
       Action.add_action_hash(current_user.id, {:action => 'reseller_lcr_change', :target_id => id, :target_type => "user", :data => user_old.lcr_id, :data2 => lcr_id})
 
@@ -2396,50 +2396,50 @@ GROUP BY terminators.id;").map { |t| t.id }
 
     if monitoring_a
       if api == 1
-        self.ignore_global_monitorings = params[:ignore_global_monitorings].to_i if params[:ignore_global_monitorings]
+        ignore_global_monitorings = params[:ignore_global_monitorings].to_i if params[:ignore_global_monitorings]
       else
-        self.ignore_global_monitorings = params[:ignore_global_monitorings].to_i
+        ignore_global_monitorings = params[:ignore_global_monitorings].to_i
       end
     end
     if api == 1
-      self.block_conditional_use = params[:block_conditional_use].to_i if params[:block_conditional_use]
+      block_conditional_use = params[:block_conditional_use].to_i if params[:block_conditional_use]
     else
-      self.block_conditional_use = params[:block_conditional_use].to_i
+      block_conditional_use = params[:block_conditional_use].to_i
     end
 
 
     if rec_a
       if api == 1
-        self.recording_enabled = params[:recording_enabled].to_i if params[:recording_enabled]
+        recording_enabled = params[:recording_enabled].to_i if params[:recording_enabled]
       else
-        self.recording_enabled = params[:recording_enabled].to_i
+        recording_enabled = params[:recording_enabled].to_i
       end
 
       if api == 1
-        self.recording_forced_enabled = params[:recording_forced_enabled].to_i if params[:recording_forced_enabled]
+        recording_forced_enabled = params[:recording_forced_enabled].to_i if params[:recording_forced_enabled]
       else
-        self.recording_forced_enabled = params[:recording_forced_enabled].to_i
+        recording_forced_enabled = params[:recording_forced_enabled].to_i
       end
 
       if api == 1
-        self.recording_hdd_quota = params[:user][:recording_hdd_quota].to_f * 1048576 if  params[:user][:recording_hdd_quota]
+        recording_hdd_quota = params[:user][:recording_hdd_quota].to_f * 1048576 if  params[:user][:recording_hdd_quota]
       else
-        self.recording_hdd_quota = params[:user][:recording_hdd_quota].to_f * 1048576
+        recording_hdd_quota = params[:user][:recording_hdd_quota].to_f * 1048576
       end
 
     end
 
-    if self.address
-      self.address.update_attributes(params[:address])
+    if address
+      address.update_attributes(params[:address])
     else
       a = Address.create(params[:address])
-      self.address_id = a.id
+      address_id = a.id
     end
 
 
     if params[:warning_email_active]
       if params[:user] and params[:date]
-        self.warning_email_hour = params[:user][:warning_email_hour].to_i != -1 ? params[:date][:user_warning_email_hour].to_i : params[:user][:warning_email_hour].to_i
+        warning_email_hour = params[:user][:warning_email_hour].to_i != -1 ? params[:date][:user_warning_email_hour].to_i : params[:user][:warning_email_hour].to_i
       end
     end
 
@@ -2594,7 +2594,7 @@ GROUP BY terminators.id;").map { |t| t.id }
         end
       }
 
-      params = current_user.sanitize_user_params_by_accountant_permissions(s, params, self.clone)
+      params = current_user.sanitize_user_params_by_accountant_permissions(s, params, clone)
       #'user[warning_balance_call]', 'user[generate_invoice]', 'privacy[global]',
     end
 
@@ -2602,7 +2602,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def sanitize_user_params_by_accountant_permissions(session, params, user = nil)
-    if self.is_accountant?
+    if is_accountant?
       if session[:acc_user_create_opt_1] != 2
         params[:password] = nil
       end
@@ -2621,7 +2621,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def sanitize_device_params_by_accountant_permissions(session, params, user = nil)
-    if self.is_accountant?
+    if is_accountant?
       params[:device] = params[:device].except(:pin) if session[:acc_device_pin].to_i != 2 if params[:device]
       params[:device] = params[:device].except(:extension) if session[:acc_device_edit_opt_1] != 2 if params[:device]
       if session[:acc_device_edit_opt_2] != 2 and params[:device]
@@ -2669,11 +2669,11 @@ GROUP BY terminators.id;").map { |t| t.id }
   #  end
   #end
 
-  def self.time_zone
+  def time_zone
     self[:time_zone]
   end
 
-  def self.time_zone=(s)
+  def time_zone=(s)
     self[:time_zone] = s
   end
 
@@ -2860,9 +2860,9 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def get_correct_owner_id
-    if self.is_accountant? or self.is_admin?
+    if is_accountant? or is_admin?
       return 0
-    elsif self.is_reseller?
+    elsif is_reseller?
       return id
     else
       return owner_id
@@ -2874,7 +2874,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def get_price_calculation_sqls
-    if self.is_reseller? or self.owner_id != 0
+    if is_reseller? or owner_id != 0
       up = SqlExport.user_price_sql
       rp = SqlExport.reseller_price_sql
       pp = SqlExport.reseller_provider_price_sql
@@ -2904,9 +2904,9 @@ GROUP BY terminators.id;").map { |t| t.id }
   +boolean+ true if user has unlimited credit number, otherwise false.
 =end
   def credit_unlimited?
-    #if self.prepaid?
+    #if prepaid?
     #  raise "Prepaid users do not have credit"
-    self.credit == -1
+    credit == -1
   end
 
 =begin
@@ -2916,7 +2916,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   *boolean* - true or false depending on wheter user is postpaid
 =end
   def postpaid?
-    self.postpaid.to_i == 1
+    postpaid.to_i == 1
   end
 
 =begin
@@ -2926,7 +2926,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   *boolean* - true or false depending on wheter user is prepaid
 =end
   def prepaid?
-    not self.postpaid?
+    not postpaid?
   end
 
 
@@ -2940,8 +2940,8 @@ GROUP BY terminators.id;").map { |t| t.id }
   does not have credit(NULL, VOID etc), but not has credit equal to 0.
 =end
   def set_prepaid
-    self.credit = 0
-    self.postpaid = 0
+    credit = 0
+    postpaid = 0
   end
 
 =begin
@@ -2949,7 +2949,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   in as int - 0 for prepaid, 1 for postpaid. 
 =end
   def set_postpaid
-    self.postpaid = 1
+    postpaid = 1
   end
 
 =begin
@@ -2959,7 +2959,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   *boolean* - true or false depending on wheter minimal charge is enabled or disabled
 =end
   def minimal_charge_enabled?
-    self.minimal_charge != 0
+    minimal_charge != 0
   end
 
 
@@ -2982,11 +2982,11 @@ GROUP BY terminators.id;").map { |t| t.id }
   *boolean* - true or false depending whether minimal charge should be added to invoice
 =end
   def add_on_minimal_charge? invoice_period_end
-    self.minimal_charge_enabled? and self.minimal_charge_start_at and self.minimal_charge_start_at < invoice_period_end #Time.parse('2001-01-01 00:00:00') < invoice_period_end#Date.parse(self.minimal_charge_start_at) < invoice_period_end
+    minimal_charge_enabled? and minimal_charge_start_at and minimal_charge_start_at < invoice_period_end #Time.parse('2001-01-01 00:00:00') < invoice_period_end#Date.parse(minimal_charge_start_at) < invoice_period_end
   end
 
   def credit_notes(items_per_page=nil, offset=0, order_by='user_name', desc=1)
-    condition = ['owner_id = ?', self.get_correct_owner_id]
+    condition = ['owner_id = ?', get_correct_owner_id]
     if ['user_name', 'number', 'issue_date', 'status', 'pay_date', 'price'].include? order_by
       order_by = order_by + " " + (desc == 1 ? "DESC" : "ASC")
     end
@@ -2998,7 +2998,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def credit_note_count
-    condition = ['owner_id = ?', self.get_correct_owner_id]
+    condition = ['owner_id = ?', get_correct_owner_id]
     CreditNote.count(:all, :include => :user, :conditions => condition)
   end
 
@@ -3014,7 +3014,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   +value_in_system_currency+ float, amount converted to system currency
 =end
   def to_system_currency(value)
-    value.to_f / self.currency.exchange_rate.to_f
+    value.to_f / currency.exchange_rate.to_f
   end
 
 =begin
@@ -3057,10 +3057,10 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def reseller_right(permission)
-    if not self.is_reseller?
+    if not is_reseller?
       raise "User is not reseller"
-    elsif self.acc_group
-      right = self.acc_group.acc_group_rights.find(:first, :conditions => "acc_rights.name = '#{permission}'", :include => :acc_right)
+    elsif acc_group
+      right = acc_group.acc_group_rights.find(:first, :conditions => "acc_rights.name = '#{permission}'", :include => :acc_right)
       if right
         return right.value.to_i
       else
@@ -3087,10 +3087,10 @@ GROUP BY terminators.id;").map { |t| t.id }
 
 =end
   def accountant_right(permission)
-    if not self.is_accountant?
+    if not is_accountant?
       raise "User is not accountant"
-    elsif self.acc_group
-      right = self.acc_group.acc_group_rights.find(:first, :conditions => "acc_rights.name = '#{permission}'", :include => :acc_right)
+    elsif acc_group
+      right = acc_group.acc_group_rights.find(:first, :conditions => "acc_rights.name = '#{permission}'", :include => :acc_right)
       if right
         return right.value.to_i
       else
@@ -3109,7 +3109,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   +boolean+ true if reseller has common use providers, otherwise false
 =end
   def has_own_providers?
-    if self.is_reseller?
+    if is_reseller?
       common_use_provider_count > 0
     else
       raise "User is not reseller, he cannot have providers"
@@ -3126,8 +3126,8 @@ GROUP BY terminators.id;").map { |t| t.id }
   other resellers that would have common providers.
 =end
   def resellers_with_common_providers
-    if self.is_reseller?
-      if self.has_own_providers?
+    if is_reseller?
+      if has_own_providers?
         return nil
       else
         #this query selects all resellers that have no own providers, hence
@@ -3145,11 +3145,11 @@ GROUP BY terminators.id;").map { |t| t.id }
 		       FROM   common_use_providers 
 		       GROUP BY reseller_id) common_use_providers ON reseller_id = users.id
                  WHERE usertype = 'reseller' AND
-                       users.id != #{self.id} AND
+                       users.id != #{id} AND
                        providers.id IS NULL AND
                        provider_list = (SELECT GROUP_CONCAT(provider_id ORDER BY provider_id) 
                                         FROM   common_use_providers 
-                                        WHERE reseller_id = #{self.id}
+                                        WHERE reseller_id = #{id}
                                         GROUP BY reseller_id)"
         User.find_by_sql(query)
       end
@@ -3202,8 +3202,8 @@ GROUP BY terminators.id;").map { |t| t.id }
   +integer+ 0 or more depending on how much common use providers are associated with reseller
 =end
   def common_use_provider_count
-    if self.is_reseller?
-      Provider.count(:all, :conditions => ["user_id = #{self.id}"]).to_i
+    if is_reseller?
+      Provider.count(:all, :conditions => ["user_id = #{id}"]).to_i
     else
       raise "User is not reseller, he cannot have providers"
     end
@@ -3211,20 +3211,20 @@ GROUP BY terminators.id;").map { |t| t.id }
 
   def block_and_send_email
     users = [self, owner]
-    em= Email.find(:first, :conditions => ["name = 'block_when_no_balance' AND owner_id = ?", self.owner_id])
+    em= Email.find(:first, :conditions => ["name = 'block_when_no_balance' AND owner_id = ?", owner_id])
     variables = Email.email_variables(self)
-    num = EmailsController::send_email(em, Confline.get_value("Email_from", self.owner_id), users, variables)
+    num = EmailsController::send_email(em, Confline.get_value("Email_from", owner_id), users, variables)
 
-    # num = Email.send_email(em, users, Confline.get_value("Email_from", self.owner_id), 'send_email', {:assigns=>variables, :owner=>variables[:owner]})
+    # num = Email.send_email(em, users, Confline.get_value("Email_from", owner_id), 'send_email', {:assigns=>variables, :owner=>variables[:owner]})
     if num.to_s != _('Email_sent')
-      Action.add_action2(self.id, "error", 'Cant_send_email', num.to_s)
+      Action.add_action2(id, "error", 'Cant_send_email', num.to_s)
     end
-    Action.new(:user_id => self.id, :date => Time.now, :action => "user_blocked", :data => "insufficient funds").save
-    self.blocked = 1
+    Action.new(:user_id => id, :date => Time.now, :action => "user_blocked", :data => "insufficient funds").save
+    blocked = 1
   end
 
   def blocked?;
-    self.blocked == 1;
+    blocked == 1;
   end
 
   def save_with_balance;
@@ -3261,23 +3261,23 @@ GROUP BY terminators.id;").map { |t| t.id }
      Note that no transactions are used, so if smth goes wrong data might be corrupted.
 =end
   def add_to_balance(amount)
-    self.balance += amount
-    if self.save
-      exchange_rate = Currency.count_exchange_rate(Currency.get_default.name, self.currency.name)
+    balance += amount
+    if save
+      exchange_rate = Currency.count_exchange_rate(Currency.get_default.name, currency.name)
       amount *= exchange_rate
-      tax_amount = self.get_tax.count_tax_amount(amount)
+      tax_amount = get_tax.count_tax_amount(amount)
       logger.fatal 'bbbbbbbbbbbbbbbbbbbbbbbbbbb'
-      logger.fatal self.currency.name
+      logger.fatal currency.name
       logger.fatal Currency.get_default.name
       logger.fatal exchange_rate
       logger.fatal amount
       logger.fatal tax_amount
-      payment = Payment.create_for_user(self, {:paymenttype => 'Manual', :amount => amount, :tax => tax_amount, :shipped_at => Time.now, :date_added => Time.now, :completed => 1, :currency => self.currency.name})
+      payment = Payment.create_for_user(self, {:paymenttype => 'Manual', :amount => amount, :tax => tax_amount, :shipped_at => Time.now, :date_added => Time.now, :completed => 1, :currency => currency.name})
       if payment.save
         return true
       else
-        self.balance -= amount
-        self.save
+        balance -= amount
+        save
         return false
       end
     else
