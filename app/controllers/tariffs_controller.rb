@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class TariffsController < ApplicationController
+  require 'csv'
  # include PdfGen
   include UniversalHelpers
   #require 'rubygems'
@@ -1009,7 +1010,7 @@ class TariffsController < ApplicationController
           csv_prefixes = []
           csv_destinations = {}
           begin
-            csv_file = FasterCSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
+            csv_file = CSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
             for row in csv_file
               prefix = ""
               prefix = row[session[:imp_prefix].to_i].to_s.gsub(/\s/, '') if row[session[:imp_prefix].to_i].to_i > 0 and row[session[:imp_rate].to_i]
@@ -1074,7 +1075,7 @@ class TariffsController < ApplicationController
           bad_lines = []
           bad_lines_status = []
 
-          @csv_file = FasterCSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
+          @csv_file = CSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
           my_debug_time "FasterCSV.new"
           ndicf = 0 #new dst in csv file
           bad_dst = 0 #how many dst impossible to create
@@ -1227,7 +1228,7 @@ class TariffsController < ApplicationController
               sql_line = []
               status = session[:status_array]
 
-              @csv_file = FasterCSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
+              @csv_file = CSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
 
               limit = 1000 #how many dst create at once
 
@@ -1335,7 +1336,7 @@ class TariffsController < ApplicationController
         @file = session[:file]
         if session[:imp_prefix] and session[:imp_rate]
           begin
-            csv_file = FasterCSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
+            csv_file = CSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
             update_rate = session[:update_rate_array]
 
             ur = 0 #updated rates
@@ -1439,7 +1440,7 @@ class TariffsController < ApplicationController
         @file = session[:file]
         if session[:imp_prefix] and session[:imp_rate]
           begin
-            csv_file = FasterCSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
+            csv_file = CSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
             update_rate = session[:update_rate_array]
             status = session[:status_array]
 
@@ -1848,7 +1849,7 @@ class TariffsController < ApplicationController
     if !@file.blank?
       if params[:csv2].to_i == 0
         @sep = session["import_csv_tariffs_import_csv_options".to_sym][:sep]
-        @csv_file = FasterCSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
+        @csv_file = CSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
         begin
           @csv_file.each { |row|}
           @csv_file.rewind

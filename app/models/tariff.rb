@@ -357,7 +357,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     # currencies
     exrate = Currency.count_exchange_rate(self.currency, session[:show_currency])
 
-    csv_string = FasterCSV.generate(:col_sep => sep) do |csv|
+    csv_string = CSV.generate(:col_sep => sep) do |csv|
       csv << [
         Localization._t("Direction", session[:lang]),                                               # r["direction"]
         Localization._t("Destination", session[:lang]),                                             # r["destination"]
