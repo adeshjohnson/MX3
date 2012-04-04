@@ -871,7 +871,9 @@ class CardgroupsController < ApplicationController
     #2011.11.18 #3047 reseller doesnt have rights to view callcards/aggregate,
     #cant find any link from menu to link to this page and  acording to ticket
     #he shouldnt. but theres some doubt because code looks like he could
-    if current_user.usertype.include?('reseller')
+    #2012.04.04 #5379 apprarently rs pro should be able to see this page if he 
+    #has cc addon enabled
+    if current_user.usertype.include?('reseller') and allow_manage_providers? and calling_cards_active?
       dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     end
