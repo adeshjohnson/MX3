@@ -1485,8 +1485,8 @@ class ApiController < ApplicationController
               doc.show_device(@options[:s_device])
               doc.show_status(@options[:s_call_type])
               doc.show_provider(@options[:s_provider]) if !@options[:s_provider].blank? 
- 	      doc.show_hgc(@options[:s_hgc]) if !@options[:s_hgc].blank? 
- 	      doc.show_did(@options[:s_did]) if !@options[:s_did].blank? 
+              doc.show_hgc(((@options[:s_hgc].to_i > 0) ? @options[:s_hgc].to_i : 'all')) if !@options[:s_hgc].blank?
+              doc.show_did(@options[:s_did]) if !@options[:s_did].blank?
  	      doc.show_destination(@options[:s_destination]) if !@options[:s_destination].blank? 
               if calls and calls.size.to_i > 0
                 doc.calls {
