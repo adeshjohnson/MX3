@@ -73,7 +73,7 @@ class CallsController < ApplicationController
     cond = ["calldate BETWEEN '" + session_from_datetime + "' AND '" + session_till_datetime + "'"]
     cond << "users.owner_id = #{current_user.id}" if reseller?
     #cond << "calls.user_id != -1" # This allows to filter invalid calls
-    cond << "(usrs.id = #{q(@options[:originator].to_i)} OR usrs.owner_id = #{q(@options[:originator].to_i)})"  if @options[:originator] != "any"
+    cond << "(usrs.id = #{q(@options[:originator].to_i)} OR users.owner_id = #{q(@options[:originator].to_i)})"  if @options[:originator] != "any"
     cond << "calls.prefix LIKE '#{@options[:prefix].gsub(/[^0-9]/, "")}%'" if  @options[:prefix].to_s != ""
     if terminator_cond.to_s != ''
       cond << "providers.terminator_id = #{terminator_cond.to_s}"
@@ -99,8 +99,8 @@ class CallsController < ApplicationController
       terminator_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.reseller_billsec, 0)) AS 'terminating_billsec'"
     else
       # Check if call belongs to resellers user if yes then admins income is reseller perice
-      originating_billed = SqlExport.replace_price("SUM(IF(owner_id = 0 AND calls.disposition = 'ANSWERED', if(calls.user_price is NULL, 0, calls.user_price), if(calls.reseller_price IS NULL, 0, calls.reseller_price)))", {:reference=> 'originating_billed'})
-      originating_billsec = "SUM(IF(owner_id = 0 AND calls.disposition = 'ANSWERED', IF(calls.user_billsec IS NULL, 0, calls.user_billsec), if(calls.reseller_billsec IS NULL, 0, calls.reseller_billsec))) AS 'originating_billsec'"
+      originating_billed = SqlExport.replace_price("SUM(IF(users.owner_id = 0 AND calls.disposition = 'ANSWERED', if(calls.user_price is NULL, 0, calls.user_price), if(calls.reseller_price IS NULL, 0, calls.reseller_price)))", {:reference=> 'originating_billed'})
+      originating_billsec = "SUM(IF(users.owner_id = 0 AND calls.disposition = 'ANSWERED', IF(calls.user_billsec IS NULL, 0, calls.user_billsec), if(calls.reseller_billsec IS NULL, 0, calls.reseller_billsec))) AS 'originating_billsec'"
       
       terminator_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', calls.provider_price, 0))", {:reference=> 'terminating_billed'})
       terminator_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.provider_billsec, 0)) AS 'terminating_billsec'"
@@ -202,7 +202,7 @@ class CallsController < ApplicationController
 
     cond = ["calldate BETWEEN '" + session_from_datetime + "' AND '" + session_till_datetime + "'"]
     #cond << "calls.user_id != -1"
-    cond << "calls.user_id IN (SELECT id FROM users WHERE id = #{@options[:originator].to_i} OR owner_id = #{@options[:originator].to_i})"  if @options[:originator] != "any"
+    cond << "calls.user_id IN (SELECT id FROM users WHERE id = #{@options[:originator].to_i} OR users.owner_id = #{@options[:originator].to_i})"  if @options[:originator] != "any"
     cond << "calls.prefix LIKE '#{@options[:prefix].gsub(/[^0-9]/, "")}%'" if  @options[:prefix].to_s != ""
     
     @options[:order_by], order_by = summary_order_by(params, @options)
