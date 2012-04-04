@@ -83,8 +83,8 @@ module UniversalHelpers
   def load_file_through_database(filename, extension = "csv", path = "/tmp/")
     full_file_path = "#{q(path)}#{q(filename)}.#{q(extension)}"
     logger.debug("  >> load_file_through_database(#{filename})")
-    file = ActiveRecord::Base.connection.execute("select LOAD_FILE('#{full_file_path}')").fetch_row()[0]
-    if file
+    file = ActiveRecord::Base.connection.execute("select LOAD_FILE('#{full_file_path}')")#.fetch_row()[0]
+    if file.first[0]
       File.open(full_file_path, 'w') {|f| f.write(file) }
       logger.debug("  >> load_file_through_database = file")
       return filename
