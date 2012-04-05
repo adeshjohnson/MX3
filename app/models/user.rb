@@ -2236,17 +2236,17 @@ GROUP BY terminators.id;").map { |t| t.id }
     Action.add_action_hash(current_user.id, {:action => 'user_edited', :target_id => id, :target_type => "user"})
     if api == 1
       if params[:unlimited] and params[:unlimited].to_i == 1
-        credit = -1
+        self.credit = -1
       else
-        credit = params[:credit].to_f if params[:credit]
-        credit = 0 if credit < 0 if params[:credit]
+        self.credit = params[:credit].to_f if params[:credit]
+        self.credit = 0 if credit < 0 if params[:credit]
       end
     else
       if params[:unlimited].to_i == 1 and params[:user][:postpaid] == 1
-        credit = -1
+        self.credit = -1
       else
-        credit = params[:credit].to_f
-        credit = 0 if credit < 0
+        self.credit = params[:credit].to_f
+        self.credit = 0 if credit < 0
       end
 
       if postpaid? and Confline.mor_11_extended?
@@ -2258,20 +2258,20 @@ GROUP BY terminators.id;").map { |t| t.id }
         #so no need to check for that either.
         #but minimal charge daytime must be supplied if minimal charge is enabled.
         #if it is disabled set datetime to nil
-        minimal_charge = params[:minimal_charge_value].to_i
+        self.minimal_charge = params[:minimal_charge_value].to_i
         if params[:user][:postpaid] == 0
-          minimal_charge = 0
-          minimal_charge_start_at = nil
+          self.minimal_charge = 0
+          self.minimal_charge_start_at = nil
         elsif params[:minimal_charge_value].to_i != 0 and params[:minimal_charge_date]
-          year = params[:minimal_charge_date][:year].to_i
-          month = params[:minimal_charge_date][:month].to_i
-          minimal_charge_start_at = Date.new(year, month, 1)
+          self.year = params[:minimal_charge_date][:year].to_i
+          self.month = params[:minimal_charge_date][:month].to_i
+          self.minimal_charge_start_at = Date.new(year, month, 1)
         elsif params[:minimal_charge_value].to_i == 0
-          minimal_charge_start_at = nil
+          self.minimal_charge_start_at = nil
         else
           #set to current datetime, when saveing model, it should cause error
           #because when minimal charge is disabled datetime should be disabled
-          minimal_charge_start_at = Date.new(Time.now.year, Time.now.month, 1)
+          self.minimal_charge_start_at = Date.new(Time.now.year, Time.now.month, 1)
         end
       end
     end
@@ -2312,56 +2312,56 @@ GROUP BY terminators.id;").map { |t| t.id }
 
     if api == 1
       if params[:agr_date][:year] and params[:agr_date][:month] and params[:agr_date][:day]
-        agreement_date = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
+        self.agreement_date = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
       end
     else
-      agreement_date = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
+      self.agreement_date = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
     end
 
     if api == 1
       if params[:block_at_date][:year] and params[:block_at_date][:month] and params[:block_at_date][:day]
-        block_at = params[:block_at_date][:year].to_s + "-" + params[:block_at_date][:month].to_s + "-" + params[:block_at_date][:day].to_s
+        self.block_at = params[:block_at_date][:year].to_s + "-" + params[:block_at_date][:month].to_s + "-" + params[:block_at_date][:day].to_s
       end
     else
-      block_at = params[:block_at_date][:year].to_s + "-" + params[:block_at_date][:month].to_s + "-" + params[:block_at_date][:day].to_s
+      self.block_at = params[:block_at_date][:year].to_s + "-" + params[:block_at_date][:month].to_s + "-" + params[:block_at_date][:day].to_s
     end
 
 
     if api == 1
-      block_at_conditional = params[:block_at_conditional].to_i if  params[:block_at_conditional]
+      self.block_at_conditional = params[:block_at_conditional].to_i if  params[:block_at_conditional]
     else
-      block_at_conditional = params[:block_at_conditional].to_i
+      self.block_at_conditional = params[:block_at_conditional].to_i
     end
 
 
     if api == 1
-      allow_loss_calls = params[:allow_loss_calls].to_i if params[:allow_loss_calls]
+      self.allow_loss_calls = params[:allow_loss_calls].to_i if params[:allow_loss_calls]
     else
-      allow_loss_calls = params[:allow_loss_calls].to_i
+      self.allow_loss_calls = params[:allow_loss_calls].to_i
     end
 
     if api == 1
-      warning_email_active = params[:warning_email_active].to_i if params[:warning_email_active]
+      self.warning_email_active = params[:warning_email_active].to_i if params[:warning_email_active]
     else
-      warning_email_active = params[:warning_email_active].to_i
+      self.warning_email_active = params[:warning_email_active].to_i
     end
 
     if api == 1
       if params[:warning_email_balance]
         if warning_email_balance.to_f != params[:warning_email_balance].to_f
-          warning_email_sent = 0
+          self.warning_email_sent = 0
         end
       end
     else
       if warning_email_balance.to_f != params[:warning_email_balance].to_f
-        warning_email_sent = 0
+        self.warning_email_sent = 0
       end
     end
 
     if api == 1
-      invoice_zero_calls = params[:show_zero_calls].to_i if params[:show_zero_calls]
+      self.invoice_zero_calls = params[:show_zero_calls].to_i if params[:show_zero_calls]
     else
-      invoice_zero_calls = params[:show_zero_calls].to_i
+      self.invoice_zero_calls = params[:show_zero_calls].to_i
     end
 
 
@@ -2378,9 +2378,9 @@ GROUP BY terminators.id;").map { |t| t.id }
 
     if is_reseller?
       if api == 1
-        own_providers = params[:own_providers].to_i if params[:own_providers]
+        self.own_providers = params[:own_providers].to_i if params[:own_providers]
       else
-        own_providers = params[:own_providers].to_i
+        self.own_providers = params[:own_providers].to_i
       end
 
     end
@@ -2407,35 +2407,35 @@ GROUP BY terminators.id;").map { |t| t.id }
 
     if monitoring_a
       if api == 1
-        ignore_global_monitorings = params[:ignore_global_monitorings].to_i if params[:ignore_global_monitorings]
+        self.ignore_global_monitorings = params[:ignore_global_monitorings].to_i if params[:ignore_global_monitorings]
       else
-        ignore_global_monitorings = params[:ignore_global_monitorings].to_i
+        self.ignore_global_monitorings = params[:ignore_global_monitorings].to_i
       end
     end
     if api == 1
-      block_conditional_use = params[:block_conditional_use].to_i if params[:block_conditional_use]
+      self.block_conditional_use = params[:block_conditional_use].to_i if params[:block_conditional_use]
     else
-      block_conditional_use = params[:block_conditional_use].to_i
+      self.block_conditional_use = params[:block_conditional_use].to_i
     end
 
 
     if rec_a
       if api == 1
-        recording_enabled = params[:recording_enabled].to_i if params[:recording_enabled]
+        self.recording_enabled = params[:recording_enabled].to_i if params[:recording_enabled]
       else
-        recording_enabled = params[:recording_enabled].to_i
+        self.recording_enabled = params[:recording_enabled].to_i
       end
 
       if api == 1
-        recording_forced_enabled = params[:recording_forced_enabled].to_i if params[:recording_forced_enabled]
+        self.recording_forced_enabled = params[:recording_forced_enabled].to_i if params[:recording_forced_enabled]
       else
-        recording_forced_enabled = params[:recording_forced_enabled].to_i
+        self.recording_forced_enabled = params[:recording_forced_enabled].to_i
       end
 
       if api == 1
-        recording_hdd_quota = params[:user][:recording_hdd_quota].to_f * 1048576 if  params[:user][:recording_hdd_quota]
+        self.recording_hdd_quota = params[:user][:recording_hdd_quota].to_f * 1048576 if  params[:user][:recording_hdd_quota]
       else
-        recording_hdd_quota = params[:user][:recording_hdd_quota].to_f * 1048576
+        self.recording_hdd_quota = params[:user][:recording_hdd_quota].to_f * 1048576
       end
 
     end
@@ -2444,17 +2444,17 @@ GROUP BY terminators.id;").map { |t| t.id }
       address.update_attributes(params[:address])
     else
       a = Address.create(params[:address])
-      address_id = a.id
+      self.address_id = a.id
     end
 
 
     if params[:warning_email_active]
       if params[:user] and params[:date]
-        warning_email_hour = params[:user][:warning_email_hour].to_i != -1 ? params[:date][:user_warning_email_hour].to_i : params[:user][:warning_email_hour].to_i
+        self.warning_email_hour = params[:user][:warning_email_hour].to_i != -1 ? params[:date][:user_warning_email_hour].to_i : params[:user][:warning_email_hour].to_i
       end
     end
 
-
+    self.save
     return self
   end
 
