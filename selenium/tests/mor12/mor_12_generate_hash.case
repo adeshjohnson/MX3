@@ -48,10 +48,14 @@
 </tr>
 <tr>
 	<td>verifyText</td>
+	<td>id=page_title</td>
+	<td>Generate hash</td>
+</tr>
+<tr>
+	<td>verifyText</td>
 	<td>id=ssettings_menu16</td>
 	<td>Generate hash</td>
 </tr>
-<!--1. Reikalingas page_title-->
 <tr>
 	<td>type</td>
 	<td>name=link</td>
@@ -62,30 +66,29 @@
 	<td>name=commit</td>
 	<td></td>
 </tr>
-<!--2. failed to parse -->
 <tr>
 	<td>waitForTextPresent</td>
-	<td>failed to parse uri user_id=2&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=5</td>
+	<td>Failed to parse uri user_id=2&amp;price=20&amp;comment=labas vakaras&amp;issue_date=1330594129&amp;number=5</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>css=table.maintable &gt; tbody &gt; tr &gt; td</td>
+	<td>id=api_key</td>
 	<td>API key</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//div[2]/table/tbody/tr/td[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>//div[2]/table/tbody/tr[2]/td</td>
+	<td>id=generate_hash</td>
 	<td>Generated hash</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[2]/td[2]</td>
+	<td>id=secret_key</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=system_hash</td>
 	<td>da39a3ee5e6b4b0d3255bfef95601890afd80709</td>
 </tr>
 <tr>
@@ -185,7 +188,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>failed to parse uri id=1&amp;quantity=2&amp;email=aisteaisteb@gmail.com</td>
+	<td>Failed to parse uri id=1&amp;quantity=2&amp;email=aisteaisteb@gmail.com</td>
 	<td></td>
 </tr>
 <tr>
@@ -200,65 +203,69 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//div[2]/table/tbody/tr/td[2]</td>
+	<td>id=param_value_pin</td>
 	<td>7856</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[2]/td[2]</td>
+	<td>id=param_value_amount</td>
 	<td>100</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[3]/td[2]</td>
+	<td>id=param_value_callerid</td>
 	<td>4444</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[4]/td[2]</td>
+	<td>id=param_value_cardgroup_id</td>
 	<td>1</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[5]/td[2]</td>
+	<td>id=secret_key</td>
 	<td>123456</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[6]/td[2]</td>
+	<td>id=system_hash</td>
 	<td>118f394ea0b031da71270d528fdfd7464e24d799</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>css=table.maintable &gt; tbody &gt; tr &gt; td</td>
+	<td>id=param_pin</td>
 	<td>pin</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//div[2]/table/tbody/tr[2]/td</td>
+	<td>id=param_amount</td>
 	<td>amount</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//div[2]/table/tbody/tr[3]/td</td>
+	<td>id=param_callerid</td>
 	<td>callerid</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[4]/td</td>
+	<td>id=param_cardgroup_id</td>
 	<td>cardgroup_id</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[5]/td</td>
+	<td>id=api_key</td>
 	<td>API key</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[6]/td</td>
+	<td>id=generate_hash</td>
 	<td>Generated hash</td>
 </tr>
-<!-- 3. sugeneravus naują hash išlieka ankščiau išmesta klaida-->
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>Failed to parse uri id=1&amp;quantity=2&amp;email=aisteaisteb@gmail.com</td>
+	<td></td>
+</tr>
 <tr>
 	<td>type</td>
 	<td>name=link</td>
@@ -274,7 +281,6 @@
 	<td>222</td>
 	<td></td>
 </tr>
-<!--4. Lenteliai reikia normalių id-->
 <tr>
 	<td>verifyText</td>
 	<td>css=table.maintable &gt; tbody &gt; tr &gt; td</td>
@@ -282,52 +288,57 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//div/table/tbody/tr[2]/td</td>
+	<td>id=param_pin</td>
+	<td>pin</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=param_amount</td>
 	<td>amount</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[4]/td</td>
-	<td>cardgroup_id</td>
+	<td>id=param_callerid</td>
+	<td>callerid</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[5]/td</td>
+	<td>id=api_key</td>
 	<td>API key</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[6]/td</td>
+	<td>id=generate_hash</td>
 	<td>Generated hash</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//div/table/tbody/tr/td[2]</td>
+	<td>id=param_value_pin</td>
 	<td>222</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[2]/td[2]</td>
+	<td>id=param_value_amount</td>
 	<td>50</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[3]/td[2]</td>
+	<td>id=param_value_callerid</td>
 	<td>7777</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[4]/td[2]</td>
+	<td>id=param_value_cardgroup_id</td>
 	<td>1</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[5]/td[2]</td>
+	<td>id=secret_key</td>
 	<td>123456</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[6]/td[2]</td>
+	<td>id=system_hash</td>
 	<td>f5a2f4661e2618e18db8110cefd248c1ed7c2524</td>
 </tr>
 <tr>
@@ -360,7 +371,11 @@
 	<td>/billing/functions/generate_hash</td>
 	<td></td>
 </tr>
-<!--5. kiti useriai(ne adminas) norėdami patekti į hash generavimo puslapį, patenka į tuščią langą. Gal reikėtų kokį pranešimą įdėti...-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -391,7 +406,11 @@
 	<td>/billing/functions/generate_hash</td>
 	<td></td>
 </tr>
-<!--5. kiti useriai(ne adminas) norėdami patekti į hash generavimo puslapį, patenka į tuščią langą. Gal reikėtų kokį pranešimą įdėti...-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -422,7 +441,11 @@
 	<td>/billing/functions/generate_hash</td>
 	<td></td>
 </tr>
-<!--5. kiti useriai(ne adminas) norėdami patekti į hash generavimo puslapį, patenka į tuščią langą. Gal reikėtų kokį pranešimą įdėti...-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -453,7 +476,11 @@
 	<td>/billing/functions/generate_hash</td>
 	<td></td>
 </tr>
-<!--5. kiti useriai(ne adminas) norėdami patekti į hash generavimo puslapį, patenka į tuščią langą. Gal reikėtų kokį pranešimą įdėti...-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -511,17 +538,17 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>API key</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
 	<td>Generated hash</td>
 	<td></td>
 </tr>
 <tr>
+	<td>waitForTextPresent</td>
+	<td>API key</td>
+	<td></td>
+</tr>
+<tr>
 	<td>storeText</td>
-	<td>//tr[5]/td[2]</td>
+	<td>id=system_hash</td>
 	<td>email_hash</td>
 </tr>
 <tr>
