@@ -44,7 +44,7 @@
                   <td id="default_currency"><%= select_tag('user[currency_id]', options_for_select(Currency.get_active.collect{|t| [t.name, t.id]}, @user.try(:currency_id) ))  %></td>
                 </tr>
                 <tr>
-                  <td><%= _('Time_zone') %>:</td>
+                  <td><%= _('Time_zone') %>:</td> 
                   <td id="time_zone"><%= select_tag('user[time_zone]', options_for_select(User.get_zones, @user.try(:time_zone) ))  %></td>
                 </tr>
               <%end%>
