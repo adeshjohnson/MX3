@@ -1248,7 +1248,7 @@ module ApplicationHelper
       for destination in destinations
         code << "<option value='#{destination.prefix.to_s}'>#{destination.prefix.to_s} - #{destination.subcode} #{destination.name}</option>"
       end
-      code.join("\n")
+      code.join("\n").html_safe
     else
       ''
     end
