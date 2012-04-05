@@ -43,3 +43,6 @@ gem 'prototype-rails'#, :git => 'git://github.com/rubychan/prototype-rails.git'
 gem 'prawn'
 gem 'prawn-layout'
 gem 'prawnto'
+
+# To api tariff import/export
+gem 'xml-simple'

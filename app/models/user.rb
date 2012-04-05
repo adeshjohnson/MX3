@@ -77,6 +77,7 @@ class User < ActiveRecord::Base
     logger.fatal(usertype.to_yaml)
     #uses resellers id
     if usertype.to_s == 'reseller'
+      logger.fatal "Ddddddddddddddddddddddddddddddddddddd"
       locations = Location.find(:first, :conditions => ['user_id=? and name=?', id, 'Default location'])
       if locations.blank?
         #create new default location  if reseller has no localization
