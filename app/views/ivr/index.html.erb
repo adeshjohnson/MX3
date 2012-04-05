@@ -10,9 +10,9 @@
   </tr>
 <% @ivrs.each_with_index { |ivr,index|%>
   <tr class="row<%= index%2+1 %>"> 
-    <td align="left"><%= ivr.name %></td>
-    <td align="center"><%= link_to b_edit, :action => 'edit', :id => ivr.id %></td>
-    <td align="center"><%= link_to b_delete, { :action => 'destroy', :id => ivr.id }, :confirm => _('are_you_sure'), :method => "post" %></td>
+    <td align="left" id=<%="ivr_#{ivr.id}_name"%>><%= ivr.name %></td>
+    <td align="center" id=<%="ivr_#{ivr.id}_edit"%>><%= link_to b_edit, :action => 'edit', :id => ivr.id %></td>
+    <td align="center" id=<%="ivr_#{ivr.id}_delete"%>><%= link_to b_delete, { :action => 'destroy', :id => ivr.id }, :confirm => _('are_you_sure'), :method => "post" %></td>
   </tr>
 <% } %>
 </table>
