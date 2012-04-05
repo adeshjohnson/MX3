@@ -1309,7 +1309,7 @@ class User < ActiveRecord::Base
   end
 
   def get_tax
-    assign_default_tax if tax.nil?
+    self.assign_default_tax if tax.nil?
     tax
   end
 
