@@ -145,7 +145,7 @@ class CdrController < ApplicationController
 
           if @step == 4
             my_debug_time "step 4"
-            @users = User.find(:all, :select=>"users.*, #{SqlExport.nice_user_sql}", :joins=>"JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group=>'users.id')
+            @users = User.find(:all, :select=>"users.*, #{SqlExport.nice_user_sql}", :joins=>"LEFT JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group=>'users.id')
             @providers = current_user.load_providers(:all , :conditions=>'hidden=0')
             if !@providers or @providers.size.to_i < 1
               flash[:notice] = _('No_Providers')
