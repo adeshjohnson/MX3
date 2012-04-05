@@ -1,7 +1,7 @@
 <%= javascript_include_tag "wz_tooltip" %>
 <table>
   <tr>
-    <td class="n" <%= "onmouseover=\"Tip(\' #{(lcrpartial_destinations_providers(@lcr.id)).to_s} \')\" onmouseout = \"UnTip()\"" %>><%= "<b>"+_('Main_LCR') + "</b> : " + @lcr.name.to_s + "&nbsp;&nbsp;&nbsp;" %>  <%= "<b>" + _('Order') + "</b> : " + @lcr.order.to_s %></td>
+    <td class="n" <%= "onmouseover=\"Tip(\' #{(lcrpartial_destinations_providers(@lcr.id)).to_s} \')\" onmouseout = \"UnTip()\"".html_safe %>><%= raw "<b>"+_('Main_LCR') + "</b> : " + @lcr.name.to_s + "&nbsp;&nbsp;&nbsp;" %>  <%= raw "<b>" + _('Order') + "</b> : " + @lcr.order.to_s %></td>
   </tr>
 </table>
 <br />
@@ -28,7 +28,7 @@
       <td id ="lname_<%=lp['id']%>"><%=  lp['lname']%></td>
 
       <% if lp['lcr_id'] %>
-        <td class="n" <%= "onmouseover=\"Tip(\' #{(lcrpartial_destinations_providers(lp['lcr_id'])).to_s} \')\" onmouseout = \"UnTip()\"" %>><%=  lp['order'] %>	 </td>
+        <td class="n" <%= "onmouseover=\"Tip(\' #{(lcrpartial_destinations_providers(lp['lcr_id'])).to_s} \')\" onmouseout = \"UnTip()\"".html_safe%>><%=  lp['order'] %>	 </td>
       <% else%>
         <td></td>
       <% end %>
