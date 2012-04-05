@@ -15,7 +15,7 @@
           <td id="error_<%=card.number%>"> <%= _('Failed_to_create_card') %> </td>
         <% else %>
           <td id="field_<%=card.number%>"><strong><%=card.number%></strong></td> 
-          <td id="error_<%=card.number%>"><% a =[] ; card.errors.each { |key, value| a <<  _(value)  } if card.respond_to?(:errors)  %>  <%=a.join(" ") if a and a.size.to_i > 0 %></td> 
+          <td id="error_<%=card.number%>"><% a =[] ; card.errors.each { |key, value| a <<  _(key) + ':' + _(value)  } if card.respond_to?(:errors)  %>  <%=a.join(" ") if a and a.size.to_i > 0 %></td> 
         <% end %>
       </tr>
     <% } %>
