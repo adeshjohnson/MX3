@@ -199,7 +199,6 @@ class Monitoring < ActiveRecord::Base
       users = User.find(:all,
         :select => 'callsA.dst dst, callA.calldate calldateA, callsA.src srcA, callsB.calldate calldateB, callsB.dst dstB',
         :conditions => ["callsA.calldate between callsB.calldate and callsB.calldate + INTERVAL callsB.duration SECOND AND callsA.uniqueid != callsB.uniqueid AND users.blocked = 0 AND users.postpaid = ? AND users.ignore_global_monitorings = 0 #{find_all_users_sql}", ((self.user_type == "postpaid") ? 1 : 0) ],
-        :group => 
         :joins => "JOIN calls callsA ON (callsA.user_id = users.id AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))
                    JOIN calls callsB ON (callsA.dst = callsB.dst AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
     elsif user_type && user_type =~ /all/ # monitoring for all users
