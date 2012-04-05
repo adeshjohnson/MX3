@@ -3201,6 +3201,10 @@ GROUP BY terminators.id;").map { |t| t.id }
     return out
   end
 
+  def blocked?;
+    blocked == 1;
+  end
+
   private
 
 =begin
@@ -3231,10 +3235,6 @@ GROUP BY terminators.id;").map { |t| t.id }
     end
     Action.new(:user_id => id, :date => Time.now, :action => "user_blocked", :data => "insufficient funds").save
     blocked = 1
-  end
-
-  def blocked?;
-    blocked == 1;
   end
 
   def save_with_balance;
