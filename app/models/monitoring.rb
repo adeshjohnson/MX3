@@ -189,7 +189,7 @@ class Monitoring < ActiveRecord::Base
   end
 
   def existent?
-    @existent_record
+    @existent_record                                                        2758
   end
 
   def simultaneous_calls

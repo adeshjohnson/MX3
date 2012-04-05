@@ -67,7 +67,7 @@ class Cardgroup < ActiveRecord::Base
     }.merge(opt)
     if !tax or tax == {}
       if self.owner_id
-        new_tax = User.where({:id=>self.owner_id}).get_tax.clone
+        new_tax = User.where({:id=>self.owner_id}).first.get_tax.clone
       else 
         new_tax = Confline.get_default_tax(0)
       end 
