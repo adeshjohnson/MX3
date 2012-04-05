@@ -1968,17 +1968,17 @@ class DevicesController < ApplicationController
   this would only mean that someone has corruped data. 
 =end
   def set_voicemail_variables(device)
-    begin 
+    begin
       @device_voicemail_active = device.voicemail_active
       @device_voicemail_box = device.voicemail_box
       @device_voicemail_box_email = @device_voicemail_box.email
       @device_voicemail_box_password = @device_voicemail_box.password
       @fullname = @device_voicemail_box.fullname
       @device_enable_mwi = device.enable_mwi
-    rescue NoMethodError 
+    rescue NoMethodError
       flash[:notice] = _('Device_voicemail_box_not_found')
       redirect_to :controller => :callc, :action => :main
-    end 
+    end
   end
 
 

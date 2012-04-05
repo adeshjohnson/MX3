@@ -12,6 +12,7 @@ class ApiController < ApplicationController
   before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements]
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
 
+  require 'xmlsimple'
 
   def method_missing(method_name, *args, &block)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)

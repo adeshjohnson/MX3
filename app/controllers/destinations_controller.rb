@@ -196,9 +196,9 @@ class DestinationsController < ApplicationController
 
     ine=0
     @Calls_graph2 =""
-    while ine <= index -1
+    while ine <= index - 1
       @Calls_graph2 +=@a_date[ine].to_s  + ";" + @a_calls[ine].to_s + "\\n"
-      ine=ine +1
+      ine= ine + 1
     end
 
     #formating graph for Calltime
@@ -214,7 +214,7 @@ class DestinationsController < ApplicationController
 
     ine=0
     @Avg_Calltime_graph =""
-    while ine <= index -1
+    while ine <= index - 1
       @Avg_Calltime_graph +=@a_date[ine].to_s  + ";" + @a_avg_billsec[ine].to_s + "\\n"
       ine=ine +1
     end
@@ -223,7 +223,7 @@ class DestinationsController < ApplicationController
 
     ine=0
     @Asr_graph =""
-    while ine <= index -1
+    while ine <= index - 1
       @Asr_graph +=@a_date[ine].to_s  + ";" + @a_ars[ine].to_s + "\\n"
       ine=ine +1
     end
