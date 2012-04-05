@@ -5,7 +5,7 @@
   <br /> 
   <%= form_tag({:action => 'import_numbers_from_file', :step => "2"}, {:multipart => "true", :id => "files"}) do %>
     <%= _('Upload') %>: <%= file_field_tag "file" %>
-    <%= submit_tag (  _('Upload_file'), :disable_with=>_('Processing..')  )%>
+    <%= submit_tag(  _('Upload_file'), :disable_with=>_('Processing..'))%>
   <% end %>
 <% end %>
 <% if @step == 2 %>
