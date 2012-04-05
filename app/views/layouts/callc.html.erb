@@ -195,7 +195,7 @@
             &nbsp;&nbsp;<%= Confline.get_value("Version", 0) %> <%= Confline.get_value("Copyright_Title", 0) %>
           <%end%>
         <% end %>
-        <% nice_date_time(Time.now) %>
+        <%# nice_date_time(Time.now) %>
         <% session[:usertype] %>&nbsp;
       </div>
       <% if session[:usertype] == "admin" and session[:hide_manual_link].to_i != 1%>
