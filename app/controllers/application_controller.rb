@@ -361,7 +361,11 @@ class ApplicationController < ActionController::Base
   def authorize_admin
     if session[:usertype] != "admin"
       flash[:notice] = _('You_are_not_authorized_to_view_this_page')
-      redirect_to :controller => "callc", :action => "login" and return false
+      if session[:user_id] != nil
+        redirect_to :controller => "callc", :action => "main" and return false
+      else
+        redirect_to :controller => "callc", :action => "login" and return false
+      end
     end
   end
 
