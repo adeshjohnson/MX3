@@ -253,6 +253,8 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    flags_to_session if !session[:tr_arr]
+
     # ---- currency ------
     if params[:currency]
       if curr = Currency.find(:first, :conditions => "name = '#{params[:currency]}'")

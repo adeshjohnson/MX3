@@ -12,8 +12,7 @@ class CcshopController < ApplicationController
   before_filter :check_paypal, :only =>[:display_cart, :checkout, :empty_cart, :remove_from_cart]
 
   def index
-    list
-    render :action => 'list'
+    redirect_to :action => 'list'
   end
 
   def list
