@@ -107,8 +107,8 @@ class User < ActiveRecord::Base
   def check_address
     unless address
       a = Address.create()
-      address_id = a.id
-      save
+      self.address_id = a.id
+      self.save
     end
   end
 
