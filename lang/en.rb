@@ -4344,7 +4344,9 @@ Localization.define('en') do |l|
   l.store 'Change_Time_zone_to_all_users', 'Change Time zone to all users'
   l.store 'System_time_zone_daylight_savings', 'System time zone daylight savings'
   l.store 'Aggregate_statistics', 'Aggregate statistics' 
-
+  l.store 'No_failover_provider', 'No failover provider'
+  l.store 'No_failover_provider_explained', 'If you will enable this setting, only first provider in the Routing Plan (LCR) will be used. If it fails - no other provider will be used to deliver the call.'
+ 
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

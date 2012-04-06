@@ -11,10 +11,17 @@
 
 <% if params[:action] == "edit" and @lcr.order == "price" %>
 
-	<p <%= tooltip(_('First_provider_percent_limit'),h( _('First_provider_percent_limit_explained'))) %> ><label for="lcr_first_provider_percent_limit"><%= _('First_provider_percent_limit') %></label> <%= b_info %><br>
+	<p <%= raw tooltip(_('First_provider_percent_limit'),h( _('First_provider_percent_limit_explained'))).html_safe %> ><label for="lcr_first_provider_percent_limit"><%= _('First_provider_percent_limit') %></label> <%= b_info %><br>
 	<%= text_field 'lcr', 'first_provider_percent_limit', "class" => "input", :size => "5", :maxlength => "5"  %>%</p>
 
 <% end %>
+
+<p>
+  <label <%= raw tooltip(_('No_failover_provider'),h( _('No_failover_provider_explained'))).html_safe %> ><%= _('No_failover_provider') %></label>
+  <%= radio_button_tag('lcr[no_failover]', '0', !@lcr.no_failover?, {:id => "lcr_no_failover"}) %> <%= _('No') %>
+  <%= radio_button_tag('lcr[no_failover]', '1', @lcr.no_failover?, {:id => "lcr_no_failover"}) %> <%= _('Yes') %>
+</p>
+
 
 
 

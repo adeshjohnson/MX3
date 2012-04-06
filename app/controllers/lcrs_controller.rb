@@ -86,6 +86,7 @@ class LcrsController < ApplicationController
     @page_icon = "edit.png"
 
     @old_lcr = @lcr.clone
+    @lcr.no_failover = params[:lcr][:no_failover].to_i
     if @lcr.update_attributes(params[:lcr].reject { |k, v| k == 'user_id' })
       if  @old_lcr.order != @lcr.order and @lcr.order == "priority"
         Lcrprovider.find(:all, :select => "lcrproviders.*", :joins => "RIGHT JOIN providers ON (providers.id = lcrproviders.provider_id)", :conditions => ["lcr_id = ?", @lcr.id]).each_with_index { |provider, i|

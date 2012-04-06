@@ -322,4 +322,15 @@ class Lcr < ActiveRecord::Base
     end
   end
 
+=begin
+  Check whether no failover provider should be used for this lcr
+  
+  *Returns*
+  +boolean+ - true if no failover providers should be user, false otherwise 
+
+=end
+  def no_failover?
+    (self.no_failover.to_i == 1 ? true : false)
+  end
+
 end
