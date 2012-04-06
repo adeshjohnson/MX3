@@ -1142,7 +1142,7 @@ class User < ActiveRecord::Base
     device.works_not_logged = Confline.get_value("Default_device_works_not_logged", owner_id).to_i
     if owner_id != 0
       #kvieciam metoda
-      owner = User.find_by_id(owner_id)
+      owner = User.where({:id => owner_id}).first
       owner.after_create_localization
       #after this value should be default location and reseller gets new default location if did not have it
     end
