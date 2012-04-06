@@ -497,7 +497,7 @@
 
           <% if session[:usertype] != "reseller" %>
 
-            <tr <%= tooltip(_('Common_Use'), _('Common_Use_Explanation')) %>>
+            <tr <%= raw tooltip(_('Common_Use'), _('Common_Use_Explanation')).html_safe %>>
               <td id="common_use"><%= _('Common_Use') %>:</td>
               <td id="provider_is_used_by_reseller">
                 <% if @is_common_use_used %>
@@ -506,6 +506,13 @@
                   <%= radio_button_tag('provider[common_use]', '0', checked = (@provider.common_use == 0) ) %> <%= _('No') %>
                   <%= radio_button_tag('provider[common_use]', '1', checked = (@provider.common_use == 1) ) %> <%= _('Yes') %>
                 <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td> <%= _('Anti_resale_auto_answer') %> </td>
+              <td> 
+                <%= radio_button_tag('device[anti_resale_auto_answer]', '0', (not @device.anti_resale_auto_answer?)) %> <%= _('No') %>
+                <%= radio_button_tag('device[anti_resale_auto_answer]', '1', @device.anti_resale_auto_answer?) %> <%= _('Yes') %>
               </td>
             </tr>
 

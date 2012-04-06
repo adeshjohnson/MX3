@@ -148,3 +148,10 @@
     </td>
   </tr>
 <% end %>
+<tr>
+  <td> <%= _('Anti_resale_auto_answer') %> </td>
+  <td> 
+    <%= radio_button_tag('device[anti_resale_auto_answer]', '0', (not @device.anti_resale_auto_answer?)) %> <%= _('No') %>
+    <%= radio_button_tag('device[anti_resale_auto_answer]', '1', @device.anti_resale_auto_answer?) %> <%= _('Yes') %>
+  </td>
+</tr>
