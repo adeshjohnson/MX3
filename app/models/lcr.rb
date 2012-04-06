@@ -10,6 +10,7 @@ class Lcr < ActiveRecord::Base
 
 =end
   before_destroy :lcr_before_destroy
+  after_save :equalize_percent
 
   def lcr_before_destroy
 
@@ -125,15 +126,14 @@ class Lcr < ActiveRecord::Base
   end
 
   def equalize_percent
-    providers = Lcrprovider.find(:all, :select => "lcrproviders.*", :joins => "RIGHT JOIN providers ON (providers.id = lcrproviders.provider_id)", :conditions => ["lcr_id = ?", self.id])
-    percent = 10000/providers.size if providers and providers.size > 0
-    sum = 0
-    providers.each{  |provider|
-      provider.percent = percent
-      provider.save
-      sum += percent
-    }
-    providers[0].percent = 10000 - sum + percent and providers[0].save if providers.size > 2 and 10000/providers.size*providers.size != 10000
+    if order_changed? and order == "percent"
+      providers = Lcrprovider.find(:all, :select => "lcrproviders.*", :joins => "RIGHT JOIN providers ON (providers.id = lcrproviders.provider_id)", :conditions => ["lcr_id = ?", self.id])
+      percent = 10000/providers.size if providers and providers.size > 0
+      providers.each{  |provider|
+        provider.percent = percent
+        provider.save
+      }
+    end
   end
 
   def Lcr.lcrs_order_by(params, options)

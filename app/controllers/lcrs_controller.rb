@@ -94,9 +94,6 @@ class LcrsController < ApplicationController
           provider.save
         }
       end
-      if  @old_lcr.order != @lcr.order and @lcr.order == "percent"
-        @lcr.equalize_percent
-      end
       flash[:status] = _('Lcr_was_successfully_updated')
       redirect_to :action => 'list', :id => @lcr
     else
