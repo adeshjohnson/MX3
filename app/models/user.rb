@@ -1962,9 +1962,11 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def fix_when_is_rendering
+    if User.current
     balance = balance * User.current.currency.exchange_rate.to_f
     credit = credit * User.current.currency.exchange_rate.to_f if credit != -1
     warning_email_balance = warning_email_balance * User.current.currency.exchange_rate.to_f
+      end
   end
 
 
