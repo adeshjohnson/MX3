@@ -439,41 +439,17 @@ class CcshopController < ApplicationController
   end
 
   def generate_personal_rates_pdf
-    sql = "SELECT rates.* FROM rates
-           LEFT JOIN destinationgroups on (destinationgroups.id = rates.destinationgroup_id)
-           WHERE rates.tariff_id ='#{@tariff.id}'
-           ORDER BY destinationgroups.name, destinationgroups.desttype ASC"
-    rates = Rate.find_by_sql(sql)
+    rates = Rate.joins('LEFT JOIN destinationgroups on (destinationgroups.id = rates.destinationgroup_id)').where(['rates.tariff_id = ?',@tariff.id]).order('destinationgroups.name, destinationgroups.desttype ASC').all
     options = {
-      #font size
-      :fontsize => 6,
-      :title_fontsize1 => 16,
-      :title_fontsize2 => 10,
-      :header_size_add => 1,
-      :page_number_size => 8,
-      #positions
-      :first_page_pos => 150,
-      :second_page_pos => 70,
-      :page_num_pos => 780,
-      :header_eleveation => 20,
-      :step_size => 15,
-      :title_pos1 => 40,
-      :title_pos2 => 65,
-      :title_pos3 => 80,
-
-      :first_page_items => 40,
-      :second_page_items => 45,
-
-      # col possitions
-      :col1_x => 40,
-      :col2_x => 250,
-      :col3_x => 330,
-      :col4_x => 410,
-
-      :currency => session[:show_currency]
+        :name=>@tariff.name,
+        :pdf_name=>_('Users_rates'),
+        :currency => session[:show_currency]
     }
-    pdf = PdfGen::Generate.generate_user_rates_pdf(rates, @tariff, options)
-    send_data pdf.render, :filename => "Rates-#{session[:show_currency]}.pdf", :type => "application/pdf"
+    pdf = PdfGen::Generate.generate_rates_header(options)
+    pdf = PdfGen::Generate.generate_user_rates_pdf(pdf, rates, @tariff, options)
+    file = pdf.render
+    filename = "Rates-#{session[:show_currency]}.pdf"
+    testable_file_send(file, filename, "application/pdf")
   end
 
   def generate_personal_rates_csv
