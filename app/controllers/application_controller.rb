@@ -303,6 +303,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize
+    logger.fatal session.to_yaml
     if session[:usertype].to_s != "admin" #or session[:usertype].to_s != "accountant"
       c = controller_name.to_s.gsub(/"|'|\\/, '')
       a = action_name.to_s.gsub(/"|'|\\/, '')
