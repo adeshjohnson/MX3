@@ -20,25 +20,19 @@
           <table width="100%">
             <tr>
               <td valign="top">
-                <% if session[:logo_picture] %>
-                    <% unless session[:logo_picture].blank? %>
-                        <%= link_to(image_tag(session[:logo_picture]), {:controller => "/callc", :action => "main"}, {:id => "company_logo", :title => session[:company]}) %>
-                    <% end %>
+                <% if session[:logo_picture]%>
+                    <%= image_tag session[:logo_picture] %>
                 <% else %>
-                    <% if Confline.get_value("Show_logo_on_register_page", 0).to_i == 1 %>
-                        <%= link_to(image_tag(Confline.get_value("Logo_Picture", 0)), {:controller => "/callc", :action => "main"}, {:id => "company_logo", :title => Confline.get_value("Company", 0)}) %>
-                    <% end %>
+                    <%= image_tag Confline.get_value("Logo_picture")%>
                 <% end %>
               </td>
               <td>
                 <table width="100%">
                   <tr>
                     <% if session[:login] == true %>
-                        <% name = '' %>
-                        <% if (session[:first_name].to_s.length + session[:last_name].to_s.length) > 0 %>
-                            <% name = "<b>#{session[:first_name].titleize} #{session[:last_name].titleize}</b>".html_safe %>
-                        <% end %>
-                        <%= link_to name + "(#{session[:username]})", :controller => :users, :action => :personal_details, :id=>session[:user_id] %>  <%= link_to _('Logout'), :controller => "callc", :action => "logout" %>
+                        <td align="right" class="nb">
+                          <b> <%= session[:first_name].capitalize %> <%= session[:last_name].capitalize %>  </b> (<%= session[:username] %>) <% link_to _('logoff'), :controller => "callc", :action => "logout" %>
+                        </td>
                     <% end %>
                   </tr>
                   <% if session[:cclogin] == true %>
@@ -52,7 +46,7 @@
 
                     <td align="right" valign="bottom">
                       <div>
-                        <%= flag_list.html_safe %>
+                        <%= raw flag_list.html_safe %>
                       </div>
                     </td>
                   </tr>
