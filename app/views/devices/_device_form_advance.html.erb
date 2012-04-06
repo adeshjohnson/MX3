@@ -155,3 +155,12 @@
     <%= radio_button_tag('device[anti_resale_auto_answer]', '1', @device.anti_resale_auto_answer?) %> <%= _('Yes') %>
   </td>
 </tr>
+<% if defined? PROVB_Active and PROVB_Active.to_i == 1 %>
+<tr>
+  <td> <%= _('Time_limit_per_day') %> </td>
+  <td> 
+    <%= text_field_tag 'device[time_limit_per_day]', @device.time_limit_per_day, :size => 10, "class" => "input"  %>
+    <%= _('min') %>
+  </td>
+</tr>
+<% end %>

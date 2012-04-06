@@ -983,6 +983,29 @@ class Device < ActiveRecord::Base
     self.user_id == -1
   end
 
+=begin
+  Set time limit per day option for the device. In database it is saved in seconds but this
+  method is expecting minutes tu be passed to it
+
+  *Params*
+  +minutes+ integer, time interval in minutes.
+=end
+  def time_limit_per_day=(minutes)
+    write_attribute(:time_limit_per_day, minutes.to_i * 60)
+  end
+
+=begin
+  Get time limit per day expressed in minutes. In database it is saves in seconds, sho we just
+  convert to minutes by deviding by 60. Obviuosly this is OOD mistake, we should use so sort of
+  'time interval' instance..
+
+  *Returns*
+  +minutes+ integer, time interval in minutes
+=end
+  def time_limit_per_day
+    (read_attribute(:time_limit_per_day) / 60).to_i
+  end
+
   private
 
 =begin

@@ -4347,7 +4347,8 @@ Localization.define('en') do |l|
   l.store 'No_failover_provider', 'No failover provider'
   l.store 'No_failover_provider_explained', 'If you will enable this setting, only first provider in the Routing Plan (LCR) will be used. If it fails - no other provider will be used to deliver the call.'
   l.store 'Anti_resale_auto_answer', 'Anti-resale (Auto-answer)'  
-
+  l.store 'Time_limit_per_day', 'Time limit per day'
+  l.store 'min', 'min'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
