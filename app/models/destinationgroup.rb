@@ -17,7 +17,7 @@ class Destinationgroup < ActiveRecord::Base
     end
 
     def rate(tariff_id)
-      Rate.find(:first, :conditions => "tariff_id = #{tariff_id} AND destinationgroup_id = #{self.id}")
+      Rate.where("tariff_id = #{tariff_id} AND destinationgroup_id = #{self.id}").first
     end
 
     def custom_rate(user_id)
