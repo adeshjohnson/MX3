@@ -1256,22 +1256,22 @@ class User < ActiveRecord::Base
 
 =end
 
-  def assign_default_tax(tax={}, opt ={})
+  def assign_default_tax(taxs={}, opt ={})
     options = {
         :save => true
     }.merge(opt)
-    if !tax or tax == {}
+    if !taxs or taxs == {}
       if owner_id == 0
         new_tax = Confline.get_default_tax(0)
       else
         new_tax = User.find_by_id(owner_id).get_tax.clone
       end
     else
-      new_tax = Tax.new(tax)
+      new_tax = Tax.new(taxs)
     end
-    tax = new_tax
-    tax.save if options[:save] == true
-    save if options[:save] == true
+    new_tax.save if options[:save] == true
+    self.tax_id = new_tax.id
+    self.save if options[:save] == true
   end
 
   def assign_default_tax2
@@ -1310,7 +1310,7 @@ class User < ActiveRecord::Base
 
   def get_tax
     self.assign_default_tax if tax.nil?
-    tax
+    self.tax
   end
 
   def user_type
