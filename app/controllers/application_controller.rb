@@ -5,12 +5,12 @@ class ApplicationController < ActionController::Base
     rescue_from Exception do |exc|
       #log_exception_handler(exc) and return false
       logger.fatal exc.to_yaml
-      logger.fatal exc.backtrace.collect{|t| t.to_s }.join("\n")
+      logger.fatal exc.backtrace.collect { |t| t.to_s }.join("\n")
       if !params[:this_is_fake_exception]
         my_rescue_action_in_public(exc)
-        redirect_to :controller=>:callc, :action=>:main and return false
+        redirect_to :controller => :callc, :action => :main and return false
       else
-        render :text=>my_rescue_action_in_public(exc)
+        render :text => my_rescue_action_in_public(exc)
       end
     end
   end
@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
     MorLog.my_debug("   Session(#{params[:controller]}_#{params[:action]}):"+ session["#{params[:controller]}_#{params[:action]}".intern].to_s)
     flash[:notice] = _('You_are_not_authorized_to_view_this_page')
     Rails.logger.error(m)
-    redirect_to :controller=>:callc, :action=>:main
+    redirect_to :controller => :callc, :action => :main
     # or render/redirect_to somewhere else
   end
 
@@ -105,9 +105,9 @@ class ApplicationController < ActionController::Base
 
   def pages_validator(options, total, page = 1)
     options[:page] = options[:page].to_i < 1 ? 1 : options[:page].to_i
-    total_pages = ( total.to_f / session[:items_per_page].to_f).ceil
+    total_pages = (total.to_f / session[:items_per_page].to_f).ceil
     options[:page] = total_pages if options[:page].to_i > total_pages.to_i and total_pages.to_i > 0
-    fpage = ((options[:page] -1 ) * session[:items_per_page]).to_i
+    fpage = ((options[:page] -1) * session[:items_per_page]).to_i
     return fpage, total_pages, options
   end
 
@@ -117,7 +117,7 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     User.current = current_user
-    logger.fatal      session[:time_zone_offset].to_i
+    logger.fatal session[:time_zone_offset].to_i
     User.system_time_offset = session[:time_zone_offset].to_i
   end
 
@@ -140,7 +140,7 @@ class ApplicationController < ActionController::Base
 
   def mobile_standard
     if request.env["HTTP_X_MOBILE_GATEWAY"]
-      out =  nil
+      out = nil
     else
 
       #  request.env["HTTP_USER_AGENT"].match("iPhone") ? "mobile" : "callc"
@@ -152,10 +152,10 @@ class ApplicationController < ActionController::Base
           end
         end
         if session[:layout_t].to_s == "full" or session[:layout_t].to_s == nil
-          out =  "callc"
+          out = "callc"
         end
         if session[:layout_t].to_s == "callcenter"
-          out =  "callcenter"
+          out = "callcenter"
         end
       else
         if !(request.env["HTTP_USER_AGENT"].to_s.match("iPhone") or request.env["HTTP_USER_AGENT"].to_s.match("iPod"))
@@ -214,13 +214,13 @@ class ApplicationController < ActionController::Base
         @total_expected = count["total_calls"].to_i
         @day_expected = count["calls_per_day"].to_i
         calls = CcTask.get_good_calls_count(session[:user_id])
-        @total_made =  calls["god_calls"].to_i
-        calls2 = CcTask.get_good_calls_count(session[:user_id],true)
+        @total_made = calls["god_calls"].to_i
+        calls2 = CcTask.get_good_calls_count(session[:user_id], true)
 
         @day_made = calls2["god_calls"].to_i
         @total_expected==0 ? @total_percent = 0 : @total_percent = (@total_made*100/@total_expected).to_i
-        @day_expected == 0 ? @today_percent = 0 : @today_percent = (@day_made*100/@day_expected  ).to_i
-        @Callscenter_graph = _('total_calls') + " #{@total_made} / #{@total_expected} " +";" + @total_percent.to_s  + "\\n"
+        @day_expected == 0 ? @today_percent = 0 : @today_percent = (@day_made*100/@day_expected).to_i
+        @Callscenter_graph = _('total_calls') + " #{@total_made} / #{@total_expected} " +";" + @total_percent.to_s + "\\n"
         @Callscenter_graph += _('calls_per_day') + " #{@day_made} / #{@day_expected} " + ";" + @today_percent.to_s + "\\n"
       end
     end
@@ -242,12 +242,12 @@ class ApplicationController < ActionController::Base
         if current_user
           translation = current_user.default_translation
         else
-          user_tr = UserTranslation.find(:first,:include => [:translation], :conditions => "user_translations.active = 1 AND user_translations.user_id = 0", :order => "user_translations.position ASC")
+          user_tr = UserTranslation.find(:first, :include => [:translation], :conditions => "user_translations.active = 1 AND user_translations.user_id = 0", :order => "user_translations.position ASC")
           translation = user_tr.translation if user_tr
         end
 
         df = (translation ? translation.short_name : "en")
-        Localization.lang = df  #Default_Language #default language
+        Localization.lang = df #Default_Language #default language
         session[:lang] = df
         ActiveProcessor.configuration.language = df
       end
@@ -262,7 +262,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    t =  test_machine_active? ? (Time.now - 3.year) : Time.now
+    t = test_machine_active? ? (Time.now - 3.year) : Time.now
 
     # ---- items per page -----
     session[:items_per_page] = 1 if session[:items_per_page].to_i < 1
@@ -293,6 +293,7 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => "callc", :action => "main" and return false
     end
   end
+
   # Method to store all HangupCauseCodes in session. Possible uses : before massive hangupcausecodes analysis or on session start
   def store_codes_in_session
     codes = Hangupcausecode.find(:all)
@@ -320,11 +321,11 @@ class ApplicationController < ActionController::Base
         MorLog.my_debug("Authorization failed:\n   User_type: "+session[:usertype_id].to_s+"\n   Requested: " + "#{c}::#{a}")
         MorLog.my_debug("   Session(#{c}_#{a}):"+ session["#{c}_#{a}".intern].to_s)
         flash[:notice] = _('You_are_not_authorized_to_view_this_page')
-               if session[:user_id]
-                       redirect_to :controller => "callc", :action => "main" and return false
-                          else
-                                      redirect_to :controller => "callc", :action => "login" and return false
-                                end
+        if session[:user_id] != nil
+          redirect_to :controller => "callc", :action => "main" and return false
+        else
+          redirect_to :controller => "callc", :action => "login" and return false
+        end
       end
     end
   end
@@ -336,7 +337,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def check_read_write_permission(view = [], edit = [] , options= {})
+  def check_read_write_permission(view = [], edit = [], options= {})
     options[:ignore] ||= false
     if session[:usertype] == options[:role]
       action = params[:action].to_sym
@@ -384,7 +385,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def add_action2 (user_id, action, data , data2)
+  def add_action2 (user_id, action, data, data2)
     if user_id
       act = Action.new
       act.date = Time.now
@@ -400,20 +401,20 @@ class ApplicationController < ActionController::Base
 
   def change_date_to_present
     t = current_user.user_time(Time.now)
-    session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from] = t.year, t.month, t.day, 0,  0
+    session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from] = t.year, t.month, t.day, 0, 0
     session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till] = t.year, t.month, t.day, 23, 59
   end
 
   def change_date_from
     if params[:date_from]
-      if params[:date_from][:year].to_i > 1000            # dirty hack to prevent ajax trashed params error
+      if params[:date_from][:year].to_i > 1000 # dirty hack to prevent ajax trashed params error
         session[:year_from] = params[:date_from][:year]
-        session[:month_from] = params[:date_from][:month].to_i <= 0 ? 1 :  params[:date_from][:month].to_i
+        session[:month_from] = params[:date_from][:month].to_i <= 0 ? 1 : params[:date_from][:month].to_i
 
         if params[:date_from][:day].to_i < 1
           params[:date_from][:day] = 1
         else
-          if !Date.valid_civil?(session[:year_from].to_i, session[:month_from].to_i , params[:date_from][:day].to_i)
+          if !Date.valid_civil?(session[:year_from].to_i, session[:month_from].to_i, params[:date_from][:day].to_i)
             params[:date_from][:day] = last_day_of_month(session[:year_from], session[:month_from])
           end
         end
@@ -435,14 +436,14 @@ class ApplicationController < ActionController::Base
 
   def change_date_till
     if params[:date_till]
-      if params[:date_from][:year].to_i > 1000            # dirty hack to prevent ajax trashed params error
+      if params[:date_from][:year].to_i > 1000 # dirty hack to prevent ajax trashed params error
         session[:year_till] = params[:date_till][:year]
         session[:month_till] = params[:date_till][:month].to_i <= 0 ? 1 : params[:date_till][:month].to_i
 
         if params[:date_till][:day].to_i < 1
           params[:date_till][:day] = 1
         else
-          if !Date.valid_civil?(session[:year_till].to_i, session[:month_till].to_i , params[:date_till][:day].to_i)
+          if !Date.valid_civil?(session[:year_till].to_i, session[:month_till].to_i, params[:date_till][:day].to_i)
             params[:date_till][:day] = last_day_of_month(session[:year_till], session[:month_till])
           end
         end
@@ -489,17 +490,17 @@ class ApplicationController < ActionController::Base
 
   def random_password(size = 12)
     chars = (('a'..'z').to_a + (0..9).to_a) - %w(i o 0 1 l 0)
-    (1..size).collect{|a| chars[rand(chars.size)] }.join
+    (1..size).collect { |a| chars[rand(chars.size)] }.join
   end
 
   def ApplicationController::random_password(size = 12)
     chars = (('a'..'z').to_a + (0..9).to_a) - %w(i o 0 1 l 0)
-    (1..size).collect{|a| chars[rand(chars.size)] }.join
+    (1..size).collect { |a| chars[rand(chars.size)] }.join
   end
 
   def random_digit_password(size = 8)
     chars = ((0..9).to_a)
-    (1..size).collect{|a| chars[rand(chars.size)] }.join
+    (1..size).collect { |a| chars[rand(chars.size)] }.join
   end
 
   #put value into file for debugging
@@ -550,7 +551,6 @@ class ApplicationController < ActionController::Base
   end
 
 
-
   #function for configuring extensions based on passed arguments
   def configure_extensions(device_id, options = {})
     @device = Device.find_by_id(device_id)
@@ -558,7 +558,7 @@ class ApplicationController < ActionController::Base
     return if !@device || device_id == 0
 
     default_context = "mor_local"
-    default_app		= "Dial"
+    default_app = "Dial"
 
     busy_extension = 201
     no_answer_extension = 401
@@ -632,7 +632,7 @@ class ApplicationController < ActionController::Base
                 forward_callerid = cf.data4
             end
 
-            if cf.data3 != 2  and forward_callerid.to_s.length > 0 #callerid does not changes
+            if cf.data3 != 2 and forward_callerid.to_s.length > 0 #callerid does not changes
               Extline.mcreate(default_context, i, "Set", "CALLERID(num)=#{forward_callerid}", @device.extension, device_id)
               i+=1
             end
@@ -641,7 +641,7 @@ class ApplicationController < ActionController::Base
 
             case cf.data2
               when "local"
-                dev =  Device.find(:first, :conditions=>{:id=>cf.data})
+                dev = Device.find(:first, :conditions => {:id => cf.data})
                 if dev
                   Extline.mcreate(default_context, i, "Goto", "#{dev.extension}|1", @device.extension, device_id)
                   i+=1
@@ -753,7 +753,7 @@ class ApplicationController < ActionController::Base
 
 
         Extline.mcreate(default_context, i, default_app, @device.device_type + "/" + @device.name + trunk + "|#{timeout.to_s}", @device.extension, device_id)
-        busy_ext		= 200 + i
+        busy_ext = 200 + i
         i += 1
         Extline.mcreate(default_context, i, "GotoIf", "$[$[\"${DIALSTATUS}\" = \"CHANUNAVAIL\"]|$[\"${DIALSTATUS}\" = \"CONGESTION\"]]?" + chanunavail_extension.to_s, @device.extension, device_id)
         i += 1
@@ -811,7 +811,7 @@ class ApplicationController < ActionController::Base
 
             case cf.data2
               when "local"
-                dev = Device.find(:first, :conditions=>{:id=>cf.data})
+                dev = Device.find(:first, :conditions => {:id => cf.data})
                 if dev
                   Extline.mcreate(default_context, i, "Goto", "#{dev.extension}|1", @device.extension, device_id)
                   i+=1
@@ -835,7 +835,7 @@ class ApplicationController < ActionController::Base
             Extline.mcreate(default_context, i, "Goto", 'mor_voicemail|${EXTEN}|1', @device.extension, device_id)
             i += 1
 
-          when  "empty"
+          when "empty"
             Extline.mcreate(default_context, i, "Hangup", "", @device.extension, device_id)
         end #case cf.action
 
@@ -845,7 +845,6 @@ class ApplicationController < ActionController::Base
         Extline.mcreate(default_context, i, "Hangup", "", @device.extension, device_id)
       end
       #=========================================================
-
 
 
       #======================  B U S Y  ======================
@@ -873,7 +872,7 @@ class ApplicationController < ActionController::Base
                 forward_callerid = cf.data4
             end
 
-            if cf.data3 != 2  and forward_callerid.to_s.length > 0 #callerid does not changes
+            if cf.data3 != 2 and forward_callerid.to_s.length > 0 #callerid does not changes
               Extline.mcreate(default_context, i, "Set", "CALLERID(num)=#{forward_callerid}", @device.extension, device_id)
               i+=1
             end
@@ -882,7 +881,7 @@ class ApplicationController < ActionController::Base
 
             case cf.data2
               when "local"
-                dev =  Device.find(:first, :conditions=>{:id=>cf.data})
+                dev = Device.find(:first, :conditions => {:id => cf.data})
                 if dev
                   Extline.mcreate(default_context, i, "Goto", "#{dev.extension}|1", @device.extension, device_id)
                   i+=1
@@ -912,7 +911,7 @@ class ApplicationController < ActionController::Base
             Extline.mcreate(default_context, i, "Goto", 'mor_voicemail|${EXTEN}|1', @device.extension, device_id)
             i += 1
 
-          when  "empty"
+          when "empty"
 
             Extline.mcreate(default_context, i, "GotoIf", "${LEN(${MOR_CALL_FROM_DID}) = 1}?#{i + 1}:mor|BUSY|1", @device.extension, device_id)
             i += 1
@@ -931,7 +930,6 @@ class ApplicationController < ActionController::Base
         i += 1
       end
       #=========================================================
-
 
 
       #======================  F A I L E D  ======================
@@ -959,7 +957,7 @@ class ApplicationController < ActionController::Base
                 forward_callerid = cf.data4
             end
 
-            if cf.data3 != 2  #callerid does not changes
+            if cf.data3 != 2 #callerid does not changes
               Extline.mcreate(default_context, i, "Set", "CALLERID(num)=#{forward_callerid}", @device.extension, device_id)
               i+=1
             end
@@ -968,7 +966,7 @@ class ApplicationController < ActionController::Base
 
             case cf.data2
               when "local"
-                dev =  Device.find(:first, :conditions=>{:id=>cf.data})
+                dev = Device.find(:first, :conditions => {:id => cf.data})
                 if dev
                   Extline.mcreate(default_context, i, "Goto", "#{dev.extension}|1", @device.extension, device_id)
                   i+=1
@@ -996,7 +994,7 @@ class ApplicationController < ActionController::Base
             Extline.mcreate(default_context, i, "Goto", 'mor_voicemail|${EXTEN}|1', @device.extension, device_id)
             i += 1
 
-          when  "empty"
+          when "empty"
 
             Extline.mcreate(default_context, i, "GotoIf", "${LEN(${MOR_CALL_FROM_DID}) = 1}?#{i + 1}:mor|FAILED|1", @device.extension, device_id)
             i += 1
@@ -1033,10 +1031,10 @@ class ApplicationController < ActionController::Base
             server.ami_cmd('extensions reload')
           end
         end
-        Action.add_action_hash(options[:current_user], {:action=>'Device sent to Asterisk', :target_id=>@device.id, :target_type=>"device", :data=>@device.user_id})
+        Action.add_action_hash(options[:current_user], {:action => 'Device sent to Asterisk', :target_id => @device.id, :target_type => "device", :data => @device.user_id})
       rescue Exception => e
         MorLog.my_debug _('Cannot_connect_to_asterisk_server')
-        Action.add_action_hash(options[:current_user], {:action=>'error', :data2=>"Cannot_connect_to_asterisk_server", :target_id=>@device.id, :target_type=>"device", :data=>@device.user_id, :data3=>e.class.to_s, :data4=>e.message.to_s})
+        Action.add_action_hash(options[:current_user], {:action => 'error', :data2 => "Cannot_connect_to_asterisk_server", :target_id => @device.id, :target_type => "device", :data => @device.user_id, :data3 => e.class.to_s, :data4 => e.message.to_s})
         if session[:usertype] == "admin" and !options[:no_redirect]
           flash_help_link = "http://wiki.kolmisoft.com/index.php/GUI_Error_-_SystemExit"
           flash[:notice] = _('Cannot_connect_to_asterisk_server')
@@ -1141,7 +1139,7 @@ class ApplicationController < ActionController::Base
   def nice_cid(cid)
     if cid
       cid = cid.split(/"\s*/).to_s
-      cid = cid[0,cid.index('<')]		  if cid.index('<')
+      cid = cid[0, cid.index('<')] if cid.index('<')
     else
       cid = ""
     end
@@ -1151,7 +1149,7 @@ class ApplicationController < ActionController::Base
   # converting caller id like "name" <11> to 11
   def cid_number(cid)
     if cid and cid.index('<') and cid.index('>')
-      cid = cid[cid.index('<')+1,cid.index('>') - cid.index('<') - 1]
+      cid = cid[cid.index('<')+1, cid.index('>') - cid.index('<') - 1]
     else
       cid = ""
     end
@@ -1222,16 +1220,15 @@ class ApplicationController < ActionController::Base
   end
 
 
-
   #============================================================
 
   # get last day of month
-  def last_day_of_month(year,month)
+  def last_day_of_month(year, month)
 
     year = year.to_i
     month = month.to_i
 
-    if (month == 1)	or (month == 3) or (month == 5) or (month == 7)  or (month == 8) or (month == 10) or (month == 12)
+    if (month == 1) or (month == 3) or (month == 5) or (month == 7) or (month == 8) or (month == 10) or (month == 12)
       day = "31"
     else
       if  (month == 4) or (month == 6) or (month == 9) or (month == 11)
@@ -1250,7 +1247,7 @@ class ApplicationController < ActionController::Base
   #previous month
   def prev_month(date) # takes format as '2006-02'
     year = date[0..4].to_i
-    month =	date[5..7].to_i
+    month = date[5..7].to_i
     if month == 1
       month += 12
       year -= 1
@@ -1262,8 +1259,8 @@ class ApplicationController < ActionController::Base
   #previous day
   def prev_day(date) # takes format as '2006-02-21'
     year = date[0..4].to_i
-    month =	date[5..7].to_i
-    day =	date[8..10].to_i
+    month = date[5..7].to_i
+    day = date[8..10].to_i
 
 
     if day == 1
@@ -1273,11 +1270,11 @@ class ApplicationController < ActionController::Base
         year -= 1
         day = 31
       else
-        if (month == 5) or (month == 7)  or (month == 8) or (month == 10) or (month == 12)
+        if (month == 5) or (month == 7) or (month == 8) or (month == 10) or (month == 12)
           day = 30
           month -= 1
         else
-          if (month == 2) or  (month == 4) or (month == 6) or (month == 9) or (month == 11)
+          if (month == 2) or (month == 4) or (month == 6) or (month == 9) or (month == 11)
             day = 31
             month -= 1
           else
@@ -1316,15 +1313,15 @@ class ApplicationController < ActionController::Base
 
   def nice_number(number)
     if !session[:nice_number_digits]
-      confline =  Confline.get_value("Nice_Number_Digits")
+      confline = Confline.get_value("Nice_Number_Digits")
       session[:nice_number_digits] ||= confline.to_i if confline and confline.to_s.length > 0
       session[:nice_number_digits] ||= 2 if !session[:nice_number_digits]
     end
     session[:nice_number_digits] = 2 if session[:nice_number_digits] == ""
     n = ""
-    n = sprintf("%0.#{session[:nice_number_digits]}f",number.to_f) if number
+    n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_f) if number
     if session[:change_decimal]
-      n = n.gsub('.',session[:global_decimal])
+      n = n.gsub('.', session[:global_decimal])
     end
     n
   end
@@ -1334,21 +1331,21 @@ class ApplicationController < ActionController::Base
       session[:nice_prepaid_invoice_number_digits] ||= Confline.get_value("Prepaid_Round_finals_to_2_decimals").to_i
       n = ""
       if session[:nice_prepaid_invoice_number_digits].to_i == 1
-        n = sprintf("%0.#{2}f",number.to_f) if number
+        n = sprintf("%0.#{2}f", number.to_f) if number
       else
-        n = sprintf("%0.#{session[:nice_number_digits]}f",number.to_f) if number
+        n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_f) if number
       end
     else
       session[:nice_invoice_number_digits] ||= Confline.get_value("Round_finals_to_2_decimals").to_i
       n = ""
       if session[:nice_invoice_number_digits].to_i == 1
-        n = sprintf("%0.#{2}f",number.to_f) if number
+        n = sprintf("%0.#{2}f", number.to_f) if number
       else
-        n = sprintf("%0.#{session[:nice_number_digits]}f",number.to_f) if number
+        n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_f) if number
       end
     end
     if session[:change_decimal] and options[:no_repl].to_i == 0
-      n = n.gsub('.',session[:global_decimal])
+      n = n.gsub('.', session[:global_decimal])
     end
     n
   end
@@ -1386,7 +1383,7 @@ class ApplicationController < ActionController::Base
     if device
       d = device.device_type + "/"
       d += device.name if device.device_type != "FAX"
-      d += device.extension if device.device_type == "FAX"  or device.name.length == 0
+      d += device.extension if device.device_type == "FAX" or device.name.length == 0
     end
 
     d
@@ -1430,7 +1427,7 @@ class ApplicationController < ActionController::Base
   def nice_src(call, options={})
     value = Confline.get_value("Show_Full_Src")
     srt = call.clid.split(' ')
-    name =  srt[0..-2].join(' ').to_s.delete('"')
+    name = srt[0..-2].join(' ').to_s.delete('"')
     number = call.src.to_s
     if options[:pdf].to_i == 0
       session[:show_full_src] ||= value
@@ -1524,7 +1521,7 @@ class ApplicationController < ActionController::Base
     session[:username] = user.username
     session[:first_name] = user.first_name
     session[:last_name] = user.last_name
-    session[:user_id]  = user.id
+    session[:user_id] = user.id
     session[:usertype] = user.usertype
     session[:owner_id] = user.owner_id
     session[:tax] = user.get_tax
@@ -1541,20 +1538,20 @@ class ApplicationController < ActionController::Base
       sql = 'select HOUR(timediff(now(),convert_tz(now(),@@session.time_zone,\'+00:00\'))) as u;'
       #logger.fatal "ddddddddddddddddddddddddddddddd"
       z = ActiveRecord::Base.connection.select_all(sql)[0]['u']
-     # logger.fatal "ddddddddddddddddddddddddddddddd"
+      # logger.fatal "ddddddddddddddddddddddddddddddd"
       t = z.to_s.to_i
       #logger.fatal "ddddddddddddddddddddddddddddddd"
       Confline.set_value('System_time_zone_offset', t.to_i, 0)
-     # logger.fatal "ddddddddddddddddddddddddddddddd"
+      # logger.fatal "ddddddddddddddddddddddddddddddd"
       session[:time_zone_offset] = Confline.get_value('System_time_zone_ofset').to_i
     end
     logger.fatal session[:time_zone_offset].to_i
 
-    ["Hide_Iwantto", "Hide_Manual_Link"].each{|option|
+    ["Hide_Iwantto", "Hide_Manual_Link"].each { |option|
       session[option.downcase.to_sym] = Confline.get_value(option).to_i
     }
 
-    ["Hide_Device_Passwords_For_Users"].each {|option|
+    ["Hide_Device_Passwords_For_Users"].each { |option|
       session[option.downcase.to_sym] = Confline.get_value(option, user.owner_id).to_i
     }
 
@@ -1623,13 +1620,13 @@ class ApplicationController < ActionController::Base
       az, av = user.alow_device_types_zap_virt
       session[:device] = {
           :allow_zap => az,
-          :allow_virtual  => av
+          :allow_virtual => av
       }
     else
       session[:tariff_csv_import_value] = Confline.get_value("Load_CSV_From_Remote_Mysql", user.owner_id).to_i == 0 ? 1 : 0
       if  session[:tariff_csv_import_value].to_i == 1
         config = YAML::load(File.open("#{Rails.root}/config/database.yml"))
-        session[:tariff_csv_import_value] =  (config['production']['host'].blank? or config['production']['host'].include?('localhsot')) ? 1 : 0
+        session[:tariff_csv_import_value] = (config['production']['host'].blank? or config['production']['host'].include?('localhsot')) ? 1 : 0
       end
       session[:show_menu] = Confline.get_value("Show_only_main_page", user.owner_id).to_i
       session[:version] = Confline.get_value("Version", user.owner_id)
@@ -1655,7 +1652,7 @@ class ApplicationController < ActionController::Base
     session[:cyberplat_enabled] = Confline.get_value("Cyberplat_Enabled", user.owner_id).to_i
     session[:ouroboros_enabled] = Confline.get_value("Ouroboros_Enabled", user.owner_id).to_i
     session[:ouroboros_name] = Confline.get_value("Ouroboros_Link_name_and_url", user.owner_id).to_s
-    session[:ouroboros_url] = Confline.get_value2("Ouroboros_Link_name_and_url",user.owner_id).to_s
+    session[:ouroboros_url] = Confline.get_value2("Ouroboros_Link_name_and_url", user.owner_id).to_s
     if session[:usertype] == "reseller" and Confline.get_value("Paypal_Disable_For_Reseller").to_i == 1
       session[:paypal_enabled] = 0
     else
@@ -1684,9 +1681,8 @@ class ApplicationController < ActionController::Base
     # get only the filename, not the whole path (from IE)
     just_filename = File.basename(file_name)
     # replace all none alphanumeric, underscore or perioids with underscore
-    just_filename.gsub(/[^\w\.\_]/,'_')
+    just_filename.gsub(/[^\w\.\_]/, '_')
   end
-
 
 
   # reads translations table and puts translations into session
@@ -1695,14 +1691,14 @@ class ApplicationController < ActionController::Base
       if current_user
         @translations = current_user.active_translations
       else
-        tra = UserTranslation.find(:all,:include => [:translation], :conditions => "user_translations.active = 1 AND user_translations.user_id = 0", :order => "user_translations.position ASC")
+        tra = UserTranslation.find(:all, :include => [:translation], :conditions => "user_translations.active = 1 AND user_translations.user_id = 0", :order => "user_translations.position ASC")
         @translations = tra.map(&:translation)
       end
     else
-      @translations =  force_owner.active_translations
+      @translations = force_owner.active_translations
     end
     tr_arr = []
-    @translations.each{|tr| tr_arr << tr}
+    @translations.each { |tr| tr_arr << tr }
     session[:tr_arr] = tr_arr
   end
 
@@ -1814,7 +1810,7 @@ Variables: (Names marked with * are required)
 
   def get_file_ext(file_string, type)
     filename = sanitize_filename(file_string)
-    ext =  filename.to_s.split(".").last
+    ext = filename.to_s.split(".").last
     if ext.downcase != type.downcase
       flash[:notice] = _('File_type_not_match')+ " : #{type.to_s}"
       return false
@@ -1857,7 +1853,7 @@ Variables: (Names marked with * are required)
         for zz in 0..self.size-1
           b[zz][i] = self[zz][j]
         end
-        self[key][j] = "s"       #mark as used
+        self[key][j] = "s" #mark as used
 
         i+=1
 
@@ -1885,7 +1881,7 @@ Variables: (Names marked with * are required)
       when "ActionController::RoutingError"
         if exception.to_s.scan(/no route found to match \"\/images\//).size > 0
           if exception.to_s.scan(/no route found to match \"\/images\/flags\//).size > 0
-            country = exception.to_s.scan(/flags\/.*"/)[0].gsub("flags", "").gsub(/[\'\"\\\/]/,"")
+            country = exception.to_s.scan(/flags\/.*"/)[0].gsub("flags", "").gsub(/[\'\"\\\/]/, "")
             if simple_file_name?(country)
               MorLog.my_debug(" >> cp #{Rails.root}/public/images/flags/empty.jpg #{Rails.root}/public/images/flags/#{country}", true)
               MorLog.my_debug(`cp #{Rails.root}/public/images/flags/empty.jpg #{Rails.root}/public/images/flags/#{country}`)
@@ -1920,10 +1916,10 @@ Variables: (Names marked with * are required)
         MorLog.my_debug("  >> Exception is important", true)
         MorLog.log_exception(exception, id, params[:controller].to_s, params[:action].to_s)
 
-        trace = exception.backtrace.collect{|t| t.to_s }.join("\n")
+        trace = exception.backtrace.collect { |t| t.to_s }.join("\n")
 
         exception_class = escape_for_email(exception.class).to_s
-        exception_class_previous = Confline.get_value("Last_Crash_Exception_Class",0).to_s
+        exception_class_previous = Confline.get_value("Last_Crash_Exception_Class", 0).to_s
         exception_send_email = Confline.get_value("Exception_Send_Email").to_i
 
         # Lots of duplication but this is due fact that in future there may be
@@ -1935,7 +1931,7 @@ Variables: (Names marked with * are required)
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Asterik_server_connection_error', :data2 => exception.message).save
         end
 
-        if exception_class.include?("Errno::EHOSTUNREACH")  or ( exception_class.include?("Errno::ECONNREFUSED") and trace.to_s.include?("rami.rb:380"))
+        if exception_class.include?("Errno::EHOSTUNREACH") or (exception_class.include?("Errno::ECONNREFUSED") and trace.to_s.include?("rami.rb:380"))
           flash_help_link = "http://wiki.kolmisoft.com/index.php/GUI_Error_-_SystemExit"
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Asterik_server_connection_error', :data2 => exception.message).save
         end
@@ -1969,7 +1965,7 @@ Variables: (Names marked with * are required)
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Data_not_found', :data2 => exception.message).save
         end
 
-        if exception_class.include?("Net::SMTP") or (exception_class.include?("Errno::ECONNREFUSED") and trace.to_s.include?("smtp_tls.rb"))  or (exception_class.include?("SocketError") and trace.to_s.include?("smtp_tls.rb")) or  ((exception_class.include?("Timeout::Error") and trace.to_s.include?("smtp.rb") )) or trace.to_s.include?("smtp.rb")
+        if exception_class.include?("Net::SMTP") or (exception_class.include?("Errno::ECONNREFUSED") and trace.to_s.include?("smtp_tls.rb")) or (exception_class.include?("SocketError") and trace.to_s.include?("smtp_tls.rb")) or ((exception_class.include?("Timeout::Error") and trace.to_s.include?("smtp.rb"))) or trace.to_s.include?("smtp.rb")
           flash_help_link = email_exceptions(exception)
         end
 
@@ -2052,9 +2048,9 @@ Variables: (Names marked with * are required)
           # Gather all exception
           rep, rev, status = get_svn_info
           rp = []
-          (params.each { |k,v| rp << ["#{k} => #{v}"] })
+          (params.each { |k, v| rp << ["#{k} => #{v}"] })
 
-          message =  [
+          message = [
               "ID:         #{id.to_s}",
               "IP:         #{request.env['SERVER_ADDR']}",
               "Class:      #{exception_class}",
@@ -2145,11 +2141,11 @@ Variables: (Names marked with * are required)
 
   def nice_session
     s = []
-    [:username,:first_name,:last_name,:user_id,:usertype,:owner_id,:tax,:usertype_id,:device_id,:tariff_id,:sms_service_active,:user_cc_agent,
-     :help_link,:default_currency,:show_currency,:manager_in_groups,:voucher_attempt,:fax_device_enabled,:nice_number_digits,:items_per_page,
-     :callback_active,:integrity_check,:frontpage_text,:version,:copyright_title,:company_email,:company,:admin_browser_title,:logo_picture,
-     :active_calls_refresh_interval,:show_full_src,:show_rates_for_users,:webmoney_enabled,:paypal_enabled,
-     :vouchers_enabled,:linkpoint_enabled,:cyberplat_enabled,:ouroboros_enabled,:ouroboros_name,:ouroboros_url,:show_active_calls_for_users].each{|key|
+    [:username, :first_name, :last_name, :user_id, :usertype, :owner_id, :tax, :usertype_id, :device_id, :tariff_id, :sms_service_active, :user_cc_agent,
+     :help_link, :default_currency, :show_currency, :manager_in_groups, :voucher_attempt, :fax_device_enabled, :nice_number_digits, :items_per_page,
+     :callback_active, :integrity_check, :frontpage_text, :version, :copyright_title, :company_email, :company, :admin_browser_title, :logo_picture,
+     :active_calls_refresh_interval, :show_full_src, :show_rates_for_users, :webmoney_enabled, :paypal_enabled,
+     :vouchers_enabled, :linkpoint_enabled, :cyberplat_enabled, :ouroboros_enabled, :ouroboros_name, :ouroboros_url, :show_active_calls_for_users].each { |key|
       s << [escape_for_email("#{key} => #{session[key]}")]
     }
     out = ""
@@ -2157,7 +2153,7 @@ Variables: (Names marked with * are required)
     out
   end
 
-  def  email_exceptions(exception)
+  def email_exceptions(exception)
     flash = nil
 
     # http://www.emailaddressmanager.com/tips/codes.html
@@ -2166,9 +2162,9 @@ Variables: (Names marked with * are required)
     err_link = {}
     code = ['421', '422', '431', '432', '441', '442', '446', '447', '449', '450', '451', '500', '501', '502', '503', '504', '510', '521', '530', '535', '550', '551', '552', '553', '554']
 
-    code.each{|value| err_link[value] = 'http://wiki.kolmisoft.com/index.php/GUI_Error_-_Email_SMTP#' + value.to_s }
+    code.each { |value| err_link[value] = 'http://wiki.kolmisoft.com/index.php/GUI_Error_-_Email_SMTP#' + value.to_s }
 
-    err_link.each{|key, value| flash = value if exception.message.to_s.include?(key)}
+    err_link.each { |key, value| flash = value if exception.message.to_s.include?(key) }
 
     if flash.to_s.blank?
       if exception.class.to_s.include?("Net::SMTPAuthenticationError")
@@ -2251,7 +2247,7 @@ Variables: (Names marked with * are required)
       cond_str << ["number_type = 1"]
       invoice = Invoice.find(:first, :joins => "LEFT JOIN users ON (invoices.user_id = users.id)", :conditions => [cond_str.join(" AND ")]+cond_var, :order => "CAST(SUBSTRING(number,#{ls+1},255) AS SIGNED) DESC")
 
-      invoice ? number = (invoice.number[ls,invoice.number.length - ls].to_i + 1) : number = 1
+      invoice ? number = (invoice.number[ls, invoice.number.length - ls].to_i + 1) : number = 1
       #
       #      logger.fatal "----------------------- \n l #{length}"
       #      logger.fatal '21999'[2,'21999'.length - 2].to_i + 1
@@ -2262,7 +2258,7 @@ Variables: (Names marked with * are required)
 
       zl = length - start.length - number.to_s.length
       z = ""
-      1..zl.times {z += "0"}
+      1..zl.times { z += "0" }
       invnum = "#{start}#{z}#{number.to_s}"
     end
     #INV070605011 - prefixYYMMDDnr
@@ -2273,10 +2269,10 @@ Variables: (Names marked with * are required)
       cond_var = [ls, owner_id]
       cond_str << ["number_type = 2"]
       pinv = Invoice.find(:first, :joins => "LEFT JOIN users ON (invoices.user_id = users.id)", :conditions => [cond_str.join(" AND ")]+cond_var, :order => "CAST(SUBSTRING(number,#{ls+1},255) AS SIGNED) DESC")
-      pinv ? nn = (pinv.number[ls,pinv.number.length - ls].to_i + 1) : nn = 1
+      pinv ? nn = (pinv.number[ls, pinv.number.length - ls].to_i + 1) : nn = 1
       zl = length - start.length - nn.to_s.length - 6
       z = ""
-      1..zl.times {z += "0"}
+      1..zl.times { z += "0" }
       invnum = "#{start}#{date}#{z}#{nn}"
     end
     invnum
@@ -2284,7 +2280,7 @@ Variables: (Names marked with * are required)
 
   def flash_errors_for(message, object)
     flash[:notice] = message
-    object.errors.each{ |key, value|
+    object.errors.each { |key, value|
       flash[:notice] += "<br> * #{_(value)}"
     } if object.respond_to?(:errors)
   end
@@ -2314,7 +2310,7 @@ Variables: (Names marked with * are required)
   def check_user_id_with_session(user_id)
     if user_id != session[:user_id] and session[:usertype] != "admin"
       dont_be_so_smart
-      redirect_to :controller=>:callc, :action => :main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     else
       return true
     end
@@ -2389,7 +2385,7 @@ Variables: (Names marked with * are required)
 
   # Delegatas. Suderinamumui.
   def email_variables(user, device = nil, variables = {})
-    Email.email_variables(user, device, variables, {:nice_number_digits => session[:nice_number_digits], :global_decimal=>session[:global_decimal], :change_decimal=>session[:change_decimal]})
+    Email.email_variables(user, device, variables, {:nice_number_digits => session[:nice_number_digits], :global_decimal => session[:global_decimal], :change_decimal => session[:change_decimal]})
   end
 
   def invoice_total_tax_name(tax)
@@ -2401,12 +2397,12 @@ Variables: (Names marked with * are required)
   def owned_balance_from_previous_month(invoice)
     user = invoice.user
     # check if invoice is for whole month
-    first_day = invoice.period_start.to_s[8,2]
-    last_day = invoice.period_end.to_s[8,2]
-    year = invoice.period_start.to_s[0,4]
-    month = invoice.period_start.to_s[5,2].to_i.to_s #remove leading 0
+    first_day = invoice.period_start.to_s[8, 2]
+    last_day = invoice.period_end.to_s[8, 2]
+    year = invoice.period_start.to_s[0, 4]
+    month = invoice.period_start.to_s[5, 2].to_i.to_s #remove leading 0
 
-    if first_day.to_i == 1 and last_day.to_i == last_day_of_month(year,month).to_i
+    if first_day.to_i == 1 and last_day.to_i == last_day_of_month(year, month).to_i
       # get balance from actions for last month
       action = Action.find(:first, :conditions => "user_id = #{invoice.user_id} AND action = 'user_balance_at_month_end' AND data = '#{year}-#{month}'")
       if action
@@ -2418,14 +2414,14 @@ Variables: (Names marked with * are required)
         # count calls price in invoice
         inv_calls_price = 0.0
         inv_details = invoice.invoicedetails
-        inv_details.each{|id| inv_calls_price += id.price.to_f if id.invdet_type == 0}
+        inv_details.each { |id| inv_calls_price += id.price.to_f if id.invdet_type == 0 }
 
         # count balance
         #balance = sprintf("%0.#{2}f", user.balance.to_f + user.get_tax.count_tax_amount(user.balance.to_f ))
         #owned_balance = action.data2.to_f - inv_details_price.to_f
         owned_balance = (action.data2.to_f * (-1)) - inv_calls_price.to_f
 
-        balance_with_tax = owned_balance.to_f + user.get_tax.count_tax_amount(owned_balance.to_f )
+        balance_with_tax = owned_balance.to_f + user.get_tax.count_tax_amount(owned_balance.to_f)
         return [owned_balance, balance_with_tax]
       else
         MorLog.my_debug("Balance will not be shown because not found balance at the end of month, invoice id: #{invoice.id}")
@@ -2511,7 +2507,7 @@ Variables: (Names marked with * are required)
 
   def render_email(email_to_render, user)
     bin = binding()
-    Email.email_variables(user).each{|key, value| Kernel.eval("#{key} = '#{value.gsub("'", "&#8216;")}'", bin)}
+    Email.email_variables(user).each { |key, value| Kernel.eval("#{key} = '#{value.gsub("'", "&#8216;")}'", bin) }
     ERB.new(email_to_render.body).result(bin).to_s
   end
 
@@ -2521,18 +2517,18 @@ Variables: (Names marked with * are required)
     not_words = ""
     objc = []
 
-    5.times{|num| not_words += f[num].to_s.gsub(/[\w "']/, "").to_s.strip}
+    5.times { |num| not_words += f[num].to_s.gsub(/[\w "']/, "").to_s.strip }
 
     symbols_count=[]
     symbols = not_words.split(//).uniq.sort
     symbols.delete(':') if return_type == 2
     symbols.delete('-')
 
-    symbols.each_with_index {|symbol, index| symbols_count[index] = not_words.count(symbol) }
+    symbols.each_with_index { |symbol, index| symbols_count[index] = not_words.count(symbol) }
 
     max2 = 0
     max_item2 = 0
-    symbols_count.each_with_index {|item, index|
+    symbols_count.each_with_index { |item, index|
       max2 = index if  max_item2 <= item
       max_item2 = item if max_item2 <= item
     }
@@ -2540,7 +2536,7 @@ Variables: (Names marked with * are required)
     symbols_count[max2] = 0
     max3 = 0
     max_item3 = 0
-    symbols_count.each_with_index {|item, index|
+    symbols_count.each_with_index { |item, index|
       max3 = index if  max_item3 <= item
       max_item3 = item if max_item3 <= item
     }
@@ -2550,19 +2546,19 @@ Variables: (Names marked with * are required)
     action = params[:controller].to_s + "_" + params[:action].to_s
     sep, dec = session["import_csv_#{action}_options".to_sym][:sep], session["import_csv_#{action}_options".to_sym][:dec]
 
-    5.times{|num| objc[num] = f[num].to_s.split(sep1)}
+    5.times { |num| objc[num] = f[num].to_s.split(sep1) }
 
     line = 1
     line = opts[:line] if opts[:line]
-    colums_size =  f[line].to_s.split(params[:sepn2]) if params[:sepn2]
-    colums_size =  f[line].to_s.split(sep1) if !params[:sepn2]
+    colums_size = f[line].to_s.split(params[:sepn2]) if params[:sepn2]
+    colums_size = f[line].to_s.split(sep1) if !params[:sepn2]
     flash[:status] = nil
     disable_next = false
     if ((sep1 != sep or (dec1 != dec and return_type == 2)) and params[:use_suggestion].to_i != 2) or (colums_size.size.to_i < min_collum_size.to_i and !params[:sepn2].blank?)
       disable_next = true if colums_size.size.to_i < min_collum_size.to_i
       flash[:notice] = nil
       flash[:status] = _('Please_confirm_column_delimiter_and_decimal_delimiter')
-      render :partial => "layouts/csv_import_confirm", :locals => {:sep=>sep, :dec=>dec, :sep1=>sep1, :dec1=>dec1, :return_type=>return_type.to_i, :action_to =>params[:action].to_s, :fl=>objc, :min_collum_size=>min_collum_size, :disable_next=>disable_next, :opts => opts } and return false
+      render :partial => "layouts/csv_import_confirm", :locals => {:sep => sep, :dec => dec, :sep1 => sep1, :dec1 => dec1, :return_type => return_type.to_i, :action_to => params[:action].to_s, :fl => objc, :min_collum_size => min_collum_size, :disable_next => disable_next, :opts => opts} and return false
     end
     true
   end
@@ -2574,18 +2570,18 @@ Variables: (Names marked with * are required)
 
     if params[:step].to_i > 1
       if params[:use_suggestion].to_i >= 1
-        options[:sep] = params[:use_suggestion].to_i == 1 ? params[:sepn].to_s: params[:sepn2].to_s
-        options[:dec] = params[:use_suggestion].to_i == 1 ? params[:decn].to_s: params[:decn2].to_s
+        options[:sep] = params[:use_suggestion].to_i == 1 ? params[:sepn].to_s : params[:sepn2].to_s
+        options[:dec] = params[:use_suggestion].to_i == 1 ? params[:decn].to_s : params[:decn2].to_s
       else
         if options[:sep].blank?
           confl_sep = Confline.get_value("CSV_Separator", correct_owner_id).to_s
-          options[:sep] = confl_sep.blank? ? ',': confl_sep.to_s
+          options[:sep] = confl_sep.blank? ? ',' : confl_sep.to_s
         else
           options[:sep] = options[:sep]
         end
         if options[:dec].blank?
           confl_dec = Confline.get_value("CSV_Decimal", correct_owner_id).to_s
-          options[:dec] = confl_dec.blank? ? '.': confl_dec.to_s
+          options[:dec] = confl_dec.blank? ? '.' : confl_dec.to_s
         else
           options[:dec] = options[:dec]
         end
@@ -2593,8 +2589,8 @@ Variables: (Names marked with * are required)
     else
       confl_sep = Confline.get_value("CSV_Separator", correct_owner_id).to_s
       confl_dec = Confline.get_value("CSV_Decimal", correct_owner_id).to_s
-      options[:sep] = confl_sep.blank? ? ',': confl_sep.to_s
-      options[:dec] = confl_dec.blank? ? '.': confl_dec.to_s
+      options[:sep] = confl_sep.blank? ? ',' : confl_sep.to_s
+      options[:dec] = confl_dec.blank? ? '.' : confl_dec.to_s
     end
 
     session["import_csv_#{action}_options".to_sym] = options
@@ -2605,16 +2601,16 @@ Variables: (Names marked with * are required)
     if options.size > 0
       if options[:year].to_i > 2000
         year = options[:year].to_i
-        month = options[:month].to_i  #<= 0 ? 1 :  options[:month].to_i
+        month = options[:month].to_i #<= 0 ? 1 :  options[:month].to_i
         if options[:day].to_i < 1
           options[:day] = 1
         else
-          if !Date.valid_civil?(year.to_i, month.to_i , options[:day].to_i)
+          if !Date.valid_civil?(year.to_i, month.to_i, options[:day].to_i)
             options[:day] = last_day_of_month(year, month)
           end
         end
         day = options[:day]
-        t = Time.mktime(year.to_i, month,day).to_date.to_s
+        t = Time.mktime(year.to_i, month, day).to_date.to_s
       end
     else
       t = Date.now().to_s
@@ -2623,7 +2619,7 @@ Variables: (Names marked with * are required)
 
   def nice_date_time(time, ofset=1)
     if time
-      format  = session[:date_time_format].to_s.blank? ? "%Y-%m-%d %H:%M:%S" : session[:date_time_format].to_s
+      format = session[:date_time_format].to_s.blank? ? "%Y-%m-%d %H:%M:%S" : session[:date_time_format].to_s
       t = time.respond_to?(:strftime) ? time : time.to_time
       if ofset.to_i == 1
         d = current_user ? current_user.user_time(t).strftime(format.to_s) : t.strftime(format.to_s)
@@ -2638,7 +2634,7 @@ Variables: (Names marked with * are required)
 
   def nice_date(date, ofset=1)
     if date
-      format  = session[:date_format].to_s.blank? ? "%Y-%m-%d" : session[:date_format].to_s
+      format = session[:date_format].to_s.blank? ? "%Y-%m-%d" : session[:date_format].to_s
       t = date.respond_to?(:strftime) ? date : date.to_time
       t = t.class.to_s == 'Date' ? t.to_time : t
       d = ofset.to_i == 1 ? current_user.user_time(t).strftime(format.to_s) : t.strftime(format.to_s)
@@ -2674,7 +2670,7 @@ Variables: (Names marked with * are required)
   end
 
   def allow_manage_providers_tariffs?
-    session[:usertype] == "admin"  or current_user.reseller_allow_providers_tariff? or (session[:usertype].to_s == "accountant" and session[:acc_tariff_manage].to_i > 0)
+    session[:usertype] == "admin" or current_user.reseller_allow_providers_tariff? or (session[:usertype].to_s == "accountant" and session[:acc_tariff_manage].to_i > 0)
   end
 
   def allow_manage_providers?
@@ -2689,11 +2685,11 @@ Variables: (Names marked with * are required)
   end
 
   def allow_manage_dids?
-    (session[:allow_own_dids].to_i == 1  and current_user.usertype == 'reseller') or ['admin', 'accountant'].include?(current_user.usertype)
+    (session[:allow_own_dids].to_i == 1 and current_user.usertype == 'reseller') or ['admin', 'accountant'].include?(current_user.usertype)
   end
 
   def see_providers_in_dids?
-    ( current_user.reseller_allow_providers_tariff? and current_user.usertype == 'reseller') or ['admin', 'accountant'].include?(current_user.usertype)
+    (current_user.reseller_allow_providers_tariff? and current_user.usertype == 'reseller') or ['admin', 'accountant'].include?(current_user.usertype)
   end
 
   private
@@ -2724,7 +2720,7 @@ Variables: (Names marked with * are required)
   def get_svn_info
     begin
       svn_info = `svn info #{Rails.root}`
-      svn_status = (`svn status #{Rails.root} 2>&1`).to_s.split("\n").collect{|l| l if (l[0..0] == "M" or l.scan("This client is too old to work with working copy").size > 0) }.compact.size > 0
+      svn_status = (`svn status #{Rails.root} 2>&1`).to_s.split("\n").collect { |l| l if (l[0..0] == "M" or l.scan("This client is too old to work with working copy").size > 0) }.compact.size > 0
       svn_data = svn_info.split("\n")
       rep = svn_data[1].to_s.split(": ")[1].to_s.strip
       rev = svn_data[4].to_s.split(": ")[1].to_s.strip
@@ -2745,7 +2741,8 @@ Variables: (Names marked with * are required)
   def testable_file_send(file, filename, mimetype)
     if params[:test]
       case mimetype
-        when "application/pdf" then render :text => {:filename => filename, :file => "File rendered"}.to_json
+        when "application/pdf" then
+          render :text => {:filename => filename, :file => "File rendered"}.to_json
         else
           render :text => {:filename => filename, :file => file}.to_json
       end
@@ -2757,7 +2754,7 @@ Variables: (Names marked with * are required)
   def send_crash_email(address, subject, message)
     MorLog.my_debug("  >> Before sending message.", true)
     local_filename = "/tmp/mor_crash_email.txt"
-    File.open(local_filename, 'w'){|f| f.write(message) }
+    File.open(local_filename, 'w') { |f| f.write(message) }
     command = "/usr/local/mor/sendEmail -f 'support@kolmisoft.com' -t '#{address}' -u '#{subject}' -s 'smtp.gmail.com' -xu 'crashemail1' -xp 'crashemail199' -o message-file='#{local_filename}' tls='auto'"
     system(command)
     MorLog.my_debug("  >> Crash email sent to #{address}", true)
@@ -2807,7 +2804,7 @@ Variables: (Names marked with * are required)
   end
 
   def calling_cards_active?
-    defined?(CC_Active) and (CC_Active == 1) and (session[:usertype] != 'reseller' or (session[:usertype] == 'reseller' and  (session[:res_calling_cards].to_i == 2) ))
+    defined?(CC_Active) and (CC_Active == 1) and (session[:usertype] != 'reseller' or (session[:usertype] == 'reseller' and (session[:res_calling_cards].to_i == 2)))
   end
 
   def sms_active?
@@ -2891,7 +2888,7 @@ Variables: (Names marked with * are required)
   end
 
   def mor_11_extend?
-   # params[:controller].to_s == 'api' ?  1 == Confline.get_value("MOR_11_extend", 0).to_i :  1 == session[:mor_11_extend].to_i
+    # params[:controller].to_s == 'api' ?  1 == Confline.get_value("MOR_11_extend", 0).to_i :  1 == session[:mor_11_extend].to_i
     true
   end
 
@@ -2906,7 +2903,7 @@ Variables: (Names marked with * are required)
 
   def last_day_month(date)
     year = session["year_#{date}".to_sym]
-    if last_day_of_month(session["year_#{date}".to_sym],session["month_#{date}".to_sym]).to_i <= session["day_#{date}".to_sym].to_i
+    if last_day_of_month(session["year_#{date}".to_sym], session["month_#{date}".to_sym]).to_i <= session["day_#{date}".to_sym].to_i
       day = "01"
       if session["month_#{date}".to_sym].to_i == 12
         month = '01'
@@ -2918,13 +2915,13 @@ Variables: (Names marked with * are required)
       day = session["day_#{date}".to_sym].to_i+1
       month = session["month_#{date}".to_sym].to_i
     end
-    return year, month , day
+    return year, month, day
   end
 
   def split_number(number)
     number_array = []
     number = number.to_s.gsub(/\D/, "")
-    number.size.times{|i| number_array << number[0..i]}
+    number.size.times { |i| number_array << number[0..i] }
     number_array
   end
 
@@ -2972,8 +2969,8 @@ Variables: (Names marked with * are required)
 =end
   def self.month_difference(period_start, period_end)
     month_diff = period_end.month - period_start.month
-    if month_diff  == 0
-      return ((first_day_of_the_month? period_start and last_day_of_the_month? period_end) ? 1 :0)
+    if month_diff == 0
+      return ((first_day_of_the_month? period_start and last_day_of_the_month? period_end) ? 1 : 0)
     else
       month_diff = month_diff - 1
       if first_day_of_the_month? period_start
