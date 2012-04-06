@@ -364,7 +364,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_link_23 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
 	<td>Card was deleted</td>
 	<td></td>
 </tr>
@@ -379,8 +394,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Please select file</td>
+	<td>waitForTextPresent</td>
+	<td>Please upload file</td>
 	<td></td>
 </tr>
 <tr>
@@ -585,9 +600,10 @@
 	<td>delete_link_1</td>
 	<td></td>
 </tr>
+<!--<tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr>-->
 <tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
+	<td>waitForTextPresent</td>
+	<td>Deleted</td>
 	<td></td>
 </tr>
 <tr>
@@ -948,7 +964,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=4&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#delete_link_34 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
 	<td>Card was deleted</td>
 	<td></td>
 </tr>
@@ -963,8 +999,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Please select file</td>
+	<td>waitForTextPresent</td>
+	<td>Please upload file</td>
 	<td></td>
 </tr>
 <tr>
@@ -1009,8 +1045,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>You do not have rights to edit this</td>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <!--Create new cardgroup and later test if LCR is set correctly.-->
@@ -1985,7 +2021,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=( Add cards)</td>
+	<td>link=Generate new Cards</td>
 	<td></td>
 </tr>
 <tr>
