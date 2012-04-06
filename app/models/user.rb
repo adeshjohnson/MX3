@@ -1598,7 +1598,7 @@ class User < ActiveRecord::Base
     VoicemailBox.update_all(["fullname = ?", [first_name.to_s, last_name.to_s].join(" ")], "device_id in (#{device_ids.join(", ")})") if device_ids.size > 0
   end
 
-  def check_users_balance
+  def User.check_users_balance
     User.update_all("warning_email_sent = '0'", "warning_email_active = '1' AND warning_email_sent = '1' AND balance > warning_email_balance")
   end
 
