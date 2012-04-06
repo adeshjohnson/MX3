@@ -52,7 +52,7 @@
 
                     <td align="right" valign="bottom">
                       <div>
-                        <div id="flag_list_div"><%= flag_list.html_safe %></div>
+                        <%= flag_list.html_safe %>
                       </div>
                     </td>
                   </tr>
@@ -174,7 +174,7 @@
         &nbsp;&nbsp;<%=raw session[:version] %> <%=raw session[:copyright_title] %>
     <%else%>
         <%if Confline.get_value("Show_logo_on_register_page", 0).to_i == 1%>
-            &nbsp;&nbsp;<%= Confline.get_value("Version", 0) %> <%= Confline.get_value("Copyright_Title", 0) %>
+            &nbsp;&nbsp;<%= raw Confline.get_value("Version", 0) %> <%= raw Confline.get_value("Copyright_Title", 0) %>
         <%end%>
     <% end %>
     &nbsp;
