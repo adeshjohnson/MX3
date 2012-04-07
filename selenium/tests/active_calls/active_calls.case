@@ -480,12 +480,17 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>provider[common_use]_1</td>
+	<td>provider_common_use_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider was successfully updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -500,7 +505,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
@@ -540,7 +550,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>tariff[purpose]_provider</td>
+	<td>tariff_purpose_provider</td>
 	<td></td>
 </tr>
 <tr>
@@ -618,11 +628,7 @@
 	<td>Are you sure?</td>
 	<td></td>
 </tr>
-<tr>
-	<td>waitForPopUp</td>
-	<td>new_window</td>
-	<td>30000</td>
-</tr>
+<!--<tr> 	<td>waitForPopUp</td> 	<td>new_window</td> 	<td>30000</td> </tr>-->
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Hangup</td>
