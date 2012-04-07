@@ -1143,7 +1143,7 @@ class User < ActiveRecord::Base
     if owner_id != 0
       #kvieciam metoda
       owner = User.where({:id => owner_id}).first
-      owner.after_create_localization
+      owner.after_create_localization if owner
       #after this value should be default location and reseller gets new default location if did not have it
     end
 
