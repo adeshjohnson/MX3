@@ -1,5 +1,5 @@
-#!/usr/bin/env ruby
 # encoding: utf-8
+#!/usr/bin/env ruby
 require 'rexml/document'
 # MAYBE useless function
 class String
@@ -251,13 +251,13 @@ class Command < Base
       when "verifyNotTable"
         line = "begin\n    assert_equal #{@value}, !@selenium.get_table(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
       when "verifyText"
-        line ="begin\n    assert_equal #{@value}, @selenium.get_text(#{@target}).force_encoding('UTF-8') \nrescue Exception=>e\n    @verification_errors << e\nend"
+        line ="begin\n    assert_equal #{@value}, @selenium.get_text(#{@target}).respond_to?(:force_encoding) ? @selenium.get_text(#{@target}).force_encoding('UTF-8') : @selenium.get_text(#{@target}) \nrescue Exception=>e\n    @verification_errors << e\nend"
       when "verifyTextPresent"
         line ="begin\n     assert @selenium.is_text_present(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
       when "verifyTextNotPresent"
         line = "begin\n    assert !@selenium.is_text_present(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
       when "assertText"
-        line = "assert_equal #{@value}, @selenium.get_text(#{@target}).force_encoding('UTF-8') "
+        line = "assert_equal #{@value}, @selenium.get_text(#{@target}).respond_to?(:force_encoding) ? @selenium.get_text(#{@target}).force_encoding('UTF-8') : @selenium.get_text(#{@target}) "
       when "assertTable"
         line = "assert_equal #{@value}, @selenium.get_table(#{@target})"
       when "assertValue"
@@ -289,9 +289,9 @@ class Command < Base
       when "waitForTable"
         line = "assert !60.times{ break if (#{@value} == @selenium.get_table(#{@target}) rescue false); sleep 1 }"
       when "waitForText"
-        line = "assert !60.times{ break if (#{sanitize_for_regexp(@value)} =~ @selenium.get_text(#{@target}).force_encoding('UTF-8')  rescue false); sleep 1 }"
+        line = "assert !60.times{ break if (#{sanitize_for_regexp(@value)} =~ @selenium.get_text(#{@target}).respond_to?(:force_encoding) ? @selenium.get_text(#{@target}).force_encoding('UTF-8') : @selenium.get_text(#{@target})  rescue false); sleep 1 }"
       when "waitForNotText"
-        line = "assert !60.times{ break unless (#{sanitize_for_regexp(@value)} == @selenium.get_text(#{@target}).force_encoding('UTF-8')  rescue false); sleep 1 }"
+        line = "assert !60.times{ break unless (#{sanitize_for_regexp(@value)} == @selenium.get_text(#{@target}).respond_to?(:force_encoding) ? @selenium.get_text(#{@target}).force_encoding('UTF-8') : @selenium.get_text(#{@target})  rescue false); sleep 1 }"
       when "waitForTextPresent"
         line = "assert !60.times{ break if (@selenium.is_text_present(#{@target}) rescue false); sleep 1 }"
       when "waitForTextNotPresent"
@@ -319,7 +319,7 @@ class Command < Base
       when "verifyNotValue"
         line = "begin\n    assert_not_equal #{@value}, @selenium.get_value(#{@target})\nrescue Exception=>e\n        @verification_errors << e\nend"
       when "verifyNotText"
-        line = "begin\n    assert_not_equal #{@value}, @selenium.get_text(#{@target}).force_encoding('UTF-8') \nrescue Exception=>e\n    @verification_errors << e\nend"
+        line = "begin\n    assert_not_equal #{@value}, @selenium.get_text(#{@target}).respond_to?(:force_encoding) ? @selenium.get_text(#{@target}).force_encoding('UTF-8') : @selenium.get_text(#{@target}) \nrescue Exception=>e\n    @verification_errors << e\nend"
       when "store"
         line = "#{@value} = #{@target}"
       when "storeSelectOptions"
@@ -366,7 +366,7 @@ class Command < Base
       when "assertElementNotPresent"
         line = "assert !@selenium.is_element_present(#{@target})"
       when "storeText"
-        line = "#{@value.gsub(/\"/, "")} = @selenium.get_text(#{@target}).force_encoding('UTF-8') "
+        line = "#{@value.gsub(/\"/, "")} = @selenium.get_text(#{@target}).respond_to?(:force_encoding) ? @selenium.get_text(#{@target}).force_encoding('UTF-8') : @selenium.get_text(#{@target}) "
       when "storeValue"
         line = "#{@value.gsub(/\"/, "")} = @selenium.get_value(#{@target})"
       when "verifyNotExpression"
