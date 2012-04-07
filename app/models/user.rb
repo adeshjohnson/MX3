@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   has_many :cs_invoices, :conditions => ["state = 'unpaid'"]
   has_many :all_cs_invoices, :class_name => 'CsInvoice'
   #has_and_belongs_to_many :callshops, :join_table => "usergroups", :association_foreign_key => "group_id"
-  has_many :callshops, :through => :usergroups, :foreign_key => "group_id", :source =>:group
+  has_many :callshops, :through => :usergroups, :foreign_key => "group_id", :source => :group
 
   has_many :providers, :dependent => :destroy
   has_many :terminators, :dependent => :destroy
@@ -1962,11 +1962,11 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def fix_when_is_rendering
-    if User.current
-    balance = balance * User.current.currency.exchange_rate.to_f
-    credit = credit * User.current.currency.exchange_rate.to_f if credit != -1
-    warning_email_balance = warning_email_balance * User.current.currency.exchange_rate.to_f
-      end
+    if User.current  and self
+      self.balance = self.balance.to_f * User.current.currency.exchange_rate.to_f
+      self.credit = self.credit.to_f * User.current.currency.exchange_rate.to_f if credit != -1
+      self.warning_email_balance = self.warning_email_balance.to_f * User.current.currency.exchange_rate.to_f
+    end
   end
 
 
