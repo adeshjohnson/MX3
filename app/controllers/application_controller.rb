@@ -130,7 +130,7 @@ class ApplicationController < ActionController::Base
 
   def set_charset
     headers["Content-Type"] = "text/html; charset=utf-8"
-    session[:flash_not_redirect] = 0 # HACK!!
+    session[:flash_not_redirect] = 0 if session # HACK!!
   end
 
   #def adjust_json_formatting
