@@ -269,7 +269,7 @@ class Command < Base
       when "verifyElementNotPresent"
         line = "begin\n    assert !@selenium.is_element_present(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
       when "verifyValue"
-        line = "begin\n    assert_equal #{@value}, @selenium.get_value(#{@target}).force_encoding('UTF-8') \nrescue Exception=>e\n    @verification_errors << e\nend"
+        line = "begin\n    assert_equal #{@value}, @selenium.get_value(#{@target}).respond_to?(:force_encoding) ? @selenium.get_value(#{@target}).force_encoding('UTF-8') : @selenium.get_value(#{@target}) \nrescue Exception=>e\n    @verification_errors << e\nend"
       when "verifySelectOptions"
         line = "begin\n    assert #{sanitize_for_regexp(@value)} =~ @selenium.get_select_options(#{@target}).join(\",\")\nrescue Exception=>e\n    @verification_errors << e\nend"
       when "verifyNotSelectOptions"
