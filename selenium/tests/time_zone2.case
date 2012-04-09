@@ -93,7 +93,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT-09:00) Alaska</td>
 </tr>
 <tr>
@@ -118,7 +118,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT+07:00) Bangkok, Hanoi, Jakarta, Novosibirsk</td>
 </tr>
 <tr>
@@ -168,7 +168,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT-03:00) Brasilia, Buenos Aires, Greenland</td>
 </tr>
 <tr>
@@ -305,6 +305,71 @@
 	<td>verifyText</td>
 	<td>id=calldate_1</td>
 	<td>2009-01-01 07:00:04</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_hour</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_hour</td>
+	<td>label=23</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_minute</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calldate_1</td>
+	<td>2009-01-01 07:00:04</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=calldate_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=calldate_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=calldate_7</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -465,6 +530,71 @@
 	<td>verifyText</td>
 	<td>id=rec_date_time_1</td>
 	<td>2008-12-31 15:00:04</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_hour</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_hour</td>
+	<td>label=23</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_minute</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rec_date_time_5</td>
+	<td>2009-01-01 15:00:04</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rec_date_time_6</td>
+	<td>2009-01-01 15:00:04</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=rec_date_time_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=rec_date_time_2</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -668,7 +798,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT-04:30) Caracas</td>
 </tr>
 <tr>
@@ -728,7 +858,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT+09:30) Adelaide, Darwin</td>
 </tr>
 <tr>
@@ -813,7 +943,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT-03:30) Newfoundland</td>
 </tr>
 <tr>
@@ -848,7 +978,7 @@
 </tr>
 <tr>
 	<td>verifySelectedLabel</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>(GMT-04:30) Caracas</td>
 </tr>
 <tr>
@@ -858,7 +988,7 @@
 </tr>
 <tr>
 	<td>verifySelectedLabel</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>(GMT+09:30) Adelaide, Darwin</td>
 </tr>
 <tr>
@@ -868,12 +998,12 @@
 </tr>
 <tr>
 	<td>verifySelectedLabel</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>(GMT-03:30) Newfoundland</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT+05:45) Kathmandu</td>
 </tr>
 <tr>
@@ -888,7 +1018,7 @@
 </tr>
 <tr>
 	<td>verifySelectedLabel</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>(GMT+05:45) Kathmandu</td>
 </tr>
 </tbody></table>
