@@ -1,0 +1,94 @@
+<script type="text/javascript">
+    //=========================== Active Device Markers ===========================
+    function addActiveDeviceMarker(val1, val2, info) {
+        var myLatlng1 = new google.maps.LatLng(val1, val2);
+        var image = '../assets/icons/device_active.png';
+
+        var marker = new google.maps.Marker({
+            position:myLatlng1,
+            clickable:true,
+            icon:image,
+            map:map
+        });
+        marker.mycategory = "active_devices";
+        active_markers.push(marker);
+
+        google.maps.event.addListener(marker, 'click', function () {
+            infowindow.close();
+            infowindow = new google.maps.InfoWindow({
+                content:unescape(info)
+            });
+            infowindow.open(map, marker);
+        });
+    }
+    //=========================== Destinations Markers ===========================
+    function addDestinationMarker(val1, val2, info) {
+        var myLatlng2 = new google.maps.LatLng(val1, val2);
+
+        var marker1 = new google.maps.Marker({
+            position:myLatlng2,
+            clickable:true,
+            map:map
+        });
+
+        marker1.mycategory = "destinations";
+        active_markers.push(marker1);
+
+        google.maps.event.addListener(marker1, 'click', function () {
+            infowindow.close();
+            infowindow = new google.maps.InfoWindow({
+                content:unescape(info)
+            });
+            infowindow.open(map, marker1);
+        });
+    }
+    //================================= Show/Hide =================================
+    function show_active(category) {
+        for (var i = 0; i < active_markers.length; i++) {
+            if (active_markers[i].mycategory == category) {
+                active_markers[i].setVisible(true);
+            }
+        }
+    }
+    function hide_active(category) {
+        for (var i = 0; i < active_markers.length; i++) {
+            if (active_markers[i].mycategory == category) {
+                active_markers[i].setMap(null);
+                var old_length = active_markers.length;
+                active_markers.splice(active_markers.indexOf(active_markers[i]), 1);
+                if (old_length > active_markers.length) {
+                    i--;
+                }
+            }
+        }
+        for (var i = 0; i < lines_array.length; i++) {
+            lines_array[i].setMap(null);
+        }
+        lines_array = [];
+        infowindow.close();
+
+    }
+    //=============================================================================
+
+    function boxclick_active(box, category) {
+        hide_active('destinations');
+        hide_active(category);
+        if (box == 1) {
+            show_active(category);
+            document.getElementById('devices_box').style.display = 'none';
+            boxclick(0, 'devices');
+            document.getElementById('servers_box').style.display = 'none';
+            boxclick(0, 'servers');
+            document.getElementById('providers_box').style.display = 'none';
+            boxclick(0, 'providers');
+        } else {
+            document.getElementById('devices_box').style.display = 'block';
+            boxclick(1, 'devices');
+            document.getElementById('servers_box').style.display = 'block';
+            boxclick(1, 'servers');
+            document.getElementById('providers_box').style.display = 'block';
+            boxclick(1, 'providers');
+        }
+    }
+
+</script>

@@ -742,7 +742,7 @@ module ApplicationHelper
     d = b_virtual_device if device.device_type == "Virtual"
     d = b_skype if device.device_type == "Skype"
     d = b_provider if provider
-    d
+    d.html_safe
   end
 
   def nice_device_type(device, options = {})
@@ -753,7 +753,7 @@ module ApplicationHelper
     d = []
     d << nice_device_pic(device) if opts[:image] == true
     d << print_tech(device.device_type) if opts[:tech] == true
-    d.join("\n")
+    d.join("\n").html_safe
   end
 
 
@@ -805,7 +805,7 @@ module ApplicationHelper
 
   def link_nice_device(device)
     if device.user_id != -1
-      link_to nice_device(device), :controller => "devices", :action => "device_edit", :id => device.id
+      raw link_to nice_device(device).html_safe, :controller => "devices", :action => "device_edit", :id => device.id
     else
 
       provider = device.provider
@@ -868,7 +868,7 @@ module ApplicationHelper
   end
 
   def link_nice_user(user, options = {})
-    link_to nice_user(user), {:controller => "users", :action => "edit", :id => user.id}.merge(options)
+    raw link_to nice_user(user).html_safe, {:controller => "users", :action => "edit", :id => user.id}.merge(options)
   end
 
   def link_user_gray(user, options = {})

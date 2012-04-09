@@ -3123,66 +3123,18 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @page_title = _('Google_Maps')
     @page_icon = "world.png"
 
-    @devices = Device.find(
-        :all,
-        :include => :user,
-        :conditions => "ipaddr > 0 AND ipaddr != '0.0.0.0' AND user_id > -1
+    @devices = Device.includes(:user).where("name NOT LIKE 'mor_server%' AND ipaddr > 0 AND ipaddr != '0.0.0.0' AND user_id > -1
     AND '192.168.' != SUBSTRING(ipaddr, 1, LENGTH('192.168.'))
     AND '10.' != SUBSTRING(ipaddr, 1, LENGTH('10.'))
     AND ((CAST(SUBSTRING(ipaddr, 1,6) AS DECIMAL(6,3)) > 172.31)
-    or (CAST(SUBSTRING(ipaddr, 1,6) AS DECIMAL(6,3)) < 172.16))")
-    @providers = Provider.find(:all, :conditions => "server_ip > 0 AND server_ip != '0.0.0.0' AND hidden = 0")
-    @servers = Server.find(:all, :conditions => "server_ip > 0 AND server_ip != '0.0.0.0'")
-    @map = GMap.new("map")
-    @map.control_init(:large_map => true, :map_type => true)
-    @map.record_init @map.enableScrollWheelZoom();
-
-
-    @dev_icon = GIcon.new(:image => Web_Dir + "/images/icons/device.png", :icon_size => GSize.new(16, 16), :icon_anchor => GPoint.new(7, 7), :info_window_anchor => GPoint.new(9, 2))
-    @pro_icon = GIcon.new(:image => Web_Dir + "/images/icons/provider.png", :icon_size => GSize.new(16, 16), :icon_anchor => GPoint.new(7, 7), :info_window_anchor => GPoint.new(9, 2))
-    @ser_icon = GIcon.new(:image => Web_Dir + "/images/icons/server.png", :icon_size => GSize.new(16, 16), :icon_anchor => GPoint.new(7, 7), :info_window_anchor => GPoint.new(9, 2))
-    #@map.icon_global_init(,:info_window_anchor => GPoint.new(16,0)),"device")
-    @map.center_zoom_init([0, 0], 2)
-
-    #    clusterer = Clusterer.new([],:max_visible_markers => 150)
-    #    @map.overlay_global_init clusterer, "clusterer"
-
-
+    or (CAST(SUBSTRING(ipaddr, 1,6) AS DECIMAL(6,3)) < 172.16))").all
+    @providers = Provider.where("server_ip > 0 AND server_ip != '0.0.0.0' AND hidden = 0").all
+    @servers = Server.where("server_ip > 0 AND server_ip != '0.0.0.0'").all
     session[:google_active] = 0
-    session[:google_devices] = 1
-    session[:google_providers] = 1
-    session[:google_server] = 1
-    session[:google_active_activated] = 0
-    render :layout => "mor_min" if Confline.get_value("Google_Fullscreen").to_i == 1
-  end
-
-  def google_remove
-    if params[:type]== "devices"
-      session[:google_devices]= (session[:google_devices].to_i + 1) %2
-    end
-    if params[:type]== "providers"
-      session[:google_providers]= (session[:google_providers].to_i + 1) %2
-    end
-    if params[:type]== "servers"
-      session[:google_servers]= (session[:google_servers].to_i + 1) %2
-    end
-    if params[:type]== "active"
-      session[:google_active]= (session[:google_active].to_i + 1) %2
-      if session[:google_active] == 0
-        @non_active = 1
-      end
-    end
-    render :layout => false
   end
 
   def google_active
-    if session[:google_active]==1
-      @calls = Activecall.find(:all, :include => [:provider])
-      @pro_icon = GIcon.new(:image => Web_Dir+"/images/icons/provider.png", :icon_size => GSize.new(16, 16), :icon_anchor => GPoint.new(7, 7), :info_window_anchor => GPoint.new(9, 2))
-      @ser_icon = GIcon.new(:image => Web_Dir+"/images/icons/server.png", :icon_size => GSize.new(16, 16), :icon_anchor => GPoint.new(7, 7), :info_window_anchor => GPoint.new(9, 2))
-      @act_icon = GIcon.new(:image => Web_Dir+"/images/icons/device_active.png", :icon_size => GSize.new(16, 16), :icon_anchor => GPoint.new(7, 7), :info_window_anchor => GPoint.new(9, 2))
-    end
-    render :layout => false
+    @calls = Activecall.includes(:provider).all
   end
 
   def hangup_cause_codes_stats
