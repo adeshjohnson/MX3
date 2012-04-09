@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.163" />
+<link rel="selenium.base" href="" />
 <title>New Test</title>
 </head>
 <body>
@@ -239,7 +239,7 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>sreseller_menu28</td>
+	<td>sreseller_menu30</td>
 	<td>Call Stats</td>
 </tr>
 <tr>
@@ -434,7 +434,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
 	<td></td>
 </tr>
 <!--reseller with own provider-->
@@ -466,7 +471,7 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>sreseller_menu39</td>
+	<td>sreseller_menu41</td>
 	<td>Call Stats</td>
 </tr>
 <tr>
@@ -513,11 +518,6 @@
 	<td>verifyText</td>
 	<td>total_calls</td>
 	<td>4</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=user_1</td>
-	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -601,7 +601,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>tariff[purpose]_provider</td>
+	<td>tariff_purpose_provider</td>
 	<td></td>
 </tr>
 <tr>

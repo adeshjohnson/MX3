@@ -1003,8 +1003,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>You are not authorized to view this page</td>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
@@ -1272,15 +1272,15 @@
 </tr>
 <!--* one bought card should display number-->
 <tr>
-	<td>verifyText</td>
-	<td>user_10</td>
+	<td>assertText</td>
+	<td>id=user_1</td>
 	<td>1111111000 (7856)</td>
 </tr>
 <!--* several bought cards should show that it was a batch sale-->
 <tr>
-	<td>verifyText</td>
-	<td>user_13</td>
+	<td>assertTextNotPresent</td>
 	<td>Batch Card sale</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
