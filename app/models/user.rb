@@ -2369,15 +2369,15 @@ GROUP BY terminators.id;").map { |t| t.id }
 
     #provider = params[:provider].to_i
 
-    tax = Tax.new(tax_from_params)
-    tax.save
+    #self.tax = Tax.new(tax_from_params)
+    #self.tax.save
 
-    unless tax
-      assign_default_tax
+    unless self.tax
+      self.assign_default_tax
     end
 
-    tax.update_attributes(tax_from_params)
-    tax.save
+    self.tax.update_attributes(tax_from_params)
+    self.tax.save
 
     if is_reseller?
       if api == 1
