@@ -111,7 +111,7 @@
   </div>
 <% end %>
 
-<% if mor_11_extend? %>
+<% if mor_11_extend? and @lcr.no_failover? %>
   <%= _('Failover_provider') %>: <%= @lcr.failover_provider ? @lcr.failover_provider.name : _('Do_not_use') %>
 
   <%= form_tag(:action => 'try_to_add_failover_provider', :id => @lcr) do %>
