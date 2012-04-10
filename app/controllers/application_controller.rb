@@ -117,14 +117,14 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     User.current = current_user
-    logger.fatal session[:time_zone_offset].to_i
+    #logger.fatal session[:time_zone_offset].to_i
     User.system_time_offset = session[:time_zone_offset].to_i
   end
 
   def set_timezone
     if current_user
-      logger.fatal current_user.user_time(Time.now)
-      logger.fatal current_user.system_time(current_user.user_time(Time.now))
+      #logger.fatal current_user.user_time(Time.now)
+      #logger.fatal current_user.system_time(current_user.user_time(Time.now))
     end
   end
 
@@ -303,7 +303,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize
-    logger.fatal session.to_yaml
+   # logger.fatal session.to_yaml
     if session[:usertype].to_s != "admin" #or session[:usertype].to_s != "accountant"
       c = controller_name.to_s.gsub(/"|'|\\/, '')
       a = action_name.to_s.gsub(/"|'|\\/, '')
@@ -1550,7 +1550,7 @@ class ApplicationController < ActionController::Base
       # logger.fatal "ddddddddddddddddddddddddddddddd"
       session[:time_zone_offset] = Confline.get_value('System_time_zone_ofset').to_i
     end
-    logger.fatal session[:time_zone_offset].to_i
+    #logger.fatal session[:time_zone_offset].to_i
 
     ["Hide_Iwantto", "Hide_Manual_Link"].each { |option|
       session[option.downcase.to_sym] = Confline.get_value(option).to_i
@@ -2322,7 +2322,7 @@ Variables: (Names marked with * are required)
   end
 
   def check_owner_for_device(user, r = 1, cu =nil)
-    logger.fatal r
+    #logger.fatal r
     a = true
     if user.class != User
       user = User.find_by_id(user)
@@ -2361,7 +2361,7 @@ Variables: (Names marked with * are required)
         end
       end
     end
-    logger.fatal a
+    #logger.fatal a
     return a
   end
 

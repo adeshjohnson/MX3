@@ -1736,7 +1736,6 @@ class User < ActiveRecord::Base
   end
 
   def safe_attributtes(params, id)
-    logger.fatal params[:time_zone]
     if ['reseller', 'user'].include?(usertype)
       allow_params = [:time_zone, :spy_device_id, :currency_id, :password, :warning_email_balance, :warning_email_hour, :first_name, :last_name, :clientid, :taxation_country, :vat_number, :acc_group_id]
       allow_params += [:accounting_number, :generate_invoice, :username, :tariff_id, :postpaid, :call_limit, :blocked, :agreement_number, :language, :warning_balance_sound_file_id, :warning_balance_call, :quickforwards_rule_id] if usertype == 'reseller' and id.to_i != id.to_i
@@ -3232,12 +3231,6 @@ GROUP BY terminators.id;").map { |t| t.id }
       exchange_rate = Currency.count_exchange_rate(Currency.get_default.name, currency.name)
       amount *= exchange_rate
       tax_amount = get_tax.count_tax_amount(amount)
-      logger.fatal 'bbbbbbbbbbbbbbbbbbbbbbbbbbb'
-      logger.fatal currency.name
-      logger.fatal Currency.get_default.name
-      logger.fatal exchange_rate
-      logger.fatal amount
-      logger.fatal tax_amount
       payment = Payment.create_for_user(self, {:paymenttype => 'Manual', :amount => amount, :tax => tax_amount, :shipped_at => Time.now, :date_added => Time.now, :completed => 1, :currency => currency.name})
       if payment.save
         return true
