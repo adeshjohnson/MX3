@@ -1269,6 +1269,7 @@ class User < ActiveRecord::Base
     else
       new_tax = Tax.new(taxs)
     end
+    logger.fatal new_tax.to_yaml
     new_tax.save if options[:save] == true
     self.tax_id = new_tax.id
     self.save if options[:save] == true
@@ -2368,7 +2369,8 @@ GROUP BY terminators.id;").map { |t| t.id }
 
     #provider = params[:provider].to_i
 
-    tax = Tax.create(tax_from_params)
+    tax = Tax.new(tax_from_params)
+    tax.save
 
     unless tax
       assign_default_tax
