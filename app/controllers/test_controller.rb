@@ -93,10 +93,11 @@ class TestController < ApplicationController
   end
 
   def load_delta_sql
-    #MorLog.my_debug(params[:path])
-    #MorLog.my_debug(params[:path].join("/"))
-    #MorLog.my_debug(File.exist?("#{Rails.root}/config/routes.rb"))
+    MorLog.my_debug(params[:path])
+    MorLog.my_debug(params[:path].join("/"))
+    MorLog.my_debug(File.exist?("#{Rails.root}/config/routes.rb"))
     filename = "#{Rails.root}/selenium/tests/#{params[:path].to_s.gsub(/[^A-Za-z_\/]/, "")}.sql"
+    MorLog.my_debug(filename)
     if File.exist?(filename)
       command = "mysql -u mor -pmor mor < #{filename}"
       MorLog.my_debug(command)
