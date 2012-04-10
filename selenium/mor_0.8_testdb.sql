@@ -119,3 +119,5 @@ INSERT INTO `actions`
 (`id`, `user_id`, `date`,               `action`,   `data`, `data2`, `processed`, `target_type`, `target_id`, `data3`, `data4`) VALUES
 (1,    0,         '2010-01-01 00:00:01','test_time','',     '',      0,           'user',        0,           NULL,    NULL),
 (2,    0,         '2010-01-01 23:59:58','test_time','',     '',      0,           'user',        0,           NULL,    NULL);
+
+update servers set active=0;
