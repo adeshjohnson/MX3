@@ -3230,7 +3230,9 @@ GROUP BY terminators.id;").map { |t| t.id }
     if self.save
       exchange_rate = Currency.count_exchange_rate(Currency.get_default.name, currency.name)
       amount *= exchange_rate
+      logger.fatal      amount
       tax_amount = self.get_tax.count_tax_amount(amount)
+      logger.fatal    tax_amount
       payment = Payment.create_for_user(self, {:paymenttype => 'Manual', :amount => amount, :tax => tax_amount, :shipped_at => Time.now, :date_added => Time.now, :completed => 1, :currency => currency.name})
       if payment.save
         return true
