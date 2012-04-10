@@ -15,7 +15,7 @@
       <td id="activation_start_<%= sub.id %>" align="center"> <%= nice_date_time sub.activation_start %> </td>
       <td id="activation_end_<%= sub.id %>" align="center"> <%= nice_date_time sub.activation_end %> </td>
       <td id="time_left_<%= sub.id %>" align="right"> <%= sub.time_left if sub.service.servicetype == "flat_rate" %></td>
-      <td id="price_<%= sub.id %>" align="right"> <%= nice_number sub.service.price %> <%= session[:default_currency] %></td>
+      <td id="price_<%= sub.id %>" align="right"> <%= nice_number sub.service.price %> <%= current_user.currency.name %></td>
     </tr>
   <% } %>
 </table>
