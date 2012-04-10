@@ -8,7 +8,7 @@ if @calls
       loc = Iplocation.new
     end
     if loc.longitude == 0 and loc.latitude == 0
-      loc = Iplocation.get_location(Server.find(:first, :conditions => "server_id = 1").server_ip)
+      loc = Iplocation.get_location(Server.where("server_id = 1").first.server_ip)
     end
     loc2 = Iplocation.get_location(call.prefix, 1)
 

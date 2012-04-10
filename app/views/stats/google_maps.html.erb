@@ -39,40 +39,44 @@
 
     <%#*================== Generate Server Markers ==================%>
 
-    <%
-      arr2 = Array.new
-      for server in @servers do
-        loc =Iplocation.get_location(server.server_ip)
-        if loc.longitude != 0 and loc.latitude != 0
-          tool_tip  = '<img alt="Server" src="'+Web_Dir+'/assets/icons/server.png" title="Server" />'
-          tool_tip += "<br />Host: "+server.hostname if server.hostname
-          tool_tip += "<br />IP: "+loc.ip if loc.ip
-          tool_tip += "<br />Country: "+loc.country if loc.country
-          arr2 << "google.maps.event.addListener(map, 'tilesloaded', addServerMarker(#{loc.latitude}, #{loc.longitude}, escape('#{tool_tip.gsub(/\n/, "<br />").html_safe}')));"
-        end
-      end
-    %>
-    <% for i in arr2 do%>
-    <%= raw i %>
+    <% if session[:usertype] == "admin" %>
+        <%
+          arr2 = Array.new
+          for server in @servers do
+            loc =Iplocation.get_location(server.server_ip)
+            if loc.longitude != 0 and loc.latitude != 0
+              tool_tip  = '<img alt="Server" src="'+Web_Dir+'/assets/icons/server.png" title="Server" />'
+              tool_tip += "<br />Host: "+server.hostname if server.hostname
+              tool_tip += "<br />IP: "+loc.ip if loc.ip
+              tool_tip += "<br />Country: "+loc.country if loc.country
+              arr2 << "google.maps.event.addListener(map, 'tilesloaded', addServerMarker(#{loc.latitude}, #{loc.longitude}, escape('#{tool_tip.gsub(/\n/, "<br />").html_safe}')));"
+            end
+          end
+        %>
+        <% for i in arr2 do%>
+        <%= raw i %>
+        <% end %>
     <% end %>
 
     <%#*================== Generate Provider Markers ==================%>
 
-    <%
-      arr3 = Array.new
-      for provider in @providers do
-        loc =Iplocation.get_location(provider.server_ip)
-        if loc.longitude != 0 and loc.latitude != 0
-          tool_tip  = '<img alt="Provider" src="'+Web_Dir+'/assets/icons/provider.png" title="Provider" />'
-          tool_tip += "<br />Name: "+provider.name
-          tool_tip += "<br />IP: "+loc.ip if loc.ip
-          tool_tip += "<br />Country: "+loc.country if loc.country
-          arr3 << "google.maps.event.addListener(map, 'tilesloaded', addProviderMarker(#{loc.latitude}, #{loc.longitude}, escape('#{tool_tip.gsub(/\n/, "<br />").html_safe}')));"
-        end
-      end
-    %>
-    <% for i in arr3 do%>
-    <%= raw i %>
+    <% if allow_manage_providers? %>
+        <%
+          arr3 = Array.new
+          for provider in @providers do
+            loc =Iplocation.get_location(provider.server_ip)
+            if loc.longitude != 0 and loc.latitude != 0
+              tool_tip  = '<img alt="Provider" src="'+Web_Dir+'/assets/icons/provider.png" title="Provider" />'
+              tool_tip += "<br />Name: "+provider.name
+              tool_tip += "<br />IP: "+loc.ip if loc.ip
+              tool_tip += "<br />Country: "+loc.country if loc.country
+              arr3 << "google.maps.event.addListener(map, 'tilesloaded', addProviderMarker(#{loc.latitude}, #{loc.longitude}, escape('#{tool_tip.gsub(/\n/, "<br />").html_safe}')));"
+            end
+          end
+        %>
+        <% for i in arr3 do%>
+        <%= raw i %>
+        <% end %>
     <% end %>
 
     <%#*=============================================================%>
@@ -258,30 +262,35 @@
         <label class="checkboxLabel">Show devices</label>
       </div>
 
-      <div class="checkboxContainer" onclick="(document.getElementById('servers_box').style.display == 'block') ? document.getElementById('servers_box').style.display = 'none' : document.getElementById('servers_box').style.display = 'block' , boxclick(((document.getElementById('servers_box').style.display == 'block') ? 1 : 0),'servers');">
-              <span role="checkbox" class="checkboxSpan ">
-                <div class="blankDiv" id="servers_box" style="display: block">
-                  <img class="blankImg" src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"/>
-                </div>
-              </span>
-        <label class="checkboxLabel">Show servers</label>
-      </div>
 
-      <div class="checkboxContainer" onclick="(document.getElementById('providers_box').style.display == 'block') ? document.getElementById('providers_box').style.display = 'none' : document.getElementById('providers_box').style.display = 'block' , boxclick(((document.getElementById('providers_box').style.display == 'block') ? 1 : 0),'providers');">
-              <span role="checkbox" class="checkboxSpan ">
-                <div class="blankDiv" id="providers_box" style="display: block">
-                  <img class="blankImg" src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"/>
-                </div>
-              </span>
-        <label class="checkboxLabel">Show providers</label>
-      </div>
+      <% if session[:usertype] == "admin" %>
+          <div class="checkboxContainer" onclick="(document.getElementById('servers_box').style.display == 'block') ? document.getElementById('servers_box').style.display = 'none' : document.getElementById('servers_box').style.display = 'block' , boxclick(((document.getElementById('servers_box').style.display == 'block') ? 1 : 0),'servers');">
+                  <span role="checkbox" class="checkboxSpan ">
+                    <div class="blankDiv" id="servers_box" style="display: block">
+                      <img class="blankImg" src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"/>
+                    </div>
+                  </span>
+            <label class="checkboxLabel">Show servers</label>
+          </div>
+      <% end %>
 
+
+      <% if allow_manage_providers? %>
+          <div class="checkboxContainer" onclick="(document.getElementById('providers_box').style.display == 'block') ? document.getElementById('providers_box').style.display = 'none' : document.getElementById('providers_box').style.display = 'block' , boxclick(((document.getElementById('providers_box').style.display == 'block') ? 1 : 0),'providers');">
+                  <span role="checkbox" class="checkboxSpan ">
+                    <div class="blankDiv" id="providers_box" style="display: block">
+                      <img class="blankImg" src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"/>
+                    </div>
+                  </span>
+            <label class="checkboxLabel">Show providers</label>
+          </div>
+      <% end %>
     </div>
   </div>
 </div>
 <br/>
 </body>
-<img id="icon_info_gmaps" src="<%=Web_Dir%>/assets/icons/information.png" title="Info">
+<img id="icon_info_gmaps" src="<%= Web_Dir %>/assets/icons/information.png" title="Info">
 <a id="info_google_maps_link" href="http://wiki.kolmisoft.com/index.php/Google_Maps_integration" target="_blank"><%= _('click_here_for_more_information') %></a>.
 <br/>
 <script type="text/javascript">

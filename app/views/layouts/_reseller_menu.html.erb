@@ -64,6 +64,7 @@
   <% end %>
 <%##3396%>
   reseller_menu.add(85,80,'<%= _('Call_Stats') %>','<%= Web_Dir %>/stats/show_user_stats');
+  reseller_menu.add(90,0,'<%= _('Google_maps') %>','<%= Web_Dir %>/stats/google_maps');
 
   <%
   sms = (sms_active? and ((session[:sms_service_active].to_i == 1) or (session[:res_sms_addon].to_i == 2)))
