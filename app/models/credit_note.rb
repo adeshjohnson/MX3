@@ -164,7 +164,7 @@ class CreditNote < ActiveRecord::Base
   def user=(user)
     if self.user_id != user.id
       self.user_id = user.id
-      @tax = user.get_tax.clone # this is nasty but could not figure out how to do it the right way
+      @tax = user.get_tax.dup # this is nasty but could not figure out how to do it the right way
       @tax.save
       self.tax_id = @tax.id
       self.price_with_vat = calculate_price_with_vat

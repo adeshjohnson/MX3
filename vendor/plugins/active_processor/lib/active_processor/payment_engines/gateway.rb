@@ -49,12 +49,12 @@ module ActiveProcessor
         @payment.amount = (@payment.money + @payment.tax).ceil
 
         # we choose only those fields for authentication which have attribute for=authentication in configuration
-        @fields['config'].clone.delete_if{ |item, conf| conf['for'] != "authentication" }.each {|field, configuration|
+        @fields['config'].dup.delete_if{ |item, conf| conf['for'] != "authentication" }.each {|field, configuration|
           @payment.auth_config[field.to_sym] = configuration['html_options']['value']
         }
         @payment.auth_config[:test] = true if @fields['config']['test']['html_options']['value'] == "1"
         gw = @instance.new(@payment.auth_config)
-        @fields['form'].clone.delete_if{ |field, conf| conf['for'] != "authorization" }.each_pair{ |field, config|
+        @fields['form'].dup.delete_if{ |field, conf| conf['for'] != "authorization" }.each_pair{ |field, config|
           field.match(/^(.*)\[(.*)\]$/)
           @payment.authorize.deep_merge!({ $1.to_sym => { $2.to_sym => params[@engine][@name][$1][$2] } })
         }

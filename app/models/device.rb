@@ -876,7 +876,7 @@ class Device < ActiveRecord::Base
           end
         }
 
-        params =  current_user.sanitize_device_params_by_accountant_permissions(s, params, self.clone)
+        params =  current_user.sanitize_device_params_by_accountant_permissions(s, params, self.dup)
       else
         s[:acc_device_create] = 0
       end

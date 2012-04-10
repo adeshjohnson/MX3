@@ -63,7 +63,7 @@ class CallshopController < ApplicationController
     @user = @invoice.user
     @old_invoice = @user.cs_invoices.first
     unless @old_invoice
-      tax = @user.get_tax.clone
+      tax = @user.get_tax.dup
       tax.save
       @invoice.tax_id = tax.id
       @invoice.balance_with_tax = params[:invoice][:balance].to_f

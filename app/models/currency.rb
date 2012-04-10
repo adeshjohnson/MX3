@@ -63,7 +63,7 @@ class Currency < ActiveRecord::Base
     begin
       transaction do
         old_curr = Currency.get_default
-        temp_curr = old_curr.clone
+        temp_curr = old_curr.dup
         old_curr.name = self.name
         old_curr.full_name= self.full_name
         old_curr.exchange_rate = 1

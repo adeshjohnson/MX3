@@ -85,7 +85,7 @@ class LcrsController < ApplicationController
     @page_title = _('LCR_edit')
     @page_icon = "edit.png"
 
-    @old_lcr = @lcr.clone
+    @old_lcr = @lcr.dup
     @lcr.no_failover = params[:lcr][:no_failover].to_i
     if @lcr.update_attributes(params[:lcr].reject { |k, v| k == 'user_id' })
       if  @old_lcr.order != @lcr.order and @lcr.order == "priority"
@@ -435,7 +435,7 @@ class LcrsController < ApplicationController
         selected_lcrs = params[:lcr].map { |key, value| key.to_i }
         selected_lcrs.reject! { |lcr_id| lcr_id == 0 }
         if selected_lcrs.size > 0
-          if Lcr.clone_lcrs(resellerA[0], resellerB[0], selected_lcrs)
+          if Lcr.dup_lcrs(resellerA[0], resellerB[0], selected_lcrs)
             flash[:status] = _('Selecte_LCRs_cloned')
           else
             flash[:notice] = _("Failed_to_clone_LCR's")
@@ -499,16 +499,16 @@ class LcrsController < ApplicationController
 
   def lcr_clone
     if mor_11_extend?
-      ln = @lcr.clone
+      ln = @lcr.dup
       ln.name = 'Clone: ' + ln.name + ' ' + Time.now.to_s(:db)
       if ln.save
         for p in @lcr.lcrproviders
-          pn = p.clone
+          pn = p.dup
           pn.lcr_id = ln.id
           pn.save
         end
         for l in @lcr.lcr_partials
-          lp = l.clone
+          lp = l.dup
           lp.lcr_id = ln.id
           lp.save
         end

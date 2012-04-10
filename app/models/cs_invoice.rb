@@ -32,7 +32,7 @@ class CsInvoice < ActiveRecord::Base
   end
 
   def cs_before_create
-    tax = user.get_tax.clone
+    tax = user.get_tax.dup
     tax.save
     self.tax_id = tax.id
   end

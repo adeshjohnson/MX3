@@ -106,7 +106,7 @@ begin
 
     def Call.make_inserts(new_provider_id)
       names = Call.column_names
-      n2 = names.clone
+      n2 = names.dup
       names.each_with_index { |n, id|
         i= 0
         if n == 'provider_price'

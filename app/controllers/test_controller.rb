@@ -6,7 +6,7 @@ class TestController < ApplicationController
     #    opts = {}
     #    params[:tax] ? opts[:tax] = params[:tax] : opts[:tax] = false
     #    params[:address] ? opts[:address] = params[:address] : opts[:address] = false
-    user = User.find(:first, :order => "id desc").clone
+    user = User.find(:first, :order => "id desc").dup
     user.username = user.username.to_s + "no_adr"
     user.tax_id = 999999
     user.address_id = nil

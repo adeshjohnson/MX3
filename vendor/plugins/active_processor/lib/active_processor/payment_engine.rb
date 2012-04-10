@@ -127,7 +127,7 @@ module ActiveProcessor
       custom_fields ||= {}
       ['config','form'].each { |scope|
         if config.has_key?(scope.to_s)
-          result = config[scope.to_s]['fields'].clone
+          result = config[scope.to_s]['fields'].dup
 
           if config[scope.to_s].has_key?('excludes')
             # delete the unnecessary default fields

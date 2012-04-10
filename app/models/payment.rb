@@ -137,7 +137,7 @@ class Payment < ActiveRecord::Base
   def paypal_refund_payment(notify, user)
     # create new reverse payment
     MorLog.my_debug('Paypal reverse', true)
-    refund_payment = self.clone
+    refund_payment = self.dup
     refund_payment.fee = notify.fee.to_f
     refund_payment.amount = notify.gross.to_f
     refund_payment.gross = notify.gross.to_f - notify.tax.to_f
@@ -165,7 +165,7 @@ class Payment < ActiveRecord::Base
       user.balance += sprintf("%.2f", refund_payment.gross * Currency.count_exchange_rate(refund_payment.currency, Currency.find(1).name)).to_f
       if refund_payment.fee.to_f != 0.0 and Confline.get_value("PayPal_User_Pays_Transfer_Fee", 0).to_i == 1
         user.balance -= sprintf("%.2f", refund_payment.fee * Currency.count_exchange_rate(refund_payment.currency, Currency.find(1).name)).to_f
-        fee_payment = refund_payment.clone
+        fee_payment = refund_payment.dup
         fee_payment.paymenttype = "paypal_reversed_fee"
         fee_payment.fee = 0
         fee_payment.shipped_at = Time.now

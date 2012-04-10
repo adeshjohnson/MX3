@@ -143,7 +143,7 @@ class ServersController < ApplicationController
 
   def server_update
     @servers = Server.find(:all)
-    server_old = @server.clone
+    server_old = @server.dup
 
     @server_providers = Serverprovider.find(:all, :conditions=>["server_id=?", @server.server_id])
 

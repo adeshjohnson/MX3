@@ -1264,7 +1264,7 @@ class User < ActiveRecord::Base
       if owner_id == 0
         new_tax = Confline.get_default_tax(0)
       else
-        new_tax = User.find_by_id(owner_id).get_tax.clone
+        new_tax = User.find_by_id(owner_id).get_tax.dup
       end
     else
       new_tax = Tax.new(taxs)
@@ -2207,7 +2207,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def update_from_edit(params, current_user, tax_from_params, monitoring_a, rec_a, api = 0)
-    user_old = clone
+    user_old = self.dup
 
     if api == 1
       invoice = 0
@@ -2608,7 +2608,7 @@ GROUP BY terminators.id;").map { |t| t.id }
         end
       }
 
-      params = current_user.sanitize_user_params_by_accountant_permissions(s, params, clone)
+      params = current_user.sanitize_user_params_by_accountant_permissions(s, params, self.dup)
       #'user[warning_balance_call]', 'user[generate_invoice]', 'privacy[global]',
     end
 

@@ -432,13 +432,13 @@ def mainloop
 
           if type == 'action'
             @action_events.synchronize do
-              @action_events << event.clone
+              @action_events << event.dup
               event.clear
               @action_events_pending.signal
             end
           elsif type == 'state'
             @state_events.synchronize do
-              @state_events << event.clone
+              @state_events << event.dup
               if @state_events.size >= @event_cache
                 @state_events.shift
               end
@@ -517,7 +517,7 @@ def find_events(key=nil,value=nil)
       return found
     else
       @state_events_pending.wait_while {@state_events.empty?}
-      @state_events.clone.each do |e|
+      @state_events.dup.each do |e|
         if key == 'any' and e.to_s =~/#{value}/
           found.push(e)
           @state_events.delete(e)
@@ -539,7 +539,7 @@ def get_events
       return found
     else
       @state_events_pending.wait_while {@state_events.empty?}
-      @state_events.clone.each do |e|
+      @state_events.dup.each do |e|
         found.push(e)
       end
       @state_events.clear
@@ -575,7 +575,7 @@ def send_action(action=nil,t=3)
     while finished == 0
       @action_events.synchronize do
         @action_events_pending.wait_while {@action_events.empty?}
-        @action_events.clone.each do |e|
+        @action_events.dup.each do |e|
 
           ## Action responses that contain an ActionID
           if e['ActionID'].to_s == sent_id
@@ -714,7 +714,7 @@ def send_action(action=nil,t=3)
                 while eventfinished == 0
                   @state_events.synchronize do
                     @state_events_pending.wait_while {@state_events.empty?}
-                    @state_events.clone.each do |s|
+                    @state_events.dup.each do |s|
                       if s['Channel'] =~/#{action['Channel']}/ and (s['Event'] == 'Hangup' or s['Event'] == 'OriginateFailed')
                         @state_events.delete(s)
                         result << s

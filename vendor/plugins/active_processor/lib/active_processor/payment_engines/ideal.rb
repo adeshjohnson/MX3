@@ -193,7 +193,7 @@ module ActiveProcessor
         user.balance += payment.amount.to_f * exchange_rate
         if get(:config, "transaction_fee_enabled").to_i == 1
           fee = get(:config, "transaction_fee_amount").to_f
-          fee_payment = payment.clone
+          fee_payment = payment.dup
           fee_payment.attributes = {:paymenttype => "ideal_ideal_fee", :fee => 0, :tax => 0, :shipped_at => Time.now,
             :completed => 1, :pending_reason => "Completed", :amount => fee*-1, :gross => fee*-1}
           fee_payment.save

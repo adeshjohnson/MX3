@@ -265,7 +265,7 @@ class DevicesController < ApplicationController
     change_opt_4 = !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_4].to_i != 2)
 
     return false unless check_owner_for_device(@device.user)
-    @device_old = @device.clone
+    @device_old = @device.dup
 
     @device.set_old_name
     params[:device][:description]=params[:device][:description].to_s.strip
@@ -585,7 +585,7 @@ class DevicesController < ApplicationController
       MorLog.my_debug "ddddddddddddddddddddddddd"
       if @device.save
         # --------------- VM -------------
-        old_vm = (vm = @device.voicemail_box).clone
+        old_vm = (vm = @device.voicemail_box).dup
 
         vm.email = params[:vm_email] if params[:vm_email]
         if !(session[:usertype] == "accountant" and session[:acc_voicemail_password].to_i != 2)

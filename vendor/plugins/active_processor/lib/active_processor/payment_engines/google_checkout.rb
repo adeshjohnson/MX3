@@ -108,7 +108,7 @@ module ActiveProcessor
 
         auth_config = {}
         # we choose only those fields for authentication which have attribute for=authentication in configuration
-        @fields['config'].clone.delete_if{ |item, conf| conf['for'] != "authentication" }.each {|field, configuration|
+        @fields['config'].dup.delete_if{ |item, conf| conf['for'] != "authentication" }.each {|field, configuration|
           auth_config[field.to_sym] = configuration['html_options']['value']
         }
         auth_config[:use_sandbox] = (auth_config[:use_sandbox].to_i == 0 ? false : true)

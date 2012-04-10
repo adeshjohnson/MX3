@@ -352,7 +352,7 @@ class AccountingController < ApplicationController
       if (outgoing_calls_price > 0) or (outgoing_calls_by_users_price > 0) or (incoming_received_calls_price > 0) or (incoming_made_calls_price > 0) or (total_subscriptions > 0) or (minimal_charge_amount > 0)
         MorLog.my_debug("    Generating invoice....", 1)
 
-        tax = user.get_tax.clone
+        tax = user.get_tax.dup
         tax.save
         invoice = Invoice.new(:user_id => user.id, :period_start => @period_start, :period_end => @period_end, :issue_date => issue_date, :paid => 0, :number => "", :invoice_type => "postpaid", :tax_id => tax.id)
         invoice.save
@@ -586,7 +586,7 @@ class AccountingController < ApplicationController
         end
 
         # tax for invoice
-        tax = user_tax.clone
+        tax = user_tax.dup
         tax.save
         invoice = Invoice.new(:user_id => user.id, :period_start => @period_start, :period_end => @period_end, :issue_date => issue_date, :paid => 1, :number => "", :invoice_type => "prepaid", :tax_id =>tax.id)
         invoice.save
@@ -1755,7 +1755,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     if (outgoing_calls_price > 0) or (outgoing_calls_by_users_price > 0) or (incoming_received_calls_price > 0) or (incoming_made_calls_price > 0) or (total_subscriptions > 0) or (minimal_charge_amount > 0)
       MorLog.my_debug("    Generating invoice....")
 
-      tax = user.get_tax.clone
+      tax = user.get_tax.dup
       tax.save
       price = 0
 

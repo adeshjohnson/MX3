@@ -486,7 +486,7 @@ class PaymentsController < ApplicationController
                 @user.balance += sprintf("%.2f", @payment.gross * Currency.count_exchange_rate(@payment.currency, Currency.find(1).name)).to_f
                 if @payment.fee.to_f != 0.0 and Confline.get_value("PayPal_User_Pays_Transfer_Fee", @user.owner_id).to_i == 1
                   @user.balance -= sprintf("%.2f", @payment.fee * Currency.count_exchange_rate(@payment.currency, Currency.find(1).name)).to_f
-                  fee_payment = @payment.clone
+                  fee_payment = @payment.dup
                   fee_payment.paymenttype = "paypal_fee"
                   fee_payment.fee = 0
                   fee_payment.tax = 0
@@ -566,7 +566,7 @@ class PaymentsController < ApplicationController
     if @payment.paymenttype == "paypal" and @payment.fee.to_f != 0.0 and Confline.get_value("PayPal_User_Pays_Transfer_Fee", user.owner_id).to_i == 1
       # sprintf rounds to ceiling.
       user.balance -= sprintf("%.2f", @payment.fee * exchange_rate).to_f
-      fee_payment = @payment.clone
+      fee_payment = @payment.dup
       fee_payment.paymenttype = "paypal_fee"
       fee_payment.fee = 0
       fee_payment.tax = 0

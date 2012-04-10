@@ -1172,7 +1172,7 @@ in before filter : ard (:find_ard)
       @tax = Tax.new
       if session[:usertype] == "reseller"
         reseller = User.find_by_id(owner)
-        @tax = reseller.get_tax.clone
+        @tax = reseller.get_tax.dup
       else
         @tax.assign_default_tax({}, {:save => false} )
       end

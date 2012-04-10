@@ -201,7 +201,7 @@ class RemoteRealexTest < Test::Unit::TestCase
   end
 
   def test_cvn
-    @visa_cvn = @visa.clone
+    @visa_cvn = @visa.dup
     @visa_cvn.verification_value = "111"
     response = @gateway.purchase(@amount, @visa_cvn, 
       :order_id => generate_unique_id,

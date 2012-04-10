@@ -436,7 +436,7 @@ class CardsController < ApplicationController
   def update
     return_controller = params[:return_to_controller] if params[:return_to_controller]
     return_action = params[:return_to_action] if params[:return_to_action]
-    @card_old = @card.clone
+    @card_old = @card.dup
     @cg = @card.cardgroup
     result=check_user_for_cardgroup(@cg)
     return false if result == false
