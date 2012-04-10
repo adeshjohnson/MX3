@@ -9,19 +9,6 @@ class Tariff < ActiveRecord::Base
   has_many :common_use_providers
   
   validates_uniqueness_of :name, :message => _('Name_must_be_unique'), :scope => [:owner_id]
-  #before_create :validate_name_uniqueness
-
-=begin
-  ticket #5009. if admins would try to create tariff, it's name has to be globaly unique,
-  if reseller triesto create card it's name has to be unique except admins cards
-=end
-  def validate_name_uniqueness
-    if User.current.is_admin?
-      return (not Tariff.find(:first, :conditions => {:name => self.name}))
-    else
-      return (not Tariff.find(:first, :conditions => ["owner_id != 0 and name = #{self.name}"]))
-    end
-  end
   
   def real_currency
     Currency.find(:first, :conditions => ['name = ?', self.currency])
