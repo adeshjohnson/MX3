@@ -1163,6 +1163,9 @@ class User < ActiveRecord::Base
       device.location_id = set_location_id
     end
 
+    logger.fatal device.to_yam
+    logger.fatal    set_location_id
+    logger.fatal   owner.is_reseller?
     device.timeout = Confline.get_value("Default_device_timeout", owner_id)
 
     device.record = Confline.get_value("Default_device_record", owner_id).to_i
