@@ -2,7 +2,7 @@
     //=========================== Active Device Markers ===========================
     function addActiveDeviceMarker(val1, val2, info) {
         var myLatlng1 = new google.maps.LatLng(val1, val2);
-        var image = '../assets/icons/device_active.png';
+        var image = '<%=Web_Dir%>/assets/icons/device_active.png';
 
         var marker = new google.maps.Marker({
             position:myLatlng1,

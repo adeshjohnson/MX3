@@ -44,7 +44,7 @@
       for server in @servers do
         loc =Iplocation.get_location(server.server_ip)
         if loc.longitude != 0 and loc.latitude != 0
-          tool_tip  = '<img alt="Server" src="/assets/icons/server.png" title="Server" />'
+          tool_tip  = '<img alt="Server" src="'+Web_Dir+'/assets/icons/server.png" title="Server" />'
           tool_tip += "<br />Host: "+server.hostname if server.hostname
           tool_tip += "<br />IP: "+loc.ip if loc.ip
           tool_tip += "<br />Country: "+loc.country if loc.country
@@ -63,7 +63,7 @@
       for provider in @providers do
         loc =Iplocation.get_location(provider.server_ip)
         if loc.longitude != 0 and loc.latitude != 0
-          tool_tip  = '<img alt="Provider" src="/assets/icons/provider.png" title="Provider" />'
+          tool_tip  = '<img alt="Provider" src="'+Web_Dir+'/assets/icons/provider.png" title="Provider" />'
           tool_tip += "<br />Name: "+provider.name
           tool_tip += "<br />IP: "+loc.ip if loc.ip
           tool_tip += "<br />Country: "+loc.country if loc.country
@@ -93,7 +93,7 @@
 
     function addDeviceMarker(val1, val2, info) {
         var myLatlng1 = new google.maps.LatLng(val1, val2);
-        var image1 = '../assets/icons/device.png';
+        var image1 = '<%=Web_Dir%>/assets/icons/device.png';
 
         var marker1 = new google.maps.Marker({
             position:myLatlng1,
@@ -118,7 +118,7 @@
 
     function addServerMarker(val1, val2, info) {
         var myLatlng2 = new google.maps.LatLng(val1, val2);
-        var image2 = '../assets/icons/server.png';
+        var image2 = '<%=Web_Dir%>/assets/icons/server.png';
 
         var marker2 = new google.maps.Marker({
             position:myLatlng2,
@@ -141,7 +141,7 @@
 
     function addProviderMarker(val1, val2, info) {
         var myLatlng3 = new google.maps.LatLng(val1, val2);
-        var image3 = '../assets/icons/provider.png';
+        var image3 = '<%=Web_Dir%>/assets/icons/provider.png';
 
         var marker3 = new google.maps.Marker({
             position:myLatlng3,
@@ -281,7 +281,7 @@
 </div>
 <br/>
 </body>
-<img id="icon_info_gmaps" src="../assets/icons/information.png" title="Info">
+<img id="icon_info_gmaps" src="<%=Web_Dir%>/assets/icons/information.png" title="Info">
 <a id="info_google_maps_link" href="http://wiki.kolmisoft.com/index.php/Google_Maps_integration" target="_blank"><%= _('click_here_for_more_information') %></a>.
 <br/>
 <script type="text/javascript">
