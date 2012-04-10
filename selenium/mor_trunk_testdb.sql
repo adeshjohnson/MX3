@@ -173,3 +173,5 @@ INSERT INTO `emails` VALUES (6,'calling_cards_data_to_paypal','Calling Card purc
 UPDATE users SET blocked = 0 WHERE id = 2;
 
 INSERT INTO `conflines` (name, value, owner_id) VALUES ('System_time_zone_ofset', '0', '0');
+
+update servers set active=0;
