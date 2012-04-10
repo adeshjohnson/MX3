@@ -3227,8 +3227,8 @@ GROUP BY terminators.id;").map { |t| t.id }
      Note that no transactions are used, so if smth goes wrong data might be corrupted.
 =end
   def add_to_balance(amount)
-    balance += amount
-    if save
+    self.balance += amount
+    if self.save
       exchange_rate = Currency.count_exchange_rate(Currency.get_default.name, currency.name)
       amount *= exchange_rate
       tax_amount = get_tax.count_tax_amount(amount)
@@ -3242,8 +3242,8 @@ GROUP BY terminators.id;").map { |t| t.id }
       if payment.save
         return true
       else
-        balance -= amount
-        save
+        self.balance -= amount
+        self.save
         return false
       end
     else
