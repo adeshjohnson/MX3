@@ -74,8 +74,9 @@ class Cardgroup < ActiveRecord::Base
     else 
       new_tax = Tax.new(tax)
     end
-    self.tax = new_tax
-    self.tax.save if options[:save] == true
+    logger.fatal new_tax.to_yaml
+    new_tax.save if options[:save] == true
+    self.tax_id = new_tax.id
     self.save if options[:save] == true
   end
 

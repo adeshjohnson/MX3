@@ -3475,7 +3475,9 @@ class ApiController < ApplicationController
             logger.fatal "II%%%%%%%%%%%%%%%%%%%%%%%%4%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
             logger.fatal values.to_yaml
             card_by_pin = Card.find(:first, :include => :cardgroup, :conditions => {:pin => values[:pin], :owner_id => @current_user.get_correct_owner_id})
+
             if card_by_pin
+              logger.fatal card_by_pin.to_yaml
               card_by_pin.disable
               if card_by_pin.save
                 if device.user.add_to_balance(card_by_pin.balance)
