@@ -3208,6 +3208,50 @@ GROUP BY terminators.id;").map { |t| t.id }
     blocked == 1;
   end
 
+
+=begin
+  Add some amount to user's balance.
+  Note that after changeing balance we immediately save data to database, since we dont use
+  transactions that's least what we should do. If adding amount to balance or creating
+  payment fails - we do our best to revert everything... but still without using
+  transactions there are lot's of ways to fail.
+  Note that amount is expected to be in system's default currency, if not payment amount
+  might be giberish.
+
+  *Params*
+  +amount+ amount to be added to balance and payment created with amount and tax in
+   this users currency.
+
+  *Returns*
+  +boolean+ true changeing balance and creating payment succeeded, otherwise false.
+     Note that no transactions are used, so if smth goes wrong data might be corrupted.
+=end
+  def add_to_balance(amount)
+    balance += amount
+    if save
+      exchange_rate = Currency.count_exchange_rate(Currency.get_default.name, currency.name)
+      amount *= exchange_rate
+      tax_amount = get_tax.count_tax_amount(amount)
+      logger.fatal 'bbbbbbbbbbbbbbbbbbbbbbbbbbb'
+      logger.fatal currency.name
+      logger.fatal Currency.get_default.name
+      logger.fatal exchange_rate
+      logger.fatal amount
+      logger.fatal tax_amount
+      payment = Payment.create_for_user(self, {:paymenttype => 'Manual', :amount => amount, :tax => tax_amount, :shipped_at => Time.now, :date_added => Time.now, :completed => 1, :currency => currency.name})
+      if payment.save
+        return true
+      else
+        balance -= amount
+        save
+        return false
+      end
+    else
+      return false
+    end
+  end
+
+
   private
 
 =begin
@@ -3256,46 +3300,6 @@ GROUP BY terminators.id;").map { |t| t.id }
     end
   end
 
-=begin
-  Add some amount to user's balance.
-  Note that after changeing balance we immediately save data to database, since we dont use
-  transactions that's least what we should do. If adding amount to balance or creating
-  payment fails - we do our best to revert everything... but still without using 
-  transactions there are lot's of ways to fail.
-  Note that amount is expected to be in system's default currency, if not payment amount
-  might be giberish.
 
-  *Params*
-  +amount+ amount to be added to balance and payment created with amount and tax in
-   this users currency.
-
-  *Returns*
-  +boolean+ true changeing balance and creating payment succeeded, otherwise false. 
-     Note that no transactions are used, so if smth goes wrong data might be corrupted.
-=end
-  def add_to_balance(amount)
-    balance += amount
-    if save
-      exchange_rate = Currency.count_exchange_rate(Currency.get_default.name, currency.name)
-      amount *= exchange_rate
-      tax_amount = get_tax.count_tax_amount(amount)
-      logger.fatal 'bbbbbbbbbbbbbbbbbbbbbbbbbbb'
-      logger.fatal currency.name
-      logger.fatal Currency.get_default.name
-      logger.fatal exchange_rate
-      logger.fatal amount
-      logger.fatal tax_amount
-      payment = Payment.create_for_user(self, {:paymenttype => 'Manual', :amount => amount, :tax => tax_amount, :shipped_at => Time.now, :date_added => Time.now, :completed => 1, :currency => currency.name})
-      if payment.save
-        return true
-      else
-        balance -= amount
-        save
-        return false
-      end
-    else
-      return false
-    end
-  end
 
 end
