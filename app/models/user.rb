@@ -1130,7 +1130,7 @@ class User < ActiveRecord::Base
 
 
   def create_default_device(options={})
-    owner_id =owner_id
+    owner_id = self.owner_id
 
     fextension = options[:free_ext]
     device = Device.new({:user_id => id, :devicegroup_id => options[:dev_group].to_i, :context => "mor_local", :device_type => options[:device_type].to_s, :extension => fextension, :pin => options[:pin].to_s, :secret => options[:secret].to_s})
@@ -1163,9 +1163,6 @@ class User < ActiveRecord::Base
       device.location_id = set_location_id
     end
 
-    logger.fatal device.to_yam
-    logger.fatal    set_location_id
-    logger.fatal   owner.is_reseller?
     device.timeout = Confline.get_value("Default_device_timeout", owner_id)
 
     device.record = Confline.get_value("Default_device_record", owner_id).to_i
