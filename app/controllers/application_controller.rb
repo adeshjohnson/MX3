@@ -1141,10 +1141,10 @@ class ApplicationController < ActionController::Base
 
 
   # converting caller id like "name" <11> to name
-  def nice_cid(cid)
-    if cid
-      cid = cid.split(/"\s*/).to_s
-      cid = cid[0, cid.index('<')] if cid.index('<')
+  def nice_cid(cidn)
+    if cidn
+      cid = cidn.split('"')
+      cid = cid[1] #if cidn.index('<')
     else
       cid = ""
     end
