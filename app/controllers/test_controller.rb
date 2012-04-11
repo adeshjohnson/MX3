@@ -45,6 +45,7 @@ class TestController < ApplicationController
       Confline.set_value("Last_Crash_Exception_Class", "")
       raise OpenSSL::SSL::SSLError
     when "Cairo"
+      params[:this_is_fake_exception] = nil
       raise LoadError, 'Could not find the ruby cairo bindings in the standard locations or via rubygems. Check to ensure they\'re installed correctly'
     when "Gems"
       raise LoadError, 'in the standard locations or via rubygems. Check to en'
