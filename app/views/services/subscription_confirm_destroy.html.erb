@@ -39,5 +39,5 @@
   <% end %>
   <br>
   <br>
-  <%= submit_tag(_('Delete'), {:confirm => _('Are_you_sure'), :disable_with=>_('Processing..')}) %>
+  <%= submit_tag(_('Delete'), {:confirm => _('Are_you_sure'), :onclick => "return confirm('#{_('Are you sure?')}')", :disable_with=>_('Processing..')}) %>
 <% end %>
