@@ -22,13 +22,13 @@
   <b><%= _('First_file_lines') %>:</b><br /><br />
   <% flines = []
   tl = 0 %>
-  <% for line in session[:file] %>
+  <% for line in session[:file].split('\n') %>
     <% flines << line if tl < 5%>
     <% tl += 1 %>
   <% end %>
   <% flines << "...." if tl > 5 %>
 
-  <%= text_area_tag "body", flines, :size => "150x10", :class => "input" %>
+  <%= text_area_tag "body", flines.join.html_safe, :size => "150x10", :class => "input" %>
 
   <br />
   <% session[:file_lines] = tl %>
