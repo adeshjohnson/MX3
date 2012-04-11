@@ -622,11 +622,12 @@ class Device < ActiveRecord::Base
 
   def ip_must_be_unique_on_save
 
+    idi = self.id
     message = (User.current and User.current.usertype == 'admin') ? _("When_IP_Authentication_checked_IP_must_be_unique") : _('This_IP_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>"
     cond = if ipaddr.blank?
-      ['devices.id != ? AND host = ? AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', id, host, User.current.id]
+      ['devices.id != ? AND host = ? AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', idi, host, User.current.id]
     else
-      ['devices.id != ? AND (host = ? OR ipaddr = ?) AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', id, host, ipaddr, User.current.id]
+      ['devices.id != ? AND (host = ? OR ipaddr = ?) AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', idi, host, ipaddr, User.current.id]
     end
 
     #    check device wihs is provider with providers devices.
@@ -639,10 +640,10 @@ class Device < ActiveRecord::Base
     condd = self.device_ip_authentication_record.to_i == 1 ? '' : ' and devices.username = "" '
     cond22 = if ipaddr.blank?
       #      check device host with another owner devices
-      ['devices.id != ? AND host = ? and users.owner_id != ?  and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd , id, host, User.current.id]
+      ['devices.id != ? AND host = ? and users.owner_id != ?  and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd , idi, host, User.current.id]
     else
       #      check device IP and Host with another owner devices
-      ['devices.id != ? AND (host = ? OR ipaddr = ?) and users.owner_id != ? and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd , id, host, ipaddr, User.current.id]
+      ['devices.id != ? AND (host = ? OR ipaddr = ?) and users.owner_id != ? and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd , idi, host, ipaddr, User.current.id]
     end
 
     #    check device IP with another user providers IP's with have ip auth on, 0.0.0.0 not included
@@ -652,7 +653,7 @@ class Device < ActiveRecord::Base
     end
 
     #    check device IP with another user providers IP's with have ip auth on, 0.0.0.0 not included
-    if Provider.count(:all, :joins=>['JOIN devices ON (device_id = devices.id)'],:conditions=>["server_ip = ? and devices.username = '' and server_ip != '0.0.0.0' and devices.id != ?  and ipaddr != '' AND providers.user_id != ? and ipaddr != '0.0.0.0'", ipaddr, id, User.current.id]).to_i > 0
+    if Provider.count(:all, :joins=>['JOIN devices ON (device_id = devices.id)'],:conditions=>["server_ip = ? and devices.username = '' and server_ip != '0.0.0.0' and devices.id != ?  and ipaddr != '' AND providers.user_id != ? and ipaddr != '0.0.0.0'", ipaddr, idi, User.current.id]).to_i > 0
       errors.add(:ip_authentication, message)
       return false
     end
@@ -663,9 +664,9 @@ class Device < ActiveRecord::Base
       message2 = (User.current and User.current.usertype == 'admin') ? _("Device_with_such_IP_and_Port_already_exist") + ' ' + _('Please_check_this_link_to_see_how_it_can_be_resolved') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Configure_Provider_which_can_make_calls' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>" : _('This_IP_and_port_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>"
 
       cond3 = if ipaddr.blank?
-        ['devices.id != ? AND host = ? and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? AND providers.id IS NULL' + condd, id, host, port]
+        ['devices.id != ? AND host = ? and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? AND providers.id IS NULL' + condd, idi, host, port]
       else
-        ['devices.id != ? AND (host = ? OR ipaddr = ?) and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? AND providers.id IS NULL' + condd, id, host, ipaddr, port]
+        ['devices.id != ? AND (host = ? OR ipaddr = ?) and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? AND providers.id IS NULL' + condd, idi, host, ipaddr, port]
       end
 
       if Device.count(:all, :joins=>['JOIN users ON (user_id = users.id) LEFT JOIN providers ON (providers.device_id = devices.id)'],:conditions=>cond3).to_i > 0
@@ -677,9 +678,9 @@ class Device < ActiveRecord::Base
       message2 = (User.current and User.current.usertype == 'admin') ? _("Provider_with_such_IP_and_Port_already_exist") + ' ' + _('Please_check_this_link_to_see_how_it_can_be_resolved') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Configure_Provider_which_can_make_calls' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>" : _('This_IP_and_port_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>"
 
       cond3 = if ipaddr.blank?
-        ['devices.id != ? AND host = ? and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? ' + condd, id, host, port]
+        ['devices.id != ? AND host = ? and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? ' + condd, idi, host, port]
       else
-        ['devices.id != ? AND (host = ? OR ipaddr = ?) and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=?' + condd, id, host, ipaddr, port]
+        ['devices.id != ? AND (host = ? OR ipaddr = ?) and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=?' + condd, idi, host, ipaddr, port]
       end
       if Provider.count(:all, :joins=>['JOIN devices ON (device_id = devices.id)'],:conditions=>cond3).to_i > 0
         errors.add(:ip_authentication, message2)
