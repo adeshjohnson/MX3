@@ -143,6 +143,7 @@ class User < ActiveRecord::Base
     logger.fatal('going to update_resellers_device_location')
     #and update devices
     update_resellers_device_location(loc.id)
+    logger.fatal "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
   end
 
   def update_resellers_device_location(locationid)
@@ -689,10 +690,10 @@ class User < ActiveRecord::Base
 
   def create_reseller_conflines
     resellers_device_location = Confline.get_value("Default_device_location_id", id)
-    if usertype == "reseller"
+    if usertype == "reseller" and  !Confline.get_value("Default_device_type", id).to_s.blank?
       #sql = "DELETE FROM conflines WHERE owner_id = #{id}"
       #ActiveRecord::Base.connection.execute(sql)
-      Confline.delete_all("owner_id = #{id}")
+      Confline.delete_all("owner_id = #{id} AND name like 'Default_device%'")
       Confline.new_confline('Company', Confline.get_value('Company'), id)
       Confline.new_confline('Company_Email', Confline.get_value('Company_Email'), id)
       Confline.new_confline('Version', Confline.get_value('Version'), id)
