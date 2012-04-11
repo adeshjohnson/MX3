@@ -2032,7 +2032,6 @@ Variables: (Names marked with * are required)
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'DNS_Error', :data2 => exception.message).save
         end
 
-        logger.fatal    exception.message.to_s
         if exception_class.include?("LoadError") and exception.message.to_s.include?('locations or via rubygems.')
           if exception.message.include?('cairo')
             flash_help_link = "http://wiki.kolmisoft.com/index.php/Cannot_generate_PDF"
@@ -2119,7 +2118,7 @@ Variables: (Names marked with * are required)
         end
 
         if !flash_help_link.blank?
-          flash[:notice] = _("Something_is_wrong_please_consult_help_link")
+          flash[:notice] = _('Something_is_wrong_please_consult_help_link')
           flash[:notice] += "<a id='exception_info_link' href='#{flash_help_link}' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>".html_safe
         else
           flash[:notice] = flash_notice.to_s.blank? ? "INTERNAL ERROR. - ID: #{id} - #{exception_class}" : flash_notice
