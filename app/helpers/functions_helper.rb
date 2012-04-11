@@ -36,7 +36,7 @@ module FunctionsHelper
     res << "</div>"
     res << "</div>"
     dtree_group_script(nice_name, id, width, height)
-    concat(res.join("\n").html_safe + "#{block.binding}".html_safe).html_safe
+    concat(res.join("\n").html_safe).html_safe
   end
 
 =begin

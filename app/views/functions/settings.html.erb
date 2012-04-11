@@ -374,33 +374,33 @@
                 <td><b><%= _('Allow_GET_API')%>:</b></td>
                 <td><%= check_box_tag 'allow_get_api', value = "1", Confline.get_value('Allow_GET_API').to_i == 1 %></td>
               </tr>
-              <tr <%= tooltip(_('API_Secret_Key'), _('API_Secret_Key_Explanation'))%>>
+              <tr <%= tooltip(_('API_Secret_Key'), _('API_Secret_Key_Explanation')).html_safe %>>
                 <td></td>
                 <td><b><%= _('API_Secret_Key')%>:</b></td>
                 <td><%= text_field_tag('api_secret_key', Confline.get_value("API_Secret_Key") , "class" => "input", :size => "35", :maxlength => "255" )%></td>
               </tr>
-              <tr <%= tooltip(_('XML_API_Extension'), _('XML_API_Extension_Explanation'))%> >
+              <tr <%= tooltip(_('XML_API_Extension'), _('XML_API_Extension_Explanation')).html_safe %> >
                 <td></td>
                 <td><b><%= _('XML_API_Extension')%>:</b></td>
                 <td><%= check_box_tag 'xml_api_extension', value = "1", (Confline.get_value("XML_API_Extension").to_i == 1) %> </td>
               </tr>
-              <tr <%= tooltip(_('API_Login_Redirect_to_Main'), _('API_Login_Redirect_Explanation'))%> >
+              <tr <%= tooltip(_('API_Login_Redirect_to_Main'), _('API_Login_Redirect_Explanation')).html_safe %> >
                 <td></td>
                 <td><b><%= _('API_Login_Redirect_to_Main')%>:</b></td>
                 <td><%= check_box_tag 'api_login_redirect_to_main', 1, (Confline.get_value("API_Login_Redirect_to_Main").to_i == 1) %> </td>
               </tr>
-              <tr <%= tooltip(_('API_allow_Registration'), _('API_allow_Registration_Explanation'))%> >
+              <tr <%= tooltip(_('API_allow_Registration'), _('API_allow_Registration_Explanation')).html_safe %> >
                 <td></td>
                 <td><b><%= _('API_allow_Registration')%>:</b></td>
                 <td><%= check_box_tag 'api_allow_registration', 1, (Confline.get_value("API_Allow_registration_ower_API").to_i == 1) %> </td>
               </tr>
               <%if mor_11_extend?%>
-                <tr <%= tooltip(_('API_allow_Payments'), _('API_allow_Payments_Explanation'))%> >
+                <tr <%= tooltip(_('API_allow_Payments'), _('API_allow_Payments_Explanation')).html_safe %> >
                   <td></td>
                   <td><b><%= _('API_allow_Payments')%>:</b></td>
                   <td><%= check_box_tag 'api_allow_payments', 1, (Confline.get_value("API_Allow_payments_ower_API").to_i == 1) %> </td>
                 </tr>
-                <tr <%= tooltip(_('API_Payment_Confirmation'), _('API_Payment_Confirmation_Explanation'))%> >
+                <tr <%= tooltip(_('API_Payment_Confirmation'), _('API_Payment_Confirmation_Explanation')).html_safe %> >
                   <td></td>
                   <td><b><%= _('API_Payment_Confirmation')%>:</b></td>
                   <td><%= check_box_tag 'api_payment_confirmation', 1, (Confline.get_value("API_payment_confirmation").to_i == 1) %> </td>
