@@ -2440,6 +2440,8 @@ Variables: (Names marked with * are required)
 
   def current_user
     @current_user ||= User.find(:first, :include => [:tax, :address, :currency], :conditions => ["users.id = ?", session[:user_id]])
+    User.current_user = @current_user
+    @current_user
   end
 
   def validate_range(value, min, max, min_def = nil, max_def = nil)

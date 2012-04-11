@@ -58,9 +58,10 @@ class Confline < ActiveRecord::Base
 
   def Confline::set_value2(name, value = 0, id = 0)
     cl = Confline.find(:first, :conditions => ["name = ? and owner_id = ?", name, id])
+    logger.fatal User.current_user.to_yaml
     if cl
       if cl.value2.to_s != value.to_s
-        Action.add_action_hash(User.current.id, {:action=>"Confline changed", :target_id=>cl.id, :target_type=>'confline', :data=>cl.value2.to_s, :data2=>value.to_s, :data3=>'value2', :data4=>name})
+        Action.add_action_hash(User.current_user.id, {:action=>"Confline changed", :target_id=>cl.id, :target_type=>'confline', :data=>cl.value2.to_s, :data2=>value.to_s, :data3=>'value2', :data4=>name})
       end
       cl.value2 = value
       cl.save

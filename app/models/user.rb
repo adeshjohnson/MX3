@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   require 'net/http'
 
   cattr_accessor :current
+  cattr_accessor :current_user
 
   cattr_accessor :system_time_offset
 
