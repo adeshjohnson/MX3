@@ -2032,7 +2032,8 @@ Variables: (Names marked with * are required)
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'DNS_Error', :data2 => exception.message).save
         end
 
-        if exception_class.include?("LoadError") and exception.message.include?('locations or via rubygems.')
+        logger.fatal    exception.message.to_s
+        if exception_class.include?("LoadError") and exception.message.to_s.include?('locations or via rubygems.')
           if exception.message.include?('cairo')
             flash_help_link = "http://wiki.kolmisoft.com/index.php/Cannot_generate_PDF"
           else
