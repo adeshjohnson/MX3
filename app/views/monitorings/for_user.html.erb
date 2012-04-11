@@ -59,7 +59,7 @@
 </script>
 
 <div id="new_entry" style="<%= "display: none" unless params[:for_user] %>">
-  <% form_for :monitoring, @monitoring, :url => { :action => 'create' }, :builder => MonitoringFormBuilder do |f| %>
+  <% form_for @monitoring, :url => { :action => 'create' }, :builder => MonitoringFormBuilder do |f| %>
     <table width="100%" class="monitoring" cellspacing="0" cellpadding="0">
       <thead>
         <tr>
