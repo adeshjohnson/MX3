@@ -38,9 +38,9 @@
     <%= observe_field("user", :update   => "user_devices2", :url=> { :action => "cli_user_devices", :add=>1 }, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
 
 
-    <%=      "<div id = 'user_devices2'>" %>
+    <%=      "<div id = 'user_devices2'>".html_safe %>
 
-    <%=       "</div>" %>
+    <%=       "</div>".html_safe %>
     <br/>
     <%= submit_tag _('Add'), :disable_with=>_('Processing..')%>
 
