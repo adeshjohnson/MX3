@@ -18,7 +18,7 @@
 <%action = params[:action] == 'import_csv' ? 'import_csv' : 'import_csv2' %>
 <%= form_tag :action => action, :step => "3" do %>
   <div id="tariff_time_select">
-    <%= _("Rate_day_type") %>: <%= select_tag("rate_day_type", options_for_select([[_("All"), "all"], [_("Work_Days"), "wd"], [_("Free_Days"), "fd"]], session[:imp_date_day_type]), :onchange=>"check_values();")  %>
+    <%= _("Rate_day_type") %>: <%= select_tag("rate_day_type", options_for_select(@rate_type, session[:imp_date_day_type]), :onchange=>"check_values();")  %>
     <%= _("From") %>:
     <select id="time_from_hour" name="time_from[hour]" onchange="check_values();">
       <%24.times { |i|%>
