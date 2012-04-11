@@ -26,7 +26,7 @@ class IvrvoicesController < ApplicationController
   def create
     ivr_voice = IvrVoice.new(params[:ivr])
 
-    if ivr_voice.create
+    if ivr_voice.save
       flash[:status] = _('IVR_Voice_Created')
     else
       flash_errors_for(_('IVR_Voice_Not_Created'), ivr_voice)
