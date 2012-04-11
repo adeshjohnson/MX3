@@ -34,8 +34,8 @@ class IvrController < ApplicationController
     @help_link = "http://wiki.kolmisoft.com/index.php/IVR_system"
 
     logger.fatal session[:ivr_index].to_yaml
-    if session[:ivr_index] and session[:ivr_index][:page].to_i > 0
-      session_page_no = session[:ivr_index][:page]
+    if session[:ivr_index] and session[:ivr_index].to_i > 0
+      session_page_no = session[:ivr_index]
     else
       session_page_no = 1
     end
@@ -47,8 +47,8 @@ class IvrController < ApplicationController
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     fpage = ((@options[:page] - 1) * session[:items_per_page]).to_i
  
-    session[:ivr_index] = {} unless session[:ivr_index]
-    session[:ivr_index][:page] = @options[:page]
+    session[:ivr_index] = 1 unless session[:ivr_index]
+    session[:ivr_index] = @options[:page]
 
     @ivrs = current_user.ivrs.find(:all, :order => " name ASC", :offset => fpage.to_i, :limit => session[:items_per_page].to_i)
 
