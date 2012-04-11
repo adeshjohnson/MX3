@@ -15,7 +15,7 @@
 <% i = 0 %>
 <%for back in @backups%>
   <tr class="row<%= (i % 2 + 1).to_s %>">
-    <td id="time_<%= back.id %>" align="center"><%= nice_date_time(back.backuptime, 0)%> <%= logger.fatal back.backuptime.to_yaml  %></td>
+    <td id="time_<%= back.id %>" align="center"><%= nice_date_time(back.backuptime, 0)%></td>
     <td id="type_<%= back.id %>" align="left"><%= back.backuptype%></td>
     <td id="comment_<%= back.id %>" align="left"><%= back.comment%></td>
     <td id="download_<%= back.id %>" align="center"><%= link_to b_download, {:action=>'backup_download', :id=> back.id}, :id=>"back_downl_#{back.id}" %></td>
