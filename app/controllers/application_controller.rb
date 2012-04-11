@@ -303,7 +303,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize
-   # logger.fatal session.to_yaml
+    # logger.fatal session.to_yaml
     if session[:usertype].to_s != "admin" #or session[:usertype].to_s != "accountant"
       c = controller_name.to_s.gsub(/"|'|\\/, '')
       a = action_name.to_s.gsub(/"|'|\\/, '')
@@ -2627,7 +2627,13 @@ Variables: (Names marked with * are required)
   def nice_date_time(time, ofset=1)
     if time
       format = session[:date_time_format].to_s.blank? ? "%Y-%m-%d %H:%M:%S" : session[:date_time_format].to_s
-      t = time.respond_to?(:strftime) ? time : time.to_time
+      logger.fatal time
+      logger.fatal format
+      if time.respond_to?(:strftime)
+        t = time
+      else
+        t = time.to_time
+      end
       if ofset.to_i == 1
         d = current_user ? current_user.user_time(t).strftime(format.to_s) : t.strftime(format.to_s)
       else
