@@ -787,9 +787,9 @@ class User < ActiveRecord::Base
     Confline.new_confline("Email_Smtp_Server", Confline.get_value("Email_Smtp_Server", 0), id)
     Confline.new_confline("Email_Domain", Confline.get_value("Email_Domain", 0), id)
     Confline.new_confline("Email_Login", Confline.get_value("Email_Login", 0), id)
-    Confline.set_value2("Email_Login", 1, id)
+    Confline.set_value2("Email_Login", 1, self.id)
     Confline.new_confline("Email_Password", Confline.get_value("Email_Password", 0), id)
-    Confline.set_value2("Email_Password", 1, id)
+    Confline.set_value2("Email_Password", 1, self.id)
     Confline.new_confline("Email_port", Confline.get_value("Email_port", 0), id)
   end
 

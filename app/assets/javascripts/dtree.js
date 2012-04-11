@@ -87,7 +87,7 @@ function dTree(objName) {
 
 	this.icon = {
 
-		root				: mor_web_dir + '/assets/dtree/base.gif',
+		root				:  mor_web_dir + '/assets/dtree/base.gif',
 
 		folder			: mor_web_dir + '/assets/dtree/folder.gif',
 
