@@ -17,7 +17,7 @@ class BackupsController < ApplicationController
     @page_title = _('Backup_manager')      
     @page_icon = 'database_save.png'   
     @help_link = "http://wiki.kolmisoft.com/index.php/Backup_system"
-    @backups = Backup.find(:all, :order => "backuptime ASC")
+    @backups = Backup.order("backuptime ASC").all
   end
   
   def backup_new

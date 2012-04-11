@@ -68,7 +68,7 @@ class Backup < ActiveRecord::Base
 
   def Backup.private_backup_create(user_id, backuptype = "manual", comment = "")
     time = Time.now().to_s(:db)
-    backuptime =  time.split(/[- :]/).to_s
+    backuptime =  time.gsub(/[- :]/, '').to_s
     backup_folder = Confline.get_value("Backup_Folder")
 
     backup_folder = "/usr/local/mor/backups" if backup_folder.to_s == ""
