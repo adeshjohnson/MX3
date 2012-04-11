@@ -81,7 +81,7 @@ class Cardgroup < ActiveRecord::Base
   end
 
   def get_tax
-    self.assign_default_tax if self.tax.nil? or self.tax_id == 0
+    self.assign_default_tax if self.tax.nil? or self.tax_id.to_i == 0 or !self.tax
     self.tax
   end
 
