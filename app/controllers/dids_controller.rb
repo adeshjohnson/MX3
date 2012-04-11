@@ -427,7 +427,7 @@ class DidsController < ApplicationController
       return false if !a
 
       if old_dev_id > 0
-        dev = Device.find_by_id(old_dev_id)
+        dev = Device.where({:id => old_dev_id}).first
         if dev
           dev.primary_did_id = 0
           a= configure_extensions(old_dev_id, {:no_redirect => true, :current_user=>current_user})
