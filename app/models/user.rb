@@ -1366,7 +1366,7 @@ class User < ActiveRecord::Base
         #all_data << {:price => 0, :price_with_tax => 0, :subscription => sub, :msg => "Alraedy payed"}
       end
     }
-    balance -= b
+    self.balance -= b
     if postpaid? and (balance + credit < 0) and not credit_unlimited?
       changed = 1
       MorLog.my_debug("  Blocking postpaid user and sending email")
