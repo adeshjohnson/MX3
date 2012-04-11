@@ -203,6 +203,7 @@ class CallcController < ApplicationController
     end
     session[:login] = false
 
+    session.clear 
 
     flash[:notice] = _('logged_off')
     if Confline.get_value("Logout_link", owner.id).to_s.blank?
