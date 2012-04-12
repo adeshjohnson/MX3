@@ -192,8 +192,8 @@ class Device < ActiveRecord::Base
     #device_after_save
     if self.user
       user = self.user
-
-      Action.add_action_hash(User.current.id, {:target_id => id, :target_type => "device", :action => "device_created"})
+      curr_id =  User.current ? User.current.id : self.user.owner_id
+      Action.add_action_hash(curr_id, {:target_id => id, :target_type => "device", :action => "device_created"})
       #------- VM ----------
       email = Confline.get_value("Default_device_voicemail_box_email", user.owner_id)
       email = user.address.email if user.address and user.address.email.to_s.size > 0
