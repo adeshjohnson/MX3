@@ -228,7 +228,7 @@ class Device < ActiveRecord::Base
   def codec?(codec)
     sql =  "SELECT COUNT(*) as 'count' FROM devicecodecs, codecs WHERE devicecodecs.device_id = '" + self.id.to_s + "' AND devicecodecs.codec_id = codecs.id AND codecs.name = '" + codec.to_s + "'"
     res = ActiveRecord::Base.connection.select_one(sql)
-    res['count'] == '1'
+    res['count'].to_i == 1
   end
 
   def codecs

@@ -1919,7 +1919,11 @@ class DevicesController < ApplicationController
           pc = Devicecodec.new
           pc.codec_id = params[:codec_id]
           pc.device_id = @device.id
-          pc.save
+          begin
+            pc.save
+          rescue
+            logger.fatal 'could not save codec, may be unique constraint was violated?'
+          end
         else
           pc = Devicecodec.find(:first, :conditions=>['device_id=? AND codec_id=?',params[:id],params[:codec_id]])
           pc.destroy if pc
