@@ -1457,7 +1457,8 @@ class TariffsController < ApplicationController
               ## check if we need to create new rate/ratedetails
               if status and status[i] > 0 and status[i] < 10 and not update_rate[i] #and i < session[:file_lines]
                 prefix = row[session[:imp_prefix]].to_s.gsub(/\s/, '')
-
+                logger.fatal row[session[:imp_rate]]
+                logger.fatal row[session[:imp_rate]].to_s.gsub(@dec, ".").to_f
                 ratev = row[session[:imp_rate]].to_s.gsub(@dec, ".").to_f #.gsub!(/[^\d\.]/, '')
                 connection_fee = 0
                 connection_fee = row[session[:imp_connection_fee]].to_s.gsub(@dec, ".").to_f if session[:imp_connection_fee] >= 0
