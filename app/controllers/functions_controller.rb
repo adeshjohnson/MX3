@@ -3,19 +3,19 @@ class FunctionsController < ApplicationController
 
   require "yaml"
   layout "callc"
-  before_filter :check_post_method, :only=>[:callback_settings_update, :activate_callback]
+  before_filter :check_post_method, :only => [:callback_settings_update, :activate_callback]
   before_filter :check_localization
   before_filter :authorize
-  before_filter :find_location, :only=>[:location_rules, :location_devices, :location_destroy]
-  before_filter :find_location_rule, :only => [:location_rule_edit, :location_rule_update, :location_rule_change_status, :location_rule_destroy ]
+  before_filter :find_location, :only => [:location_rules, :location_devices, :location_destroy]
+  before_filter :find_location_rule, :only => [:location_rule_edit, :location_rule_update, :location_rule_change_status, :location_rule_destroy]
   before_filter :find_dialplan, :only => [:pbx_function_edit, :pbx_function_update, :pbx_function_destroy]
-  before_filter :callback_active?, :only=>[:callback, :callback_settings, :callback_settings_update, :activate_callback]
+  before_filter :callback_active?, :only => [:callback, :callback_settings, :callback_settings_update, :activate_callback]
 
   $date_formats = ["%Y-%m-%d %H:%M:%S", "%Y/%m/%d %H:%M:%S", "%Y,%m,%d %H:%M:%S", "%Y.%m.%d %H:%M:%S", "%d-%m-%Y %H:%M:%S", "%d/%m/%Y %H:%M:%S", "%d,%m,%Y %H:%M:%S", "%d.%m.%Y %H:%M:%S", "%m-%d-%Y %H:%M:%S", "%m/%d/%Y %H:%M:%S", "%m,%d,%Y %H:%M:%S", "%m.%d.%Y %H:%M:%S"]
-  $decimal_formats = ['.',',',';']
+  $decimal_formats = ['.', ',', ';']
 
   def index
-    redirect_to :controller => :callc,  :action => :main and return false
+    redirect_to :controller => :callc, :action => :main and return false
   end
 
 
@@ -44,11 +44,10 @@ class FunctionsController < ApplicationController
 
   # ============== CALLBACK ===============
 
-	def spy_channel
-				
+  def spy_channel
 
-		
-		device_id = current_user.spy_device_id
+
+    device_id = current_user.spy_device_id
 
     # this code selects correct calls for admin/reseller/user
     user_sql = " activecalls.id = #{params[:id].to_i}"
@@ -64,7 +63,7 @@ class FunctionsController < ApplicationController
       end
     end
 
-    acall = Activecall.find(:first, :conditions=>user_sql, :joins=>"LEFT JOIN devices AS dst ON (dst.id = activecalls.dst_device_id) ")
+    acall = Activecall.find(:first, :conditions => user_sql, :joins => "LEFT JOIN devices AS dst ON (dst.id = activecalls.dst_device_id) ")
     unless acall
       @error = _('Dont_be_so_smart')
       dont_be_so_smart
@@ -73,27 +72,27 @@ class FunctionsController < ApplicationController
 
       if device_id > 0
         @channel = params[:channel].to_s
-        
+
         device = Device.find(device_id)
         src = device.extension
-			
+
         server = Confline.get_value("Web_Callback_Server").to_i
         server = 1 if server == 0
-			
+
         src_channel = "Local/#{src}@mor_cb_src/n"
-      		
+
         extension = @channel.split('-')[0]
-      		
+
         @spy_device = nice_device(device)
-      		
+
         originate_call(device_id, src, src_channel, "mor_cb_spy", extension, _('Spy_Channel'), nil, server)
-			  
+
       else
         @error = _('No_Spy_device_explanation')
       end
     end
-		render(:layout => false)
-	end
+    render(:layout => false)
+  end
 
 
   def callback_from_url
@@ -114,8 +113,8 @@ class FunctionsController < ApplicationController
 
     if params[:acc].length > 0 and @src.length > 0
 
-          
-      device= Device.find(:first,  :joins => "LEFT JOIN users ON (users.id = devices.user_id)", :conditions => ["devices.id = ? AND secret = ? AND device_type != 'FAX' AND (users.owner_id = ? OR users.id = ?) AND name not like 'mor_server_%'", @acc, secret, corrected_user_id, corrected_user_id])
+
+      device= Device.find(:first, :joins => "LEFT JOIN users ON (users.id = devices.user_id)", :conditions => ["devices.id = ? AND secret = ? AND device_type != 'FAX' AND (users.owner_id = ? OR users.id = ?) AND name not like 'mor_server_%'", @acc, secret, corrected_user_id, corrected_user_id])
 
       unless device
         flash[:notice] = _('Device_not_found')
@@ -145,7 +144,6 @@ class FunctionsController < ApplicationController
   end
 
 
-
   def callback
     @page_title = _('Callback')
     @page_icon = 'phone_sound.png'
@@ -166,7 +164,6 @@ class FunctionsController < ApplicationController
   end
 
 
-
   def activate_callback
 
     @src = ""
@@ -176,43 +173,49 @@ class FunctionsController < ApplicationController
     @src = params[:src].gsub(/[^\d]/, "") if params[:src]
     @dst = params[:dst].gsub(/[^\d]/, "") if params[:dst]
 
-    device = current_user.devices.find(:first, :conditions=>{:id=>@acc})
+    device = current_user.devices.find(:first, :conditions => {:id => @acc})
 
     unless device
       flash[:notice] = _('Device_not_found')
       redirect_to :controller => :callc, :action => :main and return false
     end
-    
+
     callerid_number = device.callerid_number
-    
+
     if callerid_number.length == 0
       # if number not set, check what to use as caller id:
       # source or WEB_Callback_CID ?
-      if Confline.get_value('Web_Callback_Send_Source_As_CID', 0).to_i  == 1
-        callerid_number = @src 
+      if Confline.get_value('Web_Callback_Send_Source_As_CID', 0).to_i == 1
+        callerid_number = @src
       else
-        callerid_number = Confline.get_value('WEB_Callback_CID', 0) 
+        callerid_number = Confline.get_value('WEB_Callback_CID', 0)
       end
     end
 
     server = Confline.get_value("Web_Callback_Server").to_i
     server = 1 if server == 0
 
-    if @src.length > 0
+    serv = Server.where({:id => server})
+    if !serv or serv.active != 1
+      flash[:notice] = _('Cannot_connect_to_asterisk_server')
+    else
+      if @src.length > 0
 
-      channel = "Local/#{@src}@mor_cb_src/n"
-      if @dst.length > 0
-        originate_call(@acc, @src, channel, "mor_cb_dst", @dst, callerid_number, nil, server)
+        channel = "Local/#{@src}@mor_cb_src/n"
+        if @dst.length > 0
+          originate_call(@acc, @src, channel, "mor_cb_dst", @dst, callerid_number, nil, server)
+        else
+          originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", callerid_number, nil, server)
+        end
+
+
+        flash[:status] = _('Callback_activated')
       else
-        originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", callerid_number, nil, server)
+        flash[:notice] = _('Source_should_be_entered_for_callback')
       end
 
 
-      flash[:status] = _('Callback_activated')
-    else
-      flash[:notice] = _('Source_should_be_entered_for_callback')
     end
-
     redirect_to :controller => "functions", :action => 'callback' and return false
 
   end
@@ -224,9 +227,9 @@ class FunctionsController < ApplicationController
 
     @dialplans = current_user.dialplans.find(:all, :conditions => "dptype = 'pbxfunction'", :order => "name ASC")
     if reseller?
-      @pbxfunctions = Pbxfunction.find(:all, :conditions=>'allow_resellers = 1 AND name != "ringgroupid"',:order => "pf_type ASC")
+      @pbxfunctions = Pbxfunction.find(:all, :conditions => 'allow_resellers = 1 AND name != "ringgroupid"', :order => "pf_type ASC")
     else
-      @pbxfunctions = Pbxfunction.find(:all, :conditions=>'name != "ringgroupid"', :order => "pf_type ASC")
+      @pbxfunctions = Pbxfunction.find(:all, :conditions => 'name != "ringgroupid"', :order => "pf_type ASC")
     end
 
   end
@@ -239,9 +242,9 @@ class FunctionsController < ApplicationController
     @page_icon = 'edit.png'
 
     if reseller?
-      @pbxfunctions = Pbxfunction.find(:all, :conditions=>'allow_resellers = 1 AND name != "ringgroupid"',:order => "pf_type ASC")
+      @pbxfunctions = Pbxfunction.find(:all, :conditions => 'allow_resellers = 1 AND name != "ringgroupid"', :order => "pf_type ASC")
     else
-      @pbxfunctions = Pbxfunction.find(:all, :conditions=>'name != "ringgroupid"', :order => "pf_type ASC")
+      @pbxfunctions = Pbxfunction.find(:all, :conditions => 'name != "ringgroupid"', :order => "pf_type ASC")
     end
 
     @currency = Currency.get_active
@@ -259,22 +262,22 @@ class FunctionsController < ApplicationController
 
     if current_user.id != @dialplan.user_id.to_i
       dont_be_so_smart
-      redirect_to :controller => :callc,  :action => :main and return false  
+      redirect_to :controller => :callc, :action => :main and return false
     end
     user = User.find_by_id(params[:s_user].to_i)
 
     if reseller?
       if user.owner_id.to_i != current_user.id and user.id.to_i != current_user.id
         dont_be_so_smart
-        redirect_to :controller => :callc,  :action => :main and return false
+        redirect_to :controller => :callc, :action => :main and return false
       end
     else
       if user.owner_id.to_i != current_user.id
         dont_be_so_smart
-        redirect_to :controller => :callc,  :action => :main and return false
+        redirect_to :controller => :callc, :action => :main and return false
       end
     end
-  
+
     if params[:dialplan]
       pbxfunction_id = params[:dialplan][:type_id]
       pbxfunction = Pbxfunction.find(pbxfunction_id)
@@ -346,7 +349,7 @@ class FunctionsController < ApplicationController
       dialplan.data3 = def_currency.name if def_currency
       dialplan.data4 = "en"
     end
-    
+
     if pbxfunction and pbxfunction.pf_type == "external_did"
       dialplan.data5 = current_user.id
     end
@@ -357,9 +360,8 @@ class FunctionsController < ApplicationController
 
     flash[:status] = _('Pbx_function_created')
     redirect_to :action => 'pbx_functions'
-    
-  end
 
+  end
 
 
   def pbx_function_destroy
@@ -368,7 +370,7 @@ class FunctionsController < ApplicationController
     #      flash[:notice]=_('Dialplan_was_not_found')
     #      redirect_to :action=>:pbx_functions and return false
     #    end
-    dids = Did.count(:all, :conditions=>"dialplan_id = '#{params[:id].to_i}'")
+    dids = Did.count(:all, :conditions => "dialplan_id = '#{params[:id].to_i}'")
     if dids.to_i == 0
       pbx_function_delete_extline(@dialplan)
 
@@ -417,7 +419,7 @@ class FunctionsController < ApplicationController
     if notice_msg.nil? and admin? and @user and @user.owner_id.to_i > 0
       @reseller = @user.owner
       if @reseller and @reseller.is_reseller?
-        notice_msg = _('Reseller_Tariff_not_found') if notice_msg.nil? and not (@r_tariff = @reseller.tariff )
+        notice_msg = _('Reseller_Tariff_not_found') if notice_msg.nil? and not (@r_tariff = @reseller.tariff)
       else
         notice_msg = _('Reseller_Was_Not_Found')
       end
@@ -450,7 +452,7 @@ class FunctionsController < ApplicationController
       flash[:notice] = _('Check_if_your_user_is_using_your_lcr')
       redirect_to :controller => "callc", :action => "main" and return false
     end
-    
+
     @lcr_providers = @lcr.providers
 
     @device = Device.find(:first, :conditions => ["devices.id = ? and devices.user_id = ?", params[:device], @user.id])
@@ -461,7 +463,7 @@ class FunctionsController < ApplicationController
     end
 
     if @device.location
-      if @device.location_id <= 1  and current_user.usertype == 'reseller'
+      if @device.location_id <= 1 and current_user.usertype == 'reseller'
         #import admin rules as default location and use it instead of GLOBAL!
         @device.check_location_id
         #now device should have default location in db
@@ -529,7 +531,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     @loc_tariff_id = res['tariff_id']
     @loc_device_id = res['device_id']
     #check if reseller is changed from/to res pro and he changed LCR in location rules, lcr partial
-    lcr_owner =  Lcr.find_by_id(@loc_lcr_id)
+    lcr_owner = Lcr.find_by_id(@loc_lcr_id)
     if lcr_owner and !@user_owner.is_admin?
       if lcr_owner.user_id.to_i == @user_owner.owner_id.to_i and @user_owner.reseller_allow_providers_tariff?
         flash[:notice] = _('Check_if_you_are_using_your_lcr')
@@ -547,7 +549,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       if @user_owner.is_allow_manage_providers?
         @lcr = @user_owner.lcrs.find_by_id(@loc_lcr_id)
       else
-        @lcr = @user_owner.load_lcrs(:first, :conditions=>"id = #{@loc_lcr_id}")
+        @lcr = @user_owner.load_lcrs(:first, :conditions => "id = #{@loc_lcr_id}")
       end
       @new_lcr = @lcr
       @lcr_providers = @lcr.providers
@@ -594,7 +596,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
 
     @direction_name, @destination_group_name = direction_by_dst(@loc_dst)
 
-    time = nice_time2 Time.mktime("2000","01","01",session[:hour_from], session[:minute_from], "00")
+    time = nice_time2 Time.mktime("2000", "01", "01", session[:hour_from], session[:minute_from], "00")
     dst = @loc_dst
     tariff_id = @u_tariff.id
     daytype = @daytype
@@ -611,10 +613,10 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     if @u_tariff.purpose == "user"
 
       sql = "SELECT A.prefix, aratedetails.id as 'aid', aratedetails.from as 'afrom', aratedetails.duration as 'adur', aratedetails.artype as 'atype', aratedetails.round as 'around', aratedetails.price as 'aprice', destinationgroups.id as 'dgid', aratedetails.start_time, aratedetails.end_time " +
-        "FROM  rates 	JOIN aratedetails ON (aratedetails.rate_id = rates.id  AND '#{time}' BETWEEN aratedetails.start_time AND aratedetails.end_time AND (aratedetails.daytype = '#{daytype}' OR aratedetails.daytype = ''))  "+
-        "JOIN destinationgroups ON (destinationgroups.id = rates.destinationgroup_id ) " +
-        "JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix=SUBSTRING('#{dst}', 1, LENGTH(destinations.prefix))  ORDER BY LENGTH(destinations.prefix) DESC LIMIT 1) as A ON (A.destinationgroup_id = destinationgroups.id) " +
-        " WHERE rates.tariff_id = #{tariff_id} ORDER BY afrom ASC, atype ASC "
+          "FROM  rates 	JOIN aratedetails ON (aratedetails.rate_id = rates.id  AND '#{time}' BETWEEN aratedetails.start_time AND aratedetails.end_time AND (aratedetails.daytype = '#{daytype}' OR aratedetails.daytype = ''))  "+
+          "JOIN destinationgroups ON (destinationgroups.id = rates.destinationgroup_id ) " +
+          "JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix=SUBSTRING('#{dst}', 1, LENGTH(destinations.prefix))  ORDER BY LENGTH(destinations.prefix) DESC LIMIT 1) as A ON (A.destinationgroup_id = destinationgroups.id) " +
+          " WHERE rates.tariff_id = #{tariff_id} ORDER BY afrom ASC, atype ASC "
 
       #my_debug "2"
       @res_user = ActiveRecord::Base.connection.select_all(sql)
@@ -623,10 +625,10 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       #custom rates
 
       sql = "SELECT A.prefix, acustratedetails.id as 'acid', acustratedetails.from as 'acfrom', acustratedetails.duration as 'acdur', acustratedetails.artype as 'actype', acustratedetails.round as 'acround', acustratedetails.price as 'acprice', destinationgroups.id as 'dgid', acustratedetails.start_time, acustratedetails.end_time "+
-        "FROM  destinationgroups   " +
-        "JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix=SUBSTRING('#{dst}', 1, LENGTH(destinations.prefix))  ORDER BY LENGTH(destinations.prefix) DESC LIMIT 1) as A ON (A.destinationgroup_id = destinationgroups.id)   " +
-        "JOIN customrates ON (customrates.destinationgroup_id = destinationgroups.id AND customrates.user_id = #{user.id})  " +
-        "JOIN acustratedetails ON (acustratedetails.customrate_id = customrates.id  AND '#{time}' BETWEEN acustratedetails.start_time AND acustratedetails.end_time AND (acustratedetails.daytype = 'FD' OR acustratedetails.daytype = ''))  "
+          "FROM  destinationgroups   " +
+          "JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix=SUBSTRING('#{dst}', 1, LENGTH(destinations.prefix))  ORDER BY LENGTH(destinations.prefix) DESC LIMIT 1) as A ON (A.destinationgroup_id = destinationgroups.id)   " +
+          "JOIN customrates ON (customrates.destinationgroup_id = destinationgroups.id AND customrates.user_id = #{user.id})  " +
+          "JOIN acustratedetails ON (acustratedetails.customrate_id = customrates.id  AND '#{time}' BETWEEN acustratedetails.start_time AND acustratedetails.end_time AND (acustratedetails.daytype = 'FD' OR acustratedetails.daytype = ''))  "
 
       @res_cuser = ActiveRecord::Base.connection.select_all(sql)
       @cdgroup = Destinationgroup.find(@res_cuser[0]['dgid']) if @res_cuser[0]
@@ -653,7 +655,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
 
     @not_disabled_prov = 0
     @active_prov = 0
-    
+
     @res_prov = []
     for prov in @lcr_providers
 
@@ -681,7 +683,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
 
       rr['prefix'] = nil
       rr['cf'] = nil
-      rr['increment_s'] =  nil
+      rr['increment_s'] = nil
       rr['min_time'] = nil
       rr['rate'] = nil
       rr['e_rate'] = "1"
@@ -689,10 +691,10 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       if res
         rr['prefix'] = res['prefix']
         rr['cf'] = res['cf']
-        rr['increment_s'] =  res['increment_s']
-        rr['min_time'] =  res['min_time']
+        rr['increment_s'] = res['increment_s']
+        rr['min_time'] = res['min_time']
         rr['rate'] = res['rate']
-        rr['e_rate'] =  res['e_rate']
+        rr['e_rate'] = res['e_rate']
       end
       tariff = Tariff.find_by_id(tariff_id)
       unless tariff
@@ -703,7 +705,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
 
       if @user_owner.is_reseller? and @user_owner.is_allow_manage_providers? and prov.common_use == 1
         #t=Tariff.find_by_id(current_user.tariff_id)
-        data =  CommonUseProvider.find(:first,:conditions =>" reseller_id = #{@user_owner.id} AND provider_id = #{prov.id}",:include=>[:tariff] )
+        data = CommonUseProvider.find(:first, :conditions => " reseller_id = #{@user_owner.id} AND provider_id = #{prov.id}", :include => [:tariff])
         t = data.tariff if data
         unless t
           flash[:notice] = _('Tariff_not_found')
@@ -712,10 +714,10 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
         rr['e_rate'] = t.exchange_rate(@user_owner.currency.name).to_f
         if t.purpose == "user"
           sql = "SELECT aratedetails.price as 'rate',aratedetails.round as 'increment_s'  " +
-            "FROM  rates 	JOIN aratedetails ON (aratedetails.rate_id = rates.id  AND '#{time}' BETWEEN aratedetails.start_time AND aratedetails.end_time AND (aratedetails.daytype = '#{daytype}' OR aratedetails.daytype = ''))  "+
-            "JOIN destinationgroups ON (destinationgroups.id = rates.destinationgroup_id ) " +
-            "JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix=SUBSTRING('#{dst}', 1, LENGTH(destinations.prefix))  ORDER BY LENGTH(destinations.prefix) DESC LIMIT 1) as A ON (A.destinationgroup_id = destinationgroups.id) " +
-            " WHERE rates.tariff_id = #{t.id} "
+              "FROM  rates 	JOIN aratedetails ON (aratedetails.rate_id = rates.id  AND '#{time}' BETWEEN aratedetails.start_time AND aratedetails.end_time AND (aratedetails.daytype = '#{daytype}' OR aratedetails.daytype = ''))  "+
+              "JOIN destinationgroups ON (destinationgroups.id = rates.destinationgroup_id ) " +
+              "JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix=SUBSTRING('#{dst}', 1, LENGTH(destinations.prefix))  ORDER BY LENGTH(destinations.prefix) DESC LIMIT 1) as A ON (A.destinationgroup_id = destinationgroups.id) " +
+              " WHERE rates.tariff_id = #{t.id} "
         else
           sql = "SELECT ratedetails.rate , ratedetails.increment_s as 'increment_s'
                 FROM rates
@@ -726,7 +728,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
         rate = ActiveRecord::Base.connection.select_one(sql)
         if rate
           rr['rate'] = rate['rate']
-          rr['increment_s'] =  rate['increment_s']
+          rr['increment_s'] = rate['increment_s']
         else
           rr['rate'] = nil
         end
@@ -739,10 +741,10 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
         rr['e_rate'] = t.exchange_rate(@user_owner.currency.name).to_f
         if t.purpose == "user"
           sql = "SELECT aratedetails.price as 'rate',aratedetails.round as 'increment_s'  " +
-            "FROM  rates 	JOIN aratedetails ON (aratedetails.rate_id = rates.id  AND '#{time}' BETWEEN aratedetails.start_time AND aratedetails.end_time AND (aratedetails.daytype = '#{daytype}' OR aratedetails.daytype = ''))  "+
-            "JOIN destinationgroups ON (destinationgroups.id = rates.destinationgroup_id ) " +
-            "JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix=SUBSTRING('#{dst}', 1, LENGTH(destinations.prefix))  ORDER BY LENGTH(destinations.prefix) DESC LIMIT 1) as A ON (A.destinationgroup_id = destinationgroups.id) " +
-            " WHERE rates.tariff_id = #{t.id} "
+              "FROM  rates 	JOIN aratedetails ON (aratedetails.rate_id = rates.id  AND '#{time}' BETWEEN aratedetails.start_time AND aratedetails.end_time AND (aratedetails.daytype = '#{daytype}' OR aratedetails.daytype = ''))  "+
+              "JOIN destinationgroups ON (destinationgroups.id = rates.destinationgroup_id ) " +
+              "JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix=SUBSTRING('#{dst}', 1, LENGTH(destinations.prefix))  ORDER BY LENGTH(destinations.prefix) DESC LIMIT 1) as A ON (A.destinationgroup_id = destinationgroups.id) " +
+              " WHERE rates.tariff_id = #{t.id} "
         else
           sql = "SELECT ratedetails.rate as 'rate', ratedetails.increment_s as 'increment_s'
                 FROM rates
@@ -753,7 +755,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
         rate = ActiveRecord::Base.connection.select_one(sql)
         if rate
           rr['rate'] = rate['rate']
-          rr['increment_s'] =  rate['increment_s']
+          rr['increment_s'] = rate['increment_s']
         else
           rr['rate'] = nil
         end
@@ -774,7 +776,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     elsif reseller?
       @reseller = current_user
     end
-   
+
     if @reseller
       @r_tariff = @reseller.tariff
       @r_lcr = @reseller.lcr
@@ -829,7 +831,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     @page_icon = 'key.png'
 
 
-    @users = User.find(:all, :select=>"*, #{SqlExport.nice_user_sql}", :conditions => "hidden = 0", :order => "nice_user ASC")
+    @users = User.find(:all, :select => "*, #{SqlExport.nice_user_sql}", :conditions => "hidden = 0", :order => "nice_user ASC")
 
   end
 
@@ -838,7 +840,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     @user = User.find_by_id(params[:user])
     unless @user
       flash[:notice] = _('User_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
 
     if @user.owner_id.to_i != session[:user_id].to_i
@@ -851,7 +853,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
 
     flash[:status] = _('Logged_as') + ": " + nice_user(@user)
 
-    if defined?(CS_Active) && CS_Active == 1 && group = @user.usergroups.find(:first, :include => :group, :conditions => [ "usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"])
+    if defined?(CS_Active) && CS_Active == 1 && group = @user.usergroups.find(:first, :include => :group, :conditions => ["usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"])
       session[:cs_group] = group
       session[:lang] = Translation.find_by_id(group.group.translation_id).short_name
       redirect_to :controller => "callshop", :action => "show", :id => group.group_id and return false
@@ -923,7 +925,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
   end
 
   def send_test_email
-    @emails = Email.find(:all, :conditions =>["owner_id= ? AND (callcenter='0' OR callcenter IS NULL)", session[:user_id]])
+    @emails = Email.find(:all, :conditions => ["owner_id= ? AND (callcenter='0' OR callcenter IS NULL)", session[:user_id]])
     if @emails.size.to_i == 0 and session[:usertype] == "reseller"
       user=User.find(session[:user_id])
       user.create_reseller_emails
@@ -1021,9 +1023,9 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Confline.set_value("Invoice_Short_File_Name", params[:invoice_short_file_name].to_i)
     session[:nice_invoice_number_digits] = params[:invoice_number_digits].to_i
     Confline.set_value("Invoice_user_billsec_show", params[:invoice_user_billsec_show].to_i)
-    Confline.set_value("Invoice_show_additional_details_on_separate_page",  params[:show_additional_details_on_separate_page_check].to_i)
-    Confline.set_value2("Invoice_show_additional_details_on_separate_page",  params[:show_additional_details_on_separate_page_details].to_s)
-    set_valid_page_limit("Invoice_page_limit", params[:invoice_page_limit].to_i, 0)#"magic number" 0 means administrator id
+    Confline.set_value("Invoice_show_additional_details_on_separate_page", params[:show_additional_details_on_separate_page_check].to_i)
+    Confline.set_value2("Invoice_show_additional_details_on_separate_page", params[:show_additional_details_on_separate_page_details].to_s)
+    set_valid_page_limit("Invoice_page_limit", params[:invoice_page_limit].to_i, 0) #"magic number" 0 means administrator id
 
     # Prepaid
     Confline.set_value("Prepaid_Invoice_Number_Start", params[:prepaid_invoice_number_start])
@@ -1053,15 +1055,15 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     @invoice_prepaid = (params[:i1_prepaid]).to_i + (params[:i2_prepaid]).to_i + (params[:i3_prepaid]).to_i + (params[:i4_prepaid]).to_i + (params[:i5_prepaid]).to_i + (params[:i6_prepaid]).to_i
     Confline.set_value("Prepaid_Invoice_default", @invoice_prepaid)
     Confline.set_value("Prepaid_Round_finals_to_2_decimals", params[:prepaid_invoice_number_digits].to_i)
-    Confline.set_value("Prepaid_Invoice_Short_File_Name",    params[:prepaid_invoice_short_file_name].to_i)
+    Confline.set_value("Prepaid_Invoice_Short_File_Name", params[:prepaid_invoice_short_file_name].to_i)
     session[:nice_prepaid_invoice_number_digits] = params[:prepaid_invoice_number_digits].to_i
     Confline.set_value("Prepaid_Invoice_user_billsec_show", params[:prepaid_invoice_user_billsec_show].to_i)
-    Confline.set_value("Prepaid_Invoice_show_additional_details_on_separate_page",  params[:prepaid_show_additional_details_on_separate_page_check].to_i)
-    Confline.set_value2("Prepaid_Invoice_show_additional_details_on_separate_page",  params[:prepaid_show_additional_details_on_separate_page_details].to_s)
-    set_valid_page_limit("Prepaid_Invoice_page_limit", params[:prepaid_invoice_page_limit].to_i, 0)#"magic number" 0 means administrator id
-    
+    Confline.set_value("Prepaid_Invoice_show_additional_details_on_separate_page", params[:prepaid_show_additional_details_on_separate_page_check].to_i)
+    Confline.set_value2("Prepaid_Invoice_show_additional_details_on_separate_page", params[:prepaid_show_additional_details_on_separate_page_details].to_s)
+    set_valid_page_limit("Prepaid_Invoice_page_limit", params[:prepaid_invoice_page_limit].to_i, 0) #"magic number" 0 means administrator id
+
     Confline.set_value("Invoice_allow_recalculate_after_send", params[:invoice_allow_recalculate_after_send].to_i, 0)
-        
+
     #Emails
 
     update_confline("Email_Sending_Enabled", params[:email_sending_enabled])
@@ -1075,7 +1077,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
 
 
     if callback_active?
-      if Confline.get_value("Email_Callback_Login",0).to_s != params[:email_login] or Confline.get_value("Email_Callback_Pop3_Server",0).to_s != params[:email_pop3_server]
+      if Confline.get_value("Email_Callback_Login", 0).to_s != params[:email_login] or Confline.get_value("Email_Callback_Pop3_Server", 0).to_s != params[:email_pop3_server]
         update_confline("Email_Pop3_Server", params[:email_pop3_server])
         update_confline("Email_Login", params[:email_login])
         update_confline("Email_Password", params[:email_password])
@@ -1101,7 +1103,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     update_confline("Usual_text_font_style", @usual_text_font_style.to_s)
     update_confline("Usual_text_highlighted_text_color", params[:colorfield2])
     @usual_text_highlighted_text_style = (params[:style4]).to_i + (params[:style5]).to_i + (params[:style6]).to_i
-    update_confline("Usual_text_highlighted_text_style",@usual_text_highlighted_text_style.to_s)
+    update_confline("Usual_text_highlighted_text_style", @usual_text_highlighted_text_style.to_s)
     update_confline("Usual_text_highlighted_text_size", params[:usual_text_highlighted_text_size])
     update_confline("Header_footer_font_color", params[:colorfield3])
     update_confline("Header_footer_font_size", params[:h_f_font_size])
@@ -1166,7 +1168,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       error = 1
     end
     Confline.set_value("Disalow_Duplicate_Device_Usernames", params[:disalow_duplicate_device_usernames])
-    update_confline("Disallow_prepaid_user_balance_drop_below_zero",params[:disallow_prepaid_user_balance_drop_below_zero].to_i)
+    update_confline("Disallow_prepaid_user_balance_drop_below_zero", params[:disallow_prepaid_user_balance_drop_below_zero].to_i)
     Confline.set_value("Hide_non_completed_payments_for_user", params[:hide_non_completed_payments_for_user].to_i)
     Confline.set_value("Disallow_Email_Editing", params[:disallow_email_editing], current_user.id)
 
@@ -1191,16 +1193,16 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     end
     Confline.set_value("Google_Key", params[:gm_key])
 
-    Confline.set_value("Active_Calls_Maximum_Calls", params[:active_calls_max] )
-    Confline.set_value("Active_Calls_Refresh_Interval", (params[:active_calls_interval].to_i < 3 ? 3 : params[:active_calls_interval].to_i) )
-    Confline.set_value("Show_Active_Calls_for_Users", params[:show_active_calls_for_users] )
-    Confline.set_value("Active_Calls_Show_Server", params[:active_calls_show_server] )
+    Confline.set_value("Active_Calls_Maximum_Calls", params[:active_calls_max])
+    Confline.set_value("Active_Calls_Refresh_Interval", (params[:active_calls_interval].to_i < 3 ? 3 : params[:active_calls_interval].to_i))
+    Confline.set_value("Show_Active_Calls_for_Users", params[:show_active_calls_for_users])
+    Confline.set_value("Active_Calls_Show_Server", params[:active_calls_show_server])
 
-    Confline.set_value("Banned_CLIs_default_IVR_id", params[:banned_clis_default_ivr_id] )
+    Confline.set_value("Banned_CLIs_default_IVR_id", params[:banned_clis_default_ivr_id])
     if params[:show_logo_on_register_page]
-      Confline.set_value("Show_logo_on_register_page", params[:show_logo_on_register_page] )
+      Confline.set_value("Show_logo_on_register_page", params[:show_logo_on_register_page])
     else
-      Confline.set_value("Show_logo_on_register_page", 0 )
+      Confline.set_value("Show_logo_on_register_page", 0)
     end
     Confline.set_value("Show_rates_for_users", params[:show_rates_for_users].to_i, session[:user_id])
     Confline.set_value("Show_Advanced_Rates_For_Users", params[:show_advanced_rates_for_users].to_i, session[:user_id])
@@ -1254,7 +1256,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Confline.set_value('Allow_GET_API', params[:allow_get_api].to_i)
     Confline.set_value('API_Secret_Key', params[:api_secret_key])
     Confline.set_value('API_Login_Redirect_to_Main', params[:api_login_redirect_to_main].to_i)
-    Confline.set_value('API_Allow_registration_ower_API',params[:api_allow_registration].to_i)
+    Confline.set_value('API_Allow_registration_ower_API', params[:api_allow_registration].to_i)
     # /API settings
 
     Confline.set_value("CSV_File_size", params[:csv_file_size].to_i)
@@ -1264,7 +1266,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     # terms and conditions
     cl = Confline.find_or_create_by_name_and_owner_id("Registration_Agreement", session[:user_id])
     if params[:use_terms_and_conditions]
-      cl.update_attributes({ :value2 => params[:terms_and_conditions], :value => "1" })
+      cl.update_attributes({:value2 => params[:terms_and_conditions], :value => "1"})
     else
       cl.update_attribute(:value, "0")
     end
@@ -1278,13 +1280,13 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       Confline.set_value('Tell_Balance', params[:tell_balance].to_i)
       Confline.set_value('Tell_Time', params[:tell_time].to_i)
       Confline.set_value('API_Allow_payments_ower_API', params[:api_allow_payments].to_i)
-      Confline.set_value('API_payment_confirmation',params[:api_payment_confirmation].to_i)
+      Confline.set_value('API_payment_confirmation', params[:api_payment_confirmation].to_i)
       Dialplan.change_tell_balance_value(params[:tell_balance].to_i) if tb != params[:tell_balance].to_i
       Dialplan.change_tell_time_value(params[:tell_time].to_i) if tt != params[:tell_time].to_i
     end
-    
+
     # PRIVACY settings
-    Confline.set_value("Hide_Destination_End",  params[:hide_destination_ends_gui].to_i + params[:hide_destination_ends_csv].to_i + params[:hide_destination_ends_pdf].to_i)
+    Confline.set_value("Hide_Destination_End", params[:hide_destination_ends_gui].to_i + params[:hide_destination_ends_csv].to_i + params[:hide_destination_ends_pdf].to_i)
     # /PRIVACY settings
     user = User.find_by_id(session[:user_id])
     unless user
@@ -1298,6 +1300,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     redirect_to :action => 'settings' and return false
 
   end
+
 =begin rdoc
 Sets default tax values for users or cardgroups
 
@@ -1317,41 +1320,41 @@ Sets default tax values for users or cardgroups
   def tax_change
     owner = correct_owner_id
     tax ={
-      :tax1_enabled => 1,
-      :tax2_enabled => Confline.get_value2("Tax_2", owner).to_i,
-      :tax3_enabled => Confline.get_value2("Tax_3", owner).to_i,
-      :tax4_enabled => Confline.get_value2("Tax_4", owner).to_i,
-      :tax1_name => Confline.get_value("Tax_1", owner),
-      :tax2_name => Confline.get_value("Tax_2", owner),
-      :tax3_name => Confline.get_value("Tax_3", owner),
-      :tax4_name => Confline.get_value("Tax_4", owner),
-      :total_tax_name => Confline.get_value("Total_tax_name", owner),
-      :tax1_value => Confline.get_value("Tax_1_Value", owner).to_f,
-      :tax2_value => Confline.get_value("Tax_2_Value", owner).to_f,
-      :tax3_value => Confline.get_value("Tax_3_Value", owner).to_f,
-      :tax4_value => Confline.get_value("Tax_4_Value", owner).to_f,
-      :compound_tax =>  Confline.get_value("Tax_compound", owner).to_i
+        :tax1_enabled => 1,
+        :tax2_enabled => Confline.get_value2("Tax_2", owner).to_i,
+        :tax3_enabled => Confline.get_value2("Tax_3", owner).to_i,
+        :tax4_enabled => Confline.get_value2("Tax_4", owner).to_i,
+        :tax1_name => Confline.get_value("Tax_1", owner),
+        :tax2_name => Confline.get_value("Tax_2", owner),
+        :tax3_name => Confline.get_value("Tax_3", owner),
+        :tax4_name => Confline.get_value("Tax_4", owner),
+        :total_tax_name => Confline.get_value("Total_tax_name", owner),
+        :tax1_value => Confline.get_value("Tax_1_Value", owner).to_f,
+        :tax2_value => Confline.get_value("Tax_2_Value", owner).to_f,
+        :tax3_value => Confline.get_value("Tax_3_Value", owner).to_f,
+        :tax4_value => Confline.get_value("Tax_4_Value", owner).to_f,
+        :compound_tax => Confline.get_value("Tax_compound", owner).to_i
     }
 
     tax[:total_tax_name] = "TAX" if tax[:total_tax_name].blank?
     tax[:tax1_name] = tax[:total_tax_name].to_s if tax[:tax1_name].blank?
 
     case params[:u].to_i
-    when 1
+      when 1
         users = User.find(:all, :include => [:tax], :conditions => ["owner_id = ?", owner])
-      for user in users do
-        user.assign_default_tax(tax, {:save => true})
-      end
-      Confline.set_default_object(Tax, owner, tax)
-      flash[:status] = _('User_taxes_set_successfully')
-    when 2
+        for user in users do
+          user.assign_default_tax(tax, {:save => true})
+        end
+        Confline.set_default_object(Tax, owner, tax)
+        flash[:status] = _('User_taxes_set_successfully')
+      when 2
         Cardgroup.set_tax(tax, session[:user_id])
-      flash[:status] = _('Cardgroup_taxes_set_successfully')
-    when 3
+        flash[:status] = _('Cardgroup_taxes_set_successfully')
+      when 3
         Voucher.set_tax(tax)
-      flash[:status] = _('voucher_taxes_set_successfully')
-    else
-      dont_be_so_smart
+        flash[:status] = _('voucher_taxes_set_successfully')
+      else
+        dont_be_so_smart
     end
 
     if owner == 0
@@ -1369,7 +1372,6 @@ Sets default tax values for users or cardgroups
 
     @devices = Device.find(:all, :conditions => "user_id >= 0 AND name not like 'mor_server_%'", :order => "username ASC")
   end
-
 
 
   def style(stile)
@@ -1496,9 +1498,9 @@ Sets default tax values for users or cardgroups
     Confline.set_value("PayPal_Email_Notification", params[:paypal_email_notification])
     Confline.set_value("PayPal_Test", params[:paypal_test])
     Confline.set_value("PayPal_Payment_Confirmation", params[:paypal_payment_confirmation])
-    Confline.set_value('PayPal_Custom_redirect',params[:paypal_custom_redirect])
-    Confline.set_value('Paypal_return_url',params[:paypal_return_url])
-    Confline.set_value('Paypal_cancel_url',params[:paypal_cancel_url])
+    Confline.set_value('PayPal_Custom_redirect', params[:paypal_custom_redirect])
+    Confline.set_value('Paypal_return_url', params[:paypal_return_url])
+    Confline.set_value('Paypal_cancel_url', params[:paypal_cancel_url])
     # /PayPal
 
     #WebMoney
@@ -1568,7 +1570,7 @@ Sets default tax values for users or cardgroups
     @page_title = _('Addons_Settings')
     @page_icon = 'cog.png'
     if recordings_addon_active?
-      @total_recordings_size = Recording.find(:all, :first, :select=> "SUM(size) AS 'total_size'", :conditions => "deleted = 0")[0]["total_size"].to_f
+      @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => "deleted = 0")[0]["total_size"].to_f
     end
   end
 
@@ -1608,7 +1610,7 @@ Sets default tax values for users or cardgroups
     # /=== Recordings ==============================================================
     # === Click To Call ============================================================
     if calling_cards_active?
-      Confline.set_value("CCShop_show_values_without_VAT_for_user", params[:CCShop_show_values_without_VAT_for_user].to_i, session[:user_id] )
+      Confline.set_value("CCShop_show_values_without_VAT_for_user", params[:CCShop_show_values_without_VAT_for_user].to_i, session[:user_id])
     end
     # === SMS ======================================================================
     if sms_active?
@@ -1619,16 +1621,15 @@ Sets default tax values for users or cardgroups
       Confline.set_value2("Frontpage_SMS_Text", params[:frontpage_sms_text].to_s, session[:user_id])
     end
     # /=== SMS =====================================================================
-    
+
     # Monitoring
     if (defined?(MA_Active) and MA_Active == 1)
-    	
+
       Confline.set_value("Spy_Device", params[:spy_device], session[:user_id])
-    	
+
     end
-    
-    
-    
+
+
     renew_session(current_user)
 
     if errors.size > 0
@@ -1705,7 +1706,7 @@ Sets default tax values for users or cardgroups
   def translations_change_status
     tr = UserTranslation.find(params[:id])
     active = UserTranslation.get_active.size
-    tr.active = (tr.active == 1 ? 0 :  1)
+    tr.active = (tr.active == 1 ? 0 : 1)
     if (tr.active == 0 and active != 1) or tr.active == 1
       tr.save
     end
@@ -1745,12 +1746,12 @@ Sets default tax values for users or cardgroups
     Confline.set_value("Company", params[:reseller_company], session[:user_id])
     Confline.set_value("Company_Email", params[:reseller_company_email], session[:user_id])
     Confline.set_value("Version", params[:reseller_version], session[:user_id])
-    Confline.set_value("Copyright_Title",params[:reseller_copyright_title], session[:user_id])
-    Confline.set_value("Admin_Browser_Title",params[:reseller_admin_browser_title], session[:user_id])
+    Confline.set_value("Copyright_Title", params[:reseller_copyright_title], session[:user_id])
+    Confline.set_value("Admin_Browser_Title", params[:reseller_admin_browser_title], session[:user_id])
     Confline.set_value2("Frontpage_Text", params[:frontpage_text].to_s, session[:user_id])
     #boolean values
 
-    {"Registration_enabled" => :registration_enabled, "Hide_registration_link" => :hide_registration_link,  "Show_logo_on_register_page" => :show_logo_on_register_page,  "Registration_Enable_VAT_checking" => :enable_vat_checking ,  "Registration_allow_vat_blank" => :allow_vat_blank}.each{|key, value|
+    {"Registration_enabled" => :registration_enabled, "Hide_registration_link" => :hide_registration_link, "Show_logo_on_register_page" => :show_logo_on_register_page, "Registration_Enable_VAT_checking" => :enable_vat_checking, "Registration_allow_vat_blank" => :allow_vat_blank}.each { |key, value|
       Confline.set_value(key, params[value].to_i, session[:user_id])
     }
 
@@ -1762,7 +1763,7 @@ Sets default tax values for users or cardgroups
     Confline.set_value("Invoice_Number_Type", params[:invoice_number_type], session[:user_id])
     Confline.set_value("Invoice_Period_Start_Day", params[:invoice_period_start_day], session[:user_id])
     Confline.set_value("Invoice_Show_Calls_In_Detailed", params[:invoice_show_calls_in_detailed], session[:user_id])
-    format = params[:invoice_address_format].to_i == 0 ? Confline.get_value("Invoice_Address_Format",0).to_i : params[:invoice_address_format]
+    format = params[:invoice_address_format].to_i == 0 ? Confline.get_value("Invoice_Address_Format", 0).to_i : params[:invoice_address_format]
     Confline.set_value("Invoice_Address_Format", format, session[:user_id])
     Confline.set_value("Invoice_Address1", params[:invoice_address1], session[:user_id])
     Confline.set_value("Invoice_Address2", params[:invoice_address2], session[:user_id])
@@ -1778,12 +1779,12 @@ Sets default tax values for users or cardgroups
     Confline.set_value("Invoice_Show_Balance_Line", params[:invoice_show_balance_line], session[:user_id])
     Confline.set_value("Invoice_Short_File_Name", params[:invoice_short_file_name].to_i, session[:user_id])
     Confline.set_value("Date_format", params[:date_format], session[:user_id])
-    Confline.set_value("Invoice_show_additional_details_on_separate_page",  params[:show_additional_details_on_separate_page_check].to_i, session[:user_id])
-    Confline.set_value2("Invoice_show_additional_details_on_separate_page",  params[:show_additional_details_on_separate_page_details].to_s, session[:user_id])
+    Confline.set_value("Invoice_show_additional_details_on_separate_page", params[:show_additional_details_on_separate_page_check].to_i, session[:user_id])
+    Confline.set_value2("Invoice_show_additional_details_on_separate_page", params[:show_additional_details_on_separate_page_details].to_s, session[:user_id])
     set_valid_page_limit("Invoice_page_limit", params[:invoice_page_limit].to_i, session[:user_id])
     unless current_user.reseller_allow_providers_tariff?
       # PRIVACY settings
-      Confline.set_value("Hide_Destination_End",  params[:hide_destination_ends_gui].to_i + params[:hide_destination_ends_csv].to_i + params[:hide_destination_ends_pdf].to_i, session[:user_id])
+      Confline.set_value("Hide_Destination_End", params[:hide_destination_ends_gui].to_i + params[:hide_destination_ends_csv].to_i + params[:hide_destination_ends_pdf].to_i, session[:user_id])
       # /PRIVACY settings
     end
 
@@ -1794,7 +1795,7 @@ Sets default tax values for users or cardgroups
     Confline.set_value("Show_Rates_Without_Tax", params[:show_rates_without_tax], session[:user_id])
     Confline.set_value("Show_rates_for_users", params[:show_rates_for_users].to_i, session[:user_id])
     Confline.set_value("Show_Advanced_Rates_For_Users", params[:show_advanced_rates_for_users].to_i, session[:user_id])
-    update_confline("Disallow_prepaid_user_balance_drop_below_zero",params[:disallow_prepaid_user_balance_drop_below_zero].to_i, session[:user_id])
+    update_confline("Disallow_prepaid_user_balance_drop_below_zero", params[:disallow_prepaid_user_balance_drop_below_zero].to_i, session[:user_id])
     Confline.set_value("Logout_link", params[:logout_link], session[:user_id])
     Confline.set_value("Show_only_main_page", params[:show_only_main_page].to_i, session[:user_id])
     Confline.set_value("Show_forgot_password", params[:show_forgot_password].to_i, session[:user_id])
@@ -1845,7 +1846,7 @@ Sets default tax values for users or cardgroups
     cl = Confline.find_or_create_by_name_and_owner_id("Registration_Agreement", session[:user_id])
     if params[:use_terms_and_conditions]
 
-      cl.update_attributes({ :value2 => params[:terms_and_conditions], :value => "1" })
+      cl.update_attributes({:value2 => params[:terms_and_conditions], :value => "1"})
     else
 
       cl.update_attribute(:value, "0")
@@ -1860,6 +1861,7 @@ Sets default tax values for users or cardgroups
     flash[:status] = _('Settings_saved')
     redirect_to :action => 'reseller_settings' and return false
   end
+
   # -------------- Reseller logo options -----------------------------------------
   def reseller_settings_logo
     @page_title = _('Logo_settings')
@@ -1876,9 +1878,9 @@ Sets default tax values for users or cardgroups
           if @ext == 'jpg' or @ext == 'jpeg' or @ext == 'png' or @ext == 'gif'
             @filename = "logo_"+session[:user_id].to_s+"."+@ext
             File.open(Actual_Dir + '/app/assets/images/logo/' + @filename, "wb") do |f|
-               f.write(params[:logo].read)
+              f.write(params[:logo].read)
             end
-            update_confline("Logo_Picture", 'logo/' + @filename.to_s , session[:user_id] )
+            update_confline("Logo_Picture", 'logo/' + @filename.to_s, session[:user_id])
             flash[:status] = _('Logo_uploaded')
             user = User.find(session[:user_id])
             renew_session(user)
@@ -1896,6 +1898,7 @@ Sets default tax values for users or cardgroups
     end
     redirect_to :action => 'reseller_settings_logo' and return false
   end
+
   # -------------- RESELLER payment settings--------------------------------------
   def reseller_settings_payments
 =begin
@@ -1927,9 +1930,9 @@ Sets default tax values for users or cardgroups
     Confline.set_value("PayPal_Test", params[:reseller_paypal_test], session[:user_id])
     Confline.set_value("PayPal_Email_Notification", params[:reseller_paypal_email_notification], session[:user_id])
     Confline.set_value("PayPal_Payment_Confirmation", params[:reseller_paypal_payment_confirmation], session[:user_id])
-    Confline.set_value('PayPal_Custom_redirect',params[:paypal_custom_redirect], session[:user_id])
-    Confline.set_value('Paypal_return_url',params[:paypal_return_url], session[:user_id])
-    Confline.set_value('Paypal_cancel_url',params[:paypal_cancel_url], session[:user_id])
+    Confline.set_value('PayPal_Custom_redirect', params[:paypal_custom_redirect], session[:user_id])
+    Confline.set_value('Paypal_return_url', params[:paypal_return_url], session[:user_id])
+    Confline.set_value('Paypal_cancel_url', params[:paypal_cancel_url], session[:user_id])
 
     #WebMoney
     if params[:reseller_webmoney_enabled]
@@ -1968,20 +1971,20 @@ Sets default tax values for users or cardgroups
     @page_icon = 'lightning.png'
     @help_link = "http://wiki.kolmisoft.com/index.php/Integrity_Check"
     @default_user_warning = false
-    
+
     @destinations_without_dg = Destination.find(:all, :conditions => "destinationgroup_id = 0", :order => "direction_code ASC")
     @dialplans = Dialplan.find(:all, :conditions => "dptype = 'ivr' and data8 = 1")
-    @actions = Action.find(:all,:joins => " JOIN users ON (actions.user_id = users.id) ", :conditions => "action = 'error' AND processed = '0' ")
-    @devices = Device.find(:all,:conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0  AND username NOT LIKE 'mor_server_%'")
-    @users = User.find(:all,:conditions => ["password = SHA1('') or password = SHA1(username)"])
+    @actions = Action.find(:all, :joins => " JOIN users ON (actions.user_id = users.id) ", :conditions => "action = 'error' AND processed = '0' ")
+    @devices = Device.find(:all, :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0  AND username NOT LIKE 'mor_server_%'")
+    @users = User.find(:all, :conditions => ["password = SHA1('') or password = SHA1(username)"])
     @default_users_erors = Confline.get_default_user_pospaid_errors
-    if  @default_users_erors and  @default_users_erors.size.to_i > 0
+    if  @default_users_erors and @default_users_erors.size.to_i > 0
       @default_user_warning = true
     end
-    @users_postpaid_and_loss_calls = User.find(:all,:conditions => ["postpaid = 1 and allow_loss_calls = 1"])
+    @users_postpaid_and_loss_calls = User.find(:all, :conditions => ["postpaid = 1 and allow_loss_calls = 1"])
 
     if @actions.size.to_i > 0
-      @action = Action.find(:first,:joins => " JOIN users ON (actions.user_id = users.id) ", :conditions => "action = 'error' AND processed = '0' ", :order => "date ASC")
+      @action = Action.find(:first, :joins => " JOIN users ON (actions.user_id = users.id) ", :conditions => "action = 'error' AND processed = '0' ", :order => "date ASC")
       date = @action.date.to_time - 1.day
       session[:year_from] = date.year
       session[:month_from] = date.month
@@ -1996,7 +1999,7 @@ Sets default tax values for users or cardgroups
 
     @destinations_without_dg = Destination.find(:all, :conditions => "destinationgroup_id = 0", :order => "direction_code ASC")
 
-    if @destinations_without_dg.size > 0 
+    if @destinations_without_dg.size > 0
       return 1
     else
       Confline.set_value("Integrity_Check", 0)
@@ -2009,7 +2012,7 @@ Sets default tax values for users or cardgroups
 
     @default_user_warning = true if Confline.get_value('Default_User_allow_loss_calls', user_id).to_i == 1 and Confline.get_value('Default_User_postpaid', user_id).to_i == 1
 
-    @users_postpaid_and_loss_calls = User.find(:all,:conditions => ["postpaid = 1 and allow_loss_calls = 1"])
+    @users_postpaid_and_loss_calls = User.find(:all, :conditions => ["postpaid = 1 and allow_loss_calls = 1"])
 
     if @users_postpaid_and_loss_calls.size > 0 or @default_user_warning
       return 1
@@ -2036,12 +2039,11 @@ Sets default tax values for users or cardgroups
     @rights = Right.find(:all, :include => [:role_rights], :order => "saved DESC ,controller ASC , action ASC")
 
 
-
     RoleRight.transaction do
 
-      @rights.each{|right|
+      @rights.each { |right|
         MorLog.my_debug("OH SNAP #{right.role_rights.size}") if right.role_rights.size != 5
-        right.role_rights.each{ |rr|
+        right.role_rights.each { |rr|
 
           MorLog.my_debug(rr.to_yaml) if right.id == 75
           MorLog.my_debug(params["Setting_#{rr.role_id}_#{right.id}".to_sym].to_i) if right.id == 75
@@ -2141,12 +2143,12 @@ Sets default tax values for users or cardgroups
     @controllers = Dir.new("#{Rails.root}/app/controllers").entries
     @controllers.each do |controller|
       if controller =~ /_controller/
-        cont = controller.camelize.gsub(".rb","")
-        cont_short = cont.gsub("Controller","").downcase
+        cont = controller.camelize.gsub(".rb", "")
+        cont_short = cont.gsub("Controller", "").downcase
         (eval("#{cont}.new.methods") -
             ApplicationController.methods -
             Object.methods -
-            ApplicationController.new.methods).sort.each {|met|
+            ApplicationController.new.methods).sort.each { |met|
           RoleRight.new_right(cont_short, met.to_s, cont_short.to_s.capitalize + "_"+met.to_s)
         }
       end
@@ -2350,7 +2352,7 @@ Sets default tax values for users or cardgroups
               user = User.new
               user.temporary_id = clean_value_all(r_arr[session[:imp_user_temp_id]]).to_i
               user.username =clean_value_all r_arr[session[:imp_user_username]].to_s
-              user.password =  Digest::SHA1.hexdigest(clean_value_all(r_arr[session[:imp_user_password]].to_s))
+              user.password = Digest::SHA1.hexdigest(clean_value_all(r_arr[session[:imp_user_password]].to_s))
               my_debug("Password:")
               my_debug(clean_value_all(r_arr[session[:imp_user_password]].to_s))
 
@@ -2400,7 +2402,7 @@ Sets default tax values for users or cardgroups
               user.address_id = address.id
               user.owner_id = 0
               unless user.save
-                user.errors.each{|key, value|
+                user.errors.each { |key, value|
                   MorLog.my_debug("#{key} - #{value}")
                 }
 
@@ -2529,7 +2531,7 @@ Sets default tax values for users or cardgroups
             if user_temp_id.length == 0
               err += _("Temp_User_ID_Cant_Be_Empty") + "<br />"
             else
-              user = User.find(:first, :conditions=>"temporary_id = #{user_temp_id.to_i}")
+              user = User.find(:first, :conditions => "temporary_id = #{user_temp_id.to_i}")
               if !user
                 err += _("User_Was_Not_Found") + "<br />"
               end
@@ -2587,7 +2589,7 @@ Sets default tax values for users or cardgroups
                 #if reseller , importin device with no location , find default location
                 #if no default location, create it and use
                 if reseller?
-                  loc = Location.find(:all, :conditions => ['name = ? and user_id = ?','Default location', current_user.id])
+                  loc = Location.find(:all, :conditions => ['name = ? and user_id = ?', 'Default location', current_user.id])
                   if not loc
                     current_user.create_reseller_localization
                     loc = Location.find(:first, :conditions => "name = 'Default location'")
@@ -2621,12 +2623,12 @@ Sets default tax values for users or cardgroups
               device.save
               device.accountcode = device.id
               if device.save
-              a=configure_extensions(device.id, :current_user=>current_user)
-              return false if !a
+                a=configure_extensions(device.id, :current_user => current_user)
+                return false if !a
               else
                 @error_array << arr
                 msq = ''
-                device.errors.each{ |key, value|
+                device.errors.each { |key, value|
                   msq += "<br> * #{_(value)}"
                 } if device.respond_to?(:errors)
                 @msg_array << msq
@@ -2659,7 +2661,7 @@ Sets default tax values for users or cardgroups
     session[:imp_device_include] and session[:imp_device_include]==1 ? @include = 1 : @include = 0
 
     if @step == 2
-      @providers = Provider.find(:all, :conditions=>['hidden=?',0])
+      @providers = Provider.find(:all, :conditions => ['hidden=?', 0])
 
       if params[:include].to_i == 1
         session[:imp_dids_include] = 1
@@ -2726,7 +2728,7 @@ Sets default tax values for users or cardgroups
             if user_id.length == 0
               err += _("Temp_User_ID_Cant_Be_Empty") + "<br />"
             else
-              user = User.find(:first, :conditions=>"temporary_id = #{user_id.to_i}")
+              user = User.find(:first, :conditions => "temporary_id = #{user_id.to_i}")
               if !user
                 err += _("User_Was_Not_Found") + "<br />"
               end
@@ -2747,7 +2749,7 @@ Sets default tax values for users or cardgroups
               if did_tx.to_s[0, 1] == "0"
                 err += _("DID_Cant_Start_With_Zero") + "<br />"
               else
-                if Did.find(:first, :conditions=>["did = ?", did_tx])
+                if Did.find(:first, :conditions => ["did = ?", did_tx])
                   err += _("DID_Must_Be_Unique") + "<br />"
                 end
               end
@@ -2782,8 +2784,8 @@ Sets default tax values for users or cardgroups
 
   def clean_value(value)
     cv = value
-    cv = cv[1..cv.length] if cv[0,1] == "\""
-    cv = cv[0..cv.length-2] if cv[cv.length-1,1] == "\""
+    cv = cv[1..cv.length] if cv[0, 1] == "\""
+    cv = cv[0..cv.length-2] if cv[cv.length-1, 1] == "\""
     cv
   end
 
@@ -2800,10 +2802,10 @@ Sets default tax values for users or cardgroups
 
   def clean_value_all(value)
     cv = value.to_s
-    while cv[0,1] == "\"" or cv[0] == "'" do
+    while cv[0, 1] == "\"" or cv[0] == "'" do
       cv = cv[1..cv.length]
     end
-    while cv[cv.length-1,1] == "\"" or cv[cv.length-1,1] == "'" do
+    while cv[cv.length-1, 1] == "\"" or cv[cv.length-1, 1] == "'" do
       cv = cv[0..cv.length-2]
     end
     cv
@@ -2899,7 +2901,6 @@ Sets default tax values for users or cardgroups
   end
 
 
-
   def check_separator
     if session[:file] == nil
       flash[:notice] = _('Please_select_file')
@@ -2909,7 +2910,7 @@ Sets default tax values for users or cardgroups
       sep = params[:custom].to_i > 0 ? params[:sepn].to_s : params[:sepn2].to_s
       arr = file.split("\n")
       @fl = []
-      5.times{|num| @fl[num] = arr[num].to_s.split(sep)}
+      5.times { |num| @fl[num] = arr[num].to_s.split(sep) }
       if  @fl[1].size.to_i < params[:min_collum_size].to_i
         @notice = _('Not_enough_columns_check_csv_separators')
       end
@@ -2950,7 +2951,7 @@ Sets default tax values for users or cardgroups
         end
       end
     end
-    
+
     renew_session(current_user)
     if error.to_i == 0
       flash[:status] = _('Settings_saved')
@@ -2959,16 +2960,16 @@ Sets default tax values for users or cardgroups
   end
 
   def generate_hash
-    @page_title = _('Generate_hash')     
+    @page_title = _('Generate_hash')
     if current_user.is_admin?
       @api_link = params[:link].to_s
       if not @api_link.blank?
         @query_values = Hash.new
         begin
-          CGI::parse(URI.parse(@api_link).query).each { |key, value | @query_values[key.to_sym] = value[0]}
-          flash[:notice] = nil 
+          CGI::parse(URI.parse(@api_link).query).each { |key, value| @query_values[key.to_sym] = value[0] }
+          flash[:notice] = nil
         rescue
-          flash[:notice] = _("failed_to_parse_uri") + ' ' + @api_link  
+          flash[:notice] = _("failed_to_parse_uri") + ' ' + @api_link
         end
         dummy, ret, @hash_param_order = MorApi.check_params_with_all_keys(@query_values, dummy)
         @system_hash = ret[:system_hash]
@@ -3004,7 +3005,7 @@ Sets default tax values for users or cardgroups
   def check_callback_addon
     unless callback_active?
       dont_be_so_smart
-      redirect_to :controller=>:callc, :action=>:main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
   end
 
@@ -3023,7 +3024,7 @@ Sets default tax values for users or cardgroups
     # get only the filename, not the whole path (from IE)
     just_filename = File.basename(file_name)
     # replace all none alphanumeric, underscore or perioids with underscore
-    just_filename.gsub(/[^\w\.\_]/,'_')
+    just_filename.gsub(/[^\w\.\_]/, '_')
   end
 
 
@@ -3125,7 +3126,6 @@ Sets default tax values for users or cardgroups
 =end
 
 
-
 =begin rdoc
  Updates tax for all cardgroups. If cardgroups has no tax - new tax is created.
 
@@ -3138,7 +3138,7 @@ Sets default tax values for users or cardgroups
     @rule = Locationrule.find_by_id(params[:id])
     unless @rule
       flash[:notice]=_('Location_rule_was_not_found')
-      redirect_to :action=>:localization and return false
+      redirect_to :action => :localization and return false
     end
     check_location_rule_owner
   end
@@ -3148,7 +3148,7 @@ Sets default tax values for users or cardgroups
 
     unless @dialplan
       flash[:notice]=_('Dialplan_was_not_found')
-      redirect_to :action=>:pbx_functions and return false
+      redirect_to :action => :pbx_functions and return false
     end
 
     unless @dialplan.user_id.to_i == current_user.id.to_i
@@ -3161,7 +3161,7 @@ Sets default tax values for users or cardgroups
     @location = Location.find_by_id(params[:id])
     unless @location
       flash[:notice]=_('Location_was_not_found')
-      redirect_to :action=>:localization and return false
+      redirect_to :action => :localization and return false
     end
     check_location_owner
   end
