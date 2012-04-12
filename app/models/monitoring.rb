@@ -11,7 +11,8 @@ class Monitoring < ActiveRecord::Base
   attr_accessor :existent_record
 
   MONITORING_TYPES = {
-    1 => 'Monitoring_call_price_sum_over_past_period'
+    1 => 'Monitoring_call_price_sum_over_past_period',
+    2 => 'Monitoring_simultaneous_calls_over_past_period'
   }.freeze
 
   validate do |monitoring|
@@ -150,7 +151,11 @@ class Monitoring < ActiveRecord::Base
   end
 
   def m_after_initialize
-    self.mtype = 1 # monitoring type: calls price sum in past period, change me when new monitoring types will be added!
+    if self.monitoring_type == 'simultaneous'
+      self.mtype = 2
+    else
+      self.mtype = 1 # monitoring type: calls price sum in past period, change me when new monitoring types will be added!
+    end
   end
 
   # associates or deassociates user with monitoring
