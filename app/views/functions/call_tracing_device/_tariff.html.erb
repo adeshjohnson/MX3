@@ -1,27 +1,30 @@
 <table width="100%" class="simple">
   <tr class="row2">
     <th align="left"><%= b_rates + (user_type == "reseller" ? _('Reseller_rates') : _('User_rates')) %></th>
-    <td align="right" ></td>
+    <td align="right"></td>
   </tr>
   <tr class="row1">
     <td align="left"><%= b_view + _('Tariff') + "/" + _('Type') %>:</td>
-    <td align="right" id="tariff_<%= user.id %>"  ><%= link_nice_tariff_if_own(tariff) %>/<%=  {"user" => _('Retail'), "user_wholesale" => _('Wholesale')}[tariff.purpose] %></td>
+    <td align="right" id="tariff_<%= user.id %>"><%= link_nice_tariff_if_own(tariff) %>
+      /<%= {"user" => _('Retail'), "user_wholesale" => _('Wholesale')}[tariff.purpose] %></td>
   </tr>
   <tr class="row2">
     <td align="left"><%= b_currency + _('Currency') %> (<%= _('Exchange_rate') %>):</td>
-    <td align="right" id="currency_<%= user.id %>" ><%= tariff.currency %> (<%= nice_number tariff.exchange_rate(current_user.currency.name) %>)</td>
+    <td align="right" id="currency_<%= user.id %>"><%= tariff.currency %>
+      (<%= nice_number tariff.exchange_rate(current_user.currency.name) %>)
+    </td>
   </tr>
 
   <% if rates and rates[0] %>
-    <tr class="row1">
-      <td align="left"><%= _('Prefix') %>:</td>
-      <td align="right" id="prefix_<%= user.id %>" ><%= rates[0]['prefix'] if rates[0]%></td>
-    </tr>
-    <% if tariff.purpose == "user" %>
-      <tr class="row2">
-        <td align="left"><%= _('Destination_group') %>:</td>
-        <td align="right" id="destination_group_<%= user.id %>" ><%= (draw_flag_by_code(destination_group.flag) + " " + destination_group.name + " " + destination_group.desttype) if destination_group %></td>
+      <tr class="row1">
+        <td align="left"><%= _('Prefix') %>:</td>
+        <td align="right" id="prefix_<%= user.id %>"><%= rates[0]['prefix'] if rates[0] %></td>
       </tr>
-    <% end %>
+      <% if tariff.purpose == "user" %>
+          <tr class="row2">
+            <td align="left"><%= _('Destination_group') %>:</td>
+            <td align="right" id="destination_group_<%= user.id %>"><%= (draw_flag_by_code(destination_group.flag) + " " + destination_group.name + " " + destination_group.desttype) if destination_group %></td>
+          </tr>
+      <% end %>
   <% end %>
 </table>

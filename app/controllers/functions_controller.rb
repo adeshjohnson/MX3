@@ -85,8 +85,9 @@ class FunctionsController < ApplicationController
 
         @spy_device = nice_device(device)
 
-        originate_call(device_id, src, src_channel, "mor_cb_spy", extension, _('Spy_Channel'), nil, server)
+        st = originate_call(device_id, src, src_channel, "mor_cb_spy", extension, _('Spy_Channel'), nil, server)
 
+        @error = _('Cannot_connect_to_asterisk_server') if st.to_i != 0
       else
         @error = _('No_Spy_device_explanation')
       end
@@ -129,11 +130,12 @@ class FunctionsController < ApplicationController
 
         channel = "Local/#{@src}@mor_cb_src/n"
         if @dst.length > 0
-          originate_call(@acc, @src, channel, "mor_cb_dst", @dst, callerid_number)
+          st = originate_call(@acc, @src, channel, "mor_cb_dst", @dst, callerid_number)
         else
-          originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", callerid_number)
+          st = originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", callerid_number)
         end
 
+        @error = _('Cannot_connect_to_asterisk_server') if st.to_i != 0
         #create_call_file(@acc, @src, @dst)
       end
 
@@ -203,13 +205,19 @@ class FunctionsController < ApplicationController
 
         channel = "Local/#{@src}@mor_cb_src/n"
         if @dst.length > 0
-          originate_call(@acc, @src, channel, "mor_cb_dst", @dst, callerid_number, nil, server)
+          st = originate_call(@acc, @src, channel, "mor_cb_dst", @dst, callerid_number, nil, server)
         else
-          originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", callerid_number, nil, server)
+          st = originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", callerid_number, nil, server)
         end
 
 
-        flash[:status] = _('Callback_activated')
+        if st.to_i != 0
+          flash[:notice] = _('Cannot_connect_to_asterisk_server')
+        else
+          flash[:status] = _('Callback_activated')
+          end
+
+
       else
         flash[:notice] = _('Source_should_be_entered_for_callback')
       end
@@ -2832,7 +2840,8 @@ Sets default tax values for users or cardgroups
       server = 1 if server == 0
 
       channel = "Local/#{src}@mor_cb_src/n"
-      originate_call(device.id, src, channel, "mor_cb_dst", dst, device.callerid_number, nil, server)
+      st = originate_call(device.id, src, channel, "mor_cb_dst", dst, device.callerid_number, nil, server)
+      @error = _('Cannot_connect_to_asterisk_server') if st.to_i != 0
     else
       @error = _('No_device')
     end

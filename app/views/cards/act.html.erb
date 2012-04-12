@@ -1,28 +1,29 @@
 <b><%= _('Card_group') %></b>: <%= link_to @cg.name, :controller => "cardgroups", :action => "show", :id => @cg %>
-<br />
-<br />
+<br/>
+<br/>
 <b><%= _('Number_length') %></b>: <%= @cg.number_length %>
 
 <%= form_tag(:action => 'act_confirm', :cg => @cg.id) do %>
 
-  <p><label for="card_number"><%= _('Start_number') %></label><br/>
-    <%= text_field_tag 'start_number', "", "class" => "input", "maxlength" => @cg.number_length   %></p>
+    <p><label for="card_number"><%= _('Start_number') %></label><br/>
+      <%= text_field_tag 'start_number', "", "class" => "input", "maxlength" => @cg.number_length %></p>
 
-  <p><label for="card_number"><%= _('End_number') %></label><br/>
-    <%= text_field_tag 'end_number', "", "class" => "input" , "maxlength" => @cg.number_length  %></p>
+    <p><label for="card_number"><%= _('End_number') %></label><br/>
+      <%= text_field_tag 'end_number', "", "class" => "input", "maxlength" => @cg.number_length %></p>
 
-  <%=_('Buy')%> : <input type="radio" id="buy" name="activate" value="3" />
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <%=_('Disable')%> : <input type="radio" id="disable" name="activate" value="0" />
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <%=_('Delete')%> : <input type="radio" id="delete" name="activate" value="2" />
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <%=_('Change_distributor')%> : <input type="radio" id="distributor" name="activate" value="4" />&nbsp;&nbsp; <%= select_tag("user_id", options_for_select([["None", -1]] + @users.map{|user| [nice_user(user), user.id]})) %>
-  <br />
-  <br />
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <%= submit_tag _('Execute'), :disable_with=>_('Processing..') %>
+    <%= _('Buy') %> : <input type="radio" id="buy" name="activate" value="3"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <%= _('Disable') %> : <input type="radio" id="disable" name="activate" value="0"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <%= _('Delete') %> : <input type="radio" id="delete" name="activate" value="2"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <%= _('Change_distributor') %> :
+    <input type="radio" id="distributor" name="activate" value="4"/>&nbsp;&nbsp; <%= select_tag("user_id", options_for_select([["None", -1]] + @users.map { |user| [nice_user(user), user.id] })) %>
+    <br/>
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <%= submit_tag _('Execute'), :disable_with => _('Processing..') %>
 <% end %>
 
-<br />
-<br />
+<br/>
+<br/>

@@ -5,7 +5,7 @@ Localization.define('cr') do |l|
 
   l.store 'enter_username_and_psw', 'Unesite korisničko ime i lozinku'
   l.store 'login', 'PRIJAVA'
-  l.store 'change_date','Promjeni datum'
+  l.store 'change_date', 'Promjeni datum'
   l.store 'total_calls', 'Ukupno poziva'
   l.store 'date', 'Datum'
   l.store 'called_from', 'Poziv od'
@@ -75,9 +75,9 @@ Localization.define('cr') do |l|
   l.store 'usertype', 'Tip korisnika'
   l.store 'is_logged', 'Prijavljen'
   l.store 'back', 'Natrag'
-  l.store 'password','Lozinka'
+  l.store 'password', 'Lozinka'
   l.store 'last_time_registered', 'Posljednji put prijavljen'
-  l.store 'context','Kontekst'
+  l.store 'context', 'Kontekst'
   l.store 'voicemail', 'Glasovna pošta'
   l.store 'ext_lines', 'Vanjske linije'
   l.store 'blocked_number', 'Blokirani brojevi'
@@ -85,7 +85,7 @@ Localization.define('cr') do |l|
   l.store 'to', 'do'
   l.store 'From', 'Od'
   l.store 'Total_records', 'Ukupno zapisa'
-  l.store 'more_calltime_made_users','Najviše pozivani korisnici'
+  l.store 'more_calltime_made_users', 'Najviše pozivani korisnici'
   l.store 'Total', 'Ukupno'
   l.store 'not_processed_missed', 'Nije obrađeno - propusteno'
   l.store 'Change_period', 'Promjeni period'
@@ -1318,7 +1318,7 @@ Localization.define('cr') do |l|
   l.store 'VM_Server', 'VoiceMail server'
   l.store 'VM_Extension', 'VoiceMail lokal'
   l.store 'VM_Retrieve_Extension', 'Preuzmite lokal'
-  l.store 'VM_Server_Device',  'VM Server_uređaj'
+  l.store 'VM_Server_Device', 'VM Server_uređaj'
   l.store 'Click2Call', 'Click2Call'
   l.store 'Users_subscribed_to_c2c', 'Korisnici prijavljeni na Click2Call'
   l.store 'Subscribe_user_to_c2c_service', 'Prijavi korisnika na Click2Call uslugu'
@@ -1452,37 +1452,37 @@ Localization.define('cr') do |l|
   l.store 'Wrong_length_for_card_pin', 'Neispravna duljina PIN-a kartice'
   l.store 'Cards_imported', 'Importirane kartice'
   l.store 'Cards_were_successfully_deleted', 'Kartice su uspješno obrisane'
-  l.store 'p_Please_Fill_In','Molim vas da ispunite obrazac za plaćanje kreditnom karticom'
-  l.store 'p_First_Name','Ime (navedeno na kreditnoj kartici)'
-  l.store 'p_Last_Name','Prezime (navedeno na kreditnoj kartici)'
-  l.store 'p_Company','Tvrtka'
-  l.store 'p_Billing_Address','Adresa za naplatu'
-  l.store 'p_State','State (Samo građani USA )'
-  l.store 'p_Province','Država/Provincija (Za ostatak svijeta)'
-  l.store 'p_ZIP','ZIP/Poštanski broj'
-  l.store 'p_Phone','Telefonski broj'
-  l.store 'p_Fax','Broj faksa'
-  l.store 'p_Email','E-mail adresa'
-  l.store 'p_CCType','Vrsta kreditne kartice'
-  l.store 'p_Card_Number','Broj kreditne kartice'
-  l.store 'p_Exp_Month','Mjesec isteka'
-  l.store 'p_Exp_Year','Godina isteka'
-  l.store 'p_CCV','CCV kod'
-  l.store 'p_what_is_it','Što je to?'
-  l.store 'p_Code_Not_Present','Kod se ne nalazi na kartici'
-  l.store 'p_Agree','Slažete li se?'
-  l.store 'p_Read_Agreed','Pročitao sam i slažem se'
-  l.store 'p_Read_Agreed_Link','Uvjeti poslovanja'
-  l.store 'p_Required_Fields','Označava obavezna polja'
-  l.store 'p_Proceed','Nastavite sa plaćanjem'
-  l.store 'p_Approved','Vaša uplata je odobrena.'
-  l.store 'p_Rejected','Vaša kreditna kartica je odbijena. Plaćanje nije obavljeno.'
-  l.store 'p_Invalid_Card','Neispravan broj kreditne kartice'
-  l.store 'p_Card_Expired','Kreditna kartica je istekla'
+  l.store 'p_Please_Fill_In', 'Molim vas da ispunite obrazac za plaćanje kreditnom karticom'
+  l.store 'p_First_Name', 'Ime (navedeno na kreditnoj kartici)'
+  l.store 'p_Last_Name', 'Prezime (navedeno na kreditnoj kartici)'
+  l.store 'p_Company', 'Tvrtka'
+  l.store 'p_Billing_Address', 'Adresa za naplatu'
+  l.store 'p_State', 'State (Samo građani USA )'
+  l.store 'p_Province', 'Država/Provincija (Za ostatak svijeta)'
+  l.store 'p_ZIP', 'ZIP/Poštanski broj'
+  l.store 'p_Phone', 'Telefonski broj'
+  l.store 'p_Fax', 'Broj faksa'
+  l.store 'p_Email', 'E-mail adresa'
+  l.store 'p_CCType', 'Vrsta kreditne kartice'
+  l.store 'p_Card_Number', 'Broj kreditne kartice'
+  l.store 'p_Exp_Month', 'Mjesec isteka'
+  l.store 'p_Exp_Year', 'Godina isteka'
+  l.store 'p_CCV', 'CCV kod'
+  l.store 'p_what_is_it', 'Što je to?'
+  l.store 'p_Code_Not_Present', 'Kod se ne nalazi na kartici'
+  l.store 'p_Agree', 'Slažete li se?'
+  l.store 'p_Read_Agreed', 'Pročitao sam i slažem se'
+  l.store 'p_Read_Agreed_Link', 'Uvjeti poslovanja'
+  l.store 'p_Required_Fields', 'Označava obavezna polja'
+  l.store 'p_Proceed', 'Nastavite sa plaćanjem'
+  l.store 'p_Approved', 'Vaša uplata je odobrena.'
+  l.store 'p_Rejected', 'Vaša kreditna kartica je odbijena. Plaćanje nije obavljeno.'
+  l.store 'p_Invalid_Card', 'Neispravan broj kreditne kartice'
+  l.store 'p_Card_Expired', 'Kreditna kartica je istekla'
 
   # ------
 
-  l.store 'ERROR','Greška'
+  l.store 'ERROR', 'Greška'
   l.store 'Calls_To_Dids', 'Pozivi prema DID-ovima'
   l.store 'Total_calls_DID', 'Ukupno DID poziva'
   l.store 'Total_Calls_To_Dids', 'Ukupno poziva prema DID-ovima'
@@ -2478,7 +2478,7 @@ Localization.define('cr') do |l|
   l.store 'New_percent', 'Novi postotak'
   l.store 'Payment_successful', 'Placanje uspjesno'
   l.store 'Payment_Details', 'Pojedinosti o placanju'
-  l.store 'Transaction_ID',  'ID Transakcije'
+  l.store 'Transaction_ID', 'ID Transakcije'
   l.store 'Order_ID', 'ID Narudzbe'
   l.store 'SIP_Specific', 'Specificni SIP'
   l.store 'Latency', 'Skrivenost'
@@ -2963,7 +2963,7 @@ Localization.define('cr') do |l|
   l.store 'No_user', 'No User'
 
   l.store 'PayPal_Warning', 'PayPal is not safe to use! For more details check this <a href="http://wiki.kolmisoft.com/index.php/PayPal#WARNING" target="_blank">link</a>'
-    
+
   l.store 'Quick_help', 'Quick help'
   l.store 'Balance_user_edit_explanation', 'Balance is amount of money which user has in his account in your system.<br>In other words - is the amount of money you owe to the user.<br><br>Balance can be increased or decreased using <b>Manual Payments</b>.'
 
@@ -2990,7 +2990,7 @@ Localization.define('cr') do |l|
   l.store 'Areyousure?', 'Are you sure?'
   l.store 'Email_sending_is_disabled', 'Email sending is disabled'
   l.store 'SMS_Tariff_assigned_to_provider', 'SMS Tariff assigned to Provider'
-  l.store 'User_not_subscribed_to_SMS', 'User is not subscribed to SMS'   # Mindaugas 2009 11 24
+  l.store 'User_not_subscribed_to_SMS', 'User is not subscribed to SMS' # Mindaugas 2009 11 24
 
   l.store 'Fake_Ring', 'Fake Ring'
   l.store 'Fake_Ring_Explanation', 'Should system generate Fake Ring or not?<br>Use only if your Device/Provider has bad protocol implementation and <br>does not send RING signal properly.<br><br>Default is NO.'
@@ -3217,7 +3217,7 @@ Localization.define('cr') do |l|
   l.store 'User_with_fax_already_exists', 'User with such fax number already exists'
   l.store 'Disalow_Duplicate_Device_Usernames', 'Do not allow duplicate device user names' #Mindaugas 2010 05 05
 
-  
+
   l.store 'Vouchers_interval_was_not_deleted', 'Vouchers interval not deleted'
   l.store 'Learn_more_about_DIDs', 'Learn more about DIDs'
   l.store 'Understand_DID_billing', 'Understand DID billing'
@@ -3227,7 +3227,7 @@ Localization.define('cr') do |l|
   l.store 'Charge_DID_on_a_monthly_basis', 'Charge DID on a monthly basis'
   l.store 'Block_DID', 'Block DID'
   l.store 'I_want_to', 'I want to'
-  
+
   l.store 'DID_Provider', 'DID Provider'
   l.store 'DID_Provider_Explanation', 'DID Provider is <b><u>ONLY for informational purposes</u></b>.<br><br>If you do not know which Provider to assign - create dummy Provider to represent company from which you buy DID.<br>If this is fake DID - assign any Provider you want.<br>If your DID Provider has several IP addresses (as DIDWW) and you configured several Providers in MOR - assign ANY configured Provider.'
 
@@ -3240,7 +3240,7 @@ Localization.define('cr') do |l|
   l.store 'Dev_group_details_not_changed', 'Device group details were not changed'
   l.store 'Dev_group_details_changed', 'Device group details were changed'
   l.store 'Dev_group_not_created', 'Device group was not created' #Mindaugas 2010 05 13
-  l.store 'MWI_enable', 'Enable MWI'  #Mindaugas 2010 05 13
+  l.store 'MWI_enable', 'Enable MWI' #Mindaugas 2010 05 13
   l.store 'Dev_group_not_found', 'Devicegroup not found'
   l.store 'MWI_Explanation', 'In telephony, a Message Waiting Indicator (MWI) is a telephone calling feature that illuminates a LED on selected telephones to notify a user of waiting voicemail messages. It works on most telephone networks and PBXs.' #Mindaugas 2010 05 14
 
@@ -3258,7 +3258,7 @@ Localization.define('cr') do |l|
   l.store 'Visual', 'Visual'
   l.store 'Phonebook_number_must_be_numeric', 'Phonebook number must be numeric'
   l.store 'Speeddial_must_be_numeric', 'SpeedDial must be numeric'
-  l.store 'Drag_and_drop', 'drag & drop to change order'  
+  l.store 'Drag_and_drop', 'drag & drop to change order'
   l.store 'Grace_Time_Explanation', 'If call duration is less than <i>Grace Time</i>, it will not be accounted.<br>Example: <i>Grace Time</i> = 3s, call duration <= 3s, then price for the call = 0'
   l.store 'XML_API_Extension_Explanation', 'XML API Extension - send XML output with \< HTML \> tag - this is used for broken .Net support, keep it unchecked if everything works for you.'
 
@@ -3342,7 +3342,7 @@ Localization.define('cr') do |l|
   l.store 'Show_providers_on_map', 'Show providers on map'
   l.store 'Show_in_map', 'Show in map'
   l.store 'Must_login_first', 'You must login first'
-  
+
   l.store 'IVR_Voice_Not_Updated', 'IVR Voice not updated'
   l.store 'Invalidvalues', 'Invalid values'
   l.store 'Dev_group_not_deleted', 'Device Group not deleted'
@@ -3387,10 +3387,10 @@ Localization.define('cr') do |l|
   l.store 'Payment_was_not_found', 'Payment was not found.'
   l.store 'Transaction_waiting_for_confirmation', 'Waiting for confirmation'
   l.store 'Transaction_has_expired', 'Payment has expired'
-  
+
 
   l.store 'Use_external_script_explained', ''
-  
+
   l.store 'New_callshop', 'New Call Shop'
   l.store 'Callshop_was_not_found_or_is_empty', 'Call Shop was not found or there are no phone booths assigned. Please add more phone booths.'
   l.store 'You_are_not_authorized_to_manage_callshop', 'You are not authorized to manage this Call Shop'
@@ -3478,7 +3478,7 @@ Localization.define('cr') do |l|
   l.store 'Send_a_text_message_(SMS)', 'Send a text-message (SMS)'
   l.store 'Send_SMS_from_Front_page', 'Send SMS from Front page'
   l.store 'Frontpage_Text_for_SMS', 'Frontpage Text for SMS'
-  l.store 'Fax_path', 'Fax path' 
+  l.store 'Fax_path', 'Fax path'
   l.store 'Cardgroup_Stats', 'Card Groups Stats'
   l.store 'Total_number_of_cards', 'Total number of cards'
   l.store 'Total_number_of_cards_first_used_in_period', 'Total number of cards first used in period'
@@ -3577,7 +3577,7 @@ Localization.define('cr') do |l|
   l.store 'Client_receives_the_Call_and_answers', 'Client receives the Call and answers'
   l.store 'System_calls_back_to_the_Client', 'System calls back to the Client'
   l.store 'If_field_is_left_empty_Callback_Device_CallerID_will_be_used', 'If field is left empty - Callback Device CallerID will be used'
-  
+
   l.store 'Common_Use', 'Common Use'
   l.store 'Common_Use_Explanation', 'Provider can be used by Resellers which are able to create their own Providers.<br>Reseller will be billed using this Provider.'
 
@@ -3750,10 +3750,7 @@ Localization.define('cr') do |l|
   #    l.store '', ''
 
 
-
   #    l.store 'Cannot_duplicate_email_callback_server', ''
-
-
 
 
 end

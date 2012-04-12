@@ -119,21 +119,21 @@ class Google4R::Checkout::MerchantCalculationResultsTest < Test::Unit::TestCase
 </merchant-calculation-results>}
 
     @results = MerchantCalculationResults.new
-    
+
   end
-  
+
   def test_responds_correctly
-    
-    [ :merchant_calculation_results
+
+    [:merchant_calculation_results
     ].each do |symbol|
       assert_respond_to @results, symbol
     end
   end
-  
+
   def test_to_xml_works_correctly
     @coupon_result = CouponResult.new(true, 'FirstVisitCoupon', Money.new(500, 'USD'), 'Congratulations! You saved $5.00 on your first visit!')
     @gift_certificate_result = GiftCertificateResult.new(true, 'GiftCert012345', Money.new(1000, 'USD'), 'You used your Gift Certificate!')
-    
+
     @results.create_merchant_calculation_result do |result|
       result.shipping_name = 'SuperShip'
       result.address_id = '739030698069958'
@@ -142,7 +142,7 @@ class Google4R::Checkout::MerchantCalculationResultsTest < Test::Unit::TestCase
       result.create_merchant_code_result(@coupon_result)
       result.create_merchant_code_result(@gift_certificate_result)
     end
-    
+
     @results.create_merchant_calculation_result do |result|
       result.shipping_name = 'UPS Ground'
       result.address_id = '739030698069958'
@@ -152,7 +152,7 @@ class Google4R::Checkout::MerchantCalculationResultsTest < Test::Unit::TestCase
       result.create_merchant_code_result(@coupon_result)
       result.create_merchant_code_result(@gift_certificate_result)
     end
-    
+
     @results.create_merchant_calculation_result do |result|
       result.shipping_name = 'SuperShip'
       result.address_id = '421273450774618'
@@ -162,7 +162,7 @@ class Google4R::Checkout::MerchantCalculationResultsTest < Test::Unit::TestCase
       result.create_merchant_code_result(@coupon_result)
       result.create_merchant_code_result(@gift_certificate_result)
     end
-    
+
     @results.create_merchant_calculation_result do |result|
       result.shipping_name = 'UPS Ground'
       result.address_id = '421273450774618'
@@ -176,4 +176,4 @@ class Google4R::Checkout::MerchantCalculationResultsTest < Test::Unit::TestCase
     # perform the assertions
     assert_strings_equal @xml_str, @results.to_xml
   end
- end
+end

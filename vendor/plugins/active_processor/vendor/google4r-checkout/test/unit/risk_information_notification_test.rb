@@ -73,22 +73,22 @@ class Google4R::Checkout::RiskInformationNotificationTest < Test::Unit::TestCase
 }
 
   end
-  
+
   def test_create_from_element_works_correctly
     # Stub out Address creation.
     expectation = Address.stubs(:create_from_element).times(1).returns(:address)
     expectation.with { |param| param.name == 'billing-address' }
-    
+
     root = REXML::Document.new(@example_xml).root
-    
+
     notification = RiskInformationNotification.create_from_element(root, @frontend)
-    
+
     assert_equal '4f5adc5b-aac5-4618-9e3b-75e60eaf29cd', notification.serial_number
     assert_equal '1564645586934214', notification.google_order_number
     assert_equal true, notification.eligible_for_protection
-    
-    assert_equal :address, notification.buyer_billing_address        
-    
+
+    assert_equal :address, notification.buyer_billing_address
+
     assert_equal 'Y', notification.avs_response
     assert_equal 'M', notification.cvn_response
     assert_equal '6789', notification.partial_card_number

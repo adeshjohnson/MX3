@@ -18,7 +18,7 @@ module ActiveProcessor
     end
 
     def each_field_for(scope = :form, &block)
-      @fields[scope.to_s].sort_by{|k,v| v['position']}.each(&block)
+      @fields[scope.to_s].sort_by { |k, v| v['position'] }.each(&block)
     end
 
     def set(scope, params = {})
@@ -29,7 +29,7 @@ module ActiveProcessor
           valid, message, ext= valid_logo?(value)
           if valid
             message = "custom_#{@gateway}_#{@engine}_logo.#{ext}"
-            File.open(Rails.root + "/public/images/logo/#{message}", "w"){ |f| f.write(value.read) }
+            File.open(Rails.root + "/public/images/logo/#{message}", "w") { |f| f.write(value.read) }
             value = message
           else
             @errors.store(name, message)
@@ -37,19 +37,19 @@ module ActiveProcessor
           end
         end
 
-       value =  @fields[scope.to_s][name.to_s]['html_options']['value'] if value.blank? and  @fields[scope.to_s] and  @fields[scope.to_s][name.to_s] and  @fields[scope.to_s][name.to_s]['html_options'] and  @fields[scope.to_s][name.to_s]['html_options']['value'] and  !@fields[scope.to_s][name.to_s]['html_options']['value'].blank?
+        value = @fields[scope.to_s][name.to_s]['html_options']['value'] if value.blank? and @fields[scope.to_s] and @fields[scope.to_s][name.to_s] and @fields[scope.to_s][name.to_s]['html_options'] and @fields[scope.to_s][name.to_s]['html_options']['value'] and !@fields[scope.to_s][name.to_s]['html_options']['value'].blank?
 
       end
 
       if value.kind_of?(StringIO)
-        params = { name => { 'html_options' => { 'value' => value } } }
+        params = {name => {'html_options' => {'value' => value}}}
       elsif value.kind_of?(Hash)
         params = {}
-        value.each_pair{ |key, val|
-          params.merge!({ "#{name}[#{key}]" => { 'html_options' => { 'value' => val.strip } } })
+        value.each_pair { |key, val|
+          params.merge!({"#{name}[#{key}]" => {'html_options' => {'value' => val.strip}}})
         }
       else
-        params = { name => { 'html_options' => { 'value' => value.to_s.strip } } }
+        params = {name => {'html_options' => {'value' => value.to_s.strip}}}
       end
 
       for field, value in params
@@ -77,7 +77,7 @@ module ActiveProcessor
         block.call(self, ActiveProcessor::FormHelper)
       else
         view = (@template) ? File.read(@template) : File.dirname(__FILE__) + '/views/payment-form.html.erb'
-        erb  = ::File.read view
+        erb = ::File.read view
 
         return ERB.new(erb).result(binding)
       end
@@ -89,13 +89,13 @@ module ActiveProcessor
     end
 
     def get_to(prefix, action, id = nil)
-      arr = [Web_URL, Web_Dir.to_s.gsub("/", ""), prefix.to_s.gsub("/", ""), "payment_gateways".to_s.gsub("/", ""), @engine.to_s.gsub("/", ""), @gateway.to_s.gsub("/", ""), action.to_s.gsub("/", ""), id.to_s.gsub("/", "")].collect{|el| el.to_s unless el.to_s.blank? }
+      arr = [Web_URL, Web_Dir.to_s.gsub("/", ""), prefix.to_s.gsub("/", ""), "payment_gateways".to_s.gsub("/", ""), @engine.to_s.gsub("/", ""), @gateway.to_s.gsub("/", ""), action.to_s.gsub("/", ""), id.to_s.gsub("/", "")].collect { |el| el.to_s unless el.to_s.blank? }
       @get_to ||= arr.compact.join("/")
       @get_to
     end
 
     private
-    
+
     def valid_logo?(file)
       if file.size > 0
         if file.size < 102400
@@ -119,20 +119,20 @@ module ActiveProcessor
       # get only the filename, not the whole path (from IE)
       just_filename = File.basename(file_name)
       # replace all none alphanumeric, underscore or perioids with underscore
-      just_filename.gsub(/[^\w\.\_]/,'_')
+      just_filename.gsub(/[^\w\.\_]/, '_')
     end
 
     def adjust_fields(config, custom_fields)
       fields = {}
       custom_fields ||= {}
-      ['config','form'].each { |scope|
+      ['config', 'form'].each { |scope|
         if config.has_key?(scope.to_s)
           result = config[scope.to_s]['fields'].dup
 
           if config[scope.to_s].has_key?('excludes')
             # delete the unnecessary default fields
             result = result.delete_if {
-              |key, value| config[scope.to_s]['excludes'].include?(key)
+                |key, value| config[scope.to_s]['excludes'].include?(key)
             } unless config[scope.to_s]['excludes'].nil?
           end
           if config[scope.to_s].has_key?('includes')

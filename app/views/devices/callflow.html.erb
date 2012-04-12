@@ -1,12 +1,12 @@
 <% if session[:usertype] == "admin" or (session[:usertype] == "accountant" or session[:usertype] == "reseller" and @device.user_id != session[:user_id]) %>
-  <b><%= b_user + _('User') %>:</b> <%= link_nice_user(@user)  %><br>
-  <b><%= b_device + _('Device') %>:</b> <%= link_nice_device @device %><br>
+    <b><%= b_user + _('User') %>:</b> <%= link_nice_user(@user) %><br>
+    <b><%= b_device + _('Device') %>:</b> <%= link_nice_device @device %><br>
 <% else %>
-  <b><%= b_device + _('Device') %>:</b> <%= user_link_nice_device(@device) %><br>
+    <b><%= b_device + _('Device') %>:</b> <%= user_link_nice_device(@device) %><br>
 <% end %>
 
 <% if session[:usertype] == "admin" %>
-  <%= link_to b_extlines + _('Extlines'), {:action => "device_extlines", :id => @device.id}  %>
+    <%= link_to b_extlines + _('Extlines'), {:action => "device_extlines", :id => @device.id} %>
 <% end %>
 
 <br><br>
@@ -18,39 +18,39 @@
     <th width="5%"></th>
   </tr>
 
-  <tr class="row1" style = "height: 40px">
+  <tr class="row1" style="height: 40px">
     <td align="center">        <%= _('Before_Call') %> </td>
     <td id="before_call" align="center"> <%= draw_callflows(@before_call_cfs) %></td>
-    <td id="before_call_edit" align="center"> <%= link_to b_edit, {:action => "callflow_edit", :id => @device.id, :cft => "before_call"}, {:id =>"before_call_edit_link" } %> </td>
+    <td id="before_call_edit" align="center"> <%= link_to b_edit, {:action => "callflow_edit", :id => @device.id, :cft => "before_call"}, {:id => "before_call_edit_link"} %> </td>
   </tr>
 
-  <tr class="row2" style = "height: 40px">
+  <tr class="row2" style="height: 40px">
     <td align="center">        <%= b_call + _('Call') %> </td>
-    <td id="call" align="center"> <%= "Dial(#{@device.device_type}/#{@device.name}|#{@device.timeout})"%></td>
-    <td id="call_edit" align="center"> <!--<%= link_to b_edit, {:action => "callflow_device", :id => @device.id}, {:id =>"call_edit_link" } %>--> </td>
+    <td id="call" align="center"> <%= "Dial(#{@device.device_type}/#{@device.name}|#{@device.timeout})" %></td>
+    <td id="call_edit" align="center"> <!--<%= link_to b_edit, {:action => "callflow_device", :id => @device.id}, {:id => "call_edit_link"} %>--> </td>
   </tr>
 
-  <tr class="row1" style = "height: 40px">
+  <tr class="row1" style="height: 40px">
     <td align="center">        <%= _('Answered') %> </td>
     <td id="hangup" align="center"> <%= _('Hangup') %></td>
-    <td> </td>
+    <td></td>
   </tr>
 
-  <tr class="row2" style = "height: 40px">
+  <tr class="row2" style="height: 40px">
     <td align="center">        <%= _('No_Answer') %> </td>
     <td id="no_answer" align="center"> <%= draw_callflows(@no_answer_cfs) %></td>
-    <td id="no_answer_edit" align="center"> <%= link_to b_edit, {:action => "callflow_edit", :id => @device.id, :cft => "no_answer"}, {:id =>"no_answer_edit_link" } %> </td>
+    <td id="no_answer_edit" align="center"> <%= link_to b_edit, {:action => "callflow_edit", :id => @device.id, :cft => "no_answer"}, {:id => "no_answer_edit_link"} %> </td>
   </tr>
 
-  <tr class="row1" style = "height: 40px">
+  <tr class="row1" style="height: 40px">
     <td align="center">        <%= _('Busy') %> </td>
     <td id="busy" align="center"> <%= draw_callflows(@busy_cfs) %></td>
-    <td id="busy_edit" align="center"> <%= link_to b_edit, {:action => "callflow_edit", :id => @device.id, :cft => "busy"}, {:id =>"busy_edit_link" } %> </td>
+    <td id="busy_edit" align="center"> <%= link_to b_edit, {:action => "callflow_edit", :id => @device.id, :cft => "busy"}, {:id => "busy_edit_link"} %> </td>
   </tr>
 
-  <tr class="row2" style = "height: 40px">
+  <tr class="row2" style="height: 40px">
     <td align="center">        <%= _('Failed') %> </td>
     <td id="failed" align="center"> <%= draw_callflows(@failed_cfs) %></td>
-    <td id="failed_edit" align="center"> <%= link_to b_edit, {:action => "callflow_edit", :id => @device.id, :cft => "failed"}, {:id =>"failed_edit_link" } %> </td>
+    <td id="failed_edit" align="center"> <%= link_to b_edit, {:action => "callflow_edit", :id => @device.id, :cft => "failed"}, {:id => "failed_edit_link"} %> </td>
   </tr>
 </table>

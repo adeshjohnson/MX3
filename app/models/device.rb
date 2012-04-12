@@ -13,6 +13,7 @@ class Device < ActiveRecord::Base
   def device_ror_type=(s)
     self[:type] = s
   end
+
   #=====================================================================
 
   attr_accessor :device_ip_authentication_record
@@ -33,15 +34,15 @@ class Device < ActiveRecord::Base
   has_many :ringgroups_devices
 
 
-  before_validation :check_device_username, :on =>:create
+  before_validation :check_device_username, :on => :create
 
   validates_presence_of :name, :message => _('Device_must_have_name')
   validates_presence_of :extension, :message => _('Device_must_have_extension')
   validates_uniqueness_of :extension, :message => _('Device_extension_must_be_unique')
   validates_uniqueness_of :username, :message => _('Device_Username_Must_Be_Unique'), :if => :username_must_be_unique
   # validates_format_of :name, :with => /^\w+$/,  :on=>:create, :message => _('Device_username_must_consist_only_of_digits_and_letters')
-  validates_format_of :max_timeout, :with => /^[0-9]+$/,   :message => _('Device_Call_Timeout_must_be_greater_than_or_equal_to_0')
-  validates_numericality_of :port, :message => _("Port_must_be_number"), :if => Proc.new{|o| not o.port.blank? }
+  validates_format_of :max_timeout, :with => /^[0-9]+$/, :message => _('Device_Call_Timeout_must_be_greater_than_or_equal_to_0')
+  validates_numericality_of :port, :message => _("Port_must_be_number"), :if => Proc.new { |o| not o.port.blank? }
 
   # before_create :check_callshop_user
   before_save :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth
@@ -61,7 +62,7 @@ class Device < ActiveRecord::Base
         errors.add(:secret, _("Name_And_Secret_Cannot_Be_Equal"))
         return false
       end
-      
+
       if self.secret.to_s.length < 8 and Confline.get_value("Allow_short_passwords_in_devices").to_i == 0
         errors.add(:secret, _("Password_is_too_short"))
         return false
@@ -143,16 +144,16 @@ class Device < ActiveRecord::Base
 
   def check_device_username
     if self.username_must_be_unique_on_creation
-      username = self.username ; name = self.username
-      while Device.find(:first, :conditions=>{:username=>username})
+      username = self.username; name = self.username
+      while Device.find(:first, :conditions => {:username => username})
         username = self.generate_rand_name(name, 2)
       end
       self.username = username
     end
     if self.virtual?
-      username = self.username ;
-      while Device.find(:first, :conditions=>{:username=>username})
-        username = self.generate_rand_name('',12)
+      username = self.username;
+      while Device.find(:first, :conditions => {:username => username})
+        username = self.generate_rand_name('', 12)
       end
       self.username = username
     end
@@ -192,7 +193,7 @@ class Device < ActiveRecord::Base
     #device_after_save
     if self.user
       user = self.user
-      curr_id =  User.current ? User.current.id : self.user.owner_id
+      curr_id = User.current ? User.current.id : self.user.owner_id
       Action.add_action_hash(curr_id, {:target_id => id, :target_type => "device", :action => "device_created"})
       #------- VM ----------
       email = Confline.get_value("Default_device_voicemail_box_email", user.owner_id)
@@ -226,13 +227,13 @@ class Device < ActiveRecord::Base
   end
 
   def codec?(codec)
-    sql =  "SELECT COUNT(*) as 'count' FROM devicecodecs, codecs WHERE devicecodecs.device_id = '" + self.id.to_s + "' AND devicecodecs.codec_id = codecs.id AND codecs.name = '" + codec.to_s + "'"
+    sql = "SELECT COUNT(*) as 'count' FROM devicecodecs, codecs WHERE devicecodecs.device_id = '" + self.id.to_s + "' AND devicecodecs.codec_id = codecs.id AND codecs.name = '" + codec.to_s + "'"
     res = ActiveRecord::Base.connection.select_one(sql)
     res['count'].to_i == 1
   end
 
   def codecs
-    sql =  "SELECT * FROM codecs, devicecodecs WHERE devicecodecs.device_id = '" + self.id.to_s + "' AND devicecodecs.codec_id = codecs.id ORDER BY devicecodecs.priority"
+    sql = "SELECT * FROM codecs, devicecodecs WHERE devicecodecs.device_id = '" + self.id.to_s + "' AND devicecodecs.codec_id = codecs.id ORDER BY devicecodecs.priority"
     res = ActiveRecord::Base.connection.select_all(sql)
     codecs = []
     for i in 0..res.size-1
@@ -249,15 +250,15 @@ class Device < ActiveRecord::Base
 
   def update_codecs_with_priority(codecs, ifsave = true)
     dc = {}
-    Devicecodec.find(:all, :conditions => ["device_id = ?",self.id]).each{|c| dc[c.codec_id] = c.priority; c.destroy}
-    Codec.find(:all).each {|codec| Devicecodec.new(:codec_id => codec.id, :device_id=>self.id, :priority=>dc[codec.id].to_i ).save if codecs[codec.name] == "1"}
+    Devicecodec.find(:all, :conditions => ["device_id = ?", self.id]).each { |c| dc[c.codec_id] = c.priority; c.destroy }
+    Codec.find(:all).each { |codec| Devicecodec.new(:codec_id => codec.id, :device_id => self.id, :priority => dc[codec.id].to_i).save if codecs[codec.name] == "1" }
     self.update_codecs(ifsave)
   end
 
 
   def update_codecs(ifsave = true)
     cl = []
-    self.codecs.each{|codec| cl << codec.name}
+    self.codecs.each { |codec| cl << codec.name }
     cl << "all" if cl.size.to_i == 0
     self.allow = cl.join(';')
     self.save if ifsave
@@ -560,13 +561,13 @@ class Device < ActiveRecord::Base
     end
     err
   end
-  
+
   def prune_device_in_server(dv_name = nil, reload = 1, serverid = nil)
     dv_name = name if dv_name.nil?
     serverid = server_id if serverid.nil?
     err= []
     # clean Realtime mess http://trac.kolmisoft.com/trac/ticket/5092
-    server = Server.find(:first, :conditions=>{:server_id=>serverid})
+    server = Server.find(:first, :conditions => {:server_id => serverid})
     begin
       server.prune_peer(dv_name, reload) if server
     rescue Exception => e
@@ -601,19 +602,20 @@ class Device < ActiveRecord::Base
 
   # Check if device is a detectable fax
   def has_fax_detect
-    flow = Callflow.find(:all, :conditions=>["data = ? and data2 = 'fax' and action = 'fax_detect'", self.id])
+    flow = Callflow.find(:all, :conditions => ["data = ? and data2 = 'fax' and action = 'fax_detect'", self.id])
     return flow if flow.size > 0
     return nil
   end
+
   # Check if device has calls forwarded to it
   def has_forwarded_calls
-    flow = Callflow.find(:all, :conditions=>["data = ? and data2 = 'local' and action = 'forward'", self.id])
+    flow = Callflow.find(:all, :conditions => ["data = ? and data2 = 'local' and action = 'forward'", self.id])
     return flow if flow.size > 0
     return nil
   end
 
   def dialplans
-    Dialplan.find(:all, :conditions=>["data3 = ?", self.id])
+    Dialplan.find(:all, :conditions => ["data3 = ?", self.id])
   end
 
   def username_must_be_unique_on_creation
@@ -623,16 +625,16 @@ class Device < ActiveRecord::Base
   def ip_must_be_unique_on_save
 
     idi = self.id
-    curr_id =  User.current ? User.current.id : self.user.owner_id
+    curr_id = User.current ? User.current.id : self.user.owner_id
     message = (User.current and User.current.usertype == 'admin') ? _("When_IP_Authentication_checked_IP_must_be_unique") : _('This_IP_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>"
     cond = if ipaddr.blank?
-      ['devices.id != ? AND host = ? AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', idi, host, curr_id]
-    else
-      ['devices.id != ? AND (host = ? OR ipaddr = ?) AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', idi, host, ipaddr, curr_id]
-    end
+             ['devices.id != ? AND host = ? AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', idi, host, curr_id]
+           else
+             ['devices.id != ? AND (host = ? OR ipaddr = ?) AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', idi, host, ipaddr, curr_id]
+           end
 
     #    check device wihs is provider with providers devices.
-    if self.device_ip_authentication_record.to_i == 1 and self.provider and Device.count(:all, :joins=>['JOIN providers ON (device_id = devices.id)'],:conditions=>cond).to_i > 0
+    if self.device_ip_authentication_record.to_i == 1 and self.provider and Device.count(:all, :joins => ['JOIN providers ON (device_id = devices.id)'], :conditions => cond).to_i > 0
       errors.add(:ip_authentication, message)
       return false
     end
@@ -640,21 +642,21 @@ class Device < ActiveRecord::Base
     #      check self device  or another devices with ip auth on
     condd = self.device_ip_authentication_record.to_i == 1 ? '' : ' and devices.username = "" '
     cond22 = if ipaddr.blank?
-      #      check device host with another owner devices
-      ['devices.id != ? AND host = ? and users.owner_id != ?  and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd , idi, host, curr_id]
-    else
-      #      check device IP and Host with another owner devices
-      ['devices.id != ? AND (host = ? OR ipaddr = ?) and users.owner_id != ? and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd , idi, host, ipaddr, curr_id]
-    end
+               #      check device host with another owner devices
+               ['devices.id != ? AND host = ? and users.owner_id != ?  and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd, idi, host, curr_id]
+             else
+               #      check device IP and Host with another owner devices
+               ['devices.id != ? AND (host = ? OR ipaddr = ?) and users.owner_id != ? and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd, idi, host, ipaddr, curr_id]
+             end
 
     #    check device IP with another user providers IP's with have ip auth on, 0.0.0.0 not included
-    if Device.count(:all, :joins=>['JOIN users ON (user_id = users.id)'],:conditions=>cond22).to_i > 0
+    if Device.count(:all, :joins => ['JOIN users ON (user_id = users.id)'], :conditions => cond22).to_i > 0
       errors.add(:ip_authentication, message)
       return false
     end
 
     #    check device IP with another user providers IP's with have ip auth on, 0.0.0.0 not included
-    if Provider.count(:all, :joins=>['JOIN devices ON (device_id = devices.id)'],:conditions=>["server_ip = ? and devices.username = '' and server_ip != '0.0.0.0' and devices.id != ?  and ipaddr != '' AND providers.user_id != ? and ipaddr != '0.0.0.0'", ipaddr, idi, curr_id]).to_i > 0
+    if Provider.count(:all, :joins => ['JOIN devices ON (device_id = devices.id)'], :conditions => ["server_ip = ? and devices.username = '' and server_ip != '0.0.0.0' and devices.id != ?  and ipaddr != '' AND providers.user_id != ? and ipaddr != '0.0.0.0'", ipaddr, idi, curr_id]).to_i > 0
       errors.add(:ip_authentication, message)
       return false
     end
@@ -665,12 +667,12 @@ class Device < ActiveRecord::Base
       message2 = (User.current and User.current.usertype == 'admin') ? _("Device_with_such_IP_and_Port_already_exist") + ' ' + _('Please_check_this_link_to_see_how_it_can_be_resolved') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Configure_Provider_which_can_make_calls' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>" : _('This_IP_and_port_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>"
 
       cond3 = if ipaddr.blank?
-        ['devices.id != ? AND host = ? and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? AND providers.id IS NULL' + condd, idi, host, port]
-      else
-        ['devices.id != ? AND (host = ? OR ipaddr = ?) and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? AND providers.id IS NULL' + condd, idi, host, ipaddr, port]
-      end
+                ['devices.id != ? AND host = ? and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? AND providers.id IS NULL' + condd, idi, host, port]
+              else
+                ['devices.id != ? AND (host = ? OR ipaddr = ?) and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? AND providers.id IS NULL' + condd, idi, host, ipaddr, port]
+              end
 
-      if Device.count(:all, :joins=>['JOIN users ON (user_id = users.id) LEFT JOIN providers ON (providers.device_id = devices.id)'],:conditions=>cond3).to_i > 0
+      if Device.count(:all, :joins => ['JOIN users ON (user_id = users.id) LEFT JOIN providers ON (providers.device_id = devices.id)'], :conditions => cond3).to_i > 0
         errors.add(:ip_authentication, message2)
         return false
       end
@@ -679,11 +681,11 @@ class Device < ActiveRecord::Base
       message2 = (User.current and User.current.usertype == 'admin') ? _("Provider_with_such_IP_and_Port_already_exist") + ' ' + _('Please_check_this_link_to_see_how_it_can_be_resolved') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Configure_Provider_which_can_make_calls' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>" : _('This_IP_and_port_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>"
 
       cond3 = if ipaddr.blank?
-        ['devices.id != ? AND host = ? and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? ' + condd, idi, host, port]
-      else
-        ['devices.id != ? AND (host = ? OR ipaddr = ?) and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=?' + condd, idi, host, ipaddr, port]
-      end
-      if Provider.count(:all, :joins=>['JOIN devices ON (device_id = devices.id)'],:conditions=>cond3).to_i > 0
+                ['devices.id != ? AND host = ? and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? ' + condd, idi, host, port]
+              else
+                ['devices.id != ? AND (host = ? OR ipaddr = ?) and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=?' + condd, idi, host, ipaddr, port]
+              end
+      if Provider.count(:all, :joins => ['JOIN devices ON (device_id = devices.id)'], :conditions => cond3).to_i > 0
         errors.add(:ip_authentication, message2)
         return false
       end
@@ -734,8 +736,8 @@ class Device < ActiveRecord::Base
 
   def Device.validate_permits_ip(ip_arr)
     err = true
-    ip_arr.each{|ip|
-      if ip and !ip.blank?  and !Device.validate_ip(ip)
+    ip_arr.each { |ip|
+      if ip and !ip.blank? and !Device.validate_ip(ip)
         err = false
       end
     }
@@ -754,11 +756,13 @@ class Device < ActiveRecord::Base
     end
   end
 
-  def device_ip_authentication?; @device_ip_authentication_record; end
+  def device_ip_authentication?;
+    @device_ip_authentication_record;
+  end
 
   def load_device_types(options = {})
-    Devicetype.find(:all).map{|type|
-      (options.has_key?(type.name) and  options[type.name] == false and self.device_type != type.name) ? nil : type
+    Devicetype.find(:all).map { |type|
+      (options.has_key?(type.name) and options[type.name] == false and self.device_type != type.name) ? nil : type
     }.compact
   end
 
@@ -795,11 +799,11 @@ class Device < ActiveRecord::Base
 
   def Device.calleridpresentation
     [
-      [_('Presentation_Allowed_Not_Screened'),'allowed_not_screened'], [_('Presentation_Allowed_Passed_Screen'),'allowed_passed_screen'],
-      [_('Presentation_Allowed_Failed_Screen'),'allowed_failed_screen'],[_('Presentation_Allowed_Network_Number'),'allowed'],
-      [_('Presentation_Prohibited_Not_Screened'),'prohib_not_screened'],[_('Presentation_Prohibited_Passed_Screen'),'prohib_passed_screen'],
-      [_('Presentation_Prohibited_Failed_Screen'),'prohib_failed_screen'],[_('Presentation_Prohibited_Network_Number'),'prohib'],
-      [_('Number_Unavailable'),'unavailable']
+        [_('Presentation_Allowed_Not_Screened'), 'allowed_not_screened'], [_('Presentation_Allowed_Passed_Screen'), 'allowed_passed_screen'],
+        [_('Presentation_Allowed_Failed_Screen'), 'allowed_failed_screen'], [_('Presentation_Allowed_Network_Number'), 'allowed'],
+        [_('Presentation_Prohibited_Not_Screened'), 'prohib_not_screened'], [_('Presentation_Prohibited_Passed_Screen'), 'prohib_passed_screen'],
+        [_('Presentation_Prohibited_Failed_Screen'), 'prohib_failed_screen'], [_('Presentation_Prohibited_Network_Number'), 'prohib'],
+        [_('Number_Unavailable'), 'unavailable']
     ]
   end
 
@@ -808,7 +812,7 @@ class Device < ActiveRecord::Base
     unless user
       notice = _("User_was_not_found")
     end
-    
+
     if current_user.usertype == 'accountant' and !allow_edit and notice.blank?
       notice = _('You_have_no_editing_permission')
     end
@@ -835,7 +839,7 @@ class Device < ActiveRecord::Base
     Extline.delete_all(["device_id = ?", id])
 
     #deleting association with dids
-    if dids = Did.find(:all, :conditions => ["device_id =?",id])
+    if dids = Did.find(:all, :conditions => ["device_id =?", id])
       for did in dids
         did.device_id = "0"
         did.save
@@ -863,10 +867,10 @@ class Device < ActiveRecord::Base
       group = current_user.acc_group
       if group
         rights = AccRight.find(
-          :all,
-          :select => "acc_rights.name, acc_group_rights.value",
-          :joins => "LEFT JOIN acc_group_rights ON (acc_group_rights.acc_right_id = acc_rights.id AND acc_group_rights.acc_group_id = #{group.id})",
-          :conditions => ["acc_rights.right_type = ?", group.group_type]
+            :all,
+            :select => "acc_rights.name, acc_group_rights.value",
+            :joins => "LEFT JOIN acc_group_rights ON (acc_group_rights.acc_right_id = acc_rights.id AND acc_group_rights.acc_group_id = #{group.id})",
+            :conditions => ["acc_rights.right_type = ?", group.group_type]
         )
         short = {"accountant" => "acc", "reseller" => "res"}
         rights.each { |right|
@@ -878,11 +882,11 @@ class Device < ActiveRecord::Base
           end
         }
 
-        params =  current_user.sanitize_device_params_by_accountant_permissions(s, params, self.dup)
+        params = current_user.sanitize_device_params_by_accountant_permissions(s, params, self.dup)
       else
         s[:acc_device_create] = 0
       end
-      if  notice.blank? and  s[:acc_device_create] != 2
+      if  notice.blank? and s[:acc_device_create] != 2
         notice = _('dont_be_so_smart')
       end
     end
@@ -895,12 +899,12 @@ class Device < ActiveRecord::Base
     #      params[:device][:pin] = nil
     #    end
 
-    if  notice.blank? and params[:device][:extension] and Device.find(:first, :conditions => ["extension = ?", params[:device][:extension] ])
+    if  notice.blank? and params[:device][:extension] and Device.find(:first, :conditions => ["extension = ?", params[:device][:extension]])
       notice = _('Extension_is_used')
 
     else
       #pin
-      if  notice.blank? and (Device.find(:first, :conditions => [" pin = ?",  params[:device][:pin]]) and params[:device][:pin].to_s != "")
+      if  notice.blank? and (Device.find(:first, :conditions => [" pin = ?", params[:device][:pin]]) and params[:device][:pin].to_s != "")
         notice = _('Pin_is_already_used')
 
       end
@@ -910,11 +914,11 @@ class Device < ActiveRecord::Base
     end
 
 
-    if notice.blank? and params[:device][:devicegroup_id] and !Devicegroup.find(:first, :conditions=>{:id=>params[:device][:devicegroup_id] , :user_id=>user.id})
+    if notice.blank? and params[:device][:devicegroup_id] and !Devicegroup.find(:first, :conditions => {:id => params[:device][:devicegroup_id], :user_id => user.id})
       notice = _('Device_group_invalid')
     end
 
-    type_array = ['SIP', 'IAX2', 'FAX','H323', 'Skype', '']
+    type_array = ['SIP', 'IAX2', 'FAX', 'H323', 'Skype', '']
     type_array << "ZAP" if allow_zap
     type_array << "Virtual" if allow_virtual
     if notice.blank? and !type_array.include?(params[:device][:device_type].to_s)
@@ -960,14 +964,19 @@ class Device < ActiveRecord::Base
     elsif technology == 'SIP'
       return true
     elsif technology == 'IAX'
-      return true  
+      return true
     else
       return true
     end
   end
 
-  def device_olde_name; @device_olde_name_record; end
-  def device_old_server; @device_old_server_record; end
+  def device_olde_name;
+    @device_olde_name_record;
+  end
+
+  def device_old_server;
+    @device_old_server_record;
+  end
 
   def set_old_name
     self.device_olde_name_record = name
@@ -1042,22 +1051,22 @@ class Device < ActiveRecord::Base
       if self.provider
         MorLog.my_debug("Provider_name_changed ID:#{id} prune:#{device_olde_name_record}, no reload", 1)
         #clean the mess from all servers and do not reload (0)
-        self.prune_device_in_all_servers(device_olde_name_record,0)
+        self.prune_device_in_all_servers(device_olde_name_record, 0)
         #clean the mess from all servers and reload (1)
         MorLog.my_debug("Provider_name_changed ID:#{id} prune:#{name}, reload", 1)
-        self.prune_device_in_all_servers(name,1)
+        self.prune_device_in_all_servers(name, 1)
       else
         if device_old_server_record != server_id
           MorLog.my_debug("Device_name_changed ID:#{id} prune:#{device_olde_name_record}, no reload old server :#{device_old_server_record}", 1)
           #clean the mess from old server and do not reload (0)
-          self.prune_device_in_server(device_olde_name_record,0, device_old_server_record)
+          self.prune_device_in_server(device_olde_name_record, 0, device_old_server_record)
         end
         MorLog.my_debug("Device_name_changed ID:#{id} prune:#{device_olde_name_record}, no reload", 1)
         #clean the mess from server and do not reload (0)
-        self.prune_device_in_server(device_olde_name_record,0)
+        self.prune_device_in_server(device_olde_name_record, 0)
         #clean the mess from server and reload (1)
         MorLog.my_debug("Device_name_changed ID:#{id} prune:#{name}, reload", 1)
-        self.prune_device_in_server(name,1)
+        self.prune_device_in_server(name, 1)
       end
       self.device_olde_name_record = name
     end

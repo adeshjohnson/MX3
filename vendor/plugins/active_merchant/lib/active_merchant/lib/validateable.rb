@@ -8,13 +8,13 @@ module ActiveMerchant #:nodoc:
       validate if respond_to?(:validate, true)
 
       errors.empty?
-    end  
+    end
 
     def initialize(attributes = {})
       self.attributes = attributes
     end
 
-    def errors    
+    def errors
       @errors ||= Errors.new(self)
     end
 
@@ -23,10 +23,10 @@ module ActiveMerchant #:nodoc:
     def attributes=(attributes)
       unless attributes.nil?
         for key, value in attributes
-          send("#{key}=", value )            
+          send("#{key}=", value)
         end
       end
-    end  
+    end
 
     # This hash keeps the errors of the object
     class Errors < HashWithIndifferentAccess
@@ -34,7 +34,7 @@ module ActiveMerchant #:nodoc:
       def initialize(base)
         @base = base
       end
-      
+
       def count
         size
       end
@@ -49,20 +49,20 @@ module ActiveMerchant #:nodoc:
       def add(field, error)
         self[field] ||= []
         self[field] << error
-      end    
-      
+      end
+
       def add_to_base(error)
         add(:base, error)
       end
 
       def each_full
-        full_messages.each { |msg| yield msg }      
+        full_messages.each { |msg| yield msg }
       end
 
       def full_messages
         result = []
 
-        self.each do |key, messages| 
+        self.each do |key, messages|
           if key == 'base'
             result << "#{messages.first}"
           else
@@ -71,7 +71,7 @@ module ActiveMerchant #:nodoc:
         end
 
         result
-      end   
-    end  
+      end
+    end
   end
 end

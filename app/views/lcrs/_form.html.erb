@@ -1,23 +1,24 @@
 <!--[form:lcr]-->
 <p><label for="lcr_name"><%= _('Name') %></label><br/>
-<%= text_field 'lcr', 'name', "class" => "input"   %></p>
+  <%= text_field 'lcr', 'name', "class" => "input" %></p>
 
 <p><label for="lcr_order"><%= _('Order') %></label><br/>
-<select name="lcr[order]">
-    <option value="price" <%= 'selected' if @lcr.order == "price" %> ><%= _('Price') %></option>   
-    <option value="priority" <%= 'selected' if @lcr.order == "priority" %>><%= _('Priority') %></option>    
-    <option value="percent" <%= 'selected' if @lcr.order == "percent" %>><%= _('Percent') %></option>    
-</select>
+  <select name="lcr[order]">
+    <option value="price" <%= 'selected' if @lcr.order == "price" %> ><%= _('Price') %></option>
+    <option value="priority" <%= 'selected' if @lcr.order == "priority" %>><%= _('Priority') %></option>
+    <option value="percent" <%= 'selected' if @lcr.order == "percent" %>><%= _('Percent') %></option>
+  </select>
 
-<% if params[:action] == "edit" and @lcr.order == "price" %>
+  <% if params[:action] == "edit" and @lcr.order == "price" %>
 
-	<p <%= raw tooltip(_('First_provider_percent_limit'),h( _('First_provider_percent_limit_explained'))).html_safe %> ><label for="lcr_first_provider_percent_limit"><%= _('First_provider_percent_limit') %></label> <%= b_info %><br>
-	<%= text_field 'lcr', 'first_provider_percent_limit', "class" => "input", :size => "5", :maxlength => "5"  %>%</p>
+    <p <%= raw tooltip(_('First_provider_percent_limit'), h(_('First_provider_percent_limit_explained'))).html_safe %> >
+      <label for="lcr_first_provider_percent_limit"><%= _('First_provider_percent_limit') %></label> <%= b_info %><br>
+      <%= text_field 'lcr', 'first_provider_percent_limit', "class" => "input", :size => "5", :maxlength => "5" %>%</p>
 
 <% end %>
 
 <p>
-  <label <%= raw tooltip(_('No_failover_provider'),h( _('No_failover_provider_explained'))).html_safe %> ><%= _('No_failover_provider') %></label>
+  <label <%= raw tooltip(_('No_failover_provider'), h(_('No_failover_provider_explained'))).html_safe %> ><%= _('No_failover_provider') %></label>
   <%= radio_button_tag('lcr[no_failover]', '0', !@lcr.no_failover?, {:id => "lcr_no_failover"}) %> <%= _('No') %>
   <%= radio_button_tag('lcr[no_failover]', '1', @lcr.no_failover?, {:id => "lcr_no_failover"}) %> <%= _('Yes') %>
 </p>

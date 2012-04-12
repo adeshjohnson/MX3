@@ -5,19 +5,19 @@
 <table width="50%" class="maintable">
   <tr>
 
-    <th align="left"><%= _('Field') %></th>     
-    <th align="left"><%= _('Value') %></th>     
-    
+    <th align="left"><%= _('Field') %></th>
+    <th align="left"><%= _('Value') %></th>
+
   </tr>
 
 
 
-<% i = 0 %>     
-<% for column in Device.content_columns %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-    <td align="left">        <%= column.name %> </td>
-    <td align="left" id="<%=column.name%>_value">        <%= @device.send(column.name) %> </td>
- </tr>
-    <% i += 1%>   
-<% end %>
+  <% i = 0 %>
+  <% for column in Device.content_columns %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td align="left">        <%= column.name %> </td>
+        <td align="left" id="<%= column.name %>_value">        <%= @device.send(column.name) %> </td>
+      </tr>
+      <% i += 1 %>
+  <% end %>
 </table>

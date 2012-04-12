@@ -1,5 +1,5 @@
 <% if session[:usertype] == "admin" %>
-  <b><%= b_user + _('User') %>:</b> <%= link_nice_user(@user) %><br/>
+    <b><%= b_user + _('User') %>:</b> <%= link_nice_user(@user) %><br/>
 <% end %>
 
 <b><%= b_device + _('Device') %>:</b> <%= user_link_nice_device @device %><br/>
@@ -8,46 +8,46 @@
 
 <table width="100%" class="maintable">
   <tr>
-    <th align="left"><%= _('CLI') %></th> 
-    <th align="center"><%= _('Description') %></th> 
-    <th align="center"><%= _('Comment') %></th> 
+    <th align="left"><%= _('CLI') %></th>
+    <th align="center"><%= _('Description') %></th>
+    <th align="center"><%= _('Comment') %></th>
     <th align="center"><%= _('Added_at') %></th>
     <th align="center"><%= _('Updated_at') %></th>
-    <%if session[:usertype].to_s == 'admin'%>
-      <th align="center"><%= _('Ivr') %></th>
-    <%end%>
+    <% if session[:usertype].to_s == 'admin' %>
+        <th align="center"><%= _('Ivr') %></th>
+    <% end %>
     <% if callback_active? %>
-      <th align="center"> 	<%= _('Use_for_Email_Callback') %> 		</th>
-    <%end%>
-    <%if session[:usertype].to_s == 'admin'%>
-      <th align="center"><%= _('Banned') %></th>
-    <%end%>
+        <th align="center">     <%= _('Use_for_Email_Callback') %>         </th>
+    <% end %>
+    <% if session[:usertype].to_s == 'admin' %>
+        <th align="center"><%= _('Banned') %></th>
+    <% end %>
   </tr>
   <%= form_tag :action => 'cli_user_update', :id => @cli.id, :device_id => @cli.device_id do %>
-    <tr class="row1">
+      <tr class="row1">
 
-      <td align="left"><%= text_field_tag 'cli', @cli.cli, "class" => "input", :size => "20", :maxlength => "20" %></td>
-      <td align="left"><%= text_field_tag 'description', @cli.description, "class" => "input", :size => "30", :maxlength => "30"  %></td>
-      <td align="left"><%= text_field_tag 'comment', @cli.comment, "class" => "input", :size => "30", :maxlength => "30"  %></td>
-      <td align="center"><%= nice_date_time @cli.added_at %></td>
-      <td align="center"><%= nice_date_time @cli.updated_at %></td>
-      <%if session[:usertype].to_s == 'admin'%>
-        <td><select name="ivr"  >
-            <option value="0" <%= "selected" if 0 == @cli.ivr_id %>><%= _('Not_assigned')%> </option>
-            <%for iv in @all_ivrs%>
-              <option value="<%= iv.id %>" <%= "selected" if iv.id == @cli.ivr_id %>><%= iv.name %> </option>
-            <%end%>
-          </select></td>
-      <%end%>
-      <% if callback_active? %>
-        <td align="center">  <%= check_box_tag 'email_callback', value = "1", checked = @cli.email_callback == 1 %></td>
-      <%end%>
-      <%if session[:usertype].to_s == 'admin'%>
-        <td align="center"><%= check_box_tag 'banned', value = "1", checked = @cli.banned == 1 %> </td>
-      <%end%>
-    </tr>
+        <td align="left"><%= text_field_tag 'cli', @cli.cli, "class" => "input", :size => "20", :maxlength => "20" %></td>
+        <td align="left"><%= text_field_tag 'description', @cli.description, "class" => "input", :size => "30", :maxlength => "30" %></td>
+        <td align="left"><%= text_field_tag 'comment', @cli.comment, "class" => "input", :size => "30", :maxlength => "30" %></td>
+        <td align="center"><%= nice_date_time @cli.added_at %></td>
+        <td align="center"><%= nice_date_time @cli.updated_at %></td>
+        <% if session[:usertype].to_s == 'admin' %>
+            <td><select name="ivr">
+              <option value="0" <%= "selected" if 0 == @cli.ivr_id %>><%= _('Not_assigned') %> </option>
+              <% for iv in @all_ivrs %>
+                  <option value="<%= iv.id %>" <%= "selected" if iv.id == @cli.ivr_id %>><%= iv.name %> </option>
+              <% end %>
+            </select></td>
+        <% end %>
+        <% if callback_active? %>
+            <td align="center">  <%= check_box_tag 'email_callback', value = "1", checked = @cli.email_callback == 1 %></td>
+        <% end %>
+        <% if session[:usertype].to_s == 'admin' %>
+            <td align="center"><%= check_box_tag 'banned', value = "1", checked = @cli.banned == 1 %> </td>
+        <% end %>
+      </tr>
 
-  </table>
-  <br/><br/>
-  <%= submit_tag 'Update', :disable_with=>_('Processing..') %>
-<% end %>
+      </table>
+      <br/><br/>
+      <%= submit_tag 'Update', :disable_with => _('Processing..') %>
+  <% end %>

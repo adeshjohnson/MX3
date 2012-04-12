@@ -9,44 +9,44 @@
     <th></th>
     <th></th>
   </tr>
-  
-<% i = 0 %>  
-<% for ph in @phonebooks %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-    <td align="left" id="name_<%=ph.id%>"><%= ph.name %></td>	
-    <td align="left" id="number_<%=ph.id%>"><%= ph.number %></td>
-    <td align="left" id="speeddial_<%=ph.id%>"><%= ph.speeddial %></td>
-    <td align="center" id="added_<%=ph.id%>"><%= nice_date_time ph.added %></td>
-    <td align="center" id="updated_<%=ph.id%>"><%= nice_date_time ph.updated_at %></td>
 
-    <% if ph.user_id != 0 or session[:user_id] == 0 %>
-	    <td align="center" id="edit_<%=ph.id%>"><%= link_to b_edit, {:action => 'edit', :id => ph}, :id=>"phonebook_edit_#{ph.id}" %></td>		
-        <td align="center" id="delete_<%=ph.id%>"><%= (link_to b_delete, { :action => 'destroy', :id => ph }, :id=>"phonebook_delete_#{ph.id}", :confirm => _('Are_you_sure'), :method => :post)  %></td>
-    <% else %>
-        <td align="center" colspan=2 id="global_<%=ph.id%>"><%= _('Global')  %></td>
-    <% end %>
+  <% i = 0 %>
+  <% for ph in @phonebooks %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td align="left" id="name_<%= ph.id %>"><%= ph.name %></td>
+        <td align="left" id="number_<%= ph.id %>"><%= ph.number %></td>
+        <td align="left" id="speeddial_<%= ph.id %>"><%= ph.speeddial %></td>
+        <td align="center" id="added_<%= ph.id %>"><%= nice_date_time ph.added %></td>
+        <td align="center" id="updated_<%= ph.id %>"><%= nice_date_time ph.updated_at %></td>
 
-  </tr>
-  <% i += 1 %>
-<% end %>
+        <% if ph.user_id != 0 or session[:user_id] == 0 %>
+            <td align="center" id="edit_<%= ph.id %>"><%= link_to b_edit, {:action => 'edit', :id => ph}, :id => "phonebook_edit_#{ph.id}" %></td>
+            <td align="center" id="delete_<%= ph.id %>"><%= (link_to b_delete, {:action => 'destroy', :id => ph}, :id => "phonebook_delete_#{ph.id}", :confirm => _('Are_you_sure'), :method => :post) %></td>
+        <% else %>
+            <td align="center" colspan=2 id="global_<%= ph.id %>"><%= _('Global') %></td>
+        <% end %>
 
-<%= form_for @phonebook, :url => { :action => 'add_new' } do |f| %>
-  <tr>
-    <th align="left">
-      <%= f.text_field 'name', "class" => "input", :size => "30", :maxlength => "50"  %>
-    </th>
-    <th align="left">
-      <%= f.text_field 'number', "class" => "input", :size => "19", :maxlength => "50"  %>
-    </th>
-    <th align="left">
-      <%= f.text_field 'speeddial', "class" => "input", :size => "10", :maxlength => "7"  %>
-    </th>
-    <th align="center"> </th>
-    <th align="center"> </th>		
-    <th align="center" colspan=2>
-      <%= image_submit_tag 'icons/add.png', :title => _('Add'), :id=>"add_phonebook" %>
-    </th> 
-  </tr>
-<% end %>
+      </tr>
+      <% i += 1 %>
+  <% end %>
+
+  <%= form_for @phonebook, :url => {:action => 'add_new'} do |f| %>
+      <tr>
+        <th align="left">
+          <%= f.text_field 'name', "class" => "input", :size => "30", :maxlength => "50" %>
+        </th>
+        <th align="left">
+          <%= f.text_field 'number', "class" => "input", :size => "19", :maxlength => "50" %>
+        </th>
+        <th align="left">
+          <%= f.text_field 'speeddial', "class" => "input", :size => "10", :maxlength => "7" %>
+        </th>
+        <th align="center"></th>
+        <th align="center"></th>
+        <th align="center" colspan=2>
+          <%= image_submit_tag 'icons/add.png', :title => _('Add'), :id => "add_phonebook" %>
+        </th>
+      </tr>
+  <% end %>
 
 </table>

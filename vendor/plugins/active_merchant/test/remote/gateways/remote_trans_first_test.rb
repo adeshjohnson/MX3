@@ -8,13 +8,13 @@ class RemoteTransFirstTest < Test::Unit::TestCase
 
     @credit_card = credit_card('4111111111111111')
     @amount = 100
-    @options = { 
-      :order_id => generate_unique_id,
-      :invoice => 'ActiveMerchant Sale',
-      :billing_address => address
+    @options = {
+        :order_id => generate_unique_id,
+        :invoice => 'ActiveMerchant Sale',
+        :billing_address => address
     }
   end
-  
+
   def test_successful_purchase
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_equal 'test transaction', response.message
@@ -25,8 +25,8 @@ class RemoteTransFirstTest < Test::Unit::TestCase
 
   def test_invalid_login
     gateway = TransFirstGateway.new(
-      :login => '',
-      :password => ''
+        :login => '',
+        :password => ''
     )
     assert response = gateway.purchase(@amount, @credit_card, @options)
     assert_equal 'invalid account', response.message

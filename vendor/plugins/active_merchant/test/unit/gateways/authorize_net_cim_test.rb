@@ -4,8 +4,8 @@ require 'test_helper'
 class AuthorizeNetCimTest < Test::Unit::TestCase
   def setup
     @gateway = AuthorizeNetCimGateway.new(
-      :login => 'X',
-      :password => 'Y'
+        :login => 'X',
+        :password => 'Y'
     )
     @amount = 100
     @credit_card = credit_card
@@ -14,41 +14,41 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
     @customer_payment_profile_id = '7813'
     @customer_address_id = '4321'
     @payment = {
-      :credit_card => @credit_card
+        :credit_card => @credit_card
     }
-    @profile = { 
-      :merchant_customer_id => 'Up to 20 chars', # Optional
-      :description => 'Up to 255 Characters', # Optional
-      :email => 'Up to 255 Characters', # Optional
-      :payment_profiles => { # Optional
-        :customer_type => 'individual or business', # Optional
-        :bill_to => @address,
-        :payment => @payment
-      },
-      :ship_to_list => {
-        :first_name => 'John', 
-        :last_name => 'Doe', 
-        :company => 'Widgets, Inc',
-        :address1 => '1234 Fake Street',
-        :city => 'Anytown',
-        :state => 'MD',
-        :zip => '12345',
-        :country => 'USA',
-        :phone_number => '(123)123-1234', # Optional - Up to 25 digits (no letters)
-        :fax_number => '(123)123-1234' # Optional - Up to 25 digits (no letters)
-      }
+    @profile = {
+        :merchant_customer_id => 'Up to 20 chars', # Optional
+        :description => 'Up to 255 Characters', # Optional
+        :email => 'Up to 255 Characters', # Optional
+        :payment_profiles => {# Optional
+                              :customer_type => 'individual or business', # Optional
+                              :bill_to => @address,
+                              :payment => @payment
+        },
+        :ship_to_list => {
+            :first_name => 'John',
+            :last_name => 'Doe',
+            :company => 'Widgets, Inc',
+            :address1 => '1234 Fake Street',
+            :city => 'Anytown',
+            :state => 'MD',
+            :zip => '12345',
+            :country => 'USA',
+            :phone_number => '(123)123-1234', # Optional - Up to 25 digits (no letters)
+            :fax_number => '(123)123-1234' # Optional - Up to 25 digits (no letters)
+        }
     }
     @options = {
-      :ref_id => '1234', # Optional
-      :profile => @profile
+        :ref_id => '1234', # Optional
+        :profile => @profile
     }
   end
-  
+
   def test_expdate_formatting
     assert_equal '2009-09', @gateway.send(:expdate, credit_card('4111111111111111', :month => "9", :year => "2009"))
     assert_equal '2013-11', @gateway.send(:expdate, credit_card('4111111111111111', :month => "11", :year => "2013"))
   end
-  
+
   def test_should_create_customer_profile_request
     @gateway.expects(:ssl_post).returns(successful_create_customer_profile_response)
 
@@ -63,13 +63,13 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
     @gateway.expects(:ssl_post).returns(successful_create_customer_payment_profile_response)
 
     assert response = @gateway.create_customer_payment_profile(
-      :customer_profile_id => @customer_profile_id,
-      :payment_profile => {
-        :customer_type => 'individual',
-        :bill_to => @address,
-        :payment => @payment
-      },
-      :validation_mode => :test
+        :customer_profile_id => @customer_profile_id,
+        :payment_profile => {
+            :customer_type => 'individual',
+            :bill_to => @address,
+            :payment => @payment
+        },
+        :validation_mode => :test
     )
     assert_instance_of Response, response
     assert_success response
@@ -81,18 +81,18 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
     @gateway.expects(:ssl_post).returns(successful_create_customer_shipping_address_response)
 
     assert response = @gateway.create_customer_shipping_address(
-      :customer_profile_id => @customer_profile_id,
-      :address => {
-        :first_name => 'John', 
-        :last_name => 'Doe', 
-        :company => 'Widgets, Inc',
-        :address1 => '1234 Fake Street',
-        :city => 'Anytown',
-        :state => 'MD',
-        :country => 'USA',
-        :phone_number => '(123)123-1234',
-        :fax_number => '(123)123-1234'
-      }
+        :customer_profile_id => @customer_profile_id,
+        :address => {
+            :first_name => 'John',
+            :last_name => 'Doe',
+            :company => 'Widgets, Inc',
+            :address1 => '1234 Fake Street',
+            :city => 'Anytown',
+            :state => 'MD',
+            :country => 'USA',
+            :phone_number => '(123)123-1234',
+            :fax_number => '(123)123-1234'
+        }
     )
     assert_instance_of Response, response
     assert_success response
@@ -104,12 +104,12 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
     @gateway.expects(:ssl_post).returns(successful_create_customer_profile_transaction_response(:auth_only))
 
     assert response = @gateway.create_customer_profile_transaction(
-      :transaction => {
-        :customer_profile_id => @customer_profile_id, 
-        :customer_payment_profile_id => @customer_payment_profile_id, 
-        :type => :auth_only, 
-        :amount => @amount
-      }
+        :transaction => {
+            :customer_profile_id => @customer_profile_id,
+            :customer_payment_profile_id => @customer_payment_profile_id,
+            :type => :auth_only,
+            :amount => @amount
+        }
     )
     assert_instance_of Response, response
     assert_success response
@@ -159,13 +159,13 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
     @gateway.expects(:ssl_post).returns(successful_create_customer_profile_transaction_response(:capture_only))
 
     assert response = @gateway.create_customer_profile_transaction(
-      :transaction => {
-        :customer_profile_id => @customer_profile_id,
-        :customer_payment_profile_id => @customer_payment_profile_id,
-        :type => :capture_only,
-        :amount => @amount,
-        :approval_code => approval_code
-      }
+        :transaction => {
+            :customer_profile_id => @customer_profile_id,
+            :customer_payment_profile_id => @customer_payment_profile_id,
+            :type => :capture_only,
+            :amount => @amount,
+            :approval_code => approval_code
+        }
     )
     assert_instance_of Response, response
     assert_success response
@@ -177,17 +177,17 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
     @gateway.expects(:ssl_post).returns(successful_create_customer_profile_transaction_response(:auth_capture))
 
     assert response = @gateway.create_customer_profile_transaction(
-      :transaction => {
-        :customer_profile_id => @customer_profile_id,
-        :customer_payment_profile_id => @customer_payment_profile_id,
-        :type => :auth_capture,
-        :order => {
-          :invoice_number => '1234',
-          :description => 'Test Order Description',
-          :purchase_order_number => '4321'
-        },
-        :amount => @amount
-      }
+        :transaction => {
+            :customer_profile_id => @customer_profile_id,
+            :customer_payment_profile_id => @customer_payment_profile_id,
+            :type => :auth_capture,
+            :order => {
+                :invoice_number => '1234',
+                :description => 'Test Order Description',
+                :purchase_order_number => '4321'
+            },
+            :amount => @amount
+        }
     )
     assert_instance_of Response, response
     assert_success response
@@ -246,8 +246,8 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
     @gateway.expects(:ssl_post).returns(successful_get_customer_payment_profile_response)
 
     assert response = @gateway.get_customer_payment_profile(
-      :customer_profile_id => @customer_profile_id,
-      :customer_payment_profile_id => @customer_payment_profile_id
+        :customer_profile_id => @customer_profile_id,
+        :customer_payment_profile_id => @customer_payment_profile_id
     )
     assert_instance_of Response, response
     assert_success response
@@ -259,8 +259,8 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
     @gateway.expects(:ssl_post).returns(successful_get_customer_shipping_address_response)
 
     assert response = @gateway.get_customer_shipping_address(
-      :customer_profile_id => @customer_profile_id,
-      :customer_address_id => @customer_address_id
+        :customer_profile_id => @customer_profile_id,
+        :customer_address_id => @customer_address_id
     )
     assert_instance_of Response, response
     assert_success response
@@ -271,10 +271,10 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
     @gateway.expects(:ssl_post).returns(successful_update_customer_profile_response)
 
     assert response = @gateway.update_customer_profile(
-      :profile => {
-        :customer_profile_id => @customer_profile_id,
-        :email => 'new email address'
-      }
+        :profile => {
+            :customer_profile_id => @customer_profile_id,
+            :email => 'new email address'
+        }
     )
     assert_instance_of Response, response
     assert_success response
@@ -285,11 +285,11 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
     @gateway.expects(:ssl_post).returns(successful_update_customer_payment_profile_response)
 
     assert response = @gateway.update_customer_payment_profile(
-      :customer_profile_id => @customer_profile_id,
-      :payment_profile => {
-        :customer_payment_profile_id => @customer_payment_profile_id,
-        :customer_type => 'business'
-      }
+        :customer_profile_id => @customer_profile_id,
+        :payment_profile => {
+            :customer_payment_profile_id => @customer_payment_profile_id,
+            :customer_type => 'business'
+        }
     )
     assert_instance_of Response, response
     assert_success response
@@ -300,11 +300,11 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
     @gateway.expects(:ssl_post).returns(successful_update_customer_shipping_address_response)
 
     assert response = @gateway.update_customer_shipping_address(
-      :customer_profile_id => @customer_profile_id,
-      :address => {
-        :customer_address_id => @customer_address_id,
-        :city => 'New City'
-      }
+        :customer_profile_id => @customer_profile_id,
+        :address => {
+            :customer_address_id => @customer_address_id,
+            :city => 'New City'
+        }
     )
     assert_instance_of Response, response
     assert_success response
@@ -313,12 +313,12 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
 
   def test_should_validate_customer_payment_profile_request
     @gateway.expects(:ssl_post).returns(successful_validate_customer_payment_profile_response)
-  
+
     assert response = @gateway.validate_customer_payment_profile(
-      :customer_profile_id => @customer_profile_id,
-      :customer_payment_profile_id => @customer_payment_profile_id,
-      :customer_address_id => @customer_address_id,
-      :validation_mode => :live
+        :customer_profile_id => @customer_profile_id,
+        :customer_payment_profile_id => @customer_payment_profile_id,
+        :customer_address_id => @customer_address_id,
+        :validation_mode => :live
     )
     assert_instance_of Response, response
     assert_success response
@@ -327,7 +327,7 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
   end
 
   private
-  
+
   def successful_create_customer_profile_response
     <<-XML
       <?xml version="1.0" encoding="utf-8" ?> 
@@ -629,9 +629,9 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
   end
 
   SUCCESSFUL_DIRECT_RESPONSE = {
-    :auth_only => '1,1,1,This transaction has been approved.,Gw4NGI,Y,508223659,,,100.00,CC,auth_only,Up to 20 chars,,,,,,,,,,,Up to 255 Characters,,,,,,,,,,,,,,6E5334C13C78EA078173565FD67318E4,,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,',
-    :capture_only => '1,1,1,This transaction has been approved.,,Y,508223660,,,100.00,CC,capture_only,Up to 20 chars,,,,,,,,,,,Up to 255 Characters,,,,,,,,,,,,,,6E5334C13C78EA078173565FD67318E4,,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,',
-    :auth_capture => '1,1,1,This transaction has been approved.,d1GENk,Y,508223661,32968c18334f16525227,Store purchase,1.00,CC,auth_capture,,Longbob,Longsen,,,,,,,,,,,,,,,,,,,,,,,269862C030129C1173727CC10B1935ED,P,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,'
+      :auth_only => '1,1,1,This transaction has been approved.,Gw4NGI,Y,508223659,,,100.00,CC,auth_only,Up to 20 chars,,,,,,,,,,,Up to 255 Characters,,,,,,,,,,,,,,6E5334C13C78EA078173565FD67318E4,,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,',
+      :capture_only => '1,1,1,This transaction has been approved.,,Y,508223660,,,100.00,CC,capture_only,Up to 20 chars,,,,,,,,,,,Up to 255 Characters,,,,,,,,,,,,,,6E5334C13C78EA078173565FD67318E4,,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,',
+      :auth_capture => '1,1,1,This transaction has been approved.,d1GENk,Y,508223661,32968c18334f16525227,Store purchase,1.00,CC,auth_capture,,Longbob,Longsen,,,,,,,,,,,,,,,,,,,,,,,269862C030129C1173727CC10B1935ED,P,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,'
   }
 
   def successful_create_customer_profile_transaction_response(transaction_type)
@@ -653,7 +653,7 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
       </createCustomerProfileTransactionResponse>
     XML
   end
-  
+
   def successful_validate_customer_payment_profile_response
     <<-XML
       <?xml version="1.0" encoding="utf-8" ?> 
@@ -673,5 +673,5 @@ class AuthorizeNetCimTest < Test::Unit::TestCase
       </validateCustomerPaymentProfileResponse>
     XML
   end
-  
+
 end

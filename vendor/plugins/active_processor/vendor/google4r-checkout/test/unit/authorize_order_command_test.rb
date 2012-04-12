@@ -47,7 +47,7 @@ class Google4R::Checkout::AuthorizeOrderCommandTest < Test::Unit::TestCase
   end
 
   def test_behaves_correctly
-    [ :google_order_number ].each do |symbol|
+    [:google_order_number].each do |symbol|
       assert_respond_to @command, symbol
     end
   end

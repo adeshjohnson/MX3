@@ -35,36 +35,36 @@ require 'test/frontend_configuration'
 # Test for the class UsStateArea.
 class Google4R::Checkout::UsStateAreaTest < Test::Unit::TestCase
   include Google4R::Checkout
-  
+
   def setup
     @area = UsStateArea.new
   end
-  
+
   def test_initialization
     assert_nil @area.state
   end
-  
+
   def test_creator_sets_state
     area = UsStateArea.new('CA')
     assert_equal 'CA', area.state
   end
-  
+
   def test_us_state_area_behaves_correctly
     assert_respond_to @area, :state
     assert_respond_to @area, :state=
   end
-  
+
   def test_us_country_area_area_accessor_works
     assert_nil @area.state
-    
+
     @area.state = 'CA'
     assert_equal 'CA', @area.state
   end
-  
+
   def test_us_country_area_area_must_have_the_correct_format
     assert_raises(RuntimeError) { @area.state = 'ca' }
     assert_nil @area.state
-    
+
     assert_raises(RuntimeError) { @area.state = 'CAL' }
     assert_nil @area.state
   end

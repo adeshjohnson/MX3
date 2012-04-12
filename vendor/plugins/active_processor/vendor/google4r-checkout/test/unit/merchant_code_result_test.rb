@@ -35,16 +35,16 @@ require 'test/frontend_configuration'
 # Test for the class MerchantCode.
 class Google4R::Checkout::MerchantCodeResultTest < Test::Unit::TestCase
   include Google4R::Checkout
-  
+
   def setup
 
   end
-  
+
   def test_responds_correctly
     adjustment = CouponResult.new(true, 'some_code', Money.new(1000, 'USD'), 'A message')
-    
-    [ :valid, :valid=, :code, :code=, :calculated_amount, 
-      :calculated_amount=, :message, :message=,
+
+    [:valid, :valid=, :code, :code=, :calculated_amount,
+     :calculated_amount=, :message, :message=,
     ].each do |sym|
       assert_respond_to adjustment, sym
     end

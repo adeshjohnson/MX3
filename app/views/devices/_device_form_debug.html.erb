@@ -10,21 +10,21 @@
   <td colspan="2" height="10"></td>
 </tr>
 <%
-if @device
-  device_process_sipchaninfo = @device.process_sipchaninfo
-  save_call_log = @device.save_call_log
-else
-  device_process_sipchaninfo = Confline.get_value("Default_device_process_sipchaninfo", session[:user_id])
-  save_call_log = Confline.get_value("Default_device_save_call_log", session[:user_id])
-end
+   if @device
+     device_process_sipchaninfo = @device.process_sipchaninfo
+     save_call_log = @device.save_call_log
+   else
+     device_process_sipchaninfo = Confline.get_value("Default_device_process_sipchaninfo", session[:user_id])
+     save_call_log = Confline.get_value("Default_device_save_call_log", session[:user_id])
+   end
 %>
 <% if @device_type == "SIP" %>
-  <tr>
-    <td><%= _('Process_SIPCHANINFO') %>:</td>
-    <td><%= check_box_tag 'process_sipchaninfo', "1", device_process_sipchaninfo.to_i == 1%></td>
-  </tr>
+    <tr>
+      <td><%= _('Process_SIPCHANINFO') %>:</td>
+      <td><%= check_box_tag 'process_sipchaninfo', "1", device_process_sipchaninfo.to_i == 1 %></td>
+    </tr>
 <% end %>
 <tr>
   <td><%= _('Save_Call_Log') %>:</td>
-  <td><%= check_box_tag 'save_call_log', "1", save_call_log.to_i == 1%></td>
+  <td><%= check_box_tag 'save_call_log', "1", save_call_log.to_i == 1 %></td>
 </tr>

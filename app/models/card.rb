@@ -2,7 +2,7 @@
 class Card < ActiveRecord::Base
   belongs_to :cardgroup
 
-  has_many  :calls, :order => "calldate DESC"
+  has_many :calls, :order => "calldate DESC"
   has_many :activecalls
   has_many :cclineitems
   belongs_to :user
@@ -30,7 +30,7 @@ class Card < ActiveRecord::Base
   def self.search(user_id, conditions, options)
     cond, vars = [], []
 
-    cond << ['owner_id = ?'] ; vars << user_id
+    cond << ['owner_id = ?']; vars << user_id
 
     unless conditions['s_number'].empty?
       cond << "number LIKE ?"
@@ -66,14 +66,14 @@ class Card < ActiveRecord::Base
     end
 
     return find(:all, :conditions => [cond.join(" AND "), *vars], :order => "number ASC",
-      :limit => "#{options[:page] * options[:per_page]}, #{options[:per_page]}" ),
-      count(:all, :conditions => [cond.join(" AND "), *vars])
+                :limit => "#{options[:page] * options[:per_page]}, #{options[:per_page]}"),
+        count(:all, :conditions => [cond.join(" AND "), *vars])
   end
 
   def card_before_create
-    card_f = Card.find(:first, :select=>"cards.*, cardgroups.name AS 'ccg_name'", :conditions => ["number = ?", self.number.to_s], :joins=>"LEFT JOIN cardgroups ON (cards.cardgroup_id = cardgroups.id)")
+    card_f = Card.find(:first, :select => "cards.*, cardgroups.name AS 'ccg_name'", :conditions => ["number = ?", self.number.to_s], :joins => "LEFT JOIN cardgroups ON (cards.cardgroup_id = cardgroups.id)")
     if card_f
-      errors.add(:number, _("Card_with_this_number_already_exists") + " : " + self.number.to_s + " (#{card_f.ccg_name}) ") if (card_f.owner_id == self.owner_id or self.owner_id == 0 ) and card_f.cardgroup_id != self.cardgroup_id
+      errors.add(:number, _("Card_with_this_number_already_exists") + " : " + self.number.to_s + " (#{card_f.ccg_name}) ") if (card_f.owner_id == self.owner_id or self.owner_id == 0) and card_f.cardgroup_id != self.cardgroup_id
       return false
     end
 
@@ -90,12 +90,12 @@ class Card < ActiveRecord::Base
   end
 
   def is_owned_by?(user)
-    user_id =  user.usertype == 'accountant' ? 0 : user.id
+    user_id = user.usertype == 'accountant' ? 0 : user.id
     owner_id == user_id
   end
 
   def is_not_owned_by?(user)
-    user_id =  user.usertype == 'accountant' ? 0 : user.id
+    user_id = user.usertype == 'accountant' ? 0 : user.id
     owner_id != user_id
   end
 
@@ -106,8 +106,8 @@ class Card < ActiveRecord::Base
   end
 
   def destroy_with_check
-    
-    if not self.has_calls? and not self.has_activecalls? and not Payment.find(:first, :conditions => ["paymenttype = ? and user_id = ?", "Card", self.id])  
+
+    if not self.has_calls? and not self.has_activecalls? and not Payment.find(:first, :conditions => ["paymenttype = ? and user_id = ?", "Card", self.id])
       self.destroy
       return true
     else
@@ -125,7 +125,7 @@ class Card < ActiveRecord::Base
     end
   end
 
-  def balance=value
+  def balance= value
     if User.current and User.current.currency
       b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
     else
@@ -133,34 +133,44 @@ class Card < ActiveRecord::Base
     end
     write_attribute(:balance, b)
   end
-  
+
   def Card.get_order_by(params, options)
     case options[:order_by].to_s.strip.to_s
-    when "number" then order_by = "number"
-    when "name" then order_by = "name"
-    when "pin" then order_by = "pin"
-    when "caller_id" then order_by = "callerid"
-    when "balance" then order_by = "balance"
-    when "first_use" then order_by = "first_use"
-    when "daily_charge" then order_by = "daily_charge_paid_till"
-    when "sold" then order_by = "sold"
-    when "language" then order_by = "language"
-    when "user" then order_by = "nice_user"
-    else
-      order_by = options[:order_by]
+      when "number" then
+        order_by = "number"
+      when "name" then
+        order_by = "name"
+      when "pin" then
+        order_by = "pin"
+      when "caller_id" then
+        order_by = "callerid"
+      when "balance" then
+        order_by = "balance"
+      when "first_use" then
+        order_by = "first_use"
+      when "daily_charge" then
+        order_by = "daily_charge_paid_till"
+      when "sold" then
+        order_by = "sold"
+      when "language" then
+        order_by = "language"
+      when "user" then
+        order_by = "nice_user"
+      else
+        order_by = options[:order_by]
     end
     order_by += " ASC" if options[:order_desc].to_i == 0 and order_by != ""
-    order_by += " DESC"if options[:order_desc].to_i == 1 and order_by != ""
+    order_by += " DESC" if options[:order_desc].to_i == 1 and order_by != ""
     return order_by
   end
 
   def disable_voucher
     if cardgroup.disable_voucher == true
-      voucher = Voucher.find(:first, :conditions=>{:number=>number})
+      voucher = Voucher.find(:first, :conditions => {:number => number})
       if voucher
         voucher.use_date = Time.now
         if voucher.save
-          Action.add_action_hash(User.current, {:action=>'Disable_Voucher_when_Card_is_used', :target_id=>voucher.id, :target_type=>'Voucher', :data=>number, :data2=>id})
+          Action.add_action_hash(User.current, {:action => 'Disable_Voucher_when_Card_is_used', :target_id => voucher.id, :target_type => 'Voucher', :data => number, :data2 => id})
         end
       end
     end
@@ -207,7 +217,7 @@ class Card < ActiveRecord::Base
   Disable the card, to do that we need to set it as not sold.
 =end
   def disable
-     self.sold = false
+    self.sold = false
   end
 
 =begin
@@ -229,14 +239,14 @@ class Card < ActiveRecord::Base
       errors.add(:sold, 'Cannot sell already sold card')
       return false
     else
-      self.sold = true 
+      self.sold = true
       if self.save
         if Payment.add_for_card(self, self.balance * Currency.count_exchange_rate(Currency.get_default, self.cardgroup.tell_balance_in_currency))
           return true
         else
-         self.sold = false
-         self.save
-         return false
+          self.sold = false
+          self.save
+          return false
         end
       else
         return false
@@ -319,11 +329,11 @@ class Card < ActiveRecord::Base
   +string+ of numbers only, with length as specified
 =end
   def random_number(length)
-     number = ''
-     length.times{
-       number << rand(10).to_s
-     }
-     return number
+    number = ''
+    length.times {
+      number << rand(10).to_s
+    }
+    return number
   end
-  
+
 end

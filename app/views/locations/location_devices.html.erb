@@ -3,33 +3,33 @@
 
 <table width="50%" class="maintable">
   <tr>
-    <th align="left"><%= _('User') %>/<%= _('Provider') %></th> 
-    <th align="left"><%= _('Device') %></th> 
-    <th align="left"><%= _('Location') %></th> 
+    <th align="left"><%= _('User') %>/<%= _('Provider') %></th>
+    <th align="left"><%= _('Device') %></th>
+    <th align="left"><%= _('Location') %></th>
   </tr>
-<% i = 0 %>     
-<% for device in @devices %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-    
-    <% user = device.user %>
-    
-    <td id="nice_user_<%= device.id %>" align="left">        <%= nice_user(user) if user%> <%= b_provider + device.provider.name  if device.user_id == -1 and device.provider%></td>
-    <td id="link_nice_device_<%= device.id %>"align="left">        <%= link_nice_device(device) %> </td>
+  <% i = 0 %>
+  <% for device in @devices %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
 
-  <%= form_tag :action => 'location_change', :id => device.id do%>  
-    <td align="left">
-        <select id="select_location_id_<%= device.id %>" name="location" >
-            <% for loc in @locations %>
-                <option value=<%= loc.id%> <%= "selected" if loc.id == @location.id %>> <%= loc.name %> </option>
-            <% end %>    
-        </select>
-        <%= image_submit_tag 'icons/check.png', {:title => _('Change'), :id => "submit_#{device.id}" }%>
-    </td>
+        <% user = device.user %>
+
+        <td id="nice_user_<%= device.id %>" align="left">        <%= nice_user(user) if user %> <%= b_provider + device.provider.name if device.user_id == -1 and device.provider %></td>
+        <td id="link_nice_device_<%= device.id %>" align="left">        <%= link_nice_device(device) %> </td>
+
+        <%= form_tag :action => 'location_change', :id => device.id do %>
+            <td align="left">
+              <select id="select_location_id_<%= device.id %>" name="location">
+                <% for loc in @locations %>
+                    <option value=<%= loc.id %> <%= "selected" if loc.id == @location.id %>> <%= loc.name %> </option>
+                <% end %>
+              </select>
+              <%= image_submit_tag 'icons/check.png', {:title => _('Change'), :id => "submit_#{device.id}"} %>
+            </td>
+        <% end %>
+
+      </tr>
+      <% i += 1 %>
   <% end %>
-
- </tr>
-    <% i += 1%>   
-<% end %>
 </table>
 
 <br><br>

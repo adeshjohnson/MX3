@@ -1,262 +1,267 @@
-<%if calling_cards_active?%>
-  <% if @dp.dptype == "callingcard"%>
+<% if calling_cards_active? %>
+    <% if @dp.dptype == "callingcard" %>
+
+        <%= form_tag :action => 'update', :id => @dp do %>
+
+            <br/>
+            <b><%= _('Calling_cards_dialplan') %></b>
+            <br/>
+
+            <table class="maintable" width="100%">
+              <tr>
+
+                <th align="left"><%= _('Name') %></th>
+                <th align="right"><%= _('Number_length') %> / <%= _('Pin_length') %></th>
+                <th align="center"><%= _('Ask_only_pin') %></th>
+                <th align="center"><%= _('P0inless') %></th>
+                <th align="center"><%= _('Tell_time') %></th>
+                <th align="center"><%= _('Tell_seconds') %></th>
+                <th align="center"><%= _('Tell_balance') %></th>
+                <% if mor_11_extend? %>
+                    <th align="center"><%= _('Tell_balance_after_call') %></th>
+                <% end %>
+                <th align="right"><%= _('Ask_numberpin_times') %></th>
+                <th align="right"><%= _('Ask_dst_times') %></th>
+                <th align="center" <%= nice_end_ivr_tooltip %> ><%= _('End_IVR') %></th>
+                <% if mor_11_extend? %>
+                    <th align="right"><%= _('If_Card_balance_lower_than') %></th>
+                    <th id="balance_ivr_value" align="center"><%= _('Balance_IVR') %></th>
+                <% end %>
+                <th></th>
+
+
+              </tr>
+
+              <tr class="row1">
+
+                <td align="left"> <%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "30", :maxlength => "50" %></td>
+                <td align="right"><select name="dialplan_number_pin_length">
+                  <% for card in @cardgroups %>
+                      <option value=<%= card.id %> <%= 'selected' if @dp.data1.to_i == card.number_length.to_i and @dp.data2.to_i == card.pin_length.to_i %>> <%= card.number_length %>
+                        / <%= card.pin_length %> </option>
+                  <% end %>
+                </select>
+                </td>
+                <td align="center"> <%= check_box_tag 'dialplan[data7]', 1, (@dp.data7 == "1") %></td>
+                <td align="center"> <%= check_box_tag 'dialplan[data8]', 1, (@dp.data8.to_i == 1) %></td>
+                <td align="center"> <%= check_box_tag 'dialplan[data3]', 1, (@dp.tell_time || @dp.tell_sec) %></td>
+                <td align="center"> <%= check_box_tag 'tell_seconds', 1, (@dp.data3 == "2") %></td>
+                <td align="center"> <%= check_box_tag 'dialplan[data4]', 1, (@dp.data4 == "1") %></td>
+                <% if mor_11_extend? %>
+                    <td align="center"> <%= check_box_tag 'dialplan[data10]', 1, (@dp.data10 == "1") %></td>
+                <% end %>
+                <td align="right"> <%= text_field_tag 'dialplan[data5]', @dp.data5, "class" => "input", :size => "10", :maxlength => "10" %></td>
+                <td align="right"> <%= text_field_tag 'dialplan[data6]', @dp.data6, "class" => "input", :size => "10", :maxlength => "10" %></td>
+                <td align="center"><select name="end_ivr">
+                  <% @end_ivr.each_with_index { |val, index| %>
+                      <option value=<%= index %> <%= 'selected' if @dp.data9.to_i == (index+1) %>> <%= val %> </option>
+                  <% } %>
+                </select>
+                </td>
+                <% if mor_11_extend? %>
+                    <td align="right"><%= text_field_tag 'dialplan[data11]', @dp.data11, "class" => "input", :size => "10", :maxlength => "10", :disabled => (@balance_ivrs.size.to_i == 0) %></td>
+                    <td align="center">
+                      <select name="dialplan[data12]" id="ivr_balance">
+                        <% for ivr in @balance_ivrs %>
+                            <option value=<%= ivr.id %> <%= 'selected' if @dp.data12.to_i == ivr.id and @dp.data11 != '0' %>> <%= ivr.name %> </option>
+                        <% end %>
+                      </select>
+                    </td>
+                <% end %>
+                <td align="center"><%= image_submit_tag 'icons/edit.png', :title => _('Edit') %></td>
+              </tr>
+
+            </table>
+            <script type="text/javascript">
+                //<![CDATA[
+                Event.observe(window, 'load', function () {
+
+                    if (!$('dialplan[data3]').checked) {
+                        $('tell_seconds').disabled = true;
+                    }
+                });
+
+                Event.observe($('dialplan[data3]'), 'click', function () {
+                            if ($('dialplan[data3]').checked) {
+                                $('tell_seconds').disabled = false;
+                            }
+                            else {
+                                $('tell_seconds').disabled = true;
+                            }
+                        }
+                );
+
+                if (Boolean(parseFloat($('dialplan[data11]').value))) {
+                    $('ivr_balance').show();
+                } else {
+                    $('ivr_balance').hide();
+                }
+
+                Event.observe($('dialplan[data11]'), 'change', function () {
+                            if (Boolean(parseFloat($('dialplan[data11]').value))) {
+                                $('ivr_balance').show();
+                            } else {
+                                $('ivr_balance').hide();
+                            }
+                        }
+                );
+
+
+                //]]>
+            </script>
+        <% end %>
+    <% end %>
+<% end %>
+
+<% if @dp.dptype == "authbypin" %>
 
     <%= form_tag :action => 'update', :id => @dp do %>
 
-      <br />
-      <b><%= _('Calling_cards_dialplan')  %></b>
-      <br />
+        <b><%= _('Authorization_by_pin_dialplan') %></b>
+        <br/><br/>
 
-      <table class="maintable" width="100%">
-        <tr>
-
-          <th align="left"><%= _('Name') %></th>
-          <th align="right"><%= _('Number_length') %> / <%= _('Pin_length') %></th>
-          <th align="center"><%= _('Ask_only_pin') %></th>
-          <th align="center"><%= _('P0inless') %></th>
-          <th align="center"><%= _('Tell_time') %></th>
-          <th align="center"><%= _('Tell_seconds') %></th>
-          <th align="center"><%= _('Tell_balance') %></th>
-          <% if mor_11_extend? %>
-            <th align="center"><%= _('Tell_balance_after_call') %></th>
-          <% end %>
-          <th align="right"><%= _('Ask_numberpin_times') %></th>
-          <th align="right"><%= _('Ask_dst_times') %></th>
-          <th align="center" <%= nice_end_ivr_tooltip%> ><%= _('End_IVR') %></th>
-          <% if mor_11_extend? %>
-            <th align="right"><%= _('If_Card_balance_lower_than') %></th>
-            <th id="balance_ivr_value" align="center"><%= _('Balance_IVR') %></th>
-          <% end %>
-          <th></th>
-
-
-        </tr>
-
-        <tr class="row1">
-
-          <td align="left"> <%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "30", :maxlength => "50"  %></td>
-          <td align="right"><select name="dialplan_number_pin_length" >
-              <% for card in @cardgroups %>
-                <option value=<%= card.id %> <%= 'selected' if @dp.data1.to_i == card.number_length.to_i and @dp.data2.to_i == card.pin_length.to_i %> > <%=  card.number_length%> / <%= card.pin_length %> </option>
-              <% end %>
-            </select>
-          </td>
-          <td align="center"> <%= check_box_tag 'dialplan[data7]', 1, (@dp.data7 == "1")%></td>
-          <td align="center"> <%= check_box_tag 'dialplan[data8]', 1, (@dp.data8.to_i == 1)%></td>
-          <td align="center"> <%= check_box_tag 'dialplan[data3]', 1, (@dp.tell_time || @dp.tell_sec)%></td>
-          <td align="center"> <%= check_box_tag 'tell_seconds',1,(@dp.data3 == "2")%></td>
-          <td align="center"> <%= check_box_tag 'dialplan[data4]', 1, (@dp.data4 == "1")%></td>
-          <% if mor_11_extend? %>
-            <td align="center"> <%= check_box_tag 'dialplan[data10]', 1, (@dp.data10 == "1") %></td>
-          <% end %>
-          <td align="right"> <%= text_field_tag 'dialplan[data5]', @dp.data5, "class" => "input", :size => "10", :maxlength => "10"  %></td>
-          <td align="right"> <%= text_field_tag 'dialplan[data6]', @dp.data6, "class" => "input", :size => "10", :maxlength => "10"  %></td>
-          <td align="center"> <select name ="end_ivr" >
-              <%@end_ivr.each_with_index{|val,index|%>
-                <option value=<%= index %> <%= 'selected' if @dp.data9.to_i == (index+1)%>  > <%= val %> </option>
-              <% }%>
-            </select>
-          </td>
-          <% if mor_11_extend? %>
-            <td align="right"><%= text_field_tag 'dialplan[data11]', @dp.data11, "class" => "input", :size => "10", :maxlength => "10", :disabled => (@balance_ivrs.size.to_i == 0) %></td>
-            <td align="center">
-              <select name="dialplan[data12]" id="ivr_balance">
-                <% for ivr in @balance_ivrs %>
-                  <option value=<%= ivr.id %> <%= 'selected' if @dp.data12.to_i == ivr.id and @dp.data11 != '0' %> > <%=  ivr.name %> </option>
+        <table class="maintable" width="100%">
+          <tr>
+            <th align="left"><%= _('Name') %></th>
+            <th align="center"><%= _('Use_ANI') %>?</th>
+            <th align="right"><%= _('Ask_numberpin_times') %></th>
+            <th align="right"><%= _('Ask_dst_times') %></th>
+            <% if mor_11_extend? %>
+                <th align="right"><%= _('Tell_balance_after_entering_destination') %></th>
+                <% if calling_cards_active? %>
+                    <th align="center"><%= _('Use_calling_card') %></th>
                 <% end %>
-              </select>
-            </td>
-          <% end %>
-          <td align="center"><%= image_submit_tag 'icons/edit.png', :title => _('Edit') %></td>
-        </tr>
+            <% end %>
+            <th align="center" <%= tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation')) %>><%= _('Save_original_CallerID') %></th>
+            <th align="center" <%= tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation')) %>><%= _('Default_device') %></th>
+            <th></th>
+          </tr>
 
-      </table>
-      <script type="text/javascript">
-        //<![CDATA[
-        Event.observe(window, 'load', function() {
-
-        if (!$('dialplan[data3]').checked) {
-        $('tell_seconds').disabled = true;
-        }
-        });
-
-        Event.observe($('dialplan[data3]'), 'click', function() {
-        if ($('dialplan[data3]').checked) { $('tell_seconds').disabled = false; }
-        else {$('tell_seconds').disabled = true; }
-        }
-        );
-
-        if (Boolean(parseFloat($('dialplan[data11]').value))) {
-          $('ivr_balance').show();
-        }else{
-          $('ivr_balance').hide();
-        }  
-
-        Event.observe($('dialplan[data11]'), 'change', function() {
-          if (Boolean(parseFloat($('dialplan[data11]').value))) {
-            $('ivr_balance').show();
-          }else{
-            $('ivr_balance').hide();
-          }  
-        }
-        );
-
- 
-        //]]>
-      </script>
-    <% end %>
-  <% end %>
-<%end%>
-
-<% if @dp.dptype == "authbypin"%>
-
-  <%= form_tag :action => 'update', :id => @dp do %>
-
-    <b><%= _('Authorization_by_pin_dialplan')  %></b>
-    <br /><br/>
-
-    <table class="maintable" width="100%">
-      <tr>
-        <th align="left"><%= _('Name') %></th>
-        <th align="center"><%= _('Use_ANI') %>?</th>
-        <th align="right"><%= _('Ask_numberpin_times') %></th>
-        <th align="right"><%= _('Ask_dst_times') %></th>
-        <% if mor_11_extend? %>
-        <th align="right"><%= _('Tell_balance_after_entering_destination') %></th>
-          <% if calling_cards_active? %>
-            <th align="center"><%= _('Use_calling_card') %></th>
-          <% end %>
-        <% end %>
-        <th align="center" <%= tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation')) %>><%= _('Save_original_CallerID') %></th>
-        <th align="center" <%= tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation')) %>><%= _('Default_device') %></th>
-        <th></th>
-      </tr>
-
-      <tr class="row1">
-        <td align="left"> <%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "20", :maxlength => "50"  %></td>
-        <td align="center"> <%= check_box_tag 'dialplan[data3]', 1, (@dp.data3 == "1"), :id=> 'data3'%></td>
-        <td align="right"> <%= text_field_tag 'dialplan[data1]', @dp.data1, "class" => "input", :size => "3", :maxlength => "10"  %> </td>
-        <td align="right"> <%= text_field_tag 'dialplan[data2]', @dp.data2, "class" => "input", :size => "3", :maxlength => "10"  %></td>
-        <% if mor_11_extend? %>
-          <td align="right"> <%= check_box_tag 'dialplan[data6]', 1, @dp.data6 == "1" %></td>
-          <% if calling_cards_active? %>
-            <td align="right"> 
+          <tr class="row1">
+            <td align="left"> <%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "20", :maxlength => "50" %></td>
+            <td align="center"> <%= check_box_tag 'dialplan[data3]', 1, (@dp.data3 == "1"), :id => 'data3' %></td>
+            <td align="right"> <%= text_field_tag 'dialplan[data1]', @dp.data1, "class" => "input", :size => "3", :maxlength => "10" %> </td>
+            <td align="right"> <%= text_field_tag 'dialplan[data2]', @dp.data2, "class" => "input", :size => "3", :maxlength => "10" %></td>
+            <% if mor_11_extend? %>
+                <td align="right"> <%= check_box_tag 'dialplan[data6]', 1, @dp.data6 == "1" %></td>
+                <% if calling_cards_active? %>
+                    <td align="right">
               <span id="dialplan_data_7">
-                <%= select_tag("dialplan[data7]",options_for_select([[_('Not_used'), 0]]+ @cc_dialplans.map{|dialplan| [dialplan.name, dialplan.id]}, @dp.data7.to_i)) %> 
+                <%= select_tag("dialplan[data7]", options_for_select([[_('Not_used'), 0]]+ @cc_dialplans.map { |dialplan| [dialplan.name, dialplan.id] }, @dp.data7.to_i)) %>
               </span>
+                    </td>
+                <% end %>
+            <% end %>
+            <td align="center" <%= tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation')) %>> <%= check_box_tag 'dialplan[data4]', 1, (@dp.data4 == "1") %></td>
+            <td align="center">
+              <%= select_tag("user", options_for_select([[_('Not_used'), ""]]+ @users.map { |user| ["#{nice_user(user)} (#{user.id })", user.id] }, @user_id)) %>
+              <span id="users_device"> </span>
             </td>
-          <% end %>
-        <% end %>
-        <td align="center" <%= tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation')) %>> <%= check_box_tag 'dialplan[data4]', 1, (@dp.data4 == "1")%></td>
-        <td align="center">
-          <%= select_tag("user" ,options_for_select([[_('Not_used'), ""]]+ @users.map{|user| [ "#{nice_user(user)} (#{user.id })", user.id]}, @user_id)) %>
-          <span id ="users_device"> </span>
-        </td>
-        <td align="center">  <%= image_submit_tag 'icons/edit.png', :title => _('Edit') %></td>
-      </tr>
+            <td align="center">  <%= image_submit_tag 'icons/edit.png', :title => _('Edit') %></td>
+          </tr>
 
-    </table>
+        </table>
 
-    <br />
+        <br/>
 
-  <% end  %>
+    <% end %>
 
 <% end %>
 
 <%= observe_field("user",
-  :update => "users_device",
-  :with => "id",
-  :url=> {:controller=> :dialplans, :action => :dialplans_device_ajax},
-  :loading => "Element.show('spinner');",
-  :complete=> "Element.hide('spinner');")%>
+                  :update => "users_device",
+                  :with => "id",
+                  :url => {:controller => :dialplans, :action => :dialplans_device_ajax},
+                  :loading => "Element.show('spinner');",
+                  :complete => "Element.hide('spinner');") %>
 
-<% if @dp.dptype == "callback" and callback_active?%>
-  <%= render :partial => 'callback_dialplan' %>
+<% if @dp.dptype == "callback" and callback_active? %>
+    <%= render :partial => 'callback_dialplan' %>
 <% end %>
 
-<% if @dp.dptype == "ivr"%>
-  <% @update = true %>
-  <%= form_tag :action => 'update', :id => @dp.id do %>
-    <b><%= _('IVR_dialplan')  %></b>
-    <br />
-    <br />
-    <%= render :partial => 'dialplan' %>
-  <% end  %>
+<% if @dp.dptype == "ivr" %>
+    <% @update = true %>
+    <%= form_tag :action => 'update', :id => @dp.id do %>
+        <b><%= _('IVR_dialplan') %></b>
+        <br/>
+        <br/>
+        <%= render :partial => 'dialplan' %>
+    <% end %>
 <% end %>
 
 <%= javascript_include_tag "jquery-1.4.2.min.js" %>
-<% if @dp.dptype != 'quickforwarddids' %> 
-<script type="text/javascript" >
+<% if @dp.dptype != 'quickforwarddids' %>
+    <script type="text/javascript">
 
-  $.noConflict();
+        $.noConflict();
 
-  jQuery(function() {
-  var wsw = jQuery('#data3:checked');
-  if (wsw.val() == undefined) {
-  jQuery('#user').css('display', "none");
-  jQuery('#users_device').css('display', "none");
-  }
-  });
+        jQuery(function () {
+            var wsw = jQuery('#data3:checked');
+            if (wsw.val() == undefined) {
+                jQuery('#user').css('display', "none");
+                jQuery('#users_device').css('display', "none");
+            }
+        });
 
-  jQuery('#data3').click(function() {
-  var wsw = jQuery('#data3:checked');
+        jQuery('#data3').click(function () {
+            var wsw = jQuery('#data3:checked');
 
-  if (wsw.val() == 1) {
-  jQuery('#user').css('display', "");
-  jQuery('#users_device').css('display', "");
-  $('dialplan_data_7').show()
-  } else {
-  jQuery('#user').css('display', "none");
-  jQuery('#users_device').css('display', "none");
-  $('dialplan_data_7').hide()
-  }
-  });
-  jQuery("#user").trigger("change");
+            if (wsw.val() == 1) {
+                jQuery('#user').css('display', "");
+                jQuery('#users_device').css('display', "");
+                $('dialplan_data_7').show()
+            } else {
+                jQuery('#user').css('display', "none");
+                jQuery('#users_device').css('display', "none");
+                $('dialplan_data_7').hide()
+            }
+        });
+        jQuery("#user").trigger("change");
 
-  new Ajax.Updater('users_device',
-  '<%= url_for(
+        new Ajax.Updater('users_device',
+                '<%= url_for(
     :controller=> :dialplans,
     :action => :dialplans_device_ajax,
     :id => @user_id,
     :device_id => @dp.data5) %>', {asynchronous:true, evalScripts:true})
 
-</script>
+    </script>
 <% end %>
 
 <% if mor_11_extend? and @dp.dptype == 'quickforwarddids' %>
-  <b><%= _('Quickforward_dialplan')  %></b>
-  <br />
-  <br />
-  <%= form_tag( :action => 'update', :id => @dp ) do %>
-    <table class="maintable" width="100%">
-      <tr>
-        <th align="left" id="quickforward_dp_name"><%= _("Name") %></th>
-        <th align="left" id="quickforward_dp_user"><%= _("User") %></th>
-        <th align="left" id="quickforward_dp_device"><%= _("Device")%></th>
-        <th align="left" id="quickforward_dp_diversion"><%= _("Use_diversion_instead_of_callerid") %></th>
-        <th></th>
-      </tr>
-      <tr>
-        <%= hidden_field_tag 'dialplan[dptype]', "quickforwarddids"  %>
-        <td align="left"><%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "30", :maxlength => "50", :id=>"quickforward_dp_name"  %></td>
-        <td align="center">
-          <%= select_tag("quickforwards_user" ,options_for_select([[_('Not_used'), ""]]+ @users.map{|user| [ "#{nice_user(user)} (#{user.id })", user.id]}, @selected_user_id), {:disabled => (@selected_user_id == ''), :onchange=>'set_devices(this.value);'}) %>
-        </td>
-        <td align="center">
-          <span id="quickforwards_device"> </span>
-        </td>
-        <td align="center"><%= check_box_tag 'dialplan[data10]', 1, @dp.data10 == "1", {:id => "data10", :onclick => "$('quickforwards_user').disabled = this.checked;if($('users_device')){$('users_device').disabled = this.checked;}"}%></td>
-        <td align="center"><%= image_submit_tag 'icons/add.png', :title => _('Add'), :id=>"cb_add" %></td>
-      </tr>
-    </table>
-  <% end %>
+    <b><%= _('Quickforward_dialplan') %></b>
+    <br/>
+    <br/>
+    <%= form_tag(:action => 'update', :id => @dp) do %>
+        <table class="maintable" width="100%">
+          <tr>
+            <th align="left" id="quickforward_dp_name"><%= _("Name") %></th>
+            <th align="left" id="quickforward_dp_user"><%= _("User") %></th>
+            <th align="left" id="quickforward_dp_device"><%= _("Device") %></th>
+            <th align="left" id="quickforward_dp_diversion"><%= _("Use_diversion_instead_of_callerid") %></th>
+            <th></th>
+          </tr>
+          <tr>
+            <%= hidden_field_tag 'dialplan[dptype]', "quickforwarddids" %>
+            <td align="left"><%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "30", :maxlength => "50", :id => "quickforward_dp_name" %></td>
+            <td align="center">
+              <%= select_tag("quickforwards_user", options_for_select([[_('Not_used'), ""]]+ @users.map { |user| ["#{nice_user(user)} (#{user.id })", user.id] }, @selected_user_id), {:disabled => (@selected_user_id == ''), :onchange => 'set_devices(this.value);'}) %>
+            </td>
+            <td align="center">
+              <span id="quickforwards_device"> </span>
+            </td>
+            <td align="center"><%= check_box_tag 'dialplan[data10]', 1, @dp.data10 == "1", {:id => "data10", :onclick => "$('quickforwards_user').disabled = this.checked;if($('users_device')){$('users_device').disabled = this.checked;}"} %></td>
+            <td align="center"><%= image_submit_tag 'icons/add.png', :title => _('Add'), :id => "cb_add" %></td>
+          </tr>
+        </table>
+    <% end %>
     <script type="text/javascript">
         $.noConflict();
-        function set_devices(value){
-            new Ajax.Updater('quickforwards_device', '<%=Web_Dir%>/dialplans/dialplans_device_ajax/'+ value + '?device_id=<%=@dp.data3%>', {asynchronous:true, evalScripts:true});
-            if($('data10').checked){
+        function set_devices(value) {
+            new Ajax.Updater('quickforwards_device', '<%=Web_Dir%>/dialplans/dialplans_device_ajax/' + value + '?device_id=<%=@dp.data3%>', {asynchronous:true, evalScripts:true});
+            if ($('data10').checked) {
                 $('quickforwards_device').style.display = 'none';
-            }else{
+            } else {
                 $('quickforwards_device').style.display = '';
             }
 

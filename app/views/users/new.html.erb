@@ -1,7 +1,6 @@
-
 <%= form_tag(:action => 'create') do %>
-  <%= render :partial => 'form' %>
-  <%= submit_tag _('Create') , :disable_with=>_('Processing..'), :id=> 'commit' %>
+    <%= render :partial => 'form' %>
+    <%= submit_tag _('Create'), :disable_with => _('Processing..'), :id => 'commit' %>
 <% end %>
 
 <br>

@@ -1,8 +1,8 @@
-<%= link_to b_add + _('New_backup'), :action=>'backup_new' %>
-<br />
-<br />
-<%= b_info %> <%=_('Value_in_system_time_zone')%>: GMT <%=User.system_time_offset > 0 ? '+' : ""%><%=User.system_time_offset%>
-<br /><br />
+<%= link_to b_add + _('New_backup'), :action => 'backup_new' %>
+<br/>
+<br/>
+<%= b_info %> <%= _('Value_in_system_time_zone') %>: GMT <%= User.system_time_offset > 0 ? '+' : "" %><%= User.system_time_offset %>
+<br/><br/>
 <table width="100%" class="maintable">
   <tr>
     <th align="center"> <%= _('Date') %></th>
@@ -10,18 +10,18 @@
     <th align="left"> <%= _('Comment') %></th>
     <th align="center"> <%= _('Donwload') %></th>
     <th align="center"> <%= _('Restore') %></th>
-    <th> </th>
+    <th></th>
   </tr>
-<% i = 0 %>
-<%for back in @backups%>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-    <td id="time_<%= back.id %>" align="center"><%= nice_date_time(back.backuptime, 0)%></td>
-    <td id="type_<%= back.id %>" align="left"><%= back.backuptype%></td>
-    <td id="comment_<%= back.id %>" align="left"><%= back.comment%></td>
-    <td id="download_<%= back.id %>" align="center"><%= link_to b_download, {:action=>'backup_download', :id=> back.id}, :id=>"back_downl_#{back.id}" %></td>
-    <td id="restore_<%= back.id %>" align="center"><%= link_to b_restore, { :action => 'backup_restore', :id => back.id }, :id=>"back_restore_#{back.id}", :confirm => _('are_you_sure'), :method => "post"  %></td>
-    <td id="destroy_<%= back.id %>" align="center"><%= link_to b_delete, { :action => 'backup_destroy', :id => back.id }, :id=>"back_delete_#{back.id}", :confirm => _('are_you_sure'), :method => "post" %></td>
-  </tr>
-  <%i+=1%>
-<%end%>
+  <% i = 0 %>
+  <% for back in @backups %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="time_<%= back.id %>" align="center"><%= nice_date_time(back.backuptime, 0) %></td>
+        <td id="type_<%= back.id %>" align="left"><%= back.backuptype %></td>
+        <td id="comment_<%= back.id %>" align="left"><%= back.comment %></td>
+        <td id="download_<%= back.id %>" align="center"><%= link_to b_download, {:action => 'backup_download', :id => back.id}, :id => "back_downl_#{back.id}" %></td>
+        <td id="restore_<%= back.id %>" align="center"><%= link_to b_restore, {:action => 'backup_restore', :id => back.id}, :id => "back_restore_#{back.id}", :confirm => _('are_you_sure'), :method => "post" %></td>
+        <td id="destroy_<%= back.id %>" align="center"><%= link_to b_delete, {:action => 'backup_destroy', :id => back.id}, :id => "back_delete_#{back.id}", :confirm => _('are_you_sure'), :method => "post" %></td>
+      </tr>
+      <% i+=1 %>
+  <% end %>
 </table>

@@ -3,9 +3,9 @@ class Destination < ActiveRecord::Base
 
   has_many :rates
   has_many :flatrate_destinations, :dependent => :destroy
-  has_many  :calls, :finder_sql => 'SELECT * FROM calls WHERE prefix = \'#{prefix}\''
+  has_many :calls, :finder_sql => 'SELECT * FROM calls WHERE prefix = \'#{prefix}\''
   belongs_to :destinationgroup
-  belongs_to :direction, :foreign_key=>'direction_code', :primary_key=>'code'
+  belongs_to :direction, :foreign_key => 'direction_code', :primary_key => 'code'
 
   validates_uniqueness_of :prefix
   validates_presence_of :prefix, :subcode, :direction_code
@@ -13,7 +13,7 @@ class Destination < ActiveRecord::Base
   before_destroy :dest_before_destroy
 
   def dest_before_destroy
-    th = Thread.new{@c=Call.find(:first, :select=>'id', :conditions => "prefix = '#{prefix}'")}
+    th = Thread.new { @c=Call.find(:first, :select => 'id', :conditions => "prefix = '#{prefix}'") }
 
     if rates.size > 0
       errors.add(:rates, _("rates_exist") + ": " + prefix)
@@ -39,9 +39,9 @@ class Destination < ActiveRecord::Base
   def sms_rates(tariff)
     SmsRate.find(:first, :conditions => ["prefix=? AND sms_tariff_id=?", prefix, tariff.id])
   end
-  
+
   def Destination.auto_assignet_to_dg
-   
+
     sql = "UPDATE destinations LEFT JOIN destinationgroups ON (destinationgroups.flag = destinations.direction_code ) SET destinations.destinationgroup_id =  destinationgroups.id WHERE destinations.destinationgroup_id = 0 AND destinations.direction_code != '' AND destinations.subcode = destinationgroups.desttype"
     res = ActiveRecord::Base.connection.execute(sql)
     sql2 = "UPDATE destinations LEFT JOIN destinationgroups ON (destinationgroups.flag = destinations.direction_code ) SET destinations.destinationgroup_id =  destinationgroups.id WHERE destinations.destinationgroup_id = 0 AND destinations.name LIKE '%MOB%' AND destinationgroups.desttype = 'MOB' AND destinations.direction_code != ''"
@@ -83,13 +83,13 @@ class Destination < ActiveRecord::Base
     return destination
   end
 
-  def find_rates_and_tariffs(user_id , callshop = 0)
+  def find_rates_and_tariffs(user_id, callshop = 0)
 
     if callshop.to_i > 0
-      Rate.find(:all, :conditions=>['(destination_id = ? or destinationgroup_id in (select destinationgroup_id from  destinations where id = ?)) AND tariff_id in ( select tariff_id from users where id in ( select user_id from usergroups where group_id = ? and gusertype != "manager") )', id,id, callshop], :include=>[:tariff, :ratedetails])
+      Rate.find(:all, :conditions => ['(destination_id = ? or destinationgroup_id in (select destinationgroup_id from  destinations where id = ?)) AND tariff_id in ( select tariff_id from users where id in ( select user_id from usergroups where group_id = ? and gusertype != "manager") )', id, id, callshop], :include => [:tariff, :ratedetails])
     else
-      Rate.find(:all, :conditions=>['(destination_id = ? or destinationgroup_id in (select destinationgroup_id from  destinations where id = ?)) AND tariffs.owner_id =?', id,id, user_id], :include=>[:tariff, :ratedetails])
-    end 
+      Rate.find(:all, :conditions => ['(destination_id = ? or destinationgroup_id in (select destinationgroup_id from  destinations where id = ?)) AND tariffs.owner_id =?', id, id, user_id], :include => [:tariff, :ratedetails])
+    end
   end
 
 =begin
@@ -139,7 +139,7 @@ class Destination < ActiveRecord::Base
   %123 -> ^123(thats a system wide feature, heck knows why. AJ)
   123  -> ^123$
 =end
-	def self.prefix_pattern(prefix)
+  def self.prefix_pattern(prefix)
     '^' + (prefix.to_s.include?('%') ? prefix.to_s.delete("%") : prefix.to_s + '$')
   end
 end

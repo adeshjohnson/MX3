@@ -1,24 +1,26 @@
 <%= form_tag :action => 'settings_update' do %>
-  <br />
-  <br />
-  <table class="simple" width="100%">
-    <tr>
-      <td></td>
-      <td><b><%= _('ERP_domain')%>:</b>                 </td>
-      <td><%= text_field_tag('erp_domain', Confline.get_value("ERP_domain", correct_owner_id) , "class" => "input", :size => "35", :maxlength => "50" )%> <%=_('example')%>: https://example.voiperp.com </td>
-    </tr>
-    <tr>
-      <td width="30"></td>
-      <td><b><%= _('ERP_login')%>:</b></td>
-      <td><%= text_field_tag('erp_login', Confline.get_value("ERP_login", correct_owner_id) , "class" => "input", :size => "35", :maxlength => "50" ) %></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><b><%= _('ERP_password')%>:</b></td>
-      <td><%= text_field_tag('erp_password', Confline.get_value("ERP_password", correct_owner_id) , "class" => "input", :size => "35", :maxlength => "50" )%></td>
-    </tr>
-  </table>
-  <br />
-  <br />
-  <%= submit_tag _('Save_changes'), :disable_with=>_('Processing..')%>
-<%end%>
+    <br/>
+    <br/>
+    <table class="simple" width="100%">
+      <tr>
+        <td></td>
+        <td><b><%= _('ERP_domain') %>:</b></td>
+        <td><%= text_field_tag('erp_domain', Confline.get_value("ERP_domain", correct_owner_id), "class" => "input", :size => "35", :maxlength => "50") %> <%= _('example') %>
+          : https://example.voiperp.com
+        </td>
+      </tr>
+      <tr>
+        <td width="30"></td>
+        <td><b><%= _('ERP_login') %>:</b></td>
+        <td><%= text_field_tag('erp_login', Confline.get_value("ERP_login", correct_owner_id), "class" => "input", :size => "35", :maxlength => "50") %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><b><%= _('ERP_password') %>:</b></td>
+        <td><%= text_field_tag('erp_password', Confline.get_value("ERP_password", correct_owner_id), "class" => "input", :size => "35", :maxlength => "50") %></td>
+      </tr>
+    </table>
+    <br/>
+    <br/>
+    <%= submit_tag _('Save_changes'), :disable_with => _('Processing..') %>
+<% end %>

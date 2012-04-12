@@ -1,17 +1,16 @@
 # -*- encoding : utf-8 -*-
 
 module Cyberplat
- 
+
   class Notification
     attr_accessor :params
     attr_accessor :raw
 
     cattr_accessor :ipn_url
-    
 
 
-  #	@@ipn_url = 'https://merchant.webmoney.ru/lmi/payment.asp'
-   
+    #	@@ipn_url = 'https://merchant.webmoney.ru/lmi/payment.asp'
+
     def initialize(post)
       empty!
       parse(post)
@@ -57,7 +56,7 @@ module Cyberplat
     def currency
       params['mc_currency']
     end
-  
+
     # This is the item number which we submitted to paypal 
     def item_id
       params['item_number']
@@ -102,10 +101,11 @@ module Cyberplat
     def custom
       params['custom']
     end
-    
+
     def pending_reason
       params['pending_reason']
     end
+
     #-------------------------------------------------------
 
     # This combines the gross and currency and returns a proper Money object. 
@@ -114,18 +114,18 @@ module Cyberplat
       amount = gross.sub(/[^\d]/, '').to_i
       Money.new(amount, currency)
     end
-    
+
     # reset the notification. 
     def empty!
-      @params  = Hash.new
-      @raw     = ""      
+      @params = Hash.new
+      @raw = ""
     end
 
     def my_debug(msg)
-            File.open("/tmp/mor_debug.txt", "a") { |f|
-            f << msg.to_s
-            f << "\n"
-        }
+      File.open("/tmp/mor_debug.txt", "a") { |f|
+        f << msg.to_s
+        f << "\n"
+      }
     end
 
 
@@ -139,15 +139,15 @@ module Cyberplat
     end
 
     private
-    
+
     # Take the posted data and move the relevant data into a hash
     def parse(post)
 
       @raw = post
-      for line in post.split('&')    
-        key, value = *line.scan( %r{^(\w+)\=(.*)$} ).flatten
+      for line in post.split('&')
+        key, value = *line.scan(%r{^(\w+)\=(.*)$}).flatten
         params[key] = CGI.unescape(value)
-      end    
+      end
     end
 
   end

@@ -1,10 +1,10 @@
 <select id='select_reseller_b' name='resellerB' onchange="if(this.value!=0){$('clone_button').disabled=false;}else{$('clone_button').disabled=true;}">
   <% if @resellers.nil? or @resellers.empty? %>
-    <option value="0"> <%= _('No_resellers_were_found') %>
+      <option value="0"> <%= _('No_resellers_were_found') %>
   <% else %>
-    <option value="0"> <%= _('Select_reseller') %> </option>
-    <% @resellers.each do |reseller| %>
-       <option value="<%= reseller.id %>"> <%= nice_user reseller %> </option>
-    <% end %>
+      <option value="0"> <%= _('Select_reseller') %> </option>
+      <% @resellers.each do |reseller| %>
+          <option value="<%= reseller.id %>"> <%= nice_user reseller %> </option>
+      <% end %>
   <% end %>
 </select>

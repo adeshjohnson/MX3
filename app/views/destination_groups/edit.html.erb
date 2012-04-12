@@ -1,5 +1,5 @@
 <%= form_tag(:action => 'update', :id => @dg.id) do %>
-  <%= render :partial => 'form' %>
-  <br />
-  <%= submit_tag _('Update'), :disable_with=>_('Processing..') %>
+    <%= render :partial => 'form' %>
+    <br/>
+    <%= submit_tag _('Update'), :disable_with => _('Processing..') %>
 <% end %>

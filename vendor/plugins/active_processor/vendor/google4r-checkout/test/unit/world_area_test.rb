@@ -42,7 +42,7 @@ class Google4R::Checkout::WorldAreaTest < Test::Unit::TestCase
   def setup
     @area = WorldArea.new
   end
-  
+
   def test_initialization_works
     assert_kind_of WorldArea, @area
   end

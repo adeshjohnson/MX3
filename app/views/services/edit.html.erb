@@ -1,7 +1,6 @@
-
 <%= form_tag :action => 'update', :id => @service do %>
-  <%= render :partial => 'form' %>
-<br>
-  <%= submit_tag _('Edit'), :disable_with=>_('Processing..') %>
+    <%= render :partial => 'form' %>
+    <br>
+    <%= submit_tag _('Edit'), :disable_with => _('Processing..') %>
 <% end %>
 

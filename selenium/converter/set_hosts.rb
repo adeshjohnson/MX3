@@ -4,7 +4,7 @@ class Refactor
   def self.read_file(file)
     content = []
     file = File.open(file, "r")
-    file.each {|line| content << line }
+    file.each { |line| content << line }
     file.close
     content = content.join("")
     return content
@@ -13,7 +13,7 @@ class Refactor
 
   def self.remove_notice(file)
     content = Refactor.read_file(file)
-    content.gsub!(/<link rel="selenium.base" href=".*" \/>/){|a| "<link rel=\"selenium.base\" href=\"http://trunk\" />"}
+    content.gsub!(/<link rel="selenium.base" href=".*" \/>/) { |a| "<link rel=\"selenium.base\" href=\"http://trunk\" />" }
     Refactor.write(file, content)
   end
 

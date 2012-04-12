@@ -13,7 +13,7 @@ class Cardgroup < ActiveRecord::Base
   validates_presence_of :tariff, :message => _('Cardgroup_must_have_name')
 
   attr_protected :owner_id
-  before_save :before_save_dates , :check_location_id, :validate_pin_length
+  before_save :before_save_dates, :check_location_id, :validate_pin_length
 
   def validate_pin_length
     if (0..30).include?(self.pin_length.to_i)
@@ -23,11 +23,11 @@ class Cardgroup < ActiveRecord::Base
       return false
     end
   end
- 
- 
+
+
   def before_save_dates
-    self.valid_from = (Date.today.to_s +  " 00:00:00") if self.valid_from.blank? or self.valid_from.to_s == '0000-00-00 00:00:00'
-    self.valid_till = (Date.today.to_s +  " 23:59:59") if self.valid_till.blank? or self.valid_till.to_s == '0000-00-00 00:00:00'
+    self.valid_from = (Date.today.to_s + " 00:00:00") if self.valid_from.blank? or self.valid_from.to_s == '0000-00-00 00:00:00'
+    self.valid_till = (Date.today.to_s + " 23:59:59") if self.valid_till.blank? or self.valid_till.to_s == '0000-00-00 00:00:00'
   end
 
   def check_location_id
@@ -42,7 +42,7 @@ class Cardgroup < ActiveRecord::Base
       end
     end
   end
- 
+
   def delete_all_cards
     for c in self.cards
       c.destroy
@@ -59,19 +59,19 @@ class Cardgroup < ActiveRecord::Base
 
   def groups_salable_card
     Card.find(:first, :conditions => ["cardgroup_id = ? AND sold = 0", self.id], :order => "rand()")
-  end 
- 
+  end
+
   def assign_default_tax(tax={}, opt ={})
     options = {
-      :save => true
+        :save => true
     }.merge(opt)
     if !tax or tax == {}
       if self.owner_id
-        new_tax = User.where({:id=>self.owner_id}).first.get_tax.dup
-      else 
+        new_tax = User.where({:id => self.owner_id}).first.get_tax.dup
+      else
         new_tax = Confline.get_default_tax(0)
-      end 
-    else 
+      end
+    else
       new_tax = Tax.new(tax)
     end
     logger.fatal new_tax.to_yaml
@@ -86,7 +86,7 @@ class Cardgroup < ActiveRecord::Base
   end
 
   def Cardgroup.set_tax(tax, owner_id)
-    cardgroups = Cardgroup.find(:all, :include => [:tax], :conditions => ["owner_id = ?", owner_id] )
+    cardgroups = Cardgroup.find(:all, :include => [:tax], :conditions => ["owner_id = ?", owner_id])
     for cardgroup in cardgroups
       if !cardgroup.tax
         cardgroup.tax = Tax.new
@@ -108,8 +108,8 @@ class Cardgroup < ActiveRecord::Base
       b
     end
   end
-  
-  def price=value
+
+  def price= value
     if User.current and User.current.currency
       b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
     else
@@ -128,7 +128,7 @@ class Cardgroup < ActiveRecord::Base
     end
   end
 
-  def setup_fee=value
+  def setup_fee= value
     if User.current and User.current.currency
       b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
     else
@@ -146,7 +146,7 @@ class Cardgroup < ActiveRecord::Base
     end
   end
 
-  def daily_charge=value
+  def daily_charge= value
     if User.current and User.current.currency
       b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
     else
@@ -166,7 +166,7 @@ class Cardgroup < ActiveRecord::Base
     MorLog.my_debug("CSV analize_file #{name}", 1)
     arr = {}
     current_user = User.current.id
-    arr[:calls_in_db] = Call.count(:all, :conditions=>{:reseller_id => current_user}).to_i
+    arr[:calls_in_db] = Call.count(:all, :conditions => {:reseller_id => current_user}).to_i
 
     # set error flag on dublicates number | code : 1
     ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 1 WHERE col_#{options[:imp_number]} IN (SELECT prf FROM (select col_#{options[:imp_number]} as prf, count(*) as u from #{name} group by col_#{options[:imp_number]}  having u > 1) as imf )")
@@ -207,18 +207,18 @@ class Cardgroup < ActiveRecord::Base
     MorLog.my_debug("CSV create_cards #{name}", 1)
     count = 0
 
-        s = [] ; ss=[]
-    ["pin", "number", "cardgroup_id", "owner_id", 'sold', 'language', 'balance'].each{ |col|
+    s = []; ss=[]
+    ["pin", "number", "cardgroup_id", "owner_id", 'sold', 'language', 'balance'].each { |col|
 
-        case col
+      case col
         when "cardgroup_id"
-            s << id
+          s << id
         when "owner_id"
-            so = current_user.usertype == 'accountant' ? 0 : current_user.id
-            s << so
+          so = current_user.usertype == 'accountant' ? 0 : current_user.id
+          s << so
         when "balance"
           if options[:imp_balance] >= 0
-            s <<  "replace(col_#{options["imp_#{col}".to_sym]}, '\\r', '')"
+            s << "replace(col_#{options["imp_#{col}".to_sym]}, '\\r', '')"
           else
             s << price
           end
@@ -228,8 +228,8 @@ class Cardgroup < ActiveRecord::Base
           s << '"eng"'
         else
           s << 'replace(col_' + (options["imp_#{col}".to_sym]).to_s + ", '\\r', '')"
-        end
-        ss << col
+      end
+      ss << col
     }
 
     in_rd = "INSERT INTO cards (#{ss.join(',')})
@@ -259,14 +259,14 @@ class Cardgroup < ActiveRecord::Base
   +Card instance+ that is not saved to database yet(!)
 =end
   def create_card(details = {})
-     card = Card.new({:cardgroup_id => self.id, :balance => self.price, :owner_id => self.owner_id}.merge(details))
-     card.set_unique_number if not details.has_key?(:number) and card.number.to_i == 0
-     card.set_unique_pin if not details.has_key?(:pin) and not card.pin
-     return card
+    card = Card.new({:cardgroup_id => self.id, :balance => self.price, :owner_id => self.owner_id}.merge(details))
+    card.set_unique_number if not details.has_key?(:number) and card.number.to_i == 0
+    card.set_unique_pin if not details.has_key?(:pin) and not card.pin
+    return card
   end
-  
+
   def free_cards_size
-    self.cards ? self.cards.count(:all, :conditions=>{:sold=>0}).to_i : 0
+    self.cards ? self.cards.count(:all, :conditions => {:sold => 0}).to_i : 0
   end
-  
+
 end

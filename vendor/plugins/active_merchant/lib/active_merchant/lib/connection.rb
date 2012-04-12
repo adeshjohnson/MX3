@@ -16,7 +16,7 @@ module ActiveMerchant
 
     def initialize(response, message = nil)
       @response = response
-      @message  = message
+      @message = message
     end
 
     def to_s
@@ -30,7 +30,7 @@ module ActiveMerchant
     READ_TIMEOUT = 60
     VERIFY_PEER = true
     RETRY_SAFE = false
-    RUBY_184_POST_HEADERS = { "Content-Type" => "application/x-www-form-urlencoded" }
+    RUBY_184_POST_HEADERS = {"Content-Type" => "application/x-www-form-urlencoded"}
 
     attr_accessor :endpoint
     attr_accessor :open_timeout
@@ -44,11 +44,11 @@ module ActiveMerchant
     attr_accessor :tag
 
     def initialize(endpoint)
-      @endpoint     = endpoint.is_a?(URI) ? endpoint : URI.parse(endpoint)
+      @endpoint = endpoint.is_a?(URI) ? endpoint : URI.parse(endpoint)
       @open_timeout = OPEN_TIMEOUT
       @read_timeout = READ_TIMEOUT
-      @retry_safe   = RETRY_SAFE
-      @verify_peer  = VERIFY_PEER
+      @retry_safe = RETRY_SAFE
+      @verify_peer = VERIFY_PEER
     end
 
     def request(method, body, headers = {})
@@ -60,15 +60,15 @@ module ActiveMerchant
 
           realtime = Benchmark.realtime do
             result = case method
-            when :get
-              raise ArgumentError, "GET requests do not support a request body" if body
-              http.get(endpoint.request_uri, headers)
-            when :post
-              debug body
-              http.post(endpoint.request_uri, body, RUBY_184_POST_HEADERS.merge(headers))
-            else
-              raise ArgumentError, "Unsupported request method #{method.to_s.upcase}"
-            end
+                       when :get
+                         raise ArgumentError, "GET requests do not support a request body" if body
+                         http.get(endpoint.request_uri, headers)
+                       when :post
+                         debug body
+                         http.post(endpoint.request_uri, body, RUBY_184_POST_HEADERS.merge(headers))
+                       else
+                         raise ArgumentError, "Unsupported request method #{method.to_s.upcase}"
+                     end
           end
 
           info "--> %d %s (%d %.4fs)" % [result.code, result.message, result.body ? result.body.length : 0, realtime], tag
@@ -113,7 +113,7 @@ module ActiveMerchant
 
       if verify_peer
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE #uzkometuoti kai hsbc
-        http.ca_file     = File.dirname(__FILE__) + '/../../certs/cacert.pem'
+        http.ca_file = File.dirname(__FILE__) + '/../../certs/cacert.pem'
       else
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       end
@@ -148,10 +148,10 @@ module ActiveMerchant
 
     def handle_response(response)
       case response.code.to_i
-      when 200...300
-        response.body
-      else
-        raise ResponseError.new(response)
+        when 200...300
+          response.body
+        else
+          raise ResponseError.new(response)
       end
     end
 

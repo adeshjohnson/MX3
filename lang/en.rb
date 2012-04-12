@@ -5,7 +5,7 @@ Localization.define('en') do |l|
 
   l.store 'enter_username_and_psw', 'Please enter your Username and Password to login'
   l.store 'login', 'Login'
-  l.store 'change_date','Change date'
+  l.store 'change_date', 'Change date'
   l.store 'total_calls', 'Total calls'
   l.store 'date', 'Date'
   l.store 'called_from', 'Called from'
@@ -77,9 +77,9 @@ Localization.define('en') do |l|
   l.store 'usertype', 'User type'
   l.store 'is_logged', 'Logged in'
   l.store 'back', 'Back'
-  l.store 'password','Password'
+  l.store 'password', 'Password'
   l.store 'last_time_registered', 'Last time registered'
-  l.store 'context','Context'
+  l.store 'context', 'Context'
   l.store 'voicemail', 'VoiceMail'
   l.store 'ext_lines', 'ext_lines'
   l.store 'blocked_number', 'Blocked numbers'
@@ -87,7 +87,7 @@ Localization.define('en') do |l|
   l.store 'to', 'to'
   l.store 'From', 'From'
   l.store 'Total_records', 'Total records'
-  l.store 'more_calltime_made_users','Most called users'
+  l.store 'more_calltime_made_users', 'Most called users'
   l.store 'Total', 'Total'
   l.store 'not_processed_missed', 'Not processed missed'
   l.store 'Change_period', 'Change period'
@@ -1034,7 +1034,7 @@ Localization.define('en') do |l|
   l.store 'Credit_with_VAT', 'Credit with TAX'
   l.store 'Credit_without_VAT', 'Credit without TAX'
   l.store 'New_vouchers', 'New vouchers'
-  
+
   l.store 'T38_Support', 'T.38 Support'
   l.store 'Cant_delete_user_it_has_payments', 'Cannot delete this user because it has payments'
   l.store 'Tell_options', 'Tell Options'
@@ -1205,7 +1205,7 @@ Localization.define('en') do |l|
   l.store 'Corrupted', 'Corrupted'
   l.store 'Mistaken', 'Failed'
   l.store 'Size_on_HDD', 'Size on Server'
-  l.store 'MB', 'MB'    #MegaBytes
+  l.store 'MB', 'MB' #MegaBytes
   l.store 'Calls_short', 'Calls'
   l.store 'Filename', 'Filename'
   l.store 'Receive_time', 'Receive time'
@@ -1511,33 +1511,33 @@ Localization.define('en') do |l|
   l.store 'Wrong_length_for_card_pin', 'Wrong length for card PIN'
   l.store 'Cards_imported', 'Cards imported'
   l.store 'Cards_were_successfully_deleted', 'Cards were successfully deleted'
-  l.store 'p_Please_Fill_In','Please fill in credit card payment form below'
-  l.store 'p_First_Name','First Name (as it appears on the credit card)'
-  l.store 'p_Last_Name','Last Name (as it appears on the credit card)'
-  l.store 'p_Company','Company'
-  l.store 'p_Billing_Address','Billing Address'
-  l.store 'p_State','State (US residents only)'
-  l.store 'p_Province','State/Province (Non-US residents only)'
-  l.store 'p_ZIP','ZIP/Postal code'
-  l.store 'p_Phone','Phone number'
-  l.store 'p_Fax','Fax number'
-  l.store 'p_Email','Email address'
-  l.store 'p_CCType','Credit Card Type'
-  l.store 'p_Card_Number','Credit Card Number'
-  l.store 'p_Exp_Month','Expiration Month'
-  l.store 'p_Exp_Year','Expiration Year'
-  l.store 'p_CCV','CCV Code'
-  l.store 'p_what_is_it','what is it?'
-  l.store 'p_Code_Not_Present','Code not on card'
-  l.store 'p_Agree','Do you agree?'
-  l.store 'p_Read_Agreed','I have read and agree to the Extrotel '
-  l.store 'p_Read_Agreed_Link','Terms of Service'
-  l.store 'p_Required_Fields','Indicates required fields'
-  l.store 'p_Proceed','Proceed with payment'
-  l.store 'p_Approved','Your payment was approved'
-  l.store 'p_Rejected','Your credit card was rejected. Payment was declined'
-  l.store 'p_Invalid_Card','Invalid card number'
-  l.store 'p_Card_Expired','Credit card expired'
+  l.store 'p_Please_Fill_In', 'Please fill in credit card payment form below'
+  l.store 'p_First_Name', 'First Name (as it appears on the credit card)'
+  l.store 'p_Last_Name', 'Last Name (as it appears on the credit card)'
+  l.store 'p_Company', 'Company'
+  l.store 'p_Billing_Address', 'Billing Address'
+  l.store 'p_State', 'State (US residents only)'
+  l.store 'p_Province', 'State/Province (Non-US residents only)'
+  l.store 'p_ZIP', 'ZIP/Postal code'
+  l.store 'p_Phone', 'Phone number'
+  l.store 'p_Fax', 'Fax number'
+  l.store 'p_Email', 'Email address'
+  l.store 'p_CCType', 'Credit Card Type'
+  l.store 'p_Card_Number', 'Credit Card Number'
+  l.store 'p_Exp_Month', 'Expiration Month'
+  l.store 'p_Exp_Year', 'Expiration Year'
+  l.store 'p_CCV', 'CCV Code'
+  l.store 'p_what_is_it', 'what is it?'
+  l.store 'p_Code_Not_Present', 'Code not on card'
+  l.store 'p_Agree', 'Do you agree?'
+  l.store 'p_Read_Agreed', 'I have read and agree to the Extrotel '
+  l.store 'p_Read_Agreed_Link', 'Terms of Service'
+  l.store 'p_Required_Fields', 'Indicates required fields'
+  l.store 'p_Proceed', 'Proceed with payment'
+  l.store 'p_Approved', 'Your payment was approved'
+  l.store 'p_Rejected', 'Your credit card was rejected. Payment was declined'
+  l.store 'p_Invalid_Card', 'Invalid card number'
+  l.store 'p_Card_Expired', 'Credit card expired'
 
   # ------
 
@@ -3030,7 +3030,7 @@ Localization.define('en') do |l|
   l.store 'No_user', 'No User'
 
   l.store 'PayPal_Warning', 'PayPal is not safe to use! For more details check this <a href="http://wiki.kolmisoft.com/index.php/PayPal#WARNING" target="_blank">link</a>'
-    
+
   l.store 'Quick_help', 'Quick help'
   l.store 'Balance_user_edit_explanation', 'Balance is amount of money which user has in his account in your system.<br>In other words - is the amount of money you owe to the user.<br><br>Balance can be increased or decreased using <b>Manual Payments</b>.'
 
@@ -3057,7 +3057,7 @@ Localization.define('en') do |l|
   l.store 'Areyousure?', 'Are you sure?'
   l.store 'Email_sending_is_disabled', 'Email sending is disabled'
   l.store 'SMS_Tariff_assigned_to_provider', 'SMS Tariff assigned to Provider'
-  l.store 'User_not_subscribed_to_SMS', 'User is not subscribed to SMS'   # Mindaugas 2009 11 24
+  l.store 'User_not_subscribed_to_SMS', 'User is not subscribed to SMS' # Mindaugas 2009 11 24
 
   l.store 'Fake_Ring', 'Fake Ring'
   l.store 'Fake_Ring_Explanation', 'Should system generate Fake Ring or not?<br>Use only if your Device/Provider has bad protocol implementation and <br>does not send RING signal properly.<br><br>Default is NO.'
@@ -3287,7 +3287,7 @@ Localization.define('en') do |l|
   l.store 'User_with_fax_already_exists', 'User with such fax number already exists'
   l.store 'Disalow_Duplicate_Device_Usernames', 'Do not allow duplicate device user names' #Mindaugas 2010 05 05
 
-  
+
   l.store 'Vouchers_interval_was_not_deleted', 'Vouchers interval not deleted'
   l.store 'Learn_more_about_DIDs', 'Learn more about DIDs'
   l.store 'Understand_DID_billing', 'Understand DID billing'
@@ -3297,7 +3297,7 @@ Localization.define('en') do |l|
   l.store 'Charge_DID_on_a_monthly_basis', 'Charge DID on a monthly basis'
   l.store 'Block_DID', 'Block DID'
   l.store 'I_want_to', 'I want to'
-  
+
   l.store 'DID_Provider', 'DID Provider'
   l.store 'DID_Provider_Explanation', 'DID Provider is <b><u>ONLY for informational purposes</u></b>.<br><br>If you do not know which Provider to assign - create dummy Provider to represent company from which you buy DID.<br>If this is fake DID - assign any Provider you want.<br>If your DID Provider has several IP addresses (as DIDWW) and you configured several Providers in MOR - assign ANY configured Provider.'
 
@@ -3310,7 +3310,7 @@ Localization.define('en') do |l|
   l.store 'Dev_group_details_not_changed', 'Device group details were not changed'
   l.store 'Dev_group_details_changed', 'Device group details were changed'
   l.store 'Dev_group_not_created', 'Device group was not created' #Mindaugas 2010 05 13
-  l.store 'MWI_enable', 'Enable MWI'  #Mindaugas 2010 05 13
+  l.store 'MWI_enable', 'Enable MWI' #Mindaugas 2010 05 13
   l.store 'Dev_group_not_found', 'Devicegroup not found'
   l.store 'MWI_Explanation', 'In telephony, a Message Waiting Indicator (MWI) is a telephone calling feature that illuminates a LED on selected telephones to notify a user of waiting voicemail messages. It works on most telephone networks and PBXs.' #Mindaugas 2010 05 14
 
@@ -3328,7 +3328,7 @@ Localization.define('en') do |l|
   l.store 'Visual', 'Visual'
   l.store 'Phonebook_number_must_be_numeric', 'Phonebook number must be numeric'
   l.store 'Speeddial_must_be_numeric', 'SpeedDial must be numeric'
-  l.store 'Drag_and_drop', 'drag & drop to change order'  
+  l.store 'Drag_and_drop', 'drag & drop to change order'
   l.store 'Grace_Time_Explanation', 'If call duration is less than <i>Grace Time</i>, it will not be accounted.<br>Example: <i>Grace Time</i> = 3s, call duration <= 3s, then price for the call = 0'
   l.store 'XML_API_Extension_Explanation', 'XML API Extension - send XML output with \< HTML \> tag - this is used for broken .Net support, keep it unchecked if everything works for you.'
 
@@ -3413,7 +3413,7 @@ Localization.define('en') do |l|
   l.store 'Show_providers_on_map', 'Show providers on map'
   l.store 'Show_in_map', 'Show in map'
   l.store 'Must_login_first', 'You must login first'
-  
+
   l.store 'IVR_Voice_Not_Updated', 'IVR Voice not updated'
   l.store 'Invalidvalues', 'Invalid values'
   l.store 'Dev_group_not_deleted', 'Device Group not deleted'
@@ -3458,10 +3458,10 @@ Localization.define('en') do |l|
   l.store 'Payment_was_not_found', 'Payment was not found.'
   l.store 'Transaction_waiting_for_confirmation', 'Waiting for confirmation'
   l.store 'Transaction_has_expired', 'Payment has expired'
-  
+
 
   l.store 'Use_external_script_explained', 'ATTENTION! This is a VERY ADVANCED function. Consult manual for more details.'
-  
+
   l.store 'New_callshop', 'New Call Shop'
   l.store 'Callshop_was_not_found_or_is_empty', 'Call Shop was not found or there are no phone booths assigned. Please add more phone booths.'
   l.store 'You_are_not_authorized_to_manage_callshop', 'You are not authorized to manage this Call Shop'
@@ -3549,7 +3549,7 @@ Localization.define('en') do |l|
   l.store 'Send_a_text_message_(SMS)', 'Send a text-message (SMS)'
   l.store 'Send_SMS_from_Front_page', 'Send SMS from Front page'
   l.store 'Frontpage_Text_for_SMS', 'Frontpage Text for SMS'
-  l.store 'Fax_path', 'Fax path' 
+  l.store 'Fax_path', 'Fax path'
   l.store 'Cardgroup_Stats', 'Card Groups Stats'
   l.store 'Total_number_of_cards', 'Total number of cards'
   l.store 'Total_number_of_cards_first_used_in_period', 'Total number of cards first used in period'
@@ -3648,7 +3648,7 @@ Localization.define('en') do |l|
   l.store 'Client_receives_the_Call_and_answers', 'Client receives the Call and answers'
   l.store 'System_calls_back_to_the_Client', 'System calls back to the Client'
   l.store 'If_field_is_left_empty_Callback_Device_CallerID_will_be_used', 'If field is left empty - Callback Device\'s CallerID will be used. <br>If you enter * sign here - an original CallerID will be used'
-  
+
   l.store 'Common_Use', 'Common Use'
   l.store 'Common_Use_Explanation', 'Provider can be used by Resellers which are able to create their own Providers.<br>Reseller will be billed using this Provider.'
 
@@ -3809,15 +3809,15 @@ Localization.define('en') do |l|
   l.store 'Add_with_tax', 'Add with tax'
   l.store 'Check_if_you_are_using_your_lcr', 'Check if you are using your lcr'
   l.store 'Check_if_you_are_using_admins_lcr', 'Check if you are using admins lcr'
-  l.store 'No_active_providers_found','No active provider found'
-  l.store 'Call_Stats','Call Stats'
+  l.store 'No_active_providers_found', 'No active provider found'
+  l.store 'Call_Stats', 'Call Stats'
   l.store 'API_allow_Registration', 'API allow Registration'
   l.store 'API_allow_Registration_Explanation', 'Allow Registration over API'
   l.store 'No_DID_found_Please_check_interval', 'No DIDs found. Please check interval'
   l.store 'Invoice_Page_Limit', 'Invoice page limit'
   l.store 'Invoice_Page_Limit_explanation', 'Invoice page limit in PDF files'
   l.store 'Invoice_reach_limit', 'Invoice reach limit'
-  l.store 'Invoice_reach_limit_contact_administrator', 'Please contact the administrator to increase the limit'  
+  l.store 'Invoice_reach_limit_contact_administrator', 'Please contact the administrator to increase the limit'
   l.store 'No_location_found.Please_change_device_location', 'No location found. Please change device location'
   l.store '1_unallocated_number_/_404_Not_Found', '1 unallocated number / 404 Not Found'
   l.store '2_no_route_to_network_/_404_Not_Found', '2 no route to network / 404 Not Found'
@@ -3847,8 +3847,8 @@ Localization.define('en') do |l|
   l.store 'Admins_location_rules', 'Admin\'s location rules'
   l.store 'Import_admins_locations_with_rules', 'Import Admin\'s locations with rules '
   l.store 'locations_will_be_deleted', 'These Admin\'s locations will replace all your locations! All your old locations and rules will be deleted.'
-  l.store 'Old_Locations_deleted_and_new_Locations_added' , 'Old Locations deleted and new Locations added!'
-  l.store 'All_locations_and_rules_will_be_deleted' , 'All old locations and rules will be deleted and new Locations imported! All device, provider, cardgroup locations will be set to "Default location".'
+  l.store 'Old_Locations_deleted_and_new_Locations_added', 'Old Locations deleted and new Locations added!'
+  l.store 'All_locations_and_rules_will_be_deleted', 'All old locations and rules will be deleted and new Locations imported! All device, provider, cardgroup locations will be set to "Default location".'
   l.store 'Are_you_sure_location', 'Are you sure? You are going to delete old Locations and import Admin\'s Locations'
   l.store 'End_IVR', 'End IVR'
   l.store 'gateway_billing_address_first_name', 'First Name'
@@ -3903,15 +3903,15 @@ Localization.define('en') do |l|
   l.store 'Ring_group_new', 'New Ring Group'
   l.store 'Ring_group_edit', 'Edit Ring Group'
   l.store 'New_Ring_Group', 'New Ring Group'
-  l.store 'Use_ANI_if_available_fo_CallerID','Use ANI (if available) for CallerID'
-  l.store 'Add_new_Device','Add new device'
-  l.store 'Add_this_Device','Add this device'
+  l.store 'Use_ANI_if_available_fo_CallerID', 'Use ANI (if available) for CallerID'
+  l.store 'Add_new_Device', 'Add new device'
+  l.store 'Add_this_Device', 'Add this device'
   l.store 'Add_this_DID', 'Add this DID'
   l.store 'Ring_Devices', 'Ring Devices'
   l.store 'If_none_device_answers_in', 'If none device answers in'
   l.store 'Show_Extension_lines', 'Show Extension lines'
   l.store 'Destinations_not_updated', 'destination(-s) not updated'
-  l.store 'Destinations_updated_successfully' , 'destination(-s) updated successfully'
+  l.store 'Destinations_updated_successfully', 'destination(-s) updated successfully'
   l.store 'Update_this_page', 'Update this page'
   l.store 'Local_Extension', 'Local Extension'
   l.store "Provider_is_used_by_reseller", "Provider is used by reseller"
@@ -3941,8 +3941,8 @@ Localization.define('en') do |l|
   l.store 'Paypal_cancel_url', 'Return URL on canceled payment'
   l.store 'PayPal_Custom_redirect_Explanation', 'Option to manually set return address from successful or canceled PayPal payment. If not checked, system will use default address.'
   l.store 'Paypal_return_url_Explanation', 'Set return address after successful payment. If not set, system will use ' + Web_URL + Web_Dir + "/payments/personal_payments"
-  l.store 'Paypal_cancel_url_Explanation','Set return address after canceled payment. If not set, system will use ' + Web_URL + Web_Dir + "/callc/main"
-  l.store 'gateway_PayPal_Custom_redirect','PayPal custom redirect'
+  l.store 'Paypal_cancel_url_Explanation', 'Set return address after canceled payment. If not set, system will use ' + Web_URL + Web_Dir + "/callc/main"
+  l.store 'gateway_PayPal_Custom_redirect', 'PayPal custom redirect'
   l.store 'gateway_Paypal_return_url', 'Return URL on successful payment'
   l.store 'gateway_Paypal_cancel_url', 'Return URL on canceled payment'
   l.store 'Please_Upload_one_file_in_time', 'Please upload one file at a time. Please do not upload a file when another Tariff import operation is not completed.'
@@ -3950,20 +3950,20 @@ Localization.define('en') do |l|
   l.store 'Please_Select_Columns_destination', 'Please select a destination column'
   l.store 'Please_wait_while_first_import_is_finished', 'Please wait while first import is finished'
   l.store 'colission_Please_start_over', 'Collision in file import. Please start over and do one import at a time.'
-  l.store 'dialplan_def_device','Default Device for Pass-through Calls'
-  l.store 'dialplan_def_device_explanation','ATTENTION! Use this feature with great understanding what it is used for. It allows all calls pass over this Dial Plan and assigns such calls to selected Device. Consult Manual for more information.'
-  l.store "Bad_number_interval_max","PIN is too short for this interval. You can create maximum "
+  l.store 'dialplan_def_device', 'Default Device for Pass-through Calls'
+  l.store 'dialplan_def_device_explanation', 'ATTENTION! Use this feature with great understanding what it is used for. It allows all calls pass over this Dial Plan and assigns such calls to selected Device. Consult Manual for more information.'
+  l.store "Bad_number_interval_max", "PIN is too short for this interval. You can create maximum "
   l.store "cards", "cards"
-  l.store 'Short_Card_pin_not_safe','ATTENTION! It is not safe to use PIN shorter than 6 symbols.'
-  l.store 'Bad_number_interval_no_pin_left' , 'Not enough unique PIN left. Try to use longer PIN. Now You can create maximum '
+  l.store 'Short_Card_pin_not_safe', 'ATTENTION! It is not safe to use PIN shorter than 6 symbols.'
+  l.store 'Bad_number_interval_no_pin_left', 'Not enough unique PIN left. Try to use longer PIN. Now You can create maximum '
   l.store 'First_provider_percent_limit', 'First Providers percent limit'
   l.store 'First_provider_percent_limit_explained', 'If following Providers will have higher price by this percent compared to first Provider, these Providers will be skipped. 0 value disables use of this setting.'
   l.store 'Select_reseller', 'Select reseller'
   l.store 'Select_tariff', 'Select tariff'
-  l.store 'You_must_select_all_three_parameters' , 'You must select all three parameters'
+  l.store 'You_must_select_all_three_parameters', 'You must select all three parameters'
   l.store 'Record_not_deleted', 'Record was not deleted'
-  l.store 'Common_use_providers_edit','Common Use Provider Edit'
-  l.store 'Common_use_providers','Common Use Providers '
+  l.store 'Common_use_providers_edit', 'Common Use Provider Edit'
+  l.store 'Common_use_providers', 'Common Use Providers '
   l.store 'Record_exists', 'Record with these parameters already exists'
   l.store 'Leave_as_it_is', 'Leave as it is'
   l.store 'Change_Failed_Code_To', 'Change Failed Code To'
@@ -4022,7 +4022,7 @@ Localization.define('en') do |l|
   l.store 'Print', 'Print'
   l.store 'Dialednumber', 'Dialed number'
   l.store '22_number_changew/_diagnostic_/_301_Moved_Permanently', '22 number changed/ diagnostic / 301 Moved Permanently'
-  l.store 'Currency_Name_is_to_long_Max_5_Simbols', 'Currency name is too long MAX 5 symbols are allowed' 
+  l.store 'Currency_Name_is_to_long_Max_5_Simbols', 'Currency name is too long MAX 5 symbols are allowed'
   l.store 'Location_error', 'Location error'
   l.store 'Enter_device_type', 'Enter device type'
   l.store 'Others', 'Others'
@@ -4064,7 +4064,7 @@ Localization.define('en') do |l|
   l.store 'Clis_to_create', 'CLIs to create'
   l.store 'Insert_cdr_in_db', 'Insert CDRs into db'
   l.store 'Hide_recordings_for_all_users', 'Hide Recordings for all users'
-  l.store 'Search_for_cards_in_cardgroups','Search for cards in cardgroups'
+  l.store 'Search_for_cards_in_cardgroups', 'Search for cards in cardgroups'
   l.store 'Location_is_assigned_to_device_or_cardgroup', 'Location is assigned to device or card group'
   l.store 'Please_select_server', 'Please select server'
   l.store 'Resellers_can_add_their_own_DIDs', 'Resellers can add their own DIDs'
@@ -4102,9 +4102,9 @@ Localization.define('en') do |l|
   l.store 'Device_changed_from', 'Device changed from'
   l.store 'Check_if_your_user_is_using_your_lcr', 'Check if your user is using your lcr'
   l.store 'CT_Provider_is_not_active', 'Provider is not active and it is not used to handle this call. You can activate it in LCR settings.'
-  l.store 'CT_No_tariff_explanation','This provider has no rates for current destination and it is not used to handle this call.'
-  l.store 'CT_Not_active_explanation','Provider is not active and call will not go through it. You can activate it in LCR settings.'
-  l.store 'CT_No_tariff_not_active_explanation','This provider is not active and has no rates, so it is not used to handle this call.'
+  l.store 'CT_No_tariff_explanation', 'This provider has no rates for current destination and it is not used to handle this call.'
+  l.store 'CT_Not_active_explanation', 'Provider is not active and call will not go through it. You can activate it in LCR settings.'
+  l.store 'CT_No_tariff_not_active_explanation', 'This provider is not active and has no rates, so it is not used to handle this call.'
   l.store 'No_devices', 'No devices'
   l.store 'Email/Payer', 'Email/Payer'
   l.store 'Campaign_name', 'Campaign name'
@@ -4117,7 +4117,7 @@ Localization.define('en') do |l|
   l.store 'Credit_for_incoming_calls', 'Credit for incoming calls'
   l.store 'No_calls_with_campaign', 'No calls with campaign '
   l.store 'No_numbers_in_campaign', 'No numbers in campaign '
-  l.store 'Forward_DID','Forward DID'
+  l.store 'Forward_DID', 'Forward DID'
   l.store 'Tariff_not_found_cannot_create', 'Tariff not found cannot create'
   l.store 'Lcr_not_found_cannot_create', 'Lcr not found cannot create'
   l.store 'Data_not_found', 'Data was not found'
@@ -4234,9 +4234,9 @@ Localization.define('en') do |l|
   l.store 'Credit_note_not_found', 'Credit note not found'
   l.store 'gateway_xml_url', 'XML url'
   l.store 'gateway_client_id', 'Client id'
-  l.store 'Financial_statements', 'Financial statements' 
+  l.store 'Financial_statements', 'Financial statements'
   l.store 'Count', 'Count'
-  l.store 'Payments_include_information_about_credit_notes_and_invoices', 'Payments include information about credit notes and invoices' 
+  l.store 'Payments_include_information_about_credit_notes_and_invoices', 'Payments include information about credit notes and invoices'
   l.store 'Erp_settings', 'ERP settings'
   l.store 'chanspy_disabled_globaly', 'Chanspy is disabled globaly'
   l.store 'Monitorings_settings_saved', 'Monitorings settings were saved'
@@ -4272,9 +4272,9 @@ Localization.define('en') do |l|
   l.store 'Failed_to_create_card', 'Failed to create card'
   l.store 'Delete_active_calls_information', 'Reset active calls information'
   l.store 'This_action_would_only_delete_temporary_information_it_does_not_affect_any_calls', 'This action would only reset temporary information, it does not affect any calls'
-  l.store "Failed_to_clone_LCR's", "Failed to clone LCR's" 
+  l.store "Failed_to_clone_LCR's", "Failed to clone LCR's"
   l.store "Use_calling_card", "Use Calling Card"
-  l.store "Must_set_either_ip_auth_either_dynamic_host", "Must set either ip auth either dynamic host" 
+  l.store "Must_set_either_ip_auth_either_dynamic_host", "Must set either ip auth either dynamic host"
   l.store 'Name_must_be_unique', 'Name must be unique'
   l.store 'Generate_hash', 'Generate hash'
   l.store 'Invoice_allow_recalculate_after_send', 'Invoice allow recalculate after send'
@@ -4296,18 +4296,18 @@ Localization.define('en') do |l|
   l.store 'Provider_with_such_IP_and_Port_already_exist', 'Provider with such IP and Port already exist.'
   l.store 'Device_with_such_IP_and_Port_already_exist', 'Device with such IP and Port already exist.'
   l.store 'Please_check_this_link_to_see_how_it_can_be_resolved', 'Please check this link to see how it can be resolved: '
-  l.store 'Set_date_when_invoice_was_issued', 'Set date when invoice was issued'  
+  l.store 'Set_date_when_invoice_was_issued', 'Set date when invoice was issued'
   l.store 'Tell_balance_after_call', 'Tell Balance after Call'
-  l.store 'If_Card_balance_lower_than', 'If Card balance lower than' 
-  l.store 'Balance_IVR', 'Balance IVR' 
+  l.store 'If_Card_balance_lower_than', 'If Card balance lower than'
+  l.store 'Balance_IVR', 'Balance IVR'
   l.store 'To_be_able_to_cc_dialplan_cardgroup_has_to_be_created', 'To be able to create Calling Cards Dial Plan card group has to be created'
   l.store 'Pin_length_can_be_between_0_and_30', 'Pin length can be between 0 and 30'
   l.store 'Outgoing_Call_CallerID_Presentation', 'Outgoing Call CallerID Presentation'
-  l.store "Use_diversion_instead_of_callerid", "Use Diversion instead of CallerID" 
-  l.store 'Device_was_not_found', 'Device was not found' 
-  l.store 'Select_device_or_set_diversion', 'Select device or set diversion' 
-  l.store 'Show_recordings_with_zero_billsec', 'Show_recordings_with_zero_billsec' 
-  l.store 'Line_seems_to_long_failed_to_determine_file_line_separator', 'Line seems to long, failed to determine file line separator' 
+  l.store "Use_diversion_instead_of_callerid", "Use Diversion instead of CallerID"
+  l.store 'Device_was_not_found', 'Device was not found'
+  l.store 'Select_device_or_set_diversion', 'Select device or set diversion'
+  l.store 'Show_recordings_with_zero_billsec', 'Show_recordings_with_zero_billsec'
+  l.store 'Line_seems_to_long_failed_to_determine_file_line_separator', 'Line seems to long, failed to determine file line separator'
   l.store 'DID_rates_in_specified_interval_can_have_diferent_properties', 'DID rates in specified interval can have different properties, so please note that you are viewing default properties'
   l.store 'Explanation', 'Explanation'
   l.store 'Checks_SMS_providers_response_for_Good_keywords_If_found_sms_will_be_charged', 'We check SMS providers response for Good keywords. If we have found, sms will be charged.'
@@ -4347,7 +4347,7 @@ Localization.define('en') do |l|
   l.store 'click_here_for_more_information', 'Click here for more information'
   l.store 'No_failover_provider', 'No failover provider'
   l.store 'No_failover_provider_explained', 'If you will enable this setting, only first provider in the Routing Plan (LCR) will be used. If it fails - no other provider will be used to deliver the call.'
-  l.store 'Anti_resale_auto_answer', 'Anti-resale (Auto-answer)'  
+  l.store 'Anti_resale_auto_answer', 'Anti-resale (Auto-answer)'
   l.store 'Time_limit_per_day', 'Time limit per day'
   l.store 'min', 'min'
   #  l.store '', ''
@@ -4357,5 +4357,5 @@ Localization.define('en') do |l|
   #  l.store '', ''
   #  l.store '', ''
 
-  
+
 end

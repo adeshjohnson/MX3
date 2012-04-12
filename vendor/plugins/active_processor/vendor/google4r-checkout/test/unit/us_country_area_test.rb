@@ -35,17 +35,17 @@ require 'test/frontend_configuration'
 # Test for the class UsCountryArea.
 class Google4R::Checkout::UsCountryAreaTest < Test::Unit::TestCase
   include Google4R::Checkout
-  
+
   def setup
     @area = UsCountryArea.new
   end
-  
+
   def test_constants_are_defined
     assert defined?(UsCountryArea::CONTINENTAL_48)
     assert defined?(UsCountryArea::FULL_50_STATES)
     assert defined?(UsCountryArea::ALL)
   end
-  
+
   def test_initialization
     assert_nil @area.area
   end
@@ -54,22 +54,22 @@ class Google4R::Checkout::UsCountryAreaTest < Test::Unit::TestCase
     area = UsCountryArea.new(UsCountryArea::ALL)
     assert_equal UsCountryArea::ALL, area.area
   end
-  
-  
+
+
   def test_us_country_area_behaves_correctly
     assert_respond_to @area, :area
     assert_respond_to @area, :area=
   end
-  
+
   def test_us_country_area_area_accessor_works
     assert_nil @area.area
-    
-    [ UsCountryArea::CONTINENTAL_48, UsCountryArea::FULL_50_STATES, UsCountryArea::ALL ].each do |str|
+
+    [UsCountryArea::CONTINENTAL_48, UsCountryArea::FULL_50_STATES, UsCountryArea::ALL].each do |str|
       @area.area = str
       assert_equal str, @area.area
     end
   end
-  
+
   def test_us_country_area_area_validation_works
     assert_raises(RuntimeError) { @area.area = 'invalid value' }
     assert_nil @area.area

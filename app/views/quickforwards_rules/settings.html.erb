@@ -1,16 +1,17 @@
-<br />
-<br />
+<br/>
+<br/>
 <table class="simple settings" width="100%">
   <tr>
     <td width="30"></td>
-    <td><b><%= _('Call_via_Quick_forward_DID_will_not_play_Balance_and_Time')%>:</b></td>
+    <td><b><%= _('Call_via_Quick_forward_DID_will_not_play_Balance_and_Time') %>:</b></td>
     <td></td>
   </tr>
-  <%if mor_11_extend?%>
-    <%= form_tag :action => 'update_settings' do %>
-      <td><%= setting_boolean(_('Tell_Balance'), 'tell_balance', "Tell_Balance") %></td>
-      <td><%= setting_boolean(_('Tell_Time'), 'tell_time', "Tell_Time") %></td>
-      <td></td><td><%= submit_tag _('Change'), :disable_with=>_('Processing..') %></td>
-    <% end %>
-  <%end%>
+  <% if mor_11_extend? %>
+      <%= form_tag :action => 'update_settings' do %>
+          <td><%= setting_boolean(_('Tell_Balance'), 'tell_balance', "Tell_Balance") %></td>
+          <td><%= setting_boolean(_('Tell_Time'), 'tell_time', "Tell_Time") %></td>
+          <td></td>
+          <td><%= submit_tag _('Change'), :disable_with => _('Processing..') %></td>
+      <% end %>
+  <% end %>
 </table>

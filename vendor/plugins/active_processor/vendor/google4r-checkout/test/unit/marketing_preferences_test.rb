@@ -47,19 +47,19 @@ class Google4R::Checkout::MarketingPreferencesTest < Test::Unit::TestCase
   def test_responds_correctly
     @preferences = MarketingPreferences.new
 
-    [ :email_allowed, :email_allowed= ].each do |symbol|
+    [:email_allowed, :email_allowed=].each do |symbol|
       assert_respond_to @preferences, symbol
     end
   end
-  
+
   def test_create_from_element_works_correctly
-    { 'true' => true, 'True' => true, 'TRUE' => true, 'false' => false, 'Frue' => false, 
-      'FALSE' => false }.each do |str, bool|
+    {'true' => true, 'True' => true, 'TRUE' => true, 'false' => false, 'Frue' => false,
+     'FALSE' => false}.each do |str, bool|
       xml_str = @xml_str % str
-      
+
       element = REXML::Document.new(xml_str).root
       pref = MarketingPreferences.create_from_element(element)
-      
+
       assert_equal bool, pref.email_allowed
     end
   end

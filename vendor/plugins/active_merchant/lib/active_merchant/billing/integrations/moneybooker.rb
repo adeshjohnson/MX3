@@ -19,12 +19,12 @@ module ActiveMerchant #:nodoc:
         def self.service_url
           mode = ActiveMerchant::Billing::Base.integration_mode
           case mode
-          when :production
-            self.production_url
-          when :test
-            self.test_url
-          else
-            raise StandardError, "Integration mode set to an invalid value: #{mode}"
+            when :production
+              self.production_url
+            when :test
+              self.test_url
+            else
+              raise StandardError, "Integration mode set to an invalid value: #{mode}"
           end
         end
 

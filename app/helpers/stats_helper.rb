@@ -5,24 +5,22 @@ module StatsHelper
 
     key = param
 
-    order = "desc"    
+    order = "desc"
     order = "asc" if params[:sort] == param and params[:order] == "desc"
-    
+
     options = {
-      :url => {:action => 'list', :params => params.merge({:order => order, :sort => key, :page => nil})},
-      :update => 'table',
-      :before => "Element.show('spinner')",
-      :success => "Element.hide('spinner')"
+        :url => {:action => 'list', :params => params.merge({:order => order, :sort => key, :page => nil})},
+        :update => 'table',
+        :before => "Element.show('spinner')",
+        :success => "Element.hide('spinner')"
     }
     html_options = {
-      :title => _('Sort_by_this_field'),
-      :href => url_for(:action => 'list', :params => params.merge({:order => order, :sort => key, :page => nil})),
-      :class => "nb"
-    } 
-    link_to_remote(text, options, html_options, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');")
+        :title => _('Sort_by_this_field'),
+        :href => url_for(:action => 'list', :params => params.merge({:order => order, :sort => key, :page => nil})),
+        :class => "nb"
+    }
+    link_to_remote(text, options, html_options, :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');")
   end
-
-
 
 
   def sort_td_class_helper(item)
@@ -30,11 +28,11 @@ module StatsHelper
 
     pic = "sortup.gif" if params[:order] == "asc" and item == params[:sort]
     pic = "sortdown.gif" if params[:order] == "desc" and item == params[:sort]
-    
+
     image_tag pic, :style => 'border-style:none', :title => "sortup" if pic
   end
 
-  def show_call_dst(call, text_class) 
+  def show_call_dst(call, text_class)
     dest = Destination.find(:first, :conditions => ["prefix = ?", call.prefix])
     dest_txt = []
     if dest
@@ -61,7 +59,7 @@ module StatsHelper
 
   def call_duration(call, text_class, call_type)
     rez = ["<td id='duration_#{call.id}' class='#{text_class}' align='center'>"]
-    unless ["missed", "missed_inc",  "missed_inc_all"].include?(call_type)
+    unless ["missed", "missed_inc", "missed_inc_all"].include?(call_type)
       rez << nice_time(call.nice_billsec)
     else
       rez << nice_time(call.duration)
@@ -78,19 +76,19 @@ module StatsHelper
     lega = ""
     legb = ""
     pdd = ""
-    
+
     if monitorings_addon_active?
-      lega =  _("LegA_Codec") + ": " + call["lega_codec"].to_s
+      lega = _("LegA_Codec") + ": " + call["lega_codec"].to_s
       if call["answer_time"]
-        legb =  _("LegB_Codec") + ": " + call["legb_codec"].to_s
+        legb = _("LegB_Codec") + ": " + call["legb_codec"].to_s
         pdd = _("PDD") + ": " + call["pdd"].to_f.to_s + " s"
       end
     end
-    
+
     [
-      _("Server") + ": " + call["server_id"].to_s,
-      _("UniqueID") + ": " + call["uniqueid"].to_s,
-      _("User_rate") + ": " + call["user_rate"].to_s + " " + current_user.currency.name, lega, legb, pdd,
+        _("Server") + ": " + call["server_id"].to_s,
+        _("UniqueID") + ": " + call["uniqueid"].to_s,
+        _("User_rate") + ": " + call["user_rate"].to_s + " " + current_user.currency.name, lega, legb, pdd,
     ].reject(&:blank?).join("<br />")
 
   end

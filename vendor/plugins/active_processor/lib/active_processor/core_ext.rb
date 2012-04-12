@@ -9,16 +9,16 @@ class Hash
 
   def deep_merge(hash)
     target = dup
-    
+
     hash.keys.each do |key|
       if hash[key].is_a? Hash and self[key].is_a? Hash
         target[key] = target[key].deep_merge(hash[key])
         next
       end
-      
+
       target[key] = hash[key]
     end
-    
+
     target
   end
 
@@ -26,7 +26,7 @@ class Hash
   # File lib/cerberus/utils.rb, line 42
 
   def deep_merge!(second)
-    second.each_pair do |k,v|
+    second.each_pair do |k, v|
       if self[k].is_a?(Hash) and second[k].is_a?(Hash)
         self[k].deep_merge!(second[k])
       else
@@ -53,5 +53,5 @@ class Hash
     keys.each { |key| delete(key) }
     self
   end
-    
+
 end

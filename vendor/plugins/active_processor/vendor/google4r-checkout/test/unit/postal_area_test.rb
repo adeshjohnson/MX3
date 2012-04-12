@@ -38,35 +38,35 @@ require 'test/frontend_configuration'
 # Test for the class Area.
 class Google4R::Checkout::PostalAreaTest < Test::Unit::TestCase
   include Google4R::Checkout
-  
+
   def setup
     @area = PostalArea.new('GB', 'S6*')
   end
-  
+
   def test_initialization_works
-    assert_equal 'GB' , @area.country_code
+    assert_equal 'GB', @area.country_code
     assert_equal 'S6*', @area.postal_code_pattern
   end
-  
+
   def test_us_state_area_behaves_correctly
     assert_respond_to @area, :country_code
     assert_respond_to @area, :country_code=
     assert_respond_to @area, :postal_code_pattern
     assert_respond_to @area, :postal_code_pattern=
   end
-  
+
   def test_accessors_should_work
     @area.postal_code_pattern = '100*'
     assert_equal '100*', @area.postal_code_pattern
-    
+
     @area.country_code = 'DE'
     assert_equal 'DE', @area.country_code
   end
-  
+
   def test_initialize_without_postcode_works
     pa = PostalArea.new('DE')
     assert_equal 'DE', pa.country_code
     assert_nil pa.postal_code_pattern
   end
- 
+
 end

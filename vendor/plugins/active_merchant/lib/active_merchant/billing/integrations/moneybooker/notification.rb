@@ -9,7 +9,7 @@ module ActiveMerchant #:nodoc:
         class Notification < ActiveMerchant::Billing::Integrations::Notification
           def complete?
             params['status'] == "2"
-          end 
+          end
 
           def item_id
             params['transaction_id']
@@ -34,7 +34,7 @@ module ActiveMerchant #:nodoc:
 
           def receiver_email
             params['pay_to_email']
-          end 
+          end
 
           def security_key
             params['md5sig']

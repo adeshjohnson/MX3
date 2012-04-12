@@ -2,32 +2,32 @@
 require 'test_helper'
 
 class RemoteNetbillingTest < Test::Unit::TestCase
- 
+
   def setup
     @gateway = NetbillingGateway.new(fixtures(:netbilling))
 
     @credit_card = credit_card('4444111111111119',
-                     :month => '9',
-                     :year  => '2009',
-                     :verification_value => nil
-                   )
+                               :month => '9',
+                               :year => '2009',
+                               :verification_value => nil
+    )
 
-    @address = {  :address1 => '1600 Amphitheatre Parkway',
-                  :city => 'Mountain View',
-                  :state => 'CA',
-                  :country => 'US',
-                  :zip => '94043',
-                  :phone => '650-253-0001'
-                }
-  
-    @options = {  
-      :billing_address => @address,
-      :description => 'Internet purchase'
+    @address = {:address1 => '1600 Amphitheatre Parkway',
+                :city => 'Mountain View',
+                :state => 'CA',
+                :country => 'US',
+                :zip => '94043',
+                :phone => '650-253-0001'
     }
-               
+
+    @options = {
+        :billing_address => @address,
+        :description => 'Internet purchase'
+    }
+
     @amount = 100
   end
-  
+
   def test_successful_purchase
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_success response
@@ -61,9 +61,9 @@ class RemoteNetbillingTest < Test::Unit::TestCase
 
   def test_invalid_login
     gateway = NetbillingGateway.new(
-                :login => '',
-                :password => ''
-              )
+        :login => '',
+        :password => ''
+    )
     assert response = gateway.purchase(@amount, @credit_card, @options)
     assert_equal NetbillingGateway::FAILURE_MESSAGE, response.message
     assert_failure response

@@ -1,126 +1,126 @@
-          <tr>
-            <td height="20"></td>
-          </tr>
-          <% if not @new_device  and @device_type != "Virtual"%>
-            <script type="text/javascript">
-              //<![CDATA[
-              Event.observe(window, 'load', function() {
-              var ipauth = $('ip_authentication');
-              var name = $('device_name');
-              var auth_username = $('auth_username');
-              var auth_secret = $('auth_secret');
-              var secret = $('device_secret');
-              var dyncheck = $('dynamic_check');
+<tr>
+  <td height="20"></td>
+</tr>
+<% if not @new_device and @device_type != "Virtual" %>
+    <script type="text/javascript">
+        //<![CDATA[
+        Event.observe(window, 'load', function () {
+            var ipauth = $('ip_authentication');
+            var name = $('device_name');
+            var auth_username = $('auth_username');
+            var auth_secret = $('auth_secret');
+            var secret = $('device_secret');
+            var dyncheck = $('dynamic_check');
 
-              if (ipauth.checked) {
-              auth_username.style.display = "none";
-              auth_secret.style.display = "none";
-              }else {
-              auth_username.style.display = "";
-              auth_secret.style.display = "";
-              }
+            if (ipauth.checked) {
+                auth_username.style.display = "none";
+                auth_secret.style.display = "none";
+            } else {
+                auth_username.style.display = "";
+                auth_secret.style.display = "";
+            }
 
-              if (dyncheck.checked && ipauth) {
-              ipauth.disabled = true;
-              }
+            if (dyncheck.checked && ipauth) {
+                ipauth.disabled = true;
+            }
 
-              Event.observe(ipauth, 'click', function() {
-              if (ipauth.checked) {
-              auth_username.style.display = "none";
-              auth_secret.style.display = "none";
-              dyncheck.checked = false;
-              dyncheck.disabled = true;
-              secret.value = "";
-              $('qualify_no').checked = true;
-              $('qualify_yes').checked = false;
-              $('qualify_yes').disabled = true;
-              } else {
-              name.value = $('device_extension').value;
-              auth_username.style.display = "";
-              auth_secret.style.display = "";
-              dyncheck.disabled = false;
-              $('qualify_yes').disabled = false;
-              }
-              });
-              });
-              //]]>
-            </script>
-            <% if !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_2] != 2 )%>
-              <tr>
-                <td class="bottom_border">
-                  <b><%= _('Authentication') %></b>
-                </td>
-              </tr>
-              <tr>
-                <td height="10"></td>
-              </tr>
-              <tr>
-                <td valign="top">
-                  <table class="simple">
-                    <% if @device_type != "ZAP" %>
-                      <tr id="auth_username" style="display: none;">
-        <%# not change , this is the variable Rename%>
-                        <td id="username_name"><%= _('username') %>:</td>
-                        <td id="username_value"><%= text_field 'device', 'name', "class" => "input" %></td>
+            Event.observe(ipauth, 'click', function () {
+                if (ipauth.checked) {
+                    auth_username.style.display = "none";
+                    auth_secret.style.display = "none";
+                    dyncheck.checked = false;
+                    dyncheck.disabled = true;
+                    secret.value = "";
+                    $('qualify_no').checked = true;
+                    $('qualify_yes').checked = false;
+                    $('qualify_yes').disabled = true;
+                } else {
+                    name.value = $('device_extension').value;
+                    auth_username.style.display = "";
+                    auth_secret.style.display = "";
+                    dyncheck.disabled = false;
+                    $('qualify_yes').disabled = false;
+                }
+            });
+        });
+        //]]>
+    </script>
+    <% if !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_2] != 2) %>
+        <tr>
+          <td class="bottom_border">
+            <b><%= _('Authentication') %></b>
+          </td>
+        </tr>
+        <tr>
+          <td height="10"></td>
+        </tr>
+        <tr>
+          <td valign="top">
+            <table class="simple">
+              <% if @device_type != "ZAP" %>
+                  <tr id="auth_username" style="display: none;">
+                    <%# not change , this is the variable Rename%>
+                    <td id="username_name"><%= _('username') %>:</td>
+                    <td id="username_value"><%= text_field 'device', 'name', "class" => "input" %></td>
+                  </tr>
+                  <tr id="auth_secret" style="display: none;">
+                    <td id="secret_name"> <%= _('secret') %>:</td>
+                    <td id="secret_value"><%= text_field 'device', 'secret', "class" => "input" %></td>
+                  </tr>
+                  <% if @device_type != "FAX" %>
+                      <tr <%= tooltip(_('IP_Authentication'), _('IP_Authentication_Explanation')) %>>
+                        <td id="ip_auth_name"> <%= _('IP_Authentication') %>:</td>
+                        <td id="ip_auth_value"> <%= check_box_tag 'ip_authentication', value = "1", checked = @device.username.length == 0 %> </td>
                       </tr>
-                      <tr id="auth_secret" style="display: none;">
-                        <td id="secret_name"> <%= _('secret') %>:   </td>
-                        <td id="secret_value"><%= text_field 'device', 'secret', "class" => "input" %></td>
+                  <% end %>
+              <% else %>
+                  <tr>
+                    <td id="channel_name"> <%= _('Channel') %>:</td>
+                    <td id="channel_value"><%= text_field 'device', 'name', "class" => "input" %> </td>
+                  </tr>
+              <% end %>
+            </table>
+          </td>
+        </tr>
+    <% else %>
+        <% if session[:usertype] == "accountant" and session[:acc_device_edit_opt_2] == 1 %>
+            <tr>
+              <td class="bottom_border">
+                <b><%= _('Authentication') %></b>
+              </td>
+            </tr>
+            <tr>
+              <td height="10"></td>
+            </tr>
+            <tr>
+              <td valign="top">
+                <table class="simple">
+                  <% if @device_type != "ZAP" %>
+                      <tr style="display: none;">
+                        <td id="username_name"><%= _('username') %>:</td>
+                        <td id="username_value"><%= @device.name %></td>
+                      </tr>
+                      <tr style="display: none;">
+                        <td id="secret_name"><%= _('secret') %>:</td>
+                        <td id="secret_value"><%= @device.secret %></td>
                       </tr>
                       <% if @device_type != "FAX" %>
-                        <tr <%= tooltip(_('IP_Authentication'), _('IP_Authentication_Explanation')) %>>
-                          <td id="ip_auth_name"> <%= _('IP_Authentication') %>:   </td>
-                          <td id="ip_auth_value"> <%= check_box_tag 'ip_authentication', value = "1", checked = @device.username.length == 0 %> </td>
-                        </tr>
-                      <% end %>
-                    <% else %>
-                      <tr>
-                        <td id="channel_name"> <%= _('Channel') %>:   </td>
-                        <td id="channel_value"><%= text_field 'device', 'name', "class" => "input" %> </td>
-                      </tr>
-                    <% end %>
-                  </table>
-                </td>
-              </tr>
-            <% else %>
-              <% if session[:usertype] == "accountant" and session[:acc_device_edit_opt_2] == 1 %>
-                <tr>
-                  <td class="bottom_border">
-                    <b><%= _('Authentication') %></b>
-                  </td>
-                </tr>
-                <tr>
-                  <td height="10"></td>
-                </tr>
-                <tr>
-                  <td valign="top">
-                    <table class="simple">
-                      <% if @device_type != "ZAP" %>
-                        <tr style="display: none;">
-                          <td id="username_name"><%= _('username') %>:</td>
-                          <td id="username_value"><%= @device.name %></td>
-                        </tr>
-                        <tr style="display: none;">
-                          <td id="secret_name"><%= _('secret') %>:</td>
-                          <td id="secret_value"><%= @device.secret %></td>
-                        </tr>
-                        <% if @device_type != "FAX" %>
                           <tr>
-                            <td id="ip_auth_name"><%= _('IP_Authentication') %>:   </td>
+                            <td id="ip_auth_name"><%= _('IP_Authentication') %>:</td>
                             <td id="ip_auth_value"><%= @device.username.length == 0 ? b_check : b_cross %></td>
                           </tr>
-                        <% end %>
-                      <% else %>
-                        <tr>
-                          <td id="channel_name"><%= _('Channel') %>:</td>
-                          <td id="channel_value"><%= @device.name %></td>
-                        </tr>
                       <% end %>
-                    </table>
-                  </td>
-                </tr>
+                  <% else %>
+                      <tr>
+                        <td id="channel_name"><%= _('Channel') %>:</td>
+                        <td id="channel_value"><%= @device.name %></td>
+                      </tr>
+                  <% end %>
+                </table>
+              </td>
+            </tr>
 
-              <% end %>
-            <% end %>
+        <% end %>
+    <% end %>
 
-          <% end %>
+<% end %>

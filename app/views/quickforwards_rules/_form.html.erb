@@ -1,32 +1,36 @@
 <table width="100%" class="simple">
   <tr>
-    <td><%= _('Name')%>:</td>
-    <td><%= text_field('quickforwards_rule', 'name', "class" => "input", :size => "20", :maxlength => "50" )%></td>
+    <td><%= _('Name') %>:</td>
+    <td><%= text_field('quickforwards_rule', 'name', "class" => "input", :size => "20", :maxlength => "50") %></td>
   </tr>
   <tr>
-    <td><%= _('Regexp')%>:</td>
-    <td><%= text_field('quickforwards_rule', 'rule_regexp', "class" => "input", :size => "150", :maxlength => "255" )%></td>
+    <td><%= _('Regexp') %>:</td>
+    <td><%= text_field('quickforwards_rule', 'rule_regexp', "class" => "input", :size => "150", :maxlength => "255") %></td>
   </tr>
 </table>
 <div>
-<b>
-  <p><%=_('How_to_use_quickforwards_rules')%></p>
-</b>
-<p><%=_('Supported_regexp_symbols')%>:</p>
-<p>
-  % - <%=_('matches_any_symbol_any_number_of_times')%>
-  <br />
-  [1,2,3,4]% - <%=_('matches_dids_beginning_whit_1_2_3_and_4')%>
-  <br />
-  | - <%= _('Rule_seperator') %>
-</p>
-<p><%=_('Examples')%>:</p>
-<p>
-  370% - <%=_('will_match_numbers')%> 370xxxxxxxxx
-  <br />
-  370[1,3,9]% - <%=_('will_match_numbers')%> 3701xxxxxxxx, 3703xxxxxxxx <%=_('and')%> 3709xxxxxxxx
-  <br />
-  371[2,4]%|370% - <%=_('will_match_numbers')%> 3712xxxxxxxx, 3714xxxxxxxx <%=_('and')%> 370xxxxxxxxx
-</p>
+  <b>
+    <p><%= _('How_to_use_quickforwards_rules') %></p>
+  </b>
+
+  <p><%= _('Supported_regexp_symbols') %>:</p>
+
+  <p>
+    % - <%= _('matches_any_symbol_any_number_of_times') %>
+    <br/>
+    [1,2,3,4]% - <%= _('matches_dids_beginning_whit_1_2_3_and_4') %>
+    <br/>
+    | - <%= _('Rule_seperator') %>
+  </p>
+
+  <p><%= _('Examples') %>:</p>
+
+  <p>
+    370% - <%= _('will_match_numbers') %> 370xxxxxxxxx
+    <br/>
+    370[1,3,9]% - <%= _('will_match_numbers') %> 3701xxxxxxxx, 3703xxxxxxxx <%= _('and') %> 3709xxxxxxxx
+    <br/>
+    371[2,4]%|370% - <%= _('will_match_numbers') %> 3712xxxxxxxx, 3714xxxxxxxx <%= _('and') %> 370xxxxxxxxx
+  </p>
 </div>
-<br />
+<br/>

@@ -3,9 +3,9 @@
   <tr>
     <td>
       <b><%= b_user + _('User') %>:</b> <%= link_nice_user(@user) %>
-      <br />
-      <%= b_date + nice_date_time(@date_from.to_s) + " - " + nice_date_time(@date_till.to_s)%>
-      <br />
+      <br/>
+      <%= b_date + nice_date_time(@date_from.to_s) + " - " + nice_date_time(@date_till.to_s) %>
+      <br/>
       <%= b_call + _('total_calls') %>: <b><%= @total_calls %></b>
     </td>
     <td align="right">
@@ -14,89 +14,92 @@
   </tr>
   <tr>
     <td>
-      <%=b_currency + _('Currency') %>: <b><%= session[:show_currency] %></b>
+      <%= b_currency + _('Currency') %>: <b><%= session[:show_currency] %></b>
     </td>
   </tr>
 </table>
 
 
 <%= form_tag :action => params[:action] do %>
-  <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
-    <br />
+    <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+      <br/>
 
-    <%= hidden_field_tag 'search_on', 1  %>
+      <%= hidden_field_tag 'search_on', 1 %>
 
-    <%= _('From') %>: <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
-    &nbsp;&nbsp;<%= _('to') %>: <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
-    <br />
-    <br />
-    <%= _('Direction') %>:
-    <select name="direction" >
-      <option value="outgoing" selected> <%= _('Outgoing') %> </option>
-      <option value="incoming" <%= "selected" if @direction == "incoming"%>> <%= _('Incoming') %> </option>
-    </select>
-    <br />
-    <br />
+      <%= _('From') %>
+      : <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+      &nbsp;&nbsp;<%= _('to') %>
+      : <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+      <br/>
+      <br/>
+      <%= _('Direction') %>:
+      <select name="direction">
+        <option value="outgoing" selected> <%= _('Outgoing') %> </option>
+        <option value="incoming" <%= "selected" if @direction == "incoming" %>> <%= _('Incoming') %> </option>
+      </select>
+      <br/>
+      <br/>
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('Status') %>:
-    <select name="call_type" >
-      <option value="all" selected> <%= _('All') %> </option>
-      <option value="answered" <%= "selected" if @call_type == "answered"%>> <%= _('Answered') %> </option>
-      <option value="no answer" <%= "selected" if @call_type == "noanswer"%>> <%= _('No_Answer') %> </option>
-      <option value="failed" <%= "selected" if @call_type == "failed"%>> <%= _('Failed') %> </option>
-      <option value="busy" <%= "selected" if @call_type == "busy"%>> <%= _('Busy') %> </option>
-  <!--        <option value="missed" <%= "selected" if @call_type == "missed"%>> <%= _('Missed') %> </option> -->
-    </select>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('Status') %>:
+      <select name="call_type">
+        <option value="all" selected> <%= _('All') %> </option>
+        <option value="answered" <%= "selected" if @call_type == "answered" %>> <%= _('Answered') %> </option>
+        <option value="no answer" <%= "selected" if @call_type == "noanswer" %>> <%= _('No_Answer') %> </option>
+        <option value="failed" <%= "selected" if @call_type == "failed" %>> <%= _('Failed') %> </option>
+        <option value="busy" <%= "selected" if @call_type == "busy" %>> <%= _('Busy') %> </option>
+        <!--        <option value="missed" <%= "selected" if @call_type == "missed" %>> <%= _('Missed') %> </option> -->
+      </select>
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('Device') %>:
-    <select name="device" >
-      <option value=0 <%= "selected" if @sel_device_id == 0 %>> <%= _('All') %> </option>
-      <% for dev in @devices %>
-        <option value=<%= dev.id %> <%= "selected" if dev.id == @sel_device_id %>> <%= dev.device_type %>/<%= dev.extension %>/<%=h(dev.description.to_s)%> </option>
-      <% end %>
-    </select>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('Device') %>:
+      <select name="device">
+        <option value=0 <%= "selected" if @sel_device_id == 0 %>> <%= _('All') %> </option>
+        <% for dev in @devices %>
+            <option value=<%= dev.id %> <%= "selected" if dev.id == @sel_device_id %>> <%= dev.device_type %>
+              /<%= dev.extension %>/<%= h(dev.description.to_s) %> </option>
+        <% end %>
+      </select>
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('hangup_cause') %>:
-    <select name="hgc" >
-      <option value=0 <%= "selected" if @sel_hgc_id == 0 %>> <%= _('All') %> </option>
-      <% for h in @hgcs %>
-        <option value=<%= h.id %> <%= "selected" if h.id == @sel_hgc_id %>><%= h.clean_description[0..45] %> </option>
-      <% end %>
-    </select>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('hangup_cause') %>:
+      <select name="hgc">
+        <option value=0 <%= "selected" if @sel_hgc_id == 0 %>> <%= _('All') %> </option>
+        <% for h in @hgcs %>
+            <option value=<%= h.id %> <%= "selected" if h.id == @sel_hgc_id %>><%= h.clean_description[0..45] %> </option>
+        <% end %>
+      </select>
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
-  </div>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag _('Search'), :disable_with => _('Processing..') %>
+    </div>
 <% end %>
 
 
-<br />
+<br/>
 
-<% if @calls.size > 0 %> 
-  <%= link_to b_pdf + _('Export_to_PDF'), :action => "call_list_to_pdf", :id => @user.id, :date_from => session_from_datetime, :date_till => session_till_datetime, :call_type => @orig_call_type, :device => @device, :direction => @direction, :hgc=>@hgc %>
-  &nbsp;
-  <%= link_to b_csv + _('Export_to_CSV'), :action => "call_list_to_csv", :id => @user.id, :date_from => session_from_datetime, :date_till => session_till_datetime, :call_type => @orig_call_type, :device => @device, :direction=> @direction, :hgc=>@hgc %>
+<% if @calls.size > 0 %>
+    <%= link_to b_pdf + _('Export_to_PDF'), :action => "call_list_to_pdf", :id => @user.id, :date_from => session_from_datetime, :date_till => session_till_datetime, :call_type => @orig_call_type, :device => @device, :direction => @direction, :hgc => @hgc %>
+    &nbsp;
+    <%= link_to b_csv + _('Export_to_CSV'), :action => "call_list_to_csv", :id => @user.id, :date_from => session_from_datetime, :date_till => session_till_datetime, :call_type => @orig_call_type, :device => @device, :direction => @direction, :hgc => @hgc %>
 <% end %>
-<% if @user.usertype == 'reseller' and session[:user_id] == 0%>
-  &nbsp;
-  <%= link_to b_csv + _('Export_to_CSV_complete_(Calls_for_Reseller_and_his_Users)'), {:action => "call_list_to_csv", :id => @user.id, :date_from => session_from_datetime, :date_till => session_till_datetime, :reseller=> 1}, :id=>'reseller_calls_link' %>
-<%end%>
-<br />
-<br />
+<% if @user.usertype == 'reseller' and session[:user_id] == 0 %>
+    &nbsp;
+    <%= link_to b_csv + _('Export_to_CSV_complete_(Calls_for_Reseller_and_his_Users)'), {:action => "call_list_to_csv", :id => @user.id, :date_from => session_from_datetime, :date_till => session_till_datetime, :reseller => 1}, :id => 'reseller_calls_link' %>
+<% end %>
+<br/>
+<br/>
 
 <% if @total_pages > 1 %>
-  <%= render :partial => "page_select_header"  %>
-  <br />
+    <%= render :partial => "page_select_header" %>
+    <br/>
 <% end %>
 
-<% if session[:usertype] == "user" or session[:usertype] == "accountant"%>
-  <%= render :partial => "list_calls_user" %>
+<% if session[:usertype] == "user" or session[:usertype] == "accountant" %>
+    <%= render :partial => "list_calls_user" %>
 <% else %>
-  <%= render :partial => "list_calls" %>
-<% end%>
+    <%= render :partial => "list_calls" %>
+<% end %>
 
-<br />
+<br/>
 
 <% if @total_pages > 1 %>
-  <%= render :partial => "page_select_header"  %>
-  <br />
+    <%= render :partial => "page_select_header" %>
+    <br/>
 <% end %>

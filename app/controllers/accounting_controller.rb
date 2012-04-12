@@ -2,18 +2,18 @@
 class AccountingController < ApplicationController
 
   layout "callc"
-  before_filter :check_post_method, :only=>[:invoice_recalculate, :comment_invoice, :invoice_delete]
+  before_filter :check_post_method, :only => [:invoice_recalculate, :comment_invoice, :invoice_delete]
   before_filter :check_localization
   before_filter :authorize
 
 
-  before_filter :check_if_can_see_finances, :only => [:vouchers, :vouchers_list_to_csv, :voucher_new, :voucher_create, :voucher_delete, ]
-  before_filter{ |c|   c.instance_variable_set :@allow_read, true
-    c.instance_variable_set :@allow_edit, true
+  before_filter :check_if_can_see_finances, :only => [:vouchers, :vouchers_list_to_csv, :voucher_new, :voucher_create, :voucher_delete,]
+  before_filter { |c| c.instance_variable_set :@allow_read, true
+  c.instance_variable_set :@allow_edit, true
   }
-  @@voucher_view = [:vouchers , :vouchers_list_to_csv]
+  @@voucher_view = [:vouchers, :vouchers_list_to_csv]
   @@voucher_edit = [:vouchers_new, :vouchers_create, :voucher_delete, :bulk_management]
-  before_filter(:only =>  @@voucher_view+@@voucher_edit) { |c|
+  before_filter(:only => @@voucher_view+@@voucher_edit) { |c|
     allow_read, allow_edit = c.check_read_write_permission(@@voucher_view, @@voucher_edit, {:role => "accountant", :right => :acc_vouchers_manage, :ignore => true})
     c.instance_variable_set :@allow_read, allow_read
     c.instance_variable_set :@allow_edit, allow_edit
@@ -21,8 +21,8 @@ class AccountingController < ApplicationController
   }
   @@invoice_view = [:invoices]
   @@invoice_edit = [:generate_invoices]
-  before_filter(:only =>  @@invoice_view+ @@invoice_edit) { |c|
-    allow_read, allow_edit = c.check_read_write_permission(@@invoice_view,  @@invoice_edit, {:role => "accountant", :right => :acc_invoices_manage, :ignore => true})
+  before_filter(:only => @@invoice_view+ @@invoice_edit) { |c|
+    allow_read, allow_edit = c.check_read_write_permission(@@invoice_view, @@invoice_edit, {:role => "accountant", :right => :acc_invoices_manage, :ignore => true})
     c.instance_variable_set :@allow_read, allow_read
     c.instance_variable_set :@allow_edit, allow_edit
     true
@@ -31,16 +31,16 @@ class AccountingController < ApplicationController
   before_filter :find_invoice, :only => [:invoice_recalculate]
 
   def index
-    redirect_to :action=>"user_invoices"
+    redirect_to :action => "user_invoices"
   end
 
   def index_main
     dont_be_so_smart
-    redirect_to :controller=>"callc", :action => :main and return false
+    redirect_to :controller => "callc", :action => :main and return false
   end
 
   def generate_invoices
-    @users = User.find_all_for_select(correct_owner_id,{:exclude_owner=>true})
+    @users = User.find_all_for_select(correct_owner_id, {:exclude_owner => true})
     @page_title = _('Generate_invoices')
     @page_icon = "application_go.png"
 
@@ -59,20 +59,20 @@ class AccountingController < ApplicationController
     change_date
     session[:invoice_sent_options] ? @sent_options = session[:invoice_sent_options] : @sent_options = {}
 
-    [:s_username, :s_first_name, :s_last_name, :s_number, :s_period_start, :s_period_end, :s_issue_date, :s_sent_email, :s_sent_manually, :s_paid, :s_invoice_type].each{|key|
+    [:s_username, :s_first_name, :s_last_name, :s_number, :s_period_start, :s_period_end, :s_issue_date, :s_sent_email, :s_sent_manually, :s_paid, :s_invoice_type].each { |key|
       params[key] ? @sent_options[key] = params[key].to_s : (@sent_options[key] = "" if !@sent_options[key])
     }
 
     cond = []
     cond_param = []
     # params that need to be searched with appended any value via LIKE in users table
-    ["username", "first_name", "last_name"].each{ |col|
-      add_contition_and_param(@sent_options["s_#{col}".to_sym], @sent_options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?" , cond, cond_param)}
+    ["username", "first_name", "last_name"].each { |col|
+      add_contition_and_param(@sent_options["s_#{col}".to_sym], @sent_options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?", cond, cond_param) }
     # params that need to be searched with appended any value via LIKE in invoices table
-    add_contition_and_param(@sent_options[:s_number], @sent_options[:s_number].to_s+"%", "invoices.number LIKE ?" , cond, cond_param)
+    add_contition_and_param(@sent_options[:s_number], @sent_options[:s_number].to_s+"%", "invoices.number LIKE ?", cond, cond_param)
     # params that need to be searched via equality.
-    ["period_start", "period_end", "issue_date", "sent_email", "sent_manually", "paid", "invoice_type"].each{|col|
-      add_contition_and_param(@sent_options["s_#{col}".to_sym], @sent_options["s_#{col}".to_sym], "invoices.#{col} = ?" , cond, cond_param)}
+    ["period_start", "period_end", "issue_date", "sent_email", "sent_manually", "paid", "invoice_type"].each { |col|
+      add_contition_and_param(@sent_options["s_#{col}".to_sym], @sent_options["s_#{col}".to_sym], "invoices.#{col} = ?", cond, cond_param) }
 
     session[:usertype] == "accountant" ? owner_id = 0 : owner_id = session[:user_id]
     cond << "users.owner_id = ?"
@@ -93,7 +93,7 @@ class AccountingController < ApplicationController
         user = invoice.user
         attach = []
         params[:id] =invoice.id
-        prepaid =  invoice.invoice_type.to_s == 'prepaid'  ? "Prepaid_" : ''
+        prepaid = invoice.invoice_type.to_s == 'prepaid' ? "Prepaid_" : ''
         @invoice = user.send_invoice_types.to_i
         if @invoice.to_i != 0
           if (user.email).length > 0
@@ -136,7 +136,7 @@ class AccountingController < ApplicationController
             if @invoice >= 32
               @i5= 32
               pdf = {}
-              pdf[:file] =  generate_invoice_by_cid_pdf
+              pdf[:file] = generate_invoice_by_cid_pdf
               pdf[:content_type] = "application/pdf"
               pdf[:filename] = "#{_('Invoice_by_CallerID_pdf')}.pdf"
               attach << pdf
@@ -158,7 +158,7 @@ class AccountingController < ApplicationController
             if @invoice >= 8
               @i3= 8
               pdf = {}
-              pdf[:file] =  generate_invoice_detailed_pdf
+              pdf[:file] = generate_invoice_detailed_pdf
               pdf[:content_type] = "application/pdf"
               pdf[:filename] = "#{_('Invoice_detailed_pdf')}.pdf"
               attach << pdf
@@ -179,14 +179,14 @@ class AccountingController < ApplicationController
             @invoice = @invoice - @i2
             if @invoice >= 2
               pdf = {}
-              pdf[:file] =  generate_invoice_pdf
+              pdf[:file] = generate_invoice_pdf
               pdf[:content_type] = "application/pdf"
               pdf[:filename] = "#{_('Invoice_pdf')}.pdf"
               attach << pdf
             end
 
             variables = email_variables(user)
-            email= Email.find(:first, :conditions => ["name = 'invoices' AND owner_id = ?", user.owner_id] )
+            email= Email.find(:first, :conditions => ["name = 'invoices' AND owner_id = ?", user.owner_id])
             MorLog.my_debug("Try send invoice to : #{user.address.email}, Invoice : #{invoice.id}, User : #{user.id}, Email : #{email.id}", 1)
             @num = EmailsController.send_email_with_attachment(email, email_from, user, attach, variables)
             MorLog.my_debug @num
@@ -195,29 +195,29 @@ class AccountingController < ApplicationController
               invoice.sent_email = 1
               invoice.save
             else
-              Action.create_email_sending_action(user, 'error', email, {:er_type=>1, :err_message=>@num})
+              Action.create_email_sending_action(user, 'error', email, {:er_type => 1, :err_message => @num})
             end
           else
             not_sent +=1
-            email= Email.find(:first, :conditions => ["name = 'invoices' AND owner_id = ?", user.owner_id] )
-            Action.create_email_sending_action(user, 'error', email, {:er_type=>1})
+            email= Email.find(:first, :conditions => ["name = 'invoices' AND owner_id = ?", user.owner_id])
+            Action.create_email_sending_action(user, 'error', email, {:er_type => 1})
           end
         end
         #  end
       end
     end
 
-    flash[:notice] = _('ERROR') + ": " +  @num[1].to_s if  @num and @num[0] == 0
+    flash[:notice] = _('ERROR') + ": " + @num[1].to_s if  @num and @num[0] == 0
     if @number.to_i > 0
       flash[:status] = _('Invoices_sent') + ": " + @number.to_s
     else
       flash[:notice] = _('Invoices_not_sent') + ": " + not_sent.to_s if  not_sent.to_i > 0
     end
-    flash[:notice] = _('No_invoices_found_in_selected_period')  if @invoices.size.to_i == 0
+    flash[:notice] = _('No_invoices_found_in_selected_period') if @invoices.size.to_i == 0
     redirect_to :action => "invoices" and return false
   end
 
-  def get_prepaid_user_calls_csv(requesting_user, user,period_start, period_end)
+  def get_prepaid_user_calls_csv(requesting_user, user, period_start, period_end)
     user_price, reseller_price, provider_price = requesting_user.get_price_calculation_sqls
     sql = "Select calls.calldate, calls.src, calls.dst, calls.billsec, #{user_price} AS user_price, calls.src_device_id, calls.dst_device_id, calls.prefix, calls.disposition, destinations.name from calls
              JOIN devices on (devices.id = calls.src_device_id or devices.id = calls.dst_device_id)
@@ -229,7 +229,7 @@ class AccountingController < ApplicationController
     sep, dec = user.csv_params
 
     calls = Call.find_by_sql(sql)
-    csv_string = "#{_('Date')}#{sep}#{ _('Called_from')}#{sep}#{_('Called_to')}#{sep}#{_('Destination')}#{sep}#{_('Duration')}#{sep}#{_('Price')} (#{_(session[:default_currency].to_s)})\n"    
+    csv_string = "#{_('Date')}#{sep}#{ _('Called_from')}#{sep}#{_('Called_to')}#{sep}#{_('Destination')}#{sep}#{_('Duration')}#{sep}#{_('Price')} (#{_(session[:default_currency].to_s)})\n"
     for call in calls
       csv_string += "#{nice_date_time(call.calldate)}#{sep}#{call.src.to_s}#{sep}#{hide_dst_for_user(user, "csv", call.dst.to_s)}#{sep}#{call.name }#{sep}#{nice_time(call.billsec) }#{sep}#{nice_number(call.user_price).to_s.gsub(".", dec).to_s }\n"
     end
@@ -246,9 +246,9 @@ class AccountingController < ApplicationController
 
     @owner_id = correct_owner_id
 
-    invoice_number_start = Confline.get_value("Invoice_Number_Start",@owner_id)
-    invoice_number_length = Confline.get_value("Invoice_Number_Length",@owner_id).to_i
-    invoice_number_type = Confline.get_value("Invoice_Number_Type",@owner_id).to_i
+    invoice_number_start = Confline.get_value("Invoice_Number_Start", @owner_id)
+    invoice_number_length = Confline.get_value("Invoice_Number_Length", @owner_id).to_i
+    invoice_number_type = Confline.get_value("Invoice_Number_Type", @owner_id).to_i
 
     MorLog.my_debug("\n\n========== Generating invoices ============", 1)
 
@@ -261,7 +261,7 @@ class AccountingController < ApplicationController
     end
     type = params[:invoice][:type]
     type = "postpaid" if !(["postpaid", "prepaid", "user"].include?(type))
-    redirect_to :action => :generate_invoices_status_for_prepaid_users, :invoice => {:type => "prepaid"}, :date_from=>params[:date_from], :date_till=>params[:date_till], :date_issue=>params[:date_issue] and return false if type == "prepaid"
+    redirect_to :action => :generate_invoices_status_for_prepaid_users, :invoice => {:type => "prepaid"}, :date_from => params[:date_from], :date_till => params[:date_till], :date_issue => params[:date_issue] and return false if type == "prepaid"
     if type == "user"
       @user = User.find(:first, :conditions => ["users.id = ?", params[:user][:id]]) if params[:user] and params[:user][:id]
       unless @user
@@ -269,11 +269,11 @@ class AccountingController < ApplicationController
         redirect_to :action => :generate_invoices and return false
       end
       if @user.postpaid == 0
-        redirect_to :action => :generate_invoices_status_for_prepaid_users, :invoice => {:type => "user"}, :user => {:id => @user.id}, :date_from=>params[:date_from], :date_till=>params[:date_till], :date_issue=>params[:date_issue] and return false
+        redirect_to :action => :generate_invoices_status_for_prepaid_users, :invoice => {:type => "user"}, :user => {:id => @user.id}, :date_from => params[:date_from], :date_till => params[:date_till], :date_issue => params[:date_issue] and return false
       end
     end
 
-    unless [1,2].include?(invoice_number_type)
+    unless [1, 2].include?(invoice_number_type)
       flash[:notice] = _('Please_set_invoice_params')
       if session[:usertype] == "reseller"
         redirect_to :controller => :functions, :action => :reseller_settings and return false
@@ -292,7 +292,7 @@ class AccountingController < ApplicationController
     MorLog.my_debug session_from_date
     MorLog.my_debug session_till_date
 
-    total_days =(@period_end.to_date - @period_start.to_date ) + 1
+    total_days =(@period_end.to_date - @period_start.to_date) + 1
 
     if session[:invoices_is_generating].to_i == 1
       flash[:notice] = _('Invoices_is_generating')
@@ -316,7 +316,7 @@ class AccountingController < ApplicationController
 
     use_index = 0
     ind_ex.to_yaml
-    ind_ex.each{|ie| use_index = 1; use_index if ie[:key_name].to_s == 'calldate'} if ind_ex
+    ind_ex.each { |ie| use_index = 1; use_index if ie[:key_name].to_s == 'calldate' } if ind_ex
 
     issue_date = Time.mktime(params[:date_issue][:year], params[:date_issue][:month], params[:date_issue][:day])
 
@@ -366,7 +366,7 @@ class AccountingController < ApplicationController
 
         # --- add resellers users outgoing calls ---
         if (outgoing_calls_by_users_price > 0)
-          invoice.invoicedetails.create(:name => _('Calls_from_users'), :price =>outgoing_calls_by_users_price.to_f, :quantity => outgoing_calls_by_users, :invdet_type => 0)
+          invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => outgoing_calls_by_users_price.to_f, :quantity => outgoing_calls_by_users, :invdet_type => 0)
           price += outgoing_calls_by_users_price.to_f
         end
 
@@ -391,7 +391,7 @@ class AccountingController < ApplicationController
         #        end
 
 
-        MorLog.my_debug("    Invoice price without subscriptions: #{price.to_s}",1)
+        MorLog.my_debug("    Invoice price without subscriptions: #{price.to_s}", 1)
 
         # nasty hack for Balticom to recalculate invoices/balance - DO NOT USE!!!
         #user.balance -= price
@@ -456,11 +456,11 @@ class AccountingController < ApplicationController
             end
           end
           MorLog.my_debug("end subscriptions periodic_fee", 1)
-          MorLog.my_debug("    Invoice Subscriptions price: #{invd_price.to_s}",1)
+          MorLog.my_debug("    Invoice Subscriptions price: #{invd_price.to_s}", 1)
 
 
           if count_subscription == 1
-            invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price =>invd_price, :quantity => "1")
+            invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invd_price, :quantity => "1")
             price += invd_price.to_f
           end
         end
@@ -480,7 +480,7 @@ class AccountingController < ApplicationController
   # before_filter
   #   find_invoice
   def invoice_recalculate
-    if @invoice.paid? 
+    if @invoice.paid?
       flash[:notice] = _('Invoice_already_paid')
       redirect_to :action => :invoice_details, :id => @invoice.id
     else
@@ -515,7 +515,7 @@ class AccountingController < ApplicationController
       invoice_number_type = Confline.get_value("Prepaid_Invoice_Number_Type", @owner_id).to_i
     end
 
-    unless [1,2].include?(invoice_number_type)
+    unless [1, 2].include?(invoice_number_type)
       flash[:notice] = _('Please_set_invoice_params')
       if session[:usertype] == "reseller"
         redirect_to :controller => :functions, :action => :reseller_settings and return false
@@ -532,7 +532,7 @@ class AccountingController < ApplicationController
     period_end = (@period_end+" 23:59:59").to_time
     period_start_with_time = session_from_date + " 00:00:00"
     period_end_with_time = session_till_date + " 23:59:59"
-    total_days =(@period_end.to_date - @period_start.to_date ) + 1
+    total_days =(@period_end.to_date - @period_start.to_date) + 1
 
     if session[:invoices_is_generating].to_i == 1
       flash[:notice] = _('Invoices_is_generating')
@@ -554,7 +554,7 @@ class AccountingController < ApplicationController
     # retrieve users without invoices this period
 
     if type == "user"
-      @users = User.find(:all, :include => [:tax], :conditions => ["users.owner_id = ? AND users.hidden = 0 AND users.postpaid = 0 AND users.id = ? AND users.id not in (SELECT user_id from invoices where period_start = ? AND period_end = ? )", @owner_id, params[:user][:id],@period_start, @period_end])
+      @users = User.find(:all, :include => [:tax], :conditions => ["users.owner_id = ? AND users.hidden = 0 AND users.postpaid = 0 AND users.id = ? AND users.id not in (SELECT user_id from invoices where period_start = ? AND period_end = ? )", @owner_id, params[:user][:id], @period_start, @period_end])
     else
       @users = User.find(:all, :include => [:tax], :conditions => ["users.owner_id = ? AND users.hidden = 0 AND users.postpaid = 0 AND users.id not in (SELECT user_id from invoices where period_start = ? AND period_end = ? )", @owner_id, @period_start, @period_end])
     end
@@ -562,7 +562,7 @@ class AccountingController < ApplicationController
     ind_ex = ActiveRecord::Base.connection.select_all("SHOW INDEX FROM calls")
     use_index = 0
     ind_ex.to_yaml
-    ind_ex.each{|ie| use_index = 1; use_index if ie[:key_name].to_s == 'calldate'} if ind_ex
+    ind_ex.each { |ie| use_index = 1; use_index if ie[:key_name].to_s == 'calldate' } if ind_ex
 
     issue_date = Time.mktime(params[:date_issue][:year], params[:date_issue][:month], params[:date_issue][:day])
 
@@ -588,7 +588,7 @@ class AccountingController < ApplicationController
         # tax for invoice
         tax = user_tax.dup
         tax.save
-        invoice = Invoice.new(:user_id => user.id, :period_start => @period_start, :period_end => @period_end, :issue_date => issue_date, :paid => 1, :number => "", :invoice_type => "prepaid", :tax_id =>tax.id)
+        invoice = Invoice.new(:user_id => user.id, :period_start => @period_start, :period_end => @period_end, :issue_date => issue_date, :paid => 1, :number => "", :invoice_type => "prepaid", :tax_id => tax.id)
         invoice.save
 
         price = 0
@@ -600,7 +600,7 @@ class AccountingController < ApplicationController
 
         # --- add resellers users outgoing calls ---
         if (outgoing_calls_by_users_price > 0)
-          invoice.invoicedetails.create(:name => _('Calls_from_users'), :price =>outgoing_calls_by_users_price.to_f, :quantity => outgoing_calls_by_users, :invdet_type => 0)
+          invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => outgoing_calls_by_users_price.to_f, :quantity => outgoing_calls_by_users, :invdet_type => 0)
           price += outgoing_calls_by_users_price.to_f
         end
 
@@ -721,7 +721,7 @@ class AccountingController < ApplicationController
     change_date
     # search params parsing. Assign new params if they were sent, default unset params to "" and leave if param is set but not sent
     if params[:clear].to_s == "true"
-      @options.each {|key, value|
+      @options.each { |key, value|
         logger.debug "Need to clear search."
         if key.to_s.scan(/^s_.*/).size > 0
           @options[key] = nil
@@ -729,7 +729,7 @@ class AccountingController < ApplicationController
         end
       }
     end
-    [:s_username, :s_first_name, :s_last_name, :s_number, :s_period_start, :s_period_end, :s_issue_date, :s_sent_email, :s_sent_manually, :s_paid, :s_invoice_type].each{|key|
+    [:s_username, :s_first_name, :s_last_name, :s_number, :s_period_start, :s_period_end, :s_issue_date, :s_sent_email, :s_sent_manually, :s_paid, :s_invoice_type].each { |key|
       params[key] ? @options[key] = params[key].to_s : (@options[key] = "" if !@options[key])
     }
     # page number is an exception because it defaults to 1
@@ -744,13 +744,13 @@ class AccountingController < ApplicationController
     cond = []
     cond_param = []
     # params that need to be searched with appended any value via LIKE in users table
-    ["username", "first_name", "last_name"].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?" , cond, cond_param)}
+    ["username", "first_name", "last_name"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?", cond, cond_param) }
     # params that need to be searched with appended any value via LIKE in invoices table
-    add_contition_and_param(@options[:s_number], @options[:s_number].to_s+"%", "invoices.number LIKE ?" , cond, cond_param)
+    add_contition_and_param(@options[:s_number], @options[:s_number].to_s+"%", "invoices.number LIKE ?", cond, cond_param)
     # params that need to be searched via equality.
-    ["period_start", "period_end", "issue_date", "sent_email", "sent_manually", "paid", "invoice_type"].each{|col|
-      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".to_sym], "invoices.#{col} = ?" , cond, cond_param)}
+    ["period_start", "period_end", "issue_date", "sent_email", "sent_manually", "paid", "invoice_type"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".to_sym], "invoices.#{col} = ?", cond, cond_param) }
 
     session[:usertype] == "accountant" ? owner_id = 0 : owner_id = session[:user_id]
     cond << "users.owner_id = ?"
@@ -769,12 +769,12 @@ class AccountingController < ApplicationController
       @tot_in_wat = 0
       @tot_in2 = 0
       @tot_inv = Invoice.find(:all, :include => [:user, :tax], :conditions => [cond.join(" AND ")] + cond_param)
-      @tot_inv.each{|r| @tot_in2+= r.converted_price(@ex).to_f ; @tot_in_wat += (r.price_with_tax(:ex=>@ex, :precision => nice_invoice_number_digits(r.invoice_type)) )}
+      @tot_inv.each { |r| @tot_in2+= r.converted_price(@ex).to_f; @tot_in_wat += (r.price_with_tax(:ex => @ex, :precision => nice_invoice_number_digits(r.invoice_type))) }
 
       @invoices = Invoice.find(:all, :include => [:user, :tax],
-        :conditions => [cond.join(" AND ")] + cond_param,
-        :offset => session[:items_per_page]*(@options[:page]-1),
-        :limit => session[:items_per_page], :order => order_by)
+                               :conditions => [cond.join(" AND ")] + cond_param,
+                               :offset => session[:items_per_page]*(@options[:page]-1),
+                               :limit => session[:items_per_page], :order => order_by)
       #logger.fatal(([cond.join(" AND ")] + cond_param).inspect)
       cond.length > 1 ? @search = 1 : @search = 0
       cond.length > 1 ? @send_invoices = 1 : @send_invoices = 0
@@ -786,11 +786,11 @@ class AccountingController < ApplicationController
       session[:invoice_options] = @options
     else
       invoices = Invoice.find(:all, :include => [:user, :tax],
-        :conditions => [cond.join(" AND ")] + cond_param,
-        :order => order_by)
+                              :conditions => [cond.join(" AND ")] + cond_param,
+                              :order => order_by)
       sep, dec = current_user.csv_params
       csv_line = "'#{_('ID')}'#{sep}'#{_('User')}'#{sep}'#{_('Amount')} (#{dc})'#{sep}'#{_('Tax')}'#{sep}'#{_('Amount_with_tax')} (#{dc})'\n"
-      csv_line += invoices.map{ |r| "#{r.id}#{sep}#{nice_user(r.user).delete(sep)}#{sep}#{nice_invoice_number(r.converted_price(@ex), r.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{nice_invoice_number((r.price_with_tax(:ex=>@ex, :precision => nice_invoice_number_digits(r.invoice_type)) - r.converted_price(@ex)), r.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{nice_invoice_number((r.price_with_tax(:ex=>@ex, :precision => nice_invoice_number_digits(r.invoice_type))), r.invoice_type).to_s.gsub(".", dec).to_s}" }.join("\n")
+      csv_line += invoices.map { |r| "#{r.id}#{sep}#{nice_user(r.user).delete(sep)}#{sep}#{nice_invoice_number(r.converted_price(@ex), r.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{nice_invoice_number((r.price_with_tax(:ex => @ex, :precision => nice_invoice_number_digits(r.invoice_type)) - r.converted_price(@ex)), r.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{nice_invoice_number((r.price_with_tax(:ex => @ex, :precision => nice_invoice_number_digits(r.invoice_type))), r.invoice_type).to_s.gsub(".", dec).to_s}" }.join("\n")
       if params[:test].to_i == 1
         render :text => "Invoices-#{session[:show_currency]}.csv" + csv_line.to_s
       else
@@ -813,7 +813,7 @@ class AccountingController < ApplicationController
       redirect_to :controller => "callc", :action => "main" and return false
     end
 
-    invoice = Invoice.find(params[:id], :include=> [:tax])
+    invoice = Invoice.find(params[:id], :include => [:tax])
     unless invoice
       flash[:notice] = _('Invoice_not_found')
       redirect_to :controller => :callc, :action => :main and return false
@@ -866,7 +866,7 @@ class AccountingController < ApplicationController
     end
     invoice.save
 
-    redirect_to :action => "invoice_details", :id=>invoice.id
+    redirect_to :action => "invoice_details", :id => invoice.id
 
   end
 
@@ -879,7 +879,7 @@ class AccountingController < ApplicationController
       redirect_to :controller => :callc, :action => :main and return false
     end
     logger.fatal session[:show_currency]
-    flash[:notice] = _('Invoice_not_found') and redirect_to :action => 'invoices' and return false  if not params[:id]
+    flash[:notice] = _('Invoice_not_found') and redirect_to :action => 'invoices' and return false if not params[:id]
     @invoice = Invoice.find_by_id(params[:id], :include => [:user])
     @invoice_invoicedetails = @invoice.invoicedetails if @invoice
 
@@ -889,7 +889,7 @@ class AccountingController < ApplicationController
     end
 
     @user = @invoice.user
-    @page_title = _('Invoice')  + ": " + @invoice.number
+    @page_title = _('Invoice') + ": " + @invoice.number
     @page_icon = "view.png"
   end
 
@@ -926,13 +926,13 @@ class AccountingController < ApplicationController
 
 
     @user = @invoice.user
-    @page_title = _('Invoice')  + ": " + @invoice.number
+    @page_title = _('Invoice') + ": " + @invoice.number
     @page_icon = "view.png"
   end
 
   def invoice_delete
     inv = Invoice.find_by_id(params[:id], :include => [:user, :tax])
-    if ! inv
+    if !inv
       dont_be_so_smart
       redirect_to :controller => "callc", :action => "main" and return false
     end
@@ -974,7 +974,7 @@ class AccountingController < ApplicationController
         text += "\n" + idetails.to_yaml if idetails
         text += "\n" + prep
         text += "\n" + filename
-        render :text=> text
+        render :text => text
       else
         send_data pdf.render, :filename => filename, :type => "application/pdf"
       end
@@ -997,12 +997,12 @@ class AccountingController < ApplicationController
     type = (user.postpaid.to_i == 1 or invoice.user.owner_id != 0) ? "postpaid" : "prepaid"
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
-   # min_type = (Confline.get_value("#{prepaid}Invoice_Show_Time_in_Minutes", owner).to_i == 1 and mor_11_extend? ) ? 1 : 0
+    # min_type = (Confline.get_value("#{prepaid}Invoice_Show_Time_in_Minutes", owner).to_i == 1 and mor_11_extend? ) ? 1 : 0
     show_avg_rate = 1 #(Confline.get_value("#{prepaid}Invoice_Add_Average_rate", owner).to_i == 1 and mor_11_extend? ) ? 1 : 0
     pdf = invoice.generate_invoice_detailed_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal], show_avg_rate)
 
     if params[:email_or_not]
-      return  pdf.render
+      return pdf.render
     else
       filename = Invoice.filename(user, type, "Invoice_detailed-#{user.first_name}_#{user.last_name}-#{invoice.user_id}-#{invoice.number}-#{invoice.issue_date}", "pdf")
       if params[:test].to_i == 1
@@ -1016,7 +1016,7 @@ class AccountingController < ApplicationController
         text += "\n" + "currency => #{dc}"
         text += "\n" + "tax => #{tax_amount}"
         text += "\n" + "avg_rate => #{avg_rate.to_yaml}" if avg_rate
-        render :text=> text
+        render :text => text
       else
         send_data pdf.render, :filename => filename, :type => "application/pdf"
       end
@@ -1053,7 +1053,7 @@ class AccountingController < ApplicationController
     pdf = invoice.generate_invoice_by_cid_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal])
 
     if params[:email_or_not]
-      return  pdf.render
+      return pdf.render
     else
       filename = Invoice.filename(user, type, "Invoice_by_cid-#{user.first_name}_#{user.last_name}-#{invoice.user_id}-#{invoice.number}-#{invoice.issue_date}", "pdf")
       if params[:test].to_i == 1
@@ -1064,7 +1064,7 @@ class AccountingController < ApplicationController
         #        }
         text += "\n" + type
         text += "\n" + filename
-        render :text=> text
+        render :text => text
       else
         send_data pdf.render, :filename => filename, :type => "application/pdf"
       end
@@ -1078,19 +1078,19 @@ class AccountingController < ApplicationController
 
     # ---------- Company details ----------
 
-    pdf.text(session[:company], {:left =>40, :size => 23})
-    pdf.text(Confline.get_value("Invoice_Address1"), {:left =>40, :size => 12})
-    pdf.text(Confline.get_value("Invoice_Address2"), {:left =>40, :size => 12})
-    pdf.text(Confline.get_value("Invoice_Address3"), {:left =>40, :size => 12})
-    pdf.text(Confline.get_value("Invoice_Address4"), {:left =>40, :size => 12})
+    pdf.text(session[:company], {:left => 40, :size => 23})
+    pdf.text(Confline.get_value("Invoice_Address1"), {:left => 40, :size => 12})
+    pdf.text(Confline.get_value("Invoice_Address2"), {:left => 40, :size => 12})
+    pdf.text(Confline.get_value("Invoice_Address3"), {:left => 40, :size => 12})
+    pdf.text(Confline.get_value("Invoice_Address4"), {:left => 40, :size => 12})
 
     # ----------- Invoice details ----------
 
     pdf.fill_color('DCDCDC')
-    pdf.draw_text( _('INVOICE'), {:at => [330,700], :size =>26})
+    pdf.draw_text(_('INVOICE'), {:at => [330, 700], :size => 26})
     pdf.fill_color('000000')
-    pdf.draw_text(_('Date') + ": " + 'invoice.issue_date.to_s', {:at => [330,685], :size => 12})
-    pdf.draw_text(_('Invoice_number') + ": " + 'invoice.number.to_s', {:at => [330,675], :size => 12})
+    pdf.draw_text(_('Date') + ": " + 'invoice.issue_date.to_s', {:at => [330, 685], :size => 12})
+    pdf.draw_text(_('Invoice_number') + ": " + 'invoice.number.to_s', {:at => [330, 675], :size => 12})
 
     pdf.image(Actual_Dir+"/public/images/rails.png")
     pdf.text("Test Text : ąčęėįšųūž_йцукенгшщз")
@@ -1116,7 +1116,7 @@ class AccountingController < ApplicationController
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
 
     csv_string = ["number#{sep}user_id#{sep}period_start#{sep}period_end#{sep}issue_date#{sep}price (#{dc})#{sep}price_with_tax (#{dc})#{sep}accounting_number"]
-    csv_string << "#{invoice.number.to_s}#{sep}#{invoice.user_id}#{sep}#{invoice.period_start}#{sep}#{invoice.period_end}#{sep}#{invoice.issue_date}#{sep}#{nice_invoice_number(invoice.converted_price(ex), invoice.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{nice_invoice_number(invoice.price_with_tax(:ex=>ex, :precision => nice_invoice_number_digits(invoice.invoice_type)), invoice.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{user.accounting_number}"
+    csv_string << "#{invoice.number.to_s}#{sep}#{invoice.user_id}#{sep}#{invoice.period_start}#{sep}#{invoice.period_end}#{sep}#{invoice.issue_date}#{sep}#{nice_invoice_number(invoice.converted_price(ex), invoice.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{nice_invoice_number(invoice.price_with_tax(:ex => ex, :precision => nice_invoice_number_digits(invoice.invoice_type)), invoice.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{user.accounting_number}"
     #  my_debug csv_string
     prepaid, prep = invoice_type(invoice, user)
     filename = Invoice.filename(user, prep, "Invoice-#{user.first_name}_#{user.last_name}-#{invoice.user_id}-#{invoice.number}-#{invoice.issue_date}-#{dc}", "csv")
@@ -1127,7 +1127,7 @@ class AccountingController < ApplicationController
       if params[:test].to_i == 1
         render :text => (["Filename: #{filename}"] + csv_string).join("\n")
       else
-        send_data(csv_string.join("\n"),   :type => 'text/csv; charset=utf-8; header=present',  :filename => filename)
+        send_data(csv_string.join("\n"), :type => 'text/csv; charset=utf-8; header=present', :filename => filename)
       end
     end
   end
@@ -1152,14 +1152,14 @@ class AccountingController < ApplicationController
     prepaid = (invoice.invoice_type.to_s == 'prepaid' and owner == 0) ? "Prepaid_" : ""
     up, rp, pp = user.get_price_calculation_sqls
     billsec_cond = Confline.get_value("#{prepaid}Invoice_user_billsec_show", owner).to_i == 1 ? 'user_billsec' : 'billsec'
-    user_price = SqlExport.replace_price(up, {:ex=>ex})
-    reseller_price = SqlExport.replace_price(rp, {:ex=>ex})
-    did_sql_price = SqlExport.replace_price('calls.did_price', {:ex=>ex , :reference=> 'did_price'})
-    did_inc_sql_price = SqlExport.replace_price('calls.did_inc_price', {:ex=>ex, :reference=>'did_inc_price'})
+    user_price = SqlExport.replace_price(up, {:ex => ex})
+    reseller_price = SqlExport.replace_price(rp, {:ex => ex})
+    did_sql_price = SqlExport.replace_price('calls.did_price', {:ex => ex, :reference => 'did_price'})
+    did_inc_sql_price = SqlExport.replace_price('calls.did_inc_price', {:ex => ex, :reference => 'did_inc_price'})
     #did_sql_price = SqlExport.replace_price('calls.did_price', 'did_price')
-    selfcost = SqlExport.replace_price(pp, {:ex=>ex, :reference=>'selfcost'})
-    user_rate =  SqlExport.replace_price('calls.user_rate', {:ex=>ex, :reference=> 'user_rate'})
-    min_type = (Confline.get_value("#{prepaid}Invoice_Show_Time_in_Minutes", owner).to_i == 1 and mor_11_extend? ) ? 1 : 0
+    selfcost = SqlExport.replace_price(pp, {:ex => ex, :reference => 'selfcost'})
+    user_rate = SqlExport.replace_price('calls.user_rate', {:ex => ex, :reference => 'user_rate'})
+    min_type = (Confline.get_value("#{prepaid}Invoice_Show_Time_in_Minutes", owner).to_i == 1 and mor_11_extend?) ? 1 : 0
     csv_string = []
 
     for id in idetails
@@ -1186,7 +1186,7 @@ class AccountingController < ApplicationController
               qt = ""
               tp = id.converted_price(ex)
             end
-            csv_string << "#{nice_inv_name(id.name)}#{sep}#{ nice_number(qt)}#{sep}#{nice_number(tp).to_s.gsub(".",dec).to_s}"
+            csv_string << "#{nice_inv_name(id.name)}#{sep}#{ nice_number(qt)}#{sep}#{nice_number(tp).to_s.gsub(".", dec).to_s}"
           end
         end
       end
@@ -1200,24 +1200,24 @@ class AccountingController < ApplicationController
     end
 
     sql = "SELECT #{user_rate}, destinationgroups.id, destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',  COUNT(*) as 'calls', SUM(#{billsec_cond}) as 'billsec', #{selfcost}, SUM(#{user_price}) as 'price'  " +
-      "FROM calls "+
-      "JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id)
+        "FROM calls "+
+        "JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id)
         LEFT JOIN destinations ON (destinations.prefix = calls.prefix)  "+
-      "JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}"+
-      "WHERE calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
-      " AND devices.user_id = '#{user.id}'  #{zero_calls_sql}" +
-      "GROUP BY destinationgroups.id, calls.user_rate "+
-      "ORDER BY destinationgroups.name ASC, destinationgroups.desttype ASC"
+        "JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}"+
+        "WHERE calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
+        " AND devices.user_id = '#{user.id}'  #{zero_calls_sql}" +
+        "GROUP BY destinationgroups.id, calls.user_rate "+
+        "ORDER BY destinationgroups.name ASC, destinationgroups.desttype ASC"
 
     if user.usertype == "reseller"
       sql2 = "SELECT
 calls.dst,  COUNT(*) as 'count_calls', SUM(#{billsec_cond}) as 'sum_billsec', #{selfcost}, SUM(#{reseller_price}) as 'price', #{user_rate}  " +
-        "FROM calls "+
-        "#{SqlExport.left_join_reseler_providers_to_calls_sql} LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) "+
-        "WHERE calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
-        " AND (calls.reseller_id = '#{user.id}' ) #{zero_calls_sql}" +
-        "GROUP BY destinationgroups.id, calls.user_rate "+
-        "ORDER BY destinationgroups.name ASC, destinationgroups.desttype ASC"
+          "FROM calls "+
+          "#{SqlExport.left_join_reseler_providers_to_calls_sql} LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) "+
+          "WHERE calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
+          " AND (calls.reseller_id = '#{user.id}' ) #{zero_calls_sql}" +
+          "GROUP BY destinationgroups.id, calls.user_rate "+
+          "ORDER BY destinationgroups.name ASC, destinationgroups.desttype ASC"
     end
 
     res = ActiveRecord::Base.connection.select_all(sql)
@@ -1237,7 +1237,7 @@ calls.dst,  COUNT(*) as 'count_calls', SUM(#{billsec_cond}) as 'sum_billsec', #{
       billsec = r["billsec"]
       rate = r["user_rate"]
       price = r["price"]
-      csv_string << "#{invoice.number.to_s}#{sep}#{user.accounting_number.to_s.blank? ? ' ' : user.accounting_number.to_s}#{sep}#{country}#{sep}#{type}#{sep}#{rate}#{sep}#{calls}#{sep}#{billsec}#{sep}#{nice_number(price).to_s.gsub(".",dec).to_s}"
+      csv_string << "#{invoice.number.to_s}#{sep}#{user.accounting_number.to_s.blank? ? ' ' : user.accounting_number.to_s}#{sep}#{country}#{sep}#{type}#{sep}#{rate}#{sep}#{calls}#{sep}#{billsec}#{sep}#{nice_number(price).to_s.gsub(".", dec).to_s}"
     end
 
     params[:email_or_not] ? req_user = user : req_user = current_user
@@ -1246,7 +1246,7 @@ calls.dst,  COUNT(*) as 'count_calls', SUM(#{billsec_cond}) as 'sum_billsec', #{
       csv_string << "\n" + _('Calls_from_users') + ":"
       csv_string << "#{_('DID')}#{sep}#{_('Calls')}#{sep}#{_('Total_time')}#{sep}#{_('Price')}(#{dc})"
       for r in res2
-        csv_string << "#{hide_dst_for_user(req_user, "csv", r["dst"].to_s)}#{sep}#{r["count_calls"].to_s}#{sep}#{invoice_nice_time(r["sum_billsec"], min_type)}#{sep}#{nice_number(r["price"]).to_s.gsub(".",dec).to_s}"
+        csv_string << "#{hide_dst_for_user(req_user, "csv", r["dst"].to_s)}#{sep}#{r["count_calls"].to_s}#{sep}#{invoice_nice_time(r["sum_billsec"], min_type)}#{sep}#{nice_number(r["price"]).to_s.gsub(".", dec).to_s}"
       end
     end
 
@@ -1258,7 +1258,7 @@ calls.dst,  COUNT(*) as 'count_calls', SUM(#{billsec_cond}) as 'sum_billsec', #{
       if params[:test].to_i == 1
         render :text => (["Filename: #{filename}"] + csv_string).join("\n")
       else
-        send_data(csv_string.join("\n"),   :type => 'text/csv; charset=utf-8; header=present',  :filename => filename)
+        send_data(csv_string.join("\n"), :type => 'text/csv; charset=utf-8; header=present', :filename => filename)
       end
     end
   end
@@ -1284,7 +1284,7 @@ calls.dst,  COUNT(*) as 'count_calls', SUM(#{billsec_cond}) as 'sum_billsec', #{
 
     billsec_cond = Confline.get_value("#{prepaid}Invoice_user_billsec_show", owner).to_i == 1 ? 'user_billsec' : 'billsec'
     up, rp, pp = user.get_price_calculation_sqls
-    user_price = SqlExport.replace_price(up, {:ex=>ex})
+    user_price = SqlExport.replace_price(up, {:ex => ex})
 
     csv_string = ["Invoice NO.:#{sep} #{invoice.number.to_s}"]
 
@@ -1321,7 +1321,7 @@ calls.dst,  COUNT(*) as 'count_calls', SUM(#{billsec_cond}) as 'sum_billsec', #{
               qt = ""
               tp = id.converted_price(ex)
             end
-            csv_string << "#{nice_inv_name(id.name)}#{sep}#{qt}#{sep}#{nice_number(tp).to_s.gsub(".",dec).to_s}"
+            csv_string << "#{nice_inv_name(id.name)}#{sep}#{qt}#{sep}#{nice_number(tp).to_s.gsub(".", dec).to_s}"
           end
         end
       end
@@ -1338,7 +1338,7 @@ calls.dst,  COUNT(*) as 'count_calls', SUM(#{billsec_cond}) as 'sum_billsec', #{
     end
 
 
-    sql= "SELECT destinations.id, destinations.prefix as 'prefix', dir.name as 'country', destinations.name as 'dg_name', destinations.subcode as 'dg_type', MAX(#{SqlExport.replace_price('calls.user_rate',{:ex=>ex})}) as 'rate', sum(IF(DISPOSITION='ANSWERED',1,0)) AS 'answered', Count(*) as 'all_calls', SUM(IF(DISPOSITION='ANSWERED',calls.#{billsec_cond},0)) as 'billsec', SUM(IF(DISPOSITION='ANSWERED',#{SqlExport.replace_price(pp, {:ex=>ex})},0)) as 'selfcost', SUM(IF(DISPOSITION='ANSWERED',#{user_price},0)) as 'price'  FROM calls
+    sql= "SELECT destinations.id, destinations.prefix as 'prefix', dir.name as 'country', destinations.name as 'dg_name', destinations.subcode as 'dg_type', MAX(#{SqlExport.replace_price('calls.user_rate', {:ex => ex})}) as 'rate', sum(IF(DISPOSITION='ANSWERED',1,0)) AS 'answered', Count(*) as 'all_calls', SUM(IF(DISPOSITION='ANSWERED',calls.#{billsec_cond},0)) as 'billsec', SUM(IF(DISPOSITION='ANSWERED',#{SqlExport.replace_price(pp, {:ex => ex})},0)) as 'selfcost', SUM(IF(DISPOSITION='ANSWERED',#{user_price},0)) as 'price'  FROM calls
 JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id)
 LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     LEFT JOIN directions as dir ON (destinations.direction_code = dir.code)
@@ -1361,7 +1361,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
       prefix = r["prefix"].to_s
       billsec = r["billsec"].to_s
       if r["answered"].to_s.to_i > 0
-        asr = (r["answered"].to_f /  r["all_calls"].to_f) * 100
+        asr = (r["answered"].to_f / r["all_calls"].to_f) * 100
         acd = (r["billsec"].to_f / r["answered"].to_f).to_f
       else
         asr =0
@@ -1409,7 +1409,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
     up, rp, pp = user.get_price_calculation_sqls
     zero_calls_sql = user.invoice_zero_calls_sql
-    user_price = SqlExport.replace_price(up, {:ex=>ex})
+    user_price = SqlExport.replace_price(up, {:ex => ex})
     csv_s = []
     sql = "SELECT calls.src, SUM(#{user_price}) as 'price', COUNT(calls.id) AS calls_size FROM calls JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE devices.user_id = #{user.id} AND calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59' AND calls.disposition = 'ANSWERED' AND billsec > 0 #{zero_calls_sql} GROUP BY calls.src;"
 
@@ -1432,18 +1432,18 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
       if params[:test].to_i == 1
         render :text => "Filename: #{filename}" + csv_string
       else
-        send_data(csv_string,   :type => 'text/csv; charset=utf-8; header=present',  :filename => filename)
+        send_data(csv_string, :type => 'text/csv; charset=utf-8; header=present', :filename => filename)
       end
     end
   end
 
   def change_session_flag
     session[:invoices_is_generating] = 0
-    redirect_to :controller=>:callc, :action=>:main
+    redirect_to :controller => :callc, :action => :main
   end
 
   def invoices_recalculation
-    @users = User.find_all_for_select(correct_owner_id,{:exclude_owner=>true})
+    @users = User.find_all_for_select(correct_owner_id, {:exclude_owner => true})
     @page_title = _('Recalculate_invoices')
     @page_icon = "application_go.png"
 
@@ -1463,12 +1463,12 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     end
     type = params[:invoice][:type]
     type = "postpaid" if !(["postpaid", "prepaid", "user"].include?(type))
-    
+
     cond = Confline.get_value("Invoice_allow_recalculate_after_send").to_i == 1 ? '' : ' AND sent_manually = 0 AND sent_email = 0 '
     if type == "user"
-      @invoices = Invoice.find(:all, :include=>[:user], :conditions=>["paid = 0 #{cond} AND user_id = ? AND period_start >= ? AND period_end <= ? AND users.owner_id = ?", params[:user][:id], session_from_date, session_till_date, correct_owner_id ])
+      @invoices = Invoice.find(:all, :include => [:user], :conditions => ["paid = 0 #{cond} AND user_id = ? AND period_start >= ? AND period_end <= ? AND users.owner_id = ?", params[:user][:id], session_from_date, session_till_date, correct_owner_id])
     else
-      @invoices = Invoice.find(:all, :include=>[:user], :conditions=>["paid = 0 #{cond} AND invoice_type = ? AND period_start >= ? AND period_end <= ? AND users.owner_id = ?", type, session_from_date, session_till_date, correct_owner_id])
+      @invoices = Invoice.find(:all, :include => [:user], :conditions => ["paid = 0 #{cond} AND invoice_type = ? AND period_start >= ? AND period_end <= ? AND users.owner_id = ?", type, session_from_date, session_till_date, correct_owner_id])
     end
 
     @period_start = session_from_date
@@ -1483,10 +1483,10 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
         end
       end
       flash[:status] = _('Invoices_recalculated') + ": " + @i.to_s
-      redirect_to :action=>:invoices and return false
+      redirect_to :action => :invoices and return false
     else
       flash[:notice] = _('No_invoice_found_to_recalculate')
-      redirect_to :action=>:invoices_recalculation and return false
+      redirect_to :action => :invoices_recalculation and return false
     end
 
   end
@@ -1497,10 +1497,10 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     @page_icon = "view.png"
 
     if not mor_11_extend?
-      dont_be_so_smart                                                           
+      dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     end
-    @Show_Currency_Selector = 1 
+    @Show_Currency_Selector = 1
     @currency = session[:show_currency]
 
     change_date
@@ -1511,9 +1511,9 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     @valid_status_values = ['paid', 'unpaid', 'all']
     @user_id = financial_statements_user_id(session_options)
     @status = financial_statements_status(session_options)
-    @users = User.find_all_for_select(corrected_user_id,{:exclude_owner=>true})
+    @users = User.find_all_for_select(corrected_user_id, {:exclude_owner => true})
     @options = {:user_id => @user_id, :status => @status}
-    
+
     @show_search = true
 
     if current_user.is_admin? or current_user.is_accountant?
@@ -1526,10 +1526,10 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
     credit_notes = convert_to_user_currency(CreditNote.financial_statements(owner_id, @user_id, @status, @issue_from_date, @issue_till_date, ordinary_user))
     if @status != 'unpaid'
-       @paid_credit_note = get_financial_statement(credit_notes, 'paid') 
+      @paid_credit_note = get_financial_statement(credit_notes, 'paid')
     end
     if @status != 'paid'
-       @unpaid_credit_note = get_financial_statement(credit_notes, 'unpaid') 
+      @unpaid_credit_note = get_financial_statement(credit_notes, 'unpaid')
     end
 
     #invoces do not have price with vat calculated so this method returns information
@@ -1545,7 +1545,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     @paid_payment, @unpaid_payment = Payment.financial_statements(owner_id, @user_id, @status, @issue_from_date, @issue_till_date, ordinary_user, session[:show_currency])
 
     #TODO rename to session options 
-    session[:accounting_statement_options] = @options 
+    session[:accounting_statement_options] = @options
   end
 
 
@@ -1564,13 +1564,13 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 =end
   def financial_statements_user_id(session_options)
     if current_user.usertype == 'user'
-       user_id = current_user.id
-    elsif params[:user_id] and not params[:clear] 
-       user_id = params[:user_id]
+      user_id = current_user.id
+    elsif params[:user_id] and not params[:clear]
+      user_id = params[:user_id]
     elsif session_options and session_options[:user_id] and not params[:clear]
-       user_id = session_options[:user_id]
+      user_id = session_options[:user_id]
     else
-       user_id = nil
+      user_id = nil
     end
   end
 
@@ -1635,7 +1635,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
   def get_financial_statement(statements, status)
     for statement in statements
       if statement.status == status
-        return statement 
+        return statement
       end
     end
     #Return default financial data if required stetement was not found
@@ -1650,18 +1650,18 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
   In any other case everyone can view treyr user's invoices, credit notes and payments.
 =end
   def can_view_financial_statements?
-     if current_user.is_accountant? and (not current_user.accountant_allow_read('can_see_finances') or not current_user.accountant_allow_read('payments_manage') or not current_user.acoutnant_alllow_read('invoices_manage'))
-        return false
-     else
-        return true
-     end
+    if current_user.is_accountant? and (not current_user.accountant_allow_read('can_see_finances') or not current_user.accountant_allow_read('payments_manage') or not current_user.acoutnant_alllow_read('invoices_manage'))
+      return false
+    else
+      return true
+    end
   end
 
   def financial_statements_filter
-     if not can_view_financial_statement?
-        dont_be_so_smart                                                           
-        redirect_to :controller => :callc, :action => :main and return false
-     end
+    if not can_view_financial_statement?
+      dont_be_so_smart
+      redirect_to :controller => :callc, :action => :main and return false
+    end
   end
 
   def subscription_period(sub, period_start, period_end)
@@ -1683,7 +1683,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     MorLog.my_debug("\nChecking user with id: #{user.id}, name: #{nice_user(user)}, type: #{user.usertype}", 1)
 
     use_index = 0
-    MorLog.my_debug("Search with index ? : #{use_index}",1)
+    MorLog.my_debug("Search with index ? : #{use_index}", 1)
     # --- Outgoing calls ---
 
     # find own outgoing (made by this user) calls stats (count and sum price)
@@ -1701,7 +1701,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
     # --- Incoming calls ---
 
-    incoming_received_calls, incoming_received_calls_price = user.incoming_received_calls_stats_in_period(period_start_with_time, period_end_with_time,use_index)
+    incoming_received_calls, incoming_received_calls_price = user.incoming_received_calls_stats_in_period(period_start_with_time, period_end_with_time, use_index)
     MorLog.my_debug("  Incoming RECEIVED calls: #{incoming_received_calls}, for price: #{incoming_received_calls_price}", 1)
 
     incoming_made_calls, incoming_made_calls_price = user.incoming_made_calls_stats_in_period(period_start_with_time, period_end_with_time, use_index)
@@ -1726,7 +1726,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
     use_index = 0
     ind_ex.to_yaml
-    ind_ex.each{|ie| use_index = 1; use_index if ie[:key_name].to_s == 'calldate'} if ind_ex
+    ind_ex.each { |ie| use_index = 1; use_index if ie[:key_name].to_s == 'calldate' } if ind_ex
 
     incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users = call_details_for_user(user, period_start_with_time.strftime("%Y-%m-%d %H:%M:%S"), period_end_with_time.strftime("%Y-%m-%d %H:%M:%S"), use_index)
 
@@ -1767,7 +1767,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
       # --- add resellers users outgoing calls ---
       if (outgoing_calls_by_users_price > 0)
-        invoice.invoicedetails.create(:name => _('Calls_from_users'), :price =>outgoing_calls_by_users_price.to_f, :quantity => outgoing_calls_by_users, :invdet_type => 0)
+        invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => outgoing_calls_by_users_price.to_f, :quantity => outgoing_calls_by_users, :invdet_type => 0)
         price += outgoing_calls_by_users_price.to_f
       end
 
@@ -1857,7 +1857,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
         #my_debug("    Invoice Subscriptions price: #{invd_price.to_s}")
 
         if count_subscription == 1
-          invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price =>invd_price, :quantity => "1")
+          invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invd_price, :quantity => "1")
           price += invd_price.to_f
         end
       end
@@ -1878,19 +1878,30 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
   def invoices_order_by(params, options)
     case params[:order_by].to_s
-    when "user" then  order_by = "users.first_name"
-    when "number" then order_by = "invoices.number"
-    when "invoice_type" then  order_by = "invoices.invoice_type"
-    when "period_start" then  order_by = "invoices.period_start"
-    when "period_end" then  order_by = "invoices.period_end"
-    when "issue_date" then  order_by = "invoices.issue_date"
-    when "sent_email" then  order_by = "invoices.sent_email"
-    when "sent_manually" then  order_by = "invoices.sent_manually"
-    when "paid" then  order_by = "invoices.paid"
-    when "paid_date" then  order_by = "invoices.paid_date"
-    when "price" then  order_by = "invoices.price"
-    else
-      options[:order_by] ? order_by = options[:order_by] : order_by = "users.first_name"
+      when "user" then
+        order_by = "users.first_name"
+      when "number" then
+        order_by = "invoices.number"
+      when "invoice_type" then
+        order_by = "invoices.invoice_type"
+      when "period_start" then
+        order_by = "invoices.period_start"
+      when "period_end" then
+        order_by = "invoices.period_end"
+      when "issue_date" then
+        order_by = "invoices.issue_date"
+      when "sent_email" then
+        order_by = "invoices.sent_email"
+      when "sent_manually" then
+        order_by = "invoices.sent_manually"
+      when "paid" then
+        order_by = "invoices.paid"
+      when "paid_date" then
+        order_by = "invoices.paid_date"
+      when "price" then
+        order_by = "invoices.price"
+      else
+        options[:order_by] ? order_by = options[:order_by] : order_by = "users.first_name"
     end
 
     without = order_by

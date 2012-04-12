@@ -1,65 +1,65 @@
-<% if @status == 0%>
-  <table class="maintable">
-    <tr>
-      <td><%= _("Company name") %></td>
-      <td><%= session[:company] %></td>
-    </tr>
-    <tr>
-      <td><%= _("Designation") %></td>
-      <td><%= _("VoIP") %></td>
-    </tr>
-    <tr>
-      <td><%= _("URL") %></td>
-      <td><%= Web_URL + Web_Dir %></td>
-    </tr>
-    <tr>
-      <td><%= _("Company_Email") %></td>
-      <td><%= session[:company_email] %></td>
-    </tr>
-    <tr>
-      <td><%= _("Amount") %> + <%= _("VAT_Included") %></td>
-      <td><%= @transaction_amount %> <%= @transaction_currency %></td>
-    </tr>    
-    <tr>
-      <td><%= _("Transaction_date") %></td>
-      <td><%= @transaction_date %></td>
-    </tr> 
-    <tr>
-      <td><%= _("Authorization_Code") %></td>
-      <td><%= @auth_code %></td>
-    </tr> 
+<% if @status == 0 %>
+    <table class="maintable">
+      <tr>
+        <td><%= _("Company name") %></td>
+        <td><%= session[:company] %></td>
+      </tr>
+      <tr>
+        <td><%= _("Designation") %></td>
+        <td><%= _("VoIP") %></td>
+      </tr>
+      <tr>
+        <td><%= _("URL") %></td>
+        <td><%= Web_URL + Web_Dir %></td>
+      </tr>
+      <tr>
+        <td><%= _("Company_Email") %></td>
+        <td><%= session[:company_email] %></td>
+      </tr>
+      <tr>
+        <td><%= _("Amount") %> + <%= _("VAT_Included") %></td>
+        <td><%= @transaction_amount %> <%= @transaction_currency %></td>
+      </tr>
+      <tr>
+        <td><%= _("Transaction_date") %></td>
+        <td><%= @transaction_date %></td>
+      </tr>
+      <tr>
+        <td><%= _("Authorization_Code") %></td>
+        <td><%= @auth_code %></td>
+      </tr>
 
-    <tr>
-      <td><%= _("Transaction_Identifier") %></td>
-      <td><%= @transaction_id %></td>
-    </tr> 
-    <tr>
-      <td><%= _("Customer_Name") %></td>
-      <td><%= @customer_name %></td>
-    </tr>
-    <tr>
-      <td><%= _("Operation_Type") %></td>
-      <td><%= _("Balance_Update") %></td>
-    </tr>
-    <tr>
-      <td><%= _("Description") %></td>
-      <td><%= @payment_details %></td>
-    </tr>
-  </table>
+      <tr>
+        <td><%= _("Transaction_Identifier") %></td>
+        <td><%= @transaction_id %></td>
+      </tr>
+      <tr>
+        <td><%= _("Customer_Name") %></td>
+        <td><%= @customer_name %></td>
+      </tr>
+      <tr>
+        <td><%= _("Operation_Type") %></td>
+        <td><%= _("Balance_Update") %></td>
+      </tr>
+      <tr>
+        <td><%= _("Description") %></td>
+        <td><%= @payment_details %></td>
+      </tr>
+    </table>
 <% else %>
-  <table class="maintable">
-    <tr>
-      <td><%= _("Status") %></td>
-      <td><%= @status %></td>
-    </tr>
-    <tr>
-      <td><%= _("Error_code") %></td>
-      <td><%= @error_code %></td>
-    </tr>
-    <tr>
-      <td><%= _("Description") %></td>
-      <td><%= @description %></td>
-    </tr>
+    <table class="maintable">
+      <tr>
+        <td><%= _("Status") %></td>
+        <td><%= @status %></td>
+      </tr>
+      <tr>
+        <td><%= _("Error_code") %></td>
+        <td><%= @error_code %></td>
+      </tr>
+      <tr>
+        <td><%= _("Description") %></td>
+        <td><%= @description %></td>
+      </tr>
 
-  </table>
+    </table>
 <% end %>

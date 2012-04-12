@@ -50,9 +50,9 @@ class Google4R::Checkout::ChargeOrderCommandTest < Test::Unit::TestCase
     @sample_no_amount=%Q{<?xml version='1.0' encoding='UTF-8'?>
 <charge-order xmlns='http://checkout.google.com/schema/2' google-order-number='1234-5678-ABCD-1234'/>}
   end
-  
+
   def test_behaves_correctly
-    [ :google_order_number, :amount ].each do |symbol|
+    [:google_order_number, :amount].each do |symbol|
       assert_respond_to @command, symbol
     end
   end

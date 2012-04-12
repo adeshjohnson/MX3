@@ -56,13 +56,13 @@ class Action < ActiveRecord::Base
       user = User.find(:first, :conditions => ["id = ?", user])
     end
     detai = {
-      :date => details[:date].blank? ? Time.now : details[:date] ,
-      :data => "",
-      :data2 => "",
-      :user_id => user.id,
-      :target_id => nil,
-      :target_type => "",
-      :action => ""
+        :date => details[:date].blank? ? Time.now : details[:date],
+        :data => "",
+        :data2 => "",
+        :user_id => user.id,
+        :target_id => nil,
+        :target_type => "",
+        :action => ""
     }.merge(details)
     if user and !user.id.blank?
       act = Action.new
@@ -151,10 +151,10 @@ class Action < ActiveRecord::Base
   def Action.validated_user(user_id, old_email)
   end
 
-  def  Action.set_first_call_for_user(from, till)
-    calls = Call.count(:all, :select=>"distinct(user_id)" , :conditions=>["calls.calldate <= '#{till}' AND user_id >= 0"])
+  def Action.set_first_call_for_user(from, till)
+    calls = Call.count(:all, :select => "distinct(user_id)", :conditions => ["calls.calldate <= '#{till}' AND user_id >= 0"])
 
-    actions = Action.count(:all, :select=>"distinct(user_id)", :conditions=>["action='first_call' AND date <= '#{till}'"])
+    actions = Action.count(:all, :select => "distinct(user_id)", :conditions => ["action='first_call' AND date <= '#{till}'"])
     if calls.to_i > actions.to_i
       sql = "select calls.id, calldate, card_id, user_id from calls
                   JOIN (SELECT users.id FROM users
@@ -165,46 +165,55 @@ class Action < ActiveRecord::Base
                   ORDER BY calls.id ASC"
       res3 = ActiveRecord::Base.connection.select_all(sql)
       for r in res3
-        Action.add_action_hash(r['user_id'], {:action=>"first_call", :date=> r['calldate'] , :data=>r['id'], :data2=>r['card_id']})
+        Action.add_action_hash(r['user_id'], {:action => "first_call", :date => r['calldate'], :data => r['id'], :data2 => r['card_id']})
       end
     end
-    calls_size = Action.count(:all, :select=>"distinct(user_id)", :conditions=>["action='first_call' AND date BETWEEN '#{from}' AND '#{till}'"])
+    calls_size = Action.count(:all, :select => "distinct(user_id)", :conditions => ["action='first_call' AND date BETWEEN '#{from}' AND '#{till}'"])
     return calls_size
   end
 
 
   def Action.actions_order_by(options)
     case options[:order_by].to_s.strip.to_s
-    when "user"  then     order_by = "users.first_name"
-    when "type"  then     order_by = "actions.action"
-    when "date"  then     order_by = "actions.date"
-    when "data"  then     order_by = "actions.data"
-    when "data2" then     order_by = "actions.data2"
-    when "data3" then     order_by = "actions.data3"
-    when "data4" then     order_by = "actions.data4"
-    when "processed" then order_by = "actions.processed"
-    when "target" then    order_by = "actions.target_type, actions.target_id "
-    else
-      order_by = options[:order_by] ? options[:order_by] : "actions.action"
-      options[:order_desc] = options[:order_desc] ? options[:order_desc] : 0
+      when "user" then
+        order_by = "users.first_name"
+      when "type" then
+        order_by = "actions.action"
+      when "date" then
+        order_by = "actions.date"
+      when "data" then
+        order_by = "actions.data"
+      when "data2" then
+        order_by = "actions.data2"
+      when "data3" then
+        order_by = "actions.data3"
+      when "data4" then
+        order_by = "actions.data4"
+      when "processed" then
+        order_by = "actions.processed"
+      when "target" then
+        order_by = "actions.target_type, actions.target_id "
+      else
+        order_by = options[:order_by] ? options[:order_by] : "actions.action"
+        options[:order_desc] = options[:order_desc] ? options[:order_desc] : 0
     end
     order_by += " ASC" if options[:order_desc].to_i == 0 and order_by != ""
-    order_by += " DESC"if options[:order_desc].to_i == 1 and order_by != ""
+    order_by += " DESC" if options[:order_desc].to_i == 1 and order_by != ""
     return order_by
   end
 
-  
+
   def Action.condition_for_action_log_list(current_user, a1, a2, s_int_ch, options)
     #conditions
     cond_arr = []
     join = ""
-   current_user.usertype == 'admin' ? cond = [] : cond = ["actions.action NOT in ('bad_login')"]
+    current_user.usertype == 'admin' ? cond = [] : cond = ["actions.action NOT in ('bad_login')"]
 
     if current_user.usertype == 'reseller'
       cond << "users.owner_id = ?"
       cond_arr << current_user.id
     end
-    
+
     if !s_int_ch or s_int_ch.to_i != 1
       cond << "actions.date BETWEEN ? AND ?"
       cond_arr << a1.to_s + ' 00:00:00'
@@ -250,6 +259,6 @@ class Action < ActiveRecord::Base
 
     join << " JOIN users on (actions.user_id = users.id)"
 
-    return cond,cond_arr,join
+    return cond, cond_arr, join
   end
 end

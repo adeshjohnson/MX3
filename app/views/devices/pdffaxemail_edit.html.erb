@@ -7,14 +7,14 @@
 <br>
 
 <table class="maintable" width="20%">
-		<th align="left" colspan=2> 	<%= _('Edit_email') %> 		</th>
+  <th align="left" colspan=2>     <%= _('Edit_email') %>         </th>
 
-    <%= form_tag :action => 'pdffaxemail_update', :id => @email.id do %>
-	<tr>
-		<td> 	<%= text_field_tag 'email', @email.email, "class" => "input", :size => "30", :maxlength => "50"  %> 		</td>
-		<td>  <%= image_submit_tag 'icons/edit.png', :title => _('Edit') %>    </td>
-	</tr>
-	<% end %>
+  <%= form_tag :action => 'pdffaxemail_update', :id => @email.id do %>
+      <tr>
+        <td>     <%= text_field_tag 'email', @email.email, "class" => "input", :size => "30", :maxlength => "50" %>         </td>
+        <td>  <%= image_submit_tag 'icons/edit.png', :title => _('Edit') %>    </td>
+      </tr>
+  <% end %>
 </table>
 
 <br><br>

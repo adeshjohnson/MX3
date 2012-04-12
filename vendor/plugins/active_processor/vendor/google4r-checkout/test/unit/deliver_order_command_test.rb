@@ -50,7 +50,7 @@ class Google4R::Checkout::DeliverOrderCommandTest < Test::Unit::TestCase
   end
 
   def test_behaves_correctly
-    [ :google_order_number, :send_email ].each do |symbol|
+    [:google_order_number, :send_email].each do |symbol|
       assert_respond_to @command, symbol
     end
   end

@@ -34,39 +34,39 @@ module ActiveProcessor
         end
         tax = gross - money
         @payment = OpenStruct.new({
-            :money => money,
-            :orig_amount => orig.to_f,
-            :orig_with_tax => round_to_cents(orig_with_tax).to_f,
-            :orig_tax => 0,
-            :tax => round_to_cents(tax).to_f,
-            :auth_config => {},
-            :authorize => {},
-            :ip => ip,
-            :currency => params[@engine][@name]['currency'],
-            :response => {}
-          })
+                                      :money => money,
+                                      :orig_amount => orig.to_f,
+                                      :orig_with_tax => round_to_cents(orig_with_tax).to_f,
+                                      :orig_tax => 0,
+                                      :tax => round_to_cents(tax).to_f,
+                                      :auth_config => {},
+                                      :authorize => {},
+                                      :ip => ip,
+                                      :currency => params[@engine][@name]['currency'],
+                                      :response => {}
+                                  })
         @payment.orig_tax = (@payment.orig_with_tax - @payment.orig_amount)
         @payment.amount = (@payment.money + @payment.tax).ceil
 
         # we choose only those fields for authentication which have attribute for=authentication in configuration
-        @fields['config'].dup.delete_if{ |item, conf| conf['for'] != "authentication" }.each {|field, configuration|
+        @fields['config'].dup.delete_if { |item, conf| conf['for'] != "authentication" }.each { |field, configuration|
           @payment.auth_config[field.to_sym] = configuration['html_options']['value']
         }
         @payment.auth_config[:test] = true if @fields['config']['test']['html_options']['value'] == "1"
         gw = @instance.new(@payment.auth_config)
-        @fields['form'].dup.delete_if{ |field, conf| conf['for'] != "authorization" }.each_pair{ |field, config|
+        @fields['form'].dup.delete_if { |field, conf| conf['for'] != "authorization" }.each_pair { |field, config|
           field.match(/^(.*)\[(.*)\]$/)
-          @payment.authorize.deep_merge!({ $1.to_sym => { $2.to_sym => params[@engine][@name][$1][$2] } })
+          @payment.authorize.deep_merge!({$1.to_sym => {$2.to_sym => params[@engine][@name][$1][$2]}})
         }
 
         ActiveProcessor.log("paying with gateway: #{@name} from #{@payment.ip}. Original amount: #{@payment.orig_amount} #{@payment.currency} (with tax: #{@payment.orig_with_tax}), converted amount in cents #{@payment.money} (tax: #{@payment.tax}) #{params[@engine][@name]['default_currency']}")
 
         begin
           if @name == 'authorize_net'
-            @payment.response = gw.purchase(@payment.amount, @credit_card, { :ip => @payment.ip }.merge!(@payment.authorize).merge!(params))
+            @payment.response = gw.purchase(@payment.amount, @credit_card, {:ip => @payment.ip}.merge!(@payment.authorize).merge!(params))
           else
-            @payment.response = gw.authorize(@payment.amount, @credit_card, { :ip => @payment.ip }.merge!(@payment.authorize))
-          end                
+            @payment.response = gw.authorize(@payment.amount, @credit_card, {:ip => @payment.ip}.merge!(@payment.authorize))
+          end
           if @payment.response.success?
             ActiveProcessor.log("successfully payed amount: #{@payment.orig_amount} #{@payment.currency} (authorization: #{@payment.response.authorization})")
             gw.capture(@payment.amount, @payment.response.authorization)
@@ -89,13 +89,13 @@ module ActiveProcessor
 
       def valid?(params)
         for param, value in params[@engine][@name]
-          set(:form, { param => value }) # field validations
+          set(:form, {param => value}) # field validations
         end
         # CC and misc validations
         @credit_card = ActiveMerchant::Billing::CreditCard.new(
-          params[@engine][@name].except('amount', 'with_tax', 'without_tax', 'separator', 'currency', 'default_currency').delete_if{ |key,value|
-            !value.kind_of?(String)
-          }
+            params[@engine][@name].except('amount', 'with_tax', 'without_tax', 'separator', 'currency', 'default_currency').delete_if { |key, value|
+              !value.kind_of?(String)
+            }
         )
 
         unless @credit_card.valid?

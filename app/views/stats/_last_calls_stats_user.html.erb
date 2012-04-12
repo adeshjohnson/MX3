@@ -1,133 +1,135 @@
 <%= form_tag :action => params[:action] do %>
-  <div id="search_details" <%= "style='display:none;'" if @options[:search_on] == 0 %>>
+    <div id="search_details" <%= "style='display:none;'" if @options[:search_on] == 0 %>>
     <span style="text-align: right;FLOAT: right; ">
-      <%= link_to b_cross + _('Clear_search'), :action => 'last_calls_stats', :clear=>1%>
+      <%= link_to b_cross + _('Clear_search'), :action => 'last_calls_stats', :clear => 1 %>
     </span>
-    <br />
-    <%= hidden_field_tag 'search_on', 1  %>
+      <br/>
+      <%= hidden_field_tag 'search_on', 1 %>
 
-    <%= _('From') %>: <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
-    &nbsp;&nbsp;<%= _('to') %>: <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
-    <br />
-    <br />
-    <%= _('Status') %>:
-    <% call_types = [[_('All'), "all"], [_('Answered'), "answered"], [_('No_Answer'), "no answer"], [_('Failed'), "failed"], [_('Busy'), "busy"]] %>
-    <%= select_tag("s_call_type", options_for_select(call_types, @options[:s_call_type].to_s))  %>
+      <%= _('From') %>
+      : <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+      &nbsp;&nbsp;<%= _('to') %>
+      : <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+      <br/>
+      <br/>
+      <%= _('Status') %>:
+      <% call_types = [[_('All'), "all"], [_('Answered'), "answered"], [_('No_Answer'), "no answer"], [_('Failed'), "failed"], [_('Busy'), "busy"]] %>
+      <%= select_tag("s_call_type", options_for_select(call_types, @options[:s_call_type].to_s)) %>
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <%= _('Device') %>:
-    <span id="s_device_span"><%= select_tag("s_device", options_for_select([[_('All'), "all"]] + @devices.map{|dev| [nice_device(dev, {:image => false}) ,dev.id.to_s ]}, @options[:s_device].to_s)) %></span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= _('Device') %>:
+      <span id="s_device_span"><%= select_tag("s_device", options_for_select([[_('All'), "all"]] + @devices.map { |dev| [nice_device(dev, {:image => false}), dev.id.to_s] }, @options[:s_device].to_s)) %></span>
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <%= _("Destination")%>:
-    <%= text_field_tag("s_destination", h(@options[:s_destination].to_s))%>
-    <% if mor_11_extend? %>
-      <%= _('Caller_ID') %>:
-      <%= text_field_tag("s_caller_id", h(@options[:caller_id].to_s))%>
-    <% end %>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= _("Destination") %>:
+      <%= text_field_tag("s_destination", h(@options[:s_destination].to_s)) %>
+      <% if mor_11_extend? %>
+          <%= _('Caller_ID') %>:
+          <%= text_field_tag("s_caller_id", h(@options[:caller_id].to_s)) %>
+      <% end %>
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
-  </div>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
+    </div>
 <% end %>
-<br />
+<br/>
 <% if @calls.size > 0 %>
-  <%= link_to b_csv + _('Export_to_CSV'), :action => :last_calls_stats, :id => @user.id, :csv=>1%>&nbsp;&nbsp;
-  <%= link_to b_pdf + _('Export_to_PDF'), :action => :last_calls_stats, :id => @user.id, :pdf=>1%>
+    <%= link_to b_csv + _('Export_to_CSV'), :action => :last_calls_stats, :id => @user.id, :csv => 1 %>&nbsp;&nbsp;
+    <%= link_to b_pdf + _('Export_to_PDF'), :action => :last_calls_stats, :id => @user.id, :pdf => 1 %>
 <% end %>
-<br />
-<br />
-<%=page_select_header(@options[:page], @total_pages, nil, @options)%>
+<br/>
+<br/>
+<%= page_select_header(@options[:page], @total_pages, nil, @options) %>
 
 <% if @calls and @calls.size > 0 %>
-  <table width="100%" class="maintable">
-    <tr>
-      <th align="center"><%=nice_list_order('time',_('Time') , @options)%></th>
-      <th align="left"><%=nice_list_order('src',_('called_from'), @options)%></th>
-      <th align="left"><%=nice_list_order('dst',_('called_to'), @options)%></th>
-      <th align="right"><%=nice_list_order('prefix',_('Prefix_used'), @options)%></th>
-      <th align="center">
-        <% if @call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all"%>
-          <%=nice_list_order('nice_billsec', _('Duration'), @options)%>
-        <% else %>
-          <%= _('holdtime')%>
-        <% end %>
-      </th>
-
-      <% if @call_type != "answered" %>
-        <th align="left"><%=nice_list_order('hgc', _('hangup_cause'), @options)%></th>
-      <% end %>
-
-      <% if not (@call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all")%>
-        <th> 		  <%= _('processed') %>	    </th>
-      <% else %>
-
-        <% if @user.show_billing_info == 1 and can_see_finances?%>
-          <th align="right"> 		  <%= _('Price') %>	    </th>
-        <% end %>
-
-      <% end %>
-    </tr>
-    <% @calls.each_with_index { |call, i| %>
-      <%
-      call.processed == 0 ? text_class="n" : text_class="n_disabled" -%>
-      <tr class="row<%= (i % 2 + 1).to_s %>">
-        <td id="calldate_<%= call.id %>" class="<%= text_class %>" align="center"><%= nice_date_time call.calldate %></td>
-        <td id="src_<%= call.id %>" class="<%= text_class %>"><%= h(nice_src(call)) %></td>
-
-        <% if @show_destination %>
-          <%= show_call_dst(call, text_class) %>
-        <% end %>
-        <td id="prefix_<%=call.id%>" align="right"><%=call.prefix.to_s%></td>
-        <%= call_duration(call, text_class, @call_type )%>
+    <table width="100%" class="maintable">
+      <tr>
+        <th align="center"><%= nice_list_order('time', _('Time'), @options) %></th>
+        <th align="left"><%= nice_list_order('src', _('called_from'), @options) %></th>
+        <th align="left"><%= nice_list_order('dst', _('called_to'), @options) %></th>
+        <th align="right"><%= nice_list_order('prefix', _('Prefix_used'), @options) %></th>
+        <th align="center">
+          <% if @call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all" %>
+              <%= nice_list_order('nice_billsec', _('Duration'), @options) %>
+          <% else %>
+              <%= _('holdtime') %>
+          <% end %>
+        </th>
 
         <% if @call_type != "answered" %>
-          <td id="disposition_<%= call.id %>"><%= call.disposition %></td>
+            <th align="left"><%= nice_list_order('hgc', _('hangup_cause'), @options) %></th>
         <% end %>
 
-        <% if not (@call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all")%>
-          <%= form_tag(:action => 'call_list', :calltype => @call_type) do %>
-            <td id="processed_<%= call.id %>" align="center" valign="middle" class="<%= text_class %>">
-              <%= hidden_field_tag "processed", call.id %>
-              <% if call.processed == 0 %>
-                <%= submit_tag _('processed'), :disable_with=>_('Processing..')%>
-              <% else %>
-                <%= submit_tag _('cancel'), :disable_with=>_('Processing..')%>
-              <% end %>
-            </td>
-          <% end %>
+        <% if not (@call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all") %>
+            <th>           <%= _('processed') %>        </th>
         <% else %>
-          <% if @user.show_billing_info == 1 %>
-            <%# price =  call.user_price_exrate.to_f + call.did_price_exrate.to_f + call.did_inc_price_exrate.to_f %>
-            <td id="rate_<%= call.id %>" align="right"><%= nice_number(call.user_price_exrate.to_f) %></td>
-          <% end %>
+
+            <% if @user.show_billing_info == 1 and can_see_finances? %>
+                <th align="right">           <%= _('Price') %>        </th>
+            <% end %>
+
         <% end %>
       </tr>
-    <% } %>
-    <tr>
-      <th id="total" align="left" colspan="2"><%= _("Total") %>:</th>
+      <% @calls.each_with_index { |call, i| %>
+          <%
+             call.processed == 0 ? text_class="n" : text_class="n_disabled" -%>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <td id="calldate_<%= call.id %>" class="<%= text_class %>" align="center"><%= nice_date_time call.calldate %></td>
+            <td id="src_<%= call.id %>" class="<%= text_class %>"><%= h(nice_src(call)) %></td>
 
-      <% if @show_destination %>
-        <th></th>
-      <% end %>
+            <% if @show_destination %>
+                <%= show_call_dst(call, text_class) %>
+            <% end %>
+            <td id="prefix_<%= call.id %>" align="right"><%= call.prefix.to_s %></td>
+            <%= call_duration(call, text_class, @call_type) %>
 
-      <th></th>
-      <th id="total_billsec" align="center"><%= nice_time(@total_calls_stats.total_duration) %></th>
-      <% if @call_type != "answered" %>
-        <th></th>
-      <% end %>
-      <% if not (@call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all")%>
-        <th></th>
-      <% else %>
-        <% if @user.show_billing_info == 1 and can_see_finances?%>
-          <th id="total_user_price" align="right"><%= nice_number(@total_calls_stats.total_user_price_with_dids) %></th>
+            <% if @call_type != "answered" %>
+                <td id="disposition_<%= call.id %>"><%= call.disposition %></td>
+            <% end %>
+
+            <% if not (@call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all") %>
+                <%= form_tag(:action => 'call_list', :calltype => @call_type) do %>
+                    <td id="processed_<%= call.id %>" align="center" valign="middle" class="<%= text_class %>">
+                      <%= hidden_field_tag "processed", call.id %>
+                      <% if call.processed == 0 %>
+                          <%= submit_tag _('processed'), :disable_with => _('Processing..') %>
+                      <% else %>
+                          <%= submit_tag _('cancel'), :disable_with => _('Processing..') %>
+                      <% end %>
+                    </td>
+                <% end %>
+            <% else %>
+                <% if @user.show_billing_info == 1 %>
+                    <%# price =  call.user_price_exrate.to_f + call.did_price_exrate.to_f + call.did_inc_price_exrate.to_f %>
+                    <td id="rate_<%= call.id %>" align="right"><%= nice_number(call.user_price_exrate.to_f) %></td>
+                <% end %>
+            <% end %>
+          </tr>
+      <% } %>
+      <tr>
+        <th id="total" align="left" colspan="2"><%= _("Total") %>:</th>
+
+        <% if @show_destination %>
+            <th></th>
         <% end %>
-      <% end %>
-    </tr>
-  </table>
-  <br />
-  <%=page_select_header(@options[:page], @total_pages, nil, @options)%>
+
+        <th></th>
+        <th id="total_billsec" align="center"><%= nice_time(@total_calls_stats.total_duration) %></th>
+        <% if @call_type != "answered" %>
+            <th></th>
+        <% end %>
+        <% if not (@call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all") %>
+            <th></th>
+        <% else %>
+            <% if @user.show_billing_info == 1 and can_see_finances? %>
+                <th id="total_user_price" align="right"><%= nice_number(@total_calls_stats.total_user_price_with_dids) %></th>
+            <% end %>
+        <% end %>
+      </tr>
+    </table>
+    <br/>
+    <%= page_select_header(@options[:page], @total_pages, nil, @options) %>
 <% else %>
-  <br />
-  <%= _('No_calls') %>...
-<% end%>
+    <br/>
+    <%= _('No_calls') %>...
+<% end %>

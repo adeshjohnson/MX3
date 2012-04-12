@@ -34,13 +34,16 @@ module Net
 
   # Non-authentication POP3 protocol error
   # (reply code "-ERR", except authentication).
-  class POPError < ProtocolError; end
+  class POPError < ProtocolError;
+  end
 
   # POP3 authentication error.
-  class POPAuthenticationError < ProtoAuthError; end
+  class POPAuthenticationError < ProtoAuthError;
+  end
 
   # Unexpected response from the server.
-  class POPBadResponse < POPError; end
+  class POPBadResponse < POPError;
+  end
 
   #
   # = Net::POP3
@@ -211,13 +214,13 @@ module Net
     def POP3.default_pop3_port
       110
     end
-    
+
     # The default port for POP3S connections, port 995
     def POP3.default_pop3s_port
       995
     end
 
-    def POP3.socket_type   #:nodoc: obsolete
+    def POP3.socket_type #:nodoc: obsolete
       Net::InternetMessageIO
     end
 
@@ -261,9 +264,9 @@ module Net
     #     end
     #
     def POP3.foreach(address, port = nil,
-                     account = nil, password = nil,
-                     isapop = false, &block)  # :yields: message
-      start(address, port, account, password, isapop) {|pop|
+        account = nil, password = nil,
+        isapop = false, &block) # :yields: message
+      start(address, port, account, password, isapop) { |pop|
         pop.each_mail(&block)
       }
     end
@@ -282,9 +285,9 @@ module Net
     #     end
     #
     def POP3.delete_all(address, port = nil,
-                        account = nil, password = nil,
-                        isapop = false, &block)
-      start(address, port, account, password, isapop) {|pop|
+        account = nil, password = nil,
+        isapop = false, &block)
+      start(address, port, account, password, isapop) { |pop|
         pop.delete_all(&block)
       }
     end
@@ -304,8 +307,8 @@ module Net
     #                         'YourAccount', 'YourPassword', true)
     #
     def POP3.auth_only(address, port = nil,
-                       account = nil, password = nil,
-                       isapop = false)
+        account = nil, password = nil,
+        isapop = false)
       new(address, port, isapop).auth_only account, password
     end
 
@@ -393,11 +396,11 @@ module Net
     #    end
     #
     def POP3.start(address, port = nil,
-                   account = nil, password = nil,
-                   isapop = false, &block)   # :yield: pop
+        account = nil, password = nil,
+        isapop = false, &block) # :yield: pop
       new(address, port, isapop).start(account, password, &block)
     end
-    
+
     # Creates a new POP3 object.
     #
     # +address+ is the hostname or ip address of your POP3 server.
@@ -413,7 +416,7 @@ module Net
       @ssl_params = POP3.ssl_params
       @port = port
       @apop = isapop
-      
+
       @command = nil
       @socket = nil
       @started = false
@@ -435,7 +438,7 @@ module Net
     def use_ssl?
       return !@ssl_params.nil?
     end
-   
+
     # call-seq:
     #    Net::POP#enable_ssl(params = {})
     #
@@ -452,7 +455,7 @@ module Net
         @port = port || @port
       end
     end
-    
+
     def disable_ssl
       @ssl_params = nil
     end
@@ -508,7 +511,7 @@ module Net
       @started
     end
 
-    alias active? started?   #:nodoc: obsolete
+    alias active? started? #:nodoc: obsolete
 
     # Starts a POP3 session.
     #
@@ -564,10 +567,12 @@ module Net
         @command = nil
       end
     end
+
     private :do_start
 
     def on_connect
     end
+
     private :on_connect
 
     # Finishes a POP3 session and closes TCP connection.
@@ -587,6 +592,7 @@ module Net
       @socket.close if @socket and not @socket.closed?
       @socket = nil
     end
+
     private :do_finish
 
     def command
@@ -594,6 +600,7 @@ module Net
                                       if not @socket or @socket.closed?
       @command
     end
+
     private :command
 
     #
@@ -628,7 +635,7 @@ module Net
         return []
       end
 
-      @mails = command().list.map {|num, size|
+      @mails = command().list.map { |num, size|
         POPMail.new(num, size, self, command())
       }
       @mails.dup
@@ -642,7 +649,7 @@ module Net
     #   end
     #
     # This method raises a POPError if an error occurs.
-    def each_mail(&block)  # :yield: message
+    def each_mail(&block) # :yield: message
       mails().each(&block)
     end
 
@@ -683,20 +690,20 @@ module Net
       end
     end
 
-    def set_all_uids   #:nodoc: internal use only (called from POPMail#uidl)
+    def set_all_uids #:nodoc: internal use only (called from POPMail#uidl)
       uidl = command().uidl
-      @mails.each {|m| m.uid = uidl[m.number] }
+      @mails.each { |m| m.uid = uidl[m.number] }
     end
 
     def logging(msg)
       @debug_output << msg + "\n" if @debug_output
     end
 
-  end   # class POP3
+  end # class POP3
 
   # class aliases
   POP = POP3
-  POPSession  = POP3
+  POPSession = POP3
   POP3Session = POP3
 
   #
@@ -719,7 +726,7 @@ module Net
   #
   class POPMail
 
-    def initialize(num, len, pop, cmd)   #:nodoc:
+    def initialize(num, len, pop, cmd) #:nodoc:
       @number = num
       @length = len
       @pop = pop
@@ -778,7 +785,7 @@ module Net
     #
     # This method raises a POPError if an error occurs.
     #
-    def pop( dest = '', &block ) # :yield: message_chunk
+    def pop(dest = '', &block) # :yield: message_chunk
       if block_given?
         @command.retr(@number, &block)
         nil
@@ -790,8 +797,8 @@ module Net
       end
     end
 
-    alias all pop    #:nodoc: obsolete
-    alias mail pop   #:nodoc: obsolete
+    alias all pop #:nodoc: obsolete
+    alias mail pop #:nodoc: obsolete
 
     # Fetches the message header and +lines+ lines of body. 
     #
@@ -839,7 +846,7 @@ module Net
       @deleted = true
     end
 
-    alias delete! delete    #:nodoc: obsolete
+    alias delete! delete #:nodoc: obsolete
 
     # True if the mail has been deleted.
     def deleted?
@@ -858,14 +865,14 @@ module Net
 
     alias uidl unique_id
 
-    def uid=(uid)   #:nodoc: internal use only
+    def uid=(uid) #:nodoc: internal use only
       @uid = uid
     end
 
-  end   # class POPMail
+  end # class POPMail
 
 
-  class POP3Command   #:nodoc: internal use only
+  class POP3Command #:nodoc: internal use only
 
     def initialize(sock)
       @socket = sock
@@ -903,8 +910,8 @@ module Net
         list = []
         @socket.each_list_item do |line|
           m = /\A(\d+)[ \t]+(\d+)/.match(line) or
-                  raise POPBadResponse, "bad response: #{line}"
-          list.push  [m[1].to_i, m[2].to_i]
+              raise POPBadResponse, "bad response: #{line}"
+          list.push [m[1].to_i, m[2].to_i]
         end
         return list
       }
@@ -913,7 +920,7 @@ module Net
     def stat
       res = check_response(critical { get_response('STAT') })
       m = /\A\+OK\s+(\d+)\s+(\d+)/.match(res) or
-              raise POPBadResponse, "wrong response format: #{res}"
+          raise POPBadResponse, "wrong response format: #{res}"
       [m[1].to_i, m[2].to_i]
     end
 
@@ -934,7 +941,7 @@ module Net
         @socket.each_message_chunk(&block)
       }
     end
-    
+
     def dele(num)
       check_response(critical { get_response('DELE %d', num) })
     end
@@ -996,6 +1003,6 @@ module Net
       end
     end
 
-  end   # class POP3Command
+  end # class POP3Command
 
-end   # module Net
+end # module Net

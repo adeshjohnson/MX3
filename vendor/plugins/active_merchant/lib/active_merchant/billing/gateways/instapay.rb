@@ -16,8 +16,8 @@ module ActiveMerchant #:nodoc:
 
       # The name of the gateway
       self.display_name = 'InstaPay'
-      
-      SUCCESS         = "Accepted"
+
+      SUCCESS = "Accepted"
       SUCCESS_MESSAGE = "The transaction has been approved"
 
       def initialize(options = {})
@@ -48,71 +48,71 @@ module ActiveMerchant #:nodoc:
 
         commit('ns_quicksale_cc', post)
       end
-      
+
       def capture(money, authorization, options = {})
         post = {}
         add_amount(post, money)
-        add_reference(post, authorization)        
+        add_reference(post, authorization)
         commit('ns_quicksale_cc', post)
       end
 
       private
-      
+
       def add_amount(post, money)
         post[:amount] = amount(money)
       end
-      
+
       def add_reference(post, reference)
         post[:postonly] = reference
       end
-        
+
       def add_customer_data(post, options)
-        post[:ci_email]       = options[:email]
+        post[:ci_email] = options[:email]
         post["ci_IP Address"] = options[:ip]
       end
 
       def add_address(post, options)
         if address = options[:billing_address] || options[:address]
-          post[:ci_billaddr1]   = address[:address1]
-          post[:ci_billaddr2]   = address[:address2]
-          post[:ci_billcity]    = address[:city]
-          post[:ci_billstate]   = address[:state]
-          post[:ci_billzip]     = address[:zip]
+          post[:ci_billaddr1] = address[:address1]
+          post[:ci_billaddr2] = address[:address2]
+          post[:ci_billcity] = address[:city]
+          post[:ci_billstate] = address[:state]
+          post[:ci_billzip] = address[:zip]
           post[:ci_billcountry] = address[:country]
-          post[:ci_phone]       = address[:phone]
+          post[:ci_phone] = address[:phone]
         end
 
         if address = options[:shipping_address]
-          post[:ci_shipaddr1]   = address[:address1]
-          post[:ci_shipaddr2]   = address[:address2]
-          post[:ci_shipcity]    = address[:city]
-          post[:ci_shipstate]   = address[:state]
-          post[:ci_shipzip]     = address[:zip]
-          post[:ci_shipcountry] = address[:country]  
+          post[:ci_shipaddr1] = address[:address1]
+          post[:ci_shipaddr2] = address[:address2]
+          post[:ci_shipcity] = address[:city]
+          post[:ci_shipstate] = address[:state]
+          post[:ci_shipzip] = address[:zip]
+          post[:ci_shipcountry] = address[:country]
         end
       end
 
       def add_invoice(post, options)
         post[:merchantordernumber] = options[:order_id]
-        post[:ci_memo]             = options[:description]
-        post[:pocustomerrefid]     = options[:invoice]
+        post[:ci_memo] = options[:description]
+        post[:pocustomerrefid] = options[:invoice]
       end
 
       def add_creditcard(post, creditcard)
-        post[:ccnum]   = creditcard.number
-        post[:expmon]  = format(creditcard.month, :two_digits)
-        post[:cvv2]    = creditcard.verification_value if creditcard.verification_value?
+        post[:ccnum] = creditcard.number
+        post[:expmon] = format(creditcard.month, :two_digits)
+        post[:cvv2] = creditcard.verification_value if creditcard.verification_value?
         post[:expyear] = creditcard.year
-        post[:ccname]  = creditcard.name
+        post[:ccname] = creditcard.name
       end
 
       def parse(body)
         results = {}
         fields = body.split("\r\n")
-        
-        response = fields[1].split('=')        
+
+        response = fields[1].split('=')
         response_data = response[1].split(':')
-        
+
         if response[0] == SUCCESS
           results[:success] = true
           results[:message] = SUCCESS_MESSAGE
@@ -139,20 +139,20 @@ module ActiveMerchant #:nodoc:
       end
 
       def commit(action, parameters)
-        data = ssl_post GATEWAY_URL , post_data(action, parameters)
+        data = ssl_post GATEWAY_URL, post_data(action, parameters)
         response = parse(data)
 
-        Response.new(response[:success] , response[:message], response,
-          :authorization => response[:transaction_id],
-          :avs_result => { :code => response[:avs_result] },
-          :cvv_result => response[:cvv_result]
+        Response.new(response[:success], response[:message], response,
+                     :authorization => response[:transaction_id],
+                     :avs_result => {:code => response[:avs_result]},
+                     :cvv_result => response[:cvv_result]
         )
       end
 
       def post_data(action, parameters = {})
         post = {}
         post[:acctid] = @options[:login]
-        if(@options[:password])
+        if (@options[:password])
           post[:merchantpin] = @options[:password]
         end
         post[:action] = action

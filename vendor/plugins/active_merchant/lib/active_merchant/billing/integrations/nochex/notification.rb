@@ -12,7 +12,7 @@ module ActiveMerchant #:nodoc:
 
           def complete?
             status == 'Completed'
-          end 
+          end
 
           # Id of the order we passed to Nochex
           def item_id
@@ -26,7 +26,7 @@ module ActiveMerchant #:nodoc:
           def currency
             'GBP'
           end
-  
+
           # When was this payment received by the client. 
           def received_at
             # U.K. Format: 27/09/2006 22:30:54
@@ -38,10 +38,10 @@ module ActiveMerchant #:nodoc:
           def payer_email
             params['from_email']
           end
-         
+
           def receiver_email
             params['to_email']
-          end 
+          end
 
           def security_key
             params['security_key']
@@ -76,17 +76,17 @@ module ActiveMerchant #:nodoc:
           #       ... log possible hacking attempt ...
           #     end
           def acknowledge
-             payload =  raw
+            payload = raw
 
-             response = ssl_post(Nochex.notification_confirmation_url, payload, 
-               'Content-Length' => "#{payload.size}",
-               'User-Agent'     => "Active Merchant -- http://activemerchant.org",
-               'Content-Type'   => "application/x-www-form-urlencoded"
-             )
+            response = ssl_post(Nochex.notification_confirmation_url, payload,
+                                'Content-Length' => "#{payload.size}",
+                                'User-Agent' => "Active Merchant -- http://activemerchant.org",
+                                'Content-Type' => "application/x-www-form-urlencoded"
+            )
 
-             raise StandardError.new("Faulty Nochex result: #{response}") unless ["AUTHORISED", "DECLINED"].include?(response)
+            raise StandardError.new("Faulty Nochex result: #{response}") unless ["AUTHORISED", "DECLINED"].include?(response)
 
-             response == "AUTHORISED"
+            response == "AUTHORISED"
           end
         end
       end

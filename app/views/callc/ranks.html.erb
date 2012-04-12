@@ -10,78 +10,78 @@
       <th id="not_processed_missed" align="right">          <%= _('not_processed_missed') %>        </th>
       <th id="new_calls_today" align="right">          <%= _('New_calls_today') %>        </th>
       <th id="left_till_normative" align="center">         <%= _('Left_till_normative') %>        </th>
-      <th id="done" align="center">         <%= _('Done') %> %  </th>
-      <th id="m_normative" align="center">         <%= _('M_normative') %> %  </th>
+      <th id="done" align="center">         <%= _('Done') %> %</th>
+      <th id="m_normative" align="center">         <%= _('M_normative') %> %</th>
       <% if can_see_finances? -%>
-        <th id="sales_this_month" align="center">         <%= _('Sales_this_month') %> (%) </th>
-        <th id="sales_this_month_planned" align="center">         <%= _('Sales_this_month_planned') %>   </th>
+          <th id="sales_this_month" align="center">         <%= _('Sales_this_month') %> (%)</th>
+          <th id="sales_this_month_planned" align="center">         <%= _('Sales_this_month_planned') %>   </th>
       <% end -%>
     </tr>
 
 
-    <%  total_sales_this_month = 0
-    total_sales_this_month_planned = 0
-    for i in 0..@a.size-1 %>
+    <% total_sales_this_month = 0
+       total_sales_this_month_planned = 0
+       for i in 0..@a.size-1 %>
 
-      <% user = User.find(@a[i][0])  %>
+        <% user = User.find(@a[i][0]) %>
 
-      <% if i < 3%>
-        <tr bgcolor='#FFE9E9'>
+        <% if i < 3 %>
+            <tr bgcolor='#FFE9E9'>
         <% else %>
-        <tr class="row<%= (i % 2 + 1).to_s %>">
+            <tr class="row<%= (i % 2 + 1).to_s %>">
         <% end %>
-        <td id="first_name_<%= user.id%>">            <%= user.first_name %>        </td>
-        <td id="last_name_<%= user.id%>">            <%= user.last_name %>        </td>
-        <td id="username_<%= user.id%>">                <%= user.username %>        </td>
-        <td id="data1_<%= user.id%>" align="center">                <%= nice_time(@a[i][1]) %>        </td>
-        <td id="data2_<%= user.id%>" align="center">                <%= @b[@a[i][0]] %>        </td>
-        <td id="avg_call_time_<%= user.id%>" align="center">                <%= nice_time(@c[@a[i][0]]) %>        </td>
-        <td id="not_processed_missed_<%= user.id%>" align="right" <%= "class='red'" if @d[@a[i][0]] > 0 %>>                <%= @d[@a[i][0]] %>        </td>
-        <td id="new_calls_today_<%= user.id%>" align="right" >                <%= @h[@a[i][0]] %>        </td>
-        <td id="left_till_normative_<%= user.id%>" align="center" class="<%= @f[@a[i][0]] %>">                <%= nice_time @e[@a[i][0]] %>        </td>
-        <td id="done_<%= user.id%>" align="center" class="<%= @f[@a[i][0]] %>">      <%=  @g[@a[i][0]] if (@e[@a[i][0]] != 0  )%>        </td>
+        <td id="first_name_<%= user.id %>">            <%= user.first_name %>        </td>
+        <td id="last_name_<%= user.id %>">            <%= user.last_name %>        </td>
+        <td id="username_<%= user.id %>">                <%= user.username %>        </td>
+        <td id="data1_<%= user.id %>" align="center">                <%= nice_time(@a[i][1]) %>        </td>
+        <td id="data2_<%= user.id %>" align="center">                <%= @b[@a[i][0]] %>        </td>
+        <td id="avg_call_time_<%= user.id %>" align="center">                <%= nice_time(@c[@a[i][0]]) %>        </td>
+        <td id="not_processed_missed_<%= user.id %>" align="right" <%= "class='red'" if @d[@a[i][0]] > 0 %>>                <%= @d[@a[i][0]] %>        </td>
+        <td id="new_calls_today_<%= user.id %>" align="right">                <%= @h[@a[i][0]] %>        </td>
+        <td id="left_till_normative_<%= user.id %>" align="center" class="<%= @f[@a[i][0]] %>">                <%= nice_time @e[@a[i][0]] %>        </td>
+        <td id="done_<%= user.id %>" align="center" class="<%= @f[@a[i][0]] %>">      <%= @g[@a[i][0]] if (@e[@a[i][0]] != 0) %>        </td>
         <% mn = user.this_months_normative %>
-        <td id="m_normative_<%= user.id%>" align="center" <%= "class = \"red\"" if mn.to_i < 100 %>>    <%= mn.to_i %>    </td>
+        <td id="m_normative_<%= user.id %>" align="center" <%= "class = \"red\"" if mn.to_i < 100 %>>    <%= mn.to_i %>    </td>
         <% if can_see_finances? -%>
-          <td id="sales_this_month_<%= user.id%>" align="center">                <%= user.sales_this_month %>
-            <% if user.sales_this_month > 0 %>
-              <% if user.sales_this_month_planned > 0 %>
-                (<%= (user.sales_this_month * 100 / user.sales_this_month_planned ).to_i %> %)
+            <td id="sales_this_month_<%= user.id %>" align="center">                <%= user.sales_this_month %>
+              <% if user.sales_this_month > 0 %>
+                  <% if user.sales_this_month_planned > 0 %>
+                      (<%= (user.sales_this_month * 100 / user.sales_this_month_planned).to_i %> %)
+                  <% end %>
+                  <%
+                     total_sales_this_month += user.sales_this_month
+                     total_sales_this_month_planned += user.sales_this_month_planned
+                  %>
               <% end %>
-              <%
-              total_sales_this_month += user.sales_this_month
-              total_sales_this_month_planned += user.sales_this_month_planned
-            %>
-            <% end %>
-          </td>
-          <td id="sales_this_month_planned align_<%= user.id%>" align="center">                <%= user.sales_this_month_planned %>       </td>
+            </td>
+            <td id="sales_this_month_planned align_<%= user.id %>" align="center">                <%= user.sales_this_month_planned %>       </td>
         <% end -%>
-      </tr>
+        </tr>
 
 
     <% end %>
 
 
     <tr>
-      <th colspan="3" align="left">            <b><%= _('Total') %>:</b>        </th>
-      <th>            <b><%= nice_time(@total_billsec) %></b>        </td>
-      <th>            <b><%= @total_calls %></b>        </th>
-      <th>            <b><%= nice_time(@avg_billsec) %></b>        </th>
-      <th align="right">            <b><%= @total_missed_not_processed %></b>        </th>
+      <th colspan="3" align="left"><b><%= _('Total') %>:</b></th>
+      <th><b><%= nice_time(@total_billsec) %></b>        </td>
+      <th><b><%= @total_calls %></b></th>
+      <th><b><%= nice_time(@avg_billsec) %></b></th>
+      <th align="right"><b><%= @total_missed_not_processed %></b></th>
       <th align="right">            <%= @total_new_calls %> </th>
       <th></th>
       <th></th>
       <th></th>
       <% if can_see_finances? -%>
-        <th>            <%= total_sales_this_month %>
-          <% if total_sales_this_month > 0 %>
-            <% if total_sales_this_month_planned > 0 %>
-              (<%= (total_sales_this_month * 100 / total_sales_this_month_planned ).to_i %> %)
+          <th>            <%= total_sales_this_month %>
+            <% if total_sales_this_month > 0 %>
+                <% if total_sales_this_month_planned > 0 %>
+                    (<%= (total_sales_this_month * 100 / total_sales_this_month_planned).to_i %> %)
+                <% end %>
             <% end %>
-          <% end %>
 
-        </th>
-        <th>            <%= total_sales_this_month_planned %>   </th>
+          </th>
+          <th>            <%= total_sales_this_month_planned %>   </th>
       <% end -%>
     </tr>
   </table>

@@ -2,7 +2,7 @@
 class IvrSoundFilesController < ApplicationController
 
   layout "callc"
-  before_filter :check_post_method, :only=>[:destroy, :create, :update]
+  before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :check_localization
   before_filter :authorize
 
@@ -25,7 +25,7 @@ class IvrSoundFilesController < ApplicationController
 
     notice, name = Audio.create_file(params[:file], @voice, "/var/lib/asterisk/sounds/mor/ivr_voices/")
     if notice.blank?
-      @sound.path = name  + '.wav'
+      @sound.path = name + '.wav'
       @sound.size = params[:file].size.to_i
       if @sound.save
         flash[:status] = _("Sound_File_Was_Uploaded")
@@ -35,7 +35,7 @@ class IvrSoundFilesController < ApplicationController
     else
       flash[:notice] = notice
     end
-    redirect_to :controller => :ivrvoices,  :action => :edit, :id => params[:id]
+    redirect_to :controller => :ivrvoices, :action => :edit, :id => params[:id]
   end
 
   #
@@ -46,7 +46,7 @@ class IvrSoundFilesController < ApplicationController
 
     if @file.readonly.to_i == 1
       flash[:notice] = _('Dont_be_so_smart')
-      redirect_to :controller => :ivrvoices,  :action => :edit, :id => @voice.id and return false
+      redirect_to :controller => :ivrvoices, :action => :edit, :id => @voice.id and return false
     end
 
     if !IvrAction.find(:first, :conditions => ["name = 'Playback' and data2 = ?", @file.path])
@@ -56,7 +56,7 @@ class IvrSoundFilesController < ApplicationController
     else
       flash[:notice] = _("Sound_File_Can_Not_Be_Deleted_In_Use")
     end
-    redirect_to :controller => :ivrvoices,  :action => :edit, :id => @voice.id
+    redirect_to :controller => :ivrvoices, :action => :edit, :id => @voice.id
   end
 
   #
@@ -69,7 +69,7 @@ class IvrSoundFilesController < ApplicationController
     dst = @dir + @voice.voice+"/"+@file.path
     @dst = Web_Dir+"/ivr_voices/"+@voice.voice+"/"+@file.path
     if !File.exists?(dst)
-      redirect_to :controller => :callc,  :action => :main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     else
       render(:layout => "play_rec")
     end
@@ -95,7 +95,7 @@ class IvrSoundFilesController < ApplicationController
       flash_errors_for(_("Sound_File_Was_Not_Updated"), @file)
     end
 
-    redirect_to :controller => :ivrvoices,  :action => :edit, :id => @file.ivr_voice_id
+    redirect_to :controller => :ivrvoices, :action => :edit, :id => @file.ivr_voice_id
   end
 
   private

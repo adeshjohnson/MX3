@@ -1,25 +1,25 @@
-<% observers = []%>
-<table class = "maintable" width = '100%'> 
+<% observers = [] %>
+<table class="maintable" width='100%'>
   <tr>
     <th colspan="3"><b><%= _('Extensions') %>:</b></th>
   </tr>
   <% $pos_extensions.each_with_index { |ext, index| %>
-    <tr class="row<%= index%2+1 %>">
-      <td><b><%= ext.to_s %></b></td>
-      <td width = '100%'>
-          <select id ="ext_block<%= ext %>" name="<%= ext %>">
-          <option value= "-1">&nbsp;</option>
-          <% for block in @blocks do%>
-              <% select = ""
-              for exten in @extensions do
-                select = "selected" if exten.goto_ivr_block_id == block.id and exten.exten == ext
-              end %>
-              <option value= "<%= block.id %>" <%= select %>><%= block.name.to_s %> </option>
+      <tr class="row<%= index%2+1 %>">
+        <td><b><%= ext.to_s %></b></td>
+        <td width='100%'>
+          <select id="ext_block<%= ext %>" name="<%= ext %>">
+            <option value="-1">&nbsp;</option>
+            <% for block in @blocks do %>
+                <% select = ""
+                   for exten in @extensions do
+                     select = "selected" if exten.goto_ivr_block_id == block.id and exten.exten == ext
+                   end %>
+                <option value="<%= block.id %>" <%= select %>><%= block.name.to_s %> </option>
             <% end %>
           </select>
         </td>
       </tr>
-      <% observers << observe_field("ext_block"+ext, :frequency => 0.5, :url=> { :action => "extension_block", :id => @block.id, :ext => ext }, :loading => "Element.show('spinner')", :complete=> "Element.hide('spinner');#{last_changed("ext_block#{ext}")}", :with => "'data=' + value") %>
-    <% } %>
-  </table>
-  <%=raw observers.join("\n").html_safe %>
+      <% observers << observe_field("ext_block"+ext, :frequency => 0.5, :url => {:action => "extension_block", :id => @block.id, :ext => ext}, :loading => "Element.show('spinner')", :complete => "Element.hide('spinner');#{last_changed("ext_block#{ext}")}", :with => "'data=' + value") %>
+  <% } %>
+</table>
+<%= raw observers.join("\n").html_safe %>

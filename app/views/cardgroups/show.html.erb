@@ -1,221 +1,221 @@
 <% if @cardgroup.pin_length < 6 %>
-  <div id="error">
-    <%= _('Short_Card_pin_not_safe') %>
-  </div>
+    <div id="error">
+      <%= _('Short_Card_pin_not_safe') %>
+    </div>
 <% end %>
 
 <% i = 1 %>
-<b><%=_('Card_group') %> </b> : <%=@cardgroup.name%>
+<b><%= _('Card_group') %> </b> : <%= @cardgroup.name %>
 
 <% tax = @cardgroup.get_tax %>
-<%= image_tag "cards/#{@cardgroup.image}",  :style => 'border-style:none', :title => @cardgroup.name, :size => "150x100" %>
+<%= image_tag "cards/#{@cardgroup.image}", :style => 'border-style:none', :title => @cardgroup.name, :size => "150x100" %>
 
-<br /><br />
+<br/><br/>
 <div style="min-width: 775px;">
   <table style="width: 365px; float: left" class="simple">
     <tr class="row1">
-      <th align="left"><%= _('Name') %></th> 
+      <th align="left"><%= _('Name') %></th>
       <td align="right" id="name">        <%= @cardgroup.name %> </td>
     </tr>
     <tr class="row2">
-      <th align="left"><%= _('Description') %></th> 
+      <th align="left"><%= _('Description') %></th>
       <td align="right" id="description">    <%= @cardgroup.description %>     </td>
     </tr>
     <% if can_see_finances? %>
-      <tr class="row1">
-        <th align="left"><%= _('Price_with_VAT') %></th>
-        <td align="right" id="price_with_tax">      <%= nice_number(@cardgroup.price.to_f + @cardgroup.get_tax.count_tax_amount(@cardgroup.price.to_f)) %>   </td>
-      </tr>
-      <tr class="row2">
-        <th align="left"><%= _('Without_VAT') %></th>
-        <td align="right" id="price_without_tax">      <%= nice_number @cardgroup.price %>   </td>
-      </tr>
-      <tr class="row<%=(i.to_i % 2).to_i %>">
-        <th align="left"><%= _('Setup_fee') %></th>
-        <td align="right" id="setup_fee">   <%= nice_number @cardgroup.setup_fee %>   </td>
-      </tr>
-      <%i+=1%>
+        <tr class="row1">
+          <th align="left"><%= _('Price_with_VAT') %></th>
+          <td align="right" id="price_with_tax">      <%= nice_number(@cardgroup.price.to_f + @cardgroup.get_tax.count_tax_amount(@cardgroup.price.to_f)) %>   </td>
+        </tr>
+        <tr class="row2">
+          <th align="left"><%= _('Without_VAT') %></th>
+          <td align="right" id="price_without_tax">      <%= nice_number @cardgroup.price %>   </td>
+        </tr>
+        <tr class="row<%= (i.to_i % 2).to_i %>">
+          <th align="left"><%= _('Setup_fee') %></th>
+          <td align="right" id="setup_fee">   <%= nice_number @cardgroup.setup_fee %>   </td>
+        </tr>
+        <% i+=1 %>
     <% end %>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
+    <tr class="row<%= (i.to_i % 2).to_i %>">
       <th align="left">
         <%= _('Ghost_min_perc') %>
         (<%= link_to b_details + _('Custom'), :action => 'gmp_list', :id => @cardgroup.id %>)
       </th>
       <td align="right" id="ghost_min_perc">
-        <%= _('Default')  %>:
+        <%= _('Default') %>:
         <%= nice_number @cardgroup.ghost_min_perc %> %
       </td>
-    </tr>  
-    <%i+=1%>
+    </tr>
+    <% i+=1 %>
 
-    <tr class="row<%=(i.to_i % 2).to_i %>">
+    <tr class="row<%= (i.to_i % 2).to_i %>">
       <th align="left">
         <%= _('Ghost_balance_perc') %>
       </th>
       <td align="right" id="ghost_balabce_perc">
         <%= nice_number @cardgroup.ghost_balance_perc %> %
       </td>
-    </tr>  
-    <%i+=1%>
+    </tr>
+    <% i+=1 %>
 
     <% if can_see_finances? %>
-      <tr class="row<%=(i.to_i % 2).to_i %>">
-        <th align="left"><%= _('Daily_charge') %></th>
-        <td align="right" id="daily_charge">    <%= nice_number @cardgroup.daily_charge %>     </td>
-      </tr>
-      <%i+=1%>
-      <tr class="row<%=(i.to_i % 2).to_i %>">
-        <th align="left"><%= _('Currency') %></th>
-        <td align="right" id="currency">    <%= current_user.currency.name %>     </td>
-      </tr>
-      <%i+=1%>
-      <tr class="row<%=(i.to_i % 2).to_i %>">
-        <th align="left"><%= _('Tell_cents') %></th>
-        <td align="right" id="tell_cents"><%= @cardgroup.tell_cents ? _('Yes') : _('No') %></td>
-      </tr>
-      <%i+=1%>
-      <tr class="row<%=(i.to_i % 2).to_i %>">
-        <th align="left"><%= _('Tell_balance_in_currency') %></th>
-        <td align="right" id="tell_balance_in_currency"><%= @cardgroup.tell_balance_in_currency.to_s %></td>
-      </tr>
-      <%i+=1%>
+        <tr class="row<%= (i.to_i % 2).to_i %>">
+          <th align="left"><%= _('Daily_charge') %></th>
+          <td align="right" id="daily_charge">    <%= nice_number @cardgroup.daily_charge %>     </td>
+        </tr>
+        <% i+=1 %>
+        <tr class="row<%= (i.to_i % 2).to_i %>">
+          <th align="left"><%= _('Currency') %></th>
+          <td align="right" id="currency">    <%= current_user.currency.name %>     </td>
+        </tr>
+        <% i+=1 %>
+        <tr class="row<%= (i.to_i % 2).to_i %>">
+          <th align="left"><%= _('Tell_cents') %></th>
+          <td align="right" id="tell_cents"><%= @cardgroup.tell_cents ? _('Yes') : _('No') %></td>
+        </tr>
+        <% i+=1 %>
+        <tr class="row<%= (i.to_i % 2).to_i %>">
+          <th align="left"><%= _('Tell_balance_in_currency') %></th>
+          <td align="right" id="tell_balance_in_currency"><%= @cardgroup.tell_balance_in_currency.to_s %></td>
+        </tr>
+        <% i+=1 %>
     <% end %>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <th align="left"><%= _('LCR') %></th> 
+    <tr class="row<%= (i.to_i % 2).to_i %>">
+      <th align="left"><%= _('LCR') %></th>
       <td align="right" id="lcr">    <%= @cardgroup.lcr.name if @cardgroup.lcr %>   </td>
     </tr>
-    <%i+=1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <th align="left"><%= _('Tariff') %></th> 
+    <% i+=1 %>
+    <tr class="row<%= (i.to_i % 2).to_i %>">
+      <th align="left"><%= _('Tariff') %></th>
       <td align="right" id="tariff">   <%= @cardgroup.tariff.name if @cardgroup.tariff %>   </td>
     </tr>
-    <%i+=1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <th align="left"><%= _('Location') %></th> 
+    <% i+=1 %>
+    <tr class="row<%= (i.to_i % 2).to_i %>">
+      <th align="left"><%= _('Location') %></th>
       <td align="right" id="location">    <%= @cardgroup.location.name if @cardgroup.location %>    </td>
     </tr>
-    <%i+=1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <th align="left"><%= _('Number_length') %></th> 
+    <% i+=1 %>
+    <tr class="row<%= (i.to_i % 2).to_i %>">
+      <th align="left"><%= _('Number_length') %></th>
       <td align="right" id="number_length">    <%= @cardgroup.number_length %>      </td>
     </tr>
-    <%i+=1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <th align="left"><%= _('Pin_length') %></th> 
+    <% i+=1 %>
+    <tr class="row<%= (i.to_i % 2).to_i %>">
+      <th align="left"><%= _('Pin_length') %></th>
       <td align="right" id="pin_length">    <%= @cardgroup.pin_length %>     </td>
     </tr>
-    <%i+=1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <th align="left"><%= _('Created_at') %></th> 
+    <% i+=1 %>
+    <tr class="row<%= (i.to_i % 2).to_i %>">
+      <th align="left"><%= _('Created_at') %></th>
       <td align="right" id="created_at">   <%= nice_date_time @cardgroup.created_at %>   </td>
     </tr>
-    <%i+=1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <th align="left"><%= _('Valid_from') %></th> 
+    <% i+=1 %>
+    <tr class="row<%= (i.to_i % 2).to_i %>">
+      <th align="left"><%= _('Valid_from') %></th>
       <td align="right" id="valid_from">    <%= nice_date_time @cardgroup.valid_from %>   </td>
     </tr>
 
-    <%i+=1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <th align="left"><%= _('Valid_till') %></th> 
+    <% i+=1 %>
+    <tr class="row<%= (i.to_i % 2).to_i %>">
+      <th align="left"><%= _('Valid_till') %></th>
       <td align="right" id="valid_till">    <%= nice_date_time @cardgroup.valid_till %>     </td>
     </tr>
 
-    <%i+=1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <th align="left"><%= _('Valid_after_first_use') %></th> 
+    <% i+=1 %>
+    <tr class="row<%= (i.to_i % 2).to_i %>">
+      <th align="left"><%= _('Valid_after_first_use') %></th>
       <td align="right" id="valid_after_first_use">    <%= @cardgroup.valid_after_first_use.to_s %> <%= _('days') %>    </td>
     </tr>
 
-    <%i+=1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
+    <% i+=1 %>
+    <tr class="row<%= (i.to_i % 2).to_i %>">
       <th align="left"><%= _('Allow_loss_calls') %></th>
       <td align="right" id="allow_loss_calls">    <%= @cardgroup.allow_loss_calls.to_i == 1 ? b_check : b_cross %></td>
     </tr>
 
-    <%i+=1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>" <%= tooltip(_('Deny_to_double_use_a_Card_with_Pinless_dialing_when_Card_is_assigned_to_some_CallerID'), _('solo_pinless_explanation')) %>>
+    <% i+=1 %>
+    <tr class="row<%= (i.to_i % 2).to_i %>" <%= tooltip(_('Deny_to_double_use_a_Card_with_Pinless_dialing_when_Card_is_assigned_to_some_CallerID'), _('solo_pinless_explanation')) %>>
       <th align="left" id="solo_pinless_row"><%= _('Deny_to_double_use_a_Card_with_Pinless_dialing_when_Card_is_assigned_to_some_CallerID') %></th>
       <td align="right" id="solo_pinless">    <%= @cardgroup.solo_pinless ? _('Yes') : _('No') %></td>
     </tr>
 
-    <%i+=1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
+    <% i+=1 %>
+    <tr class="row<%= (i.to_i % 2).to_i %>">
       <th align="left"><%= _('Disable_Voucher_with_same_Number_as_Card_if_Card_is_used?') %></th>
       <td align="right" id="disable_voucher">    <%= @cardgroup.disable_voucher ? b_check : b_cross %></td>
     </tr>
 
-    <%i+=1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <th align="left"><%= _('Cards') %></th> 
+    <% i+=1 %>
+    <tr class="row<%= (i.to_i % 2).to_i %>">
+      <th align="left"><%= _('Cards') %></th>
       <td align="right" id="cards">
-        <%= @cardgroup.cards.size %> <%= link_to("(" + _('View') + ")", :controller => "cards", :action => "list", :cg =>  @cardgroup, :clean=>1) if @cardgroup.cards.size > 0 %>
+        <%= @cardgroup.cards.size %> <%= link_to("(" + _('View') + ")", :controller => "cards", :action => "list", :cg => @cardgroup, :clean => 1) if @cardgroup.cards.size > 0 %>
         <% if @allow_manage == true %>
-          <%= link_to "(" + b_add + _('Add_cards') + ")", :controller => "cards", :action => "new", :cg =>  @cardgroup %>
+            <%= link_to "(" + b_add + _('Add_cards') + ")", :controller => "cards", :action => "new", :cg => @cardgroup %>
         <% end %>
       </td>
     </tr>
   </table>
 
   <% if @allow_manage == true %>
-    <div class="actions" style="width: 340px; margin-left: 30px; float: left">
-      <h3><%= _('What_do_you_want_to_do_with_cc_group') %></h3>
-      <ul>
-        <li><%= link_to b_edit + _('Edit_settings'), { :action => "edit", :id => @cardgroup.id } %></li>
-        <li><%= link_to b_details + _('Check_available_cards') + ' ('+ _('not_sold') + ")", { :controller => "cards", :action => "list", :cg => @cardgroup.id, :s_sold => "no" } %></li>
-        <li><%= link_to b_add + _('Generate_new_cards'), { :controller => "cards", :action => "new", :cg => @cardgroup.id } %></li>
-      </ul>
-      <h3><%= _('This_cc_group_is_accessible_over_dids') %></h3>
-      <ul>
-        <% unless @assigned_dids.empty? %>
-          <% for did in @assigned_dids %>
-            <li><%= link_to did.did, { :controller => "dids", :action => "edit", :id => did.id } %></li>
+      <div class="actions" style="width: 340px; margin-left: 30px; float: left">
+        <h3><%= _('What_do_you_want_to_do_with_cc_group') %></h3>
+        <ul>
+          <li><%= link_to b_edit + _('Edit_settings'), {:action => "edit", :id => @cardgroup.id} %></li>
+          <li><%= link_to b_details + _('Check_available_cards') + ' ('+ _('not_sold') + ")", {:controller => "cards", :action => "list", :cg => @cardgroup.id, :s_sold => "no"} %></li>
+          <li><%= link_to b_add + _('Generate_new_cards'), {:controller => "cards", :action => "new", :cg => @cardgroup.id} %></li>
+        </ul>
+        <h3><%= _('This_cc_group_is_accessible_over_dids') %></h3>
+        <ul>
+          <% unless @assigned_dids.empty? %>
+              <% for did in @assigned_dids %>
+                  <li><%= link_to did.did, {:controller => "dids", :action => "edit", :id => did.id} %></li>
+              <% end %>
+          <% else %>
+              <%= _('none') %>
           <% end %>
-        <% else %>
-          <%= _('none') %>
-        <% end %>
-      </ul>
-    </div>
+        </ul>
+      </div>
   <% end %>
 
 </div>
 
 <div style="clear: both"></div>
-<br />
+<br/>
 <b><%= tax.total_tax_name %>:</b>
-<br />
+<br/>
 <table style="width: 365px" class="simple">
   <% i = 1 %>
-  <% if tax.tax1_enabled.to_i == 1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <td align="left"><%= tax.tax1_name %></td>
-      <td align="right"><%= tax.tax1_value %> %</td>
-    </tr>
-    <% i += 1%>
+  <% if tax.tax1_enabled.to_i == 1 %>
+      <tr class="row<%= (i.to_i % 2).to_i %>">
+        <td align="left"><%= tax.tax1_name %></td>
+        <td align="right"><%= tax.tax1_value %> %</td>
+      </tr>
+      <% i += 1 %>
   <% end %>
-  <% if tax.tax2_enabled.to_i == 1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <td align="left"><%= tax.tax2_name %></td>
-      <td align="right"><%= tax.tax2_value %> %</td>
-    </tr>
-    <% i += 1%>
+  <% if tax.tax2_enabled.to_i == 1 %>
+      <tr class="row<%= (i.to_i % 2).to_i %>">
+        <td align="left"><%= tax.tax2_name %></td>
+        <td align="right"><%= tax.tax2_value %> %</td>
+      </tr>
+      <% i += 1 %>
   <% end %>
-  <% if tax.tax3_enabled.to_i == 1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <td align="left"><%= tax.tax3_name %></td>
-      <td align="right"><%= tax.tax3_value %> %</td>
-    </tr>
-    <% i += 1%>
+  <% if tax.tax3_enabled.to_i == 1 %>
+      <tr class="row<%= (i.to_i % 2).to_i %>">
+        <td align="left"><%= tax.tax3_name %></td>
+        <td align="right"><%= tax.tax3_value %> %</td>
+      </tr>
+      <% i += 1 %>
   <% end %>
-  <% if tax.tax4_enabled.to_i == 1%>
-    <tr class="row<%=(i.to_i % 2).to_i %>">
-      <td align="left"><%= tax.tax4_name%></td>
-      <td align="right"><%= tax.tax4_value%> %</td>
-    </tr>
-    <% i += 1%>
+  <% if tax.tax4_enabled.to_i == 1 %>
+      <tr class="row<%= (i.to_i % 2).to_i %>">
+        <td align="left"><%= tax.tax4_name %></td>
+        <td align="right"><%= tax.tax4_value %> %</td>
+      </tr>
+      <% i += 1 %>
   <% end %>
 </table>
-<br />
+<br/>
 <% if @allow_manage == true %>
-  <%= link_to b_edit + _('Edit'), :action => 'edit', :id => @cardgroup %>
+    <%= link_to b_edit + _('Edit'), :action => 'edit', :id => @cardgroup %>
 <% end %>

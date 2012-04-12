@@ -8,40 +8,40 @@
     <th align="left"><%= _('Type') %></th>
     <th align="left"><%= _('Description') %></th>
     <% if @allow_edit %>
-      <th colspan=2></th>
+        <th colspan=2></th>
     <% end %>
   </tr>
   <% i = 0 %>
   <% for day in @days %>
-    <tr class="row<%= (i % 2 + 1).to_s %>">
-      <td align="left">        <%= day.date.year%> </td>
-      <td align="left">        <%= day.date.month%> </td>
-      <td align="left">        <%= day.date.day%> </td>
-      <td align="left">        <%= _('Free_day') if day.daytype == "FD"%><%= _('Work_day') if day.daytype == "WD"%> </td>
-      <td align="left">        <%= day.description %> </td>
-      <% if @allow_edit %>
-        <td align="center"><%= link_to b_edit, :action => 'day_edit', :id => day.id %></td>
-        <td align="center"><%= link_to b_delete, { :action => 'day_destroy', :id => day.id}, :confirm => _('Are_you_sure'), :method => :post %></td>
-      <% end%>
-    </tr>
-    <% i += 1%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td align="left">        <%= day.date.year %> </td>
+        <td align="left">        <%= day.date.month %> </td>
+        <td align="left">        <%= day.date.day %> </td>
+        <td align="left">        <%= _('Free_day') if day.daytype == "FD" %><%= _('Work_day') if day.daytype == "WD" %> </td>
+        <td align="left">        <%= day.description %> </td>
+        <% if @allow_edit %>
+            <td align="center"><%= link_to b_edit, :action => 'day_edit', :id => day.id %></td>
+            <td align="center"><%= link_to b_delete, {:action => 'day_destroy', :id => day.id}, :confirm => _('Are_you_sure'), :method => :post %></td>
+        <% end %>
+      </tr>
+      <% i += 1 %>
   <% end %>
   <% if @allow_edit %>
-    <%= form_tag :action => 'day_add' do %>
-      <tr class="row<%= (i % 2 + 1).to_s %>">
-        <th align="left">       <%= select_year(Date.today, :start_year => Date.today.year - 5, :end_year => Date.today.year + 1)  %> </th>
-        <th align="left">        <%= select_month(Date.today, :use_month_numbers => true) %> </th>
-        <th align="left">        <%= select_day(Date.today) %> </th>
-        <th align="left">
-          <select name="daytype" >
-            <option value="FD" > <%= _('Free_day') %> </option>
-            <option value="WD" > <%= _('Work_day') %> </option>
-          </select>
-        </th>
-        <th align="left">        <%= text_field_tag 'description', "", "class" => "input", :size => "30", :maxlength => "40"  %> </th>
-        <th align="center" colspan=2><%= image_submit_tag 'icons/add.png', :title => _('Add') %></th>
+      <%= form_tag :action => 'day_add' do %>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <th align="left">       <%= select_year(Date.today, :start_year => Date.today.year - 5, :end_year => Date.today.year + 1) %> </th>
+            <th align="left">        <%= select_month(Date.today, :use_month_numbers => true) %> </th>
+            <th align="left">        <%= select_day(Date.today) %> </th>
+            <th align="left">
+              <select name="daytype">
+                <option value="FD"> <%= _('Free_day') %> </option>
+                <option value="WD"> <%= _('Work_day') %> </option>
+              </select>
+            </th>
+            <th align="left">        <%= text_field_tag 'description', "", "class" => "input", :size => "30", :maxlength => "40" %> </th>
+            <th align="center" colspan=2><%= image_submit_tag 'icons/add.png', :title => _('Add') %></th>
 
-      </tr>
-    <% end %>
+          </tr>
+      <% end %>
   <% end %>
 </table>

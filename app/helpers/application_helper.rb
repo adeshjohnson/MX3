@@ -1171,9 +1171,9 @@ module ApplicationHelper
   def nice_list_order(user_col_name, col_header_name, options, params_sort={})
     order_dir = (options[:order_desc].to_i == 1 ? 0 : 1)
     raw link_to(
-        ((b_sort_desc if options[:order_desc].to_i== 1 and user_col_name.downcase == options[:order_by].to_s).to_s.html_safe+
-            (b_sort_asc if options[:order_desc].to_i== 0 and user_col_name.downcase == options[:order_by].to_s).to_s.html_safe+
-            _(col_header_name.to_s.html_safe)).html_safe, {:action => params[:action], :order_by => user_col_name, :order_desc => order_dir}.merge(params_sort), {:id => "#{user_col_name}_#{order_dir}"})
+            ((b_sort_desc if options[:order_desc].to_i== 1 and user_col_name.downcase == options[:order_by].to_s).to_s.html_safe+
+                (b_sort_asc if options[:order_desc].to_i== 0 and user_col_name.downcase == options[:order_by].to_s).to_s.html_safe+
+                _(col_header_name.to_s.html_safe)).html_safe, {:action => params[:action], :order_by => user_col_name, :order_desc => order_dir}.merge(params_sort), {:id => "#{user_col_name}_#{order_dir}"})
   end
 
   def link_nice_tariff_if_own(tariff)

@@ -6,7 +6,7 @@ class SmsProvider < ActiveRecord::Base
 
   belongs_to :sms_tariff
 
-  SMS_ALLOWED_VARIABLES = ["SRC","DST","MSG", "USRFIRSTNAME", "USRLASTNAME", "CALLERID"]
+  SMS_ALLOWED_VARIABLES = ["SRC", "DST", "MSG", "USRFIRSTNAME", "USRLASTNAME", "CALLERID"]
 
   before_save :validate_prov
 
@@ -51,7 +51,7 @@ class SmsProvider < ActiveRecord::Base
       string += "&from=#{self.sms_from}" if !self.sms_from.blank?
       if options[:unicode].to_i != 0
         string += "&unicode=1"
-        mtext = CGI.escape(options[:message].to_s.strip.unpack("U*").collect {|s| ( "0"*3+ s.to_i.to_s(16))[-4..-1] }.join(""))
+        mtext = CGI.escape(options[:message].to_s.strip.unpack("U*").collect { |s| ("0"*3+ s.to_i.to_s(16))[-4..-1] }.join(""))
       else
         mtext= CGI.escape(options[:message].to_s.strip)
       end
@@ -74,16 +74,16 @@ class SmsProvider < ActiveRecord::Base
 
   def send_sms_api(sms, user, options={})
     if options[:unicode].to_i != 0
-      mtext = CGI.escape(options[:message].to_s.strip.unpack("U*").collect {|s| ( "0"*3+ s.to_i.to_s(16))[-4..-1] }.join(""))
+      mtext = CGI.escape(options[:message].to_s.strip.unpack("U*").collect { |s| ("0"*3+ s.to_i.to_s(16))[-4..-1] }.join(""))
     else
       mtext= CGI.escape(options[:message].to_s.strip)
     end
 
     pr_device = user.primary_device
     cli = pr_device ? CGI.escape(pr_device.callerid.to_s) : ''
-    message_id = Net::HTTP.get_response(URI.parse(nice_url(options[:to],mtext,'src', user.first_name.to_s, user.last_name.to_s, cli.to_s)))
+    message_id = Net::HTTP.get_response(URI.parse(nice_url(options[:to], mtext, 'src', user.first_name.to_s, user.last_name.to_s, cli.to_s)))
     code = message_id.body
-    Action.add_action_hash(user, {:action=>"SMS_api_response"})
+    Action.add_action_hash(user, {:action => "SMS_api_response"})
     if code.include?(email_good_keywords)
       sms.status_code = 0
       sms.freze_user_balance_for_sms(user, sms.user_price)
@@ -100,10 +100,10 @@ class SmsProvider < ActiveRecord::Base
   def send_sms_email(sms, user, options={})
     email = Email.find(:first, :conditions => ["name = 'sms'"])
     unless email
-      email = Email.new({:name=>"sms", :template=>1, :format=>"html", :owner_id=>0, :body=>"", :subject=>"", :date_created=>Time.now().to_s(:db)})
+      email = Email.new({:name => "sms", :template => 1, :format => "html", :owner_id => 0, :body => "", :subject => "", :date_created => Time.now().to_s(:db)})
       email.save
     end
-    opt = options.merge({:email_to_address=>options[:to].strip + self.sms_provider_domain.strip, :sms_id=>sms.id, :email_from_user=>user, :owner=>user.owner_id})
+    opt = options.merge({:email_to_address => options[:to].strip + self.sms_provider_domain.strip, :sms_id => sms.id, :email_from_user => user, :owner => user.owner_id})
     to = []
     to << user
     Email.send_email(email, to, Confline.get_value("Email_from"), "sms_email_sent", opt)
@@ -123,14 +123,14 @@ class SmsProvider < ActiveRecord::Base
 
 
   def connect_to_clickatell
-    begin    
+    begin
       login = Net::HTTP.get_response("api.clickatell.com", "/http/auth?api_id=#{self.api_id}&password=#{self.password}&user=#{self.login}")
       log = login.body.split(" ")
     rescue Exception => e
       MorLog.log_exception(e, Time.now.to_i, 'sms', 'providers')
       log = []
-      log[0] = 'ERR:' 
-    end   
+      log[0] = 'ERR:'
+    end
     log
   end
 
@@ -150,7 +150,7 @@ class SmsProvider < ActiveRecord::Base
 
   def uri_parse_ok
     begin
-      Net::HTTP.get_response(URI.parse(nice_url('dst','msg','src', 'first_name', 'last_name', 'cli')))
+      Net::HTTP.get_response(URI.parse(nice_url('dst', 'msg', 'src', 'first_name', 'last_name', 'cli')))
     rescue Exception => e
       logger.fatal e.to_yaml
       errors.add(:api, _('invalid_url'))
@@ -158,7 +158,7 @@ class SmsProvider < ActiveRecord::Base
     end
   end
 
-  def nice_url(dst,msg,src, first_user, last_user, cli)
+  def nice_url(dst, msg, src, first_user, last_user, cli)
     #logger.fatal login
     login.gsub(/<%= DST %>/, dst).gsub(/<%= MSG %>/, msg).gsub(/<%= SRC %>/, src).gsub(/<%= USRFIRSTNAME %>/, first_user).gsub(/<%= USRLASTNAME %>/, last_user).gsub(/<%= CALLERID %>/, cli).strip
   end

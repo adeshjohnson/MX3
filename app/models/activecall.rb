@@ -7,11 +7,11 @@ class Activecall < ActiveRecord::Base
   belongs_to :server
 
   def src_device
-    Device.find(:first , :conditions => ["id = ?", self.src_device_id])
+    Device.find(:first, :conditions => ["id = ?", self.src_device_id])
   end
 
   def dst_device
-    Device.find(:first , :conditions => ["id = ?", self.dst_device_id])
+    Device.find(:first, :conditions => ["id = ?", self.dst_device_id])
   end
 
   def destination

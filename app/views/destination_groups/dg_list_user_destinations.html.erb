@@ -1,35 +1,35 @@
 <center>
 
-<table class="simple" width="80%" >
-  <tr>
-    <td nowrap><b><%= _('Destinations_group') %></b>:</td>
-    <td width="100%"><%= draw_flag_by_code @destgroup.flag %> <%= @destgroup.name %> <%= @destgroup.desttype %></td>
-  </tr>
-</table>
+  <table class="simple" width="80%">
+    <tr>
+      <td nowrap><b><%= _('Destinations_group') %></b>:</td>
+      <td width="100%"><%= draw_flag_by_code @destgroup.flag %> <%= @destgroup.name %> <%= @destgroup.desttype %></td>
+    </tr>
+  </table>
 
-<br/>
+  <br/>
 
-<table width="80%" class="maintable">
-  <tr>
+  <table width="80%" class="maintable">
+    <tr>
 
-    <th align="left"><%= _('Direction') %></th>
-    <th align="left"><%= _('Details') %></th>
-    <th align="left"><%= _('Prefix') %></th>
-    <th align="left"><%= _('Code') %></th>
+      <th align="left"><%= _('Direction') %></th>
+      <th align="left"><%= _('Details') %></th>
+      <th align="left"><%= _('Prefix') %></th>
+      <th align="left"><%= _('Code') %></th>
 
-  </tr>
+    </tr>
 
-<% i = 0 %>   
-<% for destination in @destinations %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-    <td><%= draw_flag destination.direction.code if destination.direction%> <%= destination.direction.name if destination.direction%> </td>
-    <td><%= destination.name %></td>
-    <td><%= destination.prefix %></td>
-    <td><%= destination.subcode %></td>
-  </tr>
-  <% i += 1%>    
-<% end %>
-</table>
+    <% i = 0 %>
+    <% for destination in @destinations %>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <td><%= draw_flag destination.direction.code if destination.direction %> <%= destination.direction.name if destination.direction %> </td>
+          <td><%= destination.name %></td>
+          <td><%= destination.prefix %></td>
+          <td><%= destination.subcode %></td>
+        </tr>
+        <% i += 1 %>
+    <% end %>
+  </table>
 
-<br/><br/>
+  <br/><br/>
 </center>

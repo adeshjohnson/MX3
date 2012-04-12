@@ -1,254 +1,282 @@
 <!--[form:provider]-->
 
 <table width="100%">
-  <tr>
-    <td valign="top">
+<tr>
+<td valign="top">
 
-      <table class="simple">
+  <table class="simple">
+    <tr>
+      <td colspan="2" class="bottom_border">
+        <b><%= _('General') %></b>
+      </td>
+    </tr>
+    <tr>
+      <td height="10"></td>
+    </tr>
+
+    <tr>
+      <td> <%= _('Name') %>:</td>
+      <td><%= text_field 'provider', 'name', "class" => "input", :maxlength => "30" %> </td>
+    </tr>
+
+
+    <tr>
+      <td> <%= _('Tariff') %>:</td>
+      <td><%= collection_select("provider", "tariff_id", @tariffs, "id", "name") %> </td>
+    </tr>
+
+
+    <tr>
+      <td height="20"></td>
+    </tr>
+    <tr>
+      <td class="bottom_border" colspan=2>
+        <b><%= _('Trunk_Details') %></b>
+      </td>
+    </tr>
+    <tr>
+      <td height="10"></td>
+    </tr>
+
+    <tr>
+      <td> <%= _('Tech') %>:</td>
+      <td><b><%= b_skype + @provider.tech %></b></td>
+    </tr>
+    <tr>
+      <td height="5"></td>
+    </tr>
+
+    <tr>
+      <td> <%= b_device + _('Device_ID') %>:</td>
+      <td>
+        <%= @device.id if @device %>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td> <%= _('Location') %>:</td>
+      <td>
+
+        <select name="device[location_id]">
+          <% for loc in @locations %>
+              <option value=<%= loc.id %> <%= "selected" if @device.location_id == loc.id %>> <%= loc.name %> </option>
+          <% end %>
+        </select>
+
+      </td>
+    </tr>
+
+
+    <% if session[:usertype] != "reseller" %>
+        <tr>
+          <td> <%= b_provider_ani + _('Automatic_Number_Identification') %>:</td>
+          <td>
+
+            <%= radio_button_tag('provider[ani]', '0', (@provider.ani == 0)) %> <%= _('No') %>
+            <%= radio_button_tag('provider[ani]', '1', (@provider.ani == 1)) %> <%= _('Yes') %>
+
+          </td>
+        </tr>
+    <% end %>
+
+    <tr>
+      <td> <%= _('Timeout') %>:</td>
+      <td><%= text_field 'provider', 'timeout', "class" => "input", :size => "5", :maxlength => "4" %> <%= _('seconds') %> </td>
+    </tr>
+
+    <tr>
+      <td> <%= b_device + _('Device_ID') %>:</td>
+      <td>
+        <%= @device.id if @device %>
+      </td>
+    </tr>
+
+    <tr>
+      <td> <%= _('Call_limit') %>:</td>
+      <td>
+
+        <%= text_field 'provider', 'call_limit', "class" => "input", :size => "9", :maxlength => "10" %>
+        ( <%= _('Call_limit_notice') %> *)
+
+      </td>
+    </tr>
+
+
+    <tr>
+      <td height="20"></td>
+    </tr>
+    <tr>
+      <td class="bottom_border" colspan=2>
+        <b><%= _('Authentication') %></b>
+      </td>
+    </tr>
+    <tr>
+      <td height="10"></td>
+    </tr>
+
+    <tr>
+      <td id="username_name"><%= _('Skype_Name') %>:</td>
+      <td id="username_value"><%= text_field 'provider', 'login', "class" => "input" %></td>
+    </tr>
+    <tr>
+      <td> <%= _('Password') %>:</td>
+      <td>
+        <%= text_field 'provider', 'password', "class" => "input" %>
+        <%= observe_field :provider_password, :function => "format_register();", :frequency => 1 %>
+      </td>
+    </tr>
+
+    <tr>
+      <td height="20"></td>
+    </tr>
+    <tr>
+      <td class="bottom_border" colspan=2>
+        <b><%= _('Where_to_route_incomming_calls_from_this_Provider') %></b>
+      </td>
+    </tr>
+    <tr>
+      <td height="10"></td>
+    </tr>
+
+    <tr>
+      <td> <%= _('Extension') %>:</td>
+      <td> <%= text_field 'provider', 'channel', "class" => "input" %></td>
+    </tr>
+
+
+  </table>
+
+
+</td>
+
+<% if not @new_provider and @provider.tech != "Zap" %>
+
+    <td valign="top">
+      <table class='simple'>
         <tr>
           <td colspan="2" class="bottom_border">
-            <b><%= _('General') %></b>
+            <b><%= _('Codecs') %></b> &nbsp; <%= _('Drag_and_drop') %>
           </td>
         </tr>
-        <tr><td height="10"></td></tr>
+        <tr>
+          <td height="10"></td>
+        </tr>
+        <tr>
+          <td valign="top">
+            <table class="simple">
+              <tr>
+                <td>
+                  <div class="simple"><%= _('Audio') %></div>
+                </td>
+
+              </tr>
+              <tr>
+                <td>
+                  <%= render :partial => "/providers/provider_codecs", :locals => {:provider => @provider, :codecs => @audio_codecs, :ctype => "audio"} %>
+                  <%= sortable_element('audio_sortable_list', :tag => 'li', :update => 'audio_items', :url => {:controller => :providers, :ctype => "audio", :action => :providercodecs_sort, :id => @provider ? @provider.id : -1}) %>
+                </td>
+              </tr>
+            </table>
+          </td>
+
 
         <tr>
-          <td> <%= _('Name') %>:   </td>
-          <td><%= text_field 'provider', 'name', "class" => "input",:maxlength => "30" %> </td>
+          <td height="20"></td>
         </tr>
 
-
-        <tr>
-          <td> <%= _('Tariff') %>:  </td>
-          <td><%= collection_select("provider", "tariff_id" , @tariffs, "id", "name") %> </td>
-        </tr>
-
-
-        <tr><td height="20"></td></tr>
         <tr>
           <td class="bottom_border" colspan=2>
-            <b><%= _('Trunk_Details') %></b>
+            <b><%= _('Advanced') %></b>
           </td>
         </tr>
-        <tr><td height="10"></td></tr>
-
         <tr>
-          <td> <%= _('Tech') %>: </td>
-          <td> <b><%= b_skype + @provider.tech %></b>   </td>
+          <td height="10"></td>
         </tr>
-        <tr><td height="5"></td></tr>
 
+        <tr <%= tooltip(_('Grace_Time'), _('Grace_Time_Explanation')) %>>
+          <td><%= _('Grace_Time') %>:</td>
+          <td><%= text_field_tag 'grace_time', @device.grace_time, "class" => "input" %></td>
+        </tr>
         <tr>
-          <td> <%= b_device + _('Device_ID') %>:   </td>
+          <td> <%= _('Allow_duplicate_calls') %>:</td>
           <td>
-            <%= @device.id if @device%>
+            <%= radio_button_tag('device[allow_duplicate_calls]', '0', (@device.allow_duplicate_calls.to_i == 0)) %> <%= _('No') %>
+            <%= radio_button_tag('device[allow_duplicate_calls]', '1', (@device.allow_duplicate_calls.to_i == 1)) %> <%= _('Yes') %>
           </td>
         </tr>
-
 
         <tr>
-          <td> <%= _('Location') %>:   </td>
+          <td> <%= _('Interpret_NO_ANSWER_as_FAILED') %>:</td>
           <td>
-
-            <select name="device[location_id]" >
-              <% for loc in @locations %>
-                <option value=<%= loc.id %> <%= "selected" if @device.location_id == loc.id %>> <%= loc.name %> </option>
-              <% end %>
-            </select>
-
+            <%= radio_button_tag('provider[interpret_noanswer_as_failed]', '0', (@provider.interpret_noanswer_as_failed == 0)) %> <%= _('No') %>
+            <%= radio_button_tag('provider[interpret_noanswer_as_failed]', '1', (@provider.interpret_noanswer_as_failed == 1)) %> <%= _('Yes') %>
           </td>
         </tr>
 
+        <tr>
+          <td> <%= _('Interpret_BUSY_as_FAILED') %>:</td>
+          <td>
+            <%= radio_button_tag('provider[interpret_busy_as_failed]', '0', (@provider.interpret_busy_as_failed == 0)) %> <%= _('No') %>
+            <%= radio_button_tag('provider[interpret_busy_as_failed]', '1', (@provider.interpret_busy_as_failed == 1)) %> <%= _('Yes') %>
+          </td>
+        </tr>
+
+        <tr <%= tooltip(_('Fake_Ring'), _('Fake_Ring_Explanation')) %>>
+          <td><%= _('Fake_Ring') %>:</td>
+          <td>
+            <%= radio_button_tag('device[fake_ring]', '0', checked = (@device.fake_ring == 0)) %> <%= _('No') %>
+            <%= radio_button_tag('device[fake_ring]', '1', checked = (@device.fake_ring == 1)) %> <%= _('Yes') %>
+          </td>
+        </tr>
 
         <% if session[:usertype] != "reseller" %>
-          <tr>
-            <td> <%= b_provider_ani + _('Automatic_Number_Identification') %>:   </td>
-            <td>
-
-              <%= radio_button_tag('provider[ani]', '0', (@provider.ani == 0) ) %> <%= _('No') %>
-              <%= radio_button_tag('provider[ani]', '1', (@provider.ani == 1) ) %> <%= _('Yes') %>
-
-            </td>
-          </tr>
-        <% end %>
-
-        <tr>
-          <td> <%= _('Timeout') %>:   </td>
-          <td><%= text_field 'provider', 'timeout', "class" => "input" , :size => "5", :maxlength => "4" %> <%= _('seconds') %> </td>
-        </tr>
-
-        <tr>
-          <td> <%= b_device + _('Device_ID') %>:   </td>
-          <td>
-            <%= @device.id if @device%>
-          </td>
-        </tr>
-
-        <tr>
-          <td> <%= _('Call_limit') %>:   </td>
-          <td>
-
-            <%= text_field 'provider', 'call_limit', "class" => "input", :size => "9", :maxlength => "10" %>  ( <%= _('Call_limit_notice') %> *)
-
-          </td>
-        </tr>
-
-
-
-        <tr><td height="20"></td></tr>
-        <tr>
-          <td class="bottom_border" colspan=2>
-            <b><%= _('Authentication') %></b>
-          </td>
-        </tr>
-        <tr><td height="10"></td></tr>
-
-        <tr>
-          <td id="username_name"><%= _('Skype_Name') %>:</td>
-          <td id="username_value"><%= text_field 'provider', 'login', "class" => "input"   %></td>
-        </tr>
-        <tr>
-          <td> <%= _('Password') %>:   </td>
-          <td>
-            <%= text_field 'provider', 'password', "class" => "input"   %>
-            <%= observe_field :provider_password, :function=> "format_register();", :frequency => 1%>
-          </td>
-        </tr>
-
-        <tr><td height="20"></td></tr>
-        <tr>
-          <td class="bottom_border" colspan=2>
-            <b><%= _('Where_to_route_incomming_calls_from_this_Provider') %></b>
-          </td>
-        </tr>
-        <tr><td height="10"></td></tr>
-
-        <tr>
-          <td> <%= _('Extension') %>:   </td>
-          <td> <%= text_field 'provider', 'channel', "class" => "input"   %></td>
-        </tr>
-
-
-      </table>
-
-
-    </td>
-
-    <% if not @new_provider and  @provider.tech != "Zap" %>
-
-      <td valign="top">
-        <table class='simple'>
-               <tr>
-            <td colspan="2" class="bottom_border">
-              <b><%= _('Codecs') %></b> &nbsp; <%= _('Drag_and_drop') %>
-            </td>
-          </tr>
-          <tr>
-            <td height="10"></td>
-          </tr>
-          <tr>
-            <td valign="top">
-              <table class="simple">
-                <tr>
-                  <td><div  class="simple"><%= _('Audio') %></div></td>
-
-                </tr>
-                <tr>
-                  <td>
-                    <%= render :partial => "/providers/provider_codecs", :locals => {:provider => @provider, :codecs=>@audio_codecs, :ctype=>"audio"} %>
-                    <%= sortable_element('audio_sortable_list', :tag => 'li', :update => 'audio_items', :url => {:controller=>:providers, :ctype=>"audio", :action => :providercodecs_sort, :id=> @provider ? @provider.id : -1}) %>
-                  </td>
-                </tr>
-              </table>
-            </td>
-
-
-          <tr><td height="20"></td></tr>
-
-          <tr>
-            <td class="bottom_border" colspan=2>
-              <b><%= _('Advanced') %></b>
-            </td>
-          </tr>
-          <tr><td height="10"></td></tr>
-
-          <tr <%= tooltip(_('Grace_Time'), _('Grace_Time_Explanation')) %>>
-            <td><%= _('Grace_Time') %>:</td>
-            <td><%= text_field_tag 'grace_time', @device.grace_time, "class" => "input" %></td>
-          </tr>
-          <tr>
-            <td> <%= _('Allow_duplicate_calls') %>:   </td>
-            <td>
-              <%= radio_button_tag('device[allow_duplicate_calls]', '0', (@device.allow_duplicate_calls.to_i == 0) ) %> <%= _('No') %>
-              <%= radio_button_tag('device[allow_duplicate_calls]', '1', (@device.allow_duplicate_calls.to_i == 1) ) %> <%= _('Yes') %>
-            </td>
-          </tr>
-
-          <tr>
-            <td> <%= _('Interpret_NO_ANSWER_as_FAILED') %>:   </td>
-            <td>
-              <%= radio_button_tag('provider[interpret_noanswer_as_failed]', '0', (@provider.interpret_noanswer_as_failed == 0) ) %> <%= _('No') %>
-              <%= radio_button_tag('provider[interpret_noanswer_as_failed]', '1', (@provider.interpret_noanswer_as_failed == 1) ) %> <%= _('Yes') %>
-            </td>
-          </tr>
-
-          <tr>
-            <td> <%= _('Interpret_BUSY_as_FAILED') %>:   </td>
-            <td>
-              <%= radio_button_tag('provider[interpret_busy_as_failed]', '0', (@provider.interpret_busy_as_failed == 0) ) %> <%= _('No') %>
-              <%= radio_button_tag('provider[interpret_busy_as_failed]', '1', (@provider.interpret_busy_as_failed == 1) ) %> <%= _('Yes') %>
-            </td>
-          </tr>
-
-          <tr <%= tooltip(_('Fake_Ring'), _('Fake_Ring_Explanation')) %>>
-            <td><%= _('Fake_Ring') %>:</td>
-            <td>
-              <%= radio_button_tag('device[fake_ring]', '0', checked = (@device.fake_ring == 0) ) %> <%= _('No') %>
-              <%= radio_button_tag('device[fake_ring]', '1', checked = (@device.fake_ring == 1) ) %> <%= _('Yes') %>
-            </td>
-          </tr>
-
-          <% if session[:usertype] != "reseller" %>
 
             <tr <%= tooltip(_('Common_Use'), _('Common_Use_Explanation')) %>>
               <td><%= _('Common_Use') %>:</td>
               <td>
-                <%= radio_button_tag('provider[common_use]', '0', checked = (@provider.common_use == 0) ) %> <%= _('No') %>
-                <%= radio_button_tag('provider[common_use]', '1', checked = (@provider.common_use == 1) ) %> <%= _('Yes') %>
+                <%= radio_button_tag('provider[common_use]', '0', checked = (@provider.common_use == 0)) %> <%= _('No') %>
+                <%= radio_button_tag('provider[common_use]', '1', checked = (@provider.common_use == 1)) %> <%= _('Yes') %>
               </td>
             </tr>
 
-            <tr><td height="20"></td></tr>
+            <tr>
+              <td height="20"></td>
+            </tr>
             <tr>
               <td class="bottom_border" colspan=2>
                 <b><%= _('Debug') %></b>
               </td>
             </tr>
-            <tr><td height="10"></td></tr>
+            <tr>
+              <td height="10"></td>
+            </tr>
             <tr>
               <td><%= _('Save_Call_Log') %>:</td>
-              <td><%= check_box_tag 'save_call_log', value = "1", (checked = @device.save_call_log.to_i == 1)%></td>
+              <td><%= check_box_tag 'save_call_log', value = "1", (checked = @device.save_call_log.to_i == 1) %></td>
             </tr>
-          <% end %>
-          <%= render :partial => 'select_servers' if session[:usertype] != "reseller" %>
-        </table>
-      </td>
+        <% end %>
+        <%= render :partial => 'select_servers' if session[:usertype] != "reseller" %>
+      </table>
+    </td>
     </tr>
-  <% end %>
+<% end %>
 </table>
-<br />
+<br/>
 <script type="text/javascript">
 
-  function show_hostname_lines(value){
-  if (value == 'hostname'){
-  $('server_hostname_row').style.display = "";
-  $('server_ip_row').style.display = "none";
-  $('server_port_row').style.display = "";}
-  if (value == 'ip'){
-  $('server_hostname_row').style.display = "";
-  $('server_ip_row').style.display = "";
-  $('server_port_row').style.display = "";}
-  }
-  show_hostname_lines("<%= @hostname_ip %>");
+    function show_hostname_lines(value) {
+        if (value == 'hostname') {
+            $('server_hostname_row').style.display = "";
+            $('server_ip_row').style.display = "none";
+            $('server_port_row').style.display = "";
+        }
+        if (value == 'ip') {
+            $('server_hostname_row').style.display = "";
+            $('server_ip_row').style.display = "";
+            $('server_port_row').style.display = "";
+        }
+    }
+    show_hostname_lines("<%= @hostname_ip %>");
 </script>
 <!--[eoform:provider]-->

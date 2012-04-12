@@ -1,39 +1,39 @@
-<%= render :partial => "bulk_management_header"  %>
+<%= render :partial => "bulk_management_header" %>
 <% unless @dids.size.to_i < 1 %>
-  <%= form_tag({:action => 'update', :back=>1}.merge(@opts)) do %>
-    <%= hidden_field_tag 'status', "reserved" %>
-    <table class="maintable" width="100%">
-      <tr>
-        <th align="left"><%= _('Reserve_did_for_user') %></th>
-      </tr>
-      <tr class="row1">
-        <td>
-          <br />
-          <%= _('Reserve_did_for_user_expanded') %>
-          <br />
-          <br />
-          <% if @free_users.size > 0 %>
+    <%= form_tag({:action => 'update', :back => 1}.merge(@opts)) do %>
+        <%= hidden_field_tag 'status', "reserved" %>
+        <table class="maintable" width="100%">
+          <tr>
+            <th align="left"><%= _('Reserve_did_for_user') %></th>
+          </tr>
+          <tr class="row1">
+            <td>
+              <br/>
+              <%= _('Reserve_did_for_user_expanded') %>
+              <br/>
+              <br/>
+              <% if @free_users.size > 0 %>
 
-            <%= b_user %>
-            <select name="user_id" >
-              <% for user in @free_users %>
-                <option value="<%= user.id %>"><%= nice_user(user) %></option>
+                  <%= b_user %>
+                  <select name="user_id">
+                    <% for user in @free_users %>
+                        <option value="<%= user.id %>"><%= nice_user(user) %></option>
+                    <% end %>
+                  </select>
+
+                  <br/>
+                  <br/>
+                  <%= submit_tag(_('Reserve'), :disable_with => _('Processing..')) %>
+                  <br/>
+              <% else %>
+                  <%= _('No_free_users') %>
+                  <br/>
+                  <br/>
               <% end %>
-            </select>
-
-            <br />
-            <br />
-            <%= submit_tag(_('Reserve'), :disable_with=>_('Processing..')) %>
-            <br />
-          <% else%>
-            <%= _('No_free_users') %>
-            <br />
-            <br />
-          <% end %>
-        </td>
-      </tr>
-    </table>
-  <% end %>
+            </td>
+          </tr>
+        </table>
+    <% end %>
 <% else %>
-  <% flash[:notice] = _('No_DID_found_Please_check_interval') %>
+    <% flash[:notice] = _('No_DID_found_Please_check_interval') %>
 <% end %>

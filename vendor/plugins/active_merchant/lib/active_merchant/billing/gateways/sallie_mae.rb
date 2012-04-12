@@ -21,7 +21,7 @@ module ActiveMerchant #:nodoc:
         @options = options
         super
       end
-      
+
       def test?
         @options[:login] == "TEST0"
       end
@@ -60,24 +60,24 @@ module ActiveMerchant #:nodoc:
         end
 
         post[:ci_email] = options[:email].to_s unless options[:email].blank?
-        post[:ci_IP]    = options[:ip].to_s unless options[:ip].blank?
+        post[:ci_IP] = options[:ip].to_s unless options[:ip].blank?
       end
 
       def add_address(post, creditcard, options)
         if address = options[:billing_address] || options[:address]
           post[:ci_billaddr1] = address[:address1].to_s
           post[:ci_billaddr2] = address[:address2].to_s unless address[:address2].blank?
-          post[:ci_billcity]  = address[:city].to_s
+          post[:ci_billcity] = address[:city].to_s
           post[:ci_billstate] = address[:state].to_s
-          post[:ci_billzip]   = address[:zip].to_s
+          post[:ci_billzip] = address[:zip].to_s
         end
 
         if shipping_address = options[:shipping_address] || options[:address]
           post[:ci_shipaddr1] = shipping_address[:address1].to_s
           post[:ci_shipaddr2] = shipping_address[:address2].to_s unless shipping_address[:address2].blank?
-          post[:ci_shipcity]  = shipping_address[:city].to_s
+          post[:ci_shipcity] = shipping_address[:city].to_s
           post[:ci_shipstate] = shipping_address[:state].to_s
-          post[:ci_shipzip]   = shipping_address[:zip].to_s
+          post[:ci_shipzip] = shipping_address[:zip].to_s
         end
       end
 
@@ -87,10 +87,10 @@ module ActiveMerchant #:nodoc:
       end
 
       def add_creditcard(post, creditcard)
-        post[:ccnum]   = creditcard.number.to_s
-        post[:ccname]  = creditcard.name.to_s
-        post[:cvv2]    = creditcard.verification_value.to_s if creditcard.verification_value?
-        post[:expmon]  = creditcard.month.to_s
+        post[:ccnum] = creditcard.number.to_s
+        post[:ccname] = creditcard.name.to_s
+        post[:cvv2] = creditcard.verification_value.to_s if creditcard.verification_value?
+        post[:expmon] = creditcard.month.to_s
         post[:expyear] = creditcard.year.to_s
       end
 
@@ -98,33 +98,33 @@ module ActiveMerchant #:nodoc:
         h = {}
         body.gsub!("<html><body><plaintext>", "")
         body.
-          split("\r\n").
-          map do |i|
-            a = i.split("=")
-            h[a.first] = a.last unless a.first.nil?
-          end
+            split("\r\n").
+            map do |i|
+          a = i.split("=")
+          h[a.first] = a.last unless a.first.nil?
+        end
         h
       end
 
       def commit(action, money, parameters)
         parameters[:acctid] = @options[:login].to_s
-        parameters[:subid]  = @options[:sub_id].to_s unless @options[:sub_id].blank?
+        parameters[:subid] = @options[:sub_id].to_s unless @options[:sub_id].blank?
         parameters[:amount] = amount(money)
 
         case action
-        when :sale
-          parameters[:action] = "ns_quicksale_cc"
-        when :authonly
-          parameters[:action] = "ns_quicksale_cc"
-          parameters[:authonly] = 1
-        when :capture
-          parameters[:action] = "ns_quicksale_cc"
+          when :sale
+            parameters[:action] = "ns_quicksale_cc"
+          when :authonly
+            parameters[:action] = "ns_quicksale_cc"
+            parameters[:authonly] = 1
+          when :capture
+            parameters[:action] = "ns_quicksale_cc"
         end
 
         response = parse(ssl_post(URL, parameters.to_post_data) || "")
         Response.new(successful?(response), message_from(response), response,
-          :test => test?,
-          :authorization => response["refcode"]
+                     :test => test?,
+                     :authorization => response["refcode"]
         )
       end
 

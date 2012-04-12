@@ -2,17 +2,17 @@
 class VouchersController < ApplicationController
   layout "callc"
 
-  before_filter :check_post_method, :only=>[:invoice_delete]
+  before_filter :check_post_method, :only => [:invoice_delete]
   before_filter :check_localization
   before_filter :authorize
-  before_filter :check_if_can_see_finances, :only => [:vouchers, :vouchers_list_to_csv, :voucher_new, :voucher_create, :voucher_delete, ]
-  before_filter :find_voucher , :only=>[:voucher_pay]
-  before_filter{ |c|   c.instance_variable_set :@allow_read, true
-    c.instance_variable_set :@allow_edit, true
+  before_filter :check_if_can_see_finances, :only => [:vouchers, :vouchers_list_to_csv, :voucher_new, :voucher_create, :voucher_delete,]
+  before_filter :find_voucher, :only => [:voucher_pay]
+  before_filter { |c| c.instance_variable_set :@allow_read, true
+  c.instance_variable_set :@allow_edit, true
   }
-  @@voucher_view = [:vouchers , :vouchers_list_to_csv]
+  @@voucher_view = [:vouchers, :vouchers_list_to_csv]
   @@voucher_edit = [:vouchers_new, :vouchers_create, :voucher_delete, :bulk_management]
-  before_filter(:only =>  @@voucher_view+@@voucher_edit) { |c|
+  before_filter(:only => @@voucher_view+@@voucher_edit) { |c|
     allow_read, allow_edit = c.check_read_write_permission(@@voucher_view, @@voucher_edit, {:role => "accountant", :right => :acc_vouchers_manage, :ignore => true})
     c.instance_variable_set :@allow_read, allow_read
     c.instance_variable_set :@allow_edit, allow_edit
@@ -36,9 +36,9 @@ class VouchersController < ApplicationController
       @options[:page] = params[:page].to_i if params[:page]
       @options[:s_usable] = params[:s_usable].to_s if params[:s_usable]
       @options[:s_usable] = params[:s_usable].to_s if params[:s_usable]
-      @options[:s_active] = params[:s_active].to_s  if params[:s_active]
-      @options[:s_number] = params[:s_number].to_s  if params[:s_number]
-      @options[:s_tag] = params[:s_tag].to_s  if params[:s_tag]
+      @options[:s_active] = params[:s_active].to_s if params[:s_active]
+      @options[:s_number] = params[:s_number].to_s if params[:s_number]
+      @options[:s_tag] = params[:s_tag].to_s if params[:s_tag]
       @options[:s_credit_min] = params[:s_credit_min].to_s if params[:s_credit_min]
       @options[:s_credit_max] = params[:s_credit_max].to_s if params[:s_credit_max]
       @options[:s_curr] = params[:s_curr].to_s if params[:s_curr]
@@ -68,11 +68,11 @@ class VouchersController < ApplicationController
       var << current_user.user_time(Time.now)
     end
 
-    ["number", "tag"].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], "%"+@options["s_#{col}".intern].to_s+"%", "vouchers.#{col} LIKE ?" , cond, var)}
+    ["number", "tag"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], "%"+@options["s_#{col}".intern].to_s+"%", "vouchers.#{col} LIKE ?", cond, var) }
 
-    ["use_date", "active_till"].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "vouchers.#{col} LIKE ?" , cond, var)}
+    ["use_date", "active_till"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "vouchers.#{col} LIKE ?", cond, var) }
 
     if !@options[:s_credit_min].blank?
       cond << "credit_with_vat >= ?"; var << @options[:s_credit_min]
@@ -89,14 +89,14 @@ class VouchersController < ApplicationController
     @total_vouchers = Voucher.count(:all, :conditions => [cond.join(" AND ")]+var, :order => "use_date DESC, active_till ASC")
     MorLog.my_debug("TW: #{@total_vouchers}")
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
-    @total_pages = ( @total_vouchers.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@total_vouchers.to_f / session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
-    @fpage = ((@options[:page] -1 ) * session[:items_per_page]).to_i
+    @fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
-    @vouchers = Voucher.find(:all, :include => [:tax, :user], :conditions => [cond.join(" AND ")]+var, :order => "use_date DESC, active_till ASC", :limit=>"#{@fpage}, #{session[:items_per_page].to_i}")
+    @vouchers = Voucher.find(:all, :include => [:tax, :user], :conditions => [cond.join(" AND ")]+var, :order => "use_date DESC, active_till ASC", :limit => "#{@fpage}, #{session[:items_per_page].to_i}")
 
-      @search = 0
-      @search = 1 if cond.length > 0
+    @search = 0
+    @search = 1 if cond.length > 0
 
     @use_dates = Voucher.get_use_dates
     @active_tills = Voucher.get_active_tills
@@ -105,8 +105,8 @@ class VouchersController < ApplicationController
     session[:vouchers_vouchers_options] = @options
 
     if params[:csv] and params[:csv].to_i > 0
-      sep = Confline.get_value("CSV_Separator",0).to_s
-      dec = Confline.get_value("CSV_Decimal",0).to_s
+      sep = Confline.get_value("CSV_Separator", 0).to_s
+      dec = Confline.get_value("CSV_Decimal", 0).to_s
 
       csv_string = _("Active")+sep+_("Number")+sep+_("Tag")+sep+_("Credit")+sep + _("Credit_with_VAT")+sep + _("Currency")+sep + _("Use_date")+sep + _("Active_till")+sep + _("User")
       csv_string += "\n"
@@ -120,7 +120,7 @@ class VouchersController < ApplicationController
 
         csv_string += "#{active.to_s}#{sep}#{v.number.to_s}#{sep}#{v.tag.to_s}#{sep}"
         if can_see_finances?
-          csv_string += "#{nice_number(v.count_credit_with_vat).to_s.gsub(".",dec).to_s}#{sep}#{nice_number(v.credit_with_vat).to_s.gsub(".",dec).to_s}#{sep}#{v.currency}#{sep}"
+          csv_string += "#{nice_number(v.count_credit_with_vat).to_s.gsub(".", dec).to_s}#{sep}#{nice_number(v.credit_with_vat).to_s.gsub(".", dec).to_s}#{sep}#{v.currency}#{sep}"
         end
         csv_string += "#{nice_date_time v.use_date}#{sep}#{nice_date(v.active_till).to_s}#{sep}#{nuser}"
         csv_string +="\n"
@@ -130,7 +130,7 @@ class VouchersController < ApplicationController
       if params[:test].to_i == 1
         render :text => csv_string
       else
-        send_data(csv_string,   :type => 'text/csv; charset=utf-8; header=present',  :filename => filename)
+        send_data(csv_string, :type => 'text/csv; charset=utf-8; header=present', :filename => filename)
       end
     end
 
@@ -166,11 +166,11 @@ class VouchersController < ApplicationController
       @tax = Tax.new(tax)
       if credit.to_f <= 0
         flash[:notice] = _('Please_enter_credit')
-        render :action => 'voucher_new'       and return false
+        render :action => 'voucher_new' and return false
       end
       if session_from_date.to_date <= Time.now.to_date
         flash[:notice] = _('Time_should_be_in_future')
-        render :action => 'voucher_new'       and return false
+        render :action => 'voucher_new' and return false
       end
     end
 
@@ -205,7 +205,7 @@ class VouchersController < ApplicationController
         @currencies = Currency.get_active
         @tax = Tax.new(tax)
         flash[:notice] = _('Please_enter_amount')
-        render :action => 'voucher_new'       and return false
+        render :action => 'voucher_new' and return false
       end
 
       for i in 1..total.to_i
@@ -268,7 +268,7 @@ class VouchersController < ApplicationController
       @user.vouchers_disabled_till = Time.now + Confline.get_value("Voucher_Disable_Time").to_i.minutes
       @user.save
       flash[:notice] = _('Too_many_wrong_attempts_Vouchers_disabled_till') + ": " + nice_date_time(@user.vouchers_disabled_till)
-      redirect_to :controller => "callc", :action => 'main'      and return false
+      redirect_to :controller => "callc", :action => 'main' and return false
     end
 
     @active = 0
@@ -318,7 +318,7 @@ class VouchersController < ApplicationController
       ruser = User.find_by_id(@user.owner_id)
       ruser.balance += @credit_in_default_currency
       ruser.save
-      pr = Payment.new({:tax=>(@voucher.credit_with_vat - @credit_in_default_currency), :gross=>@credit_in_default_currency, :paymenttype => "voucher", :amount => @voucher.credit_with_vat, :currency => @voucher.currency, :date_added => Time.now, :shipped_at => Time.now, :completed => 1, :user_id => ruser.id, :first_name => ruser.first_name, :last_name => ruser.last_name})
+      pr = Payment.new({:tax => (@voucher.credit_with_vat - @credit_in_default_currency), :gross => @credit_in_default_currency, :paymenttype => "voucher", :amount => @voucher.credit_with_vat, :currency => @voucher.currency, :date_added => Time.now, :shipped_at => Time.now, :completed => 1, :user_id => ruser.id, :first_name => ruser.first_name, :last_name => ruser.last_name})
       pr.save
     end
     #payment
@@ -373,8 +373,8 @@ class VouchersController < ApplicationController
 
     cond = ""
     today = nice_date_time(Time.now)
-    cond += " ISNULL(use_date) AND active_till >= '#{today}' " if @active  == "yes"
-    cond += " NOT (ISNULL(use_date) AND active_till >= '#{today}') " if @active  == "no"
+    cond += " ISNULL(use_date) AND active_till >= '#{today}' " if @active == "yes"
+    cond += " NOT (ISNULL(use_date) AND active_till >= '#{today}') " if @active == "no"
 
     cond += " AND " if cond.length > 0 and @tag.to_s.length > 0
     cond += " tag = '#{@tag.to_s}' " if @tag.to_s.length > 0
@@ -390,7 +390,7 @@ class VouchersController < ApplicationController
     cond += " AND " if cond.length > 0 and @atill.to_s.length > 0
     cond += " active_till LIKE '#{@atill.to_s}%' " if @atill.to_s.length > 0
     if cond.length > 0
-      @vouchers = Voucher.find(:all, :conditions=>cond)
+      @vouchers = Voucher.find(:all, :conditions => cond)
     end
 
     session[:vouchers_bulk] = @vouchers
@@ -400,7 +400,7 @@ class VouchersController < ApplicationController
   def voucher_delete
     # @vouchers set in before_filter
     vch = 0
-    @vouchers.each{|voucher| vch += 1 if voucher.destroy}
+    @vouchers.each { |voucher| vch += 1 if voucher.destroy }
     if params[:interval].to_i == 1
       if vch == 0
         flash[:notice] = _('Vouchers_interval_was_not_deleted')
@@ -419,13 +419,13 @@ class VouchersController < ApplicationController
 
   def voucher_active
     # @vouchers set in before_filter
-    @page = params[:page]if params[:page]
+    @page = params[:page] if params[:page]
     if params[:interval].to_i == 1
       @active = params[:vaction].to_s == 'active' ? 1 : 0
     else
       @active = @vouchers[0].active.to_i == 1 ? 0 : 1
     end
-    sql = "UPDATE vouchers SET active = #{@active.to_i} WHERE id IN (#{@vouchers.collect{|t| [t.id]}.join(',')})"
+    sql = "UPDATE vouchers SET active = #{@active.to_i} WHERE id IN (#{@vouchers.collect { |t| [t.id] }.join(',')})"
     ActiveRecord::Base.connection.update(sql)
     if @active.to_i == 1
       if !session[:vouchers_bulk].blank? or params[:id].to_i > 0
@@ -440,7 +440,7 @@ class VouchersController < ApplicationController
         flash[:notice] = _('No_Vouchers_found_to_deactivete')
       end
     end
-    redirect_to :action => 'vouchers', :page=>@page
+    redirect_to :action => 'vouchers', :page => @page
   end
 
   private
@@ -449,10 +449,10 @@ class VouchersController < ApplicationController
     @vouchers = []
     if params[:interval].to_i == 1
       if session[:vouchers_bulk] != nil
-        @vouchers = Voucher.find(:all, :conditions => ["vouchers.id IN (?)",  session[:vouchers_bulk]])
+        @vouchers = Voucher.find(:all, :conditions => ["vouchers.id IN (?)", session[:vouchers_bulk]])
       end
     else
-      @vouchers << Voucher.find(:first, :conditions => ["vouchers.id = ?",  params[:id]])
+      @vouchers << Voucher.find(:first, :conditions => ["vouchers.id = ?", params[:id]])
     end
     @vouchers.compact!
 
@@ -469,7 +469,7 @@ class VouchersController < ApplicationController
   end
 
   def find_voucher
-    @voucher = Voucher.find(:first, :conditions=>{:id=>params[:id]})
+    @voucher = Voucher.find(:first, :conditions => {:id => params[:id]})
     unless @voucher
       flash[:notice] = _('Voucher_not_found')
       redirect_to :controller => :callc, :action => :main and return false

@@ -8,7 +8,7 @@ module ActiveProcessor
       attr_accessor :instance
       attr_accessor :response
 
-      @@acquirers = {"ING" => {:test => "https://idealtest.secure-ing.com:443/ideal/iDeal", :live =>  "https://ideal.secure-ing.com:443/ideal/iDeal"}}
+      @@acquirers = {"ING" => {:test => "https://idealtest.secure-ing.com:443/ideal/iDeal", :live => "https://ideal.secure-ing.com:443/ideal/iDeal"}}
 
       def self.acquirers
         @@acquirers
@@ -74,7 +74,7 @@ module ActiveProcessor
 
       def valid?(params)
         for param, value in params[@engine][@name]
-          set(:form, { param => value }) # field validations
+          set(:form, {param => value}) # field validations
         end
         params[@engine][@name]['amount'] = exchange(params[@engine][@name]['amount'], params[@engine][@name]['currency'], "EUR").to_f
         if get(:config, 'min_amount').to_i > 0
@@ -102,7 +102,7 @@ module ActiveProcessor
         end
 
         tax = gross - money
-        @payment = Payment.create_for_user(user, {:pending_reason => "waiting_response",  :paymenttype => [@engine, @name].join("_"), :currency => "EUR", :gross => gross, :tax => tax, :amount => money})
+        @payment = Payment.create_for_user(user, {:pending_reason => "waiting_response", :paymenttype => [@engine, @name].join("_"), :currency => "EUR", :gross => gross, :tax => tax, :amount => money})
         @payment.save
         if purchase_options = {
             :issuer_id => params[:issuer_id].to_s,
@@ -110,8 +110,8 @@ module ActiveProcessor
             :return_url => self.get_to(nil, "notify"),
             :description => self.get(:config, "description").to_s,
             :expiration_period => "PT60M",
-            :entrance_code=> @payment.id.to_s
-          }
+            :entrance_code => @payment.id.to_s
+        }
           a = initiate_gateway
           return false unless a
           gateway = ActiveMerchant::Billing::IdealGateway.new
@@ -184,18 +184,18 @@ module ActiveProcessor
         payment.update_attributes({:completed => 1, :shipped_at => Time.now, :pending_reason => "Completed"})
         exchange_rate = ActiveProcessor.configuration.currency_exchange.call('EUR', Currency.get_default.name)
         Action.add_action_hash(payment.user_id,
-          { :action => "payment: #{self.settings['name']}",
-            :data => "User successfully payed using #{self.settings['name']} (iDeal)",
-            :data3 => "#{payment.amount} #{payment.currency} | tax: #{payment.gross - payment.amount} #{payment.currency} | fee: #{payment.fee} #{payment.currency} | sent: #{payment.gross} #{payment.currency}",
-            :data2 => "payment id: #{payment.id}",
-            :data4 => "authorization: #{payment.transaction_id}"
-          })
+                               {:action => "payment: #{self.settings['name']}",
+                                :data => "User successfully payed using #{self.settings['name']} (iDeal)",
+                                :data3 => "#{payment.amount} #{payment.currency} | tax: #{payment.gross - payment.amount} #{payment.currency} | fee: #{payment.fee} #{payment.currency} | sent: #{payment.gross} #{payment.currency}",
+                                :data2 => "payment id: #{payment.id}",
+                                :data4 => "authorization: #{payment.transaction_id}"
+                               })
         user.balance += payment.amount.to_f * exchange_rate
         if get(:config, "transaction_fee_enabled").to_i == 1
           fee = get(:config, "transaction_fee_amount").to_f
           fee_payment = payment.dup
           fee_payment.attributes = {:paymenttype => "ideal_ideal_fee", :fee => 0, :tax => 0, :shipped_at => Time.now,
-            :completed => 1, :pending_reason => "Completed", :amount => fee*-1, :gross => fee*-1}
+                                    :completed => 1, :pending_reason => "Completed", :amount => fee*-1, :gross => fee*-1}
           fee_payment.save
           Action.add_action(user.id, "payment: #{self.settings['name']} fee", "User paid ideal fee: #{fee} EUR")
           user.balance -= fee.to_f * exchange_rate
@@ -208,16 +208,16 @@ module ActiveProcessor
         payment.update_attributes({:completed => 0, :pending_reason => "Waiting for confirmation"})
 
         Action.add_action_hash(payment.user_id,
-          { :action => "payment: #{self.settings['name']}",
-            :data => "User successfully payed, waiting for payment approval #{self.settings['name']} (iDeal)",
-            :data3 => "#{payment.amount} #{payment.currency} | tax: #{payment.gross - payment.amount} #{payment.currency} | fee: #{payment.fee} #{payment.currency} | sent: #{payment.gross} #{payment.currency}",
-            :data2 => "payment id: #{payment.id}",
-            :data4 => "authorization: #{payment.transaction_id}"})
+                               {:action => "payment: #{self.settings['name']}",
+                                :data => "User successfully payed, waiting for payment approval #{self.settings['name']} (iDeal)",
+                                :data3 => "#{payment.amount} #{payment.currency} | tax: #{payment.gross - payment.amount} #{payment.currency} | fee: #{payment.fee} #{payment.currency} | sent: #{payment.gross} #{payment.currency}",
+                                :data2 => "payment id: #{payment.id}",
+                                :data4 => "authorization: #{payment.transaction_id}"})
 
         if self.get(:config, 'payment_notification').to_i == 1
           owner = User.find_by_id(user.owner_id)
-          email = Email.find(:first, :conditions => { :name => 'payment_notification_regular', :owner_id => owner.id })
-          variables = Email.email_variables(owner, nil, { :payment => payment, :payment_notification => OpenStruct.new({}), :payment_type => "#{self.name} (#{self.engine})" })
+          email = Email.find(:first, :conditions => {:name => 'payment_notification_regular', :owner_id => owner.id})
+          variables = Email.email_variables(owner, nil, {:payment => payment, :payment_notification => OpenStruct.new({}), :payment_type => "#{self.name} (#{self.engine})"})
           EmailsController::send_email(email, Confline.get_value("Email_from", owner.id), [owner], variables)
         end
         #flash[:status] = _('Transaction_waiting_for_confirmation')
@@ -225,32 +225,32 @@ module ActiveProcessor
 
       def set_error_messages(transaction, payment)
         case transaction.status
-        when :canceled then
-          payment.update_attributes({:pending_reason => "Canceled", :shipped_at => Time.now})
-          return _('Transaction_was_canceled')
-        when :expired
-          payment.update_attributes({:pending_reason => "Expired", :shipped_at => Time.now})
-          return _('Transaction_has_expired')
-        when :failure
-          payment.update_attributes({:pending_reason => "Failure", :shipped_at => Time.now})
-          return  _('Transaction_has_failed')
-        when :open
-          return  _('Transaction_not_yet_complete')
-        else
-          return _('Other_status')+": "+transaction.status.to_s
+          when :canceled then
+            payment.update_attributes({:pending_reason => "Canceled", :shipped_at => Time.now})
+            return _('Transaction_was_canceled')
+          when :expired
+            payment.update_attributes({:pending_reason => "Expired", :shipped_at => Time.now})
+            return _('Transaction_has_expired')
+          when :failure
+            payment.update_attributes({:pending_reason => "Failure", :shipped_at => Time.now})
+            return _('Transaction_has_failed')
+          when :open
+            return _('Transaction_not_yet_complete')
+          else
+            return _('Other_status')+": "+transaction.status.to_s
         end
       end
 
       def initiate_gateway
         begin
-          ActiveMerchant::Billing::IdealGateway.live_url =  @@acquirers[self.get(:config, "ideal_acquirer")][:live]
-          ActiveMerchant::Billing::IdealGateway.test_url =  @@acquirers[self.get(:config, "ideal_acquirer")][:test]
-          ActiveMerchant::Billing::IdealGateway.merchant_id  = self.get(:config, "merchant_id")
+          ActiveMerchant::Billing::IdealGateway.live_url = @@acquirers[self.get(:config, "ideal_acquirer")][:live]
+          ActiveMerchant::Billing::IdealGateway.test_url = @@acquirers[self.get(:config, "ideal_acquirer")][:test]
+          ActiveMerchant::Billing::IdealGateway.merchant_id = self.get(:config, "merchant_id")
           ActiveMerchant::Billing::IdealGateway.passphrase = self.get(:config, "passphrase")
           ActiveMerchant::Billing::IdealGateway.private_key = self.get(:config, "private_key_file")
           ActiveMerchant::Billing::IdealGateway.private_certificate = self.get(:config, "private_certificate_file")
           ActiveMerchant::Billing::IdealGateway.ideal_certificate = self.get(:config, "ideal_certificate_file")
-          ActiveMerchant::Billing::Base.gateway_mode = (self.get(:config, "test").to_i == 1 ? :test : :live )
+          ActiveMerchant::Billing::Base.gateway_mode = (self.get(:config, "test").to_i == 1 ? :test : :live)
           return true
         rescue
           return false

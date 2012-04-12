@@ -50,22 +50,22 @@ class Google4R::Checkout::OrderAdjustmentTest < Test::Unit::TestCase
           <%s />
         </shipping>
       </order-adjustment>}
-    @shipping_adjustments = [ 'flat-rate-shipping-adjustment', 'pickup-shipping-adjustment' ]
+    @shipping_adjustments = ['flat-rate-shipping-adjustment', 'pickup-shipping-adjustment']
   end
-  
+
   def test_reponds_correctly
     assert_respond_to OrderAdjustment, :create_from_element
 
     adjustment = OrderAdjustment.new
-    
-    [ :adjustment_total, :adjustment_total=, :merchant_calculation_successful,
-      :merchant_calculation_successful, :merchant_codes, :merchant_codes=, 
-      :shipping, :shipping=, :total_tax, :total_tax=
+
+    [:adjustment_total, :adjustment_total=, :merchant_calculation_successful,
+     :merchant_calculation_successful, :merchant_codes, :merchant_codes=,
+     :shipping, :shipping=, :total_tax, :total_tax=
     ].each do |symbol|
       assert_respond_to adjustment, symbol
     end
   end
-  
+
   def test_create_from_xml_works_correctly
     @shipping_adjustments.each do |adjustment_name|
       # Build Mocha Expectations
@@ -76,24 +76,24 @@ class Google4R::Checkout::OrderAdjustmentTest < Test::Unit::TestCase
       expect = MerchantCode.stubs(:create_from_element)
       expect.with { |element| element.name == 'dummy-adjustment-two' }
       expect.times(1).returns(:dummy_adjustment2)
-      
+
       expect = ShippingAdjustment.stubs(:create_from_element)
       expect.with { |element| element.name == adjustment_name }
       expect.times(1).returns(adjustment_name.to_sym)
-    
+
       # Create the adjustment
-      element = REXML::Document.new(@xml_str % [ adjustment_name ]).root
+      element = REXML::Document.new(@xml_str % [adjustment_name]).root
       adjustment = OrderAdjustment.create_from_element(element)
-    
+
       # Assert!
       assert_equal Money.new(1205, 'USD'), adjustment.adjustment_total
       assert_equal true, adjustment.merchant_calculation_successful
-      assert_equal [ :dummy_adjustment1, :dummy_adjustment2 ], adjustment.merchant_codes
+      assert_equal [:dummy_adjustment1, :dummy_adjustment2], adjustment.merchant_codes
       assert_equal adjustment_name.to_sym, adjustment.shipping
       assert_equal Money.new(1105, 'USD'), adjustment.total_tax
     end
   end
-  
+
   def test_create_from_xml_works_correctly_without_shiping_tag
     # Build Mocha Expectations
     expect = MerchantCode.stubs(:create_from_element)
@@ -103,17 +103,17 @@ class Google4R::Checkout::OrderAdjustmentTest < Test::Unit::TestCase
     expect = MerchantCode.stubs(:create_from_element)
     expect.with { |element| element.name == 'dummy-adjustment-two' }
     expect.times(1).returns(:dummy_adjustment2)
-    
+
     expect = ShippingAdjustment.expects(:create_from_element).never
-  
+
     # Create the adjustment
     element = REXML::Document.new(@xml_str.gsub(%r{<shipping>.*<\/shipping>}m, '')).root
     adjustment = OrderAdjustment.create_from_element(element)
-  
+
     # Assert!
     assert_equal Money.new(1205, 'USD'), adjustment.adjustment_total
     assert_equal true, adjustment.merchant_calculation_successful
-    assert_equal [ :dummy_adjustment1, :dummy_adjustment2 ], adjustment.merchant_codes
+    assert_equal [:dummy_adjustment1, :dummy_adjustment2], adjustment.merchant_codes
     assert_equal nil, adjustment.shipping
     assert_equal Money.new(1105, 'USD'), adjustment.total_tax
   end

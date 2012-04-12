@@ -1,5 +1,5 @@
-<% invoice = user.cs_invoices.first%>
-<tr id="booth-<%=user.id%>" class="booth reserved booth-<%=user.id%>">
+<% invoice = user.cs_invoices.first %>
+<tr id="booth-<%= user.id %>" class="booth reserved booth-<%= user.id %>">
   <td class="status">
     <span></span>
   </td>
@@ -11,10 +11,12 @@
   <td class="number">-</td>
   <td class="balance">
     <% if invoice.prepaid? %>
-      <span class="balance-value <%= ((invoice.balance - invoice.call_price) < 0.0) ? "red" : "green" %>"><%= _(invoice.invoice_type.capitalize).upcase %> (<%= sprintf("%.2f",invoice.balance.to_f - invoice.call_price.to_f) %>)</span>
-      <a href="" class="topup topup-prepaid" title="<%= _('Adjust_user_balance')%>">&nbsp;</a>
+        <span class="balance-value <%= ((invoice.balance - invoice.call_price) < 0.0) ? "red" : "green" %>"><%= _(invoice.invoice_type.capitalize).upcase %>
+          (<%= sprintf("%.2f", invoice.balance.to_f - invoice.call_price.to_f) %>)</span>
+        <a href="" class="topup topup-prepaid" title="<%= _('Adjust_user_balance') %>">&nbsp;</a>
     <% else %>
-      <span class="balance-value <%= (invoice.call_price > 0.0) ? "red" : "green" %>"><%= _(invoice.invoice_type.capitalize).upcase %> (<%= sprintf("%.2f",invoice.balance - invoice.call_price) %>)</span>
+        <span class="balance-value <%= (invoice.call_price > 0.0) ? "red" : "green" %>"><%= _(invoice.invoice_type.capitalize).upcase %>
+          (<%= sprintf("%.2f", invoice.balance - invoice.call_price) %>)</span>
     <% end %>
   </td>
   <td class="comment">

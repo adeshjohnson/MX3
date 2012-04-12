@@ -1,10 +1,10 @@
 <div id="process-list">
 </div>
 <%= periodically_call_remote(:update => 'process-list',
-  :url => { :action => :tx_status },
-  :frequency => 3,
-  :loading => "Element.show('spinner');",
-  :complete=> "Element.hide('spinner');")%>
+                             :url => {:action => :tx_status},
+                             :frequency => 3,
+                             :loading => "Element.show('spinner');",
+                             :complete => "Element.hide('spinner');") %>
 
 <div class="separator">&nbsp;</div>
 

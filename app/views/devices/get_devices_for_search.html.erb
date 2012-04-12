@@ -1,1 +1,1 @@
-<%= select_tag("s_device", options_for_select([[_('All'), "all"]] + @devices.map{|dev| [nice_device(dev, {:image => false}) ,dev.id.to_s ]})) %>
+<%= select_tag("s_device", options_for_select([[_('All'), "all"]] + @devices.map { |dev| [nice_device(dev, {:image => false}), dev.id.to_s] })) %>

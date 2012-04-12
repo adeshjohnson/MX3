@@ -1,5 +1,4 @@
-
-<table width="100%" class="maintable" >
+<table width="100%" class="maintable">
   <tr>
     <th> <%= _('Country') %></th>
     <th> <%= _('Name') %></th>
@@ -7,32 +6,32 @@
     <th> <%= _('Prefix') %></th>
     <th align="right"> <%= _('Calls') %></th>
   </tr>
-  <%if @res != [] %>
-    <%for res in @res2%>
+  <% if @res != [] %>
+      <% for res in @res2 %>
+          <tr>
+            <td <%= tooltip(_('Unknown'), _('Calls_by_source_unknown_explained')) %>> <%= _('Unknown') %> <%= b_help %></td>
+            <td> <%= '' %></td>
+            <td> <%= '' %></td>
+            <td> <%= '' %></td>
+            <td align="right"> <%= res['calls'] %></td>
+          </tr>
+      <% end %>
+  <% end %>
+  <% for res in @res3 %>
       <tr>
-        <td <%=tooltip(_('Unknown'),_('Calls_by_source_unknown_explained'))%>> <%= _('Unknown') %> <%=b_help%></td>
-        <td> <%= '' %></td>
-        <td> <%= '' %></td>
-        <td> <%= '' %></td>
-        <td align="right" > <%= res['calls'] %></td>
+        <th colspan="4"> <%= res['name'] %> <%= draw_flag(res['code']) %></th>
+        <th align="right"> <%= res['calls'] %></th>
       </tr>
-    <%end%>
-  <%end%>
-  <%for res in @res3%>
-    <tr >
-      <th colspan="4"> <%= res['name'] %> <%= draw_flag(res['code'])%></th>
-      <th align="right"> <%= res['calls'] %></th>
-    </tr>
-    <% @res.each_with_index{ |res2, i|%>
-      <%if res2['name'] == res['name']%>
-        <tr class="row<%= (i % 2 + 1).to_s %>">
-          <td> <%= res2['name'] %> </td>
-          <td> <%= res2['des_name'] %> </td>
-          <td> <%= res2['subcode'] %></td>
-          <td> <%= res2['prefix'] %></td>
-          <td align="right"> <%= res2['calls'] %></td>
-        </tr>
-      <% end  %>
-    <%  } %>
-  <%end%>
+      <% @res.each_with_index { |res2, i| %>
+          <% if res2['name'] == res['name'] %>
+              <tr class="row<%= (i % 2 + 1).to_s %>">
+                <td> <%= res2['name'] %> </td>
+                <td> <%= res2['des_name'] %> </td>
+                <td> <%= res2['subcode'] %></td>
+                <td> <%= res2['prefix'] %></td>
+                <td align="right"> <%= res2['calls'] %></td>
+              </tr>
+          <% end %>
+      <% } %>
+  <% end %>
 </table>

@@ -12,32 +12,32 @@
       <th align="center">      <%= _('Delete') %>    </th>
     </tr>
     <% @emails.each_with_index { |email, i| %>
-      <tr class="row<%= (i % 2 + 1).to_s %>">
-        <td id="created_<%= sanitize_to_id(email.name) %>" align="center"> <%= nice_date(email.date_created) %>      </td>
-        <td id="name_<%= sanitize_to_id(email.name) %>" align="left"> <%= email.name %>                           </td>
-        <td id="subject_<%= sanitize_to_id(email.name) %>" align="left"> <%= email.subject[0..20] %><%= "..." if email.subject.size > 20 %></td>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <td id="created_<%= sanitize_to_id(email.name) %>" align="center"> <%= nice_date(email.date_created) %>      </td>
+          <td id="name_<%= sanitize_to_id(email.name) %>" align="left"> <%= email.name %>                           </td>
+          <td id="subject_<%= sanitize_to_id(email.name) %>" align="left"> <%= email.subject[0..20] %><%= "..." if email.subject.size > 20 %></td>
 
-        <% if email.emails.to_i != "0" %>
-          <td id="emails_<%= sanitize_to_id(email.name) %>" align="right"><%= link_to email.emails.to_i, :action => 'list_users', :id => email.id %>  </td>
-        <% else %>
-          <td id="emails_<%= sanitize_to_id(email.name) %>" align="right"><%= 0 %>                                 </td>
-        <% end %>
-        <td id="format_<%= sanitize_to_id(email.name) %>" align="center"> <%= email.format %> </td>
-        <td id="show_<%= sanitize_to_id(email.name) %>" align="center"><%= link_to b_email, :action => 'show_emails', :id => email.id  %> </td>
-        <td id="email_send_<%= sanitize_to_id(email.name) %>" align="center">
-          <% if email.template == 0 %>
-            <% if @email_sending_enabled %>
-              <%= link_to b_email_send, :action => 'send_emails', :id => email.id %>
-            <%  else %>
-              <%= b_cross(:onmouseover=>"Tip(\'" + _("Email_sending_is_disabled") + "\')", :onmouseout => "UnTip()", :id => sanitize_to_id(email.name.to_s).to_s+"_disabled") %>
-            <% end %>
+          <% if email.emails.to_i != "0" %>
+              <td id="emails_<%= sanitize_to_id(email.name) %>" align="right"><%= link_to email.emails.to_i, :action => 'list_users', :id => email.id %>  </td>
+          <% else %>
+              <td id="emails_<%= sanitize_to_id(email.name) %>" align="right"><%= 0 %>                                 </td>
           <% end %>
-        </td>
-        <td id="edit_<%=  sanitize_to_id(email.name) %>" align="center"><%= link_to b_edit, :action => 'edit', :id => email.id if email.owner_id==session[:user_id] %></td>
-        <td id="destroy_<%= sanitize_to_id(email.name) %>" align="center"><%= link_to b_delete, { :action => 'destroy', :id => email.id}, :confirm => 'Are you sure?', :method => :post if  email.template == 0 and email.owner_id==session[:user_id]%></td>
-      </tr>
+          <td id="format_<%= sanitize_to_id(email.name) %>" align="center"> <%= email.format %> </td>
+          <td id="show_<%= sanitize_to_id(email.name) %>" align="center"><%= link_to b_email, :action => 'show_emails', :id => email.id %> </td>
+          <td id="email_send_<%= sanitize_to_id(email.name) %>" align="center">
+            <% if email.template == 0 %>
+                <% if @email_sending_enabled %>
+                    <%= link_to b_email_send, :action => 'send_emails', :id => email.id %>
+                <% else %>
+                    <%= b_cross(:onmouseover => "Tip(\'" + _("Email_sending_is_disabled") + "\')", :onmouseout => "UnTip()", :id => sanitize_to_id(email.name.to_s).to_s+"_disabled") %>
+                <% end %>
+            <% end %>
+          </td>
+          <td id="edit_<%= sanitize_to_id(email.name) %>" align="center"><%= link_to b_edit, :action => 'edit', :id => email.id if email.owner_id==session[:user_id] %></td>
+          <td id="destroy_<%= sanitize_to_id(email.name) %>" align="center"><%= link_to b_delete, {:action => 'destroy', :id => email.id}, :confirm => 'Are you sure?', :method => :post if  email.template == 0 and email.owner_id==session[:user_id] %></td>
+        </tr>
     <% } %>
   </table>
 </div>
-<br />
+<br/>
 <%= link_to b_add + _('Add_new_email'), :action => 'new' %>

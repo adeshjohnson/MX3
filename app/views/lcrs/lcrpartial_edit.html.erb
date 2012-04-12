@@ -1,36 +1,36 @@
 <table>
   <tr>
     <td>
-      <%= form_tag(:action => 'update_lcrpartial', :id=> @lp.id) do %>
-        <%= _('Main_Lcr')%> :
-        <select name="main_lcr">
-          <% for l in @lcrs%>
-            <option value = "<%=l.id %>" <%= "selected" if l.id.to_i == @lp.main_lcr_id.to_i %>> <%= l.name %></option>
-          <%end%>
-        </select>
+      <%= form_tag(:action => 'update_lcrpartial', :id => @lp.id) do %>
+          <%= _('Main_Lcr') %> :
+          <select name="main_lcr">
+            <% for l in @lcrs %>
+                <option value="<%= l.id %>" <%= "selected" if l.id.to_i == @lp.main_lcr_id.to_i %>> <%= l.name %></option>
+            <% end %>
+          </select>
+          </td>
+          <td>
+            <%= _('Prefix') %> : <%= text_field_tag('prefix', @lp.prefix.to_s, "class" => "input") %>
+            <%= observe_field("prefix",
+                              :update => :results,
+                              :frequency => 0.5,
+                              :with => "prefix",
+                              :url => {:action => "prefix_finder_find"},
+                              :loading => "Element.show('spinner');",
+                              :complete => "Element.hide('spinner');") %>
+          </td>
+          <td>
+            <div id="results"></div>
+          </td>
+          <td>
+            <%= _('Lcr') %> :
+            <select name="lcr">
+              <% for l in @lcrs %>
+                  <option value="<%= l.id %>"  <%= "selected" if l.id.to_i == @lp.lcr_id.to_i %> > <%= l.name %></option>
+              <% end %>
+            </select>
+            <%= submit_tag _('Update'), :disable_with => _('Processing..') %>
+      <% end %>
       </td>
-      <td>
-        <%= _('Prefix')%> : <%= text_field_tag('prefix', @lp.prefix.to_s, "class" => "input") %>
-        <%= observe_field("prefix",
-          :update   => :results,
-          :frequency => 0.5,
-          :with => "prefix",
-          :url      => { :action => "prefix_finder_find"},
-          :loading => "Element.show('spinner');",
-          :complete=> "Element.hide('spinner');") %>
-      </td>
-      <td>
-        <div id="results"></div>
-      </td>
-      <td>
-        <%= _('Lcr')%> :
-        <select name="lcr">
-          <% for l in @lcrs%>
-            <option value = "<%=l.id %>"  <%= "selected" if l.id.to_i == @lp.lcr_id.to_i %> > <%= l.name %></option>
-          <%end%>
-        </select>
-        <%= submit_tag _('Update') , :disable_with=>_('Processing..')%>
-      <%end%>
-    </td>
-  </tr>
+      </tr>
 </table>

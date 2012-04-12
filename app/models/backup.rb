@@ -1,11 +1,11 @@
 # -*- encoding : utf-8 -*-
 class Backup < ActiveRecord::Base
   extend UniversalHelpers
-  
+
   def destroy_all
     backup_folder = Confline.get_value('Backup_Folder')
     `rm -rf #{backup_folder.to_s + "/db_dump_" + self.backuptime.to_s + ".sql.tar.gz"}`
-    self.destroy 
+    self.destroy
   end
 
 
@@ -26,7 +26,7 @@ class Backup < ActiveRecord::Base
     if backup_shedule.to_i == 1
       if (backup_month.to_i == @time.month.to_i) or (backup_month.to_s == "Every_month")
         if (backup_month_day.to_i == @time.day.to_i) or (backup_month_day.to_s == "Every_day")
-          if (backup_week_day.to_i ==  @time.wday.to_i) or (backup_week_day.to_s == "Every_day")
+          if (backup_week_day.to_i == @time.wday.to_i) or (backup_week_day.to_s == "Every_day")
             if (backup_hour.to_i == @time.hour.to_i) or (backup_hour.to_s == "Every_hour")
               res = 0
               MorLog.my_debug "Making auto backup"
@@ -43,9 +43,9 @@ class Backup < ActiveRecord::Base
 
                 # check if we have correct number of auto backups
                 MorLog.my_debug "Checking for old backups"
-                backups = Backup.find(:all, :conditions =>"backuptype = 'auto'")
+                backups = Backup.find(:all, :conditions => "backuptype = 'auto'")
                 if backups.size.to_i >= backup_number.to_i
-                  backup = Backup.find(:first, :conditions =>"backuptype = 'auto'", :order => "backuptime ASC")
+                  backup = Backup.find(:first, :conditions => "backuptype = 'auto'", :order => "backuptime ASC")
                   backup.destroy_all
                   MorLog.my_debug "Old auto backup deleted"
                 end
@@ -68,12 +68,12 @@ class Backup < ActiveRecord::Base
 
   def Backup.private_backup_create(user_id, backuptype = "manual", comment = "")
     time = Time.now().to_s(:db)
-    backuptime =  time.gsub(/[- :]/, '').to_s
+    backuptime = time.gsub(/[- :]/, '').to_s
     backup_folder = Confline.get_value("Backup_Folder")
 
     backup_folder = "/usr/local/mor/backups" if backup_folder.to_s == ""
 
-   # script=[]
+    # script=[]
     MorLog.my_debug("/usr/local/mor/make_backup.sh #{backuptime} #{backup_folder} -c")
     script= `/usr/local/mor/make_backup.sh #{backuptime} #{backup_folder} -c`
 
@@ -85,7 +85,7 @@ class Backup < ActiveRecord::Base
       backup = Backup.new
       backup.comment = comment
       backup.backuptype = backuptype
-      backup.backuptime =  backuptime
+      backup.backuptime = backuptime
       backup.save
       MorLog.my_debug("Auto backup made", true, "%Y-%m-%d %H:%M:%S")
     end

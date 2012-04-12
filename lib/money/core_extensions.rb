@@ -15,13 +15,13 @@ end
 class String
   def to_money
     # Get the currency
-    matches = scan /([A-Z]{2,3})/ 
+    matches = scan /([A-Z]{2,3})/
     currency = matches[0] ? matches[0][0] : Money.default_currency
-    
+
     # Get the cents amount
     matches = strip.scan /(\-?\d+(\.(\d+))?)/
     cents = matches[0] ? matches[0][0].to_f * 100 : 0
-    
+
     Money.new(cents, currency)
   end
 end
@@ -30,5 +30,5 @@ end
 class NilClass
   def to_money
     Money.empty
-  end  
+  end
 end

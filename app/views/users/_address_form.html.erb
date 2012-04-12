@@ -1,59 +1,59 @@
-
-                    <tr>
-                                <td> <%= _('Address') %>:   </td>
-                                <td id="address"> <%= text_field 'address', 'address', "class" => "input"  %> </td>
-                    </tr>
-                    <tr>
-                                <td> <%= _('Postcode') %>:   </td>
-                                <td id="postcode"> <%= text_field 'address', 'postcode', "class" => "input"  %> </td>
-                    </tr>
-                    <tr>
-                                <td> <%= _('City') %>:   </td>
-                                <td id="city"> <%= text_field 'address', 'city', "class" => "input"  %> </td>
-                    </tr>
-                    <tr>
-                                <td> <%= _('County') %>:   </td>
-                                <td id="country"> <%= text_field 'address', 'county', "class" => "input"  %> </td>
-                    </tr>                    
-                    <tr>
-                                <td> <%= _('State') %>:   </td>
-                                <td id="state"> <%= text_field 'address', 'state', "class" => "input"  %> </td>
-                    </tr>                    
-                    <tr>
-                                <td> <%= _('Country') %>:   </td>
-                                <td> <div class="nb">
-                                        <select name="address[direction_id]" > 
-                                            <% for country in @countries %>
-                                                <%
-                                                    comp_country = @default_country_id
-                                                    comp_country = @user.address.direction_id  if @user.address
-                                                %>                                               
-                                                <option value="<%= country.id %>" <%= "selected" if  country.id == comp_country %>> <%= h(country.name[0,22]) %> </option>
-                                            <% end %>
-                                        </select>
-                                        </div>
-                                </td>
-                    </tr>             
-                    <tr>
-                                <td> <%= _('Phone') %>:   </td>
-                                <td id="phone"> <%= text_field 'address', 'phone', "class" => "input"  %> </td>
-                    </tr>  
-                    <tr>
-                                <td> <%= _('Mob_phone') %>:   </td>
-                                <td id="mob_phone"> <%= text_field 'address', 'mob_phone', "class" => "input"  %> </td>
-                    </tr>  
-                    <tr>
-                                <td> <%= _('Fax') %>:   </td>
-                                <td id="fax"> <%= text_field 'address', 'fax', "class" => "input"  %> </td>
-                    </tr>  
-                    <tr>
-                                <td> <%= _('Email') %>:   </td>
-                                <td id="email">
-                                  <% if @disallow_email_editing and current_user.id != @user.owner.id %>
-                                    <%= text_field 'address', 'email', "class" => "input", :disabled => "disabled"  %>
-                                  <% else %>
-                                    <%= text_field 'address', 'email', "class" => "input"  %>
-                                  <% end %>
-                                </td>
-                    </tr>                   
+<tr>
+  <td> <%= _('Address') %>:</td>
+  <td id="address"> <%= text_field 'address', 'address', "class" => "input" %> </td>
+</tr>
+<tr>
+  <td> <%= _('Postcode') %>:</td>
+  <td id="postcode"> <%= text_field 'address', 'postcode', "class" => "input" %> </td>
+</tr>
+<tr>
+  <td> <%= _('City') %>:</td>
+  <td id="city"> <%= text_field 'address', 'city', "class" => "input" %> </td>
+</tr>
+<tr>
+  <td> <%= _('County') %>:</td>
+  <td id="country"> <%= text_field 'address', 'county', "class" => "input" %> </td>
+</tr>
+<tr>
+  <td> <%= _('State') %>:</td>
+  <td id="state"> <%= text_field 'address', 'state', "class" => "input" %> </td>
+</tr>
+<tr>
+  <td> <%= _('Country') %>:</td>
+  <td>
+    <div class="nb">
+      <select name="address[direction_id]">
+        <% for country in @countries %>
+            <%
+               comp_country = @default_country_id
+               comp_country = @user.address.direction_id if @user.address
+            %>
+            <option value="<%= country.id %>" <%= "selected" if  country.id == comp_country %>> <%= h(country.name[0, 22]) %> </option>
+        <% end %>
+      </select>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td> <%= _('Phone') %>:</td>
+  <td id="phone"> <%= text_field 'address', 'phone', "class" => "input" %> </td>
+</tr>
+<tr>
+  <td> <%= _('Mob_phone') %>:</td>
+  <td id="mob_phone"> <%= text_field 'address', 'mob_phone', "class" => "input" %> </td>
+</tr>
+<tr>
+  <td> <%= _('Fax') %>:</td>
+  <td id="fax"> <%= text_field 'address', 'fax', "class" => "input" %> </td>
+</tr>
+<tr>
+  <td> <%= _('Email') %>:</td>
+  <td id="email">
+    <% if @disallow_email_editing and current_user.id != @user.owner.id %>
+        <%= text_field 'address', 'email', "class" => "input", :disabled => "disabled" %>
+    <% else %>
+        <%= text_field 'address', 'email', "class" => "input" %>
+    <% end %>
+  </td>
+</tr>
 

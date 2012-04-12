@@ -29,6 +29,6 @@ class CountryCodeTest < Test::Unit::TestCase
   end
 
   def test_invalid_code_format
-    assert_raise(CountryCodeFormatError){ CountryCode.new('Canada') }
+    assert_raise(CountryCodeFormatError) { CountryCode.new('Canada') }
   end
 end

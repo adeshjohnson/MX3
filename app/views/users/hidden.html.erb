@@ -1,103 +1,111 @@
 <table width="100%">
   <tr>
     <% unless (session[:usertype] == "accountant" and (session[:acc_user_create].to_i == 0 or session[:acc_user_create].to_i == 1)) %>
-      <td><%= link_to b_add + _('Add_new_user'), :action => 'new' %></td>
-    <% end  %>
+        <td><%= link_to b_add + _('Add_new_user'), :action => 'new' %></td>
+    <% end %>
     <td align="right">
       <% if not @users.empty? %>
-        <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+          <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
       <% end %>
     </td>
   </tr>
 </table>
 
 <%= form_tag :action => params[:action] do %>
-  <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
-    <br />
-    <table width="100%" class="simple">
-      <tr>
-        <td>
-          <%= _('Username') %>: <%= text_field_tag 's_username', @options[:s_username], "class" => "input", :size => "10", :maxlength => "30"  %>
-          <%= _('first_name') %>: <%= text_field_tag 's_first_name', @options[:s_first_name], "class" => "input", :size => "10", :maxlength => "30"  %>
-          <%= _('last_name') %>: <%= text_field_tag 's_last_name', @options[:s_last_name], "class" => "input", :size => "10", :maxlength => "30"  %>
-          <%= _('User_type') %>:
-          <select name="user_type"  >
-            <option value="-1" <%= "selected" if @options[:user_type].to_i == -1 %>><%= _('All')%> </option>
-            <%for type in @roles%>
-              <option value="<%= type.name%>" <%= "selected" if @options[:user_type].to_s == type.name %> > <%= type.name %></option>
-            <%end%>
-          </select>
-          <%= _('Email') %>: <%= text_field_tag 's_email', @options[:s_email], "class" => "input", :size => "20", :maxlength => "100"  %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= _('Agreement_number') %>: <%= text_field_tag 's_agr_number', @options[:s_agr_number], "class" => "input", :size => "10", :maxlength => "30"  %>
-          <%= _('Accounting_number') %>: <%= text_field_tag 's_acc_number',@options[:s_acc_number], "class" => "input", :size => "10", :maxlength => "30"  %>
-          <%= _('Company_Personal_ID') %>: <%= text_field_tag 's_clientid', @options[:s_clientid], "class" => "input", :size => "10", :maxlength => "30"  %>
-          <%= _('Subscriptions') %>:
-          <select name="sub_s"  >
-            <option value="-1" <%= "selected" if @options[:sub_s].to_i == -1 %>><%= _('All')%> </option>
-            <option value="0" <%= "selected" if @options[:sub_s].to_i == 0 %> >  <%= _('Without_subscriptions')%> </option>
-            <option value="1" <%= "selected" if @options[:sub_s].to_i == 1 %>><%= _('With_subscriptions')%> </option>
-          </select>
-          <%= _('User_ID') %>: <%= text_field_tag 's_id', @search_id, "class" => "input", :size => "10", :maxlength => "30"  %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
-        </td>
-        <td align="right">
-          <%# MorLog.my_debug(@search) %>
-          <%  if @search == 1%>
-            <%= link_to b_cross + _('Clear_search'), :action => 'list', :clean=>1%>
-          <%end%>
-        </td>
-      </tr>
-    </table>
-  </div>
+    <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+      <br/>
+      <table width="100%" class="simple">
+        <tr>
+          <td>
+            <%= _('Username') %>
+            : <%= text_field_tag 's_username', @options[:s_username], "class" => "input", :size => "10", :maxlength => "30" %>
+            <%= _('first_name') %>
+            : <%= text_field_tag 's_first_name', @options[:s_first_name], "class" => "input", :size => "10", :maxlength => "30" %>
+            <%= _('last_name') %>
+            : <%= text_field_tag 's_last_name', @options[:s_last_name], "class" => "input", :size => "10", :maxlength => "30" %>
+            <%= _('User_type') %>:
+            <select name="user_type">
+              <option value="-1" <%= "selected" if @options[:user_type].to_i == -1 %>><%= _('All') %> </option>
+              <% for type in @roles %>
+                  <option value="<%= type.name %>" <%= "selected" if @options[:user_type].to_s == type.name %> > <%= type.name %></option>
+              <% end %>
+            </select>
+            <%= _('Email') %>
+            : <%= text_field_tag 's_email', @options[:s_email], "class" => "input", :size => "20", :maxlength => "100" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= _('Agreement_number') %>
+            : <%= text_field_tag 's_agr_number', @options[:s_agr_number], "class" => "input", :size => "10", :maxlength => "30" %>
+            <%= _('Accounting_number') %>
+            : <%= text_field_tag 's_acc_number', @options[:s_acc_number], "class" => "input", :size => "10", :maxlength => "30" %>
+            <%= _('Company_Personal_ID') %>
+            : <%= text_field_tag 's_clientid', @options[:s_clientid], "class" => "input", :size => "10", :maxlength => "30" %>
+            <%= _('Subscriptions') %>:
+            <select name="sub_s">
+              <option value="-1" <%= "selected" if @options[:sub_s].to_i == -1 %>><%= _('All') %> </option>
+              <option value="0" <%= "selected" if @options[:sub_s].to_i == 0 %> >  <%= _('Without_subscriptions') %> </option>
+              <option value="1" <%= "selected" if @options[:sub_s].to_i == 1 %>><%= _('With_subscriptions') %> </option>
+            </select>
+            <%= _('User_ID') %>
+            : <%= text_field_tag 's_id', @search_id, "class" => "input", :size => "10", :maxlength => "30" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
+          </td>
+          <td align="right">
+            <%# MorLog.my_debug(@search) %>
+            <% if @search == 1 %>
+                <%= link_to b_cross + _('Clear_search'), :action => 'list', :clean => 1 %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
 <% end %>
-<br />
-<%=page_select_header(@options[:page], @total_pages, nil, @options)%>
+<br/>
+<%= page_select_header(@options[:page], @total_pages, nil, @options) %>
 
 <div align="center">
   <table width="100%" class="maintable">
     <tr>
-      <th align="left"> <%=nice_list_order('acc',_('Acc') , @options)%></th>
-      <th align="left"> <%=nice_list_order('username',_('Username') , @options)%></th>
-      <%if ['admin', 'accountant'].include?(current_user.usertype)%>
-        <th align="left"><%=nice_list_order('usertype',_('Usertype') , @options)%></th>
+      <th align="left"> <%= nice_list_order('acc', _('Acc'), @options) %></th>
+      <th align="left"> <%= nice_list_order('username', _('Username'), @options) %></th>
+      <% if ['admin', 'accountant'].include?(current_user.usertype) %>
+          <th align="left"><%= nice_list_order('usertype', _('Usertype'), @options) %></th>
       <% end %>
-      <th align="left">  <%=nice_list_order('user',_('User') , @options)%></th>
-      <th align="left">  <%=nice_list_order('account_type',_('ID') , @options)%></th>
+      <th align="left">  <%= nice_list_order('user', _('User'), @options) %></th>
+      <th align="left">  <%= nice_list_order('account_type', _('ID'), @options) %></th>
       <% if can_see_finances? -%>
-        <th align="right"> <%=nice_list_order('balance',_('Balance') , @options)%></th>
+          <th align="right"> <%= nice_list_order('balance', _('Balance'), @options) %></th>
       <% end -%>
       <th align="center"></th>
       <th colspan=14></th>
     </tr>
 
-    <% @users.each_with_index{ |user, i| %>
-      <% user.blocked.to_i == 0 ? text_class="n" : text_class="n_disabled" %>
+    <% @users.each_with_index { |user, i| %>
+        <% user.blocked.to_i == 0 ? text_class="n" : text_class="n_disabled" %>
 
-      <tr class="row<%= (i % 2 + 1).to_s %>">
-        <td id="id_<%= user.id %>" align="left" class="<%= text_class %>"> <%= h user.id %>      </td>
-        <td id="username_<%= user.id %>" align="left" class="<%= text_class %>"> <%= h user.username %>      </td>
-        <%if ['admin', 'accountant'].include?(current_user.usertype)%>
-          <td id="usertype_<%= user.id %>" align="left" class="<%= text_class %>"> <%= h user.usertype %>      </td>
-        <% end %>
-        <td id="name_<%= user.id %>" align="left" class="<%= text_class %>"> <%= user.first_name %> <%= user.last_name %>      </td>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <td id="id_<%= user.id %>" align="left" class="<%= text_class %>"> <%= h user.id %>      </td>
+          <td id="username_<%= user.id %>" align="left" class="<%= text_class %>"> <%= h user.username %>      </td>
+          <% if ['admin', 'accountant'].include?(current_user.usertype) %>
+              <td id="usertype_<%= user.id %>" align="left" class="<%= text_class %>"> <%= h user.usertype %>      </td>
+          <% end %>
+          <td id="name_<%= user.id %>" align="left" class="<%= text_class %>"> <%= user.first_name %> <%= user.last_name %>      </td>
 
-        <td id="postpaid_<%= user.id %>" align="left" class="<%= text_class %>">
-          <%= _('Prepaid') if user.postpaid != 1 %>  <%= _('Postpaid') if user.postpaid == 1 %>
-        </td>
-        <% if can_see_finances? -%>
-          <td id="balance_<%= user.id %>" align="right" class="<%= text_class %>"> <%= nice_number user.balance %> </td>
-        <% end -%>
+          <td id="postpaid_<%= user.id %>" align="left" class="<%= text_class %>">
+            <%= _('Prepaid') if user.postpaid != 1 %>  <%= _('Postpaid') if user.postpaid == 1 %>
+          </td>
+          <% if can_see_finances? -%>
+              <td id="balance_<%= user.id %>" align="right" class="<%= text_class %>"> <%= nice_number user.balance %> </td>
+          <% end -%>
 
-        <%= render :partial => "/layouts/user_buttons", :locals => {:user => user} %>
-      </tr>
+          <%= render :partial => "/layouts/user_buttons", :locals => {:user => user} %>
+        </tr>
     <% } %>
   </table>
 </div>

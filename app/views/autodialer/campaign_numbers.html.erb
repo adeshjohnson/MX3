@@ -3,7 +3,7 @@
     <th align="center"><%= _('Total_numbers') %></th>
     <th align="center"><%= _('Dialed') %></th>
     <th align="center"><%= _('Completed') %></th>
-    <th align="center"><%= _('Time') %></th>    
+    <th align="center"><%= _('Time') %></th>
   </tr>
   <tr>
     <td align="center">  <%= @campaign.adnumbers.size.to_s %>  </td>
@@ -12,40 +12,41 @@
     <td align="center">  <%= @campaign.completed_numbers_user_billsec %>  </td>
   </tr>
 </table>
-<br />
+<br/>
 <table width="100%">
   <tr>
     <td>
-      <%= link_to b_csv +  _('Import_numbers_from_file'), :action => 'import_numbers_from_file', :id => @campaign.id %>
+      <%= link_to b_csv + _('Import_numbers_from_file'), :action => 'import_numbers_from_file', :id => @campaign.id %>
     </td>
     <td align="right">
-      <%= link_to b_cross +  _('Delete_all_numbers'), {:action => 'delete_all_numbers', :id => @campaign.id}, :confirm => _('Are_you_sure'), :method => :post %>
+      <%= link_to b_cross + _('Delete_all_numbers'), {:action => 'delete_all_numbers', :id => @campaign.id}, :confirm => _('Are_you_sure'), :method => :post %>
     </td>
   </tr>
 </table>
-<br />
-<%=page_select_header(@page, @total_pages, {:id=>@campaign.id}, {}) if @total_pages > 1%>
+<br/>
+<%= page_select_header(@page, @total_pages, {:id => @campaign.id}, {}) if @total_pages > 1 %>
 <table class="maintable" width="100%">
   <tr>
     <th align="left"><%= _('Number') %></th>
     <th align="center"><%= _('Status') %></th>
     <th align="center"><%= _('Executed_time') %></th>
-    <th align="center"><%= _('Completed_time') %></th>    
+    <th align="center"><%= _('Completed_time') %></th>
     <th></th>
     <th></th>
   </tr>
   <% i = 0 %>
   <% for number in @numbers %>
-    <tr class="row<%= (i % 2 + 1).to_s %>">
-      <td align="left" id="number_<%=number.id%>"><%= number.number %></td>
-      <td align="center"  id="status_<%=number.id%>"><%= _(number.status) %></td>
-      <td align="center"  id="executed_time_<%=number.id%>"><%= nice_date_time number.executed_time %></td>
-      <td align="center"  id="completed_time_<%=number.id%>"><%= nice_date_time number.completed_time %></td>
-      <td align="center"  id="undo_<%=number.id%>"> <%= link_to b_undo, :action => 'reactivate_number', :id => number.id if number.status == "completed"%> </td>
-      <td align="center"  id="delete_<%=number.id%>"><% link_to b_delete, { :action => 'number_destroy', :id => number.id }, :confirm => _('Are_you_sure'), :method => :post %></td>
-    </tr>
-    <% i += 1%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td align="left" id="number_<%= number.id %>"><%= number.number %></td>
+        <td align="center" id="status_<%= number.id %>"><%= _(number.status) %></td>
+        <td align="center" id="executed_time_<%= number.id %>"><%= nice_date_time number.executed_time %></td>
+        <td align="center" id="completed_time_<%= number.id %>"><%= nice_date_time number.completed_time %></td>
+        <td align="center" id="undo_<%= number.id %>"> <%= link_to b_undo, :action => 'reactivate_number', :id => number.id if number.status == "completed" %> </td>
+        <td align="center" id="delete_<%= number.id %>">
+          <% link_to b_delete, {:action => 'number_destroy', :id => number.id}, :confirm => _('Are_you_sure'), :method => :post %></td>
+      </tr>
+      <% i += 1 %>
   <% end %>
 </table>
-<br />
-<%=page_select_header(@page, @total_pages, {:id=>@campaign.id}, {}) if @total_pages > 1%>
+<br/>
+<%= page_select_header(@page, @total_pages, {:id => @campaign.id}, {}) if @total_pages > 1 %>

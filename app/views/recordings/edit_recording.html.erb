@@ -3,26 +3,26 @@
 <% call = @recording.call -%>
 
 <% if call %>
-  <%= _('Duration') %>: <%= call.billsec %><br>
-  <%= _('Source') %>: <%= call.src %><br>
-  <%= _('Destination') %>: <%= hide_dst_for_user(current_user, "gui", call.dst) %>  <br>
+    <%= _('Duration') %>: <%= call.billsec %><br>
+    <%= _('Source') %>: <%= call.src %><br>
+    <%= _('Destination') %>: <%= hide_dst_for_user(current_user, "gui", call.dst) %>  <br>
 <% end %>
 <br>
 <br>
-<%if session[:usertype] != "user"%>
-  <%= form_tag :action =>"update_recording", :id => @recording.id do %>
-    <table class ='maintable'>
-      <tr>
-        <th><%= _("Comment")%></th>
-      </tr>
-      <tr>
-        <td><%= text_field("recording", "comment", :class=>"input", :size => "100", :maxlength => "200") %></td>
-      </tr>
-    </table>
-    <br>
-    <%= submit_tag(_("Update"), :disable_with=>_('Processing..'))%>
-  <% end %>
-<%end%>
+<% if session[:usertype] != "user" %>
+    <%= form_tag :action => "update_recording", :id => @recording.id do %>
+        <table class='maintable'>
+          <tr>
+            <th><%= _("Comment") %></th>
+          </tr>
+          <tr>
+            <td><%= text_field("recording", "comment", :class => "input", :size => "100", :maxlength => "200") %></td>
+          </tr>
+        </table>
+        <br>
+        <%= submit_tag(_("Update"), :disable_with => _('Processing..')) %>
+    <% end %>
+<% end %>
 <br>
 <br>
 

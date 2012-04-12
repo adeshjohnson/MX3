@@ -36,7 +36,7 @@ require 'test/frontend_configuration'
 # Test for the ShippingMethod class.
 class Google4R::Checkout::DeliveryMethodTest < Test::Unit::TestCase
   include Google4R::Checkout
-  
+
   def test_shipping_method_raises_runtime_error_on_initialisation
     assert_raises(RuntimeError) { DeliveryMethod.new }
   end

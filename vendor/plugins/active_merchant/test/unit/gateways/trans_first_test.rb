@@ -5,68 +5,68 @@ class TransFirstTest < Test::Unit::TestCase
 
   def setup
     @gateway = TransFirstGateway.new(
-      :login => 'LOGIN',
-      :password => 'PASSWORD'
+        :login => 'LOGIN',
+        :password => 'PASSWORD'
     )
 
     @credit_card = credit_card('4242424242424242')
     @options = {
-      :billing_address => address
+        :billing_address => address
     }
     @amount = 100
   end
-  
+
   def test_missing_field_response
     @gateway.stubs(:ssl_post).returns(missing_field_response)
-    
+
     response = @gateway.purchase(@amount, @credit_card, @options)
-    
+
     assert_failure response
     assert response.test?
     assert_equal 'Missing parameter: UserId.', response.message
   end
-  
+
   def test_successful_purchase
     @gateway.stubs(:ssl_post).returns(successful_purchase_response)
-    
+
     response = @gateway.purchase(@amount, @credit_card, @options)
-    
+
     assert_success response
     assert response.test?
     assert_equal 'test transaction', response.message
     assert_equal '355', response.authorization
   end
-  
+
   def test_failed_purchase
     @gateway.stubs(:ssl_post).returns(failed_purchase_response)
-    
+
     response = @gateway.purchase(@amount, @credit_card, @options)
-    
+
     assert_failure response
     assert response.test?
     assert_equal '29005716', response.authorization
     assert_equal 'Invalid cardholder number', response.message
   end
-  
+
   def test_avs_result
     @gateway.expects(:ssl_post).returns(successful_purchase_response)
-    
+
     response = @gateway.purchase(@amount, @credit_card, @options)
     assert_equal 'X', response.avs_result['code']
   end
-  
+
   def test_cvv_result
     @gateway.expects(:ssl_post).returns(successful_purchase_response)
-    
+
     response = @gateway.purchase(@amount, @credit_card, @options)
     assert_equal 'M', response.cvv_result['code']
   end
-  
+
   private
   def missing_field_response
     "Missing parameter: UserId.\r\n"
   end
-  
+
   def successful_purchase_response
     <<-XML
 <?xml version="1.0" encoding="utf-8"?> 
@@ -87,7 +87,7 @@ class TransFirstTest < Test::Unit::TestCase
 </CCSaleDebitResponse>
     XML
   end
-  
+
   def failed_purchase_response
     <<-XML
 <?xml version="1.0" encoding="utf-8" ?>  

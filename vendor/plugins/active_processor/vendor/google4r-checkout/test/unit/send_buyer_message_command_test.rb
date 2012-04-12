@@ -52,7 +52,7 @@ class Google4R::Checkout::SendBuyerMessageCommandTest < Test::Unit::TestCase
   end
 
   def test_behaves_correctly
-    [ :google_order_number, :message, :send_email ].each do |symbol|
+    [:google_order_number, :message, :send_email].each do |symbol|
       assert_respond_to @command, symbol
     end
   end

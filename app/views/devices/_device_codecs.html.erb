@@ -1,15 +1,15 @@
-<ul id="<%=ctype%>_sortable_list" style="list-style-type: none;margin-left: 0px;padding-left: 0px;">
+<ul id="<%= ctype %>_sortable_list" style="list-style-type: none;margin-left: 0px;padding-left: 0px;">
   <% codecs.each_with_index do |codec, index| %>
 
-    <li id="item_<%= codec.id %>" style="height: 18px; ">
-      <div id="dev_ind_<%=index%>">
-        <% if device and params[:action] != 'default_device' %>
-          <%= check_box_tag 'codec['+codec.name+']', "1", device.codec?(codec.name), :onchange=> "new Ajax.Updater('#{ctype}_items', '#{Web_Dir}/devices/devicecodecs_sort/#{device.id}?codec_id=#{codec.id}&ctype=#{ctype}&val='+this.checked, {asynchronous:true, evalScripts:true, parameters:Sortable.serialize('#{ctype}_sortable_list')}); ".html_safe%> <%= codec.long_name %>
-        <% else %>
-          <%= check_box_tag 'codec['+codec.name+']', "1", (device_code(codec.name).to_i == 1), :onchange=> "new Ajax.Updater('#{ctype}_items', '#{Web_Dir}/devices/devicecodecs_sort/#{-1}?codec_id=#{codec.id}&ctype=#{ctype}&val='+this.checked, {asynchronous:true, evalScripts:true, parameters:Sortable.serialize('#{ctype}_sortable_list')}); ".html_safe%> <%= codec.long_name %>
-        <% end %>
-      </div>
-    </li>
+      <li id="item_<%= codec.id %>" style="height: 18px; ">
+        <div id="dev_ind_<%= index %>">
+          <% if device and params[:action] != 'default_device' %>
+              <%= check_box_tag 'codec['+codec.name+']', "1", device.codec?(codec.name), :onchange => "new Ajax.Updater('#{ctype}_items', '#{Web_Dir}/devices/devicecodecs_sort/#{device.id}?codec_id=#{codec.id}&ctype=#{ctype}&val='+this.checked, {asynchronous:true, evalScripts:true, parameters:Sortable.serialize('#{ctype}_sortable_list')}); ".html_safe %> <%= codec.long_name %>
+          <% else %>
+              <%= check_box_tag 'codec['+codec.name+']', "1", (device_code(codec.name).to_i == 1), :onchange => "new Ajax.Updater('#{ctype}_items', '#{Web_Dir}/devices/devicecodecs_sort/#{-1}?codec_id=#{codec.id}&ctype=#{ctype}&val='+this.checked, {asynchronous:true, evalScripts:true, parameters:Sortable.serialize('#{ctype}_sortable_list')}); ".html_safe %> <%= codec.long_name %>
+          <% end %>
+        </div>
+      </li>
   <% end %>
 </ul>
 

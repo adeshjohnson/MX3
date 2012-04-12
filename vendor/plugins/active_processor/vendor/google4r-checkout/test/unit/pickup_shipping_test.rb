@@ -44,23 +44,23 @@ class Google4R::Checkout::PickupShippingMethodTest < Test::Unit::TestCase
     assert_nil @shipping.name
     assert_nil @shipping.price
   end
-  
+
   def test_pickup_shipping_method_behaves_correctly
-    [ :name, :name=, :price, :price= ].each do |sym|
+    [:name, :name=, :price, :price=].each do |sym|
       assert_respond_to @shipping, sym
     end
   end
-  
+
   def test_pickup_shipping_method_setting_attributes_works_correctly
     @shipping.name = "Shipping Method Name"
     assert_equal "Shipping Method Name", @shipping.name
-    
+
     @shipping.price = Money.new(100, "EUR")
     assert_kind_of Money, @shipping.price
     assert_equal 100, @shipping.price.cents
     assert_equal "EUR", @shipping.price.currency
   end
-  
+
   def test_pickup_shipping_method_price_is_validated
     # Test that PickupShippingMethod checks for its price attribute responding
     # to cents and currency.

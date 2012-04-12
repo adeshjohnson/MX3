@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class Payment < ActiveRecord::Base
-  belongs_to :user, :include=>[:tax]
+  belongs_to :user, :include => [:tax]
   has_many :cc_invoices
 
-   after_create { |record| Action.add_action_hash(User.current, {:action=>'manual_payment_created', :data=>record.user_id, :data2=>record.amount, :data3=>record.currency, :target_id=>record.id, :target_type=>'Payment'}) if record.paymenttype.to_s == 'manual' }
+  after_create { |record| Action.add_action_hash(User.current, {:action => 'manual_payment_created', :data => record.user_id, :data2 => record.amount, :data3 => record.currency, :target_id => record.id, :target_type => 'Payment'}) if record.paymenttype.to_s == 'manual' }
 
   #commented out because user is now added to belongs_to
   #def user
@@ -40,20 +40,20 @@ class Payment < ActiveRecord::Base
     user = self.user
     pa = self.amount
     if self.paymenttype == "manual" and user
-      pa = self.tax ? self.amount.to_f - self.tax.to_f :  user.get_tax.count_amount_without_tax(self.amount.to_f)
+      pa = self.tax ? self.amount.to_f - self.tax.to_f : user.get_tax.count_amount_without_tax(self.amount.to_f)
     end
-    pa = self.gross if ["webmoney", "cyberplat",  "linkpoint", "voucher", "ouroboros", "subscription", "paypal", "paypal_fee"].include?(self.paymenttype.to_s)
+    pa = self.gross if ["webmoney", "cyberplat", "linkpoint", "voucher", "ouroboros", "subscription", "paypal", "paypal_fee"].include?(self.paymenttype.to_s)
     pa = self.amount if ["invoice"].include?(self.paymenttype.to_s)
     pa
   end
 
   def payment_amount_with_vat(nice_number_digits)
-    if self.tax && !["webmoney", "cyberplat",  "linkpoint", "voucher", "ouroboros", "subscription", "invoice", "paypal", 'manual'].include?(self.paymenttype)
+    if self.tax && !["webmoney", "cyberplat", "linkpoint", "voucher", "ouroboros", "subscription", "invoice", "paypal", 'manual'].include?(self.paymenttype)
       return self.amount + self.tax
     else
       if self.paymenttype == "invoice" and self.invoice
         return self.invoice.price_with_tax(:precision => nice_number_digits)
-      else 
+      else
         return self.amount
       end
     end
@@ -92,16 +92,16 @@ class Payment < ActiveRecord::Base
     if amount != 0
       currency = Currency.get_default
       payment = Payment.new(
-        :paymenttype => "subscription",
-        :amount => user.get_tax.apply_tax(amount),
-        :shipped_at => Time.now,
-        :date_added => Time.now,
-        :completed => 1,
-        :gross => amount,
-        :tax => user.get_tax.count_tax_amount(amount),
-        :user_id => user.id,
-        :first_name => user.first_name,
-        :last_name => user.last_name)
+          :paymenttype => "subscription",
+          :amount => user.get_tax.apply_tax(amount),
+          :shipped_at => Time.now,
+          :date_added => Time.now,
+          :completed => 1,
+          :gross => amount,
+          :tax => user.get_tax.count_tax_amount(amount),
+          :user_id => user.id,
+          :first_name => user.first_name,
+          :last_name => user.last_name)
       payment.currency = currency.name if currency
       payment.email = user.address.email if user.address
       return payment.save
@@ -112,23 +112,23 @@ class Payment < ActiveRecord::Base
 
   def Payment.add_for_card(card, amount, currency = nil, owner_id = nil)
     logger.fatal card.cardgroup.get_tax.count_tax_amount(amount)
-    Payment.add_global({:paymenttype=>'Card', :tax => card.cardgroup.get_tax.count_tax_amount(amount), :currency => currency ? currency : card.cardgroup.tell_balance_in_currency, :user_id=>card.id, :card=>1, :amount=>amount, :owner_id => owner_id ? owner_id : card.cardgroup.owner_id})
+    Payment.add_global({:paymenttype => 'Card', :tax => card.cardgroup.get_tax.count_tax_amount(amount), :currency => currency ? currency : card.cardgroup.tell_balance_in_currency, :user_id => card.id, :card => 1, :amount => amount, :owner_id => owner_id ? owner_id : card.cardgroup.owner_id})
   end
 
   def Payment.add_global(details= {})
-    Payment.create({:shipped_at=>Time.now, :date_added=>Time.now, :completed=>1,:currency=>Currency.get_default}.merge(details))
+    Payment.create({:shipped_at => Time.now, :date_added => Time.now, :completed => 1, :currency => Currency.get_default}.merge(details))
   end
 
   def Payment.create_for_user(user, params = {})
-    user = User.find(:first, :conditions => ["users.id = ?", user])if user.class == Fixnum
+    user = User.find(:first, :conditions => ["users.id = ?", user]) if user.class == Fixnum
     if user
       return Payment.new({
-          :user_id => user.id,
-          :first_name => user.first_name,
-          :last_name => user.last_name,
-          :date_added => Time.now(),
-          :owner_id => user.owner.id
-        }.merge(params))
+                             :user_id => user.id,
+                             :first_name => user.first_name,
+                             :last_name => user.last_name,
+                             :date_added => Time.now(),
+                             :owner_id => user.owner.id
+                         }.merge(params))
     else
       return false
     end
@@ -158,7 +158,7 @@ class Payment < ActiveRecord::Base
     if completed.to_i == 0
       # payment_1 is not addet to user balance , preverse_paymnet is not subtracted
       MorLog.my_debug("Payment #{refund_payment.id} is not reversed, becouse Paypal payment #{id} is not completed ", true)
-      Action.add_action_hash(user, {:action=>"Paypal Reverse Failed", :data=>"Payment #{id} is not confirmed by admin", :data2=>id, :data3=>refund_payment.id })
+      Action.add_action_hash(user, {:action => "Paypal Reverse Failed", :data => "Payment #{id} is not confirmed by admin", :data2 => id, :data3 => refund_payment.id})
     else
       # payment_1 is addet to user balance , subtracte reverse amount
       refund_payment.completed = 1
@@ -175,7 +175,7 @@ class Payment < ActiveRecord::Base
         fee_payment.amount = refund_payment.fee*-1
         fee_payment.gross = refund_payment.fee*-1
         fee_payment.save
-        Action.add_action_hash(user, {:action=>"Paypal Reverse", :data=>"Payment #{id} is reversed, #{refund_payment.gross}", :data2=>id, :data3=>refund_payment.id })
+        Action.add_action_hash(user, {:action => "Paypal Reverse", :data => "Payment #{id} is reversed, #{refund_payment.gross}", :data2 => id, :data3 => refund_payment.id})
       end
       user.save
       refund_payment.save
@@ -216,11 +216,11 @@ class Payment < ActiveRecord::Base
   def self.financial_statements(owner_id, user_id, status, from_date, till_date, ordinary_user, currency_name)
     condition = ['payments.card = 0']
     condition << ["payments.date_added BETWEEN '#{from_date}' AND '#{till_date}'"]
-    if not ordinary_user 
-       condition << "payments.owner_id = #{owner_id}"
+    if not ordinary_user
+      condition << "payments.owner_id = #{owner_id}"
     end
     condition << "payments.user_id = #{user_id}" if user_id and user_id != 'all'
-    if status != 'all' and ['paid', 'unpaid'].include? status 
+    if status != 'all' and ['paid', 'unpaid'].include? status
       condition << "payments.completed = #{status == 'paid' ? 1 : 0}"
     end
 
@@ -253,14 +253,14 @@ class Payment < ActiveRecord::Base
       price = Currency.count_exchange_prices({:exrate => exchange_rate, :prices => [payment.payment_amount.to_f]})
       price_with_vat = Currency.count_exchange_prices({:exrate => exchange_rate, :prices => [payment.payment_amount_with_vat(0)]})
       if payment.completed != 0
-         paid.count += 1
-         paid.price += price
-         paid.price_with_vat += price_with_vat
+        paid.count += 1
+        paid.price += price
+        paid.price_with_vat += price_with_vat
       else
-         unpaid.count += 1
-         unpaid.price += price
-         unpaid.price_with_vat += price_with_vat
-      end      
+        unpaid.count += 1
+        unpaid.price += price
+        unpaid.price_with_vat += price_with_vat
+      end
     end
     return paid, unpaid
   end

@@ -1,45 +1,45 @@
 <%= _('Add_manual_payment_notice') %>:
 <% if mor_11_extend? %>
-  <br />
-  <%= b_info %> <%=_('You_can_enter_amount_with_OR_without_tax') %> <%=_('Not_both_at_the_same_time') %> <%=_('Based_on_what_you_enter_tax_will_be_added_or_not') %>
+    <br/>
+    <%= b_info %> <%= _('You_can_enter_amount_with_OR_without_tax') %> <%= _('Not_both_at_the_same_time') %> <%= _('Based_on_what_you_enter_tax_will_be_added_or_not') %>
 <% end %>
-  <br />
-<br />
-<br />
+<br/>
+<br/>
+<br/>
 <%= form_tag :action => 'manual_payment_status', :id => @sub do %>
-  <table>
-    <tr>
-      <td><b><%= b_user + _('User') %></b>:</td>
-      <td>
-        <% if @users.size == 1  %>
-          <%= nice_user(@users[0])  %>
-          <%= hidden_field_tag("user", @users[0].id) %>
-        <% else %>
-          <%= select_tag("user", options_for_select(@users.map{|user| [nice_user(user), user.id]})) %>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td><b><%= b_money + _('Amount') %></b>:</td>
-      <td><%= text_field_tag 'amount', "", "class" => "input", :size => "10", :maxlength => "10", :onClick=>"$('amount_with_tax').value = '';", :onChange=>"$('amount_with_tax').value = '';" %></td>
-    </tr>
-    <tr>
-      <td><b><%= b_money + _('Amount_with_VAT') %></b>:</td>
-      <td><%= text_field_tag 'amount_with_tax', "", "class" => "input", :size => "10", :maxlength => "10", :onClick=>"$('amount').value = '';", :onChange=>"$('amount').value = '';"  %></td>
-    </tr>
-    <tr>
-      <td><b><%= b_currency + _('Currency') %></b>:</td>
-      <td><%= select_tag("p_currency", options_for_select(@currs.map{|curr| [curr.name, curr.name]}))  %>
-      </td>
-    </tr>
-    <tr>
-      <td><b><%=_('Description') %></b>:</td>
-      <td> <%= text_area_tag('description', '' , "class" => "input", :cols => "32", :rows => "4" )%></td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <%= submit_tag _('Proceed'), :disable_with=>_('Processing..')%>
-      </td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <td><b><%= b_user + _('User') %></b>:</td>
+        <td>
+          <% if @users.size == 1 %>
+              <%= nice_user(@users[0]) %>
+              <%= hidden_field_tag("user", @users[0].id) %>
+          <% else %>
+              <%= select_tag("user", options_for_select(@users.map { |user| [nice_user(user), user.id] })) %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td><b><%= b_money + _('Amount') %></b>:</td>
+        <td><%= text_field_tag 'amount', "", "class" => "input", :size => "10", :maxlength => "10", :onClick => "$('amount_with_tax').value = '';", :onChange => "$('amount_with_tax').value = '';" %></td>
+      </tr>
+      <tr>
+        <td><b><%= b_money + _('Amount_with_VAT') %></b>:</td>
+        <td><%= text_field_tag 'amount_with_tax', "", "class" => "input", :size => "10", :maxlength => "10", :onClick => "$('amount').value = '';", :onChange => "$('amount').value = '';" %></td>
+      </tr>
+      <tr>
+        <td><b><%= b_currency + _('Currency') %></b>:</td>
+        <td><%= select_tag("p_currency", options_for_select(@currs.map { |curr| [curr.name, curr.name] })) %>
+        </td>
+      </tr>
+      <tr>
+        <td><b><%= _('Description') %></b>:</td>
+        <td> <%= text_area_tag('description', '', "class" => "input", :cols => "32", :rows => "4") %></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <%= submit_tag _('Proceed'), :disable_with => _('Processing..') %>
+        </td>
+      </tr>
+    </table>
 <% end %>

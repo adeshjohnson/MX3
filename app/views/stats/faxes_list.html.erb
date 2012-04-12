@@ -1,82 +1,84 @@
 <table width="100%" class="simple">
-    <tr>
-        <td><b><%= b_user + _('User') %>:</b> <%= @user.first_name + " " + @user.last_name %></td>
-     </tr>
-     <tr>
-        <td><%= b_date + nice_date_time(session_from_date) + " - " + nice_date_time(session_till_date)%></td>
-        <td align="right">
-                <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
-        </td>
-    </tr>
+  <tr>
+    <td><b><%= b_user + _('User') %>:</b> <%= @user.first_name + " " + @user.last_name %></td>
+  </tr>
+  <tr>
+    <td><%= b_date + nice_date_time(session_from_date) + " - " + nice_date_time(session_till_date) %></td>
+    <td align="right">
+      <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+    </td>
+  </tr>
 </table>
 
 
 <%= form_tag :action => params[:action] do %>
-<div id="search_details" <%= "style='display:none;'" if @search == 0 %> >
-<br>
-       <%= hidden_field_tag 'search_on', 1  %> 
-      <%= _('From') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
-     &nbsp;&nbsp;<%= _('to') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+    <div id="search_details" <%= "style='display:none;'" if @search == 0 %> >
+      <br>
+      <%= hidden_field_tag 'search_on', 1 %>
+      <%= _('From') %>
+      : <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+      &nbsp;&nbsp;<%= _('to') %>
+      : <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
 
-     &nbsp;&nbsp;<%= _('Status') %>:      
-     <select name="fstatus" > 
+      &nbsp;&nbsp;<%= _('Status') %>:
+      <select name="fstatus">
         <option value="all" selected> <%= _('All') %> </option>
-        <option value="good" <%= "selected" if @fstatus == "good"%>> <%= _('Received') %> </option>
-        <option value="pdf_size_0" <%= "selected" if @fstatus == "pdf_size_0"%>> <%= _('Corrupted') %> </option>
-        <option value="no_tif" <%= "selected" if @fstatus == "no_tif"%>> <%= _('Mistaken') %> </option>                
-    </select>
+        <option value="good" <%= "selected" if @fstatus == "good" %>> <%= _('Received') %> </option>
+        <option value="pdf_size_0" <%= "selected" if @fstatus == "pdf_size_0" %>> <%= _('Corrupted') %> </option>
+        <option value="no_tif" <%= "selected" if @fstatus == "no_tif" %>> <%= _('Mistaken') %> </option>
+      </select>
 
-     &nbsp;&nbsp;<%= _('Device') %>: 
-     
-     <select name="device_id" > 
+      &nbsp;&nbsp;<%= _('Device') %>:
+
+      <select name="device_id">
         <option value="all" selected> <%= _('All') %> </option>
-         <% for device in @devices %>
-                <option value=<%= device.id %> <%= "selected" if @sel_device.to_i == device.id %>> <%= device.device_type + "/" + device.extension %> </option>
-          <% end %>    
-    </select>
-     
-     &nbsp;&nbsp;<%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
-</div>
+        <% for device in @devices %>
+            <option value=<%= device.id %> <%= "selected" if @sel_device.to_i == device.id %>> <%= device.device_type + "/" + device.extension %> </option>
+        <% end %>
+      </select>
+
+      &nbsp;&nbsp;<%= submit_tag _('Search'), :disable_with => _('Processing..') %>
+    </div>
 <% end %>
 
 <br>
 
 <% if not @faxes.empty? %>
 
-<table width="100%" class="maintable">
-  <tr>
-    <th align="left"><%= _('Device') %></th> 
-    <th align="left"><%= _('Filename') %></th> 
-    <th align="center"><%= _('Receive_time') %></th>  
-    <th align="left"><%= _('Sender') %></th>       
-    <th align="left"><%= _('Status') %></th>           
-    <th align="right"><%= _('Size') %></th>      
-    <th align="right"></th>      
-  </tr>
-<% i = 0 %>     
-<% for fax in @faxes %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-    <% device = Device.find(fax.device_id) %>
-    <td align="left">      <%= device.device_type + "/" + device.extension %>   </td>
-    <td align="left">        <%= fax.filename %> </td>
-    <td align="center">        <%= nice_date_time fax.receive_time %> </td>   
-    <td align="left">        <%= fax.fax_sender %> </td>   
-    <td align="left">        <%= _("Received") if fax.status == "good"%><%= _("Corrupted") if fax.status == "pdf_size_0"%><%= _("Mistaken") if fax.status == "no_tif"%> </td>   
-    <td align="right">        <%= fax.size %> </td>     
-    <td align="center">  
-		<% if fax.status == "good" %>
-			<%=  link_to(b_pdf, @Fax2Email_Folder+fax.filename, :popup => ['new_window', 'scrollbars=1,status=0,menubar=0,resizable=1,width=500,height=600']) %>   
-		<% end %>
-	</td>   
- </tr>
-    <% i += 1%>   
-<% end %>
+    <table width="100%" class="maintable">
+      <tr>
+        <th align="left"><%= _('Device') %></th>
+        <th align="left"><%= _('Filename') %></th>
+        <th align="center"><%= _('Receive_time') %></th>
+        <th align="left"><%= _('Sender') %></th>
+        <th align="left"><%= _('Status') %></th>
+        <th align="right"><%= _('Size') %></th>
+        <th align="right"></th>
+      </tr>
+      <% i = 0 %>
+      <% for fax in @faxes %>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <% device = Device.find(fax.device_id) %>
+            <td align="left">      <%= device.device_type + "/" + device.extension %>   </td>
+            <td align="left">        <%= fax.filename %> </td>
+            <td align="center">        <%= nice_date_time fax.receive_time %> </td>
+            <td align="left">        <%= fax.fax_sender %> </td>
+            <td align="left">        <%= _("Received") if fax.status == "good" %><%= _("Corrupted") if fax.status == "pdf_size_0" %><%= _("Mistaken") if fax.status == "no_tif" %> </td>
+            <td align="right">        <%= fax.size %> </td>
+            <td align="center">
+              <% if fax.status == "good" %>
+                  <%= link_to(b_pdf, @Fax2Email_Folder+fax.filename, :popup => ['new_window', 'scrollbars=1,status=0,menubar=0,resizable=1,width=500,height=600']) %>
+              <% end %>
+            </td>
+          </tr>
+          <% i += 1 %>
+      <% end %>
 
 
-</table>
+    </table>
 
 <% else %>
 
-<%= _('No_data') %>
+    <%= _('No_data') %>
 
 <% end %>

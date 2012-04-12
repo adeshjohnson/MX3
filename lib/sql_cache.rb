@@ -7,10 +7,10 @@ class SQLCache
 
   def to_s
     [super,
-      "Table: #{@table}",
-      "Header: #{@header}",
-      "Treshold: #{@treshold}",
-      "Values: #{@values.size}"].join("\n")
+     "Table: #{@table}",
+     "Header: #{@header}",
+     "Treshold: #{@treshold}",
+     "Values: #{@values.size}"].join("\n")
   end
 
   def initialize(table_name, header, treshold = 1000)
@@ -23,9 +23,10 @@ class SQLCache
 
   def add(new_values, bulk = false)
     case new_values.class.to_s
-    when "String" then @values << new_values
-    when "Array" then
-      bulk ?  @values.concat(new_values) : @values << new_values.join(", ")
+      when "String" then
+        @values << new_values
+      when "Array" then
+        bulk ? @values.concat(new_values) : @values << new_values.join(", ")
     end
     flush if @values.size > @treshold
   end

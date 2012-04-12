@@ -9,49 +9,49 @@
   </tr>
 
   <tr>
-    <th align="left"> <%= _('Priority') %>:   </th>
-    <td align="right"> <%= @action.priority   %></td>
+    <th align="left"> <%= _('Priority') %>:</th>
+    <td align="right"> <%= @action.priority %></td>
   </tr>
 
   <tr>
-    <th align="left"> <%= _('Type') %>:   </th>
-    <td align="right"> <%= @action.action   %></td>
+    <th align="left"> <%= _('Type') %>:</th>
+    <td align="right"> <%= @action.action %></td>
   </tr>
   <% if @action.action == "WAIT" %>
-    <%= form_tag :action => 'action_update', :id => @action.id do %>
-      <tr>
-        <th align="left"> <%= _('Duration_in_s') %>:   </th>
-        <td align="right"> <%= text_field_tag 'wait_time', @action.data, "class" => "input" , :size => "5", :maxlength => "4"  %> <%= submit_tag(  _('Change') , :disable_with=>_('Processing..') )%> </td>
-      </tr>
-    <% end %>
+      <%= form_tag :action => 'action_update', :id => @action.id do %>
+          <tr>
+            <th align="left"> <%= _('Duration_in_s') %>:</th>
+            <td align="right"> <%= text_field_tag 'wait_time', @action.data, "class" => "input", :size => "5", :maxlength => "4" %> <%= submit_tag(_('Change'), :disable_with => _('Processing..')) %> </td>
+          </tr>
+      <% end %>
   <% end %>
   <% if @action.action == "PLAY" %>
-    <%= form_tag( {:action => 'action_update', :id => @action.id}, {:multipart => "true", :id => "files"}) do %>
-      <tr>
-        <th align="left"> <%= _('File') %>: (<%= _('Current') + ": " + @action.data %>)  </th>
-        <td align="right">  <%= file_field_tag "file" %> <%= submit_tag(  _('Upload_file'), :disable_with=>_('Processing..')  )%> </td>
-      </tr>
-    <% end %>
+      <%= form_tag({:action => 'action_update', :id => @action.id}, {:multipart => "true", :id => "files"}) do %>
+          <tr>
+            <th align="left"> <%= _('File') %>: (<%= _('Current') + ": " + @action.data %>)</th>
+            <td align="right">  <%= file_field_tag "file" %> <%= submit_tag(_('Upload_file'), :disable_with => _('Processing..')) %> </td>
+          </tr>
+      <% end %>
   <% end %>
   <% if @action.action == "IVR" and allow_manage_providers? %>
-    <%= form_tag :action => 'action_update', :id => @action.id do %>
-      <tr>
-        <th align="left"> <%= _('Forward_to_IVR') %>:   </th>
-        <td align="right">
-          <%if @ivrs and @ivrs.size.to_i > 0%>
-            <select name="ivr" >
-              <% for ivr in @ivrs %>
-                <option value="<%= ivr.id %>" <%= "selected" if ivr.id == @action.data.to_i %>> <%= ivr.name%> </option>
-              <% end%>
-            </select>
-          <%end%>
-        </td>
-      </tr>
-      <tr>
-        <th align="right" colspan=2>
-          <%= submit_tag(  _('Change'), :disable_with=>_('Processing..')  )%>
-        </th>
-      </tr>
-    <% end %>
+      <%= form_tag :action => 'action_update', :id => @action.id do %>
+          <tr>
+            <th align="left"> <%= _('Forward_to_IVR') %>:</th>
+            <td align="right">
+              <% if @ivrs and @ivrs.size.to_i > 0 %>
+                  <select name="ivr">
+                    <% for ivr in @ivrs %>
+                        <option value="<%= ivr.id %>" <%= "selected" if ivr.id == @action.data.to_i %>> <%= ivr.name %> </option>
+                    <% end %>
+                  </select>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th align="right" colspan=2>
+              <%= submit_tag(_('Change'), :disable_with => _('Processing..')) %>
+            </th>
+          </tr>
+      <% end %>
   <% end %>
 </table>                            

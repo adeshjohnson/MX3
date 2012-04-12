@@ -1,38 +1,38 @@
-<% if @total_pages > 1%>
-  <%
-      pstart = @options[:page] - 10
-      pstart = 1 if pstart < 1
+<% if @total_pages > 1 %>
+    <%
+       pstart = @options[:page] - 10
+       pstart = 1 if pstart < 1
 
-      pend = @options[:page] + 10
-      pend = @total_pages if pend > @total_pages
+       pend = @options[:page] + 10
+       pend = @total_pages if pend > @total_pages
 
-      back10 = @options[:page] - 20
-      if back10 <= 0
-          back10 = 1 if pstart > 1
-          back10 = nil if pstart == 1
-      end
+       back10 = @options[:page] - 20
+       if back10 <= 0
+         back10 = 1 if pstart > 1
+         back10 = nil if pstart == 1
+       end
 
-      forw10 = @options[:page] + 20
-      if forw10 > @total_pages
-          forw10 = @total_pages if pend < @total_pages
-          forw10 = nil if pend == @total_pages
-      end
-  %>
-  <div id="page_select_header" align="left">
-    <table>
-      <tr>
-        <td align = "center">
-          <%= link_to(_("First"), {:action => params[:action], :page => 1}, {:title => _("First_Page")}) if pstart > 1%>
-          <%= link_to("-10", {:action => params[:action], :page => back10}, {:title => "-20"}) if back10 %>
-          <% for p in pstart..pend %>
-            <%=raw "<b>" if p == @options[:page]%>
-              <%= link_to p, :action => params[:action], :page => p%>
-            <%=raw "</b>" if p == @options[:page]%>
-          <% end %>
-          <%= link_to("+10", {:action => params[:action], :page => forw10}, {:title => "+20"}) if forw10 %>
-          <%= link_to(_("Last"), {:action => params[:action], :page => @total_pages}, {:title => _("Last_Page")}) if pend < @total_pages%>
-        </td>
-      </tr>
-    </table>
-  </div>
+       forw10 = @options[:page] + 20
+       if forw10 > @total_pages
+         forw10 = @total_pages if pend < @total_pages
+         forw10 = nil if pend == @total_pages
+       end
+    %>
+    <div id="page_select_header" align="left">
+      <table>
+        <tr>
+          <td align="center">
+            <%= link_to(_("First"), {:action => params[:action], :page => 1}, {:title => _("First_Page")}) if pstart > 1 %>
+            <%= link_to("-10", {:action => params[:action], :page => back10}, {:title => "-20"}) if back10 %>
+            <% for p in pstart..pend %>
+                <%= raw "<b>" if p == @options[:page] %>
+                <%= link_to p, :action => params[:action], :page => p %>
+                <%= raw "</b>" if p == @options[:page] %>
+            <% end %>
+            <%= link_to("+10", {:action => params[:action], :page => forw10}, {:title => "+20"}) if forw10 %>
+            <%= link_to(_("Last"), {:action => params[:action], :page => @total_pages}, {:title => _("Last_Page")}) if pend < @total_pages %>
+          </td>
+        </tr>
+      </table>
+    </div>
 <% end %>

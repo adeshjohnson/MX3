@@ -3,148 +3,148 @@
 <%= javascript_include_tag "wz_tooltip" %>
 
 <%= form_tag :action => 'settings_change' do %>
-  <!-- <table style = "height: 580;"> style height does not work!!! -->
-  <table height=590>
+    <!-- <table style = "height: 580;"> style height does not work!!! -->
+    <table height=590>
     <tr>
-      <td valign="top">
-        <div id="dhtmlgoodies_tabView1">
-          <div class="dhtmlgoodies_aTab">
-            <br />
-            <br />
-            <table class="simple" width="100%">
-              <tr>
-                <td width="30"></td>
-                <td>      <b><%= _('Company')%>:</b>                </td>
-                <td>      <%= text_field_tag('company', Confline.get_value("Company") , "class" => "input", :size => "35", :maxlength => "50") %>                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>      <b><%= _('Company_Email')%>:</b>                 </td>
-                <td>      <%= text_field_tag('company_email', Confline.get_value("Company_Email") , "class" => "input", :size => "35", :maxlength => "50" )%>                </td>
-              </tr>
-              <tr>
-                <td height="10"></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>      <b><%= _('Version')%>:</b>                 </td>
-                <td>      <%= text_field_tag('version', Confline.get_value("Version") , "class" => "input", :size => "35", :maxlength => "50" )%>                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td valign="top">      <b><%= _('Copyright_Title')%>:</b>                 </td>
-                <td>      <%= text_area_tag('copyright_title', h(Confline.get_value("Copyright_Title")) , "class" => "input", :cols => "32", :rows => "4" )%>                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td valign="top">      <b><%= _('Browser_Title')%>:</b>                 </td>
-                <td>      <%= text_field_tag('admin_browser_title', Confline.get_value("Admin_Browser_Title") , "class" => "input", :size => "35", :maxlength => "50" )%>                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td valign="top">      <b><%= _('Frontpage_Text')%>:</b>                 </td>
-                <td>      <%= text_area_tag('frontpage_text', h(Confline.get_value2("Frontpage_Text", session[:user_id])) , "class" => "input", :cols => "32", :rows => "4" )%>                </td>
-              </tr>
-            </table>
-          </div>
-          <div class="dhtmlgoodies_aTab">
-            <%= render :partial => "settings_registration" %>
-          </div>
-          <% ["invoices"].each{ |tab| %>
-            <div class="dhtmlgoodies_aTab">
-              <%= render :partial => "settings_#{tab.to_s}"  %>
-            </div>
-          <% } %>
-          <div class="dhtmlgoodies_aTab">
-            <%= render :partial => "settings_emails" %>
-          </div>
+    <td valign="top">
+    <div id="dhtmlgoodies_tabView1">
+    <div class="dhtmlgoodies_aTab">
+      <br/>
+      <br/>
+      <table class="simple" width="100%">
+        <tr>
+          <td width="30"></td>
+          <td><b><%= _('Company') %>:</b></td>
+          <td>      <%= text_field_tag('company', Confline.get_value("Company"), "class" => "input", :size => "35", :maxlength => "50") %>                </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Company_Email') %>:</b></td>
+          <td>      <%= text_field_tag('company_email', Confline.get_value("Company_Email"), "class" => "input", :size => "35", :maxlength => "50") %>                </td>
+        </tr>
+        <tr>
+          <td height="10"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Version') %>:</b></td>
+          <td>      <%= text_field_tag('version', Confline.get_value("Version"), "class" => "input", :size => "35", :maxlength => "50") %>                </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td valign="top"><b><%= _('Copyright_Title') %>:</b></td>
+          <td>      <%= text_area_tag('copyright_title', h(Confline.get_value("Copyright_Title")), "class" => "input", :cols => "32", :rows => "4") %>                </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td valign="top"><b><%= _('Browser_Title') %>:</b></td>
+          <td>      <%= text_field_tag('admin_browser_title', Confline.get_value("Admin_Browser_Title"), "class" => "input", :size => "35", :maxlength => "50") %>                </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td valign="top"><b><%= _('Frontpage_Text') %>:</b></td>
+          <td>      <%= text_area_tag('frontpage_text', h(Confline.get_value2("Frontpage_Text", session[:user_id])), "class" => "input", :cols => "32", :rows => "4") %>                </td>
+        </tr>
+      </table>
+    </div>
+    <div class="dhtmlgoodies_aTab">
+      <%= render :partial => "settings_registration" %>
+    </div>
+    <% ["invoices"].each { |tab| %>
+        <div class="dhtmlgoodies_aTab">
+          <%= render :partial => "settings_#{tab.to_s}" %>
+        </div>
+    <% } %>
+    <div class="dhtmlgoodies_aTab">
+      <%= render :partial => "settings_emails" %>
+    </div>
 
-          <!--
+    <!--
                                               <div class="dhtmlgoodies_aTab">
                                                 <br />
                                                 <br />
                                                 <table class="simple" width="100%">
                                                   <tr>
-                          <td><%= _('Realtime')%></td>
-                          <td><b><%= _('Reload_time')%>:</b></td>
-                          <td><%= text_field_tag('time', Confline.get_value("Realtime_reload_time") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+                          <td><%= _('Realtime') %></td>
+                          <td><b><%= _('Reload_time') %>:</b></td>
+                          <td><%= text_field_tag('time', Confline.get_value("Realtime_reload_time"), "class" => "input", :size => "35", :maxlength => "50") %></td>
                           </tr>
                           <tr>
-                            <td width="30"> <%=_('Usual_text')%></td>
-                            <td><b><%= _('Font_color')%>:</b></td>
-                            <td><%= text_field_tag('colorfield1', Confline.get_value("Usual_text_font_color") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td><b><%= _('Font_size')%>:</b></td>
-                            <td><%= text_field_tag('usual_text_font_size', Confline.get_value("Usual_text_font_size") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+                            <td width="30"> <%= _('Usual_text') %></td>
+                            <td><b><%= _('Font_color') %>:</b></td>
+                            <td><%= text_field_tag('colorfield1', Confline.get_value("Usual_text_font_color"), "class" => "input", :size => "35", :maxlength => "50") %></td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td><b><%= _('Font_style')%>:</b></td>
+                            <td><b><%= _('Font_size') %>:</b></td>
+                            <td><%= text_field_tag('usual_text_font_size', Confline.get_value("Usual_text_font_size"), "class" => "input", :size => "35", :maxlength => "50") %></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td><b><%= _('Font_style') %>:</b></td>
                             <td>
-                              <b><%=_('bold')%></b>      <%= check_box_tag 'style1', value = "2", @style1 == 2 %>
-                              <i><%=_('italic')%></i>    <%= check_box_tag 'style2', value = "4", @style2 == 4 %>
-                              <u><%=_('underline')%></u> <%= check_box_tag 'style3', value = "8", @style3 == 8 %>
+                              <b><%= _('bold') %></b>      <%= check_box_tag 'style1', value = "2", @style1 == 2 %>
+                              <i><%= _('italic') %></i>    <%= check_box_tag 'style2', value = "4", @style2 == 4 %>
+                              <u><%= _('underline') %></u> <%= check_box_tag 'style3', value = "8", @style3 == 8 %>
                             </td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td><b><%= _('Highlighted_text_color')%>:</b></td>
-                            <td><%= text_field_tag('colorfield2', Confline.get_value("Usual_text_highlighted_text_color") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+                            <td><b><%= _('Highlighted_text_color') %>:</b></td>
+                            <td><%= text_field_tag('colorfield2', Confline.get_value("Usual_text_highlighted_text_color"), "class" => "input", :size => "35", :maxlength => "50") %></td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td><b><%= _('Highlighted_text_size')%>:</b>                 </td>
-                            <td><%= text_field_tag('usual_text_highlighted_text_size', Confline.get_value("Usual_text_highlighted_text_size") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+                            <td><b><%= _('Highlighted_text_size') %>:</b>                 </td>
+                            <td><%= text_field_tag('usual_text_highlighted_text_size', Confline.get_value("Usual_text_highlighted_text_size"), "class" => "input", :size => "35", :maxlength => "50") %></td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td><b><%= _('Highlighted_text_style')%>:</b></td>
+                            <td><b><%= _('Highlighted_text_style') %>:</b></td>
                             <td>
-                              <b><%=_('bold')%></b>      <%= check_box_tag 'style4', value = "2", @style4 == 2 %>
-                              <i><%=_('italic')%></i>    <%= check_box_tag 'style5', value = "4", @style5 == 4 %>
-                              <u><%=_('underline')%></u> <%= check_box_tag 'style6', value = "8", @style6 == 8 %>
+                              <b><%= _('bold') %></b>      <%= check_box_tag 'style4', value = "2", @style4 == 2 %>
+                              <i><%= _('italic') %></i>    <%= check_box_tag 'style5', value = "4", @style5 == 4 %>
+                              <u><%= _('underline') %></u> <%= check_box_tag 'style6', value = "8", @style6 == 8 %>
                             </td>
                           </tr>
                           <tr>
-                            <td><%= _('Header_footer_text')%></td>
-                            <td><b><%= _('Font_color ')%>:</b></td>
-                            <td><%=  text_field_tag('colorfield3', Confline.get_value("Header_footer_font_color") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+                            <td><%= _('Header_footer_text') %></td>
+                            <td><b><%= _('Font_color ') %>:</b></td>
+                            <td><%= text_field_tag('colorfield3', Confline.get_value("Header_footer_font_color"), "class" => "input", :size => "35", :maxlength => "50") %></td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td><b><%= _('Font_size')%>:</b></td>
-                            <td><%=  text_field_tag('h_f_font_size', Confline.get_value("Header_footer_font_size") , "class" => "input", :size => "35", :maxlength => "50" )%>  </td>
+                            <td><b><%= _('Font_size') %>:</b></td>
+                            <td><%= text_field_tag('h_f_font_size', Confline.get_value("Header_footer_font_size"), "class" => "input", :size => "35", :maxlength => "50") %>  </td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td><b><%= _('Font_style')%>:</b></td>
+                            <td><b><%= _('Font_style') %>:</b></td>
                             <td>
-                              <b><%=_('bold')%></b>      <%= check_box_tag 'style7', value = "2", @style7 == 2 %>
-                              <i><%=_('italic')%></i>    <%= check_box_tag 'style8', value = "4", @style8 == 4 %>
-                              <u><%=_('underline')%></u> <%= check_box_tag 'style9', value = "8", @style9 == 8 %>
+                              <b><%= _('bold') %></b>      <%= check_box_tag 'style7', value = "2", @style7 == 2 %>
+                              <i><%= _('italic') %></i>    <%= check_box_tag 'style8', value = "4", @style8 == 4 %>
+                              <u><%= _('underline') %></u> <%= check_box_tag 'style9', value = "8", @style9 == 8 %>
                             </td>
                           </tr>
                           <tr>
-                            <td><%= _('Background')%> </td>
-                            <td><b><%= _('Color')%>:</b></td>
-                            <td><%=  text_field_tag('colorfield4', Confline.get_value("Background_color") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+                            <td><%= _('Background') %> </td>
+                            <td><b><%= _('Color') %>:</b></td>
+                            <td><%= text_field_tag('colorfield4', Confline.get_value("Background_color"), "class" => "input", :size => "35", :maxlength => "50") %></td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td><b><%= _('Row1_color')%>:</b></td>
-                            <td><%=  text_field_tag('colorfield5', Confline.get_value("Row1_color") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+                            <td><b><%= _('Row1_color') %>:</b></td>
+                            <td><%= text_field_tag('colorfield5', Confline.get_value("Row1_color"), "class" => "input", :size => "35", :maxlength => "50") %></td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td><b><%= _('Row2_color')%>:</b>                            </td>
-                            <td><%=  text_field_tag('colorfield6', Confline.get_value("Row2_color") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+                            <td><b><%= _('Row2_color') %>:</b>                            </td>
+                            <td><%= text_field_tag('colorfield6', Confline.get_value("Row2_color"), "class" => "input", :size => "35", :maxlength => "50") %></td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td><b><%= _('3_first_rows_color')%>:</b></td>
-                            <td><%=  text_field_tag('colorfield7', Confline.get_value("3_first_rows_color") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
+                            <td><b><%= _('3_first_rows_color') %>:</b></td>
+                            <td><%= text_field_tag('colorfield7', Confline.get_value("3_first_rows_color"), "class" => "input", :size => "35", :maxlength => "50") %></td>
                           </tr>
                           </table>
                           <script type="text/javascript">
@@ -155,283 +155,304 @@
                               </script>
                           </div>
           -->
-          <div class="dhtmlgoodies_aTab">
-            <%= render :partial => "settings_various"  %>
-          </div>
-          <div class="dhtmlgoodies_aTab">
-            <br />
-            <br />
-            <table class="simple" width="100%">
-              <tr>
-                <td width="30"></td>
-                <td><b><%= _('Total_tax_name')%>: </b></td>
-                <td></td>
-                <td><%= text_field_tag('total_tax', Confline.get_value("Total_tax_name") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td width="30"></td>
-                <td><b><%= _('Compound_tax')%></b></td>
-                <td></td>
-                <td>
-                  <% value = Confline.get_value("Tax_compound") -%>
-                  <% value == "" ? value = 1 : value = value.to_i -%>
-                  <%= check_box_tag("compound_tax", 1, (value == 1))%>
-                </td>
-                <td></td>
-              </tr>
-              <tr>
-                <td width="30"></td>
-                <td><b><%= _('Tax')%></b></td>
-                <td><b><%= _('Active')%>?</b></td>
-                <td><b><%= _('Name')%></b></td>
-                <td><b><%= _('Value')%></b></td>
-              </tr>
-              <tr>
-                <td width="30"></td>
-                <td><%= _('Tax_1')%></td>
-                <td></td>
-                <td><%= text_field_tag('tax1name', Confline.get_value("Tax_1") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
-                <td><%= text_field_tag('tax1value', Confline.get_value("Tax_1_Value").to_f , "class" => "input", :size => "5", :maxlength => "10" )%> %</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><%= _('Tax_2')%></td>
-                <td><%= check_box_tag 'tax2active', value = "1", Confline.get_value2("Tax_2").to_i == 1 %></td>
-                <td><%= text_field_tag('tax2name', Confline.get_value("Tax_2") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
-                <td><%= text_field_tag('tax2value', Confline.get_value("Tax_2_Value").to_f  , "class" => "input", :size => "5", :maxlength => "10" )%> %</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><%= _('Tax_3')%></td>
-                <td><%= check_box_tag 'tax3active', value = "1", Confline.get_value2("Tax_3").to_i == 1 %></td>
-                <td><%= text_field_tag('tax3name', Confline.get_value("Tax_3") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
-                <td><%= text_field_tag('tax3value', Confline.get_value("Tax_3_Value").to_f  , "class" => "input", :size => "5", :maxlength => "10" )%> %</td>
-              </tr>
-              <tr>
-                <td><br /><br /></td>
-                <td><%= _('Tax_4')%><br /><br /></td>
-                <td><%= check_box_tag 'tax4active', value = "1", Confline.get_value2("Tax_4").to_i == 1 %><br /><br /></td>
-                <td><%= text_field_tag('tax4name', Confline.get_value("Tax_4") , "class" => "input", :size => "35", :maxlength => "50" )%><br /><br /></td>
-                <td><%= text_field_tag('tax4value', Confline.get_value("Tax_4_Value").to_f  , "class" => "input", :size => "5", :maxlength => "10" )%> % <br /><br /></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><b><%= link_to b_check + _('Applay_to_all_Users'), {:action=>'tax_change', :u=>1}, :confirm => _('are_you_sure'), :method => "post"%></b></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><b><%= link_to b_check + _('Apply_to_all_Calling_Card_Groups'), {:action=>'tax_change', :u=>2}, :confirm => _('are_you_sure'), :method => "post"%></b></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><b><%= link_to b_check + _('Apply_to_all_Vouchers'), {:action=>'tax_change', :u=>3}, :confirm => _('are_you_sure'), :method => "post"%></b></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
-          <div class="dhtmlgoodies_aTab">
-            <br /><br />
-            <table class="simple" width="100%">
-              <tr>
-                <td width="30"></td>
-                <td>      <b><%= _('Fullscreen')%>: </b>                </td>
-                <td>      <%= check_box_tag 'gm_fullscreen', value = "1", Confline.get_value("Google_Fullscreen").to_i == 1 %></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><b><%= _('Reload_Time')%>: </b></td>
-                <td><%= text_field_tag('gm_reload_time', Confline.get_value("Google_ReloadTime") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><b><%= _('Width')%>: </b></td>
-                <td><%= text_field_tag('gm_width', Confline.get_value("Google_Width") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><b><%= _('Height')%>: </b></td>
-                <td><%= text_field_tag('gm_height', Confline.get_value("Google_Height") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><b><%= _('Key')%>: </b></td>
-                <td><%= text_field_tag('gm_key', Confline.get_value("Google_Key") , "class" => "input", :size => "65", :maxlength => "200" )%></td>
-              </tr>
-            </table>
-          </div>
+    <div class="dhtmlgoodies_aTab">
+      <%= render :partial => "settings_various" %>
+    </div>
+    <div class="dhtmlgoodies_aTab">
+      <br/>
+      <br/>
+      <table class="simple" width="100%">
+        <tr>
+          <td width="30"></td>
+          <td><b><%= _('Total_tax_name') %>: </b></td>
+          <td></td>
+          <td><%= text_field_tag('total_tax', Confline.get_value("Total_tax_name"), "class" => "input", :size => "35", :maxlength => "50") %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td width="30"></td>
+          <td><b><%= _('Compound_tax') %></b></td>
+          <td></td>
+          <td>
+            <% value = Confline.get_value("Tax_compound") -%>
+            <% value == "" ? value = 1 : value = value.to_i -%>
+            <%= check_box_tag("compound_tax", 1, (value == 1)) %>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td width="30"></td>
+          <td><b><%= _('Tax') %></b></td>
+          <td><b><%= _('Active') %>?</b></td>
+          <td><b><%= _('Name') %></b></td>
+          <td><b><%= _('Value') %></b></td>
+        </tr>
+        <tr>
+          <td width="30"></td>
+          <td><%= _('Tax_1') %></td>
+          <td></td>
+          <td><%= text_field_tag('tax1name', Confline.get_value("Tax_1"), "class" => "input", :size => "35", :maxlength => "50") %></td>
+          <td><%= text_field_tag('tax1value', Confline.get_value("Tax_1_Value").to_f, "class" => "input", :size => "5", :maxlength => "10") %>
+            %
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= _('Tax_2') %></td>
+          <td><%= check_box_tag 'tax2active', value = "1", Confline.get_value2("Tax_2").to_i == 1 %></td>
+          <td><%= text_field_tag('tax2name', Confline.get_value("Tax_2"), "class" => "input", :size => "35", :maxlength => "50") %></td>
+          <td><%= text_field_tag('tax2value', Confline.get_value("Tax_2_Value").to_f, "class" => "input", :size => "5", :maxlength => "10") %>
+            %
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= _('Tax_3') %></td>
+          <td><%= check_box_tag 'tax3active', value = "1", Confline.get_value2("Tax_3").to_i == 1 %></td>
+          <td><%= text_field_tag('tax3name', Confline.get_value("Tax_3"), "class" => "input", :size => "35", :maxlength => "50") %></td>
+          <td><%= text_field_tag('tax3value', Confline.get_value("Tax_3_Value").to_f, "class" => "input", :size => "5", :maxlength => "10") %>
+            %
+          </td>
+        </tr>
+        <tr>
+          <td><br/><br/></td>
+          <td><%= _('Tax_4') %>
+            <br/><br/></td>
+          <td><%= check_box_tag 'tax4active', value = "1", Confline.get_value2("Tax_4").to_i == 1 %>
+            <br/><br/></td>
+          <td><%= text_field_tag('tax4name', Confline.get_value("Tax_4"), "class" => "input", :size => "35", :maxlength => "50") %>
+            <br/><br/></td>
+          <td><%= text_field_tag('tax4value', Confline.get_value("Tax_4_Value").to_f, "class" => "input", :size => "5", :maxlength => "10") %>
+            % <br/><br/></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <b><%= link_to b_check + _('Applay_to_all_Users'), {:action => 'tax_change', :u => 1}, :confirm => _('are_you_sure'), :method => "post" %></b>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <b><%= link_to b_check + _('Apply_to_all_Calling_Card_Groups'), {:action => 'tax_change', :u => 2}, :confirm => _('are_you_sure'), :method => "post" %></b>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <b><%= link_to b_check + _('Apply_to_all_Vouchers'), {:action => 'tax_change', :u => 3}, :confirm => _('are_you_sure'), :method => "post" %></b>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dhtmlgoodies_aTab">
+      <br/><br/>
+      <table class="simple" width="100%">
+        <tr>
+          <td width="30"></td>
+          <td><b><%= _('Fullscreen') %>: </b></td>
+          <td>      <%= check_box_tag 'gm_fullscreen', value = "1", Confline.get_value("Google_Fullscreen").to_i == 1 %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Reload_Time') %>: </b></td>
+          <td><%= text_field_tag('gm_reload_time', Confline.get_value("Google_ReloadTime"), "class" => "input", :size => "35", :maxlength => "50") %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Width') %>: </b></td>
+          <td><%= text_field_tag('gm_width', Confline.get_value("Google_Width"), "class" => "input", :size => "35", :maxlength => "50") %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Height') %>: </b></td>
+          <td><%= text_field_tag('gm_height', Confline.get_value("Google_Height"), "class" => "input", :size => "35", :maxlength => "50") %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Key') %>: </b></td>
+          <td><%= text_field_tag('gm_key', Confline.get_value("Google_Key"), "class" => "input", :size => "65", :maxlength => "200") %></td>
+        </tr>
+      </table>
+    </div>
 
-          <div class="dhtmlgoodies_aTab">
-            <br />
-            <br />
-            <table class="simple" width="100%">
-              <tr>
-                <td width="30"></td>
-                <td> <b><%= _('Backup_storage_directory_on_local_machine') %>  </b> </td>
-                <td>
-                  <!--	<%= text_field_tag('backup_storage_directory', Confline.get_value('Backup_Folder'), "class" => "input") %> -->
-                  <%= Confline.get_value('Backup_Folder') %>
-                </td>
-              </tr>
+    <div class="dhtmlgoodies_aTab">
+      <br/>
+      <br/>
+      <table class="simple" width="100%">
+        <tr>
+          <td width="30"></td>
+          <td><b><%= _('Backup_storage_directory_on_local_machine') %>  </b></td>
+          <td>
+            <!--	<%= text_field_tag('backup_storage_directory', Confline.get_value('Backup_Folder'), "class" => "input") %> -->
+            <%= Confline.get_value('Backup_Folder') %>
+          </td>
+        </tr>
 
-              <tr>
-                <td></td>
-                <td> <b><%= _('Run_backup_according_below_shedule') %> </b>  </td>
-                <td><%= check_box_tag 'shedule', value = "1", Confline.get_value('Backup_shedule').to_i == 1 %> </td>
-              </tr>
-              <% backup_month = Confline.get_value("Backup_month") %>
-              <tr>
-                <td></td>
-                <td><b> <%= _('Month') %>  </b> </td>
-                <td> <select name="backup_month"  onChange="set_days_number(document.backup.backup_month,document.backup.number)">
-                    <option value="<%= 'Every_month' %>" <%= "selected" if backup_month.to_s == "Every_month"  %>> <%= _('Every_month') %> </option>
-                    <% n = 12 -%>
-                    <% i = 1 -%>
-                    <% n.times do %>
-                      <option value="<%= i %>" <%= "selected" if backup_month.to_i == i  %> > <%= nice_month_name(i) %> </option>
-                      <%i+=1 -%>
-                    <%end%>
-                  </select>
-                </td>
-              </tr>
-              <% backup_month_day = Confline.get_value("Backup_month_day") %>
-              <tr>
-                <td></td>
-                <td> <b><%= _('Day_of_month') %> </b>  </td>
-                <td> <% %>
-                  <select name="backup_month_day">
-                    <option value="<%= 'Every_day' %>" <%= "selected" if backup_month_day.to_s == "Every_day"  %> > <%= _('Every_day') %> </option>
-                    <% n = 31 -%>
-                    <% i = 1 -%>
-                    <% n.times do %>
-                      <option value="<%= i %>" <%= "selected" if backup_month_day.to_i == i  %> > <%= i %> </option>
-                      <% i+=1 -%>
-                    <%end%>
-                  </select>
-                </td>
-              </tr>
-              <% backup_week_day = Confline.get_value("Backup_week_day")%>
-              <tr>
-                <td></td>
-                <td><b> <%= _('Day_of_week') %>  </b> </td>
-                <td> <select name="backup_week_day" >
-                    <option value="<%= 'Every_day' %>"  <%= "selected" if backup_week_day.to_s == "Every_day"  %> > <%= _('Every_day') %> </option>
-                    <% n = 7 -%>
-                    <% i = 1 -%>
-                    <% n.times do %>
-                      <option value="<%= i %>" <%= "selected" if backup_week_day.to_i == i  %> > <%= i %> </option>
-                      <% i+=1 -%>
-                    <%end%>
-                  </select>
-                </td>
-              </tr>
-              <% backup_hour = Confline.get_value("Backup_hour")%>
-              <tr>
-                <td></td>
-                <td><b> <%= _('Hour') %> </b>  </td>
-                <td><select name="hour" >
-                    <% n = 24 -%>
-                    <% i = 1 -%>
-                    <% n.times do %>
-                      <option value="<%= i %>" <%= "selected" if backup_hour.to_i == i  %> > <%= i %> </option>
-                      <% i+=1 -%>
-                    <%end%>
-                  </select>
-                  <%= b_info %> <%=_('Value_in_system_time_zone')%>: GMT <%=User.system_time_offset > 0 ? '+' : ""%><%=User.system_time_offset%>
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td> <b><%= _('Keep_on_local_server') %>  </b> </td>
-                <td> <%= text_field_tag('backup_number', Confline.get_value('Backup_number'), "class" => "input") %> <%= _('backups')%></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td> <b><%= _('Dont_start_backup_if_disk_space_less_than') %> </b>  </td>
-                <td> <%= text_field_tag('backup_disk_space', Confline.get_value('Backup_disk_space'), "class" => "input") %> % </td>
-              </tr>
-            </table>
-          </div>
-          <div class="dhtmlgoodies_aTab">
-            <br />
-            <br />
-            <table class="simple" width="100%">
-              <tr>
-                <td width="30"></td>
-                <td><b><%= _('Allow_API')%>:</b></td>
-                <td><%= check_box_tag 'allow_api', value = "1", Confline.get_value('Allow_API').to_i == 1 %></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><b><%= _('Allow_GET_API')%>:</b></td>
-                <td><%= check_box_tag 'allow_get_api', value = "1", Confline.get_value('Allow_GET_API').to_i == 1 %></td>
-              </tr>
-              <tr <%= tooltip(_('API_Secret_Key'), _('API_Secret_Key_Explanation')).html_safe %>>
-                <td></td>
-                <td><b><%= _('API_Secret_Key')%>:</b></td>
-                <td><%= text_field_tag('api_secret_key', Confline.get_value("API_Secret_Key") , "class" => "input", :size => "35", :maxlength => "255" )%></td>
-              </tr>
-              <tr <%= tooltip(_('XML_API_Extension'), _('XML_API_Extension_Explanation')).html_safe %> >
-                <td></td>
-                <td><b><%= _('XML_API_Extension')%>:</b></td>
-                <td><%= check_box_tag 'xml_api_extension', value = "1", (Confline.get_value("XML_API_Extension").to_i == 1) %> </td>
-              </tr>
-              <tr <%= tooltip(_('API_Login_Redirect_to_Main'), _('API_Login_Redirect_Explanation')).html_safe %> >
-                <td></td>
-                <td><b><%= _('API_Login_Redirect_to_Main')%>:</b></td>
-                <td><%= check_box_tag 'api_login_redirect_to_main', 1, (Confline.get_value("API_Login_Redirect_to_Main").to_i == 1) %> </td>
-              </tr>
-              <tr <%= tooltip(_('API_allow_Registration'), _('API_allow_Registration_Explanation')).html_safe %> >
-                <td></td>
-                <td><b><%= _('API_allow_Registration')%>:</b></td>
-                <td><%= check_box_tag 'api_allow_registration', 1, (Confline.get_value("API_Allow_registration_ower_API").to_i == 1) %> </td>
-              </tr>
-              <%if mor_11_extend?%>
-                <tr <%= tooltip(_('API_allow_Payments'), _('API_allow_Payments_Explanation')).html_safe %> >
-                  <td></td>
-                  <td><b><%= _('API_allow_Payments')%>:</b></td>
-                  <td><%= check_box_tag 'api_allow_payments', 1, (Confline.get_value("API_Allow_payments_ower_API").to_i == 1) %> </td>
-                </tr>
-                <tr <%= tooltip(_('API_Payment_Confirmation'), _('API_Payment_Confirmation_Explanation')).html_safe %> >
-                  <td></td>
-                  <td><b><%= _('API_Payment_Confirmation')%>:</b></td>
-                  <td><%= check_box_tag 'api_payment_confirmation', 1, (Confline.get_value("API_payment_confirmation").to_i == 1) %> </td>
-                </tr>
-              <%end%>
-            </table>
-          </div>
-          <% ["functionality", "privacy", "visual"].each{ |tab| %>
-            <div class="dhtmlgoodies_aTab">
-              <br />
-              <br />
-              <%= render :partial => "settings_#{tab.to_s}"  %>
-            </div>
-          <% } %>
+        <tr>
+          <td></td>
+          <td><b><%= _('Run_backup_according_below_shedule') %> </b></td>
+          <td><%= check_box_tag 'shedule', value = "1", Confline.get_value('Backup_shedule').to_i == 1 %> </td>
+        </tr>
+        <% backup_month = Confline.get_value("Backup_month") %>
+        <tr>
+          <td></td>
+          <td><b> <%= _('Month') %>  </b></td>
+          <td>
+            <select name="backup_month" onChange="set_days_number(document.backup.backup_month,document.backup.number)">
+              <option value="<%= 'Every_month' %>" <%= "selected" if backup_month.to_s == "Every_month" %>> <%= _('Every_month') %> </option>
+              <% n = 12 -%>
+              <% i = 1 -%>
+              <% n.times do %>
+                  <option value="<%= i %>" <%= "selected" if backup_month.to_i == i %> > <%= nice_month_name(i) %> </option>
+                  <% i+=1 -%>
+              <% end %>
+            </select>
+          </td>
+        </tr>
+        <% backup_month_day = Confline.get_value("Backup_month_day") %>
+        <tr>
+          <td></td>
+          <td><b><%= _('Day_of_month') %> </b></td>
+          <td>
+            <% %>
+            <select name="backup_month_day">
+              <option value="<%= 'Every_day' %>" <%= "selected" if backup_month_day.to_s == "Every_day" %> > <%= _('Every_day') %> </option>
+              <% n = 31 -%>
+              <% i = 1 -%>
+              <% n.times do %>
+                  <option value="<%= i %>" <%= "selected" if backup_month_day.to_i == i %> > <%= i %> </option>
+                  <% i+=1 -%>
+              <% end %>
+            </select>
+          </td>
+        </tr>
+        <% backup_week_day = Confline.get_value("Backup_week_day") %>
+        <tr>
+          <td></td>
+          <td><b> <%= _('Day_of_week') %>  </b></td>
+          <td><select name="backup_week_day">
+            <option value="<%= 'Every_day' %>"  <%= "selected" if backup_week_day.to_s == "Every_day" %> > <%= _('Every_day') %> </option>
+            <% n = 7 -%>
+            <% i = 1 -%>
+            <% n.times do %>
+                <option value="<%= i %>" <%= "selected" if backup_week_day.to_i == i %> > <%= i %> </option>
+                <% i+=1 -%>
+            <% end %>
+          </select>
+          </td>
+        </tr>
+        <% backup_hour = Confline.get_value("Backup_hour") %>
+        <tr>
+          <td></td>
+          <td><b> <%= _('Hour') %> </b></td>
+          <td><select name="hour">
+            <% n = 24 -%>
+            <% i = 1 -%>
+            <% n.times do %>
+                <option value="<%= i %>" <%= "selected" if backup_hour.to_i == i %> > <%= i %> </option>
+                <% i+=1 -%>
+            <% end %>
+          </select>
+            <%= b_info %> <%= _('Value_in_system_time_zone') %>:
+            GMT <%= User.system_time_offset > 0 ? '+' : "" %><%= User.system_time_offset %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Keep_on_local_server') %>  </b></td>
+          <td> <%= text_field_tag('backup_number', Confline.get_value('Backup_number'), "class" => "input") %> <%= _('backups') %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Dont_start_backup_if_disk_space_less_than') %> </b></td>
+          <td> <%= text_field_tag('backup_disk_space', Confline.get_value('Backup_disk_space'), "class" => "input") %>
+            %
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="dhtmlgoodies_aTab">
+      <br/>
+      <br/>
+      <table class="simple" width="100%">
+        <tr>
+          <td width="30"></td>
+          <td><b><%= _('Allow_API') %>:</b></td>
+          <td><%= check_box_tag 'allow_api', value = "1", Confline.get_value('Allow_API').to_i == 1 %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Allow_GET_API') %>:</b></td>
+          <td><%= check_box_tag 'allow_get_api', value = "1", Confline.get_value('Allow_GET_API').to_i == 1 %></td>
+        </tr>
+        <tr <%= tooltip(_('API_Secret_Key'), _('API_Secret_Key_Explanation')).html_safe %>>
+          <td></td>
+          <td><b><%= _('API_Secret_Key') %>:</b></td>
+          <td><%= text_field_tag('api_secret_key', Confline.get_value("API_Secret_Key"), "class" => "input", :size => "35", :maxlength => "255") %></td>
+        </tr>
+        <tr <%= tooltip(_('XML_API_Extension'), _('XML_API_Extension_Explanation')).html_safe %> >
+          <td></td>
+          <td><b><%= _('XML_API_Extension') %>:</b></td>
+          <td><%= check_box_tag 'xml_api_extension', value = "1", (Confline.get_value("XML_API_Extension").to_i == 1) %> </td>
+        </tr>
+        <tr <%= tooltip(_('API_Login_Redirect_to_Main'), _('API_Login_Redirect_Explanation')).html_safe %> >
+          <td></td>
+          <td><b><%= _('API_Login_Redirect_to_Main') %>:</b></td>
+          <td><%= check_box_tag 'api_login_redirect_to_main', 1, (Confline.get_value("API_Login_Redirect_to_Main").to_i == 1) %> </td>
+        </tr>
+        <tr <%= tooltip(_('API_allow_Registration'), _('API_allow_Registration_Explanation')).html_safe %> >
+          <td></td>
+          <td><b><%= _('API_allow_Registration') %>:</b></td>
+          <td><%= check_box_tag 'api_allow_registration', 1, (Confline.get_value("API_Allow_registration_ower_API").to_i == 1) %> </td>
+        </tr>
+        <% if mor_11_extend? %>
+            <tr <%= tooltip(_('API_allow_Payments'), _('API_allow_Payments_Explanation')).html_safe %> >
+              <td></td>
+              <td><b><%= _('API_allow_Payments') %>:</b></td>
+              <td><%= check_box_tag 'api_allow_payments', 1, (Confline.get_value("API_Allow_payments_ower_API").to_i == 1) %> </td>
+            </tr>
+            <tr <%= tooltip(_('API_Payment_Confirmation'), _('API_Payment_Confirmation_Explanation')).html_safe %> >
+              <td></td>
+              <td><b><%= _('API_Payment_Confirmation') %>:</b></td>
+              <td><%= check_box_tag 'api_payment_confirmation', 1, (Confline.get_value("API_payment_confirmation").to_i == 1) %> </td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+    <% ["functionality", "privacy", "visual"].each { |tab| %>
+        <div class="dhtmlgoodies_aTab">
+          <br/>
+          <br/>
+          <%= render :partial => "settings_#{tab.to_s}" %>
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-      </td>
+    <% } %>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    </td>
     </tr>
     <tr>
       <td>
-        <%= submit_tag _('Save_changes'), :disable_with=>_('Processing..')%>
+        <%= submit_tag _('Save_changes'), :disable_with => _('Processing..') %>
       </td>
     </tr>
-  </table>
+    </table>
 <% end %>
 <% content_for :scripts do %>
-  <script type="text/javascript">
-  <% setting_tabs = ["Global", "Registration", "Invoices", "Emails", "Various", "Tax", "Google_Maps", "Backups", "API", "Functionality", "Privacy", "Visual"] -%>
-    initTabs('dhtmlgoodies_tabView1', Array(<%= setting_tabs.map{|tab| "'"+ _(tab) + "'"}.join(", ") %>),0,800,580);
-  </script>
+    <script type="text/javascript">
+        <% setting_tabs = ["Global", "Registration", "Invoices", "Emails", "Various", "Tax", "Google_Maps", "Backups", "API", "Functionality", "Privacy", "Visual"] -%>
+        initTabs('dhtmlgoodies_tabView1', Array(<%= setting_tabs.map{|tab| "'"+ _(tab) + "'"}.join(", ") %>), 0, 800, 580);
+    </script>
 <% end %>

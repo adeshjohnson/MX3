@@ -3,14 +3,14 @@
 
 
 <table class="maintable" width="20%">
-		<th align="left" colspan=2> 	<%= _('Add_new_email') %> 		</th>
+  <th align="left" colspan=2>     <%= _('Add_new_email') %>         </th>
 
-    <%= form_tag :action => 'pdffaxemail_new', :id => @device.id do %>
-	<tr>
-		<td> 	<%= text_field_tag 'new_pdffaxemail', "", "class" => "input", :size => "30", :maxlength => "50"  %> 		</td>
-		<td>  <%= image_submit_tag 'icons/add.png', :title => _('Add') %>    </td>
-	</tr>
-	<% end %>
+  <%= form_tag :action => 'pdffaxemail_new', :id => @device.id do %>
+      <tr>
+        <td>     <%= text_field_tag 'new_pdffaxemail', "", "class" => "input", :size => "30", :maxlength => "50" %>         </td>
+        <td>  <%= image_submit_tag 'icons/add.png', :title => _('Add') %>    </td>
+      </tr>
+  <% end %>
 </table>
 
 <br><br>

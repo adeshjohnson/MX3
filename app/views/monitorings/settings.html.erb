@@ -1,12 +1,12 @@
 <%= form_tag :action => :chanspy do %>
-  <table class="simple" width="50%">
-   <% if current_user.is_admin? or current_user.is_accountant? %>
-     <tr>
-       <td width="30"></td>
-       <td><b><%= _('chanspy_disabled_globaly') %>:</b></td>
-       <td><%= check_box_tag 'disable_chanspy', 1, @chanspy_disabled %></td>
-    <% end %>
-  </table>
-  <br /> <br />
-  <%= submit_tag _('Save_changes'), :disable_with=>_('Processing..')%>
+    <table class="simple" width="50%">
+      <% if current_user.is_admin? or current_user.is_accountant? %>
+          <tr>
+            <td width="30"></td>
+            <td><b><%= _('chanspy_disabled_globaly') %>:</b></td>
+            <td><%= check_box_tag 'disable_chanspy', 1, @chanspy_disabled %></td>
+      <% end %>
+    </table>
+    <br/> <br/>
+    <%= submit_tag _('Save_changes'), :disable_with => _('Processing..') %>
 <% end %>

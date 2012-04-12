@@ -9,7 +9,7 @@ module ActiveMerchant #:nodoc:
           # amount
           mapping :account, 'email'
           mapping :amount, 'amount'
-        
+
           # Set the field status = test for testing with accounts:
           # Account             Password
           # test1@nochex.com    123456
@@ -27,7 +27,7 @@ module ActiveMerchant #:nodoc:
             end
             add_field mappings[:amount], sprintf("%.2f", cents.to_f/100)
           end
-          
+
           # Optional Parameters
           # ordernumber
           mapping :order, 'ordernumber'
@@ -36,27 +36,27 @@ module ActiveMerchant #:nodoc:
           # lastname
           # email_address_sender
           mapping :customer, :first_name => 'firstname',
-                             :last_name  => 'lastname',
-                             :email      => 'email_address_sender'
+                  :last_name => 'lastname',
+                  :email => 'email_address_sender'
 
           # town
           # firstline
           # county
           # postcode
-          mapping :billing_address, :city     => 'town',
-                                    :address1 => 'firstline',
-                                    :state    => 'county',
-                                    :zip      => 'postcode'
+          mapping :billing_address, :city => 'town',
+                  :address1 => 'firstline',
+                  :state => 'county',
+                  :zip => 'postcode'
 
           # responderurl 
           mapping :notify_url, 'responderurl'
 
           # returnurl
           mapping :return_url, 'returnurl'
-          
+
           # cancelurl
           mapping :cancel_return_url, 'cancelurl'
-          
+
           # description
           mapping :description, 'description'
 

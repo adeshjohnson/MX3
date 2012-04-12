@@ -1,20 +1,20 @@
 <%= render :partial => "search_header" %>
-<br />
+<br/>
 <table class="bordered">
   <tr>
     <td align="left" NOWRAP>
-      <%= _("Records")%>: <%= @total_calls %>&nbsp;&nbsp;&nbsp;
-      <%= _("Pages")%>: <%= @total_pages%>&nbsp;&nbsp;&nbsp;
+      <%= _("Records") %>: <%= @total_calls %>&nbsp;&nbsp;&nbsp;
+      <%= _("Pages") %>: <%= @total_pages %>&nbsp;&nbsp;&nbsp;
     </td>
     <td align="left" NOWRAP>
       <%= render :partial => "page_select_header_agg" %>
     </td>
   </tr>
 </table>
-<br />
+<br/>
 <% if @total_calls.to_i > 0 %>
-  <%= link_to b_csv + _('Export_to_CSV'), :action => :aggregate, :csv=>1%>
+    <%= link_to b_csv + _('Export_to_CSV'), :action => :aggregate, :csv => 1 %>
 <% end %>
-<br />
-<br />
+<br/>
+<br/>
 <%= render :partial => "aggregate_call_list" %>

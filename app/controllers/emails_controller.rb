@@ -9,7 +9,7 @@ class EmailsController < ApplicationController
   BASE_DIR = "/tmp/attachements"
   layout "callc"
 
-  before_filter :check_post_method, :only=>[:destroy, :create, :update]
+  before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :check_localization
   before_filter :authorize, :except => [:email_callback]
   before_filter :find_email, :only => [:edit, :update, :show_emails, :list_users, :destroy, :send_emails, :send_emails_from_cc]
@@ -55,7 +55,7 @@ class EmailsController < ApplicationController
 
   def edit
     @help_link = 'http://wiki.kolmisoft.com/index.php/Email_variables'
-    @page_title =  _('Edit_email')+": " + @email.name
+    @page_title = _('Edit_email')+": " + @email.name
     @page_icon = "edit.png"
   end
 
@@ -67,7 +67,7 @@ class EmailsController < ApplicationController
     @user = User.find_by_id(session[:user_id])
     unless @user
       flash[:notice] = _('User_was_not_found')
-      render :controller=>"callc", :action => 'main'
+      render :controller => "callc", :action => 'main'
     end
 
     if @email.update_attributes(params[:email])
@@ -81,7 +81,7 @@ class EmailsController < ApplicationController
       end
     else
       flash[:notice] = _('Email_was_not_updated') + ": " + _("Wrong_email_variables") + " <a href='http://wiki.kolmisoft.com/index.php/Email_variables'>wiki</a>"
-      render :action => 'edit', :id => params[:id], :ccc=>@ccc
+      render :action => 'edit', :id => params[:id], :ccc => @ccc
     end
   end
 
@@ -95,8 +95,8 @@ class EmailsController < ApplicationController
       user=User.find(session[:user_id])
       user.create_reseller_emails
       @emails = Email.find(:all,
-        :conditions =>["owner_id= ? and (callcenter='0' or callcenter is null)", session[:user_id]],
-        :joins => "LEFT JOIN (SELECT data, data2, COUNT(*) as emails FROM actions WHERE action = 'email_sent' GROUP BY data2) as actions ON (emails.id = actions.data2)")
+                           :conditions => ["owner_id= ? and (callcenter='0' or callcenter is null)", session[:user_id]],
+                           :joins => "LEFT JOIN (SELECT data, data2, COUNT(*) as emails FROM actions WHERE action = 'email_sent' GROUP BY data2) as actions ON (emails.id = actions.data2)")
     end
   end
 
@@ -104,9 +104,9 @@ class EmailsController < ApplicationController
     @page_title = _('Emails')
     @page_icon = "email.png"
     if session[:usertype].to_s != "admin"
-      @emails = Email.find(:all, :conditions =>["(owner_id= ? or owner_id='0') and callcenter='1'", session[:user_id]])
+      @emails = Email.find(:all, :conditions => ["(owner_id= ? or owner_id='0') and callcenter='1'", session[:user_id]])
     else
-      @emails = Email.find(:all, :conditions =>"callcenter='1'")
+      @emails = Email.find(:all, :conditions => "callcenter='1'")
     end
     @email_sending_enabled = Confline.get_value("Email_Sending_Enabled", 0).to_i == 1
   end
@@ -116,7 +116,7 @@ class EmailsController < ApplicationController
 =end
 
   def show_emails
-    @page_title =  _('show_emails')+": " + @email.name
+    @page_title = _('show_emails')+": " + @email.name
     @page_icon = "email.png"
   end
 
@@ -134,9 +134,9 @@ class EmailsController < ApplicationController
     @total_pages = (Action.count(:conditions => ["data2 = ? AND action = 'email_sent'", params[:id]]).to_f / session[:items_per_page].to_f).ceil
 
     @actions = Action.find(:all,
-      :conditions => ["data2 = ? AND action = 'email_sent'", params[:id]],
-      :offset=> (@page-1)*session[:items_per_page],
-      :limit => session[:items_per_page])
+                           :conditions => ["data2 = ? AND action = 'email_sent'", params[:id]],
+                           :offset => (@page-1)*session[:items_per_page],
+                           :limit => session[:items_per_page])
   end
 
 =begin
@@ -192,7 +192,7 @@ class EmailsController < ApplicationController
     @page_icon = "email_go.png"
 
     @search_agent= params[:agent]
-    @agents = User.find(:all, :conditions=>"call_center_agent=1")
+    @agents = User.find(:all, :conditions => "call_center_agent=1")
 
     @clients = CcClient.whit_main_contact(@search_agent)
 
@@ -233,10 +233,12 @@ class EmailsController < ApplicationController
 
   def send_all(users, email)
     e =[]
-    status = Email.send_email(email, users, session[:usertype].to_s == "admin" ? Confline.get_value("Company_Email", 0) : Confline.get_value("Email_from", session[:user_id].to_i), 'send_all', {:owner=>session[:user_id], })
-    status.uniq.each{ |i|  e << _(i.capitalize)}
+    status = Email.send_email(email, users, session[:usertype].to_s == "admin" ? Confline.get_value("Company_Email", 0) : Confline.get_value("Email_from", session[:user_id].to_i), 'send_all', {:owner => session[:user_id], })
+    status.uniq.each { |i| e << _(i.capitalize) }
     flash[:notice] = e.join('<br>')
-  end #send_all
+  end
+
+  #send_all
 
   def EmailsController::send_test(id)
     user = User.find(id)
@@ -244,8 +246,8 @@ class EmailsController < ApplicationController
 
     users = []
     users << user
-    variables = Email.email_variables(user, nil, {:owner=>id})
-    send_email(email, Confline.get_value("Email_from", id) ,users, variables)
+    variables = Email.email_variables(user, nil, {:owner => id})
+    send_email(email, Confline.get_value("Email_from", id), users, variables)
 
     # redirect_to :controller => "callc", :action => "main" and return false
   end
@@ -264,22 +266,22 @@ class EmailsController < ApplicationController
 
     admin_email = adm.email
     details = ActionView::Base.new(Rails::Configuration.new.view_path).render(:partial => 'emails/email_calling_cards_purchase', :locals => {:cards => cards})
-    user = User.new({:usertype=>'user', :username=>'Card', :first_name=>order.first_name, :last_name=>order.last_name})
-    varables = Email.email_variables(user, nil, {:cc_purchase_details => details}, {:user_email_card=>order.email})
-    EmailsController::send_email(email, admin_email ,users, varables)
+    user = User.new({:usertype => 'user', :username => 'Card', :first_name => order.first_name, :last_name => order.last_name})
+    varables = Email.email_variables(user, nil, {:cc_purchase_details => details}, {:user_email_card => order.email})
+    EmailsController::send_email(email, admin_email, users, varables)
     MorLog.my_debug "_____________________________"
     MorLog.my_debug admin_email
     MorLog.my_debug user_mail
     MorLog.my_debug "_____________________________"
-    EmailsController::send_email(email, user_mail ,admin, {:cc_purchase_details => details})
+    EmailsController::send_email(email, user_mail, admin, {:cc_purchase_details => details})
 
   end
 
   def EmailsController::send_email(email, email_from, users, assigns = {})
     if Confline.get_value("Email_Sending_Enabled", 0).to_i == 1
-      email_from.gsub!(' ', '_')#so nasty, but rails has a bug and doest send from_email if it has spaces in it
-      status = Email.send_email(email, users, email_from, 'send_email', {:assigns=>assigns, :owner=>assigns[:owner]})
-      status.uniq.each{ |i|  @e = _(i.capitalize) + '<br>'}
+      email_from.gsub!(' ', '_') #so nasty, but rails has a bug and doest send from_email if it has spaces in it
+      status = Email.send_email(email, users, email_from, 'send_email', {:assigns => assigns, :owner => assigns[:owner]})
+      status.uniq.each { |i| @e = _(i.capitalize) + '<br>' }
       return @e
     else
       return _('Email_disabled')
@@ -289,8 +291,8 @@ class EmailsController < ApplicationController
 
   def EmailsController::send_email_with_attachment(email, email_from, user, attachments, assigns = {})
     num = []
-    status = Email.send_email(email, [user], email_from, 'send_email_with_attachment', {:assigns=>assigns, :owner=>user.owner_id.to_i, :attachments=>attachments})
-    status.uniq.each{ |i|  num[1] = _(i.capitalize) + '<br>'; num[0] = (i =~ /email[\s_]*sent/i) ? 1 : 0 }
+    status = Email.send_email(email, [user], email_from, 'send_email_with_attachment', {:assigns => assigns, :owner => user.owner_id.to_i, :attachments => attachments})
+    status.uniq.each { |i| num[1] = _(i.capitalize) + '<br>'; num[0] = (i =~ /email[\s_]*sent/i) ? 1 : 0 }
     return num
   end
 
@@ -308,11 +310,11 @@ class EmailsController < ApplicationController
     gres = []
 
     for r in res
-      time =  r['sending_date'].to_time
+      time = r['sending_date'].to_time
       min = ((Time.now - time).to_i / 60)
       @user = User.find(r['user_id'])
       @ruser = User.find(r['reseller_id'])
-      if min.to_i  < r['sms_email_wait_time'].to_i
+      if min.to_i < r['sms_email_wait_time'].to_i
         gres << r
       else
         if r['time_out_charge_user'].to_i == 1
@@ -364,7 +366,7 @@ class EmailsController < ApplicationController
 
 
     Net::POP3.enable_ssl(OpenSSL::SSL::VERIFY_NONE)
-    Net::POP3.start( pop3_server, Net::POP3.default_pop3s_port, login, psw) do |pop|
+    Net::POP3.start(pop3_server, Net::POP3.default_pop3s_port, login, psw) do |pop|
       if pop.mails.empty?
         a= 'No mail.'
         #     my_debug a
@@ -457,7 +459,6 @@ class EmailsController < ApplicationController
   end
 
 
-
   def email_callback
     if callback_active?
       if params[:subject].to_s.downcase == 'change'
@@ -467,9 +468,9 @@ class EmailsController < ApplicationController
       end
 
       if params[:subject].to_s.downcase == 'callback'
-        auth_callerid = params[:param1].to_s.gsub(/[^0-9]/,"")
-        first_number = params[:param2].to_s.gsub(/[^0-9]/,"")
-        second_number =  params[:param3].to_s.gsub(/[^0-9]/,"")
+        auth_callerid = params[:param1].to_s.gsub(/[^0-9]/, "")
+        first_number = params[:param2].to_s.gsub(/[^0-9]/, "")
+        second_number = params[:param3].to_s.gsub(/[^0-9]/, "")
 
         my_debug params.to_yaml
 
@@ -485,11 +486,16 @@ class EmailsController < ApplicationController
 
             if device
 
-              originate_call(device.id, first_number, "Local/#{first_number}@mor_cb_src/n", "mor_cb_dst", second_number, device.callerid)
+              st = originate_call(device.id, first_number, "Local/#{first_number}@mor_cb_src/n", "mor_cb_dst", second_number, device.callerid)
 
-              MorLog.my_debug "email callback - originating callback to '#{first_number}' and '#{second_number}'"
-              Action.add_action2(0, "email_callback_originate", "done", "originating callback to '#{first_number}' and '#{second_number}'")
+              if st.to_i == 0
+                MorLog.my_debug "email callback - originating callback to '#{first_number}' and '#{second_number}'"
+                Action.add_action2(0, "email_callback_originate", "done", "originating callback to '#{first_number}' and '#{second_number}'")
+              else
+                MorLog.my_debug "#{_('Cannot_connect_to_asterisk_server')} :: email callback - originating callback to '#{first_number}' and '#{second_number}'"
+                Action.add_action2(0, "email_callback_originate", _('Cannot_connect_to_asterisk_server'), "originating callback to '#{first_number}' and '#{second_number}'")
 
+              end
             else
               MorLog.my_debug "email2callback error - auth. device not found"
               Action.add_action2(0, "email_callback_originate", "error", "auth. device not found, '#{first_number}' - '#{second_number}'")
@@ -514,7 +520,7 @@ class EmailsController < ApplicationController
       end
     else
       MorLog.my_debug "ERROR, Callback addon is disabled"
-        Action.add_action2(0, "email_callback", "error - Callback addon is disabled", '')
+      Action.add_action2(0, "email_callback", "error - Callback addon is disabled", '')
     end
   end
 
@@ -555,7 +561,7 @@ class EmailsController < ApplicationController
       #
       email = Email.find(:first, :conditions => ["name = 'registration_confirmation_for_admin' AND owner_id= ?", owner_id])
       users = [User.find_by_id(owner_id)]
-      variables = Email.email_variables(user, device, {:user_ip=>reg_ip, :password=>password, :free_ext=>free_ext})
+      variables = Email.email_variables(user, device, {:user_ip => reg_ip, :password => password, :free_ext => free_ext})
       num = EmailsController.send_email(email, Confline.get_value("Email_from", owner_id), users, variables)
 
       #      if num
@@ -578,7 +584,7 @@ class EmailsController < ApplicationController
     @email = Email.find_by_id(params[:id])
     unless @email
       flash[:notice] = _('Email_was_not_found')
-      redirect_to :controller=>"callc", :action => 'main' and return false
+      redirect_to :controller => "callc", :action => 'main' and return false
     end
     check_user_for_email(@email)
   end
@@ -587,7 +593,7 @@ class EmailsController < ApplicationController
     @user = User.find_by_id(session[:user_id])
     unless @user
       flash[:notice] = _('User_was_not_found')
-      render :controller=>"callc", :action => 'main'
+      render :controller => "callc", :action => 'main'
     end
   end
 
@@ -601,4 +607,5 @@ class EmailsController < ApplicationController
     end
     return true
   end
+
 end

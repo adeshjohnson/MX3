@@ -2,17 +2,17 @@
 class CardgroupsController < ApplicationController
 
   layout "callc"
-  before_filter :check_post_method, :only=>[:destroy, :create, :update]
+  before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :check_localization
   before_filter :check_calingcards_enabled
   before_filter :authorize
 
-  before_filter :check_if_can_see_finances, :only =>[:new, :create]
+  before_filter :check_if_can_see_finances, :only => [:new, :create]
   #before_filter :authorize_admin
 
   @@card_view_res = []
   @@card_edit_res = [:list, :search, :show, :new, :create, :edit, :update, :destroy, :cards_to_csv, :upload_card_image]
-  before_filter(:only =>  @@card_view_res+@@card_edit_res) { |c|
+  before_filter(:only => @@card_view_res+@@card_edit_res) { |c|
     allow_read, allow_edit = c.check_read_write_permission(@@card_view_res, @@card_edit_res, {:role => "reseller", :right => :res_calling_cards, :ignore => true})
     c.instance_variable_set :@allow_read_res, allow_read
     c.instance_variable_set :@allow_edit_res, allow_edit
@@ -35,21 +35,21 @@ class CardgroupsController < ApplicationController
     end
     @page_title = _('Card_groups')
     @help_link = "http://wiki.kolmisoft.com/index.php/Calling_Card_Groups"
-    
+
     user_id = get_user_id()
 
     session[:cardgroup_search_options] ||= {}
 
     @search, @options = 0, {
-      "s_number" => "",
-      "s_pin" => "",
-      "s_balance_max" => "",
-      "s_balance_min" => "",
-      "s_sold" => "",
-      "s_caller_id" => ''
+        "s_number" => "",
+        "s_pin" => "",
+        "s_balance_max" => "",
+        "s_balance_min" => "",
+        "s_sold" => "",
+        "s_caller_id" => ''
     }
 
-    @cardgroups = Cardgroup.find(:all,:include => [:tax], :conditions=>["owner_id = ?", user_id])
+    @cardgroups = Cardgroup.find(:all, :include => [:tax], :conditions => ["owner_id = ?", user_id])
   end
 
   def search
@@ -63,7 +63,7 @@ class CardgroupsController < ApplicationController
     end
     @page_title = _('Card_groups')
     @help_link = "http://wiki.kolmisoft.com/index.php/Calling_Card_Groups"
-    
+
     user_id = get_user_id()
     @show_pin = !(session[:usertype] == "accountant" and session[:acc_callingcard_pin].to_i == 0)
 
@@ -71,17 +71,17 @@ class CardgroupsController < ApplicationController
     session[:cardgroup_search_options] ||= {}
 
     @options = {
-      "s_number" => "",
-      "s_pin" => "",
-      "s_balance_max" => "",
-      "s_balance_min" => "",
-      "s_sold" => "",
-      "s_caller_id" => ''
+        "s_number" => "",
+        "s_pin" => "",
+        "s_balance_max" => "",
+        "s_balance_min" => "",
+        "s_sold" => "",
+        "s_caller_id" => ''
     }
     @options.merge!(session[:cardgroup_search_options]).merge!(params.slice(*@options.keys))
     session[:cardgroup_search_options] = @options
     @page = params[:page].to_i
-    @cards, @card_count = Card.search(corrected_user_id, @options, { :page => @page, :per_page => session[:items_per_page] })
+    @cards, @card_count = Card.search(corrected_user_id, @options, {:page => @page, :per_page => session[:items_per_page]})
     @total_pages = (@card_count / session[:items_per_page].to_f).ceil
   end
 
@@ -89,9 +89,9 @@ class CardgroupsController < ApplicationController
     @allow_manage = !(session[:usertype] == "accountant" and (session[:acc_callingcard_manage].to_i == 0 or session[:acc_callingcard_manage].to_i == 1))
     @page_title = _('Card_group_details')
     @page_icon = "details.png"
-    @help_link = "http://wiki.kolmisoft.com/index.php/Calling_Card_Groups"    
-    
-    @cardgroup = Cardgroup.find(:first, :include => [:tariff, :lcr,:location, :tax], :conditions => ["cardgroups.id = ?", params[:id]])
+    @help_link = "http://wiki.kolmisoft.com/index.php/Calling_Card_Groups"
+
+    @cardgroup = Cardgroup.find(:first, :include => [:tariff, :lcr, :location, :tax], :conditions => ["cardgroups.id = ?", params[:id]])
 
     unless @cardgroup
       flash[:notice] = _("Cardgroup_not_found")
@@ -108,7 +108,7 @@ class CardgroupsController < ApplicationController
     @allow_manage = !(session[:usertype] == "accountant" and (session[:acc_callingcard_manage].to_i == 0 or session[:acc_callingcard_manage].to_i == 1))
     unless @allow_manage
       flash[:notice] = _("You_have_no_editing_permission")
-      redirect_to :controller => :callc,  :action => :main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
     @page_title = _('New_card_group')
     @page_icon = "add.png"
@@ -117,7 +117,7 @@ class CardgroupsController < ApplicationController
       @cardgroup = Cardgroup.new
       @price_with_vat = 0
     else
-      @cardgroup =  session[:tmp_new_cardgroup]
+      @cardgroup = session[:tmp_new_cardgroup]
       if @cardgroup.tax
         @price_with_vat = @cardgroup.price + @cardgroup.get_tax.count_tax_amount(@cardgroup.price)
       else
@@ -142,12 +142,12 @@ class CardgroupsController < ApplicationController
     check_addon
 
     if reseller? and !current_user.reseller_allow_providers_tariff?
-      @lcrs = current_user.lcrs.find(:all, :conditions=>["id = ?", user.lcr_id], :order => "name ASC")
+      @lcrs = current_user.lcrs.find(:all, :conditions => ["id = ?", user.lcr_id], :order => "name ASC")
     else
       @lcrs = current_user.lcrs.find(:all, :order => "name ASC")
     end
     @locations = current_user.locations
-    
+
     @cardgroup.tax = tax
     if Confline.get_value("User_Wholesale_Enabled").to_i == 0
       cond = " AND purpose = 'user' "
@@ -177,13 +177,13 @@ class CardgroupsController < ApplicationController
 
     @cardgroup.price = @cardgroup.tax.count_amount_without_tax(price_with_vat)
     @cardgroup.valid_from = nice_date_from_params(params[:date_from]) + " 00:00:00"
-    @cardgroup.valid_till =  nice_date_from_params(params[:date_till]) + " 23:59:59"
+    @cardgroup.valid_till = nice_date_from_params(params[:date_till]) + " 23:59:59"
     @cardgroup.owner_id = get_user_id()
     @cardgroup.allow_loss_calls = params[:allow_loss_calls].to_i
     @cardgroup.disable_voucher = params[:disable_voucher].to_i
     if session[:usertype].to_s == "reseller" and current_user.own_providers.to_i == 0
       user= User.find_by_id(get_user_id())
-      @cardgroup.lcr = Lcr.find(:all, :conditions=>"id = '#{user.lcr_id}'", :order => "name ASC")[0]
+      @cardgroup.lcr = Lcr.find(:all, :conditions => "id = '#{user.lcr_id}'", :order => "name ASC")[0]
     end
     if @cardgroup.save and tax_save
       session[:tmp_new_cardgroup] = nil
@@ -204,12 +204,12 @@ class CardgroupsController < ApplicationController
   def edit
     @page_title = _('Card_group_edit')
     @page_icon = "edit.png"
-    @cardgroup = Cardgroup.find(:first,:include => [:tax], :conditions => ["cardgroups.id = ?", params[:id]])
+    @cardgroup = Cardgroup.find(:first, :include => [:tax], :conditions => ["cardgroups.id = ?", params[:id]])
     unless @cardgroup
       flash[:notice] = _('Cardgroup_was_not_found')
       redirect_to :action => 'list' and return false
     end
-   
+
     @cardgroup.assign_default_tax if @cardgroup.tax.nil?
     check_user_for_cardgroup(@cardgroup)
 
@@ -217,7 +217,7 @@ class CardgroupsController < ApplicationController
     user= User.find_by_id(user_id)
 
     if reseller? and !current_user.reseller_allow_providers_tariff?
-      @lcrs = current_user.lcrs.find(:all, :conditions=>["id = ?", user.lcr_id], :order => "name ASC")
+      @lcrs = current_user.lcrs.find(:all, :conditions => ["id = ?", user.lcr_id], :order => "name ASC")
     else
       @lcrs = current_user.lcrs.find(:all, :order => "name ASC")
     end
@@ -233,8 +233,8 @@ class CardgroupsController < ApplicationController
 
     @price_with_vat =@cardgroup.price.to_f + @cardgroup.get_tax.count_tax_amount(@cardgroup.price.to_f).to_f
 
-    @cardgroup.valid_from = (Date.today.to_s +  " 00:00:00") if @cardgroup.valid_from.blank? or @cardgroup.valid_from.to_s == '0000-00-00 00:00:00'
-    @cardgroup.valid_till = (Date.today.to_s +  " 23:59:59") if @cardgroup.valid_till.blank? or @cardgroup.valid_till.to_s == '0000-00-00 00:00:00'
+    @cardgroup.valid_from = (Date.today.to_s + " 00:00:00") if @cardgroup.valid_from.blank? or @cardgroup.valid_from.to_s == '0000-00-00 00:00:00'
+    @cardgroup.valid_till = (Date.today.to_s + " 23:59:59") if @cardgroup.valid_till.blank? or @cardgroup.valid_till.to_s == '0000-00-00 00:00:00'
     @cardgroup.save
 
     t = @cardgroup.valid_from.to_time
@@ -252,7 +252,7 @@ class CardgroupsController < ApplicationController
   end
 
   def update
-    @cardgroup = Cardgroup.find(:first,:include => [:tax], :conditions => ["cardgroups.id = ?", params[:id]])
+    @cardgroup = Cardgroup.find(:first, :include => [:tax], :conditions => ["cardgroups.id = ?", params[:id]])
     unless @cardgroup
       flash[:notice] = _('Cardgroup_was_not_found')
       redirect_to :action => 'list' and return false
@@ -278,10 +278,10 @@ class CardgroupsController < ApplicationController
       flash_errors_for(_('Cardgroup_was_not_updated'), @cardgroup)
       user_id = get_user_id()
       if reseller? and !current_user.reseller_allow_providers_tariff?
-          @lcrs = current_user.lcrs.find(:all, :conditions=>["id = ?", user.lcr_id], :order => "name ASC")
-        else
-          @lcrs = current_user.lcrs.find(:all, :order => "name ASC")
-        end
+        @lcrs = current_user.lcrs.find(:all, :conditions => ["id = ?", user.lcr_id], :order => "name ASC")
+      else
+        @lcrs = current_user.lcrs.find(:all, :order => "name ASC")
+      end
 
       @locations = current_user.locations
       if Confline.get_value("User_Wholesale_Enabled").to_i == 0
@@ -304,7 +304,7 @@ class CardgroupsController < ApplicationController
     check_user_for_cardgroup(cg)
     for card in cg.cards
       if card.calls.count == 0
-        if not Payment.find(:first, :conditions => ["paymenttype = ? and user_id = ?", "Card", card.id] )
+        if not Payment.find(:first, :conditions => ["paymenttype = ? and user_id = ?", "Card", card.id])
           card.destroy
         end
       end
@@ -315,13 +315,13 @@ class CardgroupsController < ApplicationController
       redirect_to :action => 'list' and return false
     end
     if cg.cards.size == 0
-      
+
       # destroy ghost minute percent records
       gmps = CcGhostminutepercent.find(:all, :conditions => "cardgroup_id = '#{cg.id}'")
       for gmp in gmps
         gmp.destroy
       end
-      
+
       cg.destroy
       flash[:status] = _('Cardgroup_was_deleted')
       redirect_to :action => 'list'
@@ -339,11 +339,11 @@ class CardgroupsController < ApplicationController
     a=check_user_for_cardgroup(cg)
     return false if !a
     cards = cg.cards
-    sep,dec = current_user.csv_params
-    
+    sep, dec = current_user.csv_params
+
     csv_string = _("Number")+sep
     if show_pin == true
-      csv_string +=  _("Pin")+sep
+      csv_string += _("Pin")+sep
     end
 
     if can_see_finances?
@@ -365,7 +365,7 @@ class CardgroupsController < ApplicationController
 
     if @file
       filename = "Cards-#{cg.name}.csv"
-      send_data(csv_body.join("\n"),   :type => 'text/csv; charset=utf-8; header=present',  :filename => filename)
+      send_data(csv_body.join("\n"), :type => 'text/csv; charset=utf-8; header=present', :filename => filename)
     else
       render :text => csv_body.join("\n"), :layput => false
     end
@@ -376,7 +376,7 @@ class CardgroupsController < ApplicationController
     @cardgroup=Cardgroup.find_by_id(params[:id])
     unless @cardgroup
       flash[:notice] = _('Cardgroup_now_found')
-      redirect_to :action => 'show', :id=>@cardgroup.id and return false
+      redirect_to :action => 'show', :id => @cardgroup.id and return false
     end
 
     a=check_user_for_cardgroup(@cardgroup)
@@ -409,7 +409,7 @@ class CardgroupsController < ApplicationController
     else
       flash[:notice] = _('Select_a_file')
     end
-    redirect_to :action => 'show', :id=>@cardgroup.id and return false
+    redirect_to :action => 'show', :id => @cardgroup.id and return false
   end
 
 
@@ -425,13 +425,12 @@ class CardgroupsController < ApplicationController
     @search_cardgroup = -1
     @search_cardgroup = params[:s_cardgroup] if params[:s_cardgroup]
 
-    @cgs = Cardgroup.find(:all, :conditions=>"owner_id = '#{user_id}'", :order=>"name Asc")
+    @cgs = Cardgroup.find(:all, :conditions => "owner_id = '#{user_id}'", :order => "name Asc")
     # MorLog.my_debug @cgs.size
     cond = ""
     if @search_cardgroup.to_i != -1
       cond += " AND cards.cardgroup_id = '#{@search_cardgroup.to_i}' "
     end
-
 
 
     sql = "SELECT cards.*, cardgroups.price, calls.calldate, calls.dst, calls.user_price FROM cards
@@ -479,34 +478,32 @@ class CardgroupsController < ApplicationController
     #MorLog.my_debug @cards_callsv.to_yaml
 
 
-
   end
-
 
 
   def gmp_list
     @page_title = _('Ghost_minutes_percents')
-    @page_icon = "view.png"    
+    @page_icon = "view.png"
     @help_link = "http://wiki.kolmisoft.com/index.php/Ghost_Minute_Percent_per_Destination_for_Calling_Card_Group"
-    
+
     @cg=Cardgroup.find_by_id(params[:id])
     unless @cg
       flash[:notice] = _('Cardgroup_now_found')
-      redirect_to :action => 'show', :id=>@cg.id and return false
+      redirect_to :action => 'show', :id => @cg.id and return false
     end
 
     a=check_user_for_cardgroup(@cg)
     return false if !a
-    
+
     @gmps = CcGhostminutepercent.find(:all, :conditions => "cardgroup_id = '#{@cg.id}'")
-    
+
   end
 
 
   def gmp_create
-    
+
     @cg = Cardgroup.find_by_id(params[:cg].to_i)
-    
+
     unless @cg
       flash[:notice] = _('Cardgroup_now_found')
       redirect_to :action => 'list' and return false
@@ -515,30 +512,30 @@ class CardgroupsController < ApplicationController
     prefix = params[:prefix].to_s.strip
     if prefix.length == 0
       flash[:notice] = _('Empty_prefix')
-      redirect_to :action => 'gmp_list', :id=>@cg.id and return false
+      redirect_to :action => 'gmp_list', :id => @cg.id and return false
     end
 
     percent = params[:percent].to_f
     if percent == 0
       flash[:notice] = _('Bad_percent')
-      redirect_to :action => 'gmp_list', :id=>@cg.id and return false
+      redirect_to :action => 'gmp_list', :id => @cg.id and return false
     end
-    
+
     old_gmp = CcGhostminutepercent.find(:first, :conditions => "cardgroup_id = '#{@cg.id}' AND prefix = '#{prefix}' AND percent = '#{percent}'")
     if old_gmp
       flash[:notice] = _('Duplicate_record')
-      redirect_to :action => 'gmp_list', :id=>@cg.id and return false           
+      redirect_to :action => 'gmp_list', :id => @cg.id and return false
     end
-    
+
     gmp = CcGhostminutepercent.new
     gmp.cardgroup_id = @cg.id
     gmp.prefix = prefix
     gmp.percent = percent
     gmp.save
-    
+
     flash[:status] = _('Record_created')
-    redirect_to :action => 'gmp_list', :id=>@cg.id 
-    
+    redirect_to :action => 'gmp_list', :id => @cg.id
+
   end
 
 
@@ -549,7 +546,7 @@ class CardgroupsController < ApplicationController
       flash[:notice] = _('Record_not_found')
       redirect_to :action => 'list' and return false
     end
-   
+
     @cg = gmp.cardgroup
     unless @cg
       flash[:notice] = _('Cardgroup_now_found')
@@ -559,15 +556,15 @@ class CardgroupsController < ApplicationController
     gmp.destroy
 
     flash[:status] = _('Record_deleted')
-    redirect_to :action => 'gmp_list', :id=>@cg.id 
-        
+    redirect_to :action => 'gmp_list', :id => @cg.id
+
   end
 
 
   def gmp_edit
 
     @page_title = _('Ghost_minutes_percent_edit')
-    @page_icon = "edit.png"  
+    @page_icon = "edit.png"
     @help_link = "http://wiki.kolmisoft.com/index.php/Ghost_Minute_Percent_per_Destination_for_Calling_Card_Group"
 
     @gmp = CcGhostminutepercent.find_by_id(params[:id].to_i)
@@ -575,55 +572,55 @@ class CardgroupsController < ApplicationController
       flash[:notice] = _('Record_not_found')
       redirect_to :action => 'list' and return false
     end
-   
+
     @cg = @gmp.cardgroup
     unless @cg
       flash[:notice] = _('Cardgroup_now_found')
       redirect_to :action => 'list' and return false
-    end    
-    
+    end
+
   end
 
 
   def gmp_update
-    
+
     @gmp = CcGhostminutepercent.find_by_id(params[:id].to_i)
     unless @gmp
       flash[:notice] = _('Record_not_found')
       redirect_to :action => 'list' and return false
     end
-   
+
     @cg = @gmp.cardgroup
     unless @cg
       flash[:notice] = _('Cardgroup_now_found')
       redirect_to :action => 'list' and return false
-    end   
+    end
 
     prefix = params[:prefix].to_s.strip
     if prefix.length == 0
       flash[:notice] = _('Empty_prefix')
-      redirect_to :action => 'gmp_list', :id=>@cg.id and return false
+      redirect_to :action => 'gmp_list', :id => @cg.id and return false
     end
 
     percent = params[:percent].to_i
     if percent == 0
       flash[:notice] = _('Bad_percent')
-      redirect_to :action => 'gmp_list', :id=>@cg.id and return false
+      redirect_to :action => 'gmp_list', :id => @cg.id and return false
     end
 
     old_gmp = CcGhostminutepercent.find(:first, :conditions => "cardgroup_id = '#{@cg.id}' AND prefix = '#{prefix}' AND percent = '#{percent}'")
     if old_gmp
       flash[:notice] = _('Duplicate_record')
-      redirect_to :action => 'gmp_list', :id=>@cg.id and return false           
-    end    
-    
+      redirect_to :action => 'gmp_list', :id => @cg.id and return false
+    end
+
     @gmp.prefix = prefix
     @gmp.percent = percent
     @gmp.save
-    
+
     flash[:notice] = _('Record_updated')
-    redirect_to :action => 'gmp_list', :id=>@cg.id 
-    
+    redirect_to :action => 'gmp_list', :id => @cg.id
+
   end
 
 =begin rdoc
@@ -836,7 +833,6 @@ class CardgroupsController < ApplicationController
 =end
 
 
-
   def cardgroups_stats
     @page_title = _('Cardgroup_Stats')
     check_addon
@@ -845,11 +841,11 @@ class CardgroupsController < ApplicationController
     session[:card_groups_stats_options] ? @options = session[:card_groups_stats_options] : @options = {}
 
     #params[:page]          ? @options[:page] = params[:page].to_i                   : (@options[:page] = 1 if !@options[:page] or params[:page].to_i <= 0)
-    params[:s_only_first_use] ? @options[:s_only_first_use] = params[:s_only_first_use].to_i : (params[:clean] or !session[:card_groups_stats_options])? @options[:s_only_first_use] = 0 : @options[:s_only_first_use] = session[:card_groups_stats_options][:s_only_first_use]
+    params[:s_only_first_use] ? @options[:s_only_first_use] = params[:s_only_first_use].to_i : (params[:clean] or !session[:card_groups_stats_options]) ? @options[:s_only_first_use] = 0 : @options[:s_only_first_use] = session[:card_groups_stats_options][:s_only_first_use]
 
     user_id = get_user_id()
 
-    arr = {:joins=>'LEFT JOIN cards ON (cards.cardgroup_id = cardgroups.id)', :conditions=>["cardgroups.owner_id = ?", user_id]}
+    arr = {:joins => 'LEFT JOIN cards ON (cards.cardgroup_id = cardgroups.id)', :conditions => ["cardgroups.owner_id = ?", user_id]}
     sum_if = "SUM(IF(cards.first_use IS NOT NULL AND (cards.first_use BETWEEN '#{session_from_datetime}' AND '#{session_till_datetime}'),"
     if @options[:s_only_first_use].to_i == 1
       arr[:select]="COUNT(cards.id) as c_id,  #{sum_if}1,0)) as c_siz, #{sum_if}cards.balance,0)) as sum_b"
@@ -857,7 +853,7 @@ class CardgroupsController < ApplicationController
       arr[:select]="COUNT(cards.id) as c_id,  #{sum_if}1,0)) as c_siz, SUM(balance) as sum_b"
     end
     @cg_total = Cardgroup.find(:all, arr)
-    arr[:select]="cardgroups.id, cardgroups.name,  " +  arr[:select]
+    arr[:select]="cardgroups.id, cardgroups.name,  " + arr[:select]
     arr[:group]='cardgroups.id'
     @cgs = Cardgroup.find(:all, arr)
   end
@@ -882,15 +878,15 @@ class CardgroupsController < ApplicationController
     session[:aggregate_cards_list_options] ? @options = session[:aggregate_cards_list_options] : @options = {}
 
     params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page])
-    params[:destination_grouping] ? @options[:destination_grouping] = params[:destination_grouping].to_i : (@options[:destination_grouping] = 1 if ! @options[:destination_grouping])
+    params[:destination_grouping] ? @options[:destination_grouping] = params[:destination_grouping].to_i : (@options[:destination_grouping] = 1 if !@options[:destination_grouping])
     params[:order_desc] ? @options[:order_desc] = params[:order_desc].to_i : (@options[:order_desc] = 1 if !@options[:order_desc])
     params[:order_by] ? @options[:order_by] = params[:order_by].to_s : (@options[:order_by] = "direction" if !@options[:order_by])
 
-    params[:cardgroup] ? @options[:cardgroup] = params[:cardgroup] :  (@options[:cardgroup] = "any" if !@options[:cardgroup] )
-    params[:prefix] ? @options[:prefix] = params[:prefix].gsub(/[^0-9]/, "") :  (@options[:prefix] = "" if !@options[:prefix])
+    params[:cardgroup] ? @options[:cardgroup] = params[:cardgroup] : (@options[:cardgroup] = "any" if !@options[:cardgroup])
+    params[:prefix] ? @options[:prefix] = params[:prefix].gsub(/[^0-9]/, "") : (@options[:prefix] = "" if !@options[:prefix])
 
     @options[:order] = Call.calls_order_by(params, @options)
-    @cardgroups = Cardgroup.find(:all,:include => [:tax], :conditions=>["owner_id = ?", user_id])
+    @cardgroups = Cardgroup.find(:all, :include => [:tax], :conditions => ["owner_id = ?", user_id])
 
     @options[:csv] = params[:csv].to_i
     @options[:from]= session_from_datetime
@@ -902,7 +898,7 @@ class CardgroupsController < ApplicationController
       settings_owner_id = (["reseller", "admin"].include?(session[:usertype]) ? session[:user_id] : session[:owner_id])
       @options[:collumn_separator] = Confline.get_csv_separator(settings_owner_id)
       @options[:current_user] = current_user
-      filename = Call.cardgroup_aggregate(@options.merge({:test=>params[:test]}))
+      filename = Call.cardgroup_aggregate(@options.merge({:test => params[:test]}))
       filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
       if filename
         filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_f)
@@ -920,7 +916,7 @@ class CardgroupsController < ApplicationController
       @result = []
       @total_calls = @result_full.size
       # calculate total values of dataset.
-      @total = {:duration => 0, :user_price=>0, :provider_price=>0, :total_calls => 0, :asr => 0, :acd =>0, :answered_calls => 0, :profit=>0, :margin=>0, :markup=>0}
+      @total = {:duration => 0, :user_price => 0, :provider_price => 0, :total_calls => 0, :asr => 0, :acd => 0, :answered_calls => 0, :profit => 0, :margin => 0, :markup => 0}
       @result_full.each { |row|
         @total[:duration] += row.duration.to_f
         @total[:total_calls] += row.total_calls.to_i
@@ -939,8 +935,8 @@ class CardgroupsController < ApplicationController
       @total_pages = (@total_calls.to_f / session[:items_per_page].to_f).ceil
       @options[:page] = @total_pages if @options[:page] > @total_pages
       start = session[:items_per_page]*(@options[:page]-1)
-      (start..(start+session[:items_per_page])-1).each {|i|
-        @result <<  @result_full[i] if @result_full[i]
+      (start..(start+session[:items_per_page])-1).each { |i|
+        @result << @result_full[i] if @result_full[i]
       }
       session[:aggregate_cards_list_options] = @options
     end

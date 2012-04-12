@@ -64,12 +64,12 @@ class Audio
   end
 
   def Audio.create_file(file, object, server_path)
-    path , final_path = object.final_path
+    path, final_path = object.final_path
     notice = ''
     if file and notice.blank?
       if file.size.to_i > 0 and notice.blank?
         if  file.size.to_i < 10485760 and notice.blank?
-          filename = File.basename(file.original_filename.gsub(/[^\w\.\_]/,'_'), '_')
+          filename = File.basename(file.original_filename.gsub(/[^\w\.\_]/, '_'), '_')
           ext = filename.split(".").last
           #MorLog.my_debug ext
           if (ext.downcase == 'mp3' or ext.downcase == 'wav') and notice.blank?
@@ -85,7 +85,7 @@ class Audio
             if !File.exists?(dst) and notice.blank?
               notice = _("File_not_uploaded_please_check_file_system_permissions")
             else
-              Action.add_action_hash(User.current, {:action=>'Sound_file_addet', :data=> new_name, :data2=>dst,:target_id=>object.id, :target_type=>object.class.to_s.downcase})
+              Action.add_action_hash(User.current, {:action => 'Sound_file_addet', :data => new_name, :data2 => dst, :target_id => object.id, :target_type => object.class.to_s.downcase})
             end
           else
             notice = _("File_is_not_wav_or_mp3")
@@ -97,9 +97,9 @@ class Audio
         notice =_('Please_select_file')
       end
     else
-     notice = _("File_not_uploaded")
+      notice = _("File_not_uploaded")
     end
-    return notice , new_name.to_s # + '.wav'
+    return notice, new_name.to_s # + '.wav'
   end
 
 end

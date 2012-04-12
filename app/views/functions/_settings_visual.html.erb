@@ -1,46 +1,46 @@
 <table class="simple" width="100%">
-  <%=   raw settings_string(_('Items_Per_Page'), 'items_per_page',"Items_Per_Page") %>
+  <%= raw settings_string(_('Items_Per_Page'), 'items_per_page', "Items_Per_Page") %>
   <tr>
     <td></td>
-    <td><b><%= _('Default_Date_Format')%>:</b></td>
+    <td><b><%= _('Default_Date_Format') %>:</b></td>
     <td>
       <select name='date_format'>
         <% sdf = Confline.get_value('Date_format', 0).to_s %>
         <% for df in $date_formats %>
-          <option value='<%= df %>' <%= 'selected' if df == sdf %>>
-            <%= h df.to_s.delete('%') %>
-          </option>
+            <option value='<%= df %>' <%= 'selected' if df == sdf %>>
+              <%= h df.to_s.delete('%') %>
+            </option>
         <% end %>
       </select>
     </td>
   </tr>
-  <%=   raw settings_string(_('Nice_Number_Digits'), 'nice_number_digits', "Nice_Number_Digits") %>
-  <%=   raw setting_boolean(_('Hide_Quick_Stats'), 'hide_quick_stats', "Hide_quick_stats") %>
-  <%=   raw setting_boolean(_('Hide_device_passwords_for_users'), 'hide_device_passwords_for_users', "Hide_Device_Passwords_For_Users") %>
-  <%=   raw setting_boolean(_('Hide_HELP_banner'), 'hide_help_banner', "Hide_HELP_banner") %>
-  <%=   raw setting_boolean(_('Hide_Iwantto'), 'hide_iwantto', "Hide_Iwantto") %>
-  <%=   raw setting_boolean(_('Hide_manual_link'), 'hide_manual_link', "Hide_Manual_Link") %>
-  <%=   raw setting_boolean(_('Show_logo_on_register_page'), 'show_logo_on_register_page', "Show_logo_on_register_page") %>
-  <%=   raw setting_boolean(_('Show_Full_Src'), 'show_full_src', "Show_Full_Src") %>
-  <%=   raw setting_boolean(_('Hide_payment_options_for_postpaid_users'), 'hide_payment_options_for_postpaid_users', "Hide_payment_options_for_postpaid_users") %>
-  <%=   raw setting_boolean(_('Show_advanced_Device_settings'), 'show_advanced_device_settings', "Show_advanced_Device_settings") %>
-  <%=   raw setting_boolean(_('Hide_non_completed_payments_for_user'), 'hide_non_completed_payments_for_user', "Hide_non_completed_payments_for_user") %>
-  <%=   raw setting_boolean(_('Show_only_main_page'), 'show_only_main_page', "Show_only_main_page") %>
-  <%=   raw setting_boolean(_('Show_forgot_password'), 'show_forgot_password', "Show_forgot_password") %>
-  <%=   raw setting_boolean(_('Hide_recordings_for_all_users'), 'hide_recordings_for_all_users', "Hide_recordings_for_all_users") %>
+  <%= raw settings_string(_('Nice_Number_Digits'), 'nice_number_digits', "Nice_Number_Digits") %>
+  <%= raw setting_boolean(_('Hide_Quick_Stats'), 'hide_quick_stats', "Hide_quick_stats") %>
+  <%= raw setting_boolean(_('Hide_device_passwords_for_users'), 'hide_device_passwords_for_users', "Hide_Device_Passwords_For_Users") %>
+  <%= raw setting_boolean(_('Hide_HELP_banner'), 'hide_help_banner', "Hide_HELP_banner") %>
+  <%= raw setting_boolean(_('Hide_Iwantto'), 'hide_iwantto', "Hide_Iwantto") %>
+  <%= raw setting_boolean(_('Hide_manual_link'), 'hide_manual_link', "Hide_Manual_Link") %>
+  <%= raw setting_boolean(_('Show_logo_on_register_page'), 'show_logo_on_register_page', "Show_logo_on_register_page") %>
+  <%= raw setting_boolean(_('Show_Full_Src'), 'show_full_src', "Show_Full_Src") %>
+  <%= raw setting_boolean(_('Hide_payment_options_for_postpaid_users'), 'hide_payment_options_for_postpaid_users', "Hide_payment_options_for_postpaid_users") %>
+  <%= raw setting_boolean(_('Show_advanced_Device_settings'), 'show_advanced_device_settings', "Show_advanced_Device_settings") %>
+  <%= raw setting_boolean(_('Hide_non_completed_payments_for_user'), 'hide_non_completed_payments_for_user', "Hide_non_completed_payments_for_user") %>
+  <%= raw setting_boolean(_('Show_only_main_page'), 'show_only_main_page', "Show_only_main_page") %>
+  <%= raw setting_boolean(_('Show_forgot_password'), 'show_forgot_password', "Show_forgot_password") %>
+  <%= raw setting_boolean(_('Hide_recordings_for_all_users'), 'hide_recordings_for_all_users', "Hide_recordings_for_all_users") %>
   <% if mor_11_extend? %>
-    <%=   raw setting_boolean(_('Show_recordings_with_zero_billsec'), 'show_recordings_with_zero_billsec', 'Show_recordings_with_zero_billsec') %>
+      <%= raw setting_boolean(_('Show_recordings_with_zero_billsec'), 'show_recordings_with_zero_billsec', 'Show_recordings_with_zero_billsec') %>
   <% end %>
   <tr>
     <td></td>
-    <td><b><%= _('Default_Number_Decimal')%>:</b></td>
+    <td><b><%= _('Default_Number_Decimal') %>:</b></td>
     <td>
       <select name='global_number_decimal'>
         <% sdf = Confline.get_value('Global_Number_Decimal', 0).to_s %>
         <% for df in $decimal_formats %>
-          <option value='<%= df %>' <%= 'selected' if df == sdf %>>
-            <%= h df.to_s%>
-          </option>
+            <option value='<%= df %>' <%= 'selected' if df == sdf %>>
+              <%= h df.to_s %>
+            </option>
         <% end %>
       </select>
     </td>

@@ -4,13 +4,14 @@ class CallsController < ApplicationController
   layout "callc"
   before_filter :check_localization
   before_filter :authorize
-  before_filter :find_call, :only => [ :call_info ]
+  before_filter :find_call, :only => [:call_info]
 =begin rdoc
  Agregated call summary. Bu user/provider/destination.
 =end
   def index
-    redirect_to :controller=>"callc", :action => 'main'
+    redirect_to :controller => "callc", :action => 'main'
   end
+
 =begin redoc
 
  *Performance*
@@ -30,27 +31,27 @@ class CallsController < ApplicationController
 
     params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page])
     params[:order_desc] ? @options[:order_desc] = params[:order_desc].to_i : (@options[:order_desc] = 1 if !@options[:order_desc])
-    params[:destination_grouping] ? @options[:destination_grouping] = params[:destination_grouping].to_i : (@options[:destination_grouping] = 1 if ! @options[:destination_grouping])
+    params[:destination_grouping] ? @options[:destination_grouping] = params[:destination_grouping].to_i : (@options[:destination_grouping] = 1 if !@options[:destination_grouping])
 
     # default values for first collumn (selects and fields)
     if !session[:aggregate_list_options] or params[:search].to_i == 1
-      (params[:originator] and params[:originator].to_s != "") ? @options[:originator] = params[:originator] :  @options[:originator] = "any"
-      (params[:terminator] and params[:terminator].to_s != "") ? @options[:terminator] = params[:terminator] :  @options[:terminator] = "any"
-      (params[:prefix] and params[:prefix].to_s != "") ? @options[:prefix] = params[:prefix].gsub(/[^0-9]/, "") :  @options[:prefix] = ""
+      (params[:originator] and params[:originator].to_s != "") ? @options[:originator] = params[:originator] : @options[:originator] = "any"
+      (params[:terminator] and params[:terminator].to_s != "") ? @options[:terminator] = params[:terminator] : @options[:terminator] = "any"
+      (params[:prefix] and params[:prefix].to_s != "") ? @options[:prefix] = params[:prefix].gsub(/[^0-9]/, "") : @options[:prefix] = ""
 
       #default values for show/do not show checkboxes and collumns
-      (params[:unique_id_show] and params[:unique_id_show].to_s != "") ? @options[:unique_id_show] = params[:unique_id_show].to_i :  @options[:unique_id_show] = 1
-      (params[:destination_show] and params[:destination_show].to_s != "") ? @options[:destination_show] = params[:destination_show].to_i :  @options[:destination_show] = 1
-      (params[:customer_orig_show] and params[:customer_orig_show].to_s != "") ? @options[:customer_orig_show] = params[:customer_orig_show].to_i :  @options[:customer_orig_show] = 1
-      (params[:customer_term_show] and params[:customer_term_show].to_s != "") ? @options[:customer_term_show] = params[:customer_term_show].to_i :  @options[:customer_term_show] = 1
-      (params[:ip_address_orig_show] and params[:ip_address_orig_show].to_s != "") ? @options[:ip_address_orig_show] = params[:ip_address_orig_show].to_i :  @options[:ip_address_orig_show] = 1
-      (params[:ip_address_term_show] and params[:ip_address_term_show].to_s != "") ? @options[:ip_address_term_show] = params[:ip_address_term_show].to_i :  @options[:ip_address_term_show] = 1
+      (params[:unique_id_show] and params[:unique_id_show].to_s != "") ? @options[:unique_id_show] = params[:unique_id_show].to_i : @options[:unique_id_show] = 1
+      (params[:destination_show] and params[:destination_show].to_s != "") ? @options[:destination_show] = params[:destination_show].to_i : @options[:destination_show] = 1
+      (params[:customer_orig_show] and params[:customer_orig_show].to_s != "") ? @options[:customer_orig_show] = params[:customer_orig_show].to_i : @options[:customer_orig_show] = 1
+      (params[:customer_term_show] and params[:customer_term_show].to_s != "") ? @options[:customer_term_show] = params[:customer_term_show].to_i : @options[:customer_term_show] = 1
+      (params[:ip_address_orig_show] and params[:ip_address_orig_show].to_s != "") ? @options[:ip_address_orig_show] = params[:ip_address_orig_show].to_i : @options[:ip_address_orig_show] = 1
+      (params[:ip_address_term_show] and params[:ip_address_term_show].to_s != "") ? @options[:ip_address_term_show] = params[:ip_address_term_show].to_i : @options[:ip_address_term_show] = 1
       if can_see_finances?
-        (params[:price_orig_show] and params[:price_orig_show].to_s != "") ? @options[:price_orig_show] = params[:price_orig_show].to_i :  @options[:price_orig_show] = 1
-        (params[:price_term_show] and params[:price_term_show].to_s != "") ? @options[:price_term_show] = params[:price_term_show].to_i :  @options[:price_term_show] = 1
+        (params[:price_orig_show] and params[:price_orig_show].to_s != "") ? @options[:price_orig_show] = params[:price_orig_show].to_i : @options[:price_orig_show] = 1
+        (params[:price_term_show] and params[:price_term_show].to_s != "") ? @options[:price_term_show] = params[:price_term_show].to_i : @options[:price_term_show] = 1
       end
-      (params[:billed_time_orig_show] and params[:billed_time_orig_show].to_s != "") ? @options[:billed_time_orig_show] = params[:billed_time_orig_show].to_i :  @options[:billed_time_orig_show] = 1
-      (params[:billed_time_term_show] and params[:billed_time_term_show].to_s != "") ? @options[:billed_time_term_show] = params[:billed_time_term_show].to_i :  @options[:billed_time_term_show] = 1
+      (params[:billed_time_orig_show] and params[:billed_time_orig_show].to_s != "") ? @options[:billed_time_orig_show] = params[:billed_time_orig_show].to_i : @options[:billed_time_orig_show] = 1
+      (params[:billed_time_term_show] and params[:billed_time_term_show].to_s != "") ? @options[:billed_time_term_show] = params[:billed_time_term_show].to_i : @options[:billed_time_term_show] = 1
     end
 
     @options[:order_by], order_by = agregate_order_by(params, @options)
@@ -63,7 +64,7 @@ class CallsController < ApplicationController
     # groups by those params that are not in search conditions
     group_by = []
     @options[:destination_grouping].to_i == 1 ? group_by << "destinations.direction_code, destinations.prefix" : group_by << "destinations.direction_code, destinations.subcode"
-    
+
     if @options[:customer_orig_show].to_i == 1 or @options[:customer_term_show].to_i == 1
       group_by << "devices.user_id" if @options[:originator] == "any"
       group_by << "providers.terminator_id" if @options[:terminator] == "any"
@@ -73,7 +74,7 @@ class CallsController < ApplicationController
     cond = ["calldate BETWEEN '" + session_from_datetime + "' AND '" + session_till_datetime + "'"]
     cond << "users.owner_id = #{current_user.id}" if reseller?
     #cond << "calls.user_id != -1" # This allows to filter invalid calls
-    cond << "(usrs.id = #{q(@options[:originator].to_i)} OR users.owner_id = #{q(@options[:originator].to_i)})"  if @options[:originator] != "any"
+    cond << "(usrs.id = #{q(@options[:originator].to_i)} OR users.owner_id = #{q(@options[:originator].to_i)})" if @options[:originator] != "any"
     cond << "calls.prefix LIKE '#{@options[:prefix].gsub(/[^0-9]/, "")}%'" if  @options[:prefix].to_s != ""
     if terminator_cond.to_s != ''
       cond << "providers.terminator_id = #{terminator_cond.to_s}"
@@ -87,22 +88,22 @@ class CallsController < ApplicationController
     else
       cond << "providers.terminator_id IN (#{term_ids.join(", ")})"
     end
-    
+
     cond << "NOT (billsec = 0 AND disposition = 'ANSWERED')"
     # terminator requires other conditions
 
     if reseller?
-      originating_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', if(calls.user_price is NULL, 0, calls.user_price), 0))", {:reference=> 'originating_billed'})
-      originating_billsec = "SUM(IF(calls.disposition = 'ANSWERED', IF(calls.user_billsec IS NULL, 0, calls.user_billsec), 0)) AS 'originating_billsec'" 
+      originating_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', if(calls.user_price is NULL, 0, calls.user_price), 0))", {:reference => 'originating_billed'})
+      originating_billsec = "SUM(IF(calls.disposition = 'ANSWERED', IF(calls.user_billsec IS NULL, 0, calls.user_billsec), 0)) AS 'originating_billsec'"
 
-      terminator_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', calls.reseller_price, 0))", {:reference=> 'terminating_billed'})
+      terminator_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', calls.reseller_price, 0))", {:reference => 'terminating_billed'})
       terminator_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.reseller_billsec, 0)) AS 'terminating_billsec'"
     else
       # Check if call belongs to resellers user if yes then admins income is reseller perice
-      originating_billed = SqlExport.replace_price("SUM(IF(users.owner_id = 0 AND calls.disposition = 'ANSWERED', if(calls.user_price is NULL, 0, calls.user_price), if(calls.reseller_price IS NULL, 0, calls.reseller_price)))", {:reference=> 'originating_billed'})
+      originating_billed = SqlExport.replace_price("SUM(IF(users.owner_id = 0 AND calls.disposition = 'ANSWERED', if(calls.user_price is NULL, 0, calls.user_price), if(calls.reseller_price IS NULL, 0, calls.reseller_price)))", {:reference => 'originating_billed'})
       originating_billsec = "SUM(IF(users.owner_id = 0 AND calls.disposition = 'ANSWERED', IF(calls.user_billsec IS NULL, 0, calls.user_billsec), if(calls.reseller_billsec IS NULL, 0, calls.reseller_billsec))) AS 'originating_billsec'"
-      
-      terminator_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', calls.provider_price, 0))", {:reference=> 'terminating_billed'})
+
+      terminator_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', calls.provider_price, 0))", {:reference => 'terminating_billed'})
       terminator_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.provider_billsec, 0)) AS 'terminating_billsec'"
     end
 
@@ -143,7 +144,7 @@ class CallsController < ApplicationController
     @result = []
     @total_calls = @result_full.size
     # calculate total values of dataset.
-    @total = {:billed_orig => 0, :billed_term => 0, :billsec_orig => 0, :billsec_term => 0, :duration => 0, :total_calls => 0, :asr => 0, :acd =>0, :answered_calls => 0}
+    @total = {:billed_orig => 0, :billed_term => 0, :billsec_orig => 0, :billsec_term => 0, :duration => 0, :total_calls => 0, :asr => 0, :acd => 0, :answered_calls => 0}
     @result_full.each { |row|
       @total[:billed_orig] += row.originating_billed.to_f
       @total[:billed_term] += row.terminating_billed.to_f
@@ -161,8 +162,8 @@ class CallsController < ApplicationController
     @total_pages = (@total_calls.to_f / session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages if @options[:page] > @total_pages
     start = session[:items_per_page]*(@options[:page]-1)
-    (start..(start+session[:items_per_page])-1).each {|i|
-      @result <<  @result_full[i] if @result_full[i]
+    (start..(start+session[:items_per_page])-1).each { |i|
+      @result << @result_full[i] if @result_full[i]
     }
 
     session[:aggregate_list_options] = @options
@@ -170,9 +171,9 @@ class CallsController < ApplicationController
     @options = load_parties(@options)
 
     if @options[:terminator] == "any"
-       @terminator_providers_count = any_terminator_providers_count(@options[:terminators])
+      @terminator_providers_count = any_terminator_providers_count(@options[:terminators])
     else
-       @terminator_providers_count = terminator_providers_count(@options[:terminators], @options[:terminator])
+      @terminator_providers_count = terminator_providers_count(@options[:terminators], @options[:terminator])
     end
   end
 
@@ -189,22 +190,22 @@ class CallsController < ApplicationController
     params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page])
 
     params[:term_order_desc] ? @options[:term_order_desc] = params[:term_order_desc].to_i : (@options[:term_order_desc] = 1 if !@options[:order_desc])
-    params[:order_desc] ? @options[:order_desc] =  params[:order_desc].to_i : (@options[:order_desc] = 1 if !@options[:order_desc])
-    params[:order_by] ?   @options[:order_by_name] = params[:order_by].to_s : (@options[:order_by_name] = "" if !@options[:order_by_name])
+    params[:order_desc] ? @options[:order_desc] = params[:order_desc].to_i : (@options[:order_desc] = 1 if !@options[:order_desc])
+    params[:order_by] ? @options[:order_by_name] = params[:order_by].to_s : (@options[:order_by_name] = "" if !@options[:order_by_name])
 
     if !session[:summary_list_options] or params[:search].to_i == 1
-      (params[:originator] and params[:originator].to_s != "") ? @options[:originator] = params[:originator] :  @options[:originator] = "any"
-      (params[:terminator] and params[:terminator].to_s != "") ? @options[:terminator] = params[:terminator] :  @options[:terminator] = "any"
-      (params[:prefix] and params[:prefix].to_s != "") ? @options[:prefix] = params[:prefix].gsub(/[^0-9]/, "") :  @options[:prefix] = ""
+      (params[:originator] and params[:originator].to_s != "") ? @options[:originator] = params[:originator] : @options[:originator] = "any"
+      (params[:terminator] and params[:terminator].to_s != "") ? @options[:terminator] = params[:terminator] : @options[:terminator] = "any"
+      (params[:prefix] and params[:prefix].to_s != "") ? @options[:prefix] = params[:prefix].gsub(/[^0-9]/, "") : @options[:prefix] = ""
     end
 
     @options[:terminator] != "any" ? terminator_cond = @options[:terminator] : terminator_cond = ""
 
     cond = ["calldate BETWEEN '" + session_from_datetime + "' AND '" + session_till_datetime + "'"]
     #cond << "calls.user_id != -1"
-    cond << "calls.user_id IN (SELECT id FROM users WHERE id = #{@options[:originator].to_i} OR users.owner_id = #{@options[:originator].to_i})"  if @options[:originator] != "any"
+    cond << "calls.user_id IN (SELECT id FROM users WHERE id = #{@options[:originator].to_i} OR users.owner_id = #{@options[:originator].to_i})" if @options[:originator] != "any"
     cond << "calls.prefix LIKE '#{@options[:prefix].gsub(/[^0-9]/, "")}%'" if  @options[:prefix].to_s != ""
-    
+
     @options[:order_by], order_by = summary_order_by(params, @options)
 
     (@options[:order_by_name].to_s.scan(/term_/).size > 0) ? order_by_desc = order_by : order_by_desc = ""
@@ -213,7 +214,7 @@ class CallsController < ApplicationController
     @total_items_term = @terminator_lines.size
 
     @total = {:term_calls => 0, :term_min => 0, :term_exact_min => 0, :term_amount => 0,
-      :orig_calls => 0, :orig_min => 0, :orig_exact_min => 0, :orig_amount => 0}
+              :orig_calls => 0, :orig_min => 0, :orig_exact_min => 0, :orig_amount => 0}
     @terminator_lines.each { |row|
       @total[:term_calls] += row.total_calls.to_i
       @total[:term_exact_min] += row.exact_billsec.to_f
@@ -236,17 +237,17 @@ class CallsController < ApplicationController
 
     @originator_lines = []
     start = session[:items_per_page]*(@options[:page]-1)
-    (start..(start+session[:items_per_page]-1)).each {|i|
-      @originator_lines <<  @originator_lines_full[i] if @originator_lines_full[i]
+    (start..(start+session[:items_per_page]-1)).each { |i|
+      @originator_lines << @originator_lines_full[i] if @originator_lines_full[i]
     }
 
     session[:summary_list_options] = @options
     @options = load_parties(@options)
 
     if @options[:terminator] == "any"
-       @terminator_providers_count = any_terminator_providers_count(@options[:terminators])
+      @terminator_providers_count = any_terminator_providers_count(@options[:terminators])
     else
-       @terminator_providers_count = terminator_providers_count(@options[:terminators], @options[:terminator])
+      @terminator_providers_count = terminator_providers_count(@options[:terminators], @options[:terminator])
     end
 
   end
@@ -277,22 +278,22 @@ class CallsController < ApplicationController
 
 
     @did = nil
-    @did = Did.find(:first, :conditions => ["id = ?", @call.did_id.to_i])   if @call.did_id.to_i > 0
+    @did = Did.find(:first, :conditions => ["id = ?", @call.did_id.to_i]) if @call.did_id.to_i > 0
 
     @user = nil
-    @user = User.find(:first, :conditions => ["id = ?", @call.user_id.to_i])   if @call.user_id.to_i >= 0
+    @user = User.find(:first, :conditions => ["id = ?", @call.user_id.to_i]) if @call.user_id.to_i >= 0
 
     @src_device = nil
-    @src_device = Device.find(:first, :conditions => ["id = ?", @call.src_device_id.to_i])   if @call.src_device_id.to_i >= 0
+    @src_device = Device.find(:first, :conditions => ["id = ?", @call.src_device_id.to_i]) if @call.src_device_id.to_i >= 0
 
     @reseller = nil
-    @reseller = User.find(:first, :conditions => ["id = ?", @call.reseller_id.to_i])   if @call.reseller_id.to_i > 0
+    @reseller = User.find(:first, :conditions => ["id = ?", @call.reseller_id.to_i]) if @call.reseller_id.to_i > 0
 
     @provider = nil
-    @provider = Provider.find(:first, :conditions => ["providers.id = ?", @call.provider_id.to_i], :include => :user)   if @call.provider_id.to_i > 0
+    @provider = Provider.find(:first, :conditions => ["providers.id = ?", @call.provider_id.to_i], :include => :user) if @call.provider_id.to_i > 0
 
     @card = nil
-    @card = Card.find(:first, :conditions => ["id = ?", @call.card_id.to_i])   if @call.card_id.to_i > 0
+    @card = Card.find(:first, :conditions => ["id = ?", @call.card_id.to_i]) if @call.card_id.to_i > 0
 
     @call_log = @call.call_log
 
@@ -326,21 +327,34 @@ class CallsController < ApplicationController
 
   def agregate_order_by(params, options)
     case params[:order_by].to_s
-    when "direction" then      order_by = "destinations.direction_code"
-    when "destination" then    order_by = "destinations.name"
-    when "customer_orig" then  order_by = "nice_user"
-    when "customer_term" then  order_by = "terminators.name"
-    when "billed_orig" then    order_by = "originating_billed"
-    when "billed_term" then    order_by = "terminating_billed"
-    when "billsec_orig" then   order_by = "originating_billsec"
-    when "billsec_term" then   order_by = "terminating_billsec"
-    when "duration" then       order_by = "duration"
-    when "answered_calls" then order_by = "answered_calls"
-    when "total_calls" then    order_by = "total_calls"
-    when "asr" then            order_by = "asr"
-    when "acd" then            order_by = "acd"
-    else
-      options[:order_by] ? order_by = options[:order_by] : order_by = ""
+      when "direction" then
+        order_by = "destinations.direction_code"
+      when "destination" then
+        order_by = "destinations.name"
+      when "customer_orig" then
+        order_by = "nice_user"
+      when "customer_term" then
+        order_by = "terminators.name"
+      when "billed_orig" then
+        order_by = "originating_billed"
+      when "billed_term" then
+        order_by = "terminating_billed"
+      when "billsec_orig" then
+        order_by = "originating_billsec"
+      when "billsec_term" then
+        order_by = "terminating_billsec"
+      when "duration" then
+        order_by = "duration"
+      when "answered_calls" then
+        order_by = "answered_calls"
+      when "total_calls" then
+        order_by = "total_calls"
+      when "asr" then
+        order_by = "asr"
+      when "acd" then
+        order_by = "acd"
+      else
+        options[:order_by] ? order_by = options[:order_by] : order_by = ""
     end
 
     without = order_by
@@ -349,7 +363,7 @@ class CallsController < ApplicationController
     order_by = "destinations.direction_code " + (options[:order_desc] == 1 ? "DESC" : "ASC") + ", destinations.subcode" if order_by.to_s == "destinations.name"
 
     order_by += " ASC" if options[:order_desc] == 0 and order_by != ""
-    order_by += " DESC"if options[:order_desc] == 1 and order_by != ""
+    order_by += " DESC" if options[:order_desc] == 1 and order_by != ""
     return without, order_by
   end
 
@@ -360,26 +374,36 @@ class CallsController < ApplicationController
 
   def summary_order_by(params, options)
     case params[:order_by].to_s
-    when "orig_name"         then order_by = "users.first_name"
-    when "orig_calls"        then order_by = "total_calls"
-    when "orig_exec_billsec" then order_by = "exact_billsec"
-    when "orig_billsec"      then order_by = "originator_billsec"
-    when "orig_price"        then order_by = "originator_price"
+      when "orig_name" then
+        order_by = "users.first_name"
+      when "orig_calls" then
+        order_by = "total_calls"
+      when "orig_exec_billsec" then
+        order_by = "exact_billsec"
+      when "orig_billsec" then
+        order_by = "originator_billsec"
+      when "orig_price" then
+        order_by = "originator_price"
 
-    when "term_name"         then order_by = "provider_name"
-    when "term_calls"        then order_by = "total_calls"
-    when "term_exec_billsec" then order_by = "exact_billsec"
-    when "term_billsec"      then order_by = "provider_billsec"
-    when "term_price"        then order_by = "provider_price"
-    else
-      options[:order_by] ? order_by = options[:order_by] : order_by = ""
+      when "term_name" then
+        order_by = "provider_name"
+      when "term_calls" then
+        order_by = "total_calls"
+      when "term_exec_billsec" then
+        order_by = "exact_billsec"
+      when "term_billsec" then
+        order_by = "provider_billsec"
+      when "term_price" then
+        order_by = "provider_price"
+      else
+        options[:order_by] ? order_by = options[:order_by] : order_by = ""
     end
     without = order_by
 
     order_by = "users.first_name " + (options[:order_desc] == 1 ? "DESC" : "ASC") + ", users.last_name" if order_by.to_s == "users.first_name"
 
     order_by += " ASC" if options[:order_desc] == 0 and order_by != ""
-    order_by += " DESC"if options[:order_desc] == 1 and order_by != ""
+    order_by += " DESC" if options[:order_desc] == 1 and order_by != ""
     return without, order_by
   end
 

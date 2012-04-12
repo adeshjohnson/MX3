@@ -4,7 +4,7 @@
     <td><%= @direction.name %></td>
   </tr>
 </table>
-<%= form_tag(:action => 'create', :id => @direction.id ) do %>
-  <%= render :partial => 'form' %>
-  <%= submit_tag _('Create'), :disable_with=>_('Processing..') %>
+<%= form_tag(:action => 'create', :id => @direction.id) do %>
+    <%= render :partial => 'form' %>
+    <%= submit_tag _('Create'), :disable_with => _('Processing..') %>
 <% end %>

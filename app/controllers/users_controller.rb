@@ -1,13 +1,12 @@
 # -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
 
-  
-  
+
   layout "callc"
-  
+
   include SqlExport
 
-  before_filter :check_post_method, :only=>[:destroy, :create, :update, :update_personal_details]
+  before_filter :check_post_method, :only => [:destroy, :create, :update, :update_personal_details]
   before_filter :authorize, :except => [:daily_actions]
   before_filter :check_localization, :except => [:daily_actions]
   before_filter { |c|
@@ -18,14 +17,14 @@ class UsersController < ApplicationController
     c.instance_variable_set :@allow_edit, allow_edit
     true
   }
-  before_filter :find_user, :only => [ :update, :device_group_create, :device_groups, :device_group_new, :custom_rates, :user_custom_rate_add_new, :user_acustrates_full, :monitorings ]
+  before_filter :find_user, :only => [:update, :device_group_create, :device_groups, :device_group_new, :custom_rates, :user_custom_rate_add_new, :user_acustrates_full, :monitorings]
   before_filter :find_user_from_session, :only => [:update_personal_details, :personal_details]
   before_filter :find_devicegroup, :only => [:device_group_delete, :device_group_update, :device_group_edit]
   before_filter :find_customrate, :only => [:user_delete_custom_rate, :artg_destroy, :ard_manage, :user_ard_time_edit, :user_acustrates, :user_custom_rate_add]
   before_filter :find_ard, :only => [:user_custom_rate_delete, :user_custom_rate_update]
-  before_filter :find_ard_all, :only=> [:artg_destroy, :user_ard_time_edit, :user_acustrates]
-  before_filter :check_params, :only=>[:create, :update, :default_user_update]
-  before_filter :check_with_integrity, :only=>[:edit, :list, :new, :default_user, :users_postpaid_and_allowed_loss_calls, :default_user_errors_list]
+  before_filter :find_ard_all, :only => [:artg_destroy, :user_ard_time_edit, :user_acustrates]
+  before_filter :check_params, :only => [:create, :update, :default_user_update]
+  before_filter :check_with_integrity, :only => [:edit, :list, :new, :default_user, :users_postpaid_and_allowed_loss_calls, :default_user_errors_list]
 
 
   def index
@@ -40,51 +39,51 @@ class UsersController < ApplicationController
 
     logger.fatal "fffffffffffffffffffffffffffffff"
     @default_currency = Currency.find(:first).name
-    @roles = Role.find(:all, :conditions=>["name !='guest'"])
+    @roles = Role.find(:all, :conditions => ["name !='guest'"])
 
     default = {
-      :items_per_page=> session[:items_per_page].to_i,
-      :page => "1",
-      :order_by => "nice_user",
-      :order_desc => 0,
-      :s_username => "",
-      :s_first_name => "",
-      :s_last_name => "",
-      :s_agr_number => "",
-      :s_acc_number => "",
-      :s_clientid => "",
-      :sub_s => "-1",
-      :user_type => "-1",
-      :s_email=> "",
-      :s_id=> ""
+        :items_per_page => session[:items_per_page].to_i,
+        :page => "1",
+        :order_by => "nice_user",
+        :order_desc => 0,
+        :s_username => "",
+        :s_first_name => "",
+        :s_last_name => "",
+        :s_agr_number => "",
+        :s_acc_number => "",
+        :s_clientid => "",
+        :sub_s => "-1",
+        :user_type => "-1",
+        :s_email => "",
+        :s_id => ""
     }
-   
+
     if params[:clean]
       @options = default
     else
       @options = ((params[:clear] || !session[:user_list_stats]) ? default : session[:user_list_stats])
     end
 
-    default.each{|key, value| @options[key] = params[key] if params[key]}
+    default.each { |key, value| @options[key] = params[key] if params[key] }
 
 
-    @options[:order_by_full] = @options[:order_by] + (@options[:order_desc] == 1 ? " DESC": " ASC")
+    @options[:order_by_full] = @options[:order_by] + (@options[:order_desc] == 1 ? " DESC" : " ASC")
     @options[:order] = User.users_order_by(params, @options)
 
 
     owner = correct_owner_id
     cond = ["users.hidden = 0 AND users.owner_id = ?"]
     joins, group_by, var = [], nil, [owner]
-    select =  ["users.*", "tariffs.purpose", "#{SqlExport.nice_user_sql}"]
+    select = ["users.*", "tariffs.purpose", "#{SqlExport.nice_user_sql}"]
 
     add_contition_and_param(@options[:user_type], @options[:user_type], "users.usertype = ?", cond, var) if @options[:user_type].to_i != -1
     add_contition_and_param(@options[:s_id], @options[:s_id], "users.id = ?", cond, var) if @options[:s_id].to_i != -1
     add_contition_and_param(@options[:s_agr_number], @options[:s_agr_number].to_s+"%", "users.agreement_number LIKE ?", cond, var) if !@options[:s_agr_number].blank?
     add_contition_and_param(@options[:s_acc_number], @options[:s_acc_number].to_s+"%", "users.accounting_number LIKE ?", cond, var) if !@options[:s_acc_number].blank?
-    add_contition_and_param(@options[:s_email], @options[:s_email].to_s, "email = ?" , cond, var) if !@options[:s_email].blank?
+    add_contition_and_param(@options[:s_email], @options[:s_email].to_s, "email = ?", cond, var) if !@options[:s_email].blank?
 
-    ["first_name", "username", "last_name", "clientid" ].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], "%"+@options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?" , cond, var)}
+    ["first_name", "username", "last_name", "clientid"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], "%"+@options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?", cond, var) }
 
     unless @options[:s_email].blank?
       joins << "LEFT JOIN addresses ON (users.address_id = addresses.id)"
@@ -99,11 +98,11 @@ class UsersController < ApplicationController
     joins << "LEFT JOIN tariffs ON users.tariff_id = tariffs.id"
 
     # page params
-    @user_size = User.find(:all, :select =>select.join(","),  :joins => joins.join(" "), :conditions => [cond.join(" AND "), *var], :group => group_by)
+    @user_size = User.find(:all, :select => select.join(","), :joins => joins.join(" "), :conditions => [cond.join(" AND "), *var], :group => group_by)
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
-    @total_pages = ( @user_size.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@user_size.size.to_f / session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
-    fpage = ((@options[:page] -1 ) * session[:items_per_page]).to_i
+    fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
     #we need to left join acc_groups, addreses and lcrs. When COUNTING users this data is irelevant,
     #so no need for extra joins there
@@ -119,8 +118,8 @@ class UsersController < ApplicationController
     select << "tariffs.name AS tariff_name"
     select << "acc_groups.name AS acc_group_name"
 
-    @users = User.find(:all, :select =>select.join(","), :joins => joins.join(" "), :conditions => [cond.join(" AND "), *var], :order => @options[:order], :group => group_by, :limit=>"#{fpage}, #{session[:items_per_page].to_i}")
-    @search = ((cond.size > 1  or @options[:sub_s].to_i > -1) ? 1 : 0 )
+    @users = User.find(:all, :select => select.join(","), :joins => joins.join(" "), :conditions => [cond.join(" AND "), *var], :order => @options[:order], :group => group_by, :limit => "#{fpage}, #{session[:items_per_page].to_i}")
+    @search = ((cond.size > 1 or @options[:sub_s].to_i > -1) ? 1 : 0)
 
     session[:user_list_stats] = @options
   end
@@ -145,23 +144,23 @@ class UsersController < ApplicationController
     #    @user_pages, @users = paginate :users, :per_page => 40
 
     @default_currency = Currency.find(:first).name
-    @roles = Role.find(:all, :conditions=>["name !='guest'"])
-    
+    @roles = Role.find(:all, :conditions => ["name !='guest'"])
+
     default = {
-      :items_per_page=> session[:items_per_page].to_i,
-      :page => "1",
-      :order_by => "nice_user",
-      :order_desc => 0,
-      :s_username => "",
-      :s_first_name => "",
-      :s_last_name => "",
-      :s_agr_number => "",
-      :s_acc_number => "",
-      :s_clientid => "",
-      :sub_s => "-1",
-      :user_type => "-1",
-      :s_email=> "",
-      :s_id=> ""
+        :items_per_page => session[:items_per_page].to_i,
+        :page => "1",
+        :order_by => "nice_user",
+        :order_desc => 0,
+        :s_username => "",
+        :s_first_name => "",
+        :s_last_name => "",
+        :s_agr_number => "",
+        :s_acc_number => "",
+        :s_clientid => "",
+        :sub_s => "-1",
+        :user_type => "-1",
+        :s_email => "",
+        :s_id => ""
     }
 
     if params[:clean]
@@ -169,25 +168,25 @@ class UsersController < ApplicationController
     else
       @options = ((params[:clear] || !session[:user_hiden_stats]) ? default : session[:user_hiden_stats])
     end
-    
-    default.each{|key, value| @options[key] = params[key] if params[key]}
+
+    default.each { |key, value| @options[key] = params[key] if params[key] }
 
 
-    @options[:order_by_full] = @options[:order_by] + (@options[:order_desc] == 1 ? " DESC": " ASC")
+    @options[:order_by_full] = @options[:order_by] + (@options[:order_desc] == 1 ? " DESC" : " ASC")
     @options[:order] = User.users_order_by(params, @options)
 
     owner = correct_owner_id
     cond = ["users.hidden = 1 AND users.owner_id = ?"]
-    joins,  var = [],  [owner]
-    select =  ["users.*", "#{SqlExport.nice_user_sql}"]
+    joins, var = [], [owner]
+    select = ["users.*", "#{SqlExport.nice_user_sql}"]
     add_contition_and_param(@options[:user_type], @options[:user_type], "users.usertype = ?", cond, var) if @options[:user_type].to_i != -1
     add_contition_and_param(@options[:s_id], @options[:s_id], "users.id = ?", cond, var) if @options[:s_id].to_i != -1
     add_contition_and_param(@options[:s_agr_number], @options[:s_agr_number].to_s+"%", "users.agreement_number LIKE ?", cond, var) if !@options[:s_agr_number].blank?
     add_contition_and_param(@options[:s_acc_number], @options[:s_acc_number].to_s+"%", "users.accounting_number LIKE ?", cond, var) if !@options[:s_acc_number].blank?
-    add_contition_and_param(@options[:s_email], @options[:s_email].to_s, "email = ?" , cond, var) if !@options[:s_email].blank?
+    add_contition_and_param(@options[:s_email], @options[:s_email].to_s, "email = ?", cond, var) if !@options[:s_email].blank?
 
-    ["first_name", "username", "last_name", "clientid" ].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], "%"+@options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?" , cond, var)}
+    ["first_name", "username", "last_name", "clientid"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], "%"+@options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?", cond, var) }
 
     unless @options[:s_email].blank?
       joins << "LEFT JOIN addresses ON (users.address_id = addresses.id)"
@@ -203,16 +202,16 @@ class UsersController < ApplicationController
     joins and joins.size > 0 ? joins = joins.join(" ") : joins = nil
 
     # page params
-    @user_size = User.find(:all, :select =>select.join(","),  :joins => joins, :conditions => [cond.join(" AND "), *var], :group => group_by)
+    @user_size = User.find(:all, :select => select.join(","), :joins => joins, :conditions => [cond.join(" AND "), *var], :group => group_by)
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
-    @total_pages = ( @user_size.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@user_size.size.to_f / session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
-    fpage = ((@options[:page] -1 ) * session[:items_per_page]).to_i
+    fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
 
-    @users = User.find(:all, :select =>select.join(","), :joins => joins, :conditions => [cond.join(" AND "), *var], :order => @options[:order], :group => group_by, :limit=>"#{fpage}, #{session[:items_per_page].to_i}")
-    @search = ((cond.size > 1  or @options[:sub_s].to_i > -1) ? 1 : 0 )
-   
+    @users = User.find(:all, :select => select.join(","), :joins => joins, :conditions => [cond.join(" AND "), *var], :order => @options[:order], :group => group_by, :limit => "#{fpage}, #{session[:items_per_page].to_i}")
+    @search = ((cond.size > 1 or @options[:sub_s].to_i > -1) ? 1 : 0)
+
     session[:user_hiden_stats] = @options
   end
 
@@ -246,8 +245,8 @@ class UsersController < ApplicationController
   def new
     @page_title = _('New_user')
     @page_icon = "add.png"
-    @help_link = "http://wiki.kolmisoft.com/index.php/User_Details"    
-    
+    @help_link = "http://wiki.kolmisoft.com/index.php/User_Details"
+
     check_for_accountant_create_user
     @lcrs = current_user.load_lcrs(:all, :order => "name ASC")
     @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
@@ -306,7 +305,7 @@ class UsersController < ApplicationController
       dont_be_so_smart
       redirect_to :controller => "callc", :action => 'main' and return false
     end
-    
+
     if ["accountant", "reseller"].include?(params[:user][:usertype])
       if params[:accountant_type].to_i == 0
         dont_be_so_smart
@@ -317,12 +316,12 @@ class UsersController < ApplicationController
     else
       params[:user][:acc_group_id] = 0
     end
-    
+
     if params[:privacy]
       if params[:privacy][:global].to_i == 1
         params[:user][:hide_destination_end] = -1
       else
-        params[:user][:hide_destination_end] = params[:privacy].values.sum{|v| v.to_i}
+        params[:user][:hide_destination_end] = params[:privacy].values.sum { |v| v.to_i }
       end
     end
 
@@ -378,11 +377,11 @@ class UsersController < ApplicationController
     @user.invoice_zero_calls = params[:show_zero_calls].to_i
 
     @user.own_providers = params[:own_providers].to_i if @user.usertype == 'reseller'
-    
+
     if monitoring_enabled_for(current_user)
       @user.ignore_global_monitorings = params[:ignore_global_monitorings].to_i
     end
-    
+
     #reseller support
     if @user.owner_id != 0
       reseller = User.find(@user.owner_id)
@@ -422,13 +421,13 @@ class UsersController < ApplicationController
       if params[:minimal_charge_value].to_i != 0 and params[:minimal_charge_date]
         year = params[:minimal_charge_date][:year].to_i
         month = params[:minimal_charge_date][:month].to_i
-        day = 1 
+        day = 1
         @user.minimal_charge_start_at = Date.new(year, month, day)
       elsif params[:minimal_charge_value].to_i == 0
         @user.minimal_charge_start_at = nil
       end
     end
-     
+
 
     if @user.valid? and User.create(@user.attributes)
 
@@ -453,12 +452,12 @@ class UsersController < ApplicationController
     @return_action = params[:return_to_action] if params[:return_to_action]
 
     redirect_to :action => 'list' and return false if not params[:id]
-    @user = User.find(:first,:include => [:address, :tax], :conditions => ["users.id = ?", params[:id]])
+    @user = User.find(:first, :include => [:address, :tax], :conditions => ["users.id = ?", params[:id]])
     redirect_to :action => 'list' and return false if not @user
 
     check_owner_for_user(@user.id)
-    
-    @page_title =  _('users_settings')+": "+nice_user(@user)
+
+    @page_title = _('users_settings')+": "+nice_user(@user)
     @page_icon = "edit.png"
     @help_link = "http://wiki.kolmisoft.com/index.php/User_Details"
 
@@ -490,7 +489,7 @@ class UsersController < ApplicationController
     if !@user.tax or @user.tax_id.to_i == 0
       @user.assign_default_tax
     end
-    @total_recordings_size = Recording.find(:all, :first, :select=> "SUM(size) AS 'total_size'", :conditions =>["user_id = ? AND deleted = 0", @user.id] )[0]["total_size"].to_f
+    @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ? AND deleted = 0", @user.id])[0]["total_size"].to_f
     @address = @user.address
     @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
     @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
@@ -529,7 +528,7 @@ class UsersController < ApplicationController
       @user.address.save
       #my_debug @user.send_invoice_types
       flash[:status] = _('user_details_changed')+": "+nice_user(@user)
-      redirect_to(:action => :edit, :id=>@user.id) and return false
+      redirect_to(:action => :edit, :id => @user.id) and return false
     else
       check_owner_for_user(@user.id)
 
@@ -561,7 +560,7 @@ class UsersController < ApplicationController
       end
       @user.fix_when_is_rendering
       @user.assign_default_tax if !@user.tax or @user.tax_id.to_i == 0
-      @total_recordings_size = Recording.find(:all, :first, :select=> "SUM(size) AS 'total_size'", :conditions =>["user_id = ? AND deleted = 0", @user.id] )[0]["total_size"].to_f
+      @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ? AND deleted = 0", @user.id])[0]["total_size"].to_f
       @address = @user.address
       @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
       @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
@@ -586,7 +585,7 @@ class UsersController < ApplicationController
       flash[:notice] = _('User_was_not_found')
       redirect_to :action => "list" and return false
     end
-    error =  check_owner_for_user(user)
+    error = check_owner_for_user(user)
     if !error
       dont_be_so_smart and return false
     end
@@ -628,7 +627,7 @@ class UsersController < ApplicationController
     end
 
     if user.usertype == 'reseller'
-      rusers = User.count(:all, :conditions =>["owner_id = ?", user.id]).to_i
+      rusers = User.count(:all, :conditions => ["owner_id = ?", user.id]).to_i
       if rusers > 0
         flash[:notice] = _('Cant_delete_reseller_whit_users')
         redirect_to :controller => return_controller, :action => return_action and return false
@@ -642,7 +641,7 @@ class UsersController < ApplicationController
       flash[:notice] = _('Cant_delete_sysadmin')
     end
 
-    redirect_to :controller => return_controller,  :action => return_action
+    redirect_to :controller => return_controller, :action => return_action
   end
 
 
@@ -651,7 +650,7 @@ class UsersController < ApplicationController
 in before filter : user (:find_user)
 =end
   def device_groups
-    @page_title =  _('Device_groups')
+    @page_title = _('Device_groups')
     @page_icon = "groups.png"
 
     @devicegroups = @user.devicegroups
@@ -666,7 +665,7 @@ in before filter : user (:find_user)
 in before filter : devicegroup (:find_devicegroup)
 =end
   def device_group_edit
-    @page_title =  _('Device_group_edit')
+    @page_title = _('Device_group_edit')
     @page_icon = "edit.png"
 
     @user = @devicegroup.user
@@ -700,7 +699,7 @@ in before filter : devicegroup (:find_devicegroup)
 in before filter : user (:find_user)
 =end
   def device_group_new
-    @page_title =  _('Device_group_new')
+    @page_title = _('Device_group_new')
     @page_icon = "add.png"
 
     @devicegroup = Devicegroup.new
@@ -714,24 +713,24 @@ in before filter : user (:find_user)
 in before filter : user (:find_user)
 =end
   def device_group_create
-    @address =  Address.new(params[:address])
+    @address = Address.new(params[:address])
 
-    @devicegroup =  Devicegroup.new(:user_id=>@user.id, :name => params[:devicegroup][:name], :added => Time.now().to_s(:db))
+    @devicegroup = Devicegroup.new(:user_id => @user.id, :name => params[:devicegroup][:name], :added => Time.now().to_s(:db))
     if @address.save
 
       @devicegroup.address_id = @address.id
-    
+
       if @devicegroup.save
         flash[:status] = _('Dev_group_created')
         redirect_to :action => 'device_groups', :id => @devicegroup.user.id and return false
       else
-        
+
         @countries = Direction.find(:all, :order => "name ASC")
         flash_errors_for(_('Dev_group_not_created'), @devicegroup)
         render :action => :device_group_new
       end
     else
-      
+
       @countries = Direction.find(:all, :order => "name ASC")
       flash_errors_for(_('Dev_group_not_created'), @address)
       render :action => :device_group_new
@@ -753,12 +752,12 @@ in before filter : devicegroup (:find_devicegroup)
 
   # in before filter : user (find_user_from_session)
   def personal_details
-    @page_title =  _('Personal_details')
+    @page_title = _('Personal_details')
     @page_icon = "edit.png"
 
     @address = @user.address
     @countries = Direction.find(:all, :order => "name ASC")
-    @total_recordings_size = Recording.find(:all, :first, :select=> "SUM(size) AS 'total_size'", :conditions =>["user_id = ?", @user.id] )[0]["total_size"].to_f
+    @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ?", @user.id])[0]["total_size"].to_f
     @i = @user.get_invoices_status
 
     @disallow_email_editing = Confline.get_value("Disallow_Email_Editing", current_user.owner.id) == "1"
@@ -790,7 +789,7 @@ in before filter : devicegroup (:find_devicegroup)
     @user.update_attributes(current_user.safe_attributtes(params[:user].each_value(&:strip!), @user.id))
     @user.usertype = usertype
     @user.warning_email_active = params[:warning_email_active].to_i
-    @user.password = Digest::SHA1.hexdigest(params[:password][:password])  if params[:password][:password].length > 0
+    @user.password = Digest::SHA1.hexdigest(params[:password][:password]) if params[:password][:password].length > 0
     @user.warning_email_hour = params[:user][:warning_email_hour].to_i != -1 ? params[:date][:user_warning_email_hour].to_i : params[:user][:user_warning_email_hour].to_i
     if !@user.address
       a = Address.create(params[:address].each_value(&:strip!)) if params[:address]
@@ -820,7 +819,7 @@ in before filter : devicegroup (:find_devicegroup)
         @devices = Device.find_all_for_select(corrected_user_id)
       end
       @countries = Direction.find(:all, :order => "name ASC")
-      @total_recordings_size = Recording.find(:all, :first, :select=> "SUM(size) AS 'total_size'", :conditions =>["user_id = ?", @user.id] )[0]["total_size"].to_f
+      @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ?", @user.id])[0]["total_size"].to_f
       @i = @user.get_invoices_status
       @address = @user.address
       flash_errors_for(_('User_was_not_updated'), @user)
@@ -835,7 +834,7 @@ in before filter : devicegroup (:find_devicegroup)
 in before filter : user (:find_user)
 =end
   def custom_rates
-    @page_title =  _('Custom_rates')
+    @page_title = _('Custom_rates')
     @page_icon = "coins.png"
 
     @tariff = @user.tariff
@@ -892,7 +891,7 @@ in before filter : customrate (:find_customrate) ; ards (:find_ard_all)
 
     pet = nice_time2(@ards[0].start_time - 1.second)
 
-    @ards.eatch{|a| a.destroy}
+    @ards.eatch { |a| a.destroy }
 
     pards = Acustratedetail.find(:all, :conditions => ["customrate_id = ? AND end_time = ? AND daytype = ?", @customrate.id, pet, dt])
 
@@ -900,11 +899,11 @@ in before filter : customrate (:find_customrate) ; ards (:find_ard_all)
       flash[:notice] = _('Acustratedetails_not_found')
       redirect_to(:controller => "callc", :action => "main") and return false
     end
-    
-    pards.eatch{|pa| pa.end_time = "23:59:59"; pa.save}
+
+    pards.eatch { |pa| pa.end_time = "23:59:59"; pa.save }
 
     flash[:status] = _('Rate_details_updated')
-    redirect_to :action => 'user_acustrates_full', :id => @customrate.user_id , :dg => @customrate.destinationgroup_id
+    redirect_to :action => 'user_acustrates_full', :id => @customrate.user_id, :dg => @customrate.destinationgroup_id
   end
 
 =begin
@@ -957,7 +956,7 @@ in before filter : customrate (:find_customrate)
       end
       flash[:status] = _('Rate_details_split')
     end
-    redirect_to :action => 'user_acustrates_full', :id => @customrate.user_id , :dg => @customrate.destinationgroup_id
+    redirect_to :action => 'user_acustrates_full', :id => @customrate.user_id, :dg => @customrate.destinationgroup_id
   end
 
 =begin
@@ -1014,20 +1013,20 @@ in before filter : customrate (:find_customrate); ards (:find_ard_all)
 
     if st.to_s > et.to_s
       flash[:notice] = _('Bad_time')
-      redirect_to :action => 'user_acustrates_full', :id => @customrate.user_id , :dg => @customrate.destinationgroup_id    and return false
+      redirect_to :action => 'user_acustrates_full', :id => @customrate.user_id, :dg => @customrate.destinationgroup_id and return false
     end
 
     rdetails = @customrate.acustratedetails_by_daytype(params[:daytype])
-    ard = Acustratedetail.find(:first, :conditions => ["customrate_id = ? AND start_time = ? AND daytype = ?", @customrate.id, st, dt ])
-    
-    unless ard 
+    ard = Acustratedetail.find(:first, :conditions => ["customrate_id = ? AND start_time = ? AND daytype = ?", @customrate.id, st, dt])
+
+    unless ard
       flash[:notice] = _('Acustratedetail_not_found')
       redirect_to(:controller => "callc", :action => "main") and return false
     end
 
     # we need to create new rd to cover all day
-    if (et != "23:59:59") and ((rdetails[(rdetails.size - 1)].start_time == ard.start_time) )
-      nst = Time.mktime('2000','01','01', params[:date][:hour], params[:date][:minute], params[:date][:second]) + 1.second
+    if (et != "23:59:59") and ((rdetails[(rdetails.size - 1)].start_time == ard.start_time))
+      nst = Time.mktime('2000', '01', '01', params[:date][:hour], params[:date][:minute], params[:date][:second]) + 1.second
       for a in @ards
         na = Acustratedetail.new
         na.from = a.from
@@ -1047,7 +1046,7 @@ in before filter : customrate (:find_customrate); ards (:find_ard_all)
     end
 
     flash[:status] = _('Rate_details_updated')
-    redirect_to :action => 'user_acustrates_full', :id => @customrate.user_id , :dg => @customrate.destinationgroup_id
+    redirect_to :action => 'user_acustrates_full', :id => @customrate.user_id, :dg => @customrate.destinationgroup_id
   end
 
 =begin
@@ -1076,7 +1075,7 @@ in before filter : customrate (:find_customrate); ards (:find_ard_all)
 in before filter : ard (:find_ard)
 =end
   def user_custom_rate_update
-    
+
     rate = @ard.customrate
     @dgroup = rate.destinationgroup
     @user = rate.user
@@ -1174,7 +1173,7 @@ in before filter : ard (:find_ard)
         reseller = User.find_by_id(owner)
         @tax = reseller.get_tax.dup
       else
-        @tax.assign_default_tax({}, {:save => false} )
+        @tax.assign_default_tax({}, {:save => false})
       end
     end
     @user = Confline.get_default_object(User, owner)
@@ -1220,7 +1219,7 @@ in before filter : ard (:find_ard)
 
     #User.set_default_user(owner, params[:user])
     @invoice = invoice_params_for_user
-    
+
     params[:user][:send_invoice_types] = @invoice
     params[:user][:generate_invoice] = params[:user][:generate_invoice].to_i
     params[:user][:recording_enabled] = params[:recording_enabled]
@@ -1231,8 +1230,8 @@ in before filter : ard (:find_ard)
     params[:user][:warning_email_active]= params[:warning_email_active].to_i
     params[:user][:invoice_zero_calls] = params[:show_zero_calls].to_i
     params[:user][:acc_group_id] = params[:accountant_type]
-    params[:user][:cyberplat_active] =  params[:cyberplat_active].to_i
-    params[:user][:balance] =  current_user.convert_curr(params[:user][:balance].to_f)
+    params[:user][:cyberplat_active] = params[:cyberplat_active].to_i
+    params[:user][:balance] = current_user.convert_curr(params[:user][:balance].to_f)
     params[:user][:recording_hdd_quota] = (params[:user][:recording_hdd_quota].to_f*1048576).to_i
     #    params[:user][:agreement_date] = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
     if params[:unlimited].to_i == 1
@@ -1251,7 +1250,7 @@ in before filter : ard (:find_ard)
       if params[:privacy][:global].to_i == 1
         params[:user][:hide_destination_end] = -1
       else
-        params[:user][:hide_destination_end] = params[:privacy].values.sum{|v| v.to_i}
+        params[:user][:hide_destination_end] = params[:privacy].values.sum { |v| v.to_i }
       end
     end
 
@@ -1307,17 +1306,17 @@ in before filter : ard (:find_ard)
   def users_postpaid_and_allowed_loss_calls
     if current_user.is_admin?
       select, join = users_sql
-      @users_postpaid_and_loss_calls = User.find(:all, :select => select, :joins => join,:conditions => ["postpaid = 1 and allow_loss_calls = 1"])
+      @users_postpaid_and_loss_calls = User.find(:all, :select => select, :joins => join, :conditions => ["postpaid = 1 and allow_loss_calls = 1"])
     end
 
   end
-  
+
   def default_user_errors_list
     if current_user.is_admin?
       select, join = users_sql
       ownr = Confline.get_default_user_pospaid_errors
-      ids = []; ownr.each{|o| ids << o['owner_id']}
-      @users_postpaid_and_loss_calls = User.find(:all, :select => select, :joins => join,:conditions => ["users.id in (#{ids.join(',')})"])
+      ids = []; ownr.each { |o| ids << o['owner_id'] }
+      @users_postpaid_and_loss_calls = User.find(:all, :select => select, :joins => join, :conditions => ["users.id in (#{ids.join(',')})"])
     end
     render :action => :users_postpaid_and_allowed_loss_calls
   end
@@ -1327,7 +1326,7 @@ in before filter : ard (:find_ard)
   def check_owner_for_user(user)
     if user.class != User
       #user = User.find(:first, :conditions => ["id = ? ", user])
-      user = User.where({:id=>user}).first
+      user = User.where({:id => user}).first
     end
 
     if !user
@@ -1379,15 +1378,15 @@ in before filter : ard (:find_ard)
         else
           params[:password] = nil
         end
-      end    
+      end
       {:acc_user_create_opt_2 => [:usertype],
-        :acc_user_create_opt_3 => [:lcr_id],
-        :acc_user_create_opt_4 => [:tariff_id],
-        :acc_user_create_opt_5 => [:balance],
-        :acc_user_create_opt_6 => [:postpaid, :hidden],
-        :acc_user_create_opt_7 => [:call_limit]
-      }.each{ |option, fields|
-        fields.each{|field|  params[:user].except!(field) if session[option] != 2}
+       :acc_user_create_opt_3 => [:lcr_id],
+       :acc_user_create_opt_4 => [:tariff_id],
+       :acc_user_create_opt_5 => [:balance],
+       :acc_user_create_opt_6 => [:postpaid, :hidden],
+       :acc_user_create_opt_7 => [:call_limit]
+      }.each { |option, fields|
+        fields.each { |field| params[:user].except!(field) if session[option] != 2 }
       }
       params[:password] = nil if user and user.usertype == "admin"
     end
@@ -1458,7 +1457,7 @@ in before filter : ard (:find_ard)
       redirect_to(:controller => "callc", :action => "main") and return false
     end
   end
-  
+
   def check_with_integrity
     session[:integrity_check] = current_user.integrity_recheck_user
   end

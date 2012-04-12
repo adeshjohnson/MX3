@@ -1,12 +1,12 @@
 # -*- encoding : utf-8 -*-
 class TariffsController < ApplicationController
   require 'csv'
- # include PdfGen
+  # include PdfGen
   include UniversalHelpers
   #require 'rubygems'
   layout "callc"
 
-  before_filter :check_post_method, :only=>[:destroy, :create, :update, :rate_destroy, :ratedetail_update, :ratedetail_destroy, :ratedetail_create, :artg_destroy, :user_rate_update, :user_rate_delete, :user_rates_update, :user_rate_destroy, :day_destroy, :day_update, :update_tariff_for_users ]
+  before_filter :check_post_method, :only => [:destroy, :create, :update, :rate_destroy, :ratedetail_update, :ratedetail_destroy, :ratedetail_create, :artg_destroy, :user_rate_update, :user_rate_delete, :user_rates_update, :user_rate_destroy, :day_destroy, :day_update, :update_tariff_for_users]
   before_filter :check_localization
   before_filter :authorize, :except => [:destinations_csv]
   before_filter :check_if_can_see_finances, :only => [:new, :create, :index, :list, :edit, :update, :destroy, :rates_list, :import_csv, :delete_all_rates, :make_user_tariff, :make_user_tariff_wholesale]
@@ -233,7 +233,7 @@ class TariffsController < ApplicationController
       end
     else
       #@rates = Rate.find(:all, :conditions => ["rates.tariff_id=? AND directions.name like ?", @tariff.id, @st+"%"], :include => [:ratedetails, :destination, :tariff], :joins => "LEFT JOIN directions ON (directions.code = destinations.direction_code)", :order => "directions.name ASC, destinations.prefix ASC", :limit => "0,1000000")
-      @rates = Rate.includes(:ratedetails, {:destination=>:direction}, :tariff).where(["rates.tariff_id=? AND directions.name like ?", @tariff.id, @st+"%"]).order("directions.name ASC, destinations.prefix ASC").offset(0).limit(1000000).all
+      @rates = Rate.includes(:ratedetails, {:destination => :direction}, :tariff).where(["rates.tariff_id=? AND directions.name like ?", @tariff.id, @st+"%"]).order("directions.name ASC, destinations.prefix ASC").offset(0).limit(1000000).all
     end
 
     @total_pages = (@rates.size.to_f / session[:items_per_page].to_f).ceil
@@ -2861,12 +2861,12 @@ class TariffsController < ApplicationController
     a = check_user_for_tariff(@tariff)
     return false if !a
 
-    rates = Rate.includes({:destination=>:direction}).where(['rates.tariff_id = ?',@tariff.id]).order('directions.name, destinations.subcode ASC').all
+    rates = Rate.includes({:destination => :direction}).where(['rates.tariff_id = ?', @tariff.id]).order('directions.name, destinations.subcode ASC').all
     options = {
-        :name=>@tariff.name,
-        :pdf_name=>_('Rates'),
+        :name => @tariff.name,
+        :pdf_name => _('Rates'),
         :currency => session[:show_currency],
-        :hide_tariff=> params[:hide_tariff].to_i == 1
+        :hide_tariff => params[:hide_tariff].to_i == 1
     }
     pdf = PdfGen::Generate.generate_rates_header(options)
     pdf = PdfGen::Generate.generate_personal_wholesale_rates_pdf(pdf, rates, @tariff, options)
@@ -2895,14 +2895,14 @@ class TariffsController < ApplicationController
 
   # before_filter : user; tariff
   def generate_personal_wholesale_rates_pdf
-    rates = Rate.includes({:destination=>:direction}).where(['rates.tariff_id = ?',@tariff.id]).order('directions.name ASC').all
+    rates = Rate.includes({:destination => :direction}).where(['rates.tariff_id = ?', @tariff.id]).order('directions.name ASC').all
     options = {
-        :name=>@tariff.name,
-        :pdf_name=>_('Rates'),
+        :name => @tariff.name,
+        :pdf_name => _('Rates'),
         :currency => session[:show_currency]
     }
     pdf = PdfGen::Generate.generate_rates_header(options)
-    pdf = PdfGen::Generate.generate_personal_wholesale_rates_pdf(pdf,rates, @tariff, options)
+    pdf = PdfGen::Generate.generate_personal_wholesale_rates_pdf(pdf, rates, @tariff, options)
     file = pdf.render
     filename = "Rates-#{(session[:show_currency]).to_s}.pdf"
     testable_file_send(file, filename, "application/pdf")
@@ -2911,10 +2911,10 @@ class TariffsController < ApplicationController
   # before_filter : tariff(find_tariff_whith_currency)
   def generate_user_rates_pdf
 
-    rates = Rate.joins('LEFT JOIN destinationgroups on (destinationgroups.id = rates.destinationgroup_id)').where(['rates.tariff_id = ?',@tariff.id]).order('destinationgroups.name, destinationgroups.desttype ASC').all
+    rates = Rate.joins('LEFT JOIN destinationgroups on (destinationgroups.id = rates.destinationgroup_id)').where(['rates.tariff_id = ?', @tariff.id]).order('destinationgroups.name, destinationgroups.desttype ASC').all
     options = {
-        :name=>@tariff.name,
-        :pdf_name=>_('Users_rates'),
+        :name => @tariff.name,
+        :pdf_name => _('Users_rates'),
         :currency => session[:show_currency]
     }
     pdf = PdfGen::Generate.generate_rates_header(options)
@@ -2959,8 +2959,8 @@ class TariffsController < ApplicationController
     dgroups = Destinationgroup.find(:all, :order => "name ASC, desttype ASC")
     tax = session[:tax]
     options = {
-        :name=>@tariff.name,
-        :pdf_name=>_('Personal_rates'),
+        :name => @tariff.name,
+        :pdf_name => _('Personal_rates'),
         :currency => session[:show_currency]
     }
     pdf = PdfGen::Generate.generate_rates_header(options)

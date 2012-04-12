@@ -5,7 +5,7 @@ class Location < ActiveRecord::Base
   has_many :devices
 
 
-  validates_presence_of :name, :message=> _('Name_cannot_be_blank')
+  validates_presence_of :name, :message => _('Name_cannot_be_blank')
 
   before_create :loc_before_create
 
@@ -20,7 +20,7 @@ class Location < ActiveRecord::Base
     end
   end
 
-  
+
   def destroy_all
     for rule in locationrules
       rule.destroy
@@ -34,4 +34,4 @@ class Location < ActiveRecord::Base
     add.to_s + dst[start, dst.length.to_i].to_s
   end
 
-  end
+end

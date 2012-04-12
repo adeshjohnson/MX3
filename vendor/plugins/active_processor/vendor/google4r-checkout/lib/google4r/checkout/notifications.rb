@@ -32,10 +32,10 @@ require 'rexml/document'
 
 module Google4R #:nodoc:
   module Checkout #:nodoc:
-    # Thrown by Notification on unimplemented and unknown notification from Google.
+                  # Thrown by Notification on unimplemented and unknown notification from Google.
     class UnknownNotificationType < Exception
     end
-    
+
     # Represents a notification acknowledgment to tell Google that the 
     # notification has been recieved and processed. Google guarantees not to
     # resend any notification it has recieved an acknowledgment for.    
@@ -52,19 +52,19 @@ module Google4R #:nodoc:
     #   notification_acknowledgement = Google4R::Checkout::NotificationAcknowledgement.new.to_xml
     #   render :text => notification_acknowledgement, :status => 200
     #
-    class NotificationAcknowledgement      
-      
+    class NotificationAcknowledgement
+
       attr_reader :serial_number
-      
+
       def initialize(notification=nil)
         @serial_number = notification.serial_number unless notification.nil?
       end
-      
+
       def to_xml
         NotificationAcknowledgementXmlGenerator.new(self).generate
       end
     end
-    
+
     # This class expects the message sent by Google. It parses the XMl document and returns
     # the appropriate Notification. If the notification sent by Google is invalid then a 
     # UnknownNotificationType is raised that you should catch and then send a 404 to Google
@@ -102,13 +102,13 @@ module Google4R #:nodoc:
     class NotificationHandler
       # The Frontend object that created this NotificationHandler
       attr_accessor :frontend
-      
+
       # Create a new NotificationHandler and assign value of the parameter frontend to
       # the frontend attribute.
       def initialize(frontend)
         @frontend = frontend
       end
-      
+
       # Parses the given xml_str and returns the appropriate *Notification class. At the
       # moment, only NewOrderNotification and OrderStateChangeNotification objects can be
       # returned.
@@ -121,86 +121,86 @@ module Google4R #:nodoc:
         raise UnknownNotificationType, "No root in xml" unless root
 
         case root.name
-        when 'new-order-notification' then
-          NewOrderNotification.create_from_element(root, frontend)
-        when 'order-state-change-notification' then
-          OrderStateChangeNotification.create_from_element(root, frontend)
-        when 'risk-information-notification' then
-          RiskInformationNotification.create_from_element(root, frontend)
-        when 'charge-amount-notification' then
-          ChargeAmountNotification.create_from_element(root, frontend)
-        when 'refund-amount-notification' then
-          RefundAmountNotification.create_from_element(root, frontend)
-        when 'chargeback-amount-notification' then
-          ChargebackAmountNotification.create_from_element(root, frontend)
-        when 'authorization-amount-notification' then
-          AuthorizationAmountNotification.create_from_element(root, frontend)
-        else
-          raise UnknownNotificationType, "Unknown notification type: #{root.name}"
+          when 'new-order-notification' then
+            NewOrderNotification.create_from_element(root, frontend)
+          when 'order-state-change-notification' then
+            OrderStateChangeNotification.create_from_element(root, frontend)
+          when 'risk-information-notification' then
+            RiskInformationNotification.create_from_element(root, frontend)
+          when 'charge-amount-notification' then
+            ChargeAmountNotification.create_from_element(root, frontend)
+          when 'refund-amount-notification' then
+            RefundAmountNotification.create_from_element(root, frontend)
+          when 'chargeback-amount-notification' then
+            ChargebackAmountNotification.create_from_element(root, frontend)
+          when 'authorization-amount-notification' then
+            AuthorizationAmountNotification.create_from_element(root, frontend)
+          else
+            raise UnknownNotificationType, "Unknown notification type: #{root.name}"
         end
       end
     end
-    
+
     # Abstract class for all the notifications.  It should not be instantiated
     # directly.
     class Notification
       # The frontend this notification belongs to.
       attr_accessor :frontend
-      
+
       # The serial number of the new order notification (String).
       attr_accessor :serial_number
-      
+
       # The Google order number the new order notification belongs to (String).
       attr_accessor :google_order_number
-      
+
       # The timestamp of the notification. Also see #timestamp=
       attr_accessor :timestamp
-      
+
       # Initializes the RiskInformationNotification instance with the given Frontend instance.
       def initialize(frontend)
         @frontend = frontend
       end
-      
+
     end
-    
+
     # Google Checkout sends <new-order-notification> messages to the web service when a new
     # order has been successfully filed with Google Checkout. These messages will be parsed
     # into NewOrderNotification instances.
     class NewOrderNotification < Notification
-      
+
       # The buyer's billing address (Address).
       attr_accessor :buyer_billing_address
 
       # The buyer's shipping adress (Address).
       attr_accessor :buyer_shipping_address
-      
+
       # The buyer's ID from Google Checkout (String).
       attr_accessor :buyer_id
-      
+
       # The buyer's marketing preferences (MarketingPreferences).
       attr_accessor :marketing_preferences
-      
+
       # The order's financial order state (String, one of FinancialOrderState::*).
       attr_accessor :financial_order_state
-      
+
       # The order's fulfillment state (String, one of FulfillmentOrderState::*).
       attr_accessor :fulfillment_order_state
-      
+
       # The order's number at Google Checkout (String).
       attr_accessor :google_order_number
-      
+
       # The order's total adjustment (OrderAdjustment).
       attr_accessor :order_adjustment
-      
+
       # The order's total amount (Money).
       attr_accessor :order_total
-      
+
       # The order's shopping cart (ShoppingCart)
       attr_accessor :shopping_cart
-      
+
       # The tax tables for the items in the order notification.
       attr_reader :tax_tables
-      
+
       # Set the order's timestamp (Time). When the timestamp is set then the tax tables valid 
       # at the given point of time are set into the attribute tax tables from the frontend's
       # tax_table_factory.
@@ -208,7 +208,7 @@ module Google4R #:nodoc:
         @timestamp = time
         @tax_tables = frontend.tax_table_factory.effective_tax_tables_at(time)
       end
-      
+
       # Factory method to create a new CheckoutNotification object from the REXML:Element object
       #
       # Raises NoMethodError and RuntimeError exceptions if the given element misses required
@@ -217,7 +217,7 @@ module Google4R #:nodoc:
       # You have to pass in the Frontend class this notification belongs to.
       def self.create_from_element(element, frontend)
         result = NewOrderNotification.new(frontend)
-        
+
         result.timestamp = Time.parse(element.elements['timestamp'].text)
         result.serial_number = element.attributes['serial-number']
         result.google_order_number = element.elements['google-order-number'].text
@@ -233,7 +233,7 @@ module Google4R #:nodoc:
         amount = (element.elements['order-total'].text.to_f*100).to_i
         currency = element.elements['order-total'].attributes['currency']
         result.order_total = Money.new(amount, currency)
-        
+
         return result
       end
     end
@@ -256,7 +256,7 @@ module Google4R #:nodoc:
 
       # The reason for the change (String, can be nil).
       attr_accessor :reason
-        
+
       # The tax tables for the items in the order notification.
       attr_reader :tax_tables
 
@@ -267,7 +267,7 @@ module Google4R #:nodoc:
         @timestamp = time
         @tax_tables = frontend.tax_table_factory.effective_tax_tables_at(time)
       end
-      
+
       # Factory method that creates a new OrderStateChangeNotification from an REXML::Element instance.
       # Use this to create instances of OrderStateChangeNotification.
       #
@@ -284,7 +284,7 @@ module Google4R #:nodoc:
         result.new_fulfillment_order_state = element.elements['new-fulfillment-order-state'].text
         result.previous_fulfillment_order_state = element.elements['previous-fulfillment-order-state'].text
         result.reason = element.elements['reason'].text rescue nil
-        
+
         return result
       end
     end
@@ -292,10 +292,10 @@ module Google4R #:nodoc:
     # Google Checkout sends <charge-amount-notification> messages to the web service when the
     # to confirm that the charge was successfully executed.
     class ChargeAmountNotification < Notification
-      
+
       # The amount most recently charged for an order (Money)
       attr_accessor :latest_charge_amount
-      
+
       # The total amount charged for an order (Money)
       attr_accessor :total_charge_amount
 
@@ -306,18 +306,18 @@ module Google4R #:nodoc:
       # elements.
       def self.create_from_element(element, frontend)
         charge = ChargeAmountNotification.new(frontend)
-        
+
         charge.serial_number = element.attributes['serial-number']
-        charge.google_order_number = element.elements['google-order-number'].text        
-        
-        currency = element.elements['latest-charge-amount'].attributes['currency'] 
+        charge.google_order_number = element.elements['google-order-number'].text
+
+        currency = element.elements['latest-charge-amount'].attributes['currency']
         amount = (element.elements['latest-charge-amount'].text.to_f*100).to_i
         charge.latest_charge_amount = Money.new(amount, currency)
-        
+
         currency = element.elements['total-charge-amount'].attributes['currency']
         amount = (element.elements['total-charge-amount'].text.to_f*100).to_i
-        charge.total_charge_amount = Money.new(amount, currency)  
-        
+        charge.total_charge_amount = Money.new(amount, currency)
+
         charge.timestamp = Time.parse(element.elements['timestamp'].text)
 
         return charge
@@ -328,10 +328,10 @@ module Google4R #:nodoc:
     # a <refund-order> order processing command.  See the Google Checkout documentation for more details:
     # http://code.google.com/apis/checkout/developer/index.html#refund_amount_notification
     class RefundAmountNotification < Notification
-      
+
       # The amount most recently refunded for an order (Money)
       attr_accessor :latest_refund_amount
-      
+
       # The total amount refunded for an order (Money)
       attr_accessor :total_refund_amount
 
@@ -342,10 +342,10 @@ module Google4R #:nodoc:
       # elements.
       def self.create_from_element(element, frontend)
         refund = RefundAmountNotification.new(frontend)
-        
+
         refund.serial_number = element.attributes['serial-number']
         refund.google_order_number = element.elements['google-order-number'].text
-        
+
         currency = element.elements['latest-refund-amount'].attributes['currency']
         amount = (element.elements['latest-refund-amount'].text.to_f*100).to_i
         refund.latest_refund_amount = Money.new(amount, currency)
@@ -353,7 +353,7 @@ module Google4R #:nodoc:
         currency = element.elements['total-refund-amount'].attributes['currency']
         amount = (element.elements['total-refund-amount'].text.to_f*100).to_i
         refund.total_refund_amount = Money.new(amount, currency)
-        
+
         refund.timestamp = Time.parse(element.elements['timestamp'].text)
 
         return refund
@@ -365,10 +365,10 @@ module Google4R #:nodoc:
     # See the Google Checkout documentation for more details:
     # http://code.google.com/apis/checkout/developer/index.html#chargeback_amount_notification
     class ChargebackAmountNotification < Notification
-      
+
       # The amount most recently charged back for an order (Money)
       attr_accessor :latest_chargeback_amount
-      
+
       # The total amount charged back for an order (Money)
       attr_accessor :total_chargeback_amount
 
@@ -379,10 +379,10 @@ module Google4R #:nodoc:
       # elements.
       def self.create_from_element(element, frontend)
         chargeback = ChargebackAmountNotification.new(frontend)
-        
+
         chargeback.serial_number = element.attributes['serial-number']
         chargeback.google_order_number = element.elements['google-order-number'].text
-        
+
         currency = element.elements['latest-chargeback-amount'].attributes['currency']
         amount = (element.elements['latest-chargeback-amount'].text.to_f*100).to_i
         chargeback.latest_chargeback_amount = Money.new(amount, currency)
@@ -390,28 +390,28 @@ module Google4R #:nodoc:
         currency = element.elements['total-chargeback-amount'].attributes['currency']
         amount = (element.elements['total-chargeback-amount'].text.to_f*100).to_i
         chargeback.total_chargeback_amount = Money.new(amount, currency)
-        
+
         chargeback.timestamp = Time.parse(element.elements['timestamp'].text)
 
         return chargeback
       end
     end
-    
+
     # Google Checkout sends an <authorization-amount-notification> in response to a successful
     # request for an explicit credit card reauthorization.
     # See the Google Checkout documentation for more details:
     # http://code.google.com/apis/checkout/developer/index.html#authorization_amount_notification
     class AuthorizationAmountNotification < Notification
-      
+
       # The amount that is reauthorized to be charged to the customer's credit card (Money)
       attr_accessor :authorization_amount
-      
+
       # The time that a credit card authorization for an order expires.
       attr_accessor :authorization_expiration_date
-      
+
       # The address verification response (String)
       attr_accessor :avs_response
-      
+
       # Credit verification value for the order (String)
       attr_accessor :cvn_response
 
@@ -422,25 +422,25 @@ module Google4R #:nodoc:
       # elements.
       def self.create_from_element(element, frontend)
         authorization = AuthorizationAmountNotification.new(frontend)
-        
+
         authorization.serial_number = element.attributes['serial-number']
         authorization.google_order_number = element.elements['google-order-number'].text
-        
+
         currency = element.elements['authorization-amount'].attributes['currency']
         amount = (element.elements['authorization-amount'].text.to_f*100).to_i
         authorization.authorization_amount = Money.new(amount, currency)
 
         authorization.authorization_expiration_date = Time.parse(element.elements['authorization-expiration-date'].text)
-        
+
         authorization.avs_response = element.elements['avs-response'].text
         authorization.cvn_response = element.elements['cvn-response'].text
-        
+
         authorization.timestamp = Time.parse(element.elements['timestamp'].text)
 
         return authorization
       end
     end
-    
+
     # Google Checkout sends out <risk-information-notification> messages for fraud detection
     # related information. See the Google Checkout documentation for more details:
     # http://code.google.com/apis/checkout/developer/index.html#risk_information_notification
@@ -448,13 +448,13 @@ module Google4R #:nodoc:
 
       # Is the order eligible for Google Checkout's payment guarantee policy (boolean).
       attr_accessor :eligible_for_protection
-      
+
       # The buyer's billing address (Address).
       attr_accessor :buyer_billing_address
 
       # The address verification response (String)
       attr_accessor :avs_response
-      
+
       # Credit verification value for the order (String)
       attr_accessor :cvn_response
 
@@ -465,7 +465,7 @@ module Google4R #:nodoc:
       attr_accessor :ip_address
 
       # The age of the buyer's google checkout account in days
-      attr_accessor :buyer_account_age      
+      attr_accessor :buyer_account_age
 
       # Factory method that creates a new RiskInformationNotification from an REXML::Element instance.
       # Use this to create instances of RiskInformationNotification
@@ -474,9 +474,9 @@ module Google4R #:nodoc:
       # elements.
       def self.create_from_element(element, frontend)
         risk = RiskInformationNotification.new(frontend)
-        
+
         risk.serial_number = element.attributes['serial-number']
-        risk.timestamp = Time.parse(element.elements['timestamp'].text)       
+        risk.timestamp = Time.parse(element.elements['timestamp'].text)
         risk.partial_card_number = element.elements['risk-information/partial-cc-number'].text
         risk.ip_address = element.elements['risk-information/ip-address'].text
         risk.google_order_number = element.elements['google-order-number'].text
@@ -489,7 +489,7 @@ module Google4R #:nodoc:
         return risk
       end
     end
-    
+
     # Container for the valid financial order states as defined in the 
     # Google Checkout API.
     module FinancialOrderState
@@ -501,7 +501,7 @@ module Google4R #:nodoc:
       CANCELLED = "CANCELLED".freeze
       CANCELLED_BY_GOOGLE = "CANCELLED_BY_GOOGLE".freeze
     end
-    
+
     # Container for the valid fulfillment order states as defined in the 
     # Google Checkout API.
     module FulfillmentOrderState
@@ -510,41 +510,41 @@ module Google4R #:nodoc:
       DELIVERED = "DELIVERED".freeze
       WILL_NOT_DELIVER = "WILL_NOT_DELIVER".freeze
     end
-    
+
     # The marketing preferences of a customer.
     class MarketingPreferences
       # Boolean, true if the customer wants to receive emails.
       attr_accessor :email_allowed
-      
+
       # Creates a new MarketingPreferences object from a given REXML::Element instance.
       def self.create_from_element(element)
         result = MarketingPreferences.new
-        
+
         result.email_allowed = (element.elements['email-allowed'].text.downcase == 'true')
-        
+
         return result
       end
     end
-    
+
     # MerchantCodes represent gift certificates or coupons that have been used in an order.
     #
     # Only used with Merchant Calculations.
     class MerchantCode
       GIFT_CERTIFICATE = "GIFT_CERTIFICATE".freeze
       COUPON = "COUPON".freeze
-      
+
       # The type of the adjustment. Can be one of GIFT_CERTIFICATE and COUPON.
       attr_accessor :type
-      
+
       # The adjustment's code (String).
       attr_accessor :code
-      
+
       # The amount of money that has been calculated as the adjustment's worth (Money, optional).
       attr_accessor :calculated_amount
-      
+
       # The amount of the adjustment that has been applied to the cart's total (Money).
       attr_accessor :applied_amount
-      
+
       # The message associated with the direct adjustment (String, optional).
       attr_accessor :message
 
@@ -552,77 +552,77 @@ module Google4R #:nodoc:
       # name must be "gift-certificate-adjustment" or "coupon-adjustment".
       def self.create_from_element(element)
         result = MerchantCode.new
-        
+
         result.type =
-          case element.name
-        when 'gift-certificate-adjustment' then
-          GIFT_CERTIFICATE
-        when 'coupon-adjustment' then
-          COUPON
-        else
-          raise ArgumentError, "Invalid tag name: #{element.name} in \n—-\n#{element.to_s}\n—-."
-        end
-        
+            case element.name
+              when 'gift-certificate-adjustment' then
+                GIFT_CERTIFICATE
+              when 'coupon-adjustment' then
+                COUPON
+              else
+                raise ArgumentError, "Invalid tag name: #{element.name} in \n—-\n#{element.to_s}\n—-."
+            end
+
         result.code = element.elements['code'].text
-        
+
         amount = (element.elements['calculated-amount'].text.to_f*100).to_i rescue nil
         currency = element.elements['calculated-amount'].attributes['currency'] rescue nil
         result.calculated_amount = Money.new(amount, currency) unless amount.nil?
-        
+
         amount = (element.elements['applied-amount'].text.to_f*100).to_i
         currency = element.elements['applied-amount'].attributes['currency']
         result.applied_amount = Money.new(amount, currency)
-        
+
         result.message = element.elements['message'].text rescue nil
-        
+
         return result
       end
     end
-    
+
     # ShippingAdjustments represent the chosen shipping method.
     class ShippingAdjustment
       MERCHANT_CALCULATED = "MERCHANT_CALCULATED".freeze
       FLAT_RATE = "FLAT_RATE".freeze
       PICKUP = "PICKUP".freeze
-      
+
       # The type of the shipping adjustment, one of MERCHANT_CALCULATED, FLAT_RATE
       # PICKUP.
       attr_accessor :type
-      
+
       # The name of the shipping adjustment.
       attr_accessor :name
-      
+
       # The cost of the selected shipping (Money).
       attr_accessor :cost
-      
+
       # Creates a new ShippingAdjustment object from a REXML::Element object.
       #
       # Can raise a RuntimeException if the given Element is invalid.
       def self.create_from_element(element)
         result = ShippingAdjustment.new
-        
-        result.type = 
-          case element.name
-        when 'flat-rate-shipping-adjustment' then
-          FLAT_RATE
-        when 'pickup-shipping-adjustment' then
-          PICKUP
-        when 'merchant-calculated-shipping-adjustment' then
-          MERCHANT_CALCULATED
-        else
-          raise "Unexpected shipping adjustment '#{element.name}'"
-        end
-        
+
+        result.type =
+            case element.name
+              when 'flat-rate-shipping-adjustment' then
+                FLAT_RATE
+              when 'pickup-shipping-adjustment' then
+                PICKUP
+              when 'merchant-calculated-shipping-adjustment' then
+                MERCHANT_CALCULATED
+              else
+                raise "Unexpected shipping adjustment '#{element.name}'"
+            end
+
         result.name = element.elements['shipping-name'].text
-        
+
         amount = (element.elements['shipping-cost'].text.to_f*100).to_i
         currency = element.elements['shipping-cost'].attributes['currency']
         result.cost = Money.new(amount, currency)
-        
+
         return result
       end
     end
-    
+
     # OrderAdjustment objects contain the adjustments (i.e. the entities in the cart that 
     # represent positive and negative amounts (at the moment Google Checkout support coupons,
     # gift certificates and shipping)).
@@ -630,39 +630,39 @@ module Google4R #:nodoc:
       # The <adjustment-total> tag contains the total adjustment to an order total based 
       # on tax, shipping, gift certificates and coupon codes (optional).
       attr_accessor :adjustment_total
-      
+
       # Boolean, true iff the merchant calculations have been successful (optional).
       attr_accessor :merchant_calculation_successful
-      
+
       # Array of MerchantCode objects.
       attr_accessor :merchant_codes
-      
+
       # The chosen ShippingAdjustment object for this order.
       attr_accessor :shipping
-      
+
       # The total amount of tax that has been paid for this order (Money, optional).
       attr_accessor :total_tax
-      
+
       # Creates a new OrderAdjustment from a given REXML::Element object.
       def self.create_from_element(element)
         result = OrderAdjustment.new
-        
+
         amount = (element.elements['total-tax'].text.to_f*100).to_i rescue nil
         currency = element.elements['total-tax'].attributes['currency'] rescue nil
         result.total_tax = Money.new(amount, currency) unless amount.nil?
-        
+
         shipping_element = element.elements["shipping/*"]
         result.shipping = ShippingAdjustment.create_from_element(shipping_element) unless shipping_element.nil?
-        
+
         result.merchant_codes = Array.new
         element.elements.each(%q{merchant-codes/*}) { |elem| result.merchant_codes << MerchantCode.create_from_element(elem) }
-        
+
         result.merchant_calculation_successful = (element.elements['merchant-calculation-successful'].text.downcase == 'true') rescue nil
-        
+
         amount = (element.elements['adjustment-total'].text.to_f*100).to_i rescue nil
         currency = element.elements['adjustment-total'].attributes['currency'] rescue nil
         result.adjustment_total = Money.new(amount, currency) unless amount.nil?
-        
+
         return result
       end
     end
@@ -678,32 +678,32 @@ module Google4R #:nodoc:
         # Otherwise, result will be set to the REXML::Text node's value if it is not whitespace
         # only.
         result = nil
-        
+
         element.each_child do |child|
           case child
-          when REXML::Element
-            result ||= Hash.new
-            child_value = self.element_to_value(child)
+            when REXML::Element
+              result ||= Hash.new
+              child_value = self.element_to_value(child)
 
-            # <foo>bar</foo>               becomes 'foo' => 'bar
-            # <foo>foo</foo><foo>bar</foo> becomes 'foo' => [ 'foo', 'bar' ]
-            if result[child.name].nil? then
-              result[child.name] = child_value
-            elsif result[child.name].kind_of?(Array) then
-              result[child.name] << child_value
+              # <foo>bar</foo>               becomes 'foo' => 'bar
+              # <foo>foo</foo><foo>bar</foo> becomes 'foo' => [ 'foo', 'bar' ]
+              if result[child.name].nil? then
+                result[child.name] = child_value
+              elsif result[child.name].kind_of?(Array) then
+                result[child.name] << child_value
+              else
+                tmp = result[child.name]
+                result[child.name] = [tmp, child_value]
+              end
+            when REXML::Text
+              next if result.kind_of?(Hash) # ignore text if we already found a tag
+              str = child.value.strip
+              result = str if str.length > 0
             else
-              tmp = result[child.name]
-              result[child.name] = [ tmp, child_value ]
-            end
-          when REXML::Text
-            next if result.kind_of?(Hash) # ignore text if we already found a tag
-            str = child.value.strip
-            result = str if str.length > 0
-          else
-            # ignore
+              # ignore
           end
         end
-        
+
         return result
       end
     end

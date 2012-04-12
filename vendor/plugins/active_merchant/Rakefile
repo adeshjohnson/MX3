@@ -41,7 +41,7 @@ end
 # Genereate the RDoc documentation
 Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_dir = 'doc'
-  rdoc.title    = "ActiveMerchant library"
+  rdoc.title = "ActiveMerchant library"
   rdoc.options << '--line-numbers' << '--inline-source' << '--main=README'
   rdoc.rdoc_files.include('README', 'CHANGELOG')
   rdoc.rdoc_files.include('lib/**/*.rb')
@@ -55,7 +55,7 @@ end
 task :lines do
   lines = 0
   codelines = 0
-  Dir.foreach("lib") { |file_name| 
+  Dir.foreach("lib") { |file_name|
     next unless file_name =~ /.*rb/
 
     f = File.open("lib/" + file_name)
@@ -71,7 +71,7 @@ task :lines do
 end
 
 desc "Delete tar.gz / zip / rdoc"
-task :cleanup => [ :clobber_package, :clobber_rdoc ]
+task :cleanup => [:clobber_package, :clobber_rdoc]
 
 spec = Gem::Specification.new do |s|
   s.name = PKG_NAME
@@ -86,12 +86,12 @@ spec = Gem::Specification.new do |s|
   s.author = "Tobias Luetke"
   s.email = "tobi@leetsoft.com"
   s.homepage = "http://activemerchant.org/"
-  
+
   s.add_dependency('activesupport', '<= 2.3.2')
   s.add_dependency('builder', '>= 2.0.0')
-  
+
   s.signing_key = ENV['GEM_PRIVATE_KEY']
-  s.cert_chain  = ['gem-public_cert.pem']
+  s.cert_chain = ['gem-public_cert.pem']
 end
 
 Rake::GemPackageTask.new(spec) do |p|
@@ -101,14 +101,14 @@ Rake::GemPackageTask.new(spec) do |p|
 end
 
 desc "Release the gems and docs to RubyForge"
-task :release => [ :publish, :upload_rdoc ]
+task :release => [:publish, :upload_rdoc]
 
 desc "Publish the release files to RubyForge."
-task :publish => [ :package ] do
+task :publish => [:package] do
   require 'rubyforge'
-  
-  packages = %w( gem tgz zip ).collect{ |ext| "pkg/#{PKG_NAME}-#{PKG_VERSION}.#{ext}" }
-  
+
+  packages = %w( gem tgz zip ).collect { |ext| "pkg/#{PKG_NAME}-#{PKG_VERSION}.#{ext}" }
+
   rubyforge = RubyForge.new
   rubyforge.configure
   rubyforge.login
@@ -117,7 +117,7 @@ end
 
 desc 'Upload RDoc to RubyForge'
 task :upload_rdoc => :rdoc do
-  user = ENV['RUBYFORGE_USER'] 
+  user = ENV['RUBYFORGE_USER']
   project = "/var/www/gforge-projects/#{PKG_NAME}"
   local_dir = 'doc'
   pub = Rake::SshDirPublisher.new user, project, local_dir
@@ -130,20 +130,20 @@ namespace :gateways do
     support = GatewaySupport.new
     support.to_s
   end
-  
+
   namespace :print do
     desc 'Print the currently supported gateways in RDoc format'
     task :rdoc do
       support = GatewaySupport.new
       support.to_rdoc
     end
-  
+
     desc 'Print the currently supported gateways in Textile format'
     task :textile do
       support = GatewaySupport.new
       support.to_textile
     end
-    
+
     desc 'Print the gateway functionality supported by each gateway'
     task :features do
       support = GatewaySupport.new

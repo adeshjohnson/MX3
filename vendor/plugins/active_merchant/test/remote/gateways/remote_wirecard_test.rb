@@ -14,22 +14,22 @@ class RemoteWirecardTest < Test::Unit::TestCase
     @declined_card = credit_card('4000300011112220')
 
     @options = {
-      :order_id => 1,
-      :billing_address => address,
-      :description => 'Wirecard remote test purchase',
-      :email => 'soleone@example.com'
+        :order_id => 1,
+        :billing_address => address,
+        :description => 'Wirecard remote test purchase',
+        :email => 'soleone@example.com'
     }
-    
+
     @german_address = {
-      :name     => 'Jim Deutsch',
-      :address1 => '1234 Meine Street',
-      :company  => 'Widgets Inc',
-      :city     => 'Koblenz',
-      :state    => 'Rheinland-Pfalz',
-      :zip      => '56070',
-      :country  => 'DE',
-      :phone    => '0261 12345 23',
-      :fax      => '0261 12345 23-4'
+        :name => 'Jim Deutsch',
+        :address1 => '1234 Meine Street',
+        :company => 'Widgets Inc',
+        :city => 'Koblenz',
+        :state => 'Rheinland-Pfalz',
+        :zip => '56070',
+        :country => 'DE',
+        :phone => '0261 12345 23',
+        :fax => '0261 12345 23-4'
     }
   end
 
@@ -58,24 +58,24 @@ class RemoteWirecardTest < Test::Unit::TestCase
     assert_success response
     assert response.message[/THIS IS A DEMO/]
   end
-  
+
   def test_successful_purchase_with_german_address_german_state_and_german_phone
     assert response = @gateway.purchase(@amount, @credit_card, @options.merge(:billing_address => @german_address))
 
     assert_success response
     assert response.message[/THIS IS A DEMO/]
   end
-    
+
   def test_successful_purchase_with_german_address_no_state_and_invalid_phone
     assert response = @gateway.purchase(@amount, @credit_card, @options.merge(:billing_address => @german_address.merge({:state => nil, :phone => '1234'})))
 
     assert_success response
     assert response.message[/THIS IS A DEMO/]
   end
-  
+
   def test_successful_purchase_with_german_address_and_valid_phone
     assert response = @gateway.purchase(@amount, @credit_card, @options.merge(:billing_address => @german_address.merge({:phone => '+049-261-1234-123'})))
-  
+
     assert_success response
     assert response.message[/THIS IS A DEMO/]
   end
@@ -83,7 +83,7 @@ class RemoteWirecardTest < Test::Unit::TestCase
   # Failure tested
 
   def test_wrong_creditcard_authorization
-    assert response = @gateway.authorize(@amount, @declined_card, @options)  
+    assert response = @gateway.authorize(@amount, @declined_card, @options)
     assert_failure response
     assert response.test?
     assert response.message[/credit card number not allowed in demo mode/i]
@@ -93,9 +93,9 @@ class RemoteWirecardTest < Test::Unit::TestCase
     assert response = @gateway.purchase(@amount, @declined_card, @options)
     assert response.test?
     assert_failure response
-    assert response.message[ /Credit card number not allowed in demo mode/ ], "Got wrong response message"
+    assert response.message[/Credit card number not allowed in demo mode/], "Got wrong response message"
   end
-  
+
   def test_unauthorized_capture
     assert response = @gateway.capture(@amount, "1234567890123456789012")
     assert_failure response
@@ -106,7 +106,7 @@ class RemoteWirecardTest < Test::Unit::TestCase
     gateway = WirecardGateway.new(:login => '', :password => '', :signature => '')
     assert response = gateway.purchase(@amount, @credit_card, @options)
     assert_failure response
-    assert response.message[ /wrong credentials/ ]
+    assert response.message[/wrong credentials/]
   end
-  
+
 end

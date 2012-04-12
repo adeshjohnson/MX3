@@ -4,17 +4,17 @@ class LocationsController < ApplicationController
   require "yaml"
   layout "callc"
 
-  before_filter :check_post_method, :only=>[:location_destroy, :location_rule_update, :location_rule_change_status, :location_rule_destroy, :location_change]
+  before_filter :check_post_method, :only => [:location_destroy, :location_rule_update, :location_rule_change_status, :location_rule_destroy, :location_change]
   before_filter :check_localization
   before_filter :authorize
   #before_filter :check_permsission
-  before_filter :find_location, :only=>[:location_rules, :location_devices, :location_destroy]
-  before_filter :find_location_rule, :only => [:location_rule_edit, :location_rule_update, :location_rule_change_status, :location_rule_destroy ]
+  before_filter :find_location, :only => [:location_rules, :location_devices, :location_destroy]
+  before_filter :find_location_rule, :only => [:location_rule_edit, :location_rule_update, :location_rule_change_status, :location_rule_destroy]
 
 
   def index
     flash[:notice] = _('Dont_be_so_smart')
-    redirect_to :controller => :callc,  :action => :main and return false
+    redirect_to :controller => :callc, :action => :main and return false
   end
 
   def localization
@@ -29,11 +29,11 @@ class LocationsController < ApplicationController
     @help_link = "http://wiki.kolmisoft.com/index.php/Number_Manipulation"
 
     if current_user.usertype == 'admin'
-      @users = User.find(:all, :select=>"users.*, #{SqlExport.nice_user_sql}", :joins=>"JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 ", :order => "nice_user ASC", :group=>'users.id')
+      @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 ", :order => "nice_user ASC", :group => 'users.id')
     else
-      @users = User.find(:all, :select=>"users.*, #{SqlExport.nice_user_sql}", :joins=>"JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group=>'users.id')
+      @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group => 'users.id')
     end
-    @rules = @location.locationrules(:include=>[:device])
+    @rules = @location.locationrules(:include => [:device])
 
     if Confline.get_value("User_Wholesale_Enabled").to_i == 0
       cond = " AND purpose = 'user' "
@@ -44,14 +44,14 @@ class LocationsController < ApplicationController
     #find current users lcr with check what type reseller
     @lcrs = current_user.load_lcrs(:all, :order => "name ASC")
 
-    @grules_dst = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", 1,"dst"], :order => "name ASC")
-    @grules_src = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", 1,"src"], :order => "name ASC")
-    @rules_dst = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", @location.id,"dst"], :order => "name ASC")
-    @rules_src = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", @location.id,"src"], :order => "name ASC")
+    @grules_dst = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", 1, "dst"], :order => "name ASC")
+    @grules_src = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", 1, "src"], :order => "name ASC")
+    @rules_dst = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", @location.id, "dst"], :order => "name ASC")
+    @rules_src = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", @location.id, "src"], :order => "name ASC")
     cond = ["dids.id > 0"]
     var = []
     cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller'
-    @dids = Did.find(:all,:include=>[:user, :device, :provider, :dialplan], :conditions => [cond.join(" AND ")].concat(var), :order => "dids.did ASC")
+    @dids = Did.find(:all, :include => [:user, :device, :provider, :dialplan], :conditions => [cond.join(" AND ")].concat(var), :order => "dids.did ASC")
   end
 
 =begin
@@ -70,15 +70,15 @@ in before filter : rule (:find_location_rule)
     #find current users lcr with check what type reseller
     @lcrs = current_user.load_lcrs(:all, :order => "name ASC")
     if current_user.usertype == 'admin'
-      @users = User.find(:all, :select=>"users.*, #{SqlExport.nice_user_sql}", :joins=>"JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 ", :order => "nice_user ASC", :group=>'users.id')
+      @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 ", :order => "nice_user ASC", :group => 'users.id')
     else
-      @users = User.find(:all, :select=>"users.*, #{SqlExport.nice_user_sql}", :joins=>"JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group=>'users.id')
+      @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group => 'users.id')
     end
-    @devices = Device.find(:all, :conditions=>["user_id =? AND name not like 'mor_server_%'" , @rule.device.user_id]) if @rule.device
+    @devices = Device.find(:all, :conditions => ["user_id =? AND name not like 'mor_server_%'", @rule.device.user_id]) if @rule.device
     cond = ["dids.id > 0"]
     var = []
     cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller'
-    @dids = Did.find(:all,:include=>[:user, :device, :provider, :dialplan], :conditions => [cond.join(" AND ")].concat(var), :order => "dids.did ASC")
+    @dids = Did.find(:all, :include => [:user, :device, :provider, :dialplan], :conditions => [cond.join(" AND ")].concat(var), :order => "dids.did ASC")
   end
 
 =begin
@@ -87,7 +87,7 @@ in before filter : rule (:find_location_rule)
   def location_rule_update
     if params[:name].blank? #or (params[:cut].length == 0 and params[:add].length ==0)
       flash[:notice] = _('Please_enter_name')
-      redirect_to :action => 'location_rule_edit', :id => @rule.id   and return false
+      redirect_to :action => 'location_rule_edit', :id => @rule.id and return false
     end
     @rule.name = params[:name]
     @rule.cut = params[:cut] if params[:cut]
@@ -106,7 +106,7 @@ in before filter : rule (:find_location_rule)
 in before filter : rule (:find_location_rule)
 =end
   def location_rule_change_status
-    if @rule.enabled ==  0
+    if @rule.enabled == 0
       @rule.enabled = 1; st =_('Rule_enabled')
     else
       @rule.enabled = 0; st = _('Rule_disabled')
@@ -127,7 +127,7 @@ in before filter : rule (:find_location_rule)
 
   def location_rule_add
 
-    rule = Locationrule.new({:name=>params[:name], :enabled=>1, :lr_type=>params[:lr_type]})
+    rule = Locationrule.new({:name => params[:name], :enabled => 1, :lr_type => params[:lr_type]})
     rule.location_id = params[:location_id]
     rule.cut = params[:cut] if params[:cut]
     rule.add = params[:add] if params[:add]
@@ -158,7 +158,7 @@ in before filter : rule (:find_location_rule)
     device = Device.find_by_id(params[:id])
     unless  device
       flash[:notice]=_('Device_was_not_found')
-      redirect_to :action=>:localization and return false
+      redirect_to :action => :localization and return false
     end
     old_loc = device.location_id
     device.location_id = params[:location]
@@ -171,14 +171,14 @@ in before filter : rule (:find_location_rule)
   end
 
   def location_add
-    loc = Location.new({:name=>params[:name]})
-    loc.save ? flash[:status] = _('Location_added'): flash_errors_for(_('Please_enter_name'), loc)
-    redirect_to :action => 'localization'  and return false
+    loc = Location.new({:name => params[:name]})
+    loc.save ? flash[:status] = _('Location_added') : flash_errors_for(_('Please_enter_name'), loc)
+    redirect_to :action => 'localization' and return false
   end
 
   def location_destroy
     devices = @location.devices.count
-    cardgroups = Cardgroup.find(:all,:conditions=>"location_id = #{@location.id}").size
+    cardgroups = Cardgroup.find(:all, :conditions => "location_id = #{@location.id}").size
 
     if devices == 0 and cardgroups == 0 and @location.destroy_all
       flash[:status] = _('Location_deleted')
@@ -188,14 +188,14 @@ in before filter : rule (:find_location_rule)
       flash_errors_for(_('Location_not_deleted'), @location)
     end
     redirect_to :action => 'localization'
-    
+
   end
-  
+
   #Ticket 3495 ------------
   def import_admins_locations
     @page_title = _('Import_admins_locations_with_rules')
     if reseller?
-      @locations = Location.find(:all, :conditions=>{:user_id=>0}, :order => "name ASC")
+      @locations = Location.find(:all, :conditions => {:user_id => 0}, :order => "name ASC")
     else
       dont_be_so_smart
       redirect_to :controller => 'callc', :action => 'main'
@@ -208,41 +208,41 @@ in before filter : rule (:find_location_rule)
       @location = Location.find_by_id(params[:id])
       @rules = @location.locationrules
 
-      @grules_dst = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", 1,"dst"], :order => "name ASC")
-      @grules_src = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", 1,"src"], :order => "name ASC")
-      @rules_dst = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", @location.id,"dst"], :order => "name ASC")
-      @rules_src = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", @location.id,"src"], :order => "name ASC")
+      @grules_dst = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", 1, "dst"], :order => "name ASC")
+      @grules_src = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", 1, "src"], :order => "name ASC")
+      @rules_dst = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", @location.id, "dst"], :order => "name ASC")
+      @rules_src = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", @location.id, "src"], :order => "name ASC")
       render :action => :location_rules
     else
       dont_be_so_smart
       redirect_to :controller => 'callc', :action => 'main'
     end
   end
-  
+
   def delete_and_import_admins_location
     if reseller?
       #find all resellers locations and delete them
-      @locations = Location.find(:all, :conditions=>{:user_id=>correct_owner_id}, :order => "name ASC")
+      @locations = Location.find(:all, :conditions => {:user_id => correct_owner_id}, :order => "name ASC")
       for location in @locations
         location.destroy_all
       end
       #create new default location
       current_user.create_reseller_localization
-      location_id = Confline.get_value("Default_device_location_id",current_user.id).to_i
+      location_id = Confline.get_value("Default_device_location_id", current_user.id).to_i
       #change all devices and cardgroups locations (providers location id is in his device location_id)
       Device.update_all "location_id = #{location_id}", "user_id IN (SELECT id from users where owner_id = #{current_user.id}) OR id IN (SELECT device_id FROM providers WHERE user_id = #{current_user.id})"
       Cardgroup.update_all "location_id = #{location_id}", "owner_id = #{current_user.id}"
       #get all admins locations with rules
-      admins_locations = Location.find(:all,:conditions=>['locations.user_id=? and locations.name != ?',0, 'Global'], :include=>[:locationrules])
-    
+      admins_locations = Location.find(:all, :conditions => ['locations.user_id=? and locations.name != ?', 0, 'Global'], :include => [:locationrules])
+
       for a_location in admins_locations
-        loc = Location.new({:name=>a_location.name, :user_id=> a_location.user_id })
+        loc = Location.new({:name => a_location.name, :user_id => a_location.user_id})
         loc.user_id = a_location.user_id
         loc.save
         logger.fatal('Location created')
- 
+
         for a_rules in a_location.locationrules
-          rule = Locationrule.new({:name=>a_rules.name, :enabled=>1, :lr_type=>a_rules.lr_type})
+          rule = Locationrule.new({:name => a_rules.name, :enabled => 1, :lr_type => a_rules.lr_type})
           rule.location_id = loc.id
           rule.cut = a_rules.cut if a_rules.cut
           rule.add = a_rules.add if a_rules.add
@@ -251,11 +251,12 @@ in before filter : rule (:find_location_rule)
           rule.save
           logger.fatal('rule created')
         end
-      end   
+      end
       redirect_to :action => 'localization'
       flash[:status] = _('Old_Locations_deleted_and_new_Locations_added')
     end
   end
+
   #-----------
   private
 
@@ -263,7 +264,7 @@ in before filter : rule (:find_location_rule)
     @rule = Locationrule.find_by_id(params[:id])
     unless @rule
       flash[:notice]=_('Location_rule_was_not_found')
-      redirect_to :action=>:localization and return false
+      redirect_to :action => :localization and return false
     end
     check_location_rule_owner
   end
@@ -272,7 +273,7 @@ in before filter : rule (:find_location_rule)
     @location = Location.find_by_id(params[:id])
     unless @location
       flash[:notice]=_('Location_was_not_found')
-      redirect_to :action=>:localization and return false
+      redirect_to :action => :localization and return false
     end
     check_location_owner
   end

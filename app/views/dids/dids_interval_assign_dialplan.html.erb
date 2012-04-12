@@ -1,93 +1,95 @@
-<%= render :partial => "bulk_management_header"  %>
+<%= render :partial => "bulk_management_header" %>
 <% unless @dids.size.to_i < 1 %>
-  <table class="maintable" width="50%">
-    <tr>
-      <th align="left">    <%= _('Assign_to_dialplan') %>    </th>
-    </tr>
-    <tr class="row1">
-      <td>
-        <br /><%= b_forward %><%= _('Assign_to_dialplan_extended') %><br /><br />
+    <table class="maintable" width="50%">
+      <tr>
+        <th align="left">    <%= _('Assign_to_dialplan') %>    </th>
+      </tr>
+      <tr class="row1">
+        <td>
+          <br/><%= b_forward %><%= _('Assign_to_dialplan_extended') %>
+          <br/><br/>
 
 
-        <% if not @ccdps.empty? %>
-          <%= form_tag({:action => 'assign_to_dp'}.merge(@opts)) do %>
-            <b><%= _('Calling_cards_dialplan') %>:</b>
-            <select name="dp_id" >
-              <% for dp in @ccdps %>
-                <option value=<%= dp.id %>> <%= dp.name %> </option>
+          <% if not @ccdps.empty? %>
+              <%= form_tag({:action => 'assign_to_dp'}.merge(@opts)) do %>
+                  <b><%= _('Calling_cards_dialplan') %>:</b>
+                  <select name="dp_id">
+                    <% for dp in @ccdps %>
+                        <option value=<%= dp.id %>> <%= dp.name %> </option>
+                    <% end %>
+                  </select>
+                  <%= submit_tag _('Assign'), :disable_with => _('Processing..'), :id => 'callinc_cards_dp', :confirm => 'Are you sure?' %>
               <% end %>
-            </select>
-            <%= submit_tag _('Assign'), :disable_with=>_('Processing..'), :id=> 'callinc_cards_dp', :confirm => 'Are you sure?' %>
           <% end %>
-        <% end %>
 
 
 
-        <% if not @abpdps.empty? %>
-          <%= form_tag({:action => 'assign_to_dp'}.merge(@opts)) do %>
-            <b><%= _('Authorization_by_pin_dialplan') %>:</b>
-            <select name="dp_id" >
-              <% for dp in @abpdps %>
-                <option value=<%= dp.id %>> <%= dp.name %> </option>
+          <% if not @abpdps.empty? %>
+              <%= form_tag({:action => 'assign_to_dp'}.merge(@opts)) do %>
+                  <b><%= _('Authorization_by_pin_dialplan') %>:</b>
+                  <select name="dp_id">
+                    <% for dp in @abpdps %>
+                        <option value=<%= dp.id %>> <%= dp.name %> </option>
+                    <% end %>
+                  </select>
+                  <%= submit_tag _('Assign'), :id => "assign_to_dp_pin", :disable_with => _('Processing..'), :confirm => 'Are you sure?', :id => 'pin_pd' %>
               <% end %>
-            </select>
-            <%= submit_tag _('Assign'), :id=>"assign_to_dp_pin", :disable_with=>_('Processing..'), :confirm => 'Are you sure?', :id=>'pin_pd' %>
           <% end %>
-        <% end %>
 
 
-        <% if callback_active? and  not @cbdps.empty? %>
-          <%= form_tag({:action => 'assign_to_dp'}.merge(@opts)) do %>
-            <b><%= _('Callback_dialplan') %>:</b>
-            <select name="dp_id" >
-              <% for dp in @cbdps %>
-                <option value=<%= dp.id %>> <%= dp.name %> </option>
+          <% if callback_active? and not @cbdps.empty? %>
+              <%= form_tag({:action => 'assign_to_dp'}.merge(@opts)) do %>
+                  <b><%= _('Callback_dialplan') %>:</b>
+                  <select name="dp_id">
+                    <% for dp in @cbdps %>
+                        <option value=<%= dp.id %>> <%= dp.name %> </option>
+                    <% end %>
+                  </select>
+                  <%= submit_tag _('Assign'), :id => "assign_to_dp_callback", :disable_with => _('Processing..'), :confirm => 'Are you sure?', :id => 'callback_pd' %>
               <% end %>
-            </select>
-            <%=  submit_tag _('Assign') , :id=>"assign_to_dp_callback", :disable_with=>_('Processing..'), :confirm => 'Are you sure?', :id=>'callback_pd'%>
           <% end %>
-        <% end %>
 
 
-        <% if not @qfddps.empty? %>
-          <%= form_tag({:action => 'assign_to_dp'}.merge(@opts)) do %>
-            <b><%= _('Quick_Forwards_dialplan') %></b>
-            <% for dp in @qfddps %>
-              <%= hidden_field_tag 'dp_id', dp.id  %>
-            <% end %>
-            <%= submit_tag  _('Assign'), :disable_with=>_('Processing..'), :confirm => 'Are you sure?', :id=>'fovard_pd' %>
-          <% end %>
-          <br />
-        <% end %>
-
-
-        <% if not @pbxfdps.empty? %>
-          <%= form_tag({:action => 'assign_to_dp'}.merge(@opts)) do %>
-            <b><%= _('PBX_Functions_dialplan') %></b>
-            <select name="dp_id" >
-              <% for dp in @pbxfdps %>
-                <option value=<%= dp.id %>> <%= dp.data2 %> - <%= dp.pbxfunction.name if dp.pbxfunction %> </option>
+          <% if not @qfddps.empty? %>
+              <%= form_tag({:action => 'assign_to_dp'}.merge(@opts)) do %>
+                  <b><%= _('Quick_Forwards_dialplan') %></b>
+                  <% for dp in @qfddps %>
+                      <%= hidden_field_tag 'dp_id', dp.id %>
+                  <% end %>
+                  <%= submit_tag _('Assign'), :disable_with => _('Processing..'), :confirm => 'Are you sure?', :id => 'fovard_pd' %>
               <% end %>
-            </select>
-            <%= submit_tag _('Assign'), :disable_with=>_('Processing..'), :confirm => 'Are you sure?', :id=>'pbx_pd' %>
+              <br/>
           <% end %>
-          <br />
-        <% end %>
 
-        <% if @ivrs.size > 0 %>
-          <%= form_tag({:action => 'assign_to_dp'}.merge(@opts)) do %>
-            <b><%= _('Ivr_Dialplan') %></b>
-            <select name="dp_id" >
-              <% for dp in @ivrs %>
-                <option value=<%= dp.id %>><%= dp.name %> </option>
+
+          <% if not @pbxfdps.empty? %>
+              <%= form_tag({:action => 'assign_to_dp'}.merge(@opts)) do %>
+                  <b><%= _('PBX_Functions_dialplan') %></b>
+                  <select name="dp_id">
+                    <% for dp in @pbxfdps %>
+                        <option value=<%= dp.id %>> <%= dp.data2 %>
+                          - <%= dp.pbxfunction.name if dp.pbxfunction %> </option>
+                    <% end %>
+                  </select>
+                  <%= submit_tag _('Assign'), :disable_with => _('Processing..'), :confirm => 'Are you sure?', :id => 'pbx_pd' %>
               <% end %>
-            </select>
-            <%= submit_tag _('Assign'), :disable_with=>_('Processing..'), :confirm => 'Are you sure?', :id=>'ivr_pd' %>
+              <br/>
           <% end %>
-        <% end %>
-      </td>
-    </tr>
-  </table>
+
+          <% if @ivrs.size > 0 %>
+              <%= form_tag({:action => 'assign_to_dp'}.merge(@opts)) do %>
+                  <b><%= _('Ivr_Dialplan') %></b>
+                  <select name="dp_id">
+                    <% for dp in @ivrs %>
+                        <option value=<%= dp.id %>><%= dp.name %> </option>
+                    <% end %>
+                  </select>
+                  <%= submit_tag _('Assign'), :disable_with => _('Processing..'), :confirm => 'Are you sure?', :id => 'ivr_pd' %>
+              <% end %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
 <% else %>
-  <% flash[:notice] = _('No_DID_found_Please_check_interval') %>
+    <% flash[:notice] = _('No_DID_found_Please_check_interval') %>
 <% end %>

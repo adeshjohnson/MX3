@@ -1,26 +1,26 @@
 <html>
 <head>
-    <%= stylesheet_link_tag "mor" %>   
+  <%= stylesheet_link_tag "mor" %>
 </head>
 
 <body OnLoad='compt=setTimeout("self.close();",5000)'>
-	
-	<br><br>
-	
-	<table class="simple">
-		<tr>
-			<td>
-				<% if @error.to_s.length > 0 %>
-					<%= @error %>
-				<% else%>
-					<%= b_call+_('Dialing_Spy_Device')%>: <%= @spy_device %>...
-					<br><br>
-					<%= _('Will_spy_on_channel') %>: <%= @channel.to_s%>				
-				<% end %>
-			</td>
-		</tr>
-	</table>		
 
-	
+<br><br>
+
+<table class="simple">
+  <tr>
+    <td>
+      <% if @error.to_s.length > 0 %>
+          <%= @error %>
+      <% else %>
+          <%= b_call+_('Dialing_Spy_Device') %>: <%= @spy_device %>...
+          <br><br>
+          <%= _('Will_spy_on_channel') %>: <%= @channel.to_s %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+
 </body>
 </html>

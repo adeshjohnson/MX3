@@ -17,13 +17,14 @@ class SubclassGateway < SimpleTestGateway
 end
 
 class Hash #:nodoc:
-  # Return a new hash with all keys converted to symbols.
+           # Return a new hash with all keys converted to symbols.
   def symbolize_keys
     inject({}) do |options, (key, value)|
       options[(key.to_sym rescue key) || key] = value
       options
     end
   end
+
   # Destructively convert all keys to symbols.
   def symbolize_keys!
     self.replace(self.symbolize_keys)
@@ -33,7 +34,7 @@ end
 module ActiveMerchant
   module Assertions
     def assert_field(field, value)
-      clean_backtrace do 
+      clean_backtrace do
         assert_equal value, @helper.fields[field]
       end
     end
@@ -137,7 +138,7 @@ module Test
         return unless hash.is_a?(Hash)
 
         hash.symbolize_keys!
-        hash.each{|k,v| symbolize_keys(v)}
+        hash.each { |k, v| symbolize_keys(v) }
       end
     end
   end

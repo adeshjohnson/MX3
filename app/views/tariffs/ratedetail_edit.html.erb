@@ -1,14 +1,16 @@
-<b><%= b_view + _('Tariff') %>:</b> <%= link_to @tariff.name, :action => "rates_list", :id => @tariff.id, :st => @destination.direction.name[0,1] %>
+<b><%= b_view + _('Tariff') %>
+  :</b> <%= link_to @tariff.name, :action => "rates_list", :id => @tariff.id, :st => @destination.direction.name[0, 1] %>
 <br/>
-<b><%= b_currency + _('Currency') %>:</b> <%=  @tariff.currency %>
+<b><%= b_currency + _('Currency') %>:</b> <%= @tariff.currency %>
 <br/>
 <%= draw_flag @destination.direction.code %> <%= @destination.direction.name %>
 <%= @destination.prefix %> <%= @destination.subcode %>
 <br/>
-<b><%= b_date + _('Day_type') %>:</b> <%= _('Free_day') if @ratedetail.daytype == "FD" %><%= _('Work_day') if @ratedetail.daytype == "WD" %><%= _('Work_day_and_Free_day') if @ratedetail.daytype == "" %>
+<b><%= b_date + _('Day_type') %>
+  :</b> <%= _('Free_day') if @ratedetail.daytype == "FD" %><%= _('Work_day') if @ratedetail.daytype == "WD" %><%= _('Work_day_and_Free_day') if @ratedetail.daytype == "" %>
 <hr/>
 <%= form_tag(:action => 'ratedetail_update', :id => @ratedetail) do %>
-  <%= render :partial => 'ratedetail_form' %>
-  <%= submit_tag _('Edit'), :disable_with=>_('Processing..') %>
+    <%= render :partial => 'ratedetail_form' %>
+    <%= submit_tag _('Edit'), :disable_with => _('Processing..') %>
 <% end %>
 <br/><br/>

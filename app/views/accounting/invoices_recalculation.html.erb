@@ -1,31 +1,31 @@
 <%= render :partial => 'timezone_notice' %>
 <%= form_tag :action => 'invoices_recalculation_status' do %>
-  <%= _('Please_select_period_to_recalculate_invoices') %>:
-  <br />
-  <br />
-  <%= _('From') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
-  &nbsp;&nbsp;<%= _('to') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
-  <br />
-  <br />
-  <table>
-    <tr>
-      <td><%= radio_button "invoice","type", "postpaid", {:checked => true} %></td>
-      <td><%= _('Postpaid')%></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><%= radio_button "invoice","type", "prepaid" %></td>
-      <td><%= _('Prepaid')%></td>
-      <td></td>
-    </tr>
-    <% if @users and @users.size > 0%>
+    <%= _('Please_select_period_to_recalculate_invoices') %>:
+    <br/>
+    <br/>
+    <%= _('From') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+    &nbsp;&nbsp;<%= _('to') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+    <br/>
+    <br/>
+    <table>
       <tr>
-        <td><%= radio_button "invoice","type", "user" %></td>
-        <td><%= _("User")%></td>
-        <td><%= select("user", "id", @users.map {|u| [nice_user(u),u.id]}) if @users %></td>
+        <td><%= radio_button "invoice", "type", "postpaid", {:checked => true} %></td>
+        <td><%= _('Postpaid') %></td>
+        <td></td>
       </tr>
-    <% end  %>
-  </table >
-  <br />
-  <%= submit_tag _('Recalculate'), :confirm => _('Are_you_sure'), :method => :post, :disable_with=>_('Processing..')%>
+      <tr>
+        <td><%= radio_button "invoice", "type", "prepaid" %></td>
+        <td><%= _('Prepaid') %></td>
+        <td></td>
+      </tr>
+      <% if @users and @users.size > 0 %>
+          <tr>
+            <td><%= radio_button "invoice", "type", "user" %></td>
+            <td><%= _("User") %></td>
+            <td><%= select("user", "id", @users.map { |u| [nice_user(u), u.id] }) if @users %></td>
+          </tr>
+      <% end %>
+    </table>
+    <br/>
+    <%= submit_tag _('Recalculate'), :confirm => _('Are_you_sure'), :method => :post, :disable_with => _('Processing..') %>
 <% end %>

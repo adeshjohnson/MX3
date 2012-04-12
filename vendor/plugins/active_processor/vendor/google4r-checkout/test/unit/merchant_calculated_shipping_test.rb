@@ -39,17 +39,17 @@ class Google4R::Checkout::MerchantCalculatedShippingTest < Test::Unit::TestCase
   def setup
     @shipping = MerchantCalculatedShipping.new
   end
-  
+
   def test_merchant_calculated_shipping_method_behaves_correctly
-    [ :name, :name=, :price, :price=, 
-      :shipping_restrictions_allowed_areas, :shipping_restrictions_excluded_areas,
-      :address_filters_allowed_areas, :address_filters_excluded_areas,
-      :create_allowed_area, :create_excluded_area, :create_area
+    [:name, :name=, :price, :price=,
+     :shipping_restrictions_allowed_areas, :shipping_restrictions_excluded_areas,
+     :address_filters_allowed_areas, :address_filters_excluded_areas,
+     :create_allowed_area, :create_excluded_area, :create_area
     ].each do |symbol|
       assert_respond_to @shipping, symbol
     end
   end
-  
+
   def test_initialization
     assert_nil @shipping.name
     assert_nil @shipping.price
@@ -58,17 +58,17 @@ class Google4R::Checkout::MerchantCalculatedShippingTest < Test::Unit::TestCase
     assert_equal [], @shipping.address_filters_allowed_areas
     assert_equal [], @shipping.address_filters_excluded_areas
   end
-  
+
   def test_merchant_calculated_shipping_setting_attributes_works_correctly
     @shipping.name = "Shipping Method Name"
     assert_equal "Shipping Method Name", @shipping.name
-    
+
     @shipping.price = Money.new(100, "EUR")
     assert_kind_of Money, @shipping.price
     assert_equal 100, @shipping.price.cents
     assert_equal "EUR", @shipping.price.currency
   end
-  
+
   def test_merchant_calculated_shipping_price_is_validated
     # Test that MerchantCalculatedShipping checks for its price attribute responding
     # to cents and currency.
@@ -76,22 +76,22 @@ class Google4R::Checkout::MerchantCalculatedShippingTest < Test::Unit::TestCase
     assert_raises(RuntimeError) { @shipping.price = 10 }
     assert_raises(RuntimeError) { @shipping.price = "str" }
   end
-  
+
   def test_create_allowed_excluded_areas_works_with_block
-    [ [ :shipping_restrictions_allowed_areas, :create_allowed_area ], 
-      [ :shipping_restrictions_excluded_areas, :create_excluded_area ] ].each do |pair|
+    [[:shipping_restrictions_allowed_areas, :create_allowed_area],
+     [:shipping_restrictions_excluded_areas, :create_excluded_area]].each do |pair|
       read_sym, create_sym = pair
-      
-      [ UsZipArea, UsStateArea, UsCountryArea ].each do |clazz|
-    
+
+      [UsZipArea, UsStateArea, UsCountryArea].each do |clazz|
+
         the_area = nil
-    
-        res = 
-          @shipping.send(create_sym, clazz) do |area|
-            the_area = area
-            assert_kind_of clazz, area
-          end
-      
+
+        res =
+            @shipping.send(create_sym, clazz) do |area|
+              the_area = area
+              assert_kind_of clazz, area
+            end
+
         assert_equal res, the_area
         assert @shipping.send(read_sym).include?(the_area)
       end
@@ -99,35 +99,35 @@ class Google4R::Checkout::MerchantCalculatedShippingTest < Test::Unit::TestCase
   end
 
   def test_create_allowed_excluded_areas_works_without_block
-    [ [ :shipping_restrictions_allowed_areas, :create_allowed_area], 
-      [ :shipping_restrictions_excluded_areas, :create_excluded_area ] ].each do |pair|
+    [[:shipping_restrictions_allowed_areas, :create_allowed_area],
+     [:shipping_restrictions_excluded_areas, :create_excluded_area]].each do |pair|
       read_sym, create_sym = pair
 
-      [ UsZipArea, UsStateArea, UsCountryArea ].each do |clazz|
+      [UsZipArea, UsStateArea, UsCountryArea].each do |clazz|
         area = @shipping.send(create_sym, clazz)
-      
+
         assert_kind_of clazz, area
-      
+
         assert @shipping.send(read_sym).include?(area)
       end
     end
   end
-  
+
   def test_create_shipping_restrictions_allowed_excluded_areas_works_with_block
-    [ [ :shipping_restrictions_allowed_areas, :create_shipping_restrictions_allowed_area ], 
-      [ :shipping_restrictions_excluded_areas, :create_shipping_restrictions_excluded_area ] ].each do |pair|
+    [[:shipping_restrictions_allowed_areas, :create_shipping_restrictions_allowed_area],
+     [:shipping_restrictions_excluded_areas, :create_shipping_restrictions_excluded_area]].each do |pair|
       read_sym, create_sym = pair
-      
-      [ UsZipArea, UsStateArea, UsCountryArea ].each do |clazz|
-    
+
+      [UsZipArea, UsStateArea, UsCountryArea].each do |clazz|
+
         the_area = nil
-    
-        res = 
-          @shipping.send(create_sym, clazz) do |area|
-            the_area = area
-            assert_kind_of clazz, area
-          end
-      
+
+        res =
+            @shipping.send(create_sym, clazz) do |area|
+              the_area = area
+              assert_kind_of clazz, area
+            end
+
         assert_equal res, the_area
         assert @shipping.send(read_sym).include?(the_area)
       end
@@ -135,37 +135,37 @@ class Google4R::Checkout::MerchantCalculatedShippingTest < Test::Unit::TestCase
   end
 
   def test_create_shipping_restrictions_allowed_excluded_areas_works_without_block
-    [ [ :shipping_restrictions_allowed_areas, :create_shipping_restrictions_allowed_area], 
-      [ :shipping_restrictions_excluded_areas, :create_shipping_restrictions_excluded_area ] ].each do |pair|
+    [[:shipping_restrictions_allowed_areas, :create_shipping_restrictions_allowed_area],
+     [:shipping_restrictions_excluded_areas, :create_shipping_restrictions_excluded_area]].each do |pair|
       read_sym, create_sym = pair
 
-      [ UsZipArea, UsStateArea, UsCountryArea ].each do |clazz|
+      [UsZipArea, UsStateArea, UsCountryArea].each do |clazz|
         area = @shipping.send(create_sym, clazz)
-      
+
         assert_kind_of clazz, area
-      
+
         assert @shipping.send(read_sym).include?(area)
       end
     end
   end
 
   def test_create_allowed_excluded_areas_validates_parameter
-    [ :create_allowed_area, :create_excluded_area ].each do |sym|
+    [:create_allowed_area, :create_excluded_area].each do |sym|
       assert_raises(RuntimeError) { @shipping.send(sym, String) }
     end
   end
-  
+
   def test_new_create_area_with_merchant_calculated_shipping
-    [ [ :shipping_restrictions, :allowed_areas ],
-      [ :shipping_restrictions, :excluded_areas ],
-      [ :address_filters, :allowed_areas ],
-      [ :address_filters, :excluded_areas ] ].each do |pair|
-        type_sym, area_sym = pair
-        [ UsZipArea, UsStateArea, UsCountryArea ].each do |clazz|
+    [[:shipping_restrictions, :allowed_areas],
+     [:shipping_restrictions, :excluded_areas],
+     [:address_filters, :allowed_areas],
+     [:address_filters, :excluded_areas]].each do |pair|
+      type_sym, area_sym = pair
+      [UsZipArea, UsStateArea, UsCountryArea].each do |clazz|
         area = @shipping.send(:create_area, type_sym, area_sym, clazz)
-      
+
         assert_kind_of clazz, area
-      
+
         assert @shipping.send((type_sym.to_s + '_' + area_sym.to_s).to_sym).include?(area)
       end
     end

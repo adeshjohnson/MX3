@@ -14,12 +14,12 @@ class Lcr < ActiveRecord::Base
 
   def lcr_before_destroy
 
-    if User.find(:all, :conditions => ["lcr_id = ?",id]).size > 0
+    if User.find(:all, :conditions => ["lcr_id = ?", id]).size > 0
       errors.add(:users, _('Lcr_not_deleted'))
       return false
     end
 
-    lrules= Locationrule.find(:all, :conditions=>"lcr_id='#{id}'")
+    lrules= Locationrule.find(:all, :conditions => "lcr_id='#{id}'")
     if lrules.size.to_i > 0
       errors.add(:locationrules, lrules.size.to_s + " " + _('locationrules_are_using_this_lcr_cant_delete'))
       return false
@@ -33,7 +33,7 @@ class Lcr < ActiveRecord::Base
     for partial in self.lcr_partials
       partial.destroy
     end
-    
+
   end
 
   def providers(order = nil)
@@ -60,8 +60,8 @@ class Lcr < ActiveRecord::Base
     sql = "SELECT providers.* FROM providers JOIN lcrs ON (providers.id = lcrs.failover_provider_id) WHERE lcrs.id = #{self.id}"
     Provider.find_by_sql(sql)[0]
   end
-  
-  def failover_provider=(provider) 
+
+  def failover_provider=(provider)
     if provider
       self.failover_provider_id = provider.id
     else
@@ -75,38 +75,38 @@ class Lcr < ActiveRecord::Base
 
   def add_provider(prov)
     if self.order.to_s == "percent"
-      @prs = Lcrprovider.find(:all, :conditions=>["lcr_id = ?", self.id])
+      @prs = Lcrprovider.find(:all, :conditions => ["lcr_id = ?", self.id])
       if @prs
         lcr_percent = 10000 / (@prs.size + 1)
-        for pr in @prs 
+        for pr in @prs
           pr.percent = lcr_percent
           pr.save
         end
       else
         lcr_percent = 10000
       end
-      Lcrprovider.create({:lcr_id=>id, :provider_id=>prov.id.to_i, :percent=>lcr_percent})
+      Lcrprovider.create({:lcr_id => id, :provider_id => prov.id.to_i, :percent => lcr_percent})
     else
-      lprov = Lcrprovider.find(:first, :conditions=>["lcr_id = ?", self.id], :order=>"priority desc")
-      Lcrprovider.create({:lcr_id=>id, :provider_id=>prov.id.to_i, :priority=>(lprov ? lprov.priority.to_i + 1 : 1)})
+      lprov = Lcrprovider.find(:first, :conditions => ["lcr_id = ?", self.id], :order => "priority desc")
+      Lcrprovider.create({:lcr_id => id, :provider_id => prov.id.to_i, :priority => (lprov ? lprov.priority.to_i + 1 : 1)})
     end
   end
 
   def remove_provider(prov_id)
     if self.order.to_s == "percent"
-      @pr2 = Lcrprovider.find(:first, :conditions=>["lcr_id = ? AND provider_id = ?",self.id.to_s,  prov_id.to_s])
+      @pr2 = Lcrprovider.find(:first, :conditions => ["lcr_id = ? AND provider_id = ?", self.id.to_s, prov_id.to_s])
       if @pr2
-        @prs = Lcrprovider.find(:all, :conditions=>["lcr_id = ? AND id != ?", self.id.to_s, @pr2.id])
+        @prs = Lcrprovider.find(:all, :conditions => ["lcr_id = ? AND id != ?", self.id.to_s, @pr2.id])
         if @prs.size > 0
-          lcr_percent = 10000 / @prs.size 
+          lcr_percent = 10000 / @prs.size
           for pr in @prs
-            pr.percent = lcr_percent 
+            pr.percent = lcr_percent
             pr.save
           end
         end
       end
     end
-    Lcrprovider.destroy_all(["lcr_id = ? AND provider_id = ?",self.id.to_s, prov_id.to_s] )
+    Lcrprovider.destroy_all(["lcr_id = ? AND provider_id = ?", self.id.to_s, prov_id.to_s])
   end
 
   def provider_active(provider_id)
@@ -129,7 +129,7 @@ class Lcr < ActiveRecord::Base
     if order_changed? and order == "percent"
       providers = Lcrprovider.find(:all, :select => "lcrproviders.*", :joins => "RIGHT JOIN providers ON (providers.id = lcrproviders.provider_id)", :conditions => ["lcr_id = ?", self.id])
       percent = 10000/providers.size if providers and providers.size > 0
-      providers.each{  |provider|
+      providers.each { |provider|
         provider.percent = percent
         provider.save
       }
@@ -144,12 +144,12 @@ class Lcr < ActiveRecord::Base
         order_by = " lcrs.name "
       when "order"
         order_by = " lcrs.order "
-    else
-      options[:order_by] ? order_by = "name" : order_by = "name"
-      options[:order_desc] = 1
+      else
+        options[:order_by] ? order_by = "name" : order_by = "name"
+        options[:order_desc] = 1
     end
     order_by += " ASC" if options[:order_desc].to_i == 0 and order_by != ""
-    order_by += " DESC"if options[:order_desc].to_i == 1 and order_by != ""
+    order_by += " DESC" if options[:order_desc].to_i == 1 and order_by != ""
     return order_by
 
   end
@@ -182,14 +182,14 @@ class Lcr < ActiveRecord::Base
                                     left JOIN tariffs ON (tariffs.id = providers.tariff_id)
                                   WHERE lcr_id = #{id} and tariff_id is not null")
 
-      t_ids = tariffs.map{|i| i.tid}
-      create_temp_table = "CREATE TABLE #{t_name}_2 AS (SELECT  destinationgroup_id, #{SqlExport.replace_dec("MIN( price * exchange_rate)", options[:column_dem],'rate_min' )}, #{SqlExport.replace_dec("MAX( price * exchange_rate)", options[:column_dem],'rate_max' )} FROM rates
+      t_ids = tariffs.map { |i| i.tid }
+      create_temp_table = "CREATE TABLE #{t_name}_2 AS (SELECT  destinationgroup_id, #{SqlExport.replace_dec("MIN( price * exchange_rate)", options[:column_dem], 'rate_min')}, #{SqlExport.replace_dec("MAX( price * exchange_rate)", options[:column_dem], 'rate_max')} FROM rates
                            JOIN aratedetails ON (rates.id = rate_id)
                            JOIN tariffs ON (tariffs.id = tariff_id)
                            JOIN currencies ON (currencies.name = tariffs.currency)
                      WHERE tariff_id IN (#{options[:current_user].tariff_id}) group by destinationgroup_id);"
       ActiveRecord::Base.connection.execute(create_temp_table)
-      cretate_table_2 = " CREATE TABLE #{t_name}_1 AS (SELECT destination_id as did, #{SqlExport.replace_dec("MIN( rate * exchange_rate)", options[:column_dem],'rate_min' )}, #{SqlExport.replace_dec("MAX( rate * exchange_rate)", options[:column_dem],'rate_max' )} FROM rates
+      cretate_table_2 = " CREATE TABLE #{t_name}_1 AS (SELECT destination_id as did, #{SqlExport.replace_dec("MIN( rate * exchange_rate)", options[:column_dem], 'rate_min')}, #{SqlExport.replace_dec("MAX( rate * exchange_rate)", options[:column_dem], 'rate_max')} FROM rates
                            JOIN ratedetails ON (rates.id = rate_id)
                            JOIN tariffs ON (tariffs.id = tariff_id)
                            JOIN currencies ON (currencies.name = tariffs.currency)
@@ -208,7 +208,7 @@ class Lcr < ActiveRecord::Base
                                     JOIN providers ON (providers.id = provider_id)
                                   WHERE lcr_id = #{id} ) AND tariffs.owner_id = #{options[:current_user].id} "
       if options[:current_user].usertype == 'reseller'
-        cond =   " (tariff_id IN (SELECT DISTINCT(providers.tariff_id) FROM lcrproviders
+        cond = " (tariff_id IN (SELECT DISTINCT(providers.tariff_id) FROM lcrproviders
                                     JOIN providers ON (providers.id = provider_id)
                                   WHERE lcr_id = #{id} ) AND tariffs.owner_id = #{options[:current_user].id}) OR tariffs.id = #{options[:current_user].tariff_id}  "
       end
@@ -232,9 +232,9 @@ class Lcr < ActiveRecord::Base
     filename = "Make_LCR_tariff-#{SqlExport.clean_filename(name)}-#{options[:curr]}-#{Time.now().to_i}_#{options[:rand]}"
     sql = "SELECT dir_name, name, subcode, prefix, 
                   #{SqlExport.replace_dec('rate_min', options[:column_dem], 'rate_min')},
-                  #{SqlExport.replace_dec('rate_max', options[:column_dem],'rate_max')} "
+                  #{SqlExport.replace_dec('rate_max', options[:column_dem], 'rate_max')} "
     if options[:test] != 1
-      sql +=    " INTO OUTFILE '/tmp/#{filename}.csv'
+      sql += " INTO OUTFILE '/tmp/#{filename}.csv'
                 FIELDS TERMINATED BY '#{options[:collumn_separator]}' OPTIONALLY ENCLOSED BY '#{''}'
                 ESCAPED BY '#{"\\\\"}'
             LINES TERMINATED BY '#{"\\n"}' "
@@ -256,7 +256,7 @@ class Lcr < ActiveRecord::Base
   end
 
   def new_location(cut, add, dst)
-    loc_dst = Location.nice_locilization(cut, add,dst)
+    loc_dst = Location.nice_locilization(cut, add, dst)
     # read LCR Partials
     sql = "SELECT lcr_partials.prefix as 'prefix', lcrs.id as 'lcr_id', lcrs.order FROM lcr_partials JOIN lcrs ON (lcrs.id = lcr_partials.lcr_id) WHERE main_lcr_id = '#{id}' AND prefix=SUBSTRING('#{loc_dst}',1,LENGTH(prefix)) ORDER BY LENGTH(prefix) DESC LIMIT 1;"
     #my_debug sql
@@ -290,11 +290,11 @@ class Lcr < ActiveRecord::Base
       #construct where clause, which speficies user_id of lcr specifies lcr id if
       #at least one valid lcr id is given in lcr_list.
       query_condition = "user_id = #{resellerA.id}"
-      if lcr_list and lcr_list.size > 0 
+      if lcr_list and lcr_list.size > 0
         lcr_list.reject! { |lcr_id| lcr_id.to_i == 0 }
         lcr_list = lcr_list.join(',')
         if lcr_list.length > 0
-          query_condition += " AND id IN (#{lcr_list})" 
+          query_condition += " AND id IN (#{lcr_list})"
         end
       end
       #find all resellerA's lcrs and iterate through them, cloning each lcr
@@ -315,7 +315,7 @@ class Lcr < ActiveRecord::Base
             return false
           end
         end
-        return true 
+        return true
       else
         return false
       end

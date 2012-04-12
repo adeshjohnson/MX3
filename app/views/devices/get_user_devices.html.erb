@@ -1,1 +1,1 @@
-<%= select_tag("device_id", options_for_select([[_("All"), "all"]]+@devices.map{|d| [nice_device_no_pic(d), d.id]})) %>
+<%= select_tag("device_id", options_for_select([[_("All"), "all"]]+@devices.map { |d| [nice_device_no_pic(d), d.id] })) %>

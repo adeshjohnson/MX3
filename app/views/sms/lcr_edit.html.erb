@@ -1,7 +1,6 @@
-
 <%= form_tag(:action => 'lcr_update', :id => @lcr) do %>
-  <%= render :partial => 'lcr_form' %>
-  <%= submit_tag _('Edit') , :disable_with=>_('Processing..')%>
+    <%= render :partial => 'lcr_form' %>
+    <%= submit_tag _('Edit'), :disable_with => _('Processing..') %>
 <% end %>
 
 <br><br>    

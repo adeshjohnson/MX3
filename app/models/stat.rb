@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Stat < ActiveRecord::Base
 
-  def self.find_rates_and_tariffs_by_number(user_id, id,phrase)
-    sql=  "select * from (SELECT tariffs.`name` as tariffs_name , tariffs.`purpose` , tariffs.`currency`,
+  def self.find_rates_and_tariffs_by_number(user_id, id, phrase)
+    sql= "select * from (SELECT tariffs.`name` as tariffs_name , tariffs.`purpose` , tariffs.`currency`,
     ratedetails.`start_time` , ratedetails.`end_time` , ratedetails.`rate` ,
     destinations.`prefix` , destinations.`direction_code` , destinations.`subcode` , destinations.`name` ,
     aratedetails.`price`, aratedetails.`start_time` as arate_start_time ,aratedetails.`end_time` as arate_end_time

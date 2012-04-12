@@ -1,19 +1,19 @@
 <% content_for :scripts do %>
-  <%= javascript_include_tag("callshop/callshop_invoice") %>
-  <script type="text/javascript">
-    var options = <%= javascript_parameters(@cshop).to_json %>;
+    <%= javascript_include_tag("callshop/callshop_invoice") %>
+    <script type="text/javascript">
+        var options = <%= javascript_parameters(@cshop).to_json %>;
 
-    $(document).ready(function() {
-      add_edit(options.urls.invoice_edit);
-      add_print();
-      add_cancel();
-      add_update(options.urls.update);
-      add_partial_received();
-      add_full_received();
-      sortable_headers(this, options.urls.invoice_list, options.urls.invoice_print, options.urls.invoice_edit);
-      pagination_links(this, options.urls.invoice_list, options.urls.invoice_print, options.urls.invoice_edit);
-    });
-  </script>
+        $(document).ready(function () {
+            add_edit(options.urls.invoice_edit);
+            add_print();
+            add_cancel();
+            add_update(options.urls.update);
+            add_partial_received();
+            add_full_received();
+            sortable_headers(this, options.urls.invoice_list, options.urls.invoice_print, options.urls.invoice_edit);
+            pagination_links(this, options.urls.invoice_list, options.urls.invoice_print, options.urls.invoice_edit);
+        });
+    </script>
 <% end %>
 
 <div class="page_select container_24">
@@ -23,39 +23,41 @@
 <div id="table-wrap">
   <table id="invoice_list" cellpadding="0" cellspacing="0">
     <thead>
-      <tr>
-        <% [["created_at", _('Issue_date')], ["balance", _('Amount')] , ["state", _('Status')], ["comment", _('Comment')], ["invoice_type", _('User_type')]].each{ |col| %>
+    <tr>
+      <% [["created_at", _('Issue_date')], ["balance", _('Amount')], ["state", _('Status')], ["comment", _('Comment')], ["invoice_type", _('User_type')]].each { |col| %>
           <td class="<%= "first" if col[0] == "created_at" %> <%= (col[0] == @search_params[:order_by] ? "sorted-on-#{@search_params[:order_dir].downcase}" : "") %>">
             <a class="sort-col" href="" data-sort-type="<%= col[0] %>"><%= col[1] %></a>
           </td>
-        <% } %>
-        <td>
-          <%= _('View') %>
-        </td>
-        <td class="last">
-          <%= _('Edit') %>
-        </td>
-      </tr>
+      <% } %>
+      <td>
+        <%= _('View') %>
+      </td>
+      <td class="last">
+        <%= _('Edit') %>
+      </td>
+    </tr>
     </thead>
     <tbody id="invoices_list">
-      <% for invoice in @invoices %>
-        <tr id="<%=invoice.id%>" class="booth">
+    <% for invoice in @invoices %>
+        <tr id="<%= invoice.id %>" class="booth">
           <td class="issue_date"><%= invoice.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
           <td class="amount"><%= format_money(invoice.balance, @currency) %></td>
           <td class="status"><%= invoice_state(invoice) %></td>
           <td class="comment"><%= h(invoice.comment) %></td>
           <td class="user_type"><%= invoice.invoice_type %></td>
-          <td><%= link_to "&nbsp;", { :action => "invoice_print", :id => @cshop.id, :invoice_id => invoice.id }, :class => "print"  %></td>
+          <td><%= link_to "&nbsp;", {:action => "invoice_print", :id => @cshop.id, :invoice_id => invoice.id}, :class => "print" %></td>
           <td>
             <div class="btn">
-              <%= link_to "&nbsp;", { :action => "invoice_edit", :id => @cshop.id, :invoice_id => invoice.id }, :class => "edit" %>
+              <%= link_to "&nbsp;", {:action => "invoice_edit", :id => @cshop.id, :invoice_id => invoice.id}, :class => "edit" %>
             </div>
           </td>
         </tr>
-      <% end %>
+    <% end %>
     </tbody>
     <tfoot>
-      <tr><td colspan="7">&nbsp;</td></tr>
+    <tr>
+      <td colspan="7">&nbsp;</td>
+    </tr>
     </tfoot>
   </table>
 </div>

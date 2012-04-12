@@ -6,7 +6,7 @@
 
         <tr class="row2">
           <th align="left"><%= _('User') %>:</th>
-          <td id="user" align="right"> <%= @user.first_name + " " + @user.last_name%> </td>
+          <td id="user" align="right"> <%= @user.first_name + " " + @user.last_name %> </td>
         </tr>
 
         <tr class="row1">
@@ -62,7 +62,7 @@
       <table width="95%" class="maintable">
 
         <tr>
-          <th align="left"> <%= _('Generate') %>: </th>
+          <th align="left"> <%= _('Generate') %>:</th>
           <th align="center"> <%= _('PDF') %> </th>
           <th align="center"> <%= _('CSV') %> </th>
         </tr>
@@ -70,14 +70,14 @@
         <tr class="row1">
           <th align="left"><%= _('Invoice') %>:</th>
           <td align="center">
-            <%= form_tag :action => 'generate_invoice_pdf', :id => @invoice.id  do %>
-              <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice') %>
+            <%= form_tag :action => 'generate_invoice_pdf', :id => @invoice.id do %>
+                <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice') %>
             <% end %>
           </td>
 
           <td align="center">
-            <%= form_tag :action => 'generate_invoice_csv', :id => @invoice.id  do %>
-              <%= image_submit_tag 'icons/excel.png', :title => _('Invoice') %>
+            <%= form_tag :action => 'generate_invoice_csv', :id => @invoice.id do %>
+                <%= image_submit_tag 'icons/excel.png', :title => _('Invoice') %>
             <% end %>
           </td>
         </tr>
@@ -85,14 +85,14 @@
         <tr class="row2">
           <th align="left"><%= _('Invoice_detailed') %>:</th>
           <td align="center">
-            <%= form_tag :action => 'generate_invoice_detailed_pdf', :id => @invoice.id  do %>
-              <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_detailed') %>
+            <%= form_tag :action => 'generate_invoice_detailed_pdf', :id => @invoice.id do %>
+                <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_detailed') %>
             <% end %>
           </td>
 
           <td align="center">
-            <%= form_tag :action => 'generate_invoice_detailed_csv', :id => @invoice.id  do %>
-              <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_detailed') %>
+            <%= form_tag :action => 'generate_invoice_detailed_csv', :id => @invoice.id do %>
+                <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_detailed') %>
             <% end %>
           </td>
         </tr>
@@ -100,13 +100,13 @@
         <tr class="row1">
           <th align="left"><%= _('Invoice_by_CallerID') %>:</th>
           <td align="center">
-            <%= form_tag :action => 'generate_invoice_by_cid_pdf', :id => @invoice.id  do %>
-              <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_by_CallerID') %>
+            <%= form_tag :action => 'generate_invoice_by_cid_pdf', :id => @invoice.id do %>
+                <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_by_CallerID') %>
             <% end %>
           </td>
           <td align="center">
-            <%= form_tag :action => 'generate_invoice_by_cid_csv', :id => @invoice.id  do %>
-              <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_by_CallerID') %>
+            <%= form_tag :action => 'generate_invoice_by_cid_csv', :id => @invoice.id do %>
+                <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_by_CallerID') %>
             <% end %>
           </td>
         </tr>
@@ -117,7 +117,7 @@
                               <th align="left"><%= _('Invoice_CDR') %>:</th>
 
                                         <td align="center">
-          <%= form_tag :action => 'generate_invoice_cdr_pdf', :id => @invoice.id  do %>
+          <%= form_tag :action => 'generate_invoice_cdr_pdf', :id => @invoice.id do %>
             <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_CDR') %>
           <% end %>
                                         </td>
@@ -125,7 +125,7 @@
 
 
                                         <td align="center">
-          <%= form_tag :action => 'generate_invoice_cdr_csv', :id => @invoice.id  do %>
+          <%= form_tag :action => 'generate_invoice_cdr_csv', :id => @invoice.id do %>
             <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_CDR') %>
           <% end %>
                                         </td>
@@ -138,7 +138,9 @@
 
   </tr>
 
-  <tr><td height="20"></td></tr>
+  <tr>
+    <td height="20"></td>
+  </tr>
 
   <tr>
     <td>
@@ -151,19 +153,19 @@
           <th align="right"><%= _('Line_Total') %></th>
         </tr>
         <% @invoice_invoicedetails.each_with_index { |id, i| %>
-          <tr class="row<%= (i % 2 + 1).to_s %>">
-            <%
-            qt = ""
-            tp = id.price
-            if id.quantity
-              qt = id.quantity
-              tp = qt * id.price if id.invdet_type > 0
-            end -%>
-            <td id="name_<%= id.id %>" align="left"> <%= id.name %> </td>
-            <td id="quantity_<%= id.id %>" align="right"> <%= qt %> </td>
-            <td id="price_<%= id.id %>" align="right"> <%= nice_number(id.price) %> </td>
-            <td id="total_price_<%= id.id %>" align="right"> <%= nice_number(tp) %> </td>
-          </tr>
+            <tr class="row<%= (i % 2 + 1).to_s %>">
+              <%
+                 qt = ""
+                 tp = id.price
+                 if id.quantity
+                   qt = id.quantity
+                   tp = qt * id.price if id.invdet_type > 0
+                 end -%>
+              <td id="name_<%= id.id %>" align="left"> <%= id.name %> </td>
+              <td id="quantity_<%= id.id %>" align="right"> <%= qt %> </td>
+              <td id="price_<%= id.id %>" align="right"> <%= nice_number(id.price) %> </td>
+              <td id="total_price_<%= id.id %>" align="right"> <%= nice_number(tp) %> </td>
+            </tr>
         <% } -%>
       </table>
     </td>

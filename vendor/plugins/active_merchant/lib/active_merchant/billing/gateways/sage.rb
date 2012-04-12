@@ -22,7 +22,7 @@ module ActiveMerchant #:nodoc:
         @options = options
         super
       end
-      
+
       # Performs an authorization transaction
       # 
       # ==== Parameters
@@ -52,7 +52,7 @@ module ActiveMerchant #:nodoc:
       def authorize(money, credit_card, options = {})
         bankcard.authorize(money, credit_card, options)
       end
-      
+
       # Performs a purchase, which is essentially an authorization and capture in a single operation.
       # 
       # ==== Parameters
@@ -94,8 +94,8 @@ module ActiveMerchant #:nodoc:
         else
           bankcard.purchase(money, source, options)
         end
-      end                       
-    
+      end
+
       # Captures authorized funds.
       #
       # ==== Parameters
@@ -105,7 +105,7 @@ module ActiveMerchant #:nodoc:
       def capture(money, reference, options = {})
         bankcard.capture(money, reference, options)
       end
-      
+
       # Voids a prior transaction. Works for both CreditCard and Check transactions.
       #
       # ==== Parameters
@@ -132,15 +132,15 @@ module ActiveMerchant #:nodoc:
           bankcard.credit(money, source, options)
         end
       end
-          
+
       private
       def bankcard
         @bankcard ||= SageBankcardGateway.new(@options)
       end
-      
+
       def virtual_check
         @virtual_check ||= SageVirtualCheckGateway.new(@options)
-      end 
+      end
     end
   end
 end

@@ -2,100 +2,100 @@
 
 
 <div align="left" class="nb">
- <%= form_tag(:action => 'user_logins') do %>
-     <%= _('From') %>: <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
-     &nbsp;&nbsp;<%= _('to') %>: <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
-     &nbsp;&nbsp;<%= submit_tag _('Change_date'), :disable_with=>_('Processing..')%>
-<% end %>
+  <%= form_tag(:action => 'user_logins') do %>
+      <%= _('From') %>
+      : <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
+      &nbsp;&nbsp;<%= _('to') %>
+      : <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
+      &nbsp;&nbsp;<%= submit_tag _('Change_date'), :disable_with => _('Processing..') %>
+  <% end %>
 </div>
 <% if @total_pages > 1 %>
     <br/>
     <%= render :partial => "page_select_header" %>
 <% end %>
-    
+
 <br/>
 
 <% i = 0 %>
-<% @days.date.size.times do%>
+<% @days.date.size.times do %>
 
-<table width="100%"  class="bordered">
+    <table width="100%" class="bordered">
 
-<tr>
-
-
-
-<td width ="100%" valign="top">
+      <tr>
 
 
-
-<table class="maintable" width="100%">
-    <tr>
-        <td colspan="5">
-            <b><%= nice_date(@days.date[i]) %></b>
-        </td>
-    </tr>
-
-    <tr class="row1">
-        <th align="center"><%= _('Login') %></th>
-        <th align="center"><%= _('Logout') %></th>
-        <th align="center"><%= _('Duration') %></th>        
-        <th align="center"><%= _('Calls') %></th> 
-        <th></th>
-    </tr>
-
-   <% ii = 0 %>
-   <% if @days.login[i] %>
-    <% @days.login[i].size.times do %>
-    <tr class="row<%= (ii % 2 + 1).to_s %>">
-        <td align="center">      <%= nice_date_time(@days.login[i][ii])%> </td>
-        <td align="center">     <%= nice_date_time(@days.logout[i][ii])%></td>
-        <td align="center">    <%= nice_time @days.duration[i][ii] %></td>   
-<% lld = @user.last_login.date if @user.last_login
-   total_calls = @user.calls("answered", @days.login[i][ii].strftime("%Y-%m-%d %H:%M:%S"), @days.logout[i][ii].strftime("%Y-%m-%d %H:%M:%S")).size
-%>
+        <td width="100%" valign="top">
 
 
-        <td align="center">    
-            <% if total_calls > 0%>
-                <%= link_to _('Calls'), {:controller => "stats", :action => "call_list_from_link", :id => @user.id, :call_type => "answered", :date_from => @days.login[i][ii].strftime("%Y-%m-%d %H:%M:%S"), :date_till => @days.logout[i][ii].strftime("%Y-%m-%d %H:%M:%S")}, {:title => _('Calls')} if @user.last_login %> (<%= total_calls %>)</td>   
-            <% else %>
-                <%= _('No_calls') %>
+          <table class="maintable" width="100%">
+            <tr>
+              <td colspan="5">
+                <b><%= nice_date(@days.date[i]) %></b>
+              </td>
+            </tr>
+
+            <tr class="row1">
+              <th align="center"><%= _('Login') %></th>
+              <th align="center"><%= _('Logout') %></th>
+              <th align="center"><%= _('Duration') %></th>
+              <th align="center"><%= _('Calls') %></th>
+              <th></th>
+            </tr>
+
+            <% ii = 0 %>
+            <% if @days.login[i] %>
+                <% @days.login[i].size.times do %>
+                    <tr class="row<%= (ii % 2 + 1).to_s %>">
+                      <td align="center">      <%= nice_date_time(@days.login[i][ii]) %> </td>
+                      <td align="center">     <%= nice_date_time(@days.logout[i][ii]) %></td>
+                      <td align="center">    <%= nice_time @days.duration[i][ii] %></td>
+                      <% lld = @user.last_login.date if @user.last_login
+                         total_calls = @user.calls("answered", @days.login[i][ii].strftime("%Y-%m-%d %H:%M:%S"), @days.logout[i][ii].strftime("%Y-%m-%d %H:%M:%S")).size
+                      %>
+
+
+                      <td align="center">
+                        <% if total_calls > 0 %>
+                            <%= link_to _('Calls'), {:controller => "stats", :action => "call_list_from_link", :id => @user.id, :call_type => "answered", :date_from => @days.login[i][ii].strftime("%Y-%m-%d %H:%M:%S"), :date_till => @days.logout[i][ii].strftime("%Y-%m-%d %H:%M:%S")}, {:title => _('Calls')} if @user.last_login %>
+                            (<%= total_calls %>)</td>
+                        <% else %>
+                            <%= _('No_calls') %>
+                        <% end %>
+                        <td align="center">    <%= link_to b_pdf, :action => "call_list_to_pdf", :id => @user.id, :date_from => @days.login[i][ii].strftime("%Y-%m-%d %H:%M:%S"), :date_till => @days.login[i][ii].strftime("%Y-%m-%d %H:%M:%S"), :date_till => @days.login[i][ii].strftime("%Y-%m-%d %H:%M:%S"), :date_till => @days.logout[i][ii].strftime("%Y-%m-%d %H:%M:%S"), :call_type => "answered" if total_calls > 0 %></td>
+                        </tr>
+                    <% ii += 1 %>
+                <% end %>
             <% end %>
-        <td align="center">    <%= link_to b_pdf, :action => "call_list_to_pdf", :id => @user.id, :date_from => @days.login[i][ii].strftime("%Y-%m-%d %H:%M:%S"), :date_till => @days.login[i][ii].strftime("%Y-%m-%d %H:%M:%S"), :date_till => @days.login[i][ii].strftime("%Y-%m-%d %H:%M:%S"), :date_till => @days.logout[i][ii].strftime("%Y-%m-%d %H:%M:%S"), :call_type => "answered" if total_calls > 0%></td>    
-    </tr>
-        <% ii += 1 %>
-    <% end %>
-   <% end %>
 
-</table>
+          </table>
 
-</td>
+        </td>
 
-<td>  
-  <!-- amcolumn script-->
-<div id="flashcontent<%= i %>"><strong>You need to upgrade your Flash Player</strong></div>
-<script type="text/javascript">
-  // <![CDATA[
-  var so = new SWFObject("<%= Web_Dir %>/swf/amcolumn.swf", "amcolumn", "200", "150", "8", "#FFFFFF");
-        so.addVariable("path", "<%= Web_Dir %>/swf/");
-       	so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/amcolumn_2.xml"));
-        so.addParam("wmode", "transparent");
-		so.addVariable("chart_data",  escape("<%=  @Login_graph[i]%>"));
-		so.write("flashcontent<%= i %>");
-  // ]]>
-</script>
-<!-- end of amcolumn script -->
-
-    
-      
-    <!--  <div align="center">         <img src="<%= Web_Dir %>/graphs/graph_bar?id=log_graph<%= i %>" alt="Graph" /> </div> -->
-</td>
+        <td>
+          <!-- amcolumn script-->
+          <div id="flashcontent<%= i %>"><strong>You need to upgrade your Flash Player</strong></div>
+          <script type="text/javascript">
+              // <![CDATA[
+              var so = new SWFObject("<%= Web_Dir %>/swf/amcolumn.swf", "amcolumn", "200", "150", "8", "#FFFFFF");
+              so.addVariable("path", "<%= Web_Dir %>/swf/");
+              so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/amcolumn_2.xml"));
+              so.addParam("wmode", "transparent");
+              so.addVariable("chart_data", escape("<%=  @Login_graph[i]%>"));
+              so.write("flashcontent<%= i %>");
+              // ]]>
+          </script>
+          <!-- end of amcolumn script -->
 
 
-</tr>
-</table>
-<br/><br/>
+          <!--  <div align="center">         <img src="<%= Web_Dir %>/graphs/graph_bar?id=log_graph<%= i %>" alt="Graph" /> </div> -->
+        </td>
 
-    <% i+= 1%>
+
+      </tr>
+    </table>
+    <br/><br/>
+
+    <% i+= 1 %>
 <% end %>
 

@@ -43,25 +43,25 @@ class Google4R::Checkout::TaxRuleTest < Test::Unit::TestCase
     @table = TaxTable.new(false)
     @rule = @table.create_rule
   end
-  
+
   def test_tax_rule_gets_initialized_correctly
     assert_equal @table, @rule.table
     assert_nil @rule.area
     assert_nil @rule.rate
     assert !@rule.shipping_taxed
   end
-  
+
   def test_tax_rule_behaves_correctly
     assert_respond_to @rule, :table
     assert_respond_to @rule, :area
     assert_respond_to @rule, :rate
     assert_respond_to @rule, :shipping_taxed
   end
-  
+
   def test_tax_rule_accessors_work
     @rule.area = :area
     assert_equal :area, @rule.area
-    
+
     @rule.rate = 0.5
     assert_equal 0.5, @rule.rate
 

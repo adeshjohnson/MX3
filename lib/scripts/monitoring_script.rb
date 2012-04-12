@@ -9,47 +9,47 @@ script_running = `ps ax | grep monitoring_script.rb | grep -v grep | wc -l`
 if script_running.to_i > 1
   puts "FAIL : Script is already running!!!"
 else
-  
+
   require 'rubygems'
   require 'active_record'
   require 'optparse'
   require 'digest/sha1'
 
   options = {}
-  optparse = OptionParser.new do|opts|
+  optparse = OptionParser.new do |opts|
 
     # Define the options, and what they do
     options[:address] = nil
-    opts.on( '-a', "--address ADDRESS', 'Api address, default 'http://localhost/billing/api/ma_activate'" ) do|a|
+    opts.on('-a', "--address ADDRESS', 'Api address, default 'http://localhost/billing/api/ma_activate'") do |a|
       options[:address] = a
     end
 
     options[:name] = nil
-    opts.on( '-n', '--name NAME', "Database name, default 'mor'" ) do|n|
+    opts.on('-n', '--name NAME', "Database name, default 'mor'") do |n|
       options[:name] = n
     end
 
     options[:user] = nil
-    opts.on( '-u', '--user USER', "Database user, default 'mor'" ) do|u|
+    opts.on('-u', '--user USER', "Database user, default 'mor'") do |u|
       options[:user] = u
     end
 
     options[:pasw] = nil
-    opts.on( '-p', '--password PASSWORD', "Database password, default 'mor'" ) do|p|
+    opts.on('-p', '--password PASSWORD', "Database password, default 'mor'") do |p|
       options[:pasw] = p
     end
 
     options[:host] = nil
-    opts.on( '-s', '--server HOST', "Database host, default 'localhost'" ) do|h|
+    opts.on('-s', '--server HOST', "Database host, default 'localhost'") do |h|
       options[:host] = h
     end
 
     options[:key] = nil
-    opts.on( '-k', '--key KEY', "API secret key, default ''" ) do|h|
+    opts.on('-k', '--key KEY', "API secret key, default ''") do |h|
       options[:key] = h
     end
 
-    opts.on( '-h', '--help', 'Display this screen' ) do
+    opts.on('-h', '--help', 'Display this screen') do
       puts opts
       exit
     end
@@ -62,10 +62,10 @@ else
   Api_addres = options[:address].to_s.empty? ? 'http://localhost/billing/api/ma_activate' : options[:address].to_s
   Api_key = options[:key].to_s.empty? ? '' : options[:key].to_s
   Debug_file = '/home/arunas/mor/12/log/monitorings.log'
-  Database_name = options[:name].to_s.empty?  ? 'mor'  : options[:name]
-  Database_username = options[:user].to_s.empty?  ? 'mor'  : options[:user]
-  Database_password = options[:pasw].to_s.empty?  ? ''  : options[:pasw]
-  Database_host =  options[:host].to_s.empty? ? 'localhost'  : options[:host]
+  Database_name = options[:name].to_s.empty? ? 'mor' : options[:name]
+  Database_username = options[:user].to_s.empty? ? 'mor' : options[:user]
+  Database_password = options[:pasw].to_s.empty? ? '' : options[:pasw]
+  Database_host = options[:host].to_s.empty? ? 'localhost' : options[:host]
 
   begin
     #---------- connect to DB ----------------------
@@ -83,67 +83,66 @@ else
       require 'uri'
 
 
-
       def get_users(user_type = nil)
         find_all_users_sql = self.owner_id == 0 ? '' : " AND users.owner_id = #{self.owner_id} "
 
         if self.monitoring_type == 'simultaneous'
           if user_type && user_type =~ /postpaid|prepaid/ # monitoring for postpaids and prepaids
             users = User.find(:all,
-              :select => 'users.id',
-              :conditions => ["callsA.calldate between callsB.calldate and callsB.calldate + INTERVAL callsB.duration SECOND AND callsA.uniqueid != callsB.uniqueid AND users.blocked = 0 AND users.postpaid = ? AND users.ignore_global_monitorings = 0 #{find_all_users_sql}", ((self.user_type == "postpaid") ? 1 : 0) ],
-              :group => "users.id",
-              :joins => "JOIN calls callsA ON (callsA.user_id = users.id AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))
+                              :select => 'users.id',
+                              :conditions => ["callsA.calldate between callsB.calldate and callsB.calldate + INTERVAL callsB.duration SECOND AND callsA.uniqueid != callsB.uniqueid AND users.blocked = 0 AND users.postpaid = ? AND users.ignore_global_monitorings = 0 #{find_all_users_sql}", ((self.user_type == "postpaid") ? 1 : 0)],
+                              :group => "users.id",
+                              :joins => "JOIN calls callsA ON (callsA.user_id = users.id AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))
                          JOIN calls callsB ON (callsA.dst = callsB.dst AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
           elsif user_type && user_type =~ /all/ # monitoring for all users
             users = User.find(:all,
-              :select => 'users.id',
-              :conditions => ["callsA.calldate between callsB.calldate and callsB.calldate + INTERVAL callsB.duration SECOND AND callsA.uniqueid != callsB.uniqueid AND users.blocked = 0 AND users.ignore_global_monitorings = 0 #{find_all_users_sql}"],
-              :group => "users.id",
-              :joins => "JOIN calls callsA ON (callsA.user_id = users.id AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))
+                              :select => 'users.id',
+                              :conditions => ["callsA.calldate between callsB.calldate and callsB.calldate + INTERVAL callsB.duration SECOND AND callsA.uniqueid != callsB.uniqueid AND users.blocked = 0 AND users.ignore_global_monitorings = 0 #{find_all_users_sql}"],
+                              :group => "users.id",
+                              :joins => "JOIN calls callsA ON (callsA.user_id = users.id AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))
                         JOIN calls callsB ON (callsA.dst = callsB.dst AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
           else # monitoring for individual users
             users = User.find(:all,
-              :select => 'users.id',
-              :conditions => ["callsA.calldate between callsB.calldate and callsB.calldate + INTERVAL callsB.duration SECOND AND callsA.uniqueid != callsB.uniqueid AND users.blocked = 0 AND users.ignore_global_monitorings = 0 #{find_all_users_sql}", self.id],
-              :group => "users.id",
-              :joins => "JOIN calls callsA ON (callsA.user_id = users.id AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))
+                              :select => 'users.id',
+                              :conditions => ["callsA.calldate between callsB.calldate and callsB.calldate + INTERVAL callsB.duration SECOND AND callsA.uniqueid != callsB.uniqueid AND users.blocked = 0 AND users.ignore_global_monitorings = 0 #{find_all_users_sql}", self.id],
+                              :group => "users.id",
+                              :joins => "JOIN calls callsA ON (callsA.user_id = users.id AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))
                         JOIN calls callsB ON (callsA.dst = callsB.dst AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
           end
         else
           operator = (self.monitoring_type == 'above' ? '>' : '<')
 
           if user_type && user_type =~ /postpaid|prepaid/ # monitoring for postpaids and prepaids
-  
+
             Monitoring.debug("Monitoring for POSTPAID OR PREPAID users")
 
             users = User.find(:all,
-              :select => 'users.id',
-              :conditions => ["users.blocked = 0 AND users.postpaid = ? AND users.ignore_global_monitorings = 0 #{find_all_users_sql}", ((self.user_type == "postpaid") ? 1 : 0) ],
-              :group => "users.id HAVING SUM(#{SqlExport.user_price_sql}) #{operator} #{self.amount.to_f}",
-              :joins => "JOIN calls ON (calls.user_id = users.id AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
+                              :select => 'users.id',
+                              :conditions => ["users.blocked = 0 AND users.postpaid = ? AND users.ignore_global_monitorings = 0 #{find_all_users_sql}", ((self.user_type == "postpaid") ? 1 : 0)],
+                              :group => "users.id HAVING SUM(#{SqlExport.user_price_sql}) #{operator} #{self.amount.to_f}",
+                              :joins => "JOIN calls ON (calls.user_id = users.id AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
           elsif user_type && user_type =~ /all/ # monitoring for all users
-          
+
             Monitoring.debug("Monitoring for ALL users")
-        
+
             users = User.find(:all,
-              :select => 'users.id',
-              :conditions => ["users.blocked = 0 AND users.ignore_global_monitorings = 0 #{find_all_users_sql}", self.id],
-              :group => "users.id HAVING SUM(#{SqlExport.user_price_sql}) #{operator} #{self.amount.to_f}",
-              :joins => "JOIN calls ON (calls.user_id = users.id AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
+                              :select => 'users.id',
+                              :conditions => ["users.blocked = 0 AND users.ignore_global_monitorings = 0 #{find_all_users_sql}", self.id],
+                              :group => "users.id HAVING SUM(#{SqlExport.user_price_sql}) #{operator} #{self.amount.to_f}",
+                              :joins => "JOIN calls ON (calls.user_id = users.id AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
 
             Monitoring.debug("users.blocked = 0 AND users.ignore_global_monitorings = 0 #{find_all_users_sql}")
             Monitoring.debug("JOIN calls ON (calls.user_id = users.id AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
             Monitoring.debug("users.id HAVING SUM(#{SqlExport.user_price_sql}) #{operator} #{self.amount.to_f}")
           else # monitoring for individual users
-        
-    	    Monitoring.debug("Monitoring for PERSONAL users, amount: #{self.amount.to_f}, period: #{self.period_in_past.to_i} min")
-        
+
+            Monitoring.debug("Monitoring for PERSONAL users, amount: #{self.amount.to_f}, period: #{self.period_in_past.to_i} min")
+
             users = User.find(:all,
-              :select =>'users.id',
-              :conditions => "monitorings_users.monitoring_id = #{self.id} AND users.blocked = 0 #{find_all_users_sql}",
-              :group=>"users.id HAVING SUM(#{SqlExport.user_price_sql}) #{operator} #{self.amount.to_f}",
-              :joins=>"JOIN calls ON (calls.user_id = users.id AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)) JOIN monitorings_users ON (users.id = monitorings_users.user_id)")
+                              :select => 'users.id',
+                              :conditions => "monitorings_users.monitoring_id = #{self.id} AND users.blocked = 0 #{find_all_users_sql}",
+                              :group => "users.id HAVING SUM(#{SqlExport.user_price_sql}) #{operator} #{self.amount.to_f}",
+                              :joins => "JOIN calls ON (calls.user_id = users.id AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)) JOIN monitorings_users ON (users.id = monitorings_users.user_id)")
           end
         end
 
@@ -151,9 +150,9 @@ else
       end
 
       def send_notice_to_api(users)
-        h =  Digest::SHA1.hexdigest(self.id.to_s + users.map(&:id).join(",") + self.block.to_s + self.email.to_s + self.mtype.to_s + Api_key.to_s)
+        h = Digest::SHA1.hexdigest(self.id.to_s + users.map(&:id).join(",") + self.block.to_s + self.email.to_s + self.mtype.to_s + Api_key.to_s)
         res = Net::HTTP.post_form(URI.parse(Api_addres),
-          {'monitoring_id' => self.id, 'block' => self.block, 'email' => self.email, 'mtype' => self.mtype, 'users' => users.map(&:id).join(","), :hash=>h})
+                                  {'monitoring_id' => self.id, 'block' => self.block, 'email' => self.email, 'mtype' => self.mtype, 'users' => users.map(&:id).join(","), :hash => h})
 
         Monitoring.debug("#{Time.now().to_s(:db)} --- MONITORING notice send to #{Api_addres}") if res
         Monitoring.debug("#{res.body}") if res
@@ -172,14 +171,14 @@ else
     Monitoring.debug("\n*******************************************************************************************************")
     Monitoring.debug("#{Time.now().to_s(:db)} --- STARTING MONITORING ")
 
-    monitorings = Monitoring.find(:all, :conditions=>'active = 1')
+    monitorings = Monitoring.find(:all, :conditions => 'active = 1')
 
     if monitorings and monitorings.size > 0
       Monitoring.debug("Found #{monitorings.size} monitorings")
     else
       Monitoring.debug("Monitorings not found...")
     end
-    
+
     for monitoring in monitorings
       users = monitoring.get_users(monitoring.user_type)
       if users and users.size > 0
@@ -188,12 +187,12 @@ else
       end
     end
     puts "OK"
- 
-  rescue  Exception => e
+
+  rescue Exception => e
     #------------------ ERROR -------------------
     File.open(Debug_file, "a") { |f|
       f << "******************************************************************************************************* \n"
-      f << "#{Time.now().to_s(:db)} --- ERROR ! \n #{e.class} \n #{e.message} \n" 
+      f << "#{Time.now().to_s(:db)} --- ERROR ! \n #{e.class} \n #{e.message} \n"
       f << e.backtrace.join("\n")
       f << "\n\n"
     }

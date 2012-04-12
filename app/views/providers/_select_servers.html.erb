@@ -1,4 +1,6 @@
-<tr><td height="20"></td></tr>
+<tr>
+  <td height="20"></td>
+</tr>
 <tr>
   <td class="bottom_border" colspan=2>
     <b><%= _('Servers') %></b>
@@ -10,12 +12,12 @@
 <tr>
   <td colspan="2">
     <table width="100%">
-      <%@servers.each{|serv|%>
-      <tr>
-        <td><%= nice_server(serv)%></td>
-        <td><%= check_box_tag "add_to_servers[#{serv.server_id}]", 1, @serverproviders[serv.server_id] == 1 %></td>
-      </tr>
-      <%}%>
+      <% @servers.each { |serv| %>
+          <tr>
+            <td><%= nice_server(serv) %></td>
+            <td><%= check_box_tag "add_to_servers[#{serv.server_id}]", 1, @serverproviders[serv.server_id] == 1 %></td>
+          </tr>
+      <% } %>
     </table>
   </td>
 </tr>

@@ -1,6 +1,6 @@
 <% if @results and @results.length > 0 %>
-  <%= draw_flag(@dest.direction_code)%> <%= @results %>
+    <%= draw_flag(@dest.direction_code) %> <%= @results %>
 <% else %>
-  <br />
+    <br/>
 <% end %>
-<%=  hidden_field 'test_rezult', '' %>
+<%= hidden_field 'test_rezult', '' %>

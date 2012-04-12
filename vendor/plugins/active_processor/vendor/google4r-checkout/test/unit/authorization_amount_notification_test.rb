@@ -53,10 +53,10 @@ class Google4R::Checkout::AuthorizationAmountNotificationTest < Test::Unit::Test
 </authorization-amount-notification>
 }
   end
-  
+
   def test_create_from_element_works_correctly
     root = REXML::Document.new(@example_xml).root
-    
+
     notification = AuthorizationAmountNotification.create_from_element(root, @frontend)
 
     assert_equal 'bea6bc1b-e1e2-44fe-80ff-2391b25c2510', notification.serial_number

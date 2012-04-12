@@ -5,7 +5,7 @@ class Callerid < ActiveRecord::Base
   validates_uniqueness_of :cli, :message => _('Such_CLI_exists')
   validates_presence_of :cli, :message => _('Please_enter_details')
   validates_numericality_of :cli, :message => _("CLI_must_be_number")
-  
+
   def Callerid.use_for_callback(cli, status)
     if status.to_i == 1
       sql = "UPDATE callerids SET callerids.email_callback = '0'
@@ -20,16 +20,16 @@ class Callerid < ActiveRecord::Base
       ActiveRecord::Base.connection.update(sql2)
     end
   end
-  
-  
+
+
   def Callerid.set_callback_from_emails(old_callerid, new_callerid)
-    
+
     cli3 = Callerid.find(:first, :conditions => "cli = '#{old_callerid}' AND email_callback = '1' ")
     if  cli3
       cli = Callerid.find(:first, :conditions => "cli = '#{new_callerid}'")
       if cli
         MorLog.my_debug "changed: #{old_callerid} to #{new_callerid}"
-        Callerid.use_for_callback(cli,1)
+        Callerid.use_for_callback(cli, 1)
       else
         MorLog.my_debug "Create new Callerid, Callerid.cli=#{new_callerid}"
         cli2 = Callerid.new
@@ -41,11 +41,11 @@ class Callerid < ActiveRecord::Base
         cli2.added_at = Time.now
         cli2.save
         MorLog.my_debug "changed with creating: #{old_callerid} to #{new_callerid}"
-        Callerid.use_for_callback(cli2,1)
+        Callerid.use_for_callback(cli2, 1)
       end
-                
+
       Action.add_action2(0, "email_callback_change", "completed", "#{old_callerid} changed to #{new_callerid}")
-      
+
     else
       MorLog.my_debug "Email Callback ERROR: #{old_callerid} not found or not allowed for email callback, dst: #{new_callerid}"
       Action.add_action2(0, "email_callback_change", "error", "#{old_callerid} not found or not allowed for email callback, dst: #{new_callerid}")

@@ -24,7 +24,7 @@ class ActiveProcessor::OsmpController < ActiveProcessor::BaseController
       ActiveProcessor.debug("  > Command: #{params[:command]}")
       fail_request(transaction[:id], "Bad command.") and return false
     end
-    
+
     if !params[:sum] or params[:sum].to_f <= 0
       ActiveProcessor.debug("  > Sum: #{params[:sum]}")
       fail_request(transaction[:id], "Bad sum.") and return false
@@ -44,10 +44,10 @@ class ActiveProcessor::OsmpController < ActiveProcessor::BaseController
       ActiveProcessor.debug("  > Date: #{params[:txn_date]}")
       fail_request(transaction[:id], "Bad transaction date.") and return false
     end
-    
+
     begin
       ActiveProcessor.debug("OSMP accessed.")
-      @engine = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => transaction[:user].id }).enabled_by(transaction[:user].owner_id)
+      @engine = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => transaction[:user].id}).enabled_by(transaction[:user].owner_id)
       @gateway = @engine.query
       if @gateway and @engine
         transaction[:date] = params[:txn_date]
@@ -57,34 +57,34 @@ class ActiveProcessor::OsmpController < ActiveProcessor::BaseController
         transaction[:currency] = @gateway.get(:config, "default_geteway_currency")
         ActiveProcessor.debug("  > COMMAND :#{transaction[:command]}")
         case transaction[:command].to_s
-        when "check" then
-          ActiveProcessor.debug("  > CHECKING")         
-          render :xml=> @gateway.check(transaction) and return false
-        when "pay" then
-          ActiveProcessor.debug("  > PAY")
-          payment =  Payment.find(:first, :conditions => ["date_added = ? AND paymenttype = ? AND transaction_id = ?", transaction[:date], [params[:engine], params[:gateway]].join("_"), transaction[:id]])
-          if payment
-            render :xml => @gateway.error_response(params[:txn_id]) and return false
-          else
-            @engine.pay_with(@gateway, request.remote_ip, params.merge(:transaction => transaction))
-            payment =  Payment.find(:first, :conditions => ["date_added = ? AND paymenttype = ? AND transaction_id = ?", transaction[:date], [params[:engine], params[:gateway]].join("_"), transaction[:id]])
+          when "check" then
+            ActiveProcessor.debug("  > CHECKING")
+            render :xml => @gateway.check(transaction) and return false
+          when "pay" then
+            ActiveProcessor.debug("  > PAY")
+            payment = Payment.find(:first, :conditions => ["date_added = ? AND paymenttype = ? AND transaction_id = ?", transaction[:date], [params[:engine], params[:gateway]].join("_"), transaction[:id]])
             if payment
-              render :xml => @gateway.payment_status(payment) and return false
-            else
               render :xml => @gateway.error_response(params[:txn_id]) and return false
+            else
+              @engine.pay_with(@gateway, request.remote_ip, params.merge(:transaction => transaction))
+              payment = Payment.find(:first, :conditions => ["date_added = ? AND paymenttype = ? AND transaction_id = ?", transaction[:date], [params[:engine], params[:gateway]].join("_"), transaction[:id]])
+              if payment
+                render :xml => @gateway.payment_status(payment) and return false
+              else
+                render :xml => @gateway.error_response(params[:txn_id]) and return false
+              end
             end
-          end
-          redirect_to :action => :index and return false
+            redirect_to :action => :index and return false
         end
-        else
-          flash[:notice] = _("Inactive_Gateway")
-          redirect_to :controller => "/callc", :action => "main" and return false
-        end
+      else
+        flash[:notice] = _("Inactive_Gateway")
+        redirect_to :controller => "/callc", :action => "main" and return false
+      end
     rescue Exception => e
       MorLog.log_exception(e, transaction[:id], "OSMP_CONTROLLER", "NOTIFY")
       ActiveProcessor.debug("  > EXPCEPTION IN OSMP")
       fail_request(transaction[:id], "Internal error.") and return false
-      
+
     end
   end
 
@@ -92,8 +92,8 @@ class ActiveProcessor::OsmpController < ActiveProcessor::BaseController
 
   def fail_request(tnx_id, comment)
     xml = Builder::XmlMarkup.new
-    xml.instruct!(:xml, :version=>"1.0")
-    render :xml => xml.response{
+    xml.instruct!(:xml, :version => "1.0")
+    render :xml => xml.response {
       xml.osmp_txn_id(tnx_id)
       xml.result(300)
       xml.comment(comment)
@@ -103,8 +103,8 @@ class ActiveProcessor::OsmpController < ActiveProcessor::BaseController
   # a little duplication with ospm lib
   def user_not_found_response(tnx_id)
     xml = Builder::XmlMarkup.new
-    xml.instruct!(:xml, :version=>"1.0")
-    render :xml => xml.response{
+    xml.instruct!(:xml, :version => "1.0")
+    render :xml => xml.response {
       xml.osmp_txn_id(tnx_id)
       xml.result(5)
       xml.comment("The subscribers ID is not found (Wrong number)")

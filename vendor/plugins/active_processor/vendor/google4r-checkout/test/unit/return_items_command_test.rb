@@ -45,7 +45,7 @@ class Google4R::Checkout::ReturnItemsCommandTest < Test::Unit::TestCase
     @item_info1 = ItemInfo.new('A1')
     @item_info2 = ItemInfo.new('B2')
     @command.item_info_arr = [@item_info1, @item_info2]
-    
+
 
     @sample_xml=%Q{<?xml version='1.0' encoding='UTF-8'?>
 <return-items xmlns='http://checkout.google.com/schema/2' google-order-number='841171949013218'>
@@ -62,8 +62,8 @@ class Google4R::Checkout::ReturnItemsCommandTest < Test::Unit::TestCase
   end
 
   def test_behaves_correctly
-    [ :google_order_number, :item_info_arr, :send_email,
-      :google_order_number=, :item_info_arr=, :send_email= ].each do |symbol|
+    [:google_order_number, :item_info_arr, :send_email,
+     :google_order_number=, :item_info_arr=, :send_email=].each do |symbol|
       assert_respond_to @command, symbol
     end
   end

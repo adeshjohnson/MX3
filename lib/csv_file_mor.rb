@@ -27,7 +27,7 @@ module CsvFileMor
     file_id = 0
     file_name_array = []
     file_split = File.new(@@path.to_s + options[:cdr_import_file_name]+"_#{file_id.to_i}#{@@exct}", 'w')
-    file_name_array << {:f_name=>options[:cdr_import_file_name]+"_#{file_id.to_i}#{@@exct}", :f_used=>0 }
+    file_name_array << {:f_name => options[:cdr_import_file_name]+"_#{file_id.to_i}#{@@exct}", :f_used => 0}
     file.each_line { |line|
       if i < 10000
         file_split << line
@@ -36,12 +36,12 @@ module CsvFileMor
         file_id +=1
         file_split.close
         file_split = File.new(@@path.to_s + options[:cdr_import_file_name]+"_#{file_id.to_i}#{@@exct}", 'w')
-        file_name_array << {:f_name=>options[:cdr_import_file_name]+"_#{file_id.to_i}#{@@exct}", :f_used=>0 }
+        file_name_array << {:f_name => options[:cdr_import_file_name]+"_#{file_id.to_i}#{@@exct}", :f_used => 0}
       end
       i+=1
     }
     file_split.close
-    
+
 
     return file_name_array
   end
@@ -67,10 +67,10 @@ module CsvFileMor
 #    if options[:remove_flags]
 #      file_hash.each{|f| f[:f_used] = 0}
 #    end
-MorLog.my_debug @@path+file_hash[:f_name]
+    MorLog.my_debug @@path+file_hash[:f_name]
     file = nil
     file = File.open(@@path+file_hash[:f_name], 'r').read if File.exist?(@@path+file_hash[:f_name])
- MorLog.my_debug file
+    MorLog.my_debug file
     return file
   end
 

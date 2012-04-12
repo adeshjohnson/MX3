@@ -3,18 +3,18 @@ require 'test_helper'
 
 class ChronopayHelperTest < Test::Unit::TestCase
   include ActiveMerchant::Billing::Integrations
-  
+
   def setup
-    @helper = Chronopay::Helper.new('order-500','003176-0001-0001', :amount => 500, :currency => 'CAD')
+    @helper = Chronopay::Helper.new('order-500', '003176-0001-0001', :amount => 500, :currency => 'CAD')
   end
- 
+
   def test_basic_helper_fields
     assert_field 'cs1', 'order-500'
     assert_field 'product_id', '003176-0001-0001'
     assert_field 'product_price', '500'
     assert_field 'product_price_currency', 'CAD'
   end
-  
+
   def test_customer_fields
     @helper.customer :first_name => 'Cody', :last_name => 'Fauser'
     assert_field 'f_name', 'Cody'
@@ -27,7 +27,7 @@ class ChronopayHelperTest < Test::Unit::TestCase
                             :city => 'Ottawa',
                             :state => 'On',
                             :zip => '90210'
-   
+
     assert_field 'country', 'CAN'
     assert_field 'street', '1 My Street'
     assert_field 'state', 'On'
@@ -56,11 +56,11 @@ class ChronopayHelperTest < Test::Unit::TestCase
       @helper.company_address :address => '500 Dwemthy Fox Road'
     end
   end
-  
+
   def test_setting_invalid_address_field
     fields = @helper.fields.dup
     @helper.billing_address :street => 'My Street'
-    
+
     # Will still set the state code to 'XX'
     fields['state'] = 'XX'
     assert_equal fields, @helper.fields

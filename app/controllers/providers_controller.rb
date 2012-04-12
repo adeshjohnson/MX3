@@ -2,14 +2,14 @@
 class ProvidersController < ApplicationController
 
   layout "callc"
-  before_filter :check_post_method, :only=>[:destroy, :create, :update, :delete]
+  before_filter :check_post_method, :only => [:destroy, :create, :update, :delete]
 
   before_filter :check_localization
   before_filter :authorize
   before_filter :providers_enabled_for_reseller?
-  before_filter :find_provider, :only=>[:hide, :provider_servers, :add_server_to_provider, :show, :edit, :update, :destroy, :provider_rules, :providercodecs_sort, :provider_test,
-    :provider_rule_change_status, :provider_rule_add, :provider_rule_destroy, :provider_rule_edit, :provider_rule_update, :unassign]
-  before_filter :find_providerrule, :only=>[:provider_rule_change_status, :provider_rule_destroy, :provider_rule_edit, :provider_rule_update]
+  before_filter :find_provider, :only => [:hide, :provider_servers, :add_server_to_provider, :show, :edit, :update, :destroy, :provider_rules, :providercodecs_sort, :provider_test,
+                                          :provider_rule_change_status, :provider_rule_add, :provider_rule_destroy, :provider_rule_edit, :provider_rule_update, :unassign]
+  before_filter :find_providerrule, :only => [:provider_rule_change_status, :provider_rule_destroy, :provider_rule_edit, :provider_rule_update]
 
   def index
     list
@@ -25,7 +25,7 @@ class ProvidersController < ApplicationController
     @options = clear_options(@options) if params[:clear].to_i == 1
     @options[:s_user_id] ||= current_user.id
     params[:s_hidden] = params[:s_hidden].to_i
-    [:s_tech, :s_name, :s_hidden].each{|key|
+    [:s_tech, :s_name, :s_hidden].each { |key|
       params[key] ? @options[key] = params[key].to_s : (@options[key] = "" if !@options[key])
     }
     # page number is an exception because it defaults to 1
@@ -42,15 +42,15 @@ class ProvidersController < ApplicationController
     cond = []
     cond_param = []
     #conditions
-    ["name"].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "providers.#{col} LIKE ?" , cond, cond_param)}
-    ["tech", "hidden", "owner_id"].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s, "providers.#{col} = ?" , cond, cond_param)}
+    ["name"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "providers.#{col} LIKE ?", cond, cond_param) }
+    ["tech", "hidden", "owner_id"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s, "providers.#{col} = ?", cond, cond_param) }
 
     @total_pages = (current_user.providers.count(:all, :conditions => [cond.join(" AND ")] + cond_param).to_f / session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages and @total_pages > 0
 
-    @providers = current_user.providers.find(:all, :conditions => [cond.join(" AND ")] + cond_param, :include=>[:tariff],:offset => session[:items_per_page]*(@options[:page]-1), :limit => session[:items_per_page], :order => order_by)
+    @providers = current_user.providers.find(:all, :conditions => [cond.join(" AND ")] + cond_param, :include => [:tariff], :offset => session[:items_per_page]*(@options[:page]-1), :limit => session[:items_per_page], :order => order_by)
 
     @provider_used_by_resellers = Provider.find_by_sql("SELECT p.* FROM providers p LEFT JOIN lcrproviders l ON l.provider_id = p.id
      WHERE p.common_use = 1 AND (p.terminator_id IN (SELECT id FROM terminators WHERE user_id !=0) OR l.lcr_id IN (SELECT id FROM lcrs WHERE user_id !=0)) GROUP BY p.id")
@@ -85,7 +85,7 @@ class ProvidersController < ApplicationController
       flash[:status] = _('Provider_hidden')
 
     end
-    redirect_to :action => 'list', :s_hidden=>@provider.hidden.to_i
+    redirect_to :action => 'list', :s_hidden => @provider.hidden.to_i
   end
 
   # in before filter : provider (find_provider)
@@ -98,18 +98,18 @@ class ProvidersController < ApplicationController
   # in before filter : provider (find_provider)
   def delete
     server = Server.find(params[:id])
-    serverprovider=Serverprovider.find(:all, :conditions=>["provider_id=? and server_id=?",@provider.id,server.server_id])
+    serverprovider=Serverprovider.find(:all, :conditions => ["provider_id=? and server_id=?", @provider.id, server.server_id])
     for providers in serverprovider
       providers.destroy
     end
     flash[:status] = _('Server_deleted')
-    redirect_to :action => 'provider_servers', :id=>@provider.id
+    redirect_to :action => 'provider_servers', :id => @provider.id
   end
 
   # in before filter : provider (find_provider)
   def add_server_to_provider
     @server=Server.find(params[:server_add])
-    serv_prov = Serverprovider.find(:first, :conditions=>["server_id=? AND provider_id=?", @server.server_id, @provider.id])
+    serv_prov = Serverprovider.find(:first, :conditions => ["server_id=? AND provider_id=?", @server.server_id, @provider.id])
 
     if not serv_prov
       serverprovider=Serverprovider.new
@@ -118,11 +118,11 @@ class ProvidersController < ApplicationController
       serverprovider.save
 
       flash[:status] = _('Server_added')
-      redirect_to :action => 'provider_servers' , :id=>@provider.id
+      redirect_to :action => 'provider_servers', :id => @provider.id
 
     else
       flash[:notice] = _('Server_allready_exists')
-      redirect_to :action => 'provider_servers' , :id=>@provider.id
+      redirect_to :action => 'provider_servers', :id => @provider.id
     end
   end
 
@@ -138,9 +138,9 @@ class ProvidersController < ApplicationController
     @providertypes = Providertype.find(:all)
     @tariffs = Tariff.find(:all, :conditions => ["purpose = 'provider' AND owner_id = ?", session[:user_id]])
     @locations = current_user.locations
-    @servers= Server.find(:all, :order=>"server_id")
+    @servers= Server.find(:all, :order => "server_id")
     @serverproviders = []
-    @provider.serverproviders.each{|p| @serverproviders[p.server_id] = 1}
+    @provider.serverproviders.each { |p| @serverproviders[p.server_id] = 1 }
 
     unless @servers.size > 0
       flash[:notice] = _('No_servers_available')
@@ -156,7 +156,6 @@ class ProvidersController < ApplicationController
 
     @new_provider = true
   end
-
 
 
   def create
@@ -186,7 +185,7 @@ class ProvidersController < ApplicationController
     #      redirect_to :action => :list and return false
     #    end
 
-    params[:add_to_servers] = {'1'=>'1'} if session[:usertype] == "reseller"
+    params[:add_to_servers] = {'1' => '1'} if session[:usertype] == "reseller"
 
     if !params[:add_to_servers] or params[:add_to_servers].size.to_i == 0
       flash[:notice] = _('Please_select_server')
@@ -203,7 +202,7 @@ class ProvidersController < ApplicationController
       if params[:ip_authentication].to_s == "1"
         if !dev.name.include?('ipauth')
           name = dev.generate_rand_name('ipauth', 8)
-          while Device.find(:first, :conditions=>['name= ? and id != ?' ,name, dev.id])
+          while Device.find(:first, :conditions => ['name= ? and id != ?', name, dev.id])
             name = dev.generate_rand_name('ipauth', 8)
           end
           dev.name = name
@@ -222,11 +221,11 @@ class ProvidersController < ApplicationController
       dev.insecure = "port,invite"
       dev.device_type = @provider.tech.strip
       dev.user_id = -1 #means it's not ordinary user
-      #temp until taken from provider's table
+                        #temp until taken from provider's table
       dev.port = @provider.port.strip
       dev.works_not_logged = 1
       dev.nat = "no"
-      #temp
+                        #temp
       if not dev.save
         @provider.destroy
         flash_errors_for(_('Provider_was_not_created'), dev)
@@ -234,20 +233,20 @@ class ProvidersController < ApplicationController
       end
 
       dev.accountcode = dev.id
-      #dev.name = "prov" + dev.id.to_s
+                        #dev.name = "prov" + dev.id.to_s
       dev.save
 
       @provider.device_id = dev.id
       @provider.save
 
       @provider.create_serverproviders(params[:add_to_servers])
-      #end
-      #==============================================================
+                        #end
+                        #==============================================================
 
       flash[:status] = _('Provider_was_successfully_created')
       redirect_to :action => 'edit', :id => @provider.id
     else
-       flash_errors_for(_('Provider_was_not_created'), @provider)
+      flash_errors_for(_('Provider_was_not_created'), @provider)
       redirect_to :action => 'new' and return false
     end
   end
@@ -256,13 +255,13 @@ class ProvidersController < ApplicationController
   def edit
     @page_title = _('Provider_edit') + ": " + @provider.name
     @page_icon = "edit.png"
-    @servers= Server.find(:all, :order=>"server_id")
+    @servers= Server.find(:all, :order => "server_id")
     @prules = @provider.providerrules
 
     @providertypes = Providertype.find(:all)
 
     if @provider.tech == "Skype"
-      @audio_codecs = @provider.codecs_order('audio', {:skype=>true})
+      @audio_codecs = @provider.codecs_order('audio', {:skype => true})
     else
       @audio_codecs = @provider.codecs_order('audio')
     end
@@ -272,14 +271,14 @@ class ProvidersController < ApplicationController
     @tariffs = Tariff.find(:all, :conditions => ["purpose = 'provider' AND owner_id = ?", session[:user_id]])
 
     @locations = current_user.locations
-    
+
     @serverproviders = []
-    @provider.serverproviders.each{|p| @serverproviders[p.server_id] = 1}
+    @provider.serverproviders.each { |p| @serverproviders[p.server_id] = 1 }
 
     @is_common_use_used = false
-    provider_used_by_resellers_terminator = Provider.find(:all, :conditions => ["id = ? AND common_use = 1 and terminator_id IN (select id from terminators where user_id != 0)",@provider.id])
-    provider_used_by_resellers_lcr = Lcrprovider.find(:all, :conditions => ["(provider_id = ? and lcr_id IN (select id from lcrs where user_id != 0))",@provider.id])
-    if provider_used_by_resellers_terminator.size > 0 or  provider_used_by_resellers_lcr.size > 0
+    provider_used_by_resellers_terminator = Provider.find(:all, :conditions => ["id = ? AND common_use = 1 and terminator_id IN (select id from terminators where user_id != 0)", @provider.id])
+    provider_used_by_resellers_lcr = Lcrprovider.find(:all, :conditions => ["(provider_id = ? and lcr_id IN (select id from lcrs where user_id != 0))", @provider.id])
+    if provider_used_by_resellers_terminator.size > 0 or provider_used_by_resellers_lcr.size > 0
       @is_common_use_used = true
     end
 
@@ -341,40 +340,40 @@ class ProvidersController < ApplicationController
     params[:provider][:reg_extension] ||= ""
     params[:provider][:reg_line] ||= ""
 
-    params[:provider][:call_limit] = 0  if params[:provider][:call_limit] and params[:provider][:call_limit].to_i < 0
+    params[:provider][:call_limit] = 0 if params[:provider][:call_limit] and params[:provider][:call_limit].to_i < 0
 
     @provider.set_old
 
     if @provider.tech != 'Zap'
       params[:provider][:login]= params[:provider][:login].strip if params[:provider][:login]
-      params[:provider][:password]=  params[:provider][:password].strip if params[:provider][:password]
+      params[:provider][:password]= params[:provider][:password].strip if params[:provider][:password]
       params[:provider][:server_ip]= params[:provider][:server_ip].strip if params[:provider][:server_ip]
       params[:provider][:port]= params[:provider][:port].strip if params[:provider][:port]
-      params[:cid_number]=  params[:cid_number].strip if params[:cid_number]
+      params[:cid_number]= params[:cid_number].strip if params[:cid_number]
       params[:cid_name]=params[:cid_name].strip if params[:cid_name]
       params[:fromdomain]=params[:fromdomain].strip if params[:fromdomain]
       params[:fromuser]=params[:fromuser].strip if params[:fromuser]
     else
       params[:provider][:channel]= params[:provider][:channel].strip if params[:provider][:channel]
     end
-    params[:provider][:hidden] = (params[:provider][:hidden] == '1' ? 1 : 0)  
+    params[:provider][:hidden] = (params[:provider][:hidden] == '1' ? 1 : 0)
     @provider.attributes = params[:provider]
-    @provider.network(params[:hostname_ip].to_s, params[:provider][:server_ip].to_s.strip, params[:device][:ipaddr].to_s.strip,  params[:provider][:port].to_s.strip)
+    @provider.network(params[:hostname_ip].to_s, params[:provider][:server_ip].to_s.strip, params[:device][:ipaddr].to_s.strip, params[:provider][:port].to_s.strip)
     unless @provider.valid?
       flash_errors_for(_('Providers_was_not_saved'), @provider)
-      redirect_to :action => 'edit' , :id=> @provider.id and return false
+      redirect_to :action => 'edit', :id => @provider.id and return false
     end
 
     if (params[:hostname_ip] == 'hostname' and params[:provider][:server_ip].blank?) or (params[:hostname_ip] == 'ip' and (params[:provider][:server_ip].blank? or params[:device][:ipaddr].blank?))
       @hostname_ip = "ip"
       flash[:notice] = _('Hostname/IP_is_blank')
-      redirect_to :action => 'edit' , :id=> @provider.id and return false
+      redirect_to :action => 'edit', :id => @provider.id and return false
     end
 
-    params[:add_to_servers] = {'1'=>'1'} if session[:usertype] == "reseller"
+    params[:add_to_servers] = {'1' => '1'} if session[:usertype] == "reseller"
     if !params[:add_to_servers] or params[:add_to_servers].size.to_i == 0
       flash[:notice] = _('Please_select_server')
-      redirect_to :action => 'edit', :id=>@provider.id and return false
+      redirect_to :action => 'edit', :id => @provider.id and return false
     end
     #========= codecs =======
 
@@ -388,11 +387,11 @@ class ProvidersController < ApplicationController
     @device.attributes = params[:device]
 
     if params[:mask1]
-      if !Device.validate_permits_ip([params[:ip1],params[:ip2],params[:ip3],params[:mask1],params[:mask2],params[:mask3]])
+      if !Device.validate_permits_ip([params[:ip1], params[:ip2], params[:ip3], params[:mask1], params[:mask2], params[:mask3]])
         flash[:notice] = _('Allowed_IP_is_not_valid')
-        redirect_to :action => 'device_edit', :id => @provider.id  and return false
+        redirect_to :action => 'device_edit', :id => @provider.id and return false
       else
-        @device.permit = Device.validate_perims({:ip1=>params[:ip1], :ip2=>params[:ip2], :ip3=>params[:ip3], :mask1=>params[:mask1], :mask2=>params[:mask2], :mask3=>params[:mask3]})
+        @device.permit = Device.validate_perims({:ip1 => params[:ip1], :ip2 => params[:ip2], :ip3 => params[:ip3], :mask1 => params[:mask1], :mask2 => params[:mask2], :mask3 => params[:mask3]})
       end
     end
 
@@ -429,13 +428,13 @@ class ProvidersController < ApplicationController
 
     if params[:ip_authentication].to_i == 1
 
-      @provider.login  = ""
+      @provider.login = ""
       @provider.password = ""
       @device.username = ""
       @device.secret = ""
       if !@device.name.include?('ipauth')
         name = @device.generate_rand_name('ipauth', 8)
-        while Device.find(:first, :conditions=>['name= ? and id != ?' ,name, @device.id])
+        while Device.find(:first, :conditions => ['name= ? and id != ?', name, @device.id])
           name = @device.generate_rand_name('ipauth', 8)
         end
         @device.name = name
@@ -453,7 +452,7 @@ class ProvidersController < ApplicationController
       @device.secret = (@provider.password).strip
     end
     #------- Network related -------
-    @provider.network(params[:hostname_ip].to_s, params[:provider][:server_ip].to_s.strip, params[:device][:ipaddr].to_s.strip,  params[:provider][:port].to_s.strip)
+    @provider.network(params[:hostname_ip].to_s, params[:provider][:server_ip].to_s.strip, params[:device][:ipaddr].to_s.strip, params[:provider][:port].to_s.strip)
 
     if params[:save_call_log].to_s == "1"
       @device.save_call_log = 1
@@ -492,10 +491,10 @@ class ProvidersController < ApplicationController
 
 
       flash[:status] = _('Provider_was_successfully_updated')
-      redirect_to :action => 'list', :id => @provider, :s_hidden=>@provider.hidden.to_i and return false
+      redirect_to :action => 'list', :id => @provider, :s_hidden => @provider.hidden.to_i and return false
     else
       flash_errors_for(_('Providers_was_not_saved'), @provider)
-      redirect_to :action => 'edit' , :id=> @provider.id and return false
+      redirect_to :action => 'edit', :id => @provider.id and return false
     end
   end
 
@@ -516,20 +515,20 @@ class ProvidersController < ApplicationController
 
       device.user_id = -1
       if device.save
-        flash[:status] = _('Provider_unassigned')  
+        flash[:status] = _('Provider_unassigned')
       else
         flash[:notice] = _('Provider_not_updated')
       end
 
       if defined? @return_action and defined? @return_controller
-        redirect_to :controller => @return_controller, :action => @return_action       and return false
+        redirect_to :controller => @return_controller, :action => @return_action and return false
       else
         redirect_back_or_default
       end
 
     else
       dont_be_so_smart
-      redirect_to :controller => :callc, :action => :main       and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
 
   end
@@ -593,15 +592,15 @@ class ProvidersController < ApplicationController
   def provider_rule_add
     if params[:name].blank? or (params[:cut].blank? and params[:add].blank?)
       flash[:notice] = _('Please_fill_all_fields')
-      redirect_to :action => 'provider_rules', :id => params[:id]   and return false
+      redirect_to :action => 'provider_rules', :id => params[:id] and return false
     end
 
     rule = Providerrule.new({
-        :provider_id => @provider.id,
-        :name => params[:name].strip,
-        :enabled => 1,
-        :pr_type => params[:pr_type].strip
-      })
+                                :provider_id => @provider.id,
+                                :name => params[:name].strip,
+                                :enabled => 1,
+                                :pr_type => params[:pr_type].strip
+                            })
     rule.cut = params[:cut].strip if params[:cut]
     rule.add = params[:add].strip if params[:add]
     rule.minlen = params[:minlen].strip if params[:minlen].length > 0
@@ -635,7 +634,7 @@ class ProvidersController < ApplicationController
   def provider_rule_update
     if params[:name].length == 0 or (params[:cut].length == 0 and params[:add].length ==0)
       flash[:notice] = _('Please_fill_all_fields')
-      redirect_to :action => 'provider_rule_edit', :id => params[:id], :providerrule_id => params[:providerrule_id]   and return false
+      redirect_to :action => 'provider_rule_edit', :id => params[:id], :providerrule_id => params[:providerrule_id] and return false
     end
 
     @providerrule.name = params[:name].strip
@@ -661,7 +660,7 @@ class ProvidersController < ApplicationController
     @provider = Provider.new
     @provider.tech = ""
     @tariffs = Tariff.find(:all, :conditions => ["purpose = 'provider' AND owner_id = ?", session[:user_id]])
-    @servers= Server.find(:all, :order=>"server_id")
+    @servers= Server.find(:all, :order => "server_id")
 
     if not @tariffs
       flash[:notice] = _('No_tariffs_available')
@@ -714,13 +713,13 @@ class ProvidersController < ApplicationController
         pc = Providercodec.new({:codec_id => params[:codec_id], :provider_id => @provider.id})
         pc.save if pc
       else
-        pc = Providercodec.find(:first, :conditions=>['provider_id=? AND codec_id=?',params[:id],params[:codec_id]])
+        pc = Providercodec.find(:first, :conditions => ['provider_id=? AND codec_id=?', params[:id], params[:codec_id]])
         pc.destroy if pc
       end
     end
 
     params["#{params[:ctype]}_sortable_list".to_sym].each_with_index do |i, index|
-      item = Providercodec.find(:first, :conditions=>['provider_id=? AND codec_id=?',params[:id],i])
+      item = Providercodec.find(:first, :conditions => ['provider_id=? AND codec_id=?', params[:id], i])
       if item
         item.priority = index.to_i
         item.save

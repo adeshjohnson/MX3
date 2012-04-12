@@ -24,7 +24,7 @@ class Money
 
   attr_reader :cents, :currency
 
-  class MoneyError < StandardError# :nodoc:
+  class MoneyError < StandardError # :nodoc:
   end
 
   # Bank lets you exchange the object which is responsible for currency
@@ -70,8 +70,8 @@ class Money
     if self.cents == 0 or currency == other_money.currency
       Money.new(cents + other_money.cents, other_money.currency)
     else
-      Money.new(cents + other_money.exchange_to(currency).cents,currency)
-    end   
+      Money.new(cents + other_money.exchange_to(currency).cents, currency)
+    end
   end
 
   def -(other_money)
@@ -79,7 +79,7 @@ class Money
       Money.new(cents - other_money.cents, other_money.currency)
     else
       Money.new(cents - other_money.exchange_to(currency).cents, currency)
-    end   
+    end
   end
 
   # get the cents value of the object
@@ -89,12 +89,12 @@ class Money
 
   # multiply money by fixnum
   def *(fixnum)
-    Money.new(cents * fixnum, currency)    
+    Money.new(cents * fixnum, currency)
   end
 
   # divide money by fixnum
   def /(fixnum)
-    Money.new(cents / fixnum, currency)    
+    Money.new(cents / fixnum, currency)
   end
 
 
@@ -125,9 +125,9 @@ class Money
     rules = rules.flatten
 
     if rules.include?(:no_cents)
-      formatted = sprintf("$%d", cents.to_f / 100  )          
+      formatted = sprintf("$%d", cents.to_f / 100)
     else
-      formatted = sprintf("$%.2f", cents.to_f / 100  )      
+      formatted = sprintf("$%.2f", cents.to_f / 100)
     end
 
     if rules.include?(:with_currency)
@@ -147,7 +147,7 @@ class Money
   # Recieve the amount of this money object in another currency   
   def exchange_to(other_currency)
     self.class.bank.reduce(self, other_currency)
-  end  
+  end
 
   # Create a new money object with value 0
   def self.empty(currency = default_currency)
@@ -185,10 +185,10 @@ class Money
   # in euro
   def as_ca_euro
     exchange_to("EUR")
-  end  
+  end
 
   # Conversation to self
   def to_money
     self
-  end  
+  end
 end

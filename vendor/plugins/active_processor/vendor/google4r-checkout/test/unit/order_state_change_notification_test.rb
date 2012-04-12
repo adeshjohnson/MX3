@@ -46,7 +46,7 @@ class Google4R::Checkout::OrderStateChangeNotificationTest < Test::Unit::TestCas
     @data[:previous_fulfillment_order_state] = "NEW"
     @data[:reason] = "charge_customer"
     @data[:timestamp] = Time.new
-    
+
     @xml_template = %q{<?xml version="1.0" encoding="UTF-8"?>
     <order-state-change-notification xmlns="http://checkout.google.com/schema/2" serial-number="%s">
         <google-order-number>%s</google-order-number>
@@ -62,16 +62,16 @@ class Google4R::Checkout::OrderStateChangeNotificationTest < Test::Unit::TestCas
     @frontend = Frontend.new(FRONTEND_CONFIGURATION)
     @frontend.tax_table_factory = TestTaxTableFactory.new
   end
-  
+
   def test_order_state_change_notification_responds_correctly
     assert_respond_to OrderStateChangeNotification, :create_from_element
-    
+
     notification = OrderStateChangeNotification.new(@frontend)
-    
-    [ :serial_number, :google_order_number, :new_financial_order_state, :previous_fulfillment_order_state,
-      :new_financial_order_state, :previous_fulfillment_order_state, :reason, :timestamp,
-      :serial_number=, :google_order_number=, :new_financial_order_state=, :previous_fulfillment_order_state=,
-      :new_financial_order_state=, :previous_fulfillment_order_state=, :reason=, :timestamp      
+
+    [:serial_number, :google_order_number, :new_financial_order_state, :previous_fulfillment_order_state,
+     :new_financial_order_state, :previous_fulfillment_order_state, :reason, :timestamp,
+     :serial_number=, :google_order_number=, :new_financial_order_state=, :previous_fulfillment_order_state=,
+     :new_financial_order_state=, :previous_fulfillment_order_state=, :reason=, :timestamp
     ].each do |sym|
       assert_respond_to notification, sym
     end
@@ -109,44 +109,44 @@ class Google4R::Checkout::OrderStateChangeNotificationTest < Test::Unit::TestCas
 
   # <reason> in notification
   def test_create_from_xml_should_correctly_create_order_state_change_notification_with_reason
-    [ true, false ].each do |skip_reason|
-      xml_str = @xml_template % 
-        [ 
-          @data[:serial_number], @data[:google_order_number], @data[:new_financial_order_state],
-          @data[:new_fulfillment_order_state], @data[:previous_financial_order_state],
-          @data[:previous_fulfillment_order_state], @data[:reason], @data[:timestamp].iso8601
-        ]
-      
+    [true, false].each do |skip_reason|
+      xml_str = @xml_template %
+          [
+              @data[:serial_number], @data[:google_order_number], @data[:new_financial_order_state],
+              @data[:new_fulfillment_order_state], @data[:previous_financial_order_state],
+              @data[:previous_fulfillment_order_state], @data[:reason], @data[:timestamp].iso8601
+          ]
+
       xml_str = xml_str.gsub(/<reason>.*?<\/reason>/, '') if skip_reason
-    
+
       notification = OrderStateChangeNotification.create_from_element(REXML::Document.new(xml_str).root, @frontend)
-    
+
       @data.each do |key, value|
         next if skip_reason and key == :reason
-        
+
         if key == :timestamp then
           assert_in_delta @data[:timestamp].to_f, notification.timestamp.to_f, 1
         else
           assert_equal @data[key], notification.send(key), "#{key}"
         end
       end
-      
+
       assert_nil notification.reason if skip_reason
     end
   end
-  
+
   def test_create_from_xml_should_raise_exception_with_missing_tags
     # Remove all required tags from the XML and expect the XPath query in
     # OrderStateChangeNotification#create_from_xml to evaluate to nil and thus
     # raise a NoMethodError.
-    [ 'google-order-number', 'new-financial-order-state', 'new-fulfillment-order-state',
-      'previous-financial-order-state', 'previous-fulfillment-order-state', 'timestamp' ].each do |tag_name|
-      xml_str = @xml_template % 
-        [ 
-          @data[:serial_number], @data[:google_order_number], @data[:new_financial_order_state],
-          @data[:new_fulfillment_order_state], @data[:previous_financial_order_state],
-          @data[:previous_fulfillment_order_state], @data[:reason], @data[:timestamp].iso8601
-        ]
+    ['google-order-number', 'new-financial-order-state', 'new-fulfillment-order-state',
+     'previous-financial-order-state', 'previous-fulfillment-order-state', 'timestamp'].each do |tag_name|
+      xml_str = @xml_template %
+          [
+              @data[:serial_number], @data[:google_order_number], @data[:new_financial_order_state],
+              @data[:new_fulfillment_order_state], @data[:previous_financial_order_state],
+              @data[:previous_fulfillment_order_state], @data[:reason], @data[:timestamp].iso8601
+          ]
 
       xml_str = xml_str.gsub(%r{<#{tag_name}>.*?</#{tag_name}>}, '')
       doc = REXML::Document.new(xml_str)

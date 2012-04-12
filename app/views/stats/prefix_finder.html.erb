@@ -1,30 +1,48 @@
-<script type="text/javascript">  
-function get_prefix(value) {
-     new Ajax.Updater('results', '<%= Web_Dir %>/stats/prefix_finder_find?prefix=' + value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');Element.toggle('spinner2');}, onLoading:function(request){Element.show('spinner');Element.toggle('spinner2');} }) 
-}
-function get_country(value) {
-     new Ajax.Updater('country_results', '<%= Web_Dir %>/stats/prefix_finder_find_country?prefix=' + value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');Element.toggle('spinner2');}, onLoading:function(request){Element.show('spinner');Element.toggle('spinner2');} }) 
-}
-function get_rate(value) {
-     new Ajax.Updater('rate_results', '<%= Web_Dir %>/stats/rate_finder_find?prefix=' + value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');Element.toggle('spinner2');}, onLoading:function(request){Element.show('spinner');Element.toggle('spinner2');} }) 
-}
+<script type="text/javascript">
+    function get_prefix(value) {
+        new Ajax.Updater('results', '<%= Web_Dir %>/stats/prefix_finder_find?prefix=' + value, {asynchronous:true, evalScripts:true, onComplete:function (request) {
+            Element.hide('spinner');
+            Element.toggle('spinner2');
+        }, onLoading:function (request) {
+            Element.show('spinner');
+            Element.toggle('spinner2');
+        } })
+    }
+    function get_country(value) {
+        new Ajax.Updater('country_results', '<%= Web_Dir %>/stats/prefix_finder_find_country?prefix=' + value, {asynchronous:true, evalScripts:true, onComplete:function (request) {
+            Element.hide('spinner');
+            Element.toggle('spinner2');
+        }, onLoading:function (request) {
+            Element.show('spinner');
+            Element.toggle('spinner2');
+        } })
+    }
+    function get_rate(value) {
+        new Ajax.Updater('rate_results', '<%= Web_Dir %>/stats/rate_finder_find?prefix=' + value, {asynchronous:true, evalScripts:true, onComplete:function (request) {
+            Element.hide('spinner');
+            Element.toggle('spinner2');
+        }, onLoading:function (request) {
+            Element.show('spinner');
+            Element.toggle('spinner2');
+        } })
+    }
 </script>
 
 <b><%= _("Type_Prefix_To_Get_Destination") %></b>:
-<%= text_field_tag :search, "", "class" => "input", :onkeyup=>"get_prefix(this.value);" %>
-<br />
-<br />
-<div id="results"><br /></div>
-<br />
-<br />
+<%= text_field_tag :search, "", "class" => "input", :onkeyup => "get_prefix(this.value);" %>
+<br/>
+<br/>
+<div id="results"><br/></div>
+<br/>
+<br/>
 <b><%= _("Type_Country") %></b>:
-<%= text_field_tag :country_search, "", "class" => "input", :onkeyup=>"get_country(this.value);" %>
+<%= text_field_tag :country_search, "", "class" => "input", :onkeyup => "get_country(this.value);" %>
 <div id="country_results"></div>
 
-<br />
-<br />
+<br/>
+<br/>
 <b><%= _("Type_number_To_Get_Rate") %></b>:
-<%= text_field_tag :rate_search, "", "class" => "input", :onkeyup=>"get_rate(this.value);" %>
-<br />
-<br />
+<%= text_field_tag :rate_search, "", "class" => "input", :onkeyup => "get_rate(this.value);" %>
+<br/>
+<br/>
 <div id="rate_results"></div>

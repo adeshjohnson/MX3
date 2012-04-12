@@ -1,4 +1,3 @@
-
 <div id="error">
   <%= _('locations_will_be_deleted') %>
 </div>
@@ -13,23 +12,26 @@
     <th align="left"><%= _('Location') %></th>
     <th align="center"><%= _('Rules') %></th>
   </tr>
-  <%  @locations.each_with_index { |loc, i| %>
-    <tr class="row<%= (i % 2 + 1).to_s %>">
-      <td id ="name_<%= loc.id %>" align="left">
-        <% if loc.name != 'Global' %>
-          <%= loc.name %>
-        <% else %>
-          <%= 'Default location' %>
-        <% end %>
-      </td>
-      <td id ="rule_<%= loc.id %>" align="center"><%= link_to b_rules, :action => 'admins_location_rules', :id => loc.id %> (<%= loc.locationrules.size %>)</td>
-    </tr>
+  <% @locations.each_with_index { |loc, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="name_<%= loc.id %>" align="left">
+          <% if loc.name != 'Global' %>
+              <%= loc.name %>
+          <% else %>
+              <%= 'Default location' %>
+          <% end %>
+        </td>
+        <td id="rule_<%= loc.id %>" align="center"><%= link_to b_rules, :action => 'admins_location_rules', :id => loc.id %>
+          (<%= loc.locationrules.size %>)
+        </td>
+      </tr>
   <% } %>
 </table>
 <br/>
 <%= form_tag :action => 'delete_and_import_admins_location' do %>
-  <table width="100%">
-    <tr><td align="left" ><%= submit_tag _("Replace_locations_with_admins"), :confirm => _('Are_you_sure_location'), :method => :post, :disable_with=>_('Processing..')%></td>
-    </tr>
-  </table>
+    <table width="100%">
+      <tr>
+        <td align="left"><%= submit_tag _("Replace_locations_with_admins"), :confirm => _('Are_you_sure_location'), :method => :post, :disable_with => _('Processing..') %></td>
+      </tr>
+    </table>
 <% end %>

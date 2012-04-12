@@ -24,10 +24,10 @@ def initialize_production(config)
   config.after_initialize do
     ActiveProcessor.configure do |config|
       config.host = HOST
-      config.translate_func = lambda {|s| Localization::_t(s, ActiveProcessor.configuration.language )}
-      config.calculate_tax = lambda{ |u,a| User.find(:first, :conditions => { :id => u }).get_tax.apply_tax(a) }
-      config.substract_tax = lambda{ |u,a| User.find(:first, :conditions => { :id => u }).get_tax.count_amount_without_tax(a) }
-      config.currency_exchange = lambda {|c1, c2| Currency.count_exchange_rate(c1, c2)}
+      config.translate_func = lambda { |s| Localization::_t(s, ActiveProcessor.configuration.language) }
+      config.calculate_tax = lambda { |u, a| User.find(:first, :conditions => {:id => u}).get_tax.apply_tax(a) }
+      config.substract_tax = lambda { |u, a| User.find(:first, :conditions => {:id => u}).get_tax.count_amount_without_tax(a) }
+      config.currency_exchange = lambda { |c1, c2| Currency.count_exchange_rate(c1, c2) }
     end
   end
 end
@@ -38,10 +38,10 @@ def initialize_development(config)
 
     ActiveProcessor.configure do |config|
       config.host = HOST
-      config.translate_func = lambda {|s| Localization::_t(s, ActiveProcessor.configuration.language )}
-      config.currency_exchange = lambda {|c1, c2| Currency.count_exchange_rate(c1, c2)}
-      config.calculate_tax = lambda{ |u,a| User.find(:first, :conditions => { :id => u }).get_tax.apply_tax(a) }
-      config.substract_tax = lambda{ |u,a| User.find(:first, :conditions => { :id => u }).get_tax.count_amount_without_tax(a) }
+      config.translate_func = lambda { |s| Localization::_t(s, ActiveProcessor.configuration.language) }
+      config.currency_exchange = lambda { |c1, c2| Currency.count_exchange_rate(c1, c2) }
+      config.calculate_tax = lambda { |u, a| User.find(:first, :conditions => {:id => u}).get_tax.apply_tax(a) }
+      config.substract_tax = lambda { |u, a| User.find(:first, :conditions => {:id => u}).get_tax.count_amount_without_tax(a) }
     end
   end
 end

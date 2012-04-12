@@ -4,16 +4,16 @@ class PaymentsController < ApplicationController
   require "digest"
 
   layout "callc"
-  before_filter :check_post_method, :only=>[:destroy, :create, :update]
+  before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :check_localization, :except => [:paypal_ipn, :webmoney_result, :cyberplat_result, :ouroboros_accept, :linkpoint_ipn]
   before_filter :authorize, :except => [:paypal_ipn, :webmoney_result, :cyberplat_result, :ouroboros_accept, :linkpoint_ipn]
   before_filter :check_if_can_see_finances, :only => [:index, :list, :payments_csv, :show, :new, :create, :update, :destroy]
   before_filter :find_user_session, :only => [:paypal, :paypal_pay, :personal_payments, :ouroboros, :ouroboros_pay, :webmoney, :webmoney_pay, :cyberplat, :cyberplat_pay, :linkpoint_pay, :confirm_payment]
-  before_filter :find_payment, :only => [ :confirm_payment, :change_description ]
+  before_filter :find_payment, :only => [:confirm_payment, :change_description]
 
   @@payments_view = [:list, :payments_csv]
   @@payments_edit = [:manual_payment, :manual_payment_status]
-  before_filter(:only =>  @@payments_view+@@payments_edit) { |c|
+  before_filter(:only => @@payments_view+@@payments_edit) { |c|
     allow_read, allow_edit = c.check_read_write_permission(@@payments_view, @@payments_edit, {:role => "accountant", :right => :acc_payments_manage, :ignore => true})
     c.instance_variable_set :@allow_read, allow_read
     c.instance_variable_set :@allow_edit, allow_edit
@@ -32,7 +32,7 @@ class PaymentsController < ApplicationController
     change_date
 
     session[:payments_list_c] ? @options = session[:payments_list_c] : @options = {}
-    [:s_transaction,:s_completed, :s_username, :s_first_name, :s_last_name, :s_paymenttype, :s_amount_min, :s_amount_max, :s_currency, :s_number, :s_pin].each{|key|
+    [:s_transaction, :s_completed, :s_username, :s_first_name, :s_last_name, :s_paymenttype, :s_amount_min, :s_amount_max, :s_currency, :s_number, :s_pin].each { |key|
       if params[:clear].to_i == 1
         @options[key] = ""
       else
@@ -44,31 +44,31 @@ class PaymentsController < ApplicationController
 
     cond = ["date_added BETWEEN ? AND ?"]
     cond << "payments.owner_id = ?"
-    cond_param = [q(session_from_datetime), q(session_till_datetime),  correct_owner_id]
+    cond_param = [q(session_from_datetime), q(session_till_datetime), correct_owner_id]
 
     if hide_uncompleted_payment == 1
       cond << " (payments.pending_reason != 'Unnotified payment' or payments.pending_reason is null)"
     end
 
-    ["username", "first_name", "last_name"].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?" , cond, cond_param)}
+    ["username", "first_name", "last_name"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?", cond, cond_param) }
 
-    ["number", "pin"].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "cards.#{col} LIKE ?" , cond, cond_param)}
+    ["number", "pin"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "cards.#{col} LIKE ?", cond, cond_param) }
 
-    ["paymenttype", "currency", "completed"].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s, "payments.#{col} = ?" , cond, cond_param)}
+    ["paymenttype", "currency", "completed"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s, "payments.#{col} = ?", cond, cond_param) }
 
-    ["transaction"].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "payments.transaction_id LIKE ?" , cond, cond_param)}
+    ["transaction"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "payments.transaction_id LIKE ?", cond, cond_param) }
 
     cond << "amount >= '#{current_user.to_system_currency(q(@options[:s_amount_min]))}' " if !@options[:s_amount_min].blank?
     cond << "amount <= '#{current_user.to_system_currency(q(@options[:s_amount_max]))}' " if !@options[:s_amount_max].blank?
 
     @payments = Payment.find(:all,
-      :select=>"payments.*, payments.user_id as 'user_id', payments.first_name as 'payer_first_name', payments.last_name as 'payer_last_name', users.username, users.first_name, users.last_name, cards.number, cards.pin, cards.id as card_id",
-      :joins=>"left join users on (payments.user_id = users.id and payments.card = '0') left join cards on (payments.user_id = cards.id and payments.card != '0')   left join cardgroups on (cards.cardgroup_id = cardgroups.id)",
-      :conditions=>[cond.join(" AND ")] + cond_param)
+                             :select => "payments.*, payments.user_id as 'user_id', payments.first_name as 'payer_first_name', payments.last_name as 'payer_last_name', users.username, users.first_name, users.last_name, cards.number, cards.pin, cards.id as card_id",
+                             :joins => "left join users on (payments.user_id = users.id and payments.card = '0') left join cards on (payments.user_id = cards.id and payments.card != '0')   left join cardgroups on (cards.cardgroup_id = cardgroups.id)",
+                             :conditions => [cond.join(" AND ")] + cond_param)
 
     @search = 1
 
@@ -136,33 +136,33 @@ class PaymentsController < ApplicationController
     change_date
 
     session[:payments_list_c] ? @options = session[:payments_list_c] : @options = {}
-    [:s_completed, :s_username, :s_first_name, :s_last_name, :s_paymenttype, :s_amount_min, :s_amount_max, :s_currency, :s_number, :s_pin].each{|key|
+    [:s_completed, :s_username, :s_first_name, :s_last_name, :s_paymenttype, :s_amount_min, :s_amount_max, :s_currency, :s_number, :s_pin].each { |key|
       params[key] ? @options[key] = params[key].to_s : (@options[key] = "" if !@options[key])
     }
 
     cond = ["date_added BETWEEN ? AND ?"]
     cond << "payments.owner_id = ?"
-    cond_param = [q(session_from_datetime), q(session_till_datetime),  correct_owner_id]
+    cond_param = [q(session_from_datetime), q(session_till_datetime), correct_owner_id]
 
-    ["username", "first_name", "last_name"].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?" , cond, cond_param)}
+    ["username", "first_name", "last_name"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?", cond, cond_param) }
 
-    ["number", "pin"].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "cards.#{col} LIKE ?" , cond, cond_param)}
+    ["number", "pin"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "cards.#{col} LIKE ?", cond, cond_param) }
 
-    ["paymenttype", "currency", "completed"].each{ |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s, "payments.#{col} = ?" , cond, cond_param)}
+    ["paymenttype", "currency", "completed"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s, "payments.#{col} = ?", cond, cond_param) }
 
     cond << "amount >= '#{q(@options[:s_amount_min])}' " if !@options[:s_amount_min].blank?
     cond << "amount <= '#{q(@options[:s_amount_max])}' " if !@options[:s_amount_max].blank?
 
     payments = Payment.find(:all,
-      :select=>"payments.*, payments.user_id as 'user_id', users.username, users.first_name, users.last_name, cards.number, cards.pin, cards.id as card_id",
-      :joins=>"left join users on (payments.user_id = users.id and payments.card = '0') left join cards on (payments.user_id = cards.id and payments.card != '0')   left join cardgroups on (cards.cardgroup_id = cardgroups.id)",
-      :conditions=>[cond.join(" AND ")] + cond_param)
+                            :select => "payments.*, payments.user_id as 'user_id', users.username, users.first_name, users.last_name, cards.number, cards.pin, cards.id as card_id",
+                            :joins => "left join users on (payments.user_id = users.id and payments.card = '0') left join cards on (payments.user_id = cards.id and payments.card != '0')   left join cardgroups on (cards.cardgroup_id = cardgroups.id)",
+                            :conditions => [cond.join(" AND ")] + cond_param)
 
-    sep = Confline.get_value("CSV_Separator",0).to_s
-    dec = Confline.get_value("CSV_Decimal",0).to_s
+    sep = Confline.get_value("CSV_Separator", 0).to_s
+    dec = Confline.get_value("CSV_Decimal", 0).to_s
 
     csv_string = "#{_('User')}/#{_('Card')}#{sep}#{_('Date')}#{sep}#{_('Confirm_date')}#{sep}#{_('Type')}#{sep}#{_('Amount')}#{sep}#{_('Fee')}#{sep}#{_('Amount_with_VAT')}#{sep}#{_('Currency')}#{sep}#{_('Completed')}*\n"
 
@@ -213,9 +213,9 @@ class PaymentsController < ApplicationController
     filename = "Payments.csv"
     session[:payments_list_c] = @options
     if params[:test].to_i == 1
-      render :text=> "Payments_csv_is_ok\n\n"+csv_string
+      render :text => "Payments_csv_is_ok\n\n"+csv_string
     else
-      send_data(csv_string,   :type => 'text/csv; charset=utf-8; header=present',  :filename => filename)
+      send_data(csv_string, :type => 'text/csv; charset=utf-8; header=present', :filename => filename)
     end
 
   end
@@ -242,7 +242,7 @@ class PaymentsController < ApplicationController
       render :text => "" and return false
     end
 
-    Action.add_error(session[:user_id], "Linkpoint_user_URL_mismatches_WebURL",{:data2 => Web_URL + Web_Dir, :data3 => request.protocol + request.host}) unless check_request_url
+    Action.add_error(session[:user_id], "Linkpoint_user_URL_mismatches_WebURL", {:data2 => Web_URL + Web_Dir, :data3 => request.protocol + request.host}) unless check_request_url
     @page_title = _('LinkPoint')
     @page_icon = "money.png"
     @enabled = Confline.get_value("Linkpoint_Enabled", 0).to_i
@@ -375,11 +375,11 @@ class PaymentsController < ApplicationController
       redirect_to :controller => "callc", :action => "main" and return false
     end
     #ticket 3698
-    
+
     custom_redirect = Confline.get_value('PayPal_Custom_redirect', @user.owner_id).to_i
     custom_redirect_successful_payment = Confline.get_value('Paypal_return_url', @user.owner_id)
     custom_redirect_canceled_payment = Confline.get_value('Paypal_cancel_url', @user.owner_id)
-    
+
     if custom_redirect and custom_redirect.to_i == 1
       @paypal_return_url = Web_URL + "/" + custom_redirect_successful_payment.to_s
       @paypal_cancel_url = Web_URL + "/" + custom_redirect_canceled_payment.to_s
@@ -388,7 +388,7 @@ class PaymentsController < ApplicationController
       @paypal_cancel_url = Web_URL + Web_Dir + "/callc/main"
     end
 
-    @paypal_ipn_url =    Web_URL + Web_Dir + "/payments/paypal_ipn"
+    @paypal_ipn_url = Web_URL + Web_Dir + "/payments/paypal_ipn"
 
     @amount = Confline.get_value("PayPal_Default_Amount", @user.owner_id).to_f
     @amount = params[:amount].to_f if params[:amount]
@@ -500,7 +500,7 @@ class PaymentsController < ApplicationController
                 end
                 @user.save
                 MorLog.my_debug("PayPal balance")
-                MorLog.my_debug( "User balance after payment: #{@user.balance}")
+                MorLog.my_debug("User balance after payment: #{@user.balance}")
                 Action.add_action(@user.id, "PayPal", "Payment completed: #{@payment.amount} #{@payment.currency}")
                 MorLog.my_debug('transaction succesfully completed', true)
               else # confirmation is required for all payments
@@ -511,10 +511,10 @@ class PaymentsController < ApplicationController
                 MorLog.my_debug('transaction waiting for confirmation', true)
 
                 if Confline.get_value("PayPal_Email_Notification", @user.owner_id).to_i == 1
-                  email = Email.find(:first, :conditions => { :name => 'payment_notification_integrations', :owner_id => @user.owner_id })
+                  email = Email.find(:first, :conditions => {:name => 'payment_notification_integrations', :owner_id => @user.owner_id})
                   user = User.find_by_id(@user.owner_id)
 
-                  variables = Email.email_variables(user, nil, { :payment => @payment, :payment_notification => notify, :payment_type => "paypal" })
+                  variables = Email.email_variables(user, nil, {:payment => @payment, :payment_notification => notify, :payment_type => "paypal"})
                   EmailsController::send_email(email, Confline.get_value("Email_from", user.id), [user], variables)
                   MorLog.my_debug('confirmation email sent', true)
                 end
@@ -522,7 +522,7 @@ class PaymentsController < ApplicationController
             elsif notify.reversed?
               @payment.paypal_refund_payment(notify, @user)
             else
-              MorLog. my_debug("transaction pending: #{notify.status}", true)
+              MorLog.my_debug("transaction pending: #{notify.status}", true)
             end
 
             @payment.save
@@ -581,17 +581,17 @@ class PaymentsController < ApplicationController
     end
 
     Action.add_action_hash(user.id,
-      { :action => "payment_confirmation",
-        :data => "Payment confirmed",
-        :data2 => "payment id: #{@payment.id}",
-        :data3 => "#{@payment.amount} #{@payment.currency}"
-      })
+                           {:action => "payment_confirmation",
+                            :data => "Payment confirmed",
+                            :data2 => "payment id: #{@payment.id}",
+                            :data3 => "#{@payment.amount} #{@payment.currency}"
+                           })
 
     user.save
 
     MorLog.my_debug('transaction succesfully confirmed')
 
-    @payment.update_attributes({ :completed => 1, :pending_reason => "Completed", :shipped_at => Time.now })
+    @payment.update_attributes({:completed => 1, :pending_reason => "Completed", :shipped_at => Time.now})
     flash[:status] = _('Payment_confirmed')
 
     redirect_back_or_default("/payments/list")
@@ -599,13 +599,13 @@ class PaymentsController < ApplicationController
 
   def fix_paypal_payments
     change_date
-    @payments = Payment.find(:all, :conditions =>["paymenttype = 'paypal' AND date_added BETWEEN ? AND ? ", session_from_datetime, session_till_datetime ])
+    @payments = Payment.find(:all, :conditions => ["paymenttype = 'paypal' AND date_added BETWEEN ? AND ? ", session_from_datetime, session_till_datetime])
 
-    MorLog.my_debug("DELETE FROM payments WHERE id IN (#{@payments.map{|p| p.id}.join(",")});")
+    MorLog.my_debug("DELETE FROM payments WHERE id IN (#{@payments.map { |p| p.id }.join(",")});")
 
     insert = []
     insert_header = "INSERT INTO payments (`id`, `tax`, `completed`, `paymenttype`, `shipped_at`, `hash`, `pending_reason`, `amount`, `transaction_id`, `card`, `owner_id`, `fee`, `gross`, `user_id`, `vat_percent`, `last_name`, `bill_nr`, `currency`, `date_added`, `payer_status`, `payer_email`, `residence_country`, `email`, `first_name`)"
-    @payments.each{|payment|
+    @payments.each { |payment|
       insert << "(#{payment.id},#{payment.tax},#{payment.completed},'#{payment.paymenttype}','#{payment.shipped_at.to_s(:db) if payment.shipped_at}','#{payment.payment_hash}','#{payment.pending_reason}',#{payment.amount},'#{payment.transaction_id}',#{payment.card},#{payment.owner_id},#{payment.fee},#{payment.gross},#{payment.user_id},#{payment.vat_percent},'#{payment.last_name}',#{payment.bill_nr},'#{payment.currency}','#{payment.date_added.to_s(:db) if payment.date_added}', '#{payment.payer_status}','#{payment.payer_email}','#{payment.residence_country}','#{payment.email}','#{payment.first_name}')".gsub("''", "NULL").gsub(",,", ",NULL,")
       if payment.gross.to_f == 0.0
         payment.gross = payment.amount.to_f - payment.tax.to_f
@@ -622,8 +622,9 @@ class PaymentsController < ApplicationController
     MorLog.my_debug("#{insert_header} VALUES#{insert.join(",")};")
 
     flash[:notice] = _("Payments_converted")
-    redirect_to :controller => "callc", :action  => "global_settings" and return false
+    redirect_to :controller => "callc", :action => "global_settings" and return false
   end
+
   ########### PERSONAL ##########
 
   def personal_payments
@@ -641,7 +642,7 @@ class PaymentsController < ApplicationController
     @page_icon = "add.png"
     @users = []
     unless params[:user_id].blank?
-      user = User.find(:first,:include => [:tax], :conditions => ["users.id = ?", params[:user_id]])
+      user = User.find(:first, :include => [:tax], :conditions => ["users.id = ?", params[:user_id]])
       unless user
         flash[:notice] = _('User_was_not_found')
         redirect_to :controller => "callc", :action => "main" and return false
@@ -664,30 +665,30 @@ class PaymentsController < ApplicationController
     @page_title = _('Add_manual_payment')
     @page_icon = "add.png"
 
-    @user = User.find(:first,:include => [:tax], :conditions => ["users.id = ?" ,params[:user]])
+    @user = User.find(:first, :include => [:tax], :conditions => ["users.id = ?", params[:user]])
     unless @user
       Action.add_action(session[:user_id], "error", "User: #{params[:user]} was not found") if session[:user_id].to_i != 0
       dont_be_so_smart
       redirect_to :controller => "callc", :action => "main" and return false
     end
     if !params[:amount].blank?
-      @amount =  params[:amount].to_f
+      @amount = params[:amount].to_f
       @am_typ = "ammount"
       @user.get_tax
       @real_amount = @user.tax.apply_tax(@amount)
     else
       @am_typ = "amount_with_tax"
       @real_amount = params[:amount_with_tax].to_f #if !params[:amount_with_tax].blank?
-      @amount  = @user.get_tax.count_amount_without_tax(@real_amount)
+      @amount = @user.get_tax.count_amount_without_tax(@real_amount)
     end
 
     @curr = params[:p_currency]
-    @curr_amount =  @amount.to_f
-    @curr_real_amount =  @real_amount.to_f
+    @curr_amount = @amount.to_f
+    @curr_real_amount = @real_amount.to_f
     @description = params[:description]
     @exchange_rate = count_exchange_rate(current_user.currency.name, @curr)
-    @amount = @amount.to_f /  @exchange_rate.to_f
-    @real_amount = @real_amount.to_f /  @exchange_rate.to_f
+    @amount = @amount.to_f / @exchange_rate.to_f
+    @real_amount = @real_amount.to_f / @exchange_rate.to_f
     if @amount.to_f == 0.to_f
       flash[:notice] = _('Please_add_correct_amount')
       redirect_to :action => 'manual_payment'
@@ -695,14 +696,13 @@ class PaymentsController < ApplicationController
   end
 
 
-
   def manual_payment_finish
 
-    user = User.find(:first,:include => [:tax], :conditions => ["users.id = ?", params[:user]])
+    user = User.find(:first, :include => [:tax], :conditions => ["users.id = ?", params[:user]])
     amount = params[:amount].to_f
     real_amount = params[:real_amount].to_f
     currency = params[:p_currency]
-    exchange_rate = count_exchange_rate(current_user.currency.name,currency)
+    exchange_rate = count_exchange_rate(current_user.currency.name, currency)
 
     unless user
       Action.add_action(session[:user_id], "error", "User: #{params[:user]} was not found") if session[:user_id].to_i != 0
@@ -710,9 +710,9 @@ class PaymentsController < ApplicationController
       redirect_to :controller => "callc", :action => "main" and return false
     end
 
-    curr_amount =  amount / exchange_rate.to_f
-    curr_real_amount =  real_amount / exchange_rate.to_f
-    user.balance +=  curr_amount
+    curr_amount = amount / exchange_rate.to_f
+    curr_real_amount = real_amount / exchange_rate.to_f
+    user.balance += curr_amount
     user.save
 
     paym = Payment.new
@@ -736,8 +736,8 @@ class PaymentsController < ApplicationController
       number_type = Confline.get_value("Prepaid_Invoice_Number_Type").to_i
       invoice = Invoice.new
       invoice.user_id = user.id
-      invoice.period_start =  Time.now
-      invoice.period_end =  Time.now
+      invoice.period_start = Time.now
+      invoice.period_end = Time.now
       invoice.issue_date = Time.now
       invoice.paid = 1
       invoice.number = ""
@@ -788,7 +788,7 @@ class PaymentsController < ApplicationController
       redirect_to :action => 'list' and return false
     end
 
-    user = User.find(:first, :include=>[:tax], :conditions => ["users.id = ?", paym.user_id])
+    user = User.find(:first, :include => [:tax], :conditions => ["users.id = ?", paym.user_id])
     if user and user.class == User
       real_amount = user.get_tax.count_amount_without_tax(paym.amount) / Currency::count_exchange_rate(current_user.currency.name, paym.currency)
       user.balance -= real_amount
@@ -813,6 +813,7 @@ class PaymentsController < ApplicationController
     @enabled = Confline.get_value("WebMoney_Enabled", @user.owner_id).to_i
     @currency = Confline.get_value("WebMoney_Default_Currency", @user.owner_id)
   end
+
 =begin rdoc
 
 =end
@@ -826,7 +827,7 @@ class PaymentsController < ApplicationController
 
       @webmoney_result_url = Web_URL + Web_Dir + "/payments/webmoney_result"
       @webmoney_fail_url = Web_URL + Web_Dir + "/payments/webmoney_fail"
-      @webmoney_success_url =    Web_URL + Web_Dir + "/payments/webmoney_success"
+      @webmoney_success_url = Web_URL + Web_Dir + "/payments/webmoney_success"
 
       #@user = User.find(session[:user_id])
       @user_id = session[:user_id]
@@ -935,7 +936,7 @@ class PaymentsController < ApplicationController
                   @payment.save
                   @user = User.find(params[:user])
                   #@user.balance += params[:gross].to_f
-                  @user.balance += params[:gross].to_f*Currency.count_exchange_rate(@payment.currency,@user.currency).to_f
+                  @user.balance += params[:gross].to_f*Currency.count_exchange_rate(@payment.currency, @user.currency).to_f
                   @user.save
                 else
                   MorLog.my_debug('Hash mismatch')
@@ -1009,7 +1010,7 @@ class PaymentsController < ApplicationController
     if !File.exist?("#{Actual_Dir}/lib/cyberplat/checker.ini")
       flash[:notice] = _("Cyberplat_is_not_configured")
       Action.add_error(session[:user_id], _('Cyberplat')+": "+_("/lib/cyberplat/checker.ini_was_not_found"))
-      redirect_to :controller => "callc", :action => "main"  and return false
+      redirect_to :controller => "callc", :action => "main" and return false
     end
     @page_title = _('Cyberplat')
     @page_icon = "money.png"
@@ -1050,11 +1051,11 @@ class PaymentsController < ApplicationController
       @user_amount_with_vat = @user_amount + @user_vat_sum
       @user_fee_sum = @user_amount_with_vat*(@fee/100)
       @user_amount_with_vat += @user_fee_sum
-      @user_amount_with_vat = sprintf("%.2f", @user_amount_with_vat ).to_f
+      @user_amount_with_vat = sprintf("%.2f", @user_amount_with_vat).to_f
       @description = session[:company] + " balance update"
 
 
-      @vat_sum = sprintf("%.2f",  @user_vat_sum).to_f
+      @vat_sum = sprintf("%.2f", @user_vat_sum).to_f
       @amount_with_vat = @amount + @vat_sum
       @fee_sum = @amount_with_vat*(@fee/100)
       @fee_sum = sprintf("%.2f", @fee_sum).to_f
@@ -1097,7 +1098,7 @@ class PaymentsController < ApplicationController
 
 
     if @payment and @enabled == 1
-      File.open("#{checker_tmp}/message2.txt", 'w') {|f| f.write(params[:reply]) }
+      File.open("#{checker_tmp}/message2.txt", 'w') { |f| f.write(params[:reply]) }
       system("#{Actual_Dir}/lib/cyberplat/checker.exe -c -f #{Actual_Dir}/lib/cyberplat/checker.ini #{checker_tmp}/message2.txt > #{checker_tmp}/message3.txt")
       msg = ""
       File.open("#{checker_tmp}/message3.txt", "r") do |infile|
@@ -1141,13 +1142,13 @@ class PaymentsController < ApplicationController
               @payment.payer_email = @user.email
               @payment.pending_reason = ''
               @payment.save
-              @user.balance += sprintf("%.2f",@payment.gross * Currency.count_exchange_rate(@payment.currency, Currency.find(1).name)).to_f
+              @user.balance += sprintf("%.2f", @payment.gross * Currency.count_exchange_rate(@payment.currency, Currency.find(1).name)).to_f
               @user.save
               email = Email.find(:first, :conditions => "name = 'cyberplat_announce' AND owner_id = #{@user.owner_id}")
               users = []
               users << @user
               users << User.find(@user.owner_id)
-              variables = email_variables(user, nil, {:amount => @transaction_amount, :currency => @transaction_currency, :date => @transaction_date, :auth_code => @auth_code, :trans_id => @transaction_id , :customer_name => @customer_name ,:description => @payment_details})
+              variables = email_variables(user, nil, {:amount => @transaction_amount, :currency => @transaction_currency, :date => @transaction_date, :auth_code => @auth_code, :trans_id => @transaction_id, :customer_name => @customer_name, :description => @payment_details})
               EmailsController.send_email(email, session[:company_email], users, variables)
             else
               @status = 1
@@ -1218,21 +1219,21 @@ class PaymentsController < ApplicationController
       @address = @user.address
       unless @address
         flash[:notice] = _('User_address_was_not_found')
-        redirect_to :controller=>"callc", :action=>"main" and return false
+        redirect_to :controller => "callc", :action => "main" and return false
       end
 
       @dir = @address.direction if  @address.direction_id.to_i > 0
       @direction = @dir.name if !@dir.nil?
 
-      @merchant_code =     Confline.get_value("Ouroboros_Merchant_Code", @user.owner_id)
-      @lang =              Confline.get_value("Ouroboros_Language", @user.owner_id)
+      @merchant_code = Confline.get_value("Ouroboros_Merchant_Code", @user.owner_id)
+      @lang = Confline.get_value("Ouroboros_Language", @user.owner_id)
       #@amount =            Confline.get_value("Ouronboros_Default_Amount", @user.owner_id).to_f
-      @secret_key =        Confline.get_value("Ouroboros_Secret_key", @user.owner_id)
-      @ob_min_amount =     Confline.get_value("Ouroboros_Min_Amount", @user.owner_id).to_f
-      @ob_max_amount =     Confline.get_value("Ouroboros_Max_Amount", @user.owner_id).to_f
-      @currency =          Confline.get_value('Ouroboros_Default_Currency', @user.owner_id)
-      @retry_count =       Confline.get_value("Ouroboros_Retry_Count", @user.owner_id)
-      @completition =      Confline.get_value("Ouroboros_Completion",@user.owner_id )
+      @secret_key = Confline.get_value("Ouroboros_Secret_key", @user.owner_id)
+      @ob_min_amount = Confline.get_value("Ouroboros_Min_Amount", @user.owner_id).to_f
+      @ob_max_amount = Confline.get_value("Ouroboros_Max_Amount", @user.owner_id).to_f
+      @currency = Confline.get_value('Ouroboros_Default_Currency', @user.owner_id)
+      @retry_count = Confline.get_value("Ouroboros_Retry_Count", @user.owner_id)
+      @completition = Confline.get_value("Ouroboros_Completion", @user.owner_id)
       @completition_over = Confline.get_value("Ouroboros_Completion_Over", @user.owner_id)
       @policy = OuroborosPayment.format_policy(@ob_max_amount, @retry_count, @completition, @completition_over)
       @amount = OuroborosPayment.format_amount(params[:amount], @ob_min_amount, @ob_max_amount)
@@ -1338,7 +1339,7 @@ class PaymentsController < ApplicationController
   private
 
   def find_user_session
-    @user = User.find(:first,:include => [:tax], :conditions => ["users.id = ?", session[:user_id]])
+    @user = User.find(:first, :include => [:tax], :conditions => ["users.id = ?", session[:user_id]])
 
     unless @user
       flash[:notice] = _('User_was_not_found')
@@ -1361,7 +1362,7 @@ class PaymentsController < ApplicationController
 
   def get_price_exchange(price, cur)
     exrate = Currency.count_exchange_rate(cur, current_user.currency.name)
-    rate_cur = Currency.count_exchange_prices({:exrate=>exrate, :prices=>[price.to_f]})
+    rate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [price.to_f]})
     return rate_cur.to_f
   end
 end

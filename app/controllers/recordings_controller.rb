@@ -7,8 +7,8 @@ class RecordingsController < ApplicationController
   @@view = [:index, :list, :play_rec]
   @@edit = [:edit, :update, :setup, :update_recordings, :calls2recordings_disabled, :destroy, :destroy_recording]
 
-  before_filter{ |c|
-    allow_read, allow_edit = c.check_read_write_permission( @@view,  @@edit, {:role => "accountant", :right => :acc_recordings_manage, :ignore => true})
+  before_filter { |c|
+    allow_read, allow_edit = c.check_read_write_permission(@@view, @@edit, {:role => "accountant", :right => :acc_recordings_manage, :ignore => true})
     c.instance_variable_set :@allow_read, allow_read
     c.instance_variable_set :@allow_edit, allow_edit
     true
@@ -16,7 +16,7 @@ class RecordingsController < ApplicationController
 
   before_filter :check_localization
   before_filter :authorize
-  before_filter :check_post_method, :only=>[ :destroy_recording, :destroy, :update, :update_recordings, :list_users_update  ]
+  before_filter :check_post_method, :only => [:destroy_recording, :destroy, :update, :update_recordings, :list_users_update]
 
   def index
     redirect_to :action => :list_recordings and return false
@@ -47,7 +47,7 @@ class RecordingsController < ApplicationController
       date_before = Time.at(rec.datetime.to_f-2).strftime("%Y-%m-%d %H:%M:%S")
       date_after = Time.at(rec.datetime.to_f+2).strftime("%Y-%m-%d %H:%M:%S")
       #        my_debug date_before.to_s+date_after.to_s
-      if call=Call.find(:first, :conditions => ["src_device_id = ? AND dst_device_id = ? AND calldate BETWEEN ? AND ?",rec.src_device_id, rec.dst_device_id, date_before, date_after])
+      if call=Call.find(:first, :conditions => ["src_device_id = ? AND dst_device_id = ? AND calldate BETWEEN ? AND ?", rec.src_device_id, rec.dst_device_id, date_before, date_after])
         rec.call_id = call.id
         rec.save
         temp << call
@@ -86,12 +86,12 @@ class RecordingsController < ApplicationController
     sql = "SELECT recordings.*, providers.name AS provider_name FROM recordings LEFT JOIN calls ON recordings.call_id = calls.id LEFT JOIN providers ON providers.id = calls.provider_id WHERE recordings.datetime BETWEEN '#{from_t}' AND '#{till_t}' AND (recordings.src_device_id = '#{@device.id}' OR recordings.dst_device_id = '#{@device.id}') ORDER BY recordings.datetime DESC LIMIT #{@from}, #{@to}"
 
     my_debug sql
-    
+
     @recs = Recording.find_by_sql(sql)
-    @total_pages = Recording.count(:all, :conditions=>"datetime BETWEEN '#{from_t}' AND '#{till_t}' AND (src_device_id = '#{@device.id}' OR dst_device_id = '#{@device.id}')")
+    @total_pages = Recording.count(:all, :conditions => "datetime BETWEEN '#{from_t}' AND '#{till_t}' AND (src_device_id = '#{@device.id}' OR dst_device_id = '#{@device.id}')")
     @total_pages = @total_pages / session[:items_per_page]
-    @page_select_options = {:action=>'show', :controller=>"recordings", :show_rec=>@s_dev}
-    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend? )
+    @page_select_options = {:action => 'show', :controller => "recordings", :show_rec => @s_dev}
+    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend?)
   end
 
   def play_rec
@@ -99,7 +99,7 @@ class RecordingsController < ApplicationController
     @rec = Recording.find_by_id(params[:rec])
     unless @rec
       flash[:notice] = _('Recording_was_not_found')
-      redirect_to :controller=>"callc", :action => 'main' and return false
+      redirect_to :controller => "callc", :action => 'main' and return false
     end
     @title = Confline.get_value("Admin_Browser_Title")
     @call = @rec.call
@@ -119,17 +119,17 @@ class RecordingsController < ApplicationController
     @rec = Recording.find_by_id(params[:id])
     unless @rec
       flash[:notice] = _('Recording_was_not_found')
-      redirect_to :controller=>"callc", :action => 'main' and return false
+      redirect_to :controller => "callc", :action => 'main' and return false
     end
     @recording = ""
     if @rec
       server_path = get_server_path(@rec.local)
       a=check_user_for_recording(@rec)
       return false if !a
-      
+
       @title = Confline.get_value("Admin_Browser_Title")
       @call = @rec.call
-      
+
       @recording = server_path.to_s + @rec.mp3
     end
     render(:layout => "play_rec")
@@ -137,7 +137,7 @@ class RecordingsController < ApplicationController
 
 =begin rdoc
  Lists recordings for admin and reseller. 
-=end 
+=end
 
   def list
     @page_title = _('Recordings')
@@ -165,7 +165,7 @@ class RecordingsController < ApplicationController
     conditions_var = []
 
     conditions_str << "recordings.datetime BETWEEN ? AND ?"
-    conditions_var += [@date_from,@date_till]
+    conditions_var += [@date_from, @date_till]
 
     if !@search_source.blank?
       conditions_str << "recordings.src LIKE ?"
@@ -184,12 +184,12 @@ class RecordingsController < ApplicationController
     @size = Recording.count(:conditions => [conditions_str.join(' AND ')] +conditions_var).to_i
     @items_per_page = Confline.get_value("Items_Per_Page").to_i
     @total_pages = (@size.to_f / @items_per_page.to_f).ceil
-    @recordings = Recording.find(:all,:include => :call, :conditions =>[conditions_str.join(' AND ')] +conditions_var, :limit => @items_per_page, :offset => (@page-1)*@items_per_page, :order => "datetime DESC")
+    @recordings = Recording.find(:all, :include => :call, :conditions => [conditions_str.join(' AND ')] +conditions_var, :limit => @items_per_page, :offset => (@page-1)*@items_per_page, :order => "datetime DESC")
     @page_select_params = {
-      :s_source => @search_source,
-      :s_destination => @search_destination
+        :s_source => @search_source,
+        :s_destination => @search_destination
     }
-    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend? )
+    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend?)
   end
 
 
@@ -217,13 +217,13 @@ class RecordingsController < ApplicationController
     conditions_var = []
 
     conditions_str << "recordings.datetime BETWEEN ? AND ?"
-    conditions_var += [@date_from,@date_till]
+    conditions_var += [@date_from, @date_till]
     conditions_str << "deleted = ?"
     conditions_var << 0
 
     if @search_source != "" and @search_destination != ""
       conditions_str << "(recordings.src LIKE ? OR recordings.dst LIKE ? )"
-      conditions_var  += [@search_source,@search_destination]
+      conditions_var += [@search_source, @search_destination]
     else
       if !@search_source.blank?
         conditions_str << "recordings.src LIKE ?"
@@ -237,7 +237,7 @@ class RecordingsController < ApplicationController
     end
 
     conditions_str << "((recordings.user_id = ? AND visible_to_user = 1) OR (recordings.dst_user_id = ? AND visible_to_dst_user = 1))"
-    conditions_var += [@user.id,@user.id]
+    conditions_var += [@user.id, @user.id]
 
 
     @size = Recording.where([conditions_str.join(' AND ')] +conditions_var).count.to_i
@@ -245,15 +245,16 @@ class RecordingsController < ApplicationController
     @total_pages = (@size.to_f / @items_per_page.to_f).ceil
     @recordings = Recording.includes(:call).where([conditions_str.join(' AND ')] +conditions_var).limit(@items_per_page).offset((@page-1)*@items_per_page).order("calls.calldate DESC").all
     @page_select_params = {
-      :s_source => @search_source,
-      :s_destination => @search_destination
+        :s_source => @search_source,
+        :s_destination => @search_destination
     }
     @search = params[:clear].to_i if params[:clear]
-    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend? )
+    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend?)
   end
+
 =begin rdoc
   Recording edit action for admin and reseller.
-=end 
+=end
 
   def edit
     @page_title = _('Edit_Recording')
@@ -261,7 +262,7 @@ class RecordingsController < ApplicationController
     @recording = Recording.find_by_id(params[:id])
     unless @recording
       flash[:notice] = _('Recording_was_not_found')
-      redirect_to :controller=>"callc", :action => 'main' and return false
+      redirect_to :controller => "callc", :action => 'main' and return false
     end
     a=check_user_for_recording(@recording)
     return false if !a
@@ -278,7 +279,7 @@ class RecordingsController < ApplicationController
     @recording = Recording.find_by_id(params[:id])
     unless @recording
       flash[:notice] = _('Recording_was_not_found')
-      redirect_to :controller=>"callc", :action => 'main' and return false
+      redirect_to :controller => "callc", :action => 'main' and return false
     end
     a=check_user_for_recording(@recording)
     return false if !a
@@ -286,13 +287,13 @@ class RecordingsController < ApplicationController
 
 =begin rdoc
  Recording update action for admin and reseller.
-=end 
+=end
 
   def update
     @recording = Recording.find_by_id(params[:id])
     unless @recording
       flash[:notice] = _('Recording_was_not_found')
-      redirect_to :controller=>"callc", :action => 'main' and return false
+      redirect_to :controller => "callc", :action => 'main' and return false
     end
     a=check_user_for_recording(@recording)
     return false if !a
@@ -308,13 +309,13 @@ class RecordingsController < ApplicationController
 
 =begin rdoc
  Recording update action for user
-=end 
+=end
 
   def update_recording
     @recording = Recording.find_by_id(params[:id])
     unless @recording
       flash[:notice] = _('Recording_was_not_found')
-      redirect_to :controller=>"callc", :action => 'main' and return false
+      redirect_to :controller => "callc", :action => 'main' and return false
     end
     a=check_user_for_recording(@recording)
     return false if !a
@@ -330,13 +331,13 @@ class RecordingsController < ApplicationController
 
 =begin rdoc
   
-=end 
+=end
 
   def list_users
     @page_title = _('Users')
     @page_icon = 'vcard.png'
-    @roles = Role.find(:all, :conditions=>["name !='guest'"])
-    
+    @roles = Role.find(:all, :conditions => ["name !='guest'"])
+
     params[:search_on] ? @search = params[:search_on].to_i : @search = 0
     params[:page] ? @page = params[:page].to_i : @page = 1
     params[:s_username] ? @search_username = params[:s_username] : @search_username = ""
@@ -347,7 +348,7 @@ class RecordingsController < ApplicationController
     params[:user_type] ? @search_type = params[:user_type] : @search_type = -1
     params[:s_acc_number] ? @search_account_number = params[:s_acc_number] : @search_account_number = ""
     params[:s_clientid] ? @search_clientid = params[:s_clientid] : @search_clientid = ""
-    if session[:usertype] == "accountant" 
+    if session[:usertype] == "accountant"
       owner = User.find(session[:user_id].to_i).get_owner.id.to_i
     else
       owner = session[:user_id]
@@ -388,14 +389,14 @@ class RecordingsController < ApplicationController
 
     @total_pages = (@size / @items_per_page.to_f).ceil
     @page_select_params = {
-      :s_username => @search_username,
-      :s_first_name => @search_fname,
-      :s_last_name => @search_lname,
-      :s_agr_number => @search_agrnumber,
-      :sub_s => @search_sub,
-      :user_type => @search_type,
-      :s_acc_number => @search_account_number,
-      :s_clientid => @search_clientid
+        :s_username => @search_username,
+        :s_first_name => @search_fname,
+        :s_last_name => @search_lname,
+        :s_agr_number => @search_agrnumber,
+        :sub_s => @search_sub,
+        :user_type => @search_type,
+        :s_acc_number => @search_account_number,
+        :s_clientid => @search_clientid
     }
   end
 
@@ -421,15 +422,15 @@ class RecordingsController < ApplicationController
 
     #    conditions_str = ["users.owner_id = ?"]
     #    conditions_var = [owner_id]
-    
+
     conditions_str << "recordings.datetime BETWEEN ? AND ?"
-    conditions_var += [@date_from,@date_till]
-        
+    conditions_var += [@date_from, @date_till]
+
     if !@search_source.blank?
       conditions_str << "recordings.src LIKE ?"
       conditions_var << @search_source
     end
-    
+
     if !@search_destination.blank?
       conditions_str << "recordings.dst LIKE ?"
       conditions_var << @search_destination
@@ -438,28 +439,28 @@ class RecordingsController < ApplicationController
     if !@user.blank? and @user != "all"
       conditions_str << "recordings.user_id = ?"
       conditions_var << @user.to_i
-      @devices = Device.find(:all, :select=> "devices.*", :joins=>"LEFT JOIN users ON (users.id = devices.user_id)" , :conditions => ["users.owner_id = ? AND device_type != 'FAX' AND user_id = ? AND name not like 'mor_server_%'", owner_id, @user])
+      @devices = Device.find(:all, :select => "devices.*", :joins => "LEFT JOIN users ON (users.id = devices.user_id)", :conditions => ["users.owner_id = ? AND device_type != 'FAX' AND user_id = ? AND name not like 'mor_server_%'", owner_id, @user])
     else
-      @devices = Device.find(:all, :select=> "devices.*", :joins=>"LEFT JOIN users ON (users.id = devices.user_id)" , :conditions => ["users.owner_id = ? AND device_type != 'FAX' AND name not like 'mor_server_%'", owner_id])
+      @devices = Device.find(:all, :select => "devices.*", :joins => "LEFT JOIN users ON (users.id = devices.user_id)", :conditions => ["users.owner_id = ? AND device_type != 'FAX' AND name not like 'mor_server_%'", owner_id])
     end
 
     if !@device.blank? and @device != 'all' and @device.to_i != 0
       conditions_str << "(recordings.src_device_id  = ? OR recordings.dst_device_id  = ?)"
       conditions_var += [@device, @device]
     end
-    
-   @users = User.find_all_for_select(corrected_user_id,{:exclude_owner=>true})
+
+    @users = User.find_all_for_select(corrected_user_id, {:exclude_owner => true})
 
     @recordings = Recording.find(:all, :select => "recordings.*", :joins => "LEFT JOIN users ON (users.id = recordings.user_id)", :conditions => [conditions_str.join(' AND ')] +conditions_var, :limit => session[:items_per_page], :offset => (@page-1)*session[:items_per_page], :order => "datetime DESC")
-    
+
     @size = Recording.count(:joins => "LEFT JOIN users ON (users.id = recordings.user_id)", :conditions => [conditions_str.join(' AND ')] +conditions_var)
     @total_pages = @size / session[:items_per_page]
-    
+
     @server_path = get_server_path(1)
     @remote_server_path = get_server_path(0)
-    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend? )
+    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend?)
   end
- 
+
 =begin  rdoc
   
 =end
@@ -484,7 +485,7 @@ class RecordingsController < ApplicationController
         end
       end
     }
-    users.each { |num,user|
+    users.each { |num, user|
       new = params[:"recording_enabled_#{num}"].to_i.to_s+params[:"recording_forced_enabled_#{num}"].to_i.to_s+params[:"recording_hdd_quota_#{num}"].to_s+params[:"recordings_email_#{num}"].to_s
       old = user.recording_enabled.to_s + user.recording_forced_enabled.to_s + user.recording_hdd_quota.to_s + user.recordings_email.to_s
       if new != old
@@ -501,13 +502,13 @@ class RecordingsController < ApplicationController
 
 =begin rdoc
  Destroys recording. Action for user.
-=end 
+=end
 
   def destroy_recording
     @recording = Recording.find_by_id(params[:id])
     unless @recording
       flash[:notice] = _('Recording_was_not_found')
-      redirect_to :controller=>"callc", :action => 'main' and return false
+      redirect_to :controller => "callc", :action => 'main' and return false
     end
     a=check_user_for_recording(@recording)
     return false if !a
@@ -519,51 +520,51 @@ class RecordingsController < ApplicationController
     redirect_to(:action => "recordings") and return false
   end
 
-  
+
 =begin rdoc
  Destroys recording. 
-=end 
+=end
 
   def destroy
     rec = Recording.find_by_id(params[:id])
     unless rec
       flash[:notice] = _('Recording_was_not_found')
-      redirect_to :controller=>"callc", :action => 'main' and return false
+      redirect_to :controller => "callc", :action => 'main' and return false
     end
     a=check_user_for_recording(rec)
     return false if !a
-    
+
     if rec.user_id != session[:user_id] and rec.dst_user_id != session[:user_id]
       dont_be_so_smart
-      redirect_to :controller => "callc", :action => "main" and return false 
+      redirect_to :controller => "callc", :action => "main" and return false
     end
     # allow to delete when src/dst matches otherwise -> do invisible
     if rec.user_id == rec.dst_user_id or (rec.user_id == session[:user_id] and rec.visible_to_dst_user == 0) or (rec.dst_user_id == session[:user_id] and rec.visible_to_user == 0)
-    
+
       if rec.destroy_all
         flash[:notice] = _("Recording_was_destroyed")
       else
         flash[:notice] = _("Recording_was_not_destroyed")
       end
-    
+
     else
-    
+
       # hide recording for src user because dst user still can see it
-      if (rec.user_id == session[:user_id] and rec.visible_to_dst_user == 1)        
+      if (rec.user_id == session[:user_id] and rec.visible_to_dst_user == 1)
         rec.visible_to_user = 0
         rec.save
         flash[:notice] = _("Recording_was_destroyed")
       end
 
       # hide recording for dst user because src user still can see it
-      if (rec.dst_user_id == session[:user_id] and rec.visible_to_user == 1)        
+      if (rec.dst_user_id == session[:user_id] and rec.visible_to_user == 1)
         rec.visible_to_dst_user = 0
         rec.save
         flash[:notice] = _("Recording_was_destroyed")
       end
-        
+
     end
-    
+
     redirect_to :action => :list_recordings
   end
 
@@ -573,12 +574,12 @@ class RecordingsController < ApplicationController
     @find_rec_size = -1
     session[:recordings_delete_cond] = nil
     if params[:rec_action].to_i == 0
-      @devices = Device.find(:all, :include=>[:user], :conditions=>["users.owner_id = ? AND name not like 'mor_server_%'", correct_owner_id])
+      @devices = Device.find(:all, :include => [:user], :conditions => ["users.owner_id = ? AND name not like 'mor_server_%'", correct_owner_id])
     else
       cond = 'id = -1'
       @type = params[:rec_action].to_i
       if params[:rec_action].to_i == 1
-        @device = Device.find(:first, :conditions=>{:id=>params[:s_device]})
+        @device = Device.find(:first, :conditions => {:id => params[:s_device]})
         unless @device
           flash[:notice] = _('Device_was_not_found')
           redirect_back_or_default("/callc/main")
@@ -590,17 +591,17 @@ class RecordingsController < ApplicationController
         cond = "datetime BETWEEN '#{session_from_datetime}' AND '#{session_till_datetime}'"
       end
       session[:recordings_delete_cond] = cond
-      @find_rec_size = Recording.count(:all, :conditions=>cond)
+      @find_rec_size = Recording.count(:all, :conditions => cond)
     end
 
   end
 
   def bulk_delete
-    recordings = Recording.find(:all, :conditions=>session[:recordings_delete_cond])
+    recordings = Recording.find(:all, :conditions => session[:recordings_delete_cond])
     for r in recordings
       unless r
         flash[:notice] = _('Recording_was_not_found')
-        redirect_to :controller=>"callc", :action => 'main' and return false
+        redirect_to :controller => "callc", :action => 'main' and return false
       end
       a=check_user_for_recording(r)
       return false if !a
@@ -619,7 +620,7 @@ class RecordingsController < ApplicationController
 
 =begin rdoc
 
-=end 
+=end
 
   def get_server_path(local = 1)
 
@@ -628,27 +629,27 @@ class RecordingsController < ApplicationController
       #server_port = Confline.get_value("Recordings_addon_Port")
       #server_port.to_s != "" ? server_path = "http://"+ server + ":" + server_port : server_path = "http://"+ server
       server_path = "http://#{server.to_s}/recordings/"
-    else  
+    else
       server_path = Web_URL + Web_Dir + "/recordings/"
     end
-    
+
     server_path
-    
+
   end
 
 =begin rdoc
 
-=end 
+=end
 
   def check_user_for_recording(recording)
     if ((recording.user_id != session[:user_id] and recording.dst_user_id != session[:user_id])) and (session[:usertype] != "admin" and session[:usertype] != "reseller")
       dont_be_so_smart
-      redirect_to :controller => "callc", :action => "main" and return false 
+      redirect_to :controller => "callc", :action => "main" and return false
     end
-    if session[:usertype] == "reseller" and ((recording.user and recording.user.owner_id != session[:user_id]) and (recording.dst_user and recording.dst_user.owner_id != session[:user_id]) )
+    if session[:usertype] == "reseller" and ((recording.user and recording.user.owner_id != session[:user_id]) and (recording.dst_user and recording.dst_user.owner_id != session[:user_id]))
       if recording.user_id != session[:user_id]
         dont_be_so_smart
-        redirect_to :controller => "callc", :action => "main" and return false 
+        redirect_to :controller => "callc", :action => "main" and return false
       end
     end
     return true

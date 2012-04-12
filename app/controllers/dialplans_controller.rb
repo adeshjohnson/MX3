@@ -1,19 +1,19 @@
 # -*- encoding : utf-8 -*-
 class DialplansController < ApplicationController
   layout "callc"
-  before_filter :check_post_method, :only=>[:destroy, :create, :update, :did_assign_to_dp]
+  before_filter :check_post_method, :only => [:destroy, :create, :update, :did_assign_to_dp]
   before_filter :check_localization
   before_filter :authorize
-  before_filter :find_dialplan, :only=>[:list_extlines, :edit, :update, :destroy, :did_assign_to_dp]
+  before_filter :find_dialplan, :only => [:list_extlines, :edit, :update, :destroy, :did_assign_to_dp]
 
-  @@End_ivr = ['End IVR #1','End IVR #2','End IVR #3']
+  @@End_ivr = ['End IVR #1', 'End IVR #2', 'End IVR #3']
 
   def dialplans
     @page_title = _('Dial_Plans')
 
     @ccdps = []
     @ccdps = current_user.dialplans.find(:all, :select => 'dialplans.*, ivrs.name AS balance_ivr', :joins => "LEFT JOIN ivrs ON dialplans.data12 = ivrs.id", :conditions => "dptype = 'callingcard'", :order => "name ASC") if cc_active?
-    
+
     @abpdps = current_user.dialplans.find(:all, :conditions => "dptype = 'authbypin'", :order => "name ASC")
     @cbdps = current_user.dialplans.find(:all, :conditions => "dptype = 'callback'", :order => "name ASC") if callback_active?
     @ivr_dialplans = current_user.dialplans.find(:all, :conditions => "dptype = 'ivr'", :order => "name ASC")
@@ -45,7 +45,7 @@ class DialplansController < ApplicationController
     @page_icon = "edit.png"
 
     @cbdids = Did.find_by_sql("SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != 'callback' AND reseller_id = #{current_user.id}")
-    @cbdevices =  Device.find(:all, :conditions => "user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'", :include=>[:user], :order => "name ASC")
+    @cbdevices = Device.find(:all, :conditions => "user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'", :include => [:user], :order => "name ASC")
     @cardgroups = Cardgroup.find_by_sql("SELECT cardgroups.id, cardgroups.number_length, cardgroups.pin_length FROM cardgroups WHERE owner_id = #{current_user.id} group by number_length , pin_length ")
     if @dp.dptype == "ivr"
       @dialplan = @dp
@@ -55,12 +55,12 @@ class DialplansController < ApplicationController
     end
 
     if @dp.dptype == "callback" and callback_active?
-      @free_dids = Did.find(:all, :conditions=>['status = "free" AND reseller_id = ?', current_user.id], :order=>'did ASC')
+      @free_dids = Did.find(:all, :conditions => ['status = "free" AND reseller_id = ?', current_user.id], :order => 'did ASC')
       @help_link = "http://wiki.kolmisoft.com/index.php/Callback"
     end
     if @dp.dptype == 'authbypin'
       @users = current_user.find_all_for_select
-      if @dp.data5.blank?      
+      if @dp.data5.blank?
         @user_id = ""
       else
         device_used = Device.find_by_id(@dp.data5.to_i)
@@ -69,7 +69,7 @@ class DialplansController < ApplicationController
       @cc_dialplans = Dialplan.find(:all, :conditions => {:dptype => 'callingcard', :user_id => current_user.get_corrected_owner_id})
     end
     if @dp.dptype == 'callingcard' and mor_11_extend?
-      @balance_ivrs = current_user.ivrs.find(:all)  
+      @balance_ivrs = current_user.ivrs.find(:all)
     end
 
     if @dp.dptype == 'quickforwarddids'
@@ -90,7 +90,7 @@ class DialplansController < ApplicationController
     @device_selected = params[:device_id].to_i
     @device = []
     if params[:id]
-      @device = Device.find(:all,:conditions =>['user_id =? AND name not like "mor_server_%"',params[:id]])
+      @device = Device.find(:all, :conditions => ['user_id =? AND name not like "mor_server_%"', params[:id]])
     end
     render :layout => false
   end
@@ -99,7 +99,7 @@ class DialplansController < ApplicationController
     did = Did.find_by_id(params[:did_id])
     unless did
       flash[:notice]=_('Did_was_not_found')
-      redirect_to :action=>:dialplans and return false
+      redirect_to :action => :dialplans and return false
     end
     did.dialplan_id = @dp.id
     did.status = "active"
@@ -113,8 +113,8 @@ class DialplansController < ApplicationController
   def update
 
     unless params[:dialplan]
-     flash[:notice] = _('Dont_Be_So_Smart')
-     redirect_to :action => 'dialplans' and return false
+      flash[:notice] = _('Dont_Be_So_Smart')
+      redirect_to :action => 'dialplans' and return false
     end
 
     if params[:dialplan][:name].length == 0
@@ -128,11 +128,11 @@ class DialplansController < ApplicationController
       @cardgroup = Cardgroup.find_by_id(params[:dialplan_number_pin_length])
       unless @cardgroup
         flash[:notice]=_('Cardgroup_was_not_found')
-        redirect_to :action=>:dialplans and return false
+        redirect_to :action => :dialplans and return false
       end
       @dp.data1=@cardgroup.number_length
       @dp.data2=@cardgroup.pin_length
-      
+
       #tell time - data3
 
       @dp.data3 = @dp.tell_time_status(params[:dialplan][:data3], params[:tell_seconds])
@@ -140,7 +140,7 @@ class DialplansController < ApplicationController
       @dp.data4 = params[:dialplan][:data4] ? 1 : 0
       @dp.data7 = params[:dialplan][:data7] ? 1 : 0
       @dp.data8 = params[:dialplan][:data8] ? 1 : 0
-     
+
       @dp.data5 = params[:dialplan][:data5].strip if params[:dialplan][:data5].to_i > 0
       @dp.data6 = params[:dialplan][:data6].strip if params[:dialplan][:data6].to_i > 0
       @dp.data9 = params[:end_ivr].to_i + 1
@@ -154,8 +154,8 @@ class DialplansController < ApplicationController
     end
 
     if @dp.dptype == "authbypin"
-      if params[:dialplan][:data1].to_i > 0 or (params[:dialplan][:data3].to_i == 1 and params[:dialplan][:data1].to_i >= 0 )
-        @dp.data1 = params[:dialplan][:data1].strip 
+      if params[:dialplan][:data1].to_i > 0 or (params[:dialplan][:data3].to_i == 1 and params[:dialplan][:data1].to_i >= 0)
+        @dp.data1 = params[:dialplan][:data1].strip
       elsif params[:dialplan][:data3].to_i == 0 and params[:dialplan][:data1].to_i == 0
         @dp.data1 = 1
       end
@@ -164,24 +164,24 @@ class DialplansController < ApplicationController
       @dp.data3 = params[:dialplan][:data3] ? 1 : 0
       @dp.data4 = params[:dialplan][:data4] ? 1 : 0
       @dp.data6 = params[:dialplan][:data6].to_i == 1 ? "1" : "0"
-      if params[:dialplan][:data3].to_i != 0 
+      if params[:dialplan][:data3].to_i != 0
         @dp.data5 = params[:users_device]
       else
         @dp.data5 = ""
       end
       if Dialplan.find(:first, :conditions => {:id => params[:dialplan][:data7].to_i, :user_id => current_user.get_corrected_owner_id})
-        @dp.data7 = params[:dialplan][:data7].to_i 
+        @dp.data7 = params[:dialplan][:data7].to_i
       else
         @dp.data7 = 0
       end
     end
 
-    if callback_active?  and @dp.dptype == "callback" and params[:dialplan]
+    if callback_active? and @dp.dptype == "callback" and params[:dialplan]
       @dp.data1 = params[:dialplan][:data1].strip if params[:dialplan][:data1]
       @dp.data2 = params[:dialplan][:data2].strip
       @dp.data3 = params[:dialplan][:data3].strip
       @dp.data4 = params[:dialplan][:data4] ? params[:dialplan][:data4].to_i : 0
-      @dp.data5 = params[:dialplan][:data5].strip 
+      @dp.data5 = params[:dialplan][:data5].strip
       @dp.data6 = params[:dialplan][:data6].strip
     end
 
@@ -189,13 +189,13 @@ class DialplansController < ApplicationController
       @dp.update_attributes(params[:dialplan])
     end
 
-    if @dp.dptype == "quickforwarddids" 
+    if @dp.dptype == "quickforwarddids"
       @dp.data10 = 0 if params[:dialplan][:data10].to_i == 0
-      if params[:dialplan][:data10].to_i == 0 and params[:users_device].to_i == 0 
+      if params[:dialplan][:data10].to_i == 0 and params[:users_device].to_i == 0
         flash[:notice] = _('Select_device_or_set_diversion')
         redirect_to :action => 'edit', :id => @dp.id and return false
       end
-      if params[:dialplan][:data10].to_i == 0 
+      if params[:dialplan][:data10].to_i == 0
         if not User.find(:first, :joins => "JOIN devices ON devices.user_id = users.id", :conditions => "devices.id = #{params[:users_device].to_i} AND users.owner_id = #{current_user.get_corrected_owner_id}")
           flash[:notice] = _('Device_was_not_found')
           redirect_to :action => 'edit', :id => @dp.id and return false
@@ -211,7 +211,7 @@ class DialplansController < ApplicationController
 
 
     if @dp.save
-      add_action(session[:user_id], 'dp_edited',@dp.id)
+      add_action(session[:user_id], 'dp_edited', @dp.id)
       if @dp.dptype == "ivr"
         session[:integrity_check] = DidsController::reformat_dialplans
       end
@@ -229,13 +229,13 @@ class DialplansController < ApplicationController
   def new
     @page_title = _('Dial_Plan_new')
     @page_icon = "add.png"
-    @dp = Dialplan.new({:data2=>5})
+    @dp = Dialplan.new({:data2 => 5})
 
     @cbdids = Did.find_by_sql("SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != 'callback' AND dids.reseller_id = #{current_user.id}")
     @cardgroups = Cardgroup.find_by_sql("SELECT cardgroups.id, cardgroups.number_length, cardgroups.pin_length FROM cardgroups WHERE owner_id = #{current_user.id} group by number_length , pin_length ")
-    @cbdevices = Device.find(:all, :conditions => "user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'", :include=>[:user], :order => "name ASC")
+    @cbdevices = Device.find(:all, :conditions => "user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'", :include => [:user], :order => "name ASC")
     @cc_dialplans = Dialplan.find(:all, :conditions => {:dptype => 'callingcard', :user_id => current_user.get_corrected_owner_id})
-    @balance_ivrs = current_user.ivrs.find(:all)  
+    @balance_ivrs = current_user.ivrs.find(:all)
 
 
     @ivrs = current_user.ivrs.find(:all)
@@ -265,7 +265,7 @@ class DialplansController < ApplicationController
       @cardgroup = Cardgroup.find(:first, :conditions => "id = #{params[:dialplan_number_pin_length]}")
       unless @cardgroup
         flash[:notice]=_('Cardgroup_was_not_found')
-        redirect_to :action=>:dialplans and return false
+        redirect_to :action => :dialplans and return false
       end
       if @cardgroup
         dp.data1=@cardgroup.number_length
@@ -281,7 +281,7 @@ class DialplansController < ApplicationController
 
       #tell time - data3
       dp.data3 = dp.tell_time_status(dp.data3, params[:tell_seconds])
-      
+
       dp.data4 = 0 if not dp.data4
       dp.data5 = 3 if dp.data5.length == 0
       dp.data6 = 3 if dp.data6.length == 0
@@ -294,9 +294,9 @@ class DialplansController < ApplicationController
       end
     end
 
-    if dp.dptype == "quickforwarddids" 
+    if dp.dptype == "quickforwarddids"
       dp.data10 = 0 if dp.data10.to_s.length == 0
-      if dp.data10 == 0 and params[:users_device].to_i == 0 
+      if dp.data10 == 0 and params[:users_device].to_i == 0
         flash[:notice] = _('Select_device_or_set_diversion')
         redirect_to :action => 'new' and return false
       end
@@ -310,20 +310,20 @@ class DialplansController < ApplicationController
 
 
     if dp.dptype == "authbypin"
-      if params[:dialplan][:data1].to_i > 0 or (params[:dialplan][:data3].to_i == 1 and params[:dialplan][:data1].to_i >= 0 )
-        dp.data1 = params[:dialplan][:data1].strip 
+      if params[:dialplan][:data1].to_i > 0 or (params[:dialplan][:data3].to_i == 1 and params[:dialplan][:data1].to_i >= 0)
+        dp.data1 = params[:dialplan][:data1].strip
       elsif params[:dialplan][:data3].to_i == 0 and params[:dialplan][:data1].to_i == 0
         dp.data1 = 3
       end
       dp.data2 = 3 if dp.data2.length == 0
       dp.data3 = 0 if not dp.data3
       dp.data4 = 0 if not dp.data4
-      dp.data5 =  params[:users_device]
-      dp.data6 =  params[:dialplan][:data6].to_i == 1 ? "1" : "0"
-      dp.data7 =  params[:dialplan][:data7].to_i
+      dp.data5 = params[:users_device]
+      dp.data6 = params[:dialplan][:data6].to_i == 1 ? "1" : "0"
+      dp.data7 = params[:dialplan][:data7].to_i
     end
 
-    if callback_active?  and dp.dptype == "callback"
+    if callback_active? and dp.dptype == "callback"
       dp.data2 = 5 if dp.data2.length == 0
     end
 
@@ -331,7 +331,7 @@ class DialplansController < ApplicationController
       if dp.dptype == "ivr"
         dp.regenerate_ivr_dialplan
       end
-      add_action(session[:user_id], 'dp_created',dp.id)
+      add_action(session[:user_id], 'dp_created', dp.id)
       flash[:status] = _('Dialplan_was_successfully_created')
     else
       flash[:notice] = _('Dialplan_was_not_created')
@@ -358,7 +358,7 @@ class DialplansController < ApplicationController
         end
       end
     end
-    add_action(session[:user_id], 'dp_deleted',@dp.id)
+    add_action(session[:user_id], 'dp_deleted', @dp.id)
     name = @dp.name
     @dp.destroy_all
     flash[:status] = _('Dialplan_deleted') + ": " + name
@@ -368,10 +368,10 @@ class DialplansController < ApplicationController
   private
 
   def find_dialplan
-    @dp = Dialplan.find(:first, :conditions=>{:id=>params[:id]})
+    @dp = Dialplan.find(:first, :conditions => {:id => params[:id]})
     unless @dp
       flash[:notice]=_('Dialplan_was_not_found')
-      redirect_to :controller=>:callc, :action=>:main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
 
     unless @dp.user_id.to_i == current_user.id.to_i

@@ -41,7 +41,7 @@ class Array
   # subsets of the array's elements will be returned.
   def power
     # the power set line is stolen from http://johncarrino.net/blog/2006/08/11/powerset-in-ruby/
-    inject([[]]){|c,y|r=[];c.each{|i|r<<i;r<<i+[y]};r}
+    inject([[]]) { |c, y| r=[]; c.each { |i| r<<i; r<<i+[y] }; r }
   end
 end
 
@@ -50,8 +50,8 @@ class TestTaxTableFactory
   def effective_tax_tables_at(time)
     table = Google4R::Checkout::TaxTable.new(false)
     table.name = "Some Table"
-    
-    [ table ]
+
+    [table]
   end
 end
 
@@ -59,7 +59,7 @@ class Test::Unit::TestCase
   def assert_nospace_equal(expected, actual)
     return assert_equal(expected.gsub(/\s/, ''), actual.gsub(/\s/, ''))
   end
-  
+
   # Perform assertion on strings. The advantage of this method over the normal assert_equal
   # method is that it displays the exact mismatch location and is aware of multi line strings.
   # 
@@ -76,16 +76,16 @@ class Test::Unit::TestCase
   #   3>.Actual value is a real prefix of the expected value!
   def assert_strings_equal(expected, actual, msg=nil)
     return true if expected == actual
-    
+
     message = msg.nil? ? '' : "#{msg}\n"
     message += %Q{<#{expected}> expected but was
 <#{actual}>.}
-    
+
     expected_lines, actual_lines = expected.split(/\r\n|\n|\r/), actual.split(/\r\n|\n|\r/)
-    
-    1.upto([ expected_lines.length, actual_lines.length ].min) do |i|
+
+    1.upto([expected_lines.length, actual_lines.length].min) do |i|
       next if expected_lines[i] == actual_lines[i]
-      
+
       # expected line != actual line
       if expected_lines[i].length != actual_lines[i].length then
         _wrap_assertion do
@@ -93,7 +93,7 @@ class Test::Unit::TestCase
           raise Test::Unit::AssertionFailedError, message
         end
       end
-      
+
       1.upto(expected_lines[i].length) do |j|
         if expected_lines[i][j] != actual_lines[i][j] then
           _wrap_assertion do
@@ -103,7 +103,7 @@ class Test::Unit::TestCase
         end
       end
     end
-    
+
     # if we reach here then one of expected and actual is a prefix of the other
     if expected.length < actual.length then
       message += "\nExpected value is a real prefix of the actual value!"

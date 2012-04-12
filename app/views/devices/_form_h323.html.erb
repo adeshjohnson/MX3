@@ -1,370 +1,397 @@
 <table width="100%">
-  <tr>
-    <td valign="top">
-      <table class="simple">
+<tr>
+<td valign="top">
+<table class="simple">
+<tr>
+  <td colspan="2" class="bottom_border">
+    <b><%= _('General') %></b>
+  </td>
+</tr>
+<tr>
+  <td height="10"></td>
+</tr>
+<tr>
+  <td> <%= _('Accountcode') %>:</td>
+  <td><%= @device.accountcode if @device %> </td>
+</tr>
+<tr>
+  <td> <%= _('Description') %>:</td>
+  <td><%= text_field 'device', 'description', "class" => "input" %> </td>
+</tr>
+<% if session[:usertype] == "accountant" %>
+    <% if session[:acc_device_pin].to_i > 0 %>
         <tr>
-          <td colspan="2" class="bottom_border">
-            <b><%= _('General') %></b>
-          </td>
-        </tr>
-        <tr><td height="10"></td></tr>
-        <tr>
-          <td> <%= _('Accountcode') %>:   </td>
-          <td><%= @device.accountcode  if @device %> </td>
-        </tr>
-        <tr>
-          <td> <%= _('Description') %>:   </td>
-          <td><%= text_field 'device', 'description', "class" => "input" %> </td>
-        </tr>
-        <% if session[:usertype] == "accountant" %>
-          <% if session[:acc_device_pin].to_i > 0 %>
-            <tr>
-              <td id="device_pin_name"> <%= _('PIN') %>:   </td>
-              <% if session[:acc_device_pin].to_i == 1 %>
-                <td id="device_pin_value"><%= @device.pin %></td>
-              <% end %>
-
-              <% if session[:acc_device_pin].to_i == 2 %>
-                <td id="device_pin_value"><%= text_field 'device', 'pin', "class" => "input" %> </td>
-              <% end %>
-            </tr>
+          <td id="device_pin_name"> <%= _('PIN') %>:</td>
+          <% if session[:acc_device_pin].to_i == 1 %>
+              <td id="device_pin_value"><%= @device.pin %></td>
           <% end %>
-        <% elsif session[:usertype] == "reseller" %>
-          <tr>
-            <td> <%= _('PIN') %>:   </td>
-            <td id="device_pin_value"><%= @device.pin %></td>
-          </tr>
-        <%else%>
-          <tr>
-            <td id="device_pin_name"> <%= _('PIN') %>:   </td>
-            <td id="device_pin_value"><%= text_field 'device', 'pin', "class" => "input" %> </td>
-          </tr>
-        <% end %>
-        <tr>
-          <td> <%= _('Device_group') %>:   </td>
-          <td>
-            <select name="device[devicegroup_id]" >
-              <% if @devgroups %>
-                <% for dg in @devgroups %>
-                  <option value="<%= dg.id %>" <%= "selected" if @device.devicegroup.id == dg.id if @device.devicegroup %>> <%= dg.name %> </option>
-                <% end %>
-              <% end %>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td> <%= _('Tech') %>: </td>
-          <td> <b><%= @device_type %></b>   </td>
-        </tr>
-        <tr>
-          <td height="5"></td>
-        </tr>
-        <% if !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_1] != 2 )%>
-          <tr>
-            <td id="extension_name"><%= _('extension') %>:</td>
-            <td id="extension_value"><%= text_field_tag 'device[extension]', @extension, "class" => "input", :id=>"device_extension" %></td>
-          </tr>
-        <% else %>
-          <% if session[:usertype] == "accountant" and session[:acc_device_edit_opt_1] == 1 or current_user.usertype == 'reseller'%>
-            <tr>
-              <td id="extension_name"><%= _('extension') %>:</td>
-              <td id="extension_value"><%= @extension %></td>
-            </tr>
-          <% end %>
-        <% end %>
-        <tr>
-          <td> <%= _('DTMF_Mode') %>:   </td>
-          <td>
-            <% if @device
-              device_dtmfmode = @device.dtmfmode
-            else
-              device_dtmfmode = Confline.get_value("Default_device_dtmfmode", session[:user_id])
-            end %>
-            <select name="device[dtmfmode]" >
-              <option value="inband" <%= "selected" if device_dtmfmode == "inband"%>> inband </option>
-              <option value="rfc2833" <%= "selected" if device_dtmfmode == "rfc2833"%>> rfc2833 </option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td> <%= _('Location') %>:   </td>
-          <td>
-            <% if @device
-              device_location_id = @device.location_id
-            else
-              device_location_id = Confline.get_value("Default_device_location_id", session[:user_id])
-            end
-          %>
-            <select name="device[location_id]" >
-              <% for loc in @locations %>
-                <option value=<%= loc.id %> <%= "selected" if device_location_id.to_i == loc.id %>> <%= loc.name %> </option>
-              <% end %>
-            </select>
 
-          </td>
-        </tr>
-        <%
-        if @device
-          timeout = @device.timeout
-          max_timeout = @device.max_timeout
-        else
-          timeout = Confline.get_value("Default_device_timeout", session[:user_id])
-          max_timeout = Confline.get_value("Default_device_max_timeout", session[:user_id])
-        end                              %>
-        <tr>
-          <td> <%= _('Ringing_Timeout') %>:   </td>
-          <td><%= text_field_tag 'device_timeout', timeout, "class" => "input" , :size => "5", :maxlength => "4" %> <%= _('seconds') %> </td>
-        </tr>
-        <tr <%= tooltip(_('Call_Timeout'), _('Call_Timeout_Explanation')) %> >
-          <td> <%= _('Call_Timeout') %>:   </td>
-          <td><%= text_field_tag 'device[max_timeout]', max_timeout, "class" => "input" , :size => "5", :maxlength => "4" %> <%= _('seconds') %> </td>
-        </tr>
-        <% if @device
-          device_ani = @device.ani
-          device_istrunk = @device.istrunk
-          #device_record = @device.record
-          dev_call_limit = @device.call_limit
-          device_server = @device.server_id #if session[:usertype] == 'admin'
-        else
-          device_ani = Confline.get_value("Default_device_ani", session[:user_id]).to_i
-          device_istrunk = Confline.get_value("Default_device_istrunk", session[:user_id])
-          device_server = Confline.get_value("Default_device_server_id", session[:user_id])
-          if session[:usertype] == 'admin'
-            device_record = Confline.get_value("Default_device_record", session[:user_id])
-
-          else
-            device_record = 0
-          end
-          dev_call_limit = Confline.get_value("Default_device_call_limit", session[:user_id])
-        end
-
-
-      %>
-        <% if session[:usertype] == "admin" or session[:usertype] == "reseller" or (session[:usertype] == "accountant" and session[:acc_user_create_opt_7].to_i == 1) %>
-          <tr>
-            <td> <%= _('Call_limit') %>:   </td>
-            <td>
-              <%= text_field_tag 'call_limit', dev_call_limit, "class" => "input", :size => "9", :maxlength => "10" %>  ( <%= _('Call_limit_notice') %> *)
-            </td>
-          </tr>
-  <%# if session[:usertype] == "admin"%>
-          <tr>
-            <td> <%= b_server + _('Server') %>:   </td>
-            <td>
-              <select name="device[server_id]" >
-                <% for ser in @servers %>
-                  <option value=<%= ser.server_id %> <%= "selected" if device_server.to_i == ser.server_id %>> ID: <%= ser.server_id %>, IP: <%= ser.server_ip %> (<%= ser.comment%>) </option>
-                <% end %>
-              </select>
-            </td>
-          </tr>
-  <%# end %>
-        <% else %>
-          <% if session[:usertype] == "accountant" and session[:acc_user_create_opt_7].to_i == 1 %>
-            <tr>
-              <td id="set_call_limit_name"><%= _('Call_limit') %>:</td>
-              <td><%= dev_call_limit %></td>
-            </tr>
+          <% if session[:acc_device_pin].to_i == 2 %>
+              <td id="device_pin_value"><%= text_field 'device', 'pin', "class" => "input" %> </td>
           <% end %>
-        <% end %>
-        <tr><td height="20"></td></tr>
-        <tr>
-          <td class="bottom_border" colspan=2>
-            <b><%= _('Network_related') %></b>
-          </td>
         </tr>
-        <tr><td height="10"></td></tr>
-        <tr>
-          <td> <%= _('Hostname') %>/<%= _('IP') %>:   </td>
-          <td> <%= text_field_tag 'host', @device.host, "class" => "input" %> </td>
-        </tr>
-        <tr>
-          <td> <%= _('Port') %>:   </td>
-          <td> <%= text_field_tag 'port', @device.port, "class" => "input" %> </td>
-        </tr>
-        <tr>
-          <td> <%= _('Fast_Start') %>:   </td>
-          <td>
-            <%= radio_button_tag('device[faststart]', 'no', checked = (@device.faststart == 'no') ) %> <%= _('No') %>
-            <%= radio_button_tag('device[faststart]', 'yes', checked = (@device.faststart == 'yes') ) %> <%= _('Yes') %>
-          </td>
-        </tr>
-        <tr>
-          <td> <%= _('h245_Tunneling') %>:   </td>
-          <td>
-            <%= radio_button_tag('device[h245tunneling]', 'no', checked = (@device.h245tunneling == 'no') ) %> <%= _('No') %>
-            <%= radio_button_tag('device[h245tunneling]', 'yes', checked = (@device.h245tunneling == 'yes') ) %> <%= _('Yes') %>
-          </td>
-        </tr>
-        <tr><td height="20"></td></tr>
-        <tr>
-          <td class="bottom_border" colspan=2>
-            <b><%= _('CallerID') %></b>
-          </td>
-        </tr>
-        <tr><td height="10"></td></tr>
-        <% if !(session[:usertype] == 'accountant' and session[:acc_device_edit_opt_3] != 2) %>
-          <tr>
-            <td> <%= _('Name') %>:   </td>
-            <td> <%= text_field_tag('cid_name', @cid_name, "class" => "input") %> </td>
-          </tr>
-        <% else %>
-          <% if session[:usertype] == 'accountant' and session[:acc_device_edit_opt_3] == 1 %>
-            <tr>
-              <td id="cid_name_name"><%= _('Name') %>:</td>
-              <td id="cid_name_value"><%= @cid_name %></td>
-            </tr>
+    <% end %>
+<% elsif session[:usertype] == "reseller" %>
+    <tr>
+      <td> <%= _('PIN') %>:</td>
+      <td id="device_pin_value"><%= @device.pin %></td>
+    </tr>
+<% else %>
+    <tr>
+      <td id="device_pin_name"> <%= _('PIN') %>:</td>
+      <td id="device_pin_value"><%= text_field 'device', 'pin', "class" => "input" %> </td>
+    </tr>
+<% end %>
+<tr>
+  <td> <%= _('Device_group') %>:</td>
+  <td>
+    <select name="device[devicegroup_id]">
+      <% if @devgroups %>
+          <% for dg in @devgroups %>
+              <option value="<%= dg.id %>" <%= "selected" if @device.devicegroup.id == dg.id if @device.devicegroup %>> <%= dg.name %> </option>
           <% end %>
-        <% end %>
-        <% if !(session[:usertype] == 'accountant' and session[:acc_device_edit_opt_4] != 2) %>
-          <tr>
-            <td id="cid_number_name"> <%= _('Number') %>:   </td>
-            <td id="cid_number_value"> <%= text_field_tag('cid_number', @cid_number, "class" => "input") %> </td>
-          </tr>
-        <% else %>
-          <% if session[:usertype] == 'accountant' and session[:acc_device_edit_opt_4] == 1 %>
-            <tr>
-              <td id="cid_number_name"><%= _('Number') %>:</td>
-              <td id="cid_number_value"><%= @cid_number %></td>
-            </tr>
-          <% end %>
-        <% end %>
-        <% if @device
-          device_voicemail_active = @device.voicemail_active
-          device_voicemail_box = @device.voicemail_box
-          device_voicemail_box_email = @device.voicemail_box.email
-          device_voicemail_box_password = @device.voicemail_box.password
-          device_enable_mwi = @device.enable_mwi
-          forward_did = @device.forward_did_id.to_i
-        else
-          device_voicemail_active = Confline.get_value("Default_device_voicemail_active", session[:user_id])
-          device_voicemail_box = Confline.get_value("Default_device_voicemail_box", session[:user_id])
-          device_voicemail_box_email = Confline.get_value("Default_device_voicemail_box_email", session[:user_id])
-          device_voicemail_box_password = Confline.get_value("Default_device_voicemail_box_password", session[:user_id])
-          device_enable_mwi = Confline.get_value("Default_device_enable_mwi", session[:user_id])
-        end
-      %>
-        <tr><td height="20"></td></tr>
+      <% end %>
+    </select>
+  </td>
+</tr>
+<tr>
+  <td> <%= _('Tech') %>:</td>
+  <td><b><%= @device_type %></b></td>
+</tr>
+<tr>
+  <td height="5"></td>
+</tr>
+<% if !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_1] != 2) %>
+    <tr>
+      <td id="extension_name"><%= _('extension') %>:</td>
+      <td id="extension_value"><%= text_field_tag 'device[extension]', @extension, "class" => "input", :id => "device_extension" %></td>
+    </tr>
+<% else %>
+    <% if session[:usertype] == "accountant" and session[:acc_device_edit_opt_1] == 1 or current_user.usertype == 'reseller' %>
         <tr>
-          <td class="bottom_border" colspan=2>
-            <b><%= b_voicemail + _('VoiceMail') %></b>
-          </td>
+          <td id="extension_name"><%= _('extension') %>:</td>
+          <td id="extension_value"><%= @extension %></td>
         </tr>
-        <tr><td height="10"></td></tr>
-        <% if device_voicemail_box or device_voicemail_box.to_i == 1 %>
-          <tr>
-            <td> <%= _('Email') %>:   </td>
-            <td> <%= text_field_tag 'vm_email', device_voicemail_box_email, "class" => "input" %>  </td>
-          </tr>
-          <% if session[:usertype] == "accountant" %>
-            <% if session[:acc_voicemail_password].to_i > 0%>
-              <tr>
-                <td> <%= _('Password') %>:   </td>
-                <% if session[:acc_voicemail_password].to_i == 1 %>
+    <% end %>
+<% end %>
+<tr>
+  <td> <%= _('DTMF_Mode') %>:</td>
+  <td>
+    <% if @device
+         device_dtmfmode = @device.dtmfmode
+       else
+         device_dtmfmode = Confline.get_value("Default_device_dtmfmode", session[:user_id])
+       end %>
+    <select name="device[dtmfmode]">
+      <option value="inband" <%= "selected" if device_dtmfmode == "inband" %>> inband</option>
+      <option value="rfc2833" <%= "selected" if device_dtmfmode == "rfc2833" %>> rfc2833</option>
+    </select>
+  </td>
+</tr>
+<tr>
+  <td> <%= _('Location') %>:</td>
+  <td>
+    <% if @device
+         device_location_id = @device.location_id
+       else
+         device_location_id = Confline.get_value("Default_device_location_id", session[:user_id])
+       end
+    %>
+    <select name="device[location_id]">
+      <% for loc in @locations %>
+          <option value=<%= loc.id %> <%= "selected" if device_location_id.to_i == loc.id %>> <%= loc.name %> </option>
+      <% end %>
+    </select>
+
+  </td>
+</tr>
+<%
+   if @device
+     timeout = @device.timeout
+     max_timeout = @device.max_timeout
+   else
+     timeout = Confline.get_value("Default_device_timeout", session[:user_id])
+     max_timeout = Confline.get_value("Default_device_max_timeout", session[:user_id])
+   end %>
+<tr>
+  <td> <%= _('Ringing_Timeout') %>:</td>
+  <td><%= text_field_tag 'device_timeout', timeout, "class" => "input", :size => "5", :maxlength => "4" %> <%= _('seconds') %> </td>
+</tr>
+<tr <%= tooltip(_('Call_Timeout'), _('Call_Timeout_Explanation')) %> >
+  <td> <%= _('Call_Timeout') %>:</td>
+  <td><%= text_field_tag 'device[max_timeout]', max_timeout, "class" => "input", :size => "5", :maxlength => "4" %> <%= _('seconds') %> </td>
+</tr>
+<% if @device
+     device_ani = @device.ani
+     device_istrunk = @device.istrunk
+     #device_record = @device.record
+     dev_call_limit = @device.call_limit
+     device_server = @device.server_id #if session[:usertype] == 'admin'
+   else
+     device_ani = Confline.get_value("Default_device_ani", session[:user_id]).to_i
+     device_istrunk = Confline.get_value("Default_device_istrunk", session[:user_id])
+     device_server = Confline.get_value("Default_device_server_id", session[:user_id])
+     if session[:usertype] == 'admin'
+       device_record = Confline.get_value("Default_device_record", session[:user_id])
+
+     else
+       device_record = 0
+     end
+     dev_call_limit = Confline.get_value("Default_device_call_limit", session[:user_id])
+   end
+
+
+%>
+<% if session[:usertype] == "admin" or session[:usertype] == "reseller" or (session[:usertype] == "accountant" and session[:acc_user_create_opt_7].to_i == 1) %>
+    <tr>
+      <td> <%= _('Call_limit') %>:</td>
+      <td>
+        <%= text_field_tag 'call_limit', dev_call_limit, "class" => "input", :size => "9", :maxlength => "10" %>
+        ( <%= _('Call_limit_notice') %> *)
+      </td>
+    </tr>
+    <%# if session[:usertype] == "admin"%>
+    <tr>
+      <td> <%= b_server + _('Server') %>:</td>
+      <td>
+        <select name="device[server_id]">
+          <% for ser in @servers %>
+              <option value=<%= ser.server_id %> <%= "selected" if device_server.to_i == ser.server_id %>>
+                ID: <%= ser.server_id %>, IP: <%= ser.server_ip %> (<%= ser.comment %>)
+              </option>
+          <% end %>
+        </select>
+      </td>
+    </tr>
+    <%# end %>
+<% else %>
+    <% if session[:usertype] == "accountant" and session[:acc_user_create_opt_7].to_i == 1 %>
+        <tr>
+          <td id="set_call_limit_name"><%= _('Call_limit') %>:</td>
+          <td><%= dev_call_limit %></td>
+        </tr>
+    <% end %>
+<% end %>
+<tr>
+  <td height="20"></td>
+</tr>
+<tr>
+  <td class="bottom_border" colspan=2>
+    <b><%= _('Network_related') %></b>
+  </td>
+</tr>
+<tr>
+  <td height="10"></td>
+</tr>
+<tr>
+  <td> <%= _('Hostname') %>/<%= _('IP') %>:</td>
+  <td> <%= text_field_tag 'host', @device.host, "class" => "input" %> </td>
+</tr>
+<tr>
+  <td> <%= _('Port') %>:</td>
+  <td> <%= text_field_tag 'port', @device.port, "class" => "input" %> </td>
+</tr>
+<tr>
+  <td> <%= _('Fast_Start') %>:</td>
+  <td>
+    <%= radio_button_tag('device[faststart]', 'no', checked = (@device.faststart == 'no')) %> <%= _('No') %>
+    <%= radio_button_tag('device[faststart]', 'yes', checked = (@device.faststart == 'yes')) %> <%= _('Yes') %>
+  </td>
+</tr>
+<tr>
+  <td> <%= _('h245_Tunneling') %>:</td>
+  <td>
+    <%= radio_button_tag('device[h245tunneling]', 'no', checked = (@device.h245tunneling == 'no')) %> <%= _('No') %>
+    <%= radio_button_tag('device[h245tunneling]', 'yes', checked = (@device.h245tunneling == 'yes')) %> <%= _('Yes') %>
+  </td>
+</tr>
+<tr>
+  <td height="20"></td>
+</tr>
+<tr>
+  <td class="bottom_border" colspan=2>
+    <b><%= _('CallerID') %></b>
+  </td>
+</tr>
+<tr>
+  <td height="10"></td>
+</tr>
+<% if !(session[:usertype] == 'accountant' and session[:acc_device_edit_opt_3] != 2) %>
+    <tr>
+      <td> <%= _('Name') %>:</td>
+      <td> <%= text_field_tag('cid_name', @cid_name, "class" => "input") %> </td>
+    </tr>
+<% else %>
+    <% if session[:usertype] == 'accountant' and session[:acc_device_edit_opt_3] == 1 %>
+        <tr>
+          <td id="cid_name_name"><%= _('Name') %>:</td>
+          <td id="cid_name_value"><%= @cid_name %></td>
+        </tr>
+    <% end %>
+<% end %>
+<% if !(session[:usertype] == 'accountant' and session[:acc_device_edit_opt_4] != 2) %>
+    <tr>
+      <td id="cid_number_name"> <%= _('Number') %>:</td>
+      <td id="cid_number_value"> <%= text_field_tag('cid_number', @cid_number, "class" => "input") %> </td>
+    </tr>
+<% else %>
+    <% if session[:usertype] == 'accountant' and session[:acc_device_edit_opt_4] == 1 %>
+        <tr>
+          <td id="cid_number_name"><%= _('Number') %>:</td>
+          <td id="cid_number_value"><%= @cid_number %></td>
+        </tr>
+    <% end %>
+<% end %>
+<% if @device
+     device_voicemail_active = @device.voicemail_active
+     device_voicemail_box = @device.voicemail_box
+     device_voicemail_box_email = @device.voicemail_box.email
+     device_voicemail_box_password = @device.voicemail_box.password
+     device_enable_mwi = @device.enable_mwi
+     forward_did = @device.forward_did_id.to_i
+   else
+     device_voicemail_active = Confline.get_value("Default_device_voicemail_active", session[:user_id])
+     device_voicemail_box = Confline.get_value("Default_device_voicemail_box", session[:user_id])
+     device_voicemail_box_email = Confline.get_value("Default_device_voicemail_box_email", session[:user_id])
+     device_voicemail_box_password = Confline.get_value("Default_device_voicemail_box_password", session[:user_id])
+     device_enable_mwi = Confline.get_value("Default_device_enable_mwi", session[:user_id])
+   end
+%>
+<tr>
+  <td height="20"></td>
+</tr>
+<tr>
+  <td class="bottom_border" colspan=2>
+    <b><%= b_voicemail + _('VoiceMail') %></b>
+  </td>
+</tr>
+<tr>
+  <td height="10"></td>
+</tr>
+<% if device_voicemail_box or device_voicemail_box.to_i == 1 %>
+    <tr>
+      <td> <%= _('Email') %>:</td>
+      <td> <%= text_field_tag 'vm_email', device_voicemail_box_email, "class" => "input" %>  </td>
+    </tr>
+    <% if session[:usertype] == "accountant" %>
+        <% if session[:acc_voicemail_password].to_i > 0 %>
+            <tr>
+              <td> <%= _('Password') %>:</td>
+              <% if session[:acc_voicemail_password].to_i == 1 %>
                   <td><%= device_voicemail_box_password %></td>
-                <% end %>
+              <% end %>
 
-                <% if session[:acc_voicemail_password].to_i == 2 %>
+              <% if session[:acc_voicemail_password].to_i == 2 %>
                   <td><%= text_field_tag 'vm_psw', device_voicemail_box_password, "class" => "input" %></td>
-                <% end %>
-              </tr>
-            <% end %>
-          <% else %>
-            <tr>
-              <td><%= _('Password') %>:</td>
-              <td><%= text_field_tag 'vm_psw', device_voicemail_box_password, "class" => "input" %></td>
+              <% end %>
             </tr>
-          <% end %>
         <% end %>
-        <tr <%= tooltip(_('MWI_enable'), _('MWI_Explanation')) %> >
-          <td><%= _('MWI_enable') %>:</td>
-          <td>
-            <%= radio_button_tag('device[enable_mwi]', 0, checked = (device_enable_mwi.to_i == 0) ) %> <%= _('No') %>
-            <%= radio_button_tag('device[enable_mwi]', 1, checked = (device_enable_mwi.to_i == 1) ) %> <%= _('Yes') %>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td valign="top">
-      <table class="simple">
+    <% else %>
         <tr>
-          <td colspan="2" class="bottom_border">
-            <b><%= _('Codecs') %></b> &nbsp; <%= _('Drag_and_drop') %>
-          </td>
+          <td><%= _('Password') %>:</td>
+          <td><%= text_field_tag 'vm_psw', device_voicemail_box_password, "class" => "input" %></td>
         </tr>
-        <tr><td height="10"></td></tr>
-        <tr>
-          <td valign="top">
-            <table class="simple">
-              <tr>
-                <td><div  class="simple"><%= _('Audio') %></div></td>
-              </tr>
-              <tr>
-                <td>
-                  <%= render :partial => "/devices/device_codecs", :locals => {:device => @device, :codecs=>@audio_codecs, :ctype=>"audio"} %>
-                  <%= sortable_element('audio_sortable_list', :tag => 'li', :update => 'audio_items', :url => {:controller=>:devices, :ctype=>"audio", :action => :devicecodecs_sort, :id=> @device ? @device.id : -1}) %>
-                </td>
-              </tr>
-            </table>
-          </td>
+    <% end %>
+<% end %>
+<tr <%= tooltip(_('MWI_enable'), _('MWI_Explanation')) %> >
+  <td><%= _('MWI_enable') %>:</td>
+  <td>
+    <%= radio_button_tag('device[enable_mwi]', 0, checked = (device_enable_mwi.to_i == 0)) %> <%= _('No') %>
+    <%= radio_button_tag('device[enable_mwi]', 1, checked = (device_enable_mwi.to_i == 1)) %> <%= _('Yes') %>
+  </td>
+</tr>
+</table>
+</td>
+<td valign="top">
+<table class="simple">
+<tr>
+  <td colspan="2" class="bottom_border">
+    <b><%= _('Codecs') %></b> &nbsp; <%= _('Drag_and_drop') %>
+  </td>
+</tr>
+<tr>
+  <td height="10"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table class="simple">
+      <tr>
+        <td>
+          <div class="simple"><%= _('Audio') %></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= render :partial => "/devices/device_codecs", :locals => {:device => @device, :codecs => @audio_codecs, :ctype => "audio"} %>
+          <%= sortable_element('audio_sortable_list', :tag => 'li', :update => 'audio_items', :url => {:controller => :devices, :ctype => "audio", :action => :devicecodecs_sort, :id => @device ? @device.id : -1}) %>
+        </td>
+      </tr>
+    </table>
+  </td>
 
-          <td valign="top">
-            <table class="simple">
-              <tr>
-                <td><div class="simple"><%= _('Video') %></div></td>
-              </tr>
-              <tr>
-                <td>
-                  <%= render :partial => "/devices/device_codecs", :locals => {:device => @device, :codecs=>@video_codecs, :ctype=>"video"} %>
-                  <%= sortable_element('video_sortable_list', :tag => 'li', :update => 'video_items', :url => {:controller=>:devices, :ctype=>"video", :action => :devicecodecs_sort, :id=>@device ? @device.id : -1}) %>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
+  <td valign="top">
+    <table class="simple">
+      <tr>
+        <td>
+          <div class="simple"><%= _('Video') %></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= render :partial => "/devices/device_codecs", :locals => {:device => @device, :codecs => @video_codecs, :ctype => "video"} %>
+          <%= sortable_element('video_sortable_list', :tag => 'li', :update => 'video_items', :url => {:controller => :devices, :ctype => "video", :action => :devicecodecs_sort, :id => @device ? @device.id : -1}) %>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
 
-        <tr><td height="20"></td></tr>
+<tr>
+  <td height="20"></td>
+</tr>
 
-        <tr>
-          <td class="bottom_border" colspan=2>
-            <b><%= _('Advanced') %></b>
-          </td>
-        </tr>
-        <tr><td height="10"></td></tr>
-        <% if @device
-          device_grace_time =@device.grace_time
-          lang = @device.language.to_s.blank? ? 'en' : @device.language
-        else
-          device_grace_time =Confline.get_value("Default_device_grace_time", session[:user_id])
-          lang = Confline.get_value("Default_device_language", session[:user_id]).to_s.blank? ? 'en' : Confline.get_value("Default_device_language", session[:user_id])
-        end
-      %>
-        <tr>
-          <td> <%= _('Grace_Time') %>:   </td>
-          <td> <%= text_field_tag 'grace_time', device_grace_time, :size => 5, "class" => "input" %> s</td>
-        </tr>
-        <tr>
-          <td> <%= _('Allow_duplicate_calls') %>:   </td>
-          <td>
-            <%= radio_button_tag('device[allow_duplicate_calls]', '0', checked = (@device.allow_duplicate_calls.to_i == 0) ) %> <%= _('No') %>
-            <%= radio_button_tag('device[allow_duplicate_calls]', '1', checked = (@device.allow_duplicate_calls.to_i == 1) ) %> <%= _('Yes') %>
-          </td>
-        </tr>
+<tr>
+  <td class="bottom_border" colspan=2>
+    <b><%= _('Advanced') %></b>
+  </td>
+</tr>
+<tr>
+  <td height="10"></td>
+</tr>
+<% if @device
+     device_grace_time =@device.grace_time
+     lang = @device.language.to_s.blank? ? 'en' : @device.language
+   else
+     device_grace_time =Confline.get_value("Default_device_grace_time", session[:user_id])
+     lang = Confline.get_value("Default_device_language", session[:user_id]).to_s.blank? ? 'en' : Confline.get_value("Default_device_language", session[:user_id])
+   end
+%>
+<tr>
+  <td> <%= _('Grace_Time') %>:</td>
+  <td> <%= text_field_tag 'grace_time', device_grace_time, :size => 5, "class" => "input" %> s</td>
+</tr>
+<tr>
+  <td> <%= _('Allow_duplicate_calls') %>:</td>
+  <td>
+    <%= radio_button_tag('device[allow_duplicate_calls]', '0', checked = (@device.allow_duplicate_calls.to_i == 0)) %> <%= _('No') %>
+    <%= radio_button_tag('device[allow_duplicate_calls]', '1', checked = (@device.allow_duplicate_calls.to_i == 1)) %> <%= _('Yes') %>
+  </td>
+</tr>
 
-        <tr <%= tooltip(_('Fake_Ring'), _('Fake_Ring_Explanation')) %>>
-          <td><%= _('Fake_Ring') %>:</td>
-          <td>
-            <%= radio_button_tag('device[fake_ring]', '0', checked = (@device.fake_ring.to_i == 0) ) %> <%= _('No') %>
-            <%= radio_button_tag('device[fake_ring]', '1', checked = (@device.fake_ring.to_i == 1) ) %> <%= _('Yes') %>
-          </td>
-        </tr>
-        <tr <%= tooltip(_('Language'), _('Device_Language_Explanation')) %>>
-          <td><%= _('Language') %>:</td>
-          <td>
-            <%= text_field_tag 'device[language]', lang, :size => 10, "class" => "input"  %>
-          </td>
-        </tr>
-        <!--
+<tr <%= tooltip(_('Fake_Ring'), _('Fake_Ring_Explanation')) %>>
+  <td><%= _('Fake_Ring') %>:</td>
+  <td>
+    <%= radio_button_tag('device[fake_ring]', '0', checked = (@device.fake_ring.to_i == 0)) %> <%= _('No') %>
+    <%= radio_button_tag('device[fake_ring]', '1', checked = (@device.fake_ring.to_i == 1)) %> <%= _('Yes') %>
+  </td>
+</tr>
+<tr <%= tooltip(_('Language'), _('Device_Language_Explanation')) %>>
+  <td><%= _('Language') %>:</td>
+  <td>
+    <%= text_field_tag 'device[language]', lang, :size => 10, "class" => "input" %>
+  </td>
+</tr>
+<!--
                 <tr <%#= tooltip(_('Works_not_logged'), _('Works_not_logged_Explanation')) %>>
                   <td> <%#= _('Works_not_logged') %>:   </td>
                   <td>
@@ -379,117 +406,121 @@ end
 
                   </td>
                 </tr> -->
-        <tr>
-          <td><%= b_trunk + _('Trunk') if device_ani == 0%><%= b_trunk_ani + _('Trunk') if device_ani.to_i == 1%>?:</td>
-          <td>
-            <%= radio_button_tag('trunk', 0, checked = (device_istrunk.to_i == 0) ) %> <%= _('No') %>
-            <%= radio_button_tag('trunk', 1, checked = ((device_istrunk.to_i == 1)and(device_ani.to_i == 0)) ) %> <%= _('Yes') %>
-            <%= radio_button_tag('trunk', 2, checked = ((device_istrunk.to_i == 1)and(device_ani.to_i == 1)) ) %> <%= _('Yes_with_ANI') %>
-          </td>
-        </tr>
+<tr>
+  <td><%= b_trunk + _('Trunk') if device_ani == 0 %><%= b_trunk_ani + _('Trunk') if device_ani.to_i == 1 %>?:</td>
+  <td>
+    <%= radio_button_tag('trunk', 0, checked = (device_istrunk.to_i == 0)) %> <%= _('No') %>
+    <%= radio_button_tag('trunk', 1, checked = ((device_istrunk.to_i == 1)and(device_ani.to_i == 0))) %> <%= _('Yes') %>
+    <%= radio_button_tag('trunk', 2, checked = ((device_istrunk.to_i == 1)and(device_ani.to_i == 1))) %> <%= _('Yes_with_ANI') %>
+  </td>
+</tr>
 
-        <tr <%= tooltip(_('Change_Failed_Code_To'),h( _('Change_Failed_Code_To_Explanation'))) %> >
-          <td><%= _('Change_Failed_Code_To') %>:</td>
-          <td>
-            <%= render :partial => '/layouts/hgc_end_select', :locals=>{:select_field_tag=>"device[change_failed_code_to]", :filed_value=>@device.change_failed_code_to.to_i} %>
-          </td>
-        </tr>
-        <% if @device %>
+<tr <%= tooltip(_('Change_Failed_Code_To'), h(_('Change_Failed_Code_To_Explanation'))) %> >
+  <td><%= _('Change_Failed_Code_To') %>:</td>
+  <td>
+    <%= render :partial => '/layouts/hgc_end_select', :locals => {:select_field_tag => "device[change_failed_code_to]", :filed_value => @device.change_failed_code_to.to_i} %>
+  </td>
+</tr>
+<% if @device %>
+    <tr>
+      <td><%= _('Forward_DID') %>:</td>
+      <td>
+        <select name="forward_did" id="forward_did">
+          <option value="-1"><%= _('None') %> </option>
+          <% for d in @all_dids %>
+              <option value=<%= d.id %> <%= "selected" if  d.id == forward_did %>> <%= d.did %> </option>
+          <% end %>
+        </select>
+      </td>
+    </tr>
+<% end %>
+
+
+<tr>
+  <td height="20"></td>
+</tr>
+<tr>
+  <td colspan="2" class="bottom_border">
+    <b><%= _('Tell_options') %></b>
+  </td>
+</tr>
+<% if @device
+     device_tell_balance = @device.tell_balance
+     device_tell_time = @device.tell_time
+     device_tell_rtime_when_left = @device.tell_rtime_when_left
+     device_repeat_rtime_every = @device.repeat_rtime_every
+
+   else
+     device_tell_balance = Confline.get_value("Default_device_tell_balance", session[:user_id])
+     device_tell_time = Confline.get_value("Default_device_tell_time", session[:user_id])
+     device_tell_rtime_when_left = Confline.get_value("Default_device_tell_rtime_when_left", session[:user_id])
+     device_repeat_rtime_every = Confline.get_value("Default_device_repeat_rtime_every", session[:user_id])
+   end
+
+%>
+<tr>
+  <td height="10"></td>
+</tr>
+<tr>
+  <td> <%= _('Tell_balance') %>:</td>
+  <td>
+    <%= radio_button_tag('device[tell_balance]', 0, checked = (device_tell_balance.to_i == 0)) %> <%= _('No') %>
+    <%= radio_button_tag('device[tell_balance]', 1, checked = (device_tell_balance.to_i == 1)) %> <%= _('Yes') %>
+  </td>
+</tr>
+<tr>
+  <td> <%= _('Tell_time') %>:</td>
+  <td>
+    <%= radio_button_tag('device[tell_time]', 0, checked = (device_tell_time.to_i == 0)) %> <%= _('No') %>
+    <%= radio_button_tag('device[tell_time]', 1, checked = (device_tell_time.to_i == 1)) %> <%= _('Yes') %>
+  </td>
+</tr>
+<tr>
+  <td> <%= _('Tell_remaining_time_when_left') %>:</td>
+  <td align="left"> <%= text_field_tag 'device[tell_rtime_when_left]', device_tell_rtime_when_left, "class" => "input", :size => "5", :maxlength => "4" %>
+    s
+  </td>
+</tr>
+
+<tr>
+  <td> <%= _('Repeat_remaining_time_every') %>:</td>
+  <td align="left"> <%= text_field_tag 'device[repeat_rtime_every]', device_repeat_rtime_every, "class" => "input", :size => "5", :maxlength => "4" %>
+    s
+  </td>
+</tr>
+<% if (rec_active?) and !(@user and (@user.recording_enabled.to_i != 1 and @user.recording_forced_enabled.to_i != 1)) %>
+    <% @owner = @user.owner_id %>
+    <%= render :partial => "device_recordings" %>
+<% end %>
+
+<% if !reseller? %>
+    <% if not @new_device and @device_type != "FAX" and @device_type != "Virtual" %>
+        <td>
           <tr>
-            <td><%= _('Forward_DID') %>:</td>
-            <td>
-              <select name="forward_did" id="forward_did">
-                <option value="-1"><%=  _('None')%> </option>
-                <% for d in @all_dids %>
-                  <option value=<%= d.id %> <%= "selected" if  d.id == forward_did %>> <%= d.did %> </option>
-                <% end %>
-              </select>
+            <td colspan="2" height="20"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="bottom_border">
+              <b><%= _('Debug') %></b>
             </td>
           </tr>
-        <% end %>
-
-
-        <tr>
-          <td height="20"></td>
-        </tr>
-        <tr>
-          <td colspan="2" class="bottom_border">
-            <b><%= _('Tell_options') %></b>
-          </td>
-        </tr>
-        <% if @device
-          device_tell_balance = @device.tell_balance
-          device_tell_time = @device.tell_time
-          device_tell_rtime_when_left = @device.tell_rtime_when_left
-          device_repeat_rtime_every = @device.repeat_rtime_every
-
-        else
-          device_tell_balance = Confline.get_value("Default_device_tell_balance", session[:user_id])
-          device_tell_time = Confline.get_value("Default_device_tell_time", session[:user_id])
-          device_tell_rtime_when_left = Confline.get_value("Default_device_tell_rtime_when_left", session[:user_id])
-          device_repeat_rtime_every = Confline.get_value("Default_device_repeat_rtime_every", session[:user_id])
-        end
-
-      %>
-        <tr>
-          <td height="10"></td>
-        </tr>
-        <tr>
-          <td> <%= _('Tell_balance') %>:   </td>
-          <td>
-            <%= radio_button_tag('device[tell_balance]', 0, checked = (device_tell_balance.to_i == 0) ) %> <%= _('No') %>
-            <%= radio_button_tag('device[tell_balance]', 1, checked = (device_tell_balance.to_i == 1) ) %> <%= _('Yes') %>
-          </td>
-        </tr>
-        <tr>
-          <td> <%= _('Tell_time') %>:</td>
-          <td>
-            <%= radio_button_tag('device[tell_time]', 0, checked = (device_tell_time.to_i == 0) ) %> <%= _('No') %>
-            <%= radio_button_tag('device[tell_time]', 1, checked = (device_tell_time.to_i == 1) ) %> <%= _('Yes') %>
-          </td>
-        </tr>
-        <tr>
-          <td> <%= _('Tell_remaining_time_when_left') %>:   </td>
-          <td align="left"> <%= text_field_tag 'device[tell_rtime_when_left]', device_tell_rtime_when_left, "class" => "input", :size => "5", :maxlength => "4" %>  s</td>
-        </tr>
-
-        <tr>
-          <td> <%= _('Repeat_remaining_time_every') %>:   </td>
-          <td align="left"> <%= text_field_tag 'device[repeat_rtime_every]', device_repeat_rtime_every, "class" => "input", :size => "5", :maxlength => "4" %>  s</td>
-        </tr>
-        <% if (rec_active?) and !(@user and (@user.recording_enabled.to_i != 1 and @user.recording_forced_enabled.to_i != 1 ))%>
-          <% @owner = @user.owner_id%>
-          <%= render :partial => "device_recordings"%>
-        <% end %>
-
-        <% if !reseller? %>
-          <% if not @new_device and  @device_type != "FAX" and @device_type != "Virtual" %>
-            <td>
-            <tr>
-              <td colspan="2" height="20"></td>
-            </tr>
-            <tr>
-              <td colspan="2" class="bottom_border">
-                <b><%= _('Debug') %></b>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" height="10"></td>
-            </tr>
-            <%  if @device
-              save_call_log = @device.save_call_log
-            else
-              save_call_log = Confline.get_value("Default_device__save_call_log", session[:user_id])
-            end%>
-            <tr>
-              <td><%= _('Save_Call_Log') %>:</td>
-              <td><%= check_box_tag 'save_call_log', "1", save_call_log.to_i == 1 %></td>
-            </tr>
+          <tr>
+            <td colspan="2" height="10"></td>
+          </tr>
+          <% if @device
+               save_call_log = @device.save_call_log
+             else
+               save_call_log = Confline.get_value("Default_device__save_call_log", session[:user_id])
+             end %>
+          <tr>
+            <td><%= _('Save_Call_Log') %>:</td>
+            <td><%= check_box_tag 'save_call_log', "1", save_call_log.to_i == 1 %></td>
+          </tr>
         </td>
-      <% end %>
     <% end %>
-    <% @owner = @user.owner_id if !@owner %>
-    <%= render :partial => "device_recordings"%>
+<% end %>
+<% @owner = @user.owner_id if !@owner %>
+<%= render :partial => "device_recordings" %>
 </table>
 </td>
 </tr>

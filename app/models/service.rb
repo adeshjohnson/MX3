@@ -2,7 +2,7 @@
 class Service < ActiveRecord::Base
   has_many :subscriptions
   has_many :flatrate_destinations, :dependent => :destroy
-  
+
   validates_presence_of :name, :message => _("Service_must_have_a_name")
   validates_presence_of :servicetype, :message => _("Service_must_have_a_service_type")
   validates_numericality_of :quantity, :message => _("Quantity_should_be_digit")
@@ -43,7 +43,7 @@ class Service < ActiveRecord::Base
     end
   end
 
-  def price=value
+  def price= value
     if User.current and User.current.currency
       b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
     else
@@ -52,7 +52,7 @@ class Service < ActiveRecord::Base
     write_attribute(:price, b)
   end
 
-    # converted attributes for user in current user currency
+  # converted attributes for user in current user currency
   def selfcost_price
     b = read_attribute(:selfcost_price)
     if User.current and User.current.currency
@@ -62,7 +62,7 @@ class Service < ActiveRecord::Base
     end
   end
 
-  def selfcost_price=value
+  def selfcost_price= value
     if User.current and User.current.currency
       b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
     else
@@ -70,6 +70,6 @@ class Service < ActiveRecord::Base
     end
     write_attribute(:selfcost_price, b)
   end
-  
+
 end
 

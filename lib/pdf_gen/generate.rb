@@ -18,106 +18,106 @@ module PdfGen
           :colspan => 3
       }
 
-      headers = [{:text=>_('date')}.merge(top_options),
-                 {:text=>_('called_from')}.merge(top_options),
-                 {:text=>_('called_to')}.merge(top_options),
-                 {:text=>_('duration')}.merge(top_options),
-                 {:text=>_('hangup_cause')}.merge(top_options)]
-      headers2 = [{:text=> ' ', :colspan => 6}]
+      headers = [{:text => _('date')}.merge(top_options),
+                 {:text => _('called_from')}.merge(top_options),
+                 {:text => _('called_to')}.merge(top_options),
+                 {:text => _('duration')}.merge(top_options),
+                 {:text => _('hangup_cause')}.merge(top_options)]
+      headers2 = [{:text => ' ', :colspan => 6}]
 
       if options[:pdf_last_calls].to_i == 1
         if ['admin', 'accountant'].include?(usertype)
-          headers << {:text=>_('Server')}.merge(top_options)
-          headers << {:text=>_('Provider')}.merge(top_options2)
+          headers << {:text => _('Server')}.merge(top_options)
+          headers << {:text => _('Provider')}.merge(top_options2)
           #--------------------- rate price name
 
-          headers2 << {:text=>_('Name')}
-          headers2 << {:text=>_('Rate')}
-          headers2 << {:text=>_('Price')}
+          headers2 << {:text => _('Name')}
+          headers2 << {:text => _('Rate')}
+          headers2 << {:text => _('Price')}
           #headers << headers2
           if options[:rs_active]
-            headers << {:text=>_('Reseller')}.merge(top_options2)
+            headers << {:text => _('Reseller')}.merge(top_options2)
             #--------------------- rate price name
-            headers2 << {:text=>_('Name')}
-            headers2 << {:text=>_('Rate')}
-            headers2 << {:text=>_('Price')}
+            headers2 << {:text => _('Name')}
+            headers2 << {:text => _('Rate')}
+            headers2 << {:text => _('Price')}
           end
-          headers << {:text=>_('User')}.merge(top_options2)
+          headers << {:text => _('User')}.merge(top_options2)
           #--------------------- rate price name
-          headers2 << {:text=>_('Name')}
-          headers2 << {:text=>_('Rate')}
-          headers2 << {:text=>_('Price')}
+          headers2 << {:text => _('Name')}
+          headers2 << {:text => _('Rate')}
+          headers2 << {:text => _('Price')}
 
-          headers << {:text=>_('Did'), :colspan => 4}
+          headers << {:text => _('Did'), :colspan => 4}
           #--------------------- rate price name
 
-          headers2 << {:text=>_('Number')}
-          headers2 << {:text=>_('Provider')}
-          headers2 << {:text=>_('Incoming')}
-          headers2 << {:text=>_('Owner')}
-        #  headers << headers2
+          headers2 << {:text => _('Number')}
+          headers2 << {:text => _('Provider')}
+          headers2 << {:text => _('Incoming')}
+          headers2 << {:text => _('Owner')}
+          #  headers << headers2
         end
         if usertype == 'reseller'
           if options[:reseller_allow_providers_tariff]
-            headers << {:text=>_('Provider')}.merge(top_options2)
+            headers << {:text => _('Provider')}.merge(top_options2)
             #--------------------- rate price name
             headers2 << _('Name')
-            headers2 << {:text=>_('Rate')}
-            headers2 << {:text=>_('Price')}
+            headers2 << {:text => _('Rate')}
+            headers2 << {:text => _('Price')}
           end
-          headers << {:text=>_('Selfcost')}.merge(top_options2) if options[:rs_active]
-          headers2 << {:text=>_('Rate')}
-          headers2 << {:text=>_('Price')}
-          headers2 << {:text=>_('User')}
+          headers << {:text => _('Selfcost')}.merge(top_options2) if options[:rs_active]
+          headers2 << {:text => _('Rate')}
+          headers2 << {:text => _('Price')}
+          headers2 << {:text => _('User')}
           #--------------------- rate price name
-          headers2 << {:text=>_('Name')}
-          headers2 << {:text=>_('Rate')}
-          headers2 << {:text=>_('Price')}
-          headers2 << {:text=>_('Did')}
+          headers2 << {:text => _('Name')}
+          headers2 << {:text => _('Rate')}
+          headers2 << {:text => _('Price')}
+          headers2 << {:text => _('Did')}
           #--------------------- rate price name
-          headers << {:text=>_('Number')}.merge(top_options)
+          headers << {:text => _('Number')}.merge(top_options)
         end
         if usertype == 'user'
-          headers << {:text=>_('Prefix_used')}.merge(top_options)
-          headers << {:text=>_('Price')}.merge(top_options)
+          headers << {:text => _('Prefix_used')}.merge(top_options)
+          headers << {:text => _('Price')}.merge(top_options)
         end
       else
         if usertype == "admin"
           if direction == "incoming"
-            headers << {:text=>_('Provider')}.merge(top_options)
-            headers << {:text=>_('Incoming')}.merge(top_options)
-            headers << {:text=>_('Owner')}.merge(top_options)
-            headers << {:text=>_('Profit')}.merge(top_options)
+            headers << {:text => _('Provider')}.merge(top_options)
+            headers << {:text => _('Incoming')}.merge(top_options)
+            headers << {:text => _('Owner')}.merge(top_options)
+            headers << {:text => _('Profit')}.merge(top_options)
           else
-            headers << {:text=>_('Price')}.merge(top_options)
-            headers << {:text=>_('Provider_price')}.merge(top_options)
-            headers << {:text=>_('Profit')}.merge(top_options)
-            headers << {:text=>_('Margin')}.merge(top_options)
-            headers << {:text=>_('Markup')}.merge(top_options)
+            headers << {:text => _('Price')}.merge(top_options)
+            headers << {:text => _('Provider_price')}.merge(top_options)
+            headers << {:text => _('Profit')}.merge(top_options)
+            headers << {:text => _('Margin')}.merge(top_options)
+            headers << {:text => _('Markup')}.merge(top_options)
           end
         end
 
         if usertype == "reseller"
           if direction == "incoming"
-            headers << {:text=>_('Price')}.merge(top_options)
+            headers << {:text => _('Price')}.merge(top_options)
           else
-            headers << {:text=>_('Price')}.merge(top_options)
-            headers << {:text=>_('Provider_price')}.merge(top_options)
-            headers << {:text=>_('Profit')}.merge(top_options)
-            headers << {:text=>_('Margin')}.merge(top_options)
-            headers << {:text=>_('Markup')}.merge(top_options)
+            headers << {:text => _('Price')}.merge(top_options)
+            headers << {:text => _('Provider_price')}.merge(top_options)
+            headers << {:text => _('Profit')}.merge(top_options)
+            headers << {:text => _('Margin')}.merge(top_options)
+            headers << {:text => _('Markup')}.merge(top_options)
           end
         end
 
         if usertype == "user"
           #if direction != "incoming"
-          headers << {:text=>_('Price')}.merge(top_options)
+          headers << {:text => _('Price')}.merge(top_options)
           #end
         end
       end
 
 
-     return  headers, headers2
+      return headers, headers2
     end
 
 =begin rdoc
@@ -184,7 +184,7 @@ module PdfGen
 
         total_price +=rate_cur if call.user_price
         total_billsec += call.billsec
-              items << item
+        items << item
       end
       item = []
       item << _('Profit')
@@ -239,10 +239,10 @@ module PdfGen
               @arate_cur_ = nice_number(@arate_cur, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
             end
             item << @arate_cur_
-            item << nice_number(tax.count_tax_amount(@arate_cur)+@arate_cur, {:nice_number_digits => digits, :change_decimal=>cgnd, :global_decimal=>gnd})
+            item << nice_number(tax.count_tax_amount(@arate_cur)+@arate_cur, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
           else
-            item << nice_number(0, {:nice_number_digits => digits, :change_decimal=>cgnd, :global_decimal=>gnd})
-            item << nice_number(0, {:nice_number_digits => digits, :change_decimal=>cgnd, :global_decimal=>gnd})
+            item << nice_number(0, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
+            item << nice_number(0, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
           end
 
         end
@@ -251,8 +251,8 @@ module PdfGen
       pdf.table(items,
                 :width => 550, :border_width => 0,
                 :font_size => 7,
-                :headers => [_('Name'), _('Type'), _('Rate'), _('Rate_with_VAT')] ,
-                :align_headers => { 0 => :left, 1 => :left, 2 => :right , 3 => :right }) do
+                :headers => [_('Name'), _('Type'), _('Rate'), _('Rate_with_VAT')],
+                :align_headers => {0 => :left, 1 => :left, 2 => :right, 3 => :right}) do
         column(0).style(:align => :left)
         column(1).style(:align => :left)
         column(2).style(:align => :right)
@@ -260,7 +260,7 @@ module PdfGen
       end
 
       string = "<page>/<total>"
-      opt = { :at => [500, 0], :size => 9, :align => :right, :start_count_at => 1 }
+      opt = {:at => [500, 0], :size => 9, :align => :right, :start_count_at => 1}
       pdf.number_pages string, opt
 
       pdf
@@ -283,7 +283,7 @@ module PdfGen
         if rate.destination && rate.destination.direction
           item << rate.destination.direction.name
           item << rate.destination.subcode
-          item << {:text => rate.destination.prefix.to_s, :align =>:left}
+          item << {:text => rate.destination.prefix.to_s, :align => :left}
         else
           item << " "
           item << " "
@@ -296,27 +296,26 @@ module PdfGen
           item << rate_details[0]['increment_s']
           item << rate_details[0]['min_time']
         else
-          item << nice_number(0.0, {:nice_number_digits => digits, :change_decimal=>cgnd, :global_decimal=>gnd})
-          item << nice_number(0.0, {:nice_number_digits => digits, :change_decimal=>cgnd, :global_decimal=>gnd})
+          item << nice_number(0.0, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
+          item << nice_number(0.0, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
           item << 0
         end
 
         items << item
 
         if rate_details.size > 1
-          items <<  [{:text => _('*_Maximum_rate'),:colspan => 7}]
+          items << [{:text => _('*_Maximum_rate'), :colspan => 7}]
           items << [' ', '', '', '', '', '', '']
         end
 
       end
 
 
-
       pdf.table(items,
                 :width => 550, :border_width => 0,
                 :font_size => 7,
-                :headers => [_('Destination'), _('Subcode'), _('Prefix'), _('Rate'), _('Connection_Fee'), _('Increment'), _('Min_Time')] ,
-                :align_headers => { 0 => :left, 1 => :left, 2 => :left, 3 => :right , 4 => :right ,5=> :right , 6 => :right }) do
+                :headers => [_('Destination'), _('Subcode'), _('Prefix'), _('Rate'), _('Connection_Fee'), _('Increment'), _('Min_Time')],
+                :align_headers => {0 => :left, 1 => :left, 2 => :left, 3 => :right, 4 => :right, 5 => :right, 6 => :right}) do
         column(0).style(:align => :left)
         column(1).style(:align => :left)
         column(2).style(:align => :left)
@@ -327,7 +326,7 @@ module PdfGen
       end
 
       string = "<page>/<total>"
-      opt = { :at => [500, 0], :size => 9, :align => :right, :start_count_at => 1 }
+      opt = {:at => [500, 0], :size => 9, :align => :right, :start_count_at => 1}
       pdf.number_pages string, opt
 
       pdf
@@ -356,15 +355,15 @@ module PdfGen
         end
         if arate_details.size > 0
           if arate_details.size > 1
-            arate_cur =   nice_number(arate_cur[0], {:nice_number_digits => digits, :change_decimal=>cgnd, :global_decimal=>gnd}).to_s + " *"
+            arate_cur = nice_number(arate_cur[0], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd}).to_s + " *"
           else
-            arate_cur =  nice_number(arate_cur[0], {:nice_number_digits => digits, :change_decimal=>cgnd, :global_decimal=>gnd})
-            end
+            arate_cur = nice_number(arate_cur[0], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
+          end
           item << arate_cur
           item << arate_details[0]['round']
         else
-          item << nice_number(0, {:nice_number_digits => digits, :change_decimal=>cgnd, :global_decimal=>gnd})
-          item << nice_number(0, {:nice_number_digits => digits, :change_decimal=>cgnd, :global_decimal=>gnd})
+          item << nice_number(0, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
+          item << nice_number(0, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         end
         items << item
       end
@@ -373,15 +372,15 @@ module PdfGen
                 :width => 550, :border_width => 0,
                 :font_size => 10,
                 :headers => [_('Destination'), _('Subcode'), _('Rate'), _('Round')],
-                :align_headers => { 0 => :left, 1 => :center, 2 => :right, 3 => :right }) do
-        column(0).style(:align => :left,  :height => 15, :width => 450)
+                :align_headers => {0 => :left, 1 => :center, 2 => :right, 3 => :right}) do
+        column(0).style(:align => :left, :height => 15, :width => 450)
         column(1).style(:align => :center, :height => 15)
         column(2).style(:align => :right, :height => 15)
         column(3).style(:align => :right, :height => 15)
       end
 
       string = "<page>/<total>"
-      opt = { :at => [500, 0], :size => 9, :align => :right, :start_count_at => 1 }
+      opt = {:at => [500, 0], :size => 9, :align => :right, :start_count_at => 1}
       pdf.number_pages string, opt
 
       pdf
@@ -542,7 +541,7 @@ module PdfGen
     pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line5", owner), {:left => 50, :size => 12})
                                                                                                             #    if opts[:show_end_title] == true
                                                                                                             #      inv_end_title = Confline.get_value("#{prepaid}Invoice_End_Title", owner)
-                                                                                                     #      pdf.text(inv_end_title.to_s, {:left => 0, :size =>14, :alignment=>:center})
+                                                                                                            #      pdf.text(inv_end_title.to_s, {:left => 0, :size =>14, :alignment=>:center})
                                                                                                             #    end
     pdf
   end
@@ -678,7 +677,7 @@ module PdfGen
                                 :pdf_last_calls => 1,
                                 :rs_active => main_options[:rs_active],
                                 :can_see_finaces => main_options[:can_see_finances],
-                                :reseller_allow_providers_tariff => current_user.reseller_allow_providers_tariff? })
+                                :reseller_allow_providers_tariff => current_user.reseller_allow_providers_tariff?})
 
     ###### Generate PDF ########
     pdf = Prawn::Document.new(:size => 'A4', :layout => :portrait)
@@ -692,14 +691,14 @@ module PdfGen
     options[:calls_per_page] = options[:calls_per_page_first]
 
     items = []
-    h , h2 = call_list_to_pdf_header(pdf, main_options[:direction], usertype, 0, options)
+    h, h2 = call_list_to_pdf_header(pdf, main_options[:direction], usertype, 0, options)
     items << h2 if current_user.usertype != 'user'
     for call in calls
       item = []
       #calldate2 - because something overwites calldate when changing date format
       item << call.calldate2
-      item << {:text => nice_src(call, {:pdf => 1})  , :align => :left}
-      item << {:text => hide_dst_for_user(current_user, "pdf", call.dst.to_s)  , :align => :left}
+      item << {:text => nice_src(call, {:pdf => 1}), :align => :left}
+      item << {:text => hide_dst_for_user(current_user, "pdf", call.dst.to_s), :align => :left}
       item << nice_time(call['nice_billsec'])
       item << call.dispod
 
@@ -729,7 +728,7 @@ module PdfGen
           item << nice_number(call['user_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         end
 
-        item << {:text => call['did']   , :align => :left}
+        item << {:text => call['did'], :align => :left}
         if main_options[:can_see_finances]
 
           item << nice_number(call['did_prov_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
@@ -765,21 +764,21 @@ module PdfGen
       end
       items << item
     end
-             item = []
+    item = []
     #Totals
 
-    item << {:text=>_('Total'), :colspan=>3}
+    item << {:text => _('Total'), :colspan => 3}
     item << nice_time(total_calls.total_duration)
-    item << {:text=>'', :colspan=>4}
+    item << {:text => '', :colspan => 4}
     if main_options[:can_see_finances]
       if ['admin', 'accountant'].include?(usertype)
 
         item << nice_number(total_calls.total_provider_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
-        item << {:text=>'', :colspan=>2}
+        item << {:text => '', :colspan => 2}
         item << nice_number(total_calls.total_reseller_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
-        item << {:text=>'', :colspan=>2}
+        item << {:text => '', :colspan => 2}
         item << nice_number(total_calls.total_user_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
-        item << {:text=>''}
+        item << {:text => ''}
         item << nice_number(total_calls.total_did_prov_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         item << nice_number(total_calls.total_did_inc_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         item << nice_number(total_calls.total_did_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
@@ -806,7 +805,7 @@ module PdfGen
 
     pdf.table(items,
               :width => 540, :border_width => 0,
-              :font_size => 3,   :padding => 1,
+              :font_size => 3, :padding => 1,
               :headers => h) do
     end
 
@@ -814,7 +813,7 @@ module PdfGen
     opt = {:at => [500, 0], :size => 9, :align => :right, :start_count_at => 1}
     pdf.number_pages string, opt
 
-     pdf
+    pdf
   end
 
   def Generate.generate_additional_details_for_invoice_pdf(pdf, details, options={})

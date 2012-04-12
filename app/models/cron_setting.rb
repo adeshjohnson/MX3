@@ -15,8 +15,8 @@ class CronSetting < ActiveRecord::Base
       self.to_target_class = 'Provider_Tariff'
       self.user_id = User.current.id
     end
-    
-    if (valid_from > valid_till and next_run_time > valid_till  or valid_till.to_time < Time.now) and repeat_forever.to_i == 0
+
+    if (valid_from > valid_till and next_run_time > valid_till or valid_till.to_time < Time.now) and repeat_forever.to_i == 0
       errors.add(:period, _("Please_enter_correct_period"))
       return false
     end
@@ -27,11 +27,11 @@ class CronSetting < ActiveRecord::Base
   end
 
   def CronSetting.cron_settings_actions
-    [[_('change_tariff'), 'change_tariff'],[_('change_provider_tariff'), 'change_provider_tariff']]
+    [[_('change_tariff'), 'change_tariff'], [_('change_provider_tariff'), 'change_provider_tariff']]
   end
 
   def CronSetting.cron_settings_periodic_types
-    [[_('One_time'),0], [_('Yearly'), 1], [_('Monthly'), 2], [_('Weekly'), 3], [_('Work_days'), 4], [_('Free_days'), 5], [_('Daily'), 6]]
+    [[_('One_time'), 0], [_('Yearly'), 1], [_('Monthly'), 2], [_('Weekly'), 3], [_('Work_days'), 4], [_('Free_days'), 5], [_('Daily'), 6]]
   end
 
   def CronSetting.cron_settings_priority
@@ -39,26 +39,26 @@ class CronSetting < ActiveRecord::Base
   end
 
   def CronSetting.cron_settings_target_class
-    [[_('User'), 'User'],[_('Provider'), 'Provider']]
+    [[_('User'), 'User'], [_('Provider'), 'Provider']]
   end
 
 
   def target
     case target_class
-    when 'User'
-      User.find(:first, :conditions=>{:id=>target_id})
-    when 'Provider'
-      Provider.find(:first,:conditions=>{:id=>provider_target_id})
+      when 'User'
+        User.find(:first, :conditions => {:id => target_id})
+      when 'Provider'
+        Provider.find(:first, :conditions => {:id => provider_target_id})
     end
   end
 
   def after_create
-    CronAction.create({:cron_setting_id=>id, :run_at => self.next_run_time})
+    CronAction.create({:cron_setting_id => id, :run_at => self.next_run_time})
   end
 
   def after_update
-    CronAction.delete_all(:cron_setting_id=>id)
-    CronAction.create({:cron_setting_id=>id, :run_at => self.next_run_time})
+    CronAction.delete_all(:cron_setting_id => id)
+    CronAction.create({:cron_setting_id => id, :run_at => self.next_run_time})
   end
 
   def next_run_time(tim=nil)
@@ -68,40 +68,40 @@ class CronSetting < ActiveRecord::Base
       else
         time = tim.to_time
       end
-      
+
     else
       time = valid_from.to_time
     end
-    
+
     case periodic_type
-    when 0
-      time = time.to_s.to_time
-    when 1
-      time = time.to_s.to_time + 1.year
-    when 2
-      time = time.to_s.to_time + 1.month
-    when 3
-      time = time.to_s.to_time + 1.week
-    when 4
-      z = time.to_s.to_time + 1.day
-      if z.wday > 5
-        time = time.to_s.to_time + 2.day
-      else
+      when 0
+        time = time.to_s.to_time
+      when 1
+        time = time.to_s.to_time + 1.year
+      when 2
+        time = time.to_s.to_time + 1.month
+      when 3
+        time = time.to_s.to_time + 1.week
+      when 4
+        z = time.to_s.to_time + 1.day
+        if z.wday > 5
+          time = time.to_s.to_time + 2.day
+        else
+          time = time.to_s.to_time + 1.day
+        end
+      when 5
+        z = time.to_s.to_time + 1.day
+        if z.wday < 6
+          time = time.to_s.to_time + 5.day
+        else
+          time = time.to_s.to_time + 1.day
+        end
+      when 6
         time = time.to_s.to_time + 1.day
-      end
-    when 5
-      z = time.to_s.to_time + 1.day
-      if z.wday < 6
-        time = time.to_s.to_time + 5.day
-      else
-        time = time.to_s.to_time + 1.day
-      end
-    when 6
-      time = time.to_s.to_time + 1.day
     end
     if time < Time.now
       time = next_run_time(time)
     end
-    time 
+    time
   end
 end

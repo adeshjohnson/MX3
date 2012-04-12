@@ -1,38 +1,38 @@
-<table class = "simpletable" width="100%">
+<table class="simpletable" width="100%">
   <tr>
-    <td colspan="2"><%= link_to_remote b_refresh + _("Refresh"), :url => { :action => "refresh_edit_window" , :block_id => @block.id }, :update => "edit_window" , :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');"%></td>
+    <td colspan="2"><%= link_to_remote b_refresh + _("Refresh"), :url => {:action => "refresh_edit_window", :block_id => @block.id}, :update => "edit_window", :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');" %></td>
   </tr>
 </table>
- 
+
 <table>
   <tr>
     <td>
       <div id="canvas_div" style="position:relative;">
-        <div id="div_space" style = "position:absolute">
-        </div >
-        <canvas id="canvas_graph" height = "300" width = "550"></canvas>
+        <div id="div_space" style="position:absolute">
+        </div>
+        <canvas id="canvas_graph" height="300" width="550"></canvas>
       </div>
     </td>
   </tr>
   <tr>
     <td>
-      <div id = "canvas_div2" style="position:relative;">
-        <div id = "div_space2" style = "position:absolute">
-        </div >
-        <canvas id="graph2" height = "550" width = "550"></canvas>
-      </div>  
+      <div id="canvas_div2" style="position:relative;">
+        <div id="div_space2" style="position:absolute">
+        </div>
+        <canvas id="graph2" height="550" width="550"></canvas>
+      </div>
     </td>
   </tr>
-</table> 
+</table>
 
 <script type="text/javascript">
-  function drawFirst(left, right){
-    var canvas = document.getElementById("canvas_graph");
-    if (canvas.getContext) {
-      var ctx = canvas.getContext("2d");
-      <%=raw clear_text().html_safe %>
-      <%=raw draw_block(@block, 170,20, "ctx","div_space").html_safe %>
-      <% for exten in @block.ivr_extensions do %>
+    function drawFirst(left, right) {
+        var canvas = document.getElementById("canvas_graph");
+        if (canvas.getContext) {
+            var ctx = canvas.getContext("2d");
+        <%=raw clear_text().html_safe %>
+        <%=raw draw_block(@block, 170,20, "ctx","div_space").html_safe %>
+        <% for exten in @block.ivr_extensions do %>
         <% if exten.exten.to_i != 0 or exten.exten == "0"
           pos = exten.exten.to_i
           else 
@@ -46,61 +46,61 @@
             when "t" 
               pos = 13  
             end %>
-          <% end %>
+        <% end %>
         <% if exten.goto_ivr_block_id == @block.id %>
-          <% if pos < 7 %>
-            ctx.drawImage(right, 200 ,<%= 20+(pos%7)*29 %>, 16,29 );
-          <% else %>
-            ctx.drawImage(left , 333 ,<%= 20+(pos%7)*29 %>, 16,29  );
-          <% end %>
+        <% if pos < 7 %>
+            ctx.drawImage(right, 200, <%= 20+(pos%7)*29 %>, 16, 29);
         <% else %>
-          <%=raw draw_block(exten.goto_ivr_block, pos/7*360-10, pos%7*29+20, "ctx","div_space", true).html_safe %>
-        <% end %>  
+            ctx.drawImage(left, 333, <%= 20+(pos%7)*29 %>, 16, 29);
+        <% end %>
+        <% else %>
+        <%=raw draw_block(exten.goto_ivr_block, pos/7*360-10, pos%7*29+20, "ctx","div_space", true).html_safe %>
+        <% end %>
 
-      <% end %>
+        <% end %>
 
+        }
+        else {
+            alert('Your browser seems to lack canvas support.');
+        }
     }
-    else {
-      alert('Your browser seems to lack canvas support.');
-    }
-  }
 
-  function drawSecond(icon){
-    var canvas2 = document.getElementById("graph2");
-    if (canvas2.getContext) {
-      var ctx2 = canvas2.getContext("2d");
-      <% i = 0 %>
-      <% alfa = 360.to_f / @blocks.size.to_f %>
-      <% clear_text2 %>
-      <% posx = {}%>
-      <% posy = {}%>
-      <% for block in @blocks do %>
-        <% x = 210*Math.sin(alfa*i.to_f*Math::PI.to_f/180.to_f) + 270 %> 
+    function drawSecond(icon) {
+        var canvas2 = document.getElementById("graph2");
+        if (canvas2.getContext) {
+            var ctx2 = canvas2.getContext("2d");
+        <% i = 0 %>
+        <% alfa = 360.to_f / @blocks.size.to_f %>
+        <% clear_text2 %>
+        <% posx = {}%>
+        <% posy = {}%>
+        <% for block in @blocks do %>
+        <% x = 210*Math.sin(alfa*i.to_f*Math::PI.to_f/180.to_f) + 270 %>
         <% y = 250 - 210*Math.cos(alfa*i.to_f*Math::PI.to_f/180.to_f)%>
         <% posx[block.id] = x %>
         <% posy[block.id] = y %>
         <%=raw draw_block_icon(block, x-8, y-8 , "ctx2","div_space2") %>
         <% i += 1 %>
-      <% end %>
-      <% red_lenght = 20 %>
-      <% for block in @blocks do %>
+        <% end %>
+        <% red_lenght = 20 %>
+        <% for block in @blocks do %>
         <% for ext in block.ivr_extensions%>
 
-          <% if ext.goto_ivr_block_id != block.id %>
-            <% x1 = posx[ext.goto_ivr_block_id] - posx[block.id]%>
-            <% y1 = posy[ext.goto_ivr_block_id] - posy[block.id]  %>
-            <% x2 = x1/ Math.sqrt(x1*x1 + y1*y1)%>
-            <% y2 = y1/ Math.sqrt(x1*x1 + y1*y1)
-               xBase = posx[ext.goto_ivr_block_id] - (red_lenght * x2).round
-               yBase = posy[ext.goto_ivr_block_id] - (red_lenght * y2).round
-               xNormalDelta =  y1
-               yNormalDelta = 0-x1
-               xNormalUnitDelta = xNormalDelta / Math.sqrt( xNormalDelta*xNormalDelta +  yNormalDelta*yNormalDelta)/8
-               yNormalUnitDelta = yNormalDelta / Math.sqrt( xNormalDelta*xNormalDelta +  yNormalDelta*yNormalDelta)/8
-             %>
+        <% if ext.goto_ivr_block_id != block.id %>
+        <% x1 = posx[ext.goto_ivr_block_id] - posx[block.id]%>
+        <% y1 = posy[ext.goto_ivr_block_id] - posy[block.id]  %>
+        <% x2 = x1/ Math.sqrt(x1*x1 + y1*y1)%>
+        <% y2 = y1/ Math.sqrt(x1*x1 + y1*y1)
+          xBase = posx[ext.goto_ivr_block_id] - (red_lenght * x2).round
+          yBase = posy[ext.goto_ivr_block_id] - (red_lenght * y2).round
+          xNormalDelta =  y1
+          yNormalDelta = 0-x1
+          xNormalUnitDelta = xNormalDelta / Math.sqrt( xNormalDelta*xNormalDelta +  yNormalDelta*yNormalDelta)/8
+          yNormalUnitDelta = yNormalDelta / Math.sqrt( xNormalDelta*xNormalDelta +  yNormalDelta*yNormalDelta)/8
+        %>
 
-            <% l = Math.sqrt(x1*x1+y1*y1) %>
-            <% p = red_lenght/l %>
+        <% l = Math.sqrt(x1*x1+y1*y1) %>
+        <% p = red_lenght/l %>
             ctx2.globalCompositeOperation = 'destination-over';
             //ctx2.globalCompositeOperation = 'source-over';
             ctx2.strokeStyle = 'rgb(255,0,0)';
@@ -112,36 +112,36 @@
             ctx2.lineTo(<%=raw  xBase - (red_lenght*xNormalUnitDelta).round   %>, <%=raw  yBase - (red_lenght*yNormalUnitDelta) %>);
             ctx2.moveTo(<%=raw  posx[ext.goto_ivr_block_id].to_i - (x1*8/l) %>, <%=raw  posy[ext.goto_ivr_block_id].to_i  - (y1*8/l)%>);
             ctx2.lineTo(<%=raw  xBase + (red_lenght*xNormalUnitDelta).round  %>, <%=raw  yBase + (red_lenght *yNormalUnitDelta).round %>);
-            ctx2.stroke();              
-          <% end %>
+            ctx2.stroke();
         <% end %>
-      <% end %>
-      <% for block in @blocks do %>
+        <% end %>
+        <% end %>
+        <% for block in @blocks do %>
         <% for ext in block.ivr_extensions%>
-          ctx2.strokeStyle = 'rgb(170,170,170)';
-          ctx2.lineWidth = 1;
-          ctx2.beginPath();
-          ctx2.moveTo(<%=raw  posx[block.id] %>, <%=raw  posy[block.id] %>);
-          ctx2.lineTo(<%=raw  posx[ext.goto_ivr_block_id] %>, <%=raw  posy[ext.goto_ivr_block_id] %>)
-          ctx2.stroke();
+            ctx2.strokeStyle = 'rgb(170,170,170)';
+            ctx2.lineWidth = 1;
+            ctx2.beginPath();
+            ctx2.moveTo(<%=raw  posx[block.id] %>, <%=raw  posy[block.id] %>);
+            ctx2.lineTo(<%=raw  posx[ext.goto_ivr_block_id] %>, <%=raw  posy[ext.goto_ivr_block_id] %>)
+            ctx2.stroke();
         <% end %>
-      <% end %>
+        <% end %>
+        }
+        else {
+            alert('Your browser seems to lack canvas support.');
+        }
     }
-    else {
-      alert('Your browser seems to lack canvas support.');
-    }
-  }
-  var left = new Image(16,16);
-  var right = new Image(16,16);
-  var icon = new Image(16,16);
-  left.src =  '<%=Web_Dir %>' + '/images/icons/self_left.png';
-  right.src = '<%=Web_Dir %>' + '/images/icons/self_right.png';
-  icon.src =  '<%=Web_Dir %>' + '/images/icons/view.png';
+    var left = new Image(16, 16);
+    var right = new Image(16, 16);
+    var icon = new Image(16, 16);
+    left.src = '<%=Web_Dir %>' + '/images/icons/self_left.png';
+    right.src = '<%=Web_Dir %>' + '/images/icons/self_right.png';
+    icon.src = '<%=Web_Dir %>' + '/images/icons/view.png';
 
-  left.onload = function(){
-    right.onload=drawFirst(left, right);
-  }
-  icon.onload=function(icon){
-    drawSecond(icon);
-  }
+    left.onload = function () {
+        right.onload = drawFirst(left, right);
+    }
+    icon.onload = function (icon) {
+        drawSecond(icon);
+    }
 </script>

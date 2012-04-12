@@ -1,20 +1,20 @@
 <br>
 <table width="100%" class="maintable">
   <tr>
-    <th align="left" width="20%"><%= _('DID') %></th> 
-    <th align="left" width="20%"><%= _('Forward_to') %></th> 
-    <th align="left"><%= _('Description') %></th> 
+    <th align="left" width="20%"><%= _('DID') %></th>
+    <th align="left" width="20%"><%= _('Forward_to') %></th>
+    <th align="left"><%= _('Description') %></th>
     <th></th>
   </tr>
 
-<%= form_tag :action => 'quickforwarddid_update', :id => @qfdid.id, :did_id => @did.id do %>
-  <tr class="row1">
-    <td align="left">   <%= @did.did %>      </td>
-    <td align="left">   <%= text_field_tag 'number', @qfdid.number, "class" => "input", :size => "25", :maxlength => "30"   %>      </td>
-    <td align="left">   <%= text_field_tag 'description', @qfdid.description, "class" => "input", :size => "50", :maxlength => "100"   %>      </td>
-    <td align="center">   <%= image_submit_tag 'icons/check.png', :title => _('Update') %>      </td>        
- </tr>
- <% end %>
+  <%= form_tag :action => 'quickforwarddid_update', :id => @qfdid.id, :did_id => @did.id do %>
+      <tr class="row1">
+        <td align="left">   <%= @did.did %>      </td>
+        <td align="left">   <%= text_field_tag 'number', @qfdid.number, "class" => "input", :size => "25", :maxlength => "30" %>      </td>
+        <td align="left">   <%= text_field_tag 'description', @qfdid.description, "class" => "input", :size => "50", :maxlength => "100" %>      </td>
+        <td align="center">   <%= image_submit_tag 'icons/check.png', :title => _('Update') %>      </td>
+      </tr>
+  <% end %>
 </table>
- 
+
 <br> 

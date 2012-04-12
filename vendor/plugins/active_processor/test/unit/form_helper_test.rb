@@ -1,42 +1,42 @@
 # -*- encoding : utf-8 -*-
 require 'test/test_helper'
- 
+
 class GatewayEngineTest < Test::Unit::TestCase
 
   context "Form helper engine" do
     setup do
       ActiveProcessor.configuration = mock
-      ActiveProcessor.configuration.stubs(:data).returns({ 
-        'enabled' => {
-          'gateways' => ['bogus'],
-        },
-        'gateways' => {
-          'bogus' => {
-              'config' => {
-                'fields' => {
-                  'login' => { 'as' => "input_field", 'position' => 3, 'for' => 'authentication', 'value' => 'afaf', 'html_options' => { 'size' => 30 } },
-                  'password' => { 'as' => "password_field", 'position' => 4 },
-                  'check_box' => { 'as' => "check_box", 'position' => 4 },
-                  'select' => { 'as' => 'select', 'position' => 4, 'value' => ['a','b'] },
-                  'text' => { 'as' => 'text', 'position' => 4, 'value' => 'abc' },
-                  'hidden' => { 'as' => 'hidden_field', 'position' => 4, 'value' => 'abc' },
-                  'separator' => { 'as' => 'separator', 'position' => 4, 'value' => 'abc' },
-                  'card_select' => { 'as' => 'card_select', 'position' => 4, 'value' => 'abc' },
-                  'before_str' => { 'as' => 'input_field', 'position' => 4, 'value' => 'abc', 'before' => "def" },
-                  'before_proc' => { 'as' => 'input_field', 'position' => 4, 'value' => 'abc', 'before' => lambda { "def" } },
-                  'after_str' => { 'as' => 'input_field', 'position' => 4, 'value' => 'abc', 'after' => "def" },
-                  'after_proc' => { 'as' => 'input_field', 'position' => 4, 'value' => 'abc', 'after' => lambda { "def" } },
-                  'plain_text' => { 'as' => 'plain_text', 'position' => 4, 'value' => 'some plain text' },
-                  'payment_confirmation' => { 'as' => 'payment_confirmation', 'position' => 4 },
-                  'payment_confirmation_lite' => { 'as' => 'payment_confirmation_lite', 'position' => 4 },
-                  'year_select' => { 'as' => 'year_select', 'position' => 4 },
-                  'month_select' => { 'as' => 'month_select', 'position' => 4 }
-                }
-              }
-          }
-        }
-      })
-      ActiveProcessor.configuration.stubs(:translate_func).returns( proc{ |a| a } )
+      ActiveProcessor.configuration.stubs(:data).returns({
+                                                             'enabled' => {
+                                                                 'gateways' => ['bogus'],
+                                                             },
+                                                             'gateways' => {
+                                                                 'bogus' => {
+                                                                     'config' => {
+                                                                         'fields' => {
+                                                                             'login' => {'as' => "input_field", 'position' => 3, 'for' => 'authentication', 'value' => 'afaf', 'html_options' => {'size' => 30}},
+                                                                             'password' => {'as' => "password_field", 'position' => 4},
+                                                                             'check_box' => {'as' => "check_box", 'position' => 4},
+                                                                             'select' => {'as' => 'select', 'position' => 4, 'value' => ['a', 'b']},
+                                                                             'text' => {'as' => 'text', 'position' => 4, 'value' => 'abc'},
+                                                                             'hidden' => {'as' => 'hidden_field', 'position' => 4, 'value' => 'abc'},
+                                                                             'separator' => {'as' => 'separator', 'position' => 4, 'value' => 'abc'},
+                                                                             'card_select' => {'as' => 'card_select', 'position' => 4, 'value' => 'abc'},
+                                                                             'before_str' => {'as' => 'input_field', 'position' => 4, 'value' => 'abc', 'before' => "def"},
+                                                                             'before_proc' => {'as' => 'input_field', 'position' => 4, 'value' => 'abc', 'before' => lambda { "def" }},
+                                                                             'after_str' => {'as' => 'input_field', 'position' => 4, 'value' => 'abc', 'after' => "def"},
+                                                                             'after_proc' => {'as' => 'input_field', 'position' => 4, 'value' => 'abc', 'after' => lambda { "def" }},
+                                                                             'plain_text' => {'as' => 'plain_text', 'position' => 4, 'value' => 'some plain text'},
+                                                                             'payment_confirmation' => {'as' => 'payment_confirmation', 'position' => 4},
+                                                                             'payment_confirmation_lite' => {'as' => 'payment_confirmation_lite', 'position' => 4},
+                                                                             'year_select' => {'as' => 'year_select', 'position' => 4},
+                                                                             'month_select' => {'as' => 'month_select', 'position' => 4}
+                                                                         }
+                                                                     }
+                                                                 }
+                                                             }
+                                                         })
+      ActiveProcessor.configuration.stubs(:translate_func).returns(proc { |a| a })
     end
 
     should "render an input field" do
@@ -51,7 +51,7 @@ class GatewayEngineTest < Test::Unit::TestCase
 
     should "render a label" do
       @engine = GatewayEngine.new(:first, {:engine => :gateways, :gateway => :bogus})
-      ActiveProcessor.configuration.stubs(:translate_func).returns(lambda{|s| "translated"})
+      ActiveProcessor.configuration.stubs(:translate_func).returns(lambda { |s| "translated" })
       assert_match /<label(.*)for=\"gateways_bogus_login\"(.*)>/, ActiveProcessor::FormHelper.label(@engine.query.engine, @engine.query.name, 'login', @engine.query.fields['config']['login'])
     end
 

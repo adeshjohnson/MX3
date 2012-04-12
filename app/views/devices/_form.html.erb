@@ -3,69 +3,69 @@
   <tr>
     <td valign="top">
       <table class="simple">
-        <%= render :partial => "device_form_general"%>
+        <%= render :partial => "device_form_general" %>
         <% if @default.to_i != 1 %>
-          <%= render :partial => "device_form_authentication"%>
+            <%= render :partial => "device_form_authentication" %>
         <% end %>
 
-        <% if not @new_device and  @device_type != "FAX" %>
-          <%= render :partial => "device_form_callerid"%>
+        <% if not @new_device and @device_type != "FAX" %>
+            <%= render :partial => "device_form_callerid" %>
         <% end %>
 
-        <% if not @new_device and  @device_type != "FAX" and @device_type != "Virtual"%>
-          <% if @device_type != "ZAP" %>
-            <%= render :partial => "device_form_network"%>
-          <% end %>
+        <% if not @new_device and @device_type != "FAX" and @device_type != "Virtual" %>
+            <% if @device_type != "ZAP" %>
+                <%= render :partial => "device_form_network" %>
+            <% end %>
         <% end %>
 
         <% if session[:usertype] != "reseller" %>
-          <% if not @new_device and  @device_type != "FAX" and @device_type != "Virtual" %>
-            <%= render :partial => "device_form_groups"%>
-          <% end %>
+            <% if not @new_device and @device_type != "FAX" and @device_type != "Virtual" %>
+                <%= render :partial => "device_form_groups" %>
+            <% end %>
         <% end %>
 
-        <% if not @new_device and  @device_type != "FAX" %>
-          <%= render :partial => "device_form_voicemail"%>
+        <% if not @new_device and @device_type != "FAX" %>
+            <%= render :partial => "device_form_voicemail" %>
         <% end %>
       </table>
     </td>
 
     <td valign="top">
-      <table <%=" style='width:300px;aligin:left;' " if @device_type == "FAX" %> >
+      <table <%= " style='width:300px;aligin:left;' " if @device_type == "FAX" %> >
 
-        <% if not @new_device  and @device_type != "Virtual" %>
+        <% if not @new_device and @device_type != "Virtual" %>
 
-          <% if @device_type != "ZAP" %>
+            <% if @device_type != "ZAP" %>
 
-            <%= render :partial => "device_form_codecs"%>
-            <% if not @device_type == "FAX" %>
-              <%= render :partial => "device_form_address"%>
+                <%= render :partial => "device_form_codecs" %>
+                <% if not @device_type == "FAX" %>
+                    <%= render :partial => "device_form_address" %>
+                <% end %>
             <% end %>
-          <% end %>
         <% end %>
 
-          <% if not @new_device  and  @device_type != "ZAP" %>
-            <%= render :partial => "device_form_advance"%>
-          <% end %>
-        
-        
-
-
-        <% if not @new_device and  @device_type != "FAX"%>
-          <%= render :partial => "device_form_tell_options"%>
+        <% if not @new_device and @device_type != "ZAP" %>
+            <%= render :partial => "device_form_advance" %>
         <% end %>
 
-        <% if not @new_device and  @device_type != "FAX" and @device_type != "Virtual" %>
 
 
-          <% if session[:usertype] != "reseller" %>
-            <%= render :partial => "device_form_debug"%>
-          <% end %>
+
+        <% if not @new_device and @device_type != "FAX" %>
+            <%= render :partial => "device_form_tell_options" %>
         <% end %>
 
-        <% if not @new_device and  @device_type != "FAX"%>
-          <% @owner = @user.owner_id if !@owner %>
-          <%= render :partial => "device_recordings"%>
+        <% if not @new_device and @device_type != "FAX" and @device_type != "Virtual" %>
+
+
+            <% if session[:usertype] != "reseller" %>
+                <%= render :partial => "device_form_debug" %>
+            <% end %>
+        <% end %>
+
+        <% if not @new_device and @device_type != "FAX" %>
+            <% @owner = @user.owner_id if !@owner %>
+            <%= render :partial => "device_recordings" %>
         <% end %>
 
       </table>
@@ -73,4 +73,4 @@
   </tr>
 </table>
 <!--[eoform:device]-->
-<br />
+<br/>

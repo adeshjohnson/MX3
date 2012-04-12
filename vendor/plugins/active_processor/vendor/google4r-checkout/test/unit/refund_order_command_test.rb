@@ -56,9 +56,9 @@ class Google4R::Checkout::RefundOrderCommandTest < Test::Unit::TestCase
   <reason>Damaged Merchandise</reason>
 </refund-order>}
   end
-  
+
   def test_behaves_correctly
-    [ :google_order_number, :amount, :reason, :comment ].each do |symbol|
+    [:google_order_number, :amount, :reason, :comment].each do |symbol|
       assert_respond_to @command, symbol
     end
   end

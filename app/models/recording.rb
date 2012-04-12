@@ -9,8 +9,8 @@ class Recording < ActiveRecord::Base
 #    Call.find(:first, :conditions => ["id = ?",self.call_id])
 #  end
 
-  def destroy_all       
-    
+  def destroy_all
+
     if self.local.to_i == 1
       # delete from local server
 
@@ -18,22 +18,22 @@ class Recording < ActiveRecord::Base
       rm_cmd = "rm -f /home/mor/public/recordings/#{self.uniqueid}.mp3"
       MorLog.my_debug(rm_cmd)
       system(rm_cmd)
-      
-    else  
+
+    else
       # delete from remote server
       server = Confline.get_value("Recordings_addon_IP").to_s
       server_port = Confline.get_value("Recordings_addon_Port").to_s
-      server_user = Confline.get_value("Recordings_addon_Login").to_s  
-      
+      server_user = Confline.get_value("Recordings_addon_Login").to_s
+
       file_path = "/usr/local/mor/recordings/#{self.uniqueid.to_s}.mp3"
-      
+
       MorLog.my_debug("Deleting audio file #{self.uniqueid}.mp3 from remote server #{server.to_s}")
-      rm_cmd = "/usr/bin/ssh #{server_user.to_s}@#{server.to_s} -p #{server_port.to_s} -f rm -fr #{file_path} "      
+      rm_cmd = "/usr/bin/ssh #{server_user.to_s}@#{server.to_s} -p #{server_port.to_s} -f rm -fr #{file_path} "
       MorLog.my_debug(rm_cmd)
-      system(rm_cmd)                   
-      
+      system(rm_cmd)
+
     end
-    
+
     self.destroy
   end
 

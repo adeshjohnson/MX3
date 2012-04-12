@@ -1,158 +1,159 @@
 <script>
-window.onload = function() {
-  document.getElementById('username').focus()
-}
+    window.onload = function () {
+        document.getElementById('username').focus()
+    }
 
 </script>
 
 <%= form_tag(:action => 'signup_end') do %>
-  <table width="100%">
-    <tr>
-      <td valign="top" align="center">
-        <table class="simple">
-          <tr>
-            <td colspan="2" class="bottom_border" align="left">
-              <b><%= _('Account_details') %></b>
-            </td>
-          </tr>
-          <tr>
-            <td height="10"></td>
-          </tr>
-          <tr>
-            <td align="left"> <%= _('Username') %>: *  </td>
-            <td align="left"> <%= text_field_tag 'username', session[:reg_username], "class" => "input", :size => "30", :maxlength => "40"  %> </td>
-          </tr>
-          <tr>
-            <td align="left"> <%= _('Password') %>: *  </td>
-            <td align="left"> <%= password_field_tag 'password', session[:reg_password], "class" => "input", :size => "30", :maxlength => "40"  %> </td>
-          </tr>
-          <tr>
-            <td align="left"> <%= _('Password_reenter') %>: *  </td>
-            <td align="left"> <%= password_field_tag 'password2', session[:reg_password2], "class" => "input", :size => "30", :maxlength => "40"  %> </td>
-          </tr>
-          <tr>
-            <td align="left"> <%= _('Device_type') %>:   </td>
-            <td align="left">
+    <table width="100%">
+      <tr>
+        <td valign="top" align="center">
+          <table class="simple">
+            <tr>
+              <td colspan="2" class="bottom_border" align="left">
+                <b><%= _('Account_details') %></b>
+              </td>
+            </tr>
+            <tr>
+              <td height="10"></td>
+            </tr>
+            <tr>
+              <td align="left"> <%= _('Username') %>: *</td>
+              <td align="left"> <%= text_field_tag 'username', session[:reg_username], "class" => "input", :size => "30", :maxlength => "40" %> </td>
+            </tr>
+            <tr>
+              <td align="left"> <%= _('Password') %>: *</td>
+              <td align="left"> <%= password_field_tag 'password', session[:reg_password], "class" => "input", :size => "30", :maxlength => "40" %> </td>
+            </tr>
+            <tr>
+              <td align="left"> <%= _('Password_reenter') %>: *</td>
+              <td align="left"> <%= password_field_tag 'password2', session[:reg_password2], "class" => "input", :size => "30", :maxlength => "40" %> </td>
+            </tr>
+            <tr>
+              <td align="left"> <%= _('Device_type') %>:</td>
+              <td align="left">
                 <%= radio_button_tag('device_type', "SIP", checked = "1") %> SIP
-                <%= radio_button_tag('device_type', "IAX2", checked =  (session[:reg_device_type] == "IAX2")) %> IAX2
-                </td>
-          </tr>                              
-          <tr>
-            <td height="20"></td>
-          </tr>    
-          <tr>
-            <td colspan="2" class="bottom_border" align="left">
-              <b><%= _('Personal_details') %></b>
-            </td>
-          </tr>
-          <tr>
-            <td height="10"></td>
-          </tr>
-          <tr>
-            <td align="left"> <%= _('first_name') %>/<%= _('Company_name') %>: *   </td>
-            <td align="left"> <%= text_field_tag 'first_name', session[:reg_first_name], "class" => "input", :size => "30", :maxlength => "40"  %> </td>
-          </tr>
-          <tr>
-            <td align="left"> <%= _('last_name') %>: *   </td>
-            <td align="left"> <%= text_field_tag 'last_name', session[:reg_last_name], "class" => "input", :size => "30", :maxlength => "40"  %> </td>
-          </tr>
-          <tr>
-            <td align="left"> <%= _('Company_Personal_ID') %>:   </td>
-            <td align="left"> <%= text_field_tag 'client_id', session[:reg_client_id], "class" => "input", :size => "30", :maxlength => "40"  %> </td>
-          </tr>
-          <tr>
-            <td align="left"> <%= _('VAT_Reg_number') %>:<%= ' *   ' if @vat_necessary%> || <%= @vat_necessary %>  </td>
-            <td align="left"> <%= text_field_tag 'vat_number', session[:reg_vat_number], "class" => "input", :size => "30", :maxlength => "40"  %> </td>
-          </tr>
-          <tr>
-            <td height="20"></td>
-          </tr>                
-          <tr>
-            <td colspan="2" class="bottom_border" align="left">
-              <b><%= _('Registration_address') %></b>
-            </td>
-          </tr>
-          <tr>
-            <td height="10"></td>
-          </tr>
-          <%= render :partial => 'address_form' %>
-          <tr>
-            <td height="30"></td>
-          </tr>                 
-          <tr>
-            <td colspan="2">
-              <b>* <%= _('These_fields_are_necessary_for_registration') %></b>
-            </td>
-          </tr>
-          <tr>
-            <td height="20"></td>
-          </tr>
-<%if Confline.get_value("reCAPTCHA_enabled").to_i == 1%>
-        </table>
-        <snap><%= recaptcha_tags :display => {:theme => 'white'} %> </snap>
-        <table class="simple">
-<%end%>
-        <% if @agreement and @agreement.value == "1" %>
-          <tr>
-            <script type="text/javascript">
-               Event.observe(window, 'load', function() {
-                  var agree = $('agree');
-
-                  Event.observe(agree, 'click', function() {
-                    if (agree.checked) {
-                      $('submit_f').disabled = false;
-
-                    } else {
-                      $('submit_f').disabled = true;
-
-                    }
-                  });
-               });
-            </script>
-            <td colspan="2" align="left">
-              <strong><%=_('Terms_and_conditions')%></strong>
-            </td>
-          </tr>
-          <tr>
-            <td style="width: 350px; border: 1px solid #DCDCDC; padding: 0 5px 0 5px;" colspan="2" align="left">
-              <%= simple_format(@agreement.value2) %>
-            </td>
-          </tr>
-          <tr>
-            <td height="20"></td>
-          </tr>   
-          <tr>
-            <td height="20" colspan="2" align="center">
-              <%= check_box_tag 'agree', '1', false, :id => "agree" %> <%= _('I_agree') %>
-            </td>
-          </tr>   
-          <tr>
-            <td height="20"></td>
-          </tr>   
-        <% end %>
-          <tr>
-            <td colspan="2" align="center">
-            <% if @agreement and @agreement.value == "1" %>
-              <%= submit_tag(_('Sign_up'), :disabled => "disabled", :id => "submit_f") %>
-            <% else %>
-              <%= submit_tag(_('Sign_up'), :id => "submit_f") %>
+                <%= radio_button_tag('device_type', "IAX2", checked = (session[:reg_device_type] == "IAX2")) %> IAX2
+              </td>
+            </tr>
+            <tr>
+              <td height="20"></td>
+            </tr>
+            <tr>
+              <td colspan="2" class="bottom_border" align="left">
+                <b><%= _('Personal_details') %></b>
+              </td>
+            </tr>
+            <tr>
+              <td height="10"></td>
+            </tr>
+            <tr>
+              <td align="left"> <%= _('first_name') %>/<%= _('Company_name') %>: *</td>
+              <td align="left"> <%= text_field_tag 'first_name', session[:reg_first_name], "class" => "input", :size => "30", :maxlength => "40" %> </td>
+            </tr>
+            <tr>
+              <td align="left"> <%= _('last_name') %>: *</td>
+              <td align="left"> <%= text_field_tag 'last_name', session[:reg_last_name], "class" => "input", :size => "30", :maxlength => "40" %> </td>
+            </tr>
+            <tr>
+              <td align="left"> <%= _('Company_Personal_ID') %>:</td>
+              <td align="left"> <%= text_field_tag 'client_id', session[:reg_client_id], "class" => "input", :size => "30", :maxlength => "40" %> </td>
+            </tr>
+            <tr>
+              <td align="left"> <%= _('VAT_Reg_number') %>:<%= ' *   ' if @vat_necessary %>
+                || <%= @vat_necessary %>  </td>
+              <td align="left"> <%= text_field_tag 'vat_number', session[:reg_vat_number], "class" => "input", :size => "30", :maxlength => "40" %> </td>
+            </tr>
+            <tr>
+              <td height="20"></td>
+            </tr>
+            <tr>
+              <td colspan="2" class="bottom_border" align="left">
+                <b><%= _('Registration_address') %></b>
+              </td>
+            </tr>
+            <tr>
+              <td height="10"></td>
+            </tr>
+            <%= render :partial => 'address_form' %>
+            <tr>
+              <td height="30"></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <b>* <%= _('These_fields_are_necessary_for_registration') %></b>
+              </td>
+            </tr>
+            <tr>
+              <td height="20"></td>
+            </tr>
+            <% if Confline.get_value("reCAPTCHA_enabled").to_i == 1 %>
+                </table>
+                <snap><%= recaptcha_tags :display => {:theme => 'white'} %> </snap>
+                <table class="simple">
             <% end %>
+            <% if @agreement and @agreement.value == "1" %>
+                <tr>
+                  <script type="text/javascript">
+                      Event.observe(window, 'load', function () {
+                          var agree = $('agree');
+
+                          Event.observe(agree, 'click', function () {
+                              if (agree.checked) {
+                                  $('submit_f').disabled = false;
+
+                              } else {
+                                  $('submit_f').disabled = true;
+
+                              }
+                          });
+                      });
+                  </script>
+                  <td colspan="2" align="left">
+                    <strong><%= _('Terms_and_conditions') %></strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width: 350px; border: 1px solid #DCDCDC; padding: 0 5px 0 5px;" colspan="2" align="left">
+                    <%= simple_format(@agreement.value2) %>
+                  </td>
+                </tr>
+                <tr>
+                  <td height="20"></td>
+                </tr>
+                <tr>
+                  <td height="20" colspan="2" align="center">
+                    <%= check_box_tag 'agree', '1', false, :id => "agree" %> <%= _('I_agree') %>
+                  </td>
+                </tr>
+                <tr>
+                  <td height="20"></td>
+                </tr>
+            <% end %>
+            <tr>
+              <td colspan="2" align="center">
+                <% if @agreement and @agreement.value == "1" %>
+                    <%= submit_tag(_('Sign_up'), :disabled => "disabled", :id => "submit_f") %>
+                <% else %>
+                    <%= submit_tag(_('Sign_up'), :id => "submit_f") %>
+                <% end %>
+              </td>
+            </tr>
+            </table>
             </td>
-          </tr>
-        </table>            
-      </td>
-    </tr>
-  </table>
-  <%= hidden_field_tag('id', params[:id]) %>
+      </tr>
+    </table>
+    <%= hidden_field_tag('id', params[:id]) %>
 <% end %>
 
 <% content_for :scripts do %>
-<script type="text/javascript">
-  $j("#submit_f").click(function() {
-  
-  $j("#submit_f").attr('disabled', 'disabled');
-  $j("#submit_f").attr('value', '<%=_('Processing..')%>');
-  $j("#submit_f").parents("form").submit();
-});
-</script>
+    <script type="text/javascript">
+        $j("#submit_f").click(function () {
+
+            $j("#submit_f").attr('disabled', 'disabled');
+            $j("#submit_f").attr('value', '<%=_('Processing..')%>');
+            $j("#submit_f").parents("form").submit();
+        });
+    </script>
 <% end %>

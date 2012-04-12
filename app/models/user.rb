@@ -690,7 +690,7 @@ class User < ActiveRecord::Base
 
   def create_reseller_conflines
     resellers_device_location = Confline.get_value("Default_device_location_id", id)
-    if usertype == "reseller" and  !Confline.get_value("Default_device_type", id).to_s.blank?
+    if usertype == "reseller" and !Confline.get_value("Default_device_type", id).to_s.blank?
       #sql = "DELETE FROM conflines WHERE owner_id = #{id}"
       #ActiveRecord::Base.connection.execute(sql)
       Confline.delete_all("owner_id = #{id} AND name like 'Default_device%'")
@@ -1964,7 +1964,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def fix_when_is_rendering
-    if User.current  and self
+    if User.current and self
       self.balance = self.balance.to_f * User.current.currency.exchange_rate.to_f
       self.credit = self.credit.to_f * User.current.currency.exchange_rate.to_f if credit != -1
       self.warning_email_balance = self.warning_email_balance.to_f * User.current.currency.exchange_rate.to_f
@@ -3234,9 +3234,9 @@ GROUP BY terminators.id;").map { |t| t.id }
     if self.save
       exchange_rate = Currency.count_exchange_rate(Currency.get_default.name, currency.name)
       amount *= exchange_rate
-      logger.fatal      amount
+      logger.fatal amount
       tax_amount = self.get_tax.count_tax_amount(amount)
-      logger.fatal    tax_amount
+      logger.fatal tax_amount
       payment = Payment.create_for_user(self, {:paymenttype => 'Manual', :amount => amount, :tax => tax_amount, :shipped_at => Time.now, :date_added => Time.now, :completed => 1, :currency => currency.name})
       if payment.save
         return true
@@ -3298,7 +3298,6 @@ GROUP BY terminators.id;").map { |t| t.id }
         l.destroy }
     end
   end
-
 
 
 end

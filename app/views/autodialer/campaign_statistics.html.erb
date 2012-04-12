@@ -2,141 +2,143 @@
 
 <div align="left" class="nb">
   <%= form_tag :action => 'campaign_statistics' do %>
-    <%= _('From') %>: <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
-    &nbsp;&nbsp;
-    <%= _('to') %>: <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
-    &nbsp;&nbsp;
-    <%=_('Campaign')%> :
-    <select name="campaign_id" >
-      <option value="-1" <%= " selected " if @campaign_id.to_i == -1 %>> <%= _('None') %> </option>
-      <% for campaign in @campaigns %>
-        <option value=<%= campaign.id %> <%= " selected " if campaign.id.to_i == @campaign_id.to_i %>> <%= campaign.name %> </option>
-      <% end %>
-    </select>
-    &nbsp;&nbsp;<%= submit_tag _('Change'), :disable_with=>_('Processing..')%>
+      <%= _('From') %>
+      : <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+      &nbsp;&nbsp;
+      <%= _('to') %>
+      : <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+      &nbsp;&nbsp;
+      <%= _('Campaign') %> :
+      <select name="campaign_id">
+        <option value="-1" <%= " selected " if @campaign_id.to_i == -1 %>> <%= _('None') %> </option>
+        <% for campaign in @campaigns %>
+            <option value=<%= campaign.id %> <%= " selected " if campaign.id.to_i == @campaign_id.to_i %>> <%= campaign.name %> </option>
+        <% end %>
+      </select>
+      &nbsp;&nbsp;<%= submit_tag _('Change'), :disable_with => _('Processing..') %>
   <% end %>
 
 </div>
-<br />
-<br />
+<br/>
+<br/>
 <% if !@numbers.compact.empty? %>
-  <table class="maintable">
-    <tr class="row1" >
-      <th id="name"><%= _('Campaign_name') %>:</th>
-      <td id="campaign_name" class="no_wrap" align="center" WIDTH="30%">
-        <%= @campaing_stat.name  if @campaing_stat%>
-      </td>
-    </tr>
-    <tr>
-      <th id="numbers"><%= _('Total_numbers') %>:</th>
-      <td id="total_numbers" align="center" ><%= @numbers.size if @numbers   %></td>
-    </tr>
-    <tr class="row1">
-      <th id="dialed"><%= _('Dialed') %>:</th>
-      <td id="dialed_value" align="center" ><%= @dialed if @dialed %></td>
-    </tr>
-    <tr>
-      <th id="completed"><%= _('Completed') %>:</th>
-      <td id="completed_value" align="center" ><%= @complete if @complete%></td>
-    </tr>
-    <tr class="row1">
-      <th id="call_time"><%= _('Total_call_time') %>:</th>
-      <td id="total_call_time" align="center" ><%=  @total if @total%></td>
-    </tr>
-    <tr>
-      <th id="total_longer_than_10"><%= _('Total_call_longer_than_10s') %>:</th>
-      <td id="total_call_longer_than_10" align="center" ><%=  @total_longer_than_10 if  @total_longer_than_10 %></td>
-    </tr>
-  </table>
-  <br />
-  <br />
-  <% if !@channels.compact.empty? %>
-    <table width="100%">
-      <tr>
-        <td align="center" width =" 10%">
-          <div id="flashcontent2"><strong>You need to upgrade your Flash Player</strong></div>
-          <script type="text/javascript">
-            // <![CDATA[
-            var so = new SWFObject("<%= Web_Dir %>/swf/amcolumn.swf", "amcolumn", "350", "250", "8", "#FFFFFF");
-            so.addVariable("path", "<%= Web_Dir %>/swf/");
-            so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/amcolumn_1.xml"));
-            so.addParam("wmode", "transparent");
-            so.addVariable("chart_data",  escape("<%= @Calls_graph %>"));
-            so.addVariable("additional_chart_settings", escape("<settings></settings>"));
-            so.addVariable("additional_chart_settings", "<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('Calls') %></b>]]></text></label></labels></settings>");
-            so.write("flashcontent2");
-            // ]]>
-          </script>
-          <!-- end of amcolumn script -->
-        </td>
-        <td align="center" width =" 10%">
-          <!-- ampie script-->
-          <div id="flashcontent1"><strong>You need to upgrade your Flash Player</strong></div>
-          <script type="text/javascript">
-            // <![CDATA[
-            var so = new SWFObject("<%= Web_Dir %>/swf/ampie.swf", "ampie", "450", "250", "9", "#FFFFFF");
-            so.addVariable("path", "<%= Web_Dir %>/swf/");
-            so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/pie2.xml"));
-            so.addParam("wmode", "transparent");
-            so.addVariable("chart_data", escape(<%=  @pie_chart %>));
-            so.addVariable("additional_chart_settings", encodeURI("<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%=  %></b>]]></text></label></settings>"));
-            so.write("flashcontent1");
-            // ]]>
-          </script>
-          <!-- end of ampie script -->
-        </td>
-        <td  WIDTH="30%">
-          <table class="maintable" WIDTH="40%" >
-            <tr class="row1" >
-              <th class="no_wrap"><%= _('ANSWERED') %>:</th>
-              <td align="right" WIDTH="30%" id="calls_answered">
-                <%= @calls_answered.to_s%>
-              </td>
-              <td align="right"WIDTH="30%" id="answered_percent">
-                <%= @answered_percent %>%
-              </td>
-            </tr>
-            <tr>
-              <th class="no_wrap"><%= _('NO ANSWER') %>:</th>
-              <td align="right" WIDTH="30%" id="calls_no_answer">
-                <%=  @calls_no_answer.to_s   %>
-              </td>
-              <td align="right"WIDTH="30%" id="no_answer_percent">
-                <%=  @no_answer_percent %>%
-              </td>
-            </tr>
-            <tr class="row1">
-              <th><%= _('BUSY') %>:</th>
-              <td align="right" WIDTH="30%" id="calls_busy">
-                <%= @calls_busy.to_s %>
-              </td>
-              <td align="right"WIDTH="30%" id="busy_percent">
-                <%= @busy_percent %>%
-              </td>
-            </tr>
-            <tr>
-              <th><%= _('FAILED') %>:</th>
-              <td align="right"WIDTH="30%" id="calls_failed">
-                <%= @calls_failed.to_s %>
-              </td>
-              <td align="right"WIDTH="30%" id="failed_percent">
-                <%= @failed_percent %>%
-              </td>
-            </tr>
-            <tr class="row1">
-              <th><%= _('All_calls') %>:</th>
-              <td align="right"WIDTH="30%" id="all_calls" >
-                <%=  @calls_all.to_s %>
-              </td>
-              <td align="right"WIDTH="30%" id="all_calls_percent">
-                100%
-              </td>
-            </tr>
-          </table>
+    <table class="maintable">
+      <tr class="row1">
+        <th id="name"><%= _('Campaign_name') %>:</th>
+        <td id="campaign_name" class="no_wrap" align="center" WIDTH="30%">
+          <%= @campaing_stat.name if @campaing_stat %>
         </td>
       </tr>
+      <tr>
+        <th id="numbers"><%= _('Total_numbers') %>:</th>
+        <td id="total_numbers" align="center"><%= @numbers.size if @numbers %></td>
+      </tr>
+      <tr class="row1">
+        <th id="dialed"><%= _('Dialed') %>:</th>
+        <td id="dialed_value" align="center"><%= @dialed if @dialed %></td>
+      </tr>
+      <tr>
+        <th id="completed"><%= _('Completed') %>:</th>
+        <td id="completed_value" align="center"><%= @complete if @complete %></td>
+      </tr>
+      <tr class="row1">
+        <th id="call_time"><%= _('Total_call_time') %>:</th>
+        <td id="total_call_time" align="center"><%= @total if @total %></td>
+      </tr>
+      <tr>
+        <th id="total_longer_than_10"><%= _('Total_call_longer_than_10s') %>:</th>
+        <td id="total_call_longer_than_10" align="center"><%= @total_longer_than_10 if  @total_longer_than_10 %></td>
+      </tr>
     </table>
-  <% end %>
+    <br/>
+    <br/>
+    <% if !@channels.compact.empty? %>
+        <table width="100%">
+          <tr>
+            <td align="center" width=" 10%">
+              <div id="flashcontent2"><strong>You need to upgrade your Flash Player</strong></div>
+              <script type="text/javascript">
+                  // <![CDATA[
+                  var so = new SWFObject("<%= Web_Dir %>/swf/amcolumn.swf", "amcolumn", "350", "250", "8", "#FFFFFF");
+                  so.addVariable("path", "<%= Web_Dir %>/swf/");
+                  so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/amcolumn_1.xml"));
+                  so.addParam("wmode", "transparent");
+                  so.addVariable("chart_data", escape("<%= @Calls_graph %>"));
+                  so.addVariable("additional_chart_settings", escape("<settings></settings>"));
+                  so.addVariable("additional_chart_settings", "<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%= _('Calls') %></b>]]></text></label></labels></settings>");
+                  so.write("flashcontent2");
+                  // ]]>
+              </script>
+              <!-- end of amcolumn script -->
+            </td>
+            <td align="center" width=" 10%">
+              <!-- ampie script-->
+              <div id="flashcontent1"><strong>You need to upgrade your Flash Player</strong></div>
+              <script type="text/javascript">
+                  // <![CDATA[
+                  var so = new SWFObject("<%= Web_Dir %>/swf/ampie.swf", "ampie", "450", "250", "9", "#FFFFFF");
+                  so.addVariable("path", "<%= Web_Dir %>/swf/");
+                  so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/pie2.xml"));
+                  so.addParam("wmode", "transparent");
+                  so.addVariable("chart_data", escape(<%=  @pie_chart %>));
+                  so.addVariable("additional_chart_settings", encodeURI("<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b><%=  %></b>]]></text></label></settings>"));
+                  so.write("flashcontent1");
+                  // ]]>
+              </script>
+              <!-- end of ampie script -->
+            </td>
+            <td WIDTH="30%">
+              <table class="maintable" WIDTH="40%">
+                <tr class="row1">
+                  <th class="no_wrap"><%= _('ANSWERED') %>:</th>
+                  <td align="right" WIDTH="30%" id="calls_answered">
+                    <%= @calls_answered.to_s %>
+                  </td>
+                  <td align="right" WIDTH="30%" id="answered_percent">
+                    <%= @answered_percent %>%
+                  </td>
+                </tr>
+                <tr>
+                  <th class="no_wrap"><%= _('NO ANSWER') %>:</th>
+                  <td align="right" WIDTH="30%" id="calls_no_answer">
+                    <%= @calls_no_answer.to_s %>
+                  </td>
+                  <td align="right" WIDTH="30%" id="no_answer_percent">
+                    <%= @no_answer_percent %>%
+                  </td>
+                </tr>
+                <tr class="row1">
+                  <th><%= _('BUSY') %>:</th>
+                  <td align="right" WIDTH="30%" id="calls_busy">
+                    <%= @calls_busy.to_s %>
+                  </td>
+                  <td align="right" WIDTH="30%" id="busy_percent">
+                    <%= @busy_percent %>%
+                  </td>
+                </tr>
+                <tr>
+                  <th><%= _('FAILED') %>:</th>
+                  <td align="right" WIDTH="30%" id="calls_failed">
+                    <%= @calls_failed.to_s %>
+                  </td>
+                  <td align="right" WIDTH="30%" id="failed_percent">
+                    <%= @failed_percent %>%
+                  </td>
+                </tr>
+                <tr class="row1">
+                  <th><%= _('All_calls') %>:</th>
+                  <td align="right" WIDTH="30%" id="all_calls">
+                    <%= @calls_all.to_s %>
+                  </td>
+                  <td align="right" WIDTH="30%" id="all_calls_percent">
+                    100%
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+    <% end %>
 <% else %>
-  <b><%= _('Choose_campaign') %></b>
+    <b><%= _('Choose_campaign') %></b>
 <% end %>

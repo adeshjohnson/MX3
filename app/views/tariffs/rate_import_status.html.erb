@@ -2,8 +2,8 @@
 <div id="rate_import_status" style="background-color:#eee;">
 </div>
 <%= periodically_call_remote(:update => 'rate_import_status',
-:url => { :action => :rate_import_status_view },
-:frequency => 2,
-:loading => "Element.show('spinner');",
-:complete=> "Element.hide('spinner');")%>
+                             :url => {:action => :rate_import_status_view},
+                             :frequency => 2,
+                             :loading => "Element.show('spinner');",
+                             :complete => "Element.hide('spinner');") %>
 ---

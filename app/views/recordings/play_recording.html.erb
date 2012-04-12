@@ -1,20 +1,20 @@
 <% if @rec %>
-  <div class="nb"><%= b_play + _('Playing_recording') %>: <%= nice_date_time(@rec.datetime) %></div>
+    <div class="nb"><%= b_play + _('Playing_recording') %>: <%= nice_date_time(@rec.datetime) %></div>
 
-  <br>
-  <br>
-  <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="280" height="80" id="mp3player" 
-      codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" >
-    <param name="movie" value="<%= Web_URL %><%= Web_Dir %>/mp3player/mp3player.swf" />
-    <param name="flashvars" value="config=<%= Web_URL %><%= Web_Dir %>/mp3player/config.xml&file=<%= @recording %>" />
-    <embed src="<%= Web_URL %><%= Web_Dir %>/mp3player/mp3player.swf" width="280" height="80" name="mp3player"
-      flashvars="config=<%= Web_URL %><%= Web_Dir %>/mp3player/config.xml&file=<%= @recording %>" 
-      type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
-  </object>
+    <br>
+    <br>
+    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="280" height="80" id="mp3player"
+            codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0">
+      <param name="movie" value="<%= Web_URL %><%= Web_Dir %>/mp3player/mp3player.swf"/>
+      <param name="flashvars" value="config=<%= Web_URL %><%= Web_Dir %>/mp3player/config.xml&file=<%= @recording %>"/>
+      <embed src="<%= Web_URL %><%= Web_Dir %>/mp3player/mp3player.swf" width="280" height="80" name="mp3player"
+             flashvars="config=<%= Web_URL %><%= Web_Dir %>/mp3player/config.xml&file=<%= @recording %>"
+             type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"/>
+    </object>
 
-  <br>
-  <br>
-  <div class="nb"><%= link_to b_download + _('Download'), @recording %></div> 
+    <br>
+    <br>
+    <div class="nb"><%= link_to b_download + _('Download'), @recording %></div>
 <% else %>
-<%= _("Recording_was_not_found") %>
+    <%= _("Recording_was_not_found") %>
 <% end %>

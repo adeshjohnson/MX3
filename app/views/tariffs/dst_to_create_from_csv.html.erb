@@ -1,25 +1,26 @@
 <table class="maintable" width="100%">
-  <%if @csv2.to_i == 0%>
-    <% @csv_file.each_with_index{ |row, i| %>
-      <% if (2..4).include?(@status[i].to_i) %>
-        <tr class="row<%= (i % 2 + 1).to_s %>">
-          <% row.each{|r| %>
-            <td><%= r.to_s  %> <%  "-->" + @status[i].to_s %></td>
-          <% } %>
-        </tr>
-      <% end %>
-    <% } %>
-  <%else%>
-    <%if @csv_file%>
-      <% @csv_file.each_with_index{ |row, i| %>
-        <tr class="row<%= (i % 2 + 1).to_s %>">
-          <% row.each{|r| %>
-            <%if r[0].include?('col_')%>
-              <td><%= r[1].to_s  %></td>
-            <%end%>
-          <% } %>
-        </tr>
+  <% if @csv2.to_i == 0 %>
+      <% @csv_file.each_with_index { |row, i| %>
+          <% if (2..4).include?(@status[i].to_i) %>
+              <tr class="row<%= (i % 2 + 1).to_s %>">
+                <% row.each { |r| %>
+                    <td><%= r.to_s %>
+                      <% "-->" + @status[i].to_s %></td>
+                <% } %>
+              </tr>
+          <% end %>
       <% } %>
-    <%end%>
-  <%end%>
+  <% else %>
+      <% if @csv_file %>
+          <% @csv_file.each_with_index { |row, i| %>
+              <tr class="row<%= (i % 2 + 1).to_s %>">
+                <% row.each { |r| %>
+                    <% if r[0].include?('col_') %>
+                        <td><%= r[1].to_s %></td>
+                    <% end %>
+                <% } %>
+              </tr>
+          <% } %>
+      <% end %>
+  <% end %>
 </table>

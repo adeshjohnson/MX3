@@ -2,10 +2,10 @@
 class CurrenciesController < ApplicationController
 
   layout "callc"
-  before_filter :check_post_method, :only=>[:destroy, :create, :update]
-  before_filter :check_localization, :except=>[:calculate]
-  before_filter :authorize, :except=>[:calculate]
-  before_filter :find_currecy, :only=>[:currencies_change_update_status, :currencies_change_status, :currencies_change_default, :edit, :update, :destroy]
+  before_filter :check_post_method, :only => [:destroy, :create, :update]
+  before_filter :check_localization, :except => [:calculate]
+  before_filter :authorize, :except => [:calculate]
+  before_filter :find_currecy, :only => [:currencies_change_update_status, :currencies_change_status, :currencies_change_default, :edit, :update, :destroy]
 
   def calculate
     @without_tax = (params[:curr1].to_s == params[:curr2].to_s ? round_to_cents(params[:amount].to_f) : exchange(params[:amount], params[:curr1], params[:curr2]).to_f)
@@ -20,12 +20,12 @@ class CurrenciesController < ApplicationController
     end
 
     result = {
-      :without_tax => round_to_cents(@without_tax.to_f),
-      :with_tax => round_to_cents(@with_tax.to_f)
+        :without_tax => round_to_cents(@without_tax.to_f),
+        :with_tax => round_to_cents(@with_tax.to_f)
     }
 
     respond_to do |format|
-      format.json { 
+      format.json {
         render :json => result.to_json
       }
     end
@@ -72,7 +72,7 @@ class CurrenciesController < ApplicationController
     else
       flash[:notice] = _('Error_Please_Try_Again_Later')
     end
-    redirect_to :action=>:change_default
+    redirect_to :action => :change_default
   end
 
   def update_currencies_rates
@@ -84,7 +84,7 @@ class CurrenciesController < ApplicationController
       rescue Exception => e
       end
     else
-      @currency = Currency.find(:first, :conditions=>['id=?',params[:id]])
+      @currency = Currency.find(:first, :conditions => ['id=?', params[:id]])
       unless @currency
         flash[:notice] = _('Currency_was_not_found')
         redirect_back_or_default("/currencies/currencies")
@@ -121,7 +121,7 @@ class CurrenciesController < ApplicationController
   def destroy
     total_tariffs = @currency.tariffs.size
 
-    if (@currency.id != 1) and (total_tariffs == 0) and (@currency.curr_edit != 1)#AND check if some tariff etc uses this currency
+    if (@currency.id != 1) and (total_tariffs == 0) and (@currency.curr_edit != 1) #AND check if some tariff etc uses this currency
       session[:show_currency] = session[:default_currency] if session[:show_currency] == @currency.name
       @currency.destroy
       flash[:status] = _('Currency_deleted')
@@ -144,7 +144,7 @@ class CurrenciesController < ApplicationController
   end
 
   def find_currecy
-    @currency = Currency.find(:first, :conditions=>['id=?',params[:id]])
+    @currency = Currency.find(:first, :conditions => ['id=?', params[:id]])
     unless @currency
       flash[:notice] = _('Currency_was_not_found')
       redirect_back_or_default("/currencies/currencies") and return false

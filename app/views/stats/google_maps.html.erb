@@ -40,43 +40,43 @@
     <%#*================== Generate Server Markers ==================%>
 
     <% if session[:usertype] == "admin" %>
-        <%
-          arr2 = Array.new
-          for server in @servers do
-            loc =Iplocation.get_location(server.server_ip)
-            if loc.longitude != 0 and loc.latitude != 0
-              tool_tip  = '<img alt="Server" src="'+Web_Dir+'/assets/icons/server.png" title="Server" />'
-              tool_tip += "<br />Host: "+server.hostname if server.hostname
-              tool_tip += "<br />IP: "+loc.ip if loc.ip
-              tool_tip += "<br />Country: "+loc.country if loc.country
-              arr2 << "google.maps.event.addListener(map, 'tilesloaded', addServerMarker(#{loc.latitude}, #{loc.longitude}, escape('#{tool_tip.gsub(/\n/, "<br />").html_safe}')));"
-            end
-          end
-        %>
-        <% for i in arr2 do%>
-        <%= raw i %>
-        <% end %>
+    <%
+      arr2 = Array.new
+      for server in @servers do
+        loc =Iplocation.get_location(server.server_ip)
+        if loc.longitude != 0 and loc.latitude != 0
+          tool_tip  = '<img alt="Server" src="'+Web_Dir+'/assets/icons/server.png" title="Server" />'
+          tool_tip += "<br />Host: "+server.hostname if server.hostname
+          tool_tip += "<br />IP: "+loc.ip if loc.ip
+          tool_tip += "<br />Country: "+loc.country if loc.country
+          arr2 << "google.maps.event.addListener(map, 'tilesloaded', addServerMarker(#{loc.latitude}, #{loc.longitude}, escape('#{tool_tip.gsub(/\n/, "<br />").html_safe}')));"
+        end
+      end
+    %>
+    <% for i in arr2 do%>
+    <%= raw i %>
+    <% end %>
     <% end %>
 
     <%#*================== Generate Provider Markers ==================%>
 
     <% if allow_manage_providers? %>
-        <%
-          arr3 = Array.new
-          for provider in @providers do
-            loc =Iplocation.get_location(provider.server_ip)
-            if loc.longitude != 0 and loc.latitude != 0
-              tool_tip  = '<img alt="Provider" src="'+Web_Dir+'/assets/icons/provider.png" title="Provider" />'
-              tool_tip += "<br />Name: "+provider.name
-              tool_tip += "<br />IP: "+loc.ip if loc.ip
-              tool_tip += "<br />Country: "+loc.country if loc.country
-              arr3 << "google.maps.event.addListener(map, 'tilesloaded', addProviderMarker(#{loc.latitude}, #{loc.longitude}, escape('#{tool_tip.gsub(/\n/, "<br />").html_safe}')));"
-            end
-          end
-        %>
-        <% for i in arr3 do%>
-        <%= raw i %>
-        <% end %>
+    <%
+      arr3 = Array.new
+      for provider in @providers do
+        loc =Iplocation.get_location(provider.server_ip)
+        if loc.longitude != 0 and loc.latitude != 0
+          tool_tip  = '<img alt="Provider" src="'+Web_Dir+'/assets/icons/provider.png" title="Provider" />'
+          tool_tip += "<br />Name: "+provider.name
+          tool_tip += "<br />IP: "+loc.ip if loc.ip
+          tool_tip += "<br />Country: "+loc.country if loc.country
+          arr3 << "google.maps.event.addListener(map, 'tilesloaded', addProviderMarker(#{loc.latitude}, #{loc.longitude}, escape('#{tool_tip.gsub(/\n/, "<br />").html_safe}')));"
+        end
+      end
+    %>
+    <% for i in arr3 do%>
+    <%= raw i %>
+    <% end %>
     <% end %>
 
     <%#*=============================================================%>

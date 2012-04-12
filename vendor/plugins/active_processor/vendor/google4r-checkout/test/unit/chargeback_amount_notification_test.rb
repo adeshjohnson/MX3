@@ -51,10 +51,10 @@ class Google4R::Checkout::ChargebackAmountNotificationTest < Test::Unit::TestCas
 </chargeback-amount-notification>
 }
   end
-  
+
   def test_create_from_element_works_correctly
     root = REXML::Document.new(@example_xml).root
-    
+
     notification = ChargebackAmountNotification.create_from_element(root, @frontend)
 
     assert_equal 'bea6bc1b-e1e2-44fe-80ff-0180e33a2614', notification.serial_number

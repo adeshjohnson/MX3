@@ -40,64 +40,64 @@ class Google4R::Checkout::NotificationHandlerTest < Test::Unit::TestCase
     @frontend = Frontend.new(FRONTEND_CONFIGURATION)
     @frontend.tax_table_factory = TestTaxTableFactory.new
     @notification_handler = @frontend.create_notification_handler
-    
+
     @xmls_with_known_tags =
-      [
-        [ 
-          '<new-order-notification xmlns="http://checkout.google.com/schema/2" />',
-          'new-order-notification',
-          NewOrderNotification
-        ],
         [
-          '<order-state-change-notification xmlns="http://checkout.google.com/schema/2" />',
-          'order-state-change-notification',
-          OrderStateChangeNotification
-        ],
-        [
-          '<risk-information-notification xmlns="http://checkout.google.com/schema/2" />',
-          'risk-information-notification',
-          RiskInformationNotification
-        ],
-        [
-          '<charge-amount-notification xmlns="http://checkout.google.com/schema/2" />',
-          'charge-amount-notification',
-          ChargeAmountNotification
-        ],
-        [
-          '<refund-amount-notification xmlns="http://checkout.google.com/schema/2" />',
-          'refund-amount-notification',
-          RefundAmountNotification
-        ],
-        [
-          '<chargeback-amount-notification xmlns="http://checkout.google.com/schema/2" />',
-          'chargeback-amount-notification',
-          ChargebackAmountNotification
-        ],
-        [
-          '<authorization-amount-notification xmlns="http://checkout.google.com/schema/2" />',
-          'authorization-amount-notification',
-          AuthorizationAmountNotification
-        ],
-      ]
-    
+            [
+                '<new-order-notification xmlns="http://checkout.google.com/schema/2" />',
+                'new-order-notification',
+                NewOrderNotification
+            ],
+            [
+                '<order-state-change-notification xmlns="http://checkout.google.com/schema/2" />',
+                'order-state-change-notification',
+                OrderStateChangeNotification
+            ],
+            [
+                '<risk-information-notification xmlns="http://checkout.google.com/schema/2" />',
+                'risk-information-notification',
+                RiskInformationNotification
+            ],
+            [
+                '<charge-amount-notification xmlns="http://checkout.google.com/schema/2" />',
+                'charge-amount-notification',
+                ChargeAmountNotification
+            ],
+            [
+                '<refund-amount-notification xmlns="http://checkout.google.com/schema/2" />',
+                'refund-amount-notification',
+                RefundAmountNotification
+            ],
+            [
+                '<chargeback-amount-notification xmlns="http://checkout.google.com/schema/2" />',
+                'chargeback-amount-notification',
+                ChargebackAmountNotification
+            ],
+            [
+                '<authorization-amount-notification xmlns="http://checkout.google.com/schema/2" />',
+                'authorization-amount-notification',
+                AuthorizationAmountNotification
+            ],
+        ]
+
     @xmls_with_unknown_tags =
-      [
-        '<unknown-notification />'
-      ]
+        [
+            '<unknown-notification />'
+        ]
   end
-  
+
   def test_handler_gets_initialized_correctly
     assert_equal @frontend, @notification_handler.frontend
   end
-  
+
   def test_returns_correct_notification_class_for_known_notifications
     @xmls_with_known_tags.each do |triple|
       xml_str, tag_name, klass = triple
-      
+
       expect = klass.stubs(:create_from_element)
       expect.times(1).returns(:foo)
       expect.with { |element, frontend| element.name == tag_name and frontend == @frontend }
-      
+
       result = nil
       assert_nothing_raised {
         result = @notification_handler.handle(xml_str)
@@ -105,7 +105,7 @@ class Google4R::Checkout::NotificationHandlerTest < Test::Unit::TestCase
       assert_equal :foo, result
     end
   end
-  
+
   def test_raises_exception_on_unknown_notifications
     @xmls_with_unknown_tags.each do |xml_str|
       assert_raises(UnknownNotificationType) { @notification_handler.handle(xml_str) }

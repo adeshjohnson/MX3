@@ -7,10 +7,10 @@ class RemoveUsaEpayTest < Test::Unit::TestCase
     @gateway = UsaEpayGateway.new(fixtures(:usa_epay))
     @creditcard = credit_card('4000100011112224')
     @declined_card = credit_card('4000300011112220')
-    @options = { :billing_address => address }
+    @options = {:billing_address => address}
     @amount = 100
   end
-  
+
   def test_successful_purchase
     assert response = @gateway.purchase(@amount, @creditcard, @options)
     assert_equal 'Success', response.message

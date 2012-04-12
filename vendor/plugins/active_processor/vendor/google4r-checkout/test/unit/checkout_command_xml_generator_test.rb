@@ -44,17 +44,17 @@ require 'rexml/document'
 # TODO: Make the tests querying Google Checkout's diagnose service and the XSD validation optional.
 class Google4R::Checkout::CheckoutCommandXmlGeneratorTest < Test::Unit::TestCase
   include Google4R::Checkout
-  
+
   def setup
     @schema_path = File.expand_path(File.join(File.dirname(__FILE__), '..', 'xml', 'apiv2.xsd'))
     @expected_path = File.expand_path(File.join(File.dirname(__FILE__), '..', 'xml', 'test_check_persisting_works_expected.xml'))
-    
+
     @frontend = Frontend.new(FRONTEND_CONFIGURATION)
     @frontend.tax_table_factory = TestTaxTableFactory.new
     @command = @frontend.create_checkout_command
     @generator = CheckoutCommandXmlGenerator.new(@command)
   end
-  
+
   # Note that this is not really a good test. We do not actually compare anything.
   # Instead, we simply generate some XML, validate it using XSD via xmllint and then
   # compare it to the output that we validated by reading it earlier.
@@ -91,11 +91,11 @@ class Google4R::Checkout::CheckoutCommandXmlGeneratorTest < Test::Unit::TestCase
       rule.area.area = UsCountryArea::ALL
     end
     tax_tables << nondefault_table
-    
+
     TestTaxTableFactory.any_instance.stubs(:effective_tax_tables_at).returns(tax_tables)
     @frontend.tax_table_factory = TestTaxTableFactory.new
     @command = @frontend.create_checkout_command
-    
+
     @command.continue_shopping_url = 'http://wwww.example.com/continue_shopping'
     @command.edit_cart_url = 'http://wwww.example.com/edit_cart'
     @command.request_buyer_phone_number = false
@@ -104,42 +104,42 @@ class Google4R::Checkout::CheckoutCommandXmlGeneratorTest < Test::Unit::TestCase
     @command.accept_gift_certificates = true
     @command.platform_id = '1234567890'
     @command.analytics_data = 'abcd1234defgh5678ijklmn'
-    
+
     @generator = CheckoutCommandXmlGenerator.new(@command)
-    
+
     @command.shopping_cart.expires_at = Time.parse('2007-11-29T15:33:20 UTC')
-    
+
     @command.create_shipping_method(PickupShipping) do |shipping|
       shipping.name = 'Pickup Test Shipping'
       shipping.price = Money.new(100, 'USD')
     end
-    
+
     @command.create_shipping_method(FlatRateShipping) do |shipping|
       shipping.name = 'State Test Shipping'
       shipping.price = Money.new(100, 'USD')
-      
-      shipping.create_allowed_area(UsStateArea)  { |area| area.state = 'CA' }
+
+      shipping.create_allowed_area(UsStateArea) { |area| area.state = 'CA' }
       shipping.create_excluded_area(UsStateArea) { |area| area.state = 'TX' }
     end
-    
+
     @command.create_shipping_method(FlatRateShipping) do |shipping|
       shipping.name = 'Country Area Test Shipping'
       shipping.price = Money.new(100, 'USD')
 
-      shipping.create_allowed_area(UsCountryArea)  { |area| area.area = UsCountryArea::FULL_50_STATES }
+      shipping.create_allowed_area(UsCountryArea) { |area| area.area = UsCountryArea::FULL_50_STATES }
       shipping.create_excluded_area(UsCountryArea) { |area| area.area = UsCountryArea::CONTINENTAL_48 }
     end
-    
+
     @command.create_shipping_method(FlatRateShipping) do |shipping|
       shipping.name = 'Zip Test Shipping'
       shipping.price = Money.new(100, 'USD')
 
-      shipping.create_allowed_area(UsZipArea)  { |area| area.pattern = '1*' }
+      shipping.create_allowed_area(UsZipArea) { |area| area.pattern = '1*' }
       shipping.create_excluded_area(UsZipArea) { |area| area.pattern = '12*' }
     end
-    
-    @command.shopping_cart.private_data = { 'we' => 'can pass in some data here'.split }
-    
+
+    @command.shopping_cart.private_data = {'we' => 'can pass in some data here'.split}
+
     1.upto(10) do |i|
       @command.shopping_cart.create_item do |item|
         item.name = "Item Name #{i}"
@@ -148,72 +148,72 @@ class Google4R::Checkout::CheckoutCommandXmlGeneratorTest < Test::Unit::TestCase
         item.quantity = i * 2
         item.id = "Merchant ID #{i}"
         if i == 1 then
-          item.private_data = { 'some' => { 'data' => 'Yeah, Yeah!' }, 'bars' => { 'bar' => [ 1, 2 ] } }
+          item.private_data = {'some' => {'data' => 'Yeah, Yeah!'}, 'bars' => {'bar' => [1, 2]}}
         end
-        
+
         item.tax_table = nondefault_table if i % 2 == 1
       end
     end
-    
+
     xml_str = @generator.generate
     assert_xml_validates_against_xml_schema(@schema_path, xml_str)
     assert_string_equals_file_contents(@expected_path, xml_str)
     assert_google_checkout_diagnose_returns_no_warnings(xml_str)
   end
-  
+
   # Test that values within hashes are persisted correctly.
   def test_process_hash_processes_hash_values_correctly
     element = REXML::Element.new('root')
-    @generator.instance_eval { process_hash(element, { 'key' => 'value' }) }
+    @generator.instance_eval { process_hash(element, {'key' => 'value'}) }
     assert_equal "<root><key>value</key></root>", element.to_s
   end
-  
+
   protected
-    
-    def assert_google_checkout_diagnose_returns_no_warnings(xml_str)
-      tmpfile = Tempfile.new('xml_output')
-      tmpfile << xml_str
-      tmpfile.flush
 
-      url = "https://%s:%s@sandbox.google.com/checkout/cws/v2/Merchant/%s/request/diagnose" %
-        [ FRONTEND_CONFIGURATION[:merchant_id], FRONTEND_CONFIGURATION[:merchant_key], 
-          FRONTEND_CONFIGURATION[:merchant_id] ]
+  def assert_google_checkout_diagnose_returns_no_warnings(xml_str)
+    tmpfile = Tempfile.new('xml_output')
+    tmpfile << xml_str
+    tmpfile.flush
 
-      stdin, stdout, stderr = Open3.popen3("curl -d @#{tmpfile.path} #{url}")
-      outstr = stdout.read
-      errstr = stderr.read
-      
-      assert (outstr != ''), 'curl command not available'
-      
-      # Check that there is no <warnings> tag in the XML.
-      xml_document = REXML::Document.new(outstr)
-      assert 0, xml_document.root.elements.to_a('//warnings').size
-      
-      tmpfile.close!
+    url = "https://%s:%s@sandbox.google.com/checkout/cws/v2/Merchant/%s/request/diagnose" %
+        [FRONTEND_CONFIGURATION[:merchant_id], FRONTEND_CONFIGURATION[:merchant_key],
+         FRONTEND_CONFIGURATION[:merchant_id]]
+
+    stdin, stdout, stderr = Open3.popen3("curl -d @#{tmpfile.path} #{url}")
+    outstr = stdout.read
+    errstr = stderr.read
+
+    assert (outstr != ''), 'curl command not available'
+
+    # Check that there is no <warnings> tag in the XML.
+    xml_document = REXML::Document.new(outstr)
+    assert 0, xml_document.root.elements.to_a('//warnings').size
+
+    tmpfile.close!
+  end
+
+  def assert_xml_validates_against_xml_schema(schema_path, xml_str)
+    tmpfile = Tempfile.new('xml_output')
+    tmpfile << xml_str
+    tmpfile.flush
+
+    #puts "---\n#{xml_str}\n---"
+
+    stdin, stdout, stderr = Open3.popen3("xmllint --schema #{schema_path} #{tmpfile.path}")
+
+    outstr = stdout.read
+    errstr = stderr.read
+    if errstr !~ /validates$/ then
+      assert false, "The document did not validate: ---\nOUT:#{outstr}\nERR:#{errstr}\n---"
+    else
+      assert true
     end
-  
-    def assert_xml_validates_against_xml_schema(schema_path, xml_str)
-      tmpfile = Tempfile.new('xml_output')
-      tmpfile << xml_str
-      tmpfile.flush
-      
-      #puts "---\n#{xml_str}\n---"
 
-      stdin, stdout, stderr = Open3.popen3("xmllint --schema #{schema_path} #{tmpfile.path}")
+    tmpfile.close!
+  end
 
-      outstr = stdout.read
-      errstr = stderr.read
-      if errstr !~ /validates$/ then
-        assert false, "The document did not validate: ---\nOUT:#{outstr}\nERR:#{errstr}\n---"
-      else
-        assert true
-      end
-      
-      tmpfile.close!
-    end
-    
-    def assert_string_equals_file_contents(expected_path, xml_str)
-      file_contents = File.open(expected_path, 'r') { |f| f.read }
-      assert_strings_equal file_contents, xml_str
-    end
+  def assert_string_equals_file_contents(expected_path, xml_str)
+    file_contents = File.open(expected_path, 'r') { |f| f.read }
+    assert_strings_equal file_contents, xml_str
+  end
 end

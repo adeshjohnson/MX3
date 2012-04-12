@@ -45,12 +45,12 @@ module ActiveProcessor
       # standard configuration
       @config_file = File.dirname(__FILE__)+"/../../gateway_config.yml"
       @legacy_rails = (Rails.respond_to?(:env)) ? false : true
-      @data = YAML::load( File.open(@config_file) )[((@legacy_rails)? RAILS_ENV : Rails.env)]
+      @data = YAML::load(File.open(@config_file))[((@legacy_rails) ? RAILS_ENV : Rails.env)]
       @translate_func = lambda { |phrase| t(phrase) }
       @currency_exchange = lambda { |curr1, curr2| 1.0 }
       @currency_calc_url = "/currencies/calculate"
-      @calculate_tax = lambda{ |u,a| a }
-      @substract_tax = lambda{ |u,a| a }
+      @calculate_tax = lambda { |u, a| a }
+      @substract_tax = lambda { |u, a| a }
       @layout = "callc"
       @language = "en"
       @config = "http://localhost:3000"

@@ -3,7 +3,7 @@ class ServicesController < ApplicationController
 
   layout "callc"
 
-  before_filter :check_post_method, :only=>[:destroy, :create, :update]
+  before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :check_localization
 
   before_filter :authorize
@@ -17,15 +17,15 @@ class ServicesController < ApplicationController
     c.instance_variable_set :@allow_edit, true
   }
 
-  before_filter(:only => @@susbscription_view+@@susbscription_edit){ |c|
-    allow_read, allow_edit = c.check_read_write_permission( @@susbscription_view,  @@susbscription_edit, {:role => "accountant", :right => :acc_manage_subscriptions_opt_1})
+  before_filter(:only => @@susbscription_view+@@susbscription_edit) { |c|
+    allow_read, allow_edit = c.check_read_write_permission(@@susbscription_view, @@susbscription_edit, {:role => "accountant", :right => :acc_manage_subscriptions_opt_1})
     c.instance_variable_set :@allow_read, allow_read
     c.instance_variable_set :@allow_edit, allow_edit
     true
   }
 
-  before_filter(:only => @@service_view+@@service_edit){ |c|
-    allow_read, allow_edit = c.check_read_write_permission( @@service_view,  @@service_edit, {:role => "accountant", :right => :acc_services_manage})
+  before_filter(:only => @@service_view+@@service_edit) { |c|
+    allow_read, allow_edit = c.check_read_write_permission(@@service_view, @@service_edit, {:role => "accountant", :right => :acc_services_manage})
     c.instance_variable_set :@allow_read, allow_read
     c.instance_variable_set :@allow_edit, allow_edit
     true
@@ -102,25 +102,25 @@ class ServicesController < ApplicationController
     @page_title = _('Flat_rate_destinations')
     @page_icon = "actions.png"
     @flatrate_destinations = FlatrateDestination.find(:all, :include => [:service, :destination], :conditions => ["flatrate_destinations.service_id = ?", params[:id]])
-    @flatrate_destinations.each_with_index{|fd, i| fd.destroy and @flatrate_destinations[i] = nil if fd.destination == nil}
+    @flatrate_destinations.each_with_index { |fd, i| fd.destroy and @flatrate_destinations[i] = nil if fd.destination == nil }
     @flatrate_destinations = @flatrate_destinations.compact
 
     @directions = Direction.find(:all)
-    @diff_directions = @flatrate_destinations.map{|dest| dest.destination.direction_code if (dest and dest.destination)}.uniq
-    @prefixes = @flatrate_destinations.map{|fl| fl.destination.prefix}
-    @destinations = Destination.find(:all, :conditions=>["direction_code = ?", @directions[0].code])
-    @destinations = @destinations.map{|d| d if !@prefixes.include?(d.prefix)}.compact
+    @diff_directions = @flatrate_destinations.map { |dest| dest.destination.direction_code if (dest and dest.destination) }.uniq
+    @prefixes = @flatrate_destinations.map { |fl| fl.destination.prefix }
+    @destinations = Destination.find(:all, :conditions => ["direction_code = ?", @directions[0].code])
+    @destinations = @destinations.map { |d| d if !@prefixes.include?(d.prefix) }.compact
   end
 
   # @service in before filter
   def destination_add
     if params[:submit_icon] == "prefix_find"
-      @destination = Destination.find(:first, :conditions => ["prefix = ?" , params[:search_1]])
+      @destination = Destination.find(:first, :conditions => ["prefix = ?", params[:search_1]])
       @enabled = params[:enabled_1].to_i
     end
 
     if params[:submit_icon] == "country_find"
-      @destination = Destination.find(:first, :conditions => ["prefix = ?" , params[:pre]])
+      @destination = Destination.find(:first, :conditions => ["prefix = ?", params[:pre]])
       @enabled = params[:enabled].to_i
     end
 
@@ -134,7 +134,7 @@ class ServicesController < ApplicationController
       redirect_to(:action => :destinations, :id => @service.id) and return false
     end
 
-    flatrate_destination = FlatrateDestination.new(:service => @service, :destination => @destination, :active=> @enabled.to_i)
+    flatrate_destination = FlatrateDestination.new(:service => @service, :destination => @destination, :active => @enabled.to_i)
 
     if flatrate_destination and flatrate_destination.save
       flash[:status] = _('Flatrate_destination_created')
@@ -164,18 +164,18 @@ class ServicesController < ApplicationController
   # @service in before filter
   def destination_prefix_find
     @flatrate_destinations = FlatrateDestination.find(:all, :include => [:destination], :conditions => ["service_id = ?", @service.id])
-    @prefixes = @flatrate_destinations.map{|fl| fl.destination.prefix}
+    @prefixes = @flatrate_destinations.map { |fl| fl.destination.prefix }
     if params[:find_by] == "direction"
-      @destinations = Destination.find(:all, :conditions=>["direction_code = ?", params[:direction]])
-      @destinations = @destinations.map{|d| d if !@prefixes.include?(d.prefix)}.compact
+      @destinations = Destination.find(:all, :conditions => ["direction_code = ?", params[:direction]])
+      @destinations = @destinations.map { |d| d if !@prefixes.include?(d.prefix) }.compact
       render(:layout => false) and return false
     end
 
     if params[:find_by] == "prefix"
       @dest = Destination.find(
-        :first,
-        :conditions => ["prefix = SUBSTRING(?, 1, LENGTH(destinations.prefix))", params[:direction]],
-        :order => "LENGTH(destinations.prefix) DESC"
+          :first,
+          :conditions => ["prefix = SUBSTRING(?, 1, LENGTH(destinations.prefix))", params[:direction]],
+          :order => "LENGTH(destinations.prefix) DESC"
       ) if @phrase != ''
       @results = ""
 
@@ -200,15 +200,15 @@ class ServicesController < ApplicationController
     @per_page = Confline.get_value("Items_Per_Page").to_i
     @pos = []
     @neg = []
-    @direction = Direction.find(:first,:conditions => ["code = ?", params[:direction]] )
+    @direction = Direction.find(:first, :conditions => ["code = ?", params[:direction]])
     unless @direction
       @message = _('Direction_not_found')
     end
-    @flatrate_destinations = FlatrateDestination.find(:all, :include => [:destination], :joins =>"LEFT JOIN destinations ON (flatrate_destinations.destination_id = destinations.id)", :conditions => ["destinations.direction_code = ? and service_id = ?", params[:direction], params[:id]], :order => "length(destinations.prefix)")
+    @flatrate_destinations = FlatrateDestination.find(:all, :include => [:destination], :joins => "LEFT JOIN destinations ON (flatrate_destinations.destination_id = destinations.id)", :conditions => ["destinations.direction_code = ? and service_id = ?", params[:direction], params[:id]], :order => "length(destinations.prefix)")
     @destinations = []
 
-    @flatrate_destinations.each{ |dest|
-      @dest = Destination.find(:all, :conditions => ["prefix LIKE ?" ,dest.destination.prefix.to_s+"%"])
+    @flatrate_destinations.each { |dest|
+      @dest = Destination.find(:all, :conditions => ["prefix LIKE ?", dest.destination.prefix.to_s+"%"])
       dest.active.to_i == 1 ? @destinations += @dest : @destinations -= @dest
     }
 
@@ -217,13 +217,14 @@ class ServicesController < ApplicationController
 
     render(:layout => "layouts/mor_min")
   end
+
   # =============== Subscriptions groups =================
 
   def subscriptions
     @page_title = _('Subscriptions')
     @page_icon = "layers.png"
 
-    @users = User.find_all_for_select(corrected_user_id,{:exclude_owner=>true})
+    @users = User.find_all_for_select(corrected_user_id, {:exclude_owner => true})
 
     change_date
 
@@ -251,7 +252,7 @@ class ServicesController < ApplicationController
       cond += " AND subscriptions.service_id = '#{@search_service}' "
     end
     period_start = "'#{session_from_date } 00:00:00'"
-    period_end =  "'#{session_till_date} 23:59:59'"
+    period_end = "'#{session_till_date} 23:59:59'"
     cond += " AND (#{period_start} BETWEEN subscriptions.activation_start AND subscriptions.activation_end OR
 #{period_end} BETWEEN subscriptions.activation_start AND subscriptions.activation_end OR
 (subscriptions.activation_start > #{period_start} AND subscriptions.activation_end < #{period_end}))"
@@ -316,8 +317,8 @@ class ServicesController < ApplicationController
   def subscription_create
     @sub = Subscription.new(params[:subscription])
     @sub.user_id = @user.id
-    @sub.activation_start = Time.mktime(params[:activation_start][:year],params[:activation_start][:month],params[:activation_start][:day],params[:activation_start][:hour],params[:activation_start][:minute])
-    @sub.activation_end = Time.mktime(params[:activation_end][:year],params[:activation_end][:month],params[:activation_end][:day],params[:activation_end][:hour],params[:activation_end][:minute])
+    @sub.activation_start = Time.mktime(params[:activation_start][:year], params[:activation_start][:month], params[:activation_start][:day], params[:activation_start][:hour], params[:activation_start][:minute])
+    @sub.activation_end = Time.mktime(params[:activation_end][:year], params[:activation_end][:month], params[:activation_end][:day], params[:activation_end][:hour], params[:activation_end][:minute])
 
     @sub.added = @sub.added - @sub.added.strftime("%S").to_i.seconds
 
@@ -330,7 +331,7 @@ class ServicesController < ApplicationController
 
     if ((@sub.activation_start < @sub.activation_end) and service.servicetype == "periodic_fee") or service.servicetype == "one_time_fee" or service.servicetype == "flat_rate"
       @sub.save
-      Action.add_action_hash(current_user.id, {:action=>'Subscription_added', :target_id => @sub.id, :target_type=>"Subscription", :data=>@sub.user_id, :data2=>@sub.service_id })
+      Action.add_action_hash(current_user.id, {:action => 'Subscription_added', :target_id => @sub.id, :target_type => "Subscription", :data => @sub.user_id, :data2 => @sub.service_id})
 
       if @user.user_type == "prepaid"
         subscription_price = @sub.price_for_period(Time.now.beginning_of_day, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59))
@@ -340,11 +341,11 @@ class ServicesController < ApplicationController
             flash[:notice] = _('insufficient_balance')
             redirect_to :action => 'subscriptions_list', :id => @user.id and return false
           else
-            MorLog.my_debug("Prepaid user:#{@user.id} Subscription:#{@sub.id} Price:#{subscription_price} Period:#{Time.now.beginning_of_day}-#{Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)}" )
+            MorLog.my_debug("Prepaid user:#{@user.id} Subscription:#{@sub.id} Price:#{subscription_price} Period:#{Time.now.beginning_of_day}-#{Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)}")
             @user.balance -= subscription_price
             @user.save
             Payment.subscription_payment(@user, subscription_price)
-            Action.new(:user_id => @user.id, :target_id => @sub.id, :target_type =>"subscription", :date => Time.now, :action => "subscription_paid", :data => "#{Time.now.year}-#{Time.now.month}", :data2=>subscription_price).save
+            Action.new(:user_id => @user.id, :target_id => @sub.id, :target_type => "subscription", :date => Time.now, :action => "subscription_paid", :data => "#{Time.now.year}-#{Time.now.month}", :data2 => subscription_price).save
           end
         end
       end
@@ -387,12 +388,12 @@ class ServicesController < ApplicationController
 
     @service = @sub.service
     @sub.memo = params[:memo]
-    ld1 = last_day_of_month(params[:activation_start][:year],params[:activation_start][:month]).to_i
-    ld2 = last_day_of_month(params[:activation_end][:year],params[:activation_end][:month]).to_i
+    ld1 = last_day_of_month(params[:activation_start][:year], params[:activation_start][:month]).to_i
+    ld2 = last_day_of_month(params[:activation_end][:year], params[:activation_end][:month]).to_i
     params[:activation_start][:day] = ld1 if params[:activation_start][:day].to_i > ld1.to_i
     params[:activation_end][:day] = ld2 if params[:activation_end][:day].to_i > ld2.to_i
-    @sub.activation_start = Time.mktime(params[:activation_start][:year],params[:activation_start][:month],params[:activation_start][:day],params[:activation_start][:hour],params[:activation_start][:minute])
-    @sub.activation_end = Time.mktime(params[:activation_end][:year],params[:activation_end][:month],params[:activation_end][:day],params[:activation_end][:hour],params[:activation_end][:minute])
+    @sub.activation_start = Time.mktime(params[:activation_start][:year], params[:activation_start][:month], params[:activation_start][:day], params[:activation_start][:hour], params[:activation_start][:minute])
+    @sub.activation_end = Time.mktime(params[:activation_end][:year], params[:activation_end][:month], params[:activation_end][:day], params[:activation_end][:hour], params[:activation_end][:minute])
 
     if @service.servicetype == "flat_rate"
       @sub.activation_start = @sub.activation_start.beginning_of_month.change(:hour => 0, :min => 0, :sec => 0)
@@ -403,7 +404,7 @@ class ServicesController < ApplicationController
       @sub.save
       flash[:status] = _('Subscription_updated')
       if @back.to_s == "subscriptions"
-        redirect_to :action => 'subscriptions', :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device=>@search_device, :s_date_from=> @search_date_from, :s_date_till=>@search_date_till, :page=>@page
+        redirect_to :action => 'subscriptions', :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device => @search_device, :s_date_from => @search_date_from, :s_date_till => @search_date_till, :page => @page
       else
         redirect_to :action => 'subscriptions_list', :id => @sub.user.id
       end
@@ -411,7 +412,7 @@ class ServicesController < ApplicationController
     else
       flash[:notice] = _('Bad_time')
       if @back.to_s == "subscriptions"
-        redirect_to :action => 'subscriptions', :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device=>@search_device, :s_date_from=> @search_date_from, :s_date_till=>@search_date_till, :page=>@page
+        redirect_to :action => 'subscriptions', :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device => @search_device, :s_date_from => @search_date_from, :s_date_till => @search_date_till, :page => @page
       else
         redirect_to :action => 'subscription_edit', :id => @sub.id
       end
@@ -462,29 +463,29 @@ class ServicesController < ApplicationController
     @search_date_till = params[:s_date_till] if params[:s_date_till]
 
     case params[:delete].to_s
-    when "delete"
-      Action.add_action_hash(current_user.id, {:action=>'Subscription_deleted', :target_id => @sub.id, :target_type=>"Subscription", :data=>@sub.user_id, :data2=>@sub.service_id })
-      @sub.destroy
-      flash[:status] = _('Subscription_deleted')
-    when "disable"
-      Action.add_action_hash(current_user.id, {:action=>'Subscription_disabled', :target_id => @sub.id, :target_type=>"Subscription", :data=>@sub.user_id, :data2=>@sub.service_id })
-      @sub.disable
-      @sub.save
-      flash[:status] = _('Subscription_disabled')
-    when "return_money_whole"
-      Action.add_action_hash(current_user.id, {:action=>'Subscription_deleted_and_return_money_whole', :target_id => @sub.id, :target_type=>"Subscription", :data=>@sub.user_id, :data2=>@sub.service_id })
-      @sub.return_money_whole
-      @sub.destroy
-      flash[:status] = _('Subscription_deleted_and_money_returned')
-    when "return_money_month"
-      Action.add_action_hash(current_user.id, {:action=>'Subscription_deleted_and_return_money_month', :target_id => @sub.id, :target_type=>"Subscription", :data=>@sub.user_id, :data2=>@sub.service_id })
-      @sub.return_money_month
-      @sub.destroy
-      flash[:status] = _('Subscription_deleted_and_money_returned')
+      when "delete"
+        Action.add_action_hash(current_user.id, {:action => 'Subscription_deleted', :target_id => @sub.id, :target_type => "Subscription", :data => @sub.user_id, :data2 => @sub.service_id})
+        @sub.destroy
+        flash[:status] = _('Subscription_deleted')
+      when "disable"
+        Action.add_action_hash(current_user.id, {:action => 'Subscription_disabled', :target_id => @sub.id, :target_type => "Subscription", :data => @sub.user_id, :data2 => @sub.service_id})
+        @sub.disable
+        @sub.save
+        flash[:status] = _('Subscription_disabled')
+      when "return_money_whole"
+        Action.add_action_hash(current_user.id, {:action => 'Subscription_deleted_and_return_money_whole', :target_id => @sub.id, :target_type => "Subscription", :data => @sub.user_id, :data2 => @sub.service_id})
+        @sub.return_money_whole
+        @sub.destroy
+        flash[:status] = _('Subscription_deleted_and_money_returned')
+      when "return_money_month"
+        Action.add_action_hash(current_user.id, {:action => 'Subscription_deleted_and_return_money_month', :target_id => @sub.id, :target_type => "Subscription", :data => @sub.user_id, :data2 => @sub.service_id})
+        @sub.return_money_month
+        @sub.destroy
+        flash[:status] = _('Subscription_deleted_and_money_returned')
     end
 
     if @back.to_s == "subscriptions"
-      redirect_to :action => 'subscriptions', :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device=>@search_device, :s_date_from=> @search_date_from, :s_date_till=>@search_date_till, :page=>@page
+      redirect_to :action => 'subscriptions', :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device => @search_device, :s_date_from => @search_date_from, :s_date_till => @search_date_till, :page => @page
     else
       redirect_to :action => 'subscriptions_list', :id => @sub.user.id
     end
@@ -500,10 +501,10 @@ class ServicesController < ApplicationController
   private
 
   def find_service
-    @service = Service.find(:first, :conditions => ["id = ? AND owner_id = ? ",params[:id], correct_owner_id])
+    @service = Service.find(:first, :conditions => ["id = ? AND owner_id = ? ", params[:id], correct_owner_id])
     unless @service
       flash[:notice] = _('Service_was_not_found')
-      redirect_to :controller=>:callc, :action =>:main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
   end
 
@@ -515,21 +516,21 @@ class ServicesController < ApplicationController
     @user = User.find(:first, :include => [:subscriptions], :conditions => ["users.id = ? AND users.owner_id = ?", params[:id], correct_owner_id])
     unless @user
       flash[:notice] = _('User_Was_Not_Found')
-      redirect_to :controller=>:callc, :action =>:main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
   end
 
   def find_subscription
-    @sub = Subscription.find(:first, :include => [:user, :service] ,:conditions => ["subscriptions.id = ? ", params[:id]])
+    @sub = Subscription.find(:first, :include => [:user, :service], :conditions => ["subscriptions.id = ? ", params[:id]])
     unless @sub
       flash[:notice] = _('Subscription_not_found')
-      redirect_to :controller=>:callc, :action =>:main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
 
     service = @sub.service
     unless service and service.owner_id == correct_owner_id
       flash[:notice] = _('Subscription_not_found')
-      redirect_to :controller=>:callc, :action =>:main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
   end
 

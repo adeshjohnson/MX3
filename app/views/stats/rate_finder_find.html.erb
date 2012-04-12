@@ -1,31 +1,33 @@
-<%if @rates and @rates.size.to_i > 0 %>
+<% if @rates and @rates.size.to_i > 0 %>
 
-  <b><%= _('Rates') %>:</b>
-  <br /> 
-  <%@rates.each{|r|%>
-    <p>
-      <b>
-        <%=r['tariffs_name'].to_s%>
-      </b>
-      <% if r['purpose'] == 'user' %>
-        <b>
-          (<%=  _('prefix') %>: <%=r['prefix'].to_s%>) :
-        </b><br />
-        <%= draw_flag(r['direction_code']) if r['direction_code']%> <%= r['subcode'].to_s+" "+r['name'].to_s %>
-        <br />
-        <%=nice_time2 r['arate_start_time']%> - <%=nice_time2 r['arate_end_time']%> => <%=r['price']%> (<%=r['currency']%>)<br />
-      <%else%>
-        <b>
-          (<%=  _('prefix') %>: <%=r['prefix'].to_s%>) :
-        </b><br />
-        <%= draw_flag(r['direction_code']) if r['direction_code']%> <%= r['subcode'].to_s+" "+r['name'].to_s %>
-        <br />
-        <%=nice_time2 r['start_time']%> - <%=nice_time2 r['end_time']%> => <%=r['rate']%> (<%=r['currency']%>)<br />
-      <%end%>
-    </p>
-  <%}%>
+    <b><%= _('Rates') %>:</b>
+    <br/>
+    <% @rates.each { |r| %>
+        <p>
+          <b>
+            <%= r['tariffs_name'].to_s %>
+          </b>
+          <% if r['purpose'] == 'user' %>
+              <b>
+                (<%= _('prefix') %>: <%= r['prefix'].to_s %>) :
+              </b><br/>
+              <%= draw_flag(r['direction_code']) if r['direction_code'] %> <%= r['subcode'].to_s+" "+r['name'].to_s %>
+              <br/>
+              <%= nice_time2 r['arate_start_time'] %> - <%= nice_time2 r['arate_end_time'] %> => <%= r['price'] %>
+              (<%= r['currency'] %>)<br/>
+          <% else %>
+              <b>
+                (<%= _('prefix') %>: <%= r['prefix'].to_s %>) :
+              </b><br/>
+              <%= draw_flag(r['direction_code']) if r['direction_code'] %> <%= r['subcode'].to_s+" "+r['name'].to_s %>
+              <br/>
+              <%= nice_time2 r['start_time'] %> - <%= nice_time2 r['end_time'] %> => <%= r['rate'] %>
+              (<%= r['currency'] %>)<br/>
+          <% end %>
+        </p>
+    <% } %>
 <% else %>
-  <p>
-    <%= _('NO RESULTS') %>
-  </p>
-<%end%>
+    <p>
+      <%= _('NO RESULTS') %>
+    </p>
+<% end %>

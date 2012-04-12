@@ -6,15 +6,15 @@ class MorLog
   end
 
   def MorLog.my_debug(msg, add_time = nil, format_string = "%y-%m-%d %H:%M:%S")
-    if add_time 
+    if add_time
       if add_time.class.to_s == "Time"
         msg = add_time.strftime(format_string) +" - "+ msg
         time = add_time
-      else 
-        msg = Time.now.strftime(format_string) +" - "+ msg 
+      else
+        msg = Time.now.strftime(format_string) +" - "+ msg
         time = Time.now
       end
-      
+
     end
     File.open(Debug_File, "a") { |f|
       f << msg.to_s
@@ -26,12 +26,12 @@ class MorLog
       return true
     end
   end
-  
+
   def MorLog.log_exception(exception, id, controller, action)
     if exception
       crash_log_file = Confline.get_value("Crash_log_file").to_s
       crash_log_file = "/tmp/mor_crash.log" if crash_log_file.to_s.length == 0
-       trace = (exception.respond_to?(:backtrace) ? exception.backtrace : [])
+      trace = (exception.respond_to?(:backtrace) ? exception.backtrace : [])
       File.open(crash_log_file, "a") { |f|
         f << "--------------------------------------------------------------------------------\n"
         f << "ID:         #{id.to_s}\n"
@@ -45,6 +45,7 @@ class MorLog
       }
     end
   end
+
 =begin
  Do not use this. It now generates to much ouptut. Needs to be cleaned before use.
 
@@ -71,6 +72,7 @@ class MorLog
       printer.print(File.new("#{Rails.root}/log/profile.html", "w"))
     end
   end
+
 =begin
  Dumps some key call information. Feel free to edit to your needs.
 =end
@@ -84,13 +86,13 @@ class MorLog
 
     if call.disposition == "ANSWERED"
       str << "  Provider:"
-      {"rate" => call.provider_rate, "billsec" => call.provider_billsec, "price" => call.provider_price}.each{|msg, val| str << "    #{msg}: #{val}"}
+      {"rate" => call.provider_rate, "billsec" => call.provider_billsec, "price" => call.provider_price}.each { |msg, val| str << "    #{msg}: #{val}" }
 
       str << "  User:"
-      {"rate" => call.user_rate, "billsec" => call.user_billsec, "price" => call.user_price}.each{|msg, val| str << "    #{msg}: #{val}"}
+      {"rate" => call.user_rate, "billsec" => call.user_billsec, "price" => call.user_price}.each { |msg, val| str << "    #{msg}: #{val}" }
       if call.reseller_id.to_i > 0
         str << "  Reseller:"
-        {"rate" => call.reseller_rate, "billsec" => call.reseller_billsec, "price" => call.reseller_price}.each{|msg, val| str << "    #{msg}: #{val}"}
+        {"rate" => call.reseller_rate, "billsec" => call.reseller_billsec, "price" => call.reseller_price}.each { |msg, val| str << "    #{msg}: #{val}" }
       end
     end
     str << "END: #{msg}-------------------------------------"

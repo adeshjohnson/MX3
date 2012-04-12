@@ -1,14 +1,14 @@
-<%= _("Terminator")%> : <%= @terminator.name%>
-<br />
-<br />
+<%= _("Terminator") %> : <%= @terminator.name %>
+<br/>
+<br/>
 <%= form_tag :action => "update", :id => @terminator.id do %>
-  <table width="100%">
-    <tr>
-      <td> <%= _('Name') %>:   </td>
-      <td><%= text_field 'terminator', 'name', "class" => "input" %> </td>
-    </tr>
-  </table>
-  <br />
-  <br />
-  <%= submit_tag _("Update"), :disable_with=>_('Processing..') %>
+    <table width="100%">
+      <tr>
+        <td> <%= _('Name') %>:</td>
+        <td><%= text_field 'terminator', 'name', "class" => "input" %> </td>
+      </tr>
+    </table>
+    <br/>
+    <br/>
+    <%= submit_tag _("Update"), :disable_with => _('Processing..') %>
 <% end %>

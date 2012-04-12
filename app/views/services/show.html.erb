@@ -1,7 +1,7 @@
 <% for column in Service.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @service.send(column.name) %>
-</p>
+    <p>
+      <b><%= column.human_name %>:</b> <%= h @service.send(column.name) %>
+    </p>
 <% end %>
 
 <%= link_to 'Edit', :action => 'edit', :id => @service %> |

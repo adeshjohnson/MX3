@@ -42,13 +42,13 @@ class Google4R::Checkout::TrackingDataTest < Test::Unit::TestCase
   def setup
     @tracking_data = TrackingData.new('UPS', '1234')
   end
-  
+
   def test_initialization_works
     assert_kind_of TrackingData, @tracking_data
   end
-  
-  def test_responds_correctly 
-    [ :carrier, :tracking_number].each do |sym|
+
+  def test_responds_correctly
+    [:carrier, :tracking_number].each do |sym|
       assert_respond_to @tracking_data, sym
     end
   end

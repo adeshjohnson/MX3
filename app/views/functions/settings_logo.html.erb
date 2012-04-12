@@ -1,19 +1,19 @@
 <%= _('Logo_settings') %>
-<br />
-<br />
+<br/>
+<br/>
 <table>
-  <%= form_tag({:action=>'settings_logo_save'}, :multipart => true) do%>
-    <tr>
-      <td><%= file_field_tag "logo" %></td>
-    </tr>
-    <tr>
-      <td><%= submit_tag _('Upload_logo'), :disable_with=>_('Processing..')%></td>
-    </tr>
+  <%= form_tag({:action => 'settings_logo_save'}, :multipart => true) do %>
+      <tr>
+        <td><%= file_field_tag "logo" %></td>
+      </tr>
+      <tr>
+        <td><%= submit_tag _('Upload_logo'), :disable_with => _('Processing..') %></td>
+      </tr>
   <% end %>
 </table>
-<br />
-<br />
+<br/>
+<br/>
 <% if @logo %>
-  <b><%= @logo %></b><br /><br />
-  <%= image_tag @logo , :alt => 'Logo' %>
+    <b><%= @logo %></b><br/><br/>
+    <%= image_tag @logo, :alt => 'Logo' %>
 <% end %>

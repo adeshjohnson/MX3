@@ -12,15 +12,19 @@
 
 
 
-<% if @page_title %> 
+<% if @page_title %>
     <table class="page_title" width="100%">
-          <tr><td width="100%" align="center"> <%= @page_title %></td>    </tr>
+      <tr>
+        <td width="100%" align="center"> <%= @page_title %></td>
+      </tr>
     </table>
-<% end %> 
+<% end %>
 
-    <table width="100%">
-          <tr><td align="center" height="30" valign="center"><%= image_tag("indicator_line.gif",  :style => 'display:none', :id => "busy", :title => _('statistics') ) %></td></tr>
-    </table>
+<table width="100%">
+  <tr>
+    <td align="center" height="30" valign="center"><%= image_tag("indicator_line.gif", :style => 'display:none', :id => "busy", :title => _('statistics')) %></td>
+  </tr>
+</table>
 
 <div aligh="center"><%= yield %></div>
 

@@ -1,14 +1,14 @@
 <b><%= _('DB_analysis') %></b>
-<table class="maintable" >
+<table class="maintable">
   <tr class="row1">
     <td id="cards_in_db" width="50%"><%= _('Cards_in_DB') %></td>
     <td id="cards_in_db_value" width="15%" align="right"><%= @card_analize[:cards_in_db].to_i %></td>
     <td width="35%"></td>
   </tr>
 </table>
-<br />
+<br/>
 <b><%= _('CSV_file_analysis') %></b>
-<table class="maintable" >
+<table class="maintable">
   <tr class="row1">
     <td id="file_size" width="50%"><%= _('File_size') %></td>
     <td id="file_size_value" width="15%" align="right"><%= session[:card_file_size] %></td>
@@ -24,23 +24,23 @@
     <td id="card_in_file_value" width="15%" align="right"><%= @card_analize[:card_in_csv_file] %></td>
     <td width="35%"></td>
   </tr>
-    <tr>
-      <td id="existing_cards" width="50%"><%= _('Existing_cards_in_csv_file') %></td>
-      <td id="existing_cards_value" width="15%" align="right"><%= @card_analize[:existing_cards_in_csv_file] %></td>
-      <td width="35%"></td>
-    </tr>
-    <tr class="row1">
-      <td id="new_cards" width="50%"><%= _('New_cards_in_csv_file') %></td>
-      <td id="new_cards_value" width="15%" align="right"><%= @card_analize[:cards_to_create] %></td>
-      <td id="bad_new_cards" width="35%" align="center"><%= link_to @card_analize[:bad_cards].to_i.to_s + ' ' +  _('bad_cards'), :action=>:bad_cards, :cg=>@cg %></td>
-    </tr>
+  <tr>
+    <td id="existing_cards" width="50%"><%= _('Existing_cards_in_csv_file') %></td>
+    <td id="existing_cards_value" width="15%" align="right"><%= @card_analize[:existing_cards_in_csv_file] %></td>
+    <td width="35%"></td>
+  </tr>
+  <tr class="row1">
+    <td id="new_cards" width="50%"><%= _('New_cards_in_csv_file') %></td>
+    <td id="new_cards_value" width="15%" align="right"><%= @card_analize[:cards_to_create] %></td>
+    <td id="bad_new_cards" width="35%" align="center"><%= link_to @card_analize[:bad_cards].to_i.to_s + ' ' + _('bad_cards'), :action => :bad_cards, :cg => @cg %></td>
+  </tr>
 </table>
-<br />
+<br/>
 <b><%= _('To_do') %></b>
-<table class="maintable" >
-      <tr class="row1">
-        <td id="cards_to_create" width="50%"><%= _('Cards_to_create') %></td>
-        <td id="cards_to_create_value" width="15%" align="right"><b><%= @card_analize[:cards_to_create] %></b></td>
-        <td id="cards_to_create_step" width="35%" align="center" width="35%"><%= _('Step') %> 6 </td>
-      </tr>
+<table class="maintable">
+  <tr class="row1">
+    <td id="cards_to_create" width="50%"><%= _('Cards_to_create') %></td>
+    <td id="cards_to_create_value" width="15%" align="right"><b><%= @card_analize[:cards_to_create] %></b></td>
+    <td id="cards_to_create_step" width="35%" align="center" width="35%"><%= _('Step') %> 6</td>
+  </tr>
 </table>

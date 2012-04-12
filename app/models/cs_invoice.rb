@@ -12,7 +12,7 @@ class CsInvoice < ActiveRecord::Base
   end
 
   def call_price
-    @call_price ||= round_to_cents(calls.sum{ |call| round_to_cents(curr_price(call.user_price))})
+    @call_price ||= round_to_cents(calls.sum { |call| round_to_cents(curr_price(call.user_price)) })
   end
 
   def call_duration
@@ -46,7 +46,7 @@ class CsInvoice < ActiveRecord::Base
     end
   end
 
-  def balance=value
+  def balance= value
     if User.current and User.current.currency
       b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
     else

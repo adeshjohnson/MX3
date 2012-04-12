@@ -1,29 +1,31 @@
+<%= form_tag :action => "right_create" do %>
+    <table>
+      <tr>
+      <tr>
+        <td>
+          <%= _("New_Right") %>:
+        </td>
+      <tr></tr>
+      <tr>
+        <td><%= _("Controller") %>:</td>
+        <td><%= text_field "right", "controller", "class" => "input" %></td>
+      </tr>
+      <tr>
+        <td><%= _("Action") %>:</td>
+        <td><%= text_field "right", "action", "class" => "input" %>
+          <br/></td>
+      </tr>
+      <tr>
+        <td><%= _("Description") %>:</td>
+        <td><%= text_field "right", "description", "class" => "input" %>
+          <br/></td>
+        <td>
+        <td/>
+      </tr>
 
-<%= form_tag :action => "right_create" do%>
-<table>
-<tr>
-  <tr>
-    <td>
-      <%= _("New_Right") %>:
-    </td>
-  <tr></tr>
-  <tr>
-    <td><%= _("Controller")%>:</td>
-    <td><%= text_field "right", "controller", "class" => "input"%></td>
-  </tr>
-  <tr> 
-    <td><%= _("Action")%>:</td>
-    <td><%= text_field "right", "action", "class" => "input"%><br /></td>
-  </tr>
-  <tr> 
-    <td><%= _("Description")%>:</td>
-    <td><%= text_field "right", "description", "class" => "input"%><br /></td>
-  <td><td/>
-  </tr>
-  
 
-</table>
-<%= submit_tag _('Create'), :disable_with=>_('Processing..') %>
-<% end%>
-<br />
-<br />
+    </table>
+    <%= submit_tag _('Create'), :disable_with => _('Processing..') %>
+<% end %>
+<br/>
+<br/>

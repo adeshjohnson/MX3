@@ -1,54 +1,54 @@
 <% tax = @cg.get_tax %>
 <% @taxes = tax.applied_tax_list(@card.balance) %>
-<b><%=_('Card_group') %> </b> : <%=@cg.name%>
+<b><%= _('Card_group') %> </b> : <%= @cg.name %>
 <b><br><%= _('Card') %></b>:<%= @card.number %>
 <br>
 <br>
 <br>
 <%= form_tag :action => 'card_buy_finish', :cg => @cg.id, :id => @card do %>
-  <br>
-  <b><%= b_money + _('Total_Price') %></b>:
-  <%= nice_number(@real_price) %> <%= current_user.currency.name %>
-  <br>
-  <br>
-  <hr>
-  <br>
-  <table class='simple' width=50%>
-    <tr>
-      <td colspan="2"> <%= _('Email_for_Invoice') %>:</td>
-      <td id="email"> <%= @email %> </td>
-    </tr>
-    <tr>
-      <td colspan="2"> <%= _('Send_Invoice') %>:</td>
-      <td id="send_invoices"> <%= @send_invoice.to_i == 1 ? _("Yes")  : _("No") %> </td>
-    </tr>
-    <tr>
-      <td colspan="2"> <%= _('Price') %>:</td>
-      <td id="price"> <%= nice_number(@card.balance) %> <%= current_user.currency.name %> </td>
-    </tr>
-    <% if @taxes.size.to_i > 1 %>
-    <% for tax in @taxes %>
+    <br>
+    <b><%= b_money + _('Total_Price') %></b>:
+    <%= nice_number(@real_price) %> <%= current_user.currency.name %>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <table class='simple' width=50%>
       <tr>
-        <td width="20"></td>
-        <td> <%= tax[:name] %>(<%= nice_number(tax[:value])+" %" %>): </td>
-        <td id="tax_<%=tax[:name]%>"> <%= nice_number(tax[:tax]) %> <%= current_user.currency.name %> </td>
+        <td colspan="2"> <%= _('Email_for_Invoice') %>:</td>
+        <td id="email"> <%= @email %> </td>
       </tr>
-    <% end %>
-    <%end%>
-    <tr> 
-      <td colspan="2">   <%= @total_tax_name %>: </td> 
-      <td id="total_tax"> <%= nice_number(@cg.get_tax.count_tax_amount(@card.balance)) %> <%= current_user.currency.name %> </td>
-    </tr>  
-    <tr>
-      <td colspan="2"> <%= _('Total_Price') %>:</td>
-      <td id="total_price"> <%= nice_number(@real_price) %> <%= current_user.currency.name %> </td>
-    </tr>
-  </table>
-  <br>
-  <br>
-  <%= hidden_field_tag "email", @email %>
-  <%= hidden_field_tag "send_invoice", @send_invoice %>
-  <%= submit_tag _('Confirm'), :disable_with=>_('Processing..')%>
+      <tr>
+        <td colspan="2"> <%= _('Send_Invoice') %>:</td>
+        <td id="send_invoices"> <%= @send_invoice.to_i == 1 ? _("Yes") : _("No") %> </td>
+      </tr>
+      <tr>
+        <td colspan="2"> <%= _('Price') %>:</td>
+        <td id="price"> <%= nice_number(@card.balance) %> <%= current_user.currency.name %> </td>
+      </tr>
+      <% if @taxes.size.to_i > 1 %>
+          <% for tax in @taxes %>
+              <tr>
+                <td width="20"></td>
+                <td> <%= tax[:name] %>(<%= nice_number(tax[:value])+" %" %>):</td>
+                <td id="tax_<%= tax[:name] %>"> <%= nice_number(tax[:tax]) %> <%= current_user.currency.name %> </td>
+              </tr>
+          <% end %>
+      <% end %>
+      <tr>
+        <td colspan="2">   <%= @total_tax_name %>:</td>
+        <td id="total_tax"> <%= nice_number(@cg.get_tax.count_tax_amount(@card.balance)) %> <%= current_user.currency.name %> </td>
+      </tr>
+      <tr>
+        <td colspan="2"> <%= _('Total_Price') %>:</td>
+        <td id="total_price"> <%= nice_number(@real_price) %> <%= current_user.currency.name %> </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+    <%= hidden_field_tag "email", @email %>
+    <%= hidden_field_tag "send_invoice", @send_invoice %>
+    <%= submit_tag _('Confirm'), :disable_with => _('Processing..') %>
 <% end %>
 <br>
 <br>

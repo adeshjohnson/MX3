@@ -11,9 +11,9 @@ class PermissionsController < ApplicationController
 =end
 
   def index
-    redirect_to :controller=>:callc, :action => :main
+    redirect_to :controller => :callc, :action => :main
   end
-  
+
   def list
     if params[:group_type].to_s == "accountant"
       @page_title = _('Accountant_Groups')
@@ -53,7 +53,7 @@ class PermissionsController < ApplicationController
     else
       flash_errors_for(_('Group_was_not_created'), group)
     end
-    redirect_to :action => 'list', :group_type => params[:group_type]  and return false
+    redirect_to :action => 'list', :group_type => params[:group_type] and return false
   end
 
 =begin rdoc
@@ -71,7 +71,7 @@ class PermissionsController < ApplicationController
  *Redirect*
 
  * +groups_list+
-=end 
+=end
   def destory
     if @group.destroy
       User.update_all("acc_group_id = NULL", ["acc_group_id = ?", @group.id])
@@ -110,7 +110,7 @@ class PermissionsController < ApplicationController
 
       cond << "permission_group NOT IN (#{permis.join(' , ')})" if permis.size.to_i > 0
     end
-    
+
     if (permis and permis.size.to_i > 0) or @group.group_type != 'reseller'
       @rights = AccRight.find(:all, :conditions => [cond.join(" AND ")].concat(var), :order => "permission_group")
     else
@@ -130,9 +130,9 @@ class PermissionsController < ApplicationController
       acc_group_rights = @group.acc_group_rights
       rights = AccRight.find(:all, :conditions => ["right_type = ?", @group.group_type])
       rights.each { |right|
-        gr = acc_group_rights.select{ |r| r.acc_right_id == right.id }[0]
+        gr = acc_group_rights.select { |r| r.acc_right_id == right.id }[0]
         gr = AccGroupRight.new(:acc_group => @group, :acc_right => right) if gr.nil?
-      
+
         if (params["right_#{right.id}".to_sym] and params["right_#{right.id}".to_sym].to_i != gr.value) or gr.new_record? or @group.only_view
           params["right_#{right.id}".to_sym] ? gr.value = params["right_#{right.id}".to_sym].to_i : gr.value = 0
           gr.value = 1 if gr.value > 1 and @group.only_view
@@ -149,7 +149,7 @@ class PermissionsController < ApplicationController
   private
 
   def find_permissions_group
-    @group = AccGroup.find(:first, :conditions => ["id = ? AND group_type = ?", params[:id],  params[:group_type]])
+    @group = AccGroup.find(:first, :conditions => ["id = ? AND group_type = ?", params[:id], params[:group_type]])
     unless @group
       flash[:notice] = _("Group_was_not_found")
       redirect_to :action => :groups_list and return false
@@ -159,8 +159,8 @@ class PermissionsController < ApplicationController
 
   def check_group_type
     unless ["reseller", "accountant"].include?(params[:group_type])
-       flash[:notice] = _("Group_was_not_found")
-       redirect_to :controller => :callc, :action => :main and return false
+      flash[:notice] = _("Group_was_not_found")
+      redirect_to :controller => :callc, :action => :main and return false
     end
   end
 end

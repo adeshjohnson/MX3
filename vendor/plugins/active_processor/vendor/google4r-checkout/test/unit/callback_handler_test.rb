@@ -40,34 +40,34 @@ class Google4R::Checkout::CallbackHandlerTest < Test::Unit::TestCase
     @frontend = Frontend.new(FRONTEND_CONFIGURATION)
     @frontend.tax_table_factory = TestTaxTableFactory.new
     @callback_handler = @frontend.create_callback_handler
-    
+
     @xmls_with_known_tags =
-      [
-        [ 
-          '<merchant-calculation-callback xmlns="http://checkout.google.com/schema/2" />',
-          'merchant-calculation-callback',
-          MerchantCalculationCallback
+        [
+            [
+                '<merchant-calculation-callback xmlns="http://checkout.google.com/schema/2" />',
+                'merchant-calculation-callback',
+                MerchantCalculationCallback
+            ]
         ]
-      ]
-    
+
     @xmls_with_unknown_tags =
-      [
-        '<unknown-callback/>'
-      ]
+        [
+            '<unknown-callback/>'
+        ]
   end
-  
+
   def test_handler_gets_initialized_correctly
     assert_equal @frontend, @callback_handler.frontend
   end
-  
+
   def test_returns_correct_callback_class_for_known_callback
     @xmls_with_known_tags.each do |triple|
       xml_str, tag_name, klass = triple
-      
+
       expect = klass.stubs(:create_from_element)
       expect.times(1).returns(:foo)
       expect.with { |element, frontend| element.name == tag_name and frontend == @frontend }
-      
+
       result = nil
       assert_nothing_raised {
         result = @callback_handler.handle(xml_str)
@@ -75,7 +75,7 @@ class Google4R::Checkout::CallbackHandlerTest < Test::Unit::TestCase
       assert_equal :foo, result
     end
   end
-  
+
   def test_raises_exception_on_unknown_callback
     @xmls_with_unknown_tags.each do |xml_str|
       assert_raises(UnknownCallbackType) { @callback_handler.handle(xml_str) }

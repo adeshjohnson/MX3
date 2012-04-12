@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class AccGroup < ActiveRecord::Base
   attr_protected :group_type
-  has_many :users 
+  has_many :users
   has_many :acc_group_rights, :dependent => :destroy
   validates_presence_of :name, :message => _("Group_Name_Must_Be_Set")
   validates_uniqueness_of :name, :message => _("Group_Name_Must_Be_Unique")
@@ -10,7 +10,7 @@ class AccGroup < ActiveRecord::Base
 =begin rdoc
  Performs validation before destroy
 =end
-  
+
   def acc_group_before_destroy
     if User.find(:first, :conditions => ["acc_group_id = ?", self.id])
       errors.add(:users, _("Group_has_assigned_users"))

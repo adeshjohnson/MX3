@@ -2,7 +2,7 @@
 class CreditNoteController < ApplicationController
 
   layout "callc"
-  before_filter :check_post_method, :only=>[:destroy, :create, :update]
+  before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :link_to_user?, :only => [:list, :edit]
   before_filter :link_to_financial_operations?, :only => [:list, :edit]
   before_filter :can_edit_financial_data?, :only => [:pay, :unpay, :destroy, :new, :create]
@@ -17,7 +17,7 @@ class CreditNoteController < ApplicationController
     page_no = current_page
     page_no = @total_pages if page_no.to_i > @total_pages.to_i and @total_pages.to_i > 0
     page_no = 1 if page_no < 1
-    offset = ((page_no -1 ) * items_per_page).to_i
+    offset = ((page_no -1) * items_per_page).to_i
 
     @notes = credit_notes(items_per_page, offset)
 
@@ -31,12 +31,12 @@ class CreditNoteController < ApplicationController
     @options[:order_by], @options[:order_desc] = order_by
     session[:credit_note_list] = @options
   end
-  
+
   def new
     @page_title = _('New_credit_note')
     @page_icon = "add.png"
 
-    @users = User.find_all_for_select(correct_owner_id,{:exclude_owner=>true})
+    @users = User.find_all_for_select(correct_owner_id, {:exclude_owner => true})
     unless @users
       flash[:notice] = _("There_is_no_users")
     end
@@ -69,7 +69,7 @@ class CreditNoteController < ApplicationController
         redirect_to :controller => :credit_note, :action => :edit, :id => @note.id
       else
         flash[:notice] = _('Failed_to_save_credit_note')
-        @users = User.find_all_for_select(correct_owner_id,{:exclude_owner=>true})
+        @users = User.find_all_for_select(correct_owner_id, {:exclude_owner => true})
         render :action => :new
       end
     else
@@ -83,7 +83,7 @@ class CreditNoteController < ApplicationController
   find such credit note does redirect to list.
 =end
   def edit
-    @page_title =  _('Credit_note')
+    @page_title = _('Credit_note')
     @page_icon = "edit.png"
     @note = find_credit_note(params[:id])
     unless @note
@@ -100,7 +100,7 @@ class CreditNoteController < ApplicationController
     else
       flash[:notice] = _('Credit_note_not_found')
     end
-      redirect_to :controller => :credit_note, :action => :list
+    redirect_to :controller => :credit_note, :action => :list
   end
 
   def update
@@ -140,8 +140,8 @@ class CreditNoteController < ApplicationController
       redirect_to :controller => :credit_note, :action => :list
     end
   end
-  
-private
+
+  private
 
 =begin
   Makes from/till date from passed parameter, but if one of them was not passed
@@ -193,7 +193,7 @@ private
     condition = credit_note_conditions
     order, desc = order_by
     desc = (desc == 1 ? 'ASC' : 'DESC')
-    CreditNote.find(:all, :select=>"credit_notes.*, #{SqlExport.nice_user_sql}, users.username, users.last_name, users.first_name", :joins => 'LEFT JOIN users ON (users.id = credit_notes.user_id)', :conditions => condition.join(' AND '), :limit => limit, :offset => offset, :order => order + ' ' + desc)
+    CreditNote.find(:all, :select => "credit_notes.*, #{SqlExport.nice_user_sql}, users.username, users.last_name, users.first_name", :joins => 'LEFT JOIN users ON (users.id = credit_notes.user_id)', :conditions => condition.join(' AND '), :limit => limit, :offset => offset, :order => order + ' ' + desc)
 
   end
 
@@ -212,7 +212,7 @@ private
     elsif current_user.is_reseller? or current_user.is_admin?
       condition = ["users.owner_id = #{current_user.id}"]
     end
-    
+
     options = search_options
     condition << "status = '#{options[:status]}'" if ['paid', 'unpaid'].include? options[:status]
     condition << "first_name LIKE '#{options[:first_name].strip}%'" if options[:first_name]
@@ -222,16 +222,16 @@ private
     condition << "price <= #{current_user.to_system_currency(options[:amount_max].to_f)}" if options[:amount_max]
     if options[:status] == 'paid' and options[:paid_date_from] and options[:paid_date_till]
       from = options[:paid_date_from]
-      from = current_user.system_time(from[:year] + '-'  + from[:month] + '-' + from[:day] + ' 00:00:00')
+      from = current_user.system_time(from[:year] + '-' + from[:month] + '-' + from[:day] + ' 00:00:00')
       till = options[:paid_date_till]
-      till = current_user.system_time(till[:year] + '-'  + till[:month] + '-' + till[:day] + ' 23:59:59')
+      till = current_user.system_time(till[:year] + '-' + till[:month] + '-' + till[:day] + ' 23:59:59')
       condition << "pay_date BETWEEN '#{from}' AND '#{till}'"
     end
     if options[:issue_date_from] and options[:issue_date_till]
       from = options[:issue_date_from]
-      from = current_user.system_time(from[:year] + '-'  + from[:month] + '-' + from[:day] + ' 00:00:00')
+      from = current_user.system_time(from[:year] + '-' + from[:month] + '-' + from[:day] + ' 00:00:00')
       till = options[:issue_date_till]
-      till = current_user.system_time(till[:year] + '-'  + till[:month] + '-' + till[:day] + ' 23:59:59')
+      till = current_user.system_time(till[:year] + '-' + till[:month] + '-' + till[:day] + ' 23:59:59')
       condition << "issue_date BETWEEN '#{from}' AND '#{till}'"
     end
     return condition
@@ -247,13 +247,13 @@ private
   *Returns*
   +credit_note+ instance of CreditNote or nil if no credit note were found
 =end
-def find_credit_note(credit_note_id)
-  if current_user.is_accountant?
-    CreditNote.find(:first, :include => :user, :conditions => ['users.owner_id IN (0, ?) AND credit_notes.id = ?', current_user.id, credit_note_id.to_i])
-  elsif current_user.is_reseller? or current_user.is_admin?
-    CreditNote.find(:first, :include => :user, :conditions => ['users.owner_id = ? AND credit_notes.id = ?', current_user.id, credit_note_id.to_i])
+  def find_credit_note(credit_note_id)
+    if current_user.is_accountant?
+      CreditNote.find(:first, :include => :user, :conditions => ['users.owner_id IN (0, ?) AND credit_notes.id = ?', current_user.id, credit_note_id.to_i])
+    elsif current_user.is_reseller? or current_user.is_admin?
+      CreditNote.find(:first, :include => :user, :conditions => ['users.owner_id = ? AND credit_notes.id = ?', current_user.id, credit_note_id.to_i])
+    end
   end
-end
 
 =begin
   Options set in params hash override parameters saved in session.
@@ -273,11 +273,11 @@ end
     if can_view_finances?
       valid_options += [:status, :amount_min, :amount_max, :paid_date_from, :paid_date_till]
     end
-    valid_options.each{|key|
+    valid_options.each { |key|
       if params[:clear].to_i == 1 or meaningless? params[key]
         options.delete(key)
       elsif params[key]
-         options[key] = params[key] 
+        options[key] = params[key]
       end
     }
     logger.fatal options.to_yaml
@@ -324,26 +324,26 @@ end
   Default for paid_date/issue_date from/till is today, default for status is all.
   If none of these params are specified theres no need to show search menu.
 =end
- def show_search? search_options
-   if search_options
-     [:issue_date_from, :issue_date_till, :paid_date_from, :paid_date_till].each { |key|
-       date = search_options[key]
-       if date
-         date = Date.new(date[:year].to_i, date[:month].to_i, date[:day].to_i)
-         return true if date != Date.today
-       end
-     }
-     if ['paid', 'unpaid'].include? search_options[:status]
-       return true 
-     elsif ([:username, :first_name, :last_name, :amount_min, :amount_max] & search_options.keys).size > 0
-       return true
-     else
-       return false
-     end
-   else
-     false
-   end
- end
+  def show_search? search_options
+    if search_options
+      [:issue_date_from, :issue_date_till, :paid_date_from, :paid_date_till].each { |key|
+        date = search_options[key]
+        if date
+          date = Date.new(date[:year].to_i, date[:month].to_i, date[:day].to_i)
+          return true if date != Date.today
+        end
+      }
+      if ['paid', 'unpaid'].include? search_options[:status]
+        return true
+      elsif ([:username, :first_name, :last_name, :amount_min, :amount_max] & search_options.keys).size > 0
+        return true
+      else
+        return false
+      end
+    else
+      false
+    end
+  end
 
 
 =begin
@@ -364,15 +364,15 @@ end
     end
     order_by = 'first_name'
     desc = 1
-     if params[:order_by] and valid_params.include? params[:order_by]
-       desc = params[:order_desc].to_i if params[:order_desc]
-       return params[:order_by], desc
-     elsif session[:credit_note_list] and session[:credit_note_list][:order_by] and valid_params.include? session[:credit_note_list][:order_by]
-       desc = session[:credit_note_list][:order_desc].to_i if session[:credit_note_list][:order_desc]
-       return session[:credit_note_list][:order_by], desc
-     else
-       return order_by, desc
-     end
+    if params[:order_by] and valid_params.include? params[:order_by]
+      desc = params[:order_desc].to_i if params[:order_desc]
+      return params[:order_by], desc
+    elsif session[:credit_note_list] and session[:credit_note_list][:order_by] and valid_params.include? session[:credit_note_list][:order_by]
+      desc = session[:credit_note_list][:order_desc].to_i if session[:credit_note_list][:order_desc]
+      return session[:credit_note_list][:order_by], desc
+    else
+      return order_by, desc
+    end
   end
 
 =begin
@@ -444,5 +444,5 @@ end
     @can_view_finances = can_view_finances?
     return true
   end
-  
+
 end

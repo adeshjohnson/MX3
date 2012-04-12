@@ -39,17 +39,17 @@ class Google4R::Checkout::CarrierCalculatedShippingTest < Test::Unit::TestCase
   def setup
     @shipping = CarrierCalculatedShipping.new
   end
-  
+
   def test_carrier_calculated_shipping_method_behaves_correctly
-    [ :carrier_calculated_shipping_options, :shipping_packages,
-      :create_carrier_calculated_shipping_option,
-      :create_shipping_package,
-      :create_from_element
+    [:carrier_calculated_shipping_options, :shipping_packages,
+     :create_carrier_calculated_shipping_option,
+     :create_shipping_package,
+     :create_from_element
     ].each do |symbol|
       assert_respond_to @shipping, symbol
     end
   end
-  
+
   def test_initialization
     assert_equal [], @shipping.carrier_calculated_shipping_options
     assert_equal [], @shipping.shipping_packages

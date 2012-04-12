@@ -44,7 +44,7 @@ class Google4R::Checkout::OrderReportCommandTest < Test::Unit::TestCase
     @command.financial_state = 'CHARGED'
     @command.fulfillment_state = 'NEW'
     @command.date_time_zone = 'America/New_York'
-    
+
     @sample_xml=%Q{<?xml version='1.0' encoding='UTF-8'?>
 <order-list-request end-date='2007-09-30T23:59:59' start-date='2007-09-01T00:00:00' xmlns='http://checkout.google.com/schema/2'>
   <financial-state>CHARGED</financial-state>
@@ -54,10 +54,10 @@ class Google4R::Checkout::OrderReportCommandTest < Test::Unit::TestCase
   end
 
   def test_behaves_correctly
-    [ :start_date, :end_date,
-      :financial_state, :financial_state=,
-      :fulfillment_state, :fulfillment_state=,
-      :date_time_zone, :date_time_zone= ].each do |symbol|
+    [:start_date, :end_date,
+     :financial_state, :financial_state=,
+     :fulfillment_state, :fulfillment_state=,
+     :date_time_zone, :date_time_zone=].each do |symbol|
       assert_respond_to @command, symbol
     end
   end
@@ -73,7 +73,7 @@ class Google4R::Checkout::OrderReportCommandTest < Test::Unit::TestCase
     assert_equal('NEW', @command.fulfillment_state)
     assert_equal('America/New_York', @command.date_time_zone)
   end
-  
+
   def test_good_dates
     assert_nothing_raised RuntimeError do
       @frontend.create_order_report_command(
@@ -81,7 +81,7 @@ class Google4R::Checkout::OrderReportCommandTest < Test::Unit::TestCase
           Time.utc(2007, 9, 30, 23, 59, 59))
     end
   end
-  
+
   def test_dates_should_not_be_string
     assert_raise RuntimeError do
       @frontend.create_order_report_command(
@@ -89,7 +89,7 @@ class Google4R::Checkout::OrderReportCommandTest < Test::Unit::TestCase
           '2007-09-30T23:59:59')
     end
   end
-  
+
   def test_end_date_before_start_date
     assert_raise RuntimeError do
       @frontend.create_order_report_command(
@@ -97,13 +97,13 @@ class Google4R::Checkout::OrderReportCommandTest < Test::Unit::TestCase
           Time.utc(2006, 9, 30, 23, 59, 59))
     end
   end
-  
+
   def test_financial_state
     assert_raise RuntimeError do
       @command.financial_state = 'DUMMY'
     end
   end
-  
+
   def test_fulfillment_state
     assert_raise RuntimeError do
       @command.fulfillment_state = 'DUMMY'

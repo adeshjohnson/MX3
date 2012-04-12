@@ -3,9 +3,9 @@ class ActiveProcessor::IdealController < ActiveProcessor::BaseController
   before_filter :check_localization
 
   def index
-    @gateway = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => current_user.id }).enabled_by(current_user.owner.id).query
+    @gateway = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => current_user.id}).enabled_by(current_user.owner.id).query
     respond_to do |format|
-      format.html {  }
+      format.html {}
     end
   rescue ActiveProcessor::GatewayEngineError # invalid engine or gateway name specified
     flash[:notice] = _("Inactive_Gateway")
@@ -13,11 +13,11 @@ class ActiveProcessor::IdealController < ActiveProcessor::BaseController
   end
 
   def pay
-    @engine = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => current_user.id }).enabled_by(current_user.owner.id)
+    @engine = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => current_user.id}).enabled_by(current_user.owner.id)
     @gateway = @engine.query
 
-    params['gateways']["issuer_id"] = params[:purchase][:issuer_id] if params[:purchase] and  params[:purchase][:issuer_id]
-    if params[:purchase] and  params[:purchase][:issuer_id] and @engine.pay_with(@gateway, request.remote_ip, params['gateways'])
+    params['gateways']["issuer_id"] = params[:purchase][:issuer_id] if params[:purchase] and params[:purchase][:issuer_id]
+    if params[:purchase] and params[:purchase][:issuer_id] and @engine.pay_with(@gateway, request.remote_ip, params['gateways'])
       flash[:notice] = nil
       redirect_to @gateway.redirect_url and return false
     else
@@ -33,7 +33,7 @@ class ActiveProcessor::IdealController < ActiveProcessor::BaseController
   def notify
     payment = Payment.find(:first, :conditions => {:transaction_id => params[:trxid], :pending_reason => "waiting_response"})
     if payment and !payment.transaction_id.blank?
-      gateway = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => current_user.id }).enabled_by(current_user.owner_id).query
+      gateway = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => current_user.id}).enabled_by(current_user.owner_id).query
       success, message = gateway.check_response(payment)
       if success
         flash[:status] = message

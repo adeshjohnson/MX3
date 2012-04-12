@@ -5,7 +5,7 @@ module ActiveMerchant #:nodoc:
       class Notification
         attr_accessor :params
         attr_accessor :raw
-        
+
         # set this to an array in the subclass, to specify which IPs are allowed to send requests
         class_attribute :production_ips
 
@@ -37,23 +37,23 @@ module ActiveMerchant #:nodoc:
 
         # reset the notification. 
         def empty!
-          @params  = Hash.new
-          @raw     = ""      
+          @params = Hash.new
+          @raw = ""
         end
-        
+
         # Check if the request comes from an official IP
         def valid_sender?(ip)
           return true if ActiveMerchant::Billing::Base.integration_mode == :test || production_ips.blank?
           production_ips.include?(ip)
         end
-        
+
         private
 
         # Take the posted data and move the relevant data into a hash
         def parse(post)
           @raw = post.to_s
-          for line in @raw.split('&')    
-            key, value = *line.scan( %r{^([A-Za-z0-9_.]+)\=(.*)$} ).flatten
+          for line in @raw.split('&')
+            key, value = *line.scan(%r{^([A-Za-z0-9_.]+)\=(.*)$}).flatten
             params[key] = CGI.unescape(value)
           end
         end

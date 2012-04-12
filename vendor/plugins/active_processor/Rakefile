@@ -35,7 +35,7 @@ end
 desc 'Generate documentation for the active_processor plugin.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'ActiveProcessor'
+  rdoc.title = 'ActiveProcessor'
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.options << '--charset' << 'utf-8'
   rdoc.rdoc_files.include('README')

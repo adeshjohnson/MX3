@@ -13,35 +13,37 @@
 
   </tr>
 
-<% i = 0 %>   
-<%= form_tag(:action => 'rate_try_to_add', :id => @tariff.id, :st => @st) do %>
-   <% for dest in @dests%>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
+  <% i = 0 %>
+  <%= form_tag(:action => 'rate_try_to_add', :id => @tariff.id, :st => @st) do %>
+      <% for dest in @dests %>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
 
-      <td id="direction_<%=dest.id%>"><%= draw_flag dest.direction.code %> <%=dest.direction.name %></td>
-      <td id="prefix_<%=dest.id%>"><%= dest.prefix %></td>
-      <td id="name_<%=dest.id%>"><%= dest.name %></td>
-      <td id="subcode_<%=dest.id%>" align="center"><%= dest.direction.code.upcase %></td>
-     <%
-        show_rr = true
-        price = 0.0
-        #rates = []
-        rate = dest.sms_rates(@tariff)
-        if rate == nil or rate == ''
-          price = ''
-        else
-         price = rate.price 
-        end
-    %>
-      <td align="center"><%= text_field_tag dest.id, price, :size => "7", "class" => "input", :id => "rate_"+dest.id.to_s   %></td>
-  </tr>
-  <% i += 1%>    
+            <td id="direction_<%= dest.id %>"><%= draw_flag dest.direction.code %> <%= dest.direction.name %></td>
+            <td id="prefix_<%= dest.id %>"><%= dest.prefix %></td>
+            <td id="name_<%= dest.id %>"><%= dest.name %></td>
+            <td id="subcode_<%= dest.id %>" align="center"><%= dest.direction.code.upcase %></td>
+            <%
+               show_rr = true
+               price = 0.0
+               #rates = []
+               rate = dest.sms_rates(@tariff)
+               if rate == nil or rate == ''
+                 price = ''
+               else
+                 price = rate.price
+               end
+            %>
+            <td align="center"><%= text_field_tag dest.id, price, :size => "7", "class" => "input", :id => "rate_"+dest.id.to_s %></td>
+          </tr>
+          <% i += 1 %>
+      <% end %>
+      <tr>
+        <th colspan="5" align="right"><%= submit_tag _('Add_rates'), :disable_with => _('Processing..'), :id => "add_rates" %></th>
+      </tr>
   <% end %>
-  <tr><th colspan="5" align="right"><%= submit_tag _('Add_rates'), :disable_with=>_('Processing..'), :id => "add_rates" %></th></tr>
-<% end %>
 
 
 </table>
 
-<br />
+<br/>
     

@@ -51,10 +51,10 @@ class Google4R::Checkout::RefundAmountNotificationTest < Test::Unit::TestCase
 </refund-amount-notification>
 }
   end
-  
+
   def test_create_from_element_works_correctly
     root = REXML::Document.new(@example_xml).root
-    
+
     notification = RefundAmountNotification.create_from_element(root, @frontend)
 
     assert_equal 'd669f8c7-6d75-4ad6-9278-d2fc997d15f2', notification.serial_number

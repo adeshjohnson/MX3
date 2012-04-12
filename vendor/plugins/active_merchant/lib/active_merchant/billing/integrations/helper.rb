@@ -8,7 +8,7 @@ module ActiveMerchant #:nodoc:
         class_inheritable_hash :mappings
         class_attribute :country_format
         self.country_format = :alpha2
-        
+
         # The application making the calls to the gateway
         # Useful for things like the PayPal build notation (BN) id fields
         class_attribute :application_id
@@ -43,25 +43,25 @@ module ActiveMerchant #:nodoc:
         def billing_address(params = {})
           add_address(:billing_address, params)
         end
-        
+
         def shipping_address(params = {})
           add_address(:shipping_address, params)
         end
-        
+
         def form_fields
           @fields
         end
 
         private
-        
+
         def add_address(key, params)
           return if mappings[key].nil?
-          
+
           code = lookup_country_code(params.delete(:country))
-          add_field(mappings[key][:country], code) 
+          add_field(mappings[key][:country], code)
           add_fields(key, params)
         end
-        
+
         def lookup_country_code(name_or_code)
           country = Country.find(name_or_code)
           country.code(country_format).to_s
@@ -78,14 +78,14 @@ module ActiveMerchant #:nodoc:
           mapping = mappings[method_id]
 
           case mapping
-          when Array
-            mapping.each{ |field| add_field(field, args.last) }
-          when Hash
-            options = args.last.is_a?(Hash) ? args.pop : {}
+            when Array
+              mapping.each { |field| add_field(field, args.last) }
+            when Hash
+              options = args.last.is_a?(Hash) ? args.pop : {}
 
-            mapping.each{ |key, field| add_field(field, options[key]) }
-          else
-            add_field(mapping, args.last)
+              mapping.each { |key, field| add_field(field, options[key]) }
+            else
+              add_field(mapping, args.last)
           end
         end
       end

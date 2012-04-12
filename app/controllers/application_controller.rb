@@ -1751,22 +1751,25 @@ class ApplicationController < ActionController::Base
 
     # --------- USING AMI ----------
     @server = Server.find(:first, :conditions => "server_id = #{server_id}")
-    ami_host = @server.server_ip
-    ami_username = @server.ami_username
-    ami_secret = @server.ami_secret
+    if  !@server or @server.active != 1
+      connection_status = 1
+    else
+      ami_host = @server.server_ip
+      ami_username = @server.ami_username
+      ami_secret = @server.ami_secret
 
-    server = Rami::Server.new({'host' => ami_host, 'username' => ami_username, 'secret' => ami_secret})
-    server.console =1
-    server.event_cache = 100
-    server.run
+      server = Rami::Server.new({'host' => ami_host, 'username' => ami_username, 'secret' => ami_secret})
+      server.console =1
+      server.event_cache = 100
+      server.run
 
-    client = Rami::Client.new(server)
-    client.timeout = 3
+      client = Rami::Client.new(server)
+      client.timeout = 3
 
-    accs = acc.to_s
-    variable = "MOR_ACC=#{accs}"
+      accs = acc.to_s
+      variable = "MOR_ACC=#{accs}"
 
-    variable += "|" + var2 if var2 and var2.length > 0
+      variable += "|" + var2 if var2 and var2.length > 0
 
 =begin
 CLI> manager show command originate
@@ -1789,10 +1792,13 @@ Variables: (Names marked with * are required)
         Async: Set to 'true' for fast origination
 =end
 
-    t = client.originate({'Channel' => channel, 'Context' => context, 'Exten' => extension, 'Priority' => "1", 'Async' => "no", 'Variable' => variable, "CallerID" => callerid, "Account" => accs, "Timeout" => "1200000"})
+      t = client.originate({'Channel' => channel, 'Context' => context, 'Exten' => extension, 'Priority' => "1", 'Async' => "no", 'Variable' => variable, "CallerID" => callerid, "Account" => accs, "Timeout" => "1200000"})
 
-    client.stop
+      client.stop
 
+      connection_status = 0
+    end
+    return connection_status
   end
 
 
@@ -3007,6 +3013,6 @@ end
 
 module Enumerable
   def dups
-    inject({}) {|h,v| h[v]=h[v].to_i+1; h}.reject{|k,v| v==1}.keys
+    inject({}) { |h, v| h[v]=h[v].to_i+1; h }.reject { |k, v| v==1 }.keys
   end
 end

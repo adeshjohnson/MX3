@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-module Paypal 
+module Paypal
   # This is a collection of helpers which aid in the creation of paypal buttons 
   # 
   # Example:
@@ -15,7 +15,7 @@ module Paypal
   # One way is to add "include Paypal::Helpers" in your application_helper.rb
   # See Paypal::Notification for information on how to catch payment events. 
   module Helpers
-    
+
     # Convenience helper. Can replace <%= form_tag Paypal::Notification.ipn_url %>
     # takes optional url parameter, default is Paypal::Notification.ipn_url
     def paypal_form_tag(url = Paypal::Notification.ipn_url)
@@ -64,19 +64,19 @@ module Paypal
     def paypal_setup(item_number, amount, business, options = {})
 
       params = {
-        :item_name => 'Balance update',
-        :no_shipping => '1',
-        :no_note => '1',
-        :currency => session[:default_currency],
-#       :return_url => nil
+          :item_name => 'Balance update',
+          :no_shipping => '1',
+          :no_note => '1',
+          :currency => session[:default_currency],
+          #       :return_url => nil
       }.merge(options)
 
       # We accept both, strings and money objects as amount    
       amount = amount.cents.to_f / 100.0 if amount.respond_to?(:cents)
       amount = sprintf("%.2f", amount)
-      
+
       # same for tax
-      
+
       if params[:tax]
         tax = params[:tax]
         tax = tax.cents.to_f / 100.0 if tax.respond_to?(:cents)
@@ -87,8 +87,8 @@ module Paypal
 
 
 #	amount="0.01" #testing
-      
-      # Build the form 
+
+# Build the form
       returning button = [] do
         button << tag(:input, :type => 'hidden', :name => 'cmd', :value => "_xclick")
         button << tag(:input, :type => 'hidden', :name => 'quantity', :value => 1)
@@ -111,6 +111,6 @@ module Paypal
         button << tag(:input, :type => 'hidden', :name => 'charset', :value => 'utf-8') unless params[:no_utf8]
       end.join("\n")
     end
-    
+
   end
 end

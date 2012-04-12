@@ -9,13 +9,13 @@ class IdealTest < Test::Unit::TestCase
     @gateway = IdealGateway.new
 
     @valid_options = {
-      :issuer_id         => '0151',
-      :expiration_period => 'PT10M',
-      :return_url        => 'http://return_to.example.com',
-      :order_id          => '123456789012',
-      :currency          => 'EUR',
-      :description       => 'A classic Dutch windmill',
-      :entrance_code     => '1234'
+        :issuer_id => '0151',
+        :expiration_period => 'PT10M',
+        :return_url => 'http://return_to.example.com',
+        :order_id => '123456789012',
+        :currency => 'EUR',
+        :description => 'A classic Dutch windmill',
+        :entrance_code => '1234'
     }
   end
 
@@ -59,7 +59,7 @@ class IdealTest < Test::Unit::TestCase
   #
 
   def test_retrieval_of_issuers
-    assert_equal [{ :id => '0151', :name => 'Issuer Simulator' }], @gateway.issuers.list
+    assert_equal [{:id => '0151', :name => 'Issuer Simulator'}], @gateway.issuers.list
   end
 
   def test_successful_transaction
@@ -114,13 +114,19 @@ class IdealTest < Test::Unit::TestCase
   # whether or not the transaction was successful.
   def test_transaction(type)
     amount = case type
-    when :success      then 100
-    when :cancelled    then 200
-    when :expired      then 300
-    when :open         then 400
-    when :failure      then 500
-    when :server_error then 700
-    end
+               when :success then
+                 100
+               when :cancelled then
+                 200
+               when :expired then
+                 300
+               when :open then
+                 400
+               when :failure then
+                 500
+               when :server_error then
+                 700
+             end
 
     response = @gateway.setup_purchase(amount, @valid_options)
     assert response.success?

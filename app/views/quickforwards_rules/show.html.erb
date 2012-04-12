@@ -3,12 +3,12 @@
     <th align="left"><%= _('User') %></th>
     <th align="left"><%= _('Usertype') %></th>
   </tr>
-  <%if @users%>
-    <%@users.each_with_index { |u ,index | %>
-      <tr class="row<%=index%2%>">
-        <td align="left" id="name_<%=u.id%>"> <%= link_nice_user(u) %></td>
-        <td align="left" id="usertype_<%=u.id%>"> <%= h(u.usertype)%></td>
-      </tr>
-    <% } %>
-  <%end%>
+  <% if @users %>
+      <% @users.each_with_index { |u, index| %>
+          <tr class="row<%= index%2 %>">
+            <td align="left" id="name_<%= u.id %>"> <%= link_nice_user(u) %></td>
+            <td align="left" id="usertype_<%= u.id %>"> <%= h(u.usertype) %></td>
+          </tr>
+      <% } %>
+  <% end %>
 </table>

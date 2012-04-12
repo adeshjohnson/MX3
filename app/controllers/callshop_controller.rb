@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class CallshopController < ApplicationController
 
-  layout "callshop", :except => [ :new, :free_booth, :topup_booth, :invoice_print, :invoice_edit, :comment_update ]
+  layout "callshop", :except => [:new, :free_booth, :topup_booth, :invoice_print, :invoice_edit, :comment_update]
 
   before_filter :check_localization
   before_filter :check_addon
@@ -12,14 +12,14 @@ class CallshopController < ApplicationController
 
   @@callshop_view = []
   @@callshop_edit = [:show, :show_json, :new, :reserve_booth, :update, :free_booth, :release_booth, :comment_update, :topup_booth, :topup_update, :invoices, :invoice_print, :invoice_edit, :get_number_data]
-  before_filter(:only =>  @@callshop_view+@@callshop_edit) { |c|
+  before_filter(:only => @@callshop_view+@@callshop_edit) { |c|
     allow_read, allow_edit = c.check_read_write_permission(@@callshop_view, @@callshop_edit, {:role => "reseller", :right => :res_call_shop, :ignore => true})
     c.instance_variable_set :@callshop, allow_read
     c.instance_variable_set :@callshop, allow_edit
     true
   }
 
-  before_filter :find_shop_and_authorize, :except => [ :new, :show_json, :get_number_data]
+  before_filter :find_shop_and_authorize, :except => [:new, :show_json, :get_number_data]
   # manager view
   def show
     @users = @cshop.users
@@ -28,8 +28,8 @@ class CallshopController < ApplicationController
       redirect_to :controller => :callc, :action => :main and return false
     end
     session[:callshop] = {}
-    session[:callshop][:booths]  ||= @users.collect{|user| user.id}
-    @users.each{|user| store_invoice_in_session(user, user.cs_invoices.first) }
+    session[:callshop][:booths] ||= @users.collect { |user| user.id }
+    @users.each { |user| store_invoice_in_session(user, user.cs_invoices.first) }
   end
 
   # load JSON using data about users from variable that is set in show_v2
@@ -37,9 +37,9 @@ class CallshopController < ApplicationController
     if session[:callshop] and session[:callshop][:booths] and session[:callshop][:booths].size > 0
       booths = status_for_ajax(session[:callshop][:booths])
       json_hash = {
-        #        :free_booths => booths.collect{|b| b[:state] if b[:state] == "free"}.compact.size,
-        #        :active_calls => booths.collect{|b| b[:state] if b[:state] == "occupied"}.compact.size,
-        :booths => booths}
+          #        :free_booths => booths.collect{|b| b[:state] if b[:state] == "free"}.compact.size,
+          #        :active_calls => booths.collect{|b| b[:state] if b[:state] == "occupied"}.compact.size,
+          :booths => booths}
       render :json => json_hash.to_json
     else
       render :text => "{}"
@@ -59,7 +59,7 @@ class CallshopController < ApplicationController
 
   # reservation action (xhr)
   def reserve_booth
-    @invoice = CsInvoice.new(params[:invoice].merge!({ :callshop_id => params[:id] }))
+    @invoice = CsInvoice.new(params[:invoice].merge!({:callshop_id => params[:id]}))
     @user = @invoice.user
     @old_invoice = @user.cs_invoices.first
     unless @old_invoice
@@ -151,15 +151,15 @@ class CallshopController < ApplicationController
     if @invoice
       @user.update_attributes(:balance => 0, :blocked => 1)
       opts = {
-        :state => (params[:full_payment].eql?("true")) ? "full" : "partial"
+          :state => (params[:full_payment].eql?("true")) ? "full" : "partial"
       }
       calls = @invoice.calls
       if calls and calls.size > 0
-        @invoice.update_attributes({:comment => params[:comment], :balance => params[:balance], :paid_at => Time.now }.merge(opts))
+        @invoice.update_attributes({:comment => params[:comment], :balance => params[:balance], :paid_at => Time.now}.merge(opts))
       else
         @invoice.destroy
       end
-      @user.cs_invoices.find(:all , :conditions => ["state = 'unpaid'"]).each(&:destroy)
+      @user.cs_invoices.find(:all, :conditions => ["state = 'unpaid'"]).each(&:destroy)
       store_invoice_in_session(@user, nil)
       render :text => "OK"
     else
@@ -179,7 +179,7 @@ class CallshopController < ApplicationController
 
   def topup_update
     logger.debug " >> Finding targets"
-    @invoice = CsInvoice.find(:first, :include => [:user,:tax], :conditions => ["cs_invoices.id = ?", params[:invoice_id]])
+    @invoice = CsInvoice.find(:first, :include => [:user, :tax], :conditions => ["cs_invoices.id = ?", params[:invoice_id]])
     @user = @invoice.user
     params[:invoice][:balance_with_tax] = params[:invoice][:balance].to_f
     if params[:increase] and params[:invoice] and !params[:invoice][:balance].to_f.zero?
@@ -219,24 +219,24 @@ class CallshopController < ApplicationController
     @total_pages = (@total_invoices.to_f / session[:items_per_page].to_f).ceil
     @search_params[:page] = correct_page_number(@search_params[:page], @total_pages)
     @invoices = @cshop.invoices.find(:all,
-      :conditions => ["paid_at IS NOT NULL"],
-      :order => invoices_order(@search_params),
-      :offset => (@search_params[:page].to_i - 1) * session[:items_per_page],
-      :limit => session[:items_per_page]
+                                     :conditions => ["paid_at IS NOT NULL"],
+                                     :order => invoices_order(@search_params),
+                                     :offset => (@search_params[:page].to_i - 1) * session[:items_per_page],
+                                     :limit => session[:items_per_page]
     )
 
     respond_to do |format|
       format.html {}
       format.json {
-        invoices = @invoices.map{|invoice|
-          { :id => invoice.id,
-            :issue_date => invoice.created_at.strftime("%Y-%m-%d %H:%M:%S"),
-            :amount => format_money(invoice.balance, @currency),
-            :status => invoice_state(invoice),
-            :comment => invoice.comment,
-            :user_type => invoice.invoice_type }
+        invoices = @invoices.map { |invoice|
+          {:id => invoice.id,
+           :issue_date => invoice.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+           :amount => format_money(invoice.balance, @currency),
+           :status => invoice_state(invoice),
+           :comment => invoice.comment,
+           :user_type => invoice.invoice_type}
         }
-        render :text => {:invoices => invoices, :pages => page_select_header(@search_params[:page].to_i, @total_pages,{},{}, "array" )}.to_json
+        render :text => {:invoices => invoices, :pages => page_select_header(@search_params[:page].to_i, @total_pages, {}, {}, "array")}.to_json
       }
     end
     session[:callshop_invoices_order] = @search_params
@@ -254,18 +254,18 @@ class CallshopController < ApplicationController
   def get_number_data
     number = params[:number]
     arguments = {
-      "directions.name" => "direction_name",
-      "directions.code" => "code",
-      "destinations.prefix" => "prefix",
-      "destinations.subcode" => "subcode",
-      "destinations.name" => "dest_name",
-      "rates.id" => "rate_id"
+        "directions.name" => "direction_name",
+        "directions.code" => "code",
+        "destinations.prefix" => "prefix",
+        "destinations.subcode" => "subcode",
+        "destinations.name" => "dest_name",
+        "rates.id" => "rate_id"
     }
     joins = [
-      "LEFT JOIN directions on (destinations.direction_code = directions.code)",
-      "LEFT JOIN rates ON (rates.destination_id = directions.id)",
+        "LEFT JOIN directions on (destinations.direction_code = directions.code)",
+        "LEFT JOIN rates ON (rates.destination_id = directions.id)",
     ]
-    sql = "SELECT #{arguments.map{|key, value| "#{key} AS #{value}"}.join(", ")} FROM destinations #{joins.join("\n")} WHERE prefix = SUBSTRING('#{number}', 1, LENGTH(destinations.prefix)) ORDER BY LENGTH(destinations.prefix) DESC LIMIT 1"
+    sql = "SELECT #{arguments.map { |key, value| "#{key} AS #{value}" }.join(", ")} FROM destinations #{joins.join("\n")} WHERE prefix = SUBSTRING('#{number}', 1, LENGTH(destinations.prefix)) ORDER BY LENGTH(destinations.prefix) DESC LIMIT 1"
     rez = ActiveRecord::Base.connection.select_all(sql)
     result = []
     if rez and rez[0]
@@ -273,9 +273,9 @@ class CallshopController < ApplicationController
       MorLog.my_debug("..........................")
       MorLog.my_debug(sql)
 
-      destination = [rez["direction_name"], rez["subcode"],  rez["dest_name"]].compact
+      destination = [rez["direction_name"], rez["subcode"], rez["dest_name"]].compact
 
-      result = [{:type => "with_flag", :flag => rez["code"].downcase, :name => _("Destination"), :value=> destination.join(" ")} , {:name => "SOMENAME", :value => "somevalue"}]
+      result = [{:type => "with_flag", :flag => rez["code"].downcase, :name => _("Destination"), :value => destination.join(" ")}, {:name => "SOMENAME", :value => "somevalue"}]
     end
     render :json => result.to_json
   end
@@ -283,7 +283,7 @@ class CallshopController < ApplicationController
   private
 
   def find_shop_and_authorize
-    @cshop = Callshop.find_by_id(params[:id], :include => { :users => [ :cs_invoices ] }, :order => "usergroups.position asc", :conditions => ["usergroups.gusertype = 'user'"] )
+    @cshop = Callshop.find_by_id(params[:id], :include => {:users => [:cs_invoices]}, :order => "usergroups.position asc", :conditions => ["usergroups.gusertype = 'user'"])
 
     unless @cshop
       reset_session
@@ -309,7 +309,6 @@ class CallshopController < ApplicationController
   end
 
 
-
   def invoices_parse_params(params, search_params)
     search_params[:page] = params[:page] if params[:page] and params[:page].to_i > 0
     search_params[:order_by] = params[:order_by].to_s if params[:order_by] and @@invoice_searchable_cols.include?(params[:order_by].to_s)
@@ -333,25 +332,25 @@ class CallshopController < ApplicationController
     old_countries = session[:callshop][:countries] ||= {}
     countries = {}
     columns = {
-      :id => "users.id",
-      :number => "activecalls.dst",
-      :prefix => "activecalls.prefix",
-      #here getting only answer time
-      :duration => "activecalls.answer_time",
-      :user_rate => "activecalls.user_rate",
-      :user_type => "users.postpaid",
-      :timestamp => "activecalls.start_time",
-      :balance => "ABS(users.balance)",
+        :id => "users.id",
+        :number => "activecalls.dst",
+        :prefix => "activecalls.prefix",
+        #here getting only answer time
+        :duration => "activecalls.answer_time",
+        :user_rate => "activecalls.user_rate",
+        :user_type => "users.postpaid",
+        :timestamp => "activecalls.start_time",
+        :balance => "ABS(users.balance)",
     }
 
-    sql = "SELECT #{columns.map{|key, value| "#{value} AS #{key.to_s}"}.join(", ")} FROM users
+    sql = "SELECT #{columns.map { |key, value| "#{value} AS #{key.to_s}" }.join(", ")} FROM users
   LEFT JOIN activecalls ON (users.id = activecalls.user_id)
   WHERE users.id IN (#{users.join(", ")});"
     #MorLog.my_debug("-----------------------------------------------\n"  + sql.to_s)
     rez = ActiveRecord::Base.connection.select_all(sql)
-    all_booths = rez.inject([]){ |booths, row|
+    all_booths = rez.inject([]) { |booths, row|
       booth = {:id => nil, :created_at => nil, :number => nil, :duration => nil, :user_rate => nil, :country => nil, :user_type => nil, :timestamp => nil, :balance => nil, :state => nil}
-      row.each{|key, value| booth[key.to_sym] = value if booth.has_key?(key.to_sym)} # parse values from SQL
+      row.each { |key, value| booth[key.to_sym] = value if booth.has_key?(key.to_sym) } # parse values from SQL
 
       #replaced duration counting from sql NOW() to Time.now.getlocal()
       #booth[:duration] = nice_time(booth[:duration])

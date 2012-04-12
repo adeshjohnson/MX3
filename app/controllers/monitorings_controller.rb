@@ -7,21 +7,21 @@ class MonitoringsController < ApplicationController
   before_filter :check_if_enabled
   before_filter :set_icon_and_title
 
-  before_filter :find_user, :only => [ :for_user ]
-  before_filter :find_monitoring, :only => [ :edit, :destroy, :update ]
+  before_filter :find_user, :only => [:for_user]
+  before_filter :find_monitoring, :only => [:edit, :destroy, :update]
 
-  @@monitorings_view = [ :index, :for_user ]
-  @@monitorings_edit = [ :create, :edit, :destroy, :update, :chanspy, :settings ]
-  before_filter(:only =>  @@monitorings_view+@@monitorings_edit) { |c|
+  @@monitorings_view = [:index, :for_user]
+  @@monitorings_edit = [:create, :edit, :destroy, :update, :chanspy, :settings]
+  before_filter(:only => @@monitorings_view+@@monitorings_edit) { |c|
     allow_read, allow_edit = c.check_read_write_permission(@@monitorings_view, @@monitorings_edit, {:role => "accountant", :right => :acc_monitorings_manage, :ignore => true})
     c.instance_variable_set :@allow_read, allow_read
     c.instance_variable_set :@allow_edit, allow_edit
     true
   }
 
-  @@monitorings_view_res = [  ]
-  @@monitorings_edit_res = [ :index, :for_user, :create, :edit, :destroy, :update ]
-  before_filter(:only =>  @@monitorings_view_res+@@monitorings_edit_res) { |c|
+  @@monitorings_view_res = []
+  @@monitorings_edit_res = [:index, :for_user, :create, :edit, :destroy, :update]
+  before_filter(:only => @@monitorings_view_res+@@monitorings_edit_res) { |c|
     allow_read, allow_edit = c.check_read_write_permission(@@monitorings_view_res, @@monitorings_edit_res, {:role => "reseller", :right => :res_monitorings, :ignore => true})
     c.instance_variable_set :@allow_read_res, allow_read
     c.instance_variable_set :@allow_edit_res, allow_edit
@@ -50,7 +50,7 @@ class MonitoringsController < ApplicationController
       @monitoring.associate
       @monitoring.reload
 
-      flash[:status] = "#{_("Such_monitoring_already_exists_users_associated")}. #{_("Applied_to_n_users", ( @monitoring.users.any? ) ? @monitoring.users.count : _(@monitoring.user_type.capitalize).downcase)}."
+      flash[:status] = "#{_("Such_monitoring_already_exists_users_associated")}. #{_("Applied_to_n_users", (@monitoring.users.any?) ? @monitoring.users.count : _(@monitoring.user_type.capitalize).downcase)}."
 
       redirect_back_or_default("/monitorings")
       # otherwisde create a new monitoring and associate users
@@ -60,7 +60,7 @@ class MonitoringsController < ApplicationController
         #        @monitoring.associate
         #        @monitoring.reload
 
-        flash[:status] = "#{_("Monitoring_created_succesfully")}. #{_("Applied_to_n_users", ( @monitoring.users.any? ) ? @monitoring.users.count : _(@monitoring.user_type.capitalize).downcase)}."
+        flash[:status] = "#{_("Monitoring_created_succesfully")}. #{_("Applied_to_n_users", (@monitoring.users.any?) ? @monitoring.users.count : _(@monitoring.user_type.capitalize).downcase)}."
 
         redirect_back_or_default("/monitorings")
       else
@@ -69,7 +69,7 @@ class MonitoringsController < ApplicationController
           @user = User.find_by_id(@monitoring.user)
           render :action => "for_user"
         else
-          @users = User.find(:all, :conditions=>['users.hidden = 0 AND users.owner_id = ?', correct_owner_id])
+          @users = User.find(:all, :conditions => ['users.hidden = 0 AND users.owner_id = ?', correct_owner_id])
           @monitorings = current_user.owned_monitorings.find(:all, :include => [:users])
           render :action => "index"
         end
@@ -92,11 +92,11 @@ class MonitoringsController < ApplicationController
 
   def update
     if @monitoring.update_attributes(params[:monitoring])
-      flash[:status] = "#{_('Monitoring_updated_successfully')}. #{_("Applied_to_n_users", ( @monitoring.users.any? ) ? @monitoring.users.count : _(@monitoring.user_type.capitalize).downcase)}."
+      flash[:status] = "#{_('Monitoring_updated_successfully')}. #{_("Applied_to_n_users", (@monitoring.users.any?) ? @monitoring.users.count : _(@monitoring.user_type.capitalize).downcase)}."
       redirect_back_or_default("/monitorings")
     else
       if @monitoring.is_duplicate?
-        flash[:notice] = "#{_("Such_monitoring_already_exists_users_associated")}. #{_("Applied_to_n_users", ( @monitoring.users.any? ) ? @monitoring.users.count : _(@monitoring.user_type.capitalize).downcase)}."
+        flash[:notice] = "#{_("Such_monitoring_already_exists_users_associated")}. #{_("Applied_to_n_users", (@monitoring.users.any?) ? @monitoring.users.count : _(@monitoring.user_type.capitalize).downcase)}."
       else
         flash_errors_for(_("Failed_to_update_monitoring"), @monitoring)
       end
@@ -140,7 +140,7 @@ class MonitoringsController < ApplicationController
     if params[:id] == current_user.id
       @user = User.find_by_id(params[:id])
     else
-      @user = User.find(:first, :conditions=>{:id=>params[:id], :owner_id=>correct_owner_id})
+      @user = User.find(:first, :conditions => {:id => params[:id], :owner_id => correct_owner_id})
     end
 
     unless @user
@@ -155,7 +155,7 @@ class MonitoringsController < ApplicationController
     else
       @monitoring = current_user.owned_monitorings.find_by_id(params[:id])
     end
-    
+
 
     unless @monitoring
       flash[:notice] = _('Monitoring_not_found')
@@ -172,7 +172,9 @@ class MonitoringsController < ApplicationController
     end
   end
 
-  def for_user?; params[:for_user]; end
+  def for_user?;
+    params[:for_user];
+  end
 
   def set_icon_and_title
     @page_title = _('Monitorings')

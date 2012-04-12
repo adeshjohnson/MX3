@@ -8,130 +8,142 @@
             <b><%= _('General') %></b>
           </td>
         </tr>
-        <tr><td height="10"></td></tr>
+        <tr>
+          <td height="10"></td>
+        </tr>
 
         <tr>
-          <td> <%= _('Name') %>:   </td>
-          <td><%= text_field 'provider', 'name', "class" => "input",:maxlength => "30" %> </td>
+          <td> <%= _('Name') %>:</td>
+          <td><%= text_field 'provider', 'name', "class" => "input", :maxlength => "30" %> </td>
         </tr>
 
         <tr>
           <td> <%= _('Tech') %>:</td>
           <td>
-            <%if @action.to_s == 'new'%>
-              <% for pt in @providertypes%>
-                <%= radio_button_tag('provider[tech]', pt.name, @provider.tech == pt.name ) %> <%= print_tech pt.name%>
-              <% end %>
+            <% if @action.to_s == 'new' %>
+                <% for pt in @providertypes %>
+                    <%= radio_button_tag('provider[tech]', pt.name, @provider.tech == pt.name) %> <%= print_tech pt.name %>
+                <% end %>
 
-              <% if skp_active? %>
-                <%= radio_button_tag('provider[tech]', "Skype", (@device_type == "Skype") ) %> Skype
-              <% end %>
+                <% if skp_active? %>
+                    <%= radio_button_tag('provider[tech]', "Skype", (@device_type == "Skype")) %> Skype
+                <% end %>
 
             <% else %>
-              <b><%= @provider.tech %></b>
+                <b><%= @provider.tech %></b>
             <% end %>
 
           </td>
         </tr>
-        <tr><td height="5"></td></tr>
         <tr>
-          <td> <%= _('Tariff') %>:  </td>
-          <td><%= collection_select("provider", "tariff_id" , @tariffs, "id", "name") %> </td>
+          <td height="5"></td>
+        </tr>
+        <tr>
+          <td> <%= _('Tariff') %>:</td>
+          <td><%= collection_select("provider", "tariff_id", @tariffs, "id", "name") %> </td>
         </tr>
         <% if not @new_provider %>
-          <tr>
-            <td> <%= _('DTMF_Mode') %>:   </td>
-            <td>
-              <select name="device[dtmfmode]">
-                <option value="inband" <%= "selected" if @device.dtmfmode == "inband"%>> inband </option>
-                <option value="info" <%= "selected" if @device.dtmfmode == "info"%>> info </option>
-                <option value="rfc2833" <%= "selected" if @device.dtmfmode == "rfc2833"%>> rfc2833 </option>
-                <option value="auto" <%= "selected" if @device.dtmfmode == "auto"%>> auto </option>
-              </select>
-            </td>
-          </tr>
-
-          <tr>
-            <td> <%= _('Location') %>:   </td>
-            <td>
-
-              <select name="device[location_id]" >
-                <% for loc in @locations %>
-                  <option value=<%= loc.id %> <%= "selected" if @device.location_id == loc.id %>> <%= loc.name %> </option>
-                <% end %>
-              </select>
-
-            </td>
-          </tr>
-
-          <% if session[:usertype] != "reseller" %>
             <tr>
-              <td> <%= b_provider_ani + _('Automatic_Number_Identification') %>:   </td>
+              <td> <%= _('DTMF_Mode') %>:</td>
+              <td>
+                <select name="device[dtmfmode]">
+                  <option value="inband" <%= "selected" if @device.dtmfmode == "inband" %>> inband</option>
+                  <option value="info" <%= "selected" if @device.dtmfmode == "info" %>> info</option>
+                  <option value="rfc2833" <%= "selected" if @device.dtmfmode == "rfc2833" %>> rfc2833</option>
+                  <option value="auto" <%= "selected" if @device.dtmfmode == "auto" %>> auto</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td> <%= _('Location') %>:</td>
               <td>
 
-                <%= radio_button_tag('provider[ani]', '0', @provider.ani == 0) %> <%= _('No') %>
-                <%= radio_button_tag('provider[ani]', '1', @provider.ani == 1) %> <%= _('Yes') %>
+                <select name="device[location_id]">
+                  <% for loc in @locations %>
+                      <option value=<%= loc.id %> <%= "selected" if @device.location_id == loc.id %>> <%= loc.name %> </option>
+                  <% end %>
+                </select>
 
               </td>
             </tr>
-          <% end %>
 
-          <tr>
-            <td> <%= _('Timeout') %>:   </td>
-            <td><%= text_field 'provider', 'timeout', "class" => "input" , :size => "5", :maxlength => "4" %> <%= _('seconds') %> </td>
-          </tr>
+            <% if session[:usertype] != "reseller" %>
+                <tr>
+                  <td> <%= b_provider_ani + _('Automatic_Number_Identification') %>:</td>
+                  <td>
 
-          <tr>
-            <td> <%= b_device + _('Device_ID') %>:   </td>
-            <td>
+                    <%= radio_button_tag('provider[ani]', '0', @provider.ani == 0) %> <%= _('No') %>
+                    <%= radio_button_tag('provider[ani]', '1', @provider.ani == 1) %> <%= _('Yes') %>
 
-              <%= @device.id if @device%>
+                  </td>
+                </tr>
+            <% end %>
 
-            </td>
-          </tr>
-          <tr>
-            <td> <%= _('Call_limit') %>:   </td>
-            <td> <%= text_field 'provider', 'call_limit', "class" => "input", :size => "9", :maxlength => "10" %>  ( <%= _('Call_limit_notice') %> )</td>
-          </tr>
-          <tr>
-            <td> <%= _('Hidden') %>? :   </td>
-            <td> <%=  check_box_tag('provider[hidden]', "1", @provider.hidden.to_i == 1) %></td>
-          </tr>
-          <tr>
-            <td height="20"></td>
-          </tr>
-          <tr>
-            <td class="bottom_border" colspan=2>
-              <b><%= _('Authentication') %></b>
-            </td>
-          </tr>
-          <tr><td height="10"></td></tr>
-          <tr>
-            <td> <%= _('Channel') %>:   </td>
-            <td> <%= text_field 'provider', 'channel', "class" => "input"   %></td>
-          </tr>
-                    <tr><td height="20"></td></tr>
+            <tr>
+              <td> <%= _('Timeout') %>:</td>
+              <td><%= text_field 'provider', 'timeout', "class" => "input", :size => "5", :maxlength => "4" %> <%= _('seconds') %> </td>
+            </tr>
 
-          <tr>
-            <td class="bottom_border" colspan=2>
-              <b><%= _('Advanced') %></b>
-            </td>
-          </tr>
-          <tr><td height="10"></td></tr>
-          <% if session[:usertype] != "reseller" %>
+            <tr>
+              <td> <%= b_device + _('Device_ID') %>:</td>
+              <td>
 
-          <tr <%= tooltip(_('Common_Use'), _('Common_Use_Explanation')) %>>
-            <td id="common_use"><%= _('Common_Use') %>:</td>
-            <td>
-              <%= radio_button_tag('provider[common_use]', '0', checked = (@provider.common_use == 0) ) %> <%= _('No') %>
-              <%= radio_button_tag('provider[common_use]', '1', checked = (@provider.common_use == 1) ) %> <%= _('Yes') %>
-            </td>
-          </tr>
-          <%end%>
-        </table>
-      <%end%>
-    </td>
+                <%= @device.id if @device %>
+
+              </td>
+            </tr>
+            <tr>
+              <td> <%= _('Call_limit') %>:</td>
+              <td> <%= text_field 'provider', 'call_limit', "class" => "input", :size => "9", :maxlength => "10" %>
+                ( <%= _('Call_limit_notice') %> )
+              </td>
+            </tr>
+            <tr>
+              <td> <%= _('Hidden') %>? :</td>
+              <td> <%= check_box_tag('provider[hidden]', "1", @provider.hidden.to_i == 1) %></td>
+            </tr>
+            <tr>
+              <td height="20"></td>
+            </tr>
+            <tr>
+              <td class="bottom_border" colspan=2>
+                <b><%= _('Authentication') %></b>
+              </td>
+            </tr>
+            <tr>
+              <td height="10"></td>
+            </tr>
+            <tr>
+              <td> <%= _('Channel') %>:</td>
+              <td> <%= text_field 'provider', 'channel', "class" => "input" %></td>
+            </tr>
+            <tr>
+              <td height="20"></td>
+            </tr>
+
+            <tr>
+              <td class="bottom_border" colspan=2>
+                <b><%= _('Advanced') %></b>
+              </td>
+            </tr>
+            <tr>
+              <td height="10"></td>
+            </tr>
+            <% if session[:usertype] != "reseller" %>
+
+                <tr <%= tooltip(_('Common_Use'), _('Common_Use_Explanation')) %>>
+                  <td id="common_use"><%= _('Common_Use') %>:</td>
+                  <td>
+                    <%= radio_button_tag('provider[common_use]', '0', checked = (@provider.common_use == 0)) %> <%= _('No') %>
+                    <%= radio_button_tag('provider[common_use]', '1', checked = (@provider.common_use == 1)) %> <%= _('Yes') %>
+                  </td>
+                </tr>
+            <% end %>
+            </table>
+        <% end %>
+        </td>
   </tr>
-   <%= render :partial => 'select_servers' if session[:usertype] != "reseller" %>
+  <%= render :partial => 'select_servers' if session[:usertype] != "reseller" %>
 </table>
 

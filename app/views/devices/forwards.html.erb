@@ -1,46 +1,46 @@
 <div align="center">
-<table width="100%" class="maintable">
+  <table width="100%" class="maintable">
 
     <tr>
-        <th align="left">            <%= _('Extension') %>        </th>
-        <th align="left">            <%= _('User') %>        </th>
-     
-        <th align="center">            <%= _('Forward') %>        </th>
-        <th>                </th>
+      <th align="left">            <%= _('Extension') %>        </th>
+      <th align="left">            <%= _('User') %>        </th>
+
+      <th align="center">            <%= _('Forward') %>        </th>
+      <th></th>
     </tr>
 
-<% i = 0 %>
-<% for dev in @devices%>
-  <% if @user = dev.user %>
-    <tr class="row<%= (i % 2 + 1).to_s %>">            
-        <td>            <%= dev.extension %>       </td>
-        <td>            <%= @user.first_name + " " + @user.last_name %>      </td>
-        <td  align="center">            
-            <% d = dev %>
-                
-            <% while d.forward_to != 0%>    
-                
-                <% if d.forward_to != 0 %>
-                    -> <%= Device.find(d.forward_to).extension %>
-            
-                <% end %>
-        
-                <% d = Device.find(d.forward_to) %>
-            <% end %>
-        </td>
-        <td  align="center">            
-        <% if @group %>
-            <%= link_to _('Change'), :action => 'device_forward', :id => dev, :group => @group.id %>  
-        <% else %>    
-            <%= link_to _('Change'), :action => 'device_forward', :id => dev %>  
-        <% end %>
-        
-        </td>
-                
-    </tr>    
-  <% end %>
-<% i += 1%>  
-<% end %>
+    <% i = 0 %>
+    <% for dev in @devices %>
+        <% if @user = dev.user %>
+            <tr class="row<%= (i % 2 + 1).to_s %>">
+              <td>            <%= dev.extension %>       </td>
+              <td>            <%= @user.first_name + " " + @user.last_name %>      </td>
+              <td align="center">
+                <% d = dev %>
 
-</table>
+                <% while d.forward_to != 0 %>
+
+                    <% if d.forward_to != 0 %>
+                        -> <%= Device.find(d.forward_to).extension %>
+
+                    <% end %>
+
+                    <% d = Device.find(d.forward_to) %>
+                <% end %>
+              </td>
+              <td align="center">
+                <% if @group %>
+                    <%= link_to _('Change'), :action => 'device_forward', :id => dev, :group => @group.id %>
+                <% else %>
+                    <%= link_to _('Change'), :action => 'device_forward', :id => dev %>
+                <% end %>
+
+              </td>
+
+            </tr>
+        <% end %>
+        <% i += 1 %>
+    <% end %>
+
+  </table>
 </div>

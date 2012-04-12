@@ -6,10 +6,10 @@ require 'rexml/document'
 
 module ActiveMerchant #:nodoc:
   module Billing #:nodoc:
-    # The base class for all iDEAL response classes.
-    #
-    # Note that if the iDEAL system is under load it will _not_ allow more
-    # then two retries per request.
+                 # The base class for all iDEAL response classes.
+                 #
+                 # Note that if the iDEAL system is under load it will _not_ allow more
+                 # then two retries per request.
     class IdealResponse < Response
       def initialize(response_body, options = {})
         @response = REXML::Document.new(response_body).root
@@ -44,12 +44,17 @@ module ActiveMerchant #:nodoc:
       # * +AP+ - <tt>:application</tt>
       def error_type
         unless success?
-          case error_code[0,2]
-          when 'IX' then :xml
-          when 'SO' then :system
-          when 'SE' then :security
-          when 'BR' then :value
-          when 'AP' then :application
+          case error_code[0, 2]
+            when 'IX' then
+              :xml
+            when 'SO' then
+              :system
+            when 'SE' then
+              :security
+            when 'BR' then
+              :value
+            when 'AP' then
+              :application
           end
         end
       end
@@ -189,7 +194,7 @@ module ActiveMerchant #:nodoc:
       # verified.
       def verified?
         @verified ||= IdealGateway.ideal_certificate.public_key.
-                        verify(OpenSSL::Digest::SHA1.new, signature, message)
+            verify(OpenSSL::Digest::SHA1.new, signature, message)
       end
 
       private
@@ -218,7 +223,7 @@ module ActiveMerchant #:nodoc:
       #   gateway.issuers.list # => [{ :id => '1006', :name => 'ABN AMRO Bank' }]
       def list
         @response.get_elements('//Issuer').map do |issuer|
-          { :id => issuer.get_text('issuerID').to_s, :name => issuer.get_text('issuerName').to_s }
+          {:id => issuer.get_text('issuerID').to_s, :name => issuer.get_text('issuerName').to_s}
         end
       end
     end

@@ -1,7 +1,7 @@
 <% if @results and @results.length > 0 %>
-  <%= @results %>
+    <%= @results %>
 <% else %>
-  <br />
+    <br/>
 <% end %>
-<div id="price" style="visibility:hidden" ><%= @price %></div>
-<div id="curr" style="visibility:hidden" ><%=current_user.currency.name.to_s %></div>
+<div id="price" style="visibility:hidden"><%= @price %></div>
+<div id="curr" style="visibility:hidden"><%= current_user.currency.name.to_s %></div>

@@ -1,7 +1,7 @@
 <ul style="list-style-type: none;margin-left: 0px;padding-left: 0px;margin-top: 0px;margin-bottom:0px;">
-  <%if @devices.size.to_i > 0%>
-    <% for dev in @devices   %>
-      <li style="height: 17px;"><%= nice_device(dev) %></li>
-    <% end %>
-  <%end%>
+  <% if @devices.size.to_i > 0 %>
+      <% for dev in @devices %>
+          <li style="height: 17px;"><%= nice_device(dev) %></li>
+      <% end %>
+  <% end %>
 </ul>

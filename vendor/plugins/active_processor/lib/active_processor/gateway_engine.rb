@@ -18,9 +18,9 @@ module ActiveProcessor
 
       def field(engine, scope, name, options = {})
         if options.is_a?(Proc)
-          fields.deep_merge!({ engine.to_s => { scope.to_s => { name.to_s => options.call } } })
+          fields.deep_merge!({engine.to_s => {scope.to_s => {name.to_s => options.call}}})
         else
-          fields.deep_merge!({ engine.to_s => { scope.to_s => { name.to_s => options } } })
+          fields.deep_merge!({engine.to_s => {scope.to_s => {name.to_s => options}}})
         end
       end
 
@@ -29,11 +29,11 @@ module ActiveProcessor
       end
 
       def filter(name, arg)
-        filters.push({ name => arg })
+        filters.push({name => arg})
 
         define_method name do |input|
           self.gateways.each { |engine, gateways|
-            gateways.reject!{ |name, gateway| arg.call(gateway, input)  }
+            gateways.reject! { |name, gateway| arg.call(gateway, input) }
           }
           self
         end
@@ -87,7 +87,7 @@ module ActiveProcessor
 
       def for_user(user)
         @user = user
-        run(["on", @engine, "user_set"], ["on","user_set"])
+        run(["on", @engine, "user_set"], ["on", "user_set"])
         self
       end
 
@@ -104,7 +104,7 @@ module ActiveProcessor
           block.call(self, ActiveProcessor::FormHelper)
         else
           view = (@template) ? File.read(@template) : File.dirname(__FILE__) + '/views/configuration-form.html.erb'
-          erb  = ::File.read view
+          erb = ::File.read view
 
           return ERB.new(erb).result(binding)
         end
@@ -137,7 +137,7 @@ module ActiveProcessor
       end
 
       def size
-        @gateways.inject(0) {|s,en| s += en.last.keys.size}
+        @gateways.inject(0) { |s, en| s += en.last.keys.size }
       end
 
       # Assumes the params structure of:
@@ -145,13 +145,13 @@ module ActiveProcessor
       # e.g. { :gateways => { :bogus => { :login => "value", :password => "value" } }
       def update_with(scope, params = {})
         @params, errors = params, 0 # these may be needed in callback
-        run("on","before",scope.to_s,"update")
+        run("on", "before", scope.to_s, "update")
 
         @params.each { |engine, gateways|
           gateways.each { |gateway, settings|
             ActiveProcessor.log("updating gateway: #{gateway} #{scope}")
             settings.each { |name, value|
-              @gateways[engine][gateway].set(scope, { name => value })
+              @gateways[engine][gateway].set(scope, {name => value})
               errors += @gateways[engine][gateway].errors.size
             }
             if @gateways[engine][gateway].respond_to?(:valid_settings?)
@@ -161,7 +161,7 @@ module ActiveProcessor
           }
         }
 
-        run("on","after",scope.to_s,"update")
+        run("on", "after", scope.to_s, "update")
 
         return (errors == 0) ? true : false
       end
@@ -169,24 +169,24 @@ module ActiveProcessor
       # Pay using these parameters
       def pay_with(gateway, ip, params = {})
         @params = params # for callbacks
-        run(["on","before","payment","validation"],["on","before",@engine,"payment","validation"])
+        run(["on", "before", "payment", "validation"], ["on", "before", @engine, "payment", "validation"])
         ActiveProcessor.log("validating gateway: #{gateway.name} #{gateway.engine}")
         if gateway.valid?(params)
           ActiveProcessor.log("validated successfully: #{gateway.name} #{gateway.engine}")
-          run(["on","after","payment","validation"],["on","after",@engine,"payment","validation"])
+          run(["on", "after", "payment", "validation"], ["on", "after", @engine, "payment", "validation"])
           ActiveProcessor.log("paying with gateway: #{gateway.name} #{gateway.engine}")
           if gateway.pay(@user, ip, params)
             ActiveProcessor.log("successfully payed with: #{gateway.name} #{gateway.engine}")
-            run(["on","after","successful","payment"],["on","after",@engine,"successful","payment"])
+            run(["on", "after", "successful", "payment"], ["on", "after", @engine, "successful", "payment"])
             return true
           else
             ActiveProcessor.log("failed to pay with: #{gateway.name} #{gateway.engine}")
-            run(["on","after","failed","payment"],["on","after",@engine,"failed","payment"])
+            run(["on", "after", "failed", "payment"], ["on", "after", @engine, "failed", "payment"])
             return false
           end
         else
           ActiveProcessor.log("failed to validate: #{gateway.name} #{gateway.engine}")
-          run(["on","after","failed","payment","validation"],["on","after",@engine,"failed","payment","validation"])
+          run(["on", "after", "failed", "payment", "validation"], ["on", "after", @engine, "failed", "payment", "validation"])
           return false
         end
       end
@@ -200,19 +200,19 @@ module ActiveProcessor
         if @quantity == :first
           sanity_check
 
-          @gateways = { @engine.to_s => { @gateway.to_s => ActiveProcessor::PaymentEngines.const_get(@engine.to_s.classify.to_sym).new(@engine, @gateway, ActiveProcessor.configuration.data[@engine.to_s][@gateway.to_s], self.class.fields[@engine.to_s]) } }
+          @gateways = {@engine.to_s => {@gateway.to_s => ActiveProcessor::PaymentEngines.const_get(@engine.to_s.classify.to_sym).new(@engine, @gateway, ActiveProcessor.configuration.data[@engine.to_s][@gateway.to_s], self.class.fields[@engine.to_s])}}
 
-          run("on","first","find") unless @mode == :update
+          run("on", "first", "find") unless @mode == :update
         elsif @quantity == :enabled
           @gateways, @attributes = {}, {}
 
           ActiveProcessor.configuration.data['enabled'].each { |engine, gateways|
             gateways.each { |gateway|
-              @gateways.deep_merge!({ engine.to_s => { gateway.to_s => ActiveProcessor::PaymentEngines.const_get(engine.to_s.classify.to_sym).new(engine, gateway, ActiveProcessor.configuration.data[engine][gateway], self.class.fields[engine.to_s]) } })
+              @gateways.deep_merge!({engine.to_s => {gateway.to_s => ActiveProcessor::PaymentEngines.const_get(engine.to_s.classify.to_sym).new(engine, gateway, ActiveProcessor.configuration.data[engine][gateway], self.class.fields[engine.to_s])}})
             }
           }
 
-          run("on","enabled","find") unless @mode == :update
+          run("on", "enabled", "find") unless @mode == :update
         else
           # ..or all gateways from this engine
           raise ActiveProcessor::GatewayEngineError.new("There is no engine defined by this name") unless ActiveProcessor.configuration.data['enabled'].keys.include?(@engine.to_s)
@@ -220,13 +220,13 @@ module ActiveProcessor
           @gateways, @attributes = {}, {}
 
           ActiveProcessor.configuration.data['enabled'][@engine.to_s].each { |gateway|
-            @gateways.deep_merge!({ @engine.to_s => { gateway.to_s => ActiveProcessor::PaymentEngines.const_get(@engine.to_s.classify.to_sym).new(@engine, gateway, ActiveProcessor.configuration.data[@engine.to_s][gateway], self.class.fields[@engine.to_s]) } })
+            @gateways.deep_merge!({@engine.to_s => {gateway.to_s => ActiveProcessor::PaymentEngines.const_get(@engine.to_s.classify.to_sym).new(@engine, gateway, ActiveProcessor.configuration.data[@engine.to_s][gateway], self.class.fields[@engine.to_s])}})
           }
 
-          run("on","all","find") unless @mode == :update
+          run("on", "all", "find") unless @mode == :update
         end
 
-        run("on","find") unless @mode == :update
+        run("on", "find") unless @mode == :update
 
         @gateways
       end
@@ -247,14 +247,14 @@ module ActiveProcessor
 
       def run(*args)
         case args.first.class.to_s
-        when "String"
-          method = args.join("_")
-          send(method) if self.respond_to?(method)
-        when "Array"
-          for callback in args
-            method = callback.join("_")
+          when "String"
+            method = args.join("_")
             send(method) if self.respond_to?(method)
-          end
+          when "Array"
+            for callback in args
+              method = callback.join("_")
+              send(method) if self.respond_to?(method)
+            end
         end
       end
 

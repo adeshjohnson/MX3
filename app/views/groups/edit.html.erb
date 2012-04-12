@@ -1,7 +1,6 @@
-
 <%= form_tag(:action => 'update', :id => @group) do %>
-  <%= render :partial => 'form' %>
-  <%= submit_tag _('Edit'), :disable_with=>_('Processing..') %>
+    <%= render :partial => 'form' %>
+    <%= submit_tag _('Edit'), :disable_with => _('Processing..') %>
 <% end %>
 
 <% link_to 'Show', :action => 'show', :id => @group %> 

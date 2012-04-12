@@ -40,34 +40,34 @@ class Google4R::Checkout::MerchantCalculationResultTest < Test::Unit::TestCase
     # Build up some Mocha expectations.
     expect = CouponResult.stubs(:new)
     expect.times(1).returns(:coupon_result)
-    
+
     expect = GiftCertificateResult.stubs(:new)
     expect.times(1).returns(:gift_certificate_result)
-    
+
     expect = Money.stubs(:new)
     expect.times(1).returns(:shipping_rate, :total_tax)
 
     @result = MerchantCalculationResult.new('UPS Ground', '1234567890', Money.new(1000, 'USD'), true, Money.new(2000, 'USD'))
   end
-  
+
   def test_responds_correctly
-    
-    [ :shipping_name, :shipping_name=,
-      :address_id, :address_id=, 
-      :shipping_rate, :shipping_rate=,
-      :shippable, :shippable=,
-      :total_tax, :total_tax=,
-      :merchant_code_results
+
+    [:shipping_name, :shipping_name=,
+     :address_id, :address_id=,
+     :shipping_rate, :shipping_rate=,
+     :shippable, :shippable=,
+     :total_tax, :total_tax=,
+     :merchant_code_results
     ].each do |symbol|
       assert_respond_to @result, symbol
     end
   end
-  
+
   def test_create_merchant_code_result_works_correctly
     # Create the new CouponResult and GiftCertificationResult instances.
     @result.create_merchant_code_result(CouponResult)
     @result.create_merchant_code_result(GiftCertificateResult)
-    
+
     # perform the assertions
     assert_equal 'UPS Ground', @result.shipping_name
     assert_equal '1234567890', @result.address_id

@@ -1,85 +1,85 @@
 # -*- encoding : utf-8 -*-
 module ActiveMerchant #:nodoc:
   module Billing #:nodoc:
-    # ==== Customer Information Manager (CIM)
-    # 
-    # The Authorize.Net Customer Information Manager (CIM) is an optional additional service that allows you to store sensitive payment information on
-    # Authorize.Net's servers, simplifying payments for returning customers and recurring transactions. It can also help with Payment Card Industry (PCI) 
-    # Data Security Standard compliance, since customer data is no longer stored locally.
-    # 
-    # To use the AuthorizeNetCimGateway CIM must be enabled for your account.
-    # 
-    # Information about CIM is available on the {Authorize.Net website}[http://www.authorize.net/solutions/merchantsolutions/merchantservices/cim/].
-    # Information about the CIM API is available at the {Authorize.Net Integration Center}[http://developer.authorize.net/]
-    # 
-    # ==== Login and Password
-    # 
-    # The login and password are not the username and password you use to 
-    # login to the Authorize.Net Merchant Interface. Instead, you will 
-    # use the API Login ID as the login and Transaction Key as the 
-    # password.
-    # 
-    # ==== How to Get Your API Login ID and Transaction Key
-    #
-    # 1. Log into the Merchant Interface
-    # 2. Select Settings from the Main Menu
-    # 3. Click on API Login ID and Transaction Key in the Security section
-    # 4. Type in the answer to the secret question configured on setup
-    # 5. Click Submit
+                 # ==== Customer Information Manager (CIM)
+                 #
+                 # The Authorize.Net Customer Information Manager (CIM) is an optional additional service that allows you to store sensitive payment information on
+                 # Authorize.Net's servers, simplifying payments for returning customers and recurring transactions. It can also help with Payment Card Industry (PCI)
+                 # Data Security Standard compliance, since customer data is no longer stored locally.
+                 #
+                 # To use the AuthorizeNetCimGateway CIM must be enabled for your account.
+                 #
+                 # Information about CIM is available on the {Authorize.Net website}[http://www.authorize.net/solutions/merchantsolutions/merchantservices/cim/].
+                 # Information about the CIM API is available at the {Authorize.Net Integration Center}[http://developer.authorize.net/]
+                 #
+                 # ==== Login and Password
+                 #
+                 # The login and password are not the username and password you use to
+                 # login to the Authorize.Net Merchant Interface. Instead, you will
+                 # use the API Login ID as the login and Transaction Key as the
+                 # password.
+                 #
+                 # ==== How to Get Your API Login ID and Transaction Key
+                 #
+                 # 1. Log into the Merchant Interface
+                 # 2. Select Settings from the Main Menu
+                 # 3. Click on API Login ID and Transaction Key in the Security section
+                 # 4. Type in the answer to the secret question configured on setup
+                 # 5. Click Submit
     class AuthorizeNetCimGateway < Gateway
 
       class_attribute :test_url, :live_url
 
       self.test_url = 'https://apitest.authorize.net/xml/v1/request.api'
       self.live_url = 'https://api.authorize.net/xml/v1/request.api'
-      
+
       AUTHORIZE_NET_CIM_NAMESPACE = 'AnetApi/xml/v1/schema/AnetApiSchema.xsd'
 
       CIM_ACTIONS = {
-        :create_customer_profile => 'createCustomerProfile',
-        :create_customer_payment_profile => 'createCustomerPaymentProfile',
-        :create_customer_shipping_address => 'createCustomerShippingAddress',
-        :get_customer_profile => 'getCustomerProfile',
-        :get_customer_payment_profile => 'getCustomerPaymentProfile',
-        :get_customer_shipping_address => 'getCustomerShippingAddress',
-        :delete_customer_profile => 'deleteCustomerProfile',
-        :delete_customer_payment_profile => 'deleteCustomerPaymentProfile',
-        :delete_customer_shipping_address => 'deleteCustomerShippingAddress',
-        :update_customer_profile => 'updateCustomerProfile',
-        :update_customer_payment_profile => 'updateCustomerPaymentProfile',
-        :update_customer_shipping_address => 'updateCustomerShippingAddress',
-        :create_customer_profile_transaction => 'createCustomerProfileTransaction',
-        :validate_customer_payment_profile => 'validateCustomerPaymentProfile'
+          :create_customer_profile => 'createCustomerProfile',
+          :create_customer_payment_profile => 'createCustomerPaymentProfile',
+          :create_customer_shipping_address => 'createCustomerShippingAddress',
+          :get_customer_profile => 'getCustomerProfile',
+          :get_customer_payment_profile => 'getCustomerPaymentProfile',
+          :get_customer_shipping_address => 'getCustomerShippingAddress',
+          :delete_customer_profile => 'deleteCustomerProfile',
+          :delete_customer_payment_profile => 'deleteCustomerPaymentProfile',
+          :delete_customer_shipping_address => 'deleteCustomerShippingAddress',
+          :update_customer_profile => 'updateCustomerProfile',
+          :update_customer_payment_profile => 'updateCustomerPaymentProfile',
+          :update_customer_shipping_address => 'updateCustomerShippingAddress',
+          :create_customer_profile_transaction => 'createCustomerProfileTransaction',
+          :validate_customer_payment_profile => 'validateCustomerPaymentProfile'
       }
-      
+
       CIM_TRANSACTION_TYPES = {
-        :auth_capture => 'profileTransAuthCapture',
-        :auth_only => 'profileTransAuthOnly',
-        :capture_only => 'profileTransCaptureOnly'
+          :auth_capture => 'profileTransAuthCapture',
+          :auth_only => 'profileTransAuthOnly',
+          :capture_only => 'profileTransCaptureOnly'
       }
 
       CIM_VALIDATION_MODES = {
-        :none => 'none',
-        :test => 'testMode',
-        :live => 'liveMode'
+          :none => 'none',
+          :test => 'testMode',
+          :live => 'liveMode'
       }
-      
+
       BANK_ACCOUNT_TYPES = {
-        :checking => 'checking',
-        :savings => 'savings',
-        :business_checking => 'businessChecking'
+          :checking => 'checking',
+          :savings => 'savings',
+          :business_checking => 'businessChecking'
       }
-      
+
       ECHECK_TYPES = {
-        :ccd => 'CCD',
-        :ppd => 'PPD'
+          :ccd => 'CCD',
+          :ppd => 'PPD'
       }
-      
+
       self.homepage_url = 'http://www.authorize.net/'
       self.display_name = 'Authorize.Net CIM'
       self.supported_countries = ['US']
       self.supported_cardtypes = [:visa, :master, :american_express, :discover]
-    
+
       # Creates a new AuthorizeNetCimGateway
       #
       # The gateway requires that a valid API Login ID and Transaction Key be passed
@@ -127,7 +127,7 @@ module ActiveMerchant #:nodoc:
         requires!(options, :customer_profile_id)
         requires!(options, :payment_profile)
         requires!(options[:payment_profile], :payment)
-        
+
         request = build_request(:create_customer_payment_profile, options)
         commit(:create_customer_payment_profile, request)
       end
@@ -141,7 +141,7 @@ module ActiveMerchant #:nodoc:
       def create_customer_shipping_address(options)
         requires!(options, :customer_profile_id)
         requires!(options, :address)
-        
+
         request = build_request(:create_customer_shipping_address, options)
         commit(:create_customer_shipping_address, request)
       end
@@ -345,7 +345,7 @@ module ActiveMerchant #:nodoc:
       def expdate(credit_card)
         sprintf('%04d-%02d', credit_card.year, credit_card.month)
       end
-      
+
       def build_request(action, options = {})
         unless CIM_ACTIONS.include?(action)
           raise StandardError, "Invalid Customer Information Manager Action: #{action}"
@@ -368,7 +368,7 @@ module ActiveMerchant #:nodoc:
           xml.tag!('transactionKey', @options[:password])
         end
       end
-      
+
       def build_create_customer_profile_request(xml, options)
         add_profile(xml, options[:profile])
 
@@ -377,23 +377,23 @@ module ActiveMerchant #:nodoc:
 
       def build_create_customer_payment_profile_request(xml, options)
         xml.tag!('customerProfileId', options[:customer_profile_id])
-        
+
         xml.tag!('paymentProfile') do
           add_payment_profile(xml, options[:payment_profile])
         end
-        
+
         xml.tag!('validationMode', CIM_VALIDATION_MODES[options[:validation_mode]]) if options[:validation_mode]
 
         xml.target!
       end
-      
+
       def build_create_customer_shipping_address_request(xml, options)
         xml.tag!('customerProfileId', options[:customer_profile_id])
-        
+
         xml.tag!('address') do
           add_address(xml, options[:address])
         end
-        
+
         xml.target!
       end
 
@@ -432,8 +432,8 @@ module ActiveMerchant #:nodoc:
       end
 
       def build_update_customer_profile_request(xml, options)
-        add_profile(xml, options[:profile], true) 
-        
+        add_profile(xml, options[:profile], true)
+
         xml.target!
       end
 
@@ -441,7 +441,7 @@ module ActiveMerchant #:nodoc:
         xml.tag!('customerProfileId', options[:customer_profile_id])
 
         xml.tag!('paymentProfile') do
-          add_payment_profile(xml, options[:payment_profile]) 
+          add_payment_profile(xml, options[:payment_profile])
         end
 
         xml.target!
@@ -451,7 +451,7 @@ module ActiveMerchant #:nodoc:
         xml.tag!('customerProfileId', options[:customer_profile_id])
 
         xml.tag!('address') do
-          add_address(xml, options[:address]) 
+          add_address(xml, options[:address])
         end
 
         xml.target!
@@ -460,10 +460,10 @@ module ActiveMerchant #:nodoc:
       def build_create_customer_profile_transaction_request(xml, options)
         add_transaction(xml, options[:transaction])
         xml.tag!('extraOptions', "x_test_request=TRUE") if @options[:test]
-        
+
         xml.target!
       end
-      
+
       def build_validate_customer_payment_profile_request(xml, options)
         xml.tag!('customerProfileId', options[:customer_profile_id])
         xml.tag!('customerPaymentProfileId', options[:customer_payment_profile_id])
@@ -494,12 +494,12 @@ module ActiveMerchant #:nodoc:
           end
         end
       end
-      
+
       def add_transaction(xml, transaction)
         unless CIM_TRANSACTION_TYPES.include?(transaction[:type])
           raise StandardError, "Invalid Customer Information Manager Transaction Type: #{transaction[:type]}"
         end
-        
+
         xml.tag!('transaction') do
           xml.tag!(CIM_TRANSACTION_TYPES[transaction[:type]]) do
             # The amount to be billed to the customer
@@ -511,7 +511,7 @@ module ActiveMerchant #:nodoc:
           end
         end
       end
-      
+
       def add_order(xml, order)
         xml.tag!('order') do
           xml.tag!('invoiceNumber', order[:invoice_number]) if order[:invoice_number]
@@ -519,7 +519,7 @@ module ActiveMerchant #:nodoc:
           xml.tag!('purchaseOrderNumber', order[:purchase_order_number]) if order[:purchase_order_number]
         end
       end
-      
+
       def add_payment_profiles(xml, payment_profiles)
         xml.tag!('paymentProfiles') do
           add_payment_profile(xml, payment_profiles)
@@ -538,7 +538,7 @@ module ActiveMerchant #:nodoc:
             add_address(xml, payment_profile[:bill_to])
           end
         end
-        
+
         if payment_profile[:payment]
           xml.tag!('payment') do
             add_credit_card(xml, payment_profile[:payment][:credit_card]) if payment_profile[:payment].has_key?(:credit_card)
@@ -549,7 +549,7 @@ module ActiveMerchant #:nodoc:
             xml.tag!('taxId', payment_profile[:payment]) if payment_profile[:payment].has_key?(:tax_id)
           end
         end
-        
+
         xml.tag!('customerPaymentProfileId', payment_profile[:customer_payment_profile_id]) if payment_profile[:customer_payment_profile_id]
       end
 
@@ -571,7 +571,7 @@ module ActiveMerchant #:nodoc:
         xml.tag!('country', address[:country])
         xml.tag!('phoneNumber', address[:phone_number]) if address[:phone_number]
         xml.tag!('faxNumber', address[:fax_number]) if address[:fax_number]
-        
+
         xml.tag!('customerAddressId', address[:customer_address_id]) if address[:customer_address_id]
       end
 
@@ -588,14 +588,14 @@ module ActiveMerchant #:nodoc:
           xml.tag!('cardCode', credit_card.verification_value) if credit_card.verification_value?
         end
       end
-      
+
       # Adds customer’s bank account information
       # Note: This element should only be included 
       # when the payment method is bank account.
       def add_bank_account(xml, bank_account)
         raise StandardError, "Invalid Bank Account Type: #{bank_account[:account_type]}" unless BANK_ACCOUNT_TYPES.include?(bank_account[:account_type])
         raise StandardError, "Invalid eCheck Type: #{bank_account[:echeck_type]}" unless ECHECK_TYPES.include?(bank_account[:echeck_type])
-        
+
         xml.tag!('bankAccount') do
           # The type of bank account
           xml.tag!('accountType', BANK_ACCOUNT_TYPES[bank_account[:account_type]])
@@ -613,7 +613,7 @@ module ActiveMerchant #:nodoc:
           xml.tag!('bankName', bank_account[:bank_name]) if bank_account[:bank_name]
         end
       end
-      
+
       # Adds customer’s driver's license information
       # Note: This element is only required for 
       # Wells Fargo SecureSource eCheck.Net merchants
@@ -629,11 +629,11 @@ module ActiveMerchant #:nodoc:
           xml.tag!('dateOfBirth', drivers_license[:date_of_birth])
         end
       end
-      
+
       def commit(action, request)
         url = test? ? test_url : live_url
         xml = ssl_post(url, request, "Content-Type" => "text/xml")
-        
+
         response_params = parse(action, xml)
 
         message = response_params['messages']['message']['text']
@@ -641,68 +641,68 @@ module ActiveMerchant #:nodoc:
         success = response_params['messages']['result_code'] == 'Ok'
 
         response = Response.new(success, message, response_params,
-          :test => test_mode,
-          :authorization => response_params['customer_profile_id'] || (response_params['profile'] ? response_params['profile']['customer_profile_id'] : nil)
+                                :test => test_mode,
+                                :authorization => response_params['customer_profile_id'] || (response_params['profile'] ? response_params['profile']['customer_profile_id'] : nil)
         )
-        
+
         response.params['direct_response'] = parse_direct_response(response) if response.params['direct_response']
         response
       end
-      
+
       def parse_direct_response(response)
         direct_response = {'raw' => response.params['direct_response']}
         direct_response_fields = response.params['direct_response'].split(',')
 
         direct_response.merge(
-          {
-            'response_code' => direct_response_fields[0],
-            'response_subcode' => direct_response_fields[1],
-            'response_reason_code' => direct_response_fields[2],
-            'message' => direct_response_fields[3],
-            'approval_code' => direct_response_fields[4],
-            'avs_response' => direct_response_fields[5],
-            'transaction_id' => direct_response_fields[6],
-            'invoice_number' => direct_response_fields[7],
-            'order_description' => direct_response_fields[8],
-            'amount' => direct_response_fields[9],
-            'method' => direct_response_fields[10],
-            'transaction_type' => direct_response_fields[11],
-            'customer_id' => direct_response_fields[12],
-            'first_name' => direct_response_fields[13],
-            'last_name' => direct_response_fields[14],
-            'company' => direct_response_fields[15],
-            'address' => direct_response_fields[16],
-            'city' => direct_response_fields[17],
-            'state' => direct_response_fields[18],
-            'zip_code' => direct_response_fields[19],
-            'country' => direct_response_fields[20],
-            'phone' => direct_response_fields[21],
-            'fax' => direct_response_fields[22],
-            'email_address' => direct_response_fields[23],
-            'ship_to_first_name' => direct_response_fields[24],
-            'ship_to_last_name' => direct_response_fields[25],
-            'ship_to_company' => direct_response_fields[26],
-            'ship_to_address' => direct_response_fields[27],
-            'ship_to_city' => direct_response_fields[28],
-            'ship_to_state' => direct_response_fields[29],
-            'ship_to_zip_code' => direct_response_fields[30],
-            'ship_to_country' => direct_response_fields[31],
-            'tax' => direct_response_fields[32],
-            'duty' => direct_response_fields[33],
-            'freight' => direct_response_fields[34],
-            'tax_exempt' => direct_response_fields[35],
-            'purchase_order_number' => direct_response_fields[36],
-            'md5_hash' => direct_response_fields[37],
-            'card_code' => direct_response_fields[38],
-            'cardholder_authentication_verification_response' => direct_response_fields[39]
-          }
+            {
+                'response_code' => direct_response_fields[0],
+                'response_subcode' => direct_response_fields[1],
+                'response_reason_code' => direct_response_fields[2],
+                'message' => direct_response_fields[3],
+                'approval_code' => direct_response_fields[4],
+                'avs_response' => direct_response_fields[5],
+                'transaction_id' => direct_response_fields[6],
+                'invoice_number' => direct_response_fields[7],
+                'order_description' => direct_response_fields[8],
+                'amount' => direct_response_fields[9],
+                'method' => direct_response_fields[10],
+                'transaction_type' => direct_response_fields[11],
+                'customer_id' => direct_response_fields[12],
+                'first_name' => direct_response_fields[13],
+                'last_name' => direct_response_fields[14],
+                'company' => direct_response_fields[15],
+                'address' => direct_response_fields[16],
+                'city' => direct_response_fields[17],
+                'state' => direct_response_fields[18],
+                'zip_code' => direct_response_fields[19],
+                'country' => direct_response_fields[20],
+                'phone' => direct_response_fields[21],
+                'fax' => direct_response_fields[22],
+                'email_address' => direct_response_fields[23],
+                'ship_to_first_name' => direct_response_fields[24],
+                'ship_to_last_name' => direct_response_fields[25],
+                'ship_to_company' => direct_response_fields[26],
+                'ship_to_address' => direct_response_fields[27],
+                'ship_to_city' => direct_response_fields[28],
+                'ship_to_state' => direct_response_fields[29],
+                'ship_to_zip_code' => direct_response_fields[30],
+                'ship_to_country' => direct_response_fields[31],
+                'tax' => direct_response_fields[32],
+                'duty' => direct_response_fields[33],
+                'freight' => direct_response_fields[34],
+                'tax_exempt' => direct_response_fields[35],
+                'purchase_order_number' => direct_response_fields[36],
+                'md5_hash' => direct_response_fields[37],
+                'card_code' => direct_response_fields[38],
+                'cardholder_authentication_verification_response' => direct_response_fields[39]
+            }
         )
       end
-      
+
       def parse(action, xml)
         xml = REXML::Document.new(xml)
         root = REXML::XPath.first(xml, "//#{CIM_ACTIONS[action]}Response") ||
-               REXML::XPath.first(xml, "//ErrorResponse")
+            REXML::XPath.first(xml, "//ErrorResponse")
         if root
           response = parse_element(root)
         end
@@ -713,7 +713,7 @@ module ActiveMerchant #:nodoc:
       def parse_element(node)
         if node.has_elements?
           response = {}
-          node.elements.each{ |e|
+          node.elements.each { |e|
             key = e.name.underscore
             value = parse_element(e)
             if response.has_key?(key)
@@ -723,8 +723,8 @@ module ActiveMerchant #:nodoc:
                 response[key] = [response[key], value]
               end
             else
-              response[key] = parse_element(e) 
-            end 
+              response[key] = parse_element(e)
+            end
           }
         else
           response = node.text

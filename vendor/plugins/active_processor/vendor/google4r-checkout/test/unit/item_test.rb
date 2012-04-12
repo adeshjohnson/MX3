@@ -39,7 +39,7 @@ class Google4R::Checkout::ItemTest < Test::Unit::TestCase
   def setup
     @frontend = Frontend.new(FRONTEND_CONFIGURATION)
     @frontend.tax_table_factory = TestTaxTableFactory.new
-    
+
     @xml_str = %q{<?xml version="1.0" encoding="UTF-8" ?>
       <item>
         <item-name>MegaSound 2GB MP3 Player</item-name>
@@ -61,24 +61,24 @@ class Google4R::Checkout::ItemTest < Test::Unit::TestCase
           <email-delivery>true</email-delivery>
         </digital-content>
       </item>}
-    
-    @optional_tags = [ 'merchant-item-id', 'merchant-private-item-data', 'tax-table-selector' ]
+
+    @optional_tags = ['merchant-item-id', 'merchant-private-item-data', 'tax-table-selector']
 
     @command = @frontend.create_checkout_command
     @shopping_cart = @command.shopping_cart
     @item = @shopping_cart.create_item
     @digital_content = @item.digital_content
   end
-  
+
   def test_item_behaves_correctly
-    [ :shopping_cart,  :name, :name=, :description, :description=, :unit_price, :unit_price=,
-      :quantity, :quantity=, :id, :id=, :private_data, :private_data=,
-      :tax_table, :tax_table=, :digital_content, :weight, :weight=
+    [:shopping_cart, :name, :name=, :description, :description=, :unit_price, :unit_price=,
+     :quantity, :quantity=, :id, :id=, :private_data, :private_data=,
+     :tax_table, :tax_table=, :digital_content, :weight, :weight=
     ].each do |symbol|
       assert_respond_to @item, symbol
     end
   end
-  
+
   def test_item_gets_initialized_correctly
     assert_equal @shopping_cart, @item.shopping_cart
     assert_nil @item.name
@@ -90,47 +90,47 @@ class Google4R::Checkout::ItemTest < Test::Unit::TestCase
     assert_nil @item.tax_table
     assert_nil @item.digital_content
   end
-  
+
   def test_item_setters_work
     @item.name = "name"
     assert_equal "name", @item.name
-    
+
     @item.description = "description"
     assert_equal "description", @item.description
-    
+
     @item.unit_price = Money.new(100, "EUR")
     assert_equal Money.new(100, "EUR"), @item.unit_price
-    
+
     @item.quantity = 10
     assert_equal 10, @item.quantity
-    
+
     @item.id = "id"
     assert_equal "id", @item.id
-    
+
     @item.private_data = Hash.new
     assert_equal Hash.new, @item.private_data
-    
+
     @item.weight = Weight.new(2.2)
     assert_equal Weight, @item.weight.class
   end
-  
+
   def test_set_tax_table_works
     table = @command.tax_tables.first
     @item.tax_table = table
     assert_equal table, @item.tax_table
   end
-  
+
   def test_set_tax_table_raises_if_table_is_unknown_in_command
     assert_raises(RuntimeError) { @item.tax_table = TaxTable.new(false) }
   end
-  
+
   def test_set_private_data_only_works_with_hashes
     assert_raises(RuntimeError) { @shopping_cart.private_data = 1 }
     assert_raises(RuntimeError) { @shopping_cart.private_data = nil }
     assert_raises(RuntimeError) { @shopping_cart.private_data = 'Foobar' }
     assert_raises(RuntimeError) { @shopping_cart.private_data = [] }
   end
-  
+
   def test_item_price_must_be_money_instance
     assert_raises(RuntimeError) { @item.unit_price = nil }
     assert_raises(RuntimeError) { @item.unit_price = "String" }
@@ -148,9 +148,9 @@ class Google4R::Checkout::ItemTest < Test::Unit::TestCase
       tax_table.name = 'Some Table'
       command.tax_tables << tax_table
       item = Item.create_from_element(REXML::Document.new(xml_str).root, command.shopping_cart)
-      
+
       assert_equal command.shopping_cart, item.shopping_cart
-      
+
       assert_equal 'MegaSound 2GB MP3 Player', item.name
       assert_equal 'Portable MP3 player - stores 500 songs', item.description
       assert_equal Money.new(17800, 'USD'), item.unit_price
@@ -158,12 +158,12 @@ class Google4R::Checkout::ItemTest < Test::Unit::TestCase
       assert_equal 'MGS2GBMP3', item.id unless item.id.nil?
       assert_equal 2.2, item.weight.value
       assert_equal 'LB', item.weight.unit
-      
-      hash = 
-        {
-          'item-note' => [ 'Text 1', 'Text 2' ],
-          'nested' => { 'tags' => 'value' }
-        }
+
+      hash =
+          {
+              'item-note' => ['Text 1', 'Text 2'],
+              'nested' => {'tags' => 'value'}
+          }
       assert_equal hash, item.private_data unless optional_tag_names.include?('merchant-private-item-data')
 
       assert_equal 'Some Table', item.tax_table.name unless optional_tag_names.include?('tax-table-selector')

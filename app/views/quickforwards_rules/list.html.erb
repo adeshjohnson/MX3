@@ -1,5 +1,5 @@
 <p><%= link_to b_add + _('New_quickforwards_rule'), :action => 'new' %></p>
-<br />
+<br/>
 <table class="maintable" width="100%">
   <tr>
     <th align="left"><%= _('Name') %></th>
@@ -8,15 +8,15 @@
     <th></th>
     <th></th>
   </tr>
-  <%if @quickforwards_rules%>
-    <%@quickforwards_rules.each_with_index { |r ,index | %>
-      <tr class="row<%=index%2%>">
-        <td align="left" id="name_<%=r.id%>" <%=tooltip(_('Will_macth_dids'), r.will_macht.join("<BR />")) if r.will_macht%>> <%= link_to h(r.name), {:action=>:edit, :id=>r.id} %></td>
-        <td align="left" id="rr_<%=r.id%>" <%=tooltip(_('Will_macth_dids'), r.will_macht.join("<BR />")) if r.will_macht%>> <%= h(r.rule_regexp)%></td>
-        <td align="center" id="users_<%=r.id%>"><%= link_to b_user + "(#{r.users.size})", :action => :show, :id => r.id %></td>
-        <td align="center" id="edit_<%=r.id%>"><%= link_to b_edit, :action => 'edit', :id => r.id %></td>
-        <td align="center" id="delete_<%=r.id%>"><%= link_to(b_delete, { :action => 'destroy', :id => r.id }, :confirm => _('Are_you_sure'), :method => :post) %></td>
-      </tr>
-    <% } %>
-  <%end%>
+  <% if @quickforwards_rules %>
+      <% @quickforwards_rules.each_with_index { |r, index| %>
+          <tr class="row<%= index%2 %>">
+            <td align="left" id="name_<%= r.id %>" <%= tooltip(_('Will_macth_dids'), r.will_macht.join("<BR />")) if r.will_macht %>> <%= link_to h(r.name), {:action => :edit, :id => r.id} %></td>
+            <td align="left" id="rr_<%= r.id %>" <%= tooltip(_('Will_macth_dids'), r.will_macht.join("<BR />")) if r.will_macht %>> <%= h(r.rule_regexp) %></td>
+            <td align="center" id="users_<%= r.id %>"><%= link_to b_user + "(#{r.users.size})", :action => :show, :id => r.id %></td>
+            <td align="center" id="edit_<%= r.id %>"><%= link_to b_edit, :action => 'edit', :id => r.id %></td>
+            <td align="center" id="delete_<%= r.id %>"><%= link_to(b_delete, {:action => 'destroy', :id => r.id}, :confirm => _('Are_you_sure'), :method => :post) %></td>
+          </tr>
+      <% } %>
+  <% end %>
 </table>

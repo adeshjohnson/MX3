@@ -1,18 +1,18 @@
 <table width="100%" class="maintable">
   <tr>
-    <th id="h_did" align="left" width="20%"><%=nice_list_order('did',_('DID') , @options)%></th>
-    <th id="h_forward" align="left" width="20%"><%=nice_list_order('number',_('Forward_to') , @options)%></th>
-    <th id="h_desc" align="left"><%=nice_list_order('description',_('Description') , @options)%></th>
+    <th id="h_did" align="left" width="20%"><%= nice_list_order('did', _('DID'), @options) %></th>
+    <th id="h_forward" align="left" width="20%"><%= nice_list_order('number', _('Forward_to'), @options) %></th>
+    <th id="h_desc" align="left"><%= nice_list_order('description', _('Description'), @options) %></th>
     <th></th>
     <th></th>
   </tr>
-  <% @dids.each_with_index {|did, i| %>
-    <tr class="row<%= (i % 2 + 1).to_s %>">
-      <td id="did_<%= did["did"] %>" align="left"><%= did["did"] %></td>
-      <td id="number_<%= did["did"] %>" align="left"><%= did["number"] if did["not_edit"].to_i == 0%></td>
-      <td id="desc_<%= did["did"] %>" align="left"><%= did["description"] if did["not_edit"].to_i == 0%></td>
-      <td id="edit_<%= did["did"] %>" align="center"><%= link_to b_edit, :action => "quickforwarddid_edit", :id => did["did_id"] %></td>
-      <td id="delete_<%= did["did"] %>" align="center"><%= link_to b_delete, { :action => 'quickforwarddid_destroy', :id => did["qid"].to_i }, :confirm => _('Are_you_sure'), :method => :post if did["did_id"] and did["not_edit"].to_i == 0 %></td>
-    </tr>
+  <% @dids.each_with_index { |did, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="did_<%= did["did"] %>" align="left"><%= did["did"] %></td>
+        <td id="number_<%= did["did"] %>" align="left"><%= did["number"] if did["not_edit"].to_i == 0 %></td>
+        <td id="desc_<%= did["did"] %>" align="left"><%= did["description"] if did["not_edit"].to_i == 0 %></td>
+        <td id="edit_<%= did["did"] %>" align="center"><%= link_to b_edit, :action => "quickforwarddid_edit", :id => did["did_id"] %></td>
+        <td id="delete_<%= did["did"] %>" align="center"><%= link_to b_delete, {:action => 'quickforwarddid_destroy', :id => did["qid"].to_i}, :confirm => _('Are_you_sure'), :method => :post if did["did_id"] and did["not_edit"].to_i == 0 %></td>
+      </tr>
   <% } %>
 </table>

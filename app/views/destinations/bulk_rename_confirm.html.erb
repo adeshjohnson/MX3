@@ -1,20 +1,20 @@
 <b>
-  <p><%= _("Prefix") %>: <%=h @prefix %></p>
+  <p><%= _("Prefix") %>: <%= h @prefix %></p>
 </b>
-<br />
-<br />
-<%= _('Destinations_quantity')%>: <%= @destination_count %>
-<br />
-<br />
+<br/>
+<br/>
+<%= _('Destinations_quantity') %>: <%= @destination_count %>
+<br/>
+<br/>
 <table>
-  <%@destinations.each{|d|%>
-    <tr>
-      <td><%= d.prefix %></td>
-      <td><%= d.destinationgroup.name if d.destinationgroup %></td>
-    </tr>
-  <%}%>
+  <% @destinations.each { |d| %>
+      <tr>
+        <td><%= d.prefix %></td>
+        <td><%= d.destinationgroup.name if d.destinationgroup %></td>
+      </tr>
+  <% } %>
 </table>
-<br />
-<span style="float:left;"><%=link_to b_back + _('back'), session[:return_to]%></span>
-<span style="float:left;margin-left: 30px;"><%= button_to _('Rename'), {:controller=>:destinations, :action=>:bulk_rename, :prefix=>@prefix, :destination=>@destination_name}, :disable_with=>_('Processing..'), :confirm => _('Are_you_sure'), :method => :post %></span>
+<br/>
+<span style="float:left;"><%= link_to b_back + _('back'), session[:return_to] %></span>
+<span style="float:left;margin-left: 30px;"><%= button_to _('Rename'), {:controller => :destinations, :action => :bulk_rename, :prefix => @prefix, :destination => @destination_name}, :disable_with => _('Processing..'), :confirm => _('Are_you_sure'), :method => :post %></span>
 

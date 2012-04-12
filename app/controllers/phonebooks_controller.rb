@@ -3,12 +3,12 @@ class PhonebooksController < ApplicationController
 
   layout "callc"
 
-  before_filter :check_post_method, :only=>[:destroy, :create, :update]
+  before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :authorize
   before_filter :check_localization
   before_filter :find_phonebook, :only => [:update, :edit, :destroy, :show]
   before_filter :find_user, :only => [:add_new]
-  before_filter :find_phonebooks, :only => [ :index, :list ]
+  before_filter :find_phonebooks, :only => [:index, :list]
 
 
   def index
@@ -100,11 +100,11 @@ class PhonebooksController < ApplicationController
 
     unless @phonebook
       flash[:notice]=_('Phonebook_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
     if @phonebook.user_id != session[:user_id] and session[:usertype] != "admin"
       dont_be_so_smart
-      redirect_to :action=>:list and return false
+      redirect_to :action => :list and return false
     end
   end
 
@@ -112,7 +112,7 @@ class PhonebooksController < ApplicationController
     @user = User.find_by_id(session[:user_id])
     unless @user
       flash[:notice]=_('User_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
   end
 
@@ -127,6 +127,6 @@ class PhonebooksController < ApplicationController
     end
 
     @phonebooks = Phonebook.user_phonebooks(@user)
-    
+
   end
 end

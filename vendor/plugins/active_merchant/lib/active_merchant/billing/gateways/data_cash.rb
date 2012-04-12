@@ -14,7 +14,7 @@ module ActiveMerchant
       # Switch, Visa, Visa Delta, VISA Electron, Visa Purchasing 
       #
       # Note continuous authority is only supported for :visa, :master and :american_express card types  
-      self.supported_cardtypes = [ :visa, :master, :american_express, :discover, :diners_club, :jcb, :maestro, :switch, :solo, :laser ]
+      self.supported_cardtypes = [:visa, :master, :american_express, :discover, :diners_club, :jcb, :maestro, :switch, :solo, :laser]
 
       self.homepage_url = 'http://www.datacash.com/'
       self.display_name = 'DataCash'
@@ -118,7 +118,7 @@ module ActiveMerchant
       # * <tt>authorization</tt> -- The authorization returned from the previous authorize request.   
       def capture(money, authorization, options = {})
         commit(build_void_or_capture_request(FULFILL_TYPE, money, authorization, options))
-      end                    
+      end
 
       # Void a previous transaction
       # 
@@ -155,7 +155,7 @@ module ActiveMerchant
         @options[:test] || super
       end
 
-      private                         
+      private
       # Create the xml document for a 'cancel' or 'fulfill' transaction.
       # 
       # Final XML should look like:
@@ -193,14 +193,14 @@ module ActiveMerchant
         xml.instruct!
         xml.tag! :Request do
           add_authentication(xml)
-          
+
           xml.tag! :Transaction do
             xml.tag! :HistoricTxn do
               xml.tag! :reference, reference
               xml.tag! :authcode, auth_code
               xml.tag! :method, type
             end
-            
+
             if money
               xml.tag! :TxnDetails do
                 xml.tag! :merchantreference, format_reference_number(options[:order_id])
@@ -278,7 +278,7 @@ module ActiveMerchant
         xml.instruct!
         xml.tag! :Request do
           add_authentication(xml)
-          
+
           xml.tag! :Transaction do
             if options[:set_up_continuous_authority]
               xml.tag! :ContAuthTxn, :type => 'setup'
@@ -464,7 +464,7 @@ module ActiveMerchant
       #   -none: The results is stored in the passed xml document
       #   
       def add_credit_card(xml, credit_card, address)
-        
+
         xml.tag! :Card do
 
           # DataCash calls the CC number 'pan'
@@ -472,8 +472,8 @@ module ActiveMerchant
           xml.tag! :expirydate, format_date(credit_card.month, credit_card.year)
 
           # optional values - for Solo etc
-          if [ 'switch', 'solo' ].include?(card_brand(credit_card).to_s)
-            
+          if ['switch', 'solo'].include?(card_brand(credit_card).to_s)
+
             xml.tag! :issuenumber, credit_card.issue_number unless credit_card.issue_number.blank?
 
             if !credit_card.start_month.blank? && !credit_card.start_year.blank?
@@ -498,24 +498,24 @@ module ActiveMerchant
             # xml to be valid (or can drop the ExtendedPolicy and use
             # a predefined one
             xml.tag! :ExtendedPolicy do
-              xml.tag! :cv2_policy, 
-              :notprovided =>   POLICY_REJECT,
-              :notchecked =>    POLICY_REJECT,
-              :matched =>       POLICY_ACCEPT,
-              :notmatched =>    POLICY_REJECT,
-              :partialmatch =>  POLICY_REJECT
+              xml.tag! :cv2_policy,
+                       :notprovided => POLICY_REJECT,
+                       :notchecked => POLICY_REJECT,
+                       :matched => POLICY_ACCEPT,
+                       :notmatched => POLICY_REJECT,
+                       :partialmatch => POLICY_REJECT
               xml.tag! :postcode_policy,
-              :notprovided =>   POLICY_ACCEPT,
-              :notchecked =>    POLICY_ACCEPT,
-              :matched =>       POLICY_ACCEPT,
-              :notmatched =>    POLICY_REJECT,
-              :partialmatch =>  POLICY_ACCEPT
-              xml.tag! :address_policy, 
-              :notprovided =>   POLICY_ACCEPT,
-              :notchecked =>    POLICY_ACCEPT,
-              :matched =>       POLICY_ACCEPT,
-              :notmatched =>    POLICY_REJECT,
-              :partialmatch =>  POLICY_ACCEPT
+                       :notprovided => POLICY_ACCEPT,
+                       :notchecked => POLICY_ACCEPT,
+                       :matched => POLICY_ACCEPT,
+                       :notmatched => POLICY_REJECT,
+                       :partialmatch => POLICY_ACCEPT
+              xml.tag! :address_policy,
+                       :notprovided => POLICY_ACCEPT,
+                       :notchecked => POLICY_ACCEPT,
+                       :matched => POLICY_ACCEPT,
+                       :notmatched => POLICY_REJECT,
+                       :partialmatch => POLICY_ACCEPT
             end
           end
         end
@@ -530,11 +530,11 @@ module ActiveMerchant
       #   - ActiveMerchant::Billing::Response object
       #   
       def commit(request)
-        response = parse(ssl_post(test? ? TEST_URL : LIVE_URL, request))      
+        response = parse(ssl_post(test? ? TEST_URL : LIVE_URL, request))
 
         Response.new(response[:status] == DATACASH_SUCCESS, response[:reason], response,
-          :test => test?,
-          :authorization => "#{response[:datacash_reference]};#{response[:authcode]};#{response[:ca_reference]}"
+                     :test => test?,
+                     :authorization => "#{response[:datacash_reference]};#{response[:authcode]};#{response[:ca_reference]}"
         )
       end
 
@@ -548,7 +548,7 @@ module ActiveMerchant
       #   -String: date in MM/YY format
       #
       def format_date(month, year)
-        "#{format(month,:two_digits)}/#{format(year, :two_digits)}"
+        "#{format(month, :two_digits)}/#{format(year, :two_digits)}"
       end
 
       # Parse the datacash response and create a Response object
@@ -570,7 +570,7 @@ module ActiveMerchant
         end
 
         response
-      end     
+      end
 
       # Parse an xml element
       #
@@ -582,7 +582,7 @@ module ActiveMerchant
       # -  none (results are stored in the passed hash)
       def parse_element(response, node)
         if node.has_elements?
-          node.elements.each{|e| parse_element(response, e) }
+          node.elements.each { |e| parse_element(response, e) }
         else
           response[node.name.underscore.to_sym] = node.text
         end

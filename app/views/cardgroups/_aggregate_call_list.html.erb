@@ -1,54 +1,55 @@
-<table class = "maintable" width="100%">
+<table class="maintable" width="100%">
   <!-- UPPER LINE OF HEADER -->
   <tr>
     <% if @options[:destination_grouping].to_i == 1 %>
-      <th align="left"  nowrap> <%= nice_list_order("destination","Prefix", @options) %> </th>
+        <th align="left" nowrap> <%= nice_list_order("destination", "Prefix", @options) %> </th>
     <% else %>
-      <th align="left"  nowrap> <%= nice_list_order("direction","Direction", @options) %> </th>
+        <th align="left" nowrap> <%= nice_list_order("direction", "Direction", @options) %> </th>
     <% end %>
-    <th align="left"  style="white-space:nowrap;"> <%= nice_list_order("cardgroup","Cardgroup", @options) %></th>
-    <th align="center"  style="white-space:nowrap;"> <%= nice_list_order("duration","Duration", @options) %> </th>
-    <th align="right"   style="white-space:nowrap;"> <%= nice_list_order("answered_calls","Answered_calls", @options) %> </th>
-    <th align="right"   style="white-space:nowrap;"> <%= nice_list_order("total_calls","Total_calls", @options) %> </th>
-    <th align="right"   style="white-space:nowrap;"> <%= nice_list_order("asr","ASR", @options) %> %</th>
-    <th align="center"  style="white-space:nowrap;"> <%= nice_list_order("acd","ACD", @options) %></th>
-    <th align="right"  style="white-space:nowrap;"> <%= nice_list_order("provider_price","Provider_price", @options) %></th>
-    <th align="right"  style="white-space:nowrap;"> <%= nice_list_order("user_price","User_price", @options) %></th>
-    <th align="right"  style="white-space:nowrap;"> <%= nice_list_order("profit","Profit", @options) %></th>
-    <th align="right"  style="white-space:nowrap;"> <%= nice_list_order("margin","Margin", @options) %></th>
-    <th align="right"  style="white-space:nowrap;"> <%= nice_list_order("markup","Markup", @options) %></th>
+    <th align="left" style="white-space:nowrap;"> <%= nice_list_order("cardgroup", "Cardgroup", @options) %></th>
+    <th align="center" style="white-space:nowrap;"> <%= nice_list_order("duration", "Duration", @options) %> </th>
+    <th align="right" style="white-space:nowrap;"> <%= nice_list_order("answered_calls", "Answered_calls", @options) %> </th>
+    <th align="right" style="white-space:nowrap;"> <%= nice_list_order("total_calls", "Total_calls", @options) %> </th>
+    <th align="right" style="white-space:nowrap;"> <%= nice_list_order("asr", "ASR", @options) %> %</th>
+    <th align="center" style="white-space:nowrap;"> <%= nice_list_order("acd", "ACD", @options) %></th>
+    <th align="right" style="white-space:nowrap;"> <%= nice_list_order("provider_price", "Provider_price", @options) %></th>
+    <th align="right" style="white-space:nowrap;"> <%= nice_list_order("user_price", "User_price", @options) %></th>
+    <th align="right" style="white-space:nowrap;"> <%= nice_list_order("profit", "Profit", @options) %></th>
+    <th align="right" style="white-space:nowrap;"> <%= nice_list_order("margin", "Margin", @options) %></th>
+    <th align="right" style="white-space:nowrap;"> <%= nice_list_order("markup", "Markup", @options) %></th>
   </tr>
   <!-- LOWER LINE OF HEADER -->
   <!-- TABLE DATA -->
   <% dir_cache = {} -%>
-  <% @result.each_with_index {  |row, i| %>
-    <%# direction = dir_cache["d#{row.code}".to_sym] ||= Direction.find(:first, :conditions => ["directions.code = ?", row.code]) -%>
+  <% @result.each_with_index { |row, i| %>
+      <%# direction = dir_cache["d#{row.code}".to_sym] ||= Direction.find(:first, :conditions => ["directions.code = ?", row.code]) -%>
 
-    <tr class="row<%= (i % 2 + 1).to_s %>">
-      <% if @options[:destination_grouping].to_i == 1 %>
-        <td align="left" id="t_dir_name_<%=i%>"><%= h(row.dir_name)%> <%= h(row.subcode) %> <%= h(row.dest_name) %> <%= "("+row.prefix + ")" if !row.prefix.to_s.blank?%></td>
-      <% else %>
-        <td align="left" id="t_dir_name_<%=i%>"><%= h(row.dir_name) %> <%= h(row.subcode) %> <% "("+row.prefix + ")" if !row.prefix.to_s.blank?%></td>
-      <% end %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <% if @options[:destination_grouping].to_i == 1 %>
+            <td align="left" id="t_dir_name_<%= i %>"><%= h(row.dir_name) %> <%= h(row.subcode) %> <%= h(row.dest_name) %> <%= "("+row.prefix + ")" if !row.prefix.to_s.blank? %></td>
+        <% else %>
+            <td align="left" id="t_dir_name_<%= i %>"><%= h(row.dir_name) %> <%= h(row.subcode) %>
+              <% "("+row.prefix + ")" if !row.prefix.to_s.blank? %></td>
+        <% end %>
 
-      <td align="left" id="t_cardname_<%=i%>"><%=row.cardgroup_name%></td>
-      <td align="center" id="t_duration_<%=i%>"><%= nice_time(row.duration) %></td>
-      <td align="right" id="t_answered_calls_<%=i%>"><%= row.answered_calls %></td>
-      <td align="right" id="t_total_calls_<%=i%>"><%= row.total_calls %></td>
-      <td align="right" id="t_asr_<%=i%>"><%= nice_number(row.asr) %> %</td>
-      <td align="center" id="t_acd_<%=i%>"><%= nice_time(row.acd) %></td>
-      <td align="right" id="t_provider_price_<%=i%>"><%= nice_number(row.provider_price) %></td>
-      <td align="right" id="t_user_price_<%=i%>"><%= nice_number(row.user_price) %></td>
-      <td align="right" id="t_profit_<%=i%>"><%= nice_number(row.profit) %></td>
-      <td align="right" id="t_margin_<%=i%>"><%= nice_number(row.margin) %> %</td>
-      <td align="right" id="t_markup_<%=i%>"><%= nice_number(row.markup) %> %</td>
-    </tr>
+        <td align="left" id="t_cardname_<%= i %>"><%= row.cardgroup_name %></td>
+        <td align="center" id="t_duration_<%= i %>"><%= nice_time(row.duration) %></td>
+        <td align="right" id="t_answered_calls_<%= i %>"><%= row.answered_calls %></td>
+        <td align="right" id="t_total_calls_<%= i %>"><%= row.total_calls %></td>
+        <td align="right" id="t_asr_<%= i %>"><%= nice_number(row.asr) %> %</td>
+        <td align="center" id="t_acd_<%= i %>"><%= nice_time(row.acd) %></td>
+        <td align="right" id="t_provider_price_<%= i %>"><%= nice_number(row.provider_price) %></td>
+        <td align="right" id="t_user_price_<%= i %>"><%= nice_number(row.user_price) %></td>
+        <td align="right" id="t_profit_<%= i %>"><%= nice_number(row.profit) %></td>
+        <td align="right" id="t_margin_<%= i %>"><%= nice_number(row.margin) %> %</td>
+        <td align="right" id="t_markup_<%= i %>"><%= nice_number(row.markup) %> %</td>
+      </tr>
   <% } -%>
   <!-- TOTAL LINE -->
   <tr>
-    <th><%= _("Total")%>:</th>
-    <th  align="center"></th>
-    <th id="total_duration" align="center" ><%= nice_time(@total[:duration])  %></th>
+    <th><%= _("Total") %>:</th>
+    <th align="center"></th>
+    <th id="total_duration" align="center"><%= nice_time(@total[:duration]) %></th>
     <th id="total_answ_calls" align="right"><%= @total[:answered_calls] %></th>
     <th id="total_total_calls" align="right"><%= @total[:total_calls] %></th>
     <th id="total_ast" align="right"><%= nice_number(@total[:asr]) %> %</th>

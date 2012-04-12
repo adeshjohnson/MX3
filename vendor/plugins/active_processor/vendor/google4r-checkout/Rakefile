@@ -14,9 +14,9 @@ task :test => :'test:all'
 # 
 # File sets 
 # 
-RUBY_FILES  = FileList['lib/**/*.rb', 'lib/**/vendor/**'] 
-RDOC_EXTRA  = FileList['README','LICENSE', 'CHANGES'] 
-EXTRA_FILES = FileList['var/cacert.pem'] 
+RUBY_FILES = FileList['lib/**/*.rb', 'lib/**/vendor/**']
+RDOC_EXTRA = FileList['README', 'LICENSE', 'CHANGES']
+EXTRA_FILES = FileList['var/cacert.pem']
 
 #
 # Documentation
@@ -25,10 +25,10 @@ EXTRA_FILES = FileList['var/cacert.pem']
 desc 'Generate documentation for the google4r library.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'docs'
-  rdoc.title    = 'google4r/checkout'
-  rdoc.main     = 'README'
+  rdoc.title = 'google4r/checkout'
+  rdoc.main = 'README'
   rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files = RUBY_FILES + RDOC_EXTRA 
+  rdoc.rdoc_files = RUBY_FILES + RDOC_EXTRA
 end
 
 #
@@ -37,7 +37,7 @@ end
 
 namespace :test do
   desc 'Run all tests on the Google4R::Checkout::* classes.'
-  task :all => [ :integration, :unit, :system ]
+  task :all => [:integration, :unit, :system]
 
   desc 'Run unit tests on the Google4R::Checkout::* classes.'
   Rake::TestTask.new(:unit) do |t|
@@ -71,7 +71,7 @@ begin
     gem.description = gem.summary
     gem.authors = ["Tony Chan", "Brandon Dimcheff"]
 
-    gem.test_files = FileList['test/**/*_test.rb'] 
+    gem.test_files = FileList['test/**/*_test.rb']
 
     gem.required_ruby_version = '>= 1.8.4'
     gem.autorequire = ''

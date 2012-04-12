@@ -1,5 +1,5 @@
-<%if params[:id] and params[:id] != "" %>
-  <%= select_tag("users_device", options_for_select( [[_('Not_used'), ""]]+ @device.map{|dev| [dev.device_type + "/" + dev.name, dev.id]}, @device_selected)) %>
+<% if params[:id] and params[:id] != "" %>
+    <%= select_tag("users_device", options_for_select([[_('Not_used'), ""]]+ @device.map { |dev| [dev.device_type + "/" + dev.name, dev.id] }, @device_selected)) %>
 <% else %>
-  &nbsp;
+    &nbsp;
 <% end %>

@@ -216,8 +216,8 @@ module PrototypeHelper
 
     options[:html] ||= {}
     options[:html][:onsubmit] =
-      (options[:html][:onsubmit] ? options[:html][:onsubmit] + "; " : "") +
-      "#{remote_function(options)}; return false;"
+        (options[:html][:onsubmit] ? options[:html][:onsubmit] + "; " : "") +
+            "#{remote_function(options)}; return false;"
 
     form_tag(options[:html].delete(:action) || url_for(options[:url]), options[:html], &block)
   end
@@ -260,24 +260,25 @@ module PrototypeHelper
     options = args.extract_options!
 
     case record_or_name_or_array
-    when String, Symbol
-      object_name = record_or_name_or_array
-    when Array
-      object = record_or_name_or_array.last
-      object_name = ActiveModel::Naming.singular(object)
-      apply_form_for_options!(record_or_name_or_array, options)
-      args.unshift object
-    else
-      object      = record_or_name_or_array
-      object_name = ActiveModel::Naming.singular(record_or_name_or_array)
-      apply_form_for_options!(object, options)
-      args.unshift object
+      when String, Symbol
+        object_name = record_or_name_or_array
+      when Array
+        object = record_or_name_or_array.last
+        object_name = ActiveModel::Naming.singular(object)
+        apply_form_for_options!(record_or_name_or_array, options)
+        args.unshift object
+      else
+        object = record_or_name_or_array
+        object_name = ActiveModel::Naming.singular(record_or_name_or_array)
+        apply_form_for_options!(object, options)
+        args.unshift object
     end
 
     form_remote_tag options do
       fields_for object_name, *(args << options), &proc
     end
   end
+
   alias_method :form_remote_for, :remote_form_for
 
   # Returns '<tt>eval(request.responseText)</tt>' which is the JavaScript function
@@ -406,27 +407,27 @@ module PrototypeHelper
   #  periodically_call_remote(:url => 'update', :frequency => '20', :update => 'news_block')
   #
   def periodically_call_remote(options = {})
-     frequency = options[:frequency] || 10 # every ten seconds by default
-     code = "new PeriodicalExecuter(function() {#{remote_function(options)}}, #{frequency})"
-     javascript_tag(code)
+    frequency = options[:frequency] || 10 # every ten seconds by default
+    code = "new PeriodicalExecuter(function() {#{remote_function(options)}}, #{frequency})"
+    javascript_tag(code)
   end
 
   protected
-    def build_observer(klass, name, options = {})
-      if options[:with] && (options[:with] !~ /[\{=(.]/)
-        options[:with] = "'#{options[:with]}=' + encodeURIComponent(value)"
-      else
-        options[:with] ||= 'value' unless options[:function]
-      end
-
-      callback = options[:function] || remote_function(options)
-      javascript  = "new #{klass}('#{name}', "
-      javascript << "#{options[:frequency]}, " if options[:frequency]
-      javascript << "function(element, value) {"
-      javascript << "#{callback}}"
-      javascript << ")"
-      javascript_tag(javascript)
+  def build_observer(klass, name, options = {})
+    if options[:with] && (options[:with] !~ /[\{=(.]/)
+      options[:with] = "'#{options[:with]}=' + encodeURIComponent(value)"
+    else
+      options[:with] ||= 'value' unless options[:function]
     end
+
+    callback = options[:function] || remote_function(options)
+    javascript = "new #{klass}('#{name}', "
+    javascript << "#{options[:frequency]}, " if options[:frequency]
+    javascript << "function(element, value) {"
+    javascript << "#{callback}}"
+    javascript << ")"
+    javascript_tag(javascript)
+  end
 end
 
 ActionController::Base.helper PrototypeHelper

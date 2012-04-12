@@ -35,29 +35,29 @@ require 'test/frontend_configuration'
 # Test for the class UsZipArea.
 class Google4R::Checkout::UsZipAreaTest < Test::Unit::TestCase
   include Google4R::Checkout
-  
+
   def setup
     @area = UsZipArea.new
   end
-  
+
   def test_initialization
     assert_nil @area.pattern
   end
-  
+
   def test_creator_sets_area
     area = UsZipArea.new('123*')
     assert_equal '123*', area.pattern
   end
-  
+
   def test_us_zip_area_behaves_correctly
     # test that the methods and constants are defined correctly
     assert_respond_to @area, :pattern
     assert_respond_to @area, :pattern=
   end
-  
+
   def test_us_zip_area_pattern_accessor_works
     assert_nil @area.pattern
-    
+
     @area.pattern = '12345678'
     assert_equal '12345678', @area.pattern
 

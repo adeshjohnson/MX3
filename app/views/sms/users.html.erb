@@ -1,43 +1,42 @@
-
 <% if @not_active_users.size > 0 %>
-<%= form_tag :action => 'user_subscribe_to_sms' do %>
+    <%= form_tag :action => 'user_subscribe_to_sms' do %>
 
-<%= b_add + _('Subscribe_user_to_sms_service') %>:
+        <%= b_add + _('Subscribe_user_to_sms_service') %>:
 
-<select name="user_id" >
-    <% for user in @not_active_users%>
-        <option value="<%= user.id %>" > <%= nice_user(user) %> </option>
+        <select name="user_id">
+          <% for user in @not_active_users %>
+              <option value="<%= user.id %>"> <%= nice_user(user) %> </option>
+          <% end %>
+        </select>
+
+        <%= submit_tag _('Subscribe'), :disable_with => _('Processing..') %>
     <% end %>
-</select>
-
-<%= submit_tag _('Subscribe'), :disable_with=>_('Processing..')%>
-<% end %>
 
 
-<br><br>
+    <br><br>
 <% end %>
 
 <table width="100%" class="maintable">
   <tr>
     <th align="left"><%= _('Name') %></th>
     <% if session[:usertype] == 'admin' %>
-    <th align="left"><%= _('Lcr') %></th>
-    <%end%>
+        <th align="left"><%= _('Lcr') %></th>
+    <% end %>
     <th align="left"><%= _('Tariff') %></th>
     <th align="center"><%= _('Unsubscribe') %></th>
     <th></th>
   </tr>
-<% i = 0 %>
-<% for user in @active_users %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-    <td align="left">        <%= nice_user(user) %> </td>
-    <% if session[:usertype] == 'admin' %>
-    <td align="left">        <%= user.sms_lcr.name if user.sms_lcr %> </td>
-    <%end%>
-    <td align="left">        <%= user.sms_tariff.name if user.sms_tariff %> </td>
-    <td align="center"><%= link_to b_delete, {:action => "user_subscribe_to_sms", :user_id => user.id }, :id=>"delete_#{user.id}", :confirm => _('Are_you_sure'), :method => :post %></td>
-    <td align="center"><%= link_to b_edit, :action => "lcr_edit_user", :id => user.id%> </td>
- </tr>
-    <% i += 1%>
-<% end %>
+  <% i = 0 %>
+  <% for user in @active_users %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td align="left">        <%= nice_user(user) %> </td>
+        <% if session[:usertype] == 'admin' %>
+            <td align="left">        <%= user.sms_lcr.name if user.sms_lcr %> </td>
+        <% end %>
+        <td align="left">        <%= user.sms_tariff.name if user.sms_tariff %> </td>
+        <td align="center"><%= link_to b_delete, {:action => "user_subscribe_to_sms", :user_id => user.id}, :id => "delete_#{user.id}", :confirm => _('Are_you_sure'), :method => :post %></td>
+        <td align="center"><%= link_to b_edit, :action => "lcr_edit_user", :id => user.id %> </td>
+      </tr>
+      <% i += 1 %>
+  <% end %>
 </table>

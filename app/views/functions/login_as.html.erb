@@ -3,15 +3,15 @@
 <br><br>
 
 <%= form_tag :action => 'login_as_execute' do %>
-<select name="user" > 
-<% for user in @users%>
-    <option value='<%=user.id%>'> <%= nice_user user %> </option>
-<% end %>
+    <select name="user">
+      <% for user in @users %>
+          <option value='<%= user.id %>'> <%= nice_user user %> </option>
+      <% end %>
 
-</select>
+    </select>
 
-<br><br><br>
+    <br><br><br>
 
-<%= submit_tag _('Login_as'), :disable_with=>_('Processing..') %>
+    <%= submit_tag _('Login_as'), :disable_with => _('Processing..') %>
 
 <% end %>

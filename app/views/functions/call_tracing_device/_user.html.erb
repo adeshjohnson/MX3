@@ -2,7 +2,7 @@
 
   <tr class="row2">
     <th align="left"><%= _('Details') %></th>
-    <td align="right" ></td>
+    <td align="right"></td>
   </tr>
 
   <tr class="row1">
@@ -22,10 +22,12 @@
 
   <tr class="row2">
     <td align="left"><%= b_date + _('Call_Time') %>:</td>
-    <td align="right" id="call_time"><%= nice_date_time(session_from_datetime) %> (<%= {"WD" => _("Workday"), "FD" => _('Freeday')}[daytype] %>)</td>
+    <td align="right" id="call_time"><%= nice_date_time(session_from_datetime) %>
+      (<%= {"WD" => _("Workday"), "FD" => _('Freeday')}[daytype] %>)
+    </td>
   </tr>
   <tr class="row2">
-    <td align="left"><%=  _('Allow_loss_calls') %>:</td>
+    <td align="left"><%= _('Allow_loss_calls') %>:</td>
     <td align="right" id="user_allow_loss_calls"><%= user.allow_loss_calls.to_i == 1 ? _('Yes') : _('No') %></td>
   </tr>
 </table>

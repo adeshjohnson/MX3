@@ -1,66 +1,67 @@
 <b><%= _('DID') %>: <%= @did.did %></b>
-<br />
-<br />
-<b><%= _('Current_status') %>: <%= @did.status.capitalize %></b><br />
-<br />
+<br/>
+<br/>
+<b><%= _('Current_status') %>: <%= @did.status.capitalize %></b><br/>
+<br/>
 
-<% if @did.user and @did.status != "free" and not @did.dialplan%>
-  <%= b_user + _('Assigned_to_user') %>: <%= @did.user.first_name + " " + @did.user.last_name %><br />
+<% if @did.user and @did.status != "free" and not @did.dialplan %>
+    <%= b_user + _('Assigned_to_user') %>: <%= @did.user.first_name + " " + @did.user.last_name %><br />
 <% end %>
 
-<% if @did.status != "free" and @did.dialplan%>
-  <%= _('Assigned_to_dial_plan') %>: <%= @did.dialplan.name%><br />
+<% if @did.status != "free" and @did.dialplan %>
+    <%= _('Assigned_to_dial_plan') %>: <%= @did.dialplan.name %><br />
 <% end %>
 
-<% if @did.device%>
-  <%= b_device + _('Assigned_to_device') %>: <%= @did.device.device_type + "/" + @did.device.name %><br />
+<% if @did.device %>
+    <%= b_device + _('Assigned_to_device') %>: <%= @did.device.device_type + "/" + @did.device.name %><br />
 <% end %>
 
-<% if @did.status == "closed"%>
-  <br /><%= _('Reserved_for_user_till') %>: <%= nice_date_time @did.closed_till %><br />
+<% if @did.status == "closed" %>
+    <br/><%= _('Reserved_for_user_till') %>: <%= nice_date_time @did.closed_till %><br />
 <% end %>
 
-<br /> <br />
+<br/> <br/>
 <%= nice_did_rate_explain(@did_rate.rate_type) %>
-<br /> <br />
+<br/> <br/>
 
 <%= form_tag(:action => 'update', :id => @did_rate) do %>
-  <br/>
-  <table class='simple' width=50%>
-    <tr>
-      <td colspan =" 2">
-        <%= b_info + _('Explanation_when_spliting_rate')%>
-      </td>
-    </tr>
-    <tr>
-      <td><br/><b><label for="did_rate_start_time"><%= _('Start_Time') %>:</label> </b> </td>
-      <!-- <% text_field 'did_rate', 'start_time', "class" => "input", "disabled" => true    %></p> -->
-      <td><br/><%=  nice_time2 @did_rate.start_time %> </td>
-    </tr>
-    <tr>
-      <td> <b><label for="did_rate_end_time"><%= _('End_Time') %>:</label></b> </td>
-      <td>
-        <%= text_field 'did_rate', 'end_time', "class" => "input"   %>
-      </td>
-    </tr>
-    <tr>
-      <td><b><label for="did_rate_rate"><%= _('Rate') %>:</label></b></td>
-      <td><%= text_field 'did_rate', 'rate', "class" => "input"   %></td>
-    </tr>
-    <tr>
-      <td><b><label for="did_rate_connection_fee"><%= _('Connection_Fee') %>:</label></b></td>
-      <td><%= text_field 'did_rate', 'connection_fee', "class" => "input"   %></td>
-    </tr>
-    <tr>
-      <td><b><label for="did_rate_increment"><%= _('Increment') %>:</label></b></td>
-      <td><%= text_field 'did_rate', 'increment_s', "class" => "input"   %></td>
-    </tr>
-    <tr>
-      <td><b><label for="did_rate_min_time"><%= _('Min_Time') %>:</label></b></td>
-      <td><%= text_field 'did_rate', 'min_time', "class" => "input"   %></td>
-    </tr>
-  </table>
-  <br/>
-  <%= submit_tag _('Edit'), :disable_with=>_('Processing..') %>
+    <br/>
+    <table class='simple' width=50%>
+      <tr>
+        <td colspan=" 2">
+          <%= b_info + _('Explanation_when_spliting_rate') %>
+        </td>
+      </tr>
+      <tr>
+        <td><br/><b><label for="did_rate_start_time"><%= _('Start_Time') %>:</label> </b></td>
+        <!--
+        <% text_field 'did_rate', 'start_time', "class" => "input", "disabled" => true %></p> -->
+        <td><br/><%= nice_time2 @did_rate.start_time %> </td>
+      </tr>
+      <tr>
+        <td><b><label for="did_rate_end_time"><%= _('End_Time') %>:</label></b></td>
+        <td>
+          <%= text_field 'did_rate', 'end_time', "class" => "input" %>
+        </td>
+      </tr>
+      <tr>
+        <td><b><label for="did_rate_rate"><%= _('Rate') %>:</label></b></td>
+        <td><%= text_field 'did_rate', 'rate', "class" => "input" %></td>
+      </tr>
+      <tr>
+        <td><b><label for="did_rate_connection_fee"><%= _('Connection_Fee') %>:</label></b></td>
+        <td><%= text_field 'did_rate', 'connection_fee', "class" => "input" %></td>
+      </tr>
+      <tr>
+        <td><b><label for="did_rate_increment"><%= _('Increment') %>:</label></b></td>
+        <td><%= text_field 'did_rate', 'increment_s', "class" => "input" %></td>
+      </tr>
+      <tr>
+        <td><b><label for="did_rate_min_time"><%= _('Min_Time') %>:</label></b></td>
+        <td><%= text_field 'did_rate', 'min_time', "class" => "input" %></td>
+      </tr>
+    </table>
+    <br/>
+    <%= submit_tag _('Edit'), :disable_with => _('Processing..') %>
 <% end %>
 <br/><br/>

@@ -8,9 +8,9 @@ class CreditNote < ActiveRecord::Base
   #before_destroy :unpay
 
   validates_presence_of :issue_date, :message => _('Credit_note_must_have_issue_date')
-  validates_presence_of :price, :message => _('Price_has_to_be_specified_and_greater_than_0')#gal nereikia?
+  validates_presence_of :price, :message => _('Price_has_to_be_specified_and_greater_than_0') #gal nereikia?
   validates_numericality_of :price, :greater_than => 0, :message => _('Price_has_to_be_specified_and_greater_than_0')
-  validates_presence_of :price, :message => _('Price_with_tax_has_to_be_greater_than_0')#gal nereikia?
+  validates_presence_of :price, :message => _('Price_with_tax_has_to_be_greater_than_0') #gal nereikia?
   validates_numericality_of :price, :greater_than => 0, :message => _('Price_with_tax_has_to_be_greater_than_0')
   validates_uniqueness_of :payment_id, :message => _('Payment_must_be_unique'), :allow_nil => true
 
@@ -72,7 +72,7 @@ class CreditNote < ActiveRecord::Base
   users currency
 =end
 
-  def price=price
+  def price= price
     if User.current and User.current.currency
       converted_price = (price.to_f / User.current.currency.exchange_rate.to_f).to_f
     else
@@ -118,7 +118,7 @@ class CreditNote < ActiveRecord::Base
   Before saveing issue date convert it from user time to system time
   TODO: should be private, because user can set issue date only when creating note
 =end
-  def issue_date=datetime
+  def issue_date= datetime
     write_attribute(:issue_date, User.current.system_time(datetime))
   end
 
@@ -199,22 +199,22 @@ class CreditNote < ActiveRecord::Base
     select = ["SELECT COUNT(*) AS count, SUM(price) AS price, SUM(price_with_vat) as price_with_vat, status"]
     select << "FROM credit_notes"
     condition = ["issue_date BETWEEN '#{from_date}' AND '#{till_date}'"]
-    if not ordinary_user 
-       select << "JOIN users ON users.id = credit_notes.user_id"
-       condition << "owner_id = #{owner_id}"
+    if not ordinary_user
+      select << "JOIN users ON users.id = credit_notes.user_id"
+      condition << "owner_id = #{owner_id}"
     end
     condition << "user_id = #{user_id}" if user_id and user_id != 'all'
-    if status != 'all' and ['paid', 'unpaid'].include? status 
-      condition << "status = '#{status}'" 
+    if status != 'all' and ['paid', 'unpaid'].include? status
+      condition << "status = '#{status}'"
     end
     group_by = " GROUP BY status"
 
-    query = select.join("\n") + ' WHERE ' + condition.join(" AND\n") + group_by 
+    query = select.join("\n") + ' WHERE ' + condition.join(" AND\n") + group_by
     Device.find_by_sql(query)
   end
 
 
-private
+  private
 
 =begin
   When saveing pay date convert it from user time to system time. unless it is nil
@@ -224,7 +224,7 @@ private
   *Params*
   +date+
 =end
-  def pay_date=datetime
+  def pay_date= datetime
     if datetime
       datetime = User.current.system_time(datetime)
     end
@@ -254,7 +254,7 @@ private
         converted_price = self.price
       end
       price_with_vat = @tax.apply_tax(converted_price)
-      return price_with_vat 
+      return price_with_vat
     else
       nil
     end
@@ -290,9 +290,9 @@ private
 =begin
   very nasty but coudnt figure out how to make propper relationships to work
 =end
-def tax
-  Tax.find(self.tax_id)
-end
+  def tax
+    Tax.find(self.tax_id)
+  end
 
 =begin
   When credit note is paid, it's price has to be added to user's balance

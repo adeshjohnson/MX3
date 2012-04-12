@@ -8,8 +8,8 @@ require 'yaml'
 require 'pp'
 
 require 'rubygems'
-gem 'actionpack'#, "<= 1.13.6"
-gem 'activesupport'#, '<= 1.4.4'
+gem 'actionpack' #, "<= 1.13.6"
+gem 'activesupport' #, '<= 1.4.4'
 
 #require 'action_controller'
 #require 'action_view'

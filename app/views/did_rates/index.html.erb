@@ -1,41 +1,41 @@
 <b><%= _('DID') %>: <%= @did.did %></b>
-<br />
-<br />
-<b><%= _('Current_status') %>: <%= @did.status.capitalize %></b><br />
-<br />
+<br/>
+<br/>
+<b><%= _('Current_status') %>: <%= @did.status.capitalize %></b><br/>
+<br/>
 
-<% if @did.user and @did.status != "free" and not @did.dialplan%>
-  <%= b_user + _('Assigned_to_user') %>: <%= @did.user.first_name + " " + @did.user.last_name %><br />
+<% if @did.user and @did.status != "free" and not @did.dialplan %>
+    <%= b_user + _('Assigned_to_user') %>: <%= @did.user.first_name + " " + @did.user.last_name %><br />
 <% end %>
 
-<% if @did.status != "free" and @did.dialplan%>
-  <%= _('Assigned_to_dial_plan') %>: <%= @did.dialplan.name%><br />
+<% if @did.status != "free" and @did.dialplan %>
+    <%= _('Assigned_to_dial_plan') %>: <%= @did.dialplan.name %><br />
 <% end %>
 
-<% if @did.device%>
-  <%= b_device + _('Assigned_to_device') %>: <%= @did.device.device_type + "/" + @did.device.name %><br />
+<% if @did.device %>
+    <%= b_device + _('Assigned_to_device') %>: <%= @did.device.device_type + "/" + @did.device.name %><br />
 <% end %>
 
-<% if @did.status == "closed"%>
-  <br /><%= _('Reserved_for_user_till') %>: <%= nice_date_time @did.closed_till %><br />
+<% if @did.status == "closed" %>
+    <br/><%= _('Reserved_for_user_till') %>: <%= nice_date_time @did.closed_till %><br />
 <% end %>
 
-<br /> <br />
+<br/> <br/>
 
-  <%= _('DID_Provider_rate_explained') %>
+<%= _('DID_Provider_rate_explained') %>
 
-  <%= render :partial => "rate_details", :locals => {:rate_list => @did_prov_rates_c, :rtype=>''} if @did_prov_rates_c and @did_prov_rates_c.size.to_i > 0 %>
-  <%= render :partial => "rate_details", :locals => {:rate_list => @did_prov_rates_w, :rtype=>'WD'} if @did_prov_rates_w and @did_prov_rates_w.size.to_i > 0 %>
-  <%= render :partial => "rate_details", :locals => {:rate_list => @did_prov_rates_f, :rtype=>'FD'} if @did_prov_rates_f and @did_prov_rates_f.size.to_i > 0 %>
-<br /> <br />
+<%= render :partial => "rate_details", :locals => {:rate_list => @did_prov_rates_c, :rtype => ''} if @did_prov_rates_c and @did_prov_rates_c.size.to_i > 0 %>
+<%= render :partial => "rate_details", :locals => {:rate_list => @did_prov_rates_w, :rtype => 'WD'} if @did_prov_rates_w and @did_prov_rates_w.size.to_i > 0 %>
+<%= render :partial => "rate_details", :locals => {:rate_list => @did_prov_rates_f, :rtype => 'FD'} if @did_prov_rates_f and @did_prov_rates_f.size.to_i > 0 %>
+<br/> <br/>
 <%= _('DID_incoming_rate_explained') %>
 
-  <%= render :partial => "rate_details", :locals => {:rate_list => @did_incoming_rates_c, :rtype=>''} if @did_incoming_rates_c and @did_incoming_rates_c.size.to_i > 0 %>
-  <%= render :partial => "rate_details", :locals => {:rate_list => @did_incoming_rates_w, :rtype=>'WD'} if @did_incoming_rates_w and @did_incoming_rates_w.size.to_i > 0 %>
-  <%= render :partial => "rate_details", :locals => {:rate_list => @did_incoming_rates_f, :rtype=>'FD'} if @did_incoming_rates_f and @did_incoming_rates_f.size.to_i > 0 %>
-<br /> <br />
-  <%= _('DID_owner_rate_explained') %>
-  <%= render :partial => "rate_details", :locals => {:rate_list => @did_owner_rates_c, :rtype=>''} if @did_owner_rates_c and @did_owner_rates_c.size.to_i > 0 %>
-  <%= render :partial => "rate_details", :locals => {:rate_list => @did_owner_rates_w, :rtype=>'WD'} if @did_owner_rates_w and @did_owner_rates_w.size.to_i > 0 %>
-  <%= render :partial => "rate_details", :locals => {:rate_list => @did_owner_rates_f, :rtype=>'FD'} if @did_owner_rates_f and @did_owner_rates_f.size.to_i > 0 %>
+<%= render :partial => "rate_details", :locals => {:rate_list => @did_incoming_rates_c, :rtype => ''} if @did_incoming_rates_c and @did_incoming_rates_c.size.to_i > 0 %>
+<%= render :partial => "rate_details", :locals => {:rate_list => @did_incoming_rates_w, :rtype => 'WD'} if @did_incoming_rates_w and @did_incoming_rates_w.size.to_i > 0 %>
+<%= render :partial => "rate_details", :locals => {:rate_list => @did_incoming_rates_f, :rtype => 'FD'} if @did_incoming_rates_f and @did_incoming_rates_f.size.to_i > 0 %>
+<br/> <br/>
+<%= _('DID_owner_rate_explained') %>
+<%= render :partial => "rate_details", :locals => {:rate_list => @did_owner_rates_c, :rtype => ''} if @did_owner_rates_c and @did_owner_rates_c.size.to_i > 0 %>
+<%= render :partial => "rate_details", :locals => {:rate_list => @did_owner_rates_w, :rtype => 'WD'} if @did_owner_rates_w and @did_owner_rates_w.size.to_i > 0 %>
+<%= render :partial => "rate_details", :locals => {:rate_list => @did_owner_rates_f, :rtype => 'FD'} if @did_owner_rates_f and @did_owner_rates_f.size.to_i > 0 %>
 

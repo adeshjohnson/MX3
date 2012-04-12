@@ -1,11 +1,11 @@
 <table class="simple">
-  <%if params[:action] != 'personal_details'%>
-    <tr>
-      <td> <%= _('Generate_Invoice') %>: </td>
-      <td></td>
-      <td><%= check_box_tag "user[generate_invoice]", "1", @user.generate_invoice.to_i == 1, {:id => "user_generate_invoice"} %></td>
-    </tr>
-  <%end%>
+  <% if params[:action] != 'personal_details' %>
+      <tr>
+        <td> <%= _('Generate_Invoice') %>:</td>
+        <td></td>
+        <td><%= check_box_tag "user[generate_invoice]", "1", @user.generate_invoice.to_i == 1, {:id => "user_generate_invoice"} %></td>
+      </tr>
+  <% end %>
   <tr>
     <td></td>
     <th><%= _('PDF') %></th>
@@ -17,32 +17,32 @@
     <td><%= check_box_tag :i2, "4", @i[1] == 4 %> </td>
   </tr>
   <tr>
-    <td><%=  _('Detailed') %>:</td>
-    <td><%= check_box_tag :i3, "8",@i[2] == 8 %></td>
-    <td><%= check_box_tag :i4, "16",@i[3] == 16 %></td>
+    <td><%= _('Detailed') %>:</td>
+    <td><%= check_box_tag :i3, "8", @i[2] == 8 %></td>
+    <td><%= check_box_tag :i4, "16", @i[3] == 16 %></td>
   </tr>
-  <% if @user.usertype != "reseller"%>
-    <tr>
-      <td><%= _('By_CallerID') %>:</td>
-      <td><%= check_box_tag :i5, "32" ,@i[4] == 32%></td>
-      <td><%= check_box_tag :i7, "128" ,@i[6] == 128%></td>
-    </tr>
-    <tr>
-      <td><%= _('By_destinations') %>:</td>
-      <td></td>
-      <td><%= check_box_tag :i6, "64" ,@i[5] == 64%></td>
-    </tr>
-    <tr>
-      <td><%= _('Calls') %>:</td>
-      <td></td>
-      <td><%= check_box_tag :i8, "256" ,@i[7] == 256%></td>
-    </tr>
+  <% if @user.usertype != "reseller" %>
+      <tr>
+        <td><%= _('By_CallerID') %>:</td>
+        <td><%= check_box_tag :i5, "32", @i[4] == 32 %></td>
+        <td><%= check_box_tag :i7, "128", @i[6] == 128 %></td>
+      </tr>
+      <tr>
+        <td><%= _('By_destinations') %>:</td>
+        <td></td>
+        <td><%= check_box_tag :i6, "64", @i[5] == 64 %></td>
+      </tr>
+      <tr>
+        <td><%= _('Calls') %>:</td>
+        <td></td>
+        <td><%= check_box_tag :i8, "256", @i[7] == 256 %></td>
+      </tr>
   <% end %>
-  <%if params[:action] != 'personal_details'%>
-    <tr>
-      <td><%= _('Show_zero_calls') %>:</td>
-      <td></td>
-      <td><%= check_box_tag 'show_zero_calls', "1" ,@user.invoice_zero_calls.to_i == 1%> </td>
-    </tr>
-  <%end%>
+  <% if params[:action] != 'personal_details' %>
+      <tr>
+        <td><%= _('Show_zero_calls') %>:</td>
+        <td></td>
+        <td><%= check_box_tag 'show_zero_calls', "1", @user.invoice_zero_calls.to_i == 1 %> </td>
+      </tr>
+  <% end %>
 </table>

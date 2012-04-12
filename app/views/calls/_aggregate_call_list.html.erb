@@ -1,134 +1,137 @@
-<table class = "maintable" width="100%">
+<table class="maintable" width="100%">
   <% if (@options[:customer_orig_show] == 1 or @options[:customer_term_show] == 1 or
-        @options[:price_orig_show] == 1 or @options[:price_term_show] == 1 or @options[:billed_time_orig_show] == 1 or @options[:billed_time_term_show] == 1)
-    h_rows = 2
-  else
-    h_rows = 1
-  end %>
+          @options[:price_orig_show] == 1 or @options[:price_term_show] == 1 or @options[:billed_time_orig_show] == 1 or @options[:billed_time_term_show] == 1)
+       h_rows = 2
+     else
+       h_rows = 1
+     end %>
 
   <!-- UPPER LINE OF HEADER -->
   <tr>
     <% if @options[:destination_show].to_i == 1 %>
-      <% if @options[:destination_grouping].to_i == 1 %>
-        <th id="prefix" align="left" rowspan="<%= h_rows %>" nowrap> <%= ordered_list_header("destinations.name","destination","Prefix", @options) %> </th>
-      <% else %>
-        <th id="direction" align="left" rowspan="<%= h_rows %>" nowrap> <%= ordered_list_header("destinations.direction_code","direction","Direction", @options) %> </th>
-      <% end %>
+        <% if @options[:destination_grouping].to_i == 1 %>
+            <th id="prefix" align="left" rowspan="<%= h_rows %>" nowrap> <%= ordered_list_header("destinations.name", "destination", "Prefix", @options) %> </th>
+        <% else %>
+            <th id="direction" align="left" rowspan="<%= h_rows %>" nowrap> <%= ordered_list_header("destinations.direction_code", "direction", "Direction", @options) %> </th>
+        <% end %>
     <% end %>
 
     <% if @options[:customer_orig_show] == 1 or @options[:customer_term_show] == 1 %>
-      <th id="customer" align="center" colspan="<%= @options[:customer_orig_show] + @options[:customer_term_show] %>" style="white-space:nowrap;"><%= _("Customer")%></th>
+        <th id="customer" align="center" colspan="<%= @options[:customer_orig_show] + @options[:customer_term_show] %>" style="white-space:nowrap;"><%= _("Customer") %></th>
     <% end %>
 
     <% if can_see_finances? %>
-      <% if @options[:price_orig_show] == 1 or @options[:price_term_show] == 1 %>
-        <th id="billed" align="center" colspan="<%= @options[:price_orig_show] + @options[:price_term_show] %>" style="white-space:nowrap;"><%= _("Billed")%></th>
-      <% end %>
+        <% if @options[:price_orig_show] == 1 or @options[:price_term_show] == 1 %>
+            <th id="billed" align="center" colspan="<%= @options[:price_orig_show] + @options[:price_term_show] %>" style="white-space:nowrap;"><%= _("Billed") %></th>
+        <% end %>
     <% end %>
 
     <% if @options[:billed_time_orig_show] == 1 or @options[:billed_time_term_show] == 1 %>
-      <th id="billed_duration" align="center" colspan="<%= @options[:price_orig_show].to_i + @options[:price_term_show].to_i %>" style="white-space:nowrap;"><%= _("Billed_Duration")%></th>
+        <th id="billed_duration" align="center" colspan="<%= @options[:price_orig_show].to_i + @options[:price_term_show].to_i %>" style="white-space:nowrap;"><%= _("Billed_Duration") %></th>
     <% end %>
-    <th id="duration" align="center" rowspan="<%= h_rows %>" style="white-space:nowrap;"> <%= ordered_list_header("duration","duration","Duration", @options) %> </th>
-    <th id="answered_calls" align="right"  rowspan="<%= h_rows %>" style="white-space:nowrap;"> <%= ordered_list_header("answered_calls","answered_calls","Answered_calls", @options) %> </th>
-    <th id="total_calls" align="right"  rowspan="<%= h_rows %>" style="white-space:nowrap;"> <%= ordered_list_header("total_calls","total_calls","Total_calls", @options) %> </th>
-    <th id="asr" align="right"  rowspan="<%= h_rows %>" style="white-space:nowrap;"> <%= ordered_list_header("asr","asr","ASR", @options) %> %</th>
-    <th id="acd" align="center" rowspan="<%= h_rows %>" style="white-space:nowrap;"> <%= ordered_list_header("acd","acd","ACD", @options) %></th>
+    <th id="duration" align="center" rowspan="<%= h_rows %>" style="white-space:nowrap;"> <%= ordered_list_header("duration", "duration", "Duration", @options) %> </th>
+    <th id="answered_calls" align="right" rowspan="<%= h_rows %>" style="white-space:nowrap;"> <%= ordered_list_header("answered_calls", "answered_calls", "Answered_calls", @options) %> </th>
+    <th id="total_calls" align="right" rowspan="<%= h_rows %>" style="white-space:nowrap;"> <%= ordered_list_header("total_calls", "total_calls", "Total_calls", @options) %> </th>
+    <th id="asr" align="right" rowspan="<%= h_rows %>" style="white-space:nowrap;"> <%= ordered_list_header("asr", "asr", "ASR", @options) %>
+      %
+    </th>
+    <th id="acd" align="center" rowspan="<%= h_rows %>" style="white-space:nowrap;"> <%= ordered_list_header("acd", "acd", "ACD", @options) %></th>
   </tr>
   <!-- LOWER LINE OF HEADER -->
   <% if h_rows == 2 -%>
-    <tr>
-      <% if @options[:customer_orig_show].to_i == 1 -%>
-        <th id="customer_orig" align="left" style="white-space:nowrap;"> <%= ordered_list_header("nice_user","customer_orig","Originator", @options) %> </th>
-      <% end -%>
-      <% if @options[:customer_term_show].to_i == 1 -%>
-        <th id="customer_term" align="left" style="white-space:nowrap;"> <%= ordered_list_header("terminators.name","customer_term","Terminator", @options) %> </th>
-      <% end -%>
-      <% if can_see_finances? -%>
-        <% if  @options[:price_orig_show].to_i == 1 -%>
-          <th id="billed_orig" align="right" style="white-space:nowrap;"> <%= ordered_list_header("originating_billed","billed_orig","Originator", @options) %> </th>
+      <tr>
+        <% if @options[:customer_orig_show].to_i == 1 -%>
+            <th id="customer_orig" align="left" style="white-space:nowrap;"> <%= ordered_list_header("nice_user", "customer_orig", "Originator", @options) %> </th>
         <% end -%>
-        <% if @options[:price_term_show].to_i == 1 -%>
-          <th id="billed_term" align="right" style="white-space:nowrap;"> <%= ordered_list_header("terminating_billed","billed_term","Terminator", @options) %> </th>
+        <% if @options[:customer_term_show].to_i == 1 -%>
+            <th id="customer_term" align="left" style="white-space:nowrap;"> <%= ordered_list_header("terminators.name", "customer_term", "Terminator", @options) %> </th>
         <% end -%>
-      <% end -%>
-      <% if @options[:billed_time_orig_show].to_i == 1 -%>
-        <th id="billsec_orig" align="center" style="white-space:nowrap;"> <%= ordered_list_header("originating_billsec","billsec_orig","Originator", @options) %> </th>
-      <% end -%>
-      <% if @options[:billed_time_term_show].to_i == 1 -%>
-        <th id="billsec_term" align="center" style="white-space:nowrap;"> <%= ordered_list_header("terminating_billsec","billsec_term","Terminator", @options) %> </th>
-      <% end -%>
-    </tr>
+        <% if can_see_finances? -%>
+            <% if  @options[:price_orig_show].to_i == 1 -%>
+                <th id="billed_orig" align="right" style="white-space:nowrap;"> <%= ordered_list_header("originating_billed", "billed_orig", "Originator", @options) %> </th>
+            <% end -%>
+            <% if @options[:price_term_show].to_i == 1 -%>
+                <th id="billed_term" align="right" style="white-space:nowrap;"> <%= ordered_list_header("terminating_billed", "billed_term", "Terminator", @options) %> </th>
+            <% end -%>
+        <% end -%>
+        <% if @options[:billed_time_orig_show].to_i == 1 -%>
+            <th id="billsec_orig" align="center" style="white-space:nowrap;"> <%= ordered_list_header("originating_billsec", "billsec_orig", "Originator", @options) %> </th>
+        <% end -%>
+        <% if @options[:billed_time_term_show].to_i == 1 -%>
+            <th id="billsec_term" align="center" style="white-space:nowrap;"> <%= ordered_list_header("terminating_billsec", "billsec_term", "Terminator", @options) %> </th>
+        <% end -%>
+      </tr>
   <% end %>
   <!-- TABLE DATA -->
   <% dir_cache = {} -%>
   <% term_cache = {} -%>
-  <% @result.each_with_index {  |row, i| %>
-    <% direction = dir_cache["d#{row.code}".to_sym] ||= Direction.find(:first, :conditions => ["directions.code = ?", row.code]) -%>
-    <% terminator = term_cache["t#{row.terminator_id}".to_sym] ||= Terminator.find(:first, :conditions => ["terminators.id = ?", row.terminator_id]) -%>
-    <tr class="row<%= (i % 2 + 1).to_s %>">
-      <% if @options[:destination_show].to_i == 1 -%>
-        <% if @options[:destination_grouping].to_i == 1 %>
-          <td align="left" id="dir_name_<%=i%>"><%= h(direction.name) if direction %> <%= h(row.subcode) %> <%= h(row.dest_name) %> <%= "("+row.prefix.to_s + ")"%></td>
-        <% else %>
-          <td align="left" id="dir_name_<%=i%>"><%= h(direction.name) if direction %> <%= h(row.subcode) %> <% "("+row.prefix.to_s + ")"%></td>
-        <% end %>
-      <% end -%>
-      <% if @options[:customer_orig_show].to_i == 1 -%>
-        <td align="left" id="customer_orig_<%=i%>"><%= h(nice_user_from_data(row.username, row.first_name, row.last_name)) %></td>
-      <% end -%>
-      <% if @options[:customer_term_show].to_i == 1 -%>
-        <td align="left" id="customer_term_<%=i%>"><%= h(terminator.name) if terminator %></td>
-      <% end -%>
-      <% if can_see_finances? -%>
-        <% if @options[:price_orig_show].to_i == 1 -%>
-          <td align="right" id="price_orig_<%=i%>"><%= nice_number(row.originating_billed) %> <%= current_user.currency.name%></td>
+  <% @result.each_with_index { |row, i| %>
+      <% direction = dir_cache["d#{row.code}".to_sym] ||= Direction.find(:first, :conditions => ["directions.code = ?", row.code]) -%>
+      <% terminator = term_cache["t#{row.terminator_id}".to_sym] ||= Terminator.find(:first, :conditions => ["terminators.id = ?", row.terminator_id]) -%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <% if @options[:destination_show].to_i == 1 -%>
+            <% if @options[:destination_grouping].to_i == 1 %>
+                <td align="left" id="dir_name_<%= i %>"><%= h(direction.name) if direction %> <%= h(row.subcode) %> <%= h(row.dest_name) %> <%= "("+row.prefix.to_s + ")" %></td>
+            <% else %>
+                <td align="left" id="dir_name_<%= i %>"><%= h(direction.name) if direction %> <%= h(row.subcode) %>
+                  <% "("+row.prefix.to_s + ")" %></td>
+            <% end %>
         <% end -%>
-        <% if @options[:price_term_show].to_i == 1 -%>
-          <td align="right" id="price_term_<%=i%>"><%= nice_number(row.terminating_billed) %> <%= current_user.currency.name%></td>
+        <% if @options[:customer_orig_show].to_i == 1 -%>
+            <td align="left" id="customer_orig_<%= i %>"><%= h(nice_user_from_data(row.username, row.first_name, row.last_name)) %></td>
         <% end -%>
-      <% end -%>
+        <% if @options[:customer_term_show].to_i == 1 -%>
+            <td align="left" id="customer_term_<%= i %>"><%= h(terminator.name) if terminator %></td>
+        <% end -%>
+        <% if can_see_finances? -%>
+            <% if @options[:price_orig_show].to_i == 1 -%>
+                <td align="right" id="price_orig_<%= i %>"><%= nice_number(row.originating_billed) %> <%= current_user.currency.name %></td>
+            <% end -%>
+            <% if @options[:price_term_show].to_i == 1 -%>
+                <td align="right" id="price_term_<%= i %>"><%= nice_number(row.terminating_billed) %> <%= current_user.currency.name %></td>
+            <% end -%>
+        <% end -%>
 
-      <% if @options[:billed_time_orig_show].to_i == 1 -%>
-        <td align="center" id="billed_time_orig_<%=i%>"><%= nice_time(row.originating_billsec) %></td>
-      <% end -%>
-      <% if @options[:billed_time_term_show].to_i == 1 -%>
-        <td align="center" id="billed_time_term_<%=i%>"><%= nice_time(row.terminating_billsec) %></td>
-      <% end -%>
-      <td align="center" id="duration_<%=i%>"><%= nice_time(row.duration) %></td>
-      <td align="right" id="answered_calls_<%=i%>"><%= row.answered_calls %></td>
-      <td align="right" id="total_calls_<%=i%>"><%= row.total_calls %></td>
-      <td align="right" id="asr_<%=i%>"><%= nice_number(row.asr) %> %</td>
-      <td align="center" id="acd_<%=i%>"><%= nice_time(row.acd) %></td>
-    </tr>
+        <% if @options[:billed_time_orig_show].to_i == 1 -%>
+            <td align="center" id="billed_time_orig_<%= i %>"><%= nice_time(row.originating_billsec) %></td>
+        <% end -%>
+        <% if @options[:billed_time_term_show].to_i == 1 -%>
+            <td align="center" id="billed_time_term_<%= i %>"><%= nice_time(row.terminating_billsec) %></td>
+        <% end -%>
+        <td align="center" id="duration_<%= i %>"><%= nice_time(row.duration) %></td>
+        <td align="right" id="answered_calls_<%= i %>"><%= row.answered_calls %></td>
+        <td align="right" id="total_calls_<%= i %>"><%= row.total_calls %></td>
+        <td align="right" id="asr_<%= i %>"><%= nice_number(row.asr) %> %</td>
+        <td align="center" id="acd_<%= i %>"><%= nice_time(row.acd) %></td>
+      </tr>
   <% } -%>
   <!-- TOTAL LINE -->
   <tr>
     <% if @options[:destination_show].to_i == 1 -%>
-      <th><%= _("Total")%>:</th>
+        <th><%= _("Total") %>:</th>
     <% end -%>
     <% if @options[:customer_orig_show].to_i == 1 -%>
-      <th id="total_customer_orig" align="center"></th>
+        <th id="total_customer_orig" align="center"></th>
     <% end -%>
     <% if @options[:customer_term_show].to_i == 1 -%>
-      <th id="total_customer_term" align="center"></th>
+        <th id="total_customer_term" align="center"></th>
     <% end -%>
     <% if can_see_finances? -%>
-      <% if  @options[:price_orig_show].to_i == 1 -%>
-        <th id="total_billed_orig" align="right"><%= nice_number(@total[:billed_orig]) %> <%= current_user.currency.name%></th>
-      <% end -%>
-      <% if @options[:price_term_show].to_i == 1 -%>
-        <th id="total_billed_term" align="right"><%= nice_number(@total[:billed_term]) %> <%= current_user.currency.name%></th>
-      <% end -%>
+        <% if  @options[:price_orig_show].to_i == 1 -%>
+            <th id="total_billed_orig" align="right"><%= nice_number(@total[:billed_orig]) %> <%= current_user.currency.name %></th>
+        <% end -%>
+        <% if @options[:price_term_show].to_i == 1 -%>
+            <th id="total_billed_term" align="right"><%= nice_number(@total[:billed_term]) %> <%= current_user.currency.name %></th>
+        <% end -%>
     <% end -%>
 
     <% if @options[:billed_time_orig_show].to_i == 1 -%>
-      <th id="total_billsec_orig" align="center"><%= nice_time(@total[:billsec_orig]) %></th>
+        <th id="total_billsec_orig" align="center"><%= nice_time(@total[:billsec_orig]) %></th>
     <% end -%>
     <% if @options[:billed_time_term_show].to_i == 1 -%>
-      <th id="total_billsec_term" align="center"><%= nice_time(@total[:billsec_term]) %></th>
+        <th id="total_billsec_term" align="center"><%= nice_time(@total[:billsec_term]) %></th>
     <% end -%>
-    <th id="total_duration" align="center" ><%= nice_time(@total[:duration])  %></th>
+    <th id="total_duration" align="center"><%= nice_time(@total[:duration]) %></th>
     <th id="total_answ_calls" align="right"><%= @total[:answered_calls] %></th>
     <th id="total_calls" align="right"><%= @total[:total_calls] %></th>
     <th id="total_ast" align="right"><%= nice_number(@total[:asr]) %> %</th>

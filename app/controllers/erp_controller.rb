@@ -3,7 +3,7 @@ class ErpController < ApplicationController
 
   layout "callc"
 
-  before_filter :check_post_method, :only=>[:settings_update]
+  before_filter :check_post_method, :only => [:settings_update]
   before_filter :check_localization
   before_filter :authorize
   before_filter :check_erp

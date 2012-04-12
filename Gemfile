@@ -11,7 +11,7 @@ gem 'mysql2'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -22,7 +22,7 @@ end
 
 gem 'jquery-rails'
 
-gem 'prototype-rails'#, :git => 'git://github.com/rubychan/prototype-rails.git'
+gem 'prototype-rails' #, :git => 'git://github.com/rubychan/prototype-rails.git'
 #gem 'prototype_legacy_helper', '0.0.0', :git => 'git://github.com/rails/prototype_legacy_helper.git'
 
 # To use ActiveModel has_secure_password

@@ -1,4 +1,4 @@
-<table width="100%" class="maintable" >
+<table width="100%" class="maintable">
   <tr>
     <th align="center"> <%= _('Date') %></th>
     <th align="right"> <%= _('Calls') %></th>
@@ -6,91 +6,103 @@
     <th align="center"> <%= _('ACD') %></th>
     <th align="right"> <%= _('ASR') %></th>
     <th align="right"> <%= _('Fail') %></th>
-    <th align="right"> <%= _('Fail') %> % </th>
+    <th align="right"> <%= _('Fail') %> %</th>
     <% if can_see_finances? -%>
-      <th align="right"> <%= _('Price') %>  </th>
-      <th align="right"> <%= _('Provider_price') %> </th>
-      <th align="right"> <%= _('Profit') %>  </th>
-      <th align="right"> <%= _('Margin') %> % </th>
-      <th align="right"> <%= _('Markup') %> % </th>
+        <th align="right"> <%= _('Price') %>  </th>
+        <th align="right"> <%= _('Provider_price') %> </th>
+        <th align="right"> <%= _('Profit') %>  </th>
+        <th align="right"> <%= _('Margin') %> %</th>
+        <th align="right"> <%= _('Markup') %> %</th>
     <% end %>
   </tr>
-  <%if @res != [] %>
-    <% @res.each_with_index{ |res, i|%>
-      <tr class="row<%= (i % 2 + 1).to_s %>">
-        <td align="center"> <%= nice_date(res['year'].to_s + '-' + res['month'].to_s + '-' + res['day'].to_s, 0) %></td>
-        <td align="right"> <%= res['calls'] %> </td>
-        <td align="center"> <%=  nice_time(res['duration']) %></td>
-        <%if res['duration'].to_i > 0 and @directions != 'Incoming'%>
-          <td align="center"> <%= res['calls'].to_f != res['fail'].to_f ? nice_time(((res['duration'].to_f / (res['calls'].to_f - res['fail'].to_f))).to_i) : 0 %></td>
-          <td align="right"> <%= nice_number(((res['calls'].to_f - res['fail'].to_f) / res['calls'].to_f) * 100)%> %</td>
-        <%else%>
-          <td align="right" ><%= nice_time(0)%>  </td>
-          <td align="right" ><%= nice_number(0)%> % </td>
-        <%end%>
-        <td align="right"> <%= res['fail'] %></td>
-        <td align="right"> <%= nice_number((res['fail'].to_f / res['calls'].to_f) *100) %><%= "%" %></td>
+  <% if @res != [] %>
+      <% @res.each_with_index { |res, i| %>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <td align="center"> <%= nice_date(res['year'].to_s + '-' + res['month'].to_s + '-' + res['day'].to_s, 0) %></td>
+            <td align="right"> <%= res['calls'] %> </td>
+            <td align="center"> <%= nice_time(res['duration']) %></td>
+            <% if res['duration'].to_i > 0 and @directions != 'Incoming' %>
+                <td align="center"> <%= res['calls'].to_f != res['fail'].to_f ? nice_time(((res['duration'].to_f / (res['calls'].to_f - res['fail'].to_f))).to_i) : 0 %></td>
+                <td align="right"> <%= nice_number(((res['calls'].to_f - res['fail'].to_f) / res['calls'].to_f) * 100) %>
+                  %
+                </td>
+            <% else %>
+                <td align="right"><%= nice_time(0) %>  </td>
+                <td align="right"><%= nice_number(0) %> %</td>
+            <% end %>
+            <td align="right"> <%= res['fail'] %></td>
+            <td align="right"> <%= nice_number((res['fail'].to_f / res['calls'].to_f) *100) %><%= "%" %></td>
+            <% if can_see_finances? -%>
+                <td align="right"> <%= nice_number res['user_price'] %></td>
+                <% if session[:usertype] == 'admin' or session[:usertype] == 'accountant'
+                     buy_price = res['provider_price']
+                   else
+                     buy_price = res['reseller_price']
+                   end %>
+                <td align="right"> <%= nice_number buy_price %></td>
+                <td align="right"> <%= nice_number(res['user_price'].to_f - buy_price.to_f) %></td>
+
+                <% if res['duration'].to_i > 0 and @directions != 'Incoming' and res['user_price'].to_f != 0 -%>
+                    <td align="right"> <%= nice_number(((res['user_price'].to_f - buy_price.to_f)/ res['user_price'].to_f) *100) %>
+                      %
+                    </td>
+                <% else -%>
+                    <td align="right"><%= nice_number(0) %> %</td>
+                <% end -%>
+
+                <% if res['duration'].to_i > 0 and @directions != 'Incoming' and buy_price.to_f != 0 -%>
+                    <td align="right"> <%= nice_number(((res['user_price'].to_f / buy_price.to_f) *100)-100) %> %</td>
+                <% else -%>
+                    <td align="right"><%= nice_number(0) %> %</td>
+                <% end -%>
+            <% end -%>
+          </tr>
+      <% } %>
+      <%
+         total_calls = @res_total[0]['calls']
+         total_fail_calls =@res_total[0]['fail']
+         total_duration = @res_total[0]['duration']
+         total_user_price = @res_total[0]['user_price']
+         buy_price = ((admin? or accountant?) ? @res_total[0]['provider_price'] : @res_total[0]['reseller_price'])
+      %>
+      <tr>
+        <th align="left"> <%= _('Total') %>:</th>
+        <th id="total_calls" align="right"> <%= total_calls %></th>
+        <th id="total_duration" align="center"> <%= nice_time(total_duration) %></th>
+        <% if total_duration.to_i > 0 and @directions != 'Incoming' %>
+            <th id="total_acd" align="center"> <%= nice_time((total_duration.to_f / (total_calls.to_f - total_fail_calls.to_f))) if  total_calls.to_f - total_fail_calls.to_f != 0 %></th>
+            <th id="total_asr" align="right"> <%= nice_number(((total_calls.to_f - total_fail_calls.to_f) / total_calls.to_f) * 100) if total_calls.to_f != 0 %>
+              %
+            </th>
+        <% else %>
+            <th id="total_acd" align="right"><%= nice_number(0) %> </th>
+            <th id="total_asr" align="right"><%= nice_number(0) %> %</th>
+        <% end %>
+        <th id="total_failed" align="right"> <%= total_fail_calls %></th>
+        <th id="total_failed_percent" align="right"> <%= nice_number((total_fail_calls.to_f / total_calls.to_f) *100) if total_calls.to_f != 0 %>
+          %
+        </th>
         <% if can_see_finances? -%>
-          <td align="right"> <%= nice_number res['user_price'] %></td>
-          <%if session[:usertype] == 'admin' or session[:usertype] == 'accountant'
-            buy_price = res['provider_price']
-          else
-            buy_price = res['reseller_price']
-          end%>
-          <td align="right"> <%= nice_number buy_price %></td>
-          <td align="right"> <%= nice_number(res['user_price'].to_f - buy_price.to_f) %></td>
+            <th id="total_user_price" align="right"> <%= nice_number total_user_price %>  </th>
+            <th id="total_provider_price" align="right"> <%= nice_number buy_price %>  </th>
+            <th id="total_profit" align="right"> <%= nice_number(total_user_price.to_f - buy_price.to_f) %>  </th>
 
-          <%if res['duration'].to_i > 0 and @directions != 'Incoming' and res['user_price'].to_f != 0 -%>
-            <td align="right"> <%= nice_number(((res['user_price'].to_f - buy_price.to_f)/ res['user_price'].to_f) *100)%> % </td>
-          <% else -%>
-            <td align="right" ><%= nice_number(0)%> % </td>
-          <% end -%>
+            <% if total_duration.to_i > 0 and @directions != 'Incoming' and total_user_price.to_f != 0 -%>
+                <th id="total_margi" align="right"> <%= nice_number(((total_user_price.to_f - buy_price.to_f)/ total_user_price.to_f) *100) %>
+                  %
+                </th>
+            <% else -%>
+                <th id="total_margi" align="right"><%= nice_number(0) %> %</th>
+            <% end -%>
 
-          <%if res['duration'].to_i > 0 and @directions != 'Incoming' and  buy_price.to_f != 0 -%>
-            <td align="right"> <%= nice_number(((res['user_price'].to_f / buy_price.to_f) *100)-100)%> % </td>
-          <%else -%>
-            <td align="right" ><%= nice_number(0)%> % </td>
-          <%end -%>
-        <%end -%>
+            <% if total_duration.to_i > 0 and @directions != 'Incoming' and buy_price.to_f != 0 -%>
+                <th id="total_markup" align="right"> <%= nice_number(((total_user_price.to_f / buy_price.to_f) *100)-100) %>
+                  %
+                </th>
+            <% else -%>
+                <th id="total_markup" align="right"><%= nice_number(0) %> %</th>
+            <% end -%>
+        <% end -%>
       </tr>
-    <% } %>
-    <%
-    total_calls = @res_total[0]['calls']
-    total_fail_calls =@res_total[0]['fail']
-    total_duration = @res_total[0]['duration']
-    total_user_price = @res_total[0]['user_price']
-    buy_price = ((admin? or accountant?) ? @res_total[0]['provider_price'] : @res_total[0]['reseller_price'])
-    %>
-    <tr>
-      <th align="left"> <%= _('Total') %>: </th>
-      <th id="total_calls" align="right"> <%= total_calls %></th>
-      <th id="total_duration" align="center"> <%= nice_time(total_duration) %></th>
-      <% if total_duration.to_i > 0 and @directions != 'Incoming' %>
-        <th id="total_acd" align="center"> <%= nice_time((total_duration.to_f / (total_calls.to_f - total_fail_calls.to_f))) if  total_calls.to_f - total_fail_calls.to_f != 0%></th>
-        <th id="total_asr" align="right"> <%= nice_number(((total_calls.to_f - total_fail_calls.to_f) / total_calls.to_f) * 100) if total_calls.to_f != 0 %>% </th>
-      <% else %>
-        <th id="total_acd" align="right" ><%= nice_number(0)%> </th>
-        <th id="total_asr" align="right" ><%= nice_number(0)%> % </th>
-      <% end %>
-      <th id="total_failed" align="right"> <%= total_fail_calls %></th>
-      <th id="total_failed_percent" align="right"> <%= nice_number((total_fail_calls.to_f / total_calls.to_f) *100) if total_calls.to_f != 0 %> % </th>
-      <% if can_see_finances? -%>
-        <th id="total_user_price" align="right"> <%= nice_number total_user_price %>  </th>
-        <th id="total_provider_price" align="right"> <%= nice_number buy_price %>  </th>
-        <th id="total_profit" align="right"> <%= nice_number(total_user_price.to_f - buy_price.to_f) %>  </th>
-
-        <% if total_duration.to_i > 0 and @directions != 'Incoming' and total_user_price.to_f != 0 -%>
-          <th id="total_margi" align="right"> <%= nice_number(((total_user_price.to_f - buy_price.to_f)/ total_user_price.to_f) *100) %> % </th>
-        <% else -%>
-          <th id="total_margi" align="right" ><%= nice_number(0)%> % </th>
-        <% end -%>
-
-        <% if total_duration.to_i > 0 and @directions != 'Incoming' and buy_price.to_f != 0 -%>
-          <th id="total_markup" align="right"> <%= nice_number(((total_user_price.to_f / buy_price.to_f) *100)-100) %> % </th>
-        <% else -%>
-          <th id="total_markup" align="right" ><%= nice_number(0)%> % </th>
-        <% end -%>
-      <% end -%>
-    </tr>
   <% end %>
 </table>

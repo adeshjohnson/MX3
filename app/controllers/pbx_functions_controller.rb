@@ -3,10 +3,10 @@ class PbxFunctionsController < ApplicationController
 
   require "yaml"
   layout "callc"
-  before_filter :check_post_method, :only=>[:destroy, :create, :update, :set_allow]
+  before_filter :check_post_method, :only => [:destroy, :create, :update, :set_allow]
   before_filter :check_localization
   before_filter :authorize
-  before_filter :find_pbx_function, :only=>[:edit, :update, :set_allow]
+  before_filter :find_pbx_function, :only => [:edit, :update, :set_allow]
 
 
   def list
@@ -45,10 +45,10 @@ class PbxFunctionsController < ApplicationController
   private
 
   def find_pbx_function
-    @pbx_function = Pbxfunction.find(:first, :conditions=>{:id=>params[:id]})
+    @pbx_function = Pbxfunction.find(:first, :conditions => {:id => params[:id]})
     unless @pbx_function
       flash[:notice] = _('Pbx_functions_was_not_found')
-      redirect_to :controller=>"pbx_functions", :action => 'pbx_functions' and return false
+      redirect_to :controller => "pbx_functions", :action => 'pbx_functions' and return false
     end
   end
 end

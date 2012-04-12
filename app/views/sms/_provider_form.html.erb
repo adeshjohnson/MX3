@@ -3,190 +3,199 @@
 <table style="width:50%;">
   <tr>
     <td valign="top">
-      <table class="simple" style="width:100%;" >
+      <table class="simple" style="width:100%;">
         <tr>
           <td colspan="2" class="bottom_border">
             <b><%= _('General') %></b>
           </td>
         </tr>
-        <tr><td style="height:10px;"></td></tr>
         <tr>
-          <td> <%= _('Name') %>:   </td>
+          <td style="height:10px;"></td>
+        </tr>
+        <tr>
+          <td> <%= _('Name') %>:</td>
           <td><%= text_field 'provider', 'name', "class" => "input" %> </td>
         </tr>
-        <tr><td style="height:5px;"></td></tr>
         <tr>
-          <td> <%= _('Tariff') %>:  </td>
-          <td><%= collection_select("provider", "sms_tariff_id" , @tariffs, "id", "name") %> </td>
+          <td style="height:5px;"></td>
         </tr>
         <tr>
-          <td> <%= _('Provider_type') %>:  </td>
+          <td> <%= _('Tariff') %>:</td>
+          <td><%= collection_select("provider", "sms_tariff_id", @tariffs, "id", "name") %> </td>
+        </tr>
+        <tr>
+          <td> <%= _('Provider_type') %>:</td>
           <td><select id='prov_type' name="provider[provider_type]" <%= "onchange=\"Disab(this.value);\"" %> >
-              <option value="sms_email" <%='selected' if @provider.provider_type.to_s == 'sms_email'%>  ><%= _('sms_email') %></option>
-              <option value="clickatell" <%='selected' if @provider.provider_type.to_s == 'clickatell'%> ><%= _('clickatell') %></option>
-              <%if mor_11_extend?%>
-                <option value="api" <%='selected' if @provider.provider_type.to_s == 'api'%> ><%= _('API') %></option>
-              <%end%>
-            </select>
+            <option value="sms_email" <%= 'selected' if @provider.provider_type.to_s == 'sms_email' %>  ><%= _('sms_email') %></option>
+            <option value="clickatell" <%= 'selected' if @provider.provider_type.to_s == 'clickatell' %> ><%= _('clickatell') %></option>
+            <% if mor_11_extend? %>
+                <option value="api" <%= 'selected' if @provider.provider_type.to_s == 'api' %> ><%= _('API') %></option>
+            <% end %>
+          </select>
           </td>
         </tr>
         <!--- EMAIL SMS  -->
         <tr id="e_sd">
-          <td> <%= _('Domain') %>:   </td>
-          <td> <%= text_field 'provider', 'sms_provider_domain', "class" => "input"   %></td>
+          <td> <%= _('Domain') %>:</td>
+          <td> <%= text_field 'provider', 'sms_provider_domain', "class" => "input" %></td>
         </tr>
         <tr id="e_us">
-          <td> <%= _('Use_subject') %>:   </td>
-          <% if @provider%>
-            <td>  <%= check_box_tag 'provider[use_subject]', value = "1", (checked = @provider.use_subject.to_i == 1) %></td>
-          <%else%>
-            <td>  <%= check_box_tag 'provider[use_subject]', value = "1" %></td>
-          <%end%>
+          <td> <%= _('Use_subject') %>:</td>
+          <% if @provider %>
+              <td>  <%= check_box_tag 'provider[use_subject]', value = "1", (checked = @provider.use_subject.to_i == 1) %></td>
+          <% else %>
+              <td>  <%= check_box_tag 'provider[use_subject]', value = "1" %></td>
+          <% end %>
         </tr>
         <!---<tr id="e_subject">
             <td> <%# _('Subject') %>:   </td>
             <td> <%# text_field 'provider', 'sms_subject', "class" => "input"   %></td>
          </tr>-->
         <tr id="e_wt">
-          <td> <%= _('Email_wait_time') %>:   </td>
-          <td> <%= text_field 'provider', 'sms_email_wait_time', "class" => "input"   %> min </td>
+          <td> <%= _('Email_wait_time') %>:</td>
+          <td> <%= text_field 'provider', 'sms_email_wait_time', "class" => "input" %> min</td>
         </tr>
         <tr id="e_wfge">
-          <td> <%= _('Wait_for_good_email') %>:   </td>
-          <% if @provider%>
-            <td>  <%= check_box_tag 'provider[wait_for_good_email]', value = "1", (checked = @provider.wait_for_good_email.to_i == 1) %></td>
-          <%else%>
-            <td>  <%= check_box_tag 'provider[wait_for_good_email]', value = "1" %></td>
-          <%end%>
+          <td> <%= _('Wait_for_good_email') %>:</td>
+          <% if @provider %>
+              <td>  <%= check_box_tag 'provider[wait_for_good_email]', value = "1", (checked = @provider.wait_for_good_email.to_i == 1) %></td>
+          <% else %>
+              <td>  <%= check_box_tag 'provider[wait_for_good_email]', value = "1" %></td>
+          <% end %>
         </tr>
         <tr id="e_egk">
-          <td> <%= _('Email_good_keywords') %>:   </td>
-          <td> <%= text_field 'provider', 'email_good_keywords', "class" => "input"   %></td>
+          <td> <%= _('Email_good_keywords') %>:</td>
+          <td> <%= text_field 'provider', 'email_good_keywords', "class" => "input" %></td>
         </tr>
         <tr id="e_wfbe">
-          <td> <%= _('Wait_for_bad_email') %>:   </td>
-          <% if @provider%>
-            <td>  <%= check_box_tag 'provider[wait_for_bad_email]', value = "1", (checked = @provider.wait_for_bad_email.to_i == 1) %></td>
-          <%else%>
-            <td>  <%= check_box_tag 'provider[wait_for_bad_email]', value = "1" %></td>
-          <%end%>
+          <td> <%= _('Wait_for_bad_email') %>:</td>
+          <% if @provider %>
+              <td>  <%= check_box_tag 'provider[wait_for_bad_email]', value = "1", (checked = @provider.wait_for_bad_email.to_i == 1) %></td>
+          <% else %>
+              <td>  <%= check_box_tag 'provider[wait_for_bad_email]', value = "1" %></td>
+          <% end %>
         </tr>
         <tr id="e_ebk">
-          <td> <%= _('Email_bad_keywords') %>:   </td>
-          <td> <%= text_field 'provider', 'email_bad_keywords', "class" => "input"   %></td>
+          <td> <%= _('Email_bad_keywords') %>:</td>
+          <td> <%= text_field 'provider', 'email_bad_keywords', "class" => "input" %></td>
         </tr>
         <tr id="e_tocu">
-          <td> <%= _('Time_out_charge_user') %>:   </td>
-          <% if @provider%>
-            <td>  <%= check_box_tag 'provider[time_out_charge_user]', value = "1", (checked = @provider.time_out_charge_user.to_i == 1) %></td>
-          <%else%>
-            <td>  <%= check_box_tag 'provider[time_out_charge_user]', value = "1" %></td>
-          <%end%>
+          <td> <%= _('Time_out_charge_user') %>:</td>
+          <% if @provider %>
+              <td>  <%= check_box_tag 'provider[time_out_charge_user]', value = "1", (checked = @provider.time_out_charge_user.to_i == 1) %></td>
+          <% else %>
+              <td>  <%= check_box_tag 'provider[time_out_charge_user]', value = "1" %></td>
+          <% end %>
         </tr>
         <tr id="e_nkcu">
-          <td> <%= _('Nan_keywords_charge_user') %>:   </td>
-          <% if @provider%>
-            <td>  <%= check_box_tag 'provider[nan_keywords_charge_user]', value = "1", (checked = @provider.nan_keywords_charge_user.to_i == 1) %></td>
-          <%else%>
-            <td>  <%= check_box_tag 'provider[nan_keywords_charge_user]', value = "1" %></td>
-          <%end%>
+          <td> <%= _('Nan_keywords_charge_user') %>:</td>
+          <% if @provider %>
+              <td>  <%= check_box_tag 'provider[nan_keywords_charge_user]', value = "1", (checked = @provider.nan_keywords_charge_user.to_i == 1) %></td>
+          <% else %>
+              <td>  <%= check_box_tag 'provider[nan_keywords_charge_user]', value = "1" %></td>
+          <% end %>
         </tr>
         <tr id="e_psr">
-          <td> <%= _('Pay_sms_receiver') %>:   </td>
-          <% if @provider%>
-            <td>  <%= check_box_tag 'provider[pay_sms_receiver]', value = "1", (checked = @provider.pay_sms_receiver.to_i == 1) %></td>
-          <%else%>
-            <td>  <%= check_box_tag 'provider[pay_sms_receiver]', value = "1" %></td>
-          <%end%>
+          <td> <%= _('Pay_sms_receiver') %>:</td>
+          <% if @provider %>
+              <td>  <%= check_box_tag 'provider[pay_sms_receiver]', value = "1", (checked = @provider.pay_sms_receiver.to_i == 1) %></td>
+          <% else %>
+              <td>  <%= check_box_tag 'provider[pay_sms_receiver]', value = "1" %></td>
+          <% end %>
         </tr>
         <!--- clickatell SMS  -->
         <tr id="c_login">
-          <td> <%= _('Login') %>:   </td>
-          <td> <%= text_field 'provider', 'login', "class" => "input"   %></td>
+          <td> <%= _('Login') %>:</td>
+          <td> <%= text_field 'provider', 'login', "class" => "input" %></td>
         </tr>
         <tr id="c_password">
-          <td> <%= _('Password') %>:   </td>
-          <td> <%= text_field 'provider', 'password', "class" => "input"   %></td>
+          <td> <%= _('Password') %>:</td>
+          <td> <%= text_field 'provider', 'password', "class" => "input" %></td>
         </tr>
         <tr id="c_ai">
-          <td> <%= _('Api_id') %>:   </td>
-          <td> <%= text_field 'provider', 'api_id', "class" => "input"   %></td>
+          <td> <%= _('Api_id') %>:</td>
+          <td> <%= text_field 'provider', 'api_id', "class" => "input" %></td>
         </tr>
         <tr id="c_from">
-          <td> <%= _('From') %>:   </td>
-          <td> <%= text_field 'provider', 'sms_from', "class" => "input"   %></td>
+          <td> <%= _('From') %>:</td>
+          <td> <%= text_field 'provider', 'sms_from', "class" => "input" %></td>
         </tr>
-        <%if mor_11_extend?%>
-          <tr id="a_expl">
-            <td> <%= _('Allowed_variables') %>:   </td>
-            <td> &lt%= DST %&gt - <%=_('destination')%> <br/>  &lt%= MSG %&gt - <%=_('message')%> <br/> 
-                 &lt%= USRFIRSTNAME %&gt - <%=_('User_first_name')%> <br/> &lt%= USRLASTNAME %&gt - <%=_('User_last_name')%> <br/> &lt%= CALLERID %&gt - <%=_('User_primary_device_caller_id')%> <br/>
-            <%=_('Example')%> :  http://url?user=username&password=userpassword&api_id=ID&to=&lt%= DST %&gt&src=&lt%= CALLERID %&gt&text=&lt%= MSG %&gt&from_name=&lt%= USRLASTNAME %&gt </td>
-          </tr>
-          <tr id="a_api">
-            <td> <%= _('API_string') %>:   </td>
-            <td> <%= text_field_tag 'api_string', @api_string.to_s, "class" => "input", :size=>150, :maxlenght=>249   %></td>
-          </tr>
-          <tr id="a_egk">
-          <td <%= tooltip(_('Explanation'), _('Checks_SMS_providers_response_for_Good_keywords_If_found_sms_will_be_charged'))%>> <%= _('Good_keywords') %>:   </td>
-          <td> <%= text_field_tag 'api_good_keywords', @api_keywords.to_s, "class" => "input"   %></td>
-        </tr>
-        <%end%>
+        <% if mor_11_extend? %>
+            <tr id="a_expl">
+              <td> <%= _('Allowed_variables') %>:</td>
+              <td> &lt%= DST %&gt - <%= _('destination') %> <br/> &lt%= MSG %&gt - <%= _('message') %> <br/>
+                &lt%= USRFIRSTNAME %&gt - <%= _('User_first_name') %> <br/> &lt%= USRLASTNAME %&gt
+                - <%= _('User_last_name') %> <br/> &lt%= CALLERID %&gt - <%= _('User_primary_device_caller_id') %> <br/>
+                <%= _('Example') %> : http://url?user=username&password=userpassword&api_id=ID&to=&lt%= DST
+                %&gt&src=&lt%= CALLERID %&gt&text=&lt%= MSG %&gt&from_name=&lt%= USRLASTNAME %&gt
+              </td>
+            </tr>
+            <tr id="a_api">
+              <td> <%= _('API_string') %>:</td>
+              <td> <%= text_field_tag 'api_string', @api_string.to_s, "class" => "input", :size => 150, :maxlenght => 249 %></td>
+            </tr>
+            <tr id="a_egk">
+              <td <%= tooltip(_('Explanation'), _('Checks_SMS_providers_response_for_Good_keywords_If_found_sms_will_be_charged')) %>> <%= _('Good_keywords') %>
+                :
+              </td>
+              <td> <%= text_field_tag 'api_good_keywords', @api_keywords.to_s, "class" => "input" %></td>
+            </tr>
+        <% end %>
       </table>
     </td>
   </tr>
 </table>
 
 <script type="text/javascript">
-  function Disab(val) {
-  $('c_from').style.display = 'none';
-  $('c_ai').style.display = 'none';
-  $('c_password').style.display = 'none';
-  $('c_login').style.display = 'none';
-  $('e_psr').style.display = 'none';
-  $('e_nkcu').style.display = 'none';
-  $('e_tocu').style.display = 'none';
-  $('e_ebk').style.display = 'none';
-  $('e_wfbe').style.display = 'none';
-  $('e_egk').style.display = 'none';
-  $('e_wfge').style.display = 'none';
-  $('e_wt').style.display = 'none';
-  $('e_us').style.display = 'none';
-  $('e_sd').style.display = 'none';
-  <%if mor_11_extend?%>
-  $('a_api').style.display = 'none';
-  $('a_expl').style.display = 'none';
-  $('a_egk').style.display = 'none';
-  <%end%>
-  if(val=="sms_email") {
-  $('e_psr').style.display = '';
-  $('e_nkcu').style.display = '';
-  $('e_tocu').style.display = '';
-  $('e_ebk').style.display = '';
-  $('e_wfbe').style.display = '';
-  $('e_egk').style.display = '';
-  $('e_wfge').style.display = '';
-  $('e_wt').style.display = '';
-  $('e_us').style.display = '';
-  $('e_sd').style.display = '';
-  }
-  if(val=='clickatell') {
-  $('c_from').style.display = '';
-  $('c_ai').style.display = '';
-  $('c_password').style.display = '';
-  $('c_login').style.display = '';
-  }
-  <%if mor_11_extend?%>
-    if(val=='api') {
-    $('a_api').style.display = '';
-    $('a_expl').style.display = '';
-    $('a_egk').style.display = '';
+    function Disab(val) {
+        $('c_from').style.display = 'none';
+        $('c_ai').style.display = 'none';
+        $('c_password').style.display = 'none';
+        $('c_login').style.display = 'none';
+        $('e_psr').style.display = 'none';
+        $('e_nkcu').style.display = 'none';
+        $('e_tocu').style.display = 'none';
+        $('e_ebk').style.display = 'none';
+        $('e_wfbe').style.display = 'none';
+        $('e_egk').style.display = 'none';
+        $('e_wfge').style.display = 'none';
+        $('e_wt').style.display = 'none';
+        $('e_us').style.display = 'none';
+        $('e_sd').style.display = 'none';
+    <%if mor_11_extend?%>
+        $('a_api').style.display = 'none';
+        $('a_expl').style.display = 'none';
+        $('a_egk').style.display = 'none';
+    <%end%>
+        if (val == "sms_email") {
+            $('e_psr').style.display = '';
+            $('e_nkcu').style.display = '';
+            $('e_tocu').style.display = '';
+            $('e_ebk').style.display = '';
+            $('e_wfbe').style.display = '';
+            $('e_egk').style.display = '';
+            $('e_wfge').style.display = '';
+            $('e_wt').style.display = '';
+            $('e_us').style.display = '';
+            $('e_sd').style.display = '';
+        }
+        if (val == 'clickatell') {
+            $('c_from').style.display = '';
+            $('c_ai').style.display = '';
+            $('c_password').style.display = '';
+            $('c_login').style.display = '';
+        }
+    <%if mor_11_extend?%>
+        if (val == 'api') {
+            $('a_api').style.display = '';
+            $('a_expl').style.display = '';
+            $('a_egk').style.display = '';
+        }
+    <%end%>
     }
-  <%end%>
-  }
-  Disab('<%= params[:action] == "provider_new" ? "sms_email"  : @provider.provider_type.to_s %>')
+    Disab('<%= params[:action] == "provider_new" ? "sms_email"  : @provider.provider_type.to_s %>')
 </script>
-<br />
+<br/>
 
 
 <!--[eoform:provider]-->

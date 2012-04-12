@@ -41,28 +41,28 @@ module ActiveMerchant #:nodoc:
         #    <% service.cancel_return_url 'http://mystore.com' %>
         #  <% end %>
         #
-        def payment_service_for(order, account, options = {}, &proc)          
+        def payment_service_for(order, account, options = {}, &proc)
           raise ArgumentError, "Missing block" unless block_given?
 
           integration_module = ActiveMerchant::Billing::Integrations.const_get(options.delete(:service).to_s.classify)
 
           concat(form_tag(integration_module.service_url, options.delete(:html) || {}), proc.binding)
           result = "\n"
-          
+
           service_class = integration_module.const_get('Helper')
           service = service_class.new(order, account, options)
           yield service
-          
+
           result << service.form_fields.collect do |field, value|
             hidden_field_tag(field, value)
           end.join("\n")
 
           result << "\n"
-          result << '</form>' 
+          result << '</form>'
 
           concat(result, proc.binding)
         end
-        
+
         private
         def ignore_binding?
           ActionPack::VERSION::MAJOR >= 2 && ActionPack::VERSION::MINOR >= 2

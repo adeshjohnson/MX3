@@ -1,51 +1,53 @@
 <script type="text/javascript">
-function addField(field,area) {
-	if(!document.getElementById) return;
+    function addField(field, area) {
+        if (!document.getElementById) return;
         var field_area = document.getElementById(area);
-	var all_inputs = field_area.getElementsByTagName("li");
-	var last_item = all_inputs.length - 1;
-	var last = all_inputs[last_item].id;
-	var count = Number(last.split("_")[1]) + 1;
+        var all_inputs = field_area.getElementsByTagName("li");
+        var last_item = all_inputs.length - 1;
+        var last = all_inputs[last_item].id;
+        var count = Number(last.split("_")[1]) + 1;
 
-	if(document.createElement) {
-		var li = document.createElement("li");
-                li.id = "lii_"+count
-                li.innerHTML+='<%=_('Field_name')%>:';
-		var input = document.createElement("input");
-		input.id = field+count;
-		input.name = field+count;
-		input.type = "text";
-		input.setAttribute('onkeyup', 'changeName(this.id)');
-                li.appendChild(input);
-                li.innerHTML+='<%=_('Field_value')%>:';
-                var input2 = document.createElement("input");
-                input2.id = 'n_'+field+count;
-		input2.name = field+count;
-		input2.type = "text";
-                li.appendChild(input2);
-		field_area.appendChild(li);
-	} else {
-		field_area.innerHTML += "<li id='lii_"+(count)+"' ><%=_('Field_name')%>:<input name='"+(field+count)+"' id='"+(field+count)+"' type='text' onkeyup='changeName(this.id)'/><%=_('Field_value')%>:<input name='n_"+(field+count)+"' id='n_"+(field+count)+"' type='text' /></li>";
-	}
-}
+        if (document.createElement) {
+            var li = document.createElement("li");
+            li.id = "lii_" + count
+            li.innerHTML += '<%=_('Field_name')%>:';
+            var input = document.createElement("input");
+            input.id = field + count;
+            input.name = field + count;
+            input.type = "text";
+            input.setAttribute('onkeyup', 'changeName(this.id)');
+            li.appendChild(input);
+            li.innerHTML += '<%=_('Field_value')%>:';
+            var input2 = document.createElement("input");
+            input2.id = 'n_' + field + count;
+            input2.name = field + count;
+            input2.type = "text";
+            li.appendChild(input2);
+            field_area.appendChild(li);
+        } else {
+            field_area.innerHTML += "<li id='lii_" + (count) + "' ><%=_('Field_name')%>:<input name='" + (field + count) + "' id='" + (field + count) + "' type='text' onkeyup='changeName(this.id)'/><%=_('Field_value')%>:<input name='n_" + (field + count) + "' id='n_" + (field + count) + "' type='text' /></li>";
+        }
+    }
 
 
 </script>
 
 <%= form_tag(@data) do %>
-  <ol id="my_fields">
-    <li id='lii_1'><%=_('Field_name')%>:<input id="c_1" type="text" name="c_1" value="" onkeyup="changeName(this.id)" /><%=_('Field_value')%>:<input id="n_c_1" type="text" name="c_1" value="" /></li>
-  </ol>
-  <input type="button" value="<%=_('Add_Field')%>" onclick="addField('c_','my_fields');" />
-  <br />
-  <br />
-  <%= submit_tag _('Fake'), :disable_with=>_('Processing..') %>
+    <ol id="my_fields">
+      <li id='lii_1'><%= _('Field_name') %>
+        :<input id="c_1" type="text" name="c_1" value="" onkeyup="changeName(this.id)"/><%= _('Field_value') %>
+        :<input id="n_c_1" type="text" name="c_1" value=""/></li>
+    </ol>
+    <input type="button" value="<%= _('Add_Field') %>" onclick="addField('c_','my_fields');"/>
+    <br/>
+    <br/>
+    <%= submit_tag _('Fake'), :disable_with => _('Processing..') %>
 <% end %>
 
 <script type="text/javascript">
-  function changeName(Nam) {
-    var myTextField = document.getElementById(Nam);
-    var myName = document.getElementById('n_'+Nam);
-    myName.name = myTextField.value;
-  }
+    function changeName(Nam) {
+        var myTextField = document.getElementById(Nam);
+        var myName = document.getElementById('n_' + Nam);
+        myName.name = myTextField.value;
+    }
 </script>

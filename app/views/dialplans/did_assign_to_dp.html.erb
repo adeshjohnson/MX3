@@ -1,34 +1,36 @@
 <% dids = @dp.dids %>
-<div <%= @ringgroup.to_i == 0  ? "style='font-size:11px;padding:3px;border:1px solid #D4D0C8;width: 40%;background-color:##{dids.size.to_i > 0 ? 'F7F7F7' : 'E81818'};'" : 'class="ringgroup_items" style="padding-left:4px;"'%>  >
-  <%if dids.size.to_i > 0%>
-    <% for did in dids  %>
-      <%= link_to did.did, :controller=>:dids, :action => "edit", :id => did.id %><br />
-    <% end %>
-  <%else%>
-    <%= link_to b_warning + _('Assign_DID'), {:controller=>:dids, :action =>:list}, :id=>"dp_not_assign_#{@dp.id}"%>
-  <%end%>
+<div <%= @ringgroup.to_i == 0 ? "style='font-size:11px;padding:3px;border:1px solid #D4D0C8;width: 40%;background-color:##{dids.size.to_i > 0 ? 'F7F7F7' : 'E81818'};'" : 'class="ringgroup_items" style="padding-left:4px;"' %>  >
+  <% if dids.size.to_i > 0 %>
+      <% for did in dids %>
+          <%= link_to did.did, :controller => :dids, :action => "edit", :id => did.id %>
+          <br/>
+      <% end %>
+  <% else %>
+      <%= link_to b_warning + _('Assign_DID'), {:controller => :dids, :action => :list}, :id => "dp_not_assign_#{@dp.id}" %>
+  <% end %>
 </div>
 <div style="margin-top:2px;">
-  <b ><%=link_to_function(b_add + _('Add_new_DID'), "Element.toggle('add_new_did')")%></b>
+  <b><%= link_to_function(b_add + _('Add_new_DID'), "Element.toggle('add_new_did')") %></b>
+
   <div id="add_new_did" style="display:none; margin-top:2px;padding-left:4px;" <%= 'class="ringgroup_items"' if @ringgroup.to_i == 1 %> >
     <% if @free_dids and @free_dids.size.to_i > 0 %>
-    <% if @ringgroup.to_i == 0 %>
-      <b><%= _('DID') %>:</b>
-      <%else%>
-      <%= _('DID') %>:
-      <%end%>
-      <select name="did_id" id="did_id">
-        <% for d in @free_dids %>
-          <option value=<%= d.id %>> <%= d.did %> </option>
+        <% if @ringgroup.to_i == 0 %>
+            <b><%= _('DID') %>:</b>
+        <% else %>
+            <%= _('DID') %>:
         <% end %>
-      </select>
-      <%if @ringgroup.to_i == 0%>
-        <%= image_tag 'icons/check.png', :title => _('Assign') , :id=>"assign_to_dp_callback", :onclick =>"new Ajax.Updater('new_ajax_did', '#{Web_Dir}/dialplans/did_assign_to_dp?id=#{@dp.id}&did_id=' + document.getElementById('did_id').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});Delete_did_options();" if callback_active?%>
-      <%else%>
-        <span onclick="new Ajax.Updater('new_ajax_did', '<%=Web_Dir%>/dialplans/did_assign_to_dp?id=<%=@dp.id%>&ringgroup=1&did_id=' + document.getElementById('did_id').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');Update_dids();}, onLoading:function(request){Element.show('spinner');}});Delete_did_options()" ><%=b_add%> <%=_('Add_this_DID')%></span>
-      <%end%>
-    <%else%>
-      <%=_('No_Dids_aviable_to_add')%>
+        <select name="did_id" id="did_id">
+          <% for d in @free_dids %>
+              <option value=<%= d.id %>> <%= d.did %> </option>
+          <% end %>
+        </select>
+        <% if @ringgroup.to_i == 0 %>
+            <%= image_tag 'icons/check.png', :title => _('Assign'), :id => "assign_to_dp_callback", :onclick => "new Ajax.Updater('new_ajax_did', '#{Web_Dir}/dialplans/did_assign_to_dp?id=#{@dp.id}&did_id=' + document.getElementById('did_id').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});Delete_did_options();" if callback_active? %>
+        <% else %>
+            <span onclick="new Ajax.Updater('new_ajax_did', '<%=Web_Dir%>/dialplans/did_assign_to_dp?id=<%=@dp.id%>&ringgroup=1&did_id=' + document.getElementById('did_id').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');Update_dids();}, onLoading:function(request){Element.show('spinner');}});Delete_did_options()"><%= b_add %> <%= _('Add_this_DID') %></span>
+        <% end %>
+    <% else %>
+        <%= _('No_Dids_aviable_to_add') %>
     <% end %>
   </div>
 </div>

@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-module Cyberplat 
+module Cyberplat
   module Helpers
 
 
@@ -11,7 +11,7 @@ module Cyberplat
       # last resort for empty names just to allow Cyberplat payments (ok, that's nasty hack)
       firstName = "John" if firstName.to_s.length < 4
       lastName = "Lock" if lastName.to_s.length < 4
-   
+
       message = ''
       params = {
       }.merge(options)
@@ -31,7 +31,7 @@ module Cyberplat
       message += "&Currency="+currency.to_s
       message += "&FirstName="+firstName.to_s
       message += "&LastName="+lastName.to_s
-      message += "&Email="+email.to_s      
+      message += "&Email="+email.to_s
       message += "&ShopIP="+shopIP.to_s
       message += "&return_url="+return_url.to_s
       message += "&Language="+lang
@@ -39,13 +39,13 @@ module Cyberplat
       message += "&CardType="+params[:cardtype].to_s if params[:cardtype]
       message += "&Registered="+params[:registred] if params[:registred]
       checker_tmp = Confline.get_value("Cyberplat_Temporary_Directory", 0)
-      File.open("#{checker_tmp}/message.txt", 'w') {|f| f.write(message) }
-      
+      File.open("#{checker_tmp}/message.txt", 'w') { |f| f.write(message) }
+
       system("#{Actual_Dir}/lib/cyberplat/checker.exe -s -f #{Actual_Dir}/lib/cyberplat/checker.ini #{checker_tmp}/message2.txt < #{checker_tmp}/message.txt")
       msg = ""
       File.open("#{checker_tmp}/message2.txt", "r") do |infile|
         while (line = infile.gets)
-          msg +=line 
+          msg +=line
         end
       end
       Confline.my_debug(msg)
@@ -58,6 +58,6 @@ module Cyberplat
         button << tag(:input, :type => 'hidden', :name => 'message', :value => msg)
       end.join("\n")
     end
-    
+
   end
 end

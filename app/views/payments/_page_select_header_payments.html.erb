@@ -1,52 +1,52 @@
 <div align="center">
 
-<%
-    pstart = @page - 10
-    pstart = 1 if pstart < 1
-    
-    pend = @page + 10
-    pend = @total_pages if pend > @total_pages
+  <%
+     pstart = @page - 10
+     pstart = 1 if pstart < 1
 
-    back10 = @page - 20
-    if back10 <= 0
-        back10 = 1 if pstart > 1
-        back10 = nil if pstart == 1
-    end
-    
-    forw10 = @page + 20
-    if forw10 > @total_pages
-        forw10 = @total_pages if pend < @total_pages
-        forw10 = nil if pend == @total_pages
-    end
+     pend = @page + 10
+     pend = @total_pages if pend > @total_pages
 
-    back100 = @page - 100
-    if back100 < 0
-        back100 = 1 if back10 > 1 if back10
-        back100 = nil if back10.to_i <= 1 or not back10
-    end
-    
-    forw100 = @page + 100
-    if forw100 > @total_pages
-        forw100 = @total_pages if forw10 < @total_pages if forw10
-        forw100 = nil if forw10 == @total_pages or not forw10
-    end
+     back10 = @page - 20
+     if back10 <= 0
+       back10 = 1 if pstart > 1
+       back10 = nil if pstart == 1
+     end
 
-%>
+     forw10 = @page + 20
+     if forw10 > @total_pages
+       forw10 = @total_pages if pend < @total_pages
+       forw10 = nil if pend == @total_pages
+     end
 
-<table class='page_title2' width="100%">
+     back100 = @page - 100
+     if back100 < 0
+       back100 = 1 if back10 > 1 if back10
+       back100 = nil if back10.to_i <= 1 or not back10
+     end
+
+     forw100 = @page + 100
+     if forw100 > @total_pages
+       forw100 = @total_pages if forw10 < @total_pages if forw10
+       forw100 = nil if forw10 == @total_pages or not forw10
+     end
+
+  %>
+
+  <table class='page_title2' width="100%">
     <tr>
-        <td align = "center" id="page_<%=@page%>">
-            <%= link_to("<<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back100, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr}, {:title => "-100"}) if back100 %>
-            <%= link_to("<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back10, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr}, {:title => "-20"}) if back10 %>
-            <% for p in pstart..pend %>
-                <%=raw  "<b>" if p == @page%>
-                    <%= link_to p, :action => params[:action], :id => @page_select_header_id, :st => @st, :page => p, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr%>
-                <%=raw "</b>" if p == @page%>
-            <% end %>
-            <%= link_to(">", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw10, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr}, {:title => "+20"}) if forw10 %>
-            <%= link_to(">>", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw100, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr}, {:title => "+100"}) if forw100 %>
-        </td>
+      <td align="center" id="page_<%= @page %>">
+        <%= link_to("<<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back100, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr}, {:title => "-100"}) if back100 %>
+        <%= link_to("<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back10, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr}, {:title => "-20"}) if back10 %>
+        <% for p in pstart..pend %>
+            <%= raw "<b>" if p == @page %>
+            <%= link_to p, :action => params[:action], :id => @page_select_header_id, :st => @st, :page => p, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr %>
+            <%= raw "</b>" if p == @page %>
+        <% end %>
+        <%= link_to(">", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw10, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr}, {:title => "+20"}) if forw10 %>
+        <%= link_to(">>", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw100, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr}, {:title => "+100"}) if forw100 %>
+      </td>
     </tr>
-</table>
+  </table>
 
 </div>

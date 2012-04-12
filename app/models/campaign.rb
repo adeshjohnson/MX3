@@ -16,7 +16,7 @@ class Campaign < ActiveRecord::Base
         errors.add(:device, _("Device_not_found"))
         return false
       end
-      if User.current.usertype == 'reseller' and device and !Device.find(:first, :joins=>"LEFT JOIN users ON (devices.user_id = users.id)", :conditions=>"devices.id = #{device.id} and (users.owner_id = #{User.current.id} or users.id = #{User.current.id})")
+      if User.current.usertype == 'reseller' and device and !Device.find(:first, :joins => "LEFT JOIN users ON (devices.user_id = users.id)", :conditions => "devices.id = #{device.id} and (users.owner_id = #{User.current.id} or users.id = #{User.current.id})")
         errors.add(:device, _("Device_not_found"))
         return false
       end
@@ -40,15 +40,15 @@ class Campaign < ActiveRecord::Base
   end
 
   def new_numbers_count
-    Adnumber.count_by_sql "SELECT COUNT(adnumbers.id) FROM adnumbers WHERE adnumbers.campaign_id = '#{self.id}' AND status = 'new'"    
+    Adnumber.count_by_sql "SELECT COUNT(adnumbers.id) FROM adnumbers WHERE adnumbers.campaign_id = '#{self.id}' AND status = 'new'"
   end
 
   def executed_numbers_count
-    Adnumber.count_by_sql "SELECT COUNT(adnumbers.id) FROM adnumbers WHERE adnumbers.campaign_id = '#{self.id}' AND status = 'executed'"    
+    Adnumber.count_by_sql "SELECT COUNT(adnumbers.id) FROM adnumbers WHERE adnumbers.campaign_id = '#{self.id}' AND status = 'executed'"
   end
 
   def completed_numbers_count
-    Adnumber.count_by_sql "SELECT COUNT(adnumbers.id) FROM adnumbers WHERE adnumbers.campaign_id = '#{self.id}' AND status = 'completed'"    
+    Adnumber.count_by_sql "SELECT COUNT(adnumbers.id) FROM adnumbers WHERE adnumbers.campaign_id = '#{self.id}' AND status = 'completed'"
   end
 
   def completed_numbers_user_billsec
@@ -82,12 +82,12 @@ class Campaign < ActiveRecord::Base
   def final_path
     path = Confline.get_value("Temp_Dir")
     final_path = Confline.get_value('AD_Sounds_Folder')
-   
+
     if final_path.to_s == ""
       final_path = "/home/mor/public/ad_sounds"
     end
 
-     MorLog.my_debug "final_path:" + final_path.to_s
+    MorLog.my_debug "final_path:" + final_path.to_s
 
     return path, final_path
   end

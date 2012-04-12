@@ -1,89 +1,89 @@
 <b><%= b_user + _('User') %>:</b> <%= link_nice_user(@user) %><br/>
-<b><%= b_device + _('Device') %>:</b> <%= link_nice_device(@device)  %><br/><br/><br/>
+<b><%= b_device + _('Device') %>:</b> <%= link_nice_device(@device) %><br/><br/><br/>
 
 <%= form_tag :action => 'cli_device_add', :device_id => @device.id do %>
-  <table class="maintable" width="100%">
-    <tr>
-      <th align="left"><%= _('CLI') %></th>
-      <th align="left"><%= _('Description') %></th>
-      <% if @clis.size != 0%>
-        <th align="center"><%= _('Added_at') %></th>
-        <th align="center"><%= _('Updated_at') %></th>
-      <% end %>
-      <%  if session[:usertype].to_s == 'admin' or (accountant_can_write?("cli_ivr") or accountant_can_read?("cli_ivr")) %>
-        <th align="left"><%= _('Ivr') %></th>
-      <%end%>
-      <% if callback_active? %>
-        <th align="center"><%= _('Use_for_Email_Callback') %></th>
-      <%end%>
-      <th align="center"><%= _('Banned') %></th>
-      <th align="left"><%= _('Comment') %></th>
-      <th></th>
-      <th></th>
-    </tr>
-
-    <% @clis.each_with_index {|cli, i| %>
-      <tr class="row<%= (i % 2 + 1).to_s %>">
-        <td id="cli_<%=cli.id%>"><%= cli.cli %></td>
-        <td id="description_<%=cli.id%>"><%= cli.description %></td>
-        <td align="center" id="added_<%=cli.id%>"><%= nice_date_time cli.added_at %></td>
-        <td align="center" id="updated_<%=cli.id%>"><%= nice_date_time cli.updated_at %></td>
-        <%if session[:usertype].to_s == 'admin' or accountant_can_write?("cli_ivr") or accountant_can_read?("cli_ivr")%>
-          <td align="left" id="ivr_<%=cli.id%>"><%=  cli.ivr_name %></td>
-        <%end%>
-          <% if callback_active? %>
-        <td align="center" id="calback_<%=cli.id%>">
-          <%= link_to( b_check, {:action => 'change_email_callback_status_device', :id => cli.id, :email_callback => 0, :device_id => @device.id }, :confirm => _('Are_you_sure'), :method => :post) if cli.email_callback == 1 %>
-          <%= link_to( b_cross, {:action => 'change_email_callback_status_device', :id => cli.id, :email_callback => 1, :device_id => @device.id }, :confirm => _('Are_you_sure'), :method => :post) if cli.email_callback == 0 %>
-        </td>
-        <%end%>
-        <td align="center" id="banned_<%=cli.id%>"><%= cli.banned == 1 ? b_check : b_cross%></td>
-        <td align="left" id="comment_<%=cli.id%>"><%=  cli.comment %></td>
-        <td align="center" id="edit_<%=cli.id%>"><%= link_to b_edit, :action => 'cli_device_edit', :id => cli.id %></td>
-        <td align="center" id="delete_<%=cli.id%>"><%= link_to( b_delete, {:action => 'cli_device_delete', :id => cli.id }, :confirm => _('Are_you_sure'), :method => :post) %></td>
+    <table class="maintable" width="100%">
+      <tr>
+        <th align="left"><%= _('CLI') %></th>
+        <th align="left"><%= _('Description') %></th>
+        <% if @clis.size != 0 %>
+            <th align="center"><%= _('Added_at') %></th>
+            <th align="center"><%= _('Updated_at') %></th>
+        <% end %>
+        <% if session[:usertype].to_s == 'admin' or (accountant_can_write?("cli_ivr") or accountant_can_read?("cli_ivr")) %>
+            <th align="left"><%= _('Ivr') %></th>
+        <% end %>
+        <% if callback_active? %>
+            <th align="center"><%= _('Use_for_Email_Callback') %></th>
+        <% end %>
+        <th align="center"><%= _('Banned') %></th>
+        <th align="left"><%= _('Comment') %></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% } %>
+
+      <% @clis.each_with_index { |cli, i| %>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <td id="cli_<%= cli.id %>"><%= cli.cli %></td>
+            <td id="description_<%= cli.id %>"><%= cli.description %></td>
+            <td align="center" id="added_<%= cli.id %>"><%= nice_date_time cli.added_at %></td>
+            <td align="center" id="updated_<%= cli.id %>"><%= nice_date_time cli.updated_at %></td>
+            <% if session[:usertype].to_s == 'admin' or accountant_can_write?("cli_ivr") or accountant_can_read?("cli_ivr") %>
+                <td align="left" id="ivr_<%= cli.id %>"><%= cli.ivr_name %></td>
+            <% end %>
+            <% if callback_active? %>
+                <td align="center" id="calback_<%= cli.id %>">
+                  <%= link_to(b_check, {:action => 'change_email_callback_status_device', :id => cli.id, :email_callback => 0, :device_id => @device.id}, :confirm => _('Are_you_sure'), :method => :post) if cli.email_callback == 1 %>
+                  <%= link_to(b_cross, {:action => 'change_email_callback_status_device', :id => cli.id, :email_callback => 1, :device_id => @device.id}, :confirm => _('Are_you_sure'), :method => :post) if cli.email_callback == 0 %>
+                </td>
+            <% end %>
+            <td align="center" id="banned_<%= cli.id %>"><%= cli.banned == 1 ? b_check : b_cross %></td>
+            <td align="left" id="comment_<%= cli.id %>"><%= cli.comment %></td>
+            <td align="center" id="edit_<%= cli.id %>"><%= link_to b_edit, :action => 'cli_device_edit', :id => cli.id %></td>
+            <td align="center" id="delete_<%= cli.id %>"><%= link_to(b_delete, {:action => 'cli_device_delete', :id => cli.id}, :confirm => _('Are_you_sure'), :method => :post) %></td>
+          </tr>
+      <% } %>
 
 
-    <tr>
-      <th align="left"><%= text_field_tag 'cli', "", "class" => "input", :size => "20", :maxlength => "20"  %></th>
-      <th align="left"><%= text_field_tag 'description', "", "class" => "input", :size => "30", :maxlength => "30"  %></th>
-      <% if @clis.size != 0%>
-        <th align="left"></th>
-        <th>
-        </th>
-      <% end %>
-      <%if session[:usertype].to_s == 'admin' or accountant_can_write?("cli_ivr") %>
-        <th>
-          <select name="ivr"  >
-            <option value="0" <%= "selected" %>><%= _('Not_assigned')%> </option>
-            <%for iv in @all_ivrs%>
-              <option value="<%= iv.id %>" <%= "selected" if iv.id.to_i == Confline.get_value("Banned_CLIs_default_IVR_id", 0).to_i %> ><%= iv.name %> </option>
-            <%end%>
-          </select>
-        </th>
-      <% end %>
-      <% if session[:usertype].to_s == 'admin' %>
-        <% if callback_active?%>
-        <th>
-          <select name="email_callback"  >
-            <option value="0" ><%= _('Not_use_for_email_callback')%> </option>
-            <option value="1"><%= _('Use_for_email_callback')%> </option>
-          </select>
-        </th>
-        <%end%>
-        <th>
-          <select name="banned"  >
-            <option value="0" ><%= _('Not_banned')%> </option>
-            <option value="1"><%= _('Banned')%> </option>
-          </select>
-        </th>
-      <%else%>
-        <th></th>
-        <th></th>
-      <%end%>
-      <th align="left"><%= text_field_tag 'comment', "", "class" => "input"  %></th>
-      <th align="center" colspan=2><%= image_submit_tag 'icons/add.png', :title => _('Add') %></th>
-    </tr>
-  </table>
+      <tr>
+        <th align="left"><%= text_field_tag 'cli', "", "class" => "input", :size => "20", :maxlength => "20" %></th>
+        <th align="left"><%= text_field_tag 'description', "", "class" => "input", :size => "30", :maxlength => "30" %></th>
+        <% if @clis.size != 0 %>
+            <th align="left"></th>
+            <th>
+            </th>
+        <% end %>
+        <% if session[:usertype].to_s == 'admin' or accountant_can_write?("cli_ivr") %>
+            <th>
+              <select name="ivr">
+                <option value="0" <%= "selected" %>><%= _('Not_assigned') %> </option>
+                <% for iv in @all_ivrs %>
+                    <option value="<%= iv.id %>" <%= "selected" if iv.id.to_i == Confline.get_value("Banned_CLIs_default_IVR_id", 0).to_i %> ><%= iv.name %> </option>
+                <% end %>
+              </select>
+            </th>
+        <% end %>
+        <% if session[:usertype].to_s == 'admin' %>
+            <% if callback_active? %>
+                <th>
+                  <select name="email_callback">
+                    <option value="0"><%= _('Not_use_for_email_callback') %> </option>
+                    <option value="1"><%= _('Use_for_email_callback') %> </option>
+                  </select>
+                </th>
+            <% end %>
+            <th>
+              <select name="banned">
+                <option value="0"><%= _('Not_banned') %> </option>
+                <option value="1"><%= _('Banned') %> </option>
+              </select>
+            </th>
+        <% else %>
+            <th></th>
+            <th></th>
+        <% end %>
+        <th align="left"><%= text_field_tag 'comment', "", "class" => "input" %></th>
+        <th align="center" colspan=2><%= image_submit_tag 'icons/add.png', :title => _('Add') %></th>
+      </tr>
+    </table>
 <% end %>

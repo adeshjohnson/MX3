@@ -9,10 +9,10 @@ module WebMoney
 
     def webmoney_setup(payment_id, amount, purse, options = {})
       params = {
-        :item_name => 'Balance update',
-        :no_shipping => '1',
-        :no_note => '1',
-        :currency => session[:default_currency]
+          :item_name => 'Balance update',
+          :no_shipping => '1',
+          :no_note => '1',
+          :currency => session[:default_currency]
       }.merge(options)
 
       # We accept both, strings and money objects as amount

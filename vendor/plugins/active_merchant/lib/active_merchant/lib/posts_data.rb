@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 module ActiveMerchant #:nodoc:
-  module PostsData  #:nodoc:
+  module PostsData #:nodoc:
 
     def self.included(base)
       base.superclass_delegating_accessor :ssl_strict
@@ -32,13 +32,13 @@ module ActiveMerchant #:nodoc:
       connection = Connection.new(endpoint)
       connection.open_timeout = open_timeout
       connection.read_timeout = read_timeout
-      connection.retry_safe   = retry_safe
-      connection.verify_peer  = ssl_strict
-      connection.logger       = logger
-      connection.tag          = self.class.name
+      connection.retry_safe = retry_safe
+      connection.verify_peer = ssl_strict
+      connection.logger = logger
+      connection.tag = self.class.name
       connection.wiredump_device = wiredump_device
 
-      connection.pem          = @options[:pem] if @options
+      connection.pem = @options[:pem] if @options
       connection.pem_password = @options[:pem_password] if @options
 
       connection.request(method, data, headers)

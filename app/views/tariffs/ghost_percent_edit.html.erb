@@ -1,23 +1,24 @@
-<b><%= b_view + _('Tariff') %>:</b> <%= link_to @tariff.name, :action => "rates_list", :id => @tariff.id, :st => @destination.direction.name[0,1] %>
+<b><%= b_view + _('Tariff') %>
+  :</b> <%= link_to @tariff.name, :action => "rates_list", :id => @tariff.id, :st => @destination.direction.name[0, 1] %>
 <br/>
-<b><%= b_currency + _('Currency') %>:</b> <%=  @tariff.currency %>
+<b><%= b_currency + _('Currency') %>:</b> <%= @tariff.currency %>
 <br/><br/>
 <%= draw_flag @destination.direction.code %> <%= @destination.direction.name %>
 <%= @destination.prefix %> <%= @destination.subcode %>
 <br/><br/>
 
 <%= form_tag(:action => :ghost_percent_update, :id => @tariff.id, :rate_id => @rate.id) do %>
-  <table class="simple">
-    <tr>
-      <%if mor_11_extend?%>
-        <td><%= _('Ghost_percent') %> :</td>
-        <td id="ghost_percent"><%= text_field 'rate', 'ghost_min_perc', :size => "7", "class" => "input" %> %</td>
-      <%end%> 
-    </tr>
-  </table>
-  <br /><br />
-  <%= submit_tag(_('Update'), :disable_with=>_('Processing..')) %>
-<%end%>
-  
-<br /><br />
+    <table class="simple">
+      <tr>
+        <% if mor_11_extend? %>
+            <td><%= _('Ghost_percent') %> :</td>
+            <td id="ghost_percent"><%= text_field 'rate', 'ghost_min_perc', :size => "7", "class" => "input" %> %</td>
+        <% end %>
+      </tr>
+    </table>
+    <br/><br/>
+    <%= submit_tag(_('Update'), :disable_with => _('Processing..')) %>
+<% end %>
+
+<br/><br/>
 

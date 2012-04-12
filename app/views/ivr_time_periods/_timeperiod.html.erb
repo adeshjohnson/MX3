@@ -1,20 +1,20 @@
-<b><%= _("Name") %>:</b> <%= text_field 'period', 'name', "class" => "input" , :size => "30", :maxlength => "255" %>
-<br />
-<br />
-<table class = "maintable">
+<b><%= _("Name") %>:</b> <%= text_field 'period', 'name', "class" => "input", :size => "30", :maxlength => "255" %>
+<br/>
+<br/>
+<table class="maintable">
   <tr>
     <th></th>
     <th><%= _("Date") %></th>
     <th><%= _("Weekday") %></th>
-    <th><%=  _("Hour") %> : <%= _("Minute") %></th>
+    <th><%= _("Hour") %> : <%= _("Minute") %></th>
   </tr>
   <tr>
     <td><%= _("Start_Time") %>:</td>
-    <% d = nil  %>
-    
+    <% d = nil %>
+
     <td>
-      <%= select_month((@period and @period.start_month.to_i != 0) ? @period.start_month.to_i : nil ,:prefix => "period", :field_name => "start_month", :include_blank => true)%>
-      <%= select_day((@period and @period.start_day.to_i != 0) ? @period.start_day.to_i : nil, :prefix => "period", :field_name => "start_day", :include_blank => true)%>  
+      <%= select_month((@period and @period.start_month.to_i != 0) ? @period.start_month.to_i : nil, :prefix => "period", :field_name => "start_month", :include_blank => true) %>
+      <%= select_day((@period and @period.start_day.to_i != 0) ? @period.start_day.to_i : nil, :prefix => "period", :field_name => "start_day", :include_blank => true) %>
     </td>
 
     <td><select name="period[start_weekday]">
@@ -27,17 +27,18 @@
       <option value="sat" <%= "selected" if @period and @period.start_weekday.to_s == 'sat' %>><%= _("Saturday") %></option>
       <option value="sun" <%= "selected" if @period and @period.start_weekday.to_s == 'sun' %>><%= _("Sunday") %></option>
     </select></td>
-    <td><%= select_hour(@period ? @period.start_hour : nil, :prefix => "period", :field_name => "start_hour")%> : <%= select_minute(@period ? @period.start_minute : nil, :prefix => "period", :field_name => "start_minute")%></td>
+    <td><%= select_hour(@period ? @period.start_hour : nil, :prefix => "period", :field_name => "start_hour") %>
+      : <%= select_minute(@period ? @period.start_minute : nil, :prefix => "period", :field_name => "start_minute") %></td>
   </tr>
 
   <tr>
     <td><%= _("End_Time") %>:</td>
-<% #MorLog.my_debug(@end_date.to_s) %>
-<% #MorLog.my_debug("#{@end_date['year']}-#{@end_date['month']}-#{@end_date['day']}") %>
-    <% d = nil  %>
+    <% #MorLog.my_debug(@end_date.to_s)  %>
+    <% #MorLog.my_debug("#{@end_date['year']}-#{@end_date['month']}-#{@end_date['day']}")  %>
+    <% d = nil %>
     <td>
-      <%= select_month((@period and @period.end_month.to_i != 0) ? @period.end_month.to_i : nil ,:prefix => "period", :field_name => "end_month", :include_blank => true)%>
-      <%= select_day((@period and @period.end_day.to_i != 0) ? @period.end_day.to_i : nil, :prefix => "period", :field_name => "end_day", :include_blank => true)%>
+      <%= select_month((@period and @period.end_month.to_i != 0) ? @period.end_month.to_i : nil, :prefix => "period", :field_name => "end_month", :include_blank => true) %>
+      <%= select_day((@period and @period.end_day.to_i != 0) ? @period.end_day.to_i : nil, :prefix => "period", :field_name => "end_day", :include_blank => true) %>
     </td>
     <td><select name="period[end_weekday]">
       <option value="0"></option>
@@ -49,8 +50,9 @@
       <option value="sat" <%= "selected" if @period and @period.end_weekday.to_s == 'sat' %> ><%= _("Saturday") %></option>
       <option value="sun" <%= "selected" if @period and @period.end_weekday.to_s == 'sun' %> ><%= _("Sunday") %></option>
     </select></td>
-    <td><%= select_hour(@period ? @period.end_hour : 23, :prefix => "period", :field_name => "end_hour")%> : <%= select_minute(@period ? @period.end_minute : 59, :prefix => "period", :field_name => "end_minute")%></tr>
+    <td><%= select_hour(@period ? @period.end_hour : 23, :prefix => "period", :field_name => "end_hour") %>
+      : <%= select_minute(@period ? @period.end_minute : 59, :prefix => "period", :field_name => "end_minute") %></tr>
 </table>
 
 
-<br />
+<br/>

@@ -34,7 +34,7 @@ class Subscription < ActiveRecord::Base
     time = Time.now
     if service.servicetype == "one_time_fee" and time > activation_start and time < activation_end
       datas = flatrate_datas(:conditions => ["year_month = ?", time.strftime("%Y-%m")])
-      datas.each{ |data|
+      datas.each { |data|
         data.minutes = service.quantity.to_i - value
         data.save
       }
@@ -65,69 +65,70 @@ class Subscription < ActiveRecord::Base
     end
     total_price = 0
     case service.servicetype
-    when "flat_rate"
-      start_date, end_date = subscription_period(period_start, period_end)
-      days_used =  end_date - start_date
-      if start_date.month == end_date.month and start_date.year == end_date.year
-        total_price = service.price
-      else
-        total_price = 0
-        if months_between(start_date, end_date) > 1
-          # jei daugiau nei 1 menuo. Tarpe yra sveiku menesiu kuriem nereikia papildomai skaiciuoti intervalu
-          total_price += (months_between(start_date, end_date)-1) * service.price
+      when "flat_rate"
+        start_date, end_date = subscription_period(period_start, period_end)
+        days_used = end_date - start_date
+        if start_date.month == end_date.month and start_date.year == end_date.year
+          total_price = service.price
+        else
+          total_price = 0
+          if months_between(start_date, end_date) > 1
+            # jei daugiau nei 1 menuo. Tarpe yra sveiku menesiu kuriem nereikia papildomai skaiciuoti intervalu
+            total_price += (months_between(start_date, end_date)-1) * service.price
+          end
+          #suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas
+          last_day_of_month = start_date.to_time.end_of_month.to_date
+          last_day_of_month2 = end_date.to_time.end_of_month.to_date
+          total_price += service.price
+          total_price += service.price/last_day_of_month2.day * (end_date.day)
         end
-        #suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas
-        last_day_of_month = start_date.to_time.end_of_month.to_date
-        last_day_of_month2 = end_date.to_time.end_of_month.to_date
-        total_price += service.price
-        total_price += service.price/last_day_of_month2.day * (end_date.day)
-      end
       when "one_time_fee"
-        logger.fatal       "one_time_fee"
-        logger.fatal       "#{activation_start} >= #{period_start} and #{activation_start} <= #{period_end}"
-      if activation_start >= period_start and activation_start <= period_end
-        total_price = service.price
-      end
-    when "periodic_fee"
-      start_date, end_date = subscription_period(period_start, period_end)
-      days_used =  end_date - start_date
-      logger.fatal       "periodic_fee"
-      logger.fatal       "#{start_date.month} == #{end_date.month} and #{start_date.year} == #{end_date.year}"
-      if start_date.month == end_date.month and start_date.year == end_date.year
-        total_days = start_date.to_time.end_of_month.day
-        total_price = service.price / total_days * (days_used+1)
-      else
-        total_price = 0
-        if months_between(start_date, end_date) > 1
-          # jei daugiau nei 1 menuo. Tarpe yra sveiku menesiu kuriem nereikia papildomai skaiciuoti intervalu
-          total_price += (months_between(start_date, end_date)-1) * service.price
+        logger.fatal "one_time_fee"
+        logger.fatal "#{activation_start} >= #{period_start} and #{activation_start} <= #{period_end}"
+        if activation_start >= period_start and activation_start <= period_end
+          total_price = service.price
         end
-        #suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas
-        last_day_of_month = start_date.to_time.end_of_month.to_date
-        last_day_of_month2 = end_date.to_time.end_of_month.to_date
-        total_price += service.price/last_day_of_month.day * (last_day_of_month - start_date+1).to_i
-        total_price += service.price/last_day_of_month2.day * (end_date.day)
-      end
+      when "periodic_fee"
+        start_date, end_date = subscription_period(period_start, period_end)
+        days_used = end_date - start_date
+        logger.fatal "periodic_fee"
+        logger.fatal "#{start_date.month} == #{end_date.month} and #{start_date.year} == #{end_date.year}"
+        if start_date.month == end_date.month and start_date.year == end_date.year
+          total_days = start_date.to_time.end_of_month.day
+          total_price = service.price / total_days * (days_used+1)
+        else
+          total_price = 0
+          if months_between(start_date, end_date) > 1
+            # jei daugiau nei 1 menuo. Tarpe yra sveiku menesiu kuriem nereikia papildomai skaiciuoti intervalu
+            total_price += (months_between(start_date, end_date)-1) * service.price
+          end
+          #suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas
+          last_day_of_month = start_date.to_time.end_of_month.to_date
+          last_day_of_month2 = end_date.to_time.end_of_month.to_date
+          total_price += service.price/last_day_of_month.day * (last_day_of_month - start_date+1).to_i
+          total_price += service.price/last_day_of_month2.day * (end_date.day)
+        end
     end
     total_price
   end
+
 =begin
   Counts amount of money to be returned for the rest of current month
 =end
   def return_for_month_end
     amount = 0
     case service.servicetype
-    when "flat_rate"
-      period_start = Time.now
-      period_end = Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
-      start_date, end_date = subscription_period(period_start, period_end)
-      days_used =  end_date - start_date
-      total_days = start_date.to_time.end_of_month.day
-      amount = service.price / total_days * (days_used+1)
-    when "one_time_fee"
-      amount = price_for_period(Time.now, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)).to_f
-    when "periodic_fee"
-      amount = price_for_period(Time.now, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)).to_f
+      when "flat_rate"
+        period_start = Time.now
+        period_end = Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
+        start_date, end_date = subscription_period(period_start, period_end)
+        days_used = end_date - start_date
+        total_days = start_date.to_time.end_of_month.day
+        amount = service.price / total_days * (days_used+1)
+      when "one_time_fee"
+        amount = price_for_period(Time.now, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)).to_f
+      when "periodic_fee"
+        amount = price_for_period(Time.now, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)).to_f
     end
     logger.debug "Amount: #{amount}"
     return amount.to_f
@@ -137,10 +138,10 @@ class Subscription < ActiveRecord::Base
     user.user_type == "prepaid" ? end_time = Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59) : end_time = Time.now.beginning_of_month
     amount = 0
     case service.servicetype
-    when "one_time_fee"
-      amount = service.price if end_time > activation_end
-    when "flat_rate", "periodic_fee"
-      amount = price_for_period(activation_start , end_time).to_f
+      when "one_time_fee"
+        amount = service.price if end_time > activation_end
+      when "flat_rate", "periodic_fee"
+        amount = price_for_period(activation_start, end_time).to_f
     end
     if amount > 0
       Payment.subscription_payment(user, amount * -1)

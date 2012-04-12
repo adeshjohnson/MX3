@@ -4,56 +4,57 @@
   </tr>
 </table>
 <%= form_tag :action => 'list' do %>
-  <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
-    <br/><br/>
-    <table width="100%" class="simple">
-      <tr>
-        <td>
-          <%= _('LCR_name') %>: <%= text_field_tag 's_name', @options[:s_name].to_s, "class" => "input", :size => "15", :maxlength => "30"  %>
-          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
-        </td>
-        <td align="right">
-          <%if @search == 1%>
-            <%= link_to b_cross + _('Clear_search'), :action => 'list', :clean=>1%>
-          <%end%>
-        </td>
-      </tr>
-    </table>
-  </div>
-<%end%>
+    <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+      <br/><br/>
+      <table width="100%" class="simple">
+        <tr>
+          <td>
+            <%= _('LCR_name') %>
+            : <%= text_field_tag 's_name', @options[:s_name].to_s, "class" => "input", :size => "15", :maxlength => "30" %>
+            <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
+          </td>
+          <td align="right">
+            <% if @search == 1 %>
+                <%= link_to b_cross + _('Clear_search'), :action => 'list', :clean => 1 %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+<% end %>
 <br/><br/>
 
-<%= page_select_header(@options[:page], @total_pages , @options)  %>
+<%= page_select_header(@options[:page], @total_pages, @options) %>
 
 <table width="100%" class="maintable">
   <tr>
-    <th align="left"><%=sortable_list_header("id", _('ID'), @options)%></th>
-    <th align="left"><%=sortable_list_header("name", _('Name'), @options)%></th>
-    <th align="left"><%=sortable_list_header("order", _('Order'), @options)%></th>
-    <th align="center"><%=_('Providers')%></th>
-    <th align="center"><%=_('By_Destinations')%></th>
-    <th align="center"><%=_('Usage_Details')%></th>
-    <th align="center"><%=_('Make_Tariff_from_LCR_Providers_to_CSV')%></th>
+    <th align="left"><%= sortable_list_header("id", _('ID'), @options) %></th>
+    <th align="left"><%= sortable_list_header("name", _('Name'), @options) %></th>
+    <th align="left"><%= sortable_list_header("order", _('Order'), @options) %></th>
+    <th align="center"><%= _('Providers') %></th>
+    <th align="center"><%= _('By_Destinations') %></th>
+    <th align="center"><%= _('Usage_Details') %></th>
+    <th align="center"><%= _('Make_Tariff_from_LCR_Providers_to_CSV') %></th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @lcrs.each_with_index{ |lcr, i| %>
-  <% providers = lcr.providers %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-    <td id="id_<%=lcr.id%>"><%= lcr.id %></td>
-    <td id="name_<%=lcr.id%>"><%=h lcr.name %></td>
-    <td id="order_<%=lcr.id%>"><%= lcr.order %></td>
-    <td align="center" id="providers_<%=lcr.id%>"><%= link_to b_providers + _('Providers'), :action => 'providers_list', :id => lcr.id %> <%= "(" + providers.size.to_s + ")" if providers %><%= "(0)" if not providers%></td>
-    <td align="center" id="destinations_<%=lcr.id%>"><%= link_to b_actions, :action => 'details_by_destinations', :id => lcr.id,    :no_direction => true %></td>
-    <td align="center" id="usage_<%=lcr.id%>"><%= link_to b_details, :action => 'details', :id => lcr.id %></td>
-    <td align="center" id="make_tariff_<%=lcr.id%>"><%= link_to b_csv, {:action => :make_tariff, :id => lcr.id}, :id=>"lcr_make_tariff_#{lcr.id}" if providers and providers.size.to_i > 0 %></td>
-    <td align="center" id="clone_lcr_<%=lcr.id%>"><%= link_to b_copy({:title=>_('Lcr_copy')}), {:action => :lcr_clone, :id => lcr.id}, :id=>"lcr_clone_id_#{lcr.id}" %></td>
-    <td align="center" id="edit_<%=lcr.id%>"><%= link_to b_edit, {:action => 'edit', :id => lcr.id}, :id=>"lcr_edit_#{lcr.id}" %></td>
-    <td align="center" id="destroy_<%=lcr.id%>"><%= link_to b_delete, { :action => 'destroy', :id => lcr.id }, :id=>"lcr_destroy_#{lcr.id}", :confirm => _('Are_you_sure'), :method => :post %></td>
-  </tr>
-<% } %>
+  <% @lcrs.each_with_index { |lcr, i| %>
+      <% providers = lcr.providers %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="id_<%= lcr.id %>"><%= lcr.id %></td>
+        <td id="name_<%= lcr.id %>"><%= h lcr.name %></td>
+        <td id="order_<%= lcr.id %>"><%= lcr.order %></td>
+        <td align="center" id="providers_<%= lcr.id %>"><%= link_to b_providers + _('Providers'), :action => 'providers_list', :id => lcr.id %> <%= "(" + providers.size.to_s + ")" if providers %><%= "(0)" if not providers %></td>
+        <td align="center" id="destinations_<%= lcr.id %>"><%= link_to b_actions, :action => 'details_by_destinations', :id => lcr.id, :no_direction => true %></td>
+        <td align="center" id="usage_<%= lcr.id %>"><%= link_to b_details, :action => 'details', :id => lcr.id %></td>
+        <td align="center" id="make_tariff_<%= lcr.id %>"><%= link_to b_csv, {:action => :make_tariff, :id => lcr.id}, :id => "lcr_make_tariff_#{lcr.id}" if providers and providers.size.to_i > 0 %></td>
+        <td align="center" id="clone_lcr_<%= lcr.id %>"><%= link_to b_copy({:title => _('Lcr_copy')}), {:action => :lcr_clone, :id => lcr.id}, :id => "lcr_clone_id_#{lcr.id}" %></td>
+        <td align="center" id="edit_<%= lcr.id %>"><%= link_to b_edit, {:action => 'edit', :id => lcr.id}, :id => "lcr_edit_#{lcr.id}" %></td>
+        <td align="center" id="destroy_<%= lcr.id %>"><%= link_to b_delete, {:action => 'destroy', :id => lcr.id}, :id => "lcr_destroy_#{lcr.id}", :confirm => _('Are_you_sure'), :method => :post %></td>
+      </tr>
+  <% } %>
 </table>
-<br />
-<%= link_to b_add +  _('LCR_new'), :action => 'new' %>
+<br/>
+<%= link_to b_add + _('LCR_new'), :action => 'new' %>

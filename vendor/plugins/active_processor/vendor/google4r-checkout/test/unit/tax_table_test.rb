@@ -39,45 +39,45 @@ class Google4R::Checkout::TaxTableTest < Test::Unit::TestCase
   def setup
     @table = TaxTable.new(false)
   end
-  
+
   def test_table_behaves_correctly
     assert_respond_to @table, :rules
     assert_respond_to @table, :name
     assert_respond_to @table, :name=
     assert_respond_to @table, :standalone
   end
-  
+
   def test_initialized_correctly
     assert_nil @table.name
     assert_equal [], @table.rules
     assert_equal false, @table.standalone
   end
-  
+
   def test_accessors_work_correctly
     @table.name = "name"
     assert_equal "name", @table.name
   end
-  
+
   def test_create_rule_works_correctly_with_block
     the_rule = nil
-    
+
     res =
-      @table.create_rule do |rule|
-        the_rule = rule
-        assert_kind_of TaxRule, rule
-      end
-    
+        @table.create_rule do |rule|
+          the_rule = rule
+          assert_kind_of TaxRule, rule
+        end
+
     assert_equal res, the_rule
     assert @table.rules.include?(the_rule)
   end
-  
+
   def test_create_rule_works_correctly_without_block
     res = nil
-    
+
     res = @table.create_rule
-    
+
     assert_kind_of TaxRule, res
-    
+
     assert @table.rules.include?(res)
   end
 end

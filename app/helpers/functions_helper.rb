@@ -43,9 +43,9 @@ module FunctionsHelper
  Simple helper to generate script yhat shows tabs.
 =end
 
-  def dtree_group_script(name ,div_name, width, height)
+  def dtree_group_script(name, div_name, width, height)
     content_for :scripts do
-      content_tag(:script, "initTabs('#{div_name}', Array('#{name}'),0,#{width},#{height});", :type=>"text/javascript").html_safe
+      content_tag(:script, "initTabs('#{div_name}', Array('#{name}'),0,#{width},#{height});", :type => "text/javascript").html_safe
     end
   end
 
@@ -62,8 +62,8 @@ module FunctionsHelper
 
   def setting_group_boolean(name, prop_name, conf_name, options = {})
     opts ={}.merge(options)
-    settings_group_line(name, options[:tip]){
-      "#{check_box_tag  prop_name, "1", Confline.get_value(conf_name, session[:user_id]).to_i == 1}#{opts[:sufix]}"
+    settings_group_line(name, options[:tip]) {
+      "#{check_box_tag prop_name, "1", Confline.get_value(conf_name, session[:user_id]).to_i == 1}#{opts[:sufix]}"
     }
   end
 
@@ -81,11 +81,11 @@ module FunctionsHelper
   def settings_group_text(name, prop_name, conf_name, options = {}, html_options = {})
     opts = {:sufix => ""}.merge(options)
     html_opts ={
-      :class => "input",
-      :size => "35",
-      :maxlength => "50"}.merge(html_options)
-    settings_group_line(name, html_options[:tip]){
-      "#{text_field_tag(prop_name, Confline.get_value(conf_name, session[:user_id]) , html_opts )}#{opts[:sufix]}"
+        :class => "input",
+        :size => "35",
+        :maxlength => "50"}.merge(html_options)
+    settings_group_line(name, html_options[:tip]) {
+      "#{text_field_tag(prop_name, Confline.get_value(conf_name, session[:user_id]), html_opts)}#{opts[:sufix]}"
     }
   end
 
@@ -103,10 +103,10 @@ module FunctionsHelper
   def settings_group_number(name, prop_name, conf_name, options = {}, html_options = {})
     opts = {:sufix => ""}.merge(options)
     html_opts ={
-      :class => "input",
-      :size => "35",
-      :maxlength => "50"}.merge(html_options)
-    settings_group_line(name, html_options[:tip]){
+        :class => "input",
+        :size => "35",
+        :maxlength => "50"}.merge(html_options)
+    settings_group_line(name, html_options[:tip]) {
       "#{text_field_tag(prop_name, Confline.get_value(conf_name, session[:user_id]).to_i, html_opts)}#{opts[:sufix]}"
     }
   end

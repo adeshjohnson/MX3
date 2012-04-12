@@ -1,10 +1,10 @@
 <% if @step == 1 %>
-  <br />
-  <%= form_tag( {:action => 'test_file_upload', :step => "2"}, {:multipart => "true", :id => "files"}) do %>
-    <%= _('Upload') %>: <%= file_field_tag "file" %>
-    <br /><br />
-    <%= submit_tag(_('Upload_file'), :disable_with=>_('Processing..'))%>
-  <% end %>
+    <br/>
+    <%= form_tag({:action => 'test_file_upload', :step => "2"}, {:multipart => "true", :id => "files"}) do %>
+        <%= _('Upload') %>: <%= file_field_tag "file" %>
+        <br/><br/>
+        <%= submit_tag(_('Upload_file'), :disable_with => _('Processing..')) %>
+    <% end %>
 
 
 <% end %>
@@ -15,9 +15,9 @@
     <b><%= _('File') %>:</b>
     <br>
     <br>
-    <% 
-        flines = []
-        tl = 0 %>
+    <%
+       flines = []
+       tl = 0 %>
     <% for line in session[:file] %>
         <% flines << line %>
         <% tl += 1 %>
@@ -25,17 +25,17 @@
 
     <%= text_area_tag "body", flines, :size => "150x30", :class => "input" %>
 
-  <br />
-  <br />
+    <br/>
+    <br/>
 
-  <%= link_to b_back + _('Back') , :action => "test_file_upload" %>
+    <%= link_to b_back + _('Back'), :action => "test_file_upload" %>
 
 <% end %>
 
-<br />
-<br />
+<br/>
+<br/>
 
-  <%= form_tag( {:action => 'test_file_upload', :step => "3"}) do %>
-    <%= submit_tag(_('Delete_all_files'), :disable_with=>_('Processing..'))%>
-  <% end %>
+<%= form_tag({:action => 'test_file_upload', :step => "3"}) do %>
+    <%= submit_tag(_('Delete_all_files'), :disable_with => _('Processing..')) %>
+<% end %>
 

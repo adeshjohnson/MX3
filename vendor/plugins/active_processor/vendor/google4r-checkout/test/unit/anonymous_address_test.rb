@@ -37,7 +37,7 @@ class Google4R::Checkout::AnonymousAddressTest < Test::Unit::TestCase
   include Google4R::Checkout
 
   def setup
-    
+
     @xml_str = %q{<?xml version="1.0" encoding="UTF-8" ?>
 <anonymous-address id="739030698069958">
   <country-code>US</country-code>
@@ -47,30 +47,30 @@ class Google4R::Checkout::AnonymousAddressTest < Test::Unit::TestCase
 </anonymous-address>}
 
   end
-  
+
   def test_responds_correctly
     address = Address.new
-    
-    [ :address_id, :address_id=,
-      :country_code, :country_code=,
-      :city, :city=, :region, :region=,
-      :postal_code, :postal_code=
+
+    [:address_id, :address_id=,
+     :country_code, :country_code=,
+     :city, :city=, :region, :region=,
+     :postal_code, :postal_code=
     ].each do |symbol|
       assert_respond_to address, symbol
     end
   end
-    
+
   def test_creating_anonymous_address
-    
+
     document = REXML::Document.new(@xml_str)
 
     anonymous_address = AnonymousAddress.create_from_element(document.elements['/anonymous-address'])
-    
+
     assert_equal '739030698069958', anonymous_address.address_id
     assert_equal 'US', anonymous_address.country_code
     assert_equal 'Mountain View', anonymous_address.city
     assert_equal 'CA', anonymous_address.region
     assert_equal '94043', anonymous_address.postal_code
-    
+
   end
 end

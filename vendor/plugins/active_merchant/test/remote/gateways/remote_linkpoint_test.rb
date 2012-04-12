@@ -24,9 +24,9 @@ require 'test_helper'
 class LinkpointTest < Test::Unit::TestCase
   def setup
     Base.mode = :test
-    
+
     @gateway = LinkpointGateway.new(fixtures(:linkpoint))
-        
+
     # Test credit card numbers
     # American Express: 371111111111111
     # Discover: 6011-1111-1111-1111
@@ -37,55 +37,55 @@ class LinkpointTest < Test::Unit::TestCase
 
     @amount = 100
     @credit_card = credit_card('4111111111111111')
-    @options = { :order_id => generate_unique_id, :billing_address => address }
+    @options = {:order_id => generate_unique_id, :billing_address => address}
   end
-  
+
   def test_successful_authorization
     assert response = @gateway.authorize(1000, @credit_card, @options)
-    
+
     assert_instance_of Response, response
     assert_success response
     assert_equal "APPROVED", response.params["approved"]
   end
-  
+
   def test_successful_authorization_and_capture
     assert authorization = @gateway.authorize(@amount, @credit_card, @options)
     assert_success authorization
     assert authorization.test?
-    
+
     assert capture = @gateway.capture(@amount, authorization.authorization)
     assert_success capture
     assert_equal 'ACCEPTED', capture.message
   end
-  
+
   def test_successful_purchase_without_cvv2_code
     @credit_card.verification_value = nil
-    
+
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_success response
     assert_equal "APPROVED", response.params["approved"]
     assert_equal 'NNN', response.params["avs"]
   end
-  
+
   def test_successful_purchase_with_cvv2_code
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_success response
     assert_equal "APPROVED", response.params["approved"]
     assert_equal 'NNNM', response.params["avs"]
   end
-  
+
   def test_successful_purchase_and_void
     purchase = @gateway.purchase(@amount, @credit_card, @options)
     assert_success purchase
-    
+
     assert void = @gateway.void(purchase.authorization)
     assert_success void
   end
-  
+
   def test_successfull_purchase_and_credit
     assert purchase = @gateway.purchase(2400, @credit_card, @options)
     assert_success purchase
-    
+
     assert credit = @gateway.credit(2400, purchase.authorization)
     assert_success credit
   end
@@ -101,18 +101,18 @@ class LinkpointTest < Test::Unit::TestCase
   end
 
   def test_successful_recurring_payment
-    assert response = @gateway.recurring(2400, @credit_card, 
-      :order_id => generate_unique_id, 
-      :installments => 12,
-      :startdate => "immediate",
-      :periodicity => :monthly,
-      :billing_address => address
+    assert response = @gateway.recurring(2400, @credit_card,
+                                         :order_id => generate_unique_id,
+                                         :installments => 12,
+                                         :startdate => "immediate",
+                                         :periodicity => :monthly,
+                                         :billing_address => address
     )
-    
+
     assert_success response
     assert_equal "APPROVED", response.params["approved"]
   end
-  
+
   def test_declined_purchase_with_invalid_credit_card
     @credit_card.number = '1111111111111111'
     assert response = @gateway.purchase(@amount, @credit_card, @options)

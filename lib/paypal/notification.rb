@@ -46,7 +46,7 @@ module Paypal
 
     def initialize(response, message = nil)
       @response = response
-      @message  = message
+      @message = message
     end
 
     def to_s
@@ -88,7 +88,7 @@ module Paypal
 
     # Was the transaction complete?
     def complete?
-      status == "Completed"# or status == "Canceled_Reversal"
+      status == "Completed" # or status == "Canceled_Reversal"
     end
 
     # Was the transaction reversed?
@@ -191,6 +191,7 @@ module Paypal
     def business
       params['business']
     end
+
     #-------------------------------------------------------
 
     # This combines the gross and currency and returns a proper Money object.
@@ -202,8 +203,8 @@ module Paypal
 
     # reset the notification.
     def empty!
-      @params  = Hash.new
-      @raw     = ""
+      @params = Hash.new
+      @raw = ""
     end
 
     def my_debug(msg)
@@ -258,36 +259,36 @@ module Paypal
       end
     end
 
-      private
+    private
 
-      # Take the posted data and move the relevant data into a hash
-      def parse(post)
+    # Take the posted data and move the relevant data into a hash
+    def parse(post)
 
 #	my_debug(post)
 
-        @raw = post
-        for line in post.to_s.split('&')
-          key, value = *line.scan( %r{^(\w+)\=(.*)$} ).flatten
-          params[key] = CGI.unescape(value)
-        end
+      @raw = post
+      for line in post.to_s.split('&')
+        key, value = *line.scan(%r{^(\w+)\=(.*)$}).flatten
+        params[key] = CGI.unescape(value)
       end
-
-      def retry_exceptions
-        retries = MAX_RETRIES
-        begin
-          yield
-        rescue Paypal::RetriableConnectionError => e
-          retries -= 1
-          sleep(rand(10))
-          retry unless retries.zero?
-          raise ConnectionError, e.message
-        rescue Paypal::ConnectionError
-          retries -= 1
-          sleep(rand(10))
-          retry if !retries.zero?
-          raise
-        end
-      end
-
     end
+
+    def retry_exceptions
+      retries = MAX_RETRIES
+      begin
+        yield
+      rescue Paypal::RetriableConnectionError => e
+        retries -= 1
+        sleep(rand(10))
+        retry unless retries.zero?
+        raise ConnectionError, e.message
+      rescue Paypal::ConnectionError
+        retries -= 1
+        sleep(rand(10))
+        retry if !retries.zero?
+        raise
+      end
+    end
+
   end
+end

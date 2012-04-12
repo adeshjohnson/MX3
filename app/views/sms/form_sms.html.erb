@@ -1,72 +1,72 @@
 <table class="simple">
-<tr>
-    <td> <%= _('Domain') %>:   </td>
-    <td> <%= text_field 'provider', 'sms_provider_domain', "class" => "input"   %></td>
- </tr>
+  <tr>
+    <td> <%= _('Domain') %>:</td>
+    <td> <%= text_field 'provider', 'sms_provider_domain', "class" => "input" %></td>
+  </tr>
 
-<tr>
-    <td> <%= _('Use_subject') %>:   </td>
-<% if @provider%>
-    <td>  <%= check_box_tag 'provider[use_subject]', value = "1", (checked = @provider.use_subject.to_i == 1) %></td>    
-<%else%>
-   <td>  <%= check_box_tag 'provider[use_subject]', value = "1" %></td> 
-  <%end%>
- </tr>
-<!---<tr>
+  <tr>
+    <td> <%= _('Use_subject') %>:</td>
+    <% if @provider %>
+        <td>  <%= check_box_tag 'provider[use_subject]', value = "1", (checked = @provider.use_subject.to_i == 1) %></td>
+    <% else %>
+        <td>  <%= check_box_tag 'provider[use_subject]', value = "1" %></td>
+    <% end %>
+  </tr>
+  <!---<tr>
     <td> <%= _('Subject') %>:   </td>
-    <td> <%= text_field 'provider', 'sms_subject', "class" => "input"   %></td> 
+    <td> <%= text_field 'provider', 'sms_subject', "class" => "input" %></td>
  </tr>-->
-<tr>
-    <td> <%= _('Email_wait_time') %>:   </td>
-    <td> <%= text_field 'provider', 'sms_email_wait_time', "class" => "input"   %> min </td> 
- </tr>
-<tr>
-    <td> <%= _('Wait_for_good_email') %>:   </td>
-<% if @provider%>
-    <td>  <%= check_box_tag 'provider[wait_for_good_email]', value = "1", (checked = @provider.wait_for_good_email.to_i == 1) %></td>    
-<%else%>
-   <td>  <%= check_box_tag 'provider[wait_for_good_email]', value = "1" %></td> 
-  <%end%>
- </tr>
-<tr>
-    <td> <%= _('Email_good_keywords') %>:   </td>
-    <td> <%= text_field 'provider', 'email_good_keywords', "class" => "input"   %></td> 
- </tr>
-<tr>
-    <td> <%= _('Wait_for_bad_email') %>:   </td>
-<% if @provider%>
-    <td>  <%= check_box_tag 'provider[wait_for_bad_email]', value = "1", (checked = @provider.wait_for_bad_email.to_i == 1) %></td>    
-<%else%>
-   <td>  <%= check_box_tag 'provider[wait_for_bad_email]', value = "1" %></td> 
-  <%end%>
- </tr>
-<tr>
-    <td> <%= _('Email_bad_keywords') %>:   </td>
-    <td> <%= text_field 'provider', 'email_bad_keywords', "class" => "input"   %></td> 
- </tr>
-<tr>
-<td> <%= _('Time_out_charge_user') %>:   </td>
-<% if @provider%>
-    <td>  <%= check_box_tag 'provider[time_out_charge_user]', value = "1", (checked = @provider.time_out_charge_user.to_i == 1) %></td>    
-<%else%>
-   <td>  <%= check_box_tag 'provider[time_out_charge_user]', value = "1" %></td> 
-  <%end%>
- </tr>
-<tr>
-<td> <%= _('Nan_keywords_charge_user') %>:   </td>
-<% if @provider%>
-    <td>  <%= check_box_tag 'provider[nan_keywords_charge_user]', value = "1", (checked = @provider.nan_keywords_charge_user.to_i == 1) %></td>    
-<%else%>
-   <td>  <%= check_box_tag 'provider[nan_keywords_charge_user]', value = "1" %></td> 
-  <%end%>
- </tr>
-<tr>
-<td> <%= _('Pay_sms_receiver') %>:   </td>
-<% if @provider%>
-    <td>  <%= check_box_tag 'provider[pay_sms_receiver]', value = "1", (checked = @provider.pay_sms_receiver.to_i == 1) %></td>    
-<%else%>
-   <td>  <%= check_box_tag 'provider[pay_sms_receiver]', value = "1" %></td> 
-  <%end%>
- </tr>
+  <tr>
+    <td> <%= _('Email_wait_time') %>:</td>
+    <td> <%= text_field 'provider', 'sms_email_wait_time', "class" => "input" %> min</td>
+  </tr>
+  <tr>
+    <td> <%= _('Wait_for_good_email') %>:</td>
+    <% if @provider %>
+        <td>  <%= check_box_tag 'provider[wait_for_good_email]', value = "1", (checked = @provider.wait_for_good_email.to_i == 1) %></td>
+    <% else %>
+        <td>  <%= check_box_tag 'provider[wait_for_good_email]', value = "1" %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td> <%= _('Email_good_keywords') %>:</td>
+    <td> <%= text_field 'provider', 'email_good_keywords', "class" => "input" %></td>
+  </tr>
+  <tr>
+    <td> <%= _('Wait_for_bad_email') %>:</td>
+    <% if @provider %>
+        <td>  <%= check_box_tag 'provider[wait_for_bad_email]', value = "1", (checked = @provider.wait_for_bad_email.to_i == 1) %></td>
+    <% else %>
+        <td>  <%= check_box_tag 'provider[wait_for_bad_email]', value = "1" %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td> <%= _('Email_bad_keywords') %>:</td>
+    <td> <%= text_field 'provider', 'email_bad_keywords', "class" => "input" %></td>
+  </tr>
+  <tr>
+    <td> <%= _('Time_out_charge_user') %>:</td>
+    <% if @provider %>
+        <td>  <%= check_box_tag 'provider[time_out_charge_user]', value = "1", (checked = @provider.time_out_charge_user.to_i == 1) %></td>
+    <% else %>
+        <td>  <%= check_box_tag 'provider[time_out_charge_user]', value = "1" %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td> <%= _('Nan_keywords_charge_user') %>:</td>
+    <% if @provider %>
+        <td>  <%= check_box_tag 'provider[nan_keywords_charge_user]', value = "1", (checked = @provider.nan_keywords_charge_user.to_i == 1) %></td>
+    <% else %>
+        <td>  <%= check_box_tag 'provider[nan_keywords_charge_user]', value = "1" %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td> <%= _('Pay_sms_receiver') %>:</td>
+    <% if @provider %>
+        <td>  <%= check_box_tag 'provider[pay_sms_receiver]', value = "1", (checked = @provider.pay_sms_receiver.to_i == 1) %></td>
+    <% else %>
+        <td>  <%= check_box_tag 'provider[pay_sms_receiver]', value = "1" %></td>
+    <% end %>
+  </tr>
 
 </table>

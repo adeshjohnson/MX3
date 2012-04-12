@@ -3,17 +3,17 @@ class TerminatorsController < ApplicationController
 
   layout "callc"
 
-  before_filter :check_post_method, :only=>[:create , :destroy ,:update, :provider_remove, :provider_add ]
+  before_filter :check_post_method, :only => [:create, :destroy, :update, :provider_remove, :provider_add]
   before_filter :check_localization
   before_filter :authorize
   before_filter :providers_enabled_for_reseller?
   before_filter :find_terminator, :only => [:provider_add, :providers, :destroy, :update, :edit]
-  
+
   def index
     list
     render :action => 'list'
   end
-  
+
 =begin rdoc
  Lists terminators
 =end
@@ -88,6 +88,7 @@ class TerminatorsController < ApplicationController
     @page_title = _('Terminator_edit') + ": " + @terminator.name
     @page_icon = "edit.png"
   end
+
 =begin rdoc
  Updates terminator.
 
@@ -130,10 +131,10 @@ class TerminatorsController < ApplicationController
     @page_icon = "provider.png"
     if current_user.usertype == 'reseller'
       @assigned = Provider.find(:all, :conditions => ["providers.terminator_id = ? AND (providers.user_id = ? OR (providers.common_use = 1 AND id IN (SELECT provider_id FROM common_use_providers where reseller_id = #{current_user.id})))", @terminator.id, current_user.id], :order => "name ASC")
-      @not_assigned =  Provider.find(:all, :conditions => ["providers.terminator_id = 0 AND (providers.user_id = ? OR (providers.common_use = 1 AND id IN (SELECT provider_id FROM common_use_providers where reseller_id = #{current_user.id})))", current_user.id], :order => "name ASC")
+      @not_assigned = Provider.find(:all, :conditions => ["providers.terminator_id = 0 AND (providers.user_id = ? OR (providers.common_use = 1 AND id IN (SELECT provider_id FROM common_use_providers where reseller_id = #{current_user.id})))", current_user.id], :order => "name ASC")
     else
       @assigned = Provider.find(:all, :conditions => ["providers.terminator_id = ? AND (providers.user_id = ? OR providers.common_use = 1)", @terminator.id, current_user.id], :order => "name ASC")
-      @not_assigned =  Provider.find(:all, :conditions => ["providers.terminator_id = 0 AND (providers.user_id = ? OR providers.common_use = 1)", current_user.id], :order => "name ASC")
+      @not_assigned = Provider.find(:all, :conditions => ["providers.terminator_id = 0 AND (providers.user_id = ? OR providers.common_use = 1)", current_user.id], :order => "name ASC")
     end
   end
 
@@ -214,5 +215,5 @@ class TerminatorsController < ApplicationController
       redirect_to :action => :list and return false
     end
   end
-  
+
 end

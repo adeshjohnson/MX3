@@ -98,35 +98,35 @@ class Google4R::Checkout::MerchantCalculationCallbackTest < Test::Unit::TestCase
     @frontend = Frontend.new(FRONTEND_CONFIGURATION)
     @frontend.tax_table_factory = TestTaxTableFactory.new
   end
-  
+
   def test_responds_correctly
     assert_respond_to MerchantCalculationCallback, :create_from_element
-    
+
     callback = MerchantCalculationCallback.new(@frontend)
-    
-    [ :shopping_cart, :shopping_cart=,
-      :buyer_language, :buyer_language=,
-      :anonymous_addresses, :tax, :tax=,
-      :shipping_methods, :merchant_code_strings
+
+    [:shopping_cart, :shopping_cart=,
+     :buyer_language, :buyer_language=,
+     :anonymous_addresses, :tax, :tax=,
+     :shipping_methods, :merchant_code_strings
     ].each do |symbol|
       assert_respond_to callback, symbol
     end
   end
-  
+
   def test_create_from_element_works_correctly
     # Build up some Mocha expectations.
-    
+
     expect = ShoppingCart.stubs(:create_from_element)
     expect.times(1).returns(:shopping_cart)
     expect.with { |element, owner| element.name == 'shopping-cart' and owner.kind_of?(MerchantCalculationCallback) }
-    
+
     expect = AnonymousAddress.stubs(:create_from_element)
     expect.times(1).returns(:anonymous_address, :anonymous_address2)
     expect.with { |element| element.name == 'anonymous-address' }
-    
+
     # Create the new notification.
     merchantCalculationCallback = MerchantCalculationCallback.create_from_element(REXML::Document.new(@xml_str).root, @frontend)
-    
+
     # perform the assertions
     assert_equal :shopping_cart, merchantCalculationCallback.shopping_cart
     assert_equal 'en_US', merchantCalculationCallback.buyer_language
@@ -135,4 +135,4 @@ class Google4R::Checkout::MerchantCalculationCallbackTest < Test::Unit::TestCase
     assert_equal ['SuperShip', 'UPS Ground'], merchantCalculationCallback.shipping_methods
     assert_equal ['GiftCert012345', 'FirstVisitCoupon'], merchantCalculationCallback.merchant_code_strings
   end
- end
+end

@@ -41,7 +41,7 @@ class Google4R::Checkout::ShoppingCartTest < Test::Unit::TestCase
     @frontend.tax_table_factory = TestTaxTableFactory.new
     @command = @frontend.create_checkout_command
     @shopping_cart = @command.shopping_cart
-    
+
     @xml_str = %q{<?xml version="1.0" encoding="UTF-8" ?>
       <shopping-cart>
         <merchant-private-data>
@@ -66,24 +66,24 @@ class Google4R::Checkout::ShoppingCartTest < Test::Unit::TestCase
         </items>
       </shopping-cart>}
 
-    @optional_tags = [ 'cart-expiration', 'merchant-private-data' ]
+    @optional_tags = ['cart-expiration', 'merchant-private-data']
   end
-  
+
   def test_behaves_correctly
-    [ :owner, :expires_at, :items, :owner, :private_data, :private_data= ].each do |sym|
+    [:owner, :expires_at, :items, :owner, :private_data, :private_data=].each do |sym|
       assert_respond_to @shopping_cart, sym
     end
   end
-  
+
   def test_initialized_correctly
     assert_equal @command, @shopping_cart.owner
     assert_equal nil, @shopping_cart.expires_at
     assert_equal [], @shopping_cart.items
     assert_equal @command, @shopping_cart.owner
   end
-  
+
   def test_accessors_work_correctly
-    hash = { 'foo' => [ { 'bar' => 'baz' }, "d'oh", 2 ] }
+    hash = {'foo' => [{'bar' => 'baz'}, "d'oh", 2]}
     @shopping_cart.private_data = hash.dup
     assert_equal hash, @shopping_cart.private_data
   end
@@ -94,27 +94,27 @@ class Google4R::Checkout::ShoppingCartTest < Test::Unit::TestCase
     assert_raises(RuntimeError) { @shopping_cart.private_data = 'Foobar' }
     assert_raises(RuntimeError) { @shopping_cart.private_data = [] }
   end
-  
+
   def test_create_item_works_correctly_with_block
     the_item = nil
-    
-    res = 
-      @shopping_cart.create_item do |item|
-        the_item = item
-      
-        assert_kind_of Item, item
-      end
-    
+
+    res =
+        @shopping_cart.create_item do |item|
+          the_item = item
+
+          assert_kind_of Item, item
+        end
+
     assert_equal res, the_item
     assert @shopping_cart.items.include?(the_item)
   end
-  
+
   def test_create_item_works_correctly_without_block
     item = @shopping_cart.create_item
-    
+
     assert @shopping_cart.items.include?(item)
   end
-  
+
   def test_create_from_element_works
     @optional_tags.power.each do |optional_tag_names|
       xml_str = @xml_str
@@ -122,26 +122,26 @@ class Google4R::Checkout::ShoppingCartTest < Test::Unit::TestCase
       optional_tag_names.each { |name| xml_str = xml_str.gsub(%r{<#{name}.*?</#{name}>}, '') }
 
       element = REXML::Document.new(xml_str).root
-    
+
       expect = Item.stubs(:create_from_element)
-      expect.with do |element, shopping_cart| 
+      expect.with do |element, shopping_cart|
         element.name == 'item' and
-        element.elements['item-name'].text == 'AA Rechargeable Battery Pack'
+            element.elements['item-name'].text == 'AA Rechargeable Battery Pack'
       end
       expect.times(1).returns(:item1)
 
       expect = Item.stubs(:create_from_element)
       expect.with do |element, shopping_cart|
         element.name == 'item' and
-        element.elements['item-name'].text == 'MegaSound 2GB MP3 Player'
+            element.elements['item-name'].text == 'MegaSound 2GB MP3 Player'
       end
       expect.times(1).returns(:item2)
 
       shopping_cart = ShoppingCart.create_from_element(element, nil)
-    
+
       assert_equal Time.parse("2007-12-31T23:59:59-05:00"), shopping_cart.expires_at unless optional_tag_names.include?('cart-expiration')
-      assert_equal [ :item1, :item2 ], shopping_cart.items
-      assert_equal({ 'affiliate-code' => '01234' }, shopping_cart.private_data) unless optional_tag_names.include?('merchant-private-data')
+      assert_equal [:item1, :item2], shopping_cart.items
+      assert_equal({'affiliate-code' => '01234'}, shopping_cart.private_data) unless optional_tag_names.include?('merchant-private-data')
     end
   end
 end

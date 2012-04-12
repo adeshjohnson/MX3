@@ -1,11 +1,15 @@
-<table class = "maintable">
+<table class="maintable">
   <tr>
     <th><%= _("Name") %></th>
-    <td colspan="<%= @create || @update ? "3" : "4" %>"><%= text_field 'dialplan', 'name', "class" => "input" , :size => "30", :maxlength => "255" %></td>
-    <% if @create %><td align="center"><%= image_submit_tag 'icons/add.png',  :title => _('Add' ), :id=>"ivr_add" %></td><% end %>
-    <% if @update %><td align="center"><%= image_submit_tag 'icons/edit.png', :title => _('Edit'), :id=>"ivr_edit" %></td><% end %>
+    <td colspan="<%= @create || @update ? "3" : "4" %>"><%= text_field 'dialplan', 'name', "class" => "input", :size => "30", :maxlength => "255" %></td>
+    <% if @create %>
+        <td align="center"><%= image_submit_tag 'icons/add.png', :title => _('Add'), :id => "ivr_add" %></td>
+    <% end %>
+    <% if @update %>
+        <td align="center"><%= image_submit_tag 'icons/edit.png', :title => _('Edit'), :id => "ivr_edit" %></td>
+    <% end %>
   </tr>
-  <tr> 
+  <tr>
     <th></th>
     <th><%= _("Ivr") %>: 1</th>
     <th><%= _("Ivr") %>: 2</th>
@@ -17,34 +21,34 @@
     <th><%= _("Ivr") %></th>
     <td>
       <select name="dialplan[data2]">
-      <option value=""></option>
-      <% for ivr in @ivrs do%>
-        <option value="<%= ivr.id %>" <%= "selected" if @dp and ivr.id.to_i == @dp.data2.to_i %> ><%= ivr.name %></option>  
-      <% end %>
+        <option value=""></option>
+        <% for ivr in @ivrs do %>
+            <option value="<%= ivr.id %>" <%= "selected" if @dp and ivr.id.to_i == @dp.data2.to_i %> ><%= ivr.name %></option>
+        <% end %>
       </select>
     </td>
     <td>
       <select name="dialplan[data4]">
-      <option value=""></option>
-      <% for ivr in @ivrs do%>
-        <option value="<%= ivr.id %>" <%= "selected" if @dp and ivr.id.to_i == @dp.data4.to_i %>><%= ivr.name %></option>  
-      <% end %>
+        <option value=""></option>
+        <% for ivr in @ivrs do %>
+            <option value="<%= ivr.id %>" <%= "selected" if @dp and ivr.id.to_i == @dp.data4.to_i %>><%= ivr.name %></option>
+        <% end %>
       </select>
     </td>
     <td>
       <select name="dialplan[data6]">
-      <option value=""></option>
-      <% for ivr in @ivrs do%>
-        <option value="<%= ivr.id %>" <%= "selected" if @dp and ivr.id.to_i == @dp.data6.to_i %>><%= ivr.name %></option>  
-      <% end %>
+        <option value=""></option>
+        <% for ivr in @ivrs do %>
+            <option value="<%= ivr.id %>" <%= "selected" if @dp and ivr.id.to_i == @dp.data6.to_i %>><%= ivr.name %></option>
+        <% end %>
       </select>
-    </td>    
+    </td>
     <td>
       <select name="dialplan[data7]">
-      <option value=""></option>
-      <% for ivr in @ivrs do%>
-        <option value="<%= ivr.id %>" <%= "selected" if @dp and ivr.id.to_i == @dp.data7.to_i %>><%= ivr.name %></option>  
-      <% end %>
+        <option value=""></option>
+        <% for ivr in @ivrs do %>
+            <option value="<%= ivr.id %>" <%= "selected" if @dp and ivr.id.to_i == @dp.data7.to_i %>><%= ivr.name %></option>
+        <% end %>
       </select>
     </td>
   </tr>
@@ -53,25 +57,25 @@
     <td>
       <select name="dialplan[data1]">
         <option value=""></option>
-      <% for period in @timeperiods do%>
-        <option value="<%= period.id %>" <%= "selected" if @dp and period.id.to_i == @dp.data1.to_i %>><%= period.name %></option>  
-      <% end %>
+        <% for period in @timeperiods do %>
+            <option value="<%= period.id %>" <%= "selected" if @dp and period.id.to_i == @dp.data1.to_i %>><%= period.name %></option>
+        <% end %>
       </select>
     </td>
     <td>
       <select name="dialplan[data3]">
         <option value=""></option>
-      <% for period in @timeperiods do%>
-        <option value="<%= period.id %>" <%= "selected" if @dp and period.id.to_i == @dp.data3.to_i %>><%= period.name %></option>  
-      <% end %>
+        <% for period in @timeperiods do %>
+            <option value="<%= period.id %>" <%= "selected" if @dp and period.id.to_i == @dp.data3.to_i %>><%= period.name %></option>
+        <% end %>
       </select>
-    </td>    
+    </td>
     <td>
       <select name="dialplan[data5]">
         <option value=""></option>
-      <% for period in @timeperiods do%>
-        <option value="<%= period.id %>" <%= "selected" if @dp and period.id.to_i == @dp.data5.to_i %>><%= period.name %></option>  
-      <% end %>
+        <% for period in @timeperiods do %>
+            <option value="<%= period.id %>" <%= "selected" if @dp and period.id.to_i == @dp.data5.to_i %>><%= period.name %></option>
+        <% end %>
       </select>
     </td>
     <td>

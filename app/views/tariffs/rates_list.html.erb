@@ -1,40 +1,41 @@
 <table width="100%">
   <tr>
-    <td><%= link_nice_tariff(@tariff)%></td>
-    <td align="right" nowrap><%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')")  %></td>
+    <td><%= link_nice_tariff(@tariff) %></td>
+    <td align="right" nowrap><%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %></td>
   </tr>
 </table>
 
 
-<%= form_tag :action => 'rates_list', :id=>@tariff.id do %>
-  <div id="search_details" <%= "style='display:none;'" if @search.to_i == 0 %>>
-    <br />
-    <table width="100%" class="simple">
-      <tr>
-        <td>
-          <%= _('Prefix') %>: <%= text_field_tag 's_prefix', @s_prefix, "class" => "input", :size => "10", :maxlength => "30"  %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
-        </td>
-        <td align="right">
-          <%  if @search == 1%>
-            <%= link_to b_cross + _('Clear_search'), :action => 'rates_list', :id=>@tariff.id%>
-          <%end%>
-        </td>
-      </tr>
-    </table>
-  </div>
+<%= form_tag :action => 'rates_list', :id => @tariff.id do %>
+    <div id="search_details" <%= "style='display:none;'" if @search.to_i == 0 %>>
+      <br/>
+      <table width="100%" class="simple">
+        <tr>
+          <td>
+            <%= _('Prefix') %>
+            : <%= text_field_tag 's_prefix', @s_prefix, "class" => "input", :size => "10", :maxlength => "30" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
+          </td>
+          <td align="right">
+            <% if @search == 1 %>
+                <%= link_to b_cross + _('Clear_search'), :action => 'rates_list', :id => @tariff.id %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
 <% end %>
-<br />
+<br/>
 
 
-<%= render :partial => 'letter_select_header' if @s_prefix.blank?%>
+<%= render :partial => 'letter_select_header' if @s_prefix.blank? %>
 <% if @total_pages > 1 %>
-  <br/>
-  <%= render :partial => 'page_select_header' %>
+    <br/>
+    <%= render :partial => 'page_select_header' %>
 <% end %>
 <br/>
 
@@ -44,142 +45,142 @@
     <th align="left"><%= _('Direction') %></th>
 
     <% if @use_lata %>
-      <th align="left"><%= _('NPANXX') %>/<%= _('Prefix') %></th>
-      <th align="left"><%= _('Subcode') %></th>
-      <th align="left"><%= _('City') %></th>
-      <th align="left"><%= _('State') %></th>
-      <th align="left"><%= _('LATA') %></th>
-      <th align="left"><%= _('Class') %></th>
-      <th align="left"><%= _('OCN') %></th>
-      <th align="left"><%= _('OCN_Name') %></th>
+        <th align="left"><%= _('NPANXX') %>/<%= _('Prefix') %></th>
+        <th align="left"><%= _('Subcode') %></th>
+        <th align="left"><%= _('City') %></th>
+        <th align="left"><%= _('State') %></th>
+        <th align="left"><%= _('LATA') %></th>
+        <th align="left"><%= _('Class') %></th>
+        <th align="left"><%= _('OCN') %></th>
+        <th align="left"><%= _('OCN_Name') %></th>
     <% else %>
-      <th align="left"><%= _('Prefix') %></th>
-      <th align="left"><%= _('Subcode') %></th>
-      <th align="left"><%= _('Name') %></th>
+        <th align="left"><%= _('Prefix') %></th>
+        <th align="left"><%= _('Subcode') %></th>
+        <th align="left"><%= _('Name') %></th>
     <% end %>
-    <%if mor_11_extend?%>
-      <th align="right"><%= _('Ghost_percent') %> % </th>
-      <th></th>
-    <%end%> 
+    <% if mor_11_extend? %>
+        <th align="right"><%= _('Ghost_percent') %> %</th>
+        <th></th>
+    <% end %>
 
     <th></th>
-    <%if @can_edit == true%>
-      <% if @allow_manage == true %>
-        <th></th>
-      <% end %>
+    <% if @can_edit == true %>
+        <% if @allow_manage == true %>
+            <th></th>
+        <% end %>
     <% end %>
   </tr>
   <% @rates.each_with_index { |rate, i| %>
-  <%# rate = Rate.find(:first,:conditions => ["rates.id = ?", r["id"]]) %>
-  <%# if rate %>
-    <tr class="row<%= (i % 2 + 1).to_s %>">
-      <td id="destination_<%=rate.id%>" <%=nice_rates_tolltip(rate)%> ><%= draw_flag rate.destination.direction_code %> <%= rate.destination.direction.name %></td>
-      <% if @use_lata %>
-        <td id="prefix_<%=rate.id%>" ><%= rate.destination.prefix %></td>
-        <td id="subcode_<%=rate.id%>" ><%= rate.destination.subcode %></td>
-        <td id="city_<%=rate.id%>" ><%= rate.destination.city %></td>
-        <td id="state_<%=rate.id%>" ><%= rate.destination.state %></td>
-        <td id="lata_<%=rate.id%>" ><%= rate.destination.lata %></td>
-        <td id="tier_<%=rate.id%>" ><%= rate.destination.tier %></td>
-        <td id="ocn_<%=rate.id%>" ><%= rate.destination.ocn %></td>
-        <td id="name_<%=rate.id%>" ><%= rate.destination.name %></td>
-      <% else %>
-        <td id="prefix_<%=rate.id%>" ><%= rate.destination.prefix %></td>
-        <td id="subcode_<%=rate.id%>" ><%= rate.destination.subcode %></td>
-        <td id="name_<%=rate.id%>" ><%= rate.destination.name if rate.destination.name%></td>
-      <% end %>
-      <%if mor_11_extend?%>
-        <td align="right" id="ghost_percent_<%=rate.id%>"><%=  nice_number rate.ghost_min_perc %></td>
-        <td align="center"><%= link_to b_edit, { :action => :ghost_percent_edit, :rate_id => rate.id, :id => @tariff.id}, :id =>"edit_img_"+rate.id.to_s %></td>
-      <%end%> 
-      <td align="center"><%= link_to b_details + _('Details'), { :action => 'rate_details', :id => rate }, :id =>"details_img_"+rate.id.to_s%></td>
-      <%if @can_edit == true%>
-        <% if @allow_manage == true %>
-          <td align="center"><%= link_to b_delete, { :action => 'rate_destroy', :id => rate, :tariff => @tariff.id}, :id =>"destroy_img_"+rate.id.to_s, :confirm => _('Are_you_sure'), :method => :post %></td>
+      <%# rate = Rate.find(:first,:conditions => ["rates.id = ?", r["id"]]) %>
+      <%# if rate %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="destination_<%= rate.id %>" <%= nice_rates_tolltip(rate) %> ><%= draw_flag rate.destination.direction_code %> <%= rate.destination.direction.name %></td>
+        <% if @use_lata %>
+            <td id="prefix_<%= rate.id %>"><%= rate.destination.prefix %></td>
+            <td id="subcode_<%= rate.id %>"><%= rate.destination.subcode %></td>
+            <td id="city_<%= rate.id %>"><%= rate.destination.city %></td>
+            <td id="state_<%= rate.id %>"><%= rate.destination.state %></td>
+            <td id="lata_<%= rate.id %>"><%= rate.destination.lata %></td>
+            <td id="tier_<%= rate.id %>"><%= rate.destination.tier %></td>
+            <td id="ocn_<%= rate.id %>"><%= rate.destination.ocn %></td>
+            <td id="name_<%= rate.id %>"><%= rate.destination.name %></td>
+        <% else %>
+            <td id="prefix_<%= rate.id %>"><%= rate.destination.prefix %></td>
+            <td id="subcode_<%= rate.id %>"><%= rate.destination.subcode %></td>
+            <td id="name_<%= rate.id %>"><%= rate.destination.name if rate.destination.name %></td>
         <% end %>
-      <% end %>
-    </tr>
-  <%# end %>
+        <% if mor_11_extend? %>
+            <td align="right" id="ghost_percent_<%= rate.id %>"><%= nice_number rate.ghost_min_perc %></td>
+            <td align="center"><%= link_to b_edit, {:action => :ghost_percent_edit, :rate_id => rate.id, :id => @tariff.id}, :id => "edit_img_"+rate.id.to_s %></td>
+        <% end %>
+        <td align="center"><%= link_to b_details + _('Details'), {:action => 'rate_details', :id => rate}, :id => "details_img_"+rate.id.to_s %></td>
+        <% if @can_edit == true %>
+            <% if @allow_manage == true %>
+                <td align="center"><%= link_to b_delete, {:action => 'rate_destroy', :id => rate, :tariff => @tariff.id}, :id => "destroy_img_"+rate.id.to_s, :confirm => _('Are_you_sure'), :method => :post %></td>
+            <% end %>
+        <% end %>
+      </tr>
+      <%# end %>
   <% } %>
 </table>
 
 
 
 <% if @total_pages > 1 %>
-  <br/>
-  <%= render :partial => 'page_select_header' %>
+    <br/>
+    <%= render :partial => 'page_select_header' %>
 <% end %>
 
-<%if @can_edit == true%>
-  <% if @allow_manage == true %>
-    <br />
-    <br />
-
-    <%= link_to b_add + _('New_rate'), :action => 'rate_new', :id => @tariff.id, :st => @st %>
-    <br/><br/>
-    <%= link_to_function(b_add + _('Quick_Add_New_Rate'), "Element.toggle('quick_add_new_rate')") %>
-
-    <div id='quick_add_new_rate' style='display:none;'>
-      <br/>
-      <%= form_tag :action => :rate_new_quick, :id => @tariff.id, :st => @st, :page => @page do%>
-        <table>
-          <tr>
-            <td><%= _('Prefix')%> : </td>
-            <td><%= text_field_tag :prefix, "",  :class => "input" %>
-              <%= observe_field("prefix",
-                :update   => :prefix_results,
-                :frequency => 0.5,
-                :url      => { :action => "check_prefix_availability", :tariff_id => @tariff.id,},
-                :loading => "Element.show('spinner');",
-                :complete=> "Element.hide('spinner');")
-            %>
-            </td>
-            <td id="prefix_results"></td>
-          </tr>
-          <tr>
-            <td><%= _("Price")%> : </td>
-            <td><%= text_field_tag :price, "", "class" => "input" %> </td>
-            <td><%= @tariff.currency.to_s%></td>
-          </tr>
-          <%if mor_11_extend?%>
-            <tr>
-              <td><%= _('Ghost_percent') %> : </td>
-              <td><%= text_field_tag :ghost_percent, "", "class" => "input" %> </td>
-              <td>%</td>
-            </tr>
-          <%end%>
-          <tr>
-            <td><%= submit_tag(_("Add_rate"), :disable_with=>_('Processing..'))%></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </table>
-      <% end %>
-    </div>
-
-    <% if @directions.size > 0 %>
-      <br/><br/>
-      <%= link_to_function(b_add + _('Add_New_Rate'), "Element.toggle('direction_list')") %>
-    <% end %>
-
-    <% if @directions.size > 0 %>
-      <div id='direction_list' style='display:none;'>
+<% if @can_edit == true %>
+    <% if @allow_manage == true %>
         <br/>
-        <table class='simple'>
-          <% @directions.each { |direction| %>
-            <tr>
-              <% if direction[:dest_count] != direction[:rate_count] %>
-                <td><%= link_to(draw_flag(direction.code)+" " + direction.name, :action => :rate_new_by_direction, :dir_id => direction.id, :id => @tariff.id, :st => @st) %></td>
-              <% else %>
-                <td><%= draw_flag(direction.code)+" " + direction.name + " - "+_("All_rates_are_set") %></td>
-              <% end %>
-            </tr>
-          <% } %>
-        </table>
-      </div>
+        <br/>
 
+        <%= link_to b_add + _('New_rate'), :action => 'rate_new', :id => @tariff.id, :st => @st %>
+        <br/><br/>
+        <%= link_to_function(b_add + _('Quick_Add_New_Rate'), "Element.toggle('quick_add_new_rate')") %>
+
+        <div id='quick_add_new_rate' style='display:none;'>
+          <br/>
+          <%= form_tag :action => :rate_new_quick, :id => @tariff.id, :st => @st, :page => @page do %>
+              <table>
+                <tr>
+                  <td><%= _('Prefix') %> :</td>
+                  <td><%= text_field_tag :prefix, "", :class => "input" %>
+                    <%= observe_field("prefix",
+                                      :update => :prefix_results,
+                                      :frequency => 0.5,
+                                      :url => {:action => "check_prefix_availability", :tariff_id => @tariff.id, },
+                                      :loading => "Element.show('spinner');",
+                                      :complete => "Element.hide('spinner');")
+                    %>
+                  </td>
+                  <td id="prefix_results"></td>
+                </tr>
+                <tr>
+                  <td><%= _("Price") %> :</td>
+                  <td><%= text_field_tag :price, "", "class" => "input" %> </td>
+                  <td><%= @tariff.currency.to_s %></td>
+                </tr>
+                <% if mor_11_extend? %>
+                    <tr>
+                      <td><%= _('Ghost_percent') %> :</td>
+                      <td><%= text_field_tag :ghost_percent, "", "class" => "input" %> </td>
+                      <td>%</td>
+                    </tr>
+                <% end %>
+                <tr>
+                  <td><%= submit_tag(_("Add_rate"), :disable_with => _('Processing..')) %></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </table>
+          <% end %>
+        </div>
+
+        <% if @directions.size > 0 %>
+            <br/><br/>
+            <%= link_to_function(b_add + _('Add_New_Rate'), "Element.toggle('direction_list')") %>
+        <% end %>
+
+        <% if @directions.size > 0 %>
+            <div id='direction_list' style='display:none;'>
+              <br/>
+              <table class='simple'>
+                <% @directions.each { |direction| %>
+                    <tr>
+                      <% if direction[:dest_count] != direction[:rate_count] %>
+                          <td><%= link_to(draw_flag(direction.code)+" " + direction.name, :action => :rate_new_by_direction, :dir_id => direction.id, :id => @tariff.id, :st => @st) %></td>
+                      <% else %>
+                          <td><%= draw_flag(direction.code)+" " + direction.name + " - "+_("All_rates_are_set") %></td>
+                      <% end %>
+                    </tr>
+                <% } %>
+              </table>
+            </div>
+
+        <% end %>
     <% end %>
-  <% end %>
 <% end %>
 
 <br/><br/><br/><br/>

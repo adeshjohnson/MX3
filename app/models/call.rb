@@ -62,7 +62,7 @@ class Call < ActiveRecord::Base
   end
 
   def Call.nice_failed_cond_sql
-    if User.current.usertype.to_s == 'user'  and Confline.get_value('Change_ANSWER_to_FAILED_if_HGC_not_equal_to_16_for_Users').to_i == 1
+    if User.current.usertype.to_s == 'user' and Confline.get_value('Change_ANSWER_to_FAILED_if_HGC_not_equal_to_16_for_Users').to_i == 1
       " (calls.disposition='FAILED' OR (calls.disposition='ANSWERED' and calls.hangupcause!='16')) "
     else
       " calls.disposition='FAILED' "
@@ -70,7 +70,7 @@ class Call < ActiveRecord::Base
   end
 
   def Call.nice_disposition
-    if User.current.usertype.to_s == 'user'  and Confline.get_value('Change_ANSWER_to_FAILED_if_HGC_not_equal_to_16_for_Users').to_i == 1
+    if User.current.usertype.to_s == 'user' and Confline.get_value('Change_ANSWER_to_FAILED_if_HGC_not_equal_to_16_for_Users').to_i == 1
       " IF(calls.disposition  = 'ANSWERED',IF((calls.disposition='ANSWERED' AND calls.hangupcause='16'), 'ANSWERED', 'FAILED'),disposition)"
     else
       " calls.disposition"
@@ -124,7 +124,7 @@ class Call < ActiveRecord::Base
     end
   end
 
-  def Call::get_calls_by_calldate(a1,a2, disposition = nil)
+  def Call::get_calls_by_calldate(a1, a2, disposition = nil)
 
     sql = "SELECT a.calldate, COUNT(b.calldate) AS c FROM calls a, calls b
     WHERE b.calldate <= a.calldate AND a.calldate <= DATE_ADD(b.calldate, INTERVAL b.duration SECOND)
@@ -138,6 +138,7 @@ class Call < ActiveRecord::Base
     Call.find_by_sql(sql)
 
   end
+
 =begin rdoc
 
 =end
@@ -176,7 +177,7 @@ class Call < ActiveRecord::Base
     i = 0
     start_date.upto(end_date) do |day|
       day_stats = day_by_day_stats[i]
-	    if day_stats['calldate'] and day.to_date == day_stats['calldate'].to_date
+      if day_stats['calldate'] and day.to_date == day_stats['calldate'].to_date
         date[index] = day_stats['calldate'].strftime("%Y-%m-%d")
         calls[index] = day_stats['total_calls'].to_i
         billsec[index] = day_stats['total_billsec'].to_i
@@ -189,8 +190,8 @@ class Call < ActiveRecord::Base
         avg_billsec[index] = 0
       end
       index += 1
-	  end
-   
+    end
+
     calls << day_by_day_stats.last['total_calls']
     billsec << day_by_day_stats.last['total_billsec']
     avg_billsec << day_by_day_stats.last['average_billsec']
@@ -295,11 +296,11 @@ class Call < ActiveRecord::Base
   def Call::summary_by_terminator(cond, terminator_cond, order_by, user)
     if user.usertype == "reseller"
       provider_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.reseller_billsec, 0)) AS 'provider_billsec'"
-      provider_price = SqlExport.replace_price("SUM(#{SqlExport.reseller_provider_price_sql})",{:reference=>  'provider_price'})
+      provider_price = SqlExport.replace_price("SUM(#{SqlExport.reseller_provider_price_sql})", {:reference => 'provider_price'})
       cond << "users.owner_id = #{user.id}"
     else
       provider_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.provider_billsec, 0)) AS 'provider_billsec'"
-      provider_price = SqlExport.replace_price("SUM(#{SqlExport.admin_provider_price_sql})", {:reference=> 'provider_price'})
+      provider_price = SqlExport.replace_price("SUM(#{SqlExport.admin_provider_price_sql})", {:reference => 'provider_price'})
     end
 
     #limit terminators to allowed ones.
@@ -339,6 +340,7 @@ class Call < ActiveRecord::Base
     MorLog.my_debug sql
     Call.find_by_sql(sql)
   end
+
 =begin rdoc
 =end
 
@@ -386,6 +388,7 @@ class Call < ActiveRecord::Base
     "
     Call.find_by_sql(sql)
   end
+
 =begin rdoc
 =end
 
@@ -421,41 +424,74 @@ class Call < ActiveRecord::Base
 
   def Call.calls_order_by(params, options)
     case options[:order_by].to_s.strip.to_s
-    when "time" then order_by = "calls.calldate"
-    when "src" then order_by = "calls.src"
-    when "dst" then order_by = "calls.dst"
-    when "nice_billsec" then order_by = "nice_billsec"
-    when "hgc" then order_by = "calls.hangupcause"
-    when "server" then order_by = "calls.server_id"
-    when "p_name" then order_by = "providers.name"
-    when "p_rate" then order_by = "calls.provider_rate"
-    when "p_price" then order_by = "calls.provider_price"
-    when "reseller" then order_by = "nice_reseller"
-    when "r_rate" then order_by = "calls.reseller_rate"
-    when "r_price" then order_by = "calls.reseller_price"
-    when "user" then order_by = "nice_user"
-    when "u_rate" then order_by = "calls.user_rate"
-    when "u_price" then order_by = "calls.user_price"
-    when "number" then order_by = "dids.did"
-    when "d_provider" then order_by = "calls.did_prov_price"
-    when "d_inc" then order_by = "calls.did_inc_price"
-    when "d_owner" then order_by = "calls.did_price"
-    when "prefix" then order_by = "calls.prefix"
-    when "direction" then      order_by = "destinations.direction_code"
-    when "destination" then    order_by = "destinations.name"
-    when "duration" then       order_by = "duration"
-    when "answered_calls" then order_by = "answered_calls"
-    when "total_calls" then    order_by = "total_calls"
-    when "cardgroup" then    order_by = "cardgroups.name"
-    when "asr" then            order_by = "asr"
-    when "acd" then            order_by = "acd"
-    when "markup" then            order_by = "markup"
-    when "margin" then            order_by = "margin"
-    when "user_price" then            order_by = "user_price"
-    when "provider_price" then            order_by = "provider_price"
-    when "profit" then            order_by = "profit"
-    else
-      order_by = options[:order_by]
+      when "time" then
+        order_by = "calls.calldate"
+      when "src" then
+        order_by = "calls.src"
+      when "dst" then
+        order_by = "calls.dst"
+      when "nice_billsec" then
+        order_by = "nice_billsec"
+      when "hgc" then
+        order_by = "calls.hangupcause"
+      when "server" then
+        order_by = "calls.server_id"
+      when "p_name" then
+        order_by = "providers.name"
+      when "p_rate" then
+        order_by = "calls.provider_rate"
+      when "p_price" then
+        order_by = "calls.provider_price"
+      when "reseller" then
+        order_by = "nice_reseller"
+      when "r_rate" then
+        order_by = "calls.reseller_rate"
+      when "r_price" then
+        order_by = "calls.reseller_price"
+      when "user" then
+        order_by = "nice_user"
+      when "u_rate" then
+        order_by = "calls.user_rate"
+      when "u_price" then
+        order_by = "calls.user_price"
+      when "number" then
+        order_by = "dids.did"
+      when "d_provider" then
+        order_by = "calls.did_prov_price"
+      when "d_inc" then
+        order_by = "calls.did_inc_price"
+      when "d_owner" then
+        order_by = "calls.did_price"
+      when "prefix" then
+        order_by = "calls.prefix"
+      when "direction" then
+        order_by = "destinations.direction_code"
+      when "destination" then
+        order_by = "destinations.name"
+      when "duration" then
+        order_by = "duration"
+      when "answered_calls" then
+        order_by = "answered_calls"
+      when "total_calls" then
+        order_by = "total_calls"
+      when "cardgroup" then
+        order_by = "cardgroups.name"
+      when "asr" then
+        order_by = "asr"
+      when "acd" then
+        order_by = "acd"
+      when "markup" then
+        order_by = "markup"
+      when "margin" then
+        order_by = "margin"
+      when "user_price" then
+        order_by = "user_price"
+      when "provider_price" then
+        order_by = "provider_price"
+      when "profit" then
+        order_by = "profit"
+      else
+        order_by = options[:order_by]
     end
     if order_by != ""
       order_by += (options[:order_desc].to_i == 0 ? " ASC" : " DESC")
@@ -465,7 +501,7 @@ class Call < ActiveRecord::Base
 
 
   def call_log
-    c_l = CallLog.find(:first, :conditions=>["uniqueid = ?", self.uniqueid])
+    c_l = CallLog.find(:first, :conditions => ["uniqueid = ?", self.uniqueid])
     return c_l
   end
 
@@ -475,9 +511,9 @@ class Call < ActiveRecord::Base
     select << SqlExport.nice_user_sql
     #select << 'calls.user_id, users.first_name, users.last_name, card_id, cards.number'
     select << Call.nice_disposition + ' AS disposition'
-    ['did_price', 'did_inc_price', 'did_prov_price'].each{|co| select << "(#{co} * #{options[:exchange_rate]} ) AS #{co}_exrate"}
+    ['did_price', 'did_inc_price', 'did_prov_price'].each { |co| select << "(#{co} * #{options[:exchange_rate]} ) AS #{co}_exrate" }
     #if reseller pro - change common use provider price, rate to reseller tariff rate, price
-    
+
     select << "(#{SqlExport.reseller_rate_sql} * #{options[:exchange_rate]} ) AS reseller_rate_exrate"
 
     if options[:current_user].usertype == 'reseller'
@@ -502,13 +538,13 @@ class Call < ActiveRecord::Base
         select << "(#{SqlExport.admin_profit_sql}) * #{options[:exchange_rate]} AS profit"
       end
     end
-    select << "IF(resellers.id > 0, #{SqlExport.nice_user_sql("resellers", nil)}, '') AS 'nice_reseller'" 
-    Call.find(:all, :select=> select.join(", \n") , :conditions=>[cond.join(" \nAND "), *var], :joins=>jn.join(" \n"), :order=>options[:order], :limit=>"#{((options[:page].to_i - 1 ) * options[:items_per_page].to_i).to_i}, #{options[:items_per_page].to_i}")
+    select << "IF(resellers.id > 0, #{SqlExport.nice_user_sql("resellers", nil)}, '') AS 'nice_reseller'"
+    Call.find(:all, :select => select.join(", \n"), :conditions => [cond.join(" \nAND "), *var], :joins => jn.join(" \n"), :order => options[:order], :limit => "#{((options[:page].to_i - 1) * options[:items_per_page].to_i).to_i}, #{options[:items_per_page].to_i}")
   end
 
   def Call.last_calls_total(options={})
     cond, var, jn = Call.last_calls_parse_params(options)
-    Call.count(:all, :joins=>jn.join(" \n"), :conditions=>[cond.join(' AND '), *var]).to_i
+    Call.count(:all, :joins => jn.join(" \n"), :conditions => [cond.join(' AND '), *var]).to_i
   end
 
   def Call.last_calls_total_stats(options={})
@@ -527,8 +563,8 @@ class Call < ActiveRecord::Base
       reseller_price = SqlExport.admin_reseller_price_no_dids_sql
     end
     Call.find(
-      :first,
-      :select => "
+        :first,
+        :select => "
                  COUNT(*) as total_calls,
                  SUM(IF((billsec IS NULL OR billsec = 0), IF(real_billsec IS NULL, 0, real_billsec), billsec)) as total_duration,
                  SUM(#{SqlExport.user_price_sql}) * #{options[:exchange_rate].to_f} as total_user_price_with_dids,
@@ -541,8 +577,8 @@ class Call < ActiveRecord::Base
                  SUM(did_inc_price) * #{options[:exchange_rate].to_f} as total_did_inc_price,
                  
       " + prov_price+"," + profit,
-      :joins=>jn.join(" \n"),
-      :conditions=>[cond.join(' AND '), *var])
+        :joins => jn.join(" \n"),
+        :conditions => [cond.join(' AND '), *var])
   end
 
   def Call.last_calls_csv(options={})
@@ -551,17 +587,17 @@ class Call < ActiveRecord::Base
     format = Confline.get_value('Date_format', options[:current_user].owner_id).gsub('M', 'i')
     #calldate2 - because something overwites calldate when changing date format
     time_offset = options[:current_user].time_offset
-    s <<  SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format=>format, :offset=>time_offset}), "calldate2")
-    s <<  SqlExport.column_escape_null("calls.src", "src")
+    s << SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format => format, :offset => time_offset}), "calldate2")
+    s << SqlExport.column_escape_null("calls.src", "src")
     if options[:pdf].to_i == 1
-      s <<  SqlExport.column_escape_null("calls.clid", "clid")
+      s << SqlExport.column_escape_null("calls.clid", "clid")
     end
 
     options[:usertype] == 'user' ? s << hide_dst_for_user_sql(self, "csv", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"}) : s << SqlExport.column_escape_null("calls.localized_dst", "dst")
-    s << SqlExport.column_escape_null("calls.prefix", "prefix") if options[:current_user].usertype != 'reseller'   
+    s << SqlExport.column_escape_null("calls.prefix", "prefix") if options[:current_user].usertype != 'reseller'
     s << "CONCAT(#{SqlExport.column_escape_null("directions.name")}, ' ', #{SqlExport.column_escape_null("destinations.subcode")}, ' ', #{SqlExport.column_escape_null("destinations.name")}) as destination"
     s << Call.nice_billsec_sql
-    
+
     if options[:current_user].usertype != 'user' or (Confline.get_value('Show_HGC_for_Resellers').to_i == 1 and options[:current_user].usertype == 'reseller')
       s << SqlExport.column_escape_null("CONCAT(#{SqlExport.column_escape_null("calls.disposition")}, '(', #{SqlExport.column_escape_null("calls.hangupcause")}, ')')", 'dispod')
     else
@@ -571,28 +607,28 @@ class Call < ActiveRecord::Base
       s << SqlExport.column_escape_null("calls.server_id", "server_id")
       s << SqlExport.column_escape_null("providers.name", "provider_name")
       if options[:can_see_finances]
-        s << SqlExport.replace_dec("(IF(calls.provider_rate IS NULL, 0, #{SqlExport.admin_provider_rate_sql}) * #{options[:exchange_rate]} )", options[:column_dem],'provider_rate')
-        s << SqlExport.replace_dec("(IF(calls.provider_price IS NULL, 0, #{SqlExport.admin_provider_price_sql}) * #{options[:exchange_rate]} )",options[:column_dem],'provider_price')
+        s << SqlExport.replace_dec("(IF(calls.provider_rate IS NULL, 0, #{SqlExport.admin_provider_rate_sql}) * #{options[:exchange_rate]} )", options[:column_dem], 'provider_rate')
+        s << SqlExport.replace_dec("(IF(calls.provider_price IS NULL, 0, #{SqlExport.admin_provider_price_sql}) * #{options[:exchange_rate]} )", options[:column_dem], 'provider_price')
       end
       if (defined?(RS_Active) and RS_Active.to_i == 1)
         nice_reseller = "IF(resellers.id != 0,IF(LENGTH(resellers.first_name+resellers.last_name) > 0, CONCAT(resellers.first_name, ' ',resellers.last_name ), resellers.username), ' ')"
         s << "IF(#{nice_reseller} IS NULL, ' ', #{nice_reseller}) as 'nice_reseller'"
         if options[:can_see_finances]
-          s << SqlExport.replace_dec("(#{SqlExport.admin_reseller_rate_sql} * #{options[:exchange_rate]} ) ",options[:column_dem],'reseller_rate')
-          s << SqlExport.replace_dec("(#{SqlExport.admin_reseller_price_sql} * #{options[:exchange_rate]} ) ",options[:column_dem],'reseller_price')
+          s << SqlExport.replace_dec("(#{SqlExport.admin_reseller_rate_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'reseller_rate')
+          s << SqlExport.replace_dec("(#{SqlExport.admin_reseller_price_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'reseller_price')
         end
       end
 
       s << "IF(calls.card_id = 0 ,CONCAT(IF(users.first_name IS NULL, '', users.first_name), ' ', IF(users.last_name IS NULL, '', users.last_name)), CONCAT('Card#', IF(cards.number IS NULL, '', cards.number))) as 'user'"
       if options[:can_see_finances]
-        s << SqlExport.replace_dec("(IF(calls.user_rate IS NULL, 0, #{SqlExport.user_rate_sql}) * #{options[:exchange_rate]} )",options[:column_dem],'user_rate')
-        s << SqlExport.replace_dec("(IF(calls.user_price IS NULL, 0, #{SqlExport.user_price_sql}) * #{options[:exchange_rate]} ) ",options[:column_dem],'user_price')
+        s << SqlExport.replace_dec("(IF(calls.user_rate IS NULL, 0, #{SqlExport.user_rate_sql}) * #{options[:exchange_rate]} )", options[:column_dem], 'user_rate')
+        s << SqlExport.replace_dec("(IF(calls.user_price IS NULL, 0, #{SqlExport.user_price_sql}) * #{options[:exchange_rate]} ) ", options[:column_dem], 'user_price')
       end
       s << "IF(dids.did IS NULL, '' , dids.did) AS 'did'"
       if options[:can_see_finances]
-        s << SqlExport.replace_dec("(IF(calls.did_prov_price IS NULL, 0, calls.did_prov_price) * #{options[:exchange_rate]} ) ",options[:column_dem], 'did_prov_price')
-        s << SqlExport.replace_dec("(IF(calls.did_inc_price IS NULL, 0, calls.did_inc_price) * #{options[:exchange_rate]} ) ",options[:column_dem], 'did_inc_price')
-        s << SqlExport.replace_dec("(IF(calls.did_price IS NULL, 0 , calls.did_price) * #{options[:exchange_rate]} ) ",options[:column_dem], 'did_price')
+        s << SqlExport.replace_dec("(IF(calls.did_prov_price IS NULL, 0, calls.did_prov_price) * #{options[:exchange_rate]} ) ", options[:column_dem], 'did_prov_price')
+        s << SqlExport.replace_dec("(IF(calls.did_inc_price IS NULL, 0, calls.did_inc_price) * #{options[:exchange_rate]} ) ", options[:column_dem], 'did_inc_price')
+        s << SqlExport.replace_dec("(IF(calls.did_price IS NULL, 0 , calls.did_price) * #{options[:exchange_rate]} ) ", options[:column_dem], 'did_price')
       end
     end
     if options[:current_user].show_billing_info == 1 and options[:can_see_finances]
@@ -601,37 +637,37 @@ class Call < ActiveRecord::Base
           s << SqlExport.column_escape_null("providers.name", "provider_name")
           if options[:can_see_finances]
             #if reseller pro - change common use provider price, rate to reseller tariff rate, price
-            s << SqlExport.replace_dec("(IF(calls.provider_rate IS NULL, 0, #{SqlExport.reseller_provider_rate_sql}) * #{options[:exchange_rate]} )",options[:column_dem], 'provider_rate')
-            s << SqlExport.replace_dec("(IF(calls.provider_price IS NULL, 0, #{SqlExport.reseller_provider_price_sql}) * #{options[:exchange_rate]} ) ",options[:column_dem],  'provider_price')
+            s << SqlExport.replace_dec("(IF(calls.provider_rate IS NULL, 0, #{SqlExport.reseller_provider_rate_sql}) * #{options[:exchange_rate]} )", options[:column_dem], 'provider_rate')
+            s << SqlExport.replace_dec("(IF(calls.provider_price IS NULL, 0, #{SqlExport.reseller_provider_price_sql}) * #{options[:exchange_rate]} ) ", options[:column_dem], 'provider_price')
           end
         end
-        s << SqlExport.replace_dec("(#{SqlExport.reseller_rate_sql} * #{options[:exchange_rate]} ) ",options[:column_dem], 'reseller_rate')
-        s << SqlExport.replace_dec("(#{SqlExport.reseller_price_sql} * #{options[:exchange_rate]} ) ",options[:column_dem], 'reseller_price')
+        s << SqlExport.replace_dec("(#{SqlExport.reseller_rate_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'reseller_rate')
+        s << SqlExport.replace_dec("(#{SqlExport.reseller_price_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'reseller_price')
         s << "IF(calls.card_id = 0 ,CONCAT(IF(users.first_name IS NULL, '', users.first_name), ' ', IF(users.last_name IS NULL, '', users.last_name)), CONCAT('Card#', IF(cards.number IS NULL, '', cards.number))) as 'user'"
-        s << SqlExport.replace_dec("(#{SqlExport.user_rate_sql} * #{options[:exchange_rate]} ) ",options[:column_dem], 'user_rate')
-        s << SqlExport.replace_dec("(IF(#{SqlExport.user_price_sql} != 0 , (#{SqlExport.user_price_sql}), 0) * #{options[:exchange_rate]} ) ",options[:column_dem], 'user_price')
+        s << SqlExport.replace_dec("(#{SqlExport.user_rate_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'user_rate')
+        s << SqlExport.replace_dec("(IF(#{SqlExport.user_price_sql} != 0 , (#{SqlExport.user_price_sql}), 0) * #{options[:exchange_rate]} ) ", options[:column_dem], 'user_price')
       end
       if options[:current_user].usertype == 'user'
         s << SqlExport.replace_dec("((#{SqlExport.user_price_sql}) * #{options[:exchange_rate]} ) ", options[:column_dem], "user_price")
       end
     end
-    
+
     if options[:current_user].usertype == "admin" or options[:current_user].usertype == "accountant"
       if options[:can_see_finances]
-        s << SqlExport.replace_dec("(#{SqlExport.admin_profit_sql} * #{options[:exchange_rate]})",options[:column_dem],'profit')
+        s << SqlExport.replace_dec("(#{SqlExport.admin_profit_sql} * #{options[:exchange_rate]})", options[:column_dem], 'profit')
       end
     elsif options[:current_user].usertype == 'reseller'
-      if options[:can_see_finances]      
-        s << SqlExport.replace_dec("(#{SqlExport.reseller_profit_sql} * #{options[:exchange_rate]})",options[:column_dem],  'profit')
+      if options[:can_see_finances]
+        s << SqlExport.replace_dec("(#{SqlExport.reseller_profit_sql} * #{options[:exchange_rate]})", options[:column_dem], 'profit')
       end
       s << "IF(dids.did IS NULL , '' , dids.did) AS 'did'"
     end
-    
-    
+
+
     filename = "Last_calls-#{options[:current_user].id.to_s.gsub(" ", "_")}-#{options[:from].gsub(" ", "_").gsub(":", "_")}-#{options[:till].gsub(" ", "_").gsub(":", "_")}-#{Time.now().to_i}"
     sql = "SELECT * "
     if options[:test] != 1 and options[:pdf].to_i == 0
-      sql +=    " INTO OUTFILE '/tmp/#{filename}.csv'
+      sql += " INTO OUTFILE '/tmp/#{filename}.csv'
             FIELDS TERMINATED BY '#{options[:collumn_separator]}' OPTIONALLY ENCLOSED BY '#{''}'
             ESCAPED BY '#{"\\\\"}'
         LINES TERMINATED BY '#{"\\n"}' "
@@ -642,7 +678,7 @@ class Call < ActiveRecord::Base
     sql += " FROM (SELECT #{s.join(', ')}
              FROM calls "
     unless options[:s_country] and !options[:s_country].blank?
-      sql +=  "LEFT JOIN destinations ON (destinations.prefix = IF(calls.prefix IS NULL, '', calls.prefix)) "
+      sql += "LEFT JOIN destinations ON (destinations.prefix = IF(calls.prefix IS NULL, '', calls.prefix)) "
     end
     sql += jn.join(' ')
     sql += "LEFT JOIN directions ON (directions.code = destinations.direction_code)"
@@ -670,28 +706,28 @@ class Call < ActiveRecord::Base
     var = [options[:a1], options[:a2]]
 
     if options[:s_server].to_i != -1 and options[:current_user].usertype != 'reseller'
-      cond << 'server_id = ?' ; var << options[:s_server].to_i
+      cond << 'server_id = ?'; var << options[:s_server].to_i
     end
 
     if options[:s_user].to_i != -1
-      cond << 'user_id = ? ' ; var << options[:s_user]  # AND b.user_id = '#{@search_user}' "
+      cond << 'user_id = ? '; var << options[:s_user] # AND b.user_id = '#{@search_user}' "
       if options[:s_device].to_i != -1
-        cond << 'src_device_id = ?' ; var << options[:s_device] # AND b.src_device_id = '#{@search_device}'"
+        cond << 'src_device_id = ?'; var << options[:s_device] # AND b.src_device_id = '#{@search_device}'"
       end
     end
 
     if options[:s_reseller].to_i != -1
-      cond << 'calls.reseller_id = ? ' ; var << options[:s_reseller]
+      cond << 'calls.reseller_id = ? '; var << options[:s_reseller]
     end
 
     if options[:s_direction] != -1
       case options[:s_direction].to_s
-      when "outgoing"
-        cond << 'did_id= 0'
-      when "incoming"
-        cond << "did_id > 0 AND callertype = 'Local'"
-      when "mixed"
-        cond << "did_id > 0 AND callertype = 'Outside'"
+        when "outgoing"
+          cond << 'did_id= 0'
+        when "incoming"
+          cond << "did_id > 0 AND callertype = 'Local'"
+        when "mixed"
+          cond << "did_id > 0 AND callertype = 'Outside'"
       end
     end
 
@@ -699,7 +735,7 @@ class Call < ActiveRecord::Base
       cond << 'provider_id = ?'; var << options[:s_provider]
     end
     if options[:s_did].to_i != -1 and options[:current_user].usertype != 'reseller'
-      cond << "did_id= ?" ; var << options[:s_did]
+      cond << "did_id= ?"; var << options[:s_did]
     end
 
     if options[:current_user].usertype == "reseller"
@@ -707,9 +743,9 @@ class Call < ActiveRecord::Base
       var += [options[:current_user].id, options[:current_user].id, options[:current_user].id]
     end
 
-    c2 = Call.find(:all, :conditions=>[cond.join(' AND ').to_s] + var, :select=>'calldate, duration')
+    c2 = Call.find(:all, :conditions => [cond.join(' AND ').to_s] + var, :select => 'calldate, duration')
     cond << "disposition = 'ANSWERED'"
-    calls1 = Call.find(:all, :conditions=>[cond.join(' AND ').to_s] + var, :select=>'calldate, duration')
+    calls1 = Call.find(:all, :conditions => [cond.join(' AND ').to_s] + var, :select => 'calldate, duration')
     return calls1, c2
   end
 
@@ -741,47 +777,47 @@ class Call < ActiveRecord::Base
     cond << 'calls.disposition = "ANSWERED"'
 
     calls_all = Call.find(:all,
-      :conditions=>[cond.join(' AND ').to_s] + var,
-      :select=>"COUNT(*) as 'calls', SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'billsec', SUM(#{provider_price}) as 'selfcost', SUM(#{user_price}) as 'price', SUM(#{user_price}-#{provider_price}) as calls_profit",
-      :joins=>"LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}")
+                          :conditions => [cond.join(' AND ').to_s] + var,
+                          :select => "COUNT(*) as 'calls', SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'billsec', SUM(#{provider_price}) as 'selfcost', SUM(#{user_price}) as 'price', SUM(#{user_price}-#{provider_price}) as calls_profit",
+                          :joins => "LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}")
 
     calls = Call.find(:all,
-      :conditions=>[cond.join(' AND ').to_s] + var,
-      :select=>"destinations.direction_code as 'direction_code', destinationgroups.id, destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',  COUNT(*) as 'calls', SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'billsec', SUM(#{provider_price}) as 'selfcost', SUM(#{user_price}) as 'price'",
-      :joins=>"LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}",
-      :group=>'destinationgroups.id',
-      :order=>'destinationgroups.name ASC, destinationgroups.desttype ASC')
+                      :conditions => [cond.join(' AND ').to_s] + var,
+                      :select => "destinations.direction_code as 'direction_code', destinationgroups.id, destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',  COUNT(*) as 'calls', SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'billsec', SUM(#{provider_price}) as 'selfcost', SUM(#{user_price}) as 'price'",
+                      :joins => "LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}",
+                      :group => 'destinationgroups.id',
+                      :order => 'destinationgroups.name ASC, destinationgroups.desttype ASC')
 
     calls_for_pie_graph = Call.find(:all,
-      :conditions=>[cond.join(' AND ').to_s] + var,
-      :select=>"destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'billsec'",
-      :joins=>"LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}",
-      :group=>'destinationgroups.id',
-      :order=>'billsec desc')
+                                    :conditions => [cond.join(' AND ').to_s] + var,
+                                    :select => "destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'billsec'",
+                                    :joins => "LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}",
+                                    :group => 'destinationgroups.id',
+                                    :order => 'billsec desc')
 
     calls_for_price = Call.find(:all,
-      :conditions=>[cond.join(' AND ').to_s] + var,
-      :select=>"destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',  SUM(#{user_price}) as 'price'",
-      :joins=>"LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}",
-      :group=>'destinationgroups.id',
-      :order=>'price desc')
+                                :conditions => [cond.join(' AND ').to_s] + var,
+                                :select => "destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',  SUM(#{user_price}) as 'price'",
+                                :joins => "LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}",
+                                :group => 'destinationgroups.id',
+                                :order => 'price desc')
 
     calls_for_profit = Call.find(:all,
-      :conditions=>[cond.join(' AND ').to_s] + var,
-      :select=>"destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type', SUM(#{user_price}-#{provider_price}) as calls_profit",
-      :joins=>"LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}",
-      :group=>'destinationgroups.id',
-      :order=>'calls_profit desc')
+                                 :conditions => [cond.join(' AND ').to_s] + var,
+                                 :select => "destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type', SUM(#{user_price}-#{provider_price}) as calls_profit",
+                                 :joins => "LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}",
+                                 :group => 'destinationgroups.id',
+                                 :order => 'calls_profit desc')
 
     #---------- Graphs ------------
     #    Countries times for pie
     all = 0
     country_times_pie= "\""
     if calls_for_pie_graph and calls_for_pie_graph.size.to_i > 0
-      calls_for_pie_graph.each_with_index{|c,i|
+      calls_for_pie_graph.each_with_index { |c, i|
         pull = i == 1 ? 'true' : 'false'
         if i < 6
-          country_times_pie += c.dg_name.to_s + " " + c.dg_type + ";" + (c.billsec.to_i / 60).to_s + ";" + pull +  "\\n"
+          country_times_pie += c.dg_name.to_s + " " + c.dg_type + ";" + (c.billsec.to_i / 60).to_s + ";" + pull + "\\n"
         else
           all += c.billsec
         end
@@ -796,10 +832,10 @@ class Call < ActiveRecord::Base
     all = 0
     countries_profit_pie = "\""
     if calls_for_profit and calls_for_profit.size.to_i > 0
-      calls_for_profit.each_with_index{|c,i|
+      calls_for_profit.each_with_index { |c, i|
         pull = i == 1 ? 'true' : 'false'
         if i < 6
-          countries_profit_pie += c.dg_name.to_s + " " + c.dg_type + ";" + (Email.nice_number(c.calls_profit.to_f)).to_s + ";" + pull +  "\\n"
+          countries_profit_pie += c.dg_name.to_s + " " + c.dg_type + ";" + (Email.nice_number(c.calls_profit.to_f)).to_s + ";" + pull + "\\n"
         else
           all += c.calls_profit.to_f
         end
@@ -814,10 +850,10 @@ class Call < ActiveRecord::Base
     all = 0
     countries_incomes_pie = "\""
     if calls_for_price and calls_for_price.size.to_i > 0
-      calls_for_price.each_with_index{|c,i|
+      calls_for_price.each_with_index { |c, i|
         pull = i == 1 ? 'true' : 'false'
         if i < 6
-          countries_incomes_pie += c.dg_name.to_s + " " + c.dg_type + ";" + Email.nice_number(c.price.to_f).to_s + ";" + pull +  "\\n"
+          countries_incomes_pie += c.dg_name.to_s + " " + c.dg_type + ";" + Email.nice_number(c.price.to_f).to_s + ";" + pull + "\\n"
         else
           all += c.price.to_f
         end
@@ -833,14 +869,14 @@ class Call < ActiveRecord::Base
   end
 
   def Call.hangup_cause_codes_stats(options={})
-    cond = [] ; var = []
+    cond = []; var = []
 
     if options[:user_id].to_i != -1
-      cond << 'calls.user_id = ? ' ; var << options[:user_id]
+      cond << 'calls.user_id = ? '; var << options[:user_id]
     end
 
     if options[:device_id].to_i != -1
-      cond <<  "(calls.src_device_id = ? OR calls.dst_device_id = ?)"
+      cond << "(calls.src_device_id = ? OR calls.dst_device_id = ?)"
       var +=[options[:device_id].to_i, options[:device_id].to_i]
     end
 
@@ -885,8 +921,8 @@ class Call < ActiveRecord::Base
     end
 
     day_calls = Call.find_by_sql(
-      "SELECT * FROM (SELECT * FROM (SELECT * FROM (#{date_period.join(" UNION ")}) AS v) AS d) AS u 
-        LEFT JOIN (SELECT DATE(calldate) as call_date, #{SqlExport.nice_date('DATE(calldate)',  {:reference=> 'call_date_formated', :format=>format, :tz=>options[:current_user].time_zone})}, SUM(IF(calls.hangupcause = '16', 1,0)) as 'calls', SUM(IF(calls.hangupcause != '16', 1,0)) as 'b_calls' FROM calls
+        "SELECT * FROM (SELECT * FROM (SELECT * FROM (#{date_period.join(" UNION ")}) AS v) AS d) AS u
+        LEFT JOIN (SELECT DATE(calldate) as call_date, #{SqlExport.nice_date('DATE(calldate)', {:reference => 'call_date_formated', :format => format, :tz => options[:current_user].time_zone})}, SUM(IF(calls.hangupcause = '16', 1,0)) as 'calls', SUM(IF(calls.hangupcause != '16', 1,0)) as 'b_calls' FROM calls
                     LEFT JOIN hangupcausecodes ON (calls.hangupcause = hangupcausecodes.code ) #{des}
                     WHERE #{ ActiveRecord::Base.sanitize_sql_array([(cond+["calls.hangupcause != ''"]).join(' AND '), *var])}
                     GROUP BY call_date ) AS p ON (u.call_date2 = DATE(p.call_date) )")
@@ -897,10 +933,10 @@ class Call < ActiveRecord::Base
     hcc_pie= "\""
     calls_size = 0
     if code_calls and code_calls.size.to_i > 0
-      code_calls.each_with_index{|c,i|
+      code_calls.each_with_index { |c, i|
         pull = i == 1 ? 'true' : 'false'
         if i < 6
-          hcc_pie += c.hc_code.to_s + ";" + (c.calls.to_i).to_s + ";" + pull +  "\\n"
+          hcc_pie += c.hc_code.to_s + ";" + (c.calls.to_i).to_s + ";" + pull + "\\n"
         else
           all += c.calls.to_i
         end
@@ -914,8 +950,8 @@ class Call < ActiveRecord::Base
 
     #    Hangup causes codes for line
     hcc_graph = []
-    day_calls.each_with_index{|c, i|
-      hcc_graph << c.call_date_formated.to_s  + ";" + c.calls.to_i.to_s + ";"+c.b_calls.to_i.to_s
+    day_calls.each_with_index { |c, i|
+      hcc_graph << c.call_date_formated.to_s + ";" + c.calls.to_i.to_s + ";"+c.b_calls.to_i.to_s
     }
 
     return calls, hcc_pie, hcc_graph.join("\\n"), calls_size
@@ -925,9 +961,9 @@ class Call < ActiveRecord::Base
 
     cond = ["calls.calldate BETWEEN ? AND ?  AND calls.disposition = 'ANSWERED' "]
     var =[options[:from].to_s + ' 00:00:00', options[:till].to_s + ' 23:59:59']
-    jn = ['LEFT JOIN destinations ON (destinations.prefix = calls.prefix)',"JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id)#{SqlExport.left_join_reseler_providers_to_calls_sql}"]
+    jn = ['LEFT JOIN destinations ON (destinations.prefix = calls.prefix)', "JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id)#{SqlExport.left_join_reseler_providers_to_calls_sql}"]
     if options[:s_user].to_i != -1
-      cond << 'calls.user_id = ? '; var <<  options[:s_user]
+      cond << 'calls.user_id = ? '; var << options[:s_user]
     end
 
     if options[:current_user].usertype == "reseller"
@@ -941,20 +977,20 @@ class Call < ActiveRecord::Base
     end
     s =[]
 
-    s << SqlExport.replace_sep("destinationgroups.name", options[:collumn_separator], nil, "dg_name" )
-    s <<  SqlExport.column_escape_null("destinationgroups.desttype", "dg_type")
-    s <<  SqlExport.column_escape_null("COUNT(*)", 'calls')
+    s << SqlExport.replace_sep("destinationgroups.name", options[:collumn_separator], nil, "dg_name")
+    s << SqlExport.column_escape_null("destinationgroups.desttype", "dg_type")
+    s << SqlExport.column_escape_null("COUNT(*)", 'calls')
     s << SqlExport.column_escape_null("SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) ))", 'billsec')
     unless options[:hide_finances]
-      s <<  SqlExport.column_escape_null("SUM(#{provider_price})", 'selfcost')
-      s <<  SqlExport.column_escape_null("SUM(#{user_price})", 'price')
-      s <<  SqlExport.column_escape_null("SUM(#{user_price} - #{provider_price})", 'profit')
+      s << SqlExport.column_escape_null("SUM(#{provider_price})", 'selfcost')
+      s << SqlExport.column_escape_null("SUM(#{user_price})", 'price')
+      s << SqlExport.column_escape_null("SUM(#{user_price} - #{provider_price})", 'profit')
     end
 
     filename = "Country_stats-#{options[:from].gsub(" ", "_").gsub(":", "_")}-#{options[:till].gsub(" ", "_").gsub(":", "_")}-#{Time.now().to_i}"
     sql = "SELECT * "
     if options[:test] != 1
-      sql +=    " INTO OUTFILE '/tmp/#{filename}.csv'
+      sql += " INTO OUTFILE '/tmp/#{filename}.csv'
             FIELDS TERMINATED BY '#{options[:collumn_separator]}' OPTIONALLY ENCLOSED BY '#{''}'
             ESCAPED BY '#{"\\\\"}'
         LINES TERMINATED BY '#{"\\n"}' "
@@ -999,13 +1035,13 @@ class Call < ActiveRecord::Base
       s << "IF(calls.prefix = '', 'No prefix found', calls.prefix ) AS prefix, directions.name as 'dir_name', destinations.direction_code AS 'code', destinations.subcode AS 'subcode', destinations.name AS 'dest_name'"
     else
       if options[:destination_grouping].to_i == 1
-        s << SqlExport.column_escape_null("CONCAT(directions.name, ' ', destinations.subcode, ' ', destinations.name, ' (',  calls.prefix, ') ' )", "direct_name",  'No prefix found')
+        s << SqlExport.column_escape_null("CONCAT(directions.name, ' ', destinations.subcode, ' ', destinations.name, ' (',  calls.prefix, ') ' )", "direct_name", 'No prefix found')
       else
         s << SqlExport.column_escape_null("CONCAT(directions.name, ' ', destinations.subcode, ' (',  calls.prefix, ') ')", "direct_name", 'No prefix found')
       end
     end
     s << "cardgroups.name AS  'cardgroup_name'"
-    s << SqlExport.column_escape_null("SUM(IF(calls.disposition = 'ANSWERED', calls.billsec, 0))",  'duration', 0)
+    s << SqlExport.column_escape_null("SUM(IF(calls.disposition = 'ANSWERED', calls.billsec, 0))", 'duration', 0)
     s << SqlExport.column_escape_null("SUM(IF(calls.disposition = 'ANSWERED', 1,0))", 'answered_calls', 0)
     s << SqlExport.column_escape_null("COUNT(*)", 'total_calls', 0)
     s << SqlExport.column_escape_null("SUM(IF(calls.disposition = 'ANSWERED', 1,0))/COUNT(*)*100", 'asr', 0)
@@ -1014,9 +1050,9 @@ class Call < ActiveRecord::Base
     s << SqlExport.column_escape_null("SUM(calls.user_price)", "user_price", 0)
     s << SqlExport.column_escape_null("SUM(calls.user_price) - SUM(calls.provider_price)", 'profit', 0)
     s << SqlExport.column_escape_null("IF((SUM(calls.user_price) != 0 OR SUM(calls.provider_price) != 0),(((SUM(calls.user_price) - SUM(calls.provider_price)) / SUM(calls.user_price)) * 100),0)", 'margin', 0)
-    s << SqlExport.column_escape_null("IF((SUM(calls.user_price) != 0 OR SUM(calls.provider_price) != 0),(((SUM(calls.user_price) / SUM(calls.provider_price)) * 100 ) - 100), 0)",'markup', 0)
+    s << SqlExport.column_escape_null("IF((SUM(calls.user_price) != 0 OR SUM(calls.provider_price) != 0),(((SUM(calls.user_price) / SUM(calls.provider_price)) * 100 ) - 100), 0)", 'markup', 0)
     order = !options[:order].to_s.blank? ? 'ORDER BY ' + options[:order] : ''
-    group =  group_by.size > 0 ? 'GROUP BY ' +group_by.join(", ") : ''
+    group = group_by.size > 0 ? 'GROUP BY ' +group_by.join(", ") : ''
 
     jn = ["LEFT JOIN devices ON (calls.src_device_id = devices.id)", "LEFT JOIN users ON (users.id = devices.user_id)", "JOIN cards ON (cards.id = calls.card_id)", "LEFT JOIN cardgroups ON (cardgroups.id = cards.cardgroup_id)", "LEFT JOIN destinations ON (destinations.prefix = calls.prefix)", "LEFT JOIN directions ON (directions.code = destinations.direction_code)"]
 
@@ -1024,7 +1060,7 @@ class Call < ActiveRecord::Base
       filename = "Cardgroups_aggregate-#{options[:from].gsub(" ", "_").gsub(":", "_")}-#{options[:till].gsub(" ", "_").gsub(":", "_")}-#{Time.now().to_i}"
       sql = "SELECT * "
       if options[:test].to_i != 1
-        sql +=    " INTO OUTFILE '/tmp/#{filename}.csv'
+        sql += " INTO OUTFILE '/tmp/#{filename}.csv'
             FIELDS TERMINATED BY '#{options[:collumn_separator]}' OPTIONALLY ENCLOSED BY '#{''}'
             ESCAPED BY '#{"\\\\"}'
         LINES TERMINATED BY '#{"\\n"}' "
@@ -1053,8 +1089,8 @@ class Call < ActiveRecord::Base
     MorLog.my_debug("CSV analyze_file #{name}", 1)
     arr = {}
     current_user = User.current.id
-    arr[:calls_in_db] = Call.count(:all, :conditions=>{:reseller_id => current_user}).to_i
-    arr[:clis_in_db] = Callerid.count(:all, :joins=>'JOIN devices ON (devices.id = callerids.device_id) JOIN users ON (devices.user_id = users.id)', :conditions=>"users.owner_id = #{current_user}").to_i
+    arr[:calls_in_db] = Call.count(:all, :conditions => {:reseller_id => current_user}).to_i
+    arr[:clis_in_db] = Callerid.count(:all, :joins => 'JOIN devices ON (devices.id = callerids.device_id) JOIN users ON (devices.user_id = users.id)', :conditions => "users.owner_id = #{current_user}").to_i
 
     if options[:step] and options[:step] == 8
       arr[:step] = 8
@@ -1067,10 +1103,10 @@ class Call < ActiveRecord::Base
       #set flag on not found and count them
       found_clis = ActiveRecord::Base.connection.select_all("SELECT col_#{options[:imp_clid]} FROM #{name} JOIN callerids ON (callerids.cli = replace(col_#{options[:imp_clid]}, '\\r', ''))")
       idsclis = ["'not_found'"]
-      found_clis.each{|id| idsclis << id["col_#{options[:imp_clid]}"].to_s}
+      found_clis.each { |id| idsclis << id["col_#{options[:imp_clid]}"].to_s }
       ActiveRecord::Base.connection.execute("UPDATE #{name} SET not_found_in_db = 1 where col_#{options[:imp_clid]}  not in (#{idsclis.compact.join(',')})")
     end
-    
+
 
     #set flag on bad dst | code : 3
     ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 3 where replace(replace(col_#{options[:imp_dst]}, '\\r', ''), '
@@ -1089,18 +1125,18 @@ class Call < ActiveRecord::Base
 ', '') REGEXP '^[0-9]+$' = 0 and not_found_in_db = 1")
     end
     cond = options[:import_user] ? " AND user_id = #{options[:import_user]} " : '' #" calls.cli "
-    ActiveRecord::Base.connection.execute("UPDATE #{name} JOIN calls ON (calls.calldate = timestamp(replace(col_#{options[:imp_calldate]}, '\\r', '')) ) SET f_error = 1, nice_error = 2 WHERE dst = replace(col_#{options[:imp_dst]}, '\\r', '') and billsec = replace(col_#{options[:imp_billsec]}, '\\r', '')  #{cond} and f_error = 0" )
+    ActiveRecord::Base.connection.execute("UPDATE #{name} JOIN calls ON (calls.calldate = timestamp(replace(col_#{options[:imp_calldate]}, '\\r', '')) ) SET f_error = 1, nice_error = 2 WHERE dst = replace(col_#{options[:imp_dst]}, '\\r', '') and billsec = replace(col_#{options[:imp_billsec]}, '\\r', '')  #{cond} and f_error = 0")
 
     arr[:cdr_in_csv_file] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} where f_error = 0").to_i
     arr[:bad_clis] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} where f_error = 1").to_i
     if options[:step] and options[:step] == 8
       arr[:new_clis_to_create] = ActiveRecord::Base.connection.select_value("SELECT COUNT(DISTINCT(col_#{options[:imp_clid]})) FROM #{name}  WHERE nice_error != 1 and not_found_in_db = 1").to_i if options[:imp_clid] and options[:imp_clid] >= 0
-      arr[:clis_to_assigne] = Callerid.count(:all, :conditions=>{:device_id=>-1}).to_i
+      arr[:clis_to_assigne] = Callerid.count(:all, :conditions => {:device_id => -1}).to_i
     else
       arr[:new_clis_to_create] = ActiveRecord::Base.connection.select_value("SELECT COUNT(DISTINCT(col_#{options[:imp_clid]})) FROM #{name} LEFT JOIN callerids on (callerids.cli = replace(col_#{options[:imp_clid]}, '\\r', '')) WHERE nice_error != 1 and callerids.id is null and not_found_in_db = 1").to_i if options[:imp_clid] and options[:imp_clid] >= 0
-      arr[:clis_to_assigne] = Callerid.count(:all, :conditions=>{:device_id=>-1}).to_i + arr[:new_clis_to_create].to_i
+      arr[:clis_to_assigne] = Callerid.count(:all, :conditions => {:device_id => -1}).to_i + arr[:new_clis_to_create].to_i
     end
-    
+
     arr[:existing_clis_in_csv_file] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} where not_found_in_db = 0 and f_error = 0").to_i
     arr[:new_clis_in_csv_file] = ActiveRecord::Base.connection.select_value("SELECT COUNT(DISTINCT(col_#{options[:imp_clid]})) FROM #{name} where not_found_in_db = 1").to_i if options[:imp_clid] and options[:imp_clid] >= 0
     arr[:cdrs_to_insert] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} where f_error = 0").to_i
@@ -1115,11 +1151,11 @@ class Call < ActiveRecord::Base
     else
       res = ActiveRecord::Base.connection.select_all("SELECT *, devices.id as dev_id FROM #{name} JOIN callerids ON (callerids.cli = replace(col_#{options[:imp_clid]}, '\\r', '')) JOIN devices ON (callerids.device_id = devices.id) WHERE f_error = 0 and do_not_import = 0")
     end
- 
+
     imported_cdrs = 0
     for r in res
       billsec = r["col_#{options[:imp_billsec]}"].to_i
-      call = Call.new(:billsec => billsec, :dst => CsvImportDb.clean_value(r["col_#{options[:imp_dst]}"].to_s).gsub(/[^0-9]/, ""), :calldate =>r["col_#{options[:imp_calldate]}"], :card_id => 0, :lastdata => "", :dstchannel => "", :uniqueid => "", :dcontext => "", :lastapp => "", :channel => "", :userfield => "")
+      call = Call.new(:billsec => billsec, :dst => CsvImportDb.clean_value(r["col_#{options[:imp_dst]}"].to_s).gsub(/[^0-9]/, ""), :calldate => r["col_#{options[:imp_calldate]}"], :card_id => 0, :lastdata => "", :dstchannel => "", :uniqueid => "", :dcontext => "", :lastapp => "", :channel => "", :userfield => "")
       duration = CsvImportDb.clean_value(r["col_#{options[:imp_duration]}"]).to_i
       duration = billsec if duration == 0 or options[:imp_duration] == -1
       disposition = ""
@@ -1144,7 +1180,7 @@ class Call < ActiveRecord::Base
       call.user_id = r['user_id']
       call.provider_id = provider.id
       call.localized_dst = call.dst
-            
+
       user = User.find(call.user_id)
 
       call.reseller_id = user.owner_id
@@ -1176,7 +1212,7 @@ class Call < ActiveRecord::Base
       user = user_id
       user_id = user.id
     else
-      user = User.find(:first,:include => [:tariff], :conditions => ["users.id = ?", user_id])
+      user = User.find(:first, :include => [:tariff], :conditions => ["users.id = ?", user_id])
     end
     #logger.info user.to_yaml
 
@@ -1225,7 +1261,7 @@ class Call < ActiveRecord::Base
       #      start = loc_cut.length if loc_cut
       orig_dst = dst
       #      dst = loc_add.to_s + dst[start, dst.length]
-      dst = Location.nice_locilization(loc_cut, loc_add,orig_dst)
+      dst = Location.nice_locilization(loc_cut, loc_add, orig_dst)
 
       MorLog.my_debug "Before Localication: #{orig_dst}, after localization-> dst: #{dst}, cut: #{loc_cut.to_s}, add: #{loc_add.to_s} "
 
@@ -1274,13 +1310,13 @@ class Call < ActiveRecord::Base
       if own_did == 0
         #data for selfcost
         dst_array = []
-        dst.length.times{|i| dst_array << dst[0, i+1]}
+        dst.length.times { |i| dst_array << dst[0, i+1] }
         if dst_array.size > 0
           sql =
-            "SELECT A.prefix, ratedetails.rate,   ratedetails.increment_s, ratedetails.min_time, ratedetails.connection_fee "+
-            "FROM  rates JOIN ratedetails ON (ratedetails.rate_id = rates.id  AND (ratedetails.daytype = '#{daytype}' OR ratedetails.daytype = '' ) AND '#{time}' BETWEEN ratedetails.start_time AND ratedetails.end_time) JOIN (SELECT destinations.* FROM  destinations " +
-            "WHERE destinations.prefix IN ('#{dst_array.join("', '")}') ORDER BY LENGTH(destinations.prefix) DESC) " +
-            "as A ON (A.id = rates.destination_id) WHERE rates.tariff_id = #{selfcost_tariff_id} ORDER BY LENGTH(A.prefix) DESC LIMIT 1;"
+              "SELECT A.prefix, ratedetails.rate,   ratedetails.increment_s, ratedetails.min_time, ratedetails.connection_fee "+
+                  "FROM  rates JOIN ratedetails ON (ratedetails.rate_id = rates.id  AND (ratedetails.daytype = '#{daytype}' OR ratedetails.daytype = '' ) AND '#{time}' BETWEEN ratedetails.start_time AND ratedetails.end_time) JOIN (SELECT destinations.* FROM  destinations " +
+                  "WHERE destinations.prefix IN ('#{dst_array.join("', '")}') ORDER BY LENGTH(destinations.prefix) DESC) " +
+                  "as A ON (A.id = rates.destination_id) WHERE rates.tariff_id = #{selfcost_tariff_id} ORDER BY LENGTH(A.prefix) DESC LIMIT 1;"
         end
 
         #my_debug sql
@@ -1298,7 +1334,7 @@ class Call < ActiveRecord::Base
         if (self.billsec % s_increment == 0)
           s_billsec = (self.billsec / s_increment).floor * s_increment
         else
-          s_billsec = ((self.billsec / s_increment).floor + 1 ) * s_increment
+          s_billsec = ((self.billsec / s_increment).floor + 1) * s_increment
         end
         s_billsec = s_min_time if s_billsec < s_min_time
         s_price = (s_rate * s_billsec) / 60 + s_conn_fee
@@ -1313,8 +1349,8 @@ class Call < ActiveRecord::Base
 
         if self.reseller_id.to_i > 0
 
-          reseller = User.find(:first, :conditions => "id = #{self.reseller_id.to_i}" )
-          tariff = @tariffs_cache["t_#{reseller.tariff_id.to_i}".to_sym] ||=  Tariff.find(:first, :conditions => "id = #{reseller.tariff_id.to_i}") if reseller
+          reseller = User.find(:first, :conditions => "id = #{self.reseller_id.to_i}")
+          tariff = @tariffs_cache["t_#{reseller.tariff_id.to_i}".to_sym] ||= Tariff.find(:first, :conditions => "id = #{reseller.tariff_id.to_i}") if reseller
 
           if reseller and tariff
             res_price, res_max_rate, res_exchange_rate, res_temp_prefix, res_billsec = self.count_call_rating_details_for_user(tariff, time, daytype, dst, reseller)
@@ -1329,9 +1365,8 @@ class Call < ActiveRecord::Base
       # ========= Calculation ===========
 
 
-
       #new
-      self.provider_rate  = s_rate / prov_exchange_rate
+      self.provider_rate = s_rate / prov_exchange_rate
       self.user_rate = max_rate / user_exchange_rate
 
       self.provider_billsec = s_billsec
@@ -1363,7 +1398,6 @@ class Call < ActiveRecord::Base
           self.prefix = res_temp_prefix
         end
       end
-
 
 
       #need to find prefix for error fixing when no prefix is in calls table - this should not happen anyways, so maybe no fix is neccesary?
@@ -1416,17 +1450,17 @@ class Call < ActiveRecord::Base
       #"ON (A.destinationgroup_id = destinationgroups.id) WHERE rates.tariff_id = #{tariff_id} ORDER BY aratedetails.id ASC"
 
       dst_array = []
-      dst.length.times{|i| dst_array << dst[0, i+1]}
+      dst.length.times { |i| dst_array << dst[0, i+1] }
       sql = "SELECT B.prefix as 'prefix', aid, afrom, adur, atype, around, aprice, acid, acfrom, acdur, actype, acround, acprice " +
-        "FROM (SELECT A.prefix, aratedetails.id as 'aid', aratedetails.from as 'afrom', aratedetails.duration as 'adur', aratedetails.artype as 'atype', aratedetails.round as 'around', aratedetails.price as 'aprice', acustratedetails.id as 'acid', acustratedetails.from as 'acfrom', acustratedetails.duration as 'acdur', acustratedetails.artype as 'actype', acustratedetails.round as 'acround', acustratedetails.price as 'acprice', SUM(acustratedetails.id) as 'sacid'  " +
-        "FROM  rates JOIN aratedetails ON (aratedetails.rate_id = rates.id  AND '#{time}' BETWEEN aratedetails.start_time AND aratedetails.end_time AND (aratedetails.daytype = '#{daytype}' OR aratedetails.daytype = ''))  " +
-        "JOIN destinationgroups ON (destinationgroups.id = rates.destinationgroup_id)     " +
-        "JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix IN ('#{dst_array.join("', '")}')  AND destinationgroup_id IN (SELECT rates.destinationgroup_id from rates where rates.tariff_id = #{tariff.id})" +
-        "ORDER BY LENGTH(destinations.prefix) DESC LIMIT 1) as A ON (A.destinationgroup_id = destinationgroups.id)  " +
-        "LEFT JOIN customrates ON (customrates.destinationgroup_id = destinationgroups.id AND customrates.user_id = #{user.id})  " +
-        "LEFT JOIN acustratedetails ON (acustratedetails.customrate_id = customrates.id  AND '#{time}' BETWEEN acustratedetails.start_time AND acustratedetails.end_time AND (acustratedetails.daytype = '#{daytype}' OR acustratedetails.daytype = ''))  " +
-        "WHERE rates.tariff_id = #{tariff.id} GROUP BY aratedetails.id, acustratedetails.id ) AS B GROUP BY IF(B.sacid > 0,B.acid,B.aid)  " +
-        "ORDER BY acfrom ASC, actype ASC, afrom ASC, atype ASC "
+          "FROM (SELECT A.prefix, aratedetails.id as 'aid', aratedetails.from as 'afrom', aratedetails.duration as 'adur', aratedetails.artype as 'atype', aratedetails.round as 'around', aratedetails.price as 'aprice', acustratedetails.id as 'acid', acustratedetails.from as 'acfrom', acustratedetails.duration as 'acdur', acustratedetails.artype as 'actype', acustratedetails.round as 'acround', acustratedetails.price as 'acprice', SUM(acustratedetails.id) as 'sacid'  " +
+          "FROM  rates JOIN aratedetails ON (aratedetails.rate_id = rates.id  AND '#{time}' BETWEEN aratedetails.start_time AND aratedetails.end_time AND (aratedetails.daytype = '#{daytype}' OR aratedetails.daytype = ''))  " +
+          "JOIN destinationgroups ON (destinationgroups.id = rates.destinationgroup_id)     " +
+          "JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix IN ('#{dst_array.join("', '")}')  AND destinationgroup_id IN (SELECT rates.destinationgroup_id from rates where rates.tariff_id = #{tariff.id})" +
+          "ORDER BY LENGTH(destinations.prefix) DESC LIMIT 1) as A ON (A.destinationgroup_id = destinationgroups.id)  " +
+          "LEFT JOIN customrates ON (customrates.destinationgroup_id = destinationgroups.id AND customrates.user_id = #{user.id})  " +
+          "LEFT JOIN acustratedetails ON (acustratedetails.customrate_id = customrates.id  AND '#{time}' BETWEEN acustratedetails.start_time AND acustratedetails.end_time AND (acustratedetails.daytype = '#{daytype}' OR acustratedetails.daytype = ''))  " +
+          "WHERE rates.tariff_id = #{tariff.id} GROUP BY aratedetails.id, acustratedetails.id ) AS B GROUP BY IF(B.sacid > 0,B.acid,B.aid)  " +
+          "ORDER BY acfrom ASC, actype ASC, afrom ASC, atype ASC "
 
       #      sql = "SELECT B.prefix as 'prefix', aid, afrom, adur, atype, around, aprice, acid, acfrom, acdur, actype, acround, acprice FROM (
       #                SELECT * FROM (
@@ -1474,7 +1508,6 @@ class Call < ActiveRecord::Base
           r_price = r['aprice']
           cr = false
         end
-
 
 
         #         MorLog.my_debug "from: #{r_from}, duration: #{r_duration}, artype: #{r_artype}, round: #{r_round}, price: #{r_price}"
@@ -1525,10 +1558,9 @@ class Call < ActiveRecord::Base
             price += r_price.to_f
             billsec = 0
             #my_debug "5. event, price: #{price}"
-          end  #minute-event
+          end #minute-event
         end #suitable arate
       end
-
 
 
       user_billsec = 0
@@ -1555,7 +1587,7 @@ class Call < ActiveRecord::Base
 
     else #tariff.purpose == "user_wholesale"
 
-      #======================= user wholesale ===============
+         #======================= user wholesale ===============
 
       sql = "SELECT A.prefix, ratedetails.rate, ratedetails.increment_s, ratedetails.min_time, ratedetails.connection_fee as 'cf' FROM  rates JOIN ratedetails ON (ratedetails.rate_id = rates.id  AND (ratedetails.daytype =  '#{daytype}' OR ratedetails.daytype = '' )  AND '#{time}' BETWEEN ratedetails.start_time AND ratedetails.end_time) JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix=SUBSTRING('#{dst}', 1, LENGTH(destinations.prefix)) ORDER BY LENGTH(destinations.prefix) DESC) as A ON (A.id = rates.destination_id) WHERE rates.tariff_id = #{tariff.id} LIMIT 1;"
 
@@ -1586,7 +1618,7 @@ class Call < ActiveRecord::Base
       if (self.billsec % uw_increment == 0)
         uw_billsec = (self.billsec / uw_increment).floor * uw_increment
       else
-        uw_billsec = ((self.billsec / uw_increment).floor + 1 ) * uw_increment
+        uw_billsec = ((self.billsec / uw_increment).floor + 1) * uw_increment
       end
       uw_billsec = uw_min_time if uw_billsec < uw_min_time
 
@@ -1607,15 +1639,14 @@ class Call < ActiveRecord::Base
   end
 
 
-
   private
-  
+
   def Call.last_calls_parse_params(options={})
     jn = ['LEFT JOIN users ON (calls.user_id = users.id)',
-      'LEFT JOIN users AS resellers ON (calls.reseller_id = resellers.id)',     
-      'LEFT JOIN dids ON (calls.did_id = dids.id)',
-      'LEFT JOIN cards ON (calls.card_id = cards.id)',
-      SqlExport.left_join_reseler_providers_to_calls_sql
+          'LEFT JOIN users AS resellers ON (calls.reseller_id = resellers.id)',
+          'LEFT JOIN dids ON (calls.did_id = dids.id)',
+          'LEFT JOIN cards ON (calls.card_id = cards.id)',
+          SqlExport.left_join_reseler_providers_to_calls_sql
     ]
     cond = ["(calls.calldate BETWEEN ? AND ?)"]
     var = [options[:from], options[:till]]
@@ -1670,7 +1701,7 @@ class Call < ActiveRecord::Base
       cond<<"calls.did_id > ?"
       var << '0'
     end
-    
+
     if options[:provider]
       cond << "(calls.provider_id = ? or calls.did_provider_id=?)"
       var += [options[:provider].id, options[:provider].id]
@@ -1688,6 +1719,6 @@ class Call < ActiveRecord::Base
     end
     # this is nasty but oh well.
 
-    return  cond, var, jn
+    return cond, var, jn
   end
 end

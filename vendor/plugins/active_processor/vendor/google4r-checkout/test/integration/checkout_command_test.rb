@@ -43,19 +43,19 @@ class Google4R::Checkout::CheckoutCommandIntegrationTest < Test::Unit::TestCase
     @frontend.tax_table_factory = TestTaxTableFactory.new
     @command = @frontend.create_checkout_command
   end
-  
+
   def test_sending_to_google_works_with_valid_request
     setup_command(@command)
     result = @command.send_to_google_checkout
     assert_kind_of CheckoutRedirectResponse, result
   end
-  
+
   def test_sending_to_google_works_with_merchant_calculated_shipping
     setup_command(@command, MerchantCalculatedShipping)
     result = @command.send_to_google_checkout
     assert_kind_of CheckoutRedirectResponse, result
   end
-  
+
   def test_sending_to_google_works_with_carrier_calculated_shipping
     setup_command(@command, CarrierCalculatedShipping)
     result = @command.send_to_google_checkout
@@ -65,10 +65,10 @@ class Google4R::Checkout::CheckoutCommandIntegrationTest < Test::Unit::TestCase
     #puts result
     assert_kind_of CheckoutRedirectResponse, result
   end
-  
+
   def test_using_invalid_credentials_raise_google_checkout_error
-    invalid_patches = [ [ :merchant_id, 'invalid' ], [ :merchant_key, 'invalid' ] ]
-    
+    invalid_patches = [[:merchant_id, 'invalid'], [:merchant_key, 'invalid']]
+
     invalid_patches.each do |patch|
       config = FRONTEND_CONFIGURATION.dup
       config[patch[0]] = patch[1]
@@ -80,24 +80,24 @@ class Google4R::Checkout::CheckoutCommandIntegrationTest < Test::Unit::TestCase
       assert_raises(GoogleCheckoutError) { @command.send_to_google_checkout }
     end
   end
-  
+
   def test_invalid_xml_raises_google_checkout_error
     class << @command
       def to_xml
         ''
       end
     end
-    
+
     setup_command(@command)
     assert_raises(GoogleCheckoutError) { @command.send_to_google_checkout }
   end
-  
+
   protected
-  
+
   # Sets up the given CheckoutCommand so it contains some
   # shipping methods and its cart contains some items.
   def setup_command(command, shipping_type=FlatRateShipping)
-    
+
     if shipping_type == FlatRateShipping
       # Add shipping methods.
       command.create_shipping_method(FlatRateShipping) do |shipping|
@@ -108,10 +108,10 @@ class Google4R::Checkout::CheckoutCommandIntegrationTest < Test::Unit::TestCase
         end
       end
     end
-    
+
     if shipping_type == MerchantCalculatedShipping
       command.merchant_calculations_url = 'http://www.example.com'
-      
+
       command.create_shipping_method(MerchantCalculatedShipping) do |shipping|
         shipping.name = 'International Shipping'
         shipping.price = Money.new(2000)
@@ -121,11 +121,11 @@ class Google4R::Checkout::CheckoutCommandIntegrationTest < Test::Unit::TestCase
         end
       end
     end
-    
+
     if shipping_type == CarrierCalculatedShipping
       command.create_shipping_method(CarrierCalculatedShipping) do |shipping|
-        shipping.create_carrier_calculated_shipping_option do | option |
-          option.shipping_company = 
+        shipping.create_carrier_calculated_shipping_option do |option|
+          option.shipping_company =
               CarrierCalculatedShipping::CarrierCalculatedShippingOption::FEDEX
           option.price = Money.new(3000)
           option.shipping_type = 'Priority Overnight'
@@ -133,7 +133,7 @@ class Google4R::Checkout::CheckoutCommandIntegrationTest < Test::Unit::TestCase
           option.additional_fixed_charge = Money.new(500)
           option.additional_variable_charge_percent = 15.5
         end
-        shipping.create_shipping_package do | package |
+        shipping.create_shipping_package do |package|
           ship_from = AnonymousAddress.new
           ship_from.address_id = 'ABC'
           ship_from.city = 'Ann Arbor'
@@ -141,7 +141,7 @@ class Google4R::Checkout::CheckoutCommandIntegrationTest < Test::Unit::TestCase
           ship_from.country_code = 'US'
           ship_from.postal_code = '48104'
           package.ship_from = ship_from
-          package.delivery_address_category = 
+          package.delivery_address_category =
               CarrierCalculatedShipping::ShippingPackage::COMMERCIAL
           package.height = Dimension.new(1)
           package.length = Dimension.new(2)
@@ -149,7 +149,7 @@ class Google4R::Checkout::CheckoutCommandIntegrationTest < Test::Unit::TestCase
         end
       end
     end
-    
+
     # Add items to the cart.
     1.upto(5) do |i|
       command.shopping_cart.create_item do |item|
@@ -161,7 +161,7 @@ class Google4R::Checkout::CheckoutCommandIntegrationTest < Test::Unit::TestCase
         item.weight = Weight.new(2.2)
         if (i == 5)
           item.create_digital_content do |dc|
-            dc.display_disposition = 
+            dc.display_disposition =
                 Google4R::Checkout::Item::DigitalContent::OPTIMISTIC
             dc.description = "Information on how to get your content"
             dc.url = "http://my.domain.com/downloads"

@@ -1,25 +1,25 @@
 <p>
-  <%= _('Please_press_here_to_pay')%>:
+  <%= _('Please_press_here_to_pay') %>:
   <strong><%= @gateway.payment.amount %> <%= @gateway.settings['default_currency'] %>
   </strong>
   <%= _('Using') %> "<%= @gateway.display_name %>".
 </p>
 <% payment_service_for @gateway.payment.transaction, @gateway.get(:config, :login),
-                              :amount => (@gateway.payment.amount),
-                              :currency => @gateway.settings['default_currency'],
-                              :service => @gateway.name.to_sym,
-                              :html => { :id => 'payment-form' } do |service| %>
+                       :amount => (@gateway.payment.amount),
+                       :currency => @gateway.settings['default_currency'],
+                       :service => @gateway.name.to_sym,
+                       :html => {:id => 'payment-form'} do |service| %>
 
     <% service.invoice @gateway.payment.transaction %>
 
-   <% unless @gateway.settings['tax_inclusive'] %>
-     <% service.tax @gateway.payment.tax / 100.0  %>
+    <% unless @gateway.settings['tax_inclusive'] %>
+        <% service.tax @gateway.payment.tax / 100.0 %>
     <% end %>
-   <% service.currency @gateway.settings['default_currency'] %>
-   <% service.notify_url Web_URL + Web_Dir + @gateway.notify_url %>
-   <% service.return_url Web_URL + Web_Dir + @gateway.return_url %>
-   <% service.cancel_return_url Web_URL + Web_Dir + @gateway.cancel_return_url %>
+    <% service.currency @gateway.settings['default_currency'] %>
+    <% service.notify_url Web_URL + Web_Dir + @gateway.notify_url %>
+    <% service.return_url Web_URL + Web_Dir + @gateway.return_url %>
+    <% service.cancel_return_url Web_URL + Web_Dir + @gateway.cancel_return_url %>
 
-   <%= submit_tag(_('Confirm'), :disable_with=>_('Processing..')) %>
- <% end %>
+    <%= submit_tag(_('Confirm'), :disable_with => _('Processing..')) %>
+<% end %>
 

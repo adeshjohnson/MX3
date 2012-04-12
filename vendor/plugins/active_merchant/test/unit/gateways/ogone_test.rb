@@ -4,21 +4,21 @@ require 'test_helper'
 class OgoneTest < Test::Unit::TestCase
 
   def setup
-    @credentials = { :login => 'merchant id',
-                     :user => 'username',
-                     :password => 'password',
-                     :signature => 'mynicesig' }
+    @credentials = {:login => 'merchant id',
+                    :user => 'username',
+                    :password => 'password',
+                    :signature => 'mynicesig'}
     @gateway = OgoneGateway.new(@credentials)
     @credit_card = credit_card
     @amount = 100
     @identification = "3014726"
     @options = {
-      :order_id => '1',
-      :billing_address => address,
-      :description => 'Store Purchase'
+        :order_id => '1',
+        :billing_address => address,
+        :description => 'Store Purchase'
     }
   end
-  
+
   def teardown
     Base.mode = :test
   end
@@ -86,16 +86,16 @@ class OgoneTest < Test::Unit::TestCase
     assert_failure response
     assert response.test?
   end
-  
+
   def test_create_readable_error_message_upon_failure
     @gateway.expects(:ssl_post).returns(test_failed_authorization_due_to_unknown_order_number)
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_failure response
     assert response.test?
-    
+
     assert_equal "Unknown order", response.message
   end
-  
+
   def test_supported_countries
     assert_equal ['BE', 'DE', 'FR', 'NL', 'AT', 'CH'], OgoneGateway.supported_countries
   end
@@ -119,7 +119,7 @@ class OgoneTest < Test::Unit::TestCase
     response = @gateway.purchase(@amount, @credit_card)
     assert_equal 'P', response.cvv_result['code']
   end
-  
+
   def test_production_mode
     Base.mode = :production
     gateway = OgoneGateway.new(@credentials)
@@ -132,19 +132,19 @@ class OgoneTest < Test::Unit::TestCase
     gateway = OgoneGateway.new(@credentials)
     assert gateway.test?
   end
-  
+
   def test_format_error_message_with_slash_separator
     @gateway.expects(:ssl_post).returns('<ncresponse NCERRORPLUS="unknown order/1/i/67.192.100.64" STATUS="0" />')
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_equal "Unknown order", response.message
   end
-  
+
   def test_format_error_message_with_pipe_separator
     @gateway.expects(:ssl_post).returns('<ncresponse NCERRORPLUS=" no card no|no exp date|no brand" STATUS="0" />')
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_equal "No card no, no exp date, no brand", response.message
   end
-  
+
   def test_format_error_message_with_no_separator
     @gateway.expects(:ssl_post).returns('<ncresponse NCERRORPLUS=" unknown order " STATUS="0" />')
     assert response = @gateway.purchase(@amount, @credit_card, @options)
@@ -297,7 +297,7 @@ class OgoneTest < Test::Unit::TestCase
     </ncresponse>
     END
   end
-  
+
   def test_failed_authorization_due_to_unknown_order_number
     <<-END
     <?xml version="1.0"?>

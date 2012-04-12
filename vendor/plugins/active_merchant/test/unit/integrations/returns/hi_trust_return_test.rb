@@ -10,13 +10,13 @@ class HiTrustReturnTest < Test::Unit::TestCase
     assert_equal HiTrust::Return::SUCCESS, r.params['retcode']
     assert_equal HiTrust::Return::CODES[HiTrust::Return::SUCCESS], r.message
   end
-  
+
   def test_failed_return
     r = HiTrust::Return.new('retcode=-100')
     assert_false r.success?
     assert_equal HiTrust::Return::CODES['-100'], r.message
   end
-  
+
   def test_unknown_return
     r = HiTrust::Return.new('retcode=unknown')
     assert_false r.success?

@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 require 'test/test_helper'
- 
+
 class ActiveProcessorTest < Test::Unit::TestCase
 
   context "ActiveProcessor" do

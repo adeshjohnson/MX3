@@ -26,7 +26,7 @@ class Voucher < ActiveRecord::Base
   end
 
   def Voucher.set_tax(tax)
-    Voucher.find(:all, :include => [:tax], :conditions => ["user_id = -1"]).each {|voucher|
+    Voucher.find(:all, :include => [:tax], :conditions => ["user_id = -1"]).each { |voucher|
       voucher.tax = Tax.new unless voucher.tax
       voucher.tax.update_attributes(tax)
     }
@@ -46,12 +46,12 @@ class Voucher < ActiveRecord::Base
 
   def disable_card
     if Confline.get_value('Voucher_Card_Disable', User.current.owner_id).to_i == 1
-      card = Card.find(:first, :conditions=>{:number=>number})
+      card = Card.find(:first, :conditions => {:number => number})
       if card
         card.sold = 1
         card.first_use = Time.now
         if card.save
-          Action.add_action_hash(User.current, {:action=>'Disable_Card_when_Voucher_is_used', :target_id=>card.id, :target_type=>'Card', :data=>number, :data2=>id})
+          Action.add_action_hash(User.current, {:action => 'Disable_Card_when_Voucher_is_used', :target_id => card.id, :target_type => 'Card', :data => number, :data2 => id})
         end
       end
     end
@@ -72,5 +72,5 @@ class Voucher < ActiveRecord::Base
   def Voucher.get_tags
     ActiveRecord::Base.connection.select_all("SELECT DISTINCT vouchers.tag FROM vouchers ORDER BY tag ASC")
   end
-  
+
 end

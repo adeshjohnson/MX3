@@ -61,7 +61,7 @@ module Linkpoint
       params['currency']
     end
 
-     def approval_code
+    def approval_code
       params['approval_code']
     end
 
@@ -72,18 +72,21 @@ module Linkpoint
     def country
       params['scountry']
     end
-#
-#    def tax
-#      params['tax']
-#    end
-#
+
+    #
+    #    def tax
+    #      params['tax']
+    #    end
+    #
     def custom
       params['custom']
     end
-#
+
+    #
     def pending_reason
       params['failReason']
     end
+
     #-------------------------------------------------------
 
     def amount
@@ -93,15 +96,15 @@ module Linkpoint
 
     # reset the notification.
     def empty!
-      @params  = Hash.new
-      @raw     = ""
+      @params = Hash.new
+      @raw = ""
     end
 
     def my_debug(msg)
-            File.open("/tmp/mor_debug.txt", "a") { |f|
-            f << msg.to_s
-            f << "\n"
-        }
+      File.open("/tmp/mor_debug.txt", "a") { |f|
+        f << msg.to_s
+        f << "\n"
+      }
     end
 
 
@@ -110,18 +113,18 @@ module Linkpoint
       uri = URI.parse(self.class.ipn_url)
       status = nil
 
-	  if @request.request_uri.host == uri.host
-		 my_debug("acknowledge passed")
-		true
-		else
-		  my_debug("acknowledge not passed")
-		  false
-		end
+      if @request.request_uri.host == uri.host
+        my_debug("acknowledge passed")
+        true
+      else
+        my_debug("acknowledge not passed")
+        false
+      end
       #Net::HTTP.start(uri.host, uri.port) do |request|
       #  status = request.post(uri.path, raw + "&cmd=_notify-validate").body
       #end
 
-     # status == "APPROVED"
+      # status == "APPROVED"
 
     end
 
@@ -130,20 +133,20 @@ module Linkpoint
     # Take the posted data and move the relevant data into a hash
     def parse(post)
 
-    my_debug(post)
+      my_debug(post)
 
       @raw = post
       for line in post.split('&')
 
 
         if line.include? "status" or line.include? "ttime" or line.include? "oid" or line.include? "txnorg" or line.include? "chargetotal" or line.include? "currency" or line.include? "failReason" or line.include? "custom"
-          key, value = *line.scan( %r{^(\w+)\=(.*)$} ).flatten
+          key, value = *line.scan(%r{^(\w+)\=(.*)$}).flatten
           params[key] = CGI.unescape(value)
         end
 
         my_debug(key+" "+params[key])
       end
-     my_debug("parse successful")
+      my_debug("parse successful")
     end
 
   end

@@ -1,6 +1,6 @@
 <b><%= b_user + _('User') %>:</b> <%= link_nice_user @user %>
 <br/>
-<b><%= b_device + _('Device') %>:</b> <%= link_nice_device(@device)%>
+<b><%= b_device + _('Device') %>:</b> <%= link_nice_device(@device) %>
 <br/>
 <br/>
 <br/>
@@ -15,10 +15,10 @@
     <th></th>
   </tr>
   <% for did in @dids %>
-    <tr>
-      <td id="did_<%= did.id %>"> <%= link_to(did.did, :controller => :dids, :action => :edit, :id => did.id) %></td>
-      <td id="edit_did_<%= did.id %>" class="icon_cell"><%= link_to(b_edit, :controller => :dids, :action => :edit, :id => did.id) %></td>
-    </tr>
+      <tr>
+        <td id="did_<%= did.id %>"> <%= link_to(did.did, :controller => :dids, :action => :edit, :id => did.id) %></td>
+        <td id="edit_did_<%= did.id %>" class="icon_cell"><%= link_to(b_edit, :controller => :dids, :action => :edit, :id => did.id) %></td>
+      </tr>
   <% end %>
 </table>
 

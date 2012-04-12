@@ -1,12 +1,13 @@
 <% dids = plan.dids %>
-<td align="left" id='<%=id%>'
-<%if dids.size.to_i > 0%>
-      >
-        <% for did in dids  %>
-      <%= link_to did.did,:controller => 'dids', :action => "edit", :id => did.id %><br />
-    <% end %>
-  <%else%>
-    class='red' <%= raw tooltip(_('DP_without_DID'), _('DP_without_DID_explanation')).html_safe %> >
-    <%= link_to b_warning + _('Assign_DID'), {:controller=>:dids, :action =>:list}, :id=>"dp_not_assign_#{plan.id}"%>
-  <%end%>
+<td align="left" id='<%= id %>'
+    <% if dids.size.to_i > 0 %>
+>
+<% for did in dids %>
+<%= link_to did.did, :controller => 'dids', :action => "edit", :id => did.id %>
+<br/>
+<% end %>
+<% else %>
+class='red' <%= raw tooltip(_('DP_without_DID'), _('DP_without_DID_explanation')).html_safe %> >
+<%= link_to b_warning + _('Assign_DID'), {:controller => :dids, :action => :list}, :id => "dp_not_assign_#{plan.id}" %>
+<% end %>
 </td>

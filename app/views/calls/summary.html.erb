@@ -1,34 +1,34 @@
-<%= render :partial => "search_header" , :locals => {:no_checkboxes => true}%>
-<br />
-<table class = "bordered">
+<%= render :partial => "search_header", :locals => {:no_checkboxes => true} %>
+<br/>
+<table class="bordered">
   <tr>
     <td align="left" nowrap>
-      <%= _("Records")%>: <%= @total_items_term %>
+      <%= _("Records") %>: <%= @total_items_term %>
       &nbsp;&nbsp;&nbsp;
     </td>
   </tr>
 </table>
-<br />
-<table class = "maintable" width="100%">
+<br/>
+<table class="maintable" width="100%">
   <tr>
-    <th align="left"><%= ordered_list_header("term_name","term_name","Terminator", @options.merge({:order_by => @options[:order_by_name] })) %></th>
-    <th align="right"><%= ordered_list_header("term_calls","term_calls","Total_Calls", @options.merge({:order_by => @options[:order_by_name] })) %></th>
-    <th align="center"><%= ordered_list_header("term_exec_billsec","term_exec_billsec","Exact_Billsec", @options.merge({:order_by => @options[:order_by_name] })) %></th>
-    <th align="center"><%= ordered_list_header("term_billsec","term_billsec","Terminator_Billsec", @options.merge({:order_by => @options[:order_by_name] })) %></th>
+    <th align="left"><%= ordered_list_header("term_name", "term_name", "Terminator", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="right"><%= ordered_list_header("term_calls", "term_calls", "Total_Calls", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="center"><%= ordered_list_header("term_exec_billsec", "term_exec_billsec", "Exact_Billsec", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="center"><%= ordered_list_header("term_billsec", "term_billsec", "Terminator_Billsec", @options.merge({:order_by => @options[:order_by_name]})) %></th>
     <% if can_see_finances? -%>
-      <th align="right"><%= ordered_list_header("term_price","term_price","Terminator_Price", @options.merge({:order_by => @options[:order_by_name] })) %></th>
+        <th align="right"><%= ordered_list_header("term_price", "term_price", "Terminator_Price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
     <% end -%>
   </tr>
-  <%@terminator_lines.each_with_index { |row, i| -%>
-    <tr class="row<%= (i % 2 + 1).to_s %>">
-      <td id="prov_name_<%=row.prov_id%>" align="left"><%= h(row.provider_name) %></td>
-      <td id="prov_calls_<%=row.prov_id%>" align="right"><%= row.total_calls.to_i %></td>
-      <td id="prov_e_billsec_<%=row.prov_id%>" align="center"><%= nice_time(row.exact_billsec.to_f) %></td>
-      <td id="prov_o_billsec_<%=row.prov_id%>" align="center"><%= nice_time(row.provider_billsec.to_f) %></td>
-      <% if can_see_finances? -%>
-        <td id="prov_price_<%=row.prov_id%>" align="right"><%= nice_number(row.provider_price.to_f) %> <%= current_user.currency.name%></td>
-      <% end -%>
-    </tr>
+  <% @terminator_lines.each_with_index { |row, i| -%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="prov_name_<%= row.prov_id %>" align="left"><%= h(row.provider_name) %></td>
+        <td id="prov_calls_<%= row.prov_id %>" align="right"><%= row.total_calls.to_i %></td>
+        <td id="prov_e_billsec_<%= row.prov_id %>" align="center"><%= nice_time(row.exact_billsec.to_f) %></td>
+        <td id="prov_o_billsec_<%= row.prov_id %>" align="center"><%= nice_time(row.provider_billsec.to_f) %></td>
+        <% if can_see_finances? -%>
+            <td id="prov_price_<%= row.prov_id %>" align="right"><%= nice_number(row.provider_price.to_f) %> <%= current_user.currency.name %></td>
+        <% end -%>
+      </tr>
   <% } -%>
   <tr>
     <th align="left"><%= _("Total") %> :</th>
@@ -36,19 +36,19 @@
     <th id="term_exact_min" align="center"><%= nice_time(@total[:term_exact_min]) %></th>
     <th id="term_min" align="center"><%= nice_time(@total[:term_min]) %></th>
     <% if can_see_finances? -%>
-      <th id="term_amount" align="right"><%= nice_number(@total[:term_amount]) %> <%= current_user.currency.name%></th>
+        <th id="term_amount" align="right"><%= nice_number(@total[:term_amount]) %> <%= current_user.currency.name %></th>
     <% end -%>
   </tr>
 </table>
-<br />
-<hr />
-<br />
-<table class = "bordered">
+<br/>
+<hr/>
+<br/>
+<table class="bordered">
   <tr>
     <td align="left" nowrap>
-      <%= _("Records")%>: <%= @total_items_orig %>
+      <%= _("Records") %>: <%= @total_items_orig %>
       &nbsp;&nbsp;&nbsp;
-      <%= _("Pages")%>: <%= @total_pages%>
+      <%= _("Pages") %>: <%= @total_pages %>
       &nbsp;&nbsp;&nbsp;
     </td>
     <td align="left" nowrap>
@@ -56,27 +56,27 @@
     </td>
   </tr>
 </table>
-<br />
-<table class = "maintable" width="100%">
+<br/>
+<table class="maintable" width="100%">
   <tr>
-    <th align="left"><%= ordered_list_header("orig_name","orig_name","Originator", @options.merge({:order_by => @options[:order_by_name] })) %></th>
-    <th align="right"><%= ordered_list_header("orig_calls","orig_calls","Total_Calls", @options.merge({:order_by => @options[:order_by_name] })) %></th>
-    <th align="center"><%= ordered_list_header("orig_exact_billsec","orig_exact_billsec","Exact_Billsec", @options.merge({:order_by => @options[:order_by_name] })) %></th>
-    <th align="center"><%= ordered_list_header("orig_billsec","orig_billsec","Originator_Billsec", @options.merge({:order_by => @options[:order_by_name] })) %></th>
+    <th align="left"><%= ordered_list_header("orig_name", "orig_name", "Originator", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="right"><%= ordered_list_header("orig_calls", "orig_calls", "Total_Calls", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="center"><%= ordered_list_header("orig_exact_billsec", "orig_exact_billsec", "Exact_Billsec", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="center"><%= ordered_list_header("orig_billsec", "orig_billsec", "Originator_Billsec", @options.merge({:order_by => @options[:order_by_name]})) %></th>
     <% if can_see_finances? -%>
-      <th align="right"><%= ordered_list_header("orig_price","orig_price","Originator_Price", @options.merge({:order_by => @options[:order_by_name] })) %></th>
+        <th align="right"><%= ordered_list_header("orig_price", "orig_price", "Originator_Price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
     <% end -%>
   </tr>
-  <%@originator_lines.each_with_index { |row, i| -%>
-    <tr class="row<%= (i % 2 + 1).to_s %>">
-      <td id="user_name_<%=row.dev_user_id%>" align="left"><%= row.nice_user.to_s %></td>
-      <td id="user_calls_<%=row.dev_user_id%>" align="right"><%= row.total_calls.to_i %></td>
-      <td id="user_e_billsec_<%=row.dev_user_id%>" align="center"><%= nice_time(row.exact_billsec.to_f) %></td>
-      <td id="user_o_billsec_<%=row.dev_user_id%>" align="center"><%= nice_time(row.originator_billsec.to_f) %></td>
-      <% if can_see_finances? -%>
-        <td id="user_price_<%=row.dev_user_id%>" align="right"><%= nice_number(row.originator_price.to_f) %> <%= current_user.currency.name%></td>
-      <% end -%>
-    </tr>
+  <% @originator_lines.each_with_index { |row, i| -%>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="user_name_<%= row.dev_user_id %>" align="left"><%= row.nice_user.to_s %></td>
+        <td id="user_calls_<%= row.dev_user_id %>" align="right"><%= row.total_calls.to_i %></td>
+        <td id="user_e_billsec_<%= row.dev_user_id %>" align="center"><%= nice_time(row.exact_billsec.to_f) %></td>
+        <td id="user_o_billsec_<%= row.dev_user_id %>" align="center"><%= nice_time(row.originator_billsec.to_f) %></td>
+        <% if can_see_finances? -%>
+            <td id="user_price_<%= row.dev_user_id %>" align="right"><%= nice_number(row.originator_price.to_f) %> <%= current_user.currency.name %></td>
+        <% end -%>
+      </tr>
   <% } -%>
   <tr>
     <th align="left"><%= _("Total") %> :</th>
@@ -84,7 +84,7 @@
     <th id="orig_exact_min" align="center"><%= nice_time(@total[:orig_exact_min]) %></th>
     <th id="orig_min" align="center"><%= nice_time(@total[:orig_min]) %></th>
     <% if can_see_finances? -%>
-      <th id="orig_amount" align="right"><%= nice_number(@total[:orig_amount]) %> <%= current_user.currency.name %></th>
+        <th id="orig_amount" align="right"><%= nice_number(@total[:orig_amount]) %> <%= current_user.currency.name %></th>
     <% end -%>
   </tr>
 </table>

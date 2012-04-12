@@ -1,32 +1,32 @@
-<%  if params[:find_by] == "direction" %>
-  <script type="text/javascript">
-    $('pre').innerHTML = ""
-  <% @destinations.each { |des|%>
-    $('pre').options.add(new Option("<%= "#{des.prefix.to_s} - #{des.subcode} #{des.name}"%>", "<%= des.prefix %>"));
-  <% } %>
-  </script>
+<% if params[:find_by] == "direction" %>
+    <script type="text/javascript">
+        $('pre').innerHTML = ""
+        <% @destinations.each { |des|%>
+        $('pre').options.add(new Option("<%= "#{des.prefix.to_s} - #{des.subcode} #{des.name}"%>", "<%= des.prefix %>"));
+        <% } %>
+    </script>
 <% end %>
 
-<%  if params[:find_by] == "prefix" %>
-  <% if @message.to_s.length == 0 %>
-    <script type="text/javascript">
-    <%=
-    update_page do |page|
-      page.show("prefix_find_submit")
-    end %>
-    </script>
-    <% if @results and @results.length > 0 %>
+<% if params[:find_by] == "prefix" %>
+    <% if @message.to_s.length == 0 %>
+        <script type="text/javascript">
+            <%=
+           update_page do |page|
+             page.show("prefix_find_submit")
+           end %>
+        </script>
+        <% if @results and @results.length > 0 %>
 
-      <%= draw_flag(@dest.direction_code)%> <%= @results %>
+            <%= draw_flag(@dest.direction_code) %> <%= @results %>
+        <% else %>
+            <br/>
+        <% end %>
     <% else %>
-      <br />
+        <script type="text/javascript">
+            <%= update_page do |page|
+             page.hide("prefix_find_submit")
+           end %>
+        </script>
+        <%= @message %>
     <% end %>
-  <% else  %>
-    <script type="text/javascript">
-    <%= update_page do |page|
-      page.hide("prefix_find_submit")
-    end %>
-    </script>
-    <%= @message  %>
-  <% end  %>
-<% end  %>
+<% end %>

@@ -1,20 +1,20 @@
-<%if @devices and @devices.size.to_i > 0%>
-<%= _('Device') %>:
-<select name="device_id" id="device_id<%="_#{@did}" if @did.to_i > 0%>" onchange="$('device_id_from_js').value = this.value;">
-  <%if @add.to_i != 1%>
-    <option value="-1" <%= "selected" if @search_device == nil or (@search_device.to_i == -1) %>><%= _('All')%> </option>
-  <%end%>
-  <%for dev in @devices%>
-    <option value="<%= dev.id %>" <%= "selected" if @search_dev.to_i ==dev.id.to_i %>><%=  nice_device(dev)%> </option>
-  <%end%>
-</select>
-<script type="text/javascript">
-  <%kint = @did ? "_#{@did}" : ''%>
-  $('device_id_from_js').value = $('device_id<%=kint%>').value;
-  </script>
-<%if @include_cli%>
-<span id = 'add_device_<%=@did%>' onclick="new Ajax.Updater('select_device_<%=@did%>', '<%=Web_Dir %>/cdr/cli_add/<%=@did%>?device_id=' + document.getElementById('device_id_<%=@did%>').value, {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});"><%=b_add%></span>
-<%end%>
-  <%else%>
-  <%=_('No_devices')%>
-<%end%>
+<% if @devices and @devices.size.to_i > 0 %>
+    <%= _('Device') %>:
+    <select name="device_id" id="device_id<%= "_#{@did}" if @did.to_i > 0 %>" onchange="$('device_id_from_js').value = this.value;">
+      <% if @add.to_i != 1 %>
+          <option value="-1" <%= "selected" if @search_device == nil or (@search_device.to_i == -1) %>><%= _('All') %> </option>
+      <% end %>
+      <% for dev in @devices %>
+          <option value="<%= dev.id %>" <%= "selected" if @search_dev.to_i ==dev.id.to_i %>><%= nice_device(dev) %> </option>
+      <% end %>
+    </select>
+    <script type="text/javascript">
+        <%kint = @did ? "_#{@did}" : ''%>
+        $('device_id_from_js').value = $('device_id<%=kint%>').value;
+    </script>
+    <% if @include_cli %>
+        <span id='add_device_<%= @did %>' onclick="new Ajax.Updater('select_device_<%=@did%>', '<%=Web_Dir %>/cdr/cli_add/<%=@did%>?device_id=' + document.getElementById('device_id_<%=@did%>').value, {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});"><%= b_add %></span>
+    <% end %>
+<% else %>
+    <%= _('No_devices') %>
+<% end %>

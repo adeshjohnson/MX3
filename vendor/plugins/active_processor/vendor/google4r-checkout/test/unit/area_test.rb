@@ -38,7 +38,7 @@ require 'test/frontend_configuration'
 # Test for the class Area.
 class Google4R::Checkout::AreaTest < Test::Unit::TestCase
   include Google4R::Checkout
-  
+
   def test_instanciating_area_raises_runtime_error
     assert_raises(RuntimeError) { Area.new }
   end

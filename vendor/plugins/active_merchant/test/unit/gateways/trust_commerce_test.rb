@@ -4,8 +4,8 @@ require 'test_helper'
 class TrustCommerceTest < Test::Unit::TestCase
   def setup
     @gateway = TrustCommerceGateway.new(
-      :login => 'TestMerchant',
-      :password => 'password'
+        :login => 'TestMerchant',
+        :password => 'password'
     )
     # Force SSL post
     @gateway.stubs(:tclink?).returns(false)
@@ -28,29 +28,29 @@ class TrustCommerceTest < Test::Unit::TestCase
     assert_instance_of Response, response
     assert_failure response
   end
-   
-  def test_amount_style   
-   assert_equal '1034', @gateway.send(:amount, 1034)
-                                                  
-   assert_raise(ArgumentError) do
-     @gateway.send(:amount, '10.34')
-   end
+
+  def test_amount_style
+    assert_equal '1034', @gateway.send(:amount, 1034)
+
+    assert_raise(ArgumentError) do
+      @gateway.send(:amount, '10.34')
+    end
   end
-  
+
   def test_avs_result
     @gateway.expects(:ssl_post).returns(successful_purchase_response)
-    
+
     response = @gateway.purchase(@amount, @credit_card)
     assert_equal 'Y', response.avs_result['code']
   end
-  
+
   def test_cvv_result
     @gateway.expects(:ssl_post).returns(successful_purchase_response)
-    
+
     response = @gateway.purchase(@amount, @credit_card)
     assert_equal 'P', response.cvv_result['code']
   end
-  
+
   def test_supported_countries
     assert_equal ['US'], TrustCommerceGateway.supported_countries
   end
@@ -58,7 +58,7 @@ class TrustCommerceTest < Test::Unit::TestCase
   def test_supported_card_types
     assert_equal [:visa, :master, :discover, :american_express, :diners_club, :jcb], TrustCommerceGateway.supported_cardtypes
   end
-  
+
   def test_test_flag_should_be_set_when_using_test_login_in_production
     Base.gateway_mode = :production
     @gateway.expects(:ssl_post).returns(successful_purchase_response)
@@ -68,9 +68,9 @@ class TrustCommerceTest < Test::Unit::TestCase
   ensure
     Base.gateway_mode = :test
   end
-  
+
   private
-  
+
   def successful_purchase_response
     <<-RESPONSE
 transid=025-0007423614
@@ -79,7 +79,7 @@ avs=Y
 cvv=P
     RESPONSE
   end
-  
+
   def unsuccessful_purchase_response
     <<-RESPONSE
 transid=025-0007423827

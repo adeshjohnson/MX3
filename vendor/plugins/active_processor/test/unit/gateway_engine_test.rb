@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 require 'test/test_helper'
- 
+
 class GatewayEngineTest < Test::Unit::TestCase
 
   context "Gateway engine" do
@@ -9,43 +9,43 @@ class GatewayEngineTest < Test::Unit::TestCase
       ActiveProcessor.configuration = mock
       ActiveProcessor.stubs(:log).returns(true)
       ActiveProcessor.configuration.stubs(:data).returns(
-        { 
-          'enabled' => {
-            'gateways' => ['bogus'],
-            'integrations' => ['bogus', 'two_checkout']
-          },
-          'gateways' => {
-            'bogus' => {
-                'config' => {
-                  'fields' => {
-                    'login' => { 'as' => "input_field", 'position' => 3, 'for' => 'authentication', 'value' => 'afaf', 'validates' => { 'with' => /\w+/, 'message' => 'some_error' } },
-                    'password' => { 'as' => "af", 'position' => 4 }
+          {
+              'enabled' => {
+                  'gateways' => ['bogus'],
+                  'integrations' => ['bogus', 'two_checkout']
+              },
+              'gateways' => {
+                  'bogus' => {
+                      'config' => {
+                          'fields' => {
+                              'login' => {'as' => "input_field", 'position' => 3, 'for' => 'authentication', 'value' => 'afaf', 'validates' => {'with' => /\w+/, 'message' => 'some_error'}},
+                              'password' => {'as' => "af", 'position' => 4}
+                          }
+                      },
+                      'form' => {
+                          'fields' => {
+                              'login' => {'as' => "input_field", 'position' => 3, 'value' => 'afaf', 'validates' => {'with' => /\w+/, 'message' => 'some_error'}},
+                          }
+                      }
                   }
-                },
-                'form' => {
-                  'fields' => {
-                    'login' => { 'as' => "input_field", 'position' => 3, 'value' => 'afaf', 'validates' => { 'with' => /\w+/, 'message' => 'some_error' } },
+              },
+              'integrations' => {
+                  'bogus' => {
+                      'config' => {
+                          'fields' => {
+                              'login' => {'as' => "input_field", 'position' => 3, 'for' => "authentication", 'value' => 'ofof'}
+                          }
+                      }
+                  },
+                  'two_checkout' => {
+                      'config' => {
+                          'fields' => {
+                              'login' => {'as' => "input_field", 'position' => 3, 'for' => "authentication"}
+                          }
+                      }
                   }
-                }
-            }
-          },
-          'integrations' => {
-            'bogus' => {
-              'config' => {
-                'fields' => {
-                  'login' => { 'as' => "input_field", 'position' => 3, 'for' => "authentication", 'value' => 'ofof' }
-                }
               }
-            },
-            'two_checkout' => {
-              'config' => {
-                'fields' => {
-                  'login' => { 'as' => "input_field", 'position' => 3, 'for' => "authentication" }
-                }
-              }
-            }
           }
-        }
       )
     end
 
@@ -90,7 +90,7 @@ class GatewayEngineTest < Test::Unit::TestCase
     should "invoke callback when user is being set" do
       GatewayEngine.class_eval do
         def on_gateways_user_set
-          @user = 8 
+          @user = 8
         end
       end
       @engine = GatewayEngine.new(:first, {:engine => :gateways, :gateway => :bogus}).for_user(88)
@@ -112,9 +112,10 @@ class GatewayEngineTest < Test::Unit::TestCase
         def on_string_callback
           @user = 10
         end
+
         # define method to call private one :) ugly?
         def callback_method
-          run("on","string","callback")
+          run("on", "string", "callback")
         end
       end
       @engine = GatewayEngine.new(:first, {:engine => :gateways, :gateway => :bogus}).for_user(88)
@@ -129,7 +130,7 @@ class GatewayEngineTest < Test::Unit::TestCase
     end
 
     #should "return all enabled gateways" do
-      #assert_equal GatewayEngine.find(:enabled).to_hash, {"integrations"=>{"test_integration"=>[["login",{"position"=>3, "as"=>"input_field", "for"=>"authentication"}]]},"gateways"=>{"test_gateway"=>[["login", {"position"=>3, "as"=>"input_field", "for"=>"authentication"}],["password", {"position"=>4, "as"=>"af"}]]}}
+    #assert_equal GatewayEngine.find(:enabled).to_hash, {"integrations"=>{"test_integration"=>[["login",{"position"=>3, "as"=>"input_field", "for"=>"authentication"}]]},"gateways"=>{"test_gateway"=>[["login", {"position"=>3, "as"=>"input_field", "for"=>"authentication"}],["password", {"position"=>4, "as"=>"af"}]]}}
     #end
 
     should "invoke enabled find callback" do
@@ -172,13 +173,16 @@ class GatewayEngineTest < Test::Unit::TestCase
 
     should "validate update values" do
       GatewayEngine.class_eval do
-        def on_before_update; end
-        def on_after_update; end
+        def on_before_update;
+        end
+
+        def on_after_update;
+        end
       end
 
       @engine = GatewayEngine.find(:enabled)
       @engine.update_with(:config, {
-        'gateways' => { 'bogus' => { 'login' => "!!!" } }
+          'gateways' => {'bogus' => {'login' => "!!!"}}
       })
 
       assert_equal 1, @engine.query(:engine => :gateways, :gateway => :bogus).errors.size
@@ -187,14 +191,17 @@ class GatewayEngineTest < Test::Unit::TestCase
 
     should "update values" do
       GatewayEngine.class_eval do
-        def on_before_config_update; end
-        def on_after_config_update; end
+        def on_before_config_update;
+        end
+
+        def on_after_config_update;
+        end
       end
 
       @engine = GatewayEngine.find(:enabled)
       @engine.update_with(:config, {
-        'gateways' => { 'bogus' => { 'login' => "123" } },
-        'integrations' => { 'bogus' => { 'login' => "456" } },
+          'gateways' => {'bogus' => {'login' => "123"}},
+          'integrations' => {'bogus' => {'login' => "456"}},
       })
       assert_equal "123", @engine.query(:engine => :gateways, :gateway => :bogus).get(:config, 'login')
       assert_equal "456", @engine.query(:engine => :integrations, :gateway => :bogus).get(:config, 'login')
@@ -206,12 +213,14 @@ class GatewayEngineTest < Test::Unit::TestCase
         def on_before_config_update
           @params['gateways']['bogus']['login'] = '789'
         end
-        def on_after_config_update; end
+
+        def on_after_config_update;
+        end
       end
       @engine = GatewayEngine.find(:enabled)
       @engine.update_with(:config, {
-        'gateways' => { 'bogus' => { 'login' => "123" } },
-        'integrations' => { 'bogus' => { 'login' => "456" } },
+          'gateways' => {'bogus' => {'login' => "123"}},
+          'integrations' => {'bogus' => {'login' => "456"}},
       })
       assert_equal "789", @engine.query(:engine => :gateways, :gateway => :bogus).get(:config, 'login')
     end
@@ -220,14 +229,14 @@ class GatewayEngineTest < Test::Unit::TestCase
       # we'll modify the value that was passed
       GatewayEngine.class_eval do
         def on_after_config_update
-          @gateways['gateways']['bogus'].set(:config, { 'login' => '10' })
+          @gateways['gateways']['bogus'].set(:config, {'login' => '10'})
         end
       end
 
       @engine = GatewayEngine.find(:enabled)
       @engine.update_with(:config, {
-        'gateways' => { 'bogus' => { 'login' => "123" } },
-        'integrations' => { 'bogus' => { 'login' => "456" } },
+          'gateways' => {'bogus' => {'login' => "123"}},
+          'integrations' => {'bogus' => {'login' => "456"}},
       })
 
       assert_equal "10", @engine.query(:engine => :gateways, :gateway => :bogus).get(:config, 'login')
@@ -239,7 +248,7 @@ class GatewayEngineTest < Test::Unit::TestCase
       ActiveProcessor::PaymentEngines::Gateway.any_instance.expects(:valid?).returns(true)
       ActiveProcessor::PaymentEngines::Gateway.any_instance.expects(:pay).returns(true)
 
-      assert_equal true, @engine.pay_with(@engine.query({:engine => :gateways, :gateway => :bogus}), "127.0.0.1", { 'gateways' => { 'bogus' => { 'login' => '1' } } })
+      assert_equal true, @engine.pay_with(@engine.query({:engine => :gateways, :gateway => :bogus}), "127.0.0.1", {'gateways' => {'bogus' => {'login' => '1'}}})
     end
 
     should "not allow to pay if payment validation fails" do
@@ -247,7 +256,7 @@ class GatewayEngineTest < Test::Unit::TestCase
 
       ActiveProcessor::PaymentEngines::Gateway.any_instance.expects(:valid?).returns(false)
 
-      assert_equal false, @engine.pay_with(@engine.query({:engine => :gateways, :gateway => :bogus}), "127.0.0.1", { 'gateways' => { 'bogus' => { 'login' => '1' } } })
+      assert_equal false, @engine.pay_with(@engine.query({:engine => :gateways, :gateway => :bogus}), "127.0.0.1", {'gateways' => {'bogus' => {'login' => '1'}}})
     end
 
     should "not pay if payment action fails" do
@@ -256,22 +265,22 @@ class GatewayEngineTest < Test::Unit::TestCase
       ActiveProcessor::PaymentEngines::Gateway.any_instance.expects(:valid?).returns(true)
       ActiveProcessor::PaymentEngines::Gateway.any_instance.expects(:pay).returns(false)
 
-      assert_equal false, @engine.pay_with(@engine.query({:engine => :gateways, :gateway => :bogus}), "127.0.0.1", { 'gateways' => { 'bogus' => { 'login' => '1' } } })
+      assert_equal false, @engine.pay_with(@engine.query({:engine => :gateways, :gateway => :bogus}), "127.0.0.1", {'gateways' => {'bogus' => {'login' => '1'}}})
     end
 
     context "with set engine" do
       setup do
         ActiveProcessor.configuration = mock
         ActiveProcessor.configuration.stubs(:data).returns(
-          { 
-            'enabled' => {
-              'gateways' => ['bogus', 'authorize_net']
-            },
-            'gateways' => {
-              'bogus' => { 'config' => { 'fields' => { 'login' => { 'some' => 4, 'position' => 3 } } } },
-              'authorize_net' => { 'config' => { 'fields' => { 'password' => { 'other' => 5, 'position' => 4 } } } }
+            {
+                'enabled' => {
+                    'gateways' => ['bogus', 'authorize_net']
+                },
+                'gateways' => {
+                    'bogus' => {'config' => {'fields' => {'login' => {'some' => 4, 'position' => 3}}}},
+                    'authorize_net' => {'config' => {'fields' => {'password' => {'other' => 5, 'position' => 4}}}}
+                }
             }
-          }
         )
       end
 
@@ -281,7 +290,7 @@ class GatewayEngineTest < Test::Unit::TestCase
       end
 
       should "raise error if that engine is not present" do
-        assert_raise (ActiveProcessor::GatewayEngineError) { GatewayEngine.new(:first, {:engine => :non_existent, :gateway => :bogus}).to_hash }
+        assert_raise (ActiveProcessor::GatewayEngineError) {GatewayEngine.new(:first, {:engine => :non_existent, :gateway => :bogus}).to_hash}
       end
 
       should "invoke all find callback" do
@@ -300,20 +309,20 @@ class GatewayEngineTest < Test::Unit::TestCase
       setup do
         ActiveProcessor.configuration = mock
         ActiveProcessor.configuration.stubs(:data).returns(
-          { 
-            'enabled' => {
-              'gateways' => ['bogus']
-            },
-            'gateways' => {
-              'bogus' => { 
-                'config' => {
-                  "fields" => {
-                    'login' => { 'as' => "input_field", 'position' => 3, 'for' => "authentication", 'value' => 'test' }
-                  }
+            {
+                'enabled' => {
+                    'gateways' => ['bogus']
                 },
-              },
+                'gateways' => {
+                    'bogus' => {
+                        'config' => {
+                            "fields" => {
+                                'login' => {'as' => "input_field", 'position' => 3, 'for' => "authentication", 'value' => 'test'}
+                            }
+                        },
+                    },
+                }
             }
-          }
         )
       end
 
@@ -342,24 +351,24 @@ class GatewayEngineTest < Test::Unit::TestCase
         setup do
           ActiveProcessor.configuration = mock
           ActiveProcessor.configuration.stubs(:data).returns(
-            { 
-              'enabled' => {
-                'gateways' => ['bogus']
-              },
-              'gateways' => {
-                'bogus' => {                   
-                  'config' => {
-                    "fields" => {
-                      'login' => { 'as' => "input_field", 'position' => 3, 'for' => "authentication" }
-                    },
-                    "excludes" => ['login'],
-                    "includes" => {
-                      'field' => { 'as' => "input_field", 'value' => "opa", 'position' => 2 } 
-                    },
+              {
+                  'enabled' => {
+                      'gateways' => ['bogus']
+                  },
+                  'gateways' => {
+                      'bogus' => {
+                          'config' => {
+                              "fields" => {
+                                  'login' => {'as' => "input_field", 'position' => 3, 'for' => "authentication"}
+                              },
+                              "excludes" => ['login'],
+                              "includes" => {
+                                  'field' => {'as' => "input_field", 'value' => "opa", 'position' => 2}
+                              },
+                          }
+                      },
                   }
-                },
               }
-            }
           )
         end
 
@@ -377,7 +386,7 @@ class GatewayEngineTest < Test::Unit::TestCase
 
       should "display configuration form" do
         @engine = GatewayEngine.new(:first, {:engine => :gateways, :gateway => :bogus})
-        ActiveProcessor.configuration.stubs(:translate_func).returns(lambda{|s| "translated"})
+        ActiveProcessor.configuration.stubs(:translate_func).returns(lambda { |s| "translated" })
         assert_match /(.*)form(.*)/, @engine.display_form
       end
 
@@ -391,27 +400,27 @@ class GatewayEngineTest < Test::Unit::TestCase
       setup do
         ActiveProcessor.configuration = mock
         ActiveProcessor.configuration.stubs(:data).returns(
-          { 
-            'enabled' => {
-              'gateways' => ['bogus']
-            },
-            'gateways' => {
-              'bogus' => { :some => :setting },
+            {
+                'enabled' => {
+                    'gateways' => ['bogus']
+                },
+                'gateways' => {
+                    'bogus' => {:some => :setting},
+                }
             }
-          }
         )
       end
 
       should "raise error rwhen they're not set at all" do
-        assert_raise (ActiveProcessor::GatewayEngineError) { GatewayEngine.new.to_hash }
+        assert_raise (ActiveProcessor::GatewayEngineError) {GatewayEngine.new.to_hash}
       end
 
       should "raise error when engine is non-present" do
-        assert_raise (ActiveProcessor::GatewayEngineError) { GatewayEngine.new(:first, {:engine => :non_existent, :gateway => :bogus}).to_hash }
+        assert_raise (ActiveProcessor::GatewayEngineError) {GatewayEngine.new(:first, {:engine => :non_existent, :gateway => :bogus}).to_hash}
       end
 
       should "raise error when gateway is not enabled" do
-        assert_raise (ActiveProcessor::GatewayEngineError) { GatewayEngine.new(:first, {:engine => :gateways, :gateway => :non_existent}).to_hash }
+        assert_raise (ActiveProcessor::GatewayEngineError) {GatewayEngine.new(:first, {:engine => :gateways, :gateway => :non_existent}).to_hash}
       end
     end
 

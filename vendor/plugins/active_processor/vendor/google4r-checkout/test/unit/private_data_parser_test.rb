@@ -45,25 +45,25 @@ class Google4R::Checkout::PrivateDataParserTest < Test::Unit::TestCase
       </nested>
     </merchant-private-item-data>}
   end
-  
+
   def test_responds_correctly
     assert_respond_to PrivateDataParser, :element_to_value
   end
-  
+
   def test_parser_works_in_simple_example
     element = REXML::Document.new(@xml_str1).root.elements['//tags']
-    
+
     assert_equal 'value', PrivateDataParser.element_to_value(element)
   end
-  
+
   def test_parser_works_in_complex_example
     doc = REXML::Document.new(@xml_str1)
-    
-    hash = 
-      {
-        'item-note' => [ 'Text 1', 'Text 2' ],
-        'nested' => { 'tags' => 'value' }
-      }
+
+    hash =
+        {
+            'item-note' => ['Text 1', 'Text 2'],
+            'nested' => {'tags' => 'value'}
+        }
     assert_equal hash, PrivateDataParser.element_to_value(doc.root)
   end
 end

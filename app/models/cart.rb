@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Cart < ActiveRecord::Base
 
-    attr_reader :items
-    attr_reader :total_price
+  attr_reader :items
+  attr_reader :total_price
 
   def initialize
     empty!
@@ -13,9 +13,9 @@ class Cart < ActiveRecord::Base
     @total_price = 0.00
   end
 
-  def add_product(cardgroup)   
+  def add_product(cardgroup)
     left = Card.count(:conditions => ["sold = 0 AND cardgroup_id = ?", cardgroup.id])
-    
+
     for item_in_cart in @items do
       if item_in_cart.cardgroup_id == cardgroup.id
         left = left - 1
@@ -23,10 +23,10 @@ class Cart < ActiveRecord::Base
     end
     if left > 0
       item = Cclineitem.for_cardgroup(cardgroup)
-      @items << item 
+      @items << item
       @total_price += cardgroup.price + cardgroup.get_tax.count_tax_amount(cardgroup.price)
       return true
-    end 
+    end
     return false
   end
 

@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/paypal'
 
 module ActiveMerchant #:nodoc:
   module Billing #:nodoc:
-    # The PayPal gateway for PayPal Website Payments Pro Canada only supports Visa and MasterCard
+                 # The PayPal gateway for PayPal Website Payments Pro Canada only supports Visa and MasterCard
     class PaypalCaGateway < PaypalGateway
       self.supported_cardtypes = [:visa, :master, :american_express]
       self.supported_countries = ['CA']

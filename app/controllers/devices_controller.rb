@@ -2,15 +2,15 @@
 class DevicesController < ApplicationController
 
   layout "callc"
-  before_filter :check_post_method, :only=>[:create, :update ]
+  before_filter :check_post_method, :only => [:create, :update]
   before_filter :check_localization
   before_filter :authorize
   before_filter :find_email, :only => [:pdffaxemail_edit, :pdffaxemail_update, :pdffaxemail_destroy]
   before_filter :find_fax_device, :only => [:pdffaxemail_add, :pdffaxemail_new]
   before_filter :find_device, :only => [:destroy, :device_edit, :device_update, :device_extlines, :device_dids, :try_to_forward_device, :device_clis, :device_all_details, :callflow, :callflow_edit, :user_device_edit, :user_device_update]
   before_filter :find_cli, :only => [:change_email_callback_status, :change_email_callback_status_device, :cli_delete, :cli_user_delete, :cli_device_delete, :cli_edit, :cli_update, :cli_device_edit, :cli_user_edit, :cli_device_update, :cli_user_update]
-  before_filter :verify_params, :only => [ :create ]
-  before_filter :check_callback_addon, :only =>[:change_email_callback_status, :change_email_callback_status_device]
+  before_filter :verify_params, :only => [:create]
+  before_filter :check_callback_addon, :only => [:change_email_callback_status, :change_email_callback_status_device]
 
   before_filter { |c|
     view = [:index, :new, :edit, :device_edit, :show_devices, :device_extlines, :device_dids, :forwards, :group_forwards, :device_clis, :clis, :clis_banned_status, :cli_user_devices, :device_all_details, :default_device, :get_user_devices, :ajax_get_user_devices]
@@ -39,7 +39,7 @@ class DevicesController < ApplicationController
     @user = User.find_by_id(params[:user_id])
     unless @user
       flash[:notice]=_('User_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
     check_owner_for_device(@user)
     check_for_accountant_create_device
@@ -68,7 +68,7 @@ class DevicesController < ApplicationController
     #@locations = Location.find(:all, :conditions=>['user_id=? or id = 1', correct_owner_id], :order => "name ASC")
     #------ permits --------
 
-    @ip1,@mask1,@ip2,@mask2,@ip3,@mask3 = @device.perims_split
+    @ip1, @mask1, @ip2, @mask2, @ip3, @mask3 = @device.perims_split
 
     #------ advanced --------
     if @device.qualify == "no"
@@ -82,18 +82,17 @@ class DevicesController < ApplicationController
   end
 
 
-
   def create
-    
+
     sanitize_device_params_by_accountant_permissions
-    user = User.find(:first,:include =>[:address], :conditions => ["users.id = ?", params[:user_id]])
+    user = User.find(:first, :include => [:address], :conditions => ["users.id = ?", params[:user_id]])
     unless user
       flash[:notice]=_('User_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
 
     params[:device][:pin] = session[:device][:pin] if session[:device] and session[:device][:pin]
-    
+
     notice, par = Device.validate_before_create(current_user, user, params, allow_zap?, allow_virtual?)
     if !notice.blank?
       flash[:notice] = notice
@@ -101,11 +100,11 @@ class DevicesController < ApplicationController
     end
 
     fextension = free_extension()
-    device = user.create_default_device({:device_ip_authentication_record=>par[:ip_authentication].to_i,:description=>par[:device][:description], :device_type=>par[:device][:device_type], :dev_group=>par[:device][:devicegroup_id], :free_ext=>fextension, :secret=>random_password(12), :username=>fextension, :pin=>par[:device][:pin]})
+    device = user.create_default_device({:device_ip_authentication_record => par[:ip_authentication].to_i, :description => par[:device][:description], :device_type => par[:device][:device_type], :dev_group => par[:device][:devicegroup_id], :free_ext => fextension, :secret => random_password(12), :username => fextension, :pin => par[:device][:pin]})
 
     if device.save
       flash[:status] = device.check_callshop_user(_('device_created'))
-      a=configure_extensions(device.id, {:current_user=>current_user})
+      a=configure_extensions(device.id, {:current_user => current_user})
       return false if !a
     else
       flash_errors_for(_('device_not_created'), device)
@@ -114,12 +113,12 @@ class DevicesController < ApplicationController
 
     redirect_to :controller => "devices", :action => 'device_edit', :id => device.id and return false
   end
-  
+
   def edit
     @user = User.find_by_id(params[:id])
     unless @user
       flash[:notice]=_('User_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
   end
 
@@ -137,10 +136,10 @@ class DevicesController < ApplicationController
     notice = @device.validate_before_destroy(current_user, @allow_edit)
     if !notice.blank?
       flash[:notice] = notice
-      redirect_to :controller => @return_controller, :action => @return_action, :id => @device.user_id       and return false
+      redirect_to :controller => @return_controller, :action => @return_action, :id => @device.user_id and return false
     end
     @device.destroy_all
-    
+
     flash[:status] = _('device_deleted')
     redirect_to :controller => @return_controller, :action => @return_action, :id => user_id
   end
@@ -152,7 +151,7 @@ class DevicesController < ApplicationController
     @page_icon = "device.png"
     @help_link = "http://wiki.kolmisoft.com/index.php/Devices"
 
-    @user=User.find_by_id(params[:id], :include => [:devices], :conditions=>['owner_id = ? or users.id =?', correct_owner_id, current_user.id])
+    @user=User.find_by_id(params[:id], :include => [:devices], :conditions => ['owner_id = ? or users.id =?', correct_owner_id, current_user.id])
     if !@user
       flash[:notice] = _("User_not_found")
       redirect_to :controller => "callc", :action => "main" and return false
@@ -221,7 +220,7 @@ class DevicesController < ApplicationController
     else
       collect_locations = 'user_id=? or id = 1'
     end
-    @locations = Location.find(:all, :conditions=>[collect_locations, correct_owner_id], :order => "name ASC")
+    @locations = Location.find(:all, :conditions => [collect_locations, correct_owner_id], :order => "name ASC")
 
     @dids = @device.dids
     @all_dids = Did.forward_dids_for_select
@@ -230,7 +229,7 @@ class DevicesController < ApplicationController
 
     #------ permits --------
 
-    @ip1,@mask1,@ip2,@mask2,@ip3,@mask3 = @device.perims_split
+    @ip1, @mask1, @ip2, @mask2, @ip3, @mask3 = @device.perims_split
 
     #------ advanced --------
     if @device.qualify == "no"
@@ -271,7 +270,7 @@ class DevicesController < ApplicationController
     params[:device][:description]=params[:device][:description].to_s.strip
 
 
-    @devicetypes = @device.load_device_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?).map{|dt| dt.name}
+    @devicetypes = @device.load_device_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?).map { |dt| dt.name }
     @devicetypes << "FAX"
     MorLog.my_debug(@devicetypes.inspect)
     unless @devicetypes.include?(params[:device][:device_type].to_s)
@@ -299,7 +298,7 @@ class DevicesController < ApplicationController
       end
       params[:device][:timeout]=params[:device_timeout].to_s.strip
     end
-    if not @new_device  and @device.device_type != "Virtual"
+    if not @new_device and @device.device_type != "Virtual"
       if @device.device_type != "ZAP"
         if change_opt_2 == true
           params[:device][:name]=params[:device][:name].to_s.strip
@@ -316,12 +315,12 @@ class DevicesController < ApplicationController
       end
     end
 
-    if not @new_device and  @device.device_type != "FAX"
+    if not @new_device and @device.device_type != "FAX"
       change_opt_3 == true ? params[:cid_number]=params[:cid_number].to_s.strip : params[:cid_number]= cid_number(@device.callerid)
-      change_opt_4 == true ? params[:cid_name]=params[:cid_name].to_s.strip :  params[:cid_name]= nice_cid(@device.callerid)
+      change_opt_4 == true ? params[:cid_name]=params[:cid_name].to_s.strip : params[:cid_name]= nice_cid(@device.callerid)
     end
 
-    if not @new_device and  @device.device_type != "FAX" and @device.device_type != "Virtual"
+    if not @new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
       if @device.device_type != "ZAP"
         params[:host]=params[:host].to_s.strip
         if @device.host != "dynamic"
@@ -333,19 +332,19 @@ class DevicesController < ApplicationController
     end
 
 
-    if not @new_device and  @device.device_type != "FAX" and @device.device_type != "Virtual"
+    if not @new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
       params[:callgroup]=params[:callgroup].to_s.strip
       params[:pickupgroup]=params[:pickupgroup].to_s.strip
     end
 
-    if not @new_device and  @device.device_type != "FAX" and @device.device_type != "Virtual"
+    if not @new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
       if @device.voicemail_box
         params[:vm_email]=params[:vm_email].to_s.strip
         params[:vm_psw]=params[:vm_psw].to_s.strip
       end
     end
 
-    if not @new_device and  @device.device_type != "FAX" and @device.device_type != "Virtual"
+    if not @new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
       if @device.device_type != "ZAP"
         params[:ip1]=params[:ip1].to_s.strip
         params[:mask1]=params[:mask1].to_s.strip
@@ -360,7 +359,7 @@ class DevicesController < ApplicationController
       end
     end
 
-    if not @new_device and  @device.device_type != "FAX"
+    if not @new_device and @device.device_type != "FAX"
       params[:device][:tell_rtime_when_left]=params[:device][:tell_rtime_when_left].to_s.strip
       params[:device][:repeat_rtime_every]=params[:device][:repeat_rtime_every].to_s.strip
       params[:device][:qf_tell_time] = params[:device][:qf_tell_time].to_i
@@ -391,26 +390,26 @@ class DevicesController < ApplicationController
       if params[:host].to_s.strip.blank?
         flash[:notice] = _("Must_set_either_ip_auth_either_dynamic_host")
         redirect_to :action => :device_edit, :id => @device.id and return false
-       else
-         params[:ip_authentication] = '1'
-       end
+      else
+        params[:ip_authentication] = '1'
+      end
     end
 
-    if params[:device][:extension] and Device.find(:first, :conditions => ["id != ? and extension = ?",@device.id, params[:device][:extension] ])
+    if params[:device][:extension] and Device.find(:first, :conditions => ["id != ? and extension = ?", @device.id, params[:device][:extension]])
       flash[:notice] = _('Extension_is_used')
-      redirect_to :action => 'device_edit', :id =>@device.id and return false
+      redirect_to :action => 'device_edit', :id => @device.id and return false
     else
       #pin
       if (Device.find(:first, :conditions => ["id != ? AND pin = ?", @device.id, params[:device][:pin]]) and params[:device][:pin].to_s != "")
         flash[:notice] = _('Pin_is_already_used')
-        redirect_to :action => 'device_edit', :id =>@device.id and return false
+        redirect_to :action => 'device_edit', :id => @device.id and return false
       end
       if params[:device][:pin].to_s.strip.scan(/[^0-9]/).compact.size > 0
         flash[:notice] = _('Pin_must_be_numeric')
-        redirect_to :action => 'device_edit', :id =>@device.id and return false
+        redirect_to :action => 'device_edit', :id => @device.id and return false
       end
       @device.device_ip_authentication_record = params[:ip_authentication].to_i
-      params[:device] = params[:device].reject{|key, value| ['extension'].include?(key.to_s)} if current_user.usertype == 'reseller' and Confline.get_value('Allow_resellers_to_change_extensions_for_their_user_devices').to_i == 0
+      params[:device] = params[:device].reject { |key, value| ['extension'].include?(key.to_s) } if current_user.usertype == 'reseller' and Confline.get_value('Allow_resellers_to_change_extensions_for_their_user_devices').to_i == 0
       if params[:device][:pin].blank? and current_user.usertype == 'reseller'
         params[:device][:pin] = @device.pin
       end
@@ -445,12 +444,12 @@ class DevicesController < ApplicationController
       end
 
       if params[:ip_authentication].to_s == "1"
-        
+
         @device.username = ""
         @device.secret = ""
         if !@device.name.include?('ipauth')
           name = @device.generate_rand_name('ipauth', 8)
-          while Device.find(:first, :conditions=>['name= ? and id != ?' ,name, @device.id])
+          while Device.find(:first, :conditions => ['name= ? and id != ?', name, @device.id])
             name = @device.generate_rand_name('ipauth', 8)
           end
           @device.name = name
@@ -482,11 +481,11 @@ class DevicesController < ApplicationController
       @device.update_codecs_with_priority(params[:codec], false) if params[:codec]
       #============= PERMITS ===================
       if params[:mask1]
-        if !Device.validate_permits_ip([params[:ip1],params[:ip2],params[:ip3],params[:mask1],params[:mask2],params[:mask3]])
+        if !Device.validate_permits_ip([params[:ip1], params[:ip2], params[:ip3], params[:mask1], params[:mask2], params[:mask3]])
           flash[:notice] = _('Allowed_IP_is_not_valid')
-          redirect_to :action => 'device_edit', :id => @device.id  and return false
+          redirect_to :action => 'device_edit', :id => @device.id and return false
         else
-          @device.permit = Device.validate_perims({:ip1=>params[:ip1], :ip2=>params[:ip2], :ip3=>params[:ip3], :mask1=>params[:mask1], :mask2=>params[:mask2], :mask3=>params[:mask3]})
+          @device.permit = Device.validate_perims({:ip1 => params[:ip1], :ip2 => params[:ip2], :ip3 => params[:ip3], :mask1 => params[:mask1], :mask2 => params[:mask2], :mask3 => params[:mask3]})
         end
       end
 
@@ -577,11 +576,11 @@ class DevicesController < ApplicationController
       if params[:vm_email].to_s != ""
         if !Email.address_validation(params[:vm_email])
           flash[:notice] = _("Email_address_not_corect")
-          redirect_to :action => 'device_edit', :id => @device.id  and return false
+          redirect_to :action => 'device_edit', :id => @device.id and return false
         end
       end
 
-      @device.mailbox = @device.enable_mwi.to_i == 0 ?  "" : @device.extension.to_s + "@default"
+      @device.mailbox = @device.enable_mwi.to_i == 0 ? "" : @device.extension.to_s + "@default"
       MorLog.my_debug "ddddddddddddddddddddddddd"
       if @device.save
         # --------------- VM -------------
@@ -595,22 +594,22 @@ class DevicesController < ApplicationController
         ActiveRecord::Base.connection.update(sql)
 
         @device = check_context(@device)
-        a=configure_extensions(@device.id, {:current_user=>current_user})
+        a=configure_extensions(@device.id, {:current_user => current_user})
         return false if !a
         @devices_to_reconf = Callflow.find(:all, :conditions => ["device_id = ? AND action = 'forward' AND data2 = 'local'", @device.id])
         @devices_to_reconf.each { |call_flow|
           if call_flow.data.to_i > 0
-            a=configure_extensions(call_flow.data.to_i, {:current_user=>current_user})
+            a=configure_extensions(call_flow.data.to_i, {:current_user => current_user})
             return false if !a
           end
         }
         flash[:status] = _('phones_settings_updated')
         # actions to report who changed what in device settings.
         if @device_old.pin != @device.pin
-          Action.add_action_hash(session[:user_id], {:target_id => @device.id, :target_type => "device", :action => "device_pin_changed", :data => @device_old.pin, :data2=>@device.pin})
+          Action.add_action_hash(session[:user_id], {:target_id => @device.id, :target_type => "device", :action => "device_pin_changed", :data => @device_old.pin, :data2 => @device.pin})
         end
         if @device_old.secret != @device.secret
-          Action.add_action_hash(session[:user_id], {:target_id => @device.id, :target_type => "device", :action => "device_secret_changed", :data => @device_old.secret, :data2=>@device.secret})
+          Action.add_action_hash(session[:user_id], {:target_id => @device.id, :target_type => "device", :action => "device_secret_changed", :data => @device_old.secret, :data2 => @device.secret})
         end
         if old_vm.password != vm.password
           Action.add_action_hash(session[:user_id], {:target_id => @device.id, :target_type => "device", :action => "device_voice_mail_password_changed", :data => old_vm.password, :data2 => vm.password})
@@ -638,13 +637,13 @@ class DevicesController < ApplicationController
         else
           collect_locations = 'user_id=? or id = 1'
         end
-        @locations = Location.find(:all, :conditions=>[collect_locations, correct_owner_id], :order => "name ASC")
+        @locations = Location.find(:all, :conditions => [collect_locations, correct_owner_id], :order => "name ASC")
 
         @dids = @device.dids
 
         #------ permits --------
 
-        @ip1,@mask1,@ip2,@mask2,@ip3,@mask3 = @device.perims_split
+        @ip1, @mask1, @ip2, @mask2, @ip3, @mask3 = @device.perims_split
 
         #------ advanced --------
         if @device.qualify == "no"
@@ -657,7 +656,7 @@ class DevicesController < ApplicationController
         @fax_enabled = true if Confline.get_value("Fax_Device_Enabled").to_i == 1
         @pdffaxemails = @device.pdffaxemails
         @servers = Server.find(:all, :order => "server_id ASC")
-        
+
         set_voicemail_variables(@device)
 
         if @device.device_type == "H323"
@@ -692,7 +691,7 @@ class DevicesController < ApplicationController
     @page_title = _('dids')
     @user = @device.user
     check_owner_for_device(@user)
-    
+
     if !@dids = @device.dids
       @dids = nil
     end
@@ -715,7 +714,7 @@ class DevicesController < ApplicationController
         end
       end
     else
-      @devices = Device.find(:all, :conditions=>"name not like 'mor_server_%'", :order => "extension ASC")
+      @devices = Device.find(:all, :conditions => "name not like 'mor_server_%'", :order => "extension ASC")
     end
 
     @device = Device.find(params[:id])
@@ -734,7 +733,7 @@ class DevicesController < ApplicationController
       d = Device.find(@fwd_to)
       can_fwd = false if d.forward_to == @device.id
 
-      while !( d.forward_to == 0  or d.forward_to == @device.id)
+      while !(d.forward_to == 0 or d.forward_to == @device.id)
         d = Device.find(d.forward_to)
         can_fwd = false if d.forward_to == @device.id
       end
@@ -760,7 +759,7 @@ class DevicesController < ApplicationController
         #my_debug "device not saved"
       end
 
-      a=configure_extensions(@device.id, {:current_user=>current_user})
+      a=configure_extensions(@device.id, {:current_user => current_user})
       return false if !a
     else
       flash[:notice] = _('device') +' ' + @device.name.to_s + ' ' + _('not_forwarded_close_circle')
@@ -768,7 +767,6 @@ class DevicesController < ApplicationController
 
     redirect_to :action => 'device_forward', :id => @device
   end
-
 
 
   def forwards
@@ -938,7 +936,7 @@ class DevicesController < ApplicationController
     @cli.cli = params[:cli]
     @cli.description = params[:description]
     @cli.comment = params[:comment]
-    params[:banned].to_i == 1 ? @cli.banned = 1: @cli.banned = 0
+    params[:banned].to_i == 1 ? @cli.banned = 1 : @cli.banned = 0
     @cli.ivr_id = params[:ivr] if params[:ivr] and accountant_can_write?("cli_ivr")
     if @cli.save
       Callerid.use_for_callback(@cli, params[:email_callback])
@@ -954,7 +952,7 @@ class DevicesController < ApplicationController
     cli = Callerid.find_by_id(params[:id])
     unless cli
       flash[:notice]=_('Callerid_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
     cli.cli = params[:cli]
     cli.description = params[:description]
@@ -1058,7 +1056,7 @@ class DevicesController < ApplicationController
     @cl.created_at = Time.now if not @cl.created_at
     @cl.banned.to_i == 1 ? @cl.banned = 0 : @cl.banned = 1
     @cl.save
-    redirect_to :action=>'clis'
+    redirect_to :action => 'clis'
   end
 
   def cli_user_devices
@@ -1069,7 +1067,7 @@ class DevicesController < ApplicationController
     #      @add = 1
     #      @devices = Device.find(:all, :select=>"devices.*", :joins=>"LEFT JOIN callerids ON (callerids.device_id = devices.id)",:conditions => ["user_id = ? AND callerids.id IS NULL", @num]) if @num.to_i != -1
     #    else
-    @devices = Device.find(:all , :conditions => ["user_id = ? AND name not like 'mor_server_%'", @num]) if @num.to_i != -1
+    @devices = Device.find(:all, :conditions => ["user_id = ? AND name not like 'mor_server_%'", @num]) if @num.to_i != -1
     #    end
 
     if params[:add]
@@ -1083,7 +1081,7 @@ class DevicesController < ApplicationController
     @page_title = _('Devices')
     @page_icon = "device.png"
     @help_link = "http://wiki.kolmisoft.com/index.php/Devices"
-    
+
     default_options = {}
     if params[:clean]
       @options = default_options
@@ -1115,14 +1113,14 @@ class DevicesController < ApplicationController
       @options.delete(:search_pin)
     else
       pin = params[:s_pin].to_s.strip
- 	    if pin.length > 0
- 	      @options[:search_pin] = pin if pin =~ /^[0-9]+$/
+      if pin.length > 0
+        @options[:search_pin] = pin if pin =~ /^[0-9]+$/
       end
       @options.delete(:search_pinless)
     end
 
     @options[:search_description].to_s.length + @options[:search_extension].to_s.length+ @options[:search_username].to_s.length + @options[:search_cli].to_s.length > 0 ? @options[:search] = 1 : @options[:search] = 0
-    params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page] or @options[:page] <= 0 )
+    params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page] or @options[:page] <= 0)
     join = ["LEFT OUTER JOIN users ON users.id = devices.user_id"]
     cond = ["user_id != -1 AND devices.name not like 'mor_server_%'"]
     cond_par = []
@@ -1173,26 +1171,26 @@ class DevicesController < ApplicationController
     cond << "users.owner_id = ?"
     cond_par << session[:user_id]
 
-    
+
     #grouping by device id is needed only when searching by cli. how to work around it withoud duplicating code?
-    @total_pages = (Device.count(:all, :joins => join.join(" "), :conditions  => [cond.join(" AND ")] + cond_par, :group => 'devices.id').size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (Device.count(:all, :joins => join.join(" "), :conditions => [cond.join(" AND ")] + cond_par, :group => 'devices.id').size.to_f / session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages.to_i if @total_pages.to_i < @options[:page].to_i and @total_pages > 0
     @options[:page] = 1 if @options[:page].to_i < 1
 
     @devices = Device.find(:all,
-      :select => "devices.*, IF(LENGTH(CONCAT(users.first_name, users.last_name)) > 0,CONCAT(users.first_name, users.last_name), users.username) AS 'nice_user'",
-      :joins => join.join(" "),
-      :conditions  => [cond.join(" AND ")] + cond_par,
-      :group => 'devices.id',
-      :order => order_by,
-      :offset => session[:items_per_page]*(@options[:page]-1),
-      :limit => session[:items_per_page]
+                           :select => "devices.*, IF(LENGTH(CONCAT(users.first_name, users.last_name)) > 0,CONCAT(users.first_name, users.last_name), users.username) AS 'nice_user'",
+                           :joins => join.join(" "),
+                           :conditions => [cond.join(" AND ")] + cond_par,
+                           :group => 'devices.id',
+                           :order => order_by,
+                           :offset => session[:items_per_page]*(@options[:page]-1),
+                           :limit => session[:items_per_page]
     )
 
     if default and (session[:devices_all_options] == nil or session[:devices_all_options][:order_by] == nil)
       @options.delete(:order_by)
     end
-    session[:devices_all_options] =  @options
+    session[:devices_all_options] = @options
   end
 
   # in before filter : device (:find_device)
@@ -1243,7 +1241,7 @@ class DevicesController < ApplicationController
     if session[:usertype] == "reseller"
       @user = @device.user
 
-      if @user.owner_id != session[:user_id]  and @user.id != session[:user_id]
+      if @user.owner_id != session[:user_id] and @user.id != session[:user_id]
         dont_be_so_smart
         redirect_to :controller => "callc", :action => 'main'
       end
@@ -1302,79 +1300,79 @@ class DevicesController < ApplicationController
       check_owner_for_device(@user)
     end
 
-    @dids = Did.find(:all, :conditions=>["device_id = ?", @device.id])
+    @dids = Did.find(:all, :conditions => ["device_id = ?", @device.id])
     @cf_type = params[:cft]
 
     @fax_enabled = Confline.get_value("Fax_Device_Enabled").to_i
 
 
     whattodo = params[:whattodo]
-    cf = Callflow.find(:first, :conditions=>{:id=>params[:cf], :device_id=>@device}) if params[:cf]
+    cf = Callflow.find(:first, :conditions => {:id => params[:cf], :device_id => @device}) if params[:cf]
     if !cf and params[:cf]
       flash[:notice]=_('Callflow_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
     #MorLog.my_debug("CF :#{cf.to_s}" )
     case whattodo
-    when "change_action"
-      cf.action = params[:cf_action]
-      cf.data = ""
-      cf.data2 = ""
-      cf.data3 = 1
-      cf.save
-    when "change_local_device"
-      if  params[:cf_data].to_i == 5
-        if params[:device_id].to_s != ""
-          cf.data = params[:device_id].to_i
-          cf.data2 = "local"
-          cf.data3=""
-          cf.save if cf.data.to_i > 0
-        else
-          err=1
-        end
-      end
-      if  params[:cf_data].to_i == 6
-        if  params[:ext_number].to_i == @device.extension.to_i
-          flash[:notice] = _('Devices_callflow_external_number_cant_match_extension')
-          redirect_to :action=>'callflow_edit', :id=>@device.id, :cft=>@cf_type and return false
-        end
-        cf.data = params[:ext_number].to_s.strip
-        cf.data2 = "external"
-        cf.data3=""
+      when "change_action"
+        cf.action = params[:cf_action]
+        cf.data = ""
+        cf.data2 = ""
+        cf.data3 = 1
         cf.save
-      end
+      when "change_local_device"
+        if  params[:cf_data].to_i == 5
+          if params[:device_id].to_s != ""
+            cf.data = params[:device_id].to_i
+            cf.data2 = "local"
+            cf.data3=""
+            cf.save if cf.data.to_i > 0
+          else
+            err=1
+          end
+        end
+        if  params[:cf_data].to_i == 6
+          if  params[:ext_number].to_i == @device.extension.to_i
+            flash[:notice] = _('Devices_callflow_external_number_cant_match_extension')
+            redirect_to :action => 'callflow_edit', :id => @device.id, :cft => @cf_type and return false
+          end
+          cf.data = params[:ext_number].to_s.strip
+          cf.data2 = "external"
+          cf.data3=""
+          cf.save
+        end
 
 
-      if params[:cf_data3].to_i < 5
-        cf.data3 = params[:cf_data3].to_s
-        if params[:cf_data3].to_i == 3
-          cf.data4 = params[:did_id] if  params[:did_id]
+        if params[:cf_data3].to_i < 5
+          cf.data3 = params[:cf_data3].to_s
+          if params[:cf_data3].to_i == 3
+            cf.data4 = params[:did_id] if  params[:did_id]
+          end
+          if params[:cf_data3].to_i == 4
+            cf.data4 = params[:cf_data4] if  params[:cf_data4].length > 0
+          end
+          if params[:cf_data3].to_i < 3
+            cf.data4 = ""
+          end
+          cf.save #if cf
         end
-        if params[:cf_data3].to_i == 4
-          cf.data4 = params[:cf_data4] if  params[:cf_data4].length > 0
+      when "change_fax_device"
+        cf.data = params[:device_id].to_i
+        cf.data2 = "fax"
+        cf.save if cf.data.to_i > 0
+      when "change_device_timeout"
+        value = params[:device_timeout].to_i
+        if value < 10
+          value = 10
         end
-        if params[:cf_data3].to_i < 3
-          cf.data4 = ""
-        end
-        cf.save #if cf
-      end
-    when "change_fax_device"
-      cf.data = params[:device_id].to_i
-      cf.data2 = "fax"
-      cf.save if cf.data.to_i > 0
-    when "change_device_timeout"
-      value = params[:device_timeout].to_i
-      if value < 10
-        value = 10
-      end
-      @device.timeout = value
-      @device.save
+        @device.timeout = value
+        @device.save
     end
 
     if err.to_i == 0
-      flash[:status] = _('Callflow_updated')         if params[:whattodo] and params[:whattodo].length > 0
+      flash[:status] = _('Callflow_updated') if params[:whattodo] and params[:whattodo].length > 0
 
-      @cfs = Callflow.find(:all, :conditions => ["cf_type = ? AND device_id = ?",@cf_type,  @device.id], :order => "priority ASC")
+      @cfs = Callflow.find(:all, :conditions => ["cf_type = ? AND device_id = ?", @cf_type, @device.id], :order => "priority ASC")
 
       if session[:usertype] != "admin" and session[:usertype] != "accountant"
         if session[:usertype] == "user" and session[:manager_in_groups].size == 0
@@ -1402,12 +1400,12 @@ class DevicesController < ApplicationController
         @fax_devices = Device.find(:all, :conditions => "user_id != -1 AND device_type = 'FAX' AND name not like 'mor_server_%'", :order => "name ASC")
       end
       if params[:whattodo] and params[:whattodo].to_s.length > 0
-        a=configure_extensions(@device.id, {:current_user=>current_user})
+        a=configure_extensions(@device.id, {:current_user => current_user})
         return false if !a
       end
     else
       flash[:notice]= _('Please_select_device')
-      redirect_to :action=>'callflow_edit', :id=>@device.id, :cft=>@cf_type
+      redirect_to :action => 'callflow_edit', :id => @device.id, :cft => @cf_type
     end
   end
 
@@ -1434,7 +1432,7 @@ class DevicesController < ApplicationController
     @user = User.find_by_id(session[:user_id])
     unless @user
       flash[:notice] = _('User_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
     if @device.user_id != @user.id
       dont_be_so_smart
@@ -1485,7 +1483,7 @@ class DevicesController < ApplicationController
     @device.description = params[:device][:description]
 
     @device.record = params[:device][:record].to_i
-    @device.recording_to_email =  params[:device][:recording_to_email].to_i
+    @device.recording_to_email = params[:device][:recording_to_email].to_i
     @device.recording_email = params[:device][:recording_email]
     @device.recording_keep = params[:device][:recording_keep].to_i
     #@device.record_forced =  params[:device][:record_forced].to_i
@@ -1497,6 +1495,7 @@ class DevicesController < ApplicationController
     end
     redirect_to :action => :user_devices and return false
   end
+
   # ------------------ PDF Fax Emails -----------------
 
   def pdffaxemail_add
@@ -1557,7 +1556,7 @@ class DevicesController < ApplicationController
     device_id = @email.device_id
     @email.destroy
 
-    flash[:status] = _('Email_deleted')  + ": " + email
+    flash[:status] = _('Email_deleted') + ": " + email
     redirect_to :action => 'device_edit', :id => device_id
   end
 
@@ -1580,13 +1579,13 @@ class DevicesController < ApplicationController
     @devicetypes = Devicetype.load_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?)
 
     @audio_codecs = Codec.find(:all,
-      :select=>'codecs.*,  (conflines.value2 + 0) AS v2', :joins=>'LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))',
-      :conditions =>["conflines.name like 'Default_device_codec%' and codecs.codec_type = 'audio' and owner_id =?", session[:user_id]],
-      :order=>'v2 asc')
+                               :select => 'codecs.*,  (conflines.value2 + 0) AS v2', :joins => 'LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))',
+                               :conditions => ["conflines.name like 'Default_device_codec%' and codecs.codec_type = 'audio' and owner_id =?", session[:user_id]],
+                               :order => 'v2 asc')
     @video_codecs = Codec.find(:all,
-      :select=>'codecs.*, (conflines.value2 + 0) AS v2', :joins=>'LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))',
-      :conditions =>["conflines.name like 'Default_device_codec%' and codecs.codec_type = 'video' and owner_id =?", session[:user_id]],
-      :order=>'v2 asc')
+                               :select => 'codecs.*, (conflines.value2 + 0) AS v2', :joins => 'LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))',
+                               :conditions => ["conflines.name like 'Default_device_codec%' and codecs.codec_type = 'video' and owner_id =?", session[:user_id]],
+                               :order => 'v2 asc')
     @owner = session[:user_id]
     @device_type =Confline.get_value("Default_device_type", session[:user_id])
     if session[:usertype] == 'reseller'
@@ -1594,7 +1593,7 @@ class DevicesController < ApplicationController
     else
       collect_locations = 'user_id=? or id = 1'
     end
-    @locations = Location.find(:all, :conditions=>[collect_locations, correct_owner_id], :order => "name ASC")
+    @locations = Location.find(:all, :conditions => [collect_locations, correct_owner_id], :order => "name ASC")
     @default = 1
     @cid_name = Confline.get_value("Default_device_cid_name", session[:user_id])
     @cid_number = Confline.get_value("Default_device_cid_number", session[:user_id])
@@ -1633,7 +1632,7 @@ class DevicesController < ApplicationController
     @user = User.new(:recording_enabled => 1)
 
     @fax_enabled = true if Confline.get_value("Fax_Device_Enabled").to_i == 1
- 
+
     @device_voicemail_active = Confline.get_value("Default_device_voicemail_active", session[:user_id])
     @device_voicemail_box = Confline.get_value("Default_device_voicemail_box", session[:user_id])
     @device_voicemail_box_email = Confline.get_value("Default_device_voicemail_box_email", session[:user_id])
@@ -1657,14 +1656,14 @@ class DevicesController < ApplicationController
       end
     end
 
-    Confline.set_value("Default_device_type",params[:device][:device_type], session[:user_id] )
+    Confline.set_value("Default_device_type", params[:device][:device_type], session[:user_id])
     Confline.set_value("Default_device_dtmfmode", params[:device][:dtmfmode], session[:user_id])
     Confline.set_value("Default_device_works_not_logged", params[:device][:works_not_logged], session[:user_id])
     Confline.set_value("Default_device_location_id", params[:device][:location_id], session[:user_id])
     Confline.set_value("Default_device_timeout", params[:device_timeout], session[:user_id])
 
-    Confline.set_value("Default_device_call_limit",params[:call_limit].to_i, session[:user_id])
-    Confline.set_value("Default_device_server_id",params[:device][:server_id].to_i, session[:user_id]) if params[:device] and params[:device][:server_id]
+    Confline.set_value("Default_device_call_limit", params[:call_limit].to_i, session[:user_id])
+    Confline.set_value("Default_device_server_id", params[:device][:server_id].to_i, session[:user_id]) if params[:device] and params[:device][:server_id]
     Confline.set_value("Default_device_cid_name", params[:cid_name], session[:user_id])
     Confline.set_value("Default_device_cid_number", params[:cid_number], session[:user_id])
 
@@ -1678,31 +1677,31 @@ class DevicesController < ApplicationController
     Confline.set_value("Default_device_voicemail_box_email", params[:vm_email], session[:user_id])
     Confline.set_value("Default_device_voicemail_box_password", params[:vm_psw], session[:user_id])
 
-    Confline.set_value("Default_device_trustrpid",params[:device][:trustrpid], session[:user_id])
+    Confline.set_value("Default_device_trustrpid", params[:device][:trustrpid], session[:user_id])
     Confline.set_value("Default_device_sendrpid", params[:device][:sendrpid], session[:user_id])
     Confline.set_value("Default_device_t38pt_udptl", params[:device][:t38pt_udptl], session[:user_id])
     Confline.set_value("Default_device_promiscredir", params[:device][:promiscredir], session[:user_id])
     Confline.set_value("Default_device_progressinband", params[:device][:progressinband], session[:user_id])
-    Confline.set_value("Default_device_videosupport",params[:device][:videosupport], session[:user_id])
+    Confline.set_value("Default_device_videosupport", params[:device][:videosupport], session[:user_id])
 
     Confline.set_value("Default_device_allow_duplicate_calls", params[:device][:allow_duplicate_calls], session[:user_id])
     Confline.set_value("Default_device_tell_balance", params[:device][:tell_balance], session[:user_id])
-    Confline.set_value("Default_device_tell_time",params[:device][:tell_time], session[:user_id])
-    Confline.set_value("Default_device_tell_rtime_when_left",params[:device][:tell_rtime_when_left], session[:user_id])
+    Confline.set_value("Default_device_tell_time", params[:device][:tell_time], session[:user_id])
+    Confline.set_value("Default_device_tell_rtime_when_left", params[:device][:tell_rtime_when_left], session[:user_id])
     Confline.set_value("Default_device_repeat_rtime_every", params[:device][:repeat_rtime_every], session[:user_id])
     Confline.set_value("Default_device_fake_ring", params[:device][:fake_ring], session[:user_id])
     lang = params[:device][:language].to_s.blank? ? 'en' : params[:device][:language].to_s
     Confline.set_value("Default_device_language", lang, session[:user_id])
     Confline.set_value("Default_device_enable_mwi", params[:device][:enable_mwi].to_i, session[:user_id])
-    
+
 
     #============= PERMITS ===================
     if params[:mask1]
-      if !Device.validate_permits_ip([params[:ip1],params[:ip2],params[:ip3],params[:mask1],params[:mask2],params[:mask3]])
+      if !Device.validate_permits_ip([params[:ip1], params[:ip2], params[:ip3], params[:mask1], params[:mask2], params[:mask3]])
         flash[:notice] = _('Allowed_IP_is_not_valid')
         redirect_to :action => 'default_device' and return false
       else
-        Confline.set_value("Default_device_permits",Device.validate_perims({:ip1=>params[:ip1], :ip2=>params[:ip2], :ip3=>params[:ip3], :mask1=>params[:mask1], :mask2=>params[:mask2], :mask3=>params[:mask3]}), session[:user_id])
+        Confline.set_value("Default_device_permits", Device.validate_perims({:ip1 => params[:ip1], :ip2 => params[:ip2], :ip3 => params[:ip3], :mask1 => params[:mask1], :mask2 => params[:mask2], :mask3 => params[:mask3]}), session[:user_id])
       end
     end
 
@@ -1718,10 +1717,10 @@ class DevicesController < ApplicationController
     Confline.set_value("Default_device_use_ani_for_cli", params[:device][:use_ani_for_cli], session[:user_id])
     #------- Network related -------
     Confline.set_value("Default_device_host", params[:host], session[:user_id])
-    Confline.set_value("Default_device_host", "dynamic", session[:user_id])  if params[:dynamic_check] == "1"
+    Confline.set_value("Default_device_host", "dynamic", session[:user_id]) if params[:dynamic_check] == "1"
 
     if Confline.get_value("Default_device_host", session[:user_id]) != "dynamic"
-      Confline.set_value("Default_device_ipaddr",Confline.get_value("Default_device_host", session[:user_id]), session[:user_id])
+      Confline.set_value("Default_device_ipaddr", Confline.get_value("Default_device_host", session[:user_id]), session[:user_id])
     else
       Confline.set_value("Default_device_ipaddr", "", session[:user_id])
     end
@@ -1736,7 +1735,7 @@ class DevicesController < ApplicationController
       end
     end
     #changed validation, look for comment about #4978 ticket 
-    Confline.set_value("Default_device_port", Device::DefaultPort["IAX2"].to_s, session[:user_id])  if not Device.valid_port? params[:port], @device_type
+    Confline.set_value("Default_device_port", Device::DefaultPort["IAX2"].to_s, session[:user_id]) if not Device.valid_port? params[:port], @device_type
     Confline.set_value("Default_device_port", Device::DefaultPort["SIP"].to_s, session[:user_id]) if not Device.valid_port? params[:port], @device_type
 
     Confline.set_value("Default_device_regseconds", params[:canreinvite], session[:user_id])
@@ -1786,7 +1785,6 @@ class DevicesController < ApplicationController
     #------- Advanced -------
 
 
-
     Confline.set_value("Default_device_fromuser", params[:fromuser], session[:user_id])
     Confline.set_value("Default_device_fromuser", nil, session[:user_id]) if not params[:fromuser] or params[:fromuser].length < 1
 
@@ -1803,9 +1801,9 @@ class DevicesController < ApplicationController
     Confline.set_value("Default_device_change_failed_code_to", params[:device][:change_failed_code_to])
 
     #recordings
-    Confline.set_value("Default_device_record",  params[:device][:record].to_i, session[:user_id])
-    Confline.set_value("Default_device_recording_to_email",  params[:device][:recording_to_email].to_i, session[:user_id])
-    Confline.set_value("Default_device_recording_keep",  params[:device][:recording_keep].to_i, session[:user_id])
+    Confline.set_value("Default_device_record", params[:device][:record].to_i, session[:user_id])
+    Confline.set_value("Default_device_recording_to_email", params[:device][:recording_to_email].to_i, session[:user_id])
+    Confline.set_value("Default_device_recording_keep", params[:device][:recording_keep].to_i, session[:user_id])
     Confline.set_value("Default_device_record_forced", params[:device][:record_forced].to_i, session[:user_id])
     Confline.set_value("Default_device_recording_email", params[:device][:recording_email].to_s, session[:user_id])
 
@@ -1815,11 +1813,10 @@ class DevicesController < ApplicationController
     Confline.set_value("Default_device_max_timeout", tim_max.to_i < 0 ? 0 : tim_max, session[:user_id])
     # http://trac.kolmisoft.com/trac/ticket/4236
     # Confline.set_value("Default_device_allow_grandstreams", params[:device][:allow_grandstreams].to_i, session[:user_id])
-    
+
     flash[:status]=_("Settings_Saved")
     redirect_to :action => 'default_device' and return false
   end
-
 
 
   def assign_provider
@@ -1837,6 +1834,7 @@ class DevicesController < ApplicationController
     end
     redirect_to :action => 'show_devices', :id => params[:id]
   end
+
 =begin
  AJAX action.
 
@@ -1857,9 +1855,9 @@ class DevicesController < ApplicationController
     owner_id = correct_owner_id
     @user = request.raw_post.gsub("=", "")
     if @user == "all"
-      @devices = Device.find(:all, :select=> "devices.*", :joins=>"LEFT JOIN users ON (users.id = devices.user_id)" , :conditions => ["users.owner_id = ? AND device_type != 'FAX' AND name not like 'mor_server_%'", owner_id])
+      @devices = Device.find(:all, :select => "devices.*", :joins => "LEFT JOIN users ON (users.id = devices.user_id)", :conditions => ["users.owner_id = ? AND device_type != 'FAX' AND name not like 'mor_server_%'", owner_id])
     else
-      @devices = Device.find(:all, :select=> "devices.*", :joins=>"LEFT JOIN users ON (users.id = devices.user_id)" , :conditions => ["users.owner_id = ? AND device_type != 'FAX' AND user_id = ? AND name not like 'mor_server_%'", owner_id, @user])
+      @devices = Device.find(:all, :select => "devices.*", :joins => "LEFT JOIN users ON (users.id = devices.user_id)", :conditions => ["users.owner_id = ? AND device_type != 'FAX' AND user_id = ? AND name not like 'mor_server_%'", owner_id, @user])
     end
     render :layout => false
   end
@@ -1878,10 +1876,10 @@ class DevicesController < ApplicationController
     cond << "device_type != 'FAX'" if @fax == true
 
     @devices = Device.find(
-      :all,
-      :select=> "devices.*",
-      :joins=>"LEFT JOIN users ON (users.id = devices.user_id)" ,
-      :conditions => [cond.join(" AND ")].concat(var))
+        :all,
+        :select => "devices.*",
+        :joins => "LEFT JOIN users ON (users.id = devices.user_id)",
+        :conditions => [cond.join(" AND ")].concat(var))
     render :layout => false
   end
 
@@ -1925,13 +1923,13 @@ class DevicesController < ApplicationController
             logger.fatal 'could not save codec, may be unique constraint was violated?'
           end
         else
-          pc = Devicecodec.find(:first, :conditions=>['device_id=? AND codec_id=?',params[:id],params[:codec_id]])
+          pc = Devicecodec.find(:first, :conditions => ['device_id=? AND codec_id=?', params[:id], params[:codec_id]])
           pc.destroy if pc
         end
       end
 
       params["#{params[:ctype]}_sortable_list".to_sym].each_with_index do |i, index|
-        item = Devicecodec.find(:first, :conditions=>['device_id=? AND codec_id=?',params[:id],i])
+        item = Devicecodec.find(:first, :conditions => ['device_id=? AND codec_id=?', params[:id], i])
         if item
           item.priority = index.to_i
           item.save
@@ -1940,7 +1938,7 @@ class DevicesController < ApplicationController
       end
     else
       params["#{params[:ctype]}_sortable_list".to_sym].each_with_index do |i, index|
-        codec = Codec.find(:first, :conditions=>['id=?',i])
+        codec = Codec.find(:first, :conditions => ['id=?', i])
         if codec
           val = params[:val] == 'true' ? 1 : 0
           Confline.set_value("Default_device_codec_#{codec.name}", val, session[:user_id]) if params[:val] and params[:codec_id].to_i == codec.id
@@ -1955,13 +1953,13 @@ class DevicesController < ApplicationController
     @page_title = _('Devices_with_weak_password')
 
     session[:devices_devices_weak_passwords_options] ? @options = session[:devices_devices_weak_passwords_options] : @options = {}
-    params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page] or @options[:page] <= 0 )
+    params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page] or @options[:page] <= 0)
 
-    @total_pages = (Device.count(:all,  :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0").to_f/session[:items_per_page].to_f).ceil
+    @total_pages = (Device.count(:all, :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0").to_f/session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages.to_i if @total_pages.to_i < @options[:page].to_i and @total_pages > 0
     @devices = Device.find(:all, :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0 AND username NOT LIKE 'mor_server_%'", :offset => session[:items_per_page]*(@options[:page]-1), :limit => session[:items_per_page])
 
-    session[:devices_devices_weak_passwords_options] =  @options
+    session[:devices_devices_weak_passwords_options] = @options
   end
 
   private
@@ -1987,7 +1985,7 @@ class DevicesController < ApplicationController
 
 
   def check_reseller_conflines(reseller)
-    if !Confline.find(:first, :conditions=>"name LIKE 'Default_device_%' AND owner_id = '#{reseller.id}'")
+    if !Confline.find(:first, :conditions => "name LIKE 'Default_device_%' AND owner_id = '#{reseller.id}'")
       reseller.create_reseller_conflines
     end
   end
@@ -2013,6 +2011,7 @@ class DevicesController < ApplicationController
       redirect_to(:controller => "callc", :action => "main") and return false
     end
   end
+
 =begin rdoc
  Clears values accountant is not allowed to send.
 =end
@@ -2032,18 +2031,27 @@ class DevicesController < ApplicationController
 
   def devices_all_order_by(params, options)
     case params[:order_by].to_s
-    when "user" then  order_by = "nice_user"
-    when "acc" then  order_by = "devices.id"
-    when "description" then  order_by = "devices.description"
-    when "pin" then  order_by = "devices.pin"
-    when "type" then  order_by = "devices.device_type"
-    when "extension" then order_by = "devices.extension"
-    when "username"  then order_by = "devices.name"
-    when "secret"  then order_by = "devices.secret"
-    when "cid"  then order_by = "devices.callerid"
-    else
-      default = true
-      options[:order_by] ? order_by = options[:order_by] : order_by = "nice_user"
+      when "user" then
+        order_by = "nice_user"
+      when "acc" then
+        order_by = "devices.id"
+      when "description" then
+        order_by = "devices.description"
+      when "pin" then
+        order_by = "devices.pin"
+      when "type" then
+        order_by = "devices.device_type"
+      when "extension" then
+        order_by = "devices.extension"
+      when "username" then
+        order_by = "devices.name"
+      when "secret" then
+        order_by = "devices.secret"
+      when "cid" then
+        order_by = "devices.callerid"
+      else
+        default = true
+        options[:order_by] ? order_by = options[:order_by] : order_by = "nice_user"
     end
 
     without = order_by
@@ -2062,7 +2070,7 @@ class DevicesController < ApplicationController
   end
 
   def find_device
-    @device = Device.find(:first, :conditions=>['devices.id=?',params[:id]], :include => [:user, :dids])
+    @device = Device.find(:first, :conditions => ['devices.id=?', params[:id]], :include => [:user, :dids])
 
     unless @device
       flash[:notice] = _('Device_was_not_found')
@@ -2083,7 +2091,7 @@ class DevicesController < ApplicationController
     @cli = Callerid.find(:first, :include => [:device], :conditions => {:id => params[:id]})
     unless @cli
       flash[:notice]=_('Callerid_was_not_found')
-      redirect_to :controller=>:callc, :action =>:main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     else
       check_cli_owner(@cli)
     end
@@ -2094,7 +2102,7 @@ class DevicesController < ApplicationController
     user = device.user if device
     unless user and (user.owner_id == correct_owner_id or user.id == session[:user_id])
       dont_be_so_smart
-      redirect_to :controller=>:callc, :action =>:main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
   end
 
@@ -2108,7 +2116,7 @@ class DevicesController < ApplicationController
   def check_callback_addon
     unless callback_active?
       dont_be_so_smart
-      redirect_to :controller=>:callc, :action=>:main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
   end
 

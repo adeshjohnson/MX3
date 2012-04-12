@@ -5,41 +5,41 @@ class PaypalTest < Test::Unit::TestCase
   def setup
     Base.mode = :test
     PaypalGateway.pem_file = nil
-    
+
     @amount = 100
     @gateway = PaypalGateway.new(
-                :login => 'cody', 
-                :password => 'test',
-                :pem => 'PEM'
-               )
-    
+        :login => 'cody',
+        :password => 'test',
+        :pem => 'PEM'
+    )
+
     @credit_card = credit_card('4242424242424242')
-    @options = { :billing_address => address, :ip => '127.0.0.1' }
-  end 
+    @options = {:billing_address => address, :ip => '127.0.0.1'}
+  end
 
   def test_no_ip_address
-    assert_raise(ArgumentError){ @gateway.purchase(@amount, @credit_card, :billing_address => address)}
+    assert_raise(ArgumentError) { @gateway.purchase(@amount, @credit_card, :billing_address => address) }
   end
-  
+
   def test_successful_purchase
     @gateway.expects(:ssl_post).returns(successful_purchase_response)
-    
+
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_instance_of Response, response
     assert_success response
     assert_equal '62U664727W5914806', response.authorization
     assert response.test?
   end
-  
+
   def test_successful_reference_purchase
     @gateway.expects(:ssl_post).returns(successful_purchase_response)
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_instance_of Response, response
     assert_success response
     assert_equal '62U664727W5914806', response.authorization
-    
+
     ref_id = response.authorization
-    
+
     gateway2 = PaypalGateway.new(:login => 'cody', :password => 'test', :pem => 'PEM')
     gateway2.expects(:ssl_post).returns(successful_reference_purchase_response)
     assert response = gateway2.purchase(@amount, ref_id, @options)
@@ -48,16 +48,16 @@ class PaypalTest < Test::Unit::TestCase
     assert_equal '62U664727W5915049', response.authorization
     assert response.test?
   end
-  
+
   def test_failed_purchase
     @gateway.expects(:ssl_post).returns(failed_purchase_response)
-    
+
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_instance_of Response, response
     assert_failure response
     assert response.test?
   end
-  
+
   def test_reauthorization
     @gateway.expects(:ssl_post).returns(successful_reauthorization_response)
     response = @gateway.reauthorize(@amount, '32J876265E528623B')
@@ -65,7 +65,7 @@ class PaypalTest < Test::Unit::TestCase
     assert_equal('1TX27389GX108740X', response.authorization)
     assert response.test?
   end
-  
+
   def test_reauthorization_with_warning
     @gateway.expects(:ssl_post).returns(successful_with_warning_reauthorization_response)
     response = @gateway.reauthorize(@amount, '32J876265E528623B')
@@ -73,15 +73,15 @@ class PaypalTest < Test::Unit::TestCase
     assert_equal('1TX27389GX108740X', response.authorization)
     assert response.test?
   end
-  
+
   def test_amount_style
-   assert_equal '10.34', @gateway.send(:amount, 1034)
-                                                      
-   assert_raise(ArgumentError) do
-     @gateway.send(:amount, '10.34')
-   end
+    assert_equal '10.34', @gateway.send(:amount, 1034)
+
+    assert_raise(ArgumentError) do
+      @gateway.send(:amount, '10.34')
+    end
   end
-  
+
   def test_paypal_timeout_error
     @gateway.stubs(:ssl_post).returns(paypal_timeout_error_response)
     response = @gateway.purchase(@amount, @credit_card, @options)
@@ -90,19 +90,19 @@ class PaypalTest < Test::Unit::TestCase
     assert_equal "Timeout processing request", response.params['detail']
     assert_equal "SOAP-ENV:Server: Internal error - Timeout processing request", response.message
   end
-  
+
   def test_pem_file_accessor
     PaypalGateway.pem_file = '123456'
     gateway = PaypalGateway.new(:login => 'test', :password => 'test')
     assert_equal '123456', gateway.options[:pem]
   end
-  
+
   def test_passed_in_pem_overrides_class_accessor
     PaypalGateway.pem_file = '123456'
     gateway = PaypalGateway.new(:login => 'test', :password => 'test', :pem => 'Clobber')
     assert_equal 'Clobber', gateway.options[:pem]
   end
-  
+
   def test_ensure_options_are_transferred_to_express_instance
     PaypalGateway.pem_file = '123456'
     gateway = PaypalGateway.new(:login => 'test', :password => 'password')
@@ -112,7 +112,7 @@ class PaypalTest < Test::Unit::TestCase
     assert_equal 'password', express.options[:password]
     assert_equal '123456', express.options[:pem]
   end
-  
+
   def test_supported_countries
     assert_equal ['US'], PaypalGateway.supported_countries
   end
@@ -120,116 +120,116 @@ class PaypalTest < Test::Unit::TestCase
   def test_supported_card_types
     assert_equal [:visa, :master, :american_express, :discover], PaypalGateway.supported_cardtypes
   end
-  
+
   def test_button_source
     PaypalGateway.application_id = 'ActiveMerchant_DC'
-    
+
     xml = REXML::Document.new(@gateway.send(:build_sale_or_authorization_request, 'Test', @amount, @credit_card, {}))
     assert_equal 'ActiveMerchant_DC', REXML::XPath.first(xml, '//n2:ButtonSource').text
   end
-  
+
   def test_item_total_shipping_handling_and_tax_not_included_unless_all_are_present
     xml = @gateway.send(:build_sale_or_authorization_request, 'Authorization', @amount, @credit_card,
-      :tax => @amount,
-      :shipping => @amount,
-      :handling => @amount
+                        :tax => @amount,
+                        :shipping => @amount,
+                        :handling => @amount
     )
-    
+
     doc = REXML::Document.new(xml)
     assert_nil REXML::XPath.first(doc, '//n2:PaymentDetails/n2:TaxTotal')
   end
-  
+
   def test_item_total_shipping_handling_and_tax
     xml = @gateway.send(:build_sale_or_authorization_request, 'Authorization', @amount, @credit_card,
-      :tax => @amount,
-      :shipping => @amount,
-      :handling => @amount,
-      :subtotal => 200
+                        :tax => @amount,
+                        :shipping => @amount,
+                        :handling => @amount,
+                        :subtotal => 200
     )
-    
+
     doc = REXML::Document.new(xml)
     assert_equal '1.00', REXML::XPath.first(doc, '//n2:PaymentDetails/n2:TaxTotal').text
   end
-  
+
   def test_should_use_test_certificate_endpoint
     gateway = PaypalGateway.new(
-                :login => 'cody', 
-                :password => 'test',
-                :pem => 'PEM'
-              )
+        :login => 'cody',
+        :password => 'test',
+        :pem => 'PEM'
+    )
     assert_equal PaypalGateway::URLS[:test][:certificate], gateway.send(:endpoint_url)
   end
-  
+
   def test_should_use_live_certificate_endpoint
     gateway = PaypalGateway.new(
-                :login => 'cody', 
-                :password => 'test',
-                :pem => 'PEM'
-              )
+        :login => 'cody',
+        :password => 'test',
+        :pem => 'PEM'
+    )
     gateway.expects(:test?).returns(false)
-      
+
     assert_equal PaypalGateway::URLS[:live][:certificate], gateway.send(:endpoint_url)
   end
-  
+
   def test_should_use_test_signature_endpoint
     gateway = PaypalGateway.new(
-                :login => 'cody', 
-                :password => 'test',
-                :signature => 'SIG'
-              )
-      
+        :login => 'cody',
+        :password => 'test',
+        :signature => 'SIG'
+    )
+
     assert_equal PaypalGateway::URLS[:test][:signature], gateway.send(:endpoint_url)
   end
-  
+
   def test_should_use_live_signature_endpoint
     gateway = PaypalGateway.new(
-                :login => 'cody', 
-                :password => 'test',
-                :signature => 'SIG'
-              )
+        :login => 'cody',
+        :password => 'test',
+        :signature => 'SIG'
+    )
     gateway.expects(:test?).returns(false)
-      
+
     assert_equal PaypalGateway::URLS[:live][:signature], gateway.send(:endpoint_url)
   end
-  
+
   def test_should_raise_argument_when_credentials_not_present
     assert_raises(ArgumentError) do
       PaypalGateway.new(:login => 'cody', :password => 'test')
     end
   end
-  
+
   def test_avs_result
     @gateway.expects(:ssl_post).returns(successful_purchase_response)
-    
+
     response = @gateway.purchase(@amount, @credit_card, @options)
     assert_equal 'X', response.avs_result['code']
   end
-     
+
   def test_cvv_result
     @gateway.expects(:ssl_post).returns(successful_purchase_response)
-    
+
     response = @gateway.purchase(@amount, @credit_card, @options)
     assert_equal 'M', response.cvv_result['code']
   end
-  
+
   def test_fraud_review
     @gateway.expects(:ssl_post).returns(fraud_review_response)
-    
+
     response = @gateway.purchase(@amount, @credit_card, @options)
     assert_success response
     assert_equal "SuccessWithWarning", response.params["ack"]
     assert_equal "Payment Pending your review in Fraud Management Filters", response.message
     assert response.fraud_review?
   end
-  
+
   def test_failed_capture_due_to_pending_fraud_review
     @gateway.expects(:ssl_post).returns(failed_capture_due_to_pending_fraud_review)
-    
+
     response = @gateway.capture(@amount, 'authorization')
     assert_failure response
     assert_equal "Transaction must be accepted in Fraud Management Filters before capture.", response.message
   end
-  
+
   # This occurs when sufficient 3rd party API permissions are not present to make the call for the user
   def test_authentication_failed_response
     @gateway.expects(:ssl_post).returns(authentication_failed_response)
@@ -238,7 +238,7 @@ class PaypalTest < Test::Unit::TestCase
     assert_equal "10002", response.params["error_codes"]
     assert_equal "You do not have permissions to make this API call", response.message
   end
-  
+
   private
   def successful_purchase_response
     <<-RESPONSE
@@ -270,7 +270,7 @@ class PaypalTest < Test::Unit::TestCase
 </SOAP-ENV:Envelope>
     RESPONSE
   end
-  
+
   def successful_reference_purchase_response
     <<-RESPONSE
 <?xml version="1.0" encoding="UTF-8"?>
@@ -301,7 +301,7 @@ class PaypalTest < Test::Unit::TestCase
 </SOAP-ENV:Envelope>
     RESPONSE
   end
-  
+
   def failed_purchase_response
     <<-RESPONSE
 <?xml version="1.0" encoding="UTF-8"?>
@@ -331,7 +331,7 @@ class PaypalTest < Test::Unit::TestCase
 </SOAP-ENV:Envelope>
     RESPONSE
   end
-  
+
   def paypal_timeout_error_response
     <<-RESPONSE
 <?xml version='1.0' encoding='UTF-8'?>
@@ -356,7 +356,7 @@ class PaypalTest < Test::Unit::TestCase
 </SOAP-ENV:Envelope>
     RESPONSE
   end
-  
+
   def successful_reauthorization_response
     <<-RESPONSE
 <?xml version="1.0" encoding="UTF-8"?>
@@ -405,7 +405,7 @@ class PaypalTest < Test::Unit::TestCase
 </SOAP-ENV:Envelope>  
     RESPONSE
   end
-  
+
   def successful_with_warning_reauthorization_response
     <<-RESPONSE
 <?xml version="1.0" encoding="UTF-8"?>
@@ -454,7 +454,7 @@ class PaypalTest < Test::Unit::TestCase
 </SOAP-ENV:Envelope>  
     RESPONSE
   end
-  
+
   def fraud_review_response
     <<-RESPONSE
     <?xml version="1.0" encoding="UTF-8"?>
@@ -492,7 +492,7 @@ class PaypalTest < Test::Unit::TestCase
 </SOAP-ENV:Envelope>
     RESPONSE
   end
-  
+
   def failed_capture_due_to_pending_fraud_review
     <<-RESPONSE
 <?xml version="1.0" encoding="UTF-8"?>
@@ -534,7 +534,7 @@ class PaypalTest < Test::Unit::TestCase
 </SOAP-ENV:Envelope>
     RESPONSE
   end
-  
+
   def authentication_failed_response
     <<-RESPONSE
 <?xml version="1.0" encoding="UTF-8"?>

@@ -1,130 +1,130 @@
-
 <%= form_tag :action => 'action_log' do %>
-  <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
-    <br />
-    <table cellspacing="0" cellpadding="0" style="width: 100%">
-      <tr>
-        <td style="width: 70%">
-          <%= hidden_field_tag 'search_on', 1  %>
+    <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+      <br/>
+      <table cellspacing="0" cellpadding="0" style="width: 100%">
+        <tr>
+          <td style="width: 70%">
+            <%= hidden_field_tag 'search_on', 1 %>
 
-          <%= _('From') %>:
-          <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
-          &nbsp;&nbsp;<%= _('to') %>:
-          <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+            <%= _('From') %>:
+            <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+            &nbsp;&nbsp;<%= _('to') %>:
+            <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
 
-          <br /><br />
-          <%= _('User') %>:
-          <%= select_tag("user_id", options_for_select([["All", -1]]+@users.map{|user| [nice_user(user), user.id.to_i]}, @options[:s_user].to_i)) %>
+            <br/><br/>
+            <%= _('User') %>:
+            <%= select_tag("user_id", options_for_select([["All", -1]]+@users.map { |user| [nice_user(user), user.id.to_i] }, @options[:s_user].to_i)) %>
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('DID') %>:
-          <%= select_tag("did", options_for_select([["All", ""]]+@dids.map{|did| [did.did, did.id.to_s]}, @options[:s_did].to_s)) %>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('DID') %>:
+            <%= select_tag("did", options_for_select([["All", ""]]+@dids.map { |did| [did.did, did.id.to_s] }, @options[:s_did].to_s)) %>
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('Action_type') %>:
-          <%= select_tag("action_type", options_for_select([["All", "all"]]+@res.map{|r| [r['action'].to_s, r['action'].to_s]}, @options[:s_type].to_s)) %>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('Action_type') %>:
+            <%= select_tag("action_type", options_for_select([["All", "all"]]+@res.map { |r| [r['action'].to_s, r['action'].to_s] }, @options[:s_type].to_s)) %>
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('Reviewed') %>:
-          <%= select_tag("processed", options_for_select([[_('All'), -1], [_('Reviewed').downcase, 1], [_('Not_reviewed').downcase, 0]], @options[:s_processed].to_i)) %>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('Reviewed') %>:
+            <%= select_tag("processed", options_for_select([[_('All'), -1], [_('Reviewed').downcase, 1], [_('Not_reviewed').downcase, 0]], @options[:s_processed].to_i)) %>
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag _('Search'), :disable_with => _('Processing..') %>
 
-          <% unless @options[:s_target_id].blank? && @options[:s_target_type].blank? %>
-            <br/>
-            <br/>
-            <strong><%=_('Showing')%></strong> <%= @options[:s_target_type] %> (<%= @options[:s_target_id]%>)
-          <% end %>
-        </td>
-        <td style="width: 10%">
-          <%= link_to b_cross + _('Clear_search'), :action => 'action_log', :clean => 1 if @search == 1 %>
-          <%= link_to(_('Mark_all_as_reviewed'), :action => 'action_log_mark_reviewed') if @search == 1 %>
-        </td>
-      </tr>
-    </table>
-  </div>
+            <% unless @options[:s_target_id].blank? && @options[:s_target_type].blank? %>
+                <br/>
+                <br/>
+                <strong><%= _('Showing') %></strong> <%= @options[:s_target_type] %> (<%= @options[:s_target_id] %>)
+            <% end %>
+          </td>
+          <td style="width: 10%">
+            <%= link_to b_cross + _('Clear_search'), :action => 'action_log', :clean => 1 if @search == 1 %>
+            <%= link_to(_('Mark_all_as_reviewed'), :action => 'action_log_mark_reviewed') if @search == 1 %>
+          </td>
+        </tr>
+      </table>
+    </div>
 <% end %>
-<br />
-<br />
-<%= page_select_header(@options[:page], @total_pages , @options).html_safe  %>
+<br/>
+<br/>
+<%= page_select_header(@options[:page], @total_pages, @options).html_safe %>
 <table width="100%" class="maintable">
   <tr>
-    <th align="center">	<%= sortable_list_header("date", _('date'), @options) %></th>
-    <th align="left">	<%= sortable_list_header("user", _('User'), @options) %></th>
-    <th align="left">	<%= sortable_list_header("type", _('Action_type'), @options) %>	</th>
-    <th align="left">	<%= sortable_list_header("target", _('Target'), @options) %> </th>
-    <th align="left">	<%= sortable_list_header("data", _('Action_data'), @options) %>	 </th>
-    <th align="left">	<%= sortable_list_header("data2", _('Action_data_2'), @options) %>    </th>
-    <th align="left">	<%= sortable_list_header("data3", _('Action_data_3'), @options) %>  </th>
-    <th align="left">	<%= sortable_list_header("data4", _('Action_data_4'), @options) %>    </th>
-    <th align="center">	<%= sortable_list_header("processed", _('Reviewed'), @options) %>  </th>
+    <th align="center">    <%= sortable_list_header("date", _('date'), @options) %></th>
+    <th align="left">    <%= sortable_list_header("user", _('User'), @options) %></th>
+    <th align="left">    <%= sortable_list_header("type", _('Action_type'), @options) %>    </th>
+    <th align="left">    <%= sortable_list_header("target", _('Target'), @options) %> </th>
+    <th align="left">    <%= sortable_list_header("data", _('Action_data'), @options) %>     </th>
+    <th align="left">    <%= sortable_list_header("data2", _('Action_data_2'), @options) %>    </th>
+    <th align="left">    <%= sortable_list_header("data3", _('Action_data_3'), @options) %>  </th>
+    <th align="left">    <%= sortable_list_header("data4", _('Action_data_4'), @options) %>    </th>
+    <th align="center">    <%= sortable_list_header("processed", _('Reviewed'), @options) %>  </th>
   </tr>
   <% @actions.each_with_index { |r, i| %>
-    <tr class= <%= r['action'].to_s == "error" ? "red" : "row#{(i % 2 + 1).to_s}" %>>
-      <td id="date_<%=r['id'] %>" align="center"><%= nice_date_time(r['date'])%></td>
+      <tr class= <%= r['action'].to_s == "error" ? "red" : "row#{(i % 2 + 1).to_s}" %>>
+        <td id="date_<%= r['id'] %>" align="center"><%= nice_date_time(r['date']) %></td>
 
-      <% if (r['first_name'].length + r['last_name'].length).to_i > 0 %>
-        <td align="left" id="user_<%=r['id'] %>"> <%= link_to r['first_name'].to_s + " " + r['last_name'].to_s,  :controller => "users", :action => "edit", :id => r['user_id'] %></td>
-      <% else %>
-        <% if r['user_id'] != -0 %>
-          <td align="left" id="user_<%=r['id'] %>"> <%=link_to  r['username'],  :controller => "users", :action => "edit", :id => r['user_id'] %></td>
+        <% if (r['first_name'].length + r['last_name'].length).to_i > 0 %>
+            <td align="left" id="user_<%= r['id'] %>"> <%= link_to r['first_name'].to_s + " " + r['last_name'].to_s, :controller => "users", :action => "edit", :id => r['user_id'] %></td>
         <% else %>
-          <td align="left" id="user_<%=r['id'] %>"> <%= _('No_user') %> </td>
+            <% if r['user_id'] != -0 %>
+                <td align="left" id="user_<%= r['id'] %>"> <%= link_to r['username'], :controller => "users", :action => "edit", :id => r['user_id'] %></td>
+            <% else %>
+                <td align="left" id="user_<%= r['id'] %>"> <%= _('No_user') %> </td>
+            <% end %>
         <% end %>
-      <% end %>
-      <% if r['action'].to_s == 'hacking_attempt' %>
-        <td id="type_<%=r['id'] %>" <%= tooltip(_('Hacking_Attempt'), _('Hacking_Attempt_Explanation')) %>>
-          <%= b_help %> <a href="http://wiki.kolmisoft.com/index.php/Action_log#hacking_attempt"><%= h(r['action'].to_s) %></a>
-        </td>
-      <% else %>
-        <td id="type_<%=r['id'] %>">
-          <%= h(r['action'].to_s) %>
-        </td>
-      <%end%>
+        <% if r['action'].to_s == 'hacking_attempt' %>
+            <td id="type_<%= r['id'] %>" <%= tooltip(_('Hacking_Attempt'), _('Hacking_Attempt_Explanation')) %>>
+              <%= b_help %>
+              <a href="http://wiki.kolmisoft.com/index.php/Action_log#hacking_attempt"><%= h(r['action'].to_s) %></a>
+            </td>
+        <% else %>
+            <td id="type_<%= r['id'] %>">
+              <%= h(r['action'].to_s) %>
+            </td>
+        <% end %>
 
-      <td align="left" id="target_<%=r['id'] %>">
-        <% case r['target_type'].to_s
-        when "user" %>
-          <% if (user = User.find_by_id(r['target_id'].to_i)) == nil %>
-            <%= _('User_was_not_found')%>
+        <td align="left" id="target_<%= r['id'] %>">
+          <% case r['target_type'].to_s
+               when "user" %>
+              <% if (user = User.find_by_id(r['target_id'].to_i)) == nil %>
+                  <%= _('User_was_not_found') %>
+              <% else %>
+                  <%= link_nice_user(user) %>
+              <% end %>
+          <% when "device" %>
+              <% if (device = Device.find_by_id(r['target_id'].to_i)) == nil %>
+                  <%= _("Device_was_not_found") %>
+              <% else %>
+                  <%= link_nice_device(device) %>
+              <% end %>
+          <% when "monitoring" %>
+              <%= link_to(_("Monitoring (#{r['target_id']})"), {:controller => :monitorings, :action => :edit, :id => r['target_id'].to_i}) %>
+          <% when "card" %>
+              <%= link_to(_("Card"), {:controller => :cards, :action => :edit, :id => r['target_id'].to_i}) %>
+          <% when "subscription" %>
+              <%= link_to(_('Subscription'), {:controller => :services, :action => :subscription_edit, :id => r['target_id'].to_i}) %>
+          <% when "SMS" %>
+              <%= link_to(_('SMS') + " ("+r['target_id'].to_s+")", {:controller => :sms, :action => :sms_list}) %>
+          <% when "provider" %>
+              <%= link_to(_('Provider'), {:controller => :providers, :action => :edit, :id => r['target_id'].to_i}) %>
           <% else %>
-            <%= link_nice_user(user) %>
-          <% end%>
-        <% when "device"%>
-          <% if (device = Device.find_by_id(r['target_id'].to_i)) == nil %>
-            <%= _("Device_was_not_found")%>
-          <% else %>
-            <%= link_nice_device(device)%>
+
+              <%= r['target_type'].to_s + " ("+r['target_id'].to_s+")" if (r['target_type'].to_s+ r['target_id'].to_s).strip.length > 0 %>
           <% end %>
-        <% when "monitoring" %>
-          <%= link_to(_("Monitoring (#{r['target_id']})"), {:controller => :monitorings, :action => :edit, :id => r['target_id'].to_i}) %>
-        <% when "card" %>
-          <%= link_to(_("Card"), {:controller => :cards, :action => :edit, :id => r['target_id'].to_i})%>
-        <% when "subscription" %>
-          <%= link_to(_('Subscription'), {:controller => :services, :action=> :subscription_edit, :id => r['target_id'].to_i})  %>
-        <% when "SMS" %>
-          <%= link_to(_('SMS') + " ("+r['target_id'].to_s+")" , {:controller => :sms, :action=> :sms_list})  %>
-        <% when "provider" %>
-          <%= link_to(_('Provider'), {:controller => :providers, :action=> :edit, :id => r['target_id'].to_i}) %>
+        </td>
+        <% if r['action'].match("did") %>
+            <% did = Did.find_by_id(r['data'].to_i) %>
+            <td id="data_<%= r['id'] %>"><%= link_to did.did, :controller => "dids", :action => "edit", :id => h(r['data']), :back_controller => "stats", :back_action => "action_log" if did %></td>
         <% else %>
-
-          <%= r['target_type'].to_s + " ("+r['target_id'].to_s+")" if (r['target_type'].to_s+ r['target_id'].to_s).strip.length > 0 %>
+            <td id="data_<%= r['id'] %>"><%= h(r['data'].to_s) %> </td>
         <% end %>
-      </td>
-      <% if r['action'].match("did")%>
-        <% did = Did.find_by_id(r['data'].to_i)%>
-        <td id="data_<%=r['id'] %>"><%=link_to did.did ,:controller=>"dids", :action=>"edit", :id=> h(r['data']), :back_controller =>"stats", :back_action=>"action_log" if did%></td>
-      <% else %>
-        <td id="data_<%=r['id'] %>"><%= h(r['data'].to_s) %> </td>
-      <% end %>
 
-      <td id="data2_<%=r['id'] %>"> <%=  h(r['data2'].to_s) %> </td>
-      <td id="data3_<%=r['id'] %>"> <%= h(r['data3'].to_s) %> </td>
-      <td id="data4_<%=r['id'] %>"> <%= h(r['data4'].to_s) %> </td>
+        <td id="data2_<%= r['id'] %>"> <%= h(r['data2'].to_s) %> </td>
+        <td id="data3_<%= r['id'] %>"> <%= h(r['data3'].to_s) %> </td>
+        <td id="data4_<%= r['id'] %>"> <%= h(r['data4'].to_s) %> </td>
 
-      <td align="center" id="processed_<%=r['id'] %>">
-        <%= form_tag :action => 'action_processed', :id => r['id'].to_i, :s_action =>@action, :user=>@user_id, :procc => @processed  do %>
-          <%= image_submit_tag 'icons/cross.png', :title => _('Reviewed'), :id=>"cross_#{r['id']}" if r['processed'].to_i == 0 %>
-          <%= image_submit_tag 'icons/check.png', :title => _('Not_reviewed'), :id=>"check_#{r['id']}" if r['processed'].to_i == 1 %>
-        <% end %>
-      </td>
-    </tr>
+        <td align="center" id="processed_<%= r['id'] %>">
+          <%= form_tag :action => 'action_processed', :id => r['id'].to_i, :s_action => @action, :user => @user_id, :procc => @processed do %>
+              <%= image_submit_tag 'icons/cross.png', :title => _('Reviewed'), :id => "cross_#{r['id']}" if r['processed'].to_i == 0 %>
+              <%= image_submit_tag 'icons/check.png', :title => _('Not_reviewed'), :id => "check_#{r['id']}" if r['processed'].to_i == 1 %>
+          <% end %>
+        </td>
+      </tr>
   <% } %>
 </table>

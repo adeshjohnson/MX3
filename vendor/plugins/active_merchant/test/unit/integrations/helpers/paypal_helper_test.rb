@@ -3,12 +3,12 @@ require 'test_helper'
 
 class PaypalHelperTest < Test::Unit::TestCase
   include ActiveMerchant::Billing::Integrations
-  
+
   def setup
-    @helper = Paypal::Helper.new(1,'cody@example.com', :amount => 500, :currency => 'CAD')
+    @helper = Paypal::Helper.new(1, 'cody@example.com', :amount => 500, :currency => 'CAD')
     @url = 'http://example.com'
   end
-  
+
   def test_static_fields
     assert_field 'cmd', '_ext-enter'
     assert_field 'redirect_cmd', '_xclick'
@@ -41,14 +41,14 @@ class PaypalHelperTest < Test::Unit::TestCase
     @helper.return_url = @url
     assert_field 'return', @url
   end
-  
+
   def test_cancel_return_url
     @helper.cancel_return_url = @url
     assert_field 'cancel_return', @url
   end
- 
-  def test_customer_fields 
-    @helper.customer :first_name => 'Cody', 
+
+  def test_customer_fields
+    @helper.customer :first_name => 'Cody',
                      :last_name => 'Fauser',
                      :email => 'cody@example.com'
 
@@ -59,14 +59,14 @@ class PaypalHelperTest < Test::Unit::TestCase
 
   def test_shipping_address
     @helper.shipping_address :country => 'CA',
-                            :address1 => '1 My Street',
-                            :city => 'Ottawa',
-                            :zip => '90210',
-                            :phone => '(555)123-4567'
+                             :address1 => '1 My Street',
+                             :city => 'Ottawa',
+                             :zip => '90210',
+                             :phone => '(555)123-4567'
 
     assert_field 'country', 'CA'
     assert_field 'address1', '1 My Street'
-    assert_field 'zip', '90210' 
+    assert_field 'zip', '90210'
     assert_field 'night_phone_a', '555'
     assert_field 'night_phone_b', '123'
     assert_field 'night_phone_c', '4567'
@@ -88,11 +88,11 @@ class PaypalHelperTest < Test::Unit::TestCase
     assert_field 'night_phone_b', '02838841670'
     assert_field 'night_phone_c', nil
   end
-  
-  
+
+
   def test_province
     @helper.shipping_address :country => 'CA',
-                            :state => 'On'
+                             :state => 'On'
 
     assert_field 'country', 'CA'
     assert_field 'state', 'Ontario'
@@ -100,12 +100,12 @@ class PaypalHelperTest < Test::Unit::TestCase
 
   def test_state
     @helper.shipping_address :country => 'US',
-                            :state => 'TX'
+                             :state => 'TX'
 
     assert_field 'country', 'US'
     assert_field 'state', 'TX'
   end
-  
+
   def test_shipping
     @helper.shipping '7.99'
     assert_field 'shipping', '7.99'
@@ -124,11 +124,11 @@ class PaypalHelperTest < Test::Unit::TestCase
   def test_setting_invalid_address_field
     fields = @helper.fields.dup
     fields["state"] = 'N/A'
-    
+
     @helper.shipping_address :street => 'My Street'
     assert_equal fields, @helper.fields
   end
-  
+
   def test_setting_item_name
     @helper.item_name = 'Really Cool Gizmo'
     assert_field 'item_name', 'Really Cool Gizmo'
@@ -138,35 +138,35 @@ class PaypalHelperTest < Test::Unit::TestCase
     @helper.quantity = '10'
     assert_field 'quantity', '10'
   end
-  
+
   def test_setting_no_shipping
     @helper.no_shipping = '0'
     assert_field 'no_shipping', '0'
   end
-  
+
   def test_setting_no_note
     @helper.no_note = '0'
     assert_field 'no_note', '0'
   end
-  
+
   def test_uk_shipping_address_with_no_state
     @helper.shipping_address :country => 'GB',
-                            :state => ''
+                             :state => ''
 
     assert_field 'state', 'N/A'
   end
-  
+
   def test_default_bn
-    assert_field 'bn', ActiveMerchant::Billing::Integrations::Helper.application_id 
+    assert_field 'bn', ActiveMerchant::Billing::Integrations::Helper.application_id
   end
-  
+
   def test_override_bn
     identifier = 'CodeGenies_ShoppingCart_IC_CA'
-    
+
     Paypal::Helper.application_id = identifier
-    
-    @helper = Paypal::Helper.new(1,'cody@example.com', :amount => 500, :currency => 'CAD')
-    assert_field 'bn', identifier 
+
+    @helper = Paypal::Helper.new(1, 'cody@example.com', :amount => 500, :currency => 'CAD')
+    assert_field 'bn', identifier
   end
-  
+
 end

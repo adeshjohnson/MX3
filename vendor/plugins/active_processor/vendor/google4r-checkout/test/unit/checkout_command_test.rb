@@ -44,14 +44,14 @@ class Google4R::Checkout::CheckoutCommandTest < Test::Unit::TestCase
 
   def test_tax_table_factory_works_correctly
     TestTaxTableFactory.any_instance.stubs(:effective_tax_tables_at).returns([:tax_table])
-    
+
     frontend = Frontend.new(FRONTEND_CONFIGURATION)
     frontend.tax_table_factory = TestTaxTableFactory.new
     command = frontend.create_checkout_command
-    
+
     assert_equal [:tax_table], command.tax_tables
   end
-  
+
   def test_initialized_correctly
     assert_equal @frontend, @command.frontend
     assert_kind_of ShoppingCart, @command.shopping_cart
@@ -60,66 +60,66 @@ class Google4R::Checkout::CheckoutCommandTest < Test::Unit::TestCase
     assert_nil @command.continue_shopping_url
     assert_nil @command.request_buyer_phone_number
   end
-  
+
   def test_command_behaves_correctly
-    [ :frontend, :shopping_cart, :tax_tables, :shipping_methods, :create_shipping_method,
-      :edit_cart_url, :edit_cart_url=, :continue_shopping_url, :continue_shopping_url=,
-      :request_buyer_phone_number, :request_buyer_phone_number=,
-      :merchant_calculations_url, :merchant_calculations_url=,
-      :accept_merchant_coupons, :accept_merchant_coupons=,
-      :accept_gift_certificates, :accept_gift_certificates=,
-      :platform_id, :platform_id=
+    [:frontend, :shopping_cart, :tax_tables, :shipping_methods, :create_shipping_method,
+     :edit_cart_url, :edit_cart_url=, :continue_shopping_url, :continue_shopping_url=,
+     :request_buyer_phone_number, :request_buyer_phone_number=,
+     :merchant_calculations_url, :merchant_calculations_url=,
+     :accept_merchant_coupons, :accept_merchant_coupons=,
+     :accept_gift_certificates, :accept_gift_certificates=,
+     :platform_id, :platform_id=
     ].each do |symbol|
       assert_respond_to @command, symbol
     end
   end
-  
+
   def test_accessors_work_correctly
     @command.edit_cart_url = "edit cart url"
     assert_equal "edit cart url", @command.edit_cart_url
-    
+
     @command.continue_shopping_url = "continue shopping url"
     assert_equal "continue shopping url", @command.continue_shopping_url
-    
+
     @command.request_buyer_phone_number = true
     assert_equal true, @command.request_buyer_phone_number
 
     assert_nil @command.analytics_data
     @command.analytics_data = 'abcd1234defgh5678ijklmn'
     assert_equal 'abcd1234defgh5678ijklmn', @command.analytics_data
-    
+
   end
 
   def test_create_shipping_method_works_correctly_with_block
-    [ PickupShipping, FlatRateShipping, MerchantCalculatedShipping ].each do |clazz|
-  
+    [PickupShipping, FlatRateShipping, MerchantCalculatedShipping].each do |clazz|
+
       shipping = nil
 
-      res = 
-        @command.create_shipping_method(clazz) do |obj|
-          shipping = obj
-          assert_kind_of clazz, obj
-        end
-    
+      res =
+          @command.create_shipping_method(clazz) do |obj|
+            shipping = obj
+            assert_kind_of clazz, obj
+          end
+
       assert_equal res, shipping
       assert @command.shipping_methods.include?(shipping)
     end
   end
-  
+
   def test_create_shipping_method_works_correctly_without_block
-    [ PickupShipping, FlatRateShipping, MerchantCalculatedShipping ].each do |clazz|
+    [PickupShipping, FlatRateShipping, MerchantCalculatedShipping].each do |clazz|
       obj = @command.create_shipping_method(clazz)
-    
+
       assert_kind_of clazz, obj
-    
+
       assert @command.shipping_methods.include?(obj)
     end
   end
-  
+
   def test_create_shipping_method_raises_exception_on_invalid_clazz_parameter
     assert_raises(ArgumentError) { @command.create_shipping_method(String) }
   end
-  
+
   def test_to_xml_does_not_raise_exception
     assert_nothing_raised { @command.to_xml }
   end

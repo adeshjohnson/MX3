@@ -5,14 +5,14 @@ class CdrController < ApplicationController
   before_filter :authorize
 
   def index
-    redirect_to :controller => :callc, :action=> :main
+    redirect_to :controller => :callc, :action => :main
   end
 
   # ======== CSV IMPORT =================
 
   def import_csv
 
-    step_names = [_('Import_CDR'), _('File_upload'), _('Column_assignment'), _('Column_confirmation'),_('Select_details'), _('Analysis'), _('Fix_clis'), _('Create_clis'), _('Assigne_clis'), _('Import_CDR')]
+    step_names = [_('Import_CDR'), _('File_upload'), _('Column_assignment'), _('Column_confirmation'), _('Select_details'), _('Analysis'), _('Fix_clis'), _('Create_clis'), _('Assigne_clis'), _('Import_CDR')]
     params[:step] ? @step = params[:step].to_i : @step = 0
     @step = 0 if @step > step_names.size or @step < 0
     @step_name = step_names[@step]
@@ -36,34 +36,34 @@ class CdrController < ApplicationController
       my_debug_time "step 1"
       session[:temp_cdr_import_csv] = nil
       session[:cdr_import_csv] = nil
-      session[:cdrs_import]  = nil
+      session[:cdrs_import] = nil
       if params[:file]
         @file = params[:file]
         if  @file.size > 0
           if !@file.respond_to?(:original_filename) or !@file.respond_to?(:read) or !@file.respond_to?(:rewind)
             flash[:notice] = _('Please_select_file')
-            redirect_to :action => :import_csv,  :step => 0 and return false
+            redirect_to :action => :import_csv, :step => 0 and return false
           end
           if get_file_ext(@file.original_filename, "csv") == false
             @file.original_filename
             flash[:notice] = _('Please_select_CSV_file')
-            redirect_to :action => :import_csv,  :step => 0 and return false
+            redirect_to :action => :import_csv, :step => 0 and return false
           end
           @file.rewind
           file = @file.read
           session[:cdr_file_size] = file.size
-          session[:temp_cdr_import_csv] = CsvImportDb.save_file("_crd_",file)
+          session[:temp_cdr_import_csv] = CsvImportDb.save_file("_crd_", file)
           flash[:status] = _('File_downloaded')
-          redirect_to :action => :import_csv,  :step => 2 and return false
+          redirect_to :action => :import_csv, :step => 2 and return false
         else
           session[:temp_cdr_import_csv] = nil
           flash[:notice] = _('Please_select_file')
-          redirect_to :action => :import_csv,  :step => 0 and return false
+          redirect_to :action => :import_csv, :step => 0 and return false
         end
       else
         session[:temp_cdr_import_csv] = nil
         flash[:notice] = _('Please_upload_file')
-        redirect_to :action => :import_csv,  :step => 0 and return false
+        redirect_to :action => :import_csv, :step => 0 and return false
       end
     end
 
@@ -74,12 +74,12 @@ class CdrController < ApplicationController
       if session[:temp_cdr_import_csv]
         file = CsvImportDb.head_of_file("/tmp/#{session[:temp_cdr_import_csv]}.csv", 20).join("").to_s
         session[:file] = file
-        a = check_csv_file_seperators(file, 2,2, {:line=>0})
+        a = check_csv_file_seperators(file, 2, 2, {:line => 0})
         if a
           @fl = CsvImportDb.head_of_file("/tmp/#{session[:temp_cdr_import_csv]}.csv", 1).join("").to_s.split(@sep)
           begin
             colums ={}
-            colums[:colums] = [{:name=>"f_error", :type=>"INT(4)", :default=>0}, {:name=>"nice_error", :type=>"INT(4)", :default=>0},{:name=>"do_not_import", :type=>"INT(4)", :default=>0},{:name=>"changed", :type=>"INT(4)", :default=>0}, {:name=>"not_found_in_db", :type=>"INT(4)", :default=>0}, {:name=>"id", :type=>'INT(11)', :inscrement=>' NOT NULL auto_increment '}]
+            colums[:colums] = [{:name => "f_error", :type => "INT(4)", :default => 0}, {:name => "nice_error", :type => "INT(4)", :default => 0}, {:name => "do_not_import", :type => "INT(4)", :default => 0}, {:name => "changed", :type => "INT(4)", :default => 0}, {:name => "not_found_in_db", :type => "INT(4)", :default => 0}, {:name => "id", :type => 'INT(11)', :inscrement => ' NOT NULL auto_increment '}]
             session[:cdr_import_csv] = CsvImportDb.load_csv_into_db(session[:temp_cdr_import_csv], @sep, @dec, @fl, nil, colums)
             session[:file_lines] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{session[:temp_cdr_import_csv]}")
           rescue Exception => e
@@ -90,23 +90,23 @@ class CdrController < ApplicationController
             session[:file] = File.open("/tmp/#{session[:temp_cdr_import_csv]}.csv", "rb").read
             CsvImportDb.clean_after_import(session[:temp_cdr_import_csv])
             session[:temp_cdr_import_csv] = nil
-            redirect_to :action => "import_csv",  :step => 2 and return false
+            redirect_to :action => "import_csv", :step => 2 and return false
           end
           flash[:status] = _('File_uploaded') if !flash[:notice]
         end
       else
         session[:cdr_import_csv] = nil
         flash[:notice] = _('Please_upload_file')
-        redirect_to :action => :import_csv,  :step => 1 and return false
+        redirect_to :action => :import_csv, :step => 1 and return false
       end
-      
+
     end
 
     if  @step > 2
 
       unless ActiveRecord::Base.connection.tables.include?(session[:temp_cdr_import_csv])
         flash[:notice] = _('Please_upload_file')
-        redirect_to :action => :import_csv,  :step => 0 and return false
+        redirect_to :action => :import_csv, :step => 0 and return false
       end
 
       if session[:cdr_import_csv]
@@ -136,7 +136,7 @@ class CdrController < ApplicationController
             flash[:status] = _('Columns_assigned')
           else
             flash[:notice] = _('Please_Select_Columns')
-            redirect_to :action => :import_csv,  :step => 2 and return false
+            redirect_to :action => :import_csv, :step => 2 and return false
           end
         end
 
@@ -145,11 +145,11 @@ class CdrController < ApplicationController
 
           if @step == 4
             my_debug_time "step 4"
-            @users = User.find(:all, :select=>"users.*, #{SqlExport.nice_user_sql}", :joins=>"LEFT JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group=>'users.id')
-            @providers = current_user.load_providers(:all , :conditions=>'hidden=0')
+            @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "LEFT JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group => 'users.id')
+            @providers = current_user.load_providers(:all, :conditions => 'hidden=0')
             if !@providers or @providers.size.to_i < 1
               flash[:notice] = _('No_Providers')
-              redirect_to :action => :import_csv,  :step => 0 and return false
+              redirect_to :action => :import_csv, :step => 0 and return false
             end
           end
 
@@ -161,26 +161,26 @@ class CdrController < ApplicationController
             session[:cdr_import_csv2][:import_provider] = params[:provider].to_i
             unless params[:provider]
               flash[:notice] = _('Please_select_Provider')
-              redirect_to :action => :import_csv,  :step => 4 and return false
+              redirect_to :action => :import_csv, :step => 4 and return false
             end
             if session[:cdr_import_csv2][:import_type].to_i == 0
               session[:cdr_import_csv2][:import_user] = params[:user].to_i
               session[:cdr_import_csv2][:import_device] = params[:device_id].to_i
-              if User.find(:first, :conditions=>{:id=>params[:user]}) and Device.find(:first, :conditions=>{:id=>params[:device_id]})
+              if User.find(:first, :conditions => {:id => params[:user]}) and Device.find(:first, :conditions => {:id => params[:device_id]})
                 @cdr_analize = Call.analize_cdr_import(session[:temp_cdr_import_csv], session[:cdr_import_csv2])
                 @new_step = 9
                 @cdr_analize[:file_lines] = session[:cdr_import_csv2][:file_lines]
                 session[:cdr_analize] = @cdr_analize
               else
                 flash[:notice] = _('User_and_Device_is_bad')
-                redirect_to :action => :import_csv,  :step => 4 and return false
+                redirect_to :action => :import_csv, :step => 4 and return false
               end
             else
               if session[:cdr_import_csv2][:imp_clid].to_i == -1
                 flash[:notice] = _('Please_select_CLID_commun')
-                redirect_to :action => :import_csv,  :step => 2 and return false
+                redirect_to :action => :import_csv, :step => 2 and return false
               end
-              session[:cdr_import_csv2][:create_callerid]  =  params[:create_callerid].to_i
+              session[:cdr_import_csv2][:create_callerid] = params[:create_callerid].to_i
               @cdr_analize = Call.analize_cdr_import(session[:temp_cdr_import_csv], session[:cdr_import_csv2])
               @new_step = 9 if @cdr_analize[:bad_clis].to_i == 0 and @cdr_analize[:new_clis_to_create].to_i == 0
               flash[:status] = _('Analysis_completed')
@@ -197,14 +197,14 @@ class CdrController < ApplicationController
             @options = {}
             session[:cdrs_import] ? @options = session[:cdrs_import] : @options = {}
             # search
-            params[:page]  ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page])
-            params[:hide_error]  ? @options[:hide] = params[:hide_error].to_i : (@options[:hide] = 0 if !@options[:hide])
+            params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page])
+            params[:hide_error] ? @options[:hide] = params[:hide_error].to_i : (@options[:hide] = 0 if !@options[:hide])
 
             cond = ""
             if @options[:hide].to_i > 0
               cond = " AND nice_error != 2"
             end
-            
+
             fpage, @total_pages, @options = pages_validator(@options, ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 #{cond }").to_f, params[:page])
             @import_cdrs = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 #{cond } LIMIT #{fpage}, #{session[:items_per_page]}")
             @next_step = session[:cdr_import_csv2][:create_callerid].to_i == 0 ? 9 : 7
@@ -226,21 +226,21 @@ class CdrController < ApplicationController
               session[:cdr_import_csv2][:step] = 8
               session[:cdrs_import2] ? @options = session[:cdrs_import2] : @options = {}
               # search
-              params[:page]  ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page])
+              params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page])
 
 
               @cdr_analize = Call.analize_cdr_import(session[:temp_cdr_import_csv], session[:cdr_import_csv2])
               @cdr_analize[:file_lines] = session[:cdr_import_csv2][:file_lines]
 
-              fpage, @total_pages, @options = pages_validator(@options, Callerid.count(:all, :conditions=>{:device_id => -1}).to_f, params[:page])
-              @clis = Callerid.find(:all, :conditions=>{:device_id => -1}, :offset=>fpage, :limit=>session[:items_per_page])
+              fpage, @total_pages, @options = pages_validator(@options, Callerid.count(:all, :conditions => {:device_id => -1}).to_f, params[:page])
+              @clis = Callerid.find(:all, :conditions => {:device_id => -1}, :offset => fpage, :limit => session[:items_per_page])
 
-              @users = User.find(:all, :select=>"users.*, #{SqlExport.nice_user_sql}", :joins=>"JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group=>'users.id')
+              @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group => 'users.id')
             end
           else
             if @step == 7 or @step == 8
               dont_be_so_smart
-              redirect_to :action => :import_csv,  :step => 6 and return false
+              redirect_to :action => :import_csv, :step => 6 and return false
             end
           end
 
@@ -251,7 +251,7 @@ class CdrController < ApplicationController
             @cdr_analize = Call.analize_cdr_import(session[:temp_cdr_import_csv], session[:cdr_import_csv2])
             @cdr_analize[:file_lines] = session[:cdr_import_csv2][:file_lines]
             begin
-              @total_cdrs, @errors =  Call.insert_cdrs_from_csv(session[:temp_cdr_import_csv], session[:cdr_import_csv2])
+              @total_cdrs, @errors = Call.insert_cdrs_from_csv(session[:temp_cdr_import_csv], session[:cdr_import_csv2])
               flash[:status] = _('Import_completed')
               session[:temp_cdr_import_csv] = nil
               @run_time = Time.now - start_time
@@ -263,23 +263,23 @@ class CdrController < ApplicationController
           end
         else
           flash[:notice] = _('Please_Select_Columns')
-          redirect_to :action => :import_csv,  :step => "2" and return false
+          redirect_to :action => :import_csv, :step => "2" and return false
         end
       else
         flash[:notice] = _('Zero_file')
-        redirect_to :controller=>"tariffs", :action=>"list" and return false
+        redirect_to :controller => "tariffs", :action => "list" and return false
       end
     end
   end
 
 
   def cli_add
-    @dev = Device.find(:first, :conditions=>{:id=>params[:device_id]})
-    @cli = Callerid.find(:first, :conditions=>{:id=>params[:id]})
+    @dev = Device.find(:first, :conditions => {:id => params[:device_id]})
+    @cli = Callerid.find(:first, :conditions => {:id => params[:id]})
 
     unless @dev or @cli
       @error = _('Device_or_Cli_not_found')
-      @users = User.find(:all, :select=>"users.*, #{SqlExport.nice_user_sql}", :joins=>"JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group=>'users.id')
+      @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group => 'users.id')
     else
       @cli.device_id = @dev.id
       @cli.added_at = Time.now
@@ -299,13 +299,13 @@ class CdrController < ApplicationController
 
     unless ActiveRecord::Base.connection.tables.include?(session[:temp_cdr_import_csv])
       @error = _('CDR_not_found')
-      redirect_to  :layout => false and return false
+      redirect_to :layout => false and return false
     end
 
     MorLog.my_debug "SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 and id = #{params[:id]}"
-    @cdr =  ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 and id = #{params[:id]}")
+    @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 and id = #{params[:id]}")
 
-    unless @cdr  and @cdr.size > 0
+    unless @cdr and @cdr.size > 0
       @error = _('CDR_not_found')
       render :layout => false and return false
     end
@@ -318,40 +318,40 @@ class CdrController < ApplicationController
       ActiveRecord::Base.connection.execute("UPDATE #{session[:temp_cdr_import_csv]} SET col_#{session[:cdr_import_csv2][:imp_clid]} = '#{cli}', col_#{session[:cdr_import_csv2][:imp_calldate]} = '#{calldate}', col_#{session[:cdr_import_csv2][:imp_billsec]} = '#{billsec}', col_#{session[:cdr_import_csv2][:imp_dst]} = '#{dst}', f_error = 0, changed = 1 WHERE f_error = 1 and id = #{params[:id]}")
     end
 
-    if Call.find(:first, :conditions=>{:calldate=>calldate, :billsec=>billsec, :dst=>dst})
+    if Call.find(:first, :conditions => {:calldate => calldate, :billsec => billsec, :dst => dst})
       @error = _('CDR_exist_in_db_match_caldate_dst_src')
       render :layout => false and return false
     else
       ActiveRecord::Base.connection.execute("UPDATE #{session[:temp_cdr_import_csv]} SET col_#{session[:cdr_import_csv2][:imp_clid]} = '#{cli}', col_#{session[:cdr_import_csv2][:imp_calldate]} = '#{calldate}', col_#{session[:cdr_import_csv2][:imp_billsec]} = '#{billsec}', col_#{session[:cdr_import_csv2][:imp_dst]} = '#{dst}', f_error = 0, changed = 1 WHERE f_error = 1 and id = #{params[:id]}")
-      @cdr =  ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 0 and id = #{params[:id]}")
+      @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 0 and id = #{params[:id]}")
       render :layout => false and return false
     end
 
-   
+
   end
 
   def not_import_bad_cdr
-    @cdr =  ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 and id = #{params[:id]}")
+    @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 and id = #{params[:id]}")
 
     unless @cdr
       @error = _('CDR_not_found')
     else
       ActiveRecord::Base.connection.execute("UPDATE #{session[:temp_cdr_import_csv]} SET do_not_import = 1 WHERE f_error = 1 and id = #{params[:id]}")
-      @cdr =  ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE do_not_import = 1 and id = #{params[:id]}")
+      @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE do_not_import = 1 and id = #{params[:id]}")
     end
     render :layout => false and return false
   end
 
 
   def rerating
-    @step =  (params[:step] ? params[:step].to_i : 1)
+    @step = (params[:step] ? params[:step].to_i : 1)
     @step_name = [nil, _('Select_details'), _('Confirm'), _('Status')][@step]
 
     @page_title = _('CDR_Rerating') + "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" + _('Step') + ": " + @step.to_s + "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" + @step_name
     @page_icon = 'coins.png';
 
     if @step == 1
-      @users = User.find(:all, :select=>"*, #{SqlExport.nice_user_sql}", :conditions => "hidden = 0", :order => "nice_user ASC")
+      @users = User.find(:all, :select => "*, #{SqlExport.nice_user_sql}", :conditions => "hidden = 0", :order => "nice_user ASC")
       @tariffs = Tariff.find(:all, :conditions => "purpose != 'provider' ", :order => "name ASC")
     end
 
@@ -372,7 +372,7 @@ class CdrController < ApplicationController
 
       unless users and users.size.to_i > 0
         flash[:notice] = _('User_not_found')
-        redirect_to :action=>:rerating and return false
+        redirect_to :action => :rerating and return false
       end
 
       @calls_stats = 0
@@ -390,7 +390,7 @@ class CdrController < ApplicationController
           @calls_stats = @user.calls_total_stats('answered', session_from_datetime, session_till_datetime)
           @billsec += @calls_stats["total_billsec"].to_f
           @provider_price += @calls_stats["total_provider_price"].to_f
-          @reseller_price +=  @calls_stats["total_reseller_price"].to_f
+          @reseller_price += @calls_stats["total_reseller_price"].to_f
           @user_price += @calls_stats["total_user_price"].to_f
           @total_calls += @calls_stats["total_calls"].to_i
           @users_with_calls +=1 if @calls_stats["total_calls"].to_i > 0
@@ -410,8 +410,6 @@ class CdrController < ApplicationController
     end
 
 
-
-
     if @step == 3
 
       @user_id = params[:user].to_i
@@ -419,15 +417,15 @@ class CdrController < ApplicationController
       users = []
 
       if params[:user].to_i == -1
-        users = User.find(:all, :include =>[:tariff])
+        users = User.find(:all, :include => [:tariff])
       else
-        user = User.find(:first, :include =>[:tariff], :conditions => ["users.id = ?", params[:user]])
+        user = User.find(:first, :include => [:tariff], :conditions => ["users.id = ?", params[:user]])
         users << user if user
       end
 
       unless users and users.size.to_i > 0
         flash[:notice] = _('User_not_found')
-        redirect_to :action=>:rerating and return false
+        redirect_to :action => :rerating and return false
       end
 
       @old_billsec = params[:billsec].to_i
@@ -468,7 +466,7 @@ class CdrController < ApplicationController
 
           for call in @calls
             provider = providers_cache["p_#{call.provider_id}".to_sym] ||= Provider.find(:first, :include => [:tariff], :conditions => ["providers.id = ?", call.provider_id])
-            if provider and  provider.user_id == current_user.get_corrected_owner_id
+            if provider and provider.user_id == current_user.get_corrected_owner_id
 
               one_old_user_price += call.user_price.to_f
               one_old_reseller_price += call.reseller_price.to_f
@@ -498,7 +496,7 @@ class CdrController < ApplicationController
           @reseller_price += one_reseller_price
           @user_price += one_user_price
 
-          @old_provider_price +=  one_old_provider_price.to_f
+          @old_provider_price += one_old_provider_price.to_f
           @old_reseller_price += one_old_reseller_price.to_f
           @old_user_price += one_old_user_price.to_f
 
@@ -538,6 +536,6 @@ class CdrController < ApplicationController
   end
 
   def return_correct_select_value(param)
-    param ?  param.to_i : -1
+    param ? param.to_i : -1
   end
 end

@@ -26,8 +26,9 @@ class IvrVoice< ActiveRecord::Base
 
   class << self # Class methods
     alias :all_columns :columns
+
     def columns
-      all_columns.reject {|c| c.name == 'readonly'}
+      all_columns.reject { |c| c.name == 'readonly' }
     end
   end
 
@@ -40,7 +41,7 @@ class IvrVoice< ActiveRecord::Base
   end
 
   protected
-  
+
   def ivrv_before_validation
     self.voice = self.voice.downcase.gsub(/[^a-z_]/, "")
   end
@@ -49,7 +50,7 @@ class IvrVoice< ActiveRecord::Base
     errors.add(:voice, "Contains Invalid symbols") if voice.scan(/[^a-z_]/).size != 0
   end
 
-  def  set_user
+  def set_user
     self.user_id = User.current.id
   end
 

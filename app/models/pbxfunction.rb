@@ -12,7 +12,7 @@ class Pbxfunction < ActiveRecord::Base
 
   def dialplans
     Dialplan.find(:all, :conditions => "data1 = #{self.id}", :order => "#{self.name}")
-    
+
   end
-  
+
 end

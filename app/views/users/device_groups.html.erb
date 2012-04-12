@@ -1,39 +1,38 @@
-
-<%= b_user + _('User') + ": " +  @user.first_name + " " + @user.last_name %>
+<%= b_user + _('User') + ": " + @user.first_name + " " + @user.last_name %>
 <br><br><br>
 
 <% for dg in @devicegroups %>
-<% devices = dg.devices %>
-<table width="50%" class="maintable" %>
-  <tr>
-    <th align="left">        <%= _('Group') + ": " + dg.name %> </th>
-    <th align="right"><%= _('Created') + ": " + nice_date_time(dg.added) %>    </th>
-  </tr>
-  <tr>
-        <td> <%= _('Members') %>: <%= devices.count%></td>
-        <td align="right"> <%= link_to b_edit + _('Edit_details'), :action => 'device_group_edit', :id => dg.id %></td>
-  </tr>
-  <% i = 0 %>    
-  <% for mem in devices %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-        <td colspan="2">
-            <%= link_to b_device + mem.device_type + "/" + mem.extension, :controller => "devices", :action => "device_edit", :id => mem.id %>
-        </td>
-  </tr> 
-    <% i += 1%>    
-  <% end %>
-    <% if dg.devices.size == 0 and dg.primary == 0 %>
+    <% devices = dg.devices %>
+    <table width="50%" class="maintable" %>
     <tr>
-        <th colspan="2">    <%= link_to b_delete + _('Delete'), {:action => 'device_group_delete', :id => dg.id}, :confirm => _('are_you_sure'), :method => :post %>    </th>
+      <th align="left">        <%= _('Group') + ": " + dg.name %> </th>
+      <th align="right"><%= _('Created') + ": " + nice_date_time(dg.added) %>    </th>
     </tr>
+    <tr>
+      <td> <%= _('Members') %>: <%= devices.count %></td>
+      <td align="right"> <%= link_to b_edit + _('Edit_details'), :action => 'device_group_edit', :id => dg.id %></td>
+    </tr>
+    <% i = 0 %>
+    <% for mem in devices %>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <td colspan="2">
+            <%= link_to b_device + mem.device_type + "/" + mem.extension, :controller => "devices", :action => "device_edit", :id => mem.id %>
+          </td>
+        </tr>
+        <% i += 1 %>
+    <% end %>
+    <% if dg.devices.size == 0 and dg.primary == 0 %>
+        <tr>
+          <th colspan="2">    <%= link_to b_delete + _('Delete'), {:action => 'device_group_delete', :id => dg.id}, :confirm => _('are_you_sure'), :method => :post %>    </th>
+        </tr>
     <% end %>
 
-</table>
+    </table>
 
-<br><br>
+    <br><br>
 
 
 <% end %>
 
-<%= link_to b_add + _('Add_new_device_group'), :action => 'device_group_new', :id => @user.id %>    
+<%= link_to b_add + _('Add_new_device_group'), :action => 'device_group_new', :id => @user.id %>
 <br><br>

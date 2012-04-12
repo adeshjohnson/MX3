@@ -31,7 +31,7 @@ module ActiveProcessor
 
       def valid?(params)
         for param, value in params[@engine][@name]
-          set(:form, { param => value }) # field validations
+          set(:form, {param => value}) # field validations
         end
 
         if get(:config, 'min_amount').to_i > 0
@@ -64,13 +64,13 @@ module ActiveProcessor
         orig_tax = origin_with_tax - orig
         tax = gross - money
         @payment = OpenStruct.new({
-            :money => money,
-            :orig_amount => orig,
-            :orig_tax => orig_tax,
-            :orig_with_tax => round_to_cents(origin_with_tax).to_f,
-            :tax => round_to_cents(tax).to_f,
-            :auth_config => {}
-          })
+                                      :money => money,
+                                      :orig_amount => orig,
+                                      :orig_tax => orig_tax,
+                                      :orig_with_tax => round_to_cents(origin_with_tax).to_f,
+                                      :tax => round_to_cents(tax).to_f,
+                                      :auth_config => {}
+                                  })
 
         @payment.orig_tax = (@payment.orig_with_tax - @payment.orig_amount)
         @payment.amount = gross.ceil / 100.0

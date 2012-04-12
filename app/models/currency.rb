@@ -3,10 +3,10 @@ class Currency < ActiveRecord::Base
 
   has_many :users
 
-  validates_length_of :name,  :maximum => 5 , :message => _('Currency_Name_is_to_long_Max_5_Simbols')
-  validates_numericality_of :exchange_rate, :greater_than=>0.to_f, :on => :create, :message => _('Currency_exchange_rate_canot_be_blank')
+  validates_length_of :name, :maximum => 5, :message => _('Currency_Name_is_to_long_Max_5_Simbols')
+  validates_numericality_of :exchange_rate, :greater_than => 0.to_f, :on => :create, :message => _('Currency_exchange_rate_canot_be_blank')
   validates_presence_of :name, :message => _('Currency_must_have_name')
-  validates_uniqueness_of :name,  :message => _('Currency_Name_Must_Be_Unique')
+  validates_uniqueness_of :name, :message => _('Currency_Name_Must_Be_Unique')
 
   def tariffs
     Tariff.find_by_sql ["SELECT tariffs.id FROM tariffs WHERE currency = ? UNION SELECT sms_tariffs.id FROM sms_tariffs WHERE currency = ?", self.name, self.name]
@@ -35,16 +35,16 @@ class Currency < ActiveRecord::Base
   def Currency.count_exchange_prices(options={})
     if options[:exrate].to_f > 0.to_f
       new_prices = []
-      options[:prices].each{|p|new_prices << p.to_f * options[:exrate].to_f}
-      a = new_prices#.to_sentence
+      options[:prices].each { |p| new_prices << p.to_f * options[:exrate].to_f }
+      a = new_prices #.to_sentence
     else
       a = options[:prices] #.to_sentence
     end
-   if a.size == 1
-     return a[0]
-   else
-     return *a
-  end
+    if a.size == 1
+      return a[0]
+    else
+      return *a
+    end
   end
 
 =begin rdoc
@@ -85,15 +85,15 @@ class Currency < ActiveRecord::Base
     require 'net/http'
     default_currency = Currency.get_default
     par = []
-    arr= id.to_i  > 0 ?{:conditions=>["id=?", id]} : {:conditions=>["curr_update=1 AND id != 1"]}
+    arr= id.to_i > 0 ? {:conditions => ["id=?", id]} : {:conditions => ["curr_update=1 AND id != 1"]}
     currencies = Currency.find(:all, arr)
     if currencies
-      currencies.each{|cur| par << "s=" + default_currency.name.strip.to_s + cur.name.strip.to_s + "=X"}
+      currencies.each { |cur| par << "s=" + default_currency.name.strip.to_s + cur.name.strip.to_s + "=X" }
       par << "f=l1"
-      Net::HTTP.start("download.finance.yahoo.com") { |http| resp = http.get('/d/quotes.csv?'+par.join('&').to_s) ; @file = resp.body}
-      @file.each_with_index{|cur, i| currencies[i].exchange_rate= cur.to_f; currencies[i].last_update = Time.now; currencies[i].save }
+      Net::HTTP.start("download.finance.yahoo.com") { |http| resp = http.get('/d/quotes.csv?'+par.join('&').to_s); @file = resp.body }
+      @file.each_with_index { |cur, i| currencies[i].exchange_rate= cur.to_f; currencies[i].last_update = Time.now; currencies[i].save }
       Action.add_action(User.current.id, "Currency updated", id)
-    end  
+    end
   end
 
   def update_rate

@@ -2,9 +2,10 @@
 module PdfGen
   module Count
     def Count.page_number(pdf, page, pages)
-      pdf.draw_text "#{page}/#{pages}", :size=>9, :at => [500, 0]
+      pdf.draw_text "#{page}/#{pages}", :size => 9, :at => [500, 0]
       pdf
     end
+
 =begin rdoc
 # Counts total pages for units when first and the rest of the pages have different sizes.
 #
@@ -52,10 +53,10 @@ module PdfGen
     end
 
     def Count.error_message_from_limit(pdf, limit, user, invoice)
-      Action.add_action_hash(user, {:target_id=>invoice.id, :target_type=>"Invoice", :action=>"Invoice_limit_reach", :data=>invoice.user_id})
+      Action.add_action_hash(user, {:target_id => invoice.id, :target_type => "Invoice", :action => "Invoice_limit_reach", :data => invoice.user_id})
       pdf.start_new_page
-      pdf.text( _('Invoice_reach_limit') + ': ' + limit.to_s, {:left => 50, :top => 100, :font_size =>16})
-      pdf.text( _('Invoice_reach_limit_contact_administrator'), {:left => 50, :top => 130, :font_size =>16})
+      pdf.text(_('Invoice_reach_limit') + ': ' + limit.to_s, {:left => 50, :top => 100, :font_size => 16})
+      pdf.text(_('Invoice_reach_limit_contact_administrator'), {:left => 50, :top => 130, :font_size => 16})
       pdf
     end
 

@@ -39,7 +39,7 @@ class Google4R::Checkout::DigitalContentTest < Test::Unit::TestCase
   def setup
     @frontend = Frontend.new(FRONTEND_CONFIGURATION)
     @frontend.tax_table_factory = TestTaxTableFactory.new
-    
+
     @email_delivery_str = %q{<?xml version="1.0" encoding="UTF-8" ?>
 <digital-content>
   <display-disposition>OPTIMISTIC</display-disposition>
@@ -67,8 +67,8 @@ class Google4R::Checkout::DigitalContentTest < Test::Unit::TestCase
   </description>
 </digital-content>}
 
-    
-    @optional_tags = [ 'merchant-item-id', 'merchant-private-item-data', 'tax-table-selector' ]
+
+    @optional_tags = ['merchant-item-id', 'merchant-private-item-data', 'tax-table-selector']
 
     @command = @frontend.create_checkout_command
     @shopping_cart = @command.shopping_cart
@@ -77,30 +77,30 @@ class Google4R::Checkout::DigitalContentTest < Test::Unit::TestCase
   end
 
   def test_behaves_correctly
-    [ :description, :description=, :display_disposition,
-      :display_disposition=, :email_delivery,
-      :email_delivery=, :key, :key=, :url, :url= ].each do |symbol|
+    [:description, :description=, :display_disposition,
+     :display_disposition=, :email_delivery,
+     :email_delivery=, :key, :key=, :url, :url=].each do |symbol|
       assert_respond_to @item.digital_content, symbol
     end
   end
-  
+
   def test_create_from_element_works
     digital_content = Item::DigitalContent.create_from_element(REXML::Document.new(@email_delivery_str).root)
     assert_equal 'OPTIMISTIC', digital_content.display_disposition
     assert_equal "true", digital_content.email_delivery
-    
+
     digital_content = Item::DigitalContent.create_from_element(REXML::Document.new(@key_url_delivery_str).root)
     assert_equal 'PESSIMISTIC', digital_content.display_disposition
     assert_nil digital_content.email_delivery
     assert_equal '1456-1514-3657-2198', digital_content.key
     assert_equal 'http://supersoft.example.com', digital_content.url
-    
+
     digital_content = Item::DigitalContent.create_from_element(REXML::Document.new(@description_delivery_str).root)
     assert_equal 'OPTIMISTIC', digital_content.display_disposition
     assert_nospace_equal %q{It may take up to 24 hours to process your new
     storage. You will be able to see your increased storage on your &amp;lt;a
     href=&quot;http://login.example.com&quot;&amp;gt;account page&amp;lt;/a&amp;gt;.},
-    REXML::Text.new(digital_content.description).to_s
+                         REXML::Text.new(digital_content.description).to_s
   end
 
 end

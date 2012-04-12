@@ -3,15 +3,15 @@ class RinggroupsController < ApplicationController
 
   layout "callc"
 
-  before_filter :check_post_method, :only=>[:destroy, :create, :update]
+  before_filter :check_post_method, :only => [:destroy, :create, :update]
 
   before_filter :check_localization
   before_filter :authorize
-  before_filter :find_ringgroup, :only=>[:show, :edit, :destroy, :assign_device, :show_dids, :show_devices, :show_extlines, :device_sort, :update, :free_user_devices, :delete_device]
+  before_filter :find_ringgroup, :only => [:show, :edit, :destroy, :assign_device, :show_dids, :show_devices, :show_extlines, :device_sort, :update, :free_user_devices, :delete_device]
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-    :redirect_to => { :action => :index }
+  verify :method => :post, :only => [:destroy, :create, :update],
+         :redirect_to => {:action => :index}
 
 
   def index
@@ -20,8 +20,8 @@ class RinggroupsController < ApplicationController
     session[:ringgroups_list_options] ? @options = session[:ringgroups_list_options] : @options = {}
 
     # search
-    params[:page]  ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page])
-   
+    params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page])
+
     # order
     params[:order_desc] ? @options[:order_desc] = params[:order_desc].to_i : (@options[:order_desc] = 0 if !@options[:order_desc])
     params[:order_by] ? @options[:order_by] = params[:order_by].to_s : @options[:order_by] == "acc"
@@ -35,9 +35,9 @@ class RinggroupsController < ApplicationController
     # page params
     @ringgroups_size = current_user.ringgroups.find(:all, arr).size.to_i
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
-    @total_pages = ( @ringgroups_size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@ringgroups_size.to_f / session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
-    @fpage = ((@options[:page] -1 ) * session[:items_per_page]).to_i
+    @fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
     @search = @options[:s_name].blank? ? 0 : 1
 
@@ -81,18 +81,18 @@ class RinggroupsController < ApplicationController
       redirect_to :action => :index and return false
     end
 
-    @ringgroup = Ringgroup.new(params[:ringgroup].merge({:name=>params[:dialplan][:name]}))
+    @ringgroup = Ringgroup.new(params[:ringgroup].merge({:name => params[:dialplan][:name]}))
     if @ringgroup.save
       dialplan = Dialplan.new(params[:dialplan].merge({:dptype => "ringgroup", :data1 => @ringgroup.id}))
       dialplan.save
       @ringgroup.update_exline(ext)
       flash[:status] = _('Ring_Group_was_successfully_created')
-      redirect_to :action=>:edit, :id=>@ringgroup.id
+      redirect_to :action => :edit, :id => @ringgroup.id
     else
       flash_errors_for(_('Ring_Group_not_created'), @ringgroup)
-      redirect_to :action=>:index
+      redirect_to :action => :index
     end
-    
+
   end
 
 
@@ -105,7 +105,7 @@ class RinggroupsController < ApplicationController
     @devices = @ringgroup.devices
     @dialplan = @ringgroup.dialplan
     @users = User.find(:all)
-    @extlines = Extline.find(:all, :conditions=>['exten = ? AND app IN ("Set", "Dial", "Goto")', @dialplan.data2], :order=>"priority ASC")
+    @extlines = Extline.find(:all, :conditions => ['exten = ? AND app IN ("Set", "Dial", "Goto")', @dialplan.data2], :order => "priority ASC")
   end
 
   def update
@@ -113,8 +113,8 @@ class RinggroupsController < ApplicationController
       flash[:notice] = _('Name_cannot_be_blank')
       redirect_to :action => :index and return false
     end
-    
-    if @ringgroup.update_attributes(params[:ringgroup].reject{|k,v| k == 'user_id'})
+
+    if @ringgroup.update_attributes(params[:ringgroup].reject { |k, v| k == 'user_id' })
       @dialplan = @ringgroup.dialplan
       ext = @dialplan.data2.to_s
       @dialplan.update_attributes(params[:dialplan])
@@ -123,7 +123,7 @@ class RinggroupsController < ApplicationController
     else
       flash_errors_for(_('Ring_Group_not_updated'), @ringgroup)
     end
-    redirect_to :action=>:index
+    redirect_to :action => :index
   end
 
   def destroy
@@ -137,12 +137,12 @@ class RinggroupsController < ApplicationController
     else
       flash_errors_for(_('Ring_Group_not_deleted'), @ringgroup)
     end
-    redirect_to :action=>:index
+    redirect_to :action => :index
   end
 
   def assign_device
-    r = RinggroupsDevice.new({:device_id=>params[:device_id].to_i, :ringgroup_id => @ringgroup.id})
-    r_old = RinggroupsDevice.find(:first, :conditions=>{:ringgroup_id => @ringgroup.id}, :order=>'priority DESC')
+    r = RinggroupsDevice.new({:device_id => params[:device_id].to_i, :ringgroup_id => @ringgroup.id})
+    r_old = RinggroupsDevice.find(:first, :conditions => {:ringgroup_id => @ringgroup.id}, :order => 'priority DESC')
     r.priority = r_old ? r_old.priority.to_i + 1 : 0
     r.save
     @ringgroup.update_exline
@@ -152,7 +152,7 @@ class RinggroupsController < ApplicationController
   end
 
   def delete_device
-    r = RinggroupsDevice.find(:first, :conditions=>{:device_id=>params[:device_id].to_i, :ringgroup_id => @ringgroup.id})
+    r = RinggroupsDevice.find(:first, :conditions => {:device_id => params[:device_id].to_i, :ringgroup_id => @ringgroup.id})
     r.destroy
     @ringgroup.update_exline
     @devices = @ringgroup.devices
@@ -163,7 +163,7 @@ class RinggroupsController < ApplicationController
 
   def device_sort
     params[:sortable_list].each_index do |i|
-      item = RinggroupsDevice.find(:first, :conditions=>{:device_id=>params[:sortable_list][i], :ringgroup_id=>@ringgroup.id})
+      item = RinggroupsDevice.find(:first, :conditions => {:device_id => params[:sortable_list][i], :ringgroup_id => @ringgroup.id})
       item.update_attributes(:priority => i)
     end
     @ringgroup.update_exline
@@ -171,7 +171,7 @@ class RinggroupsController < ApplicationController
     @users = User.find(:all)
     @dids = current_user.dids_for_select('free')
     @free_dids = Did.free_dids_for_select(@ringgroup.did_id)
-    render :layout => false, :action => :edit, :id=>@ringgroup
+    render :layout => false, :action => :edit, :id => @ringgroup
   end
 
   def free_user_devices
@@ -193,7 +193,7 @@ class RinggroupsController < ApplicationController
     devices = @ringgroup.devices
     appdata = ''
     if devices
-      devices.each_with_index{|d, i|
+      devices.each_with_index { |d, i|
         if d.device_type.to_s == 'Virtual'
           if i > 0
             appdata += "&Local/#{d.name}@mor_local"
@@ -222,10 +222,10 @@ class RinggroupsController < ApplicationController
   private
 
   def find_ringgroup
-    @ringgroup = current_user.ringgroups.find(:first, :conditions=>{:id=>params[:id]}, :include=>[:dialplan])
+    @ringgroup = current_user.ringgroups.find(:first, :conditions => {:id => params[:id]}, :include => [:dialplan])
     unless @ringgroup
       flash[:notice] = _('Ringgroup_was_not_found')
-      redirect_to :controller=>"ringgroups" and return false
+      redirect_to :controller => "ringgroups" and return false
     end
   end
 

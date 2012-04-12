@@ -1,163 +1,196 @@
 <!DOCTYPE html>
 
 <html lang="lt" id="cs">
-  <head>
-    <title><%= h(@cshop.name) %></title>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-    <%= stylesheet_link_tag "callshop_invoice", :media => "print" %>
-    <style type="text/css">
-      .clearfix:after {clear:both;content:' ';display:block;font-size:0;line-height:0;visibility:hidden;width:0;height:0}* html .clearfix,*:first-child+html .clearfix{zoom:1}
+<head>
+  <title><%= h(@cshop.name) %></title>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+  <%= stylesheet_link_tag "callshop_invoice", :media => "print" %>
+  <style type="text/css">
+      .clearfix:after {
+          clear: both;
+          content: ' ';
+          display: block;
+          font-size: 0;
+          line-height: 0;
+          visibility: hidden;
+          width: 0;
+          height: 0
+      }
+
+      * html .clearfix, *:first-child+html .clearfix {
+          zoom: 1
+      }
 
       html, body {
-        font-family: Helvetica, Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        background-color: #fefefe;
-        color: #000;
+          font-family: Helvetica, Arial, Helvetica, sans-serif;
+          font-size: 14px;
+          background-color: #fefefe;
+          color: #000;
       }
 
       a {
-        color: #343434;
-        text-decoration: none;
-        outline: none;
+          color: #343434;
+          text-decoration: none;
+          outline: none;
       }
 
       #header ul li {
-        display: block;
-        float: left;
-        margin-right: 10px;
-        background-image: -webkit-gradient(linear,left bottom,left top, color-stop(0, #e5e2e2), color-stop(.5, #e5e2e2), color-stop(1, #f8f8f8));
-        background-image: -moz-linear-gradient(center bottom, #e5e2e2 0%, #e5e2e2 50%, #f8f8f8 100%);
+          display: block;
+          float: left;
+          margin-right: 10px;
+          background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e5e2e2), color-stop(.5, #e5e2e2), color-stop(1, #f8f8f8));
+          background-image: -moz-linear-gradient(center bottom, #e5e2e2 0%, #e5e2e2 50%, #f8f8f8 100%);
       }
 
-      #header ul li  {
-        border: 1px solid #808080;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
+      #header ul li {
+          border: 1px solid #808080;
+          -moz-border-radius: 5px;
+          -webkit-border-radius: 5px;
       }
 
-      #header li a.active { font-weight: bold; }
+      #header li a.active {
+          font-weight: bold;
+      }
 
       #header ul li.right {
-        float: right;
+          float: right;
       }
 
       #header {
-        padding-bottom: 20px;
-        border-bottom: 1px solid #AAA;
+          padding-bottom: 20px;
+          border-bottom: 1px solid #AAA;
       }
 
       #header ul li a {
-        display: block;
-        text-indent: 25px;
-        height: 20px;
-        font-size: 12px;
-        line-height: 20px;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        padding: 5px 10px 5px 10px;
-        border: 1px solid #FFF;
+          display: block;
+          text-indent: 25px;
+          height: 20px;
+          font-size: 12px;
+          line-height: 20px;
+          -moz-border-radius: 5px;
+          -webkit-border-radius: 5px;
+          padding: 5px 10px 5px 10px;
+          border: 1px solid #FFF;
       }
 
       #header ul li:hover {
-        background-image: -webkit-gradient(linear,left bottom,left top, color-stop(0, #e5e2e2), color-stop(.5, #e5e2e2), color-stop(1, #e5e2e2));
-        background-image: -moz-linear-gradient(center bottom, #e5e2e2 0%, #e5e2e2 50%, #e5e2e2 100%);
+          background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e5e2e2), color-stop(.5, #e5e2e2), color-stop(1, #e5e2e2));
+          background-image: -moz-linear-gradient(center bottom, #e5e2e2 0%, #e5e2e2 50%, #e5e2e2 100%);
       }
 
       #print a {
-        background: transparent url('../../images/callshop/11_printer.png') no-repeat 10px center;
+          background: transparent url('../../images/callshop/11_printer.png') no-repeat 10px center;
       }
 
       #close a {
-        background: transparent url('../../images/callshop/12_cross.png') no-repeat 10px center;
+          background: transparent url('../../images/callshop/12_cross.png') no-repeat 10px center;
       }
 
-      table thead td { font-weight: bolder; }
-      table { width: 100%; border-left: 1px solid #AAA; border-bottom: 1px solid #AAA; }
-      table td { border-top: 1px solid #AAA; border-right: 1px solid #AAA; padding: 5px; }
-      table tfoot { font-weight: bolder }
-    </style>
+      table thead td {
+          font-weight: bolder;
+      }
 
-    <%= javascript_include_tag "jquery-1.4.2.min.js" %>
-    <script type="text/javascript">
-      $(document).ready(function(){
+      table {
+          width: 100%;
+          border-left: 1px solid #AAA;
+          border-bottom: 1px solid #AAA;
+      }
 
-        $("#print").click(function(ev) {
-          ev.preventDefault();
-          window.print();
-        });
+      table td {
+          border-top: 1px solid #AAA;
+          border-right: 1px solid #AAA;
+          padding: 5px;
+      }
 
-        $("#close").click(function(ev) {
-          ev.preventDefault();
-          window.close();
-        });
+      table tfoot {
+          font-weight: bolder
+      }
+  </style>
+
+  <%= javascript_include_tag "jquery-1.4.2.min.js" %>
+  <script type="text/javascript">
+      $(document).ready(function () {
+
+          $("#print").click(function (ev) {
+              ev.preventDefault();
+              window.print();
+          });
+
+          $("#close").click(function (ev) {
+              ev.preventDefault();
+              window.close();
+          });
 
       });
-    </script>
+  </script>
 
-  </head>
-  <body>
+</head>
+<body>
 
-    <div id="header" class="container_24 clearfix">
-      <ul class="grid_11 suffix_10">
-        <%= tab_for(_("Print"), { :action => "show", :id => @cshop.id }, { :id => "print" }) %>
-        <%= tab_for(_("Close"), { :action => "invoices", :id => @cshop.id }, { :id => "close" }) %>
-      </ul>
-    </div>
+<div id="header" class="container_24 clearfix">
+  <ul class="grid_11 suffix_10">
+    <%= tab_for(_("Print"), {:action => "show", :id => @cshop.id}, {:id => "print"}) %>
+    <%= tab_for(_("Close"), {:action => "invoices", :id => @cshop.id}, {:id => "close"}) %>
+  </ul>
+</div>
 
-    <h1><%= _('Invoice') %></h1>
-    <h2><%= @cshop.name %></h2>
+<h1><%= _('Invoice') %></h1>
 
-    <p>
-      <%= simple_format(@cshop.description) %>
-    </p>
-    <p>
-      <strong><%= _('Period') %>: <%= nice_date_time(@invoice.created_at) %> - <%= nice_date_time(@invoice.paid_at || @invoice.updated_at) %></strong>
-    </p>
+<h2><%= @cshop.name %></h2>
 
-    <table id="calls" cellspacing="0" cellpadding="0">
-      <thead>
-        <tr>
-          <td><%= _('Call_Start_Time') %></td>
-          <td><%= _('Dialed_number') %></td>
-          <td><%= _('Price_per_min') %></td>
-          <td><%= _('Call_time') %></td>
-          <td><%= _('Call_price') %></td>
-        </tr>
-      </thead>
-      <tbody>
-        <% for call in @invoice.calls(nice_date_time(@invoice.paid_at || @invoice.updated_at)) %>
-          <tr>
-            <td><%= nice_date_time(call.calldate) %></td>
-            <td><%= call.dst %></td>
-            <td><%= curr_price(call.user_rate) %></td>
-            <td><%= seconds_to_time(call.user_billsec) %></td>
-            <td><%= format_money(curr_price(call.user_price)) %> <%= @currency %></td>
-          </tr>
-        <% end %>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td style="text-align: right; padding-right: 10px;" colspan="3"><%= _('Total') %></td>
-          <td>
-            <%= seconds_to_time(@invoice.call_duration) %>
-          </td>
-          <td><%= format_money(@invoice.price_with_tax) %></td>
-        </tr>
-      </tfoot>
-      <%if @invoice.tax%>
-        <% tax = @invoice.tax
-        taxes = tax.applied_tax_list(@invoice.call_price)%>
-        <%taxes.each { |tax_hash| %>
-          <%if tax.get_tax_count > 1%>
-            <tfoot>
+<p>
+  <%= simple_format(@cshop.description) %>
+</p>
+
+<p>
+  <strong><%= _('Period') %>: <%= nice_date_time(@invoice.created_at) %>
+    - <%= nice_date_time(@invoice.paid_at || @invoice.updated_at) %></strong>
+</p>
+
+<table id="calls" cellspacing="0" cellpadding="0">
+  <thead>
+  <tr>
+    <td><%= _('Call_Start_Time') %></td>
+    <td><%= _('Dialed_number') %></td>
+    <td><%= _('Price_per_min') %></td>
+    <td><%= _('Call_time') %></td>
+    <td><%= _('Call_price') %></td>
+  </tr>
+  </thead>
+  <tbody>
+  <% for call in @invoice.calls(nice_date_time(@invoice.paid_at || @invoice.updated_at)) %>
+      <tr>
+        <td><%= nice_date_time(call.calldate) %></td>
+        <td><%= call.dst %></td>
+        <td><%= curr_price(call.user_rate) %></td>
+        <td><%= seconds_to_time(call.user_billsec) %></td>
+        <td><%= format_money(curr_price(call.user_price)) %> <%= @currency %></td>
+      </tr>
+  <% end %>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td style="text-align: right; padding-right: 10px;" colspan="3"><%= _('Total') %></td>
+    <td>
+      <%= seconds_to_time(@invoice.call_duration) %>
+    </td>
+    <td><%= format_money(@invoice.price_with_tax) %></td>
+  </tr>
+  </tfoot>
+  <% if @invoice.tax %>
+      <% tax = @invoice.tax
+         taxes = tax.applied_tax_list(@invoice.call_price) %>
+      <% taxes.each { |tax_hash| %>
+          <% if tax.get_tax_count > 1 %>
+              <tfoot>
               <tr>
                 <td style="text-align: right; padding-right: 10px;" colspan="4"><%= tax_hash[:name].to_s + "(" + tax_hash[:value].to_s + "%)" %></td>
                 <td><%= sprintf("%.2f", tax_hash[:tax].to_f) %></td>
               </tr>
-            </tfoot>
-          <%end%>
-        <%}%>
-      <%end%>
-    </table>
-  </body>
+              </tfoot>
+          <% end %>
+      <% } %>
+  <% end %>
+</table>
+</body>
 </html>

@@ -10,19 +10,19 @@
     <th></th>
   </tr>
   <% @lcrs.each_with_index { |lcr, i| %>
-    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <tr class="row<%= (i % 2 + 1).to_s %>">
 
-      <% for column in SmsLcr.content_columns %>
-        <td id="<%= column.name %>_<%=lcr.id%>" align="left"><%= h(lcr.send(column.name)) %></td>
-      <% end %>
-      <td id="providers_<%= lcr.id %>" align="center"><%= link_to b_providers + _('Providers'), {:action => 'lcr_providers', :id => lcr.id}, :id =>"providers_link_"+lcr.id.to_s  %> <%= "(" + lcr.sms_providers.size.to_s + ")" if lcr.sms_providers %><%= "(0)" if not lcr.sms_providers%></td>
-      <td id="details_<%= lcr.id %>" align="center"><%= link_to b_details, {:action => 'lcr_details', :id => lcr.id}, :id =>"details_link_"+lcr.id.to_s  %>
-      <td id="edit_<%= lcr.id %>" align="center"><%= link_to b_edit, {:action => 'lcr_edit', :id => lcr.id}, :id =>"edit_link_"+lcr.id.to_s  %></td>
-      <td id="delete_<%= lcr.id %>" align="center"><%= link_to b_delete, { :action => 'lcr_destroy', :id => lcr.id }, :confirm => _('Are_you_sure'), :method => :post, :id => "delete_link_"+lcr.id.to_s %></td>
-    </tr>
+        <% for column in SmsLcr.content_columns %>
+            <td id="<%= column.name %>_<%= lcr.id %>" align="left"><%= h(lcr.send(column.name)) %></td>
+        <% end %>
+        <td id="providers_<%= lcr.id %>" align="center"><%= link_to b_providers + _('Providers'), {:action => 'lcr_providers', :id => lcr.id}, :id => "providers_link_"+lcr.id.to_s %> <%= "(" + lcr.sms_providers.size.to_s + ")" if lcr.sms_providers %><%= "(0)" if not lcr.sms_providers %></td>
+        <td id="details_<%= lcr.id %>" align="center"><%= link_to b_details, {:action => 'lcr_details', :id => lcr.id}, :id => "details_link_"+lcr.id.to_s %>
+        <td id="edit_<%= lcr.id %>" align="center"><%= link_to b_edit, {:action => 'lcr_edit', :id => lcr.id}, :id => "edit_link_"+lcr.id.to_s %></td>
+        <td id="delete_<%= lcr.id %>" align="center"><%= link_to b_delete, {:action => 'lcr_destroy', :id => lcr.id}, :confirm => _('Are_you_sure'), :method => :post, :id => "delete_link_"+lcr.id.to_s %></td>
+      </tr>
   <% } %>
 </table>
 
-<br />
+<br/>
 
-<%= link_to b_add +  _('LCR_new'), :action => 'lcr_new' %>
+<%= link_to b_add + _('LCR_new'), :action => 'lcr_new' %>

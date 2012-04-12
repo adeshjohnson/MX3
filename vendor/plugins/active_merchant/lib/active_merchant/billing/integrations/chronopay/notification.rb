@@ -23,14 +23,14 @@ module ActiveMerchant #:nodoc:
           # sends.  See Paypal::Notification#status for more details
           def status
             case params['transaction_type']
-            when 'onetime'
-              'Completed'
-            when 'refund'
-              'Refunded'
-            when 'chargeback'
-              'Reversed'
-            else
-              'Failed'
+              when 'onetime'
+                'Completed'
+              when 'refund'
+                'Refunded'
+              when 'chargeback'
+                'Reversed'
+              else
+                'Failed'
             end
           end
 
@@ -45,7 +45,7 @@ module ActiveMerchant #:nodoc:
           end
 
           # Unique ID of Merchant’s web-site
-          def site_id 
+          def site_id
             params['site_id']
           end
 
@@ -64,7 +64,7 @@ module ActiveMerchant #:nodoc:
           end
 
           # Date of transaction in MM/DD/YYYY format
-          def date 
+          def date
             params['date']
           end
 

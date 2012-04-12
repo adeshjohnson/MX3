@@ -48,7 +48,7 @@ class CcInvoice < ActiveRecord::Base
   def CcInvoice.get_next_number(owner_id)
     start = Confline.get_value("Calling_Card_Invoice_Number_Start", owner_id)
     length = Confline.get_value("Calling_Card_Invoice_Number_Length", owner_id).to_i
-    invoice = CcInvoice.find(:first,:select => "number", :conditions => "owner_id = #{owner_id} AND number REGEXP '#{start.to_i}[[:digit:]]{#{length.to_i}}'", :order => "number DESC")
+    invoice = CcInvoice.find(:first, :select => "number", :conditions => "owner_id = #{owner_id} AND number REGEXP '#{start.to_i}[[:digit:]]{#{length.to_i}}'", :order => "number DESC")
     if invoice
       num = invoice.number.gsub(start, "").to_i+1
     else

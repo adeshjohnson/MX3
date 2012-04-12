@@ -1,79 +1,79 @@
-
 <% if admin? %>
-  <%= form_tag :action => 'let_resellers_use_all_common_use_providers' do %>
-    <table width="100%">
-      <tr><td align="left" ><%= submit_tag _("Let resellers use all common use providers "), :confirm => _('Are_you_sure'), :method => :post, :disable_with=>_('Processing..')%></td>
-      </tr>
-    </table>
-    <br/>
-  <% end %>
+    <%= form_tag :action => 'let_resellers_use_all_common_use_providers' do %>
+        <table width="100%">
+          <tr>
+            <td align="left"><%= submit_tag _("Let resellers use all common use providers "), :confirm => _('Are_you_sure'), :method => :post, :disable_with => _('Processing..') %></td>
+          </tr>
+        </table>
+        <br/>
+    <% end %>
 <% end %>
-    
-<%= page_select_header(@options[:page], @total_pages , {:s_hidden=>@options[:s_hidden]}, @options) %>
+
+<%= page_select_header(@options[:page], @total_pages, {:s_hidden => @options[:s_hidden]}, @options) %>
 
 <table width="100%" class="maintable">
   <tr>
-    <th align="left"><%= nice_list_order('nice_user',_('Reseller'), @options, {:s_hidden=>@options[:s_hidden]})%></th>
-    <th align="left"><%= nice_list_order('provider_name' ,_('Provider'), @options, {:s_hidden=>@options[:s_hidden]})%></th>
-    <th align="left"><%= nice_list_order('tariff_name',  _('Tariff'), @options, {:s_hidden=>@options[:s_hidden]}) %></th>
+    <th align="left"><%= nice_list_order('nice_user', _('Reseller'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
+    <th align="left"><%= nice_list_order('provider_name', _('Provider'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
+    <th align="left"><%= nice_list_order('tariff_name', _('Tariff'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
     <th></th>
     <th></th>
   </tr>
 
-  <% @data.each_with_index{|data,i| %>
-    <tr class="row<%= (i % 2 + 1).to_s %>">
-      <td align="left" id="reseller_<%=data["id"]%>">
-        <%=  data["nice_user"]%>
-      </td>
-      <td align="left" id="provider_<%=data["id"]%>">
-        <%=  data["provider_name"]  %>
-      </td>
-      <td align="left" id="tariff_<%=data["id"]%>">
-        <%= data["tariff_name"] %>
-      </td>
-      <td align="center">
-        <%= link_to b_edit, { :action => :edit, :id => data["id"] }, :id=>"edit_#{data["id"]}", :method => :post %>
-      </td>
-      <td align="center">
-        <%= link_to b_delete, { :action => :destroy, :id => data["id"] }, :id=>"delete_#{data["id"]}",:confirm => _('Are_you_sure'), :method => :post %>
-      </td>
+  <% @data.each_with_index { |data, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td align="left" id="reseller_<%= data["id"] %>">
+          <%= data["nice_user"] %>
+        </td>
+        <td align="left" id="provider_<%= data["id"] %>">
+          <%= data["provider_name"] %>
+        </td>
+        <td align="left" id="tariff_<%= data["id"] %>">
+          <%= data["tariff_name"] %>
+        </td>
+        <td align="center">
+          <%= link_to b_edit, {:action => :edit, :id => data["id"]}, :id => "edit_#{data["id"]}", :method => :post %>
+        </td>
+        <td align="center">
+          <%= link_to b_delete, {:action => :destroy, :id => data["id"]}, :id => "delete_#{data["id"]}", :confirm => _('Are_you_sure'), :method => :post %>
+        </td>
 
-    </tr>
+      </tr>
   <% } %>
 
 </table>
 
-<br />
+<br/>
 
 <%= form_tag(:action => :create) do %>
-  <div class="nb"><%= b_add + _('Add') %>:
-    <select name="select_reseller"  >
-      <option value="0"><%= _('Select_reseller') %>
-        <% for reseller in @resellers %>
-        <option value="<%= reseller.id %>"> <%= nice_user(reseller) %> </option>
-      <% end %>
-      </option>
-    </select>
+    <div class="nb"><%= b_add + _('Add') %>:
+      <select name="select_reseller">
+        <option value="0"><%= _('Select_reseller') %>
+          <% for reseller in @resellers %>
+            <option value="<%= reseller.id %>"> <%= nice_user(reseller) %> </option>
+        <% end %>
+        </option>
+      </select>
 
-    <select name="select_provider"  >
-      <option value="0"><%= _('Select_provider') %>
-        <% for provider in @common_use_providers %>
-        <option value="<%= provider.id %>"> <%= h( provider.name + " " + provider.tech.to_s+"/"+provider.server_ip+":"+provider.port.to_s)%></option>
-      <% end %>
-      </option>
+      <select name="select_provider">
+        <option value="0"><%= _('Select_provider') %>
+          <% for provider in @common_use_providers %>
+            <option value="<%= provider.id %>"> <%= h(provider.name + " " + provider.tech.to_s+"/"+provider.server_ip+":"+provider.port.to_s) %></option>
+        <% end %>
+        </option>
 
-    </select>
-    <select name="select_tariff"  >
-      <option value="0"><%= _('Select_tariff') %>
-        <% for tariff in @tariffs %>
-        <option value="<%= tariff.id %>">  <%= _('Retail') + " - " if tariff.purpose == "user" %><%= _('Wholesale') + " - " if tariff.purpose == "user_wholesale" %><%= tariff.name %> </option>
-      <% end %>
-      </option>
+      </select>
+      <select name="select_tariff">
+        <option value="0"><%= _('Select_tariff') %>
+          <% for tariff in @tariffs %>
+            <option value="<%= tariff.id %>">  <%= _('Retail') + " - " if tariff.purpose == "user" %><%= _('Wholesale') + " - " if tariff.purpose == "user_wholesale" %><%= tariff.name %> </option>
+        <% end %>
+        </option>
 
-    </select>
+      </select>
 
-    <%= submit_tag _('Add') , :disable_with=>_('Processing..') %>
+      <%= submit_tag _('Add'), :disable_with => _('Processing..') %>
 
-  </div>
+    </div>
 <% end %>
-<br />
+<br/>

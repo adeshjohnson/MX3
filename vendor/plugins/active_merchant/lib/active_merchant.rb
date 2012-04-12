@@ -21,7 +21,7 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
-                    
+
 $:.unshift File.dirname(__FILE__)
 
 # Include rails' active support for all the core extensions we love
@@ -61,6 +61,6 @@ require 'active_merchant/billing/gateways'
 
 module ActiveMerchant #:nodoc:
   module Billing #:nodoc:    
-    autoload :Integrations, 'active_merchant/billing/integrations'    
+    autoload :Integrations, 'active_merchant/billing/integrations'
   end
 end

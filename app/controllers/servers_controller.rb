@@ -3,16 +3,16 @@ class ServersController < ApplicationController
 
   layout "callc"
 
-  before_filter :check_post_method, :only=>[:destroy, :create, :update,  :server_add, :server_update, :delete]
+  before_filter :check_post_method, :only => [:destroy, :create, :update, :server_add, :server_update, :delete]
   before_filter :check_localization
   before_filter :authorize
-  before_filter :find_server, :only=>[:server_providers, :add_provider_to_server, :show, :edit, :destroy, :server_change_status, :server_change_gateway_status, :server_test, :server_update ]
-  before_filter :check_server_ip , :only=>[:server_update]
+  before_filter :find_server, :only => [:server_providers, :add_provider_to_server, :show, :edit, :destroy, :server_change_status, :server_change_gateway_status, :server_test, :server_update]
+  before_filter :check_server_ip, :only => [:server_update]
 
   def index
     if session[:usertype] != "admin"
       dont_be_so_smart
-      redirect_to :controller=>"callc", :action=>"main" and return false
+      redirect_to :controller => "callc", :action => "main" and return false
     else
       list
       render :action => 'list'
@@ -24,7 +24,7 @@ class ServersController < ApplicationController
     @page_title = _('Asterisk_Servers')
     @page_icon = 'server.png'
     @help_link = "http://wiki.kolmisoft.com/index.php/Multi_Server_support"
-    @servers =  Server.find(:all, :order=>"id")
+    @servers = Server.find(:all, :order => "id")
   end
 
   def server_providers
@@ -32,11 +32,11 @@ class ServersController < ApplicationController
     @page_icon = 'provider.png'
     @help_link = "http://wiki.kolmisoft.com/index.php/Multi_Server_support"
 
-    @providers = Provider.find(:all, :conditions=>['hidden=?',0])
-    serv_prov = Serverprovider.find(:all, :conditions=>["server_id=?", @server.server_id])
+    @providers = Provider.find(:all, :conditions => ['hidden=?', 0])
+    serv_prov = Serverprovider.find(:all, :conditions => ["server_id=?", @server.server_id])
     @new_prv = []
     for prv in @providers
-      if not Serverprovider.find(:first, :conditions=>["server_id=? AND provider_id=?", @server.server_id, prv.id])
+      if not Serverprovider.find(:first, :conditions => ["server_id=? AND provider_id=?", @server.server_id, prv.id])
         @new_prv << prv
       end
       @providers = @new_prv
@@ -50,7 +50,7 @@ class ServersController < ApplicationController
       flash[:notice] = _('Provider_not_found')
       redirect_to :action => 'list' and return false
     end
-    serv_prov = Serverprovider.find(:first, :conditions=>["server_id=? AND provider_id=?", @server.server_id, @provider.id])
+    serv_prov = Serverprovider.find(:first, :conditions => ["server_id=? AND provider_id=?", @server.server_id, @provider.id])
 
     if not serv_prov
       serverprovider=Serverprovider.new
@@ -59,15 +59,14 @@ class ServersController < ApplicationController
       serverprovider.save
 
       if @provider.register == 1
-        @provider.servers.each{|server| server.reload }
+        @provider.servers.each { |server| server.reload }
       end
       flash[:status] = _('Provider_added')
     else
       flash[:notice] = _('Provider_allready_exists')
     end
-    redirect_to :action => 'server_providers' , :id=>@server.id and return false
+    redirect_to :action => 'server_providers', :id => @server.id and return false
   end
-
 
 
   def show
@@ -136,7 +135,7 @@ class ServersController < ApplicationController
     else
       flash_errors_for(_('Server_not_created'), server)
     end
-   
+
     redirect_to :action => 'list'
   end
 
@@ -145,7 +144,7 @@ class ServersController < ApplicationController
     @servers = Server.find(:all)
     server_old = @server.dup
 
-    @server_providers = Serverprovider.find(:all, :conditions=>["server_id=?", @server.server_id])
+    @server_providers = Serverprovider.find(:all, :conditions => ["server_id=?", @server.server_id])
 
     @server.hostname = params[:server_hostname].strip
     @server.server_ip = params[:server_ip].strip
@@ -174,7 +173,7 @@ class ServersController < ApplicationController
           max = serv.server_id.to_i
         end
       end
-      
+
       @server.server_id = max + 1 if @server.server_id.to_i == 0
 
       for serv in @servers
@@ -183,17 +182,17 @@ class ServersController < ApplicationController
         end
       end
 
-      for ser_prov in  @server_providers
-        ser_prov.server_id =  @server.server_id
+      for ser_prov in @server_providers
+        ser_prov.server_id = @server.server_id
         ser_prov.save
       end
     end
 
     @server.maxcalllimit = (params[:server_maxcalllimit].to_i <= 2 ? 2 : params[:server_maxcalllimit])
     if @server.server_id != server_old.server_id
-      Device.update_all(["server_id = ?",@server.server_id], ["server_id = ? AND username NOT LIKE 'mor_server_%'", server_old.server_id])
+      Device.update_all(["server_id = ?", @server.server_id], ["server_id = ? AND username NOT LIKE 'mor_server_%'", server_old.server_id])
     end
-    
+
     if @server.save
       #update device
       dev = @server.server_device
@@ -218,10 +217,9 @@ class ServersController < ApplicationController
     else
       flash[:notice] = _('Server_not_updated')
     end
-    
+
     redirect_to :action => 'list'
   end
-
 
 
   def delete
@@ -236,13 +234,13 @@ class ServersController < ApplicationController
       redirect_to :action => 'list' and return false
     end
 
-    serverprovider=Serverprovider.find(:all, :conditions=>["provider_id=? and server_id=?",provider.id,server.server_id])
+    serverprovider=Serverprovider.find(:all, :conditions => ["provider_id=? and server_id=?", provider.id, server.server_id])
 
     for providers in serverprovider
       providers.destroy
     end
     flash[:status] = _('Providers_deleted')
-    redirect_to :action => 'server_providers', :id=>server.id
+    redirect_to :action => 'server_providers', :id => server.id
 
   end
 
@@ -250,7 +248,7 @@ class ServersController < ApplicationController
     if @server.destroy
       dev = Device.find(:first, :conditions => "name = 'mor_server_#{@server.server_id.to_s}'")
       dev.destroy if dev
-      serverprovider=Serverprovider.find(:all, :conditions=>["server_id=?",@server.server_id])
+      serverprovider=Serverprovider.find(:all, :conditions => ["server_id=?", @server.server_id])
       for providers in serverprovider
         providers.destroy
       end
@@ -260,7 +258,6 @@ class ServersController < ApplicationController
     end
     redirect_to :action => 'list'
   end
-
 
 
   def server_change_status
@@ -309,9 +306,9 @@ class ServersController < ApplicationController
     end
     render(:layout => "layouts/mor_min")
   end
-  
+
   private
-  
+
   def find_server
     @server = Server.find(:first, :conditions => ["id = ?", params[:id]])
     unless @server
@@ -321,7 +318,7 @@ class ServersController < ApplicationController
   end
 
   def check_server_ip
-    if params[:server_id] and Server.find(:first, :conditions=>["id != ? AND server_id = ?", params[:id],params[:server_id]])
+    if params[:server_id] and Server.find(:first, :conditions => ["id != ? AND server_id = ?", params[:id], params[:server_id]])
       flash[:notice] = _('Server_ID_collision')
       redirect_to :action => :list and return false
     end

@@ -1,84 +1,86 @@
 <table width="100%">
   <tr>
-    <%if @options[:s_hidden].to_i == 0 %>
-      <td nowrap><%= link_to((b_add + _('New_provider')), :action => 'new') %></td>
-      <td nowrap><% link_to((b_add + _('New_H323_Provider')), :action => 'provider_new') %></td>
-    <%end%>
+    <% if @options[:s_hidden].to_i == 0 %>
+        <td nowrap><%= link_to((b_add + _('New_provider')), :action => 'new') %></td>
+        <td nowrap>
+          <% link_to((b_add + _('New_H323_Provider')), :action => 'provider_new') %></td>
+    <% end %>
     <td align="right" width="100%">
       <% if not @providers.empty? %>
-        <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+          <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
       <% end %>
     </td>
   </tr>
 </table>
 <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
-  <%= form_tag :action => 'list' , :s_hidden=>@options[:s_hidden] do %>
-    <br />
-    <table width="100%" class="simple">
-      <tr>
-        <td>
-          <%= _('Name') %>: <%= text_field_tag 's_name', @options[:s_name], "class" => "input", :size => "15", :maxlength => "30"  %>
+  <%= form_tag :action => 'list', :s_hidden => @options[:s_hidden] do %>
+      <br/>
+      <table width="100%" class="simple">
+        <tr>
+          <td>
+            <%= _('Name') %>
+            : <%= text_field_tag 's_name', @options[:s_name], "class" => "input", :size => "15", :maxlength => "30" %>
 
-          <%= _('Type') %>:
-          <select name="s_tech" >
-            <option value="" selected> <%= _('All') %></option>
-            <% for ps in @provtypes%>
-              <option value=<%= ps["tech"] %> <%= "selected" if ps["tech"] == @options[:s_tech] %>> <%= ps["tech"] %> </option>
+            <%= _('Type') %>:
+            <select name="s_tech">
+              <option value="" selected> <%= _('All') %></option>
+              <% for ps in @provtypes %>
+                  <option value=<%= ps["tech"] %> <%= "selected" if ps["tech"] == @options[:s_tech] %>> <%= ps["tech"] %> </option>
+              <% end %>
+            </select>
+
+
+            <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
+          </td>
+          <td align="right">
+            <% if @search == 1 %>
+                <%= link_to b_cross + _('Clear_search'), {:action => 'list', :s_hidden => @options[:s_hidden], :clear => 1}, {:id => "clear_search"} %>
             <% end %>
-          </select>
-
-
-          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
-        </td>
-        <td align="right">
-          <%if @search == 1 %>
-            <%= link_to b_cross + _('Clear_search'), {:action => 'list', :s_hidden=>@options[:s_hidden], :clear=>1}, {:id => "clear_search"}%>
-          <%end%>
-        </td>
-      </tr>
-    </table>
+          </td>
+        </tr>
+      </table>
 
   <% end %>
 </div>
-<br />
-<%= page_select_header(@options[:page], @total_pages , {:s_hidden=>@options[:s_hidden]}, @options) %>
+<br/>
+<%= page_select_header(@options[:page], @total_pages, {:s_hidden => @options[:s_hidden]}, @options) %>
 
 <table width="100%" class="maintable">
   <tr>
-    <th align="left"><%=nice_list_order('id',_('ID'), @options, {:s_hidden=>@options[:s_hidden]})%></th>
-    <th align="left"><%=nice_list_order('name',_('Provider'), @options, {:s_hidden=>@options[:s_hidden]})%></th>
-    <th align="left"><%=nice_list_order('tech', _('Tech'), @options, {:s_hidden=>@options[:s_hidden]})%></th>
-    <th align="left"><%=nice_list_order('channel', _('Channel'), @options, {:s_hidden=>@options[:s_hidden]})%></th>
-    <th align="left"><%=nice_list_order('login', _('Login'), @options, {:s_hidden=>@options[:s_hidden]})%></th>
-    <th align="left"><%=nice_list_order('password', _('Password'), @options, {:s_hidden=>@options[:s_hidden]})%></th>
-    <th align="left"><%=nice_list_order('server_ip', _('Hostname') + "/" + _('Server_IP'), @options, {:s_hidden=>@options[:s_hidden]})%></th>
-    <th align="left"><%=nice_list_order('tariff', _('Tariff'), @options, {:s_hidden=>@options[:s_hidden]})%></th>
-    <th align="center"><%=_('Test')%></th>
-    <th align="center"><%=_('Rules')%></th>
-    <th align="center"><%=_('Calls')  %></th>
+    <th align="left"><%= nice_list_order('id', _('ID'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
+    <th align="left"><%= nice_list_order('name', _('Provider'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
+    <th align="left"><%= nice_list_order('tech', _('Tech'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
+    <th align="left"><%= nice_list_order('channel', _('Channel'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
+    <th align="left"><%= nice_list_order('login', _('Login'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
+    <th align="left"><%= nice_list_order('password', _('Password'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
+    <th align="left"><%= nice_list_order('server_ip', _('Hostname') + "/" + _('Server_IP'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
+    <th align="left"><%= nice_list_order('tariff', _('Tariff'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
+    <th align="center"><%= _('Test') %></th>
+    <th align="center"><%= _('Rules') %></th>
+    <th align="center"><%= _('Calls') %></th>
     <th></th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-  <% @providers.each_with_index{ |prov, i| %>
-    <tr class="row<%= (i % 2 + 1).to_s %>">
-      <td id="id_<%= prov.id %>" <%=@n_class%>><%= h(prov.id) %></td>
-      <td id="ani_<%= prov.id %>" <%=@n_class%>><%= b_provider_ani if prov.ani == 1%><%= prov.name %></td>
-      <td id="tech_<%= prov.id %>" <%=@n_class%>><%= print_tech prov.tech %></td>
-      <td id="channel_<%= prov.id %>" <%=@n_class%>><%= h(prov.channel) %></td>
-      <td id="login_<%= prov.id %>" <%=@n_class%>><%= h(prov.login) if prov.tech == "SIP" or prov.tech == "IAX2"  or prov.tech == "Skype" %></td>
-      <td id="password_<%= prov.id %>" <%=@n_class%>><%= h(prov.password) if prov.tech == "SIP" or prov.tech == "IAX2"  or prov.tech == "Skype"%></td>
-      <td id="server_ip_<%= prov.id %>" <%=@n_class%>>
-        <% if prov.tech != "Skype"%>
-          <%= h(prov.server_ip)   %>
-        <% else %>
-          <%= _('Skype_Network') %>
-        <% end %>
-      </td>
-      <td id="tariff_name_<%= prov.id %>" <%=@n_class%>><%= h(prov.tariff.name) if prov.tariff %></td>
-      <%= render :partial => "/layouts/provider_buttons", :locals => {:provider => prov,  :provider_used_by_resellers => @provider_used_by_resellers}%>
-    </tr>
+  <% @providers.each_with_index { |prov, i| %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td id="id_<%= prov.id %>" <%= @n_class %>><%= h(prov.id) %></td>
+        <td id="ani_<%= prov.id %>" <%= @n_class %>><%= b_provider_ani if prov.ani == 1 %><%= prov.name %></td>
+        <td id="tech_<%= prov.id %>" <%= @n_class %>><%= print_tech prov.tech %></td>
+        <td id="channel_<%= prov.id %>" <%= @n_class %>><%= h(prov.channel) %></td>
+        <td id="login_<%= prov.id %>" <%= @n_class %>><%= h(prov.login) if prov.tech == "SIP" or prov.tech == "IAX2" or prov.tech == "Skype" %></td>
+        <td id="password_<%= prov.id %>" <%= @n_class %>><%= h(prov.password) if prov.tech == "SIP" or prov.tech == "IAX2" or prov.tech == "Skype" %></td>
+        <td id="server_ip_<%= prov.id %>" <%= @n_class %>>
+          <% if prov.tech != "Skype" %>
+              <%= h(prov.server_ip) %>
+          <% else %>
+              <%= _('Skype_Network') %>
+          <% end %>
+        </td>
+        <td id="tariff_name_<%= prov.id %>" <%= @n_class %>><%= h(prov.tariff.name) if prov.tariff %></td>
+        <%= render :partial => "/layouts/provider_buttons", :locals => {:provider => prov, :provider_used_by_resellers => @provider_used_by_resellers} %>
+      </tr>
   <% } %>
 </table>
 
@@ -86,49 +88,49 @@
 
 
 <% if @admin_providers and @admin_providers.size > 0 %>
-  <br/><br/><br/>
-  <div <%= tooltip(_('System_Providers'), _('System_Providers_Explanation')) %>><%= b_provider + _('System_Providers') %></div>
-  <br/>
+    <br/><br/><br/>
+    <div <%= tooltip(_('System_Providers'), _('System_Providers_Explanation')) %>><%= b_provider + _('System_Providers') %></div>
+    <br/>
 
-  <table width="100%" class="maintable">
-    <tr>
-      <!--<th align="left"><%=nice_list_order('id',_('ID'), @options, {:s_hidden=>@options[:s_hidden]})%></th>-->
-      <th align="left"><%=nice_list_order('name',_('Provider'), @options, {:s_hidden=>@options[:s_hidden]})%></th>
-      <!--<th align="left"><%=nice_list_order('tech', _('Tech'), @options, {:s_hidden=>@options[:s_hidden]})%></th>-->
-      <!--<th align="left"><%=nice_list_order('channel', _('Channel'), @options, {:s_hidden=>@options[:s_hidden]})%></th>-->
-      <!--<th align="left"><%=nice_list_order('login', _('Login'), @options, {:s_hidden=>@options[:s_hidden]})%></th>-->
-      <!--<th align="left"><%=nice_list_order('password', _('Password'), @options, {:s_hidden=>@options[:s_hidden]})%></th>-->
-      <!--<th align="left"><%=nice_list_order('server_ip', _('Hostname') + "/" + _('Server_IP'), @options, {:s_hidden=>@options[:s_hidden]})%></th>-->
-     <!--<th align="left"><%=nice_list_order('tariff', _('Tariff'), @options, {:s_hidden=>@options[:s_hidden]})%></th>-->
-      <th align="left"><%= _('Tariff')%></th>
-       <!--<th align="center"><%=_('Test')%></th>-->
-       <!--<th align="center"><%=_('Rules')%></th>-->
-      <th align="center"><%=_('Calls')  %></th>
+    <table width="100%" class="maintable">
+      <tr>
+        <!--<th align="left"><%= nice_list_order('id', _('ID'), @options, {:s_hidden => @options[:s_hidden]}) %></th>-->
+        <th align="left"><%= nice_list_order('name', _('Provider'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
+        <!--<th align="left"><%= nice_list_order('tech', _('Tech'), @options, {:s_hidden => @options[:s_hidden]}) %></th>-->
+        <!--<th align="left"><%= nice_list_order('channel', _('Channel'), @options, {:s_hidden => @options[:s_hidden]}) %></th>-->
+        <!--<th align="left"><%= nice_list_order('login', _('Login'), @options, {:s_hidden => @options[:s_hidden]}) %></th>-->
+        <!--<th align="left"><%= nice_list_order('password', _('Password'), @options, {:s_hidden => @options[:s_hidden]}) %></th>-->
+        <!--<th align="left"><%= nice_list_order('server_ip', _('Hostname') + "/" + _('Server_IP'), @options, {:s_hidden => @options[:s_hidden]}) %></th>-->
+        <!--<th align="left"><%= nice_list_order('tariff', _('Tariff'), @options, {:s_hidden => @options[:s_hidden]}) %></th>-->
+        <th align="left"><%= _('Tariff') %></th>
+        <!--<th align="center"><%= _('Test') %></th>-->
+        <!--<th align="center"><%= _('Rules') %></th>-->
+        <th align="center"><%= _('Calls') %></th>
 
-    </tr>
-    <% @admin_providers.each_with_index{ |prov, i| %>
-      <tr class="row<%= (i % 2 + 1).to_s %>">
-        <!--<td id="id_<%= prov.id %>" <%=@n_class%>><%= h(prov.id) %></td>-->
-        <td id="sys_ani_<%= prov.id %>" <%=@n_class%>><%= b_provider_ani if prov.ani == 1%><%= prov.name %></td>
-        <!--<td id="tech_<%= prov.id %>" <%=@n_class%>><%= print_tech prov.tech %></td>-->
-        <!--<td id="channel_<%= prov.id %>" <%=@n_class%>><%= h(prov.channel) %></td>-->
-        <!--<td id="login_<%= prov.id %>" <%=@n_class%>><%= h(prov.login) if prov.tech == "SIP" or prov.tech == "IAX2" %></td>-->
-        <!--<td id="password_<%= prov.id %>" <%=@n_class%>><%= h(prov.password) if prov.tech == "SIP" or prov.tech == "IAX2" %></td>-->
-        <!--<td id="server_ip_<%= prov.id %>" <%=@n_class%>><%= h(prov.server_ip) %></td>-->
-        <% tariff = CommonUseProvider.find(:first,:conditions =>" reseller_id = #{current_user.id} AND provider_id = #{prov.id}",:include=>[:tariff] ) %>
-        <td id="tariff_name_<%= prov.id %>" <%=@n_class%>>
-          <% if tariff and tariff.tariff %>
-            <% if tariff.tariff.purpose == 'user_wholesale' %>
-              <%=  link_to h(tariff.tariff.name),:controller => "tariffs", :action => 'rates_list', :id => tariff.tariff.id %>
-            <% else %>
-              <%=  link_to h(tariff.tariff.name),:controller => "tariffs", :action => 'user_rates_list', :id => tariff.tariff.id %>
-            <% end %>
-          <% end %>
-        </td>
-        <!--<%= render :partial => "/layouts/provider_buttons", :locals => {:provider => prov} %>-->
-        <td id="sys_calls_<%= prov.id %>" align="center" <%=@n_class%>> <%= link_to b_call, {:controller => "stats", :action => 'last_calls_stats', :s_provider => prov}, {:id => "calls_link_"+prov.id.to_s} %></td>
       </tr>
-    <% } %>
-  </table>
+      <% @admin_providers.each_with_index { |prov, i| %>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <!--<td id="id_<%= prov.id %>" <%= @n_class %>><%= h(prov.id) %></td>-->
+            <td id="sys_ani_<%= prov.id %>" <%= @n_class %>><%= b_provider_ani if prov.ani == 1 %><%= prov.name %></td>
+            <!--<td id="tech_<%= prov.id %>" <%= @n_class %>><%= print_tech prov.tech %></td>-->
+            <!--<td id="channel_<%= prov.id %>" <%= @n_class %>><%= h(prov.channel) %></td>-->
+            <!--<td id="login_<%= prov.id %>" <%= @n_class %>><%= h(prov.login) if prov.tech == "SIP" or prov.tech == "IAX2" %></td>-->
+            <!--<td id="password_<%= prov.id %>" <%= @n_class %>><%= h(prov.password) if prov.tech == "SIP" or prov.tech == "IAX2" %></td>-->
+            <!--<td id="server_ip_<%= prov.id %>" <%= @n_class %>><%= h(prov.server_ip) %></td>-->
+            <% tariff = CommonUseProvider.find(:first, :conditions => " reseller_id = #{current_user.id} AND provider_id = #{prov.id}", :include => [:tariff]) %>
+            <td id="tariff_name_<%= prov.id %>" <%= @n_class %>>
+              <% if tariff and tariff.tariff %>
+                  <% if tariff.tariff.purpose == 'user_wholesale' %>
+                      <%= link_to h(tariff.tariff.name), :controller => "tariffs", :action => 'rates_list', :id => tariff.tariff.id %>
+                  <% else %>
+                      <%= link_to h(tariff.tariff.name), :controller => "tariffs", :action => 'user_rates_list', :id => tariff.tariff.id %>
+                  <% end %>
+              <% end %>
+            </td>
+            <!--<%= render :partial => "/layouts/provider_buttons", :locals => {:provider => prov} %>-->
+            <td id="sys_calls_<%= prov.id %>" align="center" <%= @n_class %>> <%= link_to b_call, {:controller => "stats", :action => 'last_calls_stats', :s_provider => prov}, {:id => "calls_link_"+prov.id.to_s} %></td>
+          </tr>
+      <% } %>
+    </table>
 
 <% end %>

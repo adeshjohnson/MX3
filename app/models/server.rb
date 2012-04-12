@@ -9,14 +9,14 @@ class Server < ActiveRecord::Base
 
   before_destroy :check_if_no_devices_own_server
   before_save :check_server_device
-  
+
   def check_if_no_devices_own_server
-    if Device.count(:conditions => ["server_id = ?",  self.server_id]).to_i > 0
+    if Device.count(:conditions => ["server_id = ?", self.server_id]).to_i > 0
       errors.add(:server_id, _("Server_Has_Devices"))
       return false
     end
   end
-  
+
   def check_server_device
     unless self.server_device
       self.create_server_device
@@ -24,7 +24,7 @@ class Server < ActiveRecord::Base
   end
 
   def serverprovider
-    Serverprovider.find(:all, :conditions=>["provider_id=?", self.id])
+    Serverprovider.find(:all, :conditions => ["provider_id=?", self.id])
   end
 
   def providers
@@ -57,7 +57,7 @@ class Server < ActiveRecord::Base
         t = client.command("iax2 show peer " + device_username + " load")
         t = client.command("sip show user " + device_username + " load")
         t = client.command("iax2 show user " + device_username + " load")
-      end 
+      end
 
       client.stop
 
@@ -95,10 +95,10 @@ class Server < ActiveRecord::Base
       client.stop
     end
   end
-  
+
   def create_server_device
     dev = Device.new
-    dev.name = "mor_server_" +  server_id.to_s
+    dev.name = "mor_server_" + server_id.to_s
     dev.fromuser = dev.name
     dev.host = hostname
     dev.secret = "" #random_password(10)
@@ -116,7 +116,7 @@ class Server < ActiveRecord::Base
     dev.description = 'DO NOT EDIT'
     dev.save
   end
-  
+
   def server_device
     Device.find(:first, :conditions => "name = 'mor_server_#{server_id.to_s}'")
   end

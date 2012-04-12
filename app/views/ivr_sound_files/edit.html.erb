@@ -1,8 +1,8 @@
-<%= form_tag :action => 'update', :id=>@file.id do %>
-  <table class="maintable">
+<%= form_tag :action => 'update', :id => @file.id do %>
+    <table class="maintable">
       <tr>
         <th align="left"><b><%= _("Description") %></b></th>
-        <td><%= text_field_tag('description', @file.description , "class" => "input", :size => "35", :maxlength => "255" )%></td>            
+        <td><%= text_field_tag('description', @file.description, "class" => "input", :size => "35", :maxlength => "255") %></td>
       </tr>
       <tr>
         <th align="left"><b><%= _("File_name") %></b></th>
@@ -16,8 +16,8 @@
         <th align="left"><b><%= _("Created_At") %></b></th>
         <td><%= nice_date_time(@file.created_at) %></td>
       </tr>
-  </table>
-  <br />
-  <%= submit_tag _('Save_changes'), :disable_with=>_('Processing..')%>
-  <br />
+    </table>
+    <br/>
+    <%= submit_tag _('Save_changes'), :disable_with => _('Processing..') %>
+    <br/>
 <% end %>

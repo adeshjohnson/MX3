@@ -1,30 +1,30 @@
 <% if @step == 1 %>
-  <br />
-  <%= form_tag( {:action => 'import_user_data_dids', :step => "2"}, {:multipart => "true", :id => "files"}) do %>
-    <%= _('Upload') %>: <%= file_field_tag "file" %>
-    <br />
-    <%= _('Include_first_line')%>?<%= check_box_tag 'include', value = "1"%>
-    <br />
-    <br />
-    <%= submit_tag(_('Upload_file'), :disable_with=>_('Processing..'))%>
-  <% end %>
-  <br>
-  <%= _('Next_step') + ": " + _('Column_assignment')%>
+    <br/>
+    <%= form_tag({:action => 'import_user_data_dids', :step => "2"}, {:multipart => "true", :id => "files"}) do %>
+        <%= _('Upload') %>: <%= file_field_tag "file" %>
+        <br/>
+        <%= _('Include_first_line') %>?<%= check_box_tag 'include', value = "1" %>
+        <br/>
+        <br/>
+        <%= submit_tag(_('Upload_file'), :disable_with => _('Processing..')) %>
+    <% end %>
+    <br>
+    <%= _('Next_step') + ": " + _('Column_assignment') %>
 <% end %>
 
 <% if @step == 2 %>
-    <%= _('Column_assignment')%>
-    <br />
+    <%= _('Column_assignment') %>
+    <br/>
     <%= _('File_size') %>: <%= session[:file_size] %> <%= _('bytes') %><br>
     <br>
     <b><%= _('First_file_lines') %>:</b>
     <br>
     <br>
-    <% 
-        flines = []
-        tl = 0 %>
+    <%
+       flines = []
+       tl = 0 %>
     <% for line in session[:file].split(/\n|\r|\rn/) %>
-        <% flines << line if tl < 5%>
+        <% flines << line if tl < 5 %>
         <% tl += 1 %>
     <% end %>
     <% flines << "...." if tl > 5 %>
@@ -38,176 +38,176 @@
     <br>
     <br>
 
-  <%= form_tag :action => 'import_user_data_dids', :step => "3" do %>
-    <table class="maintable" width="70%">
-        <tr>
-          <th><%= _('Value') %></th>
-          <th><%= _('Select_from_CSV_file') %></th>
-        </tr>
-        <tr>
-          <td height="20" colspan="2">
-             <b><%= _('DIDs') %></b>
-           </td>
-        </tr> 
-        <tr class="row1">
-          <td>  <%= _('Temporary_User_ID') %> *</td>
-          <td>
-            <div class="nb" align="center">
-              <select name="temp_user_id" > 
-                <option value="-1">  </option>
-                <% i = 0 %>
-                <% for l in @fl %>
-                  <option value="<%= i %>" <%= "selected" if session[:imp_did_temp_user_id] == i %>> <%= clean_value l %> </option>
-                    <% i += 1 %>
-                  <% end %>
-              </select>
-            </div>
-          </td>        
-        </tr>
-        <tr>
-          <td>  <%= _('Temporary_Device_ID') %> *</td>
-          <td>
-            <div class="nb" align="center">
-              <select name="temp_device_id" > 
-                <option value="-1">  </option>
-                <% i = 0 %>
-                <% for l in @fl %>
-                  <option value="<%= i %>" <%= "selected" if session[:imp_did_device_id] == i %>> <%= clean_value l %> </option>
-                    <% i += 1 %>
-                  <% end %>
-              </select>
-            </div>
-          </td>        
-        </tr>
-        <tr class="row1">
-            <td>   <%= _('DID') %>  * </td>
+    <%= form_tag :action => 'import_user_data_dids', :step => "3" do %>
+        <table class="maintable" width="70%">
+          <tr>
+            <th><%= _('Value') %></th>
+            <th><%= _('Select_from_CSV_file') %></th>
+          </tr>
+          <tr>
+            <td height="20" colspan="2">
+              <b><%= _('DIDs') %></b>
+            </td>
+          </tr>
+          <tr class="row1">
+            <td>  <%= _('Temporary_User_ID') %> *</td>
             <td>
-                <div class="nb" align="center">
-                    <select name="did" > 
-                        <option value="-1">  </option>                
-                        <% i = 0 %>
-                        <% for l in @fl %>
-                            <option value="<%= i %>" <%= "selected" if session[:imp_did_did] == i %>> <%= clean_value l %> </option>
-                            <% i += 1 %>
-                        <% end %>
-                    </select>
-                </div>
-            </td>       
-        </tr> 
+              <div class="nb" align="center">
+                <select name="temp_user_id">
+                  <option value="-1"></option>
+                  <% i = 0 %>
+                  <% for l in @fl %>
+                      <option value="<%= i %>" <%= "selected" if session[:imp_did_temp_user_id] == i %>> <%= clean_value l %> </option>
+                      <% i += 1 %>
+                  <% end %>
+                </select>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>  <%= _('Temporary_Device_ID') %> *</td>
+            <td>
+              <div class="nb" align="center">
+                <select name="temp_device_id">
+                  <option value="-1"></option>
+                  <% i = 0 %>
+                  <% for l in @fl %>
+                      <option value="<%= i %>" <%= "selected" if session[:imp_did_device_id] == i %>> <%= clean_value l %> </option>
+                      <% i += 1 %>
+                  <% end %>
+                </select>
+              </div>
+            </td>
+          </tr>
+          <tr class="row1">
+            <td>   <%= _('DID') %>  *</td>
+            <td>
+              <div class="nb" align="center">
+                <select name="did">
+                  <option value="-1"></option>
+                  <% i = 0 %>
+                  <% for l in @fl %>
+                      <option value="<%= i %>" <%= "selected" if session[:imp_did_did] == i %>> <%= clean_value l %> </option>
+                      <% i += 1 %>
+                  <% end %>
+                </select>
+              </div>
+            </td>
+          </tr>
 
-            <tr>
-          <td height="20" colspan="2">
-            <b><%= _('Select_provider') %></b>
-          </td>
-        </tr>   
+          <tr>
+            <td height="20" colspan="2">
+              <b><%= _('Select_provider') %></b>
+            </td>
+          </tr>
 
-        <tr>
-          <td> <%= _('Provider') %>  * </td>
-          <td>
-            <div class="nb" align="center">
-              <select name="provider" > 
-                <option value="-1">  </option>                
-                <% i = 0 %>
-                <% for provider in @providers %>
-                  <option value="<%= provider.id %>" <%= "selected" if provider.id == session[:imp_did_provider] %>> <%= provider.name %> </option>
-                  <% i += 1 %>
-                <% end %>
-              </select>
-            </div>
-          </td>     
-        </tr>
-    </table>
-    <br />
-    <b>* - <%= _("These_fields_are_necessary_for_registration") %></b>
-    <br />
-    <br />
-  <%= submit_tag(  _('Assign_columns'), :disable_with=>_('Processing..')  )%>
-  <% end %>
-  <br />
-  <%= _('Next_step') + ": " + _('Column_confirmation')%>
-  <br />
-  <%= link_to b_back + _('Back') , :action => "import_user_data_dids", :step =>1 %>
+          <tr>
+            <td> <%= _('Provider') %>  *</td>
+            <td>
+              <div class="nb" align="center">
+                <select name="provider">
+                  <option value="-1"></option>
+                  <% i = 0 %>
+                  <% for provider in @providers %>
+                      <option value="<%= provider.id %>" <%= "selected" if provider.id == session[:imp_did_provider] %>> <%= provider.name %> </option>
+                      <% i += 1 %>
+                  <% end %>
+                </select>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br/>
+        <b>* - <%= _("These_fields_are_necessary_for_registration") %></b>
+        <br/>
+        <br/>
+        <%= submit_tag(_('Assign_columns'), :disable_with => _('Processing..')) %>
+    <% end %>
+    <br/>
+    <%= _('Next_step') + ": " + _('Column_confirmation') %>
+    <br/>
+    <%= link_to b_back + _('Back'), :action => "import_user_data_dids", :step => 1 %>
 <% end %>
 
 <% if @step == 3 %>
-  <%= _('File_size') %>: <%= session[:file_size] %> <%= _('bytes') %><br>
-  <br>
-  <b><%= _('First_file_lines') %>:</b><br><br>
-  <table class="maintable" width="100%">
-    <tr>
-      <th><%= _('Temporary_User_ID') %></th>
-      <th><%= _('Temporary_Device_ID') %></th>
-      <th><%= _('DID') %></th>
-    </tr>
+    <%= _('File_size') %>: <%= session[:file_size] %> <%= _('bytes') %><br>
+    <br>
+    <b><%= _('First_file_lines') %>:</b><br><br>
+    <table class="maintable" width="100%">
+      <tr>
+        <th><%= _('Temporary_User_ID') %></th>
+        <th><%= _('Temporary_Device_ID') %></th>
+        <th><%= _('DID') %></th>
+      </tr>
 
-    <% session[:file].each_with_index{ |session_line, tl| %>
-      <% if tl.to_i < 20 and tl.to_i != 0-@include.to_i %>
-        <% arr = session_line.split(@sep) %>
-        <tr class="row<%= (tl % 2 + 1).to_s %>">
-          <td> <%= clean_value arr[session[:imp_did_temp_user_id]].to_s if session[:imp_did_temp_user_id] >= 0 %>    </td>
-          <td> <%= clean_value arr[session[:imp_did_device_id]].to_s if session[:imp_did_device_id] >= 0 %>    </td>
-          <td> <%= clean_value arr[session[:imp_did_did]].to_s if session[:imp_did_did] >= 0 %>    </td>
-        </tr>
-      <% end %>
-    <% } %>
-  </table>
-  <br />
-  <b><%= _('Total_file_lines') %>: <%= session[:file_lines] %> </b>
-  <br />
-  <br />
-  <table>
-    <tr>
-      <td>
-        <%= form_tag :action => 'import_user_data_dids', :step => "2" do %>
-          <%= submit_tag(  _('Back'), :disable_with=>_('Processing..')  )%>
-        <% end %>
-      </td>
-
-      <td width="20"></td>
-      <% if session[:imp_did_temp_user_id] >= 0 and session[:imp_did_device_id] >= 0 and session[:imp_did_did] >= 0 and session[:imp_did_provider] >= 0%>
+      <% session[:file].each_with_index { |session_line, tl| %>
+          <% if tl.to_i < 20 and tl.to_i != 0-@include.to_i %>
+              <% arr = session_line.split(@sep) %>
+              <tr class="row<%= (tl % 2 + 1).to_s %>">
+                <td> <%= clean_value arr[session[:imp_did_temp_user_id]].to_s if session[:imp_did_temp_user_id] >= 0 %>    </td>
+                <td> <%= clean_value arr[session[:imp_did_device_id]].to_s if session[:imp_did_device_id] >= 0 %>    </td>
+                <td> <%= clean_value arr[session[:imp_did_did]].to_s if session[:imp_did_did] >= 0 %>    </td>
+              </tr>
+          <% end %>
+      <% } %>
+    </table>
+    <br/>
+    <b><%= _('Total_file_lines') %>: <%= session[:file_lines] %> </b>
+    <br/>
+    <br/>
+    <table>
+      <tr>
         <td>
-          <%= form_tag :action => 'import_user_data_dids', :step => "4" do %>
-            <%= submit_tag(  _('Confirm_columns'), :disable_with=>_('Processing..')  )%>
+          <%= form_tag :action => 'import_user_data_dids', :step => "2" do %>
+              <%= submit_tag(_('Back'), :disable_with => _('Processing..')) %>
           <% end %>
         </td>
-      <% end %>
-        
-    </tr>
-  </table>
-<%= _('Next_step') + ": " + _('Import_user_data')%>
+
+        <td width="20"></td>
+        <% if session[:imp_did_temp_user_id] >= 0 and session[:imp_did_device_id] >= 0 and session[:imp_did_did] >= 0 and session[:imp_did_provider] >= 0 %>
+            <td>
+              <%= form_tag :action => 'import_user_data_dids', :step => "4" do %>
+                  <%= submit_tag(_('Confirm_columns'), :disable_with => _('Processing..')) %>
+              <% end %>
+            </td>
+        <% end %>
+
+      </tr>
+    </table>
+    <%= _('Next_step') + ": " + _('Import_user_data') %>
 
 <% end %>
 
 
 <% if @step == 4 %>
-  
-  <% if @error_array != [] %>
-    <br />
-    <br />
-    <%= _("Errors")%>:
-    <table class="maintable" width="100%">
-    <tr>
-      <th><%= _('Temporary_User_ID') %></th>
-      <th><%= _('Temporary_Device_id') %></th>
-      <th><%= _('DID') %></th>
-      <th><%= _('Error') %></th>
-    </tr>
-   <% tl = 0 %>
-    <% for line in @error_array %>
-        <% arr = line.split(@sep) %>
-        <tr class="row<%= (tl % 2 + 1).to_s %>">
-          <td> <%= clean_value(arr[session[:imp_did_temp_user_id]].to_s) if session[:imp_did_temp_user_id] >= 0 %>    </td>
-          <td> <%= clean_value(arr[session[:imp_did_device_id]].to_s) if session[:imp_did_device_id] >= 0 %>    </td>
-          <td> <%= clean_value(arr[session[:imp_did_did]].to_s)  if session[:imp_did_did] >= 0 %>    </td>
-          <td> <%= @msg_array[tl]%> </td>
-        </tr>    
-      <% tl += 1 %>
+
+    <% if @error_array != [] %>
+        <br/>
+        <br/>
+        <%= _("Errors") %>:
+        <table class="maintable" width="100%">
+          <tr>
+            <th><%= _('Temporary_User_ID') %></th>
+            <th><%= _('Temporary_Device_id') %></th>
+            <th><%= _('DID') %></th>
+            <th><%= _('Error') %></th>
+          </tr>
+          <% tl = 0 %>
+          <% for line in @error_array %>
+              <% arr = line.split(@sep) %>
+              <tr class="row<%= (tl % 2 + 1).to_s %>">
+                <td> <%= clean_value(arr[session[:imp_did_temp_user_id]].to_s) if session[:imp_did_temp_user_id] >= 0 %>    </td>
+                <td> <%= clean_value(arr[session[:imp_did_device_id]].to_s) if session[:imp_did_device_id] >= 0 %>    </td>
+                <td> <%= clean_value(arr[session[:imp_did_did]].to_s) if session[:imp_did_did] >= 0 %>    </td>
+                <td> <%= @msg_array[tl] %> </td>
+              </tr>
+              <% tl += 1 %>
+          <% end %>
+        </table>
     <% end %>
-  </table>
-  <% end%>
-  <br />
-  <%= link_to b_back + _('Back') , :action => "import_user_data_dids", :step =>3 %>
+    <br/>
+    <%= link_to b_back + _('Back'), :action => "import_user_data_dids", :step => 3 %>
 <% end %>
 
-<br />
-<br />
+<br/>
+<br/>

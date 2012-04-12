@@ -2,7 +2,7 @@
   <tr>
     <td>
       <% if @link_to_finances -%>
-        <%= link_to b_generate + _('Create_credit_note'), {:action => "new"} %>
+          <%= link_to b_generate + _('Create_credit_note'), {:action => "new"} %>
       <% end %>
     </td>
     <td align="right">
@@ -12,111 +12,120 @@
 </table>
 
 <%= form_tag :action => 'list' do %>
-  <div id="search_details" <%= "style='display:none;'" if not @show_search %>>
-    <br/>
-    <table width="100%" class="simple">
-      <tr>
-        <td>
-          <%= _('Username') %>: <%= text_field_tag 'username', @options[:username], "class" => "input", :size => "15", :maxlength => "30"  %>&nbsp;&nbsp;
-          <%= _('first_name') %>: <%= text_field_tag 'first_name', @options[:first_name], "class" => "input", :size => "15", :maxlength => "30"  %>&nbsp;&nbsp;
-          <%= _('last_name') %>: <%= text_field_tag 'last_name', @options[:last_name], "class" => "input", :size => "15", :maxlength => "30"  %>&nbsp;&nbsp;
-          <% if can_see_finances? -%>
-            <%= _('Amount_between') %>: <%= text_field_tag 'amount_min', @options[:amount_min], "class" => "input", :size => "7", :maxlength => "10"  %> -
-            <%= text_field_tag 'amount_max', @options[:amount_max], "class" => "input", :size => "7", :maxlength => "10"  %>&nbsp;&nbsp;
-            <%= _('Status') %>:
-            <select id="payment_status" name="status"> 
-              <option value="all" <%=' selected ' if @options[:status] == 'all'%>><%=_('All')%></option>
-              <option value="paid" <%=' selected ' if @options[:status] == 'paid'%>><%=_('Paid')%></option>
-              <option value="unpaid" <%=' selected ' if @options[:status] == 'unpaid'%>><%=_('Unpaid')%></option>
-            </select>
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <% if @can_view_finances -%>
+    <div id="search_details" <%= "style='display:none;'" if not @show_search %>>
+      <br/>
+      <table width="100%" class="simple">
+        <tr>
+          <td>
+            <%= _('Username') %>
+            : <%= text_field_tag 'username', @options[:username], "class" => "input", :size => "15", :maxlength => "30" %>&nbsp;&nbsp;
+            <%= _('first_name') %>
+            : <%= text_field_tag 'first_name', @options[:first_name], "class" => "input", :size => "15", :maxlength => "30" %>&nbsp;&nbsp;
+            <%= _('last_name') %>
+            : <%= text_field_tag 'last_name', @options[:last_name], "class" => "input", :size => "15", :maxlength => "30" %>&nbsp;&nbsp;
+            <% if can_see_finances? -%>
+                <%= _('Amount_between') %>
+                : <%= text_field_tag 'amount_min', @options[:amount_min], "class" => "input", :size => "7", :maxlength => "10" %>
+                -
+                <%= text_field_tag 'amount_max', @options[:amount_max], "class" => "input", :size => "7", :maxlength => "10" %>&nbsp;&nbsp;
+                <%= _('Status') %>:
+                <select id="payment_status" name="status">
+                  <option value="all" <%= ' selected ' if @options[:status] == 'all' %>><%= _('All') %></option>
+                  <option value="paid" <%= ' selected ' if @options[:status] == 'paid' %>><%= _('Paid') %></option>
+                  <option value="unpaid" <%= ' selected ' if @options[:status] == 'unpaid' %>><%= _('Unpaid') %></option>
+                </select>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <% if @can_view_finances -%>
             <span id='paid_date'>
-            <%= _('Paid_date') + ' ' + _('From') %>: <%= select_date(@paid_date_from, :end_year => Date.today.year+1, :prefix => "paid_date_from", :use_month_numbers => false) %>
-            &nbsp;&nbsp;<%= _('to') %>: <%= select_date(@paid_date_till, :end_year => Date.today.year+1, :prefix => "paid_date_till", :use_month_numbers => false) %>
+            <%= _('Paid_date') + ' ' + _('From') %>
+              : <%= select_date(@paid_date_from, :end_year => Date.today.year+1, :prefix => "paid_date_from", :use_month_numbers => false) %>
+              &nbsp;&nbsp;<%= _('to') %>
+              : <%= select_date(@paid_date_till, :end_year => Date.today.year+1, :prefix => "paid_date_till", :use_month_numbers => false) %>
             </span>
-            <script type="text/javascript">
-              //<![CDATA[
-              function observe_payment_status(){
-                if($('payment_status').value=='paid'){
-                  $('paid_date').show();
-                  $('paid_date').disabled = false;
-                }else{
-                  $('paid_date').hide();
-                  $('paid_date').disabled = true;
-                }
-              }
+                <script type="text/javascript">
+                    //<![CDATA[
+                    function observe_payment_status() {
+                        if ($('payment_status').value == 'paid') {
+                            $('paid_date').show();
+                            $('paid_date').disabled = false;
+                        } else {
+                            $('paid_date').hide();
+                            $('paid_date').disabled = true;
+                        }
+                    }
 
-              observe_payment_status();
-              Event.observe(window, 'load', function() {
-                Event.observe($('payment_status'), 'change', function() {
-                  observe_payment_status();
-                })
-              })
-              //]]>
-            </script>
-          <% end %>
-          <%= _('Issue_date') + ' ' + _('From') %>: <%= select_date(@issue_date_from, :end_year => Date.today.year+1, :prefix => "issue_date_from", :use_month_numbers => false) %>
-          &nbsp;&nbsp;<%= _('to') %>: <%= select_date(@issue_date_till, :end_year => Date.today.year+1, :prefix => "issue_date_till", :use_month_numbers => false) %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
-        </td>
-        <td align="right">
-          <%= link_to b_cross + _('Clear_search'), :action => 'list', :clear=>1 if @show_search %>
-        </td>
-      </tr>
-    </table>
-  </div>
+                    observe_payment_status();
+                    Event.observe(window, 'load', function () {
+                        Event.observe($('payment_status'), 'change', function () {
+                            observe_payment_status();
+                        })
+                    })
+                    //]]>
+                </script>
+            <% end %>
+            <%= _('Issue_date') + ' ' + _('From') %>
+            : <%= select_date(@issue_date_from, :end_year => Date.today.year+1, :prefix => "issue_date_from", :use_month_numbers => false) %>
+            &nbsp;&nbsp;<%= _('to') %>
+            : <%= select_date(@issue_date_till, :end_year => Date.today.year+1, :prefix => "issue_date_till", :use_month_numbers => false) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
+          </td>
+          <td align="right">
+            <%= link_to b_cross + _('Clear_search'), :action => 'list', :clear => 1 if @show_search %>
+          </td>
+        </tr>
+      </table>
+    </div>
 <% end %>
 
 <%= page_select_header(@options[:page], @total_pages) %>
 
 <table width="100%" class="maintable">
   <tr>
-    <th align="left"> <%= nice_list_order("nice_user",_('User'), @options) %> </th>
-    <th align="left"> <%= nice_list_order("number",_('Number'), @options) %> </th>
-    <th align="center"> <%= nice_list_order("issue_date" ,_('Issue_date'), @options) %> </th>
+    <th align="left"> <%= nice_list_order("nice_user", _('User'), @options) %> </th>
+    <th align="left"> <%= nice_list_order("number", _('Number'), @options) %> </th>
+    <th align="center"> <%= nice_list_order("issue_date", _('Issue_date'), @options) %> </th>
     <% if @can_view_finances %>
-      <th align="center"> <%= nice_list_order("status" ,_('Paid'), @options) %> </th>
-      <th align="center"> <%= nice_list_order("pay_date" ,_('Paid_date'), @options) %> </th>
-      <th align="right"> <%= nice_list_order("price" ,_('Price'), @options) %> (<%= session[:show_currency] %>)</th>
-      <th align="right" id="price_with_vat"> <%= _('Price_with_VAT') %>  (<%= session[:show_currency] %>)</th>
+        <th align="center"> <%= nice_list_order("status", _('Paid'), @options) %> </th>
+        <th align="center"> <%= nice_list_order("pay_date", _('Paid_date'), @options) %> </th>
+        <th align="right"> <%= nice_list_order("price", _('Price'), @options) %> (<%= session[:show_currency] %>)</th>
+        <th align="right" id="price_with_vat"> <%= _('Price_with_VAT') %>  (<%= session[:show_currency] %>)</th>
     <% end %>
     <th align="center" id="note_details"><%= _('Details') %></th>
     <% if @link_to_finances %>
-      <th align="center" id="delete_note"><%= _('Delete') %></th>
+        <th align="center" id="delete_note"><%= _('Delete') %></th>
     <% end %>
   </tr>
   <% if @notes %>
-    <% @notes.each_with_index { |note, i| %>
-      <tr class="row<%= (i % 2 + 1).to_s %>">
-        <td id="user_<%= note.id %>" align="left"> <%= nice_user_from_data(note.username, note.first_name, note.last_name, {:link=> @link_to_user, :user_id=>note.user_id}) %> </td>
-        <td id="note_number_<%= note.id %>" align="left"> <%= note.number %> </td>
-        <td id="note_issue_date<%= note.id %>"align="center"> <%= nice_date_time note.issue_date, 0 %> </td>
-        <% if @can_view_finances %>
-          <td id="paid_<%= note.id %>" align="center">
-            <% if note.paid? %>
-              <%= image_tag 'icons/check.png', :title => _('Paid'), :id=>"image_paid_" + note.id.to_s %>
-            <% else %>
-              <%= image_tag 'icons/cross.png', :title => _('Unpaid'), :id=>"image_not_paid_" + note.id.to_s %>
-           <% end %>
-          </td>
-          <td id="note_paid_date_<%= note.id %>" align="center"> <%= nice_date_time note.pay_date if note.paid? %> </td>
-          <td id="note_price_<%= note.id %>" align="right"> <%= note.price %> </td>
-          <td id="note_full_price_<%= note.id %>" align="right"> <%= note.price_with_vat %> </td>
-        <% end %>
-        <td id="details_<%= note.id %>" align="center"><%= link_to b_details, {:action => 'edit', :id => note.id}, :id=>"details_link_"+note.id.to_s  %></td>
-        <% if @link_to_finances %>
-          <td id="delete_<%= note.id %>" align="center"><%= link_to b_delete, {:action => 'destroy', :id => note.id}, :id=>"delete_link_"+note.id.to_s  %></td>
-        <% end %>
-    <% } %>
+      <% @notes.each_with_index { |note, i| %>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <td id="user_<%= note.id %>" align="left"> <%= nice_user_from_data(note.username, note.first_name, note.last_name, {:link => @link_to_user, :user_id => note.user_id}) %> </td>
+            <td id="note_number_<%= note.id %>" align="left"> <%= note.number %> </td>
+            <td id="note_issue_date<%= note.id %>" align="center"> <%= nice_date_time note.issue_date, 0 %> </td>
+            <% if @can_view_finances %>
+                <td id="paid_<%= note.id %>" align="center">
+                  <% if note.paid? %>
+                      <%= image_tag 'icons/check.png', :title => _('Paid'), :id => "image_paid_" + note.id.to_s %>
+                  <% else %>
+                      <%= image_tag 'icons/cross.png', :title => _('Unpaid'), :id => "image_not_paid_" + note.id.to_s %>
+                  <% end %>
+                </td>
+                <td id="note_paid_date_<%= note.id %>" align="center"> <%= nice_date_time note.pay_date if note.paid? %> </td>
+                <td id="note_price_<%= note.id %>" align="right"> <%= note.price %> </td>
+                <td id="note_full_price_<%= note.id %>" align="right"> <%= note.price_with_vat %> </td>
+            <% end %>
+            <td id="details_<%= note.id %>" align="center"><%= link_to b_details, {:action => 'edit', :id => note.id}, :id => "details_link_"+note.id.to_s %></td>
+            <% if @link_to_finances %>
+                <td id="delete_<%= note.id %>" align="center"><%= link_to b_delete, {:action => 'destroy', :id => note.id}, :id => "delete_link_"+note.id.to_s %></td>
+            <% end %>
+      <% } %>
   <% end %>
 </table>
 

@@ -38,22 +38,22 @@ class Google4R::Checkout::AddressTest < Test::Unit::TestCase
 
   def setup
     @data =
-      {
-        :contact_name => 'John Smith',
-        :email => 'johnsmith@example.com',
-        :fax => '+01123456789',
-        :phone => '+01123456789',
-        :address1 => '10 Example Road',
-        :address2 => 'Bar',
-        :city => 'Sampleville',
-        :company_name => 'Company Name',
-        :region => 'CA',
-        :postal_code => '94141',
-        :country_code => 'US',
-      }
-    
-    @optional_fields = [ :fax, :phone, :address2, :company_name, :contact_name ]
-    
+        {
+            :contact_name => 'John Smith',
+            :email => 'johnsmith@example.com',
+            :fax => '+01123456789',
+            :phone => '+01123456789',
+            :address1 => '10 Example Road',
+            :address2 => 'Bar',
+            :city => 'Sampleville',
+            :company_name => 'Company Name',
+            :region => 'CA',
+            :postal_code => '94141',
+            :country_code => 'US',
+        }
+
+    @optional_fields = [:fax, :phone, :address2, :company_name, :contact_name]
+
     @xml_str = %q{<?xml version="1.0" encoding="UTF-8" ?>
       <root>
         <some-address>
@@ -71,43 +71,43 @@ class Google4R::Checkout::AddressTest < Test::Unit::TestCase
       </some-address>
     </root>}
   end
-  
+
   def test_responds_correctly
     @address = Address.new
-    
+
     @data.each do |key, value|
       assert_respond_to @address, key, "key == #{key}"
       assert_respond_to @address, "#{key}=".to_sym, "key == #{key}"
     end
   end
-    
+
   def test_creating_address_with_full_fields_works
-    xml_str = @xml_str % 
-      [
-        @data[:contact_name], @data[:email], @data[:fax], @data[:phone], @data[:address1],
-        @data[:address2], @data[:city], @data[:company_name], @data[:region], 
-        @data[:postal_code], @data[:country_code]
-      ]
-    
+    xml_str = @xml_str %
+        [
+            @data[:contact_name], @data[:email], @data[:fax], @data[:phone], @data[:address1],
+            @data[:address2], @data[:city], @data[:company_name], @data[:region],
+            @data[:postal_code], @data[:country_code]
+        ]
+
     document = REXML::Document.new(xml_str)
-    
+
     the_element = document.elements['/root/some-address']
-    
+
     address = Address.create_from_element(the_element)
-    
+
     @data.each do |key, value|
       assert_equal value, address.send(key)
     end
   end
-  
+
   def test_creating_address_works_when_removing_optional_fields
     @optional_fields.power.each do |optional_symbols|
-      xml_str = @xml_str % 
-        [
-          @data[:contact_name], @data[:email], @data[:fax], @data[:phone], @data[:address1],
-          @data[:address2], @data[:city], @data[:company_name], @data[:region], 
-          @data[:postal_code], @data[:country_code]
-        ]
+      xml_str = @xml_str %
+          [
+              @data[:contact_name], @data[:email], @data[:fax], @data[:phone], @data[:address1],
+              @data[:address2], @data[:city], @data[:company_name], @data[:region],
+              @data[:postal_code], @data[:country_code]
+          ]
 
       # Remove all optional symbols in this run.
       optional_symbols.each do |symbol|

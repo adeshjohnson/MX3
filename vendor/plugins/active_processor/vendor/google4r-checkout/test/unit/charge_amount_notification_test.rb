@@ -50,10 +50,10 @@ class Google4R::Checkout::ChargeAmountNotificationTest < Test::Unit::TestCase
 </charge-amount-notification>
 }
   end
-  
+
   def test_create_from_element_works_correctly
     root = REXML::Document.new(@example_xml).root
-    
+
     notification = ChargeAmountNotification.create_from_element(root, @frontend)
 
     assert_equal 'e91f167e-4f98-4b29-b793-80aaa6a61c911', notification.serial_number

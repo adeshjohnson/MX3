@@ -38,7 +38,7 @@
 
       <% dest = Destination.find(:first, :conditions => "prefix = '#{@call.prefix}'") %>
       <% if dest %>
-        <%= dest.direction.name if dest.direction %>	<%= dest.subcode %> <%= dest.name %>
+          <%= dest.direction.name if dest.direction %>    <%= dest.subcode %> <%= dest.name %>
       <% end %>
       &nbsp;&nbsp;<%= _('Prefix_used') %>: <%= @call.prefix %>
 
@@ -94,17 +94,17 @@
     <th align="left"><%= b_server + _('Server') %></th>
     <td id="server" align="right">
       <% if server %>
-        <%= link_to _("ID") + ": #{server.id} / IP: " + server.server_ip.to_s , {:controller => "servers", :action => :list} %>
+          <%= link_to _("ID") + ": #{server.id} / IP: " + server.server_ip.to_s, {:controller => "servers", :action => :list} %>
       <% else %>
-        <%= _('Server_not_found') %>
+          <%= _('Server_not_found') %>
       <% end %>
     </td>
   </tr>
 
 </table>
 
-<br />
-<br />
+<br/>
+<br/>
 
 <table width="50%" class="maintable">
 
@@ -119,27 +119,27 @@
 
 
   <% if @user %>
-    <tr>
-      <th align="left"><%= b_user + _('User') %></th>
-      <td id="user" align="right"> <%= link_nice_user @user %>  </td>
-    </tr>
+      <tr>
+        <th align="left"><%= b_user + _('User') %></th>
+        <td id="user" align="right"> <%= link_nice_user @user %>  </td>
+      </tr>
   <% end %>
 
   <% if @src_device %>
-    <tr class="row1">
-      <th align="left"><%= b_device + _('Device') %></th>
-      <td id="src_device" align="right"> <%= link_nice_device @src_device %>  </td>
-    </tr>
+      <tr class="row1">
+        <th align="left"><%= b_device + _('Device') %></th>
+        <td id="src_device" align="right"> <%= link_nice_device @src_device %>  </td>
+      </tr>
   <% end %>
 
 
-  <% user_tariff = @user.tariff  if @user%>
+  <% user_tariff = @user.tariff if @user %>
   <% if user_tariff %>
-    <tr>
-      <th align="left"><%= _('Tariff') %></th>
-      <% %>
-      <td id="user_tariff" align="right"> <%= link_to user_tariff.name + " (" + user_tariff.purpose + ")" , :controller => "tariffs", :action => "rates_list", :id => @user.tariff_id %>  </td>
-    </tr>
+      <tr>
+        <th align="left"><%= _('Tariff') %></th>
+        <% %>
+        <td id="user_tariff" align="right"> <%= link_to user_tariff.name + " (" + user_tariff.purpose + ")", :controller => "tariffs", :action => "rates_list", :id => @user.tariff_id %>  </td>
+      </tr>
   <% end %>
 
   <tr>
@@ -148,27 +148,27 @@
   </tr>
 
   <% if @call.disposition == "ANSWERED" %>
-    <tr class="row1">
-      <th align="left"><%= _('Billsec') %></th>
-      <td id="user_billsec" align="right"> <%= @call.user_billsec %>  </td>
-    </tr>
-    <% if can_see_finances? -%>
-      <tr>
-        <th align="left"><%= _('Price') %></th>
-        <td id="user_price" align="right"> <%= nice_number @call.user_price %>  </td>
+      <tr class="row1">
+        <th align="left"><%= _('Billsec') %></th>
+        <td id="user_billsec" align="right"> <%= @call.user_billsec %>  </td>
       </tr>
-    <% end %>
+      <% if can_see_finances? -%>
+          <tr>
+            <th align="left"><%= _('Price') %></th>
+            <td id="user_price" align="right"> <%= nice_number @call.user_price %>  </td>
+          </tr>
+      <% end %>
   <% end %>
   <% if @provider %>
-    <tr>
-      <th id="providers_owner_row" align="left"><%= b_provider + _("Providers_owner") %></th>
-      <% logger.fatal @provider.user.inspect %>
-      <td id="providers_owner" align="right"> <%= link_to nice_user(@provider.user), :controller => "users", :action => "list" %>  </td>
-    </tr>
+      <tr>
+        <th id="providers_owner_row" align="left"><%= b_provider + _("Providers_owner") %></th>
+        <% logger.fatal @provider.user.inspect %>
+        <td id="providers_owner" align="right"> <%= link_to nice_user(@provider.user), :controller => "users", :action => "list" %>  </td>
+      </tr>
   <% end %>
 </table>
-<br />
-<br />
+<br/>
+<br/>
 <table width="50%" class="maintable">
 
   <tr>
@@ -181,93 +181,93 @@
   </tr>
 
   <% if @provider %>
-    <tr>
-      <th align="left"><%= b_provider + _('Provider') %></th>
-      <td id="provider" align="right"> <%= link_to @provider.name, :controller => "providers", :action => "list" %>  </td>
-    </tr>
-
-    <tr class="row1">
-      <th align="left"><%= _('Technology') %></th>
-      <td id="prov_tech" align="right"> <%= @provider.tech %>  </td>
-    </tr>
-
-    <tr>
-      <th align="left"><%= _('Server_IP') %></th>
-      <td id="server_ip" align="right"> <%= @provider.server_ip %>  </td>
-    </tr>
-
-    <% prov_tariff = @provider.tariff %>
-    <% if prov_tariff %>
       <tr>
-        <th align="left"><%= _('Tariff') %></th>
-        <% %>
-        <td id="provider_tariff" align="right"> <%= link_to prov_tariff.name + " (" + prov_tariff.purpose + ")" , :controller => "tariffs", :action => "rates_list", :id => @provider.tariff_id %>  </td>
-      </tr>
-    <% end %>
-
-    <tr class="row1">
-      <th align="left"><%= _('Rate') %></th>
-      <td id="provider_rate" align="right"> <%= nice_number @call.provider_rate %>  </td>
-    </tr>
-
-    <% if @call.disposition == "ANSWERED" %>
-
-      <tr>
-        <th align="left"><%= _('Billsec') %></th>
-        <td id="provider_billsec" align="right"> <%= @call.provider_billsec %>  </td>
+        <th align="left"><%= b_provider + _('Provider') %></th>
+        <td id="provider" align="right"> <%= link_to @provider.name, :controller => "providers", :action => "list" %>  </td>
       </tr>
 
       <tr class="row1">
-        <th align="left"><%= _('Price') %></th>
-        <td id="provider_price" align="right"> <%= nice_number @call.provider_price %>  </td>
+        <th align="left"><%= _('Technology') %></th>
+        <td id="prov_tech" align="right"> <%= @provider.tech %>  </td>
       </tr>
-    <% end %>
 
-  <% end %>
-</table>
-<br />
-<br />
-<% if rs_active? %>
-
-  <table width="50%" class="maintable">
-
-    <tr>
-      <th align="center" colspan=2><%= b_reseller + _('Reseller') %></th>
-    </tr>
-
-    <% if @reseller%>
       <tr>
-        <th align="left"><%= b_user + _('Name') %></th>
-        <td id="reseller" align="right"> <%= link_nice_user @reseller %>  </td>
+        <th align="left"><%= _('Server_IP') %></th>
+        <td id="server_ip" align="right"> <%= @provider.server_ip %>  </td>
+      </tr>
+
+      <% prov_tariff = @provider.tariff %>
+      <% if prov_tariff %>
+          <tr>
+            <th align="left"><%= _('Tariff') %></th>
+            <% %>
+            <td id="provider_tariff" align="right"> <%= link_to prov_tariff.name + " (" + prov_tariff.purpose + ")", :controller => "tariffs", :action => "rates_list", :id => @provider.tariff_id %>  </td>
+          </tr>
+      <% end %>
+
+      <tr class="row1">
+        <th align="left"><%= _('Rate') %></th>
+        <td id="provider_rate" align="right"> <%= nice_number @call.provider_rate %>  </td>
       </tr>
 
       <% if @call.disposition == "ANSWERED" %>
-        <tr>
-          <th align="left"><%= _('Rate') %></th>
-          <td id="reseller_rate" align="right"> <%= nice_number @call.reseller_rate %>  </td>
-        </tr>
 
-        <tr>
-          <th align="left"><%= _('Billsec') %></th>
-          <td id="reseller_billsec" align="right"> <%= @call.reseller_billsec %>  </td>
-        </tr>
+          <tr>
+            <th align="left"><%= _('Billsec') %></th>
+            <td id="provider_billsec" align="right"> <%= @call.provider_billsec %>  </td>
+          </tr>
 
-        <tr>
-          <th align="left"><%= _('Price') %></th>
-          <td id="reseller_price" align="right"> <%= nice_number @call.reseller_price %>  </td>
-        </tr>
+          <tr class="row1">
+            <th align="left"><%= _('Price') %></th>
+            <td id="provider_price" align="right"> <%= nice_number @call.provider_price %>  </td>
+          </tr>
       <% end %>
 
-    <% else %>
+  <% end %>
+</table>
+<br/>
+<br/>
+<% if rs_active? %>
+
+    <table width="50%" class="maintable">
+
       <tr>
-        <td align="center" colspan=2><%= _('This_call_does_not_belong_to_reseller') %></td>
+        <th align="center" colspan=2><%= b_reseller + _('Reseller') %></th>
       </tr>
-    <% end%>
-  </table>
+
+      <% if @reseller %>
+          <tr>
+            <th align="left"><%= b_user + _('Name') %></th>
+            <td id="reseller" align="right"> <%= link_nice_user @reseller %>  </td>
+          </tr>
+
+          <% if @call.disposition == "ANSWERED" %>
+              <tr>
+                <th align="left"><%= _('Rate') %></th>
+                <td id="reseller_rate" align="right"> <%= nice_number @call.reseller_rate %>  </td>
+              </tr>
+
+              <tr>
+                <th align="left"><%= _('Billsec') %></th>
+                <td id="reseller_billsec" align="right"> <%= @call.reseller_billsec %>  </td>
+              </tr>
+
+              <tr>
+                <th align="left"><%= _('Price') %></th>
+                <td id="reseller_price" align="right"> <%= nice_number @call.reseller_price %>  </td>
+              </tr>
+          <% end %>
+
+      <% else %>
+          <tr>
+            <td align="center" colspan=2><%= _('This_call_does_not_belong_to_reseller') %></td>
+          </tr>
+      <% end %>
+    </table>
 
 
-  <br />
-  <br />
+    <br/>
+    <br/>
 
 <% end %>
 
@@ -278,45 +278,45 @@
     <th align="center" colspan=2><%= _('DID') %></th>
   </tr>
 
-  <% if @did%>
-    <tr>
-      <th align="left"><%= _('DID_Number') %></th>
-      <td id="did" align="right"> <%= link_to @did.did, :controller => "dids", :action => "edit", :id => @did.id %>  </td>
-    </tr>
-
-    <% if @call.disposition == "ANSWERED" %>
-
+  <% if @did %>
       <tr>
-        <th align="left"><%= _('Provider_price') %></th>
-        <td id="did_prov_price" align="right"> <%= link_to(nice_number(@call.did_prov_price), :controller => "dids", :action => "did_rates", :id => @call.did_id) %>  </td>
+        <th align="left"><%= _('DID_Number') %></th>
+        <td id="did" align="right"> <%= link_to @did.did, :controller => "dids", :action => "edit", :id => @did.id %>  </td>
       </tr>
 
-      <tr>
-        <th align="left"><%= _('Incoming_price') %></th>
-        <td id="did_inc_price" align="right"> <%= link_to(nice_number(@call.did_inc_price), :controller => "dids", :action => "did_rates", :id => @call.did_id) %>  </td>
-      </tr>
+      <% if @call.disposition == "ANSWERED" %>
 
-      <tr>
-        <th align="left"><%= _('Owner_price') %></th>
-        <td id="did_price" align="right"> <%= link_to(nice_number(@call.did_price), :controller => "dids", :action => "did_rates", :id => @call.did_id) %>  </td>
-      </tr>
+          <tr>
+            <th align="left"><%= _('Provider_price') %></th>
+            <td id="did_prov_price" align="right"> <%= link_to(nice_number(@call.did_prov_price), :controller => "dids", :action => "did_rates", :id => @call.did_id) %>  </td>
+          </tr>
 
-      <tr>
-        <th align="left"><%= _('Billsec') %></th>
-        <td id="did_billsec" align="right"> <%= @call.did_billsec %>  </td>
-      </tr>
+          <tr>
+            <th align="left"><%= _('Incoming_price') %></th>
+            <td id="did_inc_price" align="right"> <%= link_to(nice_number(@call.did_inc_price), :controller => "dids", :action => "did_rates", :id => @call.did_id) %>  </td>
+          </tr>
 
-    <% end %>
+          <tr>
+            <th align="left"><%= _('Owner_price') %></th>
+            <td id="did_price" align="right"> <%= link_to(nice_number(@call.did_price), :controller => "dids", :action => "did_rates", :id => @call.did_id) %>  </td>
+          </tr>
+
+          <tr>
+            <th align="left"><%= _('Billsec') %></th>
+            <td id="did_billsec" align="right"> <%= @call.did_billsec %>  </td>
+          </tr>
+
+      <% end %>
 
   <% else %>
-    <tr>
-      <td align="center" colspan=2><%= _('DID_was_not_used_in_this_call') %></td>
-    </tr>
-  <% end%>
+      <tr>
+        <td align="center" colspan=2><%= _('DID_was_not_used_in_this_call') %></td>
+      </tr>
+  <% end %>
 
 </table>
 
-<br /><br />
+<br/><br/>
 
 <table width="50%" class="maintable">
 
@@ -362,7 +362,7 @@
 </table>
 
 
-<br /><br />
+<br/><br/>
 
 
 <table width="<%= @call_log ? '100%' : '50%' %>" class="maintable">
@@ -370,14 +370,14 @@
     <th align="center" colspan=2><%= _('Call_Log') %></th>
   </tr>
   <tr id="call_log" class="row1">
-    <% if @call_log%>
-      <%
-      log = @call_log.log.to_s
-      log = log.split("<br>").collect{|line| line =~ /WARNING\:/ ? line.gsub("WARNING:", "<span style='font-weight:bold'>WARNING:")+"</span >" : line}.collect{|line| line =~ /ERORR\:/ ? line.gsub("ERROR:", "<span style='color: red;font-weight:bold'>ERROR:")+"</span >" : line}.join("<br>")
-    %>
-      <td align="left" colspan=2><%= log %></td>
+    <% if @call_log %>
+        <%
+           log = @call_log.log.to_s
+           log = log.split("<br>").collect { |line| line =~ /WARNING\:/ ? line.gsub("WARNING:", "<span style='font-weight:bold'>WARNING:")+"</span >" : line }.collect { |line| line =~ /ERORR\:/ ? line.gsub("ERROR:", "<span style='color: red;font-weight:bold'>ERROR:")+"</span >" : line }.join("<br>")
+        %>
+        <td align="left" colspan=2><%= log %></td>
     <% else %>
-      <td align="center" colspan=2><%= _('Call_Log_for_this_Call_not_saved_into_DB') %></td>
+        <td align="center" colspan=2><%= _('Call_Log_for_this_Call_not_saved_into_DB') %></td>
     <% end %>
   </tr>
 </table>

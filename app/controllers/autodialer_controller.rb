@@ -2,14 +2,14 @@
 class AutodialerController < ApplicationController
 
   layout "callc"
-  before_filter :check_post_method, :only=>[:redial_all_failed_calls, :campaign_update, :campaign_create, :campaign_destroy, :action_destroy, :action_add, :action_update]
+  before_filter :check_post_method, :only => [:redial_all_failed_calls, :campaign_update, :campaign_create, :campaign_destroy, :action_destroy, :action_add, :action_update]
   before_filter :check_localization
   #before_filter :authorize_admin, :only => [:campaigns]
   before_filter :authorize
-  before_filter :find_campaign, :only=>[:campaign_destroy, :view_campaign_actions, :campaign_update,:redial_all_failed_calls, :action_add, :campaign_actions, :import_numbers_from_file, :campaign_edit, :campaign_change_status, :campaign_numbers, :delete_all_numbers]
-  before_filter :find_campaign_action, :only=>[:play_rec, :action_update, :action_edit, :action_destroy]
-  before_filter :find_adnumber, :only=>[:reactivate_number]
-  before_filter :check_params_campaign, :only=>[:campaign_create, :campaign_update]
+  before_filter :find_campaign, :only => [:campaign_destroy, :view_campaign_actions, :campaign_update, :redial_all_failed_calls, :action_add, :campaign_actions, :import_numbers_from_file, :campaign_edit, :campaign_change_status, :campaign_numbers, :delete_all_numbers]
+  before_filter :find_campaign_action, :only => [:play_rec, :action_update, :action_edit, :action_destroy]
+  before_filter :find_adnumber, :only => [:reactivate_number]
+  before_filter :check_params_campaign, :only => [:campaign_create, :campaign_update]
 
   def index
     if session[:usertype] == 'admin'
@@ -156,8 +156,8 @@ class AutodialerController < ApplicationController
       @campaign.status = "disabled"
       flash[:notice] = _('Campaign_stopped') + ": " + @campaign.name
     else
-      flash[:notice] = _('No_actions_for_campaign') + ": " + @campaign.name         if @campaign.adactions.size == 0
-      flash[:notice] = _('No_free_numbers_for_campaign') + ": " + @campaign.name         if @campaign.new_numbers_count == 0
+      flash[:notice] = _('No_actions_for_campaign') + ": " + @campaign.name if @campaign.adactions.size == 0
+      flash[:notice] = _('No_free_numbers_for_campaign') + ": " + @campaign.name if @campaign.new_numbers_count == 0
 
       if @campaign.adactions.size > 0 and @campaign.new_numbers_count > 0
         @campaign.status = "enabled"
@@ -179,7 +179,7 @@ class AutodialerController < ApplicationController
 
     fpage, @total_pages, options = pages_validator(params, @campaign.adnumbers.size.to_f)
     @page = options[:page]
-    @numbers = @campaign.adnumbers.find(:all, :offset=>fpage, :limit=>session[:items_per_page])
+    @numbers = @campaign.adnumbers.find(:all, :offset => fpage, :limit => session[:items_per_page])
   end
 
 
@@ -253,7 +253,6 @@ class AutodialerController < ApplicationController
       end
 
 
-
       redirect_to :action => 'campaign_numbers', :id => @campaign.id
 
     end
@@ -292,7 +291,7 @@ class AutodialerController < ApplicationController
   def action_destroy
     campaign_id = @action.campaign_id
     if @action.action == "PLAY"
-      path , final_path = @action.campaign.final_path
+      path, final_path = @action.campaign.final_path
       Audio.rm_sound_file("#{final_path}/#{@action.file_name}.wav")
     end
     @action.destroy
@@ -309,7 +308,7 @@ class AutodialerController < ApplicationController
   end
 
   def action_update
-    path , final_path = @action.campaign.final_path
+    path, final_path = @action.campaign.final_path
 
     if @action.action == "WAIT"
       @action.data = params[:wait_time].to_i
@@ -350,7 +349,6 @@ class AutodialerController < ApplicationController
   end
 
 
-
   def redial_all_failed_calls
     if Adnumber.update_all(" status = 'new' , executed_time = NULL", "status = 'executed' and campaign_id = #{@campaign.id}")
       flash[:status] = _('All_calls_failed_redial_was_successful')
@@ -366,12 +364,12 @@ class AutodialerController < ApplicationController
     change_date
     @date = Time.mktime(session[:year_from], session[:month_from], session[:day_from])
     year, month, day = last_day_month('till')
-    @edate = Time.mktime(year,month,day)
+    @edate = Time.mktime(year, month, day)
     @campaign_id = params[:campaign_id] ? params[:campaign_id].to_i : -1
     #ticket #5472 campaigns.owner_id seems to be 0 all the time, maybe it's 
     #representing owner of the user that created campaign. 
     #seems that campaigns.user_id is representing creator/owner of the campaign
-    campaign_owner_id = ((@current_user.is_admin?  or @current_user.is_accountant?) ? 0 : @current_user.id)
+    campaign_owner_id = ((@current_user.is_admin? or @current_user.is_accountant?) ? 0 : @current_user.id)
     @campaigns = Campaign.find(:all, :conditions => "user_id = #{campaign_owner_id}")
     @Calltime_graph =""
     @answered_percent = @no_answer_percent = @failed_percent = @busy_percent = 0
@@ -383,12 +381,12 @@ class AutodialerController < ApplicationController
     #if selected campaign
     if @campaign_id != -1
       @campaing_stat = Campaign.find_by_id(@campaign_id)
-      data = Adnumber.find(:all, :conditions=>['campaign_id = ?',@campaign_id])
+      data = Adnumber.find(:all, :conditions => ['campaign_id = ?', @campaign_id])
       data.each do |numbers|
         @numbers << numbers.number
         @channels << numbers.channel
       end
-      
+
       #if there are numbers
       if @numbers and !@numbers.compact.empty?
         #count dialed, completed, total call time, total call time longer than 10s
@@ -397,10 +395,12 @@ class AutodialerController < ApplicationController
         #if there are channels in db
         if @channels and !@channels.compact.empty?
           # create regexp ('Local/number@|..')
-          @channels.each do |channel|@channels_number << channel.scan(/(.*@)/).flatten.first if channel end
+          @channels.each do |channel|
+            @channels_number << channel.scan(/(.*@)/).flatten.first if channel
+          end
           @channels_number = @channels_number.join('|')
           #find device
-          @scr_device =  @campaing_stat.device_id
+          @scr_device = @campaing_stat.device_id
           @total = @campaing_stat.count_completed_user_billsec(@scr_device, @channels_number, session_from_date, session_till_date)
           @total_longer_than_10 = @campaing_stat.count_completed_user_billsec_longer_than_ten(@scr_device, @channels_number, session_from_date, session_till_date)
           country_times_pie= "\""
@@ -408,13 +408,13 @@ class AutodialerController < ApplicationController
             @calls = Call.find_by_sql("select count(*) as counted_calls, disposition from calls where src_device_id = #{@scr_device} AND channel REGEXP '#{@channels_number}' AND disposition in ('ANSWERED', 'NO ANSWER','FAILED','BUSY') AND calldate BETWEEN '#{session_from_date} 00:00:00' AND '#{session_till_date} 23:59:59' group by disposition")
             #count percent
             @calls.each do |call|
-              @calls_answered =  call.counted_calls.to_i if call.disposition == 'ANSWERED'
+              @calls_answered = call.counted_calls.to_i if call.disposition == 'ANSWERED'
               @calls_no_answer = call.counted_calls.to_i if call.disposition == 'NO ANSWER'
-              @calls_failed  = call.counted_calls.to_i if call.disposition == 'FAILED'
+              @calls_failed = call.counted_calls.to_i if call.disposition == 'FAILED'
               @calls_busy = call.counted_calls.to_i if call.disposition == 'BUSY'
             end
             @calls_all = @calls_answered+@calls_no_answer+@calls_failed+@calls_busy
-            
+
             if  @calls_all.to_i > 0
               @answered_percent = @calls_answered*100/ @calls_all.to_i
               @no_answer_percent = @calls_no_answer*100/ @calls_all.to_i
@@ -440,19 +440,19 @@ class AutodialerController < ApplicationController
             @a_date[i] = @date.strftime("%Y-%m-%d")
             @a_calls[i] = 0
             sql = 'SELECT COUNT(calls.id) as \'calls\', SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as \'billsec\' FROM calls ' +
-              'WHERE (calls.calldate BETWEEN \'' + @a_date[i] + ' 00:00:00\' AND \'' + @a_date[i] + " 23:59:59\' AND src_device_id = #{@scr_device} AND channel REGEXP '#{@channels_number}' )"
+                'WHERE (calls.calldate BETWEEN \'' + @a_date[i] + ' 00:00:00\' AND \'' + @a_date[i] + " 23:59:59\' AND src_device_id = #{@scr_device} AND channel REGEXP '#{@channels_number}' )"
             res = ActiveRecord::Base.connection.select_all(sql)
             @a_calls[i] = res[0]["calls"].to_i
             @date += (60 * 60 * 24)
             i+=1
           end
-          
+
           index = i
           ine = 0
           #create string fo column chart
           @Calls_graph = ""
           while ine <= index - 1
-            @Calls_graph +=@a_date[ine].to_s  + ";" + @a_calls[ine].to_s + "\\n"
+            @Calls_graph +=@a_date[ine].to_s + ";" + @a_calls[ine].to_s + "\\n"
             ine= ine + 1
           end
         else
@@ -463,16 +463,16 @@ class AutodialerController < ApplicationController
         redirect_to :action => :campaign_statistics and return false
       end
     end
-    
+
   end
 
   private
 
   def find_campaign
     if current_user.is_admin?
-      @campaign = Campaign.find(:first, :conditions=>{:id=>params[:id]})
+      @campaign = Campaign.find(:first, :conditions => {:id => params[:id]})
     else
-      @campaign = current_user.campaigns.find(:first, :conditions=>{:id=>params[:id]})
+      @campaign = current_user.campaigns.find(:first, :conditions => {:id => params[:id]})
     end
 
     unless @campaign
@@ -486,7 +486,7 @@ class AutodialerController < ApplicationController
   end
 
   def find_campaign_action
-    @action = Adaction.find(:first, :conditions=>{:id=>params[:id]}, :include=>[:campaign])
+    @action = Adaction.find(:first, :conditions => {:id => params[:id]}, :include => [:campaign])
     unless @action
       flash[:notice] = _('Action_was_not_found')
       if current_user.is_admin?
@@ -501,7 +501,7 @@ class AutodialerController < ApplicationController
   end
 
   def find_adnumber
-    @number = Adnumber.find(:first, :conditions=>{:id=>params[:id]}, :include=>[:campaign])
+    @number = Adnumber.find(:first, :conditions => {:id => params[:id]}, :include => [:campaign])
     unless @number
       flash[:notice] = _('Number_was_not_found')
       redirect_to :action => :index and return false

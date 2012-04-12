@@ -5,7 +5,7 @@ module DidsHelper
     if user and did
       unless did.reseller_id > 0 and user.id == 0
         if user.owner_id == correct_owner_id
-          user_info =  link_to(nice_user(user), {:controller => "users", :action => "edit", :id => did.user_id}, {:id=>"user_link"+ did.id.to_s})
+          user_info = link_to(nice_user(user), {:controller => "users", :action => "edit", :id => did.user_id}, {:id => "user_link"+ did.id.to_s})
         else
           user_info = nice_user(user)
         end
@@ -25,14 +25,14 @@ module DidsHelper
     if dialplan
       dp = did.dialplan
       case dp.dptype
-      when 'pbxfunction'
-        link_to dp.name + " (" + dp.dptype + ")", { :controller=>:functions, :action => :pbx_function_edit, :id => dp.id }
-      when 'quickforwarddids'
-        dp.name + " (" + dp.dptype + ")"
-      when 'ringgroup'
-        link_to dp.name + " (" + dp.dptype + ")", { :controller=>:ringgroups, :action => :edit, :id => dp.id }
-      else
-        link_to dp.name + " (" + dp.dptype + ")", { :controller=>:dialplans, :action => :edit, :id => dp.id }
+        when 'pbxfunction'
+          link_to dp.name + " (" + dp.dptype + ")", {:controller => :functions, :action => :pbx_function_edit, :id => dp.id}
+        when 'quickforwarddids'
+          dp.name + " (" + dp.dptype + ")"
+        when 'ringgroup'
+          link_to dp.name + " (" + dp.dptype + ")", {:controller => :ringgroups, :action => :edit, :id => dp.id}
+        else
+          link_to dp.name + " (" + dp.dptype + ")", {:controller => :dialplans, :action => :edit, :id => dp.id}
       end
     end
   end
@@ -45,7 +45,7 @@ module DidsHelper
     cont = []
     if device
       if link == 1
-      cont << link_nice_device(device)
+        cont << link_nice_device(device)
       else
         cont << nice_device(device)
       end

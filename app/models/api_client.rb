@@ -61,19 +61,19 @@ module APIClient
   def self.ping
     return true
     #begin
-      #return true if self.link.call("ping").eql?("0")
-      #return false
+    #return true if self.link.call("ping").eql?("0")
+    #return false
     #rescue Timeout::Error, Errno::ECONNREFUSED
-      #raise CommunicationError, "An error occured while trying to send message to API backend."
+    #raise CommunicationError, "An error occured while trying to send message to API backend."
     #end
   end
 
   # universaus kvietimo metodas. argumentai - hashai
 
   def self.send(method, *args)
-    args.collect!{ |a| a.to_s } # API priima argumentus kaip stringus
+    args.collect! { |a| a.to_s } # API priima argumentus kaip stringus
     begin
-      return true if self.link.call(method, Digest::SHA1.hexdigest("#{args.join}#{self.configuration.salt}"), *args ).eql?("0")
+      return true if self.link.call(method, Digest::SHA1.hexdigest("#{args.join}#{self.configuration.salt}"), *args).eql?("0")
       return false
     rescue Timeout::Error, Errno::ECONNREFUSED
       raise CommunicationError, "An error occured while trying to send message to API backend."

@@ -1,21 +1,20 @@
+<% i = 0 %>
 
-<% i = 0 %> 
-
-  <table width="100%" class="maintable" >
-    <tr>
-      <th align="center">        <%= _('Created') %>    </th>
-      <th align="left">        <%= _('Name') %>    </th>
-      <th align="left">        <%= _('Subject') %>    </th>
-      <th align="right">        <%= _('Sent_to_users') %>    </th>
-      <th align="center">        <%= _('Format') %>    </th>
-      <th align="center">        <%= _('Show') %>    </th>
-      <th align="center">      <%= _('Send') %>    </th>
-      <th align="center">      <%= _('Edit') %>    </th>
-      <th align="center">      <%= _('Delete') %>    </th>
-    </tr>
-    <% for @email in @emails %>
+<table width="100%" class="maintable">
+  <tr>
+    <th align="center">        <%= _('Created') %>    </th>
+    <th align="left">        <%= _('Name') %>    </th>
+    <th align="left">        <%= _('Subject') %>    </th>
+    <th align="right">        <%= _('Sent_to_users') %>    </th>
+    <th align="center">        <%= _('Format') %>    </th>
+    <th align="center">        <%= _('Show') %>    </th>
+    <th align="center">      <%= _('Send') %>    </th>
+    <th align="center">      <%= _('Edit') %>    </th>
+    <th align="center">      <%= _('Delete') %>    </th>
+  </tr>
+  <% for @email in @emails %>
       <tr class="row<%= (i % 2 + 1).to_s %>">
-        <td align="center"> <%= nice_date(@email.date_created) %>      </td>    
+        <td align="center"> <%= nice_date(@email.date_created) %>      </td>
         <td align="left"> <%= @email.name %>                           </td>
         <td align="left"> <%= @email.subject[0..20] %><%= "..." if @email.subject.size > 20 %></td>
 
@@ -26,15 +25,15 @@
             <td align="right"><%= 0 %>                                 </td>
         <% end %>
         <td align="center"> <%= @email.format %> </td>
-        <td align="center"><%= link_to b_email, :action => 'show_emails', :id => @email.id %> </td>      
-        <td align="center"><%= link_to b_email_send, :action => 'send_emails_from_cc', :id => @email.id if @email_sending_enabled and @email.template == 0 %> </td>      
-        <td align="center"><%= link_to b_edit, :action => 'edit', :id => @email.id if @email.owner_id==session[:user_id] %></td>    
-        <td align="center"><%= link_to b_delete, { :action => 'destroy', :id => @email.id, :ccc => @ccc }, :confirm => 'Are you sure?', :method => :post if  @email.template == 0 and @email.owner_id==session[:user_id]%></td>    
+        <td align="center"><%= link_to b_email, :action => 'show_emails', :id => @email.id %> </td>
+        <td align="center"><%= link_to b_email_send, :action => 'send_emails_from_cc', :id => @email.id if @email_sending_enabled and @email.template == 0 %> </td>
+        <td align="center"><%= link_to b_edit, :action => 'edit', :id => @email.id if @email.owner_id==session[:user_id] %></td>
+        <td align="center"><%= link_to b_delete, {:action => 'destroy', :id => @email.id, :ccc => @ccc}, :confirm => 'Are you sure?', :method => :post if  @email.template == 0 and @email.owner_id==session[:user_id] %></td>
       </tr>
-      <% i += 1%>  
-    <% end %>
-  </table>
+      <% i += 1 %>
+  <% end %>
+</table>
 
 
-<br />
+<br/>
 <%= link_to b_add + _('Add_new_email'), :action => 'new' %>

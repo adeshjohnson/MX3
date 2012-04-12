@@ -1,66 +1,66 @@
-<br />
-<br />
+<br/>
+<br/>
 <table class="simple" width="100%">
   <%= raw setting_boolean(_('Enabled') + '?', 'registration_enabled', "Registration_enabled").html_safe %>
   <%= raw setting_boolean(_('Hide_registration_link') + '?', 'hide_registration_link', "Hide_registration_link") %>
   <tr>
     <td></td>
-    <td><b><%= _('Default_Country')%>:</b></td>
+    <td><b><%= _('Default_Country') %>:</b></td>
     <td>
       <select name='default_country_id'>
         <% cdbid = Confline.get_value('Default_Country_ID').to_i %>
         <% for country in @countries %>
-          <option value='<%= country.id %>' <%= 'selected' if country.id == cdbid %>><%= h country.name.to_s %></option>
+            <option value='<%= country.id %>' <%= 'selected' if country.id == cdbid %>><%= h country.name.to_s %></option>
         <% end %>
       </select>
     </td>
   </tr>
   <tr>
     <td></td>
-    <td><b><%= _('Asterisk_Server_IP')%>:</b></td>
-    <td><%= text_field_tag('asterisk_server_ip', Confline.get_value("Asterisk_Server_IP") , "class" => "input", :size => "40", :maxlength => "50" )%></td>
+    <td><b><%= _('Asterisk_Server_IP') %>:</b></td>
+    <td><%= text_field_tag('asterisk_server_ip', Confline.get_value("Asterisk_Server_IP"), "class" => "input", :size => "40", :maxlength => "50") %></td>
   </tr>
   <%= raw setting_boolean(_('Send_Email_To_User_After_Registration'), 'send_email_to_user_after_registration', "Send_Email_To_User_After_Registration") %>
   <%= raw setting_boolean(_('Send_Email_To_Admin_After_Registration'), 'send_email_to_admin_after_registration', "Send_Email_To_Admin_After_Registration") %>
   <%= raw setting_boolean(_('Enable_reCAPTCHA'), 'enable_recaptcha', "reCAPTCHA_enabled") %>
   <tr>
     <td width="30"></td>
-    <td>      <b><%= _('ReCAPTCHA_public_key')%>:</b>                </td>
-    <td>     <%= text_field_tag('recaptcha_public_key', Confline.get_value("ReCAPTCHA_public_key") , "class" => "input", :size => "40", :maxlength => "50" )%>
+    <td><b><%= _('ReCAPTCHA_public_key') %>:</b></td>
+    <td>     <%= text_field_tag('recaptcha_public_key', Confline.get_value("ReCAPTCHA_public_key"), "class" => "input", :size => "40", :maxlength => "50") %>
       <% if Confline.get_value("ReCAPTCHA_public_key").to_s.blank? or Confline.get_value("ReCAPTCHA_private_key").to_s.blank? %>
         <span>
           <a style="" href="https://admin.recaptcha.net/accounts/signup/?next=" target="_blank"><%= _('Get_reCAPTCHA_keys') %> </a>
         </span>
-      <%end%>
+      <% end %>
     </td>
   </tr>
   <tr>
     <td width="30"></td>
-    <td>      <b><%= _('ReCAPTCHA_private_key')%>:</b>                </td>
-    <td>      <%= text_field_tag('recaptcha_private_key', Confline.get_value("ReCAPTCHA_private_key") , "class" => "input", :size => "40", :maxlength => "50" )%></td>
+    <td><b><%= _('ReCAPTCHA_private_key') %>:</b></td>
+    <td>      <%= text_field_tag('recaptcha_private_key', Confline.get_value("ReCAPTCHA_private_key"), "class" => "input", :size => "40", :maxlength => "50") %></td>
   </tr>
   <tr>
     <td></td>
     <td valign="top">
-      <b><%= _('Terms_and_conditions')%>:</b>
+      <b><%= _('Terms_and_conditions') %>:</b>
     </td>
     <td>
-      <%= text_area_tag('terms_and_conditions', h((@agreement) ? @agreement.value2 : "") , "class" => "input", :cols => "32", :rows => "12" )%>
+      <%= text_area_tag('terms_and_conditions', h((@agreement) ? @agreement.value2 : ""), "class" => "input", :cols => "32", :rows => "12") %>
     </td>
   </tr>
   <tr>
     <td></td>
     <td valign="top">
-      <b><%= _('Use_terms_and_conditions')%>:</b>
+      <b><%= _('Use_terms_and_conditions') %>:</b>
     </td>
     <td>
       <%= check_box_tag('use_terms_and_conditions', 1, (!@agreement or @agreement.value.empty? or @agreement.value == "0") ? false : true) %>
     </td>
   </tr>
-  <%=  raw setting_boolean(_('Allow_registration_username_passwords_in_devices'), 'allow_registration_username_passwords_in_devices', "Allow_registration_username_passwords_in_devices") %>
+  <%= raw setting_boolean(_('Allow_registration_username_passwords_in_devices'), 'allow_registration_username_passwords_in_devices', "Allow_registration_username_passwords_in_devices") %>
 
-  <%if mor_11_extend?%>
-    <%=   raw setting_boolean(_('Enable_VAT_checking_for_EU_companies'), 'enable_vat_checking', "Registration_Enable_VAT_checking", 0, {:tip=>tooltip(_('VAT_checking_for_EU_companies'), _('VAT_checking_for_EU_companies_explanation'))}) %>
-    <%=   raw setting_boolean(_('Allow_VAT_blank_for_EU_companies'), 'allow_vat_blank', "Registration_allow_vat_blank", 0, {:tip=>tooltip(_('VAT_blank_for_EU_companies'), _('VAT_blank_for_EU_companies_explanation'))}) %>
-  <%end%>
+  <% if mor_11_extend? %>
+      <%= raw setting_boolean(_('Enable_VAT_checking_for_EU_companies'), 'enable_vat_checking', "Registration_Enable_VAT_checking", 0, {:tip => tooltip(_('VAT_checking_for_EU_companies'), _('VAT_checking_for_EU_companies_explanation'))}) %>
+      <%= raw setting_boolean(_('Allow_VAT_blank_for_EU_companies'), 'allow_vat_blank', "Registration_allow_vat_blank", 0, {:tip => tooltip(_('VAT_blank_for_EU_companies'), _('VAT_blank_for_EU_companies_explanation'))}) %>
+  <% end %>
 </table>

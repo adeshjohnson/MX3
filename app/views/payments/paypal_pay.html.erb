@@ -1,14 +1,15 @@
-<div align="right"><%= image_tag("logo/paypal_logo.gif",  :style => 'border-style:none', :title => "PayPal") %></div>
+<div align="right"><%= image_tag("logo/paypal_logo.gif", :style => 'border-style:none', :title => "PayPal") %></div>
 <%= form_tag(@paypal_url) do %>
-<%= raw paypal_setup(@payment.id, @amount, Confline.get_value("PayPal_Email", @user.owner_id), :item_name => session[:company] + " balance update", :return_url => @paypal_return_url, :cancel_url => @paypal_cancel_url, :notify_url => @paypal_ipn_url, :currency => @currency, :tax => (@amount_with_vat - @amount), :custom => @amount_with_vat).html_safe  %>
+    <%= raw paypal_setup(@payment.id, @amount, Confline.get_value("PayPal_Email", @user.owner_id), :item_name => session[:company] + " balance update", :return_url => @paypal_return_url, :cancel_url => @paypal_cancel_url, :notify_url => @paypal_ipn_url, :currency => @currency, :tax => (@amount_with_vat - @amount), :custom => @amount_with_vat).html_safe %>
 
-    <%= _('Please_press_here_to_pay')%>* <%= nice_number @amount %> <%= @currency %>
+    <%= _('Please_press_here_to_pay') %>* <%= nice_number @amount %> <%= @currency %>
     <br/><br/>
-    <%= submit_tag _('Pay'), :onclick=>"this.disabled = true; this.value = '#{_('Processing..')}'; this.form.submit();" %>
-	  
-<%end%>
+    <%= submit_tag _('Pay'), :onclick => "this.disabled = true; this.value = '#{_('Processing..')}'; this.form.submit();" %>
+
+<% end %>
 
 <br/>
-<div class = "simple"> 
-  * <%= _('Your_VAT') %>: <%= @vat %> %. <%= _('Total_amount_to_pay')%>: <%= nice_number @amount_with_vat %> <%= @currency %>
+<div class="simple">
+  * <%= _('Your_VAT') %>: <%= @vat %> %. <%= _('Total_amount_to_pay') %>
+  : <%= nice_number @amount_with_vat %> <%= @currency %>
 </div>

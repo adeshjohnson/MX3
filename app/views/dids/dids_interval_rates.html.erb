@@ -1,112 +1,112 @@
-<%= render :partial => "bulk_management_header"  %>
+<%= render :partial => "bulk_management_header" %>
 <% unless @dids.size.to_i < 1 %>
-  <%= _('DID_rates_in_specified_interval_can_have_diferent_properties') %>
-  <%= form_tag :action => 'edit_rate', :from => @from , :till => @till, :interval => 1, :user =>  @user do %>
-    <%= _('DID_Provider_rate_explained') %>
-    <% i = 0 %>
-    <% unless reseller? %>
-      <br />
-      <br />
+    <%= _('DID_rates_in_specified_interval_can_have_diferent_properties') %>
+    <%= form_tag :action => 'edit_rate', :from => @from, :till => @till, :interval => 1, :user => @user do %>
+        <%= _('DID_Provider_rate_explained') %>
+        <% i = 0 %>
+        <% unless reseller? %>
+            <br/>
+            <br/>
 
-      <table width="100%" class="maintable">
-        <tr>
-          <th><%= _('Start_Time') %></th>
-          <th><%= _('End_Time') %></th>
-          <th align="left"><%= _('Rate') %></th>
-          <th align="left"><%= _('Connection_Fee') %></th>
-          <th align="left"><%= _('Increment') %></th>
-          <th align="left"><%= _('Min_Time') %></th>
-        </tr>
-        <tr class="row<%= (i % 2 + 1).to_s %>">
-          <td align="center"><%= nice_time2('00:00:00') %></td>
-          <td align="center"><%= nice_time2('23:59:59') %></td>
-          <td>
-            <%= text_field_tag 'prate', '0', "class" => "input", :size => "5", :maxlength => "14"  %>
-          </td>
-          <td>
-            <%= text_field_tag 'pcon_fee', '0', "class" => "input", :size => "5", :maxlength => "14"  %>
-          </td>
-          <td>
-            <%= text_field_tag 'pinc', '1', "class" => "input", :size => "5", :maxlength => "14"  %>
-          </td>
-          <td>
-            <%= text_field_tag 'pmin_time', '0', "class" => "input", :size => "5", :maxlength => "14"  %>
-          </td>
-        </tr>
-      </table>
-      <br />
-      <br />
+            <table width="100%" class="maintable">
+              <tr>
+                <th><%= _('Start_Time') %></th>
+                <th><%= _('End_Time') %></th>
+                <th align="left"><%= _('Rate') %></th>
+                <th align="left"><%= _('Connection_Fee') %></th>
+                <th align="left"><%= _('Increment') %></th>
+                <th align="left"><%= _('Min_Time') %></th>
+              </tr>
+              <tr class="row<%= (i % 2 + 1).to_s %>">
+                <td align="center"><%= nice_time2('00:00:00') %></td>
+                <td align="center"><%= nice_time2('23:59:59') %></td>
+                <td>
+                  <%= text_field_tag 'prate', '0', "class" => "input", :size => "5", :maxlength => "14" %>
+                </td>
+                <td>
+                  <%= text_field_tag 'pcon_fee', '0', "class" => "input", :size => "5", :maxlength => "14" %>
+                </td>
+                <td>
+                  <%= text_field_tag 'pinc', '1', "class" => "input", :size => "5", :maxlength => "14" %>
+                </td>
+                <td>
+                  <%= text_field_tag 'pmin_time', '0', "class" => "input", :size => "5", :maxlength => "14" %>
+                </td>
+              </tr>
+            </table>
+            <br/>
+            <br/>
+        <% end %>
+
+        <%= _('DID_incoming_rate_explained') %>
+        <br/>
+        <br/>
+        <table width="100%" class="maintable">
+          <tr>
+            <th><%= _('Start_Time') %></th>
+            <th><%= _('End_Time') %></th>
+            <th align="left"><%= _('Rate') %></th>
+            <th align="left"><%= _('Connection_Fee') %></th>
+            <th align="left"><%= _('Increment') %></th>
+            <th align="left"><%= _('Min_Time') %></th>
+          </tr>
+
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <td align="center"><%= nice_time2('00:00:00') %></td>
+            <td align="center"><%= nice_time2('23:59:59') %></td>
+            <td>
+              <%= text_field_tag 'irate', '0', "class" => "input", :size => "5", :maxlength => "14" %>
+            </td>
+            <td>
+              <%= text_field_tag 'icon_fee', '0', "class" => "input", :size => "5", :maxlength => "14" %>
+            </td>
+            <td>
+              <%= text_field_tag 'iinc', '1', "class" => "input", :size => "5", :maxlength => "14" %>
+            </td>
+            <td>
+              <%= text_field_tag 'imin_time', '0', "class" => "input", :size => "5", :maxlength => "14" %>
+            </td>
+          </tr>
+        </table>
+        <br/>
+        <br/>
+
+        <% unless reseller? %>
+            <%= _('DID_owner_rate_explained') %>
+            <br/>
+            <br/>
+            <table width="100%" class="maintable">
+              <tr>
+                <th><%= _('Start_Time') %></th>
+                <th><%= _('End_Time') %></th>
+                <th align="left"><%= _('Rate') %></th>
+                <th align="left"><%= _('Connection_Fee') %></th>
+                <th align="left"><%= _('Increment') %></th>
+                <th align="left"><%= _('Min_Time') %></th>
+              </tr>
+
+              <tr class="row<%= (i % 2 + 1).to_s %>">
+                <td align="center"><%= nice_time2('00:00:00') %></td>
+                <td align="center"><%= nice_time2('23:59:59') %></td>
+                <td>
+                  <%= text_field_tag 'orate', '0', "class" => "input", :size => "5", :maxlength => "14" %>
+                </td>
+                <td>
+                  <%= text_field_tag 'ocon_fee', '0', "class" => "input", :size => "5", :maxlength => "14" %>
+                </td>
+                <td>
+                  <%= text_field_tag 'oinc', '1', "class" => "input", :size => "5", :maxlength => "14" %>
+                </td>
+                <td>
+                  <%= text_field_tag 'omin_time', '0', "class" => "input", :size => "5", :maxlength => "14" %>
+                </td>
+              </tr>
+            </table>
+            <br/>
+            <br/>
+        <% end %>
+        <%= submit_tag _('Change'), :title => _('Edit'), :disable_with => _('Processing..') %>
     <% end %>
-
-    <%= _('DID_incoming_rate_explained') %>
-    <br />
-    <br />
-    <table width="100%" class="maintable">
-      <tr>
-        <th><%= _('Start_Time') %></th>
-        <th><%= _('End_Time') %></th>
-        <th align="left"><%= _('Rate') %></th>
-        <th align="left"><%= _('Connection_Fee') %></th>
-        <th align="left"><%= _('Increment') %></th>
-        <th align="left"><%= _('Min_Time') %></th>
-      </tr>
-
-      <tr class="row<%= (i % 2 + 1).to_s %>">
-        <td align="center"><%= nice_time2('00:00:00') %></td>
-        <td align="center"><%= nice_time2('23:59:59') %></td>
-        <td>
-          <%= text_field_tag 'irate', '0', "class" => "input", :size => "5", :maxlength => "14" %>
-        </td>
-        <td>
-          <%= text_field_tag 'icon_fee', '0', "class" => "input", :size => "5", :maxlength => "14"  %>
-        </td>
-        <td>
-          <%= text_field_tag 'iinc', '1', "class" => "input", :size => "5", :maxlength => "14"  %>
-        </td>
-        <td>
-          <%= text_field_tag 'imin_time', '0', "class" => "input", :size => "5", :maxlength => "14"  %>
-        </td>
-      </tr>
-    </table>
-    <br />
-    <br />
-
-    <% unless reseller? %>
-      <%= _('DID_owner_rate_explained') %>
-      <br />
-      <br />
-      <table width="100%" class="maintable">
-        <tr>
-          <th><%= _('Start_Time') %></th>
-          <th><%= _('End_Time') %></th>
-          <th align="left"><%= _('Rate') %></th>
-          <th align="left"><%= _('Connection_Fee') %></th>
-          <th align="left"><%= _('Increment') %></th>
-          <th align="left"><%= _('Min_Time') %></th>
-        </tr>
-
-        <tr class="row<%= (i % 2 + 1).to_s %>">
-          <td align="center"><%= nice_time2('00:00:00') %></td>
-          <td align="center"><%= nice_time2('23:59:59') %></td>
-          <td>
-            <%= text_field_tag 'orate', '0', "class" => "input", :size => "5", :maxlength => "14"  %>
-          </td>
-          <td>
-            <%= text_field_tag 'ocon_fee', '0', "class" => "input", :size => "5", :maxlength => "14"  %>
-          </td>
-          <td>
-            <%= text_field_tag 'oinc', '1', "class" => "input", :size => "5", :maxlength => "14"  %>
-          </td>
-          <td>
-            <%= text_field_tag 'omin_time', '0', "class" => "input", :size => "5", :maxlength => "14"  %>
-          </td>
-        </tr>
-      </table>
-      <br />
-      <br />
-    <% end %>
-    <%= submit_tag _('Change'), :title => _('Edit') , :disable_with=>_('Processing..')%>
-  <% end %>
 <% else %>
-  <% flash[:notice] = _('No_DID_found_Please_check_interval') %>
-<%end%>
+    <% flash[:notice] = _('No_DID_found_Please_check_interval') %>
+<% end %>

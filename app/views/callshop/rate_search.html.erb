@@ -1,45 +1,43 @@
-
-
 <table>
   <tr>
     <td> <%= _("Enter_Prefix") %>:
-      <%= text_field_tag :search, "", "class" => "input", :id=>"prefix_search" %></td>
+      <%= text_field_tag :search, "", "class" => "input", :id => "prefix_search" %></td>
 
     <td><%= _("Type_Country") %>:
-      <%= text_field_tag :country_search, "", "class" => "input", :id=>"country_search"  %></td>
+      <%= text_field_tag :country_search, "", "class" => "input", :id => "country_search" %></td>
   </tr>
   <tr>
     <td><span id="results"></span></td>
-    <td><span id="country_results" ></span></td>
+    <td><span id="country_results"></span></td>
   </tr>
 </table>
 
 <script type="text/javascript">
 
-  jQuery('#country_search').live('keyup', function() {
-  jQuery.ajax({
-  url: "<%=Web_Dir%>/stats/prefix_finder_find_country",
-  data:{
-  prefix : jQuery('#country_search').attr('value'),
-  callshop: <%= @cshop.id %>
-  },
-  success: function(data){
-  $('#country_results').html(data) ;
-  }
-  });
-  });
+    jQuery('#country_search').live('keyup', function () {
+        jQuery.ajax({
+            url:"<%=Web_Dir%>/stats/prefix_finder_find_country",
+            data:{
+                prefix:jQuery('#country_search').attr('value'),
+                callshop: <%= @cshop.id %>
+            },
+            success:function (data) {
+                $('#country_results').html(data);
+            }
+        });
+    });
 
-  jQuery('#prefix_search').live('keyup', function() {
-  jQuery.ajax({
-  url: "<%=Web_Dir%>/stats/prefix_finder_find",
-  data:{
-  prefix : jQuery('#prefix_search').attr('value'),
-  callshop: <%= @cshop.id %>
-  },
-  success: function(data) {
-  $('#results').html(data);
-  }
-  });
-  });
+    jQuery('#prefix_search').live('keyup', function () {
+        jQuery.ajax({
+            url:"<%=Web_Dir%>/stats/prefix_finder_find",
+            data:{
+                prefix:jQuery('#prefix_search').attr('value'),
+                callshop: <%= @cshop.id %>
+            },
+            success:function (data) {
+                $('#results').html(data);
+            }
+        });
+    });
 
 </script>

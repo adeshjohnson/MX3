@@ -5,13 +5,13 @@
 
 
 <table class="maintable" width="100%">
-<% i = 0 %>  
-	<% for ext in @extlines %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-		<td>
-			[<%= ext.context %>] exten => <%= ext.exten %>,<%= ext.priority %>,<%= ext.app %>(<%= ext.appdata %>)
-		</td>
-	</tr>
-     <% i += 1%> 	
-	<% end %>
+  <% i = 0 %>
+  <% for ext in @extlines %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td>
+          [<%= ext.context %>] exten => <%= ext.exten %>,<%= ext.priority %>,<%= ext.app %>(<%= ext.appdata %>)
+        </td>
+      </tr>
+      <% i += 1 %>
+  <% end %>
 </table>

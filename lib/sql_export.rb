@@ -4,9 +4,10 @@ module SqlExport
     # "IF(#{users}.id IS NULL, '', IF((LENGTH(#{users}.first_name )> 0 OR (LENGTH(#{users}.last_name) > 0)),CONCAT(#{users}.first_name, ' ', #{users}.last_name), #{users}.username))#{" AS '#{name}'" if name}"
     "IF(#{users}.id IS NULL, '', IF((LENGTH(#{users}.first_name )> 0 AND (LENGTH(#{users}.last_name) > 0)),CONCAT(#{users}.first_name, ' ', #{users}.last_name), IF((LENGTH(#{users}.first_name )> 0), #{users}.first_name, IF((LENGTH(#{users}.last_name )> 0), #{users}.last_name, #{users}.username)))) #{" AS '#{name}'" if name}"
   end
+
   # marks type possitions in user.hide_destination_end numbers
   @@types = {"gui" => 1, "csv" => 2, "pdf" => 3}
-  
+
   def checked_possition?(permission_number, possition)
     (permission_number.to_i & 2**(possition.to_i-1)) != 0
   end
@@ -23,9 +24,9 @@ module SqlExport
 
   def hide_last_numbers_sql(column, options={})
     opts = {
-      :with => "XXX",
-      :last => 3,
-      :as => column
+        :with => "XXX",
+        :last => 3,
+        :as => column
     }.merge(options)
     "concat(substring(#{column}, 1, length(#{column})-#{opts[:last]}), '#{opts[:with]}') as #{opts[:as]}"
   end
@@ -45,7 +46,7 @@ module SqlExport
   end
 
   def SqlExport.nice_date(column, opt={})
-    "DATE_FORMAT(DATE_ADD(#{column}, INTERVAL #{opt[:offset] ? opt[:offset].to_f  * 60 : 0 } MINUTE ), '#{opt[:format].blank? ? '%Y-%m-%d %H:%i:%S' : opt[:format]}') #{"AS #{opt[:reference]}" unless opt[:reference].blank?}"
+    "DATE_FORMAT(DATE_ADD(#{column}, INTERVAL #{opt[:offset] ? opt[:offset].to_f * 60 : 0 } MINUTE ), '#{opt[:format].blank? ? '%Y-%m-%d %H:%i:%S' : opt[:format]}') #{"AS #{opt[:reference]}" unless opt[:reference].blank?}"
   end
 
   def SqlExport.replace_sep(column, replase_from = "", replase_to = "", reference = nil)

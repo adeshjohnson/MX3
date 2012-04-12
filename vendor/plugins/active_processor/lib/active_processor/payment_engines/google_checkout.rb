@@ -11,7 +11,7 @@ module ActiveProcessor
 
         super(engine, name, options, fields)
       end
-      
+
       def valid_settings?
         if !get(:config, 'max_amount').to_f.zero? and !get(:config, 'min_amount').to_f.zero? and get(:config, 'max_amount').to_f < get(:config, 'min_amount').to_f
           @errors.store("min_amount", "gateway_error_min_amount_more_than_max")
@@ -23,7 +23,7 @@ module ActiveProcessor
         init_config
 
         for param, value in params[@engine][@name]
-          set(:form, { param => value }) # field validations
+          set(:form, {param => value}) # field validations
         end
 
         params[@engine][@name]['amount'] = round_to_cents(params[@engine][@name]['amount']).to_i*100 # Paverciam centais.
@@ -56,20 +56,20 @@ module ActiveProcessor
           money = ActiveProcessor.configuration.substract_tax.call(user, gross)
           origin_with_tax = original_amount
         else
-          money = exchange(original_amount,original_currency, payment_default_currency)
+          money = exchange(original_amount, original_currency, payment_default_currency)
           gross = ActiveProcessor.configuration.calculate_tax.call(user, money)
           origin_with_tax = ActiveProcessor.configuration.calculate_tax.call(user, original_amount)
         end
-        
+
         @payment = OpenStruct.new({
-            :money => money,
-            :orig_amount => original_amount.to_f,
-            :orig_tax => 0,
-            :orig_with_tax => round_to_cents(origin_with_tax).to_f,
-            :tax => round_to_cents(gross).to_f - money,
-            :orig_currency => original_currency,
-            :currency => payment_default_currency
-          })
+                                      :money => money,
+                                      :orig_amount => original_amount.to_f,
+                                      :orig_tax => 0,
+                                      :orig_with_tax => round_to_cents(origin_with_tax).to_f,
+                                      :tax => round_to_cents(gross).to_f - money,
+                                      :orig_currency => original_currency,
+                                      :currency => payment_default_currency
+                                  })
         @payment.orig_tax = (@payment.orig_with_tax - @payment.orig_amount)
         @payment.amount = gross.ceil
       end
@@ -108,7 +108,7 @@ module ActiveProcessor
 
         auth_config = {}
         # we choose only those fields for authentication which have attribute for=authentication in configuration
-        @fields['config'].dup.delete_if{ |item, conf| conf['for'] != "authentication" }.each {|field, configuration|
+        @fields['config'].dup.delete_if { |item, conf| conf['for'] != "authentication" }.each { |field, configuration|
           auth_config[field.to_sym] = configuration['html_options']['value']
         }
         auth_config[:use_sandbox] = (auth_config[:use_sandbox].to_i == 0 ? false : true)

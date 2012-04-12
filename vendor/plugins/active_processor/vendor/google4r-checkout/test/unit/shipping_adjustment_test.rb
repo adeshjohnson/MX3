@@ -42,57 +42,57 @@ class Google4R::Checkout::ShippingAdjustmentTest < Test::Unit::TestCase
         <shipping-name>%s</shipping-name>
         <shipping-cost currency="%s">%s</shipping-cost>
       </%s>}
-    
+
     @valid_adjustment_types =
-      [
-        [ "FLAT_RATE", 'flat-rate-shipping-adjustment' ],
-        [ "PICKUP", 'pickup-shipping-adjustment' ],
-      ]
-    
-    @invalid_adjustment_types = [ 'merchant-calculated-shipping', 'invalid-shipping' ]
+        [
+            ["FLAT_RATE", 'flat-rate-shipping-adjustment'],
+            ["PICKUP", 'pickup-shipping-adjustment'],
+        ]
+
+    @invalid_adjustment_types = ['merchant-calculated-shipping', 'invalid-shipping']
   end
-  
+
   def test_responds_correctly
     adjustment = ShippingAdjustment.new
-    
-    [ :type, :type=, :name, :name=, :cost, :cost= ].each do |symbol|
+
+    [:type, :type=, :name, :name=, :cost, :cost=].each do |symbol|
       assert_respond_to adjustment, symbol
     end
   end
-  
+
   def test_constants_are_defined
     assert defined?(ShippingAdjustment::FLAT_RATE)
     assert defined?(ShippingAdjustment::PICKUP)
   end
-  
+
   def test_create_from_element_works_with_valid_shipping_adjustment_types
     @valid_adjustment_types.each do |pair|
       type, tag_name = pair
-      
-      xml_str = @xml_str % 
-        [
-          tag_name, 'Some Name', 'USD', '10.00', tag_name
-        ]
-      
+
+      xml_str = @xml_str %
+          [
+              tag_name, 'Some Name', 'USD', '10.00', tag_name
+          ]
+
       element = REXML::Document.new(xml_str).root
-      
+
       adjustment = ShippingAdjustment.create_from_element(element)
-      
+
       assert_equal Money.new(1000, 'USD'), adjustment.cost
       assert_equal type, adjustment.type
       assert_equal 'Some Name', adjustment.name
     end
   end
-  
+
   def test_create_from_element_raises_exception_with_invalid_shipping_adjustment_types
     @invalid_adjustment_types.each do |tag_name|
-      xml_str = @xml_str % 
-        [
-          tag_name, 'Some Name', 'USD', '10.00', tag_name
-        ]
-      
+      xml_str = @xml_str %
+          [
+              tag_name, 'Some Name', 'USD', '10.00', tag_name
+          ]
+
       element = REXML::Document.new(xml_str).root
-      
+
       assert_raises(RuntimeError) do
         adjustment = ShippingAdjustment.create_from_element(element)
       end

@@ -4,42 +4,43 @@
 
 <table class='simple' width=50%>
   <% if @etedit %>
-    <tr>
-      <td colspan =" 2">
-        <%= b_info + _('Explanation_when_spliting_rate')%>
-      </td>
-    </tr>
+      <tr>
+        <td colspan=" 2">
+          <%= b_info + _('Explanation_when_spliting_rate') %>
+        </td>
+      </tr>
   <% end %>
   <tr>
-    <td><br/><b><label for="ratedetail_start_time"><%= _('Start_Time') %>:</label> </b> </td>
-    <!-- <% text_field 'ratedetail', 'start_time', "class" => "input", "disabled" => true    %></p> -->
-    <td><br/><%=  nice_time2 @ratedetail.start_time %> </td>
+    <td><br/><b><label for="ratedetail_start_time"><%= _('Start_Time') %>:</label> </b></td>
+    <!--
+    <% text_field 'ratedetail', 'start_time', "class" => "input", "disabled" => true %></p> -->
+    <td><br/><%= nice_time2 @ratedetail.start_time %> </td>
   </tr>
   <tr>
-    <td> <b><label for="ratedetail_end_time"><%= _('End_Time') %>:</label></b> </td>
+    <td><b><label for="ratedetail_end_time"><%= _('End_Time') %>:</label></b></td>
     <td>
       <% if @etedit %>
-        <%= text_field 'ratedetail', 'end_time', "class" => "input"   %>
+          <%= text_field 'ratedetail', 'end_time', "class" => "input" %>
       <% else %>
-        <%=  nice_time2 @ratedetail.end_time %>
+          <%= nice_time2 @ratedetail.end_time %>
       <% end %>
     </td>
   </tr>
   <tr>
     <td><b><label for="ratedetail_rate"><%= _('Rate') %>:</label></b></td>
-    <td><%= text_field 'ratedetail', 'rate', "class" => "input"   %></td>
+    <td><%= text_field 'ratedetail', 'rate', "class" => "input" %></td>
   </tr>
   <tr>
     <td><b><label for="ratedetail_connection_fee"><%= _('Connection_Fee') %>:</label></b></td>
-    <td><%= text_field 'ratedetail', 'connection_fee', "class" => "input"   %></td>
+    <td><%= text_field 'ratedetail', 'connection_fee', "class" => "input" %></td>
   </tr>
   <tr>
     <td><b><label for="ratedetail_increment"><%= _('Increment') %>:</label></b></td>
-    <td><%= text_field 'ratedetail', 'increment_s', "class" => "input"   %></td>
+    <td><%= text_field 'ratedetail', 'increment_s', "class" => "input" %></td>
   </tr>
   <tr>
     <td><b><label for="ratedetail_min_time"><%= _('Min_Time') %>:</label></b></td>
-    <td><%= text_field 'ratedetail', 'min_time', "class" => "input"   %></td>
+    <td><%= text_field 'ratedetail', 'min_time', "class" => "input" %></td>
   </tr>
 </table>
 

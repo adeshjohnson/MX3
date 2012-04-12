@@ -5,11 +5,11 @@ class Usergroup < ActiveRecord::Base
 
   before_create :check_menager_size_in_group
 
-    def check_menager_size_in_group
-      if Usergroup.count(:all, :conditions=>['group_id=? AND gusertype = "manager"', self.group_id]).to_i > 0 and self.gusertype == 'manager'
-        errors.add(:gusertype, _("Call_Shop_can_have_only_one_manager"))
-        return false
-      end
+  def check_menager_size_in_group
+    if Usergroup.count(:all, :conditions => ['group_id=? AND gusertype = "manager"', self.group_id]).to_i > 0 and self.gusertype == 'manager'
+      errors.add(:gusertype, _("Call_Shop_can_have_only_one_manager"))
+      return false
     end
+  end
 
 end

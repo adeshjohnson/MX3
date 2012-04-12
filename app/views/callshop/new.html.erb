@@ -1,45 +1,46 @@
 <tr class='slide'>
   <td colspan='10'>
-    <% form_for :invoice, :url => { :controller => "callshop", :action => "reserve_booth", :id => params[:id], :format => "json" } do |form| %>
-      <table cellpadding="0" cellspacing="0" class="invoice">
-        <tr>
-          <td>
-            <label for="invoice_usertype"><%= _('User_type') %></label>
-          </td>
-          <td>
-            <label for="invoice_comment"><%= _('Comment') %></label>
-          </td>
-        </tr>
-        <tr>
-          <td style="width: 20%">
-            <%= form.radio_button :invoice_type, "prepaid", :class => "prepaid_btn"  %> <%= _('Prepaid') %> <br/>
-            <%= form.radio_button :invoice_type, "postpaid", :class => "postpaid_btn", :checked => "checked" %> <%= _('Postpaid') %>
-            <br />
-            <br />
-            <div  style="display: none" class="balance">
-              <label for="invoice_price"><%= _('Money') %></label> (<%= @currency %>)
-              <br />
+    <% form_for :invoice, :url => {:controller => "callshop", :action => "reserve_booth", :id => params[:id], :format => "json"} do |form| %>
+        <table cellpadding="0" cellspacing="0" class="invoice">
+          <tr>
+            <td>
+              <label for="invoice_usertype"><%= _('User_type') %></label>
+            </td>
+            <td>
+              <label for="invoice_comment"><%= _('Comment') %></label>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 20%">
+              <%= form.radio_button :invoice_type, "prepaid", :class => "prepaid_btn" %> <%= _('Prepaid') %> <br/>
+              <%= form.radio_button :invoice_type, "postpaid", :class => "postpaid_btn", :checked => "checked" %> <%= _('Postpaid') %>
+              <br/>
+              <br/>
+
+              <div style="display: none" class="balance">
+                <label for="invoice_price"><%= _('Money') %></label> (<%= @currency %>)
+                <br/>
               <span class="field-wrap">
                 <%= form.text_field :balance, :size => 14 %>
               </span>
-              <br />
-              <input class="hidden" type="hidden" value="<%= 1 %>" name="add_with_tax_new" />
-            </div>
-          </td>
-          <td style="width: 80%">
+                <br/>
+                <input class="hidden" type="hidden" value="<%= 1 %>" name="add_with_tax_new"/>
+              </div>
+            </td>
+            <td style="width: 80%">
             <span class="field-wrap">
               <%= form.text_area :comment, :rows => 4, :columns => 10 %>
             </span>
-          </td>
-        </tr>
-        <tr colspan="2">
-          <td>
-            <%= form.hidden_field :user_id %>
-            <%= submit_tag _("Reserve"), :class => "reserve" %>
-            <%= content_tag(:input, "", { :value => _("Cancel"), :type => "button", :class => "cancel"} ) %>
-          </td>
-        </tr>
-      </table>
+            </td>
+          </tr>
+          <tr colspan="2">
+            <td>
+              <%= form.hidden_field :user_id %>
+              <%= submit_tag _("Reserve"), :class => "reserve" %>
+              <%= content_tag(:input, "", {:value => _("Cancel"), :type => "button", :class => "cancel"}) %>
+            </td>
+          </tr>
+        </table>
     <% end %>
   </td>
 </tr>

@@ -1,10 +1,10 @@
 # -*- encoding : utf-8 -*-
 class Providerrule < ActiveRecord::Base
-  belongs_to  :provider
-  
+  belongs_to :provider
+
   def before_transformation
     bt = "_" + self.start.to_s
-    if self.length == 0 
+    if self.length == 0
       bt += "X."
     else
       (self.length - self.start.length).times do

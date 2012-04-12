@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class DidRatesController < ApplicationController
   layout "callc"
-  before_filter :check_post_method, :only=>[:destroy, :create, :update]
+  before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :check_localization
   before_filter :authorize
 
@@ -16,7 +16,7 @@ class DidRatesController < ApplicationController
 
   before_filter :check_reseller
   before_filter :find_did, :only => [:index]
-  before_filter :find_did_rate, :only=>[:edit, :update, :manage]
+  before_filter :find_did_rate, :only => [:edit, :update, :manage]
 
 
   def index
@@ -57,7 +57,7 @@ class DidRatesController < ApplicationController
     if @did_rate.update_attributes(params[:did_rate])
 
       # we need to create new rd to cover all day
-      if (nice_time2(@did_rate.end_time) != "23:59:59") and ((rdetails[(rdetails.size - 1)] == @did_rate) )
+      if (nice_time2(@did_rate.end_time) != "23:59:59") and ((rdetails[(rdetails.size - 1)] == @did_rate))
         st = @did_rate.end_time + 1.second
 
         nrd = Didrate.new
@@ -71,11 +71,11 @@ class DidRatesController < ApplicationController
         nrd.daytype = @did_rate.daytype
         nrd.rate_type = @did_rate.rate_type
         if nrd.save
-          Action.add_action_hash(current_user, {:action=>'did_rate_created', :target_id=>nrd.id, :target_type=>"Didrate", :data=>nrd.did_id})
+          Action.add_action_hash(current_user, {:action => 'did_rate_created', :target_id => nrd.id, :target_type => "Didrate", :data => nrd.did_id})
         end
       end
 
-      Action.add_action_hash(current_user, {:action=>'did_rate_edited', :target_id=>@did_rate.id, :target_type=>"Didrate", :data=>@did_rate.did_id})
+      Action.add_action_hash(current_user, {:action => 'did_rate_edited', :target_id => @did_rate.id, :target_type => "Didrate", :data => @did_rate.did_id})
       flash[:status] = _('Rate_details_was_successfully_updated')
       redirect_to :action => :index, :id => @did_rate.did_id
     else
@@ -143,14 +143,14 @@ class DidRatesController < ApplicationController
   private
 
   def find_did
-    @did = Did.find(:first, :conditions =>["id = ?", params[:id]])
+    @did = Did.find(:first, :conditions => ["id = ?", params[:id]])
     unless @did
       flash[:notice]=_('DID_was_not_found')
-      redirect_to :controller=>:dids, :action=>:list and return false
+      redirect_to :controller => :dids, :action => :list and return false
     end
     if @did.reseller_id != session[:user_id] and session[:usertype].to_s == 'reseller'
       flash[:notice]=_('DID_was_not_found')
-      redirect_to :controller=>:dids, :action=>:list and return false
+      redirect_to :controller => :dids, :action => :list and return false
     end
   end
 
@@ -162,10 +162,10 @@ class DidRatesController < ApplicationController
   end
 
   def find_did_rate
-    @did_rate = Didrate.find(:first, :conditions =>["id = ?", params[:id]])
+    @did_rate = Didrate.find(:first, :conditions => ["id = ?", params[:id]])
     unless @did_rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :controller=>:callc, :action=>:main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
   end
 end

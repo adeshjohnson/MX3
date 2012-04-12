@@ -317,12 +317,12 @@ class Invoice < ActiveRecord::Base
     n = 15 - dgids.size.to_i
 
     if options[:show_avg_rate] == 1
-      n.times { items <<  [' ', '', '', '', '', ''] } if n > 0
-      items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_f))]      if user.minimal_charge_enabled?
+      n.times { items << [' ', '', '', '', '', ''] } if n > 0
+      items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_f))] if user.minimal_charge_enabled?
       items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(self.converted_price(ex)))]
     else
-      n.times { items <<  [' ', '', '', '', '']  } if n > 0
-      items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_f))]       if user.minimal_charge_enabled?
+      n.times { items << [' ', '', '', '', ''] } if n > 0
+      items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_f))] if user.minimal_charge_enabled?
       items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(self.converted_price(ex)))]
     end
     items_t, up_string, tax_amount, price_with_tax = tax_items(ex, nc, nice_number_hash, 2, options[:show_avg_rate])
@@ -451,13 +451,13 @@ class Invoice < ActiveRecord::Base
         :user => user,
         :tariff_purpose => user.tariff.purpose,
         :format => Confline.get_value('Date_format', current_user.owner_id).gsub('M', 'i'),
-        :user_price => SqlExport.replace_price(up, {:ex=>ex}),
-        :reseller_price => SqlExport.replace_price(rp, {:ex=>ex}),
-        :did_price => SqlExport.replace_price('calls.did_price', {:ex=>ex , :reference=> 'did_price'}),
+        :user_price => SqlExport.replace_price(up, {:ex => ex}),
+        :reseller_price => SqlExport.replace_price(rp, {:ex => ex}),
+        :did_price => SqlExport.replace_price('calls.did_price', {:ex => ex, :reference => 'did_price'}),
         :did_sql_price => SqlExport.replace_price('calls.did_price', {:ex => ex, :reference => 'did_price'}),
-        :did_inc_sql_price => SqlExport.replace_price('calls.did_inc_price', {:ex=>ex, :reference=>'did_inc_price'}),
-        :selfcost => SqlExport.replace_price(pp, {:ex=>ex, :reference=>'selfcost'}),
-        :user_rate => SqlExport.replace_price('calls.user_rate', {:ex=>ex, :reference=> 'user_rate'}),
+        :did_inc_sql_price => SqlExport.replace_price('calls.did_inc_price', {:ex => ex, :reference => 'did_inc_price'}),
+        :selfcost => SqlExport.replace_price(pp, {:ex => ex, :reference => 'selfcost'}),
+        :user_rate => SqlExport.replace_price('calls.user_rate', {:ex => ex, :reference => 'user_rate'}),
         :zero_calls_sql => user.invoice_zero_calls.to_i == 0 ? " AND calls.user_price > 0 " : "",
         :owner => owner,
         :prepaid => prepaid,

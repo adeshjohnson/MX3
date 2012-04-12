@@ -1,18 +1,18 @@
 # -*- encoding : utf-8 -*-
 class IvrController < ApplicationController
   layout "callc"
-  before_filter :check_post_method, :only=>[:destroy, :create, :update]
+  before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :check_localization
   before_filter :authorize
 
   before_filter :find_ivr_action_silent, :only => [:update_data1, :update_data2, :action_params]
   before_filter :find_ivr_block_silent, :only => [:update_block_timeout_digits, :update_block_timeout_response, :update_block_name]
-  before_filter :find_ivr, :only=>[:edit, :update_ivr_name, :destroy  ]
-  before_filter :find_ivr_block, :only=>[:add_ivr_extension, :ivr_extlines, :change_block, :add_block]
+  before_filter :find_ivr, :only => [:edit, :update_ivr_name, :destroy]
+  before_filter :find_ivr_block, :only => [:add_ivr_extension, :ivr_extlines, :change_block, :add_block]
   before_filter :check_reseller
 
   # Global variables. Defines possile choices for extensions and actions
-  $pos_actions = ['Playback', 'Change Voice','Delay', 'Hangup', 'Transfer To', 'Debug', 'Set Accountcode', 'Change CallerID (Number)']
+  $pos_actions = ['Playback', 'Change Voice', 'Delay', 'Hangup', 'Transfer To', 'Debug', 'Set Accountcode', 'Change CallerID (Number)']
   $pos_extensions = %w(0 1 2 3 4 5 6 7 8 9 # * i t)
   $pos_variables = ['MOR_ASK_DST_TIMES']
 
@@ -24,7 +24,7 @@ class IvrController < ApplicationController
 
   def settings_change
     Confline.set_value("IVR_Voice_Dir", params[:voice_dir])
-    redirect_to :controller => "ivr",  :action => "settings"
+    redirect_to :controller => "ivr", :action => "settings"
   end
 
 
@@ -43,10 +43,10 @@ class IvrController < ApplicationController
     @options = {}
     @options[:page] = ((params[:page].to_i < 1) ? session_page_no : params[:page].to_i)
     @total_ivrs = current_user.ivrs.count()
-    @total_pages = ( @total_ivrs.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@total_ivrs.to_f / session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     fpage = ((@options[:page] - 1) * session[:items_per_page]).to_i
- 
+
     session[:ivr_index] = 1 unless session[:ivr_index]
     session[:ivr_index] = @options[:page]
 
@@ -91,9 +91,9 @@ class IvrController < ApplicationController
     @ivr_sound_files = current_user.ivr_sound_files.find(:first)
 
     @block = @ivr.start_block
-    @blocks = IvrBlock.find(:all, :include => [:ivr_extensions, :ivr_actions], :conditions => ["ivr_id = ?",@ivr.id ])
+    @blocks = IvrBlock.find(:all, :include => [:ivr_extensions, :ivr_actions], :conditions => ["ivr_id = ?", @ivr.id])
     @extensions = @block.ivr_extensions
-    @actions = @block.ivr_actions    
+    @actions = @block.ivr_actions
   end
 
   # Sets default values for added and changed actions.
@@ -120,7 +120,7 @@ class IvrController < ApplicationController
   # <tt>data1</tt> - variable name.
   # <tt>data2</tt> - variable value.
 
-  def action_params  
+  def action_params
     @num = params[:action_name]
     #    @action = IvrAction.find(:first, :conditions => ["id = ?", params[:id]])
     #    params.each { |key, val|
@@ -135,36 +135,36 @@ class IvrController < ApplicationController
     @action.data6 = ""
 
     case @action.name
-    when "Playback"
-      voice = current_user.ivr_voices.find(:first)
-      voice ? @action.data1 = voice.voice : @action.data1 = ""
-      if !@action.data1.blank?
-        sound_file = current_user.ivr_sound_files.find(:first,
-          :joins => "LEFT JOIN ivr_voices ON (ivr_voices.id = ivr_sound_files.ivr_voice_id)" ,
-          :conditions => ["ivr_voices.voice = ?", @action.data1])
-      end
-      if sound_file
-        @action.data2 = sound_file ? sound_file.path.to_s : ""
-      end
-    when "Delay"
-      @action.data1 = 0
-    when "Change Voice"
-      @action.data1 = current_user.ivr_voices.find(:first) ? current_user.ivr_voices.find(:first).voice.to_s : ""
-    when "Hangup"
-      @action.data1 = "Busy"
-    when "Transfer To"
-      @action.data1 ="IVR"
-      @action.data2 =current_user.ivrs.find(:first).id
-    when "Debug"
-      @action.data1 = "#{@action.ivr_block.name}_was_reached."
-    when "Set Accountcode"
-      @action.data1 = current_user.load_users_devices(:first, :conditions => "user_id > -1").id
-    when "Mor"
-    when "Set Variable"
-      @action.data1 = $pos_variables[0]
-      @action.data2 = "0"
-    when "Change CallerID (Number)"
-      @action.data1 = 0
+      when "Playback"
+        voice = current_user.ivr_voices.find(:first)
+        voice ? @action.data1 = voice.voice : @action.data1 = ""
+        if !@action.data1.blank?
+          sound_file = current_user.ivr_sound_files.find(:first,
+                                                         :joins => "LEFT JOIN ivr_voices ON (ivr_voices.id = ivr_sound_files.ivr_voice_id)",
+                                                         :conditions => ["ivr_voices.voice = ?", @action.data1])
+        end
+        if sound_file
+          @action.data2 = sound_file ? sound_file.path.to_s : ""
+        end
+      when "Delay"
+        @action.data1 = 0
+      when "Change Voice"
+        @action.data1 = current_user.ivr_voices.find(:first) ? current_user.ivr_voices.find(:first).voice.to_s : ""
+      when "Hangup"
+        @action.data1 = "Busy"
+      when "Transfer To"
+        @action.data1 ="IVR"
+        @action.data2 =current_user.ivrs.find(:first).id
+      when "Debug"
+        @action.data1 = "#{@action.ivr_block.name}_was_reached."
+      when "Set Accountcode"
+        @action.data1 = current_user.load_users_devices(:first, :conditions => "user_id > -1").id
+      when "Mor"
+      when "Set Variable"
+        @action.data1 = $pos_variables[0]
+        @action.data2 = "0"
+      when "Change CallerID (Number)"
+        @action.data1 = 0
     end
     @action.save
     critical_update(@action)
@@ -217,18 +217,18 @@ class IvrController < ApplicationController
     @data = params[:data]
 
     case params[:number]
-    when "2"
-      @action.data2 = @data
-    when "3"
-      @action.data3 = @data
-    when "4"
-      @action.data4 = @data
-    when "5"
-      @action.data5 = @data
-    when "6"
-      @action.data6 = @data
-    else
-      @action.data1 = @data
+      when "2"
+        @action.data2 = @data
+      when "3"
+        @action.data3 = @data
+      when "4"
+        @action.data4 = @data
+      when "5"
+        @action.data5 = @data
+      when "6"
+        @action.data6 = @data
+      else
+        @action.data1 = @data
     end
     if @action.name == "Delay"
       @action.data1 = 2
@@ -236,26 +236,26 @@ class IvrController < ApplicationController
     end
     if @action.name == "Transfer To"
       case @action.data1
-      when 'IVR'
-        ivr = current_user.ivrs.find(:first)
-        @action.data2 = ivr ? ivr.start_block_id : 0
-      when 'DID'
-        did = current_user.load_dids(:first)
-        @action.data2 = did ? did.did : 0
-      when 'Device'
-        device = Device.find_by_sql("SELECT devices.id as id, users.first_name as first_name, users.last_name as last_name, devices.device_type as dev_type, devices.name as dev_name, devices.extension as dev_extension FROM devices LEFT JOIN users ON (devices.user_id = users.id) WHERE devices.user_id > -1 AND users.owner_id = #{current_user.id}")
-        @action.data2 = device[0] ? device[0].dev_extension : 0
-      when 'Block'
-        block = @action.ivr_block.ivr.start_block_id
-        @action.data2 = block ? block : 0
+        when 'IVR'
+          ivr = current_user.ivrs.find(:first)
+          @action.data2 = ivr ? ivr.start_block_id : 0
+        when 'DID'
+          did = current_user.load_dids(:first)
+          @action.data2 = did ? did.did : 0
+        when 'Device'
+          device = Device.find_by_sql("SELECT devices.id as id, users.first_name as first_name, users.last_name as last_name, devices.device_type as dev_type, devices.name as dev_name, devices.extension as dev_extension FROM devices LEFT JOIN users ON (devices.user_id = users.id) WHERE devices.user_id > -1 AND users.owner_id = #{current_user.id}")
+          @action.data2 = device[0] ? device[0].dev_extension : 0
+        when 'Block'
+          block = @action.ivr_block.ivr.start_block_id
+          @action.data2 = block ? block : 0
       end
     end
 
     if @action.name == "Playback"
       if !@action.data1.blank?
         file = current_user.ivr_sound_files.find(:first,
-          :joins => "LEFT JOIN ivr_voices ON (ivr_voices.id = ivr_sound_files.ivr_voice_id)" ,
-          :conditions => ["ivr_voices.voice = ?", @action.data1])
+                                                 :joins => "LEFT JOIN ivr_voices ON (ivr_voices.id = ivr_sound_files.ivr_voice_id)",
+                                                 :conditions => ["ivr_voices.voice = ?", @action.data1])
       end
       if file
         @action.data2 = file.path
@@ -301,7 +301,7 @@ class IvrController < ApplicationController
   def extension_block
     @data = params[:data]
     if params[:id] != '0' and @data.to_i != 0 # Hack for IE... it sometimes sends zeros instead ob block numbers.
-      @ext = IvrExtension.find(:first, :include => [:ivr_block], :conditions => ["ivr_block_id = ? AND exten = ?",params[:id], params[:ext]])
+      @ext = IvrExtension.find(:first, :include => [:ivr_block], :conditions => ["ivr_block_id = ? AND exten = ?", params[:id], params[:ext]])
       if @data.to_s == "-1"
         if @ext
           @ext.destroy
@@ -343,7 +343,7 @@ class IvrController < ApplicationController
     # @block = IvrBlock.find(:first, :conditions => ["id = ?", params[:block_id]])
     @ivr = @block.ivr
     if params[:rm].to_s == 'true'
-      ext=IvrExtension.find(:first, :conditions=> ["id = ?", params[:id]])
+      ext=IvrExtension.find(:first, :conditions => ["id = ?", params[:id]])
       ext.destroy
     else
       ext = IvrExtension.new
@@ -370,7 +370,7 @@ class IvrController < ApplicationController
     else
       @ivr = @block.ivr
       if params[:rm].to_s == "true"
-        if IvrExtension.find(:all, :conditions => ["goto_ivr_block_id = ? and ivr_block_id != ?", @block.id, @block.id ]).size == 0 and @block.id != @ivr.start_block.id
+        if IvrExtension.find(:all, :conditions => ["goto_ivr_block_id = ? and ivr_block_id != ?", @block.id, @block.id]).size == 0 and @block.id != @ivr.start_block.id
           @block.destroy
           @block = @ivr.start_block
         end
@@ -411,7 +411,7 @@ class IvrController < ApplicationController
     @blocks = @ivr.ivr_blocks
     @extensions = @block.ivr_extensions
     @actions = @block.ivr_actions
-    render(:layout => false , :action => "add_block")
+    render(:layout => false, :action => "add_block")
   end
 
   def change_block
@@ -420,7 +420,7 @@ class IvrController < ApplicationController
     @blocks = @ivr.ivr_blocks
     @extensions = @block.ivr_extensions
     @actions = @block.ivr_actions
-    render(:action => "add_block",:layout => false)
+    render(:action => "add_block", :layout => false)
   end
 
   def ivr_extlines
@@ -437,8 +437,9 @@ class IvrController < ApplicationController
     else
       flash[:notice] = _("IVR_Is_In_Use")
     end
-    redirect_to :controller => :ivr,  :action => :index
+    redirect_to :controller => :ivr, :action => :index
   end
+
   # //IVR EDITING ################################################################
 
   private
@@ -448,19 +449,19 @@ class IvrController < ApplicationController
 =end
   def critical_update(object)
     case object.class.to_s
-    when 'IvrAction'
-      block = object.ivr_block
-    when 'IvrBlock'
-      block = object
-    when 'IvrExtension'
-      block = object.ivr_block
-    when 'IvrTimeperiod'
-      plans = current_user.dialplans.find(:all, :conditions => ["dptype = 'ivr' and (data1 = ? or data3 = ? or data5 = ?)", object.id, object.id, object.id])
-      for plan in plans do
-        plan.regenerate_ivr_dialplan
-      end
-    else
-      block = nil
+      when 'IvrAction'
+        block = object.ivr_block
+      when 'IvrBlock'
+        block = object
+      when 'IvrExtension'
+        block = object.ivr_block
+      when 'IvrTimeperiod'
+        plans = current_user.dialplans.find(:all, :conditions => ["dptype = 'ivr' and (data1 = ? or data3 = ? or data5 = ?)", object.id, object.id, object.id])
+        for plan in plans do
+          plan.regenerate_ivr_dialplan
+        end
+      else
+        block = nil
     end
     if block
       block.regenerate_extlines
@@ -485,7 +486,7 @@ class IvrController < ApplicationController
     @ivr = current_user.ivrs.find(:first, :conditions => ["id = ?", params[:id]])
     unless @ivr
       flash[:notice] = _('IVR_Was_Not_Found')
-      redirect_to :controller => :ivr,  :action => :index and return false
+      redirect_to :controller => :ivr, :action => :index and return false
     end
   end
 
@@ -493,11 +494,11 @@ class IvrController < ApplicationController
     @block = IvrBlock.find(:first, :conditions => ["id = ?", params[:block_id]])
     unless @block
       flash[:notice] = _('IVR_Block_Was_Not_Found')
-      redirect_to :controller => :ivr,  :action => :index and return false
+      redirect_to :controller => :ivr, :action => :index and return false
     end
     if !@block.ivr or @block.ivr.user_id != current_user.id
       dont_be_so_smart
-      redirect_to :controller => :callc,  :action => :main and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
   end
 

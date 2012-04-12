@@ -1,53 +1,54 @@
-
 <table width="100%">
-    <tr>
-        <td align="left" width="100%">
-            <%= link_to b_add + _('New_tariff'), :action => 'tariff_new' %>
-        </td>
-        
-     </tr>     
-</table>     
-<br>
-
-<% if session[:usertype] == "admin"  %>
-
-<b><%= _('For_providers') %> - <%= _('Inbound_traffic') %></b>
-<br><br>
-
-<table width="100%" class="maintable">
   <tr>
-    <th align="left"><%= _('Name') %></th>
-    <th align="center"><%= _('Currency') %></th>
-    <th align="center" colspan="2"><%= _('Rates') %></th>
-    <th></th>
-    <th></th>
-    
-  </tr>
+    <td align="left" width="100%">
+      <%= link_to b_add + _('New_tariff'), :action => 'tariff_new' %>
+    </td>
 
-<% i = 0 %>     
-<% for tariff in @prov_tariffs %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-  <% rates = SmsRate.find(:all, :conditions => "sms_tariff_id = '#{tariff.id}'") %>
-    <td id="prov_name_<%=tariff.id%>"><%=h tariff.name %></td>
-    <td id="prov_currency_<%=tariff.id%>" align="center"><%= tariff.currency %></td>
-    <td id="prov_rates_<%=tariff.id%>" align="center"><%= link_to b_rates + _('Rates'), :action => 'rates', :id => tariff %> (<%= rates.size if rates %>)</td>
-    <td id="prov_delete_all_rates_<%=tariff.id%>" align="center"><%= link_to b_rates_delete + _('Delete_all_rates'), {:action => 'delete_all_rates', :id => tariff }, :confirm => 'Are you sure?', :method => :post  if rates and rates.size > 0%></td>
-    <td id="prov_tariff_edit_<%=tariff.id%>" align="center"><%= link_to b_edit, { :action => 'tariff_edit', :id => tariff }, :id => "image_edit_"+tariff.id.to_s  %></td>
-    <td id="prov_tariff_destroy_<%=tariff.id%>" align="center"><%= link_to b_delete, { :action => 'tariff_destroy', :id => tariff }, :confirm => 'Are you sure?', :method => :post, :id => "image_destroy_"+tariff.id.to_s %></td>
   </tr>
-  <% i += 1%>    
-<% end %>
 </table>
-
-<br />
-
-<hr>
-
-
-
 <br>
-<b><%= _('For_users') %> - <%= _('Outbound_traffic') %></b>
-<br><br><br>
+
+<% if session[:usertype] == "admin" %>
+
+    <b><%= _('For_providers') %> - <%= _('Inbound_traffic') %></b>
+    <br><br>
+
+    <table width="100%" class="maintable">
+      <tr>
+        <th align="left"><%= _('Name') %></th>
+        <th align="center"><%= _('Currency') %></th>
+        <th align="center" colspan="2"><%= _('Rates') %></th>
+        <th></th>
+        <th></th>
+
+      </tr>
+
+      <% i = 0 %>
+      <% for tariff in @prov_tariffs %>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <% rates = SmsRate.find(:all, :conditions => "sms_tariff_id = '#{tariff.id}'") %>
+            <td id="prov_name_<%= tariff.id %>"><%= h tariff.name %></td>
+            <td id="prov_currency_<%= tariff.id %>" align="center"><%= tariff.currency %></td>
+            <td id="prov_rates_<%= tariff.id %>" align="center"><%= link_to b_rates + _('Rates'), :action => 'rates', :id => tariff %>
+              (<%= rates.size if rates %>)
+            </td>
+            <td id="prov_delete_all_rates_<%= tariff.id %>" align="center"><%= link_to b_rates_delete + _('Delete_all_rates'), {:action => 'delete_all_rates', :id => tariff}, :confirm => 'Are you sure?', :method => :post if rates and rates.size > 0 %></td>
+            <td id="prov_tariff_edit_<%= tariff.id %>" align="center"><%= link_to b_edit, {:action => 'tariff_edit', :id => tariff}, :id => "image_edit_"+tariff.id.to_s %></td>
+            <td id="prov_tariff_destroy_<%= tariff.id %>" align="center"><%= link_to b_delete, {:action => 'tariff_destroy', :id => tariff}, :confirm => 'Are you sure?', :method => :post, :id => "image_destroy_"+tariff.id.to_s %></td>
+          </tr>
+          <% i += 1 %>
+      <% end %>
+    </table>
+
+    <br/>
+
+    <hr>
+
+
+
+    <br>
+    <b><%= _('For_users') %> - <%= _('Outbound_traffic') %></b>
+    <br><br><br>
 
 <% end %>
 
@@ -57,60 +58,64 @@
 <table width="100%" class="maintable">
   <tr>
     <th align="left"><%= _('Name') %></th>
-    <th align="center"><%= _('Currency') %></th>    
+    <th align="center"><%= _('Currency') %></th>
     <th align="center" colspan="2"><%= _('Rates') %></th>
-    
-    <th></th>    
+
+    <th></th>
     <th></th>
   </tr>
 
-<% i = 0 %>     
-<% for tariff in @user_tariffs %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-  <% rates = SmsRate.find(:all, :conditions => "sms_tariff_id = '#{tariff.id}'") %>
-    <td id="user_name_<%=tariff.id%>"><%=h tariff.name %></td>
-    <td id="user_currency_<%=tariff.id%>" align="center"><%= tariff.currency %></td>
-    <td id="user_rates_<%=tariff.id%>" align="center"><%= link_to b_rates + _('Rates'), :action => 'rates', :id => tariff %>(<%= rates.size if rates %>)</td>
-    <td id="user_delete_all_rates_<%=tariff.id%>" align="center"><%= link_to b_rates_delete + _('Delete_all_rates'), {:action => 'delete_all_rates', :id => tariff }, :confirm => 'Are you sure?', :method => :post  if rates and rates.size > 0%></td>
-    <td id="user_tariff_edit_<%=tariff.id%>" align="center"><%= link_to b_edit, { :action => 'tariff_edit', :id => tariff }, :id => "image_edit_"+tariff.id.to_s %></td>
-    <td id="user_tariff_destroy_<%=tariff.id%>" align="center"><%= link_to b_delete, { :action => 'tariff_destroy', :id => tariff }, :confirm => 'Are you sure?', :method => :post, :id => "image_destroy_"+tariff.id.to_s%></td>
-  </tr>
-  <% i += 1%>    
-<% end %>
+  <% i = 0 %>
+  <% for tariff in @user_tariffs %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <% rates = SmsRate.find(:all, :conditions => "sms_tariff_id = '#{tariff.id}'") %>
+        <td id="user_name_<%= tariff.id %>"><%= h tariff.name %></td>
+        <td id="user_currency_<%= tariff.id %>" align="center"><%= tariff.currency %></td>
+        <td id="user_rates_<%= tariff.id %>" align="center"><%= link_to b_rates + _('Rates'), :action => 'rates', :id => tariff %>
+          (<%= rates.size if rates %>)
+        </td>
+        <td id="user_delete_all_rates_<%= tariff.id %>" align="center"><%= link_to b_rates_delete + _('Delete_all_rates'), {:action => 'delete_all_rates', :id => tariff}, :confirm => 'Are you sure?', :method => :post if rates and rates.size > 0 %></td>
+        <td id="user_tariff_edit_<%= tariff.id %>" align="center"><%= link_to b_edit, {:action => 'tariff_edit', :id => tariff}, :id => "image_edit_"+tariff.id.to_s %></td>
+        <td id="user_tariff_destroy_<%= tariff.id %>" align="center"><%= link_to b_delete, {:action => 'tariff_destroy', :id => tariff}, :confirm => 'Are you sure?', :method => :post, :id => "image_destroy_"+tariff.id.to_s %></td>
+      </tr>
+      <% i += 1 %>
+  <% end %>
 </table>
 
 <% if @user_wholesale_enabled %>
-<br><br>
-<b><%= _('Wholesale_tariffs') %></b>
-<br><br>
+    <br><br>
+    <b><%= _('Wholesale_tariffs') %></b>
+    <br><br>
 
-<table width="100%" class="maintable">
-  <tr>
-    <th align="left"><%= _('Name') %></th>
-    <th align="center"><%= _('Currency') %></th>
-    <th align="center" colspan="4"><%= _('Rates') %></th>
-    <th></th>
-    <th></th>
-    <th></th>
- <th></th>
-    <th></th>
-    <th></th>        
-  </tr>
+    <table width="100%" class="maintable">
+      <tr>
+        <th align="left"><%= _('Name') %></th>
+        <th align="center"><%= _('Currency') %></th>
+        <th align="center" colspan="4"><%= _('Rates') %></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
 
-<% i = 0 %>     
-<% for tariff in @user_wholesale_tariffs %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-  <% rates = tariff.sms_rates %>
-    <td id="user_wholesale_name_<%=tariff.id%>"><%=h tariff.name %></td>
-    <td id="user_wholesale_currency_<%=tariff.id%>" align="center"><%= tariff.currency %></td>
-    <td id="user_wholesale_rates_<%=tariff.id%>" align="center"><%= link_to b_rates + _('Rates'), :action => 'rates_list', :id => tariff %> (<%= rates.size if rates%>)</td>
-    <td id="user_wholesale_delete_all_rates_<%=tariff.id%>" align="center"><%= link_to b_rates_delete + _('Delete_all_rates'), {:action => 'delete_all_rates', :id => tariff }, :confirm => 'Are you sure?', :method => :post  if rates and rates.size > 0%></td>
-    <td id="user_wholesale_tariff_edit_<%=tariff.id%>" align="center"><%= link_to b_edit, { :action => 'tariff_edit', :id => tariff }, :id => "image_edit_"+tariff.id.to_s %></td>
-    <td id="user_wholesale_tariff_destroy_<%=tariff.id%>" align="center"><%= link_to b_delete, { :action => 'tariff_destroy', :id => tariff }, :confirm => 'Are you sure?', :method => :post, :id => "image_destroy_"+tariff.id.to_s  %></td>
-  </tr>
-  <% i += 1%>    
-<% end %>
-</table>
+      <% i = 0 %>
+      <% for tariff in @user_wholesale_tariffs %>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <% rates = tariff.sms_rates %>
+            <td id="user_wholesale_name_<%= tariff.id %>"><%= h tariff.name %></td>
+            <td id="user_wholesale_currency_<%= tariff.id %>" align="center"><%= tariff.currency %></td>
+            <td id="user_wholesale_rates_<%= tariff.id %>" align="center"><%= link_to b_rates + _('Rates'), :action => 'rates_list', :id => tariff %>
+              (<%= rates.size if rates %>)
+            </td>
+            <td id="user_wholesale_delete_all_rates_<%= tariff.id %>" align="center"><%= link_to b_rates_delete + _('Delete_all_rates'), {:action => 'delete_all_rates', :id => tariff}, :confirm => 'Are you sure?', :method => :post if rates and rates.size > 0 %></td>
+            <td id="user_wholesale_tariff_edit_<%= tariff.id %>" align="center"><%= link_to b_edit, {:action => 'tariff_edit', :id => tariff}, :id => "image_edit_"+tariff.id.to_s %></td>
+            <td id="user_wholesale_tariff_destroy_<%= tariff.id %>" align="center"><%= link_to b_delete, {:action => 'tariff_destroy', :id => tariff}, :confirm => 'Are you sure?', :method => :post, :id => "image_destroy_"+tariff.id.to_s %></td>
+          </tr>
+          <% i += 1 %>
+      <% end %>
+    </table>
 <% end %>
 
 <br>

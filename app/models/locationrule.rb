@@ -36,7 +36,7 @@ class Locationrule < ActiveRecord::Base
 
 
   def check_min_and_max
-    Locationrule.count(:all, :conditions=>["NOT ((? < minlen AND ? < minlen) OR (? > maxlen and ? > maxlen ) ) AND location_id = ? AND locationrules.add = ? and cut = ? AND id != ? AND lr_type = ?", minlen, maxlen, minlen, maxlen,location_id,add, cut, id.to_i, lr_type]).to_i > 0
+    Locationrule.count(:all, :conditions => ["NOT ((? < minlen AND ? < minlen) OR (? > maxlen and ? > maxlen ) ) AND location_id = ? AND locationrules.add = ? and cut = ? AND id != ? AND lr_type = ?", minlen, maxlen, minlen, maxlen, location_id, add, cut, id.to_i, lr_type]).to_i > 0
   end
 
 end

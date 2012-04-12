@@ -7,10 +7,10 @@ class CallcController < ApplicationController
   #require 'enumerator'
   require 'smtp_tls'
 
-  layout  :mobile_standard
+  layout :mobile_standard
 
   before_filter :check_localization, :except => [:pay_subscriptions, :monthly_actions]
-  before_filter :authorize, :except => [:login, :try_to_login, :pay_subscriptions, :monthly_actions,  :forgot_password]
+  before_filter :authorize, :except => [:login, :try_to_login, :pay_subscriptions, :monthly_actions, :forgot_password]
   before_filter :find_registration_owner, :only => [:signup_start, :signup_end]
 
   @@monthly_action_cooldown = 2.hours
@@ -69,7 +69,6 @@ class CallcController < ApplicationController
     # -----------------------------------
 
 
-
     if session[:login] == true
 
       redirect_to :action => "main" and return false
@@ -88,7 +87,7 @@ class CallcController < ApplicationController
     session[:day_till] = t.day
     session[:hour_till] = 23
     session[:minute_till] = 59
-    
+
     if Confline.get_value("Show_logo_on_register_page", @owner_id).to_i == 1
       session[:logo_picture] = Confline.get_value("Logo_Picture", @owner_id)
       session[:version] = Confline.get_value("Version", @owner_id)
@@ -101,7 +100,7 @@ class CallcController < ApplicationController
 
     if  request.env["HTTP_X_MOBILE_GATEWAY"]
       respond_to do |format|
-        format.wml { render :action => 'login.wml.builder'}
+        format.wml { render :action => 'login.wml.builder' }
         #format.html
       end
     end
@@ -153,7 +152,7 @@ class CallcController < ApplicationController
       #                     redirect_to :action => "main" and return false
       #                   else
 
-      bad_psw = (params["login"]["psw"].to_s == 'admin' and @user.id == 0)? _('ATTENTION!_Please_change_admin_password_from_default_one_Press')+ " <a href='#{Web_Dir}/users/edit/0'> #{_('Here')} </a> " + _('to_do_this') : ''
+      bad_psw = (params["login"]["psw"].to_s == 'admin' and @user.id == 0) ? _('ATTENTION!_Please_change_admin_password_from_default_one_Press')+ " <a href='#{Web_Dir}/users/edit/0'> #{_('Here')} </a> " + _('to_do_this') : ''
       flash[:notice] = bad_psw if !bad_psw.blank?
       if (request.env["HTTP_USER_AGENT"]) && (request.env["HTTP_USER_AGENT"].match("iPhone") or request.env["HTTP_USER_AGENT"].match("iPod"))
         #my_debug request.env["HTTP_USER_AGENT"]
@@ -161,7 +160,7 @@ class CallcController < ApplicationController
         redirect_to :action => "main_for_pda" and return false
       else
         flash[:status] = _('login_succesfull')
-        if defined?(CS_Active) && CS_Active == 1 && group = current_user.usergroups.find(:first, :include => :group, :conditions => [ "usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"]) and current_user.usertype != 'admin'
+        if defined?(CS_Active) && CS_Active == 1 && group = current_user.usergroups.find(:first, :include => :group, :conditions => ["usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"]) and current_user.usertype != 'admin'
           session[:cs_group] = group
           session[:lang] = Translation.find_by_id(group.group.translation_id).short_name
           redirect_to :controller => "callshop", :action => "show", :id => group.group_id and return false
@@ -178,7 +177,7 @@ class CallcController < ApplicationController
 
       u_hash = us ? us.uniquehash : ''
       flash[:notice] = _('bad_login')
-      redirect_to :action => "login", :id=>u_hash and return false
+      redirect_to :action => "login", :id => u_hash and return false
     end
   end
 
@@ -206,7 +205,7 @@ class CallcController < ApplicationController
     end
     session[:login] = false
 
-    session.clear 
+    session.clear
 
     flash[:notice] = _('logged_off')
     if Confline.get_value("Logout_link", owner.id).to_s.blank?
@@ -224,17 +223,17 @@ class CallcController < ApplicationController
     @r = ''
     @st = true
     if params[:email] and !params[:email].blank?
-      addresses = Address.find(:all, :conditions=>['email = ?', params[:email]])
+      addresses = Address.find(:all, :conditions => ['email = ?', params[:email]])
       if addresses and addresses.size.to_i > 0
         if addresses.size.to_i == 1
-          user = User.find(:first, :include=>[:address], :conditions=>['address_id = ?',addresses[0].id ])
+          user = User.find(:first, :include => [:address], :conditions => ['address_id = ?', addresses[0].id])
           if user and user.id != 0
             psw = random_password(12)
             email =Email.find(:first, :conditions => ["name = 'password_reminder' AND owner_id = ?", user.owner_id])
-            variables = Email.email_variables(user, nil, {:owner=>user.owner_id, :login_password=>psw})
+            variables = Email.email_variables(user, nil, {:owner => user.owner_id, :login_password => psw})
             session[:flash_not_redirect] = 1
             session[:forgot_pasword] = 1
-            num = EmailsController::send_email(email, Confline.get_value("Email_from",user.owner_id), [user], variables)
+            num = EmailsController::send_email(email, Confline.get_value("Email_from", user.owner_id), [user], variables)
             if num.to_s.include?(_('Email_sent')+'<br>')
               user.password = Digest::SHA1.hexdigest(psw)
               if user.save
@@ -284,7 +283,7 @@ class CallcController < ApplicationController
     if Confline.get_value("Hide_quick_stats").to_i == 0
       show_quick_stats
     end
-    
+
     #  my_debug @quick_stats
     # @total_profitm = @total_call_pricem - @total_call_selfpricem
     #  @total_profitd = @total_call_priced - @total_call_selfpriced
@@ -298,11 +297,11 @@ class CallcController < ApplicationController
     @ob_link_name = session[:ouroboros_name]
     @ob_link_url = session[:ouroboros_url]
     @ob_enabled = 0 if @user.owner_id > 0 # do not show for reseller users
-    @addresses = Phonebook.find(:all, :conditions=>["user_id=?", session[:user_id]])
+    @addresses = Phonebook.find(:all, :conditions => ["user_id=?", session[:user_id]])
     if  request.env["HTTP_X_MOBILE_GATEWAY"]
       @notice = params[:sms_notice].to_s
       respond_to do |format|
-        format.wml { render :action => 'main.wml.builder'}
+        format.wml { render :action => 'main.wml.builder' }
         #format.html
       end
     end
@@ -315,7 +314,7 @@ class CallcController < ApplicationController
 
 
     @user=User.find(:first, :include => [:tax], :conditions => ["users.id = ?", session[:user_id]])
-    
+
     unless @user
       redirect_to :action => "logout" and return false
     end
@@ -340,8 +339,6 @@ class CallcController < ApplicationController
   def user_settings
     @user=User.find(session[:user_id])
   end
-
-
 
 
   def ranks
@@ -373,7 +370,7 @@ class CallcController < ApplicationController
         #            calls_billsec += call.duration #billsec
         #          end
 
-        calls_billsec = user.total_duration("answered",today, today) + user.total_duration("answered_inc",today, today)
+        calls_billsec = user.total_duration("answered", today, today) + user.total_duration("answered_inc", today, today)
         @h[user.id] = calls_billsec
 
         @total_billsec += calls_billsec
@@ -384,7 +381,7 @@ class CallcController < ApplicationController
 
     end
 
-    @a = @h.sort {|a,b| b[1]<=>a[1]}
+    @a = @h.sort { |a, b| b[1]<=>a[1] }
 
     @b = []
     @c = []
@@ -399,9 +396,9 @@ class CallcController < ApplicationController
       if @ranks_type == "duration"
         user = User.find(a[0])
 
-        @b[a[0]] = user.total_calls("answered",today, today) + user.total_calls("answered_inc",today,today)
+        @b[a[0]] = user.total_calls("answered", today, today) + user.total_calls("answered_inc", today, today)
         #User.find(a[0]).calls("answered",today,today).size
-        @d[a[0]] = user.total_calls("missed_not_processed","2000-01-01", today)
+        @d[a[0]] = user.total_calls("missed_not_processed", "2000-01-01", today)
         #User.find(a[0]).calls("missed_not_processed","2000-01-01",today).size
         @total_missed_not_processed += @d[a[0]]
         @total_calls += @b[a[0]]
@@ -475,7 +472,7 @@ class CallcController < ApplicationController
   def global_settings
     @page_title = _('global_settings')
     cond = "exten = ? AND context = ? AND priority IN (2, 3) AND appdata like ?"
-    ext = Extline.find(:first, :conditions => [cond, '_X.',"mor" , 'TIMEOUT(response)%'])
+    ext = Extline.find(:first, :conditions => [cond, '_X.', "mor", 'TIMEOUT(response)%'])
     @timeout_response = (ext ? ext.appdata.gsub("TIMEOUT(response)=", "").to_i : 20)
     ext = Extline.find(:first, :conditions => [cond, '_X.', "mor", 'TIMEOUT(digit)%'])
     @timeout_digit = (ext ? ext.appdata.gsub("TIMEOUT(digit)=", "").to_i : 10)
@@ -493,7 +490,7 @@ class CallcController < ApplicationController
     if @type == "devices"
       @devices = Device.find(:all, :conditions => "user_id > 0")
       for dev in @devices
-        a=configure_extensions(dev.id, {:current_user=>current_user})
+        a=configure_extensions(dev.id, {:current_user => current_user})
         return false if !a
       end
     end
@@ -562,7 +559,7 @@ class CallcController < ApplicationController
       session[:version] = Confline.get_value("Version", @owner.id)
       session[:copyright_title] = Confline.get_value("Copyright_Title", @owner.id)
     end
-    @vat_necessary =  Confline.get_value("Registration_Enable_VAT_checking").to_i == 1 && Confline.get_value("Registration_allow_vat_blank").to_i == 0
+    @vat_necessary = Confline.get_value("Registration_Enable_VAT_checking").to_i == 1 && Confline.get_value("Registration_allow_vat_blank").to_i == 0
   end
 
   def signup_end
@@ -602,7 +599,7 @@ class CallcController < ApplicationController
     capt = true
     if Confline.get_value("reCAPTCHA_enabled").to_i == 1
       usern = User.new
-      capt =  verify_recaptcha(usern) ? true : (false ; notice = _('Please_enter_captcha'))
+      capt = verify_recaptcha(usern) ? true : (false; notice = _('Please_enter_captcha'))
     end
 
     if capt and !notice or notice.blank?
@@ -612,11 +609,11 @@ class CallcController < ApplicationController
         session[:version] = Confline.get_value("Version", @owner.id)
         session[:copyright_title] = Confline.get_value("Copyright_Title", @owner.id)
       end
-      @user, @send_email_to_user, @device, notice2 = User.create_from_registration(params, @owner, reg_ip, free_extension(), new_device_pin(),random_password(12), next_agreement_number)
+      @user, @send_email_to_user, @device, notice2 = User.create_from_registration(params, @owner, reg_ip, free_extension(), new_device_pin(), random_password(12), next_agreement_number)
       session[:reg_owner_id] = @user.owner_id
       unless notice2
         flash[:status] = _('Registration_succesful')
-        a = Thread.new {configure_extensions(@device.id, {:current_user=>@owner})}
+        a = Thread.new { configure_extensions(@device.id, {:current_user => @owner}) }
         #        a=configure_extensions(@device.id)
         #        return false if !a
       else
@@ -624,7 +621,7 @@ class CallcController < ApplicationController
       end
     else
       flash[:notice] = notice
-      redirect_to :action => "signup_start" , :id => params[:id]  and return false
+      redirect_to :action => "signup_start", :id => params[:id] and return false
     end
   end
 
@@ -634,7 +631,7 @@ class CallcController < ApplicationController
   def hourly_actions
     #    backups_hourly_cronjob
     if active_heartbeat_server
-      periodic_action("hourly", @@hourly_action_cooldown){
+      periodic_action("hourly", @@hourly_action_cooldown) {
         # check/make auto backup
         #    bt = Thread.new {
         Backup.backups_hourly_cronjob(session[:user_id])
@@ -652,10 +649,10 @@ class CallcController < ApplicationController
             MorLog.my_debug("Found #{payments.size} waiting payments")
             # There m ay be possibe to do some caching if performance becomes an issue.
             if payments.size > 0
-              payments.each{ |payment|
+              payments.each { |payment|
                 user = payment.user
-                gateway = ::GatewayEngine.find(:first, {:engine => "ideal", :gateway => "ideal", :for_user => user.id }).enabled_by(user.owner.id).query ## this is cacheable
-                success , message = gateway.check_response(payment)
+                gateway = ::GatewayEngine.find(:first, {:engine => "ideal", :gateway => "ideal", :for_user => user.id}).enabled_by(user.owner.id).query ## this is cacheable
+                success, message = gateway.check_response(payment)
                 MorLog.my_debug("#{success ? "Done" : "Fail"} : #{message}")
               }
             end
@@ -697,7 +694,7 @@ class CallcController < ApplicationController
 
   def daily_actions
     if active_heartbeat_server
-      periodic_action("daily", @@daily_action_cooldown){
+      periodic_action("daily", @@daily_action_cooldown) {
         # ========================== Cleaning session table ================================
         @time = Time.now - 1.day
         @atime = @time.strftime("%Y-%m-%d %H:%M:%S")
@@ -710,11 +707,11 @@ class CallcController < ApplicationController
 
         #delete file
         delete_files_after_csv_import
-        system("rm -f /tmp/get_tariff_*")       #delete tariff export zip files
+        system("rm -f /tmp/get_tariff_*") #delete tariff export zip files
         # =========== block users if necessary =====================================
         block_users
         block_users_conditional
-        
+
       }
     end
   end
@@ -724,7 +721,7 @@ class CallcController < ApplicationController
 
   def monthly_actions
     if active_heartbeat_server
-      periodic_action("monthly", @@monthly_action_cooldown){
+      periodic_action("monthly", @@monthly_action_cooldown) {
 
         # --------- count/deduct subscriptions --------
         year = Time.now.year.to_i
@@ -780,26 +777,26 @@ class CallcController < ApplicationController
 
     # ---------- Company details ----------
 
-    pdf.text(session[:company], {:left =>40, :size => 23})
-    pdf.text(Confline.get_value("Invoice_Address1"), {:left =>40, :size => 12})
-    pdf.text(Confline.get_value("Invoice_Address2"), {:left =>40, :size => 12})
-    pdf.text(Confline.get_value("Invoice_Address3"), {:left =>40, :size => 12})
-    pdf.text(Confline.get_value("Invoice_Address4"), {:left =>40, :size => 12})
+    pdf.text(session[:company], {:left => 40, :size => 23})
+    pdf.text(Confline.get_value("Invoice_Address1"), {:left => 40, :size => 12})
+    pdf.text(Confline.get_value("Invoice_Address2"), {:left => 40, :size => 12})
+    pdf.text(Confline.get_value("Invoice_Address3"), {:left => 40, :size => 12})
+    pdf.text(Confline.get_value("Invoice_Address4"), {:left => 40, :size => 12})
 
     # ----------- Invoice details ----------
 
     pdf.fill_color('DCDCDC')
-    pdf.draw_text( _('INVOICE'), {:at => [330,700], :size =>26})
+    pdf.draw_text(_('INVOICE'), {:at => [330, 700], :size => 26})
     pdf.fill_color('000000')
-    pdf.draw_text(_('Date') + ": " + 'invoice.issue_date.to_s', {:at => [330,685], :size => 12})
-    pdf.draw_text(_('Invoice_number') + ": " + 'invoice.number.to_s', {:at => [330,675], :size => 12})
+    pdf.draw_text(_('Date') + ": " + 'invoice.issue_date.to_s', {:at => [330, 685], :size => 12})
+    pdf.draw_text(_('Invoice_number') + ": " + 'invoice.number.to_s', {:at => [330, 675], :size => 12})
 
     pdf.image(Actual_Dir+"/public/images/rails.png")
     pdf.text("Test Text : ąčęėįšųūž_йцукенгшщз")
     pdf.render
 
     flash[:status] = _('Pdf_test_pass')
-    redirect_to :action=>:main and return false
+    redirect_to :action => :main and return false
   end
 
   def global_change_confline
@@ -826,6 +823,7 @@ class CallcController < ApplicationController
     end
     return true
   end
+
   # saves users balances at the end of the month to use them in future in invoices to show users how much they owe to system owner
   def save_user_balances(year, month)
 
@@ -856,7 +854,7 @@ class CallcController < ApplicationController
 
   def pay_subscriptions(year, month)
     email_body = []
-    doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2 )
+    doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
 
     @year = year.to_i
     @month = month.to_i
@@ -868,25 +866,25 @@ class CallcController < ApplicationController
     email_body << "Charging for subscriptions.\nDate: #{@year}-#{@month}\n"
 
     @users = User.find(:all,
-      :joins => ("RIGHT JOIN subscriptions ON (users.id = subscriptions.user_id)"),:readonly => false,
-      :include =>[:tax ],
-      :conditions => ["blocked != 1"])
+                       :joins => ("RIGHT JOIN subscriptions ON (users.id = subscriptions.user_id)"), :readonly => false,
+                       :include => [:tax],
+                       :conditions => ["blocked != 1"])
     generation_time = Time.now
-    doc.subscriptions(){
+    doc.subscriptions() {
       doc.year(@year)
       doc.month(@month)
       @users.each_with_index { |user, i|
         user_time = Time.now
         subscriptions = user.pay_subscriptions(@year, @month)
         if subscriptions.size > 0
-          doc.user(:username => user.username, :user_id => user.id, :first_name => user.first_name, :balance => user.balance, :user_type   => user.user_type){
+          doc.user(:username => user.username, :user_id => user.id, :first_name => user.first_name, :balance => user.balance, :user_type => user.user_type) {
             send = true
             email_body << "#{i+1} User: #{nice_user(user)}(#{user.username}):"
             doc.blocked("true") if user.blocked.to_i == 1
             email_body << "  User was blocked." if user.blocked.to_i == 1
-            subscriptions.each{ |sub_hash|
+            subscriptions.each { |sub_hash|
               email_body << "  Service: #{sub_hash[:subscription].service.name} - #{nice_number(sub_hash[:price])}"
-              doc.subscription{
+              doc.subscription {
                 doc.service(sub_hash[:subscription].service.name)
                 doc.price(nice_number(sub_hash[:price]))
               }
@@ -923,7 +921,7 @@ class CallcController < ApplicationController
     select << "       create_time < ADDDATE(NOW(), INTERVAL -1 DAY);"
     tables = ActiveRecord::Base.connection.select_all(select.join(' '))
     if tables
-      tables.each{|t|
+      tables.each { |t|
         MorLog.my_debug("Found table : #{t.values}", 1)
         Tariff.clean_after_import(t.values)
       }
@@ -946,7 +944,7 @@ class CallcController < ApplicationController
   end
 
   def backups_hourly_cronjob
-    redirect_to :controller => "backups", :action=>'backups_hourly_cronjob'
+    redirect_to :controller => "backups", :action => 'backups_hourly_cronjob'
   end
 
   def block_users
@@ -984,25 +982,25 @@ class CallcController < ApplicationController
 
     enable_debug = 1
 
-    users = User.find(:all,:include => [:address], :conditions => "warning_email_active = '1' AND ( (warning_email_sent = '0' AND warning_email_hour = '-1') or ( warning_email_hour = '#{Time.now().hour.to_i}')) AND balance < warning_email_balance")
+    users = User.find(:all, :include => [:address], :conditions => "warning_email_active = '1' AND ( (warning_email_sent = '0' AND warning_email_hour = '-1') or ( warning_email_hour = '#{Time.now().hour.to_i}')) AND balance < warning_email_balance")
     if users.size.to_i > 0
       for user in users
         if enable_debug == 1
           MorLog.my_debug("Need to send warning_balance email to: #{user.id} #{user.username} #{user.email}")
         end
-        email= Email.find(:first, :conditions => ["name = 'warning_balance_email' AND owner_id = ?", user.owner_id] )
+        email= Email.find(:first, :conditions => ["name = 'warning_balance_email' AND owner_id = ?", user.owner_id])
         unless email
           owner = user.owner
           if owner.usertype == "reseller"
             owner.check_reseller_emails
-            email= Email.find(:first, :conditions => ["name = 'warning_balance_email' AND owner_id = ?", user.owner_id] )
+            email= Email.find(:first, :conditions => ["name = 'warning_balance_email' AND owner_id = ?", user.owner_id])
           end
         end
         variables = email_variables(user)
         begin
           @num = EmailsController::send_email(email, Confline.get_value("Email_from", user.owner_id), [user], variables)
           if @num.to_s == _('Email_sent')+"<br>"
-            Action.add_action_hash(user.owner_id, {:action=>"warning_balance_send", :data=>user.id, :data2=>email.id} )
+            Action.add_action_hash(user.owner_id, {:action => "warning_balance_send", :data => user.id, :data2 => email.id})
             if enable_debug == 1
               MorLog.my_debug("warning_balance_sent: #{user.id} #{user.username} #{user.email}")
             end
@@ -1012,7 +1010,7 @@ class CallcController < ApplicationController
           if enable_debug == 1
             MorLog.my_debug("warning_balance email not sent to: #{user.id} #{user.username} #{user.email}, because: #{exception.message.to_s}")
           end
-          Action.new(:user_id => user.owner_id, :target_id=>user.id, :target_type=>"user", :date => Time.now.to_s(:db), :action => "error", :data => 'Cant_send_email', :data2 => exception.message.to_s).save
+          Action.new(:user_id => user.owner_id, :target_id => user.id, :target_type => "user", :date => Time.now.to_s(:db), :action => "error", :data => 'Cant_send_email', :data2 => exception.message.to_s).save
         end
       end
     else
@@ -1025,7 +1023,7 @@ class CallcController < ApplicationController
 
 
   def find_registration_owner
-    unless params[:id] and (@owner = User.find(:first, :conditions => ["uniquehash = ?",params[:id]]))
+    unless params[:id] and (@owner = User.find(:first, :conditions => ["uniquehash = ?", params[:id]]))
       dont_be_so_smart
       redirect_to :action => "login" and return false
     end

@@ -1,39 +1,40 @@
 <table width="100%" class="simple">
-    <tr>
-        <td> <%= _('Name') + ":" %>  </td>
-        <td colspan="2" id="name_<%= @email.name %>" >
-            <%= text_field('email', 'name', "class" => "input") if @email.template == 0 %>  
-            <%= @email.name if @email.template == 1 %>
+  <tr>
+    <td> <%= _('Name') + ":" %>  </td>
+    <td colspan="2" id="name_<%= @email.name %>">
+      <%= text_field('email', 'name', "class" => "input") if @email.template == 0 %>
+      <%= @email.name if @email.template == 1 %>
 
-        </td>
-    </tr>
-    
-    <tr>
-        <td> <%= _('Subject') + ":" %>  </td>
-        <td  colspan="2" id="subject_<%= @email.name %>"> <%= text_field 'email', 'subject', "class" => "input", :style => "width: 610px" %> </td>
-    </tr>
-    
-    <tr>
-        <td> <%= _('Message_text') + ":" %>  </td>
-        <td  colspan="2" id="messge_<%= @email.name %>"> <%= text_area 'email', 'body', "class" => "input", :style => "width: 610px" %> </td>
-    </tr>
-    
-    <tr> <!-- #List of available email parameters 
+    </td>
+  </tr>
+
+  <tr>
+    <td> <%= _('Subject') + ":" %>  </td>
+    <td colspan="2" id="subject_<%= @email.name %>"> <%= text_field 'email', 'subject', "class" => "input", :style => "width: 610px" %> </td>
+  </tr>
+
+  <tr>
+    <td> <%= _('Message_text') + ":" %>  </td>
+    <td colspan="2" id="messge_<%= @email.name %>"> <%= text_area 'email', 'body', "class" => "input", :style => "width: 610px" %> </td>
+  </tr>
+
+  <tr> <!-- #List of available email parameters
         <td> <%= _('Available_variables') + ":" %>  </td>
         <td> <%= '&lt%= username%&gt' %> <br>
             <%= '&lt%= last_name%&gt' %> <br>
             <%= '&lt%= full_name%&gt' %> <br>
         </td>
-        <td> <%= _('User_first_name')%><br>
-             <%= _('User_last_name')%><br>
-             <%= _('User_full_name')%><br>
+        <td> <%= _('User_first_name') %><br>
+             <%= _('User_last_name') %><br>
+             <%= _('User_full_name') %><br>
         </td>
         -->
-    </tr>
-    <tr>
-        <td> <%= _('Format') + ":" %>  </td>
-        <td  colspan="2" id="format_<%= @email.name %>">   
-                <%= radio_button_tag('email[format]', 'html', checked = (@email.format.to_s == "html") ) %> HTML                
-                <%= radio_button_tag('email[format]', 'plain', checked = (@email.format.to_s == "plain") ) %> PLAIN </td>
-    </tr>
+  </tr>
+  <tr>
+    <td> <%= _('Format') + ":" %>  </td>
+    <td colspan="2" id="format_<%= @email.name %>">
+      <%= radio_button_tag('email[format]', 'html', checked = (@email.format.to_s == "html")) %> HTML
+      <%= radio_button_tag('email[format]', 'plain', checked = (@email.format.to_s == "plain")) %> PLAIN
+    </td>
+  </tr>
 </table>

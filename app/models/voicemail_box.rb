@@ -9,22 +9,23 @@ class VoicemailBox < ActiveRecord::Base
   validates_uniqueness_of :device_id
 
   class << self # Class methods
-        alias :all_columns :columns
-        def columns
-            all_columns.reject {|c| c.name == 'delete'}
-          end
-      end
+    alias :all_columns :columns
 
-    def self.delete
-        self[:delete]
-      end
+    def columns
+      all_columns.reject { |c| c.name == 'delete' }
+    end
+  end
 
-    def self.delete=(s)
-        self[:delete] = s
-      end
+  def self.delete
+    self[:delete]
+  end
 
-    def is_deletable
-        self[:delete]
-      end
+  def self.delete=(s)
+    self[:delete] = s
+  end
+
+  def is_deletable
+    self[:delete]
+  end
 
 end

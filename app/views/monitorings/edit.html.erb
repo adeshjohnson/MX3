@@ -1,102 +1,106 @@
 <h3><%= _('Edit_monitoring') %>
-  <%if @m_users and @m_users.size.to_i > 0%>
-  <%str=[] ; @m_users.each{|u| str << nice_user(u)};  s = str.size.to_i > 1 ? 's' :''  %>
-  <%= _('for_user'+s) + ': ' + str.join('; ') %>
-<%end%></h3>
-<%= form_for @monitoring, :url => { :action => 'update', :id => @monitoring.id }, :builder => MonitoringFormBuilder do |f| %>
-  <table width="100%" class="monitoring" cellspacing="0" cellpadding="0">
-    <thead>
+  <% if @m_users and @m_users.size.to_i > 0 %>
+      <% str=[] ; @m_users.each { |u| str << nice_user(u) };  s = str.size.to_i > 1 ? 's' :'' %>
+      <%= _('for_user'+s) + ': ' + str.join('; ') %>
+  <% end %></h3>
+<%= form_for @monitoring, :url => {:action => 'update', :id => @monitoring.id}, :builder => MonitoringFormBuilder do |f| %>
+    <table width="100%" class="monitoring" cellspacing="0" cellpadding="0">
+      <thead>
       <tr>
         <th class="last"><%= _('Active') %></th>
-        <th <%= tooltip(_('Period'), _('Period_explanation'))%>><%= _('Period') %></th>
-        <th <%= tooltip(_('Amount'), _('Amount_explanation'))%>><%= _('Amount') %> (<%= Currency.get_default.name %>)</th>
-        <th <%= tooltip(_('Block_user'), _('Block_user_explanation'))%>><%= _('Block_user') %></th>
-        <th <%= tooltip(_('Send_email_to_admin'), _('Send_email_explanation'))%>><%= _('Send_email_to_admin') %></th>
+        <th <%= tooltip(_('Period'), _('Period_explanation')) %>><%= _('Period') %></th>
+        <th <%= tooltip(_('Amount'), _('Amount_explanation')) %>><%= _('Amount') %> (<%= Currency.get_default.name %>)
+        </th>
+        <th <%= tooltip(_('Block_user'), _('Block_user_explanation')) %>><%= _('Block_user') %></th>
+        <th <%= tooltip(_('Send_email_to_admin'), _('Send_email_explanation')) %>><%= _('Send_email_to_admin') %></th>
         <% unless @monitoring.user_type.blank? %>
-          <th <%= tooltip(_('User_type'), _('User_type_explanation'))%>><%= _('User_type') %></th>
+            <th <%= tooltip(_('User_type'), _('User_type_explanation')) %>><%= _('User_type') %></th>
         <% end %>
         <th class="last"></th>
       </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
       <tr>
         <td class="center">
-          <%= f.check_box :active %><br/>
+          <%= f.check_box :active %>
+          <br/>
         </td>
-        <%= render :partial => "form", :locals => { :form => f }  %>
+        <%= render :partial => "form", :locals => {:form => f} %>
         <td>
           <% unless @monitoring.user_type.blank? %>
-            <%= f.radio_button 'user_type', 'all', :checked => true %> <%= _('All') %><br/>
-            <%= f.radio_button 'user_type', 'postpaid' %> <%= _('Postpaid') %><br/>
-            <%= f.radio_button 'user_type', 'prepaid' %> <%= _('Prepaid') %>
+              <%= f.radio_button 'user_type', 'all', :checked => true %> <%= _('All') %>
+              <br/>
+              <%= f.radio_button 'user_type', 'postpaid' %> <%= _('Postpaid') %>
+              <br/>
+              <%= f.radio_button 'user_type', 'prepaid' %> <%= _('Prepaid') %>
           <% end %>
         </td>
       </tr>
       <tr>
         <td colspan="7" class="top-bordered">
-          <%= submit_tag _('Update'), :disable_with=>_('Processing..') %>
+          <%= submit_tag _('Update'), :disable_with => _('Processing..') %>
         </td>
       </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
 
-  <p id="explanation"></p>
+    <p id="explanation"></p>
 
 <% end %>
 
-<br />
+<br/>
 <script type="text/javascript">
-  var template = new Template("<%= _('Monitoring_template_short') %>");
-  var values = <%= monitoring_values(@monitoring, :users => "<strong>"+nice_user(@user)+"</strong>") %>;
-  var messages = <%= monitoring_messages %> ;
+    var template = new Template("<%= _('Monitoring_template_short') %>");
+    var values = <%= monitoring_values(@monitoring, :users => "<strong>"+nice_user(@user)+"</strong>") %>;
+    var messages = <%= monitoring_messages %>;
 
-  Event.observe(window, 'load', function() {
-    $("explanation").update(template.evaluate(values));
-
-    new Form.Element.Observer('amount', 1.0,
-    function(el, value) {
-      values.amount = value + " " + $("default_currency").value;
-      $("explanation").update(template.evaluate(values));
-    }
-  );
-
-    //uwaga! do no not try to make any changes, you've been worned!
-    //this array contains id of radiobuttons. when iterating through it event observers are beeing registered.
-    //on event, observer will change template according to whitch button was pressed. notice
-    // -- values[ev.match(/[A-Za-z]+$/)[0]] = messages[ev];
-    //one asoc array contains keys and another contains same endings of keys(notice reg exp). this subtile trick
-    //makes one to many relationship between these two arrays.
-    ["will_be_blocked", "will_not_be_blocked", "will_be_sent", "will_not_be_sent", "bellow_monitoringamount", "above_monitoringamount"].each( function(ev) {
-      Event.observe(ev, 'change', function() {
-        values[ev.match(/[A-Za-z]+$/)[0]] = messages[ev];
+    Event.observe(window, 'load', function () {
         $("explanation").update(template.evaluate(values));
-      });
-    });
 
-    Event.observe('monitoring_period_in_past_type_minutes', 'change', function() {
-      values.period = messages['thirty_minutes'];
-      $("explanation").update(template.evaluate(values));
-    });
+        new Form.Element.Observer('amount', 1.0,
+                function (el, value) {
+                    values.amount = value + " " + $("default_currency").value;
+                    $("explanation").update(template.evaluate(values));
+                }
+        );
 
-    Event.observe('monitoring_period_in_past_type_hours', 'change', function() {
-      values.period = parseInt($$(".period_hours").first().value) / 60 + " " + messages['hours'];
-      $("explanation").update(template.evaluate(values));
-    });
+        //uwaga! do no not try to make any changes, you've been worned!
+        //this array contains id of radiobuttons. when iterating through it event observers are beeing registered.
+        //on event, observer will change template according to whitch button was pressed. notice
+        // -- values[ev.match(/[A-Za-z]+$/)[0]] = messages[ev];
+        //one asoc array contains keys and another contains same endings of keys(notice reg exp). this subtile trick
+        //makes one to many relationship between these two arrays.
+        ["will_be_blocked", "will_not_be_blocked", "will_be_sent", "will_not_be_sent", "bellow_monitoringamount", "above_monitoringamount"].each(function (ev) {
+            Event.observe(ev, 'change', function () {
+                values[ev.match(/[A-Za-z]+$/)[0]] = messages[ev];
+                $("explanation").update(template.evaluate(values));
+            });
+        });
 
-    Event.observe($$(".period_hours").first(), 'change', function() {
-      values.period = parseInt($$(".period_hours").first().value) / 60 + " " + messages['hours'];
-      $("explanation").update(template.evaluate(values));
-    });
+        Event.observe('monitoring_period_in_past_type_minutes', 'change', function () {
+            values.period = messages['thirty_minutes'];
+            $("explanation").update(template.evaluate(values));
+        });
 
-    Event.observe('monitoring_period_in_past_type_days', 'change', function() {
-      values.period = parseInt($$(".period_days").first().value) / 1440 + " " + messages['days'];
-      $("explanation").update(template.evaluate(values));
-    });
+        Event.observe('monitoring_period_in_past_type_hours', 'change', function () {
+            values.period = parseInt($$(".period_hours").first().value) / 60 + " " + messages['hours'];
+            $("explanation").update(template.evaluate(values));
+        });
 
-    Event.observe($$('.period_days').first(), 'change', function() {
-      values.period = parseInt($$(".period_days").first().value) / 1440 + " " + messages['days'];
-      $("explanation").update(template.evaluate(values));
-    });
+        Event.observe($$(".period_hours").first(), 'change', function () {
+            values.period = parseInt($$(".period_hours").first().value) / 60 + " " + messages['hours'];
+            $("explanation").update(template.evaluate(values));
+        });
 
-  });
+        Event.observe('monitoring_period_in_past_type_days', 'change', function () {
+            values.period = parseInt($$(".period_days").first().value) / 1440 + " " + messages['days'];
+            $("explanation").update(template.evaluate(values));
+        });
+
+        Event.observe($$('.period_days').first(), 'change', function () {
+            values.period = parseInt($$(".period_days").first().value) / 1440 + " " + messages['days'];
+            $("explanation").update(template.evaluate(values));
+        });
+
+    });
 </script>

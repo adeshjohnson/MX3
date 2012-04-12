@@ -44,21 +44,21 @@ class Google4R::Checkout::ItemInfoTest < Test::Unit::TestCase
     @item_info.create_tracking_data('UPS', '55555555')
     @item_info.create_tracking_data('FedEx', '12345678')
   end
-  
+
   def test_initialization_works
     assert_kind_of ItemInfo, @item_info
   end
-  
-  def test_responds_correctly 
-    [ :merchant_item_id, :tracking_data_arr].each do |sym|
+
+  def test_responds_correctly
+    [:merchant_item_id, :tracking_data_arr].each do |sym|
       assert_respond_to @item_info, sym
     end
   end
-  
+
   def test_merchant_item_id
-    assert_equal('A1', @item_info.merchant_item_id) 
+    assert_equal('A1', @item_info.merchant_item_id)
   end
-  
+
   def test_tracking_data_arr
     tracking_data = @item_info.tracking_data_arr[0]
     assert_equal('UPS', tracking_data.carrier)

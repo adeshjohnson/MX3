@@ -1,161 +1,166 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-  <head>
-    <title><%=  session[:admin_browser_title] %></title>
-    <script type="text/javascript">var mor_web_dir = '<%=Web_Dir%>';</script>
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application" %>
-    <%= stylesheet_link_tag "ccshop" %>
-    <%= csrf_meta_tags %>
-    <%= yield :head %>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <table width="100%">
-      <tr>
-        <td height="5"></td>
-      </tr>
-      <tr>
-        <td>
-          <table width="100%">
-            <tr>
-              <td valign="top">
-                <% if session[:logo_picture]%>
-                    <%= image_tag session[:logo_picture] %>
-                <% else %>
-                    <%= image_tag Confline.get_value("Logo_picture")%>
+<head>
+  <title><%= session[:admin_browser_title] %></title>
+  <script type="text/javascript">var mor_web_dir = '<%=Web_Dir%>';</script>
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "ccshop" %>
+  <%= csrf_meta_tags %>
+  <%= yield :head %>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<table width="100%">
+  <tr>
+    <td height="5"></td>
+  </tr>
+  <tr>
+    <td>
+      <table width="100%">
+        <tr>
+          <td valign="top">
+            <% if session[:logo_picture] %>
+                <%= image_tag session[:logo_picture] %>
+            <% else %>
+                <%= image_tag Confline.get_value("Logo_picture") %>
+            <% end %>
+          </td>
+          <td>
+            <table width="100%">
+              <tr>
+                <% if session[:login] == true %>
+                    <td align="right" class="nb">
+                      <b> <%= session[:first_name].capitalize %> <%= session[:last_name].capitalize %>  </b>
+                      (<%= session[:username] %>)
+                      <% link_to _('logoff'), :controller => "callc", :action => "logout" %>
+                    </td>
                 <% end %>
-              </td>
-              <td>
-                <table width="100%">
+              </tr>
+              <% if session[:cclogin] == true %>
                   <tr>
-                    <% if session[:login] == true %>
-                        <td align="right" class="nb">
-                          <b> <%= session[:first_name].capitalize %> <%= session[:last_name].capitalize %>  </b> (<%= session[:username] %>) <% link_to _('logoff'), :controller => "callc", :action => "logout" %>
-                        </td>
-                    <% end %>
-                  </tr>
-                  <% if session[:cclogin] == true %>
-                    <tr>
-                      <td align="right" class="nb">
-                        <b> <%= _('Card_number') %>: </b><%= session[:card_number] %>  <% link_to _('logoff'), :controller => "ccshop", :action => "logout" %>
-                      </td>
-                    </tr>
-                  <% end %>
-                  <tr>
-
-                    <td align="right" valign="bottom">
-                      <div>
-                        <%= raw flag_list.html_safe %>
-                      </div>
+                    <td align="right" class="nb">
+                      <b> <%= _('Card_number') %>: </b><%= session[:card_number] %>
+                      <% link_to _('logoff'), :controller => "ccshop", :action => "logout" %>
                     </td>
                   </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-      <tr> <td height="5"></td>
-      </tr>
-    </table>
-    <div id="ddnav">
-      <% if @page_title %>
-        <div class="page_title_new">
-          <b>&nbsp;</b><%= image_tag('icons/' + @page_icon, :title => @page_title) if @page_icon %>&nbsp;<%=raw  @page_title.html_safe %>
-        </div>
-      <% end %>
-    </div>
-    <div id="topbck"></div>
+              <% end %>
+              <tr>
+
+                <td align="right" valign="bottom">
+                  <div>
+                    <%= raw flag_list.html_safe %>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+  <tr>
+    <td height="5"></td>
+  </tr>
+</table>
+<div id="ddnav">
+  <% if @page_title %>
+      <div class="page_title_new">
+        <b>&nbsp;</b><%= image_tag('icons/' + @page_icon, :title => @page_title) if @page_icon %>&nbsp;<%= raw @page_title.html_safe %>
+      </div>
+  <% end %>
+</div>
+<div id="topbck"></div>
 
 
-    <table width="100%">
-      <tr>
-        <td>
-          <table width="100%" height=400>
-            <tr valign="top">
-              <td>
-              </td>
-              <td class="left_menu" width="170" >
-                <% if session[:cclogin] == true %>
-                  <script type="text/javascript">
+<table width="100%">
+  <tr>
+    <td>
+      <table width="100%" height=400>
+        <tr valign="top">
+          <td>
+          </td>
+          <td class="left_menu" width="170">
+            <% if session[:cclogin] == true %>
+                <script type="text/javascript">
                     d5 = new dTree('d5');
-                    d5.add(0,-1,'<%= _('MENU') %>');
-                    d5.add(1,0,'<%= _('Details') %>','<%= Web_Dir %>/ccshop/card_details');
-                    d5.add(2,0,'<%= _('Calls') %>','<%= Web_Dir %>/ccshop/call_list');
+                    d5.add(0, -1, '<%= _('MENU') %>');
+                    d5.add(1, 0, '<%= _('Details') %>', '<%= Web_Dir %>/ccshop/card_details');
+                    d5.add(2, 0, '<%= _('Calls') %>', '<%= Web_Dir %>/ccshop/call_list');
                     <%if session[:ccshop_display_paypal].to_i == 1%>
-                      d5.add(3,0,'<%= _('Shop') %>','<%= Web_Dir %>/ccshop/index');
+                    d5.add(3, 0, '<%= _('Shop') %>', '<%= Web_Dir %>/ccshop/index');
                     <%end%>
-                    d5.add(4,0,'<%= _('Rates') %>','<%= Web_Dir %>/ccshop/rates');
-                    d5.add(5,0,'<%= _('Speed_Dials') %>','<%= Web_Dir %>/ccshop/speeddials');
-                    d5.add(6,0,'<%= _('Logoff') %>','<%= Web_Dir %>/ccshop/logout');
+                    d5.add(4, 0, '<%= _('Rates') %>', '<%= Web_Dir %>/ccshop/rates');
+                    d5.add(5, 0, '<%= _('Speed_Dials') %>', '<%= Web_Dir %>/ccshop/speeddials');
+                    d5.add(6, 0, '<%= _('Logoff') %>', '<%= Web_Dir %>/ccshop/logout');
                     document.write(d5);
-                  </script>
+                </script>
 
-                  <div align="center">
-                    <%= image_tag("indicator_line.gif",
-                      :align => 'absmiddle',
-                      :border=> 0,
-                      :id => "spinner",
-                      :style=>"display: none;" ) %>
-                  </div>
+                <div align="center">
+                  <%= image_tag("indicator_line.gif",
+                                :align => 'absmiddle',
+                                :border => 0,
+                                :id => "spinner",
+                                :style => "display: none;") %>
+                </div>
 
-                <% else %>
-                  <div class="nb">
-                    <b><%= _('Login') %>:</b>
-                    <%= form_tag(:controlle => "ccshop", :action => 'try_to_login') do %>
+            <% else %>
+                <div class="nb">
+                  <b><%= _('Login') %>:</b>
+                  <%= form_tag(:controlle => "ccshop", :action => 'try_to_login') do %>
                       <% if CC_Single_Login == 1 %>
-                        <%= text_field_tag 'login', "", "class" => "input", :size => "15", :maxlength => "20"  %>
-                      <%  else  %>
-                        <table class="simple">
-                          <tr>
-                            <td> <%= _('Number') %>&nbsp; </td>
-                            <td> <%= text_field_tag 'login_num', "", "class" => "input", :size => "15", :maxlength => "20"  %></td>
-                          </tr>
-                          <tr>
-                            <td> <%= _('PIN') %> </td>
-                            <td> <%= password_field_tag 'login_pin', "", "class" => "input", :size => "15", :maxlength => "20"  %></td>
-                          </tr>
-                        </table>
-                      <%  end  %>
+                          <%= text_field_tag 'login', "", "class" => "input", :size => "15", :maxlength => "20" %>
+                      <% else %>
+                          <table class="simple">
+                            <tr>
+                              <td> <%= _('Number') %>&nbsp; </td>
+                              <td> <%= text_field_tag 'login_num', "", "class" => "input", :size => "15", :maxlength => "20" %></td>
+                            </tr>
+                            <tr>
+                              <td> <%= _('PIN') %> </td>
+                              <td> <%= password_field_tag 'login_pin', "", "class" => "input", :size => "15", :maxlength => "20" %></td>
+                            </tr>
+                          </table>
+                      <% end %>
 
-                      <%= submit_tag _('login'), :disable_with=>_('Processing..')%>
-                    <% end %>
-                  </div>
+                      <%= submit_tag _('login'), :disable_with => _('Processing..') %>
+                  <% end %>
+                </div>
 
                 </td>
 
+            <% end %>
+
+            <td></td>
+
+            <td align="left" class="main_window">
+
+
+              <% if @Show_Currency_Selector %>
+                  <%= currency_selector.html_safe %>
+              <% else %>
+                  <br>
               <% end %>
 
-              <td></td>
+              <% if flash[:notice] -%>
+                  <div id="notice"><%= flash[:notice].html_safe %></div>
+                  <br/>
+              <% end -%>
+              <% if flash[:status] -%>
+                  <div id="status"><%= flash[:status].html_safe %></div>
+                  <br/>
+              <% end -%>
 
-              <td align="left" class="main_window" >
+              <div class="nb"><%= raw yield.html_safe %></div>
+            </td>
 
-
-                <% if @Show_Currency_Selector%>
-                    <%= currency_selector.html_safe %>
-                <% else %>
-                  <br>
-                <% end %>
-
-                <% if flash[:notice] -%>
-                    <div id="notice"><%= flash[:notice].html_safe %></div>
-                    <br />
-                <% end -%>
-                <% if flash[:status] -%>
-                    <div id="status"><%= flash[:status].html_safe %></div>
-                    <br />
-                <% end -%>
-
-                <div class="nb"><%= raw yield.html_safe %></div>
-              </td>
-
-              <td></td>
+            <td></td>
 
             </tr>
-          </table>
+      </table>
 
-        </td></tr>
-    </table>
-  </td>
+    </td>
+  </tr>
+</table>
+</td>
 </tr>
 
 </table>
@@ -164,12 +169,12 @@
 <div id="footerbck"></div>
 <div id="footerbox">
   <div class="left-element">
-    <% if session[:version] and session[:copyright_title]%>
-        &nbsp;&nbsp;<%=raw session[:version] %> <%=raw session[:copyright_title] %>
-    <%else%>
-        <%if Confline.get_value("Show_logo_on_register_page", 0).to_i == 1%>
+    <% if session[:version] and session[:copyright_title] %>
+        &nbsp;&nbsp;<%= raw session[:version] %> <%= raw session[:copyright_title] %>
+    <% else %>
+        <% if Confline.get_value("Show_logo_on_register_page", 0).to_i == 1 %>
             &nbsp;&nbsp;<%= raw Confline.get_value("Version", 0) %> <%= raw Confline.get_value("Copyright_Title", 0) %>
-        <%end%>
+        <% end %>
     <% end %>
     &nbsp;
   </div>
@@ -177,14 +182,13 @@
 
 <%= javascript_include_tag "jquery-1.4.2.min.js" %>
 <script type="text/javascript">
-  $j = jQuery.noConflict();
+    $j = jQuery.noConflict();
 </script>
 <%= javascript_include_tag "mor/mor.js" %>
 
 <script type="text/javascript">
-  read_show_hide_menus();
+    read_show_hide_menus();
 </script>
-
 
 
 </body>

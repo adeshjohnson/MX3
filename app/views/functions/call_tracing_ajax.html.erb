@@ -1,12 +1,12 @@
 <% if @user and @user.is_reseller? %>
-  <% users = @user.find_all_for_select(:exclude_owner =>true) %>
-  <%= select_tag("reseller_user", options_for_select( [[_("None"), ""]] + users.map{|u| [ "#{nice_user(u)} (#{u.id })", u.id]})) %>
-  <script type="text/javascript">
-    $j("#reseller_users_header").removeClass("invisible");
-  </script>
+    <% users = @user.find_all_for_select(:exclude_owner => true) %>
+    <%= select_tag("reseller_user", options_for_select([[_("None"), ""]] + users.map { |u| ["#{nice_user(u)} (#{u.id })", u.id] })) %>
+    <script type="text/javascript">
+        $j("#reseller_users_header").removeClass("invisible");
+    </script>
 <% else %>
-  &nbsp;
-  <script type="text/javascript">
-    $j("#reseller_users_header").addClass("invisible");
-  </script>
+    &nbsp;
+    <script type="text/javascript">
+        $j("#reseller_users_header").addClass("invisible");
+    </script>
 <% end %>

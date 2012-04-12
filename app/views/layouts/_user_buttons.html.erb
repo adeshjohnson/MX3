@@ -1,68 +1,68 @@
 <% if defined?(user) and !user.new_record? and params[:action] != "default_user" %>
-  <td id="logged_<%= user.id %>" align="center">
-    <% if user.blocked.to_i == 0 %>
-      <%= user.logged == 1 ? b_online : b_offline%>
-    <% else %>
-      <%= image_tag('icons/exclamation.png', :title => _('User_is_blocked') )  %>
-    <% end %>
-  </td>
-
-  <td id="call_list_<%= user.id %>" align="center">
-    <%=   link_to(b_call ,{:controller => "stats", :action => "last_calls_stats", :s_user => user}, :id=>"call_list_link_"+user.id.to_s) %>
-  </td>
-
-  <td id="recordings_<%= user.id %>" align="center"> <%= link_to(b_record , {:controller => "recordings", :action => "list", :id => user.id}, :id=>"recordings_link_"+user.id.to_s) %> </td>
-
-  <% if admin? or reseller? %>
-    <td id="login_as_<%= user.id %>" align="center"><%= link_to(b_login_as, { :controller => "functions", :action => 'login_as_execute', :user => user }, :id=>"login_as_link_"+user.id.to_s, :confirm => _('are_you_sure'), :method => :post) if user.id != 0 %></td>
-  <%end%>
-
-  <% if admin? or reseller? %>
-    <td id="call_tracing_<%= user.id %>" align="center"><%= link_to(b_call_tracing,  {:controller => 'functions', :action => 'call_tracing_user', :user => user.id}, :id=>"call_tracing_link_"+user.id.to_s) %> </td>
-  <% end %>
-
-  <% if admin? %>
-    <td id="device_groups_<%= user.id %>" align="center"><%= link_to(b_groups,  {:controller => 'users', :action => 'device_groups', :id => user.id}, :id=>"device_groups_link_"+user.id.to_s) %> </td>
-  <% end %>
-
-  <% unless accountant? and session[:acc_device_manage].to_i == 0 %>
-    <td id="show_devices_<%= user.id %>" align="center"><%= link_to(b_device, {:controller => 'devices', :action => 'show_devices', :id => user.id}, :id=>"show_devices_link_"+user.id.to_s) unless (user.usertype == "admin" or user.usertype == "accountant")  and session[:usertype] != "admin" %></td>
-  <% end %>
-
-  <% if ["admin", "reseller"].include?(session[:usertype]) or (accountant? and session[:acc_payments_manage] > 1)%>
-    <td id="manual_payment_<%= user.id %>" align="center"><%= link_to(b_money, {:controller => 'payments', :action => 'manual_payment', :user_id => user.id}, :id=>"manual_payment_link_"+user.id.to_s )%></td>
-  <% end %>
-
-  <% if admin? %>
-    <td id="custom_rates_<%= user.id %>" align="center"><%= link_to(b_crates, {:controller => 'users', :action => 'custom_rates', :id => user.id}, :id=>"custom_rates_link_"+user.id.to_s ) if user.tariff and user.tariff.purpose == "user"%></td>
-  <% end %>
-
-  <% if ["admin", 'reseller'].include?(session[:usertype]) or (accountant? and session[:acc_manage_subscriptions_opt_1] > 0) %>
-    <td id="subscriptions_<%= user.id %>" align="center"><%= link_to b_subscriptions, {:controller => 'services', :action => 'subscriptions_list', :id => user.id}, :id=>"subscriptions_link_"+user.id.to_s  %></td>
-  <% end %>
-
-  <% if admin? or (accountant? and session[:acc_user_manage].to_i == 2)%>
-    <td id="user_log_<%= user.id %>" align="center">
-      <%=   link_to(b_user_log ,{:controller => "stats", :action => "action_log", :user_id => user}, :id=>"user_log_link_"+user.id.to_s) %>
+    <td id="logged_<%= user.id %>" align="center">
+      <% if user.blocked.to_i == 0 %>
+          <%= user.logged == 1 ? b_online : b_offline %>
+      <% else %>
+          <%= image_tag('icons/exclamation.png', :title => _('User_is_blocked')) %>
+      <% end %>
     </td>
-  <%end%>
 
-  <% if monitoring_enabled_for(current_user) %>
-      <td id="monitorings_<%= user.id %>" align="center">
-        <%= link_to(b_search({:title => _("Create_monitoring")}), {:controller => 'monitorings', :action => 'for_user', :id => user}, {:id => "monitorings_link_#{user.id}"}) %>
-      </td>
-  <% end %>
+    <td id="call_list_<%= user.id %>" align="center">
+      <%= link_to(b_call, {:controller => "stats", :action => "last_calls_stats", :s_user => user}, :id => "call_list_link_"+user.id.to_s) %>
+    </td>
 
-  <% unless (params[:controller] == "users" and params[:action] == "edit") %>
-    <td id="edit_<%= user.id %>" align="center"><%= link_to b_edit, {:action => 'edit', :id => user}, :id=>"edit_link_"+user.id.to_s unless (user.usertype == "admin" or user.usertype == "accountant") and session[:usertype] != "admin" %></td>
-  <% end %>
+    <td id="recordings_<%= user.id %>" align="center"> <%= link_to(b_record, {:controller => "recordings", :action => "list", :id => user.id}, :id => "recordings_link_"+user.id.to_s) %> </td>
 
-  <% if admin? or (accountant? and session[:acc_user_manage].to_i == 2) or reseller?%>
-    <% user.hidden.to_i == 1 ? img = b_unhide : img = b_hide %>
-    <td id="hide_<%= user.id %>" align="center"><%= link_to(img, { :action => 'hide', :id => user }, {:id=>"hide_link_"+user.id.to_s, :confirm => _('are_you_sure'), :method => "post"}) unless (user.usertype == "admin" or user.usertype == "accountant") and session[:usertype] != "admin" %></td>
-  <% end %>
+    <% if admin? or reseller? %>
+        <td id="login_as_<%= user.id %>" align="center"><%= link_to(b_login_as, {:controller => "functions", :action => 'login_as_execute', :user => user}, :id => "login_as_link_"+user.id.to_s, :confirm => _('are_you_sure'), :method => :post) if user.id != 0 %></td>
+    <% end %>
 
-  <% unless (accountant? and session[:acc_user_manage].to_i != 2)%>
-    <td id="delete_<%= user.id %>" align="center"><%= link_to b_delete, { :action => 'destroy', :id => user }, :id=>"delete_link_"+user.id.to_s, :confirm => _('are_you_sure'), :method => "post" unless (user.usertype == "admin" or user.usertype == "accountant") and session[:usertype] != "admin" %></td>
-  <% end %>
-<% end  %>
+    <% if admin? or reseller? %>
+        <td id="call_tracing_<%= user.id %>" align="center"><%= link_to(b_call_tracing, {:controller => 'functions', :action => 'call_tracing_user', :user => user.id}, :id => "call_tracing_link_"+user.id.to_s) %> </td>
+    <% end %>
+
+    <% if admin? %>
+        <td id="device_groups_<%= user.id %>" align="center"><%= link_to(b_groups, {:controller => 'users', :action => 'device_groups', :id => user.id}, :id => "device_groups_link_"+user.id.to_s) %> </td>
+    <% end %>
+
+    <% unless accountant? and session[:acc_device_manage].to_i == 0 %>
+        <td id="show_devices_<%= user.id %>" align="center"><%= link_to(b_device, {:controller => 'devices', :action => 'show_devices', :id => user.id}, :id => "show_devices_link_"+user.id.to_s) unless (user.usertype == "admin" or user.usertype == "accountant") and session[:usertype] != "admin" %></td>
+    <% end %>
+
+    <% if ["admin", "reseller"].include?(session[:usertype]) or (accountant? and session[:acc_payments_manage] > 1) %>
+        <td id="manual_payment_<%= user.id %>" align="center"><%= link_to(b_money, {:controller => 'payments', :action => 'manual_payment', :user_id => user.id}, :id => "manual_payment_link_"+user.id.to_s) %></td>
+    <% end %>
+
+    <% if admin? %>
+        <td id="custom_rates_<%= user.id %>" align="center"><%= link_to(b_crates, {:controller => 'users', :action => 'custom_rates', :id => user.id}, :id => "custom_rates_link_"+user.id.to_s) if user.tariff and user.tariff.purpose == "user" %></td>
+    <% end %>
+
+    <% if ["admin", 'reseller'].include?(session[:usertype]) or (accountant? and session[:acc_manage_subscriptions_opt_1] > 0) %>
+        <td id="subscriptions_<%= user.id %>" align="center"><%= link_to b_subscriptions, {:controller => 'services', :action => 'subscriptions_list', :id => user.id}, :id => "subscriptions_link_"+user.id.to_s %></td>
+    <% end %>
+
+    <% if admin? or (accountant? and session[:acc_user_manage].to_i == 2) %>
+        <td id="user_log_<%= user.id %>" align="center">
+          <%= link_to(b_user_log, {:controller => "stats", :action => "action_log", :user_id => user}, :id => "user_log_link_"+user.id.to_s) %>
+        </td>
+    <% end %>
+
+    <% if monitoring_enabled_for(current_user) %>
+        <td id="monitorings_<%= user.id %>" align="center">
+          <%= link_to(b_search({:title => _("Create_monitoring")}), {:controller => 'monitorings', :action => 'for_user', :id => user}, {:id => "monitorings_link_#{user.id}"}) %>
+        </td>
+    <% end %>
+
+    <% unless (params[:controller] == "users" and params[:action] == "edit") %>
+        <td id="edit_<%= user.id %>" align="center"><%= link_to b_edit, {:action => 'edit', :id => user}, :id => "edit_link_"+user.id.to_s unless (user.usertype == "admin" or user.usertype == "accountant") and session[:usertype] != "admin" %></td>
+    <% end %>
+
+    <% if admin? or (accountant? and session[:acc_user_manage].to_i == 2) or reseller? %>
+        <% user.hidden.to_i == 1 ? img = b_unhide : img = b_hide %>
+        <td id="hide_<%= user.id %>" align="center"><%= link_to(img, {:action => 'hide', :id => user}, {:id => "hide_link_"+user.id.to_s, :confirm => _('are_you_sure'), :method => "post"}) unless (user.usertype == "admin" or user.usertype == "accountant") and session[:usertype] != "admin" %></td>
+    <% end %>
+
+    <% unless (accountant? and session[:acc_user_manage].to_i != 2) %>
+        <td id="delete_<%= user.id %>" align="center"><%= link_to b_delete, {:action => 'destroy', :id => user}, :id => "delete_link_"+user.id.to_s, :confirm => _('are_you_sure'), :method => "post" unless (user.usertype == "admin" or user.usertype == "accountant") and session[:usertype] != "admin" %></td>
+    <% end %>
+<% end %>

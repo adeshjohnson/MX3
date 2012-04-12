@@ -13,7 +13,7 @@ module ActiveMerchant #:nodoc:
       md5 << self.class.name
       md5.hexdigest
     end
-    
+
     module_function :generate_unique_id
   end
 end

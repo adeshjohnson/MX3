@@ -4,27 +4,27 @@
     <td width="30"></td>
     <td colspan="2">
       <% hide_dest = Confline.get_value("Hide_Destination_End", session[:user_id]).to_i -%>
-      <% settings_group(_("Hide_Destinations_Ends"),"dhtmlgoodies_tab_privacy_hide_number", width, 90){ %>
-        <tr>
-          <td></td>
-          <td><b><%= _("Yes") %>/<%= _("No") %></b></td>
-        </tr>
-        <tr>
-          <td><b><%= _("GUI") %></b></td>
-          <td><%= radio_button_tag :hide_destination_ends_gui, "1", checked_possition?(hide_dest, 1)  %>
-              <%= radio_button_tag :hide_destination_ends_gui, "0", !checked_possition?(hide_dest, 1) %></td>
-        </tr>
-        <tr>
-          <td><b><%= _("CSV") %></b></td>
-          <td><%= radio_button_tag :hide_destination_ends_csv, "2",  checked_possition?(hide_dest, 2)  %>
-              <%= radio_button_tag :hide_destination_ends_csv, "0", !checked_possition?(hide_dest, 2) %></td>
-        </tr>
-        <tr>
-          <td><b><%= _("PDF") %></b></td>
-          <td><%= radio_button_tag :hide_destination_ends_pdf, "4",  checked_possition?(hide_dest, 3)  %>
-              <%= radio_button_tag :hide_destination_ends_pdf, "0", !checked_possition?(hide_dest, 3) %></td>
-        </tr>
-      <% } %>
-    </td>
+      <% settings_group(_("Hide_Destinations_Ends"), "dhtmlgoodies_tab_privacy_hide_number", width, 90) { %>
+      <tr>
+        <td></td>
+        <td><b><%= _("Yes") %>/<%= _("No") %></b></td>
+      </tr>
+      <tr>
+        <td><b><%= _("GUI") %></b></td>
+        <td><%= radio_button_tag :hide_destination_ends_gui, "1", checked_possition?(hide_dest, 1) %>
+          <%= radio_button_tag :hide_destination_ends_gui, "0", !checked_possition?(hide_dest, 1) %></td>
+      </tr>
+      <tr>
+        <td><b><%= _("CSV") %></b></td>
+        <td><%= radio_button_tag :hide_destination_ends_csv, "2", checked_possition?(hide_dest, 2) %>
+          <%= radio_button_tag :hide_destination_ends_csv, "0", !checked_possition?(hide_dest, 2) %></td>
+      </tr>
+      <tr>
+        <td><b><%= _("PDF") %></b></td>
+        <td><%= radio_button_tag :hide_destination_ends_pdf, "4", checked_possition?(hide_dest, 3) %>
+          <%= radio_button_tag :hide_destination_ends_pdf, "0", !checked_possition?(hide_dest, 3) %></td>
+      </tr>
+  <% } %>
+  </td>
   </tr>
 </table>

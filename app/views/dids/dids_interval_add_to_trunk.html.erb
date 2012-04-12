@@ -1,34 +1,35 @@
-<%= render :partial => "bulk_management_header"  %>
+<%= render :partial => "bulk_management_header" %>
 
-<%= form_tag({:action => 'update', :back=>1}.merge(@opts)) do %>
-  <%= hidden_field_tag 'status', "active" %>
-  <table class="maintable" width="100%">
-    <tr>
-      <th align="left"> <%= b_trunk %><%= _('Assign_did_to_Trunk') %></th>
-    </tr>
-    <tr class="row1">
-      <td>
-        <br /><%= _('Assign_did_to_trunk_expanded') %>
-        <br />
-        <br />
-        <% if @available_trunks.size > 0 %>
-          <%= b_trunk %>
-          <select name="device_id" >
-            <% for dev in @available_trunks %>
-              <option value="<%= dev.id %>"> <%= nice_user(dev.user) %> - <%= nice_device(dev) %><%= " - " + dev.description.to_s if dev.description.to_s.length > 0 %> </option>
-            <% end %>
-          </select>
-          <br />
-          <br />
-          <%= submit_tag(_('Assign'), :disable_with=>_('Processing..')) %>
-          <br />
-        <% else%>
-          <%= _('No_free_trunks_for_did') %>
-          <br />
-          <br />
-        <% end %>
-      </td>
-    </tr>
-  </table>
-  <br />
+<%= form_tag({:action => 'update', :back => 1}.merge(@opts)) do %>
+    <%= hidden_field_tag 'status', "active" %>
+    <table class="maintable" width="100%">
+      <tr>
+        <th align="left"> <%= b_trunk %><%= _('Assign_did_to_Trunk') %></th>
+      </tr>
+      <tr class="row1">
+        <td>
+          <br/><%= _('Assign_did_to_trunk_expanded') %>
+          <br/>
+          <br/>
+          <% if @available_trunks.size > 0 %>
+              <%= b_trunk %>
+              <select name="device_id">
+                <% for dev in @available_trunks %>
+                    <option value="<%= dev.id %>"> <%= nice_user(dev.user) %>
+                      - <%= nice_device(dev) %><%= " - " + dev.description.to_s if dev.description.to_s.length > 0 %> </option>
+                <% end %>
+              </select>
+              <br/>
+              <br/>
+              <%= submit_tag(_('Assign'), :disable_with => _('Processing..')) %>
+              <br/>
+          <% else %>
+              <%= _('No_free_trunks_for_did') %>
+              <br/>
+              <br/>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+    <br/>
 <% end %>

@@ -7,11 +7,11 @@ class HiTrustNotificationTest < Test::Unit::TestCase
   def setup
     @notification = HiTrust::Notification.new(successful_response)
   end
-  
+
   def teardown
     ActiveMerchant::Billing::Base.integration_mode = :test
   end
-  
+
   def test_accessors
     assert @notification.complete?
     assert_equal "Completed", @notification.status
@@ -56,5 +56,5 @@ class HiTrustNotificationTest < Test::Unit::TestCase
   private
   def successful_response
     'retcode=00&ordernumber=1000&orderstatus=02&authCode=123456&eci=VISA3D&authRRN=012345678901&storeid=101010&approveamount=500&currency=USD&orderdate=2007-12-01.12.35.40.123456'
-  end  
+  end
 end

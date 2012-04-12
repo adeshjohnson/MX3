@@ -2,22 +2,22 @@
 class GroupsController < ApplicationController
   layout "callc"
 
-  before_filter :check_post_method, :only=>[:destroy, :create, :update, :add_member, :remove_member]
+  before_filter :check_post_method, :only => [:destroy, :create, :update, :add_member, :remove_member]
   before_filter :check_localization
   before_filter :authorize
   before_filter :check_user_type, :only => [:members, :change_member_type, :add_member, :remove_member, :change_position]
-  before_filter :find_group, :only => [ :show, :edit, :update, :destroy, :members, :add_member, :remove_member, :manager_members, :callshop_management, :member_stats, :member_stats_update, :change_member_type, :change_position ]
+  before_filter :find_group, :only => [:show, :edit, :update, :destroy, :members, :add_member, :remove_member, :manager_members, :callshop_management, :member_stats, :member_stats_update, :change_member_type, :change_position]
   before_filter :check_addon
 
   @@callshop_view = []
-  @@callshop_edit = [:index, :list, :show, :new,  :create, :edit, :update, :destroy, :members, :change_member_type, :change_position, :add_member, :remove_member, :manager_list, :manager_members, :callshop_management, :member_stats, :member_stats_update, :group_member_devices]
-  before_filter(:only =>  @@callshop_view+@@callshop_edit) { |c|
+  @@callshop_edit = [:index, :list, :show, :new, :create, :edit, :update, :destroy, :members, :change_member_type, :change_position, :add_member, :remove_member, :manager_list, :manager_members, :callshop_management, :member_stats, :member_stats_update, :group_member_devices]
+  before_filter(:only => @@callshop_view+@@callshop_edit) { |c|
     allow_read, allow_edit = c.check_read_write_permission(@@callshop_view, @@callshop_edit, {:role => "reseller", :right => :res_call_shop, :ignore => true})
     c.instance_variable_set :@callshop, allow_read
     c.instance_variable_set :@callshop, allow_edit
     true
   }
-  
+
   def index
     list
     render :action => 'list'
@@ -25,7 +25,7 @@ class GroupsController < ApplicationController
 
   def list
     @page_title = _('Callshops')
-    @groups = Group.find(:all, :include => :translation, :conditions => { :owner_id => current_user.id })
+    @groups = Group.find(:all, :include => :translation, :conditions => {:owner_id => current_user.id})
   end
 
   def show
@@ -87,7 +87,7 @@ class GroupsController < ApplicationController
     user = User.find_by_id(params[:user])
     unless user
       flash[:notice] = _('User_was_not_found')
-      redirect_to :controller => 'callc', :action=>"main" and return false
+      redirect_to :controller => 'callc', :action => "main" and return false
     end
 
     usergroup = Usergroup.find(:first, :conditions => ["user_id = ? AND group_id = ?", user.id, @group.id])
@@ -124,7 +124,7 @@ class GroupsController < ApplicationController
     user = User.find_by_id(params[:new_member])
     unless user
       flash[:notice] = _('User_was_not_found')
-      redirect_to :controller => 'callc', :action=>"main" and return false
+      redirect_to :controller => 'callc', :action => "main" and return false
     end
     if user.usertype == "user" and user.owner_id == correct_owner_id
       usergroup = Usergroup.new({:user_id => user.id, :group_id => @group.id})
@@ -148,7 +148,7 @@ class GroupsController < ApplicationController
     user = User.find_by_id(params[:user])
     unless user
       flash[:notice] = _('User_was_not_found')
-      redirect_to :controller => 'callc', :action=>"main" and return false
+      redirect_to :controller => 'callc', :action => "main" and return false
     end
     member = Usergroup.find(:first, :conditions => ["user_id = ? AND group_id = ?", user.id, @group.id])
     if member
@@ -166,7 +166,7 @@ class GroupsController < ApplicationController
     user = User.find_by_id(session[:user_id])
     unless user
       flash[:notice] = _('User_was_not_found')
-      redirect_to :controller => 'callc', :action=>"main" and return false
+      redirect_to :controller => 'callc', :action => "main" and return false
     end
     @groups = user.groups
   end
@@ -185,8 +185,8 @@ class GroupsController < ApplicationController
 
     i = 0
     for member in @group.users
-      @calls[i] = member.total_calls("answered",session_from_datetime, session_till_datetime) + member.total_calls("answered_inc", session_from_datetime, session_till_datetime)
-      @durations[i] = member.total_duration("answered",session_from_datetime, session_till_datetime) + member.total_duration("answered_inc", session_from_datetime, session_till_datetime)
+      @calls[i] = member.total_calls("answered", session_from_datetime, session_till_datetime) + member.total_calls("answered_inc", session_from_datetime, session_till_datetime)
+      @durations[i] = member.total_duration("answered", session_from_datetime, session_till_datetime) + member.total_duration("answered_inc", session_from_datetime, session_till_datetime)
       i+=1
     end
 
@@ -227,9 +227,9 @@ class GroupsController < ApplicationController
 
     i = 0
     for member in @group.simple_users
-      @calls[i] = member.total_calls("answered",@date_from, @date_till)
+      @calls[i] = member.total_calls("answered", @date_from, @date_till)
       #      @durations[i] = member.total_duration("answered",date_from, date_till)
-      @durations[i] = member.total_billsec("answered",@date_from, @date_till)
+      @durations[i] = member.total_billsec("answered", @date_from, @date_till)
       i+=1
     end
 
@@ -282,7 +282,7 @@ class GroupsController < ApplicationController
     end
 
     flash[:notice] = _('Member_stats_updated')
-    redirect_to  :action => "member_stats", :id => @group.id
+    redirect_to :action => "member_stats", :id => @group.id
 
   end
 
@@ -309,7 +309,7 @@ class GroupsController < ApplicationController
     @user = User.find_by_id(params[:id])
     unless @user
       flash[:notice] = _('User_was_not_found')
-      redirect_to :controller => 'callc', :action=>"main" and return false
+      redirect_to :controller => 'callc', :action => "main" and return false
     end
     @devices = @user.devices
 
@@ -321,7 +321,7 @@ class GroupsController < ApplicationController
   def check_user_type
     if session[:usertype] == "user"
       dont_be_so_smart
-      redirect_to :controller => 'callc', :action=>"main" and return false
+      redirect_to :controller => 'callc', :action => "main" and return false
     end
   end
 
@@ -331,12 +331,12 @@ class GroupsController < ApplicationController
 
     unless @group
       flash[:notice] = _('Call_shop_was_not_found')
-      redirect_to :controller => 'callc', :action=>"main" and return false
+      redirect_to :controller => 'callc', :action => "main" and return false
     end
 
     unless @group.owner_id == current_user.id
       dont_be_so_smart
-      redirect_to :controller => 'callc', :action=>"main" and return false
+      redirect_to :controller => 'callc', :action => "main" and return false
     end
   end
 

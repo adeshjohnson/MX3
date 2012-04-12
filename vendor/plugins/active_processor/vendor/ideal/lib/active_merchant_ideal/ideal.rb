@@ -7,14 +7,14 @@ require 'digest/sha1'
 
 module ActiveMerchant #:nodoc:
   module Billing #:nodoc: 
-    # === Response classes
-    # 
-    # * IdealResponse
-    # * IdealTransactionResponse
-    # * IdealStatusResponse
-    # * IdealDirectoryResponse
-    # 
-    # See the IdealResponse base class for more information on errors.
+                 # === Response classes
+                 #
+                 # * IdealResponse
+                 # * IdealTransactionResponse
+                 # * IdealStatusResponse
+                 # * IdealDirectoryResponse
+                 #
+                 # See the IdealResponse base class for more information on errors.
     class IdealGateway < Gateway
       AUTHENTICATION_TYPE = 'SHA1_RSA'
       LANGUAGE = 'nl'
@@ -65,13 +65,13 @@ module ActiveMerchant #:nodoc:
       def self.ideal_certificate_file=(certificate_file)
         self.ideal_certificate = File.read(certificate_file)
       end
-      
+
       # Instantiates and assings a OpenSSL::X509::Certificate instance with the
       # provided iDEAL certificate data.
       def self.ideal_certificate=(certificate_data)
         @ideal_certificate = OpenSSL::X509::Certificate.new(certificate_data)
       end
-      
+
       # Returns the global merchant ideal_certificate.
       def self.ideal_certificate
         @ideal_certificate
@@ -224,24 +224,24 @@ module ActiveMerchant #:nodoc:
       def javaize_key(key)
         key = key.to_s
         case key
-        when 'acquirer_transaction_request'
-          'AcquirerTrxReq'
-        when 'acquirer_status_request'
-          'AcquirerStatusReq'
-        when 'directory_request'
-          'DirectoryReq'
-        when 'issuer', 'merchant', 'transaction'
-          key.capitalize
-        when 'created_at'
-          'createDateTimeStamp'
-        when 'merchant_return_url'
-          'merchantReturnURL'
-        when 'token_code', 'expiration_period', 'entrance_code'
-          key[0,1] + key.camelize[1..-1]
-        when /^(\w+)_id$/
-          "#{$1}ID"
-        else
-          key
+          when 'acquirer_transaction_request'
+            'AcquirerTrxReq'
+          when 'acquirer_status_request'
+            'AcquirerStatusReq'
+          when 'directory_request'
+            'DirectoryReq'
+          when 'issuer', 'merchant', 'transaction'
+            key.capitalize
+          when 'created_at'
+            'createDateTimeStamp'
+          when 'merchant_return_url'
+            'merchantReturnURL'
+          when 'token_code', 'expiration_period', 'entrance_code'
+            key[0, 1] + key.camelize[1..-1]
+          when /^(\w+)_id$/
+            "#{$1}ID"
+          else
+            key
         end
       end
 
@@ -274,18 +274,18 @@ module ActiveMerchant #:nodoc:
         message = "#{timestamp}#{self.class.merchant_id}#{@sub_id}#{options[:transaction_id]}"
 
         xml_for(:acquirer_status_request, [
-          [:created_at,       timestamp],
-          [:merchant, [
-            [:merchant_id,    self.class.merchant_id],
-            [:sub_id,         @sub_id],
-            [:authentication, AUTHENTICATION_TYPE],
-            [:token,          token],
-            [:token_code,     token_code(message)]
-          ]],
+            [:created_at, timestamp],
+            [:merchant, [
+                [:merchant_id, self.class.merchant_id],
+                [:sub_id, @sub_id],
+                [:authentication, AUTHENTICATION_TYPE],
+                [:token, token],
+                [:token_code, token_code(message)]
+            ]],
 
-          [:transaction, [
-            [:transaction_id, options[:transaction_id]]
-          ]]
+            [:transaction, [
+                [:transaction_id, options[:transaction_id]]
+            ]]
         ])
       end
 
@@ -294,14 +294,14 @@ module ActiveMerchant #:nodoc:
         message = "#{timestamp}#{self.class.merchant_id}#{@sub_id}"
 
         xml_for(:directory_request, [
-          [:created_at,       timestamp],
-          [:merchant, [
-            [:merchant_id,    self.class.merchant_id],
-            [:sub_id,         @sub_id],
-            [:authentication, AUTHENTICATION_TYPE],
-            [:token,          token],
-            [:token_code,     token_code(message)]
-          ]]
+            [:created_at, timestamp],
+            [:merchant, [
+                [:merchant_id, self.class.merchant_id],
+                [:sub_id, @sub_id],
+                [:authentication, AUTHENTICATION_TYPE],
+                [:token, token],
+                [:token_code, token_code(message)]
+            ]]
         ])
       end
 
@@ -315,41 +315,41 @@ module ActiveMerchant #:nodoc:
 
         timestamp = created_at_timestamp
         message = timestamp +
-                  options[:issuer_id] +
-                  self.class.merchant_id +
-                  @sub_id.to_s +
-                  options[:return_url] +
-                  options[:order_id] +
-                  money.to_s +
-                  CURRENCY +
-                  LANGUAGE +
-                  options[:description] +
-                  options[:entrance_code]
+            options[:issuer_id] +
+            self.class.merchant_id +
+            @sub_id.to_s +
+            options[:return_url] +
+            options[:order_id] +
+            money.to_s +
+            CURRENCY +
+            LANGUAGE +
+            options[:description] +
+            options[:entrance_code]
 
         xml = xml_for(:acquirer_transaction_request, [
-          [:created_at, timestamp],
-          [:issuer, [[:issuer_id, options[:issuer_id]]]],
+            [:created_at, timestamp],
+            [:issuer, [[:issuer_id, options[:issuer_id]]]],
 
-          [:merchant, [
-            [:merchant_id,         self.class.merchant_id],
-            [:sub_id,              @sub_id],
-            [:authentication,      AUTHENTICATION_TYPE],
-            [:token,               token],
-            [:token_code,          token_code(message)],
-            [:merchant_return_url, options[:return_url]]
-          ]],
+            [:merchant, [
+                [:merchant_id, self.class.merchant_id],
+                [:sub_id, @sub_id],
+                [:authentication, AUTHENTICATION_TYPE],
+                [:token, token],
+                [:token_code, token_code(message)],
+                [:merchant_return_url, options[:return_url]]
+            ]],
 
-          [:transaction, [
-            [:purchase_id,       options[:order_id]],
-            [:amount,            money],
-            [:currency,          CURRENCY],
-            [:expiration_period, options[:expiration_period]],
-            [:language,          LANGUAGE],
-            [:description,       options[:description]],
-            [:entrance_code,     options[:entrance_code]]
-          ]]
+            [:transaction, [
+                [:purchase_id, options[:order_id]],
+                [:amount, money],
+                [:currency, CURRENCY],
+                [:expiration_period, options[:expiration_period]],
+                [:language, LANGUAGE],
+                [:description, options[:description]],
+                [:entrance_code, options[:entrance_code]]
+            ]]
         ])
-      xml
+        xml
       end
 
     end

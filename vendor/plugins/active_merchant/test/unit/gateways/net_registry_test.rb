@@ -4,30 +4,30 @@ require 'test_helper'
 class NetRegistryTest < Test::Unit::TestCase
   def setup
     @gateway = NetRegistryGateway.new(
-      :login => 'X',
-      :password => 'Y'
+        :login => 'X',
+        :password => 'Y'
     )
 
     @amount = 100
     @credit_card = credit_card
     @options = {
-      :order_id => '1',
-      :billing_address => address
+        :order_id => '1',
+        :billing_address => address
     }
   end
-  
+
   def test_filtered_fields
     @gateway.stubs(:ssl_post).returns(successful_purchase_response)
     response = @gateway.purchase(@amount, @credit_card, @options)
-    
+
     NetRegistryGateway::FILTERED_PARAMS.each do |param|
       assert_false response.params.has_key?(param)
     end
   end
-  
+
   def test_successful_purchase
     @gateway.stubs(:ssl_post).returns(successful_purchase_response)
-    
+
     response = @gateway.purchase(@amount, @credit_card, @options)
     assert_success response
     assert_match '0707161858000000', response.authorization
@@ -38,7 +38,7 @@ class NetRegistryTest < Test::Unit::TestCase
     response = @gateway.credit(@amount, '0707161858000000', @options)
     assert_success response
   end
-  
+
   def test_capture_without_credit_card_provided
     assert_raise(ArgumentError) do
       response = @gateway.capture(@amount, '0707161858000000', @options)
@@ -74,7 +74,7 @@ class NetRegistryTest < Test::Unit::TestCase
 
   def test_purchase_with_expired_credit_card
     @gateway.stubs(:ssl_post).returns(purchase_with_expired_credit_card_response)
-    
+
     response = @gateway.purchase(@amount, @credit_card, @options)
     assert_failure response
     assert_equal 'CARD EXPIRED', response.message
@@ -82,7 +82,7 @@ class NetRegistryTest < Test::Unit::TestCase
 
   def test_purchase_with_invalid_month
     @gateway.stubs(:ssl_post).returns(purchase_with_invalid_month_response)
-    
+
     response = @gateway.purchase(@amount, @credit_card, @options)
     assert_failure response
     assert_equal 'Invalid month', response.message
@@ -91,7 +91,7 @@ class NetRegistryTest < Test::Unit::TestCase
   def test_bad_login
     gateway = NetRegistryGateway.new(:login => 'bad-login', :password => 'bad-login')
     gateway.stubs(:ssl_post).returns(bad_login_response)
-    
+
     response = gateway.purchase(@amount, @credit_card, @options)
     assert_failure response
     assert_equal 'failed', response.params['status']
@@ -154,7 +154,7 @@ account_type=CREDIT A/C
 result=1
     RESPONSE
   end
-  
+
   def successful_credit_response
     <<-RESPONSE
 approved
@@ -211,7 +211,7 @@ account_type=CREDIT A/C
 result=1
     RESPONSE
   end
-  
+
   def successful_authorization_response
     <<-RESPONSE
 approved
@@ -268,7 +268,7 @@ account_type=CREDIT A/C
 result=1    
     RESPONSE
   end
-  
+
   def successful_capture_response
     <<-RESPONSE
 approved
@@ -325,7 +325,7 @@ account_type=CREDIT A/C
 result=1    
     RESPONSE
   end
-  
+
   def purchase_with_invalid_credit_card_response
     <<-RESPONSE
 declined
@@ -377,9 +377,9 @@ cashout_amount=0
 receipt_array=ARRAY(0x83752d0)
 account_type=CREDIT A/C
 result=0    
-RESPONSE
+    RESPONSE
   end
-  
+
   def purchase_with_expired_credit_card_response
     <<-RESPONSE
 failed
@@ -396,14 +396,14 @@ response_code=Q816
 result=-1
     RESPONSE
   end
-  
+
   def purchase_with_invalid_month_response
     <<-RESPONSE
 failed
 Invalid month
     RESPONSE
   end
-  
+
   def bad_login_response
     <<-RESPONSE
 failed

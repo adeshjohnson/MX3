@@ -1,4 +1,4 @@
-<iframe style="height:0px;width:0px;visibility:hidden" src="about:blank"> </iframe>
+<iframe style="height:0px;width:0px;visibility:hidden" src="about:blank"></iframe>
 
 <table class="info_table">
   <tr>
@@ -7,7 +7,9 @@
   </tr>
   <tr>
     <td> <%= _('Active_Calls') %>:</td>
-    <td><div id="active_calls_count"><%= link_to(@acc, {:controller => "stats", :action => "active_calls"}, {:id => "active_calls_link"}) %></div> </td>
+    <td>
+      <div id="active_calls_count"><%= link_to(@acc, {:controller => "stats", :action => "active_calls"}, {:id => "active_calls_link"}) %></div>
+    </td>
   </tr>
 </table>
 
@@ -20,55 +22,63 @@
   <%= render(:partial => "active_calls_show") %>
 </div>
 
-<br />
-<% if current_user.is_admin?  %>
-  <%= form_tag(:action => 'truncate_active_calls') do %>
-    <%= submit_tag _('Delete_active_calls_information'), :disable_with => _('Processing..') %>
-    <%= b_info + _('This_action_would_only_delete_temporary_information_it_does_not_affect_any_calls') %>.
-  <% end %>
+<br/>
+<% if current_user.is_admin? %>
+    <%= form_tag(:action => 'truncate_active_calls') do %>
+        <%= submit_tag _('Delete_active_calls_information'), :disable_with => _('Processing..') %>
+        <%= b_info + _('This_action_would_only_delete_temporary_information_it_does_not_affect_any_calls') %>.
+    <% end %>
 <% end %>
 
 <script type="text/javascript">
-  new PeriodicalExecuter(function() {
-  //alert(pp);
-  if(pp == 1){
-  new Ajax.Request('<%=Web_Dir%>/stats/active_calls_show', {asynchronous:true, evalScripts:true, onComplete:function(request){
-  Element.hide('spinner');
-  if (200 == request.status){
-  $('active_calls').innerHTML = request.responseText;
-  }}, onLoading:function(request){Element.show('spinner');}})
-  }
-  }, <%= @refresh_period %>)
-  //]]>
-  //<![CDATA[
-  new PeriodicalExecuter(function() {
-  if(pp == 1){
-  new Ajax.Request('<%=Web_Dir%>/stats/active_calls_count', {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');
-  if (200 == request.status){
-  $('active_calls_count').innerHTML = request.responseText;
-  }}, onLoading:function(request){Element.show('spinner');}})
-  }
-  }, <%= @refresh_period %>)
-  //]]>
+    new PeriodicalExecuter(function () {
+        //alert(pp);
+        if (pp == 1) {
+            new Ajax.Request('<%=Web_Dir%>/stats/active_calls_show', {asynchronous:true, evalScripts:true, onComplete:function (request) {
+                Element.hide('spinner');
+                if (200 == request.status) {
+                    $('active_calls').innerHTML = request.responseText;
+                }
+            }, onLoading:function (request) {
+                Element.show('spinner');
+            }})
+        }
+    }, <%= @refresh_period %>)
+    //]]>
+    //<![CDATA[
+    new PeriodicalExecuter(function () {
+        if (pp == 1) {
+            new Ajax.Request('<%=Web_Dir%>/stats/active_calls_count', {asynchronous:true, evalScripts:true, onComplete:function (request) {
+                Element.hide('spinner');
+                if (200 == request.status) {
+                    $('active_calls_count').innerHTML = request.responseText;
+                }
+            }, onLoading:function (request) {
+                Element.show('spinner');
+            }})
+        }
+    }, <%= @refresh_period %>)
+    //]]>
 </script>
 
 
 <%= javascript_include_tag "jquery-1.4.2.min.js" %>
 <script type="text/javascript">
-  $p = jQuery.noConflict();
+    $p = jQuery.noConflict();
 </script>
 <script type="text/javascript">
-  var pp = 1;
-  $p(document).ready(function(){
-  $p([document]).focusin(function(){
-  //Your logic when the page gets active
-  console.log(1);
-  pp = 1;
-  }).focusout(function(){
-  console.log(11);
-  //Your logic when the page gets inactive
-  pp = 0;
-  });
-  });
+    var pp = 1;
+    $p(document).ready(function () {
+        $p([document]).focusin(
+                function () {
+                    //Your logic when the page gets active
+                    console.log(1);
+                    pp = 1;
+                }).focusout(function () {
+                    console.log(11);
+                    //Your logic when the page gets inactive
+                    pp = 0;
+                });
+    });
 
 </script>

@@ -3,28 +3,28 @@
 <br>
 <br>
 <% if @WDFD %>
-  <table class='simple' width="100%">
-    <tr>
-      <td>            <b><%= _('Rate_details_for_WDFD') %>:</b>        </td>
-    </tr>
-  </table>
-  <%= render :partial => "user_rates_retail_detailed_items", :locals => {:rate_details => @day_arr, :ards => @day_arr, :type => "" } %>
+    <table class='simple' width="100%">
+      <tr>
+        <td><b><%= _('Rate_details_for_WDFD') %>:</b></td>
+      </tr>
+    </table>
+    <%= render :partial => "user_rates_retail_detailed_items", :locals => {:rate_details => @day_arr, :ards => @day_arr, :type => ""} %>
 <% else %>
-  <table class='simple' width="100%">
-    <tr>
-      <td>            <b><%= _('Rate_details_for_WD') %>:</b>        </td>
-    </tr>
-  </table>
-  <%= render :partial => "user_rates_retail_detailed_items", :locals => {:rate_details => @wd_arr, :type => "WD"} %>
+    <table class='simple' width="100%">
+      <tr>
+        <td><b><%= _('Rate_details_for_WD') %>:</b></td>
+      </tr>
+    </table>
+    <%= render :partial => "user_rates_retail_detailed_items", :locals => {:rate_details => @wd_arr, :type => "WD"} %>
 
-  <br>
-  <br>
+    <br>
+    <br>
 
-  <table class='simple' width="100%">
-    <tr>
-      <td><b><%= _('Rate_details_for_FD') %>:</b></td>
-    </tr>
-  </table>
-  <%= render :partial => "user_rates_retail_detailed_items", :locals => {:rate_details => @fd_arr, :type => "FD"} %>
+    <table class='simple' width="100%">
+      <tr>
+        <td><b><%= _('Rate_details_for_FD') %>:</b></td>
+      </tr>
+    </table>
+    <%= render :partial => "user_rates_retail_detailed_items", :locals => {:rate_details => @fd_arr, :type => "FD"} %>
 
 <% end %>

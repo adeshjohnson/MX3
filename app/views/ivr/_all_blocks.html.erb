@@ -1,10 +1,10 @@
-<table class = "maintable" width = '100%'>
+<table class="maintable" width='100%'>
   <tr>
     <th colspan="3"><b><%= _('Blocks') %>:</b></th>
   </tr>
-  <% @blocks.each_with_index{ |block, i|%>
-    <tr class="row<%= (i%2)+1 %>">
-      <td id="block_<%= block.id %>"><%= block_link(block) %></td>
-    </tr>
+  <% @blocks.each_with_index { |block, i| %>
+      <tr class="row<%= (i%2)+1 %>">
+        <td id="block_<%= block.id %>"><%= block_link(block) %></td>
+      </tr>
   <% } %>
 </table>

@@ -7,9 +7,9 @@ class Tariff < ActiveRecord::Base
   has_many :users
   has_many :cardgroups
   has_many :common_use_providers
-  
+
   validates_uniqueness_of :name, :message => _('Name_must_be_unique'), :scope => [:owner_id]
-  
+
   def real_currency
     Currency.find(:first, :conditions => ['name = ?', self.currency])
   end
@@ -77,15 +77,15 @@ class Tariff < ActiveRecord::Base
     extra[:offset] = options[:offset].to_i if options[:offset] and options[:offset].to_i
     if direction.class == String
       destinations = Destination.find(:all,
-        {:select => "destinations.*, directions.code AS 'dir_code', directions.name AS 'dir_name' ",
-          :joins => "LEFT JOIN directions ON (directions.code = destinations.direction_code) LEFT JOIN (SELECT * FROM rates where tariff_id = #{self.id}) as rates  ON (rates.destination_id = destinations.id)",
-          :conditions => ["destinations.direction_code = ? AND rates.id IS NULL", code]}.merge(extra))
+                                      {:select => "destinations.*, directions.code AS 'dir_code', directions.name AS 'dir_name' ",
+                                       :joins => "LEFT JOIN directions ON (directions.code = destinations.direction_code) LEFT JOIN (SELECT * FROM rates where tariff_id = #{self.id}) as rates  ON (rates.destination_id = destinations.id)",
+                                       :conditions => ["destinations.direction_code = ? AND rates.id IS NULL", code]}.merge(extra))
     end
     if direction.class == Direction
       destinations = Destination.find(:all,
-        {:select => "destinations.*, directions.code AS 'dir_code', directions.name AS 'dir_name' ",
-          :joins => "LEFT JOIN directions ON (directions.code = destinations.direction_code) LEFT JOIN (SELECT * FROM rates where tariff_id = #{self.id}) as rates  ON (rates.destination_id = destinations.id)",
-          :conditions => ["destinations.direction_code = ? AND rates.id IS NULL", direction.code]}.merge(extra))
+                                      {:select => "destinations.*, directions.code AS 'dir_code', directions.name AS 'dir_name' ",
+                                       :joins => "LEFT JOIN directions ON (directions.code = destinations.direction_code) LEFT JOIN (SELECT * FROM rates where tariff_id = #{self.id}) as rates  ON (rates.destination_id = destinations.id)",
+                                       :conditions => ["destinations.direction_code = ? AND rates.id IS NULL", direction.code]}.merge(extra))
 
     end
     options[:with_count] == true
@@ -97,7 +97,7 @@ class Tariff < ActiveRecord::Base
     rate.tariff_id = self.id
     rate.destination_id = dest_id
     rate.ghost_min_perc = ghost_percent if mor_11_extended
-    
+
     rate_det = Ratedetail.new
     rate_det.rate = rate_value.to_f
     rate_det.increment_s = increment.to_i
@@ -112,18 +112,18 @@ class Tariff < ActiveRecord::Base
   def delete_all_rates
 
     if purpose != 'user'
-      sql =  "DELETE ratedetails, rates FROM ratedetails, rates WHERE ratedetails.rate_id = rates.id AND rates.tariff_id = '#{self.id.to_s}'"
+      sql = "DELETE ratedetails, rates FROM ratedetails, rates WHERE ratedetails.rate_id = rates.id AND rates.tariff_id = '#{self.id.to_s}'"
       res = ActiveRecord::Base.connection.execute(sql)
 
       #just in case  - sometimes helps after crashed rate import from CSV file
-      sql =  "DELETE FROM rates WHERE rates.tariff_id = '#{self.id.to_s}'"
+      sql = "DELETE FROM rates WHERE rates.tariff_id = '#{self.id.to_s}'"
       res = ActiveRecord::Base.connection.execute(sql)
     else
-      sql =  "DELETE aratedetails, rates FROM aratedetails, rates WHERE aratedetails.rate_id = rates.id AND rates.tariff_id = '#{self.id.to_s}'"
+      sql = "DELETE aratedetails, rates FROM aratedetails, rates WHERE aratedetails.rate_id = rates.id AND rates.tariff_id = '#{self.id.to_s}'"
       res = ActiveRecord::Base.connection.execute(sql)
 
       #just in case  - sometimes helps after crashed rate import from CSV file
-      sql =  "DELETE FROM rates WHERE rates.tariff_id = '#{self.id.to_s}'"
+      sql = "DELETE FROM rates WHERE rates.tariff_id = '#{self.id.to_s}'"
       res = ActiveRecord::Base.connection.execute(sql)
     end
 
@@ -135,12 +135,12 @@ class Tariff < ActiveRecord::Base
 
   def exchange_rate(cur = nil)
     if cur
-      Currency.count_exchange_rate(cur,currency)
+      Currency.count_exchange_rate(cur, currency)
     else
-      sql =  "SELECT exchange_rate FROM currencies, tariffs WHERE currencies.name = tariffs.currency AND tariffs.id = '#{self.id}'"
+      sql = "SELECT exchange_rate FROM currencies, tariffs WHERE currencies.name = tariffs.currency AND tariffs.id = '#{self.id}'"
       res = ActiveRecord::Base.connection.select_one(sql)
       res["exchange_rate"].to_f
-    end  
+    end
   end
 
   def make_wholesale_tariff(amount = 0, percent = 0, fee_amount = 0, fee_percent = 0, type = "provider")
@@ -168,7 +168,7 @@ class Tariff < ActiveRecord::Base
         rates_sql = "SELECT ratedetails.id, ratedetails.end_time, ratedetails.start_time, ratedetails.rate, ratedetails.connection_fee, ratedetails.rate_id, ratedetails.increment_s, ratedetails.min_time, ratedetails.daytype, rates.id, rates.tariff_id, rates.destination_id FROM ratedetails LEFT join rates ON (rates.id = ratedetails.rate_id) WHERE rates.tariff_id = #{self.id};"
         rates_array = ActiveRecord::Base.connection.execute(rates_sql)
         rates = {}
-        rates_array.each{ |line|
+        rates_array.each { |line|
           rates[line[9]] = ActiveRecord::Base.connection.insert("INSERT INTO rates (`tariff_id`, `destination_id`, `destinationgroup_id`) VALUES(#{new_tariff_id}, #{line[11]}, NULL)").to_i if !rates[line[9]]
 
           # THIS WILL HELP TO FIND CORRECT LINES rd = {:id => line[0], :start_time => line[2], :end_time => line[1] , :rate  => line[3] , :connection_fee => line[4] , :rate_id  => line[5] , :increment_s => line[6] , :min_time => line[7] , :daytype => line[8]}
@@ -213,8 +213,8 @@ class Tariff < ActiveRecord::Base
     tariff = Tariff.new
     Tariff.transaction do
       tname = "#{self.name}"
-      tname += " + #{amount}"  if amount != 0
-      tname += " + #{percent}%"  if percent != 0
+      tname += " + #{amount}" if amount != 0
+      tname += " + #{percent}%" if percent != 0
 
       tariff.name = tname
       tariff.purpose = 'user'
@@ -299,7 +299,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     exrate = Currency.count_exchange_rate(self.currency, session[:show_currency])
     for rate in rates
       arate_details, arate_cur = get_user_rate_details(rate, exrate)
-      csv_string += !rate.destinationgroup ? "0#{sep}0#{sep}" : "#{rate.destinationgroup.name.to_s.gsub(sep," ")}#{sep}#{rate.destinationgroup.desttype}#{sep}"
+      csv_string += !rate.destinationgroup ? "0#{sep}0#{sep}" : "#{rate.destinationgroup.name.to_s.gsub(sep, " ")}#{sep}#{rate.destinationgroup.desttype}#{sep}"
       csv_string += arate_details.size == 0 ? "0#{sep}0\n" : "#{nice_number(arate_cur, session).to_s.gsub(".", dec)}#{sep}#{arate_details[0]['round'].to_s.gsub(".", dec)}\n"
     end
 
@@ -330,7 +330,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     result = ActiveRecord::Base.connection.select_all(sql)
     return result
   end
-  
+
   def generate_providers_rates_csv(session)
     sql = "SELECT directions.name as 'direction', destinations.name as 'destination', destinations.prefix, destinations.subcode, directions.code, ratedetails.start_time, ratedetails.end_time, ratedetails.rate, ratedetails.connection_fee, ratedetails.increment_s, ratedetails.min_time, ratedetails.daytype
       FROM rates LEFT JOIN ratedetails ON (rates.id = ratedetails.rate_id) LEFT JOIN destinations ON (rates.destination_id = destinations.id) LEFT JOIN directions ON (directions.code = destinations.direction_code)
@@ -346,35 +346,35 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
 
     csv_string = CSV.generate(:col_sep => sep) do |csv|
       csv << [
-        Localization._t("Direction", session[:lang]),                                               # r["direction"]
-        Localization._t("Destination", session[:lang]),                                             # r["destination"]
-        Localization._t("Prefix", session[:lang]),                                                  # r["prefix"]
-        Localization._t("Subcode", session[:lang]),                                                 # r["subcode"]
-        Localization._t("Country_code", session[:lang]),                                            # r["code"]
-        Localization._t("Rate", session[:lang])+"("+session[:show_currency].to_s+")",               # rate
-        Localization._t("Connection_Fee", session[:lang])+"("+session[:show_currency].to_s+")",     # con_fee
-        Localization._t("Increment", session[:lang]),                                               # r["increment_s"]
-        Localization._t("Minimal_Time", session[:lang]),                                            # r["min_time"]
-        Localization._("Start_Time", session[:lang]),                                               # r["start_time"]
-        Localization._t("End_Time", session[:lang]),                                                # r["end_time"]
-        Localization._t("Week_Day", session[:lang])                                                 # r["daytype"]
+          Localization._t("Direction", session[:lang]), # r["direction"]
+          Localization._t("Destination", session[:lang]), # r["destination"]
+          Localization._t("Prefix", session[:lang]), # r["prefix"]
+          Localization._t("Subcode", session[:lang]), # r["subcode"]
+          Localization._t("Country_code", session[:lang]), # r["code"]
+          Localization._t("Rate", session[:lang])+"("+session[:show_currency].to_s+")", # rate
+          Localization._t("Connection_Fee", session[:lang])+"("+session[:show_currency].to_s+")", # con_fee
+          Localization._t("Increment", session[:lang]), # r["increment_s"]
+          Localization._t("Minimal_Time", session[:lang]), # r["min_time"]
+          Localization._("Start_Time", session[:lang]), # r["start_time"]
+          Localization._t("End_Time", session[:lang]), # r["end_time"]
+          Localization._t("Week_Day", session[:lang]) # r["daytype"]
       ]
       for r in res
-        
-        rate, con_fee = Currency.count_exchange_prices({:exrate=>exrate, :prices=>[r["rate"].to_f, r["connection_fee"].to_f]})
-        csv << [ 
-          r["direction"].to_s.gsub(sep," "),
-          r["destination"].to_s.gsub(sep," "),
-          r["prefix"],
-          r["subcode"],
-          r["code"],
-          nice_number(rate, session).gsub(".", dec),
-          nice_number(con_fee, session).gsub(".", dec),
-          r["increment_s"],
-          r["min_time"],
-          r["start_time"],
-          r["end_time"],
-          r["daytype"] 
+
+        rate, con_fee = Currency.count_exchange_prices({:exrate => exrate, :prices => [r["rate"].to_f, r["connection_fee"].to_f]})
+        csv << [
+            r["direction"].to_s.gsub(sep, " "),
+            r["destination"].to_s.gsub(sep, " "),
+            r["prefix"],
+            r["subcode"],
+            r["code"],
+            nice_number(rate, session).gsub(".", dec),
+            nice_number(con_fee, session).gsub(".", dec),
+            r["increment_s"],
+            r["min_time"],
+            r["start_time"],
+            r["end_time"],
+            r["daytype"]
         ]
       end
     end
@@ -382,24 +382,24 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
 
   def generate_personal_wholesale_rates_csv(session)
     sql = "SELECT rates.* FROM rates, destinations, directions WHERE rates.tariff_id = #{id} AND rates.destination_id = destinations.id AND destinations.direction_code = directions.code ORDER by directions.name ASC;"
-    rates = Rate.find_by_sql(sql) 
-    sep = Confline.get_value("CSV_Separator").to_s 
-    dec = Confline.get_value("CSV_Decimal").to_s 
+    rates = Rate.find_by_sql(sql)
+    sep = Confline.get_value("CSV_Separator").to_s
+    dec = Confline.get_value("CSV_Decimal").to_s
 
     csv_string = Localization._t("Direction", session[:lang]) + sep + Localization._t("Prefix", session[:lang]) + sep + Localization._t("Subcode", session[:lang]) + sep + Localization._t("Rate", session[:lang]) + "(" + (session[:show_currency]).to_s+")"+
-      sep + Localization._t("Connection_Fee", session[:lang]) + "(" + (session[:show_currency]).to_s + ")" + sep + Localization._t("Increment", session[:lang]) + sep + Localization._t("Minimal_Time", session[:lang]) + "\n"
+        sep + Localization._t("Connection_Fee", session[:lang]) + "(" + (session[:show_currency]).to_s + ")" + sep + Localization._t("Increment", session[:lang]) + sep + Localization._t("Minimal_Time", session[:lang]) + "\n"
 
     exrate = Currency.count_exchange_rate(self.currency, session[:show_currency])
 
     for rate in rates
       rate_details, rate_cur = get_provider_rate_details(rate, exrate)
 
-      csv_string += "#{rate.destination.direction.name.to_s.gsub(sep," ")}" if rate.destination && rate.destination.direction 
-      csv_string += "#{sep}#{rate.destination.prefix}#{sep}#{rate.destination.subcode}#{sep}" if rate.destination 
-      csv_string += "0#{sep}0#{sep}0#{sep}" if !rate.destination 
+      csv_string += "#{rate.destination.direction.name.to_s.gsub(sep, " ")}" if rate.destination && rate.destination.direction
+      csv_string += "#{sep}#{rate.destination.prefix}#{sep}#{rate.destination.subcode}#{sep}" if rate.destination
+      csv_string += "0#{sep}0#{sep}0#{sep}" if !rate.destination
 
-      csv_string += "#{rate_cur.to_s.gsub(".", dec)}#{sep}#{rate_details[0]['connection_fee'].to_s.gsub(".", dec)}#{sep}#{rate_details[0]['increment_s'].to_s.gsub(".", dec)}#{sep}" + 
-        "#{rate_details[0]['min_time'].to_s.gsub(".", dec)}\n" if rate_details.size > 0 
+      csv_string += "#{rate_cur.to_s.gsub(".", dec)}#{sep}#{rate_details[0]['connection_fee'].to_s.gsub(".", dec)}#{sep}#{rate_details[0]['increment_s'].to_s.gsub(".", dec)}#{sep}" +
+          "#{rate_details[0]['min_time'].to_s.gsub(".", dec)}\n" if rate_details.size > 0
       csv_string += "0#{sep}0#{sep}0#{sep}0\n" if rate_details.size == 0
     end
 
@@ -408,9 +408,9 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
 
   def check_types_periods(options={})
     if options[:time_from]
-      a1, a2 = options[:time_from][:hour].to_s + ":" + options[:time_from][:minute].to_s + ":" + options[:time_from][:second].to_s,  options[:time_till][:hour].to_s + ":" + options[:time_till][:minute].to_s + ":" + options[:time_till][:second].to_s
+      a1, a2 = options[:time_from][:hour].to_s + ":" + options[:time_from][:minute].to_s + ":" + options[:time_from][:second].to_s, options[:time_till][:hour].to_s + ":" + options[:time_till][:minute].to_s + ":" + options[:time_till][:second].to_s
     else
-      a1, a2 = options[:time_from_hour].to_s + ":" + options[:time_from_minute].to_s + ":" + options[:time_from_second].to_s,  options[:time_till_hour].to_s + ":" + options[:time_till_minute].to_s + ":" + options[:time_till_second].to_s
+      a1, a2 = options[:time_from_hour].to_s + ":" + options[:time_from_minute].to_s + ":" + options[:time_from_second].to_s, options[:time_till_hour].to_s + ":" + options[:time_till_minute].to_s + ":" + options[:time_till_second].to_s
     end
     day_type = ["wd", "fd",].include?(options[:rate_day_type].to_s) ? options[:rate_day_type].to_s : ''
     #In case new rate detail's time and daytype is identical to allready existing rate details it will 
@@ -456,7 +456,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
 
   def load_csv_into_db(tname, sep, dec, fl, path = "/tmp/")
     colums ={}
-    colums[:colums] = [{:name=>"f_subcodes", :type=>"VARCHAR(50)", :default=>''},{:name=>"short_prefix", :type=>"VARCHAR(50)", :default=>''},{:name=>"f_country_code", :type=>"INT(4)", :default=>0},{:name=>"f_lata", :type=>"INT(4)", :default=>0},{:name=>"f_error", :type=>"INT(4)", :default=>0}, {:name=>"nice_error", :type=>"INT(4)", :default=>0},{:name=>"ned_update", :type=>"INT(4)", :default=>0}, {:name=>"not_found_in_db", :type=>"INT(4)", :default=>0}, {:name=>"id", :type=>'INT(11)', :inscrement=>' NOT NULL auto_increment '}]
+    colums[:colums] = [{:name => "f_subcodes", :type => "VARCHAR(50)", :default => ''}, {:name => "short_prefix", :type => "VARCHAR(50)", :default => ''}, {:name => "f_country_code", :type => "INT(4)", :default => 0}, {:name => "f_lata", :type => "INT(4)", :default => 0}, {:name => "f_error", :type => "INT(4)", :default => 0}, {:name => "nice_error", :type => "INT(4)", :default => 0}, {:name => "ned_update", :type => "INT(4)", :default => 0}, {:name => "not_found_in_db", :type => "INT(4)", :default => 0}, {:name => "id", :type => 'INT(11)', :inscrement => ' NOT NULL auto_increment '}]
     CsvImportDb.load_csv_into_db(tname, sep, dec, fl, path, colums)
   end
 
@@ -467,9 +467,9 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     arr[:destinations_in_db] = Destination.count.to_i
     arr[:directions_in_db] = Direction.count.to_i
     arr[:destinations_in_csv_file] = (ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name}").to_i - 1).to_s
-    arr[:rates_to_update] = Rate.count(:all, :conditions=>['tariff_id = ?', id], :joins=>"JOIN destinations ON (rates.destination_id = destinations.id) JOIN #{name} ON (destinations.prefix = replace(col_#{options[:imp_prefix]}, '\\r', ''))")
-    arr[:tariff_rates] = Rate.count(:all, :conditions=>{:tariff_id=>id})    
-    
+    arr[:rates_to_update] = Rate.count(:all, :conditions => ['tariff_id = ?', id], :joins => "JOIN destinations ON (rates.destination_id = destinations.id) JOIN #{name} ON (destinations.prefix = replace(col_#{options[:imp_prefix]}, '\\r', ''))")
+    arr[:tariff_rates] = Rate.count(:all, :conditions => {:tariff_id => id})
+
     # set error flag on dublicates | code : 12
     ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 12 WHERE col_#{options[:imp_prefix]} IN (SELECT prf FROM (select col_#{options[:imp_prefix]} as prf, count(*) as u from #{name} group by col_#{options[:imp_prefix]}  having u > 1) as imf )")
 
@@ -513,32 +513,31 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
   end
 
 
-
   def create_deatinations(name, options, options2)
     CsvImportDb.log_swap('create_destinations_start')
     MorLog.my_debug("CSV create_deatinations #{name}", 1)
     count = 0
-    s = [] ; ss=[]
-    ["prefix", "direction_code", "subcode", "name", "city", "state", "lata", "tier", "ocn"].each{ |col|    
+    s = []; ss=[]
+    ["prefix", "direction_code", "subcode", "name", "city", "state", "lata", "tier", "ocn"].each { |col|
       if !options["imp_#{col}".to_sym].blank? and options["imp_#{col}".to_sym].to_i > -1 or ["direction_code", "subcode"].include?(col)
         case col
-        when "direction_code"
-          sbg = "short_prefix"
-          cc = options[:imp_cc].to_i >= 0 ? "IF(replace(col_#{options[:imp_cc]}, '\\r', '') IN (SELECT code FROM directions),replace(col_#{options[:imp_cc]}, '\\r', ''),#{sbg})" : "#{sbg}"          
-          if  options[:imp_lata].to_i >= 0
-            s << " IF(length(replace(col_#{options[:imp_lata]}, '\\r', '')) > 0, 'USA', #{cc})"
+          when "direction_code"
+            sbg = "short_prefix"
+            cc = options[:imp_cc].to_i >= 0 ? "IF(replace(col_#{options[:imp_cc]}, '\\r', '') IN (SELECT code FROM directions),replace(col_#{options[:imp_cc]}, '\\r', ''),#{sbg})" : "#{sbg}"
+            if  options[:imp_lata].to_i >= 0
+              s << " IF(length(replace(col_#{options[:imp_lata]}, '\\r', '')) > 0, 'USA', #{cc})"
+            else
+              s << "#{cc}"
+            end
+          when "subcode"
+            if options[:imp_subcode] >= 0
+              s << "replace(col_#{options["imp_#{col}".to_sym]}, '\\r', '')"
+            else
+              s << "f_subcodes"
+            end
           else
-            s << "#{cc}"
-          end      
-        when "subcode"
-          if options[:imp_subcode] >= 0
-            s <<  "replace(col_#{options["imp_#{col}".to_sym]}, '\\r', '')"
-          else
-            s << "f_subcodes"
-          end        
-        else
-          s << 'replace(col_' + (options["imp_#{col}".to_sym]).to_s + ", '\\r', '')"
-        end       
+            s << 'replace(col_' + (options["imp_#{col}".to_sym]).to_s + ", '\\r', '')"
+        end
         ss << col
       elsif col == "name" and !options[:imp_dst].blank? and options[:imp_dst].to_i > -1
         ss << "name"
@@ -549,17 +548,17 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     if options[:imp_lata].to_i >= 0
       s1 = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_lata = 1 AND not_found_in_db = 1 AND f_error = 0").to_i
       n = s1/1000 +1
-      n.times{| i|
+      n.times { |i|
         #insert USA dest
         usa_sql = "INSERT INTO destinations (#{ss.join(',')})
                     SELECT #{s.join(',')} FROM #{name}
                     WHERE f_lata = 1 AND not_found_in_db = 1 AND f_error = 0 LIMIT #{i * 1000}, 1000"
         begin
-          Confline.set_value('Destination_create',1,User.current.id)
+          Confline.set_value('Destination_create', 1, User.current.id)
           ActiveRecord::Base.connection.execute(usa_sql)
           count += ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_lata = 1 AND not_found_in_db = 1 AND f_error = 0 LIMIT #{i * 1000}, 1000").to_i
         ensure
-          Confline.set_value('Destination_create',0,User.current.id)
+          Confline.set_value('Destination_create', 0, User.current.id)
         end
       }
     end
@@ -567,35 +566,33 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
 
     s2 = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_country_code = 1 AND f_error = 0 AND not_found_in_db = 1 AND f_lata = 0").to_i
     n = s2/1000 +1
-    n.times{| i|
+    n.times { |i|
       in_rd = "INSERT INTO destinations (#{ss.join(',')})
                 SELECT #{s.join(',')} FROM #{name}
                 WHERE f_country_code = 1 AND f_error = 0 AND not_found_in_db = 1 AND f_lata = 0 LIMIT #{i * 1000}, 1000"
       begin
-        Confline.set_value('Destination_create',1,User.current.id)
+        Confline.set_value('Destination_create', 1, User.current.id)
         ActiveRecord::Base.connection.execute(in_rd)
         count += ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_country_code = 1 AND f_error = 0 AND not_found_in_db = 1 AND f_lata = 0 LIMIT #{i * 1000}, 100000").to_i
       ensure
-        Confline.set_value('Destination_create',0,User.current.id)
+        Confline.set_value('Destination_create', 0, User.current.id)
       end
     }
-
-
 
 
     if options[:imp_cc] >= 0
       s3 = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_country_code = 0 AND f_error = 0 AND not_found_in_db = 1 AND f_lata = 0").to_i
       n = s3/1000 +1
-      n.times{| i|
+      n.times { |i|
         n_rd = "INSERT INTO destinations (#{ss.join(',')})
                   SELECT #{s.join(',')} FROM #{name}
                   WHERE f_country_code = 0 AND f_error = 0 AND not_found_in_db = 1 AND f_lata = 0 LIMIT #{i * 1000}, 1000"
         begin
-          Confline.set_value('Destination_create',1,User.current.id)
+          Confline.set_value('Destination_create', 1, User.current.id)
           ActiveRecord::Base.connection.execute(n_rd)
           count += ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_country_code = 0 AND f_error = 0 AND not_found_in_db = 1 AND f_lata = 0 LIMIT #{i * 1000}, 1000").to_i
         ensure
-          Confline.set_value('Destination_create',0,User.current.id)
+          Confline.set_value('Destination_create', 0, User.current.id)
         end
       }
     end
@@ -607,7 +604,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     CsvImportDb.log_swap('update_destinations_start')
     MorLog.my_debug("CSV update_destinations #{name}", 1)
     count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE ned_update = 1").to_i
-    
+
     sql ="UPDATE destinations join #{name} on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET name = replace(col_#{options[:imp_dst]}, '\\r', '') WHERE ned_update =1"
     ActiveRecord::Base.connection.update(sql)
     CsvImportDb.log_swap('update_destinations_end')
@@ -622,7 +619,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     type_sql = day_type.blank? ? '' : " AND ratedetails.daytype = '#{day_type.to_s}' "
 
     if options[:manual_connection_fee] and !options[:manual_connection_fee].blank?
-      conection_fee = options[:manual_connection_fee] 
+      conection_fee = options[:manual_connection_fee]
     elsif !options[:imp_connection_fee].blank? and options[:imp_connection_fee].to_i > -1
       conection_fee = "replace(col_#{options[:imp_connection_fee]}, '\\r', '')"
     else
@@ -630,11 +627,11 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     end
 
     if options[:manual_increment] and !options[:manual_increment].blank?
-      increment_s  = options[:manual_increment]
+      increment_s = options[:manual_increment]
     elsif !options[:imp_increment_s].blank? and options[:imp_increment_s].to_i > -1
-      increment_s  = "replace(col_#{options[:imp_increment_s]}, '\\r', '')"
+      increment_s = "replace(col_#{options[:imp_increment_s]}, '\\r', '')"
     else
-      increment_s  = 1
+      increment_s = 1
     end
 
     if options[:manual_min_time] and !options[:manual_min_time].blank?
@@ -644,8 +641,8 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     else
       min_time = 0
     end
-   
-    
+
+
     if options[:manual_ghost_percent] and !options[:manual_ghost_percent].blank?
       ghost_percent = options[:manual_ghost_percent]
     elsif !options[:imp_ghost_percent].blank? and options[:imp_ghost_percent].to_i > -1
@@ -653,7 +650,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     else
       ghost_percent = 'NULL'
     end
-    
+
     count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM ratedetails, (SELECT rates.id AS nrate_id, #{name}.* FROM rates join destinations ON (destinations.id = rates.destination_id) JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) where rates.tariff_id = #{id} AND f_error = 0 AND not_found_in_db = 0) AS temp
     WHERE ratedetails.rate_id = nrate_id #{type_sql} AND start_time = '#{options[:imp_time_from_type]}' AND end_time = '#{options[:imp_time_till_type]}'")
 
@@ -664,10 +661,10 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
             WHERE destinations.id = rates.destination_id AND replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix AND rates.tariff_id = #{id} AND f_error = 0 AND not_found_in_db = 0"
       ActiveRecord::Base.connection.update(sql)
     else
-    count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM ratedetails, (SELECT rates.id AS nrate_id, #{name}.* FROM rates join destinations ON (destinations.id = rates.destination_id) JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) where rates.tariff_id = #{id} AND f_error = 0 AND not_found_in_db = 0) AS temp
+      count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM ratedetails, (SELECT rates.id AS nrate_id, #{name}.* FROM rates join destinations ON (destinations.id = rates.destination_id) JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) where rates.tariff_id = #{id} AND f_error = 0 AND not_found_in_db = 0) AS temp
     WHERE ratedetails.rate_id = nrate_id #{type_sql} AND start_time = '#{options[:imp_time_from_type]}' AND end_time = '#{options[:imp_time_till_type]}'")
     end
-    
+
     sql = "UPDATE ratedetails, (SELECT rates.id AS nrate_id, #{name}.* FROM rates join destinations ON (destinations.id = rates.destination_id) JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) where rates.tariff_id = #{id} AND f_error = 0 AND not_found_in_db = 0) AS temp
             SET ratedetails.rate = replace(replace(replace(col_#{options[:imp_rate]}, '\\r', ''), '#{options[:dec]}', '.'), '$', ''),
                 ratedetails.connection_fee = #{conection_fee},
@@ -679,7 +676,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     return count
   end
 
-  def create_rates_from_csv(name,options, options2)
+  def create_rates_from_csv(name, options, options2)
     CsvImportDb.log_swap('create_rates_from_csv_start')
     MorLog.my_debug("CSV create_rates_from_csv #{name}", 1)
     #bad_prefix_sql = options2[:bad_destinations].to_i > 0 ? "AND replace(col_#{options[:imp_prefix]}, '\\r', '') NOT IN (#{options2[:bad_prefixes].join(',')})" : ''
@@ -688,14 +685,14 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     LEFT join rates on (destinations.id = rates.destination_id and rates.tariff_id = #{id})
     WHERE rates.id IS NULL AND f_error = 0")
 
-    if options[:manual_ghost_percent] and !options[:manual_ghost_percent].blank? 
-      ghost_percent = options[:manual_ghost_percent] 
-    elsif !options[:imp_ghost_percent].blank? and options[:imp_ghost_percent].to_i > -1 
-      ghost_percent = "replace(col_#{options[:imp_ghost_percent]}, '\\r', '')" 
-    else 
-      ghost_percent = 'NULL' 
-    end 
-        
+    if options[:manual_ghost_percent] and !options[:manual_ghost_percent].blank?
+      ghost_percent = options[:manual_ghost_percent]
+    elsif !options[:imp_ghost_percent].blank? and options[:imp_ghost_percent].to_i > -1
+      ghost_percent = "replace(col_#{options[:imp_ghost_percent]}, '\\r', '')"
+    else
+      ghost_percent = 'NULL'
+    end
+
     sql="INSERT INTO rates (tariff_id, destination_id	#{Confline.mor_11_extended? ? ', ghost_min_perc' : ''})
     SELECT #{id}, destinations.id #{Confline.mor_11_extended? ? ", #{ghost_percent}" : ''} FROM #{name}
     join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
@@ -711,41 +708,41 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     CsvImportDb.log_swap('insert_ratedetails_start')
     MorLog.my_debug("CSV insert_ratedetails #{name}", 1)
     #    bad_prefix_sql = options2[:bad_destinations].to_i > 0 ? "AND replace(col_#{options[:imp_prefix]}, '\\r', '') NOT IN (#{options2[:bad_prefixes].join(',')})" : ''
-    s = [] ; ss=[]
+    s = []; ss=[]
     collums = ["rate", "increment_s", "min_time", "connection_fee", "daytype"]
-    collums.each{ |col|
+    collums.each { |col|
       case col
-      when "daytype"
-        ["wd", "fd"].include?(options[:imp_date_day_type].to_s) ? day_type = options[:imp_date_day_type].upcase : day_type = ""
-        s1 = day_type.blank? ? "''" : " '#{day_type.to_s}' "
-      when "connection_fee"
-        if options[:manual_connection_fee] and !options[:manual_connection_fee].blank?
-          s1 = options[:manual_connection_fee]
-        elsif !options[:imp_connection_fee].blank? and options[:imp_connection_fee].to_i > -1
-          s1 = "replace(col_#{options[:imp_connection_fee]}, '\\r', '')"
+        when "daytype"
+          ["wd", "fd"].include?(options[:imp_date_day_type].to_s) ? day_type = options[:imp_date_day_type].upcase : day_type = ""
+          s1 = day_type.blank? ? "''" : " '#{day_type.to_s}' "
+        when "connection_fee"
+          if options[:manual_connection_fee] and !options[:manual_connection_fee].blank?
+            s1 = options[:manual_connection_fee]
+          elsif !options[:imp_connection_fee].blank? and options[:imp_connection_fee].to_i > -1
+            s1 = "replace(col_#{options[:imp_connection_fee]}, '\\r', '')"
+          else
+            s1 = 0
+          end
+        when "increment_s"
+          if options[:manual_increment] and !options[:manual_increment].blank?
+            s1 = options[:manual_increment]
+          elsif !options[:imp_increment_s].blank? and options[:imp_increment_s].to_i > -1
+            s1 = "replace(col_#{options[:imp_increment_s]}, '\\r', '')"
+          else
+            s1 = 1
+          end
+        when "min_time"
+          if options[:manual_min_time] and !options[:manual_min_time].blank?
+            s1 = options[:manual_min_time]
+          elsif !options[:imp_min_time].blank? and options[:imp_min_time].to_i > -1
+            s1 = "replace(col_#{options[:imp_min_time]}, '\\r', '')"
+          else
+            s1 = 0
+          end
+        when "rate"
+          s1 = "replace(replace(col_#{options[:imp_rate]}, '\\r', ''), '#{options[:dec]}', '.')"
         else
-          s1 = 0
-        end
-      when "increment_s"
-        if options[:manual_increment] and !options[:manual_increment].blank?
-          s1  = options[:manual_increment]
-        elsif !options[:imp_increment_s].blank? and options[:imp_increment_s].to_i > -1
-          s1  = "replace(col_#{options[:imp_increment_s]}, '\\r', '')"
-        else
-          s1  = 1
-        end
-      when "min_time"
-        if options[:manual_min_time] and !options[:manual_min_time].blank?
-          s1 = options[:manual_min_time]
-        elsif !options[:imp_min_time].blank? and options[:imp_min_time].to_i > -1
-          s1 = "replace(col_#{options[:imp_min_time]}, '\\r', '')"
-        else
-          s1 = 0
-        end
-      when "rate"
-        s1 = "replace(replace(col_#{options[:imp_rate]}, '\\r', ''), '#{options[:dec]}', '.')"
-      else
-        s1= 'replace(col_' + (options["imp_#{col}".to_sym]).to_s + ", '\\r', '')"
+          s1= 'replace(col_' + (options["imp_#{col}".to_sym]).to_s + ", '\\r', '')"
       end
       s << s1
       ss << col
@@ -758,14 +755,14 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name}
     join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
     join rates on (destinations.id = rates.destination_id and rates.tariff_id = #{id})
-    left join ratedetails on (ratedetails.rate_id = rates.id AND ratedetails.daytype = '#{(['wd','fd'].include?(options[:imp_date_day_type].to_s) ? options[:imp_date_day_type].to_s : '')}' AND ratedetails.start_time = '#{options[:imp_time_from_type]}' AND ratedetails.end_time = '#{options[:imp_time_till_type]}')
+    left join ratedetails on (ratedetails.rate_id = rates.id AND ratedetails.daytype = '#{(['wd', 'fd'].include?(options[:imp_date_day_type].to_s) ? options[:imp_date_day_type].to_s : '')}' AND ratedetails.start_time = '#{options[:imp_time_from_type]}' AND ratedetails.end_time = '#{options[:imp_time_till_type]}')
 WHERE ratedetails.id IS NULL AND f_error = 0")
 
     in_rd = "INSERT INTO ratedetails (rate_id, start_time, end_time, #{ss.join(',')})
     SELECT rates.id, '#{options[:imp_time_from_type]}', '#{options[:imp_time_till_type]}', #{s.join(',')} FROM #{name}
     join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
     join rates on (destinations.id = rates.destination_id and rates.tariff_id = #{id})
-    left join ratedetails on (ratedetails.rate_id = rates.id AND ratedetails.daytype = '#{(['wd','fd'].include?(options[:imp_date_day_type].to_s) ? options[:imp_date_day_type].to_s : '')}' AND ratedetails.start_time = '#{options[:imp_time_from_type]}' AND ratedetails.end_time = '#{options[:imp_time_till_type]}')
+    left join ratedetails on (ratedetails.rate_id = rates.id AND ratedetails.daytype = '#{(['wd', 'fd'].include?(options[:imp_date_day_type].to_s) ? options[:imp_date_day_type].to_s : '')}' AND ratedetails.start_time = '#{options[:imp_time_from_type]}' AND ratedetails.end_time = '#{options[:imp_time_till_type]}')
     WHERE ratedetails.id IS NULL AND f_error = 0"
 
     ActiveRecord::Base.connection.execute(in_rd)
@@ -783,11 +780,11 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
     # retrieve direction_codes to hash
     direction_codes = {}
     res = ActiveRecord::Base.connection.select_all("SELECT direction_code, prefix FROM destinations;")
-    res.each{|r| direction_codes[r["prefix"]] = r["direction_code"]}
+    res.each { |r| direction_codes[r["prefix"]] = r["direction_code"] }
 
     #counting destinations allready in MOR
     destination_data = ActiveRecord::Base.connection.select_all("SELECT prefix, name FROM destinations")
-    prefixes  = destination_data.map{|pr| pr["prefix"].to_s.gsub(/\s/, '')}
+    prefixes = destination_data.map { |pr| pr["prefix"].to_s.gsub(/\s/, '') }
 
     # 0 - empty line - skip
     # 1 - everything ok
@@ -803,23 +800,23 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
     subcodes = ''
     bad = []
 
-  
+
     new_destinations = ActiveRecord::Base.connection.select_all("SELECT *, #{name}.id AS i_id FROM #{name} left join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)  WHERE not_found_in_db = 1 AND f_error = 0 AND f_lata = 0;")
     MorLog.my_debug("Use temp table : #{name}")
 
-    prefixes = Hash[*prefixes.collect{ |v| [v.to_s, 1] }.flatten]
-  
-    new_destinations.each_with_index{ |row, i|
+    prefixes = Hash[*prefixes.collect { |v| [v.to_s, 1] }.flatten]
+
+    new_destinations.each_with_index { |row, i|
       prefix = row["col_#{options[:imp_prefix]}"].to_s.strip.gsub(/\s/, '')
       pr = row["col_#{options[:imp_prefix]}"]
-      country_code = row["col_#{options[:imp_cc]}"].to_s     #country_code
+      country_code = row["col_#{options[:imp_cc]}"].to_s #country_code
       if country_code.blank? or options[:imp_cc] == -1
         prefix = row["col_#{options[:imp_prefix]}"].to_s.strip.gsub(/\s/, '')
         pfound = 0
         plength = prefix.length
         j = 1
         while j < plength and pfound == 0
-          tprefix = prefix[0,plength-j]
+          tprefix = prefix[0, plength-j]
           pfound = 1 if prefixes[tprefix].to_i == 1
           j += 1
         end
@@ -830,7 +827,7 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
             dan = true
             dest = nil
             while (!dest and string.length.to_i > 1)
-              dest = Destination.find(:first, :conditions=> ["prefix like ?", string.to_s+'%'])
+              dest = Destination.find(:first, :conditions => ["prefix like ?", string.to_s+'%'])
               if dest
                 subcodes = dest.subcode.to_s
                 dan = false
@@ -862,32 +859,32 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
   private
 
   def get_user_rate_details(rate, exrate)
-    arate_details = Aratedetail.find(:all, :conditions => "rate_id = #{rate.id.to_s} AND artype = 'minute'", :order => "price DESC")  
-    arate_cur = Currency.count_exchange_prices({:exrate=>exrate, :prices=>[arate_details[0]['price'].to_f]})  if arate_details.size > 0
+    arate_details = Aratedetail.find(:all, :conditions => "rate_id = #{rate.id.to_s} AND artype = 'minute'", :order => "price DESC")
+    arate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [arate_details[0]['price'].to_f]}) if arate_details.size > 0
     return arate_details, arate_cur
   end
 
   def nice_number(number, session)
     if !session[:nice_number_digits]
-      confline =  Confline.get_value("Nice_Number_Digits")
+      confline = Confline.get_value("Nice_Number_Digits")
       session[:nice_number_digits] ||= confline.to_i if confline and confline.to_s.length > 0
       session[:nice_number_digits] ||= 2 if !session[:nice_number_digits]
     end
     session[:nice_number_digits] = 2 if session[:nice_number_digits] == ""
     n = ""
-    n = sprintf("%0.#{session[:nice_number_digits]}f",number.to_f) if number
+    n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_f) if number
     if session[:change_decimal]
-      n = n.gsub('.',session[:global_decimal])
+      n = n.gsub('.', session[:global_decimal])
     end
     n
   end
 
   def get_provider_rate_details(rate, exrate)
-    rate_details = Ratedetail.find(:all, :conditions => ["rate_id = ?", rate.id ], :order => "rate DESC")
+    rate_details = Ratedetail.find(:all, :conditions => ["rate_id = ?", rate.id], :order => "rate DESC")
 
     if rate_details.size > 0
       rate_increment_s = rate_details[0]['increment_s']
-      rate_cur, rate_free = Currency.count_exchange_prices({:exrate=>exrate, :prices=>[rate_details[0]['rate'].to_f, rate_details[0]['connection_fee']]})
+      rate_cur, rate_free = Currency.count_exchange_prices({:exrate => exrate, :prices => [rate_details[0]['rate'].to_f, rate_details[0]['connection_fee']]})
     end
 
     return rate_details, rate_cur

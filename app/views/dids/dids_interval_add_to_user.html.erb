@@ -1,30 +1,30 @@
-<%= render :partial => "bulk_management_header"  %>
+<%= render :partial => "bulk_management_header" %>
 <% unless @dids.size.to_i < 1 %>
-  <%= form_tag({:action => 'add_to_user'}.merge(@opts)) do %>
-    <table class="maintable" width="100%">
-      <tr>
-        <th align="left"><%= _('Details') %></th>
-      </tr>
-      <tr class="row1">
-        <td>
-          <br />
-          <b><%= _('User') %>: </b>
-          <%= select_tag("s_user", options_for_select(@users.map{|u| [nice_user(u), u.id.to_s]}, @search_user.to_s))  %>
-          &nbsp;&nbsp;<b><%= _('Device') %>:</b>
-          <span id ="device_search_list_span">
-            <%= select_tag("s_device", options_for_select([[_('All'), ""]] + @devices.map{|d| [nice_device(d, {:image => false}), d.id.to_s]}, @search_device.to_s ))  %>
+    <%= form_tag({:action => 'add_to_user'}.merge(@opts)) do %>
+        <table class="maintable" width="100%">
+          <tr>
+            <th align="left"><%= _('Details') %></th>
+          </tr>
+          <tr class="row1">
+            <td>
+              <br/>
+              <b><%= _('User') %>: </b>
+              <%= select_tag("s_user", options_for_select(@users.map { |u| [nice_user(u), u.id.to_s] }, @search_user.to_s)) %>
+              &nbsp;&nbsp;<b><%= _('Device') %>:</b>
+          <span id="device_search_list_span">
+            <%= select_tag("s_device", options_for_select([[_('All'), ""]] + @devices.map { |d| [nice_device(d, {:image => false}), d.id.to_s] }, @search_device.to_s)) %>
           </span>
-          <%= observe_field("s_user", :update => "device_search_list_span",:with => "user_id", :url=> {:controller=> "devices", :action => "ajax_get_user_devices", :default => @search_device.to_i, :all => true, :fax => true}, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
-          <br />
-          <br />
-          <%= submit_tag _('OK'), :disable_with=>_('Processing..') %>
-          <br />
-          <br />
-        </td>
-      </tr>
-    </table>
-    <br />
-  <% end %>
+              <%= observe_field("s_user", :update => "device_search_list_span", :with => "user_id", :url => {:controller => "devices", :action => "ajax_get_user_devices", :default => @search_device.to_i, :all => true, :fax => true}, :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');") %>
+              <br/>
+              <br/>
+              <%= submit_tag _('OK'), :disable_with => _('Processing..') %>
+              <br/>
+              <br/>
+            </td>
+          </tr>
+        </table>
+        <br/>
+    <% end %>
 <% else %>
-  <% flash[:notice] = _('No_DID_found_Please_check_interval') %>
+    <% flash[:notice] = _('No_DID_found_Please_check_interval') %>
 <% end %>

@@ -1,68 +1,69 @@
 <HEAD>
 
-<SCRIPT LANGUAGE="JavaScript">
+  <SCRIPT LANGUAGE="JavaScript">
 
-function checkAll(n) {
-    for (i = 0; i <= n; i++) {
-        box = eval("document.emails_form.to_be_sent_" + i); 
-        if (box && box.checked == false) {
-            box.checked = true;
-        }
-    }
-}
+      function checkAll(n) {
+          for (i = 0; i <= n; i++) {
+              box = eval("document.emails_form.to_be_sent_" + i);
+              if (box && box.checked == false) {
+                  box.checked = true;
+              }
+          }
+      }
 
-function uncheckAll(n) {
-    for (i = 0; i <= n; i++) {
-        box = eval("document.emails_form.to_be_sent_" + i); 
-        if (box && box.checked == true) {
-            box.checked = false;
-        }
-    }
-}
+      function uncheckAll(n) {
+          for (i = 0; i <= n; i++) {
+              box = eval("document.emails_form.to_be_sent_" + i);
+              if (box && box.checked == true) {
+                  box.checked = false;
+              }
+          }
+      }
 
-</script>
+  </script>
 </HEAD>
 
-<%= form_tag({:action => 'send_emails', :id => @email.id}, :name => "emails_form" ) %>
+<%= form_tag({:action => 'send_emails', :id => @email.id}, :name => "emails_form") %>
 <% user_id_max = User.find_by_sql("SELECT MAX(id) AS result FROM users") %>
 
 <div align="center">
-<table width="100%" class="maintable">
-  <tr>
-    <th align="left" width="5%" nowrap> 
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left" width="5%" nowrap>
         <input type=button value=<%= _('All') %> onClick= <%= "checkAll(" + user_id_max[0]["result"].to_s + ")" %>>
-        <input type=button value=<%= _('None') %> onClick=<%= "uncheckAll(" + user_id_max[0]["result"].to_s + ")" %>> <br/>
-    </th>
-    <th align="left">        <%= _('Username') %>    </th>
-    <th align="left">        <%= _('Usertype') %>    </th>
-    <th align="left">        <%= _('User') %>    </th>
-    <th align="left">        <%= _('Email') %>    </th>
-  </tr>
+        <input type=button value=<%= _('None') %> onClick=<%= "uncheckAll(" + user_id_max[0]["result"].to_s + ")" %>>
+        <br/>
+      </th>
+      <th align="left">        <%= _('Username') %>    </th>
+      <th align="left">        <%= _('Usertype') %>    </th>
+      <th align="left">        <%= _('User') %>    </th>
+      <th align="left">        <%= _('Email') %>    </th>
+    </tr>
 
-<% i = 0 %>  
+    <% i = 0 %>
 
-<% for @user in @users %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-    <td id="tobesent_<%= @user.id %>" align="center"> 
-        <%= check_box("to_be_sent", @user.id, {}, "yes", "no") if @user.address and @user.address.email and @user.address.email.length > 0 %> 
-        <%= b_cross if not @user.address or @user.address.email.to_s.length == 0 %> 
-    </td>
-    <td id="username_<%= @user.id %>" align="left"> <%= @user.username %>                        </td>
-    <td id="usertype_<%= @user.id %>" align="left"> <%= @user.usertype %>                        </td>
-    <td id="firstname_<%= @user.id %>" align="left"> <%= @user.first_name + " " + @user.last_name%>                      </td>
-    <td id="email_<%= @user.id %>" align="left"> <%= @user.address.email if @user.address %>                        </td>
-  </tr>
-<% i += 1%>  
-<% end %>
+    <% for @user in @users %>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+          <td id="tobesent_<%= @user.id %>" align="center">
+            <%= check_box("to_be_sent", @user.id, {}, "yes", "no") if @user.address and @user.address.email and @user.address.email.length > 0 %>
+            <%= b_cross if not @user.address or @user.address.email.to_s.length == 0 %>
+          </td>
+          <td id="username_<%= @user.id %>" align="left"> <%= @user.username %>                        </td>
+          <td id="usertype_<%= @user.id %>" align="left"> <%= @user.usertype %>                        </td>
+          <td id="firstname_<%= @user.id %>" align="left"> <%= @user.first_name + " " + @user.last_name %>                      </td>
+          <td id="email_<%= @user.id %>" align="left"> <%= @user.address.email if @user.address %>                        </td>
+        </tr>
+        <% i += 1 %>
+    <% end %>
 
-</table>
+  </table>
 </div>
 <br/>
 
-<%= submit_tag _('Send'), :disable_with=>_('Processing..') %>
+<%= submit_tag _('Send'), :disable_with => _('Processing..') %>
 
 
-<br />
-<br />
+<br/>
+<br/>
 
 

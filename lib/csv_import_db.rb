@@ -20,17 +20,17 @@ module CsvImportDb
 
   def CsvImportDb.head_of_file(path, n = 1)
     begin
-    File.open(path) do |f|
-      lines = []
-      n.times do
-        line = f.gets || break
-        lines << line
+      File.open(path) do |f|
+        lines = []
+        n.times do
+          line = f.gets || break
+          lines << line
+        end
+        if lines[0] and lines[0].size > 1000
+          lines[0]= _('Line_seems_to_long_failed_to_determine_file_line_separator')
+        end
+        lines
       end
-      if lines[0] and lines[0].size > 1000
-        lines[0]= _('Line_seems_to_long_failed_to_determine_file_line_separator')
-      end
-      lines
-    end
     rescue Exception => e
       MorLog.log_exception(e, Time.now.to_i, 'CsvImportDb.head_of_file', 'path')
       lines = ['ERROR : no file found']
@@ -61,32 +61,32 @@ module CsvImportDb
     MorLog.my_debug("CSV load_csv_into_db #{tname}", 1)
     CsvImportDb.log_swap('load')
     path = "/tmp/" if !path
-    full_file_path =  options[:xml] ? "#{path}#{tname}.xml" : "#{path}#{tname}.csv"
+    full_file_path = options[:xml] ? "#{path}#{tname}.xml" : "#{path}#{tname}.csv"
 
     #create table
 
     cols_size = options[:xml] ? 12 : fl.size
     cols = []
-    cols_size.times{|num| cols[num]= 'col_' + num.to_s + " VARCHAR(225) default NULL "}
+    cols_size.times { |num| cols[num]= 'col_' + num.to_s + " VARCHAR(225) default NULL " }
 
     incr_name = nil
     if options[:colums] and options[:colums].size > 0
 
-      options[:colums].each{|col| z = col[:name].to_s + " " + col[:type].to_s
-        z += " default " + col[:default].to_s if !col[:default].to_s.blank?
-        z += col[:inscrement].to_s if !col[:inscrement].to_s.blank?
-        incr_name = col[:name].to_s if !col[:inscrement].to_s.blank?
-        cols << z
+      options[:colums].each { |col| z = col[:name].to_s + " " + col[:type].to_s
+      z += " default " + col[:default].to_s if !col[:default].to_s.blank?
+      z += col[:inscrement].to_s if !col[:inscrement].to_s.blank?
+      incr_name = col[:name].to_s if !col[:inscrement].to_s.blank?
+      cols << z
       }
     end
 
     ActiveRecord::Base.connection.execute("DROP TABLE IF EXISTS #{tname};")
     sql = "CREATE TABLE #{tname} ("
-    sql += cols.reject{|v| v.nil? or v.empty? }.join(" , ")
+    sql += cols.reject { |v| v.nil? or v.empty? }.join(" , ")
     sql += ", PRIMARY KEY  (#{incr_name})" if !incr_name.blank?
     sql += ") ENGINE=InnoDB DEFAULT CHARSET=utf8 ;"
     ActiveRecord::Base.connection.execute(sql)
-    
+
     #load
     # http://bugs.mysql.com/bug.php?id=10195 mysql utf=>latin!!!!
     if options[:xml]

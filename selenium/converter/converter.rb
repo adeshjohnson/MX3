@@ -65,6 +65,7 @@ class NewTest < Test::Unit::TestCase
       :initialIdents => 4,
       :debug => 0
   }
+
   def Base.debug= (debug)
     @@options[:debug]= debug
   end
@@ -82,8 +83,8 @@ class NewTest < Test::Unit::TestCase
   end
 
   def Base.underscore(text)
-    under = text.to_s.gsub(/[A-Z]/) { |a| "_"+a.downcase}
-    under = under [1, 255] if under[0,1] == "_"
+    under = text.to_s.gsub(/[A-Z]/) { |a| "_"+a.downcase }
+    under = under [1, 255] if under[0, 1] == "_"
     return under
   end
 
@@ -177,10 +178,10 @@ class Command < Base
     #    string = string.to_s.gsub("*", ".*")
     #    string = string[1..-1][0..-2]
 
-    replaces = {"["=>"\\[", "]"=>"\\]",
-                "("=>"\\(", ")"=>"\\)",
-                "^"=>"\\^", "$"=>"\\$", "."=>  "\\.", "|"=>"\\|",
-                "?"=>"\\?", "+"=>"\\+", "&gt;"=>">" , "\/"=> "\\/"}
+    replaces = {"[" => "\\[", "]" => "\\]",
+                "(" => "\\(", ")" => "\\)",
+                "^" => "\\^", "$" => "\\$", "." => "\\.", "|" => "\\|",
+                "?" => "\\?", "+" => "\\+", "&gt;" => ">", "\/" => "\\/"}
 
     string = string.gsub_by_array(replaces).gsub("*", ".*")[1..-1][0..-2]
     string = "/^[\\s\\S]{0,1}#{string}$/"
@@ -189,7 +190,7 @@ class Command < Base
 
   def extract_variables(string)
     string = "\"" + string.to_s + "\""
-    string.scan(/\$\{.*?\}/).each{|occurance|
+    string.scan(/\$\{.*?\}/).each { |occurance|
       string.sub!(occurance, "\" + "+occurance[2, occurance.size - 3] + " + \"")
     }
     string.gsub(" + \"\"", "").gsub("\"\" + ", "")
@@ -327,7 +328,7 @@ class Command < Base
       when "storeSelectedValue"
         line = "#{@value.gsub(/\"/, "")} = @selenium.get_selected_value(#{@target})"
       when "verifyExpression"
-        target = @target.gsub(/[${}]/,"")
+        target = @target.gsub(/[${}]/, "")
         line = "begin\n    assert_equal #{@value}, @selenium.get_expression(#{target})\nrescue Exception=>e\n    @verification_errors << e\nend"
       when "verifyVisible"
         line = "begin\n    assert @selenium.is_visible(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
@@ -399,7 +400,7 @@ class Command < Base
     end
 
     # example: assert /^Are you sure[\s\S]$/ =~ @selenium.get_confirmation
-    if @command == "assertConfirmation" and @target[-1,1] == '?'
+    if @command == "assertConfirmation" and @target[-1, 1] == '?'
       line = "assert /^#{@target[0..-2]}[\\s\\S]$/ =~ @selenium.get_confirmation"
     end
 
@@ -422,6 +423,7 @@ class Command < Base
   def verifyFalse(statement)
     return Base.verify(assertFalse(statement))
   end
+
   def assertTrue(expression)
     return "assert " + expression.to_s
   end
@@ -460,7 +462,7 @@ class Converter < Base
         <td></td>
 </tr>').to_s != ''
         if  Converter.convert_element(element).size.to_i > 0
-          Converter.convert_element(element).each{ |com_line|
+          Converter.convert_element(element).each { |com_line|
             output.puts " "*Base.options[:initialIdents] + com_line
           }
         end
@@ -469,7 +471,6 @@ class Converter < Base
     output.puts(Base.options[:footer])
     puts output_name
   end
-
 
 
   def Converter.convert_element(element)
@@ -486,7 +487,7 @@ class Converter < Base
     #puts method.scan(/AndWait$/)
     if method.scan(/AndWait$/).size > 0
       method = method.gsub(/AndWait$/, "")
-      ret += Command.new("waitForPageToLoad", Base.options[:global_timeout] ).format_command+"\n"
+      ret += Command.new("waitForPageToLoad", Base.options[:global_timeout]).format_command+"\n"
     end
     ret = [Command.new(method, e1, e2).format_command+"\n" + ret]
     #puts ret
@@ -508,13 +509,13 @@ class Converter < Base
 end
 
 ARGV.each_with_index do |a, i|
-  if ((a == "-h" or a ==  "--host") and ARGV[i+1])
+  if ((a == "-h" or a == "--host") and ARGV[i+1])
     Base.host = ARGV[i+1]
     ARGV.delete_at(i+1)
     ARGV.delete_at(i)
   end
 
-  if ((a == "-t" or a ==  "--timeout") and ARGV[i+1])
+  if ((a == "-t" or a == "--timeout") and ARGV[i+1])
     Base.timeout = ARGV[i+1]
     ARGV.delete_at(i+1)
     ARGV.delete_at(i)

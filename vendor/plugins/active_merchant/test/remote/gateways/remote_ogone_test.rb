@@ -6,12 +6,12 @@ class RemoteOgoneTest < Test::Unit::TestCase
   def setup
     @gateway = OgoneGateway.new(fixtures(:ogone))
     @amount = 100
-    @credit_card =   credit_card('4000100011112224')
+    @credit_card = credit_card('4000100011112224')
     @declined_card = credit_card('1111111111111111')
     @options = {
-      :order_id => generate_unique_id[0...30],
-      :billing_address => address,
-      :description => 'Store Purchase'
+        :order_id => generate_unique_id[0...30],
+        :billing_address => address,
+        :description => 'Store Purchase'
     }
   end
 
@@ -20,7 +20,7 @@ class RemoteOgoneTest < Test::Unit::TestCase
     assert_success response
     assert_equal OgoneGateway::SUCCESS_MESSAGE, response.message
   end
-  
+
   def test_successful_with_non_numeric_order_id
     @options[:order_id] = "##{@options[:order_id][0...26]}.12"
     assert response = @gateway.purchase(@amount, @credit_card, @options)
@@ -92,22 +92,22 @@ class RemoteOgoneTest < Test::Unit::TestCase
 
   def test_reference_transactions
     # Setting an alias
-    assert response = @gateway.purchase(@amount, credit_card('4000100011112224'), @options.merge(:store => "awesomeman", :order_id=>Time.now.to_i.to_s+"1"))
+    assert response = @gateway.purchase(@amount, credit_card('4000100011112224'), @options.merge(:store => "awesomeman", :order_id => Time.now.to_i.to_s+"1"))
     assert_success response
     # Updating an alias
-    assert response = @gateway.purchase(@amount, credit_card('4111111111111111'), @options.merge(:store => "awesomeman", :order_id=>Time.now.to_i.to_s+"2"))
+    assert response = @gateway.purchase(@amount, credit_card('4111111111111111'), @options.merge(:store => "awesomeman", :order_id => Time.now.to_i.to_s+"2"))
     assert_success response
     # Using an alias (i.e. don't provide the credit card)
-    assert response = @gateway.purchase(@amount, "awesomeman", @options.merge(:order_id=>Time.now.to_i.to_s+"3"))
+    assert response = @gateway.purchase(@amount, "awesomeman", @options.merge(:order_id => Time.now.to_i.to_s+"3"))
     assert_success response
   end
 
   def test_invalid_login
     gateway = OgoneGateway.new(
-                :login => '',
-                :user => '',
-                :password => ''
-              )
+        :login => '',
+        :user => '',
+        :password => ''
+    )
     assert response = gateway.purchase(@amount, @credit_card, @options)
     assert_failure response
     assert_equal 'No pspid', response.message

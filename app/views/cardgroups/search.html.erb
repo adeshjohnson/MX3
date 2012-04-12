@@ -4,49 +4,52 @@
 <% length -= 2 if !can_see_finances? %>
 
 <% if @allow_manage == true and can_see_finances? %>
-<table width="100%">
-  <tr>
-    <td>	
-      <%= link_to b_add + _('New_cardgroup'), :action => 'new' %>
-    </td>
-    <td align="right">
-      <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
-    </td>
-  </tr>
-</table>
+    <table width="100%">
+      <tr>
+        <td>
+          <%= link_to b_add + _('New_cardgroup'), :action => 'new' %>
+        </td>
+        <td align="right">
+          <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+        </td>
+      </tr>
+    </table>
 <% end %>
 
 <%= form_tag :action => "search" do %>
-  <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
-    <br>
-    <%= hidden_field_tag 'search_on', 1  %>
+    <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+      <br>
+      <%= hidden_field_tag 'search_on', 1 %>
 
-    <%= _('Number') %>: <%= text_field_tag 's_number', @options["s_number"], "class" => "input", :size => "15"  %>
-    <%= _('PIN') %>: <%= text_field_tag 's_pin', @options["s_pin"], "class" => "input", :size => "15"  %>
-    <%= _('CallerID') %>: <%= text_field_tag 's_caller_id', @options[:s_caller_id], "class" => "input", :size => "15" %>
-    <%= _('Balance_between') %>: <%= text_field_tag 's_balance_min',@options["s_balance_min"], "class" => "input", :size => "7", :maxlength => "10"  %> -
-    <%= text_field_tag 's_balance_max', @options["s_balance_max"], "class" => "input", :size => "7", :maxlength => "10"  %>
+      <%= _('Number') %>: <%= text_field_tag 's_number', @options["s_number"], "class" => "input", :size => "15" %>
+      <%= _('PIN') %>: <%= text_field_tag 's_pin', @options["s_pin"], "class" => "input", :size => "15" %>
+      <%= _('CallerID') %>
+      : <%= text_field_tag 's_caller_id', @options[:s_caller_id], "class" => "input", :size => "15" %>
+      <%= _('Balance_between') %>
+      : <%= text_field_tag 's_balance_min', @options["s_balance_min"], "class" => "input", :size => "7", :maxlength => "10" %>
+      -
+      <%= text_field_tag 's_balance_max', @options["s_balance_max"], "class" => "input", :size => "7", :maxlength => "10" %>
 
-    &nbsp;&nbsp;<%= _('Sold') %>?:
-    <select name="s_sold" >
-      <option value="all" selected> <%= _('All') %> </option>
-      <option value="yes" <%= "selected" if @options["s_sold"] == "yes"%>> <%= _('Yes') %> </option>
-      <option value="no" <%= "selected" if @options["s_sold"] == "no"%>> <%= _('No') %> </option>
+      &nbsp;&nbsp;<%= _('Sold') %>?:
+      <select name="s_sold">
+        <option value="all" selected> <%= _('All') %> </option>
+        <option value="yes" <%= "selected" if @options["s_sold"] == "yes" %>> <%= _('Yes') %> </option>
+        <option value="no" <%= "selected" if @options["s_sold"] == "no" %>> <%= _('No') %> </option>
 
-    </select>
+      </select>
 
-    &nbsp;&nbsp;<%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
-  </div>
+      &nbsp;&nbsp;<%= submit_tag _('Search'), :disable_with => _('Processing..') %>
+    </div>
 <% end %>
 
-<br />
+<br/>
 <b><%= _('Cards') %></b>: <%= @card_count %>
-<br />
+<br/>
 
-<%  if @total_pages > 1 %>
-  <br>
-  <%= render :partial => "page_select_header"%>
-  <br>
+<% if @total_pages > 1 %>
+    <br>
+    <%= render :partial => "page_select_header" %>
+    <br>
 <% end %>
 
 <br>
@@ -54,56 +57,58 @@
   <tr>
     <th align="left"><%= _('Number') %></th>
     <% if @show_pin == true %>
-      <th align="left"><%= _('PIN') %></th>
+        <th align="left"><%= _('PIN') %></th>
     <% end %>
     <th align="left"><%= _('CallerID_for_pinless_dialing') %></th>
     <% if can_see_finances? %>
-      <th align="right"><%= _('Balance') %> (<%= _('Without_VAT') %>) <%= current_user.currency.name %></th>
+        <th align="right"><%= _('Balance') %> (<%= _('Without_VAT') %>) <%= current_user.currency.name %></th>
     <% end -%>
-    <th align="center"><%= _('First_use') %></th>    
+    <th align="center"><%= _('First_use') %></th>
     <th align="center"><%= _('Daily_charge_paid_till') %></th>
     <th align="center"><%= _('Sold') %>?</th>
     <th></th>
     <th align="center"><%= _('Cardgroup') %></th>
     <% if @allow_manage == true %>
-      <th></th>
-      <th id="payment_header"></th>
-      <th></th>
-      <th></th>
+        <th></th>
+        <th id="payment_header"></th>
+        <th></th>
+        <th></th>
     <% end %>
     <th></th>
   </tr>
 
   <% @cards.each_with_index { |card, i| %>
-    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <tr class="row<%= (i % 2 + 1).to_s %>">
 
-      <td id="number_<%= card.id %>" align="left"><%= card.number %></td>
-      <% if @show_pin == true%>
-        <td id="pin_<%= card.id %>" align="left"><%= card.pin %></td>
-      <% end %>
-      <td id="callerid_<%= card.id %>" align="left"><%= card.callerid.to_s %></td>
-      <% if can_see_finances? -%>
-        <td id="balance_<%= card.id %>" align="right"><%= nice_number card.balance %></td>
-      <% end -%>
-      <td id="first_use_<%= card.id %>" align="center"><%= nice_date_time card.first_use %></td>
-      <td id="daily_charge_<%= card.id %>" align="center"><%= nice_date_time card.daily_charge_paid_till %></td>
-      <td id="sold_<%= card.id %>" align="center"><%= card.sold == 1 ? b_check : b_cross %></td>
-      <td id="payments_<%= card.id %>" align="center"><%= link_to(b_payments, {:controller => 'cards', :action => 'payments', :id => @card}, {:id =>"payments_link_"+ card.id.to_s}) %></td>
-      <td id="cardgroup_<%= card.id %>" align="center"><%= link_to(b_cardgroup + card.cardgroup.name, {:controller => 'cardgroups', :action => 'show', :id => card.cardgroup_id }, {:id =>"cardgroup_link_"+ card.id.to_s}) %></td>
-      <td id="calls_<%= card.id %>" align="center"><%= link_to(b_call, {:controller => 'stats', :action => 'cc_call_list', :id => @card}, {:id =>"calls_link_"+ card.id.to_s}) %> (<%= card.calls.count %>)</td>
-      <% if @allow_manage == true %>
-        <td id="pay_<%= card.id %>" align="center"><%= link_to b_money, {:controller => "cards", :action => 'card_pay', :cg => card.cardgroup_id, :id => @card}, {:id =>"pay_link_"+ card.id.to_s}  %></td>
-        <td id="show_<%= card.id %>" align="center"><%= link_to b_details + _('Details'), {:controller => "cards", :action => 'show', :id => @card}, {:id =>"details_link_"+ card.id.to_s} %></td>
-        <td id="edit_<%= card.id %>" align="center"><%= link_to b_edit, {:controller => "cards", :action => 'edit', :id => @card}, {:id =>"edit_link_"+ card.id.to_s} %></td>
-        <td id="destroy_<%= card.id %>" align="center"><%= link_to b_delete, { :controller => "cards", :action => 'destroy', :id => @card }, {:confirm => _('Are_you_sure'), :method => :post, :id =>"delete_link_"+ card.id.to_s} %></td>
-      <% end %>
-    </tr>
+        <td id="number_<%= card.id %>" align="left"><%= card.number %></td>
+        <% if @show_pin == true %>
+            <td id="pin_<%= card.id %>" align="left"><%= card.pin %></td>
+        <% end %>
+        <td id="callerid_<%= card.id %>" align="left"><%= card.callerid.to_s %></td>
+        <% if can_see_finances? -%>
+            <td id="balance_<%= card.id %>" align="right"><%= nice_number card.balance %></td>
+        <% end -%>
+        <td id="first_use_<%= card.id %>" align="center"><%= nice_date_time card.first_use %></td>
+        <td id="daily_charge_<%= card.id %>" align="center"><%= nice_date_time card.daily_charge_paid_till %></td>
+        <td id="sold_<%= card.id %>" align="center"><%= card.sold == 1 ? b_check : b_cross %></td>
+        <td id="payments_<%= card.id %>" align="center"><%= link_to(b_payments, {:controller => 'cards', :action => 'payments', :id => @card}, {:id => "payments_link_"+ card.id.to_s}) %></td>
+        <td id="cardgroup_<%= card.id %>" align="center"><%= link_to(b_cardgroup + card.cardgroup.name, {:controller => 'cardgroups', :action => 'show', :id => card.cardgroup_id}, {:id => "cardgroup_link_"+ card.id.to_s}) %></td>
+        <td id="calls_<%= card.id %>" align="center"><%= link_to(b_call, {:controller => 'stats', :action => 'cc_call_list', :id => @card}, {:id => "calls_link_"+ card.id.to_s}) %>
+          (<%= card.calls.count %>)
+        </td>
+        <% if @allow_manage == true %>
+            <td id="pay_<%= card.id %>" align="center"><%= link_to b_money, {:controller => "cards", :action => 'card_pay', :cg => card.cardgroup_id, :id => @card}, {:id => "pay_link_"+ card.id.to_s} %></td>
+            <td id="show_<%= card.id %>" align="center"><%= link_to b_details + _('Details'), {:controller => "cards", :action => 'show', :id => @card}, {:id => "details_link_"+ card.id.to_s} %></td>
+            <td id="edit_<%= card.id %>" align="center"><%= link_to b_edit, {:controller => "cards", :action => 'edit', :id => @card}, {:id => "edit_link_"+ card.id.to_s} %></td>
+            <td id="destroy_<%= card.id %>" align="center"><%= link_to b_delete, {:controller => "cards", :action => 'destroy', :id => @card}, {:confirm => _('Are_you_sure'), :method => :post, :id => "delete_link_"+ card.id.to_s} %></td>
+        <% end %>
+      </tr>
   <% } %>
 </table>
 <br>
 
-<%  if @total_pages > 1 %>
-  <br>
-  <%= render :partial => "page_select_header"%>
-  <br>
+<% if @total_pages > 1 %>
+    <br>
+    <%= render :partial => "page_select_header" %>
+    <br>
 <% end %>

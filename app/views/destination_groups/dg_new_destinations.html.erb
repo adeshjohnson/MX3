@@ -1,4 +1,3 @@
-
 <table class="simple">
   <tr>
     <td><b><%= _('Destinations_group') %></b>:</td>
@@ -6,53 +5,55 @@
   </tr>
 </table>
 
-<br />
-<%if @free_dest_size.to_i > 0%>
-<%= render :partial => 'letter_select_header' %>
+<br/>
+<% if @free_dest_size.to_i > 0 %>
+    <%= render :partial => 'letter_select_header' %>
 
-<%  if @total_pages > 1 %>
-<br />
-<%= render :partial => 'page_select_header' %>
+    <% if @total_pages > 1 %>
+        <br/>
+        <%= render :partial => 'page_select_header' %>
+    <% end %>
+
+    <br/>
+
+    <table width="100%" class="maintable">
+      <tr>
+
+        <th align="left"><%= _('Direction') %></th>
+        <th align="left"><%= _('Details') %></th>
+        <th align="left"><%= _('Prefix') %></th>
+        <th align="left"><%= _('Code') %></th>
+        <th></th>
+
+      </tr>
+
+      <%= form_tag(:action => 'dg_add_destinations', :id => @destgroup.id, :st => @st) do %>
+          <% i = 0 %>
+          <% for destination in @destinations %>
+              <tr class="row<%= (i % 2 + 1).to_s %>">
+                <td><%= draw_flag destination.direction.code %> <%= destination.direction.name %></td>
+                <td><%= destination.name %></td>
+                <td><%= destination.prefix %></td>
+                <td><%= destination.subcode %></td>
+
+                <td align="center"><%= check_box_tag destination.prefix, 1, false %> </td>
+              </tr>
+              <% i += 1 %>
+          <% end %>
+          <tr>
+            <th colspan="5" align="right"><%= submit_tag _('Add_destinations'), :disable_with => _('Processing..') %></th>
+          </tr>
+      <% end %>
+    </table>
+
+    <% if @total_pages > 1 %>
+        <br/>
+        <%= render :partial => 'page_select_header' %>
+    <% end %>
+
+    <br/>
+
+    <%= render :partial => 'letter_select_header' %>
+<% else %>
+    <%= _('No_free_destination_found_explanation') %>
 <% end %>
-
-<br />
-
-<table width="100%" class="maintable">
-  <tr>
-
-    <th align="left"><%= _('Direction') %></th>
-    <th align="left"><%= _('Details') %></th>
-    <th align="left"><%= _('Prefix') %></th>
-    <th align="left"><%= _('Code') %></th>
-    <th></th>
-
-  </tr>
-
-<%= form_tag(:action => 'dg_add_destinations', :id => @destgroup.id, :st => @st) do %>
-<% i = 0 %>   
-<% for destination in @destinations %>
-  <tr class="row<%= (i % 2 + 1).to_s %>">
-    <td><%= draw_flag destination.direction.code %> <%= destination.direction.name %></td>
-    <td><%= destination.name %></td>
-    <td><%= destination.prefix %></td>
-    <td><%= destination.subcode %></td>
-
-    <td align="center"><%= check_box_tag destination.prefix, 1, false %> </td>
-  </tr>
-  <% i += 1%>    
-<% end %>
-  <tr><th colspan="5" align="right"><%= submit_tag _('Add_destinations'), :disable_with=>_('Processing..') %></th></tr>
-<% end %>
-</table>
-
-<%  if @total_pages > 1 %>
-<br />
-<%= render :partial => 'page_select_header' %>
-<% end %>
-
-<br />
-
-<%= render :partial => 'letter_select_header' %>
-<%else%>
-<%=_('No_free_destination_found_explanation')%>
-<%end%>

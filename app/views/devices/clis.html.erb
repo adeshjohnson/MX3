@@ -3,7 +3,7 @@
     <td><%= link_to_function(b_add + _('Add'), "Element.toggle('cli_add')") %></td>
     <td align="right">
       <% if not @clis.empty? %>
-        <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+          <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
       <% end %>
     </td>
   </tr>
@@ -12,37 +12,38 @@
 <div id="cli_add" <%= "style='display:none;'" %>>
   <%= form_tag :action => 'cli_add' do %>
 
-    <br/>
-    <%= _('CLI') %>: <%= text_field_tag 'cli', "", "class" => "input", :size => "20", :maxlength => "20"  %>
-    <%= _('Description') %>: <%= text_field_tag 'description', "", "class" => "input", :size => "30", :maxlength => "30"  %>
-    <%= _('Comment') %>: <%= text_field_tag 'comment', "", "class" => "input", :size => "30"   %>
-    <%= _('Banned') %>:
-    <select name="banned"  >
-      <option value="0" ><%= _('Not_banned')%> </option>
-      <option value="1"><%= _('Banned')%> </option>
-    </select>
-    <%= _('IVR') %>:
-    <select name="ivr"  >
-      <option value="0" <%= "selected" %>><%= _('Not_assigned')%> </option>
-      <%for iv in @all_ivrs%>
-        <option value="<%= iv.id %>" <%= "selected" if iv.id.to_i == Confline.get_value("Banned_CLIs_default_IVR_id", 0).to_i %>><%= iv.name %> </option>
-      <%end%>
-    </select>
-    <%= _('User') %>:
-    <select name="user" id="user" >
-      <option value="-1" <%= "selected" if @search_user == nil or (@search_user.to_i == -1) %>><%= _('Select_user')%> </option>
-      <%for user  in @users%>
-        <option value="<%= user.id %>" <%= "selected" if @search_user.to_i == user.id.to_i %>><%= nice_user(user)%> </option>
-      <%end%>
-    </select>
-    <%= observe_field("user", :update   => "user_devices2", :url=> { :action => "cli_user_devices", :add=>1 }, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
+      <br/>
+      <%= _('CLI') %>: <%= text_field_tag 'cli', "", "class" => "input", :size => "20", :maxlength => "20" %>
+      <%= _('Description') %>
+      : <%= text_field_tag 'description', "", "class" => "input", :size => "30", :maxlength => "30" %>
+      <%= _('Comment') %>: <%= text_field_tag 'comment', "", "class" => "input", :size => "30" %>
+      <%= _('Banned') %>:
+      <select name="banned">
+        <option value="0"><%= _('Not_banned') %> </option>
+        <option value="1"><%= _('Banned') %> </option>
+      </select>
+      <%= _('IVR') %>:
+      <select name="ivr">
+        <option value="0" <%= "selected" %>><%= _('Not_assigned') %> </option>
+        <% for iv in @all_ivrs %>
+            <option value="<%= iv.id %>" <%= "selected" if iv.id.to_i == Confline.get_value("Banned_CLIs_default_IVR_id", 0).to_i %>><%= iv.name %> </option>
+        <% end %>
+      </select>
+      <%= _('User') %>:
+      <select name="user" id="user">
+        <option value="-1" <%= "selected" if @search_user == nil or (@search_user.to_i == -1) %>><%= _('Select_user') %> </option>
+        <% for user in @users %>
+            <option value="<%= user.id %>" <%= "selected" if @search_user.to_i == user.id.to_i %>><%= nice_user(user) %> </option>
+        <% end %>
+      </select>
+      <%= observe_field("user", :update => "user_devices2", :url => {:action => "cli_user_devices", :add => 1}, :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');") %>
 
 
-    <%=      "<div id = 'user_devices2'>".html_safe %>
+      <%= "<div id = 'user_devices2'>".html_safe %>
 
-    <%=       "</div>".html_safe %>
-    <br/>
-    <%= submit_tag _('Add'), :disable_with=>_('Processing..')%>
+      <%= "</div>".html_safe %>
+      <br/>
+      <%= submit_tag _('Add'), :disable_with => _('Processing..') %>
 
 
   <% end %>
@@ -51,110 +52,113 @@
 </div>
 
 <%= form_tag :action => 'clis' do %>
-  <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
-    <br/>
+    <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+      <br/>
 
 
-    <table width="100%" class="simple">
-      <tr>
-        <td>
-          <%= _('Cli') %>: <%= text_field_tag 's_cli', @search_cli, "class" => "input", :size => "10", :maxlength => "30"  %>
-          <%= _('Description') %>: <%= text_field_tag 's_description', @search_description, "class" => "input", :size => "10", :maxlength => "30"  %>
-          <%= _('Comment') %>: <%= text_field_tag 's_comment', @search_comment, "class" => "input", :size => "10", :maxlength => "30"  %>
-          <%= _('Banned') %>:
-          <select name="s_banned"  >
-            <option value="-1" <%= "selected" if @search_banned == nil or (@search_banned.to_i == -1) %>><%= _('All')%> </option>
-            <option value="0" <%= "selected" if (@search_banned.to_i == 0) %>><%= _('Not_banned')%> </option>
-            <option value="1" <%= "selected" if (@search_banned.to_i == 1) %>><%= _('Banned')%> </option>
-          </select>
-          <% if callback_active? %>
-            <%= _('Use_for_Email_Callback') %>:
-            <select name="s_email_callback"  >
-              <option value="-1" <%= "selected" if @search_email_callback == nil or (@search_email_callback.to_i == -1) %>><%= _('All')%> </option>
-              <option value="0" <%= "selected" if (@search_email_callback.to_i == 0) %>><%= _('Not_use_for_Email_Callback')%> </option>
-              <option value="1" <%= "selected" if (@search_email_callback.to_i == 1) %>><%= _('Use_for_Email_Callback')%> </option>
+      <table width="100%" class="simple">
+        <tr>
+          <td>
+            <%= _('Cli') %>
+            : <%= text_field_tag 's_cli', @search_cli, "class" => "input", :size => "10", :maxlength => "30" %>
+            <%= _('Description') %>
+            : <%= text_field_tag 's_description', @search_description, "class" => "input", :size => "10", :maxlength => "30" %>
+            <%= _('Comment') %>
+            : <%= text_field_tag 's_comment', @search_comment, "class" => "input", :size => "10", :maxlength => "30" %>
+            <%= _('Banned') %>:
+            <select name="s_banned">
+              <option value="-1" <%= "selected" if @search_banned == nil or (@search_banned.to_i == -1) %>><%= _('All') %> </option>
+              <option value="0" <%= "selected" if (@search_banned.to_i == 0) %>><%= _('Not_banned') %> </option>
+              <option value="1" <%= "selected" if (@search_banned.to_i == 1) %>><%= _('Banned') %> </option>
             </select>
-          <%end%>
-          <%= _('IVR') %>:
-          <select name="s_ivr"  >
-            <option value="-1" <%= "selected" if @search_ivr == nil or (@search_ivr.to_i == -1) %>><%= _('All')%> </option>
-            <%for iv in @ivrs%>
-              <option value="<%= iv.id %>" <%= "selected" if @search_ivr == iv.id %>><%= iv.name %> </option>
-            <%end%>
-          </select>
+            <% if callback_active? %>
+                <%= _('Use_for_Email_Callback') %>:
+                <select name="s_email_callback">
+                  <option value="-1" <%= "selected" if @search_email_callback == nil or (@search_email_callback.to_i == -1) %>><%= _('All') %> </option>
+                  <option value="0" <%= "selected" if (@search_email_callback.to_i == 0) %>><%= _('Not_use_for_Email_Callback') %> </option>
+                  <option value="1" <%= "selected" if (@search_email_callback.to_i == 1) %>><%= _('Use_for_Email_Callback') %> </option>
+                </select>
+            <% end %>
+            <%= _('IVR') %>:
+            <select name="s_ivr">
+              <option value="-1" <%= "selected" if @search_ivr == nil or (@search_ivr.to_i == -1) %>><%= _('All') %> </option>
+              <% for iv in @ivrs %>
+                  <option value="<%= iv.id %>" <%= "selected" if @search_ivr == iv.id %>><%= iv.name %> </option>
+              <% end %>
+            </select>
 
-          <%= _('User') %>:
-          <select name="s_user" id="s_user" >
-            <option value="-1" <%= "selected" if @search_user == nil or (@search_user.to_i == -1) %>><%= _('All')%> </option>
-            <%for user  in @users%>
-              <option value="<%= user.id %>" <%= "selected" if @search_user.to_i == user.id.to_i %>><%= nice_user(user)%> </option>
-            <%end%>
-          </select>
-          <%= observe_field("s_user", :frequency => 0.5, :update   => "user_devices", :url=> { :action => "cli_user_devices" }, :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');") %>
+            <%= _('User') %>:
+            <select name="s_user" id="s_user">
+              <option value="-1" <%= "selected" if @search_user == nil or (@search_user.to_i == -1) %>><%= _('All') %> </option>
+              <% for user in @users %>
+                  <option value="<%= user.id %>" <%= "selected" if @search_user.to_i == user.id.to_i %>><%= nice_user(user) %> </option>
+              <% end %>
+            </select>
+            <%= observe_field("s_user", :frequency => 0.5, :update => "user_devices", :url => {:action => "cli_user_devices"}, :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');") %>
 
 
-          <%=      "<div id = 'user_devices'>" %>
+            <%= "<div id = 'user_devices'>" %>
 
-          <%=       "</div>" %>
-          <br/>
-          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
-        </td>
-        <td align="right">
-          <%if @search == 1%>
-            <%= link_to b_cross + _('Clear_search'), :action => 'clis'%>
-          <%end%>
-        </td>
-      </tr>
-    </table>
-  </div>
+            <%= "</div>" %>
+            <br/>
+            <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
+          </td>
+          <td align="right">
+            <% if @search == 1 %>
+                <%= link_to b_cross + _('Clear_search'), :action => 'clis' %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
 <% end %>
 
 <% if @total_pages > 1 %>
-  <br/>
-  <%= render :partial => "page_select_header" %>
+    <br/>
+    <%= render :partial => "page_select_header" %>
 <% end %>
 
 <br/>
 
-<table  width="100%" class="maintable">
+<table width="100%" class="maintable">
   <tr>
-    <th><%= _('Cli')%></th>
-    <th><%= _('Device')%></th>
-    <th><%= _('Description')%></th>
-    <th align="center"><%= _('Added_at')%></th>
-    <th align="center"><%= _('Updated_at')%></th>
-    <th><%= _('Ivr')%></th>
-    <th><%= _('Comment')%></th>
+    <th><%= _('Cli') %></th>
+    <th><%= _('Device') %></th>
+    <th><%= _('Description') %></th>
+    <th align="center"><%= _('Added_at') %></th>
+    <th align="center"><%= _('Updated_at') %></th>
+    <th><%= _('Ivr') %></th>
+    <th><%= _('Comment') %></th>
     <% if callback_active? %>
-    <th align="center"> 	<%= _('Use_for_Email_Callback') %> 		</th>
-    <%end%>
-    <th align="center"><%= _('Banned')%></th>
+        <th align="center">     <%= _('Use_for_Email_Callback') %>         </th>
+    <% end %>
+    <th align="center"><%= _('Banned') %></th>
     <th></th>
     <th></th>
   </tr>
-  <% @clis.each_with_index{|cl, i| %>
-    <%  %>
-    <tr class="row<%= (i % 2 + 1).to_s %>" >
-      <td><%= cl.cli %></td>
-      <td><%= link_nice_device(cl.device) %></td>
-      <td><%= cl.description %></td>
-      <td align="center"><%= nice_date_time(cl.added_at) %></td>
-      <td align="center"><%= nice_date_time(cl.updated_at) %></td>
-      <td><%= cl.ivr_name %></td>
-      <td><%= cl.comment.to_s %></td>
-      <% if callback_active? %>
-      <td align="center">
-        <%= link_to( b_check, {:action => 'change_email_callback_status', :id => cl.id, :email_callback => 0 }, :confirm => _('Are_you_sure'), :method => :post) if cl.email_callback == 1 %>
-        <%= link_to( b_cross, {:action => 'change_email_callback_status', :id => cl.id, :email_callback => 1 }, :confirm => _('Are_you_sure'), :method => :post) if cl.email_callback == 0 %>	</td>
-      <%end%>
-      <td align="center">
-        <%= form_tag :action => 'clis_banned_status', :id => cl.id do %>
-          <%= image_submit_tag 'icons/check.png', :title => _('Unban') if cl.banned == 1 %>
-          <%= image_submit_tag 'icons/cross.png', :title => _('Ban') if  cl.banned == 0 %>
+  <% @clis.each_with_index { |cl, i| %>
+      <% %>
+      <tr class="row<%= (i % 2 + 1).to_s %>">
+        <td><%= cl.cli %></td>
+        <td><%= link_nice_device(cl.device) %></td>
+        <td><%= cl.description %></td>
+        <td align="center"><%= nice_date_time(cl.added_at) %></td>
+        <td align="center"><%= nice_date_time(cl.updated_at) %></td>
+        <td><%= cl.ivr_name %></td>
+        <td><%= cl.comment.to_s %></td>
+        <% if callback_active? %>
+            <td align="center">
+              <%= link_to(b_check, {:action => 'change_email_callback_status', :id => cl.id, :email_callback => 0}, :confirm => _('Are_you_sure'), :method => :post) if cl.email_callback == 1 %>
+              <%= link_to(b_cross, {:action => 'change_email_callback_status', :id => cl.id, :email_callback => 1}, :confirm => _('Are_you_sure'), :method => :post) if cl.email_callback == 0 %>    </td>
         <% end %>
-      </td>
-      <td align="center"><%= link_to b_edit, :action => 'cli_edit', :id => cl.id %></td>
-      <td align="center"><%= link_to b_delete, { :action => 'cli_delete', :id => cl.id  }, :confirm => _('Are_you_sure'), :method => :post %></td>
-    </tr>
+        <td align="center">
+          <%= form_tag :action => 'clis_banned_status', :id => cl.id do %>
+              <%= image_submit_tag 'icons/check.png', :title => _('Unban') if cl.banned == 1 %>
+              <%= image_submit_tag 'icons/cross.png', :title => _('Ban') if  cl.banned == 0 %>
+          <% end %>
+        </td>
+        <td align="center"><%= link_to b_edit, :action => 'cli_edit', :id => cl.id %></td>
+        <td align="center"><%= link_to b_delete, {:action => 'cli_delete', :id => cl.id}, :confirm => _('Are_you_sure'), :method => :post %></td>
+      </tr>
   <% } %>
 </table>

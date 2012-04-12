@@ -1,25 +1,25 @@
-
-<b><%=_('Cards_were_not_created')%>:</b>
+<b><%= _('Cards_were_not_created') %>:</b>
 <br></br>
 <br></br>
 <table class="maintable" width="100%">
   <tr>
     <th align="left"><%= _('Card') %></th>
-    <th align="left"><%= _('Error')%></th>
+    <th align="left"><%= _('Error') %></th>
   </tr>
-  <%if cards%>
-    <% cards.each_with_index { |card, i| %>
-      <tr class="row<%= (i % 2 + 1).to_s %>">
-        <% if card.errors.size.to_i == 0 %>
-          <td id="field_<%=card.number%>"> <%= _('Unspecified') %> </td>
-          <td id="error_<%=card.number%>"> <%= _('Failed_to_create_card') %> </td>
-        <% else %>
-          <td id="field_<%=card.number%>"><strong><%=card.number%></strong></td> 
-          <td id="error_<%=card.number%>"><% a =[] ; card.errors.each { |key, value| a <<  _(key.to_s) + ':' + _(value.to_s)  } if card.respond_to?(:errors)  %>  <%=a.join(" ") if a and a.size.to_i > 0 %></td>
-        <% end %>
-      </tr>
-    <% } %>
-  <%end%>
+  <% if cards %>
+      <% cards.each_with_index { |card, i| %>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <% if card.errors.size.to_i == 0 %>
+                <td id="field_<%= card.number %>"> <%= _('Unspecified') %> </td>
+                <td id="error_<%= card.number %>"> <%= _('Failed_to_create_card') %> </td>
+            <% else %>
+                <td id="field_<%= card.number %>"><strong><%= card.number %></strong></td>
+                <td id="error_<%= card.number %>">
+                  <% a =[] ; card.errors.each { |key, value| a << _(key.to_s) + ':' + _(value.to_s) } if card.respond_to?(:errors) %>  <%= a.join(" ") if a and a.size.to_i > 0 %></td>
+            <% end %>
+          </tr>
+      <% } %>
+  <% end %>
 </table>
 <br></br>
-<%= button_to _('Ok'), {:action=>:list, :cg=>cg} %>
+<%= button_to _('Ok'), {:action => :list, :cg => cg} %>

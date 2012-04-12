@@ -18,12 +18,12 @@ module IdealTestCases
   end
 
   VALID_PURCHASE_OPTIONS = {
-    :issuer_id         => '0001',
-    :expiration_period => 'PT10M',
-    :return_url        => 'http://return_to.example.com',
-    :order_id          => '12345678901',
-    :description       => 'A classic Dutch windmill',
-    :entrance_code     => '1234'
+      :issuer_id => '0001',
+      :expiration_period => 'PT10M',
+      :return_url => 'http://return_to.example.com',
+      :order_id => '12345678901',
+      :description => 'A classic Dutch windmill',
+      :entrance_code => '1234'
   }
 
   ###
@@ -38,17 +38,17 @@ module IdealTestCases
 
     def test_private_certificate_returns_a_loaded_Certificate_instance
       assert_equal IdealGateway.private_certificate.to_text,
-        OpenSSL::X509::Certificate.new(PRIVATE_CERTIFICATE).to_text
+                   OpenSSL::X509::Certificate.new(PRIVATE_CERTIFICATE).to_text
     end
 
     def test_private_key_returns_a_loaded_PKey_RSA_instance
       assert_equal IdealGateway.private_key.to_text,
-        OpenSSL::PKey::RSA.new(PRIVATE_KEY, IdealGateway.passphrase).to_text
+                   OpenSSL::PKey::RSA.new(PRIVATE_KEY, IdealGateway.passphrase).to_text
     end
 
     def test_ideal_certificate_returns_a_loaded_Certificate_instance
       assert_equal IdealGateway.ideal_certificate.to_text,
-        OpenSSL::X509::Certificate.new(IDEAL_CERTIFICATE).to_text
+                   OpenSSL::X509::Certificate.new(IDEAL_CERTIFICATE).to_text
     end
   end
 
@@ -81,21 +81,21 @@ module IdealTestCases
 
     def test_ruby_to_java_keys_conversion
       keys = [
-        [:acquirer_transaction_request, 'AcquirerTrxReq'],
-        [:acquirer_status_request,      'AcquirerStatusReq'],
-        [:directory_request,            'DirectoryReq'],
-        [:created_at,                   'createDateTimeStamp'],
-        [:issuer,                       'Issuer'],
-        [:merchant,                     'Merchant'],
-        [:transaction,                  'Transaction'],
-        [:issuer_id,                    'issuerID'],
-        [:merchant_id,                  'merchantID'],
-        [:sub_id,                       'subID'],
-        [:token_code,                   'tokenCode'],
-        [:merchant_return_url,          'merchantReturnURL'],
-        [:purchase_id,                  'purchaseID'],
-        [:expiration_period,            'expirationPeriod'],
-        [:entrance_code,                'entranceCode']
+          [:acquirer_transaction_request, 'AcquirerTrxReq'],
+          [:acquirer_status_request, 'AcquirerStatusReq'],
+          [:directory_request, 'DirectoryReq'],
+          [:created_at, 'createDateTimeStamp'],
+          [:issuer, 'Issuer'],
+          [:merchant, 'Merchant'],
+          [:transaction, 'Transaction'],
+          [:issuer_id, 'issuerID'],
+          [:merchant_id, 'merchantID'],
+          [:sub_id, 'subID'],
+          [:token_code, 'tokenCode'],
+          [:merchant_return_url, 'merchantReturnURL'],
+          [:purchase_id, 'purchaseID'],
+          [:expiration_period, 'expirationPeriod'],
+          [:entrance_code, 'entranceCode']
       ]
 
       keys.each do |key, expected_key|
@@ -195,9 +195,9 @@ module IdealTestCases
       end
 
       [
-        [:order_id, '12345678901234567'], # 17 chars,
-        [:description, '123456789012345678901234567890123'], # 33 chars
-        [:entrance_code, '12345678901234567890123456789012345678901'] # 41
+          [:order_id, '12345678901234567'], # 17 chars,
+          [:description, '123456789012345678901234567890123'], # 33 chars
+          [:entrance_code, '12345678901234567890123456789012345678901'] # 41
       ].each do |key, value|
         options = VALID_PURCHASE_OPTIONS.dup
         options[key] = value
@@ -227,41 +227,41 @@ module IdealTestCases
       money = 4321
 
       message = 'created_at_timestamp' +
-                VALID_PURCHASE_OPTIONS[:issuer_id] +
-                IdealGateway.merchant_id +
-                @gateway.sub_id.to_s +
-                VALID_PURCHASE_OPTIONS[:return_url] +
-                VALID_PURCHASE_OPTIONS[:order_id] +
-                money.to_s +
-                IdealGateway::CURRENCY +
-                IdealGateway::LANGUAGE +
-                VALID_PURCHASE_OPTIONS[:description] +
-                VALID_PURCHASE_OPTIONS[:entrance_code]
+          VALID_PURCHASE_OPTIONS[:issuer_id] +
+          IdealGateway.merchant_id +
+          @gateway.sub_id.to_s +
+          VALID_PURCHASE_OPTIONS[:return_url] +
+          VALID_PURCHASE_OPTIONS[:order_id] +
+          money.to_s +
+          IdealGateway::CURRENCY +
+          IdealGateway::LANGUAGE +
+          VALID_PURCHASE_OPTIONS[:description] +
+          VALID_PURCHASE_OPTIONS[:entrance_code]
 
       @gateway.expects(:token_code).with(message).returns('the_token_code')
 
       @gateway.expects(:xml_for).with(:acquirer_transaction_request, [
-        [:created_at, 'created_at_timestamp'],
-        [:issuer, [[:issuer_id, VALID_PURCHASE_OPTIONS[:issuer_id]]]],
+          [:created_at, 'created_at_timestamp'],
+          [:issuer, [[:issuer_id, VALID_PURCHASE_OPTIONS[:issuer_id]]]],
 
-        [:merchant, [
-          [:merchant_id,         IdealGateway.merchant_id],
-          [:sub_id,              @gateway.sub_id],
-          [:authentication,      IdealGateway::AUTHENTICATION_TYPE],
-          [:token,               'the_token'],
-          [:token_code,          'the_token_code'],
-          [:merchant_return_url, VALID_PURCHASE_OPTIONS[:return_url]]
-        ]],
+          [:merchant, [
+              [:merchant_id, IdealGateway.merchant_id],
+              [:sub_id, @gateway.sub_id],
+              [:authentication, IdealGateway::AUTHENTICATION_TYPE],
+              [:token, 'the_token'],
+              [:token_code, 'the_token_code'],
+              [:merchant_return_url, VALID_PURCHASE_OPTIONS[:return_url]]
+          ]],
 
-        [:transaction, [
-          [:purchase_id,       VALID_PURCHASE_OPTIONS[:order_id]],
-          [:amount,            money],
-          [:currency,          IdealGateway::CURRENCY],
-          [:expiration_period, VALID_PURCHASE_OPTIONS[:expiration_period]],
-          [:language,          IdealGateway::LANGUAGE],
-          [:description,       VALID_PURCHASE_OPTIONS[:description]],
-          [:entrance_code,     VALID_PURCHASE_OPTIONS[:entrance_code]]
-        ]]
+          [:transaction, [
+              [:purchase_id, VALID_PURCHASE_OPTIONS[:order_id]],
+              [:amount, money],
+              [:currency, IdealGateway::CURRENCY],
+              [:expiration_period, VALID_PURCHASE_OPTIONS[:expiration_period]],
+              [:language, IdealGateway::LANGUAGE],
+              [:description, VALID_PURCHASE_OPTIONS[:description]],
+              [:entrance_code, VALID_PURCHASE_OPTIONS[:entrance_code]]
+          ]]
       ])
 
       @gateway.send(:build_transaction_request_body, money, VALID_PURCHASE_OPTIONS)
@@ -272,14 +272,14 @@ module IdealTestCases
       @gateway.expects(:token_code).with(message).returns('the_token_code')
 
       @gateway.expects(:xml_for).with(:directory_request, [
-        [:created_at, 'created_at_timestamp'],
-        [:merchant, [
-          [:merchant_id,    IdealGateway.merchant_id],
-          [:sub_id,         @gateway.sub_id],
-          [:authentication, IdealGateway::AUTHENTICATION_TYPE],
-          [:token,          'the_token'],
-          [:token_code,     'the_token_code']
-        ]]
+          [:created_at, 'created_at_timestamp'],
+          [:merchant, [
+              [:merchant_id, IdealGateway.merchant_id],
+              [:sub_id, @gateway.sub_id],
+              [:authentication, IdealGateway::AUTHENTICATION_TYPE],
+              [:token, 'the_token'],
+              [:token_code, 'the_token_code']
+          ]]
       ])
 
       @gateway.send(:build_directory_request_body)
@@ -292,24 +292,24 @@ module IdealTestCases
     end
 
     def test_builds_a_status_request_body
-      options = { :transaction_id => @transaction_id }
+      options = {:transaction_id => @transaction_id}
 
       message = 'created_at_timestamp' + IdealGateway.merchant_id + @gateway.sub_id.to_s + options[:transaction_id]
       @gateway.expects(:token_code).with(message).returns('the_token_code')
 
       @gateway.expects(:xml_for).with(:acquirer_status_request, [
-        [:created_at, 'created_at_timestamp'],
-        [:merchant, [
-          [:merchant_id,    IdealGateway.merchant_id],
-          [:sub_id,         @gateway.sub_id],
-          [:authentication, IdealGateway::AUTHENTICATION_TYPE],
-          [:token,          'the_token'],
-          [:token_code,     'the_token_code']
-        ]],
+          [:created_at, 'created_at_timestamp'],
+          [:merchant, [
+              [:merchant_id, IdealGateway.merchant_id],
+              [:sub_id, @gateway.sub_id],
+              [:authentication, IdealGateway::AUTHENTICATION_TYPE],
+              [:token, 'the_token'],
+              [:token_code, 'the_token_code']
+          ]],
 
-        [:transaction, [
-          [:transaction_id, options[:transaction_id]]
-        ]],
+          [:transaction, [
+              [:transaction_id, options[:transaction_id]]
+          ]],
       ])
 
       @gateway.send(:build_status_request_body, options)
@@ -332,7 +332,7 @@ module IdealTestCases
 
     def test_initializes_with_only_response_body
       assert_equal REXML::Document.new(DIRECTORY_RESPONSE_WITH_MULTIPLE_ISSUERS).root.to_s,
-                    @response.instance_variable_get(:@response).to_s
+                   @response.instance_variable_get(:@response).to_s
     end
 
     def test_successful
@@ -369,11 +369,11 @@ module IdealTestCases
 
     def test_returns_error_type
       [
-        ['IX1000', :xml],
-        ['SO1000', :system],
-        ['SE2000', :security],
-        ['BR1200', :value],
-        ['AP1000', :application]
+          ['IX1000', :xml],
+          ['SO1000', :system],
+          ['SE2000', :security],
+          ['BR1200', :value],
+          ['AP1000', :application]
       ].each do |code, type|
         @response.stubs(:error_code).returns(code)
         assert_equal type, @response.error_type
@@ -390,7 +390,7 @@ module IdealTestCases
       @gateway.stubs(:build_directory_request_body).returns('the request body')
       @gateway.expects(:ssl_post).with(@gateway.acquirer_url, 'the request body').returns(DIRECTORY_RESPONSE_WITH_ONE_ISSUER)
 
-      expected_issuers = [{ :id => '1006', :name => 'ABN AMRO Bank' }]
+      expected_issuers = [{:id => '1006', :name => 'ABN AMRO Bank'}]
 
       directory_response = @gateway.issuers
       assert_instance_of IdealDirectoryResponse, directory_response
@@ -402,11 +402,11 @@ module IdealTestCases
       @gateway.expects(:ssl_post).with(@gateway.acquirer_url, 'the request body').returns(DIRECTORY_RESPONSE_WITH_MULTIPLE_ISSUERS)
 
       expected_issuers = [
-        { :id => '1006', :name => 'ABN AMRO Bank' },
-        { :id => '1003', :name => 'Postbank' },
-        { :id => '1005', :name => 'Rabobank' },
-        { :id => '1017', :name => 'Asr bank' },
-        { :id => '1023', :name => 'Van Lanschot' }
+          {:id => '1006', :name => 'ABN AMRO Bank'},
+          {:id => '1003', :name => 'Postbank'},
+          {:id => '1005', :name => 'Rabobank'},
+          {:id => '1017', :name => 'Asr bank'},
+          {:id => '1023', :name => 'Van Lanschot'}
       ]
 
       directory_response = @gateway.issuers
@@ -444,7 +444,7 @@ module IdealTestCases
       @gateway = IdealGateway.new
 
       @gateway.stubs(:build_status_request_body).
-        with(:transaction_id => '0001023456789112').returns('the request body')
+          with(:transaction_id => '0001023456789112').returns('the request body')
     end
 
     def test_setup_purchase_returns_IdealStatusResponse
@@ -481,11 +481,11 @@ module IdealTestCases
     def test_returns_status
       response = IdealStatusResponse.new(ACQUIRER_SUCCEEDED_STATUS_RESPONSE)
       [
-        ['Success',   :success],
-        ['Cancelled', :cancelled],
-        ['Expired',   :expired],
-        ['Open',      :open],
-        ['Failure',   :failure]
+          ['Success', :success],
+          ['Cancelled', :cancelled],
+          ['Expired', :expired],
+          ['Open', :open],
+          ['Failure', :failure]
       ].each do |raw_status, expected_status|
         response.stubs(:text).with("//status").returns(raw_status)
         assert_equal expected_status, response.status

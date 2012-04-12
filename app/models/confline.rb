@@ -40,14 +40,14 @@ class Confline < ActiveRecord::Base
   def self.active_calls_show_did?(owner_id = 0)
     get_value('Active_calls_show_did', owner_id) == "1" ? true : false
   end
-  
+
   # Sets confline value.
   def Confline::set_value(name, value = 0, id = 0)
     cl = Confline.find(:first, :conditions => ["name = ? and owner_id = ?", name, id])
     if cl
       if cl.value.to_s != value.to_s
         u = User.current ? User.current.id : -1
-        Action.add_action_hash(u, {:action=>"Confline changed", :target_id=>cl.id, :target_type=>'confline', :data=>cl.value.to_s, :data2=>value.to_s, :data4=>name})
+        Action.add_action_hash(u, {:action => "Confline changed", :target_id => cl.id, :target_type => 'confline', :data => cl.value.to_s, :data2 => value.to_s, :data4 => name})
       end
       cl.value = value
       cl.save
@@ -62,10 +62,10 @@ class Confline < ActiveRecord::Base
     if cl
       if cl.value2.to_s != value.to_s
         if User.current_user
-        Action.add_action_hash(User.current_user.id, {:action=>"Confline changed", :target_id=>cl.id, :target_type=>'confline', :data=>cl.value2.to_s, :data2=>value.to_s, :data3=>'value2', :data4=>name})
+          Action.add_action_hash(User.current_user.id, {:action => "Confline changed", :target_id => cl.id, :target_type => 'confline', :data => cl.value2.to_s, :data2 => value.to_s, :data3 => 'value2', :data4 => name})
         else
-          Action.add_action_hash(-1, {:action=>"Confline changed", :target_id=>cl.id, :target_type=>'confline', :data=>cl.value2.to_s, :data2=>value.to_s, :data3=>'value2', :data4=>name})
-          end
+          Action.add_action_hash(-1, {:action => "Confline changed", :target_id => cl.id, :target_type => 'confline', :data => cl.value2.to_s, :data2 => value.to_s, :data3 => 'value2', :data4 => name})
+        end
       end
       cl.value2 = value
       cl.save
@@ -74,6 +74,7 @@ class Confline < ActiveRecord::Base
       Confline.new_confline2(name, value, id)
     end
   end
+
   # creates new confline with given params
   def Confline::new_confline(name, value, id = 0)
     confline = Confline.new()
@@ -92,7 +93,7 @@ class Confline < ActiveRecord::Base
   end
 
   def Confline::get_tax_number(id = 0)
-    cl = Confline.find(:all, :conditions => ["name Like 'Tax_%' and value2 = '1' AND owner_id = ?" , id])
+    cl = Confline.find(:all, :conditions => ["name Like 'Tax_%' and value2 = '1' AND owner_id = ?", id])
     return cl.size
   end
 
@@ -146,7 +147,7 @@ class Confline < ActiveRecord::Base
   def Confline.get_default_object(object, owner_id = 0)
     instance = object.new
     attributes = Confline.find(:all, :conditions => ["name LIKE 'Default_#{object.to_s}_%' AND owner_id = ?", owner_id])
-    attributes.each{ |confline|      
+    attributes.each { |confline|
       val = confline.value
       key = confline.name.gsub("Default_#{object.to_s}_", "")
       if key.include?("Default_#{object.to_s.downcase.to_s}_")
@@ -171,19 +172,19 @@ class Confline < ActiveRecord::Base
 
   def Confline.get_default_tax(owner_id)
     tax ={
-      :tax1_enabled => 1,
-      :tax2_enabled => Confline.get_value2("Tax_2",owner_id).to_i,
-      :tax3_enabled => Confline.get_value2("Tax_3",owner_id).to_i,
-      :tax4_enabled => Confline.get_value2("Tax_4",owner_id).to_i,
-      :tax1_name => Confline.get_value("Tax_1",owner_id).to_s,
-      :tax2_name => Confline.get_value("Tax_2",owner_id).to_s,
-      :tax3_name => Confline.get_value("Tax_3",owner_id).to_s,
-      :tax4_name => Confline.get_value("Tax_4",owner_id).to_s,
-      :total_tax_name => Confline.get_value("Total_tax_name",owner_id).to_s,
-      :tax1_value => Confline.get_value("Tax_1_Value",owner_id).to_f,
-      :tax2_value => Confline.get_value("Tax_2_Value",owner_id).to_f,
-      :tax3_value => Confline.get_value("Tax_3_Value",owner_id).to_f,
-      :tax4_value => Confline.get_value("Tax_4_Value",owner_id).to_f
+        :tax1_enabled => 1,
+        :tax2_enabled => Confline.get_value2("Tax_2", owner_id).to_i,
+        :tax3_enabled => Confline.get_value2("Tax_3", owner_id).to_i,
+        :tax4_enabled => Confline.get_value2("Tax_4", owner_id).to_i,
+        :tax1_name => Confline.get_value("Tax_1", owner_id).to_s,
+        :tax2_name => Confline.get_value("Tax_2", owner_id).to_s,
+        :tax3_name => Confline.get_value("Tax_3", owner_id).to_s,
+        :tax4_name => Confline.get_value("Tax_4", owner_id).to_s,
+        :total_tax_name => Confline.get_value("Total_tax_name", owner_id).to_s,
+        :tax1_value => Confline.get_value("Tax_1_Value", owner_id).to_f,
+        :tax2_value => Confline.get_value("Tax_2_Value", owner_id).to_f,
+        :tax3_value => Confline.get_value("Tax_3_Value", owner_id).to_f,
+        :tax4_value => Confline.get_value("Tax_4_Value", owner_id).to_f
     }
     Tax.new(tax)
   end
@@ -224,7 +225,7 @@ class Confline < ActiveRecord::Base
 
     not (host.blank? or login.blank? or pass.blank?)
   end
-  
+
   def self.get_default_user_pospaid_errors
     ActiveRecord::Base.connection.select_all('SELECT owner_id FROM conflines WHERE name IN (\'Default_User_allow_loss_calls\', \'Default_User_postpaid\') AND value = 1 GROUP BY owner_id HAVING COUNT(*) > 1 ;')
   end

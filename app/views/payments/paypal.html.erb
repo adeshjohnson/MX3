@@ -1,15 +1,15 @@
-<div align="right"><%= image_tag("logo/paypal_logo.gif",  :style => 'border-style:none', :title => "PayPal") %></div>
+<div align="right"><%= image_tag("logo/paypal_logo.gif", :style => 'border-style:none', :title => "PayPal") %></div>
 
 <%= form_tag :action => 'paypal_pay' do %>
-    <%= _('Please_enter_amount_to_update_your_balance') %>*: <%= text_field_tag 'amount', Confline.get_value("PayPal_Default_Amount", @user.owner_id), "class" => "input", :size => "8", :maxlength => "8"  %> <%= @currency %> 
+    <%= _('Please_enter_amount_to_update_your_balance') %>*: <%= text_field_tag 'amount', Confline.get_value("PayPal_Default_Amount", @user.owner_id), "class" => "input", :size => "8", :maxlength => "8" %> <%= @currency %>
     <br><br>
-    <%= submit_tag _('Confirm'), :disable_with=>_('Processing..') %>
+    <%= submit_tag _('Confirm'), :disable_with => _('Processing..') %>
 <% end %>
 
 <br>
 <% if @pp_min_amount.to_f > 0.0 %>
-  <div class = "simple">* <%= _('Minimum_amount') %>: <%= nice_number @pp_min_amount %> <%= @currency %></div>
+    <div class="simple">* <%= _('Minimum_amount') %>: <%= nice_number @pp_min_amount %> <%= @currency %></div>
 <% end %>
 <% if @pp_max_amount.to_f > 0.0 %>
-  <div class = "simple">* <%= _('Maximum_amount') %>: <%= nice_number @pp_max_amount %> <%= @currency %></div>
+    <div class="simple">* <%= _('Maximum_amount') %>: <%= nice_number @pp_max_amount %> <%= @currency %></div>
 <% end %>

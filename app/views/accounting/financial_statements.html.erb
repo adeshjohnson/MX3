@@ -1,5 +1,5 @@
 <%= b_info + _('Payments_include_information_about_credit_notes_and_invoices') %>
-<br />
+<br/>
 <%= b_info + _('Set_date_when_invoice_was_issued') %>
 <table width="100%">
   <tr>
@@ -10,94 +10,96 @@
 </table>
 
 <%= form_tag :action => 'financial_statements' do %>
-  <div id="search_details" <%= "style='display:none;'" if not @show_search %>>
-    <br/>
-    <table width="100%" class="simple">
-      <tr>
-        <td>
+    <div id="search_details" <%= "style='display:none;'" if not @show_search %>>
+      <br/>
+      <table width="100%" class="simple">
+        <tr>
+          <td>
             <%= _('Status') %>:
-            <select id="payment_status" name="status" >
-              <option value="all" <%=' selected ' if @options[:status] == 'all'%>><%=_('All')%></option>
-              <option value="paid" <%=' selected ' if @options[:status] == 'paid'%>><%=_('Paid')%></option>
-              <option value="unpaid" <%=' selected ' if @options[:status] == 'unpaid'%>><%=_('Unpaid')%></option>
+            <select id="payment_status" name="status">
+              <option value="all" <%= ' selected ' if @options[:status] == 'all' %>><%= _('All') %></option>
+              <option value="paid" <%= ' selected ' if @options[:status] == 'paid' %>><%= _('Paid') %></option>
+              <option value="unpaid" <%= ' selected ' if @options[:status] == 'unpaid' %>><%= _('Unpaid') %></option>
             </select>
-          <% if current_user.usertype != 'user' %>
-            <%= _('User') %>:
-            <%= select_tag("user_id", options_for_select([[_('All'), "all"]] + @users.map{|u| [nice_user(u), u.id.to_s]}, @options[:user_id].to_s)) %>
-          <% end %>
-          <%= _('Date') + ' ' + _('From') %>: <%= select_date(@issue_from_date, :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
-          &nbsp;&nbsp;<%= _('to') %>: <%= select_date(@issue_till_date, :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <br />
-          <%= submit_tag _('Search'), :disable_with=>_('Processing..')%>
-        </td>
-        <td align="right">
-          <%= link_to b_cross + _('Clear_search'), :action => 'financial_statements', :clear=>1 if @show_search %>
-        </td>
-      </tr>
-    </table>
-  </div>
+            <% if current_user.usertype != 'user' %>
+                <%= _('User') %>:
+                <%= select_tag("user_id", options_for_select([[_('All'), "all"]] + @users.map { |u| [nice_user(u), u.id.to_s] }, @options[:user_id].to_s)) %>
+            <% end %>
+            <%= _('Date') + ' ' + _('From') %>
+            : <%= select_date(@issue_from_date, :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+            &nbsp;&nbsp;<%= _('to') %>
+            : <%= select_date(@issue_till_date, :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <br/>
+            <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
+          </td>
+          <td align="right">
+            <%= link_to b_cross + _('Clear_search'), :action => 'financial_statements', :clear => 1 if @show_search %>
+          </td>
+        </tr>
+      </table>
+    </div>
 <% end %>
-<table class='maintable'> 
+<table class='maintable'>
   <tr>
     <th rowspan=2></th>
     <% if @status != 'unpaid' %>
-      <th id="status_paid" colspan=3><%= _('Paid') %></th>
+        <th id="status_paid" colspan=3><%= _('Paid') %></th>
     <% end %>
     <% if @status != 'paid' %>
-      <th id="status_unpaid" colspan=3><%= _('Unpaid') %></th>
-    <% end %>  
+        <th id="status_unpaid" colspan=3><%= _('Unpaid') %></th>
+    <% end %>
   </tr>
   <tr>
     <th id="count_1"><%= _('Count') %></th>
     <th id="price_with_vat_1"><%= _('Price_with_VAT') %> (<%= @currency %>)</th>
     <th id="price_1"><%= _('Price') %> (<%= @currency %>)</th>
     <% if not ['paid', 'unpaid'].include? @status %>
-      <th id="count_2"><%= _('Count') %></th>
-      <th id="price_with_vat_2"><%= _('Price_with_VAT') %> (<%= @currency %>)</th>
-      <th id="price_2"><%= _('Price') %> (<%= @currency %>)</th>
+        <th id="count_2"><%= _('Count') %></th>
+        <th id="price_with_vat_2"><%= _('Price_with_VAT') %> (<%= @currency %>)</th>
+        <th id="price_2"><%= _('Price') %> (<%= @currency %>)</th>
     <% end %>
   </tr>
   <tr>
     <th id="credit_notes"><%= _('Credit_notes') %></th>
     <% if @status != 'unpaid' %>
-      <td id="paid_credit_notes_count"><%= @paid_credit_note.count %> </td>
-      <td id="paid_credit_notes_price_with_vat"><%= nice_number(@paid_credit_note.price_with_vat) %></td>
-      <td id="paid_credit_notes_price"><%= nice_number(@paid_credit_note.price) %></td>
+        <td id="paid_credit_notes_count"><%= @paid_credit_note.count %> </td>
+        <td id="paid_credit_notes_price_with_vat"><%= nice_number(@paid_credit_note.price_with_vat) %></td>
+        <td id="paid_credit_notes_price"><%= nice_number(@paid_credit_note.price) %></td>
     <% end %>
     <% if @status != 'paid' %>
-      <td id="unpaid_credit_notes_count"><%= @unpaid_credit_note.count %> </td>
-      <td id="unpaid_credit_notes_price_with_vat"><%= nice_number(@unpaid_credit_note.price_with_vat) %></td>
-      <td id="unpaid_credit_notes_price"><%= nice_number(@unpaid_credit_note.price) %></td>
+        <td id="unpaid_credit_notes_count"><%= @unpaid_credit_note.count %> </td>
+        <td id="unpaid_credit_notes_price_with_vat"><%= nice_number(@unpaid_credit_note.price_with_vat) %></td>
+        <td id="unpaid_credit_notes_price"><%= nice_number(@unpaid_credit_note.price) %></td>
     <% end %>
   </tr>
   <tr>
     <th id="invoices"><%= _('Invoices') %></th>
     <% if @status != 'unpaid' %>
-      <td id="paid_invoices_count"><%= @paid_invoice.count %> </td>
-      <td id="paid_invoices_price_with_vat"><%= nice_number(@paid_invoice.price_with_vat) %></td>
-      <td id="paid_invoices_price"><%= nice_number(@paid_invoice.price) %></td>
+        <td id="paid_invoices_count"><%= @paid_invoice.count %> </td>
+        <td id="paid_invoices_price_with_vat"><%= nice_number(@paid_invoice.price_with_vat) %></td>
+        <td id="paid_invoices_price"><%= nice_number(@paid_invoice.price) %></td>
     <% end %>
     <% if @status != 'paid' %>
-      <td id="unpaid_invoices_count"><%= @unpaid_invoice.count %> </td>
-      <td id="unpaid_invoices_price_with_vat"><%= nice_number(@unpaid_invoice.price_with_vat) %></td>
-      <td id="unpaid_invoices_price"><%= nice_number(@unpaid_invoice.price) %></td>
+        <td id="unpaid_invoices_count"><%= @unpaid_invoice.count %> </td>
+        <td id="unpaid_invoices_price_with_vat"><%= nice_number(@unpaid_invoice.price_with_vat) %></td>
+        <td id="unpaid_invoices_price"><%= nice_number(@unpaid_invoice.price) %></td>
     <% end %>
   </tr>
   <tr>
     <th id="payments"><%= _('Payments') %></th>
     <% if @status != 'unpaid' %>
-      <td id="paid_payments_count"><%= @paid_payment.count %> </td>
-      <td id="paid_payments_price_with_vat"><%= nice_number(@paid_payment.price_with_vat) %></td>
-      <td id="paid_payments_price"><%= nice_number(@paid_payment.price) %></td>
+        <td id="paid_payments_count"><%= @paid_payment.count %> </td>
+        <td id="paid_payments_price_with_vat"><%= nice_number(@paid_payment.price_with_vat) %></td>
+        <td id="paid_payments_price"><%= nice_number(@paid_payment.price) %></td>
     <% end %>
     <% if @status != 'paid' %>
-      <td id="unpaid_payments_count"><%= @unpaid_payment.count %> </td>
-      <td id="unpaid_payments_price_with_vat"><%= nice_number(@unpaid_payment.price_with_vat) %></td>
-      <td id="unpaid_payments_price"><%= nice_number(@unpaid_payment.price) %></td>
+        <td id="unpaid_payments_count"><%= @unpaid_payment.count %> </td>
+        <td id="unpaid_payments_price_with_vat"><%= nice_number(@unpaid_payment.price_with_vat) %></td>
+        <td id="unpaid_payments_price"><%= nice_number(@unpaid_payment.price) %></td>
     <% end %>
   </tr>
 </table>

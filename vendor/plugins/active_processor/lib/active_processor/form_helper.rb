@@ -205,11 +205,11 @@ module ActiveProcessor
     end
 
     def self.observe_field(field_id, options = {})
-            if options[:frequency] && options[:frequency] > 0
-                       self.build_observer('Form.Element.Observer', field_id, options)
-            else
-                               self.build_observer('Form.Element.EventObserver', field_id, options)
-            end
+      if options[:frequency] && options[:frequency] > 0
+        self.build_observer('Form.Element.Observer', field_id, options)
+      else
+        self.build_observer('Form.Element.EventObserver', field_id, options)
+      end
     end
 
     def self.build_observer(klass, name, options = {})

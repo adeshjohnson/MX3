@@ -1,31 +1,30 @@
-
 <b><%= _('Card_group') %></b>: <%= link_to @cg.name, :controller => "cardgroups", :action => "show", :id => @cg %>
-<br />
-<br />
+<br/>
+<br/>
 <b><%= _('Number_length') %></b>: <%= @cg.number_length %>
-<br />
-<br />
+<br/>
+<br/>
 
 <%= form_tag(:action => 'create') do %>
-  <p>
-    <label for="card_number">
-      <%= _('Start_number') %>
-    </label>
-    <br/>
-    <%= text_field_tag 'start_number', "", "class" => "input", "maxlength" => @cg.number_length   %></p>
-  <p>
-    <label for="card_number">
-      <%= _('End_number') %>
-    </label>
-    <br/>
-    <%= text_field_tag 'end_number', "", "class" => "input" , "maxlength" => @cg.number_length  %></p>
-  <%= hidden_field_tag 'cg', @cg.id  %>
-  <p><label for="card_sold"><%= _('Language') %></label><br/>
-    <%= text_field_tag 'card_language', 'en', :size => 10, "class" => "input"  %></p>
+    <p>
+      <label for="card_number">
+        <%= _('Start_number') %>
+      </label>
+      <br/>
+      <%= text_field_tag 'start_number', "", "class" => "input", "maxlength" => @cg.number_length %></p>
+    <p>
+      <label for="card_number">
+        <%= _('End_number') %>
+      </label>
+      <br/>
+      <%= text_field_tag 'end_number', "", "class" => "input", "maxlength" => @cg.number_length %></p>
+    <%= hidden_field_tag 'cg', @cg.id %>
+    <p><label for="card_sold"><%= _('Language') %></label><br/>
+      <%= text_field_tag 'card_language', 'en', :size => 10, "class" => "input" %></p>
 
-  <p><label for="card_user"><%= _('Distributor') %></label><br/>
-    <%= select_tag("user_id", options_for_select([["None", -1]] + @users.map{|user| [nice_user(user), user.id]})) %>
-  </p>
+    <p><label for="card_user"><%= _('Distributor') %></label><br/>
+      <%= select_tag("user_id", options_for_select([["None", -1]] + @users.map { |user| [nice_user(user), user.id] })) %>
+    </p>
 
-  <%= submit_tag _('Create'), :disable_with=>_('Processing..') %>
+    <%= submit_tag _('Create'), :disable_with => _('Processing..') %>
 <% end %>

@@ -2,12 +2,12 @@
 class DidsController < ApplicationController
   layout "callc"
 
-  before_filter :check_post_method, :only=>[:destroy, :create, :update]
+  before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :check_localization
   #before_filter :authorize_admin, :except => [:quickforwarddids, :quickforwarddid_edit, :quickforwarddid_update, :quickforwarddid_destroy]
   before_filter :authorize
 
-  before_filter :check_user_for_dids, :except=>[:personal_dids, :quickforwarddids, :quickforwarddid_edit, :quickforwarddid_update, :quickforwarddid_destroy ]
+  before_filter :check_user_for_dids, :except => [:personal_dids, :quickforwarddids, :quickforwarddid_edit, :quickforwarddid_update, :quickforwarddid_destroy]
   before_filter { |c|
     view = [:index, :list, :show, :did_rates, :dids_export_to_csv]
     edit = [:new, :create, :edit, :update, :destroy, :edit_rate, :bulk_management, :confirm_did, :assign_to_dp]
@@ -17,11 +17,11 @@ class DidsController < ApplicationController
     true
   }
 
-  before_filter :check_device_presence, :only => [ :update ]
+  before_filter :check_device_presence, :only => [:update]
   before_filter :find_dids, :only => [:dids_interval_edit, :dids_interval_trunk, :dids_interval_add_to_trunk, :dids_interval_rates, :dids_interval_add_to_user, :dids_interval_delete, :delete, :dids_interval_assign_dialplan]
   before_filter :find_provider, :only => [:create]
-  before_filter :check_dids_creation, :only=>[:new, :create, :confirm_did]
-  before_filter :check_did_params, :only=>[:update]
+  before_filter :check_dids_creation, :only => [:new, :create, :confirm_did]
+  before_filter :check_did_params, :only => [:update]
 
   def index
     list
@@ -37,13 +37,13 @@ class DidsController < ApplicationController
     @page_icon = "did.png"
     @help_link = "http://wiki.kolmisoft.com/index.php/MOR_Manual#DIDs"
     @iwantto_links = [
-      ['Learn_more_about_DIDs',"http://wiki.kolmisoft.com/index.php/MOR_Manual#DIDs"],
-      ['Understand_DID_billing', "http://wiki.kolmisoft.com/index.php/DID_Billing"],
-      ['Check_DIDs_assigned_to_me',"http://wiki.kolmisoft.com/index.php/Personal_DIDs"],
-      ['Configure_DID_to_ring_some_Device',"http://wiki.kolmisoft.com/index.php/Personal_DIDs"],
-      ['Forward_DID_to_external_number',"http://wiki.kolmisoft.com/index.php/Forward_DID_to_External_Number"],
-      ['Charge_DID_on_a_monthly_basis', 'http://wiki.kolmisoft.com/index.php/How_to_charge_DID_on_a_monthly_basis'],
-      ['Block_DID', "http://wiki.kolmisoft.com/index.php/DID_Blocking"]]
+        ['Learn_more_about_DIDs', "http://wiki.kolmisoft.com/index.php/MOR_Manual#DIDs"],
+        ['Understand_DID_billing', "http://wiki.kolmisoft.com/index.php/DID_Billing"],
+        ['Check_DIDs_assigned_to_me', "http://wiki.kolmisoft.com/index.php/Personal_DIDs"],
+        ['Configure_DID_to_ring_some_Device', "http://wiki.kolmisoft.com/index.php/Personal_DIDs"],
+        ['Forward_DID_to_external_number', "http://wiki.kolmisoft.com/index.php/Forward_DID_to_External_Number"],
+        ['Charge_DID_on_a_monthly_basis', 'http://wiki.kolmisoft.com/index.php/How_to_charge_DID_on_a_monthly_basis'],
+        ['Block_DID', "http://wiki.kolmisoft.com/index.php/DID_Blocking"]]
     unless current_user.usertype == 'reseller'
       @providers = current_user.load_providers(:all, {})
     end
@@ -76,7 +76,7 @@ class DidsController < ApplicationController
     cond << "dids.provider_id = ?" and var << @search_provider if @search_provider.to_s.length > 0
     cond << "dids.language = ? " and var << @search_language.to_s if @search_language.to_s != 'all'
     if @search_status.length > 0
-      if  ['free','active'].include?(@search_status) and admin?
+      if  ['free', 'active'].include?(@search_status) and admin?
         cond << "dids.status = ? AND reseller_id = 0" and var << @search_status
       elsif @search_status == 'reserved' and admin?
         cond << "dids.status = ? OR  reseller_id > 0" and var << @search_status
@@ -91,7 +91,7 @@ class DidsController < ApplicationController
 
     total_dids = Did.count(:all, :conditions => [cond.join(" AND ")].concat(var)).to_f
     @total_pages = (total_dids / session[:items_per_page].to_f).ceil
-    @page = @total_pages  if @page > @total_pages
+    @page = @total_pages if @page > @total_pages
     @page = 1 if @page < 1
 
     @show_did_rates = !(session[:usertype] == "accountant" and session[:acc_manage_dids_opt_1] == 0 or reseller?)
@@ -105,7 +105,7 @@ class DidsController < ApplicationController
     @did = Did.find_by_id(params[:id])
     unless @did
       flash[:notice]=_('DID_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
   end
 
@@ -113,25 +113,25 @@ class DidsController < ApplicationController
     @did = Did.new
     @page_title = _('New_did')
     @page_icon = 'add.png'
-    if current_user.usertype == 'reseller' 
-      @providers = current_user.providers.find(:all, :conditions=>['hidden=?',0], :order => "name ASC")
+    if current_user.usertype == 'reseller'
+      @providers = current_user.providers.find(:all, :conditions => ['hidden=?', 0], :order => "name ASC")
     else
-      @providers = Provider.find(:all, :conditions=>['hidden=?',0], :order => "name ASC")
+      @providers = Provider.find(:all, :conditions => ['hidden=?', 0], :order => "name ASC")
     end
   end
 
   def create_did_rates(did, cache = nil)
     if cache
       values = ["'2000-01-01 23:59:59', 1, 'provider', 0.0, 0, 0.0, #{did.id}, '2000-01-01 00:00:00'",
-        "'2000-01-01 23:59:59', 1, 'owner', 0.0, 0, 0.0, #{did.id}, '2000-01-01 00:00:00'",
-        "'2000-01-01 23:59:59', 1, 'incoming', 0.0, 0, 0.0, #{did.id}, '2000-01-01 00:00:00'"
+                "'2000-01-01 23:59:59', 1, 'owner', 0.0, 0, 0.0, #{did.id}, '2000-01-01 00:00:00'",
+                "'2000-01-01 23:59:59', 1, 'incoming', 0.0, 0, 0.0, #{did.id}, '2000-01-01 00:00:00'"
       ]
       cache.add(values, true)
     else
       #create didrate for provider
       Didrate.new(:did_id => did.id, :rate_type => 'provider').save
       #create didrate for owner
-      Didrate.new(:did_id => did.id, :rate_type => 'owner' ).save
+      Didrate.new(:did_id => did.id, :rate_type => 'owner').save
       #create didrate for incoming
       Didrate.new(:did_id => did.id, :rate_type => 'incoming').save
     end
@@ -144,7 +144,7 @@ class DidsController < ApplicationController
   def create
     if params[:amount] == "one" # Create just one did
       pr = (current_user.usertype == 'reseller' and current_user.own_providers.to_i == 0) ? Confline.get_value("DID_default_provider_to_resellers").to_i.to_s : params[:provider]
-      @did = Did.new(:did => params[:did].to_s.strip, :provider_id => pr, :reseller_id=>current_user.id)
+      @did = Did.new(:did => params[:did].to_s.strip, :provider_id => pr, :reseller_id => current_user.id)
       if @did.save
         create_did_rates(@did)
         add_action(session[:user_id], 'did_created', @did.id)
@@ -168,13 +168,13 @@ class DidsController < ApplicationController
         action_cache = SQLCache.new("actions", "`data3`, `data`, `data4`, `target_id`, `action`, `date`, `processed`, `user_id`, `data2`, `target_type`")
         for d in int_start..int_end
           did = Did.new(
-            :did => d,
-            :status => "free",
-            :user_id => 0,
-            :device_id => 0,
-            :subscription_id => 0,
-            :reseller_id => current_user.id,
-            :provider_id => pr.strip)
+              :did => d,
+              :status => "free",
+              :user_id => 0,
+              :device_id => 0,
+              :subscription_id => 0,
+              :reseller_id => current_user.id,
+              :provider_id => pr.strip)
           if did.save
             create_did_rates(did, did_rate_cache)
             add_action(session[:user_id], 'did_created', did.id, action_cache)
@@ -195,13 +195,13 @@ class DidsController < ApplicationController
     if current_user.usertype == 'reseller'
       p = params[:did] ? params[:did][:provider_id] : nil
       pr_id = allow_manage_providers_tariffs? ? p : Confline.get_value("DID_default_provider_to_resellers").to_i.to_s
-      @provider = Provider.find(:first, :conditions=>["id=?", pr_id])
+      @provider = Provider.find(:first, :conditions => ["id=?", pr_id])
     else
-      @provider = Provider.find(:first, :conditions=>["id=?",params[:did][:provider_id]]) if params[:did] and params[:did][:provider_id]
+      @provider = Provider.find(:first, :conditions => ["id=?", params[:did][:provider_id]]) if params[:did] and params[:did][:provider_id]
     end
-    if !@provider or (current_user.usertype == 'reseller' and @provider and !current_user.providers.find(:first, :conditions=>['hidden=? AND id = ?',0, @provider.id]) and @provider.id != Confline.get_value("DID_default_provider_to_resellers").to_i)
+    if !@provider or (current_user.usertype == 'reseller' and @provider and !current_user.providers.find(:first, :conditions => ['hidden=? AND id = ?', 0, @provider.id]) and @provider.id != Confline.get_value("DID_default_provider_to_resellers").to_i)
       flash[:notice]=_('Provider_was_not_found')
-      redirect_to :action=>:list and return false
+      redirect_to :action => :list and return false
     end
     @amount = params[:amount]
     if @amount == "one"
@@ -214,9 +214,9 @@ class DidsController < ApplicationController
       @end=params[:did_end]
       if @start.length != @end.length
         flash[:notice]=_('DIDs_has_to_be_equal_in_length')
-        redirect_to :action=>:new and return false
+        redirect_to :action => :new and return false
       end
-      if (@start[0..0].to_i == 0  or @start.length < 10) or (@end[0..0].to_i == 0  or @end.length < 10)
+      if (@start[0..0].to_i == 0 or @start.length < 10) or (@end[0..0].to_i == 0 or @end.length < 10)
         @notice = _('DID_not_e164_compatible')
       end
     end
@@ -232,15 +232,15 @@ class DidsController < ApplicationController
 
     unless @did
       flash[:notice]=_('DID_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
     @page_title = _('Edit')+ ": " + @did.did
     @page_icon = 'edit.png'
 
     if current_user.usertype == 'reseller'
-      @providers = current_user.providers.find(:all, :conditions=>['hidden=?',0], :order => "name ASC")
+      @providers = current_user.providers.find(:all, :conditions => ['hidden=?', 0], :order => "name ASC")
     else
-      @providers = Provider.find(:all, :conditions=>['hidden=?',0], :order => "name ASC")
+      @providers = Provider.find(:all, :conditions => ['hidden=?', 0], :order => "name ASC")
     end
     @back_controller = "dids"
     @back_action = "list"
@@ -248,7 +248,7 @@ class DidsController < ApplicationController
     @back_action = params[:back_action] if params[:back_action]
     #users
     @free_users = User.find(:all, :order => "users.first_name ASC, users.last_name ASC",
-      :conditions => (reseller? ? ["hidden = 0 AND owner_id = ?", current_user.id] : "hidden = 0")
+                            :conditions => (reseller? ? ["hidden = 0 AND owner_id = ?", current_user.id] : "hidden = 0")
     )
 
     #devices
@@ -295,7 +295,7 @@ class DidsController < ApplicationController
     if @did.status == "active"
       @choice_active = true
       @choice_closed = true
-      @choice_active_dp = true  if @did.dialplan or @did.dialplan_id.to_i > 0
+      @choice_active_dp = true if @did.dialplan or @did.dialplan_id.to_i > 0
       @reseller_can_assing_to_trunk = Confline.get_value('Resellers_Allow_Assign_DID_To_Trunk').to_i == 1
     end
 
@@ -342,7 +342,7 @@ class DidsController < ApplicationController
       end
       unless did
         flash[:notice]=_('DID_was_not_found')
-        redirect_to :action=>:index and return false
+        redirect_to :action => :index and return false
       end
       did.sound_file_id = params[:did][:sound_file_id] if params[:did] and params[:did].has_key?(:sound_file_id)
 
@@ -365,7 +365,7 @@ class DidsController < ApplicationController
     end
 
     if params[:id]
-      redirect_to :action => 'edit', :id =>params[:id] and return false
+      redirect_to :action => 'edit', :id => params[:id] and return false
     else
       # @opts is beeing set in find_dids method
       if params[:back]
@@ -384,20 +384,20 @@ class DidsController < ApplicationController
       unless current_user.usertype == 'reseller'
         old_did_number = did.did
         if params[:did][:did] and params[:did][:did]!= did.did
-          did.did = params[:did][:did].to_i        
-        end                
+          did.did = params[:did][:did].to_i
+        end
         did.call_limit = params[:did][:call_limit].to_i
         did.call_limit = 0 if did.call_limit < 0
         did.comment = params[:did][:comment].to_s.strip if comment.to_i == 1
         did.user_id = params[:user_id] if params[:user_id]
-        did.device_id = params[:device_id] if params[:device_id]       
+        did.device_id = params[:device_id] if params[:device_id]
       else
         did.reseller_comment = params[:did][:reseller_comment].to_s.strip if comment.to_i == 1
       end
-      did.cid_name_prefix = params[:did][:cid_name_prefix]    
+      did.cid_name_prefix = params[:did][:cid_name_prefix]
       if did.save
         if params[:did][:did] != old_did_number
-          add_action2(session[:user_id], 'did_changed_did_number', did.id,"From: "+old_did_number.to_s)
+          add_action2(session[:user_id], 'did_changed_did_number', did.id, "From: "+old_did_number.to_s)
         end
         Action.add_action_hash(session[:user_id], {:target_type => 'provider', :target_id => params[:did][:provider_id], :action => 'did_edit_provider', :data => did.id})
         flash[:status] = _('Details_changed')
@@ -414,7 +414,7 @@ class DidsController < ApplicationController
       end
 
       extlines_did_not_active(did.id)
-      add_action(session[:user_id], 'did_made_available', did.id )
+      add_action(session[:user_id], 'did_made_available', did.id)
       flash[:status] = _('DID_made_available')
       #  redirect_to :action => 'edit', :id => did.id and return false
     end
@@ -423,14 +423,14 @@ class DidsController < ApplicationController
       old_dev_id = did.device_id
 
       did.assign(params[:device_id])
-      a=configure_extensions(did.device_id, {:no_redirect => true, :current_user=>current_user})
+      a=configure_extensions(did.device_id, {:no_redirect => true, :current_user => current_user})
       return false if !a
 
       if old_dev_id > 0
         dev = Device.where({:id => old_dev_id}).first
         if dev
           dev.primary_did_id = 0
-          a= configure_extensions(old_dev_id, {:no_redirect => true, :current_user=>current_user})
+          a= configure_extensions(old_dev_id, {:no_redirect => true, :current_user => current_user})
           return false if !a
         end
       end
@@ -440,10 +440,10 @@ class DidsController < ApplicationController
 
     if status == "closed"
       did.close
-      a=configure_extensions(did.device_id, {:no_redirect => true, :current_user=>current_user})
+      a=configure_extensions(did.device_id, {:no_redirect => true, :current_user => current_user})
       return false if !a
       extlines_did_not_active(did.id)
-      add_action(session[:user_id], 'did_closed', did.id )
+      add_action(session[:user_id], 'did_closed', did.id)
       flash[:status] = _('DID_closed')
     end
 
@@ -451,13 +451,13 @@ class DidsController < ApplicationController
     if status == "reserved" and ((did.reseller_id == 0 and !reseller?) or (reseller? and did.reseller_id != 0))
       did.reserve(params[:user_id])
       extlines_did_not_active(did.id)
-      add_action2(session[:user_id], 'did_reserved', did.id, params[:user_id] )
+      add_action2(session[:user_id], 'did_reserved', did.id, params[:user_id])
       flash[:status] = _('DID_reserved')
     end
 
     if status == "terminated"
       if did.device_id != 0
-        a=configure_extensions(did.device_id, {:no_redirect => true, :current_user=>current_user})
+        a=configure_extensions(did.device_id, {:no_redirect => true, :current_user => current_user})
         return false if !a
       end
       did.terminate
@@ -475,13 +475,13 @@ class DidsController < ApplicationController
       did = Did.find_by_id(params[:id])
       unless did
         flash[:notice]=_('DID_was_not_found')
-        redirect_to :action=>:index and return false
+        redirect_to :action => :index and return false
       end
       if params[:dp_id].to_i > 0
         dp = Dialplan.find_by_id(params[:dp_id])
         unless dp
           flash[:notice]=_('Dialplan_was_not_found')
-          redirect_to :action=>:index and return false
+          redirect_to :action => :index and return false
         end
         did.dialplan_id = dp.id
       else
@@ -551,7 +551,7 @@ class DidsController < ApplicationController
     @did = Did.find_by_id(params[:id])
     unless @did
       flash[:notice]=_('DID_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
 
     if assign_type == "callingcard"
@@ -582,18 +582,18 @@ class DidsController < ApplicationController
     did = Did.find_by_id(params[:id])
     unless did
       flash[:notice]=_('DID_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
-    didrates = did.didrates  
+    didrates = did.didrates
     id = did.id
-    if did.destroy  
-      didrates.each{ |dr| dr.destroy }
+    if did.destroy
+      didrates.each { |dr| dr.destroy }
       flash[:status] = _('Did_deleted')
       add_action(session[:user_id], 'did_deleted', id)
     else
       flash[:notice] = _('Did_can_not_delete')
     end
-    
+
     redirect_to :action => 'list'
   end
 
@@ -601,16 +601,16 @@ class DidsController < ApplicationController
     @page_title = _('Quick_Forwards')
 
     default = {
-      :items_per_page=> session[:items_per_page].to_i,
-      :page => "1",
-      :order_by => "did",
-      :order_desc => 0,
+        :items_per_page => session[:items_per_page].to_i,
+        :page => "1",
+        :order_by => "did",
+        :order_desc => 0,
     }
     @options = ((params[:clear] || !session[:quickforwarddids_stats]) ? default : session[:quickforwarddids_stats])
-    default.each{|key, value| @options[key] = params[key] if params[key]}
+    default.each { |key, value| @options[key] = params[key] if params[key] }
 
 
-    @options[:order_by_full] = @options[:order_by] + (@options[:order_desc].to_i == 1 ? " DESC": " ASC")
+    @options[:order_by_full] = @options[:order_by] + (@options[:order_desc].to_i == 1 ? " DESC" : " ASC")
 
     @qfd_dialplan = Dialplan.find(:first, :conditions => "dptype = 'quickforwarddids'", :order => "name ASC")
 
@@ -625,7 +625,7 @@ class DidsController < ApplicationController
       end
     end
     #if no rule set or blank - no dids for user
-    cond  = user.quickforwards_rule ? "AND dids.did REGEXP('^(#{regexp})')"  : "AND dids.did REGEXP('^$')"
+    cond = user.quickforwards_rule ? "AND dids.did REGEXP('^(#{regexp})')" : "AND dids.did REGEXP('^$')"
     sql = "SELECT quickforwarddids.*, dids.did FROM quickforwarddids
 JOIN dids ON (dids.id = quickforwarddids.did_id)
 JOIN dialplans ON (dids.dialplan_id = dialplans.id)
@@ -636,7 +636,7 @@ ORDER BY dids.did ASC"
     #@dids = []
     @dids2 = ActiveRecord::Base.connection.select_all(sql)
     did_id = []
-    @dids2.each{|p| did_id << p['did_id']} if @dids2
+    @dids2.each { |p| did_id << p['did_id'] } if @dids2
     did_cond = @dids2.size.to_i > 0 ? " AND dids.id NOT IN (#{did_id.join(',')}) " : ''
     sql = "SELECT * FROM (SELECT 0 AS qid, dids.did, 1 as not_edit, dids.id as did_id, '' as number, '' as description FROM dids
     JOIN dialplans ON (dids.dialplan_id = dialplans.id)
@@ -649,10 +649,10 @@ ORDER BY dids.did ASC"
      WHERE dialplans.dptype = 'quickforwarddids'  #{cond} AND quickforwarddids.user_id = '#{user_id}'
     GROUP BY quickforwarddids.id) AS v
     ORDER BY  #{@options[:order_by_full]}"
-    
+
     #if resellers user - select dids according to admins rule to reseller, then resellers rule to user
     if current_user.owner.usertype == "reseller"
-      resellers_user =  current_user
+      resellers_user = current_user
       if !resellers_user.quickforwards_rule or resellers_user.quickforwards_rule.rule_regexp.blank?
         regexp_second = '$'
       else
@@ -673,7 +673,7 @@ ORDER BY dids.did ASC"
 
     user_id = session[:user_id]
 
-    @qfdid = Quickforwarddid.find(:first, :conditions =>["did_id =? AND user_id = ?", params[:id], user_id])
+    @qfdid = Quickforwarddid.find(:first, :conditions => ["did_id =? AND user_id = ?", params[:id], user_id])
     if not @qfdid
       @qfdid = Quickforwarddid.new
       @qfdid.did_id = params[:id]
@@ -688,14 +688,14 @@ ORDER BY dids.did ASC"
 
     if  params[:number].length == 0
       flash[:notice] = _('Enter_number')
-      redirect_to :action => 'quickforwarddid_edit', :id => params[:did_id]  and return false
+      redirect_to :action => 'quickforwarddid_edit', :id => params[:did_id] and return false
     end
 
     if params[:id]
       qfdid = Quickforwarddid.find_by_id(params[:id])
       unless qfdid
         flash[:notice]=_('Quickforwarddid_was_not_found')
-        redirect_to :action=>:index and return false
+        redirect_to :action => :index and return false
       end
     else
       qfdid = Quickforwarddid.new
@@ -717,10 +717,10 @@ ORDER BY dids.did ASC"
     q = Quickforwarddid.find_by_id(params[:id])
     unless q
       flash[:notice]=_('Quickforwarddid_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
     q.destroy
-    add_action(session[:user_id], 'quickforwarddid_deletedt', params[:id] )
+    add_action(session[:user_id], 'quickforwarddid_deletedt', params[:id])
     flash[:status] = _('Number_deleted')
     redirect_to :action => 'quickforwarddids'
   end
@@ -734,7 +734,7 @@ ORDER BY dids.did ASC"
     @till=params[:till] if params[:till]
 
     unless reseller?
-      @providers = Provider.find(:all, :conditions=>['hidden=?',0], :order => "name ASC")
+      @providers = Provider.find(:all, :conditions => ['hidden=?', 0], :order => "name ASC")
       sql = "SELECT count(devices.id)  FROM devices
               left join users on (devices.user_id = users.id)
               where devices.istrunk = 1 and users.owner_id = '#{session[:user_id]}'"
@@ -745,13 +745,13 @@ ORDER BY dids.did ASC"
 
     @devices = current_user.load_users_devices(:all, {})
 
-    !params[:did_action].blank? and (1..4).include?(params[:did_action].to_i)  ? @did_action = params[:did_action].to_i : @did_action = 1
+    !params[:did_action].blank? and (1..4).include?(params[:did_action].to_i) ? @did_action = params[:did_action].to_i : @did_action = 1
     @did_action = 1 if @trunk.to_i == 0 and @did_action == 4
   end
 
   def confirm_did_action
-    params[:did_action] = 0 if reseller? and ![1,3,5].include?(params[:did_action].to_i)
-    opts = {:from => params[:did_start], :till=>params[:did_end]}
+    params[:did_action] = 0 if reseller? and ![1, 3, 5].include?(params[:did_action].to_i)
+    opts = {:from => params[:did_start], :till => params[:did_end]}
     if opts[:from].blank? or opts[:till].blank?
       flash[:notice] = _('Enter_DID_interval')
       redirect_to :action => :bulk_management and return false
@@ -766,15 +766,21 @@ ORDER BY dids.did ASC"
     opts[:device] = params[:device].to_i if params[:device] and !params[:device].strip.blank?
     opts[:active] = params[:active].to_i
     case params[:did_action].to_i
-    when 1 then opts[:action] = :dids_interval_edit
-    when 2 then opts[:action] = :dids_interval_delete
-    when 3 then opts[:action] = :dids_interval_rates
-    when 4 then opts[:action] = :dids_interval_trunk
-    when 5 then opts[:action] = :dids_interval_add_to_user
-    when 6 then opts[:action] = :dids_interval_assign_dialplan
-    else
-      flash[:notice] = _("Action_was_not_correct")
-      opts = {:action => :bulk_management}
+      when 1 then
+        opts[:action] = :dids_interval_edit
+      when 2 then
+        opts[:action] = :dids_interval_delete
+      when 3 then
+        opts[:action] = :dids_interval_rates
+      when 4 then
+        opts[:action] = :dids_interval_trunk
+      when 5 then
+        opts[:action] = :dids_interval_add_to_user
+      when 6 then
+        opts[:action] = :dids_interval_assign_dialplan
+      else
+        flash[:notice] = _("Action_was_not_correct")
+        opts = {:action => :bulk_management}
     end
     redirect_to opts and return false
   end
@@ -790,9 +796,9 @@ ORDER BY dids.did ASC"
     end
 
     @users = User.find(:all,
-      :select =>"users.id, users.username, users.first_name, users.last_name, #{SqlExport.nice_user_sql}",
-      :conditions => ["hidden = 0 AND owner_id = ?",user_id ],
-      :order => "nice_user ASC")
+                       :select => "users.id, users.username, users.first_name, users.last_name, #{SqlExport.nice_user_sql}",
+                       :conditions => ["hidden = 0 AND owner_id = ?", user_id],
+                       :order => "nice_user ASC")
     user = @users.first
     @devices = (user ? user.devices : [])
   end
@@ -815,7 +821,7 @@ ORDER BY dids.did ASC"
         var << @user.id
         @opts[:user] = @user.id
         if params[:device] and !params[:device].strip.blank?
-          @device = current_user.load_users_devices(:first, :conditions=>"devices.id = '#{params[:device]}'")
+          @device = current_user.load_users_devices(:first, :conditions => "devices.id = '#{params[:device]}'")
           if @device
             cond << "dids.device_id = ?"
             var << @device.id
@@ -833,9 +839,9 @@ ORDER BY dids.did ASC"
 
     @s_user = User.find(:first, :conditions => ["users.id = ?", params[:s_user]])
     if @s_user and @s_user.owner_id == correct_owner_id
-      
+
       if params[:s_device] and !params[:s_device].strip.blank?
-        @s_device = current_user.load_users_devices(:first, :conditions=>"devices.id = '#{params[:s_device]}'")
+        @s_device = current_user.load_users_devices(:first, :conditions => "devices.id = '#{params[:s_device]}'")
         unless @s_device
           flash[:notice] = _("Device_not_found")
           redirect_to({:action => 'dids_interval_add_to_user'}.merge(@opts)) and return false
@@ -870,7 +876,7 @@ ORDER BY dids.did ASC"
     @available_trunks = Device.find_by_sql(sql)
     if  @available_trunks.size.to_i == 0
       flash[:notice] = _('No_available_trunks')
-      redirect_to :controller =>"dids", :action=>"list"
+      redirect_to :controller => "dids", :action => "list"
     end
   end
 
@@ -886,7 +892,7 @@ ORDER BY dids.did ASC"
     @available_trunks = Device.count_by_sql(sql)
     if  @available_trunks.to_i == 0
       flash[:notice] = _('No_available_trunks')
-      redirect_to :controller =>"dids", :action=>"list"
+      redirect_to :controller => "dids", :action => "list"
     end
     @free_users = User.find(:all, :conditions => "hidden = 0")
   end
@@ -898,7 +904,7 @@ ORDER BY dids.did ASC"
     if reseller?
       @free_users = User.find(:all, :conditions => ["hidden = 0 AND owner_id = ?", current_user.id])
     else
-      @providers = Provider.find(:all, :conditions=>['hidden=?',0], :order => "name ASC")
+      @providers = Provider.find(:all, :conditions => ['hidden=?', 0], :order => "name ASC")
       @free_users = User.find(:all, :conditions => "hidden = 0")
     end
   end
@@ -931,11 +937,10 @@ ORDER BY dids.did ASC"
       end
 
       if reseller?
-        @dids = Did.find(:all, :conditions=>["did >= ? AND did <= ? AND dids.reseller_id = ? #{add_condition}",params[:from], params[:till], current_user.id])
+        @dids = Did.find(:all, :conditions => ["did >= ? AND did <= ? AND dids.reseller_id = ? #{add_condition}", params[:from], params[:till], current_user.id])
       else
-        @dids = Did.find(:all, :conditions=>["did >= ? AND did <= ? #{add_condition}",params[:from], params[:till]])
+        @dids = Did.find(:all, :conditions => ["did >= ? AND did <= ? #{add_condition}", params[:from], params[:till]])
       end
-
 
 
       for did in @dids
@@ -975,7 +980,7 @@ ORDER BY dids.did ASC"
         flash[:status] = _('Did_interval_rate_edited')
       end
 
-      redirect_to :action => 'dids_interval_rates', :from => params[:from], :till=>params[:till], :user =>params[:user]
+      redirect_to :action => 'dids_interval_rates', :from => params[:from], :till => params[:till], :user => params[:user]
 
     else
       update_rate(params[:id], params[:rate], params[:con_fee], params[:inc], params[:min_time])
@@ -1011,7 +1016,7 @@ ORDER BY dids.did ASC"
   def dids_interval_delete
     @page_title = _('Dids_interval_delete')
     @page_icon = "edit.png"
-    @providers = Provider.find(:all, :conditions=>['hidden=?',0], :order => "name ASC")
+    @providers = Provider.find(:all, :conditions => ['hidden=?', 0], :order => "name ASC")
   end
 
   # @dids, @from, @till, (@user, @device) in before filter
@@ -1022,7 +1027,7 @@ ORDER BY dids.did ASC"
     @ccdps = Dialplan.find(:all, :conditions => "dptype = 'callingcard'", :order => "name ASC")
     @abpdps = Dialplan.find(:all, :conditions => "dptype = 'authbypin'", :order => "name ASC")
 
-    @cbdps = Dialplan.find(:all, :conditions => "dptype = 'callback' AND data1 NOT IN ('#{@dids.map{|d| d.id}.join("','")}')", :order => "name ASC")
+    @cbdps = Dialplan.find(:all, :conditions => "dptype = 'callback' AND data1 NOT IN ('#{@dids.map { |d| d.id }.join("','")}')", :order => "name ASC")
 
     @qfddps = Dialplan.find(:all, :conditions => "dptype = 'quickforwarddids'", :order => "name ASC")
 
@@ -1041,7 +1046,7 @@ ORDER BY dids.did ASC"
       for did in @dids
         update_did(did, "free", 0)
         update_did(did, "terminated", 0)
-        did.didrates.each{|dr| dr.destroy}
+        did.didrates.each { |dr| dr.destroy }
         add_action(session[:user_id], 'did_deleted', did.id)
         flash[:status] = _('Did_deleted')
         did.destroy
@@ -1063,14 +1068,14 @@ ORDER BY dids.did ASC"
     end
 
     if params[:id]
-      redirect_to :action => 'edit', :id =>params[:id]
+      redirect_to :action => 'edit', :id => params[:id]
     else
       redirect_to({:action => 'dids_interval_delete'}.merge(@opts))
     end
   end
 
   def dids_export_to_csv
-    @providers = Provider.find(:all, :conditions=>['hidden=?',0], :order => "name ASC")
+    @providers = Provider.find(:all, :conditions => ['hidden=?', 0], :order => "name ASC")
 
     sql = "SELECT DISTINCT language FROM dids ORDER by language"
     @languages = ActiveRecord::Base.connection.select_all(sql)
@@ -1109,7 +1114,7 @@ ORDER BY dids.did ASC"
     cond += " AND language = '#{@search_language}' " if @search_language.length > 0
 
     if @search_status.length > 0
-      if  ['free','active'].include?(@search_status)
+      if  ['free', 'active'].include?(@search_status)
         cond += " AND status = '#{@search_status}' AND reseller_id = 0"
       elsif @search_status == 'reserved'
         cond += " AND status = '#{@search_status}' OR  reseller_id > 0"
@@ -1147,15 +1152,15 @@ ORDER BY dids.did ASC"
     filename = "DIDs.csv"
 
 
-    send_data(csv_string,   :type => 'text/csv; charset=utf-8; header=present',  :filename => filename)
+    send_data(csv_string, :type => 'text/csv; charset=utf-8; header=present', :filename => filename)
 
   end
 
   def regenerate_dialplan
-    dialplan = Dialplan.find(:first, :conditions =>["id = ? ", params[:id]])
+    dialplan = Dialplan.find(:first, :conditions => ["id = ? ", params[:id]])
     unless dialplan
       flash[:notice]=_('Quickforwarddid_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
     dialplan.regenerate_ivr_dialplan
     dialplan.data8 = 0
@@ -1174,7 +1179,7 @@ ORDER BY dids.did ASC"
     end
 
     #session[:integrity_check] = FunctionsController.integrity_recheck
-    redirect_to :controller=>"functions", :action => "integrity_check"
+    redirect_to :controller => "functions", :action => "integrity_check"
   end
 
   def DidsController::reformat_dialplans
@@ -1185,8 +1190,8 @@ ORDER BY dids.did ASC"
       dialplan.save
     end
   end
-  #FunctionsController.integrity_recheck
 
+  #FunctionsController.integrity_recheck
 
 
   def personal_dids
@@ -1196,9 +1201,9 @@ ORDER BY dids.did ASC"
     params[:page] ? @page = params[:page].to_i : @page = 1
     @total_pages = (Did.count(:all, :conditions => ["user_id = ?", user.id])/session[:items_per_page].to_f).ceil
     @dids = Did.find(:all,
-      :conditions => ["user_id = ?", user.id],
-      :offset => session[:items_per_page]*(@page-1),
-      :limit => session[:items_per_page])
+                     :conditions => ["user_id = ?", user.id],
+                     :offset => session[:items_per_page]*(@page-1),
+                     :limit => session[:items_per_page])
   end
 
   private
@@ -1212,15 +1217,15 @@ ORDER BY dids.did ASC"
 
   def set_search_param(param)
     session[:did_search_options] ||= {}
-    key = param.to_s.gsub(/search/,'s')
-    
+    key = param.to_s.gsub(/search/, 's')
+
     result = if params.has_key?(key)
-      params.fetch(key)
-    elsif session[:did_search_options].has_key?(key)
-      session[:did_search_options].fetch(key)
-    else
-      ""
-    end
+               params.fetch(key)
+             elsif session[:did_search_options].has_key?(key)
+               session[:did_search_options].fetch(key)
+             else
+               ""
+             end
     session[:did_search_options][key] = result.to_s
     instance_variable_set "@#{param}", result.to_s
   end
@@ -1248,7 +1253,7 @@ ORDER BY dids.did ASC"
     @from = params[:from].to_i
     @till =params[:till].to_i
     active = params[:active].to_i
-    @opts = {:from => @from, :till => @till, :active=>active.to_i}
+    @opts = {:from => @from, :till => @till, :active => active.to_i}
 
     var = [@from, @till]
     cond = ["dids.did BETWEEN ? AND ?"]
@@ -1285,7 +1290,7 @@ ORDER BY dids.did ASC"
     if active.to_i == 1
       cond << 'dids.status = ?'; var << 'active'
     end
-    @dids = Did.find(:all, :conditions=>[cond.join(" AND "), *var])
+    @dids = Did.find(:all, :conditions => [cond.join(" AND "), *var])
   end
 
   def check_dids_creation
@@ -1294,12 +1299,12 @@ ORDER BY dids.did ASC"
       redirect_to :controller => "callc", :action => 'main' and return false
     end
 
-    if current_user.usertype == 'reseller' and params[:provider] and current_user.own_providers.to_i == 1 and !current_user.providers.find(:first, :conditions=>"providers.id = #{params[:provider]}") and params[:provider] != Confline.get_value("DID_default_provider_to_resellers").to_i
+    if current_user.usertype == 'reseller' and params[:provider] and current_user.own_providers.to_i == 1 and !current_user.providers.find(:first, :conditions => "providers.id = #{params[:provider]}") and params[:provider] != Confline.get_value("DID_default_provider_to_resellers").to_i
       dont_be_so_smart
       redirect_to :controller => "callc", :action => 'main' and return false
     end
 
-    if current_user.usertype == 'reseller' and params[:provider] and current_user.own_providers.to_i == 0 and  params[:provider].to_i != Confline.get_value("DID_default_provider_to_resellers").to_i
+    if current_user.usertype == 'reseller' and params[:provider] and current_user.own_providers.to_i == 0 and params[:provider].to_i != Confline.get_value("DID_default_provider_to_resellers").to_i
       dont_be_so_smart
       redirect_to :controller => "callc", :action => 'main' and return false
     end
@@ -1320,18 +1325,18 @@ ORDER BY dids.did ASC"
     end
     if params[:status] == "active"
       device = Device.find(:first, :conditions => ["id = ?", params[:device_id]])
-      if current_user.usertype == 'reseller' and (!device or !Device.find(:first, :joins=>"LEFT JOIN users ON (devices.user_id = users.id)", :conditions=>"devices.id = #{device.id} and (users.owner_id = #{current_user.id} or users.id = #{current_user.id})"))
+      if current_user.usertype == 'reseller' and (!device or !Device.find(:first, :joins => "LEFT JOIN users ON (devices.user_id = users.id)", :conditions => "devices.id = #{device.id} and (users.owner_id = #{current_user.id} or users.id = #{current_user.id})"))
         dont_be_so_smart
         redirect_to :controller => :callc, :action => :main and return false
       end
     end
     if params[:did] and params[:did][:provider_id]
-      if current_user.usertype == 'reseller' and params[:did][:provider_id] and current_user.own_providers.to_i == 1 and !current_user.providers.find(:first, :conditions=>"providers.id = #{params[:did][:provider_id]}") and params[:did][:provider_id] != Confline.get_value("DID_default_provider_to_resellers").to_i
+      if current_user.usertype == 'reseller' and params[:did][:provider_id] and current_user.own_providers.to_i == 1 and !current_user.providers.find(:first, :conditions => "providers.id = #{params[:did][:provider_id]}") and params[:did][:provider_id] != Confline.get_value("DID_default_provider_to_resellers").to_i
         dont_be_so_smart
         redirect_to :controller => "callc", :action => 'main' and return false
       end
 
-      if current_user.usertype == 'reseller' and params[:did][:provider_id] and current_user.own_providers.to_i == 0 and  params[:did][:provider_id].to_i != Confline.get_value("DID_default_provider_to_resellers").to_i
+      if current_user.usertype == 'reseller' and params[:did][:provider_id] and current_user.own_providers.to_i == 0 and params[:did][:provider_id].to_i != Confline.get_value("DID_default_provider_to_resellers").to_i
         dont_be_so_smart
         redirect_to :controller => "callc", :action => 'main' and return false
       end

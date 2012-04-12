@@ -9,7 +9,7 @@ class CcshopController < ApplicationController
   before_filter :check_authentication, :only => [:card_details, :rates, :call_list, :speeddials, :speeddial_add_new, :speeddial_edit, :speeddial_update, :speeddial_destroy]
   before_filter :find_card, :only => [:card_details, :rates]
   before_filter :find_tariff, :only => [:generate_personal_rates_csv, :generate_personal_rates_pdf, :generate_personal_wholesale_rates_csv, :generate_personal_wholesale_rates_pdf]
-  before_filter :check_paypal, :only =>[:display_cart, :checkout, :empty_cart, :remove_from_cart]
+  before_filter :check_paypal, :only => [:display_cart, :checkout, :empty_cart, :remove_from_cart]
 
   def index
     redirect_to :action => 'list'
@@ -20,7 +20,7 @@ class CcshopController < ApplicationController
     join_sql = "LEFT JOIN (SELECT cardgroup_id, count(*) AS 'not_sold_count' FROM cards where sold = 0 GROUP BY cardgroup_id) AS not_sold ON cardgroups.id = not_sold.cardgroup_id"
     session[:ccshop_display_paypal] = Confline.get_value("Paypal_Enabled", 0)
     if session[:ccshop_display_paypal].to_i == 1
-      @cardgroups = Cardgroup.find(:all,:include => [:tax], :joins => join_sql,:conditions => "owner_id = 0 AND not_sold_count > 0", :order => "name ASC")
+      @cardgroups = Cardgroup.find(:all, :include => [:tax], :joins => join_sql, :conditions => "owner_id = 0 AND not_sold_count > 0", :order => "name ASC")
     end
     session[:default_currency] = Currency.find(1).name
   end
@@ -34,7 +34,7 @@ class CcshopController < ApplicationController
     if CC_Single_Login == 1
       card = Card.find(:first, :include => [:cardgroup], :conditions => ["CONCAT(cards.number, cards.pin) = ?", params["login"]])
     else
-      card = Card.find(:first, :include => [:cardgroup], :conditions => ["cards.number = ? AND cards.pin = ?",params["login_num"],params["login_pin"]])
+      card = Card.find(:first, :include => [:cardgroup], :conditions => ["cards.number = ? AND cards.pin = ?", params["login_num"], params["login_pin"]])
     end
 
     if card
@@ -72,7 +72,7 @@ class CcshopController < ApplicationController
 
   def call_list
     @page_title = _('Calls')
-    @card = Card.find(:first,:include=> [:cardgroup, :calls], :conditions => ["cards.id = ?", session[:card_id]])
+    @card = Card.find(:first, :include => [:cardgroup, :calls], :conditions => ["cards.id = ?", session[:card_id]])
     @calls = @card.calls
     @cg = @card.cardgroup
     @total_billsec = 0
@@ -87,9 +87,8 @@ class CcshopController < ApplicationController
   ############# CART ####################
 
 
-
   def add_to_cart
-    cg = Cardgroup.find(:first,:include => [:tax], :conditions => ["cardgroups.id = ? AND cardgroups.owner_id = 0",params[:id]])
+    cg = Cardgroup.find(:first, :include => [:tax], :conditions => ["cardgroups.id = ? AND cardgroups.owner_id = 0", params[:id]])
     @cart = find_cart
     params[:cards] ? amount = params[:cards][:amount].to_i : amount = 0
     success = true
@@ -143,7 +142,7 @@ class CcshopController < ApplicationController
 
     @paypal_return_url = Web_URL + Web_Dir + "/ccshop/paypal_complete"
     @paypal_cancel_url = Web_URL + Web_Dir + "/ccshop/display_cart"
-    @paypal_ipn_url =    Web_URL + Web_Dir + "/ccshop/paypal_ipn"
+    @paypal_ipn_url = Web_URL + Web_Dir + "/ccshop/paypal_ipn"
     @paypal_currency = Confline.get_value("Paypal_Default_Currency")
 
     #	@hanza_ipn_url = "https://lt.hanza.net/cgi-bin/lip/pangalink.jsp"
@@ -164,11 +163,11 @@ class CcshopController < ApplicationController
       #begin
       cclineitems = @cart.items
       cardgroups = {}
-      cclineitems.each{ |cclineitem|
+      cclineitems.each { |cclineitem|
         cardgroups[cclineitem.cardgroup_id] ? cardgroups[cclineitem.cardgroup_id] += 1 : cardgroups[cclineitem.cardgroup_id] = 1
       }
       cardgroups.each {
-        |id ,count| Cclineitem.new(:ccorder_id => @order.id, :cardgroup_id => id, :quantity => count, :price => Cardgroup.find(:first, :conditions => ["id = ?", id]).price).save
+          |id, count| Cclineitem.new(:ccorder_id => @order.id, :cardgroup_id => id, :quantity => count, :price => Cardgroup.find(:first, :conditions => ["id = ?", id]).price).save
       }
       #end
     end
@@ -252,7 +251,7 @@ class CcshopController < ApplicationController
     @sold_cards = []
     @tx = session[:tx]
     @cart=find_cart
-    if @order=Ccorder.find(:first, :conditions => [ "transaction_id = ?", @tx])
+    if @order=Ccorder.find(:first, :conditions => ["transaction_id = ?", @tx])
       @status = 1
       if @order.completed == 0
         # providing with items which are sold
@@ -264,7 +263,7 @@ class CcshopController < ApplicationController
             # new card to sell
             @card = cg.groups_salable_card
             if @card
-              item.card_id=@card.id  #saving additional field to recognize card later
+              item.card_id=@card.id #saving additional field to recognize card later
               @sold_cards << @card
               @card.sold = 1
               @card.save
@@ -308,12 +307,12 @@ class CcshopController < ApplicationController
     @dgroups = Destinationgroup.find(:all, :order => "name ASC, desttype ASC")
 
     @st = "A"
-    @st = params[:st].upcase  if params[:st]
+    @st = params[:st].upcase if params[:st]
 
     @page = 1
     @page = params[:page].to_i if params[:page]
 
-    @rates = @tariff.rates_by_st(@st,0,10000)
+    @rates = @tariff.rates_by_st(@st, 0, 10000)
     @total_pages = (@rates.size.to_f / session[:items_per_page].to_f).ceil
     @all_rates = @rates
     @rates = []
@@ -352,7 +351,7 @@ class CcshopController < ApplicationController
     @rate_details = Ratedetail.find(:all, :conditions => "rate_id = #{rate.id.to_s}", :order => "rate DESC")
     if @rate_details.size > 0
       @rate_increment_s=@rate_details[0]['increment_s']
-      @rate_cur, @rate_free = Currency.count_exchange_prices({:exrate=>exrate, :prices=>[@rate_details[0]['rate'].to_f, @rate_details[0]['connection_fee'].to_f]})
+      @rate_cur, @rate_free = Currency.count_exchange_prices({:exrate => exrate, :prices => [@rate_details[0]['rate'].to_f, @rate_details[0]['connection_fee'].to_f]})
     end
     @rate_details
   end
@@ -366,7 +365,7 @@ class CcshopController < ApplicationController
     @page_icon = "book.png"
 
     @card = Card.find(:first, :conditions => ["id = ?", session[:card_id]])
-    @sp = Phonebook.find(:all, :conditions => ["card_id = ?",session[:card_id]])
+    @sp = Phonebook.find(:all, :conditions => ["card_id = ?", session[:card_id]])
   end
 
   def speeddial_add_new
@@ -438,10 +437,10 @@ class CcshopController < ApplicationController
   end
 
   def generate_personal_rates_pdf
-    rates = Rate.joins('LEFT JOIN destinationgroups on (destinationgroups.id = rates.destinationgroup_id)').where(['rates.tariff_id = ?',@tariff.id]).order('destinationgroups.name, destinationgroups.desttype ASC').all
+    rates = Rate.joins('LEFT JOIN destinationgroups on (destinationgroups.id = rates.destinationgroup_id)').where(['rates.tariff_id = ?', @tariff.id]).order('destinationgroups.name, destinationgroups.desttype ASC').all
     options = {
-        :name=>@tariff.name,
-        :pdf_name=>_('Users_rates'),
+        :name => @tariff.name,
+        :pdf_name => _('Users_rates'),
         :currency => session[:show_currency]
     }
     pdf = PdfGen::Generate.generate_rates_header(options)
@@ -456,7 +455,7 @@ class CcshopController < ApplicationController
     if testing?
       render :text => @tariff.generate_user_rates_csv(session)
     else
-      send_data(@tariff.generate_user_rates_csv(session),   :type => 'text/csv; charset=utf-8; header=present',  :filename => filename)
+      send_data(@tariff.generate_user_rates_csv(session), :type => 'text/csv; charset=utf-8; header=present', :filename => filename)
     end
   end
 
@@ -475,34 +474,34 @@ class CcshopController < ApplicationController
     sql = "SELECT rates.* FROM rates, destinations, directions WHERE rates.tariff_id = #{@tariff.id} AND rates.destination_id = destinations.id AND destinations.direction_code = directions.code ORDER by directions.name ASC;"
     rates = Rate.find_by_sql(sql)
     options = {
-      #font size
-      :fontsize => 6,
-      :title_fontsize1 => 16,
-      :title_fontsize2 => 10,
-      :header_size_add => 1,
-      :page_number_size => 8,
-      #positions
-      :first_page_pos => 150,
-      :second_page_pos => 70,
-      :page_num_pos => 780,
-      :header_eleveation => 20,
-      :step_size => 15,
-      :title_pos1 => 50,
-      :title_pos2 => 70,
+        #font size
+        :fontsize => 6,
+        :title_fontsize1 => 16,
+        :title_fontsize2 => 10,
+        :header_size_add => 1,
+        :page_number_size => 8,
+        #positions
+        :first_page_pos => 150,
+        :second_page_pos => 70,
+        :page_num_pos => 780,
+        :header_eleveation => 20,
+        :step_size => 15,
+        :title_pos1 => 50,
+        :title_pos2 => 70,
 
-      :first_page_items => 40,
-      :second_page_items => 45,
+        :first_page_items => 40,
+        :second_page_items => 45,
 
-      # col possitions
-      :col1_x => 30,
-      :col2_x => 205,
-      :col3_x => 250,
-      :col4_x => 310,
-      :col5_x => 350,
-      :col6_x => 420,
-      :col7_x => 470,
+        # col possitions
+        :col1_x => 30,
+        :col2_x => 205,
+        :col3_x => 250,
+        :col4_x => 310,
+        :col5_x => 350,
+        :col6_x => 420,
+        :col7_x => 470,
 
-      :currency => session[:show_currency]
+        :currency => session[:show_currency]
     }
     pdf = PdfGen::Generate.generate_personal_wholesale_rates_pdf(rates, @tariff, nil, options)
     send_data pdf.render, :filename => "Rates-#{(session[:show_currency]).to_s}.pdf", :type => "application/pdf"
@@ -527,7 +526,7 @@ class CcshopController < ApplicationController
   end
 
   def find_card
-    @card = Card.find(:first, :include => [:cardgroup], :conditions => ["cards.id = ?",session[:card_id]])
+    @card = Card.find(:first, :include => [:cardgroup], :conditions => ["cards.id = ?", session[:card_id]])
 
     unless @card && @card.cardgroup
       flash[:notice] = _('Cardgroup_was_not_found')
@@ -543,26 +542,28 @@ class CcshopController < ApplicationController
   end
 
   def find_tariff
-    @tariff = Tariff.find(:first, :conditions=>['id=?', params[:id]])
+    @tariff = Tariff.find(:first, :conditions => ['id=?', params[:id]])
 
     unless @tariff
       flash[:notice]=_('Tariff_was_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
 
     unless @tariff.real_currency
       flash[:notice]=_('Tariff_currency_not_found')
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
   end
 
-  def testing?; params[:test]; end
+  def testing?;
+    params[:test];
+  end
 
   def check_paypal
     if Confline.get_value("Paypal_Enabled", 0).to_i == 0
       dont_be_so_smart
-      redirect_to :action=>:index and return false
+      redirect_to :action => :index and return false
     end
   end
-  
+
 end

@@ -1,191 +1,196 @@
-<tr><td height="20"></td></tr>
+<tr>
+  <td height="20"></td>
+</tr>
 
 <tr>
   <td class="bottom_border">
     <b><%= _('Network_related') %></b>
   </td>
 </tr>
-<tr><td height="10"></td></tr>
+<tr>
+  <td height="10"></td>
+</tr>
 <tr>
   <td valign="top">
 
     <table class="simple">
-      <%if @device
-        device_host = @device.host
-        device_ipaddr = @device.ipaddr
-        device_port = @device.port
-        device_regseconds = @device.regseconds
-        device_canreinvite = @device.canreinvite
-        device_nat = @device.nat
-        device_qualify = @device.qualify
-      else
-        device_host = Confline.get_value("Default_device_host", session[:user_id])
-        device_ipaddr = Confline.get_value("Default_device_ipaddr", session[:user_id])
-        device_port = Confline.get_value("Default_device_port", session[:user_id])
-        device_regseconds = Confline.get_value("Default_device_regseconds", session[:user_id]).to_i
-        device_canreinvite = Confline.get_value("Default_device_canreinvite", session[:user_id])
-        device_nat = Confline.get_value("Default_device_nat", session[:user_id])
-        device_qualify = Confline.get_value("Default_device_qualify", session[:user_id])
-      end
+      <% if @device
+           device_host = @device.host
+           device_ipaddr = @device.ipaddr
+           device_port = @device.port
+           device_regseconds = @device.regseconds
+           device_canreinvite = @device.canreinvite
+           device_nat = @device.nat
+           device_qualify = @device.qualify
+         else
+           device_host = Confline.get_value("Default_device_host", session[:user_id])
+           device_ipaddr = Confline.get_value("Default_device_ipaddr", session[:user_id])
+           device_port = Confline.get_value("Default_device_port", session[:user_id])
+           device_regseconds = Confline.get_value("Default_device_regseconds", session[:user_id]).to_i
+           device_canreinvite = Confline.get_value("Default_device_canreinvite", session[:user_id])
+           device_nat = Confline.get_value("Default_device_nat", session[:user_id])
+           device_qualify = Confline.get_value("Default_device_qualify", session[:user_id])
+         end
 
-    %>
+      %>
       <script type="text/javascript">
-        //<![CDATA[
-        Event.observe(window, 'load', function() {
-        var dyncheck = $('dynamic_check');
-        var port = $('port');
-        var host = $('host');
-        var ipauth = $('ip_authentication');
+          //<![CDATA[
+          Event.observe(window, 'load', function () {
+              var dyncheck = $('dynamic_check');
+              var port = $('port');
+              var host = $('host');
+              var ipauth = $('ip_authentication');
 
-        Event.observe(dyncheck, 'click', function() {
-        if (dyncheck.checked) {
-        host.disabled = true;
-        port.disabled = true;
-        host.value = "dynamic";
-        if (ipauth) {
-        ipauth.disabled = true;
-        document.getElementById('view_ip').innerHTML = '';
-        }
-        } else {
-        host.disabled = false;
-        port.disabled = false;
-        host.value = "";
-        if (ipauth) {
-        ipauth.disabled = false;
-        }
-        }
-        });
-        });
-        //]]>
+              Event.observe(dyncheck, 'click', function () {
+                  if (dyncheck.checked) {
+                      host.disabled = true;
+                      port.disabled = true;
+                      host.value = "dynamic";
+                      if (ipauth) {
+                          ipauth.disabled = true;
+                          document.getElementById('view_ip').innerHTML = '';
+                      }
+                  } else {
+                      host.disabled = false;
+                      port.disabled = false;
+                      host.value = "";
+                      if (ipauth) {
+                          ipauth.disabled = false;
+                      }
+                  }
+              });
+          });
+          //]]>
       </script>
       <tr>
-        <td> <%= _('Host') %>:   </td>
+        <td> <%= _('Host') %>:</td>
         <td>
           <% if device_host == "dynamic" %>
-            <%= text_field_tag 'host', device_host, "class" => "input", :disabled => "disabled", :onkeyup=>"add_ip(this.value);" %>
-            <%= _("Dynamic") %>?
-            <%= check_box_tag 'dynamic_check', value = "1", checked = true %>
+              <%= text_field_tag 'host', device_host, "class" => "input", :disabled => "disabled", :onkeyup => "add_ip(this.value);" %>
+              <%= _("Dynamic") %>?
+              <%= check_box_tag 'dynamic_check', value = "1", checked = true %>
           <% else %>
-            <%= text_field_tag 'host', device_host, "class" => "input", :onkeyup=>"add_ip(this.value);" %>
-            <%= _("Dynamic") %>?
-            <%= check_box_tag 'dynamic_check', value = "1", checked = false %>
+              <%= text_field_tag 'host', device_host, "class" => "input", :onkeyup => "add_ip(this.value);" %>
+              <%= _("Dynamic") %>?
+              <%= check_box_tag 'dynamic_check', value = "1", checked = false %>
           <% end %>
           <script type="text/javascript">
-            //<![CDATA[
-            function add_ip(value) {
-            document.getElementById('view_ip').innerHTML = value;
-            }
+              //<![CDATA[
+              function add_ip(value) {
+                  document.getElementById('view_ip').innerHTML = value;
+              }
           </script>
         </td>
       </tr>
 
       <tr>
-        <td> <%= _('IP_Address') %>:   </td>
-        <td> <b><span id="view_ip"><%= device_ipaddr %> </span></b></td>
+        <td> <%= _('IP_Address') %>:</td>
+        <td><b><span id="view_ip"><%= device_ipaddr %> </span></b></td>
       </tr>
 
       <tr>
-        <td> <%= _('Port') %>:   </td>
+        <td> <%= _('Port') %>:</td>
         <td>
-          <% if device_host != "dynamic"%>
-            <%= text_field_tag 'port', device_port, "class" => "input" %>
+          <% if device_host != "dynamic" %>
+              <%= text_field_tag 'port', device_port, "class" => "input" %>
           <% else %>
-            <%= text_field_tag 'port', device_port, "class" => "input", :disabled => "disabled" %>
+              <%= text_field_tag 'port', device_port, "class" => "input", :disabled => "disabled" %>
           <% end %>
         </td>
       </tr>
 
       <% if !@device.username.blank? %>
-        <tr>
-          <td id='registration_expire'>
-            <% if @device_type == "SIP" %>
-              <%= _('Registration_will_expire') %>:
-            <% else %>
-              <%= _('Last_time_registered') %>:
-            <% end %>
-          </td>
-          <td id='registration_expire_time'>
-            <b>
-              <% if device_regseconds.to_i > 0 %>
-                <%= nice_date_time(Time.at(device_regseconds)) %>
+          <tr>
+            <td id='registration_expire'>
+              <% if @device_type == "SIP" %>
+                  <%= _('Registration_will_expire') %>:
               <% else %>
-                <%= _('Never') %>
+                  <%= _('Last_time_registered') %>:
               <% end %>
+            </td>
+            <td id='registration_expire_time'>
+              <b>
+                <% if device_regseconds.to_i > 0 %>
+                    <%= nice_date_time(Time.at(device_regseconds)) %>
+                <% else %>
+                    <%= _('Never') %>
+                <% end %>
 
-            </b>
-          </td>
-        </tr>
+              </b>
+            </td>
+          </tr>
       <% end %>
 
       <% if session[:usertype] != "reseller" %>
-        <tr>
-          <td colspan=2>
-            <%= _('Media_control') %> - <%= _('canreinvite') %>/<%= _('transfer') %>:
-            <%= radio_button_tag('canreinvite', 'no', checked = (device_canreinvite == 'no') ) %> <%= _('No') %>
-            <%= radio_button_tag('canreinvite', 'yes', checked = (device_canreinvite == 'yes') ) %> <%= _('Yes') %>
-          </td>
-        </tr>
-        <script type="text/javascript">
-        //<![CDATA[
-        function disable_media_control_if_necesary(checked, value){
-        /*if some other than SIP device type was selected, then disable
-        canreinvite option completly*/
-          var canreinvite_yes = $('canreinvite_yes');
-          var canreinvite_no = $('canreinvite_no');
+          <tr>
+            <td colspan=2>
+              <%= _('Media_control') %> - <%= _('canreinvite') %>/<%= _('transfer') %>:
+              <%= radio_button_tag('canreinvite', 'no', checked = (device_canreinvite == 'no')) %> <%= _('No') %>
+              <%= radio_button_tag('canreinvite', 'yes', checked = (device_canreinvite == 'yes')) %> <%= _('Yes') %>
+            </td>
+          </tr>
+          <script type="text/javascript">
+              //<![CDATA[
+              function disable_media_control_if_necesary(checked, value) {
+                  /*if some other than SIP device type was selected, then disable
+                   canreinvite option completly*/
+                  var canreinvite_yes = $('canreinvite_yes');
+                  var canreinvite_no = $('canreinvite_no');
 
-          if(checked){
-            var enable = (value != 'SIP');
-            canreinvite_yes.disabled = enable;
-            canreinvite_no.disabled = enable;
-          }
-        }
-
-        /*add event listener for onload event and for onclick event for all device
-        type checkboxes.
-        TODO: should be using jquery to get element by name*/
-        Event.observe(window, 'load', function() {
-          var device_types = document.getElementsByName('device[device_type]')//$("input[name='device[device_type]']");
-          for (var i = 0; i < device_types.length; i++){
-            var type = device_types[i]
-            disable_media_control_if_necesary(type.checked, type.value);
-            
-            Event.observe(type, 'click', function(e){
-              var type = e.findElement();              
-              disable_media_control_if_necesary(type.checked, type.value);
-            })
-         }
-
-         if($('registration_expire') && $('device[device_type]_sip').checked){
-            Event.observe($('ip_authentication'), 'change', function(e){
-              if($('ip_authentication').checked){
-                $('registration_expire').hide();
-              }else{
-                $('registration_expire').show();
+                  if (checked) {
+                      var enable = (value != 'SIP');
+                      canreinvite_yes.disabled = enable;
+                      canreinvite_no.disabled = enable;
+                  }
               }
-            })
-          }
 
-        })
-        //]]>
-        </script>
+              /*add event listener for onload event and for onclick event for all device
+               type checkboxes.
+               TODO: should be using jquery to get element by name*/
+              Event.observe(window, 'load', function () {
+                  var device_types = document.getElementsByName('device[device_type]')//$("input[name='device[device_type]']");
+                  for (var i = 0; i < device_types.length; i++) {
+                      var type = device_types[i]
+                      disable_media_control_if_necesary(type.checked, type.value);
+
+                      Event.observe(type, 'click', function (e) {
+                          var type = e.findElement();
+                          disable_media_control_if_necesary(type.checked, type.value);
+                      })
+                  }
+
+                  if ($('registration_expire') && $('device[device_type]_sip').checked) {
+                      Event.observe($('ip_authentication'), 'change', function (e) {
+                          if ($('ip_authentication').checked) {
+                              $('registration_expire').hide();
+                          } else {
+                              $('registration_expire').show();
+                          }
+                      })
+                  }
+
+              })
+              //]]>
+          </script>
       <% end %>
 
       <tr>
         <td colspan=2>
           NAT:
-          <%= radio_button_tag('device[nat]', 'no', checked = (device_nat == 'no') ) %> <%= _('No') %>
-          <%= radio_button_tag('device[nat]', 'yes', checked = (device_nat == 'yes') ) %> <%= _('Yes') %>
-          <%= radio_button_tag('device[nat]', 'never', checked = (device_nat == 'never') ) %> <%= _('Never') %>
-          <%= radio_button_tag('device[nat]', 'route', checked = (device_nat == 'route') ) %> <%= _('Route') %>
+          <%= radio_button_tag('device[nat]', 'no', checked = (device_nat == 'no')) %> <%= _('No') %>
+          <%= radio_button_tag('device[nat]', 'yes', checked = (device_nat == 'yes')) %> <%= _('Yes') %>
+          <%= radio_button_tag('device[nat]', 'never', checked = (device_nat == 'never')) %> <%= _('Never') %>
+          <%= radio_button_tag('device[nat]', 'route', checked = (device_nat == 'route')) %> <%= _('Route') %>
         </td>
       </tr>
 
       <tr>
         <td colspan=2>
           <%= _('Qualify') %>:
-          <%= radio_button_tag('qualify', 'no', device_qualify == 'no' ) %> <%= _('No') %>
-          <%= radio_button_tag('qualify', 'yes', device_qualify != 'no' ) %> <%= _('Yes') %>
-          &nbsp;<%= text_field_tag 'qualify_time', @qualify_time, "class" => "input", :size => "5", :maxlength => "10"   %>ms
+          <%= radio_button_tag('qualify', 'no', device_qualify == 'no') %> <%= _('No') %>
+          <%= radio_button_tag('qualify', 'yes', device_qualify != 'no') %> <%= _('Yes') %>
+          &nbsp;<%= text_field_tag 'qualify_time', @qualify_time, "class" => "input", :size => "5", :maxlength => "10" %>
+          ms
         </td>
       </tr>
 

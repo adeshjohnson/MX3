@@ -8,21 +8,21 @@ module ActiveMerchant #:nodoc:
     class PaypalExpressGateway < Gateway
       include PaypalCommonAPI
       include PaypalExpressCommon
-      
+
       self.test_redirect_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='
       self.supported_countries = ['US']
       self.homepage_url = 'https://www.paypal.com/cgi-bin/webscr?cmd=xpt/merchant/ExpressCheckoutIntro-outside'
       self.display_name = 'PayPal Express Checkout'
-      
+
       def setup_authorization(money, options = {})
         requires!(options, :return_url, :cancel_return_url)
-        
+
         commit 'SetExpressCheckout', build_setup_request('Authorization', money, options)
       end
-      
+
       def setup_purchase(money, options = {})
         requires!(options, :return_url, :cancel_return_url)
-        
+
         commit 'SetExpressCheckout', build_setup_request('Sale', money, options)
       end
 
@@ -32,13 +32,13 @@ module ActiveMerchant #:nodoc:
 
       def authorize(money, options = {})
         requires!(options, :token, :payer_id)
-      
+
         commit 'DoExpressCheckoutPayment', build_sale_or_authorization_request('Authorization', money, options)
       end
 
       def purchase(money, options = {})
         requires!(options, :token, :payer_id)
-        
+
         commit 'DoExpressCheckoutPayment', build_sale_or_authorization_request('Sale', money, options)
       end
 
@@ -54,10 +54,10 @@ module ActiveMerchant #:nodoc:
 
         xml.target!
       end
-      
+
       def build_sale_or_authorization_request(action, money, options)
         currency_code = options[:currency] || currency(money)
-        
+
         xml = Builder::XmlMarkup.new :indent => 2
         xml.tag! 'DoExpressCheckoutPaymentReq', 'xmlns' => PAYPAL_NAMESPACE do
           xml.tag! 'DoExpressCheckoutPaymentRequest', 'xmlns:n2' => EBAY_NAMESPACE do
@@ -68,17 +68,17 @@ module ActiveMerchant #:nodoc:
               xml.tag! 'n2:PayerID', options[:payer_id]
               xml.tag! 'n2:PaymentDetails' do
                 xml.tag! 'n2:OrderTotal', amount(money), 'currencyID' => currency_code
-                
+
                 # All of the values must be included together and add up to the order total
-                if [:subtotal, :shipping, :handling, :tax].all?{ |o| options.has_key?(o) }
+                if [:subtotal, :shipping, :handling, :tax].all? { |o| options.has_key?(o) }
                   xml.tag! 'n2:ItemTotal', amount(options[:subtotal]), 'currencyID' => currency_code
-                  xml.tag! 'n2:ShippingTotal', amount(options[:shipping]),'currencyID' => currency_code
-                  xml.tag! 'n2:HandlingTotal', amount(options[:handling]),'currencyID' => currency_code
+                  xml.tag! 'n2:ShippingTotal', amount(options[:shipping]), 'currencyID' => currency_code
+                  xml.tag! 'n2:HandlingTotal', amount(options[:handling]), 'currencyID' => currency_code
                   xml.tag! 'n2:TaxTotal', amount(options[:tax]), 'currencyID' => currency_code
                 end
-                
+
                 xml.tag! 'n2:NotifyURL', options[:notify_url]
-                xml.tag! 'n2:ButtonSource', application_id.to_s.slice(0,32) unless application_id.blank?
+                xml.tag! 'n2:ButtonSource', application_id.to_s.slice(0, 32) unless application_id.blank?
               end
             end
           end
@@ -107,14 +107,14 @@ module ActiveMerchant #:nodoc:
               xml.tag! 'n2:OrderDescription', options[:description]
               xml.tag! 'n2:BuyerEmail', options[:email] unless options[:email].blank?
               xml.tag! 'n2:InvoiceID', options[:order_id]
-        
+
               # Customization of the payment page
               xml.tag! 'n2:PageStyle', options[:page_style] unless options[:page_style].blank?
               xml.tag! 'n2:cpp-image-header', options[:header_image] unless options[:header_image].blank?
               xml.tag! 'n2:cpp-header-back-color', options[:header_background_color] unless options[:header_background_color].blank?
               xml.tag! 'n2:cpp-header-border-color', options[:header_border_color] unless options[:header_border_color].blank?
               xml.tag! 'n2:cpp-payflow-color', options[:background_color] unless options[:background_color].blank?
-              
+
               xml.tag! 'n2:LocaleCode', options[:locale] unless options[:locale].blank?
             end
           end
@@ -122,7 +122,7 @@ module ActiveMerchant #:nodoc:
 
         xml.target!
       end
-      
+
       def build_response(success, message, response, options = {})
         PaypalExpressResponse.new(success, message, response, options)
       end

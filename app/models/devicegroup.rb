@@ -13,7 +13,7 @@ class Devicegroup < ActiveRecord::Base
     self.address_id = user_address_id
     self.save
   end
-  
+
 
   def destroy_everything
     #not possible to destroy a devgroup if it contains devices

@@ -4,55 +4,55 @@ require 'test_helper'
 class SecurePayAuTest < Test::Unit::TestCase
   def setup
     @gateway = SecurePayAuGateway.new(
-                 :login => 'login',
-                 :password => 'password'
-               )
+        :login => 'login',
+        :password => 'password'
+    )
 
     @credit_card = credit_card
     @amount = 100
-    
-    @options = { 
-      :order_id => '1',
-      :billing_address => address,
-      :description => 'Store Purchase'
+
+    @options = {
+        :order_id => '1',
+        :billing_address => address,
+        :description => 'Store Purchase'
     }
   end
-  
+
   def test_successful_purchase_with_live_data
     @gateway.expects(:ssl_post).returns(successful_live_purchase_response)
-    
+
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_instance_of Response, response
     assert_success response
-    
+
     assert_equal '000000', response.authorization
     assert response.test?
   end
-  
+
   def test_successful_purchase
     @gateway.expects(:ssl_post).returns(successful_purchase_response)
-    
+
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_instance_of Response, response
     assert_success response
-    
+
     assert_equal '024259', response.authorization
     assert response.test?
   end
 
   def test_unsuccessful_purchase
     @gateway.expects(:ssl_post).returns(failed_purchase_response)
-    
+
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_instance_of Response, response
     assert_failure response
     assert response.test?
     assert_equal "CARD EXPIRED", response.message
   end
-  
+
   def test_failed_login
     @gateway.expects(:ssl_post).returns(failed_login_response)
-    
+
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_instance_of Response, response
     assert_failure response
@@ -60,11 +60,11 @@ class SecurePayAuTest < Test::Unit::TestCase
   end
 
   private
-  
+
   def failed_login_response
     '<SecurePayMessage><Status><statusCode>504</statusCode><statusDescription>Invalid merchant ID</statusDescription></Status></SecurePayMessage>'
   end
-  
+
   def successful_purchase_response
     <<-XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -111,7 +111,7 @@ class SecurePayAuTest < Test::Unit::TestCase
 </SecurePayMessage>
     XML
   end
-  
+
   def failed_purchase_response
     <<-XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -158,7 +158,7 @@ class SecurePayAuTest < Test::Unit::TestCase
 </SecurePayMessage>
     XML
   end
-  
+
   def successful_live_purchase_response
     <<-XML
     <?xml version="1.0" encoding="UTF-8"?>

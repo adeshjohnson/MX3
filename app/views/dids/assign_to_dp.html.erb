@@ -1,41 +1,43 @@
-
 <%= _('DID') %>: <%= @did.did %>
 <% if not @ccg.empty? %>
-  <br />
-  <br />
-  <br />
-  <b><%= _('Calling_Cards') %></b>
-  <br />
-  <br />
+    <br/>
+    <br/>
+    <br/>
+    <b><%= _('Calling_Cards') %></b>
+    <br/>
+    <br/>
 <% end %>
 
 <% for cg in @ccg %>
 
-<table class="maintable" width="100%">
-    <tr class="row1">
+    <table class="maintable" width="100%">
+      <tr class="row1">
         <td>
-<%= form_tag(:action => 'assign_dp', :id => @did.id) do %>
-    <br><b><%= _('Number_length') %>:</b> <%= cg[0] %><br>
-    <b><%= _('Pin_length') %>:</b> <%= cg[1] %><br>
+          <%= form_tag(:action => 'assign_dp', :id => @did.id) do %>
+              <br><b><%= _('Number_length') %>:</b> <%= cg[0] %>
+              <br>
+              <b><%= _('Pin_length') %>:</b> <%= cg[1] %>
+              <br>
 
-        <%= hidden_field_tag 'assign_type', "callingcard" %> 
-        <%= hidden_field_tag 'number_length', cg[0] %> 
-        <%= hidden_field_tag 'pin_length', cg[1] %> 
+              <%= hidden_field_tag 'assign_type', "callingcard" %>
+              <%= hidden_field_tag 'number_length', cg[0] %>
+              <%= hidden_field_tag 'pin_length', cg[1] %>
 
-    <b><%= _('Card_groups') %>:</b> <br>
-    <% for c in cg[2] %>
-        <%= c %><br>
-    <% end %>
+              <b><%= _('Card_groups') %>:</b> <br>
+              <% for c in cg[2] %>
+                  <%= c %>
+                  <br>
+              <% end %>
 
-    <b><%= _('Answer_channel') %>:</b> <%= check_box_tag 'answer', value = "1", checked = true %>
+              <b><%= _('Answer_channel') %>:</b> <%= check_box_tag 'answer', value = "1", checked = true %>
 
-    <br><br>
-  <%= submit_tag _('Assign'), :disable_with=>_('Processing..') %>
-<% end %>
+              <br><br>
+              <%= submit_tag _('Assign'), :disable_with => _('Processing..') %>
+          <% end %>
         </td>
-    </tr>
-</table>
-<br>
+      </tr>
+    </table>
+    <br>
 
 <% end %>
 
@@ -48,16 +50,16 @@
 
 
 <table class="maintable" width="100%">
-    <tr class="row1">
-        <td>
-<%= form_tag(:action => 'assign_dp', :id => @did.id) do %>
+  <tr class="row1">
+    <td>
+      <%= form_tag(:action => 'assign_dp', :id => @did.id) do %>
 
-        <%= hidden_field_tag 'assign_type', "authbypin" %> 
-            <br>
-  <%= submit_tag _('Assign'), :disable_with=>_('Processing..') %>
-<% end %>
-        </td>
-    </tr>
+          <%= hidden_field_tag 'assign_type', "authbypin" %>
+          <br>
+          <%= submit_tag _('Assign'), :disable_with => _('Processing..') %>
+      <% end %>
+    </td>
+  </tr>
 </table>
 <br>
 

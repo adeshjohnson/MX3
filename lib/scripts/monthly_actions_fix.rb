@@ -20,26 +20,26 @@ else
   require 'digest/sha1'
 
   options = {}
-  optparse = OptionParser.new do|opts|
+  optparse = OptionParser.new do |opts|
 
     # Define the options, and what they do
     options[:name] = nil
-    opts.on( '-n', '--name NAME', "Database name, default 'mor'" ) do|n|
+    opts.on('-n', '--name NAME', "Database name, default 'mor'") do |n|
       options[:name] = n
     end
 
     options[:user] = nil
-    opts.on( '-u', '--user USER', "Database user, default 'mor'" ) do|u|
+    opts.on('-u', '--user USER', "Database user, default 'mor'") do |u|
       options[:user] = u
     end
 
     options[:pasw] = nil
-    opts.on( '-p', '--password PASSWORD', "Database password, default 'mor'" ) do|p|
+    opts.on('-p', '--password PASSWORD', "Database password, default 'mor'") do |p|
       options[:pasw] = p
     end
 
     options[:host] = nil
-    opts.on( '-s', '--server HOST', "Database host, default 'localhost'" ) do|h|
+    opts.on('-s', '--server HOST', "Database host, default 'localhost'") do |h|
       options[:host] = h
     end
 
@@ -49,11 +49,11 @@ else
     #    end
 
     options[:gui_address] = nil
-    opts.on( '-g', '--gui ADDRESS', "Address to action monthly_actions, default 'http://localhost/billing/callc/monthly_actions'" ) do|h|
+    opts.on('-g', '--gui ADDRESS', "Address to action monthly_actions, default 'http://localhost/billing/callc/monthly_actions'") do |h|
       options[:gui_address] = h
     end
 
-    opts.on( '-h', '--help', 'Display this screen' ) do
+    opts.on('-h', '--help', 'Display this screen') do
       puts opts
       puts
       exit
@@ -66,10 +66,10 @@ else
 
   M_date = options[:date].to_s.empty? ? Time.mktime(Time.now.year, Time.now.month, 1, 0, 0, 0).to_time : options[:date].to_s
   Debug_file = '/tmp/monthly_actions_fix.log'
-  Database_name = options[:name].to_s.empty?  ? 'mor'  : options[:name]
-  Database_username = options[:user].to_s.empty?  ? 'mor'  : options[:user]
-  Database_password = options[:pasw].to_s.empty?  ? 'mor'  : options[:pasw]
-  Database_host =  options[:host].to_s.empty? ? 'localhost'  : options[:host]
+  Database_name = options[:name].to_s.empty? ? 'mor' : options[:name]
+  Database_username = options[:user].to_s.empty? ? 'mor' : options[:user]
+  Database_password = options[:pasw].to_s.empty? ? 'mor' : options[:pasw]
+  Database_host = options[:host].to_s.empty? ? 'localhost' : options[:host]
   Gui_address = options[:gui_address].to_s.empty? ? 'http://localhost/billing/callc/monthly_actions' : options[:gui_address]
 
   begin
@@ -82,7 +82,7 @@ else
     class User < ActiveRecord::Base
 
       def find_actions_sum
-        actions = Action.find(:all,:select=>'SUM(data2) as a_sum', :conditions=>['action=? AND DATE(date) = ? AND user_id=?', 'subscription_paid', M_date.to_date, self.id], :group=>'user_id')
+        actions = Action.find(:all, :select => 'SUM(data2) as a_sum', :conditions => ['action=? AND DATE(date) = ? AND user_id=?', 'subscription_paid', M_date.to_date, self.id], :group => 'user_id')
         if actions and actions.size.to_i > 0
           return actions[0].a_sum.to_f
         else
@@ -91,7 +91,7 @@ else
       end
 
       def find_payments_sum
-        actions = Payment.find(:all,:select=>'SUM(gross) as a_sum', :conditions=>['paymenttype=? AND DATE(shipped_at) = ? AND DATE(date_added) = ? AND user_id=?', 'subscription', M_date.to_date, M_date.to_date, self.id], :group=>'user_id')
+        actions = Payment.find(:all, :select => 'SUM(gross) as a_sum', :conditions => ['paymenttype=? AND DATE(shipped_at) = ? AND DATE(date_added) = ? AND user_id=?', 'subscription', M_date.to_date, M_date.to_date, self.id], :group => 'user_id')
         if actions and actions.size.to_i > 0
           return actions[0].a_sum.to_f
         else
@@ -112,12 +112,12 @@ else
       # ------- From Gui : user.rb
 
       def subscriptions_in_period(period_start, period_end)
-        period_start =  period_start.to_s(:db) if period_start.class == Time or period_start.class == Date
-        period_end =  period_end.to_s(:db) if period_end.class == Time or period_end.class == Date
+        period_start = period_start.to_s(:db) if period_start.class == Time or period_start.class == Date
+        period_end = period_end.to_s(:db) if period_end.class == Time or period_end.class == Date
         subs = Subscription.find(:all, :include => [:service], :conditions => ["(? BETWEEN activation_start AND activation_end OR ? BETWEEN activation_start AND activation_end OR (activation_start > ? AND activation_end < ?)) AND subscriptions.user_id = ?", period_start, period_end, period_start, period_end, self.id])
         prices = 0.to_f
 
-        subs.each{|s| prices += s.price_for_period(period_start, period_end) }
+        subs.each { |s| prices += s.price_for_period(period_start, period_end) }
         return prices.to_f
       end
     end
@@ -137,45 +137,45 @@ else
         end
         total_price = 0
         case service.servicetype
-        when "flat_rate"
-          start_date, end_date = subscription_period(period_start, period_end)
-          days_used =  end_date - start_date
-          if start_date.month == end_date.month and start_date.year == end_date.year
-            total_price = service.price
-          else
-            total_price = 0
-            if Subscription.months_between(start_date, end_date) > 1
-              # jei daugiau nei 1 menuo. Tarpe yra sveiku menesiu kuriem nereikia papildomai skaiciuoti intervalu
-              total_price += (Subscription.months_between(start_date, end_date)-1) * service.price
+          when "flat_rate"
+            start_date, end_date = subscription_period(period_start, period_end)
+            days_used = end_date - start_date
+            if start_date.month == end_date.month and start_date.year == end_date.year
+              total_price = service.price
+            else
+              total_price = 0
+              if Subscription.months_between(start_date, end_date) > 1
+                # jei daugiau nei 1 menuo. Tarpe yra sveiku menesiu kuriem nereikia papildomai skaiciuoti intervalu
+                total_price += (Subscription.months_between(start_date, end_date)-1) * service.price
+              end
+              #suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas
+              last_day_of_month = start_date.to_time.end_of_month.to_date
+              last_day_of_month2 = end_date.to_time.end_of_month.to_date
+              total_price += service.price
+              total_price += service.price/last_day_of_month2.day * (end_date.day)
             end
-            #suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas
-            last_day_of_month = start_date.to_time.end_of_month.to_date
-            last_day_of_month2 = end_date.to_time.end_of_month.to_date
-            total_price += service.price
-            total_price += service.price/last_day_of_month2.day * (end_date.day)
-          end
-        when "one_time_fee"
-          if activation_start >= period_start and activation_start <= period_end
-            total_price = service.price
-          end
-        when "periodic_fee"
-          start_date, end_date = subscription_period(period_start, period_end)
-          days_used =  end_date - start_date
-          if start_date.month == end_date.month and start_date.year == end_date.year
-            total_days = start_date.to_time.end_of_month.day
-            total_price = service.price / total_days * (days_used+1)
-          else
-            total_price = 0
-            if Subscription.months_between(start_date, end_date) > 1
-              # jei daugiau nei 1 menuo. Tarpe yra sveiku menesiu kuriem nereikia papildomai skaiciuoti intervalu
-              total_price += (Subscription.months_between(start_date, end_date)-1) * service.price
+          when "one_time_fee"
+            if activation_start >= period_start and activation_start <= period_end
+              total_price = service.price
             end
-            #suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas
-            last_day_of_month = start_date.to_time.end_of_month.to_date
-            last_day_of_month2 = end_date.to_time.end_of_month.to_date
-            total_price += service.price/last_day_of_month.day * (last_day_of_month - start_date+1).to_i
-            total_price += service.price/last_day_of_month2.day * (end_date.day)
-          end
+          when "periodic_fee"
+            start_date, end_date = subscription_period(period_start, period_end)
+            days_used = end_date - start_date
+            if start_date.month == end_date.month and start_date.year == end_date.year
+              total_days = start_date.to_time.end_of_month.day
+              total_price = service.price / total_days * (days_used+1)
+            else
+              total_price = 0
+              if Subscription.months_between(start_date, end_date) > 1
+                # jei daugiau nei 1 menuo. Tarpe yra sveiku menesiu kuriem nereikia papildomai skaiciuoti intervalu
+                total_price += (Subscription.months_between(start_date, end_date)-1) * service.price
+              end
+              #suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas
+              last_day_of_month = start_date.to_time.end_of_month.to_date
+              last_day_of_month2 = end_date.to_time.end_of_month.to_date
+              total_price += service.price/last_day_of_month.day * (last_day_of_month - start_date+1).to_i
+              total_price += service.price/last_day_of_month2.day * (end_date.day)
+            end
         end
         total_price
       end
@@ -242,7 +242,7 @@ else
     #------------- Conflines model ----------------------
     class Confline < ActiveRecord::Base
       def Confline.check_colldown
-        c_time = Confline.find(:first, :conditions=>'name = "monthly_actions_cooldown_time"')
+        c_time = Confline.find(:first, :conditions => 'name = "monthly_actions_cooldown_time"')
         time_set = Time.parse(c_time.value, Time.now-1.year) if c_time
         unless time_set and time_set + 2.hours > Time.now
         else
@@ -273,17 +273,17 @@ else
 
     # find users whit subscriptions
     users = User.find(:all,
-      :select=>"users.*",
-      :joins => ("RIGHT JOIN subscriptions ON (users.id = subscriptions.user_id)"),
-      :conditions => ["blocked != 1"],
-      :group=>'users.id',
-      :readonly => false)
+                      :select => "users.*",
+                      :joins => ("RIGHT JOIN subscriptions ON (users.id = subscriptions.user_id)"),
+                      :conditions => ["blocked != 1"],
+                      :group => 'users.id',
+                      :readonly => false)
     Debug.debug("Users found : #{users.size.to_i}")
     # Set time
     time = M_date.to_time
 
     if users and users.size.to_i > 0
-      users.each{|u|
+      users.each { |u|
         Debug.debug("******* USER : #{u.id}; #{u.username} ************")
         # Set time
         time = time.next_month if u.postpaid == 0
@@ -331,11 +331,11 @@ else
     end
     puts "OK"
 
-  rescue  Exception => e
+  rescue Exception => e
     puts e.to_yaml
     #------------------ ERROR -------------------
     File.open(Debug_file, "a") { |f| f << "******************************************************************************************************* \n"
-      f << "#{Time.now().to_s(:db)} --- ERROR ! \n #{e.class} \n #{e.message} \n" }
+    f << "#{Time.now().to_s(:db)} --- ERROR ! \n #{e.class} \n #{e.message} \n" }
     puts "FAIL"
   end
 

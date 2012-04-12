@@ -44,7 +44,7 @@ module ActiveMerchant #:nodoc:
         #   end
         class Notification < ActiveMerchant::Billing::Integrations::Notification
           include PostsData
-          
+
           # Was the transaction complete?
           def complete?
             status == "Completed"
@@ -111,13 +111,13 @@ module ActiveMerchant #:nodoc:
           # This is the invoice which you passed to paypal 
           def invoice
             params['invoice']
-          end   
+          end
 
           # Was this a test transaction?
           def test?
             params['test_ipn'] == '1'
           end
-          
+
           def account
             params['business'] || params['receiver_email']
           end
@@ -137,13 +137,13 @@ module ActiveMerchant #:nodoc:
           #       ... log possible hacking attempt ...
           #     end
           def acknowledge
-            payload =  raw
+            payload = raw
 
-            response = ssl_post(Paypal.service_url + '?cmd=_notify-validate', payload, 
-              'Content-Length' => "#{payload.size}",
-              'User-Agent'     => "Active Merchant -- http://activemerchant.org"
+            response = ssl_post(Paypal.service_url + '?cmd=_notify-validate', payload,
+                                'Content-Length' => "#{payload.size}",
+                                'User-Agent' => "Active Merchant -- http://activemerchant.org"
             )
-            
+
             raise StandardError.new("Faulty paypal result: #{response}") unless ["VERIFIED", "INVALID"].include?(response)
 
             response == "VERIFIED"
