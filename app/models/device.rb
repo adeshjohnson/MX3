@@ -623,11 +623,12 @@ class Device < ActiveRecord::Base
   def ip_must_be_unique_on_save
 
     idi = self.id
+    curr_id =  User.current ? User.current.id : self.user.owner_id
     message = (User.current and User.current.usertype == 'admin') ? _("When_IP_Authentication_checked_IP_must_be_unique") : _('This_IP_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>"
     cond = if ipaddr.blank?
-      ['devices.id != ? AND host = ? AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', idi, host, User.current.id]
+      ['devices.id != ? AND host = ? AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', idi, host, curr_id]
     else
-      ['devices.id != ? AND (host = ? OR ipaddr = ?) AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', idi, host, ipaddr, User.current.id]
+      ['devices.id != ? AND (host = ? OR ipaddr = ?) AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', idi, host, ipaddr, curr_id]
     end
 
     #    check device wihs is provider with providers devices.
@@ -640,10 +641,10 @@ class Device < ActiveRecord::Base
     condd = self.device_ip_authentication_record.to_i == 1 ? '' : ' and devices.username = "" '
     cond22 = if ipaddr.blank?
       #      check device host with another owner devices
-      ['devices.id != ? AND host = ? and users.owner_id != ?  and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd , idi, host, User.current.id]
+      ['devices.id != ? AND host = ? and users.owner_id != ?  and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd , idi, host, curr_id]
     else
       #      check device IP and Host with another owner devices
-      ['devices.id != ? AND (host = ? OR ipaddr = ?) and users.owner_id != ? and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd , idi, host, ipaddr, User.current.id]
+      ['devices.id != ? AND (host = ? OR ipaddr = ?) and users.owner_id != ? and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd , idi, host, ipaddr, curr_id]
     end
 
     #    check device IP with another user providers IP's with have ip auth on, 0.0.0.0 not included
