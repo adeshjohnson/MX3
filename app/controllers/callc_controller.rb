@@ -138,7 +138,7 @@ class CallcController < ApplicationController
 
     #    my_debug  request.env.to_yaml
     #    my_debug  request.env["REMOTE_ADDR"].to_s
-    logger.fatal "rrrrrrrrrrrrrrrrrrrrrrrreeeeeeeeeeeeeeeeeeeeeeee"
+
     if @login_ok == true
       #redirect_to :action => "select_company", :id => @user_id and return false
       add_action(session[:user_id], "login", request.env["REMOTE_ADDR"].to_s)
@@ -171,11 +171,11 @@ class CallcController < ApplicationController
       end
       #                  end
     else
-      logger.fatal "fffffffffffffffffffffffffffffffffffffffffffffffff"
+
       add_action2(0, "bad_login", @username.to_s + "/" + @psw.to_s, request.env["REMOTE_ADDR"].to_s)
-      logger.fatal "fffffffffffffffffffffffffffffffffffffffffffffffff1"
+
       us = User.find(:first, :conditions => ["users.id = ?", session[:login_id]])
-      logger.fatal "fffffffffffffffffffffffffffffffffffffffffffffffff2"
+
       u_hash = us ? us.uniquehash : ''
       flash[:notice] = _('bad_login')
       redirect_to :action => "login", :id=>u_hash and return false
