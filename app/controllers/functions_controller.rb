@@ -197,10 +197,8 @@ class FunctionsController < ApplicationController
     server = Confline.get_value("Web_Callback_Server").to_i
     server = 1 if server == 0
 
-    serv = Server.where({:id => server})
-    if !serv or serv.active != 1
-      flash[:notice] = _('Cannot_connect_to_asterisk_server')
-    else
+    serv = Server.where({:id => server}).first
+
       if @src.length > 0
 
         channel = "Local/#{@src}@mor_cb_src/n"
@@ -223,7 +221,7 @@ class FunctionsController < ApplicationController
       end
 
 
-    end
+
     redirect_to :controller => "functions", :action => 'callback' and return false
 
   end
