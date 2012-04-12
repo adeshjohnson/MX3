@@ -4,7 +4,7 @@
 <br />
 <br />
 <% tl = 0 %>
-<% for line in session[:file] %>
+<% for line in session[:file].split('\n') %>
   <%= line + "<br />" if tl < 5%>
   <% tl += 1 %>
 <% end %>
