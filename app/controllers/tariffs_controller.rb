@@ -1047,7 +1047,7 @@ class TariffsController < ApplicationController
           my_debug_time session[:rates_to_update].to_s + " rates_to_update"
 
           #duplicate rows in csv file
-          dup_prefixes_in_csv = csv_prefixes.clone
+          dup_prefixes_in_csv = csv_prefixes.dups
 
           my_debug_time "dup_prefixes_in_csv: #{ dup_prefixes_in_csv}"
 
