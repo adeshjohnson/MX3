@@ -74,12 +74,12 @@
     <% if mor_11_extend? %>
       <th align="right"><%= _('Tell_balance_after_entering_destination') %></th>
     <% end %>
-    <th align="center" <%= tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation')) %>><%= _('Save_original_CallerID') %></th>
+    <th align="center" <%= raw(tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation'))).html_safe %>><%= _('Save_original_CallerID') %></th>
     <th align="left"><%= _('Assigned_did') %></th>
     <% if mor_11_extend? and calling_cards_active? %>
       <th align="center"><%= _('Use_calling_card') %></th>
     <% end %>
-    <th align="left"<%= tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation')) %>><%= _('Default_device') %></th>
+    <th align="left"<%= rawr(tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation'))).html_safe %>><%= _('Default_device') %></th>
     <th> </th>
     <th> </th>
 
@@ -94,12 +94,12 @@
         <% if mor_11_extend? %>
           <td align="right" id="ap_dp_data6_<%=dp.id%>"> <%= dp.data6 == "1" ? b_check : b_cross %></td> 
         <% end %>
-        <td align="center" id="ap_dp_data4_<%=dp.id%>" <%= tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation')) %>> <%= b_check if dp.data4 == "1"%><%= b_cross if dp.data4 == "0"%></td>
+        <td align="center" id="ap_dp_data4_<%=dp.id%>" <%= raw(tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation'))).html_safe %>> <%= b_check if dp.data4 == "1"%><%= b_cross if dp.data4 == "0"%></td>
         <%= render :partial => "/dids/dialplan_dids_list", :locals => {:plan => dp, :id=>"ap_dp_dids_#{dp.id}"} %>
         <% if mor_11_extend? and calling_cards_active? %>
           <td align="center" id="ap_dp_data7_<%=dp.id%>"> <%= dp.data7 == "0" ? b_cross : b_check %></td>
         <% end %>
-        <td align="left" id="ap_dp_data5_<%=dp.id%>"<%= tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation')) %> >
+        <td align="left" id="ap_dp_data5_<%=dp.id%>"<%= raw tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation')).html_safe %> >
           <% if dp.data5.blank? %>
             <%= _('Not_used') %>
           <% else %>
@@ -127,9 +127,9 @@
 
     <th align="left"><%= _('Name') %></th>
     <th align="left"><%= _('DID_on_Callback') %></th>
-    <th align="left" <%=tooltip(_('Hangup_cause_codes'), _('How_to_terminate_Callback_initiation_Call_(ISDN/SIP)'))%>><%= _('Hangup_cause_codes') %></th>
+    <th align="left" <%= raw(tooltip(_('Hangup_cause_codes'), _('How_to_terminate_Callback_initiation_Call_(ISDN/SIP)'))).html_safe%>><%= _('Hangup_cause_codes') %></th>
     <th align="left"><%= _('DID_DP_Name') %></th>
-    <th align="right" <%=tooltip(_('Wait_Time') + " (s)", _('How_many_seconds_to_wait_after_initiation_call_to_callback'))%> ><%= _('Wait') %> (s)</th>
+    <th align="right" <%= raw(tooltip(_('Wait_Time') + " (s)", _('How_many_seconds_to_wait_after_initiation_call_to_callback'))).html_safe%> ><%= _('Wait') %> (s)</th>
     <th align="left"><%= _('Initial_callback_device') %></th>
     <th align="left"><%= _('Assigned_did') %></th>
     <th align="center" <%= tooltip(_('Ask_card_data_after_callback'), _('Ask_card_data_after_callback_explanation')) %>><%= _('Ask_for_Card') %>?</th>
@@ -148,9 +148,9 @@
         <td align="left" id="c_dp_hgc_<%=dp.id%>"> <%=h Hangupcausecode.end_array(dp.data6) %> </td>
         <td align="left" id="c_dp_dname_<%=dp.id%>"> <%=h cbdid.dialplan.name.to_s if cbdid and cbdid.dialplan %></td>
         <td align="right" id="c_dp_data2_<%=dp.id%>"> <%=h dp.data2 %></td>
-        <td align="left" id="c_dp_description_<%=dp.id%>"> <%= cbdevice.description.to_s + " " + nice_device(cbdevice).to_s if cbdevice %></td>
+        <td align="left" id="c_dp_description_<%=dp.id%>"> <%= raw(cbdevice.description.to_s + " " + nice_device(cbdevice).to_s).html_safe if cbdevice %></td>
         <%= render :partial => "/dids/dialplan_dids_list", :locals => {:plan => dp, :id=>"c_dp_dids_#{dp.id}"} %>
-        <td align="center" id="c_dp_data4_<%=dp.id%>" <%= tooltip(_('Ask_card_data_after_callback'), _('Ask_card_data_after_callback_explanation')) %> >
+        <td align="center" id="c_dp_data4_<%=dp.id%>" <%= raw tooltip(_('Ask_card_data_after_callback'), _('Ask_card_data_after_callback_explanation')).html_safe %> >
           <%= b_check({:id=>"dp_callback_afcac_" + dp.id.to_s}) if dp.data4.to_i == 1%><%= b_cross({:id=>"dp_callback_afcac_" + dp.id.to_s}) if dp.data4.to_i == 0%>
         </td>
         <td align="right" id="c_dp_data5_<%=dp.id%>"> <%=h dp.data5.to_s %></td>
