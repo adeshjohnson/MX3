@@ -654,7 +654,7 @@ class Device < ActiveRecord::Base
     end
 
     #    check device IP with another user providers IP's with have ip auth on, 0.0.0.0 not included
-    if Provider.count(:all, :joins=>['JOIN devices ON (device_id = devices.id)'],:conditions=>["server_ip = ? and devices.username = '' and server_ip != '0.0.0.0' and devices.id != ?  and ipaddr != '' AND providers.user_id != ? and ipaddr != '0.0.0.0'", ipaddr, idi, User.current.id]).to_i > 0
+    if Provider.count(:all, :joins=>['JOIN devices ON (device_id = devices.id)'],:conditions=>["server_ip = ? and devices.username = '' and server_ip != '0.0.0.0' and devices.id != ?  and ipaddr != '' AND providers.user_id != ? and ipaddr != '0.0.0.0'", ipaddr, idi, curr_id]).to_i > 0
       errors.add(:ip_authentication, message)
       return false
     end
