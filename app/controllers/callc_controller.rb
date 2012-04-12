@@ -171,9 +171,12 @@ class CallcController < ApplicationController
       end
       #                  end
     else
+      logger.fatal "fffffffffffffffffffffffffffffffffffffffffffffffff"
       add_action2(0, "bad_login", @username.to_s + "/" + @psw.to_s, request.env["REMOTE_ADDR"].to_s)
+      logger.fatal "fffffffffffffffffffffffffffffffffffffffffffffffff1"
       us = User.find(:first, :conditions => ["users.id = ?", session[:login_id]])
-      u_hash= us ? us.uniquehash : ''
+      logger.fatal "fffffffffffffffffffffffffffffffffffffffffffffffff2"
+      u_hash = us ? us.uniquehash : ''
       flash[:notice] = _('bad_login')
       redirect_to :action => "login", :id=>u_hash and return false
     end
