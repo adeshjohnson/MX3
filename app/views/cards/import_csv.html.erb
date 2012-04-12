@@ -28,7 +28,7 @@
   <% end %>
   <% flines << "...." if tl > 5 %>
 
-  <%= text_area_tag "body", flines.join('\n').html_safe, :size => "150x10", :class => "input" %>
+  <%= text_area_tag "body", raw(flines.join("\n")).html_safe, :size => "150x10", :class => "input" %>
 
   <br />
   <% session[:file_lines] = tl %>
