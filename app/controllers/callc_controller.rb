@@ -138,7 +138,7 @@ class CallcController < ApplicationController
 
     #    my_debug  request.env.to_yaml
     #    my_debug  request.env["REMOTE_ADDR"].to_s
-
+    logger.fatal "rrrrrrrrrrrrrrrrrrrrrrrreeeeeeeeeeeeeeeeeeeeeeee"
     if @login_ok == true
       #redirect_to :action => "select_company", :id => @user_id and return false
       add_action(session[:user_id], "login", request.env["REMOTE_ADDR"].to_s)
