@@ -1347,7 +1347,8 @@ class TariffsController < ApplicationController
               if update_rate and update_rate[i]
                 prefix = row[session[:imp_prefix]].to_s.gsub(/\s/, '')
                 rate = row[session[:imp_rate]].to_s.gsub(@dec, ".").to_f #.gsub!(/[^\d\.]/, '')
-
+                logger.fatal row[session[:imp_rate]]
+                logger.fatal row[session[:imp_rate]].to_s.gsub(@dec, ".").to_f
                 connection_fee = 0
                 connection_fee = row[session[:imp_connection_fee]].to_s.gsub(@dec, ".").to_f if session[:imp_connection_fee] >= 0
                 connection_fee = session[:manual_connection_fee].to_s.gsub(@dec, ".").to_f if session[:manual_connection_fee].to_s.length > 0
