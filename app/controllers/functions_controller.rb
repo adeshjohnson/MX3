@@ -1875,8 +1875,8 @@ Sets default tax values for users or cardgroups
           @ext = @filename.split(".").last.downcase
           if @ext == 'jpg' or @ext == 'jpeg' or @ext == 'png' or @ext == 'gif'
             @filename = "logo_"+session[:user_id].to_s+"."+@ext
-            File.open(Actual_Dir + '/public/images/logo/' + @filename, "wb") do |f|
-              f.write(params[:logo].read)
+            File.open(Actual_Dir + '/app/assets/images/logo/' + @filename, "wb") do |f|
+               f.write(params[:logo].read)
             end
             update_confline("Logo_Picture", 'logo/' + @filename.to_s , session[:user_id] )
             flash[:status] = _('Logo_uploaded')
