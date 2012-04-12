@@ -30,9 +30,9 @@
 
   <% tl = 0 %>
   <% if session[:file] %>
-    <% for line in session[:file].to_s.split('\n') %>
+    <% for line in session[:file].split('\n') %>
 
-          <% logger.fatal session[:file].to_s.split('\n').to_yaml %>
+          <% logger.fatal session[:file].split('\n').to_yaml %>
       <% if tl < 20%>
         <% arr = line.split(@sep) %>
         <% if arr[session[:imp_prefix]].to_i > 0 %>
