@@ -1656,7 +1656,7 @@ Sets default tax values for users or cardgroups
           @filename = sanitize_filename(@file.original_filename)
           @ext = @filename.split(".").last.downcase
           if @ext == 'jpg' or @ext == 'jpeg' or @ext == 'png' or @ext == 'gif'
-            File.open(Actual_Dir + '/public/images/logo/' + @filename, "wb") do |f|
+            File.open(Actual_Dir + '/app/assets/images/logo/' + @filename, "wb") do |f|
               f.write(params[:logo].read)
             end
             update_confline("Logo_Picture", 'logo/' + @filename)
