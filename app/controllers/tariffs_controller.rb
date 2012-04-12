@@ -1620,7 +1620,7 @@ class TariffsController < ApplicationController
       my_debug_time "step 2"
       my_debug_time "use : #{session["temp_tariff_name_csv_#{@tariff.id}".to_sym]}"
       if session["temp_tariff_name_csv_#{@tariff.id}".to_sym]
-        file = @tariff.head_of_file("/tmp/#{session["temp_tariff_name_csv_#{@tariff.id}".to_sym]}.csv", 20).join("").to_s
+        file = @tariff.head_of_file("/tmp/#{session["temp_tariff_name_csv_#{@tariff.id}".to_sym]}.csv", 20)
         session[:file] = file
         a = check_csv_file_seperators(file, 2, 2)
         if a
