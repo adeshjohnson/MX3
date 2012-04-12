@@ -105,7 +105,7 @@
 </tr>
 <tr>
 	<td>verifySelectedLabel</td>
-	<td>id=user_time_zone</td>
+	<td>id=user[time_zone]</td>
 	<td>(GMT+00:00) Casablanca, Dublin, Edinburgh, Lisbon, London, Monrovia</td>
 </tr>
 <!--BACKUPS-->
@@ -325,7 +325,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_time_zone</td>
+	<td>id=user[time_zone]</td>
 	<td>label=(GMT+05:00) Islamabad, Karachi, Tashkent</td>
 </tr>
 <tr>
@@ -486,7 +486,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_time_zone</td>
+	<td>id=user[time_zone]</td>
 	<td>label=(GMT-02:00) Mid-Atlantic</td>
 </tr>
 <tr>
@@ -671,7 +671,7 @@
 </tr>
 <tr>
 	<td>verifySelectedLabel</td>
-	<td>id=user_time_zone</td>
+	<td>id=user[time_zone]</td>
 	<td>(GMT-02:00) Mid-Atlantic</td>
 </tr>
 <!--LAST CALLS STATS-->
@@ -1001,7 +1001,11 @@
 	<td>name=commit</td>
 	<td></td>
 </tr>
-<!--<tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr>-->
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
 <tr>
 	<td>waitForTextPresent</td>
 	<td>2008-12-31 - 2008-12-31</td>
@@ -1073,7 +1077,11 @@
 	<td>name=commit</td>
 	<td></td>
 </tr>
-<!--<tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr>-->
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
 <tr>
 	<td>waitForTextPresent</td>
 	<td>2009-01-01 - 2009-01-01</td>
@@ -1344,7 +1352,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_time_zone</td>
+	<td>id=user[time_zone]</td>
 	<td>label=(GMT+02:00) Athens, Cairo, Helsinki, Istanbul, Kyiv, Minsk, Riga, Tallinn, Vilnius</td>
 </tr>
 <tr>
@@ -1614,12 +1622,12 @@
 <tr>
 	<td>verifyText</td>
 	<td>//div[@id='table']/table/tbody/tr[5]/td[2]</td>
-	<td>3</td>
+	<td>4</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>id=total_calls</td>
-	<td>13</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -2087,7 +2095,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>* Value in system time zone: GMT +2</td>
+	<td>* Value in system time zone: GMT +3</td>
 	<td></td>
 </tr>
 <!--CRON_ACTIONS-->
@@ -2116,11 +2124,11 @@
 	<td>id=activation_start_day</td>
 	<td>22</td>
 </tr>
-<!--20 nes system_tz =2 ( o nustatyta buvo 15)-->
+<!--19 nes system_tz =3 ( o nustatyta buvo 15)-->
 <tr>
 	<td>verifySelectedLabel</td>
 	<td>id=activation_start_hour</td>
-	<td>20</td>
+	<td>19</td>
 </tr>
 <!--CALLS PER DAY-->
 <tr>
@@ -2210,7 +2218,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>GMT +2</td>
+	<td>GMT +3</td>
 	<td></td>
 </tr>
 <tr>
