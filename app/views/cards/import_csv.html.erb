@@ -22,7 +22,7 @@
   <b><%= _('First_file_lines') %>:</b><br /><br />
   <% flines = []
   tl = 0 %>
-  <% for line in session[:file].split('\n') %>
+  <% for line in session[:file].split(/\n|\r|\rn/) %>
     <% flines << line if tl < 5%>
     <% tl += 1 %>
   <% end %>
