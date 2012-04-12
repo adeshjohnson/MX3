@@ -131,11 +131,11 @@
       <% if mor_11_extend? %>
         <th align="right"><%= _('Tell_balance_after_entering_destination') %></th>
       <% end %>
-      <th align="center" <%= tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation')) %>><%= _('Save_original_CallerID') %></th>
+      <th align="center" <%= raw(tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation'))).html_safe %>><%= _('Save_original_CallerID') %></th>
       <% if mor_11_extend? and calling_cards_active? %>
         <th align="center"><%= _('Use_calling_card') %></th>
       <% end %>
-      <th align="center"<%= tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation')) %>><%= _('Default_device') %></th>
+      <th align="center"<%= raw(tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation'))).html_safe %>><%= _('Default_device') %></th>
       <th></th>
 
 
@@ -151,7 +151,7 @@
       <% if mor_11_extend? %>
         <td align="right"> <%= check_box_tag 'dialplan[data6]', 1, @dp.data6 == "1",  {:id => "data6"}%></td>
       <% end %>
-      <td align="center" <%= tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation')) %>><%= check_box_tag 'dialplan[data4]', 1, false,  {:id => "data4"} %></td>
+      <td align="center" <%= raw(tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation'))).html_safe %>><%= check_box_tag 'dialplan[data4]', 1, false,  {:id => "data4"} %></td>
       <% if mor_11_extend? and calling_cards_active? %>
         <td align="center"> 
           <span id="dialplan_data_7">
@@ -189,10 +189,10 @@
         <tr>
           <th id="name" align="left"><%= _('Name') %></th>
           <th id="did_on_callback" align="left"><%= _('DID_on_Callback') %></th>
-          <th id="hangup_cause_codes" align="left" <%=tooltip(_('Hangup_cause_codes'), _('How_to_terminate_Callback_initiation_Call_(ISDN/SIP)'))%>><%= _('Hangup_cause_codes') %></th>
-          <th id="wait_time" align="right" <%=tooltip(_('Wait_Time') + " (s)", _('How_many_seconds_to_wait_after_initiation_call_to_callback'))%> ><%= _('Wait') %> (s)</th>
+          <th id="hangup_cause_codes" align="left" <%= raw(tooltip(_('Hangup_cause_codes'), _('How_to_terminate_Callback_initiation_Call_(ISDN/SIP)'))).html_safe %>><%= _('Hangup_cause_codes') %></th>
+          <th id="wait_time" align="right" <%= raw(tooltip(_('Wait_Time') + " (s)", _('How_many_seconds_to_wait_after_initiation_call_to_callback'))).html_safe %> ><%= _('Wait') %> (s)</th>
           <th id="initial_callback_device" align="left"><%= _('Initial_callback_device') %></th>
-          <th id="ask_for_card" align="center" <%= tooltip(_('Ask_card_data_after_callback'), _('Ask_card_data_after_callback_explanation')) %>><%= _('Ask_for_Card') %>?</th>
+          <th id="ask_for_card" align="center" <%= raw(tooltip(_('Ask_card_data_after_callback'), _('Ask_card_data_after_callback_explanation'))).html_safe %>><%= _('Ask_for_Card') %>?</th>
           <th></th>
         </tr>
 
@@ -217,7 +217,7 @@
               <% end %>
             </select>
           </td>
-          <td align="center" <%= tooltip(_('Ask_card_data_after_callback'), _('Ask_card_data_after_callback_explanation')) %>> <%= check_box_tag 'dialplan[data4]', value = "1", checked = (@dp.data4 == "1"), :id=>'callback_dialplan[data4]_'+@dp.id.to_s %></td>
+          <td align="center" <%= raw(tooltip(_('Ask_card_data_after_callback'), _('Ask_card_data_after_callback_explanation'))).html_safe %>> <%= check_box_tag 'dialplan[data4]', value = "1", checked = (@dp.data4 == "1"), :id=>'callback_dialplan[data4]_'+@dp.id.to_s %></td>
           <td align="center"> <%= image_submit_tag 'icons/add.png', :title => _('Add'), :id=>"cb_add" %></td>
         </tr>
 
