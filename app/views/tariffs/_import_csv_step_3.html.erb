@@ -30,7 +30,7 @@
 
   <% tl = 0 %>
   <% if session[:file] %>
-    <% for line in session[:file].to_s %>
+    <% for line in session[:file].to_s.split('\n') %>
 
       <% if tl < 20%>
         <% arr = line.split(@sep) %>
