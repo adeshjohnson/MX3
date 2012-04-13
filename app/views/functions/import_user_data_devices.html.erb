@@ -260,7 +260,7 @@
         <th><%= _('CLI_number') %></th>
       </tr>
       <% tl = 0 %>
-      <% for line in session[:file] %>
+      <% for line in session[:file].split(/\n|\r|\rn/) %>
           <% if tl < 20 and tl != 0-@include.to_i %>
               <% arr = line.split(@sep) %>
               <tr class="row<%= (tl % 2 + 1).to_s %>">
