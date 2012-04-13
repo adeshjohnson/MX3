@@ -961,7 +961,7 @@ class AccountingController < ApplicationController
     type = (user.postpaid.to_i == 1 or invoice.user.owner_id != 0) ? "postpaid" : "prepaid"
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
-    pdf = invoice.genarete_simple_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal])
+    pdf = invoice.generate_simple_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal])
 
     filename = Invoice.filename(user, type, "Invoice-#{user.first_name}_#{user.last_name}-#{invoice.user_id}-#{invoice.number}-#{invoice.issue_date}", "pdf")
     if params[:email_or_not]
