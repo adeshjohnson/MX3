@@ -33,14 +33,14 @@
   <tr>
     <td id="retry_time"> <%= _('Retry_time') %>:</td>
     <td id="retry_time_value"> <%= text_field 'campaign', 'retry_time', "class" => "input" %>
-      <span <%= tooltip(_('Retry_time'), _('Retry_time_Explanation')) %> id="retry_info_img"> <%= b_info %> </span>
+      <span <%= raw(tooltip(_('Retry_time'), _('Retry_time_Explanation'))).html_safe %> id="retry_info_img"> <%= b_info %> </span>
     </td>
   </tr>
 
   <tr>
     <td id="wait_time"> <%= _('Wait_time') %>:</td>
     <td id="wait_time_value"> <%= text_field 'campaign', 'wait_time', "class" => "input" %>
-      <span <%= tooltip(_('Wait_time'), _('Wait_time_Explanation')) %> id="wait_info_img"> <%= b_info %> </span>
+      <span <%= raw(tooltip(_('Wait_time'), _('Wait_time_Explanation'))).html_safe %> id="wait_info_img"> <%= b_info %> </span>
     </td>
   </tr>
 
