@@ -72,10 +72,6 @@
 
                     <td id="round_<%= ard.id %>" align="center"><%= text_field_tag 'round', round, "class" => "input", :size => "3", :maxlength => "4" %></td>
                     <td id="price_<%= ard.id %>" align="center"><%= text_field_tag 'price', ard.price, "class" => "input", :size => "8", :maxlength => "10" %></td>
-                    <% if mor_11_extend? %>
-                        <td id="ghost_percent_<%= ard.id %>" align="center"><%= text_field_tag "ghost_percent_#{ard.id}", ard.ghost_percent, "class" => "input", :size => "8", :maxlength => "10" %></td>
-                    <% end %>
-
                     <% if @allow_edit %>
                         <td id="edit_<%= ard.id %>" align="center"> <%= image_submit_tag 'icons/edit.png', :title => _('Edit') %></td>
                         <% if i > 0 %>
