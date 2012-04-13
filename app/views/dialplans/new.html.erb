@@ -21,7 +21,7 @@
                 <% end %>
                 <th align="right"><%= _('Ask_numberpin_times') %></th>
                 <th align="right"><%= _('Ask_dst_times') %></th>
-                <th align="center" <%= nice_end_ivr_tooltip %>><%= _('End_IVR') %></th>
+                <th align="center" <%= raw(nice_end_ivr_tooltip).html_safe %>><%= _('End_IVR') %></th>
                 <% if mor_11_extend? %>
                     <th align="right"><%= _('If_Card_balance_lower_than') %></th>
                     <th align="center"><%= _('Balance_IVR') %></th>
