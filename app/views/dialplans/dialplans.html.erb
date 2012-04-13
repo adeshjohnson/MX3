@@ -28,8 +28,8 @@
         <th></th>
         <th></th>
       </tr>
-      <% if @cc_dps %>
-          <% @cc_dps.each_with_index { |dp, index| %>
+      <% if @ccdps %>
+          <% @ccdps.each_with_index { |dp, index| %>
               <tr class="row<%= index%2 %>">
                 <td align="left" id="cc_dp_name_<%= dp.id %>"> <%= h dp.name %></td>
                 <td align="right" id="cc_dp_data1_<%= dp.id %>"> <%= h dp.data1 %> </td>
