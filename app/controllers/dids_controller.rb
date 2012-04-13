@@ -434,7 +434,11 @@ class DidsController < ApplicationController
           return false if !a
         end
       end
-      Action.add_action_hash(session[:user_id], {:target_type => 'device', :target_id => dev.id, :action => 'did_assigned', :data => did.id})
+      logger.fatal dev.to_yaml
+      logger.fatal "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+      logger.fatal did.to_yaml
+      logger.fatal "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6"
+      Action.add_action_hash(current_user.id, {:target_type => 'device', :target_id => dev.id, :action => 'did_assigned', :data => did.id})
       flash[:status] = _('DID_assigned')
     end
 
