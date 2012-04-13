@@ -21,7 +21,7 @@
     </table>
     <br/>
     <span style="float:left;"><%= link_to b_back + _('back'), session[:return_to] %></span>
-    <span style="float:left;margin-left: 30px;"><%= button_to _('Reassign'), {:controller => :destination_groups, :action => :bulk_assign, :id => @dg.id, :prefix => @prefix, :type => @type}, :disable_with => _('Processing..'), :confirm => _('Are_you_sure'), :method => :post %></span>
+    <span style="float:left;margin-left: 30px;"><%= button_to _('Reassign'), {:controller => :destination_groups, :action => :bulk_assign, :id => @dg.id, :prefix => @prefix, :type => @type}, :disable_with => _('Processing..'), :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => _('Are_you_sure'), :method => :post %></span>
 <% else %>
     <%= _('No_destinations_found') %>
     <br/>

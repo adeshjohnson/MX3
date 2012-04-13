@@ -27,5 +27,5 @@
       <% end %>
     </table>
     <br/>
-    <%= submit_tag _('Recalculate'), :confirm => _('Are_you_sure'), :method => :post, :disable_with => _('Processing..') %>
+    <%= submit_tag _('Recalculate'), :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => _('Are_you_sure'), :method => :post, :disable_with => _('Processing..') %>
 <% end %>

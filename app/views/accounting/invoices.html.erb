@@ -151,7 +151,7 @@
               <option value="postpaid" <%= "selected" if 'postpaid' == @sent_options[:s_ivnoice_type].to_s %>> <%= _('Postpaid') %></option>
               <option value="prepaid" <%= "selected" if 'prepaid' == @sent_options[:s_ivnoice_type].to_s %>> <%= _('Prepaid') %> </option>
             </select>
-            <%= submit_tag(_('Send_Invoices_over_Email_to_Users'), :confirm => _('Are_you_sure_you_want_to_sent_invoices_by_email'), :disable_with => _('Processing..')) %>
+            <%= submit_tag(_('Send_Invoices_over_Email_to_Users'), :onclick => "return confirm('#{_('Are_you_sure_you_want_to_sent_invoices_by_email')}');",  :confirm => _('Are_you_sure_you_want_to_sent_invoices_by_email'), :disable_with => _('Processing..')) %>
           </td>
         </tr>
       </table>

@@ -2,7 +2,7 @@
     <%= form_tag :action => 'let_resellers_use_all_common_use_providers' do %>
         <table width="100%">
           <tr>
-            <td align="left"><%= submit_tag _("Let resellers use all common use providers "), :confirm => _('Are_you_sure'), :method => :post, :disable_with => _('Processing..') %></td>
+            <td align="left"><%= submit_tag _("Let resellers use all common use providers "), :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => _('Are_you_sure'), :method => :post, :disable_with => _('Processing..') %></td>
           </tr>
         </table>
         <br/>

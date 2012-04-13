@@ -2,7 +2,7 @@
 <br>
 <br>
 
-<%= button_to _('Confirm'), {:action => 'auto_assign_destinations_to_dg'}, :confirm => _('are_you_sure'), :method => "post" %>
+<%= button_to _('Confirm'), {:action => 'auto_assign_destinations_to_dg'}, :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => _('are_you_sure'), :method => "post" %>
 <br>
 <br>
 <%= button_to _('Cancel'), :action => 'destinations_to_dg' %>

@@ -18,7 +18,7 @@
                         <option value=<%= dp.id %>> <%= dp.name %> </option>
                     <% end %>
                   </select>
-                  <%= submit_tag _('Assign'), :disable_with => _('Processing..'), :id => 'callinc_cards_dp', :confirm => 'Are you sure?' %>
+                  <%= submit_tag _('Assign'), :disable_with => _('Processing..'), :id => 'callinc_cards_dp', :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => 'Are you sure?' %>
               <% end %>
           <% end %>
 
@@ -32,7 +32,7 @@
                         <option value=<%= dp.id %>> <%= dp.name %> </option>
                     <% end %>
                   </select>
-                  <%= submit_tag _('Assign'), :id => "assign_to_dp_pin", :disable_with => _('Processing..'), :confirm => 'Are you sure?', :id => 'pin_pd' %>
+                  <%= submit_tag _('Assign'), :id => "assign_to_dp_pin", :disable_with => _('Processing..'), :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => 'Are you sure?', :id => 'pin_pd' %>
               <% end %>
           <% end %>
 
@@ -45,7 +45,7 @@
                         <option value=<%= dp.id %>> <%= dp.name %> </option>
                     <% end %>
                   </select>
-                  <%= submit_tag _('Assign'), :id => "assign_to_dp_callback", :disable_with => _('Processing..'), :confirm => 'Are you sure?', :id => 'callback_pd' %>
+                  <%= submit_tag _('Assign'), :id => "assign_to_dp_callback", :disable_with => _('Processing..'), :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => 'Are you sure?', :id => 'callback_pd' %>
               <% end %>
           <% end %>
 
@@ -56,7 +56,7 @@
                   <% for dp in @qfddps %>
                       <%= hidden_field_tag 'dp_id', dp.id %>
                   <% end %>
-                  <%= submit_tag _('Assign'), :disable_with => _('Processing..'), :confirm => 'Are you sure?', :id => 'fovard_pd' %>
+                  <%= submit_tag _('Assign'), :disable_with => _('Processing..'), :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => 'Are you sure?', :id => 'fovard_pd' %>
               <% end %>
               <br/>
           <% end %>
@@ -71,7 +71,7 @@
                           - <%= dp.pbxfunction.name if dp.pbxfunction %> </option>
                     <% end %>
                   </select>
-                  <%= submit_tag _('Assign'), :disable_with => _('Processing..'), :confirm => 'Are you sure?', :id => 'pbx_pd' %>
+                  <%= submit_tag _('Assign'), :disable_with => _('Processing..'), :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => 'Are you sure?', :id => 'pbx_pd' %>
               <% end %>
               <br/>
           <% end %>
@@ -84,7 +84,7 @@
                         <option value=<%= dp.id %>><%= dp.name %> </option>
                     <% end %>
                   </select>
-                  <%= submit_tag _('Assign'), :disable_with => _('Processing..'), :confirm => 'Are you sure?', :id => 'ivr_pd' %>
+                  <%= submit_tag _('Assign'), :disable_with => _('Processing..'), :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => 'Are you sure?', :id => 'ivr_pd' %>
               <% end %>
           <% end %>
         </td>

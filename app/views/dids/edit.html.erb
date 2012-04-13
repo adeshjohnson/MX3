@@ -140,7 +140,7 @@
               <br/><%= b_check + _('Make_did_free_expanded') %>
               <br/><br/>
               <% if @did.reseller and !reseller? %>
-                  <%= submit_tag _('Unassign_from_Reseller'), {:confirm => _("Are you sure?"), :disable_with => _('Processing..')} %>
+                  <%= submit_tag _('Unassign_from_Reseller'), {:onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => _("Are you sure?"), :disable_with => _('Processing..')} %>
                   <br/>
               <% else %>
                   <%= submit_tag _('Make_did_free'), :disable_with => _('Processing..') %>

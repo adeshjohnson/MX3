@@ -30,6 +30,6 @@
       <% end %>
     </table>
     <br/>
-    <%= submit_tag _('Generate'), :onclick => "new Ajax.Updater('', '#{Web_Dir}/accounting/change_session_flag', Element.toggle('spinner'), Element.toggle('spinner2'));",
+    <%= submit_tag _('Generate'), :onclick => "return confirm('#{_('Are_you_sure')}');new Ajax.Updater('', '#{Web_Dir}/accounting/change_session_flag', Element.toggle('spinner'), Element.toggle('spinner2'));",
                    :confirm => _('Are_you_sure'), :method => :post, :disable_with => _('Processing..') %>
 <% end %>
