@@ -44,7 +44,7 @@
                 <td align="right" id="cc_dp_data5_<%= dp.id %>"> <%= h dp.data5 %></td>
                 <td align="right" id="cc_dp_data6_<%= dp.id %>"> <%= h dp.data6 %></td>
                 <%= render :partial => "/dids/dialplan_dids_list", :locals => {:plan => dp, :id => "cc_dp_dids_#{dp.id}"} %>
-                <td align="left" id="cc_dp_data9_<%= dp.id %>" <%= nice_end_ivr_tooltip %> >  <%= h @end_ivr[dp.data9.to_i-1] %></td>
+                <td align="left" id="cc_dp_data9_<%= dp.id %>" <%= raw(nice_end_ivr_tooltip).html_safe %> >  <%= h @end_ivr[dp.data9.to_i-1] %></td>
                 <% if mor_11_extend? %>
                     <td align="right" id="cc_dp_data11_<%= dp.id %>"> <%= h dp.data11 %> </td>
                     <td align="center" id="cc_dp_data12_<%= dp.id %>"> <%= dp.balance_ivr %> </td>
