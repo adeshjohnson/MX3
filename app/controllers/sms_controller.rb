@@ -874,7 +874,7 @@ in before filter : tariff (:find_tariff_from_id)
   def find_user_tariff
     @user_tariff = @user.sms_tariff
     unless @user_tariff
-      action = Action.new({:user_id => session[:user_id], :date => Time.now, :action => 'error', :data => _('No_sms_tariff'), :data2 => request.request_uri})
+      action = Action.new({:user_id => session[:user_id], :date => Time.now, :action => 'error', :data => _('No_sms_tariff'), :data2 => request.url})
       action.save
       flash[:notice] = _('No_SMS_tariffs_available')
       redirect_to :controller => :callc, :action => :main and return false
