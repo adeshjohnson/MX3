@@ -1297,7 +1297,7 @@ module ApplicationHelper
     out = []
     if links and links.size > 0 and session[:hide_iwantto].to_i == 0
       out << "<br><br>"
-      out << b_help + _('I_want_to')+ ":" + "<br>"
+      out << b_help + _('I_want_to')+ ":" + "<br>".html_safe
       out << "<ul class='iwantto_help'>"
 
       links.each { |arr| out << "<li><a href='#{arr[1].to_s}' target='_blank'>#{_(arr[0])}</a></li>" }
