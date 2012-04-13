@@ -421,7 +421,6 @@ class DidsController < ApplicationController
 
     if status == "active"
       old_dev_id = did.device_id
-            logger.fatal did.to_yaml
       did.assign(params[:device_id])
       a=configure_extensions(did.device_id, {:no_redirect => true, :current_user => current_user})
       return false if !a
@@ -434,11 +433,7 @@ class DidsController < ApplicationController
           return false if !a
         end
       end
-      logger.fatal dev.to_yaml
-      logger.fatal "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-      logger.fatal did.to_yaml
-      logger.fatal "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6"
-      Action.add_action_hash(current_user.id, {:target_type => 'device', :target_id => dev.id, :action => 'did_assigned', :data => did.id})
+      Action.add_action_hash(current_user.id, {:target_type => 'device', :target_id => old_dev_id, :action => 'did_assigned', :data => did.id})
       flash[:status] = _('DID_assigned')
     end
 
