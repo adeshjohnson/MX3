@@ -18,7 +18,7 @@
             }
         </script>
         <div id='confirm_with_message' style='display: none;'>
-          <%= submit_tag(_('Change'), {:confirm => _("Are you sure?"), :disable_with => _('Processing..')}) %>
+          <%= submit_tag(_('Change'), {:confirm => _("Are you sure?"), :onclick => "return confirm('#{_('Are_you_sure')}');", :disable_with => _('Processing..')}) %>
         </div>
 
         <br>

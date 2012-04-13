@@ -31,7 +31,7 @@
 <%= form_tag :action => 'delete_and_import_admins_location' do %>
     <table width="100%">
       <tr>
-        <td align="left"><%= submit_tag _("Replace_locations_with_admins"), :confirm => _('Are_you_sure_location'), :method => :post, :disable_with => _('Processing..') %></td>
+        <td align="left"><%= submit_tag _("Replace_locations_with_admins"), :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => _('Are_you_sure_location'), :method => :post, :disable_with => _('Processing..') %></td>
       </tr>
     </table>
 <% end %>

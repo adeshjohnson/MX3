@@ -2,7 +2,7 @@
     <%= form_tag :action => 'import_admins_locations' do %>
         <table width="100%">
           <tr>
-            <td align="left"><%= submit_tag _("Create_same_rules_as_Admins"), :confirm => _('Are_you_sure'), :method => :post, :disable_with => _('Processing..') %></td>
+            <td align="left"><%= submit_tag _("Create_same_rules_as_Admins"), :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => _('Are_you_sure'), :method => :post, :disable_with => _('Processing..') %></td>
           </tr>
         </table>
         <br/>
