@@ -336,6 +336,7 @@ class ProvidersController < ApplicationController
   def update
     params[:provider][:name]=params[:provider][:name].strip
     params[:provider][:timeout]= params[:provider][:timeout].strip
+    params[:provider][:max_timeout]= params[:provider][:max_timeout].strip
 
     params[:provider][:reg_extension] ||= ""
     params[:provider][:reg_line] ||= ""

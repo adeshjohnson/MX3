@@ -79,10 +79,13 @@
           </td>
         </tr>
     <% end %>
-
     <tr>
-      <td> <%= _('Timeout') %>:</td>
-      <td><%= text_field 'provider', 'timeout', "class" => "input", :size => "5", :maxlength => "4" %> <%= _('seconds') %> </td>
+      <td> <%= _('Ringing_Timeout') %>:   </td>
+      <td><%= text_field 'provider', 'timeout', "class" => "input" , :size => "5", :maxlength => "4" %> <%= _('seconds') %> </td>
+    </tr>
+    <tr>
+      <td> <%= _('Call_Timeout') %>:   </td>
+      <td><%= text_field 'provider', 'max_timeout', "class" => "input" , :size => "5", :maxlength => "4" %> <%= _('seconds') %> </td>
     </tr>
 
     <tr>
