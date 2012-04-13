@@ -52,19 +52,21 @@ class Action < ActiveRecord::Base
 =end
 
   def Action.add_action_hash(user, details={})
-    if user.class != User
-      user = User.find(:first, :conditions => ["id = ?", user])
+    if user.class == User
+      uid = user.id
+    else
+      uid = user
     end
     detai = {
         :date => details[:date].blank? ? Time.now : details[:date],
         :data => "",
         :data2 => "",
-        :user_id => user.id,
+        :user_id => uid,
         :target_id => nil,
         :target_type => "",
         :action => ""
     }.merge(details)
-    if user and !user.id.blank?
+    if user and !uid.blank?
       act = Action.new
       act.update_attributes(detai)
       return act

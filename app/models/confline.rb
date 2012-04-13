@@ -43,7 +43,7 @@ class Confline < ActiveRecord::Base
 
   # Sets confline value.
   def Confline::set_value(name, value = 0, id = 0)
-    cl = Confline.find(:first, :conditions => ["name = ? and owner_id = ?", name, id])
+    cl = Confline.where(["name = ? and owner_id = ?", name, id]).first
     if cl
       if cl.value.to_s != value.to_s
         u = User.current ? User.current.id : -1
