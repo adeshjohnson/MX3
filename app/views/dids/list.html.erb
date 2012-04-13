@@ -177,4 +177,4 @@
 <br/>
 <%= render :partial => "page_select_header" if @total_pages > 1 %>
 
-<%= iwantto_list(@iwantto_links) %>
+<%= raw(iwantto_list(@iwantto_links)).html_safe %>
