@@ -254,9 +254,9 @@ class DialplansController < ApplicationController
 
   def create
 
-    if !params[:dialplan] or params[:dialplan][:name].length == 0
+    if !params[:dialplan] or params[:dialplan][:name].blank?
       flash[:notice] = _('Please_enter_name')
-      redirect_to :action => 'new' and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
     params[:dialplan][:name]=params[:dialplan][:name].strip
 
