@@ -421,7 +421,7 @@ class DidsController < ApplicationController
 
     if status == "active"
       old_dev_id = did.device_id
-
+            logger.fatal did.to_yaml
       did.assign(params[:device_id])
       a=configure_extensions(did.device_id, {:no_redirect => true, :current_user => current_user})
       return false if !a
