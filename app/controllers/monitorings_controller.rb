@@ -33,6 +33,7 @@ class MonitoringsController < ApplicationController
     @monitorings = current_user.owned_monitorings.find(:all, :include => [:users])
     @users = User.find_all_for_select(correct_owner_id)
     @monitoring = Monitoring.new
+    @monitoring.monitoring_type = 'above'
 
     store_location
   end
