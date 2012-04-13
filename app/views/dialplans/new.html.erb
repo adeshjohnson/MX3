@@ -9,22 +9,22 @@
 
             <table class="maintable" width="100%">
               <tr>
-                <th align="left"><%= _('Name') %></th>
-                <th align="right"><%= _('Number_length') %> / <%= _('Pin_length') %></th>
-                <th align="center"><%= _('Ask_only_pin') %></th>
-                <th align="center"><%= _('Pinless') %></th>
-                <th align="center"><%= _('Tell_time') %></th>
-                <th align="center"><%= _('Tell_seconds') %></th>
-                <th align="center"><%= _('Tell_balance') %></th>
+                <th align="left" id='cc_dp_name_column'><%= _('Name') %></th>
+                <th align="right" id='cc_dp_number_length_column'><%= _('Number_length') %> / <%= _('Pin_length') %></th>
+                <th align="center" id='cc_dp_ask_only_pin_column'><%= _('Ask_only_pin') %></th>
+                <th align="center" id='cc_dp_pinless_column'><%= _('Pinless') %></th>
+                <th align="center" id='cc_dp_tell_time_column'><%= _('Tell_time') %></th>
+                <th align="center" id='cc_dp_tell_seconds_column'><%= _('Tell_seconds') %></th>
+                <th align="center" id='cc_dp_tell_balance_column'><%= _('Tell_balance') %></th>
                 <% if mor_11_extend? %>
-                    <th align="center"><%= _('Tell_balance_after_call') %></th>
+                    <th align="center" id='cc_dp_tell_balance_after_call_column'><%= _('Tell_balance_after_call') %></th>
                 <% end %>
-                <th align="right"><%= _('Ask_numberpin_times') %></th>
-                <th align="right"><%= _('Ask_dst_times') %></th>
-                <th align="center" <%= raw(nice_end_ivr_tooltip).html_safe %>><%= _('End_IVR') %></th>
+                <th align="right" id='cc_dp_ask_number_pin_column'><%= _('Ask_numberpin_times') %></th>
+                <th align="right" id='cc_dp_ask_dst_times_column'><%= _('Ask_dst_times') %></th>
+                <th align="center" id='cc_dp_end_ivr_column' <%= raw(nice_end_ivr_tooltip).html_safe %>><%= _('End_IVR') %></th>
                 <% if mor_11_extend? %>
-                    <th align="right"><%= _('If_Card_balance_lower_than') %></th>
-                    <th align="center"><%= _('Balance_IVR') %></th>
+                    <th align="right" id='cc_dp_card_balance_lower_column'><%= _('If_Card_balance_lower_than') %></th>
+                    <th align="center" id='cc_dp_balance_ivr_column'><%= _('Balance_IVR') %></th>
                 <% end %>
                 <th></th>
               </tr>
@@ -126,18 +126,18 @@
     <table class="maintable" width="100%">
       <tr>
 
-        <th align="left"><%= _('Name') %></th>
-        <th align="center"><%= _('Use_ANI') %>?</th>
-        <th align="right"><%= _('Ask_numberpin_times') %></th>
-        <th align="right"><%= _('Ask_dst_times') %></th>
+        <th align="left" id='ap_dp_name_column'><%= _('Name') %></th>
+        <th align="center" id='ap_dp_use_ani_column'><%= _('Use_ANI') %>?</th>
+        <th align="right" id='ap_db_ask_number_pin_times_column'><%= _('Ask_numberpin_times') %></th>
+        <th align="right" id='ap_dp_ask_dst_times_column'><%= _('Ask_dst_times') %></th>
         <% if mor_11_extend? %>
-            <th align="right"><%= _('Tell_balance_after_entering_destination') %></th>
+            <th align="right" id='ap_dp_tell_balance_after_entering_dst_column'><%= _('Tell_balance_after_entering_destination') %></th>
         <% end %>
-        <th align="center" <%= raw(tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation'))).html_safe %>><%= _('Save_original_CallerID') %></th>
+        <th align="center" id='ap_dp_save_original_clid_column' <%= raw(tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation'))).html_safe %>><%= _('Save_original_CallerID') %></th>
         <% if mor_11_extend? and calling_cards_active? %>
-            <th align="center"><%= _('Use_calling_card') %></th>
+            <th align="center" id='ap_dp_use_cc_column'><%= _('Use_calling_card') %></th>
         <% end %>
-        <th align="center"<%= raw(tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation'))).html_safe %>><%= _('Default_device') %></th>
+        <th align="center" id='ap_dp_default_device_column'<%= raw(tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation'))).html_safe %>><%= _('Default_device') %></th>
         <th></th>
 
 

@@ -7,29 +7,29 @@
 
     <table class="maintable" width="100%">
       <tr>
-        <th align="left"><%= _('Name') %></th>
-        <th align="right"><%= _('Number_length') %></th>
-        <th align="right"><%= _('Pin_length') %></th>
-        <th align="center"><%= _('Ask_only_pin') %></th>
-        <th align="center"><%= _('Pinless') %></th>
-        <th align="center"><%= _('Tell_time') %></th>
-        <th align="center"><%= _('Tell_balance') %></th>
+        <th align="left" id='cc_dp_name_column'><%= _('Name') %></th>
+        <th align="right" id='cc_dp_number_length_column'><%= _('Number_length') %></th>
+        <th align="right" id='cc_dp_pin_length_column'><%= _('Pin_length') %></th>
+        <th align="center" id='cc_dp_ask_only_pin_column'><%= _('Ask_only_pin') %></th>
+        <th align="center" id='cc_dp_pinless_column'><%= _('Pinless') %></th>
+        <th align="center" id='cc_dp_tell_time_column'><%= _('Tell_time') %></th>
+        <th align="center" id='cc_dp_tell_balance_column'><%= _('Tell_balance') %></th>
         <% if mor_11_extend? %>
-            <th align="center"><%= _('Tell_balance_after_call') %></th>
+            <th align="center" id='cc_dp_tell_balance_after_call_column'><%= _('Tell_balance_after_call') %></th>
         <% end %>
-        <th align="right"><%= _('Ask_numberpin_times') %></th>
-        <th align="right"><%= _('Ask_dst_times') %></th>
-        <th align="left"><%= _('Assigned_did') %></th>
-        <th align="left"><%= _('End_IVR') %></th>
+        <th align="right" id='cc_dp_ask_number_pin_times_column'><%= _('Ask_numberpin_times') %></th>
+        <th align="right" id='cc_dp_ask_dst_times_column'><%= _('Ask_dst_times') %></th>
+        <th align="left" id='cc_dp_assignes_did_column'><%= _('Assigned_did') %></th>
+        <th align="left" id='cc_dp_end_ivr_column'><%= _('End_IVR') %></th>
         <% if mor_11_extend? %>
-            <th align="right"><%= _('If_Card_balance_lower_than') %></th>
-            <th align="center"><%= _('Balance_IVR') %></th>
+            <th align="right" id='cc_dp_card_balance_lower_than_column'><%= _('If_Card_balance_lower_than') %></th>
+            <th align="center" id='cc_dp_balance_ivr_column'><%= _('Balance_IVR') %></th>
         <% end %>
         <th></th>
         <th></th>
       </tr>
-      <% if @ccdps %>
-          <% @ccdps.each_with_index { |dp, index| %>
+      <% if @cc_dps %>
+          <% @cc_dps.each_with_index { |dp, index| %>
               <tr class="row<%= index%2 %>">
                 <td align="left" id="cc_dp_name_<%= dp.id %>"> <%= h dp.name %></td>
                 <td align="right" id="cc_dp_data1_<%= dp.id %>"> <%= h dp.data1 %> </td>
@@ -65,19 +65,19 @@
 <table class="maintable" width="100%">
   <tr>
 
-    <th align="left"><%= _('Name') %></th>
-    <th align="center"><%= _('Use_ANI') %>?</th>
-    <th align="right"><%= _('Ask_pin_times') %></th>
-    <th align="right"><%= _('Ask_dst_times') %></th>
+    <th align="left" id='ap_db_name_column'><%= _('Name') %></th>
+    <th align="center" id='ap_dp_use_ani_clolumn'><%= _('Use_ANI') %>?</th>
+    <th align="right" id='ap_dp_ask_pin_times_column'><%= _('Ask_pin_times') %></th>
+    <th align="right" id='ap_dp_ask_dst_times_column'><%= _('Ask_dst_times') %></th>
     <% if mor_11_extend? %>
-        <th align="right"><%= _('Tell_balance_after_entering_destination') %></th>
+        <th align="right" id='ap_dp_tell_balance_after_enering_dst_column'><%= _('Tell_balance_after_entering_destination') %></th>
     <% end %>
-    <th align="center" <%= raw(tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation'))).html_safe %>><%= _('Save_original_CallerID') %></th>
-    <th align="left"><%= _('Assigned_did') %></th>
+    <th align="center" id='ap_dp_save_original_clid_collumn'<%= raw(tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation'))).html_safe %>><%= _('Save_original_CallerID') %></th>
+    <th align="left" id='ap_dp_assigned_did_column'><%= _('Assigned_did') %></th>
     <% if mor_11_extend? and calling_cards_active? %>
-        <th align="center"><%= _('Use_calling_card') %></th>
+        <th align="center" id='ap_dp_use_cc_column'><%= _('Use_calling_card') %></th>
     <% end %>
-    <th align="left"<%= raw(tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation'))).html_safe %>><%= _('Default_device') %></th>
+    <th align="left" id='ap_dp_default_device_column'<%= raw(tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation'))).html_safe %>><%= _('Default_device') %></th>
     <th></th>
     <th></th>
 
@@ -123,19 +123,19 @@
     <table class="maintable" width="100%">
       <tr>
 
-        <th align="left"><%= _('Name') %></th>
-        <th align="left"><%= _('DID_on_Callback') %></th>
-        <th align="left" <%= raw(tooltip(_('Hangup_cause_codes'), _('How_to_terminate_Callback_initiation_Call_(ISDN/SIP)'))).html_safe %>><%= _('Hangup_cause_codes') %></th>
-        <th align="left"><%= _('DID_DP_Name') %></th>
-        <th align="right" <%= raw(tooltip(_('Wait_Time') + " (s)", _('How_many_seconds_to_wait_after_initiation_call_to_callback'))).html_safe %> ><%= _('Wait') %>
+        <th align="left" id='c_dp_name_column'><%= _('Name') %></th>
+        <th align="left" id='c_dp_did_on_callback_column'><%= _('DID_on_Callback') %></th>
+        <th align="left" id='c_dp_hgc_column' <%= raw(tooltip(_('Hangup_cause_codes'), _('How_to_terminate_Callback_initiation_Call_(ISDN/SIP)'))).html_safe %>><%= _('Hangup_cause_codes') %></th>
+        <th align="left" id='c_dp_did_dp_name_column'><%= _('DID_DP_Name') %></th>
+        <th align="right" id='c_dp_wait_column' <%= raw(tooltip(_('Wait_Time') + " (s)", _('How_many_seconds_to_wait_after_initiation_call_to_callback'))).html_safe %> ><%= _('Wait') %>
           (s)
         </th>
-        <th align="left"><%= _('Initial_callback_device') %></th>
-        <th align="left"><%= _('Assigned_did') %></th>
-        <th align="center" <%= tooltip(_('Ask_card_data_after_callback'), _('Ask_card_data_after_callback_explanation')) %>><%= _('Ask_for_Card') %>
+        <th align="left" id='c_dp_initial_callback_device_column'><%= _('Initial_callback_device') %></th>
+        <th align="left" id='c_dp_assigned_did_column'><%= _('Assigned_did') %></th>
+        <th align="center" id='c_dp_ask_for_card_column' <%= tooltip(_('Ask_card_data_after_callback'), _('Ask_card_data_after_callback_explanation')) %>><%= _('Ask_for_Card') %>
           ?
         </th>
-        <th align="left"><%= _('CallerID') %></th>
+        <th align="left" id='c_dp_clid_column'><%= _('CallerID') %></th>
         <th></th>
         <th></th>
 
@@ -172,15 +172,15 @@
 <br/>
 <table class='maintable' width="100%">
   <tr>
-    <th align="left"><%= _("Name") %></th>
-    <th align="left"><%= _("Time_Interval") %>: 1</th>
-    <th align="left"><%= _("Ivr") %>: 1</th>
-    <th align="left"><%= _("Time_Interval") %>: 2</th>
-    <th align="left"><%= _("Ivr") %>: 2</th>
-    <th align="left"><%= _("Time_Interval") %>: 3</th>
-    <th align="left"><%= _("Ivr") %>: 3</th>
-    <th align="left"><%= _("Ivr") %>: <%= _("Default") %></th>
-    <th align="left"><%= _('Assigned_did') %></th>
+    <th align="left" id='i_dp_name_column'><%= _("Name") %></th>
+    <th align="left" id='i_dp_time_interval_column'><%= _("Time_Interval") %>: 1</th>
+    <th align="left" id='i_dp_ivr1_column'><%= _("Ivr") %>: 1</th>
+    <th align="left" id='i_dp_time_interval_column'><%= _("Time_Interval") %>: 2</th>
+    <th align="left" id='i_dp_ivr2_column'><%= _("Ivr") %>: 2</th>
+    <th align="left" id='i_dp_time_interval_column'><%= _("Time_Interval") %>: 3</th>
+    <th align="left" id='i_dp_ivr3_column'><%= _("Ivr") %>: 3</th>
+    <th align="left" id='i_dp_default_column'><%= _("Ivr") %>: <%= _("Default") %></th>
+    <th align="left" id='i_dp_assignes_did_column'><%= _('Assigned_did') %></th>
     <th></th>
     <th></th>
     <th></th>
