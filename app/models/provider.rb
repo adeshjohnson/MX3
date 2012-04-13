@@ -19,7 +19,7 @@ class Provider < ActiveRecord::Base
   attr_accessor :old_register_record
   attr_accessor :old_register_extension_record
   attr_accessor :old_register_line_record
-  attr_accessor: :max_timeout
+  attr_accessor :max_timeout
 
   # old validates_format_of :server_ip, :with => /(^(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)(?:[.](?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)){3}$)|(^[a-zA-Z]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.[a-zA-Z]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)?$)|dynamic/ , :message =>  _("Hostname_is_not_valid")
   validates_format_of :server_ip, :with => /(^(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)(?:[.](?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)){3}$)|(^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)+([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$)|^dynamic$|^$/, :message => _("Hostname_is_not_valid")
