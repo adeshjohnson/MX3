@@ -10,7 +10,7 @@
               <%= link_to_remote b_delete, :url => {:action => 'add_ivr_action', :block_id => @block.id, :id => action.id, :rm => 'true'}, :confirm => _('are_you_sure'), :update => "action_selector", :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');" %>
             </td>
             <td NOWRAP>
-              <span id="exclamation_<%= action.id %>" style="display:<%=t_to.to_i == 1 ? "''": 'none'%>;" <%= tooltip(_('Transfer_To_explanation'), _('This_action_will_not_be_taken_because_call_will_be_transferred_out_of_this_IVR_with_Transfer_To_action')) %> ><%= b_exclamation %></span>
+              <span id="exclamation_<%= action.id %>" style="display:<%=t_to.to_i == 1 ? "''": 'none'%>;" <%= raw(tooltip(_('Transfer_To_explanation'), _('This_action_will_not_be_taken_because_call_will_be_transferred_out_of_this_IVR_with_Transfer_To_action'))).html_safe %> ><%= b_exclamation %></span>
               <% t_to = 1 if action.name.to_s == 'Transfer To' %>
               <%= raw pos_action_select(action, $pos_actions, {:sounds => @ivr_sound_files, :voices => @ivr_voices}) %>
             </td>
