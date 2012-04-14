@@ -148,13 +148,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>DID was successfully created</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='Add']</td>
+	<td>link=New DID</td>
 	<td></td>
 </tr>
 <tr>
@@ -200,6 +205,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
@@ -291,6 +301,46 @@
 	<td></td>
 </tr>
 <!--==ASSIGN DID TO DIAL PLAN===-->
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='quickforward_dp_name']</td>
+	<td>Quick Forward DIDs DP</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=data10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=data10</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cb_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@type='image']</td>

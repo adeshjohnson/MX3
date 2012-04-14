@@ -243,8 +243,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>action_1</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>action_1</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>action_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=action_1</td>
 	<td>2</td>
 </tr>
 <tr>
@@ -288,9 +303,19 @@
 	<td>label=Transfer To</td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>change_action_3</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>verifySelectedValue</td>
 	<td>change_action_3</td>
 	<td>Transfer To</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>change_action_3</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -303,14 +328,29 @@
 	<td>IVR</td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>action_3</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>action_3</td>
 	<td>label=DID</td>
 </tr>
 <tr>
-	<td>verifySelectedValue</td>
+	<td>keyUp</td>
+	<td>action_3</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedValue</td>
 	<td>action_3</td>
 	<td>DID</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=option[value=&quot;37063042438&quot;]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForSelectedValue</td>
@@ -479,8 +519,23 @@
 	<td>New Block</td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>block_name</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>block_name</td>
+	<td>block2</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>block_name</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_name</td>
 	<td>block2</td>
 </tr>
 <tr>
@@ -577,9 +632,19 @@
 	<td>11</td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>block_timeout_response</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>block_timeout_response</td>
-	<td>1</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>block_timeout_response</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -587,9 +652,19 @@
 	<td>10</td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>block_timeout_digits</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>block_timeout_digits</td>
-	<td>1</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>block_timeout_digits</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -800,7 +875,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>document.forms[3].elements[6]</td>
+	<td>xpath=(//select[@name='dialplan[data1]'])[2]</td>
 	<td>label=testinis</td>
 </tr>
 <tr>
@@ -852,7 +927,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//form[3]/input</td>
+	<td>xpath=(//input[@type='image'])[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -902,8 +977,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>IVR not found</td>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
