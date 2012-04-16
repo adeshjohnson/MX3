@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>calling_card_aggregate_re</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">calling_card_aggregate_re</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/calls_for_cardgroup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/12?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=calling_cards_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=sreseller_menu_addons3</td>
+	<td>Aggregate statistics</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_calls_for_cardgroups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=sreseller_menu_addons3</td>
+	<td>Aggregate statistics</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>page_title_icon</td>
+	<td>Aggregate</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>date_from_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>date_from_minute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>date_till_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>date_till_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>date_till_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>date_till_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>date_till_minute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>cardgroup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>destination_grouping_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>destination_grouping_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Records: 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Pages: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Card Group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Duration</td>
+	<td>Duration</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Answered calls</td>
+	<td>Answered calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Total calls</td>
+	<td>Total calls</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=ASR</td>
+	<td>ASR</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=ACD</td>
+	<td>ACD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Provider price</td>
+	<td>Provider price</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=User price</td>
+	<td>User price</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Margin</td>
+	<td>Margin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>destination_grouping_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=Direction</td>
+	<td>Direction</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_duration</td>
+	<td>00:03:10</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_answ_calls</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>total_total_calls</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_duration</td>
+	<td>exact:00:03:10</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_answ_calls</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_total_calls</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_ast</td>
+	<td>83.3333 %</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_acd</td>
+	<td>00:00:38</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_provider_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_user_price</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_profit</td>
+	<td>-2.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_margin</td>
+	<td>-100.0000 %</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_markup</td>
+	<td>-50.0000 %</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_dir_name_0</td>
+	<td>Lithuania MOB</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>direction_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_dir_name_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_cardname_0</td>
+	<td>Test_cardgroup_test_1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>cardgroup_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>cardgroup_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_cardname_0</td>
+	<td>Test_cardgroup_test_1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_duration_0</td>
+	<td>00:03:10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>duration_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_duration_0</td>
+	<td>00:03:10</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_answered_calls_0</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>answered_calls_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_answered_calls_0</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_total_calls_0</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>total_calls_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_total_calls_0</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_asr_0</td>
+	<td>80.0000 %</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>asr_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>asr_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_asr_0</td>
+	<td>100.0000 %</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_acd_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_acd_1</td>
+	<td>00:00:47</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>acd_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_acd_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_provider_price_0</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>provider_price_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>provider_price_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_provider_price_0</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_user_price_0</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>user_price_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>user_price_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_user_price_0</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_profit_0</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>profit_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_profit_0</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_margin_0</td>
+	<td>0.0000 %</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_markup_0</td>
+	<td>0.0000 %</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>margin_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_margin_0</td>
+	<td>-100.0000 %</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>t_markup_0</td>
+	<td>-50.0000 %</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>markup_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_markup_0</td>
+	<td>0.0000 %</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/aggregate?csv=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>asr: 80.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>direct_name: ! 'Lithuania MOB (3706) '</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>acd: 0.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>margin: -100.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>profit: -2.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>markup: -50.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>total_calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>answered_calls: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>provider_price: 4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>duration: 190</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>cardgroup_name: Test_cardgroup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>user_price: 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>destination_grouping_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>Luxembourg MOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/aggregate?csv=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>Luxembourg MOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>destination_grouping_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix</td>
+	<td>352</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Lithuania MOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/aggregate?csv=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Lithuania MOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_dir_name_0</td>
+	<td>(No prefix found)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=cardgroup</td>
+	<td>label=Test_cardgroup_test_1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_dir_name_1</td>
+	<td>Lithuania MOB Lithuania mobile (3706)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>prefix</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>t_dir_name_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_dir_name_0</td>
+	<td>Lithuania MOB Lithuania mobile (3706)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>destination_grouping_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>t_dir_name_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Records: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Pages: 1</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
