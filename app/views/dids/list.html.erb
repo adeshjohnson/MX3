@@ -73,7 +73,7 @@
 <br/>
 
 <%= render :partial => "page_select_header" if @total_pages > 1 %>
-<%= "<br>" if @total_pages > 1 %>
+<%= "<br>".html_safe if @total_pages > 1 %>
 
 <table class="maintable" width="100%">
   <tr>
