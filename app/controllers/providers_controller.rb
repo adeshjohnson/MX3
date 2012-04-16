@@ -338,6 +338,10 @@ class ProvidersController < ApplicationController
     params[:provider][:timeout]= params[:provider][:timeout].strip
     params[:provider][:max_timeout]= params[:provider][:max_timeout].strip
 
+    #5618#comment:13 if timeout value is invalid(its not positive integer) we discard that value 
+    params[:provider].delete(:timeout) if params[:provider][:timeout] !~ /^[0-9]+$/ 
+    params[:provider].delete(:max_timeout) if params[:provider][:max_timeout] !~ /^[0-9]+$/ 
+
     params[:provider][:reg_extension] ||= ""
     params[:provider][:reg_line] ||= ""
 
