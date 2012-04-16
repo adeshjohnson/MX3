@@ -41,7 +41,7 @@
       <tr>
         <td><b><label for="did_rate_end_time"><%= _('End_Time') %>:</label></b></td>
         <td>
-          <%= text_field 'did_rate', 'end_time', "class" => "input" %>
+          <%= text_field 'did_rate', 'end_time', "class" => "input", :value => @did_rate.end_time.strftime('%H:%M:%S') %>
         </td>
       </tr>
       <tr>
