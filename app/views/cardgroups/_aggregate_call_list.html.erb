@@ -34,8 +34,8 @@
 
         <td align="left" id="t_cardname_<%= i %>"><%= row.cardgroup_name %></td>
         <td align="center" id="t_duration_<%= i %>"><%= nice_time(row.duration) %></td>
-        <td align="right" id="t_answered_calls_<%= i %>"><%= row.answered_calls %></td>
-        <td align="right" id="t_total_calls_<%= i %>"><%= row.total_calls %></td>
+        <td align="right" id="t_answered_calls_<%= i %>"><%= row.answered_calls.to_i %></td>
+        <td align="right" id="t_total_calls_<%= i %>"><%= row.total_calls.to_i %></td>
         <td align="right" id="t_asr_<%= i %>"><%= nice_number(row.asr) %> %</td>
         <td align="center" id="t_acd_<%= i %>"><%= nice_time(row.acd) %></td>
         <td align="right" id="t_provider_price_<%= i %>"><%= nice_number(row.provider_price) %></td>
@@ -50,8 +50,8 @@
     <th><%= _("Total") %>:</th>
     <th align="center"></th>
     <th id="total_duration" align="center"><%= nice_time(@total[:duration]) %></th>
-    <th id="total_answ_calls" align="right"><%= @total[:answered_calls] %></th>
-    <th id="total_total_calls" align="right"><%= @total[:total_calls] %></th>
+    <th id="total_answ_calls" align="right"><%= @total[:answered_calls].to_i %></th>
+    <th id="total_total_calls" align="right"><%= @total[:total_calls].to_i %></th>
     <th id="total_ast" align="right"><%= nice_number(@total[:asr]) %> %</th>
     <th id="total_acd" align="center"><%= nice_time(@total[:acd]) %></th>
     <th id="total_provider_price" align="right"><%= nice_number(@total[:provider_price]) %></th>
