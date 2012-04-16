@@ -254,36 +254,6 @@
         </tr>
       </table>
     </div>
-    <div class="dhtmlgoodies_aTab">
-      <br/><br/>
-      <table class="simple" width="100%">
-        <tr>
-          <td width="30"></td>
-          <td><b><%= _('Fullscreen') %>: </b></td>
-          <td>      <%= check_box_tag 'gm_fullscreen', value = "1", Confline.get_value("Google_Fullscreen").to_i == 1 %></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><b><%= _('Reload_Time') %>: </b></td>
-          <td><%= text_field_tag('gm_reload_time', Confline.get_value("Google_ReloadTime"), "class" => "input", :size => "35", :maxlength => "50") %></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><b><%= _('Width') %>: </b></td>
-          <td><%= text_field_tag('gm_width', Confline.get_value("Google_Width"), "class" => "input", :size => "35", :maxlength => "50") %></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><b><%= _('Height') %>: </b></td>
-          <td><%= text_field_tag('gm_height', Confline.get_value("Google_Height"), "class" => "input", :size => "35", :maxlength => "50") %></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><b><%= _('Key') %>: </b></td>
-          <td><%= text_field_tag('gm_key', Confline.get_value("Google_Key"), "class" => "input", :size => "65", :maxlength => "200") %></td>
-        </tr>
-      </table>
-    </div>
 
     <div class="dhtmlgoodies_aTab">
       <br/>
@@ -452,7 +422,7 @@
 <% end %>
 <% content_for :scripts do %>
     <script type="text/javascript">
-        <% setting_tabs = ["Global", "Registration", "Invoices", "Emails", "Various", "Tax", "Google_Maps", "Backups", "API", "Functionality", "Privacy", "Visual"] -%>
+        <% setting_tabs = ["Global", "Registration", "Invoices", "Emails", "Various", "Tax", "Backups", "API", "Functionality", "Privacy", "Visual"] -%>
         initTabs('dhtmlgoodies_tabView1', Array(<%= setting_tabs.map{|tab| "'"+ _(tab) + "'"}.join(", ") %>), 0, 800, 580);
     </script>
 <% end %>
