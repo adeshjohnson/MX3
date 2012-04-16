@@ -297,7 +297,7 @@
 
     new PeriodicalExecuter(function () {
         if (document.getElementById('active_devices_box').style.display == 'block') {
-            new Ajax.Request('/stats/google_active', {asynchronous:true, evalScripts:true, onComplete:function (request) {
+            new Ajax.Request('<%= Web_Dir %>/stats/google_active', {asynchronous:true, evalScripts:true, onComplete:function (request) {
                 Element.hide('spinner');
             }, onLoading:function (request) {
                 Element.show('spinner');
