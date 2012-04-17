@@ -1016,6 +1016,13 @@ class Device < ActiveRecord::Base
   def time_limit_per_day
     (read_attribute(:time_limit_per_day) / 60).to_i
   end
+=begin
+  Callerid control by cids is concidered enabled if callerid is not 0, cause this value should 
+  be id of device's clid
+=end
+def control_callerid_by_cids?
+  self.control_callerid_by_cids.to_i != 0 
+end
 
   private
 

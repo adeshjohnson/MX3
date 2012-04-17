@@ -27,6 +27,39 @@
           <tr>
             <td id="cid_number_name"> <%= _('Number') %>:</td>
             <td id="cid_number_value"> <%= text_field_tag 'cid_number', @cid_number, "class" => "input" %> </td>
+            <td id="cid_number_control"> <%= check_box_tag :enable_callerid_by_cid, 1, @device.control_callerid_by_cids?, "class" => "input", :disabled => (@cid_number.to_s.blank?) %> </td>
+          <script type='text/javascript'>
+              function toggleControlByCIDCheckbox(event){
+                disable = (event.target.value == '');
+                $('enable_callerid_by_cid').disabled = disable;
+                if(disable){
+                  $('enable_callerid_by_cid').checked = !disable;
+                  $('control_callerid_by_cids').hide();
+                }
+              }
+              function toggleControlByCIDSelect(event){
+                if(event.target.checked){
+                  $('control_callerid_by_cids').show();
+                }else{
+                  $('control_callerid_by_cids').hide();
+                }
+              }
+              window.addEventListener('load', 
+              function() {
+                 $('cid_number').addEventListener('keypress', function(event){toggleControlByCIDCheckbox(event);});
+                 $('enable_callerid_by_cid').addEventListener('change', function(event){toggleControlByCIDSelect(event)});
+                 if(!$('enable_callerid_by_cid').checked){
+                   $('control_callerid_by_cids').hide()
+                 }
+               });
+          </script>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <%= select_tag('control_callerid_by_cids', options_for_select(@device.callerids.map { |clid| [clid.cli, clid.id]}, @device.control_callerid_by_cids), :visible => @device.control_callerid_by_cids?) %>
+            </td>
           </tr>
       <% else %>
           <% if session[:usertype] == 'accountant' and session[:acc_device_edit_opt_4] == 1 %>

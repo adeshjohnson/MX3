@@ -462,7 +462,13 @@ class DevicesController < ApplicationController
       end
 
       if @device.device_type !="FAX" and (params[:cid_name] or params[:cid_number] or (params[:cid_number_from_did] and params[:cid_number_from_did].length > 0))
-        if params[:cid_number_from_did] and params[:cid_number_from_did].length > 0
+        #if cid number is not specified or checkbox to enable callerid contol by cid was not checked
+        if params[:cid_number].to_s.length == 0 or params[:enable_callerid_by_cid].to_i == 0
+          @device.control_callerid_by_cids = 0
+        else
+          @device.control_callerid_by_cids = params[:control_callerid_by_cids].to_i
+        end
+        if params[:cid_number_from_did] and params[:cid_number_from_did].to_s.length > 0
           @device.update_cid(params[:cid_name], params[:cid_number_from_did], false)
         else
           @device.update_cid(params[:cid_name], params[:cid_number], false)
