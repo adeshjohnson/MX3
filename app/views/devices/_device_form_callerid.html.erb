@@ -27,7 +27,7 @@
           <tr>
             <td id="cid_number_name"> <%= _('Number') %>:</td>
             <td id="cid_number_value"> <%= text_field_tag 'cid_number', @cid_number, "class" => "input" %> </td>
-            <td id="cid_number_control"> <%= check_box_tag :enable_callerid_by_cid, 1, @device.control_callerid_by_cids?, "class" => "input", :disabled => (@cid_number.to_s.blank?) %> </td>
+            <td id="cid_number_control" <%= tooltip(_('Control_callerid_by_cid'), _('Control_callerid_by_cid_explanation')) %>> <%= check_box_tag :enable_callerid_by_cid, 1, @device.control_callerid_by_cids?, "class" => "input", :disabled => (@cid_number.to_s.blank?) %> </td>
           <script type='text/javascript'>
               function toggleControlByCIDCheckbox(event){
                 disable = (event.target.value == '');
