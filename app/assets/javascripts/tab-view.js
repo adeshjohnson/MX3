@@ -157,7 +157,7 @@ function initTabs(mainContainerID, tabTitles, activeTab, width, height, closeBut
     for (var no = 0; no < tabTitles.length; no++) {
         var aTab = document.createElement('DIV');
         aTab.id = 'tabTab' + mainContainerID + "_" + (no + tabView_countTabs[mainContainerID]);
-        aTab.setAttribute('name',tabTitles[no].replace(' ','_').toLowerCase());
+        aTab.setAttribute('name','AAAAAAAA');          //not working on virtual machine
         aTab.onmouseover = rolloverTab;
         aTab.onmouseout = rolloutTab;
         aTab.onclick = tabClick;
