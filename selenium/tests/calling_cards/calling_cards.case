@@ -1664,19 +1664,50 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Cards were successfully deleted</td>
+	<td>assertTextPresent</td>
+	<td>Cards were not deleted</td>
 	<td></td>
 </tr>
+<!--<tr> 	<td>verifyTextPresent</td> 	<td>Cards were successfully deleted</td> 	<td></td> </tr>-->
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>verifyTextPresent</td>
 	<td>1111111002</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>verifyTextPresent</td>
 	<td>1111111001</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_10</td>
+	<td>123456789 (12345)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_11</td>
+	<td>123456789 (12345)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_14</td>
+	<td>1111111000 (7856)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_15</td>
+	<td>1111111001 (9812)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_16</td>
+	<td>1111111002 (8722)</td>
 </tr>
 <!--reseller-->
 <tr>
@@ -1927,13 +1958,14 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--<tr> 	<td>verifyTextPresent</td> 	<td>Cards were successfully deleted</td> 	<td></td> </tr>-->
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Cards were successfully deleted</td>
+	<td>assertTextPresent</td>
+	<td>Cards were not deleted</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>verifyTextPresent</td>
 	<td>123456802</td>
 	<td></td>
 </tr>
@@ -2293,8 +2325,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>You do not have rights to edit this</td>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
@@ -2646,47 +2678,67 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Cards created: 13</td>
+	<td>Cards created: 9</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>field_123456806_number</td>
+	<td>assertText</td>
+	<td>id=field_123456802</td>
+	<td>123456802</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=field_123456803</td>
+	<td>123456803</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=field_123456804</td>
+	<td>123456804</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=field_123456805</td>
+	<td>123456805</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=field_123456806</td>
+	<td>123456806</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=field_123456807</td>
+	<td>123456807</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=field_123456808</td>
+	<td>123456808</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=field_123456809</td>
+	<td>123456809</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=field_123456810</td>
+	<td>123456810</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=field_123456811</td>
+	<td>123456811</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=error_123456806</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>field_123456807_number</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>field_123456808_number</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>field_123456809_number</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>field_123456810_number</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>field_123456811_number</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>error_123456806</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>error_123456811</td>
+	<td>assertElementPresent</td>
+	<td>id=error_123456811</td>
 	<td></td>
 </tr>
 <tr>
@@ -2811,34 +2863,34 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>field_123456806_number</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=field_123456806</td>
+	<td>123456806</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>field_123456807_number</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=field_123456807</td>
+	<td>123456807</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>field_123456808_number</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=field_123456808</td>
+	<td>123456808</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>field_123456809_number</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=field_123456809</td>
+	<td>123456809</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>field_123456810_number</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=field_123456810</td>
+	<td>123456810</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>field_123456811_number</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=field_123456811</td>
+	<td>123456811</td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
@@ -3198,7 +3250,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_11 &gt; span</td>
+	<td>//div[@name='visual']</td>
 	<td></td>
 </tr>
 <tr>
