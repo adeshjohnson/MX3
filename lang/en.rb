@@ -4350,6 +4350,8 @@ Localization.define('en') do |l|
   l.store 'Anti_resale_auto_answer', 'Anti-resale (Auto-answer)'
   l.store 'Time_limit_per_day', 'Time limit per day'
   l.store 'min', 'min'
+  l.store 'Control_callerid_by_cid', 'Control CallerID by CID'
+  l.store 'Control_callerid_by_cid_explanation', 'Allow call\\\'s CalleID to be from the list of Device\\\'s CIDs. If call\\\'s CallerID will not match one of the CIDs when this setting is activated, CallerID of the call will be set as default CallerID (Number) from the field nearby'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

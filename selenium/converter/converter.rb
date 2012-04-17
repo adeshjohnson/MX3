@@ -257,6 +257,8 @@ class Command < Base
         line ="begin\n     assert @selenium.is_text_present(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
       when "verifyTextNotPresent"
         line = "begin\n    assert !@selenium.is_text_present(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "assertTextNotPresent"
+        line = "assert !@selenium.is_text_present(#{@target})"
       when "assertText"
         line = "assert_equal #{@value}, @selenium.get_text(#{@target}).respond_to?(:force_encoding) ? @selenium.get_text(#{@target}).force_encoding('UTF-8') : @selenium.get_text(#{@target}) "
       when "assertTable"
