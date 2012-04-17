@@ -1676,6 +1676,11 @@ class Call < ActiveRecord::Base
       var << "#{options[:destination]}%"
     end
 
+    unless options[:s_reseller_did].blank?
+      cond << "dids.reseller_id = ?"
+      var << options[:s_reseller_did]
+    end
+
     if options[:s_country] and !options[:s_country].blank?
       cond << "destinations.direction_code = ? "; var << options[:s_country]
       jn << 'LEFT JOIN destinations ON (calls.prefix = destinations.prefix)'

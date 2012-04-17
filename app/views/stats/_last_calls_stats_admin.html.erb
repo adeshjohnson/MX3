@@ -48,9 +48,11 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _('Caller_ID') %>:
       <%= text_field_tag("s_caller_id", h(@options[:caller_id].to_s)) %>
+      <%= _('Reseller_in_any_dids') %>
+      <%= select_tag("s_reseller_did", options_for_select([[_('All'), "all"]]+@resellers.map { |u| [nice_user(u), u.id] }, @options[:s_reseller_did].to_i)) %>
       <br/>
       <br/>
-      <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
+       <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
       <%= observe_field("s_user", :update => "s_device_span", :with => "user_id", :url => {:controller => "devices", :action => "get_devices_for_search"}, :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');") %>
     </div>
 <% end %>
