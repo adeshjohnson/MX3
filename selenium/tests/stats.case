@@ -206,7 +206,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td>
+	<td>//div[@name='various']</td>
 	<td></td>
 </tr>
 <tr>
@@ -960,12 +960,42 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>provider_price3: &quot;1&quot; billsec: &quot;50&quot; m1: &quot;75&quot; profit: &quot;3&quot;</td>
+	<td>provider_price3: &quot;1&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>disposition: ANSWERED dst: &quot;123123&quot; calldate: 2009-01-01 00:00:01 user_price3</td>
+	<td>billsec: &quot;50&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>m1: &quot;75&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>profit: &quot;3&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>disposition: ANSWERED</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>dst: &quot;123123&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>calldate: 2009-01-01 00:00:01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>user_price3</td>
 	<td></td>
 </tr>
 <tr>
@@ -995,7 +1025,22 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>provider_price3: &quot;4&quot; billsec: &quot;50&quot; m1: &quot;0&quot; profit: &quot;0&quot;</td>
+	<td>provider_price3: &quot;4&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>billsec: &quot;50&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>m1: &quot;0&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>profit: &quot;0&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -1177,8 +1222,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>{&quot;action&quot;=&gt;&quot;user_device_edit&quot;, &quot;id&quot;=&gt;&quot;5&quot;, &quot;controller&quot;=&gt;&quot;devices&quot;}</td>
+	<td>assertTextPresent</td>
+	<td>&quot;controller&quot;=&gt;&quot;devices&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;id&quot;=&gt;&quot;5&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;action&quot;=&gt;&quot;user_device_edit&quot;</td>
 	<td></td>
 </tr>
 <!--users_finances-->

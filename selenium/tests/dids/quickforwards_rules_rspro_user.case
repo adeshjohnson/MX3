@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.165" />
+<link rel="selenium.base" href="" />
 <title>quickforwards_rules_rspro</title>
 </head>
 <body>
@@ -236,13 +236,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>matches any symbol any number of times</td>
+	<td>assertTextPresent</td>
+	<td> % - matches any symbol any number of times </td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>matches dids beginning with</td>
+	<td>assertTextPresent</td>
+	<td>[1,2,3,4]% - matches DIDs beginning with 1 2 3 and 4 </td>
 	<td></td>
 </tr>
 <tr>
@@ -703,6 +703,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//td[@id='delete_2']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
