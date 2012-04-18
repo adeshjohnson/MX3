@@ -3839,7 +3839,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         :s_country => '',
         :s_reseller => "all",
         :s_caller_id => nil,
-        :s_reseller_did => 'all'
+        :s_reseller_did => nil,
     }
     options = ((params[:clear] || !session[:last_calls_stats]) ? default : session[:last_calls_stats])
     default.each { |key, value| options[key] = params[key] if params[key] }

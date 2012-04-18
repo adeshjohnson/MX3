@@ -50,6 +50,8 @@
       <%= text_field_tag("s_caller_id", h(@options[:caller_id].to_s)) %>
       <%= _('Reseller_in_any_dids') %>
       <%= select_tag("s_reseller_did", options_for_select([[_('All'), "all"]]+@resellers.map { |u| [nice_user(u), u.id] }, @options[:s_reseller_did].to_i)) %>
+      <%= _('Reseller_in_any_dids') %>                                                                
+      <%= select_tag("s_reseller_did", options_for_select([[_('All'), "all"]]+@resellers.map { |u| [nice_user(u), u.id] }, @options[:s_reseller_did].to_i)) %>
       <br/>
       <br/>
        <%= submit_tag _('Search'), :disable_with => _('Processing..') %>

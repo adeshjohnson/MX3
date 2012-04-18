@@ -241,6 +241,9 @@ class DevicesController < ApplicationController
     @extension = @device.extension
     @fax_enabled = true if Confline.get_value("Fax_Device_Enabled").to_i == 1
     @pdffaxemails = @device.pdffaxemails
+    @global_tell_balance = Confline.get_value('Tell_Balance').to_i
+    @global_tell_time = Confline.get_value('Tell_Time').to_i
+ 
 
     set_voicemail_variables(@device)
 

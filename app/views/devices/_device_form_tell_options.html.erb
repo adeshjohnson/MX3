@@ -61,6 +61,7 @@
       <td>
         <%= radio_button_tag('device[qf_tell_balance]', 0, checked = (device_qf_tell_balance.to_i == 0)) %> <%= _('No') %>
         <%= radio_button_tag('device[qf_tell_balance]', 1, checked = (device_qf_tell_balance.to_i == 1)) %> <%= _('Yes') %>
+        <%= radio_button_tag('device[qf_tell_balance]', -1, checked = (device_qf_tell_balance.to_i == -1)) %> <%= @global_tell_balance == 1 ? _('Global_yes') : _('Global_no') %>
       </td>
     </tr>
     <tr>
@@ -68,6 +69,7 @@
       <td>
         <%= radio_button_tag('device[qf_tell_time]', 0, checked = (device_qf_tell_time.to_i == 0)) %> <%= _('No') %>
         <%= radio_button_tag('device[qf_tell_time]', 1, checked = (device_qf_tell_time.to_i == 1)) %> <%= _('Yes') %>
+        <%= radio_button_tag('device[qf_tell_time]', -1, checked = (device_qf_tell_time.to_i == -1)) %> <%= @global_tell_time == 1 ? _('Global_yes') : _('Global_no') %>
       </td>
     </tr>
 <% end %>
