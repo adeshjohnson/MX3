@@ -146,7 +146,7 @@
                 <% if card %>
                     <td id="card_<%= call.id %>" class="<%= text_class %>"><%= nice_card(card) %></td>
                 <% else %>
-                    <td id="user_<%= call.id %>" class="<%= text_class %>"><%= <%= if call.hangupcause.to_i == 200 then (nice_user(call_user) if call_user and [call_user.id, call_user.owner_id].include?(current_user.id)) else _('Unauthenticated') end  %></td>
+                    <td id="user_<%= call.id %>" class="<%= text_class %>"><%= <%= if call.hangupcause.to_i != 200 then (nice_user(call_user) if call_user and [call_user.id, call_user.owner_id].include?(current_user.id)) else _('Unauthenticated') end  %></td>
                 <% end %>
 
                 <td id="user_rate_<%= call.id %>" class="<%= text_class %>" align="left"><%= nice_number(call.user_rate_exrate) %></td>
