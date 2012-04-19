@@ -78,7 +78,7 @@ class RecordingsController < ApplicationController
     @page = 1
     @page = params[:page].to_i if params[:page]
     @from = ((@page-1) * session[:items_per_page]).to_i
-    @to = ((@page+1) * session[:items_per_page]).to_i
+    @to = (session[:items_per_page]).to_i
     @s_dev = @device.id
     #@recs = Recording.find(:all, :conditions => ["SUBSTRING(datetime,1,10) BETWEEN ? AND ? AND (src_device_id = ? OR dst_device_id = ?)",session_from_date,session_till_date, @device.id, @device.id], :order => "datetime DESC")
 
@@ -89,7 +89,8 @@ class RecordingsController < ApplicationController
 
     @recs = Recording.find_by_sql(sql)
     @total_pages = Recording.count(:all, :conditions => "datetime BETWEEN '#{from_t}' AND '#{till_t}' AND (src_device_id = '#{@device.id}' OR dst_device_id = '#{@device.id}')")
-    @total_pages = @total_pages / session[:items_per_page]
+    (@total_pages % session[:items_per_page] > 0) ? (@rest = 1) : (@rest = 0)
+    @total_pages = @total_pages / session[:items_per_page] + @rest
     @page_select_options = {:action => 'show', :controller => "recordings", :show_rec => @s_dev}
     @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend?)
   end
