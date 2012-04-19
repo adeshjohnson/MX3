@@ -735,6 +735,55 @@ class ProvidersController < ApplicationController
     render :layout => false
   end
 
+  def billing
+    if current_user.is_reseller?
+      providers_enabled_for_reseller?
+    end
+    if !provider_billing_active?
+      dont_be_so_smart
+      redirect_to :controller => :callc, :action => :main and return false
+    end
+
+    @page_title = _('Providers')
+    @page_icon = "provider.png"
+
+    session[:providers_billing_options] ? @options = session[:providers_billing_options] : @options = {}
+    @options = clear_options(@options) if params[:clear].to_i == 1
+    @options[:s_user_id] ||= current_user.id
+    params[:s_hidden] = params[:s_hidden].to_i
+    [:s_tech, :s_name, :s_hidden].each { |key|
+      params[key] ? @options[key] = params[key].to_s : (@options[key] = "" if !@options[key])
+    }
+    # page number is an exception because it defaults to 1
+    if params[:page] and params[:page].to_i > 0
+      @options[:page] = params[:page].to_i
+    else
+      @options[:page] = 1 if !@options[:page] or @options[:page] <= 0
+    end
+    # same goes for order descending
+    params[:order_desc] ? @options[:order_desc] = params[:order_desc].to_i : (@options[:order_desc] = 0 if !@options[:order_desc])
+    params[:order_by] ? @options[:order_by] = params[:order_by].to_s : @options[:order_by] == "acc"
+    order_by = current_user.providers.providers_order_by(@options)
+
+    cond = []
+    cond_param = []
+    #conditions
+    ["name"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "providers.#{col} LIKE ?", cond, cond_param) }
+    ["tech", "hidden", "owner_id"].each { |col|
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s, "providers.#{col} = ?", cond, cond_param) }
+
+    @total_pages = (current_user.providers.count(:all, :conditions => [cond.join(" AND ")] + cond_param).to_f / session[:items_per_page].to_f).ceil
+    @options[:page] = @total_pages if @options[:page].to_i > @total_pages and @total_pages > 0
+
+    @providers = current_user.providers.find(:all, :conditions => [cond.join(" AND ") + ' AND users.provider_balance > 0'] + cond_param, :include => [:tariff, :user], :offset => session[:items_per_page]*(@options[:page]-1), :limit => session[:items_per_page], :order => order_by)
+
+    @n_class = ''
+    session[:providers_list_options] = @options
+    session[:back] = params
+    store_location
+  end
+
   # in before filter : provider (find_provider)
   def provider_test
     @success = 0

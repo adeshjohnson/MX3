@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
 
   # addons
   helper_method :callback_active?, :call_shop_active?, :reseller_active?, :payment_gateway_active?, :calling_cards_active?, :sms_active?, :recordings_addon_active?, :monitorings_addon_active?, :skp_active?
-  helper_method :allow_pg_extension, :erp_active?, :admin?, :reseller?, :user?, :accountant?, :reseller_pro_active?, :show_recordings?, :mor_11_extend?, :ast_18?
+  helper_method :allow_pg_extension, :erp_active?, :admin?, :reseller?, :user?, :accountant?, :reseller_pro_active?, :show_recordings?, :mor_11_extend?, :ast_18?, :provider_billing_active?, :providers_enabled_for_reseller?
   before_filter :set_charset
   before_filter :set_current_user
   # before_filter :set_timezone
@@ -2904,6 +2904,10 @@ Variables: (Names marked with * are required)
 
   def erp_active?
     (defined?(ERP_Active) and ERP_Active.to_i == 1) and admin?
+  end
+
+  def provider_billing_active?
+    (defined?(PROVB_Active) and PROVB_Active.to_i == 1)
   end
 
   def mor_11_extend?

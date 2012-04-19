@@ -1,7 +1,7 @@
 <script type="text/javascript">
     addons_menu = new dTree('addons_menu');
     addons_menu.config.inOrder = true;
-    <% if erp_active? or skp_active? or ad_active? or cc_active? or call_shop_active? or (rec_active?) or reseller_active? or (sms_active?)or (defined?(MA_Active) and MA_Active == 1) or (defined?(PG_Active) and PG_Active == 1)%>
+    <% if erp_active? or skp_active? or ad_active? or cc_active? or call_shop_active? or (rec_active?) or reseller_active? or (sms_active?)or (defined?(MA_Active) and MA_Active == 1) or (defined?(PG_Active) and PG_Active == 1) or provider_billing_active? %>
 
     <% si = 0
     i = si %>
@@ -98,5 +98,11 @@
     addons_menu.add(<%= i %>, <%= a %>, '<%= _('Settings') %>', '<%= Web_Dir %>/erp/settings');
     <% i += 1 %>
     <% end %>
+    <% if provider_billing_active? %>
+      addons_menu.add(<%= i %>, <%= si %>, '<%= _('Provider_billing') %>', '<%= Web_Dir %>/providers/billing');
+      <% i += 1 %>
+    <% end %>
+
+
     $("addons_menu_div").innerHTML = addons_menu.toString();
 </script>

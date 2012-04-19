@@ -4355,6 +4355,7 @@ Localization.define('en') do |l|
   l.store 'Reseller_in_any_dids', 'Reseller in any dids'
   l.store 'Global_no', 'Global(No)'
   l.store 'Global_yes', 'Global(Yes)'
+  l.store 'Provider_billing', 'Provider billing'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
