@@ -73,7 +73,7 @@
       payment_gateway = (payment_gateway_active? and session[:res_payment_gateways].to_i == 2 and gateways_enabled_for(current_user))
     %>
     $("reseller_menu_div").innerHTML = reseller_menu.toString();
-    <% if payment_gateway or call_shop or sms or calling_cards or erp_active? or monitoring_enabled_for(current_user) or (provider_billing_active? and providers_enabled_for_reseller? != false) %>
+    <% if payment_gateway or call_shop or sms or calling_cards or erp_active? or monitoring_enabled_for(current_user) or (provider_billing_active? and current_user.reseller_allow_providers_tariff?) %>
 
     reseller_menu_addons = new dTree('reseller_menu_addons');
     reseller_menu_addons.config.inOrder = true;
@@ -107,7 +107,7 @@
     reseller_menu_addons.add(14, 0, '<%= _('Monitorings') %>', '<%= Web_Dir %>/monitorings');
     <% end %>
  
-    <% if provider_billing_active? and providers_enabled_for_reseller? != false %>
+    <% if provider_billing_active? and current_user.reseller_allow_providers_tariff? %>
     reseller_menu_addons.add(15, 0, '<%= _('Provider_billing') %>', '<%= Web_Dir %>/providers/billing');
     <% end %>
 

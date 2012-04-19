@@ -736,10 +736,7 @@ class ProvidersController < ApplicationController
   end
 
   def billing
-    if current_user.is_reseller?
-      providers_enabled_for_reseller?
-    end
-    if !provider_billing_active?
+    unless provider_billing_active?
       dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     end
