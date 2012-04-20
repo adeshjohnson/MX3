@@ -157,7 +157,11 @@ function initTabs(mainContainerID, tabTitles, activeTab, width, height, closeBut
     for (var no = 0; no < tabTitles.length; no++) {
         var aTab = document.createElement('DIV');
         aTab.id = 'tabTab' + mainContainerID + "_" + (no + tabView_countTabs[mainContainerID]);
-        aTab.setAttribute("name",tabTitles[no].replace(' ','_').toLowerCase());          //not working on virtual machine
+        if (document.getElementsByName(tabTitles[no].replace(' ','_').toLowerCase())[0]){
+            aTab.setAttribute('name',tabTitles[no].replace(' ','_').toLowerCase() + '_' + no);
+        } else {
+            aTab.setAttribute('name',tabTitles[no].replace(' ','_').toLowerCase());
+        }
         aTab.onmouseover = rolloverTab;
         aTab.onmouseout = rolloutTab;
         aTab.onclick = tabClick;
