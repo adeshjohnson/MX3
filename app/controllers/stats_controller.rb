@@ -2766,7 +2766,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @providers = Provider.find(:all, :order => "name ASC", :conditions => ['hidden=?', 0])
 
     #@user_id2 = -1
-    @user_id = params[:user_id].to_i if params[:user_id]
+    (params[:user_id]) ? (@user_id = params[:user_id].to_i) : (@user_id = -1)        
     user_sql = ""
     #my_debug @user_id2
     @provider_id = -1

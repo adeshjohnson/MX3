@@ -1,5 +1,9 @@
 <div align="left" class="nb">
   <%= form_tag :action => 'dids' do %>
+      <span style="text-align: right;FLOAT: right; ">
+        <%= link_to b_cross + _('Clear_search'), :action => 'dids', :clear=>1%>
+      </span>
+      <br />
       <%= select_date(Time.mktime(session[:year_from], session[:month_from], session[:day_from]), :end_year => Date.today.year+1, :prefix => "date_from") %>
       <%= select_date(Time.mktime(session[:year_till], session[:month_till], session[:day_till]), :end_year => Date.today.year+1, :prefix => "date_till") %>
       &nbsp;&nbsp;
