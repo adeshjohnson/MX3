@@ -97,8 +97,8 @@
         <% if can_see_finances? -%>
             <td id="balance_<%= card.id %>" align="right"><%= nice_number card.balance %></td>
         <% end -%>
-        <td id="first_use_<%= card.id %>" align="center"><%= nice_date_time card.first_use %></td>
-        <td id="daily_charge_<%= card.id %>" align="center"><%= nice_date_time card.daily_charge_paid_till %></td>
+        <td id="first_use_<%= card.id %>" align="center"><%= nice_date card.first_use %></td>
+        <td id="daily_charge_<%= card.id %>" align="center"><%= nice_date card.daily_charge_paid_till %></td>
         <td id="sold_<%= card.id %>" align="center"><%= card.sold == 1 ? b_check : b_cross %></td>
         <td id="lang_<%= card.id %>" align="center"><%= card.language %></td>
         <td id="user_<%= card.id %>" align="left"><%= link_nice_user(card.user) if card.user %></td>
