@@ -67,6 +67,16 @@
 	<td>id=ssettings_menu23</td>
 	<td>Copy LCR</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>id=lcr_no_failover</td>
+	<td></td>
+</tr>
 <!--verify fields-->
 <tr>
 	<td>open</td>
@@ -372,6 +382,16 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>id=lcr_no_failover</td>
+	<td></td>
+</tr>
 <!--try to clone-->
 <tr>
 	<td>open</td>
@@ -527,6 +547,16 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>id=lcr_no_failover</td>
 	<td></td>
 </tr>
 <!--try to clone-->
@@ -793,6 +823,16 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>id=lcr_no_failover</td>
 	<td></td>
 </tr>
 <tr>
@@ -1108,6 +1148,116 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Failover provider: Do not use </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Use failover provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=lcr_no_failover</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=lcr_no_failover</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=lcr_no_failover</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>LCR was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=lcr_no_failover</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Failover provider: Do not use</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>xpath=(//select[@name='select_prov'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=lcr_no_failover</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//p[4]/label</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>If you will disable this setting, only first provider in the Routing Plan (LCR) will be used. If it fails - no other provider will be used to deliver the call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//p[4]/label</td>
 	<td></td>
 </tr>
 </tbody></table>
