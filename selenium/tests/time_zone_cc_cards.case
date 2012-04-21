@@ -109,9 +109,13 @@
 <tr>
 	<td>verifyText</td>
 	<td>id=first_use_20</td>
-	<td>2012-01-01 06:01:01</td>
+	<td>2012-01-01</td>
 </tr>
-<!--<tr> 	<td>verifyText</td> 	<td>id=daily_charge_20</td> 	<td>2013-12-01 05:01:01</td> </tr>-->
+<tr>
+	<td>assertText</td>
+	<td>id=daily_charge_20</td>
+	<td>2013-12-01</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/users/edit/0</td>
@@ -142,25 +146,26 @@
 	<td>/billing/cards/list?cg=1&amp;clean=1</td>
 	<td></td>
 </tr>
-<!--1. Pamirštas card listas - ten puikiai atvaizduojama su laiku, kurį pakeitus diena per 1 sumažėja-->
 <tr>
 	<td>verifyText</td>
 	<td>id=first_use_20</td>
-	<td>2011-12-31 22:01:01</td>
+	<td>2011-12-31</td>
 </tr>
-<!--<tr> 	<td>verifyText</td> 	<td>id=daily_charge_20</td> 	<td>2013-11-30 21:01:01</td> </tr>-->
+<tr>
+	<td>assertText</td>
+	<td>id=daily_charge_20</td>
+	<td>2013-11-30</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/cards/show/20</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>First use: 2011-12-31 22:01:01 </td>
+	<td>assertTextPresent</td>
+	<td>First use: 2011-12-31 </td>
 	<td></td>
 </tr>
-<!--2. show card laiko nerodo, bet pakeitus laiką taip pat per 1 dieną sumažėja-->
-<!--<tr> 	<td>verifyTextPresent</td> 	<td>Daily charge paid till: 2013-11-30 </td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/cards/edit/20</td>
@@ -221,7 +226,149 @@
 	<td>id=card_daily_charge_paid_till_3i</td>
 	<td>1</td>
 </tr>
-
+<tr>
+	<td>select</td>
+	<td>id=card_first_use_1i</td>
+	<td>label=2017</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_first_use_2i</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_first_use_3i</td>
+	<td>label=31</td>
+</tr>
+<!--3. Nors laiko ir neberodo, /billing/cards/edit/X vistiek leidžia pasirinkti laiką. o kam?-->
+<tr>
+	<td>select</td>
+	<td>id=card_first_use_4i</td>
+	<td>label=23</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_first_use_5i</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_daily_charge_paid_till_1i</td>
+	<td>label=2017</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_daily_charge_paid_till_3i</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card[user_id]</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user[time_zone]</td>
+	<td>label=(GMT+13:00) Nuku'alofa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/user_list</td>
+	<td></td>
+</tr>
+<!--5. Jei adminas laiko nemato, tai manau ir card distributorius turėtų matyti tik datą be laiko.-->
+<tr>
+	<td>assertText</td>
+	<td>id=first_use_20</td>
+	<td>2018-01-01 12:59:00</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=1&amp;clean=1</td>
+	<td></td>
+</tr>
+<!--4. NOrs laiko ir neberodo, pakeitus time zone vistiek galiu padaryti kad first use yra vėliau nei pay daily charge till-->
+<tr>
+	<td>assertText</td>
+	<td>id=first_use_20</td>
+	<td>2017-12-31</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=daily_charge_20</td>
+	<td>2017-12-30</td>
+</tr>
 </tbody></table>
 </body>
 </html>
