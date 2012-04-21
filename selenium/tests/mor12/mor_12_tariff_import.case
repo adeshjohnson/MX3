@@ -205,7 +205,7 @@
 <tr>
 	<td>verifyValue</td>
 	<td>id=rate_ghost_min_perc</td>
-	<td>20</td>
+	<td>20.0</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -384,12 +384,12 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=ghost_percent_514</td>
+	<td>id=ghost_percent_518</td>
 	<td>13.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=ghost_percent_515</td>
+	<td>id=ghost_percent_519</td>
 	<td>0.00</td>
 </tr>
 <tr>
@@ -468,13 +468,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=prefix_517</td>
+	<td>assertText</td>
+	<td>id=prefix_521</td>
 	<td>370463</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=ghost_percent_517</td>
+	<td>assertText</td>
+	<td>id=ghost_percent_521</td>
 	<td>45.0000</td>
 </tr>
 <tr>
@@ -796,6 +796,26 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Destinations updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_arates_full/4?dg=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>For Work Days and Free Days:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_arates/538?dt=&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Day : Work Day and Free Day </td>
 	<td></td>
 </tr>
 </tbody></table>
