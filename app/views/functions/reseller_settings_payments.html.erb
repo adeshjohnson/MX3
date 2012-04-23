@@ -243,7 +243,7 @@
     </div>
     <script type="text/javascript">
         <% g_t = ['PayPal', 'WebMoney'] %>
-        <% g_t << ['Vouchers'] if session[:vouchers_enabled].to_i == 1%>
+        <% g_t += ['Vouchers'] if session[:vouchers_enabled].to_i == 1%>
 
         initTabs('dhtmlgoodies_tabView1', Array(<%=gateway_tabs(g_t)%>), 0, 550, 400);
     </script>
