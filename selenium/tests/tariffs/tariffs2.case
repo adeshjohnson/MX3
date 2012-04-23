@@ -40,7 +40,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_10']/span</td>
+	<td>//div[@name='privacy']</td>
 	<td></td>
 </tr>
 <tr>
@@ -385,7 +385,7 @@
 	<td>label=59</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>waitForTextNotPresent</td>
 	<td>Tariff import incorrect time</td>
 	<td></td>
 </tr>
@@ -857,6 +857,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForTextPresent</td>
+	<td>Please select period without collisions</td>
+	<td></td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=time_from_hour</td>
 	<td>label=22</td>
@@ -875,11 +880,6 @@
 	<td>select</td>
 	<td>id=time_till_hour</td>
 	<td>label=19</td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1716,43 +1716,43 @@
 	<td>19:59:59</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=start_time_563</td>
+	<td>assertText</td>
+	<td>id=start_time_580</td>
 	<td>20:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=end_time_563</td>
+	<td>assertText</td>
+	<td>id=end_time_580</td>
 	<td>21:59:59</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=start_time_554</td>
+	<td>assertText</td>
+	<td>id=start_time_565</td>
 	<td>22:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=end_time_554</td>
+	<td>assertText</td>
+	<td>id=end_time_565</td>
 	<td>06:59:59</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=start_time_583</td>
+	<td>assertText</td>
+	<td>id=start_time_611</td>
 	<td>00:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=end_time_583</td>
+	<td>assertText</td>
+	<td>id=end_time_611</td>
 	<td>19:59:59</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=start_time_592</td>
+	<td>assertText</td>
+	<td>id=start_time_626</td>
 	<td>22:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=end_time_592</td>
+	<td>assertText</td>
+	<td>id=end_time_626</td>
 	<td>23:59:59</td>
 </tr>
 <tr>
@@ -1776,43 +1776,58 @@
 	<td>1.2600</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=connection_fee_563</td>
+	<td>assertText</td>
+	<td>id=connection_fee_580</td>
 	<td>1.0700</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=rate_554</td>
+	<td>assertText</td>
+	<td>id=increment_s_580</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rate_565</td>
 	<td>1.2600</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=connection_fee_554</td>
+	<td>assertText</td>
+	<td>id=connection_fee_565</td>
 	<td>0.0700</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=rate_583</td>
+	<td>assertText</td>
+	<td>id=increment_s_565</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rate_611</td>
 	<td>1.2600</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=connection_fee_583</td>
+	<td>assertText</td>
+	<td>id=connection_fee_611</td>
 	<td>0.0700</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=rate_592</td>
+	<td>assertText</td>
+	<td>id=increment_s_611</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rate_626</td>
 	<td>2.2600</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=connection_fee_592</td>
+	<td>assertText</td>
+	<td>id=connection_fee_626</td>
 	<td>0.0000</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=increment_s_592</td>
+	<td>assertText</td>
+	<td>id=increment_s_626</td>
 	<td>1.0000</td>
 </tr>
 <!--IMPORT TARIFF-->
@@ -2012,49 +2027,79 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=start_time_583</td>
+	<td>assertText</td>
+	<td>id=start_time_611</td>
 	<td>00:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=end_time_583</td>
+	<td>assertText</td>
+	<td>id=end_time_611</td>
 	<td>19:59:59</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=start_time_612</td>
+	<td>assertText</td>
+	<td>id=start_time_657</td>
 	<td>20:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=end_time_612</td>
+	<td>assertText</td>
+	<td>id=end_time_657</td>
 	<td>21:59:59</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=start_time_592</td>
+	<td>assertText</td>
+	<td>id=start_time_626</td>
 	<td>22:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=end_time_592</td>
+	<td>assertText</td>
+	<td>id=end_time_626</td>
 	<td>23:59:59</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=rate_612</td>
+	<td>assertText</td>
+	<td>id=rate_611</td>
+	<td>1.2600</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=connection_fee_611</td>
+	<td>0.0700</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=increment_s_611</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rate_657</td>
 	<td>2.2600</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=connection_fee_612</td>
+	<td>assertText</td>
+	<td>id=connection_fee_657</td>
 	<td>1.0700</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=increment_s_612</td>
+	<td>assertText</td>
+	<td>id=increment_s_657</td>
 	<td>30.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rate_626</td>
+	<td>2.2600</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=connection_fee_626</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=increment_s_626</td>
+	<td>1.0000</td>
 </tr>
 </tbody></table>
 </body>
