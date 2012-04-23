@@ -49,7 +49,7 @@ class CardgroupsController < ApplicationController
         "s_caller_id" => ''
     }
 
-    @cardgroups = Cardgroup.find(:all, :include => [:tax], :conditions => ["owner_id = ?", user_id])
+    @cardgroups = Cardgroup.find(:all, :select => "cardgroups.*, COUNT(*) AS card_count", :joins => "LEFT JOIN cards ON cards.cardgroup_id = cardgroups.id", :include => [:tax], :conditions=>["cardgroups.owner_id = ? AND cards.hidden =0", user_id], :group => 'cardgroups.id')
   end
 
   def search

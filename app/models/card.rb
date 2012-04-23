@@ -6,8 +6,8 @@ class Card < ActiveRecord::Base
   has_many :activecalls
   has_many :cclineitems
   belongs_to :user
-  validates_uniqueness_of :number, :scope => :cardgroup_id
-  validates_uniqueness_of :pin, :message => _('PIN_is_already_taken')
+  validates_uniqueness_of :number, :allow_nil => true, :scope => :cardgroup_id
+  validates_uniqueness_of :pin, :allow_nil => true, :message => _('PIN_is_already_taken')
   validates_uniqueness_of :callerid, :if => :validate_caller_id, :message => _('Callerid_must_be_unique')
 
   before_save :validate_pin_length, :validate_number_length, :card_before_save
@@ -18,13 +18,15 @@ class Card < ActiveRecord::Base
   end
 
   def validate_number_length
-    self.number.length == self.cardgroup.number_length.to_i
-    errors.add(:number, _('Bad_number_length_should_be') + ": " + self.cardgroup.number_length.to_s)
+    if self.number and self.number.length != self.cardgroup.number_length.to_i
+      errors.add(:number, _('Bad_number_length_should_be') + ": " + self.cardgroup.number_length.to_s)
+    end
   end
 
   def validate_pin_length
-    self.pin.length == self.cardgroup.pin_length
-    errors.add(:pin, _('Bad_pin_length_should_be') + ": " + self.cardgroup.number_length.to_s)
+    if self.pin and self.pin.length != self.cardgroup.pin_length
+      errors.add(:pin, _('Bad_pin_length_should_be') + ": " + self.cardgroup.number_length.to_s)
+    end
   end
 
   def self.search(user_id, conditions, options)
@@ -111,6 +113,7 @@ class Card < ActiveRecord::Base
       self.destroy
       return true
     else
+      self.hide
       return false
     end
   end
@@ -316,6 +319,28 @@ class Card < ActiveRecord::Base
       number = random_number(self.cardgroup.number_length)
     end while Card.find(:first, :conditions => {:number => number, :cardgroup_id => self.cardgroup_id})
     self.number = number
+  end
+
+=begin
+  Checks if card is hidden or not. Card can be hidden and no one should be able to unhide it.
+=end
+  def hidden?
+    self.hidden == 1
+  end
+
+
+
+
+=begin
+  Hide the card so that no one could see it and set pin and caller id to nil, so that new cards 
+  with these parameters could be created. Card can be hidden and no one should be able to unhide it.
+=end
+  def hide
+    self.pin = nil
+    self.callerid = nil
+    self.number = nil
+    self.hidden = 1
+    self.save
   end
 
   private

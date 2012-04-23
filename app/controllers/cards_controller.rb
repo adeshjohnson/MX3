@@ -62,6 +62,7 @@ class CardsController < ApplicationController
     params[:order_by] ? @options[:order_by] = params[:order_by].to_s : (params[:clean] or !session[:cards_list_options]) ? @options[:order_by] = "number" : @options[:order_by] = session[:cards_list_options][:order_by]
 
     cond = ["cards.cardgroup_id = #{@cg.id}"]; var =[]
+    cond << "cards.hidden = 0"
     ["number", 'name', 'pin', 'callerid'].each { |col|
       add_contition_and_param_like(@options["s_#{col}".to_sym], @options["s_#{col}".intern], "#{col} LIKE ?", cond, var) }
 
@@ -169,8 +170,8 @@ class CardsController < ApplicationController
       redirect_to :action => 'act', :cg => @cg and return false
     end
     user_id = get_user_id()
-    @list2 = Card.count(:all, :conditions => ["number >= ? and number <= ? and sold =? AND owner_id = '#{user_id}' AND cardgroup_id = ? ", @start_num, @end_num, 1, @cg.id])
-    @list = Card.count(:all, :conditions => ["number >= ? and number <= ? and sold =? AND owner_id = '#{user_id}' AND cardgroup_id = ? ", @start_num, @end_num, 0, @cg.id])
+    @list2 = Card.count(:all, :conditions => ["hidden = 0 AND number >= ? and number <= ? and sold =? AND owner_id = '#{user_id}' AND cardgroup_id = ? ", @start_num, @end_num, 1, @cg.id])
+    @list = Card.count(:all, :conditions => ["hidden = 0 AND number >= ? and number <= ? and sold =? AND owner_id = '#{user_id}' AND cardgroup_id = ? ", @start_num, @end_num, 0, @cg.id])
 
     @a_name = _('Disable') if @activate.to_i == 0
     @a_name = _('Activate') if @activate.to_i == 1
@@ -180,7 +181,7 @@ class CardsController < ApplicationController
     if @activate.to_i == 3
       @a_name = _('Buy')
       @user = User.find(:first, :include => :address, :conditions => "users.id = #{user_id}")
-      real_price = Card.find(:all, :select => "sum(balance) as balance_sum", :conditions => "number >= #{@start_num} and number <= #{@end_num} and sold = 0 AND owner_id = #{session[:user_id]} AND cardgroup_id = '#{@cg.id}' ")[0].balance_sum.to_f
+      real_price = Card.find(:all, :select => "sum(balance) as balance_sum", :conditions => "hidden = 0 AND number >= #{@start_num} and number <= #{@end_num} and sold = 0 AND owner_id = #{session[:user_id]} AND cardgroup_id = '#{@cg.id}' ")[0].balance_sum.to_f
       @real_price = real_price.to_f * User.current.currency.exchange_rate.to_f
       @tax = @cg.get_tax
       @taxes = @tax.applied_tax_list(@real_price)
@@ -196,7 +197,7 @@ class CardsController < ApplicationController
     user_id = get_user_id()
     case (action)
       when 0
-        cards = Card.find(:all, :conditions => ["number >= ? AND number <= ? AND sold = 1 AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id])
+        cards = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? AND number <= ? AND sold = 1 AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id])
         for card in cards
           card.sold = 0
           card.save
@@ -204,7 +205,7 @@ class CardsController < ApplicationController
       when 2
         cards_deleted = 0
         cards_not_deleted = 0
-        cards = Card.find(:all, :conditions => ["number >= ? AND number <= ? AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id])
+        cards = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? AND number <= ? AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id])
         for card in cards
           if card.destroy_with_check
             cards_deleted += 1
@@ -214,7 +215,7 @@ class CardsController < ApplicationController
         end
       when 3
         creation_time = Time.now
-        list = Card.find(:all, :conditions => ["number >= ? and number <= ? and sold = 0 AND owner_id = ? AND cardgroup_id = ? ", start_num, end_num, user_id, @cg.id])
+        list = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? and number <= ? and sold = 0 AND owner_id = ? AND cardgroup_id = ? ", start_num, end_num, user_id, @cg.id])
         @email = params[:email].to_s
 
         gross = 0
@@ -230,7 +231,7 @@ class CardsController < ApplicationController
       #        Payment.create(:paymenttype => "manual", :amount => tax+gross, :currency => currency, :email => @email, :completed => 1, :date_added => creation_time, :shipped_at => creation_time, :fee => 0, :gross => gross, :payer_email => @email, :tax => tax, :owner_id => session[:user_id], :card => 1, :user_id => list.first.id)
       #      end
       when 4
-        cards = Card.find(:all, :conditions => ["number >= ? AND number <= ?  AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id])
+        cards = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? AND number <= ?  AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id])
         for card in cards
           card.user_id = params[:user].to_i
           card.save
@@ -466,17 +467,14 @@ class CardsController < ApplicationController
     a=check_user_for_cardgroup(cg)
     return false if !a
 
-    if @card.calls.count == 0
-      if not Payment.find(:first, :conditions => ["paymenttype = ? and user_id = ?", "Card", @card.id])
-        @card.destroy
-        flash[:status] = _('Card_was_deleted')
-        redirect_to :action => 'list', :cg => cg and return false
-      else
-        flash[:notice] = _('Card_cannot_be_deleted')
-        redirect_to :action => 'list', :cg => cg and return false
-      end
+    a=check_user_for_cardgroup(cg)
+    return false if !a
+
+    if @card.destroy_with_check
+      flash[:status] = _('Card_was_deleted')
+      redirect_to :action => 'list', :cg => cg and return false
     else
-      flash[:notice] = _('Card_cannot_be_deleted')
+      flash[:notice] = _('Card_was_permanently_hidden')
       redirect_to :action => 'list', :cg => cg and return false
     end
   end
@@ -926,7 +924,7 @@ class CardsController < ApplicationController
   end
 
   def find_card
-    @card = Card.find(:first, :conditions => {:id => params[:id]}, :include => [:cardgroup, :user])
+    @card = Card.find(:first, :conditions => {:id => params[:id], :hidden => 0}, :include => [:cardgroup, :user])
     unless @card
       flash[:notice] = _('Card_was_not_found')
       redirect_to :controller => "cardgroups", :action => 'list' and return false

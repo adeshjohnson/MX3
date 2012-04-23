@@ -85,7 +85,7 @@
             <% end -%>
 
             <% if @allow_read == true %>
-                <td id="cards_size_<%= cg.id %>" align="center"><%= link_to(b_view + "(" + cg.cards.size.to_s + ")", {:controller => "cards", :action => "list", :cg => cg, :clean => 1}, :id => 'cards_img_'+cg.id.to_s) %></td>
+                <td id="cards_size_<%= cg.id %>" align="center"><%= link_to(b_view + "(" + cg.card_count.to_s + ")", {:controller => "cards", :action => "list", :cg => cg, :clean => 1}, :id => 'cards_img_'+cg.id.to_s) %></td>
                 <td id="b_details_<%= cg.id %>" align="center"><%= link_to b_details, {:action => 'show', :id => cg}, :id => 'details_img_'+cg.id.to_s %></td>
                 <td id="excel_icon_<%= cg.id %>" align="center"><%= image_submit_tag 'icons/excel.png', :title => _('Cards'), :id => 'excel_img_'+cg.id.to_s %></td>
             <% end %>
