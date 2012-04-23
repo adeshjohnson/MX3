@@ -3128,7 +3128,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     AND '10.' != SUBSTRING(ipaddr, 1, LENGTH('10.'))
     AND ((CAST(SUBSTRING(ipaddr, 1,6) AS DECIMAL(6,3)) > 172.31)
     or (CAST(SUBSTRING(ipaddr, 1,6) AS DECIMAL(6,3)) < 172.16))").all
-    @providers = Provider.where("server_ip > 0 AND server_ip != '0.0.0.0' AND hidden = 0").all
+    @providers = Provider.where("user_id = #{current_user.id} AND server_ip > 0 AND server_ip != '0.0.0.0' AND hidden = 0").all
     @servers = Server.where("server_ip > 0 AND server_ip != '0.0.0.0'").all
     session[:google_active] = 0
   end
