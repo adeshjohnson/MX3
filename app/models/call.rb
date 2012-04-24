@@ -1700,7 +1700,11 @@ class Call < ActiveRecord::Base
     if options[:did]
       cond << "calls.did_id = ?"
       var << options[:did].id
-    end
+    elsif !options[:s_did_pattern].to_s.strip.blank? 
+      cond << "dids.did LIKE ?" 
+      var << '%' + options[:s_did_pattern].to_s.strip + '%' 
+    end 
+
     #find_calls_only_with_did
     if options[:only_did] and options[:only_did].to_i == 1
       cond<<"calls.did_id > ?"

@@ -25,6 +25,12 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _("DID") %>:
       <%= select_tag("s_did", options_for_select([[_('All'), "all"]] + @dids.map { |d| [d.did, d.id.to_s] }, @options[:s_did].to_s)) %>
+      <%= text_field_tag("s_did_pattern", @options[:s_did_pattern].to_s, :disabled => (@options[:s_did].to_s != 'all')) %> 
+      <script type='text/javascript'> 
+        window.addEventListener('load', function(){document.getElementById('s_did').addEventListener('change', function(){document.getElementById('s_did_pattern').disabled = !(document.getElementById('s_did').value == 'all');});}); 
+        /*TODO: some day should rewrite everything using jquery. and should not forget to fire change  
+        event when page loads, so that, what and when should be enabled/disabled, would be controled by entirely by js.*/ 
+      </script> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <br/>
       <br/>

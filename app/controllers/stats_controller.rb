@@ -3833,6 +3833,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         :s_user => "all",
         :user => nil,
         :s_did => "all",
+        :s_did_pattern => "",
         :s_destination => "",
         :order_by => "time",
         :order_desc => 0,
