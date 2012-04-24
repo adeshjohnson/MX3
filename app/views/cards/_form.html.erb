@@ -34,7 +34,7 @@
   <%= image_tag 'icons/check.png', :title => _('Sold') if @card.sold == 1 %></p>
 
 <p><label for="card_first_use"><%= _('First_use') %></label><br/>
-  <%= datetime_select 'card', 'first_use' %></p>
+  <%= date_select 'card', 'first_use' %></p>
 
 <p><label for="card_daily_charge_paid_till"><%= _('Daily_charge_paid_till') %></label><br/>
   <%= date_select 'card', 'daily_charge_paid_till' %></p>
