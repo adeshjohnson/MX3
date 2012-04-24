@@ -1676,7 +1676,7 @@ class Call < ActiveRecord::Base
       var << "#{options[:destination]}%"
     end
 
-    unless options[:s_reseller_did].blank?
+    unless options[:s_reseller_did] != 'all' and !options[:s_reseller_did].blank?
       cond << "dids.reseller_id = ?"
       var << options[:s_reseller_did]
     end
