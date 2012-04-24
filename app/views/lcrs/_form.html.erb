@@ -19,8 +19,7 @@
 
 <p>
   <label <%= raw tooltip(_('No_failover_provider'), h(_('No_failover_provider_explained'))).html_safe %> ><%= _('No_failover_provider') %></label>
-  <%= radio_button_tag('lcr[no_failover]', '0', !@lcr.no_failover?, {:id => "lcr_no_failover"}) %> <%= _('No') %>
-  <%= radio_button_tag('lcr[no_failover]', '1', @lcr.no_failover?, {:id => "lcr_no_failover"}) %> <%= _('Yes') %>
+  <%= check_box_tag('lcr[no_failover]', '1', @lcr.no_failover?, {:id => "lcr_no_failover"}) %>  
 </p>
 
 
