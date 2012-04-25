@@ -2312,7 +2312,7 @@ GROUP BY terminators.id;").map { |t| t.id }
       update_voicemail_boxes if (user_old.first_name != first_name) or (user_old.last_name != last_name)
     end
 
-    password = Digest::SHA1.hexdigest(params[:password][:password]) if params[:password] and !params[:password][:password].blank?
+    self.password = Digest::SHA1.hexdigest(params[:password][:password]) if params[:password] and !params[:password][:password].blank?
 
     if api == 1
       if params[:agr_date][:year] and params[:agr_date][:month] and params[:agr_date][:day]
