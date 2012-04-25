@@ -61,20 +61,20 @@
 <%= page_select_header(@options[:page], @total_pages, ({:cg => @cg.id}), @options.merge({:cg => @cg.id})) %>
 <table class="maintable" width="100%">
   <tr>
-    <th align="left"><%= nice_list_order("number", _('Number'), @options, {:cg => @cg.id}) %></th>
-    <th align="left"><%= nice_list_order("name", _('Name'), @options, {:cg => @cg.id}) %></th>
+    <th align="left"><%= _('Number') %></th>
+    <th align="left"><%=  _('Name') %></th>
     <% if @show_pin == true %>
-        <th align="left"><%= nice_list_order("pin", _('PIN'), @options, {:cg => @cg.id}) %></th>
+        <th align="left"><%=  _('PIN') %></th>
     <% end %>
-    <th align="left"><%= nice_list_order("caller_id", _('CallerID_for_pinless_dialing'), @options, {:cg => @cg.id}) %></th>
+    <th align="left"><%= _('CallerID_for_pinless_dialing')%></th>
     <% if can_see_finances? %>
-        <th align="right"><%= nice_list_order("balance", _('Balance') + " (#{_('Without_VAT')}) ", @options, {:cg => @cg.id}) %><%= current_user.currency.name %></th>
+        <th align="right"><%= _('Balance') + " (#{_('Without_VAT')}) " %><%= current_user.currency.name %></th>
     <% end -%>
-    <th align="center"><%= nice_list_order("first_use", _('First_use'), @options, {:cg => @cg.id}) %></th>
-    <th align="center"><%= nice_list_order("daily_charge", _('Daily_charge_paid_till'), @options, {:cg => @cg.id}) %></th>
-    <th align="center"><%= nice_list_order("sold", _('Sold'), @options, {:cg => @cg.id}) %>?</th>
-    <th align="center"><%= nice_list_order("language", _('Language'), @options, {:cg => @cg.id}) %></th>
-    <th align="left"><%= nice_list_order("user", _('Distributor'), @options, {:cg => @cg.id}) %></th>
+    <th align="center"><%= _('First_use')%></th>
+    <th align="center"><%=  _('Daily_charge_paid_till') %></th>
+    <th align="center"><%=  _('Sold')%>?</th>
+    <th align="center"><%= _('Language') %></th>
+    <th align="left"><%=  _('Distributor') %></th>
     <th></th>
     <% if @allow_manage == true %>
         <th></th>
@@ -101,7 +101,7 @@
         <td id="daily_charge_<%= card.id %>" align="center"><%= nice_date card.daily_charge_paid_till %></td>
         <td id="sold_<%= card.id %>" align="center"><%= card.sold == 1 ? b_check : b_cross %></td>
         <td id="lang_<%= card.id %>" align="center"><%= card.language %></td>
-        <td id="user_<%= card.id %>" align="left"><%= link_nice_user(card.user) if card.user %></td>
+        <td id="user_<%= card.id %>" align="left"><%= link_nice_user(card.user) if @card.user_id != -1 and @card.user %></td>
         <td id="payments_<%= card.id %>" align="center"><%= link_to(b_payments, {:controller => 'cards', :action => 'payments', :id => card.id}, {:id => "payments_link_"+ card.id.to_s}) %></td>
         <td id="calls_<%= card.id %>" align="center"><%= link_to(b_call, {:controller => 'stats', :action => 'cc_call_list', :id => card.id}, {:id => "calls_link_"+ card.id.to_s}) %>
           (<%= card.calls.count %>)
