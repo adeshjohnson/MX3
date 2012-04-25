@@ -78,19 +78,15 @@ class CardsController < ApplicationController
 
     @page = @options[:page].to_i
 
-    @cards_all = Card.find(:all, :conditions => [cond.join(" AND ")] +var).size.to_i
+    @cards_all = Card.count(:all, :conditions => [cond.join(" AND ")] +var)
 
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
     @total_pages = (@cards_all.to_f / session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     @fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
-    order_by = Card.get_order_by(params, @options)
-    @cards = Card.find(:all, :select => "cards.*, #{SqlExport.nice_user_sql}",
-                       :conditions => [cond.join(" AND ")] +var,
-                       :joins => "LEFT JOIN users ON (users.id = user_id)",
-                       :order => order_by, :limit => "#{@fpage}, #{session[:items_per_page].to_i}")
-
+    #order_by = Card.get_order_by(params, @options)
+    @cards = Card.includes(:user,:calls).where([cond.join(" AND ")] +var).offset(@fpage).limit(session[:items_per_page].to_i).all
     @users = User.find_all_for_select(current_user.id)
 
     session[:cards_list_options] = @options
