@@ -133,7 +133,7 @@ class PermissionsController < ApplicationController
         gr = acc_group_rights.select { |r| r.acc_right_id == right.id }[0]
         gr = AccGroupRight.new(:acc_group => @group, :acc_right => right) if gr.nil?
 
-        if (params["right_#{right.id}".to_sym] and params["right_#{right.id}".to_sym].to_i != gr.value) or gr.new_record? or @group.only_view
+        if (params["right_#{right.id}".to_sym] and params["right_#{right.id}".to_sym].to_i != gr.value) or gr.new_record? or @group.only_view.to_i == 1
           params["right_#{right.id}".to_sym] ? gr.value = params["right_#{right.id}".to_sym].to_i : gr.value = 0
           gr.value = 1 if gr.value > 1 and @group.only_view
           gr.save
