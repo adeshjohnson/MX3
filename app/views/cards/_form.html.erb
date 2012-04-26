@@ -14,16 +14,16 @@
           <% end %>
 
           <% if session[:acc_callingcard_pin].to_i == 2 %>
-              <%= text_field 'card', 'pin', "class" => "input" %>
+              <%= text_field 'card', 'pin', "class" => "input", "size" => 30, "maxlength" => @card.cardgroup.pin_length %>
           <% end %>
         </p>
     <% end %>
 <% else %>
-    <p><label for="card_pin"><%= _('PIN') %></label><br/><%= text_field 'card', 'pin', "class" => "input" %></p>
+    <p><label for="card_pin"><%= _('PIN') %></label><br/><%= text_field 'card', 'pin', "class" => "input", "size" => 30, "maxlength" => @card.cardgroup.pin_length %></p>
 <% end %>
 
 <p>
-  <label for="card_callerid"><%= _('CallerID_for_pinless_dialing') %></label><br/><%= text_field 'card', 'callerid', "class" => "input" %>
+  <label for="card_callerid"><%= _('CallerID_for_pinless_dialing') %></label><br/><%= text_field 'card', 'callerid', "class" => "input", "maxlength" => @card.cardgroup.number_length %>
 </p>
 
 <p><label for="card_balance"><%= _('Balance') %>: </label>
