@@ -8,8 +8,8 @@
     <% if params[:group_type] == "accountant" %>
         <%= _("Accountant_Can_Only_View") if params[:group_type] == "accountant" %>
         <%= _("Reseller_Can_Only_View") if params[:group_type] == "reseller" %>
-        : <%= check_box_tag "only_view", "1", @group.only_view == true %>
         <%= hidden_field_tag("only_view", "0", {:id => "view_only_hidden"}) %>
+        : <%= check_box_tag "only_view", "1", @group.only_view == true %>
         <br/>
     <% end %>
     <br/>
