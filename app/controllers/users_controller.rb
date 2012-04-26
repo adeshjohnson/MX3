@@ -1459,6 +1459,6 @@ in before filter : ard (:find_ard)
   end
 
   def check_with_integrity
-    session[:integrity_check] = current_user.integrity_recheck_user
+    session[:integrity_check] = current_user.integrity_recheck_user if current_user
   end
 end
