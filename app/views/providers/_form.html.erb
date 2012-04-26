@@ -531,7 +531,7 @@
     </tr>
 
     <% if session[:usertype] != "reseller" %>
-
+      <% if reseller_pro_active? %>
         <tr <%= raw tooltip(_('Common_Use'), _('Common_Use_Explanation')).html_safe %>>
           <td id="common_use"><%= _('Common_Use') %>:</td>
           <td id="provider_is_used_by_reseller">
@@ -543,6 +543,7 @@
             <% end %>
           </td>
         </tr>
+      <% end %>
         <tr>
           <td> <%= _('Anti_resale_auto_answer') %> </td>
           <td>
