@@ -6,7 +6,7 @@
     ActiveSupport::Dependencies.autoload_paths << path
     ActiveSupport::Dependencies.autoload_once_paths.delete(path)
     # <hack>
-    HOST = IO.readlines(File.dirname(__FILE__) + '/../../../config/environment.rb').reject { |l| l =~ /^#/ }.join.match(/[^#]Web_URL = "(\S+)"/)[1]
+    HOST = IO.readlines(File.dirname(__FILE__) + '/../../../config/environment.rb').reject { |l| l =~ /^#/ }.join.match(/[^#]Web_URL ?= ?"(\S+)"/)[1]
     HOST = $1
     # </hack>
   else
