@@ -39,9 +39,6 @@
     <%# if !current_user.reseller_allow_providers_tariff? or ad_active? %>
     personal_menu.add(16, 0, '<%= _('Various') %>');
     <%# end %>
-    <%if !current_user.reseller_allow_providers_tariff?%>
-    personal_menu.add(17, 16, '<%= _('DIDs') %>', '<%= Web_Dir %>/dids/personal_dids');
-    <%end%>
     personal_menu.add(18, 16, '<%= _('CLIs') %>', '<%= Web_Dir %>/devices/user_device_clis');
     <%if !current_user.reseller_allow_providers_tariff?%>
     personal_menu.add(19, 16, '<%= _('PhoneBook') %>', '<%= Web_Dir %>/phonebooks/list');
@@ -63,7 +60,7 @@
     <% i += 1 %>
     <% end %>
 
-    <% if cc_active? and current_user.cards.size.to_i > 0 %>
+    <% if cc_active? and !current_user.is_reseller? and current_user.cards.size.to_i > 0 %>
     personal_menu.add(<%= i %>, <%= ii%>, '<%= _('Calling_cards') %>', '<%= Web_Dir %>/cards/user_list');
     <% i += 1 %>
     <% end %>
