@@ -2761,6 +2761,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @page_icon = "did.png"
     change_date
 
+    change_date_to_present if params[:clear]
 
     @users = User.find_all_for_select(corrected_user_id)
     @providers = Provider.find(:all, :order => "name ASC", :conditions => ['hidden=?', 0])
