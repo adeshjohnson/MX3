@@ -316,7 +316,7 @@ class VouchersController < ApplicationController
 
     if @user.owner_id != 0
       ruser = User.find_by_id(@user.owner_id)
-      ruser.balance += @credit_in_default_currency
+      ruser.balance += @credit_in_default_currency * User.current.currency.exchange_rate.to_f
       ruser.save
       pr = Payment.new({:tax => (@voucher.credit_with_vat - @credit_in_default_currency), :gross => @credit_in_default_currency, :paymenttype => "voucher", :amount => @voucher.credit_with_vat, :currency => @voucher.currency, :date_added => Time.now, :shipped_at => Time.now, :completed => 1, :user_id => ruser.id, :first_name => ruser.first_name, :last_name => ruser.last_name})
       pr.save
