@@ -1,6 +1,18 @@
 <% (defined?(no_checkboxes) and no_checkboxes == true) ? show = false : show = true -%>
 <div id="search_header">
   <%= form_tag :controller => params[:controller], :action => params[:action] do %>
+      <input type="hidden" name="destination_show" value="0"/>
+      <input type="hidden" name="customer_orig_show" value="0"/>
+      <input type="hidden" name="customer_term_show" value="0"/>
+      <input type="hidden" name="ip_address_orig_show" value="0"/>
+      <input type="hidden" name="ip_address_term_show" value="0"/>
+      <% if can_see_finances? -%>
+          <input type="hidden" name="price_orig_show" value="0"/>
+          <input type="hidden" name="price_term_show" value="0"/>
+      <% end -%>
+      <input type="hidden" name="billed_time_orig_show" value="0"/>
+      <input type="hidden" name="billed_time_term_show" value="0"/>
+      <input type="hidden" name="search" value="1"/>
       <table class="bordered">
         <tr>
           <td>
@@ -82,18 +94,6 @@
                   </tr>
               <% end %>
             </table>
-            <input type="hidden" name="destination_show" value="0"/>
-            <input type="hidden" name="customer_orig_show" value="0"/>
-            <input type="hidden" name="customer_term_show" value="0"/>
-            <input type="hidden" name="ip_address_orig_show" value="0"/>
-            <input type="hidden" name="ip_address_term_show" value="0"/>
-            <% if can_see_finances? -%>
-                <input type="hidden" name="price_orig_show" value="0"/>
-                <input type="hidden" name="price_term_show" value="0"/>
-            <% end -%>
-            <input type="hidden" name="billed_time_orig_show" value="0"/>
-            <input type="hidden" name="billed_time_term_show" value="0"/>
-            <input type="hidden" name="search" value="1"/>
           </td>
           <td valign="top">
             <%= submit_tag(_("Search"), :disable_with => _('Processing..')) -%>
