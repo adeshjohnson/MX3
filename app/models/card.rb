@@ -25,7 +25,7 @@ class Card < ActiveRecord::Base
 
   def validate_pin_length
     if self.pin and self.pin.length != self.cardgroup.pin_length
-      errors.add(:pin, _('Bad_pin_length_should_be') + ": " + self.cardgroup.number_length.to_s)
+      errors.add(:pin, _('Bad_pin_length_should_be') + ": " + self.cardgroup.pin_length.to_s)
     end
   end
 
