@@ -4356,6 +4356,8 @@ Localization.define('en') do |l|
   l.store 'Global_no', 'Global(No)'
   l.store 'Global_yes', 'Global(Yes)'
   l.store 'Provider_billing', 'Provider billing'
+  l.store 'Use_only_one_provider_(Turn_off_failover)', 'Use only one provider (Turn off failover)'
+  l.store 'Save_changes', 'Save changes'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

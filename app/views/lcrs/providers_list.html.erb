@@ -111,37 +111,54 @@
     </div>
 <% end %>
 
-<% if @lcr.no_failover? %>
-    <%= _('Failover_provider') %>: <%= @lcr.failover_provider ? @lcr.failover_provider.name : _('Do_not_use') %>
 
-    <%= form_tag(:action => 'try_to_add_failover_provider', :id => @lcr) do %>
-        <div class="nb"><%= b_add + _('Add_failover_provider') %>:
-          <select name="select_prov" <%= "disabled" if @other_providers.size == 0 %> >
-            <option value="0"><%= _('Do_not_use_failover_provider') %></option>
-            <% for prov in @other_providers %>
-                <% device = prov.device %>
-                <option value="<%= prov.id %>"> <%= prov.name %>
-                  <% if admin? or (reseller? and prov.user_id == current_user.id) %>
-                      -
-                      <% if prov.tech != "Skype" %>
-                          <%= prov.tech %>/<%= prov.server_ip %>
-                      <% else %>
-                          <%= prov.tech %>/<%= prov.login %>
-                      <% end %>
-                  <% end %>
-                </option>
-            <% end %>
-          </select>
+    <div>
+      <br/>
+      <br/>
+      <hr/>
+      <p>
+        <%= form_tag(:action => 'try_to_add_failover_provider', :id => @lcr) do %>
+            <%=_('Use_only_one_provider_(Turn_off_failover)')%>:
+            <%= radio_button_tag('no_failover', 0, @lcr.no_failover.to_i == 0 , :onchange=>"hide_failover();") %> <%= _('No') %>
+            <%= radio_button_tag('no_failover', 1, @lcr.no_failover.to_i == 1 , :onchange=>'hide_failover();') %> <%= _('Yes') %>
+            </p>
+            <br/>
+            <div id="f_providers_list" style="display:<%= @lcr.no_failover.to_i == 0 ? '' : 'none' %>;">
+              <%=_('Failover_provider') %>:  <select name="select_prov" <%= "disabled" if @other_providers.size == 0 %> >
+              <option value="0"><%= _('Do_not_use_failover_provider') %></option>
+              <% for prov in @other_providers %>
+                  <% device = prov.device %>
+                  <option value="<%= prov.id %>" <%= 'selected' if prov.id == @lcr.failover_provider_id %>  >
+                    <%= prov.name %>
+                    <%  if admin? or (reseller? and prov.user_id == current_user.id) %>
+                        -
+                        <% if prov.tech != "Skype" %>
+                            <%= prov.tech %>/<%= prov.server_ip %>
+                        <% else %>
+                            <%= prov.tech %>/<%= prov.login %>
+                        <% end %>
+                    <%end%>
+                  </option>
+              <% end %>
+            </select>
+            </div>
+            </div>
+            <br/>
+            <%= submit_tag _('Save_changes') , :disable_with=>_('Processing..') %>
+        <%end%>
 
-          <% if @other_providers.size == 0 %>
-              <%= submit_tag(_('Add'), :disabled => "1", :disable_with => _('Processing..')) %>
-          <% else %>
-              <%= submit_tag _('Add'), :disable_with => _('Processing..') %>
-          <% end %>
 
-        </div>
-    <% end %>
-<% end %>
+<script >
+    function hide_failover(){
+        var div1 = document.getElementById('f_providers_list');
+        if (div1.style.display == 'none') {
+            div1.style.display = 'block'
+        } else {
+            div1.style.display = 'none'
+        }
+    }
+</script>
+
 
 
 <br/>
