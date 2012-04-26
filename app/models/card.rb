@@ -336,7 +336,7 @@ class Card < ActiveRecord::Base
   with these parameters could be created. Card can be hidden and no one should be able to unhide it.
 =end
   def hide
-    Action.add_action_hash(options[:current_user], {:action=>'Card hidden permanently', :target_id=>self.id, :target_type=>"card", :data=>self.callerid, :data2=>self.pin, :data3=>self.number})
+    Action.add_action_hash(User.current, {:action=>'Card hidden permanently', :target_id=>self.id, :target_type=>"card", :data=>self.callerid, :data2=>self.pin, :data3=>self.number})
     self.pin = nil
     self.callerid = nil
     self.number = nil
