@@ -15,10 +15,10 @@
             <th align="left"><%= _('Field') %></th>
             <th align="left"><%= _('Value') %></th>
           </tr>
-          <% @table.singularize.titleize.gsub(' ', '').constantize.content_columns.each_with_index { |column, i| %>
+          <% @table.singularize.titleize.gsub(' ', '').constantize.column_names.each_with_index { |column, i| %>
               <tr class="row<%= (i % 2 + 1).to_s %>">
-                <td align="left"><%= column.name %></td>
-                <td align="left" id="<%= column.name %>_value"><%= @select.send(column.name) %></td>
+                <td align="left"><%= column %></td>
+                <td align="left" id="<%= column %>_value"><%= @select.send(column) %></td>
               </tr>
           <% } %>
         </table>
