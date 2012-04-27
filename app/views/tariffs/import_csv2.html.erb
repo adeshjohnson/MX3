@@ -19,7 +19,7 @@
 
         <%= _('Upload') %>: <%= file_field_tag "file" %>
 
-        <%= submit_tag(_('Upload_file'), :disable_with => _('Processing..')) %>
+        <%= submit_tag(_('Upload_file'), :disable_with => _('Processing..'), :onclick =>"Element.toggle('spinner');Element.toggle('spinner2');") %>
     <% end %>
 
     <br/>
@@ -131,7 +131,7 @@
       <tr>
         <td>
           <%= form_tag({:action => 'import_csv2', :step => "2"}) do %>
-              <%= submit_tag(_('Back'), :disable_with => _('Processing..')) %>
+              <%= submit_tag(_('Back'), :disable_with => _('Processing..'), :onclick =>"Element.toggle('spinner');Element.toggle('spinner2');") %>
           <% end %>
         </td>
 
@@ -139,7 +139,7 @@
         <% if @optins[:imp_prefix] >= 0 and @optins[:imp_rate] >= 0 %>
             <td>
               <%= form_tag({:action => 'import_csv2', :step => "4"}) do %>
-                  <%= submit_tag(_('Confirm_columns'), :disable_with => _('Processing..')) %>
+                  <%= submit_tag(_('Confirm_columns'), :disable_with => _('Processing..'), :onclick =>"Element.toggle('spinner');Element.toggle('spinner2');") %>
               <% end %>
             </td>
         <% end %>
@@ -158,7 +158,7 @@
         <td>
           <%= form_tag({:action => 'import_csv2', :step => "5"}) do %>
 
-              <%= submit_tag(_('Proceed'), :disable_with => _('Processing..')) %>
+              <%= submit_tag(_('Proceed'), :disable_with => _('Processing..'), :onclick =>"Element.toggle('spinner');Element.toggle('spinner2');") %>
           <% end %>
         </td>
       </tr>
@@ -199,7 +199,7 @@
       <tr>
         <td>
           <%= form_tag({:action => 'import_csv2', :step => "6"}) do %>
-              <%= submit_tag(_('Proceed'), :disable_with => _('Processing..')) %>
+              <%= submit_tag(_('Proceed'), :disable_with => _('Processing..'), :onclick =>"Element.toggle('spinner');Element.toggle('spinner2');") %>
           <% end %>
         </td>
       </tr>
@@ -236,7 +236,7 @@
       <tr>
         <td>
           <%= form_tag({:action => 'import_csv2', :step => "7"}) do %>
-              <%= submit_tag(_('Proceed'), :disable_with => _('Processing..')) %>
+              <%= submit_tag(_('Proceed'), :disable_with => _('Processing..'), :onclick =>"Element.toggle('spinner');Element.toggle('spinner2');") %>
           <% end %>
         </td>
       </tr>
