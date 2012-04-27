@@ -717,6 +717,7 @@
     </tr>
     <% if rec_active? %>
         <% if show_recordings? %>
+          <% if admin? or current_user.recording_enabled.to_i == 1 %>
             <tr id="rc_1">
               <td height="10" colspan="2"></td>
             </tr>
@@ -751,6 +752,7 @@
                 </table>
               </td>
             </tr>
+          <% end %>
         <% end %>
     <% end %>
   </table>
