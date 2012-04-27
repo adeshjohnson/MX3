@@ -3664,7 +3664,7 @@ class ApiController < ApplicationController
                     card.sell
                     amount = values[:amount].to_f * Currency.count_exchange_rate(card.cardgroup.tell_balance_in_currency, Currency.get_default).to_f
                     amount = cardgroup.get_tax.count_amount_without_tax(amount)
-                    if card.add_to_balance(amount)
+                    if card.add_to_balance(amount, false)
                       respond_to_successful_card_operation(doc, card)
                     else
                       doc.error("Failed to make transaction")
