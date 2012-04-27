@@ -20,12 +20,18 @@ class Card < ActiveRecord::Base
   def validate_number_length
     if self.number and self.number.length != self.cardgroup.number_length.to_i
       errors.add(:number, _('Bad_number_length_should_be') + ": " + self.cardgroup.number_length.to_s)
+      false
+    else
+      true
     end
   end
 
   def validate_pin_length
     if self.pin and self.pin.length != self.cardgroup.pin_length
       errors.add(:pin, _('Bad_pin_length_should_be') + ": " + self.cardgroup.pin_length.to_s)
+      false
+    else
+      true
     end
   end
 
@@ -201,15 +207,20 @@ class Card < ActiveRecord::Base
   +boolean+ true changeing balance and creating payment succeeded, otherwise false. 
      Note that no transactions are used, so if smth goes wrong data might be corrupted.
 =end
-  def add_to_balance(amount)
+  def add_to_balance(amount, add_payment=true)
     self.balance += amount
     if self.save
-      if Payment.add_for_card(self, amount * Currency.count_exchange_rate(Currency.get_default, self.cardgroup.tell_balance_in_currency))
-        return true
+      if add_payment
+        if Payment.add_for_card(self, amount * Currency.count_exchange_rate(Currency.get_default, self.cardgroup.tell_balance_in_currency))
+          return true
+        else
+          self.balance -= amount
+          self.save
+          return false
+        end
       else
-        self.balance -= amount
-        self.save
-        return false
+       Action.add_action_hash(User.current, {:action=>'Added to cards balance', :target_id=>self.id, :target_type=>"card", :data=>Email.nice_number(amount)})
+       return true
       end
     else
       return false
@@ -237,14 +248,21 @@ class Card < ActiveRecord::Base
   +boolean+ true if card was set as sold and payment generated succesfully, 
      otherwise false
 =end
-  def sell
+  def sell(currency=nil, owner_id=nil)
     if self.sold?
       errors.add(:sold, 'Cannot sell already sold card')
       return false
     else
-      self.sold = true
+      self.sold = true 
       if self.save
-        if Payment.add_for_card(self, self.balance * Currency.count_exchange_rate(Currency.get_default, self.cardgroup.tell_balance_in_currency))
+        #This is jus a crapy hack to make this method work with api and gui
+        if currency and owner_id
+          balance = self.balance
+        else
+          balance = self.balance * Currency.count_exchange_rate(Currency.get_default, self.cardgroup.tell_balance_in_currency) 
+        end
+        if Payment.add_for_card(self, balance, currency, owner_id)
+          self.disable_voucher
           return true
         else
           self.sold = false
@@ -321,15 +339,16 @@ class Card < ActiveRecord::Base
     self.number = number
   end
 
+  def balance_with_vat
+     self.cardgroup.get_tax.count_tax_amount(self.balance) + balance
+  end
+
 =begin
   Checks if card is hidden or not. Card can be hidden and no one should be able to unhide it.
 =end
   def hidden?
     self.hidden == 1
   end
-
-
-
 
 =begin
   Hide the card so that no one could see it and set pin and caller id to nil, so that new cards 
@@ -356,7 +375,7 @@ class Card < ActiveRecord::Base
 =end
   def random_number(length)
     number = ''
-    length.times {
+     length.times{
       number << rand(10).to_s
     }
     return number

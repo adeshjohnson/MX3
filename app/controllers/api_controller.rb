@@ -3475,28 +3475,31 @@ class ApiController < ApplicationController
             logger.fatal "II%%%%%%%%%%%%%%%%%%%%%%%%4%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
             logger.fatal values.to_yaml
             card_by_pin = Card.find(:first, :include => :cardgroup, :conditions => {:pin => values[:pin], :owner_id => @current_user.get_correct_owner_id})
-
             if card_by_pin
-              logger.fatal card_by_pin.to_yaml
-              card_by_pin.disable
-              if card_by_pin.save
-                if device.user.add_to_balance(card_by_pin.balance)
-                  card_by_pin.add_to_balance(card_by_pin.balance * -1)
-                  doc.response {
-                    doc.status("ok")
-                    doc.device_id(device.id)
-                    doc.user_id(device.user_id)
-                    doc.new_balance(device.user.balance)
-                  }
-                else
-                  doc.error("Failed to make transaction")
-                end
+              if card_by_pin.balance == 0
+                doc.error("PIN number balance is zero")
               else
-                doc.error {
-                  card_by_pin.errors.each { |key, value|
-                    doc.error(_(value))
-                  } if card_by_pin.respond_to?(:errors)
-                }
+                card_by_pin.disable
+                if card_by_pin.save
+                  if device.user.add_to_balance(card_by_pin.balance, 'card_refill')
+                    card_by_pin.add_to_balance(card_by_pin.balance * -1, false)
+                    doc.response {
+                      doc.status("ok")
+                      doc.device_id(device.id)
+                      doc.user_id(device.user_id)
+                      doc.new_balance(nice_number(device.user.balance))
+                      doc.new_balance_with_vat(nice_number(device.user.balance_with_vat))
+                    }
+                  else
+                    doc.error("Failed to make transaction")
+                  end
+                else
+                  doc.error {
+                    card_by_pin.errors.each { |key, value|
+                      doc.error(_(value))
+                    } if card_by_pin.respond_to?(:errors)
+                  }
+                end
               end
             else
               doc.error("PIN number not found")
@@ -3508,48 +3511,61 @@ class ApiController < ApplicationController
                 card_by_pin = Card.find(:first, :include => :cardgroup, :conditions => ['cards.pin = ? AND cardgroups.owner_id =? AND cards.id <> ?', values[:pin], @current_user.get_correct_owner_id, card.id])
                 if  card_by_pin
                   if card.cardgroup_id == card_by_pin.cardgroup_id
-                    #2 * We find card1 by callerid and card2 by PIN, then card2.balance += card1.balance, card1.disable.
+                    #2 * We find card2 by callerid and card1 by PIN, then card2.balance += card1.balance, card1.disable.
                     logger.fatal "II%%%%%%%%%%%%%%%%%%%%%%%%2%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
                     logger.fatal values.to_yaml
-                    amount = card.balance
-                    logger.fatal card.to_yaml
-                    logger.fatal card_by_pin.to_yaml
-                    card.disable
-                    card.add_to_balance(card.balance * -1)
-                    if card.save
-                      if card_by_pin.add_to_balance(amount)
+                    amount = card_by_pin.balance
+                    if amount == 0
+                      doc.error("PIN number balance is zero")
+                    else
+                      logger.fatal card.to_yaml
+                      logger.fatal card_by_pin.to_yaml
+                      card_by_pin.disable
+                      card_by_pin.add_to_balance(card.balance * -1, false)
+                      if card_by_pin.save
+                        card.sell
+                        if card.add_to_balance(amount, false)
+                          respond_to_successful_card_operation(doc, card)
+                        else
+                          doc.error("Failed to make transaction")
+                        end
                         respond_to_successful_card_operation(doc, card_by_pin)
                       else
-                        doc.error("Failed to make transaction")
+                        doc.error {
+                          card_by_pin.errors.each { |key, value|
+                            doc.error(_(value))
+                          } if card_by_pin.respond_to?(:errors)
+                        }
                       end
-                    else
-                      doc.error {
-                        card.errors.each { |key, value|
-                          doc.error(_(value))
-                        } if card.respond_to?(:errors)
-                      }
                     end
                   else
-                    #3 * We find card1 by callerid and card2 by PIN. card1.callerid=card2.callerid, card2.callerid=nil, card1.balance +=card2.balance, card1.sold, card2.disable
+                    #3 * We find card2 by callerid and card1 by PIN. card1.callerid=card2.callerid, card2.callerid=nil, card1.balance +=card2.balance, card1.sold, card2.disable
                     logger.fatal "II%%%%%%%%%%%%%%%%%%%%%%%%3%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
                     logger.fatal values.to_yaml
-                    amount = card_by_pin.balance
-                    card_by_pin.disable
-                    card_by_pin.add_to_balance(card_by_pin.balance * -1)
-                    card.callerid = card_by_pin.callerid
-                    card_by_pin.callerid = nil
-                    if card_by_pin.save
-                      if card.add_to_balance(amount)
-                        respond_to_successful_card_operation(doc, card)
-                      else
-                        doc.error("Failed to make transaction")
-                      end
+                    amount = card.balance
+                    if amount == 0
+                      doc.error("PIN number balance is zero")
                     else
-                      doc.error {
-                        card_by_pin.errors.each { |key, value|
-                          doc.error(_(value))
-                        } if card_by_pin.respond_to?(:errors)
-                      }
+                      card.sell
+                      card_by_pin.sell
+                      card.add_to_balance(card.balance * -1, false)
+                      card_by_pin.callerid = card.callerid
+                      card.callerid = nil
+                      if card.save
+                        if card_by_pin.add_to_balance(amount, false)
+                          card.disable
+                          card.save
+                          respond_to_successful_card_operation(doc, card_by_pin)
+                        else
+                          doc.error("Failed to make transaction")
+                        end
+                      else
+                        doc.error {
+                          card.errors.each { |key, value|
+                            doc.error(_(value))
+                          } if card.respond_to?(:errors)
+                        }
+                      end
                     end
                   end
                 else
@@ -3563,7 +3579,7 @@ class ApiController < ApplicationController
                 card_by_pin = Card.find(:first, :include => :cardgroup, :conditions => {:pin => values[:pin], :owner_id => @current_user.get_correct_owner_id})
                 if  card_by_pin
                   card_by_pin.callerid = values[:callerid]
-                  if ((!card_by_pin.sold? and card_by_pin.sell) or card_by_pin.sold?) and card_by_pin.save
+                  if card_by_pin.sell
                     respond_to_successful_card_operation(doc, card_by_pin)
                   else
                     doc.error {
@@ -3591,12 +3607,13 @@ class ApiController < ApplicationController
             #4 * We find device by callerid, device.user.balance+=amount
             logger.fatal "I%%%%%%%%%%%%%%%%%%%%%%%%4%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
             logger.fatal values.to_yaml
-            if device.user.add_to_balance(values[:amount].to_f)
+            if device.user.add_to_balance(device.user.get_tax.count_amount_without_tax(values[:amount].to_f), 'card_refill')
               doc.response {
                 doc.status("ok")
                 doc.device_id(device.id)
                 doc.user_id(device.user_id)
-                doc.new_balance(device.user.balance)
+                doc.new_balance(nice_number(device.user.balance))
+                doc.new_balance_with_vat(nice_number(device.user.balance_with_vat))
               }
             else
               doc.error("Failed to make transaction")
@@ -3605,7 +3622,6 @@ class ApiController < ApplicationController
             card = Card.find(:first, :conditions => {:callerid => values[:callerid]})
             if  !card or (card and card.cardgroup.owner_id == @current_user.get_correct_owner_id)
               if card
-
                 if values[:cardgroup_id]
                   cardgroup = Cardgroup.find(:first, :conditions => {:id => values[:cardgroup_id], :owner_id => @current_user.get_correct_owner_id})
                 else
@@ -3617,12 +3633,13 @@ class ApiController < ApplicationController
                     logger.fatal "I%%%%%%%%%%%%%%%%%%%%%%%%3%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
                     logger.fatal values.to_yaml
                     original_balance = card.balance
-                    card.add_to_balance(card.balance * -1)
+                    card.add_to_balance(card.balance * -1, false)
                     card.disable
                     card.callerid = nil
                     amount = values[:amount].to_f * Currency.count_exchange_rate(cardgroup.tell_balance_in_currency, Currency.get_default).to_f
+                    amount = cardgroup.get_tax.count_amount_without_tax(original_balance + amount)
                     if card.save
-                      card_n = cardgroup.create_card({:balance => original_balance + amount, :callerid => values[:callerid]})
+                      card_n = cardgroup.create_card({:balance => amount, :callerid => values[:callerid]})
 
                       if card_n.sell and card_n.save
                         respond_to_successful_card_operation(doc, card_n)
@@ -3644,7 +3661,9 @@ class ApiController < ApplicationController
                     #2  * We find card1 by callerid and cardgroup by card1, we check if cardgroup is allowed for user then then card1.balance += amount
                     logger.fatal "I%%%%%%%%%%%%%%%%%%%%%%%%2%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
                     logger.fatal values.to_yaml
+                    card.sell
                     amount = values[:amount].to_f * Currency.count_exchange_rate(card.cardgroup.tell_balance_in_currency, Currency.get_default).to_f
+                    amount = cardgroup.get_tax.count_amount_without_tax(amount)
                     if card.add_to_balance(amount)
                       respond_to_successful_card_operation(doc, card)
                     else
@@ -3662,6 +3681,7 @@ class ApiController < ApplicationController
                 if cardgroup
                   logger.fatal cardgroup.tell_balance_in_currency
                   amount = values[:amount].to_f * Currency.count_exchange_rate(cardgroup.tell_balance_in_currency, Currency.get_default).to_f
+                  amount = cardgroup.get_tax.count_amount_without_tax(amount)
                   card_n = cardgroup.create_card({:balance => amount, :callerid => values[:callerid]})
 
                   if card_n.sell and card_n.save
@@ -3823,6 +3843,7 @@ class ApiController < ApplicationController
         doc.id(card.id)
         doc.cardgroup_id(card.cardgroup_id)
         doc.balance(nice_number(card.balance))
+        doc.balance_with_vat(nice_number(card.balance_with_vat))
         doc.callerid(card.callerid)
         doc.pin(card.pin)
         doc.number(card.number)

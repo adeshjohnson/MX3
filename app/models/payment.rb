@@ -111,12 +111,12 @@ class Payment < ActiveRecord::Base
   end
 
   def Payment.add_for_card(card, amount, currency = nil, owner_id = nil)
-    logger.fatal card.cardgroup.get_tax.count_tax_amount(amount)
-    Payment.add_global({:paymenttype => 'Card', :tax => card.cardgroup.get_tax.count_tax_amount(amount), :currency => currency ? currency : card.cardgroup.tell_balance_in_currency, :user_id => card.id, :card => 1, :amount => amount, :owner_id => owner_id ? owner_id : card.cardgroup.owner_id})
+   # logger.fatal card.cardgroup.get_tax.count_tax_amount(amount)
+    Payment.add_global({:paymenttype=>'Card', :tax => card.cardgroup.get_tax.count_tax_amount(amount), :currency => currency ? currency : card.cardgroup.tell_balance_in_currency, :user_id=>card.id, :card=>1, :amount=>amount, :owner_id => owner_id ? owner_id : card.cardgroup.owner_id})
   end
 
   def Payment.add_global(details= {})
-    Payment.create({:shipped_at => Time.now, :date_added => Time.now, :completed => 1, :currency => Currency.get_default}.merge(details))
+    Payment.create({:shipped_at=>Time.now, :date_added=>Time.now, :completed=>1,:currency=>Currency.get_default}.merge(details))
   end
 
   def Payment.create_for_user(user, params = {})
