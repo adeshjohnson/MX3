@@ -2190,6 +2190,9 @@ Variables: (Names marked with * are required)
       if exception.class.to_s.include?("Errno::ECONNRESET")
         flash = 'http://wiki.kolmisoft.com/index.php/GUI_Error_-_Email_SMTP#Connection_reset'
       end
+      if exception.message.include?('SMTP-AUTH requested but missing user name')
+        flash = 'http://wiki.kolmisoft.com/index.php/GUI_Error_-_Email_SMTP#ERROR'
+      end
     end
     Action.new(:user_id => session[:user_id].to_s.blank? ? session[:reg_owner_id].to_i : session[:user_id], :date => Time.now.to_s(:db), :action => "error", :data => 'Cant_send_email', :data2 => exception.message.to_s).save
     flash
