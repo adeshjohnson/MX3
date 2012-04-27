@@ -878,18 +878,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=user_9</td>
-	<td>label=System Admin</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=device_id_9</td>
+	<td>storeText</td>
+	<td>id=select_device_16</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=device_id_9</td>
+	<td>id=user_16</td>
+	<td>label=System Admin</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id_16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id_16</td>
 	<td>label=IAX2/103</td>
 </tr>
 <tr>
@@ -899,17 +904,17 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>id=select_device_9</td>
+	<td>id=select_device_16</td>
 	<td>IAX2/103</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_10</td>
+	<td>id=user_17</td>
 	<td>label=Test Reseller</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=device_id_10</td>
+	<td>id=device_id_17</td>
 	<td></td>
 </tr>
 <tr>
@@ -919,27 +924,27 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=select_device_10</td>
+	<td>id=select_device_17</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>id=select_device_10</td>
+	<td>id=select_device_17</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_11</td>
+	<td>id=user_18</td>
 	<td>label=Test User #1</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=device_id_11</td>
+	<td>id=device_id_18</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=device_id_11</td>
+	<td>id=device_id_18</td>
 	<td>label=IAX2/101</td>
 </tr>
 <tr>
@@ -949,17 +954,17 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_12</td>
+	<td>id=user_19</td>
 	<td>label=Test User #1</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=device_id_12</td>
+	<td>id=device_id_19</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=device_id_12</td>
+	<td>id=device_id_19</td>
 	<td>label=FAX/102</td>
 </tr>
 <tr>
@@ -969,12 +974,12 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_13</td>
+	<td>id=user_20</td>
 	<td>label=Test Reseller</td>
 </tr>
 <tr>
 	<td>verifyNotText</td>
-	<td>id=user_devices_13</td>
+	<td>id=user_devices_20</td>
 	<td>No devices</td>
 </tr>
 <tr>
@@ -1108,44 +1113,44 @@
 	<td>8</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=cdr_in_csv_file_number</td>
-	<td>3</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=existing_clis_number</td>
 	<td>2</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=new_clis_number</td>
+	<td>assertText</td>
+	<td>id=existing_clis_number</td>
 	<td>1</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
+	<td>id=new_clis_number</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>id=new_bad_clis</td>
-	<td>5 Bad CDRs</td>
+	<td>6 Bad CDRs</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=fix_cdrs_value</td>
-	<td>5</td>
+	<td>6</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=clis_to_create_value</td>
 	<td>1</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=assigne_clis_value</td>
 	<td>5</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=cdrs_to_insert_value</td>
-	<td>3</td>
+	<td>assertText</td>
+	<td>css=#cdrs_to_insert_value &gt; b</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1240,7 +1245,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>id=cdrs_to_insert_value</td>
-	<td>3</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
@@ -1263,14 +1268,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=date_13</td>
+	<td>assertText</td>
+	<td>id=date_20</td>
 	<td>999999999999999999999999999999</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=date_15</td>
-	<td>234567677</td>
+	<td>assertText</td>
+	<td>id=date_21</td>
+	<td>234567655</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1283,43 +1288,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>css=#total_calls &gt; b</td>
-	<td>4</td>
+	<td>assertText</td>
+	<td>id=total_calls</td>
+	<td>3</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=imported_calls</td>
 	<td>2</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=failed_calls</td>
-	<td>2</td>
+	<td>1</td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Destination is not numerical value</td>
+	<td>assertTextPresent</td>
+	<td>CLI is not number</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Billsec is not numerical value</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invalid calldate</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Destination is not numerical value</td>
+	<td>assertTextPresent</td>
+	<td>CDR exist in db match caldate dst src</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>CDR exist in db match caldate dst src</td>
+	<td>assertTextPresent</td>
+	<td>CLI is not number</td>
 	<td></td>
 </tr>
 <tr>

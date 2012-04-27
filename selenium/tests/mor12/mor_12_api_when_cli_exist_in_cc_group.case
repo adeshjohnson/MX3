@@ -38,12 +38,47 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td>/billing/currencies/currencies</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/currencies/currencies_change_update_status/2')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Currency update disabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=exchange_rate</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Currency details updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=icon_cross_curr_upd_enable_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=icon_chech_curr_upd_disable_2</td>
 	<td></td>
 </tr>
 <!--edit cc group-->
@@ -249,13 +284,13 @@
 <!--hash #1, cg=1, cli=4444, amount=100-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?cardgroup_id=1&amp;callerid=4444&amp;amount=100</td>
+	<td>/billing/test/test_api?callerid=4444&amp;amount=100</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>d703d39e26dd770b614d3e0786373aecb4378fa3</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
 </tr>
 <!--create cards for cg=3-->
 <tr>
@@ -322,13 +357,53 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/cards/list?cg=1&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_1</td>
+	<td>4444</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_1</td>
+	<td>10.0840</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#sold_1 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=3&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_27</td>
+	<td>5555</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_27</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#sold_27 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
 <!--hash #1, cg=1, cli=4444, amount=100-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/cc_by_cli?u=admin&amp;p=admin1&amp;cardgroup_id=1&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=d703d39e26dd770b614d3e0786373aecb4378fa3</td>
+	<td>/billing/api/cc_by_cli?u=admin&amp;p=admin1&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -342,9 +417,14 @@
 	<td>1</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=balance</td>
-	<td>110.0840</td>
+	<td>100.9931</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance_with_vat</td>
+	<td>111.0924</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -369,13 +449,13 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>css=status</td>
-	<td>ok</td>
+	<td>css=id</td>
+	<td>27</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>css=id</td>
-	<td>27</td>
+	<td>css=status</td>
+	<td>ok</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -383,9 +463,14 @@
 	<td>3</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=balance</td>
-	<td>406.2118</td>
+	<td>102.4520</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance_with_vat</td>
+	<td>150.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -405,7 +490,7 @@
 <!--hash #1, cg=1, cli=4444, amount=100-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/cc_by_cli?u=accountant&amp;p=accountant1&amp;cardgroup_id=1&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=d703d39e26dd770b614d3e0786373aecb4378fa3</td>
+	<td>/billing/api/cc_by_cli?u=accountant&amp;p=accountant1&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -427,7 +512,7 @@
 <!--hash #1, cg=1, cli=4444, amount=100-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/cc_by_cli?u=reseller&amp;p=reseller1&amp;cardgroup_id=1&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=d703d39e26dd770b614d3e0786373aecb4378fa3</td>
+	<td>/billing/api/cc_by_cli?u=reseller&amp;p=reseller1&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -438,7 +523,7 @@
 <!--hash #1, cg=1, cli=4444, amount=100-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/cc_by_cli?u=101&amp;p=1011&amp;cardgroup_id=1&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=d703d39e26dd770b614d3e0786373aecb4378fa3</td>
+	<td>/billing/api/cc_by_cli?u=101&amp;p=1011&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <!--Bad login, tam kad useris nesuprastų jog toks dalykas egzistuoja ar kažkas panašaus.-->
@@ -450,7 +535,7 @@
 <!--hash #1, cg=1, cli=4444, amount=100-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/cc_by_cli?u=user_reseller&amp;p=user_reseller1&amp;cardgroup_id=1&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=d703d39e26dd770b614d3e0786373aecb4378fa3</td>
+	<td>/billing/api/cc_by_cli?u=user_reseller&amp;p=user_reseller1&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -500,33 +585,63 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=amount_1</td>
-	<td>100.0000</td>
+	<td>assertText</td>
+	<td>id=amount_10</td>
+	<td>10.0840</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=amount_2</td>
-	<td>300.0000</td>
+	<td>assertText</td>
+	<td>id=amout_with_tax_10</td>
+	<td>11.0924</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=amout_with_tax_1</td>
-	<td>110.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amout_with_tax_2</td>
-	<td>439.2300</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=currency_1</td>
+	<td>assertText</td>
+	<td>id=currency_10</td>
 	<td>USD</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=currency_2</td>
+	<td>id=amount_11</td>
+	<td>90.9091</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_11</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=currency_11</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_12</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_12</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_12</td>
+	<td>EUR</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_13</td>
+	<td>204.9040</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_13</td>
+	<td>300.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=currency_13</td>
 	<td>EUR</td>
 </tr>
 <tr>
@@ -552,12 +667,17 @@
 <tr>
 	<td>verifyText</td>
 	<td>id=balance_27</td>
-	<td>406.2118</td>
+	<td>102.4520</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>id=user_27</td>
 	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=img[alt=&quot;Check&quot;]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -582,11 +702,11 @@
 <tr>
 	<td>verifyText</td>
 	<td>//td[@id='balance_1']</td>
-	<td>110.0840</td>
+	<td>100.9931</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>css=tr.row1 &gt; #sold_1 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td>assertText</td>
+	<td>css=img[alt=&quot;Check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -741,23 +861,33 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=amount_1</td>
+	<td>id=amount_11</td>
+	<td>90.9091</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_13</td>
+	<td>204.9040</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_11</td>
 	<td>100.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=amout_with_tax_1</td>
-	<td>110.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amount_2</td>
+	<td>id=amout_with_tax_13</td>
 	<td>300.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=amout_with_tax_2</td>
-	<td>439.2300</td>
+	<td>id=currency_11</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=currency_13</td>
+	<td>EUR</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -777,7 +907,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>id=balance_27</td>
-	<td>406.2118</td>
+	<td>102.4520</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -802,7 +932,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>//td[@id='balance_1']</td>
-	<td>110.0840</td>
+	<td>100.9931</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -845,28 +975,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForTextPresent</td>
 	<td>Card was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/cards/card_pay/12?cg=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>The card was sold</td>
 	<td></td>
 </tr>
 <tr>
@@ -897,46 +1012,6 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Card was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/cards/card_pay/30?cg=3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>The card was sold</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/cards/card_pay/1?cg=3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>The card was sold</td>
 	<td></td>
 </tr>
 <!--hash #6, cg=1, cli=6666, amount=150, pin=6930-->
@@ -1025,39 +1100,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>css=status</td>
-	<td>ok</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>css=id</td>
-	<td>30</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>css=cardgroup_id</td>
-	<td>3</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>css=balance</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>css=callerid</td>
-	<td>7777</td>
-</tr>
-<tr>
-	<td>storeText</td>
-	<td>css=pin</td>
-	<td>pin4</td>
-</tr>
-<tr>
-	<td>storeText</td>
-	<td>css=number</td>
-	<td>number4</td>
+	<td>assertTextPresent</td>
+	<td>PIN number balance is zero</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1091,43 +1136,43 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=amount_15</td>
-	<td>-10.0840</td>
+	<td>id=amount_11</td>
+	<td>90.9091</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=amout_with_tax_15</td>
-	<td>-11.0924</td>
+	<td>id=amount_13</td>
+	<td>204.9040</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=amount_16</td>
+	<td>id=amout_with_tax_11</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_13</td>
+	<td>300.0000</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=currency_11</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=currency_13</td>
+	<td>EUR</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_14</td>
 	<td>10.0840</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=amout_with_tax_16</td>
+	<td>assertText</td>
+	<td>id=amout_with_tax_14</td>
 	<td>11.0924</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amount_17</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amout_with_tax_17</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amount_18</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amout_with_tax_18</td>
-	<td>0.0000</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1143,6 +1188,11 @@
 	<td>verifyText</td>
 	<td>id=balance_30</td>
 	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#sold_30 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
 </tr>
 <!--balancas nepadidėja nes default balance yra nulis-->
 <tr>
@@ -1177,6 +1227,11 @@
 </tr>
 <tr>
 	<td>verifyText</td>
+	<td>css=#sold_8 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
 	<td>id=callerid_12</td>
 	<td>6666</td>
 </tr>
@@ -1186,8 +1241,8 @@
 	<td>20.1681</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>css=#sold_8 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1442,9 +1497,14 @@
 	<td>1</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=balance</td>
-	<td>210.0840</td>
+	<td>191.9022</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance_with_vat</td>
+	<td>211.0924</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -1483,9 +1543,14 @@
 	<td>3</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=balance</td>
-	<td>812.4235</td>
+	<td>204.9040</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance_with_vat</td>
+	<td>300.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -1531,30 +1596,11 @@
 	<td>/billing/api/cc_by_cli?u=accountant&amp;p=accountant1&amp;cardgroup_id=3&amp;callerid=7777&amp;amount=50&amp;pin=${pin3}&amp;test=1&amp;hash=${hash2}</td>
 	<td></td>
 </tr>
+<!--b. Kai pridedama kortelė, kurios balansas yra 0, turi nekeisti callerID niekur ir mesti klaidą: "PIN number balance is zero"-->
 <tr>
-	<td>verifyText</td>
-	<td>css=status</td>
-	<td>ok</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>css=id</td>
-	<td>30</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>css=cardgroup_id</td>
-	<td>3</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>css=balance</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>css=callerid</td>
-	<td>7777</td>
+	<td>assertTextPresent</td>
+	<td>PIN number balance is zero</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1587,9 +1633,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>//td[@id='balance_1']</td>
-	<td>210.0840</td>
+	<td>191.9022</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1607,9 +1653,9 @@
 	<td>5555</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=balance_27</td>
-	<td>812.4235</td>
+	<td>204.9040</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1643,92 +1689,32 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=amount_19</td>
+	<td>id=amount_11</td>
+	<td>90.9091</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amount_13</td>
+	<td>204.9040</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=amout_with_tax_11</td>
 	<td>100.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=amout_with_tax_19</td>
-	<td>110.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=currency_19</td>
-	<td>USD</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amount_20</td>
+	<td>id=amout_with_tax_13</td>
 	<td>300.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=amout_with_tax_20</td>
-	<td>439.2300</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=currency_20</td>
-	<td>EUR</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amount_19</td>
-	<td>100.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amout_with_tax_19</td>
-	<td>110.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amount_20</td>
-	<td>300.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amout_with_tax_20</td>
-	<td>439.2300</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amount_21</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amout_with_tax_21</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amount_22</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=amout_with_tax_22</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=currency_19</td>
+	<td>id=currency_11</td>
 	<td>USD</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=currency_20</td>
-	<td>EUR</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=currency_21</td>
-	<td>EUR</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=currency_22</td>
+	<td>id=currency_13</td>
 	<td>EUR</td>
 </tr>
 <tr>
@@ -1962,6 +1948,16 @@
 	<td>32</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>css=balance</td>
+	<td>31.6667</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance_with_vat</td>
+	<td>47.5000</td>
+</tr>
+<tr>
 	<td>verifyText</td>
 	<td>css=cardgroup_id</td>
 	<td>4</td>
@@ -1998,9 +1994,14 @@
 	<td>4</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=balance</td>
 	<td>26.6667</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance_with_vat</td>
+	<td>40.0000</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -2044,8 +2045,18 @@
 </tr>
 <tr>
 	<td>verifyText</td>
+	<td>id=balance_31</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_32</td>
+	<td>09090909</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>id=balance_32</td>
-	<td>87.8055</td>
+	<td>31.6667</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -2056,11 +2067,6 @@
 	<td>verifyText</td>
 	<td>id=balance_33</td>
 	<td>26.6667</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=balance_31</td>
-	<td>0.0000</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -2074,9 +2080,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=balance</td>
-	<td>310.0840</td>
+	<td>282.8113</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance_with_vat</td>
+	<td>311.0924</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -2150,9 +2161,203 @@
 	<td>4444</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>//td[@id='balance_1']</td>
-	<td>310.0840</td>
+	<td>282.8113</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>1111111002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>1111111007</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=distributor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Action : Change distributor </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card interval : 1111111002 - 1111111007</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Distributor changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_3</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_callerid</td>
+	<td>32313231</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_30</td>
+	<td>Added to cards balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_52</td>
+	<td>Added to cards balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_30</td>
+	<td>Added to cards balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_31</td>
+	<td>Added to cards balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_51</td>
+	<td>Added to cards balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_52</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_30</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_31</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_51</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data_52</td>
+	<td>13.3333</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data_30</td>
+	<td>-10.0840</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data_31</td>
+	<td>10.0840</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data_51</td>
+	<td>-13.3333</td>
+</tr>
+<!--hash #12 cli=32313231 pin=1360-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?callerid=32313231&amp;pin=1360</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash12</td>
+</tr>
+<!--hash #13 cli=32313231 amount=100-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?callerid=32313231&amp;amount=100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash13</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--hash #13 cli=32313231 amount=100-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/cc_by_cli?u=reseller&amp;p=reseller1&amp;callerid=32313231&amp;amount=100&amp;test=1&amp;hash=${hash13}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You do not have permission to access card</td>
+	<td></td>
+</tr>
+<!--hash #12 cli=32313231 pin=1360-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/cc_by_cli?u=reseller&amp;p=reseller1&amp;callerid=32313231&amp;pin=1360&amp;test=1&amp;hash=${hash12}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You do not have permission to access card</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
