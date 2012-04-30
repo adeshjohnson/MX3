@@ -470,7 +470,7 @@ class CardsController < ApplicationController
       flash[:status] = _('Card_was_deleted')
       redirect_to :action => 'list', :cg => cg and return false
     else
-      flash[:notice] = _('Card_was_permanently_hidden')
+      flash[:status] = _('Card_was_permanently_hidden')
       redirect_to :action => 'list', :cg => cg and return false
     end
   end
