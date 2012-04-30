@@ -5,8 +5,8 @@
         <th id="h_type" align="left"><%= _('Type') %></th>
         <th id="h_period" align="center"><%= _('Period') %></th>
         <% if can_see_finances? -%>
-            <th id="h_price" align="right"><%= _('Price') %></th>
-            <th id="h_price" align="right"><%= _('Selfcost') %></th>
+            <th id="h_price" align="right"><%= _('Price') %> (<%= current_user.currency.name %>)</th>
+            <th id="h_price" align="right"><%= _('Selfcost') %>(<%= current_user.currency.name %>)</th>
         <% end -%>
         <th id="h_quantity" align="right"><%= _('Quantity') %></th>
         <% if @allow_edit %>

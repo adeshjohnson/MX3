@@ -22,7 +22,7 @@
           <tr id="line_<%= sub.id %>" class="row<%= (i % 2 + 1).to_s %>">
             <td id="service_name_<%= sub.id %>" align="left"><%= link_to(sub.service.name, {:action => "list"}, :id => "service_name_link_"+ sub.id.to_s) %></td>
             <% if can_see_finances? %>
-                <td id="service_price_<%= sub.id %>" align="right"> <%= nice_number Currency.count_exchange_rate(current_user.currency.name, Currency.get_default.name) * sub.service.price %> </td>
+                <td id="service_price_<%= sub.id %>" align="right"> <%= nice_number sub.service.price %> </td>
             <% end %>
             <td id="memo_<%= sub.id %>" align="left"> <%= sub.memo[0..50] if sub.memo %> </td>
             <td id="added_<%= sub.id %>" align="center"> <%= nice_date_time sub.added %> </td>
