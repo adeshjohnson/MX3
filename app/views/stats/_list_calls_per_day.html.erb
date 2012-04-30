@@ -18,42 +18,42 @@
   <% if @res != [] %>
       <% @res.each_with_index { |res, i| %>
           <tr class="row<%= (i % 2 + 1).to_s %>">
-            <td align="center"> <%= nice_date(res['year'].to_s + '-' + res['month'].to_s + '-' + res['day'].to_s, 0) %></td>
-            <td align="right"> <%= res['calls'] %> </td>
-            <td align="center"> <%= nice_time(res['duration']) %></td>
+            <td align="center" id='date_<%= i %>'> <%= nice_date(res['year'].to_s + '-' + res['month'].to_s + '-' + res['day'].to_s, 0) %></td>
+            <td align="right" id='calls_<%= i %>'> <%= res['calls'] %> </td>
+            <td align="center" id='duration_<%= i %>'> <%= nice_time(res['duration']) %></td>
             <% if res['duration'].to_i > 0 and @directions != 'Incoming' %>
-                <td align="center"> <%= res['calls'].to_f != res['fail'].to_f ? nice_time(((res['duration'].to_f / (res['calls'].to_f - res['fail'].to_f))).to_i) : 0 %></td>
-                <td align="right"> <%= nice_number(((res['calls'].to_f - res['fail'].to_f) / res['calls'].to_f) * 100) %>
+                <td align="center" id='acd_<%= i %>'> <%= res['calls'].to_f != res['fail'].to_f ? nice_time(((res['duration'].to_f / (res['calls'].to_f - res['fail'].to_f))).to_i) : 0 %></td>
+                <td align="right" id='asr_<%= i %>'> <%= nice_number(((res['calls'].to_f - res['fail'].to_f) / res['calls'].to_f) * 100) %>
                   %
                 </td>
             <% else %>
-                <td align="right"><%= nice_time(0) %>  </td>
-                <td align="right"><%= nice_number(0) %> %</td>
+                <td align="right" id='acd1_<%= i %>'><%= nice_time(0) %>  </td>
+                <td align="right" id='asr1_<%= i %>'><%= nice_number(0) %> %</td>
             <% end %>
-            <td align="right"> <%= res['fail'] %></td>
-            <td align="right"> <%= nice_number((res['fail'].to_f / res['calls'].to_f) *100) %><%= "%" %></td>
+            <td align="right" id='fail_<%= i %>'> <%= res['fail'] %></td>
+            <td align="right" id='fail2_<%= i %>'> <%= nice_number((res['fail'].to_f / res['calls'].to_f) *100) %><%= "%" %></td>
             <% if can_see_finances? -%>
-                <td align="right"> <%= nice_number res['user_price'] %></td>
+                <td align="right" id='price_<%= i %>'> <%= nice_number res['user_price'] %></td>
                 <% if session[:usertype] == 'admin' or session[:usertype] == 'accountant'
                      buy_price = res['provider_price']
                    else
                      buy_price = res['reseller_price']
                    end %>
-                <td align="right"> <%= nice_number buy_price %></td>
-                <td align="right"> <%= nice_number(res['user_price'].to_f - buy_price.to_f) %></td>
+                <td align="right" id='prov_price_<%= i %>'> <%= nice_number buy_price %></td>
+                <td align="right" id='user_price_<%= i %>'> <%= nice_number(res['user_price'].to_f - buy_price.to_f) %></td>
 
                 <% if res['duration'].to_i > 0 and @directions != 'Incoming' and res['user_price'].to_f != 0 -%>
-                    <td align="right"> <%= nice_number(((res['user_price'].to_f - buy_price.to_f)/ res['user_price'].to_f) *100) %>
+                    <td align="right" id='m_<%= i %>'> <%= nice_number(((res['user_price'].to_f - buy_price.to_f)/ res['user_price'].to_f) *100) %>
                       %
                     </td>
                 <% else -%>
-                    <td align="right"><%= nice_number(0) %> %</td>
+                    <td align="right" id='m1_<%= i %>'><%= nice_number(0) %> %</td>
                 <% end -%>
 
                 <% if res['duration'].to_i > 0 and @directions != 'Incoming' and buy_price.to_f != 0 -%>
-                    <td align="right"> <%= nice_number(((res['user_price'].to_f / buy_price.to_f) *100)-100) %> %</td>
+                    <td align="right" id='mr_<%= i %>'> <%= nice_number(((res['user_price'].to_f / buy_price.to_f) *100)-100) %> %</td>
                 <% else -%>
-                    <td align="right"><%= nice_number(0) %> %</td>
+                    <td align="right" id='dmr1_<%= i %>'><%= nice_number(0) %> %</td>
                 <% end -%>
             <% end -%>
           </tr>
