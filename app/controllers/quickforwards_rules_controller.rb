@@ -11,7 +11,7 @@ class QuickforwardsRulesController < ApplicationController
 
   def list
     @page_title = _('Quickforwards_Rules')
-    @quickforwards_rules = current_user.quickforwards_rules(:all, :order => "name")
+    @quickforwards_rules = current_user.quickforwards_rules.order("name").all
 
   end
 
