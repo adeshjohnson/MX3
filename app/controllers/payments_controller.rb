@@ -665,7 +665,7 @@ class PaymentsController < ApplicationController
     @page_title = _('Add_manual_payment')
     @page_icon = "add.png"
 
-    @user = User.find(:first, :include => [:tax], :conditions => ["users.id = ?", params[:user]])
+    @user = User.includes(:tax).where(["users.id = ?", params[:user]]).first
     unless @user
       Action.add_action(session[:user_id], "error", "User: #{params[:user]} was not found") if session[:user_id].to_i != 0
       dont_be_so_smart
