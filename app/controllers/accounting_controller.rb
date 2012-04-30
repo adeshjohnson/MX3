@@ -1050,7 +1050,7 @@ class AccountingController < ApplicationController
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
 
-    pdf = invoice.generate_invoice_by_cid_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal])
+    pdf, arr_t  = invoice.generate_invoice_by_cid_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal], params[:test].to_i == 1)
 
     if params[:email_or_not]
       return pdf.render
