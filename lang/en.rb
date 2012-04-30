@@ -4358,6 +4358,7 @@ Localization.define('en') do |l|
   l.store 'Provider_billing', 'Provider billing'
   l.store 'Use_only_one_provider_(Turn_off_failover)', 'Use only one provider (Turn off failover)'
   l.store 'Save_changes', 'Save changes'
+  l.store 'Card_was_permanently_hidden', 'Card was permanently hidden'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
