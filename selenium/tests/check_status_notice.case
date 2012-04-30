@@ -71,10 +71,9 @@
 	<td>/billing/cardgroups/list</td>
 	<td></td>
 </tr>
-<!--There is no ID-->
 <tr>
 	<td>clickAndWait</td>
-	<td>edit_img_2</td>
+	<td>edit_img_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -270,7 +269,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>notice</td>
-	<td>Bad number length, should be: 10</td>
+	<td>Bad number length should be: 10</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -355,8 +354,8 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>status</td>
-	<td>Card group deleted</td>
+	<td>id=notice</td>
+	<td>Card Group can not be deleted</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -474,13 +473,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Card was not updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad pin length should be: 4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_number</td>
+	<td>4444444444</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>4444</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyText</td>
 	<td>status</td>
 	<td>Card was successfully updated</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/list?cg=2&amp;s_sold=no</td>
+	<td>/billing/cards/list?cg=1&amp;s_sold=no</td>
 	<td></td>
 </tr>
 <tr>
@@ -494,9 +518,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>notice</td>
-	<td>Card can not be deleted</td>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Card was permanently hidden</td>
 </tr>
 <tr>
 	<td>open</td>
