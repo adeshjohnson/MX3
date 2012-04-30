@@ -710,18 +710,6 @@ class CardsController < ApplicationController
     invoice.ccorder = ccorder
     invoice.save
 
-    paym = Payment.new
-    paym.paymenttype = 'Card'
-    paym.amount = amount
-    paym.currency = session[:default_currency]
-    paym.date_added = creation_time
-    paym.shipped_at = creation_time
-    paym.completed = 1
-    paym.user_id = @card.id
-    paym.card = 1
-    paym.owner_id = current_user.id
-    paym.save
-
     if params[:send_invoice].to_i == 1
       options = {
           :title_fontsize => 13,
@@ -757,9 +745,7 @@ class CardsController < ApplicationController
       PdfGen::Generate.generate_cc_invoice(invoice, options)
       invoice.save
     end
-    @card.sold = 1
-    @card.save
-    @card.disable_voucher
+    @card.sell(session[:default_currency], current_user.id)
     flash[:status] = _("Card_is_sold")
     redirect_to(:action => :list, :id => @card.id, :cg => @cg.id) and return false
   end
