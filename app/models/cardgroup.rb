@@ -86,7 +86,7 @@ class Cardgroup < ActiveRecord::Base
   end
 
   def Cardgroup.set_tax(tax, owner_id)
-    cardgroups = Cardgroup.find(:all, :include => [:tax], :conditions => ["owner_id = ?", owner_id])
+    cardgroups = Cardgroup.includes([:tax]).where(["owner_id = ?", owner_id]).all
     for cardgroup in cardgroups
       if !cardgroup.tax
         cardgroup.tax = Tax.new
