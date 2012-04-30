@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.163" />
+<link rel="selenium.base" href="" />
 <title>New Test</title>
 </head>
 <body>
@@ -217,9 +217,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>verifyNotText</td>
 	<td>//div[@id='tabViewdhtmlgoodies_tabView1_3']/table/tbody/tr[8]/td[3]</td>
 	<td>Cannot send test email because main parameters are empty</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=email_test_link</td>
+	<td>Press to test (Test email will be sent to: test@kolmisoft.com)</td>
 </tr>
 <tr>
 	<td>type</td>

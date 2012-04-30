@@ -83,6 +83,7 @@
 	<td>File uploaded</td>
 	<td></td>
 </tr>
+<!--Kai įkelta all su tam tikra dienos dalimi, įkėlinėjant vėl tai pačiai dienos daliai ir nuo ir iki laikai vienodi(v1:m1:s1 = v2:m2:s2), gaunamas pranešimas kad įvyksta kolizija. nei refreš, nei pakartotinis select nepadeda.-->
 <tr>
 	<td>select</td>
 	<td>rate_day_type</td>
@@ -104,6 +105,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_hour</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_hour</td>
+	<td>01</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_from_minute</td>
 	<td>w</td>
@@ -119,6 +135,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_minute</td>
+	<td>01</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_from_second</td>
 	<td>w</td>
@@ -134,6 +165,31 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_second</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_second</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_second</td>
+	<td>01</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_till_hour</td>
 	<td>w</td>
@@ -144,13 +200,43 @@
 	<td>label=22</td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>id=time_till_minute</td>
+	<td>keyUp</td>
+	<td>id=time_till_hour</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_hour</td>
+	<td>label=22</td>
 </tr>
 <tr>
 	<td>keyUp</td>
 	<td>id=time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_hour</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_hour</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=time_till_minute</td>
 	<td>w</td>
 </tr>
 <tr>
@@ -162,6 +248,36 @@
 	<td>keyUp</td>
 	<td>id=time_till_minute</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_minute</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_minute</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_minute</td>
+	<td>22</td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -177,6 +293,21 @@
 	<td>keyUp</td>
 	<td>id=time_till_second</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_second</td>
+	<td>label=42</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_second</td>
+	<td>42</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -207,6 +338,36 @@
 	<td>fireEvent</td>
 	<td>rate_day_type</td>
 	<td>blur</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_hour</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_minute</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_second</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_hour</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_minute</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_second</td>
+	<td>42</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -340,7 +501,7 @@
 	<td>label=&quot;Min Time&quot;</td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Tariff import incorrect time</td>
 	<td></td>
 </tr>
@@ -365,6 +526,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_hour</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_hour</td>
+	<td>01</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_from_minute</td>
 	<td>w</td>
@@ -380,6 +556,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_minute</td>
+	<td>01</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_from_second</td>
 	<td>w</td>
@@ -395,6 +586,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_second</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_second</td>
+	<td>01</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_till_hour</td>
 	<td>w</td>
@@ -406,8 +612,23 @@
 </tr>
 <tr>
 	<td>keyUp</td>
-	<td>id=time_till_minute</td>
+	<td>id=time_till_hour</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_hour</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_hour</td>
+	<td>22</td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -421,8 +642,23 @@
 </tr>
 <tr>
 	<td>keyUp</td>
-	<td>id=time_till_hour</td>
+	<td>id=time_till_minute</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_minute</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_minute</td>
+	<td>22</td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -435,6 +671,11 @@
 	<td>label=42</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>id=time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=time_till_second</td>
 	<td>label=42</td>
@@ -443,11 +684,46 @@
 	<td>keyUp</td>
 	<td>id=time_till_second</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_second</td>
+	<td>42</td>
 </tr>
 <tr>
 	<td>fireEvent</td>
 	<td>rate_day_type</td>
 	<td>blur</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_hour</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_minute</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_second</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_hour</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_minute</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_second</td>
+	<td>42</td>
 </tr>
 <tr>
 	<td>waitForTextNotPresent</td>
@@ -597,9 +873,14 @@
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>id=time_from_minute</td>
+	<td>keyUp</td>
+	<td>id=time_from_hour</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_hour</td>
+	<td>label=01</td>
 </tr>
 <tr>
 	<td>keyUp</td>
@@ -607,14 +888,19 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_minute</td>
-	<td>label=01</td>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_hour</td>
+	<td>01</td>
 </tr>
 <tr>
 	<td>keyDown</td>
-	<td>id=time_from_second</td>
+	<td>id=time_from_minute</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_minute</td>
+	<td>label=01</td>
 </tr>
 <tr>
 	<td>keyUp</td>
@@ -623,17 +909,52 @@
 </tr>
 <tr>
 	<td>select</td>
+	<td>id=time_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_minute</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
 	<td>id=time_from_second</td>
 	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_second</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_second</td>
+	<td>01</td>
 </tr>
 <tr>
 	<td>keyDown</td>
 	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
 	<td>w</td>
 </tr>
 <tr>
@@ -642,13 +963,28 @@
 	<td>label=14</td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>id=time_till_minute</td>
+	<td>keyUp</td>
+	<td>id=time_till_hour</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_hour</td>
+	<td>label=14</td>
 </tr>
 <tr>
 	<td>keyUp</td>
 	<td>id=time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_hour</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=time_till_minute</td>
 	<td>w</td>
 </tr>
 <tr>
@@ -657,14 +993,24 @@
 	<td>label=14</td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>id=time_till_second</td>
+	<td>keyUp</td>
+	<td>id=time_till_minute</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_minute</td>
+	<td>label=14</td>
 </tr>
 <tr>
 	<td>keyUp</td>
 	<td>id=time_till_minute</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_minute</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -672,6 +1018,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>id=time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=time_till_second</td>
 	<td>label=14</td>
@@ -680,6 +1031,21 @@
 	<td>keyUp</td>
 	<td>id=time_till_second</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_second</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_second</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -705,6 +1071,36 @@
 	<td>select</td>
 	<td>min_time_id</td>
 	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_hour</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_minute</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_second</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_hour</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_minute</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_second</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>fireEvent</td>
@@ -858,6 +1254,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_hour</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_hour</td>
+	<td>01</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_from_minute</td>
 	<td>w</td>
@@ -873,6 +1284,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_minute</td>
+	<td>01</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_from_second</td>
 	<td>w</td>
@@ -888,6 +1314,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_second</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_second</td>
+	<td>01</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_till_hour</td>
 	<td>w</td>
@@ -901,6 +1342,21 @@
 	<td>keyUp</td>
 	<td>id=time_till_hour</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_hour</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -918,6 +1374,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_till_minute</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_minute</td>
+	<td>14</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_till_second</td>
 	<td>w</td>
@@ -928,6 +1399,11 @@
 	<td>label=14</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>id=time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=time_till_second</td>
 	<td>label=14</td>
@@ -936,6 +1412,41 @@
 	<td>keyUp</td>
 	<td>id=time_till_second</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_second</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_hour</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_minute</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_second</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_hour</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_minute</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_second</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>fireEvent</td>
@@ -1204,7 +1715,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForTextNotPresent</td>
 	<td>Please select period without collisions</td>
 	<td></td>
 </tr>
@@ -1224,6 +1735,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_hour</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_hour</td>
+	<td>01</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_from_minute</td>
 	<td>w</td>
@@ -1239,6 +1765,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_minute</td>
+	<td>01</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_from_second</td>
 	<td>w</td>
@@ -1254,6 +1795,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_second</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_second</td>
+	<td>01</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_till_hour</td>
 	<td>w</td>
@@ -1267,6 +1823,21 @@
 	<td>keyUp</td>
 	<td>id=time_till_hour</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_hour</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_hour</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -1284,6 +1855,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_till_minute</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_minute</td>
+	<td>14</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_till_second</td>
 	<td>w</td>
@@ -1297,6 +1883,21 @@
 	<td>keyUp</td>
 	<td>id=time_till_second</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_second</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_second</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1327,6 +1928,36 @@
 	<td>select</td>
 	<td>min_time_id</td>
 	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_hour</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_minute</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_second</td>
+	<td>01</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_hour</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_minute</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_second</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>fireEvent</td>
@@ -1354,6 +1985,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_hour</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_hour</td>
+	<td>00</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_from_minute</td>
 	<td>w</td>
@@ -1369,6 +2015,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_from_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_minute</td>
+	<td>00</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_from_second</td>
 	<td>w</td>
@@ -1382,6 +2043,21 @@
 	<td>keyUp</td>
 	<td>id=time_from_second</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_from_second</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_second</td>
+	<td>00</td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -1399,6 +2075,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_till_hour</td>
+	<td>label=23</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_hour</td>
+	<td>23</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_till_minute</td>
 	<td>w</td>
@@ -1414,6 +2105,21 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=time_till_minute</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_minute</td>
+	<td>59</td>
+</tr>
+<tr>
 	<td>keyDown</td>
 	<td>id=time_till_second</td>
 	<td>w</td>
@@ -1427,6 +2133,21 @@
 	<td>keyUp</td>
 	<td>id=time_till_second</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=time_till_second</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_second</td>
+	<td>59</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1457,6 +2178,36 @@
 	<td>select</td>
 	<td>min_time_id</td>
 	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_hour</td>
+	<td>00</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_minute</td>
+	<td>00</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_from_second</td>
+	<td>00</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_hour</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_minute</td>
+	<td>59</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=time_till_second</td>
+	<td>59</td>
 </tr>
 <tr>
 	<td>fireEvent</td>
