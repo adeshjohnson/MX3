@@ -43,7 +43,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>You are not authorized to view this page</td>
+	<td>Action was not found</td>
 	<td></td>
 </tr>
 <!--Set taxes for ADMIN-->
@@ -364,27 +364,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Don't be so smart...</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/cards/list?cg=3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=#delete_link_23 &gt; img[alt=&quot;Delete&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Card was deleted</td>
 	<td></td>
 </tr>
@@ -399,8 +379,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Please upload file</td>
+	<td>verifyTextPresent</td>
+	<td>Please select file</td>
 	<td></td>
 </tr>
 <tr>
@@ -608,11 +588,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Deleted</td>
 	<td></td>
 </tr>
 <tr>
@@ -973,27 +948,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Don't be so smart...</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/cards/list?cg=4&amp;clean=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#delete_link_34 &gt; img[alt=&quot;Delete&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Card was deleted</td>
 	<td></td>
 </tr>
@@ -1008,8 +963,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Please upload file</td>
+	<td>verifyTextPresent</td>
+	<td>Please select file</td>
 	<td></td>
 </tr>
 <tr>
@@ -1054,8 +1009,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Don't be so smart...</td>
+	<td>verifyTextPresent</td>
+	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
 <!--Create new cardgroup and later test if LCR is set correctly.-->
@@ -1664,11 +1619,16 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Cards were not deleted</td>
 	<td></td>
 </tr>
-<!--<tr> 	<td>verifyTextPresent</td> 	<td>Cards were successfully deleted</td> 	<td></td> </tr>-->
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Cards were successfully deleted</td>
+	<td></td>
+</tr>
+<!--Because these card have payments-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>1111111002</td>
@@ -1678,36 +1638,6 @@
 	<td>verifyTextPresent</td>
 	<td>1111111001</td>
 	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/payments/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=user_10</td>
-	<td>123456789 (12345)</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=user_11</td>
-	<td>123456789 (12345)</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=user_14</td>
-	<td>1111111000 (7856)</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=user_15</td>
-	<td>1111111001 (9812)</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=user_16</td>
-	<td>1111111002 (8722)</td>
 </tr>
 <!--reseller-->
 <tr>
@@ -1958,10 +1888,15 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--<tr> 	<td>verifyTextPresent</td> 	<td>Cards were successfully deleted</td> 	<td></td> </tr>-->
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Cards were not deleted</td>
+	<td></td>
+</tr>
+<!--Because these card have payments-->
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Cards were successfully deleted</td>
 	<td></td>
 </tr>
 <tr>
@@ -2062,7 +1997,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Generate new Cards</td>
+	<td>link=( Add cards)</td>
 	<td></td>
 </tr>
 <tr>
@@ -2325,8 +2260,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Don't be so smart...</td>
+	<td>verifyTextPresent</td>
+	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
 <tr>
@@ -2682,54 +2617,54 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456802</td>
-	<td>123456802</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456803</td>
-	<td>123456803</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456804</td>
-	<td>123456804</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456805</td>
-	<td>123456805</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456806</td>
-	<td>123456806</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456807</td>
-	<td>123456807</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456808</td>
-	<td>123456808</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456809</td>
-	<td>123456809</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456810</td>
-	<td>123456810</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456811</td>
-	<td>123456811</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -2863,34 +2798,34 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456806</td>
-	<td>123456806</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456807</td>
-	<td>123456807</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456808</td>
-	<td>123456808</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456809</td>
-	<td>123456809</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456810</td>
-	<td>123456810</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertElementPresent</td>
 	<td>id=field_123456811</td>
-	<td>123456811</td>
+	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
@@ -3271,16 +3206,343 @@
 <tr>
 	<td>type</td>
 	<td>id=cardgroup_ghost_min_perc</td>
-	<td>55,55</td>
+	<td>55.55</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--Neišsaugo reikšmių po kablelio-->
-<!--<tr> 	<td>verifyText</td> 	<td>ghost_min_perc</td> 	<td>Default: 55,5500 %</td> </tr>-->
-<!--Skirtukas nepasikeites-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Default: 55,5500 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>cctest1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_pin_length</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>0000000001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>0000000010</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/61</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>111111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/61</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>11111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Bad pin length should be: 6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Bad pin length should be: 6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>111111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>111111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/61</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>11.111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>11.111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/61</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>aaaaaa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/61</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>aaaaa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Bad pin length should be: 6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/61</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>%^$a;[^ūĖĘ#</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>%^$a;[ </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>cctest2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_pin_length</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>0000000011</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>0000000020</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/71</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>111111111111111111111111111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>111111111111111111111111111111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/71</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>111111111111111111111111111111222</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>111111111111111111111111111111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/71</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Bad pin length should be: 30</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
