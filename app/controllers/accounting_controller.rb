@@ -999,7 +999,7 @@ class AccountingController < ApplicationController
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
     # min_type = (Confline.get_value("#{prepaid}Invoice_Show_Time_in_Minutes", owner).to_i == 1 and mor_11_extend? ) ? 1 : 0
     show_avg_rate = 1 #(Confline.get_value("#{prepaid}Invoice_Add_Average_rate", owner).to_i == 1 and mor_11_extend? ) ? 1 : 0
-    pdf = invoice.generate_invoice_detailed_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal], show_avg_rate)
+    pdf, arr_t = invoice.generate_invoice_detailed_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal], show_avg_rate, params[:test].to_i == 1)
 
     if params[:email_or_not]
       return pdf.render
@@ -1015,7 +1015,7 @@ class AccountingController < ApplicationController
         text += "\n" + filename
         text += "\n" + "currency => #{dc}"
         text += "\n" + "tax => #{tax_amount}"
-        text += "\n" + "avg_rate => #{avg_rate.to_yaml}" if avg_rate
+        text += "\n" + "avg_rate => #{arr_t.to_yaml}" if avg_rate
         render :text => text
       else
         send_data pdf.render, :filename => filename, :type => "application/pdf"

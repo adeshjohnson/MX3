@@ -243,7 +243,7 @@ class Invoice < ActiveRecord::Base
     pdf
   end
 
-  def generate_invoice_detailed_pdf(current_user, dc, ex, nc, cde, gde, show_avg_rate)
+  def generate_invoice_detailed_pdf(current_user, dc, ex, nc, cde, gde, show_avg_rate, testing_mode = false)
     nice_number_hash = {:change_decimal => cde, :global_decimal => gde, :nc => nc}
 
     options = self.genereate_options(current_user, ex)
@@ -439,7 +439,8 @@ class Invoice < ActiveRecord::Base
     end
 
     pdf = pdf_end(pdf, options)
-    pdf
+    test_return = testing_mode ? items : []
+    return pdf, test_return
   end
 
   def genereate_options(current_user, ex)
