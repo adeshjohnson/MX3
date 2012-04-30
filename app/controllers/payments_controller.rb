@@ -281,7 +281,7 @@ class PaymentsController < ApplicationController
     @success = false
     if request.raw_post
       notify = Linkpoint::Notification.new(request.raw_post)
-      @payment = Payment.find(:first, :conditions => ["id = ?", notify.transaction_id])
+      @payment = Payment.where(["id = ?", notify.transaction_id]).first
       @test = Confline.get_value("Linkpoint_Test").to_i
       if request.protocol == "https://" or Confline.get_value("Linkpoint_Allow_HTTP").to_i == 1
         if notify.complete?
@@ -333,7 +333,7 @@ class PaymentsController < ApplicationController
             @payment.pending_reason = ""
             @reason = _("Your_Payment_Was_Suspected_Of_Fraud")
           end
-          @payment.save
+          @payment.save if @payment
         end
       else
         @reason = _("Unsecure_Transaction")
