@@ -274,6 +274,7 @@ class DidsController < ApplicationController
     #DialPlan variables (DID's for dialplan)
     @choice_free_dp = false
     @choice_active_dp = false
+    @reseller_can_assing_to_trunk = Confline.get_value('Resellers_Allow_Assign_DID_To_Trunk').to_i == 1
 
     if @did.status == "free"
       if @did.reseller and !reseller?
@@ -296,7 +297,6 @@ class DidsController < ApplicationController
       @choice_active = true
       @choice_closed = true
       @choice_active_dp = true if @did.dialplan or @did.dialplan_id.to_i > 0
-      @reseller_can_assing_to_trunk = Confline.get_value('Resellers_Allow_Assign_DID_To_Trunk').to_i == 1
     end
 
     if @did.status == "closed"
