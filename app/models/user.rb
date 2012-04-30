@@ -3229,7 +3229,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   +boolean+ true changeing balance and creating payment succeeded, otherwise false.
      Note that no transactions are used, so if smth goes wrong data might be corrupted.
 =end
-  def add_to_balance(amount)
+  def add_to_balance(amount, payment_type='Manual')
     self.balance += amount
     if self.save
       exchange_rate = Currency.count_exchange_rate(Currency.get_default.name, currency.name)
@@ -3237,7 +3237,7 @@ GROUP BY terminators.id;").map { |t| t.id }
       logger.fatal amount
       tax_amount = self.get_tax.count_tax_amount(amount)
       logger.fatal tax_amount
-      payment = Payment.create_for_user(self, {:paymenttype => 'Manual', :amount => amount, :tax => tax_amount, :shipped_at => Time.now, :date_added => Time.now, :completed => 1, :currency => currency.name})
+      payment = Payment.create_for_user(self, {:paymenttype => payment_type, :amount => amount, :tax => tax_amount, :shipped_at => Time.now, :date_added => Time.now, :completed => 1, :currency => currency.name})
       if payment.save
         return true
       else
@@ -3250,6 +3250,9 @@ GROUP BY terminators.id;").map { |t| t.id }
     end
   end
 
+  def balance_with_vat
+    self.get_tax.apply_tax(self.balance)
+  end
 
   private
 
