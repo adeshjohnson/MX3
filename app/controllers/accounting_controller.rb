@@ -1015,7 +1015,7 @@ class AccountingController < ApplicationController
         text += "\n" + filename
         text += "\n" + "currency => #{dc}"
         text += "\n" + "tax => #{tax_amount}"
-        text += "\n" + "avg_rate => #{arr_t.to_yaml}" if avg_rate
+        text += "\n" + "avg_rate => #{arr_t.to_yaml}" if arr_t
         render :text => text
       else
         send_data pdf.render, :filename => filename, :type => "application/pdf"
@@ -1059,9 +1059,7 @@ class AccountingController < ApplicationController
       if params[:test].to_i == 1
         pdf.render
         text = "Ok"
-        #        res_arr.each{|r|
-        #          text += "\n" + r.to_yaml if r
-        #        }
+        text += "\n" + "#{arr_t.to_yaml}" if arr_t
         text += "\n" + type
         text += "\n" + filename
         render :text => text
