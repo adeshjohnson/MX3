@@ -113,8 +113,10 @@
               <td><strong><%= _('CallerID_Name_Prefix') %>:</strong></td>
               <td> <%= text_field_tag 'did[cid_name_prefix]', @did.cid_name_prefix, :size => 20, :maxlength => "20", "class" => "input" %> </td>
             </tr>
-
-
+            <tr>
+              <td><strong><%= _('Tone_zone') %>:</strong></td>
+              <td><%= select_tag("did[tonezone]", options_for_select([''] + @tone_zones.map{|zone| [zone, zone]}, @did.tonezone.to_s)) %></td> 
+            </tr>
             <tr <%= tooltip(_('Grace_Time'), _('Grace_Time_Explanation')) if current_user.usertype != 'reseller' %>>
               <td><%= submit_tag _('Change'), :disable_with => _('Processing..') %></td>
               <td>&nbsp;</td>

@@ -93,6 +93,7 @@
 <%# end %>
     <th align="left"><%= _('Simultaneous_Call_limit') %></th>
     <th align="left"><%= _('Comment') %></th>
+    <th align="left"><%= _('Tone_zone') %></th>
     <% if @show_did_rates %>
         <th align="center"><%= _('Rates') %></th>
     <% end %>
@@ -151,6 +152,7 @@
         <% else %>
             <td id="comment_<%= did.id %>" class="<%= text_class %>" align="left" <%= "onmouseover=\"Tip(\' #{(did.comment).to_s} \')\" onmouseout = \"UnTip()\"" if did.comment %>><%= did.comment.to_s[0, 25] if did.comment %></td>
         <% end %>
+        <td align="left"><%= did.tonezone %></td>
         <% if @show_did_rates %>
             <td id="rates_<%= did.id %>" align="center"> <%= link_to(b_rates + _('Rates'), {:controller => :did_rates, :action => :index, :id => did}, {:id => "rates_link_"+did.id.to_s}) %></td>
         <% end %>
