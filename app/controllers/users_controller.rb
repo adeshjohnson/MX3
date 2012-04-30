@@ -285,6 +285,9 @@ class UsersController < ApplicationController
     @user.tax = @tax
     @user.address = @address
     @user.agreement_number = next_agreement_number
+    if Confline.get_value("Default_User_recording_enabled").to_i == 1
+      @user.recording_enabled = 1
+    end
 
     @i = @user.get_invoices_status
   end
