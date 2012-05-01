@@ -175,7 +175,7 @@ class Invoice < ActiveRecord::Base
 
   #================================== PDF generation ===================================================================
 
-  def generate_simple_pdf(current_user, dc, ex, nc, cde, gde)
+  def generate_simple_pdf(current_user, dc, ex, nc, cde, gde, testing_mode = false)
     user = self.user
     prepaid, prep = self.new_invoice_type(user)
     type = (user.postpaid.to_i == 1 or self.user.owner_id != 0) ? "postpaid" : "prepaid"
@@ -240,7 +240,9 @@ class Invoice < ActiveRecord::Base
 
     pdf = pdf_end(pdf, options)
 
-    pdf
+
+    test_return = testing_mode ? items : []
+    return pdf, test_return
   end
 
   def generate_invoice_detailed_pdf(current_user, dc, ex, nc, cde, gde, show_avg_rate, testing_mode = false)

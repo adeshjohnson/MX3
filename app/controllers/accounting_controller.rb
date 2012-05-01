@@ -949,7 +949,7 @@ class AccountingController < ApplicationController
   ############ PDF ###############
 
   def generate_invoice_pdf
-    invoice = Invoice.find_by_id(params[:id], :include => [:tax, :user])
+    invoice = Invoice.includes([:tax, :user, :invoicedetails]).where({:id=>params[:id]}).first
     idetails = invoice.invoicedetails if invoice
 
     unless invoice
@@ -961,7 +961,7 @@ class AccountingController < ApplicationController
     type = (user.postpaid.to_i == 1 or invoice.user.owner_id != 0) ? "postpaid" : "prepaid"
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
-    pdf = invoice.generate_simple_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal])
+    pdf, arr_t = invoice.generate_simple_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal], params[:test].to_i == 1)
 
     filename = Invoice.filename(user, type, "Invoice-#{user.first_name}_#{user.last_name}-#{invoice.user_id}-#{invoice.number}-#{invoice.issue_date}", "pdf")
     if params[:email_or_not]
@@ -970,10 +970,11 @@ class AccountingController < ApplicationController
       if params[:test].to_i == 1
         pdf.render
         text = "Ok"
-        text += "\n" + old_invoice.to_yaml if old_invoice
+        text += "\n" + invoice.to_yaml if invoice
         text += "\n" + idetails.to_yaml if idetails
-        text += "\n" + prep
+        text += "\n" + type
         text += "\n" + filename
+        text += "\n" + arr_t.to_yaml if arr_t
         render :text => text
       else
         send_data pdf.render, :filename => filename, :type => "application/pdf"
