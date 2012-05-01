@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.95" />
+<link rel="selenium.base" href="" />
 <title>mor_12_lcr_copies</title>
 </head>
 <body>
@@ -73,10 +73,16 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertChecked</td>
+	<td>assertElementNotPresent</td>
 	<td>id=lcr_no_failover</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/4</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>assertValue</td> 	<td>id=no_failover_0</td> 	<td>on</td> </tr>-->
 <!--verify fields-->
 <tr>
 	<td>open</td>
@@ -382,16 +388,6 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/lcrs/edit/1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertChecked</td>
-	<td>id=lcr_no_failover</td>
-	<td></td>
-</tr>
 <!--try to clone-->
 <tr>
 	<td>open</td>
@@ -547,16 +543,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/lcrs/edit/1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertChecked</td>
-	<td>id=lcr_no_failover</td>
 	<td></td>
 </tr>
 <!--try to clone-->
@@ -827,16 +813,6 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/lcrs/edit/1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertChecked</td>
-	<td>id=lcr_no_failover</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/lcrs/list</td>
 	<td></td>
 </tr>
@@ -956,6 +932,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=no_failover_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=no_failover_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
+	<td>Do not use failover provider</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>xpath=(//select[@name='select_prov'])[2]</td>
 	<td>label=common_use_provider - SIP/0.0.0.0</td>
@@ -968,11 +959,6 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Failover provider added</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Failover provider: common_use_provider </td>
 	<td></td>
 </tr>
 <tr>
@@ -1013,11 +999,6 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Failover provider added</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Failover provider: Provider_for_admin </td>
 	<td></td>
 </tr>
 <tr>
@@ -1111,9 +1092,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Failover provider: Do not use </td>
+	<td>click</td>
+	<td>id=no_failover_0</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
+	<td>Do not use failover provider</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1131,8 +1117,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Failover provider: Provider common use </td>
+	<td>click</td>
+	<td>id=no_failover_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1146,9 +1132,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Failover provider: Do not use </td>
-	<td></td>
+	<td>assertSelectedLabel</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
+	<td>Do not use failover provider</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1177,88 +1163,83 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/lcrs/edit/6</td>
+	<td>/billing/lcrs/providers_list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=no_failover_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
+	<td>Do not use failover provider</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
+	<td>label=Provider common use - IAX2/0.0.0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=td.main_window &gt; div.nb &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Use failover provider</td>
+	<td>Failover provider added</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=lcr_no_failover</td>
-	<td>on</td>
+	<td>assertSelectedLabel</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
+	<td>Provider common use - IAX2/0.0.0.0</td>
 </tr>
 <tr>
-	<td>uncheck</td>
-	<td>id=lcr_no_failover</td>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=lcr_no_failover</td>
-	<td>off</td>
+	<td>assertSelectedLabel</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
+	<td>Provider common use - IAX2/0.0.0.0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=no_failover_1</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>css=td.main_window &gt; div.nb &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>LCR was successfully updated</td>
+	<td>assertTextPresent</td>
+	<td>Failover provider unassigned</td>
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/lcrs/edit/6</td>
+	<td>waitForNotVisible</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=lcr_no_failover</td>
-	<td>off</td>
+	<td>assertSelectedLabel</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
+	<td>Do not use failover provider</td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/lcrs/providers_list/6</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Failover provider: Do not use</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>xpath=(//select[@name='select_prov'])[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/lcrs/edit/6</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=lcr_no_failover</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>mouseOver</td>
-	<td>//p[4]/label</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>If you will disable this setting, only first provider in the Routing Plan (LCR) will be used. If it fails - no other provider will be used to deliver the call</td>
-	<td></td>
-</tr>
-<tr>
-	<td>mouseOut</td>
-	<td>//p[4]/label</td>
-	<td></td>
+	<td>assertNotSelectedLabel</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
+	<td>Provider common use - IAX2/0.0.0.0</td>
 </tr>
 </tbody></table>
 </body>
