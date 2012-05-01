@@ -138,9 +138,24 @@
 	<td></td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>time_from_hour</td>
 	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -148,9 +163,29 @@
 	<td>label=00</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>time_from_second</td>
 	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_hour</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -158,14 +193,39 @@
 	<td>label=12</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>time_till_minute</td>
 	<td>label=59</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>time_till_second</td>
 	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -355,9 +415,24 @@
 	<td>All</td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>time_from_hour</td>
 	<td>label=13</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -365,9 +440,29 @@
 	<td>label=00</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>time_from_second</td>
 	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_hour</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -375,14 +470,39 @@
 	<td>label=23</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>time_till_minute</td>
 	<td>label=59</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>time_till_second</td>
 	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForTextNotPresent</td>
@@ -701,34 +821,94 @@
 	<td>Work Days</td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
-	<td>id=time_from_hour</td>
+	<td>time_from_hour</td>
 	<td>label=07</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_minute</td>
-	<td>label=00</td>
+	<td>keyUp</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_from_second</td>
+	<td>time_from_minute</td>
 	<td>label=00</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
-	<td>id=time_till_hour</td>
+	<td>time_from_second</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_hour</td>
 	<td>label=19</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=59</td>
+	<td>keyUp</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_second</td>
+	<td>time_till_minute</td>
 	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_second</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -862,39 +1042,94 @@
 	<td></td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
-	<td>id=time_from_hour</td>
+	<td>time_from_hour</td>
 	<td>label=22</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
-	<td>id=time_from_minute</td>
+	<td>time_from_minute</td>
 	<td>label=00</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
-	<td>id=time_from_second</td>
+	<td>time_from_second</td>
 	<td>label=00</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_till_hour</td>
-	<td>label=19</td>
+	<td>keyUp</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_hour</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_hour</td>
+	<td>time_till_hour</td>
 	<td>label=06</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=59</td>
+	<td>keyUp</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_second</td>
+	<td>time_till_minute</td>
 	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_second</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1003,34 +1238,94 @@
 	<td>Work Days</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_hour</td>
-	<td>label=00</td>
+	<td>keyDown</td>
+	<td>time_from_hour</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_from_minute</td>
+	<td>time_from_hour</td>
 	<td>label=00</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_second</td>
-	<td>label=00</td>
+	<td>keyUp</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_hour</td>
+	<td>time_from_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_from_second</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_hour</td>
 	<td>label=23</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=59</td>
+	<td>keyUp</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_second</td>
+	<td>time_till_minute</td>
 	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_second</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
@@ -1063,19 +1358,49 @@
 	<td></td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
-	<td>id=time_from_hour</td>
+	<td>time_from_hour</td>
 	<td>label=20</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_minute</td>
-	<td>label=00</td>
+	<td>keyUp</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_from_second</td>
+	<td>time_from_minute</td>
 	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_from_second</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
@@ -1083,19 +1408,49 @@
 	<td></td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
-	<td>id=time_till_hour</td>
+	<td>time_till_hour</td>
 	<td>label=21</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=59</td>
+	<td>keyUp</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_second</td>
+	<td>time_till_minute</td>
 	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_second</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForTextNotPresent</td>
@@ -1224,34 +1579,94 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_hour</td>
-	<td>label=00</td>
+	<td>keyDown</td>
+	<td>time_from_hour</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_from_minute</td>
+	<td>time_from_hour</td>
 	<td>label=00</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_second</td>
-	<td>label=00</td>
+	<td>keyUp</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_hour</td>
+	<td>time_from_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_from_second</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_hour</td>
 	<td>label=23</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=59</td>
+	<td>keyUp</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_second</td>
+	<td>time_till_minute</td>
 	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_second</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1274,19 +1689,49 @@
 	<td></td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
-	<td>id=time_from_hour</td>
+	<td>time_from_hour</td>
 	<td>label=07</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_minute</td>
-	<td>label=00</td>
+	<td>keyUp</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_from_second</td>
+	<td>time_from_minute</td>
 	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_from_second</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
@@ -1294,19 +1739,49 @@
 	<td></td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
-	<td>id=time_till_hour</td>
+	<td>time_till_hour</td>
 	<td>label=19</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=59</td>
+	<td>keyUp</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_second</td>
+	<td>time_till_minute</td>
 	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_second</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForTextNotPresent</td>
@@ -1435,34 +1910,94 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_hour</td>
-	<td>label=00</td>
+	<td>keyDown</td>
+	<td>time_from_hour</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_from_minute</td>
+	<td>time_from_hour</td>
 	<td>label=00</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_second</td>
-	<td>label=00</td>
+	<td>keyUp</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_hour</td>
+	<td>time_from_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_from_second</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_hour</td>
 	<td>label=23</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=59</td>
+	<td>keyUp</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_second</td>
+	<td>time_till_minute</td>
 	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_second</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1475,34 +2010,94 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_hour</td>
-	<td>label=00</td>
+	<td>keyDown</td>
+	<td>time_from_hour</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_from_minute</td>
+	<td>time_from_hour</td>
 	<td>label=00</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_second</td>
-	<td>label=00</td>
+	<td>keyUp</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_hour</td>
+	<td>time_from_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_from_second</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_hour</td>
 	<td>label=19</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=59</td>
+	<td>keyUp</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_second</td>
+	<td>time_till_minute</td>
 	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_second</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForTextNotPresent</td>
@@ -1852,34 +2447,94 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_hour</td>
-	<td>label=00</td>
+	<td>keyDown</td>
+	<td>time_from_hour</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_from_minute</td>
+	<td>time_from_hour</td>
 	<td>label=00</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_second</td>
-	<td>label=00</td>
+	<td>keyUp</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_hour</td>
+	<td>time_from_minute</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_from_second</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_hour</td>
 	<td>label=23</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=59</td>
+	<td>keyUp</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_second</td>
+	<td>time_till_minute</td>
 	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_second</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
@@ -1902,19 +2557,49 @@
 	<td></td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
-	<td>id=time_from_hour</td>
+	<td>time_from_hour</td>
 	<td>label=20</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_from_minute</td>
-	<td>label=00</td>
+	<td>keyUp</td>
+	<td>time_from_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_from_second</td>
+	<td>time_from_minute</td>
 	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_from_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_from_second</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_from_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
@@ -1922,19 +2607,49 @@
 	<td></td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
-	<td>id=time_till_hour</td>
+	<td>time_till_hour</td>
 	<td>label=21</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=59</td>
+	<td>keyUp</td>
+	<td>time_till_hour</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_minute</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=time_till_second</td>
+	<td>time_till_minute</td>
 	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_minute</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>time_till_second</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>time_till_second</td>
+	<td>label=59</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>time_till_second</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForTextNotPresent</td>

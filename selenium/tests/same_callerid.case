@@ -63,7 +63,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>Card was successfully updated</td>
+	<td>CallerID : 1234 </td>
 	<td></td>
 </tr>
 <tr>
@@ -108,7 +108,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>Card was successfully updated</td>
+	<td>PIN: 5774 </td>
 	<td></td>
 </tr>
 <tr>
@@ -128,7 +128,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>Card was successfully updated</td>
+	<td>PIN: 6930 </td>
 	<td></td>
 </tr>
 <tr>
@@ -139,6 +139,26 @@
 <tr>
 	<td>verifyTextNotPresent</td>
 	<td>Callerid must be unique</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=1&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_1</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_8</td>
 	<td></td>
 </tr>
 <tr>

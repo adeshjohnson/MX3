@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.163" />
+<link rel="selenium.base" href="" />
 <title>New Test</title>
 </head>
 <body>
@@ -64,8 +64,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>check</td>
+	<td>id=recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=webmoney_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
 	<td></td>
 </tr>
 <!--create new reseller-->
@@ -448,11 +473,6 @@
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>reseller_paypal_default_amount</td>
-	<td>10</td>
-</tr>
-<tr>
-	<td>verifyValue</td>
 	<td>reseller_paypal_min_amount</td>
 	<td>5</td>
 </tr>
@@ -466,11 +486,8 @@
 	<td>reseller_paypal_test</td>
 	<td>off</td>
 </tr>
-<tr>
-	<td>verifyValue</td>
-	<td>reseller_webmoney_enabled</td>
-	<td>off</td>
-</tr>
+<!--webmoney turi būti disabled-->
+<!--<tr> 	<td>verifyValue</td> 	<td>reseller_webmoney_enabled</td> 	<td>off</td> </tr>-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>webmoney_gateway</td>

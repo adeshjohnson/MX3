@@ -1177,6 +1177,36 @@
 	<td>//div[@id='confirm_without_message']/input</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings succesfully changed: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=recording_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings succesfully changed: Test Reseller</td>
+	<td></td>
+</tr>
 <!--Login 101/101 -->
 <tr>
 	<td>open</td>
