@@ -23,7 +23,7 @@
 <% end %>
 
 <p>
-  <label for="card_callerid"><%= _('CallerID_for_pinless_dialing') %></label><br/><%= text_field 'card', 'callerid', "class" => "input", "maxlength" => @card.cardgroup.number_length %>
+  <label for="card_callerid"><%= _('CallerID_for_pinless_dialing') %></label><br/><%= text_field 'card', 'callerid', "class" => "input", "maxlength" => 30 %>
 </p>
 
 <p><label for="card_balance"><%= _('Balance') %>: </label>
