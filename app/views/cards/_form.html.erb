@@ -1,7 +1,7 @@
 <!--[form:card]-->
 
 <p><label for="card_number"><%= _('Number') %></label><br/>
-  <%= text_field 'card', 'number', "class" => "input" %></p>
+  <%= text_field 'card', 'number', "class" => "input", "maxlength" => @card.cardgroup.number_length %></p>
 
 <p><label for="card_name"><%= _('Name') %></label><br/>
   <%= text_field 'card', 'name', "class" => "input" %></p>
