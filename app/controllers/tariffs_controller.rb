@@ -965,6 +965,7 @@ class TariffsController < ApplicationController
             session[:imp_time_till_type] = params[:time_till][:hour].to_s + ":" + params[:time_till][:minute].to_s + ":" + params[:time_till][:second].to_s
           end
           session[:imp_update_dest_names] = params[:update_dest_names].to_i if admin?
+          session[:imp_update_subcodes] = params[:update_subcodes].to_i if admin?
 
           #priority over csv
 
@@ -1691,6 +1692,7 @@ class TariffsController < ApplicationController
             @optins[:imp_time_from_type] = params[:time_from][:hour].to_s + ":" + params[:time_from][:minute].to_s + ":" + params[:time_from][:second].to_s if params[:time_from]
             @optins[:imp_time_till_type] = params[:time_till][:hour].to_s + ":" + params[:time_till][:minute].to_s + ":" + params[:time_till][:second].to_s if params[:time_till]
             @optins[:imp_update_dest_names] = params[:update_dest_names].to_i if admin?
+            @optins[:imp_update_subcodes] = params[:update_subcodes].to_i if admin?
 
             if admin? and params[:update_dest_names].to_i == 1
               if params[:destination_id] and params[:destination_id].to_i >=0
@@ -1757,6 +1759,10 @@ class TariffsController < ApplicationController
                   if session["tariff_import_csv2_#{@tariff.id}".to_sym][:imp_update_dest_names].to_i == 1
                     session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_destination_from_file] = @tariff.update_destinations(session["tariff_name_csv_#{@tariff.id}".to_sym], session["tariff_import_csv2_#{@tariff.id}".to_sym], session["tariff_analize_csv2_#{@tariff.id}".to_sym])
                     flash[:status] += "<br />"+ _('Destination_names_updated') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_destination_from_file]}"
+                  end
+                  if session["tariff_import_csv2_#{@tariff.id}".to_sym][:imp_update_subcodes].to_i == 1
+                    session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_subcodes_from_file] = @tariff.update_subcodes(session["tariff_name_csv_#{@tariff.id}".to_sym], session["tariff_import_csv2_#{@tariff.id}".to_sym], session["tariff_analize_csv2_#{@tariff.id}".to_sym])
+                    flash[:status] += "<br />"+ _('Subcodes_updated') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_subcodes_from_file]}"
                   end
                 rescue Exception => e
                   my_debug_time e.to_yaml
