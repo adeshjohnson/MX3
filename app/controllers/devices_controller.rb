@@ -524,8 +524,8 @@ class DevicesController < ApplicationController
       #we have doubts whether this made any sense. so user now can set port to any positive integer
       @device.port = ""
       @device.port = params[:port] if params[:port]
-      @device.port = Device::DefaultPort["IAX2"] if not Device.valid_port? params[:port], @device.device_type
-      @device.port = Device::DefaultPort["SIP"] if not Device.valid_port? params[:port], @device.device_type
+      @device.port = Device::DefaultPort["IAX2"] if @device.device_type == 'IAX2' and not Device.valid_port? params[:port], @device.device_type
+      @device.port = Device::DefaultPort["SIP"] if @device.device_type == 'SIP' and not Device.valid_port? params[:port], @device.device_type
 
       @device.canreinvite = params[:canreinvite]
       @device.transfer = params[:canreinvite]
