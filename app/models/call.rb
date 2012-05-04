@@ -916,6 +916,7 @@ class Call < ActiveRecord::Base
     date_period = []
     a1 = !options[:a1].blank? ? options[:a1] : '2004'
     a2 = !options[:a2].blank? ? options[:a2] : Date.today.to_s
+    a2 = a1 if a1.to_date > a2.to_date
     "#{a1} 00:00:00".to_date.upto("#{a2} 23:59:59".to_date) do |date|
       date_period << "select '#{date.to_s}' as call_date2"
     end
