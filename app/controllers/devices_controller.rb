@@ -102,6 +102,9 @@ class DevicesController < ApplicationController
     fextension = free_extension()
     device = user.create_default_device({:device_ip_authentication_record => par[:ip_authentication].to_i, :description => par[:device][:description], :device_type => par[:device][:device_type], :dev_group => par[:device][:devicegroup_id], :free_ext => fextension, :secret => random_password(12), :username => fextension, :pin => par[:device][:pin]})
 
+    device.port = Device::DefaultPort["IAX2"] if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type
+    device.port = Device::DefaultPort["SIP"] if device.device_type == 'SIP' and not Device.valid_port? device.port, device.device_type
+
     if device.save
       flash[:status] = device.check_callshop_user(_('device_created'))
       a=configure_extensions(device.id, {:current_user => current_user})
