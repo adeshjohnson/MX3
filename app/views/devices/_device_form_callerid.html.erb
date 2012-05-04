@@ -46,7 +46,7 @@
               }
               window.addEventListener('load', 
               function() {
-                 $('cid_number').addEventListener('keypress', function(event){toggleControlByCIDCheckbox(event);});
+                 $('cid_number').addEventListener('keyup', function(event){toggleControlByCIDCheckbox(event);});
                  $('enable_callerid_by_cid').addEventListener('change', function(event){toggleControlByCIDSelect(event)});
                  if(!$('enable_callerid_by_cid').checked){
                    $('control_callerid_by_cids').hide()
