@@ -1981,7 +1981,7 @@ Sets default tax values for users or cardgroups
     @destinations_without_dg = Destination.find(:all, :conditions => "destinationgroup_id = 0", :order => "direction_code ASC")
     @dialplans = Dialplan.find(:all, :conditions => "dptype = 'ivr' and data8 = 1")
     @actions = Action.find(:all, :joins => " JOIN users ON (actions.user_id = users.id) ", :conditions => "action = 'error' AND processed = '0' ")
-    @devices = Device.find(:all, :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0  AND username NOT LIKE 'mor_server_%'")
+    @devices = Device.find(:all, :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0 AND device_type != 'H323' AND username NOT LIKE 'mor_server_%'")
     @users = User.find(:all, :conditions => ["password = SHA1('') or password = SHA1(username)"])
     @default_users_erors = Confline.get_default_user_pospaid_errors
     if  @default_users_erors and @default_users_erors.size.to_i > 0
