@@ -330,7 +330,7 @@ class Lcr < ActiveRecord::Base
 
 =end
   def no_failover?
-    (self.no_failover.to_i == 1 ? true : false)
+    (self.no_failover.to_i != 0 ? true : false)
   end
 
 end

@@ -4363,6 +4363,7 @@ Localization.define('en') do |l|
   l.store 'Update_subcodes_from_file', 'Update subcodes from file'
   l.store 'Subcodes_updated', 'Subcodes updated'
   l.store 'Destination_subcodes_update', 'Destination subcodes to update'
+  l.store 'Cannot_delete_provider_it_is_assigned_as_failover_provider', 'Cannot delete provider it is assigned as failover provider'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

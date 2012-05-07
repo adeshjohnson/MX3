@@ -68,6 +68,11 @@ class Provider < ActiveRecord::Base
       return false
     end
 
+    if Lcr.count(:conditions => ["failover_provider_id = ?" , self.id]) > 0
+      errors.add(:lcrproviders, _('Cannot_delete_provider_it_is_assigned_as_failover_provider'))
+      return false
+    end
+
     for rule in self.providerrules
       rule.destroy
     end
