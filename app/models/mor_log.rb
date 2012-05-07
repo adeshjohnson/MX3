@@ -98,4 +98,15 @@ class MorLog
     str << "END: #{msg}-------------------------------------"
     MorLog.my_debug(str.join("\n"))
   end
+
+  def MorLog.log_session_size(msg, session_id)
+
+    msg = Time.now.to_s(:db) +" - #{session_id} - #{ActiveRecord::Base.connection.select_value("select length(data)/1024 from sessions where session_id = '#{session_id}'")} KB  #{msg}"
+
+    File.open('/tmp/mor_session.log', "a") { |f|
+      f << msg.to_s
+      f << "\n"
+    }
+
+  end
 end

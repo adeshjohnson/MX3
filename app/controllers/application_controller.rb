@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
   # addons
   helper_method :callback_active?, :call_shop_active?, :reseller_active?, :payment_gateway_active?, :calling_cards_active?, :sms_active?, :recordings_addon_active?, :monitorings_addon_active?, :skp_active?
   helper_method :allow_pg_extension, :erp_active?, :admin?, :reseller?, :user?, :accountant?, :reseller_pro_active?, :show_recordings?, :mor_11_extend?, :ast_18?, :provider_billing_active?, :providers_enabled_for_reseller?
-  before_filter :set_charset
+  before_filter :log_session_size, :set_charset
   before_filter :set_current_user
   # before_filter :set_timezone
 
@@ -59,6 +59,9 @@ class ApplicationController < ActionController::Base
     # or render/redirect_to somewhere else
   end
 
+  def log_session_size
+    MorLog.log_session_size(params.inspect.to_s, request.session_options[:id]) if session_log_active?
+  end
 
   def item_pages(total_items)
     #parameters:
@@ -2906,6 +2909,10 @@ Variables: (Names marked with * are required)
 
   def test_machine_active?
     (defined?(TEST_MACHINE) and TEST_MACHINE.to_i == 1)
+  end
+
+  def session_log_active?
+    (defined?(TEST_MACHINE_SESSION) and TEST_MACHINE_SESSION.to_i == 1)
   end
 
   def erp_active?
