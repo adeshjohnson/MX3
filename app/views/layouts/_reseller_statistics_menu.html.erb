@@ -3,7 +3,9 @@
     reseller_statistics_menu.config.inOrder = true;
     reseller_statistics_menu.add(0, -1, '<%= _('STATISTICS') %>');
     reseller_statistics_menu.add(1, 0, '<%= _('Country_Stats') %>', '<%= Web_Dir %>/stats/country_stats');
-    reseller_statistics_menu.add(2, 0, '<%= _('Hangup_cause') %>', '<%= Web_Dir %>/stats/hangup_cause_codes_stats');
+    <% if current_user.reseller_allowed_to_view_hgc_stats? %>
+      reseller_statistics_menu.add(2, 0, '<%= _('Hangup_cause') %>', '<%= Web_Dir %>/stats/hangup_cause_codes_stats');
+    <% end %>
     reseller_statistics_menu.add(3, 0, '<%= _('Load_stats') %>', '<%= Web_Dir %>/stats/load_stats');
     reseller_statistics_menu.add(4, 0, '<%= _('Prefix_Finder') %>', '<%= Web_Dir %>/stats/prefix_finder');
     <%if allow_manage_providers?%>

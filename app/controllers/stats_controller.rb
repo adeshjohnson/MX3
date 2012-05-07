@@ -3144,6 +3144,13 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
   def hangup_cause_codes_stats
 
+    #ticket 5672 only if reseller pro addon is active, reseller that has own providers can access 
+    #hangup cause statistics page.
+    if current_user.is_reseller? and !current_user.reseller_allowed_to_view_hgc_stats?
+      dont_be_so_smart
+      redirect_to :controller => :callc, :action => :main and return false
+    end
+
     @page_title = _('Hangup_cause_codes_stats')
     @page_icon = "chart_pie.png"
 

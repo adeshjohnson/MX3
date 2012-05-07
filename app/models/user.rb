@@ -1705,6 +1705,19 @@ class User < ActiveRecord::Base
     own_providers == 1
   end
 
+=begin
+  reseller is allowed view hangup cause statistics if he can have own providers(that mean rs pro has to be enabled)
+  and global setting allowing to view hgc statistics is set to true.
+  It would be errorneus to use this method on any other user that's type is not reseller.
+=end
+  def reseller_allowed_to_view_hgc_stats?
+    if !self.is_reseller?
+      raise "User type error"
+    else
+      Confline.get_value('Show_HGC_for_Resellers').to_i == 1 and (self.reseller_allow_providers_tariff? or !rs_active?)
+    end
+  end
+
   def load_lcrs(*arr)
     if is_accountant?
       if arr[1] and arr[1].include?(:conditions)
