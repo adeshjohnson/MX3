@@ -3317,5 +3317,8 @@ GROUP BY terminators.id;").map { |t| t.id }
     end
   end
 
+  def rs_active?
+    (defined?(RS_Active) and RS_Active.to_i == 1)
+  end
 
 end
