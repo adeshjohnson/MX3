@@ -58,7 +58,6 @@ class LcrsController < ApplicationController
     @page_title = _('LCR_new')
     @page_icon = "add.png"
     @lcr = Lcr.new
-    @lcr.no_failover = 1
   end
 
   def create
