@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 #Hebrew translation by BHComm.net, Shmaya Reichman
 
 Localization.define('he') do |l| 
