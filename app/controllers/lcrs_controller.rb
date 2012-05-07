@@ -362,7 +362,8 @@ class LcrsController < ApplicationController
   def try_to_add_failover_provider
     prov_id = params[:select_prov]
 
-    if prov_id != "0"
+    @lcr.no_failover = params[:no_failover].to_i 
+    if prov_id != "0" and @lcr.no_failover.to_i == 0
       @prov = Provider.find(:first, :conditions => ['id = ? AND (user_id = ? OR common_use = 1)', prov_id, current_user.id])
       unless @prov
         flash[:notice] = _('Provider_was_not_found')
