@@ -201,14 +201,19 @@ class CardsController < ApplicationController
       when 2
         cards_deleted = 0
         cards_not_deleted = 0
-        cards = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? AND number <= ? AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id])
-        for card in cards
-          if card.destroy_with_check
-            cards_deleted += 1
-          else
-            cards_not_deleted += 1
-          end
-        end
+        card_count = Card.count(:all, :conditions => ["number >= ? AND number <= ? AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id,  @cg.id] )
+          delete_cards = 1000 #number of cards to be deleted in one go
+          (card_count / delete_cards.to_f).ceil.times { |i|
+            offset = (i*delete_cards)
+            cards = Card.find(:all, :conditions => ["number >= ? AND number <= ? AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id,  @cg.id], :offset => offset, :limit => delete_cards )
+            for card in cards
+              if card.destroy_with_check
+                cards_deleted += 1
+              else
+                cards_not_deleted += 1
+              end
+            end
+          }
       when 3
         creation_time = Time.now
         list = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? and number <= ? and sold = 0 AND owner_id = ? AND cardgroup_id = ? ", start_num, end_num, user_id, @cg.id])
