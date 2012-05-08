@@ -1919,10 +1919,11 @@ class DevicesController < ApplicationController
 
   def devicecodecs_sort
     if params[:id].to_i > 0
-      @device = Device.find_by_id(params[:id])
+      @device = Device.find(:first, :conditions => {:id => params[:id]})
       unless @device
         flash[:notice] = _('Device_was_not_found')
-        redirect_back_or_default("/callc/main")
+        redirect_back_or_default("/callc/main") 
+        return false
       end
       if params[:codec_id]
         if params[:val] == 'true'
