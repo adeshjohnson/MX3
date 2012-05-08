@@ -1943,17 +1943,6 @@ class TariffsController < ApplicationController
       cond = "destinationgroups.name LIKE '#{@st}%'"
     end
 
-    # Cia reiketu refactorint.
-    #    sql = "SELECT destinationgroups.flag, destinationgroups.name, destinationgroups.desttype,  A.*, rates.id as 'rate_id', B.count_arates as 'arates_size', C.price, C.round, C.artype
-    #             FROM
-    #              (SELECT destinations.destinationgroup_id as 'dg_id', COUNT(destinations.id) as 'destinations' FROM destinations #{cond} GROUP BY destinations.destinationgroup_id) as A
-    #                JOIN destinationgroups ON (A.dg_id = destinationgroups.id)
-    #                LEFT JOIN rates ON (destinationgroups.id = rates.destinationgroup_id AND rates.tariff_id = #{@tariff.id} )
-    #                LEFT JOIN (SELECT rates.id as 'rates_id', COUNT(aratedetails.id) as 'count_arates' FROM rates LEFT JOIN aratedetails ON (aratedetails.rate_id = rates.id) WHERE rates.tariff_id = #{@tariff.id} GROUP BY rates.id) AS B ON (B.rates_id = rates.id)
-    #                LEFT JOIN (SELECT rates.id as 'rates_id', aratedetails.* FROM rates LEFT JOIN aratedetails ON (aratedetails.rate_id = rates.id AND aratedetails.artype = 'minute') WHERE rates.tariff_id = #{@tariff.id} GROUP BY rates.id) AS C ON (C.rates_id = rates.id)
-    ##{cond2}
-    #ORDER BY destinationgroups.name, destinationgroups.desttype ASC;#"
-
     #Cia refactorintas , veikia x7 greiciau...
     sql = "SELECT * FROM (
                           SELECT destinationgroups.flag, destinationgroups.name, destinationgroups.desttype, destinationgroup_id AS dg_id, COUNT(DISTINCT destinations.id) AS destinations  FROM destinations
@@ -2502,26 +2491,42 @@ class TariffsController < ApplicationController
       dont_be_so_smart
       redirect_to :controller => "callc", :action => "main" and return false
     end
-    (params[:st] and ("A".."Z").include?(params[:st].upcase)) ? @st = params[:st].upcase : @st = "A"
-    @dgroups = Destinationgroup.find(:all, :conditions => ["name like ?", "#{@st}%"], :order => "name ASC, desttype ASC")
     @Show_Currency_Selector = true
 
     @page = 1
     @page = params[:page].to_i if params[:page]
 
-    @rates = @tariff.rates_by_st(@st, 0, 10000)
-    @total_pages = (@rates.size.to_f / session[:items_per_page].to_f).ceil
-    @all_rates = @rates
-    @rates = []
+    (params[:st] and ("A".."Z").include?(params[:st].upcase)) ? @st = params[:st].upcase : @st = "A"
+    @dgroupse = Destinationgroup.find(:all, :conditions => ["name like ?", "#{@st}%"], :order => "name ASC, desttype ASC")
+
+    @dgroups = []
     iend = ((session[:items_per_page] * @page) - 1)
-    iend = @all_rates.size - 1 if iend > (@all_rates.size - 1)
+    iend = @dgroupse.size - 1 if iend > (@dgroupse.size - 1)
     for i in ((@page - 1) * session[:items_per_page])..iend
-      @rates << @all_rates[i]
+      @dgroups << @dgroupse[i]
+      logger.fatal "ffffffffffffffffffffffffffff"
     end
 
-    exrate = Currency.count_exchange_rate(@tariff.currency, session[:show_currency])
-    @ratesd = Ratedetail.find_all_from_id_with_exrate({:rates => @rates, :exrate => exrate, :destinations => true, :directions => true})
+    if @tariff.purpose == 'user'
+      @total_pages = (@dgroupse.size.to_f / session[:items_per_page].to_f).ceil
+      #@rates = @tariff.rates_by_st(@st, 0, 10000)
+    else
 
+
+      @rates = @tariff.rates_by_st(@st, 0, 10000)
+      @total_pages = (@rates.size.to_f / session[:items_per_page].to_f).ceil
+
+      @all_rates = @rates
+      @rates = []
+      iend = ((session[:items_per_page] * @page) - 1)
+      iend = @all_rates.size - 1 if iend > (@all_rates.size - 1)
+      for i in ((@page - 1) * session[:items_per_page])..iend
+        @rates << @all_rates[i]
+      end
+
+      exrate = Currency.count_exchange_rate(@tariff.currency, session[:show_currency])
+      @ratesd = Ratedetail.find_all_from_id_with_exrate({:rates => @rates, :exrate => exrate, :destinations => true, :directions => true})
+    end
     @use_lata = @st == "U" ? true : false
 
     @letter_select_header_id = @tariff.id
