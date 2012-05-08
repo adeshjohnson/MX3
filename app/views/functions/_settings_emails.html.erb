@@ -53,7 +53,7 @@
       <% # if sending disabled show message  %>
       <% if !Confline.get_value("Email_Sending_Enabled").blank? %>
           <% # if main params missing: server, port, login, password show message  %>
-          <% if !Confline.get_value("Email_Smtp_Server").blank? and !Confline.get_value("Email_port").blank? and !Confline.get_value("Email_Login").blank? and !Confline.get_value("Email_Password").blank? %>
+          <% if !Confline.get_value("Email_Smtp_Server").blank? and !Confline.get_value("Email_port").blank?  %>
               <% # if email missing show message  %>
               <% admin = current_user -%>
               <% if !admin.email.blank? %>
