@@ -60,7 +60,7 @@
 
       <% if cf.action == "forward" %>
           <br/>
-          <%= _('Forward') + " " + b_forward %>
+          <%= (_('Forward') + " " + b_forward).html_safe %>
           <%= cf.data if cf.data2 == "external" %>
           <% if cf.data2 == "local"
                dev = Device.find(cf.data) %>
