@@ -1348,6 +1348,10 @@ class DevicesController < ApplicationController
             flash[:notice] = _('Devices_callflow_external_number_cant_match_extension')
             redirect_to :action => 'callflow_edit', :id => @device.id, :cft => @cf_type and return false
           end
+          if  params[:ext_number].to_s.blank?
+            flash[:notice] = _('Devices_callflow_external_number_cant_be_blank')
+            redirect_to :action=>'callflow_edit', :id=>@device.id, :cft=>@cf_type and return false
+          end
           cf.data = params[:ext_number].to_s.strip
           cf.data2 = "external"
           cf.data3=""
