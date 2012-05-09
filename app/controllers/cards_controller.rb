@@ -611,6 +611,7 @@ class CardsController < ApplicationController
 
             @options[:file]= session[:file]
             @options[:file_lines] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{session[:card_import_csv]}")
+            @lines_number = @options[:file_lines]
             session[:card_import_csv2] = @options
             flash[:status] = _('Columns_assigned')
           else
