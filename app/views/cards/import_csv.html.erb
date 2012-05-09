@@ -31,8 +31,7 @@
   <%= text_area_tag "body", raw(flines.join("\n")).html_safe, :size => "150x10", :class => "input" %>
 
   <br />
-  <% session[:file_lines] = tl %>
-  <b><%= _('Total_file_lines') %>: <%= session[:file_lines] %> </b>
+  <b><%= _('Total_file_lines') %>: <%= @lines_number %> </b>
 
 
   <br />
