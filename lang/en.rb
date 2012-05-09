@@ -4366,6 +4366,7 @@ Localization.define('en') do |l|
   l.store 'Cannot_delete_provider_it_is_assigned_as_failover_provider', 'Cannot delete provider it is assigned as failover provider'
   l.store 'Bad_pin_length_should_be', 'Bad pin length should be' 
   l.store 'Devices_callflow_external_number_cant_be_blank', 'Devices Call Flow external number cannot be blank'   
+  l.store 'Invalid_IP_addess', 'Invalid IP addess'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
