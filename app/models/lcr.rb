@@ -224,7 +224,7 @@ class Lcr < ActiveRecord::Base
             LEFT JOIN directions ON (destinations.direction_code = directions.code)
             WHERE #{cond} 
             GROUP BY destination_id
-            HAVING rate_min != rate_max #{'AND rate_min != 0 AND rate_max != 0' if Confline.get_value('Show_zero_rates_in_LCR_tariff_export').to_i == 0} 
+            #{'HAVING rate_min != 0 AND rate_max != 0' if Confline.get_value('Show_zero_rates_in_LCR_tariff_export').to_i == 0} 
             ORDER BY dir_name ASC"
 
     end
