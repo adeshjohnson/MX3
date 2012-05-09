@@ -35,7 +35,7 @@
           <td style="width: 10%">
             <%= link_to b_cross + _('Clear_search'), :action => 'action_log', :clean => 1 if @search == 1 %>
             <br/>
-            <%= link_to b_check + _('Mark_all_as_reviewed'), :action => 'action_log_mark_reviewed' if @search == 1 %>
+            <%= link_to b_check + _('Mark_all_as_reviewed'), :action => 'action_log_mark_reviewed' if @not_reviewed_actions %>
           </td>
         </tr>
       </table>

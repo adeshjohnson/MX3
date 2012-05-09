@@ -3593,6 +3593,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     cond, cond_arr, join = Action.condition_for_action_log_list(current_user, a1, a2, params[:s_int_ch], @options)
     # page params
     @ac_size = Action.count(:all, :conditions => [cond.join(" AND ")] + cond_arr, :joins => join, :select => "actions.id")
+    @not_reviewed_actions = Action.find(:all, :conditions => [(['processed = 0'] + cond).join(" AND ")] + cond_arr, :joins => join, :limit => 1).size.to_i == 1
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
     @total_pages = (@ac_size.to_f / session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
