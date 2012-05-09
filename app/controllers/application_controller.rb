@@ -47,8 +47,15 @@ class ApplicationController < ActionController::Base
   helper_method :allow_pg_extension, :erp_active?, :admin?, :reseller?, :user?, :accountant?, :reseller_pro_active?, :show_recordings?, :mor_11_extend?, :ast_18?, :provider_billing_active?, :providers_enabled_for_reseller?
   before_filter :log_session_size, :set_charset
   before_filter :set_current_user
+  before_filter :redirect_callshop_manager 
   # before_filter :set_timezone
 
+  def redirect_callshop_manager 
+    if current_user and current_user.is_callshop_manager?  
+      redirect_to :controller => "callshop", :action => "show", :id => current_user.callshop_manager_group.group_id  
+      return false 
+    end 
+  end 
 
   def method_missing(m, *args, &block)
     MorLog.my_debug("Authorization failed:\n   User_type: "+session[:usertype_id].to_s+"\n   Requested: " + "#{params[:controller]}::#{params[:action]}")

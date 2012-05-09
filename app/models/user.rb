@@ -3269,6 +3269,18 @@ GROUP BY terminators.id;").map { |t| t.id }
     self.get_tax.apply_tax(self.balance)
   end
 
+  def is_callshop_manager? 
+    (defined?(CS_Active) && CS_Active == 1 && self.usergroups.find(:first, :include => :group, :conditions => [ "usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"])) 
+  end 
+	 
+  def callshop_manager_group 
+    if (defined?(CS_Active) && CS_Active == 1) 
+      self.usergroups.find(:first, :include => :group, :conditions => [ "usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"]) 
+    else 
+      return nil 
+    end  
+  end 
+
   private
 
 =begin

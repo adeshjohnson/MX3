@@ -12,6 +12,7 @@ class CallcController < ApplicationController
   before_filter :check_localization, :except => [:pay_subscriptions, :monthly_actions]
   before_filter :authorize, :except => [:login, :try_to_login, :pay_subscriptions, :monthly_actions, :forgot_password]
   before_filter :find_registration_owner, :only => [:signup_start, :signup_end]
+  skip_before_filter :redirect_callshop_manager, :only => [:logout]
 
   @@monthly_action_cooldown = 2.hours
   @@daily_action_cooldown = 2.hours

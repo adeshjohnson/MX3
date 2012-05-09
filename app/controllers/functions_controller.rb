@@ -10,6 +10,7 @@ class FunctionsController < ApplicationController
   before_filter :find_location_rule, :only => [:location_rule_edit, :location_rule_update, :location_rule_change_status, :location_rule_destroy]
   before_filter :find_dialplan, :only => [:pbx_function_edit, :pbx_function_update, :pbx_function_destroy]
   before_filter :callback_active?, :only => [:callback, :callback_settings, :callback_settings_update, :activate_callback]
+  skip_before_filter :redirect_callshop_manager, :except => [:login_as_execute]
 
   $date_formats = ["%Y-%m-%d %H:%M:%S", "%Y/%m/%d %H:%M:%S", "%Y,%m,%d %H:%M:%S", "%Y.%m.%d %H:%M:%S", "%d-%m-%Y %H:%M:%S", "%d/%m/%Y %H:%M:%S", "%d,%m,%Y %H:%M:%S", "%d.%m.%Y %H:%M:%S", "%m-%d-%Y %H:%M:%S", "%m/%d/%Y %H:%M:%S", "%m,%d,%Y %H:%M:%S", "%m.%d.%Y %H:%M:%S"]
   $decimal_formats = ['.', ',', ';']
