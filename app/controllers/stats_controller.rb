@@ -987,6 +987,11 @@ in before filter : user (:find_user_from_id_or_session)
           redirect_to :controller => :callc, :action => :main and return false
         end
     end
+
+    if params[:commit] != nil
+      @options[:page] = 1
+    end
+
   end
 
   def call_list
