@@ -3189,9 +3189,11 @@ class ApiController < ApplicationController
               if comfirm.to_i == 0
                 exchange_rate = Currency.count_exchange_rate(Currency.get_default.name, currency.name)
                 curr_amount = amount / exchange_rate.to_f
-
+                userrr = User.current
+                User.current = nil
                 user.balance += curr_amount
                 user.save
+                User.current = userrr
                 Action.add_action_hash(paym.user_id,
                                        {:action => "payment: #{pttype}",
                                         :data => "User successfully payed using #{pttype}",
