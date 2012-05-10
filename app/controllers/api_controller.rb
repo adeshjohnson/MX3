@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class ApiController < ApplicationController
 
+  session :off, :only => [:create_payment]
+
   include SqlExport
 
   require 'builder/xmlbase'
