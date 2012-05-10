@@ -169,66 +169,63 @@
         </tr>
       </table>
     </div>
-
-    <% if session[:webmoney_enabled].to_i == 1 %>
-      <div class="dhtmlgoodies_aTab">
-        <br/><br/>
-        <table class="simple" width="100%">
-          <tr>
-            <td width="30"></td>
-            <td><b><%= _('Enabled') %>:</b></td>
-            <td>      <%= check_box_tag 'reseller_webmoney_enabled', value = "1", checked = Confline.get_value("WebMoney_Enabled", session[:user_id]).to_i == 1 %>                 </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><b><%= _('WebMoney_Gateway') %>:</b></td>
-            <td><%= select_tag("webmoney_gateway", options_for_select([[_("Russian"), 0], [_("English"), 1]], Confline.get_value("WebMoney_Gateway", session[:user_id]).to_i)) %></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><b><%= _('WebMoney_Purse') %>:</b></td>
-            <td>      <%= text_field_tag('reseller_webmoney_purse', Confline.get_value("WebMoney_Purse", session[:user_id]), "class" => "input", :size => "35", :maxlength => "20") %>                </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><b><%= _('WebMoney_Currency') %>:</b></td>
-            <td>
-              <select name="reseller_webmoney_default_currency" <%= "disabled" if @currencies.size < 1 %> >
-                <% for curr in @currencies %>
-                    <option value="<%= curr.name %>" <%= "selected" if @wppcurr == curr.name %>> <%= curr.name %> </option>
-                <% end %>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><b><%= _('Default_Amount') %>:</b></td>
-            <td>      <%= text_field_tag('reseller_webmoney_default_amount', Confline.get_value("WebMoney_Default_Amount", session[:user_id]), "class" => "input", :size => "35", :maxlength => "50") %>                </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><b><%= _('Min_Amount') %>:</b></td>
-            <td>      <%= text_field_tag('reseller_webmoney_min_amount', Confline.get_value("WebMoney_Min_Amount", session[:user_id]), "class" => "input", :size => "35", :maxlength => "50") %>                </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><b><%= _('Test') %>:</b></td>
-            <td>      <%= check_box_tag 'reseller_webmoney_test', value = "1", checked = Confline.get_value("WebMoney_Test", session[:user_id]).to_i == 1 %>                </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><b><%= _('WebMoney_SIM_MODE') %>:</b></td>
-            <td>
-              <select name="reseller_webmoney_sim_mode">
-                <option value="0" <%= "selected" if @selected_mode == 0 %>>0 - All sucessfull.</option>
-                <option value="1" <%= "selected" if @selected_mode == 1 %>>1 - All fail.</option>
-                <option value="2" <%= "selected" if @selected_mode == 2 %>>2 - 80% - success; 20% - fail.</option>
-              </select>
-            </td>
-          </tr>
-        </table>
-      </div>
-    <% end %>
+    <div class="dhtmlgoodies_aTab">
+      <br/><br/>
+      <table class="simple" width="100%">
+        <tr>
+          <td width="30"></td>
+          <td><b><%= _('Enabled') %>:</b></td>
+          <td>      <%= check_box_tag 'reseller_webmoney_enabled', value = "1", checked = Confline.get_value("WebMoney_Enabled", session[:user_id]).to_i == 1 %>                 </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('WebMoney_Gateway') %>:</b></td>
+          <td><%= select_tag("webmoney_gateway", options_for_select([[_("Russian"), 0], [_("English"), 1]], Confline.get_value("WebMoney_Gateway", session[:user_id]).to_i)) %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('WebMoney_Purse') %>:</b></td>
+          <td>      <%= text_field_tag('reseller_webmoney_purse', Confline.get_value("WebMoney_Purse", session[:user_id]), "class" => "input", :size => "35", :maxlength => "20") %>                </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('WebMoney_Currency') %>:</b></td>
+          <td>
+            <select name="reseller_webmoney_default_currency" <%= "disabled" if @currencies.size < 1 %> >
+              <% for curr in @currencies %>
+                  <option value="<%= curr.name %>" <%= "selected" if @wppcurr == curr.name %>> <%= curr.name %> </option>
+              <% end %>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Default_Amount') %>:</b></td>
+          <td>      <%= text_field_tag('reseller_webmoney_default_amount', Confline.get_value("WebMoney_Default_Amount", session[:user_id]), "class" => "input", :size => "35", :maxlength => "50") %>                </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Min_Amount') %>:</b></td>
+          <td>      <%= text_field_tag('reseller_webmoney_min_amount', Confline.get_value("WebMoney_Min_Amount", session[:user_id]), "class" => "input", :size => "35", :maxlength => "50") %>                </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('Test') %>:</b></td>
+          <td>      <%= check_box_tag 'reseller_webmoney_test', value = "1", checked = Confline.get_value("WebMoney_Test", session[:user_id]).to_i == 1 %>                </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('WebMoney_SIM_MODE') %>:</b></td>
+          <td>
+            <select name="reseller_webmoney_sim_mode">
+              <option value="0" <%= "selected" if @selected_mode == 0 %>>0 - All sucessfull.</option>
+              <option value="1" <%= "selected" if @selected_mode == 1 %>>1 - All fail.</option>
+              <option value="2" <%= "selected" if @selected_mode == 2 %>>2 - 80% - success; 20% - fail.</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
     <% if session[:vouchers_enabled].to_i == 1 %>
         <div class="dhtmlgoodies_aTab">
           <br/><br/>
@@ -244,8 +241,7 @@
     <% end %>
     </div>
     <script type="text/javascript">
-        <% g_t = ['PayPal'] %>
-        <% g_t += ['WebMoney'] if session[:webmoney_enabled].to_i == 1%>
+        <% g_t = ['PayPal', 'WebMoney'] %>
         <% g_t += ['Vouchers'] if session[:vouchers_enabled].to_i == 1%>
 
         initTabs('dhtmlgoodies_tabView1', Array(<%=gateway_tabs(g_t)%>), 0, 550, 400);
