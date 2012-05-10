@@ -4368,6 +4368,7 @@ Localization.define('en') do |l|
   l.store 'Devices_callflow_external_number_cant_be_blank', 'Devices Call Flow external number cannot be blank'   
   l.store 'Invalid_IP_addess', 'Invalid IP addess'
   l.store 'Callback_settings', 'Callback settings'
+  l.store 'OSMP_configuration_details', 'Please read this link for technical details how to configure OSMP gateways'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

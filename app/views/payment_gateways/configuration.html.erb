@@ -100,6 +100,10 @@
                                     <a href="http://checkout.google.com/support/sell/bin/answer.py?hl=en&answer=25400" target="_blank"><%= _('link') %></a>
                                   </td>
                                 </tr>
+                            <% elsif gateway.settings['name'] == 'OSMP' %>
+                              <tr style="color: red">
+                                <td colspan='2'><a href="http://wiki.kolmisoft.com/index.php/Osmp_technical_details" target="_blank"><%=_('OSMP_configuration_details')%></a> </td>
+                              </tr>
                             <% end %>
                             <% gateway.errors.each { |field, error| %>
                                 <tr style="color: red">
