@@ -1288,7 +1288,7 @@ Localization.define('en') do |l|
   l.store 'Items_Per_Page', 'Items per page'
   l.store 'Device_PIN_Length', 'Device PIN length'
   l.store 'Fax_Device_Enabled', 'Fax device enabled'
-  l.store 'Email_Fax_From_Sender', 'Email2Fax From Sender'
+  l.store 'Email_Fax_From_Sender', 'Fax2Email From Sender'
   l.store 'Change_Zap', 'Change Zap'
   l.store 'Change_Zap_to', 'Change Zap to'
   l.store 'Copyright_Title', 'Copyright title'
