@@ -2927,6 +2927,7 @@ Sets default tax values for users or cardgroups
   end
 
   def callback_settings
+    @page_title = _('Callback_settings')
     @servers = Server.find(:all, :order => "server_id ASC")
   end
 
