@@ -24,13 +24,13 @@
       </tr>
       <tr>
         <td></td>
-        <td><b><%= _('WEB_Callback_CID') %>:</b></td>
-        <td><%= text_field_tag('web_callback_cid', Confline.get_value("WEB_Callback_CID"), "class" => "input", :size => "35", :maxlength => "50") %></td>
+        <td><b><%= _('Send_Source_As_CID') %>:</b></td>
+        <td><%= check_box_tag 'web_callback_send_source', value = "1", Confline.get_value("Web_Callback_Send_Source_As_CID").to_i == 1 %></td>
       </tr>
       <tr>
         <td></td>
-        <td><b><%= _('Send_Source_As_CID') %>:</b></td>
-        <td><%= check_box_tag 'web_callback_send_source', value = "1", Confline.get_value("Web_Callback_Send_Source_As_CID").to_i == 1 %></td>
+        <td><b><%= _('WEB_Callback_CID') %>:</b></td>
+        <td><%= text_field_tag('web_callback_cid', Confline.get_value("WEB_Callback_CID"), "class" => "input", :size => "35", :maxlength => "50") %></td>
       </tr>
       <tr>
         <td></td>
@@ -59,10 +59,15 @@
                     <td><%#= text_field_tag('email_callback_password', Confline.get_value("Email_Callback_Password") , "class" => "input", :size => "35", :maxlength => "50" )%></td>
                   </tr>
     -->
+      <tr>
+        <td></td>
+        <td colspan='2'>
+          <br />
+          <br />
+          <%= submit_tag _('Save_changes'), :disable_with=>_('Processing..')%>
+        </td>
+      </tr>
     </table>
-    <br/>
-    <br/>
-    <%= submit_tag _('Save_changes'), :disable_with => _('Processing..') %>
 <% end %>
 
 
