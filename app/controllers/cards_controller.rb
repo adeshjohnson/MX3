@@ -200,19 +200,37 @@ class CardsController < ApplicationController
         end
       when 2
         cards_deleted = 0
-        cards_not_deleted = 0
-        card_count = Card.count(:all, :conditions => ["number >= ? AND number <= ? AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id,  @cg.id] )
-          delete_cards = 1000 #number of cards to be deleted in one go
-          (card_count / delete_cards.to_f).ceil.times { |i|
-            cards = Card.find(:all, :conditions => ["number >= ? AND number <= ? AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id,  @cg.id], :limit => delete_cards )
-            for card in cards
-              if card.destroy_with_check
-                cards_deleted += 1
-              else
-                cards_not_deleted += 1
-              end
-            end
-          }
+        query = "DELETE cards 
+                 FROM cards 
+                 JOIN (SELECT cards.id
+                       FROM cards
+                       LEFT JOIN payments ON (payments.card = cards.id) 
+                       LEFT JOIN calls ON (calls.card_id = cards.id) 
+                       LEFT JOIN activecalls ON (activecalls.card_id = cards.id) 
+                       WHERE activecalls.id IS NULL AND
+                             calls.id IS NULL AND
+                             payments.id IS NULL AND
+                             cards.cardgroup_id = #{@cg.id} AND
+                             cards.number BETWEEN #{start_num} AND #{end_num}
+                       GROUP BY cards.id
+                        LIMIT 10000) tmp USING(id)"
+        begin
+          rows_affected = ActiveRecord::Base.connection.delete(query)
+          cards_deleted += rows_affected
+        end while rows_affected > 0
+        query = "SELECT COUNT(*)
+                 FROM  (SELECT cards.id
+                        FROM cards
+                        LEFT JOIN payments ON (payments.card = cards.id) 
+                        LEFT JOIN calls ON (calls.card_id = cards.id) 
+                        LEFT JOIN activecalls ON (activecalls.card_id = cards.id) 
+                        WHERE (activecalls.id IS NOT NULL OR
+                               calls.id IS NOT NULL OR
+                               payments.id IS NOT NULL) AND
+                               cards.cardgroup_id = #{@cg.id} AND
+                               cards.number BETWEEN #{start_num} AND #{end_num}
+                        GROUP BY cards.id) tmp"
+        cards_not_deleted = ActiveRecord::Base.connection.select_value(query).to_i;
       when 3
         creation_time = Time.now
         list = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? and number <= ? and sold = 0 AND owner_id = ? AND cardgroup_id = ? ", start_num, end_num, user_id, @cg.id])
