@@ -14,7 +14,7 @@
     <%@destinations.each{|d|%>
       <tr>
         <td><%= d.prefix %></td>
-        <td><%= d.destinationgroup.name if d.destinationgroup %></td>
+        <td><%= d.name %></td>
       </tr>
     <%}%>
   </table>
