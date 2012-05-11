@@ -4105,7 +4105,7 @@ Localization.define('en') do |l|
   l.store 'CT_No_tariff_explanation', 'This provider has no rates for current destination and it is not used to handle this call.'
   l.store 'CT_Not_active_explanation', 'Provider is not active and call will not go through it. You can activate it in LCR settings.'
   l.store 'CT_No_tariff_not_active_explanation', 'This provider is not active and has no rates, so it is not used to handle this call.'
-  l.store 'No_devices', 'No devices'
+  l.store 'No_devices', 'User has no Device, CDR import is not possible'
   l.store 'Email/Payer', 'Email/Payer'
   l.store 'Campaign_name', 'Campaign name'
   l.store 'Total_call_time', 'Total call time'
