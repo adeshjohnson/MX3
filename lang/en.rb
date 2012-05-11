@@ -4371,6 +4371,7 @@ Localization.define('en') do |l|
   l.store 'OSMP_configuration_details', 'Please read this link for technical details how to configure OSMP gateways'
   l.store 'for_more_details_about_integrity_check_click_here', 'For more details about Integrity Check please click here'
   l.store 'Cardgroup_is_associated_with_dialplans', 'Cardgroup is associated with dialplans'
+  l.store 'Your_Asterisk_server_is_not_accessible_Please_check_if_address_entered_is_valid_and_network_is_OK', 'Your Asterisk server is not accessible. Please check if address entered is valid and network is OK'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
