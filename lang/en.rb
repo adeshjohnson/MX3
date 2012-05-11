@@ -3404,7 +3404,7 @@ Localization.define('en') do |l|
   l.store 'Disallow_Email_Editing', 'Do not allow users to change their email addresses'
   l.store 'Payment_security_disallow_email_editing', 'For maximum security consider disallowing email editing in Settings->Various'
   l.store 'Calls_by_source_unknown_explained', 'Unknown calls are the ones, which CallerID length is less than 11 digits or number is invalid (does not match E164 format).'
-  l.store 'H323_device_must_have_IP', 'H323 device must have IP address to make calls.'
+  l.store 'H323_device_must_have_IP', 'H323 device must have valid IP address to make calls.'
   l.store 'H323_device_port_is_not_1720', 'H323 device port is not 1720.'
   l.store 'Forbidden_to_delete_payments', 'You are forbidden to delete payments'
   l.store 'Show_active_calls_in_real_time', 'Show active calls in real time'
