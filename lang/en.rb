@@ -4369,6 +4369,7 @@ Localization.define('en') do |l|
   l.store 'Invalid_IP_addess', 'Invalid IP addess'
   l.store 'Callback_settings', 'Callback settings'
   l.store 'OSMP_configuration_details', 'Please read this link for technical details how to configure OSMP gateways'
+  l.store 'for_more_details_about_integrity_check_click_here', 'For more details about Integrity Check please click here'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
