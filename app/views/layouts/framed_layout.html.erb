@@ -93,12 +93,7 @@
                     <% if session[:integrity_check] == 1 %>
                         <table class='error_table'>
                           <tr>
-                            <td><%= _("System_May_Not_Be_Working_Propertly") %>
-                              .<br/><%= _("Please_Check_System_Integrity_Here") %>:
-                            </td>
-                          </tr>
-                          <tr>
-                            <td><%= link_to _("Integrity_Check"), :controller => "functions", :action => "integrity_check" %></td>
+                            <td><%= link_to _("Please_Check_System_Integrity_Here") , :controller=> "functions", :action=>"integrity_check" %></td>
                           </tr>
                         </table>
                         <br/>

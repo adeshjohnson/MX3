@@ -2089,7 +2089,7 @@ Localization.define('en') do |l|
   l.store 'New_Voice', 'New Voice'
   l.store 'Ivr_Name', 'IVR Name'
   l.store 'System_May_Not_Be_Working_Propertly', 'Some of configuration needs your attention'
-  l.store 'Please_Check_System_Integrity_Here', 'Please click here to see it'
+  l.store 'Please_Check_System_Integrity_Here', 'Some of configuration needs your attention. Please click here to see it'
   l.store 'Integrity_Check', 'Integrity Check'
   l.store 'Voices', 'Voices'
   l.store 'Timeperiods', 'Time Periods'
