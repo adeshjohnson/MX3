@@ -64,22 +64,18 @@
             </tr>
         <% end %>
     <% end %>
-
-    <% if session[:usertype] != "reseller" %>
-        <tr>
-          <td> <%= _('Device_group') %>:</td>
-          <td>
-            <select name="device[devicegroup_id]">
-              <% if @devgroups %>
-                  <% for dg in @devgroups %>
-                      <option value="<%= dg.id %>" <%= "selected" if @device.devicegroup.id == dg.id if @device.devicegroup %>> <%= dg.name %> </option>
-                  <% end %>
+    <tr>
+      <td> <%= _('Device_group') %>:</td>
+      <td>
+        <select name="device[devicegroup_id]">
+          <% if @devgroups %>
+              <% for dg in @devgroups %>
+                  <option value="<%= dg.id %>" <%= "selected" if @device.devicegroup.id == dg.id if @device.devicegroup %>> <%= dg.name %> </option>
               <% end %>
-            </select>
-          </td>
-        </tr>
-    <% end %>
-
+          <% end %>
+        </select>
+      </td>
+    </tr>
 <% end %>
 <tr>
   <td colspan="2">

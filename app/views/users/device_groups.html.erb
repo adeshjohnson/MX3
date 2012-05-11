@@ -3,7 +3,7 @@
 
 <% for dg in @devicegroups %>
     <% devices = dg.devices %>
-    <table width="50%" class="maintable" %>
+    <table width="50%" class="maintable">
     <tr>
       <th align="left">        <%= _('Group') + ": " + dg.name %> </th>
       <th align="right"><%= _('Created') + ": " + nice_date_time(dg.added) %>    </th>

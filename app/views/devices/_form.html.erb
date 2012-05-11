@@ -18,10 +18,8 @@
             <% end %>
         <% end %>
 
-        <% if session[:usertype] != "reseller" %>
-            <% if not @new_device and @device_type != "FAX" and @device_type != "Virtual" %>
-                <%= render :partial => "device_form_groups" %>
-            <% end %>
+        <% if not @new_device and @device_type != "FAX" and @device_type != "Virtual" %>
+            <%= render :partial => "device_form_groups" %>
         <% end %>
 
         <% if not @new_device and @device_type != "FAX" %>

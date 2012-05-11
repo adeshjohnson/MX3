@@ -21,7 +21,7 @@
         <td id="call_tracing_<%= user.id %>" align="center"><%= link_to(b_call_tracing, {:controller => 'functions', :action => 'call_tracing_user', :user => user.id}, :id => "call_tracing_link_"+user.id.to_s) %> </td>
     <% end %>
 
-    <% if admin? %>
+    <% if admin? or reseller? %>
         <td id="device_groups_<%= user.id %>" align="center"><%= link_to(b_groups, {:controller => 'users', :action => 'device_groups', :id => user.id}, :id => "device_groups_link_"+user.id.to_s) %> </td>
     <% end %>
 
