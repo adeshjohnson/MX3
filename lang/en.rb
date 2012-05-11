@@ -4370,6 +4370,7 @@ Localization.define('en') do |l|
   l.store 'Callback_settings', 'Callback settings'
   l.store 'OSMP_configuration_details', 'Please read this link for technical details how to configure OSMP gateways'
   l.store 'for_more_details_about_integrity_check_click_here', 'For more details about Integrity Check please click here'
+  l.store 'Cardgroup_is_associated_with_dialplans', 'Cardgroup is associated with dialplans'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

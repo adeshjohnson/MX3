@@ -301,6 +301,12 @@ class CardgroupsController < ApplicationController
       flash[:notice] = _('Cardgroup_was_not_found')
       redirect_to :action => 'list' and return false
     end
+
+    if Dialplan.count(:all, :conditions => {:data2 => cg.pin_length, :data1 => cg.number_length, :dptype => 'callingcard'}).to_i > 0 and Cardgroup.count(:all, :conditions => {:pin_length => cg.pin_length, :number_length => cg.number_length}).to_i < 2
+      flash[:notice] = _('Cardgroup_is_associated_with_dialplans')
+      redirect_to :action => 'list' and return false
+    end
+
     check_user_for_cardgroup(cg)
     for card in cg.cards
       if card.calls.count == 0
