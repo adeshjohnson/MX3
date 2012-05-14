@@ -125,7 +125,7 @@
             <br/>
             <div id="f_providers_list" style="display:<%= !@lcr.no_failover? ? '' : 'none' %>;">
               <%=_('Failover_provider') %>:  <select name="select_prov" <%= "disabled" if (@other_providers + @providers).size == 0 %> >
-              <option value="0"><%= _('Select_provider') %></option>
+              <option value="0"><%= _('Do_not_use_Failover_Provider') %></option>
               <% for prov in @other_providers + @providers %>
                   <% device = prov.device %>
                   <option value="<%= prov.id %>" <%= 'selected' if prov.id == @lcr.failover_provider_id %>  >
@@ -141,6 +141,9 @@
                   </option>
               <% end %>
             </select>
+            <span <%= tooltip(_('Do_not_use_Failover_Provider'), _('Do_not_use_failover_explanation')).html_safe %>>
+              <%= b_exclamation %>
+            </span>
             </div>
             </div>
             <br/>
