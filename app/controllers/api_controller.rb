@@ -1700,7 +1700,16 @@ class ApiController < ApplicationController
     if Confline.get_value("Devices_Check_Ballance").to_i == 1
       @user = User.find(:first, :conditions => "uniquehash = '#{params[:id]}'")
       if @user
-        render :text => "#{nice_number(@user.balance)}"
+        if params[:currency].to_s.blank?# in case currency was not supplied or is blank return balance in system's currency 
+          user_balance = @user.balance
+        elsif params[:currency].to_s.downcase == 'user'
+          user_balance = @user.balance * Currency.count_exchange_rate(Currency.get_default.name, @user.currency.name)
+        elsif Currency.find(:first, :conditions => {:name => params[:currency]})# in case valid currency was supplied return balance in that currency
+          user_balance = @user.balance * Currency.count_exchange_rate(Currency.get_default.name, params[:currency])
+        else # in case invalid currency value was supplied, return currency in system's currency
+          user_balance = @user.balance
+        end
+        render :text => nice_number(user_balance).to_s
       else
         render :text => _("User_Not_Found")
       end
@@ -1713,7 +1722,16 @@ class ApiController < ApplicationController
     if Confline.get_value("Devices_Check_Ballance").to_i == 1
       user = User.find(:first, :conditions => ["username = ?", params[:username]])
       if user
-        render :text => "#{nice_number(user.balance)}"
+        if params[:currency].to_s.blank?# in case currency was not supplied or is blank return balance in system's currency 
+          user_balance = user.balance
+        elsif params[:currency].to_s.downcase == 'user'
+          user_balance = user.balance * Currency.count_exchange_rate(Currency.get_default.name, user.currency.name)
+        elsif Currency.find(:first, :conditions => {:name => params[:currency]})# in case valid currency was supplied return balance in that currency
+          user_balance = user.balance * Currency.count_exchange_rate(Currency.get_default.name, params[:currency])
+        else # in case invalid currency value was supplied, return currency in system's currency
+          user_balance = user.balance
+        end
+        render :text => nice_number(user_balance).to_s
       else
         render :text => _("User_Not_Found")
       end
