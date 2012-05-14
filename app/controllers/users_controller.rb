@@ -1404,9 +1404,10 @@ in before filter : ard (:find_ard)
 
 
   def find_user
-    @user = User.find_by_id(params[:id])
 
-    unless @user and @user.owner_id == current_user.id
+      @user = User.where({:id=>params[:id]}).first
+
+      unless @user and @user.owner_id == current_user.get_correct_owner_id
       flash[:notice] = _('User_not_found')
       redirect_to(:controller => "callc", :action => "main") and return false
     end
