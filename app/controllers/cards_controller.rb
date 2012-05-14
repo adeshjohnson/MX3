@@ -576,7 +576,6 @@ class CardsController < ApplicationController
     if @step == 2
       my_debug_time "step 2"
       my_debug_time "use : #{session[:temp_card_import_csv]}"
-      @lines_number = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{session[:card_import_csv]}")
       if session[:temp_card_import_csv]
         file = CsvImportDb.head_of_file("/tmp/#{session[:temp_card_import_csv]}.csv", 20).join("").to_s
         session[:file] = file
@@ -587,6 +586,7 @@ class CardsController < ApplicationController
             colums ={}
             colums[:colums] = [{:name => "f_error", :type => "INT(4)", :default => 0}, {:name => "nice_error", :type => "INT(4)", :default => 0}, {:name => "do_not_import", :type => "INT(4)", :default => 0}, {:name => "changed", :type => "INT(4)", :default => 0}, {:name => "not_found_in_db", :type => "INT(4)", :default => 0}, {:name => "id", :type => 'INT(11)', :inscrement => ' NOT NULL auto_increment '}]
             session[:card_import_csv] = CsvImportDb.load_csv_into_db(session[:temp_card_import_csv], @sep, @dec, @fl, nil, colums)
+            @lines_number = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{session[:card_import_csv]}")
           rescue Exception => e
             MorLog.log_exception(e, Time.now.to_i, params[:controller], params[:action])
             session[:import_csv_card_import_csv_options] = {}
