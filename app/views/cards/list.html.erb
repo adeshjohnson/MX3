@@ -104,7 +104,7 @@
         <td id="user_<%= card.id %>" align="left"><%= link_nice_user(card.user) if card.user_id != -1 and card.user %></td>
         <td id="payments_<%= card.id %>" align="center"><%= link_to(b_payments, {:controller => 'cards', :action => 'payments', :id => card.id}, {:id => "payments_link_"+ card.id.to_s}) %></td>
         <td id="calls_<%= card.id %>" align="center"><%= link_to(b_call, {:controller => 'stats', :action => 'cc_call_list', :id => card.id}, {:id => "calls_link_"+ card.id.to_s}) %>
-          (<%= card.calls.count %>)
+          (<%= card.call_count %>)
         </td>
         <% if @allow_manage == true %>
             <td id="pay_<%= card.id %>" align="center"><%= link_to b_money, {:action => 'card_pay', :cg => @cg.id, :id => card.id}, {:id => "pay_link_"+ card.id.to_s} %></td>
