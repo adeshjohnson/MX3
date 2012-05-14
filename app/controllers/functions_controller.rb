@@ -481,7 +481,7 @@ class FunctionsController < ApplicationController
       redirect_to :action => 'call_tracing_user', :user => @user.id and return false
     end
 
-    if @device.device_type == "H323" and (@device.ipaddr == "0.0.0.0" or @device.ipaddr !~ '^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$')
+    if @device.device_type == "H323" and (@device.ipaddr == "0.0.0.0" or @device.ipaddr.to_s !~ /^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$/)
       flash[:notice] = _('H323_device_must_have_IP')
       redirect_to :action => 'call_tracing_user', :user => @user.id and return false
     end
