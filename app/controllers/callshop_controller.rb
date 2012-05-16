@@ -5,7 +5,7 @@ class CallshopController < ApplicationController
 
   before_filter :check_localization
   before_filter :check_addon
-  skip_before_filter :redirect_callshop_manager, :only => [:new, :main, :show, :show_json, :reserve_booth, :free_booth, :release_booth, :invoices, :invoice_edit, :update, :comment_update] 
+  skip_before_filter :redirect_callshop_manager, :only => [:new, :main, :show, :show_json, :reserve_booth, :free_booth, :release_booth, :invoices, :invoice_edit, :update, :comment_update, :rate_search] 
   #skip_before_filter :set_current_user
 
   @@invoice_searchable_cols = ["created_at", "balance", "state", "comment", "invoice_type"]

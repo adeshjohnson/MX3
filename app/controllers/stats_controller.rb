@@ -15,6 +15,7 @@ class StatsController < ApplicationController
   before_filter :find_provider, :only => [:providers_calls]
   before_filter :check_reseller_in_providers, :only => [:providers, :providers_stats, :country_stats]
   before_filter :no_cache, :only => [:active_calls]
+  skip_before_filter :redirect_callshop_manager, :only => [:prefix_finder_find, :prefix_finder_find_country]
 
   def index
     user_stats
