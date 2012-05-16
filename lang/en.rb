@@ -4373,7 +4373,7 @@ Localization.define('en') do |l|
   l.store 'Cardgroup_is_associated_with_dialplans', 'Cardgroup is associated with dialplans'
   l.store 'Confirm_changes', 'Confirm changes'
   l.store 'for_these_prefixes', 'for these prefixes'
-  l.store 'Destination_names_will_be_changed_to', 'Destination names will be changed to'
+  l.store 'Destination_names_will_be_changed_to', 'Destination details will be changed to'
   l.store 'Your_Asterisk_server_is_not_accessible_Please_check_if_address_entered_is_valid_and_network_is_OK', 'Your Asterisk server is not accessible. Please check if address entered is valid and network is OK'
   l.store 'Do_not_use_Failover_Provider', 'Do not use Failover Provider'
   l.store 'Do_not_use_failover_explanation', 'ATTENTION! Failover Provider will be used without checking its rates. You can take loss using it!'

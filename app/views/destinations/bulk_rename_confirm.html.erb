@@ -12,9 +12,9 @@
 <div align="center" style="overflow:auto;max-height:500px;width:250px">
   <table width="100%" class="maintable">
     <%@destinations.each{|d|%>
-      <tr>
-        <td><%= d.prefix %></td>
-        <td><%= d.name %></td>
+      <tr id="<%=d.id%>">
+        <td id="prefix_<%=d.id%>"><%= d.prefix %></td>
+        <td id="name_<%=d.id%>"><%= d.name %></td>
       </tr>
     <%}%>
   </table>
