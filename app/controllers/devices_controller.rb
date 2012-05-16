@@ -104,6 +104,7 @@ class DevicesController < ApplicationController
 
     device.port = Device::DefaultPort["IAX2"] if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type
     device.port = Device::DefaultPort["SIP"] if device.device_type == 'SIP' and not Device.valid_port? device.port, device.device_type
+      device.port = Device::DefaultPort["H323"] if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type 
 
     if device.save
       flash[:status] = device.check_callshop_user(_('device_created'))
@@ -530,6 +531,7 @@ class DevicesController < ApplicationController
       @device.port = params[:port] if params[:port]
       @device.port = Device::DefaultPort["IAX2"] if @device.device_type == 'IAX2' and not Device.valid_port? params[:port], @device.device_type
       @device.port = Device::DefaultPort["SIP"] if @device.device_type == 'SIP' and not Device.valid_port? params[:port], @device.device_type
+      @device.port = Device::DefaultPort["H323"] if @device.device_type == 'H323' and not Device.valid_port? params[:port], @device.device_type 
 
       @device.canreinvite = params[:canreinvite]
       @device.transfer = params[:canreinvite]

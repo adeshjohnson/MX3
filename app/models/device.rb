@@ -949,7 +949,7 @@ class Device < ActiveRecord::Base
     self.name =~ /mor_server_\d+/ ? true : false
   end
 
-  DefaultPort={'SIP' => 5060, 'IAX2' => 4569}
+  DefaultPort={'SIP' => 5060, 'IAX2' => 4569, 'H323' => 1720}
 
 =begin
   Check whether port is valid for supplied technology, at this moment only ilegal 
