@@ -86,7 +86,7 @@ class CardsController < ApplicationController
     @fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
     #order_by = Card.get_order_by(params, @options)
-    @cards = Card.includes(:user).where([cond.join(" AND ")] +var).offset(@fpage).limit(session[:items_per_page].to_i).all
+    @cards = Card.where([cond.join(" AND ")] +var).offset(@fpage).limit(session[:items_per_page].to_i).all
     @users = User.find_all_for_select(current_user.id)
 
     session[:cards_list_options] = @options
