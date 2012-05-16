@@ -4381,6 +4381,7 @@ Localization.define('en') do |l|
   l.store 'Cardgroup_is_associated_with_dialplans', 'Cardgroup is associated with dialplans'
   l.store 'Cardgroup_is_used_in_ANI_PIN_Dialplan', 'Cardgroup is used in ANI PIN Dialplan'
   l.store 'Cards_were_hidden', 'Cards were hidden'
+  l.store 'Destination_details', 'Destination details' 
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
