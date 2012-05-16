@@ -988,7 +988,7 @@ in before filter : user (:find_user_from_id_or_session)
         end
     end
 
-    if params[:commit] != nil
+    if !params[:commit].nil?
       @options[:page] = 1
     end
 
