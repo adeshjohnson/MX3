@@ -19,6 +19,8 @@ class CardgroupsController < ApplicationController
     true
   }
 
+  before_filter :find_card_group , :only=> [:destroy, :show, :edit, :update, :cards_to_csv, :upload_card_image, :gmp_list]
+
   def index
     redirect_to :action => :list
   end
@@ -296,44 +298,17 @@ class CardgroupsController < ApplicationController
   end
 
   def destroy
-    cg = Cardgroup.find_by_id(params[:id])
-    unless cg
-      flash[:notice] = _('Cardgroup_was_not_found')
+    if @cg.validate_before_destroy
+      flash_errors_for(_('Cardgroup_cannot_be_deleted'), @cg)
       redirect_to :action => 'list' and return false
     end
 
-    if Dialplan.count(:all, :conditions => {:data2 => cg.pin_length, :data1 => cg.number_length, :dptype => 'callingcard'}).to_i > 0 and Cardgroup.count(:all, :conditions => {:pin_length => cg.pin_length, :number_length => cg.number_length}).to_i < 2
-      flash[:notice] = _('Cardgroup_is_associated_with_dialplans')
-      redirect_to :action => 'list' and return false
-    end
-
-    check_user_for_cardgroup(cg)
-    for card in cg.cards
-      if card.calls.count == 0
-        if not Payment.find(:first, :conditions => ["paymenttype = ? and user_id = ?", "Card", card.id])
-          card.destroy
-        end
-      end
-    end
-    cg = Cardgroup.find_by_id(params[:id])
-    unless cg
-      flash[:notice] = _('Cardgroup_was_not_found')
-      redirect_to :action => 'list' and return false
-    end
-    if cg.cards.size == 0
-
-      # destroy ghost minute percent records
-      gmps = CcGhostminutepercent.find(:all, :conditions => "cardgroup_id = '#{cg.id}'")
-      for gmp in gmps
-        gmp.destroy
-      end
-
-      cg.destroy
+    if @cg.destroy_or_hide
       flash[:status] = _('Cardgroup_was_deleted')
       redirect_to :action => 'list'
     else
-      flash[:notice] = _('Cardgroup_cannot_be_deleted')
-      redirect_to :action => 'list'
+      flash_errors_for(_('Cardgroup_cannot_be_deleted'), @cg)
+      redirect_to :action => 'list' and return false
     end
   end
 
@@ -629,216 +604,6 @@ class CardgroupsController < ApplicationController
 
   end
 
-=begin rdoc
- Displays calling cards invoices for admin/reseller.
-=end
-=begin
-  def invoices
-    owner = get_user_id
-    @page_title = _('Invoices')
-    @page_icon = "view.png"
-    @items_per_page = Confline.get_value("Items_Per_Page").to_i
-
-    change_date
-    params[:s_number] ? @search_number = params[:s_number].strip : @search_number = ""
-    params[:s_mail] ? @search_mail = params[:s_mail] : @search_mail = ""
-    params[:s_manually] ? @search_manually = params[:s_manually] :  @search_manually = ""
-    params[:s_paid] ?  @search_paid = params[:s_paid] : @search_paid = ""
-    params[:page] ? @page = params[:page].to_i : @page = 1
-    cond = []
-    cond << "cc_invoices.owner_id = #{owner}"
-    cond << "cc_invoices.created_at BETWEEN '" + session_from_date + " 00:00:00' AND '" + session_till_date + " 23:59:59'"
-    cond << "cc_invoices.number LIKE '#{@search_number}%'" if @search_number.length > 0
-    cond << "cc_invoices.sent_email = '#{@search_mail}'" if @search_mail.length > 0
-    cond << "cc_invoices.sent_manually = '#{@search_manually}'" if @search_manually.length > 0
-    cond << "cc_invoices.paid = '#{@search_paid}'" if @search_paid.length > 0
-
-    cond.length > 2 ? @search = 1 : @search = 0
-    MorLog.my_debug(".....................................")
-    @invoices = CcInvoice.find(
-      :all,
-      :include => [:ccorder, :payment],
-      :conditions => cond.join(" AND "),
-      :limit => @items_per_page, :offset => (@page-1)*@items_per_page)
-
-    @size = CcInvoice.count(:conditions => cond.join(" AND ")).to_i
-    @total_pages = (@size.to_f / @items_per_page.to_f).ceil
-    @page_select_params = {
-      :s_number => @search_number,
-      :s_mail => @search_mail,
-      :s_manually => @search_manually,
-      :s_paid => @search_paid,
-    }
-  end
-=end
-=begin rdoc
- Shows CcInvoice details.
-
- *Params*
-
- <tt>id</tt> - CcInvoice id
-=end
-=begin
-  def invoice_details
-    @invoice = CcInvoice.find(:first, :include => [:ccorder, :payment], :conditions => ["cc_invoices.id = ? AND cc_invoices.owner_id = ?", params[:id], session[:user_id]])
-    @page_title = _('Invoice')  + ": " + @invoice.number
-    @page_icon = "view.png"
-    @line_items = Cclineitem.find(:all, :include => :cardgroup, :conditions => ["ccorder_id = ?", @invoice.ccorder.id])
-  end
-=end
-=begin rdoc
- Deletes CcInvoice
-
- *Params*
-
- <tt>id</tt> - CcInvoice id
-
- *Redirect*
-
- Redirects to "invoices" - invoices list.
-=end
-=begin
-  def invoice_delete
-    @invoice = CcInvoice.find(:first, :conditions => "id = #{params[:id]} AND owner_id = #{session[:user_id]}")
-    if @invoice and @invoice.destroy
-      flash[:notice] = _('Invoice_deleted') + ": " + @invoice.number
-    else
-      flash[:notice] = _('Invoice_was_not_deleted')
-    end
-    redirect_to :action => :invoices and return false
-  end
-=end
-
-=begin rdoc
- Change cc_invoice paid status
-
- *Params*
-
- <tt>id</tt> - CcInvoice id
- <tt>status<tt> - string describing what param should be changed. ["paid", "sent_email" , "sent_manually"]
-
- *Redirect*
-
- Redirects back to "invoice_details" with invoice ID.
-=end
-=begin
-  def invoice_change_status
-    invoice = CcInvoice.find(:first, :conditions => "id = #{params[:id]} AND owner_id = #{session[:user_id]}")
-    if !invoice
-      dont_be_so_smart
-      redirect_to :controller => "callc", :action => "main" and return false
-    end
-    case params[:status]
-    when "paid"
-      invoice.paid.to_i == 1 ? invoice.paid = 0 : invoice.paid = 1
-    when "sent_email"
-      invoice.sent_email.to_i == 1 ? invoice.sent_email = 0 : invoice.sent_email = 1
-    when "sent_manually"
-      invoice.sent_manually.to_i == 1 ? invoice.sent_manually = 0 : invoice.sent_manually = 1
-    end
-    invoice.save
-    redirect_to(:action => :invoice_details, :id => invoice.id) and return false
-  end
-=end
-
-=begin rdoc
- Generates invoice PDF.
-
- *Params*
-
- <tt>id</tt> - CcInvoice id
-=end
-=begin
-  def generate_invoice_pdf
-    invoice = CcInvoice.find(:first, :conditions => "id = #{params[:id]} AND owner_id = #{session[:user_id]}")
-    if !invoice
-      dont_be_so_smart
-      redirect_to :controller => "callc", :action => "main" and return false
-    end
-    options = {
-      :title_fontsize => 13,
-      :title_fontsize1 => 16,
-      :title_fontsize2 => 9,
-      :address_fontsize => 8,
-      :fontsize => 7,
-      :tax_fontsize => 7,
-      # header/address text
-      :address_pos1 => 40,     :title_pos0 => 43,
-      :address_pos2 => 70,     :title_pos1 => 75,
-      :address_pos3 => 85,     :title_pos2 => 90,
-      :address_pos4 => 100,
-      :address_pos5 => 115,
-
-      :left => 40,
-      :title_left2 => 330,
-      :item_line_height => 20,
-      :item_line_add_y => 3,
-      :item_line_add_x => 6,
-      :line_y => 140,
-      :length => 520,
-      :item_line_start => 220,
-      :lines => 20,
-      :col1_x => 320,
-      :col2_x => 390,
-      :col3_x => 470,
-      #:box2_items => 3
-      :tax_box_h => 11,
-      :tax_box_text_add_y => 1,
-      :tax_box_text_x => 360,
-      :bank_details_step => 15
-    }
-    pdf = PdfGen::Generate.generate_cc_invoice(invoice, options)
-    send_data pdf.render, :filename => "Invoice-#{invoice.number}-#{nice_date(invoice.created_at)}.pdf", :type => "application/pdf"
-  end
-=end
-=begin rdoc
-
-=end
-=begin
-  def generate_invoice_csv
-    invoice = CcInvoice.find(:first, :conditions => ["id = ? AND owner_id = ?", params[:id], session[:user_id]])
-    if !invoice
-      dont_be_so_smart
-      redirect_to :controller => "callc", :action => "main" and return false
-    end
-    order = invoice.ccorder
-    line_items = Cclineitem.find(:all, :include => [:cardgroup, :card], :conditions => ["ccorder_id = ?", order.id])
-    cg = line_items[0].cardgroup
-    sep = Confline.get_value("CSV_Separator").to_s
-
-    tax = cg.tax
-    taxes = tax.applied_tax_list(0)
-    total_tax_name = tax.total_tax_name
-    header_array = [_("Card"), _("Quantity"), _("Price"), _("Total")]
-    csv_string = FasterCSV.generate(:col_sep => sep) do |csv|
-      if order.amount == order.gross + tax.count_tax_amount(order.gross)
-        taxes.each { |tax_hash|
-          header_array << "#{tax_hash[:name]}: #{nice_number(tax_hash[:value])}%"
-        }
-      end
-      header_array << "#{total_tax_name}:"
-      header_array << _("Total_price")
-      csv << header_array
-      line_items.each{ |item|
-        total_price = item.price*item.quantity
-        taxes = tax.applied_tax_list(total_price)
-        array = [item.cardgroup.name, item.quantity, nice_number(item.price), nice_number(total_price)]
-        if order.amount == order.gross + tax.count_tax_amount(order.gross)
-          taxes.each { |tax_hash|
-            array << nice_number(tax_hash[:tax])
-          }
-        end
-        array << nice_number(tax.count_tax_amount(total_price))
-        array << nice_number(total_price+tax.count_tax_amount(total_price))
-        csv << array
-      }
-    end
-    filename = "Invoice-#{invoice.number}-#{nice_date(invoice.created_at)}.csv"
-    send_data(csv_string,   :type => 'text/csv; charset=utf-8; header=present',  :filename => filename)
-  end
-=end
-
-
   def cardgroups_stats
     @page_title = _('Cardgroup_Stats')
     check_addon
@@ -994,6 +759,15 @@ class CardgroupsController < ApplicationController
     else
       return true
     end
+  end
+
+  def find_card_group
+    @cg = Cardgroup.includes([:tariff, :lcr,:location, :tax]).where(['id=? and hidden = 0',params[:id]]).first
+    unless @cg
+      flash[:notice] = _('Cardgroup_was_not_found')
+      redirect_to :action => 'list' and return false
+    end
+    check_user_for_cardgroup(@cg)
   end
 
 end

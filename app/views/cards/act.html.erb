@@ -17,6 +17,8 @@
     &nbsp;&nbsp;&nbsp;&nbsp;
     <%= _('Delete') %> : <input type="radio" id="delete" name="activate" value="2"/>
     &nbsp;&nbsp;&nbsp;&nbsp;
+    <%=_('Delete_and_hide')%> : <input type="radio" id="delete_and_hide" name="activate" value="5" />
+    &nbsp;&nbsp;&nbsp;&nbsp;
     <%= _('Change_distributor') %> :
     <input type="radio" id="distributor" name="activate" value="4"/>&nbsp;&nbsp; <%= select_tag("user_id", options_for_select([["None", -1]] + @users.map { |user| [nice_user(user), user.id] })) %>
     <br/>

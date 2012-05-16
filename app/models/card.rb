@@ -35,6 +35,84 @@ class Card < ActiveRecord::Base
     end
   end
 
+  def Card.delete_from_sql(options={})
+    cards_deleted = 0
+    query = "DELETE cards
+               FROM cards
+               JOIN (SELECT cards.id
+                     FROM cards
+                     LEFT JOIN payments ON (payments.user_id = cards.id and paymenttype='Card')
+                     LEFT JOIN calls ON (calls.card_id = cards.id)
+                     LEFT JOIN activecalls ON (activecalls.card_id = cards.id)
+                     WHERE activecalls.id IS NULL AND
+                           calls.id IS NULL AND
+                           payments.id IS NULL AND
+                           cards.cardgroup_id = #{options[:cardgroup_id]} AND
+                           cards.number BETWEEN #{options[:start_num]} AND #{options[:end_num]}
+                     GROUP BY cards.id
+                     LIMIT 10000) tmp USING(id)"
+    begin
+      rows_affected = ActiveRecord::Base.connection.delete(query)
+
+      cards_deleted += rows_affected
+    end while rows_affected > 0
+    query = "SELECT COUNT(*)
+               FROM  (SELECT cards.id
+                      FROM cards
+                      LEFT JOIN payments ON (payments.user_id = cards.id and paymenttype='Card')
+                      LEFT JOIN calls ON (calls.card_id = cards.id)
+                      LEFT JOIN activecalls ON (activecalls.card_id = cards.id)
+                      WHERE (activecalls.id IS NOT NULL OR
+                             calls.id IS NOT NULL OR
+                             payments.id IS NOT NULL) AND
+                             cards.cardgroup_id = #{options[:cardgroup_id]} AND
+                             cards.number BETWEEN #{options[:start_num]} AND #{options[:end_num]}
+                      GROUP BY cards.id) tmp"
+    cards_not_deleted = ActiveRecord::Base.connection.select_value(query).to_i
+    return    cards_deleted, cards_not_deleted
+  end
+
+  def Card.delete_and_hide_from_sql(options={})
+    cards_deleted, cards_not_deleted = Card.delete_from_sql(options)
+    if cards_not_deleted.to_i > 0
+      cards_hidden = Card.hide_from_sql(options.merge!({:force=>true}))
+    end
+    return  cards_deleted, cards_hidden
+  end
+
+  def Card.hide_from_sql(options={})
+    cards_hidden = 0
+    if options[:force]
+      query = "UPDATE cards SET callerid = NULL, number = CONCAT('DELETED_#{Time.now.to_i}_', number), pin = CONCAT('DELETED_#{Time.now.to_i}_', pin), hidden = 1 WHERE cards.cardgroup_id = #{options[:cardgroup_id]} AND cards.number BETWEEN #{options[:start_num]} AND #{options[:end_num]} LIMIT 10000;"
+      begin
+        rows_affected = ActiveRecord::Base.connection.update(query)
+        cards_hidden += rows_affected
+      end while rows_affected > 0
+    else
+      query = "UPDATE cards SET callerid = NULL, number = CONCAT('DELETED_#{Time.now.to_i}_', number), pin = CONCAT('DELETED_#{Time.now.to_i}_', pin), hidden = 1
+               FROM cards
+               JOIN (SELECT cards.id
+                     FROM cards
+                     LEFT JOIN payments ON (payments.user_id = cards.id and paymenttype='Card')
+                     LEFT JOIN calls ON (calls.card_id = cards.id)
+                     LEFT JOIN activecalls ON (activecalls.card_id = cards.id)
+                     WHERE (activecalls.id IS NOT NULL OR
+                           calls.id IS NOT NULL OR
+                           payments.id IS NOT NULL) AND
+                           cards.cardgroup_id = #{options[:cardgroup_id]} AND
+                           cards.number BETWEEN #{options[:start_num]} AND #{options[:end_num]}
+                     GROUP BY cards.id
+                     LIMIT 10000) tmp USING(id)"
+      begin
+        rows_affected = ActiveRecord::Base.connection.update(query)
+        cards_hidden += rows_affected
+      end while rows_affected > 0
+    end
+
+    return  cards_hidden
+  end
+
+
   def self.search(user_id, conditions, options)
     cond, vars = [], []
 
@@ -356,9 +434,9 @@ class Card < ActiveRecord::Base
 =end
   def hide
     Action.add_action_hash(User.current, {:action=>'Card hidden permanently', :target_id=>self.id, :target_type=>"card", :data=>self.callerid, :data2=>self.pin, :data3=>self.number})
-    self.pin = nil
+    self.pin = 'DELETED_#{Time.now.to_i}_' + self.pin.to_s
     self.callerid = nil
-    self.number = nil
+    self.number = 'DELETED_#{Time.now.to_i}_' + self.number.to_s
     self.hidden = 1
     self.save
   end

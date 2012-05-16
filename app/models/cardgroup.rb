@@ -7,6 +7,7 @@ class Cardgroup < ActiveRecord::Base
   belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'
 
   has_many :cards, :order => "number ASC", :dependent => :destroy
+  has_many :cc_ghostminutepercents, :dependent => :destroy
 
   validates_uniqueness_of :name, :message => _('Cardgroup_name_must_be_unique')
   validates_presence_of :name, :message => _('Cardgroup_must_have_name')
@@ -14,6 +15,11 @@ class Cardgroup < ActiveRecord::Base
 
   attr_protected :owner_id
   before_save :before_save_dates, :check_location_id, :validate_pin_length
+  before_save :before_save_dates, :check_location_id, :validate_pin_length
+  before_destroy :validate_before_destroy
+
+  default_scope where(:hidden => 0)
+
 
   def validate_pin_length
     if (0..30).include?(self.pin_length.to_i)
@@ -47,6 +53,61 @@ class Cardgroup < ActiveRecord::Base
     for c in self.cards
       c.destroy
     end
+  end
+
+  def validate_before_destroy
+    if Dialplan.count(:all, :conditions => {:data2 => pin_length, :data1 => number_length, :dptype => 'callingcard'}).to_i > 0 and Cardgroup.count(:all, :conditions => {:pin_length => pin_length, :number_length => number_length}).to_i < 2
+      errors.add(:dialplan, _('Cardgroup_is_associated_with_dialplans'))
+      return false
+    end
+    if Dialplan.count(:all, :conditions => {:data7 => id, :data6 => 1, :dptype => 'authbypin'}).to_i > 0
+      errors.add(:dialplan, _('Cardgroup_is_used_in_ANI_PIN_Dialplan'))
+      return false
+    end
+  end
+
+  def destroy_or_hide
+
+    if Card.where(['cardgroup_id = ? AND number NOT LIKE "DELETED%"', id]).first
+      if Card.count(:all, :conditions => ['user_id != -1 AND cardgroup_id = ?', id]) > 0
+        distrobutor_cards = Card.find(:all, :conditions => ['user_id != -1 AND cardgroup_id = ?', id])
+        for dsc in distrobutor_cards
+          c_u_id = dsc.id
+          dsc.user_id = -1
+          dsc.save
+          Action.add_action_hash(User.current, {:action => 'card_separated_from_user', :target_id => dsc.id, :target_type => 'Card', :data => c_u_id})
+        end
+      end
+
+
+      Card.delete_and_hide_from_sql({:cardgroup_id => id, :start_num => self.first_start_number, :end_num => self.last_end_number})
+
+    end
+
+    unless Card.where( ['cardgroup_id = ?', id]).first
+      # destroy ghost minute percent records
+      gmps = self.cc_ghostminutepercents
+      if gmps and gmps.size.to_i > 0
+        for gmp in gmps
+          gmp.destroy
+        end
+      end
+      Action.add_action_hash(User.current, {:action => 'calling_card_group_deleted', :target_id => id, :target_type => 'CardGroup'})
+      self.destroy
+    else
+      self.hidden = 1
+      self.save
+      Action.add_action_hash(User.current, {:action => 'calling_card_group_deleted_and_hidden', :target_id => id, :target_type => 'CardGroup'})
+    end
+
+  end
+
+  def first_start_number
+    Card.where(['cardgroup_id =? AND number NOT LIKE "DELETED%"', id]).order('number ASC').first.number.to_s
+  end
+
+  def last_end_number
+    Card.where(['cardgroup_id =? AND number NOT LIKE "DELETED%"', id]).order('number DESC').first.number.to_s
   end
 
   def is_owned_by?(user)

@@ -199,38 +199,7 @@ class CardsController < ApplicationController
           card.save
         end
       when 2
-        cards_deleted = 0
-        query = "DELETE cards 
-                 FROM cards 
-                 JOIN (SELECT cards.id
-                       FROM cards
-                       LEFT JOIN payments ON (payments.card = cards.id) 
-                       LEFT JOIN calls ON (calls.card_id = cards.id) 
-                       LEFT JOIN activecalls ON (activecalls.card_id = cards.id) 
-                       WHERE activecalls.id IS NULL AND
-                             calls.id IS NULL AND
-                             payments.id IS NULL AND
-                             cards.cardgroup_id = #{@cg.id} AND
-                             cards.number BETWEEN #{start_num} AND #{end_num}
-                       GROUP BY cards.id
-                        LIMIT 10000) tmp USING(id)"
-        begin
-          rows_affected = ActiveRecord::Base.connection.delete(query)
-          cards_deleted += rows_affected
-        end while rows_affected > 0
-        query = "SELECT COUNT(*)
-                 FROM  (SELECT cards.id
-                        FROM cards
-                        LEFT JOIN payments ON (payments.card = cards.id) 
-                        LEFT JOIN calls ON (calls.card_id = cards.id) 
-                        LEFT JOIN activecalls ON (activecalls.card_id = cards.id) 
-                        WHERE (activecalls.id IS NOT NULL OR
-                               calls.id IS NOT NULL OR
-                               payments.id IS NOT NULL) AND
-                               cards.cardgroup_id = #{@cg.id} AND
-                               cards.number BETWEEN #{start_num} AND #{end_num}
-                        GROUP BY cards.id) tmp"
-        cards_not_deleted = ActiveRecord::Base.connection.select_value(query).to_i;
+        cards_deleted, cards_not_deleted = Card.delete_from_sql({:cardgroup_id => @cg.id, :start_num => start_num, :end_num => end_num})
       when 3
         creation_time = Time.now
         list = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? and number <= ? and sold = 0 AND owner_id = ? AND cardgroup_id = ? ", start_num, end_num, user_id, @cg.id])
@@ -254,6 +223,8 @@ class CardsController < ApplicationController
           card.user_id = params[:user].to_i
           card.save
         end
+      when 5
+        cards_deleted, cards_hidden = Card.delete_and_hide_from_sql({:cardgroup_id => @cg.id, :start_num => start_num, :end_num => end_num})
     end
     case (action)
       when 0
@@ -274,6 +245,8 @@ class CardsController < ApplicationController
         flash[:status] = _('Cards_were_successfully_bought')
       when 4
         flash[:status] = _('Distributor_changed')
+      when 5
+        flash[:status] = cards_deleted.to_s + ' ' + _('Cards_were_successfully_deleted')  + '<br>' + cards_hidden.to_i.to_s + ' ' + _('Cards_were_hidden')
     end
 
     redirect_to :action => 'list', :cg => @cg and return false

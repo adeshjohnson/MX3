@@ -455,7 +455,7 @@ class FunctionsController < ApplicationController
 
     @u_tariff = @user.tariff
     @lcr = @user.lcr
-    if @lcr.user_id.to_i == current_user.owner_id.to_i and current_user.reseller_allow_providers_tariff? and current_user.id != @user.id
+    if (!@lcr or @lcr == nil) or (@lcr.user_id.to_i == current_user.owner_id.to_i and current_user.reseller_allow_providers_tariff? and current_user.id != @user.id)
       flash[:notice] = _('Check_if_your_user_is_using_your_lcr')
       redirect_to :controller => "callc", :action => "main" and return false
     end
