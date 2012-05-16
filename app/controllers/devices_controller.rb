@@ -1976,7 +1976,7 @@ class DevicesController < ApplicationController
     session[:devices_devices_weak_passwords_options] ? @options = session[:devices_devices_weak_passwords_options] : @options = {}
     params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page] or @options[:page] <= 0)
 
-    @total_pages = (Device.count(:all, :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0 AND device_type != 'H323'").to_f/session[:items_per_page].to_f).ceil
+    @total_pages = (Device.count(:all, :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0 AND device_type != 'H323' AND username NOT LIKE 'mor_server_%'").to_f/session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages.to_i if @total_pages.to_i < @options[:page].to_i and @total_pages > 0
     @devices = Device.find(:all, :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0 AND device_type != 'H323' AND username NOT LIKE 'mor_server_%'", :offset => session[:items_per_page]*(@options[:page]-1), :limit => session[:items_per_page])
 
