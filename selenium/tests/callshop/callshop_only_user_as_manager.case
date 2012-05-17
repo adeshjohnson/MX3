@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://trunk" />
+<link rel="selenium.base" href="" />
 <title>callshop_only_user_as_manager</title>
 </head>
 <body>
@@ -49,6 +49,11 @@
 <tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/callshop/test_callshop</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
 	<td></td>
 </tr>
 <tr>
@@ -174,6 +179,151 @@
 <tr>
 	<td>verifyElementNotPresent</td>
 	<td>new_member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>Test_user_user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>Test_user_user1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Call Shop was not found or there are no phone booths assigned. Please add more phone booths.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user_username</td>
+	<td>Test_user_test_shop</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>Test_user_test_shop1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/members/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Call booth was successfully added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>Test_user_user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>Test_user_user1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Manager view</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Manager view</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Manager view</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/sms</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Manager view</td>
 	<td></td>
 </tr>
 </tbody></table>
