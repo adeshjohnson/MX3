@@ -4,8 +4,7 @@
       <b>
         <%= _('Prefix') %>
         : <%= text_field_tag 'prefix', '', "class" => "input", :size => "20", :maxlength => "40", :id => "destination_prefix" %>
-        <%= _('Destination_details') %>
-        : <%= text_field_tag 'destination', '', "class" => "input", :size => "20", :maxlength => "40", :id => "destination_name" %>
+        <%= _('Destination_details') %>: <%= text_field_tag 'destination', '', "class" => "input", :size => "20", :maxlength => "40", :id => "destination_name" %>
       </b>
       <%= submit_tag _('Rename'), :disable_with => _('Processing..') %>
   <% end %>
