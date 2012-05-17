@@ -4289,7 +4289,7 @@ Localization.define('en') do |l|
   l.store 'Add_failover_provider', 'Add failover provider'
   l.store 'Do_not_use_failover_provider', 'Do not use failover provider'
   l.store 'Failover_provider_added', 'Failover Provider was added'
-  l.store 'Failover_provider', 'Failover provider'
+  l.store 'Failover_provider', 'Failover Provider'
   l.store 'Failover_provider_unassigned', 'Failover Provider was unassigned'
   l.store 'Calling_card_dialplan_is_assigned_to_this_dialpan', 'Calling card dialplan is assigned to this dialpan'
   l.store 'Dialplan_is_associated_with_other_dialplans', 'Dialplan is associated with other dialplans'
