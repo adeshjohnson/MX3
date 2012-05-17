@@ -298,7 +298,8 @@ class CardgroupsController < ApplicationController
   end
 
   def destroy
-    if @cg.validate_before_destroy
+    @cg.validate_before_destroy
+    if @cg.respond_to?(:errors) and @cg.errors.size.to_i > 0
       flash_errors_for(_('Cardgroup_cannot_be_deleted'), @cg)
       redirect_to :action => 'list' and return false
     end

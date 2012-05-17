@@ -56,7 +56,7 @@ class Cardgroup < ActiveRecord::Base
   end
 
   def validate_before_destroy
-    if Dialplan.count(:all, :conditions => {:data2 => pin_length, :data1 => number_length, :dptype => 'callingcard'}).to_i > 0 and Cardgroup.count(:all, :conditions => {:pin_length => pin_length, :number_length => number_length}).to_i < 2
+    if Dialplan.count(:all, :conditions => {:data2 => pin_length, :data1 => number_length, :dptype => 'callingcard'}).to_i > 0 and Cardgroup.count(:all, :conditions => {:pin_length => pin_length, :number_length => number_length, :hidden=>0, :owner_id=>owner_id}).to_i < 2
       errors.add(:dialplan, _('Cardgroup_is_associated_with_dialplans'))
       return false
     end
