@@ -3528,7 +3528,7 @@ class ApiController < ApplicationController
             end
           else
             card = Card.find(:first, :conditions => {:callerid => values[:callerid]})
-            if   !card or (card and card.cardgroup.owner_id == @current_user.get_correct_owner_id)
+            if  !card or (card and (card.cardgroup.owner_id == @current_user.get_correct_owner_id) or card.cardgroup.hidden == 1 )
               if card
                 card_by_pin = Card.find(:first, :include => :cardgroup, :conditions => ['cards.pin = ? AND cardgroups.owner_id =? AND cards.id <> ?', values[:pin], @current_user.get_correct_owner_id, card.id])
                 if  card_by_pin
