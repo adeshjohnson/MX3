@@ -897,7 +897,7 @@ class Call < ActiveRecord::Base
     end
 
     cond << "calls.calldate BETWEEN ? AND ?"
-    var += [options[:current_user].system_time("#{options[:a1]} 00:00:00"), options[:current_user].system_time("#{options[:a2]} 23:23:59")]
+    var += [options[:current_user].system_time("#{options[:a1]} 00:00:00"), options[:current_user].system_time("#{options[:a2]} 23:59:59")]
 
     sql = "SELECT calls_hc.hc_code, calls_hc.calls, hangupcausecodes.id, hangupcausecodes.code, hangupcausecodes.description FROM(
               SELECT calls.hangupcause AS 'hc_code', count(calls.id) AS 'calls' FROM calls #{des} WHERE #{ ActiveRecord::Base.sanitize_sql_array([cond.join(' AND '), *var])} GROUP BY hc_code) AS calls_hc
