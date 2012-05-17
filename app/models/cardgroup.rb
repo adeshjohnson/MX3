@@ -6,7 +6,7 @@ class Cardgroup < ActiveRecord::Base
   belongs_to :tax, :dependent => :destroy
   belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'
 
-  has_many :cards, :order => "number ASC", :dependent => :destroy
+  has_many :cards, :conditions => 'hidden = 0', :order => "number ASC", :dependent => :destroy
   has_many :cc_ghostminutepercents, :dependent => :destroy
 
   validates_uniqueness_of :name, :message => _('Cardgroup_name_must_be_unique')
