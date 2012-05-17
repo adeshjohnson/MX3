@@ -512,7 +512,7 @@ class DevicesController < ApplicationController
       end
 
       #------- Network related -------
-      if !@new_device and @device.device_type == 'H323' and params[:host].to_s.strip !~ /\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}/
+      if !@new_device and @device.device_type == 'H323' and params[:host].to_s.strip !~ /^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/
         flash[:notice] = _('Invalid_IP_addess')
         redirect_to :action => 'device_edit', :id =>@device.id and return false
       end
