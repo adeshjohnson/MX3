@@ -762,7 +762,7 @@ class CardgroupsController < ApplicationController
   end
 
   def find_card_group
-    @cg = Cardgroup.includes([:tariff, :lcr,:location, :tax]).where(['id=? and hidden = 0',params[:id]]).first
+    @cg = Cardgroup.includes([:tariff, :lcr,:location, :tax]).where(['cardgroups.id=? and cardgroups.hidden = 0',params[:id]]).first
     unless @cg
       flash[:notice] = _('Cardgroup_was_not_found')
       redirect_to :action => 'list' and return false
