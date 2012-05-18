@@ -821,7 +821,7 @@ ORDER BY dids.did ASC"
         cond << "dids.user_id = ?"
         var << @user.id
         @opts[:user] = @user.id
-        if params[:device] and !params[:device].strip.blank?
+        if params[:device] and not (params[:device].strip.blank? or params[:device].strip.downcase == 'all') 
           @device = current_user.load_users_devices(:first, :conditions => "devices.id = '#{params[:device]}'")
           if @device
             cond << "dids.device_id = ?"
@@ -841,7 +841,7 @@ ORDER BY dids.did ASC"
     @s_user = User.find(:first, :conditions => ["users.id = ?", params[:s_user]])
     if @s_user and @s_user.owner_id == correct_owner_id
 
-      if params[:s_device] and !params[:s_device].strip.blank?
+      if params[:s_device] and not (params[:s_device].strip.blank? or params[:s_device].strip.downcase == 'all') 
         @s_device = current_user.load_users_devices(:first, :conditions => "devices.id = '#{params[:s_device]}'")
         unless @s_device
           flash[:notice] = _("Device_not_found")
