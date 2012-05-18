@@ -192,13 +192,12 @@ class Card < ActiveRecord::Base
   end
 
   def destroy_with_check
-
     if not self.has_calls? and not self.has_activecalls? and not Payment.find(:first, :conditions => ["paymenttype = ? and user_id = ?", "Card", self.id])
       self.destroy
-      return true
     else
-      self.hide
-      return false
+      if Confline.mor_11_extended?
+        self.hide
+      end
     end
   end
 

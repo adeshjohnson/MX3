@@ -96,6 +96,7 @@ class Cardgroup < ActiveRecord::Base
       self.destroy
     else
       self.hidden = 1
+      self.name = "DELETED_#{Time.now}_" + name
       self.save
       Action.add_action_hash(User.current, {:action => 'calling_card_group_deleted_and_hidden', :target_id => id, :target_type => 'CardGroup'})
     end
