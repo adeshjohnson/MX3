@@ -308,7 +308,7 @@ class CardgroupsController < ApplicationController
       flash[:status] = _('Cardgroup_was_deleted')
       redirect_to :action => 'list'
     else
-      flash_errors_for(_('Cardgroup_cannot_be_deleted'), @cg)
+      flash_errors_for(_('Card_was_not_deleted'), cg)
       redirect_to :action => 'list' and return false
     end
   end
