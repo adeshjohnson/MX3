@@ -27,7 +27,7 @@
         <td><b><%= _('Send_Source_As_CID') %>:</b></td>
         <td><%= check_box_tag 'web_callback_send_source', value = "1", Confline.get_value("Web_Callback_Send_Source_As_CID").to_i == 1 %></td>
       </tr>
-      <tr>
+      <tr id="web_callback_cid_row">
         <td></td>
         <td><b><%= _('WEB_Callback_CID') %>:</b></td>
         <td><%= text_field_tag('web_callback_cid', Confline.get_value("WEB_Callback_CID"), "class" => "input", :size => "35", :maxlength => "50") %></td>
@@ -72,23 +72,24 @@
 
 
 <script type="text/javascript">
-    //<![CDATA[
-    Event.observe(window, 'load', function () {
+  //<![CDATA[
+  Event.observe(window, 'load', function() {
+  if($('web_callback_send_source').checked){
+    $('web_callback_cid_row').show();
+  }else{
+    $('web_callback_cid_row').hide();
+  }
+  });
 
-        if ($('web_callback_send_source').checked) {
-            $('web_callback_cid').disabled = true;
-        }
-    });
+  Event.observe($('web_callback_send_source'), 'click', function() {
+   if($('web_callback_send_source').checked){
+     $('web_callback_cid_row').show();
+   }else{
+     $('web_callback_cid_row').hide();
+   }
+  }
+  );
 
-    Event.observe($('web_callback_send_source'), 'click', function () {
-                if ($('web_callback_send_source').checked) {
-                    $('web_callback_cid').disabled = true;
-                }
-                else {
-                    $('web_callback_cid').disabled = false;
-                }
-            }
-    );
 
     //]]>
 </script>
