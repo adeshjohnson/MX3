@@ -3325,6 +3325,8 @@ GROUP BY terminators.id;").map { |t| t.id }
         lrules.each { |lr| lr.destroy } if lrules
         lpt = l.lcr_partials
         lpt.each { |t| t.destroy } if lpt
+        lcrptov = l.lcrproviders
+        lcrptov.each { |p| p.destroy } if lcrptov
         l.destroy }
     end
   end
