@@ -1423,8 +1423,7 @@ in before filter : ard (:find_ard)
   end
 
   def find_devicegroup
-    @devicegroup = Devicegroup.find(:first, :joins => "JOIN users ON users.id = devicegroups.user_id", :conditions => ["devicegroups.id = ? AND users.owner_id = ?", params[:id], current_user.id])
-
+    @devicegroup = Devicegroup.includes(:user).where(["devicegroups.id = ? AND users.owner_id = ?", params[:id], current_user.id]).first
     unless @devicegroup
       flash[:notice] = _('Dev_group_not_found')
       redirect_to(:controller => "callc", :action => "main") and return false
