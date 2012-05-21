@@ -1,0 +1,2697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>permissions_user</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">permissions_user</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/for_permissions_test</td>
+	<td></td>
+</tr>
+<!--pause-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/Accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Please select period to generate invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Visual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=user_tariff_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>name=device[location_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Ouroboros</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_logo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=logo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/translations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Activating - Click on translation to enable/disable it</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=cur_name_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/groups_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/group_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/group_destory/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_addons</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=name_registration_confirmation_for_admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=New Backup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_download/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_restore/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Backup Manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/integrity_check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Destinations not assigned to Destination Groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Asterisk Servers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=server_hostname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Asterisk Servers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>New Provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=provider_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_calls/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_rules/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Provider rules</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_rule_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/provider_rule_destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Rule deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/terminators</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/terminator_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=terminator_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/terminator_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>name=provider_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/terminator_destory/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Terminator deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/details_by_destinations/1?no_direction=true</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Add new destinations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/details/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>System Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=lcr_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=name_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/remove_provider/1?prov=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>LCR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=New tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=tariff_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Rates for tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Afghanistan 93 FIX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=ratedetail_end_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/delete_all_rates/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/make_user_tariff/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=add_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/generate_provider_rates_pdf/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/generate_providers_rates_csv/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/tariffs_list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=tariff_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=name_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/generate_user_rates_pdf/4?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/generate_user_rates_csv/4?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/tariffs_list/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test Tariff + 0.1</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/destroy/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/day_setup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/destination_list/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Anguilla mobile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/destination_new/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=destination_prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/destination_stats/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=direction_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/destroy/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/destination_groups_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/dg_list_destinations/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/dg_new_destinations/1?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Afghanistan FIX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/destination_group_stats/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/destination_group_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=dg_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/destination_group_destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/destination_group_new/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/destination_group_update/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/dg_add_destinations/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/dg_destination_delete/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/dg_list_user_destinations/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=New DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=did_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=did_start</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/did_rates/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=tr.row1 &gt; td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=did_comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/dids_export_to_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=New Dial Plan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/dialplan_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=dialplan[name]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/dialplan_destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list_extlines/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/pbx_functions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=ext</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/pbx_function_edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=ext</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/pbx_function_destroy/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_vm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=vm_retrieve_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>phonebook_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_voice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>IVR Voice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new_voice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=ivr[voice]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit_voice/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=voice[description]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/destroy_sound_file/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/destroy_voice/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_timeperiod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=New Time Period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new_timeperiod</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=period_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit_timeperiod/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=period_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/destroy_timeperiod/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/list_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=New IVR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=ivr_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit_ivr/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=ivr_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/destroy_ivr/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/rerating</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/localization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/functions/location_rules/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/location_rule_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/location_devices/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>name=location</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/location_destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=name_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=service_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=service_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=link_generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_pdf/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_destinations_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_delete/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=s_username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/payments_csv?s_curr=&amp;s_fname=&amp;s_lname=&amp;s_max=&amp;s_min=&amp;s_type=&amp;s_username=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/voucher_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=amount_total</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/vouchers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=s_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/voucher_delete/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=user_link_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/login_as_execute?user=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=user_username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list/0?calltype=answered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=System Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing_user?user=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/device_groups/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Add new Device Group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/device_group_new/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=devicegroup_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/device_group_edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=devicegroup_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/custom_rates/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>name=dg_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/dg_list_destinations/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_acustrates/1?dt=&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=duration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_delete_custom_rate/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions_list/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=add_subscription</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_new/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=subscription_memo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=memo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_confirm_destroy/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log?user_id=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=user_username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/hidden</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=s_username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=description_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=device_description</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/callflow/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Before Call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/callflow_edit/5?cft=before_call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>name=cf_action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/callflow_edit/5?cft=no_answer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>name=cf_action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/callflow_edit/5?cft=busy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>name=cf_action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/callflow_edit/5?cft=failed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>name=cf_action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_dids/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=IAX2/103</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_clis/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=cli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/devices/cli_device_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=cli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_device_delete/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/show?show_rec=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_all_details/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=System Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=device_description</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=System Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=cli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_delete/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data_dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=New group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/members/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Add new member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=group_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>id=group_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/remove_member?group=2&amp;user=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/login_as</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>name=user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices_status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_by_cid_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_destinations_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/pay_invoice/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/send_invoices/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/user_invoices/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaigns</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Name:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>campaign_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/Autodialer/campaign_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_numbers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/import_numbers_from_file/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/delete_all_numbers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_actions/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/action_add/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/action_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/play_rec/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/user_campaigns</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/view_campaign_actions/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
