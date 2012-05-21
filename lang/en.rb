@@ -3311,7 +3311,7 @@ Localization.define('en') do |l|
   l.store 'Dev_group_details_changed', 'Device group details were changed'
   l.store 'Dev_group_not_created', 'Device group was not created' #Mindaugas 2010 05 13
   l.store 'MWI_enable', 'Enable MWI' #Mindaugas 2010 05 13
-  l.store 'Dev_group_not_found', 'Devicegroup not found'
+  l.store 'Dev_group_not_found', 'Device Group was not found'
   l.store 'MWI_Explanation', 'In telephony, a Message Waiting Indicator (MWI) is a telephone calling feature that illuminates a LED on selected telephones to notify a user of waiting voicemail messages. It works on most telephone networks and PBXs.' #Mindaugas 2010 05 14
 
   l.store 'Customrate_not_found', 'Custom rate not found'
