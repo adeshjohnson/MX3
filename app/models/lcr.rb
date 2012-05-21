@@ -9,13 +9,13 @@ class Lcr < ActiveRecord::Base
 =begin rdoc
 
 =end
-  before_destroy :lcr_before_destroy
+  before_destroy :validate_before_destroy
   after_save :equalize_percent
 
-  def lcr_before_destroy
+  def validate_before_destroy
 
     if User.find(:all, :conditions => ["lcr_id = ?", id]).size > 0
-      errors.add(:users, _('Lcr_not_deleted'))
+      errors.add(:users, _('LCR_not_deleted_because_it_is_used_by_some_user(s)'))
       return false
     end
 
@@ -29,11 +29,6 @@ class Lcr < ActiveRecord::Base
       errors.add(:lcr_partials, self.lcr_partials.count.to_s + " " + _('lcr_partials_are_using_this_lcr_cant_delete'))
       return false
     end
-
-    for partial in self.lcr_partials
-      partial.destroy
-    end
-
   end
 
   def providers(order = nil)
@@ -331,6 +326,15 @@ class Lcr < ActiveRecord::Base
 =end
   def no_failover?
     (self.no_failover.to_i != 0 ? true : false)
+  end
+
+  def destroy_all
+    lrules= Locationrule.find(:all, :conditions => "lcr_id='#{id}'")
+    lrules.each { |lr| lr.destroy } if lrules
+    lpt = self.lcr_partials
+    lpt.each { |t| t.destroy } if lpt
+    lcrptov = self.lcrproviders
+    lcrptov.each { |p| p.destroy } if lcrptov
   end
 
 end

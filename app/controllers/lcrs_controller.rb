@@ -104,7 +104,10 @@ class LcrsController < ApplicationController
 
   #in before filter : @lcr
   def destroy
-    if @lcr.destroy
+    @lcr.validate_before_destroy
+    if @lcr.respond_to?(:errors) and @lcr.errors.size == 0
+      @lcr.destroy_all
+      @lcr.destroy
       flash[:status] = _('Lcr_deleted')
     else
       flash_errors_for(_('Lcr_not_deleted'), @lcr)

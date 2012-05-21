@@ -323,7 +323,8 @@ Localization.define('en') do |l|
   l.store 'No_lcrs_found_user_not_functional', 'No available LCR for user. Please create LCR and assign it to user. Otherwise this user will be unable to call.'
 
   l.store 'Lcr_deleted', 'LCR was sucsessfully deleted'
-  l.store 'Lcr_not_deleted', 'LCR not deleted because it is used by some user(s)!'
+  l.store 'Lcr_not_deleted', 'LCR was not deleted'
+  l.store 'LCR_not_deleted_because_it_is_used_by_some_user(s)', 'LCR not deleted because it is used by some user(s)!'
   l.store 'Rate_deleted', 'Rate successfully deleted'
   l.store 'device_created', 'Device created'
   l.store 'device_deleted', 'Device deleted'
