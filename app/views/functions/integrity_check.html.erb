@@ -36,8 +36,7 @@
   </tr>
   <% if @default_user_warning %>
       <tr class='red'>
-        <td align="left" id="default_user_warning">  <%= _('Default_user_warning') %>
-          : <%= _('Default_user_is_set_to_postpaid_and_allowed_loss_calls') %></td>
+        <td align="left" id="default_user_warning">  <%= _('Default_user_warning') %>: <%= _('Default_user_is_set_to_postpaid_and_allowed_loss_calls') %></td>
         <td align="right" id="default_user_warning_size">  <%= @default_users_erors.size.to_i %></td>
         <td align="center" id="fix_default_user"> <%= link_to b_fix + _('Fix'), :controller => "users", :action => "default_user_errors_list" %> </td>
       </tr>
