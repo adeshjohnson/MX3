@@ -53,7 +53,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT+05:00) Islamabad, Karachi, Tashkent</td>
 </tr>
 <tr>
@@ -112,6 +112,11 @@
 	<td>2012-01-01</td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>id=daily_charge_20</td>
 	<td>2013-12-01</td>
@@ -122,13 +127,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Manual</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT-03:00) Brasilia, Buenos Aires, Greenland</td>
 </tr>
 <tr>
@@ -187,12 +187,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>id=card_first_use_4i</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>id=card_first_use_5i</td>
 	<td></td>
 </tr>
@@ -241,17 +241,6 @@
 	<td>id=card_first_use_3i</td>
 	<td>label=31</td>
 </tr>
-<!--3. Nors laiko ir neberodo, /billing/cards/edit/X vistiek leidžia pasirinkti laiką. o kam?-->
-<tr>
-	<td>select</td>
-	<td>id=card_first_use_4i</td>
-	<td>label=23</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=card_first_use_5i</td>
-	<td>label=59</td>
-</tr>
 <tr>
 	<td>select</td>
 	<td>id=card_daily_charge_paid_till_1i</td>
@@ -264,7 +253,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=card[user_id]</td>
+	<td>id=card_user_id</td>
 	<td>label=Test Reseller</td>
 </tr>
 <tr>
@@ -284,7 +273,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT+13:00) Nuku'alofa</td>
 </tr>
 <tr>
@@ -327,11 +316,10 @@
 	<td>/billing/cards/user_list</td>
 	<td></td>
 </tr>
-<!--5. Jei adminas laiko nemato, tai manau ir card distributorius turėtų matyti tik datą be laiko.-->
 <tr>
 	<td>assertText</td>
 	<td>id=first_use_20</td>
-	<td>2018-01-01 12:59:00</td>
+	<td>2017-12-31</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -358,11 +346,10 @@
 	<td>/billing/cards/list?cg=1&amp;clean=1</td>
 	<td></td>
 </tr>
-<!--4. NOrs laiko ir neberodo, pakeitus time zone vistiek galiu padaryti kad first use yra vėliau nei pay daily charge till-->
 <tr>
 	<td>assertText</td>
 	<td>id=first_use_20</td>
-	<td>2017-12-31</td>
+	<td>2017-12-30</td>
 </tr>
 <tr>
 	<td>assertText</td>
