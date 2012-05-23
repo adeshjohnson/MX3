@@ -54,9 +54,9 @@
               <%= hidden_field_tag 'amount', "interval" %>
 
               <% if @notice %>
-                  <%= submit_tag(_('ok'), :confirm => _('Are_you_sure'), :method => :post, :disable_with => _('Processing..')) %>
+                  <%= submit_tag(_('ok'), :onclick => "return confirm('#{_('Are_you_sure')}')", :confirm => _('Are_you_sure'), :method => :post, :disable_with => _('Processing..')) %>
               <% else %>
-                  <%= submit_tag _('ok'), :disable_with => _('Processing..') %>
+                  <%= submit_tag _('ok'), :onclick => "return confirm('#{_('Are_you_sure')}')", :disable_with => _('Processing..') %>
               <% end %>
           <% end %>
         </td>
