@@ -8,7 +8,7 @@ module ApplicationHelper
   #    end
 
   def tooltip(title, text)
-    "onmouseover=\"Tip(\' #{text} \', WIDTH, -600, TITLE, '#{title}', TITLEBGCOLOR, '#494646', FADEIN, 200, FADEOUT, 200 )\" onmouseout = \"UnTip()\""
+    raw "onmouseover=\"Tip(\' #{text} \', WIDTH, -600, TITLE, '#{title}', TITLEBGCOLOR, '#494646', FADEIN, 200, FADEOUT, 200 )\" onmouseout = \"UnTip()\"".html_safe
   end
 
   def weekday_name(day)
@@ -1429,8 +1429,8 @@ conf_name - name of confline that will be represented by checkbox.
 =end
   def nice_user_tooltip(user)
     if user
-      user_details = "<b>#{_('Tariff')}:</b> #{user.try(:tariff_name)} <br> <b>#{_('LCR')}:</b> #{user.try(:lcr_name)}<br> <b>#{_('Credit')}:</b> #{nice_credit(user)}"
-      address_details = "<br> <b>#{_('Country')}:</b> #{user.try(:county)}<br> <b>#{_('City')}:</b> #{user.try(:city)}"
+      user_details = raw "<b>#{_('Tariff')}:</b> #{user.try(:tariff_name)} <br> <b>#{_('LCR')}:</b> #{user.try(:lcr_name)}<br> <b>#{_('Credit')}:</b> #{nice_credit(user)}".html_safe
+      address_details = raw "<br> <b>#{_('Country')}:</b> #{user.try(:county)}<br> <b>#{_('City')}:</b> #{user.try(:city)}".html_safe
       tooltip('User details', (user_details + address_details).html_safe)
     end
   end
