@@ -675,7 +675,7 @@ class PaymentsController < ApplicationController
       @amount = params[:amount].to_f
       @am_typ = "ammount"
       @user.get_tax
-      @real_amount = @user.tax.apply_tax(@amount)
+      @real_amount = @user.get_tax.apply_tax(@amount)
     else
       @am_typ = "amount_with_tax"
       @real_amount = params[:amount_with_tax].to_f #if !params[:amount_with_tax].blank?
