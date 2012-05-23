@@ -1259,10 +1259,10 @@ module ApplicationHelper
   end
 
   def ordered_list_header(true_col_name, user_col_name, col_header_name, options)
-    link_to(
-        (b_sort_desc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 1).to_s+
-            (b_sort_asc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 0).to_s+
-            _(col_header_name.to_s), :action => params[:action], :order_by => user_col_name.to_s, :order_desc => (options[:order_by].to_s == true_col_name ? 1 - options[:order_desc] : 1))
+    raw link_to(
+        (b_sort_desc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 1).to_s.html_safe+
+            (b_sort_asc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 0).to_s.html_safe+
+            _(col_header_name.to_s.html_safe), :action => params[:action], :order_by => user_col_name.to_s, :order_desc => (options[:order_by].to_s == true_col_name ? 1 - options[:order_desc] : 1)).html_safe
   end
 
   # suformuoja tabų pavadinimus javascriptui
