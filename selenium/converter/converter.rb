@@ -281,6 +281,8 @@ class Command < Base
         line = "assert_equal #{@value}, @selenium.get_selected_label(#{@target})"
       when 'assertNotSelectedLabel'
         line = "assert_not_equal #{@value}, @selenium.get_selected_label(#{@target})"
+      when 'assertNotVisible'
+        line = "assert !60.times{ break if (@selenium.is_visible(#{@target}) rescue false); sleep 1 }"
       when "assertChecked"
         line = "assert @selenium.is_checked(#{@target})"
       when "waitForElementPresent"
