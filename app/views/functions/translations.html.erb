@@ -41,7 +41,7 @@
                      native_name = ""
                      native_name += " / " + translation.native_name if translation.native_name.length > 0 %>
                   <%#= link_to_remote(flag + " " + translation.name + native_name, {:update => 'items', :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');", :url => {:action => "translations_change_status", :id => tr.id}}, {:style => "#{style}", :id=> "translation_#{translation.id}_#{tr.active}"}) %>
-                  <a style="<%= style %>" onclick="new Ajax.Updater('items', '<%=Web_Dir%>/functions/translations_change_status/<%=tr.id%>', {asynchronous:true, evalScripts:true }); return false;" href="#">
+                  <a style="<%= style %>" id=<%= "translation_#{translation.id}_#{tr.active}" %> onclick="new Ajax.Updater('items', '<%=Web_Dir%>/functions/translations_change_status/<%=tr.id%>', {asynchronous:true, evalScripts:true }); return false;" href="#">
                     <%= flag + " " + translation.name + native_name %>
                   </a>
 
