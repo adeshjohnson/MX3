@@ -216,7 +216,7 @@ module PdfGen
 
     # ******************************************** Rates ###############################################################
 
-    def Generate.generate_personal_rates(dgroups, tariff, tax, usr, options)
+    def Generate.generate_personal_rates(pdf, dgroups, tariff, tax, usr, options)
       digits = Confline.get_value("Nice_Number_Digits").to_i
       gnd = Confline.get_value("Global_Number_Decimal").to_s
       exrate = Currency.count_exchange_rate(tariff.currency, options[:currency])

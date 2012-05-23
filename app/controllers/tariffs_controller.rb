@@ -2975,7 +2975,7 @@ class TariffsController < ApplicationController
         :currency => session[:show_currency]
     }
     pdf = PdfGen::Generate.generate_rates_header(options)
-    pdf = PdfGen::Generate.generate_personal_rates(dgroups, @tariff, tax, @user, options)
+    pdf = PdfGen::Generate.generate_personal_rates(pdf, dgroups, @tariff, tax, @user, options)
 
     filename = "Rates-Personal-#{@user.username}-#{session[:show_currency]}.pdf"
     file = pdf.render
