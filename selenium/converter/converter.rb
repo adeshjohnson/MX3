@@ -279,6 +279,8 @@ class Command < Base
         line = "begin\n    assert_not_equal #{@value}, @selenium.get_select_options(#{@target}).join(\",\")\nrescue Exception=>e\n    @verification_errors << e\nend"
       when 'assertSelectedLabel'
         line = "assert_equal #{@value}, @selenium.get_selected_label(#{@target})"
+      when 'assertNotSelectedLabel'
+        line = "assert_not_equal #{@value}, @selenium.get_selected_label(#{@target})"
       when "assertChecked"
         line = "assert @selenium.is_checked(#{@target})"
       when "waitForElementPresent"
