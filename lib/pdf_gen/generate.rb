@@ -696,16 +696,16 @@ module PdfGen
     for call in calls
       item = []
       #calldate2 - because something overwites calldate when changing date format
-      item << call.calldate2
-      item << {:text => nice_src(call, {:pdf => 1}), :align => :left}
-      item << {:text => hide_dst_for_user(current_user, "pdf", call.dst.to_s), :align => :left}
+      item << call.calldate2.to_s
+      item << {:text => nice_src(call, {:pdf => 1}).to_s, :align => :left}
+      item << {:text => hide_dst_for_user(current_user, "pdf", call.dst.to_s).to_s, :align => :left}
       item << nice_time(call['nice_billsec'])
-      item << call.dispod
+      item << call.dispod.to_s
 
       if ['admin', 'accountant'].include?(usertype)
 
-        item << call.server_id
-        item << call['provider_name']
+        item << call.server_id.to_s
+        item << call['provider_name'].to_s
         if main_options[:can_see_finances]
 
           item << nice_number(call['provider_rate'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
@@ -713,7 +713,7 @@ module PdfGen
         end
         if main_options[:rs_active]
 
-          item << call['nice_reseller']
+          item << call['nice_reseller'].to_s
           if main_options[:can_see_finances]
 
             item << nice_number(call['reseller_rate'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
@@ -721,14 +721,14 @@ module PdfGen
           end
         end
 
-        item << call['user']
+        item << call['user'].to_s
         if main_options[:can_see_finances]
 
           item << nice_number(call['user_rate'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
           item << nice_number(call['user_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         end
 
-        item << {:text => call['did'], :align => :left}
+        item << {:text => call['did'].to_s, :align => :left}
         if main_options[:can_see_finances]
 
           item << nice_number(call['did_prov_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
@@ -740,7 +740,7 @@ module PdfGen
           if usertype == 'reseller'
             if current_user.reseller_allow_providers_tariff?
 
-              item << call['provider_name']
+              item << call['provider_name'].to_s
               if main_options[:can_see_finances]
 
                 item << nice_number(call['reseller_rate'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
@@ -750,14 +750,14 @@ module PdfGen
 
             item << nice_number(call['reseller_rate'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
             item << nice_number(call['reseller_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
-            item << call['user']
+            item << call['user'].to_s
             item << nice_number(call['user_rate'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
             item << nice_number(call['user_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
-            item << call['did']
+            item << call['did'].to_s
           end
           if usertype == 'user'
 
-            item << call['prefix']
+            item << call['prefix'].to_s
             item << nice_number(call['user_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
           end
         end
@@ -802,7 +802,7 @@ module PdfGen
     items << item
 
     Rails.logger.fatal h2.to_yaml
-    Rails.logger.fatal items.to_yaml
+
 
     pdf.table(items,
               :width => 540, :border_width => 0,
