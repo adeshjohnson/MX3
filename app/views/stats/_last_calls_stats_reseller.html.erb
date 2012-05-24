@@ -113,15 +113,15 @@
           <% call.processed == 0 ? text_class="n" : text_class="n_disabled" -%>
           <tr class="row<%= (i % 2 + 1).to_s %>">
             <td id="calldate_<%= call.id %>" class="<%= text_class %>" align="center"><%= nice_date_time call.calldate %></td>
-            <td id="src_<%= call.id %>" class="<%= text_class %>"><%= h(nice_src(call)) %></td>
+            <td id="src_<%= call.id %>" class="<%= text_class %>"><%= h(nice_src(call)).html_safe %></td>
 
             <% if @show_destination %>
-                <%= show_call_dst(call, text_class) %>
+                <%= show_call_dst(call, text_class).html_safe %>
             <% end %>
-            <%= call_duration(call, text_class, @call_type) %>
+            <%= call_duration(call, text_class, @call_type).html_safe %>
 
             <% if @call_type != "answered" %>
-                <td id="disposition_<%= call.id %>" <%= "onmouseover=\"Tip(\'" + get_hangup_cause_message(call.hangupcause) + "\')\" onmouseout = \"UnTip()\"" if call.hangupcause and Confline.get_value('Show_HGC_for_Resellers').to_i == 1 %> >
+                <td id="disposition_<%= call.id %>" <%= "onmouseover=\"Tip(\'" + get_hangup_cause_message(call.hangupcause).html_safe + "\')\" onmouseout = \"UnTip()\"" if call.hangupcause and Confline.get_value('Show_HGC_for_Resellers').to_i == 1 %> >
                   <%= call.disposition %>
                   <%= " (" + call.hangupcause.to_s + ")" if Confline.get_value('Show_HGC_for_Resellers').to_i == 1 and session[:usertype] == 'reseller' %>
                 </td>
