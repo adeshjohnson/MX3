@@ -334,9 +334,9 @@ class ProvidersController < ApplicationController
   end
 
   def update
-    params[:provider][:name]=params[:provider][:name].strip
-    params[:provider][:timeout]= params[:provider][:timeout].strip
-    params[:provider][:max_timeout]= params[:provider][:max_timeout].strip
+    params[:provider][:name]=params[:provider][:name].to_s.strip
+    params[:provider][:timeout]= params[:provider][:timeout].to_s.strip
+    params[:provider][:max_timeout]= params[:provider][:max_timeout].to_s.strip
 
     #5618#comment:13 if timeout value is invalid(its not positive integer) we discard that value 
     params[:provider].delete(:timeout) if params[:provider][:timeout] !~ /^[0-9]+$/ 
