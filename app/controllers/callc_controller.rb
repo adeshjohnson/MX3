@@ -672,6 +672,9 @@ class CallcController < ApplicationController
         if t.to_i != old_tz.to_i and Confline.get_value('System_time_zone_daylight_savings').to_i == 1
           # ========================== System time ofset update users ================================
           diff = t.to_i - old_tz.to_i
+          logger.fatal      diff
+          logger.fatal      t
+          logger.fatal      old_tz
           sql = "UPDATE users SET time_zone = ((time_zone + #{diff.to_f}) % 24);;"
           ActiveRecord::Base.connection.execute(sql)
           MorLog.my_debug("System time ofset update users", 1)
