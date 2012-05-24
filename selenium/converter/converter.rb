@@ -257,6 +257,8 @@ class Command < Base
         line ="begin\n     assert @selenium.is_text_present(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
       when "verifyTextNotPresent"
         line = "begin\n    assert !@selenium.is_text_present(#{@target})\nrescue Exception=>e\n    @verification_errors << e\nend"
+      when "assertTextPresent"
+        line = "assert @selenium.is_text_present(#{@target})"
       when "assertTextNotPresent"
         line = "assert !@selenium.is_text_present(#{@target})"
       when "assertText"
