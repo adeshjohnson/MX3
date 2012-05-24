@@ -73,8 +73,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/dids/bulk_management</td>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'Bulk management')])[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -256,7 +261,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>DID rates in specified interval can have different properties, so please note that you are viewing default properties Provider's rate. This rate is paid to or by provider for using this DID</td>
+	<td>DID rates in specified interval can have different properties, so please note that you are viewing default properties </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Provider's rate. This rate is paid to or by provider for using this DID </td>
 	<td></td>
 </tr>
 <tr>
