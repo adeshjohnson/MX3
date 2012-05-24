@@ -2069,34 +2069,34 @@ class TariffsController < ApplicationController
     if @ards[0].daytype.to_s == ""
       @WDFD = true
 
-      sql = "SELECT start_time, end_time FROM aratedetails WHERE daytype = '' AND rate_id = #{@rate.id}  GROUP BY start_time ORDER BY start_time ASC"
+      sql = "SELECT TIME(start_time) start_time, TIME(end_time) end_time FROM aratedetails WHERE daytype = '' AND rate_id = #{@rate.id}  GROUP BY start_time ORDER BY start_time ASC"
       res = ActiveRecord::Base.connection.select_all(sql)
       @st_arr = []
       @et_arr = []
       for r in res
-        @st_arr << r["start_time"]
-        @et_arr << r["end_time"]
+        @st_arr << r["start_time"].strftime("%H:%M:%S")
+        @et_arr << r["end_time"].strftime("%H:%M:%S")
       end
 
     else
       @WDFD = false
 
-      sql = "SELECT start_time, end_time FROM aratedetails WHERE daytype = 'WD' AND rate_id = #{@rate.id}  GROUP BY start_time ORDER BY start_time ASC"
+      sql = "SELECT TIME(start_time) start_time, TIME(end_time) end_time FROM aratedetails WHERE daytype = 'WD' AND rate_id = #{@rate.id}  GROUP BY start_time ORDER BY start_time ASC"
       res = ActiveRecord::Base.connection.select_all(sql)
       @Wst_arr = []
       @Wet_arr = []
       for r in res
-        @Wst_arr << r["start_time"]
-        @Wet_arr << r["end_time"]
+        @Wst_arr << r["start_time"].strftime("%H:%M:%S")
+        @Wet_arr << r["end_time"].strftime("%H:%M:%S")
       end
 
-      sql = "SELECT start_time, end_time FROM aratedetails WHERE daytype = 'FD' AND rate_id = #{@rate.id} GROUP BY start_time ORDER BY start_time ASC"
+      sql = "SELECT TIME(start_time) start_time, TIME(end_time) end_time FROM aratedetails WHERE daytype = 'FD' AND rate_id = #{@rate.id} GROUP BY start_time ORDER BY start_time ASC"
       res = ActiveRecord::Base.connection.select_all(sql)
       @Fst_arr = []
       @Fet_arr = []
       for r in res
-        @Fst_arr << r["start_time"]
-        @Fet_arr << r["end_time"]
+        @Fst_arr << r["start_time"].strftime("%H:%M:%S")
+        @Fet_arr << r["end_time"].strftime("%H:%M:%S")
       end
 
     end
