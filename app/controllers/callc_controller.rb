@@ -521,9 +521,9 @@ class CallcController < ApplicationController
 
   def global_set_tz
     if Confline.get_value('System_time_zone_ofset_changed').to_i == 0
-      sql = "select timediff(now(),convert_tz(now(),@@session.time_zone,'+00:00'));"
-      z = ActiveRecord::Base.connection.select_value(sql)
-      t = z.to_i
+      sql = 'select HOUR(timediff(now(),convert_tz(now(),@@session.time_zone,\'+00:00\'))) as u;'
+      z = ActiveRecord::Base.connection.select_all(sql)[0]['u']
+      t = z.to_s.to_i
       Confline.set_value('System_time_zone_ofset', t.to_i, 0)
       Confline.set_value('System_time_zone_ofset_changed', 1, 0)
       users = User.find(:all)
@@ -664,10 +664,10 @@ class CallcController < ApplicationController
         #======================== Cron actions =====================================
         CronAction.do_jobs
         #======================== System time ofset =====================================
-        sql = "select timediff(now(),convert_tz(now(),@@session.time_zone,'+00:00'));"
-        z = ActiveRecord::Base.connection.select_value(sql)
+        sql = 'select HOUR(timediff(now(),convert_tz(now(),@@session.time_zone,\'+00:00\'))) as u;'
+        z = ActiveRecord::Base.connection.select_all(sql)[0]['u']
         MorLog.my_debug("GET global time => #{z.to_yaml}", 1)
-        t = z.to_i
+        t = z.to_s.to_i
         old_tz= Confline.get_value('System_time_zone_ofset')
         if t.to_i != old_tz.to_i and Confline.get_value('System_time_zone_daylight_savings').to_i == 1
           # ========================== System time ofset update users ================================
