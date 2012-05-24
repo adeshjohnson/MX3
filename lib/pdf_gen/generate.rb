@@ -23,7 +23,7 @@ module PdfGen
                  {:text => _('called_to')}.merge(top_options),
                  {:text => _('duration')}.merge(top_options),
                  {:text => _('hangup_cause')}.merge(top_options)]
-      headers2 = [{:text => ' ', :colspan => 6}]
+      headers2 = [{:text =>'', :colspan => 6}]
 
       if options[:pdf_last_calls].to_i == 1
         if ['admin', 'accountant'].include?(usertype)
