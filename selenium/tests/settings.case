@@ -65,7 +65,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_11 &gt; span</td>
+	<td>//div[@name='visual']</td>
 	<td></td>
 </tr>
 <tr>
@@ -2120,7 +2120,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Balance(USD)</td>
+	<td>Balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>USD</td>
 	<td></td>
 </tr>
 <tr>
@@ -2135,7 +2140,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Balance(EUR)</td>
+	<td>Balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>USD</td>
 	<td></td>
 </tr>
 <!--* check wether visibility of 'credit' row changes on account type change-->
@@ -2168,6 +2178,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings succesfully changed: System Admin</td>
 	<td></td>
 </tr>
 <tr>
