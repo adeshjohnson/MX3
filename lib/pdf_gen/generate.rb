@@ -802,6 +802,7 @@ module PdfGen
     items << item
 
     Rails.logger.fatal h2.to_yaml
+    Rails.logger.fatal items.to_yaml
 
     pdf.table(items,
               :width => 540, :border_width => 0,
