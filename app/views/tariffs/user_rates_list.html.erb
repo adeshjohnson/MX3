@@ -1,6 +1,6 @@
 <table width="100%">
   <tr>
-    <td><%= link_nice_tariff_retail(@tariff) %></td>
+    <td><%= link_nice_tariff_retail(@tariff).html_safe %></td>
     <td align="right" nowrap><%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %></td>
   </tr>
 </table>
@@ -101,7 +101,7 @@
                           <% res['arates_size'].to_i %></td>
                     <% end %>
                 <% else %>
-                    <td id="price_<%= rate_id %>" colspan="2" align="center"><%= _('Check_advanced_rates') + b_forward %></td>
+                    <td id="price_<%= rate_id %>" colspan="2" align="center"><%= (_('Check_advanced_rates') + b_forward).html_safe %></td>
                 <% end %>
 
                 <td id="rates_<%= rate_id %>" align="center"><%= link_to b_rates, {:action => 'user_arates_full', :id => @tariff.id, :dg => res['dg_id'].to_i}, {:id => "rates_link_"+rate_id.to_s} %> </td>
