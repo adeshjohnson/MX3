@@ -1267,7 +1267,7 @@ module ApplicationHelper
 
   # suformuoja tabų pavadinimus javascriptui
   def gateway_tabs(gateway_names)
-    gateway_names.collect { |gw| gw.inspect }.join(",")
+    gateway_names.collect { |gw| gw.inspect }.join(",").html_safe
   end
 
   def gateways_enabled
