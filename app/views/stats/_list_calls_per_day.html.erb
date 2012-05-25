@@ -30,7 +30,7 @@
                 <td align="right" id='acd1_<%= i %>'><%= nice_time(0) %>  </td>
                 <td align="right" id='asr1_<%= i %>'><%= nice_number(0) %> %</td>
             <% end %>
-            <td align="right" id='fail_<%= i %>'> <%= res['fail'] %></td>
+            <td align="right" id='fail_<%= i %>'> <%= res['fail'].to_i %></td>
             <td align="right" id='fail2_<%= i %>'> <%= nice_number((res['fail'].to_f / res['calls'].to_f) *100) %><%= "%" %></td>
             <% if can_see_finances? -%>
                 <td align="right" id='price_<%= i %>'> <%= nice_number res['user_price'] %></td>
@@ -78,7 +78,7 @@
             <th id="total_acd" align="right"><%= nice_number(0) %> </th>
             <th id="total_asr" align="right"><%= nice_number(0) %> %</th>
         <% end %>
-        <th id="total_failed" align="right"> <%= total_fail_calls %></th>
+        <th id="total_failed" align="right"> <%= total_fail_calls.to_i %></th>
         <th id="total_failed_percent" align="right"> <%= nice_number((total_fail_calls.to_f / total_calls.to_f) *100) if total_calls.to_f != 0 %>
           %
         </th>
