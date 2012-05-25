@@ -43,7 +43,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>Action was not found</td>
+	<td> You are not authorized to view this page</td>
 	<td></td>
 </tr>
 <!--Set taxes for ADMIN-->
@@ -359,8 +359,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/cards/destroy/23</td>
+	<td>clickAndWait</td>
+	<td>css=#delete_link_23 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
@@ -380,7 +385,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please select file</td>
+	<td>Please upload file</td>
 	<td></td>
 </tr>
 <tr>
@@ -944,7 +949,17 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/destroy/34</td>
+	<td>/billing/cards/list?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_link_34 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
@@ -964,7 +979,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please select file</td>
+	<td>Please upload file</td>
 	<td></td>
 </tr>
 <tr>
@@ -1010,7 +1025,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>You do not have rights to edit this</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <!--Create new cardgroup and later test if LCR is set correctly.-->
@@ -1075,7 +1090,7 @@
 <tr>
 	<td>verifyExpression</td>
 	<td>${a}</td>
-	<td>9 / 510 / 4</td>
+	<td>9 / 5,10 / 4</td>
 </tr>
 <!--Create LCR and assign it to reseller-->
 <tr>
@@ -2256,7 +2271,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>You do not have rights to edit this</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
@@ -3180,7 +3195,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@name='visual']</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_10 &gt; span</td>
 	<td></td>
 </tr>
 <tr>
