@@ -30,7 +30,7 @@ module DevicesHelper
           output += b_cross + _('Fax_detect_not_functional_please_select_fax_device') + "<br>" if cf.data2 == ""
       end
     end
-    output
+    output.html_safe
   end
 
   def print_cf_type(cft)
