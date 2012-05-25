@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
 
+
   if !Rails.env.development?
     rescue_from Exception do |exc|
       #log_exception_handler(exc) and return false
