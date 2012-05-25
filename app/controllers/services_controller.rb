@@ -317,8 +317,8 @@ class ServicesController < ApplicationController
   def subscription_create
     @sub = Subscription.new(params[:subscription])
     @sub.user_id = @user.id
-    @sub.activation_start = Time.mktime(params[:activation_start][:year], params[:activation_start][:month], params[:activation_start][:day], params[:activation_start][:hour], params[:activation_start][:minute])
-    @sub.activation_end = Time.mktime(params[:activation_end][:year], params[:activation_end][:month], params[:activation_end][:day], params[:activation_end][:hour], params[:activation_end][:minute])
+    @sub.activation_start = Time.gm(params[:activation_start][:year], params[:activation_start][:month], params[:activation_start][:day], params[:activation_start][:hour], params[:activation_start][:minute])
+    @sub.activation_end = Time.gm(params[:activation_end][:year], params[:activation_end][:month], params[:activation_end][:day], params[:activation_end][:hour], params[:activation_end][:minute])
 
     @sub.added = @sub.added - @sub.added.strftime("%S").to_i.seconds
 
