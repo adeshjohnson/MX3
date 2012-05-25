@@ -47,4 +47,6 @@ gem 'prawnto'
 # To api tariff import/export
 gem 'xml-simple'
 
+gem 'session_off'
+
 

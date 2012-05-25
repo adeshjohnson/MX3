@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApiController < ApplicationController
 
-  #session :off, :only => [:create_payment]
+  session :off, :only => [:create_payment]
 
   include SqlExport
 
