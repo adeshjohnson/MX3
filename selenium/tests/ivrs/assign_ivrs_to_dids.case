@@ -152,6 +152,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForTextPresent</td>
 	<td>DID interval was successfully created</td>
 	<td></td>
@@ -468,7 +473,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -649,7 +654,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>IVR not found</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <!--reseller 3 login-->
@@ -789,7 +794,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
