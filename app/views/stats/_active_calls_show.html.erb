@@ -3,17 +3,17 @@
     <table width="100%" class="maintable">
       <tr>
         <th align="center"></th>
-        <th align="center"><%= remote_sortable_list_header("answer_time", _('Start_time'), @options) %></th>
-        <th align="center"><%= remote_sortable_list_header("duration", _('Duration'), @options) %></th>
-        <th align="left"><%= remote_sortable_list_header("src", _('Source') + " (#{_("Caller")})", @options) %></th>
-        <th align="left"><%= remote_sortable_list_header("localized_dst", _('Destination') + " (#{_("Callee")})", @options) %></th>
+        <th align="center"><%= remote_sortable_list_header("answer_time", _('Start_time'), @options).html_safe %></th>
+        <th align="center"><%= remote_sortable_list_header("duration", _('Duration'), @options).html_safe %></th>
+        <th align="left"><%= remote_sortable_list_header("src", _('Source') + " (#{_("Caller")})", @options).html_safe %></th>
+        <th align="left"><%= remote_sortable_list_header("localized_dst", _('Destination') + " (#{_("Callee")})", @options).html_safe %></th>
         <% if @show_did %>
-            <th align="right"><%= remote_sortable_list_header("did", _('DID'), @options) %></th>
+            <th align="right"><%= remote_sortable_list_header("did", _('DID'), @options).html_safe %></th>
         <% end %>
         <% if session[:usertype] == "admin" or allow_manage_providers? %>
-            <th align="left"><%= remote_sortable_list_header("provider_name", _('Provider'), @options) %></th>
+            <th align="left"><%= remote_sortable_list_header("provider_name", _('Provider'), @options).html_safe %></th>
             <% if show_servers and !current_user.is_reseller? %>
-                <th align="right"><%= remote_sortable_list_header("server_id", _('Server'), @options) %></th>
+                <th align="right"><%= remote_sortable_list_header("server_id", _('Server'), @options).html_safe %></th>
             <% end %>
         <% end %>
         <% if monitorings_addon_active? and not @chanspy_disabled %>

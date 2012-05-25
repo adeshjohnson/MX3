@@ -1158,14 +1158,14 @@ module ApplicationHelper
   end
 
   def remote_sortable_list_header(true_col_name, col_header_name, options)
-    link_to_remote(
-        (b_sort_desc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 1).to_s +
-            (b_sort_asc if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 0).to_s +
-            col_header_name,
+    raw link_to_remote(
+        (b_sort_desc.html_safe if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 1).to_s.html_safe +
+            (b_sort_asc.html_safe if options[:order_by].to_s == true_col_name.to_s and options[:order_desc]== 0).to_s.html_safe +
+            col_header_name.html_safe,
         {:update => options[:update],
          :url => {:controller => options[:controller].to_s, :action => options[:action].to_s, :order_by => true_col_name.to_s, :order_desc => (options[:order_by].to_s == true_col_name ? 1 - options[:order_desc] : 1)},
          :loading => "Element.show('spinner');",
-         :complete => "Element.hide('spinner');"}, {:class => "sortable_column_header"})
+         :complete => "Element.hide('spinner');"}, {:class => "sortable_column_header"}).html_safe
   end
 
   def nice_list_order(user_col_name, col_header_name, options, params_sort={})
