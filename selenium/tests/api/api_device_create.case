@@ -195,7 +195,7 @@
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>id=device[device_type]_sip</td>
+	<td>id=device_device_type_SIP</td>
 	<td>on</td>
 </tr>
 <!--Try to create device for user Reseller and specify device_group that is reseller's, but dont specify type. it should default to SIP-->
@@ -246,7 +246,7 @@
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>id=device[device_type]_sip</td>
+	<td>id=device_device_type_SIP</td>
 	<td>on</td>
 </tr>
 <!--Create new IAX2 device for User Test #1. were not sending device group, but device must be created without device group-->
@@ -297,7 +297,7 @@
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>id=device[device_type]_iax2</td>
+	<td>id=device_device_type_IAX2</td>
 	<td>on</td>
 </tr>
 <!--Create device group for user Test Reseller-->
@@ -364,7 +364,7 @@
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>id=device[device_type]_sip</td>
+	<td>id=device_device_type_SIP</td>
 	<td>on</td>
 </tr>
 <!--As admin create new H323 device  for user User Test #1-->
@@ -466,7 +466,7 @@
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>id=device[device_type]_fax</td>
+	<td>id=device_device_type_FAX</td>
 	<td>on</td>
 </tr>
 <!--As admin create new ZAP device  for user User Test #1-->
@@ -517,7 +517,7 @@
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>id=device[device_type]_zap</td>
+	<td>id=device_device_type_ZAP</td>
 	<td>on</td>
 </tr>
 <!--As admin create new virtual device  for user User Test #1-->
@@ -568,7 +568,7 @@
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>id=device[device_type]_virtual</td>
+	<td>id=device_device_type_Virtual</td>
 	<td>on</td>
 </tr>
 <!--As admin try to create new invalid SIPIAX2 device  for user User Test #1, we should gracefully fail.-->
@@ -1039,7 +1039,7 @@
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>id=device[device_type]_sip</td>
+	<td>id=device_device_type_SIP</td>
 	<td>on</td>
 </tr>
 <!--Create new IAX2 device for reseller's user. were not sending device group, but device must be created without device group-->
@@ -1075,7 +1075,7 @@
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>id=device[device_type]_iax2</td>
+	<td>id=device_device_type_IAX2</td>
 	<td>on</td>
 </tr>
 <!--As reseller create new SIP device  for user reseller's user, without group or with users device group-->
@@ -1111,7 +1111,7 @@
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>id=device[device_type]_sip</td>
+	<td>id=device_device_type_SIP</td>
 	<td>on</td>
 </tr>
 <!--As reseller cannot create new ZAP-->
@@ -1231,7 +1231,7 @@
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>id=device[device_type]_virtual</td>
+	<td>id=device_device_type_Virtual</td>
 	<td>on</td>
 </tr>
 <!--Admin or reseler user shouldnt have permissions to create device-->
