@@ -692,7 +692,7 @@ module PdfGen
 
     items = []
     h, h2 = call_list_to_pdf_header(pdf, main_options[:direction], usertype, 0, options)
-    items << h2 if current_user.usertype != 'user'
+    items << h2 if current_user.usertype.to_s != 'user'
     for call in calls
       item = []
       #calldate2 - because something overwites calldate when changing date format
