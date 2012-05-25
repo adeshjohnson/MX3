@@ -1015,7 +1015,6 @@ class AccountingController < ApplicationController
         text += "\n" + type
         text += "\n" + filename
         text += "\n" + "currency => #{dc}"
-        text += "\n" + "tax => #{tax_amount}"
         text += "\n" + "avg_rate => #{arr_t.to_yaml}" if arr_t
         render :text => text
       else
