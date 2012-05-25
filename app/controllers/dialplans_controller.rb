@@ -256,7 +256,7 @@ class DialplansController < ApplicationController
 
     if !params[:dialplan] or params[:dialplan][:name].blank?
       flash[:notice] = _('Please_enter_name')
-      redirect_to :controller => :callc, :action => :main and return false
+      redirect_to :action => :new and return false
     end
     params[:dialplan][:name]=params[:dialplan][:name].strip
 
