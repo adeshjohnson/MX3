@@ -239,6 +239,7 @@ class ApplicationController < ActionController::Base
   # puts correct language
   def check_localization
     # ---- language ------
+    Time.zone = 0
     if params[:lang] && Localization.l10s.has_key?(params[:lang]) # check wether such translation is present in lang/* translation files.
       Localization.lang = params[:lang]
       session[:lang] = params[:lang]
