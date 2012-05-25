@@ -151,7 +151,7 @@
       <td align="right" id="cards">
         <%= @cardgroup.cards.size %> <%= link_to("(" + _('View') + ")", :controller => "cards", :action => "list", :cg => @cardgroup, :clean => 1) if @cardgroup.cards.size > 0 %>
         <% if @allow_manage == true %>
-            <%= link_to "(" + b_add + _('Add_cards') + ")", :controller => "cards", :action => "new", :cg => @cardgroup %>
+            <%= link_to ("(" + b_add + _('Add_cards') + ")").html_safe, :controller => "cards", :action => "new", :cg => @cardgroup %>
         <% end %>
       </td>
     </tr>
