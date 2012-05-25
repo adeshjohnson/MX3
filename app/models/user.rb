@@ -1108,7 +1108,9 @@ class User < ActiveRecord::Base
   def subscriptions_in_period(period_start, period_end)
     period_start = period_start.to_s(:db) if period_start.class == Time or period_start.class == Date
     period_end = period_end.to_s(:db) if period_end.class == Time or period_end.class == Date
-    subs = Subscription.find(:all, :include => [:service], :conditions => ["(? BETWEEN activation_start AND activation_end OR ? BETWEEN activation_start AND activation_end OR (activation_start > ? AND activation_end < ?)) AND subscriptions.user_id = ?", period_start, period_end, period_start, period_end, id])
+    subs = Subscription.where(["(? BETWEEN activation_start AND activation_end OR ? BETWEEN activation_start AND activation_end OR (activation_start > ? AND activation_end < ?)) AND subscriptions.user_id = ?", period_start, period_end, period_start, period_end, self.id]).includes(:service).all
+
+    logger.fatal "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
     subs
   end
 
