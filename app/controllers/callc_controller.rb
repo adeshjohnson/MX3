@@ -869,10 +869,7 @@ class CallcController < ApplicationController
     end
     email_body << "Charging for subscriptions.\nDate: #{@year}-#{@month}\n"
 
-    @users = User.find(:all,
-                       :joins => ("RIGHT JOIN subscriptions ON (users.id = subscriptions.user_id)"), :readonly => false,
-                       :include => [:tax],
-                       :conditions => ["blocked != 1"])
+    @users = User.where('blocked != 1 AND subscriptions.id IS NOT NULL').includes(:tax, :subscriptions).all
     generation_time = Time.now
     doc.subscriptions() {
       doc.year(@year)

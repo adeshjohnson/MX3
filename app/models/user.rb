@@ -1333,7 +1333,7 @@ class User < ActiveRecord::Base
     period_start_with_time = time.beginning_of_month
     period_end_with_time = time.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
 
-    subscriptions = subscriptions_in_period(period_start_with_time, period_end_with_time)
+    subscriptions = self.subscriptions_in_period(period_start_with_time, period_end_with_time)
     MorLog.my_debug("  Found subscriptions : #{subscriptions.size}")
     b=0
     subscriptions.each { |sub|
@@ -1349,7 +1349,7 @@ class User < ActiveRecord::Base
         if user_type == "prepaid" and balance_left.to_f < 0.to_f and setting_disallow_balance_drop_below_zero.to_i == 1
           # and block user
           MorLog.my_debug("  Blocking prepaid user and sending email")
-          block_and_send_email
+          self.block_and_send_email
         else
           # pay subsciption
           b += sub_price
