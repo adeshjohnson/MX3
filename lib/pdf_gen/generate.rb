@@ -21,9 +21,9 @@ module PdfGen
       headers = [{:text => _('date')}.merge(top_options),
                  {:text => _('called_from')}.merge(top_options),
                  {:text => _('called_to')}.merge(top_options),
-                 {:text => _('duration')}.merge(top_options),
-                 {:text => _('hangup_cause')}.merge(top_options)]
-      headers2 = [{:text =>'', :colspan => 6}]
+                 {:text => _('duration')}.merge(top_options)]
+      headers << {:text => _('hangup_cause')}.merge(top_options)  if usertype != 'user'
+      headers2 = [{:text =>'', :colspan => usertype != 'user' ? 6 : 5}]
 
       if options[:pdf_last_calls].to_i == 1
         if ['admin', 'accountant'].include?(usertype)
