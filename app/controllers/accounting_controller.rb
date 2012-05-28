@@ -1059,7 +1059,7 @@ class AccountingController < ApplicationController
       if params[:test].to_i == 1
         pdf.render
         text = "Ok"
-        text += "\n" + "#{arr_t.to_yaml}" if arr_t
+        text += "\n" + "#{arr_t.inspect}" if arr_t
         text += "\n" + type
         text += "\n" + filename
         render :text => text
