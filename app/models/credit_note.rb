@@ -8,10 +8,10 @@ class CreditNote < ActiveRecord::Base
   #before_destroy :unpay
 
   validates_presence_of :issue_date, :message => _('Credit_note_must_have_issue_date')
-  validates_presence_of :price, :message => _('Price_has_to_be_specified_and_greater_than_0') #gal nereikia?
-  validates_numericality_of :price, :greater_than_or_equal_to => 0, :message => _('Price_has_to_be_specified_and_greater_than_0')
+  #validates_presence_of :price, :message => _('Price_has_to_be_specified_and_greater_than_0') #gal nereikia?
+  validates_numericality_of :price, :message => _('Price_has_to_be_specified_and_greater_than_0')
   validates_presence_of :price, :message => _('Price_with_tax_has_to_be_greater_than_0') #gal nereikia?
-  validates_numericality_of :price, :greater_than_or_equal_to => 0, :message => _('Price_with_tax_has_to_be_greater_than_0')
+  #validates_numericality_of :price, :greater_than_or_equal_to => 0, :message => _('Price_with_tax_has_to_be_greater_than_0')
   validates_uniqueness_of :payment_id, :message => _('Payment_must_be_unique'), :allow_nil => true
 
 =begin
