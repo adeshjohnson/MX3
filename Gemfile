@@ -49,4 +49,6 @@ gem 'xml-simple'
 
 gem 'session_off'
 
+gem "recaptcha", :require => "recaptcha/rails"
+
 

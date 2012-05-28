@@ -90,7 +90,7 @@
             </tr>
             <% if Confline.get_value("reCAPTCHA_enabled").to_i == 1 %>
                 </table>
-                <snap><%= recaptcha_tags :display => {:theme => 'white'} %> </snap>
+                <snap><%=raw recaptcha_tags :display => {:theme => 'white'} %> </snap>
                 <table class="simple">
             <% end %>
             <% if @agreement and @agreement.value == "1" %>
