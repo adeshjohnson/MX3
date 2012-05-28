@@ -208,7 +208,7 @@ class Invoice < ActiveRecord::Base
     items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => [:top]}, {:text => self.nice_invoice_number(user.converted_minimal_charge(ex).to_f, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}] if user.minimal_charge_enabled?
     items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => [:top]}, {:text => self.nice_invoice_number(self.converted_price(ex).to_f, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}]
 
-    items_t, up_string, tax_amount, price_with_tax = tax_items(ex, nc, nice_number_hash, 1)
+    items_t, up_string, tax_amount, price_with_tax = tax_items(ex, nc, nice_number_hash, 1, dc)
     items += items_t
     items << [{:text => _('TOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :border_width => 0}, {:text => self.nice_invoice_number(price_with_tax, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}]
 
@@ -327,7 +327,7 @@ class Invoice < ActiveRecord::Base
       items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_f))] if user.minimal_charge_enabled?
       items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(self.converted_price(ex)))]
     end
-    items_t, up_string, tax_amount, price_with_tax = tax_items(ex, nc, nice_number_hash, 2, options[:show_avg_rate])
+    items_t, up_string, tax_amount, price_with_tax = tax_items(ex, nc, nice_number_hash, 2, dc, options[:show_avg_rate])
 
     items += items_t
 
@@ -504,7 +504,7 @@ class Invoice < ActiveRecord::Base
       end
     end
 
-    logger.fatal sql
+
     res = ActiveRecord::Base.connection.select_all(sql)
 
     if options[:user].usertype == "reseller"
@@ -514,7 +514,7 @@ class Invoice < ActiveRecord::Base
     return res, res2
   end
 
-  def tax_items(ex, nc, nice_number_hash, type, show_avg_rate = 0)
+  def tax_items(ex, nc, nice_number_hash, type, dc, show_avg_rate = 0)
     items = []
     tax = self.tax
 
@@ -531,6 +531,8 @@ class Invoice < ActiveRecord::Base
         if tax.get_tax_count > 0
           up_string += 10
           aa = []
+          aa << nice_cell(' ', font) if type == 3
+          aa << nice_cell(' ', font) if type == 3
           aa << {:text => tax_hash[:name].to_s+ ": " + tax_hash[:value].to_s + " %", :background_color => "FFFFFF", :colspan => colspain, :align => :right, :border_width => 0, :font_size => font}
           aa << nice_cell(' ', font) if type == 2
           aa << nice_cell(' ', font) if type == 2
@@ -538,6 +540,7 @@ class Invoice < ActiveRecord::Base
             aa << nice_cell(' ', font) if type == 2
           end
           aa << {:text => self.nice_invoice_number(tax_hash[:tax], nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all, :font_size => font}
+          aa << {:text => dc} if type == 3
           items << aa
         end
         tax_amount += self.nice_invoice_number(tax_hash[:tax], nice_number_hash.merge({:no_repl => 1})).to_f
@@ -548,7 +551,7 @@ class Invoice < ActiveRecord::Base
       price_with_tax = self.nice_invoice_number(self.converted_price_with_vat(ex), nice_number_hash.merge({:no_repl => 1})).to_f
       tax_amount = price_with_tax - self.converted_price(ex)
     end
-    logger.fatal items.to_yaml
+
     return items, up_string, tax_amount, price_with_tax
   end
 
@@ -644,7 +647,7 @@ class Invoice < ActiveRecord::Base
         total_price += item["price"].to_f
       end
 
-      items << ['', '', '', _('Total') + ":", nice_invoice_number(total_price, nice_number_hash)]
+      items << ['', '', '', _('Total') + ":", nice_invoice_number(total_price, nice_number_hash), dc.to_s + " (" + _('Without_VAT') + ")"]
       items << [' ', '', '', '', '', '']
       ttp += total_price.to_f
     end
@@ -659,6 +662,24 @@ class Invoice < ActiveRecord::Base
       ttp += in_calls[0]["user_price"].to_f
       items << [' ', '', '', '', '', '']
     end
+
+
+    if invoicedetails and invoicedetails.size.to_i > 0
+      for id in invoicedetails
+        if id.invdet_type > 0 and id.name != 'Calls'
+
+          items << ['', {:text => nice_inv_name(id.name.to_s).to_s, :colspan => 3}, nice_invoice_number(id.converted_price(ex), nice_number_hash).to_s, dc.to_s + " (" + _('Without_VAT') + ")"]
+          ttp += id.price.to_f
+        end
+      end
+      items << [' ', '', '', '', '', '']
+    end
+
+    items << ['', {:text => _('SUBTOTAL') + ":", :colspan => 3, :align => :right}, nice_cell(self.nice_invoice_number(self.converted_price(ex))), dc.to_s + " (" + _('Without_VAT') + ")"]
+    items_t, up_string, tax_amount, price_with_tax = tax_items(ex, nc, nice_number_hash, 3, dc, options[:show_avg_rate])
+    items += items_t
+    items << ['', {:text => _('TOTAL')+ ":", :colspan => 3, :align => :right}, {:text => self.nice_invoice_number(price_with_tax, nice_number_hash).to_s, :align => :right}, dc]
+
 
     ###### Generate PDF ########
     pdf = Prawn::Document.new(:size => 'A4', :layout => :portrait)
