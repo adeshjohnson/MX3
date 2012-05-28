@@ -9,7 +9,11 @@ class ApplicationController < ActionController::Base
       logger.fatal exc.backtrace.collect { |t| t.to_s }.join("\n")
       if !params[:this_is_fake_exception]
         my_rescue_action_in_public(exc)
-        redirect_to :controller => :callc, :action => :main and return false
+        if session[:flash_not_redirect].to_i == 0
+          redirect_to :controller => :callc, :action => :main and return false
+        else
+          render(:layout => "layouts/mor_min") and return false
+        end
       else
         render :text => my_rescue_action_in_public(exc)
       end
@@ -48,15 +52,15 @@ class ApplicationController < ActionController::Base
   helper_method :allow_pg_extension, :erp_active?, :admin?, :reseller?, :user?, :accountant?, :reseller_pro_active?, :show_recordings?, :mor_11_extend?, :ast_18?, :provider_billing_active?, :providers_enabled_for_reseller?
   before_filter :log_session_size, :set_charset
   before_filter :set_current_user
-  before_filter :redirect_callshop_manager 
+  before_filter :redirect_callshop_manager
   # before_filter :set_timezone
 
-  def redirect_callshop_manager 
-    if current_user and current_user.is_callshop_manager?  
-      redirect_to :controller => "callshop", :action => "show", :id => current_user.callshop_manager_group.group_id  
-      return false 
-    end 
-  end 
+  def redirect_callshop_manager
+    if current_user and current_user.is_callshop_manager?
+      redirect_to :controller => "callshop", :action => "show", :id => current_user.callshop_manager_group.group_id
+      return false
+    end
+  end
 
   def method_missing(m, *args, &block)
     logger.fatal 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
@@ -2054,7 +2058,7 @@ Variables: (Names marked with * are required)
         end
 
         #if exception_class.include?("Net::SMTP") or (exception_class.include?("Errno::ECONNREFUSED") and trace.to_s.include?("smtp_tls.rb")) or (exception_class.include?("SocketError") and trace.to_s.include?("smtp_tls.rb")) or ((exception_class.include?("Timeout::Error") and trace.to_s.include?("smtp.rb"))) or trace.to_s.include?("smtp.rb")
-          flash_help_link = email_exceptions(exception)   if  flash_help_link.blank?
+        flash_help_link = email_exceptions(exception) if  flash_help_link.blank?
         #end
 
         if exception_class.include?("LoadError") and exception.message.to_s.include?('locations or via rubygems.')
