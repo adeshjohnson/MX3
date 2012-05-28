@@ -1823,15 +1823,15 @@ Variables: (Names marked with * are required)
   # Returns HangupCauseCode message by code
   def get_hangup_cause_message(code)
     if session["hangup#{code.to_i}".intern]
-      return session["hangup#{code.to_i}".intern]
+      return session["hangup#{code.to_i}".intern].html_safe
     else
       line = Hangupcausecode.find(:first, :conditions => "code = #{code.to_i}")
       if line
-        session["hangup#{code.to_i}".intern] = line.description
+        session["hangup#{code.to_i}".intern] = line.description.html_safe
       else
-        session["hangup#{code.to_i}".intern] = "<b>"+_("Unknown_Error")+"</b><br />"
+        session["hangup#{code.to_i}".intern] = ("<b>"+_("Unknown_Error")+"</b><br />").html_safe
       end
-      return session["hangup#{code.to_i}".intern]
+      return session["hangup#{code.to_i}".intern].html_safe
     end
   end
 

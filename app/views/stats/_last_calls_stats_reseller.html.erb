@@ -121,7 +121,7 @@
             <%= call_duration(call, text_class, @call_type).html_safe %>
 
             <% if @call_type != "answered" %>
-                <td id="disposition_<%= call.id %>" <%= "onmouseover=\"Tip(\'" + get_hangup_cause_message(call.hangupcause).html_safe + "\')\" onmouseout = \"UnTip()\"" if call.hangupcause and Confline.get_value('Show_HGC_for_Resellers').to_i == 1 %> >
+                <td id="disposition_<%= call.id %>" <%= ("onmouseover=\"Tip(\'" + (get_hangup_cause_message(call.hangupcause)).html_safe + "\')\" onmouseout = \"UnTip()\"").html_safe  if call.hangupcause and Confline.get_value('Show_HGC_for_Resellers').to_i == 1 %> >
                   <%= call.disposition %>
                   <%= " (" + call.hangupcause.to_s + ")" if Confline.get_value('Show_HGC_for_Resellers').to_i == 1 and session[:usertype] == 'reseller' %>
                 </td>
