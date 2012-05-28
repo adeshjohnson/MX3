@@ -555,6 +555,13 @@ class CallcController < ApplicationController
 
     @agreement = Confline.get("Registration_Agreement", @owner.id)
 
+    if Confline.get_value("reCAPTCHA_enabled").to_i == 1
+      Recaptcha.configuration.send("public_key=", Confline.get_value("reCAPTCHA_public_key"))
+      Recaptcha.configuration.send("private_key=", Confline.get_value("reCAPTCHA_private_key"))
+      Recaptcha.configuration.public_key = Confline.get_value("reCAPTCHA_public_key")
+      Recaptcha.configuration.private_key = Confline.get_value("reCAPTCHA_private_key")
+    end
+
     if Confline.get_value("Show_logo_on_register_page", @owner.id).to_i == 1
       session[:logo_picture] = Confline.get_value("Logo_Picture", @owner.id)
       session[:version] = Confline.get_value("Version", @owner.id)
@@ -672,9 +679,9 @@ class CallcController < ApplicationController
         if t.to_i != old_tz.to_i and Confline.get_value('System_time_zone_daylight_savings').to_i == 1
           # ========================== System time ofset update users ================================
           diff = t.to_i - old_tz.to_i
-          logger.fatal      diff
-          logger.fatal      t
-          logger.fatal      old_tz
+          logger.fatal diff
+          logger.fatal t
+          logger.fatal old_tz
           sql = "UPDATE users SET time_zone = ((time_zone + #{diff.to_f}) % 24);;"
           ActiveRecord::Base.connection.execute(sql)
           MorLog.my_debug("System time ofset update users", 1)
