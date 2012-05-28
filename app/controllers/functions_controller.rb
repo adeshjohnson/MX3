@@ -34,12 +34,17 @@ class FunctionsController < ApplicationController
 
     update_confline("Skype_Default_Provider", params[:skype_provider].to_s)
 
-    provider = Provider.find_by_id(params[:skype_provider].to_i)
+    provider = Provider.where({:id => params[:skype_provider].to_i}).first
 
-    exceptions = provider.skype_reload
-    raise exceptions[0] if exceptions.size > 0
+    if provider
+      exceptions = provider.skype_reload
+      raise exceptions[0] if exceptions.size > 0
+      flash[:status] = _('Skype_Default_Provider_changed')
+    else
+      flash[:notice] = _('Provider_not_found')
+    end
 
-    flash[:status] = _('Skype_Default_Provider_changed')
+
     redirect_to :action => "skype"
   end
 
