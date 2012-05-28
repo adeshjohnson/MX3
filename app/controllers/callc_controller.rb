@@ -555,12 +555,7 @@ class CallcController < ApplicationController
 
     @agreement = Confline.get("Registration_Agreement", @owner.id)
 
-    if Confline.get_value("reCAPTCHA_enabled").to_i == 1
-      Recaptcha.configuration.send("public_key=", Confline.get_value("reCAPTCHA_public_key"))
-      Recaptcha.configuration.send("private_key=", Confline.get_value("reCAPTCHA_private_key"))
-      Recaptcha.configuration.public_key = Confline.get_value("reCAPTCHA_public_key")
-      Recaptcha.configuration.private_key = Confline.get_value("reCAPTCHA_private_key")
-    end
+    Confline.load_recaptcha_settings
 
     if Confline.get_value("Show_logo_on_register_page", @owner.id).to_i == 1
       session[:logo_picture] = Confline.get_value("Logo_Picture", @owner.id)

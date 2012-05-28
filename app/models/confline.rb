@@ -230,4 +230,13 @@ class Confline < ActiveRecord::Base
     ActiveRecord::Base.connection.select_all('SELECT owner_id FROM conflines WHERE name IN (\'Default_User_allow_loss_calls\', \'Default_User_postpaid\') AND value = 1 GROUP BY owner_id HAVING COUNT(*) > 1 ;')
   end
 
+  def self.load_recaptcha_settings
+    if Confline.get_value("reCAPTCHA_enabled").to_i == 1
+      Recaptcha.configuration.send("public_key=", Confline.get_value("reCAPTCHA_public_key"))
+      Recaptcha.configuration.send("private_key=", Confline.get_value("reCAPTCHA_private_key"))
+      Recaptcha.configuration.public_key = Confline.get_value("reCAPTCHA_public_key")
+      Recaptcha.configuration.private_key = Confline.get_value("reCAPTCHA_private_key")
+    end
+  end
+
 end
