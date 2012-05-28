@@ -68,11 +68,11 @@ class Currency < ActiveRecord::Base
         old_curr.full_name= self.full_name
         old_curr.exchange_rate = 1
         old_curr.active = 1
-        old_curr.save(false)
+        old_curr.save(:validate => false)
         self.name = temp_curr.name
         self.active = 0
         self.full_name = temp_curr.full_name
-        self.save(false)
+        self.save(:validate => false)
         Currency.update_currency_rates
         return old_curr.name
       end
@@ -91,7 +91,12 @@ class Currency < ActiveRecord::Base
       currencies.each { |cur| par << "s=" + default_currency.name.strip.to_s + cur.name.strip.to_s + "=X" }
       par << "f=l1"
       Net::HTTP.start("download.finance.yahoo.com") { |http| resp = http.get('/d/quotes.csv?'+par.join('&').to_s); @file = resp.body }
-      @file.each_with_index { |cur, i| currencies[i].exchange_rate= cur.to_f; currencies[i].last_update = Time.now; currencies[i].save }
+      f = @file.split("\r\n")
+      f.each_with_index { |cur, i|
+        currencies[i].exchange_rate= cur.to_f;
+        currencies[i].last_update = Time.now;
+        currencies[i].save
+      }
       Action.add_action(User.current.id, "Currency updated", id)
     end
   end
