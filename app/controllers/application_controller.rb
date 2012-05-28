@@ -8,10 +8,11 @@ class ApplicationController < ActionController::Base
       logger.fatal exc.to_yaml
       logger.fatal exc.backtrace.collect { |t| t.to_s }.join("\n")
       if !params[:this_is_fake_exception]
-        my_rescue_action_in_public(exc)
         if session[:flash_not_redirect].to_i == 0
+          my_rescue_action_in_public(exc)
           redirect_to :controller => :callc, :action => :main and return false
         else
+          my_rescue_action_in_public(exc)
           render(:layout => "layouts/mor_min") and return false
         end
       else
