@@ -458,9 +458,6 @@ class CardsController < ApplicationController
     a=check_user_for_cardgroup(cg)
     return false if !a
 
-    a=check_user_for_cardgroup(cg)
-    return false if !a
-
     if @card.destroy_with_check
       flash[:status] = _('Card_was_deleted')
       redirect_to :action => 'list', :cg => cg and return false

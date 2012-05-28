@@ -186,9 +186,9 @@
 
   <tr>
     <th id="total" align="left" colspan="6"><%= _('Total') %>:</th>
-    <th id="total_amount" align="right"><%= nice_number @total_amaunt %>(<%= current_user.currency.name %>)</th>
-    <th id="total_fee" align="right"><%= nice_number @total_fee %>(<%= current_user.currency.name %>)</th>
-    <th id="total_with_tax" align="right"><%= nice_number @total_amaunt_with_vat %>(<%= current_user.currency.name %>)
+    <th id="total_amount" align="right"><%= nice_number @total_amaunt %> (<%= current_user.currency.name %>)</th>
+    <th id="total_fee" align="right"><%= nice_number @total_fee %> (<%= current_user.currency.name %>)</th>
+    <th id="total_with_tax" align="right"><%= nice_number @total_amaunt_with_vat %> (<%= current_user.currency.name %>)
     </th>
     <th align="center" colspan="5"></th>
   </tr>
@@ -198,8 +198,7 @@
     <th id="total_amount_completed" align="right"><%= nice_number @total_amaunt_completed %>
       (<%= current_user.currency.name %>)
     </th>
-    <th id="total_fee_completed" align="right"><%= nice_number @total_fee_completed %>(<%= current_user.currency.name %>
-      )
+    <th id="total_fee_completed" align="right"><%= nice_number @total_fee_completed %> (<%= current_user.currency.name %>)
     </th>
     <th id="total_with_tax_completed" align="right"><%= nice_number @total_amaunt_with_vat_completed %>
       (<%= current_user.currency.name %>)
