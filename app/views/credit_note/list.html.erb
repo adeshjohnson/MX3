@@ -123,7 +123,7 @@
             <% end %>
             <td id="details_<%= note.id %>" align="center"><%= link_to b_details, {:action => 'edit', :id => note.id}, :id => "details_link_"+note.id.to_s %></td>
             <% if @link_to_finances %>
-                <td id="delete_<%= note.id %>" align="center"><%= link_to b_delete, {:action => 'destroy', :id => note.id}, :id => "delete_link_"+note.id.to_s %></td>
+                <td id="delete_<%= note.id %>" align="center"><%= link_to b_delete, {:action => 'destroy', :id => note.id}, :method => :post, :id => "delete_link_"+note.id.to_s %></td>
             <% end %>
       <% } %>
   <% end %>
