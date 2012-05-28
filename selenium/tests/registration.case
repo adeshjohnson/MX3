@@ -299,7 +299,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--enableing recaptcha-->
+<!--enableing recaptcha blank settings-->
 <tr>
 	<td>open</td>
 	<td>/billing/functions/settings</td>
@@ -337,7 +337,58 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Settings saved</td>
+	<td>reCAPTCHA keys cannot be empty</td>
+	<td></td>
+</tr>
+<!--enableing recaptcha-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_1']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_1']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>enable_recaptcha</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=recaptcha_public_key</td>
+	<td>6LfX-dESAAAAAIO7HVd6xVBIUoro6YoB8kgcibMu </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=recaptcha_private_key</td>
+	<td>6LfX-dESAAAAAANjXx9qrlx0twbGY_rxQey8gQuf </td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>reCAPTCHA keys cannot be empty</td>
 	<td></td>
 </tr>
 <!--registering new user with recaptcha being enabled-->

@@ -993,6 +993,8 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       Confline.set_value("ReCAPTCHA_private_key", params[:recaptcha_private_key].to_s.strip)
       Recaptcha.configuration.send("public_key=", Confline.get_value("reCAPTCHA_public_key"))
       Recaptcha.configuration.send("private_key=", Confline.get_value("reCAPTCHA_private_key"))
+      Recaptcha.configuration.public_key = Confline.get_value("reCAPTCHA_public_key")
+      Recaptcha.configuration.private_key = Confline.get_value("reCAPTCHA_private_key")
     end
     Confline.set_value("Allow_registration_username_passwords_in_devices", params[:allow_registration_username_passwords_in_devices].to_i)
     Confline.set_value("Active_calls_show_did", params[:active_calls_show_did].to_i)
