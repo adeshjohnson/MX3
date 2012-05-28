@@ -4384,6 +4384,7 @@ Localization.define('en') do |l|
   l.store 'Cards_were_hidden', 'Cards were hidden'
   l.store 'Destination_details', 'Destination details'
   l.store 'Card_was_not_deleted', 'Card was not deleted'
+  l.store 'reCAPTCHA_keys_cannot_be_empty', 'reCAPTCHA keys cannot be empty'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

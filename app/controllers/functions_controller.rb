@@ -137,7 +137,7 @@ class FunctionsController < ApplicationController
         end
 
         @error = _('Cannot_connect_to_asterisk_server') if st.to_i != 0
-        #create_call_file(@acc, @src, @dst)
+                #create_call_file(@acc, @src, @dst)
       end
 
     end
@@ -200,27 +200,26 @@ class FunctionsController < ApplicationController
 
     serv = Server.where({:id => server}).first
 
-      if @src.length > 0
+    if @src.length > 0
 
-        channel = "Local/#{@src}@mor_cb_src/n"
-        if @dst.length > 0
-          st = originate_call(@acc, @src, channel, "mor_cb_dst", @dst, callerid_number, nil, server)
-        else
-          st = originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", callerid_number, nil, server)
-        end
-
-
-        if st.to_i != 0
-          flash[:notice] = _('Cannot_connect_to_asterisk_server')
-        else
-          flash[:status] = _('Callback_activated')
-          end
-
-
+      channel = "Local/#{@src}@mor_cb_src/n"
+      if @dst.length > 0
+        st = originate_call(@acc, @src, channel, "mor_cb_dst", @dst, callerid_number, nil, server)
       else
-        flash[:notice] = _('Source_should_be_entered_for_callback')
+        st = originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", callerid_number, nil, server)
       end
 
+
+      if st.to_i != 0
+        flash[:notice] = _('Cannot_connect_to_asterisk_server')
+      else
+        flash[:status] = _('Callback_activated')
+      end
+
+
+    else
+      flash[:notice] = _('Source_should_be_entered_for_callback')
+    end
 
 
     redirect_to :controller => "functions", :action => 'callback' and return false
@@ -988,11 +987,13 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     update_confline("Send_Email_To_User_After_Registration", params[:send_email_to_user_after_registration])
     update_confline("Send_Email_To_Admin_After_Registration", params[:send_email_to_admin_after_registration])
     Confline.set_value("Default_Balance_for_new_user", params[:default_balance_for_new_user].to_f)
-    Confline.set_value("reCAPTCHA_enabled", params[:enable_recaptcha].to_i)
-    Confline.set_value("ReCAPTCHA_public_key", params[:recaptcha_public_key].to_s.strip)
-    Confline.set_value("ReCAPTCHA_private_key", params[:recaptcha_private_key].to_s.strip)
-    Recaptcha.configuration.send("public_key=", Confline.get_value("reCAPTCHA_public_key"))
-    Recaptcha.configuration.send("private_key=", Confline.get_value("reCAPTCHA_private_key"))
+    if params[:enable_recaptcha].to_i == 0 or (params[:enable_recaptcha].to_i == 1 and !params[:recaptcha_public_key].to_s.blank? and !params[:recaptcha_private_key].to_s.blank?)
+      Confline.set_value("reCAPTCHA_enabled", params[:enable_recaptcha].to_i)
+      Confline.set_value("ReCAPTCHA_public_key", params[:recaptcha_public_key].to_s.strip)
+      Confline.set_value("ReCAPTCHA_private_key", params[:recaptcha_private_key].to_s.strip)
+      Recaptcha.configuration.send("public_key=", Confline.get_value("reCAPTCHA_public_key"))
+      Recaptcha.configuration.send("private_key=", Confline.get_value("reCAPTCHA_private_key"))
+    end
     Confline.set_value("Allow_registration_username_passwords_in_devices", params[:allow_registration_username_passwords_in_devices].to_i)
     Confline.set_value("Active_calls_show_did", params[:active_calls_show_did].to_i)
     Confline.set_value("Registration_Enable_VAT_checking", params[:enable_vat_checking].to_i)
@@ -1303,6 +1304,10 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       redirect_to :controller => :callc, :action => :main and return false
     end
     renew_session(user)
+    if params[:enable_recaptcha].to_i == 1 and (params[:recaptcha_public_key].to_s.blank? or params[:recaptcha_private_key].to_s.blank?)
+      flash[:notice] = _("reCAPTCHA_keys_cannot_be_empty")
+      redirect_to :action => 'settings' and return false
+    end
     if error.to_i == 0
       flash[:status] = _('Settings_saved')
     end
