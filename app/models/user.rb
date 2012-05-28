@@ -3279,7 +3279,22 @@ GROUP BY terminators.id;").map { |t| t.id }
     else 
       return nil 
     end  
-  end 
+  end
+
+
+  def block_and_send_email
+    users = [self, owner]
+    em= Email.find(:first, :conditions => ["name = 'block_when_no_balance' AND owner_id = ?", owner_id])
+    variables = Email.email_variables(self)
+    num = EmailsController::send_email(em, Confline.get_value("Email_from", owner_id), users, variables)
+
+    # num = Email.send_email(em, users, Confline.get_value("Email_from", owner_id), 'send_email', {:assigns=>variables, :owner=>variables[:owner]})
+    if num.to_s != _('Email_sent')
+      Action.add_action2(id, "error", 'Cant_send_email', num.to_s)
+    end
+    Action.new(:user_id => id, :date => Time.now, :action => "user_blocked", :data => "insufficient funds").save
+    self.blocked = 1
+  end
 
   private
 
@@ -3297,20 +3312,6 @@ GROUP BY terminators.id;").map { |t| t.id }
     else
       raise "User is not reseller, he cannot have providers"
     end
-  end
-
-  def block_and_send_email
-    users = [self, owner]
-    em= Email.find(:first, :conditions => ["name = 'block_when_no_balance' AND owner_id = ?", owner_id])
-    variables = Email.email_variables(self)
-    num = EmailsController::send_email(em, Confline.get_value("Email_from", owner_id), users, variables)
-
-    # num = Email.send_email(em, users, Confline.get_value("Email_from", owner_id), 'send_email', {:assigns=>variables, :owner=>variables[:owner]})
-    if num.to_s != _('Email_sent')
-      Action.add_action2(id, "error", 'Cant_send_email', num.to_s)
-    end
-    Action.new(:user_id => id, :date => Time.now, :action => "user_blocked", :data => "insufficient funds").save
-    blocked = 1
   end
 
   def save_with_balance;
