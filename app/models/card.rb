@@ -195,9 +195,7 @@ class Card < ActiveRecord::Base
     if not self.has_calls? and not self.has_activecalls? and not Payment.find(:first, :conditions => ["paymenttype = ? and user_id = ?", "Card", self.id])
       self.destroy
     else
-      if Confline.mor_11_extended?
-        self.hide
-      end
+      self.hide
     end
   end
 
@@ -433,11 +431,12 @@ class Card < ActiveRecord::Base
 =end
   def hide
     Action.add_action_hash(User.current, {:action=>'Card hidden permanently', :target_id=>self.id, :target_type=>"card", :data=>self.callerid, :data2=>self.pin, :data3=>self.number})
-    self.pin = 'DELETED_#{Time.now.to_i}_' + self.pin.to_s
-    self.callerid = nil
-    self.number = 'DELETED_#{Time.now.to_i}_' + self.number.to_s
-    self.hidden = 1
-    self.save
+    Card.delete_and_hide_from_sql({:cardgroup_id => self.cardgroup_id, :start_num => self.number, :end_num => self.number})
+    #self.write_attribute(:pin, "DELETED_#{Time.now.to_i}_" + self.pin.to_s)
+    #self.write_attribute(:callerid, nil)
+    #self.write_attribute(:number, "DELETED_#{Time.now.to_i}_" + self.number.to_s)
+    #self.write_attribute(:hidden, 1)
+    #self.save(:validate => false)
   end
 
   private
