@@ -664,6 +664,9 @@ class Invoice < ActiveRecord::Base
     pdf = Prawn::Document.new(:size => 'A4', :layout => :portrait)
     pdf = PdfGen::Generate.invoice_header_pdf(self, pdf, options[:company], current_user.currency.name)
 
+
+    items << [' ', '', '', '', '', ''] if items.size.to_i < 1
+
     pdf.table(items,
               :width => 550,
               :font_size => 5, :border_width => 0, :vertical_padding => 1,
