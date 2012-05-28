@@ -54,7 +54,7 @@ module StatsHelper
       rez << call.localized_dst
     end
     rez << "</td>"
-    rez.join("")
+    rez.join("").html_safe
   end
 
   def call_duration(call, text_class, call_type)
@@ -65,7 +65,7 @@ module StatsHelper
       rez << nice_time(call.duration)
     end
     rez << "</td>"
-    rez.join()
+    rez.join().html_safe
   end
 
   def check_or_cross(stat, name)
