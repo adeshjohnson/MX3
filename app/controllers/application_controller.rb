@@ -1995,10 +1995,6 @@ Variables: (Names marked with * are required)
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Data_not_found', :data2 => exception.message).save
         end
 
-        if exception_class.include?("Net::SMTP") or (exception_class.include?("Errno::ECONNREFUSED") and trace.to_s.include?("smtp_tls.rb")) or (exception_class.include?("SocketError") and trace.to_s.include?("smtp_tls.rb")) or ((exception_class.include?("Timeout::Error") and trace.to_s.include?("smtp.rb"))) or trace.to_s.include?("smtp.rb")
-          flash_help_link = email_exceptions(exception)
-        end
-
         if exception_class.include?("ActiveRecord::StatementInvalid") and exception.message.include?('Access denied for user')
           flash_notice = _('MySQL_permission_problem_contact_Kolmisoft_to_solve_it')
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'MySQL_permission_problem', :data2 => exception.message).save
@@ -2056,6 +2052,10 @@ Variables: (Names marked with * are required)
           flash_help_link = ''
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'DNS_Error', :data2 => exception.message).save
         end
+
+        #if exception_class.include?("Net::SMTP") or (exception_class.include?("Errno::ECONNREFUSED") and trace.to_s.include?("smtp_tls.rb")) or (exception_class.include?("SocketError") and trace.to_s.include?("smtp_tls.rb")) or ((exception_class.include?("Timeout::Error") and trace.to_s.include?("smtp.rb"))) or trace.to_s.include?("smtp.rb")
+          flash_help_link = email_exceptions(exception)   if  flash_help_link.balnk?
+        #end
 
         if exception_class.include?("LoadError") and exception.message.to_s.include?('locations or via rubygems.')
           if exception.message.include?('cairo')
