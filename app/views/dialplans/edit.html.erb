@@ -76,13 +76,13 @@
                 //<![CDATA[
                 Event.observe(window, 'load', function () {
 
-                    if (!$('dialplan[data3]').checked) {
+                    if (!$('dialplan_data3').checked) {
                         $('tell_seconds').disabled = true;
                     }
                 });
 
-                Event.observe($('dialplan[data3]'), 'click', function () {
-                            if ($('dialplan[data3]').checked) {
+                Event.observe($('dialplan_data3'), 'click', function () {
+                            if ($('dialplan_data3').checked) {
                                 $('tell_seconds').disabled = false;
                             }
                             else {
@@ -91,14 +91,14 @@
                         }
                 );
 
-                if (Boolean(parseFloat($('dialplan[data11]').value))) {
+                if (Boolean(parseFloat($('dialplan_data11').value))) {
                     $('ivr_balance').show();
                 } else {
                     $('ivr_balance').hide();
                 }
 
-                Event.observe($('dialplan[data11]'), 'change', function () {
-                            if (Boolean(parseFloat($('dialplan[data11]').value))) {
+                Event.observe($('dialplan_data11'), 'change', function () {
+                            if (Boolean(parseFloat($('dialplan_data11').value))) {
                                 $('ivr_balance').show();
                             } else {
                                 $('ivr_balance').hide();
