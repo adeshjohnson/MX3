@@ -2054,7 +2054,7 @@ Variables: (Names marked with * are required)
         end
 
         #if exception_class.include?("Net::SMTP") or (exception_class.include?("Errno::ECONNREFUSED") and trace.to_s.include?("smtp_tls.rb")) or (exception_class.include?("SocketError") and trace.to_s.include?("smtp_tls.rb")) or ((exception_class.include?("Timeout::Error") and trace.to_s.include?("smtp.rb"))) or trace.to_s.include?("smtp.rb")
-          flash_help_link = email_exceptions(exception)   if  flash_help_link.balnk?
+          flash_help_link = email_exceptions(exception)   if  flash_help_link.blank?
         #end
 
         if exception_class.include?("LoadError") and exception.message.to_s.include?('locations or via rubygems.')
