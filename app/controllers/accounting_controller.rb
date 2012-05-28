@@ -1037,7 +1037,7 @@ class AccountingController < ApplicationController
     invoice = Invoice.find_by_id(params[:id], :include => [:tax, :user])
 
     unless invoice
-      if params[:action] == "generate_invoice_detailed_pdf"
+      if params[:action] == "generate_invoice_detailed_pdf" or params[:action] == "generate_invoice_by_cid_pdf"
         flash[:notice] = _("Invoice_not_found")
         redirect_to :controller => :callc, :action => :main and return false
       else
