@@ -1109,8 +1109,6 @@ class User < ActiveRecord::Base
     period_start = period_start.to_s(:db) if period_start.class == Time or period_start.class == Date
     period_end = period_end.to_s(:db) if period_end.class == Time or period_end.class == Date
     subs = Subscription.where(["(? BETWEEN activation_start AND activation_end OR ? BETWEEN activation_start AND activation_end OR (activation_start > ? AND activation_end < ?)) AND subscriptions.user_id = ?", period_start, period_end, period_start, period_end, self.id]).includes(:service).all
-
-    logger.fatal "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
     subs
   end
 
@@ -1369,13 +1367,13 @@ class User < ActiveRecord::Base
       end
     }
     self.balance -= b
-    if postpaid? and (balance + credit < 0) and not credit_unlimited?
+    if self.postpaid? and (balance + credit < 0) and not self.credit_unlimited?
       changed = 1
       MorLog.my_debug("  Blocking postpaid user and sending email")
-      block_and_send_email
+      self.block_and_send_email
     end
 
-    save if changed.to_i == 1
+    self.save if changed.to_i == 1
     MorLog.my_debug("-END-#{username}-----------------------------------------")
 
     return all_data
