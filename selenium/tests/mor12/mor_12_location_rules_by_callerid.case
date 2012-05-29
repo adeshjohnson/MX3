@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>mor_12_location_rules_by_callerid</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">mor_12_location_rules_by_callerid</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/localization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>New</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Location added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_name</td>
+	<td>103esdrfgtyhuj</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_secret</td>
+	<td>103wsedtgfhyugjh</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_devices/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=select_location_id_5</td>
+	<td>label=New</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device location changed and moved to another group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Change User Tariff to this Tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Change User LCR to this LCR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//select[@name='tariff'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//select[@name='lcr'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//table[3]/tbody/tr/th[7]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>When this rule will be used then Users Tariff will be changed to this one</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//table[3]/tbody/tr/th[7]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//table[3]/tbody/tr/th[8]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>When this rule will be used then LCR for dialing User will be changed to this one.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//table[3]/tbody/tr/th[8]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>TARIFFAS</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff[purpose]_user_wholesale</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Tariff was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Quick add new Rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prefix</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate was added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Quick add new Rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prefix</td>
+	<td>3706</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>45</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lcr_name</td>
+	<td>newlcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>LCR was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>eeeee</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=provider_tariff_id</td>
+	<td>label=Test Tariff bad currency</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
+	<td>label=eeeee - SIP/0.0.0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@id='name'])[2]</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@id='cut'])[2]</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@id='add'])[2]</td>
+	<td>3706</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@id='minlen'])[2]</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@id='maxlen'])[2]</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>xpath=(//select[@name='tariff'])[2]</td>
+	<td>label=TARIFFAS</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>xpath=(//select[@name='lcr'])[2]</td>
+	<td>label=newlcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@type='image'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=tariff_2</td>
+	<td>TARIFFAS</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lcr_2</td>
+	<td>newlcr</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tariff</td>
+	<td>label=Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=lcr</td>
+	<td>label=Primary</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=tariff_2</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lcr_2</td>
+	<td>Primary</td>
+</tr>
+</tbody></table>
+</body>
+</html>
