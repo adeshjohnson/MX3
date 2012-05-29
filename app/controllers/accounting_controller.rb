@@ -949,7 +949,7 @@ class AccountingController < ApplicationController
   ############ PDF ###############
 
   def generate_invoice_pdf
-    invoice = Invoice.includes([:tax, :user, :invoicedetails]).where({:id=>params[:id]}).first
+    invoice = Invoice.includes([:tax, :user, :invoicedetails]).where({:id => params[:id]}).first
     idetails = invoice.invoicedetails if invoice
 
     unless invoice
@@ -1034,15 +1034,25 @@ class AccountingController < ApplicationController
   end
 
   def generate_invoice_by_cid_pdf
-    invoice = Invoice.find_by_id(params[:id], :include => [:tax, :user])
+    invoice = Invoice.where({:id => params[:id]}).includes([:tax, :user]).first
+
+    # unless invoice
+    #   if params[:action] == "generate_invoice_detailed_pdf" or params[:action] == "generate_invoice_by_cid_pdf"
+    #     flash[:notice] = _("Invoice_not_found")
+    #     redirect_to :controller => :callc, :action => :main and return false
+    #   else
+    #     raise "Invoice_not_found"
+    #   end
+    # end
 
     unless invoice
-      if params[:action] == "generate_invoice_detailed_pdf" or params[:action] == "generate_invoice_by_cid_pdf"
-        flash[:notice] = _("Invoice_not_found")
-        redirect_to :controller => :callc, :action => :main and return false
-      else
-        raise "Invoice_not_found"
-      end
+      flash[:notice] = _('Invoice_not_found')
+      redirect_to :controller => :callc, :action => :main and return false
+    end
+
+    if invoice.user_id != current_user.id and invoice.user.owner_id != current_user.get_corrected_owner_id
+      dont_be_so_smart
+      redirect_to :controller => :callc, :action => :main and return false
     end
 
     user = invoice.user
@@ -1050,7 +1060,7 @@ class AccountingController < ApplicationController
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
 
-    pdf, arr_t  = invoice.generate_invoice_by_cid_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal], params[:test].to_i == 1)
+    pdf, arr_t = invoice.generate_invoice_by_cid_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal], params[:test].to_i == 1)
 
     if params[:email_or_not]
       return pdf.render
@@ -1131,7 +1141,7 @@ class AccountingController < ApplicationController
   end
 
   def generate_invoice_detailed_csv
-    invoice = Invoice.includes([:tax, :user]).where({:id=>params[:id]}).first
+    invoice = Invoice.includes([:tax, :user]).where({:id => params[:id]}).first
 
     unless invoice
       flash[:notice] = _('Invoice_was_not_found')
