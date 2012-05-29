@@ -690,7 +690,7 @@ class User < ActiveRecord::Base
 
   def create_reseller_conflines
     resellers_device_location = Confline.get_value("Default_device_location_id", id)
-    if usertype == "reseller" and !Confline.get_value("Default_device_type", id).to_s.blank?
+    if usertype == "reseller" and Confline.get_value("Default_device_type", id).to_s.blank?
       #sql = "DELETE FROM conflines WHERE owner_id = #{id}"
       #ActiveRecord::Base.connection.execute(sql)
       Confline.delete_all("owner_id = #{id} AND name like 'Default_device%'")
