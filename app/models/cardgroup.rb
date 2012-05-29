@@ -56,7 +56,7 @@ class Cardgroup < ActiveRecord::Base
   end
 
   def validate_before_destroy
-    if Dialplan.count(:all, :conditions => {:data2 => pin_length, :data1 => number_length, :dptype => 'callingcard'}).to_i > 0 and Cardgroup.count(:all, :conditions => {:pin_length => pin_length, :number_length => number_length, :hidden=>0, :owner_id=>owner_id}).to_i < 2
+    if Dialplan.count(:all, :conditions => {:data2 => pin_length, :data1 => number_length, :dptype => 'callingcard'}).to_i > 0 and Cardgroup.count(:all, :conditions => {:pin_length => pin_length, :number_length => number_length, :hidden => 0, :owner_id => owner_id}).to_i < 2
       errors.add(:dialplan, _('Cardgroup_is_associated_with_dialplans'))
       return false
     end
@@ -84,7 +84,7 @@ class Cardgroup < ActiveRecord::Base
 
     end
 
-    unless Card.where( ['cardgroup_id = ?', id]).first
+    unless Card.where(['cardgroup_id = ?', id]).first
       # destroy ghost minute percent records
       gmps = self.cc_ghostminutepercents
       if gmps and gmps.size.to_i > 0
@@ -123,18 +123,18 @@ class Cardgroup < ActiveRecord::Base
     Card.find(:first, :conditions => ["cardgroup_id = ? AND sold = 0", self.id], :order => "rand()")
   end
 
-  def assign_default_tax(tax={}, opt ={})
+  def assign_default_tax(taxs={}, opt ={})
     options = {
         :save => true
     }.merge(opt)
-    if !tax or tax == {}
-      if self.owner_id
+    if !taxs or taxs == {}
+      if self.owner
         new_tax = User.where({:id => self.owner_id}).first.get_tax.dup
       else
         new_tax = Confline.get_default_tax(0)
       end
     else
-      new_tax = Tax.new(tax)
+      new_tax = Tax.new(taxs)
     end
     logger.fatal new_tax.to_yaml
     new_tax.save if options[:save] == true
