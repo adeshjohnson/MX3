@@ -794,11 +794,11 @@ class Invoice < ActiveRecord::Base
         balance_with_tax = owned_balance.to_f + user.get_tax.count_tax_amount(owned_balance.to_f)
         return [owned_balance, balance_with_tax]
       else
-        MorLog.my_debug("Balance will not be shown because not found balance at the end of month, invoice id: #{invoice.id}")
+        MorLog.my_debug("Balance will not be shown because not found balance at the end of month, invoice id: #{id}")
         return nil
       end
     else
-      MorLog.my_debug("Balance will not be shown because invoice is not for whole month, invoice id: #{invoice.id}")
+      MorLog.my_debug("Balance will not be shown because invoice is not for whole month, invoice id: #{id}")
       return nil
     end
   end
