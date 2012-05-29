@@ -668,7 +668,7 @@ class Invoice < ActiveRecord::Base
       for id in invoicedetails
         if id.invdet_type > 0 and id.name != 'Calls'
 
-          items << ['', {:text => nice_inv_name(id.name.to_s).to_s, :colspan => 3}, nice_invoice_number(id.converted_price(ex), nice_number_hash).to_s, dc.to_s + " (" + _('Without_VAT') + ")"]
+          items << ['', {:text => id.nice_inv_name, :colspan => 3}, self.nice_invoice_number((id.quantity * id.converted_price(ex)), nice_number_hash).to_s, dc.to_s + " (" + _('Without_VAT') + ")"]
           ttp += id.price.to_f
         end
       end
