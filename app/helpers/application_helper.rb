@@ -1527,7 +1527,7 @@ conf_name - name of confline that will be represented by checkbox.
 
 
   def spy_channel_icon(channel, id)
-    link_to image_tag('icons/sound.png', :title => _('Spy_Channel')), {:controller => "functions", :action => "spy_channel", :id => id, :channel => channel}, :popup => ['new_window', 'height=40,width=300']
+    link_to image_tag('icons/sound.png', :title => _('Spy_Channel')), {:controller => "functions", :action => "spy_channel", :id => id, :channel => channel}, :onclick => "window.open(this.href,'new_window','height=40,width=300');return false;".html_safe
   end
 
   def nice_card(card)
