@@ -68,7 +68,7 @@ class Provider < ActiveRecord::Base
       return false
     end
 
-    if Lcr.count(:conditions => ["failover_provider_id = ?" , self.id]) > 0
+    if Lcr.count(:conditions => ["failover_provider_id = ?", self.id]) > 0
       errors.add(:lcrproviders, _('Cannot_delete_provider_it_is_assigned_as_failover_provider'))
       return false
     end
@@ -160,7 +160,7 @@ class Provider < ActiveRecord::Base
   def codec?(codec)
     sql = "SELECT COUNT(*) as 'count' FROM providercodecs, codecs WHERE providercodecs.provider_id = '" + self.id.to_s + "' AND providercodecs.codec_id = codecs.id AND codecs.name = '" + codec.to_s + "'"
     res = ActiveRecord::Base.connection.select_one(sql)
-    res['count'] == '1'
+    res['count'].to_i == 1
   end
 
   def codecs_order(type, options={})
