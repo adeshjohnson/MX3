@@ -57,7 +57,7 @@ class TestController < ApplicationController
         us.first_name
       when "test_exceptions"
         Confline.set_value("Last_Crash_Exception_Class", "")
-        params[:this_is_fake_exception] = ""
+        #params[:this_is_fake_exception] = ""
         raise SyntaxError
       when "pdf_limit"
         PdfGen::Count.check_page_number(4, 1)
