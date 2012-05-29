@@ -80,6 +80,7 @@
             <td id="tariff_name_<%= cg.id %>" align="left"><%= h cg.tariff.name if cg.tariff %></td>
             <td id="lcr_name_<%= cg.id %>" align="left"><%= h cg.lcr.name if cg.lcr %></td>
             <% if can_see_finances? -%>
+                <% cg.get_tax %>
                 <td id="count_tax_amount_<%= cg.id %>" align="right"><%= nice_number(cg.price + cg.get_tax.count_tax_amount(cg.price)) %></td>
                 <td id="price_usd_<%= cg.id %>" align="right"><%= nice_number cg.price %></td>
             <% end -%>
