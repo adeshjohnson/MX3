@@ -764,4 +764,43 @@ class Invoice < ActiveRecord::Base
     dd
   end
 
+  def owned_balance_from_previous_month
+    user = self.user
+    # check if invoice is for whole month
+    first_day = self.period_start.to_s[8, 2]
+    last_day = self.period_end.to_s[8, 2]
+    year = self.period_start.to_s[0, 4]
+    month = self.period_start.to_s[5, 2].to_i.to_s #remove leading 0
+
+    if first_day.to_i == 1 and last_day.to_i == last_day_of_month(year, month).to_i
+      # get balance from actions for last month
+      action = Action.find(:first, :conditions => "user_id = #{self.user_id} AND action = 'user_balance_at_month_end' AND data = '#{year}-#{month}'")
+      if action
+        # count invoice details price in invoice
+        #inv_details_price = 0.0
+        #inv_details = invoice.invoicedetails
+        #inv_details.each{|id| inv_details_price += id.price.to_f if id.invdet_type > 0}
+
+        # count calls price in invoice
+        inv_calls_price = 0.0
+        inv_details = self.invoicedetails
+        inv_details.each { |id| inv_calls_price += id.price.to_f if id.invdet_type == 0 }
+
+        # count balance
+        #balance = sprintf("%0.#{2}f", user.balance.to_f + user.get_tax.count_tax_amount(user.balance.to_f ))
+        #owned_balance = action.data2.to_f - inv_details_price.to_f
+        owned_balance = (action.data2.to_f * (-1)) - inv_calls_price.to_f
+
+        balance_with_tax = owned_balance.to_f + user.get_tax.count_tax_amount(owned_balance.to_f)
+        return [owned_balance, balance_with_tax]
+      else
+        MorLog.my_debug("Balance will not be shown because not found balance at the end of month, invoice id: #{invoice.id}")
+        return nil
+      end
+    else
+      MorLog.my_debug("Balance will not be shown because invoice is not for whole month, invoice id: #{invoice.id}")
+      return nil
+    end
+  end
+
 end
