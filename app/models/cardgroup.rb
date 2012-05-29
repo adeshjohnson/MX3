@@ -136,9 +136,11 @@ class Cardgroup < ActiveRecord::Base
     else
       new_tax = Tax.new(taxs)
     end
+    logger.fatal "ffffffffffffffffffffffffffffffffff#{tax_id}fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
     logger.fatal new_tax.to_yaml
     new_tax.save if options[:save] == true
     self.tax_id = new_tax.id
+    logger.fatal "ffffffffffffffffffffffffffffffffff#{tax_id}fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
     self.save if options[:save] == true
   end
 
