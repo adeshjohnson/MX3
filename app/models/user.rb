@@ -2234,7 +2234,7 @@ GROUP BY terminators.id;").map { |t| t.id }
       invoice += params[:i6].to_i if params[:i6]
       invoice += params[:i7].to_i if params[:i7]
       invoice += params[:i8].to_i if params[:i8]
-      send_invoice_types = invoice if params[:i1] or params[:i2] or params[:i3] or params[:i4] or params[:i5] or params[:i6] or params[:i7] or params[:i8]
+      self.send_invoice_types = invoice if params[:i1] or params[:i2] or params[:i3] or params[:i4] or params[:i5] or params[:i6] or params[:i7] or params[:i8]
     else
       i1=params[:i1]
       i2=params[:i2]
@@ -2245,7 +2245,7 @@ GROUP BY terminators.id;").map { |t| t.id }
       i7=params[:i7]
       i8=params[:i8]
       invoice = i1.to_i+i2.to_i+i3.to_i+i4.to_i+i5.to_i+i6.to_i+i7.to_i+i8.to_i
-      send_invoice_types = invoice
+      self.send_invoice_types = invoice
     end
 
     update_attributes(current_user.safe_attributtes(params[:user], id))
