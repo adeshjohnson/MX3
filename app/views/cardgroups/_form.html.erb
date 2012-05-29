@@ -218,11 +218,11 @@
 <script type="text/javascript">
     function toggle_ghost_fields() {
         if ($("cardgroup_use_external_function_1").checked == true) {
-        <%= visual_effect(:fade, "ghost_min_perc") %>
-        <%= visual_effect(:fade, "ghost_balance_perc") %>
+        <%= visual_effect(:fade, "ghost_min_perc").html_safe %>
+        <%= visual_effect(:fade, "ghost_balance_perc").html_safe %>
         } else {
-        <%= visual_effect(:appear, "ghost_min_perc") %>
-        <%= visual_effect(:appear, "ghost_balance_perc") %>
+        <%= visual_effect(:appear, "ghost_min_perc").html_safe %>
+        <%= visual_effect(:appear, "ghost_balance_perc").html_safe %>
         }
     }
 
