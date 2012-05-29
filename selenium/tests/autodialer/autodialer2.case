@@ -97,6 +97,121 @@
 	<td>number_3</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_name</td>
+	<td>test2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_max_retries</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_retry_time</td>
+	<td>180</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_wait_time</td>
+	<td>60</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_callerid</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Campaign was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_name</td>
+	<td>test_re</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Campaign was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_name</td>
+	<td>test_re2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Campaign was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_statistics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=campaign_id</td>
+	<td>None test_re test_re2</td>
+</tr>
 </tbody></table>
 </body>
 </html>
