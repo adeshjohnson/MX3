@@ -536,8 +536,8 @@ class CcshopController < ApplicationController
 
   def check_authentication
     if !session[:card_id] or session[:card_id].size == 0
-      flash[:notice] = _('Must_login_first').html_safe
-      redirect_to :action => 'index' and return false
+      flash[:notice] = _('Must_login_first')
+      redirect_to :action => 'list' and return false
     end
   end
 
