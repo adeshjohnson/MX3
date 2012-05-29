@@ -2053,10 +2053,10 @@ class ApiController < ApplicationController
               tax.merge!({:tax2_enabled => params[:tax2_enabled].to_i}) if params[:tax2_enabled]
               tax.merge!({:tax3_enabled => params[:tax3_enabled].to_i}) if params[:tax3_enabled]
               tax.merge!({:tax4_enabled => params[:tax4_enabled].to_i}) if params[:tax4_enabled]
-              tax.merge!({:tax1_name => params[:tax1_name].to_s}) if params[:tax1_name]
-              tax.merge!({:tax2_name => params[:tax2_name].to_s}) if params[:tax2_name]
-              tax.merge!({:tax3_name => params[:tax3_name].to_s}) if params[:tax3_name]
-              tax.merge!({:tax4_name => params[:tax4_name].to_s}) if params[:tax4_name]
+              tax.merge!({:tax1_name => params[:tax1_name].to_s}) if not params[:tax1_name].to_s.blank?
+              tax.merge!({:tax2_name => params[:tax2_name].to_s}) if not params[:tax2_name].to_s.blank?
+              tax.merge!({:tax3_name => params[:tax3_name].to_s}) if not params[:tax3_name].to_s.blank?
+              tax.merge!({:tax4_name => params[:tax4_name].to_s}) if not params[:tax4_name].to_s.blank?
               tax.merge!({:total_tax_name => params[:total_tax_name].to_s}) if params[:total_tax_name]
               tax.merge!({:tax1_value => params[:tax1_value].to_f}) if params[:tax1_value]
               tax.merge!({:tax2_value => params[:tax2_value].to_f}) if params[:tax2_value]
