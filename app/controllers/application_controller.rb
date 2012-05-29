@@ -2052,7 +2052,7 @@ Variables: (Names marked with * are required)
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Payment_Gateway_Error', :data2 => exception.message).save
         end
 
-        if exception.message.include?('getaddrinfo: Temporary failure in name resolution')
+        if exception.message.include?('Temporary failure in name resolution')
           flash_notice = _('DNS_Error')
           flash_help_link = ''
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'DNS_Error', :data2 => exception.message).save
