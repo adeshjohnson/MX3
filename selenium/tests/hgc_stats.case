@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.165" />
+<link rel="selenium.base" href="" />
 <title>hgc_stats</title>
 </head>
 <body>
@@ -37,6 +37,11 @@
 	<td></td>
 </tr>
 <!--SQL-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/hgc_two_hundred</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/calls_for_hgc</td>
@@ -139,8 +144,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>69.5652 %</td>
+	<td>assertTextPresent</td>
+	<td>60.8696 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>200 - MOR cannot determine who is calling</td>
 	<td></td>
 </tr>
 <tr>
@@ -191,6 +201,41 @@
 <tr>
 	<td>verifyTextNotPresent</td>
 	<td>ANSWERED (11)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_hgc</td>
+	<td>label=200 - MOR cannot determine who is calling. The</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=disposition_22</td>
+	<td>FAILED (200)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_22</td>
+	<td>Unauthenticated</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=disposition_22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>200 - MOR cannot determine who is calling</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>id=disposition_22</td>
 	<td></td>
 </tr>
 <!--login-->
