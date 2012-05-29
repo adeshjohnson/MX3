@@ -1036,15 +1036,6 @@ class AccountingController < ApplicationController
   def generate_invoice_by_cid_pdf
     invoice = Invoice.where({:id => params[:id]}).includes([:tax, :user]).first
 
-    # unless invoice
-    #   if params[:action] == "generate_invoice_detailed_pdf" or params[:action] == "generate_invoice_by_cid_pdf"
-    #     flash[:notice] = _("Invoice_not_found")
-    #     redirect_to :controller => :callc, :action => :main and return false
-    #   else
-    #     raise "Invoice_not_found"
-    #   end
-    # end
-
     unless invoice
       flash[:notice] = _('Invoice_not_found')
       redirect_to :controller => :callc, :action => :main and return false
@@ -1399,10 +1390,15 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
   end
 
   def generate_invoice_by_cid_csv
-    invoice = Invoice.find_by_id(params[:id], :include => [:tax, :user])
+    invoice = Invoice.where({:id => params[:id]}).includes([:tax, :user]).first
 
     unless invoice
       flash[:notice] = _('Invoice_not_found')
+      redirect_to :controller => :callc, :action => :main and return false
+    end
+
+    if invoice.user_id != current_user.id and invoice.user.owner_id != current_user.get_corrected_owner_id
+      dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     end
 
