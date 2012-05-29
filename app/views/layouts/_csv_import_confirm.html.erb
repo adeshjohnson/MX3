@@ -1,9 +1,9 @@
-<b><%= b_exclamation + _('CSV_Import_Delimiter_explanation') %></b>
-<br></br>
-<br></br>
+<b><%= b_exclamation + _('CSV_Import_Delimiter_explanation').html_safe %></b>
+<br/>
+<br/>
 <b><%= _('You_have_to_set_same_delimiters_in_your_system') %> : </b>
 <%= _('COLUMN_SEPARATOR') + " "+ sep.to_s + " " + _('and') + " "+_('DECIMAL_SEPARATOR') + " "+ dec.to_s %>
-<br></br>
+<br/>
 <b><%= _('First_file_lines') %>:</b>
 <br/>
 <br/>
@@ -13,14 +13,14 @@
 <%# tl += 1 %>
 <%# end %>
 <%= "....<br />" if tl > 5 %>
-<br></br>
+<br/>
 <%= form_tag({:action => action_to, :step => "2"}.merge(opts)) do %>
     <%= hidden_field_tag :sepn, sep1.to_s %>
     <%= hidden_field_tag :decn, dec1.to_s if return_type == 2 %>
     <table>
       <tr>
         <td><%= _('We_suggest_import_file_with') %>:</td>
-        <td><%= radio_button_tag 'use_suggestion', '1', true, :onclick => "new Ajax.Updater('sep_results', '#{Web_Dir}/functions/check_separator?sepn=#{sep1}&min_collum_size=#{min_collum_size}'+'&custom='+document.getElementById('use_suggestion_1').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});" %><%= _('COLUMN_SEPARATOR') + " "+ sep1.to_s %>  <%= _('and') + " "+_('DECIMAL_SEPARATOR') + " "+ dec1.to_s if return_type == 2 %></td>
+        <td><%= radio_button_tag 'use_suggestion', '1', true, :onclick => "new Ajax.Updater('sep_results', '#{Web_Dir}/functions/check_separator?sepn=#{sep1}&min_collum_size=#{min_collum_size}'+'&custom='+document.getElementById('use_suggestion_1').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});" %> <%= _('COLUMN_SEPARATOR') + " "+ sep1.to_s %>  <%= _('and') + " "+_('DECIMAL_SEPARATOR') + " "+ dec1.to_s if return_type == 2 %></td>
       </tr>
       <tr>
         <td><%= _('Custom_import_file_csv') %>:</td>
@@ -64,11 +64,13 @@
                 return "0";
         }
     </script>
-    <br></br><br></br>
+    <br/>
+    <br/>
 
     <span id="sep_results">
     <%= submit_tag(_('Continue_file_import')+" >>", :disable_with => _('Processing..')) if !disable_next %>
-      <br></br><br></br>
+      <br/>
+      <br/>
     <table width="100%" class="maintable">
       <tr>
         <th><%= _('Column') %>&nbsp; 1</th>

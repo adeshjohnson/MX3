@@ -2566,7 +2566,7 @@ Variables: (Names marked with * are required)
       disable_next = true if colums_size.size.to_i < min_collum_size.to_i
       flash[:notice] = nil
       flash[:status] = _('Please_confirm_column_delimiter_and_decimal_delimiter')
-      render :partial => "layouts/csv_import_confirm", :locals => {:sep => sep, :dec => dec, :sep1 => sep1, :dec1 => dec1, :return_type => return_type.to_i, :action_to => params[:action].to_s, :fl => objc, :min_collum_size => min_collum_size, :disable_next => disable_next, :opts => opts} and return false
+      render :file => "layouts/_csv_import_confirm", :layout => "callc.html.erb", :locals => {:sep => sep, :dec => dec, :sep1 => sep1, :dec1 => dec1, :return_type => return_type.to_i, :action_to => params[:action].to_s, :fl => objc, :min_collum_size => min_collum_size, :disable_next => disable_next, :opts => opts} and return false
     end
     true
   end
