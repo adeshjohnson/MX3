@@ -772,7 +772,7 @@ class Invoice < ActiveRecord::Base
     year = self.period_start.to_s[0, 4]
     month = self.period_start.to_s[5, 2].to_i.to_s #remove leading 0
 
-    if first_day.to_i == 1 and last_day.to_i == last_day_of_month(year, month).to_i
+    if first_day.to_i == 1 and last_day.to_i == Invoice.last_day_of_month(year, month).to_i
       # get balance from actions for last month
       action = Action.find(:first, :conditions => "user_id = #{self.user_id} AND action = 'user_balance_at_month_end' AND data = '#{year}-#{month}'")
       if action
@@ -801,6 +801,27 @@ class Invoice < ActiveRecord::Base
       MorLog.my_debug("Balance will not be shown because invoice is not for whole month, invoice id: #{id}")
       return nil
     end
+  end
+
+  def Invoice.last_day_of_month(year, month)
+
+    year = year.to_i
+    month = month.to_i
+
+    if (month == 1) or (month == 3) or (month == 5) or (month == 7) or (month == 8) or (month == 10) or (month == 12)
+      day = "31"
+    else
+      if  (month == 4) or (month == 6) or (month == 9) or (month == 11)
+        day = "30"
+      else
+        if year % 4 == 0
+          day = "29"
+        else
+          day = "28"
+        end
+      end
+    end
+    day
   end
 
 end
