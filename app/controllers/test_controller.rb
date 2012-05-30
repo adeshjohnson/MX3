@@ -125,7 +125,7 @@ class TestController < ApplicationController
     script_path = File.expand_path("#{Rails.root}/lib/scripts/monitoring_script.rb")
     if File.exist?(script_path)
       MorLog.my_debug("SCRIPT WAS FOUND")
-      script = "/usr/bin/ruby #{script_path} #{params[:params].to_s.strip.gsub(/(^"|"$)/, "")}"
+      script = "ruby #{script_path} #{params[:params].to_s.strip.gsub(/(^"|"$)/, "")}"
       MorLog.my_debug(script)
       out = %x[#{script}]
       MorLog.my_debug(out)
