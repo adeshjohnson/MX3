@@ -2282,13 +2282,13 @@ GROUP BY terminators.id;").map { |t| t.id }
         elsif params[:minimal_charge_value].to_i != 0 and params[:minimal_charge_date]
           year = params[:minimal_charge_date][:year].to_i
           month = params[:minimal_charge_date][:month].to_i
-          self.minimal_charge_start_at = Time.gm(year, month, 1, 0, 0, 0).to_date
+          self.minimal_charge_start_at = Time.gm(year, month, 1, 0, 0, 0)
         elsif params[:minimal_charge_value].to_i == 0
           self.minimal_charge_start_at = nil
         else
           #set to current datetime, when saveing model, it should cause error
           #because when minimal charge is disabled datetime should be disabled
-          self.minimal_charge_start_at = Time.gm(Time.now.year, Time.now.month, 1, 0, 0, 0).to_date
+          self.minimal_charge_start_at = Time.gm(Time.now.year, Time.now.month, 1, 0, 0, 0)
         end
       end
     end
