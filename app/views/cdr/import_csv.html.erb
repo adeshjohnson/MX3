@@ -23,10 +23,10 @@
     <% flines = []
        tl = 0 %>
     <% for line in session[:file].split(/\n|\r|\rn/) %>
-        <% flines << line if tl < 5 %>
+        <%= raw (line + "<br />").html_safe if tl < 5 %>
         <% tl += 1 %>
     <% end %>
-    <% flines << "...." if tl > 5 %>
+    <%= raw "....<br />".html_safe if tl > 5 %>
 
     <%= text_area_tag "body", flines, :size => "150x10", :class => "input" %>
 
@@ -244,7 +244,7 @@
 
 
       <% tl = 0 %>
-      <% for line in session[:file] %>
+      <% for line in session[:file].split(/\n|\r|\rn/) %>
 
           <% if tl < 20 %>
               <% arr = line.split(@sep) %>
