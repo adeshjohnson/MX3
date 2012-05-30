@@ -1124,8 +1124,8 @@ class ApiController < ApplicationController
                                        <con_fee>#{nice_number(rate['connection_fee']).to_s}</con_fee>
                                        <increment>#{rate['increment_s'].to_s}</increment>
                                        <min_time>#{rate['min_time'].to_s}</min_time>
-                                       <start_time>#{rate['start_time'].to_s}</start_time>
-                                       <end_time>#{rate['end_time'].to_s}</end_time>
+                                       <start_time>#{rate['start_time'].to_s[%r[\w{2}:\w{2}:\w{2}]]}</start_time>
+                                       <end_time>#{rate['end_time'].to_s[%r[\w{2}:\w{2}:\w{2}]]}</end_time>
                                        <daytype>#{rate['daytype'].to_s}</daytype>
                                        </rate>"
             }
