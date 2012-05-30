@@ -61,7 +61,7 @@ else
 
   Api_addres = options[:address].to_s.empty? ? 'http://localhost/billing/api/ma_activate' : options[:address].to_s
   Api_key = options[:key].to_s.empty? ? '' : options[:key].to_s
-  Debug_file = '/home/mor/log/monitorings.log'
+  Debug_file = '/var/log/mor/monitorings.log'
   Database_name = options[:name].to_s.empty? ? 'mor' : options[:name]
   Database_username = options[:user].to_s.empty? ? 'mor' : options[:user]
   Database_password = options[:pasw].to_s.empty? ? '' : options[:pasw]
