@@ -127,7 +127,7 @@ class TestController < ApplicationController
       MorLog.my_debug("SCRIPT WAS FOUND")
       script = "/usr/bin/ruby #{script_path} #{params[:params].to_s.strip.gsub(/(^"|"$)/, "")}"
       MorLog.my_debug(script)
-      out = `#{script}`
+      out = %x[#{script}]
       MorLog.my_debug(out)
       render :text => "DONE (#{out})"
     else
