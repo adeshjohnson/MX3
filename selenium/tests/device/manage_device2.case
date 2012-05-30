@@ -260,12 +260,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>mailbox_value</td>
 	<td>1002@default</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>enable_mwi_value</td>
 	<td>1</td>
 </tr>
@@ -335,17 +335,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>mailbox 	1002@default</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>mailbox_value</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>enable_mwi_value</td>
 	<td>0</td>
 </tr>
@@ -488,7 +488,7 @@
 </tr>
 <!--* verify if dev_ind_0 changes position-->
 <!--netinkamas tikrinamas: elementu pavadinimai ir id nesikeiciau sukeitus vietomis, nors vizualiai susikeicia-->
-<!--<tr> 	<td>verifyElementPresent</td> 	<td>css=#item_1 #dev_ind_0</td> 	<td></td> </tr> <tr> 	<td>dragAndDropToObject</td> 	<td>item_1</td> 	<td>item_2</td> </tr> <tr> 	<td>waitForElementNotPresent</td> 	<td>css=#item_1 #dev_ind_1</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>css=#item_1 #dev_ind_0</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/devices/device_edit/2</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>css=#item_1 #dev_ind_1</td> 	<td></td> </tr> <tr> 	<td>waitForElementNotPresent</td> 	<td>css=#item_1 #dev_ind_0</td> 	<td></td> </tr>-->
+<!--<tr> 	<td>assertElementPresent</td> 	<td>css=#item_1 #dev_ind_0</td> 	<td></td> </tr> <tr> 	<td>dragAndDropToObject</td> 	<td>item_1</td> 	<td>item_2</td> </tr> <tr> 	<td>waitForElementNotPresent</td> 	<td>css=#item_1 #dev_ind_1</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>css=#item_1 #dev_ind_0</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/devices/device_edit/2</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>css=#item_1 #dev_ind_1</td> 	<td></td> </tr> <tr> 	<td>waitForElementNotPresent</td> 	<td>css=#item_1 #dev_ind_0</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
