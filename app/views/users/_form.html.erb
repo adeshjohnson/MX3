@@ -186,7 +186,7 @@
         <%= hidden_field('b_f', @user.frozen_balance) %>
       </td>
     </tr>
-    <tr id="credit-row" <%= 'style="display: none;"' if @user.prepaid? %>>
+    <tr id="credit-row" <%= 'style="display: none;"'.html_safe if @user.prepaid? %>>
       <td id="set_credit_name"><%= _('Credit') %>:</td>
       <td>
         <% text_field 'user', 'credit', "class" => "input" %>
@@ -195,7 +195,7 @@
       </td>
     </tr>
     <% if mor_11_extend? %>
-        <tr id="minimal_charge_value_row" <%= 'style="display: none;"' if @user.prepaid? %>>
+        <tr id="minimal_charge_value_row" <%= 'style="display: none;"'.html_safe if @user.prepaid? %>>
           <td id="minimal_charge_name"><%= _('Minimal Charge for Calls') %>:</td>
           <td>
             <% text_field 'user', 'credit', "class" => "input" %>
