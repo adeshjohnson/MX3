@@ -1,7 +1,7 @@
 <% if rate_details and rate_details.size > 0 %>
     <% rate_details.each_with_index { |t, i| %>
         <% ards = Aratedetail.find(:all, :conditions => ["rate_id = ? AND start_time = ? AND daytype = ?", @rate.id, t["start_time"], type], :order => "aratedetails.from ASC, artype ASC") %>
-        <br><b>Time:</b> <%= t["start_time"] %> - <%= t["end_time"] %><br><br>
+        <br><b>Time:</b> <%= t["start_time"].to_s[%r[\w{2}:\w{2}:\w{2}]] %> - <%= t["end_time"].to_s[%r[\w{2}:\w{2}:\w{2}]] %><br><br>
         <table width="100%" class="maintable">
           <tr>
             <th align="left"><%= _('From') %></th>
