@@ -2123,7 +2123,7 @@ class TariffsController < ApplicationController
     et = params[:date][:hour] + ":" + params[:date][:minute] + ":" + params[:date][:second]
     st = params[:st]
 
-    if st.to_s > et.to_s
+    if Time.parse(st) > Time.parse(et)
       flash[:notice] = _('Bad_time')
       redirect_to :action => 'user_arates_full', :id => @rate.tariff_id, :dg => @rate.destinationgroup_id and return false
     end
