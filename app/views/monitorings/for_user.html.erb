@@ -88,9 +88,9 @@
 
   <br/>
   <script type="text/javascript">
-      var template = new Template("<%= _('Monitoring_template_extended').html_safe %>");
-      var values = <%= monitoring_values(@monitoring, :users => "<strong>"+nice_user(@user)+"</strong>").html_safe %>;
-      var messages = <%= monitoring_messages.html_safe %>;
+      var template = new Template("<%= _('Monitoring_template_extended')%>");
+      var values = <%= raw  monitoring_values(@monitoring, :users => "<strong>"+nice_user(@user)+"</strong>").html_safe %>;
+      var messages = <%= raw monitoring_messages.html_safe %>;
 
       Event.observe(window, 'load', function () {
           $("explanation").update(template.evaluate(values));
