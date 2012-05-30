@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 #!/usr/bin/ruby
 
-require '/home/arunas/mor/12/lib/sql_export'
+require '/home/mor/12/lib/sql_export'
 include SqlExport
 
 #---------- check that script is not running ------------------------------------
