@@ -128,7 +128,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -163,7 +163,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>user[currency_id]</td>
+	<td>user_currency_id</td>
 	<td>label=EUR</td>
 </tr>
 <tr>
@@ -294,17 +294,17 @@
 <tr>
 	<td>assertText</td>
 	<td>total_amount</td>
-	<td>0.0000(EUR)</td>
+	<td>0.0000 (EUR)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>total_fee</td>
-	<td>0.0000(EUR)</td>
+	<td>0.0000 (EUR)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>total_with_tax</td>
-	<td>0.0000(EUR)</td>
+	<td>0.0000 (EUR)</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -348,17 +348,17 @@
 </tr>
 <tr>
 	<td>verifySelectedLabel</td>
-	<td>user[currency_id]</td>
+	<td>user_currency_id</td>
 	<td>EUR</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>user[currency_id]</td>
+	<td>user_currency_id</td>
 	<td>label=USD</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
