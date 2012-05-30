@@ -2,7 +2,7 @@
     <%= @error %>
     <% if @cli %>
         <%= _('Select_user') %>:
-        <select name="user" id="user_<%= cli.id %>" onchange="new Ajax.Updater('user_devices_<%=@cli.id%>', '<%=Web_Dir %>/devices/cli_user_devices/'+ this.value + '?did=<%=cli.id%>&cli=1', {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});">
+        <select name="user" id="user_<%= cli.id %>" onchange="new Ajax.Updater('user_devices_<%=@cli.id%>', '<%=Web_Dir %>/devices/cli_user_devices/'+ this.value + '?did=<%=@cli.id%>&cli=1', {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});">
           <option value="-1"><%= _('Select_user') %> </option>
           <% for user in @users %>
               <option value="<%= user.id %>"><%= nice_user(user) %> </option>
