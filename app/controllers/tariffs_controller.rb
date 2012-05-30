@@ -2150,7 +2150,7 @@ class TariffsController < ApplicationController
         na.round = a.round
         na.price = a.price
         na.rate_id = a.rate_id
-        na.start_time = nst
+        na.start_time = nst.to_s
         na.end_time = "23:59:59"
         na.daytype = a.daytype
         na.save
