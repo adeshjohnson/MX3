@@ -2280,8 +2280,8 @@ GROUP BY terminators.id;").map { |t| t.id }
           self.minimal_charge = 0
           self.minimal_charge_start_at = nil
         elsif params[:minimal_charge_value].to_i != 0 and params[:minimal_charge_date]
-          self.year = params[:minimal_charge_date][:year].to_i
-          self.month = params[:minimal_charge_date][:month].to_i
+          year = params[:minimal_charge_date][:year].to_i
+          month = params[:minimal_charge_date][:month].to_i
           self.minimal_charge_start_at = Date.new(year, month, 1)
         elsif params[:minimal_charge_value].to_i == 0
           self.minimal_charge_start_at = nil
@@ -3269,16 +3269,16 @@ GROUP BY terminators.id;").map { |t| t.id }
     self.get_tax.apply_tax(self.balance)
   end
 
-  def is_callshop_manager? 
-    (defined?(CS_Active) && CS_Active == 1 && self.usergroups.find(:first, :include => :group, :conditions => [ "usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"])) 
-  end 
-	 
-  def callshop_manager_group 
-    if (defined?(CS_Active) && CS_Active == 1) 
-      self.usergroups.find(:first, :include => :group, :conditions => [ "usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"]) 
-    else 
-      return nil 
-    end  
+  def is_callshop_manager?
+    (defined?(CS_Active) && CS_Active == 1 && self.usergroups.find(:first, :include => :group, :conditions => ["usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"]))
+  end
+
+  def callshop_manager_group
+    if (defined?(CS_Active) && CS_Active == 1)
+      self.usergroups.find(:first, :include => :group, :conditions => ["usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"])
+    else
+      return nil
+    end
   end
 
 
