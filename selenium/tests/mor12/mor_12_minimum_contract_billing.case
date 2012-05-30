@@ -204,7 +204,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=minimal_charge_start_at_value</td>
-	<td>Tue Jan 01 00:00:00 +0200 2008</td>
+	<td>2008-01-01 00:00:00 UTC</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -212,8 +212,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>click</td>
+	<td>id=unlimited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_postpaid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
 	<td>minimal_charge_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>minimal_charge_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1264,7 +1284,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=minimal_charge_start_at_value</td>
-	<td>Fri Feb 01 00:00:00 +0200 2008</td>
+	<td>2008-02-01 00:00:00 UTC</td>
 </tr>
 <tr>
 	<td>open</td>
