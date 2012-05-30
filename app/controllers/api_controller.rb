@@ -1065,8 +1065,8 @@ class ApiController < ApplicationController
                   outstring << "<type>#{rate['artype'].to_s}</type>
                   <round_by>#{rate['round'].to_s}</round_by>
                   <tariff_rate>#{rate['price'].to_s}</tariff_rate>
-                  <start_time>#{rate['start_time'].to_s}</start_time>
-                  <end_time>#{rate['end_time'].to_s}</end_time>
+                  <start_time>#{rate['start_time'].to_s[%r[\w{2}:\w{2}:\w{2}]]}</start_time>
+                  <end_time>#{rate['end_time'].to_s[%r[\w{2}:\w{2}:\w{2}]]}</end_time>
                   <daytype>#{rate['daytype'].to_s}</daytype>
                   <from>#{rate['from'].to_s}</from>
                   </rate>"
