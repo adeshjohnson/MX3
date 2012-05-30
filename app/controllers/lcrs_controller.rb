@@ -440,7 +440,7 @@ class LcrsController < ApplicationController
         selected_lcrs = params[:lcr].map { |key, value| key.to_i }
         selected_lcrs.reject! { |lcr_id| lcr_id == 0 }
         if selected_lcrs.size > 0
-          if Lcr.dup_lcrs(resellerA[0], resellerB[0], selected_lcrs)
+          if Lcr.clone_lcrs(resellerA[0], resellerB[0], selected_lcrs)
             flash[:status] = _('Selecte_LCRs_cloned')
           else
             flash[:notice] = _("Failed_to_clone_LCR's")
