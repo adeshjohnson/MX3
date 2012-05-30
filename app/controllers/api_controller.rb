@@ -124,7 +124,7 @@ class ApiController < ApplicationController
               st = originate_call(device.id, src, channel, "mor_cb_dst_ask", "123", device.callerid_number)
             end
             doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
-            doc.Status(st.to_i == 0 ?  "Ok" : _('Cannot_connect_to_asterisk_server'))
+            doc.Status(st.to_i == 0 ? "Ok" : _('Cannot_connect_to_asterisk_server'))
           else
             doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
             doc.Status("No source")
@@ -1593,7 +1593,7 @@ class ApiController < ApplicationController
 
                       end
 
-                      Action.add_action_hash(admin.id, # for admin
+                      Action.add_action_hash(monitoring.owner_id, # for admin
                                              {:action => "monitoring_activate",
                                               :data => "Monitoring activated",
                                               :data2 => status,
@@ -1700,11 +1700,11 @@ class ApiController < ApplicationController
     if Confline.get_value("Devices_Check_Ballance").to_i == 1
       @user = User.find(:first, :conditions => "uniquehash = '#{params[:id]}'")
       if @user
-        if params[:currency].to_s.blank?# in case currency was not supplied or is blank return balance in system's currency 
+        if params[:currency].to_s.blank? # in case currency was not supplied or is blank return balance in system's currency
           user_balance = @user.balance
         elsif params[:currency].to_s.downcase == 'user'
           user_balance = @user.balance * Currency.count_exchange_rate(Currency.get_default.name, @user.currency.name)
-        elsif Currency.find(:first, :conditions => {:name => params[:currency]})# in case valid currency was supplied return balance in that currency
+        elsif Currency.find(:first, :conditions => {:name => params[:currency]}) # in case valid currency was supplied return balance in that currency
           user_balance = @user.balance * Currency.count_exchange_rate(Currency.get_default.name, params[:currency])
         else # in case invalid currency value was supplied, return currency in system's currency
           user_balance = @user.balance
@@ -1722,11 +1722,11 @@ class ApiController < ApplicationController
     if Confline.get_value("Devices_Check_Ballance").to_i == 1
       user = User.find(:first, :conditions => ["username = ?", params[:username]])
       if user
-        if params[:currency].to_s.blank?# in case currency was not supplied or is blank return balance in system's currency 
+        if params[:currency].to_s.blank? # in case currency was not supplied or is blank return balance in system's currency
           user_balance = user.balance
         elsif params[:currency].to_s.downcase == 'user'
           user_balance = user.balance * Currency.count_exchange_rate(Currency.get_default.name, user.currency.name)
-        elsif Currency.find(:first, :conditions => {:name => params[:currency]})# in case valid currency was supplied return balance in that currency
+        elsif Currency.find(:first, :conditions => {:name => params[:currency]}) # in case valid currency was supplied return balance in that currency
           user_balance = user.balance * Currency.count_exchange_rate(Currency.get_default.name, params[:currency])
         else # in case invalid currency value was supplied, return currency in system's currency
           user_balance = user.balance
@@ -3528,7 +3528,7 @@ class ApiController < ApplicationController
             end
           else
             card = Card.find(:first, :conditions => {:callerid => values[:callerid]})
-            if  !card or (card and (card.cardgroup.owner_id == @current_user.get_correct_owner_id) or card.cardgroup.hidden == 1 )
+            if  !card or (card and (card.cardgroup.owner_id == @current_user.get_correct_owner_id) or card.cardgroup.hidden == 1)
               if card
                 card_by_pin = Card.find(:first, :include => :cardgroup, :conditions => ['cards.pin = ? AND cardgroups.owner_id =? AND cards.id <> ?', values[:pin], @current_user.get_correct_owner_id, card.id])
                 if  card_by_pin
