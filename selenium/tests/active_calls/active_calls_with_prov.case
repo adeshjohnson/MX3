@@ -38,6 +38,31 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_8 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=active_calls_interval</td>
+	<td>500</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/cc_various_calls</td>
 	<td></td>
 </tr>
@@ -444,7 +469,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_1</td>
-	<td>Test Provider</td>
+	<td>common_use_provider</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -454,16 +479,11 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_3</td>
-	<td>common_use_provider</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=provider_4</td>
 	<td>Test Provider</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=provider_8</td>
+	<td>id=provider_4</td>
 	<td>Test Provider</td>
 </tr>
 <tr>
