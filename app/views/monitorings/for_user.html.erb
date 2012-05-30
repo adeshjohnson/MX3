@@ -59,7 +59,7 @@
 </script>
 
 <div id="new_entry" style="<%= "display: none" unless params[:for_user] %>">
-  <% form_for @monitoring, :url => {:action => 'create'}, :builder => MonitoringFormBuilder do |f| %>
+  <%= form_for @monitoring, :url => {:action => 'create'}, :builder => MonitoringFormBuilder do |f| %>
       <table width="100%" class="monitoring" cellspacing="0" cellpadding="0">
         <thead>
         <tr>
@@ -89,7 +89,7 @@
   <br/>
   <script type="text/javascript">
       var template = new Template("<%= _('Monitoring_template_extended')%>");
-      var values = <%= raw  monitoring_values(@monitoring, :users => "<strong>"+nice_user(@user)+"</strong>").html_safe %>;
+      var values = <%= raw  monitoring_values(@monitoring, :users => "<strong>"+nice_user(@user)+"</strong>".html_safe).html_safe %>;
       var messages = <%= raw monitoring_messages.html_safe %>;
 
       Event.observe(window, 'load', function () {
