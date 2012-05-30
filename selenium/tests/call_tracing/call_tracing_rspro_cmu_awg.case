@@ -50,7 +50,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>tariff[purpose]_user</td>
+	<td>tariff_purpose_user</td>
 	<td></td>
 </tr>
 <tr>
@@ -121,7 +121,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>tariff[purpose]_provider</td>
+	<td>tariff_purpose_provider</td>
 	<td></td>
 </tr>
 <tr>
@@ -370,8 +370,8 @@
 	<td>9</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//th[7]/input</td>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@type='image'])[4]</td>
 	<td></td>
 </tr>
 <!--set localization rules-->
@@ -520,7 +520,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[currency_id]</td>
+	<td>id=user_currency_id</td>
 	<td>label=AWG</td>
 </tr>
 <tr>
@@ -940,7 +940,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <!--delete lcr-->
