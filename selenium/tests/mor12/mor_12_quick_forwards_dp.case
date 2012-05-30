@@ -36,6 +36,46 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='quickforward_dp_name']</td>
+	<td>Quick Forward DIDs DP</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=quickforwards_user</td>
+	<td>label=System Admin (0)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#quickforwards_user &gt; option[value=&quot;0&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=users_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=users_device</td>
+	<td>label=IAX2/103</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cb_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Dialplan successfully created</td>
+</tr>
 <!--MOR11-->
 <tr>
 	<td>open</td>
@@ -113,37 +153,12 @@
 	<td>Quick Forward DIDs DP</td>
 </tr>
 <!--MOR12-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dids/edit/1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Quick Forwards Dial Plan</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>name=dp_id</td>
-	<td></td>
-</tr>
+<!--VERIFY FIELDS-->
 <tr>
 	<td>open</td>
 	<td>/billing/dialplans/dialplans</td>
 	<td></td>
 </tr>
-<!--VERIFY FIELDS-->
 <tr>
 	<td>assertTextPresent</td>
 	<td>Quickforward</td>
@@ -332,17 +347,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quickforward_dp_2</td>
+	<td>id=quickforward_dp_3</td>
 	<td>qf_dp</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quickforward_dp_device_id_2</td>
+	<td>id=quickforward_dp_device_id_3</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quickforward_dp_data10_2</td>
+	<td>id=quickforward_dp_data10_3</td>
 	<td></td>
 </tr>
 <tr>
@@ -517,38 +532,18 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>id=quickforward_dp_2</td>
+	<td>id=quickforward_dp_3</td>
 	<td>qf_dp</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quickforward_dp_user_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=quickforward_dp_device_id_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=#quickforward_dp_data10_2 &gt; img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=quickforward_dp_3</td>
-	<td>qf_dp2</td>
-</tr>
-<tr>
-	<td>assertText</td>
 	<td>id=quickforward_dp_user_3</td>
-	<td>admin</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=quickforward_dp_device_id_3</td>
-	<td>IAX2/103</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -556,8 +551,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>id=quickforward_dp_4</td>
+	<td>qf_dp2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=quickforward_dp_user_4</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=quickforward_dp_device_id_4</td>
+	<td>IAX2/103</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#quickforward_dp_data10_4 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
-	<td>/billing/dialplans/edit/2</td>
+	<td>/billing/dialplans/edit/3</td>
 	<td></td>
 </tr>
 <tr>
@@ -664,7 +679,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/edit/3</td>
+	<td>/billing/dialplans/edit/4</td>
 	<td></td>
 </tr>
 <tr>
@@ -713,6 +728,11 @@
 	<td>blur</td>
 </tr>
 <tr>
+	<td>fireEvent</td>
+	<td>id=data10</td>
+	<td>click</td>
+</tr>
+<tr>
 	<td>waitForValue</td>
 	<td>id=data10</td>
 	<td>on</td>
@@ -750,7 +770,7 @@
 <tr>
 	<td>assertText</td>
 	<td>name=dp_id</td>
-	<td>qf_dp qf_dp2</td>
+	<td>qf_dp qf_dp2 Quick Forward DIDs DP</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -805,7 +825,7 @@
 <tr>
 	<td>assertText</td>
 	<td>name=dp_id</td>
-	<td>qf_dp qf_dp2</td>
+	<td>qf_dp qf_dp2 Quick Forward DIDs DP</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -830,6 +850,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
@@ -1059,17 +1084,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quickforward_dp_4</td>
+	<td>id=quickforward_dp_5</td>
 	<td>qf_dp_re</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quickforward_dp_device_id_4</td>
+	<td>id=quickforward_dp_device_id_5</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quickforward_dp_data10_4</td>
+	<td>id=quickforward_dp_data10_5</td>
 	<td></td>
 </tr>
 <tr>
@@ -1299,37 +1324,37 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quickforward_dp_4</td>
+	<td>id=quickforward_dp_5</td>
 	<td>qf_dp_re</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quickforward_dp_user_4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=quickforward_dp_device_id_4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=#quickforward_dp_data10_4 &gt; img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=quickforward_dp_5</td>
-	<td>qf_dp2</td>
-</tr>
-<tr>
-	<td>assertText</td>
 	<td>id=quickforward_dp_user_5</td>
-	<td>user_reseller</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=quickforward_dp_device_id_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#quickforward_dp_data10_5 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=quickforward_dp_6</td>
+	<td>qf_dp2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=quickforward_dp_user_6</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=quickforward_dp_device_id_6</td>
 	<td>IAX2/105</td>
 </tr>
 <tr>
@@ -1364,7 +1389,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/edit/4</td>
+	<td>/billing/dialplans/edit/5</td>
 	<td></td>
 </tr>
 <tr>
@@ -1445,6 +1470,11 @@
 	<td>blur</td>
 </tr>
 <tr>
+	<td>fireEvent</td>
+	<td>id=quickforwards_user</td>
+	<td>change</td>
+</tr>
+<tr>
 	<td>waitForSelectedLabel</td>
 	<td>id=quickforwards_user</td>
 	<td>Test Reseller (3)</td>
@@ -1481,7 +1511,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/edit/5</td>
+	<td>/billing/dialplans/edit/6</td>
 	<td></td>
 </tr>
 <tr>
@@ -1666,7 +1696,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/edit/2</td>
+	<td>/billing/dialplans/edit/3</td>
 	<td></td>
 </tr>
 <tr>
@@ -1676,7 +1706,27 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/destroy/2</td>
+	<td>/billing/dialplans/destroy/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/update/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/5</td>
 	<td></td>
 </tr>
 <tr>
@@ -1686,42 +1736,22 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/update/2</td>
+	<td>/billing/dialplans/destroy/5</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>You are not authorized to view this page</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/edit/4</td>
+	<td>/billing/dialplans/update/5</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>You are not authorized to view this page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dialplans/destroy/4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>You are not authorized to view this page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dialplans/update/4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>You are not authorized to view this page</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
@@ -1751,7 +1781,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/edit/2</td>
+	<td>/billing/dialplans/edit/3</td>
 	<td></td>
 </tr>
 <tr>
@@ -1761,7 +1791,27 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/destroy/2</td>
+	<td>/billing/dialplans/destroy/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/update/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/5</td>
 	<td></td>
 </tr>
 <tr>
@@ -1771,42 +1821,22 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/update/2</td>
+	<td>/billing/dialplans/destroy/5</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>You are not authorized to view this page</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/edit/4</td>
+	<td>/billing/dialplans/update/5</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>You are not authorized to view this page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dialplans/destroy/4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>You are not authorized to view this page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dialplans/update/4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>You are not authorized to view this page</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
@@ -1836,7 +1866,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/edit/2</td>
+	<td>/billing/dialplans/edit/3</td>
 	<td></td>
 </tr>
 <tr>
@@ -1846,7 +1876,27 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/destroy/2</td>
+	<td>/billing/dialplans/destroy/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/update/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/5</td>
 	<td></td>
 </tr>
 <tr>
@@ -1856,42 +1906,22 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/update/2</td>
+	<td>/billing/dialplans/destroy/5</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>You are not authorized to view this page</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/edit/4</td>
+	<td>/billing/dialplans/update/5</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>You are not authorized to view this page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dialplans/destroy/4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>You are not authorized to view this page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dialplans/update/4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>You are not authorized to view this page</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
@@ -1921,7 +1951,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/destroy/3</td>
+	<td>/billing/dialplans/destroy/4</td>
 	<td></td>
 </tr>
 <tr>
@@ -1931,7 +1961,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/update/3</td>
+	<td>/billing/dialplans/update/4</td>
 	<td></td>
 </tr>
 <tr>
@@ -1940,8 +1970,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>open</td>
+	<td>/billing/dialplans/dialplans</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=#quickforward_dp_delete_3 &gt; a</td>
+	<td>css=#quickforward_dp_delete_4 &gt; a</td>
 	<td></td>
 </tr>
 <tr>
@@ -1976,7 +2011,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=#quickforward_dp_delete_3 &gt; a &gt; img[alt=&quot;Delete&quot;]</td>
+	<td>css=#quickforward_dp_delete_4 &gt; a &gt; img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1991,7 +2026,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/edit/4</td>
+	<td>/billing/dialplans/edit/5</td>
 	<td></td>
 </tr>
 <tr>
@@ -2001,7 +2036,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/destroy/4</td>
+	<td>/billing/dialplans/destroy/5</td>
 	<td></td>
 </tr>
 <tr>
@@ -2011,7 +2046,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dialplans/update/4</td>
+	<td>/billing/dialplans/update/5</td>
 	<td></td>
 </tr>
 <tr>
@@ -2036,7 +2071,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>Dial Plan was not found</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
@@ -2046,7 +2081,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>Dial Plan was not found</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 </tbody></table>
