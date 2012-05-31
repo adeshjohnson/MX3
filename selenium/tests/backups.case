@@ -678,6 +678,41 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='quickforward_dp_name']</td>
+	<td>qf_dp</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=quickforwards_user</td>
+	<td>label=System Admin (0)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=users_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=users_device</td>
+	<td>label=IAX2/103</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cb_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Dialplan successfully created</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/dids/list</td>
 	<td></td>
 </tr>
@@ -743,7 +778,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>type_24</td>
+	<td>type_26</td>
 	<td></td>
 </tr>
 <tr>
@@ -753,7 +788,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>type_24</td>
+	<td>type_26</td>
 	<td>backup_restored</td>
 </tr>
 </tbody></table>
