@@ -268,8 +268,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>notice</td>
-	<td>Bad number length should be: 10</td>
+	<td>id=notice</td>
+	<td>Bad number length, should be: 10</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -354,8 +354,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=notice</td>
-	<td>Card Group can not be deleted</td>
+	<td>id=status</td>
+	<td>Card group deleted</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -425,6 +425,26 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Check available Cards (not sold)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>5555555555</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>5555555557</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -504,7 +524,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/list?cg=1&amp;s_sold=no</td>
+	<td>/billing/cards/list?cg=2&amp;s_sold=no</td>
 	<td></td>
 </tr>
 <tr>
@@ -520,7 +540,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=status</td>
-	<td>Card was permanently hidden</td>
+	<td>Card was deleted</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -539,8 +559,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>notice</td>
-	<td>Card Group can not be deleted</td>
+	<td>id=status</td>
+	<td>Card group deleted</td>
 </tr>
 </tbody></table>
 </body>
