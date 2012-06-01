@@ -79,13 +79,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Are you sure?</td>
+	<td>clickAndWait</td>
+	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
@@ -114,13 +114,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Are you sure?</td>
+	<td>clickAndWait</td>
+	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
@@ -131,7 +131,7 @@
 <!--reserve DID to reseller-->
 <tr>
 	<td>open</td>
-	<td>/billing/dids/edit/3</td>
+	<td>/billing/dids/edit/5</td>
 	<td></td>
 </tr>
 <tr>
@@ -146,7 +146,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dids/edit/4</td>
+	<td>/billing/dids/edit/6</td>
 	<td></td>
 </tr>
 <tr>
@@ -161,7 +161,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dids/edit/9</td>
+	<td>/billing/dids/edit/11</td>
 	<td></td>
 </tr>
 <tr>
@@ -176,7 +176,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dids/edit/10</td>
+	<td>/billing/dids/edit/12</td>
 	<td></td>
 </tr>
 <tr>
@@ -188,6 +188,46 @@
 	<td>clickAndWait</td>
 	<td>//input[@name='commit' and @value='Reserve']</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='quickforward_dp_name']</td>
+	<td>qf_dp</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=quickforwards_user</td>
+	<td>label=System Admin (0)</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>id=quickforwards_user</td>
+	<td>change</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=users_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=users_device</td>
+	<td>label=IAX2/103</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cb_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Dialplan successfully created</td>
 </tr>
 <!--assign to quickforwards-->
 <tr>
@@ -283,7 +323,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>[1,2,3,4]% - matches DIDs beginning with 1 2 3 and 4 </td>
+	<td>[1,2,3,4]% - matches dids beginning with 1 2 3 and 4</td>
 	<td></td>
 </tr>
 <tr>
@@ -520,7 +560,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
