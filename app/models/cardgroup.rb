@@ -233,13 +233,6 @@ class Cardgroup < ActiveRecord::Base
     current_user = User.current.id
     arr[:calls_in_db] = Call.count(:all, :conditions => {:reseller_id => current_user}).to_i
 
-    # set error flag on dublicates number | code : 1
-    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 1 WHERE col_#{options[:imp_number]} IN (SELECT prf FROM (select col_#{options[:imp_number]} as prf, count(*) as u from #{name} group by col_#{options[:imp_number]}  having u > 1) as imf )")
-
-    # set error flag on dublicates pin | code : 2
-    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 2 WHERE col_#{options[:imp_pin]} IN (SELECT prf FROM (select col_#{options[:imp_pin]} as prf, count(*) as u from #{name} group by col_#{options[:imp_pin]}  having u > 1) as imf )")
-
-
     # set error flag on not int number | code : 3
     ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 3 WHERE replace(col_#{options[:imp_number]}, '\\r', '') REGEXP '^[0-9]+$' = 0")
 
@@ -257,8 +250,20 @@ class Cardgroup < ActiveRecord::Base
     # set error flag on length pin | code : 7
     ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 7 WHERE LENGTH(replace(col_#{options[:imp_pin]}, '\\r', '')) != #{pin_length.to_i}")
 
-    # set not_found_in_db flag
-    ActiveRecord::Base.connection.execute("UPDATE #{name} LEFT JOIN cards ON (cards.pin = replace(col_#{options[:imp_pin]}, '\\r', '') AND cards.cardgroup_id = #{id} AND cards.number = replace(col_#{options[:imp_number]}, '\\r', '')) SET not_found_in_db = 1 WHERE cards.id IS NULL AND f_error = 0")
+    #set error flag on duplicate number in csv file | code : 1 
+    result_set = ActiveRecord::Base.connection.select_all("SELECT COUNT(*) count, col_#{options[:imp_number]} number FROM #{name} WHERE f_error = 0 GROUP BY col_#{options[:imp_number]} HAVING COUNT(*) > 1") 
+    result_set.each { |row| 
+      ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 1 WHERE col_#{options[:imp_number]} = #{row['number']} LIMIT #{row['count'].to_i - 1}") 
+    } 
+
+    # set error flag on duplicate pin in csv file | code : 2 
+    result_set = ActiveRecord::Base.connection.select_all("SELECT COUNT(*) count, col_#{options[:imp_pin]} pin FROM #{name} WHERE f_error = 0 GROUP BY col_#{options[:imp_pin]} HAVING COUNT(*) > 1") 
+    result_set.each { |row| 
+      ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 2 WHERE col_#{options[:imp_pin]} = #{row['pin']} LIMIT #{row['count'].to_i - 1}") 
+    } 
+
+    # set not_found_in_db flag 
+    ActiveRecord::Base.connection.execute("UPDATE #{name} LEFT JOIN cards ON (cards.pin = replace(col_#{options[:imp_pin]}, '\\r', '') OR cards.number = replace(col_#{options[:imp_number]}, '\\r', '')) SET not_found_in_db = 1 WHERE cards.id IS NULL AND f_error = 0")
 
     arr[:bad_cards] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 1").to_i
     arr[:cards_to_create] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 0 AND not_found_in_db = 1").to_i
