@@ -72,7 +72,8 @@ class Device < ActiveRecord::Base
   end
 
   def validate_fax_device_codecs                                                                                                                                                                                    
-    if self.device_type == 'FAX' and self.codecs.empty?                                                                                                                                                             
+    valid_codecs_count = self.codecs.count {|codec| ['alaw','ulaw'].include? codec.name} 
+    if self.device_type == 'FAX' and valid_codecs_count == 0 
        self.errors.add(:devicecodecs, 'Fax_device_has_to_have_at_least_one_codec_enabled')                                                                                                                          
        return false                                                                                                                                                                                                 
     else                                                                                                                                                                                                            
