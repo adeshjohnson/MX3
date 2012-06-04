@@ -996,13 +996,17 @@ class Device < ActiveRecord::Base
 
 =begin
   Set time limit per day option for the device. In database it is saved in seconds but this
-  method is expecting minutes tu be passed to it
+  method is expecting minutes tu be passed to it. If negative or none numeric params would be 
+  passed it will be converted to 0. if float would be passed as param, decimal part would be 
+  striped.
 
   *Params*
   +minutes+ integer, time interval in minutes.
 =end
   def time_limit_per_day=(minutes)
-    write_attribute(:time_limit_per_day, minutes.to_i * 60)
+    minutes = (minutes.to_i < 0) ? 0 : minutes.to_i
+    seconds = minutes * 60
+    write_attribute(:time_limit_per_day, seconds)
   end
 
 =begin
