@@ -1763,6 +1763,12 @@ class DevicesController < ApplicationController
     Confline.set_value("Default_device_regseconds", params[:canreinvite], session[:user_id])
     Confline.set_value("Default_device_canreinvite", params[:canreinvite], session[:user_id])
 
+    default_transport = 'udp'                                                                                                                                          
+    valid_transport_options = ['tcp', 'udp', 'tcp,udp', 'udp,tcp']                                                                                                     
+    device_transport = params[:device][:transport].to_s                                                                                                                
+    transport = (valid_transport_options.include?(device_transport) ? device_transport.to_s : 'udp')                                                                   
+    Confline.set_value("Default_device_transport", transport, session[:user_id])           
+
     #----------- Codecs ------------------
     if params[:codec]
       for codec in Codec.find(:all)

@@ -164,7 +164,8 @@
       </td>
     </tr>
 <% end %>
-<% if defined? AST_18 and AST_18.to_i == 1 %>
+<%= @device_type %>
+<% if @device_type == 'SIP' and defined? AST_18 and AST_18.to_i == 1 %>
   <tr>
     <td> <%= _('Transport') %>: </td>
     <td>

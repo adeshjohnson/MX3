@@ -1215,6 +1215,7 @@ class User < ActiveRecord::Base
     device.pickupgroup = Confline.get_value("Default_device_pickupgroup", owner_id).to_s.blank? ? nil : Confline.get_value("Default_device_pickupgroup", owner_id).to_i
     device.fromuser = Confline.get_value("Default_device_fromuser", owner_id).to_s
 
+    device.transport = Confline.get_value("Default_device_transport", owner_id).to_s 
     device.fromdomain = Confline.get_value("Default_device_fromdomain", owner_id).to_s
     device.grace_time = Confline.get_value("Default_device_grace_time", owner_id).to_s
     device.insecure = Confline.get_value("Default_device_insecure", owner_id).to_s
