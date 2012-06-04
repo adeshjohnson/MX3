@@ -1600,16 +1600,23 @@ class DevicesController < ApplicationController
 
     @devicetypes = Devicetype.load_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?)
 
-    @audio_codecs = Codec.find(:all,
+    @device_type =Confline.get_value("Default_device_type", session[:user_id]) 
+    if @device_type == 'FAX' 
+      @audio_codecs = Codec.find(:all, 
+        :select=>'codecs.*,  (conflines.value2 + 0) AS v2', :joins=>"LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, 'Default_device_codec_', '') and owner_id = #{session[:user_id]})", 
+        :conditions =>"conflines.name like 'Default_device_codec%' and codecs.codec_type = 'audio' and codecs.name IN ('alaw', 'ulaw')", 
+        :order=>'v2 asc')
+    else
+      @audio_codecs = Codec.find(:all,
                                :select => 'codecs.*,  (conflines.value2 + 0) AS v2', :joins => 'LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))',
                                :conditions => ["conflines.name like 'Default_device_codec%' and codecs.codec_type = 'audio' and owner_id =?", session[:user_id]],
                                :order => 'v2 asc')
+    end
     @video_codecs = Codec.find(:all,
                                :select => 'codecs.*, (conflines.value2 + 0) AS v2', :joins => 'LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))',
                                :conditions => ["conflines.name like 'Default_device_codec%' and codecs.codec_type = 'video' and owner_id =?", session[:user_id]],
                                :order => 'v2 asc')
     @owner = session[:user_id]
-    @device_type =Confline.get_value("Default_device_type", session[:user_id])
     if session[:usertype] == 'reseller'
       collect_locations = 'user_id=? and id != 1'
     else
@@ -1777,6 +1784,10 @@ class DevicesController < ApplicationController
     Confline.set_value("Default_device_time_limit_per_day", time_limit_per_day, session[:user_id])                                                                     
 
     #----------- Codecs ------------------
+    if params[:device][:device_type] == 'FAX' and (!params[:codec] or !(params[:codec][:alaw].to_i == 1 or params[:codec][:ulaw].to_i == 1)) 
+      flash[:notice]=_("Fax_device_has_to_have_at_least_one_codec_enabled") 
+      redirect_to :action => 'default_device' and return false 
+    end 
     if params[:codec]
       for codec in Codec.find(:all)
         if params[:codec][codec.name] == "1"
