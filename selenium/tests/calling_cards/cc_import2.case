@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.147" />
+<title>cc_import2</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">cc_import2</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>Group No 1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_number_length</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_pin_length</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card group was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>Group No 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_number_length</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_pin_length</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card group was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/import_csv?cg=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/cc_import_duplicate_pin_and_number.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=pin_id</td>
+	<td>label=123000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=number_id</td>
+	<td>label=123000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=balance_id</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=new_cards_value</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bad_new_cards</td>
+	<td>3 bad cards</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=3 bad cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=error_0</td>
+	<td>Number is duplicate</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=error_1</td>
+	<td>PIN is duplicate</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=error_2</td>
+	<td>Number is duplicate</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_number</td>
+	<td>124001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>124001</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_number</td>
+	<td>125001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>125001</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_number</td>
+	<td>126001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>126001</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_number</td>
+	<td>127001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>127001</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/import_csv?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/cc_import_duplicate_pin_and_number.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=pin_id</td>
+	<td>label=123000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=number_id</td>
+	<td>label=123000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=balance_id</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>3 bad cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=3 bad cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=error_0</td>
+	<td>Number is duplicate</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=error_1</td>
+	<td>PIN is duplicate</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=error_2</td>
+	<td>Number is duplicate</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>6</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
