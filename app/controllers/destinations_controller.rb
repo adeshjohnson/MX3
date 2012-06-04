@@ -235,7 +235,12 @@ class DestinationsController < ApplicationController
 =end
   def bulk_rename_confirm
     @prefix = params[:prefix]
-    @destinations = Destination.dst_by_prefix(@prefix)
+    begin
+      @destinations = Destination.dst_by_prefix(@prefix)
+    rescue
+      flash[:notice] = _('Invalid_prefix')
+      redirect_to :controller => :directions, :action =>:list and return false
+    end
     if @destinations.size > 0
       @destination_count = @destinations.size
       @destination_name = params[:destination]

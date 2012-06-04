@@ -5,6 +5,7 @@ class QuickforwardsRule < ActiveRecord::Base
 
   validates_presence_of :name, :message => _('Name_cannot_be_blank')
   #validates_presence_of :rule_regexp, :message=> _('Regexp_cannot_be_blank')
+  before_save :check_prefix_regexp
 
   before_create :q_before_create
 
@@ -29,5 +30,13 @@ class QuickforwardsRule < ActiveRecord::Base
     return rules
   end
 
+  def check_prefix_regexp
+    begin
+      QuickforwardsRule.find(:all, :conditions=>["rule_regexp REGEXP ?", self.rule_regexp])
+    rescue
+      errors.add(:prefix,_('Invalid_regexp'))
+      return false
+    end
+  end
 
 end

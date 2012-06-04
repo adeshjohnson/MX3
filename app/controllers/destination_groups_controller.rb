@@ -256,13 +256,24 @@ class DestinationGroupsController < ApplicationController
     @page_icon = "edit.png"
     search = params[:prefix].to_s.include?('%') ? params[:prefix].to_s.delete("%") : params[:prefix].to_s + '$'
     @destinations = Destination.find(:all, :conditions => ['prefix REGEXP ?', '^' + search], :include => [:destinationgroup], :order => 'prefix ASC')
+    begin
+      @destinations = Destination.find(:all, :conditions=>['prefix REGEXP ?', '^' + search], :include=>[:destinationgroup], :order=>'prefix ASC')
+    rescue
+      flash[:notice] = _('Invalid_prefix')
+      redirect_to :controller => :directions, :action =>:list and return false
+    end
     @prefix = params[:prefix]
     @type = params[:type]
   end
 
   def bulk_assign
     search = params[:prefix].to_s.include?('%') ? params[:prefix].to_s.delete("%") : params[:prefix].to_s + '$'
-    @destinations = Destination.find(:all, :conditions => ['prefix REGEXP ?', '^' + search], :include => [:destinationgroup], :order => 'prefix ASC')
+    begin
+      @destinations = Destination.find(:all, :conditions=>['prefix REGEXP ?', '^' + search], :include=>[:destinationgroup], :order=>'prefix ASC')
+    rescue
+      flash[:notice] = _('Invalid_prefix')
+      redirect_to :controller => :directions, :action =>:list and return false
+    end
     @prefix = params[:prefix]
     @type = params[:type]
     for d in @destinations
