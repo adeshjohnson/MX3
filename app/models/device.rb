@@ -46,6 +46,7 @@ class Device < ActiveRecord::Base
 
   # before_create :check_callshop_user
   before_save :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth
+  before_update :validate_fax_device_codecs
   after_create :create_codecs, :device_after_create
   after_save :device_after_save, :prune_device
 
@@ -70,6 +71,15 @@ class Device < ActiveRecord::Base
     end
   end
 
+  def validate_fax_device_codecs                                                                                                                                                                                    
+    if self.device_type == 'FAX' and self.codecs.empty?                                                                                                                                                             
+       self.errors.add(:devicecodecs, 'Fax_device_has_to_have_at_least_one_codec_enabled')                                                                                                                          
+       return false                                                                                                                                                                                                 
+    else                                                                                                                                                                                                            
+       return true                                                                                                                                                                                                  
+    end                                                                                                                                                                                                             
+  end                                                                                                                                                                                                               
+        
   def check_language
     if self.language.to_s.blank?
       self.language = 'en'

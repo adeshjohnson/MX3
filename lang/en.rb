@@ -4387,6 +4387,7 @@ Localization.define('en') do |l|
   l.store 'reCAPTCHA_keys_cannot_be_empty', 'reCAPTCHA keys cannot be empty'
   l.store 'Invalid_prefix', 'Invalid Prefix'
   l.store 'Invalid_regexp', 'Invalid Regexp'
+  l.store 'Fax_device_has_to_have_at_least_one_codec_enabled', 'Fax device has to have at least one codec enabled'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
