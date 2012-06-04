@@ -864,7 +864,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
 
     flash[:status] = _('Logged_as') + ": " + nice_user(@user)
 
-    if defined?(CS_Active) && CS_Active == 1 && group = @user.usergroups.find(:first, :include => :group, :conditions => ["usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"])
+    if defined?(CS_Active) && CS_Active == 1 && group = @user.usergroups.includes(:group).where("usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'").first
       session[:cs_group] = group
       session[:lang] = Translation.find_by_id(group.group.translation_id).short_name
       redirect_to :controller => "callshop", :action => "show", :id => group.group_id and return false

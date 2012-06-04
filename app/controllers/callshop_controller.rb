@@ -20,7 +20,7 @@ class CallshopController < ApplicationController
     true
   }
 
-  before_filter :find_shop_and_authorize, :except => [:new, :show_json, :get_number_data]
+  before_filter :find_shop_and_authorize, :except => [:show_json, :get_number_data]
   # manager view
   def show
     @users = @cshop.users
@@ -284,7 +284,7 @@ class CallshopController < ApplicationController
   private
 
   def find_shop_and_authorize
-    @cshop = Callshop.find_by_id(params[:id], :include => {:users => [:cs_invoices]}, :order => "usergroups.position asc", :conditions => ["usergroups.gusertype = 'user'"])
+    @cshop = Callshop.includes(:users => [:cs_invoices]).where("groups.id = ? AND usergroups.gusertype = 'manager'", params[:id]).includes(:users => [:cs_invoices]).order("usergroups.position asc").first
 
     unless @cshop
       reset_session
@@ -355,7 +355,11 @@ class CallshopController < ApplicationController
 
       #replaced duration counting from sql NOW() to Time.now.getlocal()
       #booth[:duration] = nice_time(booth[:duration])
-      booth[:duration] = nice_time(Time.now.getlocal()- Time.parse(booth[:duration].to_s))
+      if !booth[:duration].to_s.blank?
+        booth[:duration] = nice_time(Time.now.getlocal()- Time.parse(booth[:duration].to_s))
+      else
+        booth[:duration] = nice_time(Time.now.getlocal())
+      end
       booth[:user_type] = (booth[:user_type].to_i == 1 ? "postpaid" : "prepaid")
 
       if booth[:number]

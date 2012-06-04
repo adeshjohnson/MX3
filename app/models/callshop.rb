@@ -1,13 +1,11 @@
 # -*- encoding : utf-8 -*-
 class Callshop < ActiveRecord::Base
   include UniversalHelpers
-  set_table_name "groups"
+  self.table_name = "groups"
 
   has_many :invoices, :class_name => "CsInvoice"
   has_many :unpaid_invoices, :class_name => "CsInvoice", :conditions => {:paid => false}
-  has_many :users, :through => "usergroups", :foreign_key => "group_id", :order => "usergroups.position asc" # should be has many through :
-  belongs_to :user, :through => "usergroups", :foreign_key => "group_id", :order => "usergroups.position asc"
-  has_many :usergroups, :foreign_key => "group_id"
+  has_and_belongs_to_many :users, :join_table => "usergroups", :foreign_key => "group_id", :order => "usergroups.position asc" # should be has many through :|
 
   def free_booths_count
     # all users in callshop - unpaid (reserved or occupied) booths
@@ -23,9 +21,9 @@ class Callshop < ActiveRecord::Base
           booth = {:id => user.id, :element => nil, :state => user.booth_status, :number => nil, :duration => nil, :country => nil, :user_rate => nil, :local_state => false, :comment => nil, :created_at => nil, :balance => nil, :timestamp => nil}
 
           case booth[:state]
-            when "free" :
+            when "free"
               booth
-            when "reserved" :
+            when "reserved"
               invoice = user.cs_invoices.first
               booth.merge!({
                                :comment => invoice.comment,
@@ -36,7 +34,7 @@ class Callshop < ActiveRecord::Base
                                :server => "",
                                :channel => ""
                            })
-            when "occupied" :
+            when "occupied"
               calls += 1
               active_call = user.activecalls.first
               invoice = user.cs_invoices.first

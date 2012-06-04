@@ -11,7 +11,7 @@ module CallshopHelper
 #  end
 
   def tab_for(text, link, html_options = {}, link_options = {})
-    text = "<span class='icon'></span>" + text
+    text = "<span class='icon'></span>".html_safe + text
     link_options[:class] = "active" if current_page?(link)
     content_tag(:li, link_to(text, link, link_options).html_safe, html_options).html_safe
   end
