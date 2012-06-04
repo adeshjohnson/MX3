@@ -25,42 +25,87 @@
       <% end %>
       <% if !(session[:usertype] == 'accountant' and session[:acc_device_edit_opt_4] != 2) %>
           <tr>
-            <td id="cid_number_name"> <%= _('Number') %>:</td>
-            <td id="cid_number_value"> <%= text_field_tag 'cid_number', @cid_number, "class" => "input" %> </td>
-            <td id="cid_number_control" <%= tooltip(_('Control_callerid_by_cid'), _('Control_callerid_by_cid_explanation')) %>> <%= check_box_tag :enable_callerid_by_cid, 1, @device.control_callerid_by_cids?, "class" => "input", :disabled => (@cid_number.to_s.blank?) %> <%= _('Control_callerid_by_cid') %></td>
-          <script type='text/javascript'>
-              function toggleControlByCIDCheckbox(event){
-                disable = (event.target.value == '');
-                $('enable_callerid_by_cid').disabled = disable;
-                if(disable){
-                  $('enable_callerid_by_cid').checked = !disable;
-                  $('control_callerid_by_cids').hide();
-                }
-              }
-              function toggleControlByCIDSelect(event){
-                if(event.target.checked){
-                  $('control_callerid_by_cids').show();
-                }else{
-                  $('control_callerid_by_cids').hide();
-                }
-              }
-              window.addEventListener('load', 
-              function() {
-                 $('cid_number').addEventListener('keyup', function(event){toggleControlByCIDCheckbox(event);});
-                 $('enable_callerid_by_cid').addEventListener('change', function(event){toggleControlByCIDSelect(event)});
-                 if(!$('enable_callerid_by_cid').checked){
-                   $('control_callerid_by_cids').hide()
-                 }
-               });
-          </script>
+            <td height="10"></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td>
-              <%= select_tag('control_callerid_by_cids', options_for_select(@device.callerids.map { |clid| [clid.cli, clid.id]}, @device.control_callerid_by_cids), :visible => @device.control_callerid_by_cids?) %>
-            </td>
+            <td><%= radio_button_tag('device_caller_id_number', 1, @device_caller_id_number == 1, :onchange => 'disable_radio_buttons(this.id)') %></td>
+            <td><%= _('Number') %>
+              : <%= text_field_tag 'cid_number', @cid_number, "class" => "input", :onchange => 'disable_3(this.value)' %></td>
           </tr>
+          <tr>
+            <td><%= radio_button_tag('device_caller_id_number', 2, @device_caller_id_number == 2, :disabled => !(@device_dids_numbers and @device_dids_numbers.size.to_i > 0), :onchange => "disable_radio_buttons(this.id);change_cid_value($('device_number_from_did').value)") %></td>
+            <td>
+              <% if @device_dids_numbers and @device_dids_numbers.size.to_i > 0 %>
+                  <%= _('Number_from_DID') %>
+                  : <%= select_tag 'device_number_from_did', options_for_select(@device_dids_numbers, @cid_number.to_s), :onchange => 'change_cid_value(this.value)' %>
+              <% else %>
+                  <%= params[:action] == 'default_device' ? _('Cannot_set_in_default_device') : _('No_DID_assigned_to_device') %>
+              <% end %></td>
+          </tr>
+          <tr>
+            <td><%= radio_button_tag('device_caller_id_number', 3, @device_caller_id_number == 3, :onchange => 'disable_radio_buttons(this.id)') %></td>
+            <td><%= _('Control_by_DIDs_(CID_from_DIDs)') %></td>
+          </tr>
+          <tr>
+            <td><%= radio_button_tag('device_caller_id_number', 4, @device_caller_id_number == 4, :disabled => !(@device_dids_numbers and @device_dids_numbers.size.to_i > 0), :onchange => "disable_radio_buttons(this.id);change_cid_value($('device_number_cid_from_did').value)") %></td>
+            <td>
+              <% if @device_dids_numbers and @device_dids_numbers.size.to_i > 0 %>
+                  <%= _('Control_by_CIDs') %>
+                  : <%= select_tag 'device_number_cid_from_did', options_for_select(@device_dids_numbers, @cid_number.to_s), :onchange => 'change_cid_value(this.value)' %>
+              <% else %>
+                  <%= params[:action] == 'default_device' ? _('Cannot_set_in_default_device') : _('No_DID_assigned_to_device') %>
+              <% end %></td>
+          </tr>
+          <tr>
+            <td><%= radio_button_tag('device_caller_id_number', 5, @device_caller_id_number == 5, :onchange => 'disable_radio_buttons(this.id)') %></td>
+            <td><%= _('Control_by_Destination') %></td>
+          </tr>
+          <script type='text/javascript'>
+              function disable_radio_buttons(id) {
+                  if (id == 'device_caller_id_number_4') {
+                  <%if   params[:action] != 'default_device' %>
+                      $('device_number_from_did').disabled = true;
+                      $('device_number_cid_from_did').disabled = false;
+                  <%end%>
+                      $('cid_number').readOnly = true;
+                  }
+                  if (id == 'device_caller_id_number_2') {
+                  <%if   params[:action] != 'default_device' %>
+                      $('device_number_cid_from_did').disabled = true;
+                      $('device_number_from_did').disabled = false;
+                  <%end%>
+                      $('cid_number').readOnly = true;
+                  }
+                  if (id == 'device_caller_id_number_1') {
+                  <%if   params[:action] != 'default_device' %>
+                      $('device_number_cid_from_did').disabled = true;
+                      $('device_number_from_did').disabled = true;
+                  <%end%>
+                      $('cid_number').readOnly = false;
+                  }
+                  if (id != 'device_caller_id_number_4' && id !== 'device_caller_id_number_2' && id !== 'device_caller_id_number_1') {
+                  <%if   params[:action] != 'default_device' %>
+                      $('device_number_from_did').disabled = true;
+                      $('device_number_cid_from_did').disabled = true;
+                  <%end%>
+                      $('cid_number').readOnly = true;
+                  }
+                  disable_3($('cid_number').value);
+
+              }
+              function change_cid_value(val) {
+                  $('cid_number').value = val;
+              }
+              function disable_3(value) {
+                  if (value !== '') {
+                      $('device_caller_id_number_3').disabled = true;
+                  }
+                  else {
+                      $('device_caller_id_number_3').disabled = false;
+                  }
+              }
+              disable_radio_buttons('device_caller_id_number_<%=@device_caller_id_number%>');
+          </script>
       <% else %>
           <% if session[:usertype] == 'accountant' and session[:acc_device_edit_opt_4] == 1 %>
               <tr>
@@ -68,23 +113,6 @@
                 <td id="cid_number_value"><%= @cid_number %></td>
               </tr>
           <% end %>
-      <% end %>
-      <% if @dids and @dids.size > 0 %>
-          <tr>
-            <td><%= _('Number_from_DID') %>:</td>
-            <td>
-              <select name="cid_number_from_did">
-                <option value="" selected></option>
-                <% for did in @dids %>
-                    <option value=<%= did.did %>> <%= did.did %> </option>
-                <% end %>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td> <%= _('CID_from_DIDs') %>:</td>
-            <td> <%= check_box_tag 'cid_from_dids', value = "1", checked = @device.cid_from_dids == 1 %> </td>
-          </tr>
       <% end %>
     </table>
   </td>

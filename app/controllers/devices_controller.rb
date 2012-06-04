@@ -104,7 +104,7 @@ class DevicesController < ApplicationController
 
     device.port = Device::DefaultPort["IAX2"] if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type
     device.port = Device::DefaultPort["SIP"] if device.device_type == 'SIP' and not Device.valid_port? device.port, device.device_type
-      device.port = Device::DefaultPort["H323"] if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type 
+    device.port = Device::DefaultPort["H323"] if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type
 
     if device.save
       flash[:status] = device.check_callshop_user(_('device_created'))
@@ -247,7 +247,7 @@ class DevicesController < ApplicationController
     @pdffaxemails = @device.pdffaxemails
     @global_tell_balance = Confline.get_value('Tell_Balance').to_i
     @global_tell_time = Confline.get_value('Tell_Time').to_i
- 
+
 
     set_voicemail_variables(@device)
 
@@ -323,7 +323,13 @@ class DevicesController < ApplicationController
     end
 
     if not @new_device and @device.device_type != "FAX"
-      change_opt_3 == true ? params[:cid_number]=params[:cid_number].to_s.strip : params[:cid_number]= cid_number(@device.callerid)
+      if change_opt_3 == true
+        params[:cid_number]=params[:cid_number].to_s.strip
+        params[:device_caller_id_number] = params[:device_caller_id_number].to_i
+      else
+        params[:device_caller_id_number] = 1
+        params[:cid_number]= cid_number(@device.callerid)
+      end
       change_opt_4 == true ? params[:cid_name]=params[:cid_name].to_s.strip : params[:cid_name]= nice_cid(@device.callerid)
     end
 
@@ -468,25 +474,12 @@ class DevicesController < ApplicationController
         end
       end
 
-      if @device.device_type !="FAX" and (params[:cid_name] or params[:cid_number] or (params[:cid_number_from_did] and params[:cid_number_from_did].length > 0))
-        #if cid number is not specified or checkbox to enable callerid contol by cid was not checked
-        if params[:cid_number].to_s.length == 0 or params[:enable_callerid_by_cid].to_i == 0
-          @device.control_callerid_by_cids = 0
-        else
-          @device.control_callerid_by_cids = params[:control_callerid_by_cids].to_i
-        end
-        if params[:cid_number_from_did] and params[:cid_number_from_did].to_s.length > 0
-          @device.update_cid(params[:cid_name], params[:cid_number_from_did], false)
-        else
-          @device.update_cid(params[:cid_name], params[:cid_number], false)
-        end
+      if @device.device_type != 'FAX'
+        @device.update_cid(params[:cid_name], params[:cid_number], true)
+        @device.cid_from_dids = params[:device_caller_id_number].to_i == 3 ? 1 : 0
+        @device.control_callerid_by_cids = params[:device_caller_id_number].to_i == 4 ? 1 : 0
+        @device.callerid_advanced_control = params[:device_caller_id_number].to_i == 5 ? 1 : 0
       end
-
-      # CID control by DIDs (CID can be only from the set if DIDs)
-      if params[:cid_from_dids] == "1"
-        @device.update_cid("", "", false)
-      end
-      @device.cid_from_dids = params[:cid_from_dids].to_i
 
 
       #================ codecs ===================
@@ -514,7 +507,7 @@ class DevicesController < ApplicationController
       #------- Network related -------
       if !@new_device and @device.device_type == 'H323' and params[:host].to_s.strip !~ /^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/
         flash[:notice] = _('Invalid_IP_addess')
-        redirect_to :action => 'device_edit', :id =>@device.id and return false
+        redirect_to :action => 'device_edit', :id => @device.id and return false
       end
       @device.host = params[:host]
       @device.host = "dynamic" if params[:dynamic_check] == "1"
@@ -531,7 +524,7 @@ class DevicesController < ApplicationController
       @device.port = params[:port] if params[:port]
       @device.port = Device::DefaultPort["IAX2"] if @device.device_type == 'IAX2' and not Device.valid_port? params[:port], @device.device_type
       @device.port = Device::DefaultPort["SIP"] if @device.device_type == 'SIP' and not Device.valid_port? params[:port], @device.device_type
-      @device.port = Device::DefaultPort["H323"] if @device.device_type == 'H323' and not Device.valid_port? params[:port], @device.device_type 
+      @device.port = Device::DefaultPort["H323"] if @device.device_type == 'H323' and not Device.valid_port? params[:port], @device.device_type
 
       @device.canreinvite = params[:canreinvite]
       @device.transfer = params[:canreinvite]
@@ -644,6 +637,8 @@ class DevicesController < ApplicationController
           @cid_name = nice_cid(@device.callerid)
           @cid_number = cid_number(@device.callerid)
         end
+        @device_dids_numbers = @device.dids_numbers
+        @device_caller_id_number = @device.device_caller_id_number
 
         @devicetypes = @device.load_device_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?)
         @audio_codecs = audio_codecs
@@ -1356,7 +1351,7 @@ class DevicesController < ApplicationController
           end
           if  params[:ext_number].to_s.blank?
             flash[:notice] = _('Devices_callflow_external_number_cant_be_blank')
-            redirect_to :action=>'callflow_edit', :id=>@device.id, :cft=>@cf_type and return false
+            redirect_to :action => 'callflow_edit', :id => @device.id, :cft => @cf_type and return false
           end
           cf.data = params[:ext_number].to_s.strip
           cf.data2 = "external"
@@ -1600,17 +1595,17 @@ class DevicesController < ApplicationController
 
     @devicetypes = Devicetype.load_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?)
 
-    @device_type =Confline.get_value("Default_device_type", session[:user_id]) 
-    if @device_type == 'FAX' 
-      @audio_codecs = Codec.find(:all, 
-        :select=>'codecs.*,  (conflines.value2 + 0) AS v2', :joins=>"LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, 'Default_device_codec_', '') and owner_id = #{session[:user_id]})", 
-        :conditions =>"conflines.name like 'Default_device_codec%' and codecs.codec_type = 'audio' and codecs.name IN ('alaw', 'ulaw')", 
-        :order=>'v2 asc')
+    @device_type =Confline.get_value("Default_device_type", session[:user_id])
+    if @device_type == 'FAX'
+      @audio_codecs = Codec.find(:all,
+                                 :select => 'codecs.*,  (conflines.value2 + 0) AS v2', :joins => "LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, 'Default_device_codec_', '') and owner_id = #{session[:user_id]})",
+                                 :conditions => "conflines.name like 'Default_device_codec%' and codecs.codec_type = 'audio' and codecs.name IN ('alaw', 'ulaw')",
+                                 :order => 'v2 asc')
     else
       @audio_codecs = Codec.find(:all,
-                               :select => 'codecs.*,  (conflines.value2 + 0) AS v2', :joins => 'LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))',
-                               :conditions => ["conflines.name like 'Default_device_codec%' and codecs.codec_type = 'audio' and owner_id =?", session[:user_id]],
-                               :order => 'v2 asc')
+                                 :select => 'codecs.*,  (conflines.value2 + 0) AS v2', :joins => 'LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))',
+                                 :conditions => ["conflines.name like 'Default_device_codec%' and codecs.codec_type = 'audio' and owner_id =?", session[:user_id]],
+                                 :order => 'v2 asc')
     end
     @video_codecs = Codec.find(:all,
                                :select => 'codecs.*, (conflines.value2 + 0) AS v2', :joins => 'LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))',
@@ -1627,6 +1622,13 @@ class DevicesController < ApplicationController
     @cid_name = Confline.get_value("Default_device_cid_name", session[:user_id])
     @cid_number = Confline.get_value("Default_device_cid_number", session[:user_id])
     @qualify_time = Confline.get_value("Default_device_qualify", session[:user_id])
+    ddd = Confline.get_value("Default_setting_device_caller_id_number", session[:user_id]).to_i
+    @device.cid_from_dids= 1 if ddd == 3
+    @device.control_callerid_by_cids= 1 if ddd == 4
+    @device.callerid_advanced_control= 1 if ddd == 5
+
+    @device_dids_numbers = @device.dids_numbers
+    @device_caller_id_number = @device.device_caller_id_number
 
     @servers = Server.find(:all, :order => "server_id ASC")
 
@@ -1695,6 +1697,7 @@ class DevicesController < ApplicationController
     Confline.set_value("Default_device_server_id", params[:device][:server_id].to_i, session[:user_id]) if params[:device] and params[:device][:server_id]
     Confline.set_value("Default_device_cid_name", params[:cid_name], session[:user_id])
     Confline.set_value("Default_device_cid_number", params[:cid_number], session[:user_id])
+    Confline.set_value("Default_setting_device_caller_id_number", params[:device_caller_id_number].to_i, session[:user_id])
 
     Confline.set_value("Default_device_nat", params[:device][:nat], session[:user_id])
 
@@ -1770,24 +1773,24 @@ class DevicesController < ApplicationController
     Confline.set_value("Default_device_regseconds", params[:canreinvite], session[:user_id])
     Confline.set_value("Default_device_canreinvite", params[:canreinvite], session[:user_id])
 
-    default_transport = 'udp'                                                                                                                                          
-    valid_transport_options = ['tcp', 'udp', 'tcp,udp', 'udp,tcp']                                                                                                     
-    device_transport = params[:device][:transport].to_s                                                                                                                
-    transport = (valid_transport_options.include?(device_transport) ? device_transport.to_s : 'udp')                                                                   
-    Confline.set_value("Default_device_transport", transport, session[:user_id])           
+    default_transport = 'udp'
+    valid_transport_options = ['tcp', 'udp', 'tcp,udp', 'udp,tcp']
+    device_transport = params[:device][:transport].to_s
+    transport = (valid_transport_options.include?(device_transport) ? device_transport.to_s : 'udp')
+    Confline.set_value("Default_device_transport", transport, session[:user_id])
 
     #time_limit_per_day can be positive integer or 0 by default                                                                                                        
     #it should be entered as minutes and saved as minutes(cause                                                                                                        
     #later it wil be assigned to device and device will convert to minutes..:/)                                                                                        
-    time_limit_per_day = params[:device][:time_limit_per_day].to_i                                                                                                     
-    time_limit_per_day = (time_limit_per_day < 0 ? 0 : time_limit_per_day)                                                                                             
-    Confline.set_value("Default_device_time_limit_per_day", time_limit_per_day, session[:user_id])                                                                     
+    time_limit_per_day = params[:device][:time_limit_per_day].to_i
+    time_limit_per_day = (time_limit_per_day < 0 ? 0 : time_limit_per_day)
+    Confline.set_value("Default_device_time_limit_per_day", time_limit_per_day, session[:user_id])
 
     #----------- Codecs ------------------
-    if params[:device][:device_type] == 'FAX' and (!params[:codec] or !(params[:codec][:alaw].to_i == 1 or params[:codec][:ulaw].to_i == 1)) 
-      flash[:notice]=_("Fax_device_has_to_have_at_least_one_codec_enabled") 
-      redirect_to :action => 'default_device' and return false 
-    end 
+    if params[:device][:device_type] == 'FAX' and (!params[:codec] or !(params[:codec][:alaw].to_i == 1 or params[:codec][:ulaw].to_i == 1))
+      flash[:notice]=_("Fax_device_has_to_have_at_least_one_codec_enabled")
+      redirect_to :action => 'default_device' and return false
+    end
     if params[:codec]
       for codec in Codec.find(:all)
         if params[:codec][codec.name] == "1"
@@ -1956,7 +1959,7 @@ class DevicesController < ApplicationController
       @device = Device.find(:first, :conditions => {:id => params[:id]})
       unless @device
         flash[:notice] = _('Device_was_not_found')
-        redirect_back_or_default("/callc/main") 
+        redirect_back_or_default("/callc/main")
         return false
       end
       if params[:codec_id]

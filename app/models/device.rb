@@ -71,16 +71,16 @@ class Device < ActiveRecord::Base
     end
   end
 
-  def validate_fax_device_codecs                                                                                                                                                                                    
-    valid_codecs_count = self.codecs.count {|codec| ['alaw','ulaw'].include? codec.name} 
-    if self.device_type == 'FAX' and valid_codecs_count == 0 
-       self.errors.add(:devicecodecs, 'Fax_device_has_to_have_at_least_one_codec_enabled')                                                                                                                          
-       return false                                                                                                                                                                                                 
-    else                                                                                                                                                                                                            
-       return true                                                                                                                                                                                                  
-    end                                                                                                                                                                                                             
-  end                                                                                                                                                                                                               
-        
+  def validate_fax_device_codecs
+    valid_codecs_count = self.codecs.count { |codec| ['alaw', 'ulaw'].include? codec.name }
+    if self.device_type == 'FAX' and valid_codecs_count == 0
+      self.errors.add(:devicecodecs, 'Fax_device_has_to_have_at_least_one_codec_enabled')
+      return false
+    else
+      return true
+    end
+  end
+
   def check_language
     if self.language.to_s.blank?
       self.language = 'en'
@@ -950,6 +950,21 @@ class Device < ActiveRecord::Base
     (not username.blank? and (device_type == "SIP" or device_type == "IAX2")) or device_type == "Skype"
   end
 
+
+  def dids_numbers
+    numbers = []
+    self.dids.each { |d| numbers << d.did } if self.dids and self.dids.size.to_i > 0
+    numbers
+  end
+
+  def device_caller_id_number
+    device_caller_id_number = 1
+    device_caller_id_number = 3 if cid_from_dids.to_i == 1
+    device_caller_id_number = 4 if control_callerid_by_cids.to_i == 1
+    device_caller_id_number = 5 if callerid_advanced_control.to_i == 1
+    device_caller_id_number
+  end
+
 =begin
   check whether device belongs to server
 
@@ -1031,13 +1046,14 @@ class Device < ActiveRecord::Base
   def time_limit_per_day
     (read_attribute(:time_limit_per_day) / 60).to_i
   end
+
 =begin
   Callerid control by cids is concidered enabled if callerid is not 0, cause this value should 
   be id of device's clid
 =end
-def control_callerid_by_cids?
-  self.control_callerid_by_cids.to_i != 0 
-end
+  def control_callerid_by_cids?
+    self.control_callerid_by_cids.to_i != 0
+  end
 
   private
 

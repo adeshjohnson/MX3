@@ -764,6 +764,7 @@ class User < ActiveRecord::Base
       Confline.new_confline("Default_device_fake_ring", Confline.get_value("Default_device_fake_ring", 0), id)
       Confline.new_confline("Default_device_save_call_log", Confline.get_value("Default_device_save_call_log", 0), id)
       Confline.new_confline("Default_device_use_ani_for_cli", Confline.get_value("Default_device_use_ani_for_cli", 0), id)
+      Confline.new_confline("Default_setting_device_caller_id_number", Confline.get_value("Default_setting_device_caller_id_number", 0), id)
 
       #------------ codecs ----------------
 
@@ -1215,8 +1216,8 @@ class User < ActiveRecord::Base
     device.pickupgroup = Confline.get_value("Default_device_pickupgroup", owner_id).to_s.blank? ? nil : Confline.get_value("Default_device_pickupgroup", owner_id).to_i
     device.fromuser = Confline.get_value("Default_device_fromuser", owner_id).to_s
 
-    device.time_limit_per_day = Confline.get_value("Default_device_time_limit_per_day", owner_id).to_s   
-    device.transport = Confline.get_value("Default_device_transport", owner_id).to_s 
+    device.time_limit_per_day = Confline.get_value("Default_device_time_limit_per_day", owner_id).to_s
+    device.transport = Confline.get_value("Default_device_transport", owner_id).to_s
     device.fromdomain = Confline.get_value("Default_device_fromdomain", owner_id).to_s
     device.grace_time = Confline.get_value("Default_device_grace_time", owner_id).to_s
     device.insecure = Confline.get_value("Default_device_insecure", owner_id).to_s
@@ -1232,6 +1233,10 @@ class User < ActiveRecord::Base
     if not device.works_not_logged
       device.works_not_logged = 1
     end
+
+    device.cid_from_dids = Confline.get_value("Default_setting_device_caller_id_number", owner_id).to_i == 3 ? 1 : 0
+    device.control_callerid_by_cids = Confline.get_value("Default_setting_device_caller_id_number", owner_id).to_i == 4 ? 1 : 0
+    device.callerid_advanced_control = Confline.get_value("Default_setting_device_caller_id_number", owner_id).to_i == 5 ? 1 : 0
 
     if device.save
 
