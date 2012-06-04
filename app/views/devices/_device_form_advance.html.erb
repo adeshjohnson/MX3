@@ -164,3 +164,14 @@
       </td>
     </tr>
 <% end %>
+<% if defined? AST_18 and AST_18.to_i == 1 %>
+  <tr>
+    <td> <%= _('Transport') %>: </td>
+    <td>
+      <%= radio_button_tag('device[transport]', 'udp', (@device.transport == 'udp')) %> <%= _('udp') %>
+      <%= radio_button_tag('device[transport]', 'tcp', (@device.transport == 'tcp')) %> <%= _('tcp') %>
+      <%= radio_button_tag('device[transport]', 'udp,tcp', (@device.transport == 'udp,tcp')) %> <%= _('udp,tcp') %>
+      <%= radio_button_tag('device[transport]', 'tcp,udp', (@device.transport == 'tcp,udp')) %> <%= _('tcp,udp') %>
+    </td>
+  </tr>
+<% end %>
