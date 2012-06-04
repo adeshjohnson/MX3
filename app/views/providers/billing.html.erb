@@ -14,7 +14,7 @@
   <% @providers.each_with_index { |prov, i| %>
       <tr class="row<%= (i % 2 + 1).to_s %>">
         <td id="id_<%= prov.id %>" <%= @n_class %>><%= h(prov.id) %></td>
-        <td id="ani_<%= prov.id %>" <%= @n_class %>><%= b_provider_ani if prov.ani == 1 %><%= prov.name %></td>
+        <td id="ani_<%= prov.id %>" <%= @n_class %>><%= b_provider_ani if prov.ani == 1 %><%= link_to prov.name, {:action => 'edit', :id => prov}, {:id => "edit_link_name_"+prov.id.to_s} %></td>
         <td id="tech_<%= prov.id %>" <%= @n_class %>><%= print_tech prov.tech %></td>
         <td id="channel_<%= prov.id %>" <%= @n_class %>><%= h(prov.channel) %></td>
         <td id="login_<%= prov.id %>" <%= @n_class %>><%= h(prov.login) if prov.tech == "SIP" or prov.tech == "IAX2" or prov.tech == "Skype" %></td>
