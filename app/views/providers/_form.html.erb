@@ -109,7 +109,7 @@
     <% if provider_billing_active? %>
         <tr>
           <td id="prov_balance"> <%= _('Balance') %>:   </td>
-          <td id="prov_balance_value"> <%= @provider.balance %> <%= current_user.currency.name %></td>
+          <td id="prov_balance_value"> <%= nice_number @provider.balance %> <%= current_user.currency.name %></td>
         </tr>
     <% end %>
     <!--
