@@ -1769,6 +1769,13 @@ class DevicesController < ApplicationController
     transport = (valid_transport_options.include?(device_transport) ? device_transport.to_s : 'udp')                                                                   
     Confline.set_value("Default_device_transport", transport, session[:user_id])           
 
+    #time_limit_per_day can be positive integer or 0 by default                                                                                                        
+    #it should be entered as minutes and saved as minutes(cause                                                                                                        
+    #later it wil be assigned to device and device will convert to minutes..:/)                                                                                        
+    time_limit_per_day = params[:device][:time_limit_per_day].to_i                                                                                                     
+    time_limit_per_day = (time_limit_per_day < 0 ? 0 : time_limit_per_day)                                                                                             
+    Confline.set_value("Default_device_time_limit_per_day", time_limit_per_day, session[:user_id])                                                                     
+
     #----------- Codecs ------------------
     if params[:codec]
       for codec in Codec.find(:all)
