@@ -106,6 +106,12 @@
       <td> <%= _('Hidden') %>? :</td>
       <td> <%= check_box_tag('provider[hidden]', "1", @provider.hidden.to_i == 1) %></td>
     </tr>
+    <% if provider_billing_active? %>
+        <tr>
+          <td id="prov_balance"> <%= _('Balance') %>:   </td>
+          <td id="prov_balance_value"> <%= @provider.balance %> <%= current_user.currency.name %></td>
+        </tr>
+    <% end %>
     <!--
           <tr>
             <td> <%= _('Works_not_logged') %>: </td>
