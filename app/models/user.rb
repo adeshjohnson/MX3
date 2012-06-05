@@ -1218,6 +1218,7 @@ class User < ActiveRecord::Base
 
     device.time_limit_per_day = Confline.get_value("Default_device_time_limit_per_day", owner_id).to_s
     device.transport = Confline.get_value("Default_device_transport", owner_id).to_s
+    device.transport = 'udp' if !['tcp', 'udp', 'tcp,udp', 'udp,tcp'].include?(device.transport) 
     device.fromdomain = Confline.get_value("Default_device_fromdomain", owner_id).to_s
     device.grace_time = Confline.get_value("Default_device_grace_time", owner_id).to_s
     device.insecure = Confline.get_value("Default_device_insecure", owner_id).to_s
