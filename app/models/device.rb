@@ -217,6 +217,11 @@ class Device < ActiveRecord::Base
       end
       self.update_cid(Confline.get_value("Default_device_cid_name", user.owner_id), Confline.get_value("Default_device_cid_number", user.owner_id))
     end
+    
+    if self.virtual? 
+      self.name = 'virtual_' + self.id.to_i.to_s 
+      self.username = self.name 
+    end 
   end
 
 
