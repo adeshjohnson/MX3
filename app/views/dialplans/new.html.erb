@@ -138,6 +138,7 @@
             <th align="center" id='ap_dp_use_cc_column'><%= _('Use_calling_card') %></th>
         <% end %>
         <th align="center" id='ap_dp_default_device_column'<%= raw(tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation'))).html_safe %>><%= _('Default_device') %></th>
+        <th align="center" <%= nice_end_ivr_tooltip%>><%= _('End_IVR') %></th> 
         <th></th>
 
 
@@ -165,6 +166,13 @@
           <%= select_tag("user", options_for_select([[_('Not_used'), ""]]+ @users.map { |user| ["#{nice_user(user)} (#{user.id })", user.id] }, :selected => "#{@users_used.class.to_s == 'String' ? @users_used : @users_used.id.to_s}")) %>
           <span id="users_device"> </span>
         </td>
+        <td align="center">  
+ 	  <select id="dialplan[data8]" name ="dialplan[data8]"> 
+ 	    <%@end_ivr.each_with_index{|val,index|%> 
+ 	      <option value=<%= index %> <%= 'selected' if @dp.data8.to_i == (index+1)%>  > <%= val %> </option> 
+ 	    <% }%> 
+ 	  </select> 
+ 	</td> 
         <td align="center"> <%= image_submit_tag 'icons/add.png', :title => _('Add'), :id => "dp_PIN_add" %></td>
       </tr>
 

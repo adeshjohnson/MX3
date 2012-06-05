@@ -174,6 +174,7 @@ class DialplansController < ApplicationController
       else
         @dp.data7 = 0
       end
+      @dp.data8 = params[:dialplan][:data8].to_i + 1 
     end
 
     if callback_active? and @dp.dptype == "callback" and params[:dialplan]
@@ -321,6 +322,7 @@ class DialplansController < ApplicationController
       dp.data5 = params[:users_device]
       dp.data6 = params[:dialplan][:data6].to_i == 1 ? "1" : "0"
       dp.data7 = params[:dialplan][:data7].to_i
+      dp.data8 = params[:dialplan][:data8].to_i + 1 
     end
 
     if callback_active? and dp.dptype == "callback"
