@@ -4395,6 +4395,7 @@ Localization.define('en') do |l|
   l.store 'Control_by_CIDs', 'Control by CIDs'
   l.store 'Control_by_Destination', 'Control by Destination'
   l.store 'Invalid_email_format_in_emails_from', 'Invalid email format in email From field (example: example@…)'
+  l.store 'T.38_support', 'T.38 Support' 
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

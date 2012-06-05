@@ -42,13 +42,6 @@
         </tr>
 
         <% if session[:usertype] != "reseller" %>
-            <tr>
-              <td><%= _('T38_Support') %>:</td>
-              <td>
-                <%= radio_button_tag('device[t38pt_udptl]', 'no', @device.t38pt_udptl == 'no') %> <%= _('No') %>
-                <%= radio_button_tag('device[t38pt_udptl]', 'yes', @device.t38pt_udptl == 'yes') %> <%= _('Yes') %>
-              </td>
-            </tr>
             <tr <%= tooltip(_('SIP_302_Reinvite_Support'), _('SIP_302_Reinvite_Support_Explanation')) %>>
               <td><%= b_exclamation + _('SIP_302_Reinvite_Support') %>:</td>
               <td>
@@ -173,6 +166,15 @@
       <%= radio_button_tag('device[transport]', 'tcp', (@device.transport == 'tcp')) %> <%= _('tcp') %>
       <%= radio_button_tag('device[transport]', 'udp,tcp', (@device.transport == 'udp,tcp')) %> <%= _('udp,tcp') %>
       <%= radio_button_tag('device[transport]', 'tcp,udp', (@device.transport == 'tcp,udp')) %> <%= _('tcp,udp') %>
+    </td>
+  </tr>
+<% end %>
+<% if (@default.to_i == 1 or @device_type == 'FAX') and defined? AST_18 and AST_18.to_i == 1 %> 
+  <tr> 
+    <td> <%= _('T.38_support') %>: </td> 
+    <td> 
+      <%= radio_button_tag('device[t38pt_udptl]', 1, @device.t38support?) %> <%= _('Yes') %> 
+      <%= radio_button_tag('device[t38pt_udptl]', 0, !@device.t38support?) %> <%= _('No') %> 
     </td>
   </tr>
 <% end %>

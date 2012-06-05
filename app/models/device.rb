@@ -1055,6 +1055,18 @@ class Device < ActiveRecord::Base
     self.control_callerid_by_cids.to_i != 0
   end
 
+=begin 
+  Check whether fax device supports T.38. Keep in mind that calling this method is valid only if 
+  it is fax device, else exception should be rised. 
+=end 
+  def t38support? 
+    #if self.device_type == 'FAX' 
+      self.t38pt_udptl.to_i == 1 
+    #else 
+    #  raise 'Only fax devices support T.38 protocol' 
+    #end 
+  end 
+
   private
 
 =begin
