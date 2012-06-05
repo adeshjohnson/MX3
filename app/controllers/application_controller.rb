@@ -2046,6 +2046,13 @@ Variables: (Names marked with * are required)
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Payment_Gateway_Error', :data2 => exception.message).save
         end
 
+        if exception_class.include?("Google4R") and exception.message.include?('Seller Account') and exception.message.include?('is not active.')
+          flash_notice = _("Payment_Error_Contact_Administrator_account_not_active")
+          flash_help_link = ''
+          exception_send_email = 0
+          Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Payment_Gateway_Error', :data2 => exception.message).save
+        end
+
         if exception.message.include?('An API Certificate or API Signature is required to make requests to PayPal')
           flash_notice = _('An_API_Certificate_or_API_Signature_is_required_to_make_requests_to_PayPal')
           flash_help_link = ''

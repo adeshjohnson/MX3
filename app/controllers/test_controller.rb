@@ -47,6 +47,8 @@ class TestController < ApplicationController
         raise OpenSSL::SSL::SSLError
       when "Cairo"
         raise LoadError, 'Could not find the ruby cairo bindings in the standard locations or via rubygems. Check to ensure they\'re installed correctly'
+      when 'Google_account_not_active'
+        raise GoogleCheckoutError, {:message => 'Seller Account 666666666666666 is not active.', :response_code => '', :serial_number => '6666666-6666-6666-6666-666666666666'}
       when "Gems"
         raise LoadError, 'in the standard locations or via rubygems. Check to en'
       when "MYSQL"
