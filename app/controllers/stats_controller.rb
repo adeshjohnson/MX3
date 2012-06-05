@@ -1541,6 +1541,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
   def providers
     change_date
+    @Show_Currency_Selector=1
 
     @page_title = _('Providers_stats')
     @s_prefix = params[:search] ? params[:search] : ''
@@ -1561,7 +1562,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       end
     end
 
-    @providers = Provider.find_all_with_calls_for_stats(current_user, {:date_from => session_from_datetime, :date_till => session_till_datetime, :s_prefix => @s_prefix})
+    @providers = Provider.find_all_with_calls_for_stats(current_user, {:date_from => session_from_datetime, :date_till => session_till_datetime, :s_prefix => @s_prefix, :show_currency => session[:show_currency], :default_currency => session[:default_currency]})
   end
 
   def providers_stats
@@ -2773,7 +2774,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @providers = Provider.find(:all, :order => "name ASC", :conditions => ['hidden=?', 0])
 
     #@user_id2 = -1
-    (params[:user_id]) ? (@user_id = params[:user_id].to_i) : (@user_id = -1)        
+    (params[:user_id]) ? (@user_id = params[:user_id].to_i) : (@user_id = -1)
     user_sql = ""
     #my_debug @user_id2
     @provider_id = -1

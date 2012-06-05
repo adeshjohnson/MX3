@@ -400,6 +400,9 @@ class Provider < ActiveRecord::Base
   def Provider.find_all_with_calls_for_stats(current_user, options={})
     s = []
 
+    exrate = Currency.count_exchange_rate(options[:default_currency], options[:show_currency])
+    c1 = options[:default_currency] != options[:show_currency] ? " * #{exrate.to_f} " : ""
+
     s << 'providers.id, providers.name, providers.tech'
     s << 'COUNT(b.id) as pcalls'
     s << "SUM(IF(b.DISPOSITION='ANSWERED',1,0)) AS 'answered'"
@@ -410,14 +413,14 @@ class Provider < ActiveRecord::Base
     s << "SUM(b.billsec) AS billsec"
     if current_user.is_admin?
       con = ''
-      s << "SUM(b.provider_price) as 'selfcost_price'"
-      s << "SUM(IF(b.reseller_id > 0, b.reseller_price, b.user_price)) AS 'sel_price'"
-      s << "SUM(IF(b.reseller_id > 0, b.reseller_price, b.user_price) - b.provider_price ) AS 'profit'"
+      s << "(SUM(b.provider_price)#{c1}) as 'selfcost_price'"
+      s << "(SUM(IF(b.reseller_id > 0, b.reseller_price, b.user_price))#{c1}) AS 'sel_price'"
+      s << "(SUM(IF(b.reseller_id > 0, b.reseller_price, b.user_price) - b.provider_price )#{c1}) AS 'profit'"
     else
       con = "OR (providers.common_use = 1 AND providers.id IN (SELECT provider_id FROM common_use_providers where reseller_id = #{current_user.id}))"
-      s << "SUM(IF(providers.common_use = 1, b.reseller_price,b.provider_price)) as 'selfcost_price'"
-      s << "SUM(b.user_price) AS 'sel_price'"
-      s << "SUM(b.user_price - IF(providers.common_use = 1, b.reseller_price,b.provider_price)) AS 'profit'"
+      s << "(SUM(IF(providers.common_use = 1, b.reseller_price,b.provider_price))#{c1}) as 'selfcost_price'"
+      s << "(SUM(b.user_price)#{c1}) AS 'sel_price'"
+      s << "(SUM(b.user_price - IF(providers.common_use = 1, b.reseller_price,b.provider_price))#{c1} ) AS 'profit'"
     end
 
     jcond = ["calls.calldate BETWEEN '#{options[:date_from]}' AND '#{options[:date_till]}'"]

@@ -26,112 +26,111 @@
 <br/>
 
 <div align="center">
-  <table width="100%" class="maintable"
-  %>
-  <tr>
-    <th align="left">        <%= _('Provider') %>    </th>
-    <th align="left">        <%= _('Type') %>    </th>
-    <th align="right">        <%= _('Calls') %>   </th>
-    <th align="center">        <%= _('Time') %>   </th>
-    <th align="right">        <%= _('Answered') %>    </th>
-    <th align="right">        <%= _('No_Answer') %>    </th>
-    <th align="right">        <%= _('Busy') %>    </th>
-    <th align="right">        <%= _('Failed') %>    </th>
-    <th align="right">        <%= _('Failed_Locally') %>    </th>
-    <th align="right">        <%= _('ASR') %>    </th>
-    <th align="center">        <%= _('ACD') %>    </th>
-    <th align="right">        <%= _('Price') %>    </th>
-    <th align="right">        <%= _('User_Price') %>    </th>
-    <th align="right">        <%= _('Profit') %>    </th>
-    <th align="center"></th>
-    <% if current_user.is_admin? %>
-        <th align="center"></th>
+  <table width="100%" class="maintable">
+    <tr>
+      <th align="left">        <%= _('Provider') %>    </th>
+      <th align="left">        <%= _('Type') %>    </th>
+      <th align="right">        <%= _('Calls') %>   </th>
+      <th align="center">        <%= _('Time') %>   </th>
+      <th align="right">        <%= _('Answered') %>    </th>
+      <th align="right">        <%= _('No_Answer') %>    </th>
+      <th align="right">        <%= _('Busy') %>    </th>
+      <th align="right">        <%= _('Failed') %>    </th>
+      <th align="right">        <%= _('Failed_Locally') %>    </th>
+      <th align="right">        <%= _('ASR') %>    </th>
+      <th align="center">        <%= _('ACD') %>    </th>
+      <th align="right">        <%= _('Price') %> (<%= session[:show_currency] %>)</th>
+      <th align="right">        <%= _('User_Price') %> (<%= session[:show_currency] %>)</th>
+      <th align="right">        <%= _('Profit') %> (<%= session[:show_currency] %>)</th>
+      <th align="center"></th>
+      <% if current_user.is_admin? %>
+          <th align="center"></th>
+      <% end %>
+    </tr>
+
+    <%
+       @t_calls = 0
+       @t_time = 0
+       @t_answered = 0
+       @t_no_answer = 0
+       @t_busy = 0
+       @t_failed = 0
+       @t_price = 0
+       @t_user_price = 0
+       @t_profit = 0
+       @t_failed_l = 0
+    %>
+
+
+    <% i = 0 %>
+    <% for prov in @providers %>
+        <tr class="row<%= (i % 2 + 1).to_s %>">
+
+          <%
+             asr = 0.0
+             asr = ((prov.answered.to_f)/ (prov.pcalls.to_f - prov.failed_locally.to_f)) * 100 if prov.pcalls.to_i > 0
+             acd = 0.0
+             acd = prov.billsec.to_f / prov.answered.to_f if prov.answered.to_i > 0
+
+
+             @t_calls += prov.pcalls.to_f
+             @t_time += prov.billsec.to_f
+             @t_answered += prov.answered.to_f
+             @t_no_answer += prov.no_answer.to_f
+             @t_busy += prov.busy.to_f
+             @t_failed += prov.failed.to_f
+             @t_failed_l += prov.failed_locally.to_f
+             @t_price += prov.selfcost_price.to_f
+             @t_user_price += prov.sel_price.to_f
+             @t_profit += (prov.profit.to_f)
+          %>
+
+          <td align="left" id="name_<%= prov.id %>"> <%= prov.name %>      </td>
+          <td align="left" id="tech_<%= prov.id %>"> <%= prov.tech %>      </td>
+          <td align="right" id="call_<%= prov.id %>"> <%= prov.pcalls %>      </td>
+          <td align="center" id="billsec_<%= prov.id %>"> <%= nice_time prov.billsec %>      </td>
+
+          <td align="right" id="answered_<%= prov.id %>"> <%= link_to prov.answered, :action => 'providers_calls', :id => prov.id, :call_type => "ANSWERED" %>      </td>
+          <td align="right" id="no_answered_<%= prov.id %>"> <%= link_to prov.no_answer, :action => 'providers_calls', :id => prov.id, :call_type => "NO ANSWER" %>      </td>
+          <td align="right" id="busy_<%= prov.id %>"> <%= link_to prov.busy, :action => 'providers_calls', :id => prov.id, :call_type => "BUSY" %>      </td>
+          <td align="right" id="failed_<%= prov.id %>"> <%= link_to prov.failed, :action => 'providers_calls', :id => prov.id, :call_type => "FAILED" %>      </td>
+          <td align="right" id="failed_locally_<%= prov.id %>"> <%= link_to prov.failed_locally, :action => 'providers_calls', :id => prov.id, :call_type => "FAILED" %>      </td>
+
+          <td align="right" id="asr_<%= prov.id %>"> <%= nice_number asr %>  %</td>
+          <td align="center" id="acd_<%= prov.id %>"> <%= nice_time acd %>      </td>
+          <% if can_see_finances? or allow_manage_providers? -%>
+              <td align="right" id="price_<%= prov.id %>"> <%= nice_number prov.selfcost_price.to_f %>    </td>
+              <td align="right" id="price2_<%= prov.id %>"> <%= nice_number(prov.sel_price.to_f) %>     </td>
+              <td align="right" id="price3_<%= prov.id %>"> <%= nice_number(prov.profit.to_f) %>     </td>
+          <% end -%>
+          <td align="center" id="pr_stats_<%= prov.id %>"> <%= link_to b_chart_bar, :action => 'providers_stats', :id => prov.id, :search => @s_prefix %></td>
+          <% if current_user.is_admin? %>
+              <td align="center" id="hccs_<%= prov.id %>"> <%= link_to b_logins, :action => 'hangup_cause_codes_stats', :provider_id => prov.id, :country_id => -1, :back => 1 %></td>
+          <% end %>
+        </tr>
+        <% i += 1 %>
     <% end %>
-  </tr>
 
-  <%
-     @t_calls = 0
-     @t_time = 0
-     @t_answered = 0
-     @t_no_answer = 0
-     @t_busy = 0
-     @t_failed = 0
-     @t_price = 0
-     @t_user_price = 0
-     @t_profit = 0
-     @t_failed_l = 0
-  %>
-
-
-  <% i = 0 %>
-  <% for prov in @providers %>
-      <tr class="row<%= (i % 2 + 1).to_s %>">
-
-        <%
-           asr = 0.0
-           asr = ((prov.answered.to_f)/ (prov.pcalls.to_f - prov.failed_locally.to_f)) * 100 if prov.pcalls.to_i > 0
-           acd = 0.0
-           acd = prov.billsec.to_f / prov.answered.to_f if prov.answered.to_i > 0
-
-
-           @t_calls += prov.pcalls.to_f
-           @t_time += prov.billsec.to_f
-           @t_answered += prov.answered.to_f
-           @t_no_answer += prov.no_answer.to_f
-           @t_busy += prov.busy.to_f
-           @t_failed += prov.failed.to_f
-           @t_failed_l += prov.failed_locally.to_f
-           @t_price += prov.selfcost_price.to_f
-           @t_user_price += prov.sel_price.to_f
-           @t_profit += (prov.profit.to_f)
-        %>
-
-        <td align="left" id="name_<%= prov.id %>"> <%= prov.name %>      </td>
-        <td align="left" id="tech_<%= prov.id %>"> <%= prov.tech %>      </td>
-        <td align="right" id="call_<%= prov.id %>"> <%= prov.pcalls %>      </td>
-        <td align="center" id="billsec_<%= prov.id %>"> <%= nice_time prov.billsec %>      </td>
-
-        <td align="right" id="answered_<%= prov.id %>"> <%= link_to prov.answered, :action => 'providers_calls', :id => prov.id, :call_type => "ANSWERED" %>      </td>
-        <td align="right" id="no_answered_<%= prov.id %>"> <%= link_to prov.no_answer, :action => 'providers_calls', :id => prov.id, :call_type => "NO ANSWER" %>      </td>
-        <td align="right" id="busy_<%= prov.id %>"> <%= link_to prov.busy, :action => 'providers_calls', :id => prov.id, :call_type => "BUSY" %>      </td>
-        <td align="right" id="failed_<%= prov.id %>"> <%= link_to prov.failed, :action => 'providers_calls', :id => prov.id, :call_type => "FAILED" %>      </td>
-        <td align="right" id="failed_locally_<%= prov.id %>"> <%= link_to prov.failed_locally, :action => 'providers_calls', :id => prov.id, :call_type => "FAILED" %>      </td>
-
-        <td align="right" id="asr_<%= prov.id %>"> <%= nice_number asr %>  %</td>
-        <td align="center" id="acd_<%= prov.id %>"> <%= nice_time acd %>      </td>
-        <% if can_see_finances? or allow_manage_providers? -%>
-            <td align="right" id="price_<%= prov.id %>"> <%= nice_number prov.selfcost_price.to_f %>    </td>
-            <td align="right" id="price2_<%= prov.id %>"> <%= nice_number(prov.sel_price.to_f) %>     </td>
-            <td align="right" id="price3_<%= prov.id %>"> <%= nice_number(prov.profit.to_f) %>     </td>
-        <% end -%>
-        <td align="center" id="pr_stats_<%= prov.id %>"> <%= link_to b_chart_bar, :action => 'providers_stats', :id => prov.id, :search => @s_prefix %></td>
-        <% if current_user.is_admin? %>
-            <td align="center" id="hccs_<%= prov.id %>"> <%= link_to b_logins, :action => 'hangup_cause_codes_stats', :provider_id => prov.id, :country_id => -1, :back => 1 %></td>
-        <% end %>
-      </tr>
-      <% i += 1 %>
-  <% end %>
-
-  <tr>
-    <th align="left">        <%= _('Total') %>:</th>
-    <th align="left"></th>
-    <th align="right" id="tcalls">        <%= @t_calls %>   </th>
-    <th align="center" id="ttime">      <%= nice_time @t_time %>    </th>
-    <th align="right" id="ta">        <%= @t_answered %>    </th>
-    <th align="right" id="tn">        <%= @t_no_answer %>    </th>
-    <th align="right" id="tb">        <%= @t_busy %>    </th>
-    <th align="right" id="tf">        <%= @t_failed %>    </th>
-    <th align="right" id="tfl">        <%= @t_failed_l %>    </th>
-    <th align="right" id="tasr">        <%= nice_number((@t_answered.to_f / (@t_calls.to_f - @t_failed_l.to_f)) * 100) + " %" if @t_calls > 0 %>    </th>
-    <th align="center" id="tacd">       <%= nice_time(@t_time / @t_calls) if @t_calls > 0 %>    </th>
-    <th align="right" id="tp">        <%= nice_number @t_price %>    </th>
-    <th align="right" id="tup">        <%= nice_number @t_user_price %>    </th>
-    <th align="right" id="tprofit">        <%= nice_number @t_profit %>    </th>
-    <th></th>
-    <% if current_user.is_admin? %>
-        <th></th>
-    <% end %>
-  </tr>
+    <tr>
+      <th align="left">        <%= _('Total') %>:</th>
+      <th align="left"></th>
+      <th align="right" id="tcalls">        <%= @t_calls.to_i %>   </th>
+      <th align="center" id="ttime">      <%= nice_time @t_time %>    </th>
+      <th align="right" id="ta">        <%= @t_answered.to_i %>    </th>
+      <th align="right" id="tn">        <%= @t_no_answer.to_i %>    </th>
+      <th align="right" id="tb">        <%= @t_busy.to_i %>    </th>
+      <th align="right" id="tf">        <%= @t_failed.to_i %>    </th>
+      <th align="right" id="tfl">        <%= @t_failed_l.to_i %>    </th>
+      <th align="right" id="tasr">        <%= nice_number((@t_answered.to_f / (@t_calls.to_f - @t_failed_l.to_f)) * 100) + " %" if @t_calls > 0 %>    </th>
+      <th align="center" id="tacd">       <%= nice_time(@t_time / @t_answered) if @t_answered > 0 %>    </th>
+      <th align="right" id="tp">        <%= nice_number @t_price %>    </th>
+      <th align="right" id="tup">        <%= nice_number @t_user_price %>    </th>
+      <th align="right" id="tprofit">        <%= nice_number @t_profit %>    </th>
+      <th></th>
+      <% if current_user.is_admin? %>
+          <th></th>
+      <% end %>
+    </tr>
 
   </table>
 </div>
