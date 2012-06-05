@@ -165,7 +165,7 @@
             <% if card %>
                 <td id="card_<%= call.id %>" class="<%= text_class %>"> <%= link_nice_card(card) %></td>
             <% else %>
-                <td id="user_<%= call.id %>" class="<%= text_class %>"> <%= if call.hangupcause.to_i != 200 then (link_nice_user_if_own(call_user) if call_user) else  _('Unauthenticated') end %></td>
+                <td id="user_<%= call.id %>" class="<%= text_class %>"> <%= if call.hangupcause.to_i != 200 then (link_nice_user_if_own(call_user) if call_user) else  (_('Unauthenticated') + "<a href='http://wiki.kolmisoft.com/index.php/200_MOR_can%27t_determine_who_is_calling' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png'/></a>").html_safe end %></td>
             <% end %>
 
             <% if can_see_finances? -%>
