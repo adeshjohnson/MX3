@@ -311,7 +311,7 @@ class VouchersController < ApplicationController
 
     # active == 1 so lets do what must be done
     # user's balance
-    @user.balance += @credit_in_default_currency
+    @user.balance += @credit_in_default_currency * User.current.currency.exchange_rate.to_f
     @user.save
 
     if @user.owner_id != 0
