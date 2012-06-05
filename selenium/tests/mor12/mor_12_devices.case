@@ -103,8 +103,33 @@
 	<td>label=ID: 20, IP: 127.0.0.2 (second serv)</td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>T.38 Support</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_t38pt_udptl_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_t38pt_udptl_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_t38pt_udptl_1</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -116,6 +141,21 @@
 	<td>verifySelectedLabel</td>
 	<td>name=device[server_id]</td>
 	<td>ID: 20, IP: 127.0.0.2 (second serv)</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_t38pt_udptl_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_t38pt_udptl_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_t38pt_udptl_0</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -163,6 +203,26 @@
 	<td>label=ID: 20, IP: 127.0.0.2 (second serv)</td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_t38pt_udptl_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_t38pt_udptl_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>T.38 Support</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_t38pt_udptl_1</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -176,6 +236,16 @@
 	<td>verifySelectedLabel</td>
 	<td>name=device[server_id]</td>
 	<td>ID: 20, IP: 127.0.0.2 (second serv)</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_t38pt_udptl_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_t38pt_udptl_0</td>
+	<td>off</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -223,6 +293,16 @@
 	<td>label=ID: 30, IP: 127.0.0.3 (third serv)</td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_t38pt_udptl_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_t38pt_udptl_0</td>
+	<td>off</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -241,6 +321,16 @@
 	<td>assertSelectedLabel</td>
 	<td>name=device[server_id]</td>
 	<td>ID: 30, IP: 127.0.0.3 (third serv)</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_t38pt_udptl_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_t38pt_udptl_0</td>
+	<td>off</td>
 </tr>
 <!--########################-->
 <tr>
