@@ -30,7 +30,7 @@ module DidsHelper
         when 'quickforwarddids'
           dp.name + " (" + dp.dptype + ")"
         when 'ringgroup'
-          link_to dp.name + " (" + dp.dptype + ")", {:controller => :ringgroups, :action => :edit, :id => dp.id}
+          link_to dp.name + " (" + dp.dptype + ")", {:controller => :ringgroups, :action => :edit, :id => dp.data1}
         else
           link_to dp.name + " (" + dp.dptype + ")", {:controller => :dialplans, :action => :edit, :id => dp.id}
       end
