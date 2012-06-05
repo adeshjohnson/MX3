@@ -340,7 +340,12 @@ class DevicesController < ApplicationController
           params[:port]=params[:port].to_s.strip
 
         end
-        params[:qualify_time]=params[:qualify_time].to_s.strip
+        qualify =  params[:qualify_time].to_s.strip.to_i 
+ 	if qualify < 500 
+ 	  qualify = 2000 
+ 	  params[:qualify] = 'no' 
+ 	end 
+ 	params[:qualify_time] = qualify 
       end
     end
 
@@ -499,7 +504,7 @@ class DevicesController < ApplicationController
 
       if params[:qualify] == "yes"
         @device.qualify = params[:qualify_time]
-        @device.qualify == "1000" if @device.qualify.to_i <= 1000
+        @device.qualify == "2000" if @device.qualify.to_i < 500
       else
         @device.qualify = "no"
       end

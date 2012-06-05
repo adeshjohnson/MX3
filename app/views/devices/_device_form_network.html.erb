@@ -40,6 +40,16 @@
               var port = $('port');
               var host = $('host');
               var ipauth = $('ip_authentication');
+              var qualify_no = $('qualify_no'); 
+ 	      var qualify_yes = $('qualify_yes'); 
+ 	      var qualify_time = $('qualify_time') 
+ 	 
+ 	      Event.observe(qualify_yes, 'change', function() { 
+ 	        qualify_time.disabled =  false; 
+ 	      }); 
+ 	      Event.observe(qualify_no, 'change', function() { 
+ 	        qualify_time.disabled = true; 
+ 	      }); 
 
               Event.observe(dyncheck, 'click', function () {
                   if (dyncheck.checked) {
@@ -189,7 +199,7 @@
           <%= _('Qualify') %>:
           <%= radio_button_tag('qualify', 'no', device_qualify == 'no') %> <%= _('No') %>
           <%= radio_button_tag('qualify', 'yes', device_qualify != 'no') %> <%= _('Yes') %>
-          &nbsp;<%= text_field_tag 'qualify_time', @qualify_time, "class" => "input", :size => "5", :maxlength => "10" %>
+          &nbsp;<%= text_field_tag 'qualify_time', @qualify_time, "class" => "input", :size => "5", :maxlength => "10", :disabled => device_qualify == 'no' %>
           ms
         </td>
       </tr>
