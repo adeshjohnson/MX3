@@ -122,7 +122,7 @@
       <th align="right" id="tf">        <%= @t_failed.to_i %>    </th>
       <th align="right" id="tfl">        <%= @t_failed_l.to_i %>    </th>
       <th align="right" id="tasr">        <%= nice_number((@t_answered.to_f / (@t_calls.to_f - @t_failed_l.to_f)) * 100) + " %" if @t_calls > 0 %>    </th>
-      <th align="center" id="tacd">       <%= nice_time(@t_time / @t_answered) if @t_answered > 0 %>    </th>
+      <th align="center" id="tacd">       <%= nice_time((@t_time.to_f / @t_answered.to_f).round) if @t_answered > 0 %>    </th>
       <th align="right" id="tp">        <%= nice_number @t_price %>    </th>
       <th align="right" id="tup">        <%= nice_number @t_user_price %>    </th>
       <th align="right" id="tprofit">        <%= nice_number @t_profit %>    </th>
