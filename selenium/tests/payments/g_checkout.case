@@ -481,6 +481,57 @@
 	<td>total_with_tax_completed</td>
 	<td>13.5404(USD)</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@name='google_checkout_toggle']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=google_checkout_google_checkout_merchant_id</td>
+	<td>545054500582452</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=google_checkout_google_checkout_merchant_key</td>
+	<td>'4398db87-3f9c-47fe-be22-1810b758428d</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/google_checkout/google_checkout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>google_checkout_google_checkout_amount</td>
+	<td>200</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>google_checkout_google_checkout_currency</td>
+	<td>label=USD</td>
+</tr>
+<!--<tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/test/raise_exception?id=Google_account_not_active</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
