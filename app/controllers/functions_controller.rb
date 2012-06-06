@@ -961,7 +961,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     end
 
     params[:email_from] = params[:email_from].strip
-    if (params[:email_sending_enabled].to_i == 1 and params[:email_from].to_s.blank?) or (not params[:email_from].to_s.blank? and not params[:email_from].to_s =~ /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/ )
+    if not params[:email_from].to_s.blank? and not params[:email_from].to_s =~ /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/
       flash[:notice] = _("Invalid_email_format_in_emails_from")
       redirect_to :action => 'settings' and return false
     end
