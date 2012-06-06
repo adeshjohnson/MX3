@@ -404,14 +404,14 @@ class CreditNoteController < ApplicationController
   financial data
 =end
   def can_edit_finances?
-    current_user.is_admin? or current_user.is_reseller? or (current_user.is_accountant? and current_user.accountant_allow_edit('see_financial_data') and current_user.allow_read('invoices_manage'))
+    current_user.is_admin? or current_user.is_reseller? or (current_user.is_accountant? and current_user.accountant_allow_edit('see_financial_data') and current_user.accountant_allow_read('invoices_manage'))
   end
 
 =begin
   Only admin, reseller and accountant with certain permissions can view financial data
 =end
   def can_view_finances?
-    (current_user.is_admin? or current_user.is_reseller? or (current_user.is_accountant? and current_user.accountant_allow_read('acc_see_financial_data') and current_user.accountant_allow_read('invoices_manage')))
+    (current_user.is_admin? or current_user.is_reseller? or (current_user.is_accountant? and current_user.accountant_allow_read('see_financial_data') and current_user.accountant_allow_read('invoices_manage')))
   end
 
 =begin
