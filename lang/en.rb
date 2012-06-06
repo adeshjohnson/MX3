@@ -4397,6 +4397,7 @@ Localization.define('en') do |l|
   l.store 'Invalid_email_format_in_emails_from', 'Invalid email format in email From field (example: example@…)'
   l.store 'T.38_support', 'T.38 Support'
   l.store 'Payment_Error_Contact_Administrator_account_not_active', 'Payment Error Contact Administrator, account not active'
+  l.store 'Google_checkout_error', 'Google checkout error'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
