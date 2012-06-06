@@ -1433,6 +1433,10 @@ class ApplicationController < ActionController::Base
     sql = "SELECT c AS free, COUNT(v.c) AS x FROM (
               (SELECT #{ran_min} AS c)
               UNION ALL
+              (SELECT data2 c FROM dialplans  WHERE (dptype = 'pbxfunction' AND data2 REGEXP '^[0-9]+$' = 1 AND data2 BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
+              UNION ALL
+              (SELECT data2 + 1 AS c FROM dialplans  WHERE (dptype = 'pbxfunction' AND data2 REGEXP '^[0-9]+$' = 1 AND data2 BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
+              UNION ALL
               (SELECT extension c FROM devices  WHERE (extension REGEXP '^[0-9]+$' = 1 AND extension BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
               UNION ALL
               (SELECT extension + 1 AS c FROM devices WHERE (extension REGEXP '^[0-9]+$' = 1 AND extension BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)

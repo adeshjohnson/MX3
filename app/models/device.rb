@@ -45,7 +45,7 @@ class Device < ActiveRecord::Base
   validates_numericality_of :port, :message => _("Port_must_be_number"), :if => Proc.new { |o| not o.port.blank? }
 
   # before_create :check_callshop_user
-  before_save :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth
+  before_save :validate_extension_from_pbx, :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth
   before_update :validate_fax_device_codecs
   after_create :create_codecs, :device_after_create
   after_save :device_after_save, :prune_device
@@ -78,6 +78,13 @@ class Device < ActiveRecord::Base
       return false
     else
       return true
+    end
+  end
+
+  def validate_extension_from_pbx
+    if Dialplan.find(:first, :conditions => {:dptype => "pbxfunction", :data2 => extension})
+      errors.add(:extension, _('Device_extension_must_be_unique'))
+      return false
     end
   end
 
@@ -217,11 +224,11 @@ class Device < ActiveRecord::Base
       end
       self.update_cid(Confline.get_value("Default_device_cid_name", user.owner_id), Confline.get_value("Default_device_cid_number", user.owner_id))
     end
-    
-    if self.virtual? 
-      self.name = 'virtual_' + self.id.to_i.to_s 
-      self.username = self.name 
-    end 
+
+    if self.virtual?
+      self.name = 'virtual_' + self.id.to_i.to_s
+      self.username = self.name
+    end
   end
 
 
@@ -1063,14 +1070,14 @@ class Device < ActiveRecord::Base
 =begin 
   Check whether fax device supports T.38. Keep in mind that calling this method is valid only if 
   it is fax device, else exception should be rised. 
-=end 
-  def t38support? 
+=end
+  def t38support?
     #if self.device_type == 'FAX' 
-      self.t38pt_udptl.to_i == 1 
+    self.t38pt_udptl.to_i == 1
     #else 
     #  raise 'Only fax devices support T.38 protocol' 
     #end 
-  end 
+  end
 
   private
 
