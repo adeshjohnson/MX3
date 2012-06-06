@@ -13,6 +13,10 @@ class SmsProvider < ActiveRecord::Base
   def validate_prov
     self.must_have_valid_variables if self.api?
     self.uri_parse_ok if self.api?
+    unless self.sms_provider_domain !~ /(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/ 
+      errors.add(:sms_provider_domain, _('Domain_has_to_be_valid')) 
+      return false 
+    end 
   end
 
   def test_login

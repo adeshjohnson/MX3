@@ -4398,6 +4398,7 @@ Localization.define('en') do |l|
   l.store 'T.38_support', 'T.38 Support'
   l.store 'Payment_Error_Contact_Administrator_account_not_active', 'Payment Error Contact Administrator, account not active'
   l.store 'Google_checkout_error', 'Google checkout error'
+  l.store 'Domain_has_to_be_valid', 'Domain has to be valid' 
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
