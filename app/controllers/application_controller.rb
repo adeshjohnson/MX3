@@ -75,7 +75,7 @@ class ApplicationController < ActionController::Base
   end
 
   def log_session_size
-    MorLog.log_session_size(params.inspect.to_s, request.session_options[:id]) if session_log_active?
+    MorLog.log_session_size(params.inspect.to_s, request.session_options[:id]) if params[:controller].to_s != 'api' and session_log_active?
   end
 
   def item_pages(total_items)
