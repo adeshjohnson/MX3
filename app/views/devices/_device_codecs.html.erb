@@ -2,7 +2,7 @@
   <% codecs.each_with_index do |codec, index| %>
 
       <li id="item_<%= codec.id %>" style="height: 18px; ">
-        <div id="dev_ind_<%= index %>">
+        <div id="dev_ind_<%= index %>" style="white-space: nowrap">
           <% if device and params[:action] != 'default_device' %>
               <%= check_box_tag 'codec['+codec.name+']', "1", device.codec?(codec.name), :onchange => "new Ajax.Updater('#{ctype}_items', '#{Web_Dir}/devices/devicecodecs_sort/#{device.id}?codec_id=#{codec.id}&ctype=#{ctype}&val='+this.checked, {asynchronous:true, evalScripts:true, parameters:Sortable.serialize('#{ctype}_sortable_list')}); ".html_safe %> <%= codec.long_name %>
           <% else %>
