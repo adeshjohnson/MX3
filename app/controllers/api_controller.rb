@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApiController < ApplicationController
 
-  session :off, :only => [:create_payment]
+  session :off, :except => [:login, :login_form]
 
   include SqlExport
 
@@ -9,7 +9,7 @@ class ApiController < ApplicationController
   before_filter :check_allow_api
   before_filter :check_send_method, :except => [:simple_balance, :balance]
   before_filter :log_access
-  before_filter :find_current_user_for_api, :only => [:cc_by_cli, :create_payment, :payments_list, :show_calling_card_group, :buy_card_from_callingroup, :financial_statements]
+  before_filter :find_current_user_for_api, :only => [:user_subscriptions, :user_invoices, :personal_payments, :user_rates, :callflow_edit, :devices_callflow, :user_devices, :main_page, :logout, :cc_by_cli, :create_payment, :payments_list, :show_calling_card_group, :buy_card_from_callingroup, :financial_statements]
   before_filter :check_mor_11_extend, :only => [:credit_notes, :credit_note_update, :credit_note_delete, :credit_note_create, :financial_statements, :create_payment, :cc_by_cli, :show_calling_card_group, :buy_card_from_callingroup]
   before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements]
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
@@ -83,7 +83,7 @@ class ApiController < ApplicationController
 
     if username.length > 0 and password.length > 0 and user = User.find(:first, :conditions => ["username = ? and password = ?", username, Digest::SHA1.hexdigest(password)])
 
-      add_action(session[:user_id], "logout", "")
+      add_action(@current_user.id, "logout", "")
 
       user.logged = 0
       user.save
@@ -248,11 +248,6 @@ class ApiController < ApplicationController
         doc.language("#{Localization.lang}")
         doc.error_msg("")
         doc.aval_languages {
-          if session[:tr_arr]
-            for tr in session[:tr_arr]
-              doc.language("#{tr.short_name}")
-            end
-          end
         }
       }
 
@@ -262,11 +257,6 @@ class ApiController < ApplicationController
         doc.language("#{Localization.lang}")
         doc.error_msg("")
         doc.aval_languages {
-          if session[:tr_arr]
-            for tr in session[:tr_arr]
-              doc.language("#{tr.short_name}")
-            end
-          end
         }
       }
 
@@ -437,15 +427,15 @@ class ApiController < ApplicationController
       day_t = Time.now.year.to_s + "-" + good_date(Time.now.month.to_s) + "-" + good_date(Time.now.day.to_s)
 
 
-      if session[:usertype] == "admin"
-        @callsm = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.reseller_id = '#{session[:user_id]}' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59' AND disposition = 'ANSWERED'")
-        @callsd = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.reseller_id = '#{session[:user_id]}' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59' AND disposition = 'ANSWERED'")
+      if @current_user.usertype == "admin"
+        @callsm = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.reseller_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59' AND disposition = 'ANSWERED'")
+        @callsd = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.reseller_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59' AND disposition = 'ANSWERED'")
       else
-        @callsm = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.user_id = '#{session[:user_id]}' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59' AND disposition = 'ANSWERED'")
-        @callsd = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.user_id = '#{session[:user_id]}' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59' AND disposition = 'ANSWERED'")
-        if session[:usertype] == "reseller"
-          @callsm = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.reseller_id = '#{session[:user_id]}' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59' AND disposition = 'ANSWERED'")
-          @callsd = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.reseller_id = '#{session[:user_id]}' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59' AND disposition = 'ANSWERED'")
+        @callsm = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.user_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59' AND disposition = 'ANSWERED'")
+        @callsd = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.user_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59' AND disposition = 'ANSWERED'")
+        if @current_user.usertype == "reseller"
+          @callsm = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.reseller_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59' AND disposition = 'ANSWERED'")
+          @callsd = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.reseller_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59' AND disposition = 'ANSWERED'")
         end
 
       end
@@ -461,7 +451,7 @@ class ApiController < ApplicationController
       @total_call_selfpriced = 0
       @total_callsd = 0
 
-      if session[:usertype] == "reseller"
+      if @current_user.usertype == "reseller"
         for call in @callsm
           @total_callsm = @total_callsm + 1
           @total_durationm += (call.billsec).to_i
@@ -482,7 +472,7 @@ class ApiController < ApplicationController
       end
 
 
-      if session[:usertype] == "reseller"
+      if @current_user.usertype == "reseller"
         for call in @callsd
           @total_callsd=@total_callsd+1
           @total_durationd += (call.billsec).to_i
@@ -510,7 +500,7 @@ class ApiController < ApplicationController
       doc.page {
         doc.pagename("#{_('Main_page')}")
         doc.username("#{params[:u]}")
-        doc.userid("#{session[:user_id]}")
+        doc.userid("#{@current_user.id}")
         doc.language("#{Localization.lang}")
         doc.stats {
           doc.missed_calls {
@@ -522,7 +512,7 @@ class ApiController < ApplicationController
               doc.call_counts("#{@total_callsm}")
               doc.period("#{_('Month')}")
               doc.call_duration("#{ nice_time @total_durationm}")
-              if session[:usertype] == "reseller" or session[:usertype] == "admin"
+              if @current_user.usertype == "reseller" or @current_user.usertype == "admin"
                 doc.call_profit("#{@total_profitm}")
               end
             }
@@ -530,7 +520,7 @@ class ApiController < ApplicationController
               doc.call_counts("#{@total_callsd}")
               doc.period("#{_('Day')}")
               doc.call_duration("#{nice_time @total_durationd}")
-              if session[:usertype] == "reseller" or session[:usertype] == "admin"
+              if @current_user.usertype == "reseller" or @current_user.usertype == "admin"
                 doc.call_profit("#{@total_profitd}")
               end
             }
@@ -557,11 +547,8 @@ class ApiController < ApplicationController
         doc.language("en")
         doc.error_msg("")
         doc.aval_languages {
-          if session[:tr_arr]
-            for tr in session[:tr_arr]
-              doc.language("#{tr.short_name}")
-            end
-          end
+          doc.language("#{tr.short_name}")
+
         }
       }
 
@@ -675,12 +662,12 @@ class ApiController < ApplicationController
       @user.save
 
 
-      @devices = @user.devices #Device.find(:all, :conditions => "user_id = #{session[:user_id]}", :order => "name")
+      @devices = @user.devices #Device.find(:all, :conditions => "user_id = #{@current_user.id}", :order => "name")
 
       doc.page {
         doc.pagename("#{_('Devices')}")
         doc.language("#{Localization.lang}")
-        doc.userid("#{session[:user_id]}")
+        doc.userid("#{@current_user.id}")
         doc.devices {
           for dev in @devices
             doc.device {
@@ -703,11 +690,9 @@ class ApiController < ApplicationController
         doc.language("en")
         doc.error_msg("")
         doc.aval_languages {
-          if session[:tr_arr]
-            for tr in session[:tr_arr]
-              doc.language("#{tr.short_name}")
-            end
-          end
+
+          doc.language("#{tr.short_name}")
+
         }
       }
 
@@ -728,8 +713,8 @@ class ApiController < ApplicationController
       @user.logged = 1
       @user.save
 
-      if session[:usertype] != "admin"
-        if session[:usertype] == "user" and session[:manager_in_groups].size == 0
+      if @current_user.usertype != "admin"
+        if @current_user.usertype == "user" and @current_user.manager_in_groups.size == 0
           #simple user
           @device = Device.find(params[:device_id])
 
@@ -739,7 +724,7 @@ class ApiController < ApplicationController
           @user = @device.user
 
           can_check = false
-          for group in session[:manager_in_groups]
+          for group in @current_user.manager_in_groups
             for user in group.users
               can_check = true if user.id == @user.id
             end
@@ -783,7 +768,7 @@ class ApiController < ApplicationController
       doc.page {
         doc.pagename("#{_('Call_Flow')}")
         doc.language("#{Localization.lang}")
-        doc.userid("#{session[:user_id]}")
+        doc.userid("#{@current_user.id}")
         doc.device {
           doc.device_id("#{@device.id}")
           doc.device_description("#{@device.description}")
@@ -823,11 +808,9 @@ class ApiController < ApplicationController
         doc.language("en")
         doc.error_msg("")
         doc.aval_languages {
-          if session[:tr_arr]
-            for tr in session[:tr_arr]
-              doc.language("#{tr.short_name}")
-            end
-          end
+
+          doc.language("#{tr.short_name}")
+
         }
       }
 
@@ -879,7 +862,7 @@ class ApiController < ApplicationController
       doc.page {
         doc.pagename("#{_('Call_State')}")
         doc.language("#{Localization.lang}")
-        doc.userid("#{session[:user_id]}")
+        doc.userid("#{@current_user.id}")
         doc.callflow {
           doc.device_id("#{@device.id}")
           doc.device_description("#{@device.description}")
@@ -923,11 +906,6 @@ class ApiController < ApplicationController
         doc.language("en")
         doc.error_msg("")
         doc.aval_languages {
-          if session[:tr_arr]
-            for tr in session[:tr_arr]
-              doc.language("#{tr.short_name}")
-            end
-          end
         }
       }
     end
@@ -947,15 +925,15 @@ class ApiController < ApplicationController
       @user.logged = 1
       @user.save
 
-      @tariff = User.find(session[:user_id]).tariff
+      @tariff = User.find(@current_user.id).tariff
       @dgroups = Destinationgroup.find(:all, :order => "name ASC, desttype ASC")
-      @vat = session[:vat_percent].to_f
+      @vat = 0.to_f
       @rates_cur2 = []
 
       sql = "SELECT rates.* FROM rates, destinations, directions WHERE rates.tariff_id = #{@tariff.id} AND rates.destination_id = destinations.id AND destinations.direction_code = directions.code ORDER by directions.name ASC;"
       rates = Rate.find_by_sql(sql)
 
-      exrate = Currency.count_exchange_rate(@tariff.currency, session[:show_currency])
+      exrate = Currency.count_exchange_rate(@tariff.currency, @current_user.currency.name)
       for rate in rates
         get_provider_rate_details(rate, exrate)
         @rates_cur2[rate.id]=@rate_cur
@@ -966,8 +944,8 @@ class ApiController < ApplicationController
       doc.page {
         doc.pagename("#{_('Payments')}")
         doc.language("#{Localization.lang}")
-        doc.userid("#{session[:user_id]}")
-        doc.currency("#{session[:show_currency]}")
+        doc.userid("#{@current_user.id}")
+        doc.currency("#{@current_user.currency.name}")
         doc.vat_percent("#{@vat}")
         doc.aval_currencies {
           for curr in @currency
@@ -992,11 +970,6 @@ class ApiController < ApplicationController
         doc.language("en")
         doc.error_msg("")
         doc.aval_languages {
-          if session[:tr_arr]
-            for tr in session[:tr_arr]
-              doc.language("#{tr.short_name}")
-            end
-          end
         }
       }
 
@@ -1216,11 +1189,6 @@ class ApiController < ApplicationController
         doc.language("en")
         doc.error_msg("")
         doc.aval_languages {
-          if session[:tr_arr]
-            for tr in session[:tr_arr]
-              doc.language("#{tr.short_name}")
-            end
-          end
         }
       }
     end
@@ -1243,7 +1211,7 @@ class ApiController < ApplicationController
       doc.page {
         doc.pagename("#{_('Payments')}")
         doc.language("#{Localization.lang}")
-        doc.userid("#{session[:user_id]}")
+        doc.userid("#{@current_user.id}")
         doc.payments {
           for payment in @payments
             completed = _('Yes')
@@ -1282,11 +1250,6 @@ class ApiController < ApplicationController
         doc.language("en")
         doc.error_msg("")
         doc.aval_languages {
-          if session[:tr_arr]
-            for tr in session[:tr_arr]
-              doc.language("#{tr.short_name}")
-            end
-          end
         }
       }
     end
@@ -1309,7 +1272,7 @@ class ApiController < ApplicationController
       doc.page {
         doc.pagename("#{_('Invoices')}")
         doc.language("#{Localization.lang}")
-        doc.userid("#{session[:user_id]}")
+        doc.userid("#{@current_user.id}")
         doc.invoices {
           for inv in @invoices
             doc.invoice {
@@ -1333,11 +1296,6 @@ class ApiController < ApplicationController
         doc.language("en")
         doc.error_msg("")
         doc.aval_languages {
-          if session[:tr_arr]
-            for tr in session[:tr_arr]
-              doc.language("#{tr.short_name}")
-            end
-          end
         }
       }
     end
@@ -1360,7 +1318,7 @@ class ApiController < ApplicationController
       doc.page {
         doc.pagename("#{_('User_subscriptions')}")
         doc.language("#{Localization.lang}")
-        doc.userid("#{session[:user_id]}")
+        doc.userid("#{@current_user.id}")
         doc.subscriptions {
           for sub in @subscriptions
             doc.subscription {
@@ -1380,11 +1338,6 @@ class ApiController < ApplicationController
         doc.language("en")
         doc.error_msg("")
         doc.aval_languages {
-          if session[:tr_arr]
-            for tr in session[:tr_arr]
-              doc.language("#{tr.short_name}")
-            end
-          end
         }
       }
     end
@@ -1646,7 +1599,7 @@ class ApiController < ApplicationController
       @user.logged = 1
       @user.save
 
-      calls_hash = @user.new_calls(session_from_date)
+      calls_hash = @user.new_calls(@current_user.system_time(Date.today.to_s, 1))
 
       @calls = []
       for call_h in calls_hash
@@ -1658,7 +1611,7 @@ class ApiController < ApplicationController
       doc.page {
         doc.pagename("#{_('New_calls')}")
         doc.language("#{Localization.lang}")
-        doc.userid("#{session[:user_id]}")
+        doc.userid("#{@current_user.id}")
         doc.calls_stat {
           doc.total_calls("#{@calls.size}")
           doc.calls {
@@ -1685,11 +1638,6 @@ class ApiController < ApplicationController
         doc.language("en")
         doc.error_msg("")
         doc.aval_languages {
-          if session[:tr_arr]
-            for tr in session[:tr_arr]
-              doc.language("#{tr.short_name}")
-            end
-          end
         }
       }
     end
