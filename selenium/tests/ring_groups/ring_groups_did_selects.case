@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://test4.marsassolutions.com/" />
+<link rel="selenium.base" href="" />
 <title>ring_groups_did_selects</title>
 </head>
 <body>
@@ -61,6 +61,11 @@
 	<td>name=commit</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
 <!--Quick Forwards Dial Plan-->
 <tr>
 	<td>open</td>
@@ -69,7 +74,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=input[type=&quot;image&quot;]</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <!--assign to user-->
@@ -126,32 +131,32 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=dialplan[name]</td>
+	<td>id=dialplan_name</td>
 	<td>test11</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=ringgroup[comment]</td>
+	<td>id=ringgroup_comment</td>
 	<td>test11</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=dialplan[data2]</td>
+	<td>id=dialplan_data2</td>
 	<td>1234567</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=ringgroup[options]</td>
+	<td>id=ringgroup_options</td>
 	<td>test11</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=ringgroup[cid_prefix]</td>
+	<td>id=ringgroup_cid_prefix</td>
 	<td>test11</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=ringgroup[did_id]</td>
+	<td>id=ringgroup_did_id</td>
 	<td>label=37093042422</td>
 </tr>
 <tr>
@@ -198,6 +203,26 @@
 	<td>assertText</td>
 	<td>ringgroup[did_id]</td>
 	<td>None 1234567890 37093042422</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=test11 (ringgroup)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=test11 (ringgroup)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Edit Ring Group</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
