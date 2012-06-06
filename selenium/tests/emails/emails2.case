@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://trunk" />
+<link rel="selenium.base" href="" />
 <title>emails2</title>
 </head>
 <body>
@@ -77,42 +77,42 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Email sending is disabled globally.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>email_smtp_server</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>email_port</td>
 	<td>25</td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>email_login</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>email_password</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>email_batch_size</td>
 	<td>50</td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>email_from</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>Test email will be sent to: test_reseller@email.test</td>
 	<td></td>
 </tr>
@@ -168,6 +168,106 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
+	<td>Invalid email format in email From field (example: example@…)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_3 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=email_sending_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_from</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Invalid email format in email From field (example: example@…)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_3 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=email_from</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=email_sending_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_from</td>
+	<td>www.bbbbb.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Invalid email format in email From field (example: example@…)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_from</td>
+	<td>aaaaaa ssssssssss@mail.cc</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=email_sending_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Invalid email format in email From field (example: example@…)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_3 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_from</td>
+	<td>no-reply@kolmisoft.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=email_sending_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
 </tr>
@@ -202,7 +302,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>email_domain</td>
 	<td></td>
 </tr>
@@ -217,7 +317,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
 </tr>
@@ -243,7 +343,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>User's settings succesfully changed: User Resellers</td>
 	<td></td>
 </tr>
@@ -278,7 +378,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Mission complete</td>
 	<td></td>
 </tr>
@@ -310,17 +410,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>type_7</td>
 	<td>warning_balance_send</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>type_8</td>
 	<td>error</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>data_8</td>
 	<td>Cant_send_email</td>
 </tr>
@@ -347,7 +447,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_4']/span</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_3 &gt; span</td>
 	<td></td>
 </tr>
 <tr>
@@ -372,7 +472,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_4']/span</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_3 &gt; span</td>
 	<td></td>
 </tr>
 <tr>
@@ -381,7 +481,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>email_domain</td>
 	<td></td>
 </tr>
