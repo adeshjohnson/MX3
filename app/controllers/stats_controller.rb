@@ -3287,7 +3287,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
                           left join users on (devices.user_id = users.id)
                           where users.owner_id > 0 group by users.owner_id) as s_devices on(s_devices.owner_id = users.id)
         left join (SELECT COUNT(dids.id) AS 'dids', reseller_id FROM dids GROUP BY dids.reseller_id) AS s_dids ON(s_dids.reseller_id = users.id)
-        where users.usertype = 'reseller'
+        where users.usertype = 'reseller' and users.hidden = 0
         ORDER BY nice_user ASC"
     #my_debug sql
     @resellers = User.find_by_sql(sql)
