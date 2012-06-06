@@ -189,10 +189,10 @@
                   </tr>
                   <tr>
                     <td> <%= _('HDD_Quota') %>:</td>
-                    <td><%= nice_number(@total_recordings_size.to_f/1048576) %> <%= _('Mb') %>
-                      /<%= nice_number(@user.recording_hdd_quota.to_f/1048576) %> <%= _('Mb') %>
-                      ( <%= @user.recording_hdd_quota.to_f == 0.0 ? "100" : nice_number((@total_recordings_size.to_f/@user.recording_hdd_quota.to_f)*100) %>
-                      % <%= _('Taken') %>)
+                    <td>                                                                                                                                                                                                                   <% if @user.recording_hdd_quota.to_f == 0.0 %>                                                                                                                                                 
+                        <%= nice_number(@total_recordings_size.to_f/1048576) %> <%= _('Mb') %> <%= _('Taken')%>                                                                                                      
+                      <% else %>                                                                                                                                                                                                             <%= nice_number(@user.recording_hdd_quota.to_f/1048576) %> <%= _('Mb')%> (<%= nice_number(@total_recordings_size.to_f/1048576) %> <%= _('Mb') %> <%= _('Or') %> <%= nice_number((@total_recordings_size.to_f/@user.recording_hdd_quota.to_f)*100) %> % <%= _('Taken')%>)
+                      <% end %>                                                                                                                                                                                     
                     </td>
                   </tr>
                   <tr>
