@@ -65,6 +65,7 @@ class QuickforwardsRulesController < ApplicationController
   dummy method, nothing to do here
 =end
   def settings
+    @page_title = _('Quickforward_settings') 
     @tell_balance = Confline.get_value('Tell_Balance').to_i
     @tell_time = Confline.get_value('Tell_Time').to_i
   end

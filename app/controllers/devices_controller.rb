@@ -1601,6 +1601,10 @@ class DevicesController < ApplicationController
     @devicetypes = Devicetype.load_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?)
 
     @device_type =Confline.get_value("Default_device_type", session[:user_id])
+
+    @global_tell_balance = Confline.get_value('Tell_Balance').to_i 
+    @global_tell_time = Confline.get_value('Tell_Time').to_i 
+
     if @device_type == 'FAX'
       @audio_codecs = Codec.find(:all,
                                  :select => 'codecs.*,  (conflines.value2 + 0) AS v2', :joins => "LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, 'Default_device_codec_', '') and owner_id = #{session[:user_id]})",
@@ -1731,6 +1735,8 @@ class DevicesController < ApplicationController
     Confline.set_value("Default_device_language", lang, session[:user_id])
     Confline.set_value("Default_device_enable_mwi", params[:device][:enable_mwi].to_i, session[:user_id])
 
+    Confline.set_value("Default_device_qf_tell_time", params[:device][:qf_tell_time].to_i, session[:user_id]) 
+    Confline.set_value("Default_device_qf_tell_balance", params[:device][:qf_tell_balance].to_i, session[:user_id]) 
 
     #============= PERMITS ===================
     if params[:mask1]
