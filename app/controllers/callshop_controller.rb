@@ -284,7 +284,7 @@ class CallshopController < ApplicationController
   private
 
   def find_shop_and_authorize
-    @cshop = Callshop.includes(:users => [:cs_invoices]).where("groups.id = ? AND usergroups.gusertype = 'manager'", params[:id]).includes(:users => [:cs_invoices]).order("usergroups.position asc").first
+    @cshop = Callshop.includes(:users => [:cs_invoices]).where("groups.id = ? AND usergroups.gusertype = 'user'", params[:id]).includes(:users => [:cs_invoices]).order("usergroups.position asc").first
 
     unless @cshop
       reset_session
