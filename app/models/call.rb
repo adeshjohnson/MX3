@@ -1244,7 +1244,7 @@ class Call < ActiveRecord::Base
     day = self.calldate.to_s(:db)
     sql = "SELECT  A.*, (SELECT IF((SELECT daytype FROM days WHERE date = '#{day}') IS NULL, (SELECT IF(WEEKDAY('#{day}') = 5 OR WEEKDAY('#{day}') = 6, 'FD', 'WD')), (SELECT daytype FROM days WHERE date = '#{day}')))   as 'dt' FROM devices JOIN locations ON (locations.id = devices.location_id) LEFT JOIN (SELECT * FROM locationrules WHERE  enabled = 1 AND lr_type = 'dst' AND LENGTH('#{dst}') BETWEEN minlen AND maxlen AND (SUBSTRING('#{dst}',1,LENGTH(cut)) = cut OR LENGTH(cut) = 0 OR ISNULL(cut)) ORDER BY location_id DESC ) AS A ON (A.location_id = locations.id OR A.location_id = 1) WHERE devices.id = #{device_id} ORDER BY LENGTH(cut) DESC LIMIT 1;"
     res = ActiveRecord::Base.connection.select_one(sql)
-    if res and res['device_id'].blank? and res['lcr_id'].blank? and res['did_id'].blank?
+    if res and res['device_id'].blank? and res['did_id'].blank?
       daytype = res['dt']
       loc_add = res['add']
       loc_cut = res['cut']
