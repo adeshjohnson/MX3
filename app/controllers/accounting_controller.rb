@@ -745,9 +745,9 @@ class AccountingController < ApplicationController
     cond_param = []
     # params that need to be searched with appended any value via LIKE in users table
     ["username", "first_name", "last_name"].each { |col|
-      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?", cond, cond_param) }
+      add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s, "users.#{col} LIKE ?", cond, cond_param) }
     # params that need to be searched with appended any value via LIKE in invoices table
-    add_contition_and_param(@options[:s_number], @options[:s_number].to_s+"%", "invoices.number LIKE ?", cond, cond_param)
+    add_contition_and_param(@options[:s_number], @options[:s_number].to_s, "invoices.number LIKE ?", cond, cond_param)
     # params that need to be searched via equality.
     ["period_start", "period_end", "issue_date", "sent_email", "sent_manually", "paid", "invoice_type"].each { |col|
       add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".to_sym], "invoices.#{col} = ?", cond, cond_param) }
