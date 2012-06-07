@@ -13,6 +13,23 @@
         });
     });
 
+    Event.observe($("bellow_monitoringamount"),'click', function(event){ 
+      $('amount_bellow').disabled = !event.target.checked; 
+      $('amount_above').disabled = event.target.checked; 
+    }); 
+ 
+    Event.observe($("above_monitoringamount"),'click', function(event){ 
+      $('amount_above').disabled = !event.target.checked; 
+      $('amount_bellow').disabled = event.target.checked; 
+    }); 
+
+    if($("simultaneous_calls")){ 
+      Event.observe($("simultaneous_calls"),'click', function(event){ 
+        $('amount_above').disabled = true; 
+        $('amount_bellow').disabled = true;  
+      }); 
+    } 
+
     function adjustPeriod(minutes, hours, days) {
         if (minutes.checked) {
             $$(".period_minutes").first().disabled = false;
@@ -35,25 +52,38 @@
   <%= raw form.period_select :period_in_past %>
 </td>
 <td>
-  <%= form.radio_button :monitoring_type, 'bellow', :id => "bellow_monitoringamount" %> <%= _('Drops_bellow') %>
-  <br/>
-  <%= form.radio_button :monitoring_type, 'above', :id => "above_monitoringamount" %> <%= _('Increases_more') %>
-  <br/>
-  <div class="center"><%= _('than') %>
-    <%= form.text_field :amount, :class => "input", :size => 10, :id => "amount" %></div>
+  <b <%= tooltip(_('Amount'), _('Amount_explanation')) %>> <%= b_info %> <%= _('Amount') %> (<%= Currency.get_default.name %>)</b><br/> 
+  <%= form.radio_button :monitoring_type, 'bellow', :id => "bellow_monitoringamount" %> <%= _('Drops_bellow') %> 
+  <%= _('than') %> <%= form.text_field :amount, :class => "input", :size => 10, :id => "amount_bellow", :disabled => @monitoring.monitoring_type != 'bellow' %> 
+  <br/> 
+  <%= form.radio_button :monitoring_type, 'above', :id => "above_monitoringamount" %> <%= _('Increases_more') %> 
+  <%= _('than') %> <%= form.text_field :amount, :class => "input", :size => 10, :id => "amount_above", :disabled => @monitoring.monitoring_type != 'above' %> 
+  <br/> 
   <%= hidden_field_tag "default_currency", Currency.get_default.name, :id => "default_currency" %>
+  <b <%= tooltip(_('Calls'), _('Monitoring_calls_explanation'))%>><%= b_info %> <%= _('Calls') %></b> 
+  <br />
   <%= form.radio_button :monitoring_type, 'simultaneous', :id => "simultaneous_calls" %> <%= _('Simultaneous_calls') %>
   <br/>
 </td>
 <td>
-  <%= form.radio_button :block, true, :id => "will_be_blocked" %> <%= _('Block') %>
-  <br/>
-  <%= form.radio_button :block, false, :id => "will_not_be_blocked" %> <%= _('Do_not_block') %>
-  <br/>
-</td>
-<td>
-  <%= form.radio_button :email, true, :id => "will_be_sent" %> <%= _('Send') %>
-  <br/>
-  <%= form.radio_button :email, false, :id => "will_not_be_sent" %> <%= _('Do_not_send') %>
-  <br/>
+  <table> 
+    <tr> 
+    <td> 
+      <b <%= tooltip(_('Block_user'), _('Block_user_explanation'))%>><%= b_info %> <%= _('Block_user') %>:</b> 
+    </td> 
+    <td> 
+      <%= form.radio_button :block, false, :id => "will_not_be_blocked" %> <%= _('No') %> 
+      <%= form.radio_button :block, true, :id => "will_be_blocked" %> <%= _('Yes') %> 
+    </td> 
+    </tr> 
+    <tr> 
+      <td> 
+        <b <%= tooltip(_('Send_email_to_admin'), _('Send_email_explanation'))%>><%= b_info %> <%= _('Send_email_to_admin') %>:</b> 
+      </td> 
+      <td> 
+        <%= form.radio_button :email, false, :id => "will_not_be_sent" %> <%= _('No') %> 
+        <%= form.radio_button :email, true, :id => "will_be_sent" %> <%= _('Yes') %> 
+      </td> 
+    </tr> 
+  </table> 
 </td>

@@ -9,10 +9,8 @@
       <tr>
         <th class="last"><%= _('Active') %></th>
         <th <%= tooltip(_('Period'), _('Period_explanation')) %>><%= _('Period') %></th>
-        <th <%= tooltip(_('Amount'), _('Amount_explanation')) %>><%= _('Amount') %> (<%= Currency.get_default.name %>)
-        </th>
-        <th <%= tooltip(_('Block_user'), _('Block_user_explanation')) %>><%= _('Block_user') %></th>
-        <th <%= tooltip(_('Send_email_to_admin'), _('Send_email_explanation')) %>><%= _('Send_email_to_admin') %></th>
+        <th <%= tooltip(_('Condition'), _('Monitoring_condition_explanation'))%>><%= _('Condition') %> </th> 
+ 	<th <%= tooltip(_('Actions'), _('Monitoring_action_explanation'))%>><%= _('Actions') %></th> 
         <% unless @monitoring.user_type.blank? %>
             <th <%= tooltip(_('User_type'), _('User_type_explanation')) %>><%= _('User_type') %></th>
         <% end %>
@@ -51,10 +49,13 @@
 <br/>
 <script type="text/javascript">
     var template = new Template("<%= _('Monitoring_template_short') %>");
+    var template_amount = template 
+    var template_simultaneous = new Template("<%= _('Monitoring_simultaneous_calls_template_short')%>") 
     var values = <%= monitoring_values(@monitoring, :users => "<strong>"+nice_user(@user)+"</strong>") %>;
     var messages = <%= monitoring_messages %>;
 
     Event.observe(window, 'load', function () {
+        template = ($('simultaneous_calls').checked ? template_simultaneous : template_amount) 
         $("explanation").update(template.evaluate(values));
 
         new Form.Element.Observer('amount', 1.0,
@@ -64,6 +65,13 @@
                 }
         );
 
+       ['amount_above', 'amount_bellow'].each( function(element){ 
+ 	 new Form.Element.Observer(element, 1.0, function(el, value){ 
+ 	   values.amount = el.value + " " + $("default_currency").value; 
+ 	   $("explanation").update(template.evaluate(values)); 
+ 	 }); 
+       });
+
         //uwaga! do no not try to make any changes, you've been worned!
         //this array contains id of radiobuttons. when iterating through it event observers are beeing registered.
         //on event, observer will change template according to whitch button was pressed. notice
@@ -72,6 +80,7 @@
         //makes one to many relationship between these two arrays.
         ["will_be_blocked", "will_not_be_blocked", "will_be_sent", "will_not_be_sent", "bellow_monitoringamount", "above_monitoringamount"].each(function (ev) {
             Event.observe(ev, 'change', function () {
+                template = template_amount 
                 values[ev.match(/[A-Za-z]+$/)[0]] = messages[ev];
                 $("explanation").update(template.evaluate(values));
             });
@@ -81,6 +90,12 @@
             values.period = messages['thirty_minutes'];
             $("explanation").update(template.evaluate(values));
         });
+
+        Event.observe("simultaneous_calls", 'change', function() { 
+ 	  values["calls"] = messages["simultaneous_calls"]; 
+ 	  template = template_simultaneous 
+ 	  $("explanation").update(template.evaluate(values)); 
+ 	}); 
 
         Event.observe('monitoring_period_in_past_type_hours', 'change', function () {
             values.period = parseInt($$(".period_hours").first().value) / 60 + " " + messages['hours'];

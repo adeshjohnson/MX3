@@ -69,10 +69,8 @@
       <thead>
       <tr>
         <th <%= tooltip(_('Period'), _('Period_explanation')) %>><%= _('Period') %></th>
-        <th <%= tooltip(_('Amount'), _('Amount_explanation')) %>><%= _('Amount') %> (<%= Currency.get_default.name %>)
-        </th>
-        <th <%= tooltip(_('Block_user'), _('Block_user_explanation')) %>><%= _('Block_user') %></th>
-        <th <%= tooltip(_('Send_email_to_admin'), _('Send_email_explanation')) %>><%= _('Send_email_to_admin') %></th>
+        <th <%= tooltip(_('Condition'), _('Monitoring_condition_explanation'))%>><%= _('Condition') %> </th> 
+ 	<th <%= tooltip(_('Actions'), _('Monitoring_action_explanation'))%>><%= _('Actions') %></th> 
         <th <%= tooltip(_('User_type'), _('User_type_explanation')) %>><%= _('User_type') %></th>
         <th class="last"></th>
       </tr>
@@ -104,6 +102,8 @@
 <br/>
 <script type="text/javascript">
     var template = new Template("<%= _('Monitoring_template_extended') %>");
+    var template_amount = template 
+    var template_simultaneous = new Template("<%= _('Monitoring_simultaneous_calls_template_extended')%>") 
     var values = <%= raw monitoring_values(@monitoring).html_safe %>;
     var messages = <%= raw monitoring_messages.html_safe %>;
     var userss = <%= raw  monitoring_messages_users.html_safe %>;
@@ -121,9 +121,22 @@
         ["will_be_blocked", "will_not_be_blocked", "will_be_sent", "will_not_be_sent", "bellow_monitoringamount", "above_monitoringamount"].each(function (ev) {
             Event.observe(ev, 'change', function () {
                 values[ev.match(/[A-Za-z]+$/)[0]] = messages[ev];
+                if(ev == "bellow_monitoringamount"){ 
+ 	          values.amount = $("amount_bellow").value; 
+ 	        } 
+                if(ev == "above_monitoringamount"){ 
+ 	          values.amount = $("amount_above").value; 
+ 	        } 
+ 	        template = template_amount 
                 $("explanation").update(template.evaluate(values));
             });
         });
+
+        Event.observe("simultaneous_calls", 'change', function() { 
+ 	   values["calls"] = messages["simultaneous_calls"]; 
+ 	   template = template_simultaneous 
+ 	   $("explanation").update(template.evaluate(values)); 
+ 	});
 
         Event.observe('monitoring_period_in_past_type_minutes', 'change', function () {
             values.period = messages['thirty_minutes'];
