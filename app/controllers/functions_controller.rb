@@ -1846,6 +1846,13 @@ Sets default tax values for users or cardgroups
     #/Tax
 
     # EMAILS
+
+    params[:email_from] = params[:email_from].strip
+    if not params[:email_from].to_s.blank? and not params[:email_from].to_s =~ /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/
+      flash[:notice] = _("Invalid_email_format_in_emails_from")
+      redirect_to :action => 'reseller_settings' and return false
+    end
+
     Confline.set_value("Email_Sending_Enabled", params[:email_sending_enabled], session[:user_id])
     Confline.set_value("Email_Smtp_Server", params[:email_smtp_server], session[:user_id])
     # set default param in model
