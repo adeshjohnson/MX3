@@ -290,12 +290,14 @@ class CardsController < ApplicationController
     currency = params[:currency]
 
     @card.balance += real_amount
-    @card.save
 
+    if @card.save 
+      Payment.add_for_card(@card, amount, currency, current_user.id) 
+      flash[:status] = _('Payment_added') 
+    else 
+      flash_errors_for(_('Payment_was_not_added'), @card) 
+    end  
 
-    Payment.add_for_card(@card, amount, currency, current_user.id)
-
-    flash[:status] = _('Payment_added')
     redirect_to :action => 'list', :cg => @cg and return false
   end
 

@@ -4404,6 +4404,7 @@ Localization.define('en') do |l|
   l.store 'Monitoring_action_explanation', 'What condition should be active in order to take some actions?' 
   l.store 'Monitoring_condition_explanation', 'What actions to take?' 
   l.store 'Monitoring_calls_explanation', 'Conditions based on Calls' 
+  l.store 'Payment_was_not_added', 'Payment was not added' 
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
