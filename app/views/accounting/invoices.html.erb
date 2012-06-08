@@ -91,7 +91,7 @@
 <% end %>
 
 <%= form_tag(:action => 'send_invoices') do %>
-    <div id="invoices_details" <%= "style='display:none;'" if @send_invoices == 0 or Confline.get_value("Email_Sending_Enabled").to_i == 1 %> >
+    <div id="invoices_details" <%= "style='display:none;'" if @send_invoices == 0 or Confline.get_value("Email_Sending_Enabled").to_i == 0 %> >
       <br/>
       <table width="100%" class="simple">
         <tr>

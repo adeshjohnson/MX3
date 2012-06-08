@@ -777,7 +777,8 @@ class AccountingController < ApplicationController
                                :limit => session[:items_per_page], :order => order_by)
       #logger.fatal(([cond.join(" AND ")] + cond_param).inspect)
       cond.length > 1 ? @search = 1 : @search = 0
-      cond.length > 1 ? @send_invoices = 1 : @send_invoices = 0
+      #cond.length > 1 ? @send_invoices = 1 : @send_invoices = 0
+      @send_invoices = 0
 
       @period_starts = ActiveRecord::Base.connection.select_all("SELECT DISTINCT period_start FROM invoices")
       @period_ends = ActiveRecord::Base.connection.select_all("SELECT DISTINCT period_end FROM invoices")
