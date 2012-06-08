@@ -424,7 +424,7 @@ class Provider < ActiveRecord::Base
     end
 
     jcond = ["calls.calldate BETWEEN '#{options[:date_from]}' AND '#{options[:date_till]}'"]
-    jcond << "calls.prefix = '#{options[:s_prefix]}'" if !options[:s_prefix].blank?
+    jcond << "calls.prefix LIKE '#{options[:s_prefix]}'" if !options[:s_prefix].blank?
 
     if current_user.is_reseller?
       jcond << "(calls.reseller_id = #{current_user.id} OR calls.user_id = #{current_user.id})"

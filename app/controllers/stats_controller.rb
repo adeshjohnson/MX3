@@ -1544,11 +1544,11 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @Show_Currency_Selector=1
 
     @page_title = _('Providers_stats')
-    @s_prefix = params[:search] ? params[:search] : ''
+    @s_prefix = params[:search].to_s.strip
     unless  @s_prefix.blank?
       @dest = Destination.find(
           :first,
-          :conditions => "prefix = SUBSTRING('#{@s_prefix}', 1, LENGTH(destinations.prefix))",
+          :conditions => "prefix LIKE '#{@s_prefix}'",
           :order => "LENGTH(destinations.prefix) DESC"
       )
       @flag = nil
