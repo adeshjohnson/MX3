@@ -1194,6 +1194,9 @@ class User < ActiveRecord::Base
     device.tell_time = Confline.get_value("Default_device_tell_time", owner_id).to_i
     device.tell_rtime_when_left = Confline.get_value("Default_device_tell_rtime_when_left", owner_id).to_i
     device.repeat_rtime_every = Confline.get_value("Default_device_repeat_rtime_every", owner_id).to_i
+    device.qf_tell_time = Confline.get_value("Default_device_qf_tell_time", owner_id).to_i
+    device.qf_tell_balance = Confline.get_value("Default_device_qf_tell_balance", owner_id).to_i
+
 
     device.permit = Confline.get_value("Default_device_permits", owner_id).to_s
     device.qualify = Confline.get_value("Default_device_qualify", owner_id)
