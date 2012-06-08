@@ -47,6 +47,9 @@
     reseller_menu.add(44, 41, '<%= _('Profit') %>', '<%= Web_Dir %>/stats/profit');
     reseller_menu.add(45, 41, '<%= _('Services') %>', '<%= Web_Dir %>/services/list');
     reseller_menu.add(46, 45, '<%= _('Subscriptions') %>', '<%= Web_Dir %>/services/subscriptions');
+    <% if provider_billing_active? and current_user.own_providers == 1 %>
+    reseller_menu.add(47,41,'<%= _('Provider_billing') %>','<%= Web_Dir %>/providers/billing');
+    <% end %>
     reseller_menu.add(60, 0, '<%= _('Users') %>', '<%= Web_Dir %>/users/list');
     reseller_menu.add(61, 60, '<%= _('Devices') %>', '<%= Web_Dir %>/devices/devices_all');
     reseller_menu.add(62, 60, '<%= _('Hidden') %>', '<%= Web_Dir %>/users/hidden');

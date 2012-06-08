@@ -11,6 +11,7 @@ class DevicesController < ApplicationController
   before_filter :find_cli, :only => [:change_email_callback_status, :change_email_callback_status_device, :cli_delete, :cli_user_delete, :cli_device_delete, :cli_edit, :cli_update, :cli_device_edit, :cli_user_edit, :cli_device_update, :cli_user_update]
   before_filter :verify_params, :only => [:create]
   before_filter :check_callback_addon, :only => [:change_email_callback_status, :change_email_callback_status_device]
+  before_filter :find_provider, :only => [:user_device_edit]
 
   before_filter { |c|
     view = [:index, :new, :edit, :device_edit, :show_devices, :device_extlines, :device_dids, :forwards, :group_forwards, :device_clis, :clis, :clis_banned_status, :cli_user_devices, :device_all_details, :default_device, :get_user_devices, :ajax_get_user_devices]
@@ -1448,10 +1449,20 @@ class DevicesController < ApplicationController
 
 =end
   # in before filter : device (:find_device)
+
+  def find_provider
+    @provider = Provider.find(:first, :conditions => ["device_id = #{@device.id}"])
+  end
+
   def user_device_edit
-    @page_title = _('device_settings')
+    if !@provider
+      @page_title = _('device_settings')
+    else
+      @page_title = _('Provider_settings')
+    end
     @page_icon = "edit.png"
     @user = User.find_by_id(session[:user_id])
+    @owner = User.find_by_id(@user.owner_id)
     unless @user
       flash[:notice] = _('User_was_not_found')
       redirect_to :action => :index and return false
@@ -1470,6 +1481,7 @@ class DevicesController < ApplicationController
       @cid_name = nice_cid(@device.callerid)
       @cid_number = cid_number(@device.callerid)
     end
+    @curr = current_user.currency
   end
 
 =begin rdoc

@@ -4,29 +4,15 @@
   <tr>
     <th align="left"><%= nice_list_order('id', _('ID'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
     <th align="left"><%= nice_list_order('name', _('Provider'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
-    <th align="left"><%= nice_list_order('tech', _('Tech'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
-    <th align="left"><%= nice_list_order('channel', _('Channel'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
-    <th align="left"><%= nice_list_order('login', _('Login'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
-    <th align="left"><%= nice_list_order('password', _('Password'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
-    <th align="left"><%= nice_list_order('server_ip', _('Hostname') + "/" + _('Server_IP'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
-    <th align="left"><%= nice_list_order('tariff', _('Tariff'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
+    <th align="left"><%= nice_list_order('balance', _('Balance') + " (#{@curr.name})", @options, {:s_hidden => @options[:s_hidden]}) %></th>
+    <th></th>
   </tr>
   <% @providers.each_with_index { |prov, i| %>
       <tr class="row<%= (i % 2 + 1).to_s %>">
         <td id="id_<%= prov.id %>" <%= @n_class %>><%= h(prov.id) %></td>
         <td id="ani_<%= prov.id %>" <%= @n_class %>><%= b_provider_ani if prov.ani == 1 %><%= link_to prov.name, {:action => 'edit', :id => prov}, {:id => "edit_link_name_"+prov.id.to_s} %></td>
-        <td id="tech_<%= prov.id %>" <%= @n_class %>><%= print_tech prov.tech %></td>
-        <td id="channel_<%= prov.id %>" <%= @n_class %>><%= h(prov.channel) %></td>
-        <td id="login_<%= prov.id %>" <%= @n_class %>><%= h(prov.login) if prov.tech == "SIP" or prov.tech == "IAX2" or prov.tech == "Skype" %></td>
-        <td id="password_<%= prov.id %>" <%= @n_class %>><%= h(prov.password) if prov.tech == "SIP" or prov.tech == "IAX2" or prov.tech == "Skype" %></td>
-        <td id="server_ip_<%= prov.id %>" <%= @n_class %>>
-          <% if prov.tech != "Skype" %>
-              <%= h(prov.server_ip) %>
-          <% else %>
-              <%= _('Skype_Network') %>
-          <% end %>
-        </td>
-        <td id="tariff_name_<%= prov.id %>" <%= @n_class %>><%= h(prov.tariff.name) if prov.tariff %></td>
+        <td id="balance_<%= prov.id %>" <%= @n_class %>><%= nice_number prov.balance * @curr.exchange_rate %></td>
+        <td id="edit_<%= prov.id %>" <%= @n_class %> align="center"> <%= link_to b_edit, {:action => 'edit', :id => prov}, {:id => "edit_link_"+prov.id.to_s} %></td>
       </tr>
   <% } %>
 </table>

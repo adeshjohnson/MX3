@@ -259,6 +259,7 @@ class ProvidersController < ApplicationController
     @prules = @provider.providerrules
 
     @providertypes = Providertype.find(:all)
+    @curr = current_user.currency
 
     if @provider.tech == "Skype"
       @audio_codecs = @provider.codecs_order('audio', {:skype => true})
@@ -743,7 +744,7 @@ class ProvidersController < ApplicationController
 
     @page_title = _('Providers')
     @page_icon = "provider.png"
-
+    @curr = current_user.currency
     session[:providers_billing_options] ? @options = session[:providers_billing_options] : @options = {}
     @options = clear_options(@options) if params[:clear].to_i == 1
     @options[:s_user_id] ||= current_user.id

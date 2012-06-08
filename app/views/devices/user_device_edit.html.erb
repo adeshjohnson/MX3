@@ -12,6 +12,17 @@
                   <td> <%= _('Description') %>:</td>
                   <td><%= text_field 'device', 'description', "class" => "input" %> </td>
                 </tr>
+                <tr>
+                  <td height="10"></td>
+                </tr>
+                <% if @provider and provider_billing_active? %>
+                    <% if (@owner.id > 0 and @owner.own_providers == 1) or @owner.id ==0 %>
+                        <tr>
+                          <td> <%= _('Balance') %>:   </td>
+                          <td id="balance_<%= @device.id %>"><%= nice_number @provider.balance * @curr.exchange_rate %> <%= @curr.name %></td>
+                        </tr>
+                    <% end %>
+                <% end %>
                 <!--
             <tr>
               <td class="bottom_border">
