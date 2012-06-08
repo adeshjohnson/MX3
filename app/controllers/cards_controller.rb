@@ -679,6 +679,10 @@ class CardsController < ApplicationController
       flash[:notice] = _("Card_is_already_sold")
       redirect_to(:action => :card_pay, :id => @card.id, :cg => @cg.id) and return false
     end
+    unless @card.sell(session[:default_currency], current_user.id) 
+      flash_errors_for(_('Can_not_sell_invalid_card'), @card) 
+      redirect_to :action => 'list', :cg => @cg and return false 
+    end 
     @email = params[:email].to_s
     invoice = CcInvoice.new(:email => @email, :owner_id => session[:user_id])
     invoice.number = CcInvoice.get_next_number(session[:user_id])
@@ -741,7 +745,7 @@ class CardsController < ApplicationController
       PdfGen::Generate.generate_cc_invoice(invoice, options)
       invoice.save
     end
-    @card.sell(session[:default_currency], current_user.id)
+
     flash[:status] = _("Card_is_sold")
     redirect_to(:action => :list, :id => @card.id, :cg => @cg.id) and return false
   end
