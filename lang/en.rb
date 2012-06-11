@@ -4407,6 +4407,7 @@ Localization.define('en') do |l|
   l.store 'Payment_was_not_added', 'Payment was not added'
   l.store 'Provider_settings', 'Provider Configuration'
   l.store 'Can_not_sell_invalid_card', 'Can not sell invalid card'
+  l.store 'Did_is_assigned_to_device', 'Did is assigned to device, you cannot make it a trunk'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
