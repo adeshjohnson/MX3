@@ -42,6 +42,10 @@ class Did < ActiveRecord::Base
         return false
       end
     end
+    if self.device and self.device.is_trunk? and User.current.is_reseller? and not User.current.allowed_to_assign_did_to_trunk? 
+      self.errors.add(:device, _('DID_cannot_be_assigned_to_trunk')) 
+      return false 
+    end 
   end
 
   def validate_user

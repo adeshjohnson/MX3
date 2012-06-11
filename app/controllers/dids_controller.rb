@@ -423,20 +423,23 @@ class DidsController < ApplicationController
 
     if status == "active"
       old_dev_id = did.device_id
-      did.assign(params[:device_id])
-      a=configure_extensions(did.device_id, {:no_redirect => true, :current_user => current_user})
-      return false if !a
+      if did.assign(params[:device_id])
+        a=configure_extensions(did.device_id, {:no_redirect => true, :current_user => current_user})
+        return false if !a
 
-      if old_dev_id.to_i > 0
-        dev = Device.where({:id => old_dev_id}).first
-        if dev
-          dev.primary_did_id = 0
-          a= configure_extensions(old_dev_id, {:no_redirect => true, :current_user => current_user})
-          return false if !a
+        if old_dev_id.to_i > 0
+          dev = Device.where({:id => old_dev_id}).first
+          if dev
+            dev.primary_did_id = 0
+            a= configure_extensions(old_dev_id, {:no_redirect => true, :current_user => current_user})
+            return false if !a
+          end
         end
-      end
-      Action.add_action_hash(current_user.id, {:target_type => 'device', :target_id => old_dev_id, :action => 'did_assigned', :data => did.id})
-      flash[:status] = _('DID_assigned')
+        Action.add_action_hash(current_user.id, {:target_type => 'device', :target_id => old_dev_id, :action => 'did_assigned', :data => did.id})
+        flash[:status] = _('DID_assigned')
+      else 
+        flash_errors_for(_("Could_not_assign_did"), did) 
+      end 
     end
 
     if status == "closed"

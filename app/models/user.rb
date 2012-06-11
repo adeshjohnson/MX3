@@ -3307,6 +3307,10 @@ GROUP BY terminators.id;").map { |t| t.id }
     self.blocked = 1
   end
 
+  def allowed_to_assign_did_to_trunk? 
+    (Confline.get_value('Resellers_Allow_Assign_DID_To_Trunk').to_i == 1) 
+  end 
+
   private
 
 =begin

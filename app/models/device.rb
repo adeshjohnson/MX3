@@ -56,7 +56,7 @@ class Device < ActiveRecord::Base
   rights to assign dids to trunk.
 =end
 def validate_trunk
-  allowed_to_assign_did = (Confline.get_value('Resellers_Allow_Assign_DID_To_Trunk').to_i == 1)
+  allowed_to_assign_did = self.user.owner.allowed_to_assign_did_to_trunk? 
   has_assigned_did = (not self.dids.empty?)
   if self.user.owner.is_reseller? and self.is_trunk? and has_assigned_did and not allowed_to_assign_did
     self.errors.add(:trunk, _('Did_is_assigned_to_device'))
