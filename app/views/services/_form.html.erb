@@ -23,12 +23,12 @@
     </td>
   </tr>
   <tr id="price_options">
-    <td> <%= _('Price') %>:</td>
-    <td> <%= text_field 'service', 'price', "class" => "input", :onkeyup => "this.value=this.value.replace(/[^0-9.-]/,'');" %></td>
+    <td> <%= _('Price') %> (<%= current_user.currency.name %>):</td>
+    <td> <%= text_field_tag 'service[price]', @service.price, "class" => "input", :onkeyup => "this.value=this.value.replace(/[^0-9.-]/,'');" %></td>
   </tr>
   <tr id="price_options2">
-    <td> <%= _('Self_Price') %>:</td>
-    <td> <%= text_field 'service', 'selfcost_price', "class" => "input", :onkeyup => "this.value=this.value.replace(/[^0-9.-]/,'');" %></td>
+    <td> <%= _('Self_Price') %> (<%= current_user.currency.name %>):</td>
+    <td> <%= text_field_tag 'service[selfcost_price]', @service.selfcost_price, "class" => "input", :onkeyup => "this.value=this.value.replace(/[^0-9.-]/,'');" %></td>
   </tr>
   <tr id="quantity_options">
     <td> <%= _('Minutes') %>:</td>
