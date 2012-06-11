@@ -122,10 +122,10 @@
             Event.observe(ev, 'change', function () {
                 values[ev.match(/[A-Za-z]+$/)[0]] = messages[ev];
                 if(ev == "bellow_monitoringamount"){ 
- 	          values.amount = $("amount_bellow").value; 
+ 	          values.amount = $("amount_bellow").value + " " + $("default_currency").value;
  	        } 
                 if(ev == "above_monitoringamount"){ 
- 	          values.amount = $("amount_above").value; 
+ 	          values.amount = $("amount_above").value + " " + $("default_currency").value;
  	        } 
  	        template = template_amount 
                 $("explanation").update(template.evaluate(values));
