@@ -267,6 +267,8 @@ class Command < Base
         line = "assert_equal #{@value}, @selenium.get_table(#{@target})"
       when "assertValue"
         line = "assert_equal #{@value}, @selenium.get_value(#{@target})"
+      when "assertNotValue"
+        line = "assert_not_equal #{@value}, @selenium.get_value(#{@target})"
       when "assertConfirmation"
         line = "assert_equal #{@target}, @selenium.get_confirmation"
       when "verifyElementPresent"
