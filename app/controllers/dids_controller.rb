@@ -373,7 +373,9 @@ class DidsController < ApplicationController
       if params[:back]
         redirect_to({:action => 'dids_interval_add_to_trunk'}.merge(@opts)) and return false
       else
-        redirect_to({:action => 'dids_interval_edit'}.merge(@opts)) and return false
+        redirect_to(:action => 'list') and return false 
+        #ticket #5946 
+        #redirect_to({:action => 'dids_interval_edit'}.merge(@opts)) and return false
       end
     end
   end
