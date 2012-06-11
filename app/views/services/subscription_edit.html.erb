@@ -12,7 +12,7 @@
       </tr>
       <tr>
         <td> <%= _('Price') %>   </td>
-        <td> <%= nice_number Currency.count_exchange_rate(current_user.currency.name, Currency.get_default.name) * @sub.service.price %> <%= current_user.currency.name %>  </td>
+        <td> <%= nice_number @sub.service.price %> <%= current_user.currency.name %>  </td>
       </tr>
       <tr>
         <td> <%= _('Memo') %>:</td>
