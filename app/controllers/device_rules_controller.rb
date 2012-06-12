@@ -1,6 +1,7 @@
 class DeviceRulesController < ApplicationController
   layout "callc"
 
+  before_filter :allow_to_use
   before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :check_localization
   before_filter :authorize
@@ -99,6 +100,11 @@ class DeviceRulesController < ApplicationController
       flash[:notice] = _('Device_was_not_found')
       redirect_back_or_default("/callc/main")
     end
+
+    if @device.user.owner_id.to_i != current_user.id.to_i
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
   end
 
   def find_device_rule
@@ -109,17 +115,13 @@ class DeviceRulesController < ApplicationController
       redirect_back_or_default("/callc/main")
     end
 
-    if @devicerule.device.user.owner_id != current_user.id
+    if @devicerule.device.user.owner_id.to_i != current_user.id.to_i
       dont_be_so_smart
       redirect_to :controller => "callc", :action => "main" and return false
     end
   end
 
-  def allow_extend
-    unless mor_11_extend?
-      dont_be_so_smart
-      redirect_to :controller => "callc", :action => "main" and return false
-    end
+  def allow_to_use
 
     if ['user', 'accountant'].include?(current_user.usertype)
       dont_be_so_smart
