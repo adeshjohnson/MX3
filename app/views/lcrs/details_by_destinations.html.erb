@@ -93,7 +93,11 @@
           <td>
             <%= _('Prefix') %> :
             <select name="search" id="pre">
-              <%= lcrpartial_prefixl(@direction) if @direction %>
+              <% if @direction %>
+                <%= lcrpartial_prefixl(@direction) %>
+              <% elsif !@countrys.empty? %>
+                <%= lcrpartial_prefixl(@countrys[0]) %>
+              <% end %>
             </select>
 
           </td>
