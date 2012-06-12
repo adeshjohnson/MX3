@@ -98,7 +98,7 @@ class DeviceRulesController < ApplicationController
 
     unless @device
       flash[:notice] = _('Device_was_not_found')
-      redirect_back_or_default("/callc/main")
+      redirect_to :controller => "callc", :action => "main" and return false
     end
 
     if @device.user.owner_id.to_i != current_user.id.to_i
@@ -112,7 +112,7 @@ class DeviceRulesController < ApplicationController
 
     unless @devicerule
       flash[:notice] = _('Devicerule_was_not_found')
-      redirect_back_or_default("/callc/main")
+      redirect_to :controller => "callc", :action => "main" and return false
     end
 
     if @devicerule.device.user.owner_id.to_i != current_user.id.to_i
@@ -122,6 +122,10 @@ class DeviceRulesController < ApplicationController
   end
 
   def allow_to_use
+    unless mor_11_extend?
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
 
     if ['user', 'accountant'].include?(current_user.usertype)
       dont_be_so_smart
