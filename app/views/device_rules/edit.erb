@@ -1,0 +1,34 @@
+<b><%= link_to b_user + _('User') + ': ' + nice_user(@devicerule.device.user).to_s, :controller => :users, :action => :edit, :id => @devicerule.device.user_id %></b>
+<br/>
+<b><%= link_nice_device(@devicerule.device) %></b>
+<br/>
+<br/>
+<table width="70%" class="maintable">
+  <tr>
+    <th align="center"><%= _('Enabled') %>?</th>
+    <th align="left"><%= _('Name') %></th>
+    <th align="left"><%= _('Cut') %></th>
+    <th align="left"><%= _('Add') %></th>
+    <th align="right"><%= _('Min_len') %></th>
+    <th align="right"><%= _('Max_len') %></th>
+    <th></th>
+  </tr>
+
+  <tr class="row1">
+    <td align="center">
+      <%= form_tag :action => :change_status, :id => @devicerule.id do %>
+          <%= image_submit_tag 'icons/check.png', :title => _('Disable') if @devicerule.enabled == 1 %>
+          <%= image_submit_tag 'icons/cross.png', :title => _('Enable') if @devicerule.enabled == 0 %>
+      <% end %>
+    </td>
+
+    <%= form_tag :action => :update, :id => @devicerule.id do %>
+        <td align="left"> <%= text_field_tag 'name', @devicerule.name, "class" => "input", :size => "25", :maxlength => "40" %> </td>
+        <td align="left"> <%= text_field_tag 'cut', @devicerule.cut, "class" => "input", :size => "10", :maxlength => "20" %> </td>
+        <td align="left"> <%= text_field_tag 'add', @devicerule.add, "class" => "input", :size => "10", :maxlength => "20" %> </td>
+        <td align="right"> <%= text_field_tag 'minlen', @devicerule.minlen, "class" => "input", :size => "5", :maxlength => "5" %> </td>
+        <td align="right"> <%= text_field_tag 'maxlen', @devicerule.maxlen, "class" => "input", :size => "5", :maxlength => "5" %> </td>
+        <td align="center"> <%= submit_tag _('Edit'), :disable_with => _('Processing..') %> </td>
+    <% end %>
+  </tr>
+</table>

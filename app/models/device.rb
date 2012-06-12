@@ -32,6 +32,7 @@ class Device < ActiveRecord::Base
   has_one :provider
   has_many :activecalls, :foreign_key => "src_device_id"
   has_many :ringgroups_devices
+  has_many :devicerules
 
 
   before_validation :check_device_username, :on => :create
@@ -45,7 +46,7 @@ class Device < ActiveRecord::Base
   validates_numericality_of :port, :message => _("Port_must_be_number"), :if => Proc.new { |o| not o.port.blank? }
 
   # before_create :check_callshop_user
-  before_save :validate_extension_from_pbx, :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth, :validate_trunk 
+  before_save :validate_extension_from_pbx, :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth, :validate_trunk
   before_update :validate_fax_device_codecs
   after_create :create_codecs, :device_after_create
   after_save :device_after_save, :prune_device
@@ -55,20 +56,20 @@ class Device < ActiveRecord::Base
   In case device allready has assigned dids, it cannot be set to trunk if reseller does not have
   rights to assign dids to trunk.
 =end
-def validate_trunk
-  if self.user and self.user.owner.is_reseller? 
-    allowed_to_assign_did = self.user.owner.allowed_to_assign_did_to_trunk? 
-    has_assigned_did = (not self.dids.empty?)
-    if self.user.owner.is_reseller? and self.is_trunk? and has_assigned_did and not allowed_to_assign_did
-      self.errors.add(:trunk, _('Did_is_assigned_to_device'))
-      return false
+  def validate_trunk
+    if self.user and self.user.owner.is_reseller?
+      allowed_to_assign_did = self.user.owner.allowed_to_assign_did_to_trunk?
+      has_assigned_did = (not self.dids.empty?)
+      if self.user.owner.is_reseller? and self.is_trunk? and has_assigned_did and not allowed_to_assign_did
+        self.errors.add(:trunk, _('Did_is_assigned_to_device'))
+        return false
+      end
     end
   end
-end
 
-def is_trunk?
-   return self.istrunk.to_i > 0
-end
+  def is_trunk?
+    return self.istrunk.to_i > 0
+  end
 
 =begin
   if username is blank it means that ip authentication is enabled and there's

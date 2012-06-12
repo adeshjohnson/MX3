@@ -1,0 +1,6 @@
+<b><%= link_to b_user + _('User') + ': ' + nice_user(@device.user).to_s, :controller => :users, :action => :edit, :id => @device.user_id %></b>
+<br/>
+<b><%= link_nice_device(@device) %></b>
+<br/>
+<%= render :partial => "device_rules", :locals => {:name => _('Device_rules_dst'), :rules => @rules_dst, :device => @device, :type => "dst"} %>
+<%= render :partial => "device_rules", :locals => {:name => _('Device_rules_src'), :rules => @rules_src, :device => @device, :type => "src"} %>

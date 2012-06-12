@@ -4,6 +4,7 @@
 <% if session[:usertype] == "admin" or session[:usertype] == "reseller" %>
     <table width="100%" class="maintable">
       <tr>
+        <th align="left" nowrap width="10%"><%= link_to b_rules + _('Rules'), :controller => :device_rules, :action => :list, :id => @device.id %></th>
         <th align="left" nowrap width="10%"><%= link_to b_callflow + _('Callflow'), :action => "callflow", :id => @device.id %></th>
         <th align="left" nowrap width="10%"><%= link_to b_did + _('DIDs'), :action => "device_dids", :id => @device.id %></th>
         <% if session[:usertype] == "admin" %>

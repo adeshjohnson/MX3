@@ -16,6 +16,9 @@
         <th align="left">        <%= _('Password') %>      </th>
     <% end %>
     <th align="left">        <%= _('CallerID') %>      </th>
+    <% if (session[:usertype] == "admin" or session[:usertype] == "reseller") %>
+        <th id='rules_header' align="center"><%= _('Rules') %></th>
+    <% end %>
     <% if session[:usertype] == "admin" or session[:usertype] == "reseller" %>
         <th align="center">        <%= _('Call_Flow') %>      </th>
     <% end %>
@@ -52,6 +55,9 @@
             <td id="secret_<%= device.id %>"><%= device.secret if device.device_type == "SIP" or device.device_type == "IAX2" %></td>
         <% end %>
         <td id="callerid_<%= device.id %>"><%= h device.callerid %></td>
+        <% if (session[:usertype] == "admin" or session[:usertype] == "reseller") %>
+            <td id="rules_<%= device.id %>" align="center"><%= link_to b_rules, {:controller => :device_rules, :action => :list, :id => device.id}, {:id => "rules_link_"+device.id.to_s} %></td>
+        <% end %>
         <% if session[:usertype] == "admin" or session[:usertype] == "reseller" %>
             <td id="callflow_<%= device.id %>" align="center"><%= link_to(b_callflow, {:action => "callflow", :id => device.id}, {:id => "callflow_link_" + device.id.to_s}) %></td>
         <% end %>
