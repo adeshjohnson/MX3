@@ -10,9 +10,10 @@ class ApiController < ApplicationController
   before_filter :check_send_method, :except => [:simple_balance, :balance]
   before_filter :log_access
   before_filter :find_current_user_for_api, :only => [:user_subscriptions, :user_invoices, :personal_payments, :user_rates, :callflow_edit, :devices_callflow, :user_devices, :main_page, :logout, :cc_by_cli, :create_payment, :payments_list, :show_calling_card_group, :buy_card_from_callingroup, :financial_statements]
-  before_filter :check_mor_11_extend, :only => [:credit_notes, :credit_note_update, :credit_note_delete, :credit_note_create, :financial_statements, :create_payment, :cc_by_cli, :show_calling_card_group, :buy_card_from_callingroup]
+  before_filter :check_mor_11_extend, :only => [:credit_notes, :credit_note_update, :credit_note_delete, :credit_note_create, :financial_statements, :create_payment, :cc_by_cli, :show_calling_card_group, :buy_card_from_callingroup, :send_sms]
   before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements]
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
+  before_filter :check_sms_addon, :only => [:send_sms]
 
   require 'xmlsimple'
 
@@ -3785,6 +3786,81 @@ class ApiController < ApplicationController
     end
 
     send_xml_data(out_string, params[:test].to_i)
+  end
+
+  def send_sms
+    allow, values = API::check_params_with_all_keys(params, request)
+    doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
+    doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    if allow == true
+      check_user(params[:u], params[:p])
+      if @user
+        @lcr = Lcr.find_by_id(params[:lcr_id])
+        if @user.sms_service_active == 1
+          if @lcr and (@lcr.user_id == @user.owner_id)
+            if params[:dst]
+              if params[:src]
+                if params[:message]   # atskirai
+                  @user_tariff = SmsTariff.find_by_id(@user.sms_tariff_id)
+                  sms = SmsMessage.new
+                  sms.sending_date = Time.now
+                  sms.user_id = @user.id
+                  sms.reseller_id  = @user.owner_id
+                  sms.number = params[:dst]
+                  sms.save
+                  sms.sms_send(@user, @user_tariff, params[:dst], @lcr, params[:message].size.to_f, params[:message])
+                  if sms.status_code.to_s == "0"
+                    doc.response {
+                      doc.status('ok')
+                      doc.message{
+                        doc.message_id(sms.id)
+                        doc.sms_status_code_tip(sms.sms_status_code_tip)
+                        @curr = Currency.find_by_id(@user.currency_id)
+                        if @user.usertype == 'reseller'
+                          doc.price(nice_number sms.reseller_price)
+                        else
+                          doc.price(nice_number sms.user_price)
+                        end
+                        doc.currency(@curr.name)
+                      }
+                    }
+                  else
+                    doc.error(){
+                      doc.message{
+                        doc.message_id(sms.id)
+                        doc.sms_status_code_tip(sms.sms_status_code_tip)
+                      }
+                    }
+                  end
+                else
+                  doc.error("There is no message or it is empty")
+                end
+              else
+                doc.error("Wrong source")
+              end
+            else
+              doc.error("Wrong destination")
+            end
+          else
+            doc.error("There is no such LCR")
+          end
+        else
+          doc.error("User is not subscribed to sms service")
+        end
+      else
+        doc.error("Bad login")
+      end
+    else
+      doc.error("Incorrect hash")
+    end
+    send_xml_data(out_string, params[:test].to_i)
+  end
+
+  def check_sms_addon
+    unless sms_active?
+      send_xml_data(API.return_error('Dont be so smart'), params[:test].to_i)
+      return false
+    end
   end
 
   def get_version

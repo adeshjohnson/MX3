@@ -90,10 +90,14 @@ class MorApi
     ret[:s_user_id] = params[:s_user_id] if params[:s_user_id] and params[:s_user_id].to_s !~ /[^0-9]/
     ret[:s_from] = params[:s_from] if params[:s_from] and params[:s_from].to_s !~ /[^0-9]/
     ret[:s_till] = params[:s_till] if params[:s_till] and params[:s_till].to_s !~ /[^0-9]/
+    ret[:lcr_id] = params[:lcr_id].to_s if params[:lcr_id] and (params[:lcr_id] !~ /[^0-9]/)
+    ret[:dst] = params[:dst].to_s if params[:dst]
+    ret[:src] = params[:src].to_s if params[:src]
+    ret[:message] = params[:message].to_s if params[:message]
 
 
     ['s_transaction', 's_completed', 's_username', 's_first_name', 's_last_name', 's_paymenttype', 's_amount_max', 's_currency', 's_number', 's_pin',
-     'p_currency', 'paymenttype', 'tax_in_amount', 'amount', 'transaction', 'payer_email', 'shipped_at', 'fee', 'id', 'quantity', 'callerid', 'cardgroup_id', 'status', 'date_from', 'date_till', 's_reseller_did', 's_did_pattern'].each { |key|
+     'p_currency', 'paymenttype', 'tax_in_amount', 'amount', 'transaction', 'payer_email', 'shipped_at', 'fee', 'id', 'quantity', 'callerid', 'cardgroup_id', 'status', 'date_from', 'date_till', 's_reseller_did', 's_did_pattern', 'lcr_id', 'dst', 'src', 'message'].each { |key|
       ret[key.to_sym] = params[key.to_sym] if params[key.to_sym]
     }
 
@@ -105,7 +109,7 @@ class MorApi
 
     hash_param_order = ['user_id', 'period_start', 'period_end', 'direction', 'calltype', 'device', 'balance', 'monitoring_id', 'users', 'block', 'email', 'mtype', 'tariff_id', 'u0', 'u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'u7', 'u8', 'u9', 'u10', 'u11', 'u12', 'u13', 'u14', 'u15', 'u16', 'u17', 'u18', 'u19', 'u20', 'u21', 'u22', 'u23', 'u24', 'u25', 'u26', 'u27', 'u28', 'ay', 'am', 'ad', 'by', 'bm', 'bd', 'pswd', 'user_warning_email_hour', 'pgui', 'pcsv', 'ppdf', 'recording_forced_enabled', 'i4', 'tax4_enabled', 'tax2_enabled', 'accountant_type_invalid', 'block_at_conditional', 'tax3_enabled', 'accountant_type', 'tax1_value', 'show_zero_calls', 'warning_email_active', 'compound_tax', 'tax4_name', 'allow_loss_calls', 'tax3_name', 'tax2_name', 'credit', 'tax1_name', 'total_tax_name', 'tax2_value', 'tax4_value', 'ignore_global_monitorings', 'i1', 'tax3_value', 'cyberplat_active', 'i2', 'i3', 'recording_enabled', 'email_warning_sent_test', 'own_providers', 'a0', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 's_user', 's_call_type', 's_device', 's_provider', 's_hgc', 's_did', 's_destination', 'order_by', 'order_desc', 'only_did', 'description', 'pin', 'type', 'devicegroup_id', 'phonebook_id', 'number', 'name', 'speeddial', 's_user_id', 's_from',
                         's_till', 's_transaction', 's_completed', 's_username', 's_first_name', 's_last_name', 's_paymenttype', 's_amount_max', 's_currency', 's_number', 's_pin',
-                        'p_currency', 'paymenttype', 'tax_in_amount', 'amount', 'transaction', 'payer_email', 'fee', 'id', 'quantity', 'callerid', 'cardgroup_id', 'status', 'date_from', 'date_till', 's_reseller_did', 's_did_pattern']
+                        'p_currency', 'paymenttype', 'tax_in_amount', 'amount', 'transaction', 'payer_email', 'fee', 'id', 'quantity', 'callerid', 'cardgroup_id', 'status', 'date_from', 'date_till', 's_reseller_did', 's_did_pattern', 'lcr_id', 'dst', 'src', 'message']
 
     hash_param_order.each { |key|
       MorLog.my_debug key if ret[key.to_sym]
