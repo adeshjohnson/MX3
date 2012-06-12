@@ -285,6 +285,11 @@ class CallcController < ApplicationController
       show_quick_stats
     end
 
+    if session[:usertype] == 'reseller'
+      reseller = User.find(session[:user_id])
+      reseller.check_default_user_conflines
+    end
+
     #  my_debug @quick_stats
     # @total_profitm = @total_call_pricem - @total_call_selfpricem
     #  @total_profitd = @total_call_priced - @total_call_selfpriced
