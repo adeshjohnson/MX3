@@ -54,7 +54,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[4]</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -65,6 +65,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>DID interval was successfully created</td>
 	<td></td>
 </tr>
 <tr>
@@ -85,6 +90,11 @@
 <tr>
 	<td>click</td>
 	<td>css=#quickforwards_user &gt; option[value=&quot;0&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Not used IAX2/103</td>
 	<td></td>
 </tr>
 <tr>
@@ -168,42 +178,42 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>css=p.ringgroup_class</td>
 	<td>Ring Group name:</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//p[2]</td>
 	<td>Comment:</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//p[3]</td>
 	<td>This Ring Group will be reached by such local extension:</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//p[4]</td>
 	<td>Ring Time (how long device will ring): seconds</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//p[5]</td>
 	<td>Options to use when dialing (Advanced):</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//p[6]</td>
 	<td>Dialing Strategy: ringall</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//p[7]</td>
 	<td>CallerID Prefix:</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Route to DID if No Answer:</td>
 	<td></td>
 </tr>
@@ -468,9 +478,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>DID:1234567891</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=did_value3</td>
+	<td>exact:DID: 1234567891</td>
 </tr>
 <tr>
 	<td>verifyValue</td>
@@ -559,12 +569,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>dp_not_assign_2</td>
+	<td>id=dp_dids_3</td>
 	<td>Assign DID</td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>dp_not_assign_2</td>
+	<td>dp_not_assign_3</td>
 	<td></td>
 </tr>
 <tr>
@@ -579,47 +589,47 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>data2_2</td>
+	<td>id=data2_3</td>
 	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>name_2</td>
+	<td>name_3</td>
 	<td>RGname</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>comment_2</td>
+	<td>comment_3</td>
 	<td>Komentaras</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>dev_2</td>
+	<td>dev_3</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>timeout_2</td>
+	<td>timeout_3</td>
 	<td>20</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>options_2</td>
+	<td>options_3</td>
 	<td>Pasirinkimas</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>strategy_2</td>
+	<td>strategy_3</td>
 	<td>ringall</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>cid_prefix_2</td>
+	<td>cid_prefix_3</td>
 	<td>370</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>did_2</td>
+	<td>did_3</td>
 	<td>1234567891</td>
 </tr>
 <tr>
@@ -734,9 +744,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>DID:1234567891</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=did_value</td>
+	<td>1234567891</td>
 </tr>
 <tr>
 	<td>verifyValue</td>
@@ -849,9 +859,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>DID:1234567890</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=did_value</td>
+	<td>1234567890</td>
 </tr>
 <tr>
 	<td>verifyValue</td>
@@ -1175,12 +1185,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=input[type=image]</td>
+	<td>xpath=(//input[@type='image'])[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>DID assigned to Dial Plan: Quick Forward DIDs DP</td>
+	<td>DID assigned to Dial Plan: RGname2</td>
 	<td></td>
 </tr>
 <tr>
@@ -1391,8 +1401,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>dp_dids_2</td>
+	<td>verifyElementPresent</td>
+	<td>id=dp_dids_3</td>
 	<td></td>
 </tr>
 <tr>
@@ -1412,7 +1422,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>dev_2</td>
+	<td>dev_3</td>
 	<td></td>
 </tr>
 <tr>
@@ -1617,12 +1627,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=dialplan_8</td>
-	<td>Quick Forward DIDs DP (quickforwarddids)</td>
+	<td>id=dialplan_3</td>
+	<td>test111 (quickforwarddids)</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>link=Quick Forward DIDs DP (quickforwarddids)</td>
+	<td>link=test111 (quickforwarddids)</td>
 	<td></td>
 </tr>
 <tr>
@@ -1647,7 +1657,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=device[device_type]_virtual</td>
+	<td>id=device_device_type_Virtual</td>
 	<td></td>
 </tr>
 <tr>
