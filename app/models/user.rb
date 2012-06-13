@@ -1762,11 +1762,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  def safe_attributtes(params, id)
+  def safe_attributtes(params, user_id)
     if ['reseller', 'user'].include?(usertype)
       allow_params = [:time_zone, :spy_device_id, :currency_id, :password, :warning_email_balance, :warning_email_hour, :first_name, :last_name, :clientid, :taxation_country, :vat_number, :acc_group_id]
-      allow_params += [:accounting_number, :generate_invoice, :username, :tariff_id, :postpaid, :call_limit, :blocked, :agreement_number, :language, :warning_balance_sound_file_id, :warning_balance_call, :quickforwards_rule_id] if usertype == 'reseller' and id.to_i != id.to_i
-      allow_params += [:lcr_id] if params[:lcr_id] and reseller_allow_providers_tariff? and id.to_i != id.to_i and User.current.load_lcrs(:first, :conditions => "id = #{params[:lcr_id]}")
+      allow_params += [:accounting_number, :generate_invoice, :username, :tariff_id, :postpaid, :call_limit, :blocked, :agreement_number, :language, :warning_balance_sound_file_id, :warning_balance_call, :quickforwards_rule_id] if usertype == 'reseller' and self.id.to_i != user_id.to_i
+      allow_params += [:lcr_id] if params[:lcr_id] and reseller_allow_providers_tariff? and self.id.to_i != user_id.to_i and User.current.load_lcrs(:first, :conditions => "id = #{params[:lcr_id]}")
       unless check_for_own_providers
         allow_params +=[:recording_hdd_quota, :recordings_email, :hide_destination_end, :cyberplat_active,]
       end
