@@ -1,11 +1,9 @@
 <table width="100%">
   <tr>
     <td valign="top">
-      <p class='ringgroup_class' style="margin-top:3px;"><%= _('Ring_Group_name') %>
-        : <%= text_field_tag 'dialplan[name]', @dialplan.name, "class" => "input", :size => "30", :maxlength => "50" %></p>
+      <p class='ringgroup_class' style="margin-top:3px;"><%= _('Ring_Group_name') %>: <%= text_field_tag 'dialplan[name]', @dialplan.name, "class" => "input", :size => "30", :maxlength => "50" %></p>
 
-      <p class='ringgroup_class' style="margin-top:10px;"><%= _('Comment') %>
-        : <%= text_field_tag 'ringgroup[comment]', @ringgroup.comment, "class" => "input", :size => "55" %></p>
+      <p class='ringgroup_class' style="margin-top:10px;"><%= _('Comment') %>: <%= text_field_tag 'ringgroup[comment]', @ringgroup.comment, "class" => "input", :size => "55" %></p>
       <br/>
       <br/>
       <% if params[:action].to_s != 'new' and params[:action].to_s != 'create' %>
@@ -46,27 +44,20 @@
       <% end %>
       <br/>
 
-      <p class='ringgroup_class' style="margin-top:3px;"><%= _('This_Ring_Group_will_be_reached_by_such_local_extension') %>
-        : <%= text_field_tag 'dialplan[data2]', @dialplan.data2, "class" => "input", :size => "5", :maxlength => "50", :onchange => "Update_extlines();" %></p>
+      <p class='ringgroup_class' style="margin-top:3px;"><%= _('This_Ring_Group_will_be_reached_by_such_local_extension') %>: <%= text_field_tag 'dialplan[data2]', @dialplan.data2, "class" => "input", :size => "5", :maxlength => "50", :onchange => "Update_extlines();" %></p>
       <br/>
       <% if params[:action].to_s != 'new' and params[:action].to_s != 'create' %>
-          <p class='ringgroup_class' style="margin-top:5px;"><%= _('Will_ring_these_devices') %>:
-
-          <div id="new_ajax_devices" style="margin-top:5px;"><%= render :partial => 'devices' %></div>
+          <p class='ringgroup_class' style="margin-top:5px;"><%= _('Will_ring_these_devices') %>: <div id="new_ajax_devices" style="margin-top:5px;"><%= render :partial => 'devices' %></div>
           </p>
       <% end %>
 
-      <p class='ringgroup_class' style="margin-top:25px;"><%= _('Ring_Time_(how_long_device_will_ring)') %>
-        : <%= text_field_tag 'ringgroup[timeout]', @ringgroup.timeout, "class" => "input", :size => "2", :maxlength => "50", :onchange => "Update_extlines();" %> <%= _('seconds') %></p>
+      <p class='ringgroup_class' style="margin-top:25px;"><%= _('Ring_Time_(how_long_device_will_ring)') %>: <%= text_field_tag 'ringgroup[timeout]', @ringgroup.timeout, "class" => "input", :size => "2", :maxlength => "50", :onchange => "Update_extlines();" %> <%= _('seconds') %></p>
 
-      <p class='ringgroup_class' style="margin-top:13px;"><%= _('Options_to_use_when_dialing_(Advanced)') %>
-        : <%= text_field_tag 'ringgroup[options]', @ringgroup.options, "class" => "input", :size => "25", :maxlength => "50", :onchange => "Update_extlines();" %></p>
+      <p class='ringgroup_class' style="margin-top:13px;"><%= _('Options_to_use_when_dialing_(Advanced)') %>: <%= text_field_tag 'ringgroup[options]', @ringgroup.options, "class" => "input", :size => "25", :maxlength => "50", :onchange => "Update_extlines();" %></p>
 
-      <p class='ringgroup_class' style="margin-top:13px;"><%= _('Dialing_Strategy') %>
-        : <%= select_tag 'ringgroup[strategy]', options_for_select([[_('ringall'), 1]], @ringgroup.strategy.to_s) %></p>
+      <p class='ringgroup_class' style="margin-top:13px;"><%= _('Dialing_Strategy') %>: <%= select_tag 'ringgroup[strategy]', options_for_select([[_('ringall'), 1]], @ringgroup.strategy.to_s) %></p>
 
-      <p class='ringgroup_class' style="margin-top:13px;"><%= _('CallerID_prefix') %>
-        : <%= text_field_tag 'ringgroup[cid_prefix]', @ringgroup.cid_prefix, "class" => "input", :size => "20", :maxlength => "50", :onchange => "Update_extlines();" %></p>
+      <p class='ringgroup_class' style="margin-top:13px;"><%= _('CallerID_prefix') %>: <%= text_field_tag 'ringgroup[cid_prefix]', @ringgroup.cid_prefix, "class" => "input", :size => "20", :maxlength => "50", :onchange => "Update_extlines();" %></p>
 
       <p class='ringgroup_class' style="margin-top:13px;"><%= _('Route_to_DID_if_No_Answer') %>:
         <select name="ringgroup[did_id]" id="ringgroup[did_id]" onchange="Show_did(this.value);Update_extlines();">
@@ -126,8 +117,7 @@
 
             <p class='ringgroup_class' id="show_did3"><%= b_down %></p>
 
-            <p class='ringgroup_class' id="show_did2"><span id="did_value3"><%= _('DID') %>
-              :<span class="ringgroup_items2" id="did_value"><%= @ringgroup.did.did if @ringgroup.did %></span></span>
+            <p class='ringgroup_class' id="show_did2"><span id="did_value3"><%= _('DID') %>: <span class="ringgroup_items2" id="did_value"><%= @ringgroup.did.did if @ringgroup.did %></span></span>
               <span id="did_value2" style="display:none;"><%= b_cross + _('Call_end') %></span></p>
             <br/>
           </div>
