@@ -1,3 +1,4 @@
+<%= csrf_meta_tags %>
 <% content_for :head do %>
     <%= javascript_include_tag "accordion.js" %>
     <script type="text/javascript">
@@ -81,8 +82,7 @@
 <div id="settings" class="accordion">
   <% if @gateways.size > 0 %>
       <% @gateways.display_form do |gatewayengine, helper| %>
-          <%# =gatewayengine.post_to%>
-          <form action='<%= Web_Dir+'/payment_gateways/'+gatewayengine.post_to %>' method='post' enctype="multipart/form-data" onsubmit="console.log('YRAAAAAAAAA');">
+            <%= form_tag('/payment_gateways/'+gatewayengine.post_to, :multipart => true) do %>
             <% for engine, gateways in gatewayengine.gateways %>
                 <% for name, gateway in gateways %>
                     <% if  allow_pg_extension(gateway.settings['name']) and ((!gateway.settings['testing']) || (gateway.settings['testing'] && Confline.get_value("test_production_environment") == "true")) %>
@@ -144,7 +144,7 @@
             <% end %>
             <br/>
             <%= submit_tag _('Save_changes') %>
-          </form>
+          <%end%>
       <% end %>
   <% else %>
       <h3 style="color: red"><%= _("disabled_gateways") %></h3>
