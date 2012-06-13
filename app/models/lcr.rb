@@ -107,7 +107,7 @@ class Lcr < ActiveRecord::Base
   def provider_active(provider_id)
     sql = "SELECT active FROM lcrproviders WHERE lcr_id = '#{self.id}' AND provider_id = '#{provider_id}' "
     res = ActiveRecord::Base.connection.select_value(sql)
-    res == "1"
+    res.to_i == 1
   end
 
   def lcr_partials_destinations
