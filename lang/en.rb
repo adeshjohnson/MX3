@@ -4415,6 +4415,7 @@ Localization.define('en') do |l|
   l.store 'Devicerule_was_not_found', 'Device rule was not found'
   l.store 'Device_rules_dst', 'Device rules Destination'
   l.store 'Device_rules_src', 'Device rules Source'
+  l.store 'Price_has_to_be_specified', 'Price has to be specified'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
