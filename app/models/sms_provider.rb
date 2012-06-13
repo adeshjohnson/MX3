@@ -40,9 +40,9 @@ class SmsProvider < ActiveRecord::Base
     log = self.connect_to_clickatell
     if log[0].to_s == 'ERR:'
       if log[1].to_s.gsub(/,/, '').to_i <= 7
-        sms.status_code = "0" + log[1].gsub(/,/, '')
+        sms.status_code = "0" + log[1].to_s.gsub(/,/, '')
       else
-        sms.status_code = log[1].gsub(/,/, '')
+        sms.status_code = log[1].to_s.gsub(/,/, '')
       end
       sms.user_rate = 0
       sms.user_price = 0
@@ -62,10 +62,10 @@ class SmsProvider < ActiveRecord::Base
       message_id = Net::HTTP.get_response("api.clickatell.com", "/http/sendmsg?api_id=#{self.api_id.to_s.strip}&password=#{self.password.to_s.strip}&user=#{self.login.to_s.strip}&to=#{options[:to].to_s.strip}&callback=3&concat=#{options[:sms_numbers].to_s}&text=#{mtext}#{string}")
       code = message_id.body.split(" ")
       if code[0].to_s == 'ERR:'
-        if code[1].gsub(/,/, '').to_i <= 7
-          sms.status_code = "0" + code[1].gsub(/,/, '').to_s
+        if code[1].to_s.gsub(/,/, '').to_i <= 7
+          sms.status_code = "0" + code[1].to_s.gsub(/,/, '').to_s
         else
-          sms.status_code = code[1].gsub(/,/, '').to_s
+          sms.status_code = code[1].to_s.gsub(/,/, '').to_s
         end
       else
         sms.clickatell_message_id = code[1].to_s
