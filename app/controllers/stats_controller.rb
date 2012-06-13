@@ -2367,7 +2367,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     my_debug @options.to_yaml
 
-    @options[:direction] = params[:direction] ? params[:direction] : "outgoing"
+    @options[:direction] = params[:direction] || @options[:direction] || "outgoing"
     @options[:call_type] = params[:call_type] if params[:call_type]  
     @options[:call_type] = "all" if !@options[:call_type] 
     conditions = []
