@@ -49,7 +49,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>succesfully changed</td>
 	<td></td>
 </tr>
 <tr>
@@ -233,11 +238,6 @@
 	<td>${front_left}</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//a[@onclick=&quot;window.open(this.href,'new_window','height=200,width=310');return false;&quot;]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/users/edit/5</td>
 	<td></td>
@@ -254,7 +254,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>user_warning_balance_sound_file_id</td>
+	<td>id=user_warning_balance_sound_file_id</td>
 	<td>Sound/${front_left}</td>
 </tr>
 <tr>

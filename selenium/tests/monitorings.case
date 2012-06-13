@@ -32,7 +32,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -53,24 +53,24 @@
 	<td>on</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Drops bellow</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Increases more</td>
 	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>amount</td>
-	<td>33</td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>id=bellow_monitoringamount</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount_bellow</td>
+	<td>33</td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
@@ -83,13 +83,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>amount_above</td>
+	<td>33</td>
+</tr>
+<tr>
 	<td>waitForTextPresent</td>
-	<td>will be higher than 33 USD</td>
+	<td>will be higher than 33</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>//thead/tr/th[2]</td>
+	<td>//td[2]/b</td>
 	<td></td>
 </tr>
 <tr>
@@ -99,7 +104,7 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>//thead/tr/th[2]</td>
+	<td>//td[2]/b</td>
 	<td></td>
 </tr>
 <tr>
@@ -118,27 +123,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Monitoring created successfully. Applied to all users.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -149,22 +154,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -174,22 +179,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -199,22 +204,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -234,22 +239,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -261,7 +266,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>33</td>
 </tr>
 <tr>
@@ -286,7 +291,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>33</td>
 </tr>
 <tr>
@@ -310,22 +315,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-2 td.period</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-2 td.amount</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-2 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-2 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -335,22 +340,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-2 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-2 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-2 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-2 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -360,22 +365,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-2 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-2 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-2 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-2 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -391,22 +396,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -416,22 +421,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -447,7 +452,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Amount must be greater than zero</td>
 	<td></td>
 </tr>
@@ -541,7 +546,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>66</td>
 </tr>
 <tr>
@@ -565,22 +570,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-3 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-3 td.amount</td>
 	<td>66.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-3 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-3 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -590,22 +595,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-3 td.period</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-3 td.amount</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-3 td.block img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-3 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -617,7 +622,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>99</td>
 </tr>
 <tr>
@@ -641,22 +646,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-4 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-4 td.amount</td>
 	<td>99.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-4 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -666,22 +671,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-4 td.period</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-4 td.amount</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-4 td.block img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -708,7 +713,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>111</td>
 </tr>
 <tr>
@@ -727,22 +732,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-5 td.period</td>
 	<td>1 Hour(s)</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-5 td.amount</td>
 	<td>111.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-5 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -752,22 +757,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-5 td.period</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-5 td.amount</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-5 td.block img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-5 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -777,22 +782,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-5 td.period</td>
 	<td>1 Hour(s)</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-5 td.amount</td>
 	<td>111.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-5 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -804,7 +809,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>222</td>
 </tr>
 <tr>
@@ -813,7 +818,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Monitoring must either be blocking or notifying or both</td>
 	<td></td>
 </tr>
@@ -825,7 +830,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>222</td>
 </tr>
 <tr>
@@ -834,27 +839,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Monitoring updated successfully. Applied to 1 users.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-5 td.period</td>
 	<td>1 Hour(s)</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-5 td.amount</td>
 	<td>222.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-5 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -865,22 +870,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-5 td.period</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-5 td.amount</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-5 td.block img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-5 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -892,7 +897,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>123</td>
 </tr>
 <tr>
@@ -906,27 +911,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Monitoring updated successfully. Applied to postpaid users.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-4 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=#monit-4 td.amount</td>
 	<td>123.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-4 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -937,12 +942,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-2 td.active img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-2 td.active img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -952,12 +957,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>css=#monit-2 td.active img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>css=#monit-2 td.active img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -968,17 +973,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Monitoring created</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Monitoring updated</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Monitoring destroyed</td>
 	<td></td>
 </tr>
@@ -1010,7 +1015,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1030,7 +1035,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1241,7 +1246,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1251,7 +1256,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
@@ -1261,7 +1266,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1276,7 +1281,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
@@ -1286,7 +1291,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
@@ -1297,7 +1302,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>33</td>
 </tr>
 <tr>
@@ -1306,7 +1311,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
@@ -1377,7 +1382,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1392,7 +1397,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
@@ -1407,7 +1412,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1422,7 +1427,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Monitoring deleted successfully</td>
 	<td></td>
 </tr>
@@ -1432,7 +1437,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Monitoring updated successfully. Applied to prepaid users.</td>
 	<td></td>
 </tr>
@@ -1448,7 +1453,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>33</td>
 </tr>
 <tr>
@@ -1457,7 +1462,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Monitoring created successfully. Applied to all users.</td>
 	<td></td>
 </tr>
@@ -1488,7 +1493,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1498,7 +1503,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1508,7 +1513,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1518,7 +1523,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1548,7 +1553,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1558,7 +1563,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1568,7 +1573,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1578,7 +1583,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1630,7 +1635,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>123</td>
 </tr>
 <tr>
@@ -1644,9 +1649,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Monitoring created successfully. Applied to prepaid users.</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#monit-7 &gt; td.amount</td>
+	<td>123.0</td>
 </tr>
 <!--duplicate edit-->
 <tr>
@@ -1655,8 +1665,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=amount_above</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=bellow_monitoringamount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=amount_bellow</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=above_monitoringamount</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>33</td>
 </tr>
 <tr>
@@ -1670,14 +1700,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Such monitoring already exists, users were associated. Applied to all users.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=amount</td>
-	<td>33</td>
+	<td>verifyTextPresent</td>
+	<td>33.0</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1695,7 +1725,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Edit monitoring for user: prepaid_user</td>
 	<td></td>
 </tr>
@@ -1716,7 +1746,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td></td>
 </tr>
 <tr>
@@ -1731,7 +1761,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>222</td>
 </tr>
 <tr>
@@ -1765,7 +1795,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Such monitoring already exists, users were associated. Applied to 1 users.</td>
 	<td></td>
 </tr>
@@ -1775,7 +1805,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Edit monitoring for user: System Admin</td>
 	<td></td>
 </tr>
@@ -1810,7 +1840,7 @@
 	<td>label=prepaid_user</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>This monitoring will be applied to prepaid_user</td>
 	<td></td>
 </tr>
@@ -1821,7 +1851,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount</td>
+	<td>amount_above</td>
 	<td>70</td>
 </tr>
 <tr>
