@@ -104,10 +104,10 @@
     <br/>
 <% end %>
 <br/>
-<% if @provdevices and not @provdevices.empty? and allow_manage_providers? %>
-    <%= link_to_function(b_add + _('Assign_Provider'), "Element.toggle('addprov_details')") %>
-<% end %>
 <% if @user.usertype == "user" %>
+    <% if @provdevices and not @provdevices.empty? and allow_manage_providers? %>
+        <%= link_to_function(b_add + _('Assign_Provider'), "Element.toggle('addprov_details')") %>
+    <% end %>
     <%= form_tag :action => 'assign_provider', :id => @user.id do %>
         <div id="addprov_details" <%= "style='display:none;'" %>>
           <br/>
