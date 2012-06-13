@@ -38,6 +38,41 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='quickforward_dp_name']</td>
+	<td>Quick Forward Rule</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=quickforwards_user</td>
+	<td>label=Test Reseller (3)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=data10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=data10</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cb_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/quickforwards_rules/new</td>
 	<td></td>
 </tr>
@@ -93,7 +128,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>succesfully changed</td>
 	<td></td>
 </tr>
 <tr>
@@ -122,6 +162,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/dids/list</td>
 	<td></td>
@@ -133,7 +178,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@type='image']</td>
+	<td>css=input[type=&quot;image&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -157,6 +202,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/dids/list</td>
 	<td></td>
@@ -168,7 +218,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@type='image']</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1722,7 +1772,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>You have no permission</td>
+	<td>User not found</td>
 	<td></td>
 </tr>
 <tr>

@@ -83,7 +83,7 @@
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=add_to_servers[1]</td>
+	<td>id=add_to_servers_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -138,7 +138,7 @@
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=add_to_servers[1]</td>
+	<td>id=add_to_servers_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -258,58 +258,53 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>spersonal_menu8</td>
+	<td>spersonal_menu9</td>
 	<td>Calls</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>spersonal_menu9</td>
+	<td>spersonal_menu10</td>
 	<td>Last calls</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>spersonal_menu10</td>
+	<td>spersonal_menu11</td>
 	<td>Missed calls</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>spersonal_menu11</td>
+	<td>spersonal_menu12</td>
 	<td>Graphs</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>spersonal_menu12</td>
+	<td>spersonal_menu13</td>
 	<td>Recordings</td>
-</tr>
-<tr>
-	<td>assertNotText</td>
-	<td>spersonal_menu14</td>
-	<td>DIDs</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>spersonal_menu14</td>
-	<td>CLIs</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>spersonal_menu15</td>
-	<td>PhoneBook</td>
+	<td>CLIs</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>spersonal_menu16</td>
-	<td>Quick Forwards</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>spersonal_menu18</td>
-	<td>Callback</td>
+	<td>PhoneBook</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>spersonal_menu17</td>
+	<td>Quick Forwards</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=spersonal_menu18</td>
 	<td>Faxes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>spersonal_menu19</td>
+	<td>Callback</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -402,13 +397,13 @@
 	<td>Country Stats</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertNotText</td>
 	<td>sreseller_statistics_menu2</td>
 	<td>Hangup Cause</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>sreseller_statistics_menu3</td>
+	<td>sreseller_statistics_menu2</td>
 	<td>Load Stats</td>
 </tr>
 <tr>
@@ -548,7 +543,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>tariff[purpose]_provider</td>
+	<td>tariff_purpose_provider</td>
 	<td></td>
 </tr>
 <tr>
@@ -652,7 +647,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>provider[tech]_sip</td>
+	<td>id=provider_tech_SIP</td>
 	<td></td>
 </tr>
 <tr>
@@ -869,12 +864,12 @@
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>device[trustrpid]_yes</td>
+	<td>device_trustrpid_yes</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>device[sendrpid]_no</td>
+	<td>device_sendrpid_no</td>
 	<td></td>
 </tr>
 <tr>
@@ -889,12 +884,12 @@
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>device[t38pt_udptl]_no</td>
+	<td>device_t38pt_udptl_no</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>device[promiscredir]_no</td>
+	<td>device_promiscredir_no</td>
 	<td></td>
 </tr>
 <tr>
@@ -904,33 +899,33 @@
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>device[videosupport]_no</td>
+	<td>device_videosupport_no</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>device[allow_duplicate_calls]_0</td>
+	<td>device_allow_duplicate_calls_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>provider[interpret_noanswer_as_failed]_0</td>
+	<td>provider_interpret_noanswer_as_failed_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>provider[interpret_busy_as_failed]_0</td>
+	<td>provider_interpret_busy_as_failed_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>device[fake_ring]_0</td>
+	<td>device_fake_ring_0</td>
 	<td>on</td>
 </tr>
 <!--modifying values-->
 <tr>
 	<td>select</td>
-	<td>device[dtmfmode]</td>
+	<td>name=device[dtmfmode]</td>
 	<td>label=auto</td>
 </tr>
 <tr>
@@ -1075,12 +1070,12 @@
 </tr>
 <tr>
 	<td>check</td>
-	<td>device[trustrpid]_no</td>
+	<td>device_trustrpid_no</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>device[sendrpid]_yes</td>
+	<td>device_sendrpid_yes</td>
 	<td></td>
 </tr>
 <tr>
@@ -1095,12 +1090,12 @@
 </tr>
 <tr>
 	<td>check</td>
-	<td>device[t38pt_udptl]_yes</td>
+	<td>device_t38pt_udptl_yes</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>device[promiscredir]_yes</td>
+	<td>device_promiscredir_yes</td>
 	<td></td>
 </tr>
 <tr>
@@ -1110,27 +1105,27 @@
 </tr>
 <tr>
 	<td>check</td>
-	<td>device[videosupport]_yes</td>
+	<td>device_videosupport_yes</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>device[allow_duplicate_calls]_1</td>
+	<td>device_allow_duplicate_calls_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>provider[interpret_noanswer_as_failed]_1</td>
+	<td>provider_interpret_noanswer_as_failed_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>provider[interpret_busy_as_failed]_1</td>
+	<td>provider_interpret_busy_as_failed_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>device[fake_ring]_1</td>
+	<td>device_fake_ring_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1326,12 +1321,12 @@
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>device[trustrpid]_yes</td>
+	<td>device_trustrpid_yes</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>device[sendrpid]_no</td>
+	<td>device_sendrpid_no</td>
 	<td></td>
 </tr>
 <tr>
@@ -1346,12 +1341,12 @@
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>device[t38pt_udptl]_no</td>
+	<td>device_t38pt_udptl_no</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>device[promiscredir]_no</td>
+	<td>device_promiscredir_no</td>
 	<td></td>
 </tr>
 <tr>
@@ -1361,27 +1356,27 @@
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>device[videosupport]_no</td>
+	<td>device_videosupport_no</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>device[allow_duplicate_calls]_0</td>
+	<td>device_allow_duplicate_calls_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>provider[interpret_noanswer_as_failed]_0</td>
+	<td>provider_interpret_noanswer_as_failed_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>provider[interpret_busy_as_failed]_0</td>
+	<td>provider_interpret_busy_as_failed_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>device[fake_ring]_1</td>
+	<td>device_fake_ring_1</td>
 	<td>on</td>
 </tr>
 <!--...change and verify register line-->
@@ -1620,7 +1615,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>provider[tech]_zap</td>
+	<td>id=provider_tech_Zap</td>
 	<td></td>
 </tr>
 <tr>
@@ -1757,7 +1752,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>provider[tech]_iax2</td>
+	<td>provider_tech_IAX2</td>
 	<td></td>
 </tr>
 <tr>
@@ -1944,27 +1939,27 @@
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>device[videosupport]_no</td>
+	<td>device_videosupport_no</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>device[allow_duplicate_calls]_0</td>
+	<td>device_allow_duplicate_calls_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>provider[interpret_noanswer_as_failed]_0</td>
+	<td>provider_interpret_noanswer_as_failed_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>provider[interpret_busy_as_failed]_0</td>
+	<td>provider_interpret_busy_as_failed_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>device[fake_ring]_0</td>
+	<td>device_fake_ring_0</td>
 	<td>on</td>
 </tr>
 <!--modifying values-->
@@ -2120,27 +2115,27 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>device[videosupport]_yes</td>
+	<td>device_videosupport_yes</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>device[allow_duplicate_calls]_1</td>
+	<td>device_allow_duplicate_calls_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>provider[interpret_noanswer_as_failed]_1</td>
+	<td>provider_interpret_noanswer_as_failed_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>provider[interpret_busy_as_failed]_1</td>
+	<td>provider_interpret_busy_as_failed_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>device[fake_ring]_1</td>
+	<td>device_fake_ring_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2331,27 +2326,27 @@
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>device[videosupport]_no</td>
+	<td>device_videosupport_no</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>device[allow_duplicate_calls]_0</td>
+	<td>device_allow_duplicate_calls_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>provider[interpret_noanswer_as_failed]_0</td>
+	<td>provider_interpret_noanswer_as_failed_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>provider[interpret_busy_as_failed]_0</td>
+	<td>provider_interpret_busy_as_failed_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>device[fake_ring]_1</td>
+	<td>device_fake_ring_1</td>
 	<td>on</td>
 </tr>
 <!--delete provider (SIP)-->
@@ -2394,7 +2389,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>provider[tech]_h323</td>
+	<td>provider_tech_H323</td>
 	<td></td>
 </tr>
 <tr>
@@ -2442,12 +2437,12 @@
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>device[faststart]_yes</td>
+	<td>device_faststart_yes</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>device[h245tunneling]_yes</td>
+	<td>device_h245tunneling_yes</td>
 	<td></td>
 </tr>
 <tr>
@@ -2527,17 +2522,17 @@
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>device[allow_duplicate_calls]_0</td>
+	<td>device_allow_duplicate_calls_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>provider[interpret_noanswer_as_failed]_0</td>
+	<td>provider_interpret_noanswer_as_failed_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyChecked</td>
-	<td>provider[interpret_busy_as_failed]_0</td>
+	<td>provider_interpret_busy_as_failed_0</td>
 	<td></td>
 </tr>
 <!--modifying values-->
@@ -2639,22 +2634,22 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>device[allow_duplicate_calls]_1</td>
+	<td>device_allow_duplicate_calls_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>provider[interpret_noanswer_as_failed]_1</td>
+	<td>provider_interpret_noanswer_as_failed_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>provider[interpret_busy_as_failed]_1</td>
+	<td>provider_interpret_busy_as_failed_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>device[fake_ring]_1</td>
+	<td>device_fake_ring_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2706,12 +2701,12 @@
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>device[faststart]_yes</td>
+	<td>device_faststart_yes</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>device[h245tunneling]_yes</td>
+	<td>device_h245tunneling_yes</td>
 	<td></td>
 </tr>
 <tr>
@@ -2791,22 +2786,22 @@
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>device[allow_duplicate_calls]_0</td>
+	<td>device_allow_duplicate_calls_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>provider[interpret_noanswer_as_failed]_0</td>
+	<td>provider_interpret_noanswer_as_failed_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyNotChecked</td>
-	<td>provider[interpret_busy_as_failed]_0</td>
+	<td>provider_interpret_busy_as_failed_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>device[fake_ring]_1</td>
+	<td>device_fake_ring_1</td>
 	<td>on</td>
 </tr>
 <!--...change and verify network related settings-->
@@ -2980,7 +2975,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>provider[tech]_sip</td>
+	<td>provider_tech_SIP</td>
 	<td></td>
 </tr>
 <tr>
@@ -3123,7 +3118,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Provider not found</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
