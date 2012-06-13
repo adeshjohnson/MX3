@@ -157,7 +157,7 @@
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=add_to_servers[1]</td>
+	<td>id=add_to_servers_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -183,22 +183,22 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Afghanistan rate_max: &quot;2&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;2&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>FIX rate_min: &quot;2&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;2&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Austria rate_max: &quot;14&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;14&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>rate_min: &quot;14&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;14&quot;</td>
 	<td></td>
 </tr>
 <!--new providers-->
@@ -219,7 +219,7 @@
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=add_to_servers[1]</td>
+	<td>id=add_to_servers_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -249,7 +249,7 @@
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=add_to_servers[1]</td>
+	<td>id=add_to_servers_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -275,7 +275,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>tariff[purpose]_user_wholesale</td>
+	<td>tariff_purpose_user_wholesale</td>
 	<td></td>
 </tr>
 <tr>
@@ -352,7 +352,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>provider[common_use]_1</td>
+	<td>provider_common_use_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -367,7 +367,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>provider[common_use]_1</td>
+	<td>provider_common_use_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -393,7 +393,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -543,42 +543,42 @@
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>Afghanistan rate_max: &quot;2&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;2&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>FIX rate_min: &quot;2&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;2&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>Austria rate_max: &quot;14&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;14&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>rate_min: &quot;14&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;14&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Afghanistan rate_max: &quot;21&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;21&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>FIX rate_min: &quot;21&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;21&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Australia rate_max: &quot;151&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;151&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>rate_min: &quot;151&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;151&quot;</td>
 	<td></td>
 </tr>
 <!--new tariff-->
@@ -594,7 +594,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>tariff[purpose]_provider</td>
+	<td>tariff_purpose_provider</td>
 	<td></td>
 </tr>
 <tr>
@@ -713,62 +713,62 @@
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>Afghanistan rate_max: &quot;2&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;2&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>FIX rate_min: &quot;2&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;2&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>Austria rate_max: &quot;14&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;14&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>rate_min: &quot;14&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;14&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Afghanistan rate_max: &quot;21&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;21&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>FIX rate_min: &quot;21&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;21&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Australia rate_max: &quot;151&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;151&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>rate_min: &quot;151&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;151&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>France rate_max: &quot;111&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;111&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>NGN rate_min: &quot;111&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;111&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>French Polynesia rate_max: &quot;33&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;33&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>MOB rate_min: &quot;33&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;33&quot;</td>
 	<td></td>
 </tr>
 </tbody></table>
