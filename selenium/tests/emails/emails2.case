@@ -167,9 +167,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Invalid email format in email From field (example: example@…)</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -298,32 +298,12 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_4']/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>email_domain</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>email_smtp_server</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_4 &gt; span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Settings saved</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/edit/5</td>
+	<td>Email sending is disabled globally.</td>
 	<td></td>
 </tr>
 <!--
@@ -448,11 +428,6 @@
 <tr>
 	<td>click</td>
 	<td>css=#tabTabdhtmlgoodies_tabView1_3 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>email_sending_enabled</td>
 	<td></td>
 </tr>
 <tr>
