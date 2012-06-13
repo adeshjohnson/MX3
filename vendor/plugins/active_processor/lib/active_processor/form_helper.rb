@@ -56,15 +56,17 @@ module ActiveProcessor
         when "text"
           html << text_area_tag(field_name, value, html_options)
         when "check_box"
-          html << check_box_tag(field_name, "1", (value == "1") ? true : false, html_options.except('value'))
           html << hidden_field_tag(field_name, "0", html_options.merge(:id => "#{id}_hidden").except('value'))
+          html << check_box_tag(field_name, "1", (value == "1") ? true : false, html_options.except('value'))
+
           if options.has_key?('disables')
             html << self.observe_field(id, {:function => "disable_field('#{id}' ,'#{field_id(gateway.engine, gateway.name, options['disables'])}');"})
             html << "<script type='text/javascript'>\n  Event.observe(window, 'load', function() {disable_field('#{id}' ,'#{field_id(gateway.engine, gateway.name, options['disables'])}');});\n</script>"
           end
         when "check_box_redirect"
-          html << check_box_tag(field_name, "1", (value == "1") ? true : false, html_options.except('value'))
           html << hidden_field_tag(field_name, "0", html_options.merge(:id => "#{id}_hidden").except('value'))
+          html << check_box_tag(field_name, "1", (value == "1") ? true : false, html_options.except('value'))
+
           if options.has_key?('disables')
             html << observe_field(id, {:function => "disable_field('#{id}' ,'#{field_id(gateway.engine, gateway.name, options['disables'])}');"})
             html << "<script type='text/javascript'>\n  Event.observe(window, 'load', function() {disable_field('#{id}' ,'#{field_id(gateway.engine, gateway.name, options['disables'])}');});\n</script>"
