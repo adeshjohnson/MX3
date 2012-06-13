@@ -241,7 +241,7 @@ class Lcr < ActiveRecord::Base
       MorLog.my_debug(sql)
       MorLog.my_debug("------------------------------------------------------------------------")
       MorLog.my_debug(mysql_res.to_yaml)
-      filename += mysql_res.to_yaml.to_s
+      filename += mysql_res.inspect
     else
       mysql_res = ActiveRecord::Base.connection.execute(sql)
     end
