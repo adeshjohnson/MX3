@@ -247,7 +247,7 @@ class Device < ActiveRecord::Base
     end
 
     if self.virtual?
-      self.name = 'virtual_' + self.id.to_i.to_s
+      self.name = self.extension
       self.username = self.name
     end
   end
