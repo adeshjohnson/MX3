@@ -77,21 +77,21 @@ class Ringgroup < ActiveRecord::Base
 
   def Ringgroup.ringgroups_order_by(params, options)
     case params[:order_by].to_s.strip.to_s
-      when "id" :
+      when "id"
         order_by = " ringgroups.id "
-      when "name" :
+      when "name"
         order_by = " dialplans.name "
-      when "extension" :
+      when "extension"
         order_by = " dialplans.data2 "
-      when "comment" :
+      when "comment"
         order_by = " ringgroups.comment "
-      when "ring_time" :
+      when "ring_time"
         order_by = " ringgroups.timeout "
-      when "options" :
+      when "options"
         order_by = " ringgroups.options "
-      when "strategy" :
+      when "strategy"
         order_by = " ringgroups.strategy "
-      when "prefix" :
+      when "prefix"
         order_by = " ringgroups.cid_prefix "
       #when "extension" :  order_by = " ringgroups.extension "
       else

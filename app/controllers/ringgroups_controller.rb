@@ -9,11 +9,6 @@ class RinggroupsController < ApplicationController
   before_filter :authorize
   before_filter :find_ringgroup, :only => [:show, :edit, :destroy, :assign_device, :show_dids, :show_devices, :show_extlines, :device_sort, :update, :free_user_devices, :delete_device]
 
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [:destroy, :create, :update],
-         :redirect_to => {:action => :index}
-
-
   def index
     @page_title = _('Ring_groups')
 

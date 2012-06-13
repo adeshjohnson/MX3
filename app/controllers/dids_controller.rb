@@ -316,11 +316,11 @@ class DidsController < ApplicationController
 
       @cbdps = current_user.dialplans.find(:all, :conditions => "dptype = 'callback' AND data1 != #{@did.id}", :order => "name ASC") if callback_active?
 
-      if mor_11_extend?
-        @qfddps = current_user.dialplans.find(:all, :conditions => "dptype = 'quickforwarddids' AND id != 1", :order => "name ASC")
-      else
-        @qfddps = current_user.dialplans.find(:all, :conditions => "dptype = 'quickforwarddids'", :order => "name ASC")
-      end
+      #if mor_11_extend?
+      @qfddps = current_user.dialplans.find(:all, :conditions => "dptype = 'quickforwarddids' AND id != 1", :order => "name ASC")
+      #else
+      #  @qfddps = current_user.dialplans.find(:all, :conditions => "dptype = 'quickforwarddids'", :order => "name ASC")
+      # end
 
       @pbxfdps = current_user.dialplans.find(:all, :conditions => "dptype = 'pbxfunction'", :order => "name ASC")
       @ivrs = current_user.dialplans.find(:all, :conditions => "dptype = 'ivr'", :order => "name ASC")
@@ -373,7 +373,7 @@ class DidsController < ApplicationController
       if params[:back]
         redirect_to({:action => 'dids_interval_add_to_trunk'}.merge(@opts)) and return false
       else
-        redirect_to(:action => 'list') and return false 
+        redirect_to(:action => 'list') and return false
         #ticket #5946 
         #redirect_to({:action => 'dids_interval_edit'}.merge(@opts)) and return false
       end
@@ -439,9 +439,9 @@ class DidsController < ApplicationController
         end
         Action.add_action_hash(current_user.id, {:target_type => 'device', :target_id => old_dev_id, :action => 'did_assigned', :data => did.id})
         flash[:status] = _('DID_assigned')
-      else 
-        flash_errors_for(_("Could_not_assign_did"), did) 
-      end 
+      else
+        flash_errors_for(_("Could_not_assign_did"), did)
+      end
     end
 
     if status == "closed"
@@ -826,7 +826,7 @@ ORDER BY dids.did ASC"
         cond << "dids.user_id = ?"
         var << @user.id
         @opts[:user] = @user.id
-        if params[:device] and not (params[:device].strip.blank? or params[:device].strip.downcase == 'all') 
+        if params[:device] and not (params[:device].strip.blank? or params[:device].strip.downcase == 'all')
           @device = current_user.load_users_devices(:first, :conditions => "devices.id = '#{params[:device]}'")
           if @device
             cond << "dids.device_id = ?"
@@ -846,7 +846,7 @@ ORDER BY dids.did ASC"
     @s_user = User.find(:first, :conditions => ["users.id = ?", params[:s_user]])
     if @s_user and @s_user.owner_id == correct_owner_id
 
-      if params[:s_device] and not (params[:s_device].strip.blank? or params[:s_device].strip.downcase == 'all') 
+      if params[:s_device] and not (params[:s_device].strip.blank? or params[:s_device].strip.downcase == 'all')
         @s_device = current_user.load_users_devices(:first, :conditions => "devices.id = '#{params[:s_device]}'")
         unless @s_device
           flash[:notice] = _("Device_not_found")
