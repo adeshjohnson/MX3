@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>api_login</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">api_login</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_9']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>api_allow_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>api_secret_key</td>
+	<td>123450</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--#hash1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
+</tr>
+<!--#hash2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash2</td>
+</tr>
+<!--#hash3-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash3</td>
+</tr>
+<!--#hash4-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=$%$</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash4</td>
+</tr>
+<!--#hash5-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=sef</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash5</td>
+</tr>
+<!--#hash6-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=937567337911</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash6</td>
+</tr>
+<!--#hash7-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash7</td>
+</tr>
+<!--#hash8-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=sdfghjk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash8</td>
+</tr>
+<!--#hash9-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=%^R</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash9</td>
+</tr>
+<!--#hash10-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=937567337911&amp;src=9375783123767</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash10</td>
+</tr>
+<!--#hash11-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=937567337911&amp;src=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash11</td>
+</tr>
+<!--#hash12-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=937567337911&amp;src=dffbgfngnfgnf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash12</td>
+</tr>
+<!--#hash13-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=937567337911&amp;src=^%$</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash13</td>
+</tr>
+<!--#hash14-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message=labukas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash14</td>
+</tr>
+<!--#hash15-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash15</td>
+</tr>
+<!--#hash16-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash16</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?lcr_id=1&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User is not subscribed to sms service</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>sms_provider_tariff</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tariff[tariff_type]</td>
+	<td>label=Provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SMS Tariff created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/provider_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>sms_provider</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=prov_type</td>
+	<td>label=Clickatell</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_login</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_api_id</td>
+	<td>123450</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_sms_from</td>
+	<td>no_replay@kolmisoft.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SMS Provider created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lcr_name</td>
+	<td>sms_lcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>LCR was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
+	<td>label=sms_provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>sms_tariff</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SMS Tariff created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>subscribed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>subscribed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>subscribed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>subscribed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Wrong destination</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=&amp;test=1&amp;hash=${hash2}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>There is no such LCR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1111&amp;test=1&amp;hash=${hash3}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>There is no such LCR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=$%$&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>There is no such LCR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=sef&amp;test=1&amp;hash=${hash5}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>There is no such LCR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Wrong source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=&amp;test=1&amp;hash=${hash7}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Wrong destination</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?lcr_id=1&amp;dst=%^R&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=sdfghjk&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Wrong source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=%^R&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Wrong source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;test=1&amp;hash=${hash10}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>There is no message or it is empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=&amp;test=1&amp;hash=${hash11}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Wrong source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=dffbgfngnfgnf&amp;test=1&amp;hash=${hash12}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>There is no message or it is empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=^%$&amp;test=1&amp;hash=${hash13}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>There is no message or it is empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message=labukas&amp;test=1&amp;hash=${hash14}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1 - failed, system owner does not have rate for this destination</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'&amp;test=1&amp;hash=${hash15}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1 - failed, system owner does not have rate for this destination</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message=&amp;test=1&amp;hash=${hash16}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>There is no message or it is empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rate_new/2?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_2</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_7</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_8</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_5</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_9</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_6</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_11338</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_10</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_11</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_12</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_3</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_13</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_14</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_15</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_16</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_4</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_17</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rate_new/1?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_2</td>
+	<td>0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_7</td>
+	<td>0.2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_8</td>
+	<td>0.3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_5</td>
+	<td>0.4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_9</td>
+	<td>0.5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_6</td>
+	<td>0.6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_11338</td>
+	<td>0.7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_10</td>
+	<td>0.8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_11</td>
+	<td>0.9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_12</td>
+	<td>0.10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_3</td>
+	<td>0.11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_13</td>
+	<td>0.12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_14</td>
+	<td>0.13</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_15</td>
+	<td>0.14</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_16</td>
+	<td>0.15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_4</td>
+	<td>0.16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_17</td>
+	<td>0.17</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message=labukas&amp;test=1&amp;hash=${hash14}</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'&amp;test=1&amp;hash=${hash15}</td> 	<td></td> </tr>-->
+</tbody></table>
+</body>
+</html>
