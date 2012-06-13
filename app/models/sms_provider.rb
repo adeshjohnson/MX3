@@ -39,7 +39,7 @@ class SmsProvider < ActiveRecord::Base
   def send_sms_clickatell(sms, options={})
     log = self.connect_to_clickatell
     if log[0].to_s == 'ERR:'
-      if log[1].gsub(/,/, '').to_i <= 7
+      if log[1].to_s.gsub(/,/, '').to_i <= 7
         sms.status_code = "0" + log[1].gsub(/,/, '')
       else
         sms.status_code = log[1].gsub(/,/, '')
