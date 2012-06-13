@@ -1,6 +1,6 @@
 <table width="100%">
   <tr>
-    <td><%= link_nice_tariff(@tariff) %></td>
+    <td><%= link_nice_tariff(@tariff).html_safe %></td>
     <td align="right" nowrap><%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %></td>
   </tr>
 </table>
