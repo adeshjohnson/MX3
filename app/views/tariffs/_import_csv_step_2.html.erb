@@ -92,8 +92,10 @@
 
     <br/>
     <% if admin? %>
-        <%= _('Update_destination_names_from_file') %>: <%= check_box_tag("update_dest_names", 1, false) %>
-        <br/>
+      <%= _('Update_destination_names_from_file') %>: <%= check_box_tag("update_dest_names", 1, false) %>
+      <br/>
+      <%= _('Update_subcodes_from_file') %>: <%= check_box_tag("update_subcodes", 1, false) %>
+      <br />
     <% end %>
     <br/>
     <table class="maintable" width="70%">
