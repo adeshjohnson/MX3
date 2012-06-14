@@ -65,7 +65,7 @@ Mor::Application.routes.draw do
   match '/payment_gateways/:engine/:gateway(/:action)' => 'active_processor/google_checkout', :constraints => {:engine => /google_checkout/}
   match '/payment_gateways/:engine/:gateway(/:action)' => 'active_processor/osmp', :constraints => {:engine => /osmp/}
   match '/payment_gateways/:engine/:gateway(/:action/:id)' => 'active_processor/ideal', :constraints => {:engine => /ideal/}
-
+  match '/payment_gateways/:engine/:gateway/pay(/:id)' => 'active_processor/ideal#pay', :constraints => {:engine => /ideal/}
 
   match ':controller(/:action(/:id(.:format)))'
 
