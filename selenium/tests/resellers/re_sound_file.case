@@ -155,7 +155,7 @@
 <tr>
 	<td>assertText</td>
 	<td>voice[name]</td>
-	<td>Sound</td>
+	<td>sound</td>
 </tr>
 <tr>
 	<td>verifyValue</td>
@@ -255,7 +255,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=user_warning_balance_sound_file_id</td>
-	<td>Sound/${front_left}</td>
+	<td>sound/${front_left}</td>
 </tr>
 <tr>
 	<td>check</td>
@@ -264,7 +264,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -285,7 +285,7 @@
 <tr>
 	<td>verifySelectedLabel</td>
 	<td>user_warning_balance_sound_file_id</td>
-	<td>Sound/${front_left}</td>
+	<td>sound/${front_left}</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -326,7 +326,7 @@
 <tr>
 	<td>select</td>
 	<td>did_sound_file_id</td>
-	<td>label=Sound/${front_left}</td>
+	<td>label=sound/${front_left}</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -341,7 +341,7 @@
 <tr>
 	<td>verifySelectedLabel</td>
 	<td>did_sound_file_id</td>
-	<td>Sound/${front_left}</td>
+	<td>sound/${front_left}</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -361,7 +361,7 @@
 <tr>
 	<td>verifySelectedLabel</td>
 	<td>did_sound_file_id</td>
-	<td>Sound/${front_left}</td>
+	<td>sound/${front_left}</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
