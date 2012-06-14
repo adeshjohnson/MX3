@@ -2202,16 +2202,19 @@ GROUP BY terminators.id;").map { |t| t.id }
     if (!params[:id] or !u) and notice.blank?
       notice = _('Dont_be_so_smart')
     else
-      if (!Tariff.find(:first, :conditions => {:owner_id => u.id}) or !Tariff.find(:first, :conditions => {:id => Confline.get_value('Default_user_tariff_id', u.id)})) and notice.blank?
+      if Confline.count(:conditions => "owner_id = #{u.id} AND name LIKE 'Default_User_%'").to_i == 0 
+        notice = _('Default_user_is_not_present') 
+      elsif (!Tariff.find(:first, :conditions => {:owner_id => u.id}) or !Tariff.find(:first, :conditions => {:id => Confline.get_value('Default_user_tariff_id', u.id)})) and notice.blank?
         notice = _('Tariff_not_found_cannot_create')
+      else
+        #if u.usertype != 'reseller' and u.own_providers != 0
+        u_id = u
+        u_id = u = User.find(:first, :conditions => ["id=?", 0]) if u.usertype == 'reseller' and u.own_providers.to_i == 0
+        if (!u_id.lcrs.find(:first) or !u_id.lcrs.find(:first, :conditions => {:id => Confline.get_value('Default_user_lcr_id', u_id.id)})) and notice.blank?
+          notice = _('Lcr_not_found_cannot_create')
+        end
+        #end
       end
-      #if u.usertype != 'reseller' and u.own_providers != 0
-      u_id = u
-      u_id = u = User.find(:first, :conditions => ["id=?", 0]) if u.usertype == 'reseller' and u.own_providers.to_i == 0
-      if (!u_id.lcrs.find(:first) or !u_id.lcrs.find(:first, :conditions => {:id => Confline.get_value('Default_user_lcr_id', u_id.id)})) and notice.blank?
-        notice = _('Lcr_not_found_cannot_create')
-      end
-      #end
     end
 
     if Confline.mor_11_extended? and notice.blank? and Confline.get_value("Registration_Enable_VAT_checking", u.id).to_i == 1
