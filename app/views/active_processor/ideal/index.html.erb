@@ -1,3 +1,4 @@
+<% mor_default_currency = Currency.find(1).name %>
 <script type="text/javascript">
     //<![CDATA[
     Event.observe(window, 'load', function () {
@@ -26,7 +27,7 @@
                 max_amount: <%= @gateway.get(:config, 'max_amount').inspect %>,
                 tax_in_amount: <%= @gateway.get(:config, 'tax_in_amount').inspect %>,
                 curr1:$("currency").select("select").first().value,
-                curr2:'<%= @gateway.get(:config, 'default_geteway_currency') %>'
+                curr2:$("default_currency").select("input").first().value
             },
 
             onSuccess:function (transport) {
@@ -48,7 +49,7 @@
 <br/>
 <div class="simple">
   <% @gateway.display_form do |gateway, helper| %>
-      <form action='<%= gateway.post_to(Web_Dir) %>' method='post'>
+      <%= form_tag(gateway.post_to(Web_Dir), :autocomplete => false) do %>
         <table>
           <% gateway.errors.each { |field, error| %>
               <tr style="color: red">
@@ -57,7 +58,6 @@
               </tr>
           <% } %>
           <% gateway.each_field_for(:form) do |field_name, options| %>
-              <% gateway.to_yaml %>
               <tr>
                 <td class="name"><%= helper.label(gateway.engine, gateway.gateway, field_name, options) %></td>
                 <td id="<%= field_name %>"><%= helper.input(gateway, field_name, options) %></td>
@@ -66,18 +66,18 @@
         </table>
         <br/>
         <%= submit_tag _('Confirm'), :onclick => "this.disabled = true; this.value = '#{_('Payment_Processing')}'; this.form.submit();" %>
-      </form>
+      <%end%>
   <% end %>
 
   <% unless @gateway.get(:config, 'min_amount').to_f.zero? %>
       <br/>
       * <%= _('Minimum_amount') %>:
-      <span id="min_currency"><%= nice_number @gateway.get(:config, 'min_amount') %> <%= @gateway.get(:config, 'default_geteway_currency') %> <%= _('Without_tax') %></span>
+      <span id="min_currency"><%= nice_number @gateway.get(:config, 'min_amount') %> <%= @gateway.settings['default_currency'] %> <%= _('Without_tax') %></span>
   <% end %>
 
   <% unless @gateway.get(:config, 'max_amount').to_f.zero? %>
       <br/>
       * <%= _('Maximum_amount') %>:
-      <span id="max_currency"><%= nice_number @gateway.get(:config, 'max_amount') %> <%= @gateway.get(:config, 'default_geteway_currency') %> <%= _('Without_tax') %></span>
+      <span id="max_currency"><%= nice_number @gateway.get(:config, 'max_amount') %> <%= @gateway.settings['default_currency'] %> <%= _('Without_tax') %></span>
   <% end %>
 </div>

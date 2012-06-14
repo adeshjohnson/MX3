@@ -2,11 +2,11 @@
 class ActiveProcessor::IntegrationsController < ActiveProcessor::BaseController
   before_filter :check_localization
 
-  verify :method => :post, :only => [:pay],
-         :redirect_to => {:controller => :callc, :action => :main},
-         :add_flash => {:notice => _('Dont_be_so_smart'),
-                        :params => {:dont_be_so_smart => true}
-         }
+ # verify :method => :post, :only => [:pay],
+ #        :redirect_to => {:controller => :callc, :action => :main},
+ #        :add_flash => {:notice => _('Dont_be_so_smart'),
+ #                       :params => {:dont_be_so_smart => true}
+  #       }
 
   def pay
     @engine = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => current_user.id}).enabled_by(current_user.owner.id)

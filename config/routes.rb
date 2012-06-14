@@ -59,6 +59,18 @@ Mor::Application.routes.draw do
   match 'test/load_delta_sql(/*path)' => 'test#load_delta_sql'
   match 'callc/pay_subscriptions_test/:year/:month' => 'callc#pay_subscriptions_test'
   match 'billing/callc/pay_subscriptions_test/:year/:month' => 'callc#pay_subscriptions_test'
+
+  match 'payment_gateways/:engine/:gateway' => 'active_processor/gateways#index', :constraints => {:engine=>"gateways"}
+  match 'payment_gateways/:engine/:gateway/pay' => 'active_processor/gateways#pay', :constraints => {:engine=>"gateways"}
+  match 'payment_gateways/:engine/:gateway' =>  'active_processor/integrations#index', :constraints => {:engine => /integrations/}
+  match 'payment_gateways/:engine/:gateway/pay' =>  'active_processor/integrations#pay', :constraints => {:engine => /integrations/}
+  match 'payment_gateways/:engine/:gateway' =>  'active_processor/google_checkout#index', :constraints => {:engine => /google_checkout/}
+  match 'payment_gateways/:engine/:gateway/pay' =>  'active_processor/google_checkout#pay', :constraints => {:engine => /google_checkout/}
+  match 'payment_gateways/:engine/:gateway' =>  'active_processor/osmp#index', :constraints => {:engine => /osmp/}
+  match 'payment_gateways/:engine/:gateway/pay' =>  'active_processor/osmp#pay', :constraints => {:engine => /osmp/}
+  match 'payment_gateways/:engine/:gateway/index' =>  'active_processor/ideal#index', :constraints => {:engine => /ideal/}
+  match 'payment_gateways/:engine/:gateway/pay' =>  'active_processor/ideal#pay', :constraints => {:engine => /ideal/}
+
   match ':controller(/:action(/:id(.:format)))'
 
 

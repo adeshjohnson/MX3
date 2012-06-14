@@ -13,11 +13,11 @@ module ActiveMerchant #:nodoc:
         #
         # The helper creates a scope around a payment service helper
         # which provides the specific mapping for that service.
-        # 
+        #
         #  <% payment_service_for 1000, 'paypalemail@mystore.com',
-        #                               :amount => 50.00, 
-        #                               :currency => 'CAD', 
-        #                               :service => :paypal, 
+        #                               :amount => 50.00,
+        #                               :currency => 'CAD',
+        #                               :service => :paypal,
         #                               :html => { :id => 'payment-form' } do |service| %>
         #
         #    <% service.customer :first_name => 'Cody',
@@ -44,10 +44,10 @@ module ActiveMerchant #:nodoc:
         def payment_service_for(order, account, options = {}, &proc)
           raise ArgumentError, "Missing block" unless block_given?
 
-          integration_module = ActiveMerchant::Billing::Integrations.const_get(options.delete(:service).to_s.classify)
+          integration_module = ActiveMerchant::Billing::Integrations.const_get(options.delete(:service).to_s.camelize)
 
-          concat(form_tag(integration_module.service_url, options.delete(:html) || {}), proc.binding)
-          result = "\n"
+          result = []
+          result << form_tag(integration_module.service_url, options.delete(:html) || {})
 
           service_class = integration_module.const_get('Helper')
           service = service_class.new(order, account, options)
@@ -58,9 +58,12 @@ module ActiveMerchant #:nodoc:
           end.join("\n")
 
           result << "\n"
+          result << submit_tag(_('Confirm'), :disable_with => _('Processing..'))
           result << '</form>'
+          result= result.join("\n")
 
-          concat(result, proc.binding)
+          concat(result.respond_to?(:html_safe) ? result.html_safe : result)
+          #nil
         end
 
         private

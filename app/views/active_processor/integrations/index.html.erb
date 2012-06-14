@@ -48,7 +48,7 @@
 <br/>
 <div class="simple">
   <% @gateway.display_form do |gateway, helper| %>
-      <form action='<%= gateway.post_to(Web_Dir) %>' method='post'>
+      <%= form_tag(gateway.post_to(Web_Dir), :autocomplete => false) do %>
         <table>
           <% gateway.errors.each { |field, error| %>
               <tr style="color: red">
@@ -65,7 +65,7 @@
         </table>
         <br/>
         <%= submit_tag _('Confirm'), :onclick => "this.disabled = true; this.value = '#{_('Payment_Processing')}'; this.form.submit();" %>
-      </form>
+      <%end%>
   <% end %>
 
   <% unless @gateway.get(:config, 'min_amount').to_f.zero? %>

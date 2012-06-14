@@ -5,7 +5,7 @@ module ActiveMerchant #:nodoc:
       class Helper #:nodoc:
         attr_reader :fields
         class_attribute :service_url
-        class_inheritable_hash :mappings
+        class_attribute :mappings
         class_attribute :country_format
         self.country_format = :alpha2
 
@@ -38,6 +38,15 @@ module ActiveMerchant #:nodoc:
             field = mappings[subkey][k]
             add_field(field, v) unless field.blank?
           end
+        end
+
+        def add_raw_html_field(name, value)
+          return if name.blank? || value.blank?
+          @raw_html_fields << [name, value]
+        end
+
+        def raw_html_fields
+          @raw_html_fields
         end
 
         def billing_address(params = {})
