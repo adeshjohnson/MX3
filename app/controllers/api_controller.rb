@@ -3802,13 +3802,14 @@ class ApiController < ApplicationController
               if params[:src]
                 if params[:message]   # atskirai
                   @user_tariff = SmsTariff.find_by_id(@user.sms_tariff_id)
+                  @number_of_messages = (URI.unescape(params[:message]).size.to_f / 160).ceil
                   sms = SmsMessage.new
                   sms.sending_date = Time.now
                   sms.user_id = @user.id
                   sms.reseller_id  = @user.owner_id
                   sms.number = params[:dst]
                   sms.save
-                  sms.sms_send(@user, @user_tariff, params[:dst], @lcr, params[:message].size.to_f, params[:message])
+                  sms.sms_send(@user, @user_tariff, params[:dst], @lcr, @number_of_messages.to_f, URI.unescape(params[:message]))
                   if sms.status_code.to_s == "0"
                     doc.response {
                       doc.status('ok')
