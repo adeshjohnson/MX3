@@ -2524,7 +2524,7 @@ class TariffsController < ApplicationController
         @rates << @all_rates[i]
       end
 
-      exrate = Currency.count_exchange_rate(@tariff.currency, session[:show_currency])
+      exrate = Currency.count_exchange_rate(@tariff.currency, session[:show_currency].gsub(/[^A-Za-z]/, ''))
       @ratesd = Ratedetail.find_all_from_id_with_exrate({:rates => @rates, :exrate => exrate, :destinations => true, :directions => true})
     end
     @use_lata = @st == "U" ? true : false
@@ -2532,8 +2532,8 @@ class TariffsController < ApplicationController
     @letter_select_header_id = @tariff.id
     @page_select_header_id = @tariff.id
 
-    @exchange_rate = count_exchange_rate(@tariff.currency, session[:show_currency])
-    @cust_exchange_rate = count_exchange_rate(session[:default_currency], session[:show_currency])
+    @exchange_rate = count_exchange_rate(@tariff.currency, session[:show_currency].gsub(/[^A-Za-z]/, ''))
+    @cust_exchange_rate = count_exchange_rate(session[:default_currency], session[:show_currency].gsub(/[^A-Za-z]/, ''))
     @show_rates_without_tax = Confline.get_value("Show_Rates_Without_Tax", @user.owner_id)
   end
 
