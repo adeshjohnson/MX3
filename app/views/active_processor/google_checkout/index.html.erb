@@ -16,17 +16,17 @@
     });
 
     function updateFields(field, vars) {
-        var updateUrl = "<%= Web_Dir + ActiveProcessor.configuration.currency_calc_url%>";
+        var updateUrl = "<%=raw Web_Dir + ActiveProcessor.configuration.currency_calc_url%>";
         new Ajax.Request(updateUrl, {
             method:'get',
             parameters:{
-                user: <%=current_user.id%>,
+                user: <%=raw current_user.id%>,
                 amount:$("amount").select("input").first().value,
-                min_amount: <%= @gateway.get(:config, 'min_amount').inspect %>,
-                max_amount: <%= @gateway.get(:config, 'max_amount').inspect %>,
-                tax_in_amount: <%= @gateway.get(:config, 'tax_in_amount').inspect %>,
+                min_amount: <%=raw  @gateway.get(:config, 'min_amount').inspect %>,
+                max_amount: <%=raw  @gateway.get(:config, 'max_amount').inspect %>,
+                tax_in_amount: <%=raw  @gateway.get(:config, 'tax_in_amount').inspect %>,
                 curr1:$("currency").select("select").first().value,
-                curr2:'<%= @gateway.get(:config, 'default_geteway_currency') %>'
+                curr2:'<%=raw  @gateway.get(:config, 'default_geteway_currency') %>'
             },
 
             onSuccess:function (transport) {
