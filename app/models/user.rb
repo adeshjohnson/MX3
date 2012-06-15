@@ -2211,7 +2211,7 @@ GROUP BY terminators.id;").map { |t| t.id }
         u_id = u
         u_id = u = User.find(:first, :conditions => ["id=?", 0]) if u.usertype == 'reseller' and u.own_providers.to_i == 0
         if (!u_id.lcrs.find(:first) or !u_id.lcrs.find(:first, :conditions => {:id => Confline.get_value('Default_user_lcr_id', u_id.id)})) and notice.blank?
-          notice = _('Lcr_not_found_cannot_create')
+          notice = _('Default_user_does_not_have_LCR')
         end
         #end
       end

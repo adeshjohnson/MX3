@@ -4417,6 +4417,7 @@ Localization.define('en') do |l|
   l.store 'Device_rules_src', 'Device rules Source'
   l.store 'Price_has_to_be_specified', 'Price has to be specified'
   l.store 'Default_user_is_not_present', 'Default user is not present' 
+  l.store 'Default_user_does_not_have_LCR', 'Default user does not have and LCR set'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
