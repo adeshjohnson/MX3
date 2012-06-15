@@ -275,7 +275,7 @@ class ApplicationController < ActionController::Base
 
     # ---- currency ------
     if params[:currency]
-      if curr = Currency.find(:first, :conditions => "name = '#{params[:currency]}'")
+      if curr = Currency.find(:first, :conditions => "name = '#{params[:currency].gsub(/[^A-Za-z]/, '')}'")
         session[:show_currency] = curr.name
       end
     end
