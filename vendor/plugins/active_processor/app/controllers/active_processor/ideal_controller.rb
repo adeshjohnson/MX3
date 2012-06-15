@@ -4,6 +4,12 @@ class ActiveProcessor::IdealController < ActiveProcessor::BaseController
 
   def index
     @gateway = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => current_user.id}).enabled_by(current_user.owner.id).query
+
+    unless @gateway
+      flash[:notice] = _("Inactive_Gateway")
+      redirect_to :controller => "/callc", :action => "main" and return false
+    end
+
     respond_to do |format|
       format.html {}
     end
