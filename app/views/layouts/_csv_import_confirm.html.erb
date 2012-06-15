@@ -8,11 +8,11 @@
 <br/>
 <br/>
 <% tl = 0 %>
-<%# for line in session[:file] %>
-<%#= line + "<br />" if tl < 5%>
-<%# tl += 1 %>
-<%# end %>
-<%= "....<br />" if tl > 5 %>
+<% for line in session[:file].split(/\n|\r|\rn/) %>
+    <%= raw (line + "<br />").html_safe if tl < 5 %>
+    <% tl += 1 %>
+<% end %>
+<%= raw "....<br />".html_safe if tl > 5 %>
 <br/>
 <%= form_tag({:action => action_to, :step => "2"}.merge(opts)) do %>
     <%= hidden_field_tag :sepn, sep1.to_s %>
