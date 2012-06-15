@@ -16,7 +16,7 @@
   <% for column in Device.content_columns %>
       <tr class="row<%= (i % 2 + 1).to_s %>">
         <td align="left">        <%= column.name %> </td>
-        <td align="left" id="<%= column.name %>_value">        <%= @device.send(column.name) %> </td>
+        <td align="left" id="<%= column.name %>_value">        <%= @device.send(column.name) if column.name %> </td>
       </tr>
       <% i += 1 %>
   <% end %>
