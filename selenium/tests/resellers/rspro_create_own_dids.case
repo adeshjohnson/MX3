@@ -465,13 +465,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/dids/did_rates/8</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>Action was not found</td>
+	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
 <tr>
@@ -513,7 +518,7 @@
 <tr>
 	<td>select</td>
 	<td>id=did_sound_file_id</td>
-	<td>label=Voice/${Front_Left}</td>
+	<td>label=voice/test_Front_Left.wav</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -536,9 +541,9 @@
 	<td>comment</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=did_sound_file_id</td>
-	<td>Voice/${Front_Left}</td>
+	<td>voice/test_Front_Left.wav</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -708,14 +713,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=did_rate_rate</td>
-	<td>3</td>
+	<td>3.0</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=did_rate_connection_fee</td>
-	<td>3</td>
+	<td>3.0</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -904,7 +909,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>Action was not found</td>
+	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
 <tr>
@@ -1278,7 +1283,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>User: User Resellers</td>
+	<td>User Resellers</td>
 	<td></td>
 </tr>
 <tr>
