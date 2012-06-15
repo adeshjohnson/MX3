@@ -2136,7 +2136,7 @@ GROUP BY terminators.id;").map { |t| t.id }
       notice = _('Please_enter_username')
     end
 
-    if User.find(:first, :conditions => "username = '#{username}'") and notice.blank?
+    if User.where(["username = ?", username]).first and notice.blank?
       notice = _('Such_username_is_allready_taken')
     end
 
