@@ -350,7 +350,12 @@
 <tr>
 	<td>select</td>
 	<td>id=prov_type</td>
-	<td>label=Clickatell</td>
+	<td>label=API</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_string</td>
+	<td>http://wiki.kolmisoft.com/index.php/SMS_Addon_-_Providers?user=admin&amp;password=admin1&amp;api_id=ID&amp;to=&lt;%= DST %&gt;&amp;text=&lt;%= MSG %&gt;&amp;text=&lt;%= CALLERID %&gt;&amp;from_name=&lt;%= USRLASTNAME %&gt;</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -892,7 +897,116 @@
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
-<!--<tr> 	<td>open</td> 	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message=labukas&amp;test=1&amp;hash=${hash14}</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'&amp;test=1&amp;hash=${hash15}</td> 	<td></td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message=labukas&amp;test=1&amp;hash=${hash14}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>0 - sent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=price</td>
+	<td>11.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'&amp;test=1&amp;hash=${hash15}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> 0 - sent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=price</td>
+	<td>11.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/sms_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_7</td>
+	<td>937567337911</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_8</td>
+	<td>937567337911</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_rate_7</td>
+	<td>11.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_rate_8</td>
+	<td>11.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=quantity_7</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=quantity_8</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_sms</td>
+	<td>2.0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price_7</td>
+	<td>11.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price_8</td>
+	<td>11.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_price</td>
+	<td>22.0000</td>
+</tr>
 </tbody></table>
 </body>
 </html>

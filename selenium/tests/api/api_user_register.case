@@ -32,8 +32,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
 	<td></td>
 </tr>
 <!--<tr> 	<td>open</td> 	<td>/billing/functions/settings</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>id=email_sending_enabled</td> 	<td></td> </tr> <tr> 	<td>waitForValue</td> 	<td>id=email_sending_enabled</td> 	<td>on</td> </tr> <tr> 	<td>type</td> 	<td>id=email_login</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=email_password</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=email_smtp_server</td> 	<td>vilnius.balt.net</td> </tr> <tr> 	<td>type</td> 	<td>id=email_from</td> 	<td>no-reply@kolmisoft.com</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Settings saved</td> 	<td></td> </tr>-->
@@ -84,16 +94,21 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>billing/api/user_register?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -103,7 +118,67 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default user is not present</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
@@ -118,7 +193,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
@@ -133,7 +208,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
@@ -148,7 +223,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
@@ -163,7 +238,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
@@ -178,7 +253,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
@@ -193,12 +268,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>Please enter correct email</td>
 </tr>
@@ -208,77 +283,48 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>Enter device type</td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=111111&amp;password2=111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=email@email.com&amp;device_type=SIP&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNAL ERROR</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Tariff not found cannot create</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/default_user</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Default User saved</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>open</td> 	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=111111&amp;password2=111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=email@email.com&amp;device_type=SIP&amp;test=1</td> 	<td></td> </tr> <tr> 	<td>verifyTextNotPresent</td> 	<td>INTERNAL ERROR</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Tariff not found cannot create</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=111111&amp;password2=111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=aisteaisteb@gmail.com&amp;device_type=SIP&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//success</td>
 	<td>Registration succesful</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=server_ip</td>
 	<td>111.222.333.444</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=bbbbbb&amp;password=111111&amp;password2=111111&amp;first_name=basasas&amp;last_name=absasasa&amp;country_id=10&amp;email=femail@email.com&amp;device_type=SIP&amp;mob_phone=867756473&amp;phone=856700439&amp;fax=8548938475&amp;client_id=23454332&amp;vat_number=234323&amp;state=lisbona&amp;county=america&amp;city=mlt&amp;postcode=345434&amp;address=mechanizatoriai&amp;test=1</td>
+	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=bbbbbb&amp;password=111111&amp;password2=111111&amp;first_name=basasas&amp;last_name=absasasa&amp;country_id=10&amp;email=femail@email.com&amp;device_type=SIP&amp;mob_phone=867756473&amp;phone=856700439&amp;fax=8548938475&amp;client_id=23454332&amp;vat_number=234323&amp;state=lisbona&amp;county=america&amp;city=mlt&amp;postcode=345434&amp;address=mechanizatoriai&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//success</td>
 	<td>Registration succesful</td>
 </tr>
@@ -288,7 +334,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
@@ -303,7 +349,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
@@ -318,12 +364,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>This email address is already in use.</td>
 </tr>
@@ -333,12 +379,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>Passwords do not match</td>
 </tr>
@@ -348,12 +394,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>Please enter correct email</td>
 </tr>
@@ -363,22 +409,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//success</td>
 	<td>Registration succesful</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>//page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=server_ip</td>
 	<td>111.222.333.444</td>
 </tr>
@@ -388,12 +434,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -403,12 +449,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -418,12 +464,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -433,12 +479,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>Such username is allready taken</td>
 </tr>
@@ -448,12 +494,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>Password is too short</td>
 </tr>
@@ -463,12 +509,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>Please enter first name</td>
 </tr>
@@ -478,12 +524,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>Please enter last name</td>
 </tr>
@@ -493,12 +539,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>Please select country</td>
 </tr>
@@ -523,12 +569,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>hello</td>
 	<td>Hello, asasas sasasa</td>
 </tr>
@@ -538,7 +584,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>username</td>
 	<td>aaaaaa</td>
 </tr>
@@ -583,12 +629,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Hello, basasas absasasa</td>
 	<td></td>
 </tr>
@@ -598,7 +644,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>username</td>
 	<td>bbbbbb</td>
 </tr>
@@ -653,7 +699,7 @@
 	<td>femail@email.com</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>address[direction_id]</td>
 	<td>Argentina</td>
 </tr>
@@ -671,6 +717,476 @@
 	<td>verifySelectedLabel</td>
 	<td>name=user[taxation_country]</td>
 	<td>Argentina</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_usertype</td>
+	<td>label=reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=devices_check_ballance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=devices_check_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=users</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=uniquehash_value</td>
+	<td>hashas</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>tariff</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=${hashas}&amp;username=bbdddbb&amp;password=111111&amp;password2=111111&amp;first_name=basasas&amp;last_name=absasasa&amp;country_id=10&amp;email=ffffemail@email.com&amp;device_type=SIP&amp;mob_phone=86775252526473&amp;phone=85670252520439&amp;fax=85452525258938475&amp;client_id=23454332&amp;vat_number=234323&amp;state=lisbona&amp;county=america&amp;city=mlt&amp;postcode=345434&amp;address=mechanizatoriai&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default user is not present</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=${hashas}&amp;username=bbdddbb&amp;password=111111&amp;password2=111111&amp;first_name=basasas&amp;last_name=absasasa&amp;country_id=10&amp;email=ffffemail@email.com&amp;device_type=SIP&amp;mob_phone=86775252526473&amp;phone=85670252520439&amp;fax=85452525258938475&amp;client_id=23454332&amp;vat_number=234323&amp;state=lisbona&amp;county=america&amp;city=mlt&amp;postcode=345434&amp;address=mechanizatoriai&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Registration succesful</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>bbdddbb</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=username</td>
+	<td>bbdddbb</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=${hashas}&amp;username=bbdccccc&amp;password=111111&amp;password2=111111&amp;first_name=ccccasas&amp;last_name=acccasa&amp;country_id=10&amp;email=ffffemail@emajjl.com&amp;device_type=SIP&amp;mob_phone=86726473&amp;phone=85520439&amp;fax=85452938475&amp;client_id=2365532&amp;vat_number=234323&amp;state=lisbona&amp;county=america&amp;city=mlt&amp;postcode=345434&amp;address=mechanizatoriai&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Lcr not found cannot create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lcr_name</td>
+	<td>newLCR</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=${hashas}&amp;username=bbdccccc&amp;password=111111&amp;password2=111111&amp;first_name=ccccasas&amp;last_name=acccasa&amp;country_id=10&amp;email=ffffemail@emajjl.com&amp;device_type=SIP&amp;mob_phone=86726473&amp;phone=85520439&amp;fax=85452938475&amp;client_id=2365532&amp;vat_number=234323&amp;state=lisbona&amp;county=america&amp;city=mlt&amp;postcode=345434&amp;address=mechanizatoriai&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Lcr not found cannot create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=${hashas}&amp;username=bbdccccc&amp;password=111111&amp;password2=111111&amp;first_name=ccccasas&amp;last_name=acccasa&amp;country_id=10&amp;email=ffffemail@emajjl.com&amp;device_type=SIP&amp;mob_phone=86726473&amp;phone=85520439&amp;fax=85452938475&amp;client_id=2365532&amp;vat_number=234323&amp;state=lisbona&amp;county=america&amp;city=mlt&amp;postcode=345434&amp;address=mechanizatoriai&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Registration succesful</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
