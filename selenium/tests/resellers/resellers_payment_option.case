@@ -70,7 +70,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -178,12 +178,12 @@
 <tr>
 	<td>verifyValue</td>
 	<td>reseller_paypal_default_amount</td>
-	<td></td>
+	<td>10</td>
 </tr>
 <tr>
 	<td>verifyValue</td>
 	<td>reseller_paypal_min_amount</td>
-	<td></td>
+	<td>5</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -218,17 +218,17 @@
 <tr>
 	<td>verifyValue</td>
 	<td>reseller_webmoney_default_amount</td>
-	<td></td>
+	<td>10</td>
 </tr>
 <tr>
 	<td>verifyValue</td>
 	<td>reseller_webmoney_min_amount</td>
-	<td></td>
+	<td>5</td>
 </tr>
 <tr>
 	<td>verifyValue</td>
 	<td>reseller_webmoney_test</td>
-	<td>off</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -328,7 +328,7 @@
 <tr>
 	<td>verifyValue</td>
 	<td>reseller_paypal_email_notification</td>
-	<td>on</td>
+	<td>off</td>
 </tr>
 <tr>
 	<td>verifyValue</td>
@@ -616,7 +616,7 @@
 <tr>
 	<td>verifyValue</td>
 	<td>reseller_paypal_email_notification</td>
-	<td>on</td>
+	<td>off</td>
 </tr>
 <tr>
 	<td>verifyValue</td>
