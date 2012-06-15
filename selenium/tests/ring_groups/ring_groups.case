@@ -58,13 +58,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Are you sure?</td>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
@@ -1144,13 +1144,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Are you sure?</td>
+	<td>clickAndWait</td>
+	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
@@ -1717,7 +1717,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//span[@onclick=&quot;new Ajax.Updater('new_ajax_devices', '/billing/ringgroups/assign_device?id=2&amp;device_id=' + document.getElementById('device_id').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});&quot;]</td>
+	<td>xpath=(//img[@alt='Add'])[4]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1747,7 +1747,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>exten =&gt; $5t5tr4,2,Dial(Local/1001@mor_local|0|#$@TYG45tw4) </td>
+	<td>exten =&gt; $5t5tr4,2,Dial(Local/1001@mor_local,0,#$@TYG45tw4) </td>
 	<td></td>
 </tr>
 </tbody></table>
