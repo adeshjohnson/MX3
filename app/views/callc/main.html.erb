@@ -15,7 +15,7 @@
           <br/>
           <%= raw session[:frontpage_sms_text].to_s.html_safe %>
           <br/>
-          <%= render "/sms/sms" %>
+          <%= render :file => "/sms/sms" %>
       <% end %>
 
       <% if @user.postpaid == 0 or (@user.postpaid == 1 and Confline.get_value("Hide_payment_options_for_postpaid_users", 0).to_i == 0) %>
