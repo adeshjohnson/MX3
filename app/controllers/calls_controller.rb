@@ -260,7 +260,11 @@ class CallsController < ApplicationController
       server = Server.find(:first, :conditions => "id = #{server_id.to_i}")
 
       if server
-        server.ami_cmd("soft hangup #{channel}")
+        if ast_18?
+          server.ami_cmd("channel request hangup #{channel}")
+        else
+          server.ami_cmd("soft hangup #{channel}")
+        end
       end
 
     end
