@@ -1334,16 +1334,22 @@ class ApplicationController < ActionController::Base
     time.strftime("%H:%M:%S") if time
   end
 
+=begin
+  Since session is turned off in api controller, not only do we need to check for Conflines
+  and/or session variables to format a number, but we need to check wheter session is not nil.
+  In case it is nil we set nice_number_digits to 2 and do not change decimal.
+=end
   def nice_number(number)
-    if !session[:nice_number_digits]
+    if session and !session[:nice_number_digits]
       confline = Confline.get_value("Nice_Number_Digits")
       session[:nice_number_digits] ||= confline.to_i if confline and confline.to_s.length > 0
       session[:nice_number_digits] ||= 2 if !session[:nice_number_digits]
+      nice_number_digits = session[:nice_number_digits]
     end
-    session[:nice_number_digits] = 2 if session[:nice_number_digits] == ""
+    nice_number_digits = 2 if !nice_number_digits or nice_number_digits == ""
     n = ""
-    n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_f) if number
-    if session[:change_decimal]
+    n = sprintf("%0.#{nice_number_digits}f", number.to_f) if number
+    if session and session[:change_decimal]
       n = n.gsub('.', session[:global_decimal])
     end
     n
@@ -2664,12 +2670,17 @@ Variables: (Names marked with * are required)
     d
   end
 
-  def nice_date(date, ofset=1)
+=begin
+  Since sessions are disabled in api, controller no longer can we user session[:XXX] or current_user method.
+  If session is not found time/date will be converted to string in default format %Y-%m-%d. And note no time zone
+  manglig with datetime, since there is no time zones.
+=end
+def nice_date(date, ofset=1)
     if date
-      format = session[:date_format].to_s.blank? ? "%Y-%m-%d" : session[:date_format].to_s
+      format = !session or session[:date_format].to_s.blank? ? "%Y-%m-%d" : session[:date_format].to_s
       t = date.respond_to?(:strftime) ? date : date.to_time
       t = t.class.to_s == 'Date' ? t.to_time : t
-      d = ofset.to_i == 1 ? current_user.user_time(t).strftime(format.to_s) : t.strftime(format.to_s)
+      d = session and ofset.to_i == 1 ? current_user.user_time(t).strftime(format.to_s) : t.strftime(format.to_s)
     else
       d=''
     end

@@ -68,10 +68,10 @@ module ApplicationHelper
         n = n.gsub('.', options[:global_decimal])
       end
     else
-      session[:nice_number_digits] ||= Confline.get_value("Nice_Number_Digits").to_i
-      session[:nice_number_digits] ||= 2
-      n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_f) if number
-      if session[:change_decimal]
+      nice_number_digits = (session and session[:nice_number_digits]) or Confline.get_value("Nice_Number_Digits")
+      nice_number_digits = 2 if nice_number_digits == ''
+      n = sprintf("%0.#{nice_number_digits}f", number.to_f) if number
+      if session and session[:change_decimal]
         n = n.gsub('.', session[:global_decimal])
       end
     end
