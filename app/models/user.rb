@@ -3314,6 +3314,15 @@ GROUP BY terminators.id;").map { |t| t.id }
     (Confline.get_value('Resellers_Allow_Assign_DID_To_Trunk').to_i == 1) 
   end 
 
+=begin
+  Check whethter accountant can see financial data. 
+  Note that this method can return valid results only if called on user that
+  is accountant, hence if user is not an accountant exception will be risen.
+=end
+  def can_see_finances?
+    accountant_allow_read('see_financial_data')
+  end
+
   private
 
 =begin

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
       #log_exception_handler(exc) and return false
       logger.fatal exc.to_yaml
       logger.fatal exc.backtrace.collect { |t| t.to_s }.join("\n")
-      if !params[:this_is_fake_exception]
+      if !params[:this_is_fake_exception] and session
         if session[:flash_not_redirect].to_i == 0
           my_rescue_action_in_public(exc)
           redirect_to :controller => :callc, :action => :main and return false
