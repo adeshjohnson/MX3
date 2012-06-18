@@ -2675,12 +2675,12 @@ Variables: (Names marked with * are required)
   If session is not found time/date will be converted to string in default format %Y-%m-%d. And note no time zone
   manglig with datetime, since there is no time zones.
 =end
-def nice_date(date, ofset=1)
+  def nice_date(date, ofset=1)
     if date
-      format = !session or session[:date_format].to_s.blank? ? "%Y-%m-%d" : session[:date_format].to_s
+      format = session[:date_format].to_s.blank? ? "%Y-%m-%d" : session[:date_format].to_s
       t = date.respond_to?(:strftime) ? date : date.to_time
       t = t.class.to_s == 'Date' ? t.to_time : t
-      d = session and ofset.to_i == 1 ? current_user.user_time(t).strftime(format.to_s) : t.strftime(format.to_s)
+      d = ofset.to_i == 1 ? current_user.user_time(t).strftime(format.to_s) : t.strftime(format.to_s)
     else
       d=''
     end
