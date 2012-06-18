@@ -894,6 +894,11 @@ class Device < ActiveRecord::Base
       dc.destroy
     end
 
+    #destroying rules
+    for dr in Devicerule.find(:all, :conditions => ["device_id = ?", id])
+      dr.destroy
+    end
+
     user = user
     self.destroy_everything
   end

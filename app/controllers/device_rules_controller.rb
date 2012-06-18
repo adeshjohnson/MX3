@@ -115,6 +115,11 @@ class DeviceRulesController < ApplicationController
       redirect_to :controller => "callc", :action => "main" and return false
     end
 
+    unless Device.find_by_id(@devicerule.device_id)
+      flash[:notice] = _('Database_corruption_device_rule_does_not_have_device')
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
+
     if @devicerule.device.user.owner_id.to_i != current_user.id.to_i
       dont_be_so_smart
       redirect_to :controller => "callc", :action => "main" and return false

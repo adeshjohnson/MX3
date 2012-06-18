@@ -4418,6 +4418,7 @@ Localization.define('en') do |l|
   l.store 'Price_has_to_be_specified', 'Price has to be specified'
   l.store 'Default_user_is_not_present', 'Default user is not present' 
   l.store 'Default_user_does_not_have_LCR', 'Default user does not have and LCR set'
+  l.store 'Database_corruption_device_rule_does_not_have_device', 'Database corruption: Device Rule does not have Device'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
