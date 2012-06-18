@@ -82,14 +82,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Account details</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>username</td>
-	<td>111111</td>
+	<td>${@print(md5(acunetix)</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -117,14 +117,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Please enter correct email</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyValue</td>
 	<td>username</td>
-	<td>111111</td>
+	<td>${@print(md5(acunetix)</td>
 </tr>
 <tr>
 	<td>verifyValue</td>
@@ -157,7 +157,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Thank you for registering!</td>
 	<td></td>
 </tr>
@@ -233,7 +233,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Account details</td>
 	<td></td>
 </tr>
@@ -273,7 +273,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Thank you for registering!</td>
 	<td></td>
 </tr>
@@ -297,47 +297,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
-	<td></td>
-</tr>
-<!--enableing recaptcha blank settings-->
-<tr>
-	<td>open</td>
-	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Manual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_1']/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_1']/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>enable_recaptcha</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>reCAPTCHA keys cannot be empty</td>
 	<td></td>
 </tr>
 <!--enableing recaptcha-->
@@ -372,22 +331,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=recaptcha_public_key</td>
-	<td>6LfX-dESAAAAAIO7HVd6xVBIUoro6YoB8kgcibMu </td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=recaptcha_private_key</td>
-	<td>6LfX-dESAAAAAANjXx9qrlx0twbGY_rxQey8gQuf </td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
 </tr>
@@ -433,12 +382,22 @@
 	<td>test3@example.com</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>email</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Please enter captcha</td>
 	<td></td>
 </tr>
@@ -583,7 +542,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>reseller_registration_url</td>
 	<td></td>
 </tr>
@@ -615,7 +574,7 @@
 <tr>
 	<td>type</td>
 	<td>username</td>
-	<td>test_r_email</td>
+	<td>${@print(md5(test_r_email)</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -648,17 +607,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Registration succesful</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>PIN:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>pin</td>
 	<td></td>
 </tr>
@@ -708,7 +667,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>This email address is already in use.</td>
 	<td></td>
 </tr>
@@ -779,6 +738,16 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=username_6</td>
+	<td>${@print(md5(acunetix)</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -823,7 +792,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Email has not been sent because of bad system configurations</td>
 	<td></td>
 </tr>
@@ -888,7 +857,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>link=Forgot Password</td>
 	<td></td>
 </tr>
@@ -938,7 +907,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>link=Forgot Password</td>
 	<td></td>
 </tr>
@@ -965,7 +934,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>link=Forgot Password</td>
 	<td></td>
 </tr>
@@ -1040,7 +1009,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>link=Forgot Password</td>
 	<td></td>
 </tr>
@@ -1077,6 +1046,41 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Cannot change password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>logged</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>${@print(md5(test_r_email)</td>
 	<td></td>
 </tr>
 </tbody></table>
