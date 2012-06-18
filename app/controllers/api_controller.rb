@@ -6,6 +6,7 @@ class ApiController < ApplicationController
   include SqlExport
 
   require 'builder/xmlbase'
+  skip_before_filter :set_current_user, :set_charset, :redirect_callshop_manager
   before_filter :check_allow_api
   before_filter :check_send_method, :except => [:simple_balance, :balance]
   before_filter :log_access
