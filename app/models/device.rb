@@ -989,6 +989,12 @@ class Device < ActiveRecord::Base
     numbers
   end
 
+  def cid_number
+    numbers = []
+    self.callerids.each { |d| numbers << d.cli } if self.callerids and self.callerids.size.to_i > 0
+    numbers
+  end
+
   def device_caller_id_number
     device_caller_id_number = 1
     device_caller_id_number = 3 if cid_from_dids.to_i == 1

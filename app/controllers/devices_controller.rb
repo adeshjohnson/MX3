@@ -215,6 +215,10 @@ class DevicesController < ApplicationController
       @cid_number = cid_number(@device.callerid)
     end
 
+    @device_dids_numbers = @device.dids_numbers
+    @device_cids = @device.cid_number
+    @device_caller_id_number = @device.device_caller_id_number
+
     @devicetypes = @device.load_device_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?)
     @audio_codecs = @device.codecs_order('audio') #audio_codecs
     @video_codecs = @device.codecs_order('video') #video_codecs
@@ -598,7 +602,7 @@ class DevicesController < ApplicationController
       end
 
       @device.mailbox = @device.enable_mwi.to_i == 0 ? "" : @device.extension.to_s + "@default"
-      MorLog.my_debug "ddddddddddddddddddddddddd"
+
       if @device.save
         # --------------- VM -------------
         old_vm = (vm = @device.voicemail_box).dup
@@ -644,6 +648,7 @@ class DevicesController < ApplicationController
           @cid_number = cid_number(@device.callerid)
         end
         @device_dids_numbers = @device.dids_numbers
+        @device_cids = @device.cid_number
         @device_caller_id_number = @device.device_caller_id_number
 
         @devicetypes = @device.load_device_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?)
