@@ -3087,13 +3087,26 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
 =begin
+  Check whether reseller user has rights to edit specified permission
+
+  *Params*
+  +permission+ permission name. same name as it is saved in database
+
+  *Returns*
+  +allow_edit+ boolean, true if reseller is allowed to read
+=end
+  def reseller_allow_edit(permission)
+    return reseller_right(permission) == 2 
+  end
+
+=begin
   Check whether reseller user has rights to read specified permission
 
   *Params*
   +permission+ permission name. same name as it is saved in database
 
   *Returns*
-  +allow_edit+ boolean, true if accountant is allowed to read
+  +allow_edit+ boolean, true if reseller is allowed to read
 =end
   def reseller_allow_read(permission)
     return reseller_right(permission) > 0
