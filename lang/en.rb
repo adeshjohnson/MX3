@@ -4419,6 +4419,8 @@ Localization.define('en') do |l|
   l.store 'Default_user_is_not_present', 'Default user is not present' 
   l.store 'Default_user_does_not_have_LCR', 'Default user does not have and LCR set'
   l.store 'Database_corruption_device_rule_does_not_have_device', 'Database corruption: Device Rule does not have Device'
+  l.store 'No_DID_assigned_to_Device', 'No DID assigned to Device'
+  l.store 'No_CID_assigned_to_Device', 'No CID assigned to Device'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
