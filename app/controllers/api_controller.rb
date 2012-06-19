@@ -2803,7 +2803,6 @@ class ApiController < ApplicationController
         ph = Phonebook.find_by_id(params[:phonebook_id])
         if ph
           if ph.user_id != @user.id and @user.usertype != "admin"
-            dont_be_so_smart
             doc.error("Dont be so smart")
           else
             ph.number = params[:number] if params[:number]
