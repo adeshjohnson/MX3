@@ -13,6 +13,23 @@ class Subscription < ActiveRecord::Base
     end
   end
 
+=begin
+  having troubles, cause rails tries to convert datetime timezone and save to database.
+  Damn web fwamework successfuly converts and saves to db, but does not convert back when
+  selecting from db. anyways we dont need any of this conversion feature, but cant find a 
+  way to completele turn it off
+=end  
+  def activation_start=(value)
+    write_attribute(:activation_start, value.to_s(:db))
+  end
+
+=begin
+  note a comment above activation_start method
+=end
+  def activation_end=(value)
+    write_attribute(:activation_end, value.to_s(:db))
+  end
+
   def time_left
     time = Time.now
     out = 0
