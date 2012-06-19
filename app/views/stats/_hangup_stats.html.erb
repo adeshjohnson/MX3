@@ -56,7 +56,7 @@
       <% @calls.each_with_index { |c, i| %>
           <tr class="row<%= (i % 2 + 1).to_s %>">
             <td align="left"> <%= c.hc_code.to_s %>      </td>
-            <td align="left"> <%= c.description.to_s %>      </td>
+            <td align="left"> <%= c.description.to_s.html_safe %>      </td>
             <td align="right"> <%= c.calls.to_i.to_s %>      </td>
             <td align="right"> <%= nice_number (c.calls.to_f / @calls_size.to_f) * 100 %> %</td>
             <td align="center">
