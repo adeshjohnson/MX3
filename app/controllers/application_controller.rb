@@ -2651,7 +2651,7 @@ Variables: (Names marked with * are required)
 
   def nice_date_time(time, ofset=1)
     if time
-      format = session[:date_time_format].to_s.blank? ? "%Y-%m-%d %H:%M:%S" : session[:date_time_format].to_s
+      format = (session and !session[:date_time_format].to_s.blank?) ? session[:date_time_format].to_s : "%Y-%m-%d %H:%M:%S"
       logger.fatal time
       logger.fatal format
       if time.respond_to?(:strftime)
@@ -2660,7 +2660,7 @@ Variables: (Names marked with * are required)
         t = time.to_time
       end
       if ofset.to_i == 1
-        d = current_user ? current_user.user_time(t).strftime(format.to_s) : t.strftime(format.to_s)
+        d = (session and current_user) ? current_user.user_time(t).strftime(format.to_s) : t.strftime(format.to_s)
       else
         d = t.strftime(format.to_s)
       end
