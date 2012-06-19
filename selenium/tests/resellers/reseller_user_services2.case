@@ -203,13 +203,13 @@
 </tr>
 <!--išskleisiti Billing -> Services ->-->
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Services</td>
+	<td>assertElementPresent</td>
+	<td>//a[@href='/billing/services/list']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Subscriptions</td>
+	<td>assertElementPresent</td>
+	<td>//a[@href='/billing/services/subscriptions']</td>
 	<td></td>
 </tr>
 <tr>
@@ -391,7 +391,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[currency_id]</td>
+	<td>id=user_currency_id</td>
 	<td>label=USD</td>
 </tr>
 <tr>
