@@ -38,6 +38,16 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/devices/device_edit/2</td>
 	<td></td>
 </tr>
@@ -88,7 +98,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>No DID assigned to device</td>
+	<td>Number from DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Control by CIDs</td>
 	<td></td>
 </tr>
 <tr>
@@ -97,8 +112,48 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>No DID assigned to device</td>
+	<td>mouseOver</td>
+	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No DID assigned to Device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>device_caller_id_number_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No DID assigned to Device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>device_caller_id_number_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//tr[6]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No CID assigned to Device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//tr[6]/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -202,14 +257,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertNotEditable</td>
+	<td>device_number_cid_from_did</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertValue</td>
 	<td>id=device_caller_id_number_2</td>
 	<td>off</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>assertNotEditable</td>
 	<td>id=device_caller_id_number_4</td>
-	<td>off</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -232,54 +292,19 @@
 	<td>37063042438 37093042422</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=device_caller_id_number_4</td>
+	<td>mouseOver</td>
+	<td>//tr[6]/td[2]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForNotEditable</td>
-	<td>id=device_number_from_did</td>
+	<td>waitForTextPresent</td>
+	<td>No CID assigned to Device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertEditable</td>
-	<td>id=device_number_cid_from_did</td>
-	<td>37063042438</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=device_number_cid_from_did</td>
-	<td>37063042438 37093042422</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>mouseOut</td>
+	<td>//tr[6]/td[2]</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Device's settings updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=callerid_2</td>
-	<td>&quot;101&quot; &lt;37063042438&gt;</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=device_caller_id_number_4</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=cid_number</td>
-	<td>37063042438</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -287,9 +312,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertNotEditable</td>
+	<td>id=device_number_from_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>37063042438</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>id=cid_number</td>
-	<td>abc</td>
+	<td>abcd</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -304,7 +339,57 @@
 <tr>
 	<td>assertText</td>
 	<td>id=callerid_2</td>
-	<td>&quot;101&quot; &lt;abc&gt;</td>
+	<td>&quot;101&quot; &lt;abcd&gt;</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>abcd</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=cid_number</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_number_from_did</td>
+	<td>label=37093042422</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=cid_number</td>
+	<td>37093042422</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_2</td>
+	<td>&quot;101&quot; &lt;37093042422&gt;</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -337,7 +422,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Device's settings updated</td>
 	<td></td>
 </tr>
@@ -347,13 +432,113 @@
 	<td>&quot;101&quot;</td>
 </tr>
 <tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=img[alt=&quot;Edit&quot;]</td>
+	<td>xpath=(//input[@name='commit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID closed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID closed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_clis/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cli</td>
+	<td>223322114455</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cli</td>
+	<td>1144778899</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No DID assigned to Device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -367,19 +552,29 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertEditable</td>
+	<td>id=device_caller_id_number_4</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertValue</td>
 	<td>id=device_caller_id_number_4</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=cid_number</td>
-	<td>37063042438</td>
+	<td>assertText</td>
+	<td>id=device_number_cid_from_did</td>
+	<td>223322114455 1144778899</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=cid_name</td>
-	<td></td>
+	<td>select</td>
+	<td>id=device_number_cid_from_did</td>
+	<td>label=1144778899</td>
+</tr>
+<tr>
+	<td>assertNotValue</td>
+	<td>id=cid_number</td>
+	<td>37063042438</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -399,37 +594,87 @@
 <tr>
 	<td>assertText</td>
 	<td>id=callerid_2</td>
-	<td>&quot;lkjhgfdsa&quot; &lt;37063042438&gt;</td>
+	<td>&quot;lkjhgfdsa&quot;</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/2</td>
+	<td>/billing/devices/device_clis/2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=device_number_cid_from_did</td>
-	<td>label=37093042422</td>
+	<td>click</td>
+	<td>//td[@id='delete_2']/a/img</td>
+	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>id=cid_number</td>
-	<td>37093042422</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Device's settings updated</td>
+	<td>not deleted</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=callerid_2</td>
-	<td>&quot;lkjhgfdsa&quot; &lt;37093042422&gt;</td>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -437,14 +682,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=cid_number</td>
-	<td>37093042422</td>
+	<td>assertEditable</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=device_number_cid_from_did</td>
+	<td>13</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=device_number_cid_from_did</td>
-	<td>37093042422</td>
+	<td>1144778899</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -454,7 +704,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=device_number_from_did</td>
-	<td>37093042422</td>
+	<td>37063042438</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -469,7 +719,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=callerid_2</td>
-	<td>&quot;lkjhgfdsa&quot; &lt;37093042422&gt;</td>
+	<td>&quot;lkjhgfdsa&quot; &lt;37063042438&gt;</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -521,7 +771,1431 @@
 	<td>id=callerid_2</td>
 	<td>&quot;lkjhgfdsa&quot; &lt;ĘĖĮŠŲŪ()_3456789(*&amp;^%$#$%&gt;</td>
 </tr>
-
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=cid_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=cid_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_name</td>
+	<td>CallerID</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_number</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_name</td>
+	<td>CallerID</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>Test Device</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Device created</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_name</td>
+	<td>CallerID</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>100000000000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>100000000002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Are you sure? </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cid_name_name</td>
+	<td>Name:</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_name</td>
+	<td>105</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>105</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_5</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Control by Destination</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Number from DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Control by CIDs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Control by DIDs (CID from DIDs)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No DID assigned to Device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>device_caller_id_number_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No DID assigned to Device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>device_caller_id_number_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//tr[6]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No CID assigned to Device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//tr[6]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_secret</td>
+	<td>105kyujtnrfbd</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_name</td>
+	<td>105uymtnfboiuyjhgfv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_5</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>105</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_name</td>
+	<td>105</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_number_from_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>device_number_cid_from_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_2</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=cid_number</td>
+	<td>100000000000</td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=device_number_from_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_number_from_did</td>
+	<td>100000000000 100000000001</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//tr[6]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No CID assigned to Device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//tr[6]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_number_from_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>100000000000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_number</td>
+	<td>abcd</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_7</td>
+	<td>&quot;105&quot; &lt;abcd&gt;</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>abcd</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=cid_number</td>
+	<td>100000000000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_number_from_did</td>
+	<td>label=100000000001</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=cid_number</td>
+	<td>100000000001</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_7</td>
+	<td>&quot;105&quot; &lt;100000000001&gt;</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForEditable</td>
+	<td>id=device_caller_id_number_3</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_3</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_7</td>
+	<td>&quot;105&quot;</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID closed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID closed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_clis/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cli</td>
+	<td>2233221144</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cli</td>
+	<td>11447788</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No DID assigned to Device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_3</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=device_caller_id_number_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_4</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_number_cid_from_did</td>
+	<td>2233221144 11447788</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_number_cid_from_did</td>
+	<td>label=11447788</td>
+</tr>
+<tr>
+	<td>assertNotValue</td>
+	<td>id=cid_number</td>
+	<td>100000000000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_name</td>
+	<td>lkjhgfdsa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_7</td>
+	<td>&quot;lkjhgfdsa&quot;</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_clis/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[@id='delete_2']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>not deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=device_number_cid_from_did</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=device_number_cid_from_did</td>
+	<td>11447788</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=device_number_from_did</td>
+	<td>100000000000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_7</td>
+	<td>&quot;lkjhgfdsa&quot; &lt;100000000000&gt;</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_number</td>
+	<td>----55555</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_7</td>
+	<td>&quot;lkjhgfdsa&quot; &lt;----55555&gt;</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_number</td>
+	<td>ĘĖĮŠŲŪ()_3456789(*&amp;^%$#$%</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_7</td>
+	<td>&quot;lkjhgfdsa&quot; &lt;ĘĖĮŠŲŪ()_3456789(*&amp;^%$#$%&gt;</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=cid_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=cid_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_name</td>
+	<td>CallerID</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_number</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_name</td>
+	<td>CallerID</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>Test Device</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Device created</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_name</td>
+	<td>CallerID</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_edit_opt_3_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_edit_opt_4_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_create_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=manage_dids_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>ĘĖĮŠŲŪ()_3456789(*&amp;^%$#$%</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_name</td>
+	<td>lkjhgfdsa</td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_number_from_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=cid_number</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=device_number_from_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_2</td>
+	<td>&quot;lkjhgfdsa&quot; &lt;37063042438&gt;</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=device_number_cid_from_did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID closed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID closed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//tr[4]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>No DID assigned to Device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//tr[4]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_4</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_number_cid_from_did</td>
+	<td>223322114455 1144778899</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_number_cid_from_did</td>
+	<td>label=1144778899</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_name</td>
+	<td>lkjhgfdsa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_2</td>
+	<td>&quot;lkjhgfdsa&quot;</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_clis/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[@id='delete_2']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>not deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_caller_id_number_4</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
