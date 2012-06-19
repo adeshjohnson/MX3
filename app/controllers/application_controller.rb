@@ -2677,10 +2677,10 @@ Variables: (Names marked with * are required)
 =end
   def nice_date(date, ofset=1)
     if date
-      format = session[:date_format].to_s.blank? ? "%Y-%m-%d" : session[:date_format].to_s
+      format = !session or session[:date_format].to_s.blank? ? "%Y-%m-%d" : session[:date_format].to_s
       t = date.respond_to?(:strftime) ? date : date.to_time
       t = t.class.to_s == 'Date' ? t.to_time : t
-      d = ofset.to_i == 1 ? current_user.user_time(t).strftime(format.to_s) : t.strftime(format.to_s)
+      d = session or ofset.to_i == 1 ? current_user.user_time(t).strftime(format.to_s) : t.strftime(format.to_s)
     else
       d=''
     end
