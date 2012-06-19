@@ -574,6 +574,12 @@ class ApiController < ApplicationController
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
 
     if allow == true
+      #a bit nasty, huh? there are some issues after disabling session.
+      #if current user is set then currency would be converted to logged 
+      #in user's currency, but tests say it should be default currency and
+      #no conversion, hence no User.current should be set
+      User.current = nil
+
       username = params[:u].to_s
       password = params[:p].to_s
 
