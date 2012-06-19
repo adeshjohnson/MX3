@@ -4039,7 +4039,8 @@ class ApiController < ApplicationController
   end
 
   def check_calling_card_addon
-    if !calling_cards_active? or @current_user.is_user? or (@current_user.is_accountant? and !@current_user.accountant_allow_read('callingcard_manage')) or (@current_user.is_reseller? and !@current_user.reseller_allow_read('calling_cards'))
+    reseller_cc_permission = (defined?(CC_Active) and (CC_Active == 1) and (!@current_user.is_reseller? or (@current_user.is_reseller? and (@current_user.reseller_allow_edit('Reseller_allow_Callingcard_manage')))))
+    if !reseller_cc_permission or @current_user.is_user? or (@current_user.is_accountant? and !@current_user.accountant_allow_read('callingcard_manage')) or (@current_user.is_reseller? and !@current_user.reseller_allow_read('calling_cards'))
       send_xml_data(MorApi.return_error('Dont be so smart'), params[:test].to_i)
       return false
     end
