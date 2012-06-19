@@ -6,6 +6,16 @@ class Callerid < ActiveRecord::Base
   validates_presence_of :cli, :message => _('Please_enter_details')
   validates_numericality_of :cli, :message => _("CLI_must_be_number")
 
+
+  before_destroy :validate_device
+
+  def validate_device
+    if self.device.control_callerid_by_cids.to_i == self.id
+      self.errors.add(:device, _('CID_is_assigned_to_Device'))
+      return false
+    end
+  end
+
   def Callerid.use_for_callback(cli, status)
     if status.to_i == 1
       sql = "UPDATE callerids SET callerids.email_callback = '0'

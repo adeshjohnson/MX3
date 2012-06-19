@@ -487,7 +487,7 @@ class DevicesController < ApplicationController
       if @device.device_type != 'FAX'
         @device.update_cid(params[:cid_name], params[:cid_number], true)
         @device.cid_from_dids = params[:device_caller_id_number].to_i == 3 ? 1 : 0
-        @device.control_callerid_by_cids = params[:device_caller_id_number].to_i == 4 ? 1 : 0
+        @device.control_callerid_by_cids = params[:device_caller_id_number].to_i == 4 ? params[:control_callerid_by_cids].to_i : 0
         @device.callerid_advanced_control = params[:device_caller_id_number].to_i == 5 ? 1 : 0
       end
 
@@ -897,7 +897,11 @@ class DevicesController < ApplicationController
   def cli_device_delete
     cli_cli = @cli.cli
     device_id = @cli.device_id
-    @cli.destroy
+    if @cli.destroy
+      flash[:status] = _('CLI_deleted') + ": #{cli_cli}"
+    else
+      flash_errors_for(_('CLI_is_not_deleted'), @cli)
+    end
     flash[:status] = _('CLI_deleted') + ": #{cli_cli}"
     redirect_to :action => 'device_clis', :id => device_id and return false
   end

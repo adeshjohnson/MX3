@@ -996,14 +996,14 @@ class Device < ActiveRecord::Base
 
   def cid_number
     numbers = []
-    self.callerids.each { |d| numbers << d.cli } if self.callerids and self.callerids.size.to_i > 0
+    self.callerids.each { |d| numbers << [d.cli, d.id] } if self.callerids and self.callerids.size.to_i > 0
     numbers
   end
 
   def device_caller_id_number
     device_caller_id_number = 1
     device_caller_id_number = 3 if cid_from_dids.to_i == 1
-    device_caller_id_number = 4 if control_callerid_by_cids.to_i == 1
+    device_caller_id_number = 4 if control_callerid_by_cids.to_i != 0
     device_caller_id_number = 5 if callerid_advanced_control.to_i == 1
     device_caller_id_number
   end

@@ -4421,6 +4421,8 @@ Localization.define('en') do |l|
   l.store 'Database_corruption_device_rule_does_not_have_device', 'Database corruption: Device Rule does not have Device'
   l.store 'No_DID_assigned_to_Device', 'No DID assigned to Device'
   l.store 'No_CID_assigned_to_Device', 'No CID assigned to Device'
+  l.store 'CLI_is_not_deleted', 'CLI is not deleted'
+  l.store 'CID_is_assigned_to_Device', 'CID is assigned to Device'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

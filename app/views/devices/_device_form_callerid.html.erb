@@ -42,7 +42,7 @@
               </tr>
               <tr <%= tooltip(_('No_CID_assigned_to_Device'), _('No_CID_assigned_to_Device')) if !@device_cids or @device_cids.size.to_i == 0 %> >
                 <td><%= radio_button_tag('device_caller_id_number', 4, @device_caller_id_number.to_i == 4, :disabled => !(@device_cids and @device_cids.size.to_i > 0), :onchange => "disable_radio_buttons(this.id);change_cid_value($('device_number_cid_from_did').value)") %></td>
-                <td><%= _('Control_by_CIDs') %>: <%= select_tag 'device_number_cid_from_did', options_for_select(@device_cids, @cid_number.to_s), :onchange => 'change_cid_value(this.value)' %></td>
+                <td><%= _('Control_by_CIDs') %>: <%= select_tag 'control_callerid_by_cids', options_for_select(@device_cids, @device.control_callerid_by_cids.to_i) %></td>
               </tr>
               <tr>
                 <td><%= radio_button_tag('device_caller_id_number', 5, @device_caller_id_number.to_i == 5, :onchange => 'disable_radio_buttons(this.id)') %></td>
@@ -52,24 +52,24 @@
                   function disable_radio_buttons(id) {
                       if (id == 'device_caller_id_number_4') {
                           $('device_number_from_did').disabled = true;
-                          $('device_number_cid_from_did').disabled = false;
+                          $('control_callerid_by_cids').disabled = false;
 
                           $('cid_number').readOnly = true;
                       }
                       if (id == 'device_caller_id_number_2') {
                           $('device_number_from_did').disabled = false;
-                          $('device_number_cid_from_did').disabled = true;
+                          $('control_callerid_by_cids').disabled = true;
 
                           $('cid_number').readOnly = true;
                       }
                       if (id == 'device_caller_id_number_1') {
                           $('device_number_from_did').disabled = true;
-                          $('device_number_cid_from_did').disabled = true;
+                          $('control_callerid_by_cids').disabled = true;
                           $('cid_number').readOnly = false;
                       }
                       if (id != 'device_caller_id_number_4' && id !== 'device_caller_id_number_2' && id !== 'device_caller_id_number_1') {
                           $('device_number_from_did').disabled = true;
-                          $('device_number_cid_from_did').disabled = true;
+                          $('control_callerid_by_cids').disabled = true;
 
                           $('cid_number').readOnly = true;
                       }
@@ -83,7 +83,7 @@
                           $('device_caller_id_number_3').disabled = true;
                       }
                       else {
-                          $('device_caller_id_number_3').disabled = <%= raw (!@device_dids_numbers or @device_dids_numbers.size.to_i == 0) ? 'true' : 'false'%>;
+                          $('device_caller_id_number_3').disabled = <%= (!@device_dids_numbers or @device_dids_numbers.size.to_i == 0) ? 'true' : 'false'%>;
                       }
                   }
                   disable_radio_buttons('device_caller_id_number_<%=@device_caller_id_number%>');
