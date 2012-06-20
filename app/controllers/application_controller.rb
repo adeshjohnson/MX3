@@ -1344,8 +1344,8 @@ class ApplicationController < ActionController::Base
       confline = Confline.get_value("Nice_Number_Digits")
       session[:nice_number_digits] ||= confline.to_i if confline and confline.to_s.length > 0
       session[:nice_number_digits] ||= 2 if !session[:nice_number_digits]
-      nice_number_digits = session[:nice_number_digits]
     end
+    nice_number_digits = session[:nice_number_digits]
     nice_number_digits = 2 if !nice_number_digits or nice_number_digits == ""
     n = ""
     n = sprintf("%0.#{nice_number_digits}f", number.to_f) if number
