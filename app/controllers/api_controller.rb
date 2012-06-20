@@ -3802,7 +3802,7 @@ class ApiController < ApplicationController
     if allow == true
       check_user(params[:u], params[:p])
       if @user
-        @lcr = Lcr.where({:id=>params[:lcr_id]}).first
+        @lcr = Lcr.where({:id=>params[:lcr_id].to_s}).first
         if @user.sms_service_active == 1
           if @lcr and (@lcr.user_id == @user.owner_id)
             if params[:dst]
