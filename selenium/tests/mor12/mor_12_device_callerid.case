@@ -113,7 +113,7 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_2']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -123,12 +123,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_2']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>device_caller_id_number_3</td>
+	<td>//tr[@id='id_device_caller_id_number_3']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -138,12 +138,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>device_caller_id_number_3</td>
+	<td>//tr[@id='id_device_caller_id_number_3']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>//tr[6]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_4']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -153,7 +153,7 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>//tr[6]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_4']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -258,7 +258,7 @@
 </tr>
 <tr>
 	<td>assertNotEditable</td>
-	<td>device_number_cid_from_did</td>
+	<td>id=control_callerid_by_cids</td>
 	<td></td>
 </tr>
 <tr>
@@ -293,7 +293,7 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>//tr[6]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_4']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -303,7 +303,7 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>//tr[6]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_4']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -528,7 +528,7 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_2']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -538,7 +538,7 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_2']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -563,12 +563,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=device_number_cid_from_did</td>
+	<td>id=control_callerid_by_cids</td>
 	<td>223322114455 1144778899</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=device_number_cid_from_did</td>
+	<td>id=control_callerid_by_cids</td>
 	<td>label=1144778899</td>
 </tr>
 <tr>
@@ -612,7 +612,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>not deleted</td>
 	<td></td>
 </tr>
@@ -688,12 +688,12 @@
 </tr>
 <tr>
 	<td>assertEditable</td>
-	<td>id=device_number_cid_from_did</td>
-	<td>13</td>
+	<td>id=control_callerid_by_cids</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
-	<td>id=device_number_cid_from_did</td>
+	<td>id=control_callerid_by_cids</td>
 	<td>1144778899</td>
 </tr>
 <tr>
@@ -1043,7 +1043,7 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_2']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1053,12 +1053,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_2']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>device_caller_id_number_3</td>
+	<td>//tr[@id='id_device_caller_id_number_3']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1068,12 +1068,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>device_caller_id_number_3</td>
+	<td>//tr[@id='id_device_caller_id_number_3']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>//tr[6]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_4']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1083,7 +1083,7 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>//tr[6]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_4']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1193,7 +1193,7 @@
 </tr>
 <tr>
 	<td>assertNotEditable</td>
-	<td>device_number_cid_from_did</td>
+	<td>id=control_callerid_by_cids</td>
 	<td></td>
 </tr>
 <tr>
@@ -1228,7 +1228,7 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>//tr[6]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_4']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1238,7 +1238,7 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>//tr[6]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_4']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1463,7 +1463,7 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_2']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1473,7 +1473,7 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>//tr[11]/td/table/tbody/tr[4]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_2']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1498,12 +1498,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=device_number_cid_from_did</td>
+	<td>id=control_callerid_by_cids</td>
 	<td>2233221144 11447788</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=device_number_cid_from_did</td>
+	<td>id=control_callerid_by_cids</td>
 	<td>label=11447788</td>
 </tr>
 <tr>
@@ -1533,12 +1533,12 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_clis/2</td>
+	<td>/billing/devices/device_clis/7</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//td[@id='delete_2']/a/img</td>
+	<td>//td[@id='delete_4']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -1547,8 +1547,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>not deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CID is assigned to Device</td>
 	<td></td>
 </tr>
 <tr>
@@ -1613,12 +1618,12 @@
 </tr>
 <tr>
 	<td>assertEditable</td>
-	<td>id=device_number_cid_from_did</td>
-	<td>13</td>
+	<td>id=control_callerid_by_cids</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
-	<td>id=device_number_cid_from_did</td>
+	<td>id=control_callerid_by_cids</td>
 	<td>11447788</td>
 </tr>
 <tr>
@@ -1993,7 +1998,7 @@
 </tr>
 <tr>
 	<td>assertEditable</td>
-	<td>id=device_number_cid_from_did</td>
+	<td>id=control_callerid_by_cids</td>
 	<td></td>
 </tr>
 <tr>
@@ -2073,7 +2078,7 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>//tr[4]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_2']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -2083,7 +2088,7 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>//tr[4]/td[2]</td>
+	<td>//tr[@id='id_device_caller_id_number_2']/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -2093,12 +2098,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=device_number_cid_from_did</td>
+	<td>id=control_callerid_by_cids</td>
 	<td>223322114455 1144778899</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=device_number_cid_from_did</td>
+	<td>id=control_callerid_by_cids</td>
 	<td>label=1144778899</td>
 </tr>
 <tr>
@@ -2119,7 +2124,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=callerid_2</td>
-	<td>&quot;lkjhgfdsa&quot;</td>
+	<td>&quot;lkjhgfdsa&quot; &lt;37063042438&gt;</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -2137,7 +2142,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>deleted</td>
 	<td></td>
 </tr>
@@ -2152,7 +2157,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>not deleted</td>
 	<td></td>
 </tr>
@@ -2189,6 +2194,51 @@
 <tr>
 	<td>assertNotEditable</td>
 	<td>id=device_caller_id_number_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=device_caller_id_number_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_clis/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[@id='delete_2']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
 	<td></td>
 </tr>
 <tr>
