@@ -2245,7 +2245,12 @@ Variables: (Names marked with * are required)
         flash = 'http://wiki.kolmisoft.com/index.php/GUI_Error_-_Email_SMTP#ERROR'
       end
     end
-    Action.new(:user_id => session[:user_id].to_s.blank? ? session[:reg_owner_id].to_i : session[:user_id], :date => Time.now.to_s(:db), :action => "error", :data => 'Cant_send_email', :data2 => exception.message.to_s).save
+    if session
+      a_user_id = session[:user_id].to_s.blank? ? session[:reg_owner_id].to_i : session[:user_id]
+    else
+      a_user_id = 0
+    end
+    Action.new(:user_id => a_user_id, :date => Time.now.to_s(:db), :action => "error", :data => 'Cant_send_email', :data2 => exception.message.to_s).save
     flash
   end
 
