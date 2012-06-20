@@ -103,15 +103,15 @@ class Action < ActiveRecord::Base
     act.date = Time.now
     act.processed = 0
     if action == 'sms_email_sent'
-      act.user_id= options[:email_from_user].id
+      act.user_id= options[:email_from_user].id if options
       act.action=action
       act.target_type="Sms"
-      act.target_id=options[:sms_id]
-      act.data=options[:email_to_address]
+      act.target_id=options[:sms_id] if options
+      act.data=options[:email_to_address] if options
     else
       owner = obj.class.to_s == 'User' ? obj.owner_id : 0
       act.user_id = owner
-      if options[:er_type].to_i == 0
+      if options and options[:er_type].to_i == 0
         act.data = obj.id
         act.data2 = email.id
         act.action = obj.class.to_s == 'User' ? 'email_sent' : 'paypal_email_sent'
