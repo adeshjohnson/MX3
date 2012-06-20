@@ -2116,7 +2116,7 @@ Variables: (Names marked with * are required)
               "Message:    #{exception}",
               "Controller: #{params[:controller]}",
               "Action:     #{params[:action]}",
-              "User ID:    #{session[:user_id].to_i}",
+              "User ID:    #{session ? session[:user_id].to_i : 'possible_from_api'}",
               "----------------------------------------",
               "Repositority:           #{rep}",
               "Revision:               [#{rev}]",
