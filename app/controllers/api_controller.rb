@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class ApiController < ApplicationController
 
+  skip_before_filter :verify_authenticity_token
+
   session :off, :except => [:login, :login_form]
 
   include SqlExport
@@ -3909,6 +3911,7 @@ class ApiController < ApplicationController
 =end
 
   def check_allow_api
+    logger.fatal "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
     if Confline.get_value("Allow_API").to_i != 1
       send_xml_data(MorApi.return_error('API Requests are disabled'), params[:test].to_i)
     end
