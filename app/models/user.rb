@@ -3014,11 +3014,12 @@ GROUP BY terminators.id;").map { |t| t.id }
 
 =begin
   havin issues trying to turn off rails timezone conversion, but writing
-  attribute manual helps to sovle this issue
+  attribute manual helps to sovle this issue.
 =end
-#  def minimal_charge_start_at=(value)
-#    write_attribute(:minimal_charge_start_at, value.to_s(:db))
-#  end
+  def minimal_charge_start_at=(value)
+    value = (value ? value.to_s(:db) : value)
+    write_attribute(:minimal_charge_start_at, value)
+  end
 
 =begin
   Check whether minimal charge should be added to invoice. answer depends on whether
