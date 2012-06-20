@@ -1,5 +1,5 @@
 <br/>
-<%= button_to _('Assign_Automatically'), {:action => "auto_assign_warning"}, :confirm => _('are_you_sure'), :method => "post" %>
+<%= button_to _('Assign_Automatically'), {:action => "auto_assign_warning"}, :onclick => "return confirm('#{_('Are_you_sure')}');",  :confirm => _('are_you_sure'), :method => "post" %>
 <br/>
 <br/>
 
