@@ -2178,15 +2178,15 @@ Variables: (Names marked with * are required)
           flash[:notice] = flash_notice.to_s.blank? ? "INTERNAL ERROR. - ID: #{id} - #{exception_class}" : flash_notice
         end
 
-        if session[:forgot_pasword] == 1
+        if session and session[:forgot_pasword] == 1
           session[:forgot_pasword] = 0
           flash[:notice_forgot]= _('Cannot_change_password') + "<br />" + _('Email_not_sent_because_bad_system_configurations')
         end
 
-        if session[:flash_not_redirect].to_i == 0
+        if session and session[:flash_not_redirect].to_i == 0
           #redirect_to Web_Dir + "/callc/main" and return false
         else
-          session[:flash_not_redirect] = 0
+          session[:flash_not_redirect] = 0   if session
           #render(:layout => "layouts/mor_min") and return false
         end
       end
