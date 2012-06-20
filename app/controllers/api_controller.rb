@@ -3796,7 +3796,7 @@ class ApiController < ApplicationController
   end
 
   def send_sms
-    allow, values = API::check_params_with_all_keys(params, request)
+    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     if allow == true
@@ -3866,7 +3866,7 @@ class ApiController < ApplicationController
 
   def check_sms_addon
     unless sms_active?
-      send_xml_data(API.return_error('Dont be so smart'), params[:test].to_i)
+      send_xml_data(MorApi.return_error('Dont be so smart'), params[:test].to_i)
       return false
     end
   end
