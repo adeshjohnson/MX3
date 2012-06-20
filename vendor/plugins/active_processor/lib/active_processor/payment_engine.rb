@@ -29,7 +29,7 @@ module ActiveProcessor
           valid, message, ext= valid_logo?(value)
           if valid
             message = "custom_#{@gateway}_#{@engine}_logo.#{ext}"
-            File.open(Rails.root + "/public/images/logo/#{message}", "w") { |f| f.write(value.read) }
+            File.open(Rails.root + "/app/assets/images/logo/#{message}", "w") { |f| f.write(value.read) }
             value = message
           else
             @errors.store(name, message)
