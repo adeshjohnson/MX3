@@ -1547,7 +1547,7 @@ class ApiController < ApplicationController
                             call_list = ''
                           end
 
-                          variables = Email.email_variables(user, nil, {:monitoring => monitoring, :monitoring_type => _(monitoring.monitoring_types), :monitoring_users_list => users, :call_list => call_list})
+                          variables = Email.email_variables(user, nil, {:monitoring => monitoring, :monitoring_type => monitoring.monitoring_types, :monitoring_users_list => users, :call_list => call_list})
                           EmailsController::send_email(email, Confline.get_value("Email_from", user.id), [user], variables)
                         end
 
