@@ -90,7 +90,7 @@ class MorApi
     ret[:s_user_id] = params[:s_user_id] if params[:s_user_id] and params[:s_user_id].to_s !~ /[^0-9]/
     ret[:s_from] = params[:s_from] if params[:s_from] and params[:s_from].to_s !~ /[^0-9]/
     ret[:s_till] = params[:s_till] if params[:s_till] and params[:s_till].to_s !~ /[^0-9]/
-    ret[:lcr_id] = params[:lcr_id].to_s if params[:lcr_id] and (params[:lcr_id] !~ /[^0-9]/)
+    ret[:lcr_id] = params[:lcr_id].to_s if params[:lcr_id] and (params[:lcr_id].to_s !~ /[^0-9]/)
     ret[:dst] = params[:dst].to_s if params[:dst]
     ret[:src] = params[:src].to_s if params[:src]
     ret[:message] = params[:message].to_s if params[:message]
