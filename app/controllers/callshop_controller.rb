@@ -289,13 +289,21 @@ class CallshopController < ApplicationController
     unless @cshop
       reset_session
       flash[:notice] = _('Callshop_was_not_found_or_is_empty')
-      redirect_to :controller => "callc", :action => "main" and return false
+      if session[:user_id] != nil
+        redirect_to :controller => "callc", :action => "main" and return false
+      else
+        redirect_to :controller => "callc", :action => "login" and return false
+      end
     end
 
     unless session[:cs_group] && @cshop.id == session[:cs_group].group_id
       reset_session
       flash[:notice] = _('You_are_not_authorized_to_manage_callshop')
-      redirect_to :controller => "callc", :action => "main" and return false
+      if session[:user_id] != nil
+        redirect_to :controller => "callc", :action => "main" and return false
+      else
+        redirect_to :controller => "callc", :action => "login" and return false
+      end
     end
 
     @currency = current_user.currency.name #@cshop.manager_user.currency.name #Currency.get_default.name
@@ -305,7 +313,11 @@ class CallshopController < ApplicationController
     unless defined?(CS_Active) && CS_Active == 1
       reset_session
       flash[:notice] = _("Callshop_not_enabled")
-      redirect_to :controller => "callc", :action => "main" and return false
+      if session[:user_id] != nil
+        redirect_to :controller => "callc", :action => "main" and return false
+      else
+        redirect_to :controller => "callc", :action => "login" and return false
+      end
     end
   end
 

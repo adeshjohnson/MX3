@@ -64,8 +64,6 @@ class ApplicationController < ActionController::Base
   end
 
   def method_missing(m, *args, &block)
-    logger.fatal 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-    logger.fatal m.inspect
     MorLog.my_debug("Authorization failed:\n   User_type: "+session[:usertype_id].to_s+"\n   Requested: " + "#{params[:controller]}::#{params[:action]}")
     MorLog.my_debug("   Session(#{params[:controller]}_#{params[:action]}):"+ session["#{params[:controller]}_#{params[:action]}".intern].to_s)
     flash[:notice] = _('You_are_not_authorized_to_view_this_page')
