@@ -2125,7 +2125,7 @@ Variables: (Names marked with * are required)
 
               "Request params:    \n#{rp.join("\n")}",
               "----------------------------------------",
-              "Seesion params:    \n#{nice_session}",
+              "Seesion params:    \n#{nice_session if session}",
               "----------------------------------------"
           ]
           if extra_info.length > 0
