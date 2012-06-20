@@ -140,7 +140,7 @@ class SmsProvider < ActiveRecord::Base
   end
 
   def api?
-    provider_type == 'api'
+    provider_type.to_s == 'api'
   end
 
   def must_have_valid_variables
