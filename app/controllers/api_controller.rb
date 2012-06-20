@@ -3802,13 +3802,13 @@ class ApiController < ApplicationController
     if allow == true
       check_user(params[:u], params[:p])
       if @user
-        @lcr = Lcr.find_by_id(params[:lcr_id])
+        @lcr = Lcr.where({:id=>params[:lcr_id]}).first
         if @user.sms_service_active == 1
           if @lcr and (@lcr.user_id == @user.owner_id)
             if params[:dst]
               if params[:src]
                 if params[:message]   # atskirai
-                  @user_tariff = SmsTariff.find_by_id(@user.sms_tariff_id)
+                  @user_tariff = @user.sms_tariff
                   @number_of_messages = (URI.unescape(params[:message]).size.to_f / 160).ceil
                   sms = SmsMessage.new
                   sms.sending_date = Time.now
@@ -3824,7 +3824,7 @@ class ApiController < ApplicationController
                         doc.message_id(sms.id)
                         doc.sms_status_code_tip(sms.sms_status_code_tip)
                         @curr = Currency.find_by_id(@user.currency_id)
-                        if @user.usertype == 'reseller'
+                        if @user.usertype.to_s == 'reseller'
                           doc.price(nice_number sms.reseller_price)
                         else
                           doc.price(nice_number sms.user_price)
