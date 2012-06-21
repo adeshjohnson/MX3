@@ -16,7 +16,7 @@
 
         <td align="left"><%= text_field_tag 'dialplan[name]', @dialplan.name, "class" => "input", :size => "20", :maxlength => "30" %></td>
         <td align="left">
-          <select id="dp_type" name="dialplan[type_id]" <%= "onchange=\"Disab(this.value);\"" %>>
+          <select id="dp_type" name="dialplan[type_id]" <%= "onchange=\"Disab(this.value);\"".html_safe %>>
             <% for pf in @pbxfunctions %>
                 <option value="<%= pf.id %>" <%= "selected" if pf.id == @dialplan.data1.to_i %>> <%= pf.name %> </option>
             <% end %>
