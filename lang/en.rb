@@ -4423,6 +4423,7 @@ Localization.define('en') do |l|
   l.store 'No_CID_assigned_to_Device', 'No CID assigned to Device'
   l.store 'CLI_is_not_deleted', 'CLI is not deleted'
   l.store 'CID_is_assigned_to_Device', 'CID is assigned to Device'
+  l.store 'File_not_uploaded_please_check_file_system_permissions', 'File not uploaded. Please check file system permissions'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
