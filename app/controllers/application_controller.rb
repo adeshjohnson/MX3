@@ -1343,7 +1343,7 @@ class ApplicationController < ActionController::Base
       session[:nice_number_digits] ||= confline.to_i if confline and confline.to_s.length > 0
       session[:nice_number_digits] ||= 2 if !session[:nice_number_digits]
     end
-    nice_number_digits = session[:nice_number_digits] if session
+    nice_number_digits = session[:nice_number_digits]
     nice_number_digits = 2 if !nice_number_digits or nice_number_digits == ""
     n = ""
     n = sprintf("%0.#{nice_number_digits}f", number.to_f) if number
@@ -2384,14 +2384,14 @@ Variables: (Names marked with * are required)
     end
   end
 
-  def check_owner_for_device(user, r = 1, cu =nil)
+  def check_owner_for_device(user, r = 1, cu = nil)
     #logger.fatal r
     a = true
     if user.class != User
       user = User.find_by_id(user)
     end
     if cu == nil
-      if cu.usertype.to_s == "accountant" and user.usertype == "admin"
+      if session and session[:usertype] == "accountant" and user.usertype == "admin"
         dont_be_so_smart
         a = false
         if r.to_i == 1
