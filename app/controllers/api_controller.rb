@@ -2078,7 +2078,7 @@ class ApiController < ApplicationController
               doc.status("Device was deleted")
             end
           else
-            dont_be_so_smart
+            dont_be_so_smart(@user.id)
             doc.error("Dont be so smart")
           end
         else
@@ -2735,7 +2735,7 @@ class ApiController < ApplicationController
             doc.error("User was not found")
           end
         else
-          dont_be_so_smart
+          dont_be_so_smart(@user.id)
           doc.error("Dont be so smart")
         end
       else
