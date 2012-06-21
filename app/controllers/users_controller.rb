@@ -432,10 +432,21 @@ class UsersController < ApplicationController
     end
 
 
-    if @user.valid? and User.create(@user.attributes)
-
-      flash[:status] = _('user_created')
-      redirect_to :action => 'list' and return false
+    if @user.valid?
+      @user_create = User.create(@user.attributes)
+      if @user_create.errors.count == 0
+        flash[:status] = _('user_created')
+        redirect_to :action => 'list' and return false
+      else
+        @user.tax.destroy if @user.tax
+        @user.address.destroy if @user.address
+        @user.fix_when_is_rendering
+        @i = @user.get_invoices_status
+        @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
+        @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
+        flash_errors_for(_('User_was_not_created'), @user_create)
+        render :action => 'new' and return false
+      end
     else
       @user.tax.destroy if @user.tax
       @user.address.destroy if @user.address
