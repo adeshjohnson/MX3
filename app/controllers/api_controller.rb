@@ -3025,7 +3025,7 @@ class ApiController < ApplicationController
 
           note.issue_date = Time.at(params[:issue_date].to_i) if params[:issue_date].to_i > 0
           note.number = params[:number].to_i if params[:number].to_i > 0
-          note.price = params[:price] if params[:price]
+          note.price = params[:price] || 0
           if params[:issue_date].to_i > 0 and note.save
             doc.status("Credit note was created")
           else
