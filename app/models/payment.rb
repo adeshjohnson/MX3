@@ -90,6 +90,7 @@ class Payment < ActiveRecord::Base
   def Payment.subscription_payment(user, amount)
     amount = amount.to_f * -1
     if amount != 0
+      taxw = user.get_tax
       currency = Currency.get_default
       payment = Payment.new(
           :paymenttype => "subscription",
