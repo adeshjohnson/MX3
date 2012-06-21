@@ -20,7 +20,8 @@ class Subscription < ActiveRecord::Base
   way to completele turn it off
 =end  
   def activation_start=(value)
-    value = (value ? value.strftime('%F %H:%M:%S') : value)
+    logger.fatal value.inspect
+    value = (value.respond_to?(:strftime) ? value.strftime('%F %H:%M:%S') : value)
     write_attribute(:activation_start, value)
   end
 
@@ -28,7 +29,8 @@ class Subscription < ActiveRecord::Base
   note a comment above activation_start method
 =end
   def activation_end=(value)
-    value = (value ? value.strftime('%F %H:%M:%S') : value)
+    logger.fatal value.inspect
+    value = (value.respond_to?(:strftime) ? value.strftime('%F %H:%M:%S') : value)
     write_attribute(:activation_end, value)
   end
 
