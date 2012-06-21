@@ -20,14 +20,16 @@ class Subscription < ActiveRecord::Base
   way to completele turn it off
 =end  
   def activation_start=(value)
-    write_attribute(:activation_start, value.to_s(:db))
+    value = (value ? value.strftime('%F %H:%M:%S') : value)
+    write_attribute(:activation_start, value)
   end
 
 =begin
   note a comment above activation_start method
 =end
   def activation_end=(value)
-    write_attribute(:activation_end, value.to_s(:db))
+    value = (value ? value.strftime('%F %H:%M:%S') : value)
+    write_attribute(:activation_end, value)
   end
 
   def time_left

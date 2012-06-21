@@ -3017,7 +3017,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   attribute manual helps to sovle this issue.
 =end
   def minimal_charge_start_at=(value)
-    value = (value ? value.to_s : value)
+    value = (value ? value.strftime('%F %H:%M:%S') : value)
     write_attribute(:minimal_charge_start_at, value)
   end
 
