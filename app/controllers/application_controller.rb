@@ -2370,7 +2370,7 @@ Variables: (Names marked with * are required)
     end
   end
 
-  def dont_be_so_smart(user_id = session[:user_id] )
+  def dont_be_so_smart(user_id = session ? session[:user_id] : 0 )
     flash[:notice] = _('Dont_be_so_smart')
     Action.dont_be_so_smart(user_id, request.env, params)
   end
