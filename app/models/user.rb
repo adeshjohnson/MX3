@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
   before_create :user_before_create
   before_destroy :user_before_destroy
 
-  after_create :after_create_localization, :after_create_user
+  after_create :after_create_localization, :after_create_user, :create_balance_payment
   after_save :after_create_localization, :check_address
 
   def after_create_localization
@@ -110,6 +110,14 @@ class User < ActiveRecord::Base
       a = Address.create()
       self.address_id = a.id
       self.save
+    end
+  end
+
+
+  def create_balance_payment
+    if self.balance.to_f != 0.to_f
+      payment = Payment.create_for_user(self, {:description=>'balance on user creation', :paymenttype => 'initial balance', :currency => Currency.get_default.name, :amount => read_attribute(:balance).to_f})
+      payment.save
     end
   end
 
