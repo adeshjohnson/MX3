@@ -1412,9 +1412,18 @@ conf_name - name of confline that will be represented by checkbox.
     end
   end
 
-  def nice_credit(user)
+=begin 
+  Optional parameter `currency` should be supplied if you want to convert users credit 
+  to some particular currency. Note that currency is actualy currency name, not currency object 
+=end  
+  def nice_credit(user, currency=nil) 
     if user.credit and user.postpaid?
-      credit = user.credit_unlimited? ? _('Unlimited') : user.credit
+      if user.credit_unlimited?  
+        credit = _('Unlimited') 
+      else 
+        exchange_rate = currency ? Currency.count_exchange_rate(user.currency.name, currency) : 1 
+        credit = exchange_rate * user.credit  
+      end
     else
       credit = 0
     end

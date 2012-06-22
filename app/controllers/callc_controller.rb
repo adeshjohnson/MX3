@@ -265,6 +265,8 @@ class CallcController < ApplicationController
 
   def main
 
+    @Show_Currency_Selector=1 
+
     if not session[:user_id]
       redirect_to :action => "login" and return false
     end
