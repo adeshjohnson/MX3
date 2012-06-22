@@ -15,9 +15,15 @@ class IvrvoicesController < ApplicationController
     @page_title = _('IVR_Voices')
     @page_icon = "play.png"
     @voices = current_user.ivr_voices
-    @sounds = current_user.find_sound_files_for_ivrs
   end
 
+  def sound_files 
+    @page_title = _('IVR_sound_files')
+    @page_icon = "play.png"
+    @voices = current_user.ivr_voices
+    @sounds = current_user.find_sound_files_for_ivrs
+  end
+   
   def new
     @page_title = _('New_IVR_Voice')
     @page_icon = "add.png"
