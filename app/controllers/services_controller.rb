@@ -261,9 +261,10 @@ class ServicesController < ApplicationController
 
     cond += " AND subscriptions.memo = '#{@search_memo}' " if @search_memo.length > 0
 
-    sql = "SELECT services.name as serv_name , users.first_name, users.last_name, users.username, subscriptions.*, devices.device_type,  devices.name, devices.extension, devices.istrunk FROM subscriptions
+sql = "SELECT services.name as serv_name , users.first_name, users.last_name, users.username, subscriptions.*, devices.device_type,  devices.name, devices.extension, devices.istrunk, providers.device_id AS provider FROM subscriptions 
             LEFT JOIN users ON(users.id = subscriptions.user_id)
             LEFT JOIN devices ON(devices.id = subscriptions.device_id)
+            LEFT JOIN providers ON(providers.device_id = devices.id) 
             LEFT JOIN services ON(services.id = subscriptions.service_id)
             WHERE subscriptions.id > '0' AND users.owner_id = #{correct_owner_id} #{cond}"
     #MorLog.my_debug sql
