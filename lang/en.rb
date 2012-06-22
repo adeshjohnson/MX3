@@ -4426,6 +4426,7 @@ Localization.define('en') do |l|
   l.store 'File_not_uploaded_please_check_file_system_permissions', 'File not uploaded. Please check file system permissions'
   l.store 'Sound_files', 'Sound files'
   l.store 'IVR_sound_files', 'IVR sound files'
+  l.store 'Yahoo_could_not_find_currency', "Error updating currency. finances.yahoo.com cannot find exchange rate for this currency." 
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

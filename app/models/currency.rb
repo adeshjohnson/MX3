@@ -96,6 +96,9 @@ class Currency < ActiveRecord::Base
         currencies[i].exchange_rate= cur.to_f;
         currencies[i].last_update = Time.now;
         currencies[i].save
+        if currencies[i].exchange_rate == 0  
+          Action.add_action_hash(User.current.id, {:target_id => currencies[i].id, :target_type => "currency", :action => "failed_to_update_currency", :data => currencies[i].exchange_rate}) 
+        end 
       }
       Action.add_action(User.current.id, "Currency updated", id)
     end
