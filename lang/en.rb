@@ -3712,7 +3712,7 @@ Localization.define('en') do |l|
   l.store 'Show_menus', 'Show menus'
   l.store 'Show_advanced_Device_settings', 'Show advanced Device settings'
   l.store 'When_IP_Authentication_checked_IP_must_be_unique', 'When IP Authentication checked IP must be unique'
-  l.store 'Error_Please_Try_Again_Later', 'Error. Please try again later'
+  l.store 'Error_Please_Try_Again_Later', 'Could not connect to yahoo and update exchange rates, please try again later or disable updating'
   l.store 'Dids_interval_assigned_to_dialplan', 'Dids interval assigned to dialplan'
   l.store 'Assign_to_group', 'Assign to group'
   l.store 'How_to_use_destinations_bulk_menagemnt', 'How to use destinations bulk menagemnt'

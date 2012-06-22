@@ -87,7 +87,7 @@ class Currency < ActiveRecord::Base
     par = []
     arr= id.to_i > 0 ? {:conditions => ["id=?", id]} : {:conditions => ["curr_update=1 AND id != 1"]}
     currencies = Currency.find(:all, arr)
-    if currencies
+    if currencies and not currencies.empty?
       currencies.each { |cur| par << "s=" + default_currency.name.strip.to_s + cur.name.strip.to_s + "=X" }
       par << "f=l1"
       Net::HTTP.start("download.finance.yahoo.com") { |http| resp = http.get('/d/quotes.csv?'+par.join('&').to_s); @file = resp.body }
