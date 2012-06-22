@@ -1814,6 +1814,7 @@ class ApiController < ApplicationController
     allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow == true
       check_user(params[:u], params[:p])
       if @user
@@ -1850,7 +1851,7 @@ class ApiController < ApplicationController
     else
       doc.error("Incorrect hash")
     end
-
+           }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -1939,6 +1940,7 @@ class ApiController < ApplicationController
     allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow == true
       check_user(params[:u], params[:p])
       if @user
@@ -2048,7 +2050,7 @@ class ApiController < ApplicationController
     else
       doc.error("Incorrect hash")
     end
-
+                       }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -2057,6 +2059,7 @@ class ApiController < ApplicationController
     allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow == true
       check_user(params[:u], params[:p])
       if @user
@@ -2090,6 +2093,7 @@ class ApiController < ApplicationController
     else
       doc.error("Incorrect hash")
     end
+    }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -2346,6 +2350,7 @@ class ApiController < ApplicationController
     allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow == true
       check_user(params[:u], params[:p])
       if @user and mor_11_extend? and (@user.is_admin? or @user.is_reseller? or (@user.is_accountant? and @user.accountant_allow_edit('Tariff_manage')))
@@ -2390,6 +2395,7 @@ class ApiController < ApplicationController
     else
       doc.error('Incorrect hash')
     end
+    }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -2690,6 +2696,7 @@ class ApiController < ApplicationController
     allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow == true
       check_user(params[:u], params[:p])
       if @user
@@ -2744,6 +2751,7 @@ class ApiController < ApplicationController
     else
       doc.error("Incorrect hash")
     end
+    }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -2754,6 +2762,7 @@ class ApiController < ApplicationController
     allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow == true
       check_user(params[:u], params[:p])
       if @user
@@ -2791,6 +2800,7 @@ class ApiController < ApplicationController
     else
       doc.error("Incorrect hash")
     end
+    }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -2799,6 +2809,7 @@ class ApiController < ApplicationController
     allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow == true
       check_user(params[:u], params[:p])
       if @user
@@ -2829,6 +2840,7 @@ class ApiController < ApplicationController
     else
       doc.error("Incorrect hash")
     end
+    }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -2850,6 +2862,7 @@ class ApiController < ApplicationController
     allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow == true
       check_user(params[:u], params[:p])
       if @user and (@user.is_admin? or @user.is_reseller? or (@user.is_accountant? and @user.accountant_allow_read('invoices_manage')))
@@ -2888,6 +2901,7 @@ class ApiController < ApplicationController
     else
       doc.error("Incorrect hash")
     end
+    }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -2913,6 +2927,7 @@ class ApiController < ApplicationController
     allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow == true
       check_user(params[:u], params[:p])
       if @user and (@user.is_admin? or @user.is_reseller? or (@user.is_accountant? and @user.accountant_allow_read('invoices_manage')))
@@ -2947,6 +2962,7 @@ class ApiController < ApplicationController
     else
       doc.error("Incorrect hash")
     end
+    }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -2963,6 +2979,7 @@ class ApiController < ApplicationController
     allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow == true
       check_user(params[:u], params[:p])
       if @user and (@user.is_admin? or @user.is_reseller? or (@user.is_accountant? and @user.accountant_allow_edit('invoices_manage') and @user.accountant_allow_edit('see_financial_data')))
@@ -2984,6 +3001,7 @@ class ApiController < ApplicationController
     else
       doc.error("Incorrect hash")
     end
+    }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -3009,6 +3027,7 @@ class ApiController < ApplicationController
     allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow == true
       check_user(params[:u], params[:p])
       if @user and (@user.is_admin? or @user.is_reseller? or (@user.is_accountant? and @user.accountant_allow_read('invoices_manage') and @user.accountant_allow_edit('see_financial_data')))
@@ -3040,6 +3059,7 @@ class ApiController < ApplicationController
     else
       doc.error("Incorrect hash")
     end
+    }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -3063,7 +3083,7 @@ class ApiController < ApplicationController
   def financial_statements
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
-
+    doc.page {
     if @current_user and not (@current_user.is_accountant? and (not @current_user.accountant_allow_read('can_see_finances') or not @current_user.allow_read('payments_manage') or not @current_user.accountant_allow_read('invoices_manage')))
       if @values[:date_from] and @values[:date_till]
         date_from = Time.at(@values[:date_from].to_i).to_date.to_s(:db)
@@ -3126,7 +3146,7 @@ class ApiController < ApplicationController
     else
       doc.error("Bad login")
     end
-
+                         }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -3135,7 +3155,7 @@ class ApiController < ApplicationController
     allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
-
+    doc.page {
     if allow == true
       if Confline.get_value("API_Allow_payments_ower_API").to_i == 1
         if !@current_user.is_user?
@@ -3214,7 +3234,7 @@ class ApiController < ApplicationController
       doc.error("Incorrect hash")
     end
 
-
+             }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -3226,6 +3246,7 @@ class ApiController < ApplicationController
     allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow
       check_user(params[:u], params[:p])
       if @user and @user.usertype != 'user'
@@ -3431,6 +3452,7 @@ class ApiController < ApplicationController
     else
       doc.error("Incorrect hash")
     end
+    }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -3438,7 +3460,7 @@ class ApiController < ApplicationController
   def cc_by_cli
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
-
+    doc.page {
     values = @values
 
     if values[:callerid].blank?
@@ -3687,7 +3709,7 @@ class ApiController < ApplicationController
       end
 
     end
-
+           }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -3704,7 +3726,7 @@ class ApiController < ApplicationController
   def show_calling_card_group
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
-
+    doc.page {
     cg = Cardgroup.find(:first, :include => [:tariff, :lcr, :location, :tax], :conditions => ["cardgroups.id = ? and cardgroups.owner_id = ?", @values[:id], @current_user.get_correct_owner_id])
 
     if cg
@@ -3722,7 +3744,7 @@ class ApiController < ApplicationController
     else
       doc = MorApi.return_error("Cardgroup was not found", doc)
     end
-
+            }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -3740,7 +3762,7 @@ class ApiController < ApplicationController
   def buy_card_from_callingroup
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
-
+    doc.page {
     cg = Cardgroup.find(:first, :include => [:tariff, :lcr, :location, :tax], :conditions => ["cardgroups.id = ? and cardgroups.owner_id = ?", @values[:id], @current_user.get_correct_owner_id])
     cards_size = @values[:quantity].to_i < 1 ? 1 : @values[:quantity].to_i
     if cg
@@ -3791,7 +3813,7 @@ class ApiController < ApplicationController
     else
       doc = MorApi.return_error("Cardgroup was not found", doc)
     end
-
+               }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -3799,6 +3821,7 @@ class ApiController < ApplicationController
     allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow == true
       check_user(params[:u], params[:p])
       if @user
@@ -3861,6 +3884,7 @@ class ApiController < ApplicationController
     else
       doc.error("Incorrect hash")
     end
+    }
     send_xml_data(out_string, params[:test].to_i)
   end
 
@@ -3875,6 +3899,7 @@ class ApiController < ApplicationController
     allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if allow
       check_user(params[:u], params[:p])
       if @user
@@ -3886,6 +3911,7 @@ class ApiController < ApplicationController
     else
       doc.error("Incorrect hash")
     end
+    }
     send_xml_data(out_string, params[:test].to_i)
   end
 
