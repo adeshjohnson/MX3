@@ -224,7 +224,7 @@
     <% end %>
 
     <% if @device_type != "FAX" %>
-        <% if @device_type != "Virtual" %>
+
             <tr>
               <% if @device
                    device_ani = @device.ani
@@ -244,6 +244,7 @@
                    dev_call_limit = Confline.get_value("Default_device_call_limit", session[:user_id])
                  end
               %>
+              <% if @device_type != "Virtual" %>
               <% # KRISTINA let resellers users device create trunk option  %>
               <%# if session[:usertype] != "reseller" %>
               <td> <%= b_trunk + _('Trunk') if device_ani == 0 %><%= b_trunk_ani + _('Trunk') if device_ani.to_i == 1 %>
@@ -297,7 +298,7 @@
           <td>
             <select name="device[server_id]">
               <% for ser in @servers %>
-                  <option value=<%= ser.server_id %> <%= "selected" if device_server.to_i == ser.server_id %>>
+                  <option value=<%= ser.server_id %> <%= "selected" if device_server.to_i == ser.server_id.to_i %>>
                     ID: <%= ser.server_id %>, IP: <%= ser.server_ip %> (<%= ser.comment %>)
                   </option>
               <% end %>
