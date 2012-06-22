@@ -1,0 +1,26 @@
+<table class='maintable'>                                                                                  
+  <tr>                                                                                                     
+    <% if @sounds.size > 0 %>                                                                              
+        <th>                                                                                               
+        </th>                                                                                              
+    <% end %>                                                                                              
+    <% for voice in @voices do %>                                                                          
+        <th><%= voice.voice %></th>                                                                        
+    <% end %>                                                                                              
+  </tr>                                                                                                    
+                                                                                                           
+  <% @sounds.each_with_index { |sound, index| %>                                                           
+      <tr class="row<%= index%2+1 %>">                                                                     
+        <th><%= sound['path'] %>:</th>                                                                     
+        <% for voice in @voices do %>                                                                      
+            <td align="center">                                                                            
+              <% if IvrSoundFile.find(:first, :conditions => "path = '#{sound['path']}' and ivr_voice_id = #{voice.id}") %>
+                  <%= b_check %>                                                                                           
+              <% else %>                                                                                                   
+                  <%= b_cross %>                                                                                           
+              <% end %>                                                                                                    
+            </td>                                                                                                          
+        <% end %>                                                                                                          
+      </tr>                                                                                                                
+  <% } %>                                                                                                                  
+</table>   
