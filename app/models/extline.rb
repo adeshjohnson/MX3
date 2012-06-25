@@ -5,7 +5,12 @@ class Extline < ActiveRecord::Base
   def self.mcreate(context, priority, app, appdata, extension, device_id)
     if (defined?(AST_18) and AST_18.to_i == 1)
       sep = ','
-      rappdata = appdata.to_s.gsub('|', ',')
+      if appdata == "$[$[\"${DIALSTATUS}\" = \"CHANUNAVAIL\"]|$[\"${DIALSTATUS}\" = \"CONGESTION\"]]?301"
+        # do not touch this line, here | means OR operator
+        rappdata = appdata
+      else
+        rappdata = appdata.to_s.gsub('|', ',')
+      end
     else
       rappdata = appdata
     end
