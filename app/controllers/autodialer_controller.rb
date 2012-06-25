@@ -57,7 +57,7 @@ class AutodialerController < ApplicationController
     if current_user.usertype == 'user' or current_user.usertype == 'accountant'
       @devices = current_user.devices.find(:all, :conditions => "device_type != 'FAX'")
     else
-      @devices = Device.find_all_for_select(corrected_user_id)
+      @devices = Device.find(:all, :select => "devices.id, devices.description, devices.extension, devices.device_type, devices.istrunk, devices.name, devices.ani, devices.username", :joins => "LEFT JOIN users ON (users.id = devices.user_id)", :conditions => ["device_type != 'FAX' AND users.id = ? AND name not like 'mor_server_%'", corrected_user_id]) 
     end
 
     if @devices.size == 0
@@ -125,7 +125,7 @@ class AutodialerController < ApplicationController
     if current_user.usertype == 'user' or current_user.usertype == 'accountant'
       @devices = current_user.devices.find(:all, :conditions => "device_type != 'FAX'")
     else
-      @devices = Device.find_all_for_select(corrected_user_id)
+      @devices = Device.find(:all, :select => "devices.id, devices.description, devices.extension, devices.device_type, devices.istrunk, devices.name, devices.ani, devices.username", :joins => "LEFT JOIN users ON (users.id = devices.user_id)", :conditions => ["device_type != 'FAX' AND users.id = ? AND name not like 'mor_server_%'", corrected_user_id])
     end
   end
 
