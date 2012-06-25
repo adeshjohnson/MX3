@@ -14,13 +14,19 @@
       <br/>
       <br/>
       <%= _("User") %>:
-      <%= select_tag("s_user", options_for_select([[_('All'), "all"]] + @users.map { |u| [nice_user(u), u.id.to_s] }, @options[:s_user].to_s)) %>
+      <% options = @users.map{|u| [nice_user(u), u.id.to_s]} %> 
+      <% options.insert(0, [_('All'), "all"]) if @users.size > 1 %> 
+      <%= select_tag("s_user", options_for_select(options, @options[:s_user].to_s)) %> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _('Device') %>:
-      <span id="s_device_span"><%= select_tag("s_device", options_for_select([[_('All'), "all"]] + @devices.map { |dev| [nice_device(dev, {:image => false}), dev.id.to_s] }, @options[:s_device].to_s)) %></span>
+      <% options = @devices.map{|dev| [nice_device(dev, {:image => false}) ,dev.id.to_s ]} %> 
+      <% options.insert(0, [_('All'), "all"]) if @devices.size > 1 %> 
+      <span id="s_device_span"><%= select_tag("s_device", options_for_select(options, @options[:s_device].to_s), :disabled => @devices.empty?) %></span> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _("DID") %>:
-      <%= select_tag("s_did", options_for_select([[_('All'), "all"]] + @dids.map { |d| [d.did, d.id.to_s] }, @options[:s_did].to_s)) %>
+      <% options = @dids.map{|d| [d.did, d.id.to_s]} %> 
+      <% options.insert(0, [_('All'), "all"]) if @dids.size > 1 %> 
+      <%= select_tag("s_did", options_for_select(options, @options[:s_did].to_s), :disabled => @dids.empty?) %> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <br/>
       <br/>
@@ -40,7 +46,9 @@
       <br/>
       <% if current_user.reseller_allow_providers_tariff? %>
           <%= _('Provider') %>:
-          <%= select_tag("s_provider", options_for_select([[_('All'), 0]]+@providers.map { |p| [p.name, p.id] }, @options[:s_provider].to_i)) %>
+          <% options = @providers.map{|p| [p.name, p.id]} %> 
+          <% options.insert(0, [_('All'), "all"]) if @providers.size > 1 %> 
+          <%= select_tag("s_provider", options_for_select(options, @options[:s_provider].to_i), :disabled => @providers.empty?)  %> 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <% end %>
       <%= _('Caller_ID') %>:
