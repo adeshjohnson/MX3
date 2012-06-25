@@ -867,6 +867,7 @@ class CallcController < ApplicationController
 
   def pay_subscriptions(year, month)
     email_body = []
+    email_body_reseller = []
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
 
     @year = year.to_i
@@ -877,8 +878,9 @@ class CallcController < ApplicationController
       render :text => "Date is in future" and return false
     end
     email_body << "Charging for subscriptions.\nDate: #{@year}-#{@month}\n"
+    email_body_reseller << "========================================\nSubscriptions of Reseller's Users"
 
-    @users = User.where('blocked != 1 AND subscriptions.id IS NOT NULL').includes(:tax, :subscriptions).all
+    @users = User.where('blocked != 1 AND subscriptions.id IS NOT NULL').includes(:tax, :subscriptions).order('users.owner_id ASC').all
     generation_time = Time.now
     doc.subscriptions() {
       doc.year(@year)
@@ -889,9 +891,11 @@ class CallcController < ApplicationController
         if subscriptions.size > 0
           doc.user(:username => user.username, :user_id => user.id, :first_name => user.first_name, :balance => user.balance, :user_type => user.user_type) {
             send = true
-            email_body << "#{i+1} User: #{nice_user(user)}(#{user.username}):"
+            email_body << "#{i+1} User: #{nice_user(user)}(#{user.username}):"   if user.owner_id.to_i == 0
+            email_body_reseller << "#{i+1} User: #{nice_user(user)}(#{user.username}):"     if user.owner_id.to_i != 0
             doc.blocked("true") if user.blocked.to_i == 1
-            email_body << "  User was blocked." if user.blocked.to_i == 1
+            email_body << "  User was blocked." if user.blocked.to_i == 1  and user.owner_id.to_i == 0
+            email_body_reseller <<   "  User was blocked." if user.blocked.to_i == 1 and user.owner_id.to_i != 0
             subscriptions.each { |sub_hash|
               email_body << "  Service: #{sub_hash[:subscription].service.name} - #{nice_number(sub_hash[:price])}"
               doc.subscription {
@@ -899,7 +903,8 @@ class CallcController < ApplicationController
                 doc.price(nice_number(sub_hash[:price]))
               }
             }
-            email_body << ""
+            email_body << ""  if user.owner_id.to_i == 0
+            email_body_reseller <<  ""  if user.owner_id.to_i != 0
             doc.balance_left(nice_number(user.balance))
           }
         end
@@ -908,6 +913,7 @@ class CallcController < ApplicationController
       }
     }
     logger.debug("Generation took: #{Time.now - generation_time}")
+    email_body +=  email_body_reseller if email_body_reseller and email_body_reseller.size.to_i > 0
     if send
       email_time = Time.now
       email = Email.new(:body => email_body.join("\n"), :subject => "subscriptions report", :format => "plain", :id => "subscriptions report")
