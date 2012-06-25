@@ -421,7 +421,7 @@ Clears all text in second text area in IVR edit window.
 
   def print_tech(tech)
     if tech
-      tech = Confline.get_value("Change_Zap_to") if tech.downcase == "zap" and Confline.get_value("Change_Zap").to_i == 1
+      tech = Confline.get_value("Change_dahdi_to") if tech.downcase == "dahdi" and Confline.get_value("Change_dahdi").to_i == 1
     else
       tech = ""
     end

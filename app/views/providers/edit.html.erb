@@ -8,7 +8,7 @@
 <br/>
 
 <%= form_tag(:action => 'update', :id => @provider) do %>
-    <% if @provider.tech != "Zap" %>
+    <% unless @provider.is_dahdi? %>
         <%= render :partial => 'form' %>
     <% else %>
         <%= render :partial => 'form_zap' %>

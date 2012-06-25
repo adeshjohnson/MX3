@@ -13,10 +13,10 @@
   </tr>
   <tr>
     <td></td>
-    <td><b><%= _('Change_Zap') %>:</b></td>
+    <td><b><%= _('Change_dahdi') %>:</b></td>
     <td>
-      <%= check_box_tag 'change_zap', "1", Confline.get_value("Change_Zap").to_i == 1 %>
-      <%= text_field_tag('change_zap_to', Confline.get_value("Change_Zap_to"), "class" => "input", :size => "31", :maxlength => "50") %>
+      <%= check_box_tag 'change_dahdi', "1", Confline.get_value("Change_dahdi").to_i == 1 %>
+      <%= text_field_tag('change_dahdi_to', Confline.get_value("Change_dahdi_to"), "class" => "input", :size => "31", :maxlength => "50") %>
     </td>
   </tr>
   <tr>

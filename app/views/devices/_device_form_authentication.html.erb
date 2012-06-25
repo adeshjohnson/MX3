@@ -57,7 +57,7 @@
         <tr>
           <td valign="top">
             <table class="simple">
-              <% if @device_type != "ZAP" %>
+              <% unless @device.is_dahdi? %>
                   <tr id="auth_username" style="display: none;">
                     <%# not change , this is the variable Rename%>
                     <td id="username_name"><%= _('username') %>:</td>
@@ -95,7 +95,7 @@
             <tr>
               <td valign="top">
                 <table class="simple">
-                  <% if @device_type != "ZAP" %>
+                  <% unless @device.is_dahdi? %>
                       <tr style="display: none;">
                         <td id="username_name"><%= _('username') %>:</td>
                         <td id="username_value"><%= @device.name %></td>

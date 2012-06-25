@@ -709,7 +709,7 @@ module ApplicationHelper
 
   def print_tech(tech)
     if tech
-      tech = Confline.get_value("Change_Zap_to") if tech.downcase == "zap" and Confline.get_value("Change_Zap").to_i == 1
+      tech = Confline.get_value("Change_dahdi_to") if tech.downcase == "dahdi" and Confline.get_value("Change_dahdi").to_i == 1
     else
       tech = ""
     end
@@ -735,7 +735,7 @@ module ApplicationHelper
   def nice_device_pic(device, options = {})
     provider = device.provider
     d = ""
-    d = b_device if device.device_type == "SIP" or device.device_type == "IAX2" or device.device_type == "H323" or device.device_type == "ZAP"
+    d = b_device if device.device_type == "SIP" or device.device_type == "IAX2" or device.device_type == "H323" or device.device_type == "dahdi"
     d = b_trunk if device.istrunk == 1 and device.ani and device.ani == 0
     d = b_trunk_ani if device.istrunk == 1 and device.ani and device.ani == 1
     d = b_fax if device.device_type == "FAX"
@@ -784,7 +784,7 @@ module ApplicationHelper
 
   def nice_device_from_data(dev_type, dev_name, dev_extension, dev_istrunk, dev_ani, options = {})
     d=""
-    d = b_device if dev_type == "SIP" or dev_type == "IAX2" or dev_type == "H323" or dev_type == "ZAP"
+    d = b_device if dev_type == "SIP" or dev_type == "IAX2" or dev_type == "H323" or dev_type == "dahdi"
     d = b_trunk if dev_istrunk == 1 and dev_ani == 0
     d = b_trunk_ani if dev_istrunk == 1 and dev_ani == 1
     d = b_fax if dev_type == "FAX"

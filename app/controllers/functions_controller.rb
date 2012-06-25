@@ -1176,8 +1176,8 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Confline.set_value("Fax_Device_Enabled", params[:fax_device_enabled])
     Confline.set_value("Email_Fax_From_Sender", params[:email_fax_from_sender])
     Confline.set_value("Fax2Email_Folder", params[:fax2email_folder]) if params[:fax2email_folder].to_s.length > 0
-    Confline.set_value("Change_Zap", params[:change_zap])
-    Confline.set_value("Change_Zap_to", params[:change_zap_to])
+    Confline.set_value("Change_dahdi", params[:change_dahdi])
+    Confline.set_value("Change_dahdi_to", params[:change_dahdi_to])
     if params[:device_range_min].to_i < params[:device_range_max].to_i
       Confline.set_value("Device_Range_MIN", params[:device_range_min])
       Confline.set_value("Device_Range_MAX", params[:device_range_max])

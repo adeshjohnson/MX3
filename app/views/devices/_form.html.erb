@@ -13,7 +13,7 @@
         <% end %>
 
         <% if not @new_device and @device_type != "FAX" and @device_type != "Virtual" %>
-            <% if @device_type != "ZAP" %>
+            <% unless @device.is_dahdi? %>
                 <%= render :partial => "device_form_network" %>
             <% end %>
         <% end %>
@@ -33,7 +33,7 @@
 
         <% if not @new_device and @device_type != "Virtual" %>
 
-            <% if @device_type != "ZAP" %>
+            <% unless @device.is_dahdi? %>
 
                 <%= render :partial => "device_form_codecs" %>
                 <% if not @device_type == "FAX" %>
@@ -42,7 +42,7 @@
             <% end %>
         <% end %>
 
-        <% if not @new_device and @device_type != "ZAP" %>
+        <% if not @new_device and not @device.is_dahdi? %>
             <%= render :partial => "device_form_advance" %>
         <% end %>
 

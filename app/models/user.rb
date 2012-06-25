@@ -2906,8 +2906,8 @@ GROUP BY terminators.id;").map { |t| t.id }
     Confline.active_calls_show_did?
   end
 
-  def alow_device_types_zap_virt
-    return (usertype != "reseller" or (Confline.get_value("Resellers_Allow_Use_Zap_Device", 0).to_i != 0)), (usertype != "reseller" or (Confline.get_value("Resellers_Allow_Use_Virtual_Device", 0).to_i != 0))
+  def alow_device_types_dahdi_virt
+    return (usertype != "reseller" or (Confline.get_value("Resellers_Allow_Use_dahdi_Device", 0).to_i != 0)), (usertype != "reseller" or (Confline.get_value("Resellers_Allow_Use_Virtual_Device", 0).to_i != 0))
   end
 
   def get_correct_owner_id

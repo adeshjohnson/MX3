@@ -7,7 +7,7 @@ class ResellersController < ApplicationController
 
   @@settings = [
       [:boolean, "Show_HGC_for_Resellers"],
-      [:boolean, "Resellers_Allow_Use_Zap_Device"],
+      [:boolean, "Resellers_Allow_Use_dahdi_Device"],
       [:boolean, "Resellers_Allow_Use_Virtual_Device"],
       [:boolean, "Resellers_can_add_their_own_DIDs"],
       [:boolean, "Resellers_Allow_Assign_DID_To_Trunk"],

@@ -499,4 +499,8 @@ class Provider < ActiveRecord::Base
     self.device.max_timeout = timeout
   end
 
+  def is_dahdi? 
+    self.tech == 'dahdi' 
+  end 
+
 end

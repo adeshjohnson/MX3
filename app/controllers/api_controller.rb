@@ -2712,7 +2712,7 @@ class ApiController < ApplicationController
             params[:device][:pin] = params[:pin] if  params[:pin]
 
 
-            az, av = @user.alow_device_types_zap_virt
+            az, av = @user.alow_device_types_dahdi_virt
 
             notice, params2 = Device.validate_before_create(@user, user_u, params, az, av)
             if !notice.blank?

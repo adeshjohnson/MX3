@@ -89,7 +89,7 @@ class Device < ActiveRecord::Base
   TODO: each device type should have separate class. there might be PasswordlessDevice
 =end
   def check_password
-    unless self.server_device? or self.username.blank? or self.provider or ["zap", "virtual", "h323", "skype"].include?(self.device_type.downcase)
+    unless self.server_device? or self.username.blank? or self.provider or ["dahdi", "virtual", "h323", "skype"].include?(self.device_type.downcase)
       if self.name and self.secret.to_s == self.name.to_s
         errors.add(:secret, _("Name_And_Secret_Cannot_Be_Equal"))
         return false
@@ -913,7 +913,7 @@ class Device < ActiveRecord::Base
     self.destroy_everything
   end
 
-  def Device.validate_before_create(current_user, user, params, allow_zap, allow_virtual)
+  def Device.validate_before_create(current_user, user, params, allow_dahdi, allow_virtual)
     notice = ''
 
     unless user
@@ -977,7 +977,7 @@ class Device < ActiveRecord::Base
     end
 
     type_array = ['SIP', 'IAX2', 'FAX', 'H323', 'Skype', '']
-    type_array << "ZAP" if allow_zap
+    type_array << "dahdi" if allow_dahdi
     type_array << "Virtual" if allow_virtual
     if notice.blank? and !type_array.include?(params[:device][:device_type].to_s)
       notice = _('Device_type_invalid')
@@ -1119,6 +1119,10 @@ class Device < ActiveRecord::Base
     #  raise 'Only fax devices support T.38 protocol' 
     #end 
   end
+
+  def is_dahdi? 
+    return self.device_type == 'dahdi' 
+  end 
 
   private
 

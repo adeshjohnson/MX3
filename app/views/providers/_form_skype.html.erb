@@ -150,7 +150,7 @@
 
 </td>
 
-<% if not @new_provider and @provider.tech != "Zap" %>
+<% if not @new_provider and not @provider.is_dahdi? %>
 
     <td valign="top">
       <table class='simple'>

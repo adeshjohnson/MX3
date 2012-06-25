@@ -46,7 +46,7 @@ class DevicesController < ApplicationController
     check_for_accountant_create_device
 
     @device = Device.new
-    @devicetypes = Devicetype.load_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?)
+    @devicetypes = Devicetype.load_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?)
 
     if session[:usertype] == 'accountant' or session[:usertype] == 'admin'
       owner_id = 0
@@ -94,7 +94,7 @@ class DevicesController < ApplicationController
 
     params[:device][:pin] = session[:device][:pin] if session[:device] and session[:device][:pin]
 
-    notice, par = Device.validate_before_create(current_user, user, params, allow_zap?, allow_virtual?)
+    notice, par = Device.validate_before_create(current_user, user, params, allow_dahdi?, allow_virtual?)
     if !notice.blank?
       flash[:notice] = notice
       redirect_to :controller => :callc, :action => :main and return false
@@ -219,7 +219,7 @@ class DevicesController < ApplicationController
     @device_cids = @device.cid_number
     @device_caller_id_number = @device.device_caller_id_number
 
-    @devicetypes = @device.load_device_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?)
+    @devicetypes = @device.load_device_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?)
     @audio_codecs = @device.codecs_order('audio') #audio_codecs
     @video_codecs = @device.codecs_order('video') #video_codecs
 
@@ -282,7 +282,7 @@ class DevicesController < ApplicationController
     params[:device][:description]=params[:device][:description].to_s.strip
 
 
-    @devicetypes = @device.load_device_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?).map { |dt| dt.name }
+    @devicetypes = @device.load_device_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?).map { |dt| dt.name }
     @devicetypes << "FAX"
     MorLog.my_debug(@devicetypes.inspect)
     unless @devicetypes.include?(params[:device][:device_type].to_s)
@@ -311,7 +311,7 @@ class DevicesController < ApplicationController
       params[:device][:timeout]=params[:device_timeout].to_s.strip
     end
     if not @new_device and @device.device_type != "Virtual"
-      if @device.device_type != "ZAP"
+      unless @device.is_dahdi?
         if change_opt_2 == true
           params[:device][:name]=params[:device][:name].to_s.strip
           params[:device][:secret]=params[:device][:secret].to_s.strip
@@ -339,7 +339,7 @@ class DevicesController < ApplicationController
     end
 
     if not @new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
-      if @device.device_type != "ZAP"
+      unless @device.is_dahdi?
         params[:host]=params[:host].to_s.strip
         if @device.host != "dynamic"
           params[:port]=params[:port].to_s.strip
@@ -368,7 +368,7 @@ class DevicesController < ApplicationController
     end
 
     if not @new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
-      if @device.device_type != "ZAP"
+      unless @device.is_dahdi?
         params[:ip1]=params[:ip1].to_s.strip
         params[:mask1]=params[:mask1].to_s.strip
         params[:ip2]=params[:ip2].to_s.strip
@@ -651,7 +651,7 @@ class DevicesController < ApplicationController
         @device_cids = @device.cid_number
         @device_caller_id_number = @device.device_caller_id_number
 
-        @devicetypes = @device.load_device_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?)
+        @devicetypes = @device.load_device_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?)
         @audio_codecs = audio_codecs
         @video_codecs = video_codecs
 
@@ -1619,7 +1619,7 @@ class DevicesController < ApplicationController
 
     @device = Confline.get_default_object(Device, correct_owner_id)
 
-    @devicetypes = Devicetype.load_types("ZAP" => allow_zap?, "Virtual" => allow_virtual?)
+    @devicetypes = Devicetype.load_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?)
 
     @device_type =Confline.get_value("Default_device_type", session[:user_id])
 

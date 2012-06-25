@@ -350,7 +350,7 @@ class ProvidersController < ApplicationController
 
     @provider.set_old
 
-    if @provider.tech != 'Zap'
+    unless @provider.is_dahdi?
       params[:provider][:login]= params[:provider][:login].strip if params[:provider][:login]
       params[:provider][:password]= params[:provider][:password].strip if params[:provider][:password]
       params[:provider][:server_ip]= params[:provider][:server_ip].strip if params[:provider][:server_ip]

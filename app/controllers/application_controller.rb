@@ -1648,9 +1648,9 @@ class ApplicationController < ActionController::Base
       session[:show_menu] = Confline.get_value("Show_only_main_page", user.id).to_i
       #fetching some reseller specific params
       session[:tariff_csv_import_value] = 0
-      az, av = user.alow_device_types_zap_virt
+      az, av = user.alow_device_types_dahdi_virt
       session[:device] = {
-          :allow_zap => az,
+          :allow_dahdi => az,
           :allow_virtual => av
       }
     else
@@ -2897,8 +2897,8 @@ Variables: (Names marked with * are required)
     monitorings_addon_active? and user and (user.usertype == 'admin' or (user.usertype == 'accountant' and user.accountant_right('user_manage').to_i == 2) or (user.usertype == 'reseller' and user.reseller_right('monitorings').to_i == 2))
   end
 
-  def allow_zap?
-    session[:usertype] != "reseller" or (session[:device] and session[:device][:allow_zap] == true)
+  def allow_dahdi?
+    session[:usertype] != "reseller" or (session[:device] and session[:device][:allow_dahdi] == true)
   end
 
   def allow_virtual?
