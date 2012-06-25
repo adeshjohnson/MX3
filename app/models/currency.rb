@@ -24,7 +24,7 @@ class Currency < ActiveRecord::Base
     else
       curr1 = Currency.find(:first, :conditions => ["name = ?", curr1]) if curr1.class != Currency
       curr2 = Currency.find(:first, :conditions => ["name = ?", curr2]) if curr2.class != Currency
-      if curr2 and curr1
+      if curr2 and curr1 and curr1.exchange_rate.to_f != 0.0
         return curr2.exchange_rate.to_f / curr1.exchange_rate.to_f
       else
         return 0.0
