@@ -46,10 +46,20 @@ class Device < ActiveRecord::Base
   validates_numericality_of :port, :message => _("Port_must_be_number"), :if => Proc.new { |o| not o.port.blank? }
 
   # before_create :check_callshop_user
-  before_save :validate_extension_from_pbx, :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth, :validate_trunk
+  before_save :validate_extension_from_pbx, :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth, :validate_trunk, :update_mwi
   before_update :validate_fax_device_codecs
   after_create :create_codecs, :device_after_create
   after_save :device_after_save, :prune_device
+
+=begin
+  #3239 dont know whats the reason to keep two identical fields, but just keep in mind that one is 1/0 
+  #other yes/no and their values has to be the same
+=end
+  def update_mwi
+    if Confline.mor_11_extended?
+      self.subscribemwi = ((self.enable_mwi == 1) ? 'yes' : 'no')
+    end
+  end
 
 =begin
   Resellers are allowed to assign dids to trunk only if appropriate settings is set by admin.
