@@ -4426,7 +4426,10 @@ Localization.define('en') do |l|
   l.store 'File_not_uploaded_please_check_file_system_permissions', 'File not uploaded. Please check file system permissions'
   l.store 'Sound_files', 'Sound files'
   l.store 'IVR_sound_files', 'IVR sound files'
-  l.store 'Yahoo_could_not_find_currency', "Error updating currency. finances.yahoo.com cannot find exchange rate for this currency." 
+  l.store 'Yahoo_could_not_find_currency', "Error updating currency. finances.yahoo.com cannot find exchange rate for this currency."
+  l.store 'Spy_device_is_registered_on_different_server_than_this_call', 'Spy Device is registered on different Server than this Call. Spying on this Call is not possible.'
+  l.store 'Can_not_spy_virtual_device', 'Can not spy virtual device'
+  l.store 'Calculate_zero_price_calls_into_invoices', 'Calculate 0 price Calls into Invoices'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

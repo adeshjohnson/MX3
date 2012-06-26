@@ -2697,6 +2697,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     @chanspy_disabled = Confline.chanspy_disabled?
 
+    @spy_device = Device.find(:first, :conditions => "id = #{current_user.spy_device_id}")
+
     #    sql2 = "SELECT activecalls.id, activecalls.server_id as server_id, activecalls.provider_id as provider_id, activecalls.user_id as user_id  FROM activecalls
     #    WHERE start_time < '#{nice_date_time(Time.now() - 7200)}'"
 =begin

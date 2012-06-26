@@ -32,7 +32,7 @@
              rescue
              end %>
           <tr class="row<%= (i % 2 + 1).to_s %>">
-            <td id="status_<%= i %>" align="center" onmouseover="Tip('<%= active_calls_tooltip(call) %>', CLICKCLOSE, true);"><%= active_call_bullet(call) %></td>
+            <td id="status_<%= i %>" align="center" onmouseover="Tip('<%= active_calls_tooltip(call) %>', CLICKCLOSE, true);" onmouseout="UnTip()"><%= active_call_bullet(call) %></td>
             <td id="answer_time_<%= i %>" align="center"><%= answer_time.blank? ? "" : nice_time_from_date(current_user.user_time(answer_time)) %> </td>
             <td id="duration_<%= i %>" align="center"><%= answer_time.blank? ? "" : nice_time(local_time_now - answer_time) %></td>
             <td id="src_<%= i %>" align="left">
@@ -103,9 +103,13 @@
             <% end %>
             <% if monitorings_addon_active? and not @chanspy_disabled %>
                 <% if call["device_type"] != 'Virtual' %>
-                    <td align="center"> <%= spy_channel_icon(call["channel"], call["ac_id"]) %> </td>
+                    <% if !@spy_device.blank? and (call["server_id"].to_i != @spy_device.server_id.to_i) %>
+                        <td align="center" style="opacity:0.4" <%= tooltip(_('Can not spy'), _('Spy_device_is_registered_on_different_server_than_this_call')) %>> <%= image_tag('icons/sound.png', :title => _('Spy_Channel'), :disabled => true ) %> </td>
+                    <% else %>
+                        <td align="center"> <%= spy_channel_icon(call["channel"], call["ac_id"]) %> </td>
+                    <% end %>
                 <% else %>
-                    <td align="center" <%= tooltip(_('Can not spy'), _('Can not spy virtual device')) %>> <%= b_info %> </td>
+                    <td align="center" <%= tooltip(_('Can not spy'), _('Can_not_spy_virtual_device')) %>> <%= b_info %> </td>
                 <% end %>
             <% end %>
             <% if session[:usertype] == "admin" or allow_manage_providers? %>

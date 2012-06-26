@@ -365,11 +365,13 @@
       <td><%= select_tag('user[quickforwards_rule_id]', options_for_select(current_user.quickforwards_rules.collect { |t| [t.name, t.id] }, @user.try(:quickforwards_rule_id))) %></td>
     </tr>
 <% end %>
-<% if monitorings_addon_active? and (params[:action] == 'edit' or params[:action] == 'update') and current_user.show_active_calls? and not @chanspy_disabled %>
-    <tr <%= tooltip(_('ChanSpy_Device'), _('ChanSpy_Device_Explanation')) %> >
-      <td><%= _('ChanSpy_Device') %>:</td>
-      <td><%= select_tag('user[spy_device_id]', options_for_select([[_('Not_selected'), "0"]] + @devices.collect { |t| [nice_device(t, {:image => false}), t.id] }, @user.try(:spy_device_id))) %></td>
-    </tr>
+<% unless mor_11_extend? %>
+    <% if monitorings_addon_active? and (params[:action] == 'edit' or params[:action] == 'update') and current_user.show_active_calls? and not @chanspy_disabled %>
+        <tr <%= tooltip(_('ChanSpy_Device'), _('ChanSpy_Device_Explanation')) %> >
+          <td><%= _('ChanSpy_Device') %>:</td>
+          <td><%= select_tag('user[spy_device_id]', options_for_select([[_('Not_selected'), "0"]] + @devices.collect { |t| [nice_device(t, {:image => false}), t.id] }, @user.try(:spy_device_id))) %></td>
+        </tr>
+    <% end %>
 <% end %>
 </table>
 </td>
