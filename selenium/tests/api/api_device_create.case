@@ -469,10 +469,10 @@
 	<td>id=device_device_type_FAX</td>
 	<td>on</td>
 </tr>
-<!--As admin create new ZAP device  for user User Test #1-->
+<!--As admin create new dahdi device  for user User Test #1-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;type=ZAP&amp;description=desription14&amp;pin=12367&amp;devicegroup_id=4</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;type=dahdi&amp;description=desription14&amp;pin=12367&amp;devicegroup_id=4</td>
 	<td></td>
 </tr>
 <tr>
@@ -482,7 +482,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;type=ZAP&amp;description=desription14&amp;pin=12367&amp;devicegroup_id=4&amp;test=1&amp;hash=8a0a15e0c517b86747b634a81924ce8057f86a92</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;type=dahdi&amp;description=desription14&amp;pin=12367&amp;devicegroup_id=4&amp;test=1&amp;hash=8a0a15e0c517b86747b634a81924ce8057f86a92</td>
 	<td></td>
 </tr>
 <tr>
@@ -517,7 +517,7 @@
 </tr>
 <tr>
 	<td>verifyValue</td>
-	<td>id=device_device_type_ZAP</td>
+	<td>id=device_device_type_dahdi</td>
 	<td>on</td>
 </tr>
 <!--As admin create new virtual device  for user User Test #1-->
@@ -872,7 +872,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;type=ZAP&amp;description=desription14&amp;pin=1236111&amp;devicegroup_id=3</td>
+	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;type=dahdi&amp;description=desription14&amp;pin=1236111&amp;devicegroup_id=3</td>
 	<td></td>
 </tr>
 <tr>
@@ -1114,10 +1114,10 @@
 	<td>id=device_device_type_SIP</td>
 	<td>on</td>
 </tr>
-<!--As reseller cannot create new ZAP-->
+<!--As reseller cannot create new dahdi-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;type=ZAP&amp;description=desription14&amp;pin=1236111&amp;devicegroup_id=3&amp;test=1&amp;hash=83c025f7416176c183e5a25759b46c2ae0c9a0f5</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;type=dahdi&amp;description=desription14&amp;pin=1236111&amp;devicegroup_id=3&amp;test=1&amp;hash=83c025f7416176c183e5a25759b46c2ae0c9a0f5</td>
 	<td></td>
 </tr>
 <tr>
