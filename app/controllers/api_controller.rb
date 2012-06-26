@@ -3839,28 +3839,38 @@ class ApiController < ApplicationController
                   sms.reseller_id  = @user.owner_id
                   sms.number = params[:dst]
                   sms.save
-                  sms.sms_send(@user, @user_tariff, params[:dst], @lcr, @number_of_messages.to_f, URI.unescape(params[:message]))
-                  if sms.status_code.to_s == "0"
-                    doc.response {
-                      doc.status('ok')
-                      doc.message{
-                        doc.message_id(sms.id)
-                        doc.sms_status_code_tip(sms.sms_status_code_tip)
-                        @curr = Currency.find_by_id(@user.currency_id)
-                        if @user.usertype.to_s == 'reseller'
-                          doc.price(nice_number sms.reseller_price)
-                        else
-                          doc.price(nice_number sms.user_price)
-                        end
-                        doc.currency(@curr.name)
+                  begin
+                    sms.sms_send(@user, @user_tariff, params[:dst], @lcr, @number_of_messages.to_f, URI.unescape(params[:message]))
+                    if sms.status_code.to_s == "0"
+                      doc.response {
+                        doc.status('ok')
+                        doc.message{
+                          doc.message_id(sms.id)
+                          doc.sms_status_code_tip(sms.sms_status_code_tip)
+                          @curr = Currency.find_by_id(@user.currency_id)
+                          if @user.usertype.to_s == 'reseller'
+                            doc.price(nice_number sms.reseller_price)
+                          else
+                            doc.price(nice_number sms.user_price)
+                          end
+                          doc.currency(@curr.name)
+                        }
                       }
-                    }
-                  else
-                    doc.error(){
-                      doc.message{
-                        doc.message_id(sms.id)
-                        doc.sms_status_code_tip(sms.sms_status_code_tip)
+                    else
+                      doc.error(){
+                        doc.message{
+                          doc.message_id(sms.id)
+                          doc.sms_status_code_tip(sms.sms_status_code_tip)
+                        }
                       }
+                    end
+                  rescue Exception => exception 
+                    doc.error(){ 
+                      doc.message{ 
+                        doc.message_id(sms.id) 
+                        doc.sms_status_code_tip(sms.sms_status_code_tip) 
+                        doc.error_message(exception.message) 
+                      } 
                     }
                   end
                 else
