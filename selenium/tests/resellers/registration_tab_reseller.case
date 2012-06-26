@@ -38,6 +38,11 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/test/load_delta_sql/acc_groups</td>
 	<td></td>
 </tr>
@@ -63,68 +68,13 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/currencies/currencies</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=icon_chech_curr_upd_disable_21</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Currency update disabled</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/currencies/edit/21</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=exchange_rate</td>
-	<td>3</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=input[type=&quot;image&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Currency details updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=icon_cross_curr_active_21</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Currency enabled</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=icon_cross_curr_upd_enable_21</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=icon_chech_curr_upd_disable_21</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/users/edit/3</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
-	<td>label=BGN</td>
+	<td>id=user[currency_id]</td>
+	<td>label=ALL</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -154,7 +104,7 @@
 <tr>
 	<td>type</td>
 	<td>user_username</td>
-	<td>Test Reseller 2</td>
+	<td>Test_Reseller2</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -209,17 +159,17 @@
 <tr>
 	<td>type</td>
 	<td>id=user_balance</td>
-	<td>10</td>
+	<td>20</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>id=user_balance_value</td>
-	<td>BGN</td>
+	<td>ALL</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
-	<td>label=BGN</td>
+	<td>id=user[currency_id]</td>
+	<td>label=DZD</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -457,9 +407,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>id=balance</td>
-	<td>10.0000 BGN</td>
+	<td>40.0000 DZD</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -514,7 +464,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>id=user_balance_value</td>
-	<td>10.0000 BGN</td>
+	<td>20.0000 ALL</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -524,7 +474,7 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>Test Reseller 2</td>
+	<td>Test_Reseller2</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -585,6 +535,16 @@
 	<td>open</td>
 	<td>/billing/users/default_user</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_balance</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_balance_value</td>
+	<td>USD</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -809,7 +769,7 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>Test Reseller 2</td>
+	<td>Test_Reseller2</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -823,7 +783,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Succesfully logged in</td>
+	<td>logged in</td>
 	<td></td>
 </tr>
 <tr>
@@ -1057,9 +1017,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>id=balance</td>
-	<td>3.3333 USD</td>
+	<td>assertTextPresent</td>
+	<td>10.0000 USD</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1114,7 +1074,42 @@
 <tr>
 	<td>verifyText</td>
 	<td>id=user_balance_value</td>
-	<td>10.0000 BGN</td>
+	<td>20.0000 ALL</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_10</td>
+	<td>Initial balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_12</td>
+	<td>Initial balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_10</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_12</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_10</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_12</td>
+	<td>USD</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1124,7 +1119,7 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>Test Reseller 2</td>
+	<td>Test_Reseller2</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1138,7 +1133,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Succesfully logged in</td>
+	<td>logged in</td>
 	<td></td>
 </tr>
 <tr>
@@ -1274,7 +1269,7 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>Test Reseller 2</td>
+	<td>Test_Reseller2</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1310,6 +1305,41 @@
 	<td>verifyText</td>
 	<td>username_10</td>
 	<td>444444</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_11</td>
+	<td>Initial balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_13</td>
+	<td>Initial balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_11</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_13</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_11</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_13</td>
+	<td>USD</td>
 </tr>
 </tbody></table>
 </body>

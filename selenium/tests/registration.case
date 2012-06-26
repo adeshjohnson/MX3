@@ -36,8 +36,18 @@
 <!--<tr> 	<td>open</td> 	<td>/billing/functions/settings</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>id=email_sending_enabled</td> 	<td></td> </tr> <tr> 	<td>waitForValue</td> 	<td>id=email_sending_enabled</td> 	<td>on</td> </tr> <tr> 	<td>type</td> 	<td>id=email_login</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=email_password</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=email_smtp_server</td> 	<td>vilnius.balt.net</td> </tr> <tr> 	<td>type</td> 	<td>id=email_from</td> 	<td>no-reply@kolmisoft.com</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Settings saved</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/users/default_user</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_balance</td>
+	<td>20</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -338,6 +348,36 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_6</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user[currency_id]</td>
+	<td>label=DZD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>saved</td>
 	<td></td>
 </tr>
 <!--registering new user with recaptcha being enabled-->
@@ -1005,6 +1045,46 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_6</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_9</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_10</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_11</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_10</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_11</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -1047,6 +1127,41 @@
 	<td>waitForTextPresent</td>
 	<td>Cannot change password</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>aaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>aaaaaaaaaaa1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>logged</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance</td>
+	<td>80.0000 DZD</td>
 </tr>
 <tr>
 	<td>open</td>

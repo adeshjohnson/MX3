@@ -38,6 +38,11 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/test/load_delta_sql/acc_groups</td>
 	<td></td>
 </tr>
@@ -149,13 +154,18 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Succesfully logged in</td>
+	<td>logged in</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
 	<td>/billing/users/default_user</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_balance</td>
+	<td>20</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -312,6 +322,61 @@
 	<td>verifyText</td>
 	<td>css=server_ip</td>
 	<td>111.222.333.444</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_balance</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user[currency_id]</td>
+	<td>label=DZD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -584,6 +649,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>id=balance</td>
+	<td>20.0000 USD</td>
+</tr>
+<tr>
 	<td>verifyText</td>
 	<td>username</td>
 	<td>aaaaaa</td>
@@ -642,6 +712,11 @@
 	<td>open</td>
 	<td>/billing/users/personal_details</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance</td>
+	<td>80.0000 DZD</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -742,6 +817,56 @@
 	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_10</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_11</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_12</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_10</td>
+	<td>Initial balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_11</td>
+	<td>Initial balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_12</td>
+	<td>Initial balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_10</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_11</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_12</td>
+	<td>USD</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -954,6 +1079,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=user_balance</td>
+	<td>10</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -1007,6 +1137,11 @@
 	<td>open</td>
 	<td>/billing/users/personal_details</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance</td>
+	<td>10.0000 USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1155,13 +1290,18 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Succesfully logged in</td>
+	<td>logged in</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
 	<td>/billing/users/default_user</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user[currency_id]</td>
+	<td>label=ALL</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1187,6 +1327,101 @@
 	<td>assertTextPresent</td>
 	<td>Registration succesful</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_13</td>
+	<td>Initial balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_14</td>
+	<td>Initial balance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_13</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_14</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_13</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_14</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>bbdccccc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance</td>
+	<td>20.0000 ALL</td>
 </tr>
 </tbody></table>
 </body>

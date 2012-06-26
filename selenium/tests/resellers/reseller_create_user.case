@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.95" />
+<link rel="selenium.base" href="" />
 <title>create_users</title>
 </head>
 <body>
@@ -43,147 +43,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/acc_groups</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_username</td>
-	<td>admin</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=password_password</td>
-	<td>admin1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=user_usertype</td>
-	<td>label=accountant</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=accountant_type_select</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=user_balance_value</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>User not created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Username has already been taken</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>id=accountant_type_select</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifySelectedLabel</td>
-	<td>id=accountant_type_select</td>
-	<td>Accountant_permissions</td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=You have to create an accountant group</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_username</td>
-	<td>acc</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=password_password</td>
-	<td>acc1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>id=user_link_6</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_username</td>
-	<td>admin</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=password_password</td>
-	<td>admin1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=user_usertype</td>
-	<td>label=reseller</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=reseller_type_select</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>User not created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Username has already been taken</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=reseller_type_select</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifySelectedLabel</td>
-	<td>id=reseller_type_select</td>
-	<td>Reseller_Permissions</td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=You have to create a reseller group</td>
 	<td></td>
 </tr>
 <tr>
@@ -213,7 +73,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>id=user_link_7</td>
+	<td>id=user_link_6</td>
 	<td></td>
 </tr>
 <tr>
@@ -253,7 +113,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>id=user_link_8</td>
+	<td>id=user_link_7</td>
 	<td></td>
 </tr>
 <tr>
