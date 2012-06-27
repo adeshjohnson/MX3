@@ -2052,10 +2052,10 @@ class DevicesController < ApplicationController
     session[:devices_insecure_devices_options] ? @options = session[:devices_insecure_devices_options] : @options = {}
     params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page] or @options[:page] <= 0)
 
-    @total_pages = (Device.count(:all, :conditions =>  "host='dynamic' and insecure like '%invite%'").to_f/session[:items_per_page].to_f).ceil
+    @total_pages = (Device.count(:all, :conditions =>  "host='dynamic' and insecure like '%invite%'  and insecure != 'invite'").to_f/session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages.to_i if @total_pages.to_i < @options[:page].to_i and @total_pages > 0
 
-    @devices = Device.find(:all, :include=>[:user], :conditions => "host='dynamic' and insecure like '%invite%'")
+    @devices = Device.find(:all, :include=>[:user], :conditions => "host='dynamic' and insecure like '%invite%'  and insecure != 'invite'")
     session[:devices_insecure_devices_options] = @options
   end
 

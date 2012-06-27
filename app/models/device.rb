@@ -1188,7 +1188,7 @@ class Device < ActiveRecord::Base
 
 
   def Device.integrity_recheck_devices
-    Device.count(:all, :conditions =>  "host='dynamic' and insecure like '%invite%'").to_i > 0 ? 1 : 0
+    Device.count(:all, :conditions =>  "host='dynamic' and insecure like '%invite%'  and insecure != 'invite'").to_i > 0 ? 1 : 0
   end
 
 end
