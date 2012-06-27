@@ -349,7 +349,7 @@ class AccountingController < ApplicationController
         end
       end
       # check if we should generate invoice
-      if (outgoing_calls_price > 0) or (outgoing_calls_by_users_price > 0) or (incoming_received_calls_price > 0) or (incoming_made_calls_price > 0) or (total_subscriptions > 0) or (minimal_charge_amount > 0)
+      if (outgoing_calls_price > 0) or (outgoing_calls_by_users_price > 0) or (incoming_received_calls_price > 0) or (incoming_made_calls_price > 0) or (total_subscriptions > 0) or (minimal_charge_amount > 0) or ( user.invoice_zero_calls == 1 and outgoing_calls_price >= 0 and outgoing_calls > 0 ) or ( user.invoice_zero_calls == 1 and outgoing_calls_by_users_price >= 0 and outgoing_calls_by_users > 0 ) or ( user.invoice_zero_calls == 1 and incoming_received_calls_price >= 0 and incoming_received_calls > 0 ) or ( user.invoice_zero_calls == 1 and incoming_made_calls_price >= 0 and incoming_made_calls > 0 )
         MorLog.my_debug("    Generating invoice....", 1)
 
         tax = user.get_tax.dup
@@ -359,13 +359,13 @@ class AccountingController < ApplicationController
         price = 0
 
         # --- add own outgoing calls ---
-        if (outgoing_calls_price > 0)
+        if (outgoing_calls_price > 0) or ( user.invoice_zero_calls == 1 and outgoing_calls_price >= 0 and outgoing_calls > 0 )
           invoice.invoicedetails.create(:name => _('Calls'), :price => outgoing_calls_price.to_f, :quantity => outgoing_calls, :invdet_type => 0)
           price += outgoing_calls_price.to_f
         end
 
         # --- add resellers users outgoing calls ---
-        if (outgoing_calls_by_users_price > 0)
+        if (outgoing_calls_by_users_price > 0) or ( user.invoice_zero_calls == 1 and outgoing_calls_by_users_price >= 0 and incoming_made_calls_price > 0)
           invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => outgoing_calls_by_users_price.to_f, :quantity => outgoing_calls_by_users, :invdet_type => 0)
           price += outgoing_calls_by_users_price.to_f
         end
