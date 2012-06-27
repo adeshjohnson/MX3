@@ -12,6 +12,7 @@ class DevicesController < ApplicationController
   before_filter :verify_params, :only => [:create]
   before_filter :check_callback_addon, :only => [:change_email_callback_status, :change_email_callback_status_device]
   before_filter :find_provider, :only => [:user_device_edit]
+  before_filter :check_with_integrity, :only=>[:create, :update, :edit, :new]
 
   before_filter { |c|
     view = [:index, :new, :edit, :device_edit, :show_devices, :device_extlines, :device_dids, :forwards, :group_forwards, :device_clis, :clis, :clis_banned_status, :cli_user_devices, :device_all_details, :default_device, :get_user_devices, :ajax_get_user_devices]
