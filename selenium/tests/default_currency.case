@@ -32,8 +32,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_currencies</td>
 	<td></td>
 </tr>
 <tr>
@@ -47,7 +52,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>icon_cross_curr_upd_enable_2</td>
 	<td></td>
 </tr>
@@ -57,42 +62,42 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>icon_cross_curr_upd_enable_19</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>USD_exchange_rate</td>
 	<td>1.0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>EUR_exchange_rate</td>
-	<td>0.73853104</td>
+	<td>0.5</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>GBP_exchange_rate</td>
 	<td>1.0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>BRL_exchange_rate</td>
 	<td>1.0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>icon_chech_curr_upd_disable_18</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>icon_cross_curr_upd_enable_19</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>icon_cross_curr_upd_enable_2</td>
 	<td></td>
 </tr>
@@ -122,32 +127,32 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>EUR_exchange_rate</td>
-	<td>0.73853104</td>
+	<td>0.5</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>GBP_exchange_rate</td>
 	<td>1.0</td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>BRL_exchange_rate</td>
 	<td>0.0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>icon_cross_curr_upd_enable_19</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>icon_chech_curr_upd_disable_18</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>USD_exchange_rate</td>
 	<td>1.0</td>
 </tr>
@@ -167,18 +172,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>id=icon_cross_curr_active_3</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/users/personal_details</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=USD</td>
 </tr>
 <tr>
@@ -192,7 +192,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>USD</td>
 	<td></td>
 </tr>
@@ -203,7 +203,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=EUR</td>
 </tr>
 <tr>
@@ -217,7 +217,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>EUR</td>
 	<td></td>
 </tr>
@@ -228,7 +228,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=GBP</td>
 </tr>
 <tr>
@@ -242,7 +242,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>GBP</td>
 	<td></td>
 </tr>
@@ -253,7 +253,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=HRK</td>
 </tr>
 <tr>
@@ -267,7 +267,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>HRK</td>
 	<td></td>
 </tr>
@@ -293,7 +293,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=EUR</td>
 </tr>
 <tr>
@@ -307,7 +307,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>User's settings succesfully changed: Test User #1</td>
 	<td></td>
 </tr>
@@ -332,7 +332,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -342,7 +342,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>EUR</td>
 	<td></td>
 </tr>
@@ -367,7 +367,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -378,7 +378,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=ALL</td>
 </tr>
 <tr>
@@ -392,7 +392,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>User's settings succesfully changed: Test User #1</td>
 	<td></td>
 </tr>
@@ -417,7 +417,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -427,7 +427,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>ALL</td>
 	<td></td>
 </tr>
@@ -452,7 +452,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -463,7 +463,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=HRK</td>
 </tr>
 <tr>
@@ -477,7 +477,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>User's settings succesfully changed: Test User #1</td>
 	<td></td>
 </tr>
@@ -502,7 +502,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -512,7 +512,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>HRK</td>
 	<td></td>
 </tr>
@@ -537,7 +537,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -582,7 +582,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -593,7 +593,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=EUR</td>
 </tr>
 <tr>
@@ -607,7 +607,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>EUR</td>
 	<td></td>
 </tr>
@@ -618,7 +618,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=HRK</td>
 </tr>
 <tr>
@@ -632,7 +632,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>HRK</td>
 	<td></td>
 </tr>
@@ -643,7 +643,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=ALL</td>
 </tr>
 <tr>
@@ -657,7 +657,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>ALL</td>
 	<td></td>
 </tr>
@@ -668,7 +668,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=USD</td>
 </tr>
 <tr>
@@ -682,7 +682,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>USD</td>
 	<td></td>
 </tr>
@@ -707,7 +707,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -757,7 +757,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -808,7 +808,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=EUR</td>
 </tr>
 <tr>
@@ -842,7 +842,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -852,7 +852,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>EUR</td>
 	<td></td>
 </tr>
@@ -877,7 +877,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -888,7 +888,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=ALL</td>
 </tr>
 <tr>
@@ -922,7 +922,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -932,7 +932,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>ALL</td>
 	<td></td>
 </tr>
@@ -957,7 +957,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -968,7 +968,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=HRK</td>
 </tr>
 <tr>
@@ -1002,7 +1002,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -1012,7 +1012,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>HRK</td>
 	<td></td>
 </tr>
@@ -1037,7 +1037,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -1048,7 +1048,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_currency_id</td>
+	<td>id=user[currency_id]</td>
 	<td>label=USD</td>
 </tr>
 <tr>
@@ -1082,7 +1082,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -1092,7 +1092,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>USD</td>
 	<td></td>
 </tr>
@@ -1117,8 +1117,48 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ratedetail_rate</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tariff[currency]</td>
+	<td>label=LABAS</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -1152,6 +1192,26 @@
 	<td>Yahoo</td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Update currencies from web</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Currencies rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cur_edit_143</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Error updating currency</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/currencies/change_default</td>
 	<td></td>
@@ -1169,6 +1229,16 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Currencies rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariffs</td>
 	<td></td>
 </tr>
 </tbody></table>
