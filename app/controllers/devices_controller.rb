@@ -2236,7 +2236,7 @@ class DevicesController < ApplicationController
 
 
   def check_with_integrity
-    session[:integrity_check] = Device.integrity_recheck_devices if current_user and  current_user.usertype == 'admin'
+    session[:integrity_check] = Device.integrity_recheck_devices if current_user and  current_user.usertype.to_s == 'admin'
   end
 
 end
