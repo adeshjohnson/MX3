@@ -19,17 +19,17 @@
       <br/>
       <%= _("User") %>:
       <% options = @users.map{|u| [nice_user(u), u.id.to_s]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @users.size > 1 %> 
+      <% options.insert(0, [_('All'), "all"]) if @users.size > 0 %> 
       <%= select_tag("s_user", options_for_select(options, @options[:s_user].to_s)) %> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _('Device') %>:
       <% options = @devices.map{|dev| [nice_device(dev, {:image => false}) ,dev.id.to_s ]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @devices.size > 1 %> 
+      <% options.insert(0, [_('All'), "all"]) if @devices.size > 0 %> 
       <span id="s_device_span"><%= select_tag("s_device", options_for_select(options, @options[:s_device].to_s), :disabled => @devices.empty?) %></span> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _("DID") %>:
       <% options = @dids.map{|d| [d.did, d.id.to_s]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @dids.size > 1 %> 
+      <% options.insert(0, [_('All'), "all"]) if @dids.size > 0 %> 
       <%= select_tag("s_did", options_for_select(options, @options[:s_did].to_s), :disabled => @dids.empty?) %> 
       <%= text_field_tag("s_did_pattern", @options[:s_did_pattern].to_s, :disabled => (@options[:s_did].to_s != 'all')) %> 
       <script type='text/javascript'> 
@@ -52,21 +52,21 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _('Provider') %>:
       <% options = @providers.map{|p| [p.name, p.id]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @providers.size > 1 %> 
+      <% options.insert(0, [_('All'), "all"]) if @providers.size > 0 %> 
       <%= select_tag("s_provider", options_for_select(options, @options[:s_provider].to_i), :disabled => @providers.empty?)  %> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <br/>
       <br/>
       <%= _('Reseller') %>:
       <% options = @resellers.map{|u| [nice_user(u), u.id]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @resellers.size > 1 %> 
+      <% options.insert(0, [_('All'), "all"]) if @resellers.size > 0 %> 
       <%= select_tag("s_reseller", options_for_select(options, @options[:s_reseller].to_i), :disabled => @resellers.empty?)  %> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _('Caller_ID') %>:
       <%= text_field_tag("s_caller_id", h(@options[:caller_id].to_s)) %>
       <%= _('Reseller_in_any_dids') %>
       <% options = @resellers.map{|u| [nice_user(u), u.id]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @resellers.size > 1 %> 
+      <% options.insert(0, [_('All'), "all"]) if @resellers.size > 0 %> 
       <%= select_tag("s_reseller", options_for_select(options, @options[:s_reseller].to_i), :disabled => @resellers.empty?)  %> 
       <br/>
       <br/>

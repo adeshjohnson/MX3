@@ -19,7 +19,7 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _('Device') %>:
       <% options = @devices.map{|dev| [nice_device(dev, {:image => false}) ,dev.id.to_s ]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @devices.size > 1 %> 
+      <% options.insert(0, [_('All'), "all"]) if @devices.size > 0 %> 
       <span id="s_device_span"><%= select_tag("s_device", options_for_select(options, @options[:s_device].to_s), :disabled => @devices.empty?) %></span> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _("Destination") %>:

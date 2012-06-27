@@ -15,17 +15,17 @@
       <br/>
       <%= _("User") %>:
       <% options = @users.map{|u| [nice_user(u), u.id.to_s]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @users.size > 1 %> 
+      <% options.insert(0, [_('All'), "all"]) if @users.size > 0 %> 
       <%= select_tag("s_user", options_for_select(options, @options[:s_user].to_s)) %> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _('Device') %>:
       <% options = @devices.map{|dev| [nice_device(dev, {:image => false}) ,dev.id.to_s ]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @devices.size > 1 %> 
+      <% options.insert(0, [_('All'), "all"]) if @devices.size > 0 %> 
       <span id="s_device_span"><%= select_tag("s_device", options_for_select(options, @options[:s_device].to_s), :disabled => @devices.empty?) %></span> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _("DID") %>:
       <% options = @dids.map{|d| [d.did, d.id.to_s]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @dids.size > 1 %> 
+      <% options.insert(0, [_('All'), "all"]) if @dids.size > 0 %> 
       <%= select_tag("s_did", options_for_select(options, @options[:s_did].to_s), :disabled => @dids.empty?) %> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <br/>
@@ -47,7 +47,7 @@
       <% if current_user.reseller_allow_providers_tariff? %>
           <%= _('Provider') %>:
           <% options = @providers.map{|p| [p.name, p.id]} %> 
-          <% options.insert(0, [_('All'), "all"]) if @providers.size > 1 %> 
+          <% options.insert(0, [_('All'), "all"]) if @providers.size > 0 %> 
           <%= select_tag("s_provider", options_for_select(options, @options[:s_provider].to_i), :disabled => @providers.empty?)  %> 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <% end %>
