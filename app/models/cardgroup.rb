@@ -295,7 +295,7 @@ class Cardgroup < ActiveRecord::Base
         when 'sold'
           s << 0
         when 'language'
-          s << '"eng"'
+          s << '"en"'
         else
           s << 'replace(col_' + (options["imp_#{col}".to_sym]).to_s + ", '\\r', '')"
       end
