@@ -4430,6 +4430,8 @@ Localization.define('en') do |l|
   l.store 'Spy_device_is_registered_on_different_server_than_this_call', 'Spy Device is registered on different Server than this Call. Spying on this Call is not possible.'
   l.store 'Can_not_spy_virtual_device', 'Can not spy virtual device'
   l.store 'Calculate_zero_price_calls_into_invoices', 'Calculate 0 price Calls into Invoices'
+  l.store 'User_has_empty_balance', 'User has empty balance' 
+  l.store 'User_has_no_credit_left', 'User has no credit left' 
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

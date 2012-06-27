@@ -158,10 +158,18 @@ class AutodialerController < ApplicationController
     else
       flash[:notice] = _('No_actions_for_campaign') + ": " + @campaign.name if @campaign.adactions.size == 0
       flash[:notice] = _('No_free_numbers_for_campaign') + ": " + @campaign.name if @campaign.new_numbers_count == 0
+      #note the order in whitch we are checking whether campaing will be able to start 
+      #dont change it without any reason(ticket #2594) 
+      error_msg = _('User_has_no_credit_left') if @campaign.user_has_no_credit? 
+      error_msg = _('User_has_empty_balance') if @campaign.user_has_no_balance? 
+      error_msg = _('User_is_blocked') if @campaign.user_blocked? 
+      flash[:notice] = error_msg if error_msg 
 
-      if @campaign.adactions.size > 0 and @campaign.new_numbers_count > 0
+      if @campaign.adactions.size > 0 and @campaign.new_numbers_count > 0 and !@campaign.user_has_no_credit? and !@campaign.user_has_no_balance? and !@campaign.user_blocked?
         @campaign.status = "enabled"
         flash[:status] = _('Campaign_started') + ": " + @campaign.name
+      else 
+        Action.add_action_hash(current_user, :target_type => 'campaign', :action => "failed_ad_campaign_activation", :target_id => @campaign.id, :data2 => error_msg) 
       end
     end
     if @campaign.save
