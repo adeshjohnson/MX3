@@ -91,7 +91,7 @@ class CurrenciesController < ApplicationController
       end
       @currency.update_rate
       if @currency.exchange_rate == 0 
-        flash[:status] = _('Yahoo_could_not_find_currency') 
+        flash[:notice] = _('Yahoo_could_not_find_currency') 
         redirect_to :action => 'currencies' and return false 
       end 
     end
