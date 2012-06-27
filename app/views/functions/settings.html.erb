@@ -397,6 +397,11 @@
               <td><%= check_box_tag 'api_payment_confirmation', 1, (Confline.get_value("API_payment_confirmation").to_i == 1) %> </td>
             </tr>
         <% end %>
+        <tr>
+          <td width="30"></td>
+          <td><b><%= _('Uniquehash')%>:</b></td>
+          <td id="uniquehash"><%=current_user.uniquehash%></td>
+        </tr>
       </table>
     </div>
     <% ["functionality", "privacy", "visual"].each { |tab| %>
