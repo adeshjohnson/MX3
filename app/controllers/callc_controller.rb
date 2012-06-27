@@ -281,6 +281,7 @@ class CallcController < ApplicationController
       redirect_to :action => "logout" and return false
     end
     session[:integrity_check] = current_user.integrity_recheck_user
+    session[:integrity_check] = Device.integrity_recheck_devices if session[:integrity_check].to_i == 0
     @username = nice_user(@user)
 
     if Confline.get_value("Hide_quick_stats").to_i == 0
