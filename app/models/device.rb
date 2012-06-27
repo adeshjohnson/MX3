@@ -1186,4 +1186,9 @@ class Device < ActiveRecord::Base
     @cid_number = value
   end
 
+
+  def Device.integrity_recheck_devices
+    Device.count(:all, :conditions =>  "host='dynamic' and insecure like '%invite%'").to_i > 0 ? 1 : 0
+  end
+
 end

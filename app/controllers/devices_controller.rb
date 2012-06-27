@@ -2044,6 +2044,20 @@ class DevicesController < ApplicationController
     session[:devices_devices_weak_passwords_options] = @options
   end
 
+  def insecure_devices
+    @page_title = _('Insecure_Devices')
+    #@page_icon = "edit.png"
+    #@help_link = "http://wiki.kolmisoft.com/index.php/Default_device_settings"
+    session[:devices_insecure_devices_options] ? @options = session[:devices_insecure_devices_options] : @options = {}
+    params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page] or @options[:page] <= 0)
+
+    @total_pages = (Device.count(:all, :conditions =>  "host='dynamic' and insecure like '%invite%'").to_f/session[:items_per_page].to_f).ceil
+    @options[:page] = @total_pages.to_i if @total_pages.to_i < @options[:page].to_i and @total_pages > 0
+
+    @devices = Device.find(:all, :include=>[:user], :conditions => "host='dynamic' and insecure like '%invite%'")
+    session[:devices_insecure_devices_options] = @options
+  end
+
   private
 
 =begin
@@ -2217,6 +2231,11 @@ class DevicesController < ApplicationController
     else
       flash[:notice] = _('Please_select_user')
     end
+  end
+
+
+  def check_with_integrity
+    session[:integrity_check] = Device.integrity_recheck_devices if current_user and  current_user.usertype == 'admin'
   end
 
 end

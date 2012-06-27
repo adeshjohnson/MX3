@@ -46,6 +46,11 @@
     <td align="right" id="pospaid_and_loss_calls_size">        <%= @users_postpaid_and_loss_calls.size %> </td>
     <td align="center" id="fix_devices">        <%= link_to b_fix + _('Fix'), :controller => "users", :action => "users_postpaid_and_allowed_loss_calls" if @users_postpaid_and_loss_calls.size > 0 %> </td>
   </tr>
+  <tr <%= @insecure_devices.size > 0 ? "class='red'" : "class='row#{row_count%2+1}'" %> >
+    <td align="left" id="allow_loss_calls">        <%= _('Insecure_Devices') %> </td>
+    <td align="right" id="pospaid_and_loss_calls_size">        <%= @insecure_devices.size %> </td>
+    <td align="center" id="fix_devices">        <%= link_to b_fix + _('Fix'), :controller => "devices", :action => "insecure_devices" if @insecure_devices.size > 0 %> </td>
+  </tr>
 </table>
 <br/>
 <br/>
