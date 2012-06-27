@@ -106,13 +106,13 @@
         <th id="default_column"><%= _('Default') %></th>
       </tr>
       <tr class="row1">
-        <td>   <%= _('Prefix') %>/<%= _('NPANXX') %>  </td>
+        <td>   <%= _('Prefix') %>/<%= _('NPANXX') %>*  </td>
         <%= render :partial => "import_csv_step_2_select", :locals => {:name => "prefix_id", :value => :imp_prefix} %>
         <td></td>
         <td id="prefix_npanxx_value"></td>
       </tr>
       <tr>
-        <td>   <%= _('Rate') %>  </td>
+        <td>   <%= _('Rate') %>*  </td>
         <%= render :partial => "import_csv_step_2_select", :locals => {:name => "rate_id", :value => :imp_rate} %>
         <td></td>
         <td id="rate_value"></td>
@@ -208,3 +208,38 @@
 <% end %>
 <br/>
 <%= _('Next_step') + ": " + _('Column_confirmation') %>
+<script type='text/javascript'>
+  Event.observe(window, 'load', function() {
+    //select element ids that are required to be selected.
+    //if you ever add new required select element add it's id to this 
+    //assoc array and set it to false(eg smth_id: false). Note that 
+    //'not selected' value should be -1
+    var required_options = {'prefix_id': false, 'rate_id': false}
+
+    validate_selected_options = function(event){
+      var disable = false;
+      required_options[event.target.id] = (event.target.value != '-1');
+      //alert(required_options['prefix_id'] + ' ' + required_options['rate_id']);
+      for(key in required_options){
+        //alert(key + ': ' + !required_options[key]);
+        if(!required_options[key]){
+          disable = true;       
+          break;
+        }
+      }
+      //alert(disable);
+      $('submit_button').disabled = disable;
+    }
+
+    var element_name;
+    //add event listener to select that is required, note that 'not selected' value is -1
+    //and in case(on reaload for instance) browser would change to smth other value, 
+    //we set it to -1 again.
+    for(element_name in required_options){
+      $(element_name).value = '-1'
+      Event.observe($(element_name), 'change', validate_selected_options);
+    }
+
+    $('submit_button').disabled = true;
+  });
+</script>
