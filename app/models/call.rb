@@ -1728,6 +1728,21 @@ class Call < ActiveRecord::Base
       var << '%' + options[:caller_id] + '%'
     end
     # this is nasty but oh well.
+    
+    unless options[:s_card_number].to_s.strip.blank?
+      cond << "cards.number = ?"
+      var << options[:s_card_number]
+    end
+
+    unless options[:s_card_pin].to_s.strip.blank?
+      cond << "cards.pin = ?"
+      var << options[:s_card_pin]
+    end
+
+    unless options[:s_card_id].to_s.strip.blank?
+      cond << "calls.card_id = ?"
+      var << options[:s_card_id]
+    end
 
     return cond, var, jn
   end

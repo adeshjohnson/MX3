@@ -4440,6 +4440,8 @@ Localization.define('en') do |l|
   l.store 'before_trying_to_login', 'before trying to login'
   l.store 'second', 'second'
   l.store 'seconds', 'seconds'
+  l.store 'Card_id', 'Card ID'
+  l.store 'Card_pin', 'Card PIN'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

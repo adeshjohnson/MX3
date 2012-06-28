@@ -68,6 +68,16 @@
       <% options = @resellers.map{|u| [nice_user(u), u.id]} %> 
       <% options.insert(0, [_('All'), "all"]) if @resellers.size > 0 %> 
       <%= select_tag("s_reseller", options_for_select(options, @options[:s_reseller].to_i), :disabled => @resellers.empty?)  %> 
+      <% if cc_active? %>
+        <br/>
+        <br/>
+        <%= _('Card_number') %>:
+        <%= text_field_tag("s_card_number", h(@options[:s_card_number].to_s)) %>
+        <%= _('Card_pin') %>:
+        <%= text_field_tag("s_card_pin", h(@options[:s_card_pin].to_s)) %>
+        <%= _('Card_id') %>:
+        <%= text_field_tag("s_card_id", h(@options[:s_card_id].to_s)) %>
+      <% end %>
       <br/>
       <br/>
        <%= submit_tag _('Search'), :disable_with => _('Processing..') %>

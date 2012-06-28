@@ -103,7 +103,7 @@
         <td id="lang_<%= card.id %>" align="center"><%= card.language %></td>
         <td id="user_<%= card.id %>" align="left"><%= link_nice_user(card.user) if card.user_id != -1 and card.user %></td>
         <td id="payments_<%= card.id %>" align="center"><%= link_to(b_payments, {:controller => 'cards', :action => 'payments', :id => card.id}, {:id => "payments_link_"+ card.id.to_s}) %></td>
-        <td id="calls_<%= card.id %>" align="center"><%= link_to(b_call, {:controller => 'stats', :action => 'cc_call_list', :id => card.id}, {:id => "calls_link_"+ card.id.to_s}) %>
+        <td id="calls_<%= card.id %>" align="center"><%= link_to(b_call, {:controller => 'stats', :action => 'last_calls_stats', :s_card_id => card.id}, {:id => "calls_link_"+ card.id.to_s}) %>
           (<%= card.call_count %>)
         </td>
         <% if @allow_manage == true %>
