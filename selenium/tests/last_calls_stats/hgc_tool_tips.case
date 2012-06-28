@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/calls_with_various_hgc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_211</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>200 - MOR cannot determine who is calling</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_211</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_212</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>201 - User is blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_212</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_213</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>202 - Reseller is blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_213</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_214</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>203 - No rates for user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_214</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_215</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>204 - No suitable providers found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_215</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_216</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>205 - MOR not authorized to work on this computer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_216</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_217</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>206 - server_id is not set in mor.conf file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_217</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_218</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>207 - Not clear who should receive call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_218</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_219</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>209 - Test time exceeded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_219</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_220</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>210 - Balance &gt; 0, but not enough to make call 1s in length</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_220</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_221</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>211 - Low balance for user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_221</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_222</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>212 - Too low balance for more simultaneous calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_222</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_223</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>213 - Low balance for DID owner</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_223</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_224</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>214 - Too low balance for DID owner for more simultaneous calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_224</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_225</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>215 - Low balance for reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_225</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_226</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>216 - Too low balance for reseller for more simultaneous calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_226</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_227</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>217 - Callback not initiated because device not found by ANI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_227</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_228</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>218 - Reseller does not allow loss calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_228</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_229</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>219 - DID has reached call limit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_229</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_230</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>220 - User call limit reached</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_230</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_231</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>221 - Device call limit reached</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_231</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_232</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>222 - Resellers call limit reached</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_232</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_233</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>223 - Providers call limit reached</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_233</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_234</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>224 - Provider skipped because his rate is higher then users rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_234</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_235</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>225 - CallerID is banned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_235</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_236</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>226 - DID is free</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_236</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_237</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>227 - Calling Card PIN is not entered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_237</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_238</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>228 - Calling Card Destination is not entered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_238</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_239</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>229 - DID is reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_239</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_240</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>230 - Connection returned error code 0 instead of real code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_240</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_241</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>231 - Provider unreachable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_241</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_242</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>232 - Callback DID not available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_242</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_243</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>233 - Skype Addon Disabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_243</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_244</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>234 - Internal Loop</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_244</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_245</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>235 - Providers rate higher by percent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_245</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_246</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>236 Callback initiation too early</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_246</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_247</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>237 - DID User is blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_247</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_248</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>238 - Provider used its daily call time limit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_248</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_249</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>239 - Device used its daily call time limit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_249</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>disposition_250</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>240 - Provider belongs to the User which makes call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>disposition_250</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
