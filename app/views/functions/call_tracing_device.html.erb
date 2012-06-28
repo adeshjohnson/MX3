@@ -297,6 +297,7 @@ else
 end
 rez
 ) } %>
+<% users_own_provider = false %> 
 <% @res_prov.each_with_index { |r, i| %>
     <% unless @hide_lcrs_and_providers %>
         <% prov = Provider.find_by_id(r['providers_id']) %>
@@ -325,9 +326,14 @@ rez
           <td align="right" id="min_time_<%= r['providers_id'] %>" class="<%= text_class %>"><%= r['min_time'] %></td>
           <td align="right" id="round_<%= r['providers_id'] %>" class="<%= text_class %>"><%= r['increment_s'] %></td>
           <td align="right" id="price_<%= r['providers_id'] %>" class="<%= text_class %>">
+          <% if @user.id.to_i == r['user_id'].to_i %> 
+             <% users_own_provider = true %> 
+             <span <%= tooltip _('Provider_assigned_to_this_user'), _('Provider_assigned_to_this_user_explained') %>> <%= b_user %> </span> 
+          <% else %> 
             <%= long_nice_number(r['rate'].to_f / r['e_rate'].to_f) if r['rate'] and r['prefix'] %>
             <%= b_exclamation if not r['rate'] or not r['prefix'] %>
             <%= b_cross if @loss %>
+          <% end %> 
           </td>
         </tr>
     <% end %>
@@ -346,6 +352,10 @@ rez
         <% end %>
     <% end %>
 <% end %>
+
+<% if users_own_provider %> 
+  <div> <%= b_user + _('Provider_assigned_to_this_user_explained') %> </div> 
+<% end %> 
 
 <% if @res_prov.size != @active_prov %>
     <% unless @hide_lcrs_and_providers %>

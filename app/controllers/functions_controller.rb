@@ -678,6 +678,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       rr['providers_id'] = prov.id
       rr['tech'] = prov.tech
       rr['server_ip'] = prov.server_ip
+      rr['user_id'] = prov.device.user_id 
 
       sql = "SELECT `add`, cut FROM providerrules WHERE provider_id = #{prov.id} AND enabled = 1 AND pr_type = 'dst' AND LENGTH('#{dst}') BETWEEN minlen AND maxlen AND (SUBSTRING('#{dst}',1,LENGTH(cut)) = cut OR LENGTH(cut) = 0 OR ISNULL(cut)) ORDER BY LENGTH(cut) DESC LIMIT 1;"
       res = ActiveRecord::Base.connection.select_one(sql)
@@ -774,7 +775,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
 
       @res_prov << rr
       @not_disabled_prov += 1 if prov.active?(@lcr.id) == 1
-      @active_prov += 1 if rr['rate'] and rr['prefix'] and prov.active?(@lcr.id) == 1
+      @active_prov += 1 if rr['rate'] and rr['prefix'] and prov.active?(@lcr.id) == 1 and (prov.device.user_id.to_i != @user.id.to_i or !mor_11_extend?) 
 
     end
 

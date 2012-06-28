@@ -4434,6 +4434,8 @@ Localization.define('en') do |l|
   l.store 'User_has_no_credit_left', 'User has no credit left'
   l.store 'Insecure_Devices_explanation', 'List of devices which has Dynamic IP and Insecure Invite options enabled. Such combination allows to make call with incorrect device password.'
   l.store 'Insecure_Devices', 'Insecure Devices'
+  l.store 'Provider_assigned_to_this_user_explained', 'Provider is assigned to this User. Calls over such Providers are not possible.' 
+  l.store 'Provider_assigned_to_this_user', 'Provider is assigned to this User.' 
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
