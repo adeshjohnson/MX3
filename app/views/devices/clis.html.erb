@@ -22,13 +22,15 @@
         <option value="0"><%= _('Not_banned') %> </option>
         <option value="1"><%= _('Banned') %> </option>
       </select>
-      <%= _('IVR') %>:
-      <select name="ivr">
-        <option value="0" <%= "selected" %>><%= _('Not_assigned') %> </option>
-        <% for iv in @all_ivrs %>
-            <option value="<%= iv.id %>" <%= "selected" if iv.id.to_i == Confline.get_value("Banned_CLIs_default_IVR_id", 0).to_i %>><%= iv.name %> </option>
-        <% end %>
-      </select>
+      <% if allow_manage_providers? or current_user.usertype != 'reseller' %>
+          <%= _('IVR') %>:
+          <select name="ivr">
+            <option value="0" <%= "selected" %>><%= _('Not_assigned') %> </option>
+            <% for iv in @all_ivrs %>
+                <option value="<%= iv.id %>" <%= "selected" if iv.id.to_i == Confline.get_value("Banned_CLIs_default_IVR_id", 0).to_i %>><%= iv.name %> </option>
+            <% end %>
+          </select>
+      <% end %>
       <%= _('User') %>:
       <select name="user" id="user">
         <option value="-1" <%= "selected" if @search_user == nil or (@search_user.to_i == -1) %>><%= _('Select_user') %> </option>
@@ -79,13 +81,15 @@
                   <option value="1" <%= "selected" if (@search_email_callback.to_i == 1) %>><%= _('Use_for_Email_Callback') %> </option>
                 </select>
             <% end %>
-            <%= _('IVR') %>:
-            <select name="s_ivr">
-              <option value="-1" <%= "selected" if @search_ivr == nil or (@search_ivr.to_i == -1) %>><%= _('All') %> </option>
-              <% for iv in @ivrs %>
-                  <option value="<%= iv.id %>" <%= "selected" if @search_ivr == iv.id %>><%= iv.name %> </option>
-              <% end %>
-            </select>
+            <% if allow_manage_providers? or current_user.usertype != 'reseller' %>
+                <%= _('IVR') %>:
+                <select name="s_ivr">
+                  <option value="-1" <%= "selected" if @search_ivr == nil or (@search_ivr.to_i == -1) %>><%= _('All') %> </option>
+                  <% for iv in @ivrs %>
+                      <option value="<%= iv.id %>" <%= "selected" if @search_ivr == iv.id %>><%= iv.name %> </option>
+                  <% end %>
+                </select>
+            <% end %>
 
             <%= _('User') %>:
             <select name="s_user" id="s_user">
@@ -127,7 +131,9 @@
     <th><%= _('Description') %></th>
     <th align="center"><%= _('Added_at') %></th>
     <th align="center"><%= _('Updated_at') %></th>
-    <th><%= _('Ivr') %></th>
+    <% if allow_manage_providers? or current_user.usertype != 'reseller' %>
+        <th><%= _('Ivr') %></th>
+    <% end %>
     <th><%= _('Comment') %></th>
     <% if callback_active? %>
         <th align="center">     <%= _('Use_for_Email_Callback') %>         </th>
@@ -144,7 +150,9 @@
         <td><%= cl.description %></td>
         <td align="center"><%= nice_date_time(cl.added_at) %></td>
         <td align="center"><%= nice_date_time(cl.updated_at) %></td>
-        <td><%= cl.ivr_name %></td>
+        <% if allow_manage_providers? or current_user.usertype != 'reseller' %>
+            <td><%= cl.ivr_name %></td>
+        <% end %>
         <td><%= cl.comment.to_s %></td>
         <% if callback_active? %>
             <td align="center">
