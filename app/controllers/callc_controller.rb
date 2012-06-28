@@ -27,6 +27,10 @@ class CallcController < ApplicationController
   end
 
   def login
+    @show_login  = params[:shl].to_i
+    @u = params[:u].to_s
+
+
     if params[:id]
       @owner = User.find(:first, :conditions => ["users.uniquehash = ?", params[:id]])
     end
@@ -175,10 +179,10 @@ class CallcController < ApplicationController
       add_action2(0, "bad_login", @username.to_s + "/" + @psw.to_s, request.env["REMOTE_ADDR"].to_s)
 
       us = User.find(:first, :conditions => ["users.id = ?", session[:login_id]])
-
       u_hash = us ? us.uniquehash : ''
       flash[:notice] = _('bad_login')
-      redirect_to :action => "login", :id => u_hash and return false
+      show_login = Action.disable_login_check(request.env["REMOTE_ADDR"].to_s).to_i == 0 ? 1 : 0
+      redirect_to :action => "login", :id=>u_hash, :shl=>show_login, :u=>@username and return false
     end
   end
 

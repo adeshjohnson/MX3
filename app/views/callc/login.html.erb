@@ -1,10 +1,101 @@
+<div id="spinner3" style="display: none;" xmlns="http://www.w3.org/1999/html">
+  <b><span><%= image_tag "290.gif", :style => "padding-left: 40%; padding-top: 10%;margin-bottom: -22px; padding-right:10px;" %>   </span>
+    <span><%= _('Please_wait') %> <span id='javascript_countdown_time'></span>  <span id='javascript_countdown_seconds'></span> <%= _('before_trying_to_login') %> </span>
+  </b>
+</div>
+
+<%if @show_login.to_i == 1%>
+    <script type='text/javascript'>
+
+
+        var javascript_countdown = function () {
+            var time_left = 10; //number of seconds for countdown
+            var output_element_id = 'javascript_countdown_time';
+            var output_seconds_element_id = 'javascript_countdown_seconds';
+            var keep_counting = 1;
+            var no_time_left_message = 0;
+
+            function countdown() {
+                if(time_left < 2) {
+                    keep_counting = 0;
+                }
+
+                time_left = time_left - 1;
+            }
+            function format_output() {
+                var  seconds;
+                seconds = time_left % 60;
+                return seconds;
+            }
+
+            function show_time_left() {
+                document.getElementById(output_element_id).innerHTML = format_output();//time_left;
+            }
+
+            function show_seconds() {
+                var s, seconds;
+                seconds = time_left % 60;
+                if  (seconds < 2){
+                    s = '<%=_('second') %>' ;
+                }   else{
+                    s = '<%=_('seconds') %>' ;
+                }
+                document.getElementById(output_seconds_element_id).innerHTML = s;//time_left;
+            }
+
+            function no_time_left() {
+                document.getElementById(output_element_id).innerHTML = no_time_left_message;
+
+            }
+
+            return {
+                count: function () {
+                    countdown();
+                    show_time_left();
+                    show_seconds();
+                },
+                timer: function () {
+                    javascript_countdown.count();
+
+                    if(keep_counting) {
+                        setTimeout("javascript_countdown.timer();", 1000);
+                        $('login_info').style.display= 'none';
+                        $('spinner3').style.display= '';
+
+                    } else {
+                        no_time_left();
+                        $('login_info').style.display= '';
+                        $('spinner3').style.display= 'none';
+                        $('login_username').value= '<%= @u %>';
+
+                    }
+                },
+
+                setTimeLeft: function (t) {
+                    time_left = t;
+                    if(keep_counting == 0) {
+                        javascript_countdown.timer();
+                    }
+                },
+                init: function (t, element_id) {
+                    time_left = t;
+                    output_element_id = element_id;
+                    javascript_countdown.timer();
+                }
+            };
+        }();
+
+        javascript_countdown.init(10, 'javascript_countdown_time');
+    </script>
+<%end%>
+
 <script type="text/javascript">
     window.onload = function () {
         document.getElementById('login_username').focus();
     }
 </script>
 
-<center style="height:500px">
+<center style="height:500px" id='login_info'>
   <table class="simple">
     <tr>
       <td height="25"></td>

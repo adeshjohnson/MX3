@@ -38,7 +38,7 @@ class ApiController < ApplicationController
     check_user(params[:u], params[:p])
     login_ok = false
     if @user
-      add_action(@user.id, "login", "")
+      add_action(@user.id, "login", request.env["REMOTE_ADDR"].to_s)
 
       @user.logged = 1
       @user.save
@@ -58,10 +58,16 @@ class ApiController < ApplicationController
       end
 
     else
+      add_action2(0, "bad_login", params[:u].to_s + "/" +  params[:p].to_s, request.env["REMOTE_ADDR"].to_s)
       doc.action {
         doc.name("login")
         doc.status("failed")
-        doc.status_message("Login failed")
+
+        if Action.disable_login_check(request.env["REMOTE_ADDR"].to_s).to_i == 0
+          doc.status_message("Please wait 10 seconds before trying to login again")
+        else
+          doc.status_message("Login failed")
+        end
       }
     end
     if Confline.get_value("API_Login_Redirect_to_Main").to_i == 1 and login_ok
