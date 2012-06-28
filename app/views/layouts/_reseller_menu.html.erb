@@ -52,7 +52,8 @@
     <% end %>
     reseller_menu.add(60, 0, '<%= _('Users') %>', '<%= Web_Dir %>/users/list');
     reseller_menu.add(61, 60, '<%= _('Devices') %>', '<%= Web_Dir %>/devices/devices_all');
-    reseller_menu.add(62, 60, '<%= _('Hidden') %>', '<%= Web_Dir %>/users/hidden');
+    reseller_menu.add(62,61,'<%= _('CLIs') %>','<%= Web_Dir %>/devices/clis');
+    reseller_menu.add(63,60,'<%= _('Hidden') %>','<%= Web_Dir %>/users/hidden');
 
     reseller_menu.add(80, 0, '<%= _('Calls') %>', '<%= Web_Dir %>/stats/last_calls_stats');
     reseller_menu.add(81, 80, '<%= _('Graphs') %>', '<%= Web_Dir %>/stats/reseller_all_user_stats', '', '', '<%= Web_Dir %>/assets/dtree/chart.gif');

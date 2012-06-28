@@ -914,7 +914,7 @@ class DevicesController < ApplicationController
     @device = @cli.device
     #  check_owner_for_device(@device.user)
     @user = @device.user
-    unless @user and @user.id == session[:user_id].to_i or @user.owner_id == session[:user_id].to_i or session[:usertype] == "admin" or session[:usertype] == "accountant"
+    unless @user and @user.id == session[:user_id].to_i or @user.owner_id == session[:user_id].to_i or session[:usertype] == "admin" or session[:usertype] == "accountant" or session[:usertype] == "reseller"
       dont_be_so_smart
       redirect_to :controller => "callc", :action => "main" and return false
     end
@@ -1055,7 +1055,11 @@ class DevicesController < ApplicationController
 
     #MorLog.my_debug @clis.to_yaml
 
-    @users = User.find(:all)
+    if session[:usertype] == "reseller"
+      @users = User.find(:all, :conditions => "owner_id = '#{current_user.id}'" )
+    else
+      @users = User.find(:all)
+    end
 
     sql2="SELECT DISTINCT(callerids.ivr_id), ivrs.name FROM ivrs
           LEFT JOIN callerids ON (ivrs.id = callerids.ivr_id)"
