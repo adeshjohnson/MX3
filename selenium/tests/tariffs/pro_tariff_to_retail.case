@@ -32,7 +32,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -148,6 +148,11 @@
 	<td>20</td>
 </tr>
 <tr>
+	<td>assertElementPresent</td>
+	<td>link=Back to Tariffs</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -158,9 +163,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>link=Test Tariff</td>
 	<td>Test Tariff</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Back to Tariffs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back to Tariffs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=maker_retail_1</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -168,7 +188,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>name_6</td>
 	<td>Test Tariff + 10 + 20%</td>
 </tr>
@@ -209,24 +229,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate2</td>
-	<td>3.0</td>
+	<td>3</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate473</td>
-	<td>5.0</td>
+	<td>5</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate4</td>
-	<td>22.0</td>
+	<td>22</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate474</td>
-	<td>4.0</td>
+	<td>4</td>
 </tr>
 <!--set tariffs-->
 <tr>
@@ -352,42 +372,42 @@
 <tr>
 	<td>waitForValue</td>
 	<td>rate2</td>
-	<td>3.0</td>
+	<td>3</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate473</td>
-	<td>5.0</td>
+	<td>5</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate4</td>
-	<td>9.0</td>
+	<td>9</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate474</td>
-	<td>4.0</td>
+	<td>4</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate10</td>
-	<td>7.0</td>
+	<td>7</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate14</td>
-	<td>3.0</td>
+	<td>3</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate475</td>
-	<td>6.0</td>
+	<td>6</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate476</td>
-	<td>4.0</td>
+	<td>4</td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
@@ -421,27 +441,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>from_237</td>
 	<td>1</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>from_238</td>
 	<td>1</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>duration_238</td>
-	<td>Infinity ?</td>
+	<td>Infinity?</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>duration_237</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>type_237</td>
 	<td>event</td>
 </tr>
@@ -451,7 +471,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>round_237</td>
 	<td></td>
 </tr>
@@ -471,12 +491,12 @@
 	<td>132.0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>//input[@type='image']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>//img[@alt='Delete']</td>
 	<td></td>
 </tr>
@@ -526,44 +546,44 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate2</td>
-	<td>3.0</td>
+	<td>3</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate473</td>
-	<td>5.0</td>
+	<td>5</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate4</td>
-	<td>9.0</td>
+	<td>9</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate474</td>
-	<td>4.0</td>
+	<td>4</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate10</td>
-	<td>7.0</td>
+	<td>7</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate14</td>
-	<td>3.0</td>
+	<td>3</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate475</td>
-	<td>6.0</td>
+	<td>6</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>verifyValue</td>
 	<td>rate476</td>
-	<td>4.0</td>
+	<td>4</td>
 </tr>
 </tbody></table>
 </body>
