@@ -53,6 +53,16 @@
       <% end %>
       <%= _('Caller_ID') %>:
       <%= text_field_tag("s_caller_id", h(@options[:s_caller_id].to_s)) %>
+      <% if cc_active? %> 
+        <br/> 
+        <br/> 
+        <%= _('Card_number') %>: 
+        <%= text_field_tag("s_card_number", h(@options[:s_card_number].to_s)) %> 
+        <%= _('Card_pin') %>: 
+        <%= text_field_tag("s_card_pin", h(@options[:s_card_pin].to_s)) %> 
+        <%= _('Card_id') %>: 
+        <%= text_field_tag("s_card_id", h(@options[:s_card_id].to_s)) %> 
+      <% end %> 
       <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
       <%= observe_field("s_user", :update => "s_device_span", :with => "user_id", :url => {:controller => "devices", :action => "get_devices_for_search"}, :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');") %>
     </div>
