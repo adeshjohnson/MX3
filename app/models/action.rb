@@ -266,8 +266,9 @@ class Action < ActiveRecord::Base
 
   def Action.disable_login_check(ip)
     found = 0
-    found = 1 if  !actions or actions.size.to_i < 3
+
     actions = Action.where(["action in ('login', 'bad_login') and (data = ? or data2 = ?)", ip, ip]).order('date DESC').limit(3).all
+    found = 1 if  !actions or actions.size.to_i < 3
     if actions and actions.size.to_i > 0
       for a in actions
         found = 1 if a.action.to_s == 'login'
