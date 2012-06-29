@@ -39,21 +39,21 @@
             <select name="s_period_start">
               <option value="" selected>&nbsp;</option>
               <% for ps in @period_starts %>
-                  <option value=<%= ps["period_start"] %> <%= "selected" if ps["period_start"] == @options[:s_period_start] %>> <%= nice_date(ps["period_start"]) %> </option>
+                  <option value=<%= ps["period_start"] %> <%= "selected" if ps["period_start"] == @options[:s_period_start] %>> <%= ps["period_start"] %> </option>
               <% end %>
             </select>
             <%= _('Period_end') %>:
             <select name="s_period_end">
               <option value="" selected>&nbsp;</option>
               <% for ps in @period_ends %>
-                  <option value=<%= ps["period_end"] %> <%= "selected" if ps["period_end"] == @options[:s_period_end] %>> <%= nice_date(ps["period_end"]) %> </option>
+                  <option value=<%= ps["period_end"] %> <%= "selected" if ps["period_end"] == @options[:s_period_end] %>> <%= ps["period_end"] %> </option>
               <% end %>
             </select>
             <%= _('Issue_date') %>:
             <select name="s_issue_date">
               <option value="" selected>&nbsp;</option>
               <% for ps in @issue_dates %>
-                  <option value=<%= ps["issue_date"] %> <%= "selected" if ps["issue_date"] == @options[:s_issue_date] %>> <%= nice_date(ps["issue_date"]) %> </option>
+                  <option value=<%= ps["issue_date"] %> <%= "selected" if ps["issue_date"] == @options[:s_issue_date] %>> <%= ps["issue_date"] %> </option>
               <% end %>
             </select>
             <%= _('Invoice_sent_by_mail') %>:
