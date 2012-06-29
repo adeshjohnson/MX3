@@ -1,15 +1,17 @@
 <div align="center">
-
   <table class='page_title2' width="100%">
-    <tr>
-      <td align="center">
-        <% for st in 'A'..'Z' %>
-            <%= raw "<b>" if st == @st %>
-            <%= link_to st, :action => params[:action], :id => @letter_select_header_id, :st => st %>
-            <%= raw "</b>" if st == @st %>
-        <% end %>
-      </td>
-    </tr>
+    <tr> 
+      <td align = "center"> 
+        <% for st in 'A'..'Z' %> 
+          <%= "<b>".html_safe if st == @st%> 
+          <% if not defined?(@directions_first_letters) or @directions_first_letters.include?(st)%> 
+            <%= link_to st, :action => params[:action], :id => @letter_select_header_id, :st => st %> 
+          <% else %> 
+            <span style="color:grey;font-size:11px"> <%= st %> </span> 
+          <% end %> 
+          <%= "</b>".html_safe if st == @st%> 
+        <% end %> 
+      </td> 
+    </tr> 
   </table>
-
 </div>
