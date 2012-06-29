@@ -4442,6 +4442,7 @@ Localization.define('en') do |l|
   l.store 'seconds', 'seconds'
   l.store 'Card_id', 'Card ID'
   l.store 'Card_pin', 'Card PIN'
+  l.store 'Back_to_Invoices', 'Back to Invoices'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
