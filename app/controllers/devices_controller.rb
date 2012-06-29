@@ -1043,11 +1043,13 @@ class DevicesController < ApplicationController
 
     cond += " AND callerids.email_callback =  '#{@search_email_callback}' " if @search_email_callback.to_i != -1
 
+    current_user.usertype == "accountant" ? @current_user_id = 0 : @current_user_id = current_user.id
+
       sql = "SELECT callerids.* , devices.user_id , devices.name, devices.extension, devices.device_type, devices.istrunk, ivrs.name as 'ivr_name' FROM callerids
              JOIN devices on (devices.id = callerids.device_id)
              JOIN users on (users.id = devices.user_id)
              LEFT JOIN ivrs on (ivrs.id = callerids.ivr_id)
-             WHERE callerids.id > 0 #{cond} AND users.id = devices.user_id and users.owner_id = '#{current_user.id}'"
+             WHERE callerids.id > 0 #{cond} AND users.id = devices.user_id and users.owner_id = '#{@current_user_id}'"
 
     #MorLog.my_debug sql
 
@@ -1056,11 +1058,11 @@ class DevicesController < ApplicationController
 
     #MorLog.my_debug @clis.to_yaml
 
-      @users = User.find(:all, :conditions => "owner_id = '#{current_user.id}'" )
+      @users = User.find(:all, :conditions => "owner_id = '#{@current_user_id}'" )
 
       sql2="SELECT DISTINCT(callerids.ivr_id), ivrs.name FROM ivrs
           LEFT JOIN callerids ON (ivrs.id = callerids.ivr_id)
-          WHERE ivrs.user_id = '#{current_user.id}'"
+          WHERE ivrs.user_id = '#{@current_user_id}'"
 
     @ivrs = Ivr.find_by_sql(sql2)
     @all_ivrs = @ivrs
