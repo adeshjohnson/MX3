@@ -7,9 +7,9 @@
 
 <table width="100%" class="maintable">
   <tr>
-    <th align="left" width="20%"> <%= _('Country') %> </th>
-    <th align="left" width="10%"><%= _('Prefix') %></th>
-    <th align="left" width="30%"> <%= _('Destination') %> </th>
+    <th align="left" width="20%"> <%= nice_list_order('country', _('Country'), @options) %> </th>
+    <th align="left" width="10%"> <%= nice_list_order('prefix', _('Prefix'), @options) %> </th>
+    <th align="left" width="30%"> <%= nice_list_order('destination', _('Destination'), @options) %> </th>
     <th align="left"> <%= _('Subcode') %> </th>
     <th align="left"> <%= _('Destination_group') %> </th>
   </tr>

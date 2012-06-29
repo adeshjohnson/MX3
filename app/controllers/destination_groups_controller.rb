@@ -189,15 +189,23 @@ class DestinationGroupsController < ApplicationController
 
     @page_title = _('Destinations_without_Destination_Groups')
     @page_icon = 'wrench.png'
+    default = {
+        :order_by => "country",
+        :order_desc => 0
+    }
 
     session[:destinations_destinations_to_dg_options] ? @options = session[:destinations_destinations_to_dg_options] : @options = {}
     params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page] or @options[:page] <= 0)
+
+    default.each { |key, value| @options[key] = params[key] if params[key] }
+    @options[:order_by_full] = @options[:order_by] + (@options[:order_desc] == 1 ? " DESC" : " ASC")
+    @options[:order] = Destinationgroup.destinationgroups_order_by(params, @options)
 
     @total_pages = (Destination.count(:all, :conditions => "destinationgroup_id = 0").to_f/session[:items_per_page].to_f).ceil
     @options[:page] = @total_pages.to_i if @total_pages.to_i < @options[:page].to_i and @total_pages > 0
     page = @options[:page]
 
-    @destinations_without_dg = Destination.select_destination_assign_dg(page)
+    @destinations_without_dg = Destination.select_destination_assign_dg(page, @options[:order])
     dgs = Destinationgroup.find(:all, :select => "id, CONCAT(name, ' ', desttype) as gname", :order => "name ASC, desttype ASC")
     @dgs = dgs.map { |d| [d.gname.to_s, d.id.to_s] }
 
@@ -206,7 +214,7 @@ class DestinationGroupsController < ApplicationController
 
   def destinations_to_dg_update
     @options = session[:destinations_destinations_to_dg_options]
-    ds = Destination.select_destination_assign_dg(session[:destinations_destinations_to_dg_options][:page])
+    ds = Destination.select_destination_assign_dg(session[:destinations_destinations_to_dg_options][:page], "name")
     dgs = []
     ds.each { |d| dgs << d.id.to_s }
     if dgs and dgs.size.to_i > 0

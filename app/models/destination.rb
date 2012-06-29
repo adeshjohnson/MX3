@@ -54,7 +54,7 @@ class Destination < ActiveRecord::Base
     res = ActiveRecord::Base.connection.execute(sql5)
   end
 
-  def Destination.select_destination_assign_dg(page)
+  def Destination.select_destination_assign_dg(page, order)
     limit = Confline.get_value("Items_Per_Page").to_i
     offset = limit*(page-1)
 
@@ -76,7 +76,7 @@ class Destination < ActiveRecord::Base
                   JOIN destinationgroups ON (flag = direction_code  )
                   WHERE destinationgroup_id = 0 AND  destinationgroups.name = directions.name GROUP BY id ORDER BY direction_code  ) AS v3
             ) AS v4 ORDER BY p ASC
-          ) AS v5 GROUP BY id ORDER BY name LIMIT #{limit} OFFSET #{offset}"
+          ) AS v5 GROUP BY id ORDER BY #{order} LIMIT #{limit} OFFSET #{offset}"
 
 
     destination = Destination.find_by_sql(sql)

@@ -29,5 +29,18 @@ class Destinationgroup < ActiveRecord::Base
     Destinationgroup.find_by_sql(sql)
   end
 
-
+  def Destinationgroup.destinationgroups_order_by(params, options)
+    logger.fatal options[:order_by]
+    case options[:order_by].to_s.strip.to_s
+      when "country" then order_by = "dgn"
+      when "prefix" then order_by = "prefix"
+      when "destination" then order_by = "name"
+      else
+        order_by = options[:order_by]
+    end
+    if order_by != ""
+      order_by += (options[:order_desc].to_i == 0 ? " ASC" : " DESC")
+    end
+    return order_by
+  end
 end
