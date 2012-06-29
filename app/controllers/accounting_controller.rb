@@ -780,9 +780,9 @@ class AccountingController < ApplicationController
       #cond.length > 1 ? @send_invoices = 1 : @send_invoices = 0
       @send_invoices = 0
 
-      @period_starts = ActiveRecord::Base.connection.select_all("SELECT DISTINCT period_start FROM invoices")
-      @period_ends = ActiveRecord::Base.connection.select_all("SELECT DISTINCT period_end FROM invoices")
-      @issue_dates = ActiveRecord::Base.connection.select_all("SELECT DISTINCT issue_date FROM invoices")
+      @period_starts = ActiveRecord::Base.connection.select_all("SELECT DISTINCT period_start FROM invoices, users where users.owner_id = #{current_user.id} and invoices.user_id = users.id")
+      @period_ends = ActiveRecord::Base.connection.select_all("SELECT DISTINCT period_end FROM invoices, users where users.owner_id = #{current_user.id} and invoices.user_id = users.id")
+      @issue_dates = ActiveRecord::Base.connection.select_all("SELECT DISTINCT issue_date FROM invoices, users where users.owner_id = #{current_user.id} and invoices.user_id = users.id")
 
       session[:invoice_options] = @options
     else
