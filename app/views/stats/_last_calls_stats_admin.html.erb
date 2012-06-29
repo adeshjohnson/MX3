@@ -65,9 +65,9 @@
       <%= _('Caller_ID') %>:
       <%= text_field_tag("s_caller_id", h(@options[:caller_id].to_s)) %>
       <%= _('Reseller_in_any_dids') %>
-      <% options = @resellers.map{|u| [nice_user(u), u.id]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @resellers.size > 0 %> 
-      <%= select_tag("s_reseller_did", options_for_select(options, @options[:s_reseller_did].to_i), :disabled => @resellers.empty?)  %> 
+      <% options = @resellers_with_dids.map{|u| [nice_user(u), u.id]} %> 
+      <% options.insert(0, [_('All'), "all"]) if @resellers_with_dids.size > 0 %> 
+      <%= select_tag("s_reseller_did", options_for_select(options, @options[:s_reseller_did].to_i), :disabled => @resellers_with_dids.empty?)  %> 
       <% if cc_active? %>
         <br/>
         <br/>

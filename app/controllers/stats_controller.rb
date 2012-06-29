@@ -934,7 +934,7 @@ in before filter : user (:find_user_from_id_or_session)
 
 
     if ["admin", "accountant"].include?(session[:usertype])
-      @users, @user, @devices, @device, @hgcs, @hgc, @dids, @did, @providers, @provider, @reseller, @resellers = last_calls_stats_admin(@options)
+      @users, @user, @devices, @device, @hgcs, @hgc, @dids, @did, @providers, @provider, @reseller, @resellers, @resellers_with_dids = last_calls_stats_admin(@options)
     end
     session[:last_calls_stats] = @options
     options = last_calls_stats_set_variables(@options, {:user => @user, :device => @device, :hgc => @hgc, :did => @did, :current_user => current_user, :provider => @provider, :can_see_finances => can_see_finances?, :reseller => @reseller})
@@ -3937,6 +3937,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     providers = Provider.find_all_for_select
     provider = Provider.find_by_id(options[:s_provider]) if options[:s_provider].to_i > 0
     resellers = User.find(:all, :conditions => 'usertype = "reseller"')
+    resellers_with_dids = User.find(:all, :joins => 'JOIN dids ON (users.id = dids.reseller_id)', :conditions => 'usertype = "reseller"', :group => 'users.id')
     resellers = [] if !resellers
     reseller = User.find_by_id(options[:s_reseller]) if options[:s_reseller] != "all" and !options[:s_reseller].blank?
     if user
@@ -3944,7 +3945,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     else
       devices = Device.find_all_for_select
     end
-    return users, user, devices, device, hgcs, hgc, dids, did, providers, provider, reseller, resellers
+    return users, user, devices, device, hgcs, hgc, dids, did, providers, provider, reseller, resellers, resellers_with_dids
   end
 
   def last_calls_stats_set_variables(options, values)
