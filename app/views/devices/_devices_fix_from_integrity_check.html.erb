@@ -11,7 +11,7 @@
       <% @devices.each_with_index { |d, i| %>
           <tr class="row<%= (i % 2 + 1).to_s %>">
             <td id="device_id_<%= d.id %>">
-              <% if d.user_id != -1 %>
+              <% if d.user_id.to_i == -1 %>
                   <%= raw link_nice_device(d).html_safe %>
               <% else %>
                   <% if d.user and d.user.owner_id == current_user.id %>
