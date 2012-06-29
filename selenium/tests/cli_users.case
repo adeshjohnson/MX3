@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://trunk" />
+<link rel="selenium.base" href="" />
 <title>cli_users</title>
 </head>
 <body>
@@ -37,12 +37,17 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/devices/cli_edit/1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
@@ -52,7 +57,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
@@ -62,11 +67,640 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
-
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>retail_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>retail_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/devices/clis')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=cli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=description</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>name=banned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=banned</td>
+	<td>Not banned Banned</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user</td>
+	<td>Select user Test Retail rres User Test Wholesalr rres User</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cli</td>
+	<td>111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>Reseller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Wholesalr rres User</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id</td>
+	<td>label=IAX2/1021</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cli</td>
+	<td>1112</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>Reseller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Retail rres User</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id</td>
+	<td>label=IAX2/1019</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>IAX2/1019</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=s_cli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=s_description</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=s_comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>name=s_banned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>name=s_email_callback</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=s_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>wholesale_rspro</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>wholesale_rspro1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/devices/clis')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=cli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=description</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>name=banned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=banned</td>
+	<td>Not banned Banned</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user</td>
+	<td>Select user Test Wholesale wrspro User Test Retail wrspro User</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>name=ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=ivr</td>
+	<td>Not assigned</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cli</td>
+	<td>222</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>Rspro</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Retail wrspro User</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id</td>
+	<td>label=IAX2/1031</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ivr_name</td>
+	<td>IVRs</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=block_name</td>
+	<td>Pirmas blokas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=ivr_1_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cli</td>
+	<td>2222</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>rspro</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Wholesale wrspro User</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id</td>
+	<td>label=SIP/1032</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=ivr</td>
+	<td>label=IVRs</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>IAX2/1031</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>IAX2/1019</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=s_cli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=s_description</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=s_comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>name=s_banned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>name=s_email_callback</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=s_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>name=s_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>id=user</td>
+	<td>Select user System Admin Test User #1 Test Reseller Test Accountant User Resellers Test Wholesale Accountant Test Retail Accountant Test Retail User Test Wholesale User Test Retail RSPRO Test Wholesale RSPRO Test Retail Reseller Test Wholesale Reseller Test Retail rres User Test Wholesalr rres User Test Retail rrspro User Test Wholesalr rrspro User Test Retail wres User Test Wholesale wres User Test Wholesale wrspro User Test Retail wrspro User</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>1112</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>222</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>2222</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cli</td>
+	<td>333</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=banned</td>
+	<td>label=Banned</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=user</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>retail_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>retail_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>IAX2/1021</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>IAX2/1019</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>222</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>2222</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>retail_accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>retail_accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
