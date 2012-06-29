@@ -17,7 +17,20 @@
     <br/><br/>
     <b><%= _('Rates') %>:</b>
     <br/>
+    <% tariff_tipe = ''%>
     <% @rates.each { |r| %>
+        <% if  tariff_tipe.to_s != r.tariff.purpose.to_s %>
+
+            <br />
+            <br />
+            <b style='text-decoration:underline;'>
+              <%= _('User_Retail') if   r.tariff.purpose.to_s == 'user' %>
+              <%= _('Provider') if   r.tariff.purpose.to_s == 'provider' %>
+              <%= _('User_Wholesale') if   r.tariff.purpose.to_s == 'user_wholesale' %>
+              <%= _('Tariffs') %>:
+            </b>
+            <% tariff_tipe = r.tariff.purpose.to_s%>
+        <%end%>
         <p>
           <b>
             <% if  @callshop.to_i > 0 %>
@@ -32,12 +45,20 @@
           <% if r.tariff.purpose == 'user' %>
               <% r.aratedetails.each { |rr| %>
                   <%= nice_time2 rr.start_time %> - <%= nice_time2 rr.end_time %> => <%= rr.price %>
-                  (<%= r.tariff.currency %>)<br/>
+                  (<%= r.tariff.currency %>)
+                  <% if r.tariff.currency != current_user.currency.name%>
+                      / <%= nice_number(rr.price * Currency.count_exchange_rate(r['currency'],  current_user.currency.name)) %> (<%= current_user.currency.name %>)
+                  <%end%>
+                  <br/>
               <% } %>
           <% else %>
               <% r.ratedetails.each { |rr| %>
                   <%= nice_time2 rr.start_time %> - <%= nice_time2 rr.end_time %> => <%= rr.rate %>
-                  (<%= r.tariff.currency %>)<br/>
+                  (<%= r.tariff.currency %>)
+                  <% if r.tariff.currency != current_user.currency.name%>
+                      / <%= nice_number(rr.rate * Currency.count_exchange_rate(r['currency'],  current_user.currency.name)) %> (<%= current_user.currency.name %>)
+                  <%end%>
+                  <br/>
               <% } %>
           <% end %>
         </p>

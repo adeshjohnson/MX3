@@ -86,9 +86,9 @@ class Destination < ActiveRecord::Base
   def find_rates_and_tariffs(user_id, callshop = 0)
 
     if callshop.to_i > 0
-      Rate.find(:all, :conditions => ['(destination_id = ? or destinationgroup_id in (select destinationgroup_id from  destinations where id = ?)) AND tariff_id in ( select tariff_id from users where id in ( select user_id from usergroups where group_id = ? and gusertype != "manager") )', id, id, callshop], :include => [:tariff, :ratedetails])
+      Rate.find(:all, :conditions => ['(destination_id = ? or destinationgroup_id in (select destinationgroup_id from  destinations where id = ?)) AND tariff_id in ( select tariff_id from users where id in ( select user_id from usergroups where group_id = ? and gusertype != "manager") )', id, id, callshop], :include => [:tariff, :ratedetails], :order=>'tariffs.purpose')
     else
-      Rate.find(:all, :conditions => ['(destination_id = ? or destinationgroup_id in (select destinationgroup_id from  destinations where id = ?)) AND tariffs.owner_id =?', id, id, user_id], :include => [:tariff, :ratedetails])
+      Rate.find(:all, :conditions => ['(destination_id = ? or destinationgroup_id in (select destinationgroup_id from  destinations where id = ?)) AND tariffs.owner_id =?', id, id, user_id], :include => [:tariff, :ratedetails], :order=>'tariffs.purpose')
     end
   end
 

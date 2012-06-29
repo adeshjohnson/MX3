@@ -13,7 +13,7 @@ class Stat < ActiveRecord::Base
     LEFT OUTER JOIN destinations ON (destinations.id = rates.destination_id or destinations.destinationgroup_id = rates.destinationgroup_id) and destinations.prefix in (#{phrase.join(",")})
     WHERE (
     (destination_id in (#{id.join(",")}) or rates.destinationgroup_id in (select destinationgroup_id from destinations where id in (#{id.join(",")})))
-    AND tariffs.owner_id = #{user_id}) order by LENGTH(prefix) desc) as v group by tariffs_name"
+    AND tariffs.owner_id = #{user_id}) order by LENGTH(prefix) desc) as v group by tariffs_name order by purpose"
     ActiveRecord::Base.connection.select_all(sql)
   end
 

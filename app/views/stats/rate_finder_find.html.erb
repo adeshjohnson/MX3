@@ -1,8 +1,21 @@
 <% if @rates and @rates.size.to_i > 0 %>
 
+    <% tariff_tipe = ''%>
     <b><%= _('Rates') %>:</b>
     <br/>
     <% @rates.each { |r| %>
+        <% if  tariff_tipe.to_s != r['purpose'] %>
+
+            <br />
+            <br />
+            <b style='text-decoration:underline;'>
+              <%= _('User_Retail') if  r['purpose'].to_s == 'user' %>
+              <%= _('Provider') if  r['purpose'].to_s == 'provider' %>
+              <%= _('User_Wholesale') if  r['purpose'].to_s == 'user_wholesale' %>
+              <%= _('Tariffs') %>:
+            </b>
+            <% tariff_tipe = r['purpose']%>
+         <%end%>
         <p>
           <b>
             <%= r['tariffs_name'].to_s %>
@@ -14,7 +27,11 @@
               <%= draw_flag(r['direction_code']) if r['direction_code'] %> <%= r['subcode'].to_s+" "+r['name'].to_s %>
               <br/>
               <%= nice_time2 r['arate_start_time'] %> - <%= nice_time2 r['arate_end_time'] %> => <%= r['price'] %>
-              (<%= r['currency'] %>)<br/>
+              (<%= r['currency'] %>)
+              <% if r['currency'] != current_user.currency.name%>
+                  / <%= nice_number(r['rate'] * Currency.count_exchange_rate(r['currency'],  current_user.currency.name)) %> (<%= current_user.currency.name %>)
+              <%end%>
+              <br/>
           <% else %>
               <b>
                 (<%= _('prefix') %>: <%= r['prefix'].to_s %>) :
@@ -22,7 +39,11 @@
               <%= draw_flag(r['direction_code']) if r['direction_code'] %> <%= r['subcode'].to_s+" "+r['name'].to_s %>
               <br/>
               <%= nice_time2 r['start_time'] %> - <%= nice_time2 r['end_time'] %> => <%= r['rate'] %>
-              (<%= r['currency'] %>)<br/>
+              (<%= r['currency'] %>)
+              <% if r['currency'] != current_user.currency.name%>
+                    / <%= nice_number(r['rate'] * Currency.count_exchange_rate(r['currency'],  current_user.currency.name)) %> (<%= current_user.currency.name %>)
+              <%end%>
+              <br/>
           <% end %>
         </p>
     <% } %>
