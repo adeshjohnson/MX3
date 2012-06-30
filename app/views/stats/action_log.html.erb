@@ -117,8 +117,8 @@
 	        <%=link_to did.did ,:controller=>"dids", :action=>"edit", :id=> h(r['data']), :back_controller =>"stats", :back_action=>"action_log" if did%></td>
 	      <% else %>
 	  
-			  <% case r['target_type'].to_s
-		        when "card" %>
+			  <% case r['action'].to_s
+		        when "card_topup" %>
 			  		<%= link_to(_("Card_used_for_TopUp")+ " - " + _("id") + ": " + r['data'].to_s, {:controller => :cards, :action => :show, :id => r['data'].to_i})%>
 			  <% else %>
 			  	<%=  h(r['data'].to_s) %> 
@@ -132,8 +132,8 @@
 
       <td id="data2_<%=r['id'] %>"> 
 	  
-		  <% case r['target_type'].to_s
-	        when "card" %>
+		  <% case r['action'].to_s
+	        when "card_topup" %>
 		  		<%= _("Balance_increased_by")+ ": " + r['data2'].to_s %>
 		  <% else %>
 		  	<%=  h(r['data2'].to_s) %> 
