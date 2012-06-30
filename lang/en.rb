@@ -4443,6 +4443,8 @@ Localization.define('en') do |l|
   l.store 'Card_id', 'Card ID'
   l.store 'Card_pin', 'Card PIN'
   l.store 'Back_to_Invoices', 'Back to Invoices'
+  l.store 'Card_used_for_TopUp', 'Card used by TopUp'
+  l.store 'Balance_increased_by', 'Balance increased by'  
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
