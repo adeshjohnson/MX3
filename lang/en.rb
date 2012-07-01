@@ -4445,6 +4445,7 @@ Localization.define('en') do |l|
   l.store 'Back_to_Invoices', 'Back to Invoices'
   l.store 'Card_used_for_TopUp', 'Card used by TopUp'
   l.store 'Balance_increased_by', 'Balance increased by'  
+  l.store 'Show_Recordings_to_the_User_for_this_Device', 'Show Recordings to the User for this Device'  
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

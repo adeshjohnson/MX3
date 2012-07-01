@@ -44,6 +44,18 @@
         <% end %>
 
         <% if (rec_active?) %>
+		
+		      <% if (session[:usertype] == "admin" or session[:usertype] == "accountant")%>
+		        <tr>
+		          <td> <%= _('Show_Recordings_to_the_User_for_this_Device') %>: </td>
+		          <td>
+		            <%= radio_button_tag('device[record]', 0, record.to_i == 0) %> <%= _('No') %>
+		            <%= radio_button_tag('device[record]', 1, record.to_i == 1) %> <%= _('Yes') %>
+		          </td>
+		        </tr>
+			  <% end %>  		
+		
+		
             <% if @user.recording_enabled.to_i == 1 or (session[:usertype] == "admin" or session[:usertype] == "accountant") %>
                 <tr>
                   <td> <%= _('Send_Recording_to_Email') %>:</td>
