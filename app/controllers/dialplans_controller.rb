@@ -6,7 +6,7 @@ class DialplansController < ApplicationController
   before_filter :authorize
   before_filter :find_dialplan, :only => [:list_extlines, :edit, :update, :destroy, :did_assign_to_dp]
 
-  @@CC_End_ivr = ['End IVR #1', 'End IVR #2', 'End IVR #3', 'End IVR #4']
+  @@CC_End_ivr = ['End IVR #1', 'End IVR #2', 'End IVR #3', 'End IVR #4', 'End IVR #5']
   @@ANI_End_ivr = ['End IVR #1', 'End IVR #2', 'End IVR #3']
 
   def dialplans
