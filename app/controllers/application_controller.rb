@@ -1338,17 +1338,13 @@ class ApplicationController < ActionController::Base
   In case it is nil we set nice_number_digits to 2 and do not change decimal.
 =end
   def nice_number(number)
-    if session and !session[:nice_number_digits]
-      confline = Confline.get_value("Nice_Number_Digits")
-      session[:nice_number_digits] ||= confline.to_i if confline and confline.to_s.length > 0
-      session[:nice_number_digits] ||= 2 if !session[:nice_number_digits]
-    end
-    nice_number_digits = session[:nice_number_digits]
-    nice_number_digits = 2 if !nice_number_digits or nice_number_digits == ""
+    confline = (!session or !session[:nice_number_digits]) ? Confline.get_value("Nice_Number_Digits") : session[:nice_number_digits]
+    nice_number_digits = (confline and confline.to_s.length > 0) ? confline.to_i : 2
     n = ""
     n = sprintf("%0.#{nice_number_digits}f", number.to_f) if number
-    if session and session[:change_decimal]
-      n = n.gsub('.', session[:global_decimal])
+    if session 
+      session[:nice_number_digits] = nice_number_digits 
+      n = n.gsub('.', session[:global_decimal]) if session[:change_decimal]
     end
     n
   end
