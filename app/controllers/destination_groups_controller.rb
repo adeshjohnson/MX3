@@ -197,7 +197,7 @@ class DestinationGroupsController < ApplicationController
     session[:destinations_destinations_to_dg_options] ? @options = session[:destinations_destinations_to_dg_options] : @options = {}
     params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page] or @options[:page] <= 0)
 
-    default.each { |key, value| @options[key] = params[key] if params[key] }
+    default.each { |key, value| @options[key] ||= (params[key] || default[key]) } 
     @options[:order_by_full] = @options[:order_by] + (@options[:order_desc] == 1 ? " DESC" : " ASC")
     @options[:order] = Destinationgroup.destinationgroups_order_by(params, @options)
 
