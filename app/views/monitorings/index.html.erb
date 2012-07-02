@@ -2,18 +2,18 @@
 
 <table width="100%" class="maintable heading-right" cellpadding="3">
   <tr>
-    <th><%= _('Active') %></th>
-    <th><%= _('Period') %></th>
-    <th><%= _('Monitoring_type') %></th>
-    <th><%= _('Amount') %> (<%= Currency.get_default.name %>)</th>
-    <th><%= _('Block_user') %></th>
-    <th><%= _('Send_email_to_admin') %></th>
-    <th><%= _('Users') %></th>
+    <th align="center"><%= _('Active') %></th>
+    <th align="center"><%= _('Period') %></th>
+    <th align="center"><%= _('Monitoring_type') %></th>
+    <th align="center"><%= _('Amount') %> (<%= Currency.get_default.name %>)</th>
+    <th align="center"><%= _('Block_user') %></th>
+    <th align="center"><%= _('Send_email_to_admin') %></th>
+    <th align="center"><%= _('Users') %></th>
     <% if !reseller? %>
-        <th><%= _('Log') %></th>
+        <th align="center"><%= _('Log') %></th>
     <% end %>
-    <th><%= _('Edit') %></th>
-    <th><%= _('Delete') %></th>
+    <th align="center"><%= _('Edit') %></th>
+    <th align="center"><%= _('Delete') %></th>
   </tr>
   <% for monitoring in @monitorings %>
       <tr id="monit-<%= monitoring.id %>" class="center">
