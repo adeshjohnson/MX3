@@ -169,7 +169,7 @@
     </td>
   </tr>
 <% end %>
-<% if (@default.to_i == 1 or @device_type == 'FAX') and defined? AST_18 and AST_18.to_i == 1 %> 
+<% if (@default.to_i == 1 or @device_type == 'FAX' or @device_type == 'SIP') and defined? AST_18 and AST_18.to_i == 1 %>
   <tr> 
     <td> <%= _('T.38_support') %>: </td> 
     <td> 
