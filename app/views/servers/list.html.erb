@@ -14,12 +14,14 @@
         <th align="left"><%= _('ID') %></th>
         <th align="left"><%= _('Hostname') %></th>
         <th align="left"><%= _('Server_IP') %></th>
-        <th align="left"><%= _('Url') %></th>
+        <!--<th align="left"><%= _('Url') %></th> -->
         <th align="left"><%= _('Type') %></th>
+        <th align="left"><%= _('Version') %></th>
+        <th align="left"><%= _('Uptime') %></th>
         <th align="right"><%= _('Max_call_limit') %></th>
-        <th align="left"><%= _('AMI_Username') %></th>
+        <!---<th align="left"><%= _('AMI_Username') %></th>
         <th align="left"><%= _('AMI_Secret') %></th>
-        <th align="right"><%= _('SIP_Port') %></th>
+        <th align="right"><%= _('SIP_Port') %></th> -->
         <th align="left"><%= _('Comment') %></th>
         <th align="center"><%= _('Providers') %></th>
         <th></th>
@@ -41,15 +43,17 @@
             <td id="server_id_<%= serv.id %>"><%= h serv.server_id %></td>
             <td id="hostname_<%= serv.id %>"><%= h serv.hostname %></td>
             <td id="ip_<%= serv.id %>"><%= h serv.server_ip %></td>
-            <td id="url_<%= serv.id %>"><%= h serv.stats_url %></td>
+            <!---<td id="url_<%= serv.id %>"><%#= h serv.stats_url %></td>  -->
             <!-- <td align="center"><a
-            <% 'href="http://'+ (serv.server_ip).to_s + (serv.stats_url).to_s + '"'+ 'target="_blank"' %>>
-            <% b_chart_bar %>     </a></td>-->
+            <%# 'href="http://'+ (serv.server_ip).to_s + (serv.stats_url).to_s + '"'+ 'target="_blank"' %>>
+            <%# b_chart_bar %>     </a></td>-->
             <td id="type_<%= serv.id %>"><%= h serv.server_type %></td>
+            <td id="version_<%= serv.id %>" align="left"><%= h serv.version.to_s %></td>
+            <td id="uptime_<%= serv.id %>" align="left"><%= h serv.uptime.to_s %></td>
             <td id="max_call_<%= serv.id %>" align="right"><%= h serv.maxcalllimit %></td>
-            <td id="ami_username_<%= serv.id %>" align="left"><%= h serv.ami_username %></td>
-            <td id="ami_pass_<%= serv.id %>" align="left"><%= h serv.ami_secret %></td>
-            <td id="port_<%= serv.id %>" align="right"><%= h serv.port %></td>
+            <!--<td id="ami_username_<%= serv.id %>" align="left"><%#= h serv.ami_username %></td>
+            <td id="ami_pass_<%= serv.id %>" align="left"><%#= h serv.ami_secret %></td>
+            <td id="port_<%= serv.id %>" align="right"><%#= h serv.port %></td> -->
             <td id="comment_<%= serv.id %>" align="left"><%= h serv.comment %></td>
             <td id="providers_<%= serv.id %>" align="center"><%= link_to b_provider + "(" + serv.providers.size.to_s + ")", {:action => 'server_providers', :id => serv.id}, {:id => "providers_link_#{serv.id}"} %></td>
             <td id="edit_<%= serv.id %>" align="center"><%= link_to b_edit, {:action => 'edit', :id => serv.id}, {:id => "edit_link_#{serv.id}"} %></td>
