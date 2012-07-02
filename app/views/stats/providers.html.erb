@@ -14,6 +14,7 @@
                         :loading => "Element.show('spinner');",
                         :complete => "Element.hide('spinner');") %>&nbsp;&nbsp;
 
+    <br />
     <span id="results"><% if @results and @results.length > 0 %>
         <%= draw_flag(@flag) if @flag %> <%= @results %>
       <% end %></span>
