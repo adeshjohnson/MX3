@@ -1,6 +1,6 @@
-<b><%= link_to b_user + _('User') + ': ' + nice_user(@devicerule.device.user).to_s, :controller => :users, :action => :edit, :id => @devicerule.device.user_id %></b>
+<b><%= b_user + _('User') %></b>: <%= link_to nice_user(@devicerule.device.user).to_s, :controller => :users, :action => :edit, :id => @devicerule.device.user_id %>
 <br/>
-<b><%= link_nice_device(@devicerule.device) %></b>
+<b><%= _('Device') %></b>: <%= link_nice_device(@devicerule.device) %>
 <br/>
 <br/>
 <table width="70%" class="maintable">
