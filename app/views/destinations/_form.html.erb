@@ -45,7 +45,7 @@
   <%= text_field 'destination', 'prefix', "class" => "input", :disabled => (params[:action] != 'new') %>
 </p>
 <p>
-  <%= _('Code') %>
+  <%= _('Subcode') %>
   <br/>
   <%= radio_button_tag('destination[subcode]', 'FIX', @destination.subcode == "FIX") %> FIX
   <%= radio_button_tag('destination[subcode]', 'MOB', @destination.subcode == "MOB") %> MOB
