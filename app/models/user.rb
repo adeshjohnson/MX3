@@ -1904,19 +1904,19 @@ GROUP BY terminators.id;").map { |t| t.id }
 
   def User.users_order_by(params, options)
     case options[:order_by].to_s.strip.to_s
-      when "acc" then
+      when "acc"
         order_by = "users.id"
-      when "nice_user" then
+      when "nice_user"
         order_by = "nice_user"
-      when "user" then
+      when "user"
         order_by = "nice_user"
-      when "username" then
+      when "username"
         order_by = "users.username"
-      when "usertype" then
+      when "usertype"
         order_by = "users.usertype"
-      when "balance" then
+      when "balance"
         order_by = "users.balance"
-      when "account_type" then
+      when "account_type"
         order_by = "users.postpaid"
       else
         order_by = options[:order_by]
@@ -3264,8 +3264,8 @@ GROUP BY terminators.id;").map { |t| t.id }
     return out
   end
 
-  def blocked?;
-    blocked == 1;
+  def blocked?
+    blocked == 1
   end
 
 
@@ -3371,8 +3371,8 @@ GROUP BY terminators.id;").map { |t| t.id }
     end
   end
 
-  def save_with_balance;
-    @save_with_balance_record;
+  def save_with_balance
+    @save_with_balance_record
   end
 
   def clean_after_own_providers_disable

@@ -43,7 +43,7 @@ class Device < ActiveRecord::Base
   validates_uniqueness_of :username, :message => _('Device_Username_Must_Be_Unique'), :if => :username_must_be_unique
   # validates_format_of :name, :with => /^\w+$/,  :on=>:create, :message => _('Device_username_must_consist_only_of_digits_and_letters')
   validates_format_of :max_timeout, :with => /^[0-9]+$/, :message => _('Device_Call_Timeout_must_be_greater_than_or_equal_to_0')
-  validates_numericality_of :port, :message => _("Port_must_be_number"), :if => Proc.new { |o| not o.port.blank? }
+  validates_numericality_of :port, :message => _("Port_must_be_number"), :if => Proc.new{ |o| not o.port.blank? }
 
   # before_create :check_callshop_user
   before_save :validate_extension_from_pbx, :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth, :validate_trunk, :update_mwi
@@ -809,8 +809,8 @@ class Device < ActiveRecord::Base
     end
   end
 
-  def device_ip_authentication?;
-    @device_ip_authentication_record;
+  def device_ip_authentication?
+    @device_ip_authentication_record
   end
 
   def load_device_types(options = {})
@@ -1049,12 +1049,12 @@ class Device < ActiveRecord::Base
     end
   end
 
-  def device_olde_name;
-    @device_olde_name_record;
+  def device_olde_name
+    @device_olde_name_record
   end
 
-  def device_old_server;
-    @device_old_server_record;
+  def device_old_server
+    @device_old_server_record
   end
 
   def set_old_name

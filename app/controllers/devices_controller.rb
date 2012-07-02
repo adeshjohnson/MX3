@@ -2133,23 +2133,23 @@ class DevicesController < ApplicationController
 
   def devices_all_order_by(params, options)
     case params[:order_by].to_s
-      when "user" then
+      when "user"
         order_by = "nice_user"
-      when "acc" then
+      when "acc"
         order_by = "devices.id"
-      when "description" then
+      when "description"
         order_by = "devices.description"
-      when "pin" then
+      when "pin"
         order_by = "devices.pin"
-      when "type" then
+      when "type"
         order_by = "devices.device_type"
-      when "extension" then
+      when "extension"
         order_by = "devices.extension"
-      when "username" then
+      when "username"
         order_by = "devices.name"
-      when "secret" then
+      when "secret"
         order_by = "devices.secret"
-      when "cid" then
+      when "cid"
         order_by = "devices.callerid"
       else
         default = true
