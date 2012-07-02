@@ -1293,6 +1293,7 @@ class User < ActiveRecord::Base
     logger.fatal new_tax.to_yaml
     new_tax.save if options[:save] == true
     self.tax_id = new_tax.id
+    self.tax = new_tax
     self.save if options[:save] == true
   end
 
