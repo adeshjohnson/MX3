@@ -5,6 +5,9 @@
     <th align="left"><%= nice_list_order('id', _('ID'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
     <th align="left"><%= nice_list_order('name', _('Provider'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
     <th align="left"><%= nice_list_order('balance', _('Balance') + " (#{@curr.name})", @options, {:s_hidden => @options[:s_hidden]}) %></th>
+    <% if ["admin", "reseller"].include?(session[:usertype]) or (accountant? and session[:acc_payments_manage] > 1)%>
+        <th></th>
+    <%end%>
     <th></th>
   </tr>
   <% @providers.each_with_index { |prov, i| %>
@@ -12,6 +15,9 @@
         <td id="id_<%= prov.id %>" <%= @n_class %>><%= h(prov.id) %></td>
         <td id="ani_<%= prov.id %>" <%= @n_class %>><%= b_provider_ani if prov.ani == 1 %><%= link_to prov.name, {:action => 'edit', :id => prov}, {:id => "edit_link_name_"+prov.id.to_s} %></td>
         <td id="balance_<%= prov.id %>" <%= @n_class %>><%= nice_number prov.balance * @curr.exchange_rate %></td>
+        <% if ["admin", "reseller"].include?(session[:usertype]) or (accountant? and session[:acc_payments_manage] > 1)%>
+            <td id="manual_payment_<%= prov.id %>" align="center"><%= link_to(b_money, {:controller => 'payments', :action => 'manual_payment', :provider_id => prov.id}, :id=>"manual_payment_link_" + prov.id.to_s )%></td>
+        <% end %>
         <td id="edit_<%= prov.id %>" <%= @n_class %> align="center"> <%= link_to b_edit, {:action => 'edit', :id => prov}, {:id => "edit_link_"+prov.id.to_s} %></td>
       </tr>
   <% } %>

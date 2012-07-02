@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Payment < ActiveRecord::Base
   belongs_to :user, :include => [:tax]
+  belongs_to :provider
   has_many :cc_invoices
 
   after_create { |record| Action.add_action_hash(User.current, {:action => 'manual_payment_created', :data => record.user_id, :data2 => record.amount, :data3 => record.currency, :target_id => record.id, :target_type => 'Payment'}) if record.paymenttype.to_s == 'manual' }

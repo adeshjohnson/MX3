@@ -8,17 +8,24 @@
 <br/>
 <%= form_tag :action => 'manual_payment_status', :id => @sub do %>
     <table>
-      <tr>
-        <td><b><%= b_user + _('User') %></b>:</td>
-        <td>
-          <% if @users.size == 1 %>
-              <%= nice_user(@users[0]) %>
-              <%= hidden_field_tag("user", @users[0].id) %>
-          <% else %>
-              <%= select_tag("user", options_for_select(@users.map { |user| [nice_user(user), user.id] })) %>
-          <% end %>
-        </td>
-      </tr>
+      <% if @provider %>
+          <tr>
+            <td><b><%= b_user + _('Provider') %></b>:</td>
+            <td><%= @provider.name %><%= hidden_field_tag("provider_id", @provider.id) %></td>
+          </tr>
+      <% else %>
+          <tr>
+            <td><b><%= b_user + _('User') %></b>:</td>
+            <td>
+              <% if @users.size == 1 %>
+                  <%= nice_user(@users[0]) %>
+                  <%= hidden_field_tag("user", @users[0].id) %>
+              <% else %>
+                  <%= select_tag("user", options_for_select(@users.map { |user| [nice_user(user), user.id] })) %>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
       <tr>
         <td><b><%= b_money + _('Amount') %></b>:</td>
         <td><%= text_field_tag 'amount', "", "class" => "input", :size => "10", :maxlength => "10", :onClick => "$('amount_with_tax').value = '';", :onChange => "$('amount_with_tax').value = '';" %></td>

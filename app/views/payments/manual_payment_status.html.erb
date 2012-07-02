@@ -4,8 +4,13 @@
 <br/>
 <%= form_tag :action => 'manual_payment_finish', :id => @sub do %>
 
-    <b><%= b_user + _('User') %></b>:
-    <%= nice_user(@user) %>
+    <% if @provider %>
+        <b><%= b_user + _('Provider') %></b>:
+        <%= @provider.name %>
+    <% else %>
+        <b><%= b_user + _('User') %></b>:
+        <%= nice_user(@user) %>
+    <% end %>
     <br/>
     <b><%= b_money + (@am_typ.to_s == "amount" ? _('Amount') : _('Amount_with_VAT')) %></b>:
 
@@ -19,38 +24,74 @@
     <br/><br/>
     <hr/>
     <br/>
-    <table class='simple' width=50%>
-      <tr>
-        <td> <%= _('Current_balance') %>:</td>
-        <td id="balance_<%= @user.id %>"> <%= nice_number @user.balance %> <%= current_user.currency.name %> </td>
-      </tr>
-      <% if @curr != current_user.currency.name %>
+    <% if @provider %>
+        <table class='simple' width=50%>
           <tr>
-            <td>    <%= _('Exchange_rate') %> <%= current_user.currency.name %>/<%= @curr %>:</td>
-            <td id="exchange_rate_<%= @user.id %>"> <%= @exchange_rate %> </td>
+            <td> <%= _('Current_balance') %>:</td>
+            <td id="balance_<%= @provider.id %>"> <%= nice_number @provider.balance %> <%= current_user.currency.name %> </td>
           </tr>
-          <tr>
-            <td>   <%= _('Amount_with_VAT_converted_to') %> <%= current_user.currency.name %>:</td>
-            <td id="a_w_v_c_t_<%= @user.id %>"><%= nice_number @real_amount %> <%= current_user.currency.name %></td>
-          </tr>
-      <% end %>
+          <% if @curr != current_user.currency.name %>
+              <tr>
+                <td>    <%= _('Exchange_rate') %> <%= current_user.currency.name %>/<%= @curr %>:</td>
+                <td id="exchange_rate_<%= @provider.id %>"> <%= @exchange_rate %> </td>
+              </tr>
+              <tr>
+                <td>   <%= _('Amount_with_VAT_converted_to') %> <%= current_user.currency.name %>:</td>
+                <td id="a_w_v_c_t_<%= @provider.id %>"><%= nice_number @real_amount %> <%= current_user.currency.name %></td>
+              </tr>
+          <% end %>
 
-      <tr>
-        <td>   <%= _('Amount_without_VAT') %>:</td>
-        <td id="a_w_v_<%= @user.id %>"> <%= nice_number @amount %> <%= current_user.currency.name %></td>
-      </tr>
-      <tr>
-        <td>   <%= _('New_user_balance') %>:</td>
-        <td id="new_balance_<%= @user.id %>"> <%= nice_number @user.balance + @amount %> <%= current_user.currency.name %></td>
-      </tr>
-      <tr>
-        <td>   <%= _('Description') %>:</td>
-        <td id="description_<%= @user.id %>"> <%= @description %></td>
-      </tr>
-    </table>
+          <tr>
+            <td>   <%= _('Amount_without_VAT') %>:</td>
+            <td id="a_w_v_<%= @provider.id %>"> <%= nice_number @amount %> <%= current_user.currency.name %></td>
+          </tr>
+          <tr>
+            <td>   <%= _('New_Provider_balance') %>:</td>
+            <td id="new_balance_<%= @provider.id %>"> <%= nice_number @provider.balance + (@amount.to_f * -1) %> <%= current_user.currency.name %></td>
+          </tr>
+          <tr>
+            <td>   <%= _('Description') %>:</td>
+            <td id="description_<%= @provider.id %>"> <%= @description %></td>
+          </tr>
+        </table>
+    <% else %>
+        <table class='simple' width=50%>
+          <tr>
+            <td> <%= _('Current_balance') %>:</td>
+            <td id="balance_<%= @user.id %>"> <%= nice_number @user.balance %> <%= current_user.currency.name %> </td>
+          </tr>
+          <% if @curr != current_user.currency.name %>
+              <tr>
+                <td>    <%= _('Exchange_rate') %> <%= current_user.currency.name %>/<%= @curr %>:</td>
+                <td id="exchange_rate_<%= @user.id %>"> <%= @exchange_rate %> </td>
+              </tr>
+              <tr>
+                <td>   <%= _('Amount_with_VAT_converted_to') %> <%= current_user.currency.name %>:</td>
+                <td id="a_w_v_c_t_<%= @user.id %>"><%= nice_number @real_amount %> <%= current_user.currency.name %></td>
+              </tr>
+          <% end %>
+
+          <tr>
+            <td>   <%= _('Amount_without_VAT') %>:</td>
+            <td id="a_w_v_<%= @user.id %>"> <%= nice_number @amount %> <%= current_user.currency.name %></td>
+          </tr>
+          <tr>
+            <td>   <%= _('New_user_balance') %>:</td>
+            <td id="new_balance_<%= @user.id %>"> <%= nice_number @user.balance + @amount %> <%= current_user.currency.name %></td>
+          </tr>
+          <tr>
+            <td>   <%= _('Description') %>:</td>
+            <td id="description_<%= @user.id %>"> <%= @description %></td>
+          </tr>
+        </table>
+    <% end %>
     <br/>
     <br/>
-    <%= hidden_field_tag 'user', @user.id %>
+    <% if @provider %>
+        <%= hidden_field_tag 'provider_id', @provider.id %>
+    <% else %>
+        <%= hidden_field_tag 'user', @user.id %>
+    <% end %>
     <%= hidden_field_tag 'amount', @curr_amount %>
     <%= hidden_field_tag 'p_currency', @curr %>
     <%= hidden_field_tag 'real_amount', @curr_real_amount %>

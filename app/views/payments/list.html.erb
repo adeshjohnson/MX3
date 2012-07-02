@@ -111,6 +111,9 @@
 <table width="100%" class="maintable">
   <tr>
     <th align="left"><%= _('User') %>/<%= _('Card') %> (<%= _('Pin') %>)</th>
+    <% if provider_billing_active? %>
+      <th align="left"><%= _('Provider') %></th>
+    <%end%>
     <th align="left"><%= _('Email/Payer') %></th>
     <th align="left"><%= _('Transaction_ID') %></th>
     <th align="center"><%= _('Date') %></th>
@@ -150,6 +153,9 @@
           <% end %>
 
         </td>
+        <% if provider_billing_active? %>
+          <td id="provider_<%= payment.id %>" align="left"><%= payment.provider.name if payment.provider %></td>
+        <%end%>
         <td id="email_<%= payment.id %>" align="left"><%= payment.paymenttype == "gateways_authorize_net" ? payment.payer_first_name.to_s+" "+payment.payer_last_name.to_s : payment.payer_email %></td>
         <td id="transaction_<%= payment.id %>" align="left"><%= payment.transaction_id %></td>
         <td id="date_added_<%= payment.id %>" align="center"><%= nice_date_time payment.date_added %></td>
@@ -190,7 +196,7 @@
     <th id="total_fee" align="right"><%= nice_number @total_fee %> (<%= current_user.currency.name %>)</th>
     <th id="total_with_tax" align="right"><%= nice_number @total_amaunt_with_vat %> (<%= current_user.currency.name %>)
     </th>
-    <th align="center" colspan="5"></th>
+    <th align="center" colspan="<%=  provider_billing_active?  ? '6' : '5'%>"></th>
   </tr>
 
   <tr>
@@ -203,7 +209,7 @@
     <th id="total_with_tax_completed" align="right"><%= nice_number @total_amaunt_with_vat_completed %>
       (<%= current_user.currency.name %>)
     </th>
-    <th align="center" colspan="5"></th>
+    <th align="center" colspan="<%=  provider_billing_active?  ? '6' : '5'%>"></th>
   </tr>
 </table>
 <br/>

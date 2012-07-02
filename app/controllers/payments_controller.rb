@@ -636,26 +636,35 @@ class PaymentsController < ApplicationController
 
   #--------------- manual payments ------------
 
-
   def manual_payment
     @page_title = _('Add_manual_payment')
     @page_icon = "add.png"
     @users = []
     unless params[:user_id].blank?
-      user = User.find(:first, :include => [:tax], :conditions => ["users.id = ?", params[:user_id]])
+      user = User.find(:first,:include => [:tax], :conditions => ["users.id = ?", params[:user_id]])
       unless user
         flash[:notice] = _('User_was_not_found')
         redirect_to :controller => "callc", :action => "main" and return false
       end
       @users = [user].compact
     else
-      @user = nil
-      (session[:usertype] == "admin" or session[:usertype] == "accountant") ? owner_id = 0 : owner_id = session[:user_id].to_i
-      @users = User.find(:all, :conditions => ["hidden = 0 AND owner_id = ?", owner_id], :order => "first_name ASC")
+      if params[:provider_id]
+        @provider = current_user.providers.find(:first, :conditions => ["providers.id = ?", params[:provider_id]])
+        unless @provider
+          flash[:notice] = _('Provider_was_not_found')
+          redirect_to :controller => "callc", :action => "main" and return false
+        end
 
-      if !@users or @users.size == 0
-        flash[:notice] = _('No_users_to_make_payments')
-        redirect_to :controller => :payments, :action => :list and return false
+      else
+
+        @user = nil
+        (session[:usertype] == "admin" or session[:usertype] == "accountant") ? owner_id = 0 : owner_id = session[:user_id].to_i
+        @users = User.find(:all, :conditions => ["hidden = 0 AND owner_id = ?", owner_id], :order => "first_name ASC")
+
+        if !@users or @users.size == 0
+          flash[:notice] = _('No_users_to_make_payments')
+          redirect_to :controller => :payments, :action => :list and return false
+        end
       end
     end
     @currs = Currency.find(:all, :conditions => ["active = '1'"])
@@ -665,30 +674,49 @@ class PaymentsController < ApplicationController
     @page_title = _('Add_manual_payment')
     @page_icon = "add.png"
 
-    @user = User.includes(:tax).where(["users.id = ?", params[:user]]).first
-    unless @user
-      Action.add_action(session[:user_id], "error", "User: #{params[:user]} was not found") if session[:user_id].to_i != 0
-      dont_be_so_smart
-      redirect_to :controller => "callc", :action => "main" and return false
-    end
-    if !params[:amount].blank?
-      @amount = params[:amount].to_f
-      @am_typ = "ammount"
-      @user.get_tax
-      @real_amount = @user.get_tax.apply_tax(@amount)
+    if params[:provider_id]
+      @provider = current_user.providers.find(:first, :conditions => ["providers.id = ?", params[:provider_id]])
+      unless @provider
+        flash[:notice] = _('Provider_was_not_found')
+        redirect_to :controller => "callc", :action => "main" and return false
+      end
+
+      user = @provider.device.user if @provider.device and @provider.device.user
+      if !params[:amount].blank?
+        @amount =  params[:amount].to_f
+        @am_typ = "ammount"
+        @real_amount = user ?  user.get_tax.apply_tax(@amount) : @amount
+      else
+        @am_typ = "amount_with_tax"
+        @real_amount = params[:amount_with_tax].to_f #if !params[:amount_with_tax].blank?
+        @amount  = user ?  user.get_tax.count_amount_without_tax(@real_amount) : @real_amount
+      end
+
     else
-      @am_typ = "amount_with_tax"
-      @real_amount = params[:amount_with_tax].to_f #if !params[:amount_with_tax].blank?
-      @amount = @user.get_tax.count_amount_without_tax(@real_amount)
+      @user = User.find(:first,:include => [:tax], :conditions => ["users.id = ?" ,params[:user]])
+      unless @user
+        Action.add_action(session[:user_id], "error", "User: #{params[:user]} was not found") if session[:user_id].to_i != 0
+        dont_be_so_smart
+        redirect_to :controller => "callc", :action => "main" and return false
+      end
+      if !params[:amount].blank?
+        @amount =  params[:amount].to_f
+        @am_typ = "ammount"
+        @real_amount = @user.get_tax.apply_tax(@amount)
+      else
+        @am_typ = "amount_with_tax"
+        @real_amount = params[:amount_with_tax].to_f #if !params[:amount_with_tax].blank?
+        @amount  = @user.get_tax.count_amount_without_tax(@real_amount)
+      end
     end
 
     @curr = params[:p_currency]
-    @curr_amount = @amount.to_f
-    @curr_real_amount = @real_amount.to_f
+    @curr_amount =  @amount.to_f
+    @curr_real_amount =  @real_amount.to_f
     @description = params[:description]
     @exchange_rate = count_exchange_rate(current_user.currency.name, @curr)
-    @amount = @amount.to_f / @exchange_rate.to_f
-    @real_amount = @real_amount.to_f / @exchange_rate.to_f
+    @amount = @amount.to_f /  @exchange_rate.to_f
+    @real_amount = @real_amount.to_f /  @exchange_rate.to_f
     if @amount.to_f == 0.to_f
       flash[:notice] = _('Please_add_correct_amount')
       redirect_to :action => 'manual_payment'
@@ -696,79 +724,118 @@ class PaymentsController < ApplicationController
   end
 
 
+
   def manual_payment_finish
 
-    user = User.find(:first, :include => [:tax], :conditions => ["users.id = ?", params[:user]])
-    amount = params[:amount].to_f
-    real_amount = params[:real_amount].to_f
-    currency = params[:p_currency]
-    exchange_rate = count_exchange_rate(current_user.currency.name, currency)
+    if params[:provider_id]
+      provider = current_user.providers.find(:first, :conditions => ["providers.id = ?", params[:provider_id]])
+      amount = params[:amount].to_f * -1.to_f
+      real_amount = params[:real_amount].to_f * -1.to_f
+      currency = params[:p_currency]
+      exchange_rate = count_exchange_rate(current_user.currency.name,currency)
 
-    unless user
-      Action.add_action(session[:user_id], "error", "User: #{params[:user]} was not found") if session[:user_id].to_i != 0
-      dont_be_so_smart
-      redirect_to :controller => "callc", :action => "main" and return false
-    end
-
-    curr_amount = amount / exchange_rate.to_f
-    curr_real_amount = real_amount / exchange_rate.to_f
-    user.balance += curr_amount
-    user.save
-
-    paym = Payment.new
-    paym.paymenttype = 'manual'
-    paym.amount = real_amount
-    paym.currency = currency
-    paym.date_added = Time.now
-    paym.shipped_at = Time.now
-    paym.completed = 1
-    paym.user_id = user.id
-    paym.owner_id = user.owner_id
-    paym.tax = user.get_tax.count_tax_amount(amount)
-    paym.description = q(params[:description].to_s)
-    paym.save
-
-
-    invoice_amount = (curr_amount/ current_user.current.currency.exchange_rate.to_f).to_f
-    invoice_amount_real = (curr_real_amount/ current_user.current.currency.exchange_rate.to_f).to_f
-
-    if user.postpaid == 0 and user.generate_invoice == 1
-      number_type = Confline.get_value("Prepaid_Invoice_Number_Type").to_i
-      invoice = Invoice.new
-      invoice.user_id = user.id
-      invoice.period_start = Time.now
-      invoice.period_end = Time.now
-      invoice.issue_date = Time.now
-      invoice.paid = 1
-      invoice.number = ""
-      invoice.invoice_type = "prepaid"
-      invoice.price = invoice_amount
-      invoice.price_with_vat = invoice_amount_real
-      invoice.save
-
-      invoice.number = generate_invoice_number(Confline.get_value("Prepaid_Invoice_Number_Start"), Confline.get_value("Prepaid_Invoice_Number_Length").to_i, number_type, invoice.id, Time.now)
-      invoice.number_type = number_type
-      invoice.save
-
-      invdetail = Invoicedetail.new
-      invdetail.invoice_id = invoice.id
-
-      if currency.to_s != current_user.currency.name
-        invdetail.name = _('Manual_payment') + "(#{params[:amount].to_f} #{currency.to_s})"
-      else
-        invdetail.name = _('Manual_payment')
+      unless provider
+        # Action.add_action(session[:user_id], "error", "User: #{params[:provider_id]} was not found") if session[:user_id].to_i != 0
+        dont_be_so_smart
+        redirect_to :controller => "callc", :action => "main" and return false
       end
 
-      invdetail.price = invoice_amount_real
-      invdetail.quantity = 1
-      invdetail.invdet_type = 0
-      invdetail.save
+      curr_amount =  amount / exchange_rate.to_f
+      curr_real_amount =  real_amount / exchange_rate.to_f
+      provider.balance +=  curr_amount
+      provider.save
+
+      usd = provider.device.user if provider.device and provider.device.user
+      paym = Payment.new
+      paym.paymenttype = 'manual'
+      paym.amount = real_amount
+      paym.currency = currency
+      paym.date_added = Time.now
+      paym.shipped_at = Time.now
+      paym.completed = 1
+      paym.user_id = usd ? usd.id : -1
+      paym.provider_id = provider.id
+      paym.owner_id = provider.user_id
+      paym.tax = usd ? usd.get_tax.count_tax_amount(amount) : amount
+      paym.description = params[:description].to_s
+      paym.save
+
+
+
     else
-      Action.add_action_hash(current_user, :target_id => user.id, :target_type => 'user', :action => "invoice_not_created")
+      user = User.find(:first,:include => [:tax], :conditions => ["users.id = ?", params[:user]])
+      amount = params[:amount].to_f
+      real_amount = params[:real_amount].to_f
+      currency = params[:p_currency]
+      exchange_rate = count_exchange_rate(current_user.currency.name,currency)
+
+      unless user
+        Action.add_action(session[:user_id], "error", "User: #{params[:user]} was not found") if session[:user_id].to_i != 0
+        dont_be_so_smart
+        redirect_to :controller => "callc", :action => "main" and return false
+      end
+
+      curr_amount =  amount / exchange_rate.to_f
+      curr_real_amount =  real_amount / exchange_rate.to_f
+      user.balance +=  curr_amount
+      user.save
+
+      paym = Payment.new
+      paym.paymenttype = 'manual'
+      paym.amount = real_amount
+      paym.currency = currency
+      paym.date_added = Time.now
+      paym.shipped_at = Time.now
+      paym.completed = 1
+      paym.user_id = user.id
+      paym.owner_id = user.owner_id
+      paym.tax = user.get_tax.count_tax_amount(amount)
+      paym.description = params[:description].to_s
+      paym.save
+
+
+      invoice_amount = (curr_amount/ current_user.current.currency.exchange_rate.to_f).to_f
+      invoice_amount_real = (curr_real_amount/ current_user.current.currency.exchange_rate.to_f).to_f
+
+      if user.postpaid == 0 and user.generate_invoice == 1
+        number_type = Confline.get_value("Prepaid_Invoice_Number_Type").to_i
+        invoice = Invoice.new
+        invoice.user_id = user.id
+        invoice.period_start =  Time.now
+        invoice.period_end =  Time.now
+        invoice.issue_date = Time.now
+        invoice.paid = 1
+        invoice.number = ""
+        invoice.invoice_type = "prepaid"
+        invoice.price = invoice_amount
+        invoice.price_with_vat = invoice_amount_real
+        invoice.save
+
+        invoice.number = generate_invoice_number(Confline.get_value("Prepaid_Invoice_Number_Start"), Confline.get_value("Prepaid_Invoice_Number_Length").to_i, number_type, invoice.id, Time.now)
+        invoice.number_type = number_type
+        invoice.save
+
+        invdetail = Invoicedetail.new
+        invdetail.invoice_id = invoice.id
+
+        if currency.to_s != current_user.currency.name
+          invdetail.name = _('Manual_payment') + "(#{params[:amount].to_f} #{currency.to_s})"
+        else
+          invdetail.name = _('Manual_payment')
+        end
+
+        invdetail.price = invoice_amount_real
+        invdetail.quantity = 1
+        invdetail.invdet_type = 0
+        invdetail.save
+      else
+        Action.add_action_hash(current_user, :target_id => user.id, :target_type => 'user', :action => "invoice_not_created")
+      end
     end
     flash[:status] = _('Payment_added')
     redirect_to :action => 'list'
   end
+
 
   def delete_payment
     paym = Payment.find(:first, :conditions => ["id = ?", params[:id]])
