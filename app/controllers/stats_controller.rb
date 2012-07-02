@@ -3865,6 +3865,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         :s_card_id => nil
     }
     options = ((params[:clear] || !session[:last_calls_stats]) ? default : session[:last_calls_stats])
+    options[:items_per_page] = session[:items_per_page] if session[:items_per_page].to_i > 0 
     default.each { |key, value| options[key] = params[key] if params[key] }
 
     change_date_to_present if params[:clear]
