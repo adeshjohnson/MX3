@@ -12,7 +12,7 @@
         <th align="center"><%= _('Added') %></th>
         <th align="center"><%= _('Activation_start') %></th>
         <th align="center"><%= _('Activation_end') %></th>
-        <th align="right"><%= _('Time_left') %></th>
+        <th align="center"><%= _('Time_left') %></th>
         <% if @allow_edit %>
             <th></th>
             <th></th>
@@ -28,7 +28,7 @@
             <td id="added_<%= sub.id %>" align="center"> <%= nice_date_time sub.added %> </td>
             <td id="activation_start_<%= sub.id %>" align="center"> <%= nice_date_time sub.activation_start %> </td>
             <td id="activation_end_<%= sub.id %>" align="center"> <%= nice_date_time sub.activation_end %> </td>
-            <td id="time_left_<%= sub.id %>" align="right"> <%= sub.time_left if sub.service.servicetype == "flat_rate" %></td>
+            <td id="time_left_<%= sub.id %>" align="center"> <%= nice_time sub.time_left if sub.service.servicetype == "flat_rate" %></td>
             <% if @allow_edit %>
                 <td id="edit_<%= sub.id %>" align="center"><%= link_to(b_edit, {:action => 'subscription_edit', :id => sub}, :id => "edit_link_" + sub.id.to_s) %></td>
                 <td id="destroy_<%= sub.id %>" align="center"><%= link_to(b_delete, {:action => 'subscription_confirm_destroy', :id => sub}, :id => "destroy_link_" + sub.id.to_s) %></td>
