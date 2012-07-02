@@ -41,12 +41,12 @@ class Subscription < ActiveRecord::Base
 
       year_month = time.strftime("%Y-%m")
       data = FlatrateData.find(:first, :conditions => "`year_month` = '#{year_month}' AND subscription_id = #{self.id}")
-      out = data.minutes.to_i if data
+      out = data.seconds.to_i if data
 
       #      datas = flatrate_datas(:conditions => ["year_month = ?", time.strftime("%Y-%m")])
       #      datas.each{ |data| out += data.minutes.to_i }
 
-      out = service.quantity.to_i - out
+      out = service.quantity.to_i * 60 - out
     end
     out
   end
