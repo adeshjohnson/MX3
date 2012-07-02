@@ -604,6 +604,14 @@ class DevicesController < ApplicationController
 
       @device.mailbox = @device.enable_mwi.to_i == 0 ? "" : @device.extension.to_s + "@default"
 
+      # recordings for reseller 
+      # special case - reseller cannot manage a lot of recording functions 
+      # .record allows reseller's user to view it's NEW recordings 
+      if session[:usertype] == 'reseller' 
+        @device.record = @device.record_forced 
+      end 
+ 
+
       if @device.save
         # --------------- VM -------------
         old_vm = (vm = @device.voicemail_box).dup
