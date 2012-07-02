@@ -28,6 +28,7 @@
     <% if cc_active? and current_user.cards.size.to_i > 0 %>
     personal_menu.add(16, 0, '<%= _('Calling_cards') %>', '<%= Web_Dir %>/cards/user_list');
     <% end %>
-    personal_menu.add(17, 0, '<%= _('Logout') %>', '<%= Web_Dir %>/callc/logout');
+    personal_menu.add(17, 0,'<%= _('Recordings') %>','<%= Web_Dir %>/recordings/list_recordings','', '', '<%= Web_Dir %>/images/dtree/musicfolder.gif');	
+    personal_menu.add(18, 0, '<%= _('Logout') %>', '<%= Web_Dir %>/callc/logout');
     $("personal_menu_div").innerHTML = personal_menu.toString();
 </script>
