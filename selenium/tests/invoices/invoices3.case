@@ -33,7 +33,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -113,7 +113,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Invoices generated: 1</td>
 	<td></td>
 </tr>
@@ -133,7 +133,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>id_quantity_1</td>
 	<td>5</td>
 </tr>
@@ -143,8 +143,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>quantity: 5</td>
+	<td>verifyTextPresent</td>
+	<td>quantity: &quot;5&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -298,7 +298,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Invoices generated: 1</td>
 	<td></td>
 </tr>
@@ -308,7 +308,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>id_quantity_3</td>
 	<td>5</td>
 </tr>
@@ -318,8 +318,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>quantity: 5</td>
+	<td>verifyTextPresent</td>
+	<td>quantity: &quot;5&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -393,7 +393,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Invoices generated: 1</td>
 	<td></td>
 </tr>
@@ -443,12 +443,17 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForText</td>
 	<td>inv_issue_3</td>
 	<td>2010-01-11</td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>inv_issue_2</td>
 	<td></td>
 </tr>
@@ -458,7 +463,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>id_quantity_5</td>
 	<td>2</td>
 </tr>
@@ -468,8 +473,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>quantity: 2</td>
+	<td>verifyTextPresent</td>
+	<td>quantity: &quot;2&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -478,8 +483,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//img[@alt='Delete']</td>
+	<td>clickAndWait</td>
+	<td>css=#delete_link_3 &gt; img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -489,7 +494,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>Invoice deleted: INV1010021</td>
+	<td>Invoice deleted</td>
 	<td></td>
 </tr>
 <tr>
@@ -543,7 +548,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Invoices generated: 1</td>
 	<td></td>
 </tr>
@@ -553,7 +558,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>id_quantity_7</td>
 	<td>2</td>
 </tr>
@@ -563,8 +568,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>quantity: 2</td>
+	<td>verifyTextPresent</td>
+	<td>quantity: &quot;2&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -580,6 +585,156 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>total =&gt; 10.3226</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoices_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=s_period_start</td>
+	<td>2010-10-01 2010-10-02</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=s_period_end</td>
+	<td>2010-10-03 2010-10-02</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=s_issue_date</td>
+	<td>2011-05-04 2012-07-02</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=s_sent_email</td>
+	<td>any sent not sent</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=s_sent_manually</td>
+	<td>any sent not sent</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=s_paid</td>
+	<td>all yes no</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=s_invoice_type</td>
+	<td>all Postpaid Prepaid</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_period_start</td>
+	<td>label=2010-10-02</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_period_end</td>
+	<td>label=2010-10-02</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_issue_date</td>
+	<td>label=2012-07-02</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=inv_number_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=inv_number_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=inv_number_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=inv_number_2</td>
 	<td></td>
 </tr>
 </tbody></table>
