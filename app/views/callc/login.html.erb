@@ -116,8 +116,8 @@
             <br/><br/>
             <% if request.env["HTTP_USER_AGENT"] and (request.env["HTTP_USER_AGENT"].match("iPhone") or request.env["HTTP_USER_AGENT"].match("iPod")) %>
                 <select name="layout_t" tabindex="3">
-                  <option value="mini"><%= _('mini') %></option>
                   <option value="full"><%= _('full') %></option>
+                  <option value="mini"><%= _('mini') %></option>
                 </select>
             <% end %>
             <%= submit_tag _('login'), :tabindex => "4", :disable_with => _('Processing..') %>
