@@ -164,7 +164,7 @@
 <table width="100%" class="maintable">
   <tr>
     <th align="left"><%= ordered_list_header("users.first_name", "user", "User", @options) %></th>
-    <th align="left"><%= ordered_list_header("invoices.number", "number", "Number", @options) %></th>
+    <th align="left"><%= ordered_list_header("LENGTH(invoices.number)", "number" ,"Number", @options)  %></th>
     <th align="left"><%= ordered_list_header("invoices.invoice_type", "invoice_type", "Invoice_type", @options) %></th>
     <th align="center"><%= ordered_list_header("invoices.period_start", "period_start", "Period_start", @options) %></th>
     <th align="center"><%= ordered_list_header("invoices.period_end", "period_end", "Period_end", @options) %></th>

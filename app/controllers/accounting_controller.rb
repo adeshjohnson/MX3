@@ -1882,11 +1882,13 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
   end
 
   def invoices_order_by(params, options)
+    ord_2 = nil
     case params[:order_by].to_s
       when "user" then
         order_by = "users.first_name"
       when "number" then
-        order_by = "invoices.number"
+        order_by = "LENGTH(invoices.number)"
+        ord_2 =  ", number"
       when "invoice_type" then
         order_by = "invoices.invoice_type"
       when "period_start" then
@@ -1912,6 +1914,10 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     without = order_by
     order_by = "users.first_name " + (options[:order_desc] == 1 ? "DESC" : "ASC") + ", users.last_name" if order_by.to_s == "users.first_name"
     options[:order_desc].to_i == 1 ? order_by += " DESC" : order_by += " ASC"
+    if !ord_2.blank?
+      order_by +=  ord_2
+      options[:order_desc].to_i == 1 ? order_by += " DESC" : order_by += " ASC"
+    end
     return without, order_by
   end
 
