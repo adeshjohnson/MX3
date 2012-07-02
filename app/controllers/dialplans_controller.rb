@@ -6,7 +6,8 @@ class DialplansController < ApplicationController
   before_filter :authorize
   before_filter :find_dialplan, :only => [:list_extlines, :edit, :update, :destroy, :did_assign_to_dp]
 
-  @@End_ivr = ['End IVR #1', 'End IVR #2', 'End IVR #3']
+  @@CC_End_ivr = ['End IVR #1', 'End IVR #2', 'End IVR #3', 'End IVR #4']
+  @@ANI_End_ivr = ['End IVR #1', 'End IVR #2', 'End IVR #3']
 
   def dialplans
     @page_title = _('Dial_Plans')
@@ -17,7 +18,8 @@ class DialplansController < ApplicationController
     @abpdps = current_user.dialplans.find(:all, :conditions => "dptype = 'authbypin'", :order => "name ASC")
     @cbdps = current_user.dialplans.find(:all, :conditions => "dptype = 'callback'", :order => "name ASC") if callback_active?
     @ivr_dialplans = current_user.dialplans.find(:all, :conditions => "dptype = 'ivr'", :order => "name ASC")
-    @end_ivr = @@End_ivr
+    @cc_end_ivr = @@CC_End_ivr
+    @ani_end_ivr = @@ANI_End_ivr
 
     @quickforward_dialplans = current_user.dialplans.find(:all, :select => "dialplans.*, users.username AS user_name, devices.username AS device_name, devices.device_type", :joins => "LEFT JOIN devices ON dialplans.data3 = devices.id LEFT JOIN users ON users.id = devices.user_id", :conditions => "dptype = 'quickforwarddids' and dialplans.id != 1", :order => "dialplans.name ASC")
   end
@@ -83,7 +85,8 @@ class DialplansController < ApplicationController
         @selected_user_id = ''
       end
     end
-    @end_ivr = @@End_ivr
+    @cc_end_ivr = @@CC_End_ivr
+    @ani_end_ivr = @@ANI_End_ivr
   end
 
   def dialplans_device_ajax
@@ -247,7 +250,8 @@ class DialplansController < ApplicationController
     @dp_data1 = 3
     @dp_data2 = 3
     @dp_data7 = false
-    @end_ivr = @@End_ivr
+    @cc_end_ivr = @@CC_End_ivr
+    @ani_end_ivr = @@ANI_End_ivr
     @users = current_user.find_all_for_select
     @users_used = ""
   end

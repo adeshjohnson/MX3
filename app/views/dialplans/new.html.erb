@@ -50,7 +50,7 @@
                 <td align="right"> <%= text_field_tag 'dialplan[data5]', @dp_data5, "class" => "input", :size => "10", :maxlength => "10", :id => "dialplan_data_5" %></td>
                 <td align="right"> <%= text_field_tag 'dialplan[data6]', @dp_data6, "class" => "input", :size => "10", :maxlength => "10", :id => "dialplan_data_6" %></td>
                 <td align="center"><select name="end_ivr">
-                  <% @end_ivr.each_with_index { |val, index| %>
+                  <% @cc_end_ivr.each_with_index { |val, index| %>
                       <option value=<%= index %> <%= 'selected' if @dp.data9.to_i == (index+1) %>> <%= val %> </option>
                   <% } %>
                 </select>
@@ -168,10 +168,10 @@
         </td>
         <td align="center">  
  	  <select id="dialplan[data8]" name ="dialplan[data8]"> 
- 	    <%@end_ivr.each_with_index{|val,index|%> 
+ 	    <%@ani_end_ivr.each_with_index{|val,index|%>
  	      <option value=<%= index %> <%= 'selected' if @dp.data8.to_i == (index+1)%>  > <%= val %> </option> 
  	    <% }%> 
- 	  </select> 
+ 	  </select>
  	</td> 
         <td align="center"> <%= image_submit_tag 'icons/add.png', :title => _('Add'), :id => "dp_PIN_add" %></td>
       </tr>

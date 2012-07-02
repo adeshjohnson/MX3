@@ -44,7 +44,7 @@
                 <td align="right" id="cc_dp_data5_<%= dp.id %>"> <%= h dp.data5 %></td>
                 <td align="right" id="cc_dp_data6_<%= dp.id %>"> <%= h dp.data6 %></td>
                 <%= render :partial => "/dids/dialplan_dids_list", :locals => {:plan => dp, :id => "cc_dp_dids_#{dp.id}"} %>
-                <td align="left" id="cc_dp_data9_<%= dp.id %>" <%= raw(nice_end_ivr_tooltip).html_safe %> >  <%= h @end_ivr[dp.data9.to_i-1] %></td>
+                <td align="left" id="cc_dp_data9_<%= dp.id %>" <%= raw(nice_end_ivr_tooltip).html_safe %> >  <%= h @cc_end_ivr[dp.data9.to_i-1] %></td>
                 <% if mor_11_extend? %>
                     <td align="right" id="cc_dp_data11_<%= dp.id %>"> <%= h dp.data11 %> </td>
                     <td align="center" id="cc_dp_data12_<%= dp.id %>"> <%= dp.balance_ivr %> </td>
@@ -106,7 +106,7 @@
                   <%= h device.device_type + "/" + device.name %>
               <% end %>
             </td>
- 	    <td align="left" id="cc_dp_data8_<%=dp.id%>" <%= nice_end_ivr_tooltip%> >  <%=h @end_ivr[dp.data8.to_i-1] %></td> 
+ 	    <td align="left" id="cc_dp_data8_<%=dp.id%>" <%= nice_end_ivr_tooltip%> >  <%=h @ani_end_ivr[dp.data8.to_i-1] %></td>
             <td align="center" id="ap_dp_edit_<%= dp.id %>"><%= link_to b_edit, {:action => 'edit', :id => dp.id}, :id => "diaplan_edit_#{dp.id}" %></td>
             <td align="center" id="ap_dp_delete_<%= dp.id %>"><%= link_to(b_delete, {:action => 'destroy', :id => dp.id}, :id => "diaplan_delete_#{dp.id}", :confirm => _('Are_you_sure'), :method => :post) %></td>
           </tr>
