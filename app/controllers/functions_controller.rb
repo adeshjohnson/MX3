@@ -82,7 +82,8 @@ class FunctionsController < ApplicationController
         device = Device.find(device_id)
         src = device.extension
 
-        server = Confline.get_value("Web_Callback_Server").to_i
+        #server = Confline.get_value("Web_Callback_Server").to_i
+        server = device.server_id.to_i
         server = 1 if server == 0
 
         src_channel = "Local/#{src}@mor_cb_src/n"
