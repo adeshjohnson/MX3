@@ -46,8 +46,8 @@
               <% r.aratedetails.each { |rr| %>
                   <%= nice_time2 rr.start_time %> - <%= nice_time2 rr.end_time %> => <%= rr.price %>
                   (<%= r.tariff.currency %>)
-                  <% if r.tariff.currency != current_user.currency.name%>
-                      / <%= nice_number(rr.price * Currency.count_exchange_rate(r['currency'],  current_user.currency.name)) %> (<%= current_user.currency.name %>)
+                  <% if r.tariff.currency != Currency.get_default.name%>
+                      / <%= nice_number(rr.price * Currency.count_exchange_rate(r['currency'],  Currency.get_default.name)) %> (<%= Currency.get_default.name %>)
                   <%end%>
                   <br/>
               <% } %>
@@ -55,8 +55,8 @@
               <% r.ratedetails.each { |rr| %>
                   <%= nice_time2 rr.start_time %> - <%= nice_time2 rr.end_time %> => <%= rr.rate %>
                   (<%= r.tariff.currency %>)
-                  <% if r.tariff.currency != current_user.currency.name%>
-                      / <%= nice_number(rr.rate * Currency.count_exchange_rate(r['currency'],  current_user.currency.name)) %> (<%= current_user.currency.name %>)
+                  <% if r.tariff.currency != Currency.get_default.name%>
+                      / <%= nice_number(rr.rate * Currency.count_exchange_rate(r['currency'],  Currency.get_default.name)) %> (<%= Currency.get_default.name %>)
                   <%end%>
                   <br/>
               <% } %>
