@@ -5,6 +5,11 @@ class ActiveProcessor::IdealController < ActiveProcessor::BaseController
   def index
     @gateway = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => current_user.id}).enabled_by(current_user.owner.id).query
 
+    unless  @gateway
+      flash[:notice] = _("Inactive_Gateway")
+      redirect_to :controller => "/callc", :action => "main"
+    end
+
     unless @gateway
       flash[:notice] = _("Inactive_Gateway")
       redirect_to :controller => "/callc", :action => "main" and return false
@@ -21,6 +26,12 @@ class ActiveProcessor::IdealController < ActiveProcessor::BaseController
   def pay
     @engine = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => current_user.id}).enabled_by(current_user.owner.id)
     @gateway = @engine.query
+
+    unless  @gateway
+      flash[:notice] = _("Inactive_Gateway")
+      redirect_to :controller => "/callc", :action => "main"
+    end
+
 
     params['gateways']["issuer_id"] = params[:purchase][:issuer_id] if params[:purchase] and params[:purchase][:issuer_id]
     if params[:purchase] and params[:purchase][:issuer_id] and @engine.pay_with(@gateway, request.remote_ip, params['gateways'])
