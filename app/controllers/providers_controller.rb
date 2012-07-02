@@ -222,6 +222,7 @@ class ProvidersController < ApplicationController
       dev.device_type = @provider.tech.strip
       dev.user_id = -1 #means it's not ordinary user
                         #temp until taken from provider's table
+      dev.istrunk = 1   #mark as trunk by default when call will be send to this provider, to send Destination info to it also
       dev.port = @provider.port.strip
       dev.works_not_logged = 1
       dev.nat = "no"
