@@ -210,6 +210,8 @@ class TariffsController < ApplicationController
     logger.fatal @directions_first_letters.inspect
     @st = (params[:st] ? params[:st].upcase : @directions_first_letters[0]) 
 
+    @st = @st.to_s
+
     @st = 'A' if @st.blank?
 
     @directions = Direction.find(
