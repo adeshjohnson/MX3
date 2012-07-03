@@ -210,10 +210,12 @@ class TariffsController < ApplicationController
     logger.fatal @directions_first_letters.inspect
     @st = (params[:st] ? params[:st].upcase : @directions_first_letters[0]) 
 
+    @st = 'A' if @st.blank?
+
     @directions = Direction.find(
         :all,
         :select => "directions.*, COUNT(destinations.id) AS 'dest_count', COUNT(rates.id) AS 'rate_count'",
-        :conditions => ["directions.name LIKE ?", @st+"%"],
+        :conditions => ["directions.name LIKE ?", @st.to_s + "%"],
         :joins => "LEFT JOIN destinations ON (destinations.direction_code = directions.code) LEFT JOIN rates ON (rates.destination_id = destinations.id AND tariff_id = #{@tariff.id.to_i})",
         :order => "name ASC",
         :group => "directions.id")
