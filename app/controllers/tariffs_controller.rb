@@ -961,8 +961,8 @@ class TariffsController < ApplicationController
           #@f_h, @f_m, @f_s, @t_h, @t_m, @t_s = params[:time_from_hour].to_s,params[:time_from_minute].to_s,params[:time_from_second].to_s,params[:time_till_hour].to_s,params[:time_till_minute].to_s,params[:time_till_second].to_s
           @rate_type, flash[:notice_2] = @tariff.check_types_periods(params)
           unless flash[:notice_2].blank?
-            flash[:notice] = _('Tarrif_import_incorect_time')
-            flash[:notice] += '<br /> * ' + _('Please_select_period_without_collisions')
+            flash[:notice] = _('Tarrif_import_incorect_time').html_safe
+            flash[:notice] += '<br /> * '.html_safe + _('Please_select_period_without_collisions').html_safe
             redirect_to :action => "import_csv", :id => @tariff.id, :step => "2" and return false
           end
 
@@ -1690,8 +1690,8 @@ class TariffsController < ApplicationController
 
             @rate_type, flash[:notice_2] = @tariff.check_types_periods(params)
             unless flash[:notice_2].blank?
-              flash[:notice] = _('Tarrif_import_incorect_time')
-              flash[:notice] += '<br /> * ' + _('Please_select_period_without_collisions')
+              flash[:notice] = _('Tarrif_import_incorect_time').html_safe
+              flash[:notice] += '<br /> * '.html_safe + _('Please_select_period_without_collisions').html_safe
               redirect_to :action => "import_csv", :id => @tariff.id, :step => "2" and return false
             end
 

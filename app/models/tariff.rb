@@ -431,8 +431,8 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     notice_2 = ''
     # checking time periods for collisions
     if ratesd and ratesd.size.to_i > 0
-      notice_2 = _('Tarrif_import_incorect_time')
-      notice_2 += '<br /> * ' + _('Please_select_period_without_collisions')
+      notice_2 = _('Tarrif_import_incorect_time').html_safe
+      notice_2 += '<br /> * '.html_safe + _('Please_select_period_without_collisions').html_safe
       # redirect_to :action => "import_csv", :id => @tariff.id, :step => "2" and return false
     end
 
