@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.95" />
+<link rel="selenium.base" href="" />
 <title>recordings2</title>
 </head>
 <body>
@@ -32,7 +32,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -176,7 +176,71 @@
 	<td>2011-11-01 07:00:01</td>
 	<td></td>
 </tr>
-
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rec_date_time_16</td>
+	<td>2011-11-23 07:00:01</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rec_date_time_14</td>
+	<td>2011-11-13 17:00:01</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=page_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=rec_date_time_7</td>
+	<td>2010-02-18 00:00:01</td>
+</tr>
 </tbody></table>
 </body>
 </html>
