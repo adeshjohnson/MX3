@@ -43,11 +43,11 @@
       </tr>
       <tr class="row1">
         <th id="call_time"><%= _('Total_call_time') %>:</th>
-        <td id="total_call_time" align="center"><%= @total if @total %></td>
+        <td id="total_call_time" align="center"><%= @total.to_i if @total %></td>
       </tr>
       <tr>
         <th id="total_longer_than_10"><%= _('Total_call_longer_than_10s') %>:</th>
-        <td id="total_call_longer_than_10" align="center"><%= @total_longer_than_10 if  @total_longer_than_10 %></td>
+        <td id="total_call_longer_than_10" align="center"><%= @total_longer_than_10.to_i if  @total_longer_than_10 %></td>
       </tr>
     </table>
     <br/>
