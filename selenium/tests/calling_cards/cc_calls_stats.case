@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.95" />
+<link rel="selenium.base" href="" />
 <title>cc_calls_stats</title>
 </head>
 <body>
@@ -32,7 +32,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -112,13 +112,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>&quot;user&quot;=&gt;&quot;Card#3706001121&quot;</td>
+	<td>verifyTextPresent</td>
+	<td>user: Card#3706001121</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>&quot;user&quot;=&gt;&quot;Card#3706001122&quot;</td>
+	<td>verifyTextPresent</td>
+	<td>user: Card#3706001122</td>
 	<td></td>
 </tr>
 <tr>
@@ -148,6 +148,101 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=111&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=calls_link_121</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Last Calls </td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=s_card_id</td>
+	<td>121</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=s_card_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=s_card_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Card/#3706001121</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=page_2</td>
+	<td>1 2 3 4 5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2011-11-03 05:00:01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2011-11-03 09:00:01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2011-11-03 22:00:01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calldate_249</td>
+	<td>2011-11-15 02:00:01</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calldate_266</td>
+	<td>2011-11-22 17:00:01</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -167,7 +262,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -237,13 +332,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>&quot;user&quot;=&gt;&quot;Card#3706001139&quot;</td>
+	<td>verifyTextPresent</td>
+	<td>user: Card#3706001139</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>&quot;user&quot;=&gt;&quot;Card#3706001133&quot;</td>
+	<td>verifyTextPresent</td>
+	<td>user: Card#3706001133</td>
 	<td></td>
 </tr>
 </tbody></table>
