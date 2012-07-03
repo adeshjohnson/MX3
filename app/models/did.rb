@@ -257,4 +257,11 @@ class Did < ActiveRecord::Base
     Call.where("did_id = #{self.id}").first ? true : false
   end
 
+=begin
+  cc_tariff_if can only be integer greater than 0 or by default 0
+=end
+  def cc_tariff_id=(value)
+    write_attribute(:cc_tariff_id, value.to_i)
+  end
+
 end

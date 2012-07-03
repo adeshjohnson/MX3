@@ -117,6 +117,11 @@
               <td><strong><%= _('Tone_zone') %>:</strong></td>
               <td> <%= select_tag("did[tonezone]", options_for_select([''] + @tone_zones.map{|zone| [zone, zone]}, @did.tonezone.to_s)) %> </td>
             </tr>
+            <tr>
+              <td><strong><%= _('Tariff_for_cc') %>:</strong></td>
+              <td> <%= select_tag("did[cc_tariff_id]", options_for_select([_('Default')] + @cc_tariffs.map{|tariff| [tariff.name, tariff.id]}, @did.cc_tariff_id)) %> </td>
+            </tr>
+
             <tr <%= tooltip(_('Grace_Time'), _('Grace_Time_Explanation')) if current_user.usertype != 'reseller' %>>
               <td><%= submit_tag _('Change'), :disable_with => _('Processing..') %></td>
               <td>&nbsp;</td>

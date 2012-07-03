@@ -331,6 +331,8 @@ class DidsController < ApplicationController
     end
 
     @tone_zones = ['at', 'au', 'be', 'br', 'ch', 'cl', 'cn', 'cz', 'de', 'dk', 'ee', 'es', 'fi', 'fr', 'gr', 'hu', 'it', 'lt', 'mx', 'ml', 'no', 'nz', 'pl', 'pt', 'ru', 'se', 'sg', 'uk', 'us', 'us-old', 'tw', 've', 'za']
+    @cc_tariffs = Tariff.find(:all, :conditions => ["purpose != 'provider'"])
+
   end
 
   def update
@@ -347,6 +349,7 @@ class DidsController < ApplicationController
       end
       did.tonezone = params[:did][:tonezone] if params[:did] and params[:did][:tonezone]
       did.sound_file_id = params[:did][:sound_file_id] if params[:did] and params[:did].has_key?(:sound_file_id)
+      did.cc_tariff_id = params[:did][:cc_tariff_id] if params[:did] and params[:did][:cc_tariff_id]
 
       ["t_digit", "t_response", "grace_time"].each do |key|
         did[key] = params[:did][key] if params[:did] and params[:did].has_key?(key)

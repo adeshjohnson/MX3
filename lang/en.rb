@@ -4449,6 +4449,8 @@ Localization.define('en') do |l|
   l.store 'New_Provider_balance', 'New Provider balance'
   l.store 'Minimal_balance', 'Minimal balance'
   l.store 'Bad_minimal_balance', 'Bad minimal balance'
+  l.store 'Tariff_for_cc', 'Tariff for Calling Card'
+
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
