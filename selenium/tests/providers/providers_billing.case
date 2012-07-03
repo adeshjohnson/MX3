@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.93" />
+<title>providers_billing</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">providers_billing</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/billing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=img[alt=&quot;Money&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?provider_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please note that TAX will be automatically deducted from amount you are adding: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> You can enter amount with OR without tax. Not both at the same time. Based on what you enter, tax will be added or not. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Test Provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=amount_with_tax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=description</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=p_currency</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>900</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Review all data and if everything is correct - confirm the payment: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_1</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=a_w_v_1</td>
+	<td>900.0000 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=new_balance_1</td>
+	<td>-900.0000 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_10</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_10</td>
+	<td>-900.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=fee_10</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amout_with_tax_10</td>
+	<td>-900.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_10</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_10</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Assign Provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax1_value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?provider_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount_with_tax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_with_tax</td>
+	<td>-2000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Review all data and if everything is correct - confirm the payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_1</td>
+	<td>-900.0000 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=a_w_v_1</td>
+	<td>-1818.1818 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=new_balance_1</td>
+	<td>918.1818 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_11</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_11</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_11</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_11</td>
+	<td>1818.1818</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=fee_11</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amout_with_tax_11</td>
+	<td>2000.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_11</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>common_prov</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider[common_use]_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=common_prov SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Retail - Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=div.nb &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>tarprov</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff[purpose]_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>provider_re</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?provider_id=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please note that TAX will be automatically deducted from amount you are adding: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> You can enter amount with OR without tax. Not both at the same time. Based on what you enter, tax will be added or not. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>provider_re</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=amount_with_tax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=description</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=p_currency</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>900</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Review all data and if everything is correct - confirm the payment: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_3</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=a_w_v_3</td>
+	<td>900.0000 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=new_balance_3</td>
+	<td>-900.0000 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_12</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_12</td>
+	<td>-900.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=fee_12</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amout_with_tax_12</td>
+	<td>-900.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_12</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_12</td>
+	<td>provider_re</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Assign Provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax1_value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?provider_id=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount_with_tax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_with_tax</td>
+	<td>-2000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Review all data and if everything is correct - confirm the payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_3</td>
+	<td>-900.0000 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=a_w_v_3</td>
+	<td>-1818.1818 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=new_balance_3</td>
+	<td>918.1818 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_13</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_13</td>
+	<td>provider_re</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_13</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_13</td>
+	<td>1818.1818</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=fee_13</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amout_with_tax_13</td>
+	<td>2000.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_13</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?provider_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user[currency_id]</td>
+	<td>label=ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user[currency_id]</td>
+	<td>label=DZD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?provider_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>200</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Review all data and if everything is correct - confirm the payment: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_1</td>
+	<td>918.1818 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_1</td>
+	<td>918.1818 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=exchange_rate_1</td>
+	<td>0.5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=a_w_v_c_t_1</td>
+	<td>440.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=a_w_v_1</td>
+	<td>400.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=new_balance_1</td>
+	<td>518.1818 ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?provider_id=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Review all data and if everything is correct - confirm the payment: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_3</td>
+	<td>918.1818 DZD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_3</td>
+	<td>918.1818 DZD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=exchange_rate_3</td>
+	<td>0.25</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=a_w_v_c_t_3</td>
+	<td>440.0000 DZD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=a_w_v_3</td>
+	<td>400.0000 DZD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=new_balance_3</td>
+	<td>518.1818 DZD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_15</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_15</td>
+	<td>provider_re</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_15</td>
+	<td>Manual</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_15</td>
+	<td>-100.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amout_with_tax_15</td>
+	<td>-110.0000</td>
+</tr>
+</tbody></table>
+</body>
+</html>
