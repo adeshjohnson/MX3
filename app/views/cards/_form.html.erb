@@ -29,6 +29,9 @@
 <p><label for="card_balance"><%= _('Balance') %>: </label>
   <label for="card_balance"><%= nice_number(@card.balance) %></label></p><br/>
 
+<p><label for="card_sold"><%= _('Minimal_balance') %></label><br/>
+  <%= text_field 'card', 'min_balance', :size => 10, "class" => "input"  %></p>
+
 <p><label for="card_sold"><%= _('Sold') %>?</label>&nbsp;
   <%= image_tag 'icons/cross.png', :title => _('Unsold') if @card.sold ==0 %>
   <%= image_tag 'icons/check.png', :title => _('Sold') if @card.sold == 1 %></p>

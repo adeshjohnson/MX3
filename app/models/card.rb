@@ -10,7 +10,7 @@ class Card < ActiveRecord::Base
   validates_uniqueness_of :pin, :allow_nil => true, :message => _('PIN_is_already_taken')
   validates_uniqueness_of :callerid, :if => :validate_caller_id, :message => _('Callerid_must_be_unique')
 
-  before_save :validate_pin_length, :validate_number_length, :card_before_save
+  before_save :validate_pin_length, :validate_number_length, :card_before_save , :validate_min_balance
   before_create :card_before_create
 
   def validate_caller_id
@@ -29,6 +29,15 @@ class Card < ActiveRecord::Base
   def validate_pin_length
     if self.pin and self.pin.length != self.cardgroup.pin_length
       errors.add(:pin, _('Bad_pin_length_should_be') + ": " + self.cardgroup.pin_length.to_s)
+      false
+    else
+      true
+    end
+  end
+
+  def validate_min_balance
+    if self.min_balance.to_f < 0.to_f
+      errors.add(:min_balance, _('Bad_minimal_balance'))
       false
     else
       true

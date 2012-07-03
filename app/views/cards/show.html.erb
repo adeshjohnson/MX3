@@ -5,6 +5,7 @@
     <p><b><%= _('PIN') %>:</b> <%= @card.pin %> </p>
 <% end %>
 <p><b><%= _('Balance') %> (<%= _('Without_VAT') %>):</b> <%= nice_number @card.balance %> </p>
+<p><b><%= _('Minimal_balance') %>:</b> <%= nice_number @card.min_balance %> </p>
 <p><b><%= _('First_use') %>:</b> <%= nice_date @card.first_use %> </p>
 <p><b><%= _('Daily_charge_paid_till') %>:</b> <%= nice_date @card.daily_charge_paid_till %> </p>
 <p><b><%= _('Sold') %>:</b>
