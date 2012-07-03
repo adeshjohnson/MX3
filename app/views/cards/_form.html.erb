@@ -27,10 +27,10 @@
 </p>
 
 <p><label for="card_balance"><%= _('Balance') %>: </label>
-  <label for="card_balance"><%= nice_number(@card.balance) %></label></p><br/>
+<label for="card_balance"><%= nice_number(@card.balance) %></label></p>
 
-<p><label for="card_sold"><%= _('Minimal_balance') %></label><br/>
-  <%= text_field 'card', 'min_balance', :size => 10, "class" => "input"  %></p>
+<label for="card_sold"><%= _('Minimal_balance') %>:</label>
+  <%= text_field 'card', 'min_balance', :size => 10, "class" => "input"  %>
 
 <p><label for="card_sold"><%= _('Sold') %>?</label>&nbsp;
   <%= image_tag 'icons/cross.png', :title => _('Unsold') if @card.sold ==0 %>
