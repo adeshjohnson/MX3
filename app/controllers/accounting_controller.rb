@@ -1889,6 +1889,9 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
       when "number" then
         order_by = "LENGTH(invoices.number)"
         ord_2 =  ", number"
+      when "LENGTH(invoices.number)"
+        order_by = "LENGTH(invoices.number)"
+        ord_2 =  ", number"
       when "invoice_type" then
         order_by = "invoices.invoice_type"
       when "period_start" then
