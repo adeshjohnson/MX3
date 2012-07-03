@@ -147,7 +147,7 @@ class RecordingsController < ApplicationController
     @server_path = get_server_path(1)
     @remote_server_path = get_server_path(0)
 
-    if session[:usertype] == "admin"
+    if session[:usertype] == "admin" or session[:usertype] == "reseller"
       id = params[:id]
     else
       id = session[:user_id]
