@@ -15,7 +15,7 @@
                   <%= raw link_nice_device(d).html_safe %>
               <% else %>
                   <% if d.user and d.user.owner_id == current_user.id %>
-                      <%= raw link_nice_device(d).hrml_safe %>
+                      <%= raw link_nice_device(d).html_safe %>
                   <% else %>
                       <%= nice_device(d, {:image => true, :tech => true}) %>
                   <% end %>
