@@ -203,11 +203,9 @@ class TariffsController < ApplicationController
       @can_edit = false
     end
 
-
     @directions_first_letters = Rate.find(:all, :select => 'directions.name', :conditions => ["rates.tariff_id=?", @tariff.id], :joins => "JOIN destinations ON destinations.id = rates.destination_id JOIN directions ON (directions.code = destinations.direction_code)", :order => "directions.name ASC", :group => "SUBSTRING(directions.name,1,1)") 
     
     @directions_first_letters.map! { |rate| rate.name[0..0] } 
-    logger.fatal @directions_first_letters.inspect
     @st = (params[:st] ? params[:st].upcase : @directions_first_letters[0]) 
 
     @st = @st.to_s
@@ -1919,15 +1917,22 @@ class TariffsController < ApplicationController
     redirect_to :action => 'list'
   end
 
-  def first_letter_of_dstgroup 
+=begin
+  returns first letter of destination group name if it has any rates set, if nothing is set return 'A'
+=end
+  def first_letter_of_dstgroup(tariff_id)
     query = "SELECT destinationgroups.name  
-             FROM destinations 
+             FROM   destinations 
              JOIN   destinationgroups ON (destinationgroups.id = destinations.destinationgroup_id) 
+             JOIN   rates ON (rates.destinationgroup_id = destinationgroups.id )
+             JOIN   aratedetails ON (aratedetails.rate_id = rates.id)
+             WHERE  rates.tariff_id = #{tariff_id}
              GROUP BY destinations.destinationgroup_id 
              ORDER BY destinationgroups.name, destinationgroups.desttype ASC 
              LIMIT 1" 
     res = ActiveRecord::Base.connection.select_all(query) 
-    res[0]['name'][0].chr 
+    logger.fatal res.inspect
+    (res.size == 0) ? 'A' : res[0]['name'][0].chr 
   end 
 
   # =============== RATES FOR USER ==================
@@ -1948,7 +1953,7 @@ class TariffsController < ApplicationController
     @options[:page] = params[:page].to_i if !params[:page].blank?
     @items_per_page = Confline.get_value("Items_Per_Page").to_i
     @letter_select_header_id = @tariff.id
-    @st = (params[:st] ? params[:st].upcase : first_letter_of_dstgroup())
+    @st = (params[:st] ? params[:st].upcase : first_letter_of_dstgroup(@tariff.id))
 
     @page = 1
     @page = params[:page].to_i if params[:page]
