@@ -28,7 +28,7 @@
         <td id="minlen_<%= rule.id %>" align="right"><%= rule.minlen %></td>
         <td id="maxlen_<%= rule.id %>" align="right"><%= rule.maxlen %></td>
         <td align="center"><%= link_to b_edit, {:action => :edit, :id => rule.id}, :id => "edit_img_"+rule.id.to_s %></td>
-        <td align="center"><%= link_to b_delete, {:action => :destroy, :id => rule.id}, id => "delete_img_"+rule.id.to_s, :confirm => _('Are_you_sure'), :method => :post %></td>
+        <td align="center"><%= link_to b_delete, {:action => :destroy, :id => rule.id}, :id => "delete_img_"+rule.id.to_s, :confirm => _('Are_you_sure'), :method => :post %></td>
       </tr>
   <% } %>
 
