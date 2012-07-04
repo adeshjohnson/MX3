@@ -30,11 +30,13 @@ class Destinationgroup < ActiveRecord::Base
   end
 
   def Destinationgroup.destinationgroups_order_by(params, options)
-    logger.fatal options[:order_by]
     case options[:order_by].to_s.strip.to_s
-      when "country" then order_by = "dgn"
-      when "prefix" then order_by = "prefix"
-      when "destination" then order_by = "name"
+      when "country"
+        order_by = "dgn"
+      when "prefix"
+        order_by = "prefix"
+      when "destination"
+        order_by = "name"
       else
         order_by = options[:order_by]
     end

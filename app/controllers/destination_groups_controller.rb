@@ -189,16 +189,13 @@ class DestinationGroupsController < ApplicationController
 
     @page_title = _('Destinations_without_Destination_Groups')
     @page_icon = 'wrench.png'
-    default = {
-        :order_by => "country",
-        :order_desc => 0
-    }
 
     session[:destinations_destinations_to_dg_options] ? @options = session[:destinations_destinations_to_dg_options] : @options = {}
     params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page] or @options[:page] <= 0)
 
-    default.each { |key, value| @options[key] ||= (params[key] || default[key]) } 
-    @options[:order_by_full] = @options[:order_by] + (@options[:order_desc] == 1 ? " DESC" : " ASC")
+    params[:order_desc] ? @options[:order_desc] = params[:order_desc].to_i : (@options[:order_desc] = 1 if !@options[:order_desc])
+    params[:order_by] ? @options[:order_by] = params[:order_by].to_s : (@options[:order_by] = "country" if !@options[:order_by])
+
     @options[:order] = Destinationgroup.destinationgroups_order_by(params, @options)
 
     @total_pages = (Destination.count(:all, :conditions => "destinationgroup_id = 0").to_f/session[:items_per_page].to_f).ceil
