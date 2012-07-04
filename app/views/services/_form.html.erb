@@ -23,7 +23,7 @@
     </td>
   </tr>
   <tr id="price_options">
-    <td> <%= _('Sell_Price') %> (<%= current_user.currency.name %>):</td>
+    <td> <%= _('Self_Price') %> (<%= current_user.currency.name %>):</td>
     <td> <%= text_field_tag 'service[price]', @service.price, "class" => "input", :onkeyup => "this.value=this.value.replace(/[^0-9.-]/,'');" %></td>
   </tr>
   <tr id="price_options2">
