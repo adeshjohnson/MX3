@@ -4,10 +4,12 @@
       <td align = "center"> 
         <% for st in 'A'..'Z' %> 
           <%= "<b>".html_safe if st == @st%> 
-          <% if not defined?(@directions_first_letters) or @directions_first_letters.include?(st)%> 
+          <% if @directions_first_letters.include?(st)%> 
             <%= link_to st, :action => params[:action], :id => @letter_select_header_id, :st => st %> 
-          <% else %> 
-            <span style="color:grey;font-size:11px"> <%= st %> </span> 
+          <% elsif defined?(@directions_defined) and not @directions_defined.include?(st) %> 
+            <span style="color:grey;font-size:11px"> <%= st %> </span>
+          <% else %>
+            <%= link_to st, {:action => params[:action], :id => @letter_select_header_id, :st => st}, {:style => "color:grey"} %> 
           <% end %> 
           <%= "</b>".html_safe if st == @st%> 
         <% end %> 

@@ -1920,7 +1920,7 @@ class TariffsController < ApplicationController
 =begin
   returns first letter of destination group name if it has any rates set, if nothing is set return 'A'
 =end
-  def first_letter_of_dstgroup(tariff_id)
+  def tariff_dstgroups_with_rates(tariff_id)
     query = "SELECT destinationgroups.name  
              FROM   destinations 
              JOIN   destinationgroups ON (destinationgroups.id = destinations.destinationgroup_id) 
@@ -1928,11 +1928,21 @@ class TariffsController < ApplicationController
              JOIN   aratedetails ON (aratedetails.rate_id = rates.id)
              WHERE  rates.tariff_id = #{tariff_id}
              GROUP BY destinations.destinationgroup_id 
-             ORDER BY destinationgroups.name, destinationgroups.desttype ASC 
-             LIMIT 1" 
+             ORDER BY destinationgroups.name, destinationgroups.desttype ASC" 
     res = ActiveRecord::Base.connection.select_all(query) 
-    logger.fatal res.inspect
-    (res.size == 0) ? 'A' : res[0]['name'][0].chr 
+    res.map! { |rate| rate['name'][0..0] } 
+    res.uniq
+  end 
+
+  def dstgroup_name_first_letters
+    query = "SELECT destinationgroups.name  
+             FROM   destinations 
+             JOIN   destinationgroups ON (destinationgroups.id = destinations.destinationgroup_id) 
+             GROUP BY destinations.destinationgroup_id 
+             ORDER BY destinationgroups.name, destinationgroups.desttype ASC" 
+    res = ActiveRecord::Base.connection.select_all(query) 
+    res.map! {|dstgroup| dstgroup['name'][0..0].upcase}
+    res.uniq
   end 
 
   # =============== RATES FOR USER ==================
@@ -1953,7 +1963,16 @@ class TariffsController < ApplicationController
     @options[:page] = params[:page].to_i if !params[:page].blank?
     @items_per_page = Confline.get_value("Items_Per_Page").to_i
     @letter_select_header_id = @tariff.id
-    @st = (params[:st] ? params[:st].upcase : first_letter_of_dstgroup(@tariff.id))
+
+    #dst groups are rendered in 'pages' according to they name's first letter
+    #if no letter is specified in params, by default we show page full of 
+    #dst groups
+    @directions_first_letters = tariff_dstgroups_with_rates(@tariff.id)
+    @st = (params[:st] ? params[:st].upcase : (@directions_first_letters[0] || 'A'))
+
+    #needed to know whether to make link to sertain letter or not 
+    #when rendering letter_select_header
+    @directions_defined = dstgroup_name_first_letters()
 
     @page = 1
     @page = params[:page].to_i if params[:page]
