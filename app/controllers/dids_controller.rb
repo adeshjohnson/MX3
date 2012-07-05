@@ -331,7 +331,7 @@ class DidsController < ApplicationController
     end
 
     @tone_zones = ['at', 'au', 'be', 'br', 'ch', 'cl', 'cn', 'cz', 'de', 'dk', 'ee', 'es', 'fi', 'fr', 'gr', 'hu', 'it', 'lt', 'mx', 'ml', 'no', 'nz', 'pl', 'pt', 'ru', 'se', 'sg', 'uk', 'us', 'us-old', 'tw', 've', 'za']
-    @cc_tariffs = Tariff.find(:all, :conditions => ["purpose != 'provider'"])
+    @cc_tariffs = Tariff.find(:all, :conditions => ["purpose != 'provider' and owner_id = #{correct_owner_id}"])
 
   end
 

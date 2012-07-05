@@ -101,6 +101,11 @@ class Did < ActiveRecord::Base
     self.user_id = 0
     self.device_id = 0
     self.dialplan_id = 0
+    #ticket 6224 if did was assigned to reseller we should reset cc_tariff_if, because
+    #the tariff might be reseller's whitch no one else can see or use.
+    if self.reseller_id != 0
+      self.cc_tariff_id = 0
+    end
     self.reseller_id = 0
     self.status = "free"
     self.save
@@ -144,7 +149,7 @@ class Did < ActiveRecord::Base
   def reserve(user_id)
     did_user = User.find(:first, :conditions => ["id = ?", user_id])
     if did_user and did_user.is_reseller?
-      self.update_attributes({:reseller_id => did_user.id, :user_id => 0, :device_id => 0, :status => "free"})
+      self.update_attributes({:reseller_id => did_user.id, :user_id => 0, :device_id => 0, :status => "free", :cc_tariff_id => 0})
     else
       self.update_attributes({:user_id => user_id, :status => "reserved"})
     end
