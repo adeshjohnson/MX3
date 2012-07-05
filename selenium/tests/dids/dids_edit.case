@@ -32,7 +32,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -62,11 +62,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForTextPresent</td>
 	<td>DID was successfully created</td>
 	<td></td>
@@ -85,6 +80,21 @@
 	<td>type</td>
 	<td>id=did_did</td>
 	<td>37060064753</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Tariff for Calling Card</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>Default Test Tariff for Users Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>label=Test Tariff + 0.1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -130,6 +140,11 @@
 	<td>type</td>
 	<td>id=did_did</td>
 	<td>44444444</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>Test Tariff + 0.1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -213,6 +228,31 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=status</td>
+	<td>DID reserved</td>
+</tr>
+<tr>
+	<td>waitForNotEditable</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/various_calls</td>
 	<td></td>
 </tr>
@@ -242,8 +282,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Succesfully logged in</td>
+	<td>verifyTextPresent</td>
+	<td>logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>tariff2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff[purpose]_user_wholesale</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>created</td>
 	<td></td>
 </tr>
 <tr>
@@ -272,24 +337,70 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Device's settings updated</td>
+	<td>assertTextPresent</td>
+	<td>Did is assigned to device, you cannot make it a trunk</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device not updated</td>
+	<td></td>
+</tr>
+<!--Pažymėjus setingą ar ne, vistieg galiu trunk device priskirti did'ui(testavau su mor11 - ten ir testas, bet pamėginau ir su mo10, ten tas pats)-->
 <tr>
 	<td>open</td>
 	<td>/billing/dids/list</td>
 	<td></td>
 </tr>
-<!--Pažymėjus setingą ar ne, vistieg galiu trunk device priskirti did'ui(testavau su mor11 - ten ir testas, bet pamėginau ir su mo10, ten tas pats)-->
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>id=device_20</td>
 	<td>IAX2/105</td>
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>Trunk device</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=trunk_1</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>click</td> 	<td>id=dynamic_check</td> 	<td></td> </tr>-->
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/dids/edit/20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff for Calling Card</td>
 	<td></td>
 </tr>
 <tr>
@@ -300,6 +411,26 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>DID made available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>Default tariff tariff2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>label=tariff2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>changed</td>
 	<td></td>
 </tr>
 <tr>
@@ -337,16 +468,20 @@
 	<td>/billing/dids/edit/20</td>
 	<td></td>
 </tr>
-<!--Pažymėjus setingą ar ne, vistieg galiu trunk device priskirti did'ui(testavau su mor11 - ten ir testas, bet pamėginau ir su mo10, ten tas pats)-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID reserved</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id</td>
+	<td>label=SIP/1001 - Trunk device</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -354,10 +489,26 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>DID assigned</td>
+	<td>assertTextPresent</td>
+	<td>Could not assign did</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID cannot be assigned to trunk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>tariff2</td>
+</tr>
+<!--Pažymėjus setingą ar ne, vistieg galiu trunk device priskirti did'ui(testavau su mor11 - ten ir testas, bet pamėginau ir su mo10, ten tas pats)-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -379,7 +530,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -389,19 +540,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=type_29</td>
-	<td>did_assigned</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=target_29</td>
-	<td>IAX2/1002</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=data_29</td>
-	<td>37060011230</td>
+	<td>verifyElementNotPresent</td>
+	<td>id=type_36</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -409,7 +550,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Allow to assign DID to trunk:</td>
 	<td></td>
 </tr>
@@ -509,7 +650,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -529,9 +670,29 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Assign DID to device</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>id=device_id</td>
-	<td>IAX2/105 - Test Device for Resellers User IAX2/108 - Test Device for Resellers User</td>
+	<td>IAX2/105 - Test Device for Resellers User IAX2/108 - Test Device for Resellers User SIP/1001 - Trunk device</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Assign DID to Trunk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//select[@name='device_id'])[2]</td>
+	<td>User Resellers - SIP/1001 - Trunk device</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>xpath=(//select[@name='device_id'])[2]</td>
+	<td>label=User Resellers - SIP/1001 - Trunk device</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -546,6 +707,41 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Make sure you understand what you are doing here!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id</td>
+	<td>label=SIP/1001 - Trunk device</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Trunk owner can be other company</td>
 	<td></td>
 </tr>
 <tr>
@@ -569,7 +765,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -580,16 +776,16 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=type_40</td>
+	<td>id=type_48</td>
 	<td>did_assigned</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=target_40</td>
+	<td>verifyText</td>
+	<td>id=target_48</td>
 	<td>IAX2/1002</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>37060011234</td>
 	<td></td>
 </tr>
@@ -620,6 +816,61 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/2?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=manage_dids_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/24</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -639,7 +890,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -648,22 +899,26 @@
 	<td>/billing/dids/edit/23</td>
 	<td></td>
 </tr>
-<!--Pažymėjus setingą ar ne, vistieg galiu trunk device priskirti did'ui(testavau su mor11 - ten ir testas, bet pamėginau ir su mo10, ten tas pats)-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>DID reserved</td>
+	<td>assertTextPresent</td>
+	<td>Could not assign did</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID cannot be assigned to trunk</td>
 	<td></td>
 </tr>
 <!--Pažymėjus setingą ar ne, vistieg galiu trunk device priskirti did'ui(testavau su mor11 - ten ir testas, bet pamėginau ir su mo10, ten tas pats)-->
 <tr>
 	<td>assertText</td>
 	<td>id=device_id</td>
-	<td>IAX2/105 - Test Device for Resellers User IAX2/108 - Test Device for Resellers User</td>
+	<td>IAX2/105 - Test Device for Resellers User IAX2/108 - Test Device for Resellers User SIP/1001 - Trunk device</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -671,9 +926,209 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>DID assigned</td>
+	<td>assertTextPresent</td>
+	<td>DID closed</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/24</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>Default tariff tariff2</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>Default</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>label=tariff2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>tariff2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForEditable</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>Default tariff tariff2</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>Default</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>Default Test Tariff for Users Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>label=Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotEditable</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForEditable</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>Default Test Tariff for Users Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/24</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotEditable</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForEditable</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did[cc_tariff_id]</td>
+	<td>Default Test Tariff for Users Test Tariff + 0.1</td>
 </tr>
 </tbody></table>
 </body>
