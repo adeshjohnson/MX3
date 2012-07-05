@@ -851,7 +851,7 @@ class ApplicationController < ActionController::Base
             #                   i+=1
             #			       Extline.mcreate(default_context, i, "Hangup", "", @device.extension, device_id)
 
-            Extline.mcreate(default_context, i, "Set", '"MOR_VM"="u"', @device.extension, device_id)
+            Extline.mcreate(default_context, i, "Set", 'MOR_VM="u"', @device.extension, device_id)
             i += 1
             Extline.mcreate(default_context, i, "Goto", 'mor_voicemail|${EXTEN}|1', @device.extension, device_id)
             i += 1
@@ -1010,7 +1010,7 @@ class ApplicationController < ActionController::Base
             #			       Extline.mcreate(default_context, i, "Hangup", "", @device.extension, device_id)
             #			       i += 1
 
-            Extline.mcreate(default_context, i, "Set", '"MOR_VM"="u"', @device.extension, device_id)
+            Extline.mcreate(default_context, i, "Set", 'MOR_VM="u"', @device.extension, device_id)
             i += 1
             Extline.mcreate(default_context, i, "Goto", 'mor_voicemail|${EXTEN}|1', @device.extension, device_id)
             i += 1
