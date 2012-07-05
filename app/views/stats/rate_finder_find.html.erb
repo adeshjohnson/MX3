@@ -29,7 +29,7 @@
               <%= nice_time2 r['arate_start_time'] %> - <%= nice_time2 r['arate_end_time'] %> => <%= r['price'] %>
               (<%= r['currency'] %>)
               <% if r['currency'] != Currency.get_default.name%>
-                  / <%= nice_number(r['rate'] * Currency.count_exchange_rate(r['currency'],  Currency.get_default.name)) %> (<%= Currency.get_default.name %>)
+                  / <%= nice_number(r['price'].to_f * Currency.count_exchange_rate(r['currency'],  Currency.get_default.name)) %> (<%= Currency.get_default.name %>)
               <%end%>
               <br/>
           <% else %>
@@ -41,7 +41,7 @@
               <%= nice_time2 r['start_time'] %> - <%= nice_time2 r['end_time'] %> => <%= r['rate'] %>
               (<%= r['currency'] %>)
               <% if r['currency'] != Currency.get_default.name%>
-                    / <%= nice_number(r['rate'] * Currency.count_exchange_rate(r['currency'],  Currency.get_default.name)) %> (<%= Currency.get_default.name %>)
+                    / <%= nice_number(r['rate'].to_f * Currency.count_exchange_rate(r['currency'],  Currency.get_default.name)) %> (<%= Currency.get_default.name %>)
               <%end%>
               <br/>
           <% end %>
