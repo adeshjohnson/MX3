@@ -173,8 +173,8 @@
   <tr> 
     <td> <%= _('T.38_support') %>: </td> 
     <td> 
-      <%= radio_button_tag('device[t38pt_udptl]', 0, !@device.t38support?) %> <%= _('No') %> 
-      <%= radio_button_tag('device[t38pt_udptl]', 1, @device.t38support?) %> <%= _('Yes') %> 
+      <%= radio_button_tag('device[t38pt_udptl]', "no",  @device.t38pt_udptl == "no") %> <%= _('No') %>
+      <%= radio_button_tag('device[t38pt_udptl]', "yes", @device.t38pt_udptl == "yes") %> <%= _('Yes') %>
     </td>
   </tr>
 <% end %>
