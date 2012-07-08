@@ -106,12 +106,13 @@ class Campaign < ActiveRecord::Base
      user.prepaid? and user.balance <= 0 
   end 
 	 
-=begin 
-  Campaign will not be able to start if user is postpaid and does not have balance  
-  and/or credit left 
-=end 
-  def user_has_no_credit? 
-    user.postpaid? and user.balance + user.credit <= 0 
-  end 
+=begin
+  Campaign will not be able to start if user is postpaid and does not have balance 
+  and/or credit left
+  credit -1 means user has unlimited credit
+=end
+  def user_has_no_credit?
+    user.postpaid? and user.balance + user.credit <= 0 and user.credit != -1
+  end
 	 
 end
