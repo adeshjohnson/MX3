@@ -731,7 +731,8 @@ class AccountingController < ApplicationController
       }
     end
     [:s_username, :s_first_name, :s_last_name, :s_number, :s_period_start, :s_period_end, :s_issue_date, :s_sent_email, :s_sent_manually, :s_paid, :s_invoice_type].each { |key|
-      params[key] ? @options[key] = params[key].to_s.strip : @options[key] = ""
+      @options[key] = params[key] || @options[key] || ""
+      @options[key] = @options[key].strip
     }
     # page number is an exception because it defaults to 1
     if params[:page] and params[:page].to_i > 0
