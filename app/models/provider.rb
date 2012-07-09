@@ -348,7 +348,7 @@ class Provider < ActiveRecord::Base
 
     if options[:test].to_i == 1
       mysql_res = ActiveRecord::Base.connection.select_all(sql)
-      filename += mysql_res.to_yaml.to_s
+      filename += mysql_res.inspect
     else
       mysql_res = ActiveRecord::Base.connection.execute(sql)
     end
