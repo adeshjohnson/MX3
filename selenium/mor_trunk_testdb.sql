@@ -144,7 +144,7 @@ INSERT INTO `actions`
 
 
 TRUNCATE `adnumbers`;
-INSERT INTO `adnumbers` VALUES (1,'111','executed',2,'2010-01-01 01:01:01',NULL,NULL,0);
+INSERT INTO `adnumbers` VALUES (1,'111','executed',2,'2010-01-01 01:01:01',NULL,NULL,NULL,0);
 
 # test-production identification
 INSERT INTO conflines(name,value) VALUES("test_production_environment", "true");
