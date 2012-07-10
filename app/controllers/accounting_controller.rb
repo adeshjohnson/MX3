@@ -1095,7 +1095,7 @@ class AccountingController < ApplicationController
     pdf.draw_text(_('Date') + ": " + 'invoice.issue_date.to_s', {:at => [330, 685], :size => 12})
     pdf.draw_text(_('Invoice_number') + ": " + 'invoice.number.to_s', {:at => [330, 675], :size => 12})
 
-    pdf.image(Actual_Dir+"/public/images/rails.png")
+    pdf.image(Actual_Dir+"/app/assets/images/rails.png")
     pdf.text("Test Text : ąčęėįšųūž_йцукенгшщз")
     send_data pdf.render, :filename => "test.pdf", :type => "application/pdf"
   end
