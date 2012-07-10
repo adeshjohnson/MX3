@@ -122,7 +122,7 @@
 <!--#hash4-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?lcr_id=$%$</td>
+	<td>/billing/test/test_api?lcr_id=rand1</td>
 	<td></td>
 </tr>
 <tr>
@@ -177,7 +177,7 @@
 <!--#hash9-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?lcr_id=1&amp;dst=%^R</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=rand2</td>
 	<td></td>
 </tr>
 <tr>
@@ -221,7 +221,7 @@
 <!--#hash13-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?lcr_id=1&amp;dst=937567337911&amp;src=^%$</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=937567337911&amp;src=rand3</td>
 	<td></td>
 </tr>
 <tr>
@@ -529,12 +529,12 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=$%$&amp;test=1&amp;hash=${hash4}</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=rand3$&amp;test=1&amp;hash=${hash4}</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>There is no such LCR</td>
+	<td>Incorrect hash</td>
 	<td></td>
 </tr>
 <tr>
@@ -564,12 +564,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Wrong destination</td>
+	<td>Wrong source</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/send_sms?lcr_id=1&amp;dst=%^R&amp;test=1&amp;hash=${hash8}</td>
+	<td>/billing/api/send_sms?lcr_id=1&amp;dst=rand2R&amp;test=1&amp;hash=${hash8}</td>
 	<td></td>
 </tr>
 <tr>
@@ -589,12 +589,12 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=%^R&amp;test=1&amp;hash=${hash9}</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=rand2R&amp;test=1&amp;hash=${hash9}</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Wrong source</td>
+	<td>Incorrect hash</td>
 	<td></td>
 </tr>
 <tr>
@@ -614,7 +614,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Wrong source</td>
+	<td>There is no message or it is empty</td>
 	<td></td>
 </tr>
 <tr>
@@ -629,7 +629,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=^%$&amp;test=1&amp;hash=${hash13}</td>
+	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=rand3&amp;test=1&amp;hash=${hash13}</td>
 	<td></td>
 </tr>
 <tr>
@@ -664,7 +664,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>There is no message or it is empty</td>
+	<td>failed, system owner does not have rate for this destination</td>
 	<td></td>
 </tr>
 <tr>
@@ -959,18 +959,13 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=number_7</td>
-	<td>937567337911</td>
-</tr>
-<tr>
-	<td>assertText</td>
 	<td>id=number_8</td>
 	<td>937567337911</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_rate_7</td>
-	<td>11.0000</td>
+	<td>id=number_9</td>
+	<td>937567337911</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -979,12 +974,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quantity_7</td>
-	<td>1</td>
+	<td>id=user_rate_9</td>
+	<td>11.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=quantity_8</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=quantity_9</td>
 	<td>1</td>
 </tr>
 <tr>
@@ -994,12 +994,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=price_7</td>
+	<td>id=price_8</td>
 	<td>11.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=price_8</td>
+	<td>id=price_9</td>
 	<td>11.0000</td>
 </tr>
 <tr>
