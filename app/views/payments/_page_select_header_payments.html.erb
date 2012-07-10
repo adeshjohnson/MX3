@@ -39,9 +39,9 @@
         <%= link_to("<<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back100, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr}, {:title => "-100"}) if back100 %>
         <%= link_to("<", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => back10, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr}, {:title => "-20"}) if back10 %>
         <% for p in pstart..pend %>
-            <%= raw "<b>" if p == @page %>
+            <%= raw "<b>".html_safe if p == @page %>
             <%= link_to p, :action => params[:action], :id => @page_select_header_id, :st => @st, :page => p, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr %>
-            <%= raw "</b>" if p == @page %>
+            <%= raw "</b>".html_safe if p == @page %>
         <% end %>
         <%= link_to(">", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw10, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr}, {:title => "+20"}) if forw10 %>
         <%= link_to(">>", {:action => params[:action], :id => @page_select_header_id, :st => @st, :page => forw100, :s_username => @search_username, :s_number => @search_number, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_pdate => @search_pdate, :s_type => @search_ptype, :s_amount_min => @search_amount_min, :s_amount_max => @seach_amount_max, :p_curr => @search_pcurr}, {:title => "+100"}) if forw100 %>
