@@ -53,6 +53,7 @@ class CallshopController < ApplicationController
     @invoice = CsInvoice.new(:user_id => params[:user_id])
     if current_user
       @currency = current_user.currency.name #Currency.get_default.name
+      render :layout=>false
     else
       redirect_to :controller => "callc", :action => "logout" and return false
     end
@@ -143,6 +144,7 @@ class CallshopController < ApplicationController
         @status = _('Unable_to_terminate_calls_check_connectivity')
       end
     end
+    render :layout=>false
   end
 
   # booth release action (xhr)
@@ -171,11 +173,13 @@ class CallshopController < ApplicationController
   # comment update form (xhr)
   def comment_update
     @invoice = User.find_by_id(params[:user_id]).cs_invoices.first
+    render :layout=>false
   end
 
   # booth topup form (xhr)
   def topup_booth
     @invoice = CsInvoice.find(:first, :conditions => ["cs_invoices.user_id = ? AND state = 'unpaid'", params[:user_id]])
+    render :layout=>false
   end
 
   def topup_update
@@ -246,10 +250,12 @@ class CallshopController < ApplicationController
   # invoice print
   def invoice_print
     @invoice = CsInvoice.find_by_id(params[:invoice_id])
+    render :layout=>false
   end
 
   def invoice_edit
     @invoice = CsInvoice.find_by_id(params[:invoice_id])
+    render :layout=>false
   end
 
   def get_number_data

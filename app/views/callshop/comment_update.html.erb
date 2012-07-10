@@ -1,7 +1,7 @@
 <% if @invoice %>
     <tr class='slide'>
       <td colspan='10'>
-        <% form_for :url => {:controller => "callshop", :action => "update", :id => params[:id], :format => "json"} do |form| %>
+        <%= form_for :url => {:controller => "callshop", :action => "update", :id => params[:id], :format => "json"} do |form| %>
             <div class="comment">
               <strong><%= _('Comment') %></strong><br/>
         <span class="field-wrap">

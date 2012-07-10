@@ -3,7 +3,7 @@
       <td colspan="7">
         <div class="clearfix">
           <div class="grid_6 prefix_1 suffix_1">
-            <% form_for @invoice do %>
+            <%= form_for @invoice do %>
                 <% if @invoice.invoice_type == "postpaid" && @invoice.state != "full" %>
                     <strong><%= _('Full_payment_received') %></strong>
 

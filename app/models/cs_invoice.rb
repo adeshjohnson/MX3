@@ -5,7 +5,7 @@ class CsInvoice < ActiveRecord::Base
   belongs_to :tax
 
   before_save :cs_before_save
-  before_create :before_create
+  before_create :cs_before_create
 
   def calls(end_date = Time.now.strftime("%Y-%m-%d %H:%M:%S"))
     @calls ||= user.calls("ANSWERED", self.created_at.strftime("%Y-%m-%d %H:%M:%S"), end_date, "outgoing")
