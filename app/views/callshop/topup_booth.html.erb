@@ -1,6 +1,6 @@
 <tr class='slide'>
   <td colspan='10'>
-    <%= form_for :url => {:controller => "callshop", :action => "topup_balance", :id => params[:id], :format => "json"} do |form| %>
+    <%= form_for :invoice, :url => {:controller => "callshop", :action => "topup_balance", :id => params[:id], :format => "json"} do |form| %>
         <table cellpadding="0" cellspacing="0" class="invoice">
           <tr>
             <td style="width: 30%">
