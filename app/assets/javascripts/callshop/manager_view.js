@@ -573,6 +573,9 @@ function remove_slide_menus(element){
                     $.ajax({
                         url: options.urls.termination_form,
                         data: 'user_id=' + booth.id + "&server=" + booth.server + "&channel=" + booth.channel,
+                        headers: {
+                            'X-CSRF-Token': '<%= form_authenticity_token.to_s %>'
+                        },
                         beforeSend: function() {
                             callshop.change_state(booth, "loading", {});
                         },

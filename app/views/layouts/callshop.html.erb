@@ -5,6 +5,7 @@
   <title><%= _('Call_shop') %></title>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
   <%= stylesheet_link_tag "callshop", :media => "all" %>
+  <%= csrf_meta_tag %>
 </head>
 <body>
 
@@ -35,7 +36,12 @@
 <%= javascript_include_tag "jquery-1.4.2.min.js" %>
 
 <%= yield :scripts %>
-
+<script>
+    $(document).ajaxSend(function(e, xhr, options) {
+        var token = $("meta[name='csrf-token']").attr("content");
+        xhr.setRequestHeader("X-CSRF-Token", token);
+    });
+</script>
 <div id="content" class="container_24">
   <%= yield %>
 </div>
