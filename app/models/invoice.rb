@@ -441,7 +441,7 @@ class Invoice < ActiveRecord::Base
     end
 
     pdf = pdf_end(pdf, options)
-    test_return = testing_mode ? (items + (items2 ? items2 : '')) : []
+    test_return = testing_mode ? items : []
     return pdf, test_return
   end
 
