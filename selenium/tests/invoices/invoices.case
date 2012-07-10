@@ -252,6 +252,11 @@
 	<td>label=2008</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -478,7 +483,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Change' and @type='submit' and @onclick=&quot;if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Processing..';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;&quot;]</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -979,6 +984,11 @@
 	<td>//img[@alt='Check']</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
 <!--......Verify generated payment-->
 <!--......# This is a hack to get date set to today. -->
 <tr>
@@ -1054,17 +1064,17 @@
 <tr>
 	<td>verifyText</td>
 	<td>total_amount</td>
-	<td>29.0000(USD)</td>
+	<td>29.0000 (USD)</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>total_fee</td>
-	<td>0.0000(USD)</td>
+	<td>0.0000 (USD)</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>total_with_tax</td>
-	<td>54.7404(USD)</td>
+	<td>54.7404 (USD)</td>
 </tr>
 <!--## CHECK IF NUMBERS ARE ROUNDED CORRECTLY-->
 <tr>
@@ -1216,29 +1226,29 @@
 	<td>1.0000</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>//invoice[1]/product[1]/price</td>
+	<td>verifyTextPresent</td>
 	<td>13.0000</td>
+	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>//product[2]/price</td>
+	<td>verifyTextPresent</td>
 	<td>11.0000</td>
+	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>//invoice[2]/product/name</td>
+	<td>verifyTextPresent</td>
 	<td>Calls</td>
+	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>//invoice[2]/product/quantity</td>
-	<td>1</td>
+	<td>verifyTextPresent</td>
+	<td>Calls 1</td>
+	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>//invoice[2]/product/price</td>
+	<td>verifyTextPresent</td>
 	<td>5.0000</td>
+	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
@@ -1437,21 +1447,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Ok</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>billsec: &quot;20&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>calls: &quot;1&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>dst: &quot;37063042438&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -2670,6 +2665,16 @@
 <tr>
 	<td>verifyElementNotPresent</td>
 	<td>inv_type_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <!--...Ordering-->
