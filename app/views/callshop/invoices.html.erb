@@ -1,7 +1,7 @@
 <% content_for :scripts do %>
     <%= javascript_include_tag("callshop/callshop_invoice") %>
     <script type="text/javascript">
-        var options = <%= javascript_parameters(@cshop).to_json %>;
+        var options = <%=raw javascript_parameters(@cshop).to_json %>;
 
         $(document).ready(function () {
             add_edit(options.urls.invoice_edit);
