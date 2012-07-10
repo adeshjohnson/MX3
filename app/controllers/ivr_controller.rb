@@ -12,7 +12,7 @@ class IvrController < ApplicationController
   before_filter :check_reseller
 
   # Global variables. Defines possile choices for extensions and actions
-  $pos_actions = ['Playback', 'Change Voice', 'Delay', 'Hangup', 'Transfer To', 'Debug', 'Set Accountcode', 'Change CallerID (Number)']
+  $pos_actions = ['Playback', 'Change Voice','Delay', 'Hangup', 'Transfer To', 'Debug', 'Set Accountcode', 'Change CallerID (Number)', 'Action log']
   $pos_extensions = %w(0 1 2 3 4 5 6 7 8 9 # * i t)
   $pos_variables = ['MOR_ASK_DST_TIMES']
 

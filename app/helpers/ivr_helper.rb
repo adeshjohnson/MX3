@@ -79,6 +79,10 @@ module IvrHelper
             content << "document.getElementById('#{text_div}').innerHTML+=\"<div id='block_debug' style='position:absolute; white-space: nowrap; top:#{y+top_spacing+line_nr*line_height}px; left:#{x+40}px;'><a onmouseover=\\\"Tip(\'#{action.name}: #{action.data1}\')\\\" onmouseout = \\\"UnTip()\\\">#{action.name}<\\\/a><\\\/div>\";"
             line_nr += 1
             content << "document.getElementById('#{text_div}').innerHTML+=\"<div id='block_debug2' style='position:absolute; white-space: nowrap; top:#{y+top_spacing+line_nr*line_height}px; left:#{x+50}px;'>#{check_string_length(action.data1, max_text_lenght)}<\\\/div>\";"
+          when "Action log"
+            content << "document.getElementById('#{text_div}').innerHTML+=\"<div id='action_log' style='position:absolute; white-space: nowrap; top:#{y+top_spacing+line_nr*line_height}px; left:#{x+40}px;'><a onmouseover=\\\"Tip(\'#{action.name}: #{action.data1}\')\\\" onmouseout = \\\"UnTip()\\\">#{action.name}:<\\\/a><\\\/div>\";"
+            line_nr += 1
+            content << "document.getElementById('#{text_div}').innerHTML+=\"<div id='action_log2' style='position:absolute; white-space: nowrap; top:#{y+top_spacing+line_nr*line_height}px; left:#{x+50}px;'>#{check_string_length(action.data1, max_text_lenght)}<\\\/div>\";"
           when "Playback"
             content << "document.getElementById('#{text_div}').innerHTML+=\"<div id='block_playback' style='position:absolute; white-space: nowrap; top:#{y+top_spacing+line_nr*line_height}px; left:#{x+40}px;'><a onmouseover=\\\"Tip(\'#{action.name}: #{action.data1} - #{action.data2}\')\\\" onmouseout = \\\"UnTip()\\\">#{action.name}:<\\\/a><\\\/div>\";"
             line_nr += 1
@@ -302,6 +306,12 @@ Generates selector and observer for <b>Debug</b> action.
     code
   end
 
+  def generate_action_log(action)
+    code = text_field_tag("action_#{action.id.to_s}", action.data1.to_s , "class" => "input", :size => "30", :maxlength => "255" )
+    code += generate_default_observer(action)
+    code
+  end
+
 =begin rdoc
 
 =end
@@ -374,6 +384,8 @@ Generates selector and observer for <b>Change CallerID (Number)</b> action.
         return ""
       when "Set Variable"
         return generate_set_variable(action)
+      when "Action log"
+        return generate_action_log(action)
       when "Change CallerID (Number)"
         return generate_change_callerid(action)
       else

@@ -4450,7 +4450,7 @@ Localization.define('en') do |l|
   l.store 'Minimal_balance', 'Minimal balance'
   l.store 'Bad_minimal_balance', 'Bad minimal balance'
   l.store 'Tariff_for_cc', 'Tariff for Calling Card'
-
+  l.store 'Export_call_data_to_CSV', 'Export call data to CSV'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

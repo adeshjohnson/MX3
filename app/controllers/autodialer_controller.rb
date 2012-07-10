@@ -6,7 +6,7 @@ class AutodialerController < ApplicationController
   before_filter :check_localization
   #before_filter :authorize_admin, :only => [:campaigns]
   before_filter :authorize
-  before_filter :find_campaign, :only => [:campaign_destroy, :view_campaign_actions, :campaign_update, :redial_all_failed_calls, :action_add, :campaign_actions, :import_numbers_from_file, :campaign_edit, :campaign_change_status, :campaign_numbers, :delete_all_numbers]
+  before_filter :find_campaign, :only => [:export_call_data_to_csv, :campaign_destroy, :view_campaign_actions, :campaign_update, :redial_all_failed_calls, :action_add, :campaign_actions, :import_numbers_from_file, :campaign_edit, :campaign_change_status, :campaign_numbers, :delete_all_numbers]
   before_filter :find_campaign_action, :only => [:play_rec, :action_update, :action_edit, :action_destroy]
   before_filter :find_adnumber, :only => [:reactivate_number]
   before_filter :check_params_campaign, :only => [:campaign_create, :campaign_update]
@@ -470,6 +470,36 @@ class AutodialerController < ApplicationController
         flash[:notice] = _('No_numbers_in_campaign') + @campaing_stat.name
         redirect_to :action => :campaign_statistics and return false
       end
+    end
+
+  end
+
+  def   export_call_data_to_csv
+    IvrActionLog.link_logs_with_numbers
+
+    @numbers = @campaign.adnumbers.find(:all, :include=>[:ivr_action_logs])
+
+    sep, dec = current_user.csv_params
+
+    csv_string = []
+
+    for number in @numbers
+      s = []
+      if number.ivr_action_logs and   number.ivr_action_logs.size.to_i > 0
+        s << number.completed_time.to_s(:db)
+        s << number.number
+        for action in number.ivr_action_logs
+          s << action.created_at.to_s(:db)
+          s << action.action_text.to_s.gsub(sep, '')
+        end
+      end
+      csv_string << s.join(sep) if s and s.size.to_i > 0
+    end
+
+    if params[:test].to_i == 1
+      render :text => (["Filename: #{filename}"] + csv_string).join("\n")
+    else
+      send_data(csv_string.join("\n"), :type => 'text/csv; charset=utf-8; header=present', :filename => 'Campaign_call_data.csv')
     end
 
   end

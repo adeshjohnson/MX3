@@ -64,6 +64,10 @@ class IvrBlock < ActiveRecord::Base
           Extline.mcreate(context, priority.to_s, "mor", "", exten, "0")
         when "Set variable"
           Extline.mcreate(context, priority.to_s, "Set", "#{action.data1.to_s}=#{action.data2.to_s}", exten, "0")
+        when "Action log"
+          Extline.mcreate(context, priority.to_s, "Set", "IVR_TXT=\"#{action.data1.to_s.gsub('"', '`').gsub('\'', '`')}\"" , exten, "0")
+          priority += 1
+          Extline.mcreate(context, priority.to_s, "AGI", 'mor_action_log', exten, "0")
         when "Change CallerID (Number)"
           Extline.mcreate(context, priority.to_s, "Set", "CALLERID(num)=#{action.data1.to_s}", exten, "0")
         else
