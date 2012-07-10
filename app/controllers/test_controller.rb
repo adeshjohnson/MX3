@@ -10,7 +10,7 @@ class TestController < ApplicationController
     user.username = user.username.to_s + "no_adr"
     user.tax_id = 999999
     user.address_id = nil
-    user.save(false)
+    user.save(:validate => false)
     render :text => "OK"
   end
 
