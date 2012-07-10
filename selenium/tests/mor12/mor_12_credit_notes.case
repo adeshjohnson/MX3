@@ -36,32 +36,16 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
-<!--SQL-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/callc/main</td>
-	<td></td>
-</tr>
 <!--MENU-->
 <tr>
-	<td>assertText</td>
-	<td>id=ssettings_menu50</td>
-	<td>Credit notes</td>
+	<td>verifyElementPresent</td>
+	<td>link=Credit notes</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=ssettings_menu51</td>
-	<td>Financial statements</td>
+	<td>verifyElementPresent</td>
+	<td>link=Financial statements</td>
+	<td></td>
 </tr>
 <!--Set Eur =0.5-->
 <tr>
