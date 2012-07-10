@@ -252,12 +252,12 @@ class CallshopController < ApplicationController
   # invoice print
   def invoice_print
     @invoice = CsInvoice.find_by_id(params[:invoice_id])
-    #render :layout=>false
+    render :layout=>false
   end
 
   def invoice_edit
     @invoice = CsInvoice.find_by_id(params[:invoice_id])
-    #render :layout=>false
+    render :layout=>false
   end
 
   def get_number_data
