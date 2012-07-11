@@ -147,7 +147,7 @@
           <td id="username_name"><%= _('Skype_Name') %>:</td>
           <td id="username_value"><%= text_field 'device', 'name', "class" => "input" %></td>
         </tr>
-        <%= hidden_field_tag 'device[extension]', @extension, "class" => "input", :id => "device_extension" %>
+        <%#= hidden_field_tag 'device[extension]', @extension, "class" => "input", :id => "device_extension" %>
         <%= hidden_field_tag 'device[repeat_rtime_every]', '60', "class" => "input" %>
         <%= hidden_field_tag 'device[tell_rtime_when_left]', '60', "class" => "input" %>
         <% @owner = @user.owner_id if !@owner %>
