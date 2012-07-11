@@ -271,8 +271,10 @@ class TariffsController < ApplicationController
 =end
 
   def check_prefix_availability
-    @prefix = request.raw_post || request.query_string
-    @prefix = @prefix.gsub(/=/, "")
+    @prefix = (params.keys.select { |parameter| parameter =~ /[0-9]+/ })[0]
+    #wft was that? request.raw_post request.query_string??
+    #@prefix = request.raw_post || request.query_string
+    #@prefix = @prefix.gsub(/=/, "")
     @tariff = params[:tariff_id]
     @destination = Destination.find(:first,
                                     :select => "directions.name as 'dir_name', directions.code as 'dir_code', destinations.prefix AS 'des_prefix', destinations.name as 'des_name', destinations.subcode AS 'des_subcode', rates.id AS 'rate_id'",
