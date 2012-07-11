@@ -2141,6 +2141,13 @@ Variables: (Names marked with * are required)
             message << swap.to_yaml
           end
 
+          if exception_class.include?("Errno::EPERM")
+            message << "----------------------------------------"
+            message << %x[ls -la /home/mor/tmp/]
+            message << "----------------------------------------"
+            message << %x[ls -la /home/mor/]
+          end
+
           Confline.set_value("Last_Crash_Exception_Class", exception_class, 0)
 
           unless params[:this_is_fake_exception].to_s == "YES"
