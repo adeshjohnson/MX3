@@ -41,15 +41,11 @@
       <table width="100%" class="simple">
         <tr>
           <td>
-            <%= _('Username') %>
-            : <%= text_field_tag 's_username', @options[:s_username], "class" => "input", :size => "15", :maxlength => "30" %>
-            <%= _('first_name') %>
-            : <%= text_field_tag 's_first_name', @options[:s_first_name], "class" => "input", :size => "15", :maxlength => "30" %>
-            <%= _('last_name') %>
-            : <%= text_field_tag 's_last_name', @options[:s_last_name], "class" => "input", :size => "15", :maxlength => "30" %>
+            <%= _('Username') %>: <%= text_field_tag 's_username', @options[:s_username], "class" => "input", :size => "15", :maxlength => "30" %>
+            <%= _('first_name') %>: <%= text_field_tag 's_first_name', @options[:s_first_name], "class" => "input", :size => "15", :maxlength => "30" %>
+            <%= _('last_name') %>: <%= text_field_tag 's_last_name', @options[:s_last_name], "class" => "input", :size => "15", :maxlength => "30" %>
 
-            <%= _('Amount_between') %>
-            : <%= text_field_tag 's_amount_min', @options[:s_amount_min], "class" => "input", :size => "7", :maxlength => "10" %>
+            <%= _('Amount_between') %>: <%= text_field_tag 's_amount_min', @options[:s_amount_min], "class" => "input", :size => "7", :maxlength => "10" %>
             -
             <%= text_field_tag 's_amount_max', @options[:s_amount_max], "class" => "input", :size => "7", :maxlength => "10" %>
 
@@ -63,10 +59,8 @@
 
             <br/><br/>
 
-            <%= _('From') %>
-            : <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
-            &nbsp;&nbsp;<%= _('to') %>
-            : <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
+            <%= _('From') %>: <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
+            &nbsp;&nbsp;<%= _('to') %>: <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
             <br/><br/>
             <%= _('Type') %>:
             <select id="s_ptype" name="s_paymenttype">
@@ -83,14 +77,11 @@
             </select>
 
           <span id="card_details" style="<%= "display: none" unless @options[:s_paymenttype].eql?("Card") %>">
-            <%= _('Card_number') %>
-            : <%= text_field_tag 's_number', @options[:s_number], "class" => "input", :size => 15 %>
-            <%= _('Card') %> <%= _('Pin') %>
-            : <%= text_field_tag 's_pin', @options[:s__pin], "class" => "input", :size => 5 %>
+            <%= _('Card_number') %>: <%= text_field_tag 's_number', @options[:s_number], "class" => "input", :size => 15 %>
+            <%= _('Card') %> <%= _('Pin') %>: <%= text_field_tag 's_pin', @options[:s__pin], "class" => "input", :size => 5 %>
           </span>
 
-            <%= _('Transaction_ID') %>
-            : <%= text_field_tag 's_transaction', @options[:s_transaction], "class" => "input", :size => "20", :maxlength => "30" %>
+            <%= _('Transaction_ID') %>: <%= text_field_tag 's_transaction', @options[:s_transaction], "class" => "input", :size => "20", :maxlength => "30" %>
             <br/><br/>
 
             <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
@@ -191,7 +182,7 @@
   <% } %>
 
   <tr>
-    <th id="total" align="left" colspan="6"><%= _('Total') %>:</th>
+    <th id="total" align="left" colspan="<%=  provider_billing_active?  ? '7' : '6'%>"><%= _('Total') %>:</th>
     <th id="total_amount" align="right"><%= nice_number @total_amaunt %> (<%= current_user.currency.name %>)</th>
     <th id="total_fee" align="right"><%= nice_number @total_fee %> (<%= current_user.currency.name %>)</th>
     <th id="total_with_tax" align="right"><%= nice_number @total_amaunt_with_vat %> (<%= current_user.currency.name %>)
@@ -200,15 +191,10 @@
   </tr>
 
   <tr>
-    <th id="total_completed" align="left" colspan="6"><%= _('Total') %> (<%= _('Completed') %>):</th>
-    <th id="total_amount_completed" align="right"><%= nice_number @total_amaunt_completed %>
-      (<%= current_user.currency.name %>)
-    </th>
-    <th id="total_fee_completed" align="right"><%= nice_number @total_fee_completed %> (<%= current_user.currency.name %>)
-    </th>
-    <th id="total_with_tax_completed" align="right"><%= nice_number @total_amaunt_with_vat_completed %>
-      (<%= current_user.currency.name %>)
-    </th>
+    <th id="total_completed" align="left" colspan="<%=  provider_billing_active?  ? '7' : '6'%>"><%= _('Total') %> (<%= _('Completed') %>):</th>
+    <th id="total_amount_completed" align="right"><%= nice_number @total_amaunt_completed %> (<%= current_user.currency.name %>) </th>
+    <th id="total_fee_completed" align="right"><%= nice_number @total_fee_completed %> (<%= current_user.currency.name %>) </th>
+    <th id="total_with_tax_completed" align="right"><%= nice_number @total_amaunt_with_vat_completed %> (<%= current_user.currency.name %>)</th>
     <th align="center" colspan="<%=  provider_billing_active?  ? '6' : '5'%>"></th>
   </tr>
 </table>
