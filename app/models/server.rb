@@ -48,16 +48,34 @@ class Server < ActiveRecord::Base
       device_username = device_name
 
       t = client.command("sip prune realtime peer " + device_username)
-      t = client.command("sip prune realtime user " + device_username)
-      t = client.command("iax2 prune realtime user " + device_username)
-      t = client.command("iax2 prune realtime peer " + device_username)
+      
+      if (defined?(AST_18) and AST_18.to_i == 1)
+        #AST18 does not use this command, user ir pruned with 'sip prune realtime peer NAME'
+      else
+        t = client.command("sip prune realtime user " + device_username)
+      end
+      
+      if (defined?(AST_18) and AST_18.to_i == 1)
+        # AST18 do not care about user/peer to prune it
+        t = client.command("iax2 prune realtime " + device_username)
+      else
+        t = client.command("iax2 prune realtime user " + device_username)
+        t = client.command("iax2 prune realtime peer " + device_username)        
+      end
+
 
       if reload == 1
         t = client.command("sip show peer " + device_username + " load")
         t = client.command("iax2 show peer " + device_username + " load")
         t = client.command("sip show user " + device_username + " load")
-        t = client.command("iax2 show user " + device_username + " load")
-      end
+        
+        if (defined?(AST_18) and AST_18.to_i == 1)
+          #AST18 does not use this command, user is loaded with 'iax2 show peer NAME load'
+        else
+          t = client.command("iax2 show user " + device_username + " load")        
+        end
+
+      end 
 
       client.stop
 
