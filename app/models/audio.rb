@@ -82,8 +82,6 @@ class Audio
             end
             dst = "#{final_path}#{final_path.chars.to_a.last == '/' ? '' : '/'}#{new_name}.wav"
             Audio.convert(src, dst, 1, server_path, new_name)
-            logger.fatal dst
-            logger.fatal src
             if !File.exists?(dst) and notice.blank?
               notice = _("File_not_uploaded_please_check_file_system_permissions")
             else
