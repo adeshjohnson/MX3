@@ -7,7 +7,7 @@ class CallshopController < ApplicationController
   before_filter :check_addon
   skip_before_filter :redirect_callshop_manager
 
-  skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
+  #skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
   #skip_before_filter :set_current_user
 
   @@invoice_searchable_cols = ["created_at", "balance", "state", "comment", "invoice_type"]

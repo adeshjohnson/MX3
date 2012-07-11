@@ -238,7 +238,7 @@ module UniversalHelpers
       when "div" then
         return ret.join("\n").html_safe
       when "array" then
-        return ret.html_safe
+        return ret
     end
     return nil
   end

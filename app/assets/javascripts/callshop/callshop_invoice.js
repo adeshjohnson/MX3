@@ -112,7 +112,7 @@ function sortable_headers(context, invoice_list_url, invoice_print_url, invoice_
             url:invoice_list_url,
             cache:false,
             type:'GET',
-
+            contentType: "application/json; charset=utf-8",
             data:{
                 "order_by":el.attr('data-sort-type'),
                 "order_dir":((opts["reversed"]) ? "DESC" : "ASC" )
@@ -136,6 +136,7 @@ function pagination_links(context, invoice_list_url, invoice_print_url, invoice_
             url:invoice_list_url,
             cache:false,
             type:'GET',
+            contentType: "application/json; charset=utf-8",
             data:{
                 "page":page
             },

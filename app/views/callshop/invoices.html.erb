@@ -17,7 +17,7 @@
 <% end %>
 
 <div class="page_select container_24">
-  <%= page_select_header(@search_params[:page], @total_pages, {}, {:wrapper => false}, "div") %>
+  <%=raw page_select_header(@search_params[:page], @total_pages, {}, {:wrapper => false}, "div") %>
 </div>
 
 <div id="table-wrap">
@@ -63,5 +63,5 @@
 </div>
 
 <div class="page_select container_24">
-  <%= page_select_header(@search_params[:page], @total_pages, {}, {:wrapper => false}, "div") %>
+  <%=raw page_select_header(@search_params[:page], @total_pages, {}, {:wrapper => false}, "div") %>
 </div>
