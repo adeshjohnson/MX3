@@ -590,8 +590,8 @@ in before filter : tariff (:find_tariff_from_id)
 
 
   def send_sms
-    require 'rubygems'
-    require 'clickatell'
+    #require 'rubygems'
+    #require 'clickatell'
 
     sms_numbers = params[:sms_counter]
     message = params[:body]
