@@ -42,9 +42,7 @@
 </script>
 
 
-<form name="sms"
-      action="<%= Web_Dir %>/sms/send_sms"
-      method="post">
+  <%= form_tag({:action => :send_sms}, {:name=>'sms'}) do %>
 
   <p><label for="number"><%= _('Number') %></label>:
     <input id="search" type="text" name="number" size="15" maxlength="15" class="input" onkeyup="get_prefix(this.value);">
@@ -81,7 +79,7 @@
     <input readonly id="sms_unicode" type="hidden" name="sms_unicode" size="4" maxlength="4" value="0" class="input">
     <input name="commit" type="submit" value="Send"/>
 
-    </form>
+    <%end%>
 
 
 

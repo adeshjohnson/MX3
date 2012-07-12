@@ -890,7 +890,7 @@ in before filter : tariff (:find_tariff_from_id)
   end
 
   def find_number
-    if  @request.env["HTTP_X_MOBILE_GATEWAY"]
+    if  request.env["HTTP_X_MOBILE_GATEWAY"]
       sms_numbers = 1
       params[:number] = params[:number1] if    params[:number1]
       if params[:number2].to_i != 0
