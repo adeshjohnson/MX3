@@ -618,10 +618,10 @@ in before filter : tariff (:find_tariff_from_id)
     end
 
 
-    if @request.env["HTTP_X_MOBILE_GATEWAY"]
+    if request.env["HTTP_X_MOBILE_GATEWAY"]
       redirect_to :controller => 'callc', :action => 'main', :sms_notice => sms.sms_status_code_tip.to_s
     else
-      if @request.env["HTTP_USER_AGENT"].match("Safari")
+      if request.env["HTTP_USER_AGENT"].match("Safari")
         redirect_to :controller => 'callc', :action => "main_for_pda" and return false
       else
         redirect_to :action => 'sms_list' and return false
@@ -734,7 +734,7 @@ in before filter : tariff (:find_tariff_from_id)
     if n.to_s == 'All'
       number = Phonebook.find(:all, :conditions => "user_id='#{session[:user_id]}'")
     else
-      number = n
+      number = [n]
     end
 
   end
