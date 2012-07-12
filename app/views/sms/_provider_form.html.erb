@@ -25,7 +25,7 @@
         </tr>
         <tr>
           <td> <%= _('Provider_type') %>:</td>
-          <td><select id='prov_type' name="provider[provider_type]" <%= "onchange=\"Disab(this.value);\"" %> >
+          <td><select id='prov_type' name="provider[provider_type]" onchange="Disab(this.value);" >
             <option value="sms_email" <%= 'selected' if @provider.provider_type.to_s == 'sms_email' %>  ><%= _('sms_email') %></option>
             <option value="clickatell" <%= 'selected' if @provider.provider_type.to_s == 'clickatell' %> ><%= _('clickatell') %></option>
             <% if mor_11_extend? %>
