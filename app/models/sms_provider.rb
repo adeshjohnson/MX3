@@ -86,7 +86,7 @@ class SmsProvider < ActiveRecord::Base
     pr_device = user.primary_device
     cli = pr_device ? CGI.escape(pr_device.callerid.to_s) : ''
     message_id = Net::HTTP.get_response(URI.parse(nice_url(options[:to], mtext, 'src', user.first_name.to_s, user.last_name.to_s, cli.to_s)))
-    code = message_id.body
+    code = message_id.body.force_encoding("UTF-8")
     Action.add_action_hash(user, {:action => "SMS_api_response"})
     if code.include?(email_good_keywords)
       sms.status_code = 0
