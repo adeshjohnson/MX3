@@ -4453,6 +4453,8 @@ Localization.define('en') do |l|
   l.store 'Export_call_data_to_CSV', 'Export call data to CSV'
   l.store 'SRTP_encryption', 'SRTP Encryption'
   l.store 'Please_enter_wait_time_higher_or_equal_to_10', 'Please enter wait time higher or equal to 10'
+  l.store 'Block_callerid_if', 'Block callerid if'
+  l.store 'simultaneous_calls_come_from_it', 'simultaneous calls come from it'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

@@ -305,6 +305,11 @@ class DevicesController < ApplicationController
     @device.server_id = params[:device][:server_id].strip if params[:device] and params[:device][:server_id]
     #========================== check input ============================================
 
+    #because block_callerid input may be disabled and it will not be sent in 
+    #params and setter will not be triggered and value from enabled wouldnt be 
+    #set to disabled, so i we have to set it here. you may call it a little hack
+    params[:device][:block_callerid] = 0 if params[:block_callerid_enable].to_s == 'no'
+
     if @device.device_type != "Virtual"
       if params[:device][:extension]
         change_opt_1 == true ? params[:device][:extension]=params[:device][:extension].to_s.strip : params[:device][:extension] = @device.extension
@@ -1794,6 +1799,7 @@ class DevicesController < ApplicationController
     end
     Confline.set_value("Default_device_use_ani_for_cli", params[:device][:use_ani_for_cli], session[:user_id])
     Confline.set_value("Default_device_encryption", params[:device][:encryption], session[:user_id]) if params[:device][:encryption]
+    Confline.set_value("Default_device_block_callerid", params[:device][:block_callerid].to_i, session[:user_id]) 
     #------- Network related -------
     Confline.set_value("Default_device_host", params[:host], session[:user_id])
     Confline.set_value("Default_device_host", "dynamic", session[:user_id]) if params[:dynamic_check] == "1"

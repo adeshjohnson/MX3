@@ -77,6 +77,43 @@ class Device < ActiveRecord::Base
     end
   end
 
+=begin                                                            
+  Device may be blocked by core if there are more than one simultaneous call
+                                                                            
+  Returns                                                                   
+  *boolean* true if device can be blocked                                   
+=end                                                                        
+  def block_callerid?                                                       
+    (block_callerid.to_i > 1)                                               
+  end                                                                       
+                                                                            
+=begin                                                                      
+  Only valid arguments for block_callerid is 0 or integer greater than 1    
+  if params  are invalid we set it to 0                                     
+                                                                            
+  Params                                                                    
+  *simalutaneous_calls* limit of simultaneous calls when core should automaticaly 
+    block device                                                                  
+=end                                                                              
+  def block_callerid=(simultaneous_calls)                                         
+    simultaneous_calls = simultaneous_calls.to_s.strip.to_i                       
+    simultaneous_calls = simultaneous_calls < 2 ? 0 : simultaneous_calls          
+    write_attribute(:block_callerid, simultaneous_calls)                          
+  end                                                                             
+                                                                                  
+=begin                                                                            
+  Note that this method is written mostly thinking about using it in views so dont 
+  expect any logic beyound that.                                                   
+                                                                                   
+  Returns                                                                          
+  *simultaneous_calls* if block_callerid is set to smth less than 2 retun empty string 
+    else return that number                                                            
+=end                                                                                   
+  def block_callerid                                                                   
+    simultaneous_calls = read_attribute(:block_callerid).to_i                          
+    simultaneous_calls < 2 ? '' : simultaneous_calls                                   
+  end                  
+
   def is_trunk?
     return self.istrunk.to_i > 0
   end
