@@ -1241,6 +1241,7 @@ class User < ActiveRecord::Base
     device.use_ani_for_cli = Confline.get_value("Default_device_use_ani_for_cli", owner_id)
     device.calleridpres = Confline.get_value("Default_device_calleridpres", owner_id).to_s
     device.change_failed_code_to = Confline.get_value("Default_device_change_failed_code_to", owner_id).to_i
+    device.encryption = Confline.get_value("Default_device_encryption", owner_id)
     device.max_timeout = Confline.get_value("Default_device_max_timeout", owner_id).to_i
     device.language = Confline.get_value("Default_device_language", owner_id).to_s
     if not device.works_not_logged

@@ -177,4 +177,12 @@
       <%= radio_button_tag('device[t38pt_udptl]', "yes", @device.t38pt_udptl == "yes") %> <%= _('Yes') %>
     </td>
   </tr>
+<% end %><% if @device_type == 'SIP' and defined? AST_18 and AST_18.to_i == 1 %>
+  <tr>
+    <td> <%= _('SRTP_encryption') %>: </td>
+    <td>
+      <%= radio_button_tag('device[encryption]', "no",  @device.encryption != "yes") %> <%= _('No') %>
+      <%= radio_button_tag('device[encryption]', "yes", @device.encryption == "yes") %> <%= _('Yes') %>
+    </td>
+  </tr>
 <% end %>

@@ -1793,6 +1793,7 @@ class DevicesController < ApplicationController
       Confline.set_value("Default_device_qualify", "no", session[:user_id])
     end
     Confline.set_value("Default_device_use_ani_for_cli", params[:device][:use_ani_for_cli], session[:user_id])
+    Confline.set_value("Default_device_encryption", params[:device][:encryption], session[:user_id]) if params[:device][:encryption]
     #------- Network related -------
     Confline.set_value("Default_device_host", params[:host], session[:user_id])
     Confline.set_value("Default_device_host", "dynamic", session[:user_id]) if params[:dynamic_check] == "1"
