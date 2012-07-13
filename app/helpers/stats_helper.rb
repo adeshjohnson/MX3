@@ -92,4 +92,29 @@ module StatsHelper
     ].reject(&:blank?).join("<br />")
 
   end
+
+  def Subscription.subscriptions_stats_order_by(options)
+    case options[:order_by].to_s.strip.to_s
+      when "user"
+        order_by = "nice_user"
+      when "service"
+        order_by = "service_name"
+      when "price"
+        order_by = "service_price"
+      when "memo"
+        order_by = "memo"
+      when "added"
+        order_by = "added"
+      when "activation_start"
+        order_by = "activation_start"
+      when "activation_end"
+        order_by = "activation_end"
+      else
+        order_by = options[:order_by]
+    end
+    if order_by != ""
+      order_by += (options[:order_desc].to_i == 0 ? " ASC" : " DESC")
+    end
+    return order_by
+  end
 end

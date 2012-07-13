@@ -17,6 +17,11 @@ class StatsController < ApplicationController
   before_filter :no_cache, :only => [:active_calls]
   skip_before_filter :redirect_callshop_manager, :only => [:prefix_finder_find, :prefix_finder_find_country]
 
+  before_filter { |c|
+    c.instance_variable_set :@allow_read, true
+    c.instance_variable_set :@allow_edit, true
+  }
+
   def index
     user_stats
     render :action => "user_stats"
@@ -3501,6 +3506,11 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @page_title = _('Subscriptions')
     @page_icon = "chart_bar.png"
 
+    session[:subscriptions_stats_options] ? @options = session[:subscriptions_stats_options] : @options = {}
+    params[:order_desc] ? @options[:order_desc] = params[:order_desc].to_i : (@options[:order_desc] = 0 if !@options[:order_desc])
+    params[:order_by] ? @options[:order_by] = params[:order_by].to_s : (@options[:order_by] = "user" if !@options[:order_by])
+    @options[:order] = Subscription.subscriptions_stats_order_by(@options)
+
     change_date
     a1 = session_from_date
     a2 = session_till_date
@@ -3511,14 +3521,13 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     sql = "SELECT COUNT(subscriptions.id) AS sub_size  FROM subscriptions
     WHERE activation_start = '#{a1}'"
     @res2 = ActiveRecord::Base.connection.select_all(sql)
-    sql = "SELECT users.id, users.username, users.first_name, users.last_name FROM subscriptions
+    sql = "SELECT users.id, users.username, users.first_name, users.last_name, activation_start, activation_end, added, subscriptions.id AS subscription_id, memo, services.name AS service_name, services.price AS service_price, services.servicetype AS servicetype, #{SqlExport.nice_user_sql} FROM subscriptions
     JOIN users on (subscriptions.user_id = users.id)
-    WHERE ((activation_start < '#{a1}' AND activation_end BETWEEN '#{a1}' AND '#{a2}') OR (activation_start BETWEEN '#{a1}' AND '#{a2}' AND activation_end < 'a2') OR (activation_start > '#{a1}' AND activation_end < '#{a2}') OR (activation_start < '#{a1}' AND activation_end > '#{a2}')) GROUP BY users.id"
+    JOIN services on (services.id = subscriptions.service_id)
+    WHERE ((activation_start < '#{a1}' AND activation_end BETWEEN '#{a1}' AND '#{a2}') OR (activation_start BETWEEN '#{a1}' AND '#{a2}' AND activation_end < 'a2') OR (activation_start > '#{a1}' AND activation_end < '#{a2}') OR (activation_start < '#{a1}' AND activation_end > '#{a2}')) ORDER BY #{@options[:order]}"
     @res3 = ActiveRecord::Base.connection.select_all(sql)
 
-
-    params[:page] ? @page = params[:page].to_i : @page = 1
-
+    params[:page] ? @page = params[:page].to_i : (@options[:page] ? @page = @options[:page] : @page = 1)
     @total_pages = (@res3.size.to_f / session[:items_per_page].to_f).ceil
 
     @all_res = @res3
@@ -3529,7 +3538,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     for i in ((@page - 1) * session[:items_per_page])..iend
       @res3 << @all_res[i]
     end
-
+    @options[:page] = @page
+    session[:subscriptions_stats_options] = @options
   end
 
   def subscriptions_first_day
