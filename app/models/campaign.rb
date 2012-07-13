@@ -33,8 +33,8 @@ class Campaign < ActiveRecord::Base
       errors.add(:retry_time, _("Please_enter_retry_time_higher_or_equal_to_60"))
       return false
     end
-    if wait_time.to_i < 30
-      errors.add(:wait_time, _("Please_enter_wait_time_higher_or_equal_to_30"))
+    if wait_time.to_i < 10
+      errors.add(:wait_time, _("Please_enter_wait_time_higher_or_equal_to_10"))
       return false
     end
   end
