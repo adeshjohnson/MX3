@@ -112,10 +112,6 @@ class User < ActiveRecord::Base
       self.address_id = a.id
       self.save
     end
-    # hack to force resellers have a uniquehash
-    if usertype == 'reseller'
-      self.get_hash
-    end
   end
 
 
@@ -2428,6 +2424,8 @@ GROUP BY terminators.id;").map { |t| t.id }
       else
         self.own_providers = params[:own_providers].to_i
       end
+      # force resellers to have uniquehash
+      self.uniquehash = ApplicationController::random_password(10) if  self.uniquehash.to_s.blank?
 
     end
 
