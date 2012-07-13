@@ -103,6 +103,9 @@ class User < ActiveRecord::Base
     devgroup.init_primary(id, "primary", address_id)
 
     Action.add_action_hash(owner_id, {:target_id => id, :target_type => "user", :action => "user_created"})
+    if usertype == 'reseller'
+      self.get_hash
+    end
   end
 
   def check_address
@@ -881,7 +884,7 @@ class User < ActiveRecord::Base
   def get_hash
     return(uniquehash) if (uniquehash and uniquehash.length > 0)
     uniquehash = ApplicationController::random_password(10)
-    save
+    self.save
     return uniquehash
   end
 
