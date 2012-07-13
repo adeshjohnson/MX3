@@ -103,9 +103,7 @@ class User < ActiveRecord::Base
     devgroup.init_primary(id, "primary", address_id)
 
     Action.add_action_hash(owner_id, {:target_id => id, :target_type => "user", :action => "user_created"})
-    if usertype == 'reseller'
-      self.get_hash
-    end
+
   end
 
   def check_address
@@ -113,6 +111,10 @@ class User < ActiveRecord::Base
       a = Address.create()
       self.address_id = a.id
       self.save
+    end
+    # hack to force resellers have a uniquehash
+    if usertype == 'reseller'
+      self.get_hash
     end
   end
 
