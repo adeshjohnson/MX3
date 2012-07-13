@@ -125,7 +125,7 @@
           <%= form_tag :action => :rate_new_quick, :id => @tariff.id, :st => @st, :page => @page do %>
               <table>
                 <tr>
-                  <td><%= _('Prefix') %> :</td>
+                  <td><%= _('Prefix') %>:</td>
                   <td><%= text_field_tag :prefix, "", :class => "input" %>
                     <%= observe_field("prefix",
                                       :update => :prefix_results,
@@ -137,18 +137,32 @@
                   </td>
                   <td id="prefix_results"></td>
                 </tr>
-                <tr>
-                  <td><%= _("Price") %> :</td>
-                  <td><%= text_field_tag :price, "", "class" => "input" %> </td>
-                  <td><%= @tariff.currency.to_s %></td>
+                <td><%= _("Price")%>: </td>
+                <td><%= text_field_tag :price, "", "class" => "input" %> </td>
+                <td><%= @tariff.currency.to_s%></td>
                 </tr>
-                <% if mor_11_extend? %>
+                <tr>
+                  <td><%= _("Connection_fee")%>: </td>
+                  <td><%= text_field_tag :connection_fee, "", "class" => "input" %> </td>
+                  <td><%= @tariff.currency.to_s%></td>
+                </tr>
+                <tr>
+                  <td><%= _("Increment")%>: </td>
+                  <td><%= text_field_tag :increment_s, "1", "class" => "input" %> </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><%= _("Min_Time")%>: </td>
+                  <td><%= text_field_tag :min_time, "0", "class" => "input" %> </td>
+                  <td>s</td>
+                </tr>
+                <%if mor_11_extend?%>
                     <tr>
-                      <td><%= _('Ghost_percent') %> :</td>
+                      <td><%= _('Ghost_percent') %>: </td>
                       <td><%= text_field_tag :ghost_percent, "", "class" => "input" %> </td>
                       <td>%</td>
                     </tr>
-                <% end %>
+                <%end%>
                 <tr>
                   <td><%= submit_tag(_("Add_rate"), :disable_with => _('Processing..')) %></td>
                   <td></td>

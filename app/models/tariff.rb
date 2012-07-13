@@ -92,7 +92,7 @@ class Tariff < ActiveRecord::Base
     destinations
   end
 
-  def add_new_rate(dest_id, rate_value, increment, min_time, ghost_percent = nil, mor_11_extended = false)
+  def add_new_rate(dest_id, rate_value, increment, min_time, connection_fee, ghost_percent = nil, mor_11_extended = false)
     rate = Rate.new
     rate.tariff_id = self.id
     rate.destination_id = dest_id
@@ -100,8 +100,9 @@ class Tariff < ActiveRecord::Base
 
     rate_det = Ratedetail.new
     rate_det.rate = rate_value.to_f
-    rate_det.increment_s = increment.to_i
-    rate_det.min_time = min_time.to_i
+    rate_det.increment_s = increment.to_i < 1 ? 1 : increment.to_i
+    rate_det.min_time = min_time.to_i < 0 ? 0 : min_time.to_i
+    rate_det.connection_fee = connection_fee.to_f
 
     rate.ratedetails << rate_det
 
