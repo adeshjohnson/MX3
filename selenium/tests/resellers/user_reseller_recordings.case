@@ -183,7 +183,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>1.3962 Mb/0.0200 Mb ( 6981.3075 % Taken)</td>
+	<td>0.0200 Mb (1.3962 Mb or 6981.3075 % Taken) </td>
 	<td></td>
 </tr>
 <tr>
@@ -378,7 +378,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>0.0000 Mb/0.2000 Mb ( 0.0000 % Taken)</td>
+	<td>0.2000 Mb (0.0000 Mb or 0.0000 % Taken) </td>
 	<td></td>
 </tr>
 <tr>
@@ -483,7 +483,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=device[recording_email]</td>
+	<td>id=device_recording_email</td>
 	<td>k@k.com</td>
 </tr>
 <tr>
@@ -523,7 +523,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>0.4153 Mb/0.3000 Mb ( 138.4306 % Taken)</td>
+	<td>0.3000 Mb (0.4153 Mb or 138.4306 % Taken) </td>
 	<td></td>
 </tr>
 <tr>
@@ -562,28 +562,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
-	<td>id=device[recording_email]</td>
+	<td>assertValue</td>
+	<td>id=device_recording_email</td>
 	<td>k@k.com</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=device[record]_1</td>
+	<td>id=device_record_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=device[recording_to_email]_1</td>
+	<td>id=device_recording_to_email_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=device[recording_keep]_1</td>
+	<td>id=device_recording_keep_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=device[recording_email]</td>
+	<td>id=device_recording_email</td>
 	<td>csa@sa.com</td>
 </tr>
 <tr>
@@ -597,24 +597,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>id=device[record]_1</td>
+	<td>assertValue</td>
+	<td>id=device_record_1</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>id=device[recording_to_email]_1</td>
+	<td>assertValue</td>
+	<td>id=device_recording_to_email_1</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>id=device[recording_email]</td>
+	<td>assertValue</td>
+	<td>id=device_recording_keep_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_recording_email</td>
 	<td>csa@sa.com</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=device[recording_keep]_1</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -649,6 +649,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User's settings succesfully changed: User Resellers</td>
 	<td></td>
 </tr>
 <tr>
