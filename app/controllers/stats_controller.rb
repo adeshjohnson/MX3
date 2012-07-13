@@ -2353,7 +2353,10 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
   def providers_calls
 
-    session[:stats_providers_calls] = nil if session[:stats_providers_calls] and session[:stats_providers_calls][:direction] == 0
+    #type checking looks a bit nasty but cant figure out how session[:stats_providers_calls]                                     
+    #becomes integer although it should allways be hash                                                                          
+    providers_calls = session[:stats_providers_calls]                                                                            
+    session[:stats_providers_calls] = nil if (not providers_calls.kind_of?(Hash)) or (providers_calls[:direction] == 0)          
 
     session[:stats_providers_calls].nil? ? @options = {} : @options = session[:stats_providers_calls]
     @Show_Currency_Selector=1
