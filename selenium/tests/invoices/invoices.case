@@ -252,11 +252,6 @@
 	<td>label=2008</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -364,6 +359,21 @@
 	<td>label=User Resellers</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=10</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>commit</td>
 	<td></td>
@@ -449,6 +459,21 @@
 	<td>select</td>
 	<td>user_id</td>
 	<td>value=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=12</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -538,6 +563,21 @@
 	<td>value=2</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=March</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=3</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -604,6 +644,21 @@
 	<td>value=2</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=March</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=3</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -663,6 +718,21 @@
 	<td>click</td>
 	<td>invoice_type_postpaid</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=12</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -984,11 +1054,6 @@
 	<td>//img[@alt='Check']</td>
 	<td></td>
 </tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Manual</td>
-	<td></td>
-</tr>
 <!--......Verify generated payment-->
 <!--......# This is a hack to get date set to today. -->
 <tr>
@@ -1226,29 +1291,29 @@
 	<td>1.0000</td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>verifyText</td>
+	<td>//invoice[1]/product[1]/price</td>
 	<td>13.0000</td>
-	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>verifyText</td>
+	<td>//product[2]/price</td>
 	<td>11.0000</td>
-	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>verifyText</td>
+	<td>//invoice[2]/product/name</td>
 	<td>Calls</td>
-	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Calls 1</td>
-	<td></td>
+	<td>verifyText</td>
+	<td>//invoice[2]/product/quantity</td>
+	<td>1</td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>verifyText</td>
+	<td>//invoice[2]/product/price</td>
 	<td>5.0000</td>
-	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
@@ -1400,6 +1465,21 @@
 	<td>label=1</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=12</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -1447,6 +1527,21 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>'1'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>'37063042438'</td>
 	<td></td>
 </tr>
 <tr>
@@ -1677,6 +1772,21 @@
 	<td>label=reseller2no_adr</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=10</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -1886,6 +1996,21 @@
 	<td>label=28</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=10</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -1931,9 +2056,9 @@
 	<td>2009-10-28</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>inv_issue_12</td>
-	<td>${datapilna}</td>
+	<td>assertText</td>
+	<td>id=inv_issue_12</td>
+	<td>2011-10-10</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -2151,6 +2276,21 @@
 	<td>label=reseller2no_adr</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=10</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -2355,9 +2495,9 @@
 	<td>2009-01-31</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>inv_issue_13</td>
-	<td>${datapilna}</td>
+	<td>assertText</td>
+	<td>id=inv_issue_13</td>
+	<td>2011-10-10</td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
@@ -2668,13 +2808,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>selectWindow</td>
-	<td>null</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>link=Clear search</td>
 	<td></td>
 </tr>
 <!--...Ordering-->
@@ -2784,9 +2919,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>inv_issue_2</td>
-	<td>${datapilna}</td>
+	<td>assertText</td>
+	<td>id=inv_issue_2</td>
+	<td>2011-12-12</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2794,9 +2929,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>inv_issue_2</td>
-	<td>${datapilna}</td>
+	<td>assertText</td>
+	<td>id=inv_issue_2</td>
+	<td>2011-12-12</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2977,6 +3112,71 @@
 	<td>inv_price_6</td>
 	<td>24.00</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=s_issue_date</td>
+	<td>2011-12-12 2012-03-03 2012-07-14 2011-10-10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_issue_date</td>
+	<td>label=2011-12-12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_issue_2</td>
+	<td>2011-12-12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_issue_9</td>
+	<td>2011-12-12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_issue_5</td>
+	<td>2011-12-12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_issue_10</td>
+	<td>2011-12-12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_issue_6</td>
+	<td>2011-12-12</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=inv_issue_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=inv_issue_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=inv_issue_3</td>
+	<td></td>
+</tr>
 <!--reseller-->
 <tr>
 	<td>open</td>
@@ -3031,6 +3231,171 @@
 <tr>
 	<td>verifyTextNotPresent</td>
 	<td>System Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=September</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=28</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=September</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=28</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=28</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_issue_date</td>
+	<td>label=2011-12-03</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_type_15</td>
+	<td>Postpaid</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=inv_issue_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=inv_issue_14</td>
 	<td></td>
 </tr>
 <!--accountant -->
@@ -3162,6 +3527,71 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=s_issue_date</td>
+	<td>2011-12-12 2012-03-03 2012-07-14 2011-10-10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_issue_date</td>
+	<td>label=2011-12-12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_issue_2</td>
+	<td>2011-12-12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_issue_9</td>
+	<td>2011-12-12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_issue_5</td>
+	<td>2011-12-12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_issue_10</td>
+	<td>2011-12-12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_issue_6</td>
+	<td>2011-12-12</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=inv_issue_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=inv_issue_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=inv_issue_3</td>
 	<td></td>
 </tr>
 </tbody></table>
