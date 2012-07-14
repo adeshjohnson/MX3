@@ -32,7 +32,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -67,7 +67,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>number_2</td>
 	<td>37011111111</td>
 </tr>
@@ -88,12 +88,12 @@
 </tr>
 <!--* validate that invalid number didnt get inserted-->
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>0 out of 1 numbers were imported</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>number_3</td>
 	<td></td>
 </tr>
@@ -139,6 +139,91 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/autodialer/campaign_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_name</td>
+	<td>Campaign </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_wait_time</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_wait_time</td>
+	<td>sfdgfgh</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=campaign_wait_time</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_wait_time</td>
+	<td>-10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=campaign_wait_time</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please enter wait time higher or equal to 10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_wait_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=campaign_wait_time</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please enter wait time higher or equal to 10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -158,7 +243,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -211,6 +296,96 @@
 	<td>assertText</td>
 	<td>name=campaign_id</td>
 	<td>None test_re test_re2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_name</td>
+	<td>Campaign </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_wait_time</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_wait_time</td>
+	<td>sfdgfgh</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=campaign_wait_time</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please enter wait time higher or equal to 10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_wait_time</td>
+	<td>-10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=campaign_wait_time</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please enter wait time higher or equal to 10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_wait_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=campaign_wait_time</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please enter wait time higher or equal to 10</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
