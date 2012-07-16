@@ -2677,12 +2677,14 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     destinations.direction_code as direction_code, directions.name as direction_name, destinations.subcode as destination_subcode, destinations.name as destination_name,
     providers.id as provider_id, providers.name as provider_name, providers.common_use, providers.user_id as 'providers_owner_id', activecalls.did_id as did_id, dids.did as did, g.direction_code as did_direction_code,
     NOW() - activecalls.answer_time AS 'duration',
-    IF(activecalls.answer_time IS NULL, 0, 1 ) as 'status'
+    IF(activecalls.answer_time IS NULL, 0, 1 ) as 'status',
+    activecalls.card_id as cc_id, cards.number as cc_number
     FROM activecalls
     LEFT JOIN providers ON (providers.id =activecalls.provider_id)
     LEFT JOIN devices ON (devices.id = activecalls.src_device_id)
     LEFT JOIN devices AS dst ON (dst.id = activecalls.dst_device_id)
     LEFT JOIN users ON (users.id = devices.user_id)
+    LEFT JOIN cards ON (cards.id = activecalls.card_id)
     LEFT JOIN users AS dst_usr ON (dst_usr.id = dst.user_id)
     LEFT JOIN tariffs ON (tariffs.id = users.tariff_id)
     LEFT JOIN destinations ON (destinations.prefix = activecalls.prefix)

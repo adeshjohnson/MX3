@@ -37,7 +37,7 @@
             <td id="duration_<%= i %>" align="center"><%= answer_time.blank? ? "" : nice_time(local_time_now - answer_time) %></td>
             <td id="src_<%= i %>" align="left">
               <%= call["src"] %>&nbsp;
-
+               <% if call['cc_id'].to_i == 0  %>
               <% if call["user_id"] %>
                   <% if session[:usertype] != "user" %>
                       <%= nice_user_from_data(call["user_username"].to_s, call["user_first_name"].to_s, call["user_last_name"].to_s, {:link => true, :user_id => call["user_id"].to_s}) %>
@@ -46,6 +46,9 @@
                       <%= nice_device_from_data(call["device_type"].to_s, (call["device_username"].to_s.blank? ? call["device_extension"].to_s : call["device_name"].to_s), call["device_extension"].to_s, call["device_istrunk"], call["device_ani"].to_s, {:link => false, :device_id => call["device_id"].to_s}) %>
                   <% end %>
               <% end %>
+                  <%else%>
+              <%= link_to _('Card') + ': ' + call['cc_number'].to_s, {:controller=>:cards, :action=>:show, :id=>call['cc_id'].to_i}, :target=>'blank'  %>
+              <%end%>
             </td>
 
             <td id="dst_<%= i %>" align="left">
