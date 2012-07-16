@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.116" />
+<link rel="selenium.base" href="" />
 <title>sip_device</title>
 </head>
 <body>
@@ -82,14 +82,14 @@
 	<td>off</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
+	<td>assertValue</td>
+	<td>id=device_encryption_no</td>
+	<td>on</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=device_transport_udp</td>
-	<td></td>
+	<td>assertValue</td>
+	<td>id=block_callerid_enable_no</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -177,6 +177,66 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Block callerid if </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_block_callerid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>simultaneous calls come from it:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_callerid_enable_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_callerid_enable_yes</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=block_callerid_enable_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=device_block_callerid</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=device_block_callerid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SRTP Encryption:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_encryption_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_encryption_yes</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_encryption_yes</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -195,6 +255,41 @@
 	<td>assertValue</td>
 	<td>id=device_transport_tcp</td>
 	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_encryption_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_callerid_enable_yes</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_block_callerid</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_block_callerid</td>
+	<td>5.5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>updated</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -252,6 +347,51 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>SRTP Encryption</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_encryption_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_encryption_yes</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_encryption_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_block_callerid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_callerid_enable_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=block_callerid_enable_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=device_block_callerid</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_block_callerid</td>
+	<td>5.5</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -259,6 +399,16 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=device_transport_udp_tcp</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_block_callerid</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_callerid_enable_yes</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -302,6 +452,41 @@
 	<td>off</td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_encryption_no</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_encryption_yes</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_block_callerid</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_callerid_enable_yes</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_block_callerid</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=block_callerid_enable_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotEditable</td>
+	<td>id=device_block_callerid</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -322,6 +507,31 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_encryption_no</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_encryption_yes</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_encryption_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_callerid_enable_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_block_callerid</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -339,6 +549,16 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=device_transport_tcp_udp</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_encryption_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_callerid_enable_no</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -404,7 +624,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=device_transport_udp</td>
-	<td>on</td>
+	<td>off</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -413,7 +633,37 @@
 </tr>
 <tr>
 	<td>assertValue</td>
+	<td>id=device_transport_udptcp</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_transport_tcp</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device[transport]_tcp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device[encryption]_no</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
 	<td>id=device_transport_udp_tcp</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device[encryption]_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_callerid_enable_no</td>
 	<td>off</td>
 </tr>
 <tr>
@@ -445,6 +695,56 @@
 	<td>assertValue</td>
 	<td>id=device_transport_tcp</td>
 	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device[encryption]_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device[encryption]_yes</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_callerid_enable_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=block_callerid_enable_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=device[block_callerid]</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device[block_callerid]</td>
+	<td>-10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_callerid_enable_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>waitForNotEditable</td>
+	<td>id=device[block_callerid]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -479,11 +779,31 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=device_transport_udp</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device[transport]_tcp</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device[transport]_udptcp</td>
 	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>id=device_transport_tcp</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device[transport]_udp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device[encryption]_no</td>
 	<td>off</td>
 </tr>
 <tr>
@@ -510,6 +830,16 @@
 	<td>assertValue</td>
 	<td>id=device_transport_udp</td>
 	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device[transport]_udp</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device[block_callerid]</td>
+	<td>8000</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -552,6 +882,26 @@
 	<td>off</td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device[encryption]_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device[encryption]_yes</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device[block_callerid]</td>
+	<td>8000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device[block_callerid]</td>
+	<td>Ę$Ė^%</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -570,6 +920,11 @@
 	<td>click</td>
 	<td>id=device_transport_tcp_udp</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_callerid_enable_no</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
