@@ -430,12 +430,13 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
       END != 0"])
 
     notice_2 = ''
-    # checking time periods for collisions
-    if ratesd and ratesd.size.to_i > 0
-      notice_2 = _('Tarrif_import_incorect_time').html_safe
-      notice_2 += '<br /> * '.html_safe + _('Please_select_period_without_collisions').html_safe
-      # redirect_to :action => "import_csv", :id => @tariff.id, :step => "2" and return false
-    end
+    #checking time periods for collisions
+    #ticket #5808 -> not checking any more
+    #if ratesd and ratesd.size.to_i > 0
+    #  notice_2 = _('Tarrif_import_incorect_time').html_safe
+    #  notice_2 += '<br /> * '.html_safe + _('Please_select_period_without_collisions').html_safe
+    #  # redirect_to :action => "import_csv", :id => @tariff.id, :step => "2" and return false
+    #end
 
     ratesd = Ratedetail.find(:first, :select => "SUM(IF(daytype = '',1,0)) all_sum, SUM(IF(daytype != '',1,0)) wd_fd_sum ", :joins => "LEFT JOIN rates ON (ratedetails.rate_id = rates.id)", :conditions => ["rates.tariff_id = '#{id}'"])
     if ratesd.wd_fd_sum.to_i == 0
@@ -486,6 +487,22 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
       # set error flag where country_code is not found in DB | code : 11
       ActiveRecord::Base.connection.execute("UPDATE #{name} LEFT JOIN directions ON (replace(col_#{options[:imp_cc]}, '\\r', '') = directions.code) SET f_error = 1, nice_error = 11 WHERE directions.id IS NULL AND f_error = 0")
     end
+
+    logger.fatal options.inspect
+    #ticket #5808 -> since now we dont check for time collisions, 
+    #just import anything if posible. else user will be notified 
+    #in the last step about rates that was not posible to import 
+    #due to time collision.
+    day_type = options[:imp_date_day_type] 
+    start_time = options[:imp_time_from_type] 
+    end_time = options[:imp_time_till_type]
+    ActiveRecord::Base.connection.execute("UPDATE #{name} JOIN destinations ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) JOIN rates ON (rates.destination_id = destinations.id) JOIN ratedetails ON (ratedetails.rate_id = rates.id) SET f_error = 1, nice_error = 15 WHERE rates.tariff_id = '#{id}' AND 
+      CASE 
+        WHEN daytype = '#{day_type}' AND start_time = '#{start_time}' AND end_time = '#{end_time}' THEN 0 
+        WHEN '#{day_type}' IN ('WD', 'FD') AND daytype IN ('WD', 'FD') AND daytype != '#{day_type}' THEN 0
+        WHEN (daytype = '' AND '#{day_type}' != '') OR (daytype IN ('WD', 'FD') AND '#{day_type}' NOT IN ('WD', 'FD')) THEN 1
+        ELSE ('#{start_time}' BETWEEN start_time AND end_time) OR ('#{end_time}' BETWEEN start_time AND end_time) OR (start_time BETWEEN '#{start_time}' AND '#{end_time}') OR (end_time BETWEEN '#{start_time}' AND '#{end_time}')
+      END != 0")
 
     # set flag not_found_in_db
     ActiveRecord::Base.connection.execute("UPDATE #{name} LEFT JOIN destinations ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET not_found_in_db = 1 WHERE destinations.id IS NULL AND f_error = 0")

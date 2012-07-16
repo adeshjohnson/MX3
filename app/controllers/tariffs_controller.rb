@@ -1691,11 +1691,12 @@ class TariffsController < ApplicationController
             @optins[:imp_date_day_type] = params[:rate_day_type].to_s
 
             @rate_type, flash[:notice_2] = @tariff.check_types_periods(params)
-            unless flash[:notice_2].blank?
-              flash[:notice] = _('Tarrif_import_incorect_time').html_safe
-              flash[:notice] += '<br /> * '.html_safe + _('Please_select_period_without_collisions').html_safe
-              redirect_to :action => "import_csv", :id => @tariff.id, :step => "2" and return false
-            end
+            ##5808 not cheking any more
+            #unless flash[:notice_2].blank?
+            #  flash[:notice] = _('Tarrif_import_incorect_time').html_safe
+            #  flash[:notice] += '<br /> * '.html_safe + _('Please_select_period_without_collisions').html_safe
+            #  redirect_to :action => "import_csv", :id => @tariff.id, :step => "2" and return false
+            #end
 
             @optins[:imp_time_from_type] = params[:time_from][:hour].to_s + ":" + params[:time_from][:minute].to_s + ":" + params[:time_from][:second].to_s if params[:time_from]
             @optins[:imp_time_till_type] = params[:time_till][:hour].to_s + ":" + params[:time_till][:minute].to_s + ":" + params[:time_till][:second].to_s if params[:time_till]

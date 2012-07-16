@@ -41,6 +41,7 @@
                     <%= "Duplicate Field" if row['nice_error'].to_i == 12 %>
                     <%= "Prefix is invalid" if row['nice_error'].to_i == 13 %>
                     <%= "New Destinations is disabled" if row['nice_error'].to_i == 14 %>
+                    <%= "Time collision" if row['nice_error'].to_i == 15 %>
                   </b>
                 </td>
               </tr>
