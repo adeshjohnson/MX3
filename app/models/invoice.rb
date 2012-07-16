@@ -485,7 +485,7 @@ class Invoice < ActiveRecord::Base
           WHERE calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
           " AND card_id = 0 AND (devices.user_id = '#{options[:user].id}' ) #{options[:zero_calls_sql]}" +
           "GROUP BY destinationgroups.id , calls.user_rate "+
-          "ORDER BY destinationgroups.name ASC, destinationgroups.desttype ASC"
+          "ORDER BY directions.name ASC, destinationgroups.name ASC, destinationgroups.desttype ASC"
 
       if options[:user].usertype == "reseller"
         sql2 = "SELECT destinationgroups.id as 'dgid', destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',  COUNT(*) as 'calls', SUM(#{options[:billsec_cond]}) as 'billsec', #{options[:selfcost]}, SUM(#{options[:reseller_price]}) as 'price', #{options[:user_rate]}, #{options[:did_price]}  " +
@@ -494,7 +494,7 @@ class Invoice < ActiveRecord::Base
             "WHERE calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
             " AND card_id = 0 AND (calls.reseller_id = '#{options[:user].id}' ) #{options[:zero_calls_sql]}" +
             "GROUP BY destinationgroups.id, calls.user_rate "+
-            "ORDER BY destinationgroups.name ASC, destinationgroups.desttype ASC"
+            "ORDER BY directions.name ASC, destinationgroups.name ASC, destinationgroups.desttype ASC"
       end
     else
       #wholesale
