@@ -144,17 +144,19 @@ INSERT INTO `actions`
 
 
 TRUNCATE `adnumbers`;
-INSERT INTO `adnumbers` VALUES (1,'111','executed',2,'2010-01-01 01:01:01',NULL,NULL,NULL,0);
+INSERT INTO `adnumbers`(`id`,`number`,`status`,`campaign_id`,`executed_time`,`competed_time`,`chanel`,`uniqueid`) VALUES (1,'111','executed',2,'2010-01-01 01:01:01',NULL,NULL,0);
 
 # test-production identification
 INSERT INTO conflines(name,value) VALUES("test_production_environment", "true");
 
 TRUNCATE `vouchers`;
-INSERT INTO `vouchers` VALUES (1,'1234567890','1','20','4','55','2010-01-01 01:01:01','2017-01-01 01:01:01','EUR', NULL, 1, 1);
+INSERT INTO `vouchers`
+(`id`,`number`,`tag`,`credit_with_vat`,`vat_percent`,`user_id`,`use_date`,`active_till`,`currency`,`payment_id`,`active`,`tax_id`) VALUES 
+(1,'1234567890','1','20','4','55','2010-01-01 01:01:01','2017-01-01 01:01:01','EUR', NULL, 1, 1);
 
 TRUNCATE `payments`;
 INSERT INTO `payments`
-(`id`, `paymenttype`, `amount`, `currency`, `email`, `date_added`         , `completed`, `transaction_id`,`shipped_at`         , `fee`, `gross`, `first_name`, `last_name`, `payer_email`, `residence_country`, `payer_status`, `tax`, `user_id`, `pending_reason`, `vat_percent`, `owner_id`, `card`, `payment_hash`, `bill_nr`) VALUES
+(`id`, `paymenttype`, `amount`, `currency`, `email`, `date_added`         , `completed`, `transaction_id`,`shipped_at`         , `fee`, `gross`, `first_name`, `last_name`, `payer_email`, `residence_country`, `payer_status`, `tax`, `user_id`, `pending_reason`, `vat_percent`, `owner_id`, `card`, `hash`, `bill_nr`) VALUES
 (1,    'paypal',         10.50,      'USD',    NULL, '2010-04-18 00:00:01',           1,             NULL,'2010-04-18 00:00:02', 0.6  , 10     , NULL        , NULL       , NULL         , NULL               , NULL          , 0    , 0        , NULL            , 0            , 0         , 2     , NULL  ,  NULL    ),
 (2,    'paypal_fee',     -0.6 ,      'USD',    NULL, '2010-04-18 00:00:01',           1,             NULL,'2010-04-18 00:00:02', 0    , -0.6   , NULL        , NULL       , NULL         , NULL               , NULL          , 0    , 0        , NULL            , 0            , 0         , 2     , NULL  ,  NULL    ),
 (3,    'webmoney',       10.50,      'USD',    NULL, '2010-04-18 00:00:01',           1,             NULL,'2010-04-18 00:00:02', 0    , 10     , NULL        , NULL       , NULL         , NULL               , NULL          , 0    , 0        , NULL            , 0            , 0         , 2     , NULL  ,  NULL    ),
@@ -175,3 +177,4 @@ UPDATE users SET blocked = 0 WHERE id = 2;
 INSERT INTO `conflines` (name, value, owner_id) VALUES ('System_time_zone_ofset', '0', '0');
 
 update servers set active=0;
+
