@@ -136,18 +136,18 @@
                     %>
                   </td>
                   <td id="prefix_results"></td>
-                </tr>
-                <td><%= _("Price")%>: </td>
-                <td><%= text_field_tag :price, "", "class" => "input" %> </td>
-                <td><%= @tariff.currency.to_s%></td>
+                <tr>
+                  <td><%= _('Price')%>: </td>
+                  <td><%= text_field_tag :price, "", "class" => "input" %> </td>
+                  <td><%= @tariff.currency.to_s%></td>
                 </tr>
                 <tr>
-                  <td><%= _("Connection_fee")%>: </td>
+                  <td><%= _('Connection_Fee')%>: </td>
                   <td><%= text_field_tag :connection_fee, "", "class" => "input" %> </td>
                   <td><%= @tariff.currency.to_s%></td>
                 </tr>
                 <tr>
-                  <td><%= _("Increment")%>: </td>
+                  <td><%= _('Increment')%>: </td>
                   <td><%= text_field_tag :increment_s, "1", "class" => "input" %> </td>
                   <td></td>
                 </tr>
