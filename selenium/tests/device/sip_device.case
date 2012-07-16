@@ -633,7 +633,7 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=device_transport_udptcp</td>
+	<td>id=device_transport_udp_tcp</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -642,13 +642,8 @@
 	<td>off</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=device[transport]_tcp</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertValue</td>
-	<td>id=device[encryption]_no</td>
+	<td>id=device_encryption_no</td>
 	<td>off</td>
 </tr>
 <tr>
@@ -658,7 +653,12 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=device[encryption]_no</td>
+	<td>id=device_transport_tcp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_encryption_no</td>
 	<td></td>
 </tr>
 <tr>
@@ -674,6 +674,11 @@
 <tr>
 	<td>click</td>
 	<td>id=device_transport_tcp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=block_callerid_enable_no</td>
 	<td></td>
 </tr>
 <tr>
@@ -698,12 +703,12 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=device[encryption]_no</td>
+	<td>id=device_encryption_no</td>
 	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=device[encryption]_yes</td>
+	<td>id=device_encryption_yes</td>
 	<td>off</td>
 </tr>
 <tr>
@@ -718,12 +723,12 @@
 </tr>
 <tr>
 	<td>waitForValue</td>
-	<td>id=device[block_callerid]</td>
+	<td>id=device_block_callerid</td>
 	<td>2</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=device[block_callerid]</td>
+	<td>id=device_block_callerid</td>
 	<td>-10</td>
 </tr>
 <tr>
@@ -743,7 +748,7 @@
 </tr>
 <tr>
 	<td>waitForNotEditable</td>
-	<td>id=device[block_callerid]</td>
+	<td>id=device_block_callerid</td>
 	<td></td>
 </tr>
 <tr>
@@ -783,12 +788,12 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=device[transport]_tcp</td>
+	<td>id=device_transport_tcp</td>
 	<td>off</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=device[transport]_udptcp</td>
+	<td>id=device_transport_udp_tcp</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -798,12 +803,12 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=device[transport]_udp</td>
+	<td>id=device_transport_udp</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=device[encryption]_no</td>
+	<td>id=device_encryption_no</td>
 	<td>off</td>
 </tr>
 <tr>
@@ -822,6 +827,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=block_callerid_enable_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_block_callerid</td>
+	<td>8000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_encryption_no</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -833,12 +853,12 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=device[transport]_udp</td>
+	<td>id=device_transport_udp</td>
 	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=device[block_callerid]</td>
+	<td>id=device_block_callerid</td>
 	<td>8000</td>
 </tr>
 <tr>
@@ -883,22 +903,22 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=device[encryption]_no</td>
+	<td>id=device_encryption_no</td>
 	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=device[encryption]_yes</td>
+	<td>id=device_encryption_yes</td>
 	<td>off</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=device[block_callerid]</td>
+	<td>id=device_block_callerid</td>
 	<td>8000</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=device[block_callerid]</td>
+	<td>id=device_block_callerid</td>
 	<td>Ę$Ė^%</td>
 </tr>
 <tr>
