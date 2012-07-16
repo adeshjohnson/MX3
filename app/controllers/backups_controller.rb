@@ -103,9 +103,11 @@ class BackupsController < ApplicationController
     backup_folder = Confline.get_value("Backup_Folder")
 
     #script=[]
-    logger.fatal "/usr/local/mor/make_restore.sh #{backup.backuptime} #{backup_folder} -c"
+    #logger.fatal "/usr/local/mor/make_restore.sh #{backup.backuptime} #{backup_folder} -c"
     command = "/usr/local/mor/make_restore.sh #{backup.backuptime} #{backup_folder} -c"
+    logger.fatal command
     script = %x[#{command}]
+    logger.fatal script
     #my_debug("response : " + script[0].split(" ").last.last.to_s )    
 
     return_code = script.to_s.scan(/\d+/).to_s.to_i
