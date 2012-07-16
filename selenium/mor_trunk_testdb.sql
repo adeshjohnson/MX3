@@ -156,7 +156,7 @@ INSERT INTO `vouchers`
 
 TRUNCATE `payments`;
 INSERT INTO `payments`
-(`id`, `paymenttype`, `amount`, `currency`, `email`, `date_added`         , `completed`, `transaction_id`,`shipped_at`         , `fee`, `gross`, `first_name`, `last_name`, `payer_email`, `residence_country`, `payer_status`, `tax`, `user_id`, `pending_reason`, `vat_percent`, `owner_id`, `card`, `hash`, `bill_nr`) VALUES
+(`id`, `paymenttype`, `amount`, `currency`, `email`, `date_added`         , `completed`, `transaction_id`,`shipped_at`         , `fee`, `gross`, `first_name`, `last_name`, `payer_email`, `residence_country`, `payer_status`, `tax`, `user_id`, `pending_reason`, `vat_percent`, `owner_id`, `card`, `payment_hash`, `bill_nr`) VALUES
 (1,    'paypal',         10.50,      'USD',    NULL, '2010-04-18 00:00:01',           1,             NULL,'2010-04-18 00:00:02', 0.6  , 10     , NULL        , NULL       , NULL         , NULL               , NULL          , 0    , 0        , NULL            , 0            , 0         , 2     , NULL  ,  NULL    ),
 (2,    'paypal_fee',     -0.6 ,      'USD',    NULL, '2010-04-18 00:00:01',           1,             NULL,'2010-04-18 00:00:02', 0    , -0.6   , NULL        , NULL       , NULL         , NULL               , NULL          , 0    , 0        , NULL            , 0            , 0         , 2     , NULL  ,  NULL    ),
 (3,    'webmoney',       10.50,      'USD',    NULL, '2010-04-18 00:00:01',           1,             NULL,'2010-04-18 00:00:02', 0    , 10     , NULL        , NULL       , NULL         , NULL               , NULL          , 0    , 0        , NULL            , 0            , 0         , 2     , NULL  ,  NULL    ),
