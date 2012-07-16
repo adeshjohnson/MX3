@@ -2967,9 +2967,11 @@ Sets default tax values for users or cardgroups
     Confline.set_value("CB_MaxRetries", params[:cb_maxretries])
     Confline.set_value("CB_RetryTime", params[:cb_retrytime])
     Confline.set_value("CB_WaitTime", params[:cb_waittime])
-    Confline.set_value("WEB_Callback_CID", params[:web_callback_cid])
+
     Confline.set_value("Web_Callback_Server", params[:web_callback_server])
     Confline.set_value("Web_Callback_Send_Source_As_CID", params[:web_callback_send_source])
+    cid = params[:web_callback_send_source].to_i == 1 ? '' :  params[:web_callback_cid]
+    Confline.set_value("WEB_Callback_CID", cid)
 
     if (params[:email_callback_pop3_server] or params[:email_callback_login])
       if params[:email_callback_pop3_server] != params[:email_pop3_server]

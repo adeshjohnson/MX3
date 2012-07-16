@@ -74,20 +74,20 @@
 <script type="text/javascript">
   //<![CDATA[
   Event.observe(window, 'load', function() {
-  if($('web_callback_send_source').checked){
-    $('web_callback_cid_row').show();
-  }else{
-    $('web_callback_cid_row').hide();
-  }
+      if($('web_callback_send_source').checked){
+          $('web_callback_cid_row').hide();
+      }else{
+          $('web_callback_cid_row').show();
+      }
   });
 
   Event.observe($('web_callback_send_source'), 'click', function() {
-   if($('web_callback_send_source').checked){
-     $('web_callback_cid_row').show();
-   }else{
-     $('web_callback_cid_row').hide();
-   }
-  }
+              if($('web_callback_send_source').checked){
+                  $('web_callback_cid_row').hide();
+              }else{
+                  $('web_callback_cid_row').show();
+              }
+          }
   );
 
 
