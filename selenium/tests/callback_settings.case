@@ -41,7 +41,6 @@
 	<td>/billing/functions/callback_settings</td>
 	<td></td>
 </tr>
-<!--Ir dar prie to pačio galima būtų page_title uždėti callback settingams.-->
 <tr>
 	<td>verifyValue</td>
 	<td>id=cb_active</td>
@@ -62,7 +61,26 @@
 	<td>id=cb_waittime</td>
 	<td>20</td>
 </tr>
-<!--Šiaip viskas ok, bet aš kažkaip norėčiau kad checkboxas disablinantis editfield būtų virš to eiditfield. Tai yra "Send Source as CID:" check boxas būtų virš "WEB Callback CID:" edit fieldo-->
+<tr>
+	<td>assertValue</td>
+	<td>id=web_callback_send_source</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=web_callback_cid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=web_callback_send_source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=web_callback_cid</td>
+	<td></td>
+</tr>
 <tr>
 	<td>type</td>
 	<td>id=web_callback_cid</td>
@@ -79,28 +97,33 @@
 	<td>on</td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
-	<td>id=web_callback_cid</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Settings saved</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyVisible</td>
+	<td>verifyNotVisible</td>
 	<td>id=web_callback_cid</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>id=web_callback_send_source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=web_callback_cid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=web_callback_cid</td>
+	<td>ąčęėįšųū„</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=web_callback_send_source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=web_callback_cid</td>
 	<td></td>
 </tr>
 <tr>
@@ -124,9 +147,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>id=web_callback_send_source</td>
-	<td>on</td>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=web_callback_cid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=web_callback_cid</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -156,7 +194,7 @@
 <tr>
 	<td>waitForValue</td>
 	<td>id=web_callback_send_source</td>
-	<td>on</td>
+	<td>off</td>
 </tr>
 <tr>
 	<td>verifyEditable</td>
