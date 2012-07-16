@@ -1964,6 +1964,12 @@ Variables: (Names marked with * are required)
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Asterik_server_connection_error', :data2 => exception.message).save
         end
 
+        if exception_class == "Errno::EACCES"                                                                                                                                          
+          flash_notice = _('File_permission_error')                                                                                                                                    
+          flash_help_link = ''                                                                                                                                                         
+          Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'File_permission_error', :data2 => exception.message).save          
+        end           
+
         if exception_class.include?("Errno::EHOSTUNREACH") or (exception_class.include?("Errno::ECONNREFUSED") and trace.to_s.include?("rami.rb:380"))
           flash_help_link = "http://wiki.kolmisoft.com/index.php/GUI_Error_-_SystemExit"
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Asterik_server_connection_error', :data2 => exception.message).save
