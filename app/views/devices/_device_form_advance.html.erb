@@ -169,12 +169,12 @@
     </td>
   </tr>
 <% end %>
-<% if (@default.to_i == 1 or @device_type == 'FAX' or @device_type == 'SIP') and defined? AST_18 and AST_18.to_i == 1 %>
+<% if (@device_type == 'FAX' or @device_type == 'SIP') and defined? AST_18 and AST_18.to_i == 1 %>
   <tr> 
     <td> <%= _('T.38_support') %>: </td> 
     <td> 
-      <%= radio_button_tag('device[t38pt_udptl]', "no",  @device.t38pt_udptl == "no") %> <%= _('No') %>
-      <%= radio_button_tag('device[t38pt_udptl]', "yes", @device.t38pt_udptl == "yes") %> <%= _('Yes') %>
+      <%= radio_button_tag('device[t38pt_udptl]', "no",  (not @device.t38_support?)) %> <%= _('No') %>
+      <%= radio_button_tag('device[t38pt_udptl]', "yes", @device.t38_support?) %> <%= _('Yes') %>
     </td>
   </tr>
 <% end %>
@@ -182,8 +182,8 @@
   <tr>
     <td> <%= _('SRTP_encryption') %>: </td>
     <td>
-      <%= radio_button_tag('device[encryption]', "no",  @device.encryption != "yes") %> <%= _('No') %>
-      <%= radio_button_tag('device[encryption]', "yes", @device.encryption == "yes") %> <%= _('Yes') %>
+      <%= radio_button_tag('device[encryption]', "no",  (not @device.srtp_encryption?)) %> <%= _('No') %>
+      <%= radio_button_tag('device[encryption]', "yes", @device.srtp_encryption?) %> <%= _('Yes') %>
     </td>
   </tr>
 <% end %>

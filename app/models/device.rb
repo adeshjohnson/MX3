@@ -118,6 +118,22 @@ class Device < ActiveRecord::Base
     return self.istrunk.to_i > 0
   end
 
+=begin                                                                                                     
+  Returs                                                                                                   
+  *boolean* true if srtp encryption is set for device, otherwise false                                     
+=end                                                                                                       
+  def srtp_encryption?                                                                                     
+    self.encryption.to_s == 'yes'                                                                          
+  end                                                                                                      
+                                                                                                           
+=begin                                                                                                     
+  Returs                                                                                                   
+  *boolean* true if t38 support is set for device, otherwise false                                         
+=end                                                                                                       
+  def t38_support?                                                                                         
+    self.t38pt_udptl == "yes"                                                                              
+  end       
+
 =begin
   if username is blank it means that ip authentication is enabled and there's
   no need to check for valid passwords.
