@@ -39,8 +39,6 @@
     <td><b><%= _('User_Wholesale_Enabled') %>:</b></td>
     <td><%= check_box_tag 'user_wholesale_enabled', "1", Confline.get_value("User_Wholesale_Enabled").to_i == 1 %></td>
   </tr>
-  <%= raw setting_boolean(_('Allow_Devices_To_Check_Ballance'), 'devices_check_ballance', "Devices_Check_Ballance") %>
-  <%= raw setting_boolean(_('Allow_Devices_To_Check_Rate'), 'devices_check_rate', "Devices_Check_Rate") %>
   <tr>
     <td width="30"></td>
     <td <%= "onmouseover=\"Tip(\'" + _('ivr_for_200_hgc_explained') + "\')\" onmouseout = \"UnTip()\"" %>>

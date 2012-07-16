@@ -396,6 +396,8 @@
               <td><%= check_box_tag 'api_payment_confirmation', 1, (Confline.get_value("API_payment_confirmation").to_i == 1) %> </td>
             </tr>
         <% end %>
+        <%= raw setting_boolean(_('Allow_Devices_To_Check_Ballance'), 'devices_check_ballance', "Devices_Check_Ballance") %>
+        <%= raw setting_boolean(_('Allow_Devices_To_Check_Rate'), 'devices_check_rate', "Devices_Check_Rate") %>
         <tr>
           <td width="30"></td>
           <td><b><%= _('Uniquehash')%>:</b></td>
