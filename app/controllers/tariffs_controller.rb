@@ -528,6 +528,12 @@ class TariffsController < ApplicationController
 
     @tariff = @rate.tariff
     @destination = @rate.destination
+    #every rate should have destination assigned, but since it is common to have 
+    #broken relational itegrity, we should check whether destination is not nil
+    unless @destination
+      flash[:notice] = _('Rate_does_not_have_destination_assigned')
+      redirect_to :controller => :callc, :action => :main 
+    end 
     @can_edit = true
 
     if current_user.usertype == 'reseller' and @tariff.owner_id != current_user.id and CommonUseProvider.find(:first, :conditions => ["reseller_id = ? AND tariff_id = ?", current_user.id, @tariff.id])

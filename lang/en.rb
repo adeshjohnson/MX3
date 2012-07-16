@@ -4456,6 +4456,7 @@ Localization.define('en') do |l|
   l.store 'Block_callerid_if', 'Block callerid if'
   l.store 'simultaneous_calls_come_from_it', 'simultaneous calls come from it'
   l.store 'File_permission_error', 'Filesystem permission error'
+  l.store 'Rate_does_not_have_destination_assigned', 'Rate does not have assigned destination'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
