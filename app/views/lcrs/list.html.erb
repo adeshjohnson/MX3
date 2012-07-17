@@ -48,7 +48,7 @@
         <td id="order_<%= lcr.id %>"><%= lcr.order %></td>
         <td align="center" id="providers_<%= lcr.id %>"><%= link_to b_providers + _('Providers'), :action => 'providers_list', :id => lcr.id %> <%= "(" + providers.size.to_s + ")" if providers %><%= "(0)" if not providers %></td>
         <td align="center" id="destinations_<%= lcr.id %>"><%= link_to b_actions, :action => 'details_by_destinations', :id => lcr.id, :no_direction => true %>
-        <%= count = lcr.lcr_partials.count.to_i;  
+        <%= count = lcr.lcr_partials_destinations.count.to_i;
             if count > 0 then  
               "(#{count})"  
             end %>
