@@ -493,7 +493,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     #just import anything if posible. else user will be notified 
     #in the last step about rates that was not posible to import 
     #due to time collision.
-    day_type = options[:imp_date_day_type] 
+    day_type = ["wd", "fd",].include?(options[:imp_date_day_type].to_s) ? options[:imp_date_day_type].to_s : ''
     start_time = options[:imp_time_from_type] 
     end_time = options[:imp_time_till_type]
     ActiveRecord::Base.connection.execute("UPDATE #{name} JOIN destinations ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) JOIN rates ON (rates.destination_id = destinations.id) JOIN ratedetails ON (ratedetails.rate_id = rates.id) SET f_error = 1, nice_error = 15 WHERE rates.tariff_id = '#{id}' AND 
