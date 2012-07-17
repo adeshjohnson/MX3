@@ -189,7 +189,7 @@
     </td>
   </tr>
 <% end %>
-<% if ['SIP','IAX2', 'dahdi'].include? @device_type %>
+<% if ['SIP','IAX2', 'dahdi', 'H323'].include? @device_type %>
   <tr>
     <td> 
       <%= _('Block_callerid_if') %> 
