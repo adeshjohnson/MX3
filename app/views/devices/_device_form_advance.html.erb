@@ -10,7 +10,6 @@
   <td colspan="2" height="10"></td>
 </tr>
 <% if @device_type == "SIP" %>
-    <% if @device_type != "Virtual" %>
         <tr>
           <td> <%= _('Fromuser') %>:</td>
           <td> <%= text_field_tag 'fromuser', @device.fromuser, "class" => "input" %>  </td>
@@ -50,7 +49,6 @@
               </td>
             </tr>
         <% end %>
-    <% end %>
 <% end %>
 <% lang = @device.language.to_s.blank? ? 'en' : @device.language %>
 <% if @device_type != "Virtual" %>
@@ -58,21 +56,23 @@
       <td> <%= _('Grace_Time') %>:</td>
       <td> <%= text_field_tag 'grace_time', @device.grace_time, :size => 5, "class" => "input" %> s</td>
     </tr>
-    <tr>
-      <td> <%= _('Progressinband') %>:</td>
-      <td>
-        <%= radio_button_tag('device[progressinband]', 'no', @device.progressinband.to_s == 'no') %> <%= _('No') %>
-        <%= radio_button_tag('device[progressinband]', 'yes', @device.progressinband.to_s == 'yes') %> <%= _('Yes') %>
-        <%= radio_button_tag('device[progressinband]', 'never', @device.progressinband.to_s == 'never') %> <%= _('Never') %>
-      </td>
-    </tr>
-    <tr>
-      <td><%= _('Video_support') %>:</td>
-      <td>
-        <%= radio_button_tag('device[videosupport]', 'no', @device.videosupport == 'no') %> <%= _('No') %>
-        <%= radio_button_tag('device[videosupport]', 'yes', @device.videosupport == 'yes') %> <%= _('Yes') %>
-      </td>
-    </tr>
+    <% if @device_type == 'SIP' %> 
+      <tr>
+        <td> <%= _('Progressinband') %>:</td>
+        <td>
+          <%= radio_button_tag('device[progressinband]', 'no', @device.progressinband.to_s == 'no') %> <%= _('No') %>
+          <%= radio_button_tag('device[progressinband]', 'yes', @device.progressinband.to_s == 'yes') %> <%= _('Yes') %>
+          <%= radio_button_tag('device[progressinband]', 'never', @device.progressinband.to_s == 'never') %> <%= _('Never') %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= _('Video_support') %>:</td>
+        <td>
+          <%= radio_button_tag('device[videosupport]', 'no', @device.videosupport == 'no') %> <%= _('No') %>
+          <%= radio_button_tag('device[videosupport]', 'yes', @device.videosupport == 'yes') %> <%= _('Yes') %>
+        </td>
+      </tr>
+    <% end %>
     <tr>
       <td nowrap><%= _('Allow_duplicate_calls') %>:</td>
       <td>
@@ -80,13 +80,15 @@
         <%= radio_button_tag('device[allow_duplicate_calls]', '1', @device.allow_duplicate_calls.to_i == 1) %> <%= _('Yes') %>
       </td>
     </tr>
-    <tr <%= tooltip(_('Fake_Ring'), _('Fake_Ring_Explanation')) %>>
-      <td><%= _('Fake_Ring') %>:</td>
-      <td>
-        <%= radio_button_tag('device[fake_ring]', '0', @device.fake_ring.to_i == 0) %> <%= _('No') %>
-        <%= radio_button_tag('device[fake_ring]', '1', @device.fake_ring.to_i == 1) %> <%= _('Yes') %>
-      </td>
-    </tr>
+    <% if @device_type != 'FAX' %>
+      <tr <%= tooltip(_('Fake_Ring'), _('Fake_Ring_Explanation')) %>>
+        <td><%= _('Fake_Ring') %>:</td>
+        <td>
+          <%= radio_button_tag('device[fake_ring]', '0', @device.fake_ring.to_i == 0) %> <%= _('No') %>
+          <%= radio_button_tag('device[fake_ring]', '1', @device.fake_ring.to_i == 1) %> <%= _('Yes') %>
+        </td>
+      </tr>
+    <% end %>
     <tr <%= tooltip(_('Language'), _('Device_Language_Explanation')) %>>
       <td><%= _('Language') %>:</td>
       <td>
@@ -187,7 +189,7 @@
     </td>
   </tr>
 <% end %>
-<% if ['SIP','IAX2', 'dahdi', 'H323'].include? @device_type %>
+<% if ['SIP','IAX2', 'dahdi'].include? @device_type %>
   <tr>
     <td> 
       <%= _('Block_callerid_if') %> 

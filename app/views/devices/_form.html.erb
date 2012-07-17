@@ -42,7 +42,7 @@
             <% end %>
         <% end %>
 
-        <% if not @new_device and not @device.is_dahdi? %>
+        <% if not @new_device %>
             <%= render :partial => "device_form_advance" %>
         <% end %>
 
