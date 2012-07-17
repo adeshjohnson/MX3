@@ -134,6 +134,14 @@ class Email < ActiveRecord::Base
     return opts
   end
 
+  def Email.map_variables_for_api(params)
+    opts = {}
+    ALLOWED_VARIABLES.each{ |var|
+      opts[var.to_sym] = params[var.to_sym].to_s
+    }
+    return opts
+  end
+
   def Email.nice_number(number, options = {})
     n = "0.00"
     if options[:nice_number_digits].to_i > 0

@@ -3904,12 +3904,6 @@ class ApiController < ApplicationController
     send_xml_data(out_string, params[:test].to_i)
   end
 
-  def check_sms_addon
-    unless sms_active?
-      send_xml_data(MorApi.return_error('Dont be so smart'), params[:test].to_i)
-      return false
-    end
-  end
 
   def get_version
     allow, values = MorApi.check_params_with_all_keys(params, request)
@@ -3931,7 +3925,53 @@ class ApiController < ApplicationController
     send_xml_data(out_string, params[:test].to_i)
   end
 
+  def send_email
+    allow, values = MorApi.check_params_with_all_keys(params, request)
+    doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
+    doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
+      if allow == true
+        check_user(params[:u], params[:p])
+        if @user
+          email = Email.find(:first, :conditions => ['name = ? and owner_id = ?', params[:email_name], @user.get_corrected_owner_id])
+          if email
+            if !params[:email_to_user_id].blank?
+              user = User.find(:first, :conditions => ['id = ?', params[:email_to_user_id]])
+            else
+              user = @user
+            end
+            if user
+              users = [user]  # hack
+              variables = Email.map_variables_for_api(params)
+              num = EmailsController.send_email(email, Confline.get_value("Email_from", @user.get_corrected_owner_id), users, variables)
+              doc.email_sending_status(num.to_s.gsub('<br>', ''))
+            else
+              doc = MorApi.return_error("User not found", doc)
+            end
+          else
+            doc = MorApi.return_error("Email not found", doc)
+          end
+        else
+          doc = MorApi.return_error("Bad login", doc)
+        end
+      else
+        doc = MorApi.return_error("Incorrect hash", doc)
+      end
+    }
+    send_xml_data(out_string, params[:test].to_i)
+  end
+
+
+
   private
+
+
+  def check_sms_addon
+    unless sms_active?
+      send_xml_data(MorApi.return_error('Dont be so smart'), params[:test].to_i)
+      return false
+    end
+  end
 
   def respond_to_successful_card_operation(doc, card)
     doc.response {
