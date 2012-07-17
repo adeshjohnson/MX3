@@ -65,7 +65,7 @@
 <!--......Import ALL rates-->
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/import_csv/1</td>
+	<td>/billing/tariffs/import_csv2/1</td>
 	<td></td>
 </tr>
 <tr>
@@ -79,7 +79,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>File uploaded</td>
 	<td></td>
 </tr>
@@ -115,7 +115,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_hour</td>
 	<td>01</td>
 </tr>
@@ -145,7 +145,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_minute</td>
 	<td>01</td>
 </tr>
@@ -185,7 +185,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_second</td>
 	<td>01</td>
 </tr>
@@ -230,7 +230,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_hour</td>
 	<td>22</td>
 </tr>
@@ -275,7 +275,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_minute</td>
 	<td>22</td>
 </tr>
@@ -305,7 +305,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_second</td>
 	<td>42</td>
 </tr>
@@ -375,12 +375,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>213</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>1.26</td>
 	<td></td>
 </tr>
@@ -390,7 +390,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Analysis completed</td>
 	<td></td>
 </tr>
@@ -400,7 +400,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Created destinations: 9</td>
 	<td></td>
 </tr>
@@ -410,7 +410,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Rates updated: 0</td>
 	<td></td>
 </tr>
@@ -420,7 +420,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>New rates created: 20</td>
 	<td></td>
 </tr>
@@ -430,7 +430,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Rates (20)</td>
 	<td></td>
 </tr>
@@ -440,19 +440,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>rate_503</td>
 	<td>1.2600</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>connection_fee_503</td>
 	<td>0.0700</td>
 </tr>
 <!--......Update ALL rates-->
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/import_csv/1</td>
+	<td>/billing/tariffs/import_csv2/1</td>
 	<td></td>
 </tr>
 <tr>
@@ -466,7 +466,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>File uploaded</td>
 	<td></td>
 </tr>
@@ -501,12 +501,98 @@
 	<td>label=&quot;Min Time&quot;</td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>id=submit_button</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bad_dest</td>
+	<td>21 bad destination(s)(Press here to get the list)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=(Press here to get the list)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Time collision</td>
+	<td></td>
+</tr>
+<!--......Update ALL rates-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria_2.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_day_type</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
 	<td>Tariff import incorrect time</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextNotPresent</td>
 	<td>Please select period without collisions</td>
 	<td></td>
 </tr>
@@ -536,7 +622,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_hour</td>
 	<td>01</td>
 </tr>
@@ -566,7 +652,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_minute</td>
 	<td>01</td>
 </tr>
@@ -596,7 +682,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_second</td>
 	<td>01</td>
 </tr>
@@ -626,7 +712,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_hour</td>
 	<td>22</td>
 </tr>
@@ -656,7 +742,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_minute</td>
 	<td>22</td>
 </tr>
@@ -686,7 +772,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_second</td>
 	<td>42</td>
 </tr>
@@ -736,7 +822,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Columns assigned</td>
 	<td></td>
 </tr>
@@ -761,7 +847,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Created destinations: 0</td>
 	<td></td>
 </tr>
@@ -771,7 +857,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Rates updated: 20</td>
 	<td></td>
 </tr>
@@ -781,7 +867,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>New rates created: 0</td>
 	<td></td>
 </tr>
@@ -792,7 +878,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Rates (20)</td>
 	<td></td>
 </tr>
@@ -802,12 +888,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>rate_503</td>
 	<td>2.2600</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>connection_fee_503</td>
 	<td>1.0700</td>
 </tr>
@@ -827,14 +913,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>All rates deleted</td>
 	<td></td>
 </tr>
 <!--......Import FD rates-->
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/import_csv/1</td>
+	<td>/billing/tariffs/import_csv2/1</td>
 	<td></td>
 </tr>
 <tr>
@@ -848,7 +934,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>File uploaded</td>
 	<td></td>
 </tr>
@@ -888,7 +974,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_hour</td>
 	<td>01</td>
 </tr>
@@ -918,7 +1004,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_minute</td>
 	<td>01</td>
 </tr>
@@ -948,7 +1034,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_second</td>
 	<td>01</td>
 </tr>
@@ -978,7 +1064,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_hour</td>
 	<td>14</td>
 </tr>
@@ -1008,7 +1094,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_minute</td>
 	<td>14</td>
 </tr>
@@ -1113,7 +1199,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Columns assigned</td>
 	<td></td>
 </tr>
@@ -1123,7 +1209,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Analysis completed</td>
 	<td></td>
 </tr>
@@ -1133,7 +1219,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Created destinations: 0</td>
 	<td></td>
 </tr>
@@ -1143,7 +1229,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Rates updated: 0</td>
 	<td></td>
 </tr>
@@ -1153,7 +1239,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>New rates created: 20</td>
 	<td></td>
 </tr>
@@ -1163,29 +1249,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Rates (20)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/rate_details/523</td>
+	<td>/billing/tariffs/rate_details/534</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=rate_523</td>
+	<td>verifyText</td>
+	<td>id=rate_534</td>
 	<td>1.2600</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=connection_fee_523</td>
+	<td>verifyText</td>
+	<td>id=connection_fee_534</td>
 	<td>0.0700</td>
 </tr>
 <!--......Update FD rates-->
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/import_csv/1</td>
+	<td>/billing/tariffs/import_csv2/1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1199,7 +1285,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>File uploaded</td>
 	<td></td>
 </tr>
@@ -1234,7 +1320,78 @@
 	<td>label=&quot;Min Time&quot;</td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>id=submit_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
+	<td>21 bad destination(s)(Press here to get the list)</td>
+	<td></td>
+</tr>
+<!--......Update FD rates-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria_2.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_day_type</td>
+	<td>label=Free Days</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>prefix_id</td>
+	<td>label=&quot;Prefix&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>rate_id</td>
+	<td>label=&quot;Rate&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>increment_id</td>
+	<td>label=&quot;Increment&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>connection_fee_id</td>
+	<td>label=&quot;Connection fee&quot;</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>min_time_id</td>
+	<td>label=&quot;Min Time&quot;</td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
 	<td>Please select period without collisions</td>
 	<td></td>
 </tr>
@@ -1264,7 +1421,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_hour</td>
 	<td>01</td>
 </tr>
@@ -1294,7 +1451,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_minute</td>
 	<td>01</td>
 </tr>
@@ -1324,7 +1481,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_second</td>
 	<td>01</td>
 </tr>
@@ -1354,7 +1511,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_hour</td>
 	<td>14</td>
 </tr>
@@ -1384,7 +1541,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_minute</td>
 	<td>14</td>
 </tr>
@@ -1414,7 +1571,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_second</td>
 	<td>14</td>
 </tr>
@@ -1464,7 +1621,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Columns assigned</td>
 	<td></td>
 </tr>
@@ -1479,7 +1636,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Created destinations: 0</td>
 	<td></td>
 </tr>
@@ -1489,7 +1646,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Rates updated: 20</td>
 	<td></td>
 </tr>
@@ -1506,7 +1663,7 @@
 <!--......Import WD rates-->
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/import_csv/1</td>
+	<td>/billing/tariffs/import_csv2/1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1520,7 +1677,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>File uploaded</td>
 	<td></td>
 </tr>
@@ -1532,7 +1689,7 @@
 	<td>label=Free Days</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForTextNotPresent</td>
 	<td>Please select period without collisions</td>
 	<td></td>
 </tr>
@@ -1598,7 +1755,7 @@
 </tr>
 <!--Kažkas su ajax, tik įėjus į tariff import antrą stepą rodo kad yra kolizija(nors jos neturėtų būti). Atrodo jau buvo pataisyta, bet vėl iškilo ši klaida-->
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>waitForTextNotPresent</td>
 	<td>Please select period without collisions</td>
 	<td></td>
 </tr>
@@ -1608,7 +1765,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Columns assigned</td>
 	<td></td>
 </tr>
@@ -1623,7 +1780,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Created destinations: 0</td>
 	<td></td>
 </tr>
@@ -1633,7 +1790,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Rates updated: 20</td>
 	<td></td>
 </tr>
@@ -1654,39 +1811,39 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Rates (20)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/rate_details/523</td>
+	<td>/billing/tariffs/rate_details/534</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=rate_543</td>
+	<td>verifyText</td>
+	<td>id=rate_565</td>
 	<td>3.0000</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=connection_fee_543</td>
+	<td>verifyText</td>
+	<td>id=connection_fee_565</td>
 	<td>1.0700</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=rate_523</td>
+	<td>verifyText</td>
+	<td>id=rate_534</td>
 	<td>2.2600</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=connection_fee_523</td>
+	<td>verifyText</td>
+	<td>id=connection_fee_534</td>
 	<td>1.0700</td>
 </tr>
 <!--......Update WD rates-->
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/import_csv/1</td>
+	<td>/billing/tariffs/import_csv2/1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1710,7 +1867,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>File uploaded</td>
 	<td></td>
 </tr>
@@ -1745,7 +1902,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_hour</td>
 	<td>01</td>
 </tr>
@@ -1775,7 +1932,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_minute</td>
 	<td>01</td>
 </tr>
@@ -1805,7 +1962,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_second</td>
 	<td>01</td>
 </tr>
@@ -1835,7 +1992,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_hour</td>
 	<td>14</td>
 </tr>
@@ -1865,7 +2022,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_minute</td>
 	<td>14</td>
 </tr>
@@ -1895,7 +2052,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_second</td>
 	<td>14</td>
 </tr>
@@ -1965,8 +2122,63 @@
 	<td>blur</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextNotPresent</td>
 	<td>Please select period without collisions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>10 bad destination(s)(Press here to get the list)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria_3.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>File uploaded</td>
 	<td></td>
 </tr>
 <tr>
@@ -1995,7 +2207,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_hour</td>
 	<td>00</td>
 </tr>
@@ -2025,7 +2237,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_minute</td>
 	<td>00</td>
 </tr>
@@ -2055,7 +2267,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_from_second</td>
 	<td>00</td>
 </tr>
@@ -2085,7 +2297,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_hour</td>
 	<td>23</td>
 </tr>
@@ -2115,7 +2327,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_minute</td>
 	<td>59</td>
 </tr>
@@ -2145,7 +2357,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>waitForSelectedLabel</td>
 	<td>id=time_till_second</td>
 	<td>59</td>
 </tr>
@@ -2225,7 +2437,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Columns assigned</td>
 	<td></td>
 </tr>
@@ -2235,7 +2447,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Analysis completed</td>
 	<td></td>
 </tr>
@@ -2245,7 +2457,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Created destinations: 0</td>
 	<td></td>
 </tr>
@@ -2255,7 +2467,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Rates updated: 9</td>
 	<td></td>
 </tr>
@@ -2265,7 +2477,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>New rates created: 0</td>
 	<td></td>
 </tr>
@@ -2276,38 +2488,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Rates (20)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/rate_details/523</td>
+	<td>/billing/tariffs/rate_details/534</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>For Work Days:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=rate_543</td>
+	<td>verifyText</td>
+	<td>id=rate_565</td>
 	<td>1.2600</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=connection_fee_543</td>
+	<td>verifyText</td>
+	<td>id=connection_fee_565</td>
 	<td>0.0700</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=rate_523</td>
+	<td>verifyText</td>
+	<td>id=rate_534</td>
 	<td>2.2600</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=connection_fee_523</td>
+	<td>verifyText</td>
+	<td>id=connection_fee_534</td>
 	<td>1.0700</td>
 </tr>
 <!-----DELETE-->
@@ -2327,14 +2539,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>All rates deleted</td>
 	<td></td>
 </tr>
 <!--Check if error is shown when importing rate with multiple prefixes-->
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/import_csv/1</td>
+	<td>/billing/tariffs/import_csv2/1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2348,7 +2560,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
 	<td></td>
 </tr>
@@ -2373,7 +2585,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>File uploaded</td>
 	<td></td>
 </tr>
@@ -2393,18 +2605,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Columns assigned</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@name='commit' and @value='Confirm columns']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Please check prefix format in CSV. Press here for more info</td>
 	<td></td>
 </tr>
 <!--do not expand this test-->
