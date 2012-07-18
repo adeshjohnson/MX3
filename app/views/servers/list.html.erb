@@ -67,16 +67,16 @@
         <% end %>
         <th></th>
         <th></th>
-        <th align="left"><%= text_field_tag 'server_id', "", "class" => "input", :size => "2", :maxlength => "5" %></th>
-        <th align="left"><%= text_field_tag 'server_hostname', "", "class" => "input", :size => "12", :maxlength => "20" %></th>
-        <th align="left"><%= text_field_tag 'server_ip', "", "class" => "input", :size => "12", :maxlength => "30" %></th>
-        <th align="left"><%= text_field_tag 'server_url', "", "class" => "input", :size => "12", :maxlength => "20" %></th>
-        <th align="left"><%= text_field_tag 'server_type', "", "class" => "input", :size => "10", :maxlength => "15" %></th>
-        <th align="right"><%= text_field_tag 'server_maxcalllimit', "", "class" => "input", :size => "5", :maxlength => "10" %></th>
-        <th align="left"><%= text_field_tag 'server_ami_username', "", "class" => "input", :size => "12", :maxlength => "30" %></th>
-        <th align="left"><%= text_field_tag 'server_ami_secret', "", "class" => "input", :size => "12", :maxlength => "30" %></th>
-        <th align="right"><%= text_field_tag 'port', "", "class" => "input", :size => "5", :maxlength => "30" %></th>
-        <th align="left"><%= text_field_tag 'server_comment', "", "class" => "input", :size => "15", :maxlength => "30" %></th>
+        <th align="left"><%= text_field_tag 'server_id', "", "class" => "input", :size => "2", :maxlength => "5"  %></th>
+        <th align="left"><%= text_field_tag 'server_hostname', "", "class" => "input", :size => "12", :maxlength => "20"  %></th>
+        <th align="left"><%= text_field_tag 'server_ip', "", "class" => "input", :size => "12", :maxlength => "30"  %></th>
+        <th align="left"><%= text_field_tag 'server_type', "", "class" => "input", :size => "10", :maxlength => "15"  %></th>
+        <th align="left"><%= text_field_tag 'version', "", "class" => "input", :size => "5", :maxlength => "30"  %></th>
+        <th align="left"><%= text_field_tag 'uptime', "", "class" => "input", :size => "5", :maxlength => "50"  %></th>
+        <th align="right"><%= text_field_tag 'server_maxcalllimit', "", "class" => "input", :size => "5", :maxlength => "10"  %></th>
+        <th align="left"><%= text_field_tag 'server_comment', "", "class" => "input", :size => "15", :maxlength => "30"  %></th>
+        <th></th>
+        <th></th>
         <th align="center" colspan=3><%= image_submit_tag 'icons/add.png', :title => _('Add') %></th>
       </tr>
     </table>

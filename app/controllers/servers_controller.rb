@@ -91,13 +91,11 @@ class ServersController < ApplicationController
     server.server_id = params[:server_id].strip
     server.hostname = params[:server_hostname].strip
     server.server_ip = params[:server_ip].strip
-    server.stats_url = params[:server_url].strip
-    server.comment = params[:server_comment].strip
     server.server_type = params[:server_type].strip
+    server.version = params[:version].strip
+    server.uptime = params[:uptime].strip
+    server.comment = params[:server_comment].strip
     server.active = 1
-    server.ami_username = params[:server_ami_username].strip
-    server.ami_secret = params[:server_ami_secret].strip
-    server.port = params[:port].strip
 
     maxcalls = 1000
     maxcalls = params[:server_maxcalllimit].to_i if params[:server_maxcalllimit] and params[:server_maxcalllimit].length > 0
