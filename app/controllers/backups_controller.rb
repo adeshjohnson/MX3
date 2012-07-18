@@ -81,7 +81,7 @@ class BackupsController < ApplicationController
 
     res = private_backup_restore(backup)
     MorLog.my_debug(res)
-    if res == 1
+    if res.to_i == 1
       my_debug("Backup restore failed")
       flash[:notice] = _('Error') + " : " + backup_error
     else
@@ -110,7 +110,7 @@ class BackupsController < ApplicationController
     logger.fatal script
     #my_debug("response : " + script[0].split(" ").last.last.to_s )    
 
-    return_code = script.to_s.scan(/\d+/).to_s.to_i
+    return_code = script.to_s.scan(/\d+/).last.to_i #script.to_s.scan(/\d+/).to_s.to_i
 
     Action.add_action2(session[:user_id].to_i, 'backup_restored', backup.id, return_code)
     return_code
