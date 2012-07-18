@@ -39,7 +39,7 @@
               <%= link_to(b_check(:title => _('Disable')), :action => 'server_change_status', :id => serv.id) if serv.active == 1 %>
               <%= link_to(b_cross(:title => _('Enable')), :action => 'server_change_status', :id => serv.id) if serv.active == 0 %>
             </td>
-            <td id="test_<%= serv.id %>" align="center"><%= link_to b_test, {:action => "server_test", :id => serv.id}, :popup => ['new_window', 'height=100,width=400'] %> </td>
+            <td id="test_<%= serv.id %>" align="center"><%= link_to b_test, {:action => "server_test", :id => serv.id}, :onclick => "window.open(this.href,'new_window','height=200,width=400');return false;" %> </td>
             <td id="server_id_<%= serv.id %>"><%= h serv.server_id %></td>
             <td id="hostname_<%= serv.id %>"><%= h serv.hostname %></td>
             <td id="ip_<%= serv.id %>"><%= h serv.server_ip %></td>
