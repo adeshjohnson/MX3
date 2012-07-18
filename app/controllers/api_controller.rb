@@ -3947,7 +3947,7 @@ class ApiController < ApplicationController
             if user
               users = [user]  # hack
               variables = Email.map_variables_for_api(params)
-              num = EmailsController.send_email(email, Confline.get_value("Email_from", @user.get_corrected_owner_id), users, variables)
+              num = EmailsController.send_email(email, Confline.get_value("Email_from", @user.get_corrected_owner_id), users, variables.merge({:owner => @user.owner_id}))
               doc.email_sending_status(num.to_s.gsub('<br>', ''))
             else
               doc = MorApi.return_error("User not found", doc)
