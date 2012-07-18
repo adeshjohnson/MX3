@@ -13,7 +13,7 @@ class Email < ActiveRecord::Base
                        "amount", "date", "auth_code", "transaction_id", "customer_name", "description", "company_name", "url", "trans_id", "email",
                        "cc_purchase_details", "monitoring_amount", "monitoring_block", "monitoring_users", "monitoring_type", "payment_amount", "payment_payer_first_name",
                        "payment_payer_last_name", "payment_payer_email", "payment_seller_email", "payment_receiver_email", "payment_date", "payment_free",
-                       "payment_currency", "payment_type", "payment_fee", "call_list"
+                       "payment_currency", "payment_type", "payment_fee", "call_list", "user_id", "device_id", "caller_id"
   ]
 
   def destroy_everything
@@ -98,7 +98,10 @@ class Email < ActiveRecord::Base
         :payment_date => "",
         :payment_fee => "",
         :payment_currency => "",
-        :payment_type => ""
+        :payment_type => "",
+        :user_id => "",
+        :device_id => "",
+        :caller_id => ""
     }
     if device
       opts = opts.merge({
