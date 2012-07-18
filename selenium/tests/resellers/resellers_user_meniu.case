@@ -127,14 +127,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyText</td>
+	<td>//a[contains(@href, '/billing/services/user_subscriptions')]</td>
 	<td>Subscriptions</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyText</td>
+	<td>//a[contains(@href, '/billing/accounting/user_invoices')]</td>
 	<td>Invoices</td>
-	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -147,24 +147,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyText</td>
+	<td>xpath=(//a[contains(@href, '/billing/stats/last_calls_stats')])[2]</td>
 	<td>Last calls</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyText</td>
+	<td>//a[contains(@href, '/billing/stats/missed_calls')]</td>
 	<td>Missed calls</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyText</td>
+	<td>//a[contains(@href, '/billing/stats/user_stats')]</td>
 	<td>Graphs</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyText</td>
+	<td>//a[contains(@href, '/billing/recordings/list_recordings')]</td>
 	<td>Recordings</td>
-	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -177,39 +177,39 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyText</td>
+	<td>//a[contains(@href, '/billing/dids/personal_dids')]</td>
 	<td>DIDs</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyText</td>
+	<td>//a[contains(@href, '/billing/devices/user_device_clis')]</td>
 	<td>CLIs</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyText</td>
+	<td>//a[contains(@href, '/billing/phonebooks/list')]</td>
 	<td>PhoneBook</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyText</td>
+	<td>//a[contains(@href, '/billing/dids/quickforwarddids')]</td>
 	<td>Quick Forwards</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyText</td>
+	<td>//a[contains(@href, '/billing/stats/faxes_list/6')]</td>
 	<td>Faxes</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyText</td>
+	<td>//a[contains(@href, '/billing/functions/callback')]</td>
 	<td>Callback</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyText</td>
+	<td>//a[contains(@href, '/billing/autodialer/user_campaigns')]</td>
 	<td>Auto Dialer</td>
-	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -314,11 +314,6 @@
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>Recordings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
 	<td>DIDs</td>
 	<td></td>
 </tr>
@@ -393,8 +388,8 @@
 	<td>CLIs</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>spersonal_menu11</td>
+	<td>verifyText</td>
+	<td>xpath=(//a[contains(@href, '/billing/callc/logout')])[2]</td>
 	<td>Logout</td>
 </tr>
 <tr>
