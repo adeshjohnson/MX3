@@ -3831,6 +3831,7 @@ class ApiController < ApplicationController
     if allow == true
       check_user(params[:u], params[:p])
       if @user
+        if @user.sms_service_active == 1
         @lcr = Lcr.where({:id=>params[:lcr_id].to_s}).first
         if @user.sms_service_active == 1
           if @lcr and (@lcr.user_id == @user.owner_id)
@@ -3894,6 +3895,9 @@ class ApiController < ApplicationController
         else
           doc.error("User is not subscribed to sms service")
         end
+      else
+        doc.error("You are not subscribed to sms service")
+      end
       else
         doc.error("Bad login")
       end

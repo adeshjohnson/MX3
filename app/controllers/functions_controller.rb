@@ -1768,6 +1768,14 @@ Sets default tax values for users or cardgroups
   end
 
   def reseller_settings_change
+
+
+    if invalid_api_params? Confline.get_value('Allow_API').to_i, params[:api_secret_key]
+      flash[:notice] = _("invalid_api_secret_key")
+      redirect_to :action => :reseller_settings and return false
+    end
+
+
     #Confline.set_value(cline, value, id)
     Confline.set_value("Company", params[:reseller_company], session[:user_id])
     Confline.set_value("Company_Email", params[:reseller_company_email], session[:user_id])
@@ -1888,6 +1896,9 @@ Sets default tax values for users or cardgroups
 
     # EMAILS
     #
+
+    #API
+    Confline.set_value('API_Secret_Key', params[:api_secret_key], current_user.id)
 
     renew_session(current_user)
 

@@ -293,6 +293,19 @@
           <%= render :partial => "settings_privacy", :locals => {:width => 470} %>
         </div>
     <% end %>
+    <%if Confline.get_value('Allow_API').to_i == 1%>
+        <div class="dhtmlgoodies_aTab">
+          <br />
+          <br />
+          <table class="simple" width="100%">
+            <tr <%= tooltip(_('API_Secret_Key'), _('API_Secret_Key_Explanation'))%>>
+              <td></td>
+              <td><b><%= _('API_Secret_Key')%>:</b></td>
+              <td><%= text_field_tag('api_secret_key', Confline.get_value("API_Secret_Key", @user_id) , "class" => "input", :size => "35", :maxlength => "255" )%></td>
+            </tr>
+          </table>
+        </div>
+    <%end%>
     </div>
     </td>
     </tr>
@@ -309,7 +322,8 @@
       setting_tabs << "Various"
       setting_tabs << "Invoices" #if  !current_user.reseller_allow_providers_tariff?
       setting_tabs += ["Emails", "Tax"]
-      setting_tabs << "Privacy" if  !current_user.reseller_allow_providers_tariff? -%>
+      setting_tabs << "Privacy" if  !current_user.reseller_allow_providers_tariff?
+      setting_tabs << "Api"  if Confline.get_value('Allow_API').to_i == 1 -%>
             initTabs('dhtmlgoodies_tabView1', Array(<%= setting_tabs.map{|tab| "'"+ _(tab) + "'"}.join(", ") %>), 0, 600, 560);
         </script>
     <% end %>

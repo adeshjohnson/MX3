@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class MorApi
   def MorApi.check_params_with_key(params, request)
+    #hack find user from params u and p
+    user = User.find(:first, :conditions => ["username = ? and password = ?", params[:u].to_s, Digest::SHA1.hexdigest(params[:p].to_s)])
     ret = {}
     ret[:user_id] = params[:user_id].to_i if params[:user_id] and params[:user_id].to_s !~ /[^0-9]/ and params[:user_id].to_i >= 0
     ret[:request_hash] = params[:hash].to_s if params[:hash] and params[:hash].to_s.length == 40
@@ -18,7 +20,7 @@ class MorApi
     ret[:tariff_id] = params[:tariff_id].to_i if params[:tariff_id] and (params[:tariff_id].to_s !~ /[^0-9]/)
     ret[:only_did] = params[:only_did].to_i if params[:only_did] and (params[:only_did].to_s !~ /[^0-9]/)
 
-    ret[:key] = Confline.get_value("API_Secret_Key").to_s
+    ret[:key] = Confline.get_value("API_Secret_Key", user ? user.get_correct_owner_id : 0).to_s
     string =
         ret[:user_id].to_s +
             ret[:period_start].to_s +
@@ -53,6 +55,8 @@ class MorApi
 
 
   def MorApi.check_params_with_all_keys(params, request)
+    #hack find user from params u and p
+    user = User.find(:first, :conditions => ["username = ? and password = ?", params[:u].to_s, Digest::SHA1.hexdigest(params[:p].to_s)])
     MorLog.my_debug params.to_yaml
     ret = {}
     ret[:user_id] = params[:user_id].to_i if params[:user_id] and params[:user_id].to_s !~ /[^0-9]/ and params[:user_id].to_i >= 0
@@ -112,7 +116,7 @@ class MorApi
       ret[key.to_sym] = params[key.to_sym] if params[key.to_sym]
     }
 
-    ret[:key] = Confline.get_value("API_Secret_Key").to_s
+    ret[:key] = Confline.get_value("API_Secret_Key", user ? user.get_correct_owner_id : 0).to_s
     MorLog.my_debug ret.to_yaml
     MorLog.my_debug "****************************************************8"
                                                         #for future: notice - users should generate hash in same order.
