@@ -19,6 +19,36 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>API</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
 	<td>admin</td>
 </tr>
 <tr>
@@ -86,6 +116,26 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
 <!--#hash1-->
 <tr>
 	<td>open</td>
@@ -96,6 +146,91 @@
 	<td>storeText</td>
 	<td>css=body</td>
 	<td>hash1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=reseller&amp;p=reseller1&amp;lcr_id=1&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>123450</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=reseller&amp;p=reseller1&amp;lcr_id=1&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not subscribed to sms service</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
 </tr>
 <!--#hash2-->
 <tr>
@@ -283,8 +418,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>User is not subscribed to sms service</td>
+	<td>waitForTextPresent</td>
+	<td>You are not subscribed to sms service</td>
 	<td></td>
 </tr>
 <tr>
@@ -564,7 +699,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Wrong source</td>
+	<td>Wrong destination</td>
 	<td></td>
 </tr>
 <tr>
@@ -614,7 +749,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>There is no message or it is empty</td>
+	<td>Wrong source</td>
 	<td></td>
 </tr>
 <tr>
@@ -664,7 +799,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>failed, system owner does not have rate for this destination</td>
+	<td>There is no message or it is empty</td>
 	<td></td>
 </tr>
 <tr>
@@ -919,7 +1054,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td> 0 - sent</td>
+	<td>0 - sent</td>
 	<td></td>
 </tr>
 <tr>
@@ -959,13 +1094,18 @@
 </tr>
 <tr>
 	<td>assertText</td>
+	<td>id=number_7</td>
+	<td>937567337911</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>id=number_8</td>
 	<td>937567337911</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=number_9</td>
-	<td>937567337911</td>
+	<td>id=user_rate_7</td>
+	<td>11.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -974,17 +1114,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_rate_9</td>
-	<td>11.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=quantity_8</td>
+	<td>id=quantity_7</td>
 	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quantity_9</td>
+	<td>id=quantity_8</td>
 	<td>1</td>
 </tr>
 <tr>
@@ -994,18 +1129,85 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=price_8</td>
+	<td>id=price_7</td>
 	<td>11.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=price_9</td>
+	<td>id=price_8</td>
 	<td>11.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_price</td>
 	<td>22.0000</td>
+</tr>
+<!--#hash17-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash17</td>
+</tr>
+<!--#hash18-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?lcr_id=2&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash18</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=user_reseller&amp;p=user_reseller1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'&amp;test=1&amp;hash=${hash17}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not subscribed to sms service</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=user_reseller&amp;p=user_reseller1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'&amp;test=1&amp;hash=${hash17}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=user_reseller&amp;p=user_reseller1&amp;lcr_id=2&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'&amp;test=1&amp;hash=${hash17}</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
