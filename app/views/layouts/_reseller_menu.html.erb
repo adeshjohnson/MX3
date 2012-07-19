@@ -115,6 +115,11 @@
     reseller_menu_addons.add(15, 0, '<%= _('Provider_billing') %>', '<%= Web_Dir %>/providers/billing');
     <% end %>
 
+
+    <% if web_phone_active? and current_user.simple_get_acc_res_permission('webphone_res') > 0 %>
+    reseller_menu_addons.add(15,0 ,'<%= _('Webphone') %>', '<%= Web_Dir %>/functions/webphone_settings');
+    <% end %>
+
     $("reseller_menu_addons_div").innerHTML = reseller_menu_addons.toString();
     <% else %>
     $("reseller_menu_addons_div").remove();

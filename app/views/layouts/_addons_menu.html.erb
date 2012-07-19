@@ -103,5 +103,10 @@
       <% i += 1 %>
     <% end %>
 
+    <% if web_phone_active? %>
+    addons_menu.add(<%= i %>, <%= si %>, '<%= _('Webphone') %>', '<%= Web_Dir %>/functions/webphone_settings');
+    <% i += 1 %>
+    <% end %>
+
     $("addons_menu_div").innerHTML = addons_menu.toString();
 </script>

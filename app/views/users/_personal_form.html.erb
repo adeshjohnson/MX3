@@ -203,6 +203,46 @@
               </td>
             </tr>
         <% end %>
+        <% if web_phone_active? and @user.is_user? and @user.webphone_allow_use.to_i == 1 and (current_user.simple_get_acc_res_permission('webphone_acc') > 0 or current_user.simple_get_acc_res_permission('webphone_res') > 0 or current_user.is_admin? or current_user.is_user?) %>
+
+            <tr id="wb_1">
+              <td height="10" colspan="2"></td>
+            </tr>
+            <tr id="wb_2">
+              <td colspan="2" class="bottom_border"><b><%= b_record + _('Webphone') %></b></td>
+            </tr>
+            <tr id="wb_3">
+              <td height="10" colspan="2"></td>
+            </tr>
+            <tr id="wb_4">
+              <td colspan="2">
+                <table class="simple">
+                  <tr>
+                    <td> <%= _('Use_this_device_for_Webphone') %>:</td>
+                    <td>
+                      <% if current_user.is_accountant? and current_user.simple_get_acc_res_permission('webphone_acc') != 2 %>
+                          <%= b_device %> <select name="user[webphone_device_id]" id="user_webphone_device_id" disabled>
+                      <option value="" <%= "selected" if @user.webphone_device_id.to_.blank? %>></option>
+                      <% for device in @user.sip_devices %>
+                          <option value="<%= device.id %>" <%= "selected" if @user.webphone_device_id == device.id %>> <%= device.device_type + "/" + device.name %> </option>
+                      <% end %>
+                    </select>
+                      <% else %>
+                          <%= b_device %>
+                          <select name="user[webphone_device_id]" id="user_webphone_device_id" <%= "disabled" if @user.sip_devices.size < 1 %> >
+                            <option value="" <%= "selected" if @user.webphone_device_id.to_s.blank? %>></option>
+                            <% for device in @user.sip_devices %>
+                                <option value="<%= device.id %>" <%= "selected" if @user.webphone_device_id == device.id %>> <%= device.device_type + "/" + device.name %> </option>
+                            <% end %>
+                          </select>
+                      <% end %>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+        <% end %>
       </table>
     </td>
   </tr>

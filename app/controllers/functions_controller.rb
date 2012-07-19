@@ -12,6 +12,24 @@ class FunctionsController < ApplicationController
   before_filter :callback_active?, :only => [:callback, :callback_settings, :callback_settings_update, :activate_callback]
   skip_before_filter :redirect_callshop_manager, :except => [:login_as_execute]
 
+  @@card_view = [:webphone_settings]
+  @@card_edit = [:webphone_settings_update]
+  before_filter(:only => @@card_view+@@card_edit) { |c|
+    allow_read, allow_edit = c.check_read_write_permission(@@card_view, @@card_edit, {:role => "accountant", :right => :webphone_acc, :ignore => true})
+    c.instance_variable_set :@allow_read, allow_read
+    c.instance_variable_set :@allow_edit, allow_edit
+    true
+  }
+
+  @@card_view_res = []
+  @@card_edit_res = [:webphone_settings_update, :webphone_settings]
+  before_filter(:only => @@card_view_res+@@card_edit_res) { |c|
+    allow_read, allow_edit = c.check_read_write_permission(@@card_view_res, @@card_edit_res, {:role => "reseller", :right => :webphone_res, :ignore => true})
+    c.instance_variable_set :@allow_read_res, allow_read
+    c.instance_variable_set :@allow_edit_res, allow_edit
+    true
+  }
+
   $date_formats = ["%Y-%m-%d %H:%M:%S", "%Y/%m/%d %H:%M:%S", "%Y,%m,%d %H:%M:%S", "%Y.%m.%d %H:%M:%S", "%d-%m-%Y %H:%M:%S", "%d/%m/%Y %H:%M:%S", "%d,%m,%Y %H:%M:%S", "%d.%m.%Y %H:%M:%S", "%m-%d-%Y %H:%M:%S", "%m/%d/%Y %H:%M:%S", "%m,%d,%Y %H:%M:%S", "%m.%d.%Y %H:%M:%S"]
   $decimal_formats = ['.', ',', ';']
 
@@ -3029,6 +3047,21 @@ Sets default tax values for users or cardgroups
     end
   end
 
+  def webphone_settings
+    @page_title = _('Webphone_settings')
+    @page_icon = 'cog.png'
+  end
+
+  def webphone_settings_update
+    Confline.set_value2("Webphone_hash", params[:webphone_hash], current_user.get_corrected_owner_id) if !current_user.is_reseller?
+    Confline.set_value("Webphone_page_url", params[:webphone_page_url], current_user.get_corrected_owner_id)
+    Confline.set_value("Webphone_title", params[:webphone_title], current_user.get_corrected_owner_id)
+    Confline.set_value("Webphone_text", params[:webphone_text], current_user.get_corrected_owner_id)
+
+    flash[:status] = _('Settings_saved')
+    redirect_to :action => :webphone_settings and return false
+
+  end
   #================= PRIVATE ==================
 
   private

@@ -1,0 +1,155 @@
+<style type="text/css" media="all">@import "<%= Web_Dir%>/webphone/style.css";</style>
+
+<%= javascript_include_tag "jquery-1.4.2.min.js" %>
+<script type="text/javascript">
+    $j = jQuery.noConflict();
+</script>
+<script src="http://www.java.com/js/deployJava.js"></script>
+<script type="text/JavaScript" src="<%= Web_Dir %>/webphone/common_webphone.js"></script>
+
+
+<script type="text/JavaScript">
+
+    //SIP SETTINGS
+    var sipuser = '<%=current_user.webphone_device.username%>'; // *********** Replace the default user name with desired username ***********
+    var sippass = '<%=current_user.webphone_device.secret%>'; // ************ Replace the default password with desired password ***********
+
+</script>
+
+<script type="text/JavaScript">
+    var enkripsi = "<%= Confline.get_value2("Webphone_hash", 0) %>";
+    teks = "";
+    teksasli = "";
+    var panjang;
+    panjang = enkripsi.length;
+    for (i = 0; i < panjang; i++) {
+        teks += String.fromCharCode(enkripsi.charCodeAt(i) ^ 2)
+    }
+    teksasli = unescape(teks);
+    document.write(teksasli);
+</script>
+
+
+<!--Section to edit the look and feel of the WebPhone-->
+
+<div id='main_webphone_id'>
+  <div onkeyup="onKeyPressEvent(event)">
+    <div id="js_not_enabled">The webphone needs JavaScript to be enabled</div>
+    <DIV id="main">
+      <div id="bg_container">
+        <div id="container_dial">
+          <div id="header">
+            <img src="<%= Web_Dir %>/webphone/images/speaker.jpg" border="0" title="Volume Controls" id="speaker" onmouseover="btnControl('speaker',2)" onmouseout="btnControl('speaker',1)" onclick="WJSAPI_AudioDevice()"/>
+
+            <div id="logo">
+              <a href="<%= Confline.get_value("Webphone_page_url", current_user.get_correct_owner_id) %>" target="_blank" title="<%= Confline.get_value2("Webphone_title", current_user.get_correct_owner_id) %>"><%= Confline.get_value2("Webphone_text", current_user.get_correct_owner_id) %></a>
+            </div>
+            <img src="<%= Web_Dir %>/webphone/images/logout.jpg" border="0" title="Logout" id="logout" onmouseover="btnControl('logout',2)" onmouseout="btnControl('logout',1)" onclick="WJSAPI_Unregister()"/>
+          </div>
+          <br/>
+          <input type="text" id="PhoneNumber" name="PhoneNumber" value="" onfocus="testFocus(1)" onblur="testFocus(0)"/><br/>
+
+          <div style="width:200px; float:left; clear:both;"><!--//--></div>
+          <div id="info">
+            <span id="credit" title="My account balance / My number"></span><span id="dtmf"></span>&nbsp;<span id="status" ondblclick="voipStatusRegister()" title="Call status"></span>
+          </div>
+          <div id="info_event">
+            <span id="displayEvent">&nbsp;</span>
+          </div>
+          <ul id="numpad">
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_1.jpg" alt="" id="btn_1" onmouseover="btnControl('btn_1',2)" onmouseout="btnControl('btn_1',1)" onclick="WJSAPI_BtnValue(1)"/>
+            </li>
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_2.jpg" alt="" id="btn_2" onmouseover="btnControl('btn_2',2)" onmouseout="btnControl('btn_2',1)" onclick="WJSAPI_BtnValue(2)"/>
+            </li>
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_3.jpg" alt="" id="btn_3" onmouseover="btnControl('btn_3',2)" onmouseout="btnControl('btn_3',1)" onclick="WJSAPI_BtnValue(3)"/>
+            </li>
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_4.jpg" alt="" id="btn_4" onmouseover="btnControl('btn_4',2)" onmouseout="btnControl('btn_4',1)" onclick="WJSAPI_BtnValue(4)"/>
+            </li>
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_5.jpg" alt="" id="btn_5" onmouseover="btnControl('btn_5',2)" onmouseout="btnControl('btn_5',1)" onclick="WJSAPI_BtnValue(5)"/>
+            </li>
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_6.jpg" alt="" id="btn_6" onmouseover="btnControl('btn_6',2)" onmouseout="btnControl('btn_6',1)" onclick="WJSAPI_BtnValue(6)"/>
+            </li>
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_7.jpg" alt="" id="btn_7" onmouseover="btnControl('btn_7',2)" onmouseout="btnControl('btn_7',1)" onclick="WJSAPI_BtnValue(7)"/>
+            </li>
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_8.jpg" alt="" id="btn_8" onmouseover="btnControl('btn_8',2)" onmouseout="btnControl('btn_8',1)" onclick="WJSAPI_BtnValue(8)"/>
+            </li>
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_9.jpg" alt="" id="btn_9" onmouseover="btnControl('btn_9',2)" onmouseout="btnControl('btn_9',1)" onclick="WJSAPI_BtnValue(9)"/>
+            </li>
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_10.jpg" alt="" id="btn_10" onmouseover="btnControl('btn_10',2)" onmouseout="btnControl('btn_10',1)" onclick="WJSAPI_BtnValue('*')"/>
+            </li>
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_0.jpg" alt="" id="btn_0" onmouseover="btnControl('btn_0',2)" onmouseout="btnControl('btn_0',1)" onclick="WJSAPI_BtnValue(0)"/>
+            </li>
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_11.jpg" alt="" id="btn_11" onmouseover="btnControl('btn_11',2)" onmouseout="btnControl('btn_11',1)" onclick="WJSAPI_BtnValue('#')"/>
+            </li>
+          </ul>
+
+          <ul id="callbuttons">
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_call.jpg" alt="" id="btn_call" onmouseover="btnStatusControl('btn_call',2,'call')" onmouseout="btnStatusControl('btn_call',1,'call')" onclick="WJSAPI_Call()"/>
+            </li>
+            <li>
+              <img src="<%= Web_Dir %>/webphone/images/btn_hangup.jpg" alt="" id="btn_hangup" onmouseover="btnStatusControl('btn_hangup',2,'hangup')" onmouseout="btnStatusControl('btn_hangup',1,'hangup')" onclick="WJSAPI_Hangup()"/>
+            </li>
+          </ul>
+
+          <ul id="acceptreject">
+            <img src="<%= Web_Dir %>/webphone/images/btn_accept.jpg" alt="" id="btn_accept" onmouseover="btnControl('btn_accept',2)" onmouseout="btnControl('btn_accept',1)" onclick="WJSAPI_Accept()"/><img src="<%= Web_Dir %>/webphone/images/btn_reject.jpg" alt="" id="btn_reject" onmouseover="btnControl('btn_reject',2)" onmouseout="btnControl('btn_reject',1)" onclick="WJSAPI_Reject()"/>
+          </ul>
+          <!--CALL Functions-->
+          <ul id="callfunctions">
+            <li><img src="<%= Web_Dir %>/webphone/images/black.jpg" alt=""/></li>
+            <li><img src="<%= Web_Dir %>/webphone/images/black.jpg" alt=""/></li>
+            <li><img src="<%= Web_Dir %>/webphone/images/black.jpg" alt=""/></li>
+            <li><img src="<%= Web_Dir %>/webphone/images/black.jpg" alt=""/></li>
+          </ul>
+          <br>
+
+          <p>
+            <a href="<%= Confline.get_value("Webphone_page_url", current_user.get_correct_owner_id) %>" target="_blank" id="btn_main_a"><img src="<%= Web_Dir %>/webphone/images/btn_main.jpg" alt="" id="btn_main" onmouseover="btnControl('btn_main',2)" onmouseout="btnControl('btn_main',1)" title="<%= Confline.get_value2("Webphone_title", current_user.get_correct_owner_id) %>"/></a>
+          </p>
+          <span id="test"></span>
+
+        </div>
+        <div id="container_register">
+          <div style="display:none;">
+            <div id="logo2">
+              <a href="<%= Confline.get_value("Webphone_page_url", current_user.get_correct_owner_id) %>" target="_blank" title="<%= Confline.get_value2("Webphone_title", current_user.get_correct_owner_id) %>"><%= Confline.get_value2("Webphone_text", current_user.get_correct_owner_id) %></a>
+            </div>
+            <div id="login_page_error_messages">&nbsp;</div>
+            <div id="register_form">
+              <label>Username</label><br/>
+              <input type="text" id="username_input" name="username_input" class="txt" value="" title="SIP username"/><br/><br/>
+              <label>Password</label><br/>
+              <input type="password" id="password_input" name="password_input" class="txt" value="" title="SIP password"/><br/><br/>
+              <input type="checkbox" id="savesettings" name="savesettings" value="" title="Save all your login setting on this PC"/><label>Save
+              Settings</label><br/><br/>
+              <img src="<%= Web_Dir %>/webphone/images/btn_connect.jpg" alt="" id="btn_connect" onmouseover="btnControl('btn_connect',2)" onmouseout="btnControl('btn_connect',1)" onload="return WJSAPI_LoadAppletAndRegister()" title="Register to sipserver"/>
+            </div>
+          </div>
+          <div style="margin-top:150px;margin-left:35px;">
+            <img src="http://desmond.imageshack.us/Himg832/scaled.php?server=832&filename=ajaxloaderpj.gif&res=landing" alt="Loading">
+          </div>
+        </div>
+        <span id="testtest"></span>
+      </div>
+    </DIV>
+    <div>
+
+      <!--Auto Login Functions-->
+
+    </div>
+    <script> setTimeout("doit()", 5000); </script>
+  </div>
+</div>

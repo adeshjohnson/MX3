@@ -757,6 +757,37 @@
           <% end %>
         <% end %>
     <% end %>
+    <% if web_phone_active? and @user.usertype.to_s == 'user' and params[:action].to_s != 'default_user' and (current_user.simple_get_acc_res_permission('webphone_acc') > 0 or current_user.simple_get_acc_res_permission('webphone_res') > 0 or current_user.is_admin?) %>
+
+        <tr id="wb_1">
+          <td height="10" colspan="2"></td>
+        </tr>
+        <tr id="rwb_2">
+          <td colspan="2" class="bottom_border"><b><%= _('Webphone') %></b></td>
+        </tr>
+        <tr id="wb_3">
+          <td height="10" colspan="2"></td>
+        </tr>
+        <tr id="wb_4">
+          <td colspan="2">
+            <table class="simple">
+              <tr>
+                <td> <%= _('Allow_to_use_for_this_User') %>:</td>
+                <td>
+                  <% if current_user.is_accountant? and !(current_user.simple_get_acc_res_permission('webphone_acc') == 2) %>
+                      <%= radio_button_tag('user[webphone_allow_use]', 0, @user.webphone_allow_use.to_i == 0, {:disabled => !@user.have_sip_device?, :disabled => true}) %> <%= _('No') %>
+                      <%= radio_button_tag('user[webphone_allow_use]', 1, @user.webphone_allow_use.to_i == 1, {:disabled => !@user.have_sip_device?, :disabled => true}) %> <%= _('Yes') %>
+                  <% else %>
+                      <%= radio_button_tag('user[webphone_allow_use]', 0, @user.webphone_allow_use.to_i == 0, {:disabled => !@user.have_sip_device?}) %> <%= _('No') %>
+                      <%= radio_button_tag('user[webphone_allow_use]', 1, @user.webphone_allow_use.to_i == 1, {:disabled => !@user.have_sip_device?}) %> <%= _('Yes') %>
+                  <% end %>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+    <% end %>
   </table>
 </td>
 </tr>

@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   cattr_accessor :system_time_offset
 
   has_many :devices, :conditions => "devices.accountcode != 0 and devices.name not like 'mor_server_%'", :include => [:user, :provider]
+  has_many :sip_devices, :conditions => "devices.accountcode != 0 and devices.name not like 'mor_server_%' AND device_type = 'SIP'", :class_name=>'Device' , :foreign_key => 'user_id'
   has_many :actions
   belongs_to :lcr
   belongs_to :tariff
@@ -303,6 +304,11 @@ class User < ActiveRecord::Base
 
   def is_not_reseller?
     !is_reseller?
+  end
+
+
+  def webphone_device
+    Device.find(:first, :conditions=>{:id=> self.webphone_device_id})
   end
 
 =begin
@@ -1776,7 +1782,7 @@ class User < ActiveRecord::Base
 
   def safe_attributtes(params, user_id)
     if ['reseller', 'user'].include?(usertype)
-      allow_params = [:time_zone, :spy_device_id, :currency_id, :password, :warning_email_balance, :warning_email_hour, :first_name, :last_name, :clientid, :taxation_country, :vat_number, :acc_group_id]
+      allow_params = [:time_zone, :spy_device_id, :currency_id, :password, :warning_email_balance, :warning_email_hour, :first_name, :last_name, :clientid, :taxation_country, :vat_number, :acc_group_id, :webphone_device_id]
       allow_params += [:accounting_number, :generate_invoice, :username, :tariff_id, :postpaid, :call_limit, :blocked, :agreement_number, :language, :warning_balance_sound_file_id, :warning_balance_call, :quickforwards_rule_id] if usertype == 'reseller' and self.id.to_i != user_id.to_i
       allow_params += [:lcr_id] if params[:lcr_id] and reseller_allow_providers_tariff? and self.id.to_i != user_id.to_i and User.current.load_lcrs(:first, :conditions => "id = #{params[:lcr_id]}")
       unless check_for_own_providers
@@ -3358,6 +3364,32 @@ GROUP BY terminators.id;").map { |t| t.id }
   def can_see_finances?
     accountant_allow_read('see_financial_data')
   end
+
+=begin
+    Checks user devices for sip type device
+
+    *Returns*
+    +boolean+ true, false
+=end
+    def have_sip_device?
+      self.sip_devices and self.sip_devices.size.to_i > 0
+    end
+
+
+=begin
+  Returns 0/1/2 value of permmission
+
+  *Returns*
+  +int+ value of permission
+=end
+    def simple_get_acc_res_permission(permission)
+      right = self.acc_group.acc_group_rights.find(:first, :conditions => "acc_rights.name = '#{permission}'", :include => :acc_right) if self.is_accountant? or self.is_reseller?
+      if right
+        return right.value.to_i
+      else
+        return 0
+      end
+    end
 
   private
 

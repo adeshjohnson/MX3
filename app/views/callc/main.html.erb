@@ -132,7 +132,7 @@
 
           </div>
       <% end %>
-
+      <%= render :partial=>'webphone' if current_user.webphone_device %>
     </td>
   </tr>
 </table>
