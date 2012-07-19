@@ -103,10 +103,12 @@ class PermissionsController < ApplicationController
       permis << "'Calling_Cards'" if calling_cards_active?
       permis << "'SMS'" if sms_active?
       permis << "'Monitorings'" if monitorings_addon_active?
+      permis << "'Webphone'" if web_phone_active?
 
       cond << " nice_name IN (#{permis.join(' , ')})" if permis.size.to_i > 0
     elsif @group.group_type != 'reseller'
       permis << "'Callingcard'" unless calling_cards_active?
+      permis << "'Webphone'" unless web_phone_active?
 
       cond << "permission_group NOT IN (#{permis.join(' , ')})" if permis.size.to_i > 0
     end
