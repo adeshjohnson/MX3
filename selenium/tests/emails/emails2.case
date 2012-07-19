@@ -460,6 +460,41 @@
 	<td>email_domain</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_callerid_blocked</td>
+	<td>callerid_blocked</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=subject_callerid_blocked</td>
+	<td>Callerid blocked</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=emails_callerid_blocked</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=format_callerid_blocked</td>
+	<td>html</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/edit/15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>At &lt;%= date %&gt; User with ID = &lt;%= user_id %&gt;, with Device ID = &lt;%= device_id %&gt; and CallerID = &lt;%= caller_id %&gt; was blocked because it sent several simultaneous calls in same time.</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
