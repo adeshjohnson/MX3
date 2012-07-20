@@ -47,7 +47,7 @@
                   <% end %>
               <% end %>
                   <%else%>
-                  <% if call['cc_owner_id'] != session[:owner_id]%>
+                  <% if call['cc_owner_id'] != current_user.get_corrected_owner_id%>
                       <%= _('Card') + ': ' + call['cc_number'].to_s %>
                   <%else%>
                       <%= link_to _('Card') + ': ' + call['cc_number'].to_s, {:controller=>:cards, :action=>:show, :id=>call['cc_id'].to_i}, :target=>'blank'  %>
