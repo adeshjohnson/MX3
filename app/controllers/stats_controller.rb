@@ -2678,7 +2678,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     providers.id as provider_id, providers.name as provider_name, providers.common_use, providers.user_id as 'providers_owner_id', activecalls.did_id as did_id, dids.did as did, g.direction_code as did_direction_code,
     NOW() - activecalls.answer_time AS 'duration',
     IF(activecalls.answer_time IS NULL, 0, 1 ) as 'status',
-    activecalls.card_id as cc_id, cards.number as cc_number
+    activecalls.card_id as cc_id, cards.number as cc_number, cards.owner_id as cc_owner_id
     FROM activecalls
     LEFT JOIN providers ON (providers.id =activecalls.provider_id)
     LEFT JOIN devices ON (devices.id = activecalls.src_device_id)
