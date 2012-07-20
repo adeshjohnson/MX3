@@ -43,6 +43,102 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/1?currency=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_1</td>
+	<td>158.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_2</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_name_1</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_name_2</td>
+	<td>Calls from Users</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_name_3</td>
+	<td>Test_periodic_service - Test_preriodic_service_memo</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_name_4</td>
+	<td>Test_periodic_service - Test_preriodic_service_memo</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Arrow_refresh&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invoice sum was sucessfully recalculated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_5</td>
+	<td>158.0000</td>
+</tr>
+<!--<tr> 	<td>assertText</td> 	<td>id=id_total_price_2</td> 	<td>0.0000</td> </tr> <tr> 	<td>assertText</td> 	<td>id=id_name_2</td> 	<td>Calls from Users</td> </tr>-->
+<tr>
+	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/update_calls_set_zero_price</td>
 	<td></td>
 </tr>
@@ -103,63 +199,23 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/invoice_details/2?currency=USD</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_quantity_3</td>
-	<td>19</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_price_3</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_total_price_3</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_quantity_4</td>
-	<td>1</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_price_4</td>
-	<td>392.2258</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_total_price_4</td>
-	<td>392.2258</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_quantity_5</td>
-	<td>1</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_price_5</td>
-	<td>182.2258</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_total_price_5</td>
-	<td>182.2258</td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/accounting/invoice_details/3?currency=USD</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>assertText</td>
+	<td>id=id_quantity_10</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_10</td>
 	<td>0.0000</td>
-	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_10</td>
+	<td>0.0000</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -173,12 +229,12 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_detailed_pdf/2?test=1</td>
+	<td>/billing/accounting/invoice_details/5?currency=USD</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td> user_price: &quot;0&quot;</td>
+	<td>assertTextNotPresent</td>
+	<td>0.0000</td>
 	<td></td>
 </tr>
 <tr>
@@ -187,8 +243,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td> user_price: &quot;0&quot;</td>
+	<td>assertTextPresent</td>
+	<td>price: 0.00 (0.00)</td>
 	<td></td>
 </tr>
 <tr>
@@ -197,8 +253,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td> user_price: &quot;0&quot;</td>
+	<td>assertTextPresent</td>
+	<td>'0.0000'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_pdf/5?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>'0.0000'</td>
 	<td></td>
 </tr>
 <tr>
@@ -209,6 +275,26 @@
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#delete_link_1 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Invoice deleted</td>
 	<td></td>
 </tr>
 <tr>
@@ -248,16 +334,6 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=inv_price_5</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=inv_full_price_5</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
 	<td>id=inv_price_6</td>
 	<td>0.0000</td>
 </tr>
@@ -267,23 +343,33 @@
 	<td>0.0000</td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/accounting/invoice_details/6?currency=USD</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertText</td>
-	<td>id=id_quantity_9</td>
-	<td>18</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_price_9</td>
+	<td>id=inv_price_7</td>
 	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_total_price_9</td>
+	<td>id=inv_full_price_7</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/7?currency=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_16</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_16</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_16</td>
 	<td>0.0000</td>
 </tr>
 </tbody></table>
