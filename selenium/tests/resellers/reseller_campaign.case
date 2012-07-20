@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://test3.marsassolutions.com/" />
+<link rel="selenium.base" href="" />
 <title>reseller_campaign</title>
 </head>
 <body>
@@ -32,7 +32,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -72,6 +72,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>name=campaign[device_id]</td>
+	<td>IAX2/105</td>
+</tr>
+<tr>
 	<td>verifySelectedLabel</td>
 	<td>campaign[device_id]</td>
 	<td>IAX2/105</td>
@@ -97,7 +102,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -162,7 +167,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -257,7 +262,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>id=user_lcr_id</td>
 	<td>lcr</td>
 </tr>
@@ -303,6 +308,16 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/autodialer/campaign_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=campaign[device_id]</td>
+	<td>SIP/1001 IAX2/105</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -322,7 +337,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -336,7 +351,6 @@
 	<td>id=campaign_name</td>
 	<td>Campaign_admin</td>
 </tr>
-<!--Nera FAX/102-->
 <tr>
 	<td>assertText</td>
 	<td>name=campaign[device_id]</td>
@@ -388,7 +402,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -433,7 +447,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -448,7 +462,7 @@
 	<td>Campaign_101</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>name=campaign[device_id]</td>
 	<td>IAX2/101 IAX2/1002</td>
 </tr>
@@ -498,7 +512,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -533,7 +547,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>verifyTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
