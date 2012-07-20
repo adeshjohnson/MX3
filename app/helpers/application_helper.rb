@@ -297,8 +297,9 @@ module ApplicationHelper
     image_tag('icons/chart_bar.png', :title => _('Chart')) + " "
   end
 
-  def b_info
-    image_tag('icons/information.png', :title => _('Info')) + " "
+  def b_info(options = {})
+    opts = {:title => _('Info')}.merge(options)
+    image_tag('icons/information.png', :title => opts[:title]) + " "
   end
 
   def b_play

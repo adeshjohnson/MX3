@@ -1,27 +1,31 @@
 <% if current_user.is_accountant? and !(current_user.simple_get_acc_res_permission('webphone_acc') == 2) %>
-    <tr>
-      <td width="30"></td>
-      <td><b><%= _('Hash') %>:</b></td>
-      <td><%= Confline.get_value2("Webphone_hash", 0) %></td>
-    </tr>
-    <tr>
-      <td width="30"></td>
-      <td><b><%= _('Page_URL') %>:</b></td>
-      <td><%= Confline.get_value("Webphone_page_url", current_user.get_corrected_owner_id) %></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><b><%= _('Title') %>:</b></td>
-      <td><%= Confline.get_value("Webphone_title", current_user.get_corrected_owner_id) %></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><b><%= _('Text') %>:</b></td>
-      <td><%= Confline.get_value("Webphone_text", current_user.get_corrected_owner_id) %></td>
-    </tr>
-    <tr>
+    <br/>
+    <br/>
+    <table class="simple" width="100%">
+      <tr>
+        <td width="30"></td>
+        <td><b><%= _('Hash') %>:</b></td>
+        <td><%= Confline.get_value2("Webphone_hash", 0) %></td>
+      </tr>
+      <tr>
+        <td width="30"></td>
+        <td><b><%= _('Page_URL') %>:</b></td>
+        <td><%= Confline.get_value("Webphone_page_url", current_user.get_corrected_owner_id) %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><b><%= _('Title') %>:</b></td>
+        <td><%= Confline.get_value("Webphone_title", current_user.get_corrected_owner_id) %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><b><%= _('Text') %>:</b></td>
+        <td><%= Confline.get_value("Webphone_text", current_user.get_corrected_owner_id) %></td>
+      </tr>
+      <tr>
+    </table>
 <% else %>
-    <%= form_tag :action => 'webphone_settings_update' do %>
+    <% form_tag :action => 'webphone_settings_update' do %>
         <br/>
         <br/>
         <table class="simple" width="100%">

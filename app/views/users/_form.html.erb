@@ -781,6 +781,9 @@
                       <%= radio_button_tag('user[webphone_allow_use]', 0, @user.webphone_allow_use.to_i == 0, {:disabled => !@user.have_sip_device?}) %> <%= _('No') %>
                       <%= radio_button_tag('user[webphone_allow_use]', 1, @user.webphone_allow_use.to_i == 1, {:disabled => !@user.have_sip_device?}) %> <%= _('Yes') %>
                   <% end %>
+                  <% if !@user.have_sip_device? %>
+                      <%= b_info({:title=>_('No_SIP_Device')}) %>
+                  <%end%>
                 </td>
               </tr>
             </table>

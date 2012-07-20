@@ -4464,6 +4464,7 @@ Localization.define('en') do |l|
   l.store 'Webphone_settings', 'Webphone settings'
   l.store 'Webphone', 'Webphone'
   l.store 'Manege_Webphone', 'Manege Webphone'
+  l.store 'No_SIP_Device', 'No SIP Device'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

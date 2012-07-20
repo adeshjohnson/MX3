@@ -1,4 +1,4 @@
-<% if session[:acc_tariff_manage].to_i > 0 or session[:acc_manage_dids_opt_1].to_i > 0 or (cc_active? and session[:acc_callingcard_manage].to_i > 0) or session[:acc_user_manage].to_i > 0 or session[:acc_services_manage].to_i > 0 or session[:acc_invoices_manage].to_i > 0 or can_see_finances? or session[:acc_manage_subscriptions_opt_1].to_i > 0 %>
+<%  if session[:acc_tariff_manage].to_i > 0 or session[:acc_manage_dids_opt_1].to_i > 0 or (cc_active? and session[:acc_callingcard_manage].to_i > 0) or session[:acc_user_manage].to_i > 0 or session[:acc_services_manage].to_i > 0 or session[:acc_invoices_manage].to_i > 0 or can_see_finances? or session[:acc_manage_subscriptions_opt_1].to_i > 0 or  (web_phone_active? and session[:acc_webphone_acc].to_i > 0)  %>
     <script type="text/javascript">
         acc_menu = new dTree('acc_menu');
         acc_menu.config.inOrder = true;
@@ -40,7 +40,7 @@
         <% end %>
         <% end %>
 
-        <% if (cc_active? and session[:acc_callingcard_manage].to_i > 0) || monitoring_enabled_for(current_user) %>
+        <% if (cc_active? and session[:acc_callingcard_manage].to_i > 0) || monitoring_enabled_for(current_user) || (web_phone_active? and session[:acc_webphone_acc].to_i > 0) %>
         acc_menu.add(40, 0, '<%= _('Addons') %>');
         <% end %>
         <% if (cc_active? and session[:acc_callingcard_manage].to_i > 0) %>
@@ -49,6 +49,9 @@
         <% if monitoring_enabled_for(current_user) %>
         acc_menu.add(42, 40, '<%= _('Monitorings') %>', '<%= Web_Dir %>/monitorings');
         acc_menu.add(43, 42, '<%= _('Settings') %>', '<%= Web_Dir %>/monitorings/settings');
+        <% end %>
+        <% if web_phone_active? and session[:acc_webphone_acc].to_i > 0 %>
+        acc_menu.add(44, 40, '<%= _('Webphone') %>', '<%= Web_Dir %>/functions/webphone_settings');
         <% end %>
         $("accountant_menu_div").innerHTML = acc_menu.toString();
     </script>
