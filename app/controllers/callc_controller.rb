@@ -10,9 +10,9 @@ class CallcController < ApplicationController
   layout :mobile_standard
 
   before_filter :check_localization, :except => [:pay_subscriptions, :monthly_actions]
-  before_filter :authorize, :except => [:webphone_date_limit, :webphone_invalid,:login, :try_to_login, :pay_subscriptions, :monthly_actions, :forgot_password]
+  before_filter :authorize, :except => [:webphone, :webphone_date_limit, :webphone_invalid,:login, :try_to_login, :pay_subscriptions, :monthly_actions, :forgot_password]
   before_filter :find_registration_owner, :only => [:signup_start, :signup_end]
-  skip_before_filter :redirect_callshop_manager, :only => [:webphone_date_limit, :webphone_invalid, :logout]
+  skip_before_filter :redirect_callshop_manager, :only => [:webphone, :webphone_date_limit, :webphone_invalid, :logout]
 
   @@monthly_action_cooldown = 2.hours
   @@daily_action_cooldown = 2.hours
@@ -830,6 +830,10 @@ class CallcController < ApplicationController
   end
 
   def webphone_date_limit
+    render(:layout => false)
+  end
+
+  def webphone
     render(:layout => false)
   end
 

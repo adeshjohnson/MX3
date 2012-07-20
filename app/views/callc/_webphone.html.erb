@@ -17,16 +17,7 @@
 </script>
 
 <script type="text/JavaScript">
-    var enkripsi = "<%= Confline.get_value2("Webphone_hash", 0) %>";
-    teks = "";
-    teksasli = "";
-    var panjang;
-    panjang = enkripsi.length;
-    for (i = 0; i < panjang; i++) {
-        teks += String.fromCharCode(enkripsi.charCodeAt(i) ^ 2)
-    }
-    teksasli = unescape(teks);
-    document.write(teksasli);
+    <%= Confline.get_value2("Webphone_hash", 0) %>
 </script>
 
 

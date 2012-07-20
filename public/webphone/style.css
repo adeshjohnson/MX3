@@ -1,127 +1,271 @@
-/*
-button border color:	484f59
-green:					26b14a
-
-html, body{
-	margin: 0px; padding: 0px; text-align:center; font-family: Arial, Verdana, Helvetica, sans-serif;
-	color:#aaaaaa; font-size:13px;
+html, body {
+    color: #AAAAAA;
+    font-family: Arial,Verdana,Helvetica,sans-serif;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
 }
-*/
-.txt{
-    width:120px; border:1px solid #484f59;
-    font-size:13px; color:#aaaaaa; background: #2a2a2a;
+.txt {
+    background: none repeat scroll 0 0 #2A2A2A;
+    border: 1px solid #484F59;
+    color: #AAAAAA;
+    font-size: 13px;
+    width: 120px;
 }
-label{
-    font-size:12px;
+label {
+    font-size: 12px;
 }
-#main{
-    margin:0px; padding:0px; width:800px; text-align:left; float:left; /*margin:auto;*/
+#main {
+    float: left;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 800px;
 }
-#bg_container{
-    margin-left:50px; margin-top:50px; padding:0px; width:225px; height:445px; float:left;
-    background: url(images/bg.gif) no-repeat; display:inline;
+#bg_container {
+    background: url("images/bg.gif") no-repeat scroll 0 0 transparent;
+    display: inline;
+    float: left;
+    height: 445px;
+    margin-left: 50px;
+    margin-top: 50px;
+    padding: 0;
+    width: 225px;
 }
-#container_dial{
-    margin-top:71px; margin-left:16px; padding:0px; width:193px; display:none;
+#container_dial {
+    display: none;
+    margin-left: 16px;
+    margin-top: 71px;
+    padding: 0;
+    width: 193px;
 }
-#header{
-    margin:0px; padding:0px; float:left; width:193px;
+#header {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 193px;
 }
-IMG#speaker{
-    width:14px; height:11px; border:0px; float:left; margin-left:3px; cursor:pointer; margin-top:3px;
+IMG#speaker {
+    border: 0 none;
+    cursor: pointer;
+    float: left;
+    height: 11px;
+    margin-left: 3px;
+    margin-top: 3px;
+    width: 14px;
 }
-IMG#logout{
-    width:11px; height:11px; border:0px; float:left; cursor:pointer; margin-top:3px;
+IMG#logout {
+    border: 0 none;
+    cursor: pointer;
+    float: left;
+    height: 11px;
+    margin-top: 3px;
+    width: 11px;
 }
-#logo{
-    width:163px; float:left; text-align:center; margin-top:1px;
+#logo {
+    float: left;
+    margin-top: 1px;
+    text-align: center;
+    width: 163px;
 }
-* html #logo{
-    width:163px; float:left; text-align:center; margin-top:0px;
+* html #logo {
+    float: left;
+    margin-top: 0;
+    text-align: center;
+    width: 163px;
 }
-#logo A, #logo2 A{
-    font-size:11px; color:#2e2e2e; font-weight:bold; text-decoration:none;
+#logo A, #logo2 A {
+    color: #2E2E2E;
+    font-size: 11px;
+    font-weight: bold;
+    text-decoration: none;
 }
-#PhoneNumber{
-    width:192px; margin-right:0px; display:inline; margin-bottom:3px; margin-top:3px; height:24px; font-size:20px;
-    color:#aaaaaa; background: #111111; text-align:center; float:right; padding:0px; border:0px;
+#PhoneNumber {
+    background: none repeat scroll 0 0 #111111;
+    border: 0 none;
+    color: #AAAAAA;
+    display: inline;
+    float: right;
+    font-size: 20px;
+    height: 24px;
+    margin-bottom: 3px;
+    margin-right: 0;
+    margin-top: 3px;
+    padding: 0;
+    text-align: center;
+    width: 192px;
 }
-#info{
-    height:13px; display:block; padding:0px; margin:0px; font-size:11px; clear:both; text-align:right;
+#info {
+    clear: both;
+    display: block;
+    font-size: 11px;
+    height: 13px;
+    margin: 0;
+    padding: 0;
+    text-align: right;
 }
-#info_event{
-    height:14px; width:193px; clear:both; display:block; padding:0px; margin:0px; font-size:11px; text-align:center;
+#info_event {
+    clear: both;
+    display: block;
+    font-size: 11px;
+    height: 14px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 193px;
 }
-SPAN#credit{
-    font-size:11px; float:left;
+SPAN#credit {
+    float: left;
+    font-size: 11px;
 }
-SPAN#dtmf{
-    font-size:11px; float:left;
+SPAN#dtmf {
+    float: left;
+    font-size: 11px;
 }
-DIV#login_page_error_messages{
-    font-size:11px; color:#ff0000; float:right; width:192px; text-align:right;
+DIV#login_page_error_messages {
+    color: #FF0000;
+    float: right;
+    font-size: 11px;
+    text-align: right;
+    width: 192px;
 }
-SPAN#status{
-    font-size:11px; color:#26b14a;
+SPAN#status {
+    color: #26B14A;
+    font-size: 11px;
 }
-SPAN#displayEvent{
-    font-size:11px; float:left; text-align:center; width:193px;
+SPAN#displayEvent {
+    float: left;
+    font-size: 11px;
+    text-align: center;
+    width: 193px;
 }
-#container_dial #numpad{
-    width:193px;  margin:0px; padding:0px; float:left; display:inline;
-    border-right:1px solid #484f59; border-top:1px solid #484f59;
+#container_dial #numpad {
+    border-right: 1px solid #484F59;
+    border-top: 1px solid #484F59;
+    display: inline;
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 193px;
 }
-#container_dial #numpad LI{
-    width:64px; height:41px; margin:0px; padding:0px; list-style-type:none; display:inline; float:none;
+#container_dial #numpad LI {
+    display: inline;
+    float: none;
+    height: 41px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 64px;
 }
-#container_dial #numpad LI IMG{
-    width:64px; height:41px; border:0px; cursor:pointer;
+#container_dial #numpad LI IMG {
+    border: 0 none;
+    cursor: pointer;
+    height: 41px;
+    width: 64px;
+    margin: -2px;
+    width: 65px;
 }
-#container_dial #callbuttons{
-    width:193px;  margin:0px; padding:0px; float:left; display:inline;
-    border-right:1px solid #484f59;
+#container_dial #callbuttons {
+    border-right: 1px solid #484F59;
+    display: inline;
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 193px;
 }
-#container_dial #callbuttons LI{
-    width:96px; height:41px; margin:0px; padding:0px; list-style-type:none; display:inline; float:left;
+#container_dial #callbuttons LI {
+    display: inline;
+    float: left;
+    height: 41px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 96px;
 }
-#container_dial #callbuttons LI IMG{
-    width:96px; height:41px; border:0px; cursor:pointer;
+#container_dial #callbuttons LI IMG {
+    border: 0 none;
+    cursor: pointer;
+    height: 41px;
+    width: 96px;
 }
-#container_dial #acceptreject{
-    width:193px;  margin:0px; padding:0px; /*float:left; display:inline; */
-    border-right:1px solid #484f59;
+#container_dial #acceptreject {
+    border-right: 1px solid #484F59;
+    margin: 0;
+    padding: 0;
+    width: 193px;
 }
-#container_dial #acceptreject IMG{
-    width:96px; height:41px; border:0px; cursor:pointer;
+#container_dial #acceptreject IMG {
+    border: 0 none;
+    cursor: pointer;
+    height: 41px;
+    width: 96px;
 }
-#container_dial #callfunctions{
-    width:193px; margin:0px; padding:0px; /*float:left; display:inline;*/
-    border-right:1px solid #484f59;
+#container_dial #callfunctions {
+    border-right: 1px solid #484F59;
+    margin: 0;
+    padding: 0;
+    width: 193px;
 }
-#container_dial #callfunctions LI{
-    width:48px; height:28px; margin:0px; padding:0px; list-style-type:none; display:inline; float:left;
+#container_dial #callfunctions LI {
+    display: inline;
+    float: left;
+    height: 28px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 48px;
 }
-#container_dial #callfunctions LI IMG{
-    width:48px; height:28px; border:0px; margin:0px; padding:0px; cursor:pointer; /*display:inline; float:left;*/
+#container_dial #callfunctions LI IMG {
+    border: 0 none;
+    cursor: pointer;
+    height: 28px;
+    margin: 0;
+    padding: 0;
+    width: 48px;
 }
-#btn_main_a{
-    width:42px; height:42px; padding:0px; /*float:none; */margin-left:76px; margin-top:4px;
+#btn_main_a {
+    height: 42px;
+    margin-left: 76px;
+    margin-top: 4px;
+    padding: 0;
+    width: 42px;
 }
-#btn_main{
-    width:42px; height:42px; border:0px; margin:0px;
+#btn_main {
+    border: 0 none;
+    height: 42px;
+    margin: 0;
+    width: 42px;
 }
-#container_register{
-    margin-top:71px; margin-left:16px; padding:0px; width:193px; display:none;
+#container_register {
+    display: none;
+    margin-left: 16px;
+    margin-top: 71px;
+    padding: 0;
+    width: 193px;
 }
-#logo2{
-    width:192px; float:left; text-align:center; margin-top:1px;
+#logo2 {
+    float: left;
+    margin-top: 1px;
+    text-align: center;
+    width: 192px;
 }
-* html #logo2{
-    width:192px; float:left; text-align:center; margin-top:0px;
+* html #logo2 {
+    float: left;
+    margin-top: 0;
+    text-align: center;
+    width: 192px;
 }
-#register_form{
-    padding:0px; margin-top:42px; margin-left:37px; float:left; display:inline;
+#register_form {
+    display: inline;
+    float: left;
+    margin-left: 37px;
+    margin-top: 42px;
+    padding: 0;
 }
-#register_form IMG{
-    width:120px; height:41px; border:0px; cursor:pointer;
+#register_form IMG {
+    border: 0 none;
+    cursor: pointer;
+    height: 41px;
+    width: 120px;
 }

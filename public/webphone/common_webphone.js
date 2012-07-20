@@ -1326,7 +1326,7 @@ function WJSAPI_LoadApplet()
         return out;
     };
 
-    var sp = $("</div>");
+    var sp = $("<div/>");
     sp.html(appletString());
     try{
         $("body").append(sp);

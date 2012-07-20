@@ -2382,6 +2382,13 @@ GROUP BY terminators.id;").map { |t| t.id }
       self.block_at_conditional = params[:block_at_conditional].to_i
     end
 
+    if self.webphone_allow_use.to_i == 1 and user_old.webphone_allow_use.to_i == 0
+      dev = Device.find(:first, :conditions=>['id=? and device_type = "SIP"', self.primary_device_id])
+      if dev and self.webphone_device_id.to_i > 0
+        self.webphone_device_id = dev.id
+      end
+    end
+
 
     if api == 1
       self.allow_loss_calls = params[:allow_loss_calls].to_i if params[:allow_loss_calls]

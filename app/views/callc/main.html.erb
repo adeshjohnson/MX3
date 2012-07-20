@@ -1,6 +1,6 @@
 <table class="nb" width="100%">
   <tr>
-    <td width="50%" valign="top" id="hello">
+    <td width="45%" valign="top" id="hello">
       <br/>
       <%= _('hello') %>, <%= @username %>
       <br/>
@@ -132,8 +132,10 @@
 
           </div>
       <% end %>
-      <%= render :partial=>'webphone' if current_user.webphone_device %>
     </td>
+    <% if current_user.webphone_device and !Confline.get_value2("Webphone_hash", 0).blank?%>
+        <td valign="top" width="200px" align="center"><iframe src="webphone" frameborder="0" width="300px" height="600px" scrolling=no></iframe></td>
+    <%end%>
   </tr>
 </table>
 <% @temp %>
