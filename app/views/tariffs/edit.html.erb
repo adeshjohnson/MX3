@@ -1,4 +1,4 @@
-<%= link_nice_tariff(@tariff) %>
+<%= link_nice_tariff(@tariff).html_safe %>
 <%= form_tag(:action => 'update', :id => @tariff) do %>
     <%= render :partial => 'form' %>
     <br><br>
