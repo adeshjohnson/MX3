@@ -2650,6 +2650,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     # this code selects correct calls for admin/reseller/user
     user_sql = " "
     user_id = session[:usertype] == 'accountant' ? 0 : session[:user_id]
+    @user_id = user_id
     if user_id != 0
       #reseller or user
       if session[:usertype] == "reseller"
@@ -2670,10 +2671,10 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     activecalls.answer_time as answer_time, activecalls.src as src, activecalls.localized_dst as localized_dst, activecalls.uniqueid as uniqueid,
     activecalls.lega_codec as lega_codec,activecalls.legb_codec as legb_codec,activecalls.pdd as pdd,
     #{SqlExport.replace_price('activecalls.user_rate', {:reference => 'user_rate'})}, tariffs.currency as rate_currency,
-    users.id as user_id, users.first_name as user_first_name, users.last_name as user_last_name, users.username as user_username,
-    devices.id as 'device_id',devices.device_type as device_type, devices.name as device_name, devices.username as device_username, devices.extension as device_extension, devices.istrunk as device_istrunk, devices.ani as device_ani,
-    dst.id as dst_device_id,  dst.device_type as dst_device_type, dst.name as dst_device_name, dst.username as dst_device_username, dst.extension as dst_device_extension, dst.istrunk as dst_device_istrunk, dst.ani as dst_device_ani,
-    dst_usr.id as dst_user_id, dst_usr.first_name as dst_user_first_name, dst_usr.last_name as dst_user_last_name, dst_usr.username as dst_user_username,
+    users.id as user_id, users.first_name as user_first_name, users.last_name as user_last_name, users.username as user_username, users.owner_id as user_owner_id,
+    devices.id as 'device_id',devices.device_type as device_type, devices.name as device_name, devices.username as device_username, devices.extension as device_extension, devices.istrunk as device_istrunk, devices.ani as device_ani, devices.user_id as device_user_id,
+    dst.id as dst_device_id,  dst.device_type as dst_device_type, dst.name as dst_device_name, dst.username as dst_device_username, dst.extension as dst_device_extension, dst.istrunk as dst_device_istrunk, dst.ani as dst_device_ani, dst.user_id as dst_device_user_id,
+    dst_usr.id as dst_user_id, dst_usr.first_name as dst_user_first_name, dst_usr.last_name as dst_user_last_name, dst_usr.username as dst_user_username, dst_usr.owner_id as dst_user_owner_id,
     destinations.direction_code as direction_code, directions.name as direction_name, destinations.subcode as destination_subcode, destinations.name as destination_name,
     providers.id as provider_id, providers.name as provider_name, providers.common_use, providers.user_id as 'providers_owner_id', activecalls.did_id as did_id, dids.did as did, g.direction_code as did_direction_code,
     NOW() - activecalls.answer_time AS 'duration',

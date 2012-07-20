@@ -40,8 +40,8 @@
                <% if call['cc_id'].to_i == 0  %>
               <% if call["user_id"] %>
                   <% if session[:usertype] != "user" %>
-                      <%= nice_user_from_data(call["user_username"].to_s, call["user_first_name"].to_s, call["user_last_name"].to_s, {:link => true, :user_id => call["user_id"].to_s}) %>
-                      / <%= nice_device_from_data(call["device_type"].to_s, (call["device_username"].to_s.blank? ? call["device_extension"].to_s : call["device_name"].to_s), call["device_extension"].to_s, call["device_istrunk"], call["device_ani"].to_s, {:link => true, :device_id => call["device_id"].to_s}) %>
+                      <%= nice_user_from_data(call["user_username"].to_s, call["user_first_name"].to_s, call["user_last_name"].to_s, {:link => (call["user_owner_id"].to_i == @user_id.to_i ? true : false), :user_id => call["user_id"].to_s}) %>
+                      / <%= nice_device_from_data(call["device_type"].to_s,(call["device_username"].to_s.blank? ? call["device_extension"].to_s : call["device_name"].to_s), call["device_extension"].to_s, call["device_istrunk"], call["device_ani"].to_s, {:link => (call["device_user_id"].to_i == call["user_id"].to_i and call["user_owner_id"].to_i == @user_id.to_i ? true : false), :device_id => call["device_id"].to_s})%>
                   <% else %>
                       <%= nice_device_from_data(call["device_type"].to_s, (call["device_username"].to_s.blank? ? call["device_extension"].to_s : call["device_name"].to_s), call["device_extension"].to_s, call["device_istrunk"], call["device_ani"].to_s, {:link => false, :device_id => call["device_id"].to_s}) %>
                   <% end %>
@@ -60,8 +60,8 @@
               <% if call["dst_user_id"] %>
 
                   <% if session[:usertype] == "admin" %>
-                      <%= nice_user_from_data(call["dst_user_username"].to_s, call["dst_user_first_name"].to_s, call["dst_user_last_name"].to_s, {:link => true, :user_id => call["dst_user_id"].to_s}) %>
-                      / <%= nice_device_from_data(call["dst_device_type"].to_s, (call["dst_device_username"].to_s.blank? ? call["dst_device_extension"].to_s : call["dst_device_name"].to_s), call["dst_device_extension"].to_s, call["dst_device_istrunk"].to_s, call["dst_device_ani"], {:link => true, :device_id => call["dst_device_id"].to_s}) %>
+                      <%= nice_user_from_data(call["dst_user_username"].to_s, call["dst_user_first_name"].to_s, call["dst_user_last_name"].to_s , {:link => (call["dst_user_owner_id"].to_i == @user_id.to_i ? true : false), :user_id => call["dst_user_id"].to_s}) %>
+                      / <%= nice_device_from_data(call["dst_device_type"].to_s, (call["dst_device_username"].to_s.blank? ? call["dst_device_extension"].to_s : call["dst_device_name"].to_s), call["dst_device_extension"].to_s, call["dst_device_istrunk"].to_s, call["dst_device_ani"], {:link => (call["dst_device_user_id"].to_i == call["dst_user_id"].to_i and call["dst_user_owner_id"].to_i == @user_id.to_i ? true : false), :device_id => call["dst_device_id"].to_s}) %>
                   <% else %>
 
                       <% if session[:usertype] == "reseller" %>
