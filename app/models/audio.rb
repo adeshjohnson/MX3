@@ -81,6 +81,12 @@ class Audio
               f.write(file.read)
             end
             dst = "#{final_path}#{final_path.chars.to_a.last == '/' ? '' : '/'}#{new_name}.wav"
+            #since we encountered issue that mor tries to create file having '//' in it        
+            #we should fix that, by doing some hacking. TODO: refactor when some one will      
+            #assign some time for that. ticket number #6302                                    
+            dst = dst.gsub(/[\/]+/, '/')                                                       
+            src = src.gsub(/[\/]+/, '/')                                                       
+            new_name = new_name.gsub(/[\/]+/, '/')    
             Audio.convert(src, dst, 1, server_path, new_name)
             if !File.exists?(dst) and notice.blank?
               notice = _("File_not_uploaded_please_check_file_system_permissions")
