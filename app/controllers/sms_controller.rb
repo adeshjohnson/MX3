@@ -25,7 +25,7 @@ class SmsController < ApplicationController
                      :lcr_provider_change_status, :lcr_providers_sort, :providers_sort_save, :lcr_edit_user, :lcr_update_user, :providers, :provider_new, :provider_create, :provider_edit, :provider_update, :provider_destroy,
                      :tariffs, :tariff_new, :tariff_create, :tariff_edit, :tariff_update, :tariff_destroy, :rates, :rate_new, :rate_try_to_add, :rates_update, :rate_destroy, :delete_all_rates]
   before_filter(:only => @@callshop_view+@@callshop_edit) { |c|
-    allow_read, allow_edit = c.check_read_write_permission(@@callshop_view, @@callshop_edit, {:role => "reseller", :right => :res_sms_addon, :ignore => true})
+    allow_read, allow_edit = c.check_read_write_permission(@@callshop_view, @@callshop_edit, {}) # :role => "reseller", :right => :res_sms_addon, :ignore => true})
     c.instance_variable_set :@callshop, allow_read
     c.instance_variable_set :@callshop, allow_edit
     true
