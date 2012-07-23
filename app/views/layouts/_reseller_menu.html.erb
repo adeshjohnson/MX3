@@ -77,7 +77,7 @@
       payment_gateway = (payment_gateway_active? and session[:res_payment_gateways].to_i == 2 and gateways_enabled_for(current_user))
     %>
     $("reseller_menu_div").innerHTML = reseller_menu.toString();
-    <% if payment_gateway or call_shop or sms or calling_cards or erp_active? or monitoring_enabled_for(current_user) or (provider_billing_active? and current_user.reseller_allow_providers_tariff?) %>
+    <% if payment_gateway or call_shop or sms or calling_cards or erp_active? or monitoring_enabled_for(current_user) or (provider_billing_active? and current_user.reseller_allow_providers_tariff?) or (web_phone_active? and current_user.simple_get_acc_res_permission('webphone_res') > 0) %>
 
     reseller_menu_addons = new dTree('reseller_menu_addons');
     reseller_menu_addons.config.inOrder = true;

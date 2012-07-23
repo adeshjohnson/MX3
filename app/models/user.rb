@@ -3399,6 +3399,9 @@ GROUP BY terminators.id;").map { |t| t.id }
   +int+ value of permission
 =end
     def simple_get_acc_res_permission(permission)
+      unless self.acc_group
+        return 0
+      end
       right = self.acc_group.acc_group_rights.find(:first, :conditions => "acc_rights.name = '#{permission}'", :include => :acc_right) if self.is_accountant? or self.is_reseller?
       if right
         return right.value.to_i

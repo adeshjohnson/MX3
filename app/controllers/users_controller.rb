@@ -524,6 +524,10 @@ class UsersController < ApplicationController
     a = check_owner_for_user(@user.id)
     return false unless a
 
+    if web_phone_active?
+      @user.webphone_allow_use = params[:user][:webphone_allow_use].to_i
+    end
+
     notice, par = @user.validate_from_update(current_user, params, @allow_edit)
     if !notice.blank?
       flash[:notice] = notice
