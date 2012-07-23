@@ -1349,28 +1349,37 @@ class User < ActiveRecord::Base
     postpaid == 1 ? "postpaid" : "prepaid"
   end
 
-  def pay_subscriptions(year, month)
+  def pay_subscriptions(year, month, day=nil)
     changed = 0
     all_data = []
     MorLog.my_debug("---#{username}-----------------------------------------")
 
     return all_data if blocked.to_i == 1
-    time = Time.mktime(year, month, 1, 23, 59, 59)
-    time = time.next_month if user_type == "prepaid"
+    time = Time.mktime(year, month, (day ? day.to_i : 1), 23, 59, 59)
+    time = time.next_month if user_type == "prepaid" and day.nil?
 
     MorLog.my_debug("  #{time.year}-#{time.month}")
-    period_start_with_time = time.beginning_of_month
-    period_end_with_time = time.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
+    #sorry about this nasty.. since i wouldn't want to rewrite mehod 
+    #that does who knows what i jus pass day param and check whether
+    #is is nil or not. if nil it means we're paying for monthly subscriptions
+    #else we're paying daily subscriptions
+    if day
+      period_start_with_time = time.change(:hour => 0, :min => 0, :sec => 0)
+      period_end_with_time = time.change(:hour => 23, :min => 59, :sec => 59)
+    else
+      period_start_with_time = time.beginning_of_month
+      period_end_with_time = time.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
+    end
 
     subscriptions = self.subscriptions_in_period(period_start_with_time, period_end_with_time)
     MorLog.my_debug("  Found subscriptions : #{subscriptions.size}")
     b=0
     subscriptions.each { |sub|
-      if !Action.find(:first, :conditions => ["action = 'subscription_paid' AND user_id = ? AND data = ? AND target_id = ?", id, "#{time.year}-#{time.month}", sub.id])
+      if !Action.find(:first, :conditions => ["action = 'subscription_paid' AND user_id = ? AND data = ? AND target_id = ?", id, "#{time.year}-#{time.month}#{('-' + time.day.to_s) if day}", sub.id])
         changed = 1
         sub_price = sub.price_for_period(period_start_with_time, period_end_with_time)
 
-        Action.new(:user_id => id, :target_id => sub.id, :target_type => "subscription", :date => Time.now, :action => "subscription_paid", :data => "#{time.year}-#{time.month}", :data2 => sub_price).save
+        Action.new(:user_id => id, :target_id => sub.id, :target_type => "subscription", :date => Time.now, :action => "subscription_paid", :data => "#{time.year}-#{time.month}#{('-' + time.day.to_s) if day}", :data2 => sub_price).save
 
         # if setting does not allow dropping bellow zero and balance got bellow 0
         setting_disallow_balance_drop_below_zero = Confline.get_value("Disallow_prepaid_user_balance_drop_below_zero", owner_id)

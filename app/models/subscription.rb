@@ -114,9 +114,15 @@ class Subscription < ActiveRecord::Base
         days_used = end_date - start_date
         logger.fatal "periodic_fee"
         logger.fatal "#{start_date.month} == #{end_date.month} and #{start_date.year} == #{end_date.year}"
+        #if periodic fee if daily month should be the same every time and
+        #if condition should evaluate to true every time
         if start_date.month == end_date.month and start_date.year == end_date.year
-          total_days = start_date.to_time.end_of_month.day
-          total_price = service.price / total_days * (days_used+1)
+          if self.service.periodtype == 'month'
+            total_days = start_date.to_time.end_of_month.day
+            total_price = service.price / total_days * (days_used+1)
+          elsif self.service.periodtype == 'day'
+            total_price = service.price * (days_used+1)
+          end
         else
           total_price = 0
           if months_between(start_date, end_date) > 1

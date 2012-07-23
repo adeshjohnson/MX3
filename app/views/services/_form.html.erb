@@ -19,6 +19,7 @@
     <td>
       <select name="service[periodtype]">
         <option value="month" <%= "selected" if @service.periodtype == "month" %>> <%= _('month') %> </option>
+        <option value="day" <%= "selected" if @service.periodtype == "day" %>> <%= _('day') %> </option>
       </select>
     </td>
   </tr>

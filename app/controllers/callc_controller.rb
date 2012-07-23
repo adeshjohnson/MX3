@@ -721,7 +721,7 @@ class CallcController < ApplicationController
         my_debug("Sessions cleaned")
 
         # =========== get Currency rates from yahoo.com =====================================
-        update_currencies
+        #update_currencies
 
         #delete file
         delete_files_after_csv_import
@@ -729,7 +729,7 @@ class CallcController < ApplicationController
         # =========== block users if necessary =====================================
         block_users
         block_users_conditional
-
+        pay_subscriptions(@time.year.to_i, @time.month.to_i, @time.day.to_i)
       }
     end
   end
@@ -882,16 +882,17 @@ class CallcController < ApplicationController
   end
 
 
-  def pay_subscriptions(year, month)
+  def pay_subscriptions(year, month, day=nil)
     email_body = []
     email_body_reseller = []
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
 
     @year = year.to_i
     @month = month.to_i
+    @day = day ? day.to_i : 1
     send = false
 
-    if months_between(Time.mktime(@year, @month, "01").to_date, Time.now.to_date) < 0
+    if not day and months_between(Time.mktime(@year, @month, @day).to_date, Time.now.to_date) < 0
       render :text => "Date is in future" and return false
     end
     email_body << "Charging for subscriptions.\nDate: #{@year}-#{@month}\n"
@@ -902,9 +903,10 @@ class CallcController < ApplicationController
     doc.subscriptions() {
       doc.year(@year)
       doc.month(@month)
+      doc.day(@day) if day
       @users.each_with_index { |user, i|
         user_time = Time.now
-        subscriptions = user.pay_subscriptions(@year, @month)
+        subscriptions = user.pay_subscriptions(@year, @month, day)
         if subscriptions.size > 0
           doc.user(:username => user.username, :user_id => user.id, :first_name => user.first_name, :balance => user.balance, :user_type => user.user_type) {
             send = true
