@@ -99,7 +99,7 @@ class TestController < ApplicationController
   end
 
   def load_delta_sql
-    path = (params[:path].to_s.empty? ? ('sql/'+params[:id]) : params[:path])
+    path = (params[:path].to_s.empty? ? params[:id] : params[:path])
     MorLog.my_debug(path)
     # MorLog.my_debug(params[:path].join("/"))
     MorLog.my_debug(File.exist?("#{Rails.root}/config/routes.rb"))
