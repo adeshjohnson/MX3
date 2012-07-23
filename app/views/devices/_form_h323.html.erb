@@ -514,8 +514,8 @@ end
     ['block_callerid_enable_yes','block_callerid_enable_no'].each(function(radio_button){ 
       Event.observe(radio_button, 'change', function(event) { 
         var block_clid_enabled = (event.target.checked && event.target.value == 'yes') 
-        $('device[block_callerid]').disabled = (!block_clid_enabled) 
-        $('device[block_callerid]').value = (block_clid_enabled ? '2' : '') 
+        $('device_block_callerid').disabled = (!block_clid_enabled) 
+        $('device_block_callerid').value = (block_clid_enabled ? '2' : '') 
       }); 
     }); 
   }); 
