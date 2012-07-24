@@ -699,7 +699,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Wrong destination</td>
+	<td>Wrong source</td>
 	<td></td>
 </tr>
 <tr>
@@ -748,8 +748,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Wrong source</td>
+	<td>waitForTextPresent</td>
+	<td>There is no message or it is empty</td>
 	<td></td>
 </tr>
 <tr>
@@ -798,8 +798,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>There is no message or it is empty</td>
+	<td>waitForTextPresent</td>
+	<td>have rate for this destination</td>
 	<td></td>
 </tr>
 <tr>
@@ -920,11 +920,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>id=add_rates</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Rates updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -1094,18 +1089,13 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=number_7</td>
-	<td>937567337911</td>
-</tr>
-<tr>
-	<td>assertText</td>
 	<td>id=number_8</td>
 	<td>937567337911</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_rate_7</td>
-	<td>11.0000</td>
+	<td>id=number_9</td>
+	<td>937567337911</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1114,12 +1104,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quantity_7</td>
-	<td>1</td>
+	<td>id=user_rate_9</td>
+	<td>11.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=quantity_8</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=quantity_9</td>
 	<td>1</td>
 </tr>
 <tr>
@@ -1129,12 +1124,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=price_7</td>
+	<td>id=price_8</td>
 	<td>11.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=price_8</td>
+	<td>id=price_9</td>
 	<td>11.0000</td>
 </tr>
 <tr>
@@ -1201,12 +1196,137 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/send_sms?u=user_reseller&amp;p=user_reseller1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'&amp;test=1&amp;hash=${hash17}</td>
+	<td>/billing/sms/tariff_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>tariffforreseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SMS Tariff created</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/send_sms?u=user_reseller&amp;p=user_reseller1&amp;lcr_id=2&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'&amp;test=1&amp;hash=${hash17}</td>
+	<td>/billing/sms/users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>subscribed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=user_reseller&amp;p=user_reseller1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'&amp;test=1&amp;hash=${hash17}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>3 - failed, user does not have rate for this destination</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=user_reseller&amp;p=user_reseller1&amp;lcr_id=2&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'&amp;test=1&amp;hash=${hash18}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>There is no such LCR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rates/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=rate_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_3</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_sms?u=user_reseller&amp;p=user_reseller1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message='labukas'&amp;test=1&amp;hash=${hash17}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>0 - sent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SMS is sent 33.0000</td>
 	<td></td>
 </tr>
 </tbody></table>
