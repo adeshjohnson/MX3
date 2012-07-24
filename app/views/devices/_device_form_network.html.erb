@@ -189,11 +189,11 @@
           NAT:
           <%= radio_button_tag('device[nat]', 'no', checked = (device_nat == 'no')) %> <%= _('No') %>
           <%= radio_button_tag('device[nat]', 'yes', checked = (device_nat == 'yes')) %> <%= _('Yes') %>
-          <%= radio_button_tag('device[nat]', 'never', checked = (device_nat == 'never')) %> <%= _('Never') %>
           <% if ast_18? %> 
             <%= radio_button_tag('device[nat]', 'force_rport', checked = (device_nat == 'force_rport') ) %> <%= _('force_rport') %> 
             <%= radio_button_tag('device[nat]', 'comedia', checked = (device_nat == 'comedia') ) %> <%= _('comedia') %> 
           <% else %> 
+            <%= radio_button_tag('device[nat]', 'never', checked = (device_nat == 'never')) %> <%= _('Never') %>
             <%= radio_button_tag('device[nat]', 'route', checked = (device_nat == 'route') ) %> <%= _('Route') %> 
           <% end %> 
         </td>
