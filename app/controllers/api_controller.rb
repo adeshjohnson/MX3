@@ -3937,23 +3937,27 @@ class ApiController < ApplicationController
       if allow == true
         check_user(params[:u], params[:p])
         if @user
-          email = Email.find(:first, :conditions => ['name = ? and owner_id = ?', params[:email_name], @user.get_corrected_owner_id])
-          if email
-            if !params[:email_to_user_id].blank?
-              user = User.find(:first, :conditions => ['id = ?', params[:email_to_user_id]])
+          if @user.usertype == 'accountant' or @user.usertype == 'admin' or @user.usertype == 'reseller'
+            email = Email.find(:first, :conditions => ['name = ? and owner_id = ?', params[:email_name], @user.get_corrected_owner_id])
+            if email
+              if !params[:email_to_user_id].blank?
+                user = User.find(:first, :conditions => ['id = ?', params[:email_to_user_id]])
+              else
+                user = @user
+              end
+              if user
+                users = [user]  # hack
+                variables = Email.map_variables_for_api(params)
+                num = EmailsController.send_email(email, Confline.get_value("Email_from", @user.get_corrected_owner_id), users, variables.merge({:owner => @user.owner_id}))
+                doc.email_sending_status(num.to_s.gsub('<br>', ''))
+              else
+                doc = MorApi.return_error("User not found", doc)
+              end
             else
-              user = @user
-            end
-            if user
-              users = [user]  # hack
-              variables = Email.map_variables_for_api(params)
-              num = EmailsController.send_email(email, Confline.get_value("Email_from", @user.get_corrected_owner_id), users, variables.merge({:owner => @user.owner_id}))
-              doc.email_sending_status(num.to_s.gsub('<br>', ''))
-            else
-              doc = MorApi.return_error("User not found", doc)
+              doc = MorApi.return_error("Email not found", doc)
             end
           else
-            doc = MorApi.return_error("Email not found", doc)
+            doc = API.return_error("Don't be so smart", doc)
           end
         else
           doc = MorApi.return_error("Bad login", doc)
