@@ -19,6 +19,36 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//div[@name='api']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
 	<td>admin</td>
 </tr>
 <tr>
@@ -65,66 +95,6 @@
 	<td>check</td>
 	<td>xml_api_extension</td>
 	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/callc/logout</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_username</td>
-	<td>reseller</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_psw</td>
-	<td>reseller1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/functions/reseller_settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=api_secret_key</td>
-	<td>secret</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Settings saved</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/callc/logout</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_username</td>
-	<td>admin</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_psw</td>
-	<td>admin1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -357,6 +327,66 @@
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_7']/span</td>
+	<td>API</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>API Secret Key:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_secret_key</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
 <!--admin -> admin-->
 <tr>
 	<td>open</td>
@@ -364,42 +394,42 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_start</td>
 	<td>2006-01-01 02:00:00</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//userid</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//total_calls</td>
 	<td>2</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//username</td>
 	<td>admin</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_start</td>
 	<td>2006-01-01 02:00:00</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//user</td>
 	<td>System Admin</td>
 </tr>
@@ -410,37 +440,37 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//userid</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//total_calls</td>
 	<td>5</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//username</td>
 	<td>admin</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_start</td>
 	<td>2006-01-01 02:00:00</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//call[2]/user</td>
 	<td>Test User #1</td>
 </tr>
@@ -451,32 +481,32 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//userid</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//total_calls</td>
 	<td>2</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//username</td>
 	<td>admin</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_start</td>
 	<td>2006-01-01 02:00:00</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//user</td>
 	<td>Test Reseller</td>
 </tr>
@@ -487,27 +517,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//userid</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//total_calls</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//username</td>
 	<td>admin</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_start</td>
 	<td>2006-01-01 02:00:00</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
 </tr>
@@ -518,32 +548,32 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//userid</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//total_calls</td>
 	<td>4</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//username</td>
 	<td>admin</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_start</td>
 	<td>2006-01-01 02:00:00</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//user</td>
 	<td>User Resellers</td>
 </tr>
@@ -554,27 +584,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//userid</td>
 	<td>2</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//total_calls</td>
 	<td>5</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//username</td>
 	<td>101</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_start</td>
 	<td>2006-01-01 02:00:00</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
 </tr>
@@ -585,37 +615,37 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertNotText</td>
+	<td>verifyNotText</td>
 	<td>//userid</td>
 	<td>3</td>
 </tr>
 <tr>
-	<td>assertNotText</td>
+	<td>verifyNotText</td>
 	<td>//username</td>
 	<td>reseller</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//userid</td>
 	<td>2</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//total_calls</td>
 	<td>5</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//username</td>
 	<td>101</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_start</td>
 	<td>2006-01-01 02:00:00</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
 </tr>
@@ -631,17 +661,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>101</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//error</td>
 	<td>User was not found</td>
 </tr>
@@ -652,32 +682,32 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//userid</td>
 	<td>3</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//username</td>
 	<td>reseller</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//total_calls</td>
 	<td>2</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//username</td>
 	<td>reseller</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_start</td>
 	<td>2006-01-01 02:00:00</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
 </tr>
@@ -693,22 +723,22 @@
 	<td>3</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//total_calls</td>
 	<td>4</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//username</td>
 	<td>reseller</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_start</td>
 	<td>2006-01-01 02:00:00</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
 </tr>
@@ -724,37 +754,37 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertNotText</td>
+	<td>verifyNotText</td>
 	<td>//userid</td>
 	<td>3</td>
 </tr>
 <tr>
-	<td>assertNotText</td>
+	<td>verifyNotText</td>
 	<td>//username</td>
 	<td>reseller</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//userid</td>
 	<td>4</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//total_calls</td>
 	<td>2</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//username</td>
 	<td>accountant</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_start</td>
 	<td>2006-01-01 02:00:00</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
 </tr>
@@ -770,62 +800,62 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance_number</td>
 	<td>60.0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance_currency</td>
 	<td>USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=language</td>
 	<td>en</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=userid</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=account</td>
 	<td>Postpaid</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance</td>
 	<td>60.0000 USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=credit</td>
 	<td>Unlimited</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=username</td>
 	<td>admin</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=first_name</td>
 	<td>System</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=agreement_date</td>
 	<td>2007-03-26</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=taxation_country</td>
 	<td>Afghanistan</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=vat_percent</td>
 	<td>18.0</td>
 </tr>
@@ -841,52 +871,52 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance_number</td>
 	<td>26.0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance_currency</td>
 	<td>USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=language</td>
 	<td>en</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=userid</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=account</td>
 	<td>Postpaid</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance</td>
 	<td>26.0000 USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=credit</td>
 	<td>Unlimited</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=username</td>
 	<td>101</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=first_name</td>
 	<td>Test User</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=vat_percent</td>
 	<td>18.0</td>
 </tr>
@@ -902,77 +932,77 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=language</td>
 	<td>en</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=userid</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance_number</td>
 	<td>36.0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance_currency</td>
 	<td>USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=account</td>
 	<td>Postpaid</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance</td>
 	<td>36.0000 USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=credit</td>
 	<td>Unlimited</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=username</td>
 	<td>reseller</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=surname</td>
 	<td>Reseller</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=agreement_number</td>
 	<td>0000000001</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=agreement_date</td>
 	<td>2009-03-31</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=taxation_country</td>
 	<td>Lithuania</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=vat_percent</td>
 	<td>19.0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=reg_direction</td>
 	<td>test_reseller@email.test</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=reg_email</td>
 	<td>test_reseller@email.test</td>
 </tr>
@@ -988,67 +1018,67 @@
 	<td>Personal details</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance_number</td>
 	<td>44.0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance_currency</td>
 	<td>USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=language</td>
 	<td>en</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=userid</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=account</td>
 	<td>Postpaid</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance</td>
 	<td>44.0000 USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=credit</td>
 	<td>Unlimited</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=username</td>
 	<td>accountant</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=first_name</td>
 	<td>Test</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=agreement_number</td>
 	<td>0000000002</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=agreement_date</td>
 	<td>2009-03-31</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=taxation_country</td>
 	<td>Lithuania</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=vat_percent</td>
 	<td>0.0</td>
 </tr>
@@ -1064,67 +1094,67 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=language</td>
 	<td>en</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance_number</td>
 	<td>44.0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance_currency</td>
 	<td>USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=userid</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=account</td>
 	<td>Postpaid</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance</td>
 	<td>44.0000 USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=credit</td>
 	<td>Unlimited</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=username</td>
 	<td>accountant</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=first_name</td>
 	<td>Test</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=agreement_number</td>
 	<td>0000000002</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=agreement_date</td>
 	<td>2009-03-31</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=taxation_country</td>
 	<td>Lithuania</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=vat_percent</td>
 	<td>0.0</td>
 </tr>
@@ -1140,57 +1170,57 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=language</td>
 	<td>en</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance_number</td>
 	<td>26.0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance_currency</td>
 	<td>USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=userid</td>
 	<td>2</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=account</td>
 	<td>Postpaid</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance</td>
 	<td>26.0000 USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=credit</td>
 	<td>Unlimited</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=username</td>
 	<td>101</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=first_name</td>
 	<td>Test User</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=surname</td>
 	<td>#1</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=vat_percent</td>
 	<td>18.0</td>
 </tr>
@@ -1206,42 +1236,42 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=language</td>
 	<td>en</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=userid</td>
 	<td>2</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=account</td>
 	<td>Postpaid</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance</td>
 	<td>26.0000 USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=credit</td>
 	<td>Unlimited</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=username</td>
 	<td>101</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=first_name</td>
 	<td>Test User</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=vat_percent</td>
 	<td>18.0</td>
 </tr>
@@ -1268,67 +1298,67 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=language</td>
 	<td>en</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=userid</td>
 	<td>3</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=account</td>
 	<td>Postpaid</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance</td>
 	<td>36.0000 USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=credit</td>
 	<td>Unlimited</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=username</td>
 	<td>reseller</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=surname</td>
 	<td>Reseller</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=agreement_number</td>
 	<td>0000000001</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=agreement_date</td>
 	<td>2009-03-31</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=taxation_country</td>
 	<td>Lithuania</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=vat_percent</td>
 	<td>19.0</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=reg_direction</td>
 	<td>test_reseller@email.test</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=reg_email</td>
 	<td>test_reseller@email.test</td>
 </tr>
@@ -1344,57 +1374,57 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=language</td>
 	<td>en</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=userid</td>
 	<td>3</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=account</td>
 	<td>Postpaid</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance</td>
 	<td>20.0000 USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=credit</td>
 	<td>Unlimited</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=username</td>
 	<td>user_reseller</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=surname</td>
 	<td>Resellers</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=agreement_number</td>
 	<td>0000000003</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=agreement_date</td>
 	<td>2009-03-31</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=taxation_country</td>
 	<td>Afghanistan</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=vat_percent</td>
 	<td>19.0</td>
 </tr>
@@ -1410,47 +1440,47 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=language</td>
 	<td>en</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=account</td>
 	<td>Postpaid</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=balance</td>
 	<td>44.0000 USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=credit</td>
 	<td>Unlimited</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=username</td>
 	<td>accountant</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=surname</td>
 	<td>Accountant</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=agreement_number</td>
 	<td>0000000002</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=agreement_date</td>
 	<td>2009-03-31</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=taxation_country</td>
 	<td>Lithuania</td>
 </tr>
