@@ -67,7 +67,7 @@
 	<td>awsdfg</td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>id=email_domain</td>
 	<td></td>
 </tr>
@@ -94,7 +94,7 @@
 <tr>
 	<td>type</td>
 	<td>id=email_from</td>
-	<td>asdffasdfsdaf@asdfsadfsadf.lt</td>
+	<td>no-REPly@kolMISoft.coM</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -120,6 +120,11 @@
 	<td>waitForTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=email_from</td>
+	<td>no-reply@kolmisoft.com</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -210,6 +215,116 @@
 	<td>waitForTextPresent</td>
 	<td>Email has not been sent because of bad system configurations</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_from</td>
+	<td>AAAA@gmail.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=email_from</td>
+	<td>aaaa@gmail.com</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=email_sending_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_from</td>
+	<td>AAAA@gmail.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=email_from</td>
+	<td>aaaa@gmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_from</td>
+	<td>FACSSAzX@gmail.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=email_from</td>
+	<td>facssazx@gmail.com</td>
 </tr>
 </tbody></table>
 </body>
