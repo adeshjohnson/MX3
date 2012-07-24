@@ -721,7 +721,7 @@ class CallcController < ApplicationController
         my_debug("Sessions cleaned")
 
         # =========== get Currency rates from yahoo.com =====================================
-        #update_currencies
+        update_currencies
 
         #delete file
         delete_files_after_csv_import
