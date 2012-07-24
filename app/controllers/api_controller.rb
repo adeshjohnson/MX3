@@ -3832,9 +3832,9 @@ class ApiController < ApplicationController
       check_user(params[:u], params[:p])
       if @user
         if @user.sms_service_active == 1
-        @lcr = Lcr.where({:id=>params[:lcr_id].to_s}).first
+        @lcr = SmsLcr.where({:id=>params[:lcr_id].to_s}).first
         if @user.sms_service_active == 1
-          if @lcr and (@lcr.user_id == @user.owner_id)
+          if @lcr
             if params[:dst]
               if params[:src]
                 if params[:message]   # atskirai
