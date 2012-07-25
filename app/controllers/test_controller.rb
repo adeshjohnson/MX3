@@ -66,6 +66,9 @@ class TestController < ApplicationController
         raise SyntaxError
       when "pdf_limit"
         PdfGen::Count.check_page_number(4, 1)
+      else
+        flash[:notice] = _("ActionView::MissingTemplate")
+        redirect_to :controller => :callc, :action => :main and return false
     end
   end
 
