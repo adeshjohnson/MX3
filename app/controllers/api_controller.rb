@@ -3961,7 +3961,7 @@ class ApiController < ApplicationController
               doc = MorApi.return_error("Email not found", doc)
             end
           else
-            doc = API.return_error("Don't be so smart", doc)
+            doc = MorApi.return_error("Don't be so smart", doc)
           end
         else
           doc = MorApi.return_error("Bad login", doc)
