@@ -430,10 +430,12 @@ class CdrController < ApplicationController
         redirect_to :action => :rerating and return false
       end
 
+      #2012 Jul 15 AJ: if you pass these params and add to @old_*_price variables, whats 
+      #the point in calculating call prices all over again???
       @old_billsec = params[:billsec].to_i
-      @old_provider_price = params[:pprice].to_f
-      @old_reseller_price = params[:rprice].to_f
-      @old_user_price = params[:price].to_f
+      @old_provider_price = 0.to_f #params[:pprice].to_f
+      @old_reseller_price = 0.to_f #params[:rprice].to_f
+      @old_user_price = 0.to_f #params[:price].to_f
 
       testing = session[:rerating_testing].to_i
       test_tariff_id = 0
@@ -473,6 +475,11 @@ class CdrController < ApplicationController
               one_old_user_price += call.user_price.to_f
               one_old_reseller_price += call.reseller_price.to_f
               one_old_provider_price += call.provider_price.to_f
+            
+              logger.fatal 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+              logger.fatal one_old_user_price
+              logger.fatal one_old_reseller_price
+              logger.fatal one_old_provider_price
 
               call = call.count_cdr2call_details(provider.tariff, @user, test_tariff_id) if provider and call.user_id
 
@@ -501,6 +508,11 @@ class CdrController < ApplicationController
           @old_provider_price += one_old_provider_price.to_f
           @old_reseller_price += one_old_reseller_price.to_f
           @old_user_price += one_old_user_price.to_f
+
+          logger.fatal 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+          logger.fatal @old_user_price
+          logger.fatal @old_reseller_price
+          logger.fatal @old_provider_price
 
           #update prepaid user balance  (why only prepaid? - postpaid should be also edited)
           #if @user.postpaid == 0
