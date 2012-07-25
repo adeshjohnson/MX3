@@ -194,7 +194,7 @@ class Email < ActiveRecord::Base
             if !options[:email_to_address].blank?
               tmail = UserMailer.create_umail(user, action, email, options) #UserMailer.create_sent_sms(options[:email_to_address], options[:to], Confline.get_value("Email_from"), email, {:body=> options[:message]})
               mail += tmail.encoded
-              sender.sendmail tmail.encoded, tmail.from, options[:email_to_address]
+              #sender.sendmail tmail.encoded, tmail.from, options[:email_to_address]
                                                                             #              action = Action.new({:user_id=>email_from.id, :date=>Time.now, :action=>action, :target_type=>"Sms", :target_id=>options[:sms_id],  :data=>options[:email_to_address]})
               status = Action.create_email_sending_action(user, action, email, options)
             else
