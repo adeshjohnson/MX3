@@ -45,7 +45,7 @@
 <tr>
 	<td>type</td>
 	<td>id=file</td>
-	<td>/home/mor/selenium/files/csv/2603_without_destinations.csv</td>
+	<td>/home//mor/elenium/files/csv/2603_without_destinations.csv</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -78,8 +78,13 @@
 	<td>label=CODE</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td></td>
+	<td>3</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>id=submit_button</td>
 	<td></td>
 </tr>
 <tr>
@@ -125,11 +130,6 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>New rates created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Congratulations, successfully imported CSV file!</td>
 	<td></td>
 </tr>
 <tr>
