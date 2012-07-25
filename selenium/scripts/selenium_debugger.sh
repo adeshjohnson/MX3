@@ -2,7 +2,7 @@
 	report="/tmp/selenium_debugas";
 	TEST_RUNNING_LOCK="/tmp/.mor_test_is_running";
 
- 
+  
 if [ -n "$1" -a -n "$2" ]; then
 	#===========
 	if [ "$1" == "-r" ]; then
