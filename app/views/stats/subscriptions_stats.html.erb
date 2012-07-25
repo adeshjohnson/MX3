@@ -61,7 +61,7 @@
             <% if can_see_finances? %>
                 <td id="service_price_<%= r['id'] %>" align="right"> <%= nice_number r['service_price'] %> </td>
             <% end %>
-            <td id="memo_<%= r['id'] %>"align="left"> <%= r['memo[0..50]'] if r['memo']%> </td>
+            <td id="memo_<%= r['id'] %>"align="left"> <%= r['memo'] if r['memo']%> </td>
             <td id="added_<%= r['id'] %>" align="center"> <%= nice_date_time r['added'] %> </td>
             <td id="activation_start_<%= r['id'] %>" align="center"> <%= nice_date_time r['activation_start'] %> </td>
             <td id="activation_end_<%= r['id'] %>" align="center"> <%= nice_date_time r['activation_end'] %> </td>

@@ -991,6 +991,8 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       redirect_to :action => 'settings' and return false
     end
 =end
+    #reset  /stats/subscriptions_stats  session
+    session[:subscriptions_stats_options] = {}
 
     error = 0
     #Globals
