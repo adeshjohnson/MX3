@@ -1119,6 +1119,51 @@
 	<td>/billing/accounting/financial_statements</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
 <!--USER-->
 <tr>
 	<td>open</td>
@@ -1895,17 +1940,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/count</td>
+	<td>//statement[2]/count</td>
 	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/price</td>
+	<td>//statement[2]/price</td>
 	<td>430.0968</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/price_with_vat</td>
+	<td>//statement[2]/price_with_vat</td>
 	<td>430.0968</td>
 </tr>
 <!--#hash 2-->
@@ -1937,43 +1982,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=status</td>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;payments&quot;] &gt; status</td>
 	<td>paid</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=count</td>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;payments&quot;] &gt; count</td>
 	<td>5</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=price</td>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;payments&quot;] &gt; price</td>
 	<td>54.6800</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=price_with_vat</td>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;payments&quot;] &gt; price_with_vat</td>
 	<td>68.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/status</td>
+	<td>//statement[4]/status</td>
 	<td>unpaid</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/count</td>
+	<td>//statement[4]/count</td>
 	<td>6</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/price</td>
+	<td>//statement[4]/price</td>
 	<td>78.6800</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/price_with_vat</td>
+	<td>//statement[4]/price_with_vat</td>
 	<td>99.0000</td>
 </tr>
 <tr>
@@ -1998,22 +2043,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/status</td>
+	<td>//statement[2]/status</td>
 	<td>unpaid</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/count</td>
+	<td>//statement[2]/count</td>
 	<td>2</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/price</td>
+	<td>//statement[2]/price</td>
 	<td>454.0968</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/price_with_vat</td>
+	<td>//statement[2]/price_with_vat</td>
 	<td>454.0968</td>
 </tr>
 <!--#hash 5-->
@@ -2044,22 +2089,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/status</td>
+	<td>//statement[4]/status</td>
 	<td>unpaid</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/count</td>
+	<td>//statement[4]/count</td>
 	<td>0</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/price</td>
+	<td>//statement[4]/price</td>
 	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/price_with_vat</td>
+	<td>//statement[4]/price_with_vat</td>
 	<td>0.0000</td>
 </tr>
 <tr>
@@ -2084,22 +2129,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/status</td>
+	<td>//statement[2]/status</td>
 	<td>unpaid</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/count</td>
+	<td>//statement[2]/count</td>
 	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/price</td>
+	<td>//statement[2]/price</td>
 	<td>24.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/price_with_vat</td>
+	<td>//statement[2]/price_with_vat</td>
 	<td>24.0000</td>
 </tr>
 <!--#hash 6-->
@@ -2110,42 +2155,42 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/status</td>
-	<td>unpaid</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//statement[2]/count</td>
-	<td>6</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//statement[2]/price</td>
-	<td>78.6800</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//statement[2]/price_with_vat</td>
-	<td>99.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
 	<td>//statement[4]/status</td>
 	<td>unpaid</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//statement[4]/count</td>
-	<td>2</td>
+	<td>6</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//statement[4]/price</td>
-	<td>454.0968</td>
+	<td>78.6800</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//statement[4]/price_with_vat</td>
+	<td>99.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//statement[2]/status</td>
+	<td>unpaid</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//statement[2]/count</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//statement[2]/price</td>
+	<td>454.0968</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//statement[2]/price_with_vat</td>
 	<td>454.0968</td>
 </tr>
 <tr>
@@ -2177,17 +2222,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/count</td>
+	<td>//statement[4]/count</td>
 	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/price</td>
+	<td>//statement[4]/price</td>
 	<td>58.6800</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/price_with_vat</td>
+	<td>//statement[4]/price_with_vat</td>
 	<td>79.0000</td>
 </tr>
 <tr>
@@ -2197,17 +2242,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/count</td>
+	<td>//statement[2]/count</td>
 	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/price</td>
+	<td>//statement[2]/price</td>
 	<td>430.0968</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/price_with_vat</td>
+	<td>//statement[2]/price_with_vat</td>
 	<td>430.0968</td>
 </tr>
 <!--#hash 9-->
@@ -2223,7 +2268,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/price_with_vat</td>
+	<td>//statement[4]/price_with_vat</td>
 	<td>0.0000</td>
 </tr>
 <tr>
@@ -2233,7 +2278,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/price_with_vat</td>
+	<td>//statement[2]/price_with_vat</td>
 	<td>24.0000</td>
 </tr>
 <!--#hash 4-->
@@ -2243,38 +2288,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=status</td>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;payments&quot;] &gt; status</td>
 	<td>paid</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=count</td>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;payments&quot;] &gt; count</td>
 	<td>3</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=price</td>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;payments&quot;] &gt; price</td>
 	<td>53.5600</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=price_with_vat</td>
+	<td>verifyText</td>
+	<td>css=statement[type=&quot;payments&quot;] &gt; price_with_vat</td>
 	<td>69.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/count</td>
+	<td>//statement[4]/count</td>
 	<td>4</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/price</td>
+	<td>//statement[4]/price</td>
 	<td>63.1200</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/price_with_vat</td>
+	<td>//statement[4]/price_with_vat</td>
 	<td>92.0000</td>
 </tr>
 <tr>
@@ -2294,17 +2339,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/status</td>
+	<td>//statement[2]/status</td>
 	<td>unpaid</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/price</td>
+	<td>//statement[2]/price</td>
 	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/price_with_vat</td>
+	<td>//statement[2]/price_with_vat</td>
 	<td>0.0000</td>
 </tr>
 <!--#hash 5-->
@@ -2326,22 +2371,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/price</td>
+	<td>//statement[4]/price</td>
 	<td>63.1200</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[2]/price_with_vat</td>
+	<td>//statement[4]/price_with_vat</td>
 	<td>92.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/price</td>
+	<td>//statement[2]/price</td>
 	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//statement[4]/price_with_vat</td>
+	<td>//statement[2]/price_with_vat</td>
 	<td>0.0000</td>
 </tr>
 <tr>
