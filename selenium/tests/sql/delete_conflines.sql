@@ -1,1 +1,1 @@
-delete from conflines;
+delete from conflines where name like '%action%';;
