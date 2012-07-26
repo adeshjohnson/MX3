@@ -398,38 +398,48 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td>/billing/services/subscriptions</td>
 	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=amount</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=amount</td>
-	<td>7</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>id=new_balance_2</td>
-	<td>5.0000 USD</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>added</td>
+	<td>Destroy Subscription for prepaid user </td>
 	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=delete_return_money_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>returned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_2</td>
+	<td>12.0000</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -484,7 +494,7 @@
 <tr>
 	<td>type</td>
 	<td>id=service_price</td>
-	<td>4</td>
+	<td>11</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -509,7 +519,7 @@
 <tr>
 	<td>select</td>
 	<td>id=subscription_service_id</td>
-	<td>label=Service periodic fee day 2, Price: 4.0</td>
+	<td>label=Service periodic fee day 2, Price: 11.0</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -604,7 +614,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=data2_52</td>
-	<td>4.0</td>
+	<td>11.0</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -614,7 +624,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=data2_80</td>
-	<td>4.0</td>
+	<td>11.0</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -654,21 +664,6 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>changed</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=invoice_number_type_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -923,6 +918,11 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/delete_conflines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/services/new</td>
 	<td></td>
 </tr>
@@ -973,13 +973,8 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=activation_start_hour</td>
-	<td>label=00</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=activation_start_minute</td>
-	<td>label=00</td>
+	<td>id=activation_start_day</td>
+	<td>label=1</td>
 </tr>
 <tr>
 	<td>select</td>
