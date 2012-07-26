@@ -62,19 +62,27 @@ class Subscription < ActiveRecord::Base
     end
   end
 
+=begin
+  lets try to figure out what this method is ment to do..
+  When one passes period of time(start & end date), this method
+  calculates intersection of period passed and its activation 
+  period. 
+  Seems like it is ment to calculate period when subscription 
+  was active, but only in period that one passed to this method
+
+  For instance if we have two periods
+  activation period: 1-------------------3
+  period passed:            2--------------------------------4
+  method will return period starting from 2 to 3.
+
+  Note that there is a bug when periods do no intersect 
+  activation period: 1------2
+  period passed:                3----------------------------4
+  method will return period starting from 3 to 2(OMG!!)
+=end
   def subscription_period(period_start, period_end)
-    #from which day used?
-    if activation_start < period_start
-      use_start = period_start
-    else
-      use_start = activation_start
-    end
-    #till which day used?
-    if activation_end > period_end
-      use_end = period_end
-    else
-      use_end = activation_end
-    end
+    use_start = (activation_start < period_start ? period_start : activation_start)
+    use_end = (activation_end > period_end ? period_end : activation_end)
     return use_start.to_date, use_end.to_date
   end
 
@@ -121,7 +129,7 @@ class Subscription < ActiveRecord::Base
             total_days = start_date.to_time.end_of_month.day
             total_price = service.price / total_days * (days_used+1)
           elsif self.service.periodtype == 'day'
-            total_price = service.price * (days_used+1)
+            total_price = service.price * (days_used.to_i+1)
           end
         else
           total_price = 0

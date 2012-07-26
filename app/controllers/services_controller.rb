@@ -335,18 +335,23 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
       Action.add_action_hash(current_user.id, {:action => 'Subscription_added', :target_id => @sub.id, :target_type => "Subscription", :data => @sub.user_id, :data2 => @sub.service_id})
 
       if @user.user_type == "prepaid"
-        subscription_price = @sub.price_for_period(Time.now.beginning_of_day, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59))
+        if @sub.service.periodtype == 'month'
+          period_end = Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
+        else
+          period_end = Time.now.change(:hour => 23, :min => 59, :sec => 59)
+        end
+        subscription_price = @sub.price_for_period(Time.now.beginning_of_day, period_end)
         if subscription_price.to_f != 0
           if (@user.balance - subscription_price) < 0
             @sub.destroy
             flash[:notice] = _('insufficient_balance')
             redirect_to :action => 'subscriptions_list', :id => @user.id and return false
           else
-            MorLog.my_debug("Prepaid user:#{@user.id} Subscription:#{@sub.id} Price:#{subscription_price} Period:#{Time.now.beginning_of_day}-#{Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)}")
+            MorLog.my_debug("Prepaid user:#{@user.id} Subscription:#{@sub.id} Price:#{subscription_price} Period:#{Time.now.beginning_of_day}-#{period_end}")
             @user.balance -= subscription_price
             @user.save
             Payment.subscription_payment(@user, subscription_price)
-            Action.new(:user_id => @user.id, :target_id => @sub.id, :target_type => "subscription", :date => Time.now, :action => "subscription_paid", :data => "#{Time.now.year}-#{Time.now.month}", :data2 => subscription_price).save
+            Action.new(:user_id => @user.id, :target_id => @sub.id, :target_type => "subscription", :date => Time.now, :action => "subscription_paid", :data => "#{Time.now.year}-#{Time.now.month}#{('-' + Time.now.day.to_s) if @sub.service.periodtype == 'day'}", :data2 => subscription_price).save
           end
         end
       end
