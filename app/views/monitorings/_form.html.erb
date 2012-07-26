@@ -11,24 +11,23 @@
                 adjustPeriod(minutes, hours, days);
             });
         });
-    });
 
-    Event.observe($("bellow_monitoringamount"),'click', function(event){ 
-      $('amount_bellow').disabled = !event.target.checked; 
-      $('amount_above').disabled = event.target.checked; 
-    }); 
+
+        Event.observe($("bellow_monitoringamount"),'click', function(event){ 
+           $('amount_bellow').disabled = !event.target.checked; 
+           $('amount_above').disabled = event.target.checked; 
+        }); 
  
-    Event.observe($("above_monitoringamount"),'click', function(event){ 
-      $('amount_above').disabled = !event.target.checked; 
-      $('amount_bellow').disabled = event.target.checked; 
-    }); 
+        Event.observe($("above_monitoringamount"),'click', function(event){ 
+           $('amount_above').disabled = !event.target.checked; 
+          $('amount_bellow').disabled = event.target.checked; 
+        }); 
 
-    if($("simultaneous_calls")){ 
-      Event.observe($("simultaneous_calls"),'click', function(event){ 
-        $('amount_above').disabled = true; 
-        $('amount_bellow').disabled = true;  
-      }); 
-    } 
+        Event.observe($("simultaneous_calls"),'click', function(event){ 
+           $('amount_above').disabled = true; 
+           $('amount_bellow').disabled = true;  
+        }); 
+    });
 
     function adjustPeriod(minutes, hours, days) {
         if (minutes.checked) {
