@@ -207,7 +207,7 @@
       <a href="<%= @help_link %>" target="_blank"><%= image_tag('help_banner.png', :title => _('Help_Banner_Notification')) %></a>
     </div>
 <% end %>
-<!--
+
 <%= javascript_include_tag "jquery-1.4.2.min.js" %>
 <script type="text/javascript">
     $j = jQuery.noConflict();
@@ -226,7 +226,7 @@
     show_hide_menus2(1);
     <%end%>
 </script>
--->
+
 <%= yield :scripts %>
 <% if Rails.env.to_s == 'development' and false %>
     <table class="maintable">
