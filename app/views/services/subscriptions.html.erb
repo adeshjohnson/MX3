@@ -34,7 +34,7 @@
           </td>
           <td align="right">
             <% if @search == 1 %>
-                <%= link_to b_cross + _('Clear_search'), :action => 'subscriptions' %>
+                <%= link_to b_cross + _('Clear_search'), :action => 'subscriptions', :clear=>'true' %>
             <% end %>
           </td>
         </tr>

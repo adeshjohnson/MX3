@@ -238,6 +238,14 @@ class ServicesController < ApplicationController
     @search_service = params[:s_service] if params[:s_service]
     @search_device = params[:device_id] if params[:device_id]
     @search_memo = params[:s_memo] if params[:s_memo]
+    if params[:clear].to_s == "true"
+      session[:year_from] = Date.today.year
+      session[:month_from] = Date.today.month
+      session[:day_from] = Date.today.day
+      session[:year_till] = Date.today.year
+      session[:month_till] = Date.today.month
+      session[:day_till] = Date.today.day
+    end
 
     cond=""
 
