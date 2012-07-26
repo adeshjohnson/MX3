@@ -431,7 +431,7 @@
 <tr>
 	<td>assertTable</td>
 	<td>css=table.maintable.1.0</td>
-	<td>User Resellers</td>
+	<td>Sub2</td>
 </tr>
 <tr>
 	<td>assertTable</td>
@@ -451,12 +451,12 @@
 <tr>
 	<td>assertTable</td>
 	<td>css=table.maintable.1.0</td>
-	<td>Test Reseller</td>
+	<td>System Admin</td>
 </tr>
 <tr>
 	<td>assertTable</td>
 	<td>css=table.maintable.5.0</td>
-	<td>User Resellers</td>
+	<td>System Admin</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
@@ -471,12 +471,12 @@
 <tr>
 	<td>assertTable</td>
 	<td>css=table.maintable.1.0</td>
-	<td>Test Reseller</td>
+	<td>User Resellers</td>
 </tr>
 <tr>
 	<td>assertTable</td>
 	<td>css=table.maintable.5.0</td>
-	<td>Test User #1</td>
+	<td>User Resellers</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
@@ -520,18 +520,63 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Account</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/1?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=manage_subscriptions_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=services_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>reseller</td>
+	<td>accountant</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>login_psw</td>
-	<td>reseller1</td>
+	<td>accountant1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -846,7 +891,7 @@
 <tr>
 	<td>assertTable</td>
 	<td>css=table.maintable.1.0</td>
-	<td>User Resellers</td>
+	<td>Sub2</td>
 </tr>
 <tr>
 	<td>assertTable</td>
@@ -866,12 +911,12 @@
 <tr>
 	<td>assertTable</td>
 	<td>css=table.maintable.1.0</td>
-	<td>Test Reseller</td>
+	<td>System Admin</td>
 </tr>
 <tr>
 	<td>assertTable</td>
 	<td>css=table.maintable.5.0</td>
-	<td>User Resellers</td>
+	<td>System Admin</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
@@ -886,12 +931,12 @@
 <tr>
 	<td>assertTable</td>
 	<td>css=table.maintable.1.0</td>
-	<td>Test Reseller</td>
+	<td>User Resellers</td>
 </tr>
 <tr>
 	<td>assertTable</td>
 	<td>css=table.maintable.5.0</td>
-	<td>Test User #1</td>
+	<td>User Resellers</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
@@ -916,6 +961,41 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.0</td>
+	<td>Sub2</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.16.1</td>
+	<td>Penktas</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
