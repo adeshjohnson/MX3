@@ -10,7 +10,7 @@ class Card < ActiveRecord::Base
   validates_uniqueness_of :pin, :allow_nil => true, :message => _('PIN_is_already_taken')
   validates_uniqueness_of :callerid, :if => :validate_caller_id, :message => _('Callerid_must_be_unique')
 
-  before_save :validate_pin_length, :validate_number_length, :card_before_save , :validate_min_balance
+  before_save :validate_pin_length, :validate_number_length, :validate_min_balance
   before_create :card_before_create
 
   def validate_caller_id
@@ -175,12 +175,6 @@ class Card < ActiveRecord::Base
     if self.pin.to_s.blank?
       errors.add(:pin, _("Card_pin_is_blank") + " : " + self.number.to_s)
       return false
-    end
-  end
-
-  def card_before_save
-    if self.language.to_s.blank?
-      self.language = 'en'
     end
   end
 
