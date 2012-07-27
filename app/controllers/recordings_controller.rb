@@ -497,7 +497,7 @@ class RecordingsController < ApplicationController
         user.save
       end
     }
-    flash[:notice] = _("Users_have_been_updated")
+    flash[:status] = _("Users_have_been_updated")
     redirect_to :action => :list_users, :page => @page, :s_username => @search_username, :s_first_name => @search_fname, :s_last_name => @search_lname, :s_agr_number => @search_agrnumber, :sub_s => @search_sub, :user_type => @search_type, :s_acc_number => @search_account_number, :s_clientid => @search_clientid and return false
   end
 
