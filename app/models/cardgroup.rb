@@ -338,5 +338,16 @@ class Cardgroup < ActiveRecord::Base
   def free_cards_size
     self.cards ? self.cards.count(:all, :conditions => {:sold => 0}).to_i : 0
   end
+ 
+=begin
+  Check whether card's caller id should be left intact when card's balance reaches zero. 
+  I believe this shouldnt be mentiond here but since there is no other appropriat 
+  place - only mor core is responsible for mangling with callerid, if card's balance would 
+  be set to 0 or less for instance by creating a payment, it would not affect callerid until
+  someone would try to call.
+=end
+  def callerid_leave?
+     self.callerid_leave.to_i == 1
+  end
 
 end

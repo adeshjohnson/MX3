@@ -155,6 +155,13 @@
     <th align="left" id="disable_voucher_row"><%= _('Disable_Voucher_with_same_Number_as_Card_if_Card_is_used?') %></th>
     <td align="right" id="disable_voucher"><%= check_box_tag 'disable_voucher', "1", (@cardgroup.disable_voucher) %></td>
   </tr>
+  <tr class="row1">
+    <th align="left" id="deny_double_use_a_card_row"><%= _('Leave_caller_id_assigned') %>:</th>
+    <td align="right" id="deny_double_use_a_card">
+      <%= radio_button_tag("cardgroup[callerid_leave]", 0, !@cardgroup.callerid_leave?) %> <%= _("No") %>
+      <%= radio_button_tag("cardgroup[callerid_leave]", 1, @cardgroup.callerid_leave?) %> <%= _("Yes") %>
+    </td>
+  </tr>
 </table>
 <br/>
 <% tax = @cardgroup.get_tax %>
