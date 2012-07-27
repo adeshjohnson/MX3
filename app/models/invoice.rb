@@ -2,7 +2,7 @@
 class Invoice < ActiveRecord::Base
   belongs_to :user
   belongs_to :payment
-  has_many :invoicedetails
+  has_many :invoicedetails, :dependent => :destroy
   belongs_to :tax, :dependent => :destroy
 
   before_destroy :check_send
