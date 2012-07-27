@@ -29,6 +29,7 @@ class CardgroupsController < ApplicationController
   def list
     a=check_addon
     return false if !a
+    @show_pin = !(session[:usertype] == "accountant" and session[:acc_callingcard_pin].to_i == 0)
     @allow_manage = !(session[:usertype] == "accountant" and (session[:acc_callingcard_manage].to_i == 0 or session[:acc_callingcard_manage].to_i == 1))
     @allow_read = !(session[:usertype] == "accountant" and (session[:acc_callingcard_manage].to_i == 0))
     if @allow_read == false

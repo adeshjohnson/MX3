@@ -3,25 +3,29 @@
 <% length += 1 if @allow_manage %>
 <% length -= 2 if !can_see_finances? %>
 
-<% if @allow_manage == true and can_see_finances? %>
-    <table width="100%">
-      <tr>
-        <td>
-          <%= link_to b_add + _('New_cardgroup'), :action => 'new' %>
-        </td>
-        <td align="right">
-          <%= link_to_function(b_search + _('Search_for_cards_in_cardgroups'), "Element.toggle('search_details')") %>
-        </td>
-      </tr>
-    </table>
-<% end %>
+<table width="100%">
+  <tr>
+    <% if @allow_manage == true and can_see_finances? %>
+      <td>
+        <%= link_to b_add + _('New_cardgroup'), :action => 'new' %>
+      </td>
+    <% end %>
+    <% if !(session[:usertype] == "accountant" and session[:acc_callingcard_manage].to_i == 0) %>
+      <td align="right">
+        <%= link_to_function(b_search + _('Search_for_cards_in_cardgroups'), "Element.toggle('search_details')") %>
+      </td>
+    <% end %>
+  </tr>
+</table>
 <%= form_tag :action => "search" do %>
     <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
       <br/>
       <%= hidden_field_tag 'search_on', 1 %>
 
       <%= _('Number') %>: <%= text_field_tag 's_number', @options["s_number"], "class" => "input", :size => "15" %>
-      <%= _('PIN') %>: <%= text_field_tag 's_pin', @options["s_pin"], "class" => "input", :size => "15" %>
+      <% if @show_pin == true %>
+        <%= _('PIN') %>: <%= text_field_tag 's_pin', @options["s_pin"], "class" => "input", :size => "15" %>
+      <% end %>
       <%= _('CallerID') %>
       : <%= text_field_tag 's_caller_id', @options[:s_caller_id], "class" => "input", :size => "15" %>
       <%= _('Balance_between') %>

@@ -33,8 +33,10 @@
       <%= _('Number') %>
       : <%= text_field_tag 's_number', @options[:s_number], "class" => "input", :size => "15", :maxlength => @cg.number_length %>
       <%= _('Name') %>: <%= text_field_tag 's_name', @options[:s_name], "class" => "input", :size => "15" %>
-      <%= _('PIN') %>
+      <% if @show_pin == true %>
+        <%= _('PIN') %>
       : <%= text_field_tag 's_pin', @options[:s_pin], "class" => "input", :size => "15", :maxlength => @cg.pin_length %>
+      <% end %>
       <%= _('CallerID') %>: <%= text_field_tag 's_callerid', @options[:s_callerid], "class" => "input", :size => "15" %>
       <%= _('Balance_between') %>
       : <%= text_field_tag 's_balance_min', @options[:s_balance_min], "class" => "input", :size => "7", :maxlength => "10" %>
