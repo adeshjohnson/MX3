@@ -61,6 +61,8 @@
       <br/>
       <%= _('Update_subcodes_from_file') %>: <%= check_box_tag("update_subcodes", 1, false) %>
       <br />
+      <%= _('Update_directions_based_on_country_code') %>: <%= check_box_tag("update_directions", 1, false) %>
+      <br />
     <% end %>
     <br/>
     <table class="maintable" width="70%">
@@ -127,7 +129,7 @@
         <td id="country_value"></td>
       </tr>
       <tr class="row1">
-        <td>   <%= _('Country_code') %>  </td>
+        <td id='Country_code_cell'> <%= _('Country_code') %>  </td>
         <%= render :partial => "import_csv_step_2_select", :locals => {:name => "country_code_id", :value => :imp_cc} %>
         <td></td>
         <td id="country_code_value"></td>
@@ -175,16 +177,36 @@
 <%= _('Next_step') + ": " + _('Column_confirmation') %>
 <script type='text/javascript'>
   Event.observe(window, 'load', function() {
-    //select element ids that are required to be selected.
-    //if you ever add new 'required' select element, then add it's id to this 
-    //assoc array and set it to false(eg smth_id: false). Note that 
-    //'not selected' value should be -1
+    //select element ids that are required to be selected. if you ever add new 'required' 
+    //select element, then add it's id to this  assoc array and set it to false(eg smth_id: false). 
+    //Note that 'not selected' value should be -1
     var required_options = {'prefix_id': false, 'rate_id': false}
 
+    //add event listener to update_directions checkboxr. If it is checked, then country code 
+    //should be required so we add 'country_code_id' to required_options add event listener 
+    //to select element appropriately and trigger change event on prefix_id select element(we 
+    //also could trigger event on rate_id, but not on country_code_id cause it might be not be 
+    //in required_options assoc array)
+    Event.observe($('update_directions'), 'change', function(event) {
+      country_code_required = event.target.checked;
+      if(country_code_required){
+        $('Country_code_cell').innerHTML += '*'
+        required_options['country_code_id'] = ($('country_code_id').value != '-1');
+        Event.observe($('country_code_id'), 'change', validate_selected_options);
+      }else{
+        $('Country_code_cell').innerHTML = $('Country_code_cell').innerHTML.slice(0,-1);
+        delete required_options['country_code_id'];
+        Event.stopObserving($('country_code_id'), 'change', validate_selected_options);
+      }
+      $('prefix_id').fire('change');
+    });
+
+    //main point of this method is to enable submit button if all required options are selected
+    //note that id's of those options are kept in required_options assoc array.
     validate_selected_options = function(event){
       var disable = false;
       required_options[event.target.id] = (event.target.value != '-1');
-      for(key in required_options){
+      for(var key in required_options){
         if(!required_options[key]){
           disable = true;       
           break;
@@ -193,15 +215,16 @@
       $('submit_button').disabled = disable;
     }
 
-    var element_name;
-    //add event listener to select that is required, note that 'not selected' value is -1
-    //and in case(on reaload for instance) browser would change to smth other value, 
-    //we set it to -1 again.
-    for(element_name in required_options){
+    //add event listener to select element that is required, note that 'not selected' value is -1
+    //and in case(on reaload for instance) browser would change to smth other value, we set it to -1 again.
+    for(var element_name in required_options){
       $(element_name).value = '-1'
       Event.observe($(element_name), 'change', validate_selected_options);
     }
 
+    //in case(on reload for instance) browser would check country_code_id we explisitly set it to false
+    $('update_directions').checked = false;
+    //disable submit button cause required options shouldnt be selected
     $('submit_button').disabled = true;
   });
 </script>

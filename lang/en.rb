@@ -4466,6 +4466,7 @@ Localization.define('en') do |l|
   l.store 'Manege_Webphone', 'Manage Webphone'
   l.store 'No_SIP_Device', 'No SIP Device'
   l.store 'Leave_caller_id_assigned', 'Leave CallerID assigned to Card when balance is empty'
+  l.store 'Update_directions_based_on_country_code', 'Update Directions for Destinations based on Country Code'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
