@@ -198,23 +198,27 @@
         delete required_options['country_code_id'];
         Event.stopObserving($('country_code_id'), 'change', validate_selected_options);
       }
-      $('prefix_id').fire('change');
+      $('submit_button').disabled = check_for_not_selected();
     });
 
     //main point of this method is to enable submit button if all required options are selected
     //note that id's of those options are kept in required_options assoc array.
     validate_selected_options = function(event){
-      var disable = false;
       required_options[event.target.id] = (event.target.value != '-1');
+      $('submit_button').disabled = check_for_not_selected();
+    }
+
+    function check_for_not_selected(){
+      var disable = false;
       for(var key in required_options){
+        console.debug(key + ": " + required_options[key])
         if(!required_options[key]){
           disable = true;       
           break;
         }
       }
-      $('submit_button').disabled = disable;
+      return disable;
     }
-
     //add event listener to select element that is required, note that 'not selected' value is -1
     //and in case(on reaload for instance) browser would change to smth other value, we set it to -1 again.
     for(var element_name in required_options){
