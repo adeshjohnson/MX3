@@ -61,7 +61,7 @@
                 <td id="did_<%= rule.id %>" align="center"><%= link_to rule.did.did, :controller => :dids, :action => "edit", :id => rule.did_id if rule.did %> </td>
             <% end %>
             <td align="left" id="owner_<%= rule.id %>">
-              <% if rule.device %>
+              <% if rule.device and rule.device.user %>
                   <% if rule.device.user.owner_id == correct_owner_id %>
                       <%= link_nice_device(rule.device) %>
                   <% else %>
