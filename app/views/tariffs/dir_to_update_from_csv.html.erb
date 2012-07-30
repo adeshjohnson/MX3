@@ -1,0 +1,26 @@
+<table class="maintable" width="100%">
+  <tr>
+    <th><%= _("Prefix") %></th>
+    <th><%= _("Old_Direction_code") %></th>
+    <th><%= _("New_Direction_code") %></th>
+  </tr>
+  <% if  @directions and @directions.size.to_i > 0 %>
+      <% if @csv2.to_i == 0 %>
+          <% @directions.each_with_index { |dst, i| %>
+              <tr class="row<%= (i % 2 + 1).to_s %>">
+                <td><%= dst[0] %></td>
+                <td><%= dst[1][:old_direction_code] %></td>
+                <td><%= dst[1][:new_direction_code] %></td>
+              </tr>
+          <% } %>
+      <% else %>
+          <% @directions.each_with_index { |row, i| %>
+              <tr class="row<%= (i % 2 + 1).to_s %>">
+                <td><%= row["prefix"].to_s %></td>
+                <td><%= row['old_direction_code'].to_s %></td>
+                <td><%= row["new_direction_code"].to_s %></td>
+              </tr>
+          <% } %>
+      <% end %>
+  <% end %>
+</table>
