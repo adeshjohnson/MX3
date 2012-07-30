@@ -45,7 +45,7 @@
 
         <% if (rec_active?) %>
 		
-		      <% if (session[:usertype] == "admin" or session[:usertype] == "accountant")%>
+		      <% if (session[:usertype] == "admin" or session[:usertype] == "accountant" or session[:usertype] == "reseller")%>
 		        <tr>
 		          <td> <%= _('Show_Recordings_to_the_User_for_this_Device') %>: </td>
 		          <td>
