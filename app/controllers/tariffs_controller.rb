@@ -944,10 +944,14 @@ class TariffsController < ApplicationController
       @rate_type, flash[:notice_2] = @tariff.check_types_periods(params)
     end
 
+    logger.fatal 'ffffffffffffffffffffffffffffff'
     if @step == 3
+      logger.fatal 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
       my_debug_time "step 3"
       if session[:file]
+        logger.fatal 'gggggggggggggggggggggggggggggggg'
         if params[:prefix_id] and params[:rate_id] and params[:prefix_id].to_i >= 0 and params[:rate_id].to_i >= 0
+      logger.fatal 'ffffffffffffffffffffff'
           @file = session[:file]
           session[:imp_prefix] = params[:prefix_id].to_i
           session[:imp_rate] = params[:rate_id].to_i
@@ -980,7 +984,8 @@ class TariffsController < ApplicationController
           end
           session[:imp_update_dest_names] = params[:update_dest_names].to_i if admin?
           session[:imp_update_subcodes] = params[:update_subcodes].to_i if admin?
-
+          session[:imp_update_directions] = params[:update_directions].to_i if admin?
+          logger.fatal session.inspect
           #priority over csv
 
           session[:manual_connection_fee] = ""
@@ -1719,6 +1724,7 @@ class TariffsController < ApplicationController
             else
               @optins[:imp_dst] = params[:destination_id].to_i
             end
+            @optins[:imp_update_directions] = params[:update_directions].to_i if admin?
             #priority over csv
 
             @optins[:manual_connection_fee] = ""
@@ -1768,7 +1774,7 @@ class TariffsController < ApplicationController
               @tariff_analize = session["tariff_analize_csv2_#{@tariff.id}".to_sym]
               my_debug_time "step 5"
               if ["admin", "accountant"].include?(session[:usertype])
-                begin
+  #              begin
                   session["tariff_analize_csv2_#{@tariff.id}".to_sym][:created_destination_from_file] = @tariff.create_deatinations(session["tariff_name_csv_#{@tariff.id}".to_sym], session["tariff_import_csv2_#{@tariff.id}".to_sym], session["tariff_analize_csv2_#{@tariff.id}".to_sym])
                   flash[:status] = _('Created_destinations') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:created_destination_from_file]}"
                   if session["tariff_import_csv2_#{@tariff.id}".to_sym][:imp_update_dest_names].to_i == 1
@@ -1779,7 +1785,15 @@ class TariffsController < ApplicationController
                     session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_subcodes_from_file] = @tariff.update_subcodes(session["tariff_name_csv_#{@tariff.id}".to_sym], session["tariff_import_csv2_#{@tariff.id}".to_sym], session["tariff_analize_csv2_#{@tariff.id}".to_sym])
                     flash[:status] += "<br />"+ _('Subcodes_updated') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_subcodes_from_file]}"
                   end
-                rescue Exception => e
+                  if session["tariff_import_csv2_#{@tariff.id}".to_sym][:imp_update_directions].to_i == 1
+                    session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_directions_from_file] = @tariff.update_directions(session["tariff_name_csv_#{@tariff.id}".to_sym], session["tariff_import_csv2_#{@tariff.id}".to_sym], session["tariff_analize_csv2_#{@tariff.id}".to_sym])
+                    flash[:status] += "<br />"+ _('Directions_based_on_country_code_updated') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_directions_from_file]}"
+                  end
+                  if session["tariff_import_csv2_#{@tariff.id}".to_sym][:imp_update_directions].to_i == 1
+                    session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_directions_from_file] = @tariff.update_directions(session["tariff_name_csv_#{@tariff.id}".to_sym], session["tariff_import_csv2_#{@tariff.id}".to_sym], session["tariff_analize_csv2_#{@tariff.id}".to_sym])
+                    flash[:status] += "<br />"+ _('Directions_based_on_country_code_updated') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_directions_from_file]}"                           
+                  end  
+   #             rescue Exception => e
                   my_debug_time e.to_yaml
                   flash[:notice] = _('colission_Please_start_over')
                   my_debug_time "clean start"
@@ -1787,7 +1801,7 @@ class TariffsController < ApplicationController
                   session["temp_tariff_name_csv_#{@tariff.id}".to_sym] = nil
                   my_debug_time "clean done"
                   redirect_to :action => "import_csv2", :id => @tariff.id, :step => "0" and return false
-                end
+    #            end
               else
                 flash[:notice] = _('No_Destinations_Were_Created')
               end
@@ -1904,6 +1918,25 @@ class TariffsController < ApplicationController
       @tariff_id = params[:tariff_id].to_i
       if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id]}".to_sym])
         @dst = ActiveRecord::Base.connection.select_all("SELECT destinations.prefix, col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_dst]} as new_name, destinations.name as dest_name FROM destinations JOIN #{session["tariff_name_csv_#{params[:tariff_id]}".to_sym]} ON (replace(col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]}, '\\r', '') = prefix)  WHERE ned_update = 1 ")
+      end
+    end
+    render(:layout => "layouts/mor_min")
+  end
+
+  def dir_to_update_from_csv
+    @page_title = _('Direction_to_update_from_csv')
+    @file = session[:file]
+    @status = session[:status_array]
+    @csv2= params[:csv2].to_i
+    if @csv2.to_i == 0
+      @dst = session[:dst_to_update_hash]
+    else
+      @tariff_id = params[:tariff_id].to_i
+      if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id]}".to_sym])
+        imp_cc = session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_cc]
+        table_name = session["tariff_name_csv_#{params[:tariff_id]}".to_sym]
+        imp_prefix = session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]
+        @directions = ActiveRecord::Base.connection.select_all("SELECT prefix, destinations.direction_code old_direction_code, replace(col_#{imp_cc}, '\\r', '') new_direction_code from #{table_name} join directions on (replace(col_#{imp_cc}, '\\r', '') = directions.code) join destinations on (replace(col_#{imp_prefix}, '\\r', '') = destinations.prefix) WHERE destinations.direction_code != directions.code;")
       end
     end
     render(:layout => "layouts/mor_min")
