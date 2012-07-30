@@ -145,10 +145,16 @@
       <td align="right" id="disable_voucher">    <%= @cardgroup.disable_voucher ? b_check : b_cross %></td>
     </tr>
 
+    <%i+=1%>
+    <tr class="row<%=(i.to_i % 2).to_i %>">
+      <th align="left"><%= _('Leave_caller_id_assigned') %></th>
+      <td align="right" id="leave_callerid">    <%= @cardgroup.callerid_leave? ? b_check : b_cross %></td>
+    </tr>
+
     <% i+=1 %>
     <tr class="row<%= (i.to_i % 2).to_i %>">
       <th align="left"><%= _('Cards') %></th>
-      <td align="right" id="cards">
+      <td align="right" id="cards" nowrap='nowrap'>
         <%= @cardgroup.cards.size %> <%= link_to("(" + _('View') + ")", :controller => "cards", :action => "list", :cg => @cardgroup, :clean => 1) if @cardgroup.cards.size > 0 %>
         <% if @allow_manage == true %>
             <%= link_to ("(" + b_add + _('Add_cards') + ")").html_safe, :controller => "cards", :action => "new", :cg => @cardgroup %>
