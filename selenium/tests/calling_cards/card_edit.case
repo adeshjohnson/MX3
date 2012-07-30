@@ -293,6 +293,51 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/cards/list?cg=1&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>id=lang_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>0000000001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>0000000002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>id=lang_22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>id=lang_23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -513,6 +558,61 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/cards/list?cg=1&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>id=lang_22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>id=lang_23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>id=lang_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>0000000003</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>0000000004</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>id=lang_24</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>id=lang_25</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -579,12 +679,12 @@
 <tr>
 	<td>type</td>
 	<td>id=start_number</td>
-	<td>0000000001</td>
+	<td>0000000008</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=end_number</td>
-	<td>0000000002</td>
+	<td>0000000008</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -598,7 +698,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/edit/22</td>
+	<td>/billing/cards/edit/26</td>
 	<td></td>
 </tr>
 <tr>
@@ -658,7 +758,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/edit/22</td>
+	<td>/billing/cards/edit/26</td>
 	<td></td>
 </tr>
 <tr>
@@ -703,7 +803,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/edit/22</td>
+	<td>/billing/cards/edit/26</td>
 	<td></td>
 </tr>
 <tr>
@@ -748,7 +848,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/edit/22</td>
+	<td>/billing/cards/edit/26</td>
 	<td></td>
 </tr>
 <tr>
@@ -779,6 +879,51 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Minimal balance: 0.5000 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=3&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>id=lang_26</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>0000000010</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>0000000011</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>id=lang_27</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>id=lang_28</td>
 	<td></td>
 </tr>
 </tbody></table>
