@@ -1,67 +1,67 @@
 <tr>
-  <th class="bottom_border" align="left" colspan=2> <%= _('This_month') %>:</th>
+  <th class="bottom_border" align="left" colspan=2 nowrap="true"> <%= _('This_month') %>:</th>
 </tr>
 <tr>
-  <td><%= _('Calls') %>:</td>
-  <td id="month_calls"><%= @quick_stats[0] %> </td>
+  <td nowrap="true"><%= _('Calls') %>:</td>
+  <td id="month_calls" nowrap="true"><%= @quick_stats[0] %> </td>
 </tr>
 <tr>
-  <td><%= _('Duration') %>:</td>
-  <td id="month_duration"><%= nice_time @quick_stats[1] %> </td>
+  <td nowrap="true"><%= _('Duration') %>:</td>
+  <td id="month_duration" nowrap="true"><%= nice_time @quick_stats[1] %> </td>
 </tr>
 <% if current_user.is_admin? or current_user.is_reseller? %>
     <tr>
-      <td><%= _('Selfcost') %>:</td>
-      <td id="month_selfcost"><%= nice_number(@quick_stats[2].to_f) %></td>
+      <td nowrap="true"><%= _('Selfcost') %>:</td>
+      <td id="month_selfcost" nowrap="true"><%= nice_number(@quick_stats[2].to_f) %></td>
     </tr>
     <tr>
-      <td><%= _('Cost') %>:</td>
-      <td id="month_cost"><%= nice_number(@quick_stats[3].to_f) %></td>
+      <td nowrap="true"><%= _('Cost') %>:</td>
+      <td id="month_cost" nowrap="true"><%= nice_number(@quick_stats[3].to_f) %></td>
     </tr>
     <tr>
-      <td><%= _('Profit') %>:</td>
-      <td id="month_profit"><%= nice_number(@quick_stats[3].to_f - @quick_stats[2].to_f) %></td>
+      <td nowrap="true"><%= _('Profit') %>:</td>
+      <td id="month_profit" nowrap="true"><%= nice_number(@quick_stats[3].to_f - @quick_stats[2].to_f) %></td>
     </tr>
 <% end %>
 <tr>
   <td style="height: 10px"></td>
 </tr>
 <tr>
-  <th class="bottom_border" align="left" colspan=2>                     <%= _('This_day') %>:</th>
+  <th class="bottom_border" align="left" colspan=2 nowrap="true">                     <%= _('This_day') %>:</th>
 </tr>
 <tr>
-  <td><%= _('Calls') %>:</td>
-  <td id="day_calls"><%= @quick_stats[4] %> </td>
+  <td nowrap="true"><%= _('Calls') %>:</td>
+  <td id="day_calls" nowrap="true"><%= @quick_stats[4] %> </td>
 </tr>
 <tr>
-  <td><%= _('Duration') %>:</td>
-  <td id="day_duration"><%= nice_time @quick_stats[5] %> </td>
+  <td nowrap="true"><%= _('Duration') %>:</td>
+  <td id="day_duration" nowrap="true"><%= nice_time @quick_stats[5] %> </td>
 </tr>
 <% if current_user.is_admin? or current_user.is_reseller? %>
     <tr>
-      <td><%= _('Selfcost') %>:</td>
-      <td id="day_selfcost"><%= nice_number(@quick_stats[6].to_f) %></td>
+      <td nowrap="true"><%= _('Selfcost') %>:</td>
+      <td id="day_selfcost" nowrap="true"><%= nice_number(@quick_stats[6].to_f) %></td>
     </tr>
     <tr>
-      <td><%= _('Cost') %>:</td>
-      <td id="day_cost"><%= nice_number(@quick_stats[7].to_f) %></td>
+      <td nowrap="true"><%= _('Cost') %>:</td>
+      <td id="day_cost" nowrap="true"><%= nice_number(@quick_stats[7].to_f) %></td>
     </tr>
     <tr>
-      <td><%= _('Profit') %>:</td>
-      <td id="day_profit"><%= nice_number(@quick_stats[7].to_f - @quick_stats[6].to_f) %></td>
+      <td nowrap="true"><%= _('Profit') %>:</td>
+      <td id="day_profit" nowrap="true"><%= nice_number(@quick_stats[7].to_f - @quick_stats[6].to_f) %></td>
     </tr>
 <% end %>
 
 <% if not current_user.is_admin? %>
     <tr>
-      <td style="height: 10 px"></td>
+      <td style="height: 10px"></td>
     </tr>
     <tr>
-      <th class="bottom_border" align="left" colspan=2> <%= _('Finances') %>:</th>
+      <th class="bottom_border" align="left" colspan=2 nowrap="true"> <%= _('Finances') %>:</th>
     </tr>
     <tr>
-      <td><%= _('Account') %>:</td>
-      <td>
+      <td nowrap="true"><%= _('Account') %>:</td>
+      <td nowrap="true">
         <% if @user.postpaid? %>
             <%= _('Postpaid') %>
         <% else %>
@@ -70,13 +70,13 @@
       </td>
     </tr>
     <tr>
-      <td><%= _('Balance') %>:</td>
-      <td><%= nice_number(@user.balance.to_f  * Currency.count_exchange_rate(@user.currency.name, session[:show_currency])) %> <%= session[:show_currency] %> <%= "(" + nice_number(@user.get_tax.apply_tax(@user.balance.to_f)) + " " + session[:default_currency] + " "+ _('With_TAX') + ")" if @user.get_tax.sum_tax.to_f != 0.to_f %></td>
+      <td nowrap="true"><%= _('Balance') %>:</td>
+      <td nowrap="true"><%= nice_number(@user.balance.to_f  * Currency.count_exchange_rate(@user.currency.name, session[:show_currency])) %> <%= session[:show_currency] %> <%= "(" + nice_number(@user.get_tax.apply_tax(@user.balance.to_f)) + " " + session[:default_currency] + " "+ _('With_TAX') + ")" if @user.get_tax.sum_tax.to_f != 0.to_f %></td>
     </tr>
     <% if @user.postpaid? %>
         <tr>
-          <td><%= _('Credit') %>:</td>
-          <td><%= nice_credit(@user, session[:show_currency]) %>
+          <td nowrap="true"><%= _('Credit') %>:</td>
+          <td nowrap="true"><%= nice_credit(@user, session[:show_currency]) %>
             <% if not @user.credit_unlimited? %>
                 <%= session[:show_currency] %>
             <% end %>
@@ -90,12 +90,12 @@
       <td style="height: 10px"></td>
     </tr>
     <tr>
-      <th class="bottom_border" align="left" colspan=2> <%= _('Now') %>:</th>
+      <th class="bottom_border" align="left" colspan=2 nowrap="true"> <%= _('Now') %>:</th>
     </tr>
     <tr>
-      <td><%= _('Active_Calls') %>:</td>
-      <td>
-        <div id="active_calls_count"><%= link_to(Activecall.count_for_user(current_user), {:controller => "stats", :action => "active_calls"}, {:id => "active_calls_link"}) %></div>
+      <td nowrap="true"><%= _('Active_Calls') %>:</td>
+      <td nowrap="true">
+        <div id="active_calls_count" nowrap="true"><%= link_to(Activecall.count_for_user(current_user), {:controller => "stats", :action => "active_calls"}, {:id => "active_calls_link"}) %></div>
       </td>
     </tr>
 <% end %>
