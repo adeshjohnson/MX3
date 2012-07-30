@@ -175,8 +175,15 @@ class Subscription < ActiveRecord::Base
     case service.servicetype
       when "one_time_fee"
         amount = service.price if end_time > activation_end
-      when "flat_rate", "periodic_fee"
+      when "flat_rate" 
         amount = price_for_period(activation_start, end_time).to_f
+      when "periodic_fee"
+        case self.service.periodtype 
+          when 'day'
+            amount = self.subscriptions_paid_this_month
+          when 'month'
+            amount = price_for_period(activation_start, end_time).to_f
+        end
     end
     if amount > 0
       Payment.subscription_payment(user, amount * -1)
@@ -185,6 +192,18 @@ class Subscription < ActiveRecord::Base
     else
       return false
     end
+  end
+ 
+=begin
+  Counts amount that was paid during current month.
+  Note that amount is in system currency and beggining of month is in system timezone
+ 
+  *Returns*
+  +amount+ amount(float) that was paid diring current month for this subscription, might be 0.
+=end
+  def subscriptions_paid_this_month
+    actions = Action.find(:first, :select=>'SUM(data2) AS amount', :conditions=>"action = 'subscription_paid' AND target_id = #{self.id} AND date > '#{Time.now.beginning_of_month.to_s(:db)}'")
+    return actions.amount.to_f
   end
 
   def return_money_month
