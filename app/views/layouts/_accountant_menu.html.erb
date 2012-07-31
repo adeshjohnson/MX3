@@ -32,7 +32,7 @@
         acc_menu.add(37,33,'<%= _('Vouchers') %>','<%= Web_Dir %>/vouchers/vouchers');
         <% end %>
         <% if session[:acc_manage_subscriptions_opt_1].to_i > 0 or session[:acc_services_manage].to_i > 0 %>
-        <% if session[:acc_services_manage] > 0 %>
+        <% if session[:acc_services_manage].to_i > 0 %>
         acc_menu.add(38,33,'<%= _('Services') %>','<%= Web_Dir %>/services/list');
         <% else %>
         acc_menu.add(38,33,'<%= _('Services') %>');

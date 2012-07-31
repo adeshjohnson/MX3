@@ -52,7 +52,7 @@
       </tr>
       <% @res3.each_with_index { |r, i| %>
           <tr>
-            <% if session[:acc_user_manage] > 0 %>
+            <% if session[:acc_user_manage].to_i > 0 %>
                 <%if r['first_name'].length + r['last_name'].length > 0 %>
                     <td><%= link_to r['first_name'].to_s + ' ' + r['last_name'].to_s, :controller => "users", :action => "edit", :id =>r['id'], :return_to_controller=>'stats', :return_to_action=>'subscriptions_stats' %></td>
                 <%else%>
