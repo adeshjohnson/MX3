@@ -1107,7 +1107,7 @@ class DevicesController < ApplicationController
     #      @add = 1
     #      @devices = Device.find(:all, :select=>"devices.*", :joins=>"LEFT JOIN callerids ON (callerids.device_id = devices.id)",:conditions => ["user_id = ? AND callerids.id IS NULL", @num]) if @num.to_i != -1
     #    else
-    @devices = Device.find(:all, :conditions => ["user_id = ? AND name not like 'mor_server_%'", @num]) if @num.to_i != -1
+    @devices = Device.find(:all, :conditions => ["user_id = ? AND name not like 'mor_server_%' AND name NOT LIKE 'prov%'", @num]) if @num.to_i != -1
     #    end
 
     if params[:add]

@@ -1119,12 +1119,15 @@ class Device < ActiveRecord::Base
 =begin
   Check whether device belongs to provider. This would mean that
   device cannot have user associated with it.
+  UPDATE: Seems like that's not true, if provider is assigned to user,  
+  then provider device's user_id is set to that user. Support said that 
+  they just check device.name 
 
   *Returns*
   +boolean+ true if device belongs to provider, othervise false
 =end
   def belongs_to_provider?
-    self.user_id == -1
+    self.user_id == -1 or self.name =~ /^prov/
   end
 
 =begin

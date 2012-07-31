@@ -29,6 +29,10 @@ class Locationrule < ActiveRecord::Base
       errors.add(:cut_add, _("Cut_and_Add_canot_be_empty"))
       return false
     end
+    if device and device.belongs_to_provider? 
+      errors.add(:device, _("Cannot_assign_device")) 
+      return false 
+    end 
   end
 
   validates_uniqueness_of :cut, :scope => [:add, :location_id], :message => _('Rule_Must_Be_Unique'), :if => :check_min_and_max

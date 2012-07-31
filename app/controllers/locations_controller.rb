@@ -74,7 +74,7 @@ in before filter : rule (:find_location_rule)
     else
       @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group => 'users.id')
     end
-    @devices = Device.find(:all, :conditions => ["user_id =? AND name not like 'mor_server_%'", @rule.device.user_id]) if @rule.device
+    @devices = Device.find(:all, :conditions => ["user_id =? AND name not like 'mor_server_%' AND name not like 'prov%'", @rule.device.user_id]) if @rule.device
     cond = ["dids.id > 0"]
     var = []
     cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller'
