@@ -1784,7 +1784,7 @@ class ApplicationController < ActionController::Base
     # context - usually == "mor_cb_dst"
     # extension - who receives call second
     # callerid - what CallerID to apply to both calls
-    # var2 - additional variables, example: "__MOR_C2C_CALL_ID=123|__MOR_C2C_FIRST_DIAL=company"
+    # var2 - additional variables
     # server_id - on which server activate callback
 
     # --------- USING AMI ----------
