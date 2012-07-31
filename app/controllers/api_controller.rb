@@ -3135,7 +3135,7 @@ class ApiController < ApplicationController
               doc.statement("type" => type) {
                 doc.status(data.status)
                 doc.count(data.count)
-                if type == 'payments'
+                if type == 'payments' or type == 'credit_notes'
                   doc.price(nice_number(data.price))
                   doc.price_with_vat(nice_number(data.price_with_vat))
                 else
