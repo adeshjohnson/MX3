@@ -45,14 +45,14 @@
         <th id="sub_activation_start" align="center"><%= nice_list_order('activation_start', _('Activation_start'), @options) %></th>
         <th id="sub_activation_end" align="center"><%= nice_list_order('activation_end', _('Activation_end'), @options) %></th>
         <th id="sub_time_left" align="center"><%= _('Time_left') %></th>
-        <% if session[:acc_manage_subscriptions_opt_1].to_i > 1 %>
+        <% if session[:acc_manage_subscriptions_opt_1].to_i > 1 or (@allow_edit and session[:usertype] != 'accountant') %>
             <th id="sub_edit"></th>
             <th id="sub_delete"></th>
         <% end %>
       </tr>
       <% @res3.each_with_index { |r, i| %>
           <tr>
-            <% if session[:acc_user_manage].to_i > 0 %>
+            <% if session[:acc_user_manage].to_i > 0 or session[:usertype] != 'accountant' %>
                 <%if r['first_name'].length + r['last_name'].length > 0 %>
                     <td><%= link_to r['first_name'].to_s + ' ' + r['last_name'].to_s, :controller => "users", :action => "edit", :id =>r['id'], :return_to_controller=>'stats', :return_to_action=>'subscriptions_stats' %></td>
                 <%else%>
@@ -74,7 +74,7 @@
             <td id="activation_start_<%= r['id'] %>" align="center"> <%= nice_date_time r['activation_start'] %> </td>
             <td id="activation_end_<%= r['id'] %>" align="center"> <%= nice_date_time r['activation_end'] %> </td>
             <td id="time_left_<%= r['id'] %>" align="center"> <%= nice_time r['time_left'] if r['servicetype'] == "flat_rate" %></td>
-            <% if session[:acc_manage_subscriptions_opt_1].to_i > 1 %>
+            <% if session[:acc_manage_subscriptions_opt_1].to_i > 1 or (@allow_edit and session[:usertype] != 'accountant') %>
                 <td id="edit_<%= r['id'] %>" align="center"><%= link_to(b_edit, {:controller => "services", :action => 'subscription_edit', :id => r['subscription_id']}, :id=>"edit_link_" + r['id'].to_s) %></td>
                 <td id="destroy_<%= r['id'] %>" align="center"><%= link_to(b_delete, {:controller => "services", :action => 'subscription_confirm_destroy', :id => r['subscription_id'] }, :id=>"destroy_link_" + r['id'].to_s) %></td>
             <% end %>

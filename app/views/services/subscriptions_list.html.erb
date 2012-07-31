@@ -1,5 +1,5 @@
 <% if @allow_read %>
-    <% if session[:acc_user_manage].to_i > 0 %>
+    <% if session[:acc_user_manage].to_i > 0 or session[:usertype] != 'accountant' %>
         <div class="nb"><%= b_user + _('user') %>: <%= link_nice_user(@user) %> </div>
     <% else %>
         <div class="nb"><%= b_user + _('user') %>: <%= nice_user(@user) %> </div>
@@ -24,7 +24,7 @@
       </tr>
       <% @subs.each_with_index { |sub, i| %>
           <tr id="line_<%= sub.id %>" class="row<%= (i % 2 + 1).to_s %>">
-            <% if session[:acc_services_manage].to_i > 0%>
+            <% if session[:acc_services_manage].to_i > 0 or session[:usertype] != 'accountant' %>
                 <td id="service_name_<%= sub.id %>" align="left"><%= link_to(sub.service.name, {:action => "list"}, :id => "service_name_link_"+ sub.id.to_s) %></td>
             <% else %>
                 <td id="service_name_<%= sub.id %>" align="left"><%= sub.service.name %></td>
