@@ -19,24 +19,27 @@
         <% end %>
 
         <% if session[:acc_services_manage].to_i > 0 or session[:acc_invoices_manage].to_i > 0 or can_see_finances? or session[:acc_manage_subscriptions_opt_1].to_i > 0 %>
-        acc_menu.add(33, 0, '<%= _('Accounting') %>');
-        <% if session[:acc_services_manage].to_i > 0 %>
-        acc_menu.add(34, 33, '<%= _('Services') %>', '<%= Web_Dir %>/services/list');
-        <% end %>
+        acc_menu.add(33,0,'<%= _('Accounting') %>');
         <% if session[:acc_invoices_manage].to_i > 0 %>
-        acc_menu.add(35, 33, '<%= _('Invoices') %>', '<%= Web_Dir %>/accounting/invoices')
+        acc_menu.add(34,33,'<%= _('Invoices') %>','<%= Web_Dir %>/accounting/invoices')
         <% if mor_11_extend? %>
-        acc_menu.add(31, 33, '<%= _('Credit_notes') %>', '<%= Web_Dir %>/credit_note/list');
-        acc_menu.add(32, 33, '<%= _('Financial_statements') %>', '<%= Web_Dir %>/accounting/financial_statements');
+        acc_menu.add(31,33,'<%= _('Credit_notes') %>','<%= Web_Dir %>/credit_note/list');
+        acc_menu.add(32,33,'<%= _('Financial_statements') %>','<%= Web_Dir %>/accounting/financial_statements');
         <% end %>
         <% end %>
         <% if can_see_finances? %>
-        acc_menu.add(36, 33, '<%= _('Payments') %>', '<%= Web_Dir %>/payments/list');
-        acc_menu.add(37, 33, '<%= _('Vouchers') %>', '<%= Web_Dir %>/vouchers/vouchers');
+        acc_menu.add(36,33,'<%= _('Payments') %>','<%= Web_Dir %>/payments/list');
+        acc_menu.add(37,33,'<%= _('Vouchers') %>','<%= Web_Dir %>/vouchers/vouchers');
+        <% end %>
+        <% if session[:acc_manage_subscriptions_opt_1].to_i > 0 or session[:acc_services_manage].to_i > 0 %>
+        <% if session[:acc_services_manage] > 0 %>
+        acc_menu.add(38,33,'<%= _('Services') %>','<%= Web_Dir %>/services/list');
+        <% else %>
+        acc_menu.add(38,33,'<%= _('Services') %>');
         <% end %>
         <% if session[:acc_manage_subscriptions_opt_1].to_i > 0 %>
-        acc_menu.add(38, 33, '<%= _('Services') %>', '<%= Web_Dir %>/services/list');
-        acc_menu.add(39, 38, '<%= _('Subscriptions') %>', '<%= Web_Dir %>/services/subscriptions');
+        acc_menu.add(39,38,'<%= _('Subscriptions') %>','<%= Web_Dir %>/services/subscriptions');
+        <% end %>
         <% end %>
         <% end %>
 

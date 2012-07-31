@@ -1,5 +1,9 @@
 <% if @allow_read %>
-    <div class="nb"><%= b_user + _('user') %>: <%= link_nice_user(@user) %> </div>
+    <% if session[:acc_user_manage] > 0 %>
+        <div class="nb"><%= b_user + _('user') %>: <%= link_nice_user(@user) %> </div>
+    <% else %>
+        <div class="nb"><%= b_user + _('user') %>: <%= nice_user(@user) %> </div>
+    <% end %>
     <br>
 
     <table width="100%" class="maintable">
@@ -20,7 +24,11 @@
       </tr>
       <% @subs.each_with_index { |sub, i| %>
           <tr id="line_<%= sub.id %>" class="row<%= (i % 2 + 1).to_s %>">
-            <td id="service_name_<%= sub.id %>" align="left"><%= link_to(sub.service.name, {:action => "list"}, :id => "service_name_link_"+ sub.id.to_s) %></td>
+            <% if session[:acc_services_manage] > 0%>
+                <td id="service_name_<%= sub.id %>" align="left"><%= link_to(sub.service.name, {:action => "list"}, :id => "service_name_link_"+ sub.id.to_s) %></td>
+            <% else %>
+                <td id="service_name_<%= sub.id %>" align="left"><%= sub.service.name %></td>
+            <% end %>
             <% if can_see_finances? %>
                 <td id="service_price_<%= sub.id %>" align="right"> <%= nice_number sub.service.price %> </td>
             <% end %>
