@@ -1030,22 +1030,23 @@ class User < ActiveRecord::Base
     calls_price = 0
     zero_calls_sql = invoice_zero_calls_sql
     up = SqlExport.user_price_sql
-    #val = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.src_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
+  
     val = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls WHERE disposition = 'ANSWERED' and calls.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
-    val2 = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.dst_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
-    #MorLog.my_debug("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.src_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};", 1)
-    MorLog.my_debug("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls WHERE disposition = 'ANSWERED' and calls.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};", 1)
-    MorLog.my_debug("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.dst_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};", 1)
+    
+    #commenting this out, because SQL is very slow and logic is wrong
+    #val2 = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.dst_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
+    #MorLog.my_debug("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls WHERE disposition = 'ANSWERED' and calls.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};", 1)
+    #MorLog.my_debug("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls JOIN devices ON (calls.dst_device_id = devices.id) WHERE disposition = 'ANSWERED' and devices.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};", 1)
 
     if val
       total_calls += val[0]['calls'].to_i
       calls_price += val[0]['price'].to_f
     end
 
-    if val2
-      total_calls += val2[0]['calls'].to_i
-      calls_price += val2[0]['price'].to_f
-    end
+    #if val2
+    #  total_calls += val2[0]['calls'].to_i
+    #  calls_price += val2[0]['price'].to_f
+    #end
 
     return total_calls.to_i, calls_price.to_f
   end
