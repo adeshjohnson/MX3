@@ -63,6 +63,11 @@
 </tr>
 <tr>
 	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_9']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>api_allow_registration</td>
 	<td></td>
 </tr>
@@ -85,6 +90,106 @@
 	<td>type</td>
 	<td>api_secret_key</td>
 	<td>123450</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>wholesale_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>wholesale_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>123450</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>wholesale_rspro</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>wholesale_rspro1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>123450</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -164,9 +269,9 @@
 	<td>EGP</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=destination_group_name</td>
+	<td>assertTextPresent</td>
 	<td>Afghanistan</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -179,9 +284,9 @@
 	<td>1</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=tariff_rate</td>
+	<td>assertTextPresent</td>
 	<td>0.567</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -295,9 +400,9 @@
 	<td>CRC</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=direction</td>
+	<td>assertTextPresent</td>
 	<td>Afghanistan</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -369,14 +474,14 @@
 	<td>CRC</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=destination_group_name</td>
+	<td>assertTextPresent</td>
 	<td>Afghanistan</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=tariff_rate</td>
+	<td>assertTextPresent</td>
 	<td>0.533</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -428,19 +533,19 @@
 	<td>user</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=destination_group_name</td>
+	<td>assertTextPresent</td>
 	<td>Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>0.4023</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>css=duration</td>
 	<td>Infinity</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=tariff_rate</td>
-	<td>0.4023</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -465,9 +570,9 @@
 	<td>CRC</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=direction</td>
+	<td>assertTextPresent</td>
 	<td>Afghanistan</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -502,14 +607,14 @@
 	<td>CRC</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=destination_group_name</td>
+	<td>assertTextPresent</td>
 	<td>Afghanistan</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=tariff_rate</td>
+	<td>assertTextPresent</td>
 	<td>0.533</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertNotText</td>
@@ -532,9 +637,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertNotText</td>
-	<td>css=tariff_rate</td>
+	<td>assertTextNotPresent</td>
 	<td>0.4832</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -564,9 +669,9 @@
 	<td>USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=direction</td>
+	<td>assertTextPresent</td>
 	<td>Afghanistan</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -579,9 +684,9 @@
 	<td>Wholesale_wres_user_tariff</td>
 </tr>
 <tr>
-	<td>assertNotText</td>
-	<td>css=tariff_rate</td>
+	<td>assertTextNotPresent</td>
 	<td>0.4832</td>
+	<td></td>
 </tr>
 <!--#2 hash-->
 <!--user_reseller tariff-->
@@ -606,9 +711,9 @@
 	<td>NLG</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=destination_group_name</td>
+	<td>assertTextPresent</td>
 	<td>Afghanistan</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -621,9 +726,14 @@
 	<td>minute</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=tariff_rate</td>
+	<td>assertTextPresent</td>
+	<td>Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>0.4023</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertNotText</td>
@@ -646,9 +756,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertNotText</td>
-	<td>css=tariff_rate</td>
+	<td>assertTextNotPresent</td>
 	<td>0.4832</td>
+	<td></td>
 </tr>
 <!--#2 hash-->
 <!--user_reseller tariff-->
@@ -688,9 +798,14 @@
 	<td>Wholesale_wres_user_tariff</td>
 </tr>
 <tr>
-	<td>assertNotText</td>
-	<td>css=tariff_rate</td>
-	<td>0.48</td>
+	<td>assertTextPresent</td>
+	<td>Afghanistan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>0.4832</td>
+	<td></td>
 </tr>
 <!--incorrect hash-->
 <tr>
