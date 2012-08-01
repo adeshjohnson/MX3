@@ -1081,10 +1081,19 @@ class User < ActiveRecord::Base
     total_calls = 0
     calls_price = 0
 
+    # this sql is SLOOOOOWWWW on DB with millions of calls, time goes over 45s, OUCH!!!
+    #sql = "SELECT count(calls.id) as calls, #{SqlExport.replace_price("SUM(#{SqlExport.user_price_sql})", {:reference => 'price'})}
+    #              FROM calls
+    #              JOIN devices ON (calls.dst_device_id = devices.id)
+    #              WHERE disposition = 'ANSWERED' AND calldate BETWEEN '#{period_start}' AND '#{period_end}' AND devices.user_id = #{id} AND calls.did_price > 0;"
+
+    # what is really sad - that this does not calculate invoice calls correctly at all....
+    # no need to include calls.user_price + calls.did_inc_price into Incoming RECEIVED calls
+
+    # this sql uses calls.dst_user_id field which allows increase speed a lot
     sql = "SELECT count(calls.id) as calls, #{SqlExport.replace_price("SUM(#{SqlExport.user_price_sql})", {:reference => 'price'})}
                   FROM calls
-                  JOIN devices ON (calls.dst_device_id = devices.id)
-                  WHERE disposition = 'ANSWERED' AND calldate BETWEEN '#{period_start}' AND '#{period_end}' AND devices.user_id = #{id} AND calls.did_price > 0;"
+                  WHERE disposition = 'ANSWERED' AND calldate BETWEEN '#{period_start}' AND '#{period_end}' AND calls.dst_user_id = #{id}> 0;"
 
     res = ActiveRecord::Base.connection.select_all(sql)
 
@@ -1104,10 +1113,16 @@ class User < ActiveRecord::Base
     total_calls = 0
     calls_price = 0
 
-    sql = "SELECT count(calls.id) as calls, #{SqlExport.replace_price("SUM(#{SqlExport.user_price_sql})", {:reference => 'price'})}
+    # this sql is SLOOOOOWWWW on DB with millions of calls, time goes over 45s, OUCH!!!
+    #sql = "SELECT count(calls.id) as calls, #{SqlExport.replace_price("SUM(#{SqlExport.user_price_sql})", 'price')}
+    #              FROM calls
+    #              JOIN devices ON (calls.src_device_id = devices.id)
+    #              WHERE disposition = 'ANSWERED' AND calldate BETWEEN '#{period_start}' AND '#{period_end}' AND devices.user_id = #{id} AND calls.did_inc_price > 0;"
+
+    # this sql uses calls.dst_user_id field which allows increase speed a lot
+    sql = "SELECT count(calls.id) as calls, #{SqlExport.replace_price("SUM(#{SqlExport.user_price_sql})", 'price')}
                   FROM calls
-                  JOIN devices ON (calls.src_device_id = devices.id)
-                  WHERE disposition = 'ANSWERED' AND calldate BETWEEN '#{period_start}' AND '#{period_end}' AND devices.user_id = #{id} AND calls.did_inc_price > 0;"
+                  WHERE disposition = 'ANSWERED' AND calldate BETWEEN '#{period_start}' AND '#{period_end}' AND calls.dst_user_id = #{id} AND calls.did_inc_price > 0;" 
 
     res = ActiveRecord::Base.connection.select_all(sql)
 
