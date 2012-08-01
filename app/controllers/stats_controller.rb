@@ -22,6 +22,13 @@ class StatsController < ApplicationController
     c.instance_variable_set :@allow_edit, true
   }
 
+  before_filter(:only => [:subscriptions_stats]) { |c|
+    allow_read, allow_edit = c.check_read_write_permission( [:subscriptions_stats], [], {:role => "accountant", :right => :acc_manage_subscriptions_opt_1})
+    c.instance_variable_set :@allow_read, allow_read
+    c.instance_variable_set :@allow_edit, allow_edit
+    true
+  }
+
   def index
     user_stats
     render :action => "user_stats"
