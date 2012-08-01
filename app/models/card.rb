@@ -129,7 +129,7 @@ class Card < ActiveRecord::Base
 
     unless conditions['s_number'].empty?
       cond << "number LIKE ?"
-      vars << "#{conditions['s_number']}%"
+      vars << "%#{conditions['s_number']}%"
     end
 
     unless conditions['s_pin'].empty?
