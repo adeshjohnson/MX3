@@ -1789,10 +1789,6 @@ class TariffsController < ApplicationController
                     session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_directions_from_file] = @tariff.update_directions(session["tariff_name_csv_#{@tariff.id}".to_sym], session["tariff_import_csv2_#{@tariff.id}".to_sym], session["tariff_analize_csv2_#{@tariff.id}".to_sym])
                     flash[:status] += "<br />"+ _('Directions_based_on_country_code_updated') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_directions_from_file]}"
                   end
-                  if session["tariff_import_csv2_#{@tariff.id}".to_sym][:imp_update_directions].to_i == 1
-                    session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_directions_from_file] = @tariff.update_directions(session["tariff_name_csv_#{@tariff.id}".to_sym], session["tariff_import_csv2_#{@tariff.id}".to_sym], session["tariff_analize_csv2_#{@tariff.id}".to_sym])
-                    flash[:status] += "<br />"+ _('Directions_based_on_country_code_updated') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_directions_from_file]}"                           
-                  end  
                 rescue Exception => e
                   my_debug_time e.to_yaml
                   flash[:notice] = _('colission_Please_start_over')
