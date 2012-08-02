@@ -1774,7 +1774,7 @@ class TariffsController < ApplicationController
               @tariff_analize = session["tariff_analize_csv2_#{@tariff.id}".to_sym]
               my_debug_time "step 5"
               if ["admin", "accountant"].include?(session[:usertype])
-  #              begin
+                begin
                   session["tariff_analize_csv2_#{@tariff.id}".to_sym][:created_destination_from_file] = @tariff.create_deatinations(session["tariff_name_csv_#{@tariff.id}".to_sym], session["tariff_import_csv2_#{@tariff.id}".to_sym], session["tariff_analize_csv2_#{@tariff.id}".to_sym])
                   flash[:status] = _('Created_destinations') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:created_destination_from_file]}"
                   if session["tariff_import_csv2_#{@tariff.id}".to_sym][:imp_update_dest_names].to_i == 1
@@ -1793,7 +1793,7 @@ class TariffsController < ApplicationController
                     session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_directions_from_file] = @tariff.update_directions(session["tariff_name_csv_#{@tariff.id}".to_sym], session["tariff_import_csv2_#{@tariff.id}".to_sym], session["tariff_analize_csv2_#{@tariff.id}".to_sym])
                     flash[:status] += "<br />"+ _('Directions_based_on_country_code_updated') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_directions_from_file]}"                           
                   end  
-   #             rescue Exception => e
+                rescue Exception => e
                   my_debug_time e.to_yaml
                   flash[:notice] = _('colission_Please_start_over')
                   my_debug_time "clean start"
@@ -1801,7 +1801,7 @@ class TariffsController < ApplicationController
                   session["temp_tariff_name_csv_#{@tariff.id}".to_sym] = nil
                   my_debug_time "clean done"
                   redirect_to :action => "import_csv2", :id => @tariff.id, :step => "0" and return false
-    #            end
+                end
               else
                 flash[:notice] = _('No_Destinations_Were_Created')
               end
