@@ -38,24 +38,13 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/quickforwards_rules/settings</td>
 	<td></td>
 </tr>
-<!--išskleisti meniu punktą DID-->
 <tr>
-	<td>assertText</td>
-	<td>id=ssettings_menu31</td>
-	<td>Settings</td>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/quickforwards_rules/settings')]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
@@ -145,7 +134,7 @@
 <tr>
 	<td>type</td>
 	<td>id=id</td>
-	<td>1001</td>
+	<td>280</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -165,7 +154,7 @@
 <tr>
 	<td>type</td>
 	<td>id=id</td>
-	<td>1002</td>
+	<td>281</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

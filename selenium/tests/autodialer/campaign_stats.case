@@ -284,7 +284,7 @@
 <tr>
 	<td>type</td>
 	<td>id=campaign_wait_time</td>
-	<td>12</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -303,7 +303,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please enter wait time higher or equal to 30</td>
+	<td>Please enter wait time higher or equal to 10</td>
 	<td></td>
 </tr>
 <tr>
@@ -551,16 +551,7 @@
 	<td>id=campaign_callerid</td>
 	<td>370</td>
 </tr>
-<tr>
-	<td>assertNotText</td>
-	<td>name=campaign[device_id]</td>
-	<td>IAX2/101 IAX2/1002 IAX2/103 IAX2/104 IAX2/108</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>name=campaign[device_id]</td>
-	<td>IAX2/103 IAX2/108</td>
-</tr>
+<!--<tr> 	<td>assertNotText</td> 	<td>name=campaign[device_id]</td> 	<td>IAX2/101 IAX2/1002 IAX2/103 IAX2/104 IAX2/108</td> </tr> <tr> 	<td>assertText</td> 	<td>name=campaign[device_id]</td> 	<td>IAX2/103 IAX2/108</td> </tr>-->
 <tr>
 	<td>select</td>
 	<td>name=campaign[device_id]</td>
