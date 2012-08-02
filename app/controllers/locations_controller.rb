@@ -97,7 +97,7 @@ in before filter : rule (:find_location_rule)
     @rule.tariff_id = params[:tariff] if params[:tariff]
     @rule.lcr_id = params[:lcr] if params[:lcr]
     @rule.did_id = params[:did] if params[:did]
-    @rule.device_id = params[:device_id_from_js] if params[:device_id_from_js]
+    @rule.device_id = params[:s_device] ? params[:s_device] : (params[:device_id_from_js] if params[:device_id_from_js])
     @rule.save ? flash[:status] = _('Rule_updated') : flash_errors_for(_('Rule_not_updated'), @rule)
     redirect_to :action => 'location_rules', :id => @rule.location_id
   end
