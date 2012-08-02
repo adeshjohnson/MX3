@@ -82,13 +82,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=user_spy_device_id</td>
-	<td>label=SIP/1001</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td>assertElementNotPresent</td>
+	<td>id=user[spy_device_id]</td>
 	<td></td>
 </tr>
 <tr>
@@ -117,19 +112,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertElementNotPresent</td>
+	<td>id=user[spy_device_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>ChanSpy Device:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertText</td>
 	<td>id=user_spy_device_id</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>id=user_spy_device_id</td>
-	<td>Not selected IAX2/103</td>
+	<td>Not selected IAX2/101 IAX2/1002 IAX2/103 IAX2/104 SIP/1001</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -158,11 +158,16 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelected</td>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelected</td>
 	<td>id=user_spy_device_id</td>
 	<td>IAX2/103</td>
 </tr>
@@ -177,28 +182,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForPopUp</td>
-	<td>new_window</td>
-	<td>30000</td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/users/edit/2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>id=user_spy_device_id</td>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
+	<td>waitForElementPresent</td>
 	<td>id=user_spy_device_id</td>
-	<td>label=FAX/102</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -207,58 +202,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>id=user_spy_device_id</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=user_spy_device_id</td>
-	<td>label=IAX2/104</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
-	<td>/billing/devices/show_devices/4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Add new device</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=device_description</td>
-	<td>device_acc</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/edit/4</td>
+	<td>/billing/users/personal_details</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>id=user_spy_device_id</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=user_spy_device_id</td>
-	<td>label=SIP/1001</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -297,9 +247,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelected</td>
+	<td>assertText</td>
 	<td>id=user_spy_device_id</td>
-	<td>FAX/102</td>
+	<td>Not selected IAX2/101 FAX/102 IAX2/1002</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -317,7 +267,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelected</td>
+	<td>assertSelected</td>
 	<td>id=user_spy_device_id</td>
 	<td>IAX2/1002</td>
 </tr>
@@ -336,11 +286,6 @@
 	<td>css=img[alt=&quot;Sound&quot;]</td>
 	<td></td>
 </tr>
-<tr>
-	<td>waitForPopUp</td>
-	<td>new_window</td>
-	<td>30000</td>
-</tr>
 <!--spy resellers user-->
 <tr>
 	<td>open</td>
@@ -348,9 +293,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>css=td</td>
-	<td>Don't be so smart...</td>
+	<td>verifyText</td>
+	<td>id=notice</td>
+	<td>You are not authorized to view this page</td>
 </tr>
 <!--spy admin-->
 <tr>
@@ -410,14 +355,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelected</td>
+	<td>assertText</td>
 	<td>id=user_spy_device_id</td>
-	<td>IAX2/104</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=form &gt; table &gt; tbody &gt; tr &gt; td</td>
-	<td></td>
+	<td>Not selected IAX2/104 IAX2/105</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -592,21 +532,6 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/users/edit/4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>ChanSpy Device:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>id=user_spy_device_id</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -746,7 +671,7 @@
 	<td>Monitorings</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=disable_chanspy</td>
 	<td>off</td>
 </tr>
@@ -791,7 +716,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=disable_chanspy</td>
 	<td>on</td>
 </tr>
@@ -816,7 +741,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=disable_chanspy</td>
 	<td>off</td>
 </tr>
@@ -1326,7 +1251,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=disable_chanspy</td>
 	<td>off</td>
 </tr>
@@ -1381,98 +1306,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=disable_chanspy</td>
 	<td>off</td>
 </tr>
 <tr>
 	<td>open</td>
 	<td>/billing/users/edit/0</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>ChanSpy Device:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>id=user_spy_device_id</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/edit/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>ChanSpy Device:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>id=user_spy_device_id</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/edit/3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>ChanSpy Device:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>id=user_spy_device_id</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/monitorings/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=disable_chanspy</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Monitorings settings were saved</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyValue</td>
-	<td>id=disable_chanspy</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/edit/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>ChanSpy Device:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>id=user_spy_device_id</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/edit/3</td>
 	<td></td>
 </tr>
 <tr>
