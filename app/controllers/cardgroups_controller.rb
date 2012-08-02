@@ -81,11 +81,11 @@ class CardgroupsController < ApplicationController
         "s_sold" => "",
         "s_caller_id" => ''
     }
+    @options.merge!(session[:cardgroup_search_options]).merge!(params.slice(*@options.keys))
     [:s_number, :s_pin, :s_caller_id, :s_balance_min, :s_balance_max].each { |key|
       @options[key] = params[key] || @options[key] || ""
       params[key] = @options[key].to_s.strip
     }
-    @options.merge!(session[:cardgroup_search_options]).merge!(params.slice(*@options.keys))
     session[:cardgroup_search_options] = @options
     @page = params[:page].to_i
     @cards, @card_count = Card.search(corrected_user_id, @options, {:page => @page, :per_page => session[:items_per_page]})
