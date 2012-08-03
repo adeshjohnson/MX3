@@ -1,0 +1,1855 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>cc_search</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">cc_search</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<!--As admin check weather there's no column named 'Details' in cardgroups/search -->
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=payment_header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_name</td>
+	<td>admins</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_callerid</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_language</td>
+	<td>ru</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=pin_2</td>
+	<td>9812</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=number_2</td>
+	<td>1111111001</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=name_2</td>
+	<td>admins</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=callerid_2</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=balance_2</td>
+	<td>10.0840</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=lang_2</td>
+	<td>ru</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_sold</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Resellers_Permissions</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/1?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=calling_cards_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=reseller_type_select</td>
+	<td>label=Resellers_Permissions</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<!--Create accountant's permission to let him view cardsgroups/search-->
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Group was created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/2?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callingcard_pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callingcard_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>test_1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=price_with_vat</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>test_2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=price_with_vat</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>for_test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=price_with_vat</td>
+	<td>3.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>it_is_test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=price_with_vat</td>
+	<td>32.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>kolmisoft_test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=price_with_vat</td>
+	<td>22.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_1</td>
+	<td>Test_cardgroup</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_2</td>
+	<td>Test_cardgroup_test_1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_3</td>
+	<td>test_1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_4</td>
+	<td>test_2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_5</td>
+	<td>for_test</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_6</td>
+	<td>it_is_test</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_7</td>
+	<td>kolmisoft_test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>1234567890</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>1234567890</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_callerid</td>
+	<td>159159</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Card was successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>9876543210</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>9876543210</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>1100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_callerid</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Card was successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>0002225558</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>0002225558</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/24</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>1155</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_callerid</td>
+	<td>147158</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Card was successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>6665554441</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>6665554441</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/25</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>1459</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_callerid</td>
+	<td>125954</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Card was successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>3335557770</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>3335557770</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/26</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>7598</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_callerid</td>
+	<td>458752</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Card was successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>1155599881</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>1155599881</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/27</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>1239</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_callerid</td>
+	<td>485958</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Card was successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>4444444444</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>4444444444</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/28</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_pin</td>
+	<td>7852</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_callerid</td>
+	<td>879545</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Card was successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/card_buy/24?cg=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>0002225558 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>The card was sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/card_buy/28?cg=7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>4444444444</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>The card was sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--As reseller and check weather there's no column named 'Details' in cardgroups/search -->
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=payment_header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>callingcard</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_pin_length</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>1111111111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>1111111113</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_pin</td>
+	<td>9812</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_number</td>
+	<td>1111111001</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_name</td>
+	<td>admins</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_callerid</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_callerid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_min</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_max</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_max</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_language</td>
+	<td>ru</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_sold</td>
+	<td>label=No</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_sold</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_language</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=number_29</td>
+	<td>1111111111</td>
+</tr>
+<!--Loggin as accountant and check weather there's no column named 'Details' in cardgroups/search -->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=div.nb &gt; table.0.0</td>
+	<td>Search for cards in cardgroups</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search for cards in cardgroups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_caller_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_balance_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_balance_max</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>name=s_sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_pin</td>
+	<td>%11%&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=pin_23</td>
+	<td>1100</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=pin_24</td>
+	<td>1155</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_25</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_pin</td>
+	<td>11%</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=pin_23</td>
+	<td>1100</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=pin_24</td>
+	<td>1155</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_25</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_pin</td>
+	<td>%11 </td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_number</td>
+	<td> %555%&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.0</td>
+	<td>0002225558</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.4.0</td>
+	<td>1155599881</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.5.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_sold</td>
+	<td>label=Yes</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.0</td>
+	<td>0002225558</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.0</td>
+	<td>4444444444</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.3.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_sold</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_min</td>
+	<td> 3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_max</td>
+	<td>22&nbsp;&nbsp;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>0002225558</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>1155599881</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.27.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_max</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_caller_id</td>
+	<td>12%</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_2</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_25</td>
+	<td>125954</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_23</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.2</td>
+	<td>CallerID for pinless dialing</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.4.2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_number</td>
+	<td>%555%</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_sold</td>
+	<td>label=Yes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_caller_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.0</td>
+	<td>0002225558</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.2.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=payment_header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;View&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>name=s_sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=s_sold</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/show/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Check available Cards (not sold)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Check available Cards (not sold)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>name=s_sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=s_sold</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/2?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callingcard_pin_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callingcard_manage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=div.nb &gt; table.0.0</td>
+	<td>Search for cards in cardgroups</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search for cards in cardgroups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_caller_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_balance_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_balance_max</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>name=s_sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_pin</td>
+	<td>11% </td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=pin_23</td>
+	<td>1100</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=pin_24</td>
+	<td>1155</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_25</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_number</td>
+	<td>%555%&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.0</td>
+	<td>0002225558</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.4.0</td>
+	<td>1155599881</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.5.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_sold</td>
+	<td>label=Yes</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.0</td>
+	<td>0002225558</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.0</td>
+	<td>4444444444</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.3.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_sold</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_min</td>
+	<td> 3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_max</td>
+	<td>22&nbsp;&nbsp;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>0002225558</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>1155599881</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.27.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_max</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_balance_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_caller_id</td>
+	<td>12%</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_2</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_25</td>
+	<td>125954</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_23</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.2</td>
+	<td>CallerID for pinless dialing</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.4.2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_number</td>
+	<td>%555%</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_sold</td>
+	<td>label=Yes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_caller_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.0</td>
+	<td>0002225558</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.2.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/2?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callingcard_pin_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callingcard_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings succesfully changed: Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=div.nb &gt; table.0.0</td>
+	<td>Search for cards in cardgroups</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search for cards in cardgroups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=s_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_caller_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_balance_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_balance_max</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>name=s_sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=s_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_caller_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>name=s_sold</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_balance_min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=s_balance_max</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
