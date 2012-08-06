@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.119" />
+<link rel="selenium.base" href="" />
 <title>tar_imp_update_old_method</title>
 </head>
 <body>
@@ -74,12 +74,13 @@
 </tr>
 <!--ranka-->
 <tr>
-	<td>check</td>
+	<td>click</td>
 	<td>id=update_directions</td>
 	<td></td>
 </tr>
+<!--#ajax-->
 <tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>id=Country_code_cell</td>
 	<td>Country code *</td>
 </tr>
@@ -119,13 +120,14 @@
 	<td></td>
 </tr>
 <!--ranka-->
+<!--#ajax-->
 <tr>
-	<td>uncheck</td>
+	<td>click</td>
 	<td>id=update_directions</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertEditable</td>
+	<td>waitForEditable</td>
 	<td>id=submit_button</td>
 	<td></td>
 </tr>
@@ -1466,12 +1468,12 @@
 </tr>
 <!--ranka-->
 <tr>
-	<td>check</td>
+	<td>click</td>
 	<td>id=update_directions</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>id=Country_code_cell</td>
 	<td>Country code *</td>
 </tr>
@@ -1602,7 +1604,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_new_rates_created</td>
+	<td>id=new_r_to_create</td>
 	<td>24</td>
 </tr>
 <tr>
@@ -1637,12 +1639,12 @@
 </tr>
 <!--ranka-->
 <tr>
-	<td>check</td>
+	<td>click</td>
 	<td>id=update_directions</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>id=Country_code_cell</td>
 	<td>Country code *</td>
 </tr>
@@ -1768,7 +1770,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>New rates created: 5</td>
+	<td>New rates created: 24</td>
 	<td></td>
 </tr>
 </tbody></table>
