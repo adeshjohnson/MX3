@@ -21,3 +21,5 @@ Update calls set user_id=5 where src_device_id=7;
 Update calls set user_id=3 where src_device_id=6;
 Update calls set user_id=-1 where src_device_id=0;
 Update calls set user_id=0 where src_device_id=5;
+#sync data
+UPDATE calls JOIN devices ON calls.dst_device_id = devices.id SET calls.dst_user_id = devices.user_id; 
