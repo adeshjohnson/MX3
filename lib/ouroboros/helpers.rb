@@ -3,7 +3,7 @@ module Ouroboros
   module Helpers
     require "digest"
 
-    @@ouronboros_link = "https://secure.ouroboros.hr/payment/auth.php"
+    @@ouronboros_link = "https://secure.pencepay.com/payment/auth.php"
 
 =begin rdoc
  Initializes form for orouboros payment.
