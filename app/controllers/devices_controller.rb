@@ -110,8 +110,9 @@ class DevicesController < ApplicationController
 
     if device.save
       flash[:status] = device.check_callshop_user(_('device_created'))
-      a=configure_extensions(device.id, {:current_user => current_user})
-      return false if !a
+      # no need to create extensions, prune peers, etc when device is created, because user goes to edit window and all these actions are done in device_update
+      #a=configure_extensions(device.id, {:current_user => current_user})
+      #return false if !a
     else
       flash_errors_for(_('device_not_created'), device)
       redirect_to :controller => "devices", :action => 'show_devices', :id => user.id and return false
