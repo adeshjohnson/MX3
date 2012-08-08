@@ -19,7 +19,7 @@
     statistics_menu.add(14, 0, '<%= _('Various') %>');
     statistics_menu.add(17, 14, '<%= _('Country_Stats') %>', '<%= Web_Dir %>/stats/country_stats');
     statistics_menu.add(28, 14, '<%= _('Campaign_Stats') %>', '<%= Web_Dir %>/autodialer/campaign_statistics');
-    <% unless session[:usertype] == "accountant" and session[:acc_manage_dids_opt_1] == 0 %>
+    <% unless session[:usertype] == "accountant" and session[:acc_manage_dids_opt_1].to_i == 0 %>
     statistics_menu.add(24, 14, '<%= _('DIDs') %>', '<%= Web_Dir %>/stats/dids');
     statistics_menu.add(26, 24, '<%= _('Usage') %>', '<%= Web_Dir %>/stats/dids_usage');
     <% end %>
@@ -30,7 +30,7 @@
     statistics_menu.add(18, 14, '<%= _('Hangup_cause') %>', '<%= Web_Dir %>/stats/hangup_cause_codes_stats');
     statistics_menu.add(22, 14, '<%= _('Prefix_Finder') %>', '<%= Web_Dir %>/stats/prefix_finder');
     statistics_menu.add(19, 14, '<%= _('Providers') %>', '<%= Web_Dir %>/stats/providers');
-    <% unless session[:usertype] == "accountant" and session[:acc_manage_subscriptions_opt_1] == 0 %>
+    <% unless session[:usertype] == "accountant" and session[:acc_manage_subscriptions_opt_1].to_i == 0 %>
     statistics_menu.add(21, 14, '<%= _('Subscriptions') %>', '<%= Web_Dir %>/stats/subscriptions_stats');
     <% end %>
     statistics_menu.add(15, 14, '<%= _('System_stats') %>', '<%= Web_Dir %>/stats/system_stats');
