@@ -32,7 +32,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -43,7 +43,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=payment_header</td>
 	<td></td>
 </tr>
@@ -179,7 +179,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group was created</td>
 	<td></td>
 </tr>
@@ -204,7 +204,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group was updated</td>
 	<td></td>
 </tr>
@@ -219,7 +219,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings succesfully changed: Test Accountant</td>
 	<td></td>
 </tr>
@@ -745,7 +745,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=payment_header</td>
 	<td></td>
 </tr>
@@ -800,7 +800,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=pin_2</td>
 	<td></td>
 </tr>
@@ -820,7 +820,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=pin_2</td>
 	<td></td>
 </tr>
@@ -840,7 +840,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=pin_2</td>
 	<td></td>
 </tr>
@@ -860,7 +860,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=pin_2</td>
 	<td></td>
 </tr>
@@ -885,7 +885,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=pin_2</td>
 	<td></td>
 </tr>
@@ -910,7 +910,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=pin_2</td>
 	<td></td>
 </tr>
@@ -925,7 +925,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=pin_2</td>
 	<td></td>
 </tr>
@@ -940,7 +940,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=pin_2</td>
 	<td></td>
 </tr>
@@ -955,7 +955,7 @@
 	<td>All</td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=pin_2</td>
 	<td></td>
 </tr>
@@ -965,7 +965,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=pin_2</td>
 	<td></td>
 </tr>
@@ -996,7 +996,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -1048,7 +1048,7 @@
 <tr>
 	<td>type</td>
 	<td>id=s_pin</td>
-	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	<td>%11%&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1077,6 +1077,51 @@
 </tr>
 <tr>
 	<td>type</td>
+	<td>id=s_pin</td>
+	<td>11%</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=pin_23</td>
+	<td>1100</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=pin_24</td>
+	<td>1155</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_22</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_25</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_pin</td>
+	<td>%11 </td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=pin_23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
 	<td>id=s_number</td>
 	<td> %555%&nbsp;&nbsp;&nbsp;</td>
 </tr>
@@ -1091,23 +1136,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>id=number_24</td>
 	<td>0002225558</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>id=number_27</td>
 	<td>1155599881</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>id=number_26</td>
 	<td>3335557770</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_25</td>
+	<td>6665554441</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=number_6</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>6665554441</td>
+	<td>assertElementNotPresent</td>
+	<td>id=number_22</td>
 	<td></td>
 </tr>
 <tr>
@@ -1188,7 +1243,7 @@
 <tr>
 	<td>type</td>
 	<td>id=s_caller_id</td>
-	<td>&nbsp;&nbsp;&nbsp;%12%</td>
+	<td>12%</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1196,19 +1251,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>id=callerid_2</td>
 	<td>12</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>id=callerid_25</td>
 	<td>125954</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>id=callerid_23</td>
 	<td>123456</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertTable</td>
@@ -1226,14 +1281,14 @@
 	<td>%555%</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=s_caller_id</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>name=s_sold</td>
 	<td>label=Yes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_caller_id</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1256,7 +1311,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=payment_header</td>
 	<td></td>
 </tr>
@@ -1281,7 +1336,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -1301,12 +1356,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>name=s_sold</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>name=s_sold</td>
 	<td>All</td>
 </tr>
@@ -1316,7 +1371,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Check available Cards (not sold)</td>
 	<td></td>
 </tr>
@@ -1331,12 +1386,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>name=s_sold</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>name=s_sold</td>
 	<td>No</td>
 </tr>
@@ -1361,7 +1416,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group was updated</td>
 	<td></td>
 </tr>
@@ -1376,7 +1431,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings succesfully changed: Test Accountant</td>
 	<td></td>
 </tr>
@@ -1401,7 +1456,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -1453,7 +1508,7 @@
 <tr>
 	<td>type</td>
 	<td>id=s_pin</td>
-	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	<td>11% </td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1483,7 +1538,7 @@
 <tr>
 	<td>type</td>
 	<td>id=s_number</td>
-	<td> %555%&nbsp;&nbsp;&nbsp;</td>
+	<td>%555%&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1496,23 +1551,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>0002225558</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>1155599881</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>id=number_26</td>
 	<td>3335557770</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_25</td>
+	<td>6665554441</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=number_6</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>6665554441</td>
+	<td>assertElementNotPresent</td>
+	<td>id=number_22</td>
 	<td></td>
 </tr>
 <tr>
@@ -1593,7 +1648,7 @@
 <tr>
 	<td>type</td>
 	<td>id=s_caller_id</td>
-	<td>&nbsp;&nbsp;&nbsp;12</td>
+	<td>12%</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1601,24 +1656,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTable</td>
-	<td>css=table.maintable.1.2</td>
+	<td>assertText</td>
+	<td>id=callerid_2</td>
 	<td>12</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>123456</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>id=callerid_25</td>
 	<td>125954</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>12</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=callerid_23</td>
+	<td>123456</td>
 </tr>
 <tr>
 	<td>assertTable</td>
@@ -1636,14 +1686,14 @@
 	<td>%555%</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=s_caller_id</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>name=s_sold</td>
 	<td>label=Yes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_caller_id</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1701,7 +1751,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group was updated</td>
 	<td></td>
 </tr>
@@ -1716,7 +1766,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings succesfully changed: Test Accountant</td>
 	<td></td>
 </tr>
