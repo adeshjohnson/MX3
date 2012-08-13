@@ -784,12 +784,8 @@ class PaymentsController < ApplicationController
       curr_amount =  amount / exchange_rate.to_f
       curr_real_amount =  real_amount / exchange_rate.to_f
       
-      # stupid way to shoot yourself in the foot (before filters, etc) check http://trac.kolmisoft.com/trac/ticket/6420
-      #user.balance +=  curr_amount
-      #user.save
-
-      # this is how it should be to change only 1 value. It will NEVER fail!
-      ActiveRecord::Base.connection.update("UPDATE users SET balance = balance + #{curr_amount} WHERE id = '#{user.id}';")
+      user.balance +=  curr_amount
+      user.save
 
       paym = Payment.new
       paym.paymenttype = 'manual'
