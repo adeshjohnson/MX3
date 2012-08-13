@@ -728,6 +728,9 @@ class PaymentsController < ApplicationController
   def manual_payment_finish
 
     if params[:provider_id]
+      
+      # manual payment for provider
+      
       provider = current_user.providers.find(:first, :conditions => ["providers.id = ?", params[:provider_id]])
       amount = params[:amount].to_f * -1.to_f
       real_amount = params[:real_amount].to_f * -1.to_f
@@ -763,6 +766,9 @@ class PaymentsController < ApplicationController
 
 
     else
+      
+      #manual payment for user
+      
       user = User.find(:first,:include => [:tax], :conditions => ["users.id = ?", params[:user]])
       amount = params[:amount].to_f
       real_amount = params[:real_amount].to_f
@@ -777,8 +783,13 @@ class PaymentsController < ApplicationController
 
       curr_amount =  amount / exchange_rate.to_f
       curr_real_amount =  real_amount / exchange_rate.to_f
-      user.balance +=  curr_amount
-      user.save
+      
+      # stupid way to shoot yourself in the foot (before filters, etc) check http://trac.kolmisoft.com/trac/ticket/6420
+      #user.balance +=  curr_amount
+      #user.save
+
+      # this is how it should be to change only 1 value. It will NEVER fail!
+      ActiveRecord::Base.connection.update("UPDATE users SET balance = balance + #{curr_amount} WHERE id = '#{user.id}';")
 
       paym = Payment.new
       paym.paymenttype = 'manual'
@@ -797,6 +808,7 @@ class PaymentsController < ApplicationController
       invoice_amount = (curr_amount/ current_user.current.currency.exchange_rate.to_f).to_f
       invoice_amount_real = (curr_real_amount/ current_user.current.currency.exchange_rate.to_f).to_f
 
+      # create invoice for prepaid user's manual payment if such setting activated
       if user.postpaid == 0 and user.generate_invoice == 1
         number_type = Confline.get_value("Prepaid_Invoice_Number_Type").to_i
         invoice = Invoice.new
@@ -832,6 +844,8 @@ class PaymentsController < ApplicationController
         Action.add_action_hash(current_user, :target_id => user.id, :target_type => 'user', :action => "invoice_not_created")
       end
     end
+    
+    
     flash[:status] = _('Payment_added')
     redirect_to :action => 'list'
   end

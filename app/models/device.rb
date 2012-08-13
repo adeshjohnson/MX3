@@ -54,6 +54,7 @@ class Device < ActiveRecord::Base
 =begin
   #3239 dont know whats the reason to keep two identical fields, but just keep in mind that one is 1/0 
   #other yes/no and their values has to be the same
+  # MK: subscribemwi is used by Asterisk 1.4, enable_mwi by Asterisk 1.8
 =end
   def update_mwi
     if Confline.mor_11_extended?
