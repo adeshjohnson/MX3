@@ -163,7 +163,11 @@ class Subscription < ActiveRecord::Base
       when "one_time_fee"
         amount = price_for_period(Time.now, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)).to_f
       when "periodic_fee"
-        amount = price_for_period(Time.now, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)).to_f
+        if service.periodtype = 'day'
+          amount = Action.sum('data2', :conditions => ["action = 'subscription_paid' AND user_id = ? AND data >= ? AND target_id = ?", self.user_id, "#{Time.now.year}-#{Time.now.month}-#{'1'}", self.id])
+        else
+          amount = price_for_period(Time.now, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)).to_f
+       end
     end
     logger.debug "Amount: #{amount}"
     return amount.to_f
