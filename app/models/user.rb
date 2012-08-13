@@ -1395,8 +1395,6 @@ class User < ActiveRecord::Base
         changed = 1
         sub_price = sub.price_for_period(period_start_with_time, period_end_with_time)
 
-        Action.new(:user_id => id, :target_id => sub.id, :target_type => "subscription", :date => Time.now, :action => "subscription_paid", :data => "#{time.year}-#{time.month}#{('-' + time.day.to_s) if day}", :data2 => sub_price).save
-
         # if setting does not allow dropping bellow zero and balance got bellow 0
         setting_disallow_balance_drop_below_zero = Confline.get_value("Disallow_prepaid_user_balance_drop_below_zero", owner_id)
         balance_left = balance - sub_price
@@ -1406,6 +1404,7 @@ class User < ActiveRecord::Base
           self.block_and_send_email
         else
           # pay subsciption
+          Action.new(:user_id => id, :target_id => sub.id, :target_type => "subscription", :date => Time.now, :action => "subscription_paid", :data => "#{time.year}-#{time.month}#{('-' + time.day.to_s) if day}", :data2 => sub_price).save
           b += sub_price
         end
 
