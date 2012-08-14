@@ -1121,7 +1121,7 @@ class User < ActiveRecord::Base
     #              WHERE disposition = 'ANSWERED' AND calldate BETWEEN '#{period_start}' AND '#{period_end}' AND devices.user_id = #{id} AND calls.did_inc_price > 0;"
 
     # this sql uses calls.dst_user_id field which allows increase speed a lot
-    sql = "SELECT count(calls.id) as calls, #{SqlExport.replace_price("SUM(#{SqlExport.user_price_sql})", 'price')}
+    sql = "SELECT count(calls.id) as calls, #{SqlExport.replace_price("SUM(#{SqlExport.user_price_sql})", {:reference => 'price'})}
                   FROM calls
                   WHERE disposition = 'ANSWERED' AND calldate BETWEEN '#{period_start}' AND '#{period_end}' AND calls.dst_user_id = #{id} AND calls.did_inc_price > 0;" 
 
