@@ -78,6 +78,10 @@ class ServicesController < ApplicationController
 
   # @service in before filter
   def update
+    if current_user.is_accountant? and not accountant_can_write?('see_financial_data')
+      params[:service].delete(:price)
+      params[:service].delete(:selfcost_price)
+    end
     if @service.update_attributes(params[:service])
       flash[:status] = _('Service_was_successfully_updated')
       redirect_to :action => 'list'

@@ -10,10 +10,12 @@
         <td> <%= _('Service') %>   </td>
         <td> <%= @sub.service.name %>   </td>
       </tr>
+      <% if current_user.is_accountant? and current_user.accountant_allow_read('see_financial_data') %>
       <tr>
         <td> <%= _('Price') %>   </td>
         <td> <%= nice_number @sub.service.price %> <%= current_user.currency.name %>  </td>
       </tr>
+      <% end %>
       <tr>
         <td> <%= _('Memo') %>:</td>
         <td> <%= text_field_tag 'memo', @sub.memo, "class" => "input", :size => "50", :maxlength => "150" %>   </td>

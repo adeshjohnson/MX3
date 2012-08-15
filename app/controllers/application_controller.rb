@@ -2715,10 +2715,31 @@ Variables: (Names marked with * are required)
     d
   end
 
+=begin
+  Method to check check whether current user is accountat and has specified write permission
+  Note that this method shouldnt be used only if you want to check whether user has some 
+  kind of permissions but youre not certain that user is accountant. for instance current user is admin
+  and he has rights to see financial data, but this method would return false because current user is 
+  not accountant, hence 'current user IS ACCOUNTANT and has specified write permission'.
+  !!!Note that there's method defined in User class accountant_allow_edit(permission), i believe you should 
+  use that method!!!
+ 
+  *Params*
+  +permission_name+ string containing permission name, note that 'acc_' is added to that string.
+ 
+  *Returns*
+  +permited+ boolean value.
+=end
   def accountant_can_write?(permission)
     session[:usertype].to_s == 'accountant' and session["acc_#{permission}".to_sym].to_i == 2
   end
 
+=begin
+  Same thing as for accountant_can_write goes for this method.
+  !!!Note that there is(another..?) a bug - if accountant has write permission he should automaticaly have
+  read permission. WRONG, according to this method he doesn't. Note that there's method defined in User 
+  class accountant_allow_read(permission), i believe you should use that method!!!
+=end
   def accountant_can_read?(permission)
     session[:usertype].to_s == 'accountant' and session["acc_#{permission}".to_sym].to_i == 1
   end

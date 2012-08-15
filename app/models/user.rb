@@ -3140,7 +3140,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   +permission+ permission name. same name as it is saved in database
 
   *Returns*
-  +allow_edit+ boolean, true if accountant is allowed to read
+  +allow_edit+ boolean, true if accountant is allowed to read or edit
 =end
   def accountant_allow_read(permission)
     return accountant_right(permission) > 0
