@@ -206,7 +206,7 @@
     //to select element appropriately and trigger change event on prefix_id select element(we 
     //also could trigger event on rate_id, but not on subcode cause it might be not be 
     //in required_options assoc array)
-    Event.observe($('update_subcodes'), 'change', function(event) {
+    /*Event.observe($('update_subcodes'), 'change', function(event) {
       subcode_required = event.target.checked;
       if(subcode_required){
         $('subcode_cell').innerHTML += '*'
@@ -218,7 +218,7 @@
         Event.stopObserving($('subcode'), 'change', validate_selected_options);
       }
       $('submit_button').disabled = check_for_not_selected();
-    });
+    });*/
 
     //main point of this method is to enable submit button if all required options are selected
     //note that id's of those options are kept in required_options assoc array.
