@@ -68,12 +68,22 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td>/billing/users/edit/0</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
+	<td>type</td>
+	<td>id=user_first_name</td>
+	<td>System test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_last_name</td>
+	<td>Admin break</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1029,7 +1039,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/send_sms?u=admin&amp;p=admin1&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message=labukas&amp;test=1&amp;hash=${hash14}</td>
+	<td>/billing/api/send_sms?u=101&amp;p=1011&amp;lcr_id=1&amp;dst=937567337911&amp;src=9375783123767&amp;message=labukas&amp;test=1&amp;hash=${hash14}</td>
 	<td></td>
 </tr>
 <tr>
