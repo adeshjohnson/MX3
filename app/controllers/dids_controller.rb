@@ -749,6 +749,7 @@ ORDER BY dids.did ASC"
               where devices.istrunk = 1 and users.owner_id = '#{session[:user_id]}'"
 
       @trunk = Device.count_by_sql(sql)
+      @dps_created = (not Dialplan.find(:all, :conditions => "id != 1", :order => "name ASC").empty?)
     end
     @users = User.find(:all, :select => "id, username, first_name, last_name, #{SqlExport.nice_user_sql}", :conditions => ["hidden = 0 AND owner_id = ?", current_user.id], :order => "nice_user ASC")
 
@@ -1038,7 +1039,7 @@ ORDER BY dids.did ASC"
 
     @cbdps = Dialplan.find(:all, :conditions => "dptype = 'callback' AND data1 NOT IN ('#{@dids.map { |d| d.id }.join("','")}')", :order => "name ASC")
 
-    @qfddps = Dialplan.find(:all, :conditions => "dptype = 'quickforwarddids'", :order => "name ASC")
+    @qfddps = Dialplan.find(:all, :conditions => "id != 1 and dptype = 'quickforwarddids'", :order => "name ASC")
 
     @pbxfdps = Dialplan.find(:all, :conditions => "dptype = 'pbxfunction'", :order => "name ASC")
     @ivrs = Dialplan.find(:all, :conditions => "dptype = 'ivr'", :order => "name ASC")

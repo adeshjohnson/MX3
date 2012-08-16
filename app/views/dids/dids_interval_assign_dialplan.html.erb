@@ -53,9 +53,11 @@
           <% if not @qfddps.empty? %>
               <%= form_tag({:action => 'assign_to_dp'}.merge(@opts)) do %>
                   <b><%= _('Quick_Forwards_dialplan') %></b>
-                  <% for dp in @qfddps %>
-                      <%= hidden_field_tag 'dp_id', dp.id %>
-                  <% end %>
+                  <select name="dp_id" >
+                    <% for dp in @qfddps %>
+                      <option value=<%= dp.id %>> <%= dp.name %> </option>
+                    <% end %>
+                   </select>
                   <%= submit_tag _('Assign'), :disable_with => _('Processing..'), :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => 'Are you sure?', :id => 'fovard_pd' %>
               <% end %>
               <br/>
