@@ -66,11 +66,11 @@
                 <td class="border_disabled"><%= radio_button_tag('did_action', '5', (@did_action.to_i == 3)) %></td>
               </tr>
 
-              <%if not reseller? and @dps_created%>
+              <% unless reseller? %>
                   <tr>
                     <td class="border_disabled indented_form_row small_cell">
                       <label for="did_action_6"><b><%= _('Assign_DialPlan') %></b></label></td>
-                    <td class="border_disabled"><%= radio_button_tag('did_action', '6', (@did_action.to_i == 6)) %></td>
+                    <td class="border_disabled"> <%= radio_button_tag('did_action', '6', (@did_action.to_i == 6 ), {:disabled => (not @dps_created)}) %> <%= _('No_dialplans') if not @dps_created %></td>
                   </tr>
               <% end %>
 
