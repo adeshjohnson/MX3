@@ -32,7 +32,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -73,43 +73,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval was successfully created</td>
 	<td></td>
 </tr>
 <!--# ASSIGN TO USER -->
 <tr>
-	<td>clickAndWait</td>
-	<td>//a[contains(@href, '/billing/dids/bulk_management')]</td>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Update</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Delete</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Manage rates</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Add to Trunk</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Add to user</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Assign Dial Plan</td>
 	<td></td>
 </tr>
@@ -134,12 +134,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval: 100000000000 - 100000001000</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DIDs quantity: 1001</td>
 	<td></td>
 </tr>
@@ -160,7 +160,7 @@
 </tr>
 <!--!!! Device not found-->
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DIDs were updated</td>
 	<td></td>
 </tr>
@@ -170,12 +170,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>status_3</td>
 	<td>Reserved</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>user_link3</td>
 	<td>Test User #1</td>
 </tr>
@@ -216,17 +216,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval: 100000000000 - 100000000005</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DIDs quantity: 6</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User: Test User #1</td>
 	<td></td>
 </tr>
@@ -256,12 +256,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>s_device</td>
 	<td>IAX2/103</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>s_user</td>
 	<td>System Admin</td>
 </tr>
@@ -275,7 +275,7 @@
 	<td>6 DIDs were updated</td>
 	<td></td>
 </tr>
-<!--verify dids not updated-->
+<!--assert dids not updated-->
 <tr>
 	<td>open</td>
 	<td>/billing/dids/bulk_management</td>
@@ -312,7 +312,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval: 100000000000 - 100000000005</td>
 	<td></td>
 </tr>
@@ -322,17 +322,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User: Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>s_user</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>s_device</td>
 	<td>label=IAX2/103</td>
 </tr>
@@ -342,7 +342,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>status_3</td>
 	<td>Active</td>
 </tr>
@@ -398,27 +398,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval: 100000000000 - 100000000100</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DIDs quantity: 6</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User: System Admin</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Device:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>IAX2/103</td>
 	<td></td>
 </tr>
@@ -438,17 +438,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>status_3</td>
 	<td>Free</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>user_3</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>device_3</td>
 	<td></td>
 </tr>
@@ -489,17 +489,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval: 100000000004 - 100000000010</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User: System Admin</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DIDs quantity: 2</td>
 	<td></td>
 </tr>
@@ -514,7 +514,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID terminated</td>
 	<td></td>
 </tr>
@@ -524,12 +524,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>user_link7</td>
 	<td>System Admin</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>status_7</td>
 	<td>Terminated</td>
 </tr>
@@ -575,17 +575,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval: 100000000004 - 100000000008</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User: Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DIDs quantity: 3</td>
 	<td></td>
 </tr>
@@ -610,7 +610,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval rate updated</td>
 	<td></td>
 </tr>
@@ -620,17 +620,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=rate_19</td>
 	<td>10.0000</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=rate_21</td>
 	<td>10.0000</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=rate_20</td>
 	<td>10.0000</td>
 </tr>
@@ -656,7 +656,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Device's settings updated</td>
 	<td></td>
 </tr>
@@ -696,17 +696,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval: 100000000004 - 100000000008</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User: Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DIDs quantity: 3</td>
 	<td></td>
 </tr>
@@ -721,22 +721,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID reserved</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Assign DID to Trunk</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User: User Resellers</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DIDs quantity: 3</td>
 	<td></td>
 </tr>
@@ -746,22 +746,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID assigned</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval: 100000000004 - 100000000008</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User: User Resellers</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DIDs quantity: 3</td>
 	<td></td>
 </tr>
@@ -777,7 +777,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Enter DID interval</td>
 	<td></td>
 </tr>
@@ -813,7 +813,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Bad interval start and/or end</td>
 	<td></td>
 </tr>
@@ -943,7 +943,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DIDs quantity: 5</td>
 	<td></td>
 </tr>
@@ -978,7 +978,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>5 DIDs were updated</td>
 	<td></td>
 </tr>
@@ -1081,7 +1081,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>user_link15</td>
 	<td>System Admin</td>
 </tr>
@@ -1096,7 +1096,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Assign Dial Plan</td>
 	<td></td>
 </tr>
@@ -1106,7 +1106,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>did_action_6</td>
 	<td>off</td>
 </tr>
@@ -1121,68 +1121,13 @@
 	<td>100000000009</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>assertNotEditable</td>
 	<td>did_action_6</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>did_action_6</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>DID interval: 100000000000 - 100000000009</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>DIDs quantity: 10</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Assign to dialplan</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Assign to dialplan. That means deciding which operations to run when dialing this number.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>page_title</td>
-	<td>Assign Dial Plan to DIDs interval</td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Quick Forwards Dial Plan</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>fovard_pd</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>fovard_pd</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Dial Plan assigned to DIDs interval</td>
+	<td>assertTextPresent</td>
+	<td>No Dial Plans</td>
 	<td></td>
 </tr>
 <tr>
@@ -1202,17 +1147,77 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Assign Dial Plan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>did_action_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>did_action_6</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>100000000000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>100000000009</td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>did_action_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>No Dial Plans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>did_action_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callinc_cards_dp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/dialplans/new</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name_2</td>
+	<td>id=name_2</td>
 	<td>authplan</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>dp_PIN_add</td>
+	<td>id=dp_PIN_add</td>
 	<td></td>
 </tr>
 <tr>
@@ -1226,9 +1231,9 @@
 	<td>callbackplan</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
-	<td>//select[@name='dialplan[data1]']</td>
-	<td>100000000000 - Quick Forward DIDs DP</td>
+	<td>assertSelectedLabel</td>
+	<td>css=select[name=&quot;dialplan[data1]&quot;]</td>
+	<td>100000000000 - ccplan</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1276,7 +1281,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DIDs quantity: 5</td>
 	<td></td>
 </tr>
@@ -1301,52 +1306,52 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Calling Cards Dial Plan:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Authorization by PIN Dial Plan:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Callback Dial Plan:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Quick Forwards Dial Plan</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>IVR Dial Plan</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>callinc_cards_dp</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>pin_pd</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>callback_pd</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>fovard_pd</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>ivr_pd</td>
 	<td></td>
 </tr>
@@ -1361,7 +1366,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dial Plan assigned to DIDs interval</td>
 	<td></td>
 </tr>
@@ -1421,7 +1426,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DIDs quantity: 4</td>
 	<td></td>
 </tr>
@@ -1446,7 +1451,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dial Plan assigned to DIDs interval</td>
 	<td></td>
 </tr>
@@ -1476,7 +1481,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DIDs quantity: 2</td>
 	<td></td>
 </tr>
@@ -1501,7 +1506,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dial Plan assigned to DIDs interval</td>
 	<td></td>
 </tr>
@@ -1571,7 +1576,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1646,7 +1651,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1686,7 +1691,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1731,12 +1736,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>did_start</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>did_end</td>
 	<td></td>
 </tr>
@@ -2032,7 +2037,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval has to be equal in length</td>
 	<td></td>
 </tr>
@@ -2052,7 +2057,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval has to be equal in length</td>
 	<td></td>
 </tr>
@@ -2076,7 +2081,7 @@
 	<td>DID interval has to be equal in length</td>
 	<td></td>
 </tr>
-<!--Loggin as admin and verify that he cannot create DID interval if start/end arent same length-->
+<!--Loggin as admin and assert that he cannot create DID interval if start/end arent same length-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -2098,7 +2103,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -2123,7 +2128,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval has to be equal in length</td>
 	<td></td>
 </tr>
@@ -2143,7 +2148,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval has to be equal in length</td>
 	<td></td>
 </tr>
@@ -2184,11 +2189,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
 </tr>
-<!--Now loggin as resseler and verify that he cannot create DID interval if start/end arent same length-->
+<!--Now loggin as resseler and assert that he cannot create DID interval if start/end arent same length-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -2210,7 +2215,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -2235,7 +2240,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval has to be equal in length</td>
 	<td></td>
 </tr>
@@ -2255,7 +2260,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval has to be equal in length</td>
 	<td></td>
 </tr>
@@ -2275,7 +2280,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval has to be equal in length</td>
 	<td></td>
 </tr>
@@ -2284,7 +2289,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--Loggin as admin and verify that he cannot create DID interval if start/end arent same length-->
+<!--Loggin as admin and assert that he cannot create DID interval if start/end arent same length-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -2306,7 +2311,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>

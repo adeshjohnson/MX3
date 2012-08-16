@@ -68,6 +68,16 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/users/edit/0</td>
 	<td></td>
 </tr>
@@ -1046,6 +1056,11 @@
 	<td>assertTextPresent</td>
 	<td>0 - sent</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=message_id</td>
+	<td>8</td>
 </tr>
 <tr>
 	<td>assertText</td>
