@@ -135,7 +135,7 @@
         <td id="country_code_value"></td>
       </tr>
       <tr class="row2">
-        <td>   <%= _('Subcode') %>  </td>
+        <td id='subcode_cell'>   <%= _('Subcode') %>  </td>
         <%= render :partial => "import_csv_step_2_select", :locals => {:name => "subcode", :value => :imp_subcode} %>
         <td></td>
         <td id="subcode_value" align="center">NGN</td>
@@ -182,7 +182,7 @@
     //Note that 'not selected' value should be -1
     var required_options = {'prefix_id': false, 'rate_id': false}
 
-    //add event listener to update_directions checkboxr. If it is checked, then country code 
+    //add event listener to update_directions checkbox. If it is checked, then country code 
     //should be required so we add 'country_code_id' to required_options add event listener 
     //to select element appropriately and trigger change event on prefix_id select element(we 
     //also could trigger event on rate_id, but not on country_code_id cause it might be not be 
@@ -197,6 +197,25 @@
         $('Country_code_cell').innerHTML = $('Country_code_cell').innerHTML.slice(0,-1);
         delete required_options['country_code_id'];
         Event.stopObserving($('country_code_id'), 'change', validate_selected_options);
+      }
+      $('submit_button').disabled = check_for_not_selected();
+    });
+
+    //add event listener to update_subcodes checkbox. If it is checked, then subcode 
+    //should be required so we add 'subcode' to required_options add event listener 
+    //to select element appropriately and trigger change event on prefix_id select element(we 
+    //also could trigger event on rate_id, but not on subcode cause it might be not be 
+    //in required_options assoc array)
+    Event.observe($('update_subcodes'), 'change', function(event) {
+      subcode_required = event.target.checked;
+      if(subcode_required){
+        $('subcode_cell').innerHTML += '*'
+        required_options['subcode'] = ($('subcode').value != '-1');
+        Event.observe($('subcode'), 'change', validate_selected_options);
+      }else{
+        $('subcode_cell').innerHTML = $('Country_code_cell').innerHTML.slice(0,-1);
+        delete required_options['subcode'];
+        Event.stopObserving($('subcode'), 'change', validate_selected_options);
       }
       $('submit_button').disabled = check_for_not_selected();
     });
