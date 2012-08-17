@@ -98,8 +98,28 @@
 </tr>
 <tr>
 	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
 	<td>id=date_till_day</td>
 	<td>label=31</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=July</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -180,6 +200,31 @@
 	<td>click</td>
 	<td>id=invoice_type_prepaid</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=July</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=31</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -390,6 +435,66 @@
 	<td>assertElementNotPresent</td>
 	<td>css=img[alt=&quot;Arrow_refresh&quot;]</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>email_sending_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_batch_size</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_from</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_from</td>
+	<td>no-reply@kolmisoft.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_time_zone</td>
+	<td>label=(GMT+13:00) Nuku'alofa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#invoices_details &gt; table.simple &gt; tbody &gt; tr &gt; td &gt; select[name=&quot;s_issue_date&quot;]</td>
+	<td>2012-07-01 2012-07-31</td>
 </tr>
 </tbody></table>
 </body>
