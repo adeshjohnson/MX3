@@ -17,6 +17,20 @@ class CronAction < ActiveRecord::Base
 
   end
 
+=begin
+  we should chop off someone's hands for coding like that..
+  but there's explanation what periodic_type magic numbers mean:
+    0 - runs only once(how ilogical it is to ask about NEXT RUN if action can be run only once??!)
+    1 - runs once every year
+    2 - runs once every month
+    3 - runs once every week
+    4 - runs every work day
+    5 - runs every free day
+    6 - runs once every day
+
+   Note that this method will give you an answer no matter whether it should be run next time or not,
+   because cron job can have it's time limit.
+=end
   def next_run_time
     time = run_at.to_time
     case cron_setting.periodic_type
@@ -30,15 +44,15 @@ class CronAction < ActiveRecord::Base
         time = time.to_s.to_time + 1.week
       when 4
         z = time.to_s.to_time + 1.day
-        if z.wday > 5
-          time = time.to_s.to_time + 2.day
+        if weekend? z.wday
+          time = next_monday(time.to_s.to_time)
         else
           time = time.to_s.to_time + 1.day
         end
       when 5
         z = time.to_s.to_time + 1.day
-        if z.wday < 5
-          time = time.to_s.to_time + 5.day
+        unless weekend? z.wday
+          time = next_saturday(time.to_s.to_time)
         else
           time = time.to_s.to_time + 1.day
         end
@@ -47,6 +61,34 @@ class CronAction < ActiveRecord::Base
     end
     time
   end
+
+=begin
+    Check whether given date is weekend or not
+
+    *Params*
+        date - datetime or time instance
+
+    *Returns*
+        true if given date is weekday else returns false
+=end
+  def weekend?(date)
+    [6,0].include? date.wday
+  end
+
+=begin
+  We need to get date of next monday
+=end
+  def next_monday(date)
+    date += ((1-date.wday) % 7).days
+  end
+
+=begin
+  We need to get date of next saturday, that is closest day of upcoming weekend
+=end
+  def next_saturday(date)
+    date += ((6-date.wday) % 7).days
+  end
+
 
   def CronAction.do_jobs
     actions = CronAction.find(:all, :conditions => ['run_at < ? AND failed_at IS NULL', Time.now().to_s(:db)], :include => [:cron_setting])
