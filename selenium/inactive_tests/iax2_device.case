@@ -1481,6 +1481,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
@@ -1581,14 +1586,434 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertChecked</td>
 	<td>device_allow_duplicate_calls_1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>device_fake_ring_1</td>
 	<td>on</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Block callerid if </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>simultaneous calls come from it:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_block_callerid</td>
+	<td>8000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=block_callerid_enable_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=device_block_callerid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=block_callerid_enable_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_block_callerid</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Time limit per day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>min</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_time_limit_per_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>abc</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Grace Time:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>s</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=grace_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=grace_time</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=grace_time</td>
+	<td>10.5</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Allow duplicate Calls:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=device_allow_duplicate_calls_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=device_allow_duplicate_calls_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_allow_duplicate_calls_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_allow_duplicate_calls_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Fake Ring:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=device_fake_ring_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=device_fake_ring_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_fake_ring_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_fake_ring_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Language:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_language</td>
+	<td>lt</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Use ANI (if available) for CallerID:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=device_use_ani_for_cli_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=device_use_ani_for_cli_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_use_ani_for_cli_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_use_ani_for_cli_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incoming Call CallerID Presentation:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=device_calleridpres</td>
+	<td>Number Unavailable</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_calleridpres</td>
+	<td>label=None</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Change Failed Code To:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=device[change_failed_code_to]</td>
+	<td>1 unallocated number / 404 Not Found</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=device[change_failed_code_to]</td>
+	<td>label=Leave as it is</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Forward DID:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=forward_did</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=forward_did</td>
+	<td>label=37063042438</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Anti-resale (Auto-answer):</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=device_anti_resale_auto_answer_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=device_anti_resale_auto_answer_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_anti_resale_auto_answer_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_anti_resale_auto_answer_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=block_callerid_enable_yes</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_block_callerid</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_block_callerid</td>
+	<td>5.5</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>3.5</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_allow_duplicate_calls_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=grace_time</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_fake_ring_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_use_ani_for_cli_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=device_anti_resale_auto_answer_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=device_calleridpres</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=device[change_failed_code_to]</td>
+	<td>Leave as it is</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=forward_did</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>-8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=grace_time</td>
+	<td>10.5</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=device_block_callerid</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=grace_time</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>10</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1950,11 +2375,6 @@
 	<td>waitForValue</td>
 	<td>id=device_time_limit_per_day</td>
 	<td>15</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/8</td>
-	<td></td>
 </tr>
 <!--------------------------->
 </tbody></table>
