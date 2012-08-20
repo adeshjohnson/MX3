@@ -17,37 +17,37 @@
   </tr>
   <% for monitoring in @monitorings %>
       <tr id="monit-<%= monitoring.id %>" class="center">
-        <td class="active">
+        <td class="active" id='monitoring_active_<%= monitoring.id %>'>
           <%= link_to activity_indicator(monitoring.active), {:action => :update, :id => monitoring.id, :monitoring => {:active => !monitoring.active}} %>
         </td>
-        <td class="period">
+        <td class="period" id='monitoring_period_<%= monitoring.id %>'>
           <%= format_period(monitoring.period_in_past) %>
         </td>
-        <td class="period">
+        <td class="period" id='monitoring_period_2_<%= monitoring.id %>'>
           <%= format_monitoring_type(monitoring.monitoring_type) %>
         </td>
-        <td class="amount">
+        <td class="amount" id='monitoring_amount_<%= monitoring.id %>'>
           <%= monitoring.amount if ['above', 'bellow'].include? monitoring.monitoring_type %>
         </td>
-        <td class="block">
+        <td class="block" id='monitoring_block_<%= monitoring.id %>'>
           <%= block_user(monitoring) %>
         </td>
-        <td class="email">
+        <td class="email" id='monitoring_email_<%= monitoring.id %>'>
           <%= send_admin_email(monitoring) %>
         </td>
         <% if monitoring.users.any? %>
-            <td class="user_type">
+            <td class="user_type" id='monitoring_user_type_<%= monitoring.id %>'>
               <% for user in monitoring.users %>
                   <%= link_nice_user(user) %>
               <% end %>
             </td>
         <% else %>
-            <td class="user_type">
+            <td class="user_type" id='monitoring_user_type_<%= monitoring.id %>'>
               <strong><%= _(monitoring.user_type) %></strong>
             </td>
         <% end %>
         <% if !reseller? %>
-            <td class="log">
+            <td class="log" >
               <%= link_to b_user_log, {:controller => "stats", :action => "action_log", :target_type => "monitoring", :target_id => monitoring.id}, :id => "log_link_#{monitoring.id.to_s}" %>
             </td>
         <% end %>
@@ -68,10 +68,10 @@
     <table width="100%" class="monitoring" cellspacing="0" cellpadding="0">
       <thead>
       <tr>
-        <th <%= tooltip(_('Period'), _('Period_explanation')) %>><%= _('Period') %></th>
-        <th <%= tooltip(_('Condition'), _('Monitoring_condition_explanation'))%>><%= _('Condition') %> </th> 
- 	<th <%= tooltip(_('Actions'), _('Monitoring_action_explanation'))%>><%= _('Actions') %></th> 
-        <th <%= tooltip(_('User_type'), _('User_type_explanation')) %>><%= _('User_type') %></th>
+        <th id='m_period' <%= tooltip(_('Period'), _('Period_explanation')) %>><%= _('Period') %></th>
+        <th id='m_condition' <%= tooltip(_('Condition'), _('Monitoring_condition_explanation'))%>><%= _('Condition') %> </th>
+ 	    <th id='m_actions' <%= tooltip(_('Actions'), _('Monitoring_action_explanation'))%>><%= _('Actions') %></th>
+        <th id='m_user_type' <%= tooltip(_('User_type'), _('User_type_explanation')) %>><%= _('User_type') %></th>
         <th class="last"></th>
       </tr>
       </thead>
