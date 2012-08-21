@@ -62,6 +62,7 @@ class User < ActiveRecord::Base
   has_many :common_use_providers
   has_many :cards
   has_many :sms_provider_tariffs, :class_name => 'SmsTariff', :foreign_key => 'owner_id', :conditions => "tariff_type = 'provider'", :order => 'name ASC'
+  belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'
 
   validates_uniqueness_of :username, :message => _('Username_has_already_been_taken')
   validates_presence_of :username, :message => _('Username_cannot_be_blank')
@@ -329,13 +330,13 @@ class User < ActiveRecord::Base
     User.find(:all, :select => "*, #{SqlExport.nice_user_sql}", :conditions => "owner_id = #{id}", :order => "nice_user ASC")
   end
 
-  def owner
-    @attributes["owner"] ||= User.find(:first, :conditions => ["id = ?", owner_id])
-  end
+  #def owner
+  #  @attributes["owner"] ||= User.find(:first, :conditions => ["id = ?", owner_id])
+  #end
 
-  def owner= (owner)
-    @attributes["owner"] = owner
-  end
+  #def owner= (owner)
+  #  @attributes["owner"] = owner
+  #end
 
   def all_calls
     Call.find(:all, :conditions => "user_id = '#{id}'")
