@@ -206,8 +206,9 @@ class CallcController < ApplicationController
       user.save
       check_devices()
       owner = user.owner
-      owner = User.find(0) if !owner
+
     end
+    owner = User.find(0) if !owner
     session[:login] = false
 
     session.clear
