@@ -5,7 +5,9 @@
 
 <br/><br/>
 
+<% if @destination.direction %>
 <%= draw_flag @destination.direction.code %> <%= @destination.direction.name %>
+<%end%>
 <%= @destination.prefix %> <%= @destination.subcode %>
 
 <br/><br/><br/>
