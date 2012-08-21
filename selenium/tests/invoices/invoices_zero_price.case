@@ -223,20 +223,32 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>id=id_price_12</td>
+	<td>200.0000</td>
+</tr>
+<!--0.0000 randa jei ir 200.000 su aserttesxtnotpresent-->
+<!--<tr>
 	<td>assertTextNotPresent</td>
 	<td>0.0000</td>
 	<td></td>
-</tr>
+</tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/accounting/invoice_details/5?currency=USD</td>
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>id=id_total_price_13</td>
+	<td>200.0000</td>
+</tr>
+<!--0.0000 randa jei ir 200.000 su aserttesxtnotpresent-->
+<!--<tr>
 	<td>assertTextNotPresent</td>
 	<td>0.0000</td>
 	<td></td>
-</tr>
+</tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/accounting/generate_invoice_detailed_pdf/3?test=1</td>
