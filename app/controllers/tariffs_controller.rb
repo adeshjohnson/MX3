@@ -417,10 +417,12 @@ class TariffsController < ApplicationController
   def ghost_percent_edit
     a=check_user_for_tariff(@tariff.id)
     return false if !a
-    @rate = Rate.find(:first, :conditions => {:id => params[:rate_id]})
-
     @page_title = _('Ghost_percent')
-
+    @rate = Rate.find(:first, :conditions => {:id => params[:rate_id]})
+    unless rate
+      flash[:notice]=_('Rate_was_not_found')
+      redirect_to :action => :index and return false
+    end
     @destination = @rate.destination
   end
 
