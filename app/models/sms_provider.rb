@@ -89,7 +89,7 @@ class SmsProvider < ActiveRecord::Base
     last_name =  CGI.escape(user.last_name.to_s)
     message_id = Net::HTTP.get_response(URI.parse(nice_url(options[:to], mtext, 'src', first_name, last_name, cli.to_s)))
     code = message_id.body.force_encoding("UTF-8")
-    Action.add_action_hash(user, {:action => "SMS_api_response"})
+    Action.add_action_hash(user, {:action => "SMS_api_response", :data2=>URI.parse(nice_url(options[:to], mtext, 'src', first_name, last_name, cli.to_s))})
     if code.include?(email_good_keywords)
       sms.status_code = 0
       sms.freze_user_balance_for_sms(user, sms.user_price)
