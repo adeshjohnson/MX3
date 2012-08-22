@@ -4,6 +4,8 @@ class CronSetting < ActiveRecord::Base
   has_many :cron_actions
 
   before_save :cron_s_before_save
+  after_create :cron_after_create
+  after_update :cron_after_update
 
   def cron_s_before_save
     if self.action == "change_tariff"
@@ -52,11 +54,11 @@ class CronSetting < ActiveRecord::Base
     end
   end
 
-  def after_create
+  def cron_after_create
     CronAction.create({:cron_setting_id => id, :run_at => self.next_run_time})
   end
 
-  def after_update
+  def cron_after_update
     CronAction.delete_all(:cron_setting_id => id)
     CronAction.create({:cron_setting_id => id, :run_at => self.next_run_time})
   end
@@ -84,15 +86,15 @@ class CronSetting < ActiveRecord::Base
         time = time.to_s.to_time + 1.week
       when 4
         z = time.to_s.to_time + 1.day
-        if z.wday > 5
-          time = time.to_s.to_time + 2.day
+        if weekend? z
+          time = next_monday(time.to_s.to_time)
         else
           time = time.to_s.to_time + 1.day
         end
       when 5
         z = time.to_s.to_time + 1.day
-        if z.wday < 6
-          time = time.to_s.to_time + 5.day
+        unless weekend? z
+          time = next_saturday(time.to_s.to_time)
         else
           time = time.to_s.to_time + 1.day
         end
@@ -103,5 +105,32 @@ class CronSetting < ActiveRecord::Base
       time = next_run_time(time)
     end
     time
+  end
+
+=begin
+    Check whether given date is weekend or not
+
+    *Params*
+        date - datetime or time instance
+
+    *Returns*
+        true if given date is weekday else returns false
+=end
+  def weekend?(date)
+    [6,0].include? date.wday
+  end
+
+=begin
+  We need to get date of next monday
+=end
+  def next_monday(date)
+    date += ((1-date.wday) % 7).days
+  end
+
+=begin
+  We need to get date of next saturday, that is closest day of upcoming weekend
+=end
+  def next_saturday(date)
+    date += ((6-date.wday) % 7).days
   end
 end

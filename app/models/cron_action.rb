@@ -10,6 +10,7 @@ class CronAction < ActiveRecord::Base
   end
 
   def create_new
+    logger.fatal self.to_yaml
     time = self.next_run_time
     if time < cron_setting.valid_till and cron_setting.periodic_type != 0 or cron_setting.repeat_forever == 1
       CronAction.create({:cron_setting_id => cron_setting.id, :run_at => time})
