@@ -45,14 +45,14 @@ class CronAction < ActiveRecord::Base
         time = time.to_s.to_time + 1.week
       when 4
         z = time.to_s.to_time + 1.day
-        if weekend? z.wday
+        if weekend? z
           time = next_monday(time.to_s.to_time)
         else
           time = time.to_s.to_time + 1.day
         end
       when 5
         z = time.to_s.to_time + 1.day
-        unless weekend? z.wday
+        unless weekend? z
           time = next_saturday(time.to_s.to_time)
         else
           time = time.to_s.to_time + 1.day
