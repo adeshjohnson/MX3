@@ -55,6 +55,7 @@ class TestController < ApplicationController
       when "Gems"
         raise LoadError, 'in the standard locations or via rubygems. Check to en'
       when "MYSQL"
+        params[:this_is_fake_exception] = "YES"
         Confline.set_value("Last_Crash_Exception_Class", "")
         sql = "alter table users drop first_name ;"
         test = ActiveRecord::Base.connection.execute(sql)
