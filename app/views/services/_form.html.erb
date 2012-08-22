@@ -25,7 +25,7 @@
   </tr>
   <% if can_see_finances? %>
     <tr id="price_options">
-      <td> <%= _('Self_Price') %> (<%= current_user.currency.name %>):</td>
+      <td> <%= _('Sell_Price') %> (<%= current_user.currency.name %>):</td>
       <td> <%= text_field_tag 'service[price]', @service.price, "class" => "input", :disabled => (current_user.is_accountant? and not accountant_can_write?('see_financial_data')), :onkeyup => "this.value=this.value.replace(/[^0-9.-]/,'');" %></td>
     </tr>
     <tr id="price_options2">
