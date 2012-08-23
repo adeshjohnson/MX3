@@ -1218,7 +1218,7 @@ class User < ActiveRecord::Base
     device.sendrpid = Confline.get_value("Default_device_sendrpid", owner_id).to_s
     device.t38pt_udptl = Confline.get_value("Default_device_t38pt_udptl", owner_id).to_s
     device.promiscredir = Confline.get_value("Default_device_promiscredir", owner_id).to_s
-    device.promiscredir = "no" if device.promiscredir != "yes" or device.promiscredir != "no"
+    device.promiscredir = "no" if device.promiscredir.to_s != "yes" and device.promiscredir.to_s != "no"
     device.progressinband = Confline.get_value("Default_device_progressinband", owner_id).to_s
     device.videosupport = Confline.get_value("Default_device_videosupport", owner_id).to_s
     device.allow_duplicate_calls = Confline.get_value("Default_device_allow_duplicate_calls", owner_id).to_i
@@ -1268,6 +1268,7 @@ class User < ActiveRecord::Base
     device.block_callerid = Confline.get_value("Default_device_block_callerid", owner_id).to_i
     device.max_timeout = Confline.get_value("Default_device_max_timeout", owner_id).to_i
     device.language = Confline.get_value("Default_device_language", owner_id).to_s
+    device.anti_resale_auto_answer = Confline.get_value("Default_device_anti_resale_auto_answer", owner_id).to_i
     if not device.works_not_logged
       device.works_not_logged = 1
     end

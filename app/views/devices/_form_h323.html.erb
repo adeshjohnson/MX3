@@ -434,6 +434,33 @@ end
       </td>
     </tr>
 <% end %>
+<tr>
+  <td>
+    <%= _('Block_callerid_if') %>
+    <%= text_field_tag 'device[block_callerid]', @device.block_callerid, :disabled => (not @device.block_callerid?), :size => 3, "class" => "input"  %>
+    <%= _('simultaneous_calls_come_from_it') %>:
+  </td>
+  <td>
+    <%= radio_button_tag('block_callerid_enable', "no",  (not @device.block_callerid?)) %> <%= _('No') %>
+    <%= radio_button_tag('block_callerid_enable', "yes", @device.block_callerid?) %> <%= _('Yes') %>
+  </td>
+</tr>
+<script type='text/javascript' >
+    /*after window loads register event listener on two radio buttons
+     (block_callerid_enable_yes, block_callerid_enable_no). if 'yes' radio
+     button is checked enable block_callerid input box and set default value
+     to 2 else if 'no' radio button is checked disable block_callerid input
+     box and set it to empty string.*/
+    Event.observe(window, 'load', function() {
+        ['block_callerid_enable_yes','block_callerid_enable_no'].each(function(radio_button){
+            Event.observe(radio_button, 'change', function(event) {
+                var block_clid_enabled = (event.target.checked && event.target.value == 'yes')
+                $('device_block_callerid').disabled = (!block_clid_enabled)
+                $('device_block_callerid').value = (block_clid_enabled ? '2' : '')
+            });
+        });
+    });
+</script>
 
 
 <tr>
@@ -492,34 +519,6 @@ end
     <% @owner = @user.owner_id %>
     <%= render :partial => "device_recordings" %>
 <% end %>
-
-<tr> 
-  <td>  
-    <%= _('Block_callerid_if') %>  
-    <%= text_field_tag 'device[block_callerid]', @device.block_callerid, :disabled => (not @device.block_callerid?), :size => 3, "class" => "input"  %> 
-    <%= _('simultaneous_calls_come_from_it') %>:  
-  </td> 
-  <td> 
-    <%= radio_button_tag('block_callerid_enable', "no",  (not @device.block_callerid?)) %> <%= _('No') %> 
-    <%= radio_button_tag('block_callerid_enable', "yes", @device.block_callerid?) %> <%= _('Yes') %> 
-  </td> 
-</tr> 
-<script type='text/javascript' > 
-  /*after window loads register event listener on two radio buttons 
-  (block_callerid_enable_yes, block_callerid_enable_no). if 'yes' radio  
-  button is checked enable block_callerid input box and set default value  
-  to 2 else if 'no' radio button is checked disable block_callerid input  
-  box and set it to empty string.*/ 
-  Event.observe(window, 'load', function() { 
-    ['block_callerid_enable_yes','block_callerid_enable_no'].each(function(radio_button){ 
-      Event.observe(radio_button, 'change', function(event) { 
-        var block_clid_enabled = (event.target.checked && event.target.value == 'yes') 
-        $('device_block_callerid').disabled = (!block_clid_enabled) 
-        $('device_block_callerid').value = (block_clid_enabled ? '2' : '') 
-      }); 
-    }); 
-  }); 
-</script> 
 
 <% if !reseller? %>
     <% if not @new_device and @device_type != "FAX" and @device_type != "Virtual" %>

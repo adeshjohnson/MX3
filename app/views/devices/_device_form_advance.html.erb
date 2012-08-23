@@ -44,8 +44,8 @@
             <tr <%= tooltip(_('SIP_302_Reinvite_Support'), _('SIP_302_Reinvite_Support_Explanation')) %>>
               <td><%= b_exclamation + _('SIP_302_Reinvite_Support') %>:</td>
               <td>
-                <%= radio_button_tag('device[promiscredir]', 'no', @device.promiscredir == 'no') %> <%= _('No') %>
-                <%= radio_button_tag('device[promiscredir]', 'yes', @device.promiscredir == 'yes') %> <%= _('Yes') %>
+                <%= radio_button_tag('device[promiscredir]', 'no', @device.promiscredir.to_s == 'no') %> <%= _('No') %>
+                <%= radio_button_tag('device[promiscredir]', 'yes', @device.promiscredir.to_s == 'yes') %> <%= _('Yes') %>
               </td>
             </tr>
         <% end %>
@@ -191,10 +191,10 @@
 <% end %>
 <% if ['SIP','IAX2', 'dahdi', 'H323'].include? @device_type %>
   <tr>
-    <td> 
-      <%= _('Block_callerid_if') %> 
+    <td>
+      <%= _('Block_callerid_if') %>
       <%= text_field_tag 'device[block_callerid]', @device.block_callerid, :disabled => (not @device.block_callerid?), :size => 3, "class" => "input"  %>
-      <%= _('simultaneous_calls_come_from_it') %>: 
+      <%= _('simultaneous_calls_come_from_it') %>:
     </td>
     <td>
       <%= radio_button_tag('block_callerid_enable', "no",  (not @device.block_callerid?)) %> <%= _('No') %>
@@ -203,9 +203,9 @@
   </tr>
   <script type='text/javascript' >
     /*after window loads register event listener on two radio buttons
-    (block_callerid_enable_yes, block_callerid_enable_no). if 'yes' radio 
-    button is checked enable block_callerid input box and set default value 
-    to 2 else if 'no' radio button is checked disable block_callerid input 
+    (block_callerid_enable_yes, block_callerid_enable_no). if 'yes' radio
+    button is checked enable block_callerid input box and set default value
+    to 2 else if 'no' radio button is checked disable block_callerid input
     box and set it to empty string.*/
     Event.observe(window, 'load', function() {
       ['block_callerid_enable_yes','block_callerid_enable_no'].each(function(radio_button){

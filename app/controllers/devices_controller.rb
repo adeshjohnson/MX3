@@ -1894,7 +1894,8 @@ class DevicesController < ApplicationController
     Confline.set_value("Default_device_insecure", "port,invite", session[:user_id]) if params[:insecure_port] == "1" and params[:insecure_invite] == "1"
     Confline.set_value("Default_device_insecure", "invite", session[:user_id]) if params[:insecure_port] != "1" and params[:insecure_invite] == "1"
     Confline.set_value("Default_device_calleridpres", params[:device][:calleridpres].to_s, session[:user_id])
-    Confline.set_value("Default_device_change_failed_code_to", params[:device][:change_failed_code_to])
+    Confline.set_value("Default_device_change_failed_code_to", params[:device][:change_failed_code_to].to_i, session[:user_id])
+    Confline.set_value("Default_device_anti_resale_auto_answer", params[:device][:anti_resale_auto_answer].to_i, session[:user_id])
 
     #recordings
     Confline.set_value("Default_device_record", params[:device][:record].to_i, session[:user_id])
