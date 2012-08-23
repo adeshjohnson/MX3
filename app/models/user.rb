@@ -197,7 +197,7 @@ class User < ActiveRecord::Base
       own_providers = 0
     end
 
-    self.uniquehash = ApplicationController::random_password(10) if  self.uniquehash.to_s.blank?
+    uniquehash = ApplicationController::random_password(10) if uniquehash.to_s.blank?
 
   end
 
