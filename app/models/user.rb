@@ -877,7 +877,7 @@ class User < ActiveRecord::Base
 
   def User::get_hash(user_id)
     user = User.find(user_id.to_i)
-    return user.uniquehash if user and user.uniquehash and user.uniquehash.length > 0
+    return user.uniquehash if user and user.uniquehash and !user.uniquehash.blank?
     user.uniquehash = ApplicationController::random_password(10)
     user.save
     return user.uniquehash
