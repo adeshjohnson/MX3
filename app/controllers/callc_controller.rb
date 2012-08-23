@@ -730,7 +730,7 @@ class CallcController < ApplicationController
         # =========== block users if necessary =====================================
         block_users
         block_users_conditional
-        pay_subscriptions(@time.year.to_i, @time.month.to_i, @time.day.to_i)
+        pay_subscriptions(@time.year.to_i, @time.month.to_i, @time.day.to_i, "is_a_day")
       }
     end
   end
@@ -883,7 +883,7 @@ class CallcController < ApplicationController
   end
 
 
-  def pay_subscriptions(year, month, day=nil)
+  def pay_subscriptions(year, month, day=nil, is_a_day=nil)
     email_body = []
     email_body_reseller = []
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
@@ -907,7 +907,7 @@ class CallcController < ApplicationController
       doc.day(@day) if day
       @users.each_with_index { |user, i|
         user_time = Time.now
-        subscriptions = user.pay_subscriptions(@year, @month, day)
+        subscriptions = user.pay_subscriptions(@year, @month, day, is_a_day)
         if subscriptions.size > 0
           doc.user(:username => user.username, :user_id => user.id, :first_name => user.first_name, :balance => user.balance, :user_type => user.user_type) {
             send = true

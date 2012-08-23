@@ -1139,10 +1139,11 @@ class User < ActiveRecord::Base
 
   # finds subscriptions in given period
   # period is in string format date-time
-  def subscriptions_in_period(period_start, period_end)
+  def subscriptions_in_period(period_start, period_end, is_a_day = nil, is_a_day = nil)
     period_start = period_start.to_s(:db) if period_start.class == Time or period_start.class == Date
     period_end = period_end.to_s(:db) if period_end.class == Time or period_end.class == Date
-    subs = Subscription.where(["(? BETWEEN activation_start AND activation_end OR ? BETWEEN activation_start AND activation_end OR (activation_start > ? AND activation_end < ?)) AND subscriptions.user_id = ?", period_start, period_end, period_start, period_end, self.id]).includes(:service).all
+    day_sql = !is_a_day.to_s.blank? ? " AND services.periodtype = 'day' "  : ''
+    subs = Subscription.where(["(? BETWEEN activation_start AND activation_end OR ? BETWEEN activation_start AND activation_end OR (activation_start > ? AND activation_end < ?)) AND subscriptions.user_id = ?  #{day_sql}", period_start, period_end, period_start, period_end, self.id]).includes(:service).all
     subs
   end
 
@@ -1368,7 +1369,7 @@ class User < ActiveRecord::Base
     postpaid == 1 ? "postpaid" : "prepaid"
   end
 
-  def pay_subscriptions(year, month, day=nil)
+  def pay_subscriptions(year, month, day=nil, is_a_day = nil)
     changed = 0
     all_data = []
     MorLog.my_debug("---#{username}-----------------------------------------")
@@ -1390,8 +1391,10 @@ class User < ActiveRecord::Base
       period_end_with_time = time.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
     end
 
-    subscriptions = self.subscriptions_in_period(period_start_with_time, period_end_with_time)
+    subscriptions = self.subscriptions_in_period(period_start_with_time, period_end_with_time, is_a_day)
     MorLog.my_debug("  Found subscriptions : #{subscriptions.size}")
+    MorLog.my_debug("  period_start_with_time : #{period_start_with_time}")
+    MorLog.my_debug("  period_end_with_time : #{period_end_with_time}")
     b=0
     subscriptions.each { |sub|
       if !Action.find(:first, :conditions => ["action = 'subscription_paid' AND user_id = ? AND data = ? AND target_id = ?", id, "#{time.year}-#{time.month}#{('-' + time.day.to_s) if day}", sub.id])
