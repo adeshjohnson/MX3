@@ -52,6 +52,7 @@ class CardgroupsController < ApplicationController
         "s_caller_id" => ''
     }
 
+    @options = @options.merge(session[:cardgroup_search_options])
     @cardgroups = Cardgroup.find(:all, :select => "cardgroups.*, COUNT(cards.id) AS card_count", :joins => "LEFT JOIN cards ON (cards.cardgroup_id = cardgroups.id and cards.hidden = 0)", :conditions=>["cardgroups.owner_id = ?", user_id], :group => 'cardgroups.id')
   end
 

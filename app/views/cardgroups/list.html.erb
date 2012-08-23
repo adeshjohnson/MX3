@@ -22,22 +22,20 @@
       <br/>
       <%= hidden_field_tag 'search_on', 1 %>
 
-      <%= _('Number') %>: <%= text_field_tag 's_number', @options["s_number"], "class" => "input", :size => "15" %>
+      <%= _('Number') %>: <%= text_field_tag 's_number', @options[:s_number], "class" => "input", :size => "15" %>
       <% if @show_pin == true %>
-        <%= _('PIN') %>: <%= text_field_tag 's_pin', @options["s_pin"], "class" => "input", :size => "15" %>
+        <%= _('PIN') %>: <%= text_field_tag 's_pin', @options[:s_pin], "class" => "input", :size => "15" %>
       <% end %>
-      <%= _('CallerID') %>
-      : <%= text_field_tag 's_caller_id', @options[:s_caller_id], "class" => "input", :size => "15" %>
-      <%= _('Balance_between') %>
-      : <%= text_field_tag 's_balance_min', @options["s_balance_min"], "class" => "input", :size => "7", :maxlength => "10" %>
+      <%= _('CallerID') %>: <%= text_field_tag 's_caller_id', @options[:s_caller_id], "class" => "input", :size => "15" %>
+      <%= _('Balance_between') %>: <%= text_field_tag 's_balance_min', @options[:s_balance_min], "class" => "input", :size => "7", :maxlength => "10" %>
       -
-      <%= text_field_tag 's_balance_max', @options["s_balance_max"], "class" => "input", :size => "7", :maxlength => "10" %>
+      <%= text_field_tag 's_balance_max', @options[:s_balance_max], "class" => "input", :size => "7", :maxlength => "10" %>
 
       &nbsp;&nbsp;<%= _('Sold') %>?:
       <select name="s_sold">
         <option value="all" selected> <%= _('All') %> </option>
-        <option value="yes" <%= "selected" if @options["s_sold"] == "yes" %>> <%= _('Yes') %> </option>
-        <option value="no" <%= "selected" if @options["s_sold"] == "no" %>> <%= _('No') %> </option>
+        <option value="yes" <%= "selected" if @options[:s_sold] == "yes" %>> <%= _('Yes') %> </option>
+        <option value="no" <%= "selected" if @options[:s_sold] == "no" %>> <%= _('No') %> </option>
 
       </select>
 
