@@ -1,0 +1,1139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<!--// subcriptions and pages-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--...Filling db with subscription entries-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/services_and_subscriptions</td>
+	<td></td>
+</tr>
+<!--...Testing as Admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.0</td>
+	<td>User</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.1</td>
+	<td>Service</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.2</td>
+	<td>Price(USD)</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.3</td>
+	<td>Memo</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.4</td>
+	<td>Added</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.5</td>
+	<td>Activation start</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.6</td>
+	<td>Activation end</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.7</td>
+	<td>Time left</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.0</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.0</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=user&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.0</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.0</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=user&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.0</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.0</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=service&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.1</td>
+	<td>Trecias</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.1</td>
+	<td>Antras</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=service&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.1</td>
+	<td>Trecias</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.1</td>
+	<td>Antras</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=price&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.2</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.2</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=price&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.2</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.2</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=added&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.4</td>
+	<td>2012-12-24 09:25:00</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.4</td>
+	<td>2009-04-22 09:25:00</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=added&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.4</td>
+	<td>2009-04-22 09:25:00</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.4</td>
+	<td>2012-12-24 09:25:00</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=activation_start&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.5</td>
+	<td>2011-12-28 09:25:00</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.5</td>
+	<td>2009-03-22 09:25:00</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=activation_start&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.5</td>
+	<td>2009-03-22 09:25:00</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.5</td>
+	<td>2011-12-28 09:25:00</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=activation_end&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.6</td>
+	<td>2020-11-30 23:59:59</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.6</td>
+	<td>2013-01-05 09:25:00</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=memo&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.3</td>
+	<td>Test_preriodic_service_memo</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.17.3</td>
+	<td>g_preriodic_service_memo</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.3</td>
+	<td>aa preriodic_service_memo</td>
+</tr>
+<!--...Creating Accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Account</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/1?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=manage_subscriptions_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=services_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--...Testing as Accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.0</td>
+	<td>User</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.1</td>
+	<td>Service</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.2</td>
+	<td>Price(USD)</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.3</td>
+	<td>Memo</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.4</td>
+	<td>Added</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.5</td>
+	<td>Activation start</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.6</td>
+	<td>Activation end</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.7</td>
+	<td>Time left</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.0</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.0</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=user&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.0</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.0</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=user&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.0</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.0</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=service&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.1</td>
+	<td>Trecias</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.1</td>
+	<td>Antras</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=service&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.1</td>
+	<td>Trecias</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.1</td>
+	<td>Antras</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=price&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.2</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.2</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=price&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.2</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.2</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=added&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.4</td>
+	<td>2012-12-24 09:25:00</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.4</td>
+	<td>2009-04-22 09:25:00</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=added&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.4</td>
+	<td>2009-04-22 09:25:00</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.4</td>
+	<td>2012-12-24 09:25:00</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=activation_start&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.5</td>
+	<td>2011-12-28 09:25:00</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.5</td>
+	<td>2009-03-22 09:25:00</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=activation_start&amp;order_desc=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.5</td>
+	<td>2009-03-22 09:25:00</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.5</td>
+	<td>2011-12-28 09:25:00</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=activation_end&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.6</td>
+	<td>2020-11-30 23:59:59</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.6</td>
+	<td>2013-01-05 09:25:00</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?order_by=memo&amp;order_desc=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.3</td>
+	<td>Test_preriodic_service_memo</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.3</td>
+	<td>hhhhh_preriodic_service_memo</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.3</td>
+	<td>aa preriodic_service_memo</td>
+</tr>
+<!--...Testing as Reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.0</td>
+	<td>User</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.1</td>
+	<td>Device</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.2</td>
+	<td>Service</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.3</td>
+	<td>From</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.4</td>
+	<td>Till</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.5</td>
+	<td>Time left</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.0.6</td>
+	<td>Memo</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.2</td>
+	<td>Test_periodic_service</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.31.2</td>
+	<td>Sestas</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.6</td>
+	<td>a_preriodic_service_memo</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.31.6</td>
+	<td>iiiii_preriodic_service_memo</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.3</td>
+	<td>2010-03-22 09:25:00</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.31.3</td>
+	<td>2011-03-22 09:25:00</td>
+</tr>
+<!--...Setting 5 subs per page-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_10 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--...Testing as Admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.page_title2.0.0</td>
+	<td>1 2 3 4 5 6 7 8 9</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.2</td>
+	<td>13.0000</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.5.2</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.6.2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?page=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.1</td>
+	<td>Penktas</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.5.1</td>
+	<td>Service reseller1</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.6.1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?page=9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.1</td>
+	<td>Antras</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.5.1</td>
+	<td>Sestas</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.6.1</td>
+	<td></td>
+</tr>
+<!--...Testing as Accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.page_title2.0.0</td>
+	<td>1 2 3 4 5 6 7 8 9</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.2</td>
+	<td>13.0000</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.5.2</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.6.2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?page=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.1</td>
+	<td>Penktas</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.5.1</td>
+	<td>Service reseller1</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.6.1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats?page=9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.1</td>
+	<td>Antras</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.5.1</td>
+	<td>Sestas</td>
+</tr>
+<!--...Testing as Reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.page_title2.0.0</td>
+	<td>1 2 3 4 5 6 7</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.2</td>
+	<td>Test_periodic_service</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.5.2</td>
+	<td>Antras</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.6.2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions?page=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.2</td>
+	<td>Ketvirtas</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.5.2</td>
+	<td>Ketvirtas</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.6.1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions?page=7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.2</td>
+	<td>Sestas</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=table.maintable.2.0</td>
+	<td>Sestas</td>
+</tr>
+<!--...Setting back to 50-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_10 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--...Checking elements-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/subscriptions_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.3</td>
+	<td>aaaa_preriodic_service_memo</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.22.2</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.45.1</td>
+	<td>Sestas</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
