@@ -9,7 +9,7 @@ class TariffsController < ApplicationController
   before_filter :check_post_method, :only => [:destroy, :create, :update, :rate_destroy, :ratedetail_update, :ratedetail_destroy, :ratedetail_create, :artg_destroy, :user_rate_update, :user_rate_delete, :user_rates_update, :user_rate_destroy, :day_destroy, :day_update, :update_tariff_for_users]
   before_filter :check_localization
   before_filter :authorize, :except => [:destinations_csv]
-  before_filter :check_if_can_see_finances, :only => [:new, :create, :index, :list, :edit, :update, :destroy, :rates_list, :import_csv, :delete_all_rates, :make_user_tariff, :make_user_tariff_wholesale]
+  before_filter :check_if_can_see_finances, :only => [:new, :create, :list, :list, :edit, :update, :destroy, :rates_list, :import_csv, :delete_all_rates, :make_user_tariff, :make_user_tariff_wholesale]
   before_filter :find_user_from_session, :only => [:generate_personal_rates_csv, :generate_personal_rates_pdf, :generate_personal_wholesale_rates_pdf, :generate_personal_wholesale_rates_csv, :user_rates, :user_rates_detailed]
   before_filter :find_user_tariff, :only => [:generate_personal_rates_csv, :generate_personal_rates_pdf, :generate_personal_wholesale_rates_pdf, :generate_personal_wholesale_rates_csv, :user_rates, :user_rates_detailed]
   before_filter :find_tariff_whith_currency, :only => [:find_tariff_whith_currency, :generate_providers_rates_csv, :generate_provider_rates_pdf, :generate_user_rates_pdf, :generate_user_rates_csv]
@@ -348,7 +348,7 @@ class TariffsController < ApplicationController
     @direction = Direction.find(:first, :conditions => ['id = ?', params[:dir_id]])
     unless @direction
       flash[:notice]=_('Direction_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     @destinations = @tariff.free_destinations_by_direction(@direction)
     #    MorLog.my_debug(@destinations)
@@ -378,7 +378,7 @@ class TariffsController < ApplicationController
     @direction = Direction.find(:first, :conditions => ['id = ?', params[:dir_id]])
     unless @direction
       flash[:notice]=_('Direction_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     @destinations = @tariff.free_destinations_by_direction(@direction)
     mr = mor_11_extend?
@@ -419,9 +419,9 @@ class TariffsController < ApplicationController
     return false if !a
     @page_title = _('Ghost_percent')
     @rate = Rate.find(:first, :conditions => {:id => params[:rate_id]})
-    unless rate
+    unless @rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     @destination = @rate.destination
   end
@@ -471,7 +471,7 @@ class TariffsController < ApplicationController
     rate = Rate.find(:first, :conditions => ["id = ?", params[:id]])
     unless rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     if rate
       a=check_user_for_tariff(rate.tariff_id)
@@ -491,7 +491,7 @@ class TariffsController < ApplicationController
     @rate = Rate.find_by_id(params[:id])
     unless @rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
 
     rated = Ratedetail.find(:first, :conditions => ["rate_id = ?", params[:id]])
@@ -547,7 +547,7 @@ class TariffsController < ApplicationController
     @rate = Rate.find_by_id(params[:id])
     unless @rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
 
     a=check_user_for_tariff(@rate.tariff_id)
@@ -611,7 +611,7 @@ class TariffsController < ApplicationController
     @ratedetail = Ratedetail.find_by_id(params[:id])
     unless @ratedetail
       flash[:notice]=_('Ratedetail_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     @page_title = _('Rate_details_edit')
     @page_icon = "edit.png"
@@ -619,7 +619,7 @@ class TariffsController < ApplicationController
     rate = Rate.find_by_id(@ratedetail.rate_id)
     unless rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     check_user_for_tariff(rate.tariff_id)
 
@@ -638,14 +638,14 @@ class TariffsController < ApplicationController
     @ratedetail = Ratedetail.find_by_id(params[:id])
     unless @ratedetail
       flash[:notice]=_('Ratedetail_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     rd = @ratedetail
 
     rate = Rate.find_by_id(@ratedetail.rate_id)
     unless rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
 
     a=check_user_for_tariff(rate.tariff_id)
@@ -689,7 +689,7 @@ class TariffsController < ApplicationController
     @rate = Rate.find_by_id(params[:id])
     unless @rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     @page_title = _('Ratedetail_new')
     @page_icon = "add.png"
@@ -702,7 +702,7 @@ class TariffsController < ApplicationController
     @rate = Rate.find_by_id(params[:id])
     unless @rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     @ratedetail = Ratedetail.new(params[:ratedetail])
     @ratedetail.rate_id = @rate.id
@@ -718,7 +718,7 @@ class TariffsController < ApplicationController
     @rate = Rate.find_by_id(params[:rate])
     unless @rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     a=check_user_for_tariff(@rate.tariff_id)
     return false if !a
@@ -726,7 +726,7 @@ class TariffsController < ApplicationController
     rd = Ratedetail.find_by_id(params[:id])
     unless rd
       flash[:notice]=_('Ratedetail_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     rdetails = @rate.ratedetails_by_daytype(rd.daytype)
 
@@ -770,7 +770,7 @@ class TariffsController < ApplicationController
     @tariff = Tariff.find_by_id(params[:id])
     unless @tariff
       flash[:notice]=_('Tariff_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     a=check_user_for_tariff(@tariff.id)
     return false if !a
@@ -2108,7 +2108,7 @@ class TariffsController < ApplicationController
     @dgroup = Destinationgroup.find_by_id(params[:dg])
     unless @dgroup
       flash[:notice]=_('Destinationgroup_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     @rate = @dgroup.rate(@tariff.id)
 
@@ -2195,7 +2195,7 @@ class TariffsController < ApplicationController
     @rate = Rate.find_by_id(params[:id])
     unless @rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     a=check_user_for_tariff(@rate.tariff_id)
     return false if !a
@@ -2254,7 +2254,7 @@ class TariffsController < ApplicationController
     @rate = Rate.find_by_id(params[:id])
     unless @rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     dt = params[:dt]
     dt = "" if not params[:dt]
@@ -2285,7 +2285,7 @@ class TariffsController < ApplicationController
     @rate = Rate.find_by_id(params[:id])
     unless @rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
 
     a=check_user_for_tariff(@rate.tariff_id)
@@ -2352,7 +2352,7 @@ class TariffsController < ApplicationController
     @ard = Aratedetail.find_by_id(params[:id])
     unless @ard
       flash[:notice]=_('Aratedetail_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     #@dgroup = @ard.rate.destinationgroup
     #@tariff = @ard.rate.tariff
@@ -2408,7 +2408,7 @@ class TariffsController < ApplicationController
     @rate = Rate.find_by_id(params[:id])
     unless @rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     @ard = Aratedetail.new
 
@@ -2454,7 +2454,7 @@ class TariffsController < ApplicationController
     @ard = Aratedetail.find_by_id(params[:id])
     unless @ard
       flash[:notice]=_('Aratedetail_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     #@dgroup = @ard.rate.destinationgroup
 
@@ -2550,7 +2550,7 @@ class TariffsController < ApplicationController
     rate = Rate.find_by_id(params[:id])
     unless rate
       flash[:notice]=_('Rate_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     tariff_id = rate.tariff_id
 
@@ -2670,7 +2670,7 @@ class TariffsController < ApplicationController
     @dgroup = Destinationgroup.find_by_id(params[:id])
     unless @dgroup
       flash[:notice]=_('Destinationgroup_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     @rate = @dgroup.rate(session[:tariff_id])
     @custrate = @dgroup.custom_rate(session[:user_id])
@@ -2774,7 +2774,7 @@ class TariffsController < ApplicationController
     day = Day.find_by_id(params[:id])
     unless day
       flash[:notice]=_('Day_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     flash[:status] = _('Day_deleted') + ": " + day.date.to_s
     day.destroy
@@ -2790,7 +2790,7 @@ class TariffsController < ApplicationController
     @day = Day.find_by_id(params[:id])
     unless @day
       flash[:notice]=_('Day_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
   end
 
@@ -2798,7 +2798,7 @@ class TariffsController < ApplicationController
     day = Day.find_by_id(params[:id])
     unless day
       flash[:notice]=_('Day_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
 
     date = params[:date][:year] + "-" + good_date(params[:date][:month]) + "-" + good_date(params[:date][:day])
@@ -2923,12 +2923,12 @@ class TariffsController < ApplicationController
       @tarif_from = Tariff.find_by_id(params[:tariff_from])
       unless @tarif_from
         flash[:notice]=_('Tariff_was_not_found')
-        redirect_to :action => :index and return false
+        redirect_to :action => :list and return false
       end
       @tarif_to = Tariff.find_by_id(params[:tariff_to])
       unless @tarif_to
         flash[:notice]=_('Tariff_was_not_found')
-        redirect_to :action => :index and return false
+        redirect_to :action => :list and return false
       end
       for user in @tarif_from.users
         user.tariff_id = @tarif_to.id
@@ -3398,12 +3398,12 @@ class TariffsController < ApplicationController
     @tariff = Tariff.find(:first, :conditions => ['id=?', params[:id]])
     unless @tariff
       flash[:notice]=_('Tariff_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
 
     unless @tariff.real_currency
       flash[:notice]=_('Tariff_currency_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
   end
 
@@ -3412,7 +3412,7 @@ class TariffsController < ApplicationController
     @tariff = Tariff.find(:first, :conditions => ['id=?', params[:id]])
     unless @tariff
       flash[:notice]=_('Tariff_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
   end
 
@@ -3421,7 +3421,7 @@ class TariffsController < ApplicationController
     @user = User.find(:first, :include => [:tariff], :conditions => ["users.id = ?", session[:user_id]])
     unless @user
       flash[:notice]=_('User_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
   end
 
@@ -3430,12 +3430,12 @@ class TariffsController < ApplicationController
     @tariff = @user.tariff
     unless @tariff
       flash[:notice]=_('Tariff_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
 
     unless @tariff.real_currency
       flash[:notice]=_('Tariff_currency_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
   end
 
