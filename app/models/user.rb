@@ -888,10 +888,10 @@ class User < ActiveRecord::Base
 =end
 
   def get_hash
-    return(uniquehash) if (uniquehash and uniquehash.length > 0)
-    uniquehash = ApplicationController::random_password(10)
+    return(self.uniquehash) if (self.uniquehash and self.uniquehash.blank?)
+    self.uniquehash = ApplicationController::random_password(10)
     self.save
-    return uniquehash
+    return self.uniquehash
   end
 
   #debug
