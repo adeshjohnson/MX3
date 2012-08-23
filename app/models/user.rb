@@ -197,8 +197,7 @@ class User < ActiveRecord::Base
       own_providers = 0
     end
 
-    uniquehash = ApplicationController::random_password(10) if uniquehash.to_s.blank?
-
+    self.uniquehash = ApplicationController::random_password(10) if self.uniquehash.to_s.blank?
   end
 
   def user_before_create
@@ -879,7 +878,7 @@ class User < ActiveRecord::Base
 
   def User::get_hash(user_id)
     user = User.find(user_id.to_i)
-    return user.uniquehash if user and user.uniquehash and !user.uniquehash.blank?
+    return user.uniquehash if user and user.uniquehash and user.uniquehash.length > 0
     user.uniquehash = ApplicationController::random_password(10)
     user.save
     return user.uniquehash
@@ -890,10 +889,10 @@ class User < ActiveRecord::Base
 =end
 
   def get_hash
-    return(self.uniquehash) if (self.uniquehash and self.uniquehash.blank?)
-    self.uniquehash = ApplicationController::random_password(10)
+    return(uniquehash) if (uniquehash and uniquehash.length > 0)
+    uniquehash = ApplicationController::random_password(10)
     self.save
-    return self.uniquehash
+    return uniquehash
   end
 
   #debug
