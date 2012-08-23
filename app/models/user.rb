@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
+
   include SqlExport
   include UniversalHelpers
   require "digest/sha2"
