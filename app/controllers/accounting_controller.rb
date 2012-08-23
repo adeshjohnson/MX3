@@ -328,7 +328,7 @@ class AccountingController < ApplicationController
       MorLog.my_debug("end incomming calls", 1)
       # find subscriptions for user in period
       MorLog.my_debug("start subscriptions", 1)
-      subscriptions = user.subscriptions_in_period(period_start_with_time, period_end_with_time)
+      subscriptions = user.subscriptions_in_period(period_start_with_time, period_end_with_time, 'invoices')
       MorLog.my_debug("end subscriptions", 1)
       total_subscriptions = 0
       total_subscriptions = subscriptions.size if subscriptions
@@ -576,7 +576,7 @@ class AccountingController < ApplicationController
       incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users = call_details_for_user(user, period_start_with_time, period_end_with_time, use_index)
       MorLog.my_debug("incoming calls end", 1)
       MorLog.my_debug("subscriptions start", 1)
-      subscriptions = user.subscriptions_in_period(period_start_with_time, period_end_with_time)
+      subscriptions = user.subscriptions_in_period(period_start_with_time, period_end_with_time, 'invoices')
       MorLog.my_debug("subscriptions end", 1)
       total_subscriptions = 0
       total_subscriptions = subscriptions.size if subscriptions
@@ -1742,7 +1742,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users = call_details_for_user(user, period_start_with_time.strftime("%Y-%m-%d %H:%M:%S"), period_end_with_time.strftime("%Y-%m-%d %H:%M:%S"), use_index)
 
     # find subscriptions for user in period
-    subscriptions = user.subscriptions_in_period(period_start_with_time, period_end_with_time)
+    subscriptions = user.subscriptions_in_period(period_start_with_time, period_end_with_time, 'invoices')
     total_subscriptions = 0
     total_subscriptions = subscriptions.size if subscriptions
     MorLog.my_debug("  Total subscriptions this period: #{total_subscriptions}")
