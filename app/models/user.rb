@@ -1139,7 +1139,7 @@ class User < ActiveRecord::Base
 
   # finds subscriptions in given period
   # period is in string format date-time
-  def subscriptions_in_period(period_start, period_end, is_a_day = nil, is_a_day = nil)
+  def subscriptions_in_period(period_start, period_end, is_a_day = nil)
     period_start = period_start.to_s(:db) if period_start.class == Time or period_start.class == Date
     period_end = period_end.to_s(:db) if period_end.class == Time or period_end.class == Date
     day_sql = !is_a_day.to_s.blank? ? " AND services.periodtype = 'day' "  : " AND services.periodtype != 'day' "
