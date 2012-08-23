@@ -395,22 +395,12 @@
 	<td>label=11</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Tariff import incorrect time</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>* Please select period without collisions</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>rate_day_type</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>rate_day_type</td>
 	<td>All</td>
 </tr>
@@ -606,7 +596,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>start_time_503</td>
 	<td>00:00:00</td>
 </tr>
@@ -727,16 +717,6 @@
 	<td>time_from_hour</td>
 	<td>blur</td>
 </tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Tariff import incorrect time</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
-</tr>
 <!--DELETE TARIFF-->
 <tr>
 	<td>open</td>
@@ -806,7 +786,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>select</td>
 	<td>id=rate_day_type</td>
 	<td>Work Days</td>
 </tr>
@@ -1012,7 +992,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>select</td>
 	<td>id=rate_day_type</td>
 	<td>Work Days</td>
 </tr>
@@ -1020,16 +1000,6 @@
 	<td>select</td>
 	<td>id=time_from_hour</td>
 	<td>label=07</td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Tariff import incorrect time</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -1223,7 +1193,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>select</td>
 	<td>id=rate_day_type</td>
 	<td>Work Days</td>
 </tr>
@@ -1318,11 +1288,6 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertText</td>
 	<td>id=rate_day_type</td>
 	<td>Work Days Free Days</td>
@@ -1333,19 +1298,9 @@
 	<td>label=Free Days</td>
 </tr>
 <tr>
-	<td>waitForTextNotPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>id=rate_day_type</td>
 	<td>label=Work Days</td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -1393,11 +1348,6 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
-</tr>
-<tr>
 	<td>keyDown</td>
 	<td>time_till_hour</td>
 	<td>w</td>
@@ -1441,11 +1391,6 @@
 	<td>keyUp</td>
 	<td>time_till_second</td>
 	<td>w</td>
-</tr>
-<tr>
-	<td>waitForTextNotPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1559,14 +1504,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotSelectedLabel</td>
+	<td>assertNotSelectedLabel</td>
 	<td>id=rate_day_type</td>
 	<td>All</td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -1664,19 +1604,9 @@
 	<td>label=Free Days</td>
 </tr>
 <tr>
-	<td>waitForTextNotPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>id=rate_day_type</td>
 	<td>label=Work Days</td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -1724,11 +1654,6 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
-</tr>
-<tr>
 	<td>keyDown</td>
 	<td>time_till_hour</td>
 	<td>w</td>
@@ -1772,11 +1697,6 @@
 	<td>keyUp</td>
 	<td>time_till_second</td>
 	<td>w</td>
-</tr>
-<tr>
-	<td>waitForTextNotPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1890,14 +1810,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=rate_day_type</td>
 	<td>Work Days</td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -1994,11 +1909,13 @@
 	<td>id=rate_day_type</td>
 	<td>label=Free Days</td>
 </tr>
+<!--
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Please select period without collisions</td>
 	<td></td>
 </tr>
+-->
 <tr>
 	<td>keyDown</td>
 	<td>time_from_hour</td>
@@ -2196,12 +2113,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifySelectedLabel</td>
+	<td>select</td>
 	<td>id=rate_day_type</td>
 	<td>Free Days</td>
 </tr>
@@ -2211,19 +2123,9 @@
 	<td>label=21</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>id=time_from_hour</td>
 	<td>label=22</td>
-</tr>
-<tr>
-	<td>waitForTextNotPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2237,7 +2139,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>id=submit_button</td>
 	<td></td>
 </tr>
 <tr>
@@ -2291,22 +2193,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
 	<td>id=start_time_534</td>
 	<td>07:00:00</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>id=end_time_534</td>
 	<td>19:59:59</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>id=start_time_580</td>
 	<td>20:00:00</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>id=end_time_580</td>
 	<td>21:59:59</td>
 </tr>
@@ -2527,11 +2434,6 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertText</td>
 	<td>id=rate_day_type</td>
 	<td>Work Days Free Days</td>
@@ -2540,11 +2442,6 @@
 	<td>select</td>
 	<td>id=rate_day_type</td>
 	<td>label=Free Days</td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -2592,11 +2489,6 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
-</tr>
-<tr>
 	<td>keyDown</td>
 	<td>time_till_hour</td>
 	<td>w</td>
@@ -2640,11 +2532,6 @@
 	<td>keyUp</td>
 	<td>time_till_second</td>
 	<td>w</td>
-</tr>
-<tr>
-	<td>waitForTextNotPresent</td>
-	<td>Please select period without collisions</td>
-	<td></td>
 </tr>
 <tr>
 	<td>select</td>

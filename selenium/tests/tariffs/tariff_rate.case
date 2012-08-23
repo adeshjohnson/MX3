@@ -213,11 +213,6 @@
 	<td>USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[@id='quick_add_new_rate']/form/table/tbody/tr[3]/td[3]</td>
-	<td>USD</td>
-</tr>
-<tr>
 	<td>assertTextPresent</td>
 	<td>Connection Fee</td>
 	<td></td>
@@ -1051,6 +1046,16 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/520</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate does not have assigned destination</td>
 	<td></td>
 </tr>
 <tr>
