@@ -101,9 +101,9 @@
             <%= observe_field("s_user", :frequency => 0.5, :update => "user_devices", :url => {:action => "cli_user_devices"}, :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');") %>
 
 
-            <%= "<div id = 'user_devices'>" %>
+            <%= "<div id = 'user_devices'>".html_safe %>
 
-            <%= "</div>" %>
+            <%= "</div>".html_safe %>
             <br/>
             <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
           </td>
