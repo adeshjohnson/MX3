@@ -1142,7 +1142,7 @@ class User < ActiveRecord::Base
   def subscriptions_in_period(period_start, period_end, is_a_day = nil, is_a_day = nil)
     period_start = period_start.to_s(:db) if period_start.class == Time or period_start.class == Date
     period_end = period_end.to_s(:db) if period_end.class == Time or period_end.class == Date
-    day_sql = !is_a_day.to_s.blank? ? " AND services.periodtype = 'day' "  : ''
+    day_sql = !is_a_day.to_s.blank? ? " AND services.periodtype = 'day' "  : " AND services.periodtype != 'day' "
     subs = Subscription.where(["(? BETWEEN activation_start AND activation_end OR ? BETWEEN activation_start AND activation_end OR (activation_start > ? AND activation_end < ?)) AND subscriptions.user_id = ?  #{day_sql}", period_start, period_end, period_start, period_end, self.id]).includes(:service).all
     subs
   end
