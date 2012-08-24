@@ -38,6 +38,31 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='quickforward_dp_name']</td>
+	<td>qfdp</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=data10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cb_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Dialplan successfully created</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/dids/new</td>
 	<td></td>
 </tr>
@@ -74,7 +99,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td>css=input[type=&quot;image&quot;]</td>
 	<td></td>
 </tr>
 <!--assign to user-->
