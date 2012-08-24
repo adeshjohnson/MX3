@@ -1,7 +1,7 @@
 <b><%= _('Hang_up_cause_code') %></b>:
 <b> <%= @hangup.code %></b>
 <br><br>
-<%= @hangup.description %>
+<%=raw @hangup.description %>
 <br>
 <b><%= _('Country') %></b>:
 <b> <%= @country.name if @country %></b>
