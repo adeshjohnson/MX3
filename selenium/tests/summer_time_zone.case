@@ -62,16 +62,7 @@
 	<td>//body</td>
 	<td></td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/global_time_zone_plus_two</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/test/load_delta_sql/sql/global_time_zone_plus_two</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>//body</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -140,8 +131,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>mouseOver</td>
+	<td>//div[@name='backups']/span</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_6 &gt; span</td>
+	<td>//div[@name='backups']/span</td>
 	<td></td>
 </tr>
 <tr>
@@ -152,17 +148,12 @@
 <!--CRON_ACTIONS-->
 <tr>
 	<td>open</td>
-	<td>/billing/cron_actions</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/cron_actions/edit/3</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>* Value in your time zone: GMT 0.0</td>
+	<td>Value in your time zone: GMT 0.0</td>
 	<td></td>
 </tr>
 <tr>
@@ -537,7 +528,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_6 &gt; span</td>
+	<td>//div[@name='backups']/span</td>
 	<td></td>
 </tr>
 <tr>
@@ -1134,7 +1125,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>price: 5.0</td>
+	<td>price: 5</td>
 	<td></td>
 </tr>
 <tr>
@@ -1168,8 +1159,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>:text: '4.0000' </td>
+	<td>waitForTextPresent</td>
+	<td>price: 4</td>
 	<td></td>
 </tr>
 <tr>
@@ -1259,9 +1250,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=service_price</td>
-	<td>10</td>
+	<td>assertValue</td>
+	<td>id=service[price]</td>
+	<td>0.0</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1352,7 +1343,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_time_zone</td>
+	<td>id=user[time_zone]</td>
 	<td>label=(GMT+02:00) Athens, Cairo, Helsinki, Istanbul, Kyiv, Minsk, Riga, Tallinn, Vilnius</td>
 </tr>
 <tr>
@@ -1444,6 +1435,11 @@
 </tr>
 <!--hourly_action-->
 <tr>
+	<td>setTimeout</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/callc/hourly_actions</td>
 	<td></td>
@@ -1451,6 +1447,11 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Mission complete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1485,12 +1486,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=user_warning_email_balance</td>
+	<td>id=user[warning_email_balance]</td>
 	<td>500.0000</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=user_warning_email_hour_0</td>
+	<td>id=user[warning_email_hour]_0</td>
 	<td></td>
 </tr>
 <tr>
@@ -1520,12 +1521,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=user_warning_email_balance</td>
+	<td>id=user[warning_email_balance]</td>
 	<td>10.0000</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=user_warning_email_hour_0</td>
+	<td>id=user[warning_email_hour]_0</td>
 	<td></td>
 </tr>
 <tr>
@@ -1652,7 +1653,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_time_zone</td>
+	<td>id=user[time_zone]</td>
 	<td>label=(GMT-09:00) Alaska</td>
 </tr>
 <tr>
@@ -1677,12 +1678,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=user_warning_email_balance</td>
+	<td>id=user[warning_email_balance]</td>
 	<td>110.0000</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=user_warning_email_hour_0</td>
+	<td>id=user[warning_email_hour]_0</td>
 	<td></td>
 </tr>
 <tr>
@@ -1823,23 +1824,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>period_end: 2009-01-01</td>
+	<td>waitForTextPresent</td>
+	<td>period_end: &quot;2009-01-01&quot;</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>period_start: 2009-01-01</td>
+	<td>waitForTextPresent</td>
+	<td>period_start: &quot;2009-01-01&quot;</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td> issue_date: 2011-11-06</td>
+	<td>waitForTextPresent</td>
+	<td>issue_date: &quot;2011-11-06&quot;</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td> price: 5.0</td>
+	<td>waitForTextPresent</td>
+	<td>price: &quot;5&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -1873,8 +1874,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>:text: '4.0000'</td>
+	<td>waitForTextPresent</td>
+	<td>price: &quot;4&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -1994,7 +1995,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user_time_zone</td>
+	<td>id=user[time_zone]</td>
 	<td>label=(GMT+07:00) Bangkok, Hanoi, Jakarta, Novosibirsk</td>
 </tr>
 <tr>
