@@ -74,7 +74,7 @@ class CardgroupsController < ApplicationController
     @page_select_params = {}
     session[:cardgroup_search_options] ||= {}
 
-    @options = {
+    options = {
         "s_number" => "",
         "s_pin" => "",
         "s_balance_max" => "",
@@ -82,13 +82,13 @@ class CardgroupsController < ApplicationController
         "s_sold" => "",
         "s_caller_id" => ''
     }
-    @options.merge!(session[:cardgroup_search_options])
+    @options = options.merge!(session[:cardgroup_search_options])
 
     [:s_number, :s_pin, :s_caller_id, :s_balance_min, :s_balance_max].each { |key|
       @options[key] = params[key] || @options[key] || ""
       params[key] = @options[key].to_s.strip
     }
-    @options.merge!(session[:cardgroup_search_options]).merge!(params.slice(*@options.keys))
+    @options.merge!(params.slice(*@options.keys))
     logger.fatal @options.to_yaml
     logger.fatal params.to_yaml
     logger.fatal session[:cardgroup_search_options].to_yaml
