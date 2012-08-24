@@ -79,6 +79,7 @@
     <th></th>
   </tr>
 
+  <% if @cards and @cards.size.to_i > 0 %>
   <% @cards.each_with_index { |card, i| %>
       <tr class="row<%= (i % 2 + 1).to_s %>">
 
@@ -106,6 +107,7 @@
         <% end %>
       </tr>
   <% } %>
+      <%end%>
 </table>
 <br>
 
