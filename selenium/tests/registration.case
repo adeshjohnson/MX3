@@ -38,13 +38,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div[@name='api']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertText</td>
-	<td>id=uniquehash</td>
+	<td>//td[@id='uniquehash']</td>
 	<td>hfttv7bcqt</td>
 </tr>
 <!--If you want to send email do not forget enable sending email after registratinion in Settings -->
@@ -331,26 +326,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>refreshAndWait</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Manual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_1']/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_1']/span</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>enable_recaptcha</td>
 	<td></td>
@@ -452,8 +427,13 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>30000</td>
+	<td>waitForEditable</td>
+	<td>id=submit_f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=submit_f</td>
 	<td></td>
 </tr>
 <tr>
@@ -537,6 +517,11 @@
 	<td>uncheck</td>
 	<td>enable_recaptcha</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_from</td>
+	<td>no-reply@kolmisoft.com</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
