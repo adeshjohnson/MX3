@@ -114,7 +114,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>amount</td>
 	<td>444</td>
 </tr>
@@ -129,7 +129,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>responseURL</td>
 	<td>${server}${dir}/payments/linkpoint_ipn</td>
 </tr>
@@ -349,7 +349,7 @@
 	<td></td>
 </tr>
 <!--neiseina istestuoti. isorinis puslapis per letai atsidaro-->
-<!--<tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>goBack</td> 	<td></td> 	<td></td> </tr> <tr> 	<td>verifyNotEditable</td> 	<td>commit</td> 	<td></td> </tr>-->
+<!--<tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>goBack</td> 	<td></td> 	<td></td> </tr> <tr> 	<td>assertNotEditable</td> 	<td>commit</td> 	<td></td> </tr>-->
 <!--* check min/max/default value synchronization-->
 <tr>
 	<td>open</td>
@@ -367,7 +367,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>paypal_default_amount</td>
 	<td>20</td>
 </tr>
@@ -382,7 +382,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>paypal_default_amount</td>
 	<td>5</td>
 </tr>
@@ -457,17 +457,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>gateways_bogus_first_name</td>
 	<td>gg</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>gateways_bogus_year</td>
 	<td>2015</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>gateways_bogus_month</td>
 	<td>10</td>
 </tr>
@@ -532,7 +532,7 @@
 	<td>custom message</td>
 	<td></td>
 </tr>
-<!--* verify bogus access to payment gateway configuration-->
+<!--* assert bogus access to payment gateway configuration-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -548,7 +548,7 @@
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
-<!--* verify info message display in payments-->
+<!--* assert info message display in payments-->
 <tr>
 	<td>type</td>
 	<td>login_username</td>
@@ -570,7 +570,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>css=.confirm_message</td>
 	<td></td>
 </tr>
@@ -590,7 +590,7 @@
 	<td>label=Required for suspicious payments</td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>confirm_message</td>
 	<td></td>
 </tr>
@@ -630,7 +630,7 @@
 	<td>label=Required for suspicious payments</td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>confirm_message</td>
 	<td></td>
 </tr>

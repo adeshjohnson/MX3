@@ -212,7 +212,7 @@
 	<td>37067531064</td>
 	<td></td>
 </tr>
-<!--* verify calling card searching-->
+<!--* assert calling card searching-->
 <tr>
 	<td>open</td>
 	<td>/billing/cards/new?cg=3</td>
@@ -455,17 +455,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>s_number</td>
 	<td>123456850</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>s_pin</td>
 	<td>${pin}</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>s_balance_max</td>
 	<td>10</td>
 </tr>
@@ -530,7 +530,7 @@
 	<td>1111111001</td>
 	<td></td>
 </tr>
-<!--* verify correct searching (from all groups)-->
+<!--* assert correct searching (from all groups)-->
 <tr>
 	<td>open</td>
 	<td>/billing/cardgroups/list</td>
@@ -606,7 +606,7 @@
 	<td>Cards: 72</td>
 	<td></td>
 </tr>
-<!--* verify payment display for calling card-->
+<!--* assert payment display for calling card-->
 <tr>
 	<td>open</td>
 	<td>/billing/cards/payments/1</td>
@@ -668,7 +668,7 @@
 	<td>css=.payment</td>
 	<td></td>
 </tr>
-<!--* verify payment search by credit card-->
+<!--* assert payment search by credit card-->
 <tr>
 	<td>open</td>
 	<td>/billing/payments/list</td>
@@ -685,12 +685,12 @@
 	<td>label=Card</td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>s_pin</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>s_number</td>
 	<td></td>
 </tr>
@@ -710,12 +710,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>s_pin</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>s_number</td>
 	<td></td>
 </tr>
@@ -760,12 +760,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>s_pin</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>s_number</td>
 	<td></td>
 </tr>
@@ -779,7 +779,7 @@
 	<td>Card Group not found</td>
 	<td></td>
 </tr>
-<!--* verify working links in search display-->
+<!--* assert working links in search display-->
 <tr>
 	<td>open</td>
 	<td>/billing/cardgroups/list</td>
@@ -790,7 +790,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--* verify payment link-->
+<!--* assert payment link-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=#pay_1 a</td>
@@ -811,7 +811,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--* verify details link-->
+<!--* assert details link-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=#show_1 a</td>
@@ -832,7 +832,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--* verify edit link-->
+<!--* assert edit link-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=#edit_1 a</td>
@@ -853,7 +853,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--* verify card group link-->
+<!--* assert card group link-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=#cardgroup_1 a</td>
@@ -874,7 +874,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--* verify delete (it is only possible to delete card that has no payments)-->
+<!--* assert delete (it is only possible to delete card that has no payments)-->
 <tr>
 	<td>open</td>
 	<td>/billing/cards/list?cg=1&amp;page=2</td>

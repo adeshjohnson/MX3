@@ -79,7 +79,7 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
-<!--verify rates-->
+<!--assert rates-->
 <tr>
 	<td>assertText</td>
 	<td>spersonal_menu5</td>
@@ -198,14 +198,14 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
-<!--verify is it allowed see rates-->
+<!--assert is it allowed see rates-->
 <tr>
 	<td>open</td>
 	<td>/billing/functions/reseller_settings</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>show_rates_for_users</td>
 	<td>on</td>
 </tr>
@@ -240,7 +240,7 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
-<!--verify rates-->
+<!--assert rates-->
 <tr>
 	<td>assertText</td>
 	<td>spersonal_menu4</td>
@@ -354,7 +354,7 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
-<!--verify rates (do not show)-->
+<!--assert rates (do not show)-->
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>spersonal_menu3</td>
@@ -483,14 +483,14 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
-<!--verify that show rates for user not allowed-->
+<!--assert that show rates for user not allowed-->
 <tr>
 	<td>open</td>
 	<td>/billing/functions/reseller_settings</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>show_rates_for_users</td>
 	<td>off</td>
 </tr>
@@ -525,7 +525,7 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
-<!--verify rates (do not show)-->
+<!--assert rates (do not show)-->
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>spersonal_menu4</td>

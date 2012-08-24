@@ -147,7 +147,7 @@
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
-<!--* verify access to non existent callshop-->
+<!--* assert access to non existent callshop-->
 <tr>
 	<td>open</td>
 	<td>/billing/callshop/show/99</td>
@@ -158,7 +158,7 @@
 	<td>Call Shop was not found or there are no phone booths assigned. Please add more phone booths.</td>
 	<td></td>
 </tr>
-<!--* verify access without authentication-->
+<!--* assert access without authentication-->
 <tr>
 	<td>open</td>
 	<td>/billing/callshop/show/2</td>
@@ -169,7 +169,7 @@
 	<td>You are not authorized to manage this Call Shop</td>
 	<td></td>
 </tr>
-<!--* verify access with regular callshop user-->
+<!--* assert access with regular callshop user-->
 <tr>
 	<td>type</td>
 	<td>login_username</td>
@@ -195,7 +195,7 @@
 	<td>You are not authorized to manage this Call Shop</td>
 	<td></td>
 </tr>
-<!--* verify access with regular callshop user-->
+<!--* assert access with regular callshop user-->
 <tr>
 	<td>type</td>
 	<td>login_username</td>
@@ -795,7 +795,7 @@
 	<td>css=tr.reserved</td>
 	<td></td>
 </tr>
-<!--* verify invoice view-->
+<!--* assert invoice view-->
 <tr>
 	<td>open</td>
 	<td>/billing/callshop/invoices/2</td>
@@ -986,7 +986,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>new_member</td>
 	<td>user_reseller - User Resellers</td>
 </tr>
@@ -1045,7 +1045,7 @@
 	<td>Free booths: 1</td>
 	<td></td>
 </tr>
-<!--* verify group edit permissions-->
+<!--* assert group edit permissions-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -1081,7 +1081,7 @@
 	<td>Don't be so smart</td>
 	<td></td>
 </tr>
-<!--* verify login as functionality-->
+<!--* assert login as functionality-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -1117,7 +1117,7 @@
 	<td>Free booths: 3</td>
 	<td></td>
 </tr>
-<!--* verify comment updating-->
+<!--* assert comment updating-->
 <tr>
 	<td>click</td>
 	<td>css=#booth-8 a.start-session</td>
@@ -1183,7 +1183,7 @@
 	<td>123</td>
 	<td></td>
 </tr>
-<!--* verify language setting-->
+<!--* assert language setting-->
 <tr>
 	<td>storeText</td>
 	<td>css=#invoices a</td>
@@ -1254,7 +1254,7 @@
 	<td>${invoicestxt}</td>
 	<td></td>
 </tr>
-<!--* verify that we cannot add admin/reseller to callshop (no login would be possible otherwise)-->
+<!--* assert that we cannot add admin/reseller to callshop (no login would be possible otherwise)-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -1361,7 +1361,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotSelectedLabel</td>
+	<td>assertNotSelectedLabel</td>
 	<td>new_member</td>
 	<td>admin - System Admin</td>
 </tr>

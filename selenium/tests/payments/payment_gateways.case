@@ -113,22 +113,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>gateways_bogus_enabled</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>gateways_bogus_test</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>gateways_bogus_min_amount</td>
 	<td>1</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>gateways_bogus_login</td>
 	<td>abc</td>
 </tr>
@@ -229,27 +229,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>gateways_bogus_enabled</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>gateways_bogus_test</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>gateways_bogus_min_amount</td>
 	<td>10</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>gateways_bogus_max_amount</td>
 	<td>20</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>gateways_bogus_login</td>
 	<td>abc</td>
 </tr>
@@ -342,7 +342,7 @@
 	<td>Please press here to pay</td>
 	<td></td>
 </tr>
-<!--* verify payment present in personal payments-->
+<!--* assert payment present in personal payments-->
 <tr>
 	<td>open</td>
 	<td>/billing/payments/personal_payments</td>
@@ -1860,7 +1860,7 @@
 	<td>15.0000</td>
 	<td></td>
 </tr>
-<!--* verify pay'ing by GET prevention-->
+<!--* assert pay'ing by GET prevention-->
 <tr>
 	<td>open</td>
 	<td>/billing/payment_gateways/gateways/bogus/pay</td>

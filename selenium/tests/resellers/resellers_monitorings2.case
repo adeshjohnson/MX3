@@ -47,7 +47,7 @@
 	<td>//body</td>
 	<td></td>
 </tr>
-<!--verify and set permissions-->
+<!--assert and set permissions-->
 <tr>
 	<td>open</td>
 	<td>/billing/permissions/edit/12?group_type=reseller</td>
@@ -89,17 +89,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=monitorings_2</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=monitorings_1</td>
 	<td>off</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=monitorings_0</td>
 	<td>off</td>
 </tr>
@@ -185,12 +185,12 @@
 	<td>Log</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=bellow_monitoringamount</td>
 	<td>off</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=above_monitoringamount</td>
 	<td>on</td>
 </tr>
@@ -315,7 +315,7 @@
 	<td>User succesfully created</td>
 	<td></td>
 </tr>
-<!--* verify that it was created for all users-->
+<!--* assert that it was created for all users-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings/for_user/2</td>
@@ -396,7 +396,7 @@
 	<td>User not found</td>
 	<td></td>
 </tr>
-<!--* verify that personal monitoring gets deleted from single user only-->
+<!--* assert that personal monitoring gets deleted from single user only-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings/for_user/5</td>
@@ -542,7 +542,7 @@
 	<td>css=#monit-2 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
-<!--* verify that globally deleted monitoring  will be removed for all users-->
+<!--* assert that globally deleted monitoring  will be removed for all users-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//img[@alt='Delete']</td>
@@ -598,7 +598,7 @@
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
-<!--* verify monitoring creation validations-->
+<!--* assert monitoring creation validations-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings</td>
@@ -614,7 +614,7 @@
 	<td>Amount must be greater than zero</td>
 	<td></td>
 </tr>
-<!--* verify that chosen values persiste on form error-->
+<!--* assert that chosen values persiste on form error-->
 <tr>
 	<td>click</td>
 	<td>monitoring_period_in_past_type_days</td>
@@ -626,7 +626,7 @@
 	<td>label=12</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=above_monitoringamount</td>
 	<td>on</td>
 </tr>
@@ -651,31 +651,31 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyChecked</td>
+	<td>assertChecked</td>
 	<td>monitoring_period_in_past_type_days</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>monitoring_period_in_past_days</td>
 	<td>12</td>
 </tr>
 <tr>
-	<td>verifyChecked</td>
+	<td>assertChecked</td>
 	<td>will_be_blocked</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyChecked</td>
+	<td>assertChecked</td>
 	<td>will_be_sent</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyChecked</td>
+	<td>assertChecked</td>
 	<td>monitoring_user_type_prepaid</td>
 	<td></td>
 </tr>
-<!--* verify monitoring creation for different user types-->
+<!--* assert monitoring creation for different user types-->
 <tr>
 	<td>open</td>
 	<td>/billing/users/new</td>
@@ -863,7 +863,7 @@
 	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
-<!--* verify that we can create monitoring for single user-->
+<!--* assert that we can create monitoring for single user-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings/for_user/7</td>
@@ -979,7 +979,7 @@
 	<td>css=#monit-5 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
-<!--* verify that we cannot create montioring which is taking no action-->
+<!--* assert that we cannot create montioring which is taking no action-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings</td>
@@ -1005,7 +1005,7 @@
 	<td>Monitoring must either be blocking or notifying or both</td>
 	<td></td>
 </tr>
-<!--* verify monitoring edit for single user-->
+<!--* assert monitoring edit for single user-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings/edit/5</td>
@@ -1017,7 +1017,7 @@
 	<td>222</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=above_monitoringamount</td>
 	<td>on</td>
 </tr>
@@ -1094,7 +1094,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=above_monitoringamount</td>
 	<td>on</td>
 </tr>
@@ -1128,7 +1128,7 @@
 	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
-<!--* verify activation/deactivation-->
+<!--* assert activation/deactivation-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings</td>
@@ -1185,7 +1185,7 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
-<!--* verify logging-->
+<!--* assert logging-->
 <tr>
 	<td>open</td>
 	<td>/billing/stats/action_log</td>
@@ -1256,7 +1256,7 @@
 	<td>Monitoring call price sum over past period</td>
 	<td></td>
 </tr>
-<!--* verify accountant access-->
+<!--* assert accountant access-->
 <!--* no permission-->
 <tr>
 	<td>open</td>
@@ -1671,7 +1671,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=bellow_monitoringamount</td>
 	<td>off</td>
 </tr>
@@ -1705,7 +1705,7 @@
 	<td>Monitoring created successfully. Applied to all users.</td>
 	<td></td>
 </tr>
-<!--* verify other user permissions-->
+<!--* assert other user permissions-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -1984,7 +1984,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>user_username</td>
 	<td>prepaid_user</td>
 </tr>
@@ -2034,7 +2034,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>user_username</td>
 	<td>prepaid_user</td>
 </tr>
@@ -2044,7 +2044,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ignore_global_monitorings</td>
 	<td>off</td>
 </tr>
@@ -2074,7 +2074,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ignore_global_monitorings</td>
 	<td>on</td>
 </tr>

@@ -11,7 +11,7 @@
 <thead>
 <tr><td rowspan="1" colspan="3">./basic.case</td></tr>
 </thead><tbody>
-<!--Test to verify that global location rules does NOT apply if user belongs to some other location than global and he dials to destination that has some rule set for his location, in that case location rules are applied. to test this scenario we need to do call tracking for user and reseller.-->
+<!--Test to assert that global location rules does NOT apply if user belongs to some other location than global and he dials to destination that has some rule set for his location, in that case location rules are applied. to test this scenario we need to do call tracking for user and reseller.-->
 <!--loggin as admin-->
 <tr>
 	<td>open</td>
@@ -107,7 +107,7 @@
 	<td>Location added</td>
 	<td></td>
 </tr>
-<!--new location has no destination rules, except for global destination rules. to test weather global or 'other' destination rules will aplly for same prefix, we need to create 'other' and global destination rules with same 'cut', 'min', 'max' settings and differend 'add' setting(easyer to verify witch location rules were applied).-->
+<!--new location has no destination rules, except for global destination rules. to test weather global or 'other' destination rules will aplly for same prefix, we need to create 'other' and global destination rules with same 'cut', 'min', 'max' settings and differend 'add' setting(easyer to assert witch location rules were applied).-->
 <!--edit global location and create destination rule for 000987 prefix, add Argentina 54 FIX prefix and select 'Test Tariff for Users' tariff that has 54 prefix rate set-->
 <tr>
 	<td>open</td>
@@ -480,12 +480,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=rate1</td>
 	<td>2.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=rate21</td>
 	<td>7.0</td>
 </tr>
@@ -541,7 +541,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>name=commit</td>
 	<td>Add rates</td>
 </tr>
@@ -636,7 +636,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>name=commit</td>
 	<td>Press this button to continue &gt;&gt;</td>
 </tr>
@@ -736,7 +736,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>name=commit</td>
 	<td>Press this button to continue &gt;&gt;</td>
 </tr>
@@ -802,7 +802,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>name=commit</td>
 	<td>Press this button to continue &gt;&gt;</td>
 </tr>
@@ -939,7 +939,7 @@
 	<td>000987345678</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>name=commit</td>
 	<td>Press this button to continue &gt;&gt;</td>
 </tr>

@@ -32,7 +32,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -43,22 +43,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=bellow_monitoringamount</td>
 	<td>off</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=above_monitoringamount</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Drops bellow</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Increases more</td>
 	<td></td>
 </tr>
@@ -128,53 +128,53 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Monitoring created successfully. Applied to all users.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
-<!--* verify that it was created for all users-->
+<!--* assert that it was created for all users-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings/for_user/2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -184,22 +184,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -209,22 +209,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -244,26 +244,26 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
-<!--* verify that personal monitoring gets deleted from single user only-->
+<!--* assert that personal monitoring gets deleted from single user only-->
 <tr>
 	<td>click</td>
 	<td>new</td>
@@ -320,22 +320,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-2 td.period</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-2 td.amount</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-2 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-2 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -345,22 +345,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-2 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-2 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-2 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-2 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -370,26 +370,26 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-2 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-2 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-2 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-2 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
-<!--* verify that globally deleted monitoring  will be removed for all users-->
+<!--* assert that globally deleted monitoring  will be removed for all users-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//img[@alt='Delete']</td>
@@ -401,22 +401,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -426,26 +426,26 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>css=#monit-1 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>css=#monit-1 td.amount</td>
 	<td>33.0</td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-1 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-1 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
-<!--* verify monitoring creation validations-->
+<!--* assert monitoring creation validations-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings</td>
@@ -457,11 +457,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Amount must be greater than zero</td>
 	<td></td>
 </tr>
-<!--* verify that chosen values persiste on form error-->
+<!--* assert that chosen values persiste on form error-->
 <tr>
 	<td>click</td>
 	<td>monitoring_period_in_past_type_days</td>
@@ -493,31 +493,31 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyChecked</td>
+	<td>assertChecked</td>
 	<td>monitoring_period_in_past_type_days</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>monitoring_period_in_past_days</td>
 	<td>12</td>
 </tr>
 <tr>
-	<td>verifyChecked</td>
+	<td>assertChecked</td>
 	<td>will_be_blocked</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyChecked</td>
+	<td>assertChecked</td>
 	<td>will_be_sent</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyChecked</td>
+	<td>assertChecked</td>
 	<td>monitoring_user_type_prepaid</td>
 	<td></td>
 </tr>
-<!--* verify monitoring creation for different user types-->
+<!--* assert monitoring creation for different user types-->
 <tr>
 	<td>open</td>
 	<td>/billing/users/new</td>
@@ -575,22 +575,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-3 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-3 td.amount</td>
 	<td>66.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-3 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-3 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -600,22 +600,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-3 td.period</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-3 td.amount</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-3 td.block img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-3 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -651,22 +651,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-4 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-4 td.amount</td>
 	<td>99.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-4 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -676,26 +676,26 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-4 td.period</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-4 td.amount</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-4 td.block img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
-<!--* verify that we can create monitoring for single user-->
+<!--* assert that we can create monitoring for single user-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings/for_user/6</td>
@@ -737,22 +737,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-5 td.period</td>
 	<td>1 Hour(s)</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-5 td.amount</td>
 	<td>111.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-5 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -762,22 +762,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-5 td.period</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-5 td.amount</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-5 td.block img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-5 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -787,26 +787,26 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-5 td.period</td>
 	<td>1 Hour(s)</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-5 td.amount</td>
 	<td>111.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-5 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
-<!--* verify that we cannot create montioring which is taking no action-->
+<!--* assert that we cannot create montioring which is taking no action-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings</td>
@@ -823,11 +823,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Monitoring must either be blocking or notifying or both</td>
 	<td></td>
 </tr>
-<!--* verify monitoring edit for single user-->
+<!--* assert monitoring edit for single user-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings/edit/5</td>
@@ -844,27 +844,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Monitoring updated successfully. Applied to 1 users.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-5 td.period</td>
 	<td>1 Hour(s)</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-5 td.amount</td>
 	<td>222.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-5 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
@@ -875,22 +875,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-5 td.period</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-5 td.amount</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-5 td.block img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-5 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -916,43 +916,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Monitoring updated successfully. Applied to postpaid users.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-4 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#monit-4 td.amount</td>
 	<td>123.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-4 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
-<!--* verify activation/deactivation-->
+<!--* assert activation/deactivation-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-2 td.active img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-2 td.active img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
@@ -962,37 +962,37 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#monit-2 td.active img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#monit-2 td.active img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
-<!--* verify logging-->
+<!--* assert logging-->
 <tr>
 	<td>open</td>
 	<td>/billing/stats/action_log</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Monitoring created</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Monitoring updated</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Monitoring destroyed</td>
 	<td></td>
 </tr>
-<!--* verify accountant access-->
+<!--* assert accountant access-->
 <!--* no permission-->
 <tr>
 	<td>open</td>
@@ -1020,7 +1020,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1040,7 +1040,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1251,7 +1251,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1261,7 +1261,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
@@ -1271,7 +1271,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1286,7 +1286,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
@@ -1296,7 +1296,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
@@ -1316,7 +1316,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
@@ -1387,7 +1387,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1402,7 +1402,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
@@ -1417,7 +1417,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1432,7 +1432,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Monitoring deleted successfully</td>
 	<td></td>
 </tr>
@@ -1442,7 +1442,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Monitoring updated successfully. Applied to prepaid users.</td>
 	<td></td>
 </tr>
@@ -1467,11 +1467,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Monitoring created successfully. Applied to all users.</td>
 	<td></td>
 </tr>
-<!--* verify other user permissions-->
+<!--* assert other user permissions-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -1498,7 +1498,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1508,7 +1508,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1518,7 +1518,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1528,7 +1528,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1558,7 +1558,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1568,7 +1568,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1578,7 +1578,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1588,7 +1588,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1654,7 +1654,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Monitoring created successfully. Applied to prepaid users.</td>
 	<td></td>
 </tr>
@@ -1705,7 +1705,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Such monitoring already exists, users were associated. Applied to all users.</td>
 	<td></td>
 </tr>
@@ -1730,7 +1730,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Edit monitoring for user: prepaid_user</td>
 	<td></td>
 </tr>
@@ -1800,7 +1800,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Such monitoring already exists, users were associated. Applied to 1 users.</td>
 	<td></td>
 </tr>
@@ -1810,7 +1810,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Edit monitoring for user: System Admin</td>
 	<td></td>
 </tr>
@@ -1825,7 +1825,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>user_username</td>
 	<td>prepaid_user</td>
 </tr>
@@ -1845,7 +1845,7 @@
 	<td>label=prepaid_user</td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>This monitoring will be applied to prepaid_user</td>
 	<td></td>
 </tr>
@@ -1870,7 +1870,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>user_username</td>
 	<td>prepaid_user</td>
 </tr>
@@ -1880,7 +1880,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ignore_global_monitorings</td>
 	<td>off</td>
 </tr>
@@ -1910,7 +1910,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ignore_global_monitorings</td>
 	<td>on</td>
 </tr>

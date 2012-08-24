@@ -58,12 +58,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>cardgroup_solo_pinless_0</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>cardgroup_solo_pinless_1</td>
 	<td>off</td>
 </tr>
@@ -137,7 +137,7 @@
 	<td>Card group was successfully created</td>
 	<td></td>
 </tr>
-<!--verify is it created-->
+<!--assert is it created-->
 <tr>
 	<td>assertText</td>
 	<td>solo_pinless_row</td>
@@ -201,12 +201,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>cardgroup_solo_pinless_0</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>cardgroup_solo_pinless_1</td>
 	<td>off</td>
 </tr>
@@ -270,7 +270,7 @@
 	<td>Only active when Pinless dialing is activated in Calling Card Dial-Plan</td>
 	<td></td>
 </tr>
-<!--verify is it not changed-->
+<!--assert is it not changed-->
 <tr>
 	<td>open</td>
 	<td>/billing/cardgroups/edit/3</td>
@@ -282,11 +282,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>cardgroup_solo_pinless_1</td>
 	<td>on</td>
 </tr>
-<!--verify Pinless checkbox in ccdp-->
+<!--assert Pinless checkbox in ccdp-->
 <tr>
 	<td>open</td>
 	<td>/billing/dialplans/new</td>

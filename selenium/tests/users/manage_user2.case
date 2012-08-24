@@ -41,7 +41,7 @@
 	<td>/billing/test/load_delta_sql/callshop/test_callshop</td>
 	<td></td>
 </tr>
-<!--* verify user group security-->
+<!--* assert user group security-->
 <tr>
 	<td>open</td>
 	<td>/billing/groups/members/1</td>
@@ -122,7 +122,7 @@
 	<td>gusertype-2</td>
 	<td>${usertype}</td>
 </tr>
-<!--* verify warning balance sound setting-->
+<!--* assert warning balance sound setting-->
 <tr>
 	<td>open</td>
 	<td>/billing/users/edit/0</td>
@@ -139,12 +139,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyEditable</td>
+	<td>assertEditable</td>
 	<td>sound_file</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyEditable</td>
+	<td>assertEditable</td>
 	<td>user_warning_balance_sound_file_id</td>
 	<td></td>
 </tr>
@@ -154,7 +154,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyEditable</td>
+	<td>assertEditable</td>
 	<td>user_warning_balance_sound_file_id</td>
 	<td></td>
 </tr>
@@ -179,17 +179,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyChecked</td>
+	<td>assertChecked</td>
 	<td>warning_active</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyChecked</td>
+	<td>assertChecked</td>
 	<td>sound_file</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>user_warning_balance_sound_file_id</td>
 	<td>silence/silence9.wav</td>
 </tr>
@@ -199,7 +199,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyEditable</td>
+	<td>assertEditable</td>
 	<td>user_warning_balance_sound_file_id</td>
 	<td></td>
 </tr>
@@ -219,11 +219,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyEditable</td>
+	<td>assertEditable</td>
 	<td>user_warning_balance_sound_file_id</td>
 	<td></td>
 </tr>
-<!--* verify reseller user creation with bogus email-->
+<!--* assert reseller user creation with bogus email-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -284,7 +284,7 @@
 	<td>Please enter correct email</td>
 	<td></td>
 </tr>
-<!--* verify terms and conditions functionality-->
+<!--* assert terms and conditions functionality-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -351,7 +351,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotEditable</td>
+	<td>assertNotEditable</td>
 	<td>submit_f</td>
 	<td></td>
 </tr>
@@ -366,11 +366,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyEditable</td>
+	<td>assertEditable</td>
 	<td>submit_f</td>
 	<td></td>
 </tr>
-<!--* verify terms and conditions functionality for reseller-->
+<!--* assert terms and conditions functionality for reseller-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -447,7 +447,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotEditable</td>
+	<td>assertNotEditable</td>
 	<td>submit_f</td>
 	<td></td>
 </tr>
@@ -462,7 +462,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyEditable</td>
+	<td>assertEditable</td>
 	<td>submit_f</td>
 	<td></td>
 </tr>
@@ -492,7 +492,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>user_username</td>
 	<td></td>
 </tr>
@@ -541,7 +541,7 @@
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
-<!--* verify ability to disable user email editing-->
+<!--* assert ability to disable user email editing-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -568,7 +568,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyEditable</td>
+	<td>assertEditable</td>
 	<td>address_email</td>
 	<td></td>
 </tr>
@@ -638,11 +638,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotEditable</td>
+	<td>assertNotEditable</td>
 	<td>address_email</td>
 	<td></td>
 </tr>
-<!--* verify that reseller users can edit email-->
+<!--* assert that reseller users can edit email-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -669,7 +669,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyEditable</td>
+	<td>assertEditable</td>
 	<td>address_email</td>
 	<td></td>
 </tr>
@@ -699,7 +699,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotEditable</td>
+	<td>assertNotEditable</td>
 	<td>address_email</td>
 	<td></td>
 </tr>

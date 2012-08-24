@@ -344,7 +344,7 @@
 </tr>
 <!--#Išskleisti meniu punktą SMS ir veikss-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>xpath=(//a[contains(@href, '/billing/sms/sms')])[2]</td>
 	<td></td>
 </tr>
@@ -572,12 +572,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>remLen1</td>
 	<td>160</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>sms_counter</td>
 	<td>1</td>
 </tr>
@@ -612,12 +612,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>remLen1</td>
 	<td>150</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>sms_counter</td>
 	<td>1</td>
 </tr>
@@ -637,12 +637,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>remLen1</td>
 	<td>89</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>sms_counter</td>
 	<td>2</td>
 </tr>
@@ -662,12 +662,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>remLen1</td>
 	<td>112</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>sms_counter</td>
 	<td>3</td>
 </tr>
@@ -970,7 +970,7 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
-<!--verify-->
+<!--assert-->
 <tr>
 	<td>open</td>
 	<td>/billing/sms/sms</td>
@@ -1041,7 +1041,7 @@
 	<td>Total SMS Price : 3 USD</td>
 	<td></td>
 </tr>
-<!--verify with no direction-->
+<!--assert with no direction-->
 <tr>
 	<td>open</td>
 	<td>/billing/sms/sms</td>

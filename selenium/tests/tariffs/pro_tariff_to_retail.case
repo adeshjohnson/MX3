@@ -32,7 +32,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -163,7 +163,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test Tariff</td>
 	<td>Test Tariff</td>
 </tr>
@@ -188,11 +188,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>name_6</td>
 	<td>Test Tariff + 10 + 20%</td>
 </tr>
-<!--verify-->
+<!--assert-->
 <tr>
 	<td>open</td>
 	<td>/billing/tariffs/user_rates_list/6</td>
@@ -229,22 +229,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate2</td>
 	<td>3.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate473</td>
 	<td>5.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate4</td>
 	<td>22.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate474</td>
 	<td>4.0</td>
 </tr>
@@ -375,37 +375,37 @@
 	<td>3.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate473</td>
 	<td>5.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate4</td>
 	<td>9.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate474</td>
 	<td>4.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate10</td>
 	<td>7.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate14</td>
 	<td>3.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate475</td>
 	<td>6.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate476</td>
 	<td>4.0</td>
 </tr>
@@ -414,14 +414,14 @@
 	<td>Check advanced rates</td>
 	<td></td>
 </tr>
-<!--verify details-->
+<!--assert details-->
 <tr>
 	<td>open</td>
 	<td>/billing/tariffs/user_arates/505?dt=&amp;st=00%3A00%3A00</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>price</td>
 	<td>96.0</td>
 </tr>
@@ -431,7 +431,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>price</td>
 	<td>48.0</td>
 </tr>
@@ -441,27 +441,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>from_237</td>
 	<td>1</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>from_238</td>
 	<td>1</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>duration_238</td>
 	<td>Infinity ?</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>duration_237</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>type_237</td>
 	<td>event</td>
 </tr>
@@ -471,32 +471,32 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>round_237</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>round</td>
 	<td>1</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>document.forms[0].elements['price_237']</td>
 	<td>12.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>price</td>
 	<td>132.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>//input[@type='image']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>//img[@alt='Delete']</td>
 	<td></td>
 </tr>
@@ -516,7 +516,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>document.forms[0].elements['price_237']</td>
 	<td>6.0</td>
 </tr>
@@ -536,7 +536,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>price</td>
 	<td>3.0</td>
 </tr>
@@ -546,42 +546,42 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate2</td>
 	<td>3.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate473</td>
 	<td>5.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate4</td>
 	<td>9.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate474</td>
 	<td>4.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate10</td>
 	<td>7.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate14</td>
 	<td>3.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate475</td>
 	<td>6.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>rate476</td>
 	<td>4.0</td>
 </tr>

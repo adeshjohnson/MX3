@@ -68,7 +68,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval was successfully created</td>
 	<td></td>
 </tr>
@@ -213,7 +213,7 @@
 	<td>CallerID Prefix:</td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Route to DID if No Answer:</td>
 	<td></td>
 </tr>
@@ -258,7 +258,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>ringgroup[did_id]</td>
 	<td>None</td>
 </tr>
@@ -293,7 +293,7 @@
 	<td>Pasirinkimas</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>ringgroup[strategy]</td>
 	<td>ringall</td>
 </tr>
@@ -353,7 +353,7 @@
 	<td>Pasirinkimas</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>ringgroup[strategy]</td>
 	<td>ringall</td>
 </tr>
@@ -483,32 +483,32 @@
 	<td>exact:DID: 1234567891</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>dialplan[name]</td>
 	<td>RGname</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ringgroup[comment]</td>
 	<td>Komentaras</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>dialplan[data2]</td>
 	<td>1</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ringgroup[timeout]</td>
 	<td>20</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ringgroup[options]</td>
 	<td>Pasirinkimas</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ringgroup[cid_prefix]</td>
 	<td>370</td>
 </tr>
@@ -749,32 +749,32 @@
 	<td>1234567891</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>dialplan[name]</td>
 	<td>RGname</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ringgroup[comment]</td>
 	<td>Komentaras</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>dialplan[data2]</td>
 	<td>1</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ringgroup[timeout]</td>
 	<td>20</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ringgroup[options]</td>
 	<td>Pasirinkimas</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ringgroup[cid_prefix]</td>
 	<td>370</td>
 </tr>
@@ -864,37 +864,37 @@
 	<td>1234567890</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>dialplan[name]</td>
 	<td>RGname2</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ringgroup[comment]</td>
 	<td>Komentaras labai ilgas</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>dialplan[data2]</td>
 	<td>100</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ringgroup[timeout]</td>
 	<td>50</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ringgroup[options]</td>
 	<td>Pasirinkimas numeris du</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>ringgroup[cid_prefix]</td>
 	<td>370600</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>ringgroup[did_id]</td>
 	<td>1234567890</td>
 </tr>
@@ -910,7 +910,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>xpath=(//select[@name='dp_id'])[2]</td>
 	<td>100 - RGname2</td>
 </tr>
@@ -929,7 +929,7 @@
 	<td>DID assigned to Dial Plan: RGname2</td>
 	<td></td>
 </tr>
-<!--verify-->
+<!--assert-->
 <tr>
 	<td>open</td>
 	<td>/billing/ringgroups/edit/1</td>
@@ -1096,7 +1096,7 @@
 	<td>Device configuration</td>
 	<td></td>
 </tr>
-<!--verify-->
+<!--assert-->
 <tr>
 	<td>open</td>
 	<td>/billing/ringgroups/edit/1</td>
@@ -1208,7 +1208,7 @@
 	<td>DID terminated</td>
 	<td></td>
 </tr>
-<!--verify-->
+<!--assert-->
 <tr>
 	<td>open</td>
 	<td>/billing/ringgroups/edit/1</td>
@@ -1401,7 +1401,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=dp_dids_3</td>
 	<td></td>
 </tr>
