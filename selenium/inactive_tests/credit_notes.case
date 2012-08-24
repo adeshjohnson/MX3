@@ -32,7 +32,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -54,13 +54,13 @@
 </tr>
 <!--Verify there is menu option for credit notes-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Credit notes</td>
 	<td></td>
 </tr>
 <!--Verify there is link to create new note-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Create credit note</td>
 	<td></td>
 </tr>
@@ -72,7 +72,7 @@
 </tr>
 <!--Verify that you can create credit note just for certais users, you can not select reseller users etc-->
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>System Admin Test Accountant Test Reseller Test User #1</td>
 	<td></td>
 </tr>
@@ -128,49 +128,49 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note created</td>
 </tr>
-<!--Note was created, verify that data is correct-->
+<!--Note was created, assert that data is correct-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test Reseller</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=number</td>
 	<td>100</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=issue_date</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=price</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=full_price</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=comment</td>
 	<td>comment 1</td>
 </tr>
 <!--Note should be unpaid-->
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=image_not_paid</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Paid date</td>
 	<td></td>
 </tr>
@@ -186,12 +186,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note changed</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=comment</td>
 	<td>comment 2</td>
 </tr>
@@ -202,31 +202,31 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=tax1_value</td>
 	<td>0.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=tax2_value</td>
 	<td>0.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=tax3_value</td>
 	<td>0.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=tax4_value</td>
 	<td>0.0</td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>0.0000 USD</td>
 	<td></td>
 </tr>
-<!--Set note as paid and verify that payment was created and price was added to user balance-->
+<!--Set note as paid and assert that payment was created and price was added to user balance-->
 <tr>
 	<td>open</td>
 	<td>/billing/credit_note/edit/1</td>
@@ -238,7 +238,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=image_paid</td>
 	<td></td>
 </tr>
@@ -248,7 +248,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>100.0000 USD</td>
 	<td></td>
 </tr>
@@ -258,28 +258,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=paymenttype_10</td>
 	<td>Credit note</td>
 </tr>
 <!--TODO: kaip patikrinti date_added_10 kai jis dinamiskai nusistato-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test Reseller</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=amount_10</td>
 	<td>100.0000</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=amout_with_tax_10</td>
 	<td>100.0000</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=currency_10</td>
 	<td>USD</td>
 </tr>
@@ -330,38 +330,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note created</td>
 </tr>
-<!--Note was created, verify that data is correct-->
+<!--Note was created, assert that data is correct-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test User #1</td>
 	<td>Test User #1</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=number</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=issue_date</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=price</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=full_price</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=comment</td>
 	<td></td>
 </tr>
@@ -373,89 +373,89 @@
 </tr>
 <!--There should be links to edit and delete notes. Notice that paid note should be checked and have paid date-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test Reseller</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_number_1</td>
 	<td>100</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date1</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_paid_1</td>
 	<td></td>
 </tr>
 <!--TODO: kaip patikrinti pay date kai jis dinamiskai nusistato-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_1</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_full_price_1</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=img[alt=&quot;Details&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <!--Not paid note should be marked with cross and cannot have paid date set-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test User #1</td>
 	<td>Test User #1</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_number_2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date2</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_not_paid_2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_paid_date_2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_2</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_full_price_2</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#details_link_2 &gt; img[alt=&quot;Details&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#delete_link_2 &gt; img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
@@ -476,7 +476,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Settings saved</td>
 </tr>
@@ -492,12 +492,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test User #1</td>
 	<td>Test User #1</td>
 </tr>
@@ -507,12 +507,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test Reseller</td>
 	<td>Test Reseller</td>
 </tr>
@@ -523,12 +523,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_number_2</td>
 	<td></td>
 </tr>
@@ -538,12 +538,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_number_1</td>
 	<td>100</td>
 </tr>
@@ -554,12 +554,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date2</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
@@ -569,12 +569,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date1</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
@@ -585,12 +585,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_paid_1</td>
 	<td></td>
 </tr>
@@ -600,12 +600,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_not_paid_2</td>
 	<td></td>
 </tr>
@@ -616,12 +616,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_paid_date_2</td>
 	<td></td>
 </tr>
@@ -631,7 +631,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
@@ -643,12 +643,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_1</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
@@ -658,12 +658,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_2</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
@@ -674,7 +674,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Error</td>
 	<td></td>
 </tr>
@@ -684,12 +684,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Error</td>
 	<td></td>
 </tr>
@@ -705,7 +705,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_1</td>
 	<td>100.0</td>
 </tr>
@@ -715,7 +715,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_2</td>
 	<td>1000.0</td>
 </tr>
@@ -725,7 +725,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_1</td>
 	<td>100.0</td>
 </tr>
@@ -735,7 +735,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_2</td>
 	<td>1000.0</td>
 </tr>
@@ -756,7 +756,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Settings saved</td>
 </tr>
@@ -808,12 +808,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
@@ -828,12 +828,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
@@ -849,12 +849,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
@@ -875,12 +875,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
@@ -896,12 +896,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
@@ -922,12 +922,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
@@ -943,12 +943,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
@@ -959,7 +959,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>payment_status</td>
 	<td>All</td>
 </tr>
@@ -969,22 +969,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_paid_1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_not_paid_2</td>
 	<td></td>
 </tr>
@@ -999,22 +999,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_paid_1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>payment_status</td>
 	<td>Paid</td>
 </tr>
@@ -1029,22 +1029,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test User #1</td>
 	<td>Test User #1</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_not_paid_2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>payment_status</td>
 	<td>Unpaid</td>
 </tr>
@@ -1055,7 +1055,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>payment_status</td>
 	<td>Unpaid</td>
 </tr>
@@ -1076,12 +1076,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_1</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_2</td>
 	<td>1000.0</td>
 </tr>
@@ -1096,12 +1096,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_1</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_2</td>
 	<td>1000.0</td>
 </tr>
@@ -1116,12 +1116,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_2</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_1</td>
 	<td>100.0</td>
 </tr>
@@ -1136,12 +1136,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_2</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_1</td>
 	<td>100.0</td>
 </tr>
@@ -1156,12 +1156,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_1</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_2</td>
 	<td>1000.0</td>
 </tr>
@@ -1176,12 +1176,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_1</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_2</td>
 	<td>1000.0</td>
 </tr>
@@ -1196,12 +1196,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_2</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_1</td>
 	<td>100.0</td>
 </tr>
@@ -1216,12 +1216,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_2</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_1</td>
 	<td>100.0</td>
 </tr>
@@ -1236,12 +1236,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_1</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_2</td>
 	<td>1000.0</td>
 </tr>
@@ -1252,12 +1252,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=amount_min</td>
 	<td>100</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=amount_max</td>
 	<td>1000</td>
 </tr>
@@ -1308,12 +1308,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date2</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date1</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
@@ -1338,12 +1338,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date2</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date1</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
@@ -1354,42 +1354,42 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_year</td>
 	<td>2011</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_month</td>
 	<td>December</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_day</td>
 	<td>13</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_till_year</td>
 	<td>2012</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_till_month</td>
 	<td>December</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_day</td>
 	<td>13</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date2</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date1</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
@@ -1420,12 +1420,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_not_paid_2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=image_paid_1</td>
 	<td></td>
 </tr>
@@ -1436,7 +1436,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>0.0000 USD</td>
 	<td></td>
 </tr>
@@ -1461,7 +1461,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>0.0000 USD</td>
 	<td></td>
 </tr>
@@ -1487,7 +1487,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>100.0000 USD</td>
 	<td></td>
 </tr>
@@ -1512,7 +1512,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>0.0000 USD</td>
 	<td></td>
 </tr>
@@ -1522,7 +1522,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
@@ -1533,17 +1533,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_year</td>
 	<td>2006</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>paid_date_from_year</td>
 	<td>2012</td>
 </tr>
@@ -1553,12 +1553,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -1573,7 +1573,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -1583,12 +1583,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -1603,7 +1603,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
@@ -1618,12 +1618,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Clear_search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -1633,7 +1633,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -1644,7 +1644,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -1654,7 +1654,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -1664,7 +1664,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -1716,7 +1716,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note created</td>
 </tr>
@@ -1766,7 +1766,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note created</td>
 </tr>
@@ -1776,7 +1776,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=image_paid</td>
 	<td></td>
 </tr>
@@ -1807,7 +1807,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group was created</td>
 	<td></td>
 </tr>
@@ -1827,12 +1827,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group was created</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group was created</td>
 	<td></td>
 </tr>
@@ -1852,7 +1852,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group was created</td>
 	<td></td>
 </tr>
@@ -1872,7 +1872,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group was created</td>
 	<td></td>
 </tr>
@@ -1897,7 +1897,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Group was updated</td>
 </tr>
@@ -1927,7 +1927,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Group was updated</td>
 </tr>
@@ -1962,7 +1962,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Group was updated</td>
 </tr>
@@ -1997,7 +1997,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Group was updated</td>
 </tr>
@@ -2037,7 +2037,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Group was updated</td>
 </tr>
@@ -2057,7 +2057,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>User's settings succesfully changed: Test Accountant</td>
 </tr>
@@ -2083,13 +2083,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Hello, Test Accountant</td>
 	<td></td>
 </tr>
 <!--Verify there is no menu option for credit notes, because he cannot see nor invoices nor credit notes, and user can not reach pages through link-->
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Credit notes</td>
 	<td></td>
 </tr>
@@ -2099,7 +2099,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -2109,7 +2109,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -2119,7 +2119,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -2129,7 +2129,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -2139,7 +2139,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -2149,7 +2149,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -2159,7 +2159,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -2169,7 +2169,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -2195,7 +2195,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -2215,7 +2215,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>User's settings succesfully changed: Test Accountant</td>
 </tr>
@@ -2241,13 +2241,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Hello, Test Accountant</td>
 	<td></td>
 </tr>
 <!--Verify there is menu option for credit notes, because he can see invoices-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Credit notes</td>
 	<td></td>
 </tr>
@@ -2258,7 +2258,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Create credit note</td>
 	<td></td>
 </tr>
@@ -2268,7 +2268,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -2278,7 +2278,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -2289,7 +2289,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Create credit note</td>
 	<td></td>
 </tr>
@@ -2299,7 +2299,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -2310,78 +2310,78 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=paid_date_from_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=paid_date_from_month</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=paid_date_from_day</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=paid_date_till_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=paid_date_till_month</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=paid_date_from_day</td>
 	<td></td>
 </tr>
 <!--Verify that accountant with these permissions can search by username, first name, last name and issue date.-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=username</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=first_name</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=last_name</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_from_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_from_month</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_from_day</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_till_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_till_month</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_till_day</td>
 	<td></td>
 </tr>
@@ -2413,12 +2413,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Test Reseller</td>
 	<td></td>
 </tr>
@@ -2433,12 +2433,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Test Reseller</td>
 	<td></td>
 </tr>
@@ -2454,12 +2454,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Test Reseller</td>
 	<td></td>
 </tr>
@@ -2480,12 +2480,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Test Reseller</td>
 	<td></td>
 </tr>
@@ -2501,12 +2501,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Test Reseller</td>
 	<td></td>
 </tr>
@@ -2527,12 +2527,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Test Reseller</td>
 	<td></td>
 </tr>
@@ -2548,12 +2548,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Test Reseller</td>
 	<td></td>
 </tr>
@@ -2574,12 +2574,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_4</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_3</td>
 	<td>Test User #1</td>
 </tr>
@@ -2589,12 +2589,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_4</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_3</td>
 	<td>Test User #1</td>
 </tr>
@@ -2605,12 +2605,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_4</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_3</td>
 	<td>Test User #1</td>
 </tr>
@@ -2625,12 +2625,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_4</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_3</td>
 	<td>Test User #1</td>
 </tr>
@@ -2645,12 +2645,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_4</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_3</td>
 	<td>Test User #1</td>
 </tr>
@@ -2665,12 +2665,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_4</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_3</td>
 	<td>Test User #1</td>
 </tr>
@@ -2680,12 +2680,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_4</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_3</td>
 	<td>Test User #1</td>
 </tr>
@@ -2726,12 +2726,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date4</td>
 	<td>2010-01-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date3</td>
 	<td>2009-05-07 07:00:00</td>
 </tr>
@@ -2742,68 +2742,68 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_year</td>
 	<td>2010</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_month</td>
 	<td>January</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_day</td>
 	<td>4</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_till_year</td>
 	<td>2011</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_till_month</td>
 	<td>December</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_till_day</td>
 	<td>13</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date4</td>
 	<td>2010-01-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date3</td>
 	<td>2009-05-07 07:00:00</td>
 </tr>
 <!--Verify that we cannot see columns that user has no rigths to view-->
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Paid</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Price</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Paid date</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=price_with_vat</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=delete_note</td>
 	<td></td>
 </tr>
@@ -2829,7 +2829,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -2849,7 +2849,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Settings saved</td>
 </tr>
@@ -2875,7 +2875,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -2886,7 +2886,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Error</td>
 	<td></td>
 </tr>
@@ -2896,12 +2896,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Error</td>
 	<td></td>
 </tr>
@@ -2911,7 +2911,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=user_4</td>
 	<td></td>
 </tr>
@@ -2921,7 +2921,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=user_4</td>
 	<td></td>
 </tr>
@@ -2931,7 +2931,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=user_4</td>
 	<td></td>
 </tr>
@@ -2947,12 +2947,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_3</td>
 	<td>Test User #1</td>
 </tr>
@@ -2962,12 +2962,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_4</td>
 	<td>Test Reseller</td>
 </tr>
@@ -2978,12 +2978,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_number_3</td>
 	<td></td>
 </tr>
@@ -2995,12 +2995,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date3</td>
 	<td>2009-05-07 07:00:00</td>
 </tr>
@@ -3010,12 +3010,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date4</td>
 	<td>2010-01-07 07:00:00</td>
 </tr>
@@ -3026,7 +3026,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_3</td>
 	<td>Test User #1</td>
 </tr>
@@ -3036,7 +3036,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_4</td>
 	<td>Test Reseller</td>
 </tr>
@@ -3046,7 +3046,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_3</td>
 	<td>Test User #1</td>
 </tr>
@@ -3056,7 +3056,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=user_4</td>
 	<td>Test Reseller</td>
 </tr>
@@ -3082,7 +3082,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -3102,7 +3102,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Settings saved</td>
 </tr>
@@ -3128,7 +3128,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -3139,32 +3139,32 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=User</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Number</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Issue date</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=note_details</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
@@ -3175,7 +3175,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
@@ -3185,37 +3185,37 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>exact:Number:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Issue date:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=comment</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>exact:Paid:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Paid date:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Price (USD):</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Price with TAX (USD):</td>
 	<td></td>
 </tr>
@@ -3231,7 +3231,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note changed</td>
 </tr>
@@ -3241,7 +3241,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -3251,7 +3251,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -3277,7 +3277,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -3297,7 +3297,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>User's settings succesfully changed: Test Accountant</td>
 </tr>
@@ -3323,13 +3323,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Hello, Test Accountant</td>
 	<td></td>
 </tr>
 <!--Verify there is menu option for credit notes, because he can see invoices-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Credit notes</td>
 	<td></td>
 </tr>
@@ -3340,7 +3340,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Create credit note</td>
 	<td></td>
 </tr>
@@ -3350,7 +3350,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -3365,7 +3365,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -3376,7 +3376,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Create credit note</td>
 	<td></td>
 </tr>
@@ -3386,7 +3386,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -3397,153 +3397,153 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=paid_date_from_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=paid_date_from_month</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=paid_date_from_day</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=paid_date_till_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=paid_date_till_month</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=paid_date_from_day</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=username</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=first_name</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=last_name</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_from_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_from_month</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_from_day</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_till_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_till_month</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_till_day</td>
 	<td></td>
 </tr>
 <!--TODO: check whether search works-->
 <!--Verify that there are all available columns including financial data-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Paid</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Price</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Paid date</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=price_with_vat</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=User</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Number</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Issue date</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=note_details</td>
 	<td></td>
 </tr>
 <!--Verify that user cannot see link to delete credit note-->
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=delete_note</td>
 	<td></td>
 </tr>
 <!--Verify that accountant can see links to users, because he has manage users write permission-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
 <!--Verify whether accountant can see finacial data-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_paid_4</td>
 	<td></td>
 </tr>
 <!--TODO: how to check for pai date that is set dynamicaly-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_4</td>
 	<td>500.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_full_price_4</td>
 	<td>500.0</td>
 </tr>
@@ -3554,52 +3554,52 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>exact:Number:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Issue date:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=comment</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>exact:Paid:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=icon_chech_image_paid</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Paid</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Paid date:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Price (USD):</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Price with TAX (USD):</td>
 	<td></td>
 </tr>
@@ -3615,7 +3615,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note changed</td>
 </tr>
@@ -3625,7 +3625,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -3635,7 +3635,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -3661,7 +3661,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -3682,7 +3682,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>User's settings succesfully changed: Test Accountant</td>
 </tr>
@@ -3708,13 +3708,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
 <!--Verify there is menu option for credit notes-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Credit notes</td>
 	<td></td>
 </tr>
@@ -3726,7 +3726,7 @@
 </tr>
 <!--???Verify that accountant with see financial data can delete credit notes and check user balance changes-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=delete_note</td>
 	<td>Delete</td>
 </tr>
@@ -3737,7 +3737,7 @@
 </tr>
 <!--Verify there is link to create new note-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Create credit note</td>
 	<td></td>
 </tr>
@@ -3749,7 +3749,7 @@
 </tr>
 <!--Verify that you can create credit note just for certais users, you can not select reseller users etc-->
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>System Admin Test Accountant Test Reseller Test User #1</td>
 	<td></td>
 </tr>
@@ -3805,49 +3805,49 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note created</td>
 </tr>
-<!--Note was created, verify that data is correct-->
+<!--Note was created, assert that data is correct-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test Reseller</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=number</td>
 	<td>100</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=issue_date</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=price</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=full_price</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=comment</td>
 	<td>comment 1</td>
 </tr>
 <!--Note should be unpaid-->
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=image_not_paid</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Paid date</td>
 	<td></td>
 </tr>
@@ -3863,12 +3863,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note changed</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=comment</td>
 	<td>comment 2</td>
 </tr>
@@ -3879,31 +3879,31 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=tax1_value</td>
 	<td>0.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=tax2_value</td>
 	<td>0.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=tax3_value</td>
 	<td>0.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=tax4_value</td>
 	<td>0.0</td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>500.0000 USD</td>
 	<td></td>
 </tr>
-<!--Set note as paid and verify that payment was created and price was added to user balance-->
+<!--Set note as paid and assert that payment was created and price was added to user balance-->
 <tr>
 	<td>open</td>
 	<td>/billing/credit_note/edit/5</td>
@@ -3915,7 +3915,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=image_paid</td>
 	<td></td>
 </tr>
@@ -3925,7 +3925,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>600.0000 USD</td>
 	<td></td>
 </tr>
@@ -3976,38 +3976,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note created</td>
 </tr>
-<!--Note was created, verify that data is correct-->
+<!--Note was created, assert that data is correct-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test User #1</td>
 	<td>Test User #1</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=number</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=issue_date</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=price</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=full_price</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=comment</td>
 	<td></td>
 </tr>
@@ -4019,47 +4019,47 @@
 </tr>
 <!--There should be links to edit and delete notes. Notice that paid note should be checked and have paid date. Not paid note should be marked with cross and cannot have paid date set-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test User #1</td>
 	<td>Test User #1</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_number_6</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date6</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_not_paid_6</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_paid_date_6</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_6</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_full_price_6</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#details_link_6 &gt; img[alt=&quot;Details&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#delete_link_6 &gt; img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
@@ -4085,7 +4085,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -4105,7 +4105,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Settings saved</td>
 </tr>
@@ -4131,7 +4131,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -4147,12 +4147,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test User #1</td>
 	<td>Test User #1</td>
 </tr>
@@ -4162,12 +4162,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=Test Reseller</td>
 	<td>Test Reseller</td>
 </tr>
@@ -4178,12 +4178,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_number_3</td>
 	<td></td>
 </tr>
@@ -4193,12 +4193,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_number_5</td>
 	<td>100</td>
 </tr>
@@ -4209,12 +4209,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date3</td>
 	<td>2009-05-07 07:00:00</td>
 </tr>
@@ -4224,12 +4224,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date5</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
@@ -4240,12 +4240,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_paid_4</td>
 	<td></td>
 </tr>
@@ -4255,12 +4255,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_not_paid_3</td>
 	<td></td>
 </tr>
@@ -4271,12 +4271,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_paid_date_3</td>
 	<td></td>
 </tr>
@@ -4286,7 +4286,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
@@ -4298,12 +4298,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_3</td>
 	<td>50.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
@@ -4313,12 +4313,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_6</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
@@ -4329,7 +4329,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Error</td>
 	<td></td>
 </tr>
@@ -4339,12 +4339,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Error</td>
 	<td></td>
 </tr>
@@ -4360,7 +4360,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_4</td>
 	<td>500.0</td>
 </tr>
@@ -4370,7 +4370,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_6</td>
 	<td>1000.0</td>
 </tr>
@@ -4380,7 +4380,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_3</td>
 	<td>50.0</td>
 </tr>
@@ -4390,7 +4390,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_6</td>
 	<td>1000.0</td>
 </tr>
@@ -4416,7 +4416,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -4436,7 +4436,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Settings saved</td>
 </tr>
@@ -4462,7 +4462,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -4478,125 +4478,125 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=paid_date_from_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=paid_date_from_month</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=paid_date_from_day</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=paid_date_till_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=paid_date_till_month</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=paid_date_from_day</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=username</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=first_name</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=last_name</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_from_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_from_month</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_from_day</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_till_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_till_month</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=issue_date_till_day</td>
 	<td></td>
 </tr>
 <!--TODO: check whether search works-->
 <!--Verify that there are all available columns including financial data-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Paid</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Price</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Paid date</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=price_with_vat</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=User</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Number</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Issue date</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=note_details</td>
 	<td></td>
 </tr>
 <!--Verify that user can see link to delete credit note-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=delete_note</td>
 	<td></td>
 </tr>
@@ -4643,12 +4643,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
@@ -4663,12 +4663,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
@@ -4684,12 +4684,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
@@ -4710,12 +4710,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
@@ -4731,12 +4731,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
@@ -4757,12 +4757,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
@@ -4778,12 +4778,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
@@ -4794,7 +4794,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>payment_status</td>
 	<td>All</td>
 </tr>
@@ -4804,32 +4804,32 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=image_paid_4</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=image_paid_5</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=image_not_paid_3</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=image_not_paid_6</td>
 	<td></td>
 </tr>
@@ -4844,37 +4844,37 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=image_paid_4</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=image_paid_5</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=image_not_paid_3</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=image_not_paid_6</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>payment_status</td>
 	<td>Paid</td>
 </tr>
@@ -4889,32 +4889,32 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=image_paid_4</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=image_paid_5</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test User #1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=image_not_paid_3</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=image_not_paid_6</td>
 	<td></td>
 </tr>
@@ -4925,7 +4925,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>payment_status</td>
 	<td>Unpaid</td>
 </tr>
@@ -4946,22 +4946,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_5</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_4</td>
 	<td>500.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_3</td>
 	<td>50.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_6</td>
 	<td>1000.0</td>
 </tr>
@@ -4976,22 +4976,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_5</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_4</td>
 	<td>500.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_3</td>
 	<td>50.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_6</td>
 	<td>1000.0</td>
 </tr>
@@ -5011,22 +5011,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_5</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_4</td>
 	<td>500.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_3</td>
 	<td>50.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_6</td>
 	<td>1000.0</td>
 </tr>
@@ -5041,22 +5041,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_5</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_4</td>
 	<td>500.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_3</td>
 	<td>50.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_6</td>
 	<td>1000.0</td>
 </tr>
@@ -5071,22 +5071,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_5</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_4</td>
 	<td>500.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_3</td>
 	<td>50.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_6</td>
 	<td>1000.0</td>
 </tr>
@@ -5101,22 +5101,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_5</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_4</td>
 	<td>500.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_3</td>
 	<td>50.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_6</td>
 	<td>1000.0</td>
 </tr>
@@ -5131,22 +5131,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_5</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_4</td>
 	<td>500.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_3</td>
 	<td>50.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_6</td>
 	<td>1000.0</td>
 </tr>
@@ -5161,22 +5161,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_5</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_4</td>
 	<td>500.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_3</td>
 	<td>50.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_6</td>
 	<td>1000.0</td>
 </tr>
@@ -5191,22 +5191,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_5</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_4</td>
 	<td>500.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_3</td>
 	<td>50.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_6</td>
 	<td>1000.0</td>
 </tr>
@@ -5217,12 +5217,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=amount_min</td>
 	<td>100</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=amount_max</td>
 	<td>1000</td>
 </tr>
@@ -5273,22 +5273,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date6</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date4</td>
 	<td>2010-01-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date3</td>
 	<td>2009-05-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date5</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
@@ -5313,22 +5313,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date6</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date4</td>
 	<td>2010-01-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date3</td>
 	<td>2009-05-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date5</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
@@ -5339,52 +5339,52 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_year</td>
 	<td>2011</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_month</td>
 	<td>December</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_day</td>
 	<td>13</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_till_year</td>
 	<td>2012</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_till_month</td>
 	<td>December</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_day</td>
 	<td>13</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date6</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date4</td>
 	<td>2010-01-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date3</td>
 	<td>2009-05-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date5</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
@@ -5415,12 +5415,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=image_not_paid_3</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=image_not_paid_6</td>
 	<td></td>
 </tr>
@@ -5431,7 +5431,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>0.0000 USD</td>
 	<td></td>
 </tr>
@@ -5456,7 +5456,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>0.0000 USD</td>
 	<td></td>
 </tr>
@@ -5482,7 +5482,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>600.0000 USD</td>
 	<td></td>
 </tr>
@@ -5507,7 +5507,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>500.0000 USD</td>
 	<td></td>
 </tr>
@@ -5518,17 +5518,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_year</td>
 	<td>2006</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>paid_date_from_year</td>
 	<td>2008</td>
 </tr>
@@ -5538,12 +5538,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -5558,7 +5558,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -5568,12 +5568,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -5588,7 +5588,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
@@ -5603,12 +5603,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Clear_search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -5618,7 +5618,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -5629,7 +5629,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -5639,7 +5639,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -5649,7 +5649,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -5659,7 +5659,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -5669,7 +5669,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -5707,13 +5707,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
 <!--Verify there is menu option for credit notes-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Credit notes</td>
 	<td></td>
 </tr>
@@ -5725,7 +5725,7 @@
 </tr>
 <!--Verify there is link to create new note-->
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Create credit note</td>
 	<td></td>
 </tr>
@@ -5737,7 +5737,7 @@
 </tr>
 <!--Verify that you can create credit note just for certais users, you can not select reseller users etc-->
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User Resellers</td>
 	<td></td>
 </tr>
@@ -5793,49 +5793,49 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note created</td>
 </tr>
-<!--Note was created, verify that data is correct-->
+<!--Note was created, assert that data is correct-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=User Resellers</td>
 	<td>User Resellers</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=number</td>
 	<td>100</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=issue_date</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=price</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=full_price</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=comment</td>
 	<td>comment 1</td>
 </tr>
 <!--Note should be unpaid-->
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=image_not_paid</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Paid date</td>
 	<td></td>
 </tr>
@@ -5851,12 +5851,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note changed</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=comment</td>
 	<td>comment 2</td>
 </tr>
@@ -5867,31 +5867,31 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=tax1_value</td>
 	<td>0.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=tax2_value</td>
 	<td>0.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=tax3_value</td>
 	<td>0.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=tax4_value</td>
 	<td>0.0</td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>0.0000 USD</td>
 	<td></td>
 </tr>
-<!--Set note as paid and verify that payment was created and price was added to user balance-->
+<!--Set note as paid and assert that payment was created and price was added to user balance-->
 <tr>
 	<td>open</td>
 	<td>/billing/credit_note/edit/7</td>
@@ -5903,7 +5903,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=image_paid</td>
 	<td></td>
 </tr>
@@ -5913,7 +5913,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>100.0000 USD</td>
 	<td></td>
 </tr>
@@ -5923,28 +5923,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=paymenttype_13</td>
 	<td>Credit note</td>
 </tr>
 <!--TODO: kaip patikrinti date_added_10 kai jis dinamiskai nusistato-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=User Resellers</td>
 	<td>User Resellers</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=amount_13</td>
 	<td>100.0000</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=amout_with_tax_13</td>
 	<td>100.0000</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=currency_13</td>
 	<td>USD</td>
 </tr>
@@ -5995,38 +5995,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note created</td>
 </tr>
-<!--Note was created, verify that data is correct-->
+<!--Note was created, assert that data is correct-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=User Resellers</td>
 	<td>User Resellers</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=number</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=issue_date</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=price</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=full_price</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=comment</td>
 	<td></td>
 </tr>
@@ -6038,89 +6038,89 @@
 </tr>
 <!--There should be links to edit and delete notes. Notice that paid note should be checked and have paid date-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=User Resellers</td>
 	<td>User Resellers</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_number_7</td>
 	<td>100</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date7</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_paid_7</td>
 	<td></td>
 </tr>
 <!--TODO: kaip patikrinti pay date kai jis dinamiskai nusistato-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_7</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_full_price_7</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=img[alt=&quot;Details&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <!--Not paid note should be marked with cross and cannot have paid date set-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=User Resellers</td>
 	<td>User Resellers</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_number_8</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date8</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_not_paid_8</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_paid_date_8</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_8</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_full_price_8</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#details_link_8 &gt; img[alt=&quot;Details&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=#delete_link_8 &gt; img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
@@ -6147,7 +6147,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -6167,7 +6167,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Settings saved</td>
 </tr>
@@ -6193,7 +6193,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -6209,12 +6209,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_number_7</td>
 	<td>100</td>
 </tr>
@@ -6226,12 +6226,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_number_8</td>
 	<td></td>
 </tr>
@@ -6241,12 +6241,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_number_7</td>
 	<td>100</td>
 </tr>
@@ -6257,12 +6257,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date8</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
@@ -6272,12 +6272,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date7</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
@@ -6288,12 +6288,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_paid_7</td>
 	<td></td>
 </tr>
@@ -6303,12 +6303,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_not_paid_8</td>
 	<td></td>
 </tr>
@@ -6319,12 +6319,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_paid_date_8</td>
 	<td></td>
 </tr>
@@ -6334,12 +6334,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=note_paid_date_7</td>
 	<td></td>
 </tr>
@@ -6350,12 +6350,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_7</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_down&quot;]</td>
 	<td></td>
 </tr>
@@ -6365,12 +6365,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_8</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
@@ -6381,7 +6381,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Error</td>
 	<td></td>
 </tr>
@@ -6391,12 +6391,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=img[alt=&quot;Bullet_arrow_up&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Error</td>
 	<td></td>
 </tr>
@@ -6412,7 +6412,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_7</td>
 	<td>100.0</td>
 </tr>
@@ -6422,7 +6422,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_8</td>
 	<td>1000.0</td>
 </tr>
@@ -6432,7 +6432,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_7</td>
 	<td>100.0</td>
 </tr>
@@ -6442,7 +6442,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_8</td>
 	<td>1000.0</td>
 </tr>
@@ -6468,7 +6468,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -6488,7 +6488,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Settings saved</td>
 </tr>
@@ -6514,7 +6514,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -6566,7 +6566,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=User Resellers</td>
 	<td></td>
 </tr>
@@ -6581,7 +6581,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=User Resellers</td>
 	<td></td>
 </tr>
@@ -6597,7 +6597,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=User Resellers</td>
 	<td></td>
 </tr>
@@ -6618,7 +6618,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=User Resellers</td>
 	<td></td>
 </tr>
@@ -6634,7 +6634,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=User Resellers</td>
 	<td></td>
 </tr>
@@ -6655,7 +6655,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=User Resellers</td>
 	<td></td>
 </tr>
@@ -6671,7 +6671,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=User Resellers</td>
 	<td></td>
 </tr>
@@ -6682,7 +6682,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>payment_status</td>
 	<td>All</td>
 </tr>
@@ -6692,17 +6692,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=User Resellers</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_paid_7</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_not_paid_8</td>
 	<td></td>
 </tr>
@@ -6717,22 +6717,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=User Resellers</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_paid_7</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=image_not_paid_8</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>payment_status</td>
 	<td>Paid</td>
 </tr>
@@ -6747,22 +6747,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>id=image_paid_7</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>link=User Resellers</td>
 	<td>User Resellers</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_not_paid_8</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>payment_status</td>
 	<td>Unpaid</td>
 </tr>
@@ -6773,7 +6773,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>payment_status</td>
 	<td>Unpaid</td>
 </tr>
@@ -6794,12 +6794,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_7</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_8</td>
 	<td>1000.0</td>
 </tr>
@@ -6814,12 +6814,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_7</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_8</td>
 	<td>1000.0</td>
 </tr>
@@ -6834,12 +6834,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_8</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_7</td>
 	<td>100.0</td>
 </tr>
@@ -6854,12 +6854,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_8</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_7</td>
 	<td>100.0</td>
 </tr>
@@ -6874,12 +6874,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_7</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_8</td>
 	<td>1000.0</td>
 </tr>
@@ -6894,12 +6894,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_7</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_8</td>
 	<td>1000.0</td>
 </tr>
@@ -6914,12 +6914,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_8</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_7</td>
 	<td>100.0</td>
 </tr>
@@ -6934,12 +6934,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_price_8</td>
 	<td>1000.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_7</td>
 	<td>100.0</td>
 </tr>
@@ -6954,12 +6954,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_7</td>
 	<td>100.0</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_price_8</td>
 	<td>1000.0</td>
 </tr>
@@ -6970,12 +6970,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=amount_min</td>
 	<td>100</td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=amount_max</td>
 	<td>1000</td>
 </tr>
@@ -7026,12 +7026,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date8</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date7</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
@@ -7056,12 +7056,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date8</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date7</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
@@ -7072,42 +7072,42 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_year</td>
 	<td>2011</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_month</td>
 	<td>December</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_day</td>
 	<td>13</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_till_year</td>
 	<td>2012</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_till_month</td>
 	<td>December</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_day</td>
 	<td>13</td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=note_issue_date8</td>
 	<td>2011-12-07 07:00:00</td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=note_issue_date7</td>
 	<td>2012-01-02 14:00:00</td>
 </tr>
@@ -7138,12 +7138,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=image_not_paid_8</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>id=image_paid_7</td>
 	<td></td>
 </tr>
@@ -7154,7 +7154,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>100.0000 USD</td>
 	<td></td>
 </tr>
@@ -7179,7 +7179,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>100.0000 USD</td>
 	<td></td>
 </tr>
@@ -7205,7 +7205,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>100.0000 USD</td>
 	<td></td>
 </tr>
@@ -7230,12 +7230,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>100.0000 USD</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>0.0000 USD</td>
 	<td></td>
 </tr>
@@ -7245,7 +7245,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=User Resellers</td>
 	<td></td>
 </tr>
@@ -7256,17 +7256,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>issue_date_from_year</td>
 	<td>2006</td>
 </tr>
 <tr>
-	<td>verifySelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>paid_date_from_year</td>
 	<td>2012</td>
 </tr>
@@ -7276,12 +7276,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -7296,7 +7296,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -7306,12 +7306,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -7326,7 +7326,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
@@ -7341,12 +7341,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Clear_search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -7356,7 +7356,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyVisible</td>
+	<td>assertVisible</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -7367,7 +7367,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7377,7 +7377,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7387,7 +7387,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7398,7 +7398,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7408,7 +7408,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7418,7 +7418,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7428,7 +7428,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7438,7 +7438,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7447,9 +7447,9 @@
 	<td>/billing/credit_note/new</td>
 	<td></td>
 </tr>
-<!--Create credit note to verify that no other system user cann access it-->
+<!--Create credit note to assert that no other system user cann access it-->
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User Resellers</td>
 	<td></td>
 </tr>
@@ -7504,11 +7504,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=status</td>
 	<td>Credit note created</td>
 </tr>
-<!--Login as admin and verify that he cannot view or edit reseller's notes-->
+<!--Login as admin and assert that he cannot view or edit reseller's notes-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -7530,7 +7530,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -7540,7 +7540,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7550,7 +7550,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7560,7 +7560,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7570,7 +7570,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7580,11 +7580,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
-<!--Login as accountant and verify that he cannot view or edit reseller's notes-->
+<!--Login as accountant and assert that he cannot view or edit reseller's notes-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -7606,7 +7606,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
@@ -7616,7 +7616,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7626,7 +7626,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7636,7 +7636,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7646,7 +7646,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
@@ -7656,11 +7656,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Credit note not found</td>
 </tr>
-<!--Login as user and verify that nor he can see link to credit notes, nor he can access then in any way-->
+<!--Login as user and assert that nor he can see link to credit notes, nor he can access then in any way-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -7682,12 +7682,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Credit notes</td>
 	<td></td>
 </tr>
@@ -7697,7 +7697,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -7707,7 +7707,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -7717,7 +7717,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -7727,7 +7727,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -7737,7 +7737,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
@@ -7747,7 +7747,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>Don't be so smart...</td>
 </tr>
