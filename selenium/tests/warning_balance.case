@@ -12,11 +12,6 @@
 <tr><td rowspan="1" colspan="3">warning_balance</td></tr>
 </thead><tbody>
 <tr>
-	<td>setTimeout</td>
-	<td>60000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
@@ -402,8 +397,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/callc/hourly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -412,7 +417,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Mission complete</td>
 	<td></td>
 </tr>
