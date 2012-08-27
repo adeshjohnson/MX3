@@ -67,6 +67,7 @@ Mor::Application.routes.draw do
   match '/payment_gateways/:engine/:gateway(/:action/:id)' => 'active_processor/ideal', :constraints => {:engine => /ideal/}
   match '/payment_gateways/:engine/:gateway/pay(/:id)' => 'active_processor/ideal#pay', :constraints => {:engine => /ideal/}
 
+  match '/webphone' => 'callc#webphone'
   match '/active_processor/callc/main' => 'callc#main'
   match ':controller(/:action(/:id(.:format)))'
 
