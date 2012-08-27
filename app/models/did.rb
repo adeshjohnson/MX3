@@ -259,7 +259,7 @@ class Did < ActiveRecord::Base
   *boolean* - true if did has no associated calls with it, else returns false
 =end
   def find_if_used_in_calls
-    Call.where("did_id = #{self.id}").first ? true : false
+    Call.where("did_id = #{self.id}").first ? false : true
   end
 
 =begin
