@@ -407,6 +407,16 @@
 	<td>id=min_time_511</td>
 	<td>0.0000</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ghost_percent_edit/1?rate_id=135</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=rate_ghost_min_perc</td>
+	<td></td>
+</tr>
 <!---------->
 <tr>
 	<td>open</td>
@@ -692,6 +702,16 @@
 	<td>assertText</td>
 	<td>id=min_time_514</td>
 	<td>0.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ghost_percent_edit/8?rate_id=518</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=rate_ghost_min_perc</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1056,6 +1076,16 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Rate does not have assigned destination</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/5200000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rate was not found</td>
 	<td></td>
 </tr>
 <tr>
