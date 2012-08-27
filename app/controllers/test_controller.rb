@@ -118,7 +118,8 @@ class TestController < ApplicationController
       MorLog.my_debug("Delta SQL file was not found: #{filename}")
       rez = "Not Found"
     end
-    renew_session(User.find(0))
+    sys_admin = User.where({:id=>0}).first
+    renew_session(sys_admin)  if sys_admin
     render :text => rez
   end
 
