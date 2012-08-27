@@ -251,9 +251,11 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
 
           new_rate += amount.to_f
           new_rate += new_rate/100 * percent.to_f
+          new_rate = new_rate.round(15)
 
           new_connfee += fee_amount.to_f
           new_connfee += new_connfee/100 * fee_percent.to_f
+          new_connfee = new_connfee.round(15)
 
 
           # `duration`, `price`, `end_time`, `from`, `artype`, `rate_id`, `round`, `start_time`
