@@ -368,8 +368,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//a[contains(@href, '/billing/dids/bulk_management')]</td>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
@@ -648,11 +648,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>DID deleted</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/test/make_select</td>
 	<td></td>
@@ -739,12 +734,12 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>id=did[tonezone]</td>
+	<td>id=did_tonezone</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=did[tonezone]</td>
+	<td>id=did_tonezone</td>
 	<td>label=ch</td>
 </tr>
 <tr>
@@ -759,7 +754,7 @@
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
-	<td>id=did[tonezone]</td>
+	<td>id=did_tonezone</td>
 	<td>ch</td>
 </tr>
 <tr>
@@ -779,7 +774,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=did[tonezone]</td>
+	<td>id=did_tonezone</td>
 	<td>label=lt</td>
 </tr>
 <tr>
