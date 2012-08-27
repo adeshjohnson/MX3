@@ -208,20 +208,21 @@ class CallcController < ApplicationController
       owner = user.owner
 
     end
-    owner = User.find(0) if !owner
+    owner = User.where({:id=>0}).first if !owner
+    owner_id = owner ? owner.id : 0
     session[:login] = false
 
     session.clear
 
     flash[:notice] = _('logged_off')
-    if Confline.get_value("Logout_link", owner.id).to_s.blank?
+    if Confline.get_value("Logout_link", owner_id).to_s.blank?
       if owner
         redirect_to :action => "login", :id => owner.get_hash()
       else
         redirect_to :action => "login"
       end
     else
-      redirect_to Confline.get_value("Logout_link", owner.id).to_s
+      redirect_to Confline.get_value("Logout_link", owner_id).to_s
     end
   end
 
