@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>cdr_import_rerating</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">cdr_import_rerating</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/cdr_file_for_import.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=calldate_id</td>
+	<td>label=2012-05-16 14:50:00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=billsec_id</td>
+	<td>label=139</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dst_id</td>
+	<td>label=8801768642466</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=2180</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=provider</td>
+	<td>label=Provider_for_admin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import_type_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Wholesale User</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id</td>
+	<td>label=IAX2/1017</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cdr_in_csv_file_number</td>
+	<td>46</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cut</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=add</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=minlen</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=maxlen</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tariff</td>
+	<td>label=Wholesale_acc_tariff</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cdr/import_csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/cdr_one.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clid_id</td>
+	<td>label=regexp:\s</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dst_id</td>
+	<td>label=dst</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=billsec_id</td>
+	<td>label=billsec</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=provider</td>
+	<td>label=Provider_for_admin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import_type_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Wholesale User</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=device_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id</td>
+	<td>label=IAX2/1017</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Next step: Import CDR </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=May</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=May</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_rate_75</td>
+	<td>0.0600</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_price_75</td>
+	<td>0.0600</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=profit_75</td>
+	<td>-0.2730</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>fax_device</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">fax_device</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/servers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_FAX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>FAX_device</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>name=device[server_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=device[server_id]</td>
+	<td>ID: 1, IP: 127.0.0.1 (main system) ID: 20, IP: 127.0.0.2 (second serv) ID: 30, IP: 127.0.0.3 (third serv)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=device[server_id]</td>
+	<td>label=ID: 20, IP: 127.0.0.2 (second serv)</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>on</td>
+</tr>
+<!--<tr> 	<td>assertValue</td> 	<td>id=codec[ulaw]</td> 	<td>on</td> </tr>-->
+<tr>
+	<td>uncheck</td>
+	<td>id=codec_ulaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=device[server_id]</td>
+	<td>ID: 20, IP: 127.0.0.2 (second serv)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=device[server_id]</td>
+	<td>label=ID: 1, IP: 127.0.0.1 (main system)</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=codec_alaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=codec_ulaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=codec_alaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_FAX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>name=device[server_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=device[server_id]</td>
+	<td>ID: 1, IP: 127.0.0.1 (main system) ID: 20, IP: 127.0.0.2 (second serv) ID: 30, IP: 127.0.0.3 (third serv)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=device[server_id]</td>
+	<td>label=ID: 20, IP: 127.0.0.2 (second serv)</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>on</td>
+</tr>
+<!--<tr> 	<td>assertValue</td> 	<td>id=codec[ulaw]</td> 	<td>on</td> </tr>-->
+<tr>
+	<td>check</td>
+	<td>id=codec_ulaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=codec_alaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=device[server_id]</td>
+	<td>ID: 20, IP: 127.0.0.2 (second serv)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_FAX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>FAX_device2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>name=device[server_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=device[server_id]</td>
+	<td>ID: 1, IP: 127.0.0.1 (main system) ID: 20, IP: 127.0.0.2 (second serv) ID: 30, IP: 127.0.0.3 (third serv)</td>
+</tr>
+<!--<tr> 	<td>assertSelectedLabel</td> 	<td>name=device[server_id]</td> 	<td>ID: 20, IP: 127.0.0.2 (second serv)</td> </tr>-->
+<tr>
+	<td>select</td>
+	<td>name=device[server_id]</td>
+	<td>label=ID: 30, IP: 127.0.0.3 (third serv)</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=device[server_id]</td>
+	<td>ID: 30, IP: 127.0.0.3 (third serv)</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=codec_ulaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=codec_alaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_FAX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>FAX_device2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=codec_ulaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=codec_alaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_FAX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>FAX_device2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>on</td>
+</tr>
+</tbody></table>
+</body>
+</html>
