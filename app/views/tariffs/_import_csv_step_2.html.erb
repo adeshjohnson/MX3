@@ -224,6 +224,18 @@
                   delete required_options['subcode'];
                   Event.stopObserving($('subcode'), 'change', validate_selected_options);
               }
+          }else{
+              country_code_required = event.target.checked;
+
+              if(country_code_required){
+                  $('Subcode_cell').innerHTML += '*'
+                  required_options['subcode'] = ($('subcode').value != '-1');
+                  Event.observe($('subcode'), 'change', validate_selected_options);
+              }else{
+                  $('Subcode_cell').innerHTML = $('Subcode_cell').innerHTML.slice(0,-1);
+                  delete required_options['subcode'];
+                  Event.stopObserving($('subcode'), 'change', validate_selected_options);
+              }
           }
           $('submit_button').disabled = check_for_not_selected();
       });
