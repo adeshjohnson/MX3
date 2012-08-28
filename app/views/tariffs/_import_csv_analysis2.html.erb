@@ -77,9 +77,9 @@
       <% end %>
     <% if session["tariff_import_csv2_#{@tariff.id}".to_sym][:imp_update_subcodes].to_i == 1 %>
       <tr class="row1">
-        <td id="destinations_to_update" width="50%"><%= _('Destination_subcodes_update') %></td>
-        <td id="dest_to_update" align="right" width="15%"><b><%= @tariff_analize[:subcodes_to_update].to_i %> </b></td>
-        <td id="dest_to_update_step" align="center" width="35%"><%= _('Step') %> 5 <%= link_to "(#{_('Press_here_to_get_list')})", {:action => "dst_to_update_from_csv", :csv2=>1,:tariff_id => @tariff.id}, :popup => true if @tariff_analize[:subcodes_to_update].to_i > 0 and params[:step].to_i < 7%></td>
+        <td id="subcodes_to_update" width="50%"><%= _('Destination_subcodes_update') %></td>
+        <td id="sub_to_update" align="right" width="15%"><b><%= @tariff_analize[:subcodes_to_update].to_i %> </b></td>
+        <td id="sub_to_update_step" align="center" width="35%"><%= _('Step') %> 5 <%= link_to "(#{_('Press_here_to_get_list')})", {:action => "subcodes_to_update_from_csv", :csv2=>1,:tariff_id => @tariff.id}, :popup => true if @tariff_analize[:subcodes_to_update].to_i > 0 and params[:step].to_i < 7%></td>
       </tr>
     <% end %>
 

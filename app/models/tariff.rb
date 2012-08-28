@@ -520,12 +520,12 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
 
     if options[:imp_update_dest_names].to_i == 1 and options[:imp_dst] >= 0
       # set flag on destination name update
-      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = 1 WHERE destinations.name != replace(col_#{options[:imp_dst]}, '\\r', '')")
+      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = 1 WHERE (destinations.name != replace(col_#{options[:imp_dst]}, '\\r', '') OR (destinations.name IS NULL AND LENGTH(col_#{options[:imp_dst]}) > 0 )  ) ")
     end
 
-    if options[:imp_update_subcodes].to_i == 1 and options[:imp_dst] >= 0
+    if options[:imp_update_subcodes].to_i == 1 and options[:imp_subcode] >= 0
       # set flag on destination name update
-      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = ned_update + 2 WHERE destinations.subcode != replace(col_#{options[:imp_dst]}, '\\r', '')")
+      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = ned_update + 2 WHERE (destinations.subcode != replace(col_#{options[:imp_subcode]}, '\\r', '') OR (destinations.subcode IS NULL AND LENGTH(col_#{options[:imp_subcode]}) > 0 ) )")
     end
 
     if options[:imp_update_directions].to_i == 1 
@@ -535,7 +535,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     arr[:bad_destinations] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 1").to_i
     arr[:destinations_to_create] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 0 AND not_found_in_db = 1").to_i
     arr[:destinations_to_update] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) AS d_all FROM #{name} WHERE ned_update IN (1, 3, 5, 7)").to_i if options[:imp_update_dest_names].to_i == 1 and options[:imp_dst] >= 0
-    arr[:subcodes_to_update] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) AS d_all FROM #{name} WHERE ned_update IN (2, 3, 6, 7)").to_i if options[:imp_update_subcodes].to_i == 1 and options[:imp_dst] >= 0
+    arr[:subcodes_to_update] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) AS d_all FROM #{name} WHERE ned_update IN (2, 3, 6, 7)").to_i if options[:imp_update_subcodes].to_i == 1 and options[:imp_subcode] >= 0
     arr[:directions_to_update] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) AS d_all FROM #{name} WHERE ned_update IN (4, 5, 6, 7)").to_i if options[:imp_update_directions].to_i == 1 
     arr[:new_rates_to_create] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) AS r_all FROM #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) LEFT join rates on (destinations.id = rates.destination_id and rates.tariff_id = #{id}) WHERE rates.id IS NULL").to_i + arr[:destinations_to_create].to_i
     arr[:new_destinations_in_csv_file] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE not_found_in_db = 1").to_i

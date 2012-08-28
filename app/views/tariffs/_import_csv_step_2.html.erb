@@ -111,7 +111,7 @@
           </tr>
       <% end %>
       <tr>
-        <td>   <%= _('Destination') %>/<%= _('OCN_Name') %>  </td>
+        <td  id='dest_cell' >   <%= _('Destination') %>/<%= _('OCN_Name') %>  </td>
         <%= render :partial => "import_csv_step_2_select", :locals => {:name => "destination_id", :value => :imp_dst} %>
         <td></td>
         <td id="destination_ocn_name_value"></td>
@@ -182,11 +182,26 @@
     //Note that 'not selected' value should be -1
     var required_options = {'prefix_id': false, 'rate_id': false}
 
-    //add event listener to update_directions checkbox. If it is checked, then country code 
+    //add event listener to update_directions checkbox. If it is checked, then country code
     //should be required so we add 'country_code_id' to required_options add event listener 
     //to select element appropriately and trigger change event on prefix_id select element(we 
     //also could trigger event on rate_id, but not on country_code_id cause it might be not be 
     //in required_options assoc array)
+
+      Event.observe($('update_dest_names'), 'change', function(event) {
+          dest_required = event.target.checked;
+          if(dest_required){
+              $('dest_cell').innerHTML += '*'
+              required_options['destination_id'] = ($('destination_id').value != '-1');
+              Event.observe($('destination_id'), 'change', validate_selected_options);
+          }else{
+              $('dest_cell').innerHTML = $('dest_cell').innerHTML.slice(0,-1);
+              delete required_options['destination_id'];
+              Event.stopObserving($('destination_id'), 'change', validate_selected_options);
+          }
+          $('submit_button').disabled = check_for_not_selected();
+      });
+
      Event.observe($('update_directions'), 'change', function(event) {
           if($('update_subcodes').checked != true)  {
               country_code_required = event.target.checked;

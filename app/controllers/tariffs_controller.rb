@@ -1915,11 +1915,29 @@ class TariffsController < ApplicationController
     else
       @tariff_id = params[:tariff_id].to_i
       if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id]}".to_sym])
-        @dst = ActiveRecord::Base.connection.select_all("SELECT destinations.prefix, col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_dst]} as new_name, destinations.name as dest_name FROM destinations JOIN #{session["tariff_name_csv_#{params[:tariff_id]}".to_sym]} ON (replace(col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]}, '\\r', '') = prefix)  WHERE ned_update = 1 ")
+        @dst = ActiveRecord::Base.connection.select_all("SELECT destinations.prefix, col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_dst]} as new_name, destinations.name as dest_name FROM destinations JOIN #{session["tariff_name_csv_#{params[:tariff_id]}".to_sym]} ON (replace(col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]}, '\\r', '') = prefix)  WHERE ned_update IN (1, 3, 5, 7) ")
       end
     end
     render(:layout => "layouts/mor_min")
   end
+
+
+  def subcode_to_update_from_csv
+    @page_title = _('Destination_subcodes_update')
+    @file = session[:file]
+    @status = session[:status_array]
+    @csv2= params[:csv2].to_i
+    if @csv2.to_i == 0
+      @dst = session[:subcodes_to_update_hash]
+    else
+      @tariff_id = params[:tariff_id].to_i
+      if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id]}".to_sym])
+        @dst = ActiveRecord::Base.connection.select_all("SELECT destinations.prefix, col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_subcode]} as new_sub, destinations.subcode as dest_sub FROM destinations JOIN #{session["tariff_name_csv_#{params[:tariff_id]}".to_sym]} ON (replace(col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]}, '\\r', '') = prefix)  WHERE ned_update IN (2, 3, 6, 7) ")
+      end
+    end
+    render(:layout => "layouts/mor_min")
+  end
+
 
   def dir_to_update_from_csv
     @page_title = _('Direction_to_update_from_csv')
