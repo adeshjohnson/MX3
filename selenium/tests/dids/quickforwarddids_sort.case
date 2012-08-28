@@ -38,6 +38,176 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>100000000000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>100000000005</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=did_action_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=did_action_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>No Dial Plans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>asdf</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/1?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=manage_dids_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=accountant_type_select</td>
+	<td>asdf</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotEditable</td>
+	<td>id=did_action_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=did_action_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>No Dial Plans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/dialplans/new</td>
 	<td></td>
 </tr>
@@ -73,38 +243,38 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dids/new</td>
+	<td>/billing/dialplans/new</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>did_start</td>
-	<td>100000000002</td>
+	<td>//input[@id='quickforward_dp_name']</td>
+	<td>qwer</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>did_end</td>
-	<td>100000000004</td>
+	<td>select</td>
+	<td>id=quickforwards_user</td>
+	<td>label=System Admin (0)</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>id=quickforwards_user</td>
+	<td>change</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=users_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=users_device</td>
+	<td>label=IAX2/103</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[4]</td>
+	<td>id=cb_add</td>
 	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=status</td>
-	<td>DID interval was successfully created</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -134,11 +304,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>css=input[type=&quot;image&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dids/quickforwarddids</td>
 	<td></td>
 </tr>
 <tr>
@@ -284,17 +449,17 @@
 <tr>
 	<td>assertTable</td>
 	<td>//div/table.1.0</td>
-	<td>100000000002</td>
+	<td>100000000000</td>
 </tr>
 <tr>
 	<td>assertTable</td>
 	<td>//div/table.2.0</td>
-	<td>100000000003</td>
+	<td>100000000001</td>
 </tr>
 <tr>
 	<td>assertTable</td>
 	<td>//div/table.3.0</td>
-	<td>100000000004</td>
+	<td>100000000002</td>
 </tr>
 <tr>
 	<td>assertTable</td>
@@ -319,17 +484,17 @@
 <tr>
 	<td>assertTable</td>
 	<td>//div/table.1.0</td>
-	<td>100000000004</td>
+	<td>100000000002</td>
 </tr>
 <tr>
 	<td>assertTable</td>
 	<td>//div/table.2.0</td>
-	<td>100000000003</td>
+	<td>100000000001</td>
 </tr>
 <tr>
 	<td>assertTable</td>
 	<td>//div/table.3.0</td>
-	<td>100000000002</td>
+	<td>100000000000</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -390,6 +555,326 @@
 	<td>assertTable</td>
 	<td>//div/table.3.2</td>
 	<td>a</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>100000000000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>100000000005</td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=did_action_6</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=did_action_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Quick Forwards Dial Plan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=fovard_pd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dp_id</td>
+	<td>label=qfdp</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=fovard_pd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list?page=3&amp;s_did=&amp;s_language=all&amp;s_provider=&amp;s_status=&amp;s_user=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_3</td>
+	<td>qfdp (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_4</td>
+	<td>qfdp (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_5</td>
+	<td>qfdp (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_6</td>
+	<td>qfdp (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_7</td>
+	<td>qfdp (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_8</td>
+	<td>qfdp (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>100000000000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>100000000005</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=did_action_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dp_id</td>
+	<td>label=qwer</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=fovard_pd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list?page=3&amp;s_did=&amp;s_language=all&amp;s_provider=&amp;s_status=&amp;s_user=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_3</td>
+	<td>qwer (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_4</td>
+	<td>qwer (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_5</td>
+	<td>qwer (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_6</td>
+	<td>qwer (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_7</td>
+	<td>qwer (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_8</td>
+	<td>qwer (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list?page=3&amp;s_did=&amp;s_language=all&amp;s_provider=&amp;s_status=&amp;s_user=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_3</td>
+	<td>qwer (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_4</td>
+	<td>qwer (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_5</td>
+	<td>qwer (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_6</td>
+	<td>qwer (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_7</td>
+	<td>qwer (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_8</td>
+	<td>qwer (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>100000000000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>100000000005</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=did_action_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dp_id</td>
+	<td>label=qfdp</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=fovard_pd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list?page=3&amp;s_did=&amp;s_language=all&amp;s_provider=&amp;s_status=&amp;s_user=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_3</td>
+	<td>qfdp (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_4</td>
+	<td>qfdp (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_5</td>
+	<td>qfdp (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_6</td>
+	<td>qfdp (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_7</td>
+	<td>qfdp (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_8</td>
+	<td>qfdp (quickforwarddids)</td>
 </tr>
 </tbody></table>
 </body>
