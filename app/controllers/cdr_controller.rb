@@ -274,8 +274,8 @@ class CdrController < ApplicationController
 
 
   def cli_add
-    @dev = Device.find(:first, :conditions=>{:id=>params[:device_id]})
-    @cli = Callerid.find(:first, :conditions=>{:id=>params[:id]})
+    @dev = Device.where({:id => params[:device_id].to_i}).first
+    @cli = Callerid.where({:id => params[:id].to_i}).first
 
     logger.fatal @dev
     logger.fatal @cli
