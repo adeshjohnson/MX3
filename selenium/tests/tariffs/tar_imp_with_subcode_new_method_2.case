@@ -795,7 +795,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=r_to_update</td>
-	<td>22</td>
+	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -844,7 +844,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Rates updated: 22</td>
+	<td>Rates updated: 5</td>
 	<td></td>
 </tr>
 <tr>
@@ -1098,6 +1098,26 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForTextPresent</td>
+	<td> Destination/OCN name *</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=update_dest_names</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=update_dest_names</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Destination/OCN name *</td>
+	<td></td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=prefix_id</td>
 	<td>label=Prefix</td>
@@ -1121,6 +1141,11 @@
 	<td>select</td>
 	<td>id=destination_id</td>
 	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=submit_button</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1153,9 +1178,169 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>id=dest_to_update</td>
+	<td>24</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=sub_to_update</td>
+	<td>24</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/dst_to_update_from_csv?csv2=1&amp;tariff_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>United Updated Teksasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Updated Cha</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Updated Tirane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/subcode_to_update_from_csv?csv2=1&amp;tariff_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>USA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>ALB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Destination names updated: 24</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Subcodes updated: 24</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_created_destinations</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rates updated: 13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_rates_updated</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>New rates created: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_new_rates_created</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Congratulations, successfully imported CSV file!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_553</td>
+	<td>Updated Cha</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_557</td>
+	<td>Updated Tirane</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=subcode_546</td>
+	<td>AFG</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=subcode_553</td>
+	<td>ALB</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/2?st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>United Updated Tenesis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>United Updated Kanzasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>United Updated Florida</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=subcode_539</td>
+	<td>USA</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=subcode_545</td>
+	<td>USA</td>
 </tr>
 </tbody></table>
 </body>
