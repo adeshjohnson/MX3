@@ -338,11 +338,10 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>SMS</td>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/sms/sms_list')]</td>
 	<td></td>
 </tr>
-<!--#Išskleisti meniu punktą SMS ir veikss-->
 <tr>
 	<td>assertElementPresent</td>
 	<td>xpath=(//a[contains(@href, '/billing/sms/sms')])[2]</td>
@@ -623,8 +622,8 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=38</td>
-	<td>Pranesimas Pranesimas Pranesimas Pranesimas Pranesimas PranesimasPranesimasPranesimasPranesimasPranesimasPranesimas Pranesimas Pranesimas Pranesimas Pranesimas Pranesimas PranesimasPranesimasPranesimasPranesimasPranesimasPranesimas</td>
+	<td>38</td>
+	<td>Pranesimas Pranesimas Pranesimas Pranesimas Pranesimas Pranesimas PranesimasPranesimasPranesimasPranesimasPranesimasPranesimas Pranesimas Pranesimas Pranesimas Pranesimas Pranesimas PranesimasPranesimasPranesimasPranesimasPranesimasPranesimas</td>
 </tr>
 <tr>
 	<td>keyUp</td>
@@ -639,7 +638,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>remLen1</td>
-	<td>89</td>
+	<td>78</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -648,8 +647,8 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=38</td>
-	<td>Pranesimas Pranesimas Pranesimas Pranesimas Pranesimas PranesimasPranesimasPranesimasPranesimasPranesimasPranesimas Pranesimas Pranesimas Pranesimas Pranesimas Pranesimas PranesimasPranesimasPranesimasPranesimasPranesimasPranesimas Pranesimas Pranesimas Pranesimas Pranesimas Pranesimas PranesimasPranesimasPranesimasPranesimasPranesimasPranesimas</td>
+	<td>38</td>
+	<td>Pranesimas Pranesimas Pranesimas Pranesimas Pranesimas Pranesimas Pranesimas PranesimasPranesimasPranesimasPranesimasPranesimasPranesimas Pranesimas Pranesimas Pranesimas Pranesimas PranesimasPranesimasPranesimasPranesimasPranesimasPranesimas Pranesimas Pranesimas Pranesimas Pranesimas Pranesimas PranesimasPranesimasPranesimasPranesimasPranesimasPranesimas</td>
 </tr>
 <tr>
 	<td>keyUp</td>
@@ -664,7 +663,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>remLen1</td>
-	<td>112</td>
+	<td>101</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -1075,6 +1074,192 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Total SMS Price : 0 USD</td>
+	<td></td>
+</tr>
+<!--// sms api provider test-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=saddons_menu10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_last_name</td>
+	<td>L a s t N a m e</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>User's settings succesfully changed: Test User L a s t N a m e</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/provider_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=prov_type</td>
+	<td>label=API</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_string</td>
+	<td>http://192.168.0.115/?&lt;%= USRFIRSTNAME %&gt;&amp;&lt;%= USRLASTNAME %&gt;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>SMS Provider updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/sms</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>3553817219</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=38</td>
+	<td>Pranesimas su api provider</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=38</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>0 - sent, SMS is sent</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User L a s t N a m e</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>http://192.168.0.115/?Test+User&amp;L+a+s+t+N+a+m+e</td>
 	<td></td>
 </tr>
 </tbody></table>
