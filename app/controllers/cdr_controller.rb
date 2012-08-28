@@ -274,12 +274,12 @@ class CdrController < ApplicationController
 
 
   def cli_add
-    @dev = Device.where({:id => params[:device_id].to_i}).first
-    @cli = Callerid.where({:id => params[:id].to_i}).first
+    @dev = Device.find(:first, :conditions=>{:id=>params[:device_id]})
+    @cli = Callerid.find(:first, :conditions=>{:id=>params[:id]})
 
     logger.fatal @dev
     logger.fatal @cli
-    if !@dev or !@cli or @dev == nil or @cli == nil
+    unless @dev or @cli
       @error = _('Device_or_Cli_not_found')
       @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group => 'users.id')
     else
