@@ -4458,6 +4458,7 @@ Localization.define('en') do |l|
   l.store 'No_dialplans', 'No Dial Plans'
   l.store 'Self-Cost', 'Self Cost'
   l.store 'Sell_Price', 'Sell Price'
+  l.store 'Device_or_Cli_not_found', 'Device or CLI not found'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
