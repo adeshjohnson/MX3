@@ -471,7 +471,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     arr[:destinations_in_db] = Destination.count.to_i
     arr[:directions_in_db] = Direction.count.to_i
     arr[:destinations_in_csv_file] = (ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name}").to_i - 1).to_s
-    arr[:rates_to_update] = Rate.count(:all, :conditions => ['tariff_id = ?', id], :joins => "JOIN destinations ON (rates.destination_id = destinations.id) JOIN #{name} ON (destinations.prefix = replace(col_#{options[:imp_prefix]}, '\\r', ''))")
+    #arr[:rates_to_update] = Rate.count(:all, :conditions => ['tariff_id = ?', id], :joins => "JOIN destinations ON (rates.destination_id = destinations.id) JOIN #{name} ON (destinations.prefix = replace(col_#{options[:imp_prefix]}, '\\r', ''))")
     arr[:tariff_rates] = Rate.count(:all, :conditions => {:tariff_id => id})
 
     # set error flag on dublicates | code : 12
@@ -540,6 +540,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     arr[:new_rates_to_create] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) AS r_all FROM #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) LEFT join rates on (destinations.id = rates.destination_id and rates.tariff_id = #{id}) WHERE rates.id IS NULL").to_i + arr[:destinations_to_create].to_i
     arr[:new_destinations_in_csv_file] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE not_found_in_db = 1").to_i
     arr[:existing_destinations_in_csv_file] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE not_found_in_db = 0 AND f_error = 0").to_i
+    arr[:rates_to_update] = Rate.count(:all, :conditions => ['tariff_id = ? AND f_error = 0 AND not_found_in_db = 0', id], :joins => "JOIN destinations ON (rates.destination_id = destinations.id) JOIN #{name} ON (destinations.prefix = replace(col_#{options[:imp_prefix]}, '\\r', ''))")
     return arr
   end
 
