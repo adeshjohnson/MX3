@@ -123,6 +123,36 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/services/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=service_name</td>
+	<td>test_service</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=service_servicetype_periodic_fee</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=service_selfcost_price</td>
+	<td>05.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=service_price</td>
+	<td>5.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/services/edit/2</td>
 	<td></td>
 </tr>
@@ -165,6 +195,36 @@
 	<td>assertText</td>
 	<td>id=self_price_2</td>
 	<td>4.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_new/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=subscription_service_id</td>
+	<td>label=test_service, Price: 5.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=subscription_memo</td>
+	<td>monthly</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_end_year</td>
+	<td>label=2021</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>added</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -368,42 +428,37 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=type_12</td>
+	<td>id=type_13</td>
 	<td>subscription_paid</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=target_12</td>
+	<td>id=target_13</td>
 	<td>Subscription</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=data2_12</td>
+	<td>id=data2_13</td>
 	<td>7.0</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=type_40</td>
+	<td>id=type_41</td>
 	<td>subscription_paid</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=target_40</td>
+	<td>id=target_41</td>
 	<td>Subscription</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=data2_40</td>
+	<td>id=data2_41</td>
 	<td>7.0</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/services/subscriptions</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td>/billing/services/subscription_confirm_destroy/4?back=subscriptions&amp;page=1&amp;s_date_from=-1&amp;s_date_till=-1&amp;s_device=-1&amp;s_memo=&amp;s_service=-1&amp;s_user=-1</td>
 	<td></td>
 </tr>
 <tr>
@@ -608,37 +663,27 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=type_52</td>
+	<td>id=type_53</td>
 	<td>subscription_paid</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=data2_52</td>
-	<td>11.0</td>
-</tr>
-<tr>
-	<td>assertNotText</td>
-	<td>id=type_80</td>
-	<td>subscription_paid</td>
-</tr>
-<tr>
-	<td>assertNotText</td>
-	<td>id=data2_80</td>
+	<td>id=data2_53</td>
 	<td>11.0</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=type_81</td>
+	<td>id=type_82</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=type_81</td>
+	<td>id=type_82</td>
 	<td>user_blocked</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=data_81</td>
+	<td>id=data_82</td>
 	<td>insufficient funds</td>
 </tr>
 <tr>
@@ -965,6 +1010,36 @@
 	<td>assertText</td>
 	<td>id=balance_2</td>
 	<td>12.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_new/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=subscription_service_id</td>
+	<td>label=Service periodic fee day 3, Price: 10.0</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_end_year</td>
+	<td>label=2021</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=subscription_memo</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>added</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
