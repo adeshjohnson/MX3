@@ -1170,32 +1170,32 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='admin']/subscription/service/</td>
+	<td>//user[@username='admin']/subscription[2]/service/</td>
 	<td>One_time_fee</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='admin']/subscription/price</td>
+	<td>//user[@username='admin']/subscription[2]/price</td>
 	<td>5.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='admin']/subscription[2]/service/</td>
+	<td>//user[@username='admin']/subscription[3]/service/</td>
 	<td>Test_flat_rate</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='admin']/subscription[2]/price</td>
+	<td>//user[@username='admin']/subscription[3]/price</td>
 	<td>10.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='admin']/subscription[3]/service/</td>
+	<td>//user[@username='admin']/subscription/service/</td>
 	<td>Test_periodic_service</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='admin']/subscription[3]/price</td>
+	<td>//user[@username='admin']/subscription/price</td>
 	<td>6.4516</td>
 </tr>
 <tr>
@@ -1215,22 +1215,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='101']/subscription/service/</td>
+	<td>//user[@username='101']/subscription[2]/service/</td>
 	<td>Test_flat_rate</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='101']/subscription/price</td>
+	<td>//user[@username='101']/subscription[2]/price</td>
 	<td>10.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='101']/subscription[2]/service/</td>
+	<td>//user[@username='101']/subscription/service/</td>
 	<td>Test_periodic_service</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='101']/subscription[2]/price</td>
+	<td>//user[@username='101']/subscription/price</td>
 	<td>10.0000</td>
 </tr>
 <tr>
@@ -1245,32 +1245,32 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='reseller']/subscription/service/</td>
+	<td>//user[@username='reseller']/subscription[2]/service/</td>
 	<td>One_time_fee</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='reseller']/subscription/price</td>
+	<td>//user[@username='reseller']/subscription[2]/price</td>
 	<td>5.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='reseller']/subscription[2]/service/</td>
+	<td>//user[@username='reseller']/subscription[3]/service/</td>
 	<td>Test_flat_rate</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='reseller']/subscription[2]/price</td>
+	<td>//user[@username='reseller']/subscription[3]/price</td>
 	<td>10.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='reseller']/subscription[3]/service/</td>
+	<td>//user[@username='reseller']/subscription/service/</td>
 	<td>Test_periodic_service</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='reseller']/subscription[3]/price</td>
+	<td>//user[@username='reseller']/subscription/price</td>
 	<td>10.0000</td>
 </tr>
 <tr>
@@ -1290,22 +1290,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='accountant']/subscription/service/</td>
+	<td>//user[@username='accountant']/subscription[2]/service/</td>
 	<td>Test_flat_rate</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='accountant']/subscription/price</td>
+	<td>//user[@username='accountant']/subscription[2]/price</td>
 	<td>10.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='accountant']/subscription[2]/service/</td>
+	<td>//user[@username='accountant']/subscription/service/</td>
 	<td>Test_periodic_service</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//user[@username='accountant']/subscription[2]/price</td>
+	<td>//user[@username='accountant']/subscription/price</td>
 	<td>10.0000</td>
 </tr>
 <tr>
@@ -1458,21 +1458,6 @@
 <!--...Admin-->
 <tr>
 	<td>assertText</td>
-	<td>//td[@id='user_14']/a</td>
-	<td>System Admin</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>paymenttype_14</td>
-	<td>Subscription</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>amount_14</td>
-	<td>-5.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
 	<td>//td[@id='user_15']/a</td>
 	<td>System Admin</td>
 </tr>
@@ -1484,7 +1469,7 @@
 <tr>
 	<td>assertText</td>
 	<td>amount_15</td>
-	<td>-10.0000</td>
+	<td>-5.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1499,24 +1484,24 @@
 <tr>
 	<td>assertText</td>
 	<td>amount_16</td>
-	<td>-6.4516</td>
-</tr>
-<!--...User-->
-<tr>
-	<td>assertText</td>
-	<td>//td[@id='user_17']/a</td>
-	<td>Test User #1</td>
+	<td>-10.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>paymenttype_17</td>
+	<td>//td[@id='user_14']/a</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>paymenttype_14</td>
 	<td>Subscription</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>amount_17</td>
-	<td>-10.0000</td>
+	<td>amount_14</td>
+	<td>-6.4516</td>
 </tr>
+<!--...User-->
 <tr>
 	<td>assertText</td>
 	<td>//td[@id='user_18']/a</td>
@@ -1532,22 +1517,22 @@
 	<td>amount_18</td>
 	<td>-10.0000</td>
 </tr>
-<!--...Reseller-->
 <tr>
 	<td>assertText</td>
-	<td>//td[@id='user_19']/a</td>
-	<td>Test Reseller</td>
+	<td>//td[@id='user_17']/a</td>
+	<td>Test User #1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>paymenttype_19</td>
+	<td>paymenttype_17</td>
 	<td>Subscription</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>amount_19</td>
-	<td>-5.0000</td>
+	<td>amount_17</td>
+	<td>-10.0000</td>
 </tr>
+<!--...Reseller-->
 <tr>
 	<td>assertText</td>
 	<td>//td[@id='user_20']/a</td>
@@ -1561,7 +1546,7 @@
 <tr>
 	<td>assertText</td>
 	<td>amount_20</td>
-	<td>-10.0000</td>
+	<td>-5.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1576,6 +1561,21 @@
 <tr>
 	<td>assertText</td>
 	<td>amount_21</td>
+	<td>-10.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[@id='user_19']/a</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>paymenttype_19</td>
+	<td>Subscription</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amount_19</td>
 	<td>-10.0000</td>
 </tr>
 <!--...Accountant-->
