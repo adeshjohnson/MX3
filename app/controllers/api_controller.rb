@@ -1549,7 +1549,7 @@ class ApiController < ApplicationController
 
                           if monitoring.monitoring_type == 'simultaneous'
                             for calls in monitoring.simultaneous_calls
-                              call_list = calls.dst + '|' + calls.calldateA + '|' + calls.srcA + '|' + calls.calldateB + '|' + calls.srcB + '|\n'
+                              call_list = calls.dst.to_s + '|' + calls.calldateA.to_s + '|' + calls.srcA.to_s + '|' + calls.calldateB.to_s + '|' + calls.srcB.to_s + '|\n'
                             end
                           else
                             call_list = ''
