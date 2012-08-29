@@ -16,7 +16,7 @@ class TariffsController < ApplicationController
   before_filter :find_tariff_from_id, :only => [:check_tariff_time, :rate_new_by_direction, :edit, :update, :destroy, :tariffs_list, :rates_list, :rate_new_quick, :rate_try_to_add, :rate_new, :rate_new_by_direction_add, :delete_all_rates, :user_rates_list, :user_arates_full, :user_rates_update, :make_user_tariff, :make_user_tariff_wholesale, :make_user_tariff_status, :make_user_tariff_status_wholesale, :ghost_percent_edit, :ghost_percent_update]
 
   before_filter { |c|
-    view = [:list, :rates_list, :user_rates_list, :user_arates_full, :user_arates, :day_setup]
+    view = [:index, :list, :rates_list, :user_rates_list, :user_arates_full, :user_arates, :day_setup]
     edit = [:new, :create, :edit, :update, :destroy, :user_rate_update, :user_rates_update, :user_ard_time_edit, :ard_manage, :day_add, :day_edit, :day_update, :ghost_percent_edit, :ghost_percent_update]
     allow_read, allow_edit = c.check_read_write_permission(view, edit, {:role => "accountant", :right => :acc_tariff_manage, :ignore => true})
     c.instance_variable_set :@allow_read, allow_read
