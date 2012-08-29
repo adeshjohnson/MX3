@@ -70,9 +70,10 @@
         <% end %>
     <% end %>
   </tr>
+  <% if @rates and @rates.size.to_i > 0 %>
   <% @rates.each_with_index { |rate, i| %>
       <%# rate = Rate.find(:first,:conditions => ["rates.id = ?", r["id"]]) %>
-      <%# if rate %>
+      <% if rate %>
       <tr class="row<%= (i % 2 + 1).to_s %>">
         <td id="destination_<%= rate.id %>" <%= nice_rates_tolltip(rate) %> ><%= draw_flag rate.destination.direction_code %> <%= rate.destination.direction.name %></td>
         <% if @use_lata %>
@@ -100,8 +101,9 @@
             <% end %>
         <% end %>
       </tr>
-      <%# end %>
+      <% end %>
   <% } %>
+  <% end %>
 </table>
 
 
