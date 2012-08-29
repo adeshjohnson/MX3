@@ -37,11 +37,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  rescue_from ActiveRecord::RecordNotFound, :with => :method_missing
-  rescue_from AbstractController::ActionNotFound, :with => :method_missing
-  rescue_from ActionController::RoutingError, :with => :method_missing
-  rescue_from ActionController::UnknownController, :with => :method_missing
-  #rescue_from ActionController::UnknownAction, :with => :method_missing
+  rescue_from ActiveRecord::RecordNotFound, :with => :action_missing
+  rescue_from AbstractController::ActionNotFound, :with => :action_missing
+  rescue_from ActionController::RoutingError, :with => :action_missing
+  rescue_from ActionController::UnknownController, :with => :action_missing
+  #rescue_from ActionController::UnknownAction, :with => :action_missing
 
   protect_from_forgery
 
@@ -79,7 +79,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def method_missing(m, *args, &block)
+  def action_missing(m, *args, &block)
     MorLog.my_debug("Authorization failed:\n   User_type: "+session[:usertype_id].to_s+"\n   Requested: " + "#{params[:controller]}::#{params[:action]}")
     MorLog.my_debug("   Session(#{params[:controller]}_#{params[:action]}):"+ session["#{params[:controller]}_#{params[:action]}".intern].to_s)
     flash[:notice] = _('You_are_not_authorized_to_view_this_page')
