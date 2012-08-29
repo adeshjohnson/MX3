@@ -520,7 +520,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
 
     if options[:imp_update_dest_names].to_i == 1 and options[:imp_dst] >= 0
       # set flag on destination name update
-      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = 1 WHERE (destinations.name != replace(col_#{options[:imp_dst]}, '\\r', '') OR (destinations.name IS NULL AND LENGTH(col_#{options[:imp_dst]}) > 0 )  ) ")
+      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = 1 ") #WHERE (destinations.name != replace(col_#{options[:imp_dst]}, '\\r', '') OR (destinations.name IS NULL AND LENGTH(col_#{options[:imp_dst]}) > 0 )  ) ")
     end
 
     if options[:imp_update_subcodes].to_i == 1 and options[:imp_subcode] >= 0
