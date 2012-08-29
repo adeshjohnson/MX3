@@ -2,7 +2,7 @@
     <%= render :partial => 'form' %>
     <br/>
     <br/>
-    <%= submit_tag _('Update'), :disable_with => _('Processing..') %>
+    <%= submit_tag _('Update'), :onclick => "return confirm('#{_('Are_you_sure')}')", :disable_with => _('Processing..') %>
 <% end %>
 
 <% content_for :scripts do %>
