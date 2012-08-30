@@ -151,7 +151,12 @@ module ActiveProcessor
           gateways.each { |gateway, settings|
             ActiveProcessor.log("updating gateway: #{gateway} #{scope}")
             settings.each { |name, value|
-              @gateways[engine][gateway].set(scope, {name => value})
+                #ActiveProcessor.log("zzzzz#{name}:#{value.class}")
+                #if value.class.to_s == 'ActionDispatch::Http::UploadedFile'
+               # ActiveProcessor.log("eeee:#{value.read}")
+               # ActiveProcessor.log("eeee:#{value.tempfile}")
+              #end
+              @gateways[engine][gateway].set(scope, {name => (value.class == ActionDispatch::Http::UploadedFile and name != 'logo_image') ? StringIO.new(value.tempfile.read) : value})
               errors += @gateways[engine][gateway].errors.size
             }
             if @gateways[engine][gateway].respond_to?(:valid_settings?)
