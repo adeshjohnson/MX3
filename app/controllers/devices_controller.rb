@@ -1067,7 +1067,7 @@ class DevicesController < ApplicationController
 
       @users = User.find(:all, :conditions => "owner_id = '#{@current_user_id}'" )
 
-      sql2="SELECT DISTINCT(callerids.ivr_id), ivrs.name FROM ivrs
+      sql2="SELECT DISTINCT(callerids.ivr_id), ivrs.name, ivrs.id FROM ivrs
           LEFT JOIN callerids ON (ivrs.id = callerids.ivr_id)
           WHERE ivrs.user_id = '#{@current_user_id}'"
 
