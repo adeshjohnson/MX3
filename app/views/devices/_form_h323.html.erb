@@ -445,6 +445,15 @@ end
     <%= radio_button_tag('block_callerid_enable', "yes", @device.block_callerid?) %> <%= _('Yes') %>
   </td>
 </tr>
+<% if defined? PROVB_Active and PROVB_Active.to_i == 1 %>
+    <tr>
+      <td nowrap> <%= _('Time_limit_per_day') %>: </td>
+      <td>
+        <%= text_field_tag 'device[time_limit_per_day]', @device.time_limit_per_day, :size => 10, "class" => "input" %>
+        <%= _('min') %>
+      </td>
+    </tr>
+<% end %>
 <script type='text/javascript' >
     /*after window loads register event listener on two radio buttons
      (block_callerid_enable_yes, block_callerid_enable_no). if 'yes' radio
