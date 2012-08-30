@@ -150,7 +150,7 @@
     <%= radio_button_tag('device[anti_resale_auto_answer]', '1', @device.anti_resale_auto_answer?) %> <%= _('Yes') %>
   </td>
 </tr>
-<% if defined? PROVB_Active and PROVB_Active.to_i == 1 %>
+<% if defined? PROVB_Active and PROVB_Active.to_i == 1 and @device_type != "FAX" %>
     <tr>
       <td nowrap> <%= _('Time_limit_per_day') %>: </td>
       <td>
