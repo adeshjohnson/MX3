@@ -249,6 +249,9 @@ class CallshopController < ApplicationController
     session[:callshop_invoices_order] = @search_params
   end
 
+  def rate_search
+  end
+
   # invoice print
   def invoice_print
     @invoice = CsInvoice.find_by_id(params[:invoice_id])
