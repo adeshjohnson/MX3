@@ -758,13 +758,13 @@ class Device < ActiveRecord::Base
              end
 
     #    check device IP with another user providers IP's with have ip auth on, 0.0.0.0 not included
-    if Device.count(:all, :joins => ['JOIN users ON (user_id = users.id)'], :conditions => cond22).to_i > 0
+    if Device.count(:all, :joins => ['JOIN users ON (user_id = users.id)'], :conditions => cond22).to_i > 0 and !self.virtual?
       errors.add(:ip_authentication, message)
       return false
     end
 
     #    check device IP with another user providers IP's with have ip auth on, 0.0.0.0 not included
-    if Provider.count(:all, :joins => ['JOIN devices ON (device_id = devices.id)'], :conditions => ["server_ip = ? and devices.username = '' and server_ip != '0.0.0.0' and devices.id != ?  and ipaddr != '' AND providers.user_id != ? and ipaddr != '0.0.0.0'", ipaddr, idi, curr_id]).to_i > 0
+    if Provider.count(:all, :joins => ['JOIN devices ON (device_id = devices.id)'], :conditions => ["server_ip = ? and devices.username = '' and server_ip != '0.0.0.0' and devices.id != ?  and ipaddr != '' AND providers.user_id != ? and ipaddr != '0.0.0.0'", ipaddr, idi, curr_id]).to_i > 0 and !self.virtual?
       errors.add(:ip_authentication, message)
       return false
     end
@@ -780,7 +780,7 @@ class Device < ActiveRecord::Base
                 ['devices.id != ? AND (host = ? OR ipaddr = ?) and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? AND providers.id IS NULL' + condd, idi, host, ipaddr, port]
               end
 
-      if Device.count(:all, :joins => ['JOIN users ON (user_id = users.id) LEFT JOIN providers ON (providers.device_id = devices.id)'], :conditions => cond3).to_i > 0
+      if Device.count(:all, :joins => ['JOIN users ON (user_id = users.id) LEFT JOIN providers ON (providers.device_id = devices.id)'], :conditions => cond3).to_i > 0 and !self.virtual?
         errors.add(:ip_authentication, message2)
         return false
       end
@@ -793,7 +793,7 @@ class Device < ActiveRecord::Base
               else
                 ['devices.id != ? AND (host = ? OR ipaddr = ?) and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=?' + condd, idi, host, ipaddr, port]
               end
-      if Provider.count(:all, :joins => ['JOIN devices ON (device_id = devices.id)'], :conditions => cond3).to_i > 0
+      if Provider.count(:all, :joins => ['JOIN devices ON (device_id = devices.id)'], :conditions => cond3).to_i > 0 and !self.virtual?
         errors.add(:ip_authentication, message2)
         return false
       end
