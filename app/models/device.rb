@@ -742,7 +742,7 @@ class Device < ActiveRecord::Base
            end
 
     #    check device wihs is provider with providers devices.
-    if self.device_ip_authentication_record.to_i == 1 and self.provider and Device.count(:all, :joins => ['JOIN providers ON (device_id = devices.id)'], :conditions => cond).to_i > 0
+    if self.device_ip_authentication_record.to_i == 1 and self.provider and Device.count(:all, :joins => ['JOIN providers ON (device_id = devices.id)'], :conditions => cond).to_i > 0 and !self.virtual?
       errors.add(:ip_authentication, message)
       return false
     end
