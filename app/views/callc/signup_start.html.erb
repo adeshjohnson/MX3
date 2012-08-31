@@ -61,8 +61,7 @@
               <td align="left"> <%= text_field_tag 'client_id', session[:reg_client_id], "class" => "input", :size => "30", :maxlength => "40" %> </td>
             </tr>
             <tr>
-              <td align="left"> <%= _('VAT_Reg_number') %>:<%= ' *   ' if @vat_necessary %>
-                || <%= @vat_necessary %>  </td>
+              <td align="left"> <%= _('VAT_Reg_number') %>:<%= ' *   ' if @vat_necessary %></td>
               <td align="left"> <%= text_field_tag 'vat_number', session[:reg_vat_number], "class" => "input", :size => "30", :maxlength => "40" %> </td>
             </tr>
             <tr>

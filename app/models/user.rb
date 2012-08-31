@@ -2271,7 +2271,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     end
 
     if notice.blank? and Confline.get_value("Registration_Enable_VAT_checking", u.id).to_i == 1
-      logger.fatal params.to_yaml
+      #logger.fatal params.to_yaml
       if params[:vat_number] and params[:country_id]
         dr = Direction.find(:first, :conditions => {:id => params[:country_id]})
         if params[:vat_number].blank?
