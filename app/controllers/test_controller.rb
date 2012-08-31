@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class TestController < ApplicationController
   before_filter :authorize_admin, :except => [:fake_form]
+  require 'google4r/checkout'
+  include Google4R::Checkout
 
   def create_user
     #    opts = {}
