@@ -424,4 +424,8 @@ class CallshopController < ApplicationController
     session[:callshop][:cs_invoices] ||= {}
     session[:callshop][:cs_invoices][user.to_s] = invoice
   end
+
+  def rate_search
+
+  end
 end
