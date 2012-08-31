@@ -283,9 +283,11 @@ class CdrController < ApplicationController
       @error = _('Device_or_Cli_not_found')
       @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group => 'users.id')
     else
+      if @dev
       @cli.device_id = @dev.id
       @cli.added_at = Time.now
       @cli.save
+        end
     end
     render :layout => false and return false
   end
