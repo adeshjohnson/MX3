@@ -131,7 +131,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -162,8 +162,13 @@
 </tr>
 <!--update to albania-->
 <tr>
-	<td>open</td>
-	<td>/billing/destinations/edit/2?page=1</td>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//img[@alt='Edit'])[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -214,6 +219,11 @@
 </tr>
 <!--update destination group-->
 <tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/destinations/edit/2?page=1</td>
 	<td></td>
@@ -257,6 +267,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Afghanistan proper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
@@ -320,6 +335,11 @@
 	<td></td>
 </tr>
 <!--if not assigned do not show in destinations-->
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/destination_groups/destinations/5</td>
