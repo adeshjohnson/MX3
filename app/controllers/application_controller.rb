@@ -1975,12 +1975,12 @@ Variables: (Names marked with * are required)
         # need for separate link for every error.
         flash_help_link = nil
 
-        if exception_class == "Errno::ENETUNREACH"
+        if exception_class.include?("Errno::ENETUNREACH")
           flash_help_link = "http://wiki.kolmisoft.com/index.php/GUI_Error_-_Errno::ENETUNREACH"
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Asterik_server_connection_error', :data2 => exception.message).save
         end
 
-        if exception_class == "Errno::EACCES"                                                                                                                                          
+        if exception_class.include?("Errno::EACCES")
           flash_notice = _('File_permission_error')                                                                                                                                    
           flash_help_link = ''                                                                                                                                                         
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'File_permission_error', :data2 => exception.message).save          
