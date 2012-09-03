@@ -3101,3 +3101,9 @@ module Enumerable
     inject({}) { |h, v| h[v]=h[v].to_i+1; h }.reject { |k, v| v==1 }.keys
   end
 end
+
+class NilClass
+  def to_d
+    self.to_f.to_d
+  end
+end
