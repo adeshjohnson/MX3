@@ -941,7 +941,7 @@ class User < ActiveRecord::Base
 
       month_calls = res[0]['calls_count'].to_i + res2[0]['calls_count'].to_i
       month_billsec = res[0]['sum_billsec'].to_i + res2[0]['sum_billsec'].to_i
-      month_selfcost = res[0]['call_selfcost'].to_d + res2[0]['call_selfcost'].to_d
+      month_selfcost = res[0]['call_selfcost'].to_f.to_d + res2[0]['call_selfcost'].to_f.to_d
       month_cost = res[0]['call_cost'].to_d + res2[0]['call_cost'].to_d
 
       # ---- day ----
