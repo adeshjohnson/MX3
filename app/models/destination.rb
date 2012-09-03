@@ -76,7 +76,7 @@ class Destination < ActiveRecord::Base
                   JOIN destinationgroups ON (flag = direction_code  )
                   WHERE destinationgroup_id = 0 AND  destinationgroups.name = directions.name GROUP BY id ORDER BY direction_code  ) AS v3
             ) AS v4 ORDER BY p ASC
-          ) AS v5 GROUP BY id ORDER BY #{order} LIMIT #{limit} OFFSET #{offset}"
+          ) AS v5 GROUP BY id ORDER BY #{order}, id LIMIT #{limit} OFFSET #{offset}"
 
 
     destination = Destination.find_by_sql(sql)
