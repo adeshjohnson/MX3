@@ -463,7 +463,7 @@ in before filter : tariff (:find_tariff_from_id)
     @st = params[:st].upcase if params[:st]
 
     @rates = @tariff.rates_by_st(@st, 0, 10000)
-    @total_pages = (@rates.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@rates.size.to_d / session[:items_per_page].to_d).ceil
 
     @page = 1
     @page = params[:page].to_i if params[:page]
@@ -540,8 +540,8 @@ in before filter : tariff (:find_tariff_from_id)
     return false if !a
     @rates = @tariff.rates_by_st(@st, 0, 10000)
     @rates.each { |r|
-      if params[:rate] and params[:rate]["id_#{r.id}".to_sym] and params[:rate]["id_#{r.id}".to_sym][:price] and r.price.to_f != params[:rate]["id_#{r.id}".to_sym][:price].to_f
-        r.price = params[:rate]["id_#{r.id}".to_sym][:price].to_f
+      if params[:rate] and params[:rate]["id_#{r.id}".to_sym] and params[:rate]["id_#{r.id}".to_sym][:price] and r.price.to_d != params[:rate]["id_#{r.id}".to_sym][:price].to_d
+        r.price = params[:rate]["id_#{r.id}".to_sym][:price].to_d
         r.save
       end
     }
@@ -608,7 +608,7 @@ in before filter : tariff (:find_tariff_from_id)
       sms.reseller_id = @user.owner_id
       sms.number = number
       sms.save
-      sms.sms_send(@user, @user_tariff, number, @lcr, sms_numbers.to_f, message, params)
+      sms.sms_send(@user, @user_tariff, number, @lcr, sms_numbers.to_d, message, params)
 
     end
     if sms.status_code.to_s == "0"
@@ -647,20 +647,20 @@ in before filter : tariff (:find_tariff_from_id)
       @user = @sms.user
       charge = false
       # logger.info "callback : #{params.to_yaml}"
-      # logger.info @charge.to_f > 0.to_f and !sms_callback_action
-      if  @charge.to_f > 0.to_f and !sms_callback_action
+      # logger.info @charge.to_d > 0.to_d and !sms_callback_action
+      if  @charge.to_d > 0.to_d and !sms_callback_action
         @sms.charge_user
         charge = true
       end
       #sms_callback_no_charge_action = Action.find(:first, :conditions=>["target_id = ? AND target_type = 'SMS' AND action = 'SMS_callback' AND data3 != 0", @sms.id])
-      # logger.info @charge.to_f <= 0.to_f and !sms_callback_no_charge_action
-      if @charge.to_f <= 0.to_f and !sms_callback_action
+      # logger.info @charge.to_d <= 0.to_d and !sms_callback_no_charge_action
+      if @charge.to_d <= 0.to_d and !sms_callback_action
         @sms.return_sms_price_to_user
         charge = true
       end
       @sms.status_code = @status.to_s
       @sms.save
-      Action.add_action_hash(@user, {:action => "SMS_callback", :data => @status, :data4 => params.inspect.to_s[0..255], :data2 => @charge.to_f, :target_id => @sms.id, :target_type => "SMS", :data3 => charge})
+      Action.add_action_hash(@user, {:action => "SMS_callback", :data => @status, :data4 => params.inspect.to_s[0..255], :data2 => @charge.to_d, :target_id => @sms.id, :target_type => "SMS", :data3 => charge})
     else
       Action.add_error(0, "SMS_callback", {:data4 => params.inspect.to_s[0..255], :target_type => "SMS", :data2 => "SMS_not_found"})
     end
@@ -676,7 +676,7 @@ in before filter : tariff (:find_tariff_from_id)
     @page = params[:page].to_i if params[:page]
     @sms = SmsMessage.find(:all, :conditions => ["user_id= ?", session[:user_id]])
 
-    @total_pages = (@sms.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@sms.size.to_d / session[:items_per_page].to_d).ceil
     @all_sms = @sms
     @sms = []
     @a_number = []
@@ -689,7 +689,7 @@ in before filter : tariff (:find_tariff_from_id)
     @t_sms = 0
     @t_sms_price = 0
     for sms in @sms
-      if [0, 4].include?(sms.status_code.to_i) and sms.user_rate.to_f != 0.0
+      if [0, 4].include?(sms.status_code.to_i) and sms.user_rate.to_d != 0.0
         @t_sms += sms.user_price / sms.user_rate
         @t_sms_price += sms.user_price
       else
@@ -709,7 +709,7 @@ in before filter : tariff (:find_tariff_from_id)
     #logger.info ex
     @rates = @user_tariff.rates_by_st(@st, 0, 10000, {:exchange_rate => ex})
 
-    @total_pages = (@rates.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@rates.size.to_d / session[:items_per_page].to_d).ceil
     @all_rates = @rates
     @rates = []
 

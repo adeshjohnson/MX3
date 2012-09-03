@@ -89,8 +89,8 @@ class DidsController < ApplicationController
     cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller'
 
 
-    total_dids = Did.count(:all, :conditions => [cond.join(" AND ")].concat(var)).to_f
-    @total_pages = (total_dids / session[:items_per_page].to_f).ceil
+    total_dids = Did.count(:all, :conditions => [cond.join(" AND ")].concat(var)).to_d
+    @total_pages = (total_dids / session[:items_per_page].to_d).ceil
     @page = @total_pages if @page > @total_pages
     @page = 1 if @page < 1
 
@@ -1209,7 +1209,7 @@ ORDER BY dids.did ASC"
     @page_icon = "did.png"
     user = User.find(:first, :conditions => ["id = ?", session[:user_id].to_i])
     params[:page] ? @page = params[:page].to_i : @page = 1
-    @total_pages = (Did.count(:all, :conditions => ["user_id = ?", user.id])/session[:items_per_page].to_f).ceil
+    @total_pages = (Did.count(:all, :conditions => ["user_id = ?", user.id])/session[:items_per_page].to_d).ceil
     @dids = Did.find(:all,
                      :conditions => ["user_id = ?", user.id],
                      :offset => session[:items_per_page]*(@page-1),

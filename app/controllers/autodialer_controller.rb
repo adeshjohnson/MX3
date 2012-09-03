@@ -185,7 +185,7 @@ class AutodialerController < ApplicationController
     @page_title = _('Numbers_for_campaign') + ": " + @campaign.name
     @page_icon = "details.png"
 
-    fpage, @total_pages, options = pages_validator(params, @campaign.adnumbers.size.to_f)
+    fpage, @total_pages, options = pages_validator(params, @campaign.adnumbers.size.to_d)
     @page = options[:page]
     @numbers = @campaign.adnumbers.find(:all, :offset => fpage, :limit => session[:items_per_page])
   end

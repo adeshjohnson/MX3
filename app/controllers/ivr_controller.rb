@@ -43,7 +43,7 @@ class IvrController < ApplicationController
     @options = {}
     @options[:page] = ((params[:page].to_i < 1) ? session_page_no : params[:page].to_i)
     @total_ivrs = current_user.ivrs.count()
-    @total_pages = (@total_ivrs.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@total_ivrs.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     fpage = ((@options[:page] - 1) * session[:items_per_page]).to_i
 

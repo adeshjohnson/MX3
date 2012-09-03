@@ -37,7 +37,7 @@ class Service < ActiveRecord::Base
   def price
     b = read_attribute(:price)
     if User.current and User.current.currency
-      b.to_f * User.current.currency.exchange_rate.to_f
+      b.to_d * User.current.currency.exchange_rate.to_d
     else
       b
     end
@@ -45,7 +45,7 @@ class Service < ActiveRecord::Base
 
   def price= value
     if User.current and User.current.currency
-      b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
+      b = (value.to_d / User.current.currency.exchange_rate.to_d).to_d
     else
       b = value
     end
@@ -56,7 +56,7 @@ class Service < ActiveRecord::Base
   def selfcost_price
     b = read_attribute(:selfcost_price)
     if User.current and User.current.currency
-      b.to_f * User.current.currency.exchange_rate.to_f
+      b.to_d * User.current.currency.exchange_rate.to_d
     else
       b
     end
@@ -64,7 +64,7 @@ class Service < ActiveRecord::Base
 
   def selfcost_price= value
     if User.current and User.current.currency
-      b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
+      b = (value.to_d / User.current.currency.exchange_rate.to_d).to_d
     else
       b = value
     end

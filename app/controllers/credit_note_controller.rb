@@ -13,7 +13,7 @@ class CreditNoteController < ApplicationController
     @page_title = _('Credit_notes')
 
     items_per_page = session[:items_per_page]
-    @total_pages = (credit_notes_count.to_f / items_per_page.to_f).ceil
+    @total_pages = (credit_notes_count.to_d / items_per_page.to_d).ceil
     page_no = current_page
     page_no = @total_pages if page_no.to_i > @total_pages.to_i and @total_pages.to_i > 0
     page_no = 1 if page_no < 1
@@ -62,7 +62,7 @@ class CreditNoteController < ApplicationController
         @note.issue_date = Time.now
       end
       @note.number = params[:number]
-      @note.price = params[:price].to_f
+      @note.price = params[:price].to_d
       @note.comment = params[:comment]
       if @note.save
         flash[:status] = _('Credit_note_created')
@@ -218,8 +218,8 @@ class CreditNoteController < ApplicationController
     condition << "first_name LIKE '#{options[:first_name].strip}%'" if options[:first_name]
     condition << "last_name LIKE '#{options[:last_name].strip}%'" if options[:last_name]
     condition << "username LIKE '#{options[:username].strip}%'" if options[:username]
-    condition << "price >= #{current_user.to_system_currency(options[:amount_min].to_f)}" if options[:amount_min]
-    condition << "price <= #{current_user.to_system_currency(options[:amount_max].to_f)}" if options[:amount_max]
+    condition << "price >= #{current_user.to_system_currency(options[:amount_min].to_d)}" if options[:amount_min]
+    condition << "price <= #{current_user.to_system_currency(options[:amount_max].to_d)}" if options[:amount_max]
     if options[:status] == 'paid' and options[:paid_date_from] and options[:paid_date_till]
       from = options[:paid_date_from]
       from = current_user.system_time(from[:year] + '-' + from[:month] + '-' + from[:day] + ' 00:00:00')

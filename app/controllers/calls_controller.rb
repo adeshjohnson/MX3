@@ -146,20 +146,20 @@ class CallsController < ApplicationController
     # calculate total values of dataset.
     @total = {:billed_orig => 0, :billed_term => 0, :billsec_orig => 0, :billsec_term => 0, :duration => 0, :total_calls => 0, :asr => 0, :acd => 0, :answered_calls => 0}
     @result_full.each { |row|
-      @total[:billed_orig] += row.originating_billed.to_f
-      @total[:billed_term] += row.terminating_billed.to_f
-      @total[:billsec_orig] +=row.originating_billsec.to_f
-      @total[:billsec_term] += row.terminating_billsec.to_f
-      @total[:duration] += row.duration.to_f
+      @total[:billed_orig] += row.originating_billed.to_d
+      @total[:billed_term] += row.terminating_billed.to_d
+      @total[:billsec_orig] +=row.originating_billsec.to_d
+      @total[:billsec_term] += row.terminating_billsec.to_d
+      @total[:duration] += row.duration.to_d
       @total[:total_calls] += row.total_calls.to_i
       @total[:answered_calls] += row.answered_calls.to_i
     }
-    @total[:total_calls] == 0 ? @total[:asr] = 0 : @total[:asr] = @total[:answered_calls].to_f/@total[:total_calls].to_f*100
-    @total[:answered_calls] == 0 ? @total[:acd] = 0 : @total[:acd] = @total[:duration].to_f / @total[:answered_calls].to_f
+    @total[:total_calls] == 0 ? @total[:asr] = 0 : @total[:asr] = @total[:answered_calls].to_d/@total[:total_calls].to_d*100
+    @total[:answered_calls] == 0 ? @total[:acd] = 0 : @total[:acd] = @total[:duration].to_d / @total[:answered_calls].to_d
 
     # fetch required number of items.
     @result = []
-    @total_pages = (@total_calls.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@total_calls.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page] > @total_pages
     start = session[:items_per_page]*(@options[:page]-1)
     (start..(start+session[:items_per_page])-1).each { |i|
@@ -217,22 +217,22 @@ class CallsController < ApplicationController
               :orig_calls => 0, :orig_min => 0, :orig_exact_min => 0, :orig_amount => 0}
     @terminator_lines.each { |row|
       @total[:term_calls] += row.total_calls.to_i
-      @total[:term_exact_min] += row.exact_billsec.to_f
-      @total[:term_min] += row.provider_billsec.to_f
-      @total[:term_amount] += row.provider_price.to_f
+      @total[:term_exact_min] += row.exact_billsec.to_d
+      @total[:term_min] += row.provider_billsec.to_d
+      @total[:term_amount] += row.provider_price.to_d
     }
 
     (@options[:order_by_name].to_s.scan(/orig_/).size > 0) ? order_by_orig = order_by : order_by_orig = ""
     @originator_lines_full = Call.summary_by_originator(cond, terminator_cond, order_by_orig, current_user)
     @originator_lines_full.each { |row|
       @total[:orig_calls] += row.total_calls.to_i
-      @total[:orig_exact_min] += row.exact_billsec.to_f
-      @total[:orig_min] += row.originator_billsec.to_f
-      @total[:orig_amount] += row.originator_price.to_f
+      @total[:orig_exact_min] += row.exact_billsec.to_d
+      @total[:orig_min] += row.originator_billsec.to_d
+      @total[:orig_amount] += row.originator_price.to_d
     }
 
     @total_items_orig = @originator_lines_full.size
-    @total_pages = (@total_items_orig.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@total_items_orig.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page] > @total_pages
 
     @originator_lines = []

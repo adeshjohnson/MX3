@@ -104,7 +104,7 @@ class ApplicationController < ActionController::Base
     session[:items_per_page] = items_per_page
     #currently "items per page" default value is 1, user can only set it to at least 1
     #so there's code duplication, 1 should be refactored and set as some sort of global constant
-    total_pages = (total_items.to_f / items_per_page.to_f).ceil
+    total_pages = (total_items.to_d / items_per_page.to_d).ceil
     return items_per_page, total_pages
   end
 
@@ -137,7 +137,7 @@ class ApplicationController < ActionController::Base
 
   def pages_validator(options, total, page = 1)
     options[:page] = options[:page].to_i < 1 ? 1 : options[:page].to_i
-    total_pages = (total.to_f / session[:items_per_page].to_f).ceil
+    total_pages = (total.to_d / session[:items_per_page].to_d).ceil
     options[:page] = total_pages if options[:page].to_i > total_pages.to_i and total_pages.to_i > 0
     fpage = ((options[:page] -1) * session[:items_per_page]).to_i
     return fpage, total_pages, options
@@ -1357,7 +1357,7 @@ class ApplicationController < ActionController::Base
     confline = (!session or !session[:nice_number_digits]) ? Confline.get_value("Nice_Number_Digits") : session[:nice_number_digits]
     nice_number_digits = (confline and confline.to_s.length > 0) ? confline.to_i : 2
     n = ""
-    n = sprintf("%0.#{nice_number_digits}f", number.to_f) if number
+    n = sprintf("%0.#{nice_number_digits}f", number.to_d) if number
     if session 
       session[:nice_number_digits] = nice_number_digits 
       n = n.gsub('.', session[:global_decimal]) if session[:change_decimal]
@@ -1370,17 +1370,17 @@ class ApplicationController < ActionController::Base
       session[:nice_prepaid_invoice_number_digits] ||= Confline.get_value("Prepaid_Round_finals_to_2_decimals").to_i
       n = ""
       if session[:nice_prepaid_invoice_number_digits].to_i == 1
-        n = sprintf("%0.#{2}f", number.to_f) if number
+        n = sprintf("%0.#{2}f", number.to_d) if number
       else
-        n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_f) if number
+        n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_d) if number
       end
     else
       session[:nice_invoice_number_digits] ||= Confline.get_value("Round_finals_to_2_decimals").to_i
       n = ""
       if session[:nice_invoice_number_digits].to_i == 1
-        n = sprintf("%0.#{2}f", number.to_f) if number
+        n = sprintf("%0.#{2}f", number.to_d) if number
       else
-        n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_f) if number
+        n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_d) if number
       end
     end
     if session[:change_decimal] and options[:no_repl].to_i == 0
@@ -2464,10 +2464,10 @@ Variables: (Names marked with * are required)
         :tax3_name => params[:tax3_name].to_s,
         :tax4_name => params[:tax4_name].to_s,
         :total_tax_name => params[:total_tax_name].to_s,
-        :tax1_value => params[:tax1_value].to_f,
-        :tax2_value => params[:tax2_value].to_f,
-        :tax3_value => params[:tax3_value].to_f,
-        :tax4_value => params[:tax4_value].to_f,
+        :tax1_value => params[:tax1_value].to_d,
+        :tax2_value => params[:tax2_value].to_d,
+        :tax3_value => params[:tax3_value].to_d,
+        :tax4_value => params[:tax4_value].to_d,
         :compound_tax => params[:compound_tax].to_i
     }
   end
@@ -2483,7 +2483,7 @@ Variables: (Names marked with * are required)
 
   def invoice_total_tax_name(tax)
     tax_name = tax.total_tax_name.to_s
-    tax_name += " " + nice_number(tax.tax1_value.to_f).to_s + "%" if tax.get_tax_count == 1
+    tax_name += " " + nice_number(tax.tax1_value.to_d).to_s + "%" if tax.get_tax_count == 1
     return tax_name
   end
 
@@ -2498,17 +2498,17 @@ Variables: (Names marked with * are required)
   end
 
   def validate_range(value, min, max, min_def = nil, max_def = nil)
-    min_def = min.to_f unless min_def
-    max_def = max.to_f unless max_def
-    value = min_def.to_f if value.to_f < min.to_f
-    value = max_def.to_f if value.to_f > max.to_f
+    min_def = min.to_d unless min_def
+    max_def = max.to_d unless max_def
+    value = min_def.to_d if value.to_d < min.to_d
+    value = max_def.to_d if value.to_d > max.to_d
     value
   end
 
   def archive_file_if_size(filename, extension, size, path = "/tmp")
     full_name = "#{filename}.#{extension}"
     f_size = `stat -c%s #{path}/#{full_name}`
-    if (f_size.to_i / 1024).to_f >= size.to_f
+    if (f_size.to_i / 1024).to_d >= size.to_d
       `rm -rf #{path}/#{filename}.tar.gz`
       `cd #{path}; tar -czf #{filename}.tar.gz #{full_name}`
       `rm -rf #{path}/#{full_name}`

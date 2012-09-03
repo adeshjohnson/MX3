@@ -81,7 +81,7 @@ class CardsController < ApplicationController
     @cards_all = Card.count(:all, :conditions => [cond.join(" AND ")] +var)
 
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
-    @total_pages = (@cards_all.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@cards_all.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     @fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
@@ -128,7 +128,7 @@ class CardsController < ApplicationController
     @cards_all = Card.count(:conditions => [cond.join(" AND ")] +var)
 
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
-    @total_pages = (@cards_all.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@cards_all.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     @fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
@@ -177,8 +177,8 @@ class CardsController < ApplicationController
     if @activate.to_i == 3
       @a_name = _('Buy')
       @user = User.find(:first, :include => :address, :conditions => "users.id = #{user_id}")
-      real_price = Card.find(:all, :select => "sum(balance) as balance_sum", :conditions => "hidden = 0 AND number >= #{@start_num} and number <= #{@end_num} and sold = 0 AND owner_id = #{session[:user_id]} AND cardgroup_id = '#{@cg.id}' ")[0].balance_sum.to_f
-      @real_price = real_price.to_f * User.current.currency.exchange_rate.to_f
+      real_price = Card.find(:all, :select => "sum(balance) as balance_sum", :conditions => "hidden = 0 AND number >= #{@start_num} and number <= #{@end_num} and sold = 0 AND owner_id = #{session[:user_id]} AND cardgroup_id = '#{@cg.id}' ")[0].balance_sum.to_d
+      @real_price = real_price.to_d * User.current.currency.exchange_rate.to_d
       @tax = @cg.get_tax
       @taxes = @tax.applied_tax_list(@real_price)
       @total_tax_name = @tax.total_tax_name
@@ -267,7 +267,7 @@ class CardsController < ApplicationController
     @page_title = _('Add_card_payment')
     @page_icon = "money.png"
 
-    @amount = params[:amount].to_f
+    @amount = params[:amount].to_d
     @curr = params[:currency]
     @exchange_rate = count_exchange_rate(current_user.currency.name, @curr)
     if @exchange_rate == 0
@@ -285,8 +285,8 @@ class CardsController < ApplicationController
   end
 
   def card_payment_finish
-    amount = params[:amount].to_f
-    real_amount = params[:real_amount].to_f
+    amount = params[:amount].to_d
+    real_amount = params[:real_amount].to_d
     currency = params[:currency]
 
     @card.balance += real_amount

@@ -93,7 +93,7 @@ class StatsController < ApplicationController
     user_count = sum[0]["users"].to_i
     @options[:page] = params[:page].to_i if params[:page]
     @page = @options[:page]
-    @total_pages = (user_count / session[:items_per_page].to_f).ceil
+    @total_pages = (user_count / session[:items_per_page].to_d).ceil
     istart = (session[:items_per_page] * (@page - 1))
 
     session[:usertype] == 'admin' ? price_by = "provider_price" : price_by ="reseller_price"
@@ -136,38 +136,38 @@ class StatsController < ApplicationController
     @curr_balance = []
     for r in res
       id = r["id"].to_i
-      @rate_cur, @rate_cur2 = Currency.count_exchange_prices({:exrate => exrate, :prices => [r["price"].to_f, r["balance"].to_f]})
+      @rate_cur, @rate_cur2 = Currency.count_exchange_prices({:exrate => exrate, :prices => [r["price"].to_d, r["balance"].to_d]})
       @total_balance += @rate_cur2
-      @total_calls += r["calls"].to_f
-      @total_time += r["sum_duration"].to_f
+      @total_calls += r["calls"].to_d
+      @total_time += r["sum_duration"].to_d
       @total_price += @rate_cur
       @curr_price[id]=@rate_cur
       @curr_balance[id]=@rate_cur2
-      @user_price[id] = r["price"].to_f
+      @user_price[id] = r["price"].to_d
 
       #  if session[:usertype]=='admin'
-      @prov_price[id]= r["provider_price"].to_f
-      @rate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [r["provider_price"].to_f]}) if r["provider_price"]
+      @prov_price[id]= r["provider_price"].to_d
+      @rate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [r["provider_price"].to_d]}) if r["provider_price"]
       @curr_prov_price[id] = @rate_cur if r["provider_price"]
-      @total_prov += @rate_cur.to_f
+      @total_prov += @rate_cur.to_d
       # else
-      # @prov_price[id]= r["reseller_price"].to_f
-      # @rate_cur = Currency.count_exchange_prices({:exrate=>exrate, :prices=>[provider_price.to_f]}) if provider_price
+      # @prov_price[id]= r["reseller_price"].to_d
+      # @rate_cur = Currency.count_exchange_prices({:exrate=>exrate, :prices=>[provider_price.to_d]}) if provider_price
       # @curr_prov_price[id] =  @rate_cur if provider_price
-      # @total_prov += @rate_cur.to_f
+      # @total_prov += @rate_cur.to_d
       # end
     end
 
-    @all_balance = Currency.count_exchange_prices({:exrate => exrate, :prices => [sum[0]["balance"].to_f]})
+    @all_balance = Currency.count_exchange_prices({:exrate => exrate, :prices => [sum[0]["balance"].to_d]})
     @all_time = sum[0]["sum_duration"].to_i
-    @all_price = Currency.count_exchange_prices({:exrate => exrate, :prices => [sum[0]["price"].to_f]})
+    @all_price = Currency.count_exchange_prices({:exrate => exrate, :prices => [sum[0]["price"].to_d]})
     #if session[:usertype]=='admin'
-    @all_prov_price = Currency.count_exchange_prices({:exrate => exrate, :prices => [sum[0]["provider_price"].to_f]})
+    @all_prov_price = Currency.count_exchange_prices({:exrate => exrate, :prices => [sum[0]["provider_price"].to_d]})
     #else
-    #  @all_prov_price = Currency.count_exchange_prices({:exrate=>exrate, :prices=>[sum[0]["reseller_price"].to_f]})
+    #  @all_prov_price = Currency.count_exchange_prices({:exrate=>exrate, :prices=>[sum[0]["reseller_price"].to_d]})
     #end
-    @all_profit = Currency.count_exchange_prices({:exrate => exrate, :prices => [sum[0]["price"].to_f]}) - @all_prov_price.to_f
-    @total_profit = @total_price.to_f - @total_prov.to_f
+    @all_profit = Currency.count_exchange_prices({:exrate => exrate, :prices => [sum[0]["price"].to_d]}) - @all_prov_price.to_d
+    @total_profit = @total_price.to_d - @total_prov.to_d
     @all_calls = sum[0]["calls"].to_i
     #========================
     session[:show_user_stats_options] = @options
@@ -224,27 +224,27 @@ class StatsController < ApplicationController
     std = session_till_date
 
     @outgoing_perc = 0
-    @outgoing_perc = @outgoing_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @outgoing_perc = @outgoing_calls.to_d / @total_calls * 100 if @total_calls > 0
     @incoming_perc = 0
-    @incoming_perc = @incoming_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @incoming_perc = @incoming_calls.to_d / @total_calls * 100 if @total_calls > 0
 
     @o_answered_perc = 0
-    @o_answered_perc = @o_answered_calls.to_f / @outgoing_calls * 100 if @outgoing_calls > 0
+    @o_answered_perc = @o_answered_calls.to_d / @outgoing_calls * 100 if @outgoing_calls > 0
     @o_no_answer_perc = 0
-    @o_no_answer_perc = @o_no_answer_calls.to_f / @outgoing_calls * 100 if @outgoing_calls > 0
+    @o_no_answer_perc = @o_no_answer_calls.to_d / @outgoing_calls * 100 if @outgoing_calls > 0
     @o_busy_perc = 0
-    @o_busy_perc = @o_busy_calls.to_f / @outgoing_calls * 100 if @outgoing_calls > 0
+    @o_busy_perc = @o_busy_calls.to_d / @outgoing_calls * 100 if @outgoing_calls > 0
     @o_failed_perc = 0
-    @o_failed_perc = @o_failed_calls.to_f / @outgoing_calls * 100 if @outgoing_calls > 0
+    @o_failed_perc = @o_failed_calls.to_d / @outgoing_calls * 100 if @outgoing_calls > 0
 
     @i_answered_perc = 0
-    @i_answered_perc = @i_answered_calls.to_f / @incoming_calls * 100 if @incoming_calls > 0
+    @i_answered_perc = @i_answered_calls.to_d / @incoming_calls * 100 if @incoming_calls > 0
     @i_no_answer_perc = 0
-    @i_no_answer_perc = @i_no_answer_calls.to_f / @incoming_calls * 100 if @incoming_calls > 0
+    @i_no_answer_perc = @i_no_answer_calls.to_d / @incoming_calls * 100 if @incoming_calls > 0
     @i_busy_perc = 0
-    @i_busy_perc = @i_busy_calls.to_f / @incoming_calls * 100 if @incoming_calls > 0
+    @i_busy_perc = @i_busy_calls.to_d / @incoming_calls * 100 if @incoming_calls > 0
     @i_failed_perc = 0
-    @i_failed_perc = @i_failed_calls.to_f / @incoming_calls * 100 if @incoming_calls > 0
+    @i_failed_perc = @i_failed_calls.to_d / @incoming_calls * 100 if @incoming_calls > 0
 
     @t_answered_calls = @o_answered_calls + @i_answered_calls
     @t_no_answer_calls = @o_no_answer_calls + @i_no_answer_calls
@@ -252,13 +252,13 @@ class StatsController < ApplicationController
     @t_failed_calls = @o_failed_calls + @i_failed_calls
 
     @t_answered_perc = 0
-    @t_answered_perc = @t_answered_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @t_answered_perc = @t_answered_calls.to_d / @total_calls * 100 if @total_calls > 0
     @t_no_answer_perc = 0
-    @t_no_answer_perc = @t_no_answer_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @t_no_answer_perc = @t_no_answer_calls.to_d / @total_calls * 100 if @total_calls > 0
     @t_busy_perc = 0
-    @t_busy_perc = @t_busy_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @t_busy_perc = @t_busy_calls.to_d / @total_calls * 100 if @total_calls > 0
     @t_failed_perc = 0
-    @t_failed_perc = @t_failed_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @t_failed_perc = @t_failed_calls.to_d / @total_calls * 100 if @total_calls > 0
 
     @a_date, @a_calls, @a_billsec, @a_avg_billsec = Call.answered_calls_day_by_day(session_from_date, session_till_date)
 
@@ -425,28 +425,28 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     }
 
     @outgoing_perc = 0
-    @outgoing_perc = @outgoing_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @outgoing_perc = @outgoing_calls.to_d / @total_calls * 100 if @total_calls > 0
     @incoming_perc = 0
-    @incoming_perc = @incoming_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @incoming_perc = @incoming_calls.to_d / @total_calls * 100 if @total_calls > 0
 
 
     @o_answered_perc = 0
-    @o_answered_perc = @o_answered_calls.to_f / @outgoing_calls * 100 if @outgoing_calls > 0
+    @o_answered_perc = @o_answered_calls.to_d / @outgoing_calls * 100 if @outgoing_calls > 0
     @o_no_answer_perc = 0
-    @o_no_answer_perc = @o_no_answer_calls.to_f / @outgoing_calls * 100 if @outgoing_calls > 0
+    @o_no_answer_perc = @o_no_answer_calls.to_d / @outgoing_calls * 100 if @outgoing_calls > 0
     @o_busy_perc = 0
-    @o_busy_perc = @o_busy_calls.to_f / @outgoing_calls * 100 if @outgoing_calls > 0
+    @o_busy_perc = @o_busy_calls.to_d / @outgoing_calls * 100 if @outgoing_calls > 0
     @o_failed_perc = 0
-    @o_failed_perc = @o_failed_calls.to_f / @outgoing_calls * 100 if @outgoing_calls > 0
+    @o_failed_perc = @o_failed_calls.to_d / @outgoing_calls * 100 if @outgoing_calls > 0
 
     @i_answered_perc = 0
-    @i_answered_perc = @i_answered_calls.to_f / @incoming_calls * 100 if @incoming_calls > 0
+    @i_answered_perc = @i_answered_calls.to_d / @incoming_calls * 100 if @incoming_calls > 0
     @i_no_answer_perc = 0
-    @i_no_answer_perc = @i_no_answer_calls.to_f / @incoming_calls * 100 if @incoming_calls > 0
+    @i_no_answer_perc = @i_no_answer_calls.to_d / @incoming_calls * 100 if @incoming_calls > 0
     @i_busy_perc = 0
-    @i_busy_perc = @i_busy_calls.to_f / @incoming_calls * 100 if @incoming_calls > 0
+    @i_busy_perc = @i_busy_calls.to_d / @incoming_calls * 100 if @incoming_calls > 0
     @i_failed_perc = 0
-    @i_failed_perc = @i_failed_calls.to_f / @incoming_calls * 100 if @incoming_calls > 0
+    @i_failed_perc = @i_failed_calls.to_d / @incoming_calls * 100 if @incoming_calls > 0
 
 
     @t_answered_calls = @o_answered_calls + @i_answered_calls
@@ -455,13 +455,13 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @t_failed_calls = @o_failed_calls + @i_failed_calls
 
     @t_answered_perc = 0
-    @t_answered_perc = @t_answered_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @t_answered_perc = @t_answered_calls.to_d / @total_calls * 100 if @total_calls > 0
     @t_no_answer_perc = 0
-    @t_no_answer_perc = @t_no_answer_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @t_no_answer_perc = @t_no_answer_calls.to_d / @total_calls * 100 if @total_calls > 0
     @t_busy_perc = 0
-    @t_busy_perc = @t_busy_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @t_busy_perc = @t_busy_calls.to_d / @total_calls * 100 if @total_calls > 0
     @t_failed_perc = 0
-    @t_failed_perc = @t_failed_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @t_failed_perc = @t_failed_calls.to_d / @total_calls * 100 if @total_calls > 0
 
     index = i
 
@@ -569,22 +569,22 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @total_calls = @incoming_calls + @outgoing_calls
 
     @o_answered_perc = 0
-    @o_answered_perc = @o_answered_calls.to_f / @outgoing_calls * 100 if @outgoing_calls > 0
+    @o_answered_perc = @o_answered_calls.to_d / @outgoing_calls * 100 if @outgoing_calls > 0
     @o_no_answer_perc = 0
-    @o_no_answer_perc = @o_no_answer_calls.to_f / @outgoing_calls * 100 if @outgoing_calls > 0
+    @o_no_answer_perc = @o_no_answer_calls.to_d / @outgoing_calls * 100 if @outgoing_calls > 0
     @o_busy_perc = 0
-    @o_busy_perc = @o_busy_calls.to_f / @outgoing_calls * 100 if @outgoing_calls > 0
+    @o_busy_perc = @o_busy_calls.to_d / @outgoing_calls * 100 if @outgoing_calls > 0
     @o_failed_perc = 0
-    @o_failed_perc = @o_failed_calls.to_f / @outgoing_calls * 100 if @outgoing_calls > 0
+    @o_failed_perc = @o_failed_calls.to_d / @outgoing_calls * 100 if @outgoing_calls > 0
 
     @i_answered_perc = 0
-    @i_answered_perc = @i_answered_calls.to_f / @incoming_calls * 100 if @incoming_calls > 0
+    @i_answered_perc = @i_answered_calls.to_d / @incoming_calls * 100 if @incoming_calls > 0
     @i_no_answer_perc = 0
-    @i_no_answer_perc = @i_no_answer_calls.to_f / @incoming_calls * 100 if @incoming_calls > 0
+    @i_no_answer_perc = @i_no_answer_calls.to_d / @incoming_calls * 100 if @incoming_calls > 0
     @i_busy_perc = 0
-    @i_busy_perc = @i_busy_calls.to_f / @incoming_calls * 100 if @incoming_calls > 0
+    @i_busy_perc = @i_busy_calls.to_d / @incoming_calls * 100 if @incoming_calls > 0
     @i_failed_perc = 0
-    @i_failed_perc = @i_failed_calls.to_f / @incoming_calls * 100 if @incoming_calls > 0
+    @i_failed_perc = @i_failed_calls.to_d / @incoming_calls * 100 if @incoming_calls > 0
 
     @t_answered_calls = @o_answered_calls + @i_answered_calls
     @t_no_answer_calls = @o_no_answer_calls + @i_no_answer_calls
@@ -592,18 +592,18 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @t_failed_calls = @o_failed_calls + @i_failed_calls
 
     @t_answered_perc = 0
-    @t_answered_perc = @t_answered_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @t_answered_perc = @t_answered_calls.to_d / @total_calls * 100 if @total_calls > 0
     @t_no_answer_perc = 0
-    @t_no_answer_perc = @t_no_answer_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @t_no_answer_perc = @t_no_answer_calls.to_d / @total_calls * 100 if @total_calls > 0
     @t_busy_perc = 0
-    @t_busy_perc = @t_busy_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @t_busy_perc = @t_busy_calls.to_d / @total_calls * 100 if @total_calls > 0
     @t_failed_perc = 0
-    @t_failed_perc = @t_failed_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @t_failed_perc = @t_failed_calls.to_d / @total_calls * 100 if @total_calls > 0
 
     @outgoing_perc = 0
-    @outgoing_perc = @outgoing_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @outgoing_perc = @outgoing_calls.to_d / @total_calls * 100 if @total_calls > 0
     @incoming_perc = 0
-    @incoming_perc = @incoming_calls.to_f / @total_calls * 100 if @total_calls > 0
+    @incoming_perc = @incoming_calls.to_d / @total_calls * 100 if @total_calls > 0
 
     ############
 
@@ -719,7 +719,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     end
 
 
-    @total_pages = ((@a.size).to_f / 10.to_f).ceil
+    @total_pages = ((@a.size).to_d / 10.to_d).ceil
     @all_date =@a
     @a = []
     iend = ((10 * @page) - 1)
@@ -907,12 +907,12 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     for call in @calls
       @total_duration += call.duration
       if @direction == "incoming"
-        @rate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_price.to_f]}) if call.did_price
+        @rate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_price.to_d]}) if call.did_price
         @total_price += @rate_cur if call.did_price
         @curr_rate2[call.id]=@rate_cur
         @total_billsec += call.did_billsec
       else
-        @rate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.user_price.to_f]}) if call.user_price
+        @rate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.user_price.to_d]}) if call.user_price
         @total_price += @rate_cur if call.user_price
         @curr_rate[call.id]=@rate_cur
         @total_billsec += call.nice_billsec
@@ -960,7 +960,7 @@ in before filter : user (:find_user_from_id_or_session)
         @total_calls_stats = Call.last_calls_total_stats(options)
         @total_calls = @total_calls_stats.total_calls.to_i
         logger.debug " >> Total calls: #{@total_calls}"
-        @total_pages = (@total_calls/ session[:items_per_page].to_f).ceil
+        @total_pages = (@total_calls/ session[:items_per_page].to_d).ceil
         options[:page] = @total_pages if options[:page].to_i > @total_pages.to_i
         options[:page] = 1 if options[:page].to_i < 1
         @calls = Call.last_calls(options)
@@ -989,7 +989,7 @@ in before filter : user (:find_user_from_id_or_session)
         filename = Call.last_calls_csv(options)
         filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
         if filename
-          filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_f)
+          filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
           if params[:test].to_i != 1
             send_file(filename)
           else
@@ -1071,7 +1071,7 @@ in before filter : user (:find_user_from_id_or_session)
 
     @total_stats = @user.calls_total_stats(@orig_call_type, @date_from, @date_till, @direction, @device, @user.usertype, @hgc)
     @total_calls = @total_stats.total_calls.to_i
-    @total_pages = (@total_calls.to_f / @calls_per_page.to_f).ceil.to_i
+    @total_pages = (@total_calls.to_d / @calls_per_page.to_d).ceil.to_i
 
     start = @page < 1 ? 1 : (@calls_per_page * (@page-1))
     @calls_per_page2 = @calls_per_page.to_i < 2 ? 1 : @calls_per_page -1
@@ -1079,8 +1079,8 @@ in before filter : user (:find_user_from_id_or_session)
 
     @calls = [] if not @calls
 
-    @total_duration = @total_stats.total_duration.to_f
-    @total_billsec = @total_stats.total_billsec.to_f
+    @total_duration = @total_stats.total_duration.to_d
+    @total_billsec = @total_stats.total_billsec.to_d
 
     # count Totals
 
@@ -1089,37 +1089,37 @@ in before filter : user (:find_user_from_id_or_session)
     @total_price2 = 0
     @total_prov_price = 0
     @total_profit = 0
-    exchange_rate = Currency.count_exchange_rate(session[:default_currency], session[:show_currency]).to_f
+    exchange_rate = Currency.count_exchange_rate(session[:default_currency], session[:show_currency]).to_d
     #outgoing
     if session[:usertype] == "admin" and @user.owner_id != 0
-      @total_price = @total_stats.total_reseller_price.to_f * exchange_rate
+      @total_price = @total_stats.total_reseller_price.to_d * exchange_rate
     else
-      @total_price = @total_stats.total_user_price.to_f * exchange_rate
+      @total_price = @total_stats.total_user_price.to_d * exchange_rate
     end
 
     #incoming
-    @total_inc_prov_price = @total_stats.total_did_prov_price.to_f * exchange_rate
-    @total_inc_price = @total_stats.total_did_inc_price.to_f * exchange_rate
-    @total_price2 = @total_stats.total_did_price.to_f * exchange_rate
+    @total_inc_prov_price = @total_stats.total_did_prov_price.to_d * exchange_rate
+    @total_inc_price = @total_stats.total_did_inc_price.to_d * exchange_rate
+    @total_price2 = @total_stats.total_did_price.to_d * exchange_rate
 
 
     if session[:usertype] == "admin"
-      @total_prov_price = @total_stats.total_provider_price.to_f * exchange_rate
+      @total_prov_price = @total_stats.total_provider_price.to_d * exchange_rate
       #my_debug @total_prov_price
     else
       # provider price for reseller
       if @user.id == session[:user_id]
-        @total_prov_price = @total_stats.total_user_price.to_f * exchange_rate
+        @total_prov_price = @total_stats.total_user_price.to_d * exchange_rate
       else
-        @total_prov_price = @total_stats.total_reseller_price.to_f * exchange_rate
+        @total_prov_price = @total_stats.total_reseller_price.to_d * exchange_rate
       end
 
     end
 
     if @direction == "incoming"
-      @total_profit = @total_inc_prov_price.to_f + @total_inc_price.to_f + @total_price2.to_f
+      @total_profit = @total_inc_prov_price.to_d + @total_inc_price.to_d + @total_price2.to_d
     else
-      @total_profit = @total_price.to_f - @total_prov_price.to_f
+      @total_profit = @total_price.to_d - @total_prov_price.to_d
     end
 
 
@@ -1215,9 +1215,9 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       @total_duration += call.duration
       @total_price += call.user_price if call.user_price
       @total_billsec += call.nice_billsec
-      @total_profit += call.user_price.to_f - call.provider_price.to_f
+      @total_profit += call.user_price.to_d - call.provider_price.to_d
       @total_provider_price += call.provider_price if call.provider_price
-      @total_did_price += call.did_price.to_f + call.did_inc_price.to_f
+      @total_did_price += call.did_price.to_d + call.did_inc_price.to_d
     end
   end
 
@@ -1239,7 +1239,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       filename = Call.country_stats_csv({:collumn_separator => Confline.get_csv_separator(settings_owner_id), :s_user => @user_id, :current_user => current_user, :from => session_from_datetime, :till => session_till_datetime, :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i, :hide_finances => !can_see_finances?})
       filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
       if filename
-        filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_f)
+        filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
         if params[:test].to_i != 1
           send_file(filename)
         else
@@ -1291,7 +1291,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     filename = @user.user_calls_to_csv({:tz => current_user.time_zone, :device => @device, :direction => @direction, :call_type => call_type, :date_from => date_from, :date_till => date_till, :default_currency => session[:default_currency], :show_currency => session[:show_currency], :show_full_src => session[:show_full_src], :hgc => @hgc, :usertype => user_type, :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i, :reseller => res.to_i, :hide_finances => !can_see_finances?})
     filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
     if filename
-      filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_f)
+      filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
       if params[:test].to_i != 1
         send_file(filename)
       else
@@ -1356,20 +1356,20 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     items = []
     for call in calls
       item = []
-      @rate_cur3 = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.user_price.to_f]})
-      @rate_prov = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.provider_price.to_f]}) if session[:usertype] == "admin"
+      @rate_cur3 = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.user_price.to_d]})
+      @rate_prov = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.provider_price.to_d]}) if session[:usertype] == "admin"
       if session[:usertype] == "reseller"
         if call.reseller_id == 0
           # selfcost for reseller himself is user price, so profit always = 0 for his own calls
-          @rate_prov = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.user_price.to_f]})
+          @rate_prov = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.user_price.to_d]})
         else
-          @rate_prov = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.reseller_price.to_f]})
+          @rate_prov = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.reseller_price.to_d]})
         end
       end
 
-      @rate_did_pr = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_prov_price.to_f]})
-      @rate_did_ic = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_inc_price.to_f]})
-      @rate_did_ow = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_price.to_f]})
+      @rate_did_pr = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_prov_price.to_d]})
+      @rate_did_ic = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_inc_price.to_d]})
+      @rate_did_ow = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_price.to_d]})
 
       item << call.calldate.strftime("%Y-%m-%d %H:%M:%S")
       item << call.src
@@ -1393,9 +1393,9 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         else
           item << nice_number(@rate_cur3)
           item << nice_number(@rate_prov)
-          item << nice_number(@rate_cur3.to_f - @rate_prov.to_f)
-          item << nice_number(@rate_cur3.to_f != 0.to_f ? ((@rate_cur3.to_f - @rate_prov.to_f)/ @rate_cur3.to_f) *100 : 0) + " %"
-          item << nice_number(@rate_prov.to_f != 0.to_f ? ((@rate_cur3.to_f / @rate_prov.to_f) *100)-100 : 0) + " %"
+          item << nice_number(@rate_cur3.to_d - @rate_prov.to_d)
+          item << nice_number(@rate_cur3.to_d != 0.to_d ? ((@rate_cur3.to_d - @rate_prov.to_d)/ @rate_cur3.to_d) *100 : 0) + " %"
+          item << nice_number(@rate_prov.to_d != 0.to_d ? ((@rate_cur3.to_d / @rate_prov.to_d) *100)-100 : 0) + " %"
         end
       end
 
@@ -1405,9 +1405,9 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         else
           item << nice_number(@rate_cur3)
           item << nice_number(@rate_prov)
-          item << nice_number(@rate_cur3.to_f - @rate_prov.to_f)
-          item << nice_number(@rate_cur3.to_f != 0.to_f ? ((@rate_cur3.to_f - @rate_prov.to_f)/ @rate_cur3.to_f) *100 : 0) + " %"
-          item << nice_number(@rate_prov.to_f != 0.to_f ? ((@rate_cur3.to_f / @rate_prov.to_f) *100)-100 : 0) + " %"
+          item << nice_number(@rate_cur3.to_d - @rate_prov.to_d)
+          item << nice_number(@rate_cur3.to_d != 0.to_d ? ((@rate_cur3.to_d - @rate_prov.to_d)/ @rate_cur3.to_d) *100 : 0) + " %"
+          item << nice_number(@rate_prov.to_d != 0.to_d ? ((@rate_cur3.to_d / @rate_prov.to_d) *100)-100 : 0) + " %"
         end
       end
 
@@ -1426,13 +1426,13 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         total_price += @rate_cur3 if call.user_price
       end
       #total_price += @rate_cur3 if call.user_price
-      total_prov_price += @rate_prov.to_f
-      total_prfit += @rate_cur3.to_f - @rate_prov.to_f
+      total_prov_price += @rate_prov.to_d
+      total_prfit += @rate_cur3.to_d - @rate_prov.to_d
       total_billsec += call.nice_billsec
       total_did_provider += @rate_did_pr
       total_did_inc += @rate_did_ic
       total_did_own += @rate_did_ow
-      total_did_prof += @rate_did_pr.to_f + @rate_did_ic.to_f + @rate_did_ow.to_f
+      total_did_prof += @rate_did_pr.to_d + @rate_did_ic.to_d + @rate_did_ow.to_d
 
       items << item
     end
@@ -1451,13 +1451,13 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         item << nice_number(total_price)
         item << nice_number(total_prov_price)
         item << nice_number(total_prfit)
-        if total_price.to_f != 0
-          item << nice_number(total_price.to_f != 0.to_f ? (total_prfit / total_price.to_f) * 100 : 0) + " %"
+        if total_price.to_d != 0
+          item << nice_number(total_price.to_d != 0.to_d ? (total_prfit / total_price.to_d) * 100 : 0) + " %"
         else
           item << nice_number(0) + " %"
         end
-        if total_prov_price.to_f != 0
-          item << nice_number(total_prov_price.to_f != 0 ? ((total_price.to_f / total_prov_price.to_f) *100)-100 : 0) + " %"
+        if total_prov_price.to_d != 0
+          item << nice_number(total_prov_price.to_d != 0 ? ((total_price.to_d / total_prov_price.to_d) *100)-100 : 0) + " %"
         else
           item << nice_number(0) + " %"
         end
@@ -1504,8 +1504,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     add_contition_and_param(@options[:s_username], @options[:s_username] + '%', "users.username LIKE ?", cond, var)
     add_contition_and_param(@options[:s_fname], @options[:s_fname] + '%', "users.first_name LIKE  ?", cond, var)
     add_contition_and_param(@options[:s_lname], @options[:s_lname] + '%', "users.last_name LIKE ?", cond, var)
-    add_contition_and_param(@options[:s_balance_min], @options[:s_balance_min].to_f, "users.balance >= ?", cond, var)
-    add_contition_and_param(@options[:s_balance_max], @options[:s_balance_max].to_f, "users.balance <= ?", cond, var)
+    add_contition_and_param(@options[:s_balance_min], @options[:s_balance_min].to_d, "users.balance >= ?", cond, var)
+    add_contition_and_param(@options[:s_balance_max], @options[:s_balance_max].to_d, "users.balance <= ?", cond, var)
     @total_users = User.count(:all, :conditions => [cond.join(' AND ').to_s] + var).to_i
 
     items_per_page, total_pages = item_pages(@total_users)
@@ -1613,10 +1613,10 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     @provider = Provider.find_all_with_calls_for_stats(current_user, {:date_from => session_from_datetime, :date_till => session_till_datetime, :s_prefix => @s_prefix, :p_id => params[:id]})[0]
     if @provider
-      @asr_calls = nice_number((@provider.answered.to_f / @provider.pcalls.to_f) * 100)
-      @no_answer_calls_pr = nice_number((@provider.no_answer.to_f / @provider.pcalls.to_f) * 100)
-      @busy_calls_pr = nice_number((@provider.busy.to_f / @provider.pcalls.to_f) * 100)
-      @failed_calls_pr = nice_number((@provider.failed.to_f / @provider.pcalls.to_f) * 100)
+      @asr_calls = nice_number((@provider.answered.to_d / @provider.pcalls.to_d) * 100)
+      @no_answer_calls_pr = nice_number((@provider.no_answer.to_d / @provider.pcalls.to_d) * 100)
+      @busy_calls_pr = nice_number((@provider.busy.to_d / @provider.pcalls.to_d) * 100)
+      @failed_calls_pr = nice_number((@provider.failed.to_d / @provider.pcalls.to_d) * 100)
 
       @sdate = Time.mktime(session[:year_from], session[:month_from], session[:day_from])
 
@@ -1705,7 +1705,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         res2 = ActiveRecord::Base.connection.select_all(sqll)
         @a_calls2[i] = res2[0]["calls2"].to_i
 
-        @a_ars2[i] = (@a_calls[i].to_f / @a_calls2[i]) * 100 if @a_calls[i] > 0
+        @a_ars2[i] = (@a_calls[i].to_d / @a_calls2[i]) * 100 if @a_calls[i] > 0
         @a_ars[i] = nice_number @a_ars2[i]
 
         @sdate += (60 * 60 * 24)
@@ -1847,7 +1847,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @size = @calls.size.to_i
     session[:hangup_call]= @hangup.id
 
-    @total_pages = (@calls.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@calls.size.to_d / session[:items_per_page].to_d).ceil
 
     @all_calls = @calls
     @calls = []
@@ -2028,8 +2028,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     end
     total = Call.find(:all, :select => select.join(", "), :joins => "LEFT JOIN users ON (users.id = calls.user_id) #{ SqlExport.left_join_reseler_providers_to_calls_sql}", :conditions => (conditions +["disposition = 'ANSWERED'"]).join(" AND "))[0]
     @total_duration = (total["billsec"]).to_i
-    @total_call_price = (total["user_price"]).to_f
-    @total_call_selfprice = (total["provider_price"]).to_f
+    @total_call_price = (total["user_price"]).to_d
+    @total_call_selfprice = (total["provider_price"]).to_d
     select_total = ["COUNT(*) AS 'total_calls'"]
     select_total << "SUM(IF(calls.disposition = 'ANSWERED', 1, 0)) AS 'answered_calls'"
     select_total << "SUM(IF(calls.disposition = 'BUSY', 1, 0)) AS 'busy_calls'"
@@ -2043,11 +2043,11 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       @total_busy_calls = total[0]["busy_calls"].to_i
       @total_error_calls = total[0]["failed_calls"].to_i
       if @total_calls != 0
-        @total_answer_percent = @total_answered_calls.to_f * 100 / @total_calls.to_f
-        @average_call_duration = @total_duration.to_f / @total_answered_calls.to_f
-        @total_not_ans_percent = @total_not_ans_calls.to_f * 100 / @total_calls.to_f
-        @total_busy_percent = @total_busy_calls.to_f * 100 / @total_calls.to_f
-        @total_error_percent = @total_error_calls.to_f * 100 / @total_calls.to_f
+        @total_answer_percent = @total_answered_calls.to_d * 100 / @total_calls.to_d
+        @average_call_duration = @total_duration.to_d / @total_answered_calls.to_d
+        @total_not_ans_percent = @total_not_ans_calls.to_d * 100 / @total_calls.to_d
+        @total_busy_percent = @total_busy_calls.to_d * 100 / @total_calls.to_d
+        @total_error_percent = @total_error_calls.to_d * 100 / @total_calls.to_d
       else
         @total_answer_percent = 0
         @average_call_duration = 0
@@ -2090,16 +2090,16 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       @total_users = resu[0]["users"].to_i if resu and resu[0]
 
       @total_percent = 100
-      @total_profit_percent = @total_profit.to_f * 100 / @total_call_price.to_f
+      @total_profit_percent = @total_profit.to_d * 100 / @total_call_price.to_d
       @total_selfcost_percent = @total_percent - @total_profit_percent
       #average
-      @total_duration_min = @total_duration.to_f / 60
-      @avg_profit_call_min = @total_profit.to_f / @total_duration_min
-      @avg_profit_call = @total_profit.to_f / @total_answered_calls.to_f
-      days = (session_till_date.to_date - session_from_date.to_date).to_f
+      @total_duration_min = @total_duration.to_d / 60
+      @avg_profit_call_min = @total_profit.to_d / @total_duration_min
+      @avg_profit_call = @total_profit.to_d / @total_answered_calls.to_d
+      days = (session_till_date.to_date - session_from_date.to_date).to_d
       days = 1.0 if days == 0;
-      @avg_profit_day = @total_profit.to_f / days
-      @total_users != 0 ? @avg_profit_user = @total_profit.to_f / @total_users.to_f : @avg_profit_user = 0
+      @avg_profit_day = @total_profit.to_d / days
+      @total_users != 0 ? @avg_profit_user = @total_profit.to_d / @total_users.to_d : @avg_profit_user = 0
     else
       #profit
       @total_percent = 0
@@ -2139,34 +2139,34 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         if  @date.to_date > a1.to_date and r['activation_end'].to_date < a2.to_date
           price = 0
           if r['periodtype'].to_s == 'day'
-            quantity = sub_days / r['quantity'].to_f
-            days = sub_days % r['quantity'].to_f
+            quantity = sub_days / r['quantity'].to_d
+            days = sub_days % r['quantity'].to_d
 
             if r['servicetype'].to_s == "activation_from_registration"
-              price = r['price'].to_f * quantity.to_i
+              price = r['price'].to_d * quantity.to_i
             end
 
             if r['servicetype'].to_s == "one_time_fee"
-              price = r['price'].to_f
+              price = r['price'].to_d
             end
 
             if r['servicetype'].to_s == "periodic_fee" or r['servicetype'].to_s == "flat_rate"
-              price = ((r['price'].to_f / r['quantity'].to_f) * days.to_i).to_f + ((r['price'].to_f * quantity.to_f)).to_f
+              price = ((r['price'].to_d / r['quantity'].to_d) * days.to_i).to_d + ((r['price'].to_d * quantity.to_d)).to_d
             end
           end
           if r['periodtype'].to_s == 'month'
             y = r['activation_end'].to_time.year - r['activation_start'].to_time.year
             m = r['activation_end'].to_time.month - r['activation_start'].to_time.month
             months = y.to_i * 12 + m.to_i
-            quantity = months / r['quantity'].to_f
+            quantity = months / r['quantity'].to_d
             days = r['activation_end'].to_time.day - r['activation_start'].to_time.day + 1
 
             if r['servicetype'].to_s == "activation_from_registration"
-              price = r['price'].to_f * quantity.to_i
+              price = r['price'].to_d * quantity.to_i
             end
 
             if r['servicetype'].to_s == "one_time_fee"
-              price = r['price'].to_f
+              price = r['price'].to_d
             end
 
             if r['servicetype'].to_s == "periodic_fee" or r['servicetype'].to_s == "flat_rate"
@@ -2174,7 +2174,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
                 quantity = quantity -1
                 days = r['activation_start'].to_time.day + days
               end
-              price = ((r['price'].to_f / r['activation_end'].to_time.end_of_month().day.to_i.to_f) * days.to_i).to_f + ((r['price'].to_f * quantity.to_f)).to_f
+              price = ((r['price'].to_d / r['activation_end'].to_time.end_of_month().day.to_i.to_d) * days.to_i).to_d + ((r['price'].to_d * quantity.to_d)).to_d
             end
           end
           @sub_price2 = price
@@ -2196,19 +2196,19 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
           sub_days = (((sub_days / 60) / 60) / 24)
 
           if r['periodtype'].to_s == 'day'
-            quantity = sub_days / r['quantity'].to_f
-            days = sub_days % r['quantity'].to_f
+            quantity = sub_days / r['quantity'].to_d
+            days = sub_days % r['quantity'].to_d
 
             if r['servicetype'].to_s == "activation_from_registration"
-              price = r['price'].to_f * quantity.to_i
+              price = r['price'].to_d * quantity.to_i
             end
 
             if r['servicetype'].to_s == "one_time_fee"
-              price = r['price'].to_f
+              price = r['price'].to_d
             end
 
             if r['servicetype'].to_s == "periodic_fee" or r['servicetype'].to_s == "flat_rate"
-              price = ((r['price'].to_f / r['quantity'].to_f) * days.to_i).to_f + ((r['price'].to_f * quantity.to_f)).to_f
+              price = ((r['price'].to_d / r['quantity'].to_d) * days.to_i).to_d + ((r['price'].to_d * quantity.to_d)).to_d
             end
           end
 
@@ -2217,15 +2217,15 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
             y = use_end.to_time.year - use_start.to_time.year
             m = use_end.to_time.month - use_start.to_time.month
             months = y.to_i * 12 + m.to_i
-            quantity = months / r['quantity'].to_f
+            quantity = months / r['quantity'].to_d
             days = use_end.to_time.day - use_start.to_time.day + 1
 
             if r['servicetype'].to_s == "activation_from_registration"
-              price = r['price'].to_f * quantity.to_i
+              price = r['price'].to_d * quantity.to_i
             end
 
             if r['servicetype'].to_s == "one_time_fee"
-              price = r['price'].to_f
+              price = r['price'].to_d
             end
 
             if r['servicetype'].to_s == "periodic_fee" or r['servicetype'].to_s == "flat_rate"
@@ -2233,13 +2233,13 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
                 quantity = quantity -1
                 days = use_start.to_time.day + days
               end
-              price = ((r['price'].to_f / use_end.to_time.end_of_month().day.to_i.to_f) * days.to_i).to_f + ((r['price'].to_f * quantity.to_f)).to_f
+              price = ((r['price'].to_d / use_end.to_time.end_of_month().day.to_i.to_d) * days.to_i).to_d + ((r['price'].to_d * quantity.to_d)).to_d
             end
           end
           # my_debug price
           @sub_price2 = price
         end
-        @sub_price += @sub_price2.to_f
+        @sub_price += @sub_price2.to_d
       end
     end
     @s_total_profit = @total_profit
@@ -2425,8 +2425,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @exchange_rate = Currency.count_exchange_rate(session[:default_currency], session[:show_currency])
 
     @total_duration = total_data["duration"].to_i
-    @total_user_price = total_data["user_price"].to_f * @exchange_rate
-    @total_provider_price = total_data["provider_price"].to_f * @exchange_rate
+    @total_user_price = total_data["user_price"].to_d * @exchange_rate
+    @total_provider_price = total_data["provider_price"].to_d * @exchange_rate
     @total_profit = @total_user_price - @total_provider_price
 
 
@@ -2509,7 +2509,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @orig_call_type = @call_type
 
     filename = provider.provider_calls_csv({:tz => current_user.time_zone, :direction => @direction, :call_type => @call_type, :date_from => date_from, :date_till => date_till, :default_currency => session[:default_currency], :show_currency => session[:show_currency], :show_full_src => session[:show_full_src], :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i})
-    filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_f)
+    filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
     if params[:test].to_i != 1
       send_file(filename)
     else
@@ -2560,7 +2560,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
       sql = "SELECT SUM(pdffaxes.size) as 'cf' FROM pdffaxes JOIN devices ON (pdffaxes.device_id = devices.id AND devices.user_id = #{user.id}) WHERE receive_time BETWEEN '#{session_from_datetime}' AND '#{session_till_datetime}'"
       res = ActiveRecord::Base.connection.select_value(sql)
-      @size_on_hdd[i] = res.to_f / (1024 * 1024)
+      @size_on_hdd[i] = res.to_d / (1024 * 1024)
 
       @t_received += @received[i]
       @t_corrupted += @corrupted[i]
@@ -2837,7 +2837,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @page = 1
     @page = params[:page].to_i if params[:page]
 
-    @total_pages = (@res.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@res.size.to_d / session[:items_per_page].to_d).ceil
     @all_res = @res
     @res = []
 
@@ -2852,9 +2852,9 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       @dids_total_profit = 0
       @dids_total_calls = 0
       for r in @res
-        @dids_total_price += r['did_price'].to_f
-        @dids_total_price_provider += r['did_prov_price'].to_f
-        @dids_total_profit += r['did_price'].to_f - r['did_prov_price'].to_f
+        @dids_total_price += r['did_price'].to_d
+        @dids_total_price_provider += r['did_prov_price'].to_d
+        @dids_total_profit += r['did_price'].to_d - r['did_prov_price'].to_d
         @dids_total_calls += r['calls_size'].to_i
       end
     else
@@ -2864,10 +2864,10 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       @dids_total_profit = 0
       @dids_total_calls = 0
       for r in @res
-        @dids_total_price += r['did_price'].to_f
-        @dids_total_price_provider += r['did_prov_price'].to_f
-        @dids_total_inc_price += r['did_inc_price'].to_f
-        @dids_total_profit += r['did_price'].to_f + r['did_prov_price'].to_f + r['did_inc_price'].to_f
+        @dids_total_price += r['did_price'].to_d
+        @dids_total_price_provider += r['did_prov_price'].to_d
+        @dids_total_inc_price += r['did_inc_price'].to_d
+        @dids_total_profit += r['did_price'].to_d + r['did_prov_price'].to_d + r['did_inc_price'].to_d
         @dids_total_calls += r['calls_size'].to_i
       end
     end
@@ -3450,7 +3450,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     @size = Action.set_first_call_for_user(session_from_date, session_till_date)
 
-    @total_pages = (@size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@size.to_d / session[:items_per_page].to_d).ceil
 
     @page = 1
     @page = params[:page].to_i if params[:page]
@@ -3541,7 +3541,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @res3 = ActiveRecord::Base.connection.select_all(sql)
 
     params[:page] ? @page = params[:page].to_i : (@options[:page] ? @page = @options[:page] : @page = 1)
-    @total_pages = (@res3.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@res3.size.to_d / session[:items_per_page].to_d).ceil
 
     @all_res = @res3
     @res3 = []
@@ -3574,7 +3574,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @page = 1
     @page = params[:page].to_i if params[:page]
 
-    @total_pages = (@res.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@res.size.to_d / session[:items_per_page].to_d).ceil
 
     @all_res = @res
     @res = []
@@ -3628,7 +3628,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @ac_size = Action.count(:all, :conditions => [cond.join(" AND ")] + cond_arr, :joins => join, :select => "actions.id")
     @not_reviewed_actions = Action.find(:all, :conditions => [(['processed = 0'] + cond).join(" AND ")] + cond_arr, :joins => join, :limit => 1).size.to_i == 1
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
-    @total_pages = (@ac_size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@ac_size.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
     @search = 1
@@ -3903,7 +3903,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     options[:destination] = (options[:s_destination].to_s.strip.match(/\A[0-9%]+\Z/) ? options[:s_destination].to_s.strip : "")
     options[:caller_id] = options[:s_caller_id] if  options[:s_caller_id]
 
-    exchange_rate = Currency.count_exchange_rate(session[:default_currency], session[:show_currency]).to_f
+    exchange_rate = Currency.count_exchange_rate(session[:default_currency], session[:show_currency]).to_d
     options[:exchange_rate] = exchange_rate
 
     options
@@ -3978,7 +3978,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
   def get_price_exchange(price, cur)
     exrate = Currency.count_exchange_rate(cur, current_user.currency.name)
-    rate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [price.to_f]})
-    return rate_cur.to_f
+    rate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [price.to_d]})
+    return rate_cur.to_d
   end
 end

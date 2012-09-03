@@ -41,7 +41,7 @@ class LcrsController < ApplicationController
     # page params
     @lcrs_size = current_user.load_lcrs(:all, arr).size.to_i
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
-    @total_pages = (@lcrs_size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@lcrs_size.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     @fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
@@ -284,15 +284,15 @@ class LcrsController < ApplicationController
     @page_icon = "provider.png"
 
     @providers = @lcr.providers("asc")
-    sum = 0.to_f
+    sum = 0.to_d
     if params[:pr].to_i == 2
-      params.each { |key, value| sum += value.to_f.abs if key.match("prov_") }
+      params.each { |key, value| sum += value.to_d.abs if key.match("prov_") }
       if sum.to_i == 100.to_i
         params.each { |key, value|
           if key.match("prov_")
             @lcrpr = Lcrprovider.find(:first, :conditions => ["provider_id = ? AND lcr_id= ?", key.to_s.strip.delete("prov_").to_i, @lcr.id])
             if @lcrpr
-              @lcrpr.percent = value.to_f.abs * 100
+              @lcrpr.percent = value.to_d.abs * 100
               @lcrpr.save
             end
           end
@@ -415,7 +415,7 @@ class LcrsController < ApplicationController
     filename = @lcr.make_tariff(options)
     filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
     if filename
-      filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_f)
+      filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
       if params[:test].to_i != 1
         send_file(filename)
       else

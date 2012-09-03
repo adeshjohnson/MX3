@@ -465,19 +465,19 @@ class ApiController < ApplicationController
         for call in @callsm
           @total_callsm = @total_callsm + 1
           @total_durationm += (call.billsec).to_i
-          @total_call_pricem += (call.user_price).to_f
-          @total_call_selfpricem += (call.reseller_price).to_f
+          @total_call_pricem += (call.user_price).to_d
+          @total_call_selfpricem += (call.reseller_price).to_d
         end
       else
         for call in @callsm
           @total_callsm= @total_callsm + 1
           @total_durationm += (call.billsec).to_i
           if call.reseller_id == 0
-            @total_call_pricem = @total_call_pricem + (call.user_price).to_f
+            @total_call_pricem = @total_call_pricem + (call.user_price).to_d
           else
-            @total_call_pricem = @total_call_pricem + (call.reseller_price).to_f
+            @total_call_pricem = @total_call_pricem + (call.reseller_price).to_d
           end
-          @total_call_selfpricem = @total_call_selfpricem + (call.provider_price).to_f
+          @total_call_selfpricem = @total_call_selfpricem + (call.provider_price).to_d
         end
       end
 
@@ -486,19 +486,19 @@ class ApiController < ApplicationController
         for call in @callsd
           @total_callsd=@total_callsd+1
           @total_durationd += (call.billsec).to_i
-          @total_call_priced += (call.user_price).to_f
-          @total_call_selfpriced += (call.reseller_price).to_f
+          @total_call_priced += (call.user_price).to_d
+          @total_call_selfpriced += (call.reseller_price).to_d
         end
       else
         for call in @callsd
           @total_callsd=@total_callsd+1
           @total_durationd += (call.billsec).to_i
           if call.reseller_id == 0
-            @total_call_priced = @total_call_priced + (call.user_price).to_f
+            @total_call_priced = @total_call_priced + (call.user_price).to_d
           else
-            @total_call_priced = @total_call_priced + (call.reseller_price).to_f
+            @total_call_priced = @total_call_priced + (call.reseller_price).to_d
           end
-          @total_call_selfpriced = @total_call_selfpriced + (call.provider_price).to_f
+          @total_call_selfpriced = @total_call_selfpriced + (call.provider_price).to_d
         end
       end
 
@@ -943,7 +943,7 @@ class ApiController < ApplicationController
 
       @tariff = User.find(@current_user.id).tariff
       @dgroups = Destinationgroup.find(:all, :order => "name ASC, desttype ASC")
-      @vat = 0.to_f
+      @vat = 0.to_d
       @rates_cur2 = []
 
       sql = "SELECT rates.* FROM rates, destinations, directions WHERE rates.tariff_id = #{@tariff.id} AND rates.destination_id = destinations.id AND destinations.direction_code = directions.code ORDER by directions.name ASC;"
@@ -1162,7 +1162,7 @@ class ApiController < ApplicationController
     @rate_details = Ratedetail.find(:all, :conditions => "rate_id = #{rate.id.to_s}", :order => "rate DESC")
     if @rate_details.size > 0
       @rate_increment_s=@rate_details[0]['increment_s']
-      @rate_cur, @rate_free = Currency.count_exchange_prices({:exrate => exrate, :prices => [@rate_details[0]['rate'].to_f, @rate_details[0]['connection_fee'].to_f]})
+      @rate_cur, @rate_free = Currency.count_exchange_prices({:exrate => exrate, :prices => [@rate_details[0]['rate'].to_d, @rate_details[0]['connection_fee'].to_d]})
     end
     @rate_details
   end
@@ -1826,9 +1826,9 @@ class ApiController < ApplicationController
       if @user
         user_b = User.find(:first, :conditions => ["id = ? AND owner_id = ? ", values[:user_id], @user.id]) if values[:user_id]
         if user_b
-          old_balance = user_b.balance.to_f
+          old_balance = user_b.balance.to_d
           if values[:balance]
-            user_b.balance = user_b.balance + values[:balance].to_f
+            user_b.balance = user_b.balance + values[:balance].to_d
             if user_b.save
               Action.add_action_hash(@user, {:target_id => user_b.id, :target_type => 'User', :action => 'User balance changed from API', :data => old_balance, :data2 => user_b.balance, :data3 => request.env["REMOTE_ADDR"].to_s})
               doc.page {
@@ -1893,7 +1893,7 @@ class ApiController < ApplicationController
   #                  connection_fee = ratedetails.connection_fee
   #                end
   #
-  #                price =  nice_number((call.user_rate.to_f * (call.duration.to_f / 60.to_f).to_f) + connection_fee.to_f)
+  #                price =  nice_number((call.user_rate.to_d * (call.duration.to_d / 60.to_d).to_d) + connection_fee.to_d)
   #
   #                rate = call.user_rate
   #
@@ -2023,10 +2023,10 @@ class ApiController < ApplicationController
               tax.merge!({:tax3_name => params[:tax3_name].to_s}) if not params[:tax3_name].to_s.blank?
               tax.merge!({:tax4_name => params[:tax4_name].to_s}) if not params[:tax4_name].to_s.blank?
               tax.merge!({:total_tax_name => params[:total_tax_name].to_s}) if params[:total_tax_name]
-              tax.merge!({:tax1_value => params[:tax1_value].to_f}) if params[:tax1_value]
-              tax.merge!({:tax2_value => params[:tax2_value].to_f}) if params[:tax2_value]
-              tax.merge!({:tax3_value => params[:tax3_value].to_f}) if params[:tax3_value]
-              tax.merge!({:tax4_value => params[:tax4_value].to_f}) if params[:tax4_value]
+              tax.merge!({:tax1_value => params[:tax1_value].to_d}) if params[:tax1_value]
+              tax.merge!({:tax2_value => params[:tax2_value].to_d}) if params[:tax2_value]
+              tax.merge!({:tax3_value => params[:tax3_value].to_d}) if params[:tax3_value]
+              tax.merge!({:tax4_value => params[:tax4_value].to_d}) if params[:tax4_value]
               tax.merge!({:compound_tax => params[:compound_tax].to_i}) if params[:compound_tax]
 
               user_u.update_from_edit(par, @user, tax, monitoring_enabled_for(@user), rec_active?, 1)
@@ -2526,7 +2526,7 @@ class ApiController < ApplicationController
         if (!@is_duration_infinity or !@is_round_by_bigger_than_from_plus_duration) and (!@start.include?(rate[:rate_start_time]) or !@end.include?(rate[:rate_end_time]) or !@daytype.include?(rate[:daytype].to_s))
           arate_new = {}
           arate_new[:rate_id] = rate_id
-          arate_new[:price] = rate[:rate_price].to_f
+          arate_new[:price] = rate[:rate_price].to_d
           arate_new[:round] = rate[:rate_round_by].to_i
 
           arate_new[:artype] = rate[:rate_type] ? rate[:rate_type].to_s : "minute"
@@ -2632,7 +2632,7 @@ class ApiController < ApplicationController
         if (!@is_duration_infinity or !@is_round_by_bigger_than_from_plus_duration) and (!@start.include?(rate[:rate_start_time]) or !@end.include?(rate[:rate_end_time]) or !@daytype.include?(rate[:daytype].to_s))
           arate_new = {}
           arate_new[:rate_id] = rate_id
-          arate_new[:price] = rate[:rate_price].to_f
+          arate_new[:price] = rate[:rate_price].to_d
           arate_new[:round] = rate[:rate_round_by].to_i
 
           arate_new[:artype] = rate[:rate_type] ? rate[:rate_type].to_s : "minute"
@@ -3175,21 +3175,21 @@ class ApiController < ApplicationController
 
             pttype = "from_api : #{values[:paymenttype]}"
             if values[:tax_in_amount].to_i == 1
-              gross = values[:amount].to_f
-              amount = user.get_tax.count_amount_without_tax(gross).to_f
+              gross = values[:amount].to_d
+              amount = user.get_tax.count_amount_without_tax(gross).to_d
             else
-              amount = values[:amount].to_f
-              gross = user.get_tax.apply_tax(amount).to_f
+              amount = values[:amount].to_d
+              gross = user.get_tax.apply_tax(amount).to_d
             end
             tax = gross - amount
             comfirm = Confline.get_value("API_payment_confirmation").to_i
-            paym = Payment.create_for_user(user, {:pending_reason => comfirm == 1 ? 'Waiting for confirmation' : "completed", :paymenttype => pttype, :currency => currency.name, :gross => gross.to_f, :tax => tax, :amount => amount.to_f, :transaction_id => values[:transaction], :payer_email => values[:payer_email], :shipped_at => values[:shipped_at], :fee => values[:fee]})
+            paym = Payment.create_for_user(user, {:pending_reason => comfirm == 1 ? 'Waiting for confirmation' : "completed", :paymenttype => pttype, :currency => currency.name, :gross => gross.to_d, :tax => tax, :amount => amount.to_d, :transaction_id => values[:transaction], :payer_email => values[:payer_email], :shipped_at => values[:shipped_at], :fee => values[:fee]})
             paym.completed = comfirm == 1 ? 0 : 1
             paym.description = values[:description].to_s
             if paym.save
               if comfirm.to_i == 0
                 exchange_rate = Currency.count_exchange_rate(Currency.get_default.name, currency.name)
-                curr_amount = amount / exchange_rate.to_f
+                curr_amount = amount / exchange_rate.to_d
                 userrr = User.current
                 User.current = nil
                 user.balance += curr_amount
@@ -3260,7 +3260,7 @@ class ApiController < ApplicationController
         if callerid.blank?
           doc.error("Callerid must be specified")
         else
-          amount = values[:amount].to_f
+          amount = values[:amount].to_d
           pin = values[:pin].to_s
           valid_pin_supplied = (not pin.blank?)
           cardgroup_id = values[:cardgroup_id].to_i
@@ -3425,7 +3425,7 @@ class ApiController < ApplicationController
                 if cardgroup
                   card.callerid = nil
                   card.disable
-                  original_balance = card.balance.to_f
+                  original_balance = card.balance.to_d
                   if card.add_to_balance(card.balance * -1)
                     #Note that we do not call card.save method intentionaly, cause card is saved in
                     #add_to_balance method. also note order in wich card methods are called,
@@ -3614,7 +3614,7 @@ class ApiController < ApplicationController
             #4 * We find device by callerid, device.user.balance+=amount
             logger.fatal "I%%%%%%%%%%%%%%%%%%%%%%%%4%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
             logger.fatal values.to_yaml
-            if device.user.add_to_balance(device.user.get_tax.count_amount_without_tax(values[:amount].to_f), 'card_refill')
+            if device.user.add_to_balance(device.user.get_tax.count_amount_without_tax(values[:amount].to_d), 'card_refill')
               doc.response {
                 doc.status("ok")
                 doc.device_id(device.id)
@@ -3643,7 +3643,7 @@ class ApiController < ApplicationController
                     card.add_to_balance(card.balance * -1, false)
                     card.disable
                     card.callerid = nil
-                    amount = values[:amount].to_f * Currency.count_exchange_rate(cardgroup.tell_balance_in_currency, Currency.get_default).to_f
+                    amount = values[:amount].to_d * Currency.count_exchange_rate(cardgroup.tell_balance_in_currency, Currency.get_default).to_d
                     amount = cardgroup.get_tax.count_amount_without_tax(original_balance + amount)
                     if card.save
                       card_n = cardgroup.create_card({:balance => amount, :callerid => values[:callerid]})
@@ -3669,7 +3669,7 @@ class ApiController < ApplicationController
                     logger.fatal "I%%%%%%%%%%%%%%%%%%%%%%%%2%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
                     logger.fatal values.to_yaml
                     card.sell
-                    amount = values[:amount].to_f * Currency.count_exchange_rate(card.cardgroup.tell_balance_in_currency, Currency.get_default).to_f
+                    amount = values[:amount].to_d * Currency.count_exchange_rate(card.cardgroup.tell_balance_in_currency, Currency.get_default).to_d
                     amount = cardgroup.get_tax.count_amount_without_tax(amount)
                     if card.add_to_balance(amount)
                       respond_to_successful_card_operation(doc, card)
@@ -3687,7 +3687,7 @@ class ApiController < ApplicationController
                 cardgroup = Cardgroup.find(:first, :conditions => {:id => values[:cardgroup_id], :owner_id => @current_user.get_correct_owner_id})
                 if cardgroup
                   logger.fatal cardgroup.tell_balance_in_currency
-                  amount = values[:amount].to_f * Currency.count_exchange_rate(cardgroup.tell_balance_in_currency, Currency.get_default).to_f
+                  amount = values[:amount].to_d * Currency.count_exchange_rate(cardgroup.tell_balance_in_currency, Currency.get_default).to_d
                   amount = cardgroup.get_tax.count_amount_without_tax(amount)
                   card_n = cardgroup.create_card({:balance => amount, :callerid => values[:callerid]})
 
@@ -3839,7 +3839,7 @@ class ApiController < ApplicationController
               if params[:src]
                 if params[:message]   # atskirai
                   @user_tariff = @user.sms_tariff
-                  @number_of_messages = (URI.unescape(params[:message]).size.to_f / 160).ceil
+                  @number_of_messages = (URI.unescape(params[:message]).size.to_d / 160).ceil
                   sms = SmsMessage.new
                   sms.sending_date = Time.now
                   sms.user_id = @user.id
@@ -3847,7 +3847,7 @@ class ApiController < ApplicationController
                   sms.number = params[:dst]
                   sms.save
                   begin
-                    sms.sms_send(@user, @user_tariff, params[:dst], @lcr, @number_of_messages.to_f, URI.unescape(params[:message]))
+                    sms.sms_send(@user, @user_tariff, params[:dst], @lcr, @number_of_messages.to_d, URI.unescape(params[:message]))
                     if sms.status_code.to_s == "0"
                       doc.response {
                         doc.status('ok')

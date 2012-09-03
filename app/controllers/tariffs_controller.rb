@@ -242,7 +242,7 @@ class TariffsController < ApplicationController
       @rates = Rate.includes(:ratedetails, {:destination => :direction}, :tariff).where(["rates.tariff_id=? AND directions.name like ?", @tariff.id, @st+"%"]).order("directions.name ASC, destinations.prefix ASC").offset(0).limit(1000000).all
     end
 
-    @total_pages = (@rates.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@rates.size.to_d / session[:items_per_page].to_d).ceil
     @all_rates = @rates
     @rates = []
 
@@ -353,7 +353,7 @@ class TariffsController < ApplicationController
     @destinations = @tariff.free_destinations_by_direction(@direction)
     #    MorLog.my_debug(@destinations)
     @total_items = @destinations.size
-    @total_pages = (@total_items.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@total_items.to_d / session[:items_per_page].to_d).ceil
     istart = (@page-1)*session[:items_per_page]
     iend = (@page)*session[:items_per_page]-1
     #    MorLog.my_debug(istart)
@@ -500,11 +500,11 @@ class TariffsController < ApplicationController
       rd = Ratedetail.new
       rd.start_time = "00:00:00"
       rd.end_time = "23:59:59"
-      rd.rate = 0.to_f
-      rd.connection_fee = 0.to_f
+      rd.rate = 0.to_d
+      rd.connection_fee = 0.to_d
       rd.rate_id = params[:id].to_i
-      rd.increment_s = 0.to_f
-      rd.min_time = 0.to_f
+      rd.increment_s = 0.to_d
+      rd.min_time = 0.to_d
       rd.daytype = "WD"
       rd.save
     end
@@ -1368,12 +1368,12 @@ class TariffsController < ApplicationController
             csv_file.each_with_index { |row, i|
               if update_rate and update_rate[i]
                 prefix = row[session[:imp_prefix]].to_s.gsub(/\s/, '')
-                rate = row[session[:imp_rate]].to_s.gsub(@dec, ".").to_f #.gsub!(/[^\d\.]/, '')
+                rate = row[session[:imp_rate]].to_s.gsub(@dec, ".").to_d #.gsub!(/[^\d\.]/, '')
                 logger.fatal row[session[:imp_rate]]
-                logger.fatal row[session[:imp_rate]].to_s.gsub(@dec, ".").to_f
+                logger.fatal row[session[:imp_rate]].to_s.gsub(@dec, ".").to_d
                 connection_fee = 0
-                connection_fee = row[session[:imp_connection_fee]].to_s.gsub(@dec, ".").to_f if session[:imp_connection_fee] >= 0
-                connection_fee = session[:manual_connection_fee].to_s.gsub(@dec, ".").to_f if session[:manual_connection_fee].to_s.length > 0
+                connection_fee = row[session[:imp_connection_fee]].to_s.gsub(@dec, ".").to_d if session[:imp_connection_fee] >= 0
+                connection_fee = session[:manual_connection_fee].to_s.gsub(@dec, ".").to_d if session[:manual_connection_fee].to_s.length > 0
 
                 increment = 1
                 increment = row[session[:imp_inc]].to_i if session[:imp_inc] >= 0
@@ -1480,11 +1480,11 @@ class TariffsController < ApplicationController
               if status and status[i] > 0 and status[i] < 10 and not update_rate[i] #and i < session[:file_lines]
                 prefix = row[session[:imp_prefix]].to_s.gsub(/\s/, '')
                 logger.fatal row[session[:imp_rate]]
-                logger.fatal row[session[:imp_rate]].to_s.gsub(@dec, ".").to_f
-                ratev = row[session[:imp_rate]].to_s.gsub(@dec, ".").to_f #.gsub!(/[^\d\.]/, '')
+                logger.fatal row[session[:imp_rate]].to_s.gsub(@dec, ".").to_d
+                ratev = row[session[:imp_rate]].to_s.gsub(@dec, ".").to_d #.gsub!(/[^\d\.]/, '')
                 connection_fee = 0
-                connection_fee = row[session[:imp_connection_fee]].to_s.gsub(@dec, ".").to_f if session[:imp_connection_fee] >= 0
-                connection_fee = session[:manual_connection_fee].to_s.gsub(@dec, ".").to_f if session[:manual_connection_fee].to_s.length > 0
+                connection_fee = row[session[:imp_connection_fee]].to_s.gsub(@dec, ".").to_d if session[:imp_connection_fee] >= 0
+                connection_fee = session[:manual_connection_fee].to_s.gsub(@dec, ".").to_d if session[:manual_connection_fee].to_s.length > 0
 
                 increment = 1
                 increment = row[session[:imp_inc]].to_i if session[:imp_inc] >= 0
@@ -2062,7 +2062,7 @@ class TariffsController < ApplicationController
 
     #@rates = Rate.find(:all, :conditions=>["rates.tariff_id = ? #{con}", @tariff.id], :include => [:aratedetails, :destinationgroup ], :order=>"destinationgroups.name, destinationgroups.desttype ASC" )
     @res = ActiveRecord::Base.connection.select_all(sql)
-    @options[:total_pages] = (@res.size.to_f / @items_per_page.to_f).ceil
+    @options[:total_pages] = (@res.size.to_d / @items_per_page.to_d).ceil
     @options[:page] = 1 if @options[:page] > @options[:total_pages]
     istart = (@options[:page]-1)*@items_per_page
     iend = (@options[:page])*@items_per_page-1
@@ -2400,7 +2400,7 @@ class TariffsController < ApplicationController
         duration = 0 if artype == "event"
 
         round = params[:round].to_i
-        price = params[:price].to_f
+        price = params[:price].to_d
         round = 1 if round < 1
 
         @ard.from = params[:from]
@@ -2409,9 +2409,9 @@ class TariffsController < ApplicationController
         @ard.round = round
         @ard.price = price
       else
-        @ard.price = params["price_#{@ard.id}".to_sym].to_f
+        @ard.price = params["price_#{@ard.id}".to_sym].to_d
         @ard.round = params["round_#{@ard.id}".to_sym].to_i
-        #@ard.ghost_percent = params["ghost_percent_#{@ard.id}".to_sym].to_f if mor_11_extend?
+        #@ard.ghost_percent = params["ghost_percent_#{@ard.id}".to_sym].to_d if mor_11_extend?
       end
       @ard.save
       flash[:status] = _('Rate_updated')
@@ -2441,7 +2441,7 @@ class TariffsController < ApplicationController
     duration = 0 if artype == "event"
 
     round = params[:round].to_i
-    price = params[:price].to_f
+    price = params[:price].to_d
     round = 1 if round < 1
 
     rate_id = @rate.id
@@ -2504,7 +2504,7 @@ class TariffsController < ApplicationController
       price = params[("rate" + dg.id.to_s).intern] if params[("rate" + dg.id.to_s).intern]
       round = params[("round" + dg.id.to_s).intern].to_i
       round = 1 if round < 0
-      #      if price.to_f != 0 or round != 1
+      #      if price.to_d != 0 or round != 1
       rrate = dg.rate(@tariff.id)
       unless price.blank?
         #let's create ard
@@ -2520,7 +2520,7 @@ class TariffsController < ApplicationController
           ard.duration = -1
           ard.artype = "minute"
           ard.round = round
-          ard.price = price.to_f
+          ard.price = price.to_d
           ard.rate_id = rate.id
           ard.save
 
@@ -2543,7 +2543,7 @@ class TariffsController < ApplicationController
                 flash[:notice] = _('Rate_not_updated_round_by_is_too_big') + ': '+ "#{dg.name}"
                 redirect_to :action => 'user_rates_list', :id => @tariff.id, :page => params[:page], :st => params[:st], :s_prefix => params[:s_prefix] and return false
               else
-                ard.price = price.to_f
+                ard.price = price.to_d
                 ard.round = round
                 ard.save
               end
@@ -2608,13 +2608,13 @@ class TariffsController < ApplicationController
     end
 
     if @tariff.purpose == 'user'
-      @total_pages = (@dgroupse.size.to_f / session[:items_per_page].to_f).ceil
+      @total_pages = (@dgroupse.size.to_d / session[:items_per_page].to_d).ceil
       #@rates = @tariff.rates_by_st(@st, 0, 10000)
     else
 
 
       @rates = @tariff.rates_by_st(@st, 0, 10000)
-      @total_pages = (@rates.size.to_f / session[:items_per_page].to_f).ceil
+      @total_pages = (@rates.size.to_d / session[:items_per_page].to_d).ceil
 
       @all_rates = @rates
       @rates = []
@@ -2898,10 +2898,10 @@ class TariffsController < ApplicationController
       flash[:notice] = _('Please_enter_amount_or_percent')
       redirect_to :action => 'make_user_tariff_wholesale', :id => @ptariff.id and return false
     end
-    @add_amount = params[:add_amount].to_f
-    @add_percent = params[:add_percent].to_f
-    @add_confee_amount = params[:add_confee_amount].to_f
-    @add_confee_percent = params[:add_confee_percent].to_f
+    @add_amount = params[:add_amount].to_d
+    @add_percent = params[:add_percent].to_d
+    @add_confee_amount = params[:add_confee_amount].to_d
+    @add_confee_percent = params[:add_confee_percent].to_d
     if session[:usertype] == "admin"
       @t_type = params[:t_type] if params[:t_type].to_s.length > 0
     end
@@ -3061,7 +3061,7 @@ class TariffsController < ApplicationController
       @arates = @crates if @crates[0]
     end
     if @arates[0]
-      @arate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [@arates[0].price.to_f]}) if @arates[0]
+      @arate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [@arates[0].price.to_d]}) if @arates[0]
     end
   end
 
@@ -3179,7 +3179,7 @@ class TariffsController < ApplicationController
       tariff = Tariff.find(t)
       tariff_names << tariff.name
       er = count_exchange_rate(curr, tariff.currency)
-      exch_rates << er.to_f
+      exch_rates << er.to_d
       if tariff.rates
         tariff_rates << tariff.rates.size
       else
@@ -3269,15 +3269,15 @@ class TariffsController < ApplicationController
       for r in res
 
         rate = nil
-        rate = r[i].to_f / exch_rates[j] if r[i] and exch_rates[j]
+        rate = r[i].to_d / exch_rates[j] if r[i] and exch_rates[j]
 
 
-        if rate and ((min == nil) or (min.to_f > rate.to_f))
+        if rate and ((min == nil) or (min.to_d > rate.to_d))
           min = rate
           minp = j
         end
 
-        if rate and ((max == nil) or (max.to_f < rate.to_f))
+        if rate and ((max == nil) or (max.to_d < rate.to_d))
           max = rate
           maxp = j
         end
@@ -3472,7 +3472,7 @@ class TariffsController < ApplicationController
     @rate_details = Ratedetail.find(:all, :conditions => ["rate_id = ?", rate.id], :order => "rate DESC")
     if @rate_details.size > 0
       @rate_increment_s=@rate_details[0]['increment_s']
-      @rate_cur, @rate_free = Currency.count_exchange_prices({:exrate => exrate, :prices => [@rate_details[0]['rate'].to_f, @rate_details[0]['connection_fee'].to_f]})
+      @rate_cur, @rate_free = Currency.count_exchange_prices({:exrate => exrate, :prices => [@rate_details[0]['rate'].to_d, @rate_details[0]['connection_fee'].to_d]})
     end
     @rate_details
   end

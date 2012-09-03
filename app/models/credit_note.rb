@@ -72,7 +72,7 @@ class CreditNote < ActiveRecord::Base
 
   def price= price
     if User.current and User.current.currency
-      converted_price = (price.to_f / User.current.currency.exchange_rate.to_f).to_f
+      converted_price = (price.to_d / User.current.currency.exchange_rate.to_d).to_d
     else
       converted_price = price
     end
@@ -90,9 +90,9 @@ class CreditNote < ActiveRecord::Base
   def price
     price = read_attribute(:price)
     if User.current and User.current.currency
-      price.to_f * User.current.currency.exchange_rate.to_f
+      price.to_d * User.current.currency.exchange_rate.to_d
     else
-      price.to_f
+      price.to_d
     end
   end
 
@@ -106,9 +106,9 @@ class CreditNote < ActiveRecord::Base
   def price_with_vat
     price = read_attribute(:price_with_vat)
     if User.current and User.current.currency
-      price.to_f * User.current.currency.exchange_rate.to_f
+      price.to_d * User.current.currency.exchange_rate.to_d
     else
-      price.to_f
+      price.to_d
     end
   end
 
@@ -247,7 +247,7 @@ class CreditNote < ActiveRecord::Base
   def calculate_price_with_vat
     if @tax and self.price
       if User.current and User.current.currency
-        converted_price = (self.price.to_f / User.current.currency.exchange_rate.to_f).to_f
+        converted_price = (self.price.to_d / User.current.currency.exchange_rate.to_d).to_d
       else
         converted_price = self.price
       end

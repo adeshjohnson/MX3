@@ -14,7 +14,7 @@ class DestinationsController < ApplicationController
     @page = params[:page].to_i if params[:page]
     items_per_page = session[:items_per_page]
     @destinations2 = @direction.destinations_with_groups
-    @total_pages = (@destinations2.size.to_f / items_per_page).ceil
+    @total_pages = (@destinations2.size.to_d / items_per_page).ceil
 
     if @page > @total_pages
       redirect_to :action => :list, :page => @total_pages
@@ -161,7 +161,7 @@ class DestinationsController < ApplicationController
       res2 = ActiveRecord::Base.connection.select_all(sqll)
       @a_calls2[i] = res2[0]["calls2"].to_i
 
-      @a_ars2[i] = (@a_calls[i].to_f / @a_calls2[i]) * 100 if @a_calls2[i] > 0
+      @a_ars2[i] = (@a_calls[i].to_d / @a_calls2[i]) * 100 if @a_calls2[i] > 0
       @a_ars[i] = nice_number @a_ars2[i]
       @sdate += (60 * 60 * 24)
       i+=1

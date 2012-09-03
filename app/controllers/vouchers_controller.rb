@@ -89,7 +89,7 @@ class VouchersController < ApplicationController
     @total_vouchers = Voucher.count(:all, :conditions => [cond.join(" AND ")]+var, :order => "use_date DESC, active_till ASC")
     MorLog.my_debug("TW: #{@total_vouchers}")
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
-    @total_pages = (@total_vouchers.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@total_vouchers.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     @fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
@@ -157,14 +157,14 @@ class VouchersController < ApplicationController
 
     @vouchers = []
 
-    if credit.to_f <= 0 or session_from_date.to_date <= Time.now.to_date
+    if credit.to_d <= 0 or session_from_date.to_date <= Time.now.to_date
       @amaunt = params[:amount_total]
       @credit = params[:credit]
       @tag = params[:tag]
       @curr = params[:currency]
       @currencies = Currency.get_active
       @tax = Tax.new(tax)
-      if credit.to_f <= 0
+      if credit.to_d <= 0
         flash[:notice] = _('Please_enter_credit')
         render :action => 'voucher_new' and return false
       end
@@ -182,7 +182,7 @@ class VouchersController < ApplicationController
       v.number = voucher_number(confline("Voucher_Number_Length").to_i)
       v.tag = Time.now.strftime("%Y%m%d%H%M%S")
       v.tag = params[:tag] if params[:tag].length > 0
-      v.credit_with_vat = params[:credit].to_f
+      v.credit_with_vat = params[:credit].to_d
       v.currency = params[:currency]
       v.active_till = session_from_date
       v.user_id = -1
@@ -213,7 +213,7 @@ class VouchersController < ApplicationController
         v.number = voucher_number(confline("Voucher_Number_Length").to_i)
         v.tag = Time.now.strftime("%Y%m%d%H%M%S")
         v.tag = params[:tag] if params[:tag].length > 0
-        v.credit_with_vat = params[:credit].to_f
+        v.credit_with_vat = params[:credit].to_d
         v.currency = params[:currency]
         v.active_till = session_from_date
         v.user_id = -1
@@ -311,12 +311,12 @@ class VouchersController < ApplicationController
 
     # active == 1 so lets do what must be done
     # user's balance
-    @user.balance += @credit_in_default_currency * User.current.currency.exchange_rate.to_f
+    @user.balance += @credit_in_default_currency * User.current.currency.exchange_rate.to_d
     @user.save
 
     if @user.owner_id != 0
       ruser = User.find_by_id(@user.owner_id)
-      ruser.balance += @credit_in_default_currency * User.current.currency.exchange_rate.to_f
+      ruser.balance += @credit_in_default_currency * User.current.currency.exchange_rate.to_d
       ruser.save
       pr = Payment.new({:tax => (@voucher.credit_with_vat - @credit_in_default_currency), :gross => @credit_in_default_currency, :paymenttype => "voucher", :amount => @voucher.credit_with_vat, :currency => @voucher.currency, :date_added => Time.now, :shipped_at => Time.now, :completed => 1, :user_id => ruser.id, :first_name => ruser.first_name, :last_name => ruser.last_name})
       pr.save

@@ -168,7 +168,7 @@ class Cardgroup < ActiveRecord::Base
   def price
     b = read_attribute(:price)
     if User.current and User.current.currency
-      b.to_f * User.current.currency.exchange_rate.to_f
+      b.to_d * User.current.currency.exchange_rate.to_d
     else
       b
     end
@@ -176,7 +176,7 @@ class Cardgroup < ActiveRecord::Base
 
   def price= value
     if User.current and User.current.currency
-      b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
+      b = (value.to_d / User.current.currency.exchange_rate.to_d).to_d
     else
       b = value
     end
@@ -187,7 +187,7 @@ class Cardgroup < ActiveRecord::Base
   def setup_fee
     b = read_attribute(:setup_fee)
     if User.current and User.current.currency
-      b.to_f * User.current.currency.exchange_rate.to_f
+      b.to_d * User.current.currency.exchange_rate.to_d
     else
       b
     end
@@ -195,7 +195,7 @@ class Cardgroup < ActiveRecord::Base
 
   def setup_fee= value
     if User.current and User.current.currency
-      b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
+      b = (value.to_d / User.current.currency.exchange_rate.to_d).to_d
     else
       b = value
     end
@@ -205,7 +205,7 @@ class Cardgroup < ActiveRecord::Base
   def daily_charge
     b = read_attribute(:daily_charge)
     if User.current and User.current.currency
-      b.to_f * User.current.currency.exchange_rate.to_f
+      b.to_d * User.current.currency.exchange_rate.to_d
     else
       b
     end
@@ -213,7 +213,7 @@ class Cardgroup < ActiveRecord::Base
 
   def daily_charge= value
     if User.current and User.current.currency
-      b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
+      b = (value.to_d / User.current.currency.exchange_rate.to_d).to_d
     else
       b = value
     end
@@ -221,8 +221,8 @@ class Cardgroup < ActiveRecord::Base
   end
 
   def fix_when_is_rendering
-    self.setup_fee = setup_fee * User.current.currency.exchange_rate.to_f
-    self.daily_charge = daily_charge * User.current.currency.exchange_rate.to_f
+    self.setup_fee = setup_fee * User.current.currency.exchange_rate.to_d
+    self.daily_charge = daily_charge * User.current.currency.exchange_rate.to_d
   end
 
 

@@ -181,10 +181,10 @@ class Confline < ActiveRecord::Base
         :tax3_name => Confline.get_value("Tax_3", owner_id).to_s,
         :tax4_name => Confline.get_value("Tax_4", owner_id).to_s,
         :total_tax_name => Confline.get_value("Total_tax_name", owner_id).to_s,
-        :tax1_value => Confline.get_value("Tax_1_Value", owner_id).to_f,
-        :tax2_value => Confline.get_value("Tax_2_Value", owner_id).to_f,
-        :tax3_value => Confline.get_value("Tax_3_Value", owner_id).to_f,
-        :tax4_value => Confline.get_value("Tax_4_Value", owner_id).to_f
+        :tax1_value => Confline.get_value("Tax_1_Value", owner_id).to_d,
+        :tax2_value => Confline.get_value("Tax_2_Value", owner_id).to_d,
+        :tax3_value => Confline.get_value("Tax_3_Value", owner_id).to_d,
+        :tax4_value => Confline.get_value("Tax_4_Value", owner_id).to_d
     }
     Tax.new(tax)
   end

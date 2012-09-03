@@ -44,8 +44,8 @@ class RecordingsController < ApplicationController
 
     temp = []
     for rec in recs
-      date_before = Time.at(rec.datetime.to_f-2).strftime("%Y-%m-%d %H:%M:%S")
-      date_after = Time.at(rec.datetime.to_f+2).strftime("%Y-%m-%d %H:%M:%S")
+      date_before = Time.at(rec.datetime.to_d-2).strftime("%Y-%m-%d %H:%M:%S")
+      date_after = Time.at(rec.datetime.to_d+2).strftime("%Y-%m-%d %H:%M:%S")
       #        my_debug date_before.to_s+date_after.to_s
       if call=Call.find(:first, :conditions => ["src_device_id = ? AND dst_device_id = ? AND calldate BETWEEN ? AND ?", rec.src_device_id, rec.dst_device_id, date_before, date_after])
         rec.call_id = call.id
@@ -184,7 +184,7 @@ class RecordingsController < ApplicationController
 
     @size = Recording.count(:conditions => [conditions_str.join(' AND ')] +conditions_var).to_i
     @items_per_page = Confline.get_value("Items_Per_Page").to_i
-    @total_pages = (@size.to_f / @items_per_page.to_f).ceil
+    @total_pages = (@size.to_d / @items_per_page.to_d).ceil
     @recordings = Recording.find(:all, :include => :call, :conditions => [conditions_str.join(' AND ')] +conditions_var, :limit => @items_per_page, :offset => (@page-1)*@items_per_page, :order => "datetime DESC")
     @page_select_params = {
         :s_source => @search_source,
@@ -243,7 +243,7 @@ class RecordingsController < ApplicationController
 
     @size = Recording.where([conditions_str.join(' AND ')] +conditions_var).count.to_i
     @items_per_page = Confline.get_value("Items_Per_Page").to_i
-    @total_pages = (@size.to_f / @items_per_page.to_f).ceil
+    @total_pages = (@size.to_d / @items_per_page.to_d).ceil
     @recordings = Recording.includes(:call).where([conditions_str.join(' AND ')] +conditions_var).limit(@items_per_page).offset((@page-1)*@items_per_page).order("calls.calldate DESC").all
     @page_select_params = {
         :s_source => @search_source,
@@ -388,7 +388,7 @@ class RecordingsController < ApplicationController
       @users = User.find(:all, :conditions => cond, :order => "users.first_name ASC", :limit => @items_per_page, :offset => (@page-1)*@items_per_page) if cond.length > 0
     end
 
-    @total_pages = (@size / @items_per_page.to_f).ceil
+    @total_pages = (@size / @items_per_page.to_d).ceil
     @page_select_params = {
         :s_username => @search_username,
         :s_first_name => @search_fname,
@@ -492,7 +492,7 @@ class RecordingsController < ApplicationController
       if new != old
         user.recording_enabled = params[:"recording_enabled_#{num}"].to_i
         user.recording_forced_enabled = params[:"recording_forced_enabled_#{num}"].to_i
-        user.recording_hdd_quota = params[:"recording_hdd_quota_#{num}"].to_f * 1048576
+        user.recording_hdd_quota = params[:"recording_hdd_quota_#{num}"].to_d * 1048576
         user.recordings_email = params[:"recordings_email_#{num}"]
         user.save
       end

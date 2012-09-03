@@ -732,7 +732,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
         flash[:notice] = _('Tariff_not_found')
         redirect_to :action => 'call_tracing' and return false
       end
-      rr['e_rate'] = tariff.exchange_rate(@user_owner.currency.name).to_f
+      rr['e_rate'] = tariff.exchange_rate(@user_owner.currency.name).to_d
 
       if @user_owner.is_reseller? and @user_owner.is_allow_manage_providers? and prov.common_use == 1
         #t=Tariff.find_by_id(current_user.tariff_id)
@@ -742,7 +742,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
           flash[:notice] = _('Tariff_not_found')
           redirect_to :action => 'call_tracing' and return false
         end
-        rr['e_rate'] = t.exchange_rate(@user_owner.currency.name).to_f
+        rr['e_rate'] = t.exchange_rate(@user_owner.currency.name).to_d
         if t.purpose == "user"
           sql = "SELECT aratedetails.price as 'rate',aratedetails.round as 'increment_s'  " +
               "FROM  rates 	JOIN aratedetails ON (aratedetails.rate_id = rates.id  AND '#{time}' BETWEEN aratedetails.start_time AND aratedetails.end_time AND (aratedetails.daytype = '#{daytype}' OR aratedetails.daytype = ''))  "+
@@ -769,7 +769,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
           flash[:notice] = _('Tariff_not_found')
           redirect_to :action => 'call_tracing' and return false
         end
-        rr['e_rate'] = t.exchange_rate(@user_owner.currency.name).to_f
+        rr['e_rate'] = t.exchange_rate(@user_owner.currency.name).to_d
         if t.purpose == "user"
           sql = "SELECT aratedetails.price as 'rate',aratedetails.round as 'increment_s'  " +
               "FROM  rates 	JOIN aratedetails ON (aratedetails.rate_id = rates.id  AND '#{time}' BETWEEN aratedetails.start_time AND aratedetails.end_time AND (aratedetails.daytype = '#{daytype}' OR aratedetails.daytype = ''))  "+
@@ -1014,7 +1014,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     update_confline("Default_CID_Number", params[:default_cid_number])
     update_confline("Send_Email_To_User_After_Registration", params[:send_email_to_user_after_registration])
     update_confline("Send_Email_To_Admin_After_Registration", params[:send_email_to_admin_after_registration])
-    Confline.set_value("Default_Balance_for_new_user", params[:default_balance_for_new_user].to_f)
+    Confline.set_value("Default_Balance_for_new_user", params[:default_balance_for_new_user].to_d)
     if params[:enable_recaptcha].to_i == 0 or (params[:enable_recaptcha].to_i == 1 and !params[:recaptcha_public_key].to_s.blank? and !params[:recaptcha_private_key].to_s.blank?)
       Confline.set_value("reCAPTCHA_enabled", params[:enable_recaptcha].to_i)
       Confline.set_value("ReCAPTCHA_public_key", params[:recaptcha_public_key].to_s.strip)
@@ -1162,10 +1162,10 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Confline.set_value("Tax_2", params[:tax2name])
     Confline.set_value("Tax_3", params[:tax3name])
     Confline.set_value("Tax_4", params[:tax4name])
-    Confline.set_value("Tax_1_Value", params[:tax1value].to_f)
-    Confline.set_value("Tax_2_Value", params[:tax2value].to_f)
-    Confline.set_value("Tax_3_Value", params[:tax3value].to_f)
-    Confline.set_value("Tax_4_Value", params[:tax4value].to_f)
+    Confline.set_value("Tax_1_Value", params[:tax1value].to_d)
+    Confline.set_value("Tax_2_Value", params[:tax2value].to_d)
+    Confline.set_value("Tax_3_Value", params[:tax3value].to_d)
+    Confline.set_value("Tax_4_Value", params[:tax4value].to_d)
     Confline.set_value("Total_tax_name", params[:total_tax])
     Confline.set_value("Tax_compound", params[:compound_tax].to_i)
 
@@ -1375,10 +1375,10 @@ Sets default tax values for users or cardgroups
         :tax3_name => Confline.get_value("Tax_3", owner),
         :tax4_name => Confline.get_value("Tax_4", owner),
         :total_tax_name => Confline.get_value("Total_tax_name", owner),
-        :tax1_value => Confline.get_value("Tax_1_Value", owner).to_f,
-        :tax2_value => Confline.get_value("Tax_2_Value", owner).to_f,
-        :tax3_value => Confline.get_value("Tax_3_Value", owner).to_f,
-        :tax4_value => Confline.get_value("Tax_4_Value", owner).to_f,
+        :tax1_value => Confline.get_value("Tax_1_Value", owner).to_d,
+        :tax2_value => Confline.get_value("Tax_2_Value", owner).to_d,
+        :tax3_value => Confline.get_value("Tax_3_Value", owner).to_d,
+        :tax4_value => Confline.get_value("Tax_4_Value", owner).to_d,
         :compound_tax => Confline.get_value("Tax_compound", owner).to_i
     }
 
@@ -1514,8 +1514,8 @@ Sets default tax values for users or cardgroups
   def settings_payments_change
     @page_title = _('Payment_Settings')
     @page_icon = 'cog.png'
-    default_amount = (params[:paypal_default_amount].to_f > params[:paypal_max_amount].to_f) ? params[:paypal_max_amount] : params[:paypal_default_amount]
-    default_amount = (params[:paypal_default_amount].to_f < params[:paypal_min_amount].to_f) ? params[:paypal_min_amount] : default_amount
+    default_amount = (params[:paypal_default_amount].to_d > params[:paypal_max_amount].to_d) ? params[:paypal_max_amount] : params[:paypal_default_amount]
+    default_amount = (params[:paypal_default_amount].to_d < params[:paypal_min_amount].to_d) ? params[:paypal_min_amount] : default_amount
 
     #Vouchers
     Confline.set_value("Vouchers_Enabled", params[:vouchers_enabled].to_i, session[:user_id])
@@ -1616,7 +1616,7 @@ Sets default tax values for users or cardgroups
     @page_title = _('Addons_Settings')
     @page_icon = 'cog.png'
     if recordings_addon_active?
-      @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => "deleted = 0")[0]["total_size"].to_f
+      @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => "deleted = 0")[0]["total_size"].to_d
     end
   end
 
@@ -1651,7 +1651,7 @@ Sets default tax values for users or cardgroups
 
       Confline.set_value("Recordings_addon_Login", params[:ra_login], session[:user_id])
       Confline.set_value("Recordings_addon_Password", params[:ra_password], session[:user_id])
-      Confline.set_value("Recordings_addon_Max_Space", (params[:ra_max_space].to_f*1048576).to_i, session[:user_id])
+      Confline.set_value("Recordings_addon_Max_Space", (params[:ra_max_space].to_d*1048576).to_i, session[:user_id])
     end
     # /=== Recordings ==============================================================
     # === Click To Call ============================================================
@@ -1862,10 +1862,10 @@ Sets default tax values for users or cardgroups
     Confline.set_value("Tax_2", params[:tax2name], session[:user_id])
     Confline.set_value("Tax_3", params[:tax3name], session[:user_id])
     Confline.set_value("Tax_4", params[:tax4name], session[:user_id])
-    Confline.set_value("Tax_1_Value", params[:tax1value].to_f, session[:user_id])
-    Confline.set_value("Tax_2_Value", params[:tax2value].to_f, session[:user_id])
-    Confline.set_value("Tax_3_Value", params[:tax3value].to_f, session[:user_id])
-    Confline.set_value("Tax_4_Value", params[:tax4value].to_f, session[:user_id])
+    Confline.set_value("Tax_1_Value", params[:tax1value].to_d, session[:user_id])
+    Confline.set_value("Tax_2_Value", params[:tax2value].to_d, session[:user_id])
+    Confline.set_value("Tax_3_Value", params[:tax3value].to_d, session[:user_id])
+    Confline.set_value("Tax_4_Value", params[:tax4value].to_d, session[:user_id])
     Confline.set_value("Total_tax_name", params[:total_tax], session[:user_id])
 
     Confline.set_value2("Tax_1", "1", session[:user_id]) # for consistency.
@@ -2335,9 +2335,9 @@ Sets default tax values for users or cardgroups
         session[:imp_user_payment_type] = params[:payment_type].to_i if params[:payment_type]
         session[:imp_user_personal_id] = params[:personal_id].to_i if params[:personal_id]
         session[:imp_user_vat_reg_number] = params[:vat_reg_number].to_i if params[:vat_reg_number]
-        session[:imp_user_balance] = params[:balance].to_f if params[:balance]
-        session[:imp_user_credit] = params[:credit].to_f if params[:credit]
-        session[:imp_user_credit_unlimited] = params[:credit_unlimited].to_f if params[:credit_unlimited]
+        session[:imp_user_balance] = params[:balance].to_d if params[:balance]
+        session[:imp_user_credit] = params[:credit].to_d if params[:credit]
+        session[:imp_user_credit_unlimited] = params[:credit_unlimited].to_d if params[:credit_unlimited]
         session[:imp_user_address] = params[:address].to_i if params[:address]
         session[:imp_user_postcode] = params[:postcode].to_i if params[:postcode]
         session[:imp_user_city] = params[:city].to_i if params[:city]

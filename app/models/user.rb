@@ -119,8 +119,8 @@ class User < ActiveRecord::Base
 
 
   def create_balance_payment
-    if self.balance.to_f != 0.to_f
-      payment = Payment.create_for_user(self, {:description=>'balance on user creation', :paymenttype => 'initial balance', :currency => Currency.get_default.name, :amount => read_attribute(:balance).to_f})
+    if self.balance.to_d != 0.to_d
+      payment = Payment.create_for_user(self, {:description=>'balance on user creation', :paymenttype => 'initial balance', :currency => Currency.get_default.name, :amount => read_attribute(:balance).to_d})
       payment.save
     end
   end
@@ -590,7 +590,7 @@ class User < ActiveRecord::Base
     tn = 0
 
     if res[0]
-      tn = (res[0]["duration"].to_f * 100 / (res[0]["normative"].to_f * 3600)) if res[0]["normative"].to_f > 0
+      tn = (res[0]["duration"].to_d * 100 / (res[0]["normative"].to_d * 3600)) if res[0]["normative"].to_d > 0
     end
 
     tn.round.to_s
@@ -941,8 +941,8 @@ class User < ActiveRecord::Base
 
       month_calls = res[0]['calls_count'].to_i + res2[0]['calls_count'].to_i
       month_billsec = res[0]['sum_billsec'].to_i + res2[0]['sum_billsec'].to_i
-      month_selfcost = res[0]['call_selfcost'].to_f + res2[0]['call_selfcost'].to_f
-      month_cost = res[0]['call_cost'].to_f + res2[0]['call_cost'].to_f
+      month_selfcost = res[0]['call_selfcost'].to_d + res2[0]['call_selfcost'].to_d
+      month_cost = res[0]['call_cost'].to_d + res2[0]['call_cost'].to_d
 
       # ---- day ----
 
@@ -956,8 +956,8 @@ class User < ActiveRecord::Base
 
       day_calls = res[0]['calls_count'].to_i + res2[0]['calls_count'].to_i
       day_billsec = res[0]['sum_billsec'].to_i + res2[0]['sum_billsec'].to_i
-      day_selfcost = res[0]['call_selfcost'].to_f + res2[0]['call_selfcost'].to_f
-      day_cost = res[0]['call_cost'].to_f + res2[0]['call_cost'].to_f
+      day_selfcost = res[0]['call_selfcost'].to_d + res2[0]['call_selfcost'].to_d
+      day_cost = res[0]['call_cost'].to_d + res2[0]['call_cost'].to_d
 
     end
 
@@ -975,8 +975,8 @@ class User < ActiveRecord::Base
 
       month_calls = res[0]['calls_count'].to_i + res2[0]['calls_count'].to_i
       month_billsec = res[0]['sum_billsec'].to_i + res2[0]['sum_billsec'].to_i
-      month_selfcost = res[0]['call_selfcost'].to_f + res2[0]['call_selfcost'].to_f
-      month_cost = res[0]['call_cost'].to_f + res2[0]['call_cost'].to_f
+      month_selfcost = res[0]['call_selfcost'].to_d + res2[0]['call_selfcost'].to_d
+      month_cost = res[0]['call_cost'].to_d + res2[0]['call_cost'].to_d
 
       # ---- day ----
 
@@ -990,8 +990,8 @@ class User < ActiveRecord::Base
 
       day_calls = res[0]['calls_count'].to_i + res2[0]['calls_count'].to_i
       day_billsec = res[0]['sum_billsec'].to_i + res2[0]['sum_billsec'].to_i
-      day_selfcost = res[0]['call_selfcost'].to_f + res2[0]['call_selfcost'].to_f
-      day_cost = res[0]['call_cost'].to_f + res2[0]['call_cost'].to_f
+      day_selfcost = res[0]['call_selfcost'].to_d + res2[0]['call_selfcost'].to_d
+      day_cost = res[0]['call_cost'].to_d + res2[0]['call_cost'].to_d
 
     end
 
@@ -1005,8 +1005,8 @@ class User < ActiveRecord::Base
 
       month_calls = res[0]['calls_count'].to_i
       month_billsec = res[0]['sum_billsec'].to_i
-      month_selfcost = res[0]['call_selfcost'].to_f
-      month_cost = res[0]['call_cost'].to_f
+      month_selfcost = res[0]['call_selfcost'].to_d
+      month_cost = res[0]['call_cost'].to_d
 
       # ---- day ----
 
@@ -1016,8 +1016,8 @@ class User < ActiveRecord::Base
 
       day_calls = res[0]['calls_count'].to_i
       day_billsec = res[0]['sum_billsec'].to_i
-      day_selfcost = res[0]['call_selfcost'].to_f
-      day_cost = res[0]['call_cost'].to_f
+      day_selfcost = res[0]['call_selfcost'].to_d
+      day_cost = res[0]['call_cost'].to_d
 
     end
 
@@ -1043,15 +1043,15 @@ class User < ActiveRecord::Base
 
     if val
       total_calls += val[0]['calls'].to_i
-      calls_price += val[0]['price'].to_f
+      calls_price += val[0]['price'].to_d
     end
 
     if val2
       total_calls += val2[0]['calls'].to_i
-      calls_price += val2[0]['price'].to_f
+      calls_price += val2[0]['price'].to_d
     end
 
-    return total_calls.to_i, calls_price.to_f
+    return total_calls.to_i, calls_price.to_d
   end
 
 
@@ -1072,7 +1072,7 @@ class User < ActiveRecord::Base
 
     if res[0]
       total_calls = res[0]["calls"].to_i
-      calls_price = res[0]["price"].to_f
+      calls_price = res[0]["price"].to_d
     end
     return total_calls, calls_price
   end
@@ -1106,7 +1106,7 @@ class User < ActiveRecord::Base
       calls_price = res[0]["price"]
     end
 
-    return total_calls.to_i, calls_price.to_f
+    return total_calls.to_i, calls_price.to_d
   end
 
 
@@ -1135,7 +1135,7 @@ class User < ActiveRecord::Base
       calls_price = res[0]["price"]
     end
 
-    return total_calls.to_i, calls_price.to_f
+    return total_calls.to_i, calls_price.to_d
   end
 
   # finds subscriptions in given period
@@ -1343,10 +1343,10 @@ class User < ActiveRecord::Base
         :tax3_name => Confline.get_value("Tax_3", owner),
         :tax4_name => Confline.get_value("Tax_4", owner),
         :total_tax_name => Confline.get_value("Total_tax_name", owner),
-        :tax1_value => Confline.get_value("Tax_1_Value", owner).to_f,
-        :tax2_value => Confline.get_value("Tax_2_Value", owner).to_f,
-        :tax3_value => Confline.get_value("Tax_3_Value", owner).to_f,
-        :tax4_value => Confline.get_value("Tax_4_Value", owner).to_f,
+        :tax1_value => Confline.get_value("Tax_1_Value", owner).to_d,
+        :tax2_value => Confline.get_value("Tax_2_Value", owner).to_d,
+        :tax3_value => Confline.get_value("Tax_3_Value", owner).to_d,
+        :tax4_value => Confline.get_value("Tax_4_Value", owner).to_d,
         :compound_tax => Confline.get_value("Tax_compound", owner).to_i
     }
 
@@ -1409,7 +1409,7 @@ class User < ActiveRecord::Base
         # if setting does not allow dropping bellow zero and balance got bellow 0
         setting_disallow_balance_drop_below_zero = Confline.get_value("Disallow_prepaid_user_balance_drop_below_zero", owner_id)
         balance_left = balance - sub_price
-        if user_type == "prepaid" and balance_left.to_f < 0.to_f and setting_disallow_balance_drop_below_zero.to_i == 1
+        if user_type == "prepaid" and balance_left.to_d < 0.to_d and setting_disallow_balance_drop_below_zero.to_i == 1
           # and block user
           MorLog.my_debug("  Blocking prepaid user and sending email")
           self.block_and_send_email
@@ -1474,7 +1474,7 @@ class User < ActiveRecord::Base
     r2 = dec == "." ? "" : ", '.', '#{dec}')"
     n1 = "#{r1}" #"#{r1} FORMAT("
     n2 = "#{r2}" #",#{options[:nice_number_digits]})#{r2}"
-    c1 = default_currency != show_currency ? " * #{curr3er.ex.to_f} " : ""
+    c1 = default_currency != show_currency ? " * #{curr3er.ex.to_d} " : ""
 
     select = []
     select2 = []
@@ -1551,7 +1551,7 @@ class User < ActiveRecord::Base
     jn << "LEFT JOIN dids ON (calls.did_id = dids.id)" if options[:direction] == "incoming"
     jn << "LEFT JOIN providers ON (providers.id = calls.provider_id)" if options[:usertype] == "admin"
 
-    filename = "CDR-#{id.to_s.gsub(" ", "_")}-#{options[:date_from].gsub(" ", "_").gsub(":", "_")}-#{options[:date_till].gsub(" ", "_").gsub(":", "_")}-#{Time.now().to_f.to_s.gsub(".", "")}-#{options[:direction]}-#{show_currency}"
+    filename = "CDR-#{id.to_s.gsub(" ", "_")}-#{options[:date_from].gsub(" ", "_").gsub(":", "_")}-#{options[:date_till].gsub(" ", "_").gsub(":", "_")}-#{Time.now().to_d.to_s.gsub(".", "")}-#{options[:direction]}-#{show_currency}"
 
     sql = "SELECT * "
     if options[:test] != 1
@@ -1973,22 +1973,22 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def convert_curr(rate)
-    rate * User.current.currency.exchange_rate.to_f
+    rate * User.current.currency.exchange_rate.to_d
   end
 
   # converted attributes for user in current user currency
   def balance
     b = read_attribute(:balance)
     if User.current and User.current.currency
-      b.to_f * User.current.currency.exchange_rate.to_f
+      b.to_d * User.current.currency.exchange_rate.to_d
     else
-      b.to_f
+      b.to_d
     end
   end
 
   def balance= value
     if User.current and User.current.currency
-      b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
+      b = (value.to_d / User.current.currency.exchange_rate.to_d).to_d
     else
       b = value
     end
@@ -1998,7 +1998,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   def credit
     c = read_attribute(:credit)
     if User.current and User.current.currency
-      c.to_f != -1.to_f ? c.to_f * User.current.currency.exchange_rate.to_f : -1.to_f
+      c.to_d != -1.to_d ? c.to_d * User.current.currency.exchange_rate.to_d : -1.to_d
     else
       c
     end
@@ -2015,7 +2015,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     #if prepaid?
     #  raise "Cannot set credit for prepaid user"
     if User.current and User.current.currency
-      c = value == -1 ? -1 : (value.to_f / User.current.currency.exchange_rate.to_f).to_f
+      c = value == -1 ? -1 : (value.to_d / User.current.currency.exchange_rate.to_d).to_d
     else
       c = value
     end
@@ -2025,15 +2025,15 @@ GROUP BY terminators.id;").map { |t| t.id }
   def warning_email_balance
     b = read_attribute(:warning_email_balance)
     if User.current and User.current.currency
-      b.to_f * User.current.currency.exchange_rate.to_f
+      b.to_d * User.current.currency.exchange_rate.to_d
     else
-      b.to_f
+      b.to_d
     end
   end
 
   def warning_email_balance= value
     if User.current and User.current.currency
-      b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
+      b = (value.to_d / User.current.currency.exchange_rate.to_d).to_d
     else
       b = value
     end
@@ -2042,9 +2042,9 @@ GROUP BY terminators.id;").map { |t| t.id }
 
   def fix_when_is_rendering
     if User.current and self
-      self.balance = self.balance.to_f * User.current.currency.exchange_rate.to_f
-      self.credit = self.credit.to_f * User.current.currency.exchange_rate.to_f if credit != -1
-      self.warning_email_balance = self.warning_email_balance.to_f * User.current.currency.exchange_rate.to_f
+      self.balance = self.balance.to_d * User.current.currency.exchange_rate.to_d
+      self.credit = self.credit.to_d * User.current.currency.exchange_rate.to_d if credit != -1
+      self.warning_email_balance = self.warning_email_balance.to_d * User.current.currency.exchange_rate.to_d
     end
   end
 
@@ -2323,14 +2323,14 @@ GROUP BY terminators.id;").map { |t| t.id }
       if params[:unlimited] and params[:unlimited].to_i == 1
         self.credit = -1
       else
-        self.credit = params[:credit].to_f if params[:credit]
+        self.credit = params[:credit].to_d if params[:credit]
         self.credit = 0 if credit < 0 if params[:credit]
       end
     else
       if params[:unlimited].to_i == 1 and params[:user][:postpaid] == 1
         self.credit = -1
       else
-        self.credit = params[:credit].to_f
+        self.credit = params[:credit].to_d
         self.credit = 0 if credit < 0
       end
 
@@ -2440,12 +2440,12 @@ GROUP BY terminators.id;").map { |t| t.id }
 
     if api == 1
       if params[:warning_email_balance]
-        if warning_email_balance.to_f != params[:warning_email_balance].to_f
+        if warning_email_balance.to_d != params[:warning_email_balance].to_d
           self.warning_email_sent = 0
         end
       end
     else
-      if warning_email_balance.to_f != params[:warning_email_balance].to_f
+      if warning_email_balance.to_d != params[:warning_email_balance].to_d
         self.warning_email_sent = 0
       end
     end
@@ -2528,9 +2528,9 @@ GROUP BY terminators.id;").map { |t| t.id }
       end
 
       if api == 1
-        self.recording_hdd_quota = params[:user][:recording_hdd_quota].to_f * 1048576 if  params[:user][:recording_hdd_quota]
+        self.recording_hdd_quota = params[:user][:recording_hdd_quota].to_d * 1048576 if  params[:user][:recording_hdd_quota]
       else
-        self.recording_hdd_quota = params[:user][:recording_hdd_quota].to_f * 1048576
+        self.recording_hdd_quota = params[:user][:recording_hdd_quota].to_d * 1048576
       end
 
     end
@@ -2556,7 +2556,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   def warning_email_hour
     b = read_attribute(:warning_email_hour)
     if b != -1
-      c = b.to_f + time_zone.to_f - User.system_time_offset.to_f
+      c = b.to_d + time_zone.to_d - User.system_time_offset.to_d
       b = c.to_i > 24 ? c - 24 : c
       b = c.to_i < 0 ? c + 24 : b
     else
@@ -2567,7 +2567,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
   def warning_email_hour= value
     if value != -1
-      b = value.to_f - time_zone.to_f + User.system_time_offset.to_f
+      b = value.to_d - time_zone.to_d + User.system_time_offset.to_d
       c = b.to_i > 24 ? b - 24 : b
       c = b.to_i < 0 ? b + 24 : c
     else
@@ -3072,7 +3072,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   # converted attributes for user in given currency exrate
   def converted_minimal_charge(exr)
     b = read_attribute(:minimal_charge)
-    b.to_f * exr.to_f
+    b.to_d * exr.to_d
   end
 
 =begin
@@ -3129,7 +3129,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   +value_in_system_currency+ float, amount converted to system currency
 =end
   def to_system_currency(value)
-    value.to_f / currency.exchange_rate.to_f
+    value.to_d / currency.exchange_rate.to_d
   end
 
 =begin

@@ -33,7 +33,7 @@ class CommonUseProvidersController < ApplicationController
       order_by = "ORDER BY #{(@options[:order_by])+ ' '+ order}"
     end
 
-    @total_pages = (CommonUseProvider.count.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (CommonUseProvider.count.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages and @total_pages > 0
     @fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
     limit = " LIMIT #{@fpage}, #{session[:items_per_page].to_i}"

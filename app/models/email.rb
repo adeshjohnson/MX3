@@ -148,11 +148,11 @@ class Email < ActiveRecord::Base
   def Email.nice_number(number, options = {})
     n = "0.00"
     if options[:nice_number_digits].to_i > 0
-      n = sprintf("%0.#{options[:nice_number_digits]}f", number.to_f) if number
+      n = sprintf("%0.#{options[:nice_number_digits]}f", number.to_d) if number
     else
       nn ||= Confline.get_value("Nice_Number_Digits").to_i
       nn = 2 if nn == 0
-      n = sprintf("%0.#{nn}f", number.to_f) if number
+      n = sprintf("%0.#{nn}f", number.to_d) if number
     end
     if options[:change_decimal]
       n = n.gsub('.', options[:global_decimal])

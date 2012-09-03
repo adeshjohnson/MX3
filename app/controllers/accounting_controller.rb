@@ -360,14 +360,14 @@ class AccountingController < ApplicationController
 
         # --- add own outgoing calls ---
         if (outgoing_calls_price > 0) or ( user.invoice_zero_calls == 1 and outgoing_calls_price >= 0 and outgoing_calls > 0 )
-          invoice.invoicedetails.create(:name => _('Calls'), :price => outgoing_calls_price.to_f, :quantity => outgoing_calls, :invdet_type => 0)
-          price += outgoing_calls_price.to_f
+          invoice.invoicedetails.create(:name => _('Calls'), :price => outgoing_calls_price.to_d, :quantity => outgoing_calls, :invdet_type => 0)
+          price += outgoing_calls_price.to_d
         end
 
         # --- add resellers users outgoing calls ---
         if (outgoing_calls_by_users_price > 0) or ( user.invoice_zero_calls == 1 and outgoing_calls_by_users_price >= 0 and incoming_made_calls_price > 0)
-          invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => outgoing_calls_by_users_price.to_f, :quantity => outgoing_calls_by_users, :invdet_type => 0)
-          price += outgoing_calls_by_users_price.to_f
+          invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => outgoing_calls_by_users_price.to_d, :quantity => outgoing_calls_by_users, :invdet_type => 0)
+          price += outgoing_calls_by_users_price.to_d
         end
 
         if mor_11_extend? and user.postpaid?
@@ -380,14 +380,14 @@ class AccountingController < ApplicationController
 
         # --- add own received incoming calls ---
         #        if (incoming_received_calls_price > 0)
-        #          invoice.invoicedetails.create(:name => _('Incoming_received_calls'), :price => incoming_received_calls_price.to_f, :quantity => incoming_received_calls, :invdet_type => 0)
-        #          price += incoming_received_calls_price.to_f
+        #          invoice.invoicedetails.create(:name => _('Incoming_received_calls'), :price => incoming_received_calls_price.to_d, :quantity => incoming_received_calls, :invdet_type => 0)
+        #          price += incoming_received_calls_price.to_d
         #        end
 
         # --- add own made incoming calls ---
         #        if (incoming_made_calls_price > 0)
-        #          invoice.invoicedetails.create(:name => _('Incoming_made_calls'), :price => incoming_made_calls_price.to_f, :quantity => incoming_made_calls, :invdet_type => 0)
-        #          price += incoming_made_calls_price.to_f
+        #          invoice.invoicedetails.create(:name => _('Incoming_made_calls'), :price => incoming_made_calls_price.to_d, :quantity => incoming_made_calls, :invdet_type => 0)
+        #          price += incoming_made_calls_price.to_d
         #        end
 
 
@@ -465,11 +465,11 @@ class AccountingController < ApplicationController
 
           if count_subscription == 1
             invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invd_price, :quantity => "1")
-            price += invd_price.to_f
+            price += invd_price.to_d
           end
         end
         MorLog.my_debug("end subscriptions sum", 1)
-        invoice.price = price.to_f
+        invoice.price = price.to_d
         invoice.number_type = invoice_number_type
         invoice.number = generate_invoice_number(invoice_number_start, invoice_number_length, invoice_number_type, invoice.id, period_start)
         MorLog.my_debug("    Invoice number: #{invoice.number}", 1)
@@ -598,26 +598,26 @@ class AccountingController < ApplicationController
         price = 0
 
         if (outgoing_calls_price > 0)
-          invoice.invoicedetails.create(:name => _('Calls'), :price => outgoing_calls_price.to_f, :quantity => outgoing_calls, :invdet_type => 0)
-          price += outgoing_calls_price.to_f
+          invoice.invoicedetails.create(:name => _('Calls'), :price => outgoing_calls_price.to_d, :quantity => outgoing_calls, :invdet_type => 0)
+          price += outgoing_calls_price.to_d
         end
 
         # --- add resellers users outgoing calls ---
         if (outgoing_calls_by_users_price > 0)
-          invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => outgoing_calls_by_users_price.to_f, :quantity => outgoing_calls_by_users, :invdet_type => 0)
-          price += outgoing_calls_by_users_price.to_f
+          invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => outgoing_calls_by_users_price.to_d, :quantity => outgoing_calls_by_users, :invdet_type => 0)
+          price += outgoing_calls_by_users_price.to_d
         end
 
         #        # --- add own received incoming calls ---
         #        if (incoming_received_calls_price > 0)
-        #          invoice.invoicedetails.create(:name => _('Incoming_received_calls'), :price => incoming_received_calls_price.to_f, :quantity => incoming_received_calls, :invdet_type => 0)
-        #          price += incoming_received_calls_price.to_f
+        #          invoice.invoicedetails.create(:name => _('Incoming_received_calls'), :price => incoming_received_calls_price.to_d, :quantity => incoming_received_calls, :invdet_type => 0)
+        #          price += incoming_received_calls_price.to_d
         #        end
         #
         #        # --- add own made incoming calls ---
         #        if (incoming_made_calls_price > 0)
-        #          invoice.invoicedetails.create(:name => _('Incoming_made_calls'), :price => incoming_made_calls_price.to_f, :quantity => incoming_made_calls, :invdet_type => 0)
-        #          price += incoming_made_calls_price.to_f
+        #          invoice.invoicedetails.create(:name => _('Incoming_made_calls'), :price => incoming_made_calls_price.to_d, :quantity => incoming_made_calls, :invdet_type => 0)
+        #          price += incoming_made_calls_price.to_d
         #        end
 
         # --- add subscriptions ---
@@ -638,7 +638,7 @@ class AccountingController < ApplicationController
           MorLog.my_debug("start subscriptions flat_rate", 1)
           if service.servicetype == "flat_rate"
             start_date, end_date = subscription_period(sub, period_start, period_end)
-            invd_price = service.price.to_f * (months_between(start_date.to_date, end_date.to_date)+1)
+            invd_price = service.price.to_d * (months_between(start_date.to_date, end_date.to_date)+1)
             count_subscription = 1
           end
           MorLog.my_debug("end subscriptions flat_rate", 1)
@@ -669,7 +669,7 @@ class AccountingController < ApplicationController
               invd_price = 0
               if months_between(start_date, end_date) > 1
                 # jei daugiau nei 1 menuo. Tarpe yra sveiku menesiu kuriem nereikia papildomai skaiciuoti intervalu
-                invd_price += (months_between(start_date, end_date)-1) * service.price.to_f
+                invd_price += (months_between(start_date, end_date)-1) * service.price.to_d
               end
               # suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas
               last_day_of_month = start_date.to_time.end_of_month.to_date
@@ -680,13 +680,13 @@ class AccountingController < ApplicationController
           end
 
           if count_subscription == 1
-            invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invd_price.to_f, :quantity => "1")
-            price += invd_price.to_f
+            invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invd_price.to_d, :quantity => "1")
+            price += invd_price.to_d
           end
           MorLog.my_debug("end subscriptions periodic_fee", 1)
         end
         MorLog.my_debug("end subscriptions sum", 1)
-        invoice.price = price.to_f
+        invoice.price = price.to_d
         invoice.number_type = invoice_number_type
         invoice.number = generate_invoice_number(invoice_number_start, invoice_number_length, invoice_number_type, invoice.id, period_start)
         MorLog.my_debug("    Invoice number: #{invoice.number}", 1)
@@ -763,7 +763,7 @@ class AccountingController < ApplicationController
 
     @options[:order_by], order_by = invoices_order_by(params, @options)
 
-    @total_pages = (Invoice.count(:all, :include => [:user], :conditions => [cond.join(" AND ")] + cond_param).to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (Invoice.count(:all, :include => [:user], :conditions => [cond.join(" AND ")] + cond_param).to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages and @total_pages > 0
 
     dc = session[:show_currency]
@@ -774,7 +774,7 @@ class AccountingController < ApplicationController
       @tot_in_wat = 0
       @tot_in2 = 0
       @tot_inv = Invoice.find(:all, :include => [:user, :tax], :conditions => [cond.join(" AND ")] + cond_param)
-      @tot_inv.each { |r| @tot_in2+= r.converted_price(@ex).to_f; @tot_in_wat += (r.price_with_tax(:ex => @ex, :precision => nice_invoice_number_digits(r.invoice_type))) }
+      @tot_inv.each { |r| @tot_in2+= r.converted_price(@ex).to_d; @tot_in_wat += (r.price_with_tax(:ex => @ex, :precision => nice_invoice_number_digits(r.invoice_type))) }
 
       @invoices = Invoice.find(:all, :include => [:user, :tax],
                                :conditions => [cond.join(" AND ")] + cond_param,
@@ -1367,8 +1367,8 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
       prefix = r["prefix"].to_s
       billsec = r["billsec"].to_s
       if r["answered"].to_s.to_i > 0
-        asr = (r["answered"].to_f / r["all_calls"].to_f) * 100
-        acd = (r["billsec"].to_f / r["answered"].to_f).to_f
+        asr = (r["answered"].to_d / r["all_calls"].to_d) * 100
+        acd = (r["billsec"].to_d / r["answered"].to_d).to_d
       else
         asr =0
         acd =0
@@ -1432,7 +1432,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
       csv_s<< "CallerID#{sep}price(#{dc})#{sep}calls#{sep}"
 
       for ci in cids
-        csv_s << ci.src.to_s + sep.to_s + ci.price.to_f.to_s.gsub(".", dec).to_s + sep + ci.calls_size.to_i.to_s
+        csv_s << ci.src.to_s + sep.to_s + ci.price.to_d.to_s.gsub(".", dec).to_s + sep + ci.calls_size.to_i.to_s
       end
     end
 
@@ -1549,10 +1549,10 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     #abount paid and unpaid invoices, we just have to convert currency FROM USER 
     #CURRENCY TO USER'S SELECTED CURRENCY
     @paid_invoice, @unpaid_invoice = Invoice.financial_statements(owner_id, @user_id, @status, @issue_from_date, @issue_till_date, ordinary_user)
-    @paid_invoice.price = @paid_invoice.price.to_f * count_exchange_rate(current_user.currency.name, session[:show_currency])
-    @paid_invoice.price_with_vat = @paid_invoice.price_with_vat.to_f * count_exchange_rate(current_user.currency.name, session[:show_currency])
-    @unpaid_invoice.price = @unpaid_invoice.price.to_f * count_exchange_rate(current_user.currency.name, session[:show_currency])
-    @unpaid_invoice.price_with_vat = @unpaid_invoice.price_with_vat.to_f * count_exchange_rate(current_user.currency.name, session[:show_currency])
+    @paid_invoice.price = @paid_invoice.price.to_d * count_exchange_rate(current_user.currency.name, session[:show_currency])
+    @paid_invoice.price_with_vat = @paid_invoice.price_with_vat.to_d * count_exchange_rate(current_user.currency.name, session[:show_currency])
+    @unpaid_invoice.price = @unpaid_invoice.price.to_d * count_exchange_rate(current_user.currency.name, session[:show_currency])
+    @unpaid_invoice.price_with_vat = @unpaid_invoice.price_with_vat.to_d * count_exchange_rate(current_user.currency.name, session[:show_currency])
 
     #there is no need to convert to user currency because method does it by itself
     @paid_payment, @unpaid_payment = Payment.financial_statements(owner_id, @user_id, @status, @issue_from_date, @issue_till_date, ordinary_user, session[:show_currency])
@@ -1620,8 +1620,8 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
   def convert_to_user_currency(statements)
     exchange_rate = Currency.count_exchange_rate(session[:default_currency], session[:show_currency])
     for statement in statements
-      statement.price = statement.price.to_f * exchange_rate
-      statement.price_with_vat = statement.price_with_vat.to_f * exchange_rate
+      statement.price = statement.price.to_d * exchange_rate
+      statement.price_with_vat = statement.price_with_vat.to_d * exchange_rate
     end
     return statements
   end
@@ -1774,26 +1774,26 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
       # --- add own outgoing calls ---
       if (outgoing_calls_price > 0)
-        invoice.invoicedetails.create(:name => _('Calls'), :price => outgoing_calls_price.to_f, :quantity => outgoing_calls, :invdet_type => 0)
-        price += outgoing_calls_price.to_f
+        invoice.invoicedetails.create(:name => _('Calls'), :price => outgoing_calls_price.to_d, :quantity => outgoing_calls, :invdet_type => 0)
+        price += outgoing_calls_price.to_d
       end
 
       # --- add resellers users outgoing calls ---
       if (outgoing_calls_by_users_price > 0)
-        invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => outgoing_calls_by_users_price.to_f, :quantity => outgoing_calls_by_users, :invdet_type => 0)
-        price += outgoing_calls_by_users_price.to_f
+        invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => outgoing_calls_by_users_price.to_d, :quantity => outgoing_calls_by_users, :invdet_type => 0)
+        price += outgoing_calls_by_users_price.to_d
       end
 
       #      # --- add own received incoming calls ---
       #      if (incoming_received_calls_price > 0)
-      #        invoice.invoicedetails.create(:name => _('Incoming_received_calls'), :price => incoming_received_calls_price.to_f, :quantity => incoming_received_calls, :invdet_type => 0)
-      #        price += incoming_received_calls_price.to_f
+      #        invoice.invoicedetails.create(:name => _('Incoming_received_calls'), :price => incoming_received_calls_price.to_d, :quantity => incoming_received_calls, :invdet_type => 0)
+      #        price += incoming_received_calls_price.to_d
       #      end
       #
       #      # --- add own made incoming calls ---
       #      if (incoming_made_calls_price > 0)
-      #        invoice.invoicedetails.create(:name => _('Incoming_made_calls'), :price => incoming_made_calls_price.to_f, :quantity => incoming_made_calls, :invdet_type => 0)
-      #        price += incoming_made_calls_price.to_f
+      #        invoice.invoicedetails.create(:name => _('Incoming_made_calls'), :price => incoming_made_calls_price.to_d, :quantity => incoming_made_calls, :invdet_type => 0)
+      #        price += incoming_made_calls_price.to_d
       #      end
 
       if mor_11_extend? and user.postpaid?
@@ -1875,10 +1875,10 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
         if count_subscription == 1
           invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invd_price, :quantity => "1")
-          price += invd_price.to_f
+          price += invd_price.to_d
         end
       end
-      invoice.price = price.to_f
+      invoice.price = price.to_d
       MorLog.my_debug(" Recalculated Invoice number: #{invoice.number}", 1)
       invoice.save
     end

@@ -99,10 +99,10 @@ class Tariff < ActiveRecord::Base
     rate.ghost_min_perc = ghost_percent if mor_11_extended
 
     rate_det = Ratedetail.new
-    rate_det.rate = rate_value.to_f
+    rate_det.rate = rate_value.to_d
     rate_det.increment_s = increment.to_i < 1 ? 1 : increment.to_i
     rate_det.min_time = min_time.to_i < 0 ? 0 : min_time.to_i
-    rate_det.connection_fee = connection_fee.to_f
+    rate_det.connection_fee = connection_fee.to_d
 
     rate.ratedetails << rate_det
 
@@ -140,7 +140,7 @@ class Tariff < ActiveRecord::Base
     else
       sql = "SELECT exchange_rate FROM currencies, tariffs WHERE currencies.name = tariffs.currency AND tariffs.id = '#{self.id}'"
       res = ActiveRecord::Base.connection.select_one(sql)
-      res["exchange_rate"].to_f
+      res["exchange_rate"].to_d
     end
   end
 
@@ -149,10 +149,10 @@ class Tariff < ActiveRecord::Base
     tname += " + #{amount}" if amount
     tname += " + #{percent}%" if percent
 
-    amount = amount.to_f
-    percent = percent.to_f
-    fee_amount = fee_amount.to_f
-    fee_percent = fee_percent.to_f
+    amount = amount.to_d
+    percent = percent.to_d
+    fee_amount = fee_amount.to_d
+    fee_percent = fee_percent.to_d
 
     utariff = Tariff.new
     utariff.name = tname
@@ -173,11 +173,11 @@ class Tariff < ActiveRecord::Base
           rates[line[9]] = ActiveRecord::Base.connection.insert("INSERT INTO rates (`tariff_id`, `destination_id`, `destinationgroup_id`) VALUES(#{new_tariff_id}, #{line[11]}, NULL)").to_i if !rates[line[9]]
 
           # THIS WILL HELP TO FIND CORRECT LINES rd = {:id => line[0], :start_time => line[2], :end_time => line[1] , :rate  => line[3] , :connection_fee => line[4] , :rate_id  => line[5] , :increment_s => line[6] , :min_time => line[7] , :daytype => line[8]}
-          connection_fee= line[4].to_f
+          connection_fee= line[4].to_d
           connection_fee += fee_amount
           connection_fee += connection_fee*fee_percent/100
 
-          price = line[3].to_f
+          price = line[3].to_d
           price += amount
           price += price*percent/100
           count_details += 1
@@ -244,17 +244,17 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
         ActiveRecord::Base.connection.execute("DROP TEMPORARY TABLE IF EXISTS tmp_dest_groups;")
         res.each { |line|
           trates += 1
-          new_rate = line[3].to_f
-          new_increment = line[4].to_f
-          new_connfee = line[5].to_f
-          min_time = line[7].to_f
+          new_rate = line[3].to_d
+          new_increment = line[4].to_d
+          new_connfee = line[5].to_d
+          min_time = line[7].to_d
 
-          new_rate += amount.to_f
-          new_rate += new_rate/100 * percent.to_f
+          new_rate += amount.to_d
+          new_rate += new_rate/100 * percent.to_d
           new_rate = new_rate.round(15)
 
-          new_connfee += fee_amount.to_f
-          new_connfee += new_connfee/100 * fee_percent.to_f
+          new_connfee += fee_amount.to_d
+          new_connfee += new_connfee/100 * fee_percent.to_d
           new_connfee = new_connfee.round(15)
 
 
@@ -364,7 +364,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
       ]
       for r in res
 
-        rate, con_fee = Currency.count_exchange_prices({:exrate => exrate, :prices => [r["rate"].to_f, r["connection_fee"].to_f]})
+        rate, con_fee = Currency.count_exchange_prices({:exrate => exrate, :prices => [r["rate"].to_d, r["connection_fee"].to_d]})
         csv << [
             r["direction"].to_s.gsub(sep, " "),
             r["destination"].to_s.gsub(sep, " "),
@@ -925,7 +925,7 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
 
   def get_user_rate_details(rate, exrate)
     arate_details = Aratedetail.find(:all, :conditions => "rate_id = #{rate.id.to_s} AND artype = 'minute'", :order => "price DESC")
-    arate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [arate_details[0]['price'].to_f]}) if arate_details.size > 0
+    arate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [arate_details[0]['price'].to_d]}) if arate_details.size > 0
     return arate_details, arate_cur
   end
 
@@ -937,7 +937,7 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
     end
     session[:nice_number_digits] = 2 if session[:nice_number_digits] == ""
     n = ""
-    n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_f) if number
+    n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_d) if number
     if session[:change_decimal]
       n = n.gsub('.', session[:global_decimal])
     end
@@ -949,7 +949,7 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
 
     if rate_details.size > 0
       rate_increment_s = rate_details[0]['increment_s']
-      rate_cur, rate_free = Currency.count_exchange_prices({:exrate => exrate, :prices => [rate_details[0]['rate'].to_f, rate_details[0]['connection_fee']]})
+      rate_cur, rate_free = Currency.count_exchange_prices({:exrate => exrate, :prices => [rate_details[0]['rate'].to_d, rate_details[0]['connection_fee']]})
     end
 
     return rate_details, rate_cur

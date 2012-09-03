@@ -271,7 +271,7 @@ class GroupsController < ApplicationController
       user.sales_this_month = params["sales_this_month_#{user.id}".intern].to_i
       user.sales_this_month_planned = params["sales_this_month_planned_#{user.id}".intern].to_i
 
-      user.calltime_normative = params["calltime_normative_#{user.id}".intern].to_f
+      user.calltime_normative = params["calltime_normative_#{user.id}".intern].to_d
       user.show_in_realtime_stats = params["show_in_realtime_stats_#{user.id}".intern].to_i
 
       #my_debug params["show_in_realtime_stats_#{user.id}".intern].to_i

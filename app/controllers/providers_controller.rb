@@ -47,7 +47,7 @@ class ProvidersController < ApplicationController
     ["tech", "hidden", "owner_id"].each { |col|
       add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s, "providers.#{col} = ?", cond, cond_param) }
 
-    @total_pages = (current_user.providers.count(:all, :conditions => [cond.join(" AND ")] + cond_param).to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (current_user.providers.count(:all, :conditions => [cond.join(" AND ")] + cond_param).to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages and @total_pages > 0
 
     @providers = current_user.providers.find(:all, :conditions => [cond.join(" AND ")] + cond_param, :include => [:tariff], :offset => session[:items_per_page]*(@options[:page]-1), :limit => session[:items_per_page], :order => order_by)
@@ -772,7 +772,7 @@ class ProvidersController < ApplicationController
     ["tech", "hidden", "owner_id"].each { |col|
       add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s, "providers.#{col} = ?", cond, cond_param) }
 
-    @total_pages = (current_user.providers.count(:all, :conditions => [cond.join(" AND ")] + cond_param).to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (current_user.providers.count(:all, :conditions => [cond.join(" AND ")] + cond_param).to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages and @total_pages > 0
 
     @providers = current_user.providers.find(:all, :conditions => [cond.join(" AND ")] + cond_param, :include => [:tariff], :offset => session[:items_per_page]*(@options[:page]-1), :limit => session[:items_per_page], :order => order_by)

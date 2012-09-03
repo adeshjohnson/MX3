@@ -92,7 +92,7 @@ class Direction < ActiveRecord::Base
     #===== Graph =====================
 
     calls_graph = "\""
-    if calls_all and calls_all.to_f > 0
+    if calls_all and calls_all.to_d > 0
       calls_graph += _('ANSWERED') +";" + (ca[0] ? ca[0].calls : 0).to_s + ";" + "false" + "\\n"
       calls_graph += _('NO_ANSWER') +";" + (ca[1] ? ca[1].calls : 0).to_s + ";" + "false" + "\\n"
       calls_graph += _('BUSY') +";" + (ca[2] ? ca[2].calls : 0).to_s + ";" + "false" + "\\n"

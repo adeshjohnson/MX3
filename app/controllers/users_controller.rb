@@ -100,7 +100,7 @@ class UsersController < ApplicationController
     # page params
     @user_size = User.find(:all, :select => select.join(","), :joins => joins.join(" "), :conditions => [cond.join(" AND "), *var], :group => group_by)
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
-    @total_pages = (@user_size.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@user_size.size.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
@@ -204,7 +204,7 @@ class UsersController < ApplicationController
     # page params
     @user_size = User.find(:all, :select => select.join(","), :joins => joins, :conditions => [cond.join(" AND "), *var], :group => group_by)
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
-    @total_pages = (@user_size.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@user_size.size.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
@@ -348,10 +348,10 @@ class UsersController < ApplicationController
     @user = Confline.get_default_object(User, owner_id)
     @user.attributes= params[:user]
     @user.owner_id = owner_id
-    @user.warning_email_balance = params[:user][:warning_email_balance].to_f
+    @user.warning_email_balance = params[:user][:warning_email_balance].to_d
     @user.warning_email_active = params[:user][:warning_email_active].to_i
     @user.password = Digest::SHA1.hexdigest(params[:password][:password].strip)
-    @user.recording_hdd_quota = (params[:user][:recording_hdd_quota].to_f * 1048576).to_i
+    @user.recording_hdd_quota = (params[:user][:recording_hdd_quota].to_d * 1048576).to_i
     @user.agreement_date = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
 
     @invoice = invoice_params_for_user
@@ -361,7 +361,7 @@ class UsersController < ApplicationController
     if params[:unlimited] == "1"
       @user.credit = -1
     else
-      @user.credit = params[:credit].to_f
+      @user.credit = params[:credit].to_d
       @user.credit = 0 if @user.credit < 0
     end
 
@@ -402,7 +402,7 @@ class UsersController < ApplicationController
       @user.recording_enabled = 0
       @user.recording_forced_enabled = 0
     end
-    @user.balance = params[:user][:balance].to_f
+    @user.balance = params[:user][:balance].to_d
 
     if params[:warning_email_active]
       @user.warning_email_hour = params[:user][:warning_email_hour].to_i != -1 ? params[:date][:warning_email_hour].to_i : params[:user][:warning_email_hour].to_i
@@ -503,7 +503,7 @@ class UsersController < ApplicationController
     if !@user.tax or @user.tax_id.to_i == 0
       @user.assign_default_tax
     end
-    @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ? AND deleted = 0", @user.id])[0]["total_size"].to_f
+    @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ? AND deleted = 0", @user.id])[0]["total_size"].to_d
     @address = @user.address
     @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
     @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
@@ -578,7 +578,7 @@ class UsersController < ApplicationController
       end
       @user.fix_when_is_rendering
       @user.assign_default_tax if !@user.tax or @user.tax_id.to_i == 0
-      @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ? AND deleted = 0", @user.id])[0]["total_size"].to_f
+      @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ? AND deleted = 0", @user.id])[0]["total_size"].to_d
       @address = @user.address
       @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
       @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
@@ -775,7 +775,7 @@ in before filter : devicegroup (:find_devicegroup)
 
     @address = @user.address
     @countries = Direction.find(:all, :order => "name ASC")
-    @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ?", @user.id])[0]["total_size"].to_f
+    @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ?", @user.id])[0]["total_size"].to_d
     @i = @user.get_invoices_status
 
     @disallow_email_editing = Confline.get_value("Disallow_Email_Editing", current_user.owner.id) == "1"
@@ -837,7 +837,7 @@ in before filter : devicegroup (:find_devicegroup)
         @devices = Device.find_all_for_select(corrected_user_id)
       end
       @countries = Direction.find(:all, :order => "name ASC")
-      @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ?", @user.id])[0]["total_size"].to_f
+      @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ?", @user.id])[0]["total_size"].to_d
       @i = @user.get_invoices_status
       @address = @user.address
       flash_errors_for(_('User_was_not_updated'), @user)
@@ -1106,7 +1106,7 @@ in before filter : ard (:find_ard)
     duration = 0 if artype == "event"
 
     round = params[:round].to_i
-    price = params[:price].to_f
+    price = params[:price].to_d
     round = 1 if round < 1
 
     @ard.from = params[:from]
@@ -1138,7 +1138,7 @@ in before filter : customrate (:find_customrate)
     duration = 0 if artype == "event"
 
     round = params[:round].to_i
-    price = params[:price].to_f
+    price = params[:price].to_d
     round = 1 if round < 1
 
     rate_id = @customrate.id
@@ -1249,13 +1249,13 @@ in before filter : ard (:find_ard)
     params[:user][:invoice_zero_calls] = params[:show_zero_calls].to_i
     params[:user][:acc_group_id] = params[:accountant_type]
     params[:user][:cyberplat_active] = params[:cyberplat_active].to_i
-    params[:user][:balance] = current_user.convert_curr(params[:user][:balance].to_f)
-    params[:user][:recording_hdd_quota] = (params[:user][:recording_hdd_quota].to_f*1048576).to_i
+    params[:user][:balance] = current_user.convert_curr(params[:user][:balance].to_d)
+    params[:user][:recording_hdd_quota] = (params[:user][:recording_hdd_quota].to_d*1048576).to_i
     #    params[:user][:agreement_date] = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
     if params[:unlimited].to_i == 1
       params[:user][:credit] = -1
     else
-      params[:user][:credit] = params[:credit].to_f
+      params[:user][:credit] = params[:credit].to_d
       params[:user][:credit] = 0 if params[:user][:credit] < 0
     end
 

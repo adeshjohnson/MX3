@@ -70,13 +70,13 @@ class CallshopController < ApplicationController
       tax = @user.get_tax.dup
       tax.save
       @invoice.tax_id = tax.id
-      @invoice.balance_with_tax = params[:invoice][:balance].to_f
+      @invoice.balance_with_tax = params[:invoice][:balance].to_d
       @invoice.save
       user_type = (params[:invoice][:invoice_type].to_s == "postpaid" ? 1 : 0)
-      balance = (user_type == 1 ? 0 : params[:invoice][:balance].to_f)
+      balance = (user_type == 1 ? 0 : params[:invoice][:balance].to_d)
       if params[:add_with_tax_new].to_i == 1 and @invoice.tax
-        balance = @invoice.tax.count_amount_without_tax(balance).to_f
-        @invoice.balance_with_tax = params[:invoice][:balance].to_f
+        balance = @invoice.tax.count_amount_without_tax(balance).to_d
+        @invoice.balance_with_tax = params[:invoice][:balance].to_d
         @invoice.balance = balance
         @invoice.save
       else
@@ -100,22 +100,22 @@ class CallshopController < ApplicationController
     @user = @invoice.user
 
     if params[:increase] && params[:increase] != "true"
-      params[:invoice][:balance] = 0 if @invoice.balance - params[:invoice][:balance].to_f <= 0 # so it won't get negative
+      params[:invoice][:balance] = 0 if @invoice.balance - params[:invoice][:balance].to_d <= 0 # so it won't get negative
     end
 
     if params[:add_with_tax].to_i == 1 and @invoice.tax
-      params[:invoice][:balance_with_tax] = params[:invoice][:balance].to_f
-      params[:invoice][:balance] = @invoice.tax.count_amount_without_tax(params[:invoice][:balance]).to_f
+      params[:invoice][:balance_with_tax] = params[:invoice][:balance].to_d
+      params[:invoice][:balance] = @invoice.tax.count_amount_without_tax(params[:invoice][:balance]).to_d
     else
       if @invoice.tax
-        params[:invoice][:balance_with_tax] = @invoice.tax.apply_tax(params[:invoice][:balance]).to_f
+        params[:invoice][:balance_with_tax] = @invoice.tax.apply_tax(params[:invoice][:balance]).to_d
       end
     end
 
     @invoice.update_attributes(params[:invoice])
 
     if params[:invoice][:balance]
-      @user.update_attributes({:balance => params[:invoice][:balance].to_f})
+      @user.update_attributes({:balance => params[:invoice][:balance].to_d})
     end
     store_invoice_in_session(@user, @invoice)
 
@@ -188,21 +188,21 @@ class CallshopController < ApplicationController
     logger.debug " >> Finding targets"
     @invoice = CsInvoice.find(:first, :include => [:user, :tax], :conditions => ["cs_invoices.id = ?", params[:invoice_id]])
     @user = @invoice.user
-    params[:invoice][:balance_with_tax] = params[:invoice][:balance].to_f
-    if params[:increase] and params[:invoice] and !params[:invoice][:balance].to_f.zero?
+    params[:invoice][:balance_with_tax] = params[:invoice][:balance].to_d
+    if params[:increase] and params[:invoice] and !params[:invoice][:balance].to_d.zero?
       if params[:add_with_tax].to_i == 1 and @invoice.tax
-        params[:invoice][:balance] = round_to_cents(@invoice.tax.count_amount_without_tax(params[:invoice][:balance]).to_f)
+        params[:invoice][:balance] = round_to_cents(@invoice.tax.count_amount_without_tax(params[:invoice][:balance]).to_d)
       end
       if params[:increase] == "true"
-        logger.debug " >> Increasing balance by #{params[:invoice][:balance].to_f}"
-        @user.balance += params[:invoice][:balance].to_f
-        @invoice.balance += params[:invoice][:balance].to_f
-        @invoice.balance_with_tax += params[:invoice][:balance_with_tax].to_f
+        logger.debug " >> Increasing balance by #{params[:invoice][:balance].to_d}"
+        @user.balance += params[:invoice][:balance].to_d
+        @invoice.balance += params[:invoice][:balance].to_d
+        @invoice.balance_with_tax += params[:invoice][:balance_with_tax].to_d
       else
-        logger.debug " >> Decreasing balance by #{params[:invoice][:balance].to_f}"
-        @user.balance -= params[:invoice][:balance].to_f
-        @invoice.balance -= params[:invoice][:balance].to_f
-        @invoice.balance_with_tax -= params[:invoice][:balance_with_tax].to_f
+        logger.debug " >> Decreasing balance by #{params[:invoice][:balance].to_d}"
+        @user.balance -= params[:invoice][:balance].to_d
+        @invoice.balance -= params[:invoice][:balance].to_d
+        @invoice.balance_with_tax -= params[:invoice][:balance_with_tax].to_d
       end
 
       @user.balance = @invoice.balance = @invoice.balance_with_tax = 0 if @user.balance < 0
@@ -223,7 +223,7 @@ class CallshopController < ApplicationController
     @currency = current_user.currency.name #Currency.get_default.name
     @search_params = invoices_parse_params(params, @search_params)
     @total_invoices = @cshop.invoices.count(:conditions => ["paid_at IS NOT NULL"])
-    @total_pages = (@total_invoices.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@total_invoices.to_d / session[:items_per_page].to_d).ceil
     @search_params[:page] = correct_page_number(@search_params[:page], @total_pages)
     @invoices = @cshop.invoices.find(:all,
                                      :conditions => ["paid_at IS NOT NULL"],

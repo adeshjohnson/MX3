@@ -8,20 +8,20 @@ class CurrenciesController < ApplicationController
   before_filter :find_currecy, :only => [:currencies_change_update_status, :currencies_change_status, :currencies_change_default, :edit, :update, :destroy]
 
   def calculate
-    @without_tax = (params[:curr1].to_s == params[:curr2].to_s ? round_to_cents(params[:amount].to_f) : exchange(params[:amount], params[:curr1], params[:curr2]).to_f)
-    @without_tax = params[:min_amount].to_f if !params[:min_amount].blank? and @without_tax.to_f < params[:min_amount].to_f
-    @without_tax = params[:max_amount].to_f if !params[:max_amount].blank? and !params[:max_amount].to_f.zero? and @without_tax.to_f > params[:max_amount].to_f
+    @without_tax = (params[:curr1].to_s == params[:curr2].to_s ? round_to_cents(params[:amount].to_d) : exchange(params[:amount], params[:curr1], params[:curr2]).to_d)
+    @without_tax = params[:min_amount].to_d if !params[:min_amount].blank? and @without_tax.to_d < params[:min_amount].to_d
+    @without_tax = params[:max_amount].to_d if !params[:max_amount].blank? and !params[:max_amount].to_d.zero? and @without_tax.to_d > params[:max_amount].to_d
     @tax_in_amount = params[:tax_in_amount].to_s
     if @tax_in_amount == 'excluded'
-      @with_tax = ActiveProcessor.configuration.substract_tax.call(params[:user].to_i, @without_tax.to_f)
+      @with_tax = ActiveProcessor.configuration.substract_tax.call(params[:user].to_i, @without_tax.to_d)
       @with_tax, @without_tax = @without_tax, @with_tax
     else
-      @with_tax = ActiveProcessor.configuration.calculate_tax.call(params[:user].to_i, @without_tax.to_f)
+      @with_tax = ActiveProcessor.configuration.calculate_tax.call(params[:user].to_i, @without_tax.to_d)
     end
 
     result = {
-        :without_tax => round_to_cents(@without_tax.to_f),
-        :with_tax => round_to_cents(@with_tax.to_f)
+        :without_tax => round_to_cents(@without_tax.to_d),
+        :with_tax => round_to_cents(@with_tax.to_d)
     }
 
     respond_to do |format|
@@ -106,8 +106,8 @@ class CurrenciesController < ApplicationController
 
   def update
     @currency.full_name = params[:full_name]
-    if params[:exchange_rate].to_f > 0.to_f
-      @currency.exchange_rate = params[:exchange_rate].to_f
+    if params[:exchange_rate].to_d > 0.to_d
+      @currency.exchange_rate = params[:exchange_rate].to_d
       @currency.exchange_rate = 1 if @currency.id == 1
       @currency.last_update = Time.now
     else
@@ -139,7 +139,7 @@ class CurrenciesController < ApplicationController
   private
 
   def exchange(amount, curr1, curr2)
-    amount = amount.to_f * ActiveProcessor.configuration.currency_exchange.call(curr1, curr2) if defined? ActiveProcessor.configuration.currency_exchange
+    amount = amount.to_d * ActiveProcessor.configuration.currency_exchange.call(curr1, curr2) if defined? ActiveProcessor.configuration.currency_exchange
     return round_to_cents(amount)
   end
 

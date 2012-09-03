@@ -205,7 +205,7 @@ class CdrController < ApplicationController
               cond = " AND nice_error != 2"
             end
 
-            fpage, @total_pages, @options = pages_validator(@options, ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 #{cond }").to_f, params[:page])
+            fpage, @total_pages, @options = pages_validator(@options, ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 #{cond }").to_d, params[:page])
             @import_cdrs = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 #{cond } LIMIT #{fpage}, #{session[:items_per_page]}")
             @next_step = session[:cdr_import_csv2][:create_callerid].to_i == 0 ? 9 : 7
           end
@@ -232,7 +232,7 @@ class CdrController < ApplicationController
               @cdr_analize = Call.analize_cdr_import(session[:temp_cdr_import_csv], session[:cdr_import_csv2])
               @cdr_analize[:file_lines] = session[:cdr_import_csv2][:file_lines]
 
-              fpage, @total_pages, @options = pages_validator(@options, Callerid.count(:all, :conditions => {:device_id => -1}).to_f, params[:page])
+              fpage, @total_pages, @options = pages_validator(@options, Callerid.count(:all, :conditions => {:device_id => -1}).to_d, params[:page])
               @clis = Callerid.find(:all, :conditions => {:device_id => -1}, :offset => fpage, :limit => session[:items_per_page])
 
               @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group => 'users.id')
@@ -390,10 +390,10 @@ class CdrController < ApplicationController
         if @user
 
           @calls_stats = @user.calls_total_stats('answered', session_from_datetime, session_till_datetime)
-          @billsec += @calls_stats["total_billsec"].to_f
-          @provider_price += @calls_stats["total_provider_price"].to_f
-          @reseller_price += @calls_stats["total_reseller_price"].to_f
-          @user_price += @calls_stats["total_user_price"].to_f
+          @billsec += @calls_stats["total_billsec"].to_d
+          @provider_price += @calls_stats["total_provider_price"].to_d
+          @reseller_price += @calls_stats["total_reseller_price"].to_d
+          @user_price += @calls_stats["total_user_price"].to_d
           @total_calls += @calls_stats["total_calls"].to_i
           @users_with_calls +=1 if @calls_stats["total_calls"].to_i > 0
 
@@ -433,9 +433,9 @@ class CdrController < ApplicationController
       #2012 Jul 15 AJ: if you pass these params and add to @old_*_price variables, whats 
       #the point in calculating call prices all over again???
       @old_billsec = params[:billsec].to_i
-      @old_provider_price = 0.to_f #params[:pprice].to_f
-      @old_reseller_price = 0.to_f #params[:rprice].to_f
-      @old_user_price = 0.to_f #params[:price].to_f
+      @old_provider_price = 0.to_d #params[:pprice].to_d
+      @old_reseller_price = 0.to_d #params[:rprice].to_d
+      @old_user_price = 0.to_d #params[:price].to_d
 
       testing = session[:rerating_testing].to_i
       test_tariff_id = 0
@@ -472,9 +472,9 @@ class CdrController < ApplicationController
             provider = providers_cache["p_#{call.provider_id}".to_sym] ||= Provider.find(:first, :include => [:tariff], :conditions => ["providers.id = ?", call.provider_id])
             if provider and provider.user_id == current_user.get_corrected_owner_id
 
-              one_old_user_price += call.user_price.to_f
-              one_old_reseller_price += call.reseller_price.to_f
-              one_old_provider_price += call.provider_price.to_f
+              one_old_user_price += call.user_price.to_d
+              one_old_reseller_price += call.reseller_price.to_d
+              one_old_provider_price += call.provider_price.to_d
             
               logger.fatal 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
               logger.fatal one_old_user_price
@@ -487,27 +487,27 @@ class CdrController < ApplicationController
                 call.save
               end
 
-              one_user_price += call.user_price.to_f
-              one_reseller_price += call.reseller_price.to_f
+              one_user_price += call.user_price.to_d
+              one_reseller_price += call.reseller_price.to_d
 
               @billsec += call.billsec
-              @provider_price += call.provider_price.to_f
+              @provider_price += call.provider_price.to_d
             else
-              one_user_price += 0.to_f
-              one_reseller_price += 0.to_f
-              one_old_provider_price += 0.to_f
+              one_user_price += 0.to_d
+              one_reseller_price += 0.to_d
+              one_old_provider_price += 0.to_d
 
               @billsec += call.billsec
-              @provider_price += 0.to_f
+              @provider_price += 0.to_d
             end
           end
 
           @reseller_price += one_reseller_price
           @user_price += one_user_price
 
-          @old_provider_price += one_old_provider_price.to_f
-          @old_reseller_price += one_old_reseller_price.to_f
-          @old_user_price += one_old_user_price.to_f
+          @old_provider_price += one_old_provider_price.to_d
+          @old_reseller_price += one_old_reseller_price.to_d
+          @old_user_price += one_old_user_price.to_d
 
           logger.fatal 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
           logger.fatal @old_user_price

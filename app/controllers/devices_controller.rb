@@ -177,7 +177,7 @@ class DevicesController < ApplicationController
     #incase items per page wouldn't be set or set to 0? we'd get 1. user can set items per page only to positive integer.
     #but using magic numbers is a bad thing. should minimal/default items per page be defined somewhere?
     total_items = @user.devices.length
-    total_pages = (total_items.to_f / items_per_page.to_f).ceil
+    total_pages = (total_items.to_d / items_per_page.to_d).ceil
     first_page = 1
     page_no = params[:page].to_i
     page_no = page_no < first_page ? first_page : page_no
@@ -1080,7 +1080,7 @@ class DevicesController < ApplicationController
     @page = 1
     @page = params[:page].to_i if params[:page]
 
-    @total_pages = (@clis.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@clis.size.to_d / session[:items_per_page].to_d).ceil
     @all_clis = @clis
     @clis = []
     iend = ((session[:items_per_page] * @page) - 1)
@@ -1214,7 +1214,7 @@ class DevicesController < ApplicationController
 
 
     #grouping by device id is needed only when searching by cli. how to work around it withoud duplicating code?
-    @total_pages = (Device.count(:all, :joins => join.join(" "), :conditions => [cond.join(" AND ")] + cond_par, :group => 'devices.id').size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (Device.count(:all, :joins => join.join(" "), :conditions => [cond.join(" AND ")] + cond_par, :group => 'devices.id').size.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages.to_i if @total_pages.to_i < @options[:page].to_i and @total_pages > 0
     @options[:page] = 1 if @options[:page].to_i < 1
 
@@ -2053,7 +2053,7 @@ class DevicesController < ApplicationController
     session[:devices_devices_weak_passwords_options] ? @options = session[:devices_devices_weak_passwords_options] : @options = {}
     params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page] or @options[:page] <= 0)
 
-    @total_pages = (Device.count(:all, :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0 AND device_type != 'H323' AND username NOT LIKE 'mor_server_%'").to_f/session[:items_per_page].to_f).ceil
+    @total_pages = (Device.count(:all, :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0 AND device_type != 'H323' AND username NOT LIKE 'mor_server_%'").to_d/session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages.to_i if @total_pages.to_i < @options[:page].to_i and @total_pages > 0
     @devices = Device.find(:all, :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0 AND device_type != 'H323' AND username NOT LIKE 'mor_server_%'", :offset => session[:items_per_page]*(@options[:page]-1), :limit => session[:items_per_page])
 
@@ -2067,7 +2067,7 @@ class DevicesController < ApplicationController
     session[:devices_insecure_devices_options] ? @options = session[:devices_insecure_devices_options] : @options = {}
     params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page] or @options[:page] <= 0)
 
-    @total_pages = (Device.count(:all, :conditions =>  "host='dynamic' and insecure like '%invite%'  and insecure != 'invite'").to_f/session[:items_per_page].to_f).ceil
+    @total_pages = (Device.count(:all, :conditions =>  "host='dynamic' and insecure like '%invite%'  and insecure != 'invite'").to_d/session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages.to_i if @total_pages.to_i < @options[:page].to_i and @total_pages > 0
 
     @devices = Device.find(:all, :include=>[:user], :conditions => "host='dynamic' and insecure like '%invite%'  and insecure != 'invite'")

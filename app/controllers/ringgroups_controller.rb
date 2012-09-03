@@ -30,7 +30,7 @@ class RinggroupsController < ApplicationController
     # page params
     @ringgroups_size = current_user.ringgroups.find(:all, arr).size.to_i
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
-    @total_pages = (@ringgroups_size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@ringgroups_size.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     @fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 

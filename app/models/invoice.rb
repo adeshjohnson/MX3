@@ -42,7 +42,7 @@ class Invoice < ActiveRecord::Base
         tax.apply_tax(converted_price(options[:ex]), options)
       else
         if options[:precision]
-          format("%.#{options[:precision].to_i}f", converted_price_with_vat(options[:ex])).to_f
+          format("%.#{options[:precision].to_i}f", converted_price_with_vat(options[:ex])).to_d
         else
           converted_price_with_vat(options[:ex])
         end
@@ -53,7 +53,7 @@ class Invoice < ActiveRecord::Base
         tax.apply_tax(price, options)
       else
         if options[:precision]
-          format("%.#{options[:precision].to_i}f", price_with_vat).to_f
+          format("%.#{options[:precision].to_i}f", price_with_vat).to_d
         else
           price_with_vat
         end
@@ -90,25 +90,25 @@ class Invoice < ActiveRecord::Base
   # converted attributes for user in current user currency
   def price
     b = read_attribute(:price)
-    b.to_f * User.current.currency.exchange_rate.to_f
+    b.to_d * User.current.currency.exchange_rate.to_d
   end
 
   def price_with_vat
     b = read_attribute(:price_with_vat)
-    b.to_f * User.current.currency.exchange_rate.to_f
+    b.to_d * User.current.currency.exchange_rate.to_d
   end
 
   # converted attributes for user in given currency exrate
   def converted_price(exr)
     b = read_attribute(:price)
-    b.to_f * exr.to_f
+    b.to_d * exr.to_d
   end
 
 
   # converted attributes for user in given currency exrate
   def converted_price_with_vat(exr)
     b = read_attribute(:price_with_vat)
-    b.to_f * exr.to_f
+    b.to_d * exr.to_d
   end
 
 =begin
@@ -205,8 +205,8 @@ class Invoice < ActiveRecord::Base
     n = 15 - items.size.to_i
     n.times { items << [' ', '', '', ''] } if n > 0
 
-    items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => [:top]}, {:text => self.nice_invoice_number(user.converted_minimal_charge(ex).to_f, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}] if user.minimal_charge_enabled?
-    items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => [:top]}, {:text => self.nice_invoice_number(self.converted_price(ex).to_f, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}]
+    items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => [:top]}, {:text => self.nice_invoice_number(user.converted_minimal_charge(ex).to_d, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}] if user.minimal_charge_enabled?
+    items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => [:top]}, {:text => self.nice_invoice_number(self.converted_price(ex).to_d, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}]
 
     items_t, up_string, tax_amount, price_with_tax = tax_items(ex, nc, nice_number_hash, 1, dc)
     items += items_t
@@ -290,7 +290,7 @@ class Invoice < ActiveRecord::Base
       ii << item['calls']
       ii <<{:text => nice_time(item['billsec'], options[:min_type]).to_s, :align => :center}
       if options[:show_avg_rate] == 1
-        ii << {:text => nice_invoice_number((item["price"].to_f / (item["billsec"].to_f / 60).to_f)).to_s, :align => :center}
+        ii << {:text => nice_invoice_number((item["price"].to_d / (item["billsec"].to_d / 60).to_d)).to_s, :align => :center}
       end
       ii << {:text => nice_invoice_number(item['price'], nice_number_hash).to_s, :align => :right}
 
@@ -313,7 +313,7 @@ class Invoice < ActiveRecord::Base
         ii << item['calls']
         ii << {:text => nice_time(item['billsec'], options[:min_type]).to_s, :align => :center}
         if options[:show_avg_rate] == 1
-          ii << {:text => nice_invoice_number((item["price"].to_f / (item["billsec"].to_f / 60).to_f)).to_s, :align => :center}
+          ii << {:text => nice_invoice_number((item["price"].to_d / (item["billsec"].to_d / 60).to_d)).to_s, :align => :center}
         end
         ii << {:text => nice_invoice_number(item['price'], nice_number_hash).to_s, :align => :right}
         items << ii
@@ -329,11 +329,11 @@ class Invoice < ActiveRecord::Base
 
     if options[:show_avg_rate] == 1
       n.times { items << [' ', '', '', '', '', ''] } if n > 0
-      items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_f))] if user.minimal_charge_enabled?
+      items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_d))] if user.minimal_charge_enabled?
       items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(self.converted_price(ex)))]
     else
       n.times { items << [' ', '', '', '', ''] } if n > 0
-      items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_f))] if user.minimal_charge_enabled?
+      items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_d))] if user.minimal_charge_enabled?
       items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(self.converted_price(ex)))]
     end
     items_t, up_string, tax_amount, price_with_tax = tax_items(ex, nc, nice_number_hash, 2, dc, options[:show_avg_rate])
@@ -411,9 +411,9 @@ class Invoice < ActiveRecord::Base
                   item['calldate'],
                   item["#{options[:billsec_cond]}"],
                   item['dst'].to_s.strip,
-                  nice_invoice_number(item["user_price"].to_f, nice_number_hash).to_s
+                  nice_invoice_number(item["user_price"].to_d, nice_number_hash).to_s
               ]
-              tprice += item["user_price"].to_f
+              tprice += item["user_price"].to_d
               tcalls += calls2.size.to_i
             end
           end
@@ -429,9 +429,9 @@ class Invoice < ActiveRecord::Base
                   item['calldate'],
                   item["#{options[:billsec_cond]}"],
                   item['dst'].to_s.strip,
-                  nice_invoice_number(item["reseller_price"].to_f, nice_number_hash).to_s
+                  nice_invoice_number(item["reseller_price"].to_d, nice_number_hash).to_s
               ]
-              tprice += item["reseller_price"].to_f
+              tprice += item["reseller_price"].to_d
               tcalls += rcalls.size.to_i
             end
 
@@ -554,12 +554,12 @@ class Invoice < ActiveRecord::Base
           aa << {:text => dc} if type == 3
           items << aa
         end
-        tax_amount += self.nice_invoice_number(tax_hash[:tax], nice_number_hash.merge({:no_repl => 1})).to_f
+        tax_amount += self.nice_invoice_number(tax_hash[:tax], nice_number_hash.merge({:no_repl => 1})).to_d
 
       }
-      price_with_tax = self.nice_invoice_number(self.converted_price(ex), nice_number_hash.merge({:no_repl => 1})).to_f+tax_amount.to_f
+      price_with_tax = self.nice_invoice_number(self.converted_price(ex), nice_number_hash.merge({:no_repl => 1})).to_d+tax_amount.to_d
     else
-      price_with_tax = self.nice_invoice_number(self.converted_price_with_vat(ex), nice_number_hash.merge({:no_repl => 1})).to_f
+      price_with_tax = self.nice_invoice_number(self.converted_price_with_vat(ex), nice_number_hash.merge({:no_repl => 1})).to_d
       tax_amount = price_with_tax - self.converted_price(ex)
     end
 
@@ -613,7 +613,7 @@ class Invoice < ActiveRecord::Base
     ttp = 0
     for cid in cids
       src = cid["src"]
-      if cid["did_price"].to_f == 0.to_f and cid["did_inc_price"].to_f == 0.to_f
+      if cid["did_price"].to_d == 0.to_d and cid["did_inc_price"].to_d == 0.to_d
         sql = "SELECT #{dst}, #{calldate}, #{options[:billsec_cond]} as billsec, #{options[:did_inc_sql_price]}, #{options[:did_sql_price]}, #{options[:user_rate]}, #{options[:user_price]} as 'user_price', directions.name as 'direction' FROM calls #{SqlExport.left_join_reseler_providers_to_calls_sql} LEFT JOIN devices ON (calls.src_device_id = devices.id) LEFT JOIN destinations ON (calls.prefix = destinations.prefix) LEFT JOIN directions ON (destinations.direction_code = directions.code) WHERE devices.user_id = #{user.id} AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59' AND calls.disposition = 'ANSWERED'  AND billsec > 0 AND card_id = 0  AND calls.src = '#{src}' #{options[:zero_calls_sql]} ORDER BY calls.calldate ASC"
       else
         sql = "SELECT #{dst}, #{calldate}, #{options[:billsec_cond]} as billsec, #{options[:did_sql_price]}, #{options[:did_inc_sql_price]}, #{options[:user_rate]}, #{options[:user_price]} as 'user_price', directions.name as 'direction' FROM calls #{SqlExport.left_join_reseler_providers_to_calls_sql} JOIN devices ON (calls.src_device_id = devices.id) LEFT JOIN destinations ON (calls.prefix = destinations.prefix) LEFT JOIN directions ON (destinations.direction_code = directions.code) WHERE calls.card_id = 0 AND disposition = 'ANSWERED'  AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59' AND devices.user_id = '#{user.id}' AND calls.did_inc_price > 0 AND calls.src = '#{src}' ORDER BY calls.calldate ASC;"
@@ -637,7 +637,7 @@ class Invoice < ActiveRecord::Base
       end
 
 
-      if cid["did_price"].to_f == 0.to_f and cid["did_inc_price"].to_f == 0.to_f
+      if cid["did_price"].to_d == 0.to_d and cid["did_inc_price"].to_d == 0.to_d
         sql = "SELECT directions.name as 'direction', SUM(#{options[:user_price]}) as 'price', COUNT(calls.src) as 'calls' FROM calls LEFT JOIN devices ON (calls.src_device_id = devices.id) LEFT JOIN destinations ON (calls.prefix = destinations.prefix) LEFT JOIN directions ON (destinations.direction_code = directions.code) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE devices.user_id = #{user.id} AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59' AND calls.disposition = 'ANSWERED' AND card_id = 0  AND calls.src = '#{src}' GROUP BY directions.name ORDER BY directions.name ASC"
       else
         sql = "SELECT directions.name as 'direction', SUM(#{options[:user_price]}) as 'price', COUNT(calls.src) as 'calls' FROM calls JOIN devices ON (calls.src_device_id = devices.id) LEFT JOIN destinations ON (calls.prefix = destinations.prefix) LEFT JOIN directions ON (destinations.direction_code = directions.code) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE calls.card_id = 0 AND disposition = 'ANSWERED'  AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59' AND devices.user_id = '#{user.id}' AND calls.did_inc_price > 0 AND calls.src = '#{src}' GROUP BY directions.name ORDER BY directions.name ASC"
@@ -655,12 +655,12 @@ class Invoice < ActiveRecord::Base
             nice_invoice_number(item["price"], nice_number_hash),
             dc.to_s + " (" + _('Without_VAT') + ")"
         ]
-        total_price += item["price"].to_f
+        total_price += item["price"].to_d
       end
 
       items << ['', '', '', _('Total') + ":", nice_invoice_number(total_price, nice_number_hash), dc.to_s + " (" + _('Without_VAT') + ")"]
       items << [' ', '', '', '', '', '']
-      ttp += total_price.to_f
+      ttp += total_price.to_d
     end
 
     sql = "SELECT COUNT(calls.id) as calls_size, SUM(#{options[:billsec_cond]}) as billsec, SUM(#{options[:user_price]}) as 'user_price' FROM calls JOIN devices ON (calls.dst_device_id = devices.id) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE devices.user_id = #{user.id} AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59' AND calls.disposition = 'ANSWERED' AND billsec > 0 AND card_id = 0 #{options[:zero_calls_sql]};"
@@ -670,7 +670,7 @@ class Invoice < ActiveRecord::Base
     if in_calls and in_calls[0]['calls_size'].to_i > 0
       items << [_('incoming_calls'), _('Duration'), _('Price') + " (#{dc})", '', '', '']
       items << ['', nice_time(in_calls[0]["billsec"], options[:min_type]), nice_invoice_number(in_calls[0]["user_price"], nice_number_hash), '', '', '']
-      ttp += in_calls[0]["user_price"].to_f
+      ttp += in_calls[0]["user_price"].to_d
       items << [' ', '', '', '', '', '']
     end
 
@@ -680,7 +680,7 @@ class Invoice < ActiveRecord::Base
         if id.invdet_type > 0 and id.name != 'Calls'
 
           items << ['', {:text => id.nice_inv_name, :colspan => 3}, self.nice_invoice_number((id.quantity * id.converted_price(ex)), nice_number_hash).to_s, dc.to_s + " (" + _('Without_VAT') + ")"]
-          ttp += id.price.to_f
+          ttp += id.price.to_d
         end
       end
       items << [' ', '', '', '', '', '']
@@ -736,7 +736,7 @@ class Invoice < ActiveRecord::Base
 
   def nice_invoice_number(number, options = {})
     nc = options[:nc] ? options[:nc] : 2
-    n = sprintf("%0.#{nc}f", number.to_f) if number
+    n = sprintf("%0.#{nc}f", number.to_d) if number
     if options[:change_decimal] and options[:no_repl].to_i == 0
       n = n.gsub('.', options[:global_decimal])
     end
@@ -790,19 +790,19 @@ class Invoice < ActiveRecord::Base
         # count invoice details price in invoice
         #inv_details_price = 0.0
         #inv_details = invoice.invoicedetails
-        #inv_details.each{|id| inv_details_price += id.price.to_f if id.invdet_type > 0}
+        #inv_details.each{|id| inv_details_price += id.price.to_d if id.invdet_type > 0}
 
         # count calls price in invoice
         inv_calls_price = 0.0
         inv_details = self.invoicedetails
-        inv_details.each { |id| inv_calls_price += id.price.to_f if id.invdet_type == 0 }
+        inv_details.each { |id| inv_calls_price += id.price.to_d if id.invdet_type == 0 }
 
         # count balance
-        #balance = sprintf("%0.#{2}f", user.balance.to_f + user.get_tax.count_tax_amount(user.balance.to_f ))
-        #owned_balance = action.data2.to_f - inv_details_price.to_f
-        owned_balance = (action.data2.to_f * (-1)) - inv_calls_price.to_f
+        #balance = sprintf("%0.#{2}f", user.balance.to_d + user.get_tax.count_tax_amount(user.balance.to_d ))
+        #owned_balance = action.data2.to_d - inv_details_price.to_d
+        owned_balance = (action.data2.to_d * (-1)) - inv_calls_price.to_d
 
-        balance_with_tax = owned_balance.to_f + user.get_tax.count_tax_amount(owned_balance.to_f)
+        balance_with_tax = owned_balance.to_d + user.get_tax.count_tax_amount(owned_balance.to_d)
         return [owned_balance, balance_with_tax]
       else
         MorLog.my_debug("Balance will not be shown because not found balance at the end of month, invoice id: #{id}")

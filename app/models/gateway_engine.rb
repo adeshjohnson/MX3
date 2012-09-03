@@ -145,7 +145,7 @@ class GatewayEngine
                               :data4 => "authorization: #{gateway.payment.response.authorization}"
                              })
 
-      user.balance += gateway.payment.orig_amount.to_f * ActiveProcessor.configuration.currency_exchange.call(gateway.payment.currency, user.currency.name)
+      user.balance += gateway.payment.orig_amount.to_d * ActiveProcessor.configuration.currency_exchange.call(gateway.payment.currency, user.currency.name)
       user.save
     else
       payment.update_attributes({

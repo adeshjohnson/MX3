@@ -40,15 +40,15 @@ class CsInvoice < ActiveRecord::Base
   def balance
     b = read_attribute(:balance)
     if User.current and User.current.currency
-      b.to_f * User.current.currency.exchange_rate.to_f
+      b.to_d * User.current.currency.exchange_rate.to_d
     else
-      b.to_f
+      b.to_d
     end
   end
 
   def balance= value
     if User.current and User.current.currency
-      b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
+      b = (value.to_d / User.current.currency.exchange_rate.to_d).to_d
     else
       b = value
     end

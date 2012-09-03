@@ -32,7 +32,7 @@ class IvrSoundFile< ActiveRecord::Base
 
   def nice_size
     ext = "B"
-    size = self.size.to_f
+    size = self.size.to_d
     if size > 1024
       size = size / 1024
       ext = "Kb"

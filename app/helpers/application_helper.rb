@@ -63,14 +63,14 @@ module ApplicationHelper
   def nice_number(number, options = {})
     n = "0.00"
     if options[:nice_number_digits]
-      n = sprintf("%0.#{options[:nice_number_digits]}f", number.to_f) if number
+      n = sprintf("%0.#{options[:nice_number_digits]}f", number.to_d) if number
       if options[:change_decimal]
         n = n.gsub('.', options[:global_decimal])
       end
     else
       nice_number_digits = (session and session[:nice_number_digits]) or Confline.get_value("Nice_Number_Digits")
       nice_number_digits = 2 if nice_number_digits == ''
-      n = sprintf("%0.#{nice_number_digits}f", number.to_f) if number
+      n = sprintf("%0.#{nice_number_digits}f", number.to_d) if number
       if session and session[:change_decimal]
         n = n.gsub('.', session[:global_decimal])
       end
@@ -88,7 +88,7 @@ module ApplicationHelper
   end
 
   def nice_bytes(bytes, sufix_stop = "")
-    bytes = bytes.to_f
+    bytes = bytes.to_d
     sufix_pos = 0
     sufix = ["b", "Kb", "Mb", "Gb", "Tb"]
     if  sufix_stop == "" or !sufix.include?(sufix_stop)
@@ -105,7 +105,7 @@ module ApplicationHelper
     session[:nice_number_digits] ||= Confline.get_value("Nice_Number_Digits").to_i
     session[:nice_number_digits] ||= 2
     bytes = 0 unless bytes
-    n = sprintf("%0.#{session[:nice_number_digits]}f", bytes.to_f)+" "+sufix[sufix_pos]
+    n = sprintf("%0.#{session[:nice_number_digits]}f", bytes.to_d)+" "+sufix[sufix_pos]
     if session[:change_decimal]
       n = n.gsub('.', session[:global_decimal])
     end
@@ -113,7 +113,7 @@ module ApplicationHelper
   end
 
   def nice_number_currency(number, exchange_rate = 1)
-    number = number * exchange_rate.to_f if number
+    number = number * exchange_rate.to_d if number
     n = ""
     n = sprintf("%0.#{session[:nice_number_digits]}f", number) if number
     if session[:change_decimal]

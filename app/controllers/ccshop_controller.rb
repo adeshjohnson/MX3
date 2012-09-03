@@ -79,7 +79,7 @@ class CcshopController < ApplicationController
     @total_price = 0
     for call in @calls do
       @total_billsec += call.billsec.to_i
-      @total_price += call.user_price.to_f
+      @total_price += call.user_price.to_d
     end
     @total_price_with_vat = @total_price + @cg.get_tax.count_tax_amount(@total_price)
   end
@@ -313,7 +313,7 @@ class CcshopController < ApplicationController
     @page = params[:page].to_i if params[:page]
 
     @rates = @tariff.rates_by_st(@st, 0, 10000)
-    @total_pages = (@rates.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@rates.size.to_d / session[:items_per_page].to_d).ceil
     @all_rates = @rates
     @rates = []
     @rates_cur2 = []
@@ -351,7 +351,7 @@ class CcshopController < ApplicationController
     @rate_details = Ratedetail.find(:all, :conditions => "rate_id = #{rate.id.to_s}", :order => "rate DESC")
     if @rate_details.size > 0
       @rate_increment_s=@rate_details[0]['increment_s']
-      @rate_cur, @rate_free = Currency.count_exchange_prices({:exrate => exrate, :prices => [@rate_details[0]['rate'].to_f, @rate_details[0]['connection_fee'].to_f]})
+      @rate_cur, @rate_free = Currency.count_exchange_prices({:exrate => exrate, :prices => [@rate_details[0]['rate'].to_d, @rate_details[0]['connection_fee'].to_d]})
     end
     @rate_details
   end

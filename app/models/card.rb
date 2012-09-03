@@ -36,7 +36,7 @@ class Card < ActiveRecord::Base
   end
 
   def validate_min_balance
-    if self.min_balance.to_f < 0.to_f
+    if self.min_balance.to_d < 0.to_d
       errors.add(:min_balance, _('Bad_minimal_balance'))
       false
     else
@@ -144,12 +144,12 @@ class Card < ActiveRecord::Base
 
     unless conditions['s_balance_min'].empty?
       cond << "balance >= ?"
-      vars << conditions['s_balance_min'].to_f
+      vars << conditions['s_balance_min'].to_d
     end
 
     unless conditions['s_balance_max'].empty?
       cond << "balance <= ?"
-      vars << conditions['s_balance_max'].to_f
+      vars << conditions['s_balance_max'].to_d
     end
 
     if conditions['s_sold'] == "yes"
@@ -206,15 +206,15 @@ class Card < ActiveRecord::Base
   def balance
     b = read_attribute(:balance)
     if User.current and User.current.currency
-      b.to_f * User.current.currency.exchange_rate.to_f
+      b.to_d * User.current.currency.exchange_rate.to_d
     else
-      b.to_f
+      b.to_d
     end
   end
 
   def balance= value
     if User.current and User.current.currency
-      b = (value.to_f / User.current.currency.exchange_rate.to_f).to_f
+      b = (value.to_d / User.current.currency.exchange_rate.to_d).to_d
     else
       b = value
     end

@@ -83,7 +83,7 @@ class DestinationGroupsController < ApplicationController
     @page = params[:page].to_i if params[:page]
     items_per_page = session[:items_per_page]
     @free_destinations = @destgroup.free_destinations_by_st(@st)
-    @total_pages = (@free_destinations.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@free_destinations.size.to_d / session[:items_per_page].to_d).ceil
 
     @destinations = []
     iend = ((session[:items_per_page] * @page) - 1)
@@ -198,7 +198,7 @@ class DestinationGroupsController < ApplicationController
 
     @options[:order] = Destinationgroup.destinationgroups_order_by(params, @options)
 
-    @total_pages = (Destination.count(:all, :conditions => "destinationgroup_id = 0").to_f/session[:items_per_page].to_f).ceil
+    @total_pages = (Destination.count(:all, :conditions => "destinationgroup_id = 0").to_d/session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages.to_i if @total_pages.to_i < @options[:page].to_i and @total_pages > 0
     page = @options[:page]
 
@@ -354,7 +354,7 @@ class DestinationGroupsController < ApplicationController
       res2 = ActiveRecord::Base.connection.select_all(sqll)
       @a_calls2[i] = res2[0]["calls2"].to_i
 
-      @a_ars2[i] = (@a_calls[i].to_f / @a_calls2[i]) * 100 if @a_calls[i] > 0
+      @a_ars2[i] = (@a_calls[i].to_d / @a_calls2[i]) * 100 if @a_calls[i] > 0
       @a_ars[i] = nice_number @a_ars2[i]
 
 
@@ -476,7 +476,7 @@ class DestinationGroupsController < ApplicationController
       res2 = ActiveRecord::Base.connection.select_all(sqll)
       @a_calls2[i] = res2[0]["calls2"].to_i
 
-      @a_ars2[i] = (@a_calls[i].to_f / @a_calls2[i]) * 100 if @a_calls[i] > 0
+      @a_ars2[i] = (@a_calls[i].to_d / @a_calls2[i]) * 100 if @a_calls[i] > 0
       @a_ars[i] = nice_number @a_ars2[i]
 
 

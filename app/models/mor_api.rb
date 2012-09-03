@@ -41,7 +41,7 @@ class MorApi
     ret[:system_hash] = Digest::SHA1.hexdigest(string)
     ret[:device] = nil if ret[:device] == 'all'
     ret[:calltype] = 'no answer' if ret[:calltype] == 'no_answer'
-    ret[:balance] = params[:balance].to_f
+    ret[:balance] = params[:balance].to_d
     unless ret[:system_hash].to_s == ret[:request_hash]
       MorApi.create_error_action(params, request, 'API : Incorrect hash')
     end
@@ -141,7 +141,7 @@ class MorApi
     ret[:system_hash] = Digest::SHA1.hexdigest(string)
     ret[:device] = nil if ret[:device] == 'all'
     ret[:calltype] = 'no answer' if ret[:calltype] == 'no_answer'
-    ret[:balance] = params[:balance].to_f
+    ret[:balance] = params[:balance].to_d
 
 
     unless ret[:system_hash].to_s == ret[:request_hash]

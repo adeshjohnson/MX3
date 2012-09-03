@@ -30,9 +30,9 @@ class Activecall < ActiveRecord::Base
 #    user_rate = self.user_rate
 #    unless user_rate and destination
 #      rate = Rate.find(:first, :include => [:ratedetails], :conditions => ["rates.tariff_id = ? AND rates.destination_id = ?", user.tariff_id, destination.id]).ratedetails[0]
-#      user_rate = rate.rate.to_f
+#      user_rate = rate.rate.to_d
 #    end
-    user_rate = self.user_rate ? self.user_rate.to_f : 0.to_f
+    user_rate = self.user_rate ? self.user_rate.to_d : 0.to_d
     return User.current.get_rate(user_rate)
   end
 

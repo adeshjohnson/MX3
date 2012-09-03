@@ -84,7 +84,7 @@ class PaymentsController < ApplicationController
     @page = 1
     @page = params[:page].to_i if params[:page] and params[:page].to_i > 0
 
-    @total_pages = (@payments.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@payments.size.to_d / session[:items_per_page].to_d).ceil
     @page = @total_pages if params[:page].to_i > @total_pages
     @all_payments = @payments
     @payments= []
@@ -95,12 +95,12 @@ class PaymentsController < ApplicationController
       @payments << @all_payments[i]
     end
 
-    @total_amaunt= 0.to_f
-    @total_amaunt_completed = 0.to_f
-    @total_fee= 0.to_f
-    @total_fee_completed= 0.to_f
-    @total_amaunt_with_vat= 0.to_f
-    @total_amaunt_with_vat_completed= 0.to_f
+    @total_amaunt= 0.to_d
+    @total_amaunt_completed = 0.to_d
+    @total_fee= 0.to_d
+    @total_fee_completed= 0.to_d
+    @total_amaunt_with_vat= 0.to_d
+    @total_amaunt_with_vat_completed= 0.to_d
 
     for payment in @payments
       pa = payment.payment_amount
@@ -166,9 +166,9 @@ class PaymentsController < ApplicationController
 
     csv_string = "#{_('User')}/#{_('Card')}#{sep}#{_('Date')}#{sep}#{_('Confirm_date')}#{sep}#{_('Type')}#{sep}#{_('Amount')}#{sep}#{_('Fee')}#{sep}#{_('Amount_with_VAT')}#{sep}#{_('Currency')}#{sep}#{_('Completed')}*\n"
 
-    total_amaunt= 0.to_f
-    total_fee= 0.to_f
-    total_amaunt_with_vat= 0.to_f
+    total_amaunt= 0.to_d
+    total_fee= 0.to_d
+    total_amaunt_with_vat= 0.to_d
 
     for payment in payments
 
@@ -247,9 +247,9 @@ class PaymentsController < ApplicationController
     @page_icon = "money.png"
     @enabled = Confline.get_value("Linkpoint_Enabled", 0).to_i
     @linkpoint_ipn = Web_URL + Web_Dir + "/payments/linkpoint_ipn"
-    @amount = Confline.get_value("Linkpoint_Default_Amount").to_f
-    @amount = params[:amount].to_f if params[:amount]
-    lp_min_amount = Confline.get_value("Linkpoint_Min_Amount").to_f
+    @amount = Confline.get_value("Linkpoint_Default_Amount").to_d
+    @amount = params[:amount].to_d if params[:amount]
+    lp_min_amount = Confline.get_value("Linkpoint_Min_Amount").to_d
     @amount = lp_min_amount if @amount < lp_min_amount
 
     @amount_with_vat = @user.get_tax.count_tax_amount(@amount) + @amount
@@ -299,7 +299,7 @@ class PaymentsController < ApplicationController
                 @payment.payment_hash = notify.approval_code
                 @payment.save
                 if @test == 0
-                  @user.balance += sprintf("%.2f", (@payment.gross.to_f * Currency.count_exchange_rate(@payment.currency, Currency.find(1).name))).to_f
+                  @user.balance += sprintf("%.2f", (@payment.gross.to_d * Currency.count_exchange_rate(@payment.currency, Currency.find(1).name))).to_d
                   @user.save
                 end
 
@@ -390,11 +390,11 @@ class PaymentsController < ApplicationController
 
     @paypal_ipn_url = Web_URL + Web_Dir + "/payments/paypal_ipn"
 
-    @amount = Confline.get_value("PayPal_Default_Amount", @user.owner_id).to_f
-    @amount = params[:amount].to_f if params[:amount]
+    @amount = Confline.get_value("PayPal_Default_Amount", @user.owner_id).to_d
+    @amount = params[:amount].to_d if params[:amount]
 
-    pp_min_amount = Confline.get_value("PayPal_Min_Amount", @user.owner_id).to_f
-    pp_max_amount = Confline.get_value("PayPal_Max_Amount", @user.owner_id).to_f
+    pp_min_amount = Confline.get_value("PayPal_Min_Amount", @user.owner_id).to_d
+    pp_max_amount = Confline.get_value("PayPal_Max_Amount", @user.owner_id).to_d
 
     @amount = pp_min_amount if pp_min_amount > 0.0 && @amount < pp_min_amount
     @amount = pp_max_amount if pp_max_amount > 0.0 && @amount > pp_max_amount
@@ -455,13 +455,13 @@ class PaymentsController < ApplicationController
 
           paypal_email = Confline.get_value("PayPal_Email", @user.owner_id).to_s
           # we keep original amount (which he specified in payment form) in custom field so that we could compare
-          if paypal_email.to_s.downcase.strip == notify.business.to_s.downcase.strip and @payment.amount.to_f == notify.custom.to_f
+          if paypal_email.to_s.downcase.strip == notify.business.to_s.downcase.strip and @payment.amount.to_d == notify.custom.to_d
             MorLog.my_debug("business email is valid", true)
             if notify.complete?
-              @payment.fee = notify.fee.to_f
-              @payment.amount = notify.gross.to_f
-              @payment.gross = notify.gross.to_f - notify.tax.to_f
-              @payment.tax = notify.tax.to_f
+              @payment.fee = notify.fee.to_d
+              @payment.amount = notify.gross.to_d
+              @payment.gross = notify.gross.to_d - notify.tax.to_d
+              @payment.tax = notify.tax.to_d
               @payment.paymenttype = 'paypal'
               @payment.currency = notify.currency.to_s
               @payment.transaction_id = notify.transaction_id.to_s
@@ -483,9 +483,9 @@ class PaymentsController < ApplicationController
               if confirmation.blank? or confirmation == "none" or (confirmation == "suspicious" and notify.payer_email.to_s == @user.email)
                 @payment.shipped_at = (notify.complete?) ? Time.now : nil
                 MorLog.my_debug("User balance before payment: #{@user.balance}")
-                @user.balance += sprintf("%.2f", @payment.gross * Currency.count_exchange_rate(@payment.currency, Currency.find(1).name)).to_f
-                if @payment.fee.to_f != 0.0 and Confline.get_value("PayPal_User_Pays_Transfer_Fee", @user.owner_id).to_i == 1
-                  @user.balance -= sprintf("%.2f", @payment.fee * Currency.count_exchange_rate(@payment.currency, Currency.find(1).name)).to_f
+                @user.balance += sprintf("%.2f", @payment.gross * Currency.count_exchange_rate(@payment.currency, Currency.find(1).name)).to_d
+                if @payment.fee.to_d != 0.0 and Confline.get_value("PayPal_User_Pays_Transfer_Fee", @user.owner_id).to_i == 1
+                  @user.balance -= sprintf("%.2f", @payment.fee * Currency.count_exchange_rate(@payment.currency, Currency.find(1).name)).to_d
                   fee_payment = @payment.dup
                   fee_payment.paymenttype = "paypal_fee"
                   fee_payment.fee = 0
@@ -561,11 +561,11 @@ class PaymentsController < ApplicationController
     user = @payment.user
     exchange_rate = Currency.count_exchange_rate(@payment.currency, Currency.find(1).name)
     # round to cents rounds to floor.
-    user.balance += round_to_cents(@payment.payment_amount * exchange_rate.to_f)
+    user.balance += round_to_cents(@payment.payment_amount * exchange_rate.to_d)
 
-    if @payment.paymenttype == "paypal" and @payment.fee.to_f != 0.0 and Confline.get_value("PayPal_User_Pays_Transfer_Fee", user.owner_id).to_i == 1
+    if @payment.paymenttype == "paypal" and @payment.fee.to_d != 0.0 and Confline.get_value("PayPal_User_Pays_Transfer_Fee", user.owner_id).to_i == 1
       # sprintf rounds to ceiling.
-      user.balance -= sprintf("%.2f", @payment.fee * exchange_rate).to_f
+      user.balance -= sprintf("%.2f", @payment.fee * exchange_rate).to_d
       fee_payment = @payment.dup
       fee_payment.paymenttype = "paypal_fee"
       fee_payment.fee = 0
@@ -607,11 +607,11 @@ class PaymentsController < ApplicationController
     insert_header = "INSERT INTO payments (`id`, `tax`, `completed`, `paymenttype`, `shipped_at`, `hash`, `pending_reason`, `amount`, `transaction_id`, `card`, `owner_id`, `fee`, `gross`, `user_id`, `vat_percent`, `last_name`, `bill_nr`, `currency`, `date_added`, `payer_status`, `payer_email`, `residence_country`, `email`, `first_name`)"
     @payments.each { |payment|
       insert << "(#{payment.id},#{payment.tax},#{payment.completed},'#{payment.paymenttype}','#{payment.shipped_at.to_s(:db) if payment.shipped_at}','#{payment.payment_hash}','#{payment.pending_reason}',#{payment.amount},'#{payment.transaction_id}',#{payment.card},#{payment.owner_id},#{payment.fee},#{payment.gross},#{payment.user_id},#{payment.vat_percent},'#{payment.last_name}',#{payment.bill_nr},'#{payment.currency}','#{payment.date_added.to_s(:db) if payment.date_added}', '#{payment.payer_status}','#{payment.payer_email}','#{payment.residence_country}','#{payment.email}','#{payment.first_name}')".gsub("''", "NULL").gsub(",,", ",NULL,")
-      if payment.gross.to_f == 0.0
-        payment.gross = payment.amount.to_f - payment.tax.to_f
+      if payment.gross.to_d == 0.0
+        payment.gross = payment.amount.to_d - payment.tax.to_d
       else
-        payment.amount = payment.gross.to_f
-        payment.gross = payment.amount.to_f - payment.tax.to_f
+        payment.amount = payment.gross.to_d
+        payment.gross = payment.amount.to_d - payment.tax.to_d
       end
       payment.save
       if insert.size > 1000
@@ -683,12 +683,12 @@ class PaymentsController < ApplicationController
 
       user = @provider.device.user if @provider.device and @provider.device.user
       if !params[:amount].blank?
-        @amount =  params[:amount].to_f
+        @amount =  params[:amount].to_d
         @am_typ = "ammount"
         @real_amount = user ?  user.get_tax.apply_tax(@amount) : @amount
       else
         @am_typ = "amount_with_tax"
-        @real_amount = params[:amount_with_tax].to_f #if !params[:amount_with_tax].blank?
+        @real_amount = params[:amount_with_tax].to_d #if !params[:amount_with_tax].blank?
         @amount  = user ?  user.get_tax.count_amount_without_tax(@real_amount) : @real_amount
       end
 
@@ -700,24 +700,24 @@ class PaymentsController < ApplicationController
         redirect_to :controller => "callc", :action => "main" and return false
       end
       if !params[:amount].blank?
-        @amount =  params[:amount].to_f
+        @amount =  params[:amount].to_d
         @am_typ = "ammount"
         @real_amount = @user.get_tax.apply_tax(@amount)
       else
         @am_typ = "amount_with_tax"
-        @real_amount = params[:amount_with_tax].to_f #if !params[:amount_with_tax].blank?
+        @real_amount = params[:amount_with_tax].to_d #if !params[:amount_with_tax].blank?
         @amount  = @user.get_tax.count_amount_without_tax(@real_amount)
       end
     end
 
     @curr = params[:p_currency]
-    @curr_amount =  @amount.to_f
-    @curr_real_amount =  @real_amount.to_f
+    @curr_amount =  @amount.to_d
+    @curr_real_amount =  @real_amount.to_d
     @description = params[:description]
     @exchange_rate = count_exchange_rate(current_user.currency.name, @curr)
-    @amount = @amount.to_f /  @exchange_rate.to_f
-    @real_amount = @real_amount.to_f /  @exchange_rate.to_f
-    if @amount.to_f == 0.to_f
+    @amount = @amount.to_d /  @exchange_rate.to_d
+    @real_amount = @real_amount.to_d /  @exchange_rate.to_d
+    if @amount.to_d == 0.to_d
       flash[:notice] = _('Please_add_correct_amount')
       redirect_to :action => 'manual_payment'
     end
@@ -732,8 +732,8 @@ class PaymentsController < ApplicationController
       # manual payment for provider
       
       provider = current_user.providers.find(:first, :conditions => ["providers.id = ?", params[:provider_id]])
-      amount = params[:amount].to_f * -1.to_f
-      real_amount = params[:real_amount].to_f * -1.to_f
+      amount = params[:amount].to_d * -1.to_d
+      real_amount = params[:real_amount].to_d * -1.to_d
       currency = params[:p_currency]
       exchange_rate = count_exchange_rate(current_user.currency.name,currency)
 
@@ -743,8 +743,8 @@ class PaymentsController < ApplicationController
         redirect_to :controller => "callc", :action => "main" and return false
       end
 
-      curr_amount =  amount / exchange_rate.to_f
-      curr_real_amount =  real_amount / exchange_rate.to_f
+      curr_amount =  amount / exchange_rate.to_d
+      curr_real_amount =  real_amount / exchange_rate.to_d
       provider.balance +=  curr_amount
       provider.save
 
@@ -770,8 +770,8 @@ class PaymentsController < ApplicationController
       #manual payment for user
       
       user = User.find(:first,:include => [:tax], :conditions => ["users.id = ?", params[:user]])
-      amount = params[:amount].to_f
-      real_amount = params[:real_amount].to_f
+      amount = params[:amount].to_d
+      real_amount = params[:real_amount].to_d
       currency = params[:p_currency]
       exchange_rate = count_exchange_rate(current_user.currency.name,currency)
 
@@ -781,8 +781,8 @@ class PaymentsController < ApplicationController
         redirect_to :controller => "callc", :action => "main" and return false
       end
 
-      curr_amount =  amount / exchange_rate.to_f
-      curr_real_amount =  real_amount / exchange_rate.to_f
+      curr_amount =  amount / exchange_rate.to_d
+      curr_real_amount =  real_amount / exchange_rate.to_d
       
       user.balance +=  curr_amount
       user.save
@@ -801,8 +801,8 @@ class PaymentsController < ApplicationController
       paym.save
 
 
-      invoice_amount = (curr_amount/ current_user.current.currency.exchange_rate.to_f).to_f
-      invoice_amount_real = (curr_real_amount/ current_user.current.currency.exchange_rate.to_f).to_f
+      invoice_amount = (curr_amount/ current_user.current.currency.exchange_rate.to_d).to_d
+      invoice_amount_real = (curr_real_amount/ current_user.current.currency.exchange_rate.to_d).to_d
 
       # create invoice for prepaid user's manual payment if such setting activated
       if user.postpaid == 0 and user.generate_invoice == 1
@@ -827,7 +827,7 @@ class PaymentsController < ApplicationController
         invdetail.invoice_id = invoice.id
 
         if currency.to_s != current_user.currency.name
-          invdetail.name = _('Manual_payment') + "(#{params[:amount].to_f} #{currency.to_s})"
+          invdetail.name = _('Manual_payment') + "(#{params[:amount].to_d} #{currency.to_s})"
         else
           invdetail.name = _('Manual_payment')
         end
@@ -910,10 +910,10 @@ class PaymentsController < ApplicationController
       @user_id = session[:user_id]
 
 
-      @amount = Confline.get_value("WebMoney_Default_Amount", @user.owner_id).to_f
-      @amount = params[:amount].to_f if params[:amount]
+      @amount = Confline.get_value("WebMoney_Default_Amount", @user.owner_id).to_d
+      @amount = params[:amount].to_d if params[:amount]
 
-      wm_min_amount = Confline.get_value("WebMoney_Min_Amount", @user.owner_id).to_f
+      wm_min_amount = Confline.get_value("WebMoney_Min_Amount", @user.owner_id).to_d
 
       @amount = wm_min_amount if @amount < wm_min_amount
       @test = Confline.get_value('WebMoney_Test', @user.owner_id)
@@ -955,7 +955,7 @@ class PaymentsController < ApplicationController
     if  params[:LMI_PREREQUEST].to_i == 1 && @enabled == 1
       @payment = Payment.find(params[:LMI_PAYMENT_NO])
       if @payment
-        if @payment.amount.to_f == params[:LMI_PAYMENT_AMOUNT].to_f
+        if @payment.amount.to_d == params[:LMI_PAYMENT_AMOUNT].to_d
           if params[:LMI_PAYEE_PURSE].to_s == confline("WebMoney_Purse").to_s
             @payment.pending_reason = 'Notified payment'
             @payment.save
@@ -975,7 +975,7 @@ class PaymentsController < ApplicationController
       @payment = Payment.find(:first, :conditions => "id = #{params[:LMI_PAYMENT_NO].to_i}")
       if @payment
         if @payment.pending_reason.to_s == 'Notified payment' or @skip_prerequest == 1
-          if @payment.amount.to_f == params[:LMI_PAYMENT_AMOUNT].to_f
+          if @payment.amount.to_d == params[:LMI_PAYMENT_AMOUNT].to_d
             if params[:LMI_MODE].to_i == confline('WebMoney_Test').to_i
               if params[:LMI_PAYEE_PURSE].to_s == confline('WebMoney_Purse').to_s
                 @hash_str = ''
@@ -1012,8 +1012,8 @@ class PaymentsController < ApplicationController
                   @payment.pending_reason = ''
                   @payment.save
                   @user = User.find(params[:user])
-                  #@user.balance += params[:gross].to_f
-                  @user.balance += params[:gross].to_f*Currency.count_exchange_rate(@payment.currency, @user.currency).to_f
+                  #@user.balance += params[:gross].to_d
+                  @user.balance += params[:gross].to_d*Currency.count_exchange_rate(@payment.currency, @user.currency).to_d
                   @user.save
                 else
                   MorLog.my_debug('Hash mismatch')
@@ -1094,7 +1094,7 @@ class PaymentsController < ApplicationController
     @enabled = Confline.get_value("Cyberplat_Enabled", @user.owner_id).to_i
     @user_enabled = @user.cyberplat_active.to_i
     @test = Confline.get_value("Cyberplat_Test", @user.owner_id).to_i
-    @fee = Confline.get_value("Cyberplat_Transaction_Fee", @user.owner_id).to_f
+    @fee = Confline.get_value("Cyberplat_Transaction_Fee", @user.owner_id).to_d
     @cp_default_curr = Confline.get_value("Cyberplat_Default_Currency", @user.owner_id)
     @cp_default_curr = "RUB" if @cp_default_curr == "RUR"
     @user_curr = @cp_default_curr
@@ -1113,11 +1113,11 @@ class PaymentsController < ApplicationController
       @user = User.find(:first, :include => [:tax], :conditions => ["users.id = ?", session[:user_id]])
       @user_id = session[:user_id]
 
-      @user_amount = Confline.get_value("Cyberplat_Default_Amount", @user.owner_id).to_f
-      @user_amount = params[:amount].to_f if params[:amount]
-      @user_amount = sprintf("%.2f", @user_amount).to_f
-      @amount = sprintf("%.2f", @user_amount * Currency.count_exchange_rate(@user_curr, @cp_default_curr)).to_f
-      cp_min_amount = Confline.get_value("Cyberplat_Min_Amount", @user.owner_id).to_f
+      @user_amount = Confline.get_value("Cyberplat_Default_Amount", @user.owner_id).to_d
+      @user_amount = params[:amount].to_d if params[:amount]
+      @user_amount = sprintf("%.2f", @user_amount).to_d
+      @amount = sprintf("%.2f", @user_amount * Currency.count_exchange_rate(@user_curr, @cp_default_curr)).to_d
+      cp_min_amount = Confline.get_value("Cyberplat_Min_Amount", @user.owner_id).to_d
 
       if @amount < cp_min_amount
         @user_amount = cp_min_amount * Currency.count_exchange_rate(@cp_default_curr, @user_curr)
@@ -1128,16 +1128,16 @@ class PaymentsController < ApplicationController
       @user_amount_with_vat = @user_amount + @user_vat_sum
       @user_fee_sum = @user_amount_with_vat*(@fee/100)
       @user_amount_with_vat += @user_fee_sum
-      @user_amount_with_vat = sprintf("%.2f", @user_amount_with_vat).to_f
+      @user_amount_with_vat = sprintf("%.2f", @user_amount_with_vat).to_d
       @description = session[:company] + " balance update"
 
 
-      @vat_sum = sprintf("%.2f", @user_vat_sum).to_f
+      @vat_sum = sprintf("%.2f", @user_vat_sum).to_d
       @amount_with_vat = @amount + @vat_sum
       @fee_sum = @amount_with_vat*(@fee/100)
-      @fee_sum = sprintf("%.2f", @fee_sum).to_f
+      @fee_sum = sprintf("%.2f", @fee_sum).to_d
       @amount_with_vat += @fee_sum
-      @amount_with_vat = sprintf("%.2f", @amount_with_vat).to_f
+      @amount_with_vat = sprintf("%.2f", @amount_with_vat).to_d
 
       @payment = Payment.new
       @payment.paymenttype = 'cyberplat'
@@ -1199,7 +1199,7 @@ class PaymentsController < ApplicationController
       @status = z[z.index("Status")+1].to_i if z.index("Status")
       @transaction_id = z[z.index("TransactionID")+1].to_i if z.index("TransactionID")
       @order_id = z[z.index("OrderID")+1].to_i if z.index("OrderID")
-      @transaction_amount = z[z.index("TransactionAmount")+1].to_f/100 if z.index("TransactionAmount")
+      @transaction_amount = z[z.index("TransactionAmount")+1].to_d/100 if z.index("TransactionAmount")
       @transaction_currency = z[z.index("TransactionCurrency")+1] if z.index("TransactionCurrency")
       @error_code = z[z.index("ErrorCode")+1].to_i if z.index("ErrorCode")
       @description = z[z.index("Description")+1] if z.index("Description")
@@ -1219,7 +1219,7 @@ class PaymentsController < ApplicationController
               @payment.payer_email = @user.email
               @payment.pending_reason = ''
               @payment.save
-              @user.balance += sprintf("%.2f", @payment.gross * Currency.count_exchange_rate(@payment.currency, Currency.find(1).name)).to_f
+              @user.balance += sprintf("%.2f", @payment.gross * Currency.count_exchange_rate(@payment.currency, Currency.find(1).name)).to_d
               @user.save
               email = Email.find(:first, :conditions => "name = 'cyberplat_announce' AND owner_id = #{@user.owner_id}")
               users = []
@@ -1289,7 +1289,7 @@ class PaymentsController < ApplicationController
     MorLog.my_debug('Ouroboros payment : pay', 1)
     MorLog.my_debug("Ouroboros payment : user - #{@user.id}", 1)
     if @enabled == 1
-      if params[:amount].to_f <= 0.0
+      if params[:amount].to_d <= 0.0
         flash[:notice] = _('Enter_Payment_Amount')
         redirect_to :action => "ouroboros" and return false
       end
@@ -1304,10 +1304,10 @@ class PaymentsController < ApplicationController
 
       @merchant_code = Confline.get_value("Ouroboros_Merchant_Code", @user.owner_id)
       @lang = Confline.get_value("Ouroboros_Language", @user.owner_id)
-      #@amount =            Confline.get_value("Ouronboros_Default_Amount", @user.owner_id).to_f
+      #@amount =            Confline.get_value("Ouronboros_Default_Amount", @user.owner_id).to_d
       @secret_key = Confline.get_value("Ouroboros_Secret_key", @user.owner_id)
-      @ob_min_amount = Confline.get_value("Ouroboros_Min_Amount", @user.owner_id).to_f
-      @ob_max_amount = Confline.get_value("Ouroboros_Max_Amount", @user.owner_id).to_f
+      @ob_min_amount = Confline.get_value("Ouroboros_Min_Amount", @user.owner_id).to_d
+      @ob_max_amount = Confline.get_value("Ouroboros_Max_Amount", @user.owner_id).to_d
       @currency = Confline.get_value('Ouroboros_Default_Currency', @user.owner_id)
       @retry_count = Confline.get_value("Ouroboros_Retry_Count", @user.owner_id)
       @completition = Confline.get_value("Ouroboros_Completion", @user.owner_id)
@@ -1358,10 +1358,10 @@ class PaymentsController < ApplicationController
           key = Confline.get_value("Ouroboros_Secret_key", @user.owner_id)
           @hash = Ouroboros::Hash.reply_hash(params, key)
           if @hash == params[:signature]
-            if params[:amount].to_f == @payment.amount.to_f*100
+            if params[:amount].to_d == @payment.amount.to_d*100
               @currency = Confline.get_value('Ouroboros_Default_Currency', @user.owner_id)
               rate = count_exchange_rate(session[:default_currency], @payment.currency)
-              @user.balance += @payment.gross.to_f / rate
+              @user.balance += @payment.gross.to_d / rate
               @user.save
               @payment.completed = 1
               @payment.transaction_id = params[:tid]
@@ -1371,13 +1371,13 @@ class PaymentsController < ApplicationController
               @payment.pending_reason = ''
               @payment.save
               MorLog.my_debug("Ouroboros payment : payment - #{@payment.id}", 1) if @payment
-              MorLog.my_debug("Ouroboros payment : amount - #{@payment.gross.to_f / rate}", 1)
+              MorLog.my_debug("Ouroboros payment : amount - #{@payment.gross.to_d / rate}", 1)
               @error = 0
             else
               @error = 5
               MorLog.my_debug('Ouroboros payment : Amount missmach')
               MorLog.my_debug('   SYSTEM    :' + @payment.amount.to_s)
-              MorLog.my_debug('   Ouroboros :' + (params[:amount].to_f/100).to_s)
+              MorLog.my_debug('   Ouroboros :' + (params[:amount].to_d/100).to_s)
             end
           else
             @error = 4
@@ -1439,7 +1439,7 @@ class PaymentsController < ApplicationController
 
   def get_price_exchange(price, cur)
     exrate = Currency.count_exchange_rate(cur, current_user.currency.name)
-    rate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [price.to_f]})
-    return rate_cur.to_f
+    rate_cur = Currency.count_exchange_prices({:exrate => exrate, :prices => [price.to_d]})
+    return rate_cur.to_d
   end
 end

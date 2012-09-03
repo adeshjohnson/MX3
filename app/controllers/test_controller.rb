@@ -94,7 +94,7 @@ class TestController < ApplicationController
       (dub[3].to_i - 1).times {
         action = Action.find(:first, :include => [:user], :conditions => ["action = 'subscription_paid' AND user_id = ? AND data = ? AND target_id = ?", dub[0].to_i, dub[1], dub[2].to_i])
         user = action.user
-        user.balance += action.data2.to_f
+        user.balance += action.data2.to_d
         MorLog.my_debug("  Action reverted User: #{user.id}, action.data2: #{action.data2}")
         user.save
         action.destroy

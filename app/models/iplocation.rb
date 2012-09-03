@@ -13,8 +13,8 @@ class Iplocation < ActiveRecord::Base
           mas = mas.split("\n")
           loc.country=mas[0].to_s.split(":")[1].to_s.split("(")[0].to_s.strip.titlecase if mas[0].split(":")[1].to_s.strip.size > 0
           loc.city = mas[1].to_s.split(":")[1].to_s.strip.titlecase if mas[1].split(":")[1].strip.size > 0
-          loc.latitude = mas[2].split(":")[1].to_f
-          loc.longitude = mas[3].split(":")[1].to_f
+          loc.latitude = mas[2].split(":")[1].to_d
+          loc.longitude = mas[3].split(":")[1].to_d
         else
           Iplocation::reset_location(loc)
         end
@@ -44,8 +44,8 @@ class Iplocation < ActiveRecord::Base
           lon = res.match(/<tr><th>Longitude:<\/th><td>(.*)<\/td><\/tr>/)
           cit = res.match(/<tr><th>City:<\/th><td>(.*)<\/td><\/tr>/)
           cou = res.match(/<tr><th>Country:<\/th><td>(.*)<\/td><\/tr>/)
-          loc.longitude = lon[1].to_f if lon
-          loc.latitude = lat[1].to_f if lat
+          loc.longitude = lon[1].to_d if lon
+          loc.latitude = lat[1].to_d if lat
           loc.city = cit[1].to_s.strip.titlecase if cit
           loc.country = cou[1].to_s.gsub(/<img.*>/, "").strip.titlecase if cou
         else
@@ -79,8 +79,8 @@ class Iplocation < ActiveRecord::Base
           lon = res.match(/<th>My IP address longitude:<\/th>.*\n.*<td>.*\n(.*)<\/td>.*\n.*<\/tr>/)
           loc.country = cou[1].gsub(/<img.*>/, "").strip.titlecase if cou
           loc.city = cit[1].strip.titlecase if cit
-          loc.longitude = lon[1].strip.to_f if lon
-          loc.latitude = lat[1].strip.to_f if lat
+          loc.longitude = lon[1].strip.to_d if lon
+          loc.latitude = lat[1].strip.to_d if lat
         else
           Iplocation::reset_location(loc)
         end
@@ -116,8 +116,8 @@ class Iplocation < ActiveRecord::Base
       else
         if res[0] == "200"
           loc.ip = prefix
-          loc.latitude = res[2].to_f
-          loc.longitude = res[3].to_f
+          loc.latitude = res[2].to_d
+          loc.longitude = res[3].to_d
           loc.city = ""
           loc.city = dst.lstrip if dst and dst != ""
           loc.country = dir.lstrip

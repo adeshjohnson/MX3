@@ -131,7 +131,7 @@ class EmailsController < ApplicationController
     @page = 1
     @page = params[:page].to_i if params[:page] and params[:page].to_i > 0
 
-    @total_pages = (Action.count(:conditions => ["data2 = ? AND action = 'email_sent'", params[:id]]).to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (Action.count(:conditions => ["data2 = ? AND action = 'email_sent'", params[:id]]).to_d / session[:items_per_page].to_d).ceil
 
     @actions = Action.find(:all,
                            :conditions => ["data2 = ? AND action = 'email_sent'", params[:id]],
@@ -200,7 +200,7 @@ class EmailsController < ApplicationController
     @page = 1
     @page = params[:page].to_i if params[:page]
 
-    @total_pages = (@clients.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@clients.size.to_d / session[:items_per_page].to_d).ceil
     @all_clients = @clients
     @clients = []
     @a_number = []
@@ -326,12 +326,12 @@ class EmailsController < ApplicationController
           #       my_debug("userio_balansas : " + @user.frozen_balance)
           #       my_debug("resellerio_balansas : " + @ruser.frozen_balance)
           if @ruser.id.to_i != 0
-            @user.frozen_balance = @user.frozen_balance - r['user_price'].to_f
+            @user.frozen_balance = @user.frozen_balance - r['user_price'].to_d
             @user.save
           else
-            @user.frozen_balance = @user.frozen_balance - r['user_price'].to_f
+            @user.frozen_balance = @user.frozen_balance - r['user_price'].to_d
             @user.save
-            @ruser.frozen_balance = @ruser.frozen_balance - r['reseller_price'].to_f
+            @ruser.frozen_balance = @ruser.frozen_balance - r['reseller_price'].to_d
             @ruser.save
           end
           @sms.status_code = 5
@@ -339,15 +339,15 @@ class EmailsController < ApplicationController
         else
           #       my_debug "grazinau uz per ilga laika"
           if @ruser.id.to_i != 0
-            @user.balance = @user.balance + r['user_price'].to_f
-            @user.frozen_balance = @user.frozen_balance - r['user_price'].to_f
+            @user.balance = @user.balance + r['user_price'].to_d
+            @user.frozen_balance = @user.frozen_balance - r['user_price'].to_d
             @user.save
           else
-            @user.balance = @user.balance + r['user_price'].to_f
-            @user.frozen_balance = @user.frozen_balance - r['user_price'].to_f
+            @user.balance = @user.balance + r['user_price'].to_d
+            @user.frozen_balance = @user.frozen_balance - r['user_price'].to_d
             @user.save
-            @ruser.balance = @ruser.balance + r['reseller_price'].to_f
-            @ruser.frozen_balance = @ruser.frozen_balance - r['reseller_price'].to_f
+            @ruser.balance = @ruser.balance + r['reseller_price'].to_d
+            @ruser.frozen_balance = @ruser.frozen_balance - r['reseller_price'].to_d
             @ruser.save
           end
           @sms = SmsMessage.find(r['sms_id'])
@@ -387,33 +387,33 @@ class EmailsController < ApplicationController
               #           my_debug("resseller_frozen_balance : " + @ruser.frozen_balance.to_s)
               if  r['nan_keywords_charge_user'].to_i == 1
                 #                my_debug "nan_keywords_charge_user"
-                @user_price = r['user_price'].to_f
-                @ruser_price = r['reseller_price'].to_f
+                @user_price = r['user_price'].to_d
+                @ruser_price = r['reseller_price'].to_d
                 @user_price_b = 0
                 @ruser_price_b = 0
                 @sms.status_code = 5
               else
                 #                my_debug "nan_keywords_charge_user"
-                @user_price = r['user_price'].to_f
-                @ruser_price = r['reseller_price'].to_f
-                @user_price_b = r['user_price'].to_f
-                @ruser_price_b = r['user_price'].to_f
+                @user_price = r['user_price'].to_d
+                @ruser_price = r['reseller_price'].to_d
+                @user_price_b = r['user_price'].to_d
+                @ruser_price_b = r['user_price'].to_d
                 @sms.status_code = 4
               end
 
               if r['wait_for_bad_email'].to_i == 1 and msg.match(r['email_bad_keywords'])
                 #                 my_debug "wait_for_bad_email"
-                @user_price = r['user_price'].to_f
-                @ruser_price = r['reseller_price'].to_f
-                @user_price_b = r['user_price'].to_f
-                @ruser_price_b = r['user_price'].to_f
+                @user_price = r['user_price'].to_d
+                @ruser_price = r['reseller_price'].to_d
+                @user_price_b = r['user_price'].to_d
+                @ruser_price_b = r['user_price'].to_d
                 @sms.status_code = 4
               end
 
               if r['wait_for_good_email'].to_i == 1 and msg.match(r['email_good_keywords'])
                 #                 my_debug "wait_for_good_email"
-                @user_price = r['user_price'].to_f
-                @ruser_price = r['reseller_price'].to_f
+                @user_price = r['user_price'].to_d
+                @ruser_price = r['reseller_price'].to_d
                 @user_price_b = 0
                 @ruser_price_b = 0
                 @sms.status_code = 5

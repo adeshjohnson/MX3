@@ -425,8 +425,8 @@ class CallcController < ApplicationController
 
         #my_debug session[:time_to_call_per_day].to_i * 3600 - a[1]
 
-        #@e[a[0]] = session[:time_to_call_per_day].to_f * 3600 - a[1]
-        normative = user.calltime_normative.to_f * 3600
+        #@e[a[0]] = session[:time_to_call_per_day].to_d * 3600 - a[1]
+        normative = user.calltime_normative.to_d * 3600
         @e[a[0]] = normative - a[1]
         @f[a[0]] = "red"
 
@@ -553,9 +553,9 @@ class CallcController < ApplicationController
   end
 
   def set_tz_to_users
-    sql = "UPDATE users SET time_zone = ((time_zone + #{params[:add_time].to_f}) % 24);"
+    sql = "UPDATE users SET time_zone = ((time_zone + #{params[:add_time].to_d}) % 24);"
     ActiveRecord::Base.connection.execute(sql)
-    flash[:status] = _("Time_zone_for_users_add_value") + " + #{params[:add_time].to_f} "
+    flash[:status] = _("Time_zone_for_users_add_value") + " + #{params[:add_time].to_d} "
     redirect_to :action => "global_settings" and return false
   end
 
@@ -691,7 +691,7 @@ class CallcController < ApplicationController
           logger.fatal diff
           logger.fatal t
           logger.fatal old_tz
-          sql = "UPDATE users SET time_zone = ((time_zone + #{diff.to_f}) % 24);;"
+          sql = "UPDATE users SET time_zone = ((time_zone + #{diff.to_d}) % 24);;"
           ActiveRecord::Base.connection.execute(sql)
           MorLog.my_debug("System time ofset update users", 1)
         end

@@ -41,7 +41,7 @@ class Payment < ActiveRecord::Base
     user = self.user
     pa = self.amount
     if self.paymenttype == "manual" and user
-      pa = self.tax ? self.amount.to_f - self.tax.to_f : user.get_tax.count_amount_without_tax(self.amount.to_f)
+      pa = self.tax ? self.amount.to_d - self.tax.to_d : user.get_tax.count_amount_without_tax(self.amount.to_d)
     end
     pa = self.gross if ["webmoney", "cyberplat", "linkpoint", "voucher", "ouroboros", "subscription", "paypal", "paypal_fee"].include?(self.paymenttype.to_s)
     pa = self.amount if ["invoice"].include?(self.paymenttype.to_s)
@@ -75,7 +75,7 @@ class Payment < ActiveRecord::Base
     payment.currency = order.currency
     payment.fee = order.fee
     payment.amount = order.amount
-    payment.gross = order.gross.to_f
+    payment.gross = order.gross.to_d
     payment.transaction_id = order.transaction_id
     payment.first_name = order.first_name
     payment.last_name = order.last_name
@@ -89,7 +89,7 @@ class Payment < ActiveRecord::Base
   end
 
   def Payment.subscription_payment(user, amount)
-    amount = amount.to_f * -1
+    amount = amount.to_d * -1
     if amount != 0
       taxw = user.get_tax
       currency = Currency.get_default
@@ -140,10 +140,10 @@ class Payment < ActiveRecord::Base
     # create new reverse payment
     MorLog.my_debug('Paypal reverse', true)
     refund_payment = self.dup
-    refund_payment.fee = notify.fee.to_f
-    refund_payment.amount = notify.gross.to_f
-    refund_payment.gross = notify.gross.to_f - notify.tax.to_f
-    refund_payment.tax = notify.tax.to_f
+    refund_payment.fee = notify.fee.to_d
+    refund_payment.amount = notify.gross.to_d
+    refund_payment.gross = notify.gross.to_d - notify.tax.to_d
+    refund_payment.tax = notify.tax.to_d
     refund_payment.currency = notify.currency.to_s
     refund_payment.transaction_id = notify.transaction_id.to_s
     refund_payment.first_name = notify.first_name.to_s
@@ -164,9 +164,9 @@ class Payment < ActiveRecord::Base
     else
       # payment_1 is addet to user balance , subtracte reverse amount
       refund_payment.completed = 1
-      user.balance += sprintf("%.2f", refund_payment.gross * Currency.count_exchange_rate(refund_payment.currency, Currency.find(1).name)).to_f
-      if refund_payment.fee.to_f != 0.0 and Confline.get_value("PayPal_User_Pays_Transfer_Fee", 0).to_i == 1
-        user.balance -= sprintf("%.2f", refund_payment.fee * Currency.count_exchange_rate(refund_payment.currency, Currency.find(1).name)).to_f
+      user.balance += sprintf("%.2f", refund_payment.gross * Currency.count_exchange_rate(refund_payment.currency, Currency.find(1).name)).to_d
+      if refund_payment.fee.to_d != 0.0 and Confline.get_value("PayPal_User_Pays_Transfer_Fee", 0).to_i == 1
+        user.balance -= sprintf("%.2f", refund_payment.fee * Currency.count_exchange_rate(refund_payment.currency, Currency.find(1).name)).to_d
         fee_payment = refund_payment.dup
         fee_payment.paymenttype = "paypal_reversed_fee"
         fee_payment.fee = 0
@@ -252,7 +252,7 @@ class Payment < ActiveRecord::Base
     unpaid = Struct::MockPayment.new(0, 0, 0, 'unpaid')
     for payment in payments
       exchange_rate = Currency.count_exchange_rate(payment.currency, currency_name)
-      price = Currency.count_exchange_prices({:exrate => exchange_rate, :prices => [payment.payment_amount.to_f]})
+      price = Currency.count_exchange_prices({:exrate => exchange_rate, :prices => [payment.payment_amount.to_d]})
       price_with_vat = Currency.count_exchange_prices({:exrate => exchange_rate, :prices => [payment.payment_amount_with_vat(0)]})
       if payment.completed != 0
         paid.count += 1

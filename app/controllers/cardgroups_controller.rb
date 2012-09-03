@@ -96,7 +96,7 @@ class CardgroupsController < ApplicationController
     @page = params[:page].to_i
 
     @cards, @card_count = Card.search(corrected_user_id, @options, {:page => @page, :per_page => session[:items_per_page]})
-    @total_pages = (@card_count / session[:items_per_page].to_f).ceil
+    @total_pages = (@card_count / session[:items_per_page].to_d).ceil
   end
 
   def show
@@ -183,7 +183,7 @@ class CardgroupsController < ApplicationController
     check_addon
     change_date
 
-    price_with_vat = params[:price_with_vat].to_f
+    price_with_vat = params[:price_with_vat].to_d
     tax = tax_from_params
 
     @cardgroup.tax = Tax.new(tax)
@@ -245,7 +245,7 @@ class CardgroupsController < ApplicationController
     end
     @tariffs= Tariff.find(:all, :conditions => "owner_id = #{user_id} #{cond}")
 
-    @price_with_vat =@cardgroup.price.to_f + @cardgroup.get_tax.count_tax_amount(@cardgroup.price.to_f).to_f
+    @price_with_vat =@cardgroup.price.to_d + @cardgroup.get_tax.count_tax_amount(@cardgroup.price.to_d).to_d
 
     @cardgroup.valid_from = (Date.today.to_s + " 00:00:00") if @cardgroup.valid_from.blank? or @cardgroup.valid_from.to_s == '0000-00-00 00:00:00'
     @cardgroup.valid_till = (Date.today.to_s + " 23:59:59") if @cardgroup.valid_till.blank? or @cardgroup.valid_till.to_s == '0000-00-00 00:00:00'
@@ -274,7 +274,7 @@ class CardgroupsController < ApplicationController
     check_user_for_cardgroup(@cardgroup)
     change_date
     @cardgroup.update_attributes(params[:cardgroup])
-    @price_with_vat = price_with_vat = params[:price_with_vat].to_f
+    @price_with_vat = price_with_vat = params[:price_with_vat].to_d
 
     tax = tax_from_params
     @cardgroup.get_tax.update_attributes(tax)
@@ -435,7 +435,7 @@ class CardgroupsController < ApplicationController
 
     #MorLog.my_debug "_______________________________(sql)______________________________________________"
     # MorLog.my_debug sql
-    price = 0.to_f
+    price = 0.to_d
     card_id = 0
     @cards_calls = Card.find_by_sql(sql)
     @cards_callsv = []
@@ -443,23 +443,23 @@ class CardgroupsController < ApplicationController
     @cards_calls = []
     i=0
     @t_cards = 0
-    @t_price = 0.to_f
+    @t_price = 0.to_d
     for call in @c_c
 
       if card_id.to_i == call.id.to_i
-        price += call.user_price.to_f
-        if price.to_f >= call.price.to_f
-          @t_price += call.user_price.to_f
+        price += call.user_price.to_d
+        if price.to_d >= call.price.to_d
+          @t_price += call.user_price.to_d
           # MorLog.my_debug " Pridejo #{call.id}, nes #{price.to_i} >= #{call.price.to_i}"
           @cards_callsv << call
         end
       else
         card_id = call.id
-        price = 0.to_f
+        price = 0.to_d
         @t_cards +=1
-        price += call.user_price.to_f
-        if price.to_f >= call.price.to_f
-          @t_price += call.user_price.to_f
+        price += call.user_price.to_d
+        if price.to_d >= call.price.to_d
+          @t_price += call.user_price.to_d
 
           #MorLog.my_debug " Pridejo #{call.id}, nes #{price.to_i} >= #{call.price.to_i}"
           @cards_callsv << call
@@ -509,7 +509,7 @@ class CardgroupsController < ApplicationController
       redirect_to :action => 'gmp_list', :id => @cg.id and return false
     end
 
-    percent = params[:percent].to_f
+    percent = params[:percent].to_d
     if percent == 0
       flash[:notice] = _('Bad_percent')
       redirect_to :action => 'gmp_list', :id => @cg.id and return false
@@ -687,7 +687,7 @@ class CardgroupsController < ApplicationController
       filename = Call.cardgroup_aggregate(@options.merge({:test => params[:test]}))
       filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
       if filename
-        filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_f)
+        filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
         if params[:test].to_i != 1
           send_file(filename)
         else
@@ -704,21 +704,21 @@ class CardgroupsController < ApplicationController
       # calculate total values of dataset.
       @total = {:duration => 0, :user_price => 0, :provider_price => 0, :total_calls => 0, :asr => 0, :acd => 0, :answered_calls => 0, :profit => 0, :margin => 0, :markup => 0}
       @result_full.each { |row|
-        @total[:duration] += row.duration.to_f
+        @total[:duration] += row.duration.to_d
         @total[:total_calls] += row.total_calls.to_i
         @total[:answered_calls] += row.answered_calls.to_i
-        @total[:user_price] += row.user_price.to_f
-        @total[:provider_price] += row.provider_price.to_f
-        @total[:profit] += row.user_price.to_f - row.provider_price.to_f
+        @total[:user_price] += row.user_price.to_d
+        @total[:provider_price] += row.provider_price.to_d
+        @total[:profit] += row.user_price.to_d - row.provider_price.to_d
       }
-      @total[:total_calls] == 0 ? @total[:asr] = 0 : @total[:asr] = @total[:answered_calls].to_f/@total[:total_calls].to_f*100
-      @total[:answered_calls] == 0 ? @total[:acd] = 0 : @total[:acd] = @total[:duration].to_f / @total[:answered_calls].to_f
-      @total[:margin] = ((@total[:user_price] - @total[:provider_price]) / @total[:user_price]) * 100 if @total[:provider_price].to_f != 0.to_f
-      @total[:markup] = ((@total[:user_price] / @total[:provider_price]) * 100) - 100 if @total[:provider_price].to_f != 0.to_f
+      @total[:total_calls] == 0 ? @total[:asr] = 0 : @total[:asr] = @total[:answered_calls].to_d/@total[:total_calls].to_d*100
+      @total[:answered_calls] == 0 ? @total[:acd] = 0 : @total[:acd] = @total[:duration].to_d / @total[:answered_calls].to_d
+      @total[:margin] = ((@total[:user_price] - @total[:provider_price]) / @total[:user_price]) * 100 if @total[:provider_price].to_d != 0.to_d
+      @total[:markup] = ((@total[:user_price] / @total[:provider_price]) * 100) - 100 if @total[:provider_price].to_d != 0.to_d
 
       # fetch required number of items.
       @result = []
-      @total_pages = (@total_calls.to_f / session[:items_per_page].to_f).ceil
+      @total_pages = (@total_calls.to_d / session[:items_per_page].to_d).ceil
       @options[:page] = @total_pages if @options[:page] > @total_pages
       start = session[:items_per_page]*(@options[:page]-1)
       (start..(start+session[:items_per_page])-1).each { |i|

@@ -5,13 +5,13 @@ class Invoicedetail < ActiveRecord::Base
   # converted attributes for user in current user currency
   def price
     b = read_attribute(:price)
-    b.to_f * User.current.currency.exchange_rate.to_f
+    b.to_d * User.current.currency.exchange_rate.to_d
   end
 
   # coconverted_price(exr)nverted attributes for user in given currency exrate
   def converted_price(exr)
     b = read_attribute(:price)
-    b.to_f * exr.to_f
+    b.to_d * exr.to_d
   end
 
   def nice_inv_name

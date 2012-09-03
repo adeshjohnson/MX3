@@ -297,7 +297,7 @@ class Provider < ActiveRecord::Base
     r2 = dec == "." ? "" : ", '.', '#{dec}')"
     n1 = "#{r1}" #"#{r1} FORMAT("
     n2 = "#{r2}" #",#{options[:nice_number_digits]})#{r2}"
-    c1 = options[:default_currency] != options[:show_currency] ? " * #{exrate.to_f} " : ""
+    c1 = options[:default_currency] != options[:show_currency] ? " * #{exrate.to_d} " : ""
 
     select2 = []
     format = Confline.get_value('Date_format', 0).gsub('M', 'i')
@@ -401,7 +401,7 @@ class Provider < ActiveRecord::Base
     s = []
 
     exrate = Currency.count_exchange_rate(options[:default_currency], options[:show_currency])
-    c1 = options[:default_currency] != options[:show_currency] ? " * #{exrate.to_f} " : ""
+    c1 = options[:default_currency] != options[:show_currency] ? " * #{exrate.to_d} " : ""
 
     s << 'providers.id, providers.name, providers.tech'
     s << 'COUNT(b.id) as pcalls'

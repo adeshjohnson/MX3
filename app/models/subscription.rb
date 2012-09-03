@@ -161,16 +161,16 @@ class Subscription < ActiveRecord::Base
         total_days = start_date.to_time.end_of_month.day
         amount = service.price / total_days * (days_used+1)
       when "one_time_fee"
-        amount = price_for_period(Time.now, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)).to_f
+        amount = price_for_period(Time.now, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)).to_d
       when "periodic_fee"
         if service.periodtype == 'day'
           amount = Action.sum('data2', :conditions => ["action = 'subscription_paid' AND user_id = ? AND data >= ? AND target_id = ?", self.user_id, "#{Time.now.year}-#{Time.now.month}-#{'1'}", self.id])
         else
-          amount = price_for_period(Time.now, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)).to_f
+          amount = price_for_period(Time.now, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)).to_d
        end
     end
     logger.debug "Amount: #{amount}"
-    return amount.to_f
+    return amount.to_d
   end
 
   def return_money_whole
@@ -180,13 +180,13 @@ class Subscription < ActiveRecord::Base
       when "one_time_fee"
         amount = service.price if end_time > activation_end
       when "flat_rate" 
-        amount = price_for_period(activation_start, end_time).to_f
+        amount = price_for_period(activation_start, end_time).to_d
       when "periodic_fee"
         case self.service.periodtype 
           when 'day'
             amount = self.subscriptions_paid_this_month
           when 'month'
-            amount = price_for_period(activation_start, end_time).to_f
+            amount = price_for_period(activation_start, end_time).to_d
         end
     end
     if amount > 0
@@ -207,7 +207,7 @@ class Subscription < ActiveRecord::Base
 =end
   def subscriptions_paid_this_month
     actions = Action.find(:first, :select=>'SUM(data2) AS amount', :conditions=>"action = 'subscription_paid' AND target_id = #{self.id} AND date > '#{Time.now.beginning_of_month.to_s(:db)}'")
-    return actions.amount.to_f
+    return actions.amount.to_d
   end
 
   def return_money_month
@@ -216,7 +216,7 @@ class Subscription < ActiveRecord::Base
     amount = self.return_for_month_end if user and user.user_type.to_s == "prepaid"
     if amount > 0
       Payment.subscription_payment(user, amount * -1)
-      user.balance += amount.to_f
+      user.balance += amount.to_d
       return user.save
     else
       return false

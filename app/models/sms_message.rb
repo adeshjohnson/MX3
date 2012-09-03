@@ -252,7 +252,7 @@ class SmsMessage < ActiveRecord::Base
 
     #============================= provider is ok ==============================
     prov_id = res["providers_id"]
-    prov_rate = res["price"].to_f / res["e_rate"].to_f
+    prov_rate = res["price"].to_d / res["e_rate"].to_d
     prov_type = res["provider_type"]
     self.provider_id = prov_id
     provider = SmsProvider.find_by_id(prov_id)
@@ -265,9 +265,9 @@ class SmsMessage < ActiveRecord::Base
     end
     if prov_type.to_s == 'sms_email'
       if user.owner_id == 0
-        provider.send_sms_email(self, user, {:message => message, :sms_numbers => sms_numbers, :to => number, :user_price => self.user_price.to_f, :unicode => options[:sms_unicode].to_i})
+        provider.send_sms_email(self, user, {:message => message, :sms_numbers => sms_numbers, :to => number, :user_price => self.user_price.to_d, :unicode => options[:sms_unicode].to_i})
       else
-        provider.send_sms_email(self, user, {:message => message, :sms_numbers => sms_numbers, :to => number, :user_price => self.user_price.to_f, :reseller => 1, :reseller_price => self.reseller_price.to_f, :unicode => options[:sms_unicode].to_i})
+        provider.send_sms_email(self, user, {:message => message, :sms_numbers => sms_numbers, :to => number, :user_price => self.user_price.to_d, :reseller => 1, :reseller_price => self.reseller_price.to_d, :unicode => options[:sms_unicode].to_i})
       end
     end
     if prov_type.to_s == 'api'
@@ -298,8 +298,8 @@ class SmsMessage < ActiveRecord::Base
         return false
       end
 
-      r_price = (reseller_rate.price.to_f / Currency.find(:first, :conditions => ["name='#{reseller_tariff.currency}'"]).exchange_rate.to_f).to_f
-      unless check_user_for_sms(reseller, (r_price * sms_numbers).to_f)
+      r_price = (reseller_rate.price.to_d / Currency.find(:first, :conditions => ["name='#{reseller_tariff.currency}'"]).exchange_rate.to_d).to_d
+      unless check_user_for_sms(reseller, (r_price * sms_numbers).to_d)
         self.status_code = 5
         self.save
         return false
@@ -321,21 +321,21 @@ class SmsMessage < ActiveRecord::Base
       return false
     end
 
-    price = (user_rate.price.to_f / Currency.find(:first, :conditions => ["name='#{user_tariff.currency}'"]).exchange_rate.to_f).to_f
+    price = (user_rate.price.to_d / Currency.find(:first, :conditions => ["name='#{user_tariff.currency}'"]).exchange_rate.to_d).to_d
 
-    unless check_user_for_sms(user, (price * sms_numbers.to_f).to_f)
+    unless check_user_for_sms(user, (price * sms_numbers.to_d).to_d)
       self.status_code = 5
       self.save
       return false
     end
 
     self.user_rate = Email.nice_number(price)
-    self.user_price = Email.nice_number(price * sms_numbers).to_f
+    self.user_price = Email.nice_number(price * sms_numbers).to_d
     freze_user_balance_for_sms(user, self.user_price) if api == 0
     if user.owner_id != 0
       self.reseller_id = reseller.id
       self.reseller_rate = Email.nice_number(r_price)
-      self.reseller_price = Email.nice_number(r_price * sms_numbers).to_f
+      self.reseller_price = Email.nice_number(r_price * sms_numbers).to_d
       freze_user_balance_for_sms(reseller, self.reseller_price) if api == 0
     end
 
@@ -348,14 +348,14 @@ class SmsMessage < ActiveRecord::Base
   def check_user_for_sms(user, sms_price)
     out = true
     if user.postpaid.to_i == 0
-      bal = user.balance.to_f - sms_price.to_f
-      if bal.to_f < 0.to_f
+      bal = user.balance.to_d - sms_price.to_d
+      if bal.to_d < 0.to_d
         out = false
       end
     else
-      bal = user.balance.to_f - sms_price.to_f
+      bal = user.balance.to_d - sms_price.to_d
       if user.credit.to_i > -1
-        if bal.to_f < (-1 * user.credit.to_f)
+        if bal.to_d < (-1 * user.credit.to_d)
           out = false
         end
       end
@@ -365,11 +365,11 @@ class SmsMessage < ActiveRecord::Base
 
   def freze_user_balance_for_sms(user, sms_price)
     #  logger.info "freze_user_balance: #{user.id}"
-    #  logger.info "before balance :#{user.balance.to_f} , frozen_balance #{user.frozen_balance.to_f} "
-    user.balance = user.balance.to_f - sms_price.to_f
-    user.frozen_balance = user.frozen_balance.to_f + sms_price.to_f
+    #  logger.info "before balance :#{user.balance.to_d} , frozen_balance #{user.frozen_balance.to_d} "
+    user.balance = user.balance.to_d - sms_price.to_d
+    user.frozen_balance = user.frozen_balance.to_d + sms_price.to_d
     user.save
-    #   logger.info "after balance :#{user.balance.to_f} , frozen_balance #{user.frozen_balance.to_f} "
+    #   logger.info "after balance :#{user.balance.to_d} , frozen_balance #{user.frozen_balance.to_d} "
   end
 
 
@@ -389,50 +389,50 @@ class SmsMessage < ActiveRecord::Base
   def charge_user
     user = self.user
     # logger.info "charge_user: #{user.id}"
-    # logger.info "before balance :#{user.balance.to_f} , frozen_balance #{user.frozen_balance.to_f} "
-    user.frozen_balance = user.frozen_balance.to_f - self.user_price.to_f
+    # logger.info "before balance :#{user.balance.to_d} , frozen_balance #{user.frozen_balance.to_d} "
+    user.frozen_balance = user.frozen_balance.to_d - self.user_price.to_d
     owner = user.owner
     if owner.id != 0
-      owner.frozen_balance = owner.frozen_balance.to_f - self.reseller_price.to_f
+      owner.frozen_balance = owner.frozen_balance.to_d - self.reseller_price.to_d
       owner.save
     end
     user.save
-    # logger.info "after balance :#{user.balance.to_f} , frozen_balance #{user.frozen_balance.to_f} "
+    # logger.info "after balance :#{user.balance.to_d} , frozen_balance #{user.frozen_balance.to_d} "
   end
 
 
   def return_sms_price_to_user
     user = self.user
     # logger.info "return_user: #{user.id}"
-    # logger.info "before balance :#{user.balance.to_f} , frozen_balance #{user.frozen_balance.to_f} "
-    user.frozen_balance = user.frozen_balance.to_f - self.user_price.to_f
-    user.balance = user.balance.to_f + self.user_price.to_f
+    # logger.info "before balance :#{user.balance.to_d} , frozen_balance #{user.frozen_balance.to_d} "
+    user.frozen_balance = user.frozen_balance.to_d - self.user_price.to_d
+    user.balance = user.balance.to_d + self.user_price.to_d
     owner = user.owner
     if owner.id != 0
-      owner.frozen_balance = owner.frozen_balance.to_f - self.reseller_price.to_f
-      owner.balance = owner.balance.to_f + self.reseller_price.to_f
+      owner.frozen_balance = owner.frozen_balance.to_d - self.reseller_price.to_d
+      owner.balance = owner.balance.to_d + self.reseller_price.to_d
       owner.save
     end
     user.save
-    # logger.info "after balance :#{user.balance.to_f} , frozen_balance #{user.frozen_balance.to_f} "
+    # logger.info "after balance :#{user.balance.to_d} , frozen_balance #{user.frozen_balance.to_d} "
   end
 
   # converted attributes for user in current user currency
   def user_price
     b = read_attribute(:user_price)
     if User.current and User.current.currency
-      b.to_f * User.current.currency.exchange_rate.to_f
+      b.to_d * User.current.currency.exchange_rate.to_d
     else
-      b.to_f
+      b.to_d
     end
   end
 
   def user_rate
     b = read_attribute(:user_rate)
     if User.current and User.current.currency
-      b.to_f * User.current.currency.exchange_rate.to_f
+      b.to_d * User.current.currency.exchange_rate.to_d
     else
-      b.to_f
+      b.to_d
     end
   end
 
@@ -440,9 +440,9 @@ class SmsMessage < ActiveRecord::Base
   def reseller_price
     b = read_attribute(:reseller_price)
     if User.current and User.current.currency
-      b.to_f * User.current.currency.exchange_rate.to_f
+      b.to_d * User.current.currency.exchange_rate.to_d
     else
-      b.to_f
+      b.to_d
     end
   end
 
@@ -450,9 +450,9 @@ class SmsMessage < ActiveRecord::Base
   def provider_price
     b = read_attribute(:reseller_price)
     if User.current and User.current.currency
-      b.to_f * User.current.currency.exchange_rate.to_f
+      b.to_d * User.current.currency.exchange_rate.to_d
     else
-      b.to_f
+      b.to_d
     end
   end
 

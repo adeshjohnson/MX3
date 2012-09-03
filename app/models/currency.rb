@@ -4,7 +4,7 @@ class Currency < ActiveRecord::Base
   has_many :users
 
   validates_length_of :name, :maximum => 5, :message => _('Currency_Name_is_to_long_Max_5_Simbols')
-  validates_numericality_of :exchange_rate, :greater_than => 0.to_f, :on => :create, :message => _('Currency_exchange_rate_canot_be_blank')
+  validates_numericality_of :exchange_rate, :greater_than => 0.to_d, :on => :create, :message => _('Currency_exchange_rate_canot_be_blank')
   validates_presence_of :name, :message => _('Currency_must_have_name')
   validates_uniqueness_of :name, :message => _('Currency_Name_Must_Be_Unique')
 
@@ -24,8 +24,8 @@ class Currency < ActiveRecord::Base
     else
       curr1 = Currency.find(:first, :conditions => ["name = ?", curr1]) if curr1.class != Currency
       curr2 = Currency.find(:first, :conditions => ["name = ?", curr2]) if curr2.class != Currency
-      if curr2 and curr1 and curr1.exchange_rate.to_f != 0.0
-        return curr2.exchange_rate.to_f / curr1.exchange_rate.to_f
+      if curr2 and curr1 and curr1.exchange_rate.to_d != 0.0
+        return curr2.exchange_rate.to_d / curr1.exchange_rate.to_d
       else
         return 0.0
       end
@@ -33,9 +33,9 @@ class Currency < ActiveRecord::Base
   end
 
   def Currency.count_exchange_prices(options={})
-    if options[:exrate].to_f > 0.to_f
+    if options[:exrate].to_d > 0.to_d
       new_prices = []
-      options[:prices].each { |p| new_prices << p.to_f * options[:exrate].to_f }
+      options[:prices].each { |p| new_prices << p.to_d * options[:exrate].to_d }
       a = new_prices #.to_sentence
     else
       a = options[:prices] #.to_sentence
@@ -93,7 +93,7 @@ class Currency < ActiveRecord::Base
       Net::HTTP.start("download.finance.yahoo.com") { |http| resp = http.get('/d/quotes.csv?'+par.join('&').to_s); @file = resp.body }
       f = @file.split("\r\n")
       f.each_with_index { |cur, i|
-        currencies[i].exchange_rate= cur.to_f;
+        currencies[i].exchange_rate= cur.to_d;
         currencies[i].last_update = Time.now;
         currencies[i].save
         if currencies[i].exchange_rate == 0  

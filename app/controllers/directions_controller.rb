@@ -124,7 +124,7 @@ class DirectionsController < ApplicationController
       res2 = ActiveRecord::Base.connection.select_all(sqll)
       @a_calls2[i] = res2[0]["calls2"].to_i
 
-      @a_ars2[i] = (@a_calls[i].to_f / @a_calls2[i]) * 100 if @a_calls[i] > 0
+      @a_ars2[i] = (@a_calls[i].to_d / @a_calls2[i]) * 100 if @a_calls[i] > 0
       @a_ars[i] = nice_number @a_ars2[i]
 
       @sdate += (60 * 60 * 24)

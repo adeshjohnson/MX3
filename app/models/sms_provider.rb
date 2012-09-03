@@ -114,11 +114,11 @@ class SmsProvider < ActiveRecord::Base
     to << user
     Email.send_email(email, to, Confline.get_value("Email_from"), "sms_email_sent", opt)
     if self.wait_for_good_email.to_i != 1 and self.wait_for_bad_email.to_i != 1
-      user.frozen_balance = user.frozen_balance.to_f - Email.nice_number(options[:user_price].to_f).to_f
+      user.frozen_balance = user.frozen_balance.to_d - Email.nice_number(options[:user_price].to_d).to_d
       user.save
       if options[:reseller] == 1
         user_r = sms.reseller
-        user_r.frozen_balance = user_r.frozen_balance.to_f - Email.nice_number(options[:reseller_price].to_f).to_f
+        user_r.frozen_balance = user_r.frozen_balance.to_d - Email.nice_number(options[:reseller_price].to_d).to_d
         user_r.save
       end
     end

@@ -216,7 +216,7 @@ class ServicesController < ApplicationController
       dest.active.to_i == 1 ? @destinations += @dest : @destinations -= @dest
     }
 
-    @total_pages = (@destinations.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@destinations.size.to_d / session[:items_per_page].to_d).ceil
     @destinations = @destinations[(@page-1)*session[:items_per_page], session[:items_per_page]].to_a
 
     render(:layout => "layouts/mor_min")
@@ -287,7 +287,7 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
     @page = 1
     @page = params[:page].to_i if params[:page]
 
-    @total_pages = (@subs.size.to_f / session[:items_per_page].to_f).ceil
+    @total_pages = (@subs.size.to_d / session[:items_per_page].to_d).ceil
     @all_subs = @subs
     @subs = []
     iend = ((session[:items_per_page] * @page) - 1)
@@ -353,7 +353,7 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
           period_end = Time.now.change(:hour => 23, :min => 59, :sec => 59)
         end
         subscription_price = @sub.price_for_period(Time.now.beginning_of_day, period_end)
-        if subscription_price.to_f != 0
+        if subscription_price.to_d != 0
           if (@user.balance - subscription_price) < 0
             @sub.destroy
             flash[:notice] = _('insufficient_balance')

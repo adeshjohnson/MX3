@@ -148,7 +148,7 @@ class DialplansController < ApplicationController
       @dp.data6 = params[:dialplan][:data6].strip if params[:dialplan][:data6].to_i > 0
       @dp.data9 = params[:end_ivr].to_i + 1
       @dp.data10 = params[:dialplan][:data10].to_i
-      @dp.data11 = params[:dialplan][:data11].to_f
+      @dp.data11 = params[:dialplan][:data11].to_d
       if @dp.data11.to_i == 0
         @dp.data12 = ''
       else
@@ -291,7 +291,7 @@ class DialplansController < ApplicationController
       dp.data5 = 3 if dp.data5.length == 0
       dp.data6 = 3 if dp.data6.length == 0
       dp.data9 = params[:end_ivr].to_i + 1
-      dp.data11 = params[:dialplan][:data11].to_f
+      dp.data11 = params[:dialplan][:data11].to_d
       if dp.data11.to_i == 0
         dp.data12 = ''
       else

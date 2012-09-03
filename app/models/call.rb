@@ -395,12 +395,12 @@ class Call < ActiveRecord::Base
   def get_correct_user_price(usertype)
     if usertype == "admin" or usertype == "accountant"
       if reseller_id.to_i == 0
-        return User.current.convert_curr(user_price).to_f
+        return User.current.convert_curr(user_price).to_d
       else
-        return User.current.convert_curr(reseller_price).to_f
+        return User.current.convert_curr(reseller_price).to_d
       end
     end
-    return User.current.convert_curr(user_price).to_f
+    return User.current.convert_curr(user_price).to_d
   end
 
 =begin rdoc
@@ -408,17 +408,17 @@ class Call < ActiveRecord::Base
 
   def get_correct_provider_price(usertype)
     if usertype == "reseller"
-      return User.current.convert_curr(reseller_price).to_f
+      return User.current.convert_curr(reseller_price).to_d
     end
     if usertype == "user"
       if reseller_id.to_i == 0
-        return User.current.convert_curr(provider_price).to_f
+        return User.current.convert_curr(provider_price).to_d
       else
-        return User.current.convert_curr(reseller_price).to_f
+        return User.current.convert_curr(reseller_price).to_d
       end
     end
     MorLog.my_debug(self.provider_price)
-    return User.current.convert_curr(provider_price).to_f
+    return User.current.convert_curr(provider_price).to_d
   end
 
 
@@ -552,13 +552,13 @@ class Call < ActiveRecord::Base
     cond, var, jn = Call.last_calls_parse_params(options)
     #if reseller pro - change common use provider price, rate to reseller tariff rate, price
     if options[:current_user].usertype == 'reseller'
-      prov_price = "(SUM(#{SqlExport.reseller_provider_price_sql}) * #{options[:exchange_rate].to_f}) as total_provider_price"
-      profit = "(SUM(#{SqlExport.reseller_profit_sql}) * #{options[:exchange_rate].to_f}) AS total_profit"
+      prov_price = "(SUM(#{SqlExport.reseller_provider_price_sql}) * #{options[:exchange_rate].to_d}) as total_provider_price"
+      profit = "(SUM(#{SqlExport.reseller_profit_sql}) * #{options[:exchange_rate].to_d}) AS total_profit"
       user_price = SqlExport.user_price_sql
       reseller_price = SqlExport.reseller_price_sql
     else
-      prov_price = "(SUM(#{SqlExport.admin_provider_price_sql}) * #{options[:exchange_rate].to_f}) as total_provider_price"
-      profit = "(SUM(#{SqlExport.admin_profit_sql}) * #{options[:exchange_rate].to_f}) AS total_profit"
+      prov_price = "(SUM(#{SqlExport.admin_provider_price_sql}) * #{options[:exchange_rate].to_d}) as total_provider_price"
+      profit = "(SUM(#{SqlExport.admin_profit_sql}) * #{options[:exchange_rate].to_d}) AS total_profit"
       user_price = SqlExport.admin_user_price_no_dids_sql
       reseller_price = SqlExport.admin_reseller_price_no_dids_sql
     end
@@ -567,14 +567,14 @@ class Call < ActiveRecord::Base
         :select => "
                  COUNT(*) as total_calls,
                  SUM(IF((billsec IS NULL OR billsec = 0), IF(real_billsec IS NULL, 0, real_billsec), billsec)) as total_duration,
-                 SUM(#{SqlExport.user_price_sql}) * #{options[:exchange_rate].to_f} as total_user_price_with_dids,
+                 SUM(#{SqlExport.user_price_sql}) * #{options[:exchange_rate].to_d} as total_user_price_with_dids,
 
-                 SUM(#{user_price}) * #{options[:exchange_rate].to_f} as total_user_price,
-                 SUM(#{reseller_price}) * #{options[:exchange_rate].to_f} as total_reseller_price,
-                 SUM(#{SqlExport.admin_reseller_price_sql}) * #{options[:exchange_rate].to_f} as total_reseller_price_with_dids,
-                 SUM(did_price) * #{options[:exchange_rate].to_f} as total_did_price,
-                 SUM(did_prov_price) * #{options[:exchange_rate].to_f} as total_did_prov_price,
-                 SUM(did_inc_price) * #{options[:exchange_rate].to_f} as total_did_inc_price,
+                 SUM(#{user_price}) * #{options[:exchange_rate].to_d} as total_user_price,
+                 SUM(#{reseller_price}) * #{options[:exchange_rate].to_d} as total_reseller_price,
+                 SUM(#{SqlExport.admin_reseller_price_sql}) * #{options[:exchange_rate].to_d} as total_reseller_price_with_dids,
+                 SUM(did_price) * #{options[:exchange_rate].to_d} as total_did_price,
+                 SUM(did_prov_price) * #{options[:exchange_rate].to_d} as total_did_prov_price,
+                 SUM(did_inc_price) * #{options[:exchange_rate].to_d} as total_did_inc_price,
                  
       " + prov_price+"," + profit,
         :joins => jn.join(" \n"),
@@ -835,12 +835,12 @@ class Call < ActiveRecord::Base
       calls_for_profit.each_with_index { |c, i|
         pull = i == 1 ? 'true' : 'false'
         if i < 6
-          countries_profit_pie += c.dg_name.to_s + " " + c.dg_type + ";" + (Email.nice_number(c.calls_profit.to_f)).to_s + ";" + pull + "\\n"
+          countries_profit_pie += c.dg_name.to_s + " " + c.dg_type + ";" + (Email.nice_number(c.calls_profit.to_d)).to_s + ";" + pull + "\\n"
         else
-          all += c.calls_profit.to_f
+          all += c.calls_profit.to_d
         end
       }
-      countries_profit_pie+= _('Others') + ";" + Email.nice_number(all.to_f > 0.to_f ? all.to_f : 0).to_s + ";false\\n"
+      countries_profit_pie+= _('Others') + ";" + Email.nice_number(all.to_d > 0.to_d ? all.to_d : 0).to_s + ";false\\n"
     else
       countries_profit_pie+= _('No_result') + ";1;false\\n"
     end
@@ -853,12 +853,12 @@ class Call < ActiveRecord::Base
       calls_for_price.each_with_index { |c, i|
         pull = i == 1 ? 'true' : 'false'
         if i < 6
-          countries_incomes_pie += c.dg_name.to_s + " " + c.dg_type + ";" + Email.nice_number(c.price.to_f).to_s + ";" + pull + "\\n"
+          countries_incomes_pie += c.dg_name.to_s + " " + c.dg_type + ";" + Email.nice_number(c.price.to_d).to_s + ";" + pull + "\\n"
         else
-          all += c.price.to_f
+          all += c.price.to_d
         end
       }
-      countries_incomes_pie+= _('Others') + ";" + Email.nice_number(all.to_f).to_s + ";false\\n"
+      countries_incomes_pie+= _('Others') + ";" + Email.nice_number(all.to_d).to_s + ";false\\n"
     else
       countries_incomes_pie+= _('No_result') + ";1;false\\n"
     end
@@ -1325,10 +1325,10 @@ class Call < ActiveRecord::Base
 
         if res
           s_prefix = res['prefix']
-          s_rate = res['rate'].to_f
+          s_rate = res['rate'].to_d
           s_increment = res['increment_s'].to_i
           s_min_time = res['min_time'].to_i
-          s_conn_fee = res['connection_fee'].to_f
+          s_conn_fee = res['connection_fee'].to_d
         end
 
         s_increment = 1 if s_increment == 0
@@ -1517,7 +1517,7 @@ class Call < ActiveRecord::Base
           #this arate is suitable for this call
           if r_artype == "minute"
             #my_debug "1. minute, price: #{price}"
-            max_rate = r_price.to_f if max_rate < r_price.to_f
+            max_rate = r_price.to_d if max_rate < r_price.to_d
 
             #count the time frame for us to bill
             if r_duration.to_i == (-1)
@@ -1540,23 +1540,23 @@ class Call < ActiveRecord::Base
             if r_round.to_i == 0
               r_round = 1
             end
-            billsec = (billsec.to_f / r_round.to_f).ceil * r_round.to_i
+            billsec = (billsec.to_d / r_round.to_d).ceil * r_round.to_i
             #my_debug "==0"
-            #my_debug((billsec.to_f / r_round.to_f)).to_s
+            #my_debug((billsec.to_d / r_round.to_d)).to_s
             #              else
             #my_debug "!=0"
-            #                billsec = ((billsec.to_f / r_round.to_f) + 1).ceil * r_round.to_i
+            #                billsec = ((billsec.to_d / r_round.to_d) + 1).ceil * r_round.to_i
             #              end
 
             #my_debug "3. minute, price: #{price}, billsec: #{billsec}"
-            #my_debug((r_price.to_f * billsec.to_f) / 60  ).to_s
+            #my_debug((r_price.to_d * billsec.to_d) / 60  ).to_s
             #count the price for the time frame
-            price += (r_price.to_f * billsec.to_f) / 60
+            price += (r_price.to_d * billsec.to_d) / 60
 
             #my_debug "4. minute, price: #{price}"
           else #event
 
-            price += r_price.to_f
+            price += r_price.to_d
             billsec = 0
             #my_debug "5. event, price: #{price}"
           end #minute-event
@@ -1605,10 +1605,10 @@ class Call < ActiveRecord::Base
 
       if res
         uw_prefix = res['prefix']
-        uw_rate = res['rate'].to_f
+        uw_rate = res['rate'].to_d
         uw_increment = res['increment_s'].to_i
         uw_min_time = res['min_time'].to_i
-        uw_conn_fee = res['cf'].to_f
+        uw_conn_fee = res['cf'].to_d
       end
 
       uw_billsec = 0
@@ -1623,8 +1623,8 @@ class Call < ActiveRecord::Base
       end
       uw_billsec = uw_min_time if uw_billsec < uw_min_time
 
-      #my_debug (call.billsec.to_f / uw_increment)
-      #my_debug (call.billsec.to_f / uw_increment).floor
+      #my_debug (call.billsec.to_d / uw_increment)
+      #my_debug (call.billsec.to_d / uw_increment).floor
       #my_debug (call.billsec / uw_increment).floor * uw_increment
       #my_debug uw_billsec
 
