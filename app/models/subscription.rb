@@ -126,8 +126,8 @@ class Subscription < ActiveRecord::Base
         #if condition should evaluate to true every time
         if start_date.month == end_date.month and start_date.year == end_date.year
           if self.service.periodtype == 'month'
-            total_days = start_date.to_time.end_of_month.day
-            total_price = service.price / total_days * (days_used+1)
+            total_days = start_date.to_time.end_of_month.day.to_i
+            total_price = service.price / total_days * (days_used.to_i+1)
           elsif self.service.periodtype == 'day'
             total_price = service.price * (days_used.to_i+1)
           end
