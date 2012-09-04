@@ -1851,11 +1851,11 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
           days_used = use_end.to_date - use_start.to_date
 
           if service.periodtype == 'day' 
-            invd_price = service.price * (days_used+1) 
+            invd_price = service.price * (days_used.to_i + 1)
           elsif service.periodtype == 'month' 
             if start_date.month == end_date.month and start_date.year == end_date.year 
-              total_days = start_date.to_time.end_of_month.day 
-              invd_price = service.price / total_days * (days_used+1) 
+              total_days = start_date.to_time.end_of_month.day.to_i
+              invd_price = service.price / total_days * (days_used.to_i + 1)
             else 
               invd_price = 0 
               if months_between(start_date, end_date) > 1 
