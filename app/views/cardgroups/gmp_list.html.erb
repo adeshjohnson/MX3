@@ -12,7 +12,7 @@
   <% for gmp in @gmps %>
       <tr class="row<%= (i % 2 + 1).to_s %>">
         <td id="prefix_<%= gmp.id %>" align="left">        <%= gmp.prefix %> </td>
-        <td id="percent_<%= gmp.id %>" align="left">        <%= gmp.percent %> %</td>
+        <td id="percent_<%= gmp.id %>" align="left">        <%= nice_number(gmp.percent) %> %</td>
         <td id="edit_<%= gmp.id %>" align="center"><%= link_to b_edit, {:action => 'gmp_edit', :id => gmp.id}, :id => "edit_link_"+gmp.id.to_s %></td>
         <td id="delete_<%= gmp.id %>" align="center"><%= link_to b_delete, {:action => 'gmp_destroy', :id => gmp.id}, :id => "delete_link_"+gmp.id.to_s, :confirm => _('are_you_sure'), :method => "post" %></td>
 
