@@ -42,11 +42,11 @@
       <% end %>
       <tr class="row1">
         <th align="left"><%= _('Price') %>  (<%= session[:show_currency] %>):</th>
-        <td id="price" align="right"> <%= @note.price %> </td>
+        <td id="price" align="right"> <%= nice_number @note.price %> </td>
       </tr>
       <tr class="row2">
         <th align="left"><%= _('Price_with_VAT') %>  (<%= session[:show_currency] %>):</th>
-        <td id="full_price" align="right"> <%= @note.price_with_vat %> </td>
+        <td id="full_price" align="right"> <%= nice_number @note.price_with_vat %> </td>
       </tr>
   <% end %>
 </table>
