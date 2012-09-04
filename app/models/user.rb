@@ -1551,7 +1551,7 @@ class User < ActiveRecord::Base
     jn << "LEFT JOIN dids ON (calls.did_id = dids.id)" if options[:direction] == "incoming"
     jn << "LEFT JOIN providers ON (providers.id = calls.provider_id)" if options[:usertype] == "admin"
 
-    filename = "CDR-#{id.to_s.gsub(" ", "_")}-#{options[:date_from].gsub(" ", "_").gsub(":", "_")}-#{options[:date_till].gsub(" ", "_").gsub(":", "_")}-#{Time.now().to_d.to_s.gsub(".", "")}-#{options[:direction]}-#{show_currency}"
+    filename = "CDR-#{id.to_s.gsub(" ", "_")}-#{options[:date_from].gsub(" ", "_").gsub(":", "_")}-#{options[:date_till].gsub(" ", "_").gsub(":", "_")}-#{Time.now().to_f.to_s.gsub(".", "")}-#{options[:direction]}-#{show_currency}"
 
     sql = "SELECT * "
     if options[:test] != 1
