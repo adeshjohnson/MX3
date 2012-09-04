@@ -1423,7 +1423,7 @@ conf_name - name of confline that will be represented by checkbox.
         credit = _('Unlimited') 
       else 
         exchange_rate = currency ? Currency.count_exchange_rate(user.currency.name, currency) : 1 
-        credit = exchange_rate * user.credit  
+        credit = nice_number(exchange_rate * user.credit)
       end
     else
       credit = 0
