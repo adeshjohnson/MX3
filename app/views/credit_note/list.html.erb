@@ -118,8 +118,8 @@
                   <% end %>
                 </td>
                 <td id="note_paid_date_<%= note.id %>" align="center"> <%= nice_date_time note.pay_date if note.paid? %> </td>
-                <td id="note_price_<%= note.id %>" align="right"> <%= note.price %> </td>
-                <td id="note_full_price_<%= note.id %>" align="right"> <%= note.price_with_vat %> </td>
+                <td id="note_price_<%= note.id %>" align="right"> <%= nice_number note.price %> </td>
+                <td id="note_full_price_<%= note.id %>" align="right"> <%= nice_number note.price_with_vat %> </td>
             <% end %>
             <td id="details_<%= note.id %>" align="center"><%= link_to b_details, {:action => 'edit', :id => note.id}, :id => "details_link_"+note.id.to_s %></td>
             <% if @link_to_finances %>
