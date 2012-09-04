@@ -664,7 +664,7 @@ class AccountingController < ApplicationController
 
             if start_date.month == end_date.month and start_date.year == end_date.year
               total_days = start_date.to_time.end_of_month.day
-              invd_price = service.price / total_days * (days_used+1)
+              invd_price = service.price / total_days.to_i * (days_used.to_i + 1)
             else
               invd_price = 0
               if months_between(start_date, end_date) > 1
