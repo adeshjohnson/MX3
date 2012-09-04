@@ -67,10 +67,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Add new Action</td>
 	<td></td>
 </tr>
+<!--#ajax-->
 <tr>
 	<td>click</td>
 	<td>link=Add new Action</td>
@@ -157,29 +158,14 @@
 	<td>Extension</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>id=action_param_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=action_param_1</td>
-	<td>1</td>
-</tr>
-<tr>
 	<td>keyDown</td>
 	<td>id=action_param_1</td>
 	<td>w</td>
 </tr>
 <tr>
-	<td>fireEvent</td>
-	<td>id=action_param_1</td>
 	<td>focus</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
 	<td>id=action_param_1</td>
-	<td>type</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -187,9 +173,39 @@
 	<td>s0s0s0s0s0s0</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=action_param_1</td>
+	<td>s0s0s0s0s0s0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=action_param_1</td>
+	<td>s0s0s0s0s0s0</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=action_param_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=action_1</td>
+	<td>Extension</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=action_param_1</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>focus</td>
 	<td>id=action_param_1</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=action_param_1</td>
+	<td>s0s0s0s0s0s0</td>
 </tr>
 <tr>
 	<td>keyUp</td>
@@ -202,22 +218,22 @@
 	<td>s0s0s0s0s0s0</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>id=action_param_1</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>fireEvent</td>
 	<td>id=action_param_1</td>
 	<td>blur</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td></td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForValue</td>
-	<td>id=action_param_1</td>
-	<td>s0s0s0s0s0s0</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=action_param_1</td>
-	<td>blur</td>
-</tr>
-<tr>
-	<td>assertValue</td>
 	<td>id=action_param_1</td>
 	<td>s0s0s0s0s0s0</td>
 </tr>
@@ -362,11 +378,6 @@
 	<td>Extension</td>
 </tr>
 <tr>
-	<td>fireEvent</td>
-	<td>id=action_param_2</td>
-	<td>focus</td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>id=action_param_2</td>
 	<td></td>
@@ -382,14 +393,14 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>fireEvent</td>
-	<td>id=action_param_2</td>
 	<td>focus</td>
+	<td>id=action_param_2</td>
+	<td></td>
 </tr>
 <tr>
-	<td>fireEvent</td>
+	<td>keyDown</td>
 	<td>id=action_param_2</td>
-	<td>type</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -397,9 +408,24 @@
 	<td>0101010101</td>
 </tr>
 <tr>
-	<td>focus</td>
+	<td>keyUp</td>
 	<td>id=action_param_2</td>
-	<td></td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>id=action_param_2</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=action_param_2</td>
+	<td>0101010101</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=action_param_2</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -414,20 +440,15 @@
 <tr>
 	<td>fireEvent</td>
 	<td>id=action_param_2</td>
-	<td>focus</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=action_param_2</td>
-	<td>0101010101</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=action_param_2</td>
 	<td>blur</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>pause</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
 	<td>id=action_param_2</td>
 	<td>0101010101</td>
 </tr>
@@ -462,7 +483,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,4,Goto(mor_local,s0s0s0s0s0s0,1)</td>
 	<td></td>
 </tr>
@@ -569,7 +590,7 @@
 <tr>
 	<td>type</td>
 	<td>id=ivr_voice</td>
-	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -582,8 +603,48 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>can't be blank</td>
+	<td>verifyTextPresent</td>
+	<td>* can't be blank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivrvoices/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ivr_voice</td>
+	<td>blank</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ivr_description</td>
+	<td>blank</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>IVR Voice created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//img[@alt='Delete'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>IVR Voice deleted</td>
 	<td></td>
 </tr>
 <tr>
@@ -609,6 +670,11 @@
 <tr>
 	<td>open</td>
 	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_9 &gt; span</td>
 	<td></td>
 </tr>
 <tr>
