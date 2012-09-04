@@ -1574,7 +1574,7 @@ class User < ActiveRecord::Base
 
     if options[:test].to_i == 1
       mysql_res = ActiveRecord::Base.connection.select_all(sql)
-      filename += mysql_res.inspect
+      filename += mysql_res.to_yaml
     else
       mysql_res = ActiveRecord::Base.connection.execute(sql)
     end
