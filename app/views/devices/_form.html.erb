@@ -18,7 +18,7 @@
             <% end %>
         <% end %>
 
-        <% if not @new_device and @device_type != "FAX" and @device_type != "Virtual" %>
+        <% if not @new_device and @device_type != "FAX" and @device_type != "Virtual" and not current_user.is_reseller? %>
             <%= render :partial => "device_form_groups" %>
         <% end %>
 
