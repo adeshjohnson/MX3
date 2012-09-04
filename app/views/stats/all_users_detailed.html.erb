@@ -3,7 +3,10 @@
 <%= b_info + _('This_page_includes_calls_made_by_resellers_users') %>
 <br/>
 <%= b_info + _('This_page_includes_call_attemps_only') %>.
-<%= link_to _('For_more_information_visit_wiki'), 'http://wiki.kolmisoft.com/index.php/Last_Calls#Call_information_representation', :target => '_blank', :class => 'external_link', :style => 'text-decoration: underline; color: #0000ff;' %>
+
+<% if Confline.get_value("Hide_HELP_banner").to_i == 0 # checking if help links are disabled %>  
+<%= link_to  _('For_more_information_visit_wiki'), @help_link ,:target => '_blank', :class => 'external_link', :style => 'text-decoration: underline; color: #0000ff;'  %>  
+<% end %>  
 
 <br/><br/>
 
