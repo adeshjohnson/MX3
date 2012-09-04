@@ -443,8 +443,8 @@ class AccountingController < ApplicationController
               invd_price = service.price * (days_used+1)
             elsif service.periodtype == 'month'
               if start_date.month == end_date.month and start_date.year == end_date.year
-                total_days = start_date.to_time.end_of_month.day
-                invd_price = service.price / total_days * (days_used+1)
+                total_days = start_date.to_time.end_of_month.day.to_i
+                invd_price = service.price / total_days * (days_used.to_i + 1)
               else
                 invd_price = 0
                 if months_between(start_date, end_date) > 1
@@ -454,7 +454,7 @@ class AccountingController < ApplicationController
                 #suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas
                 last_day_of_month = start_date.to_time.end_of_month.to_date
                 last_day_of_month2 = end_date.to_time.end_of_month.to_date
-                invd_price += service.price/last_day_of_month.day * (last_day_of_month - start_date+1).to_i
+                invd_price += service.price/last_day_of_month.day * (last_day_of_month - start_date + 1).to_i
                 invd_price += service.price/last_day_of_month2.day * (end_date.day)
               end
             end
