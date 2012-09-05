@@ -4461,6 +4461,7 @@ Localization.define('en') do |l|
   l.store 'Device_or_Cli_not_found', 'Device or CLI not found'
   l.store 'Old_Subcode', 'Old Subcode'
   l.store 'New_Subcode', 'New Subcode'
+  l.store 'Speeddial_not_created', 'Speed dial not created'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

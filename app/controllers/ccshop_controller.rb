@@ -385,8 +385,11 @@ class CcshopController < ApplicationController
       ph.speeddial = speeddial
       ph.user_id = 0
       ph.card_id = card.id
-      ph.save
-      flash[:status] = _('Added')
+      if ph.save
+        flash[:status] = _('Added')
+      else
+        flash_errors_for(_('Speeddial_not_created'), ph)
+      end
     else
       flash[:notice] = _('Please_fill_all_fields')
     end
