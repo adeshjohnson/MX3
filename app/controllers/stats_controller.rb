@@ -182,6 +182,7 @@ class StatsController < ApplicationController
     @page_title = _('All_users_detailed')
     #@help_link = 'http://wiki.kolmisoft.com/index.php/Last_Calls#Call_information_representation'#conflicts with flash
     @users = User.find(:all, :conditions => "hidden = 0") #, :conditions => "usertype = 'user'") #, :limit => 6)
+    @help_link = "http://wiki.kolmisoft.com/index.php/Integrity_Check"
 
     call_stats = Call.total_calls_by_direction_and_disposition(session_from_date, session_till_date)
 
