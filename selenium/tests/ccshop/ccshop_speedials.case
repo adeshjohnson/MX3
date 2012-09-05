@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.11.6/billing" />
+<title>ccshop_speedials</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ccshop_speedials</td></tr>
+</thead><tbody>
+<!--create speed dial for card 1-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ccshop/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ccshop</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_num</td>
+	<td>1111111000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_pin</td>
+	<td>7856</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ccshop/speeddials</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=speeddial</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>123123123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=speeddial_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_1</td>
+	<td>test1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_1</td>
+	<td>123123123</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=speeddial_1</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>test2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>12355555</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=speeddial</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=speeddial_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:Speed dial not created<br /> * Speed dial must be unique</td>
+	<td></td>
+</tr>
+<!--check card 2-->
+<tr>
+	<td>open</td>
+	<td>/billing/ccshop/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ccshop</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_num</td>
+	<td>1111111001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_pin</td>
+	<td>9812</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ccshop/speeddials</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>test3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>1234567890</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=speeddial</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=speeddial_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=name_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_2</td>
+	<td>1234567890</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=speeddial_2</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>test4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>234562345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=speeddial</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=speeddial_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:Speed dial not created<br /> * Speed dial must be unique</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
