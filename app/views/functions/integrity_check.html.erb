@@ -54,4 +54,6 @@
 </table>
 <br/>
 <br/>
-<a href="http://wiki.kolmisoft.com/index.php/Integrity_Check" target="_blank"><%= b_info + _('for_more_details_about_integrity_check_click_here') %></a>
+<% if Confline.get_value("Hide_HELP_banner").to_i == 0 # checking if help links are disabled %>
+    <a href="http://wiki.kolmisoft.com/index.php/Integrity_Check" target="_blank"><%= b_info + _('for_more_details_about_integrity_check_click_here') %></a>
+<% end %>
