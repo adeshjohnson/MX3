@@ -64,7 +64,7 @@
             <b>&nbsp;</b><%= image_tag('icons/' + @page_icon, :title => @page_title) if @page_icon %>&nbsp;<%= raw @page_title.html_safe %>
           </span>
     <% end %>
-    <% if @help_link and session[:usertype] == "admin" and session[:help_link].to_i == 0 %>
+    <% if @help_link and session[:usertype] == "admin" and session[:help_link].to_i == 1 %>
         &nbsp;<a href="<%= @help_link %>" target="_blank"><%= icon(:help, :title => _('Get_help_about_this_page')) %></a>
     <% end %>
     <%= icon(:application_side_expand, {:id => :application_side_expand, :title => _('Show_menus')}) %>
