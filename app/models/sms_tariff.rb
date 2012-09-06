@@ -23,7 +23,7 @@ class SmsTariff < ActiveRecord::Base
   end
 
   def free_destinations_by_st(st)
-    adests = Destination.find_by_sql ["SELECT destinations.* FROM destinations, directions WHERE directions.code = destinations.direction_code AND directions.name like ? ORDER BY directions.name ASC, destinations.prefix ASC", st.to_s+'%']
+    adests = Destination.find(:all, :select => "destinations.*, directions.name AS direction_name, directions.code AS direction_code", :joins => "JOIN directions ON(directions.code = destinations.direction_code)", :conditions => "directions.name like '#{st.to_s}%'", :order => "directions.name ASC, destinations.prefix ASC")
     dests = self.destinations
     fdests = []
     fdests = adests - dests

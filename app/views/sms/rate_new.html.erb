@@ -18,10 +18,10 @@
       <% for dest in @dests %>
           <tr class="row<%= (i % 2 + 1).to_s %>">
 
-            <td id="direction_<%= dest.id %>"><%= draw_flag dest.direction.code %> <%= dest.direction.name %></td>
+            <td id="direction_<%= dest.id %>"><%= draw_flag dest.direction_code %> <%= dest.direction_name %></td>
             <td id="prefix_<%= dest.id %>"><%= dest.prefix %></td>
             <td id="name_<%= dest.id %>"><%= dest.name %></td>
-            <td id="subcode_<%= dest.id %>" align="center"><%= dest.direction.code.upcase %></td>
+            <td id="subcode_<%= dest.id %>" align="center"><%= dest.direction_code.upcase %></td>
             <%
                show_rr = true
                price = 0.0
