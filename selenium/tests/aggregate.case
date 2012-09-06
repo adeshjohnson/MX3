@@ -166,6 +166,42 @@
 	<td>id=dir_name_2</td>
 	<td>Lithuania FIX</td>
 </tr>
+<!--check whether two calls are seen in calls/aggregate event if calls.user_id != calls.src_device.user_id-->
+<tr>
+	<td>open</td>
+	<td>/billing/terminators/providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/calls/aggregate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=originator</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dir_name_4</td>
+	<td>United States FIX USA 231 Michigan (1231)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dir_name_3</td>
+	<td>Lithuania MOB Lithuania mobile (3706)</td>
+</tr>
 </tbody></table>
 </body>
 </html>
