@@ -74,7 +74,7 @@ class CallsController < ApplicationController
     cond = ["calldate BETWEEN '" + session_from_datetime + "' AND '" + session_till_datetime + "'"]
     cond << "users.owner_id = #{current_user.id}" if reseller?
     #cond << "calls.user_id != -1" # This allows to filter invalid calls
-    cond << "(usrs.id = #{q(@options[:originator].to_i)} OR users.owner_id = #{q(@options[:originator].to_i)})" if @options[:originator] != "any"
+    cond << "(users.id = #{q(@options[:originator].to_i)} OR users.owner_id = #{q(@options[:originator].to_i)})" if @options[:originator] != "any"
     cond << "calls.prefix LIKE '#{@options[:prefix].gsub(/[^0-9]/, "")}%'" if  @options[:prefix].to_s != ""
     if terminator_cond.to_s != ''
       cond << "providers.terminator_id = #{terminator_cond.to_s}"
@@ -132,7 +132,7 @@ class CallsController < ApplicationController
     LEFT JOIN users ON (users.id = devices.user_id)
     INNER JOIN providers ON (providers.id = calls.provider_id)
     #{"LEFT JOIN terminators ON (terminators.id = providers.terminator_id)" if @options[:order_by] == "terminators.name"}
-    #{"JOIN users usrs ON usrs.id = calls.user_id" if @options[:originator] != "any"}
+
     LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     WHERE(" + cond.join(" AND ")+ ")
     #{group_by.size > 0 ? 'GROUP BY ' +group_by.join(", ") : ''}
