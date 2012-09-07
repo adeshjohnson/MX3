@@ -501,8 +501,11 @@ in before filter : tariff (:find_tariff_from_id)
     # st - from which letter starts rate's direction (usualy country)
     @st = "A"
     @st = params[:st].upcase if params[:st]
+    @page = (params[:page] || 1).to_i
+    offset = (@page -1) * session[:items_per_page].to_i
 
-    @dests = @tariff.free_destinations_by_st(@st)
+    @dests, total_records = @tariff.free_destinations_by_st(@st, session[:items_per_page].to_i, offset)
+    @total_pages = (total_records.to_f / session[:items_per_page].to_f).ceil
 
     @letter_select_header_id = @tariff.id
     @page_select_header_id = @tariff.id
@@ -514,10 +517,9 @@ in before filter : tariff (:find_tariff_from_id)
   def rate_try_to_add
     st = "A"
     st = params[:st].upcase if params[:st]
-
     for dest in @tariff.free_destinations_by_st(st)
       #add only rates which are entered
-      if params[(dest.id.to_s).intern].length > 0
+      if params[(dest.id.to_s).intern].to_s.length > 0
         @tariff.add_new_rate(dest.prefix.to_s, params[(dest.id.to_s).intern])
       end
     end

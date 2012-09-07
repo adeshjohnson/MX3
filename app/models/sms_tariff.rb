@@ -22,12 +22,14 @@ class SmsTariff < ActiveRecord::Base
     SmsRate.find_by_sql ["SELECT sms_rates.*, (sms_rates.price * #{ex_r}) AS 'curr_price' FROM destinations, sms_rates, directions WHERE sms_rates.sms_tariff_id = ? AND destinations.prefix = sms_rates.prefix AND directions.code = destinations.direction_code AND directions.name like ? GROUP BY sms_rates.id ORDER BY directions.name ASC, destinations.prefix ASC LIMIT " + sql_start.to_s + "," + per_page.to_s, self.id, st.to_s+'%']
   end
 
-  def free_destinations_by_st(st)
-    adests = Destination.find(:all, :select => "destinations.*, directions.name AS direction_name, directions.code AS direction_code", :joins => "JOIN directions ON(directions.code = destinations.direction_code)", :conditions => "directions.name like '#{st.to_s}%'", :order => "directions.name ASC, destinations.prefix ASC")
+  def free_destinations_by_st(st, limit = nil, offset = 0)
+    adests = Destination.find(:all, :select => "SQL_CALC_FOUND_ROWS destinations.*, directions.name AS direction_name, directions.code AS direction_code", :joins => "JOIN directions ON(directions.code = destinations.direction_code)", :conditions => "directions.name like '#{st.to_s}%'", :order => "directions.name ASC, destinations.prefix ASC", :limit => (limit || 1000000), :offset => offset)
+    actual_adest_count = ActiveRecord::Base.connection.select("SELECT found_rows() AS count")[0]["count"]
+    logger.fatal "found_rows() returned: #{actual_adest_count}"
     dests = self.destinations
-    fdests = []
     fdests = adests - dests
-
+    actual_fdest_count = actual_adest_count - dests.size
+    limit ? [fdests, actual_fdest_count] : fdests
   end
 
   def destinations

@@ -220,43 +220,32 @@ class TariffsController < ApplicationController
         :order => "name ASC",
         :group => "directions.id")
 
-    @page = 1
-    @page = params[:page].to_i if params[:page]
+    @page = params[:page] ? params[:page].to_i : 1
+    record_offset = @page * session[:items_per_page].to_i - 1
 
     if params[:s_prefix]
       @s_prefix = params[:s_prefix].gsub(/[^0-9%]/, '')
-      dest = Destination.find(:all, :conditions => ["prefix LIKE ?", @s_prefix.to_s])
+      @des_id = Destination.find(:all, :select => 'id', :conditions => ["prefix LIKE ?", @s_prefix.to_s]).map {|destination| destination.id}
     end
-    @des_id = []
     if @s_prefix
-      if dest and dest.size.to_i > 0
-        dest.each { |d| @des_id << d.id }
+      unless @des_id.empty?
         @search = 1
-        #@rates = Rate.find(:all, :conditions => ["rates.tariff_id=? AND rates.destination_id IN (#{@des_id.join(',')})", @tariff.id], :include => [:ratedetails])
-        @rates = Rate.includes(:ratedetails).where(["rates.tariff_id=? AND rates.destination_id IN (#{@des_id.join(',')})", @tariff.id]).all
+        condition = ["rates.tariff_id=? AND rates.destination_id IN (#{@des_id.join(',')})", @tariff.id]
+        rate_count = Rate.includes(:ratedetails).where(condition).count
+        @rates = Rate.includes(:ratedetails).where(condition).offset(record_offset).limit(session[:items_per_page].to_i).all
       else
         @rates = []
       end
     else
-      #@rates = Rate.find(:all, :conditions => ["rates.tariff_id=? AND directions.name like ?", @tariff.id, @st+"%"], :include => [:ratedetails, :destination, :tariff], :joins => "LEFT JOIN directions ON (directions.code = destinations.direction_code)", :order => "directions.name ASC, destinations.prefix ASC", :limit => "0,1000000")
-      @rates = Rate.includes(:ratedetails, {:destination => :direction}, :tariff).where(["rates.tariff_id=? AND directions.name like ?", @tariff.id, @st+"%"]).order("directions.name ASC, destinations.prefix ASC").offset(0).limit(1000000).all
+      condition = ["rates.tariff_id=? AND directions.name like ?", @tariff.id, @st+"%"] 
+      includes = [:ratedetails, {:destination => :direction}, :tariff]
+      rate_count = Rate.includes(includes).where(condition).count
+      @rates = Rate.includes(includes).where(condition).order("directions.name ASC, destinations.prefix ASC").offset(record_offset).limit(session[:items_per_page].to_i).all
     end
 
-    @total_pages = (@rates.size.to_d / session[:items_per_page].to_d).ceil
-    @all_rates = @rates
-    @rates = []
+    @total_pages = (rate_count.to_f / session[:items_per_page].to_f).ceil
 
-    iend = ((session[:items_per_page] * @page) - 1)
-    iend = @all_rates.size - 1 if iend > (@all_rates.size - 1)
-    for i in ((@page - 1) * session[:items_per_page])..iend
-      @rates << @all_rates[i]
-    end
-                                        #----
-
-    @use_lata = false
-    @use_lata = true if @st == "U"
-
-
+    @use_lata = (@st == "U")
     @letter_select_header_id = @tariff.id
     @page_select_header_id = @tariff.id
   end
