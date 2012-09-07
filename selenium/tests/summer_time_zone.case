@@ -65,6 +65,21 @@
 <!--<tr> 	<td>open</td> 	<td>/billing/test/load_delta_sql/sql/global_time_zone_plus_two</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>//body</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_6 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Value in system time zone: GMT 0 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -86,6 +101,21 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_6 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Value in system time zone: GMT 0 </td>
 	<td></td>
 </tr>
 <!--ADMIN GMT+00:00-->
@@ -1543,6 +1573,22 @@
 	<td>waitForTextPresent</td>
 	<td>User's settings succesfully changed: Test Reseller</td>
 	<td></td>
+</tr>
+<!--verify offset-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_6 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='tabViewdhtmlgoodies_tabView1_6']/table/tbody/tr[6]/td[3]</td>
+	<td>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 Value in system time zone: GMT +3</td>
 </tr>
 <!--CALLS PER DAY-->
 <tr>
