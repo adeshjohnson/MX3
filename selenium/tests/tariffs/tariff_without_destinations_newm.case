@@ -39,6 +39,26 @@
 <!--WITH DESTINATIONS-->
 <tr>
 	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_10 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/tariffs/import_csv2/1?step=0</td>
 	<td></td>
 </tr>
@@ -160,7 +180,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=page_1</td>
-	<td>1 2 3</td>
+	<td>1 2 3 4 5 6 7 8 9 10</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -185,7 +205,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=destinations_without_dg_size</td>
-	<td>100</td>
+	<td>135</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -200,7 +220,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=page_1</td>
-	<td>1 2</td>
+	<td>1 2 3 4 5 6 7 8 9</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -225,7 +245,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=destinations_without_dg_size</td>
-	<td>50</td>
+	<td>120</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -238,6 +258,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>id=page_1</td>
+	<td>1 2 3 4 5 6 7 8</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -260,7 +285,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=destinations_without_dg_size</td>
-	<td>0</td>
+	<td>105</td>
 </tr>
 <tr>
 	<td>open</td>
