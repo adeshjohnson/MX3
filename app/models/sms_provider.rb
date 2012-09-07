@@ -131,8 +131,14 @@ class SmsProvider < ActiveRecord::Base
   def connect_to_clickatell
     begin
       sms_url = URI.parse("api.clickatell.com/http/auth?api_id=#{self.api_id}&password=#{self.password}&user=#{self.login}")
-      login = Net::HTTP.get_response(sms_url)
-      log = login.body.split(" ")
+      if sms_url.respond_to?(:request_uri)
+        login = Net::HTTP.get_response(sms_url)
+        log = login.body.split(" ")
+      else
+        MorLog.my_debug("SMS bad url : api.clickatell.com/http/auth?api_id=#{self.api_id}&password=#{self.password}&user=#{self.login}", 1)
+        log = []
+        log[0] = 'ERR:'
+      end
     rescue Exception => e
       MorLog.log_exception(e, Time.now.to_i, 'sms', 'providers')
       log = []

@@ -45,7 +45,7 @@ module FunctionsHelper
 
   def dtree_group_script(name, div_name, width, height)
     content_for :scripts do
-      content_tag(:script, "initTabs('#{div_name}', Array('#{name}'),0,#{width},#{height});", :type => "text/javascript").html_safe
+      content_tag(:script, raw("initTabs('#{div_name}', Array('#{name}'),0,#{width},#{height});"), :type => "text/javascript").html_safe
     end
   end
 
