@@ -88,11 +88,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>css=input[type=&quot;image&quot;]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>css=input[type=&quot;image&quot;]</td>
 	<td></td>
@@ -263,14 +258,44 @@
 	<td>2</td>
 </tr>
 <tr>
+	<td>fireEvent</td>
+	<td>action_1</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>action_1</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>action_1</td>
+	<td>2</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Add new Action</td>
 	<td></td>
 </tr>
 <tr>
+	<td>fireEvent</td>
+	<td>action_1</td>
+	<td>focus</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>action_1</td>
+	<td>2</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>change_action_2</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>action_1</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>waitForSomethingSelected</td>
@@ -278,14 +303,59 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>action_1</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>change_action_2</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>action_1</td>
+	<td>2</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>change_action_2</td>
 	<td>label=Playback</td>
 </tr>
 <tr>
-	<td>assertSelectedValue</td>
+	<td>assertValue</td>
+	<td>action_1</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>change_action_2</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>action_1</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>change_action_2</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>action_1</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>waitForSelectedValue</td>
 	<td>change_action_2</td>
 	<td>Playback</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>action_1</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -298,24 +368,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>change_action_3</td>
-	<td>label=Transfer To</td>
-</tr>
-<tr>
 	<td>keyDown</td>
 	<td>change_action_3</td>
 	<td>w</td>
 </tr>
 <tr>
-	<td>assertSelectedValue</td>
+	<td>select</td>
 	<td>change_action_3</td>
-	<td>Transfer To</td>
+	<td>label=Transfer To</td>
 </tr>
 <tr>
 	<td>keyUp</td>
 	<td>change_action_3</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>change_action_3</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>assertSelectedValue</td>
+	<td>change_action_3</td>
+	<td>Transfer To</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -343,14 +418,14 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForSelectedValue</td>
+	<td>fireEvent</td>
 	<td>action_3</td>
-	<td>DID</td>
+	<td>blur</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=option[value=&quot;37063042438&quot;]</td>
-	<td></td>
+	<td>assertSelectedValue</td>
+	<td>action_3</td>
+	<td>DID</td>
 </tr>
 <tr>
 	<td>waitForSelectedValue</td>
@@ -428,6 +503,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>change_action_6</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>change_action_6</td>
 	<td>label=Set Accountcode</td>
@@ -438,9 +518,19 @@
 	<td>w</td>
 </tr>
 <tr>
+	<td>fireEvent</td>
+	<td>change_action_6</td>
+	<td>blur</td>
+</tr>
+<tr>
 	<td>waitForSelectedLabel</td>
 	<td>action_6</td>
 	<td>System Admin - IAX2/103</td>
+</tr>
+<tr>
+	<td>keyDown</td>
+	<td>action_6</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -448,14 +538,19 @@
 	<td>label=User Resellers - IAX2/105</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>action_6</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>action_6</td>
+	<td>blur</td>
+</tr>
+<tr>
 	<td>waitForSelectedLabel</td>
 	<td>action_6</td>
 	<td>User Resellers - IAX2/105</td>
-</tr>
-<tr>
-	<td>focus</td>
-	<td>action_6</td>
-	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -525,34 +620,45 @@
 </tr>
 <tr>
 	<td>waitForValue</td>
-	<td>block_name</td>
+	<td>id=block_name</td>
 	<td>New Block</td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>block_name</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>block_name</td>
-	<td>block2</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>block_name</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>assertValue</td>
 	<td>id=block_name</td>
 	<td>block2</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>last_changed</td>
-	<td>block_name:block2</td>
+	<td>keyUp</td>
+	<td>id=block_name</td>
+	<td>w</td>
 </tr>
+<tr>
+	<td>fireEvent</td>
+	<td>id=block_name</td>
+	<td>change</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=block_name</td>
+	<td>block2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>waitForValue</td> 	<td>last_changed</td> 	<td>block_name:block2</td> </tr>-->
 <tr>
 	<td>click</td>
 	<td>link=Add new Action</td>
@@ -562,6 +668,11 @@
 	<td>waitForElementPresent</td>
 	<td>change_action_8</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>block_name</td>
+	<td>block2</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -587,6 +698,21 @@
 	<td>assertSelectedLabel</td>
 	<td>change_action_9</td>
 	<td>Hangup</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>block_name</td>
+	<td>block2</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>block_name</td>
+	<td>block2</td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>block_name</td>
+	<td></td>
 </tr>
 <!--==make 2 extensions of previously created blocks-->
 <!--ext_blockt -  a hack to cause a delay in selenium...-->
@@ -642,44 +768,24 @@
 	<td>11</td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>block_timeout_response</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>block_timeout_response</td>
-	<td>10</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>block_timeout_response</td>
-	<td>w</td>
+	<td>1</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
 	<td>block_timeout_response</td>
-	<td>10</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>block_timeout_digits</td>
-	<td>w</td>
+	<td>1</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>block_timeout_digits</td>
-	<td>11</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>block_timeout_digits</td>
-	<td>w</td>
+	<td>1</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
 	<td>block_timeout_digits</td>
-	<td>11</td>
+	<td>1</td>
 </tr>
 <!--add new actions-->
 <tr>
@@ -798,14 +904,24 @@
 	<td></td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>id=change_action_11</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=change_action_11</td>
 	<td>label=Transfer To</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=#change_action_11 &gt; option[value=&quot;Transfer To&quot;]</td>
-	<td></td>
+	<td>keyUp</td>
+	<td>id=change_action_11</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>id=change_action_11</td>
+	<td>blur</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
@@ -815,6 +931,11 @@
 <tr>
 	<td>waitForVisible</td>
 	<td>id=action_param_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=change_action_11</td>
 	<td></td>
 </tr>
 <tr>
@@ -1018,8 +1139,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>id=block_name</td>
+	<td>waitForText</td>
+	<td>link=block2</td>
 	<td>block2</td>
 </tr>
 <!--Check if add block is working-->
@@ -1177,6 +1298,21 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>MOR 12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=block_name</td>
+	<td>block2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Refresh</td>
 	<td></td>
 </tr>
 </tbody></table>
