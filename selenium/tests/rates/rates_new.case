@@ -44,6 +44,21 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/sms/tariff_new</td>
 	<td></td>
 </tr>
@@ -133,6 +148,26 @@
 	<td>457</td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rate_new/2?page=2&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>90</td>
 	<td>23</td>
@@ -158,6 +193,26 @@
 	<td>456</td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rate_new/2?page=3&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>173</td>
 	<td>23</td>
@@ -176,6 +231,11 @@
 	<td>type</td>
 	<td>227</td>
 	<td>34</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rate_new/2?page=4&amp;st=A</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -214,7 +274,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>dir_name_17</td>
+	<td>dir_name_15</td>
 	<td>Australia</td>
 </tr>
 <tr>
@@ -269,27 +329,27 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_21_price</td>
+	<td>rate_17_price</td>
 	<td>0.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_22_price</td>
+	<td>rate_18_price</td>
 	<td>346.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_23_price</td>
+	<td>rate_19_price</td>
 	<td>0.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_24_price</td>
+	<td>rate_20_price</td>
 	<td>0.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_25_price</td>
+	<td>rate_21_price</td>
 	<td>0.0</td>
 </tr>
 <tr>
@@ -333,6 +393,26 @@
 	<td>aet4t</td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rate_new/2?page=2&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>84</td>
 	<td>e65erdf</td>
@@ -353,6 +433,26 @@
 	<td>435</td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rate_new/2?page=3&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>170</td>
 	<td>34</td>
@@ -366,6 +466,26 @@
 	<td>type</td>
 	<td>187</td>
 	<td>342</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rate_new/2?page=4&amp;st=A</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -394,7 +514,7 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_26_price</td>
+	<td>rate_33_price</td>
 	<td>345.0</td>
 </tr>
 <tr>
@@ -404,23 +524,23 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_35_price</td>
+	<td>rate_31_price</td>
 	<td>435.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_33_price</td>
+	<td>rate_28_price</td>
 	<td>0.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_40_price</td>
+	<td>rate_36_price</td>
 	<td>0.0</td>
 </tr>
 <!--sql-->
 <tr>
 	<td>open</td>
-	<td>/billing/sms/rate_new/1?st=U</td>
+	<td>/billing/sms/rate_new/1?st=U&amp;page=11</td>
 	<td></td>
 </tr>
 <tr>
@@ -505,37 +625,37 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_41_price</td>
+	<td>rate_37_price</td>
 	<td>546.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_42_price</td>
+	<td>rate_38_price</td>
 	<td>456.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_43_price</td>
+	<td>rate_39_price</td>
 	<td>456.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_44_price</td>
+	<td>rate_40_price</td>
 	<td>23.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_46_price</td>
-	<td>5.0</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=rate_45_price</td>
+	<td>rate_41_price</td>
 	<td>6.585743453645735</td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>rate_42_price</td>
+	<td>5.0</td>
+</tr>
+<tr>
 	<td>open</td>
-	<td>/billing/sms/rate_new/2?st=U</td>
+	<td>/billing/sms/rate_new/2?st=U&amp;page=11</td>
 	<td></td>
 </tr>
 <tr>
@@ -620,37 +740,37 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_47_price</td>
+	<td>rate_43_price</td>
 	<td>546.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_48_price</td>
+	<td>rate_44_price</td>
 	<td>456.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_49_price</td>
+	<td>rate_45_price</td>
 	<td>456.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_50_price</td>
+	<td>rate_46_price</td>
 	<td>23.0</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>rate_52_price</td>
-	<td>5.0</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>rate_51_price</td>
+	<td>rate_47_price</td>
 	<td>658574345.364573462345253</td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>rate_48_price</td>
+	<td>5.0</td>
+</tr>
+<tr>
 	<td>open</td>
-	<td>/billing/tariffs/rate_new/1?st=U</td>
+	<td>/billing/tariffs/rate_new/1?st=U&amp;page=11</td>
 	<td></td>
 </tr>
 <tr>
