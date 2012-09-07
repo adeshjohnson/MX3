@@ -199,7 +199,7 @@ class IvrController < ApplicationController
       @block.save
       critical_update(@block)
     end
-    render_javascript "$('block_timeout_digits').value = #{@block.timeout_digits};"
+    #render_javascript "$('block_timeout_digits').value = #{@block.timeout_digits};"
   end
 
   def update_block_timeout_response
@@ -210,7 +210,7 @@ class IvrController < ApplicationController
       @block.save
       critical_update(@block)
     end
-    render_javascript "$('block_timeout_response').value = #{@block.timeout_response};"
+    #render_javascript "$('block_timeout_response').value = #{@block.timeout_response};"
   end
 
   def update_data1
