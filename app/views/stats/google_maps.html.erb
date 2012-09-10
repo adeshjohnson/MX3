@@ -220,7 +220,7 @@
   <div class="container" id="map_container" onmouseover="document.getElementById('map_dd_opts_div').style.display = 'block'" onmouseout="document.getElementById('map_dd_opts_div').style.display = 'none'">
     <div class="dropDownControl" id="map_dd_control">
       Map
-      <img class="dropDownArrow" src="http://maps.gstatic.com/mapfiles/arrow-down.png"/>
+      <img class="dropDownArrow" src="<%=Web_Dir%>/assets/icons/arrow_down_gmaps.png"/>
     </div>
     <div class="dropDownOptionsDiv" id="map_dd_opts_div">
       <div onclick="set_map_type(1)">
@@ -239,7 +239,7 @@
   <div class="container" id="container" onmouseover="document.getElementById('myddOptsDiv').style.display = 'block' , document.getElementById('container').style.width = '125px'" onmouseout="document.getElementById('myddOptsDiv').style.display = 'none' , document.getElementById('container').style.width = '85px'">
     <div class="dropDownControl" id="ddControl">
       Menu
-      <img class="dropDownArrow" src="http://maps.gstatic.com/mapfiles/arrow-down.png"/>
+      <img class="dropDownArrow" src="<%=Web_Dir%>/assets/icons/arrow_down_gmaps.png"/>
     </div>
     <div class="dropDownOptionsDiv" id="myddOptsDiv">
 
@@ -247,7 +247,7 @@
       <div class="checkboxContainer" onclick="(document.getElementById('active_devices_box').style.display == 'block') ? document.getElementById('active_devices_box').style.display = 'none' : document.getElementById('active_devices_box').style.display = 'block' ,boxclick_active(((document.getElementById('active_devices_box').style.display == 'block') ? 1 : 0),'active_devices');">
               <span role="checkbox" class="checkboxSpan ">
                 <div class="blankDiv" id="active_devices_box">
-                  <img class="blankImg" src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"/>
+                  <img class="blankImg" src="<%=Web_Dir%>/assets/icons/imgs8_gmaps.png"/>
                 </div>
               </span>
         <label class="checkboxLabel">Show Active calls</label>
@@ -256,7 +256,7 @@
       <div class="checkboxContainer" onclick="(document.getElementById('devices_box').style.display == 'block') ? document.getElementById('devices_box').style.display = 'none' : document.getElementById('devices_box').style.display = 'block' , boxclick(((document.getElementById('devices_box').style.display == 'block') ? 1 : 0),'devices');">
               <span role="checkbox" class="checkboxSpan ">
                 <div class="blankDiv" id="devices_box" style="display: block">
-                  <img class="blankImg" src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"/>
+                  <img class="blankImg" src="<%=Web_Dir%>/assets/icons/imgs8_gmaps.png"/>
                 </div>
               </span>
         <label class="checkboxLabel">Show devices</label>
@@ -267,7 +267,7 @@
           <div class="checkboxContainer" onclick="(document.getElementById('servers_box').style.display == 'block') ? document.getElementById('servers_box').style.display = 'none' : document.getElementById('servers_box').style.display = 'block' , boxclick(((document.getElementById('servers_box').style.display == 'block') ? 1 : 0),'servers');">
                   <span role="checkbox" class="checkboxSpan ">
                     <div class="blankDiv" id="servers_box" style="display: block">
-                      <img class="blankImg" src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"/>
+                      <img class="blankImg" src="<%=Web_Dir%>/assets/icons/imgs8_gmaps.png"/>
                     </div>
                   </span>
             <label class="checkboxLabel">Show servers</label>
@@ -279,7 +279,7 @@
           <div class="checkboxContainer" onclick="(document.getElementById('providers_box').style.display == 'block') ? document.getElementById('providers_box').style.display = 'none' : document.getElementById('providers_box').style.display = 'block' , boxclick(((document.getElementById('providers_box').style.display == 'block') ? 1 : 0),'providers');">
                   <span role="checkbox" class="checkboxSpan ">
                     <div class="blankDiv" id="providers_box" style="display: block">
-                      <img class="blankImg" src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"/>
+                      <img class="blankImg" src="<%=Web_Dir%>/assets/icons/imgs8_gmaps.png"/>
                     </div>
                   </span>
             <label class="checkboxLabel">Show providers</label>
