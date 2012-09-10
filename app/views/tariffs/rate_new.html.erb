@@ -1,5 +1,9 @@
 <%= link_nice_tariff(@tariff).html_safe %>
 <%= render :partial => 'letter_select_header' %>
+<% if @total_pages > 1 %>
+    <br/>
+    <%= render :partial => 'page_select_header' %>
+<% end %>
 
 <br>
 <% direction_cache = {} %>

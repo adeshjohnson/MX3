@@ -395,8 +395,11 @@ class TariffsController < ApplicationController
     # st - from which letter starts rate's direction (usualy country)
     @st = "A"
     @st = params[:st].upcase if params[:st]
+    @page = (params[:page] || 1).to_i
+    offset = (@page -1) * session[:items_per_page].to_i
 
-    @dests = @tariff.free_destinations_by_st(@st)
+    @dests, total_records = @tariff.free_destinations_by_st(@st, session[:items_per_page], offset)
+    @total_pages = (total_records.to_f / session[:items_per_page].to_f).ceil
 
     @letter_select_header_id = @tariff.id
     @page_select_header_id = @tariff.id
