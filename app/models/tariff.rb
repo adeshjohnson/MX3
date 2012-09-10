@@ -44,10 +44,10 @@ class Tariff < ActiveRecord::Base
 
   # destinations which haven't rate assigned for this tariff by first letter
   def free_destinations_by_st(st, limit = nil, offset = 0)
-    adests = Destination.find_by_sql ["SELECT SQL_CALC_FOUND_ROWS destinations.* FROM destinations, directions WHERE directions.code = destinations.direction_code AND directions.name like ? ORDER BY directions.name ASC, destinations.prefix ASC LIMIT ? OFFSET ?", st.to_s+'%', (limit || 10000), offset]
+    adests = Destination.find_by_sql ["SELECT destinations.* FROM destinations, directions WHERE directions.code = destinations.direction_code AND directions.name like ? ORDER BY directions.name ASC, destinations.prefix ASC LIMIT ? OFFSET ?", st.to_s+'%', (limit || 10000), offset]
 
-    actual_adest_count = ActiveRecord::Base.connection.select("SELECT found_rows() AS count")[0]["count"]
-    logger.fatal "found_rows() returned: #{actual_adest_count}"
+    actual_adest_count = ActiveRecord::Base.connection.select("SELECT COUNT(*) AS count FROM destinations, directions WHERE directions.code = destinations.direction_code AND directions.name like '#{st.to_s}%'")[0]["count"]
+    logger.fatal "found_rows: #{actual_adest_count}"
 
     dests = self.destinations
     fdests = []
