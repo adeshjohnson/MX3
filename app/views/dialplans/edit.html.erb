@@ -253,12 +253,18 @@
             <%= hidden_field_tag 'dialplan[dptype]', "quickforwarddids" %>
             <td align="left"><%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "30", :maxlength => "50", :id => "quickforward_dp_name" %></td>
             <td align="center">
-              <%= select_tag("quickforwards_user", options_for_select([[_('Not_used'), ""]]+ @users.map { |user| ["#{nice_user(user)} (#{user.id })", user.id] }, @selected_user_id), {:disabled => (@selected_user_id == ''), :onchange => 'set_devices(this.value);'}) %>
+              <%= select_tag("quickforwards_user", options_for_select([[_('Not_used'), ""]]+ @users.map { |user| ["#{nice_user(user)} (#{user.id })", user.id] }, @selected_user_id), {:onchange => 'set_devices(this.value);'}) %>
             </td>
             <td align="center">
-              <span id="quickforwards_device"> </span>
+              <span id="quickforwards_device"> 
+                <% if @selected_device %>
+                  <%= select_tag("users_device", options_for_select([[_('Not_used'), ""]]+ @devices.map { |dev| [dev.device_type + "/" + dev.name, dev.id] }, @selected_device_id)) %>
+                <% else %>
+                  &nbsp;
+                <% end %> 
+              </span>
             </td>
-            <td align="center"><%= check_box_tag 'dialplan[data10]', 1, @dp.data10 == "1", {:id => "data10", :onclick => "$('quickforwards_user').disabled = this.checked;if($('users_device')){$('users_device').disabled = this.checked;}"} %></td>
+            <td align="center"><%= check_box_tag 'dialplan[data10]', 1, @dp.data10 == "1", {:id => "data10"} %></td>
             <td align="center"><%= image_submit_tag 'icons/add.png', :title => _('Add'), :id => "cb_add" %></td>
           </tr>
         </table>
@@ -266,15 +272,9 @@
     <script type="text/javascript">
         $.noConflict();
         function set_devices(value) {
-            new Ajax.Updater('quickforwards_device', '<%=Web_Dir%>/dialplans/dialplans_device_ajax/' + value + '?device_id=<%=@dp.data3%>', {asynchronous:true, evalScripts:true});
-            if ($('data10').checked) {
-                $('quickforwards_device').style.display = 'none';
-            } else {
-                $('quickforwards_device').style.display = '';
-            }
-
+          new Ajax.Updater('quickforwards_device', '<%=Web_Dir%>/dialplans/dialplans_device_ajax/' + value + '?device_id=<%=@dp.data3%>', {asynchronous:true, evalScripts:true});
         }
-        set_devices(<%=  @selected_user_id%>);
+        set_devices(<%= @selected_user_id %>);
     </script>
 
 <% end %>

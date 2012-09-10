@@ -76,10 +76,11 @@ class DialplansController < ApplicationController
 
     if @dp.dptype == 'quickforwarddids'
       @users = current_user.find_all_for_select
-      if @dp.data3.to_s.length > 0 and selected_device = Device.find(:first, :select => 'users.id user_id, devices.id device_id', :joins => "JOIN users ON users.id = devices.user_id", :conditions => "users.owner_id = #{current_user.id} AND devices.id = #{@dp.data3.to_i}")
-        @devices = Device.find(:all, :conditions => "user_id = #{selected_device.user_id}")
-        @selected_user_id = selected_device.user_id
-        @selected_device_id = selected_device.user_id
+      if @dp.data3.to_s.length > 0 and @selected_device = Device.find(:first, :select => 'users.id user_id, devices.id device_id', :joins => "JOIN users ON users.id = devices.user_id", :conditions => "users.owner_id = #{current_user.id} AND devices.id = #{@dp.data3.to_i}")
+        @devices = Device.find(:all, :conditions => "user_id = #{@selected_device.user_id}")
+        @selected_user_id = @selected_device.user_id
+        @selected_device_id = @selected_device.id
+        logger.fatal @selected_device
       else
         @devices = []
         @selected_user_id = ''
@@ -194,22 +195,12 @@ class DialplansController < ApplicationController
     end
 
     if @dp.dptype == "quickforwarddids"
-      @dp.data10 = 0 if params[:dialplan][:data10].to_i == 0
-      if params[:dialplan][:data10].to_i == 0 and params[:users_device].to_i == 0
-        flash[:notice] = _('Select_device_or_set_diversion')
+      @dp.data10 = (params[:dialplan][:data10].to_i == 1 ? 1 : 0)
+      if params[:users_device].to_i != 0 and not User.find(:first, :joins => "JOIN devices ON devices.user_id = users.id", :conditions => "devices.id = #{params[:users_device].to_i} AND users.owner_id = #{current_user.get_corrected_owner_id}")
+        flash[:notice] = _('Device_was_not_found')
         redirect_to :action => 'edit', :id => @dp.id and return false
-      end
-      if params[:dialplan][:data10].to_i == 0
-        if not User.find(:first, :joins => "JOIN devices ON devices.user_id = users.id", :conditions => "devices.id = #{params[:users_device].to_i} AND users.owner_id = #{current_user.get_corrected_owner_id}")
-          flash[:notice] = _('Device_was_not_found')
-          redirect_to :action => 'edit', :id => @dp.id and return false
-        else
-          @dp.data3 = params[:users_device].to_i
-          @dp.data10 = 0
-        end
       else
-        @dp.data10 = 1
-        @dp.data3 = nil
+        @dp.data3 = params[:users_device].to_i
       end
     end
 
@@ -300,12 +291,8 @@ class DialplansController < ApplicationController
     end
 
     if dp.dptype == "quickforwarddids"
-      dp.data10 = 0 if dp.data10.to_s.length == 0
-      if dp.data10 == 0 and params[:users_device].to_i == 0
-        flash[:notice] = _('Select_device_or_set_diversion')
-        redirect_to :action => 'new' and return false
-      end
-      if dp.data10 == 0 and not User.find(:first, :joins => "JOIN devices ON devices.user_id = users.id", :conditions => "devices.id = #{params[:users_device].to_i} AND users.owner_id = #{current_user.get_corrected_owner_id}")
+      dp.data10 = (params[:dialplan][:data10].to_i == 1 ? 1 : 0)
+      if params[:users_device].to_i != 0 and not User.find(:first, :joins => "JOIN devices ON devices.user_id = users.id", :conditions => "devices.id = #{params[:users_device].to_i} AND users.owner_id = #{current_user.get_corrected_owner_id}")
         flash[:notice] = _('Device_was_not_found')
         redirect_to :action => 'new' and return false
       else
