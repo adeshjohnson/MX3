@@ -311,7 +311,7 @@
             <td align="center">
               <span id="quickforwards_device"></span>
             </td>
-            <td align="center"><%= check_box_tag 'dialplan[data10]', 1, @dp.data10 == "1", {:id => "data10", :onclick => "$('quickforwards_user').disabled = this.checked;if($('quickforwards_device').hasChildNodes()){$('quickforwards_device').childNodes[1].disabled = this.checked;}"} %></td>
+            <td align="center"><%= check_box_tag 'dialplan[data10]', 1, @dp.data10 == "1", {:id => "data10"} %></td>
             <td align="center"><%= image_submit_tag 'icons/add.png', :title => _('Add'), :id => "cb_add" %></td>
           </tr>
         </table>
