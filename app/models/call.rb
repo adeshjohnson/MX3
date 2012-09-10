@@ -668,7 +668,7 @@ class Call < ActiveRecord::Base
     sql = "SELECT * "
     if options[:test] != 1 and options[:pdf].to_i == 0
       sql += " INTO OUTFILE '/tmp/#{filename}.csv'
-            FIELDS TERMINATED BY '#{options[:collumn_separator]}' #{'OPTIONALLY' if not Confline.mor_11_extended?} ENCLOSED BY \'\"\'
+            FIELDS TERMINATED BY '#{options[:collumn_separator]}'
             ESCAPED BY '#{"\\\\"}'
         LINES TERMINATED BY '#{"\\n"}' "
     end
