@@ -1,0 +1,1 @@
+UPDATE currencies SET curr_update = 0;
