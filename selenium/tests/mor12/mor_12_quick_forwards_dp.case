@@ -326,16 +326,6 @@
 	<td>on</td>
 </tr>
 <tr>
-	<td>waitForNotEditable</td>
-	<td>id=quickforwards_user</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForNotEditable</td>
-	<td>name=users_device</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>id=cb_add</td>
 	<td></td>
@@ -352,13 +342,13 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quickforward_dp_device_id_3</td>
-	<td></td>
+	<td>id=quickforward_dp_user_3</td>
+	<td>101</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=quickforward_dp_data10_3</td>
-	<td></td>
+	<td>id=quickforward_dp_device_id_3</td>
+	<td>FAX/102</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -386,14 +376,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Select device or set diversion</td>
+	<td>assertTextPresent</td>
+	<td>Dialplan successfully created</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>//input[@id='quickforward_dp_name']</td>
-	<td>qf_dp2</td>
+	<td>assertText</td>
+	<td>id=quickforward_dp_user_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=quickforward_dp_device_id_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=quickforward_dp_data10_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/4</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertSelectOptions</td>
@@ -444,16 +449,6 @@
 	<td>waitForSelectedLabel</td>
 	<td>name=users_device</td>
 	<td>Not used</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=cb_add</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Select device or set diversion</td>
-	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -521,8 +516,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Dialplan successfully created</td>
+	<td>assertTextPresent</td>
+	<td>Dial Plan successfully updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -538,12 +533,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=quickforward_dp_user_3</td>
-	<td></td>
+	<td>101</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=quickforward_dp_device_id_3</td>
-	<td></td>
+	<td>FAX/102</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -576,17 +571,15 @@
 	<td></td>
 </tr>
 <tr>
-	<td>refreshAndWait</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertNotEditable</td>
+	<td>assertEditable</td>
 	<td>id=quickforwards_user</td>
 	<td></td>
 </tr>
-<!--Konvertavus kaip suprantu vistiek mato-->
-<!--<tr> 	<td>assertNotVisible</td> 	<td>name=users_device</td> 	<td></td> </tr>-->
+<tr>
+	<td>assertEditable</td>
+	<td>id=users_device</td>
+	<td></td>
+</tr>
 <tr>
 	<td>assertValue</td>
 	<td>name=dialplan[name]</td>
@@ -736,16 +729,6 @@
 	<td>waitForValue</td>
 	<td>id=data10</td>
 	<td>on</td>
-</tr>
-<tr>
-	<td>waitForNotEditable</td>
-	<td>id=quickforwards_user</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForNotEditable</td>
-	<td>name=users_device</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1061,16 +1044,6 @@
 	<td>keyUp</td>
 	<td>id=data10</td>
 	<td>w</td>
-</tr>
-<tr>
-	<td>waitForNotEditable</td>
-	<td>id=quickforwards_user</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForNotEditable</td>
-	<td>name=users_device</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
