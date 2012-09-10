@@ -221,7 +221,7 @@ class TariffsController < ApplicationController
         :group => "directions.id")
 
     @page = params[:page] ? params[:page].to_i : 1
-    record_offset = @page * session[:items_per_page].to_i - 1
+    record_offset = (@page - 1) * session[:items_per_page].to_i
 
     if params[:s_prefix]
       @s_prefix = params[:s_prefix].gsub(/[^0-9%]/, '')
