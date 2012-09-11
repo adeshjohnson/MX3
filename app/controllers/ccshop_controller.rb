@@ -304,7 +304,7 @@ class CcshopController < ApplicationController
     @tariff = @cardgroup.tariff
 
     @Show_Currency_Selector = true
-    @dgroups = Destinationgroup.find(:all, :order => "name ASC, desttype ASC")
+    @dgroups = Destinationgroup.find(:all, :include => [:customrates, :rates], :conditions => ["(customrates.user_id = '#{session[:user_id]}' or customrates.id IS NULL) AND (rates.tariff_id = #{@tariff.id} OR rates.id IS NULL)"], :order => "name ASC, desttype ASC")
 
     @st = "A"
     @st = params[:st].upcase if params[:st]
@@ -343,6 +343,7 @@ class CcshopController < ApplicationController
     @letter_select_header_id = @tariff.id
     @page_select_header_id = @tariff.id
 
+    @show_values_without_vat = confline("CCShop_show_values_without_VAT_for_user").to_i  
     @exchange_rate = count_exchange_rate(@tariff.currency, session[:show_currency])
     @cust_exchange_rate = count_exchange_rate(session[:default_currency], session[:show_currency])
   end

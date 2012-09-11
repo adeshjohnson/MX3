@@ -13,7 +13,7 @@
         <th align="left"><%= _('Name') %></th>
         <th align="left"><%= _('Type') %></th>
         <th align="center"><%= _('Destinations') %></th>
-        <% if confline("CCShop_show_values_without_VAT_for_user").to_i == 1 %>
+        <% if @show_values_without_vat == 1 %>
             <th align="center"><%= _('Rate') %> (<%= session[:show_currency] %>)</th>
         <% end %>
         <th align="center"><%= _('Rate_with_VAT') %> (<%= session[:show_currency] %>)</th>
@@ -31,12 +31,12 @@
                roundby = 1
 
                arates = []
-               rate = dg.rate(@tariff.id)
+               rate = dg.rates[0]
 
                arates = rate.aratedetails if rate
 
                #check for custom ratese
-               crate = Customrate.find(:first, :conditions => "user_id = '#{session[:user_id]}' AND destinationgroup_id = '#{dg.id}'")
+               crate = dg.customrates[0]
                arates = crate.acustratedetails if crate
                exchange_rate = @exchange_rate
                exchange_rate = @cust_exchange_rate if crate
@@ -61,7 +61,7 @@
 
             <td align="center"><%= link_to b_view + _('View'), {:controller => :destination_groups, :action => :dg_list_user_destinations, :id => dg.id}, :popup => true %></td>
             <% if show_rr %>
-                <% if confline("CCShop_show_values_without_VAT_for_user").to_i == 1 %>
+                <% if @show_values_without_vat == 1 %>
                     <td align="center"><%= nice_number_currency(price, exchange_rate) if arates.size > 0 %></td>
                 <% end %>
                 <td align="center"><%= nice_number_currency(@cardgroup.get_tax.count_tax_amount(price), exchange_rate) if arates.size > 0 %></td>
@@ -114,13 +114,13 @@
                 <th align="left"><%= _('Name') %></th>
             <% end %>
 
-            <% if confline("CCShop_show_values_without_VAT_for_user").to_i == 1 %>
+            <% if @show_values_without_vat == 1 %>
                 <th colspan=2 align="center"><%= _('Rate') %> (<%= session[:show_currency] %>)</th>
             <% else %>
                 <th align="center"><%= _('Rate_with_VAT') %> (<%= session[:show_currency] %>)</th>
             <% end %>
 
-            <% if confline("CCShop_show_values_without_VAT_for_user").to_i == 1 %>
+            <% if @show_values_without_vat == 1 %>
                 <th colspan=2 align="center"><%= _('Connection_Fee') %> (<%= session[:show_currency] %>)</th>
             <% else %>
                 <th align="center"><%= _('Connection_Fee_with_VAT') %> (<%= session[:show_currency] %>)</th>
@@ -146,11 +146,11 @@
                     <td><%= h(rate.destination.name) if rate.destination.name %></td>
                 <% end %>
 
-                <% if confline("CCShop_show_values_without_VAT_for_user").to_i == 1 %>
+                <% if @show_values_without_vat == 1 %>
                     <td align="center"><%= nice_number @rates_cur2[rate.id] %></td>
                 <% end %>
                 <td align="center"><%= nice_number(@rates_cur2[rate.id] + @cardgroup.get_tax.count_tax_amount(@rates_cur2[rate.id])) %></td>
-                <% if confline("CCShop_show_values_without_VAT_for_user").to_i == 1 %>
+                <% if @show_values_without_vat == 1 %>
                     <td align="center"><%= nice_number @rates_free2[rate.id] %></td>
                 <% end %>
 

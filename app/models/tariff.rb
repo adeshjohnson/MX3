@@ -16,7 +16,7 @@ class Tariff < ActiveRecord::Base
 
   # select rates by their countries (directions) first letter for easier management
   def rates_by_st(st, sql_start, per_page)
-    Rate.find_by_sql ["SELECT rates.id, rates.tariff_id, rates.destination_id FROM destinations, rates, directions WHERE rates.tariff_id = ? AND destinations.id = rates.destination_id AND directions.code = destinations.direction_code AND directions.name like ? GROUP BY rates.id ORDER BY directions.name ASC, destinations.prefix ASC LIMIT " + sql_start.to_s + "," + per_page.to_s, self.id, st.to_s+'%']
+    Rate.find_by_sql ["SELECT rates.id, rates.tariff_id, rates.destination_id, destinations.direction_code, prefix, city, state, lata, subcode, tier, ocn, destinations.name as destination_name FROM destinations, rates, directions WHERE rates.tariff_id = ? AND destinations.id = rates.destination_id AND directions.code = destinations.direction_code AND directions.name like ? GROUP BY rates.id ORDER BY directions.name ASC, destinations.prefix ASC LIMIT " + sql_start.to_s + "," + per_page.to_s, self.id, st.to_s+'%']
   end
 
   # select rates by their countries (directions) first letter for easier management
