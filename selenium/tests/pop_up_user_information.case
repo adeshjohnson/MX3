@@ -252,11 +252,6 @@
 	<td>label=Retail - Test Tariff + 0.1</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//option[@value='4']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>uncheck</td>
 	<td>unlimited</td>
 	<td></td>
@@ -267,7 +262,7 @@
 	<td>100</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
 </tr>
@@ -285,11 +280,6 @@
 	<td>select</td>
 	<td>user_tariff_id</td>
 	<td>label=Retail - Test Tariff + 0.1</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//option[@value='4']</td>
-	<td></td>
 </tr>
 <tr>
 	<td>uncheck</td>
@@ -333,7 +323,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
@@ -355,11 +350,6 @@
 	<td>select</td>
 	<td>user_tariff_id</td>
 	<td>label=Retail - Test Tariff + 0.1</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//option[@value='4']</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
