@@ -19,6 +19,7 @@ class Device < ActiveRecord::Base
   attr_accessor :device_ip_authentication_record
   attr_accessor :device_olde_name_record
   attr_accessor :device_old_server_record
+  attr_accessor :tmp_codec_cache
 
   belongs_to :user
   has_many :extlines, :order => "exten ASC, priority ASC"
@@ -335,9 +336,9 @@ class Device < ActiveRecord::Base
   end
 
   def codec?(codec)
-    sql = "SELECT COUNT(*) as 'count' FROM devicecodecs, codecs WHERE devicecodecs.device_id = '" + self.id.to_s + "' AND devicecodecs.codec_id = codecs.id AND codecs.name = '" + codec.to_s + "'"
-    res = ActiveRecord::Base.connection.select_one(sql)
-    res['count'].to_i == 1
+    sql = "SELECT codecs.name FROM devicecodecs, codecs WHERE devicecodecs.device_id = '" + self.id.to_s + "' AND devicecodecs.codec_id = codecs.id GROUP BY codecs.name HAVING COUNT(*) = 1"
+    self.tmp_codec_cache = (self.tmp_codec_cache || ActiveRecord::Base.connection.select_values(sql))
+    self.tmp_codec_cache.include? codec.to_s
   end
 
   def codecs
