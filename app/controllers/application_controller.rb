@@ -2203,7 +2203,7 @@ Variables: (Names marked with * are required)
 
         if session and session[:forgot_pasword] == 1
           session[:forgot_pasword] = 0
-          flash[:notice_forgot]= _('Cannot_change_password') + "<br />" + _('Email_not_sent_because_bad_system_configurations')
+          flash[:notice_forgot]= (_('Cannot_change_password') + "<br />" + _('Email_not_sent_because_bad_system_configurations')).html_safe
         end
 
         if session and session[:flash_not_redirect].to_i == 0
