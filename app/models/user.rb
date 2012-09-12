@@ -1700,7 +1700,7 @@ class User < ActiveRecord::Base
   end
 
   def User.find_all_for_select(owner_id = nil, options ={})
-    opts = {:select => "id, username, first_name, last_name, #{SqlExport.nice_user_sql}", :order => "nice_user"}
+    opts = {:select => "id, username, first_name, last_name, usertype, #{SqlExport.nice_user_sql}", :order => "nice_user"}
     opts[:select] += ", "+options[:select] unless options[:select].blank?
     if owner_id and
         if options[:exclude_owner] == true

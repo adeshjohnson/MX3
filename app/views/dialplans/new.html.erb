@@ -306,7 +306,7 @@
           <tr>
             <td align="left"><%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "30", :maxlength => "50", :id => "quickforward_dp_name" %></td>
             <td align="center">
-              <%= select_tag("quickforwards_user", options_for_select([[_('Not_used'), ""]]+ @users.map { |user| ["#{nice_user(user)} (#{user.id })", user.id] })) %>
+              <%= select_tag("quickforwards_user" ,options_for_select([[_('Not_used'), ""]]+ @users.select{|user| user.usertype != 'reseller' or not current_user.is_reseller? }.map{|user| [ "#{nice_user(user)} (#{user.id })", user.id]})) %>
             </td>
             <td align="center">
               <span id="quickforwards_device"></span>
