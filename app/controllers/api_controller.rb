@@ -3930,7 +3930,6 @@ class ApiController < ApplicationController
   end
 
   def send_email
-    params[:p] = 'nasty_hack_to_bypass_password'
     allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
@@ -4060,7 +4059,7 @@ class ApiController < ApplicationController
  Obsolete method. Used in former authentication.
 =end
   def check_user(login='', password='')
-    if params[:p] == 'nasty_hack_to_bypass_password'
+    if params[:action] == 'send_email'
       @user = User.find(:first, :conditions => ["username = ?", login.to_s])
     else
       @user = User.find(:first, :conditions => ["username = ? and password = ?", login.to_s, Digest::SHA1.hexdigest(password.to_s)])
