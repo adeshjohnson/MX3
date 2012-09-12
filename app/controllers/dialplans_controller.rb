@@ -79,8 +79,7 @@ class DialplansController < ApplicationController
       if @dp.data3.to_s.length > 0 and @selected_device = Device.find(:first, :select => 'users.id user_id, devices.id device_id', :joins => "JOIN users ON users.id = devices.user_id", :conditions => "users.owner_id = #{current_user.id} AND devices.id = #{@dp.data3.to_i}")
         @devices = Device.find(:all, :conditions => "user_id = #{@selected_device.user_id}")
         @selected_user_id = @selected_device.user_id
-        @selected_device_id = @selected_device.id
-        logger.fatal @selected_device
+        @selected_device_id = @selected_device.device_id
       else
         @devices = []
         @selected_user_id = ''
