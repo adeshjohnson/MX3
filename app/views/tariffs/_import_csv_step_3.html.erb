@@ -89,7 +89,7 @@
 <table>
   <tr>
     <td>
-      <%= form_tag({:action => 'import_csv', :step => "2"}) do %>
+      <%= form_tag({:action => 'import_csv2', :step => "2"}) do %>
           <%= submit_tag(_('Back'), :disable_with => _('Processing..')) %>
       <% end %>
     </td>
@@ -97,7 +97,7 @@
     <td width="20"></td>
     <% if session[:imp_prefix] >= 0 and session[:imp_rate] >= 0 %>
         <td>
-          <%= form_tag({:action => 'import_csv', :step => "4"}) do %>
+          <%= form_tag({:action => 'import_csv2', :step => "4"}) do %>
               <%= submit_tag(_('Confirm_columns'), :disable_with => _('Processing..')) %>
           <% end %>
         </td>
