@@ -349,7 +349,13 @@ class CcshopController < ApplicationController
   end
 
   def get_provider_rate_details(rate, exrate)
-    @rate_details = Ratedetail.find(:all, :conditions => "rate_id = #{rate.id.to_s}", :order => "rate DESC")
+    
+    # caching ratedetails or creating cache  
+    @tmp_ratedetails_cache = (@tmp_ratedetails_cache || Ratedetail.find(:all, :conditions => "rate_id in (SELECT rates.id FROM rates, destinations, directions WHERE rates.tariff_id = #{@tariff.id} AND rates.destination_id = destinations.id AND destinations.direction_code = directions.code)", :order => "rate DESC").select{|ratedetail| ratedetail.rate_id.to_i == rate.id.to_i})
+
+    # reading from cache 
+    @rate_details = @tmp_ratedetails_cache
+
     if @rate_details.size > 0
       @rate_increment_s=@rate_details[0]['increment_s']
       @rate_cur, @rate_free = Currency.count_exchange_prices({:exrate => exrate, :prices => [@rate_details[0]['rate'].to_d, @rate_details[0]['connection_fee'].to_d]})
