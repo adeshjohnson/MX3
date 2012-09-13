@@ -36,6 +36,12 @@
 	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
+<!--It shoudl take aprox 1.5s to load /dids/list, bus selenium somehow times out. setting timeout globaly because test requests only that page-->
+<tr>
+	<td>setTimeout</td>
+	<td>10000</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/various_calls</td>
