@@ -1,4 +1,6 @@
 <% if @tariff.purpose == "user" %>
+<%= render :partial => 'letter_select_header' %>
+<br />
 
     <% if @dgroups.size > 0 %>
         <%= link_to b_pdf + _('Export_to_PDF'), :action => "generate_personal_rates_pdf", :id => @tariff.id %>
@@ -73,6 +75,9 @@
 
 
     </table>
+
+<br /> <br />
+<%= render :partial => 'letter_select_header' %>
 
 <% else %>
 

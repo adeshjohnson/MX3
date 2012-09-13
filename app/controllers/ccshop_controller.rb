@@ -303,17 +303,17 @@ class CcshopController < ApplicationController
     @cardgroup = @card.cardgroup
     @tariff = @cardgroup.tariff
 
-    @Show_Currency_Selector = true
-    @dgroups = Destinationgroup.find(:all, :include => [:customrates, :rates], :conditions => ["(customrates.user_id = '#{session[:user_id]}' or customrates.id IS NULL) AND (rates.tariff_id = #{@tariff.id} OR rates.id IS NULL)"], :order => "name ASC, desttype ASC")
-
+    @page = 1
+    @page = params[:page].to_i if params[:page]
+   
     @st = "A"
     @st = params[:st].upcase if params[:st]
 
-    @page = 1
-    @page = params[:page].to_i if params[:page]
+    @Show_Currency_Selector = true
+    @dgroups = ( @dgroups ||= Destinationgroup.find(:all, :conditions => ["name like ?", "#{@st}%"], :order => "name ASC, desttype ASC") )
 
     @rates = @tariff.rates_by_st(@st, 0, 10000)
-    @total_pages = (@rates.size.to_d / session[:items_per_page].to_d).ceil
+    @total_pages = (@rates.size.to_f / session[:items_per_page].to_f).ceil
     @all_rates = @rates
     @rates = []
     @rates_cur2 = []
