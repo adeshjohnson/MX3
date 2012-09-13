@@ -828,6 +828,9 @@ class TariffsController < ApplicationController
   end
 
   # ======== CSV IMPORT =================
+  def import_csv
+    redirect_to :action => :import_csv2  and return false
+  end
 
   def import_csv2
 
