@@ -1151,18 +1151,20 @@ class TariffsController < ApplicationController
     @page_title = _('Dst_to_create_from_csv')
     @file = session[:file]
     @status = session[:status_array]
-    @csv2=1
+    @csv2=0
     if !@file.blank?
       if params[:csv2].to_i == 0
-        @sep = session["import_csv_tariffs_import_csv2_options".to_sym][:sep]
-        @csv_file = CSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
-        begin
-          @csv_file.each { |row|}
-          @csv_file.rewind
-        rescue
-          flash[:notice] = csv_import_invalid_file_notice
-          redirect_to :controller => "tariffs", :action => "list" and return false
-        end
+       # @sep = session["import_csv_tariffs_import_csv2_options".to_sym][:sep]
+       # @csv_file = CSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
+       # begin
+       #   @csv_file.each { |row|}
+       #   @csv_file.rewind
+       # rescue
+       #   flash[:notice] = csv_import_invalid_file_notice
+       #   redirect_to :controller => "tariffs", :action => "list" and return false
+       # end
+        flash[:notice] = _('Zero_file_size')
+        redirect_to :controller => "tariffs", :action => "list"
       else
         @csv2=1
         if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id]}".to_sym])
