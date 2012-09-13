@@ -1154,7 +1154,7 @@ class TariffsController < ApplicationController
     @csv2=0
     if !@file.blank?
       if params[:csv2].to_i == 0
-        @sep = session["import_csv_tariffs_import_csv_options".to_sym][:sep]
+        @sep = session["import_csv_tariffs_import2_csv_options".to_sym][:sep]
         @csv_file = CSV.new(@file, {:col_sep => @sep, :headers => false, :return_headers => false})
         begin
           @csv_file.each { |row|}
