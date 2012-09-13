@@ -1151,7 +1151,7 @@ class TariffsController < ApplicationController
     @page_title = _('Dst_to_create_from_csv')
     @file = session[:file]
     @status = session[:status_array]
-    @csv2=0
+    @csv2=1
     if !@file.blank?
       if params[:csv2].to_i == 0
         @sep = session["import_csv_tariffs_import_csv2_options".to_sym][:sep]
