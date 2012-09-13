@@ -1,6 +1,6 @@
 <%= render :partial => "bulk_management_header" %>
 <% unless @dids.size.to_i < 1 %>
-    <%= _('DID_rates_in_specified_interval_can_have_diferent_properties') %>
+    <%= _('DID_rates_in_specified_interval_can_have_different_properties') %>
     <%= form_tag :action => 'edit_rate', :from => @from, :till => @till, :interval => 1, :user => @user do %>
         <%= _('DID_Provider_rate_explained') %>
         <% i = 0 %>

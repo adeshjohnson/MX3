@@ -15,7 +15,7 @@
         <th align="left">          <%= _('called_to') %>        </th>
         <th align="left">          <%= _('Destination') %>        </th>
         <th align="center">
-          <% @call_type != "missed" ? _('duration') : _('holdtime') %></th>
+          <% @call_type != "missed" ? _('duration') : _('hold_time') %></th>
         <% if session[:usertype] == "admin" %>
             <th align="left">           <%= _('Provider') %>        </th>
         <% end %>

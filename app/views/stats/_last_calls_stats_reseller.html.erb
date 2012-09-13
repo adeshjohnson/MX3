@@ -86,7 +86,7 @@
           <% if @call_type != "missed" and @call_type != "missed_inc" and @call_type != "missed_inc_all" %>
               <%= nice_list_order('nice_billsec', _('Duration'), @options) %>
           <% else %>
-              <%= _('holdtime') %>
+              <%= _('hold_time') %>
           <% end %>
         </th>
 

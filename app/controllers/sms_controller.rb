@@ -123,7 +123,7 @@ in before filter : lcr (:find_lcr_from_id)
     for prov in @all_providers
       @other_providers << prov if !@providers.include?(prov)
     end
-    flash[:notice] = _('No_provaiders_available') if @all_providers.empty?
+    flash[:notice] = _('No_providers_available') if @all_providers.empty?
   end
 
 =begin

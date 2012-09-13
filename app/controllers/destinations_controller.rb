@@ -76,7 +76,7 @@ class DestinationsController < ApplicationController
       flash[:status] = _('Destination_was_successfully_updated')
       redirect_to :action => 'list', :id => @direction
     else
-      flash[:notice] = _('Such_destination_exists_allready')
+      flash[:notice] = _('Such_destination_exists_already')
       redirect_to :action => 'edit', :id => @destination
     end
   end

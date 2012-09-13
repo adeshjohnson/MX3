@@ -113,7 +113,7 @@ class DestinationGroupsController < ApplicationController
       end
     end
 
-    flash[:status] = _('Destinatios_added')
+    flash[:status] = _('Destinations_added')
     redirect_to :action => :destinations, :id => @destgroup.id
   end
 

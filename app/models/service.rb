@@ -12,8 +12,8 @@ class Service < ActiveRecord::Base
     if servicetype == 'flat_rate'
       errors.add(:price, _("Should_have_price")) if !price
       errors.add(:quantity, _("Should_have_quantity")) if !quantity
-      errors.add(:price, _("Price_should_be_possitive")) if price and price.to_i < 0
-      errors.add(:quantity, _("Quantity_should_be_possitive")) if quantity and quantity < 0
+      errors.add(:price, _("Price_should_be_positive")) if price and price.to_i < 0
+      errors.add(:quantity, _("Quantity_should_be_positive")) if quantity and quantity < 0
       return false if errors.size > 0
     end
     return true

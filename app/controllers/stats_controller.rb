@@ -2372,7 +2372,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @user = current_user
 
     if !@provider
-      flash[:notice] = _('Canot_find_provider_with_id')+" : " + params[:id].to_s
+      flash[:notice] = _('Cannot_find_provider_with_id')+" : " + params[:id].to_s
       redirect_to :controller => "providers", :action => "list" and return false
     end
 

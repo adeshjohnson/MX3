@@ -14,7 +14,7 @@ module CdrHelper
       when 1
         error = _('CLI_is_not_number')
       when 2
-        error = _('CDR_exist_in_db_match_caldate_dst_src')
+        error = _('CDR_exist_in_db_match_call_date_dst_src')
       when 3
         error = _('Destination_is_not_numerical_value')
       when 4

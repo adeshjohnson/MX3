@@ -2190,7 +2190,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     end
 
     if User.where(["username = ?", username]).first and notice.blank?
-      notice = _('Such_username_is_allready_taken')
+      notice = _('Such_username_is_already_taken')
     end
 
     if params[:password] != params[:password2] and notice.blank?

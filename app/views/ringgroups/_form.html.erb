@@ -34,7 +34,7 @@
                     </select>
                     <span onclick="new Ajax.Updater('new_ajax_did', '<%=Web_Dir%>/dialplans/did_assign_to_dp?id=<%=@dialplan.id%>&ringgroup=1&did_id=' + document.getElementById('did_id').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');Update_dids();}, onLoading:function(request){Element.show('spinner');}});Delete_did_options();"><%= b_add %> <%= _('Add_this_DID') %></span>
                 <% else %>
-                    <%= _('No_Dids_aviable_to_add') %>
+                    <%= _('No_Dids_available_to_add') %>
                 <% end %>
               </div>
             </div>

@@ -980,7 +980,7 @@ class TariffsController < ApplicationController
             @rate_type, flash[:notice_2] = @tariff.check_types_periods(params)
             ##5808 not cheking any more
             #unless flash[:notice_2].blank?
-            #  flash[:notice] = _('Tarrif_import_incorect_time').html_safe
+            #  flash[:notice] = _('Tariff_import_incorrect_time').html_safe
             #  flash[:notice] += '<br /> * '.html_safe + _('Please_select_period_without_collisions').html_safe
             #  redirect_to :action => "import_csv", :id => @tariff.id, :step => "2" and return false
             #end
@@ -1067,7 +1067,7 @@ class TariffsController < ApplicationController
                   end
                 rescue Exception => e
                   my_debug_time e.to_yaml
-                  flash[:notice] = _('colission_Please_start_over')
+                  flash[:notice] = _('collision_Please_start_over')
                   my_debug_time "clean start"
                   Tariff.clean_after_import(session["tariff_name_csv_#{@tariff.id}".to_sym])
                   session["temp_tariff_name_csv_#{@tariff.id}".to_sym] = nil
@@ -1090,7 +1090,7 @@ class TariffsController < ApplicationController
               flash[:status] = _('Rates_updated') + ": " + @tariff_analize[:rates_to_update].to_s
             rescue Exception => e
               my_debug_time e.to_yaml
-              flash[:notice] = _('colission_Please_start_over')
+              flash[:notice] = _('collision_Please_start_over')
               my_debug_time "clean start"
               Tariff.clean_after_import(session["tariff_name_csv_#{@tariff.id}".to_sym])
               session["temp_tariff_name_csv_#{@tariff.id}".to_sym] = nil
@@ -1116,7 +1116,7 @@ class TariffsController < ApplicationController
               Action.add_action(session[:user_id], "tariff_import_2", _('Tariff_was_imported_from_CSV'))
             rescue Exception => e
               my_debug_time e.to_yaml
-              flash[:notice] = _('colission_Please_start_over')
+              flash[:notice] = _('collision_Please_start_over')
               my_debug_time "clean start"
               #Tariff.clean_after_import(session["tariff_name_csv_#{@tariff.id}".to_sym])
               session["temp_tariff_name_csv_#{@tariff.id}".to_sym] = nil

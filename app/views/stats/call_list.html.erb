@@ -81,7 +81,7 @@
 <% end %>
 <% if @user.usertype == 'reseller' and session[:user_id] == 0 %>
     &nbsp;
-    <%= link_to b_csv + _('Export_to_CSV_complete_(Calls_for_Reseller_and_his_Users)'), {:action => "call_list_to_csv", :id => @user.id, :date_from => session_from_datetime, :date_till => session_till_datetime, :reseller => 1}, :id => 'reseller_calls_link' %>
+    <%= link_to b_csv + _('Export_to_CSV_completeCalls_for_Reseller_and_his_Users'), {:action => "call_list_to_csv", :id => @user.id, :date_from => session_from_datetime, :date_till => session_till_datetime, :reseller => 1}, :id => 'reseller_calls_link' %>
 <% end %>
 <br/>
 <br/>

@@ -523,7 +523,7 @@ class DevicesController < ApplicationController
 
       #------- Network related -------
       if !@new_device and @device.device_type == 'H323' and params[:host].to_s.strip !~ /^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/
-        flash[:notice] = _('Invalid_IP_addess')
+        flash[:notice] = _('Invalid_IP_address')
         redirect_to :action => 'device_edit', :id => @device.id and return false
       end
       @device.host = params[:host]
@@ -603,7 +603,7 @@ class DevicesController < ApplicationController
       #MorLog.my_debug(@device.name, true)
       if params[:vm_email].to_s != ""
         if !Email.address_validation(params[:vm_email])
-          flash[:notice] = _("Email_address_not_corect")
+          flash[:notice] = _("Email_address_not_correct")
           redirect_to :action => 'device_edit', :id => @device.id and return false
         end
       end
@@ -1572,7 +1572,7 @@ class DevicesController < ApplicationController
       flash[:status] = _('New_email_added')
     else
       if !Email.address_validation(params[:new_pdffaxemail])
-        flash[:notice] = _('Email_is_not_corect')
+        flash[:notice] = _('Email_is_not_correct')
       else
         flash[:notice] = _('Please_fill_field')
       end
@@ -1725,7 +1725,7 @@ class DevicesController < ApplicationController
 
     if params[:vm_email].to_s != ""
       if !Email.address_validation(params[:vm_email])
-        flash[:notice] = _("Email_address_not_corect")
+        flash[:notice] = _("Email_address_not_correct")
         redirect_to :action => 'default_device' and return false
       end
     end

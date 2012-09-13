@@ -63,7 +63,7 @@ class ServersController < ApplicationController
       end
       flash[:status] = _('Provider_added')
     else
-      flash[:notice] = _('Provider_allready_exists')
+      flash[:notice] = _('Provider_already_exists')
     end
     redirect_to :action => 'server_providers', :id => @server.id and return false
   end

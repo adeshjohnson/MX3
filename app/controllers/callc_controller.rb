@@ -161,10 +161,10 @@ class CallcController < ApplicationController
       flash[:notice] = bad_psw if !bad_psw.blank?
       if (request.env["HTTP_USER_AGENT"]) && (request.env["HTTP_USER_AGENT"].match("iPhone") or request.env["HTTP_USER_AGENT"].match("iPod"))
         #my_debug request.env["HTTP_USER_AGENT"]
-        flash[:status] = _('login_succesfull')
+        flash[:status] = _('login_successfully')
         redirect_to :action => "main_for_pda" and return false
       else
-        flash[:status] = _('login_succesfull')
+        flash[:status] = _('login_successfully')
         if defined?(CS_Active) && CS_Active == 1 && group = current_user.usergroups.find(:first, :include => :group, :conditions => ["usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"]) and current_user.usertype != 'admin'
           session[:cs_group] = group
           session[:lang] = Translation.find_by_id(group.group.translation_id).short_name
@@ -254,7 +254,7 @@ class CallcController < ApplicationController
             @st = false
           end
         else
-          @r = _('Email_is_used_by_multiple_users_Canot_reset_password')
+          @r = _('Email_is_used_by_multiple_users_Cannot_reset_password')
           @st = false
         end
       else
@@ -629,7 +629,7 @@ class CallcController < ApplicationController
       @user, @send_email_to_user, @device, notice2 = User.create_from_registration(params, @owner, reg_ip, free_extension(), new_device_pin(), random_password(12), next_agreement_number)
       session[:reg_owner_id] = @user.owner_id
       unless notice2
-        flash[:status] = _('Registration_succesful')
+        flash[:status] = _('Registration_successful')
         a = Thread.new { configure_extensions(@device.id, {:current_user => @owner}) }
         #        a=configure_extensions(@device.id)
         #        return false if !a

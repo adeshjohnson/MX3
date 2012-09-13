@@ -429,15 +429,15 @@ class VouchersController < ApplicationController
     ActiveRecord::Base.connection.update(sql)
     if @active.to_i == 1
       if !session[:vouchers_bulk].blank? or params[:id].to_i > 0
-        flash[:status] = _('Vouchers_interval_activeted')
+        flash[:status] = _('Vouchers_interval_activated')
       else
-        flash[:notice] = _('No_Vouchers_found_to_activete')
+        flash[:notice] = _('No_Vouchers_found_to_activate')
       end
     else
       if !session[:vouchers_bulk].blank? or params[:id].to_i > 0
-        flash[:status] = _('Vouchers_interval_deactiveted')
+        flash[:status] = _('Vouchers_interval_deactivated')
       else
-        flash[:notice] = _('No_Vouchers_found_to_deactivete')
+        flash[:notice] = _('No_Vouchers_found_to_deactivate')
       end
     end
     redirect_to :action => 'vouchers', :page => @page
@@ -459,8 +459,8 @@ class VouchersController < ApplicationController
     if @vouchers.size == 0
       if params[:interval].to_i == 1
         flash[:notice] = _('No_Vouchers_found_to_delete') if params[:action] == 'voucher_delete'
-        flash[:notice] = _('No_Vouchers_found_to_activete') if params[:action] == 'voucher_active' and params[:vaction].to_s == 'active'
-        flash[:notice] = _('No_Vouchers_found_to_deactivete') if params[:action] == 'voucher_active' and params[:vaction].to_s != 'active'
+        flash[:notice] = _('No_Vouchers_found_to_activate') if params[:action] == 'voucher_active' and params[:vaction].to_s == 'active'
+        flash[:notice] = _('No_Vouchers_found_to_deactivate') if params[:action] == 'voucher_active' and params[:vaction].to_s != 'active'
       else
         flash[:notice] = _('Voucher_not_found')
       end

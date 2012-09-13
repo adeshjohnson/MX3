@@ -73,7 +73,7 @@ class ApiController < ApplicationController
     if Confline.get_value("API_Login_Redirect_to_Main").to_i == 1 and login_ok
       bad_psw = (params[:p].to_s == 'admin' and @user.id == 0) ? _('ATTENTION!_Please_change_admin_password_from_default_one_Press')+ " <a href='#{Web_Dir}/users/edit/0'> #{_('Here')} </a> " + _('to_do_this') : ''
       flash[:notice] = bad_psw if !bad_psw.blank?
-      flash[:status] = _('login_succesfull')
+      flash[:status] = _('login_successfully')
       redirect_to :controller => :callc, :action => :main and return false
     else
       send_xml_data(out_string, params[:test].to_i)
@@ -1770,7 +1770,7 @@ class ApiController < ApplicationController
               reg_ip = request.remote_ip
               user, send_email_to_user, device, notice2 = User.create_from_registration(params, owner, reg_ip, free_extension(), new_device_pin(), random_password(12), next_agreement_number, 1)
               if notice2.blank?
-                doc.status { doc.success(_('Registration_succesful')) }
+                doc.status { doc.success(_('Registration_successful')) }
                 a = Thread.new { configure_extensions(device.id, {:api => 1, :current_user => owner}) }
                 doc.user_device_settings {
                   MorLog.my_debug user.to_yaml

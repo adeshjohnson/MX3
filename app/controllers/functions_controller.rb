@@ -987,7 +987,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     end
 =begin
     if (!Email.address_validation(params[:email_fax_from_sender]) and params[:fax_device_enabled].to_i == 1)  or !Email.address_validation(params[:company_email])
-      flash[:notice] = _("Email_address_not_corect")
+      flash[:notice] = _("Email_address_not_correct")
       redirect_to :action => 'settings' and return false
     end
 =end
@@ -1204,7 +1204,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       Confline.set_value("Device_Range_MIN", params[:device_range_min])
       Confline.set_value("Device_Range_MAX", params[:device_range_max])
     else
-      flash[:notice] = _('Device_Range_inteval_is_not_valid')
+      flash[:notice] = _('Device_Range_interval_is_not_valid')
       error = 1
     end
     Confline.set_value("Disalow_Duplicate_Device_Usernames", params[:disalow_duplicate_device_usernames])
@@ -1530,7 +1530,7 @@ Sets default tax values for users or cardgroups
 
     #PayPal
     if (!Email.address_validation(params[:paypal_email]) and (params[:paypal_enabled].to_i == 1 or params[:paypal_test].to_i ==1))
-      flash[:notice] = _("Email_address_not_corect")
+      flash[:notice] = _("Email_address_not_correct")
       redirect_to :action => 'settings_payments' and return false
     end
     Confline.set_value("Paypal_Enabled", params[:paypal_enabled].to_i)
@@ -1981,7 +1981,7 @@ Sets default tax values for users or cardgroups
   def reseller_settings_payments_change
 
     if (!Email.address_validation(params[:reseller_paypal_email]) and (params[:reseller_paypal_enabled].to_i == 1 or params[:reseller_paypal_test].to_i ==1))
-      flash[:notice] = _("Email_address_not_corect")
+      flash[:notice] = _("Email_address_not_correct")
       redirect_to :action => 'reseller_settings_payments' and return false
     end
 
@@ -2380,7 +2380,7 @@ Sets default tax values for users or cardgroups
               err += _('Please_enter_username')+"<br />"
             end
             if User.find(:first, :conditions => ["username = ?", username])
-              err += _('Such_username_is_allready_taken')+"<br />"
+              err += _('Such_username_is_already_taken')+"<br />"
             end
             if clean_value_all(r_arr[session[:imp_user_password]].to_s).length < 5
               err += _('Password_is_too_short') +"<br />"

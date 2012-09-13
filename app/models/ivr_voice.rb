@@ -68,7 +68,7 @@ class IvrVoice< ActiveRecord::Base
     end
 
     unless File.directory?(dir)
-      errors.add(:voice, _("Cann_not_create_directory"))
+      errors.add(:voice, _("Can_not_create_directory"))
       return false
     end
   end

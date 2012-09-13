@@ -58,7 +58,7 @@ class CronActionsController < ApplicationController
     @cron_setting.valid_from = current_user.system_time(Time.mktime(params[:activation_start][:year], params[:activation_start][:month], params[:activation_start][:day], params[:activation_start][:hour], '0', '0'))
     @cron_setting.valid_till = current_user.system_time(Time.mktime(params[:activation_end][:year], params[:activation_end][:month], params[:activation_end][:day], params[:activation_end][:hour], '59', '59'))
     if @cron_setting.save
-      flash[:status]=_('Setting_updeted')
+      flash[:status]=_('Setting_updated')
       redirect_to :action => :index
     else
       flash_errors_for(_('Setting_not_updated'), @cron_setting)

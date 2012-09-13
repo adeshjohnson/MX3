@@ -4,5 +4,5 @@
       &nbsp;&nbsp;<span onclick="new Ajax.Updater('new_ajax_devices', '<%=Web_Dir%>/ringgroups/assign_device?id=<%=@ringgroup.id%>&device_id=' + document.getElementById('device_id').value, {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});"><%= b_add %> <%= _('Add_this_Device') %></span>
     </td>
 <% else %>
-    <td colspan="2"><%= _('No_Devices_aviable_to_add') %></td>
+    <td colspan="2"><%= _('No_Devices_available_to_add') %></td>
 <% end %>

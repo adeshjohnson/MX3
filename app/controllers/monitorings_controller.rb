@@ -61,7 +61,7 @@ class MonitoringsController < ApplicationController
         #        @monitoring.associate
         #        @monitoring.reload
 
-        flash[:status] = "#{_("Monitoring_created_succesfully")}. #{_("Applied_to_n_users", (@monitoring.users.any?) ? @monitoring.users.count : _(@monitoring.user_type.capitalize).downcase)}."
+        flash[:status] = "#{_("Monitoring_created_successfully")}. #{_("Applied_to_n_users", (@monitoring.users.any?) ? @monitoring.users.count : _(@monitoring.user_type.capitalize).downcase)}."
 
         redirect_back_or_default("/monitorings")
       else

@@ -121,7 +121,7 @@ class ProvidersController < ApplicationController
       redirect_to :action => 'provider_servers', :id => @provider.id
 
     else
-      flash[:notice] = _('Server_allready_exists')
+      flash[:notice] = _('Server_already_exists')
       redirect_to :action => 'provider_servers', :id => @provider.id
     end
   end

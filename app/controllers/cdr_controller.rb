@@ -12,7 +12,7 @@ class CdrController < ApplicationController
 
   def import_csv
 
-    step_names = [_('Import_CDR'), _('File_upload'), _('Column_assignment'), _('Column_confirmation'), _('Select_details'), _('Analysis'), _('Fix_clis'), _('Create_clis'), _('Assigne_clis'), _('Import_CDR')]
+    step_names = [_('Import_CDR'), _('File_upload'), _('Column_assignment'), _('Column_confirmation'), _('Select_details'), _('Analysis'), _('Fix_clis'), _('Create_clis'), _('Assign_clis'), _('Import_CDR')]
     params[:step] ? @step = params[:step].to_i : @step = 0
     @step = 0 if @step > step_names.size or @step < 0
     @step_name = step_names[@step]
@@ -177,7 +177,7 @@ class CdrController < ApplicationController
               end
             else
               if session[:cdr_import_csv2][:imp_clid].to_i == -1
-                flash[:notice] = _('Please_select_CLID_commun')
+                flash[:notice] = _('Please_select_CLID_column')
                 redirect_to :action => :import_csv, :step => 2 and return false
               end
               session[:cdr_import_csv2][:create_callerid] = params[:create_callerid].to_i
@@ -321,7 +321,7 @@ class CdrController < ApplicationController
     end
 
     if Call.find(:first, :conditions => {:calldate => calldate, :billsec => billsec, :dst => dst})
-      @error = _('CDR_exist_in_db_match_caldate_dst_src')
+      @error = _('CDR_exist_in_db_match_call_date_dst_src')
       render :layout => false and return false
     else
       ActiveRecord::Base.connection.execute("UPDATE #{session[:temp_cdr_import_csv]} SET col_#{session[:cdr_import_csv2][:imp_clid]} = '#{cli}', col_#{session[:cdr_import_csv2][:imp_calldate]} = '#{calldate}', col_#{session[:cdr_import_csv2][:imp_billsec]} = '#{billsec}', col_#{session[:cdr_import_csv2][:imp_dst]} = '#{dst}', f_error = 0, changed = 1 WHERE f_error = 1 and id = #{params[:id]}")

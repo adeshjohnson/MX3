@@ -227,7 +227,7 @@
         <tr>
           <td></td>
           <td>
-            <b><%= link_to b_check + _('Applay_to_all_Users'), {:action => 'tax_change', :u => 1}, :confirm => _('are_you_sure'), :method => "post" %></b>
+            <b><%= link_to b_check + _('Apply_to_all_Users'), {:action => 'tax_change', :u => 1}, :confirm => _('are_you_sure'), :method => "post" %></b>
           </td>
           <td></td>
           <td></td>
@@ -269,7 +269,7 @@
 
         <tr>
           <td></td>
-          <td><b><%= _('Run_backup_according_below_shedule') %> </b></td>
+          <td><b><%= _('Run_backup_according_below_schedule') %> </b></td>
           <td><%= check_box_tag 'shedule', value = "1", Confline.get_value('Backup_shedule').to_i == 1 %> </td>
         </tr>
         <% backup_month = Confline.get_value("Backup_month") %>

@@ -3,8 +3,8 @@ class Currency < ActiveRecord::Base
 
   has_many :users
 
-  validates_length_of :name, :maximum => 5, :message => _('Currency_Name_is_to_long_Max_5_Simbols')
-  validates_numericality_of :exchange_rate, :greater_than => 0.to_d, :on => :create, :message => _('Currency_exchange_rate_canot_be_blank')
+  validates_length_of :name, :maximum => 5, :message => _('Currency_Name_is_to_long_Max_5_Symbols')
+  validates_numericality_of :exchange_rate, :greater_than => 0.to_d, :on => :create, :message => _('Currency_exchange_rate_cannot_be_blank')
   validates_presence_of :name, :message => _('Currency_must_have_name')
   validates_uniqueness_of :name, :message => _('Currency_Name_Must_Be_Unique')
 

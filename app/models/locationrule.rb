@@ -26,7 +26,7 @@ class Locationrule < ActiveRecord::Base
       end
     end
     if cut.blank? and add.blank?
-      errors.add(:cut_add, _("Cut_and_Add_canot_be_empty"))
+      errors.add(:cut_add, _("Cut_and_Add_cannot_be_empty"))
       return false
     end
     if device and device.belongs_to_provider? 

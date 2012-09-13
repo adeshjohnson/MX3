@@ -97,7 +97,7 @@ class LcrsController < ApplicationController
       flash[:status] = _('Lcr_was_successfully_updated')
       redirect_to :action => 'list', :id => @lcr
     else
-      flash_errors_for(_('Lcr_not_updeited'), @lcr)
+      flash_errors_for(_('Lcr_not_updated'), @lcr)
       render :action => 'edit'
     end
   end
@@ -158,7 +158,7 @@ class LcrsController < ApplicationController
         @lp.save
         flash[:status] = _("Saved")
       else
-        flash[:notice] = _("Such_prefix_allready_exists_in_this_LCR")
+        flash[:notice] = _("Such_prefix_already_exists_in_this_LCR")
       end
 
     else
@@ -275,7 +275,7 @@ class LcrsController < ApplicationController
     for prov in @all_providers
       @other_providers << prov if !@providers.include?(prov) and prov.hidden == 0
     end
-    flash[:notice] = _('No_provaiders_available') if @all_providers.empty?
+    flash[:notice] = _('No_providers_available') if @all_providers.empty?
   end
 
   #in before filter : @lcr

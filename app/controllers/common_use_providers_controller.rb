@@ -149,7 +149,7 @@ class CommonUseProvidersController < ApplicationController
   def find_data
     @commmon_use_provider = CommonUseProvider.find(:first, :conditions => {:id => params[:id]})
     unless @commmon_use_provider
-      flash[:notice] =_('Commmon_Use_Provider_not_found')
+      flash[:notice] =_('Common_Use_Provider_not_found')
       redirect_to :action => :index
     end
   end

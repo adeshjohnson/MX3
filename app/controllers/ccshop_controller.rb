@@ -45,7 +45,7 @@ class CcshopController < ApplicationController
       session[:items_per_page] = Confline.get_value("Items_Per_Page", 0).to_i
       session[:default_currency] = Currency.find(1).name
       session[:show_currency] = session[:default_currency]
-      flash[:notice] = _('login_succesfull')
+      flash[:notice] = _('login_successfully')
       redirect_to :controller => "ccshop", :action => "card_details" and return false
     else
       flash[:notice] = _('bad_cc_login')

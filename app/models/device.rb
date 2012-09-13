@@ -931,7 +931,7 @@ class Device < ActiveRecord::Base
     end
 
     if self.has_forwarded_calls and notice.blank?
-      notice = _('Cant_delete_device_has_forworded_calls')
+      notice = _('Cant_delete_device_has_forwarded_calls')
     end
 
     if self.all_calls.size > 0 and notice.blank?
@@ -939,7 +939,7 @@ class Device < ActiveRecord::Base
     end
 
     if self.dialplans.size > 0 and notice.blank?
-      notice = _('Cant_delete_device_has_diaplans')
+      notice = _('Cant_delete_device_has_dialplans')
     end
     notice
   end
