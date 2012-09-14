@@ -57,6 +57,16 @@
 <!--...Without file-->
 <tr>
 	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1?step=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please upload file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/tariffs/import_csv2/1?step=2</td>
 	<td></td>
 </tr>
@@ -117,22 +127,12 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/import_csv2/1?step=8</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Step: 0</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/functions/check_separator?min_collum_size=2&amp;sepn=;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Step: 0</td>
+	<td>Please select file</td>
 	<td></td>
 </tr>
 <!--...With file-->
@@ -217,18 +217,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Please select columns</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
-	<td>/billing/tariffs/import_csv2/1?step=8</td>
+	<td>/billing/tariffs/import_csv2/1?step=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Step: 0</td>
+	<td>Please upload file</td>
 	<td></td>
 </tr>
 <!--set csv settings-->
@@ -432,7 +427,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>New rates created: 5</td>
+	<td>New rates created: 9</td>
 	<td></td>
 </tr>
 <tr>
@@ -447,7 +442,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Rates (5)</td>
+	<td>Rates (9)</td>
 	<td></td>
 </tr>
 <tr>
@@ -638,7 +633,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>artype_260</td>
+	<td>artype_244</td>
 	<td>label=event</td>
 </tr>
 <tr>
@@ -704,7 +699,7 @@
 <!--...Check min_time value-->
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/user_arates/635?dt=&amp;st=00%3A00%3A00</td>
+	<td>/billing/tariffs/user_arates/643?dt=&amp;st=00%3A00%3A00</td>
 	<td></td>
 </tr>
 <tr>
@@ -917,12 +912,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>start_time_761</td>
+	<td>start_time_769</td>
 	<td>13:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>end_time_761</td>
+	<td>end_time_769</td>
 	<td>23:59:59</td>
 </tr>
 <tr>
@@ -932,12 +927,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>ratedetail_destroy_761</td>
+	<td>ratedetail_destroy_769</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>ratedetail_edit_761</td>
+	<td>ratedetail_edit_769</td>
 	<td></td>
 </tr>
 <tr>
@@ -967,22 +962,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>start_time_761</td>
+	<td>start_time_769</td>
 	<td>13:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>end_time_761</td>
+	<td>end_time_769</td>
 	<td>14:59:59</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>start_time_762</td>
+	<td>start_time_770</td>
 	<td>15:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>end_time_762</td>
+	<td>end_time_770</td>
 	<td>23:59:59</td>
 </tr>
 <tr>
@@ -992,17 +987,17 @@
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>ratedetail_destroy_761</td>
+	<td>ratedetail_destroy_769</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>ratedetail_destroy_762</td>
+	<td>ratedetail_destroy_770</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>ratedetail_edit_762</td>
+	<td>ratedetail_edit_770</td>
 	<td></td>
 </tr>
 <tr>
@@ -1017,17 +1012,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>start_time_763</td>
+	<td>start_time_771</td>
 	<td>23:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>end_time_763</td>
+	<td>end_time_771</td>
 	<td>23:59:59</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>end_time_762</td>
+	<td>end_time_770</td>
 	<td>22:59:59</td>
 </tr>
 <!--split-->
@@ -1038,67 +1033,67 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>end_time_767</td>
+	<td>end_time_771</td>
 	<td>23:59:59</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>end_time_766</td>
+	<td>end_time_770</td>
 	<td>22:59:59</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>start_time_766</td>
+	<td>start_time_770</td>
 	<td>15:00:00</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>end_time_765</td>
+	<td>end_time_769</td>
 	<td>14:59:59</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>start_time_765</td>
+	<td>start_time_769</td>
 	<td>13:00:00</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>end_time_766</td>
+	<td>end_time_772</td>
 	<td>12:59:59</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>start_time_766</td>
+	<td>start_time_772</td>
 	<td>00:00:00</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>end_time_765</td>
+	<td>end_time_775</td>
 	<td>23:59:59</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>start_time_765</td>
+	<td>start_time_775</td>
 	<td>23:00:00</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>end_time_764</td>
+	<td>end_time_774</td>
 	<td>22:59:59</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>start_time_764</td>
+	<td>start_time_774</td>
 	<td>15:00:00</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>end_time_763</td>
+	<td>end_time_773</td>
 	<td>14:59:59</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>start_time_763</td>
+	<td>start_time_773</td>
 	<td>13:00:00</td>
 </tr>
 <tr>
@@ -1129,7 +1124,7 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>end_time_761</td>
+	<td>end_time_769</td>
 	<td>14:59:59</td>
 </tr>
 <!--destroy-->
@@ -1155,12 +1150,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>start_time_762</td>
+	<td>start_time_770</td>
 	<td>15:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>end_time_762</td>
+	<td>end_time_770</td>
 	<td>23:59:59</td>
 </tr>
 <tr>
@@ -1180,12 +1175,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>end_time_761</td>
+	<td>end_time_769</td>
 	<td>23:59:59</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>start_time_761</td>
+	<td>start_time_769</td>
 	<td>13:00:00</td>
 </tr>
 <tr>
@@ -1195,7 +1190,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>ratedetail_destroy_761</td>
+	<td>ratedetail_destroy_769</td>
 	<td></td>
 </tr>
 <tr>
