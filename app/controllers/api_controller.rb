@@ -48,7 +48,7 @@ class ApiController < ApplicationController
           doc.name("login")
           doc.status("ok")
           doc.user_id("#{@user.id.to_s}")
-          doc.status_message("Succesfully logged in")
+          doc.status_message("Successfully logged in")
         }
       else
         login_ok = true
