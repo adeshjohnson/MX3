@@ -104,9 +104,9 @@ class DevicesController < ApplicationController
     fextension = free_extension()
     device = user.create_default_device({:device_ip_authentication_record => par[:ip_authentication].to_i, :description => par[:device][:description], :device_type => par[:device][:device_type], :dev_group => par[:device][:devicegroup_id], :free_ext => fextension, :secret => random_password(12), :username => fextension, :pin => par[:device][:pin]})
 
-    device.port = Device::DefaultPort["IAX2"] if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type
-    device.port = Device::DefaultPort["SIP"] if device.device_type == 'SIP' and not Device.valid_port? device.port, device.device_type
-    device.port = Device::DefaultPort["H323"] if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type
+    device.port = Confline.get_value("Default_IAX2_device_port", current_user.get_corrected_owner_id) if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type
+    device.port = Confline.get_value("Default_SIP_device_port", current_user.get_corrected_owner_id) if device.device_type == 'SIP' and not Device.valid_port? device.port, device.device_type
+    device.port = Confline.get_value("Default__device_port", current_user.get_corrected_owner_id) if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type
 
     if device.save
       flash[:status] = device.check_callshop_user(_('device_created'))
@@ -1803,19 +1803,6 @@ class DevicesController < ApplicationController
     else
       Confline.set_value("Default_device_ipaddr", "", session[:user_id])
     end
-
-    Confline.set_value("Default_device_port", '', session[:user_id])
-    if params[:port].to_s != ''
-      if params[:port] =~ /\A\d+\Z/
-        Confline.set_value("Default_device_port", params[:port], session[:user_id])
-      else
-        flash[:notice] = _("Port_must_be_number")
-        redirect_to :action => 'default_device' and return false
-      end
-    end
-    #changed validation, look for comment about #4978 ticket 
-    Confline.set_value("Default_device_port", Device::DefaultPort["IAX2"].to_s, session[:user_id]) if not Device.valid_port? params[:port], @device_type
-    Confline.set_value("Default_device_port", Device::DefaultPort["SIP"].to_s, session[:user_id]) if not Device.valid_port? params[:port], @device_type
 
     Confline.set_value("Default_device_regseconds", params[:canreinvite], session[:user_id])
     Confline.set_value("Default_device_canreinvite", params[:canreinvite], session[:user_id])

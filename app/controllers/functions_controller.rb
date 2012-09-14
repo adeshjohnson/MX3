@@ -1316,16 +1316,21 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Confline.set_value('Change_ANSWER_to_FAILED_if_HGC_not_equal_to_16_for_Users', params[:change_if_hgc_not_equal_to_16_for_users].to_i)
     Confline.set_value('Global_Number_Decimal', params[:global_number_decimal].to_s)
 
-    if mor_11_extend?
-      tb = Confline.get_value('Tell_Balance').to_i
-      tt = Confline.get_value('Tell_Time').to_i
-      Confline.set_value('Tell_Balance', params[:tell_balance].to_i)
-      Confline.set_value('Tell_Time', params[:tell_time].to_i)
-      Confline.set_value('API_Allow_payments_ower_API', params[:api_allow_payments].to_i)
-      Confline.set_value('API_payment_confirmation', params[:api_payment_confirmation].to_i)
-      Dialplan.change_tell_balance_value(params[:tell_balance].to_i) if tb != params[:tell_balance].to_i
-      Dialplan.change_tell_time_value(params[:tell_time].to_i) if tt != params[:tell_time].to_i
-    end
+    tb = Confline.get_value('Tell_Balance').to_i
+    tt = Confline.get_value('Tell_Time').to_i
+    Confline.set_value('Tell_Balance', params[:tell_balance].to_i)
+    Confline.set_value('Tell_Time', params[:tell_time].to_i)
+    Confline.set_value('API_Allow_payments_ower_API', params[:api_allow_payments].to_i)
+    Confline.set_value('API_payment_confirmation', params[:api_payment_confirmation].to_i)
+    Dialplan.change_tell_balance_value(params[:tell_balance].to_i) if tb != params[:tell_balance].to_i
+    Dialplan.change_tell_time_value(params[:tell_time].to_i) if tt != params[:tell_time].to_i
+
+    sip_port = params[:default_sip_device_port].to_i == 0 ? 5060 : params[:default_sip_device_port].to_i
+    iax2_port = params[:default_iax2_device_port].to_i == 0 ? 4569 : params[:default_iax2_device_port].to_i
+    h323_port = params[:default_h323_device_port].to_i == 0 ? 1720 : params[:default_h323_device_port].to_i
+    Confline.set_value('Default_SIP_device_port', sip_port, current_user.get_corrected_owner_id)
+    Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)
+    Confline.set_value('Default_H323_device_port', h323_port, current_user.get_corrected_owner_id)
 
     # PRIVACY settings
     Confline.set_value("Hide_Destination_End", params[:hide_destination_ends_gui].to_i + params[:hide_destination_ends_csv].to_i + params[:hide_destination_ends_pdf].to_i)
@@ -1919,6 +1924,15 @@ Sets default tax values for users or cardgroups
 
     #API
     Confline.set_value('API_Secret_Key', params[:api_secret_key], current_user.id)
+
+    #DEVICE 
+    sip_port = params[:default_sip_device_port].to_i == 0 ? 5060 : params[:default_sip_device_port].to_i
+    iax2_port = params[:default_iax2_device_port].to_i == 0 ? 4569 : params[:default_iax2_device_port].to_i
+    h323_port = params[:default_h323_device_port].to_i == 0 ? 1720 : params[:default_h323_device_port].to_i
+    Confline.set_value('Default_SIP_device_port', sip_port, current_user.get_corrected_owner_id)
+    Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)
+    Confline.set_value('Default_H323_device_port', h323_port, current_user.get_corrected_owner_id)
+
 
     renew_session(current_user)
 
