@@ -14,6 +14,6 @@
   <tr>
     <td></td>
     <td><b><%= _('Default_H323_device_port') %>:</b></td>
-    <td><%= text_field_tag('default_H323_device_port', Confline.get_value("Default_H323_device_port", current_user.get_corrected_owner_id).to_i, "class" => "input", :size => "35", :maxlength => "50") %></td>
+    <td><%= text_field_tag('default_h323_device_port', Confline.get_value("Default_H323_device_port", current_user.get_corrected_owner_id).to_i, "class" => "input", :size => "35", :maxlength => "50") %></td>
   </tr>
 </table>
