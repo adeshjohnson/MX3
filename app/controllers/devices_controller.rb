@@ -104,7 +104,7 @@ class DevicesController < ApplicationController
     fextension = free_extension()
     device = user.create_default_device({:device_ip_authentication_record => par[:ip_authentication].to_i, :description => par[:device][:description], :device_type => par[:device][:device_type], :dev_group => par[:device][:devicegroup_id], :free_ext => fextension, :secret => random_password(12), :username => fextension, :pin => par[:device][:pin]})
 
-    if device.port == 0 and ['SIP', 'IAX2', 'H323'].include? device.device_type
+    if device.host != 'dynamic' and device.port == 0 and ['SIP', 'IAX2', 'H323'].include? device.device_type
       flash[:notice] = _('Set_default_device_port')
       redirect_to :controller => 'functions', :action => (current_user.is_reseller? ? :reseller_settings : :settings) and return false
     end
@@ -273,7 +273,7 @@ class DevicesController < ApplicationController
       redirect_to :controller => "callc", :action => 'main' and return false
     end
  
-    if @device.port == 0 and ['SIP', 'IAX2', 'H323'].include? @device.device_type
+    if @device.host != 'dynamic' and @device.port == 0 and ['SIP', 'IAX2', 'H323'].include? @device.device_type
       flash[:notice] = _('Set_default_device_port')
       redirect_to :controller => 'functions', :action => (current_user.is_reseller? ? :reseller_settings : :settings) and return false
     end
