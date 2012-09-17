@@ -270,6 +270,16 @@
 	<td>2.2.2.2</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=port</td>
+	<td>2345</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=port</td>
+	<td>2345</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -277,26 +287,6 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Settings saved</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_sip_device_port</td>
-	<td>2345</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=default_sip_device_port</td>
-	<td>2345</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
 	<td></td>
 </tr>
 <!--CREATE DEVICE-->
@@ -595,6 +585,11 @@
 	<td>off</td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=port</td>
+	<td>2345</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>view_ip</td>
 	<td>2.2.2.2</td>
@@ -793,13 +788,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>id=default_sip_device_port</td>
+	<td>id=port</td>
 	<td>dszxgvbhjmnk,</td>
 </tr>
 <tr>
