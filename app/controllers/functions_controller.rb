@@ -1333,7 +1333,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)
       Confline.set_value('Default_H323_device_port', h323_port, current_user.get_corrected_owner_id)
     else
-      flash[:notice] = _("Device_port_mut_be_numeric_or_blank")
+      flash[:notice] = _("Device_port_must_be_numeric_or_blank")
       redirect_to :action => 'settings' and return false
     end
       
@@ -1940,7 +1940,7 @@ Sets default tax values for users or cardgroups
       Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)
       Confline.set_value('Default_H323_device_port', h323_port, current_user.get_corrected_owner_id)
     else
-      flash[:notice] = _("Device_port_mut_be_numeric_or_blank")
+      flash[:notice] = _("Device_port_must_be_numeric_or_blank")
       redirect_to :action => 'reseller_settings' and return false
     end
 

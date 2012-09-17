@@ -4452,6 +4452,8 @@ Localization.define('en') do |l|
   l.store 'Default_H323_device_port', 'Default H323 device port'
   l.store 'Default_SIP_device_port', 'Default SIP device port'
   l.store 'Default_IAX2_device_port', 'Default IAX2 device port'
+  l.store "Device_port_must_be_numeric_or_blank", "Device port must be numeric or blank"
+  l.store 'Set_default_device_port', 'Set default device port'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
