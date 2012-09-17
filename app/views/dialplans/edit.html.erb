@@ -155,7 +155,7 @@
             <% end %>
             <td align="center" <%= tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation')) %>> <%= check_box_tag 'dialplan[data4]', 1, (@dp.data4 == "1") %></td>
             <td align="center">
-              <%= select_tag("user", options_for_select([[_('Not_used'), ""]]+ @users.map { |user| ["#{nice_user(user)} (#{user.id })", user.id] }, @user_id)) %>
+	      <%=raw select_tag("user" ,options_for_select([[_('Not_used'), ""]]+ @users.select{|user| user.usertype != 'reseller' or not current_user.is_reseller? }.map{|user| [ "#{nice_user(user)} (#{user.id })", user.id]})) %>
               <span id="users_device"> </span>
             </td>
             <td align="center">  
