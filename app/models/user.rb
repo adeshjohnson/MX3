@@ -1284,6 +1284,7 @@ class User < ActiveRecord::Base
     device.control_callerid_by_cids = Confline.get_value("Default_setting_device_caller_id_number", owner_id).to_i == 4 ? 1 : 0
     device.callerid_advanced_control = Confline.get_value("Default_setting_device_caller_id_number", owner_id).to_i == 5 ? 1 : 0
 
+    device.port = Confline.get_value("Default_#{device.device_type}_device_port", current_user.get_corrected_owner_id).to_i
     if device.save
 
       #      device.accountcode = device.id

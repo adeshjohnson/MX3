@@ -104,10 +104,11 @@ class DevicesController < ApplicationController
     fextension = free_extension()
     device = user.create_default_device({:device_ip_authentication_record => par[:ip_authentication].to_i, :description => par[:device][:description], :device_type => par[:device][:device_type], :dev_group => par[:device][:devicegroup_id], :free_ext => fextension, :secret => random_password(12), :username => fextension, :pin => par[:device][:pin]})
 
-    device.port = Confline.get_value("Default_IAX2_device_port", current_user.get_corrected_owner_id) if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type
-    device.port = Confline.get_value("Default_SIP_device_port", current_user.get_corrected_owner_id) if device.device_type == 'SIP' and not Device.valid_port? device.port, device.device_type
-    device.port = Confline.get_value("Default__device_port", current_user.get_corrected_owner_id) if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type
-
+    if device.port == 0 and ['SIP', 'IAX2', 'H323'].include? device.device_type
+      flash[:notice] = _('Set_default_device_port')
+      redirect_to :controller => 'functions', :action => (current_user.is_reseller? ? :reseller_settings : :settings) and return false
+    end
+    
     if device.save
       flash[:status] = device.check_callshop_user(_('device_created'))
       # no need to create extensions, prune peers, etc when device is created, because user goes to edit window and all these actions are done in device_update
@@ -271,6 +272,12 @@ class DevicesController < ApplicationController
     if not params[:device]
       redirect_to :controller => "callc", :action => 'main' and return false
     end
+ 
+    if device.port == 0 and ['SIP', 'IAX2', 'H323'].include? device.device_type
+      flash[:notice] = _('Set_default_device_port')
+      redirect_to :controller => 'functions', :action => (current_user.is_reseller? ? :reseller_settings : :settings) and return false
+    end
+
     change_pin = !(session[:usertype] == "accountant" and session[:acc_device_pin].to_i != 2)
     change_opt_1 = !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_1].to_i != 2)
     change_opt_2 = !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_2].to_i != 2)
