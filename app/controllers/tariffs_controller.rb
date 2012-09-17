@@ -1772,7 +1772,7 @@ class TariffsController < ApplicationController
     a=check_user_for_tariff(@tariff.id)
     return false if !a
 
-    @dgroups = Destinationgroup.find(:all, :order => "name ASC, desttype ASC")
+    @dgroups = Destinationgroup.where("destinationgroups.name LIKE '#{params[:st]}%'").order("name ASC, desttype ASC").all
 
     for dg in @dgroups
 
@@ -1804,14 +1804,14 @@ class TariffsController < ApplicationController
 
         else
           #update existing ard
-          aratedetails = dg.rate(@tariff.id).aratedetails
+          aratedetails = rrate.aratedetails
           #my_debug aratedetails.size
           if aratedetails.size == 1
             ard = aratedetails[0]
             #my_debug price
             #my_debug "--"
             if price == ""
-              ard.rate.destroy_everything
+              rrate.destroy_everything
               #ard.destroy
             else
               from_duration_db = ard.from.to_i + ard.duration.to_i
