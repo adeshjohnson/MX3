@@ -1932,9 +1932,9 @@ Sets default tax values for users or cardgroups
     Confline.set_value('API_Secret_Key', params[:api_secret_key], current_user.id)
 
     #DEVICE 
-    sip_port = params[:default_sip_device_port].strip
-    iax2_port = params[:default_iax2_device_port].strip
-    h323_port = params[:default_h323_device_port].strip
+    sip_port = params[:default_sip_device_port].to_s.strip
+    iax2_port = params[:default_iax2_device_port].to_s.strip
+    h323_port = params[:default_h323_device_port].to_s.strip
     if (sip_port.to_i > 0 or sip_port.blank?) and (iax2_port.to_i > 0 or iax2_port.blank?) and (h323_port.to_i > 0 or h323_port.blank?)
       Confline.set_value('Default_SIP_device_port', sip_port, current_user.get_corrected_owner_id)
       Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)
