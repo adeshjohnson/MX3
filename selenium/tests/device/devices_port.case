@@ -38,171 +38,6 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_11 &gt; span</td>
-	<td>Devices</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=default_sip_device_port</td>
-	<td>5060</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=default_iax2_device_port</td>
-	<td>4569</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=default_h323_device_port</td>
-	<td>1720</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_sip_device_port</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_iax2_device_port</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_h323_device_port</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Settings saved</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=default_sip_device_port</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=default_iax2_device_port</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=default_h323_device_port</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_sip_device_port</td>
-	<td>12</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_iax2_device_port</td>
-	<td>0</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_h323_device_port</td>
-	<td>sdcfj</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Device port must be numeric or blank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_sip_device_port</td>
-	<td>9876</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_iax2_device_port</td>
-	<td>-456</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_h323_device_port</td>
-	<td>741p</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Device port must be numeric or blank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_sip_device_port</td>
-	<td>4654</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_iax2_device_port</td>
-	<td>7845</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_h323_device_port</td>
-	<td>-7468</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Device port must be numeric or blank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_sip_device_port</td>
-	<td>5060</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_iax2_device_port</td>
-	<td>4569</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_h323_device_port</td>
-	<td>1720</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Settings saved</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
 	<td></td>
 </tr>
@@ -804,46 +639,6 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Set default device port</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=default_h323_device_port</td>
-	<td>1720</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Settings saved</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=device_description</td>
-	<td>H323_device</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=device_device_type_H323</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
 	<td>Device created</td>
 	<td></td>
 </tr>
@@ -874,11 +669,6 @@
 </tr>
 <!--<tr> 	<td>waitForValue</td> 	<td>id=port</td> 	<td>15</td> </tr> <tr> 	<td>type</td> 	<td>id=port</td> 	<td>-15</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Device's settings updated</td> 	<td></td> </tr>-->
 <tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/16</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForValue</td>
 	<td>id=port</td>
 	<td>15</td>
@@ -900,7 +690,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/16</td>
+	<td>/billing/devices/device_edit/15</td>
 	<td></td>
 </tr>
 <tr>
