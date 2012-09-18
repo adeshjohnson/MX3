@@ -405,7 +405,7 @@
         </tr>
       </table>
     </div>
-    <% ["functionality", "privacy", "visual", "device"].each { |tab| %>
+    <% ["functionality", "privacy", "visual"].each { |tab| %>
         <div class="dhtmlgoodies_aTab">
           <br/>
           <br/>
@@ -428,7 +428,7 @@
 <% end %>
 <% content_for :scripts do %>
     <script type="text/javascript">
-        <% setting_tabs = ["Global", "Registration", "Invoices", "Emails", "Various", "Tax", "Backups", "API", "Functionality", "Privacy", "Visual", "Devices"] -%>
+        <% setting_tabs = ["Global", "Registration", "Invoices", "Emails", "Various", "Tax", "Backups", "API", "Functionality", "Privacy", "Visual"] -%>
         initTabs("dhtmlgoodies_tabView1", Array(<%= raw setting_tabs.map{|tab| "'"+ _(tab) + "'"}.join(", ") %>), 0, 800, 580);
     </script>
 <% end %>
