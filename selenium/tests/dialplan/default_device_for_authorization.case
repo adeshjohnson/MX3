@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.30:8080" />
+<link rel="selenium.base" href="" />
 <title>default_defice_for_authorization</title>
 </head>
 <body>
@@ -305,6 +305,101 @@
 	<td>assertText</td>
 	<td>ap_dp_dids_2</td>
 	<td>37063042438</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name_2</td>
+	<td>dp</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user</td>
+	<td>Not used User Resellers (5)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=User Resellers (5)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=users_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=users_device</td>
+	<td>Not used IAX2/105</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=users_device</td>
+	<td>label=IAX2/105</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=dp_PIN_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=ap_dp_data5_6</td>
+	<td>IAX2/105</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user</td>
+	<td>Not used User Resellers (5)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=users_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=users_device</td>
+	<td>Not used IAX2/105</td>
 </tr>
 </tbody></table>
 </body>
