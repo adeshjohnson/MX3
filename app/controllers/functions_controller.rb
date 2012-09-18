@@ -1325,19 +1325,13 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Dialplan.change_tell_balance_value(params[:tell_balance].to_i) if tb != params[:tell_balance].to_i
     Dialplan.change_tell_time_value(params[:tell_time].to_i) if tt != params[:tell_time].to_i
 
-    sip_port = params[:default_sip_device_port].strip
-    iax2_port = params[:default_iax2_device_port].strip
-    h323_port = params[:default_h323_device_port].strip
-    if (sip_port.to_i > 0 or sip_port.blank?) and (iax2_port.to_i > 0 or iax2_port.blank?) and (h323_port.to_i > 0 or h323_port.blank?)
-      Confline.set_value('Default_SIP_device_port', sip_port, current_user.get_corrected_owner_id)
-      Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)
-      Confline.set_value('Default_H323_device_port', h323_port, current_user.get_corrected_owner_id)
-    else
-      flash[:notice] = _("Device_port_must_be_numeric_or_blank")
-      redirect_to :action => 'settings' and return false
-    end
+    sip_port = params[:default_sip_device_port].to_i == 0 ? 5060 : params[:default_sip_device_port].to_i                                                                                                            
+    iax2_port = params[:default_iax2_device_port].to_i == 0 ? 4569 : params[:default_iax2_device_port].to_i                                                                                                         
+    h323_port = params[:default_h323_device_port].to_i == 0 ? 1720 : params[:default_h323_device_port].to_i                                                                                                         
+    Confline.set_value('Default_SIP_device_port', sip_port, current_user.get_corrected_owner_id)                                                                                                                    
+    Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)                                                                                                                  
+    Confline.set_value('Default_H323_device_port', h323_port, current_user.get_corrected_owner_id)   
       
- 
     # PRIVACY settings
     Confline.set_value("Hide_Destination_End", params[:hide_destination_ends_gui].to_i + params[:hide_destination_ends_csv].to_i + params[:hide_destination_ends_pdf].to_i)
     # /PRIVACY settings
@@ -1932,17 +1926,12 @@ Sets default tax values for users or cardgroups
     Confline.set_value('API_Secret_Key', params[:api_secret_key], current_user.id)
 
     #DEVICE 
-    sip_port = params[:default_sip_device_port].to_s.strip
-    iax2_port = params[:default_iax2_device_port].to_s.strip
-    h323_port = params[:default_h323_device_port].to_s.strip
-    if (sip_port.to_i > 0 or sip_port.blank?) and (iax2_port.to_i > 0 or iax2_port.blank?) and (h323_port.to_i > 0 or h323_port.blank?)
-      Confline.set_value('Default_SIP_device_port', sip_port, current_user.get_corrected_owner_id)
-      Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)
-      Confline.set_value('Default_H323_device_port', h323_port, current_user.get_corrected_owner_id)
-    else
-      flash[:notice] = _("Device_port_must_be_numeric_or_blank")
-      redirect_to :action => 'reseller_settings' and return false
-    end
+    sip_port = params[:default_sip_device_port].to_i == 0 ? 5060 : params[:default_sip_device_port].to_i                                                                                                            
+    iax2_port = params[:default_iax2_device_port].to_i == 0 ? 4569 : params[:default_iax2_device_port].to_i                                                                                                         
+    h323_port = params[:default_h323_device_port].to_i == 0 ? 1720 : params[:default_h323_device_port].to_i                                                                                                         
+    Confline.set_value('Default_SIP_device_port', sip_port, current_user.get_corrected_owner_id)                                                                                                                    
+    Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)                                                                                                                  
+    Confline.set_value('Default_H323_device_port', h323_port, current_user.get_corrected_owner_id)                 
 
 
     renew_session(current_user)

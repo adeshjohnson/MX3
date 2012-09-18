@@ -633,7 +633,6 @@ class CallcController < ApplicationController
         a = Thread.new { configure_extensions(@device.id, {:current_user => @owner}) }
         #        a=configure_extensions(@device.id)
         #        return false if !a
-        logger.fatal 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
       else
         flash[:notice] = notice2
       end
