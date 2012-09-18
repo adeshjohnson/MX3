@@ -9,7 +9,7 @@ class CardsController < ApplicationController
   before_filter :authorize
   before_filter :check_cc_addon
   before_filter :find_cardgruop, :only => [:card_buy_finish, :card_buy, :import_csv, :create, :new, :card_payment_finish, :list, :act, :act_confirm, :act2, :card_pay, :card_payment_status]
-  before_filter :find_card, :only => [:card_active, :card_buy_finish, :card_buy, :payments, :destroy, :update, :edit, :card_pay, :card_payment_status, :card_payment_finish, :show]
+  before_filter :find_card, :only => [:card_active, :card_buy_finish, :payments, :destroy, :update, :edit, :show]
   before_filter :check_distrobutor, :only => [:create, :update]
   before_filter :check_distrobutor_cards, :only => [:user_list, :card_active, :bullk_for_activate, :bulk_confirm, :card_active_bulk]
 
@@ -261,11 +261,22 @@ class CardsController < ApplicationController
 
     @currs =Currency.get_active
     @user = User.find(:first, :conditions => ["users.id = ?", session[:user_id]], :include => :address)
+    @card = Card.find(:first, :conditions => {:id => params[:id], :cardgroup_id => params[:cg]})
+    unless @card
+      flash[:notice] = _('Card_was_not_found')
+      redirect_to :controller => "cardgroups", :action => 'list' and return false
+    end
   end
 
   def card_payment_status
     @page_title = _('Add_card_payment')
     @page_icon = "money.png"
+
+    @card = Card.find(:first, :conditions => {:id => params[:id], :cardgroup_id => params[:cg]})
+    unless @card
+      flash[:notice] = _('Card_was_not_found')
+      redirect_to :controller => "cardgroups", :action => 'list' and return false
+    end
 
     @amount = params[:amount].to_d
     @curr = params[:currency]
@@ -288,6 +299,12 @@ class CardsController < ApplicationController
     amount = params[:amount].to_d
     real_amount = params[:real_amount].to_d
     currency = params[:currency]
+
+    @card = Card.find(:first, :conditions => {:id => params[:id], :cardgroup_id => params[:cg]})
+    unless @card
+      flash[:notice] = _('Card_was_not_found')
+      redirect_to :controller => "cardgroups", :action => 'list' and return false
+    end
 
     @card.balance += real_amount
 
@@ -661,6 +678,12 @@ class CardsController < ApplicationController
   def card_buy
     @page_title = _('Buy_Card')
     @page_icon = "money.png"
+
+    @card = Card.find(:first, :conditions => {:id => params[:id], :cardgroup_id => params[:cg]})
+    unless @card
+      flash[:notice] = _('Card_was_not_found')
+      redirect_to :controller => "cardgroups", :action => 'list' and return false
+    end
 
     @email = params[:email]
     @real_price = @card.balance+@cg.get_tax.count_tax_amount(@card.balance)
