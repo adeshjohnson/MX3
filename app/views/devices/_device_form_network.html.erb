@@ -37,7 +37,7 @@
           //<![CDATA[
           Event.observe(window, 'load', function () {
               var dyncheck = $('dynamic_check');
-              <%= "var port = $('port');" unless @default.to_i == 1 %>
+              var port = $('port');
               var host = $('host');
               var ipauth = $('ip_authentication');
               var qualify_no = $('qualify_no'); 
@@ -54,7 +54,7 @@
               Event.observe(dyncheck, 'click', function () {
                   if (dyncheck.checked) {
                       host.disabled = true;
-                      <%= "port.disabled = true;" unless @default.to_i == 1 %>
+                      port.disabled = true;
                       host.value = "dynamic";
                       if (ipauth) {
                           ipauth.disabled = true;
@@ -62,7 +62,7 @@
                       }
                   } else {
                       host.disabled = false;
-                      <%= "port.disabled = false;" unless @default.to_i == 1 %>
+                      port.disabled = false;
                       host.value = "";
                       if (ipauth) {
                           ipauth.disabled = false;
@@ -98,18 +98,16 @@
         <td><b><span id="view_ip"><%= device_ipaddr %> </span></b></td>
       </tr>
 
-      <% unless @default == 1 %>
-        <tr>
-          <td> <%= _('Port') %>:</td>
-          <td>
-            <% if device_host != "dynamic" %>
-                <%= text_field_tag 'port', device_port, "class" => "input" %>
-            <% else %>
-                <%= text_field_tag 'port', device_port, "class" => "input", :disabled => "disabled" %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
+      <tr>
+        <td> <%= _('Port') %>:</td>
+        <td>
+          <% if device_host != "dynamic" %>
+              <%= text_field_tag 'port', device_port, "class" => "input" %>
+          <% else %>
+              <%= text_field_tag 'port', device_port, "class" => "input", :disabled => "disabled" %>
+          <% end %>
+        </td>
+      </tr>
 
       <% if !@device.username.blank? %>
           <tr>
