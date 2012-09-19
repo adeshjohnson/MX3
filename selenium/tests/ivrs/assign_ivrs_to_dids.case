@@ -856,9 +856,9 @@
 	<td>kitas vardas</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>ivr_name</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -886,9 +886,9 @@
 	<td>bloko vardas 1</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>block_name</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -901,29 +901,9 @@
 	<td>bloko vardas 1</td>
 </tr>
 <tr>
-	<td>fireEvent</td>
-	<td>block_name</td>
-	<td>focus</td>
-</tr>
-<tr>
 	<td>pause</td>
 	<td>3000</td>
 	<td></td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>block_name</td>
-	<td>focus</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>block_name</td>
-	<td>blur</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>block_name</td>
-	<td>focus</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -939,11 +919,6 @@
 	<td>click</td>
 	<td>link=Refresh</td>
 	<td></td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>block_name</td>
-	<td>focus</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -991,9 +966,9 @@
 	<td>100</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>block_timeout_response</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -1016,9 +991,9 @@
 	<td>30</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>block_timeout_digits</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -1031,19 +1006,9 @@
 	<td>30</td>
 </tr>
 <tr>
-	<td>fireEvent</td>
-	<td>block_name</td>
-	<td>focus</td>
-</tr>
-<tr>
 	<td>pause</td>
 	<td>3000</td>
 	<td></td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>block_name</td>
-	<td>focus</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1051,9 +1016,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>fireEvent</td>
-	<td>block_name</td>
-	<td>focus</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -1070,16 +1035,16 @@
 	<td>link=bloko vardas 1</td>
 	<td>bloko vardas 1</td>
 </tr>
-<tr>
-	<td>fireEvent</td>
-	<td>link=bloko vardas 1</td>
-	<td>focus</td>
-</tr>
 <!--new block-->
 <tr>
 	<td>click</td>
 	<td>link=Add new Block</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForText</td>
@@ -1092,19 +1057,14 @@
 	<td>New Block</td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>block_name</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>block_name</td>
 	<td>blokas numeris 2</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>block_name</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -1117,24 +1077,14 @@
 	<td>blokas numeris 2</td>
 </tr>
 <tr>
-	<td>focus</td>
-	<td>block_name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>block_name</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>block_name</td>
 	<td>blokas numeris 2</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>block_name</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -1145,11 +1095,6 @@
 	<td>assertValue</td>
 	<td>block_name</td>
 	<td>blokas numeris 2</td>
-</tr>
-<tr>
-	<td>focus</td>
-	<td>block_name</td>
-	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1157,14 +1102,14 @@
 	<td>1011</td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>block_timeout_response</td>
 	<td></td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>block_timeout_response</td>
-	<td>w</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -1187,9 +1132,9 @@
 	<td>311</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>block_timeout_digits</td>
-	<td>311</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -1200,11 +1145,6 @@
 	<td>assertValue</td>
 	<td>block_timeout_digits</td>
 	<td>311</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>block_name</td>
-	<td>focus</td>
 </tr>
 <tr>
 	<td>pause</td>
@@ -1212,19 +1152,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>fireEvent</td>
-	<td>block_name</td>
-	<td>focus</td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>link=Refresh</td>
 	<td></td>
 </tr>
 <tr>
-	<td>fireEvent</td>
-	<td>block_name</td>
-	<td>focus</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
