@@ -238,38 +238,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>action_1</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>action_1</td>
 	<td>2</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>action_1</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>id=action_1</td>
-	<td>2</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>action_1</td>
-	<td>focus</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>action_1</td>
-	<td>blur</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>action_1</td>
 	<td>2</td>
 </tr>
 <tr>
@@ -278,9 +258,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>fireEvent</td>
-	<td>action_1</td>
-	<td>focus</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -308,11 +288,6 @@
 	<td>2</td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>change_action_2</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>action_1</td>
 	<td>2</td>
@@ -323,14 +298,9 @@
 	<td>label=Playback</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>action_1</td>
-	<td>2</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>change_action_2</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -338,9 +308,9 @@
 	<td>2</td>
 </tr>
 <tr>
-	<td>fireEvent</td>
-	<td>change_action_2</td>
-	<td>blur</td>
+	<td>assertValue</td>
+	<td>action_1</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -363,14 +333,14 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>change_action_3</td>
 	<td></td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>change_action_3</td>
-	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -378,14 +348,9 @@
 	<td>label=Transfer To</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>change_action_3</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>change_action_3</td>
-	<td>blur</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertSelectedValue</td>
@@ -403,24 +368,14 @@
 	<td>IVR</td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>action_3</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>action_3</td>
 	<td>label=DID</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>action_3</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>action_3</td>
-	<td>blur</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertSelectedValue</td>
@@ -443,6 +398,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>change_action_4</td>
 	<td></td>
@@ -456,6 +416,11 @@
 	<td>select</td>
 	<td>change_action_4</td>
 	<td>label=Hangup</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -488,6 +453,11 @@
 	<td>label=Debug</td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
 	<td>waitForValue</td>
 	<td>action_5</td>
 	<td>New_Block_was_reached.</td>
@@ -498,14 +468,14 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>change_action_6</td>
 	<td></td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>change_action_6</td>
-	<td>w</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -513,14 +483,9 @@
 	<td>label=Set Accountcode</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>change_action_6</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>change_action_6</td>
-	<td>blur</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForSelectedLabel</td>
@@ -528,24 +493,14 @@
 	<td>System Admin - IAX2/103</td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>action_6</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>action_6</td>
 	<td>label=User Resellers - IAX2/105</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>action_6</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>action_6</td>
-	<td>blur</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForSelectedLabel</td>
@@ -556,6 +511,11 @@
 	<td>click</td>
 	<td>link=Add new Action</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -571,6 +531,11 @@
 	<td>select</td>
 	<td>change_action_7</td>
 	<td>label=Change Voice</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForSomethingSelected</td>
@@ -629,14 +594,9 @@
 	<td>block2</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=block_name</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=block_name</td>
-	<td>change</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -695,6 +655,11 @@
 	<td>label=Hangup</td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
 	<td>assertSelectedLabel</td>
 	<td>change_action_9</td>
 	<td>Hangup</td>
@@ -747,9 +712,19 @@
 	<td>label=block2</td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>ext_block1</td>
 	<td>label=New_Block</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -768,9 +743,19 @@
 	<td>11</td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>block_timeout_response</td>
 	<td>1</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -781,6 +766,11 @@
 	<td>type</td>
 	<td>block_timeout_digits</td>
 	<td>1</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
@@ -904,24 +894,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>id=change_action_11</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>id=change_action_11</td>
 	<td>label=Transfer To</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=change_action_11</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=change_action_11</td>
-	<td>blur</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
@@ -1182,7 +1162,7 @@
 </tr>
 <tr>
 	<td>setTimeout</td>
-	<td>8000</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
