@@ -353,6 +353,7 @@ class ApplicationController < ActionController::Base
       if session["#{c}_#{a}".intern].to_i != 1
         MorLog.my_debug("Authorization failed:\n   User_type: "+session[:usertype_id].to_s+"\n   Requested: " + "#{c}::#{a}")
         MorLog.my_debug("   Session(#{c}_#{a}):"+ session["#{c}_#{a}".intern].to_s)
+        Localization.lang = params[:lang] || session[:lang]
         flash[:notice] = _('You_are_not_authorized_to_view_this_page')
         if session[:user_id] != nil
           redirect_to :controller => "callc", :action => "main" and return false
