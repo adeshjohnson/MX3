@@ -72,9 +72,19 @@
 	<td>label=Hangup</td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>change_action_1</td>
 	<td>label=Transfer To</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -97,9 +107,19 @@
 	<td>label=Device</td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//option[@value='Device']</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -120,6 +140,11 @@
 	<td>select</td>
 	<td>action_param_1</td>
 	<td>label=Test User #1 - IAX2 1002</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
