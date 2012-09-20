@@ -1966,8 +1966,12 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     owner = correct_owner_id
     @users = User.find_all_for_select(corrected_user_id)
 
+    if current_user.is_admin? 
+      @responsible_accountants = User.find(:all, :select => 'accountants.*', :joins => ['JOIN users accountants ON(accountants.id = users.responsible_accountant_id)'], :conditions => "accountants.hidden = 0 and accountants.usertype = 'accountant'", :group => 'accountants.id', :order => 'accountants.username')
+    end
     up, rp, pp = current_user.get_price_calculation_sqls
-    params[:user_id] ? @user_id =params[:user_id].to_i : @user_id = -1
+    params[:user_id] ? @user_id = params[:user_id].to_i : @user_id = -1
+    @responsible_accountant_id = params[:responsible_accountant_id] ? params[:responsible_accountant_id].to_i : -1
 
     conditions = []
     user_sql2 = ""
@@ -1982,6 +1986,9 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
         conditions << "calls.user_id IN (SELECT id FROM users WHERE id = '#{params[:user_id].to_i}' OR owner_id = #{params[:user_id].to_i})"
         user_sql2 = " AND subscriptions.user_id = '#{@user_id}' "
+      elsif params[:responsible_accountant_id] and params[:responsible_accountant_id] != "-1"
+        conditions << "calls.user_id IN (SELECT id FROM users WHERE id IN (SELECT users.id FROM `users` JOIN users tmp ON(tmp.id = users.responsible_accountant_id) WHERE tmp.id = '#{@responsible_accountant_id}') OR owner_id IN (SELECT users.id FROM `users` JOIN users tmp ON(tmp.id = users.responsible_accountant_id) WHERE tmp.id = '#{@responsible_accountant_id}'))"
+        user_sql2 = " AND subscriptions.user_id IN (SELECT users.id FROM `users` JOIN users tmp ON(tmp.id = users.responsible_accountant_id) WHERE tmp.id = '#{@responsible_accountant_id}')"
       end
     end
 

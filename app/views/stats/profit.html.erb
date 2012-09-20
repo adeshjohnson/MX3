@@ -7,8 +7,23 @@
   <% end %>
   <br>
   <%= form_tag :action => 'profit' do %>
-      <%= select_tag("user_id", options_for_select([[_('All'), "-1"]] + @users.map { |u| [nice_user(u), u.id.to_s] }, @user_id.to_i.to_s)) %>
-      &nbsp;&nbsp;<%= submit_tag _('Change_user'), :disable_with => _('Processing..') %>
+    <%= _('User') %>: 
+      <span id='user_select'>
+        <%= select_tag("user_id", options_for_select([[_('All'), "-1"]] + @users.map { |u| [nice_user(u), u.id.to_s] }, @user_id.to_i.to_s)) %>
+      </span>
+    <% if admin? %>
+      &nbsp;&nbsp;&nbsp;&nbsp;<%= _('Responsibe_accountant') %>:<%= select_tag("responsible_accountant_id", options_for_select([[_('All'), "-1"]] + @responsible_accountants.map { |accountant| [nice_user(accountant), accountant.id] }, @responsible_accountant_id)) %>
+      &nbsp;&nbsp;<%= submit_tag _('Recalculate'), :disable_with => _('Processing..') %>
+    <script type="text/javascript">
+        //<![CDATA[
+        Event.observe(window, 'load',  function() {
+          Event.observe($('user_id'), 'change', function(){
+           $('responsible_accountant_id').disabled = ($('user_id').value != '-1')
+          });
+        });
+        //]]>
+    </script>
+    <% end %>
   <% end %>
 
 </div>

@@ -25,7 +25,20 @@ class UsersController < ApplicationController
   before_filter :find_ard_all, :only => [:artg_destroy, :user_ard_time_edit, :user_acustrates]
   before_filter :check_params, :only => [:create, :update, :default_user_update]
   before_filter :check_with_integrity, :only => [:edit, :list, :new, :default_user, :users_postpaid_and_allowed_loss_calls, :default_user_errors_list]
+  before_filter :find_responsible_accountants, :only => [:edit, :default_user]
 
+=begin
+  we need to find all accountants that might be responsible for admins users, so that we could
+  show them in /users/edit/X or /users/default_user. but only for admin. and there would be no 
+  purpose to show that list /users/edit/X if X would be smt other than simple admins users.
+  But that's in theory, at this moment we dont have infomration about user - @user is set in 
+  controller's action, dont know why...
+=end
+  def find_responsible_accountants
+    if current_user.is_admin? #and (params[:action] == 'default_user' or (@user.is_user? and @user.owner_id.to_i == 0))
+      @responsible_accountants = User.find(:all, :conditions => {:hidden => '0', :usertype =>'accountant'}, :order => 'username')
+    end
+  end
 
   def index
     list
@@ -37,7 +50,6 @@ class UsersController < ApplicationController
     @page_icon = 'vcard.png'
     @help_link = "http://wiki.kolmisoft.com/index.php/Users"
 
-    logger.fatal "fffffffffffffffffffffffffffffff"
     @default_currency = Currency.find(:first).name
     @roles = Role.find(:all, :conditions => ["name !='guest'"])
 
@@ -509,12 +521,8 @@ class UsersController < ApplicationController
     @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
 
     @chanspy_disabled = Confline.chanspy_disabled?
-    #if @user.usertype == 'user' or @user.usertype == 'accountant'
     @devices = @user.devices(:conditions => "device_type != 'FAX'")
-    #    else
-    #      @devices = Device.find_all_for_select(corrected_user_id)
-    #    end
-
+    
     flash[:notice] = _('No_lcrs_found_user_not_functional') if @lcrs.empty?
     flash[:notice] = _('No_tariffs_found_user_not_functional') if @tariffs.empty?
   end
@@ -568,6 +576,8 @@ class UsersController < ApplicationController
       @tariffs = Tariff.find(:all, :conditions => "owner_id = '#{owner}' #{cond} ", :order => "purpose ASC, name ASC")
 
       @countries = Direction.find(:all, :order => "name ASC")
+
+      
 
       #for backwards compatibility - user had no address before, so let's give it to him
       if not @user.address

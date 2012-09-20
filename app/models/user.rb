@@ -197,6 +197,12 @@ class User < ActiveRecord::Base
       own_providers = 0
     end
 
+    #only admin's user can have responsible_accountant_id set to some other value than -1
+    #invalid_value = (responsible_accountant_id != -1 and (not is_user? or owner_id != 0))
+    if responsible_accountant_id != -1 and not User.find(:first, :conditions => {:usertype => 'accountant', :hidden => 0, :id => responsible_accountant_id})
+      errors.add(:email, _("Responsible_accountant_is_invalid"))
+      return false
+    end
     self.uniquehash = ApplicationController::random_password(10) if self.uniquehash.to_s.blank?
   end
 
@@ -2543,6 +2549,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     end
 
 
+    self.responsible_accountant_id = ((params[:user][:responsible_accountant_id].to_i < 1) ? -1 : params[:user][:responsible_accountant_id].to_i)
     if params[:warning_email_active]
       if params[:user] and params[:date]
         self.warning_email_hour = params[:user][:warning_email_hour].to_i != -1 ? params[:date][:user_warning_email_hour].to_i : params[:user][:warning_email_hour].to_i
