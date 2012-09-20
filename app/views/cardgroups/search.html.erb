@@ -96,7 +96,7 @@
         <td id="sold_<%= card.id %>" align="center"><%= card.sold == 1 ? b_check : b_cross %></td>
         <td id="payments_<%= card.id %>" align="center"><%= link_to(b_payments, {:controller => 'cards', :action => 'payments', :id => card}, {:id => "payments_link_"+ card.id.to_s}) %></td>
         <td id="cardgroup_<%= card.id %>" align="center"><%= link_to(b_cardgroup + card.cardgroup.name, {:controller => 'cardgroups', :action => 'show', :id => card.cardgroup_id}, {:id => "cardgroup_link_"+ card.id.to_s}) %></td>
-        <td id="calls_<%= card.id %>" align="center"><%= link_to(b_call, {:controller => 'stats', :action => 'cc_call_list', :id => card}, {:id => "calls_link_"+ card.id.to_s}) %>
+        <td id="calls_<%= card.id %>" align="center"><%= link_to(b_call, {:controller => 'stats', :action => :last_calls_stats, :s_card_id=>card.id}, {:id => "calls_link_"+ card.id.to_s}) %>
           (<%= card.calls.count %>)
         </td>
         <% if @allow_manage == true %>

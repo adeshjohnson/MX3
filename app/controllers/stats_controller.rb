@@ -1185,41 +1185,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
   end
 
   def cc_call_list
-    #change_date
-    if params[:id]
-      @card = Card.find_by_id(params[:id], :include => [:cardgroup])
-    else
-      @card = Card.find_by_id(session[:card_id], :include => [:cardgroup])
-    end
-    unless @card
-      flash[:notice] = _('Card_was_not_found')
-      redirect_to :controller => :callc, :action => :main and return false
-    end
-
-    if (@card.user_id != current_user.id) and (current_user.is_not_admin? and @card.is_not_owned_by?(current_user) and @card.cardgroup.is_not_owned_by?(current_user))
-      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
-      redirect_to :controller => "callc", :action => "main" and return false
-    end
-
-    @calls = @card.calls
-
-    @page_title = _('Calls_for_card') + ": #{@card.number}"
-
-    @total_duration = 0
-    @total_price = 0
-    @total_billsec = 0
-    @total_provider_price = 0
-    @total_profit = 0
-    @total_billsec = 0
-    @total_did_price = 0
-    for call in @calls
-      @total_duration += call.duration
-      @total_price += call.user_price if call.user_price
-      @total_billsec += call.nice_billsec
-      @total_profit += call.user_price.to_d - call.provider_price.to_d
-      @total_provider_price += call.provider_price if call.provider_price
-      @total_did_price += call.did_price.to_d + call.did_inc_price.to_d
-    end
+    redirect_to :action => :last_calls_stats, :s_card_id=>params[:id]
   end
 
   def country_stats
