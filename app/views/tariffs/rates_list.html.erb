@@ -75,7 +75,7 @@
       <%# rate = Rate.find(:first,:conditions => ["rates.id = ?", r["id"]]) %>
       <% if rate %>
       <tr class="row<%= (i % 2 + 1).to_s %>">
-        <td id="destination_<%= rate.id %>" <%= nice_rates_tolltip(rate) %> ><%= draw_flag rate.destination.direction_code %> <%= rate.destination.direction.name %></td>
+        <td id="destination_<%= rate.id %>" <%= nice_rates_tolltip(rate) %> ><%= draw_flag rate.destination.direction_code if rate.destination %> <%= rate.destination.direction.name if rate.destination and rate.destination.direction %></td>
         <% if @use_lata %>
             <td id="prefix_<%= rate.id %>"><%= rate.destination.prefix %></td>
             <td id="subcode_<%= rate.id %>"><%= rate.destination.subcode %></td>
