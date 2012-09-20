@@ -596,6 +596,7 @@ class CardsController < ApplicationController
             @options[:imp_number] = params[:number_id].to_i
             @options[:imp_pin] = params[:pin_id].to_i
             @options[:imp_balance] = params[:balance_id].to_i
+            @options[:imp_language] = params[:language_id].to_i
             @options[:sep] = @sep
             @options[:dec] = @dec
 
