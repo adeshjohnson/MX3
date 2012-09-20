@@ -402,9 +402,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>css=#action_15 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
@@ -510,6 +520,11 @@
 	<td>assertNotText</td>
 	<td>id=user_devices_2</td>
 	<td>No devices</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1104,8 +1119,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=new_bad_clis</td>
-	<td>5 Bad CDRs</td>
+	<td>id=bad_cdrs</td>
+	<td>5 bad CDRs(Press here to get the list)</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1164,8 +1179,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=new_bad_clis</td>
-	<td>5 Bad CDRs</td>
+	<td>id=bad_cdrs</td>
+	<td>5 bad CDRs(Press here to get the list)</td>
 </tr>
 <tr>
 	<td>assertText</td>
