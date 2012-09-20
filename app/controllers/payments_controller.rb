@@ -837,12 +837,11 @@ class PaymentsController < ApplicationController
         else
           Action.add_action_hash(current_user, :target_id => user.id, :target_type => 'user', :action => "invoice_not_created")
         end
+        flash[:status] = _('Payment_added')
+      else
+        flash_errors_for(_('Payment_failed'), user)
       end
-      flash[:status] = _('Payment_added')
-    else
-      flash_errors_for(_('Payment_failed'), user)
     end
-
     redirect_to :action => 'list'
   end
 
