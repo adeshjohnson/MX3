@@ -906,7 +906,9 @@ class CardsController < ApplicationController
   end
 
   def find_card
-    @card = Card.find(:first, :conditions => {:id => params[:id], :hidden => 0}, :include => [:cardgroup, :user])
+    query_conditions = {:id => params[:id], :hidden => 0}
+    query_conditions[:cardgroup_id] = params[:cg] if params[:cg]
+    @card = Card.find(:first, :conditions => query_conditions, :include => [:cardgroup, :user])
     unless @card
       flash[:notice] = _('Card_was_not_found')
       redirect_to :controller => "cardgroups", :action => 'list' and return false
