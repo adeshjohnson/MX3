@@ -8,7 +8,7 @@ module ApplicationHelper
   #    end
 
   def tooltip(title, text)
-    raw "onmouseover=\"Tip(\' #{text} \', WIDTH, -600, TITLE, '#{title}', TITLEBGCOLOR, '#494646', FADEIN, 200, FADEOUT, 200 )\" onmouseout = \"UnTip()\"".html_safe
+    raw "onmouseover=\"Tip(\' #{text.to_s.gsub('"', '&quot;')} \', WIDTH, -600, TITLE, '#{title}', TITLEBGCOLOR, '#494646', FADEIN, 200, FADEOUT, 200 )\" onmouseout = \"UnTip()\"".html_safe
   end
 
   def weekday_name(day)
