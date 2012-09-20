@@ -128,7 +128,13 @@
   <% if @src_device %>
       <tr class="row1">
         <th align="left"><%= b_device + _('Device') %></th>
-        <td id="src_device" align="right"> <%= link_nice_device @src_device %>  </td>
+        <td id="src_device" align="right"> 
+        <% if @call.reseller_id != 0 %>
+          <%= nice_device @src_device %>  
+        <% else %>
+          <%= link_nice_device @src_device %>  
+       <% end %>
+       </td>
       </tr>
   <% end %>
 
@@ -162,8 +168,13 @@
   <% if @provider %>
       <tr>
         <th id="providers_owner_row" align="left"><%= b_provider + _("Providers_owner") %></th>
-        <% logger.fatal @provider.user.inspect %>
-        <td id="providers_owner" align="right"> <%= link_to nice_user(@provider.user), :controller => "users", :action => "list" %>  </td>
+        <td id="providers_owner" align="right"> 
+          <% if @provider.user_id != 0 %>
+            <%= nice_user(@provider.user), :controller => "users", :action => "list" %> 
+          <% else %>
+            <%= link_to nice_user(@provider.user), :controller => "users", :action => "list" %> 
+          <% end %>
+        </td>
       </tr>
   <% end %>
 </table>

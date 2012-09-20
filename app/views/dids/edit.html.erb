@@ -10,11 +10,23 @@
 <% end %>
 
 <% if @did.user and @did.status != "free" %>
-    <%= b_user + _('Assigned_to_user') %>: <%= link_nice_user(@did.user) %><br />
+    <%= b_user + _('Assigned_to_user') %>: 
+    <%if @did.user_id != 0 and @did.reseller_id != 0 %>
+      <%= nice_user(@did.user) %>
+    <% else %>
+      <%= link_nice_user(@did.user) %>
+    <% end %>
+    <br />
 <% end %>
 
 <% if @did.device %>
-    <%= b_device + _('Assigned_to_device') %>: <%= link_nice_device @did.device %><br />
+    <%= b_device + _('Assigned_to_device') %>: 
+    <%if @did.user_id != 0 and @did.reseller_id != 0 %>
+      <%= nice_device @did.device %>
+    <% else %>
+      <%= link_nice_device @did.device %>
+    <% end %>
+    <br />
 <% end %>
 
 <% if @did.status == "closed" %>
