@@ -43,6 +43,7 @@
         <th align="center">   <%= _('Duration') %>     </th>
         <th align="center"></th>
         <th align="center"></th>
+        <th align="center"></th>
       </tr>
       </thead>
 
@@ -68,6 +69,9 @@
                       <% end %>
                     </td>
                 <% end %>
+                <td id="rec_delete_<%= rec.id %>" align="center">
+                  <%= link_to b_delete, {:action => :destroy_recording, :id => rec.id}, :confirm => _('Are_you_sure'), :id => "rec_delete_link_#{rec.id}", :method => "post" %>
+                </td>
               </tr>
           <% end %>
       <% } %>

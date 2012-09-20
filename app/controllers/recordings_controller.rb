@@ -144,6 +144,11 @@ class RecordingsController < ApplicationController
     @page_title = _('Recordings')
     @page_icon = "music.png"
 
+    if !recordings_addon_active?
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
+
     @server_path = get_server_path(1)
     @remote_server_path = get_server_path(0)
 
@@ -408,6 +413,11 @@ class RecordingsController < ApplicationController
     change_date
     owner_id = correct_owner_id
 
+    if !recordings_addon_active?
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
+
     params[:page].to_i > 0 ? @page = params[:page].to_i : @page = 1
     params[:search_on] ? @search = params[:search_on].to_i : @search = 0
     params[:s_source] ? @search_source = params[:s_source] : @search_source = ""
@@ -518,7 +528,7 @@ class RecordingsController < ApplicationController
     else
       flash[:notice] = _("Recording_was_not_destroyed")
     end
-    redirect_to(:action => "recordings") and return false
+    redirect_to(:back) and return false
   end
 
 
