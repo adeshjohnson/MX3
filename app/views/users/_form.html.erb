@@ -89,6 +89,7 @@
                                     var commit = $('commit')
                                     switch (val) {
                                         case "accountant" :
+                                            $('user_responsible_accountant_id').style.display = 'none';
                                             $('accountant_type_select').style.display = 'inline';
                                             $('accountant_type_select').name = 'accountant_type';
                                             $('reseller_type_select').style.display = 'none';
@@ -102,6 +103,7 @@
                                             }
                                             break;
                                         case "reseller" :
+                                            $('user_responsible_accountant_id').style.display = 'none';
                                             $('reseller_type_select').style.display = 'inline';
                                             $('reseller_type_select').name = 'accountant_type';
                                             $('accountant_type_select').style.display = 'none';
@@ -115,6 +117,7 @@
                                             }
                                             break;
                                         default :
+                                            $('user_responsible_accountant_id').style.display = 'inline';
                                             $('accountant_type_select').style.display = 'none';
                                             $('reseller_type_select').style.display = 'none';
                                             if (commit != null) {
