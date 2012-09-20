@@ -27,7 +27,7 @@
   <tr class="row1">
     <td id="cdr_in_csv_file" width="50%"><%= _('CDRs_in_file') %></td>
     <td id="cdr_in_csv_file_number" width="15%" align="right"><%= @cdr_analize[:cdr_in_csv_file] %></td>
-    <td width="35%"></td>
+    <td id='bad_cdrs' width="35%"><%= @cdr_analize[:bad_cdrs] %> <%= _('bad_CDRs') %><%= link_to "(#{_('Press_here_to_get_list')})", {:action => "bad_rows_from_csv", :csv2 => 1, :name =>session[:temp_cdr_import_csv]}, :popup => true %></td>
   </tr>
   <% unless session[:cdr_import_csv2][:import_user] %>
       <tr>

@@ -1118,7 +1118,12 @@ class Call < ActiveRecord::Base
     #set flag on bad billsec | code : 5
     ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 5 where replace(replace(col_#{options[:imp_billsec]}, '\\r', ''), '
 ', '') REGEXP '^[0-9]+$' = 0 and f_error = 0")
-
+    if  options[:imp_provider_id].to_i > -1
+    #set flag on bad Provider ID | code : 6
+      prov_id =
+    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 6 where replace(replace(col_#{options[:imp_provider_id]}, '\\r', ''), '
+', '') NOT IN (SELECT providers.id FROM providers WHERE hidden = 0 AND (user_id = #{current_user} OR (common_use = 1 and providers.id IN (SELECT provider_id FROM common_use_providers where reseller_id = #{current_user})))) and f_error = 0")
+    end
 
     #set flag on bad clis and count them
     unless options[:import_user]
@@ -1129,7 +1134,8 @@ class Call < ActiveRecord::Base
     ActiveRecord::Base.connection.execute("UPDATE #{name} JOIN calls ON (calls.calldate = timestamp(replace(col_#{options[:imp_calldate]}, '\\r', '')) ) SET f_error = 1, nice_error = 2 WHERE dst = replace(col_#{options[:imp_dst]}, '\\r', '') and billsec = replace(col_#{options[:imp_billsec]}, '\\r', '')  #{cond} and f_error = 0")
 
     arr[:cdr_in_csv_file] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} where f_error = 0").to_i
-    arr[:bad_clis] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} where f_error = 1").to_i
+    arr[:bad_cdrs] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} where f_error = 1").to_i
+    arr[:bad_clis] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} where f_error = 1 AND nice_error = 1 ").to_i
     if options[:step] and options[:step] == 8
       arr[:new_clis_to_create] = ActiveRecord::Base.connection.select_value("SELECT COUNT(DISTINCT(col_#{options[:imp_clid]})) FROM #{name}  WHERE nice_error != 1 and not_found_in_db = 1").to_i if options[:imp_clid] and options[:imp_clid] >= 0
       arr[:clis_to_assigne] = Callerid.count(:all, :conditions => {:device_id => -1}).to_i
@@ -1145,7 +1151,7 @@ class Call < ActiveRecord::Base
   end
 
   def Call.insert_cdrs_from_csv(name, options)
-    provider = Provider.find(:first, :include => [:tariff], :conditions => ["providers.id = ?", options[:import_provider]])
+    provider = Provider.find(:first, :include => [:tariff], :conditions => ["providers.id = ?", options[:import_provider]]) if options[:imp_provider_id].to_i < 0
 
     if options[:import_user]
       res = ActiveRecord::Base.connection.select_all("SELECT *, devices.id as dev_id FROM #{name} JOIN devices ON (devices.id = #{options[:import_device]}) WHERE f_error = 0 and do_not_import = 0")
@@ -1179,13 +1185,13 @@ class Call < ActiveRecord::Base
       call.accountcode = r['dev_id']
       call.src_device_id = r['dev_id']
       call.user_id = r['user_id']
-      call.provider_id = provider.id
+      call.provider_id = options[:imp_provider_id].to_i > -1 ? CsvImportDb.clean_value(r["col_#{options[:imp_provider_id]}"]).gsub(/[^0-9]/, "") : provider.id
       call.localized_dst = call.dst
 
       user = User.find(call.user_id)
 
       call.reseller_id = user.owner_id
-      call = call.count_cdr2call_details(provider.tariff_id, user) if call.valid?
+      call = call.count_cdr2call_details(options[:imp_provider_id].to_i > -1 ? call.provider.tariff_id : provider.tariff_id, user) if call.valid?
 
       if call.save
         user.balance -= call.user_price

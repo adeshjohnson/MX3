@@ -1,0 +1,16 @@
+<table class="maintable" width="100%">
+  <% if @rows and @rows.size > 0 %>
+        <% @rows.each_with_index { |row, i| %>
+          <tr class="row<%= (i.to_i % 2).to_s %>">
+        <% row.each { |r| %>
+            <% if r[0].include?('col_') %>
+                <td>
+                  <%= r[1] %>
+                </td>
+            <% end %>
+        <% } %>
+        <td><%= nice_cdr_import_error(row['nice_error']) %></td>
+        </tr>
+      <% } %>
+  <% end %>
+</table>

@@ -127,6 +127,7 @@ class CdrController < ApplicationController
             @options[:imp_billsec] = return_correct_select_value(params[:billsec_id])
             @options[:imp_disposition] = return_correct_select_value(params[:disposition_id])
             @options[:imp_accountcode] = return_correct_select_value(params[:accountcode_id])
+            @options[:imp_provider_id] = return_correct_select_value(params[:provider_id])
             @options[:sep] = @sep
             @options[:dec] = @dec
 
@@ -158,6 +159,7 @@ class CdrController < ApplicationController
             my_debug_time "step 5"
             @new_step = 6
             session[:cdr_import_csv2][:import_type] = params[:import_type].to_i
+            params[:provider] = session[:cdr_import_csv2][:imp_provider_id] if session[:cdr_import_csv2][:imp_provider_id].to_i > -1
             session[:cdr_import_csv2][:import_provider] = params[:provider].to_i
             unless params[:provider]
               flash[:notice] = _('Please_select_Provider')
@@ -342,6 +344,15 @@ class CdrController < ApplicationController
       @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE do_not_import = 1 and id = #{params[:id]}")
     end
     render :layout => false and return false
+  end
+
+  def bad_rows_from_csv
+    @page_title = _('Bad_rows_from_CSV_file')
+          if ActiveRecord::Base.connection.tables.include?(params[:name])
+        @rows = ActiveRecord::Base.connection.select_all("SELECT * FROM #{params[:name]} WHERE f_error = 1")
+      end
+
+    render(:layout => "layouts/mor_min")
   end
 
 

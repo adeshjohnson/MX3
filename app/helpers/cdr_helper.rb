@@ -21,6 +21,8 @@ module CdrHelper
         error = _('Invalid_calldate')
       when 5
         error = _('Billsec_is_not_numerical_value')
+      when 6
+        error = _('Provider_ID_not_found_in_DB')
     end
     error
   end

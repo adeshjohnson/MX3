@@ -203,6 +203,22 @@
             </td>
 
           </tr>
+          <tr class="row">
+            <td>   <%= _('Provider_ID') %>  </td>
+            <td>
+              <div class="nb" align="center">
+                <select name="provider_id">
+                  <option value="-1">&nbsp;</option>
+                  <% i = 0 %>
+                  <% for l in @fl %>
+                      <option value="<%= i %>" <%= "selected" if session[:cdr_import_csv2] and session[:cdr_import_csv2][:imp_provider] == i %>> <%= clean_value l %> </option>
+                      <% i += 1 %>
+                  <% end %>
+                </select>
+              </div>
+            </td>
+
+          </tr>
 
 
         </table>
@@ -239,6 +255,7 @@
         <th>  <%= _('Billsec') %>  </th>
         <th>  <%= _('Disposition') %>  </th>
         <th>  <%= _('Accountcode') %>  </th>
+        <th>  <%= _('Provider_ID') %>  </th>
       </tr>
 
 
@@ -261,6 +278,7 @@
                 <td id="imp_billsec_<%= tl %>"> <%= clean_value arr[session[:cdr_import_csv2][:imp_billsec]].to_s.gsub(@dec, ".") if session[:cdr_import_csv2][:imp_billsec] >= 0 %>    </td>
                 <td id="imp_disposition_<%= tl %>"> <%= clean_value arr[session[:cdr_import_csv2][:imp_disposition]].to_s.gsub(@dec, ".") if session[:cdr_import_csv2][:imp_disposition] >= 0 %>    </td>
                 <td id="imp_accountcode_<%= tl %>"> <%= clean_value arr[session[:cdr_import_csv2][:imp_accountcode]].to_s.gsub(@dec, ".") if session[:cdr_import_csv2][:imp_accountcode] >= 0 %>    </td>
+                <td id="imp_provider_<%= tl %>"> <%= clean_value arr[session[:cdr_import_csv2][:imp_provider_id]].to_s.gsub(@dec, ".") if session[:cdr_import_csv2][:imp_provider_id] >= 0 %>    </td>
               </tr>
 
           <% end %>
@@ -309,6 +327,7 @@
 
     <%= form_tag({:action => 'import_csv', :step => "5"}) do %>
         <table>
+          <% if  session[:cdr_import_csv2][:imp_provider_id].to_i < 0 %>
           <tr>
             <td colspan="2"><%= _('Select_provider') %>:</td>
             <td><select name="provider">
@@ -318,6 +337,7 @@
             </select>
             </td>
           </tr>
+              <% end %>
           <tr>
             <td width="200"><%= radio_button_tag('import_type', '0') %> <%= _('Import_by_user') %></td>
             <td><%= _('Select_user') %>:</td>
@@ -412,7 +432,7 @@
       </tr>
       <tr class="row0">
         <td width="50%"><%= _('Not_Imported_CDRs') %></td>
-        <td id="failed_calls" align="right" width="15%"><b><%= @cdr_analize[:cdr_in_csv_file] - @total_cdrs %></b></td>
+        <td id="failed_calls" align="right" width="15%"><b><%= @cdr_analize[:cdr_in_csv_file].to_i - @total_cdrs.to_i %></b></td>
       </tr>
       <tr class="row1">
         <td width="50%"><%= _('Run_Time') %> </td>
@@ -421,7 +441,7 @@
       <tr class="row0">
         <td width="50%"><%= _('Time_per_CDR') %></td>
         <td id="run_time_for_call" align="right" width="15%">
-          <b><%= (@total_cdrs == 0) ? "0" : nice_number(@run_time/ @total_cdrs) %> s </b></td>
+          <b><%= (@total_cdrs == 0) ? "0" : nice_number(@run_time.to_f / @total_cdrs.to_f) %> s </b></td>
       </tr>
       <% if @errors and @errors.size > 0 %>
           <tr class="row1">
