@@ -762,9 +762,7 @@ class PaymentsController < ApplicationController
       paym.tax = usd ? usd.get_tax.count_tax_amount(amount) : amount
       paym.description = params[:description].to_s
       paym.save
-
-
-
+      flash[:status] = _('Payment_added')
     else
       
       #manual payment for user
@@ -785,64 +783,66 @@ class PaymentsController < ApplicationController
       curr_real_amount =  real_amount / exchange_rate.to_d
       
       user.balance +=  curr_amount
-      user.save
+      if user.save
 
-      paym = Payment.new
-      paym.paymenttype = 'manual'
-      paym.amount = real_amount
-      paym.currency = currency
-      paym.date_added = Time.now
-      paym.shipped_at = Time.now
-      paym.completed = 1
-      paym.user_id = user.id
-      paym.owner_id = user.owner_id
-      paym.tax = user.get_tax.count_tax_amount(amount)
-      paym.description = params[:description].to_s
-      paym.save
+        paym = Payment.new
+        paym.paymenttype = 'manual'
+        paym.amount = real_amount
+        paym.currency = currency
+        paym.date_added = Time.now
+        paym.shipped_at = Time.now
+        paym.completed = 1
+        paym.user_id = user.id
+        paym.owner_id = user.owner_id
+        paym.tax = user.get_tax.count_tax_amount(amount)
+        paym.description = params[:description].to_s
+        paym.save
 
 
-      invoice_amount = (curr_amount/ current_user.current.currency.exchange_rate.to_d).to_d
-      invoice_amount_real = (curr_real_amount/ current_user.current.currency.exchange_rate.to_d).to_d
+        invoice_amount = (curr_amount/ current_user.current.currency.exchange_rate.to_d).to_d
+        invoice_amount_real = (curr_real_amount/ current_user.current.currency.exchange_rate.to_d).to_d
 
-      # create invoice for prepaid user's manual payment if such setting activated
-      if user.postpaid == 0 and user.generate_invoice == 1
-        number_type = Confline.get_value("Prepaid_Invoice_Number_Type").to_i
-        invoice = Invoice.new
-        invoice.user_id = user.id
-        invoice.period_start =  Time.now
-        invoice.period_end =  Time.now
-        invoice.issue_date = Time.now
-        invoice.paid = 1
-        invoice.number = ""
-        invoice.invoice_type = "prepaid"
-        invoice.price = invoice_amount
-        invoice.price_with_vat = invoice_amount_real
-        invoice.save
+        # create invoice for prepaid user's manual payment if such setting activated
+        if user.postpaid == 0 and user.generate_invoice == 1
+          number_type = Confline.get_value("Prepaid_Invoice_Number_Type").to_i
+          invoice = Invoice.new
+          invoice.user_id = user.id
+          invoice.period_start =  Time.now
+          invoice.period_end =  Time.now
+          invoice.issue_date = Time.now
+          invoice.paid = 1
+          invoice.number = ""
+          invoice.invoice_type = "prepaid"
+          invoice.price = invoice_amount
+          invoice.price_with_vat = invoice_amount_real
+          invoice.save
 
-        invoice.number = generate_invoice_number(Confline.get_value("Prepaid_Invoice_Number_Start"), Confline.get_value("Prepaid_Invoice_Number_Length").to_i, number_type, invoice.id, Time.now)
-        invoice.number_type = number_type
-        invoice.save
+          invoice.number = generate_invoice_number(Confline.get_value("Prepaid_Invoice_Number_Start"), Confline.get_value("Prepaid_Invoice_Number_Length").to_i, number_type, invoice.id, Time.now)
+          invoice.number_type = number_type
+          invoice.save
 
-        invdetail = Invoicedetail.new
-        invdetail.invoice_id = invoice.id
+          invdetail = Invoicedetail.new
+          invdetail.invoice_id = invoice.id
 
-        if currency.to_s != current_user.currency.name
-          invdetail.name = _('Manual_payment') + "(#{params[:amount].to_d} #{currency.to_s})"
+          if currency.to_s != current_user.currency.name
+            invdetail.name = _('Manual_payment') + "(#{params[:amount].to_d} #{currency.to_s})"
+          else
+            invdetail.name = _('Manual_payment')
+          end
+
+          invdetail.price = invoice_amount_real
+          invdetail.quantity = 1
+          invdetail.invdet_type = 0
+          invdetail.save
         else
-          invdetail.name = _('Manual_payment')
+          Action.add_action_hash(current_user, :target_id => user.id, :target_type => 'user', :action => "invoice_not_created")
         end
-
-        invdetail.price = invoice_amount_real
-        invdetail.quantity = 1
-        invdetail.invdet_type = 0
-        invdetail.save
-      else
-        Action.add_action_hash(current_user, :target_id => user.id, :target_type => 'user', :action => "invoice_not_created")
       end
+      flash[:status] = _('Payment_added')
+    else
+      flash_errors_for(_('Payment_failed'), user)
     end
-    
-    
-    flash[:status] = _('Payment_added')
+
     redirect_to :action => 'list'
   end
 
