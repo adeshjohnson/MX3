@@ -533,7 +533,7 @@ class DevicesController < ApplicationController
       if @device.host != "dynamic"
         @device.ipaddr = @device.host
       else
-        #@device.ipaddr = ""
+        @device.ipaddr = "0.0.0.0"
       end
 
       #ticket #4978, previuosly there was a validation to disallow ports lower than 100

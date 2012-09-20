@@ -116,7 +116,7 @@
                 <% if session[:usertype] == "accountant" and session[:acc_device_edit_opt_1] == 1 or session[:usertype] == "reseller" %>
                     <tr>
                       <td id="extension_name"><%= _('extension') %>:</td>
-                      <td id="extension_value"><%= @extension %></td>
+                      <td id="device_extension"><%= @extension %></td>
                     </tr>
                 <% end %>
             <% end %>
