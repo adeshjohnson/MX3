@@ -4,7 +4,7 @@
     <td valign="top">
       <table class="simple">
         <%= render :partial => "device_form_general" %>
-        <% if @default.to_i != 1 %>
+        <% if @default.to_i != 1 and  @device_type != "FAX" %>
             <%= render :partial => "device_form_authentication" %>
         <% end %>
 
