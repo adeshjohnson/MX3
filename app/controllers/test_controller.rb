@@ -22,6 +22,7 @@ class TestController < ApplicationController
 
   def raise_exception
     params[:this_is_fake_exception] = nil
+    params[:do_not_log_test_exception] = 1
     case params[:id]
       when "Errno::ENETUNREACH"
         raise Errno::ENETUNREACH

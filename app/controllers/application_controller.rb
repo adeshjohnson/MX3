@@ -1964,7 +1964,7 @@ Variables: (Names marked with * are required)
       MorLog.my_debug("Rescuing exception: #{exception.class.to_s} controller: #{params[:controller].to_s}, action: #{params[:action].to_s}", true)
       if important_exception(exception)
         MorLog.my_debug("  >> Exception is important", true)
-        MorLog.log_exception(exception, id, params[:controller].to_s, params[:action].to_s)  if params[:this_is_fake_exception].to_s != "YES"
+        MorLog.log_exception(exception, id, params[:controller].to_s, params[:action].to_s)  if params[:do_not_log_test_exception].to_i == 0
 
         trace = exception.backtrace.collect { |t| t.to_s }.join("\n")
 
