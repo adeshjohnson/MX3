@@ -106,7 +106,7 @@ class DevicesController < ApplicationController
 
     device.port = Confline.get_value("Default_IAX2_device_port", current_user.get_corrected_owner_id) if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type                    
     device.port = Confline.get_value("Default_SIP_device_port", current_user.get_corrected_owner_id) if device.device_type == 'SIP' and not Device.valid_port? device.port, device.device_type                      
-    device.port = Confline.get_value("Default__device_port", current_user.get_corrected_owner_id) if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type    
+    device.port = Confline.get_value("Default_H323_device_port", current_user.get_corrected_owner_id) if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type    
     
     if device.save
       flash[:status] = device.check_callshop_user(_('device_created'))
