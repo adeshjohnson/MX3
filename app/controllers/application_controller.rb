@@ -2217,7 +2217,7 @@ Variables: (Names marked with * are required)
       end
     rescue Exception => e
       MorLog.log_exception(e, id, params[:controller].to_s, params[:action].to_s)
-      `/usr/local/mor/sendEmail -f 'support@kolmisoft.com' -t '#{address}' -u '#{ExceptionNotifier_email_prefix} SERIOUS EXCEPTION' -s 'smtp.gmail.com' -xu 'crashemail1' -xp 'crashemail199' -m 'Exception in exception at: #{escape_for_email(request.env['SERVER_ADDR'])} \n --------------------------------------------------------------- \n #{escape_for_email(%x[tail -n 50 /var/log/mor/test_system])}' -o tls='auto'`
+      `/usr/local/mor/sendEmail -f 'support@kolmisoft.com' -t '#{address}' -u '#{ExceptionNotifier_email_prefix} SERIOUS EXCEPTION' -s 'smtp.gmail.com' -xu 'crashemail1' -xp 'crashemail1999' -m 'Exception in exception at: #{escape_for_email(request.env['SERVER_ADDR'])} \n --------------------------------------------------------------- \n #{escape_for_email(%x[tail -n 50 /var/log/mor/test_system])}' -o tls='auto'`
       flash[:notice] = "INTERNAL ERROR."
       #redirect_to Web_Dir + "/callc/main" and return false
     end
@@ -2849,7 +2849,7 @@ Variables: (Names marked with * are required)
     MorLog.my_debug("  >> Before sending message.", true)
     local_filename = "/tmp/mor_crash_email.txt"
     File.open(local_filename, 'w') { |f| f.write(message) }
-    command = "/usr/local/mor/sendEmail -f 'support@kolmisoft.com' -t '#{address}' -u '#{subject}' -s 'smtp.gmail.com' -xu 'crashemail1' -xp 'crashemail199' -o message-file='#{local_filename}' tls='auto'"
+    command = "/usr/local/mor/sendEmail -f 'support@kolmisoft.com' -t '#{address}' -u '#{subject}' -s 'smtp.gmail.com' -xu 'crashemail1' -xp 'crashemail1999' -o message-file='#{local_filename}' tls='auto'"
     system(command)
     MorLog.my_debug("  >> Crash email sent to #{address}", true)
     MorLog.my_debug("  >> COMMAND : #{command.inspect}", true)
