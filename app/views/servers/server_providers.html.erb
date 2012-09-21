@@ -31,7 +31,7 @@
         <td id="prov_server_ip_<%= prov.id %>"><%= h prov.server_ip %></td>
         <td id="prov_tariff_<%= prov.id %>"><%= h prov.tariff.name if  prov.tariff %></td>
         <td id="prov_rules_<%= prov.id %>" align="center"><%= link_to b_rules, :controller => "providers", :action => 'provider_rules', :id => prov %></td>
-        <td id="prov_calls_<%= prov.id %>" align="center"><%= link_to b_call, :controller => "stats", :action => 'providers_calls', :id => prov %></td>
+        <td id="prov_calls_<%= prov.id %>" align="center"><%= link_to b_call, {:controller => "stats", :action => 'last_calls_stats', :s_provider => prov}, {:id => "calls_link_"+prov.id.to_s} %></td>
 
 
         <td align="center"><%= link_to b_delete, {:action => 'delete', :id => prov, :sid => @server.id}, :confirm => _('Are_you_sure'), :method => :post %></td>
