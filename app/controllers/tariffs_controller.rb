@@ -1191,7 +1191,7 @@ class TariffsController < ApplicationController
     else
       @tariff_id = params[:tariff_id].to_i
       if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id]}".to_sym])
-        @dst = ActiveRecord::Base.connection.select_all("SELECT destinations.prefix, col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_dst]} as new_name, destinations.name as dest_name FROM destinations JOIN #{session["tariff_name_csv_#{params[:tariff_id]}".to_sym]} ON (replace(col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]}, '\\r', '') = prefix)  WHERE ned_update IN (1, 3, 5, 7) ")
+        @dst = ActiveRecord::Base.connection.select_all("SELECT destinations.prefix, col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_dst]} as new_name, IFNULL(original_destination_name,destinations.name) as dest_name FROM destinations JOIN #{session["tariff_name_csv_#{params[:tariff_id]}".to_sym]} ON (replace(col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]}, '\\r', '') = prefix)  WHERE ned_update IN (1, 3, 5, 7) ")
       end
     end
     render(:layout => "layouts/mor_min")

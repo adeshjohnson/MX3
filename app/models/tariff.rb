@@ -461,7 +461,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
 
   def load_csv_into_db(tname, sep, dec, fl, path = "/tmp/")
     colums ={}
-    colums[:colums] = [{:name => "f_subcodes", :type => "VARCHAR(50)", :default => ''}, {:name => "short_prefix", :type => "VARCHAR(50)", :default => ''}, {:name => "f_country_code", :type => "INT(4)", :default => 0}, {:name => "f_lata", :type => "INT(4)", :default => 0}, {:name => "f_error", :type => "INT(4)", :default => 0}, {:name => "nice_error", :type => "INT(4)", :default => 0}, {:name => "ned_update", :type => "INT(4)", :default => 0}, {:name => "not_found_in_db", :type => "INT(4)", :default => 0}, {:name => "id", :type => 'INT(11)', :inscrement => ' NOT NULL auto_increment '}]
+    colums[:colums] = [{:name => "f_subcodes", :type => "VARCHAR(50)", :default => ''}, {:name => "short_prefix", :type => "VARCHAR(50)", :default => ''}, {:name => "f_country_code", :type => "INT(4)", :default => 0}, {:name => "f_lata", :type => "INT(4)", :default => 0}, {:name => "f_error", :type => "INT(4)", :default => 0}, {:name => "nice_error", :type => "INT(4)", :default => 0}, {:name => "ned_update", :type => "INT(4)", :default => 0}, {:name => "not_found_in_db", :type => "INT(4)", :default => 0}, {:name => "id", :type => 'INT(11)', :inscrement => ' NOT NULL auto_increment '},{:name => "original_destination_name", :type => "VARCHAR(255)", :default => ''}]
     CsvImportDb.load_csv_into_db(tname, sep, dec, fl, path, colums)
   end
 
@@ -637,6 +637,12 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     CsvImportDb.log_swap('update_destinations_start')
     MorLog.my_debug("CSV update_destinations #{name}", 1)
     count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE ned_update IN (1, 3, 5, 7)").to_i
+
+    sql ="UPDATE #{name} 
+          JOIN destinations ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
+          SET original_destination_name = destinations.name
+          WHERE ned_update IN (1, 3, 5, 7)"
+    ActiveRecord::Base.connection.update(sql)
 
     sql ="UPDATE destinations 
          JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) 
