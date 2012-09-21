@@ -50,6 +50,7 @@ class TestController < ApplicationController
       when "Cairo"
         raise LoadError, 'Could not find the ruby cairo bindings in the standard locations or via rubygems. Check to ensure they\'re installed correctly'
       when 'Google_account_not_active'
+        params[:this_is_fake_exception] = "YES"
         raise GoogleCheckoutError, {:message => 'Seller Account 666666666666666 is not active.', :response_code => '', :serial_number => '6666666-6666-6666-6666-666666666666'}
       when "Google_500"
         params[:this_is_fake_exception] = ""

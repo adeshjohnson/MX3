@@ -1964,7 +1964,7 @@ Variables: (Names marked with * are required)
       MorLog.my_debug("Rescuing exception: #{exception.class.to_s} controller: #{params[:controller].to_s}, action: #{params[:action].to_s}", true)
       if important_exception(exception)
         MorLog.my_debug("  >> Exception is important", true)
-        MorLog.log_exception(exception, id, params[:controller].to_s, params[:action].to_s)
+        MorLog.log_exception(exception, id, params[:controller].to_s, params[:action].to_s)  if params[:this_is_fake_exception].to_s != "YES"
 
         trace = exception.backtrace.collect { |t| t.to_s }.join("\n")
 
@@ -2113,7 +2113,7 @@ Variables: (Names marked with * are required)
           exception_send_email = 0
         end
 
-        if exception_send_email == 1 and exception_class != exception_class_previous and !flash_help_link
+        if exception_send_email == 1 and exception_class != exception_class_previous and !flash_help_link  or params[:this_is_fake_exception].to_s == "YES"
           MorLog.my_debug("  >> Need to send email", true)
 
           if exception_class.include?("NoMemoryError")
@@ -2173,7 +2173,12 @@ Variables: (Names marked with * are required)
 
           Confline.set_value("Last_Crash_Exception_Class", exception_class, 0)
 
-          unless params[:this_is_fake_exception].to_s == "YES"
+          if params[:this_is_fake_exception].to_s == "YES"
+            MorLog.my_debug('  >> Crash email NOT sent THIS IS JUST TEST', true)
+            return :text => flash_notice.to_s + flash_help_link.to_s + message.join("\n")
+            #render :text => message.join("\n") and return false
+          else
+
             subject = "#{ExceptionNotifier_email_prefix} Exception. ID: #{id.to_s}"
             time = Confline.get_value("Last_Crash_Exception_Time", 0)
             if time and !time.blank? and (Time.now - time.to_time) > 1.minute
@@ -2183,10 +2188,6 @@ Variables: (Names marked with * are required)
               Confline.set_value("Last_Crash_Exception_Time", Time.now.to_s(:db), 0)
               MorLog.my_debug('Crash email sent')
             end
-          else
-            MorLog.my_debug('  >> Crash email NOT sent THIS IS JUST TEST', true)
-            return :text => message.join("\n")
-            #render :text => message.join("\n") and return false
           end
         else
           MorLog.my_debug("  >> Do not send email because:", true)
