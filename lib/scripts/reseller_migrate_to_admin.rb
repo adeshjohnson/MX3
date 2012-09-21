@@ -464,7 +464,7 @@ begin
           msg = "#=================== DELETE AND INSERT INTO #{t.table_name} , found to insert : #{actions.size.to_i} ==========="
           Debug.debug(msg)
           MyWritter.msg(msg)
-          MyWritter.msg "TRUNCATE #{t.table_name};"
+          MyWritter.msg "TRUNCATE #{t.table_name};"  if t.table_name.to_s != 'ivr_sound_files'  and t.table_name.to_s != 'ivr_voices'
           sql_header = "INSERT IGNORE INTO #{t.table_name} (`#{t.column_names.sort.join('`, `')}`) VALUES "
 
           sql_values = []
@@ -519,7 +519,7 @@ begin
           msg = "#=================== DELETE AND INSERT INTO #{t.table_name} , found to insert : #{actions.size.to_i} ==========="
           Debug.debug(msg)
           MyWritter.msg(msg)
-          MyWritter.msg "TRUNCATE #{t.table_name};"
+          MyWritter.msg "TRUNCATE #{t.table_name};"  if t.table_name.to_s != 'ivr_sound_files'  and t.table_name.to_s != 'ivr_voices'
           sql_header ="INSERT IGNORE INTO #{t.table_name} (`#{t.column_names.sort.join('`, `')}`) VALUES "
           sql_values = []
           actions.each_with_index { |a, i|
