@@ -170,7 +170,7 @@
         <th id="providers_owner_row" align="left"><%= b_provider + _("Providers_owner") %></th>
         <td id="providers_owner" align="right"> 
           <% if @provider.user_id != 0 %>
-            <%= nice_user(@provider.user), :controller => "users", :action => "list" %> 
+            <%= nice_user(@provider.user) %> 
           <% else %>
             <%= link_to nice_user(@provider.user), :controller => "users", :action => "list" %> 
           <% end %>
