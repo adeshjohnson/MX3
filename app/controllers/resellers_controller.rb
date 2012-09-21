@@ -31,6 +31,8 @@ class ResellersController < ApplicationController
     Confline.set_value('Allow_resellers_change_device_PIN', params[:allow_resellers_change_device_pin].to_i)
     Confline.set_value('Allow_resellers_to_change_extensions_for_their_user_devices', params[:allow_resellers_to_change_extensions_for_their_user_devices].to_i)
 
+    Confline.set_value('disallow_coppy_localization', params[:disallow_coppy_localization].to_i)
+
     flash[:status] = _('Settings_saved')
     redirect_to :action => 'settings' and return false
   end

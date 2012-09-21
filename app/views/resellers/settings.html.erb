@@ -8,6 +8,14 @@
         <td><b><%= _('Default_DID_Provider') %>:</b></td>
         <td><%= select_tag("did_provider", options_for_select(@providers.map { |pr| [pr.name, pr.id] }, Confline.get_value("DID_default_provider_to_resellers").to_i)) %></td>
       </tr>
+      <tr>
+       <td></td>
+       <td><b><%= _("Disalow_for_Reseller_to_copy_Localization_settings_from_Admin") %><b></td>
+       <td>
+         <%= _('No') %> <%= radio_button_tag 'disallow_coppy_localization', 0, (Confline.get_value('disallow_coppy_localization').to_i != 1) %>
+         <%= _('Yes') %> <%= radio_button_tag 'disallow_coppy_localization', 1, (Confline.get_value('disallow_coppy_localization').to_i == 1) %> 
+       </td>
+      </tr>
       <%= raw setting_boolean(_('Allow_resellers_change_device_PIN'), 'allow_resellers_change_device_pin', "Allow_resellers_change_device_PIN") %>
       <%= raw setting_boolean(_('Allow_resellers_to_change_extensions_for_their_user_devices'), 'allow_resellers_to_change_extensions_for_their_user_devices', "Allow_resellers_to_change_extensions_for_their_user_devices") %>
     </table>

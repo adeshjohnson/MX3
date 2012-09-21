@@ -4458,6 +4458,7 @@ Localization.define('en') do |l|
   l.store 'Provider_ID_not_found_in_DB', 'Provider ID not found in DB'
   l.store 'Provider_ID', 'Provider ID'
   l.store 'bad_CDRs', 'bad CDRs'
+  l.store 'Disalow_for_Reseller_to_copy_Localization_settings_from_Admin', 'Disalow for Reseller to copy Localization settings from Admin'
   l.store 'Minimal_balance_changed', 'Minimal balance changed'
   #  l.store '', ''
   #  l.store '', ''

@@ -1,4 +1,4 @@
-<% if reseller? %>
+<% if reseller? and (Confline.get_value('disallow_coppy_localization').to_i != 1) %>
     <%= form_tag :action => 'import_admins_locations' do %>
         <table width="100%">
           <tr>
