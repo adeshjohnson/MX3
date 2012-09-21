@@ -172,8 +172,9 @@ class SmsProvider < ActiveRecord::Base
   end
 
   def nice_url(dst, msg, src, first_user, last_user, cli)
-    #logger.fatal login
-    login.gsub(/<%= DST %>/, dst).gsub(/<%= MSG %>/, msg).gsub(/<%= SRC %>/, src).gsub(/<%= USRFIRSTNAME %>/, first_user).gsub(/<%= USRLASTNAME %>/, last_user).gsub(/<%= CALLERID %>/, cli).strip
+    # strip name and leave num
+    cli_num = ((result = cli.match(/.*%3C(.*)%3E.*/)) ? result[1] : "")
+    login.gsub(/<%= DST %>/, dst).gsub(/<%= MSG %>/, msg).gsub(/<%= SRC %>/, src).gsub(/<%= USRFIRSTNAME %>/, first_user).gsub(/<%= USRLASTNAME %>/, last_user).gsub(/<%= CALLERID %>/, cli_num).strip
   end
 
 end
