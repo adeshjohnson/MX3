@@ -1516,7 +1516,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     @Show_Currency_Selector = 1
     @currency = session[:show_currency]
 
-    change_date
+    params[:clear] ? change_date_to_present : change_date
     @issue_from_date = Date.parse(session_from_date)
     @issue_till_date = Date.parse(session_till_date)
 
