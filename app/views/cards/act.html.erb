@@ -2,30 +2,56 @@
 <br/>
 <br/>
 <b><%= _('Number_length') %></b>: <%= @cg.number_length %>
+<div class="form_background">
+  <%= form_tag(:action => 'act_confirm', :cg => @cg.id) do %>
 
-<%= form_tag(:action => 'act_confirm', :cg => @cg.id) do %>
-
-    <p><label for="card_number"><%= _('Start_number') %></label><br/>
-      <%= text_field_tag 'start_number', "", "class" => "input", "maxlength" => @cg.number_length %></p>
-
-    <p><label for="card_number"><%= _('End_number') %></label><br/>
-      <%= text_field_tag 'end_number', "", "class" => "input", "maxlength" => @cg.number_length %></p>
-
-    <%= _('Buy') %> : <input type="radio" id="buy" name="activate" value="3"/>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <%= _('Disable') %> : <input type="radio" id="disable" name="activate" value="0"/>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <%= _('Delete') %> : <input type="radio" id="delete" name="activate" value="2"/>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <%=_('Delete_and_hide')%> : <input type="radio" id="delete_and_hide" name="activate" value="5" />
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <%= _('Change_distributor') %> :
-    <input type="radio" id="distributor" name="activate" value="4"/>&nbsp;&nbsp; <%= select_tag("user_id", options_for_select([["None", -1]] + @users.map { |user| [nice_user(user), user.id] })) %>
-    <br/>
-    <br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <%= submit_tag _('Execute'), :disable_with => _('Processing..') %>
+  <table>
+    <tr>
+      <td colspan="2"><b><%= _('Which_cards') %>:</b></td>
+    </tr>
+    <tr>
+      <td class="indented_form_row" colspan="2">
+        <b><%= _('Cards_interval') %>:</b>
+        <%= text_field_tag 'start_number', "", "class" => "input", "maxlength" => @cg.number_length %> - <%= text_field_tag 'end_number', "", "class" => "input", "maxlength" => @cg.number_length %>
+        <br/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><b><%= _('What_to_do') %>:</b></td>
+    </tr>
+    <td>
+      <table>
+        <tr>
+          <td><b><%= _('Buy') %>: </b></td>
+          <td><input type="radio" id="buy" name="activate" value="1"/></td>
+        </tr>
+        <tr>
+          <td><b><%= _('Disable') %>: </b></td>
+          <td><input type="radio" id="disable" name="activate" value="0"/></td>
+        </tr>
+        <tr>
+          <td><b><%= _('Delete') %>: </b></td>
+          <td><input type="radio" id="delete" name="activate" value="2"/></td>
+        </tr>
+        <tr>
+          <td><b><%= _('Delete_and_hide') %>: </b></td>
+          <td><input type="radio" id="delete_and_hide" name="activate" value="5"/></td>
+        </tr>
+        <tr>
+          <td><b><%= _('Change_distributor') %>: </b></td>
+          <td><input type="radio" id="distributor" name="activate" value="4"/></td>
+          <td><%= select_tag("user_id", options_for_select([["None", -1]] + @users.map { |user| [nice_user(user), user.id] })) %></td>
+        </tr>
+        <tr>
+          <td><b><%= _('Minimal_balance') %>: </b></td>
+          <td><input type="radio" id="minimal_balance" name="activate" value="6"/></td>
+          <td><%= text_field 'card', 'min_balance', :size => 10, "class" => "input", :value => 0  %></td>
+        </tr>
+      </table>
+    </td>
+  </table>
+  <br/>
+  <br/>
+  <%= submit_tag _('Execute'), :disable_with => _('Processing..') %>
 <% end %>
-
-<br/>
-<br/>
+</div>

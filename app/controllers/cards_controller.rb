@@ -156,10 +156,15 @@ class CardsController < ApplicationController
     @page_title = _('Batch_management')
     @page_icon = "groups.png"
 
+    @activate = params[:activate].to_i
+    if @activate.to_i == 6 and params[:card][:min_balance] !~ /^[-+]?[0-9]*\.?[0-9]+$/
+      flash[:notice] = _('Bad_minimal_balance')
+      redirect_to :action => 'act', :cg => @cg and return false
+    end
     @start_num = params[:start_number].to_i <= params[:end_number].to_i ? params[:start_number] : params[:end_number]
     @end_num = params[:end_number].to_i >= params[:start_number].to_i ? params[:end_number] : params[:start_number]
-    @activate = params[:activate].to_i
     @u_id = params[:user_id].to_i
+    @min_balance = params[:card][:min_balance].to_d
 
     if ((@start_num.length != @cg.number_length) or (@end_num.length != @cg.number_length)) or ((@start_num.to_i == 0) or (@end_num.to_i == 0))
       flash[:notice] = _('Bad_number_length_should_be') + ": " + @cg.number_length.to_s
@@ -173,6 +178,7 @@ class CardsController < ApplicationController
     @a_name = _('Activate') if @activate.to_i == 1
     @a_name = _('Delete') if @activate.to_i == 2
     @a_name = _('Change_distributor') if @activate.to_i == 4
+    @a_name = _('Minimal_balance') if @activate.to_i == 6
 
     if @activate.to_i == 3
       @a_name = _('Buy')
@@ -225,6 +231,12 @@ class CardsController < ApplicationController
         end
       when 5
         cards_deleted, cards_hidden = Card.delete_and_hide_from_sql({:cardgroup_id => @cg.id, :start_num => start_num, :end_num => end_num})
+      when 6
+        cards = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? AND number <= ?  AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id])
+        for card in cards
+          card.min_balance = params[:min_balance].to_d
+          card.save
+        end
     end
     case (action)
       when 0
@@ -247,6 +259,8 @@ class CardsController < ApplicationController
         flash[:status] = _('Distributor_changed')
       when 5
         flash[:status] = cards_deleted.to_s + ' ' + _('Cards_were_successfully_deleted')  + '<br>' + cards_hidden.to_i.to_s + ' ' + _('Cards_were_hidden')
+      when 6
+        flash[:status] = _('Minimal_balance_changed')
     end
 
     redirect_to :action => 'list', :cg => @cg and return false
