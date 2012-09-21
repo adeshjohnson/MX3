@@ -78,6 +78,7 @@ class TestController < ApplicationController
   end
 
   def nice_exception_raiser
+    params[:do_not_log_test_exception] = 1
     params[:this_is_fake_exception] = nil
     if params[:exc_class]
       raise eval(params[:exc_class].to_s), params[:exc_message].to_s
