@@ -53,7 +53,7 @@ class Payment < ActiveRecord::Base
       return self.amount + self.tax
     else
       if self.paymenttype == "invoice" and self.invoice
-        return self.invoice.price_with_tax(:precision => nice_number_digits)
+        return self.invoice.price_with_tax#(:precision => nice_number_digits)
       else
         return self.amount
       end
@@ -217,7 +217,7 @@ class Payment < ActiveRecord::Base
 =end
   def self.financial_statements(owner_id, user_id, status, from_date, till_date, ordinary_user, currency_name)
     condition = ['payments.card = 0']
-    condition << ["payments.date_added BETWEEN '#{from_date}' AND '#{till_date}'"]
+    condition << ["payments.date_added BETWEEN '#{from_date} 00:00:00' AND '#{till_date} 23:59:59'"]
     if not ordinary_user
       condition << "payments.owner_id = #{owner_id}"
     end
