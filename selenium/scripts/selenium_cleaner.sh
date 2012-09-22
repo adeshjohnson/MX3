@@ -1,7 +1,7 @@
 #! /bin/bash 
  
         
-    
+     
 selenium_clean() 
 {
     if [ -f "/tmp/.mor_test_is_running" ]; then
