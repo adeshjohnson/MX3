@@ -125,6 +125,12 @@ class DialplansController < ApplicationController
       redirect_to :action => 'edit', :id => @dp.id and return false
     end
 
+    # checking if selected user belongs to current user.
+    if User.find(:first, :conditions => "id = '#{params[:user].to_i}'").owner_id.to_i != current_user.id.to_i and !current_user.is_admin?
+       flash[:notice] = _('Dont_be_so_smart')
+       redirect_to :action => 'new' and return false
+    end
+
     @dp.name = params[:dialplan][:name].strip
     if @dp.dptype == "callingcard"
 
@@ -258,7 +264,7 @@ class DialplansController < ApplicationController
     dp = Dialplan.new(params[:dialplan])
 
     # checking if selected user belongs to current user.
-    if User.find(:first, :conditions => "id = '#{params[:user].to_i}'").owner_id.to_i != current_user.id.to_i 
+    if User.find(:first, :conditions => "id = '#{params[:user].to_i}'").owner_id.to_i != current_user.id.to_i and !current_user.is_admin?
        flash[:notice] = _('Dont_be_so_smart')
        redirect_to :action => 'new' and return false
     end
