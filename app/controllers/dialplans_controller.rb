@@ -256,6 +256,13 @@ class DialplansController < ApplicationController
     params[:dialplan][:name]=params[:dialplan][:name].strip
 
     dp = Dialplan.new(params[:dialplan])
+
+    # checking if selected user belongs to current user.
+    if User.find(:first, :conditions => "id = '#{params[:user].to_i}'").owner_id.to_i != current_user.id.to_i 
+       flash[:notice] = _('Dont_be_so_smart')
+       redirect_to :action => 'new' and return false
+    end
+
     if params[:dialplan][:dptype] == "callingcard"
       @cardgroup = Cardgroup.find(:first, :conditions => "id = #{params[:dialplan_number_pin_length]}")
       unless @cardgroup
