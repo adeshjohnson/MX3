@@ -13,7 +13,6 @@
       </span>
     <% if admin? %>
       &nbsp;&nbsp;&nbsp;&nbsp;<%= _('Responsibe_accountant') %>:<%= select_tag("responsible_accountant_id", options_for_select([[_('All'), "-1"]] + @responsible_accountants.map { |accountant| [nice_user(accountant), accountant.id] }, @responsible_accountant_id)) %>
-      &nbsp;&nbsp;<%= submit_tag _('Recalculate'), :disable_with => _('Processing..') %>
     <script type="text/javascript">
         //<![CDATA[
         Event.observe(window, 'load',  function() {
@@ -24,6 +23,7 @@
         //]]>
     </script>
     <% end %>
+    &nbsp;&nbsp;<%= submit_tag _('Recalculate'), :disable_with => _('Processing..') %>
   <% end %>
 
 </div>
