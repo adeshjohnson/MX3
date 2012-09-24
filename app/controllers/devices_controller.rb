@@ -104,10 +104,14 @@ class DevicesController < ApplicationController
     fextension = free_extension()
     device = user.create_default_device({:device_ip_authentication_record => par[:ip_authentication].to_i, :description => par[:device][:description], :device_type => par[:device][:device_type], :dev_group => par[:device][:devicegroup_id], :free_ext => fextension, :secret => random_password(12), :username => fextension, :pin => par[:device][:pin]})
 
-    device.port = Confline.get_value("Default_IAX2_device_port", current_user.get_corrected_owner_id) if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type                    
-    device.port = Confline.get_value("Default_SIP_device_port", current_user.get_corrected_owner_id) if device.device_type == 'SIP' and not Device.valid_port? device.port, device.device_type                      
-    device.port = Confline.get_value("Default_H323_device_port", current_user.get_corrected_owner_id) if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type    
+    #device.port = Confline.get_value("Default_IAX2_device_port", current_user.get_corrected_owner_id) if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type                    
+    #device.port = Confline.get_value("Default_SIP_device_port", current_user.get_corrected_owner_id) if device.device_type == 'SIP' and not Device.valid_port? device.port, device.device_type                      
+    #device.port = Confline.get_value("Default_H323_device_port", current_user.get_corrected_owner_id) if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type    
     
+    device.port = 4569 if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type                    
+    device.port = 5060 if device.device_type == 'SIP' and not Device.valid_port? device.port, device.device_type                      
+    device.port = 1720 if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type    
+
     if device.save
       flash[:status] = device.check_callshop_user(_('device_created'))
       # no need to create extensions, prune peers, etc when device is created, because user goes to edit window and all these actions are done in device_update
