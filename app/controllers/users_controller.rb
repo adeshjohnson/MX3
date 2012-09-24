@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   before_filter :find_ard_all, :only => [:artg_destroy, :user_ard_time_edit, :user_acustrates]
   before_filter :check_params, :only => [:create, :update, :default_user_update]
   before_filter :check_with_integrity, :only => [:edit, :list, :new, :default_user, :users_postpaid_and_allowed_loss_calls, :default_user_errors_list]
-  before_filter :find_responsible_accountants, :only => [:edit, :default_user, :new]
+  before_filter :find_responsible_accountants, :only => [:edit, :default_user, :new, :create]
 
 =begin
   we need to find all accountants that might be responsible for admins users, so that we could
