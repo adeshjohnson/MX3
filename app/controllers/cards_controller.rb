@@ -178,6 +178,7 @@ class CardsController < ApplicationController
     @a_name = _('Activate') if @activate.to_i == 1
     @a_name = _('Delete') if @activate.to_i == 2
     @a_name = _('Change_distributor') if @activate.to_i == 4
+    @a_name = _('Delete_and_hide') if @activate.to_i == 5
     @a_name = _('Minimal_balance') if @activate.to_i == 6
 
     if @activate.to_i == 3
