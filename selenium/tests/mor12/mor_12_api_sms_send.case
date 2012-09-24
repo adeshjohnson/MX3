@@ -68,6 +68,36 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>SIP_device</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_name</td>
+	<td>11111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_number</td>
+	<td>370600</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/users/edit/0</td>
 	<td></td>
 </tr>
@@ -80,6 +110,11 @@
 	<td>type</td>
 	<td>id=user_last_name</td>
 	<td>Admin break</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_primary_device_id</td>
+	<td>label=SIP/1001</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1342,6 +1377,41 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>SMS is sent 33.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=action_type</td>
+	<td>label=SMS_api_response</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 </tbody></table>
