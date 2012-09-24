@@ -29,7 +29,7 @@
         if loc.longitude != 0 and loc.latitude != 0
           tool_tip = link_nice_device(device).html_safe
           tool_tip += ("<br />"+link_nice_user(user)).html_safe if user
-          arr1 << "google.maps.event.addListener(map, 'tilesloaded', addDeviceMarker(#{loc.latitude}, #{loc.longitude}, escape('#{tool_tip.gsub(/\n/, "<br />").html_safe}')));"
+          arr1 << "google.maps.event.addListener(map, 'tilesloaded', addDeviceMarker(#{loc.latitude}, #{loc.longitude}, escape('#{tool_tip.gsub(/\n/, "<br />").gsub(/\'/, "&#39;").html_safe}')));"
         end
       end
     %>
