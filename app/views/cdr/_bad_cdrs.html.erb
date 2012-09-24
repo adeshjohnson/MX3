@@ -12,6 +12,9 @@
     <th align="center"><%= _('Calldate') %></th>
     <th align="center"><%= _('Destination') %></th>
     <th align="center"><%= _('Billsec') %></th>
+    <% if session[:cdr_import_csv2][:imp_provider_id].to_i > -1 %>
+    <th align="center"><%= _('Provider') %></th>
+        <%end%>
     <th align="center"><%= _('Error_code') %></th>
     <th align="center"></th>
   </tr>
@@ -22,9 +25,24 @@
             <td id="date_<%= cli['id'] %>" align="center"><%= text_field_tag "calldate_#{cli['id']}", cli["col_#{session[:cdr_import_csv2][:imp_calldate]}"], "class" => "input" %></td>
             <td id="dst_<%= cli['id'] %>" align="center"><%= text_field_tag "cdr_dst_#{cli['id']}", cli["col_#{session[:cdr_import_csv2][:imp_dst]}"], "class" => "input" %></td>
             <td id="billsec_<%= cli['id'] %>" align="center"><%= text_field_tag "cdr_billsec_#{cli['id']}", cli["col_#{session[:cdr_import_csv2][:imp_billsec]}"], "class" => "input" %></td>
+            <% if session[:cdr_import_csv2][:imp_provider_id].to_i > -1 %>
+                <td id="provider_<%= cli['id'] %>" align="center">  <%= _('Select_provider') %>:
+                  <select id="cdr_provider_<%=cli['id']%>" >
+                    <option value="-1"><%= _('Select_provider') %> </option>
+                    <% for prov in @providers %>
+                        <option value="<%= prov.id %>"><%= prov.name %>  </option>
+                    <% end %>
+                </td>
+            <%end%>
             <td id="error_<%= cli['id'] %>" align="center"><%= nice_cdr_import_error(cli["nice_error"]) %></td>
             <td id="action_<%= cli['id'] %>" align="center">
-              <span onclick="new Ajax.Updater('bad_crd_<%=cli['id']%>', '<%=Web_Dir%>/cdr/fix_bad_cdr/<%=cli['id']%>?cli=' + escape($('cdr_cli_<%=cli['id']%>').value) +'&dst=' + escape($('cdr_dst_<%=cli['id']%>').value) +'&calldate=' + escape($('calldate_<%=cli['id']%>').value) +'&billsec=' + escape($('cdr_billsec_<%=cli['id']%>').value), {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});"> <%= b_add %> </span>
+              <% if session[:cdr_import_csv2][:imp_provider_id].to_i == -1 %>
+
+                  <span onclick="new Ajax.Updater('bad_crd_<%=cli['id']%>', '<%=Web_Dir%>/cdr/fix_bad_cdr/<%=cli['id']%>?cli=' + escape($('cdr_cli_<%=cli['id']%>').value) +'&dst=' + escape($('cdr_dst_<%=cli['id']%>').value) +'&calldate=' + escape($('calldate_<%=cli['id']%>').value) +'&billsec=' + escape($('cdr_billsec_<%=cli['id']%>').value), {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});"> <%= b_add %> </span>
+              <%else%>
+
+                  <span onclick="new Ajax.Updater('bad_crd_<%=cli['id']%>', '<%=Web_Dir%>/cdr/fix_bad_cdr/<%=cli['id']%>?cli=' + escape($('cdr_cli_<%=cli['id']%>').value) +'&dst=' + escape($('cdr_dst_<%=cli['id']%>').value) +'&calldate=' + escape($('calldate_<%=cli['id']%>').value) +'&billsec=' + escape($('cdr_billsec_<%=cli['id']%>').value) +'&provider_id=' + escape($('cdr_provider_<%=cli['id']%>').value), {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});"> <%= b_add %> </span>
+              <%end%>
               <span onclick="new Ajax.Updater('bad_crd_<%=cli['id']%>', '<%=Web_Dir%>/cdr/not_import_bad_cdr/<%=cli['id']%>', {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});"> <%= b_delete %> </span>
             </td>
         <% else %>
@@ -32,6 +50,9 @@
             <td id="date_<%= cli['id'] %>" align="center"><%= cli["col_#{session[:cdr_import_csv2][:imp_calldate]}"] %></td>
             <td id="dst_<%= cli['id'] %>" align="center"><%= cli["col_#{session[:cdr_import_csv2][:imp_dst]}"] %></td>
             <td id="billsec_<%= cli['id'] %>" align="center"><%= cli["col_#{session[:cdr_import_csv2][:imp_billsec]}"] %></td>
+            <% if session[:cdr_import_csv2][:imp_provider_id].to_i > -1 %>
+                <td id="provider_<%= cli['id'] %>" align="center"><%= cli["col_#{session[:cdr_import_csv2][:imp_provider_id]}"] %></td>
+            <%end%>
             <td id="error_<%= cli['id'] %>" align="center"><%= nice_cdr_import_error(cli["nice_error"]) %></td>
             <td id="action_<%= cli['id'] %>" align="center">
               <%= _('This_cdr_wil_not_imported') %></td>
