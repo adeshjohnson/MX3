@@ -126,7 +126,7 @@ class DialplansController < ApplicationController
     end
 
     # checking if selected user belongs to current user.
-    if User.find(:first, :conditions => "id = '#{params[:user].to_i}'").owner_id.to_i != current_user.id.to_i and !current_user.is_admin?
+    if User.find(:first, :conditions => ['id =  ? AND owner_id != ? AND ? != 0 ', params[:user], current_user.id, current_user.id]) and !current_user.is_admin?
        flash[:notice] = _('Dont_be_so_smart')
        redirect_to :action => 'new' and return false
     end
