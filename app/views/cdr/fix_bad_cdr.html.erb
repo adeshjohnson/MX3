@@ -10,7 +10,7 @@
               <select id="cdr_provider_<%=@cdr[0]['id']%>" >
                 <option value="-1"><%= _('Select_provider') %> </option>
                 <% for prov in @providers %>
-                    <option value="<%= prov.id %>"><%= prov.name %>  </option>
+                    <option value="<%= prov.id %>" <%='selected' if prov.id.to_i == @cdr[0]["col_#{session[:cdr_import_csv2][:imp_provider_id]}"].to_i %> ><%= prov.name %>  </option>
                 <% end %>
             </td>
             <%end%>
