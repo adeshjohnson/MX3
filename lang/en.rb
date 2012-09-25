@@ -2773,7 +2773,7 @@ Localization.define('en') do |l|
   l.store 'No_Ivr_Sounds', 'No IVR Sound Files available'
   l.store 'This_page_does_not_include_calls_made_by_resellers_users', 'This page does not include calls made by Users which belong to Resellers. Only calls made by Resellers themselves are in this report.'
   l.store 'This_page_does_not_include_incoming_calls', 'This page does not include incoming calls'
-  l.store 'Asterisk_Servers', 'Asterisk Servers'
+  l.store 'Servers', 'Servers'
   l.store 'PayPal_User_Pays_Transfer_Fee', 'User pays transfer fee'
   l.store 'Reseller_users', 'Resellers\' Users'
   l.store 'Enable_reCAPTCHA', 'reCAPTCHA enable'
