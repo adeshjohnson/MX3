@@ -97,13 +97,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=img[alt=&quot;Sound&quot;]</td>
+	<td>open</td>
+	<td>/billing/functions/spy_channel/20?channel=SIP%2F10.219.62.201-c40daf10</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForPopUp</td>
-	<td>new_window</td>
+	<td>assertTextPresent</td>
+	<td>No Spy Device assigned</td>
 	<td></td>
 </tr>
 <tr>
@@ -177,9 +177,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=img[alt=&quot;Sound&quot;]</td>
+	<td>open</td>
+	<td>/billing/functions/spy_channel/5?channel=SIP%2F10.219.62.200-c40daf10</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td</td>
+	<td>Cannot connect to Asterisk Server</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -278,11 +283,6 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=img[alt=&quot;Sound&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
 	<td>css=img[alt=&quot;Sound&quot;]</td>
 	<td></td>
 </tr>
@@ -385,14 +385,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=img[alt=&quot;Sound&quot;]</td>
+	<td>open</td>
+	<td>/billing/functions/spy_channel/5?channel=SIP%2F10.219.62.200-c40daf10</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForPopUp</td>
-	<td>new_window</td>
-	<td></td>
+	<td>assertText</td>
+	<td>css=td</td>
+	<td>Cannot connect to Asterisk Server</td>
 </tr>
 <!--spy admins user-->
 <tr>
