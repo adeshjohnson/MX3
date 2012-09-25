@@ -2549,7 +2549,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     end
 
 
-    self.responsible_accountant_id = ((params[:user][:responsible_accountant_id].to_i < 1) ? -1 : params[:user][:responsible_accountant_id].to_i)
+    self.responsible_accountant_id = ((params[:user][:responsible_accountant_id].to_i < 1) ? self.responsible_accountant_id : params[:user][:responsible_accountant_id].to_i)
     if params[:warning_email_active]
       if params[:user] and params[:date]
         self.warning_email_hour = params[:user][:warning_email_hour].to_i != -1 ? params[:date][:user_warning_email_hour].to_i : params[:user][:warning_email_hour].to_i
@@ -3443,6 +3443,10 @@ GROUP BY terminators.id;").map { |t| t.id }
         return 0
       end
     end
+
+  def accountant_users
+    User.find(:all, :conditions => {:responsible_accountant_id => self.id});
+  end
 
   private
 

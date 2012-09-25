@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   controller's action, dont know why...
 =end
   def find_responsible_accountants
-    if current_user.is_admin? #and (params[:action] == 'default_user' or (@user.is_user? and @user.owner_id.to_i == 0))
+    if current_user.is_admin? or current_user.is_accountant?#and (params[:action] == 'default_user' or (@user.is_user? and @user.owner_id.to_i == 0))
       @responsible_accountants = User.find(:all, :conditions => {:hidden => '0', :usertype =>'accountant'}, :order => 'username')
     end
   end
