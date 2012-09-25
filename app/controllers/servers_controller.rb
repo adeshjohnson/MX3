@@ -83,6 +83,7 @@ class ServersController < ApplicationController
     @page_title = _('Server_edit')
     @page_icon = 'edit.png'
     @help_link = "http://wiki.kolmisoft.com/index.php/Multi_Server_support"
+    @server_type = @server.server_type
   end
 
   def server_add
