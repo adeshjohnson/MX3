@@ -4,6 +4,8 @@ class Server < ActiveRecord::Base
   has_many :providers
   has_one :gateway
   has_many :activecalls
+  has_many :server_devices
+  has_many :devices, :through => :server_devices
 
   require 'rami'
 

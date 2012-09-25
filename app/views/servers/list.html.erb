@@ -24,6 +24,9 @@
         <th align="right"><%= _('SIP_Port') %></th> -->
         <th align="left"><%= _('Comment') %></th>
         <th align="center"><%= _('Providers') %></th>
+        <% if ccl_active? %>
+          <th align="center"><%= _('Devices') %></th>
+        <% end %> 
         <th></th>
         <th></th>
       </tr>
@@ -56,6 +59,9 @@
             <td id="port_<%= serv.id %>" align="right"><%#= h serv.port %></td> -->
             <td id="comment_<%= serv.id %>" align="left"><%= h serv.comment %></td>
             <td id="providers_<%= serv.id %>" align="center"><%= link_to b_provider + "(" + serv.providers.size.to_s + ")", {:action => 'server_providers', :id => serv.id}, {:id => "providers_link_#{serv.id}"} %></td>
+            <% if ccl_active? %>
+              <td id="devices_<%= serv.id %>" align="center"><%= link_to b_device + "(" + serv.devices.size.to_s + ")", {:action => 'server_devices_list', :id => serv.id} %></td>
+            <% end %>
             <td id="edit_<%= serv.id %>" align="center"><%= link_to b_edit, {:action => 'edit', :id => serv.id}, {:id => "edit_link_#{serv.id}"} %></td>
             <td id="delete_<%= serv.id %>" align="center"><%= link_to b_delete, {:action => 'destroy', :id => serv.id}, {:confirm => _('Are_you_sure'), :method => :post, :id => "delete_link_#{serv.id}"} %></td>
           </tr>
@@ -75,6 +81,9 @@
         <th align="left"><%= text_field_tag 'uptime', "", "class" => "input", :size => "5", :maxlength => "50"  %></th>
         <th align="right"><%= text_field_tag 'server_maxcalllimit', "", "class" => "input", :size => "5", :maxlength => "10"  %></th>
         <th align="left"><%= text_field_tag 'server_comment', "", "class" => "input", :size => "15", :maxlength => "30"  %></th>
+        <% if ccl_active? %>
+          <th></th>
+        <% end %> 
         <th></th>
         <th></th>
         <th align="center" colspan=3><%= image_submit_tag 'icons/add.png', :title => _('Add') %></th>
