@@ -3002,6 +3002,9 @@ Variables: (Names marked with * are required)
     (defined?(AST_18) and AST_18.to_i == 1)
   end
 
+  def ccl_active?
+    (defined?(CCL_Active) and CCL_Active.to_i == 1)
+  end
 
   def allow_pg_extension(name)
     name == 'HSBC' ? mor_11_extend? : true
