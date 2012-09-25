@@ -6,10 +6,7 @@ class Payment < ActiveRecord::Base
 
   after_create { |record| Action.add_action_hash(User.current, {:action => 'manual_payment_created', :data => record.user_id, :data2 => record.amount, :data3 => record.currency, :target_id => record.id, :target_type => 'Payment'}) if record.paymenttype.to_s == 'manual' }
 
-  #commented out because user is now added to belongs_to
-  #def user
-  #  User.find(:first, :include => [:tax], :conditions => ["users.id = ?", self.user_id])
-  #end
+  after_destroy { |record| Action.add_action_hash(User.current, {:action=>'manual_payment_deleted', :data=>record.user_id, :data2=>record.amount, :data3=>record.currency, :target_id=>record.id, :target_type=>'Payment'}) if record.paymenttype.to_s == 'manual' }
 
 
   def invoice
