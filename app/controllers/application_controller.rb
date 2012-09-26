@@ -2184,7 +2184,7 @@ Variables: (Names marked with * are required)
             if time and !time.blank? and (Time.now - time.to_time) > 1.minute
               MorLog.my_debug("Crash email NOT sent : Time.now #{Time.now.to_s(:db)} - Last_Crash_Exception_Time #{time}")
             else
-              send_crash_email(address, subject, message.join("\n"))
+              send_crash_email(address, subject, message.join("\n")) if params[:do_not_log_test_exception].to_i == 0
               Confline.set_value("Last_Crash_Exception_Time", Time.now.to_s(:db), 0)
               MorLog.my_debug('Crash email sent')
             end
