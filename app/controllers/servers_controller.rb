@@ -149,7 +149,7 @@ class ServersController < ApplicationController
     @server.server_ip = params[:server_ip].strip
     @server.stats_url = params[:server_url].strip
     @server.comment = params[:server_comment].strip
-    @server.server_type = params[:server_type].strip
+    @server.server_type = params[:server_type].to_s.strip
 
     @server.ami_username = params[:server_ami_username].strip
     @server.ami_secret = params[:server_ami_secret].strip
