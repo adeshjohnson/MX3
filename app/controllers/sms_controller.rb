@@ -335,6 +335,13 @@ in before filter : user (:find_user)
 in before filter : provider (:find_provider_from_id)
 =end
   def provider_edit
+  
+    # Only admin may edit sms providers. Checking for direct-link attempts 
+    if !current_user.is_admin?  
+    dont_be_so_smart 
+    redirect_to :controller=>:callc, :action => :main and return false 
+    end
+
     @page_title = _('Sms_providers_edit')
     @page_icon = "edit.png"
     @tariffs = current_user.sms_provider_tariffs
