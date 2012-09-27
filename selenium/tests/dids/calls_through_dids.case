@@ -38,11 +38,6 @@
 </tr>
 <!--It shoudl take aprox 1.5s to load /dids/list, bus selenium somehow times out. setting timeout globaly because test requests only that page-->
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/various_calls</td>
 	<td></td>
@@ -50,6 +45,123 @@
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//body</td>
+	<td></td>
+</tr>
+<!--1.1. opening reseller's user-->
+<tr>
+	<td>open</td>
+	<td>/billing/calls/call_info/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Call info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=IAX2*</td>
+	<td></td>
+</tr>
+<!--1.2. opening admin's user-->
+<tr>
+	<td>open</td>
+	<td>/billing/calls/call_info/14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Call info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=IAX2*</td>
+	<td></td>
+</tr>
+<!--1.3. opening rspro_provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/calls/call_info/237</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Call info</td>
+	<td></td>
+</tr>
+<!--Klaida. Admin mato linką ant resellerio providerio pavadinimo, jo neturi matyti. Turi būti paprastas tekstas.-->
+<!--<tr> 	<td>assertElementNotPresent</td> 	<td>link=RSPRO_provider</td> 	<td></td> </tr>-->
+<!--1.4. opening admin provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/calls/call_info/242</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Call info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=common_use_provider</td>
+	<td></td>
+</tr>
+<!--Actions with DIDs-->
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Assigned to user: User Resellers </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Assigned to device*IAX2/105</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=IAX2*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Assigned to user: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Assigned to device* IAX2/1002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=IAX2*</td>
 	<td></td>
 </tr>
 <tr>
