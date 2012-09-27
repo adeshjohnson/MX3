@@ -1250,12 +1250,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=cdr_in_csv_file_number</td>
-	<td>1</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=existing_clis_number</td>
-	<td>1</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1265,12 +1265,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=bad_cdrs</td>
-	<td>7 bad CDRs(Press here to get the list)</td>
+	<td>6 bad CDRs(Press here to get the list)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=fix_cdrs_value</td>
-	<td>7</td>
+	<td>6</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1285,7 +1285,7 @@
 <tr>
 	<td>assertText</td>
 	<td>css=#cdrs_to_insert_value &gt; b</td>
-	<td>1</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1378,8 +1378,13 @@
 	<td>55</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>select</td>
 	<td>id=cdr_provider_3</td>
+	<td>label=Common use provider</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=cdr_provider_4</td>
 	<td>Test Provider</td>
 </tr>
 <tr>
@@ -1387,25 +1392,20 @@
 	<td>id=cdr_provider_8</td>
 	<td>Common use provider</td>
 </tr>
-<tr>
-	<td>select</td>
-	<td>id=cdr_provider_4</td>
-	<td>label=Common use provider</td>
-</tr>
 <!--Čia nors nepasirenku providerio išsaugo pirmą ProviderID-->
-<tr>
-	<td>click</td>
-	<td>css=#action_4 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
-	<td></td>
-</tr>
 <tr>
 	<td>click</td>
 	<td>css=#action_3 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>css=#action_4 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForText</td>
-	<td>id=provider_3</td>
+	<td>id=provider_4</td>
 	<td>1</td>
 </tr>
 <tr>
@@ -1415,13 +1415,13 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=#action_2 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
+	<td>css=#action_7 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>id=provider_2</td>
-	<td>9</td>
+	<td>id=provider_7</td>
+	<td>7</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1436,7 +1436,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=cdrs_to_insert_value</td>
-	<td>1</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
@@ -1481,12 +1481,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=total_calls</td>
-	<td>4</td>
+	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=imported_calls</td>
-	<td>1</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1720,7 +1720,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=provider_46</td>
+	<td>id=provider_47</td>
 	<td>Test provider 2</td>
 </tr>
 <tr>
