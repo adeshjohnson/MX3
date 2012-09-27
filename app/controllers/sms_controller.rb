@@ -73,9 +73,11 @@ class SmsController < ApplicationController
       @user.sms_lcr_id = @lcr.id
       @user.sms_tariff_id = @tariff.id
       flash[:status] = _('User_subscribed_to_sms_service') + ": " + nice_user(@user)
+      Action.add_action_hash(User.current, {:action=>'User_subscribed_to_sms_service', :data=>@user.sms_tariff_id,:target_id=>@user.id, :target_type=>'user'}  )
     else
       @user.sms_service_active = 0
       flash[:status] = _('User_unsubscribed_from_sms_service') + ": " + nice_user(@user)
+      Action.add_action_hash(User.current, {:action=>'User_unsubscribed_from_sms_service', :target_id=>@user.id, :target_type=>'User'}  )
     end
     @user.save
 
@@ -263,8 +265,23 @@ in before filter : user (:find_user)
   def lcr_update_user
     @user.sms_lcr_id = params[:lcr_id] if session[:usertype] == 'admin'
     @user.sms_tariff_id = params[:tariff_id]
-    @user.save
-    flash[:status] = _('User_updated')
+    if  @user.save
+      Action.add_action_hash(User.current, {:action=>'sms_lcr_changed_for_user', :data=>@user.id, :target_id=>@user.sms_lcr_id, :target_type=>'sms_lcr'} )
+      if  @user.usertype.to_s == 'reseller'   and  session[:usertype] == 'admin'
+        users = User.find(:all, :conditions=>{:owner_id => @user.id})
+        if users and users.size.to_i > 0
+          for user in users
+            user.sms_lcr_id = params[:lcr_id]
+            if user.save
+              Action.add_action_hash(User.current, {:action=>'sms_lcr_changed_for_user', :data=>user.id, :target_id=>user.sms_lcr_id, :target_type=>'sms_lcr'}  )
+            end
+          end
+        end
+      end
+      flash[:status] = _('User_updated')
+    else
+      flash[:notice] = _('User_not_updated')
+    end
     redirect_to :action => 'lcr_edit_user', :id => @user.id
   end
 
