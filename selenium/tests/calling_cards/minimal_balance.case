@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://10.0.2.15/" />
+<title>#6453</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">#6453</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/cc_acc_permissions_and_cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Minimal balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=card_min_balance</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>2000000006</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>2000000008</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=minimal_balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_min_balance</td>
+	<td>letters</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad minimal balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=card_min_balance</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>2000000006</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>2000000008</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=minimal_balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_min_balance</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/27</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=card_min_balance</td>
+	<td>22.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Minimal balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=card_min_balance</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>1111111006</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>1111111010</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=minimal_balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_min_balance</td>
+	<td>letters</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad minimal balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=card_min_balance</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>1111111006</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>1111111010</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=minimal_balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_min_balance</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=card_min_balance</td>
+	<td>33.0</td>
+</tr>
+</tbody></table>
+</body>
+</html>
