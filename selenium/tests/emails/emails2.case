@@ -500,6 +500,56 @@
 	<td>At &lt;%= date %&gt; User with ID = &lt;%= user_id %&gt;, with Device ID = &lt;%= device_id %&gt; and CallerID = &lt;%= caller_id %&gt; was blocked because it sent several simultaneous calls in same time.</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/update/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/update/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email was successfully updated</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
