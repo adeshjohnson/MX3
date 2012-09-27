@@ -5,3 +5,8 @@ INSERT INTO `providers` (`id`, `name`, `tech`, `channel`, `login`, `password`, `
 (5, 'Common use provider 2', 'SIP', '', 'Common use provider 2', 'please_change', '0.0.0.0', '5060', 1, 1, 1, 0, 0, '', '', 11, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, 0, 0.000000000000000),
 (6, 'Reseller Test Provider', 'SIP', '', 'Reseller Test Provider', 'please_change', '0.0.0.0', '5060', 1, 1, 6, 0, 0, '', '', 12, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 3, 0, 0.000000000000000),
 (7, 'Reseller Test Provider 2', 'SIP', '', 'Reseller Test Provider 2', 'please_change', '0.0.0.0', '5060', 1, 1, 6, 0, 0, '', '', 13, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 3, 0, 0.000000000000000);
+update users set own_providers=1 where id=3;
+update providers set common_use=1 where id in (6,7);
+INSERT INTO `common_use_providers`(`id`, `provider_id`, `reseller_id`,`tariff_id`) VALUES
+(11,4,3,1),
+(12,5,3,1);
