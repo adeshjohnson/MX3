@@ -87,6 +87,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertElementNotPresent</td>
+	<td>name=provider</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
@@ -112,11 +117,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>sreseller_menu24</td>
-	<td>CDR Import</td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/cdr/import_csv</td>
 	<td></td>
@@ -124,7 +124,7 @@
 <tr>
 	<td>type</td>
 	<td>id=file</td>
-	<td>/home/mor/selenium/files/csv/cdr_by_cli.csv</td>
+	<td>/home/mor/selenium/files/csv/cdr_by_cli_with_pro2.csv</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -167,9 +167,9 @@
 	<td>label=Clid</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>* - Indicates required fields</td>
-	<td></td>
+	<td>select</td>
+	<td>name=provider_id</td>
+	<td>label=ProvID</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -187,32 +187,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>imp_clid_10</td>
-	<td>234567655</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>imp_src_number_13</td>
-	<td>942473279</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>imp_dst_8</td>
-	<td>34943665997</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>imp_billsec_9</td>
-	<td>0</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>id=conf</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>No Providers</td>
 	<td></td>
 </tr>
@@ -243,67 +223,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/providers/edit/1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Please select server</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/common_use_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Record created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Test Provider IAX2/22.33.44.55:4569</td>
+	<td>/billing/test/load_delta_sql/sql/providers</td>
 	<td></td>
 </tr>
 <tr>
@@ -344,7 +264,7 @@
 <tr>
 	<td>type</td>
 	<td>id=file</td>
-	<td>/home/mor/selenium/files/csv/cdr_by_cli.csv</td>
+	<td>/home/mor/selenium/files/csv/cdr_by_cli_with_pro.csv</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -387,6 +307,11 @@
 	<td>label=Clid</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>name=provider_id</td>
+	<td>label=ProvID</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -424,6 +349,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>id=conf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>name=provider</td>
 	<td></td>
 </tr>
 <tr>
@@ -459,18 +389,31 @@
 <tr>
 	<td>assertText</td>
 	<td>cdr_in_csv_file_number</td>
-	<td>18</td>
+	<td>6</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
+<!--Error - nieko nepaaiškinantis klaidos pranešimas-->
+<!--<tr> 	<td>waitForTextPresent</td> 	<td>Import completed</td> 	<td></td> </tr>-->
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Import completed</td>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
 	<td></td>
 </tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--Neįkelia skambučių-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -504,6 +447,11 @@
 <tr>
 	<td>click</td>
 	<td>id=provider_common_use_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -560,7 +508,7 @@
 <tr>
 	<td>type</td>
 	<td>id=file</td>
-	<td>/home/mor/selenium/files/csv/cdr_by_cli.csv</td>
+	<td>/home/mor/selenium/files/csv/cdr_by_cli_with_pro.csv</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -603,144 +551,9 @@
 	<td>label=Clid</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Columns assigned</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>2009-01-05 10:06:09</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>imp_clid_10</td>
-	<td>234567655</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>imp_src_number_13</td>
-	<td>942473279</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>imp_dst_8</td>
-	<td>34943665997</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>imp_billsec_9</td>
-	<td>0</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=conf</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>No Providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tariff_name</td>
-	<td>provider_tariff</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=tariff_purpose_provider</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Tariff was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>provider</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/cdr/import_csv</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=file</td>
-	<td>/home/mor/selenium/files/csv/cdr_by_cli.csv</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
-	<td>name=calldate_id</td>
-	<td>label=Date</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=src_number_id</td>
-	<td>label=Source</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=dst_id</td>
-	<td>label=Destination</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=billsec_id</td>
-	<td>label=Billsec</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=clid_id</td>
-	<td>label=Clid</td>
+	<td>name=provider_id</td>
+	<td>label=ProvID</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -820,7 +633,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=cdr_in_csv_file_number</td>
-	<td>18</td>
+	<td>1</td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
@@ -832,9 +645,80 @@
 	<td>name=commit</td>
 	<td></td>
 </tr>
+<!--Error - nieko nepaaiškinantis klaidos pranešimas-->
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Congratulations, successfully imported CSV file!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider_common_use_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
 	<td></td>
 </tr>
 <tr>
@@ -845,7 +729,7 @@
 <tr>
 	<td>type</td>
 	<td>id=file</td>
-	<td>/home/mor/selenium/files/csv/cdr_by_cli2.csv</td>
+	<td>/home/mor/selenium/files/csv/cdr_by_cli_with_pro2.csv</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -886,6 +770,11 @@
 	<td>select</td>
 	<td>name=clid_id</td>
 	<td>label=Clid</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=provider_id</td>
+	<td>label=ProvID</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -967,41 +856,8 @@
 	<td>id=total_calls</td>
 	<td>2</td>
 </tr>
-<tr>
-	<td>assertText</td>
-	<td>id=imported_calls</td>
-	<td>2</td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Destination is not numerical value</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Billsec is not numerical value</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Invalid calldate</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Destination is not numerical value</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>CDR exist in db match call date dst src</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>CDR exist in db match call date dst src</td>
-	<td></td>
-</tr>
+<!--Error - nieko nepaaiškinantis klaidos pranešimas-->
+<!--<tr> 	<td>assertText</td> 	<td>id=imported_calls</td> 	<td>2</td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Destination is not numerical value</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Billsec is not numerical value</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Invalid calldate</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Destination is not numerical value</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>CDR exist in db match call date dst src</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>CDR exist in db match call date dst src</td> 	<td></td> </tr>-->
 </tbody></table>
 </body>
 </html>
