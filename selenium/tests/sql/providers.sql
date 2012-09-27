@@ -9,4 +9,5 @@ update users set own_providers=1 where id=3;
 update providers set common_use=1 where id in (6,7);
 INSERT INTO `common_use_providers`(`id`, `provider_id`, `reseller_id`,`tariff_id`) VALUES
 (11,4,3,1),
-(12,5,3,1);
+(12,1,3,1),
+(13,5,3,1);
