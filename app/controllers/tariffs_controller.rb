@@ -934,6 +934,7 @@ class TariffsController < ApplicationController
             session[:file] = File.open("/tmp/#{session["temp_tariff_name_csv_#{@tariff.id}".to_sym]}.csv", "rb").read
             Tariff.clean_after_import(session["temp_tariff_name_csv_#{@tariff.id}".to_sym])
             session["temp_tariff_name_csv_#{@tariff.id}".to_sym] = nil
+            flash[:notice] = _('MySQL_permission_problem_contact_Kolmisoft_to_solve_it')
             redirect_to :action => "import_csv2", :id => @tariff.id, :step => "2" and return false
           end
           flash[:status] = _('File_uploaded') if !flash[:notice]
