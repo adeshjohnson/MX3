@@ -194,7 +194,7 @@ in before filter : rule (:find_location_rule)
   #Ticket 3495 ------------
   def import_admins_locations
     @page_title = _('Import_admins_locations_with_rules')
-    if reseller?
+    if reseller?  and (Confline.get_value('disallow_coppy_localization').to_i != 1)
       @locations = Location.find(:all, :conditions => {:user_id => 0}, :order => "name ASC")
     else
       dont_be_so_smart
