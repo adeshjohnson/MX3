@@ -121,7 +121,9 @@
   <% if @user %>
       <tr>
         <th align="left"><%= b_user + _('User') %></th>
-        <td id="user" align="right"> <%= link_nice_user @user %>  </td>
+        <td id="user" align="right">
+          <%= ((owner = User.find(:first, :conditions => ['id = ?', @user.owner_id]) and owner.usertype != "reseller" and !owner.blank?) ? (link_nice_user @user) : nice_user(@user) ) %>
+        </td>
       </tr>
   <% end %>
 
@@ -143,8 +145,9 @@
   <% if user_tariff %>
       <tr>
         <th align="left"><%= _('Tariff') %></th>
-        <% %>
-        <td id="user_tariff" align="right"> <%= link_to user_tariff.name + " (" + user_tariff.purpose + ")", :controller => "tariffs", :action => "rates_list", :id => @user.tariff_id %>  </td>
+        <td id="user_tariff" align="right">
+          <%= ((t_owner = User.find(:first, :conditions => ['id = ?', user_tariff.owner_id]) and t_owner.usertype != "reseller" and !t_owner.blank?) ? (link_to user_tariff.name + " (" + user_tariff.purpose + ")" , :controller => "tariffs", :action => "rates_list", :id => @user.tariff_id) : (user_tariff.name + " (" + user_tariff.purpose + ")") ) %>
+        </td>
       </tr>
   <% end %>
 
@@ -194,7 +197,9 @@
   <% if @provider %>
       <tr>
         <th align="left"><%= b_provider + _('Provider') %></th>
-        <td id="provider" align="right"> <%= link_to @provider.name, :controller => "providers", :action => "list" %>  </td>
+        <td id="provider" align="right"> 
+          <%= ((p_owner = User.find(:first, :conditions => ['id = ?', @provider.user_id]) and p_owner.usertype != "reseller" and !p_owner.blank?) ? (link_to @provider.name, :controller => "providers", :action => "list") : (@provider.name)) %> 
+        </td>
       </tr>
 
       <tr class="row1">
