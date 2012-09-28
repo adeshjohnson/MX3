@@ -1262,6 +1262,186 @@
 	<td>http://127.0.0.1/?Test+User&amp;L+a+s+t+N+a+m+e</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=users</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=sms_lcr_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=users</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=sms_lcr_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lcr_name</td>
+	<td>Second_lcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>LCR was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_providers/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
+	<td>label=sms_prov</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_edit_user/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=lcr_id</td>
+	<td>label=Second_lcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=users</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=sms_lcr_id_value</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=users</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=sms_lcr_id_value</td>
+	<td>2</td>
+</tr>
 </tbody></table>
 </body>
 </html>
