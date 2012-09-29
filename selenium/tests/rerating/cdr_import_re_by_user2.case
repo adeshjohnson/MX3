@@ -396,8 +396,26 @@
 	<td>name=commit</td>
 	<td></td>
 </tr>
-<!--Error - nieko nepaaiškinantis klaidos pranešimas-->
-<!--<tr> 	<td>waitForTextPresent</td> 	<td>Import completed</td> 	<td></td> </tr>-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_calls</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=imported_calls</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=failed_calls</td>
+	<td>0</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/stats/last_calls_stats</td>
@@ -413,7 +431,26 @@
 	<td>name=commit</td>
 	<td></td>
 </tr>
-<!--Neįkelia skambučių-->
+<tr>
+	<td>assertText</td>
+	<td>id=provider_29</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_34</td>
+	<td>Reseller Test Provider 2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_11</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_12</td>
+	<td>User Resellers</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -645,7 +682,26 @@
 	<td>name=commit</td>
 	<td></td>
 </tr>
-<!--Error - nieko nepaaiškinantis klaidos pranešimas-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_calls</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=imported_calls</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=failed_calls</td>
+	<td>0</td>
+</tr>
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Congratulations, successfully imported CSV file!</td>
@@ -829,12 +885,17 @@
 <tr>
 	<td>assertText</td>
 	<td>id=file_lines_number</td>
-	<td>8</td>
+	<td>9</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=cdr_in_csv_file_number</td>
-	<td>2</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bad_cdrs</td>
+	<td>6 bad CDRs(Press here to get the list)</td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
@@ -854,10 +915,68 @@
 <tr>
 	<td>assertText</td>
 	<td>id=total_calls</td>
-	<td>2</td>
+	<td>3</td>
 </tr>
-<!--Error - nieko nepaaiškinantis klaidos pranešimas-->
-<!--<tr> 	<td>assertText</td> 	<td>id=imported_calls</td> 	<td>2</td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Destination is not numerical value</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Billsec is not numerical value</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Invalid calldate</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Destination is not numerical value</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>CDR exist in db match call date dst src</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>CDR exist in db match call date dst src</td> 	<td></td> </tr>-->
+<tr>
+	<td>assertText</td>
+	<td>id=total_calls</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=imported_calls</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=error_msg_4</td>
+	<td>Provider ID not found in DB</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=error_msg_4</td>
+	<td>Provider ID not found in DB</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=error_msg_1</td>
+	<td>Billsec is not numerical value</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=error_msg_3</td>
+	<td>Destination is not numerical value</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_35</td>
+	<td>Reseller Test Provider 2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_38</td>
+	<td>Reseller Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_36</td>
+	<td>Test Provider</td>
+</tr>
 </tbody></table>
 </body>
 </html>
