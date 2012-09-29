@@ -392,14 +392,44 @@
 	<td>label=Reseller Test Provider</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>css=#action_3 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=cdr_provider_9</td>
 	<td>label=Test Provider</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>css=#action_9 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=cdr_provider_12</td>
 	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#action_12 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -408,28 +438,23 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=#action_3 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#action_9 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#action_12 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
 	<td>css=#action_18 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>css=#action_19 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>waitForText</td>
@@ -442,14 +467,44 @@
 	<td>label=Reseller Test Provider 2</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>css=#action_4 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=cdr_provider_5</td>
 	<td>label=Reseller Test Provider</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>css=#action_5 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=cdr_provider_6</td>
 	<td>label=Reseller Test Provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#action_6 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -458,23 +513,13 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=#action_4 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#action_5 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#action_6 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
 	<td>css=#action_11 &gt; span &gt; img[alt=&quot;Add&quot;]</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>waitForText</td>
@@ -499,7 +544,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=cdr_in_csv_file_number</td>
-	<td>13</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -514,12 +559,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=bad_cdrs</td>
-	<td>6 bad CDRs(Press here to get the list)</td>
+	<td>5 bad CDRs(Press here to get the list)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=fix_cdrs_value</td>
-	<td>6</td>
+	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -534,7 +579,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=cdrs_to_insert_value</td>
-	<td>13</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
