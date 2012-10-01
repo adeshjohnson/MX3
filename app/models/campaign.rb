@@ -114,5 +114,60 @@ class Campaign < ActiveRecord::Base
   def user_has_no_credit?
     user.postpaid? and user.balance + user.credit <= 0 and user.credit != -1
   end
+
+=begin
+    analyzes csv file and import numbers
+    requires temporary table name
+    returns number of file lines as numbers and imported lines size
+=end
+  def insert_numbers_from_csv_file(name)
+    CsvImportDb.log_swap('analize')
+    MorLog.my_debug("CSV analize_file #{name}", 1)
+
+    numbers_in_csv_file = (ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name}").to_i).to_s
+
+    #------------ Analyze ------------------------------------
+    # set error flag on duplicates | code : 1
+    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 1 WHERE f_number IN (SELECT number FROM (select f_number as number, count(*) as u from #{name} group by f_number  having u > 1) as imf )")
+
+    # set error flag where number is found in DB | code : 2
+    ActiveRecord::Base.connection.execute("UPDATE #{name} LEFT JOIN adnumbers ON (replace(f_number, '\\r', '') = adnumbers.number AND adnumbers.campaign_id = #{self.id}) SET f_error = 1, nice_error = 2 WHERE adnumbers.id IS NOT NULL AND f_error = 0")
+
+    # set error flag on not int numbers | code : 3
+    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 3 WHERE replace(f_number, '\\r', '') REGEXP '^[0-9]+$' = 0")
+
+    #------------ Import -------------------------------------
+    CsvImportDb.log_swap('create_adnumbers_start')
+    MorLog.my_debug("CSV create_adnumbers #{name}", 1)
+    count = 0
+    s = [] ; ss=[]
+    ["status", "number", "campaign_id"].each{ |col|
+
+      case col
+        when "status"
+          s << "'new'"
+        when "campaign_id"
+          s << self.id.to_s
+        when "number"
+          s <<  "replace(f_number, '\\r', '')"
+      end
+      ss << col
+    }
+
+    s1 = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 0").to_i
+    n = s1/1000 +1
+    n.times{| i|
+      nr_sql = "INSERT INTO adnumbers (#{ss.join(',')})
+                    SELECT #{s.join(',')} FROM #{name}
+                    WHERE f_error = 0 LIMIT #{i * 1000}, 1000"
+      begin
+        ActiveRecord::Base.connection.execute(nr_sql)
+        count += ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 0 LIMIT #{i * 1000}, 1000").to_i
+      end
+    }
+
+    CsvImportDb.log_swap('create_adnumbers_end')
+    return numbers_in_csv_file, count
+  end
 	 
 end

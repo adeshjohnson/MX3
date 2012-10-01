@@ -211,58 +211,55 @@ class AutodialerController < ApplicationController
 
 
     if @step == 2
-      if params[:file] or session[:file]
-        if  params[:file].size.to_i == 0
-          flash[:notice] = _('Please_select_file')
-          redirect_to :action => "import_numbers_from_file", :id => @campaign.id, :step => "1" and return false
-        end
-        if params[:file]
-          @file = params[:file]
+      if params[:file]
+        @file = params[:file]
+        if  @file.size > 0
           if !@file.respond_to?(:original_filename) or !@file.respond_to?(:read) or !@file.respond_to?(:rewind)
-            #MorLog.my_debug(@file.class.to_s)
             flash[:notice] = _('Please_select_file')
-            redirect_to :action => "import_numbers_from_file", :id => @campaign.id, :step => "1" and return false
+            redirect_to :action => "import_numbers_from_file", :id => @campaign.id, :step => "0" and return false
+          end
+          if get_file_ext(@file.original_filename, "csv") == false
+            @file.original_filename
+            flash[:notice] = _('Please_select_CSV_file')
+            redirect_to :action => "import_numbers_from_file", :id => @campaign.id, :step => "0" and return false
           end
           @file.rewind
-          session[:file] = @file.read if @file.size > 0
-        else
-          @file = session[:file]
-        end
-        session[:file_size] = @file.size
-        if session[:file_size].to_i == 0
-          flash[:notice] = _('Please_select_file')
-          redirect_to :action => "import_numbers_from_file", :id => @campaign.id, :step => "1" and return false
-        end
+          file = @file.read
+          session[:file_size] = file.size
 
-        @file = session[:file]
+          tname = CsvImportDb.save_file(@campaign.id, file, "/tmp/")
+          colums ={}
+          colums[:colums] = [{:name=>"f_number", :type=>"VARCHAR(50)", :default=>''},{:name=>"f_error", :type=>"INT(4)", :default=>0}, {:name=>"nice_error", :type=>"INT(4)", :default=>0}, {:name=>"not_found_in_db", :type=>"INT(4)", :default=>0}, {:name=>"id", :type=>'INT(11)', :inscrement=>' NOT NULL auto_increment '}]
+          begin
+            CsvImportDb.load_csv_into_db(tname, ',', '.', '', "/tmp/", colums)
+
+            @total_numbers, imported_numbers = @campaign.insert_numbers_from_csv_file(tname)
 
 
-        arr = @file.split("\n")
-        @total_numbers, imported_numbers = arr.size, 0
+            if @total_numbers == imported_numbers
+              flash[:status] = _('Numbers_imported')
+            else
+              flash[:notice] = _('M_out_of_n_numbers_imported', imported_numbers, @total_numbers)
+            end
 
-        for line in arr
-          if line.strip =~ /\A(\+|\#){0,1}\d+\Z/
-            num = Adnumber.new
-            num.number = line.strip
-            num.status = 'new'
-            num.campaign_id = @campaign.id
-            num.save
-            imported_numbers += 1
+            redirect_to :action => 'campaign_numbers', :id => @campaign.id
+
+          rescue Exception => e
+            MorLog.log_exception(e, Time.now.to_i, params[:controller], params[:action])
+            CsvImportDb.clean_after_import(tname, "/tmp/")
+            flash[:notice] = _('MySQL_permission_problem_contact_Kolmisoft_to_solve_it')
+            redirect_to :action => "import_numbers_from_file", :id => @campaign.id, :step => "0" and return false
           end
-        end
-
-        if @total_numbers == imported_numbers
-          flash[:status] = _('Numbers_imported')
         else
-          flash[:notice] = _('M_out_of_n_numbers_imported', imported_numbers, @total_numbers)
+          session["temp_tariff_name_csv_#{@tariff.id}".to_sym] = nil
+          flash[:notice] = _('Please_select_file')
+          redirect_to :action => "import_numbers_from_file", :id => @campaign.id, :step => "0" and return false
         end
       else
-        flash[:notice] = _('Numbers_not_imported')
+        session["temp_tariff_name_csv_#{@tariff.id}".to_sym] = nil
+        flash[:notice] = _('Please_upload_file')
+        redirect_to :action => "import_numbers_from_file", :id => @campaign.id, :step => "0" and return false
       end
-
-
-      redirect_to :action => 'campaign_numbers', :id => @campaign.id
-
     end
 
   end
