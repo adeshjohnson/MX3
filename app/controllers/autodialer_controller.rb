@@ -251,12 +251,10 @@ class AutodialerController < ApplicationController
             redirect_to :action => "import_numbers_from_file", :id => @campaign.id, :step => "0" and return false
           end
         else
-          session["temp_tariff_name_csv_#{@tariff.id}".to_sym] = nil
           flash[:notice] = _('Please_select_file')
           redirect_to :action => "import_numbers_from_file", :id => @campaign.id, :step => "0" and return false
         end
       else
-        session["temp_tariff_name_csv_#{@tariff.id}".to_sym] = nil
         flash[:notice] = _('Please_upload_file')
         redirect_to :action => "import_numbers_from_file", :id => @campaign.id, :step => "0" and return false
       end
