@@ -33,84 +33,11 @@
          end
 
       %>
-      <script type="text/javascript">
-          //<![CDATA[
-          Event.observe(window, 'load', function () {
-              var dyncheck = $('dynamic_check');
-              var port = $('port');
-              var host = $('host');
-              var ipauth = $('ip_authentication');
-              var qualify_no = $('qualify_no'); 
- 	      var qualify_yes = $('qualify_yes'); 
- 	      var qualify_time = $('qualify_time') 
- 	 
- 	      Event.observe(qualify_yes, 'change', function() { 
- 	        qualify_time.disabled =  false; 
- 	      }); 
- 	      Event.observe(qualify_no, 'change', function() { 
- 	        qualify_time.disabled = true; 
- 	      }); 
 
-              Event.observe(dyncheck, 'click', function () {
-                  if (dyncheck.checked) {
-                      host.disabled = true;
-                      port.disabled = true;
-                      host.value = "dynamic";
-                      if (ipauth) {
-                          ipauth.disabled = true;
-                          document.getElementById('view_ip').innerHTML = '';
-                      }
-                  } else {
-                      host.disabled = false;
-                      port.disabled = false;
-                      host.value = "";
-                      if (ipauth) {
-                          ipauth.disabled = false;
-                      }
-                  }
-              });
-          });
-          //]]>
-      </script>
-      <tr>
-        <td> <%= _('Host') %>:</td>
-        <td>
-          <% if device_host == "dynamic" %>
-              <%= text_field_tag 'host', device_host, "class" => "input", :disabled => "disabled", :onkeyup => "add_ip(this.value);" %>
-              <%= _("Dynamic") %>?
-              <%= check_box_tag 'dynamic_check', value = "1", checked = true %>
-          <% else %>
-              <%= text_field_tag 'host', device_host, "class" => "input", :onkeyup => "add_ip(this.value);" %>
-              <%= _("Dynamic") %>?
-              <%= check_box_tag 'dynamic_check', value = "1", checked = false %>
-          <% end %>
-          <script type="text/javascript">
-              //<![CDATA[
-              function add_ip(value) {
-                  document.getElementById('view_ip').innerHTML = value;
-              }
-          </script>
-        </td>
-      </tr>
 
-      <tr>
-        <td> <%= _('IP_Address') %>:</td>
-        <td><b><span id="view_ip"><%= device_ipaddr %> </span></b></td>
-      </tr>
-
-      <tr>
-        <td> <%= _('Port') %>:</td>
-        <td>
-          <% if device_host != "dynamic" %>
-              <%= text_field_tag 'port', device_port, "class" => "input" %>
-          <% else %>
-              <%= text_field_tag 'port', device_port, "class" => "input", :disabled => "disabled" %>
-          <% end %>
-        </td>
-      </tr>
 
       <% if !@device.username.blank? %>
-          <tr>
+          <tr id='dev_reg_line'>
             <td id='registration_expire'>
               <% if @device_type == "SIP" %>
                   <%= _('Registration_will_expire') %>:
@@ -213,3 +140,5 @@
 
   </td>
 </tr>
+
+

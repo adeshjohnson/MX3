@@ -288,6 +288,9 @@ class DevicesController < ApplicationController
     @device.set_old_name
     params[:device][:description]=params[:device][:description].to_s.strip
 
+    params[:ip_authentication] = params[:ip_authentication_dynamic].to_i == 1 ? 1 : 0
+    params[:dynamic_check]  = params[:ip_authentication_dynamic].to_i == 2 ? 1 : 0
+
 
     @devicetypes = @device.load_device_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?).map { |dt| dt.name }
     @devicetypes << "FAX"

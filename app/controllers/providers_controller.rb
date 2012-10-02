@@ -349,6 +349,10 @@ class ProvidersController < ApplicationController
 
     params[:provider][:call_limit] = 0 if params[:provider][:call_limit] and params[:provider][:call_limit].to_i < 0
 
+    params[:ip_authentication] = params[:ip_authentication_dynamic].to_i == 1 ? 1 : 0
+    params[:hostname_ip] = params[:prov_host].to_i == 1 ? 'hostname' : 'ip'
+    params[:hostname_ip] = params[:ip_authentication_dynamic].to_i == 2 ? 'dynamic' : params[:hostname_ip]
+
     @provider.set_old
 
     unless @provider.is_dahdi?

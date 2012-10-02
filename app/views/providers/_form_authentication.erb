@@ -1,0 +1,210 @@
+<tr>
+  <td height="20"></td>
+</tr>
+<% if !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_2] != 2) %>
+    <script type="text/javascript">
+        //<![CDATA[
+        Event.observe(window, 'load', function () {
+            var ipauth = $('ip_authentication_dynamic_1');
+            var dynamic = $('ip_authentication_dynamic_2');
+            hide_ip_elements();
+
+
+            Event.observe(ipauth, 'click', function () {
+                hide_ip_elements();
+            });
+
+            Event.observe(dynamic, 'click', function () {
+                hide_ip_elements();
+            });
+
+            Event.observe($('prov_host_1'), 'click', function () {
+                hide_hostname_elements();
+            });
+
+            Event.observe($('prov_host_2'), 'click', function () {
+                hide_hostname_elements();
+            });
+        });
+
+        function hide_ip_elements() {
+            if ($('ip_authentication_dynamic_2').checked) {
+                $('ip_auth1').style.display = "none";
+                $('server_hostname_row').style.display = "none";
+                $('server_ip_row').style.display = "none";
+                $('server_port_row').style.display = "none";
+                $('auth_username').style.display = "none";
+                $('auth_secret').style.display = "none";
+
+                $('registration_check_prov').style.display = "none";
+                $('reg_extension_row').style.display = "none";
+                $('reg_line_row').style.display = "none";
+                $('reg_register_row').style.display = "none";
+
+                $('ip_dyn1').style.display = "";
+                $('ip_dyn2').style.display = "";
+                $('ip_dyn3').style.display = "";
+                $('ip_dyn4').style.display = "";
+                hide_hostname_elements();
+
+            } else {
+                $('qualify_no').checked = true;
+                $('qualify_yes').checked = false;
+                $('qualify_yes').disabled = true;
+
+                $('ip_auth1').style.display = "";
+                $('server_hostname_row').style.display = "";
+
+                $('server_port_row').style.display = "";
+                $('auth_username').style.display = "";
+                $('auth_secret').style.display = "";
+
+                $('registration_check_prov').style.display = "";
+                $('reg_extension_row').style.display = "";
+                $('reg_line_row').style.display = "";
+                $('reg_register_row').style.display = "none";
+
+                $('ip_dyn1').style.display = "none";
+                $('ip_dyn2').style.display = "none";
+                $('ip_dyn3').style.display = "none";
+                $('ip_dyn4').style.display = "none";
+                hide_hostname_elements();
+                show_register_check_box($('provider_login').value);
+
+            }
+        }
+
+        function hide_hostname_elements(){
+            if ($('prov_host_1').checked) {
+                $('server_ip_row').style.display = "none";
+            }else{
+                $('server_ip_row').style.display = "";
+            }
+        }
+
+        function show_register_check_box(value){
+         if (value == ''){
+             $('registration_check_prov').style.display = "none";
+             $('register').checked = false;
+         }else{
+             $('registration_check_prov').style.display = "";
+         }
+         show_register_lines();
+        }
+
+        function show_register_lines() {
+         if ($('register').checked == true) {
+             $('reg_extension_row').style.display = "";
+             $('reg_line_row').style.display = "";
+             $('reg_register_row').style.display = "";
+         }else{
+             $('reg_extension_row').style.display = "none";
+             $('reg_line_row').style.display = "none";
+             $('reg_register_row').style.display = "none";
+         }
+         register_line_info();
+        }
+
+        function register_line_info(){
+            line = "register => ";
+                if ($('reg_extension').checked == true) {
+                    line += $("provider_login").value + ":" + $("provider_password").value + "@" + $("provider_server_ip").value + ":" + $("provider_port").value + "/" + $('provider_reg_extension').value;
+                } else {
+                    line += $('provider_reg_line').value
+                }
+            $('reg_register').innerHTML = line;
+        }
+        //]]>
+    </script>
+<tr>
+  <td class="bottom_border" colspan=2>
+    <b><%= _('Authentication') %></b>
+  </td>
+</tr>
+<tr>
+  <td height="10"></td>
+</tr>
+
+<% if  !@provider.is_dahdi? %>
+
+<tr <%= tooltip(_('IP_Authentication'), _('IP_Authentication_Explanation')) %>>
+  <td id="ip_auth_name"> <%= _('IP_Authentication') %>: <%= radio_button_tag 'ip_authentication_dynamic', 1, @device.username.blank?%> </td>
+  <td id="ip_auth_name2"> <%= _('Dynamic_Username_Password') %>: <%= radio_button_tag 'ip_authentication_dynamic', 2, !@device.username.blank? %> </td>
+</tr>
+
+<tr id="ip_auth1">
+  <td id="prov_host"> <%= radio_button_tag 'prov_host', 1, @provider.type.to_s == "hostname"%> <%= _('Hostname_/_IP') %></td>
+  <td id="prov_host2"> <%= radio_button_tag 'prov_host', 2, @provider.type.to_s == "ip"%> <%= _('Hostname_+_IP') %> </td>
+</tr>
+
+<tr id="server_hostname_row">
+  <td> <%= _('Hostname') %>:</td>
+  <td><%= text_field 'provider', 'server_ip', "class" => "input" %></td>
+</tr>
+<tr id="server_ip_row">
+  <td><%= _('Server_IP') %>:</td>
+  <td><%= text_field 'device', 'ipaddr', "class" => "input", :onkeyup=>'register_line_info();' %></td>
+</tr>
+<tr id="server_port_row">
+  <td> <%= _('Port') %>:</td>
+  <td><%= text_field 'provider', 'port', "class" => "input", :onkeyup=>'register_line_info();' %></td>
+</tr>
+
+
+<tr id="auth_username">
+  <td> <%= _('Login/Username') %>:</td>
+  <td> <%= text_field 'provider', 'login', "class" => "input", :onkeyup=>"show_register_check_box(this.value);" %></td>
+</tr>
+
+<tr id="auth_secret">
+  <td> <%= _('Password') %>:</td>
+  <td> <%= text_field 'provider', 'password', "class" => "input", :onkeyup=>'register_line_info();' %></td>
+</tr>
+
+
+
+    <tr id="registration_check_prov">
+      <td><%= _('Register') %>:</td>
+      <td><%= check_box_tag 'register', "1", @provider.register == 1, {:onClick => "show_register_lines();"} %></td>
+    </tr>
+
+    <tr id="reg_extension_row" style="display:none;">
+      <td><%= radio_button_tag('reg', 'extension', @provider.reg_line.to_s.length == 0, {:onClick => "register_line_info();"}) %> &nbsp; <%= raw _('Register_extension').gsub(" ", "&nbsp;") %>:</td>
+      <td><%= text_field('provider', 'reg_extension', {"class" => "input", :onkeyup=>'register_line_info();'}) %></td>
+    </tr>
+
+    <tr id="reg_line_row" style="display:none;">
+      <td><%= radio_button_tag('reg', 'line', @provider.reg_line.to_s.length > 0, {:onClick => "register_line_info();"}) %> &nbsp; <%= raw _('Register_line').gsub(" ", "&nbsp;") %>:</td>
+      <td><%= text_field('provider', 'reg_line', {"class" => "input", :size => "60", :onkeyup=>'register_line_info();'}) %></td>
+    </tr>
+
+    <tr id="reg_register_row" style="display:none;">
+      <td colspan="2" id="reg_register">register =></td>
+    </tr>
+
+        <tr id='ip_dyn1'>
+          <td id="username_name"><%= _('username') %>:</td>
+          <td id="username_value"><%=  text_field 'provider', 'login', "class" => "input"%></td>
+        </tr>
+        <tr id='ip_dyn2'>
+          <td id="secret_name"> <%= _('secret') %>:</td>
+          <td id="secret_value"><%= text_field 'provider', 'password', "class" => "input" %></td>
+        </tr>
+
+        <tr id='ip_dyn3'>
+          <td id="ip_add_name_d"><%= _('IP_Address') %>:</td>
+          <td id="ip_add_value_d">  <%= @device.host%></td>
+        </tr>
+
+        <tr id='ip_dyn4'>
+          <td id="ip_port_name_d"><%= _('Port') %>:</td>
+          <td id="ip_port_value_d"><%= @device.port%></td>
+        </tr>
+
+<% else %>
+    <tr>
+      <td> <%= _('Channel') %>:</td>
+      <td> <%= text_field 'provider', 'channel', "class" => "input" %></td>
+    </tr>
+<% end %>
+<% end %>
