@@ -21,21 +21,35 @@
                 if ($('ip_authentication_dynamic_2').checked) {
                     $('ip_auth1').style.display = "none";
                     $('ip_auth2').style.display = "none";
+                    $('ip_auth1').disabled = true;
+                    $('ip_auth2').disabled = true;
                     $('ip_dyn1').style.display = "";
                     $('ip_dyn2').style.display = "";
                     $('ip_dyn3').style.display = "";
                     $('ip_dyn4').style.display = "";
                     $('ip_dyn4').style.display = "";
-                    <%= "$('dev_reg_line').style.display = '';" if !@device.username.blank? %>
+                    $('ip_dyn1').disabled = false;
+                    $('ip_dyn2').disabled = false;
+                    $('ip_dyn3').disabled = false;
+                    $('ip_dyn4').disabled = false;
+                    $('ip_dyn4').disabled = false;
+                    <%= "$('dev_reg_line').style.display = '';$('dev_reg_line').disabled = false;" if !@device.username.blank? %>
 
                 } else {
                     $('ip_auth1').style.display = "";
                     $('ip_auth2').style.display = "";
+                    $('ip_auth1').disabled = false;
+                    $('ip_auth2').disabled = false;
                     $('ip_dyn1').style.display = "none";
                     $('ip_dyn2').style.display = "none";
                     $('ip_dyn3').style.display = "none";
                     $('ip_dyn4').style.display = "none";
-                    <%= "$('dev_reg_line').style.display = 'none';" if !@device.username.blank? %>
+                    $('ip_dyn1').disabled = true;
+                    $('ip_dyn2').disabled = true;
+                    $('ip_dyn3').disabled = true
+                    $('ip_dyn4').disabled = true;
+                    $('ip_dyn4').disabled = true;
+                    <%= "$('dev_reg_line').style.display = 'none';$('dev_reg_line').disabled = true;" if !@device.username.blank? %>
 
                 }
             }

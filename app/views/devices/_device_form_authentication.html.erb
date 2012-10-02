@@ -2,50 +2,59 @@
   <td height="20"></td>
 </tr>
 <% if not @new_device and @device_type != "Virtual" %>
-    <script type="text/javascript">
-        //<![CDATA[
-        Event.observe(window, 'load', function () {
-            var ipauth = $('ip_authentication');
-            var name = $('device_name');
-            var auth_username = $('auth_username');
-            var auth_secret = $('auth_secret');
-            var secret = $('device_secret');
-            var dyncheck = $('dynamic_check');
 
-            if (ipauth.checked) {
-                auth_username.style.display = "none";
-                auth_secret.style.display = "none";
-            } else {
-                auth_username.style.display = "";
-                auth_secret.style.display = "";
-            }
+    <tr>
+      <td class="bottom_border">
+        <b><%= _('Authentication') %></b>
+      </td>
+    </tr>
+    <tr>
+      <td height="10"></td>
+    </tr>
+    <% if !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_2] != 2) %>
+        <script type="text/javascript">
+            //<![CDATA[
+            Event.observe(window, 'load', function () {
+                var ipauth = $('ip_authentication');
+                var name = $('device_name');
+                var auth_username = $('auth_username');
+                var auth_secret = $('auth_secret');
+                var secret = $('device_secret');
+                var dyncheck = $('dynamic_check');
 
-            if (dyncheck.checked && ipauth) {
-                ipauth.disabled = true;
-            }
-
-            Event.observe(ipauth, 'click', function () {
                 if (ipauth.checked) {
                     auth_username.style.display = "none";
                     auth_secret.style.display = "none";
-                    dyncheck.checked = false;
-                    dyncheck.disabled = true;
-                    secret.value = "";
-                    $('qualify_no').checked = true;
-                    $('qualify_yes').checked = false;
-                    $('qualify_yes').disabled = true;
                 } else {
-                    name.value = $('device_extension').value;
                     auth_username.style.display = "";
                     auth_secret.style.display = "";
-                    dyncheck.disabled = false;
-                    $('qualify_yes').disabled = false;
                 }
+
+                if (dyncheck.checked && ipauth) {
+                    ipauth.disabled = true;
+                }
+
+                Event.observe(ipauth, 'click', function () {
+                    if (ipauth.checked) {
+                        auth_username.style.display = "none";
+                        auth_secret.style.display = "none";
+                        dyncheck.checked = false;
+                        dyncheck.disabled = true;
+                        secret.value = "";
+                        $('qualify_no').checked = true;
+                        $('qualify_yes').checked = false;
+                        $('qualify_yes').disabled = true;
+                    } else {
+                        name.value = $('device_extension').value;
+                        auth_username.style.display = "";
+                        auth_secret.style.display = "";
+                        dyncheck.disabled = false;
+                        $('qualify_yes').disabled = false;
+                    }
+                });
             });
-        });
-        //]]>
-    </script>
-    <% if !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_2] != 2) %>
+            //]]>
+        </script>
         <tr>
           <td class="bottom_border">
             <b><%= _('Authentication') %></b>
