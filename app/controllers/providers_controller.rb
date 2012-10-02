@@ -349,9 +349,20 @@ class ProvidersController < ApplicationController
 
     params[:provider][:call_limit] = 0 if params[:provider][:call_limit] and params[:provider][:call_limit].to_i < 0
 
+    if params[:ip_authentication_dynamic].to_i > 0
     params[:ip_authentication] = params[:ip_authentication_dynamic].to_i == 1 ? 1 : 0
+    if !params[:prov_host].blank?
     params[:hostname_ip] = params[:prov_host].to_i == 1 ? 'hostname' : 'ip'
     params[:hostname_ip] = params[:ip_authentication_dynamic].to_i == 2 ? 'dynamic' : params[:hostname_ip]
+    else
+      params[:hostname_ip] =  @provider.type.to_s
+      end
+    else
+       params[:ip_authentication] = 1 if @provider.device.username.blank?
+       if !params[:prov_host].blank?
+         params[:hostname_ip] =  @provider.type.to_s
+       end
+      end
 
     @provider.set_old
 
