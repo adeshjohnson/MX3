@@ -47,15 +47,15 @@
                 $('ip_dyn4').style.display = "";
 
                 $('ip_auth1').disabled = true;
-                $('server_hostname_row').disabled = true;
-                $('server_ip_row').disabled = true;
-                $('server_port_row').disabled = true;
-                $('auth_username').disabled = true;
-                $('auth_secret').disabled = true;
+                $('provider_server_ip').disabled = true;
+                $('device_ipaddr').disabled = true;
+                $('provider_port').disabled = true;
+                $('provider_login').disabled = true;
+                $('provider_password').disabled = true;
 
                 $('registration_check_prov').disabled = true;
-                $('reg_extension_row').disabled = true;
-                $('reg_line_row').disabled = true;
+                $('provider_reg_extension').disabled = true;
+                $('provider_reg_line').disabled = true;
                 $('reg_register_row').disabled = true;
 
                 $('ip_dyn1').disabled = false;
@@ -89,15 +89,15 @@
 
 
                 $('ip_auth1').disabled = false;
-                $('server_hostname_row').disabled = false;
+                $('provider_server_ip').disabled = false;
 
-                $('server_port_row').disabled = false;
-                $('auth_username').disabled = false;
-                $('auth_secret').disabled = false;
+                $('provider_port').disabled = false;
+                $('provider_login').disabled = false;
+                $('provider_password').disabled = false;
 
                 $('registration_check_prov').disabled = false;
-                $('reg_extension_row').disabled = false;
-                $('reg_line_row').disabled = false;
+                $('provider_reg_extension').disabled = false;
+                $('provider_reg_line').disabled = false;
                 $('reg_register_row').disabled = true;
 
                 $('ip_dyn1').disabled = true;
@@ -113,10 +113,10 @@
         function hide_hostname_elements() {
             if ($('prov_host_1').checked) {
                 $('server_ip_row').style.display = "none";
-                $('server_ip_row').disabled = true;
+                $('device_ipaddr').disabled = true;
             } else {
                 $('server_ip_row').style.display = "";
-                $('server_ip_row').disabled = true;
+                $('device_ipaddr').disabled = false;
             }
         }
 
