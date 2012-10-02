@@ -96,6 +96,56 @@
             </table>
             </td>
         </tr>
+        <%else%>
+        <tr>
+          <td valign="top">
+            <table>
+              <tr <%= tooltip(_('IP_Authentication'), _('IP_Authentication_Explanation')) %> >
+                <td id="ip_auth_name"> <%= _('IP_Authentication') %>: <%= radio_button_tag 'ip_authentication_dynamic', 1, @device.username.blank?, :disabled=>true%> </td>
+                <td id="ip_auth_name2"> <%= _('Dynamic_Username_Password') %>: <%= radio_button_tag 'ip_authentication_dynamic', 2, !@device.username.blank?, :disabled=>true %> </td>
+              </tr>
+
+              <%if @device.username.blank?%>
+              <tr>
+                <td height="20"></td>
+              </tr>
+
+              <tr id='ip_auth1a'>
+                <td><%= _('IP_Address') %>:</td>
+                <td id="ip_add_value_a">  <%= @device.host%></td>
+              </tr>
+
+              <tr id='ip_auth2a'>
+                <td><%= _('Port') %>:</td>
+                <td id="ip_port_valuea"><%=  @device.port%></td>
+              </tr>
+
+                  <%else%>
+
+              <tr id='ip_dyn1a'>
+                <%# not change , this is the variable Rename%>
+                <td id="username_name"><%= _('username') %>:</td>
+                <td id="username_value"><%= @device.name %></td>
+              </tr>
+              <tr id='ip_dyn2a'>
+                <td> <%= _('secret') %>:</td>
+                <td id="secret_value_a"><%= @device.secret %></td>
+              </tr>
+
+              <tr id='ip_dyn3a'>
+                <td id="ip_add_name_da"><%= _('IP_Address') %>:</td>
+                <td id="ip_add_value_da">  <%= @device.host%></td>
+              </tr>
+
+              <tr id='ip_dyn4a'>
+                <td id="ip_port_name_da"><%= _('Port') %>:</td>
+                <td id="ip_port_value_da"><%= @device.port%></td>
+              </tr>
+
+               <%end%>
+            </table>
+          </td>
+        </tr>
 
     <% end %>
 
