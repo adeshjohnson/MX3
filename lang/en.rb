@@ -4464,6 +4464,8 @@ Localization.define('en') do |l|
   l.store 'Hostname_/_IP', 'Hostname/IP'
   l.store 'Hostname_+_IP', 'Hostname+IP'
   l.store 'Click_here_to_see_bad_numbers', 'Click here to see bad numbers'
+  l.store 'Device_Autentication', 'Device Autentication'
+  l.store 'Decive_CallerID_Name ', 'Decive CallerID Name '
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
