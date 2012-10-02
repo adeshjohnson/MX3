@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.163" />
+<link rel="selenium.base" href="" />
 <title>providers_register</title>
 </head>
 <body>
@@ -53,7 +53,7 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td>off</td>
 </tr>
 <tr>
@@ -63,12 +63,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>provider_login</td>
+	<td>id=provider_login</td>
 	<td>testinis</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>provider_password</td>
+	<td>id=provider_password</td>
 	<td>testinis</td>
 </tr>
 <tr>
@@ -106,6 +106,12 @@
 	<td>reg_register</td>
 	<td></td>
 </tr>
+<!--pridėjau ip_authentication click'ą, antraip nerodo register => testinis.......-->
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication_dynamic_1</td>
+	<td></td>
+</tr>
 <tr>
 	<td>waitForTextPresent</td>
 	<td>register =&gt; testinis:testinis@22.33.44.55:4569/aaaaaaaaaaaaaaaaa</td>
@@ -131,6 +137,7 @@
 	<td>/billing/providers/edit/1</td>
 	<td></td>
 </tr>
+<!--neišsaugo logino ir passwordo-->
 <tr>
 	<td>assertValue</td>
 	<td>provider_login</td>
@@ -143,7 +150,7 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td>off</td>
 </tr>
 <tr>
