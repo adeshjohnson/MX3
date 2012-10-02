@@ -2,6 +2,14 @@
   <td height="20"></td>
 </tr>
 <% if not @new_device and @device_type != "Virtual" %>
+    <tr>
+      <td class="bottom_border">
+        <b><%= _('Authentication') %></b>
+      </td>
+    </tr>
+    <tr>
+      <td height="10"></td>
+    </tr>
     <% if !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_2] != 2) %>
         <script type="text/javascript">
             //<![CDATA[
@@ -55,14 +63,7 @@
             }
             //]]>
         </script>
-        <tr>
-          <td class="bottom_border">
-            <b><%= _('Authentication') %></b>
-          </td>
-        </tr>
-        <tr>
-          <td height="10"></td>
-        </tr>
+
         <tr>
           <td valign="top">
             <table>
