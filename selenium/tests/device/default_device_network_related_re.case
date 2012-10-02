@@ -220,21 +220,6 @@
 	<td>on</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=host</td>
-	<td>2.2.2.2</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -264,21 +249,6 @@
 	<td>waitForTextPresent</td>
 	<td>Device created</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=host</td>
-	<td>2.2.2.2</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=view_ip</td>
-	<td>2.2.2.2</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -341,11 +311,6 @@
 	<td>id=qualify_time</td>
 	<td>5000</td>
 </tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=dynamic_check</td>
-	<td>on</td>
-</tr>
 <!--DEFAULT DEVICE-->
 <tr>
 	<td>open</td>
@@ -395,21 +360,6 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=host</td>
-	<td>2.2.2.2</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=view_ip</td>
-	<td>2.2.2.2</td>
-</tr>
-<tr>
-	<td>assertValue</td>
 	<td>id=device_nat_no</td>
 	<td>on</td>
 </tr>
@@ -437,16 +387,6 @@
 	<td>assertValue</td>
 	<td>id=qualify_time</td>
 	<td>2000</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -478,21 +418,6 @@
 	<td>open</td>
 	<td>/billing/devices/default_device</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=host</td>
-	<td>2.2.2.2</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=view_ip</td>
-	<td>2.2.2.2</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -815,6 +740,11 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
