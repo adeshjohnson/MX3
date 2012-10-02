@@ -68,9 +68,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
+	<td>click</td>
+	<td>id=ip_authentication_dynamic_1</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertVisible</td>
@@ -89,13 +89,8 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication</td>
+	<td>id=ip_authentication_dynamic_2</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>assertNotVisible</td>
@@ -114,13 +109,8 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
 </tr>
 <tr>
 	<td>assertVisible</td>
@@ -134,31 +124,6 @@
 </tr>
 <tr>
 	<td>assertVisible</td>
-	<td>id=register</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>assertNotVisible</td>
-	<td>id=provider_login</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertNotVisible</td>
-	<td>id=provider_password</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertNotVisible</td>
 	<td>id=register</td>
 	<td></td>
 </tr>
@@ -194,13 +159,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertValue</td>
-	<td>id=ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td>on</td>
 </tr>
 <!--CRATE DEVICE WITH IPAUTH ON-->
@@ -231,23 +191,8 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -255,93 +200,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>You must specify proper host name in case IP authentication is used</td>
+	<td>assertTextPresent</td>
+	<td>When IP Authentication checked Host cannot be &quot;dynamic&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>type</td> 	<td>id=host</td> 	<td>La</td> </tr> <tr> 	<td>keyUp</td> 	<td>id=host</td> 	<td>w</td> </tr> <tr> 	<td>fireEvent</td> 	<td>id=host</td> 	<td>blur</td> </tr> <tr> 	<td>waitForText</td> 	<td>id=view_ip</td> 	<td>La</td> </tr> <tr> 	<td>type</td> 	<td>id=host</td> 	<td>Labas</td> </tr> <tr> 	<td>keyUp</td> 	<td>id=host</td> 	<td>w</td> </tr> <tr> 	<td>fireEvent</td> 	<td>id=host</td> 	<td>blur</td> </tr> <tr> 	<td>waitForText</td> 	<td>id=view_ip</td> 	<td>Labas</td> </tr> <tr> 	<td>type</td> 	<td>id=host</td> 	<td></td> </tr> <tr> 	<td>keyUp</td> 	<td>id=host</td> 	<td>w</td> </tr> <tr> 	<td>fireEvent</td> 	<td>id=host</td> 	<td>blur</td> </tr> <tr> 	<td>type</td> 	<td>id=host</td> 	<td>4.4.4.4</td> </tr> <tr> 	<td>keyUp</td> 	<td>id=host</td> 	<td>w</td> </tr> <tr> 	<td>fireEvent</td> 	<td>id=host</td> 	<td>blur</td> </tr> <tr> 	<td>waitForText</td> 	<td>id=view_ip</td> 	<td>4.4.4.4</td> </tr>-->
 <tr>
 	<td>type</td>
 	<td>id=host</td>
-	<td>La</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=host</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=host</td>
-	<td>blur</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>id=view_ip</td>
-	<td>La</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=host</td>
-	<td>Labas</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=host</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=host</td>
-	<td>blur</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>id=view_ip</td>
-	<td>Labas</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=host</td>
-	<td></td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=host</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=host</td>
-	<td>blur</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=host</td>
-	<td>4.4.4.4</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=host</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=host</td>
-	<td>blur</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>id=view_ip</td>
 	<td>4.4.4.4</td>
 </tr>
 <tr>
@@ -412,23 +283,8 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -436,18 +292,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>You must specify proper host name in case IP authentication is used</td>
+	<td>assertTextPresent</td>
+	<td>When IP Authentication checked Host cannot be &quot;dynamic&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -532,19 +383,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
-</tr>
-<tr>
 	<td>click</td>
-	<td>id=ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -588,7 +429,7 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_2</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -609,47 +450,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>id=ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -658,84 +459,19 @@
 	<td>1004</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>assertNotVisible</td>
 	<td>id=device_secret</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>assertNotValue</td>
+	<td>id=device_secret</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Device not updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Password is too short</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -746,21 +482,6 @@
 	<td>click</td>
 	<td>id=qualify_yes</td>
 	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Must set either ip auth either dynamic host</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -882,19 +603,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
-</tr>
-<tr>
 	<td>click</td>
-	<td>id=ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -958,24 +669,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=dynamic_check</td>
-	<td>on</td>
-</tr>
-<tr>
 	<td>click</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -998,24 +694,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
 	<td>click</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_2</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1069,13 +750,8 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1134,33 +810,8 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1170,6 +821,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1265,13 +921,8 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication</td>
+	<td>id=ip_authentication_dynamic_2</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1279,38 +930,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Device's settings updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/10</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1322,11 +943,6 @@
 	<td>waitForTextPresent</td>
 	<td>Password is too short</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
 </tr>
 <tr>
 	<td>type</td>
