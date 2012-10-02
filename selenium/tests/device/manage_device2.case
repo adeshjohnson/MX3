@@ -43,24 +43,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>dynamic_check</td>
-	<td></td>
+	<td>assertValue</td>
+	<td>id=ip_authentication_dynamic_2</td>
+	<td>on</td>
 </tr>
 <tr>
-	<td>assertNotEditable</td>
+	<td>assertNotVisible</td>
 	<td>host</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertNotEditable</td>
+	<td>assertNotVisible</td>
 	<td>port</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>dynamic_check</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=ip_authentication_dynamic_1</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertEditable</td>
@@ -93,16 +98,6 @@
 	<td>12345678</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -118,9 +113,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertNotChecked</td>
-	<td>dynamic_check</td>
-	<td></td>
+	<td>assertValue</td>
+	<td>id=ip_authentication_dynamic_2</td>
+	<td>off</td>
 </tr>
 <tr>
 	<td>assertEditable</td>
@@ -133,8 +128,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>check</td>
-	<td>dynamic_check</td>
+	<td>click</td>
+	<td>id=ip_authentication_dynamic_2</td>
 	<td></td>
 </tr>
 <tr>
@@ -357,32 +352,12 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>uncheck</td>
-	<td>dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertEditable</td>
-	<td>ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>host</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>ip_authentication</td>
 	<td></td>
 </tr>
 <tr>
@@ -397,38 +372,13 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>uncheck</td>
-	<td>dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertEditable</td>
-	<td>ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>host</td>
 	<td>127.0.0.1</td>
-</tr>
-<tr>
-	<td>assertEditable</td>
-	<td>ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>ip_authentication</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -506,12 +456,17 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>ip_auth_value</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
 	<td>IP Authentication is disabled when Host is marked as dynamic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -521,7 +476,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -530,17 +485,10 @@
 	<td>1.1.1.1</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
+	<td>assertTextNotPresent</td>
+	<td>Registration will expire</td>
 	<td></td>
 </tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=ip_authentication</td>
-	<td>focus</td>
-</tr>
-<!--Test sistemoje konvertavus testą šį tekstą vistiek mato, šiaip viskas ok-->
-<!--<tr> 	<td>waitForTextNotPresent</td> 	<td>Registration will expire</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
@@ -558,7 +506,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -577,9 +525,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>ip_authentication</td>
-	<td>1</td>
+	<td>assertValue</td>
+	<td>id=ip_authentication_dynamic_1</td>
+	<td>on</td>
 </tr>
 </tbody></table>
 </body>
