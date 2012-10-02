@@ -288,8 +288,12 @@ class DevicesController < ApplicationController
     @device.set_old_name
     params[:device][:description]=params[:device][:description].to_s.strip
 
-    params[:ip_authentication] = params[:ip_authentication_dynamic].to_i == 1 ? 1 : 0
-    params[:dynamic_check]  = params[:ip_authentication_dynamic].to_i == 2 ? 1 : 0
+    if params[:ip_authentication_dynamic].to_i > 0
+     params[:ip_authentication] = params[:ip_authentication_dynamic].to_i == 1 ? 1 : 0
+     params[:dynamic_check]  = params[:ip_authentication_dynamic].to_i == 2 ? 1 : 0
+    else
+      @device.username.blank? ? params[:ip_authentication] = 1 :  params[:dynamic_check] = 1
+    end
 
 
     @devicetypes = @device.load_device_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?).map { |dt| dt.name }
