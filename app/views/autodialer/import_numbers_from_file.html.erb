@@ -10,7 +10,11 @@
 <% end %>
 <% if @step == 2 %>
     <br>
-    <b><%= _('File_size') %>:</b> <%= session[:file_size] %>
+    <b><%= _('File_size') %>:</b> <%= session[:file_size].to_i %>
     <br>
     <b><%= _('Total_numbers_imported') %>:</b> <%= @total_numbers %>
+    <%if @total_numbers.to_i != @imported_numbers.to_i%>
+        <br>
+        <%= link_to _('Click_here_to_see_bad_numbers') + " (#{@total_numbers.to_i - @imported_numbers.to_i})", :action=>:bad_numbers_from_csv, :id=>@campaign.id %>
+    <%end%>
 <% end %>

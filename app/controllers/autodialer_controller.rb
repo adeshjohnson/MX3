@@ -228,21 +228,20 @@ class AutodialerController < ApplicationController
           session[:file_size] = file.size
 
           tname = CsvImportDb.save_file(@campaign.id, file, "/tmp/")
+          session["atodialer_number_import_#{@campaign.id}".to_sym] = tname
           colums ={}
           colums[:colums] = [{:name=>"f_number", :type=>"VARCHAR(50)", :default=>''},{:name=>"f_error", :type=>"INT(4)", :default=>0}, {:name=>"nice_error", :type=>"INT(4)", :default=>0}, {:name=>"not_found_in_db", :type=>"INT(4)", :default=>0}, {:name=>"id", :type=>'INT(11)', :inscrement=>' NOT NULL auto_increment '}]
           begin
             CsvImportDb.load_csv_into_db(tname, ',', '.', '', "/tmp/", colums)
 
-            @total_numbers, imported_numbers = @campaign.insert_numbers_from_csv_file(tname)
+            @total_numbers, @imported_numbers = @campaign.insert_numbers_from_csv_file(tname)
 
 
-            if @total_numbers == imported_numbers
+            if @total_numbers.to_i == @imported_numbers.to_i
               flash[:status] = _('Numbers_imported')
             else
-              flash[:notice] = _('M_out_of_n_numbers_imported', imported_numbers, @total_numbers)
+              flash[:status] = _('M_out_of_n_numbers_imported', @imported_numbers, @total_numbers)
             end
-
-            redirect_to :action => 'campaign_numbers', :id => @campaign.id
 
           rescue Exception => e
             MorLog.log_exception(e, Time.now.to_i, params[:controller], params[:action])
@@ -260,6 +259,15 @@ class AutodialerController < ApplicationController
       end
     end
 
+  end
+
+  def bad_numbers_from_csv
+    @page_title = _('Bad_rows_from_CSV_file')
+    if ActiveRecord::Base.connection.tables.include?(session["atodialer_number_import_#{params[:id]}".to_sym])
+      @rows = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session["atodialer_number_import_#{params[:id]}".to_sym]} WHERE f_error = 1")
+    end
+
+    render(:layout => "layouts/mor_min")
   end
 
 

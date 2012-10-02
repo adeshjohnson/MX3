@@ -1,0 +1,27 @@
+<table class="maintable" width="100%">
+  <% i =0 %>
+
+  <% if @rows %>
+
+
+      <% @rows.each{|row| %>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <% row.each{|r| %>
+                <%if r[0].include?('number')%>
+                    <td>
+                      <%= r[1] %>
+                    </td>
+                <%end%>
+            <% } %>
+            <td>
+              <b>
+                <%= "Duplicate Number in file" if row['nice_error'].to_i == 1 %>
+                <%= "Number is found in this Campaign" if row['nice_error'].to_i == 2 %>
+                <%= "Number is invalid" if row['nice_error'].to_i == 3 %>
+              </b>
+            </td>
+          </tr>
+      <% } %>
+  <%end%>
+
+</table>
