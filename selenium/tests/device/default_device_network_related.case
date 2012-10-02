@@ -255,19 +255,19 @@
 	<td>on</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>assertElementNotPresent</td>
 	<td>id=dynamic_check</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
+	<td>assertElementNotPresent</td>
+	<td>id=ip_authentication_dynamic_2</td>
+	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=host</td>
-	<td>2.2.2.2</td>
+	<td>assertTextNotPresent</td>
+	<td>Authentication</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -302,18 +302,18 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=host</td>
-	<td>2.2.2.2</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
+	<td>id=ip_authentication_dynamic_2</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>view_ip</td>
-	<td>2.2.2.2</td>
+	<td>id=ip_add_value_d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=ip_port_value_d</td>
+	<td>5060</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -393,7 +393,7 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_2</td>
 	<td>on</td>
 </tr>
 <!--DEFAULT DEVICE-->
@@ -455,18 +455,8 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=host</td>
-	<td>2.2.2.2</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>view_ip</td>
-	<td>2.2.2.2</td>
+	<td>id=ip_authentication_dynamic_2</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -502,16 +492,6 @@
 	<td>assertValue</td>
 	<td>id=qualify_time</td>
 	<td>2000</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -553,21 +533,6 @@
 	<td>open</td>
 	<td>/billing/devices/default_device</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=host</td>
-	<td>2.2.2.2</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>view_ip</td>
-	<td>2.2.2.2</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -815,6 +780,11 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Provider was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
