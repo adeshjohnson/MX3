@@ -73,7 +73,7 @@
 <!--check current values-->
 <tr>
 	<td>assertTextPresent</td>
-	<td>Login/Username:</td>
+	<td>Username:</td>
 	<td></td>
 </tr>
 <tr>
@@ -108,7 +108,7 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>provider_login</td>
+	<td>xpath=(//input[@id='provider_login'])[2]</td>
 	<td>SIP_provider</td>
 </tr>
 <tr>
@@ -148,12 +148,17 @@
 </tr>
 <tr>
 	<td>assertNotChecked</td>
-	<td>ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>provider_reg_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>register</td>
 	<td></td>
 </tr>
 <tr>
@@ -195,6 +200,11 @@
 	<td>assertValue</td>
 	<td>qualify_time</td>
 	<td>2000</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>qualify_yes</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
@@ -369,7 +379,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -615,7 +625,7 @@
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -815,13 +825,23 @@
 </tr>
 <!--...change and assert register line-->
 <tr>
+	<td>keyDown</td>
+	<td>provider_login</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>provider_login</td>
 	<td>login</td>
 </tr>
 <tr>
-	<td>uncheck</td>
-	<td>ip_authentication</td>
+	<td>assertValue</td>
+	<td>id=provider_login</td>
+	<td>login</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -860,7 +880,12 @@
 	<td>reg_extension</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>keyUp</td>
+	<td>provider_reg_extension</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>reg_register</td>
 	<td>register =&gt; login:@0.0.0.1:5061/reg_extension</td>
 </tr>
@@ -870,7 +895,12 @@
 	<td>test_login</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>keyUp</td>
+	<td>provider_login</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>reg_register</td>
 	<td>register =&gt; test_login:@0.0.0.1:5061/reg_extension</td>
 </tr>
@@ -880,7 +910,12 @@
 	<td>test_password</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>keyUp</td>
+	<td>provider_password</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>reg_register</td>
 	<td>register =&gt; test_login:test_password@0.0.0.1:5061/reg_extension</td>
 </tr>
@@ -890,7 +925,12 @@
 	<td>127.0.0.1</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>keyUp</td>
+	<td>provider_port</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>reg_register</td>
 	<td>register =&gt; test_login:test_password@127.0.0.1:5061/reg_extension</td>
 </tr>
@@ -900,7 +940,12 @@
 	<td>9999</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>keyUp</td>
+	<td>provider_port</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>reg_register</td>
 	<td>register =&gt; test_login:test_password@127.0.0.1:9999/reg_extension</td>
 </tr>
@@ -910,7 +955,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>reg_register</td>
 	<td>register =&gt;</td>
 </tr>
@@ -920,7 +965,12 @@
 	<td>new_regline</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>keyUp</td>
+	<td>provider_reg_line</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>reg_register</td>
 	<td>register =&gt; new_regline</td>
 </tr>
@@ -930,9 +980,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>reg_register</td>
-	<td>register =&gt; test_login:test_password@127.0.0.1:9999/</td>
+	<td>register =&gt; test_login:test_password@127.0.0.1:9999/reg_extension</td>
 </tr>
 <tr>
 	<td>type</td>
