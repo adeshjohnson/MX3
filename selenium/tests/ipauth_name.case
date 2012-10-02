@@ -58,23 +58,8 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -114,13 +99,8 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication</td>
+	<td>id=ip_authentication_dynamic_2</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
@@ -131,16 +111,6 @@
 	<td>type</td>
 	<td>id=device_secret</td>
 	<td>asdfghjkl</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -176,33 +146,13 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_2</td>
 	<td>on</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=dynamic_check</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>waitForNotVisible</td>
@@ -217,61 +167,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>You must specify proper host name in case IP authentication is used</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=dynamic_check</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=dynamic_check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=dynamic_check</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>waitForNotVisible</td>
-	<td>id=device_secret</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=host</td>
-	<td>192.168.0.107</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Device's settings updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -314,13 +209,8 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -367,16 +257,6 @@
 	<td>open</td>
 	<td>/billing/providers/edit/2</td>
 	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>off</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -435,31 +315,6 @@
 </tr>
 <!--Patikrinam kad išsitrynė-->
 <!--STOP ir koncoleje asterisk -vvvrx 'sip show peer ipauthXXXXXXXX'-->
-<tr>
-	<td>open</td>
-	<td>/billing/providers/edit/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=ip_authentication</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully updated</td>
-	<td></td>
-</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/test/make_select</td>
