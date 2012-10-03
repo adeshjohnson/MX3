@@ -1426,6 +1426,11 @@
 	<td>reg_extension</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>provider_reg_extension</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>waitForText</td>
 	<td>reg_register</td>
 	<td>register =&gt; login:@0.0.0.3:5061/reg_extension</td>
@@ -1434,6 +1439,11 @@
 	<td>type</td>
 	<td>provider_login</td>
 	<td>test_login</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>provider_login</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForText</td>
@@ -1446,6 +1456,11 @@
 	<td>test_password</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>provider_password</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>waitForText</td>
 	<td>reg_register</td>
 	<td>register =&gt; test_login:test_password@0.0.0.3:5061/reg_extension</td>
@@ -1456,6 +1471,11 @@
 	<td>127.0.0.1</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>provider_port</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>waitForText</td>
 	<td>reg_register</td>
 	<td>register =&gt; test_login:test_password@127.0.0.1:5061/reg_extension</td>
@@ -1464,6 +1484,11 @@
 	<td>type</td>
 	<td>provider_port</td>
 	<td>9999</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>provider_port</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForText</td>
@@ -1486,6 +1511,11 @@
 	<td>new_regline</td>
 </tr>
 <tr>
+	<td>keyUp</td>
+	<td>provider_reg_line</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>waitForText</td>
 	<td>reg_register</td>
 	<td>register =&gt; new_regline</td>
@@ -1495,6 +1525,7 @@
 	<td>reg_extension</td>
 	<td></td>
 </tr>
+<!--Ar turi issivalyti reg_extension galune?-->
 <tr>
 	<td>waitForText</td>
 	<td>reg_register</td>
@@ -1504,6 +1535,11 @@
 	<td>type</td>
 	<td>provider_reg_extension</td>
 	<td>reg_extension</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>provider_reg_extension</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1520,6 +1556,7 @@
 	<td>/billing/providers/edit/4</td>
 	<td></td>
 </tr>
+<!--Neissaugoti duomenys, eilutes apacioje neveikia-->
 <tr>
 	<td>assertChecked</td>
 	<td>reg_extension</td>
