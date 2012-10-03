@@ -176,7 +176,7 @@
     <% if  !@provider.is_dahdi? %>
 
         <tr <%= tooltip(_('IP_Authentication'), _('IP_Authentication_Explanation')) %>>
-          <td id="ip_auth_name"> <%= _('IP_Authentication') %>: <%= radio_button_tag 'ip_authentication_dynamic', 1, @device.username.length == 0 %> </td>
+          <td id="ip_auth_name"> <%= _('IP_Authentication') %>: <%= radio_button_tag 'ip_authentication_dynamic', 1, @provider.type.to_s != "dynamic" %> </td>
           <td id="ip_auth_name2"> <%= _('Dynamic_Username_Password') %>: <%= radio_button_tag 'ip_authentication_dynamic', 2, @provider.type.to_s == "dynamic"%> </td>
         </tr>
 
