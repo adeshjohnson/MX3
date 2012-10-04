@@ -397,6 +397,12 @@ class ProvidersController < ApplicationController
       flash[:notice] = _('Please_select_server')
       redirect_to :action => 'edit', :id => @provider.id and return false
     end
+
+    if (params[:ip_authentication].to_i == 1 and params[:register].to_i == 1 and params[:reg].to_s == 'extension' and (!params[:provider][:login] or params[:provider][:login].blank?))
+      flash[:notice] = _('Registration_can_be_used_when_at_least_Username_is_entered')
+      redirect_to :action => 'edit', :id => @provider.id and return false
+    end
+
     #========= codecs =======
 
     @provider.update_codecs_with_priority(params[:codec]) if params[:codec]
@@ -448,7 +454,7 @@ class ProvidersController < ApplicationController
 
     params[:register].to_s == "1" ? @provider.register = 1 : @provider.register = 0
 
-    if params[:ip_authentication].to_i == 1
+    if params[:ip_authentication].to_i == 1  and  @provider.register == 0
 
       @provider.login = ""
       @provider.password = ""

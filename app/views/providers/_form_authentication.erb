@@ -29,20 +29,20 @@
 
         function hide_ip_elements() {
             if ($('ip_authentication_dynamic_2').checked) {
+                // dynamic
                 $('ip_auth1').style.display = "none";
                 $('server_hostname_row').style.display = "none";
                 $('server_ip_row').style.display = "none";
                 $('server_port_row').style.display = "none";
-                $('auth_username').style.display = "none";
-                $('auth_secret').style.display = "none";
+                $('auth_username').style.display = "";
+                $('auth_secret').style.display = "";
 
                 $('registration_check_prov').style.display = "none";
                 $('reg_extension_row').style.display = "none";
                 $('reg_line_row').style.display = "none";
                 $('reg_register_row').style.display = "none";
 
-                $('ip_dyn1').style.display = "";
-                $('ip_dyn2').style.display = "";
+
                 $('ip_dyn3').style.display = "";
                 $('ip_dyn4').style.display = "";
 
@@ -50,18 +50,20 @@
                 $('provider_server_ip').disabled = true;
                 $('device_ipaddr').disabled = true;
                 $('provider_port').disabled = true;
-                $('provider_login').disabled = true;
-                $('provider_password').disabled = true;
+                $('provider_login').disabled = false;
+                $('provider_password').disabled = false;
 
-                $('registration_check_prov').disabled = true;
+                $('register').disabled = true;
                 $('provider_reg_extension').disabled = true;
                 $('provider_reg_line').disabled = true;
                 $('reg_register_row').disabled = true;
 
-                $('ip_dyn1').disabled = false;
-                $('ip_dyn2').disabled = false;
-                $('ip_dyn3').disabled = false;
-                $('ip_dyn4').disabled = false;
+                $('ip_dyn1').style.display = "none";
+                $('ip_dyn2').style.display = "none";
+
+                $('registration_notice').style.display = "none";
+                $('reg_notice_dynamic').style.display = "";
+
 
                 hide_hostname_elements();
 
@@ -74,16 +76,14 @@
                 $('server_hostname_row').style.display = "";
 
                 $('server_port_row').style.display = "";
-                $('auth_username').style.display = "";
-                $('auth_secret').style.display = "";
+
 
                 $('registration_check_prov').style.display = "";
                 $('reg_extension_row').style.display = "";
                 $('reg_line_row').style.display = "";
                 $('reg_register_row').style.display = "none";
 
-                $('ip_dyn1').style.display = "none";
-                $('ip_dyn2').style.display = "none";
+
                 $('ip_dyn3').style.display = "none";
                 $('ip_dyn4').style.display = "none";
 
@@ -92,20 +92,18 @@
                 $('provider_server_ip').disabled = false;
 
                 $('provider_port').disabled = false;
-                $('provider_login').disabled = false;
-                $('provider_password').disabled = false;
+                $('register').disabled = false;
 
                 $('registration_check_prov').disabled = false;
                 $('provider_reg_extension').disabled = false;
                 $('provider_reg_line').disabled = false;
                 $('reg_register_row').disabled = true;
 
-                $('ip_dyn1').disabled = true;
-                $('ip_dyn2').disabled = true;
-                $('ip_dyn3').disabled = true;
-                $('ip_dyn4').disabled = true;
+                $('ip_dyn1').style.display = "";
+                $('ip_dyn2').style.display = "";
+                $('reg_notice_dynamic').style.display = "none";
                 hide_hostname_elements();
-                show_register_check_box($('provider_login').value);
+                show_register_check_box();
 
             }
         }
@@ -120,17 +118,30 @@
             }
         }
 
-        function show_register_check_box(value) {
-            if (value == '') {
-                $('registration_check_prov').style.display = "none";
-                $('register').checked = false;
-                $('registration_check_prov').disabled = true;
+        function show_register_check_box() {
+            $('registration_notice').style.display = "";
+            if ($('register').checked) {
+                $('auth_username').style.display = "";
+                $('auth_secret').style.display = "";
+
+                $('provider_login').disabled = false;
+                $('provider_password').disabled = false;
+
                 $('registration_notice').style.display = "";
+
             } else {
-                $('registration_check_prov').style.display = "";
-                $('registration_check_prov').disabled = true;
-                $('registration_notice').style.display = "none";
+                $('auth_username').style.display = "none";
+                $('auth_secret').style.display = "none";
+
+                $('provider_login').disabled = true;
+                $('provider_password').disabled = true;
+
+                $('registration_notice').style.display = "";
+
             }
+
+
+
             show_register_lines();
         }
 
@@ -198,15 +209,9 @@
           <td><%= text_field 'provider', 'port', "class" => "input", :onkeyup => 'register_line_info();' %></td>
         </tr>
 
-
-        <tr id="auth_username">
-          <td> <%= _('Login/Username') %>:</td>
-          <td> <%= text_field 'provider', 'login', "class" => "input", :onkeyup => "show_register_check_box(this.value);" %></td>
-        </tr>
-
-        <tr id="auth_secret">
-          <td> <%= _('Password') %>:</td>
-          <td> <%= text_field 'provider', 'password', "class" => "input", :onkeyup => 'register_line_info();' %></td>
+        <tr id="registration_check_prov">
+          <td><%= _('Register') %>:</td>
+          <td><%= check_box_tag 'register', "1", @provider.register == 1, {:onClick => "show_register_lines();show_register_check_box();"} %></td>
         </tr>
 
         <tr id="registration_notice" >
@@ -214,16 +219,21 @@
           <td><%= _('Registration_can_be_used_when_at_least_Username_is_entered') %></td>
         </tr>
 
-        <tr id="registration_check_prov">
-          <td><%= _('Register') %>:</td>
-          <td><%= check_box_tag 'register', "1", @provider.register == 1, {:onClick => "show_register_lines();"} %></td>
-        </tr>
-
         <tr id="reg_extension_row" style="display:none;">
           <td><%= radio_button_tag('reg', 'extension', @provider.reg_line.to_s.length == 0, {:onClick => "register_line_info();"}) %> &nbsp; <%= raw _('Register_extension').gsub(" ", "&nbsp;") %>
             :
           </td>
           <td><%= text_field('provider', 'reg_extension', {"class" => "input", :onkeyup => 'register_line_info();'}) %></td>
+        </tr>
+
+        <tr id="auth_username">
+          <td> <span id='ip_dyn1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><%= _('Login/Username') %>:</td>
+          <td> <%= text_field 'provider', 'login', "class" => "input" %></td>
+        </tr>
+
+        <tr id="auth_secret">
+          <td> <span id='ip_dyn2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><%= _('Password') %>:</td>
+          <td> <%= text_field 'provider', 'password', "class" => "input", :onkeyup => 'register_line_info();' %></td>
         </tr>
 
         <tr id="reg_line_row" style="display:none;">
@@ -237,15 +247,6 @@
           <td colspan="2" id="reg_register">register =></td>
         </tr>
 
-        <tr id='ip_dyn1'>
-          <td id="username_name"><%= _('username') %>:</td>
-          <td id="username_value"><%= text_field 'provider', 'login', "class" => "input" %></td>
-        </tr>
-        <tr id='ip_dyn2'>
-          <td id="secret_name"> <%= _('secret') %>:</td>
-          <td id="secret_value"><%= text_field 'provider', 'password', "class" => "input" %></td>
-        </tr>
-
         <tr id='ip_dyn3'>
           <td id="ip_add_name_d"><%= _('IP_Address') %>:</td>
           <td id="ip_add_value_d">  <%= @device.host %></td>
@@ -254,6 +255,10 @@
         <tr id='ip_dyn4'>
           <td id="ip_port_name_d"><%= _('Port') %>:</td>
           <td id="ip_port_value_d"><%= @device.port %></td>
+        </tr>
+
+        <tr id="reg_notice_dynamic">
+          <td colspan="2"><%= b_info  + _('When_Provider_is_Dynamic_it_is_not_allowed_to_register_to_it')%></td>
         </tr>
 
     <% else %>
