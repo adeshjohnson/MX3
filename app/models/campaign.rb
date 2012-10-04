@@ -130,6 +130,9 @@ class Campaign < ActiveRecord::Base
     # set error flag on duplicates | code : 1
     ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 1 WHERE f_number IN (SELECT number FROM (select f_number as number, count(*) as u from #{name} group by f_number  having u > 1) as imf )")
 
+    # unset error for first number of duplicates
+    ActiveRecord::Base.connection.execute("UPDATE #{name}, (SELECT id FROM #{name} WHERE f_error = 1 AND nice_error = 1 GROUP BY f_number) AS A SET f_error = 0, nice_error = 0 WHERE f_error = 1 AND nice_error = 1 AND #{name}.id = A.id")
+
     # set error flag where number is found in DB | code : 2
     ActiveRecord::Base.connection.execute("UPDATE #{name} LEFT JOIN adnumbers ON (replace(f_number, '\\r', '') = adnumbers.number AND adnumbers.campaign_id = #{self.id}) SET f_error = 1, nice_error = 2 WHERE adnumbers.id IS NOT NULL AND f_error = 0")
 
