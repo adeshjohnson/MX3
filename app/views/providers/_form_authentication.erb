@@ -169,8 +169,10 @@
             line = "register => ";
             if ($('reg_extension').checked == true) {
                 line += $("provider_login").value + ":" + $("provider_password").value + "@" + $("provider_server_ip").value + ":" + $("provider_port").value + "/" + $('provider_reg_extension').value;
+                $('provider_reg_line').value = '';
             } else {
                 line += $('provider_reg_line').value
+                $('provider_reg_extension').value = '';
             }
             $('reg_register').innerHTML = line;
 
