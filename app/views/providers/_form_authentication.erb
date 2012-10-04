@@ -173,6 +173,13 @@
                 line += $('provider_reg_line').value
             }
             $('reg_register').innerHTML = line;
+
+            alert($("provider_login").value);
+            if ($("provider_login").value == ''){
+                $('registration_notice').style.display = "";
+            }else{
+                $('registration_notice').style.display = "none";
+            }
         }
         //]]>
     </script>
