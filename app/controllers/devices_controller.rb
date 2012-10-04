@@ -288,14 +288,15 @@ class DevicesController < ApplicationController
     @device.set_old_name
     params[:device][:description]=params[:device][:description].to_s.strip
 
+    if ['SIP', 'IAX2'].include?(@device.device_type)
     if params[:ip_authentication_dynamic].to_i > 0
      params[:ip_authentication] = params[:ip_authentication_dynamic].to_i == 1 ? 1 : 0
      params[:dynamic_check]  = params[:ip_authentication_dynamic].to_i == 2 ? 1 : 0
     else
       @device.username.blank? ? params[:ip_authentication] = 1 :  params[:dynamic_check] = 1
     end
-
-    params[:ip_authentication] = 1 if @device.device_type == "H323"
+        end
+    params[:ip_authentication] = 1 if @device.device_type.to_s == "H323"
 
     @devicetypes = @device.load_device_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?).map { |dt| dt.name }
     @devicetypes << "FAX"
