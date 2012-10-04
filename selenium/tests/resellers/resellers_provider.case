@@ -723,11 +723,6 @@
 	<td>please_change</td>
 </tr>
 <tr>
-	<td>assertNotChecked</td>
-	<td>ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>provider_reg_extension</td>
 	<td></td>
@@ -1171,13 +1166,13 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>provider_login</td>
-	<td></td>
+	<td>id=provider_login</td>
+	<td>SIP_provider</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>provider_password</td>
-	<td></td>
+	<td>id=provider_password</td>
+	<td>please_change</td>
 </tr>
 <tr>
 	<td>assertChecked</td>
@@ -1426,6 +1421,11 @@
 	<td>reg_extension</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td></td>
+</tr>
+<tr>
 	<td>keyUp</td>
 	<td>provider_reg_extension</td>
 	<td>w</td>
@@ -1525,11 +1525,10 @@
 	<td>reg_extension</td>
 	<td></td>
 </tr>
-<!--Ar turi issivalyti reg_extension galune?-->
 <tr>
 	<td>waitForText</td>
-	<td>reg_register</td>
-	<td>register =&gt; test_login:test_password@127.0.0.1:9999/</td>
+	<td>id=reg_register</td>
+	<td>register =&gt; test_login:test_password@127.0.0.1:9999/reg_extension</td>
 </tr>
 <tr>
 	<td>type</td>
