@@ -42,9 +42,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>assertValue</td>
 	<td>id=ip_authentication_dynamic_1</td>
-	<td></td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -102,11 +102,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>When Provider is Dynamic, it is not allowed to register to it</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>id=prov_host_2</td>
 	<td></td>
@@ -157,18 +152,23 @@
 	<td>on</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=register</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Provider should have login</td>
+	<td>assertTextPresent</td>
+	<td>Registration can be used when at least Username is entered</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication</td>
+	<td>id=register</td>
 	<td></td>
 </tr>
 <tr>
