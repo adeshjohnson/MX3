@@ -229,7 +229,7 @@
 
         <tr id="auth_username">
           <td> <span id='ip_dyn1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><%= _('Login/Username') %>:</td>
-          <td> <%= text_field 'provider', 'login', "class" => "input" %></td>
+          <td> <%= text_field 'provider', 'login', "class" => "input", :onkeyup => 'register_line_info();' %></td>
         </tr>
 
         <tr id="auth_secret">
