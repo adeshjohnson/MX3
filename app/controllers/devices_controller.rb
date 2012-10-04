@@ -295,6 +295,7 @@ class DevicesController < ApplicationController
       @device.username.blank? ? params[:ip_authentication] = 1 :  params[:dynamic_check] = 1
     end
 
+    params[:ip_authentication] = 1 if @device.device_type == "H323"
 
     @devicetypes = @device.load_device_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?).map { |dt| dt.name }
     @devicetypes << "FAX"
@@ -322,6 +323,7 @@ class DevicesController < ApplicationController
     #params and setter will not be triggered and value from enabled wouldnt be 
     #set to disabled, so i we have to set it here. you may call it a little hack
     params[:device][:block_callerid] = 0 if params[:block_callerid_enable].to_s == 'no'
+
 
     if @device.device_type != "Virtual"
       if params[:device][:extension]
@@ -538,10 +540,6 @@ class DevicesController < ApplicationController
         flash[:notice] = _('Invalid_IP_address')
         redirect_to :action => 'device_edit', :id => @device.id and return false
       end
-
-      logger.fatal "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
-      logger.fatal params[:dynamic_check].to_i
-      logger.fatal params[:host]
 
       @device.host = params[:host]
       @device.host = "dynamic" if params[:dynamic_check].to_i == 1
