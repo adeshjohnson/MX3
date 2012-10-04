@@ -538,8 +538,13 @@ class DevicesController < ApplicationController
         flash[:notice] = _('Invalid_IP_address')
         redirect_to :action => 'device_edit', :id => @device.id and return false
       end
+
+      logger.fatal "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+      logger.fatal params[:dynamic_check].to_i
+      logger.fatal params[:host]
+
       @device.host = params[:host]
-      @device.host = "dynamic" if params[:dynamic_check] == "1"
+      @device.host = "dynamic" if params[:dynamic_check].to_i == 1
 
       if @device.host != "dynamic"
         @device.ipaddr = @device.host
