@@ -72,7 +72,7 @@
 <!--edit SIP-->
 <!--check current values-->
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>Username:</td>
 	<td></td>
 </tr>
@@ -107,14 +107,19 @@
 	<td>0</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>xpath=(//input[@id='provider_login'])[2]</td>
-	<td>SIP_provider</td>
-</tr>
-<tr>
 	<td>waitForNotVisible</td>
 	<td>registration_notice</td>
 	<td>Registration can be used when at least Username is entered</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=provider_login</td>
+	<td>SIP_provider</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -147,9 +152,9 @@
 	<td>please_change</td>
 </tr>
 <tr>
-	<td>assertNotChecked</td>
+	<td>assertValue</td>
 	<td>id=ip_authentication_dynamic_1</td>
-	<td></td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -615,13 +620,13 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>provider_login</td>
-	<td></td>
+	<td>id=provider_login</td>
+	<td>SIP_provider</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>provider_password</td>
-	<td></td>
+	<td>id=provider_password</td>
+	<td>please_change</td>
 </tr>
 <tr>
 	<td>assertChecked</td>
@@ -631,6 +636,11 @@
 <tr>
 	<td>assertValue</td>
 	<td>provider_reg_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=register</td>
 	<td></td>
 </tr>
 <tr>
@@ -872,6 +882,11 @@
 <tr>
 	<td>assertChecked</td>
 	<td>reg_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
 	<td></td>
 </tr>
 <tr>
