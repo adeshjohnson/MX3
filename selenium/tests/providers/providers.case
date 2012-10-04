@@ -905,6 +905,11 @@
 	<td>register =&gt; login:@0.0.0.1:5061/reg_extension</td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>provider_login</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>provider_login</td>
 	<td>test_login</td>
@@ -1038,16 +1043,6 @@
 	<td>click</td>
 	<td>reg_line</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>reg_register</td>
-	<td>register =&gt;</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_reg_line</td>
-	<td>new_regline</td>
 </tr>
 <tr>
 	<td>waitForText</td>
@@ -1261,11 +1256,6 @@
 <!--create-->
 <tr>
 	<td>open</td>
-	<td>/billing/providers/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/providers/new</td>
 	<td></td>
 </tr>
@@ -1335,11 +1325,6 @@
 	<td>assertValue</td>
 	<td>provider_password</td>
 	<td>please_change</td>
-</tr>
-<tr>
-	<td>assertNotChecked</td>
-	<td>ip_authentication</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -1516,11 +1501,6 @@
 	<td>type</td>
 	<td>provider_call_limit</td>
 	<td>100</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>ip_authentication</td>
-	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1725,18 +1705,13 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>provider_login</td>
-	<td></td>
+	<td>id=provider_login</td>
+	<td>IAX2_provider</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>provider_password</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertChecked</td>
-	<td>ip_authentication</td>
-	<td></td>
+	<td>id=provider_password</td>
+	<td>please_change</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -2825,17 +2800,7 @@
 <!--testing ip addres validation-->
 <tr>
 	<td>open</td>
-	<td>/billing/providers/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Edit']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>hostname_ip_ip</td>
+	<td>/billing/providers/edit/1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2856,11 +2821,6 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Hostname is not valid</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>hostname_ip_ip</td>
 	<td></td>
 </tr>
 <tr>
@@ -2885,28 +2845,23 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Provider was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Edit']</td>
+	<td>When IP Authentication checked Host cannot be &quot;dynamic&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>provider_server_ip</td>
-	<td>dynamic</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>hostname_ip_ip</td>
-	<td></td>
+	<td>22.33.44.55</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>provider_server_ip</td>
 	<td>aaa.lt</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3202,7 +3157,7 @@
 <!--...Hostname-->
 <tr>
 	<td>click</td>
-	<td>hostname_ip_hostname</td>
+	<td>id=prov_host_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3241,9 +3196,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>hostname_ip_hostname</td>
-	<td></td>
+	<td>assertValue</td>
+	<td>id=prov_host_1</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertVisible</td>
@@ -3273,7 +3228,7 @@
 <!--...Hostname/IP-->
 <tr>
 	<td>click</td>
-	<td>hostname_ip_ip</td>
+	<td>id=prov_host_2</td>
 	<td></td>
 </tr>
 <tr>
@@ -3317,9 +3272,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>hostname_ip_ip</td>
-	<td></td>
+	<td>assertValue</td>
+	<td>id=prov_host_2</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertVisible</td>
@@ -3369,7 +3324,7 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>hostname_ip_ip</td>
+	<td>id=prov_host_2</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -3389,7 +3344,7 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>hostname_ip_ip</td>
+	<td>id=prov_host_2</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -3405,7 +3360,7 @@
 <!--...Dynamic-->
 <tr>
 	<td>click</td>
-	<td>hostname_ip_dynamic</td>
+	<td>id=ip_authentication_dynamic_2</td>
 	<td></td>
 </tr>
 <tr>
@@ -3424,6 +3379,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=provider_login</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -3434,9 +3394,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>hostname_ip_dynamic</td>
-	<td></td>
+	<td>assertValue</td>
+	<td>id=ip_authentication_dynamic_2</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertNotVisible</td>
@@ -3795,7 +3755,12 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>hostname_ip_hostname</td>
+	<td>id=ip_authentication_dynamic_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=prov_host_2</td>
 	<td></td>
 </tr>
 <tr>
@@ -3825,18 +3790,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>hostname_ip_dynamic</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTextPresent</td>
 	<td>When Provider is Dynamic, it is not allowed to register to it</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>hostname_ip_hostname</td>
+	<td>id=ip_authentication_dynamic_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=prov_host_2</td>
 	<td></td>
 </tr>
 <tr>
@@ -3874,7 +3839,81 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--<tr> 	<td>waitForTextPresent</td> 	<td>Configuration error.</td> 	<td></td> </tr>-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Hostname/IP is blank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>When Provider is Dynamic, it is not allowed to register to it</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication_dynamic_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=prov_host_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_ipaddr</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td>5061</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>provider_reg_line</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>reg_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_reg_extension</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>add_to_servers_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/servers/edit/1</td>
