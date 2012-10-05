@@ -13,8 +13,11 @@
 
     <% if @device.is_dahdi? %>
         <tr>
-          <td id="channel_name"> <%= _('Channel') %>:</td>
-          <td id="channel_value"><%= text_field 'device', 'name', "class" => "input" %> </td>
+          <td>
+            <table><tr><td id="channel_name"> <%= _('Channel') %>:</td>
+              <td id="channel_value"><%= text_field 'device', 'name', "class" => "input" %> </td></tr></table>
+          </td>
+
         </tr>
         <%else%>
     <% if !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_2] != 2) %>
