@@ -341,28 +341,13 @@ class ProvidersController < ApplicationController
     params[:provider][:max_timeout]= params[:provider][:max_timeout].to_s.strip
 
     #5618#comment:13 if timeout value is invalid(its not positive integer) we discard that value 
-    params[:provider].delete(:timeout) if params[:provider][:timeout] !~ /^[0-9]+$/ 
-    params[:provider].delete(:max_timeout) if params[:provider][:max_timeout] !~ /^[0-9]+$/ 
+    params[:provider].delete(:timeout) if params[:provider][:timeout] !~ /^[0-9]+$/
+    params[:provider].delete(:max_timeout) if params[:provider][:max_timeout] !~ /^[0-9]+$/
 
     params[:provider][:reg_extension] ||= ""
     params[:provider][:reg_line] ||= ""
 
     params[:provider][:call_limit] = 0 if params[:provider][:call_limit] and params[:provider][:call_limit].to_i < 0
-
-    if params[:ip_authentication_dynamic].to_i > 0
-    params[:ip_authentication] = params[:ip_authentication_dynamic].to_i == 1 ? 1 : 0
-    if !params[:prov_host].blank?
-    params[:hostname_ip] = params[:prov_host].to_i == 1 ? 'hostname' : 'ip'
-    params[:hostname_ip] = params[:ip_authentication_dynamic].to_i == 2 ? 'dynamic' : params[:hostname_ip]
-    else
-      params[:hostname_ip] =  @provider.type.to_s
-      end
-    else
-       params[:ip_authentication] = 1 if @provider.device.username.blank?
-       if !params[:prov_host].blank?
-         params[:hostname_ip] =  @provider.type.to_s
-       end
-      end
 
     @provider.set_old
 
@@ -397,12 +382,6 @@ class ProvidersController < ApplicationController
       flash[:notice] = _('Please_select_server')
       redirect_to :action => 'edit', :id => @provider.id and return false
     end
-
-    if (params[:ip_authentication].to_i == 1 and params[:register].to_i == 1 and params[:reg].to_s == 'extension' and (!params[:provider][:login] or params[:provider][:login].blank?))
-      flash[:notice] = _('Registration_can_be_used_when_at_least_Username_is_entered')
-      redirect_to :action => 'edit', :id => @provider.id and return false
-    end
-
     #========= codecs =======
 
     @provider.update_codecs_with_priority(params[:codec]) if params[:codec]
@@ -454,7 +433,7 @@ class ProvidersController < ApplicationController
 
     params[:register].to_s == "1" ? @provider.register = 1 : @provider.register = 0
 
-    if params[:ip_authentication].to_i == 1  and  @provider.register == 0
+    if params[:ip_authentication].to_i == 1
 
       @provider.login = ""
       @provider.password = ""
