@@ -183,7 +183,7 @@
         </tr>
 
         <tr id="reg_extension_row" style="display:none;">
-          <td><%= radio_button_tag('reg', 'extension', @provider.reg_line.to_s.length == 0, {:onClick => "disable_lines(this.value); format_register();"}) %>&nbsp;<%= _('Register_extension').gsub(" ", "&nbsp;") %>
+          <td><%= radio_button_tag('reg', 'extension', @provider.reg_line.to_s.length == 0, {:onClick => "disable_lines(this.value); format_register();"}) %>&nbsp;<%= raw _('Register_extension').gsub(" ", "&nbsp;") %>
             :
           </td>
           <td>
@@ -193,7 +193,7 @@
         </tr>
 
         <tr id="reg_line_row" style="display:none;">
-          <td><%= radio_button_tag('reg', 'line', @provider.reg_line.to_s.length > 0, {:onClick => "disable_lines(this.value); format_register();"}) %>&nbsp;<%= _('Register_line').gsub(" ", "&nbsp;") %>
+          <td><%= radio_button_tag('reg', 'line', @provider.reg_line.to_s.length > 0, {:onClick => "disable_lines(this.value); format_register();"}) %>&nbsp;<%= raw _('Register_line').gsub(" ", "&nbsp;") %>
             :
           </td>
           <td>
