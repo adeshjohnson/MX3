@@ -18,5 +18,5 @@
         <%= link_to _('Click_here_to_see_bad_numbers') + " (#{@total_numbers.to_i - @imported_numbers.to_i})", :action=>:bad_numbers_from_csv, :id=>@campaign.id %>
     <%end%>
     <br /><br />
-    <%= link_to _('Back to Auto Dialers'), :action=>:bad_numbers_from_csv, :id=>@campaign.id %>
+    <%= link_to _('Back_to_Numbers'), :action=>:campaign_numbers, :id=>@campaign.id %>
 <% end %>

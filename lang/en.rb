@@ -4472,6 +4472,7 @@ Localization.define('en') do |l|
   l.store 'Hour_period', 'Hour period'
   l.store 'DID_Range', 'DID Range'
   l.store 'Group_By_DID_Provider', 'Group By DID Provider'
+  l.store 'Back_to_Numbers', 'Back to Numbers'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
