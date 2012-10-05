@@ -112,11 +112,6 @@
 	<td>0.0.0.1</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -662,7 +657,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>ip_authentication_dynamic_1</td>
+	<td>id=ip_authentication</td>
 	<td></td>
 </tr>
 <tr>
@@ -935,11 +930,6 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
 	<td>register</td>
 	<td></td>
 </tr>
@@ -1175,17 +1165,12 @@
 	<td>please_change</td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>provider_reg_extension</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertNotChecked</td>
+	<td>assertChecked</td>
 	<td>register</td>
 	<td></td>
 </tr>
@@ -1381,12 +1366,7 @@
 	<td>login</td>
 </tr>
 <tr>
-	<td>uncheck</td>
-	<td>ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForEditable</td>
+	<td>assertEditable</td>
 	<td>register</td>
 	<td></td>
 </tr>
