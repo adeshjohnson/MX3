@@ -22,6 +22,7 @@
     <% unless session[:usertype] == "accountant" and session[:acc_manage_dids_opt_1].to_i == 0 %>
     statistics_menu.add(24, 14, '<%= _('DIDs') %>', '<%= Web_Dir %>/stats/dids');
     statistics_menu.add(26, 24, '<%= _('Usage') %>', '<%= Web_Dir %>/stats/dids_usage');
+    statistics_menu.add(29, 24, '<%= _('Summary') %>', '<%= Web_Dir %>/dids/summary');
     <% end %>
     <% if session[:fax_device_enabled] %>
     statistics_menu.add(23, 14, '<%= _('Faxes') %>', '<%= Web_Dir %>/stats/faxes');

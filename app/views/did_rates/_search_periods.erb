@@ -1,0 +1,6 @@
+<select name="period">
+  <option value="-1" <%= "selected" if period.to_s == "any" %> ><%= _("All") %></option>
+  <% periods.each { |pr| %>
+      <option value="<%= pr.id %>" <%= "selected" if pr.id.to_s == period.to_s %> ><%= pr.start_time.strftime("%H:%M:%S")      %> - <%= pr.end_time.strftime("%H:%M:%S") %></option>
+  <% } %>
+</select>

@@ -140,6 +140,11 @@ class DidRatesController < ApplicationController
   end
 
 
+  def get_periods_for_search
+    @periods = Didrate.find_hours_for_select(params)
+    render(:layout => false)
+  end
+
   private
 
   def find_did

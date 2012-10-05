@@ -1216,6 +1216,68 @@ ORDER BY dids.did ASC"
                      :limit => session[:items_per_page])
   end
 
+
+  def summary
+    @page_title = _('DIDs_report')
+    change_date
+
+    session[:dids_summary_list_options] ? @options = session[:dids_summary_list_options] : @options = {}
+
+    params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page])
+
+
+    params[:order_desc] ? @options[:order_desc] = params[:order_desc].to_i : (@options[:order_desc] = 1 if !@options[:order_desc])
+
+    params[:order_by] ? @options[:order_by_name] = params[:order_by].to_s : (@options[:order_by_name] = "" if !@options[:order_by_name])
+
+    @options[:dids_grouping] = params[:dids_grouping].to_i == 0 ? (@options[:dids_grouping].to_i == 0 ? 1 : @options[:dids_grouping].to_i) :  params[:dids_grouping].to_i
+    @options[:d_search] = params[:d_search].to_i == 0 ? (@options[:d_search].to_i == 0 ? 1 : @options[:d_search].to_i) :  params[:d_search].to_i
+    @options[:from] = session_from_datetime
+    @options[:till] = session_till_datetime
+    (params[:provider_id] and params[:provider_id].to_s != "") ? @options[:provider] = params[:provider_id] : @options[:provider] = "any"
+    (params[:did_number] and params[:did_number].to_s != "") ? @options[:did] = params[:did_number] : @options[:did] = ""
+    (params[:user_id] and params[:user_id].to_s != "") ? @options[:user_id] = params[:user_id] : @options[:user_id] = "any"
+    (params[:s_device] and params[:s_device].to_s != "") ? @options[:device_id] = params[:s_device] : @options[:device_id] = "all"
+    (params[:s_days] and params[:s_days].to_s != "") ? @options[:sdays] = params[:s_days] : @options[:sdays] = "all"
+    (params[:period] and params[:period].to_s != "") ? @options[:period] = params[:period] : @options[:period] = "-1"
+
+    @options[:order_by], order_by = summary_order_by(params, @options)
+
+    @dids_lines_full = Call.summary_by_dids(current_user, order_by, @options)
+
+    @total = {:calls => 0, :min => 0, :inc => 0, :own => 0, :prov => 0}
+    @dids_lines_full.each { |row|
+      @total[:calls] += row.total_calls.to_i
+      @total[:min] += row.dids_billsec.to_d
+      @total[:inc] += row.inc_price.to_d
+      @total[:own] += row.own_price.to_d
+      @total[:prov] += row.d_prov_price.to_d
+    }
+
+    # fetch required number of items.
+    @dids_lines = []
+    @total_items =  @dids_lines_full.size.to_i
+    @total_pages = (@total_items.to_d / session[:items_per_page].to_d).ceil
+    @options[:page] = @total_pages if @options[:page] > @total_pages
+    start = session[:items_per_page]*(@options[:page]-1)
+    (start..(start+session[:items_per_page])-1).each { |i|
+      @dids_lines << @dids_lines_full[i] if @dids_lines_full[i]
+    }
+
+    @nice_days =  @options[:sdays].to_s == 'all' ? _('All') :   (@options[:sdays].to_s == 'wd' ?  _('Work_days') :   _('Free_days')    )
+    d = Didrate.where({:id=>@options[:period]}).first
+    @nice_period = d.start_time.strftime("%H:%M:%S").to_s + '-' + d.end_time.strftime("%H:%M:%S").to_s if d
+
+
+    @options[:dids] = Did.all
+    @options[:users] = User.find_all_for_select
+    @options[:devices] = Device.where('user_id != -1').all
+    @options[:providers] = Provider.select('providers.*').joins('JOIN dids ON (providers.id = dids.provider_id)').group('providers.id').all
+    @options[:days] = [_('All'),_('Work_days'), _('Free_Days')]
+    @periods = Didrate.find_hours_for_select({:day=> @options[:sdays], :did=>@options[:did], :d_search=>@options[:d_search].to_i == 1 ? 'true' : 'flase', :did_from=>@options[:did_from], :did_till=>@options[:did_till]})
+
+  end
+
   private
 
   def check_user_for_dids
@@ -1352,5 +1414,39 @@ ORDER BY dids.did ASC"
       end
     end
 
+  end
+
+=begin rdoc
+  Transaltes order_by param to database fields for summary report.
+=end
+
+  def summary_order_by(params, options)
+    case params[:order_by].to_s
+      when "nice_user" then
+        order_by = "nice_user"
+      when "did" then
+        order_by = "did"
+      when "provider" then
+        order_by = "providers.name"
+      when "comment" then
+        order_by = "dids.comment"
+      when "calls" then
+        order_by = "total_calls"
+      when "billed_duration" then
+        order_by = "dids_billsec"
+      when "incoming_price" then
+        order_by = "inc_price"
+      when "owner_price" then
+        order_by = "own_price"
+      when "provider_price" then
+        order_by = "d_prov_price"
+      else
+        options[:order_by] ? order_by = options[:order_by] : order_by = ""
+    end
+
+    without = order_by
+    order_by += " ASC" if options[:order_desc] == 0 and order_by != ""
+    order_by += " DESC" if options[:order_desc] == 1 and order_by != ""
+    return without, order_by
   end
 end

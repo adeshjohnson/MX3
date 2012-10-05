@@ -336,8 +336,7 @@ class Call < ActiveRecord::Base
     GROUP BY provider.name
     #{order_by.size > 0 ? 'ORDER BY ' +order_by : ''}
     "
-    MorLog.my_debug "ddddddddddddddddddddddd"
-    MorLog.my_debug sql
+
     Call.find_by_sql(sql)
   end
 
@@ -1645,6 +1644,79 @@ class Call < ActiveRecord::Base
     return price, max_rate, user_exchange_rate, temp_prefix, user_billsec
   end
 
+
+  def Call.summary_by_dids(user, order, options)
+    group_by = []
+    options[:dids_grouping] == 1 ? group_by << "dids.provider_id" : group_by << "dids.device_id"
+
+
+    cond = ["calldate BETWEEN ? AND ?"]
+    var = [options[:from], options[:till]]
+
+
+    jn = ["JOIN dids ON (dids.id = calls.did_id)", "LEFT JOIN devices ON (dids.device_id = devices.id)", "LEFT JOIN users ON (users.id = dids.user_id)",  "LEFT JOIN providers ON (dids.provider_id = providers.id)"]
+
+    if  options[:did].to_s != ""  and options[:d_search].to_i == 1
+      cond << "dids.did LIKE ?"
+      var << options[:did].gsub(/[^0-9]/, "").to_s + "%"
+    end
+
+    if  options[:did_search_from].to_s != "" and options[:did_search_till].to_s != "" and options[:d_search].to_i == 2
+      cond << "dids.did BETWEEN ? AND ?"
+      var << options[:did_search_from].gsub(/[^0-9]/, "").to_s
+      var << options[:did_search_till].gsub(/[^0-9]/, "").to_s
+    end
+
+    if  options[:provider].to_s != "any"
+      cond << "dids.provider_id = ?"
+      var << options[:provider].to_i
+    end
+
+    if  options[:user_id].to_s != "any"
+      cond << "dids.user_id = ?"
+      var << options[:user_id].to_i
+    end
+
+    if !options[:device_id].blank? and options[:device_id].to_s != "all"
+      cond << "dids.device_id = ?"
+      var << options[:device_id].to_i
+    end
+
+    if options[:sday].to_s != 'all'
+      cond << 'DAYOFWEEK(calls.calldate) IN (1,7)'  if  options[:sday].to_s == 'fd'
+      cond << 'DAYOFWEEK(calls.calldate) IN (2,3,4,5,6)'  if  options[:sday].to_s == 'wd'
+    end
+
+    if options[:period].to_i != -1
+      didrate = Didrate.where({:id=>options[:period]}).first
+      if didrate
+      cond << 'TIME(calls.calldate) BETWEEN ? AND ?'
+      var << didrate.start_time.strftime("%H:%M:%S")
+      var << didrate.end_time.strftime("%H:%M:%S")
+        end
+    end
+
+    s = []
+
+    s << "#{SqlExport.nice_user_sql}, providers.user_id as prov_owner_id, calls.did_id, dids.did, providers.name, dids.comment, dids.provider_id, dids.user_id, dids.device_id, users.owner_id as user_owner_id "
+    s << SqlExport.column_escape_null("COUNT(*)", 'total_calls', 0)
+
+    s << SqlExport.column_escape_null("SUM(calls.billsec)", 'dids_billsec', 0)
+    s << SqlExport.column_escape_null("SUM(calls.did_inc_price)", "inc_price", 0)
+    s << SqlExport.column_escape_null("SUM(calls.did_prov_price)", "d_prov_price", 0)
+    s << SqlExport.column_escape_null("SUM(calls.did_price)", 'own_price', 0)
+
+    order = !order.to_s.blank? ? 'ORDER BY ' + order : ''
+    group = group_by.size > 0 ? 'GROUP BY ' +group_by.join(", ") : ''
+
+
+
+
+      sql = "SELECT #{s.join(', ')} FROM calls #{jn.join(' ')}  WHERE #{ ActiveRecord::Base.sanitize_sql_array([cond.join(' AND '), *var])}  #{group}  #{order} "
+      mysql_res = Call.find_by_sql(sql)
+      return mysql_res
+
+  end
 
   private
 

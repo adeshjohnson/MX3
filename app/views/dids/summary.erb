@@ -1,0 +1,181 @@
+<div id="search_header">
+  <%= form_tag :action => :summary do %>
+      <table class="bordered">
+        <tr>
+          <td>
+            <table class="simple">
+              <tr>
+                <td><%= _("From") %></td>
+                <td><%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %></td>
+              </tr>
+              <tr>
+                <td><%= _("Till") %></td>
+                <td><%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %></td>
+              </tr>
+              <tr>
+                <td><%= radio_button_tag "d_search", 1, @options[:d_search].to_i == 1 %> <%= _("DID") %></td>
+                <td><%= text_field_tag 'did_number', @options[:did], :class => 'imput' %></td>
+              </tr>
+              <tr>
+                <td><%= radio_button_tag "d_search", 2, @options[:d_search].to_i == 2 %> <%= _("DID_Range") %>   </td>
+                <td><%= text_field_tag 'did_search_from', @options[:did_search_from], :class => 'imput' %>
+                  - <%= text_field_tag 'did_search_till', @options[:did_search_till], :class => 'imput' %></td>
+              </tr>
+              <tr>
+                <td><%= _("DID_Provider") %></td>
+                <td><select name="provider_id">
+                  <option value="any" <%= "selected" if @options[:provider] == "any" %> ><%= _("Any") %></option>
+                  <% @options[:providers].each { |provider| %>
+                      <option value="<%= provider.id %>" <%= "selected" if provider.id.to_s == @options[:provider] %> ><%= nice_provider(provider) %> </option>
+                  <% } %>
+                </select></td>
+              </tr>
+              <tr>
+                <td><%= _("Assigned_User_/_Device") %></td>
+                <td><select name="user_id" id='s_user'>
+                  <option value="any" <%= "selected" if @options[:user] == "any" %> ><%= _("Any") %></option>
+                  <% @options[:users].each { |user| %>
+                      <option value="<%= user.id %>" <%= "selected" if user.id.to_s == @options[:user] %> ><%= nice_user(user) %> </option>
+                  <% } %>
+                </select>
+                <span id='user_devices'><select name="s_device">
+                  <option value="all" <%= "selected" if @options[:device_id] == "all" %> ><%= _("All") %></option>
+                  <% @options[:devices].each { |dev| %>
+                      <option value="<%= dev.id %>" <%= "selected" if dev.id.to_s == @options[:device_id] %> ><%= nice_device(dev) %> </option>
+                  <% } %>
+                </select></span>
+                </td>
+              </tr>
+              <tr>
+                <td><%= _("Days") %></td>
+                <td><select name="s_days" onchange="update_period();" id='s_day'>
+                  <option value="all" <%= "selected" if @options[:sdays] == "all" %> ><%= _('All') %></option>
+                  <option value="wd" <%= "selected" if @options[:sdays] == "wd" %> ><%= _('Work_days') %></option>
+                  <option value="fd" <%= "selected" if @options[:sdays] == "fd" %> ><%= _('Free_days') %></option>
+                </select></td>
+              </tr>
+              <tr>
+                <td><%= _("Hour_period") %></td>
+                <td id="update_periods"><%= render :partial => '/did_rates/search_periods', :locals => {:periods => @periods, :period => @options[:period]} %></td>
+              </tr>
+              <tr>
+                <td colspan="5">
+                  <%= _("Group_By_DID_Provider") %>: <%= radio_button_tag "dids_grouping", 1, @options[:dids_grouping].to_i == 1 %>
+                  <%= _("Group_By_Assigned_User_/_Device") %>: <%= radio_button_tag "dids_grouping", 2, @options[:dids_grouping].to_i == 2 %>
+                </td>
+              </tr>
+
+
+            </table>
+            <span style='float: right;'>
+            <%= submit_tag(_("Search"), :disable_with => _('Processing..')) -%>
+            <%= observe_field("s_user", :update => "user_devices", :with => "user_id", :url => {:controller => "devices", :action => "get_devices_for_search"}, :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');") %>
+            <%= link_to b_cross + _('Clear_search'), :action => :summary, :clean => 1 %>  </span>
+          </td>
+
+        </tr>
+      </table>
+  <% end %>
+</div>
+
+
+<br/>
+<br/>
+<%= _("Days") %>: <%= @nice_days %> <br />  <%= _("Hour_period") %>: <%= @nice_period %>
+
+<br/>
+<br/>
+<table class="bordered">
+  <tr>
+    <td align="left" nowrap>
+      <%= _("Records") %>: <%= @total_items %>
+      &nbsp;&nbsp;&nbsp;
+      <%= _("Pages") %>: <%= @total_pages %>
+      &nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" nowrap>
+      <%= render :partial => "page_select_header2" %>
+    </td>
+  </tr>
+</table>
+<br/>
+
+<table class="maintable" width="100%">
+  <tr>
+    <td colspan='6' style='border:0'></td>
+    <th align="center" colspan='3'><%= _('DID_Price') %></th>
+    </tr>
+  <tr>
+    <th align="left"><%= ordered_list_header("did", "did", "DID", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="left"><%= ordered_list_header("provider", "provider", "Provider", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="left"><%= ordered_list_header("comment", "comment", "Comment", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="left"><%= ordered_list_header("nice_user", "nice_user", "User_/_Device", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="right"><%= ordered_list_header("calls", "calls", "Calls", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="right"><%= ordered_list_header("billed_duration", "billed_duration", "Billed_Duration", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="right"><%= ordered_list_header("incoming_price", "incoming_price", "Incoming_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="right"><%= ordered_list_header("owner_price", "owner_price", "Owner_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="right"><%= ordered_list_header("provider_price", "provider_price", "Provider_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+
+
+  </tr>
+  <% if  @dids_lines and @dids_lines.size.to_i > 0 %>
+      <% @dids_lines.each_with_index { |row, i| -%>
+          <tr class="row<%= (i % 2 + 1).to_s %>">
+            <td id="did_<%= row.did_id %>" align="left"><%= link_to row.did, :controller => :dids, :action => :edit, :id => row.did_id %></td>
+            <td id="prov_name_<%= row.did_id %>" align="left">
+              <% if row.prov_owner_id == 0 %>
+                  <%= link_to row.name, :controller => :providers, :action => :edit, :id => row.provider_id %>
+              <% else %>
+                  <%= row.name %>
+              <% end %>
+            </td>
+            <td id="comm_<%= row.did_id %>" align="left"><%= row.comment %></td>
+            <td id="user_dev_<%= row.did_id %>" align="left">
+              <% dev = Device.where({:id => row.device_id}).first %>
+              <% if row.user_owner_id == 0 %>
+                  <%= link_to row.nice_user, :controller => :users, :action => :edit, :id => row.user_id %>
+                  <% if dev %>
+                      /
+                      <%= link_nice_device(dev) %>
+                  <% end %>
+              <% else %>
+                  <%= row.nice_user %>
+                  <% if dev %>
+                      /
+                      <%= nice_device(dev) %>
+                  <% end %>
+              <% end %>
+            </td>
+            <td id="calls_<%= row.did_id %>" align="right"><%= row.total_calls %></td>
+            <td id="dur_<%= row.did_id %>" align="right"><%= nice_time(row.dids_billsec) %></td>
+            <td id="inc_<%= row.did_id %>" align="right"><%= nice_number(row.inc_price) %></td>
+            <td id="own_<%= row.did_id %>" align="right"><%= nice_number(row.own_price) %></td>
+            <td id="prov_<%= row.did_id %>" align="right"><%= nice_number(row.d_prov_price) %></td>
+
+
+          </tr>
+      <% } -%>
+  <% end %>
+  <tr>
+    <th align="left" colspan='4'><%= _("Total") %>:</th>
+    <th id="t_calls" align="right"><%= @total[:calls] %></th>
+    <th id="t_billsec" align="right"><%= nice_time(@total[:min]) %></th>
+    <th id="t_inc" align="right"><%= nice_number(@total[:inc]) %></th>
+    <th id="t_own" align="right"><%= nice_number(@total[:own]) %></th>
+    <th id="t_prov" align="right"><%= nice_number(@total[:prov]) %></th>
+
+  </tr>
+</table>
+
+
+<script type="text/javascript">
+    function update_period() {
+        new Ajax.Updater('update_periods', '<%= Web_Dir %>/did_rates/get_periods_for_search?d_search=' + $('d_search_1').checked + '&did=' + $('did_number').value + '&did_from=' + $('did_search_from').value + '&did_till=' + $('did_search_till').value + '&day=' + $('s_day').value, {asynchronous:true, evalScripts:true, onComplete:function (request) {
+            Element.hide('spinner');
+            Element.toggle('spinner2');
+        }, onLoading:function (request) {
+            Element.show('spinner');
+            Element.toggle('spinner2');
+        } })
+    }
+</script>
