@@ -1,0 +1,8015 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>quick_admins_ct_to_re_user</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">quick_admins_ct_to_re_user</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Reseller's rate higher than user's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Reseller's rate higher than user's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--wholesaleuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;6&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;6&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Reseller's rate higher than user's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Reseller's rate higher than user's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--retailreseller-->
+<!--retailuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Reseller's rate higher than user's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Reseller's rate higher than user's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--wholesaleuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Reseller's rate higher than user's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Reseller's rate higher than user's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--call tracing, allow loss calls 1(admin):0(reseller)-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--allow loss calls-->
+<tr>
+	<td>setTimeout</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings successfully changed:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings successfully changed:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<!--wholesalereseller-->
+<!--retailuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--wholesaleuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--retailreseller-->
+<!--retailuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--wholesaleuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User makes a loss call</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--allow loss calls-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>wholesalereseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings successfully changed:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings successfully changed:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>retailreseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings successfully changed:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings successfully changed:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<!--call tracing, allow loss calls 1(admin):1(reseller)-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--wholesalereseller-->
+<!--retailuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--wholesaleuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--retailreseller-->
+<!--retailuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--wholesaleuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--call tracing, allow loss calls 0(admin):1(reseller)-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--uncheck allow loss calls-->
+<tr>
+	<td>setTimeout</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>allow_loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings successfully changed:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>allow_loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings successfully changed:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<!--wholesalereseller-->
+<!--retailuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser1 (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--wholesaleuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=wholesalereseller (6)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser1 (9)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--retailreseller-->
+<!--retailuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>retailuser2 (10)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--wholesaleuser-->
+<!--93-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>930017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--355-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3550017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--213-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2130017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--376-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>3760017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--244-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>2440017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--1264-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Select user:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Resellers' Users:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>user</td>
+	<td>retailreseller (7)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>user</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>reseller_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>reseller_user</td>
+	<td>label=wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>reseller_user</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>reseller_user</td>
+	<td>wholesaleluser2 (11)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>12640017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Provider's rate higher than reseller's</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
