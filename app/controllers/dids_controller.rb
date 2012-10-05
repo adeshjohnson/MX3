@@ -1219,6 +1219,12 @@ ORDER BY dids.did ASC"
 
   def summary
     @page_title = _('DIDs_report')
+
+    if current_user.is_accountant? and !current_user.accountant_allow_edit('See_Financial_Data')
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => 'main' and return false
+    end
+
     change_date
 
     session[:dids_summary_list_options] ? @options = session[:dids_summary_list_options] : @options = {}
