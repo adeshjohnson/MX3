@@ -52,14 +52,9 @@
 	<td>test</td>
 </tr>
 <tr>
-	<td>uncheck</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>click</td>
+	<td>id=hostname_ip_dynamic</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=ip_authentication_dynamic_1</td>
-	<td>off</td>
 </tr>
 <tr>
 	<td>assertNotVisible</td>
@@ -80,25 +75,6 @@
 	<td>type</td>
 	<td>id=provider_password</td>
 	<td>testinis</td>
-</tr>
-<tr>
-<<<<<<< .mine
-	<td>keyUp</td>
-	<td>provider_reg_line</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>check</td>
-=======
-	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
->>>>>>> .r30326
-	<td>register</td>
-	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -138,7 +114,12 @@
 <!--pridėjau ip_authentication click'ą, antraip nerodo register => testinis.......-->
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>id=hostname_ip_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=register</td>
 	<td></td>
 </tr>
 <tr>
@@ -176,16 +157,6 @@
 	<td>assertValue</td>
 	<td>provider_password</td>
 	<td>testinis</td>
-</tr>
-<tr>
-	<td>uncheck</td>
-	<td>id=ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=ip_authentication_dynamic_1</td>
-	<td>off</td>
 </tr>
 <tr>
 	<td>assertValue</td>

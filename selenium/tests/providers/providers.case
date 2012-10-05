@@ -51,7 +51,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=provider_tech_SIP</td>
+	<td>provider_tech_SIP</td>
 	<td></td>
 </tr>
 <tr>
@@ -72,8 +72,8 @@
 <!--edit SIP-->
 <!--check current values-->
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>Username:</td>
+	<td>assertTextPresent</td>
+	<td>Login/Username:</td>
 	<td></td>
 </tr>
 <tr>
@@ -107,19 +107,14 @@
 	<td>0</td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>provider_login</td>
+	<td>SIP_provider</td>
+</tr>
+<tr>
 	<td>waitForNotVisible</td>
 	<td>registration_notice</td>
 	<td>Registration can be used when at least Username is entered</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=register</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=provider_login</td>
-	<td>SIP_provider</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -152,18 +147,13 @@
 	<td>please_change</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=ip_authentication_dynamic_1</td>
-	<td>on</td>
+	<td>assertNotChecked</td>
+	<td>ip_authentication</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>provider_reg_extension</td>
-	<td></td>
-</tr>
-<tr>
-	<td>uncheck</td>
-	<td>register</td>
 	<td></td>
 </tr>
 <tr>
@@ -205,11 +195,6 @@
 	<td>assertValue</td>
 	<td>qualify_time</td>
 	<td>2000</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>qualify_yes</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
@@ -364,7 +349,7 @@
 <!--modifying values-->
 <tr>
 	<td>select</td>
-	<td>name=device[dtmfmode]</td>
+	<td>device[dtmfmode]</td>
 	<td>label=auto</td>
 </tr>
 <tr>
@@ -384,7 +369,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>ip_authentication</td>
 	<td></td>
 </tr>
 <tr>
@@ -439,77 +424,77 @@
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_alaw</td>
+	<td>codec[alaw]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_ulaw</td>
+	<td>codec[ulaw]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_g723</td>
+	<td>codec[g723]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_g726</td>
+	<td>codec[g726]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_g729</td>
+	<td>codec[g729]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_gsm</td>
+	<td>codec[gsm]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_ilbc</td>
+	<td>codec[ilbc]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_lpc10</td>
+	<td>codec[lpc10]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_speex</td>
+	<td>codec[speex]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_adpcm</td>
+	<td>codec[adpcm]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_h263</td>
+	<td>codec[slin]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_slin</td>
+	<td>codec[h261]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_h261</td>
+	<td>codec[h263]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_h263p</td>
+	<td>codec[h263p]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>id=codec_h264</td>
+	<td>codec[h264]</td>
 	<td></td>
 </tr>
 <tr>
@@ -620,27 +605,22 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=provider_login</td>
-	<td>SIP_provider</td>
+	<td>provider_login</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=provider_password</td>
-	<td>please_change</td>
+	<td>provider_password</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>ip_authentication</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>provider_reg_extension</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=register</td>
 	<td></td>
 </tr>
 <tr>
@@ -690,77 +670,77 @@
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_alaw</td>
+	<td>codec[alaw]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_ulaw</td>
+	<td>codec[ulaw]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_g723</td>
+	<td>codec[g723]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_g726</td>
+	<td>codec[g726]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_g729</td>
+	<td>codec[g729]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_gsm</td>
+	<td>codec[gsm]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_ilbc</td>
+	<td>codec[ilbc]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_lpc10</td>
+	<td>codec[lpc10]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_speex</td>
+	<td>codec[speex]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_adpcm</td>
+	<td>codec[adpcm]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_h263</td>
+	<td>codec[slin]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_slin</td>
+	<td>codec[h261]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_h261</td>
+	<td>codec[h263]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_h263p</td>
+	<td>codec[h263p]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>id=codec_h264</td>
+	<td>codec[h264]</td>
 	<td></td>
 </tr>
 <tr>
@@ -835,23 +815,13 @@
 </tr>
 <!--...change and assert register line-->
 <tr>
-	<td>keyDown</td>
-	<td>provider_login</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>provider_login</td>
 	<td>login</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=provider_login</td>
-	<td>login</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>uncheck</td>
+	<td>ip_authentication</td>
 	<td></td>
 </tr>
 <tr>
@@ -886,28 +856,13 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=provider_password</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
 	<td>provider_reg_extension</td>
 	<td>reg_extension</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>provider_reg_extension</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>reg_register</td>
 	<td>register =&gt; login:@0.0.0.1:5061/reg_extension</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>provider_login</td>
-	<td>w</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -915,12 +870,7 @@
 	<td>test_login</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>provider_login</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>reg_register</td>
 	<td>register =&gt; test_login:@0.0.0.1:5061/reg_extension</td>
 </tr>
@@ -930,12 +880,7 @@
 	<td>test_password</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>provider_password</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>reg_register</td>
 	<td>register =&gt; test_login:test_password@0.0.0.1:5061/reg_extension</td>
 </tr>
@@ -945,12 +890,7 @@
 	<td>127.0.0.1</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>provider_port</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>reg_register</td>
 	<td>register =&gt; test_login:test_password@127.0.0.1:5061/reg_extension</td>
 </tr>
@@ -960,12 +900,7 @@
 	<td>9999</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>provider_port</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>reg_register</td>
 	<td>register =&gt; test_login:test_password@127.0.0.1:9999/reg_extension</td>
 </tr>
@@ -975,7 +910,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>reg_register</td>
 	<td>register =&gt;</td>
 </tr>
@@ -985,12 +920,7 @@
 	<td>new_regline</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>provider_reg_line</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>reg_register</td>
 	<td>register =&gt; new_regline</td>
 </tr>
@@ -1000,9 +930,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>reg_register</td>
-	<td>register =&gt; test_login:test_password@127.0.0.1:9999/reg_extension</td>
+	<td>register =&gt; test_login:test_password@127.0.0.1:9999/</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1025,11 +955,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>check</td>
-	<td>reg_extension</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertChecked</td>
 	<td>reg_extension</td>
 	<td></td>
@@ -1043,6 +968,16 @@
 	<td>click</td>
 	<td>reg_line</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>reg_register</td>
+	<td>register =&gt;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_reg_line</td>
+	<td>new_regline</td>
 </tr>
 <tr>
 	<td>waitForText</td>
@@ -1256,6 +1191,11 @@
 <!--create-->
 <tr>
 	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/providers/new</td>
 	<td></td>
 </tr>
@@ -1325,6 +1265,11 @@
 	<td>assertValue</td>
 	<td>provider_password</td>
 	<td>please_change</td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>ip_authentication</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -1501,6 +1446,11 @@
 	<td>type</td>
 	<td>provider_call_limit</td>
 	<td>100</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ip_authentication</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1705,13 +1655,18 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=provider_login</td>
-	<td>IAX2_provider</td>
+	<td>provider_login</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=provider_password</td>
-	<td>please_change</td>
+	<td>provider_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>ip_authentication</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -2800,7 +2755,17 @@
 <!--testing ip addres validation-->
 <tr>
 	<td>open</td>
-	<td>/billing/providers/edit/1</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>hostname_ip_ip</td>
 	<td></td>
 </tr>
 <tr>
@@ -2821,6 +2786,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Hostname is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>hostname_ip_ip</td>
 	<td></td>
 </tr>
 <tr>
@@ -2845,23 +2815,28 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>When IP Authentication checked Host cannot be &quot;dynamic&quot;</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>provider_server_ip</td>
-	<td>22.33.44.55</td>
+	<td>dynamic</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>hostname_ip_ip</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>provider_server_ip</td>
 	<td>aaa.lt</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3157,7 +3132,7 @@
 <!--...Hostname-->
 <tr>
 	<td>click</td>
-	<td>id=prov_host_1</td>
+	<td>hostname_ip_hostname</td>
 	<td></td>
 </tr>
 <tr>
@@ -3196,9 +3171,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=prov_host_1</td>
-	<td>on</td>
+	<td>assertChecked</td>
+	<td>hostname_ip_hostname</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertVisible</td>
@@ -3228,7 +3203,7 @@
 <!--...Hostname/IP-->
 <tr>
 	<td>click</td>
-	<td>id=prov_host_2</td>
+	<td>hostname_ip_ip</td>
 	<td></td>
 </tr>
 <tr>
@@ -3272,9 +3247,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=prov_host_2</td>
-	<td>on</td>
+	<td>assertChecked</td>
+	<td>hostname_ip_ip</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertVisible</td>
@@ -3324,7 +3299,7 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=prov_host_2</td>
+	<td>hostname_ip_ip</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -3344,7 +3319,7 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=prov_host_2</td>
+	<td>hostname_ip_ip</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -3360,7 +3335,7 @@
 <!--...Dynamic-->
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication_dynamic_2</td>
+	<td>hostname_ip_dynamic</td>
 	<td></td>
 </tr>
 <tr>
@@ -3379,11 +3354,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=provider_login</td>
-	<td>Test Provider</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -3394,9 +3364,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=ip_authentication_dynamic_2</td>
-	<td>on</td>
+	<td>assertChecked</td>
+	<td>hostname_ip_dynamic</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertNotVisible</td>
@@ -3755,17 +3725,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=prov_host_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=register</td>
+	<td>hostname_ip_hostname</td>
 	<td></td>
 </tr>
 <tr>
@@ -3795,18 +3755,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>hostname_ip_dynamic</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
 	<td>When Provider is Dynamic, it is not allowed to register to it</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=prov_host_2</td>
+	<td>hostname_ip_hostname</td>
 	<td></td>
 </tr>
 <tr>
@@ -3844,81 +3804,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Hostname/IP is blank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/edit/1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>When Provider is Dynamic, it is not allowed to register to it</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=prov_host_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_server_ip</td>
-	<td>127.0.0.1</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=device_ipaddr</td>
-	<td>127.0.0.1</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_port</td>
-	<td>5061</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>register</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>provider_reg_line</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>reg_extension</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_reg_extension</td>
-	<td>1234</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>add_to_servers_1</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>waitForTextPresent</td> 	<td>Configuration error.</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/servers/edit/1</td>

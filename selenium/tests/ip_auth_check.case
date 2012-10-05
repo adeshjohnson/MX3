@@ -74,11 +74,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForValue</td>
 	<td>id=provider_server_ip</td>
 	<td>22.33.44.55</td>
@@ -169,11 +164,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>id=provider_server_ip</td>
 	<td>0.0.0.5</td>
@@ -200,7 +190,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>id=ip_authentication</td>
 	<td></td>
 </tr>
 <tr>
@@ -226,11 +216,6 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>This IP is not available</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -310,7 +295,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>This IP is not available</td>
+	<td>This IP and port is not available</td>
 	<td></td>
 </tr>
 <tr>
@@ -375,7 +360,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>id=ip_authentication</td>
 	<td></td>
 </tr>
 <tr>
@@ -405,7 +390,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>id=ip_authentication</td>
 	<td></td>
 </tr>
 <tr>
@@ -469,13 +454,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>When IP Authentication checked IP must be unique</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>assertTextPresent</td>
+	<td>Provider with such IP and Port already exist</td>
 	<td></td>
 </tr>
 <tr>
@@ -655,7 +635,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>id=ip_authentication</td>
 	<td></td>
 </tr>
 <tr>
@@ -685,7 +665,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>id=ip_authentication</td>
 	<td></td>
 </tr>
 <tr>
@@ -750,12 +730,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>This IP is not available</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>This IP and port is not available</td>
 	<td></td>
 </tr>
 <tr>
@@ -776,11 +751,6 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>This IP is not available</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
