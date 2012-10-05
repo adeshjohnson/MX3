@@ -10,6 +10,13 @@
     <tr>
       <td height="10"></td>
     </tr>
+
+    <% if @device.is_dahdi? %>
+        <tr>
+          <td id="channel_name"> <%= _('Channel') %>:</td>
+          <td id="channel_value"><%= text_field 'device', 'name', "class" => "input" %> </td>
+        </tr>
+        <%else%>
     <% if !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_2] != 2) %>
         <script type="text/javascript">
             //<![CDATA[
@@ -158,10 +165,11 @@
               </tr>
 
                <%end%>
+
             </table>
           </td>
         </tr>
-
+        <%end%>
     <% end %>
 
 <% end %>
