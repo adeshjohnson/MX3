@@ -1401,14 +1401,14 @@
 	<td>reg_extension</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=provider_password</td>
-	<td></td>
-</tr>
-<tr>
 	<td>keyUp</td>
 	<td>provider_reg_extension</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
@@ -1506,11 +1506,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>id=reg_register</td>
-	<td>register =&gt; test_login:test_password@127.0.0.1:9999/reg_extension</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>provider_reg_extension</td>
 	<td>reg_extension</td>
@@ -1519,6 +1514,11 @@
 	<td>keyUp</td>
 	<td>provider_reg_extension</td>
 	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=reg_register</td>
+	<td>register =&gt; test_login:test_password@127.0.0.1:9999/reg_extension</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
