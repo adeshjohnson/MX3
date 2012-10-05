@@ -42,13 +42,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>click</td>
+	<td>id=ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=ip_authentication</td>
 	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=prov_host_2</td>
+	<td>id=hostname_ip_ip</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -78,18 +83,28 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=prov_host_1</td>
+	<td>id=hostname_ip_hostname</td>
 	<td></td>
 </tr>
 <tr>
+	<td>waitForValue</td>
+	<td>id=hostname_ip_hostname</td>
+	<td>on</td>
+</tr>
+<tr>
 	<td>assertValue</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>id=ip_authentication</td>
 	<td>on</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=prov_host_2</td>
+	<td>id=hostname_ip_ip</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=hostname_ip_ip</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -98,22 +113,52 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=prov_host_1</td>
+	<td>id=hostname_ip_dynamic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=hostname_ip_dynamic</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>When Provider is Dynamic, it is not allowed to register to it</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=prov_host_2</td>
+	<td>id=hostname_ip_ip</td>
 	<td></td>
 </tr>
 <tr>
+	<td>waitForValue</td>
+	<td>id=hostname_ip_ip</td>
+	<td>on</td>
+</tr>
+<tr>
 	<td>assertValue</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>id=ip_authentication</td>
 	<td>on</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=prov_host_1</td>
+	<td>id=hostname_ip_hostname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=hostname_ip_hostname</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=provider_login</td>
 	<td></td>
 </tr>
 <tr>
@@ -123,7 +168,47 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=prov_host_1</td>
+	<td>id=hostname_ip_hostname</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=hostname_ip_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=hostname_ip_ip</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=ip_authentication</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=ip_authentication</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=hostname_ip_ip</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=hostname_ip_hostname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=hostname_ip_hostname</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -143,17 +228,27 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=ip_authentication_dynamic_1</td>
+	<td>id=ip_authentication</td>
 	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=prov_host_1</td>
+	<td>id=hostname_ip_hostname</td>
 	<td>on</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=register</td>
+	<td>id=ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=ip_authentication</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=provider_login</td>
 	<td></td>
 </tr>
 <tr>
@@ -162,13 +257,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Registration can be used when at least Username is entered</td>
+	<td>waitForTextPresent</td>
+	<td>Provider should have login</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=register</td>
+	<td>id=ip_authentication</td>
 	<td></td>
 </tr>
 <tr>
