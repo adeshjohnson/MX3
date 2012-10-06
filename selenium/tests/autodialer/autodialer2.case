@@ -33,7 +33,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
+	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
 <tr>
@@ -67,8 +67,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/autodialer/campaign_numbers/1</td>
+	<td>assertTextPresent</td>
+	<td>Numbers imported</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Campaign: test </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>File size: 12 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Total numbers imported: 1 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Back to Numbers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back to Numbers</td>
 	<td></td>
 </tr>
 <tr>
@@ -249,7 +274,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
+	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
 <tr>
@@ -414,7 +439,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
+	<td>Succesfully logged in</td>
 	<td></td>
 </tr>
 <tr>
@@ -431,6 +456,431 @@
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Click here to see bad numbers (15)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/bad_numbers_from_csv/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad rows from CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Duplicate Number in file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>33333333333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>11111111111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_numbers/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_3</td>
+	<td>756</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_4</td>
+	<td>11111111111</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_5</td>
+	<td>22222222222</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_6</td>
+	<td>33333333333</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/import_numbers_from_file/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/autodailer_same_numbers2.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>4 out of 17 numbers were imported</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Click here to see bad numbers (13)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Campaign: Campaign </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>File size: 199 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Total numbers imported: 17 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Back&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_numbers/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_10</td>
+	<td>312414</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_11</td>
+	<td>44444444444</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_12</td>
+	<td>66666666666</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_13</td>
+	<td>55555555555</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_3</td>
+	<td>756</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_3</td>
+	<td>756</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_4</td>
+	<td>11111111111</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_5</td>
+	<td>22222222222</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_6</td>
+	<td>33333333333</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/import_numbers_from_file/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/autodailer_same_numbers.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Click here to see bad numbers (15)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/bad_numbers_from_csv/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad rows from CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Duplicate Number in file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>33333333333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>11111111111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_numbers/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_1</td>
+	<td>111</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_17</td>
+	<td>756</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_18</td>
+	<td>11111111111</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_19</td>
+	<td>22222222222</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_20</td>
+	<td>33333333333</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_name</td>
+	<td>User_campaign</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/import_numbers_from_file/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/autodailer_same_numbers.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Click here to see bad numbers (15)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/bad_numbers_from_csv/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad rows from CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Duplicate Number in file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>33333333333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>11111111111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_numbers/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_24</td>
+	<td>756</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_25</td>
+	<td>11111111111</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_26</td>
+	<td>22222222222</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_27</td>
+	<td>33333333333</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/import_numbers_from_file/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/autodailer_same_numbers2.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>4 out of 17 numbers were imported</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Click here to see bad numbers (13)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Campaign: User_campaign</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>File size: 199 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Total numbers imported: 17 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Back&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_numbers/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_24</td>
+	<td>756</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_25</td>
+	<td>11111111111</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_26</td>
+	<td>22222222222</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_27</td>
+	<td>33333333333</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_31</td>
+	<td>312414</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_32</td>
+	<td>44444444444</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_33</td>
+	<td>66666666666</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_34</td>
+	<td>55555555555</td>
 </tr>
 </tbody></table>
 </body>
