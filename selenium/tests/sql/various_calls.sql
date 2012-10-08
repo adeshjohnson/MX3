@@ -166,3 +166,4 @@ INSERT INTO `users`
 UPDATE users SET lcr_id=11 where id=5;
 update calls set did_inc_price=2 where calldate like "2011%";
 update calls set did_price=4 where calldate like "2011%";
+update calls set did_prov_price=1.2565 where calldate like "2011%";
