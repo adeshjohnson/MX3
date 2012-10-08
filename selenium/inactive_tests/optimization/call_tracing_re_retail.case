@@ -1,0 +1,1369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<!--insert sql-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/call_tracing_re</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/call_tracing/update_location</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>rspro</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>rspro1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--create tariff to user-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate1</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate2</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate473</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate24</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate25</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate478</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate21</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate22</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Update']</td>
+	<td></td>
+</tr>
+<!--create tariff to provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/7?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_5</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_19</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/7?page=2&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_70</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/7?page=3&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_11358</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/7?page=4&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_136</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/7?page=5&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_11366</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/7?page=7&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_272</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/7?page=9&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_11381</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_11393</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--set pro to lcr-->
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>select_prov</td>
+	<td>label=specpro - SIP/0.0.0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--call tracing-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=user_rspro (7)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>297960017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>297960017219</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>prefix_7</td>
+	<td>29796</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>22.000000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price_2</td>
+	<td>6.000000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>location</td>
+	<td>Default location</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>LCR changed from Primary to:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=specpro/2</td>
+	<td>specpro/2</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<!--sql default_location_id updates from 1 to 2-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--set own provider to reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>device[location_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/localization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default location</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<!--create tariff to user-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/10?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate1</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate2</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate473</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate24</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate25</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate478</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate21</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate22</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Update']</td>
+	<td></td>
+</tr>
+<!--create tariff to provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/11?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_5</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_19</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/11?page=2&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_70</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/11?page=3&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_11358</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/11?page=4&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_136</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/11?page=5&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_11366</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/11?page=7&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_272</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/11?page=9&amp;st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_11381</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_11393</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--set pro to lcr-->
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>select_prov</td>
+	<td>label=specprov - SIP/0.0.0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--set tariff to user-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_tariff_id</td>
+	<td>label=Retail - spectariffres</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<!--call tracing-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=User Resellers (5)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>297960017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--USDEUR INTERNAL ERROR. - ID: 20121008100919 - NoMethodError-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>297960017219</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>prefix_5</td>
+	<td>29796</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>22.000000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price_7</td>
+	<td>6.000000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>destination_group_5</td>
+	<td>Aruba MOB</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>location</td>
+	<td>Default location</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/localization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default location</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--insert sql-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/call_tracing/delete_files</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--call tracing-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=User Resellers (5)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>297960017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>No location found. Please change device location</td>
+	<td></td>
+</tr>
+<!--assert-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>device[location_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/localization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default location</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>locationnew</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>name_7</td>
+	<td>locationnew</td>
+</tr>
+<!--edit-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[location_id]</td>
+	<td>label=locationnew</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_name</td>
+	<td>105oi</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_secret</td>
+	<td>105oiuy436ersg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Dabar  ir niekur nepažymėjus ip  auth reselleris gauna pranešimą This IP and port is not available-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default location locationnew</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/localization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name_6</td>
+	<td>Default location</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name_7</td>
+	<td>locationnew</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>locationnew</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Device']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Device']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>New device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>newdevice</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>device_device_type_IAX2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>device[location_id]</td>
+	<td>Default location</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[location_id]</td>
+	<td>locationnew</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/localization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default location</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name_7</td>
+	<td>locationnew</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--insert sql-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/call_tracing/delete_files</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--create location-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>device[location_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/localization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default location</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>locationnew</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>name_9</td>
+	<td>locationnew</td>
+</tr>
+<!--edit-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[location_id]</td>
+	<td>label=locationnew</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_name</td>
+	<td>105oi</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_secret</td>
+	<td>105oiuy436ersg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default location locationnew</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[location_id]</td>
+	<td>label=Default location</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/localization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name_8</td>
+	<td>Default location</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name_9</td>
+	<td>locationnew</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Location deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>locationnew</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--insert sql-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/call_tracing/seconddevice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_name</td>
+	<td>10011</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>device[location_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>specdevice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>device[location_id]</td>
+	<td>Default location</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--insert sql-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/call_tracing/thirddevice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/112</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>device[location_id]</td>
+	<td>Default location</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
