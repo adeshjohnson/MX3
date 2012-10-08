@@ -128,7 +128,13 @@ class DialplansController < ApplicationController
     # checking if selected user belongs to current user.
     if !params[:user].blank? and User.find(:first, :conditions => ['id =  ? AND owner_id != ? AND ? != 0 ', params[:user], current_user.id, current_user.id]) and !current_user.is_admin?
        flash[:notice] = _('Dont_be_so_smart')
-       redirect_to :action => 'edit', :id => @dp.id and return false
+       redirect_to :controller => 'callc', :action => 'main' and return false
+    end      
+         
+    # checking if selected device belongs to selected user. 
+    if !params[:users_device].blank? and !params[:user].blank? and !Device.find(:first, :conditions => ['user_id = ? AND id = ?', params[:user].to_s, params[:users_device].to_s])
+       flash[:notice] = _('Dont_be_so_smart')
+       redirect_to :controller => 'callc', :action => 'main' and return false
     end
 
     @dp.name = params[:dialplan][:name].strip
@@ -266,7 +272,13 @@ class DialplansController < ApplicationController
     # checking if selected user belongs to current user.
     if !params[:user].blank? and User.find(:first, :conditions => ['id =  ? AND owner_id != ? AND ? != 0 ', params[:user], current_user.id, current_user.id]) and !current_user.is_admin?
        flash[:notice] = _('Dont_be_so_smart')
-       redirect_to :action => 'new' and return false
+       redirect_to :controller => 'callc', :action => 'main' and return false
+    end      
+         
+    # checking if selected device belongs to selected user. 
+    if !params[:users_device].blank? and !params[:user].blank? and !Device.find(:first, :conditions => ['user_id = ? AND id = ?', params[:user].to_s, params[:users_device].to_s])
+       flash[:notice] = _('Dont_be_so_smart')
+       redirect_to :controller => 'callc', :action => 'main' and return false
     end
 
     if params[:dialplan][:dptype] == "callingcard"
