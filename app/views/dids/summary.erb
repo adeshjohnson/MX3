@@ -102,13 +102,16 @@
 
 <table class="maintable" width="100%">
   <tr>
-    <td colspan='4' style='border:0'></td>
+    <td colspan='3' style='border:0'></td>
     <th align="center" colspan='3'><%= _('DID_Price') %></th>
     </tr>
   <tr>
 
+    <% if @options[:dids_grouping].to_i == 1%>
     <th align="left"><%= raw nice_list_order("provider", "Provider", @options) %></th>
+        <%else%>
     <th align="left"><%= ordered_list_header("nice_user", "nice_user", "User_/_Device", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+        <%end%>
     <th align="right"><%= ordered_list_header("calls", "calls", "Calls", @options.merge({:order_by => @options[:order_by_name]})) %></th>
     <th align="right"><%= ordered_list_header("billed_duration", "billed_duration", "Billed_Duration", @options.merge({:order_by => @options[:order_by_name]})) %></th>
     <th align="right"><%= ordered_list_header("incoming_price", "incoming_price", "Incoming_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
@@ -120,7 +123,7 @@
   <% if  @dids_lines and @dids_lines.size.to_i > 0 %>
       <% @dids_lines.each_with_index { |row, i| -%>
           <tr class="row<%= (i % 2 + 1).to_s %>">
-
+            <% if @options[:dids_grouping].to_i == 1%>
             <td id="prov_name_<%= row.did_id %>" align="left">
               <% if row.prov_owner_id == 0 %>
                   <%= link_to row.name, :controller => :providers, :action => :edit, :id => row.did_provider_id %>
@@ -128,6 +131,7 @@
                   <%= row.name %>
               <% end %>
             </td>
+            <%else%>
             <td id="user_dev_<%= row.did_id %>" align="left">
               <% dev = Device.where({:id => row.device_id}).first %>
               <% if row.user_owner_id == 0 %>
@@ -144,6 +148,7 @@
                   <% end %>
               <% end %>
             </td>
+            <%end%>
             <td id="calls_<%= row.did_id %>" align="right"><%= row.total_calls %></td>
             <td id="dur_<%= row.did_id %>" align="right"><%= nice_time(row.dids_billsec) %></td>
             <td id="inc_<%= row.did_id %>" align="right"><%= nice_number(row.inc_price) %></td>
@@ -155,7 +160,7 @@
       <% } -%>
   <% end %>
   <tr>
-    <th align="left" colspan='2'><%= _("Total") %>:</th>
+    <th align="left" colspan='1'><%= _("Total") %>:</th>
     <th id="t_calls" align="right"><%= @total[:calls] %></th>
     <th id="t_billsec" align="right"><%= nice_time(@total[:min]) %></th>
     <th id="t_inc" align="right"><%= nice_number(@total[:inc]) %></th>
