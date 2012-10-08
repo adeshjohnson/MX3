@@ -1227,7 +1227,7 @@ ORDER BY dids.did ASC"
 
     change_date
 
-    session[:dids_summary_list_options] ? @options = session[:dids_summary_list_options] : @options = {}
+    @options = ((params[:clean] || !session[:dids_summary_list_options]) ? {} : session[:dids_summary_list_options])
 
     params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page])
 
@@ -1246,6 +1246,8 @@ ORDER BY dids.did ASC"
     (params[:s_device] and params[:s_device].to_s != "") ? @options[:device_id] = params[:s_device] : @options[:device_id] = "all"
     (params[:s_days] and params[:s_days].to_s != "") ? @options[:sdays] = params[:s_days] : @options[:sdays] = "all"
     (params[:period] and params[:period].to_s != "") ? @options[:period] = params[:period] : @options[:period] = "-1"
+    (params[:did_search_from] and params[:did_search_from].to_s != "") ? @options[:did_search_from] = params[:did_search_from] : @options[:did_search_from] = ""
+    (params[:did_search_till] and params[:did_search_till].to_s != "") ? @options[:did_search_till] = params[:did_search_till] : @options[:did_search_till] = ""
 
     @options[:order_by], order_by = summary_order_by(params, @options)
 
@@ -1280,7 +1282,9 @@ ORDER BY dids.did ASC"
     @options[:devices] = Device.where('user_id != -1').all
     @options[:providers] = Provider.select('providers.*').joins('JOIN dids ON (providers.id = dids.provider_id)').group('providers.id').all
     @options[:days] = [_('All'),_('Work_days'), _('Free_Days')]
-    @periods = Didrate.find_hours_for_select({:day=> @options[:sdays], :did=>@options[:did], :d_search=>@options[:d_search].to_i == 1 ? 'true' : 'flase', :did_from=>@options[:did_from], :did_till=>@options[:did_till]})
+    @periods = Didrate.find_hours_for_select({:day=> @options[:sdays], :did=>@options[:did], :d_search=>@options[:d_search].to_i == 1 ? 'true' : 'flase', :did_from=>@options[:did_search_from], :did_till=>@options[:did_search_till]})
+
+    session[:dids_summary_list_options] = @options
 
   end
 

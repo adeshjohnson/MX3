@@ -33,9 +33,9 @@
               <tr>
                 <td><%= _("Assigned_User_/_Device") %></td>
                 <td><select name="user_id" id='s_user'>
-                  <option value="any" <%= "selected" if @options[:user] == "any" %> ><%= _("Any") %></option>
+                  <option value="any" <%= "selected" if @options[:user_id] == "any" %> ><%= _("Any") %></option>
                   <% @options[:users].each { |user| %>
-                      <option value="<%= user.id %>" <%= "selected" if user.id.to_s == @options[:user] %> ><%= nice_user(user) %> </option>
+                      <option value="<%= user.id %>" <%= "selected" if user.id.to_s == @options[:user_id] %> ><%= nice_user(user) %> </option>
                   <% } %>
                 </select>
                 <span id='user_devices'><select name="s_device">
@@ -106,8 +106,8 @@
     <th align="center" colspan='3'><%= _('DID_Price') %></th>
     </tr>
   <tr>
-    <th align="left"><%= ordered_list_header("did", "did", "DID", @options.merge({:order_by => @options[:order_by_name]})) %></th>
-    <th align="left"><%= ordered_list_header("provider", "provider", "Provider", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <th align="left"><%= raw nice_list_order("did", "DID", @options) %></th>
+    <th align="left"><%= raw nice_list_order("provider", "Provider", @options) %></th>
     <th align="left"><%= ordered_list_header("comment", "comment", "Comment", @options.merge({:order_by => @options[:order_by_name]})) %></th>
     <th align="left"><%= ordered_list_header("nice_user", "nice_user", "User_/_Device", @options.merge({:order_by => @options[:order_by_name]})) %></th>
     <th align="right"><%= ordered_list_header("calls", "calls", "Calls", @options.merge({:order_by => @options[:order_by_name]})) %></th>

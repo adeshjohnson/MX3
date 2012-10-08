@@ -1647,7 +1647,7 @@ class Call < ActiveRecord::Base
 
   def Call.summary_by_dids(user, order, options)
     group_by = []
-    options[:dids_grouping] == 1 ? group_by << "dids.provider_id" : group_by << "dids.device_id"
+    options[:dids_grouping] == 1 ? group_by << "dids.provider_id" : group_by << "dids.user_id, dids.device_id"
 
 
     cond = ["calldate BETWEEN ? AND ?"]
