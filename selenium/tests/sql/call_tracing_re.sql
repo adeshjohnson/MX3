@@ -1,6 +1,8 @@
 INSERT INTO `addresses` (`id`, `direction_id`, `state`, `county`, `city`, `postcode`, `address`, `phone`, `mob_phone`, `fax`, `email`) VALUES
 (5, 1, '', '', '', '', '', '', '', '', ''),
-(6, 1, '', '', '', '', '', '', '', '', '');
+(6, 1, '', '', '', '', '', '', '', '', ''),
+(7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 1, '', '', '', '', '', '', '', '', '');
 
 INSERT INTO `aratedetails` (`id`, `from`, `duration`, `artype`, `round`, `price`, `rate_id`, `start_time`, `end_time`, `daytype`) VALUES
 (237, 1, -1, 'minute', 1, 0.200000000000000, 504, '00:00:00', '23:59:59', ''),
@@ -20,6 +22,8 @@ INSERT INTO `aratedetails` (`id`, `from`, `duration`, `artype`, `round`, `price`
 (251, 1, -1, 'minute', 1, 11.000000000000000, 518, '00:00:00', '23:59:59', ''),
 (252, 1, -1, 'minute', 1, 11.000000000000000, 519, '00:00:00', '23:59:59', '');
 
+INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
+(403, 'Default_device_location_id', '3', 3, NULL),
 
 INSERT INTO `devicegroups` (`id`, `user_id`, `address_id`, `name`, `added`, `primary`) VALUES
 (4, 6, 5, 'primary', '2012-10-07 11:33:52', 1),
@@ -29,7 +33,9 @@ INSERT INTO `devicecodecs` (`id`, `device_id`, `codec_id`, `priority`) VALUES
 (5, 8, 1, 0),
 (6, 8, 5, 0),
 (9, 9, 1, 0),
-(10, 9, 5, 0);
+(10, 9, 5, 0),
+(7, 11, 1, 0),
+(8, 11, 5, 0);
 
 INSERT INTO `locationrules` (`id`, `location_id`, `name`, `enabled`, `cut`, `add`, `minlen`, `maxlen`, `lr_type`, `lcr_id`, `tariff_id`, `did_id`, `device_id`) VALUES
 (2, 2, 'Int. prefix', 1, '00', '', 10, 20, 'dst', NULL, NULL, NULL, NULL);
@@ -105,8 +111,11 @@ INSERT INTO `providers` (`id`, `name`, `tech`, `channel`, `login`, `password`, `
 (4, 'active_without_rate', 'SIP', '', 'active_without_rate', 'please_change', '0.0.0.0', '5060', 1, 1, 9, 0, 0, '', '', 9, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, 0, 0.000000000000000),
 (5, 'inactive_with_rate', 'SIP', '', 'inactive_with_rate', 'please_change', '0.0.0.0', '5060', 1, 1, 8, 0, 0, '', '', 10, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, 0, 0.000000000000000),
 (6, 'inactive_without_rate', 'SIP', '', 'inactive_without_rate', 'please_change', '0.0.0.0', '5060', 1, 1, 9, 0, 0, '', '', 11, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, 0, 0.000000000000000),
-(7, 'specprov', 'SIP', '', 'specprov', 'please_change', '0.0.0.0', '5060', 1, 1, 11, 0, 0, '', '', 14, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 3, 0, 0.000000000000000);
+(7, 'specprov', 'SIP', '', 'specprov', 'please_change', '0.0.0.0', '5060', 1, 1, 11, 0, 0, '', '', 13, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 3, 0, 0.000000000000000);
 
+INSERT INTO `serverproviders` (`id`, `server_id`, `provider_id`) VALUES
+(1, 1, 2),
+(2, 1, 3);
 
 INSERT INTO `devices` (`id`,`name`,`host`   ,`secret`      ,`context`  ,`ipaddr`,`port`,`regseconds`,`accountcode`,`callerid`,`extension`,`voicemail_active`,`username`,`device_type`,`user_id`,`primary_did_id`,`works_not_logged`,`forward_to`,`record`,`transfer`,`disallow`,`allow`    ,`deny`           ,`permit`         ,`nat`            ,`qualify`,`fullcontact`,`canreinvite`,`devicegroup_id`,`dtmfmode`,`callgroup`,`pickupgroup`,`fromuser`,`fromdomain`,`trustrpid`,`sendrpid`,`insecure`,`progressinband`,`videosupport`,`location_id`,`description`,`istrunk` ,`cid_from_dids`,`pin`   ,`tell_balance`,`tell_time`,`tell_rtime_when_left`,`repeat_rtime_every`,`t38pt_udptl`,`regserver`,`ani`,`promiscredir`,`timeout`,`process_sipchaninfo`,`temporary_id`,`allow_duplicate_calls`,`call_limit`,`lastms`,`faststart`,`h245tunneling`,`latency`,`grace_time`,`recording_to_email`,`recording_keep`,`recording_email`,`record_forced`,`fake_ring`,`save_call_log`,`mailbox`     ,`server_id`,`enable_mwi`,`authuser`,`requirecalltoken`,`language`)
 VALUES                ( 13  ,1001  ,'dynamic','6mgs1bhnz4cy','mor_local',''      ,0     ,0           , 9           , NULL     ,1001       ,0                 ,1001      ,'SIP'        ,7        ,0               ,1                 ,0           ,0       ,'no'      ,'all'     ,'alaw;g729','0.0.0.0/0.0.0.0','0.0.0.0/0.0.0.0','yes'            ,1000     ,NULL         ,'no'         ,NULL            ,'rfc2833' ,NULL       ,NULL         ,''        ,''          ,'no'       ,'no'      ,''        ,'no'            ,'no'         ,1             ,'specdevice' ,0         ,0              , 864193 ,0             ,0          ,60                    ,60                  ,'no'         ,NULL       ,0    ,'no'          ,60       ,0                    ,NULL          ,0                      ,0           ,0       ,'yes'      ,'yes'          ,0        ,NULL        ,0                   ,0               ,''               ,0              ,0          ,0              ,'1001@default',1          ,0           ,''        ,'no'              ,'en');
