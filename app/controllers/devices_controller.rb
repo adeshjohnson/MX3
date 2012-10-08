@@ -1988,16 +1988,18 @@ class DevicesController < ApplicationController
 =end
 
   def get_devices_for_search
+     options ={}
+     options[:include_did] = params[:did_search].to_i
     if params[:user_id] == "all"
       if ["admin", "accountant"].include?(session[:usertype])
-        @devices = Device.find_all_for_select
+        @devices = Device.find_all_for_select(nil, options)
       else
-        @devices = Device.find_all_for_select(corrected_user_id)
+        @devices = Device.find_all_for_select(corrected_user_id, options)
       end
     else
       @user = User.find(params[:user_id])
       if @user and (["admin", "accountant"].include?(session[:usertype]) or @user.owner_id = corrected_user_id)
-        @devices = @user.devices(:conditions => "device_type != 'FAX'")
+        @devices = params[:did_search].to_i == 0 ? @user.devices(:conditions => "device_type != 'FAX'")  : @user.devices(:conditions => "device_type != 'FAX'").select('devices.*').joins('JOIN dids ON (dids.device_id = devices.id)').group('devices.id').all
       else
         @devices = []
       end

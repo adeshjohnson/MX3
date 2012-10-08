@@ -862,11 +862,14 @@ class Device < ActiveRecord::Base
     ip.gsub(/(^(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)(?:[.](?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)){3}$)/, "").to_s.length == 0 ? true : false
   end
 
-  def Device.find_all_for_select(current_user_id = nil)
+  def Device.find_all_for_select(current_user_id = nil, options={})
+
+    jn = ''
+    jn += ' JOIN dids ON (dids.device_id = devices.id) ' if options[:include_did].to_i == 1
     if current_user_id
-      return Device.find(:all, :select => "devices.id, devices.description, devices.extension, devices.device_type, devices.istrunk, devices.name, devices.ani, devices.username", :joins => "LEFT JOIN users ON (users.id = devices.user_id)", :conditions => ["device_type != 'FAX' AND (users.owner_id = ? OR users.id = ?) AND name not like 'mor_server_%'", current_user_id, current_user_id])
+      return Device.find(:all, :select => "devices.id, devices.description, devices.extension, devices.device_type, devices.istrunk, devices.name, devices.ani, devices.username", :joins => "LEFT JOIN users ON (users.id = devices.user_id) #{jn}", :conditions => ["device_type != 'FAX' AND (users.owner_id = ? OR users.id = ?) AND name not like 'mor_server_%'", current_user_id, current_user_id])
     else
-      return Device.find(:all, :select => "id, description, extension, device_type, istrunk, name, ani, username", :conditions => "device_type != 'FAX' AND name not like 'mor_server_%'")
+      return Device.find(:all, :select => "id, description, extension, device_type, istrunk, name, ani, username", :conditions => "device_type != 'FAX' AND name not like 'mor_server_%'", :joins=>jn)
     end
   end
 

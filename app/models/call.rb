@@ -1647,14 +1647,14 @@ class Call < ActiveRecord::Base
 
   def Call.summary_by_dids(user, order, options)
     group_by = []
-    options[:dids_grouping] == 1 ? group_by << "dids.provider_id" : group_by << "dids.user_id, dids.device_id"
+    options[:dids_grouping] == 1 ? group_by << "calls.did_provider_id" : group_by << "dids.user_id, dids.device_id"
 
 
     cond = ["calldate BETWEEN ? AND ?"]
     var = [options[:from], options[:till]]
 
 
-    jn = ["JOIN dids ON (dids.id = calls.did_id)", "LEFT JOIN devices ON (dids.device_id = devices.id)", "LEFT JOIN users ON (users.id = dids.user_id)",  "LEFT JOIN providers ON (dids.provider_id = providers.id)"]
+    jn = ["JOIN dids ON (dids.id = calls.did_id)", "LEFT JOIN devices ON (dids.device_id = devices.id)", "LEFT JOIN users ON (users.id = dids.user_id)",  "LEFT JOIN providers ON (calls.did_provider_id = providers.id)"]
 
     if  options[:did].to_s != ""  and options[:d_search].to_i == 1
       cond << "dids.did LIKE ?"
@@ -1668,7 +1668,7 @@ class Call < ActiveRecord::Base
     end
 
     if  options[:provider].to_s != "any"
-      cond << "dids.provider_id = ?"
+      cond << "calls.did_provider_id = ?"
       var << options[:provider].to_i
     end
 
@@ -1698,7 +1698,7 @@ class Call < ActiveRecord::Base
 
     s = []
 
-    s << "#{SqlExport.nice_user_sql}, providers.user_id as prov_owner_id, calls.did_id, dids.did, providers.name, dids.comment, dids.provider_id, dids.user_id, dids.device_id, users.owner_id as user_owner_id "
+    s << "#{SqlExport.nice_user_sql}, providers.user_id as prov_owner_id, calls.did_id, dids.did, providers.name, dids.comment, calls.did_provider_id, dids.user_id, dids.device_id, users.owner_id as user_owner_id "
     s << SqlExport.column_escape_null("COUNT(*)", 'total_calls', 0)
 
     s << SqlExport.column_escape_null("SUM(calls.billsec)", 'dids_billsec', 0)

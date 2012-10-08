@@ -1280,7 +1280,7 @@ ORDER BY dids.did ASC"
     @options[:dids] = Did.all
     @options[:users] = User.find_all_for_select
     @options[:devices] = Device.where('user_id != -1').all
-    @options[:providers] = Provider.select('providers.*').joins('JOIN dids ON (providers.id = dids.provider_id)').group('providers.id').all
+    @options[:providers] = Provider.all
     @options[:days] = [_('All'),_('Work_days'), _('Free_Days')]
     @periods = Didrate.find_hours_for_select({:day=> @options[:sdays], :did=>@options[:did], :d_search=>@options[:d_search].to_i == 1 ? 'true' : 'flase', :did_from=>@options[:did_search_from], :did_till=>@options[:did_search_till]})
 
