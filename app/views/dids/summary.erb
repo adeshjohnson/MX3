@@ -124,7 +124,7 @@
 
             <td id="prov_name_<%= row.did_id %>" align="left">
               <% if row.prov_owner_id == 0 %>
-                  <%= link_to row.name, :controller => :providers, :action => :edit, :id => row.provider_id %>
+                  <%= link_to row.name, :controller => :providers, :action => :edit, :id => row.did_provider_id %>
               <% else %>
                   <%= row.name %>
               <% end %>
