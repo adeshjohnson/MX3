@@ -732,6 +732,10 @@ class Device < ActiveRecord::Base
     self.device_ip_authentication_record.to_i == 0 and !self.provider
   end
 
+  def dynamic? 
+    (ipaddr.blank? or ipaddr.to_s == "0.0.0.0") ? true : false 
+  end
+
   def ip_must_be_unique_on_save
 
     idi = self.id
@@ -760,7 +764,7 @@ class Device < ActiveRecord::Base
              end
 
     #    check device IP with another user providers IP's with have ip auth on, 0.0.0.0 not included
-    if Device.count(:all, :joins => ['JOIN users ON (user_id = users.id)'], :conditions => cond22).to_i > 0 and !self.virtual?
+    if Device.count(:all, :joins => ['JOIN users ON (user_id = users.id)'], :conditions => cond22).to_i > 0 and !self.dynamic? and !self.virtual?
       errors.add(:ip_authentication, message)
       return false
     end
