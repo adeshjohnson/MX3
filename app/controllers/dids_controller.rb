@@ -1279,7 +1279,16 @@ ORDER BY dids.did ASC"
 
     @options[:dids] = Did.all
     @options[:users] = User.find_all_for_select
-    @options[:devices] = Device.where('user_id != -1').all
+    if @options[:user_id] == 'any'
+    @options[:devices] =   Device.where('user_id != -1').all
+    else
+      @user = User.find(params[:user_id])
+      if @user and (["admin", "accountant"].include?(session[:usertype]) or @user.owner_id = corrected_user_id)
+        @options[:devices] = @user.devices(:conditions => "device_type != 'FAX'").select('devices.*').joins('JOIN dids ON (dids.device_id = devices.id)').group('devices.id').all
+      else
+        @options[:devices] = []
+      end
+      end
     @options[:providers] = Provider.all
     @options[:days] = [_('All'),_('Work_days'), _('Free_Days')]
     @periods = Didrate.find_hours_for_select({:day=> @options[:sdays], :did=>@options[:did], :d_search=>@options[:d_search].to_i == 1 ? 'true' : 'flase', :did_from=>@options[:did_search_from], :did_till=>@options[:did_search_till]})
