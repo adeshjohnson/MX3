@@ -25,7 +25,7 @@
                 <td><%= _("DID_Provider") %></td>
                 <td><select name="provider_id">
                   <option value="any" <%= "selected" if @options[:provider] == "any" %> ><%= _("Any") %></option>
-                  <% @options[:providers].each { |provider| %>
+                  <% @providers.each { |provider| %>
                       <option value="<%= provider.id %>" <%= "selected" if provider.id.to_s == @options[:provider] %> ><%= nice_provider(provider) %> </option>
                   <% } %>
                 </select></td>
@@ -34,13 +34,13 @@
                 <td><%= _("Assigned_User_/_Device") %></td>
                 <td><select name="user_id" id='s_user'>
                   <option value="any" <%= "selected" if @options[:user_id] == "any" %> ><%= _("Any") %></option>
-                  <% @options[:users].each { |user| %>
+                  <% @users.each { |user| %>
                       <option value="<%= user.id %>" <%= "selected" if user.id.to_s == @options[:user_id] %> ><%= nice_user(user) %> </option>
                   <% } %>
                 </select>
                 <span id='user_devices'><select name="s_device">
                   <option value="all" <%= "selected" if @options[:device_id] == "all" %> ><%= _("All") %></option>
-                  <% @options[:devices].each { |dev| %>
+                  <% @devices.each { |dev| %>
                       <option value="<%= dev.id %>" <%= "selected" if dev.id.to_s == @options[:device_id] %> ><%= nice_device(dev) %> </option>
                   <% } %>
                 </select></span>
