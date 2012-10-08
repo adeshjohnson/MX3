@@ -2099,6 +2099,12 @@ Variables: (Names marked with * are required)
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'DNS_Error', :data2 => exception.message).save
         end
 
+        if exception.message.include?('Ambethia::ReCaptcha::Controller::RecaptchaError')
+          flash_notice = _('ReCaptcha_Error')
+          flash_help_link = ''
+          Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'ReCaptcha_Error', :data2 => exception.message).save
+        end
+
         #if exception_class.include?("Net::SMTP") or (exception_class.include?("Errno::ECONNREFUSED") and trace.to_s.include?("smtp_tls.rb")) or (exception_class.include?("SocketError") and trace.to_s.include?("smtp_tls.rb")) or ((exception_class.include?("Timeout::Error") and trace.to_s.include?("smtp.rb"))) or trace.to_s.include?("smtp.rb")
         flash_help_link = email_exceptions(exception) if  flash_help_link.blank?
         #end

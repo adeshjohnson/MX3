@@ -43,6 +43,8 @@ class TestController < ApplicationController
         raise NoMemoryError
       when "DNS_TEST"
         raise 'getaddrinfo: Temporary failure in name resolution'
+      when "ReCaptcha"
+        raise NameError, 'uninitialized constant Ambethia::ReCaptcha::Controller::RecaptchaError'
       when "SyntaxError"
         raise SyntaxError
       when "OpenSSL::SSL::SSLError"

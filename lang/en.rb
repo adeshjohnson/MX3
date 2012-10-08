@@ -4474,6 +4474,7 @@ Localization.define('en') do |l|
   l.store 'Group_By_DID_Provider', 'Group By DID Provider'
   l.store 'Back_to_Numbers', 'Back to Numbers'
   l.store 'User_/_Device', 'User/Device'
+  l.store 'ReCaptcha_Error', 'ReCaptcha Error'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
