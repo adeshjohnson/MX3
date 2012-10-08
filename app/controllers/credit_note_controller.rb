@@ -3,6 +3,8 @@ class CreditNoteController < ApplicationController
 
   layout "callc"
   before_filter :check_post_method, :only => [:destroy, :create, :update]
+  before_filter :check_localization
+  before_filter :authorize
   before_filter :link_to_user?, :only => [:list, :edit]
   before_filter :link_to_financial_operations?, :only => [:list, :edit]
   before_filter :can_edit_financial_data?, :only => [:pay, :unpay, :destroy, :new, :create]
@@ -29,7 +31,7 @@ class CreditNoteController < ApplicationController
     @show_search = show_search? @options
     @options[:page] = page_no
     @options[:order_by], @options[:order_desc] = order_by
-    session[:credit_note_list] = @options
+    session[:credit_note_list_opt] = @options
   end
 
   def new
@@ -268,7 +270,7 @@ class CreditNoteController < ApplicationController
   +options+ hash of user specified(or system default) parameters
 =end
   def search_options
-    session[:credit_note_list] ? options = session[:credit_note_list] : options = {}
+    session[:credit_note_list_opt] ? options = session[:credit_note_list_opt] : options = {}
     valid_options = [:nice_user, :first_name, :last_name, :issue_date_from, :issue_date_till]
     if can_view_finances?
       valid_options += [:status, :amount_min, :amount_max, :paid_date_from, :paid_date_till]
@@ -310,8 +312,8 @@ class CreditNoteController < ApplicationController
     first_page = 1
     if params[:page]
       params[:page].to_i
-    elsif session[:credit_note_list] and session[:credit_note_list][:page]
-      session[:credit_note_list][:page].to_i
+    elsif session[:credit_note_list_opt] and session[:credit_note_list_opt][:page]
+      session[:credit_note_list_opt][:page].to_i
     else
       first_page
     end
@@ -367,9 +369,9 @@ class CreditNoteController < ApplicationController
     if params[:order_by] and valid_params.include? params[:order_by]
       desc = params[:order_desc].to_i if params[:order_desc]
       return params[:order_by], desc
-    elsif session[:credit_note_list] and session[:credit_note_list][:order_by] and valid_params.include? session[:credit_note_list][:order_by]
-      desc = session[:credit_note_list][:order_desc].to_i if session[:credit_note_list][:order_desc]
-      return session[:credit_note_list][:order_by], desc
+    elsif session[:credit_note_list_opt] and session[:credit_note_list_opt][:order_by] and valid_params.include? session[:credit_note_list_opt][:order_by]
+      desc = session[:credit_note_list_opt][:order_desc].to_i if session[:credit_note_list_opt][:order_desc]
+      return session[:credit_note_list_opt][:order_by], desc
     else
       return order_by, desc
     end
