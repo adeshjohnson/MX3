@@ -468,6 +468,121 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/did_rates/index/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_end_time</td>
+	<td>10:59:59</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_rate</td>
+	<td>1.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_connection_fee</td>
+	<td>1.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_min_time</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Split to Work Days and Free Days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_end_time</td>
+	<td>15:59:59</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_rate</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_connection_fee</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_min_time</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'Split to Work Days and Free Days')])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rate details split</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/did_rates/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_end_time</td>
+	<td>19:59:59</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_rate</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_connection_fee</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_rate_min_time</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'Combine to Work Days and Free Days')])[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/dids/summary</td>
 	<td></td>
 </tr>
@@ -1616,6 +1731,1538 @@
 	<td>assertTextPresent</td>
 	<td>Records: 0 </td>
 	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=dids_grouping_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=d_search_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=did_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=did_search_from</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=did_search_till</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_11</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='prov_name_11'])[2]</td>
+	<td>common_use_provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_23</td>
+	<td>RSPRO_provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=s_day</td>
+	<td>All Work days Free days</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=period</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=7</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_day</td>
+	<td>label=Work days</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=period</td>
+	<td>All 00:00:00 - 10:59:59 11:00:00 - 23:59:59</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_day</td>
+	<td>label=Free days</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=period</td>
+	<td>All 00:00:00 - 10:59:59 11:00:00 - 23:59:59</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_11</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='prov_name_11'])[2]</td>
+	<td>common_use_provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_11</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_11</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='calls_11'])[2]</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=period</td>
+	<td>label=00:00:00 - 10:59:59</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=provider_id</td>
+	<td>label=Test Provider/1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_11</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_11</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_11</td>
+	<td>8.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_11</td>
+	<td>16.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_11</td>
+	<td>5.0260</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/2?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callingcard_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=manage_dids_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/dids/summary')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/summary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=page_title</td>
+	<td>DIDs report</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_from_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_from_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_from_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_from_hour</td>
+	<td>00</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_from_minute</td>
+	<td>00</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_till_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_till_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_till_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_till_hour</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_till_minute</td>
+	<td>59</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=d_search_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=did_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=d_search_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=did_search_from</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=did_search_till</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=provider_id</td>
+	<td>Any</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=s_user</td>
+	<td>Any</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=s_device</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=s_day</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=period</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=dids_grouping_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=dids_grouping_2</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_11</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='prov_name_11'])[2]</td>
+	<td>common_use_provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_23</td>
+	<td>RSPRO_provider</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=user_dev_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_11</td>
+	<td>43</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='calls_11'])[2]</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_23</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_calls</td>
+	<td>56</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dur_11</td>
+	<td>exact:00:25:20</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='dur_11'])[2]</td>
+	<td>exact:00:03:20</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dur_23</td>
+	<td>exact:00:04:10</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_billsec</td>
+	<td>exact:00:32:50</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_11</td>
+	<td>86.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='inc_11'])[2]</td>
+	<td>14.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_23</td>
+	<td>12.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_inc</td>
+	<td>112.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_inc</td>
+	<td>112.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_11</td>
+	<td>172.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='own_11'])[2]</td>
+	<td>28.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_23</td>
+	<td>24.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_own</td>
+	<td>224.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_11</td>
+	<td>54.0295</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='prov_11'])[2]</td>
+	<td>8.7955</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_23</td>
+	<td>7.5390</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_prov</td>
+	<td>70.3640</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_number</td>
+	<td>37060011221 </td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_11</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='prov_name_11'])[2]</td>
+	<td>common_use_provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_11</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='calls_11'])[2]</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dur_11</td>
+	<td>exact:00:06:40</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='dur_11'])[2]</td>
+	<td>exact:00:03:20</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_11</td>
+	<td>22.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_11</td>
+	<td>22.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='inc_11'])[2]</td>
+	<td>8.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='inc_11'])[2]</td>
+	<td>8.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_inc</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_11</td>
+	<td>44.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='own_11'])[2]</td>
+	<td>16.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_own</td>
+	<td>60.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_11</td>
+	<td>13.8215</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='prov_11'])[2]</td>
+	<td>5.0260</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_prov</td>
+	<td>18.8475</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_number</td>
+	<td>37050011221 </td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Records: 0 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> Pages: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_search_from</td>
+	<td>37060011221 </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_search_till</td>
+	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;37060011235</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=d_search_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=did_search_from</td>
+	<td>37060011221</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=did_number</td>
+	<td>37050011221</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=did_search_till</td>
+	<td>37060011235</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_11</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='prov_name_11'])[2]</td>
+	<td>common_use_provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_23</td>
+	<td>RSPRO_provider</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=user_dev_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_11</td>
+	<td>25</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='calls_11'])[2]</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_23</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_11</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='inc_11'])[2]</td>
+	<td>14.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_23</td>
+	<td>12.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_inc</td>
+	<td>76.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_11</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='own_11'])[2]</td>
+	<td>28.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_23</td>
+	<td>24.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_own</td>
+	<td>152.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_11</td>
+	<td>31.4125</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='prov_11'])[2]</td>
+	<td>8.7955</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_23</td>
+	<td>7.5390</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_prov</td>
+	<td>47.7470</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_search_from</td>
+	<td>37050011221 </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_search_till</td>
+	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;37050011248 </td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Records: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Pages: 0 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_search_from</td>
+	<td>37060011221 </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_search_till</td>
+	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;37060011229 </td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_11</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='prov_name_11'])[2]</td>
+	<td>common_use_provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_11</td>
+	<td>24</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='calls_11'])[2]</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=d_search_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=did_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=did_search_from</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=did_search_till</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=provider_id</td>
+	<td>Any Test Provider/1 common_use_provider/11 RSPRO_provider/12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=provider_id</td>
+	<td>label=RSPRO_provider/12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Records: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_23</td>
+	<td>RSPRO_provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_23</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_calls</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dur_23</td>
+	<td>exact:00:04:10</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_billsec</td>
+	<td>exact:00:04:10</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_23</td>
+	<td>12.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_inc</td>
+	<td>12.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_23</td>
+	<td>24.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_own</td>
+	<td>24.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_prov</td>
+	<td>7.5390</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_prov</td>
+	<td>7.5390</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dids_grouping_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_dev_23</td>
+	<td>User Resellers / IAX2/108</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=provider_id</td>
+	<td>label=Any</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_search_from</td>
+	<td>37060011221</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_search_till</td>
+	<td>37060011248</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Records: 5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Pages: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_dev_11</td>
+	<td>System Admin / IAX2/103</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_dev_16</td>
+	<td>Test User #1 / IAX2/1002</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_dev_28</td>
+	<td>Test Accountant / SIP/109</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_dev_20</td>
+	<td>User Resellers / IAX2/105</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_dev_23</td>
+	<td>User Resellers / IAX2/108</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_11</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_16</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_28</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_20</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_23</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_calls</td>
+	<td>56</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dur_11</td>
+	<td>exact:00:10:00</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dur_16</td>
+	<td>exact:00:07:35</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dur_28</td>
+	<td>exact:00:11:05</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dur_20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dur_23</td>
+	<td>exact:00:04:10</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_11</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_16</td>
+	<td>26.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_28</td>
+	<td>36.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_20</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_23</td>
+	<td>14.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_inc</td>
+	<td>112.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_11</td>
+	<td>60.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_16</td>
+	<td>52.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_28</td>
+	<td>72.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_20</td>
+	<td>12.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_23</td>
+	<td>28.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_own</td>
+	<td>224.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_11</td>
+	<td>18.8475</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_16</td>
+	<td>16.3345</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_28</td>
+	<td>22.6170</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_20</td>
+	<td>3.7695</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_23</td>
+	<td>8.7955</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t_prov</td>
+	<td>70.3640</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Records: 1&nbsp;&nbsp;&nbsp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_dev_16</td>
+	<td>Test User #1 / IAX2/1002</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_16</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dur_16</td>
+	<td>exact:00:07:35</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_16</td>
+	<td>26.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_16</td>
+	<td>52.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_16</td>
+	<td>16.3345</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=s_device</td>
+	<td>All IAX2/105 IAX2/108</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=s_device</td>
+	<td>All IAX2/105 IAX2/108</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_dev_20</td>
+	<td>User Resellers / IAX2/105</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_dev_23</td>
+	<td>User Resellers / IAX2/108</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_20</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_23</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_20</td>
+	<td>6.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_23</td>
+	<td>14.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_20</td>
+	<td>12.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_23</td>
+	<td>28.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_20</td>
+	<td>3.7695</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_23</td>
+	<td>8.7955</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=s_device</td>
+	<td>label=IAX2/108</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_dev_23</td>
+	<td>User Resellers / IAX2/108</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_23</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_23</td>
+	<td>14.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_23</td>
+	<td>28.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_23</td>
+	<td>8.7955</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=provider_id</td>
+	<td>label=Test Provider/1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_dev_23</td>
+	<td>User Resellers / IAX2/108</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_23</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_23</td>
+	<td>2.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_23</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_23</td>
+	<td>1.2565</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_number</td>
+	<td>aegsrdhtfgyhj#$%^&amp;^T</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--Man rodos turėtų nieko nerasti-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Records: 1 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_search_from</td>
+	<td>HGT@#$</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_search_till</td>
+	<td>#$%THGW#$%T</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=d_search_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Records: 0 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=dids_grouping_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=d_search_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=did_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=did_search_from</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=did_search_till</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_11</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='prov_name_11'])[2]</td>
+	<td>common_use_provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_23</td>
+	<td>RSPRO_provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=s_day</td>
+	<td>All Work days Free days</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=period</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=7</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_day</td>
+	<td>label=Work days</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=period</td>
+	<td>All 00:00:00 - 10:59:59 11:00:00 - 23:59:59</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_day</td>
+	<td>label=Free days</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=period</td>
+	<td>All 00:00:00 - 10:59:59 11:00:00 - 23:59:59</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_11</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='prov_name_11'])[2]</td>
+	<td>common_use_provider</td>
+</tr>
+<!--Rodo per daug skambučių, kas per skirtumas paaiškinau skype-->
+<tr>
+	<td>assertText</td>
+	<td>id=calls_11</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='calls_11'])[2]</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=period</td>
+	<td>label=00:00:00 - 10:59:59</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=provider_id</td>
+	<td>label=Test Provider/1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_11</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_11</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_11</td>
+	<td>8.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_11</td>
+	<td>16.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_11</td>
+	<td>5.0260</td>
 </tr>
 </tbody></table>
 </body>
