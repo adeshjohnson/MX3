@@ -1,0 +1,39 @@
+<%= form_tag :action => 'additional_modules_save' do %>
+    <br/>
+    <br/>
+    <table>
+      <tr>
+        <td><%= _('CCL_Active') %>:</td>
+        <td align="center"><%= check_box_tag 'CCL_Active', value = "1", Confline.get_value('CCL_Active').to_i == 1 %></td>
+      </tr>
+      <tr id="server_and_host">
+        <td><%= _('Server_IP') %>: <%= text_field_tag 'ip_address', "", "class" => "input", :size => "12", :maxlength => "30" %></td>
+        <td><%= _('Host') %>: <%= text_field_tag 'host', "", "class" => "input", :size => "12", :maxlength => "30" %></td>
+      </tr>
+
+    </table>
+    <%= hidden_field_tag('indirect', 1) %>
+    <br/>
+    <br/>
+    <%= submit_tag _('Save_changes'), :disable_with => _('Processing..') %>
+<% end %>
+
+
+<script type="text/javascript">
+    Event.observe(window, 'load', function () {
+        $('server_and_host').hidden = true;
+        $('ip_address').disabled = true;
+        $('host').disabled = true;
+        Event.observe($('CCL_Active'), 'click', function () {
+            if ($('CCL_Active').checked) {
+                $('server_and_host').hidden = false;
+                $('ip_address').disabled = false;
+                $('host').disabled = false;
+            } else {
+                $('server_and_host').hidden = true;
+                $('ip_address').disabled = true;
+                $('host').disabled = true;
+            }
+        });
+    })
+</script>

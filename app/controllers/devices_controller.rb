@@ -128,6 +128,7 @@ class DevicesController < ApplicationController
 
     if device.save
       # if device type = SIP and device host = dynamic and ccl_active=1 it must be assigned to sip_proxy server
+      serv_dev = ServerDevice.where("server_id=? AND device_id=?", device.server_id, device.id).first
       if device.device_type == "SIP" and device.host == "dynamic" and @sip_proxy_server and ccl_active?
         if not serv_dev
           server_device = ServerDevice.new
@@ -136,8 +137,6 @@ class DevicesController < ApplicationController
           server_device.save
         end
       else
-        serv_dev = ServerDevice.where("server_id=? AND device_id=?", device.server_id, device.id).first
-
         if not serv_dev
           server_device = ServerDevice.new
           server_device.server_id = device.server_id

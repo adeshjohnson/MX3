@@ -845,8 +845,8 @@ class CallcController < ApplicationController
 
   def additional_modules_save
 
-    ccl = params[:CCL_Active]
-    ccl_old = Confline.get_value("CCL_Active")
+    ccl = params[:CCL_Active].to_i
+    ccl_old = Confline.get_value("CCL_Active").to_i
     first_srv = Server.first.id
     def_asterisk = Confline.get_value("Default_asterisk_server").to_s
     reseller_server = Confline.get_value("Resellers_server_id").to_s
