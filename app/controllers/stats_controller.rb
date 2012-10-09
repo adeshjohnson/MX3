@@ -1957,6 +1957,15 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
                              :conditions => 'provider_price > user_price AND calldate BETWEEN \'' + session_from_date + ' 00:00:00\' AND \'' + session_till_date + ' 23:59:59\' AND disposition = \'ANSWERED\''+ condition)
   end
 
+  def get_rs_user_map
+    @responsible_accountant_id = params[:responsible_accountant_id] ? params[:responsible_accountant_id].to_i : -1
+    @responsible_accountant_id.to_s != "-1" ? cond = ['responsible_accountant_id = ?', @responsible_accountant_id] : ""
+    output = []
+    output << "<option value='-1'>All</option>"
+    output << User.where(cond).map { |u| ["<option value='"+u.id.to_s+"'>"+nice_user(u)+"</option>"] }
+    render :text => output.join 
+  end
+
   def profit
     @page_title = _('Profit')
     @page_icon = "money.png"

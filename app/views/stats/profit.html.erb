@@ -6,34 +6,23 @@
       &nbsp;&nbsp;<%= submit_tag _('Change_date'), :disable_with => _('Processing..') %>
   <% end %>
   <br>
+  <% @user_map = @users.map { |u| [nice_user(u), u.id.to_s] } %>
   <%= form_tag :action => 'profit' do %>
     <%= _('User') %>: 
       <span id='user_select'>
-        <%= select_tag("user_id", options_for_select([[_('All'), "-1"]] + @users.map { |u| [nice_user(u), u.id.to_s] }, @user_id.to_i.to_s)) %>
+        <%= select_tag("user_id", options_for_select([[_('All'), "-1"]] + @user_map, @user_id.to_i.to_s)) %>
       </span>
     <% if admin? %>
-      &nbsp;&nbsp;&nbsp;&nbsp;<%= _('Responsible_accountant') %>:<%= select_tag("responsible_accountant_id", options_for_select([[_('All'), "-1"]] + @responsible_accountants.map { |accountant| [nice_user(accountant), accountant.id] }, @responsible_accountant_id)) %>
+    <% @rs_map = @responsible_accountants.map { |accountant| [nice_user(accountant), accountant.id] } %>
+      &nbsp;&nbsp;&nbsp;&nbsp;<%= _('Responsible_accountant') %>:<%= select_tag("responsible_accountant_id", options_for_select([[_('All'), "-1"]] + @rs_map, @responsible_accountant_id)) %>
     <script type="text/javascript">
         //<![CDATA[
         Event.observe(window, 'load',  function() {
           Event.observe($('user_id'), 'change', function(){
-            $('responsible_accountant_id').disabled = ($('user_id').value != '-1')
+            $('responsible_accountant_id').disabled = ($('user_id').value != '-1');
           });
           Event.observe($('responsible_accountant_id'), 'change', function(){
-            <% logger.fatal @users.map { |u| {nice_user(u)=>u.id.to_s} }.to_json %>
-            <% #logger.fatal @responsible_accountants.map{ |accountant| [accountant.id, accountant.accountant_users.map{|user| [nice_user(user), id]}.to_json]}.to_json %>
-            var accountant_users = <%= "{4:[{'1':'aaaa'}, {'2':'bbbb'}]}" %>
-            var all_users = <%= "[{'1':'aaaa'}, {'2':'bbbb'}]" %>
-            $('user_id').options.length = 1;
-            if($('user_id').value = '-1'){
-              var users = accountant_users[$('responsible_accountant_id').value]
-            }else{
-              var users = all_users
-            }
-            for(var i=0;i<users.lenght;i++){
-              $('user_id').options.add(new Option(users[i], user[i]));
-            }
-            $('user_id').value = '-1';
+            <%=raw remote_function(:update => 'user_id',:url => {:action => :get_rs_user_map }, :with => "'responsible_accountant_id='+$('responsible_accountant_id').value") %>
           });
         });
         //]]>
