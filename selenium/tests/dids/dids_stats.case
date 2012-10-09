@@ -1379,11 +1379,6 @@
 	<td>label=Test User #1</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=#s_user &gt; option[value=&quot;2&quot;]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -1567,6 +1562,47 @@
 	<td>assertText</td>
 	<td>id=prov_23</td>
 	<td>1.2565</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_number</td>
+	<td>aegsrdhtfgyhj#$%^&amp;^T</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--Man rodos turėtų nieko nerasti-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Records: 1 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_search_from</td>
+	<td>HGT@#$</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_search_till</td>
+	<td>#$%THGW#$%T</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=d_search_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Records: 0 </td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
