@@ -141,7 +141,8 @@ INSERT INTO `ratedetails` (`id`, `start_time`, `end_time`, `rate`, `connection_f
 (525, '00:00:00', '23:59:59', 1.000000000000000, 0.000000000000000, 575, 1, 0, ''),
 (526, '00:00:00', '23:59:59', 2.000000000000000, 0.000000000000000, 576, 1, 0, ''),
 (527, '00:00:00', '23:59:59', 1.000000000000000, 0.000000000000000, 577, 1, 0, ''),
-(528, '00:00:00', '23:59:59', 0.100000000000000, 0.000000000000000, 584, 1, 0, '');
+(528, '00:00:00', '23:59:59', 0.100000000000000, 0.000000000000000, 584, 1, 0, ''),
+(529, '00:00:00', '23:59:59', 2.000000000000000, 0.000000000000000, 602, 1, 0, '');
 
 INSERT INTO `lcrs` (`id`, `name`, `order`, `user_id`, `first_provider_percent_limit`, `failover_provider_id`, `no_failover`) VALUES
 (2, 'speclcr', 'price', 6, 0.000000000000000, NULL, 0),
@@ -183,7 +184,7 @@ INSERT INTO `rates` (`id`, `tariff_id`, `destination_id`, `destinationgroup_id`,
 (517, 4, 0, 475, 0.000000000000000),
 (518, 6, 0, 25, 0.000000000000000),
 (519, 6, 0, 478, 0.000000000000000),
-(520, 7, 5, NULL, NULL),
+(520, 7, 16726, NULL, NULL),
 (521, 7, 136, NULL, NULL),
 (522, 7, 11366, NULL, NULL),
 (523, 7, 272, NULL, NULL),
@@ -261,7 +262,8 @@ INSERT INTO `rates` (`id`, `tariff_id`, `destination_id`, `destinationgroup_id`,
 (595, 6, 0, 477, 0.000000000000000),
 (596, 6, 0, 21, 0.000000000000000),
 (597, 6, 0, 22, 0.000000000000000),
-(598, 6, 0, 24, 0.000000000000000);
+(598, 6, 0, 24, 0.000000000000000),
+(602, 7, 16726, NULL, NULL);
 
 INSERT INTO `locations` (`id`, `name`, `user_id`) VALUES
 (2, 'Default location', 6),
@@ -272,11 +274,11 @@ INSERT INTO `locations` (`id`, `name`, `user_id`) VALUES
 
 INSERT INTO `locationrules` (`id`, `location_id`, `name`, `enabled`, `cut`, `add`, `minlen`, `maxlen`, `lr_type`, `lcr_id`, `tariff_id`, `did_id`, `device_id`) VALUES
 (2, 2, 'Int. prefix', 1, '00', '', 10, 20, 'dst', NULL, NULL, NULL, NULL),
-(3, 3, 'destrules', 1, '80', '9340', 9, 9, 'dst', 2, 6, NULL, NULL),
+(3, 3, 'destrules', 1, '80', '3741', 9, 9, 'dst', 2, 6, NULL, NULL),
 (4, 3, 'destrulesfree', 1, '90', '6140', 9, 9, 'dst', NULL, NULL, NULL, NULL),
-(5, 4, 'destrules', 1, '80', '9340', 9, 9, 'dst', 2, 6, NULL, NULL),
+(5, 4, 'destrules', 1, '80', '3741', 9, 9, 'dst', 2, 6, NULL, NULL),
 (6, 4, 'destrulesfree', 1, '90', '6140', 9, 9, 'dst', NULL, NULL, NULL, NULL),
-(7, 4, 'cellrules', 1, '80', '9340', 9, 9, 'src', NULL, NULL, NULL, NULL),
+(7, 4, 'cellrules', 1, '80', '3741', 9, 9, 'src', NULL, NULL, NULL, NULL),
 (8, 5, 'Int. prefix', 1, '00', '', 10, 20, 'dst', NULL, NULL, NULL, NULL),
 (9, 6, 'Int. prefix', 1, '00', '', 10, 20, 'dst', NULL, NULL, NULL, NULL);
 
