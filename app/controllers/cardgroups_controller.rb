@@ -180,6 +180,7 @@ class CardgroupsController < ApplicationController
 
   def create
     @cardgroup = Cardgroup.new(params[:cardgroup])
+    @cardgroup.temp_pl = params[:cardgroup][:pin_length]
     check_addon
     change_date
 

@@ -14,18 +14,28 @@ class Cardgroup < ActiveRecord::Base
   validates_presence_of :tariff, :message => _('Cardgroup_must_have_name')
 
   attr_protected :owner_id
-  before_save :before_save_dates, :check_location_id, :validate_pin_length
-  before_save :before_save_dates, :check_location_id, :validate_pin_length
+  before_create :validate_pin_length
+  before_save :before_save_dates, :check_location_id
   before_destroy :validate_before_destroy
 
   default_scope where(:hidden => 0)
 
 
   def validate_pin_length
-    if (0..30).include?(self.pin_length.to_i)
+    if !self.pin_length.blank? and self.temp_pl.to_s.match(/^\d+$/) == nil
+      errors.add(:pin_length, _('Pin_length_must_consist_only_of_digits'))
+      return false
+    end
+
+    if self.temp_pl.blank?  or self.pin_length.to_i == 0
+      errors.add(:pin_length, _('Pin_length_must_be_greater_than_0'))
+      return false
+    end
+
+    if (1..30).include?(self.pin_length.to_i)
       return true
     else
-      errors.add(:pin_length, _('Pin_length_can_be_between_0_and_30'))
+      errors.add(:pin_length, _('Pin_length_can_be_between_1_and_30'))
       return false
     end
   end
