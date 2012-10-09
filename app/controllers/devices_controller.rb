@@ -399,7 +399,7 @@ class DevicesController < ApplicationController
       end
     end
     if !ccl_active?
-      @device.server_id = params[:device][:server_id].strip if params[:device] and params[:device][:server_id]
+      @device.server_id = params[:device][:server_id] if params[:device] and params[:device][:server_id]
     end
     #========================== check input ============================================
 
