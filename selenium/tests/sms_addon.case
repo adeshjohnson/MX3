@@ -1896,11 +1896,6 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/sms/sms_list</td>
-	<td></td>
-</tr>
 <!--prefix finder-->
 <tr>
 	<td>open</td>
@@ -2640,22 +2635,14 @@
 	<td>Are you sure?</td>
 	<td></td>
 </tr>
-<!--
-seriously??
 <tr>
-	<td>waitForElementPresent</td>
-	<td>id=notice</td>
+	<td>waitForTextPresent</td>
+	<td>SMS Tariff deleted</td>
 	<td></td>
 </tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>SMS Tariff assigned to Provider</td>
-	<td></td>
-</tr>
--->
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='Delete']</td>
+	<td>//a[@id='image_destroy_3']/img</td>
 	<td></td>
 </tr>
 <tr>
