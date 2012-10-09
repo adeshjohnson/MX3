@@ -1,5 +1,9 @@
 # -*- encoding : utf-8 -*-
 class Cardgroup < ActiveRecord::Base
+
+  attr_accessor :temp_pl   #nasty hack for pin_length. When you call pin_length returns always int value, we dont need this ! Used only in group creation.
+
+
   belongs_to :tariff
   belongs_to :lcr
   belongs_to :location
