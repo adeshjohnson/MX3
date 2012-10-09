@@ -839,6 +839,126 @@ class CallcController < ApplicationController
     render(:layout => false)
   end
 
+  def additional_modules
+    @page_title = _('Additional_modules')
+  end
+
+  def additional_modules_save
+
+    ccl = params[:CCL_Active]
+    ccl_old = Confline.get_value("CCL_Active")
+    first_srv = Server.first.id
+    def_asterisk = Confline.get_value("Default_asterisk_server").to_s
+    reseller_server = Confline.get_value("Resellers_server_id").to_s
+    @resellers_devices = Device.joins("LEFT JOIN users ON (devices.user_id = users.id)").where("(users.owner_id !=0 or usertype = 'reseller') AND users.hidden = 0").all
+    if def_asterisk.to_i == 0
+      def_asterisk = first_srv
+    end
+    @sd = ServerDevice.all
+
+    if ccl.to_s != ccl_old.to_s and params[:indirect].to_i == 1
+        
+        if ccl.to_i == 0
+          p_srv_id = Server.where(:server_type => "sip_proxy").first.id.to_s rescue nil
+          if !p_srv_id.blank? 
+            Server.delete_all(:server_type => "sip_proxy")
+            Device.delete_all(:name => "mor_server_" + p_srv_id.to_s)
+          end
+
+          # CCL off - All devices with more than 1 server (or is a sip+dynamic combo) gets assigned to default asterisk server, duplicates removed.
+          dups = []
+          @sd.each do |s|
+            dup_count = ServerDevice.select("count(*) as how_many").where(:device_id => s.device_id.to_s).first.how_many.to_i rescue 0
+            dev = Device.where(:id => s.device_id.to_s).first
+            if dups.include?(s.device_id)
+              s.delete
+            elsif dup_count > 1 or (dev.host.to_s == "dynamic" and dev.device_type.to_s == "SIP")
+              if @resellers_devices.include?(dev)
+                s.server_id = reseller_server
+              else
+                s.server_id = def_asterisk.to_s
+              end
+              if s.save
+                dups << s.device_id
+              else
+                serv_error =s.errors
+              end
+            end
+            if dev.server_id != s.server_id
+              dev.server_id = s.server_id
+              dev.save
+            end
+          end
+
+
+ 
+            Confline.set_value("CCL_Active", ccl.to_i)
+            flash[:status] = "CCL turned off"
+            redirect_to :action => :additional_modules and return true
+
+        elsif ccl.to_i == 1
+
+          ip = params[:ip_address]
+          host = params[:host]
+
+          if ip.blank? or host.blank? or !check_ip_validity(ip)
+            flash[:notice] = "Invalid or empty ip/host"
+            redirect_to :action => :additional_modules and return false
+          else
+
+            old_id = Server.select("MAX(server_id) AS last_old_id").first.last_old_id rescue 0
+            new_id = old_id + 1
+
+            if (created_server = Server.create(:server_id => new_id, :server_ip => ip, :hostname => host, :server_type => "sip_proxy", :comment => "SIP Proxy" ) rescue false)
+              
+                  dev = Device.new
+                  dev.name = "mor_server_" + new_id.to_s
+                  dev.fromuser = dev.name
+                  dev.host = host
+                  dev.context = "mor_direct"
+                  dev.ipaddr = ip
+                  dev.device_type = "SIP" 
+                  dev.port = 5060 
+                  dev.extension = dev.name
+                  dev.username = dev.name
+                  dev.user_id = 0
+                  dev.allow = "all"
+                  dev.nat = "no"
+                  dev.canreinvite = "no"
+                  dev.server_id = new_id
+                  dev.description = 'DO NOT EDIT'
+                  dev.save          
+
+              @sd.each do |d|
+                 cur_dev = Device.where(:id => d.device_id.to_s).first
+                 if cur_dev.host.to_s == "dynamic" and cur_dev.device_type.to_s == "SIP"
+                   d.server_id = created_server.id
+                   d.save
+                 end
+
+              end
+
+              Confline.set_value("CCL_Active", ccl.to_i)
+
+              flash[:status] = "CCL activated"
+              redirect_to :action => :additional_modules and return true
+
+            else
+              flash[:notice] = "Failed to update"
+              redirect_to :action => :additional_modules and return false
+            end
+
+          end
+        else
+            flash[:notice] = "Failed to update"
+            redirect_to :action => :additional_modules and return false
+        end
+   
+        
+    end
+    redirect_to :action => :additional_modules
+  end
+
   private
 
   def check_devices_for_accountcode

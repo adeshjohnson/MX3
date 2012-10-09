@@ -3,10 +3,10 @@ class ServersController < ApplicationController
 
   layout "callc"
 
-  before_filter :check_post_method, :only => [:destroy, :create, :update, :server_add, :server_update, :delete]
+  before_filter :check_post_method, :only => [:destroy, :create, :update, :server_add, :server_update, :delete, :delete_device]
   before_filter :check_localization
   before_filter :authorize
-  before_filter :find_server, :only => [:server_providers, :add_provider_to_server, :show, :edit, :destroy, :server_change_status, :server_change_gateway_status, :server_test, :server_update]
+  before_filter :find_server, :only => [:server_providers, :add_provider_to_server, :show, :edit, :destroy, :server_change_status, :server_change_gateway_status, :server_test, :server_update, :server_devices_list]
   before_filter :check_server_ip, :only => [:server_update]
 
   def index
@@ -21,10 +21,10 @@ class ServersController < ApplicationController
   end
 
   def list
-    @page_title = _('Asterisk_Servers')
+    @page_title = _('Servers')
     @page_icon = 'server.png'
     @help_link = "http://wiki.kolmisoft.com/index.php/Multi_Server_support"
-    @servers = Server.find(:all, :order => "id")
+    @servers = Server.find(:all, :order => "server_id")
   end
 
   def server_providers
@@ -92,7 +92,7 @@ class ServersController < ApplicationController
     server.server_id = params[:server_id].strip
     server.hostname = params[:server_hostname].strip
     server.server_ip = params[:server_ip].strip
-    server.server_type = params[:server_type].strip
+    server.server_type = "asterisk"               # server_type can be sip_proxy(single only when ccl_active = 1) or asterisk
     server.version = params[:version].strip
     server.uptime = params[:uptime].strip
     server.comment = params[:server_comment].strip
@@ -149,7 +149,6 @@ class ServersController < ApplicationController
     @server.server_ip = params[:server_ip].strip
     @server.stats_url = params[:server_url].strip
     @server.comment = params[:server_comment].strip
-    @server.server_type = params[:server_type].to_s.strip
 
     @server.ami_username = params[:server_ami_username].strip
     @server.ami_secret = params[:server_ami_secret].strip
@@ -188,9 +187,6 @@ class ServersController < ApplicationController
     end
 
     @server.maxcalllimit = (params[:server_maxcalllimit].to_i <= 2 ? 2 : params[:server_maxcalllimit])
-    if @server.server_id != server_old.server_id
-      Device.update_all(["server_id = ?", @server.server_id], ["server_id = ? AND username NOT LIKE 'mor_server_%'", server_old.server_id])
-    end
 
     if @server.save
       #update device
@@ -241,6 +237,23 @@ class ServersController < ApplicationController
     flash[:status] = _('Providers_deleted')
     redirect_to :action => 'server_providers', :id => server.id
 
+  end
+
+  def delete_device
+    device = Device.where("id = #{params[:id]}").first
+    unless device
+      flash[:notice] = _('Device_not_found')
+      redirect_to :action => 'server_devices_list' and return false
+    end
+    server = Server.where("id = #{params[:serv_id]}").first
+    unless server
+      flash[:notice] = _('Server_not_found')
+      redirect_to :action => 'server_devices_list' and return false
+    end
+    server_device = ServerDevice.where("server_id=? AND device_id=?", params[:serv_id], params[:id]).first
+    server_device.destroy
+    flash[:status] = _('Device_deleted')
+    redirect_to :action => 'server_devices_list', :id => params[:serv_id]
   end
 
   def destroy
@@ -304,6 +317,40 @@ class ServersController < ApplicationController
       session[:server_test_ok] = 1
     end
     render(:layout => "layouts/mor_min")
+  end
+
+  # when ccl_active = 1 shows all devices of a certain server
+  def server_devices_list
+    if !ccl_active?
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
+    @page_title = _('Server_devices')
+    @page_icon = 'server.png'
+    @help_link = "http://wiki.kolmisoft.com/index.php/Multi_Server_support"
+    # ip_auth + server_devices.server_id is null + server_devices.server_id is not that server + not server device(which were created with server creation)
+    @devices = Device.select("devices.*,server_devices.server_id AS serv_id").joins("LEFT JOIN server_devices ON (server_devices.device_id = devices.id AND  server_devices.server_id = #{params[:id]})").where("(host != 'dynamic' OR device_type != 'SIP') AND server_devices.server_id is null AND user_id != -1 AND name not like 'mor_server_%'").order("name ASC").all
+  end
+
+  def add_device_to_server
+    @device = Device.where(["id=?", params[:device_add].to_i]).first
+    unless @device
+      flash[:notice] = _('Device_not_found')
+      redirect_to :action => 'server_devices_list', :id => params[:id] and return false
+    end
+    serv_dev = ServerDevice.where("server_id=? AND device_id=?", params[:id], @device.id).first
+
+    if not serv_dev
+      server_device = ServerDevice.new
+      server_device.server_id = params[:id]
+      server_device.device_id = @device.id
+      server_device.save
+
+      flash[:status] = _('Device_added')
+    else
+      flash[:notice] = _('Device_already_exists')
+    end
+    redirect_to :action => 'server_devices_list', :id => params[:id] and return false
   end
 
   private

@@ -90,20 +90,20 @@
                 ( <%= _('Call_limit_notice') %> *)
               </td>
             </tr>
-<%# if session[:usertype] == "admin"%>
-            <tr>
+            <% if params[:action] == "default_device" or !ccl_active? %>
+            <tr id="servers_dropdown">
               <td> <%= b_server + _('Server') %>:</td>
               <td>
                 <select name="device[server_id]">
                   <% for ser in @servers %>
-                      <option value=<%= ser.server_id %> <%= "selected" if device_server.to_i == ser.server_id %>>
+                      <option value=<%= ser.id %> <%= "selected" if device_server.to_i == ser.server_id %>>
                         ID: <%= ser.server_id %>, IP: <%= ser.server_ip %> (<%= ser.comment %>)
                       </option>
                   <% end %>
                 </select>
               </td>
             </tr>
-<%# end %>
+            <% end %>
         <% else %>
             <% if session[:usertype] == "accountant" and session[:acc_user_create_opt_7].to_i == 1 %>
                 <tr>
@@ -152,7 +152,43 @@
         <%= hidden_field_tag 'device[tell_rtime_when_left]', '60', "class" => "input" %>
         <% @owner = @user.owner_id if !@owner %>
         <%= render :partial => "device_recordings" %>
+        <% if params[:action] != "default_device" and ccl_active? %>
+            <tr>
+              <td height="20"></td>
+            </tr>
+
+            <tr id="servers_checkbox_title">
+              <td class="bottom_border">
+                <b><%= b_server + _('Servers') %></b>
+              </td>
+            </tr>
+            <tr>
+              <td height="10"></td>
+            </tr>
+            <tr id="servers_checkboxes">
+              <td colspan="2">
+                <table id="asterisk_servers" name="asterisk_servers" width="100%" style="...">
+                  <% @asterisk_servers.each { |serv| %>
+                      <tr>
+                        <td><%= nice_server(serv) %></td>
+                        <td><%= check_box_tag "add_to_servers[#{serv.id}]", 1, @server_devices[serv.id].to_i == 1 %></td>
+                      </tr>
+                  <% } %>
+                </table>
+              </td>
+            </tr>
+        <% end %>
       </table>
     </td>
   </tr>
 </table>
+
+<% if session[:usertype] == "reseller" %>
+    <script type="text/javascript">
+        Event.observe(window, 'load', function () {
+            var servers_dropdown = document.getElementById('servers_dropdown');
+            servers_dropdown.hide();
+
+        })
+    </script>
+<% end %>

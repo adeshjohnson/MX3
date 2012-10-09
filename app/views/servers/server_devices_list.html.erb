@@ -1,0 +1,62 @@
+<%= b_server + _('Server') %>  : <b><%= @server.hostname %> / <%= @server.server_ip %></b>
+<br/>
+<br/>
+
+<table width="100%" class="maintable">
+  <tr>
+    <th id="id_num" align="left"><%= _('ID') %></th>
+    <th id="device" align="left"><%= _('Device') %></th>
+    <th id="tech" align="left"><%= _('Tech') %></th>
+    <th id="login" align="left"><%= _('Login') %></th>
+    <th id="password" align="left"><%= _('Password') %></th>
+    <th id="hostname_server_ip" align="left"><%= _('Host') %>/<%= _('Server_IP') %></th>
+    <th id="rules" align="center" width="60px"><%= _('Rules') %></th>
+    <th id="calls" align="center" width="60px"><%= _('Calls') %></th>
+    <th width="20px"></th>
+  </tr>
+
+  <% i = 0 %>
+  <% for dev in @server.devices %>
+    <tr class="row<%= (i % 2 + 1).to_s %>">
+      <td id="device_id"><%= dev.id %></td>
+      <td id="device_<%= dev.id %>" align="left"><%= link_to nice_device(dev), :controller => "devices", :action => 'device_edit', :id => dev.id%></td>
+      <td id="tech_<%= dev.id %>" align="left"><%= dev.device_type %></td>
+      <td id="login_<%= dev.id %>" align="left"><%= dev.username %></td>
+      <td id="password_<%= dev.id %>" align="left"><%= dev.secret %></td>
+      <td id="host_server_ip_<%= dev.id %>" align="left"><%= dev.host %></td>
+      <td id="rules_<%= dev.id %>" align="center"><%= link_to b_rules, :controller => "device_rules", :action => 'list', :id => dev.id %></td>
+      <td id="calls_<%= dev.id %>" align="center"><%= link_to b_call, {:controller => "stats", :action => 'last_calls_stats', :s_device => dev.id.to_s}, {:id => "calls_link_"+dev.id.to_s} %></td>
+      <% if dev.server_devices.length > 1 %>
+        <td id="destroy_<%= dev.id %>" align="center"><%= link_to b_delete, {:action => 'delete_device', :id => dev.id, :serv_id => @server.id}, {:confirm => _('are_you_sure'), :method => :post, :id => "delete_link_"+ dev.id.to_s} %></td>
+      <% else %>
+        <td id="destroy_<%= dev.id %>" align="center" style="opacity:0.4"><%= b_delete %></td>
+      <% end %>
+    </tr>            <!-- destroy pakeist kad tiesiog delete butu is sio saraso -->
+    <% i += 1 %>
+  <% end %>
+</table>
+
+<br/><br/>
+
+<% if @devices.size > 0 and @server.server_type != "sip_proxy" %>
+    <table width="100%">
+      <tr>
+        <%= b_device + _('Add_device') %>  :
+        <br/>
+        <td id="add_device">
+          <%= form_tag :action => 'add_device_to_server', :id => @server.id do %>
+            <select name="device_add">
+              <% for dev in @devices %>
+                  <option value=<%= dev.id %>> <%= nice_device(dev) %> </option>
+              <% end %>
+            </select>
+            <%= image_submit_tag 'icons/add.png', :title => _('Add'), :id => 'Add_new_id' %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+    <br/><br/>
+<% end %>
+
+
+<br/>

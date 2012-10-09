@@ -2484,6 +2484,12 @@ Variables: (Names marked with * are required)
     Web_URL == request.protocol + request.host
   end
 
+  # IP validation
+  def check_ip_validity(ip=nil)
+   regexp = /^\b(?![0.]*$)(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)(?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3}\b$/
+   (regexp.match(ip) ? (return true) : (return false))
+  end
+
   # Delegatas. Suderinamumui.
   def email_variables(user, device = nil, variables = {})
     Email.email_variables(user, device, variables, {:nice_number_digits => session[:nice_number_digits], :global_decimal => session[:global_decimal], :change_decimal => session[:change_decimal]})
@@ -3009,7 +3015,8 @@ Variables: (Names marked with * are required)
   end
 
   def ccl_active?
-    (defined?(CCL_Active) and CCL_Active.to_i == 1)
+    ccl_active = Confline.get_value("CCL_Active") rescue NIL
+    (!ccl_active.blank? and ccl_active.to_i == 1)
   end
 
   def allow_pg_extension(name)

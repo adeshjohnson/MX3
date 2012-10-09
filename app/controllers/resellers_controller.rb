@@ -18,6 +18,7 @@ class ResellersController < ApplicationController
     @page_icon = 'cog.png'
     @settings = @@settings
     @providers = current_user.providers(:conditions => ['hidden=?', 0], :order => "name ASC")
+    @servers = Server.where("server_type = 'asterisk'").order("server_id ASC").all
   end
 
   def settings_change
@@ -27,6 +28,25 @@ class ResellersController < ApplicationController
           Confline.set_value(name, params[name.downcase.to_sym].to_i, 0)
       end
     }
+    if params[:resellers_server] != Confline.get_value('Resellers_server_id')
+      if ccl_active?
+        @resellers_and_their_users_devices = Device.select("devices.*").joins("LEFT JOIN users ON (devices.user_id = users.id)").where("(devices.device_type != 'SIP' OR devices.host != 'dynamic') AND (users.owner_id !=0 OR usertype = 'reseller') AND users.hidden = 0").all
+        @resellers_and_their_users_devices.each do |dev|
+          sql = "UPDATE devices SET server_id = #{params[:resellers_server].to_s} WHERE id = #{dev.id};"
+          ActiveRecord::Base.connection.update(sql)
+          dev.create_server_devices({params[:resellers_server].to_s => "1"})
+        end
+      else
+        @resellers_and_their_users_devices = Device.select("devices.*").joins("LEFT JOIN users ON (devices.user_id = users.id)").where("(users.owner_id !=0 OR usertype = 'reseller') AND users.hidden = 0").all
+        @resellers_and_their_users_devices.each do |dev|
+          sql = "UPDATE devices SET server_id = #{params[:resellers_server].to_s} WHERE id = #{dev.id};"
+          ActiveRecord::Base.connection.update(sql)
+          dev.create_server_devices({params[:resellers_server].to_s => "1"})
+        end
+      end
+      Confline.set_value('Resellers_server_id', params[:resellers_server].to_i)
+    end
+
     Confline.set_value("DID_default_provider_to_resellers", params[:did_provider])
     Confline.set_value('Allow_resellers_change_device_PIN', params[:allow_resellers_change_device_pin].to_i)
     Confline.set_value('Allow_resellers_to_change_extensions_for_their_user_devices', params[:allow_resellers_to_change_extensions_for_their_user_devices].to_i)

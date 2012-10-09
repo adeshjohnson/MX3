@@ -3078,6 +3078,43 @@ Sets default tax values for users or cardgroups
     redirect_to :action => :webphone_settings and return false
 
   end
+
+  def ccl_settings
+    if !ccl_active?
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
+
+    @page_title = _('CCL_Settings')
+    @page_icon = 'cog.png'
+    @help_link = "http://wiki.kolmisoft.com/index.php/"
+
+    if !current_user.is_admin?
+      redirect_to :action => :main and return false
+    end    
+ 
+    @servers = Server.where(:server_type=> "asterisk")
+ 
+  end
+
+  def ccl_settings_update
+    if !ccl_active?
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
+    if params[:indirect].to_i == 1 
+      if !params[:s_id].blank? 
+        Confline.set_value("Default_asterisk_server", params[:s_id], current_user.get_corrected_owner_id)
+        flash[:status] = _('Settings_saved')
+        redirect_to :action => :ccl_settings and return false
+      else
+        flash[:status] = _('Update_failed')
+        redirect_to :action => :ccl_settings and return false
+      end
+    else
+      redirect_to :action => :main and return false
+    end
+  end
   #================= PRIVATE ==================
 
   private

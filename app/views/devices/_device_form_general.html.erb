@@ -77,26 +77,35 @@
       </td>
     </tr>
 <% end %>
-<tr>
-  <td colspan="2">
-    <%= _('Type') %>:
-    <% i = 0 %>
-    <% ch = true %>
-    <% for dt in @devicetypes %>
-        <% ch = false if i > 0 %>
-        <%= radio_button_tag('device[device_type]', dt.name, (@device_type.to_s == dt.name.to_s)) %> <%= print_tech dt.name %>
-        <% i += 1 %>
-    <% end %>
 
-    <% if skp_active? and @new_device %>
-        <%= radio_button_tag('device[device_type]', "Skype", (@device_type == "Skype")) %> Skype
-    <% end %>
+<% if params[:action] == 'default_device' or @new_device %>
+    <tr>
+      <td colspan="2">
+        <%= _('Type') %>:
+        <% i = 0 %>
+        <% ch = true %>
+        <% for dt in @devicetypes %>
+            <% ch = false if i > 0 %>
+            <%= radio_button_tag('device[device_type]', dt.name, (@device_type.to_s == dt.name.to_s)) %> <%= print_tech dt.name %>
+            <% i += 1 %>
+        <% end %>
 
-    <% if @fax_enabled and (session[:usertype] == "admin" or session[:usertype] == "reseller") %>
-        <%= radio_button_tag('device[device_type]', "FAX", (@device_type == "FAX")) %> FAX
-    <% end %>
-  </td>
-</tr>
+        <% if skp_active? and @new_device %>
+            <%= radio_button_tag('device[device_type]', "Skype", (@device_type == "Skype")) %> Skype
+        <% end %>
+
+        <% if @fax_enabled and (session[:usertype] == "admin" or session[:usertype] == "reseller") %>
+            <%= radio_button_tag('device[device_type]', "FAX", (@device_type == "FAX")) %> FAX
+        <% end %>
+      </td>
+    </tr>
+<% else %>
+    <tr>
+      <td> <%= _('Type') %>:</td>
+      <td id="type_value"><b><%= @device_type %></b></td>
+    </tr>
+<% end %>
+
 
 <% if not @new_device %>
     <tr>
@@ -207,7 +216,7 @@
         </tr>
     <% end %>
 
-    <% if @device_type == "FAX" and mor_11_extend? %>
+    <% if (@device_type == "FAX" and params[:action] == "default_device") or (@device_type == "FAX" and ccl_active? ) %>
         <% device_server = (@device ? @device.server_id : Confline.get_value("Default_device_server_id", session[:user_id])) %>
         <tr>
           <td> <%= b_server + _('Server') %>:</td>
@@ -292,20 +301,30 @@
             <% end %>
         <% end %>
 
-        <%# if session[:usertype] == "admin"%>
-        <tr>
-          <td> <%= b_server + _('Server') %>:</td>
-          <td>
-            <select name="device[server_id]">
-              <% for ser in @servers %>
-                  <option value=<%= ser.server_id %> <%= "selected" if device_server.to_i == ser.server_id.to_i %>>
-                    ID: <%= ser.server_id %>, IP: <%= ser.server_ip %> (<%= ser.comment %>)
-                  </option>
+        <% if params[:action] == "default_device" or !ccl_active? %>
+          <tr id="servers_dropdown">
+            <td> <%= b_server + _('Server') %>:</td>
+            <td>
+              <% if ccl_active? and @servers[0] and @servers[0].server_type == 'sip_proxy' %>
+                <select id="device_server_id" name="device[server_id]" disabled="true">
+                  <% for ser in @servers %>
+                    <option value=<%= ser.id %> <%= "selected" %>>
+                      ID: <%= ser.server_id %>, IP: <%= ser.server_ip %> (<%= ser.comment %>)
+                    </option>
+                  <% end %>
+                </select>
+              <% else %>
+                <select id="device_server_id" name="device[server_id]">
+                  <% for ser in @servers %>
+                    <option value=<%= ser.id %> <%= "selected" if device_server.to_i == ser.id.to_i %>>
+                      ID: <%= ser.server_id %>, IP: <%= ser.server_ip %> (<%= ser.comment %>)
+                    </option>
+                  <% end %>
+                </select>
               <% end %>
-            </select>
-          </td>
-        </tr>
-        <%# end %>
+            </td>
+          </tr>
+        <% end %>
 
     <% else %>
         <% if @device %>
@@ -334,3 +353,90 @@
 
 </td>
 </tr>
+
+<% if ccl_active? and !@sip_proxy_server.blank? and params[:action] == "default_device" %>
+    <script type="text/javascript">
+
+        function emptyList(servers) {
+            servers.options.length=0;
+        }
+
+        function fillList(servers, list) {
+            if (list == 2) {
+                <% @servers = Server.where("server_type = 'sip_proxy'").limit(1).all %>
+                var i = 0;
+                <% for ser in @servers %>
+                    servers.options[i]= new Option("ID: <%= ser.server_id %>, IP: <%= ser.server_ip %> (<%= ser.comment %>)", <%= ser.id %>, true, true);
+                    i++;
+                <% end %>
+            } else {
+                <% @servers = Server.where("server_type = 'asterisk'").order("server_id ASC").all %>
+                <% device_server = @servers[0].server_id if @sip_proxy_server[0] and @sip_proxy_server[0].server_id == device_server.to_i %>
+                var i = 0;
+                <% for ser in @servers %>
+                    servers.options[i]= new Option("ID: <%= ser.server_id %>, IP: <%= ser.server_ip %> (<%= ser.comment %>)", <%= ser.id %>, <%= device_server.to_i == ser.server_id.to_i ? 'true' : 'false' %>, <%= device_server.to_i == ser.server_id.to_i ? 'true' : 'false' %>);
+                    i++;
+                <% end %>
+            }
+        }
+
+
+        function change_servers_if_necesary(type_checked, type_value) {
+            /*if some other than SIP device type was selected, then show all asterisk servers*/
+            var servers = $('device_server_id');
+            if (type_checked) {
+                var check = servers.disabled;
+                var enable = (type_value == 'SIP');
+                servers.disabled = enable;
+                if (check != servers.disabled) {
+                    if (enable) {             // for sip_proxy server
+                        var list_2 = 2;
+                        emptyList(servers);
+                        fillList(servers, list_2)
+                    } else {                  // for asterisk servers
+                        var list_1 = 1;
+                        emptyList(servers);
+                        fillList(servers, list_1)
+                    }
+                }
+            }
+        }
+
+        /*add event listener for onload event and for onclick event for all device
+         type checkboxes.*/
+
+        Event.observe(window, 'load', function () {
+            var device_types = document.getElementsByName('device[device_type]');
+            var type;
+
+            for (var i = 0; i < device_types.length; i++) {
+                type = device_types[i]
+                if (type.checked) {
+                    change_servers_if_necesary(type.checked, type.value)
+                }
+                Event.observe(type, 'click', function (e) {
+                    type = e.findElement();
+                    change_servers_if_necesary(type.checked, type.value);
+                })
+            }
+        })
+
+    </script>
+<% end %>
+
+<% if session[:usertype] == "reseller" %>
+    <script type="text/javascript">
+        Event.observe(window, 'load', function () {
+          <% if !ccl_active? %>
+            var servers_dropdown = document.getElementById('servers_dropdown');
+            servers_dropdown.hide();
+          <% else %>
+            var servers_checkbox_title = document.getElementById('servers_checkbox_title');
+            servers_checkbox_title.hide();
+            var servers_checkboxes = document.getElementById('servers_checkboxes');
+            servers_checkboxes.hide();
+          <% end %>
+        })
+    </script>
+<% end %>
+

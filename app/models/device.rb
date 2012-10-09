@@ -204,15 +204,16 @@ class Device < ActiveRecord::Base
     end
   end
 
+  # checks if server with such id exists
   def ensure_server_id
-    if self.server_id.blank? or !Server.find(:first, :conditions => ["server_id = ?", self.server_id])
+    if self.server_id.blank? or !Server.find(:first, :conditions => ["id = ?", self.server_id])
       default = Confline.get_value("Default_device_server_id")
       if !default.blank?
         self.server_id = default
       else
-        if server = Server.find(:first, :order => "server_id ASC")
-          Confline.set_value("Default_device_server_id", server.server_id)
-          self.server_id = server.server_id
+        if server = Server.find(:first, :order => "id ASC")
+          Confline.set_value("Default_device_server_id", server.id)
+          self.server_id = server.id
         else
           errors.add(:server, _("Server_Not_Found"))
           return false
@@ -963,6 +964,11 @@ class Device < ActiveRecord::Base
       end
     end
 
+    #destroying device connection to servers
+    for sd in ServerDevice.where("device_id = ?", id).all
+      sd.destroy
+    end
+
     #destroying codecs
     for dc in Devicecodec.find(:all, :conditions => ["device_id = ?", id])
       dc.destroy
@@ -1189,7 +1195,23 @@ class Device < ActiveRecord::Base
 
   def is_dahdi? 
     return self.device_type == 'dahdi' 
-  end 
+  end
+
+  def create_server_devices(servers)
+
+    if servers
+      ss = []
+      servers.each { |s|
+        sd = ServerDevice.where("server_id = #{s[0].to_i} AND device_id = #{id}").first
+        if not sd
+          server_device = ServerDevice.new({:server_id => s[0].to_i, :device_id => id})
+          server_device.save
+        end
+        ss << s[0].to_i
+      }
+      ActiveRecord::Base.connection.execute("DELETE FROM server_devices WHERE device_id = '#{id}' AND server_id NOT IN (#{ss.join(',')})")
+    end
+  end
 
   private
 

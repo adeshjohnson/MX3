@@ -10,7 +10,7 @@
       </tr>
       <tr>
        <td></td>
-       <td><b><%= _("Disalow_for_Reseller_to_copy_Localization_settings_from_Admin") %><b></td>
+       <td><b><%= _("Disalow_for_Reseller_to_copy_Localization_settings_from_Admin") %></b></td>
        <td>
          <%= _('No') %> <%= radio_button_tag 'disallow_coppy_localization', 0, (Confline.get_value('disallow_coppy_localization').to_i != 1) %>
          <%= _('Yes') %> <%= radio_button_tag 'disallow_coppy_localization', 1, (Confline.get_value('disallow_coppy_localization').to_i == 1) %> 
@@ -18,6 +18,11 @@
       </tr>
       <%= raw setting_boolean(_('Allow_resellers_change_device_PIN'), 'allow_resellers_change_device_pin', "Allow_resellers_change_device_PIN") %>
       <%= raw setting_boolean(_('Allow_resellers_to_change_extensions_for_their_user_devices'), 'allow_resellers_to_change_extensions_for_their_user_devices', "Allow_resellers_to_change_extensions_for_their_user_devices") %>
+      <tr>
+        <td></td>
+        <td><b><%= _('Resellers server') %>:</b></td>
+        <td><%= select_tag("resellers_server", options_for_select(@servers.map { |ser| [nice_server(ser), ser.id] }, Confline.get_value("Resellers_server_id").to_i)) %></td>
+      </tr>
     </table>
     <%= submit_tag _('Save_changes'), :disable_with => _('Processing..') %>
 <% end %>

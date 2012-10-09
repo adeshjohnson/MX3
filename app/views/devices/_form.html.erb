@@ -25,6 +25,10 @@
         <% if not @new_device and @device_type != "FAX" %>
             <%= render :partial => "device_form_voicemail" %>
         <% end %>
+
+        <% if not @new_device and params[:action] != "default_device" and ccl_active? %>
+            <%= render :partial => "device_form_servers" %>
+        <% end %>
       </table>
     </td>
 

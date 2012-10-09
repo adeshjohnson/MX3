@@ -10,11 +10,19 @@ class Server < ActiveRecord::Base
   require 'rami'
 
   before_destroy :check_if_no_devices_own_server
+  before_destroy :check_if_server_is_resellers_server
   before_save :check_server_device
 
   def check_if_no_devices_own_server
-    if Device.count(:conditions => ["server_id = ?", self.server_id]).to_i > 0
+    if Device.count(:conditions => ["server_id = ?", self.id]).to_i > 0
       errors.add(:server_id, _("Server_Has_Devices"))
+      return false
+    end
+  end
+
+  def check_if_server_is_resellers_server
+    if Confline.get_value("Resellers_server_id") == self.id
+      errors.add(:server_id, _("Server_is_default_resellers_server"))
       return false
     end
   end

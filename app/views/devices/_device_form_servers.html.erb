@@ -1,0 +1,98 @@
+<tr>
+  <td height="20"></td>
+</tr>
+
+<tr id="servers_checkbox_title">
+  <td class="bottom_border">
+    <b><%= b_server + _('Servers') %></b>
+  </td>
+</tr>
+<tr>
+  <td height="10"></td>
+</tr>
+<tr id="servers_checkboxes">
+  <td colspan="2">
+    <% if !@sip_proxy_server.blank? %>
+        <table id="sip_proxy_server" name="sip_proxy_server" width="100%" style="...">
+          <% @sip_proxy_server.each { |serv| %>
+              <tr>
+                <td><%= nice_server(serv) %></td>
+                <td><%= check_box_tag "add_to_servers[#{serv.id}]", 1, @server_devices[serv.id].to_i == 1 %></td>
+              </tr>
+          <% } %>
+        </table>
+    <% end %>
+    <table id="asterisk_servers" name="asterisk_servers" width="100%" style="...">
+      <% @asterisk_servers.each { |serv| %>
+          <tr>
+            <td><%= nice_server(serv) %></td>
+            <td><%= check_box_tag "add_to_servers[#{serv.id}]", 1, @server_devices[serv.id].to_i == 1 %></td>
+          </tr>
+      <% } %>
+    </table>
+  </td>
+</tr>
+
+
+<% if ccl_active? and !@sip_proxy_server.blank? %>
+<script type="text/javascript">
+    //<![CDATA[
+    function change_servers(type_value, dyncheck_checked) {
+        /*if some other than (SIP device type + dynamic IP) was selected, then show all asterisk servers*/
+        var enable = (type_value == 'SIP' && dyncheck_checked);
+        var sip_proxy_server = document.getElementById('sip_proxy_server');
+        var asterisk_servers = document.getElementById('asterisk_servers');
+        <% @sip_proxy_server.each { |serv| %>
+            var server = document.getElementById('add_to_servers_<%= serv.id %>');
+            if (enable) {
+                server.checked = true;
+                sip_proxy_server.style.display = 'block';
+            } else {
+                server.checked = false;
+                sip_proxy_server.style.display = 'none';
+            }
+            server.readOnly = "readonly";
+        <% } %>
+        <% @asterisk_servers.each { |serv| %>
+            var server = document.getElementById('add_to_servers_<%= serv.id %>');
+
+            if (enable) {
+                server.checked = false;
+                asterisk_servers.style.display = 'none';
+            } else {
+                server.checked = <%= @server_devices[serv.id].to_i == 1 %>;
+                asterisk_servers.style.display = 'block';
+            }
+        <% } %>
+    }
+
+    /*add event listener for onload event and for onclick event for all device
+     type checkboxes.*/
+
+    Event.observe(window, 'load', function () {
+        var dyncheck = $('ip_authentication_dynamic_2');
+        var dyn_uncheck = $('ip_authentication_dynamic_1');
+        var type = '<%= @device_type.to_s %>';
+        var sip_proxy_server = document.getElementById('add_to_servers_<%= @sip_proxy_server[0].id %>');
+        if (dyncheck == null) {
+            change_servers(type, false);
+        } else {
+            change_servers(type, dyncheck.checked);
+        }
+
+        Event.observe(dyncheck, 'click', function () {
+            change_servers(type, dyncheck.checked);
+        });
+        Event.observe(dyn_uncheck, 'click', function () {
+            change_servers(type, dyncheck.checked);
+        });
+        Event.observe(sip_proxy_server, 'click', function () {
+            sip_proxy_server.checked = true;
+        });
+    })
+
+
+
+    //]]>
+</script>
+<% end %>

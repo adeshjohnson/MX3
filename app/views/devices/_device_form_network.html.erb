@@ -68,41 +68,29 @@
           </tr>
           <script type="text/javascript">
               //<![CDATA[
-              function disable_media_control_if_necesary(checked, value) {
+              function disable_media_control_if_necesary(value) {
                   /*if some other than SIP device type was selected, then disable
                    canreinvite option completly*/
                   var canreinvite_yes = $('canreinvite_yes');
                   var canreinvite_no = $('canreinvite_no');
-
-                  if (checked) {
-                      var enable = (value != 'SIP');
-                      canreinvite_yes.disabled = enable;
-                      canreinvite_no.disabled = enable;
-                  }
+                  var enable = (value != 'SIP');
+                  canreinvite_yes.disabled = enable;
+                  canreinvite_no.disabled = enable;
               }
 
               /*add event listener for onload event and for onclick event for all device
                type checkboxes.
                TODO: should be using jquery to get element by name*/
               Event.observe(window, 'load', function () {
-                  var device_types = document.getElementsByName('device[device_type]')//$("input[name='device[device_type]']");
-                  for (var i = 0; i < device_types.length; i++) {
-                      var type = device_types[i]
-                      disable_media_control_if_necesary(type.checked, type.value);
+                  var type = '<%= @device_type.to_s %>';
+                  disable_media_control_if_necesary(type);
 
-                      Event.observe(type, 'click', function (e) {
-                          var type = e.findElement();
-                          disable_media_control_if_necesary(type.checked, type.value);
-                      })
-                  }
-
-                  if ($('registration_expire') && $('device_device_type_SIP').checked) {
-                      Event.observe($('ip_authentication'), 'change', function (e) {
-                          if ($('ip_authentication').checked) {
-                              $('registration_expire').hide();
-                          } else {
-                              $('registration_expire').show();
-                          }
+                  if ($('registration_expire') && <%= @device_type == "SIP" %>) {
+                      Event.observe($('ip_authentication_dynamic_2'), 'click', function () {
+                          $('registration_expire').hide();
+                      });
+                      Event.observe($('ip_authentication_dynamic_1'), 'click', function () {
+                          $('registration_expire').show();
                       })
                   }
 

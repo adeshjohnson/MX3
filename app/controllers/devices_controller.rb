@@ -104,6 +104,20 @@ class DevicesController < ApplicationController
     fextension = free_extension()
     device = user.create_default_device({:device_ip_authentication_record => par[:ip_authentication].to_i, :description => par[:device][:description], :device_type => par[:device][:device_type], :dev_group => par[:device][:devicegroup_id], :free_ext => fextension, :secret => random_password(12), :username => fextension, :pin => par[:device][:pin]})
 
+    @sip_proxy_server = Server.where("server_type = 'sip_proxy'").first
+    if session[:usertype] == "reseller"
+      if ccl_active? and device.device_type == "SIP" and device.host == "dynamic"
+        device.server_id = @sip_proxy_server
+      else
+        first_srv = Server.first.id
+        def_asterisk = Confline.get_value('Resellers_server_id').to_i
+        if def_asterisk.to_i == 0
+          def_asterisk = first_srv
+        end
+        device.server_id = def_asterisk
+      end
+    end
+
     #device.port = Confline.get_value("Default_IAX2_device_port", current_user.get_corrected_owner_id) if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type                    
     #device.port = Confline.get_value("Default_SIP_device_port", current_user.get_corrected_owner_id) if device.device_type == 'SIP' and not Device.valid_port? device.port, device.device_type                      
     #device.port = Confline.get_value("Default_H323_device_port", current_user.get_corrected_owner_id) if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type    
@@ -113,6 +127,24 @@ class DevicesController < ApplicationController
     device.port = 1720 if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type    
 
     if device.save
+      # if device type = SIP and device host = dynamic and ccl_active=1 it must be assigned to sip_proxy server
+      if device.device_type == "SIP" and device.host == "dynamic" and @sip_proxy_server and ccl_active?
+        if not serv_dev
+          server_device = ServerDevice.new
+          server_device.server_id = @sip_proxy_server.id
+          server_device.device_id = device.id
+          server_device.save
+        end
+      else
+        serv_dev = ServerDevice.where("server_id=? AND device_id=?", device.server_id, device.id).first
+
+        if not serv_dev
+          server_device = ServerDevice.new
+          server_device.server_id = device.server_id
+          server_device.device_id = device.id
+          server_device.save
+        end
+      end
       flash[:status] = device.check_callshop_user(_('device_created'))
       # no need to create extensions, prune peers, etc when device is created, because user goes to edit window and all these actions are done in device_update
       #a=configure_extensions(device.id, {:current_user => current_user})
@@ -221,6 +253,9 @@ class DevicesController < ApplicationController
       @cid_number = cid_number(@device.callerid)
     end
 
+    @server_devices = []
+    @device.server_devices.each { |d| @server_devices[d.server_id] = 1 }
+
     @device_dids_numbers = @device.dids_numbers
     @device_cids = @device.cid_number
     @device_caller_id_number = @device.device_caller_id_number
@@ -240,7 +275,15 @@ class DevicesController < ApplicationController
     @dids = @device.dids
     @all_dids = Did.forward_dids_for_select
 
-    @servers = Server.find(:all, :order => "server_id ASC")
+    #-------multi server support------
+
+    @servers = Server.where("server_type = 'asterisk'").order("server_id ASC").all
+
+    @sip_proxy_server = Server.where("server_type = 'sip_proxy'").limit(1).all
+    @asterisk_servers = @servers
+    if ccl_active?
+      @servers = @sip_proxy_server
+    end
 
     #------ permits --------
 
@@ -275,7 +318,7 @@ class DevicesController < ApplicationController
     if not params[:device]
       redirect_to :controller => "callc", :action => 'main' and return false
     end
- 
+
     change_pin = !(session[:usertype] == "accountant" and session[:acc_device_pin].to_i != 2)
     change_opt_1 = !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_1].to_i != 2)
     change_opt_2 = !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_2].to_i != 2)
@@ -308,6 +351,44 @@ class DevicesController < ApplicationController
       params[:device][:device_type] = @device.device_type
     end
 
+    if !params[:add_to_servers].blank? and !params[:device][:server_id].blank?
+      flash[:notice] = _('Please_select_server')
+      redirect_to :action => 'device_edit', :id => @device.id and return false
+    end
+
+    #============multi server support===========
+    @servers = Server.where("server_type = 'asterisk'").order("server_id ASC").all
+    @sip_proxy_server = Server.where("server_type = 'sip_proxy'").limit(1).all
+    @asterisk_servers = @servers
+    if ccl_active?
+      @servers = @sip_proxy_server
+
+      @server_devices = []
+      @device.server_devices.each { |d| @server_devices[d.server_id] = 1 }
+    end
+    #================ Insecure =================
+
+    if ccl_active? and params[:device][:device_type] == "SIP" and params[:device][:host] == "dynamic"
+      @device.insecure = 'port,invite'
+    elsif ccl_active? and params[:device][:device_type] != "SIP"
+      @device.insecure = 'no'
+    end
+    #========= Reseller device server ==========
+
+    if session[:usertype] == "reseller"
+      if ccl_active? and params[:device][:device_type] == "SIP" and params[:device][:host] == "dynamic"
+        params[:add_to_servers] = @sip_proxy_server
+      else
+        first_srv = Server.first.id
+        def_asterisk = Confline.get_value('Resellers_server_id').to_i
+        if def_asterisk.to_i == 0
+          def_asterisk = first_srv
+        end
+        params[:device][:server_id] = def_asterisk
+      end
+    end
+    #===========================================
+
     change_pin == true ? params[:device][:pin]=params[:device][:pin].to_s.strip : params[:device][:pin] = @device.pin
     unless (session[:usertype] == "accountant" and session[:acc_user_create_opt_7].to_i != 2) # can accountant change call_limit?
       if params[:call_limit]
@@ -317,7 +398,9 @@ class DevicesController < ApplicationController
         end
       end
     end
-    @device.server_id = params[:device][:server_id].strip if params[:device] and params[:device][:server_id]
+    if !ccl_active?
+      @device.server_id = params[:device][:server_id].strip if params[:device] and params[:device][:server_id]
+    end
     #========================== check input ============================================
 
     #because block_callerid input may be disabled and it will not be sent in 
@@ -625,10 +708,13 @@ class DevicesController < ApplicationController
       end
 
       @device.mailbox = @device.enable_mwi.to_i == 0 ? "" : @device.extension.to_s + "@default"
- 
-
       if @device.save
-        # --------------- VM -------------
+
+        #----------server_devices table changes---------
+        @device.create_server_devices(params[:add_to_servers]) if ccl_active?
+        @device.create_server_devices({params[:device][:server_id].to_s => "1"}) if !ccl_active?
+
+        # ---------------------- VM --------------------
         old_vm = (vm = @device.voicemail_box).dup
 
         vm.email = params[:vm_email] if params[:vm_email]
@@ -703,7 +789,6 @@ class DevicesController < ApplicationController
         @extension = @device.extension
         @fax_enabled = true if Confline.get_value("Fax_Device_Enabled").to_i == 1
         @pdffaxemails = @device.pdffaxemails
-        @servers = Server.find(:all, :order => "server_id ASC")
 
         set_voicemail_variables(@device)
 
@@ -1689,9 +1774,15 @@ class DevicesController < ApplicationController
     @device_dids_numbers = @device.dids_numbers
     @device_caller_id_number = @device.device_caller_id_number
 
-    @servers = Server.find(:all, :order => "server_id ASC")
+    #-------multi server support------
+    @sip_proxy_server = Server.where("server_type = 'sip_proxy'").limit(1).all
+    @servers = Server.where("server_type = 'asterisk'").order("server_id ASC").all
+    #@asterisk_servers = @servers
+    if @sip_proxy_server.length > 0 and @device_type == "SIP"
+      @servers = @sip_proxy_server
+    end
 
-    #------ permits --------
+    #------------ permits ------------
 
     @ip1 = ""
     @mask1 = ""

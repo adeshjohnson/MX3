@@ -108,5 +108,13 @@
     <% i += 1 %>
     <% end %>
 
+    <% if ccl_active? %>
+    addons_menu.add(<%= i %>, <%= si %>, '<%= _('CCL_Active') %>');
+    <% i += 1 %>
+    <% a = i-1 -%>
+    addons_menu.add(<%= i %>, <%= a %>, '<%= _('Settings') %>', '<%= Web_Dir %>/functions/ccl_settings');
+    <% i += 1 %>
+    <% end %>
+
     $("addons_menu_div").innerHTML = addons_menu.toString();
 </script>
