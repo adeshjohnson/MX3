@@ -26,7 +26,7 @@ class Cardgroup < ActiveRecord::Base
 
 
   def validate_pin_length
-    if !self.pin_length.blank? and self.temp_pl.to_s.match(/^\d+$/) == nil
+    if !self.pin_length.blank? and self.temp_pl.to_s.match(/^[0-9\.\-]+$/) == nil
       errors.add(:pin_length, _('Pin_length_must_consist_only_of_digits'))
       return false
     end
