@@ -34,10 +34,17 @@
         </tr>
         <tr>
           <td> <%= _('Insecure') %>:</td>
-          <td>
-            <%= _("Port") %>: <%= check_box_tag 'insecure_port', "1", @device.insecure.to_s.include?("port"), :blocked => true if @device_type == "SIP" and @device.host == "dynamic" and ccl_active? %>
-            <%= _("Invite") %>: <%= check_box_tag 'insecure_invite', "1", @device.insecure.to_s.include?("invite"), :blocked => true if @device_type == "SIP" and @device.host == "dynamic" and ccl_active? %>
-          </td>
+          <% if params[:action] == "default_device" or !ccl_active? %>
+            <td>
+              <%= _("Port") %>: <%= check_box_tag 'insecure_port', "1", @device.insecure.to_s.include?("port") %>
+              <%= _("Invite") %>: <%= check_box_tag 'insecure_invite', "1", @device.insecure.to_s.include?("invite") %>
+            </td>
+          <% else %>
+            <td>
+              <%= _("Port") %>: <%= check_box_tag 'insecure_port', "1", @device.insecure.to_s.include?("port"), :blocked => true if @device_type == "SIP" and @device.host == "dynamic" and ccl_active? %>
+              <%= _("Invite") %>: <%= check_box_tag 'insecure_invite', "1", @device.insecure.to_s.include?("invite"), :blocked => true if @device_type == "SIP" and @device.host == "dynamic" and ccl_active? %>
+            </td>
+          <% end %>
         </tr>
 
         <% if session[:usertype] != "reseller" %>
