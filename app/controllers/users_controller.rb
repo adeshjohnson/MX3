@@ -67,7 +67,8 @@ class UsersController < ApplicationController
         :sub_s => "-1",
         :user_type => "-1",
         :s_email => "",
-        :s_id => ""
+        :s_id => "",
+        :responsible_accountant_id => ""
     }
 
     if params[:clean]
@@ -93,6 +94,7 @@ class UsersController < ApplicationController
     add_contition_and_param(@options[:s_agr_number], @options[:s_agr_number].to_s+"%", "users.agreement_number LIKE ?", cond, var) if !@options[:s_agr_number].blank?
     add_contition_and_param(@options[:s_acc_number], @options[:s_acc_number].to_s+"%", "users.accounting_number LIKE ?", cond, var) if !@options[:s_acc_number].blank?
     add_contition_and_param(@options[:s_email], @options[:s_email].to_s, "email = ?", cond, var) if !@options[:s_email].blank?
+    add_contition_and_param(@options[:responsible_accountant_id], @options[:responsible_accountant_id].to_s+"%", "users.responsible_accountant_id = ?", cond, var) if !@options[:responsible_accountant_id].blank?
 
     ["first_name", "username", "last_name", "clientid"].each { |col|
       add_contition_and_param(@options["s_#{col}".to_sym], "%"+@options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?", cond, var) }
@@ -115,6 +117,9 @@ class UsersController < ApplicationController
     @total_pages = (@user_size.size.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
+
+    # Mapping accountants with appointed users
+    @responsible_accountants = User.find(:all, :select => 'accountants.*', :joins => ['JOIN users accountants ON(accountants.id = users.responsible_accountant_id)'], :conditions => "accountants.hidden = 0 and accountants.usertype = 'accountant'", :group => 'accountants.id', :order => 'accountants.username')
 
     #we need to left join acc_groups, addreses and lcrs. When COUNTING users this data is irelevant,
     #so no need for extra joins there

@@ -26,7 +26,7 @@
             <%= _('last_name') %>
             : <%= text_field_tag 's_last_name', @options[:s_last_name], "class" => "input", :size => "10", :maxlength => "30" %>
             <%= _('User_type') %>:
-            <select name="user_type">
+            <select id="user_type" name="user_type">
               <option value="-1" <%= "selected" if @options[:user_type].to_i == -1 %>><%= _('All') %> </option>
               <% for type in @roles %>
                   <option value="<%= type.name %>" <%= "selected" if @options[:user_type].to_s == type.name %> > <%= type.name %></option>
@@ -56,8 +56,23 @@
         </tr>
         <tr>
           <td>
+            <%= _('Responsible_accountant')%> : 
+	    <%= select_tag 'responsible_accountant_id', options_for_select([[_('All'), "-1"]] + @responsible_accountants.map { |accountant| [nice_user(accountant), accountant.id] }) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
             <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
           </td>
+              <script type="text/javascript">
+              //<![CDATA[
+                Event.observe(window, 'load',  function() {
+                  Event.observe($('responsible_accountant_id'), 'change', function(){
+		    $('user_type').disabled = ($('responsible_accountant_id').value != '-1');
+		  });
+                });
+              //]]>
+              </script>
           <td align="right">
             <%# MorLog.my_debug(@search) %>
             <% if @search == 1 %>
