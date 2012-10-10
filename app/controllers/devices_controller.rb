@@ -354,7 +354,7 @@ class DevicesController < ApplicationController
       params[:device][:device_type] = @device.device_type
     end
 
-    if !params[:add_to_servers].blank? and !params[:device][:server_id].blank?
+    if params[:add_to_servers].blank? and params[:device][:server_id].blank?
       flash[:notice] = _('Please_select_server')
       redirect_to :action => 'device_edit', :id => @device.id and return false
     end
