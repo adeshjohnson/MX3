@@ -415,17 +415,17 @@ begin
       tables.each { |t|
         case t.to_s
           when 'Acustratedetail'
-            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN customrates ON (customrates.id = customrate_id)", :conditions => " user_id IN (#{u_id})", :group => "#{t.table_name}.id")
+            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN customrates ON (customrates.id = customrate_id)", :conditions => " user_id IN (#{u_id})", :group => "#{t.table_name}.id")  if !u_id.blank?
           when 'Adaction'
-            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN campaigns ON (campaigns.id = campaign_id)", :conditions => "user_id IN (#{ru_id})", :group => "#{t.table_name}.id")
+            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN campaigns ON (campaigns.id = campaign_id)", :conditions => "user_id IN (#{ru_id})", :group => "#{t.table_name}.id")   if !ru_id.blank?
           when *['Aratedetail', 'Ratedetail']
             actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN rates ON (rates.id = rate_id) JOIN tariffs ON (tariffs.id = rates.tariff_id)", :conditions => "owner_id = #{Reseller_ID}", :group => "#{t.table_name}.id")
           when *['Callerid', 'Devicecodec', 'Callflow', 'Pdffaxemail', 'Pdffaxe']
-            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN devices ON (devices.id = device_id)", :conditions => "devices.user_id IN (#{ru_id})", :group => "#{t.table_name}.id")
+            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN devices ON (devices.id = device_id)", :conditions => "devices.user_id IN (#{ru_id})", :group => "#{t.table_name}.id") if !ru_id.blank?
           when 'Extline'
-            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "LEFT JOIN devices ON (devices.id = device_id)", :conditions => "devices.user_id IN (#{ru_id}) OR device_id = 0", :group => "#{t.table_name}.id")
+            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "LEFT JOIN devices ON (devices.id = device_id)", :conditions => "devices.user_id IN (#{ru_id}) OR device_id = 0", :group => "#{t.table_name}.id") if !ru_id.blank?
           when 'VoicemailBox'
-            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN devices ON (devices.id = device_id)", :conditions => "devices.user_id IN (#{ru_id})", :group => "#{t.table_name}.uniqueid")
+            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN devices ON (devices.id = device_id)", :conditions => "devices.user_id IN (#{ru_id})", :group => "#{t.table_name}.uniqueid") if !ru_id.blank?
           when *['CcGhostminutepercent', 'Cclineitem']
             actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN cardgroups ON (cardgroups.id = cardgroup_id)", :conditions => "cardgroups.owner_id = #{Reseller_ID}", :group => "#{t.table_name}.id")
           when 'Ccorder'
@@ -433,11 +433,11 @@ begin
           when *['Didrate', 'Quickforwarddid']
             actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN dids ON (dids.id = did_id)", :conditions => "dids.reseller_id = #{Reseller_ID}", :group => "#{t.table_name}.id")
           when 'FlatrateData'
-            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN subscriptions ON (subscriptions.id = subscription_id)", :conditions => "subscriptions.user_id IN (#{u_id})", :group => "#{t.table_name}.id")
+            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN subscriptions ON (subscriptions.id = subscription_id)", :conditions => "subscriptions.user_id IN (#{u_id})", :group => "#{t.table_name}.id")     if !u_id.blank?
           when *['FlatrateDestination', 'Subscription']
             actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN services ON (services.id = service_id)", :conditions => "owner_id = #{Reseller_ID}", :group => "#{t.table_name}.id")
           when 'Invoicedetail'
-            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN invoices ON (invoices.id = invoice_id)", :conditions => "user_id IN (#{ru_id})", :group => "#{t.table_name}.id")
+            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN invoices ON (invoices.id = invoice_id)", :conditions => "user_id IN (#{ru_id})", :group => "#{t.table_name}.id")  if !ru_id.blank?
           when *['IvrAction', 'IvrExtension']
             actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN ivr_blocks ON (ivr_blocks.id = ivr_block_id) JOIN ivrs ON (ivrs.id = ivr_id)", :conditions => "user_id = #{Reseller_ID} ", :group => "#{t.table_name}.id")
           when 'IvrBlock'
@@ -449,7 +449,7 @@ begin
           when 'Rate'
             actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN tariffs ON (tariffs.id = tariff_id)", :conditions => "owner_id = #{Reseller_ID} ", :group => "#{t.table_name}.id")
           when 'Tax'
-            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => " LEFT JOIN cs_invoices ON (cs_invoices.tax_id = taxes.id) LEFT JOIN invoices ON (invoices.tax_id = taxes.id) LEFT JOIN users ON (users.tax_id = taxes.id) LEFT JOIN vouchers ON (vouchers.tax_id = taxes.id) LEFT JOIN cardgroups ON (cardgroups.tax_id = taxes.id)", :conditions => "invoices.user_id IN (#{ru_id}) OR cs_invoices.user_id  IN (#{ru_id}) OR users.id  IN (#{ru_id}) OR vouchers.user_id IN (#{ru_id}) OR cardgroups.owner_id = #{Reseller_ID}", :group => "#{t.table_name}.id")
+            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => " LEFT JOIN cs_invoices ON (cs_invoices.tax_id = taxes.id) LEFT JOIN invoices ON (invoices.tax_id = taxes.id) LEFT JOIN users ON (users.tax_id = taxes.id) LEFT JOIN vouchers ON (vouchers.tax_id = taxes.id) LEFT JOIN cardgroups ON (cardgroups.tax_id = taxes.id)", :conditions => "invoices.user_id IN (#{ru_id}) OR cs_invoices.user_id  IN (#{ru_id}) OR users.id  IN (#{ru_id}) OR vouchers.user_id IN (#{ru_id}) OR cardgroups.owner_id = #{Reseller_ID}", :group => "#{t.table_name}.id")  if !ru_id.blank?
           when 'Usergroup'
             actions = t.find(:all, :select => "#{t.table_name}.*", :joins => "JOIN groups ON (groups.id = group_id)", :conditions => "owner_id = #{Reseller_ID} ", :group => "#{t.table_name}.id")
           when 'Right'
@@ -500,17 +500,17 @@ begin
       tables.each { |t|
         case t.to_s
           when *['Action', 'Campaign', 'Customrate', 'Devicegroup', 'Dialplan', 'Invoice', 'IvrSoundFile', 'IvrTimeperiod', 'IvrVoice', 'Ivr', 'LcrPartial', 'Lcr', 'Payment', 'Phonebook', 'Provider', 'Terminator', 'UserTranslation', 'Voucher']
-            actions = t.find(:all, :select => "#{t.table_name}.*", :conditions => "user_id IN (#{u_id})", :group => "#{t.table_name}.id")
+            actions = t.find(:all, :select => "#{t.table_name}.*", :conditions => "user_id IN (#{u_id})", :group => "#{t.table_name}.id")   if !u_id.blank?
           when 'Device'
-            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => 'LEFT JOIN providers ON (providers.device_id = devices.id)', :conditions => "devices.user_id IN (#{u_id}) OR providers.user_id = #{Reseller_ID}", :group => "#{t.table_name}.id")
+            actions = t.find(:all, :select => "#{t.table_name}.*", :joins => 'LEFT JOIN providers ON (providers.device_id = devices.id)', :conditions => "devices.user_id IN (#{u_id}) OR providers.user_id = #{Reseller_ID}", :group => "#{t.table_name}.id")        if !u_id.blank?
           when 'Address'
-            actions = t.find(:all, :select => "#{t.table_name}.*", :conditions => "id IN (SELECT address_id FROM users WHERE id IN (#{u_id}))", :group => "#{t.table_name}.id")
+            actions = t.find(:all, :select => "#{t.table_name}.*", :conditions => "id IN (SELECT address_id FROM users WHERE id IN (#{u_id}))", :group => "#{t.table_name}.id")    if !u_id.blank?
           when *['Cardgroup', 'Card', 'Group', 'Service', 'Tariff']
             actions = t.find(:all, :select => "#{t.table_name}.*", :conditions => "owner_id = #{Reseller_ID}", :group => "#{t.table_name}.id")
           when *['CsInvoice', 'CcInvoice']
-            actions = t.find(:all, :select => "#{t.table_name}.*", :conditions => "owner_id IN (#{u_id})", :group => "#{t.table_name}.id")
+            actions = t.find(:all, :select => "#{t.table_name}.*", :conditions => "owner_id IN (#{u_id})", :group => "#{t.table_name}.id")   if !u_id.blank?
           when 'User'
-            actions = t.find(:all, :select => "#{t.table_name}.*", :conditions => "id IN (#{u_id})", :group => "#{t.table_name}.id")
+            actions = t.find(:all, :select => "#{t.table_name}.*", :conditions => "id IN (#{u_id})", :group => "#{t.table_name}.id")    if !u_id.blank?
           when 'Did'
             actions = t.find(:all, :select => "#{t.table_name}.*", :conditions => "reseller_id = #{Reseller_ID}", :group => "#{t.table_name}.id")
         end
