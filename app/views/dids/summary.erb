@@ -108,7 +108,7 @@
   <tr>
 
     <% if @options[:dids_grouping].to_i == 1%>
-    <th align="left"><%= raw nice_list_order("provider", "Provider", @options) %></th>
+    <th align="left"><%= ordered_list_header("provider", "provider", "Provider",  @options.merge({:order_by => @options[:order_by_name]})) %></th>
         <%else%>
     <th align="left"><%= ordered_list_header("nice_user", "nice_user", "User_/_Device", @options.merge({:order_by => @options[:order_by_name]})) %></th>
         <%end%>
