@@ -775,9 +775,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
+	<td>assertNotVisible</td>
 	<td>name=device[server_id]</td>
-	<td>ID: 30, IP: 127.0.0.3 (third serv)</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -1407,109 +1407,6 @@
 	<td>Device created</td>
 	<td></td>
 </tr>
-<!--<tr> 	<td>type</td> 	<td>id=cid_name</td> 	<td>1005</td> </tr> <tr> 	<td>type</td> 	<td>id=cid_number</td> 	<td>1005</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Device's settings updated</td> 	<td></td> </tr>-->
-<tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/11</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=device_device_type_Virtual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Device's settings updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=name_11</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=secret_11</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/make_select</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=table</td>
-	<td>label=devices</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=id</td>
-	<td>11</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=search_devices_all</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Field</td>
-	<td></td>
-</tr>
-<tr>
-	<td>storeText</td>
-	<td>id=username_value</td>
-	<td>username</td>
-</tr>
-<tr>
-	<td>assertNotText</td>
-	<td>id=username_value</td>
-	<td>1005</td>
-</tr>
-<!--<tr> 	<td>assertText</td> 	<td>id=username_value</td> 	<td>1005Bx</td> </tr>-->
-<tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/11</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=device_device_type_SIP</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<!--<tr> 	<td>waitForTextPresent</td> 	<td>Device's settings updated</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=name_11</td> 	<td>1001</td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/test/make_select</td>
