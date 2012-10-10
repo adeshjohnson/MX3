@@ -218,7 +218,7 @@
 
     <% if (@device_type == "FAX" and params[:action] == "default_device") or (@device_type == "FAX" and !ccl_active? ) %>
         <% device_server = (@device ? @device.server_id : Confline.get_value("Default_device_server_id", session[:user_id])) %>
-        <tr>
+        <tr id="servers_dropdown">
           <td> <%= b_server + _('Server') %>:</td>
           <td>
             <select name="device[server_id]">
