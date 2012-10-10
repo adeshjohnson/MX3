@@ -1,5 +1,6 @@
 <table width="100%">
   <tr>
+    <td align="left"><%= link_to b_add + _('LCR_new'), :action => 'new' %></td>
     <td align="right"><%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %></td>
   </tr>
 </table>
@@ -61,5 +62,3 @@
       </tr>
   <% } %>
 </table>
-<br/>
-<%= link_to b_add + _('LCR_new'), :action => 'new' %>
