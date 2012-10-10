@@ -371,7 +371,7 @@ class DevicesController < ApplicationController
     end
     #================ Insecure =================
 
-    if ccl_active? and params[:device][:device_type] == "SIP" and params[:device][:host] == "dynamic"
+    if ccl_active? and params[:device][:device_type] == "SIP" and params[:dynamic_check] == 1
       @device.insecure = 'port,invite'
     elsif ccl_active? and params[:device][:device_type] != "SIP"
       @device.insecure = 'no'
@@ -379,7 +379,7 @@ class DevicesController < ApplicationController
     #========= Reseller device server ==========
 
     if session[:usertype] == "reseller"
-      if ccl_active? and params[:device][:device_type] == "SIP" and params[:device][:host] == "dynamic"
+      if ccl_active? and params[:device][:device_type] == "SIP" and params[:dynamic_check] == 1
         params[:add_to_servers] = @sip_proxy_server
       else
         first_srv = Server.first.id
