@@ -256,7 +256,7 @@ class ProvidersController < ApplicationController
   def edit
     @page_title = _('Provider_edit') + ": " + @provider.name
     @page_icon = "edit.png"
-    @servers= Server.find(:all, :order => "server_id")
+    @servers= Server.find(:all, :conditions => "server_type = 'asterisk'", :order => "server_id")
     @prules = @provider.providerrules
 
     @providertypes = Providertype.find(:all)

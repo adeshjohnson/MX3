@@ -369,13 +369,7 @@ class DevicesController < ApplicationController
       @server_devices = []
       @device.server_devices.each { |d| @server_devices[d.server_id] = 1 }
     end
-    #================ Insecure =================
 
-    if ccl_active? and params[:device][:device_type] == "SIP" and params[:dynamic_check] == 1
-      @device.insecure = 'port,invite'
-    elsif ccl_active? and params[:device][:device_type] != "SIP"
-      @device.insecure = 'no'
-    end
     #========= Reseller device server ==========
 
     if session[:usertype] == "reseller"
@@ -690,6 +684,11 @@ class DevicesController < ApplicationController
       @device.insecure = "invite" if params[:insecure_port] != "1" and params[:insecure_invite] == "1"
       @device.forward_did_id = params[:forward_did]
 
+      if ccl_active? and params[:device][:device_type] == "SIP" and params[:dynamic_check] == 1
+        @device.insecure = 'port,invite'
+      elsif ccl_active? and params[:device][:device_type] != "SIP"
+        @device.insecure = 'no'
+      end
 
       # check for errors
       @device.host = "dynamic" if not @device.host
