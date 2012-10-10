@@ -884,8 +884,13 @@ class CallcController < ApplicationController
                 serv_error =s.errors
               end
             end
-            if dev.server_id != s.server_id
-              dev.server_id = s.server_id
+            if (dev.server_id != s.server_id) or (dev.host.to_s == "dynamic" and dev.device_type.to_s == "SIP")
+              if dev.host.to_s == "dynamic" and dev.device_type.to_s == "SIP"
+                dev.insecure = 'no'
+              end
+              if dev.server_id != s.server_id
+                dev.server_id = s.server_id
+              end
               dev.save
             end
           end
@@ -934,8 +939,9 @@ class CallcController < ApplicationController
                  if cur_dev.host.to_s == "dynamic" and cur_dev.device_type.to_s == "SIP"
                    d.server_id = created_server.id
                    d.save
+                   cur_dev.insecure = 'port,invite'
+                   cur_dev.save
                  end
-
               end
 
               Confline.set_value("CCL_Active", ccl.to_i)
