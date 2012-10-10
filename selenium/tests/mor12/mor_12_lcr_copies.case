@@ -51,11 +51,10 @@
 	<td>/billing/lcrs/list</td>
 	<td></td>
 </tr>
-<!--Išskleisti LCR meniu punktą-->
 <tr>
-	<td>assertText</td>
-	<td>id=ssettings_menu23</td>
-	<td>Copy LCR</td>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/lcrs/clone_options')]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -69,10 +68,19 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/lcrs/providers_list/4</td>
+	<td>/billing/lcrs/providers_list/1</td>
 	<td></td>
 </tr>
-<!--<tr> 	<td>assertValue</td> 	<td>id=no_failover_0</td> 	<td>on</td> </tr>-->
+<tr>
+	<td>assertValue</td>
+	<td>id=no_failover_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=no_failover_0</td>
+	<td>off</td>
+</tr>
 <!--assert fields-->
 <tr>
 	<td>open</td>
@@ -398,6 +406,11 @@
 	<td>waitForTextPresent</td>
 	<td>No resellers were found</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -1113,6 +1126,81 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Page_copy&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Lcr copied</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/details_by_destinations/7?no_direction=true</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_1</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='name_1'])[2]</td>
+	<td>Afghanistan</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lname_1</td>
+	<td>newLCR</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//td[@id='lname_1'])[2]</td>
+	<td>newLCR</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=name_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=destinations_7</td>
+	<td>(2)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lcr_destroy_7 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>LCR was successfully deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=name_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -1152,8 +1240,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=#lcr_destroy_7 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td>clickAndWait</td>
+	<td>//a[@id='lcr_destroy_8']/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -1423,7 +1511,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/lcrs/providers_list/8</td>
+	<td>/billing/lcrs/providers_list/9</td>
 	<td></td>
 </tr>
 <tr>
