@@ -1701,10 +1701,9 @@
 	<td>name=commit</td>
 	<td></td>
 </tr>
-<!--Man rodos turėtų nieko nerasti-->
 <tr>
 	<td>assertTextPresent</td>
-	<td>Records: 1 </td>
+	<td>Records: 0</td>
 	<td></td>
 </tr>
 <tr>
@@ -1830,27 +1829,13 @@
 <tr>
 	<td>assertText</td>
 	<td>id=prov_name_11</td>
-	<td>Test Provider</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>xpath=(//td[@id='prov_name_11'])[2]</td>
 	<td>common_use_provider</td>
 </tr>
+<!--TURI BŪTI 4 SKAMBUČIAI-->
 <tr>
 	<td>assertText</td>
 	<td>id=calls_11</td>
-	<td>6</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=calls_11</td>
-	<td>6</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>xpath=(//td[@id='calls_11'])[2]</td>
-	<td>4</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1860,7 +1845,7 @@
 <tr>
 	<td>select</td>
 	<td>name=provider_id</td>
-	<td>label=Test Provider/1</td>
+	<td>label=common_use_provider/11</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1870,27 +1855,32 @@
 <tr>
 	<td>assertText</td>
 	<td>id=prov_name_11</td>
-	<td>Test Provider</td>
+	<td>common_use_provider</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=calls_11</td>
-	<td>4</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dur_11</td>
+	<td>exact:00:00:50</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=inc_11</td>
-	<td>8.0000</td>
+	<td>2.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=own_11</td>
-	<td>16.0000</td>
+	<td>4.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=prov_11</td>
-	<td>5.0260</td>
+	<td>1.2565</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -3077,10 +3067,9 @@
 	<td>name=commit</td>
 	<td></td>
 </tr>
-<!--Man rodos turėtų nieko nerasti-->
 <tr>
 	<td>assertTextPresent</td>
-	<td>Records: 1 </td>
+	<td>Records: 0</td>
 	<td></td>
 </tr>
 <tr>
@@ -3206,23 +3195,33 @@
 <tr>
 	<td>assertText</td>
 	<td>id=prov_name_11</td>
-	<td>Test Provider</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>xpath=(//td[@id='prov_name_11'])[2]</td>
 	<td>common_use_provider</td>
 </tr>
-<!--Rodo per daug skambučių, kas per skirtumas paaiškinau skype-->
+<!--TURI BŪTI 4 SKAMBUČIAI-->
 <tr>
 	<td>assertText</td>
 	<td>id=calls_11</td>
-	<td>6</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>xpath=(//td[@id='calls_11'])[2]</td>
-	<td>4</td>
+	<td>id=dur_11</td>
+	<td>exact:00:01:40</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inc_11</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=own_11</td>
+	<td>8.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_11</td>
+	<td>2.5130</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -3232,7 +3231,7 @@
 <tr>
 	<td>select</td>
 	<td>name=provider_id</td>
-	<td>label=Test Provider/1</td>
+	<td>label=common_use_provider/11</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3242,27 +3241,37 @@
 <tr>
 	<td>assertText</td>
 	<td>id=prov_name_11</td>
-	<td>Test Provider</td>
+	<td>common_use_provider</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=calls_11</td>
-	<td>4</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dur_11</td>
+	<td>exact:00:00:50</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=inc_11</td>
-	<td>8.0000</td>
+	<td>2.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=own_11</td>
-	<td>16.0000</td>
+	<td>4.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=prov_11</td>
-	<td>5.0260</td>
+	<td>1.2565</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_11</td>
+	<td>1.2565</td>
 </tr>
 </tbody></table>
 </body>
