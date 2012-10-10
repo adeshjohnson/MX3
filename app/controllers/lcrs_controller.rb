@@ -503,30 +503,26 @@ class LcrsController < ApplicationController
   end
 
   def lcr_clone
-    if mor_11_extend?
-      ln = @lcr.dup
-      ln.name = 'Clone: ' + ln.name + ' ' + Time.now.to_s(:db)
-      if ln.save
-        for p in @lcr.lcrproviders
-          pn = p.dup
-          pn.lcr_id = ln.id
-          pn.save
-        end
-        for l in @lcr.lcr_partials
-          lp = l.dup
-          lp.lcr_id = ln.id
-          lp.save
-        end
-        flash[:status] = _('Lcr_copied')
-      else
-        flash_errors_for(_('Lcr_not_copied'), ln)
+    ln = @lcr.dup
+    ln.name = 'Clone: ' + ln.name + ' ' + Time.now.to_s(:db)
+    if ln.save
+      for p in @lcr.lcrproviders
+        pn = p.dup
+        pn.lcr_id = ln.id
+        pn.save
       end
-      redirect_to :action => 'list' and return false
+      @lpp = LcrPartial.where(['main_lcr_id=?', @lcr.id]).all
+      for l in @lpp
+        lp = l.dup
+        lp.lcr_id = l.lcr_id
+        lp.main_lcr_id = ln.id
+        lp.save
+      end
+      flash[:status] = _('Lcr_copied')
     else
-      dont_be_so_smart
-      redirect_to :controller => "callc", :action => "main" and return false
+      flash_errors_for(_('Lcr_not_copied'), ln)
     end
-
+    redirect_to :action => 'list' and return false
   end
 
   private
