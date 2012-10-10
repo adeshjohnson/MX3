@@ -103,7 +103,11 @@ class DevicesController < ApplicationController
 
     fextension = free_extension()
     device = user.create_default_device({:device_ip_authentication_record => par[:ip_authentication].to_i, :description => par[:device][:description], :device_type => par[:device][:device_type], :dev_group => par[:device][:devicegroup_id], :free_ext => fextension, :secret => random_password(12), :username => fextension, :pin => par[:device][:pin]})
-
+    if ccl_active? and par[:device][:device_type] == "SIP"
+      device.insecure = 'port,invite'
+    elsif ccl_active? and par[:device][:device_type] != "SIP"
+      device.insecure = 'no'
+    end
     @sip_proxy_server = Server.where("server_type = 'sip_proxy'").first
     if session[:usertype] == "reseller"
       if ccl_active? and device.device_type == "SIP" and device.host == "dynamic"
