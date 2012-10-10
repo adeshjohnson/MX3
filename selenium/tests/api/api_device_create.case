@@ -270,9 +270,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=device_device_type_SIP</td>
-	<td>on</td>
+	<td>assertText</td>
+	<td>css=#type_value &gt; b</td>
+	<td>SIP</td>
 </tr>
 <!--Try to create device for user Reseller and specify device_group that is reseller's, but dont specify type. it should default to SIP-->
 <tr>
@@ -331,9 +331,9 @@
 	<td>primary</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=device_device_type_SIP</td>
-	<td>on</td>
+	<td>assertText</td>
+	<td>css=#type_value &gt; b</td>
+	<td>SIP</td>
 </tr>
 <!--Create new IAX2 device for User Test #1. were not sending device group, but device must be created without device group-->
 <tr>
@@ -392,9 +392,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=device_device_type_IAX2</td>
-	<td>on</td>
+	<td>assertText</td>
+	<td>css=#type_value &gt; b</td>
+	<td>IAX2</td>
 </tr>
 <!--Create device group for user Test Reseller-->
 <tr>
@@ -469,9 +469,9 @@
 	<td>Please change</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=device_device_type_SIP</td>
-	<td>on</td>
+	<td>assertText</td>
+	<td>css=#type_value &gt; b</td>
+	<td>SIP</td>
 </tr>
 <!--As admin create new H323 device  for user User Test #1-->
 <tr>
@@ -591,9 +591,9 @@
 	<td>Please change</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=device_device_type_FAX</td>
-	<td>on</td>
+	<td>assertText</td>
+	<td>css=#type_value &gt; b</td>
+	<td>FAX</td>
 </tr>
 <!--As admin create new dahdi device  for user User Test #1-->
 <tr>
@@ -642,9 +642,9 @@
 	<td>Please change</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=device_device_type_dahdi</td>
-	<td>on</td>
+	<td>assertText</td>
+	<td>css=#type_value &gt; b</td>
+	<td>dahdi</td>
 </tr>
 <!--As admin create new virtual device  for user User Test #1-->
 <tr>
@@ -703,9 +703,9 @@
 	<td>Please change</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=device_device_type_Virtual</td>
-	<td>on</td>
+	<td>assertText</td>
+	<td>css=#type_value &gt; b</td>
+	<td>Virtual</td>
 </tr>
 <!--As admin try to create new invalid SIPIAX2 device  for user User Test #1, we should gracefully fail.-->
 <tr>
@@ -1204,9 +1204,9 @@
 	<td>User Resellers</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=device_device_type_SIP</td>
-	<td>on</td>
+	<td>assertText</td>
+	<td>css=#type_value &gt; b</td>
+	<td>SIP</td>
 </tr>
 <!--Create new IAX2 device for reseller's user. were not sending device group, but device must be created without device group-->
 <tr>
@@ -1250,9 +1250,9 @@
 	<td>User Resellers</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=device_device_type_IAX2</td>
-	<td>on</td>
+	<td>assertText</td>
+	<td>css=#type_value &gt; b</td>
+	<td>IAX2</td>
 </tr>
 <!--As reseller create new SIP device  for user reseller's user, without group or with users device group-->
 <tr>
@@ -1296,9 +1296,9 @@
 	<td>User Resellers</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=device_device_type_SIP</td>
-	<td>on</td>
+	<td>assertText</td>
+	<td>css=#type_value &gt; b</td>
+	<td>SIP</td>
 </tr>
 <!--As reseller cannot create new dahdi-->
 <tr>
@@ -1421,9 +1421,9 @@
 	<td>User Resellers</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=device_device_type_Virtual</td>
-	<td>on</td>
+	<td>assertText</td>
+	<td>css=#type_value &gt; b</td>
+	<td>Virtual</td>
 </tr>
 <!--Admin or reseler user shouldnt have permissions to create device-->
 <tr>
