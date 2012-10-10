@@ -1847,7 +1847,7 @@ class DevicesController < ApplicationController
     Confline.set_value("Default_device_timeout", params[:device_timeout], session[:user_id])
 
     Confline.set_value("Default_device_call_limit", params[:call_limit].to_i, session[:user_id])
-    Confline.set_value("Default_device_server_id", (params[:usertype] == 'reseller' ? Confline.get_value('Resellers_server_id').to_i : params[:device][:server_id].to_i), session[:user_id]) if params[:device] and params[:device][:server_id]
+    Confline.set_value("Default_device_server_id", (session[:usertype] == 'reseller' ? Confline.get_value('Resellers_server_id').to_i : params[:device][:server_id].to_i), session[:user_id]) if params[:device] and params[:device][:server_id]
     Confline.set_value("Default_device_cid_name", params[:cid_name], session[:user_id])
     Confline.set_value("Default_device_cid_number", params[:cid_number], session[:user_id])
     Confline.set_value("Default_setting_device_caller_id_number", params[:device_caller_id_number].to_i, session[:user_id])
