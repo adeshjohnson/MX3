@@ -1840,6 +1840,9 @@ class DevicesController < ApplicationController
       end
     end
 
+    if params[:usertype] == 'reseller'
+      params[:device][:server_id] = Confline.get_value('Resellers_server_id') if params[:device] and params[:device][:server_id]
+    end
     Confline.set_value("Default_device_type", params[:device][:device_type], session[:user_id])
     Confline.set_value("Default_device_dtmfmode", params[:device][:dtmfmode], session[:user_id])
     Confline.set_value("Default_device_works_not_logged", params[:device][:works_not_logged], session[:user_id])
