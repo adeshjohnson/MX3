@@ -7,7 +7,8 @@ INSERT INTO `users` (`id`, `username`, `password`,`usertype`, `logged`, `first_n
 (11, 'wholesaleluser1', 'd92bc3262a97e080fbf30c9f4b2b6a7549abd82e', 'user', 0, '', '', 3.000000000000000, 0, 0.000000000000000, 0.000000000000000, 1, 1, 0, 11, 0.000000000000000, NULL, 0, 0, 1, 11, -1.000000000000000, '', '0000000009', '2012-10-09', '', 123, '', 0.000000000000000, 10, '', 8, 0, 0, '2000-01-01 00:00:00', 't7e3b7gyf3', 0, NULL, 0, 0, 0.000000000000000, NULL, NULL, 0, 0, 0, 1, 0.000000000000000, 0.000000000000000, 0.000000000000000, 0.000000000000000, '2008-01-01', 15, 0, 0, 0, NULL, 0, 0, 0.000000000000000, 0, 9, 1, 0, -1, -1, 0, 0, 0, 0, 1, 0, 0, 0.000000000000000, 0, NULL, 0, 0, -1),
 (12, 'retailuser2', 'd92bc3262a97e080fbf30c9f4b2b6a7549abd82e', 'user', 0, '', '', 3.000000000000000, 0, 0.000000000000000, 0.000000000000000, 1, 1, 0, 12, 0.000000000000000, NULL, 0, 0, 1, 12, -1.000000000000000, '', '0000000010', '2012-10-09', '', 123, '', 0.000000000000000, 11, '', 9, 0, 0, '2000-01-01 00:00:00', '5tvcm1vjhy', 0, NULL, 0, 0, 0.000000000000000, NULL, NULL, 0, 0, 0, 1, 0.000000000000000, 0.000000000000000, 0.000000000000000, 0.000000000000000, '2008-01-01', 15, 0, 0, 0, NULL, 0, 0, 0.000000000000000, 0, 10, 1, 0, -1, -1, 0, 0, 0, 0, 1, 0, 0, 0.000000000000000, 0, NULL, 0, 0, -1),
 (13, 'wholesaleluser2', 'd92bc3262a97e080fbf30c9f4b2b6a7549abd82e', 'user', 0, '', '', 3.000000000000000, 0, 0.000000000000000, 0.000000000000000, 1, 1, 0, 13, 0.000000000000000, NULL, 0, 0, 1, 13, -1.000000000000000, '', '0000000011', '2012-10-09', '', 123, '', 0.000000000000000, 12, '', 9, 0, 0, '2000-01-01 00:00:00', 'bj4mxc7agn', 0, NULL, 0, 0, 0.000000000000000, NULL, NULL, 0, 0, 0, 1, 0.000000000000000, 0.000000000000000, 0.000000000000000, 0.000000000000000, '2008-01-01', 15, 0, 0, 0, NULL, 0, 0, 0.000000000000000, 0, 11, 1, 0, -1, -1, 0, 0, 0, 0, 1, 0, 0, 0.000000000000000, 0, NULL, 0, 0, -1),
-(14, 'aaaaaaaaaa', '755c001f4ae3c8843e5a50dd6aa2fa23893dd3ad', 'user', 0, 'aaaaaaaaaa', 'aaaaaaaaaaaa', 3.000000000000000, 0, 0.000000000000000, 0.000000000000000, 1, 1, 0, 8, 0.000000000000000, NULL, 0, 0, 1, 0, -1.000000000000000, '', '0000000012', '2012-10-09', '', 123, '', 0.000000000000000, 13, '', 0, 0, 0, '2000-01-01 00:00:00', '7yux9vj5b0', 0, NULL, 0, 0, 0.000000000000000, NULL, NULL, 0, 0, 0, 1, 0.000000000000000, 0.000000000000000, 0.000000000000000, 0.000000000000000, '2008-01-01', 15, 0, 0, 0, '', 104, 0, 0.000000000000000, 0, 12, 1, 0, -1, -1, 0, 0, 0, 0, 1, 0, 0, 0.000000000000000, 0, NULL, 0, 0, -1);
+(14, 'aaaaaaaaaa', '755c001f4ae3c8843e5a50dd6aa2fa23893dd3ad', 'user', 0, 'aaaaaaaaaa', 'aaaaaaaaaaaa', 3.000000000000000, 0, 0.000000000000000, 0.000000000000000, 1, 1, 0, 8, 0.000000000000000, NULL, 0, 0, 1, 0, -1.000000000000000, '', '0000000012', '2012-10-09', '', 123, '', 0.000000000000000, 13, '', 0, 0, 0, '2000-01-01 00:00:00', '7yux9vj5b0', 0, NULL, 0, 0, 0.000000000000000, NULL, NULL, 0, 0, 0, 1, 0.000000000000000, 0.000000000000000, 0.000000000000000, 0.000000000000000, '2008-01-01', 15, 0, 0, 0, '', 104, 0, 0.000000000000000, 0, 12, 1, 0, -1, -1, 0, 0, 0, 0, 1, 0, 0, 0.000000000000000, 0, NULL, 0, 0, -1),
+(15, '102', '00e263ff6806064c016a643c6587b0d607a6a42d', 'user', 0, '', '', 3.000000000000000, 0, 0.000000000000000, 0.000000000000000, 6, 1, 0, 16, 0.000000000000000, NULL, 0, 0, 1, 19, -1.000000000000000, '', '0000000013', '2012-10-09', '', 123, '', 0.000000000000000, 5, '', 3, 0, 0, '2000-01-01 00:00:00', 'z9ybsarsdj', 0, NULL, 0, 0, 0.000000000000000, NULL, NULL, 0, 0, 0, 1, 0.000000000000000, 0.000000000000000, 0.000000000000000, 0.000000000000000, '2008-01-01', 15, 0, 0, 0, NULL, 0, 0, 0.000000000000000, 0, 2, 1, 0, -1, -1, 0, 0, 0, 0, 1, 0, 0, 0.000000000000000, 0, NULL, 0, 0, -1);
 
 INSERT INTO `aratedetails` (`id`, `from`, `duration`, `artype`, `round`, `price`, `rate_id`, `start_time`, `end_time`, `daytype`) VALUES
 (237, 1, -1, 'minute', 1, 2.000000000000000, 503, '00:00:00', '23:59:59', ''),
@@ -100,7 +101,13 @@ INSERT INTO `aratedetails` (`id`, `from`, `duration`, `artype`, `round`, `price`
 (324, 1, -1, 'minute', 1, 15.000000000000000, 607, '00:00:00', '23:59:59', ''),
 (325, 1, -1, 'minute', 1, 15.000000000000000, 608, '00:00:00', '23:59:59', ''),
 (326, 1, -1, 'minute', 1, 15.000000000000000, 609, '00:00:00', '23:59:59', ''),
-(327, 1, -1, 'minute', 1, 15.000000000000000, 610, '00:00:00', '23:59:59', '');
+(327, 1, -1, 'minute', 1, 15.000000000000000, 610, '00:00:00', '23:59:59', ''),
+(328, 1, -1, 'minute', 1, 8.000000000000000, 612, '00:00:00', '23:59:59', ''),
+(329, 1, -1, 'minute', 1, 8.000000000000000, 613, '00:00:00', '23:59:59', ''),
+(330, 1, -1, 'minute', 1, 8.000000000000000, 614, '00:00:00', '23:59:59', ''),
+(331, 1, -1, 'minute', 1, 3.000000000000000, 615, '00:00:00', '23:59:59', ''),
+(332, 1, -1, 'minute', 1, 3.000000000000000, 616, '00:00:00', '23:59:59', ''),
+(333, 1, -1, 'minute', 1, 3.000000000000000, 617, '00:00:00', '23:59:59', '');
 
 update `ratedetails` set connection_fee=2.000000000000000 where id=1;
 update `ratedetails` set connection_fee=2.000000000000000 where id=12;
@@ -122,6 +129,7 @@ update `ratedetails` set rate=1.000000000000000 where id=254;
 update `ratedetails` set rate=3.000000000000000 where id=256;
 update `ratedetails` set rate=1.000000000000000 where id=257;
 update `ratedetails` set rate=2.000000000000000 where id=258;
+update `ratedetails` set rate=2.000000000000000 where id=140;
 INSERT INTO `ratedetails` (`id`, `start_time`, `end_time`, `rate`, `connection_fee`, `rate_id`, `increment_s`, `min_time`, `daytype`) VALUES
 (503, '00:00:00', '23:59:59', 2.000000000000000, 0.000000000000000, 511, 1, 0, ''),
 (504, '00:00:00', '23:59:59', 3.000000000000000, 0.000000000000000, 512, 1, 0, ''),
@@ -150,17 +158,18 @@ INSERT INTO `ratedetails` (`id`, `start_time`, `end_time`, `rate`, `connection_f
 (527, '00:00:00', '23:59:59', 1.000000000000000, 0.000000000000000, 577, 1, 0, ''),
 (528, '00:00:00', '23:59:59', 0.100000000000000, 0.000000000000000, 584, 1, 0, ''),
 (529, '00:00:00', '23:59:59', 2.000000000000000, 0.000000000000000, 602, 1, 0, ''),
-(530, '00:00:00', '23:59:59', 10.000000000000000, 0.000000000000000, 603, 1, 0, 'WD'),
-(531, '00:00:00', '23:59:59', 20.000000000000000, 0.000000000000000, 604, 1, 0, 'WD'),
-(532, '00:00:00', '23:59:59', 0.000000000000000, 0.000000000000000, 503, 0, 0, 'WD'),
+(530, '00:00:00', '23:59:59', 10.000000000000000, 0.000000000000000, 603, 1, 0, ''),
+(531, '00:00:00', '23:59:59', 20.000000000000000, 0.000000000000000, 604, 1, 0, ''),
 (533, '00:00:00', '23:59:59', 20.000000000000000, 0.000000000000000, 603, 1, 0, 'FD'),
-(534, '00:00:00', '23:59:59', 10.000000000000000, 0.000000000000000, 604, 1, 0, 'FD');
+(534, '00:00:00', '23:59:59', 10.000000000000000, 0.000000000000000, 604, 1, 0, 'FD'),
+(535, '00:00:00', '23:59:59', 2.000000000000000, 0.000000000000000, 611, 1, 0, '');
 
 INSERT INTO `lcrs` (`id`, `name`, `order`, `user_id`, `first_provider_percent_limit`, `failover_provider_id`, `no_failover`) VALUES
 (2, 'speclcr', 'price', 6, 0.000000000000000, NULL, 0),
 (3, 'speclcr2', 'price', 6, 0.000000000000000, NULL, 0),
 (4, 'speclcr', 'price', 0, 0.000000000000000, NULL, 0),
-(5, 'lcr_for_call_tracing', 'price', 0, 0.000000000000000, NULL, 0);
+(5, 'lcr_for_call_tracing', 'price', 0, 0.000000000000000, NULL, 0),
+(6, 'lcras', 'price', 3, 0.000000000000000, NULL, 0);
 
 INSERT INTO `providers` (`id`, `name`, `tech`, `channel`, `login`, `password`, `server_ip`, `port`, `priority`, `quality`, `tariff_id`, `cut_a`, `cut_b`, `add_a`, `add_b`, `device_id`, `ani`, `timeout`, `call_limit`, `interpret_noanswer_as_failed`, `interpret_busy_as_failed`, `register`, `reg_extension`, `terminator_id`, `reg_line`, `hidden`, `use_p_asserted_identity`, `user_id`, `common_use`, `balance`) VALUES
 (2, 'specpro', 'SIP', '', 'specpro', '', '0.0.0.0', '5060', 1, 1, 7, 0, 0, '', '', 8, 0, 60, 0, 0, 0, 0, '', 0, '', 0, 0, 6, 0, 0.000000000000000),
@@ -168,15 +177,16 @@ INSERT INTO `providers` (`id`, `name`, `tech`, `channel`, `login`, `password`, `
 (4, 'active_with_rate', 'SIP', '', 'active_with_rate', 'please_change', '0.0.0.0', '5060', 1, 1, 14, 0, 0, '', '', 14, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, 0, 0.000000000000000),
 (5, 'active_without_rate', 'SIP', '', 'active_without_rate', 'please_change', '0.0.0.0', '5060', 1, 1, 15, 0, 0, '', '', 15, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, 0, 0.000000000000000),
 (6, 'inactive_with_rate', 'SIP', '', 'inactive_with_rate', 'please_change', '0.0.0.0', '5060', 1, 1, 14, 0, 0, '', '', 16, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, 0, 0.000000000000000),
-(7, 'inactive_without_rate', 'SIP', '', 'inactive_without_rate', 'please_change', '0.0.0.0', '5060', 1, 1, 15, 0, 0, '', '', 17, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, 0, 0.000000000000000);
+(7, 'inactive_without_rate', 'SIP', '', 'inactive_without_rate', 'please_change', '0.0.0.0', '5060', 1, 1, 15, 0, 0, '', '', 17, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, 0, 0.000000000000000),
+(8, 'provas', 'SIP', '', 'provas', 'please_change', '0.0.0.0', '5060', 1, 1, 18, 0, 0, '', '', 18, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 3, 0, 0.000000000000000);
 
 INSERT INTO `lcrproviders` (`id`, `lcr_id`, `provider_id`, `active`, `priority`, `percent`) VALUES
 (2, 2, 2, 1, 1, 0),
+(3, 5, 4, 1, 1, 0),
 (4, 5, 5, 1, 2, 0),
 (5, 5, 6, 0, 3, 0),
 (6, 5, 7, 0, 4, 0),
-(7, 1, 4, 1, 2, 0),
-(8, 5, 4, 1, 5, 0);
+(9, 6, 8, 1, 1, 0);
 
 INSERT INTO `tariffs` (`id`, `name`, `purpose`, `owner_id`, `currency`) VALUES
 (6, 'spectariffre', 'user', 6, 'USD'),
@@ -188,7 +198,10 @@ INSERT INTO `tariffs` (`id`, `name`, `purpose`, `owner_id`, `currency`) VALUES
 (12, 'Test_tariff3', 'user', 9, 'USD'),
 (13, 'test_tariff4', 'user_wholesale', 9, 'USD'),
 (14, 'Pro_tariff_with_rate', 'provider', 0, 'USD'),
-(15, 'Pro_tariff_without_rate', 'provider', 0, 'USD');
+(15, 'Pro_tariff_without_rate', 'provider', 0, 'USD'),
+(16, 'tar1', 'user', 3, 'USD'),
+(17, 'tar3', 'user', 3, 'USD'),
+(18, 'tarprov', 'provider', 3, 'USD');
 
 INSERT INTO `rates` (`id`, `tariff_id`, `destination_id`, `destinationgroup_id`, `ghost_min_perc`) VALUES
 (503, 4, 0, 1, 0.000000000000000),
@@ -295,14 +308,23 @@ INSERT INTO `rates` (`id`, `tariff_id`, `destination_id`, `destinationgroup_id`,
 (607, 4, 0, 527, 0.000000000000000),
 (608, 4, 0, 249, 0.000000000000000),
 (609, 4, 0, 250, 0.000000000000000),
-(610, 4, 0, 251, 0.000000000000000);
+(610, 4, 0, 251, 0.000000000000000),
+(611, 18, 12502, NULL, NULL),
+(612, 16, 0, 249, 0.000000000000000),
+(613, 16, 0, 250, 0.000000000000000),
+(614, 16, 0, 251, 0.000000000000000),
+(615, 17, 0, 249, 0.000000000000000),
+(616, 17, 0, 250, 0.000000000000000),
+(617, 17, 0, 251, 0.000000000000000);
 
 INSERT INTO `locations` (`id`, `name`, `user_id`) VALUES
 (2, 'Default location', 6),
 (3, 'SpecRules', 6),
 (4, 'SpecRules', 0),
 (5, 'Default location', 8),
-(6, 'Default location', 9);
+(6, 'Default location', 9),
+(7, 'Default location', 3),
+(8, 'Loc1', 3);
 
 INSERT INTO `locationrules` (`id`, `location_id`, `name`, `enabled`, `cut`, `add`, `minlen`, `maxlen`, `lr_type`, `lcr_id`, `tariff_id`, `did_id`, `device_id`) VALUES
 (2, 2, 'Int. prefix', 1, '00', '', 10, 20, 'dst', NULL, NULL, NULL, NULL),
@@ -312,7 +334,9 @@ INSERT INTO `locationrules` (`id`, `location_id`, `name`, `enabled`, `cut`, `add
 (6, 4, 'destrulesfree', 1, '90', '6140', 9, 9, 'dst', NULL, NULL, NULL, NULL),
 (7, 4, 'cellrules', 1, '80', '3741', 9, 9, 'src', NULL, NULL, NULL, NULL),
 (8, 5, 'Int. prefix', 1, '00', '', 10, 20, 'dst', NULL, NULL, NULL, NULL),
-(9, 6, 'Int. prefix', 1, '00', '', 10, 20, 'dst', NULL, NULL, NULL, NULL);
+(9, 6, 'Int. prefix', 1, '00', '', 10, 20, 'dst', NULL, NULL, NULL, NULL),
+(10, 7, 'Int. prefix', 1, '00', '', 10, 20, 'dst', NULL, NULL, NULL, NULL),
+(11, 8, 'Rul1', 1, '8', '370', 1, 100, 'dst', NULL, 17, NULL, NULL);
 
 INSERT INTO `devices` (`id`, `name`, `host`, `secret`, `context`, `ipaddr`, `port`, `regseconds`, `accountcode`, `callerid`, `extension`, `voicemail_active`, `username`, `device_type`, `user_id`, `primary_did_id`, `works_not_logged`, `forward_to`, `record`, `transfer`, `disallow`, `allow`, `deny`, `permit`, `nat`, `qualify`, `fullcontact`, `canreinvite`, `devicegroup_id`, `dtmfmode`, `callgroup`, `pickupgroup`, `fromuser`, `fromdomain`, `trustrpid`, `sendrpid`, `insecure`, `progressinband`, `videosupport`, `location_id`, `description`, `istrunk`, `cid_from_dids`, `pin`, `tell_balance`, `tell_time`, `tell_rtime_when_left`, `repeat_rtime_every`, `t38pt_udptl`, `regserver`, `ani`, `promiscredir`, `timeout`, `process_sipchaninfo`, `temporary_id`, `allow_duplicate_calls`, `call_limit`, `lastms`, `faststart`, `h245tunneling`, `latency`, `grace_time`, `recording_to_email`, `recording_keep`, `recording_email`, `record_forced`, `fake_ring`, `save_call_log`, `mailbox`, `server_id`, `enable_mwi`, `authuser`, `requirecalltoken`, `language`, `use_ani_for_cli`, `calleridpres`, `change_failed_code_to`, `reg_status`, `max_timeout`, `forward_did_id`, `anti_resale_auto_answer`, `qf_tell_balance`, `qf_tell_time`, `time_limit_per_day`, `control_callerid_by_cids`, `callerid_advanced_control`, `transport`, `subscribemwi`, `encryption`, `block_callerid`) VALUES
 (8, 'prov8', '0.0.0.0', 'please_change', 'mor', '0.0.0.0', 5060, 0, 8, NULL, 'eyymvq89fc', 0, 'specpro', 'SIP', -1, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'no', '2000', '', 'no', NULL, 'rfc2833', NULL, NULL, NULL, NULL, 'yes', 'no', 'port,invite', 'never', 'no', 3, NULL, 1, 0, NULL, 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, 0, 0, 0, NULL, 0, 0, 0, '', 1, 0, '', 'no', 'en', 0, NULL, 0, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, 'udp', NULL, 'no', 0),
@@ -321,10 +345,12 @@ INSERT INTO `devices` (`id`, `name`, `host`, `secret`, `context`, `ipaddr`, `por
 (11, '1004', 'dynamic', 'eps7da2cdgqp', 'mor_local', '', 5060, 0, 11, NULL, '1004', 0, '1004', 'SIP', 11, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'yes', '1000', NULL, 'no', 9, 'rfc2833', NULL, NULL, '', '', 'no', 'no', '', 'no', 'no', 5, 'wholesaleuserdevice1', 0, 0, '035784', 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, NULL, 0, 0, '', 0, 0, 0, '', 1, 0, '', 'no', 'en', NULL, '', 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 'udp', NULL, '', 0),
 (12, '1005', 'dynamic', '7vfwcs31cp47', 'mor_local', '', 5060, 0, 12, NULL, '1005', 0, '1005', 'SIP', 12, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'yes', '1000', NULL, 'no', 10, 'rfc2833', NULL, NULL, '', '', 'no', 'no', '', 'no', 'no', 6, 'retailuserdevice2', 0, 0, '374131', 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, NULL, 0, 0, '', 0, 0, 0, '', 1, 0, '', 'no', 'en', NULL, '', 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 'udp', NULL, '', 0),
 (13, '1006', 'dynamic', 'he65yuscyb5a', 'mor_local', '', 5060, 0, 13, NULL, '1006', 0, '1006', 'SIP', 13, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'yes', '1000', NULL, 'no', 11, 'rfc2833', NULL, NULL, '', '', 'no', 'no', '', 'no', 'no', 6, 'wholesaleuserdevice2', 0, 0, '503225', 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, NULL, 0, 0, '', 0, 0, 0, '', 1, 0, '', 'no', 'en', NULL, '', 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 'udp', NULL, '', 0),
-(14, 'prov_4', '0.0.0.0', 'please_change', 'mor', '0.0.0.0', 5060, 0, 14, '', 'ujpyrb7e67', 0, 'prov_4', 'SIP', -1, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'no', 'yes', NULL, 'no', NULL, 'rfc2833', NULL, NULL, NULL, NULL, 'yes', 'no', 'port,invite', 'never', 'no', 1, NULL, 1, 0, NULL, 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, 0, 0, 0, NULL, 0, 0, 0, '', 1, 0, '', 'no', 'en', 0, NULL, 0, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, 'udp', NULL, 'no', 0),
-(15, 'prov_5', '0.0.0.0', 'please_change', 'mor', '0.0.0.0', 5060, 0, 15, '', '6f9uu9h4me', 0, 'prov_5', 'SIP', -1, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'no', 'yes', NULL, 'no', NULL, 'rfc2833', NULL, NULL, NULL, NULL, 'yes', 'no', 'port,invite', 'never', 'no', 1, NULL, 1, 0, NULL, 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, 0, 0, 0, NULL, 0, 0, 0, '', 1, 0, '', 'no', 'en', 0, NULL, 0, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, 'udp', NULL, 'no', 0),
-(16, 'prov_6', '0.0.0.0', 'please_change', 'mor', '0.0.0.0', 5060, 0, 16, '', '33t70u1z64', 0, 'prov_6', 'SIP', -1, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'no', 'yes', NULL, 'no', NULL, 'rfc2833', NULL, NULL, NULL, NULL, 'yes', 'no', 'port,invite', 'never', 'no', 1, NULL, 1, 0, NULL, 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, 0, 0, 0, NULL, 0, 0, 0, '', 1, 0, '', 'no', 'en', 0, NULL, 0, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, 'udp', NULL, 'no', 0),
-(17, 'prov_7', '0.0.0.0', 'please_change', 'mor', '0.0.0.0', 5060, 0, 17, '', '1skq3yak1z', 0, 'prov_7', 'SIP', -1, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'no', 'yes', NULL, 'no', NULL, 'rfc2833', NULL, NULL, NULL, NULL, 'yes', 'no', 'port,invite', 'never', 'no', 1, NULL, 1, 0, NULL, 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, 0, 0, 0, NULL, 0, 0, 0, '', 1, 0, '', 'no', 'en', 0, NULL, 0, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, 'udp', NULL, 'no', 0);
+(14, 'prov_4', '0.0.0.0', 'please_change', 'mor', '0.0.0.0', 5060, 0, 14, '', 'srfrw2vtac', 0, 'prov_4', 'SIP', -1, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'no', 'yes', NULL, 'no', NULL, 'rfc2833', NULL, NULL, NULL, NULL, 'yes', 'no', 'port,invite', 'never', 'no', 1, NULL, 1, 0, NULL, 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, 0, 0, 0, NULL, 0, 0, 0, '', 1, 0, '', 'no', 'en', 0, NULL, 0, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, 'udp', NULL, 'no', 0),
+(15, 'prov_5', '0.0.0.0', 'please_change', 'mor', '0.0.0.0', 5060, 0, 15, '', 'cvmgr0f7hr', 0, 'prov_5', 'SIP', -1, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'no', 'yes', NULL, 'no', NULL, 'rfc2833', NULL, NULL, NULL, NULL, 'yes', 'no', 'port,invite', 'never', 'no', 1, NULL, 1, 0, NULL, 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, 0, 0, 0, NULL, 0, 0, 0, '', 1, 0, '', 'no', 'en', 0, NULL, 0, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, 'udp', NULL, 'no', 0),
+(16, 'prov_6', '0.0.0.0', 'please_change', 'mor', '0.0.0.0', 5060, 0, 16, '', '568tbggwx4', 0, 'prov_6', 'SIP', -1, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'no', 'yes', NULL, 'no', NULL, 'rfc2833', NULL, NULL, NULL, NULL, 'yes', 'no', 'port,invite', 'never', 'no', 1, NULL, 1, 0, NULL, 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, 0, 0, 0, NULL, 0, 0, 0, '', 1, 0, '', 'no', 'en', 0, NULL, 0, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, 'udp', NULL, 'no', 0),
+(17, 'prov_7', '0.0.0.0', 'please_change', 'mor', '0.0.0.0', 5060, 0, 17, '', '541denxrwd', 0, 'prov_7', 'SIP', -1, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'no', 'yes', NULL, 'no', NULL, 'rfc2833', NULL, NULL, NULL, NULL, 'yes', 'no', 'port,invite', 'never', 'no', 1, NULL, 1, 0, NULL, 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, 0, 0, 0, NULL, 0, 0, 0, '', 1, 0, '', 'no', 'en', 0, NULL, 0, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, 'udp', NULL, 'no', 0),
+(18, 'prov_8', '0.0.0.0', 'please_change', 'mor', '0.0.0.0', 5060, 0, 18, '', 'hx6wv3jnwz', 0, 'prov_8', 'SIP', -1, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'no', 'yes', NULL, 'no', NULL, 'rfc2833', NULL, NULL, NULL, NULL, 'yes', 'no', 'port,invite', 'never', 'no', 7, NULL, 1, 0, NULL, 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, 0, 0, 0, NULL, 0, 0, 0, '', 1, 0, '', 'no', 'en', 0, NULL, 0, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, 'udp', NULL, 'no', 0),
+(19, '1007', 'dynamic', 'qzt54622g2x1', 'mor_local', '0.0.0.0', 5060, 0, 19, NULL, '1007', 0, '1007', 'SIP', 15, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'yes', '1000', NULL, 'no', 13, 'rfc2833', NULL, NULL, NULL, NULL, 'no', 'no', NULL, 'no', 'no', 8, 'Dev1', 0, 0, '141440', 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0.000000000000000, NULL, 0, 0, '', 0, 0, 0, '', 1, 0, '', 'no', 'en', 0, '', 0, NULL, 0, -1, 0, 0, 0, 0, 0, 0, 'udp', NULL, 'no', 0);
 
 INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (403, 'Default_device_location_id', '3', 3, NULL);
@@ -338,4 +364,5 @@ INSERT INTO `devicegroups` (`id`, `user_id`, `address_id`, `name`, `added`, `pri
 (9, 11, 10, 'primary', '2012-10-09 10:42:02', 1),
 (10, 12, 11, 'primary', '2012-10-09 10:44:58', 1),
 (11, 13, 12, 'primary', '2012-10-09 10:45:18', 1),
-(12, 14, 13, 'primary', '2012-10-09 10:46:04', 1);
+(12, 14, 13, 'primary', '2012-10-09 10:46:04', 1),
+(13, 15, 5, 'primary', '2012-10-09 19:26:50', 1);
