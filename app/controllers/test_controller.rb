@@ -30,6 +30,8 @@ class TestController < ApplicationController
         raise ActiveRecord::Transactions::TransactionError, 'Transaction aborted'
       when "RuntimeError"
         raise RuntimeError, 'No route to host'
+      when "RuntimeErrorExit"
+        raise RuntimeError, 'exit'
       when "Errno::EHOSTUNREACH"
         raise Errno::EHOSTUNREACH
       when "Errno::ETIMEDOUT"

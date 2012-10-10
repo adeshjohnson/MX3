@@ -1997,7 +1997,7 @@ Variables: (Names marked with * are required)
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Asterik_server_connection_error', :data2 => exception.message).save
         end
 
-        if exception_class.include?('RuntimeError') and (exception.message.include?('Connection timed out') or exception.message.include?('Connection reset by peer'))
+        if exception_class.include?('RuntimeError') and (exception.message.include?('Connection timed out') or exception.message.include?('Connection reset by peer') or exception.message.include?('exit'))
           flash_notice = _('Your_Asterisk_server_is_not_accessible_Please_check_if_address_entered_is_valid_and_network_is_OK')
           flash_help_link = ''
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Asterik_server_connection_error', :data2 => exception.message).save
