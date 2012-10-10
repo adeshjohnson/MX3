@@ -1658,13 +1658,13 @@ class Call < ActiveRecord::Base
 
     if  options[:did].to_s != ""  and options[:d_search].to_i == 1
       cond << "dids.did LIKE ?"
-      var << options[:did].gsub(/[^0-9]/, "").to_s + "%"
+      var << options[:did].to_s.strip + "%" #options[:did].gsub(/[^0-9]/, "").to_s + "%"
     end
 
     if  options[:did_search_from].to_s != "" and options[:did_search_till].to_s != "" and options[:d_search].to_i == 2
       cond << "dids.did BETWEEN ? AND ?"
-      var << options[:did_search_from].gsub(/[^0-9]/, "").to_s
-      var << options[:did_search_till].gsub(/[^0-9]/, "").to_s
+      var << options[:did_search_from].to_s.strip #options[:did_search_from].gsub(/[^0-9]/, "").to_s
+      var << options[:did_search_till].to_s.strip #options[:did_search_till].gsub(/[^0-9]/, "").to_s
     end
 
     if  options[:provider].to_s != "any"
@@ -1682,9 +1682,9 @@ class Call < ActiveRecord::Base
       var << options[:device_id].to_i
     end
 
-    if options[:sday].to_s != 'all'
-      cond << 'DAYOFWEEK(calls.calldate) IN (1,7)'  if  options[:sday].to_s == 'fd'
-      cond << 'DAYOFWEEK(calls.calldate) IN (2,3,4,5,6)'  if  options[:sday].to_s == 'wd'
+    if options[:sdays].to_s != 'all'
+      cond << 'DAYOFWEEK(calls.calldate) IN (1,7)'  if  options[:sdays].to_s == 'fd'
+      cond << 'DAYOFWEEK(calls.calldate) IN (2,3,4,5,6)'  if  options[:sdays].to_s == 'wd'
     end
 
     if options[:period].to_i != -1
