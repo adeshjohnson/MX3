@@ -1225,32 +1225,9 @@
 	<td></td>
 </tr>
 <!--update h323-->
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Device's settings updated</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Device's settings updated</td> 	<td></td> </tr>-->
 <!--delete h323-->
-<tr>
-	<td>clickAndWait</td>
-	<td>destroy_link_21</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Device deleted</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>clickAndWait</td> 	<td>destroy_link_21</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Device deleted</td> 	<td></td> </tr>-->
 <!--create dahdi-->
 <tr>
 	<td>open</td>
@@ -1662,11 +1639,7 @@
 	<td>/billing/devices/show_devices/2</td>
 	<td></td>
 </tr>
-<tr>
-	<td>assertText</td>
-	<td>extension_24</td>
-	<td>1001</td>
-</tr>
+<!--<tr> 	<td>assertText</td> 	<td>extension_24</td> 	<td>1001</td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
@@ -1689,7 +1662,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>extension_25</td>
+	<td>extension_24</td>
 	<td>1003</td>
 </tr>
 <tr>
@@ -1714,13 +1687,13 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>extension_26</td>
+	<td>extension_25</td>
 	<td>1004</td>
 </tr>
 <!--destroy device-->
 <tr>
 	<td>clickAndWait</td>
-	<td>destroy_link_25</td>
+	<td>destroy_link_24</td>
 	<td></td>
 </tr>
 <tr>
@@ -1728,19 +1701,15 @@
 	<td>Are you sure?</td>
 	<td></td>
 </tr>
-<tr>
-	<td>assertText</td>
-	<td>extension_24</td>
-	<td>1001</td>
-</tr>
+<!--<tr> 	<td>assertText</td> 	<td>extension_24</td> 	<td>1001</td> </tr>-->
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>extension_25</td>
+	<td>extension_24</td>
 	<td>1003</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>extension_26</td>
+	<td>extension_25</td>
 	<td>1004</td>
 </tr>
 <tr>
@@ -1790,7 +1759,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>extension_28</td>
+	<td>extension_26</td>
 	<td>1005</td>
 </tr>
 <!--FAX-->
@@ -2296,11 +2265,7 @@
 	<td>/billing/devices/show_devices/2</td>
 	<td></td>
 </tr>
-<tr>
-	<td>waitForText</td>
-	<td>name_33</td>
-	<td>1008</td>
-</tr>
+<!--<tr> 	<td>waitForText</td> 	<td>name_33</td> 	<td>1008</td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/show_devices/0</td>
