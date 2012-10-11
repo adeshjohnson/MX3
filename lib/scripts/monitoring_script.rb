@@ -205,10 +205,10 @@ else
 
     for monitoring in monitorings
       if monitoring.monitoring_type == 'simultaneous'
-        calls = monitoring.get_calls(monitoring.user_type)
+        users, calls = monitoring.get_calls(monitoring.user_type)
         if calls and calls.size > 0
           Monitoring.debug("Found calls size : #{calls.size} in monitoring id :#{monitoring.id} ")
-          monitoring.send_notice_to_api(calls)
+          monitoring.send_notice_to_api(users, calls)
         end
       else
         users = monitoring.get_users(monitoring.user_type)
