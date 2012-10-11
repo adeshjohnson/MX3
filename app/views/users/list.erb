@@ -70,6 +70,9 @@
                   Event.observe($('responsible_accountant_id'), 'change', function(){
 		    $('user_type').disabled = ($('responsible_accountant_id').value != '-1');
 		  });
+	          Event.observe($('user_type'), 'change', function(){
+                    $('responsible_accountant_id').disabled = ($('user_type').value != 'user');
+                  });
                 });
               //]]>
               </script>
