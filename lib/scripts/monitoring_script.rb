@@ -77,6 +77,10 @@ else
     class User < ActiveRecord::Base
     end
 
+    #------------- User model ----------------------
+    class Call < ActiveRecord::Base
+    end
+
     #------------- Monitoring model ----------------
     class Monitoring < ActiveRecord::Base
       require 'net/http'
