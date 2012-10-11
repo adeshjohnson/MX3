@@ -756,7 +756,7 @@ class TariffsController < ApplicationController
     @step_name = _('Updating_rates') if @step == 6
     @step_name = _('Creating_new_rates') if @step == 7
 
-    @page_title = _('Import_XLS') + "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" + _('Step') + ": " + @step.to_s + "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" + @step_name
+    @page_title = (_('Import_XLS') + "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" + _('Step') + ": " + @step.to_s + "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" + @step_name).html_safe
     @page_icon = 'excel.png';
 
     @tariff = Tariff.find_by_id(params[:id])
@@ -858,7 +858,7 @@ class TariffsController < ApplicationController
     else
       step = @step
     end
-    @page_title = _('Import_CSV') + "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" + _('Step') + ": " + step.to_s + "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" + @step_name
+    @page_title = (_('Import_CSV') + "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" + _('Step') + ": " + step.to_s + "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" + @step_name).html_safe
     @page_icon = 'excel.png';
     @help_link = "http://wiki.kolmisoft.com/index.php/Rate_import_from_CSV";
 
@@ -1017,7 +1017,7 @@ class TariffsController < ApplicationController
             @optins[:dec] = @dec
             @optins[:file]= session[:file]
             @optins[:file_size] = session[:file].size
-            @optins[:file_lines] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{session["tariff_name_csv_#{@tariff.id}".to_sym]}")
+            @optins[:file_lines] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{session['tariff_name_csv_#{@tariff.id}'.to_sym]}")
             session["tariff_import_csv2_#{@tariff.id}".to_sym] = @optins
             flash[:status] = _('Columns_assigned')
           else
