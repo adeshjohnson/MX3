@@ -349,22 +349,22 @@
 <!--login as reseller-->
 <tr>
 	<td>open</td>
-	<td>/billing/users/list</td>
+	<td>/billing/callc/logout</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>login_as_link_3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Logged as: Test Reseller</td>
+	<td>commit</td>
 	<td></td>
 </tr>
 <!--Verify taht cannot opet other peoples devices-->
@@ -1079,22 +1079,22 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/users/list</td>
+	<td>/billing/callc/logout</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>login_as_link_4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Logged as: Test Accountant</td>
+	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
