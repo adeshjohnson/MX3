@@ -3,6 +3,7 @@
 
 require '/home/mor/lib/sql_export'
 include SqlExport
+require 'uri'
 
 #---------- check that script is not running ------------------------------------
 script_running = `ps ax | grep monitoring_script.rb | grep -v grep | wc -l`
