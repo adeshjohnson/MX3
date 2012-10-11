@@ -1367,23 +1367,9 @@ class ApplicationController < ActionController::Base
   end
 
   def nice_invoice_number(number, type, options = {})
-    if type.to_s == 'prepaid'
-      session[:nice_prepaid_invoice_number_digits] ||= Confline.get_value("Prepaid_Round_finals_to_2_decimals").to_i
-      n = ""
-      if session[:nice_prepaid_invoice_number_digits].to_i == 1
-        n = sprintf("%0.#{2}f", number.to_d) if number
-      else
-        n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_d) if number
-      end
-    else
-      session[:nice_invoice_number_digits] ||= Confline.get_value("Round_finals_to_2_decimals").to_i
-      n = ""
-      if session[:nice_invoice_number_digits].to_i == 1
-        n = sprintf("%0.#{2}f", number.to_d) if number
-      else
-        n = sprintf("%0.#{session[:nice_number_digits]}f", number.to_d) if number
-      end
-    end
+    dig =  nice_invoice_number_digits(type)
+    n = ""
+    n = sprintf("%0.#{dig}f", number.to_d) if number
     if session[:change_decimal] and options[:no_repl].to_i == 0
       n = n.gsub('.', session[:global_decimal])
     end
