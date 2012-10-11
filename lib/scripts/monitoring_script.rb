@@ -139,13 +139,13 @@ else
           Monitoring.debug("Monitoring for simultaneous calls")
           if user_type && user_type =~ /postpaid|prepaid/ # monitoring for postpaids and prepaids
             Monitoring.debug("Monitoring for POSTPAID OR PREPAID users")
-            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.user_id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql} AND users.postpaid = #{self.user_type == "postpaid" ? 1 : 0} order by dst; "
+            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.user_id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst having count(*) > 1) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql} AND users.postpaid = #{self.user_type == "postpaid" ? 1 : 0} order by dst; "
           elsif user_type && user_type =~ /all/ # monitoring for all users
             Monitoring.debug("Monitoring for ALL users")
-            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.user_id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql}  order by dst; "
+            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.user_id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst having count(*) > 1) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql}  order by dst; "
           else # monitoring for individual users
             Monitoring.debug("Monitoring for PERSONAL users")
-            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.user_id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql} AND users.id = #{self.id} order by dst; "
+            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.user_id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst having count(*) > 1) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql} AND users.id = #{self.id} order by dst; "
           end
         end
         if  calls_sql and !calls_sql.blank?
@@ -160,12 +160,13 @@ else
         if calls and calls.size.to_i > 0
           for c in calls
             if dst.to_s != c.dst.to_s
-              calls_string << dst.to_s + '\n'
+              calls_string << dst.to_s + 'my_empty_line_123'
               dst = c.dst.to_s
             end
-            calls_string << CGI.escape(c.dst.to_s + '|' + c.calldate.to_s + '|' + c.src.to_s + '\n')
+            calls_string << CGI.escape(c.dst.to_s + '|' + c.calldate.to_s + '|' + c.src.to_s + 'my_empty_line_123')
             users << c.user_id
           end
+
         end
         Monitoring.debug("Monitoring for PERSONAL users")
         return calls_string.join(''), users.uniq.join(",")
