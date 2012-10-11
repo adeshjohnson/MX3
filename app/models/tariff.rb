@@ -643,11 +643,6 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
           SET original_destination_name = destinations.name
           WHERE ned_update IN (1, 3, 5, 7)"
 
-    logger.fatal "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-    logger.fatal "name : " + name.inspect
-    logger.fatal "options : " + options[:imp_prefix].inspect
-    logger.fatal "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-
     ActiveRecord::Base.connection.update(sql)
 
     sql ="UPDATE destinations 

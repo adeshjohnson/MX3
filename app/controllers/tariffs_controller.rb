@@ -1017,7 +1017,7 @@ class TariffsController < ApplicationController
             @optins[:dec] = @dec
             @optins[:file]= session[:file]
             @optins[:file_size] = session[:file].size
-            @optins[:file_lines] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{session['tariff_name_csv_#{@tariff.id}'.to_sym]}")
+            @optins[:file_lines] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{session["tariff_name_csv_#{@tariff.id}".to_sym]}")
             session["tariff_import_csv2_#{@tariff.id}".to_sym] = @optins
             flash[:status] = _('Columns_assigned')
           else
