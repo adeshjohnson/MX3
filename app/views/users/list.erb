@@ -54,28 +54,35 @@
             : <%= text_field_tag 's_id', @search_id, "class" => "input", :size => "10", :maxlength => "30" %>
           </td>
         </tr>
+        <% if current_user.is_admin? or current_user.is_accountant?  %>
         <tr>
           <td>
             <%= _('Responsible_accountant')%> : 
 	    <%= select_tag 'responsible_accountant_id', options_for_select([[_('All'), "-1"]] + @responsible_accountants.map { |accountant| [nice_user(accountant), accountant.id] }) %>
           </td>
         </tr>
-        <tr>
-          <td>
-            <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
-          </td>
               <script type="text/javascript">
               //<![CDATA[
                 Event.observe(window, 'load',  function() {
+
+                  $('user_type').disabled = ($('responsible_accountant_id').value != '-1');
+                  $('responsible_accountant_id').disabled = ($('user_type').value != 'user' && $('user_type').value != '-1');
+
                   Event.observe($('responsible_accountant_id'), 'change', function(){
 		    $('user_type').disabled = ($('responsible_accountant_id').value != '-1');
 		  });
+
 	          Event.observe($('user_type'), 'change', function(){
                     $('responsible_accountant_id').disabled = ($('user_type').value != 'user' && $('user_type').value != '-1');
                   });
                 });
               //]]>
               </script>
+        <% end %>
+        <tr>
+          <td>
+            <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
+          </td>
           <td align="right">
             <%# MorLog.my_debug(@search) %>
             <% if @search == 1 %>
