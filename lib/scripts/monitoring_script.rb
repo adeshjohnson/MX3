@@ -77,7 +77,7 @@ else
     class User < ActiveRecord::Base
     end
 
-    #------------- User model ----------------------
+    #------------- Call model ----------------------
     class Call < ActiveRecord::Base
     end
 
@@ -146,7 +146,7 @@ else
           end
         end
         if  calls_sql and !calls_sql.blank?
-          calls = Call.fin_by_sql(calls_sql)
+          calls = Call.find_by_sql(calls_sql)
         else
           calls = []
         end
