@@ -15,6 +15,8 @@ else
   require 'optparse'
   require 'digest/sha1'
   require 'uri'
+  require 'cgi'
+
 
   options = {}
   optparse = OptionParser.new do |opts|
