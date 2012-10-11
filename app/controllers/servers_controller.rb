@@ -89,13 +89,13 @@ class ServersController < ApplicationController
   def server_add
     @servers = Server.find(:all)
     server = Server.new
-    server.server_id = params[:server_id].strip
-    server.hostname = params[:server_hostname].strip
-    server.server_ip = params[:server_ip].strip
+    server.server_id = params[:server_id].to_s.strip
+    server.hostname = params[:server_hostname].to_s.strip
+    server.server_ip = params[:server_ip].to_s.strip
     server.server_type = "asterisk"               # server_type can be sip_proxy(single only when ccl_active = 1) or asterisk
-    server.version = params[:version].strip
-    server.uptime = params[:uptime].strip
-    server.comment = params[:server_comment].strip
+    server.version = params[:version].to_s.strip
+    server.uptime = params[:uptime].to_s.strip
+    server.comment = params[:server_comment].to_s.strip
     server.active = 1
 
     maxcalls = 1000
@@ -145,22 +145,22 @@ class ServersController < ApplicationController
 
     @server_providers = Serverprovider.find(:all, :conditions => ["server_id=?", @server.server_id])
 
-    @server.hostname = params[:server_hostname].strip
-    @server.server_ip = params[:server_ip].strip
-    @server.stats_url = params[:server_url].strip
-    @server.comment = params[:server_comment].strip
+    @server.hostname = params[:server_hostname].to_s.strip
+    @server.server_ip = params[:server_ip].to_s.strip
+    @server.stats_url = params[:server_url].to_s.strip
+    @server.comment = params[:server_comment].to_s.strip
 
-    @server.ami_username = params[:server_ami_username].strip
-    @server.ami_secret = params[:server_ami_secret].strip
-    @server.port = params[:server_port].strip
+    @server.ami_username = params[:server_ami_username].to_s.strip
+    @server.ami_secret = params[:server_ami_secret].to_s.strip
+    @server.port = params[:server_port].to_s.strip
 
-    @server.ssh_username = params[:server_ssh_username].strip
-    @server.ssh_secret = params[:server_ssh_secret].strip
-    @server.ssh_port = params[:server_ssh_port].strip
+    @server.ssh_username = params[:server_ssh_username].to_s.strip
+    @server.ssh_secret = params[:server_ssh_secret].to_s.strip
+    @server.ssh_port = params[:server_ssh_port].to_s.strip
 
     if @server.server_id.to_i != params[:server_id].to_i
       dev = @server.server_device
-      @server.server_id = params[:server_id].strip
+      @server.server_id = params[:server_id].to_s.strip
       if dev
         dev.destroy
       end
