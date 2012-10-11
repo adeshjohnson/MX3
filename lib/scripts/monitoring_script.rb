@@ -157,6 +157,7 @@ else
         calls_string = []
         users = []
         dst = ''
+        calls_string << 'my_empty_line_123'
         if calls and calls.size.to_i > 0
           for c in calls
             if dst.to_s != c.dst.to_s
