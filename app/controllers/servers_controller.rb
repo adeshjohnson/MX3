@@ -321,7 +321,7 @@ class ServersController < ApplicationController
 
   # when ccl_active = 1 shows all devices of a certain server
   def server_devices_list
-    if !ccl_active? and session[:usertype] != "admin"
+    if !ccl_active? or (session[:usertype] != "admin" and ccl_active?)
       dont_be_so_smart
       redirect_to :controller => "callc", :action => "main" and return false
     end
