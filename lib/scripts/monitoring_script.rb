@@ -86,30 +86,7 @@ else
       def get_users(user_type = nil)
         find_all_users_sql = self.owner_id == 0 ? '' : " AND users.owner_id = #{self.owner_id} "
 
-        if self.monitoring_type == 'simultaneous'
-          if user_type && user_type =~ /postpaid|prepaid/ # monitoring for postpaids and prepaids
-            users = User.find(:all,
-                              :select => 'users.id',
-                              :conditions => ["callsA.calldate between callsB.calldate and callsB.calldate + INTERVAL callsB.duration SECOND AND callsA.uniqueid != callsB.uniqueid AND users.blocked = 0 AND users.postpaid = ? AND users.ignore_global_monitorings = 0 #{find_all_users_sql}", ((self.user_type == "postpaid") ? 1 : 0)],
-                              :group => "users.id",
-                              :joins => "JOIN calls callsA ON (callsA.user_id = users.id AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))
-                         JOIN calls callsB ON (callsA.dst = callsB.dst AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
-          elsif user_type && user_type =~ /all/ # monitoring for all users
-            users = User.find(:all,
-                              :select => 'users.id',
-                              :conditions => ["callsA.calldate between callsB.calldate and callsB.calldate + INTERVAL callsB.duration SECOND AND callsA.uniqueid != callsB.uniqueid AND users.blocked = 0 AND users.ignore_global_monitorings = 0 #{find_all_users_sql}"],
-                              :group => "users.id",
-                              :joins => "JOIN calls callsA ON (callsA.user_id = users.id AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))
-                        JOIN calls callsB ON (callsA.dst = callsB.dst AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
-          else # monitoring for individual users
-            users = User.find(:all,
-                              :select => 'users.id',
-                              :conditions => ["callsA.calldate between callsB.calldate and callsB.calldate + INTERVAL callsB.duration SECOND AND callsA.uniqueid != callsB.uniqueid AND users.blocked = 0 AND users.ignore_global_monitorings = 0 #{find_all_users_sql}", self.id],
-                              :group => "users.id",
-                              :joins => "JOIN calls callsA ON (callsA.user_id = users.id AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))
-                        JOIN calls callsB ON (callsA.dst = callsB.dst AND callsA.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE))")
-          end
-        else
+
           operator = (self.monitoring_type == 'above' ? '>' : '<')
 
           if user_type && user_type =~ /postpaid|prepaid/ # monitoring for postpaids and prepaids
@@ -144,15 +121,58 @@ else
                               :group => "users.id HAVING SUM(#{SqlExport.user_price_sql}) #{operator} #{self.amount.to_f}",
                               :joins => "JOIN calls ON (calls.user_id = users.id AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)) JOIN monitorings_users ON (users.id = monitorings_users.user_id)")
           end
-        end
+
 
         users
       end
 
+      def get_calls(user_type = nil)
+        find_all_users_sql = self.owner_id == 0 ? '' : " AND users.owner_id = #{self.owner_id} "
+        if self.monitoring_type == 'simultaneous'
+          Monitoring.debug("Monitoring for simultaneous calls")
+          if user_type && user_type =~ /postpaid|prepaid/ # monitoring for postpaids and prepaids
+            Monitoring.debug("Monitoring for POSTPAID OR PREPAID users")
+            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql} AND users.postpaid = #{self.user_type == "postpaid" ? 1 : 0} order by dst; "
+          elsif user_type && user_type =~ /all/ # monitoring for all users
+            Monitoring.debug("Monitoring for ALL users")
+            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql}  order by dst; "
+          else # monitoring for individual users
+            Monitoring.debug("Monitoring for PERSONAL users")
+            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql} AND users.id = #{self.id} order by dst; "
+          end
+        end
+        if  calls_sql and !calls_sql.blank?
+          calls = Call.fin_by_sql(calls_sql)
+        else
+          calls = []
+        end
+
+        calls_string = []
+        users = []
+        dst = ''
+        if calls and calls.size.to_i > 0
+          for c in calls
+            if dst.to_s != c.dst.to_s
+              calls_string << dst.to_s + '\n'
+              dst = c.dst.to_s
+            end
+            calls_string << c.dst.to_s + '|' + c.calldate.to_s + '|' + c.src.to_s + '\n'
+            users << c.user_id
+          end
+        end
+        return calls_string.join(''), users.uniq.join(",")
+      end
+
       def send_notice_to_api(users)
-        h = Digest::SHA1.hexdigest(self.id.to_s + users.map(&:id).join(",") + self.block.to_s + self.email.to_s + self.mtype.to_s + Api_key.to_s)
-        res = Net::HTTP.post_form(URI.parse(Api_addres),
-                                  {'monitoring_id' => self.id, 'block' => self.block, 'email' => self.email, 'mtype' => self.mtype, 'users' => users.map(&:id).join(","), :hash => h})
+        if  self.monitoring_type == 'simultaneous'
+          h =  Digest::SHA1.hexdigest(self.id.to_s + users.to_s + self.block.to_s + self.email.to_s + self.mtype.to_s + calls_string.to_s + Api_key.to_s)
+          res = Net::HTTP.post_form(URI.parse(Api_addres),
+                                    {'monitoring_id' => self.id, 'block' => self.block, 'email' => self.email, 'mtype' => self.mtype, 'users' => users.to_s, 'calls_string'=>calls_string, :hash=>h})
+        else
+          h =  Digest::SHA1.hexdigest(self.id.to_s + users.map(&:id).join(",") + self.block.to_s + self.email.to_s + self.mtype.to_s + Api_key.to_s)
+          res = Net::HTTP.post_form(URI.parse(Api_addres),
+                                    {'monitoring_id' => self.id, 'block' => self.block, 'email' => self.email, 'mtype' => self.mtype, 'users' => users.map(&:id).join(","), :hash=>h})
+        end
 
         Monitoring.debug("#{Time.now().to_s(:db)} --- MONITORING notice send to #{Api_addres}") if res
         Monitoring.debug("#{res.body}") if res
@@ -180,10 +200,18 @@ else
     end
 
     for monitoring in monitorings
-      users = monitoring.get_users(monitoring.user_type)
-      if users and users.size > 0
-        Monitoring.debug("Found users size : #{users.size} in monitoring id :#{monitoring.id} ")
-        monitoring.send_notice_to_api(users)
+      if monitoring.monitoring_type == 'simultaneous'
+        calls = monitoring.get_calls(monitoring.user_type)
+        if calls and calls.size > 0
+          Monitoring.debug("Found calls size : #{calls.size} in monitoring id :#{monitoring.id} ")
+          monitoring.send_notice_to_api(calls)
+        end
+      else
+        users = monitoring.get_users(monitoring.user_type)
+        if users and users.size > 0
+          Monitoring.debug("Found users size : #{users.size} in monitoring id :#{monitoring.id} ")
+          monitoring.send_notice_to_api(users)
+        end
       end
     end
     puts "OK"

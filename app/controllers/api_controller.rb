@@ -1547,13 +1547,7 @@ class ApiController < ApplicationController
                           email = Email.find(:first, :conditions => {:name => 'monitoring_activation', :owner_id => monitoring.owner_id})
                           user = User.find_by_id(monitoring.owner_id)
 
-                          if monitoring.monitoring_type == 'simultaneous'
-                            for calls in monitoring.simultaneous_calls
-                              call_list = calls.dst.to_s + '|' + calls.calldateA.to_s + '|' + calls.srcA.to_s + '|' + calls.calldateB.to_s + '|' + calls.srcB.to_s + '|\n'
-                            end
-                          else
-                            call_list = ''
-                          end
+                          call_list = params[:calls_string].to_s
 
                           variables = Email.email_variables(user, nil, {:monitoring => monitoring, :monitoring_type => monitoring.monitoring_types, :monitoring_users_list => users, :call_list => call_list})
                           EmailsController::send_email(email, Confline.get_value("Email_from", user.id), [user], variables)
