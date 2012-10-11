@@ -160,10 +160,10 @@ else
         if calls and calls.size.to_i > 0
           for c in calls
             if dst.to_s != c.dst.to_s
-              calls_string << dst.to_s + 'my_empty_line_123'
+              calls_string << c.dst.to_s + 'my_empty_line_123'
               dst = c.dst.to_s
             end
-            calls_string << CGI.escape(c.dst.to_s + '|' + c.calldate.to_s + '|' + c.src.to_s + 'my_empty_line_123')
+            calls_string << CGI.escape(c.dst.to_s + '|' + c.calldate.to_s(:db) + '|' + c.src.to_s + 'my_empty_line_123')
             users << c.user_id
           end
 
