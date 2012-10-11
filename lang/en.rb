@@ -4489,7 +4489,7 @@ Localization.define('en') do |l|
   l.store 'Resellers_server', 'Resellers server'
   l.store 'Default_asterisk_server', 'Default asterisk server'
   l.store 'Responsible_accountant', 'Responsible accountant'
-  #  l.store '', ''
+  l.store 'Update_failed', 'Update failed'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
