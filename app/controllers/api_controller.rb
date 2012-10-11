@@ -1547,7 +1547,7 @@ class ApiController < ApplicationController
                           email = Email.find(:first, :conditions => {:name => 'monitoring_activation', :owner_id => monitoring.owner_id})
                           user = User.find_by_id(monitoring.owner_id)
 
-                          call_list = params[:calls_string].to_s
+                          call_list = CGI.unescape(params[:calls_string].to_s)
 
                           variables = Email.email_variables(user, nil, {:monitoring => monitoring, :monitoring_type => monitoring.monitoring_types, :monitoring_users_list => users, :call_list => call_list})
                           EmailsController::send_email(email, Confline.get_value("Email_from", user.id), [user], variables)

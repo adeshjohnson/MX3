@@ -136,13 +136,13 @@ else
           Monitoring.debug("Monitoring for simultaneous calls")
           if user_type && user_type =~ /postpaid|prepaid/ # monitoring for postpaids and prepaids
             Monitoring.debug("Monitoring for POSTPAID OR PREPAID users")
-            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql} AND users.postpaid = #{self.user_type == "postpaid" ? 1 : 0} order by dst; "
+            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.user_id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql} AND users.postpaid = #{self.user_type == "postpaid" ? 1 : 0} order by dst; "
           elsif user_type && user_type =~ /all/ # monitoring for all users
             Monitoring.debug("Monitoring for ALL users")
-            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql}  order by dst; "
+            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.user_id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql}  order by dst; "
           else # monitoring for individual users
             Monitoring.debug("Monitoring for PERSONAL users")
-            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql} AND users.id = #{self.id} order by dst; "
+            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.user_id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql} AND users.id = #{self.id} order by dst; "
           end
         end
         if  calls_sql and !calls_sql.blank?
@@ -160,10 +160,11 @@ else
               calls_string << dst.to_s + '\n'
               dst = c.dst.to_s
             end
-            calls_string << c.dst.to_s + '|' + c.calldate.to_s + '|' + c.src.to_s + '\n'
+            calls_string << CGI.escape(c.dst.to_s + '|' + c.calldate.to_s + '|' + c.src.to_s + '\n')
             users << c.user_id
           end
         end
+        Monitoring.debug("Monitoring for PERSONAL users")
         return calls_string.join(''), users.uniq.join(",")
       end
 
@@ -205,7 +206,7 @@ else
 
     for monitoring in monitorings
       if monitoring.monitoring_type == 'simultaneous'
-        users, calls = monitoring.get_calls(monitoring.user_type)
+       calls, users = monitoring.get_calls(monitoring.user_type)
         if calls and calls.size > 0
           Monitoring.debug("Found calls size : #{calls.size} in monitoring id :#{monitoring.id} ")
           monitoring.send_notice_to_api(users, calls)
