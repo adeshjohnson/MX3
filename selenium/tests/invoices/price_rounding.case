@@ -341,16 +341,36 @@
 	<td></td>
 </tr>
 <!--Select current day-->
-<!--!!!!!!!!!!!!!!!!!! dev - nesuprantu kas cia daroma-->
+<!--Čia paspaudus clear search turi atstatyti dabartinę dieną-->
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=October</td>
+</tr>
 <tr>
 	<td>assertSelectedValue</td>
 	<td>id=date_from_day</td>
-	<td>2</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=October</td>
 </tr>
 <tr>
 	<td>assertSelectedValue</td>
 	<td>id=date_till_day</td>
-	<td>2</td>
+	<td>11</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -368,10 +388,9 @@
 	<td></td>
 </tr>
 <!--Today's date-->
-<!--!!!!!!!!!!!!!!!!!! dev - right ! :}-->
 <tr>
 	<td>assertTextPresent</td>
-	<td>2012-10-02</td>
+	<td> 2012-10-11 </td>
 	<td></td>
 </tr>
 <tr>
@@ -429,7 +448,6 @@
 	<td>Settings saved</td>
 	<td></td>
 </tr>
-<!--!!!!!!!!!!!!!! dev - vel nera galines datos-->
 <tr>
 	<td>open</td>
 	<td>/billing/accounting/generate_invoices</td>
@@ -449,6 +467,36 @@
 	<td>select</td>
 	<td>id=date_from_day</td>
 	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=2</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -619,7 +667,7 @@
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
-<!--Today's date-->
+<!--Must be today's date after clear search-->
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
@@ -633,7 +681,7 @@
 <tr>
 	<td>assertSelectedValue</td>
 	<td>id=date_from_day</td>
-	<td>2</td>
+	<td>11</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -648,7 +696,7 @@
 <tr>
 	<td>assertSelectedValue</td>
 	<td>id=date_till_day</td>
-	<td>2</td>
+	<td>11</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -666,11 +714,6 @@
 	<td></td>
 </tr>
 <!--Today's date-->
-<tr>
-	<td>assertTextPresent</td>
-	<td>2012-10-02</td>
-	<td></td>
-</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -715,6 +758,36 @@
 	<td>select</td>
 	<td>id=date_from_day</td>
 	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=2</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -762,6 +835,36 @@
 	<td>label=1</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>id=invoice_type_user</td>
 	<td></td>
@@ -805,6 +908,36 @@
 	<td>select</td>
 	<td>id=date_from_day</td>
 	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=2</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1106,6 +1239,7 @@
 	<td>338.2137</td>
 	<td></td>
 </tr>
+<!--Blogai apvalina: mor 12 rašo 405.8565 -->
 <tr>
 	<td>assertTextPresent</td>
 	<td>405.8564</td>
@@ -1167,6 +1301,7 @@
 	<td>712.3548</td>
 	<td></td>
 </tr>
+<!--Blogai apvalina: mor 12 rašo 854.8257-->
 <tr>
 	<td>assertTextPresent</td>
 	<td>854.8258</td>
