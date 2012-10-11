@@ -167,7 +167,7 @@ else
         return calls_string.join(''), users.uniq.join(",")
       end
 
-      def send_notice_to_api(users)
+      def send_notice_to_api(users, calls_string = '')
         if  self.monitoring_type == 'simultaneous'
           h =  Digest::SHA1.hexdigest(self.id.to_s + users.to_s + self.block.to_s + self.email.to_s + self.mtype.to_s + calls_string.to_s + Api_key.to_s)
           res = Net::HTTP.post_form(URI.parse(Api_addres),
