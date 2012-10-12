@@ -19,12 +19,21 @@
   <% for dev in @server.devices %>
     <tr class="row<%= (i % 2 + 1).to_s %>">
       <td id="device_id"><%= dev.id %></td>
-      <td id="device_<%= dev.id %>" align="left"><%= link_to nice_device(dev), :controller => "devices", :action => 'device_edit', :id => dev.id%></td>
+      <%= user = User.where("id = ?", dev.user_id).first %>
+      <% if user.owner_id == 0 %>
+        <td id="device_<%= dev.id %>" align="left"><%= link_to nice_device(dev), :controller => "devices", :action => 'device_edit', :id => dev.id%></td>
+      <% else %>
+        <td id="device_<%= dev.id %>" align="left"><%= nice_device(dev) %></td>
+      <% end %>
       <td id="tech_<%= dev.id %>" align="left"><%= dev.device_type %></td>
       <td id="login_<%= dev.id %>" align="left"><%= dev.username %></td>
       <td id="password_<%= dev.id %>" align="left"><%= dev.secret %></td>
       <td id="host_server_ip_<%= dev.id %>" align="left"><%= dev.host %></td>
-      <td id="rules_<%= dev.id %>" align="center"><%= link_to b_rules, :controller => "device_rules", :action => 'list', :id => dev.id %></td>
+      <% if user.owner_id == 0 %>
+        <td id="rules_<%= dev.id %>" align="center"><%= link_to b_rules, :controller => "device_rules", :action => 'list', :id => dev.id %></td>
+      <% else %>
+        <td id="rules_<%= dev.id %>"></td>
+      <% end %>
       <td id="calls_<%= dev.id %>" align="center"><%= link_to b_call, {:controller => "stats", :action => 'last_calls_stats', :s_device => dev.id.to_s}, {:id => "calls_link_"+dev.id.to_s} %></td>
       <% if dev.server_devices.length > 1 %>
         <td id="destroy_<%= dev.id %>" align="center"><%= link_to b_delete, {:action => 'delete_device', :id => dev.id, :serv_id => @server.id}, {:confirm => _('are_you_sure'), :method => :post, :id => "delete_link_"+ dev.id.to_s} %></td>
