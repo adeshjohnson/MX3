@@ -3106,9 +3106,9 @@ Sets default tax values for users or cardgroups
       if !params[:s_id].blank? 
         Confline.set_value("Default_asterisk_server", params[:s_id], current_user.get_corrected_owner_id)
         flash[:status] = _('Settings_saved')
-        redirect_to :action => :ccl_settings and return false
+        redirect_to :action => :ccl_settings
       else
-        flash[:status] = _('Update_failed')
+        flash[:notice] = _('Update_failed')
         redirect_to :action => :ccl_settings and return false
       end
     else

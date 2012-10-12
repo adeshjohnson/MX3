@@ -5,7 +5,7 @@
       <tr>
         <td><%= _('Default_asterisk_server') %>:</td>
         <td>
-          <select name="default_asterisk_server">
+          <select id="s_id" name="s_id">
             <% if @servers %>
               <% for serv in @servers %>
                 <option value="<%= serv.id %>" <%= "selected" if serv.id == Confline.get_value("Default_asterisk_server").to_i %>> <%= nice_server(serv) %> </option>
