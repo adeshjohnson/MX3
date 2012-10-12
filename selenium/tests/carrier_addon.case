@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<link rel="selenium.base" href="http://192.168.0.58/" />
 <title>New Test</title>
 </head>
 <body>
@@ -143,7 +143,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>name=default_asterisk_server</td>
+	<td>id=s_id</td>
 	<td>exact:Server_1: 127.0.0.1|127.0.0.1</td>
 </tr>
 <tr>
@@ -192,9 +192,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=ssettings_menu18</td>
-	<td>Servers</td>
+	<td>assertElementPresent</td>
+	<td>//a[@href='/billing/servers/list']</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -639,12 +639,12 @@
 <tr>
 	<td>assertText</td>
 	<td>name=device_add</td>
-	<td>IAX2/1002 IAX2/1006 IAX2/101 FAX/102 IAX2/103 IAX2/104 IAX2/105 IAX2/1004 IAX2/1005</td>
+	<td>IAX2/1002 IAX2/1004 IAX2/1005 IAX2/1006 IAX2/101 FAX/102 IAX2/103 IAX2/104</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>name=device_add</td>
-	<td>label=IAX2/1005</td>
+	<td>label=IAX2/104</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -658,12 +658,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=device_15</td>
-	<td>IAX2/1005</td>
+	<td>id=device_6</td>
+	<td>IAX2/104</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/15</td>
+	<td>/billing/devices/device_edit/6</td>
 	<td></td>
 </tr>
 <!--Tikrinama, ar edite pazymeta, jog device priklauso 127.0.0.2 serveriui-->
@@ -693,14 +693,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>name=device_add</td>
-	<td>IAX2/1002 IAX2/1006 IAX2/101 FAX/102 IAX2/103 IAX2/104 IAX2/105 IAX2/1004 IAX2/1005</td>
+	<td>IAX2/1002 IAX2/1004 IAX2/1005 IAX2/1006 IAX2/101 FAX/102 IAX2/103 IAX2/104</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>name=device_add</td>
-	<td>label=IAX2/1005</td>
+	<td>label=IAX2/104</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -715,16 +720,16 @@
 <tr>
 	<td>assertText</td>
 	<td>name=device_add</td>
-	<td>IAX2/1002 IAX2/1006 IAX2/101 FAX/102 IAX2/103 IAX2/104 IAX2/105 IAX2/1004</td>
+	<td>IAX2/1002 IAX2/1004 IAX2/1005 IAX2/1006 IAX2/101 FAX/102 IAX2/103</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=device_15</td>
-	<td>IAX2/1005</td>
+	<td>id=device_6</td>
+	<td>IAX2/104</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/15</td>
+	<td>/billing/devices/device_edit/6</td>
 	<td></td>
 </tr>
 <tr>
@@ -744,7 +749,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/15</td>
+	<td>/billing/devices/device_edit/6</td>
 	<td></td>
 </tr>
 <tr>
@@ -814,7 +819,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>IAX2/1004</td>
+	<td>IAX2/104</td>
 	<td></td>
 </tr>
 <tr>
@@ -1280,7 +1285,7 @@
 <tr>
 	<td>select</td>
 	<td>id=resellers_server</td>
-	<td>label=Server_4: 127.0.0.3|127.0.0.3</td>
+	<td>label=Server_3: 127.0.0.2|127.0.0.2</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1309,6 +1314,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertElementNotPresent</td>
+	<td>link=SIP/1009</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
@@ -1316,7 +1326,7 @@
 <!--Checking if device type can be changed for IAX2 and SIP devices-->
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/14</td>
+	<td>/billing/devices/device_edit/6</td>
 	<td></td>
 </tr>
 <tr>
@@ -1342,7 +1352,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>name=default_asterisk_server</td>
+	<td>id=s_id</td>
 	<td>label=Server_4: 127.0.0.3|127.0.0.3</td>
 </tr>
 <tr>
@@ -1351,13 +1361,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=s_id</td>
+	<td>Server_4: 127.0.0.3|127.0.0.3</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/6</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=add_to_servers_5</td>
+	<td>id=add_to_servers_4</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -1398,7 +1418,7 @@
 <!--this device was assigned to many servers, checking if it is now assigned to the first server available-->
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/14</td>
+	<td>/billing/devices/device_edit/6</td>
 	<td></td>
 </tr>
 <tr>
@@ -1424,7 +1444,7 @@
 <tr>
 	<td>assertSelectedValue</td>
 	<td>device_server_id</td>
-	<td>1</td>
+	<td>4</td>
 </tr>
 <!--Putting sip_proxy via fake form when CCL is off-->
 <tr>
@@ -1590,6 +1610,338 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Internal Error</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Server created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=version_7</td>
+	<td>dfsdf</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_7</td>
+	<td>asterisk</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/additional_modules</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=CCL_Active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ip_address</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=host</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CCL activated</td>
+	<td></td>
+</tr>
+<!--Checking deletion-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_devices_list/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=device_add</td>
+	<td>label=IAX2/1004</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=Add_new_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>127.0.0.3 / 127.0.0.3 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=add_to_servers_7</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#delete_link_5 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Server deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>127.0.0.3 / 127.0.0.3 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>testing_reseller_device</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_IAX2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--Testing which server is assigned to new reseller's device-->
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_devices_list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td> IAX2/1012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_devices_list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td> IAX2/1012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_devices_list/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> IAX2/1012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_devices_list/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td> IAX2/1012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/resellers/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=resellers_server</td>
+	<td>label=Server_5: 127.0.0.4|127.0.0.4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_devices_list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td> IAX2/1012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_devices_list/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td> IAX2/1012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_devices_list/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> IAX2/1012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/server_devices_list/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td> IAX2/1012</td>
 	<td></td>
 </tr>
 </tbody></table>
