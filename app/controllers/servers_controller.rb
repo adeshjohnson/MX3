@@ -252,7 +252,7 @@ class ServersController < ApplicationController
     end
     server_device = ServerDevice.where("server_id=? AND device_id=?", params[:serv_id], params[:id]).first
     server_device.destroy
-    flash[:status] = _('Device_deleted')
+    flash[:status] = _('device_deleted')
     redirect_to :action => 'server_devices_list', :id => params[:serv_id]
   end
 
@@ -329,7 +329,7 @@ class ServersController < ApplicationController
     @page_icon = 'server.png'
     @help_link = "http://wiki.kolmisoft.com/index.php/Multi_Server_support"
     # ip_auth + server_devices.server_id is null + server_devices.server_id is not that server + not server device(which were created with server creation)
-    @devices = Device.select("devices.*,server_devices.server_id AS serv_id").joins("LEFT JOIN server_devices ON (server_devices.device_id = devices.id AND  server_devices.server_id = #{params[:id]})").where("(host != 'dynamic' OR device_type != 'SIP') AND server_devices.server_id is null AND user_id != -1 AND name not like 'mor_server_%'").order("extension ASC").all
+    @devices = Device.select("devices.*,server_devices.server_id AS serv_id").joins("LEFT JOIN server_devices ON (server_devices.device_id = devices.id AND  server_devices.server_id = #{params[:id]}) LEFT JOIN users ON (users.id = devices.user_id)").where("(host != 'dynamic' OR device_type != 'SIP') AND users.owner_id = #{current_user.id} AND server_devices.server_id is null AND user_id != -1 AND name not like 'mor_server_%'").order("extension ASC").all
   end
 
   def add_device_to_server
