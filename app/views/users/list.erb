@@ -57,8 +57,9 @@
         <% if current_user.is_admin? or current_user.is_accountant?  %>
         <tr>
           <td>
+            <% (rai_selected_id = params[:responsible_accountant_id] and rai_selected_id != '-1' ? rai_selected_id : rai_selected_id = '-1')  %>
             <%= _('Responsible_accountant')%> : 
-	    <%= select_tag 'responsible_accountant_id', options_for_select([[_('All'), "-1"]] + @responsible_accountants.map { |accountant| [nice_user(accountant), accountant.id] }) %>
+	    <%= select_tag 'responsible_accountant_id', options_for_select([[_('All'), "-1"]] + @responsible_accountants.map { |accountant| [nice_user(accountant), accountant.id] }, rai_selected_id) %>
           </td>
         </tr>
               <script type="text/javascript">
