@@ -94,7 +94,7 @@ class UsersController < ApplicationController
     add_contition_and_param(@options[:s_agr_number], @options[:s_agr_number].to_s+"%", "users.agreement_number LIKE ?", cond, var) if !@options[:s_agr_number].blank?
     add_contition_and_param(@options[:s_acc_number], @options[:s_acc_number].to_s+"%", "users.accounting_number LIKE ?", cond, var) if !@options[:s_acc_number].blank?
     add_contition_and_param(@options[:s_email], @options[:s_email].to_s, "email = ?", cond, var) if !@options[:s_email].blank?
-    add_contition_and_param(@options[:responsible_accountant_id], @options[:responsible_accountant_id].to_s+"%", "users.responsible_accountant_id = ?", cond, var) if !@options[:responsible_accountant_id].blank?
+    add_contition_and_param(@options[:responsible_accountant_id], @options[:responsible_accountant_id].to_s+"%", "users.responsible_accountant_id = ?", cond, var) if @options[:responsible_accountant_id] != "-1"
 
     ["first_name", "username", "last_name", "clientid"].each { |col|
       add_contition_and_param(@options["s_#{col}".to_sym], "%"+@options["s_#{col}".intern].to_s+"%", "users.#{col} LIKE ?", cond, var) }
