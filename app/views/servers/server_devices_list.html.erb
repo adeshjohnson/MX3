@@ -19,7 +19,7 @@
   <% for dev in @server.devices %>
     <tr class="row<%= (i % 2 + 1).to_s %>">
       <td id="device_id"><%= dev.id %></td>
-      <%= user = User.where("id = ?", dev.user_id).first %>
+      <% user = User.where("id = ?", dev.user_id).first %>
       <% if user.owner_id == 0 %>
         <td id="device_<%= dev.id %>" align="left"><%= link_to nice_device(dev), :controller => "devices", :action => 'device_edit', :id => dev.id%></td>
       <% else %>
