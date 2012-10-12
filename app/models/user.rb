@@ -2137,7 +2137,9 @@ GROUP BY terminators.id;").map { |t| t.id }
     tax.save
     user.tax = tax
     user.address_id = address.id
+    logger.fatal "***** TIME : #{Time.now.to_s} - User before save 1"
     user.save
+    logger.fatal "***** TIME : #{Time.now.to_s} - User after save 1"
     # my_debug @user.to_yaml
     dev_group = Devicegroup.new
     dev_group.user_id = user.id
@@ -2147,12 +2149,16 @@ GROUP BY terminators.id;").map { |t| t.id }
     dev_group.primary = 1
     dev_group.save
 
+    logger.fatal "***** TIME : #{Time.now.to_s} - Device before save 1"
     if Confline.get_value("Allow_registration_username_passwords_in_devices").to_i == 1
       device = user.create_default_device({:device_type => params[:device_type], :dev_group => dev_group.id, :free_ext => free_ext, :secret => params[:password], :username => user.username, :pin => pin})
     else
       device = user.create_default_device({:device_type => params[:device_type], :dev_group => dev_group.id, :free_ext => free_ext, :secret => pasw, :pin => pin})
     end
+    logger.fatal "***** TIME : #{Time.now.to_s} - Device after save 1"
+    logger.fatal "***** TIME : #{Time.now.to_s} - User before save 2"
     user.save
+    logger.fatal "***** TIME : #{Time.now.to_s} - User after save 2"
 
     cb = (defined?(CALLB_Active) and (CALLB_Active == 1)) ? 1 : 0
     if params[:mob_phone].to_s.gsub(/[^0-9]/, "").length > 0
@@ -2276,6 +2282,7 @@ GROUP BY terminators.id;").map { |t| t.id }
       end
     end
 
+    logger.fatal "***** TIME : #{Time.now.to_s} - VAT CHECKING Starts"
     if notice.blank? and Confline.get_value("Registration_Enable_VAT_checking", u.id).to_i == 1
       #logger.fatal params.to_yaml
       if params[:vat_number] and params[:country_id]
@@ -2291,7 +2298,7 @@ GROUP BY terminators.id;").map { |t| t.id }
         end
       end
     end
-
+    logger.fatal "***** TIME : #{Time.now.to_s} - VAT CHECKING END"
     return notice
   end
 
