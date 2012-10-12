@@ -471,26 +471,27 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     arr = {}
     arr[:destinations_in_db] = Destination.count.to_i
     arr[:directions_in_db] = Direction.count.to_i
-    arr[:destinations_in_csv_file] = (ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name}").to_i - 1).to_s
+    arr[:destinations_in_csv_file] = (ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name}").to_i - 1).to_s         if ActiveRecord::Base.connection.tables.include?(name)
     #arr[:rates_to_update] = Rate.count(:all, :conditions => ['tariff_id = ?', id], :joins => "JOIN destinations ON (rates.destination_id = destinations.id) JOIN #{name} ON (destinations.prefix = replace(col_#{options[:imp_prefix]}, '\\r', ''))")
     arr[:tariff_rates] = Rate.count(:all, :conditions => {:tariff_id => id})
 
     # set error flag on dublicates | code : 12
-    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 12 WHERE col_#{options[:imp_prefix]} IN (SELECT prf FROM (select col_#{options[:imp_prefix]} as prf, count(*) as u from #{name} group by col_#{options[:imp_prefix]}  having u > 1) as imf )")
+    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 12 WHERE col_#{options[:imp_prefix]} IN (SELECT prf FROM (select col_#{options[:imp_prefix]} as prf, count(*) as u from #{name} group by col_#{options[:imp_prefix]}  having u > 1) as imf )")     if ActiveRecord::Base.connection.tables.include?(name)
 
     # set error flag on not int prefixes | code : 13
-    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 13 WHERE replace(col_#{options[:imp_prefix]}, '\\r', '') REGEXP '^[0-9]+$' = 0")
+    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 13 WHERE replace(col_#{options[:imp_prefix]}, '\\r', '') REGEXP '^[0-9]+$' = 0")   if ActiveRecord::Base.connection.tables.include?(name)
 
     unless ["admin", "accountant"].include?(User.current.usertype)
       # set error flag on not found destinations if reseller | code : 14
-      ActiveRecord::Base.connection.execute("UPDATE #{name} LEFT JOIN destinations ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET f_error = 1, nice_error = 14 WHERE destinations.id IS NULL AND f_error = 0")
+      ActiveRecord::Base.connection.execute("UPDATE #{name} LEFT JOIN destinations ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET f_error = 1, nice_error = 14 WHERE destinations.id IS NULL AND f_error = 0")    if ActiveRecord::Base.connection.tables.include?(name)
     end
 
     if options[:imp_cc] != -1
       # set error flag where country_code is not found in DB | code : 11
-      ActiveRecord::Base.connection.execute("UPDATE #{name} LEFT JOIN directions ON (replace(col_#{options[:imp_cc]}, '\\r', '') = directions.code) SET f_error = 1, nice_error = 11 WHERE directions.id IS NULL AND f_error = 0")
+      ActiveRecord::Base.connection.execute("UPDATE #{name} LEFT JOIN directions ON (replace(col_#{options[:imp_cc]}, '\\r', '') = directions.code) SET f_error = 1, nice_error = 11 WHERE directions.id IS NULL AND f_error = 0")      if ActiveRecord::Base.connection.tables.include?(name)
     end
 
+    if ActiveRecord::Base.connection.tables.include?(name)
     logger.fatal options.inspect
     #ticket #5808 -> since now we dont check for time collisions, 
     #just import anything if posible. else user will be notified 
@@ -506,33 +507,35 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
         WHEN (daytype = '' AND '#{day_type}' != '') OR (daytype IN ('WD', 'FD') AND '#{day_type}' NOT IN ('WD', 'FD')) THEN 1
         ELSE ('#{start_time}' BETWEEN start_time AND end_time) OR ('#{end_time}' BETWEEN start_time AND end_time) OR (start_time BETWEEN '#{start_time}' AND '#{end_time}') OR (end_time BETWEEN '#{start_time}' AND '#{end_time}')
       END != 0")
+    end
 
     # set flag not_found_in_db
-    ActiveRecord::Base.connection.execute("UPDATE #{name} LEFT JOIN destinations ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET not_found_in_db = 1 WHERE destinations.id IS NULL AND f_error = 0")
+    ActiveRecord::Base.connection.execute("UPDATE #{name} LEFT JOIN destinations ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET not_found_in_db = 1 WHERE destinations.id IS NULL AND f_error = 0")      if ActiveRecord::Base.connection.tables.include?(name)
 
     if options[:imp_lata].to_i >= 0
       # set lata flag for USA prefix
-      ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_lata = 1 WHERE replace(col_#{options[:imp_lata]}, '\\r', '') != '' AND not_found_in_db = 1")
+      ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_lata = 1 WHERE replace(col_#{options[:imp_lata]}, '\\r', '') != '' AND not_found_in_db = 1")      if ActiveRecord::Base.connection.tables.include?(name)
 
     end
 
     # set flags
-    self.csv_import_prefix_analize(name, options)
+    self.csv_import_prefix_analize(name, options)   if ActiveRecord::Base.connection.tables.include?(name)
 
     if options[:imp_update_dest_names].to_i == 1 and options[:imp_dst] >= 0
       # set flag on destination name update
-      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = 1 ") #WHERE (destinations.name != replace(col_#{options[:imp_dst]}, '\\r', '') OR (destinations.name IS NULL AND LENGTH(col_#{options[:imp_dst]}) > 0 )  ) ")
+      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = 1 ") if ActiveRecord::Base.connection.tables.include?(name) #WHERE (destinations.name != replace(col_#{options[:imp_dst]}, '\\r', '') OR (destinations.name IS NULL AND LENGTH(col_#{options[:imp_dst]}) > 0 )  ) ")
     end
 
     if options[:imp_update_subcodes].to_i == 1 and options[:imp_subcode] >= 0
       # set flag on destination name update
-      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = ned_update + 2 WHERE (destinations.subcode != replace(col_#{options[:imp_subcode]}, '\\r', '') OR (destinations.subcode IS NULL AND LENGTH(col_#{options[:imp_subcode]}) > 0 ) )")
+      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = ned_update + 2 WHERE (destinations.subcode != replace(col_#{options[:imp_subcode]}, '\\r', '') OR (destinations.subcode IS NULL AND LENGTH(col_#{options[:imp_subcode]}) > 0 ) )")  if ActiveRecord::Base.connection.tables.include?(name)
     end
 
     if options[:imp_update_directions].to_i == 1 
-      ActiveRecord::Base.connection.execute("UPDATE #{name} join directions on (replace(col_#{options[:imp_cc]}, '\\r', '') = directions.code) join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)SET ned_update = ned_update + 4 WHERE destinations.direction_code != directions.code")
+      ActiveRecord::Base.connection.execute("UPDATE #{name} join directions on (replace(col_#{options[:imp_cc]}, '\\r', '') = directions.code) join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)SET ned_update = ned_update + 4 WHERE destinations.direction_code != directions.code")   if ActiveRecord::Base.connection.tables.include?(name)
     end
 
+    if ActiveRecord::Base.connection.tables.include?(name)
     arr[:bad_destinations] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 1").to_i
     arr[:destinations_to_create] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 0 AND not_found_in_db = 1").to_i
     arr[:destinations_to_update] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) AS d_all FROM #{name} WHERE ned_update IN (1, 3, 5, 7)").to_i if options[:imp_update_dest_names].to_i == 1 and options[:imp_dst] >= 0
@@ -542,6 +545,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     arr[:new_destinations_in_csv_file] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE not_found_in_db = 1").to_i
     arr[:existing_destinations_in_csv_file] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE not_found_in_db = 0 AND f_error = 0").to_i
     arr[:rates_to_update] = Rate.count(:all, :conditions => ['tariff_id = ? AND f_error = 0 AND not_found_in_db = 0', id], :joins => "JOIN destinations ON (rates.destination_id = destinations.id) JOIN #{name} ON (destinations.prefix = replace(col_#{options[:imp_prefix]}, '\\r', ''))")
+    end
     return arr
   end
 
