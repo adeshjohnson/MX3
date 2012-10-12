@@ -340,38 +340,7 @@
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
-<!--Select current day-->
-<!--Čia paspaudus clear search turi atstatyti dabartinę dieną-->
-<tr>
-	<td>select</td>
-	<td>id=date_from_year</td>
-	<td>label=2012</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_from_month</td>
-	<td>label=October</td>
-</tr>
-<tr>
-	<td>assertSelectedValue</td>
-	<td>id=date_from_day</td>
-	<td>11</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_till_year</td>
-	<td>label=2012</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_till_month</td>
-	<td>label=October</td>
-</tr>
-<tr>
-	<td>assertSelectedValue</td>
-	<td>id=date_till_day</td>
-	<td>11</td>
-</tr>
+<!--Check if it's current day in dropdown-->
 <tr>
 	<td>open</td>
 	<td>/billing/payments/list</td>
@@ -385,12 +354,6 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>280.4122</td>
-	<td></td>
-</tr>
-<!--Today's date-->
-<tr>
-	<td>assertTextPresent</td>
-	<td> 2012-10-11 </td>
 	<td></td>
 </tr>
 <tr>
@@ -667,37 +630,7 @@
 	<td>link=Clear search</td>
 	<td></td>
 </tr>
-<!--Must be today's date after clear search-->
-<tr>
-	<td>select</td>
-	<td>id=date_from_year</td>
-	<td>label=2012</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_from_month</td>
-	<td>label=October</td>
-</tr>
-<tr>
-	<td>assertSelectedValue</td>
-	<td>id=date_from_day</td>
-	<td>11</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_till_year</td>
-	<td>label=2012</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_till_month</td>
-	<td>label=October</td>
-</tr>
-<tr>
-	<td>assertSelectedValue</td>
-	<td>id=date_till_day</td>
-	<td>11</td>
-</tr>
+<!--Check if it's current day in dropdown-->
 <tr>
 	<td>open</td>
 	<td>/billing/payments/list</td>
