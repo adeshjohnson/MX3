@@ -593,11 +593,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=update_subcodes</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>prefix_id</td>
 	<td>label=Prefix</td>
@@ -638,9 +633,9 @@
 	<td>label=Code</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>click</td>
 	<td>id=update_subcodes</td>
-	<td>on</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -984,6 +979,11 @@
 </tr>
 <tr>
 	<td>select</td>
+	<td>id=destination_id</td>
+	<td>label=Destination</td>
+</tr>
+<tr>
+	<td>select</td>
 	<td>id=prefix_id</td>
 	<td>label=Prefix</td>
 </tr>
@@ -1063,11 +1063,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=Fix</td>
 	<td></td>
@@ -1075,11 +1070,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1222,7 +1212,36 @@
 	<td>ALBANIA Tirane</td>
 	<td></td>
 </tr>
-<!--OLD destinations names stupelis tuščias-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>United States Teksasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>United States Kanzasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>United STATES Teksasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>United STATES Kanzasas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Albania Chi</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>ALBANIA Chi</td>
+	<td></td>
+</tr>
 <tr>
 	<td>goBackAndWait</td>
 	<td></td>
@@ -1231,6 +1250,11 @@
 <tr>
 	<td>open</td>
 	<td>/billing/tariffs/subcode_to_update_from_csv?csv2=1&amp;tariff_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>MOB</td>
 	<td></td>
 </tr>
 <tr>
@@ -1246,6 +1270,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>ALB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>AFG</td>
 	<td></td>
 </tr>
 <tr>
