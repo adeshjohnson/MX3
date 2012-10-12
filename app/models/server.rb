@@ -14,7 +14,7 @@ class Server < ActiveRecord::Base
   before_save :check_server_device
 
   def check_if_no_devices_own_server
-    if Device.count(:conditions => ["server_id = ?", self.id]).to_i > 0
+    if ServerDevice.count(:conditions => ["server_id = ?", self.id]).to_i > 0
       errors.add(:server_id, _("Server_Has_Devices"))
       return false
     end
