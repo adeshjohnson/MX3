@@ -642,13 +642,6 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     MorLog.my_debug("CSV update_destinations #{name}", 1)
     count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE ned_update IN (1, 3, 5, 7)").to_i
 
-    sql ="UPDATE #{name} 
-          JOIN destinations ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
-          SET original_destination_name = destinations.name
-          WHERE ned_update IN (1, 3, 5, 7)"
-
-    ActiveRecord::Base.connection.update(sql)
-
     sql ="UPDATE destinations 
          JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) 
          SET name = replace(col_#{options[:imp_dst]}, '\\r', '') 

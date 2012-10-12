@@ -949,6 +949,13 @@ class TariffsController < ApplicationController
 
     if  @step > 2
 
+      # Saving old Destination names before import
+      check_destination_names = "select count(original_destination_name) as notnull from " + session["tariff_name_csv_#{@tariff.id}".to_sym].to_s + " where original_destination_name is not NULL"
+      if (ActiveRecord::Base.connection.select(check_destination_names).first["notnull"].to_i rescue 0) > 0
+        sql = "UPDATE " + session["tariff_name_csv_#{@tariff.id}".to_sym].to_s + " JOIN destinations ON (replace(col_1, '\\r', '') = destinations.prefix) SET original_destination_name = destinations.name WHERE ned_update IN (1, 2, 3, 4)"
+        ActiveRecord::Base.connection.execute(sql) 
+      end
+
       unless ActiveRecord::Base.connection.tables.include?(session["temp_tariff_name_csv_#{@tariff.id}".to_sym])
         flash[:notice] = _('Please_upload_file')
         redirect_to :action => "import_csv2", :id => @tariff.id, :step => "0" and return false
