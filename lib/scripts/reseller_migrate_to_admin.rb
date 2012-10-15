@@ -617,6 +617,10 @@ begin
   Change_tables = [Action, Address, Cardgroup, Card, Campaign, Customrate, CcInvoice, Devicegroup, Device, Dialplan, Did, Group, Invoice, IvrSoundFile, IvrTimeperiod, IvrVoice, Ivr, LcrPartial, Lcr, Payment, Phonebook, Provider, Service, Tariff, Terminator, UserTranslation, User, Voucher]
   Not_change_tables = [Acustratedetail, Adaction, Aratedetail, Callerid, Currencie, CcGhostminutepercent, Destination, Direction, Destinationgroup, Right, Role, RoleRight, Day, Devicetype, Didrate, Extline, FlatrateData, FlatrateDestination, Hangupcausecode, Invoicedetail, IvrAction, IvrBlock, IvrExtension, Lcrprovider, Locationrule, Pdffaxemail, Pdffaxe, Providercodec, Providerrule, Quickforwarddid, Ratedetail, Rate, Serverprovider, Subscription, Tax, Usergroup, VoicemailBox]
 
+  MyWritter.msg '#=====================================REMOVE FOREIGN_KEY_CHECKS========================'
+  MyWritter.msg "SET FOREIGN_KEY_CHECKS=0;"
+  MyWritter.msg "\n"
+
   if Table_name.blank?
     ExportAllChange.make_inserts(ru_ids)
     ExportAll.make_inserts(u_ids, ru_ids)
@@ -632,6 +636,11 @@ begin
       ExportAll.make_inserts(u_ids, ru_ids)
     end
   end
+
+  MyWritter.msg "\n"
+  MyWritter.msg '#=====================================ADD FOREIGN_KEY_CHECKS========================'
+  MyWritter.msg "SET FOREIGN_KEY_CHECKS=1;"
+
 
   MyWritter.msg "\n"
   MyWritter.msg '#=====================================END==========================================='
