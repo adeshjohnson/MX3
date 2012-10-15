@@ -2056,6 +2056,7 @@ Variables: (Names marked with * are required)
           flash_notice = _("Payment_Error_Contact_Administrator_enter_merchant_id")
           flash_help_link = ''
           exception_send_email = 0
+          logger.fatal flash_notice
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Payment_Gateway_Error', :data2 => exception.message).save
         end
 
@@ -2188,12 +2189,16 @@ Variables: (Names marked with * are required)
           MorLog.my_debug("    >> Contained explanation. Flash: #{ flash_help_link}", true) if flash_help_link
         end
 
+        logger.fatal flash_notice
         if !flash_help_link.blank?
           flash[:notice] = _('Something_is_wrong_please_consult_help_link')
           flash[:notice] += "<a id='exception_info_link' href='#{flash_help_link}' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>".html_safe
         else
           flash[:notice] = flash_notice.to_s.blank? ? "INTERNAL ERROR. - ID: #{id} - #{exception_class}" : flash_notice
         end
+
+        logger.fatal flash_notice
+        logger.fatal flash[:notice]
 
         if session and session[:forgot_pasword] == 1
           session[:forgot_pasword] = 0
