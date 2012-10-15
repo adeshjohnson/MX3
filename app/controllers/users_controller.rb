@@ -667,6 +667,14 @@ class UsersController < ApplicationController
       end
     end
 
+    if user.usertype == 'accountant'
+      accountant_users = User.count(:all, :conditions => ["responsible_accountant_id = ?", user.id]).to_i
+      if accountant_users > 0
+        flash[:notice] = _('Cant_delete_accountant_with_users')
+        redirect_to :controller => return_controller, :action => return_action and return false
+      end
+    end
+
     if params[:id].to_i != 0
       user.destroy_everything
       flash[:status] = _('User_deleted')

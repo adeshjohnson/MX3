@@ -4490,7 +4490,7 @@ Localization.define('en') do |l|
   l.store 'Default_asterisk_server', 'Default asterisk server'
   l.store 'Responsible_accountant', 'Responsible accountant'
   l.store 'Update_failed', 'Update failed'
-  #  l.store '', ''
+  l.store 'Cant_delete_accountant_with_users', 'Can not delete accountant - he has users'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
