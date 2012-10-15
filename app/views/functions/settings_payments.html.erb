@@ -476,6 +476,6 @@
 <% content_for :scripts do %>
     <script type="text/javascript">
         <% setting_tabs = ['Vouchers', 'PayPal', 'WebMoney', 'Linkpoint', 'Cyberplat', 'Ouroboros'] -%>
-        initTabs('dhtmlgoodies_tabView1', Array(<%= setting_tabs.map{|tab| "'"+ _(tab) + "'"}.join(", ") %>), 0, 800, 580);
+        initTabs('dhtmlgoodies_tabView1', Array(<%= raw setting_tabs.map{|tab| "'"+ _(tab) + "'"}.join(", ") %>), 0, 800, 580);
     </script>
 <% end %>
