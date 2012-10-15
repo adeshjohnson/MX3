@@ -45,10 +45,10 @@
           <td class="status"><%= invoice_state(invoice) %></td>
           <td class="comment"><%= h(invoice.comment) %></td>
           <td class="user_type"><%= invoice.invoice_type %></td>
-          <td><%= link_to "&nbsp;", {:action => "invoice_print", :id => @cshop.id, :invoice_id => invoice.id}, :class => "print" %></td>
+          <td><%= link_to "&nbsp;".html_safe, {:action => "invoice_print", :id => @cshop.id, :invoice_id => invoice.id}, :class => "print" %></td>
           <td>
             <div class="btn">
-              <%= link_to "&nbsp;", {:action => "invoice_edit", :id => @cshop.id, :invoice_id => invoice.id}, :class => "edit" %>
+              <%= link_to "&nbsp;".html_safe, {:action => "invoice_edit", :id => @cshop.id, :invoice_id => invoice.id}, :class => "edit" %>
             </div>
           </td>
         </tr>
