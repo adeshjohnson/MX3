@@ -2060,41 +2060,41 @@ Variables: (Names marked with * are required)
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Payment_Gateway_Error', :data2 => exception.message).save
         end
 
-        if exception_class.include?("Google4R") and exception.message.include?('Seller Account') and exception.message.include?('is not active.')
+        if flash_notice.blank? and exception_class.include?("Google4R") and exception.message.include?('Seller Account') and exception.message.include?('is not active.')
           flash_notice = _("Payment_Error_Contact_Administrator_account_not_active")
           flash_help_link = ''
           exception_send_email = 0
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Payment_Gateway_Error', :data2 => exception.message).save
         end
 
-        if exception.message.include?('Unexpected response code')
+        if  flash_notice.blank? and exception.message.include?('Unexpected response code')
           flash_notice = _("Google_checkout_error") + ': ' + exception.message.to_s #.gsub('Google Unexpected response code', 'Unexpected response code')
           flash_help_link = ''
           exception_send_email = 0
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Payment_Gateway_Error', :data2 => exception.message).save
         end
 
-        if exception.message.include?('An API Certificate or API Signature is required to make requests to PayPal')
+        if  flash_notice.blank? and exception.message.include?('An API Certificate or API Signature is required to make requests to PayPal')
           flash_notice = _('An_API_Certificate_or_API_Signature_is_required_to_make_requests_to_PayPal')
           flash_help_link = ''
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Payment_Gateway_Error', :data2 => exception.message).save
         end
 
-        if exception.message.include?('Temporary failure in name resolution')
+        if  flash_notice.blank? and exception.message.include?('Temporary failure in name resolution')
           flash_notice = _('DNS_Error')
           flash_help_link = ''
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'DNS_Error', :data2 => exception.message).save
         end
 
-        if exception.message.include?('Ambethia::ReCaptcha::Controller::RecaptchaError')
+        if  flash_notice.blank? and exception.message.include?('Ambethia::ReCaptcha::Controller::RecaptchaError')
           flash_notice = _('ReCaptcha_Error')
           flash_help_link = ''
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'ReCaptcha_Error', :data2 => exception.message).save
         end
 
         #if exception_class.include?("Net::SMTP") or (exception_class.include?("Errno::ECONNREFUSED") and trace.to_s.include?("smtp_tls.rb")) or (exception_class.include?("SocketError") and trace.to_s.include?("smtp_tls.rb")) or ((exception_class.include?("Timeout::Error") and trace.to_s.include?("smtp.rb"))) or trace.to_s.include?("smtp.rb")
-        flash_help_link = email_exceptions(exception) if  flash_help_link.blank?
-        #end
+        flash_help_link = email_exceptions(exception) if  flash_help_link.blank?  and  flash_notice.blank?
+            #end
 
         if exception_class.include?("LoadError") and exception.message.to_s.include?('locations or via rubygems.')
           if exception.message.include?('cairo')
