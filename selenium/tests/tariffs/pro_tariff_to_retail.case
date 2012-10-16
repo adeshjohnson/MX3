@@ -119,12 +119,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Make user retail tariff</td>
+	<td>/billing/tariffs/make_user_tariff/1</td>
 	<td></td>
 </tr>
 <tr>
@@ -220,7 +215,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>document.forms[1].elements['commit']</td>
+	<td>css=th &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -260,13 +255,8 @@
 	<td>label=Retail - Test Tariff + 10 + 20%</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -280,13 +270,8 @@
 	<td>label=Retail - Test Tariff + 10 + 20%</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -300,13 +285,8 @@
 	<td>label=Retail - Test Tariff + 10 + 20%</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -320,13 +300,8 @@
 	<td>label=Retail - Test Tariff + 10 + 20%</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
