@@ -611,14 +611,19 @@ class CallcController < ApplicationController
       dont_be_so_smart
       redirect_to :action => "login" and return false
     end
-
+    show_debug = true
+    if show_debug
+      File.open('/tmp/new_log.txt', 'a+') {|f| f.write("\n Start #{Time.now}") }
+    end
     notice = User.validate_from_registration(params)
     capt = true
     if Confline.get_value("reCAPTCHA_enabled").to_i == 1
       usern = User.new
       capt = verify_recaptcha(usern) ? true : (false; notice = _('Please_enter_captcha'))
     end
-
+    if show_debug
+      File.open('/tmp/new_log.txt', 'a+') {|f| f.write("\n End #{Time.now}") }
+    end
     if capt and !notice or notice.blank?
       reset_session
       if Confline.get_value("Show_logo_on_register_page", @owner.id).to_i == 1
