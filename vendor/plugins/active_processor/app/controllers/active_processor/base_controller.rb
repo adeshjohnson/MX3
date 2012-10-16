@@ -64,7 +64,7 @@ module ActiveProcessor
         else
           @gateway = @engine.query
           format.html {
-            flash.now[:notice] = _('Payment_Error') + " <small>#{(@gateway.payment.response.try(:message) rescue "") unless @gateway.payment.nil?}</small>"
+            flash.now[:notice] = _('Payment_Error') + " <small>#{(@gateway.payment.response.try(:message) rescue _('Timeout_Response')) unless @gateway.payment.nil?}</small>"
             render :action => "index"
           }
         end
