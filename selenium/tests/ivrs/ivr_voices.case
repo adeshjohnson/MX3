@@ -529,28 +529,23 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=action_2</td>
-	<td>label=test</td>
-</tr>
-<tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>5000</td>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=action_2</td>
 	<td>label=test</td>
-</tr>
-<tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=option[value=&quot;${cepstralmp}&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
