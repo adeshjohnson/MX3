@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/call_tracing</td>
+	<td></td>
+</tr>
+<!--edit localization rules-->
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>9340</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tariff</td>
+	<td>label=spectariffre</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>lcr</td>
+	<td>label=speclcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=add</td>
+	<td>9340</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<!--set localization rules-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=device[location_id]</td>
+	<td>label=SpecRules</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=provider_tariff_id</td>
+	<td>label=spectariffpro</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider was successfully updated</td>
+	<td></td>
+</tr>
+<!--change default currency-->
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=icon_chech_curr_upd_disable_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=icon_cross_curr_upd_enable_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=exchange_rate</td>
+	<td>2.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=image]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Currency details updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=icon_cross_curr_upd_enable_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=icon_chech_curr_upd_disable_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=icon_cross_curr_active_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=icon_chech_curr_disable_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_currency_id</td>
+	<td>label=AWG</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Personal details changed</td>
+	<td></td>
+</tr>
+<!--call trasing-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=user_admin (16)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>800017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>location</td>
+	<td>SpecRules</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>applied_rule</td>
+	<td>destrules</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>cut</td>
+	<td>80</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>add</td>
+	<td>9340</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>localized_destination</td>
+	<td>93400017219</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>lcr_changed_from_to</td>
+	<td>speclcr</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>tariff_changed_from</td>
+	<td>spectariffre</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>prefix_16</td>
+	<td>9340</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price</td>
+	<td>4.000000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price</td>
+	<td>4.000000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price</td>
+	<td>4.000000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//th[8]</td>
+	<td>Price/min (AWG)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//th[6]</td>
+	<td>Price/min (AWG)</td>
+</tr>
+<!--call tracing without tariff and lcr-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=user_admin (16)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>900017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>location</td>
+	<td>SpecRules</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>applied_rule</td>
+	<td>destrulesfree</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>cut</td>
+	<td>90</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>add</td>
+	<td>6140</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>localized_destination</td>
+	<td>61400017219</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>destination_group_16</td>
+	<td>Australia MOB</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//th[6]</td>
+	<td>Price/min (AWG)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price</td>
+	<td>22.000000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//th[8]</td>
+	<td>Price/min (AWG)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price_3</td>
+	<td>14.000000</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>LCR changed from Primary to:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=specpro2/3</td>
+	<td>specpro2/3</td>
+</tr>
+<!--call tracing without rules-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=user_admin (16)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>297960017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>297960017219</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>prefix_16</td>
+	<td>29796</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//th[6]</td>
+	<td>Price/min (AWG)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price</td>
+	<td>44.000000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//th[8]</td>
+	<td>Price/min (AWG)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price_3</td>
+	<td>12.000000</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>LCR changed from Primary to:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=specpro2/3</td>
+	<td>specpro2/3</td>
+</tr>
+<!--delete lcr-->
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>notice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>LCR not deleted because it is used by some user(s)!</td>
+	<td></td>
+</tr>
+<!--delete provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<!--call tracing-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=user_admin (16)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>total_providers</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>total_active_providers</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>ERROR! Call cannot be made. Please check for errors!</td>
+	<td></td>
+</tr>
+<!--delete lcr-->
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>notice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>LCR not deleted because it is used by some user(s)!</td>
+	<td></td>
+</tr>
+<!--get lcr from rules-->
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>lcr</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--delete lcr-->
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>notice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>LCR not deleted because it is used by some user(s)!</td>
+	<td></td>
+</tr>
+<!--get lcr from user-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_lcr_id</td>
+	<td>label=Primary</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<!--delete lcr-->
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>LCR was successfully deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
