@@ -619,9 +619,19 @@
 	<td>block2</td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Refresh</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <!--<tr> 	<td>waitForValue</td> 	<td>last_changed</td> 	<td>block_name:block2</td> </tr>-->
 <tr>
