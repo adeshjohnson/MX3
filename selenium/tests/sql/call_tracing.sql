@@ -158,6 +158,7 @@ update `ratedetails` set rate=2.000000000000000 where id=258;
 update `ratedetails` set rate=2.000000000000000 where id=140;
 update `ratedetails` set rate=2.000000000000000 where id=392;
 update `ratedetails` set rate=2.000000000000000 where id=391;
+update `ratedetails` set rate=2.000000000000000 where id=566;
 INSERT INTO `ratedetails` (`id`, `start_time`, `end_time`, `rate`, `connection_fee`, `rate_id`, `increment_s`, `min_time`, `daytype`) VALUES
 (503, '00:00:00', '23:59:59', 2.000000000000000, 0.000000000000000, 511, 1, 0, ''),
 (504, '00:00:00', '23:59:59', 3.000000000000000, 0.000000000000000, 512, 1, 0, ''),
