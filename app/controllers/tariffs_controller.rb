@@ -52,13 +52,16 @@ class TariffsController < ApplicationController
       cond = " AND rates.destination_id IN (#{@des_id.join(',')})"
       con = " AND rates.destinationgroup_id IN (#{@des_id_d.join(',')}) "
       @search = 1
+      incl =  [:rates]
     else
       con = ''
       cond = ''
+      incl = ''
     end
-    @prov_tariffs = Tariff.find(:all, :conditions => "purpose = 'provider' AND owner_id = '#{user.id}' #{cond}", :include => [:rates], :order => "name ASC", :group => 'tariffs.id')
-    @user_tariffs = Tariff.find(:all, :conditions => "purpose = 'user' AND owner_id = '#{user.id}' #{con}", :include => [:rates], :order => "name ASC", :group => 'tariffs.id')
-    @user_wholesale_tariffs = Tariff.find(:all, :conditions => "purpose = 'user_wholesale' AND owner_id = '#{user.id}' #{cond}", :include => [:rates], :order => "name ASC", :group => 'tariffs.id')
+
+    @prov_tariffs = Tariff.find(:all, :conditions => "purpose = 'provider' AND owner_id = '#{user.id}' #{cond}", :include => incl, :order => "name ASC", :group => 'tariffs.id')
+    @user_tariffs = Tariff.find(:all, :conditions => "purpose = 'user' AND owner_id = '#{user.id}' #{con}", :include => incl, :order => "name ASC", :group => 'tariffs.id')
+    @user_wholesale_tariffs = Tariff.find(:all, :conditions => "purpose = 'user_wholesale' AND owner_id = '#{user.id}' #{cond}", :include => incl, :order => "name ASC", :group => 'tariffs.id')
     @user_wholesale_enabled = (Confline.get_value("User_Wholesale_Enabled") == "1")
 
     @Show_Currency_Selector =1
