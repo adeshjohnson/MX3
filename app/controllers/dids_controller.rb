@@ -77,7 +77,7 @@ class DidsController < ApplicationController
       end
     end
     cond << "dids.user_id = ?" and var << @search_user if @search_user.to_s.length > 0
-    cond << "dids.device_id = ?" and var << @search_device if @search_device.to_s.length > 0
+    cond << "dids.device_id = ?" and var << @search_device if @search_device.to_s.length > 0  and  @search_device.to_s != 'all'
     cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller'
 
     @search = (var.size > 0 ? 1 : 0)
