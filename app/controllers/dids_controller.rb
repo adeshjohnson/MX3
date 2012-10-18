@@ -50,7 +50,10 @@ class DidsController < ApplicationController
     params[:search_on] ? @search = 1 : @search = 0
     params[:page] ? @page = params[:page].to_i : @page = 1
 
-    session[:did_search_options] = {:search_language=>'all'} if params[:clean].to_i == 1
+    if params[:clean].to_i == 1 or !session[:did_search_options]
+      session[:did_search_options] = {:s_language => 'all'}
+      params[:s_language] = 'all' if !params[:s_language]
+    end
     [:search_did, :search_provider, :search_language, :search_status, :search_user, :search_device].each do |param|
       set_search_param(param)
     end
