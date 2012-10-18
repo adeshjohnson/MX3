@@ -12,18 +12,27 @@
           <tr class="row1">
             <td>
               <br>
-              <b><%= b_money + _('Amount_with_VAT') %></b>:
-              <%= text_field_tag 'amount', "", "class" => "input", :size => "10", :maxlength => "10" %>
               <br>
-              <br>
-              <b><%= b_currency + _('Currency') %></b>:
-              <select name="currency">
-                <% for curr in @currs %>
-                    <option value="<%= curr.name %>"><%= curr.name %></option>
-                <% end %>
-              </select>
-              <br>
-              <br>
+              <table>
+                <tr>
+                  <td><b><%= b_money + _('Amount_with_VAT') %></b>:</td>
+                  <td><%= text_field_tag 'amount', "", "class" => "input", :size => "10", :maxlength => "10" %></td>
+                </tr>
+                <tr>
+                  <td><b><%= b_currency + _('Currency') %></b>:</td>
+                  <td>              <select name="currency">
+                    <% for curr in @currs %>
+                        <option value="<%= curr.name %>"><%= curr.name %></option>
+                    <% end %>
+                  </select></td>
+                </tr>
+                <tr>
+                  <td><b><%= _('Description') %></b>:</td>
+                  <td><%= text_area_tag('description', '', "class" => "input", :cols => "32", :rows => "4") %></td>
+                </tr>
+              </table>
+          <br>
+          <br>
               <%= submit_tag _('Proceed'), :disable_with => _('Processing..') %>
               <br>
               <br>
@@ -44,6 +53,14 @@
           <tr class="row1">
             <td>
 
+              <br>
+              <br>
+              <table>
+                <tr>
+                  <td><b><%= _('Description') %></b>:</td>
+                  <td><%= text_area_tag('description', '', "class" => "input", :cols => "32", :rows => "4") %></td>
+                </tr>
+              </table>
               <br>
               <br>
               <%= submit_tag _('Buy'), :disable_with => _('Processing..') %>

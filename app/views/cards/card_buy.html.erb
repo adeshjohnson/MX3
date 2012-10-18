@@ -43,11 +43,16 @@
         <td colspan="2"> <%= _('Total_Price') %>:</td>
         <td id="total_price"> <%= nice_number(@real_price) %> <%= current_user.currency.name %> </td>
       </tr>
+      <tr>
+        <td>   <%= _('Description') %>:</td>
+        <td id="description"> <%= @description %></td>
+      </tr>
     </table>
     <br>
     <br>
     <%= hidden_field_tag "email", @email %>
     <%= hidden_field_tag "send_invoice", @send_invoice %>
+    <%= hidden_field_tag 'description', @description %>
     <%= submit_tag _('Confirm'), :disable_with => _('Processing..') %>
 <% end %>
 <br>

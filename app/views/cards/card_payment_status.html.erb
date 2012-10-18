@@ -35,6 +35,10 @@
         <td>   <%= _('New_card_balance') %>:</td>
         <td id="new_balance"> <%= nice_number @card.balance + @real_amount %> <%= current_user.currency.name %></td>
       </tr>
+      <tr>
+        <td>   <%= _('Description') %>:</td>
+        <td id="description"> <%= @description %></td>
+      </tr>
     </table>
     <br>
     <br>
@@ -42,6 +46,7 @@
     <%= hidden_field_tag 'amount', @amount %>
     <%= hidden_field_tag 'currency', @curr %>
     <%= hidden_field_tag 'real_amount', @real_amount %>
+    <%= hidden_field_tag 'description', @description %>
     <%= submit_tag _('Confirm'), :disable_with => _('Processing..') %>
 <% end %>
 <br>

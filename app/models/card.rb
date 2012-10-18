@@ -326,7 +326,7 @@ class Card < ActiveRecord::Base
   +boolean+ true if card was set as sold and payment generated succesfully, 
      otherwise false
 =end
-  def sell(currency=nil, owner_id=nil)
+  def sell(currency=nil, owner_id=nil, description='')
     if self.sold?
       errors.add(:sold, 'Cannot sell already sold card')
       return false
@@ -339,7 +339,7 @@ class Card < ActiveRecord::Base
         else
           balance = self.balance * Currency.count_exchange_rate(Currency.get_default, self.cardgroup.tell_balance_in_currency) 
         end
-        if Payment.add_for_card(self, balance, currency, owner_id)
+        if Payment.add_for_card(self, balance, currency, owner_id, description)
           self.disable_voucher
           return true
         else

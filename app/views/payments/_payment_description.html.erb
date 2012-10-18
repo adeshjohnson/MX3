@@ -1,4 +1,4 @@
-<% if payment.paymenttype == 'manual' %>
+<% if payment.paymenttype == 'manual' or payment.paymenttype == 'Card' %>
     <div id="payment_des_<%= payment.id %>">
       <div id="payment_description_link_<%= payment.id %>">
         <%= link_to_function(b_commnet_edit(payment.description), "Element.toggle('payment_description_#{payment.id}');Element.toggle('payment_description_link_#{payment.id}');") %>
