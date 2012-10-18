@@ -51,8 +51,8 @@
           <%= select_tag("s_provider", options_for_select(options, @options[:s_provider].to_i), :disabled => @providers.empty?)  %> 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <% end %>
-      <%= _('Caller_ID') %>:
-      <%= text_field_tag("s_caller_id", h(@options[:s_caller_id].to_s)) %>
+      <%= _('Source') %>:
+      <%= text_field_tag("s_source", h(@options[:s_source].to_s)) %>
       <% if cc_active? %> 
         <br/> 
         <br/> 

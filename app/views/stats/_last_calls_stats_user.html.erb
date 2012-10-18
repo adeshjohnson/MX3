@@ -25,8 +25,8 @@
       <%= _("Destination") %>:
       <%= text_field_tag("s_destination", h(@options[:s_destination].to_s)) %>
       <% if mor_11_extend? %>
-          <%= _('Caller_ID') %>:
-          <%= text_field_tag("s_caller_id", h(@options[:caller_id].to_s)) %>
+          <%= _('Source') %>:
+          <%= text_field_tag("s_source", h(@options[:source].to_s)) %>
       <% end %>
 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
