@@ -9,7 +9,7 @@ class DidsController < ApplicationController
 
   before_filter :check_user_for_dids, :except => [:personal_dids, :quickforwarddids, :quickforwarddid_edit, :quickforwarddid_update, :quickforwarddid_destroy]
   before_filter { |c|
-    view = [:index, :list, :show, :did_rates, :dids_export_to_csv]
+    view = [:index, :list, :show, :did_rates]
     edit = [:new, :create, :edit, :update, :destroy, :edit_rate, :bulk_management, :confirm_did, :assign_to_dp]
     allow_read, allow_edit = c.check_read_write_permission(view, edit, {:role => "accountant", :right => :acc_manage_dids_opt_1, :ignore => true})
     c.instance_variable_set :@allow_read, allow_read
@@ -44,12 +44,6 @@ class DidsController < ApplicationController
         ['Forward_DID_to_external_number', "http://wiki.kolmisoft.com/index.php/Forward_DID_to_External_Number"],
         ['Charge_DID_on_a_monthly_basis', 'http://wiki.kolmisoft.com/index.php/How_to_charge_DID_on_a_monthly_basis'],
         ['Block_DID', "http://wiki.kolmisoft.com/index.php/DID_Blocking"]]
-    unless current_user.usertype == 'reseller'
-      @providers = current_user.load_providers(:all, {})
-    end
-
-    sql = "SELECT DISTINCT language FROM dids ORDER by language"
-    @languages = ActiveRecord::Base.connection.select_all(sql)
 
     #seach
 
@@ -60,16 +54,12 @@ class DidsController < ApplicationController
       set_search_param(param)
     end
 
-    @search_language = 'all' if !params[:s_language]
+    logger.fatal session[:did_search_options].to_yaml
 
-    @search_device = "" if !@search_device.match(/^\d+$/)
-    @users = current_user.load_users(:all, {})
+    #@search_language = 'all' if !params[:s_language]
 
-    if @search_user and @search_user.to_i.to_s == @search_user
-      @devices = Device.find(:all, :select => "id, device_type, extension, name, username", :conditions => ["devices.user_id = ? AND name not like 'mor_server_%'", @search_user.to_i], :order => "devices.name ASC")
-    else
-      @devices = current_user.load_users_devices(:all, {})
-    end
+    #@search_device = "" if !@search_device.match(/^\d+$/)
+
     cond = ["dids.id > 0"]
     var = []
     cond << "did like ?" and var << @search_did.to_str.strip if @search_did.to_s.strip.length > 0
@@ -88,17 +78,64 @@ class DidsController < ApplicationController
     cond << "dids.device_id = ?" and var << @search_device if @search_device.to_s.length > 0
     cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller'
 
-
-    total_dids = Did.count(:all, :conditions => [cond.join(" AND ")].concat(var)).to_d
-    @total_pages = (total_dids / session[:items_per_page].to_d).ceil
-    @page = @total_pages if @page > @total_pages
-    @page = 1 if @page < 1
-
-    @show_did_rates = !(session[:usertype] == "accountant" and session[:acc_manage_dids_opt_1] == 0 or reseller?)
-
-    iend = session[:items_per_page] * (@page-1)
-    @dids = Did.includes([:user, :device, :provider, :dialplan]).where([cond.join(" AND ")].concat(var)).order("dids.did ASC").limit(session[:items_per_page]).offset(iend).all
     @search = (var.size > 0 ? 1 : 0)
+
+
+    if params[:csv].to_i == 0
+      unless current_user.usertype == 'reseller'
+        @providers = current_user.load_providers(:all, {})
+      end
+
+      sql = "SELECT DISTINCT language FROM dids ORDER by language"
+      @languages = ActiveRecord::Base.connection.select_all(sql)
+
+      @users = current_user.load_users(:all, {})
+
+      if @search_user and @search_user.to_i.to_s == @search_user
+        @devices = Device.find(:all, :select => "id, device_type, extension, name, username", :conditions => ["devices.user_id = ? AND name not like 'mor_server_%'", @search_user.to_i], :order => "devices.name ASC")
+      else
+        @devices = current_user.load_users_devices(:all, {})
+      end
+
+      total_dids = Did.count(:all, :conditions => [cond.join(" AND ")].concat(var)).to_d
+      @total_pages = (total_dids / session[:items_per_page].to_d).ceil
+      @page = @total_pages if @page > @total_pages
+      @page = 1 if @page < 1
+
+      @show_did_rates = !(session[:usertype] == "accountant" and session[:acc_manage_dids_opt_1] == 0 or reseller?)
+
+      iend = session[:items_per_page] * (@page-1)
+      @dids = Did.includes([:user, :device, :provider, :dialplan]).where([cond.join(" AND ")].concat(var)).order("dids.did ASC").limit(session[:items_per_page]).offset(iend).all
+
+    else
+
+      @dids = Did.includes([:user, :device, :provider, :dialplan]).where([cond.join(" AND ")].concat(var)).order("dids.did ASC").all
+      sep, dec = current_user.csv_params
+
+      csv_string = "DID#{sep}Provider#{sep}Language#{sep}Status#{sep}User/Dial_Plan#{sep}Device#{sep}Call_limit#{sep}Comment\n"
+      for did in @dids
+
+        if did.user_id != 0
+          user_d_plan= did.user.first_name + " " + did.user.last_name
+        else
+          if did.dialplan_id == 0 and did.status != "free"
+            user_d_plan = did.user.first_name + " " + did.user.last_name
+          else
+            user_d_plan = did.dialplan.name if did.dialplan
+          end
+        end
+        csv_string += "#{did.did.to_s}#{sep}#{did.provider.name}#{sep}#{did.language}#{sep}#{did.status.capitalize}#{sep}#{user_d_plan}#{sep}#{nice_device(did.device)}#{sep}#{did.call_limit}#{sep}#{did.comment}\n"
+        user_d_plan = ''
+      end
+
+      filename = "DIDs.csv"
+
+      if params[:test].to_i == 0
+        send_data(csv_string, :type => 'text/csv; charset=utf-8; header=present', :filename => filename)
+      else
+        render :text => csv_string
+      end
+    end
   end
 
   def show
@@ -1084,87 +1121,6 @@ ORDER BY dids.did ASC"
     end
   end
 
-  def dids_export_to_csv
-    @providers = Provider.find(:all, :conditions => ['hidden=?', 0], :order => "name ASC")
-
-    sql = "SELECT DISTINCT language FROM dids ORDER by language"
-    @languages = ActiveRecord::Base.connection.select_all(sql)
-
-    @users = User.find(:all, :conditions => "hidden = 0", :order => "first_name ASC")
-
-    @devices = Device.find(:all, :conditions => "user_id > 0 AND name not like 'mor_server_%'", :order => "name ASC")
-
-    #seach
-    @search = 0
-    @search = 1 if params[:search_on]
-
-    @search_did = ""
-    @search_did = params[:s_did] if params[:s_did]
-
-    @search_provider = ""
-    @search_provider = params[:s_provider] if params[:s_provider]
-
-    @search_language = ""
-    @search_language = params[:s_language] if params[:s_language]
-
-    @search_status= ""
-    @search_status = params[:s_status] if params[:s_status]
-
-    @search_user = ""
-    @search_user = params[:s_user] if params[:s_user]
-
-    @search_device = ""
-    @search_device = params[:s_device] if params[:s_device]
-
-    cond = ""
-    cond += " AND did like '#{@search_did}' " if @search_did.length > 0
-
-    cond += " AND provider_id = '#{@search_provider}' " if @search_provider.length > 0
-
-    cond += " AND language = '#{@search_language}' " if @search_language.length > 0
-
-    if @search_status.length > 0
-      if  ['free', 'active'].include?(@search_status)
-        cond += " AND status = '#{@search_status}' AND reseller_id = 0"
-      elsif @search_status == 'reserved'
-        cond += " AND status = '#{@search_status}' OR  reseller_id > 0"
-      else
-        cond += " AND status = '#{@search_status}'"
-      end
-    end
-
-    cond += " AND user_id = '#{@search_user}' " if @search_user.length > 0
-
-    cond += " AND device_id = '#{@search_device}' " if @search_device.length > 0
-
-    #@dids = Did.find(:all, :order => "did ASC")
-    sql = "SELECT dids.* FROM dids WHERE id > 0  #{cond} ORDER BY did ASC"
-    @dids = Did.find_by_sql(sql)
-
-    sep, dec = current_user.csv_params
-
-    csv_string = "DID#{sep}Provider#{sep}Language#{sep}Status#{sep}User/Dial_Plan#{sep}Device#{sep}Call_limit#{sep}Comment\n"
-    for did in @dids
-
-      if did.user_id != 0
-        user_d_plan= did.user.first_name + " " + did.user.last_name
-      else
-        if did.dialplan_id == 0 and did.status != "free"
-          user_d_plan = did.user.first_name + " " + did.user.last_name
-        else
-          user_d_plan = did.dialplan.name if did.dialplan
-        end
-      end
-      csv_string += "#{did.did.to_s}#{sep}#{did.provider.name}#{sep}#{did.language}#{sep}#{did.status.capitalize}#{sep}#{user_d_plan}#{sep}#{nice_device(did.device)}#{sep}#{did.call_limit}#{sep}#{did.comment}\n"
-      user_d_plan = ''
-    end
-
-    filename = "DIDs.csv"
-
-
-    send_data(csv_string, :type => 'text/csv; charset=utf-8; header=present', :filename => filename)
-
-  end
 
   def regenerate_dialplan
     dialplan = Dialplan.find(:first, :conditions => ["id = ? ", params[:id]])

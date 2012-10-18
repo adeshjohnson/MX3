@@ -9,7 +9,7 @@
           <%= link_to b_edit + _('Bulk_management'), :action => 'bulk_management' %> &nbsp;&nbsp;
       <% end %>
       <% unless current_user.usertype == "reseller" %>
-          <%= link_to b_csv + _('Export_to_csv'), :action => 'dids_export_to_csv' %>
+          <%= link_to b_csv + _('Export_to_csv'), :action => :list, :csv=>1 %>
       <% end %>
 
     </td>
