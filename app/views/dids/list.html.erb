@@ -66,6 +66,9 @@
             <%= observe_field("s_user", :update => "device_list_span", :with => "user_id", :url => {:controller => "devices", :action => "ajax_get_user_devices", :default => @search_device.to_i, :all => true, :fax => true}, :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');") %>
             &nbsp;&nbsp;<%= submit_tag _('Search'), :disable_with => _('Processing..') %>
           </td>
+          <td align="right">
+            <%= link_to b_cross + _('Clear_search'), :action => :list, :clean => 1 %>
+          </td>
         </tr>
       </table>
     </div>
