@@ -62,8 +62,8 @@
       <% options.insert(0, [_('All'), "all"]) if @resellers.size > 0 %> 
       <%= select_tag("s_reseller", options_for_select(options, @options[:s_reseller].to_i), :disabled => @resellers.empty?)  %> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <%= _('Caller_ID') %>:
-      <%= text_field_tag("s_caller_id", h(@options[:caller_id].to_s)) %>
+      <%= _('Source') %>:
+      <%= text_field_tag("s_source", h(@options[:source].to_s)) %>
       <%= _('Reseller_in_any_dids') %>
       <% options = @resellers_with_dids.map{|u| [nice_user(u), u.id.to_i]} %> 
       <% options.insert(0, [_('All'), "all"]) if @resellers_with_dids.size > 0 %> 

@@ -1801,9 +1801,9 @@ class Call < ActiveRecord::Base
     end
     logger.fatal options[:caller_id].inspect
 
-    if options[:caller_id] and not options[:caller_id].blank?
-      cond << "calls.clid LIKE ?"
-      var << '%' + options[:caller_id] + '%'
+    if options[:source] and not options[:source].blank?
+      cond << "calls.src LIKE ?"
+      var << '%' + options[:source] + '%'
     end
     # this is nasty but oh well.
     

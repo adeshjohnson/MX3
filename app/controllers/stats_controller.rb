@@ -3864,7 +3864,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         :order_desc => 0,
         :s_country => '',
         :s_reseller => "all",
-        :s_caller_id => nil,
+        :s_source => nil,
         :s_reseller_did => nil,
         :s_card_number => nil, 
         :s_card_pin => nil, 
@@ -3884,7 +3884,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     options[:direction] = options[:s_direction]
     options[:call_type] = options[:s_call_type]
     options[:destination] = (options[:s_destination].to_s.strip.match(/\A[0-9%]+\Z/) ? options[:s_destination].to_s.strip : "")
-    options[:caller_id] = options[:s_caller_id] if  options[:s_caller_id]
+    options[:source] = options[:s_source] if  options[:s_source]
 
     exchange_rate = Currency.count_exchange_rate(session[:default_currency], session[:show_currency]).to_d
     options[:exchange_rate] = exchange_rate
