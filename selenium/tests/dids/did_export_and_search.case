@@ -48,8 +48,8 @@
 </tr>
 <!--Checking if search is turned on-->
 <tr>
-	<td>verifyElementNotPresent</td>
-	<td>/html/body/table[2]/tbody/tr/td/table/tbody/tr/td[4]/div/form/div/table/tbody/tr/td/input[3]</td>
+	<td>assertNotVisible</td>
+	<td>id=s_did</td>
 	<td></td>
 </tr>
 <!--Checking if there are all DIDs displayed-->
@@ -79,9 +79,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
+	<td>assertSelectedLabel</td>
 	<td>id=s_language</td>
-	<td>label=All</td>
+	<td>All</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -207,11 +207,6 @@
 	<td>select</td>
 	<td>id=s_user</td>
 	<td>label=Test User #1</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=option[value=&quot;2&quot;]</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -433,6 +428,12 @@
 	<td>37093042422</td>
 	<td></td>
 </tr>
+<!--Checking if search is turned on-->
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=s_did</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>billing/dids/list?csv=1&amp;test=1</td>
@@ -458,12 +459,6 @@
 	<td>37093042422</td>
 	<td></td>
 </tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>/html/body/table[2]/tbody/tr/td/table/tbody/tr/td[4]/div/form/div/table/tbody/tr/td/input[3]</td>
-	<td></td>
-</tr>
-
 </tbody></table>
 </body>
 </html>
