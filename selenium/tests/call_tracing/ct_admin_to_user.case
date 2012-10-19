@@ -38,107 +38,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/user_rates_list/4?st=L</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate249</td>
-	<td>5</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate250</td>
-	<td>5</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate251</td>
-	<td>5</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Update']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Rates updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/ratedetail_edit/391</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>ratedetail_rate</td>
-	<td>2</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Rate detail was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tariff_name</td>
-	<td>ruletariff</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>tariff_purpose_user</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Tariff was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/user_rates_list/6?st=L</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate249</td>
-	<td>6</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate250</td>
-	<td>6</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate251</td>
-	<td>6</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Update']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Rates updated</td>
+	<td>/billing/test/load_delta_sql/sql/call_tracing</td>
 	<td></td>
 </tr>
 <tr>
@@ -304,7 +204,7 @@
 <tr>
 	<td>assertText</td>
 	<td>price</td>
-	<td>6.000000</td>
+	<td>16.000000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -669,7 +569,7 @@
 <tr>
 	<td>assertText</td>
 	<td>price</td>
-	<td>6.000000</td>
+	<td>16.000000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -785,6 +685,11 @@
 	<td>click</td>
 	<td>link=Assign Provider</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=provdevice</td>
+	<td>label=Test Provider - IAX2 /22.33.44.55</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

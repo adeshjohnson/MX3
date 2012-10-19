@@ -38,354 +38,10 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/new</td>
+	<td>/billing/test/load_delta_sql/sql/call_tracing</td>
 	<td></td>
 </tr>
-<tr>
-	<td>type</td>
-	<td>id=tariff_name</td>
-	<td>Pro_tariff_with_rate</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Tariff was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/rate_new/6?st=L</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate_5595</td>
-	<td>10</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/rate_new/6?page=6&amp;st=L</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate_5780</td>
-	<td>20</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Rates updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/user_rates_list/4?st=L</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate237</td>
-	<td>15</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate238</td>
-	<td>15</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate527</td>
-	<td>15</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate249</td>
-	<td>15</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate250</td>
-	<td>15</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate251</td>
-	<td>15</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=th &gt; input[name=&quot;commit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Rates updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tariff_name</td>
-	<td>Pro_tariff_without_rate</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Tariff was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>active_with_rate</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=provider_tariff_id</td>
-	<td>label=Pro_tariff_with_rate</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>add_to_servers[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>active_without_rate</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=provider_tariff_id</td>
-	<td>label=Pro_tariff_without_rate</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>add_to_servers[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>inactive_with_rate</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=provider_tariff_id</td>
-	<td>label=Pro_tariff_with_rate</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>add_to_servers[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>inactive_without_rate</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=provider_tariff_id</td>
-	<td>label=Pro_tariff_without_rate</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>add_to_servers[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/lcrs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=lcr_name</td>
-	<td>lcr_for_call_tracing</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>LCR was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/lcrs/providers_list/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=select_prov</td>
-	<td>label=active_with_rate - SIP/0.0.0.0</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=name_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=select_prov</td>
-	<td>label=active_without_rate - SIP/0.0.0.0</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=name_3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=select_prov</td>
-	<td>label=inactive_with_rate - SIP/0.0.0.0</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=name_4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=select_prov</td>
-	<td>label=inactive_without_rate - SIP/0.0.0.0</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=name_5</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=#status_4 &gt; form &gt; input[type=&quot;image&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider disabled</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=#status_5 &gt; form &gt; input[type=&quot;image&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider disabled</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td></td>
-	<td></td>
-</tr>
+<!--call_tracing-->
 <tr>
 	<td>open</td>
 	<td>/billing/users/edit/2</td>
@@ -416,7 +72,6 @@
 	<td>User's settings successfully changed: Test User #1</td>
 	<td></td>
 </tr>
-<!--call_tracing-->
 <tr>
 	<td>open</td>
 	<td>/billing/functions/call_tracing</td>
@@ -469,7 +124,7 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_4</td>
+	<td>id=dial_string_6</td>
 	<td></td>
 </tr>
 <tr>
@@ -479,12 +134,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_4</td>
+	<td>id=dial_string_6</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_5</td>
+	<td>id=dial_string_7</td>
 	<td></td>
 </tr>
 <tr>
@@ -494,12 +149,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_5</td>
+	<td>id=dial_string_7</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_3</td>
+	<td>id=dial_string_5</td>
 	<td></td>
 </tr>
 <tr>
@@ -509,7 +164,7 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_3</td>
+	<td>id=dial_string_5</td>
 	<td></td>
 </tr>
 <!--loss call-->
@@ -565,7 +220,7 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_4</td>
+	<td>id=dial_string_6</td>
 	<td></td>
 </tr>
 <tr>
@@ -575,12 +230,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_4</td>
+	<td>id=dial_string_6</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_5</td>
+	<td>id=dial_string_7</td>
 	<td></td>
 </tr>
 <tr>
@@ -590,12 +245,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_5</td>
+	<td>id=dial_string_7</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_3</td>
+	<td>id=dial_string_5</td>
 	<td></td>
 </tr>
 <tr>
@@ -605,7 +260,7 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_3</td>
+	<td>id=dial_string_5</td>
 	<td></td>
 </tr>
 <tr>
@@ -625,7 +280,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=name_2</td>
+	<td>id=name_4</td>
 	<td></td>
 </tr>
 <tr>
@@ -640,7 +295,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/lcrs/providers_list/2</td>
+	<td>/billing/lcrs/providers_list/5</td>
 	<td></td>
 </tr>
 <tr>
@@ -676,17 +331,17 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//td[@id='privider_rates_3'][@class='n']</td>
+	<td>//td[@id='privider_rates_5'][@class='n']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//td[@id='privider_rates_4'][@class='n_disabled']</td>
+	<td>//td[@id='privider_rates_6'][@class='n_disabled']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//td[@id='privider_rates_5'][@class='n_disabled']</td>
+	<td>//td[@id='privider_rates_7'][@class='n_disabled']</td>
 	<td></td>
 </tr>
 <tr>
@@ -782,7 +437,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/rate_details/503</td>
+	<td>/billing/tariffs/rate_details/603</td>
 	<td></td>
 </tr>
 <tr>
@@ -797,7 +452,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/ratedetail_edit/505</td>
+	<td>/billing/tariffs/ratedetail_edit/579</td>
 	<td></td>
 </tr>
 <tr>
@@ -817,7 +472,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/rate_details/504</td>
+	<td>/billing/tariffs/rate_details/604</td>
 	<td></td>
 </tr>
 <tr>
@@ -832,7 +487,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/ratedetail_edit/506</td>
+	<td>/billing/tariffs/ratedetail_edit/580</td>
 	<td></td>
 </tr>
 <tr>
@@ -852,7 +507,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/lcrs/providers_list/2</td>
+	<td>/billing/lcrs/providers_list/5</td>
 	<td></td>
 </tr>
 <tr>
@@ -867,7 +522,7 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>id=name_2</td>
+	<td>id=name_4</td>
 	<td>active_with_rate</td>
 </tr>
 <tr>
@@ -968,7 +623,7 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_4</td>
+	<td>id=dial_string_6</td>
 	<td></td>
 </tr>
 <tr>
@@ -978,12 +633,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_4</td>
+	<td>id=dial_string_6</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_5</td>
+	<td>id=dial_string_7</td>
 	<td></td>
 </tr>
 <tr>
@@ -993,12 +648,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_5</td>
+	<td>id=dial_string_7</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_3</td>
+	<td>id=dial_string_5</td>
 	<td></td>
 </tr>
 <tr>
@@ -1008,7 +663,7 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_3</td>
+	<td>id=dial_string_5</td>
 	<td></td>
 </tr>
 <!--call_tracing-->
@@ -1084,7 +739,7 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_4</td>
+	<td>id=dial_string_6</td>
 	<td></td>
 </tr>
 <tr>
@@ -1094,12 +749,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_4</td>
+	<td>id=dial_string_6</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_5</td>
+	<td>id=dial_string_7</td>
 	<td></td>
 </tr>
 <tr>
@@ -1109,12 +764,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_5</td>
+	<td>id=dial_string_7</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_3</td>
+	<td>id=dial_string_5</td>
 	<td></td>
 </tr>
 <tr>
@@ -1124,7 +779,7 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_3</td>
+	<td>id=dial_string_5</td>
 	<td></td>
 </tr>
 <!--call_tracing-->
@@ -1200,7 +855,7 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_4</td>
+	<td>id=dial_string_6</td>
 	<td></td>
 </tr>
 <tr>
@@ -1210,12 +865,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_4</td>
+	<td>id=dial_string_6</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_5</td>
+	<td>id=dial_string_7</td>
 	<td></td>
 </tr>
 <tr>
@@ -1225,12 +880,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_5</td>
+	<td>id=dial_string_7</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_3</td>
+	<td>id=dial_string_5</td>
 	<td></td>
 </tr>
 <tr>
@@ -1240,7 +895,7 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_3</td>
+	<td>id=dial_string_5</td>
 	<td></td>
 </tr>
 <!--call_tracing-->
@@ -1316,7 +971,7 @@
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_4</td>
+	<td>id=dial_string_6</td>
 	<td></td>
 </tr>
 <tr>
@@ -1326,12 +981,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_4</td>
+	<td>id=dial_string_6</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_5</td>
+	<td>id=dial_string_7</td>
 	<td></td>
 </tr>
 <tr>
@@ -1341,12 +996,12 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_5</td>
+	<td>id=dial_string_7</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>id=dial_string_3</td>
+	<td>id=dial_string_5</td>
 	<td></td>
 </tr>
 <tr>
@@ -1356,27 +1011,27 @@
 </tr>
 <tr>
 	<td>mouseOut</td>
-	<td>id=dial_string_3</td>
+	<td>id=dial_string_5</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//td[@id='dial_string_4'][@class='n_disabled']</td>
+	<td>//td[@id='dial_string_6'][@class='n_disabled']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//td[@id='dial_string_2'][@class='n']</td>
+	<td>//td[@id='dial_string_4'][@class='n']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//td[@id='dial_string_5'][@class='n_disabled']</td>
+	<td>//td[@id='dial_string_7'][@class='n_disabled']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//td[@id='dial_string_3'][@class='n']</td>
+	<td>//td[@id='dial_string_5'][@class='n']</td>
 	<td></td>
 </tr>
 </tbody></table>

@@ -43,184 +43,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<!--create rspro-->
-<tr>
 	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>user_username</td>
-	<td>rspro</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password_password</td>
-	<td>rspro1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>user_usertype</td>
-	<td>label=reseller</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/ratedetail_edit/1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=ratedetail_rate</td>
-	<td>0.1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Rate detail was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/ratedetail_edit/12</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=ratedetail_rate</td>
-	<td>0.1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Rate detail was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/ratedetail_edit/14</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=ratedetail_rate</td>
-	<td>0.1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Rate detail was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/rates_list/1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Quick add new Rate</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=prefix</td>
-	<td>9340</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=price</td>
-	<td>0.1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Add Rate']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>prefix_503</td>
-	<td>9340</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/user_rates_list/4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate1</td>
-	<td>0.2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate2</td>
-	<td>0.2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate473</td>
-	<td>0.2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate21</td>
-	<td>0.2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate22</td>
-	<td>0.2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate26</td>
-	<td>0.2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate27</td>
-	<td>0.2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=rate28</td>
-	<td>0.2</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=th &gt; input[name=&quot;commit&quot;]</td>
+	<td>/billing/test/load_delta_sql/sql/call_tracing</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td>//body</td>
 	<td></td>
 </tr>
 <tr>
@@ -249,407 +78,42 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
-<!--create tariff to user-->
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tariff_name</td>
-	<td>spectariffre</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>tariff_purpose_user</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/user_rates_list/6</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate1</td>
-	<td>2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate2</td>
-	<td>2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate473</td>
-	<td>2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate24</td>
-	<td>11</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate25</td>
-	<td>11</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate478</td>
-	<td>11</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate21</td>
-	<td>22</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate22</td>
-	<td>22</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Update']</td>
-	<td></td>
-</tr>
-<!--create tariff to provider-->
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tariff_name</td>
-	<td>spectariffpro</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>tariff_purpose_provider</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/rate_new/7?st=A</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate_5</td>
-	<td>2</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/rate_new/7?page=4&amp;st=A</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate_136</td>
-	<td>6</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/rate_new/7?page=5&amp;st=A</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate_11366</td>
-	<td>7</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/rate_new/7?page=7&amp;st=A</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>rate_272</td>
-	<td>8</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<!--create provider-->
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>specpro</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>device[location_id]</td>
-	<td>Default location</td>
-</tr>
-<tr>
-	<td>assertNotText</td>
-	<td>device[location_id]</td>
-	<td>Global</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<!--create lcr-->
-<tr>
-	<td>open</td>
-	<td>/billing/lcrs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>lcr_name</td>
-	<td>speclcr</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<!--set pro to lcr-->
-<tr>
-	<td>open</td>
-	<td>/billing/lcrs/providers_list/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>select_prov</td>
-	<td>label=specpro - SIP/0.0.0.0</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<!--create localization-->
-<tr>
-	<td>open</td>
-	<td>/billing/locations/localization</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Default location</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>SpecRules</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@type='image']</td>
-	<td></td>
-</tr>
-<!--create localization rules-->
-<tr>
-	<td>open</td>
-	<td>/billing/locations/location_rules/3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>destrules</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>cut</td>
-	<td>80</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>add</td>
-	<td>9340</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>minlen</td>
-	<td>9</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>maxlen</td>
-	<td>9</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>tariff</td>
-	<td>label=spectariffre</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>lcr</td>
-	<td>label=speclcr</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>add_location_rule</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/locations/location_rules/3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>destrulesfree</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>cut</td>
-	<td>90</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>add</td>
-	<td>6140</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>minlen</td>
-	<td>9</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>maxlen</td>
-	<td>9</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>add_location_rule</td>
-	<td></td>
-</tr>
-<!--set localization rules-->
-<tr>
-	<td>open</td>
-	<td>/billing/providers/edit/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>device[location_id]</td>
-	<td>label=SpecRules</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<!--resellers user-->
-<tr>
-	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>user_username</td>
-	<td>user_rspro</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password_password</td>
-	<td>user_rspro1</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>user_lcr_id</td>
-	<td>speclcr</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>user_tariff_id</td>
-	<td>Retail - spectariffre</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<!--user device-->
-<tr>
-	<td>open</td>
-	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=7</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>device_description</td>
-	<td>specdevice</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/9</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>device[location_id]</td>
-	<td>label=SpecRules</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
 <!--call trasing-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/566</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ratedetail_rate</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>frame_content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Export</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=checkbox_dump_asfile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=buttonGo</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/functions/call_tracing</td>
@@ -698,12 +162,12 @@
 <tr>
 	<td>assertText</td>
 	<td>add</td>
-	<td>9340</td>
+	<td>3741</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>localized_destination</td>
-	<td>93400017219</td>
+	<td>37410017219</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -718,7 +182,7 @@
 <tr>
 	<td>assertText</td>
 	<td>prefix_7</td>
-	<td>9340</td>
+	<td>37410</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -733,12 +197,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=direction</td>
-	<td>Afghanistan</td>
+	<td>Armenia</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=direction_group</td>
-	<td>Afghanistan</td>
+	<td>Armenia</td>
 </tr>
 <!--call tracing without tariff and lcr-->
 <tr>
@@ -945,9 +409,9 @@
 	<td>Test Reseller (3)</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>id=reseller_user</td>
-	<td>None User Resellers (5)</td>
+	<td>None 102 (15) User Resellers (5)</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1111,7 +575,7 @@
 <tr>
 	<td>type</td>
 	<td>add</td>
-	<td>9340</td>
+	<td>3741</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1217,17 +681,17 @@
 <tr>
 	<td>assertText</td>
 	<td>add</td>
-	<td>9340</td>
+	<td>3741</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>localized_destination</td>
-	<td>93400017219</td>
+	<td>37410017219</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>prefix_7</td>
-	<td>9340</td>
+	<td>37410</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1237,12 +701,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=direction_group</td>
-	<td>Afghanistan</td>
+	<td>Armenia</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=direction</td>
-	<td>Afghanistan</td>
+	<td>Armenia</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -1629,7 +1093,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/lcrs/providers_list/3</td>
+	<td>/billing/lcrs/providers_list/8</td>
 	<td></td>
 </tr>
 <tr>
@@ -1710,7 +1174,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>9340</td>
+	<td>3741</td>
 	<td></td>
 </tr>
 <tr>
@@ -1731,7 +1195,7 @@
 <!--edit rule-->
 <tr>
 	<td>open</td>
-	<td>/billing/locations/location_rule_edit/5</td>
+	<td>/billing/locations/location_rule_edit/12</td>
 	<td></td>
 </tr>
 <tr>
@@ -1812,12 +1276,12 @@
 <tr>
 	<td>assertText</td>
 	<td>add</td>
-	<td>9340</td>
+	<td>3741</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>localized_destination</td>
-	<td>93400017219</td>
+	<td>37410017219</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1832,7 +1296,7 @@
 <tr>
 	<td>assertText</td>
 	<td>prefix_7</td>
-	<td>9340</td>
+	<td>37410</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -2000,7 +1464,7 @@
 <!--delete provider-->
 <tr>
 	<td>open</td>
-	<td>/billing/lcrs/providers_list/3</td>
+	<td>/billing/lcrs/providers_list/8</td>
 	<td></td>
 </tr>
 <tr>
@@ -2073,7 +1537,7 @@
 <!--get lcr from rules-->
 <tr>
 	<td>open</td>
-	<td>/billing/locations/location_rule_edit/5</td>
+	<td>/billing/locations/location_rule_edit/12</td>
 	<td></td>
 </tr>
 <tr>
