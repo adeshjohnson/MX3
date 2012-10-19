@@ -59,7 +59,11 @@ class IvrBlock < ActiveRecord::Base
               Extline.mcreate(context, priority.to_s, "NoOp", "Unknown_Command: #{action.name}_params:_#{action.data1.to_s}|#{action.data2.to_s}", exten, "0")
           end
         when "Set Accountcode"
-          Extline.mcreate(context, priority.to_s, "Set", "MOR_ACC=#{action.data1.to_s}", exten, "0")
+          if (defined?(AST_18) and AST_18.to_i == 1)
+            Extline.mcreate(context, priority.to_s, "Set", "MASTER_CHANNEL(MOR_ACC)=#{action.data1.to_s}", exten, "0")
+          else
+            Extline.mcreate(context, priority.to_s, "Set", "MOR_ACC=#{action.data1.to_s}", exten, "0")
+          end
         when "Mor"
           Extline.mcreate(context, priority.to_s, "mor", "", exten, "0")
         when "Set variable"
