@@ -542,6 +542,91 @@
 	<td>&quot;user_price&quot;=&gt;&quot;13</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/calls_now</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_profit</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_profit</td>
+	<td>5.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_profit</td>
+	<td>45.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_profit</td>
+	<td>45.0000</td>
+</tr>
 </tbody></table>
 </body>
 </html>
