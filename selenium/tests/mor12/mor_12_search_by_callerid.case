@@ -33,10 +33,20 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
+	<td>logged in</td>
 	<td></td>
 </tr>
 <!--SQL-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/various_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/last_calls_stats/update_callerid</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
@@ -79,7 +89,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
+	<td>logged in</td>
 	<td></td>
 </tr>
 <tr>
@@ -88,8 +98,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextNotPresent</td>
+	<td>Caller ID:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Source</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td></td>
 </tr>
 <tr>
@@ -154,7 +174,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>#$%^&amp;*</td>
 </tr>
 <tr>
@@ -169,7 +189,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>sdfgvbhjn</td>
 </tr>
 <tr>
@@ -184,7 +204,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>3</td>
 </tr>
 <tr>
@@ -200,12 +220,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_212</td>
-	<td>37060011221 (37060011221)</td>
+	<td>37060011221 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_248</td>
-	<td>37060011225 (37060011225)</td>
+	<td>37060011225 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -219,7 +239,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>123</td>
 </tr>
 <tr>
@@ -240,16 +260,16 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_260</td>
-	<td>37060011239 (37060011239)</td>
+	<td>37060011239 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_273</td>
-	<td>37060011233 (37060011233)</td>
+	<td>37060011233 (labas)</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>0011</td>
 </tr>
 <tr>
@@ -265,16 +285,16 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_230</td>
-	<td>37060011226 (37060011226)</td>
+	<td>37060011226 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_256</td>
-	<td>37060011226 (37060011226)</td>
+	<td>37060011226 (labas)</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>37060011221</td>
 </tr>
 <tr>
@@ -290,21 +310,21 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_211</td>
-	<td>37060011221 (37060011221)</td>
+	<td>37060011221 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_212</td>
-	<td>37060011221 (37060011221)</td>
+	<td>37060011221 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_213</td>
-	<td>37060011221 (37060011221)</td>
+	<td>37060011221 (labas)</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>370</td>
 </tr>
 <tr>
@@ -325,12 +345,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_235</td>
-	<td>37060011226 (37060011226)</td>
+	<td>37060011226 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_247</td>
-	<td>37060011224 (37060011224)</td>
+	<td>37060011224 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -364,7 +384,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
+	<td>logged in</td>
 	<td></td>
 </tr>
 <tr>
@@ -373,8 +393,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextNotPresent</td>
+	<td>Caller ID:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Source</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td></td>
 </tr>
 <tr>
@@ -439,7 +469,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>#$%^&amp;*</td>
 </tr>
 <tr>
@@ -454,7 +484,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>sdfgvbhjn</td>
 </tr>
 <tr>
@@ -469,7 +499,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>3</td>
 </tr>
 <tr>
@@ -485,21 +515,21 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_24</td>
-	<td>37046246362</td>
+	<td>37046246362 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_237</td>
-	<td>37060011233 (37060011233)</td>
+	<td>37060011233 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_272</td>
-	<td>37060011233 (37060011233)</td>
+	<td>37060011233 (labas)</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>123</td>
 </tr>
 <tr>
@@ -515,26 +545,26 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_242</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_245</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_272</td>
-	<td>37060011233 (37060011233)</td>
+	<td>37060011233 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_277</td>
-	<td>37060011233 (37060011233)</td>
+	<td>37060011233 (labas)</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>230</td>
 </tr>
 <tr>
@@ -550,17 +580,17 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_242</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_243</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_245</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -580,7 +610,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_243</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -594,7 +624,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td></td>
 </tr>
 <tr>
@@ -670,17 +700,17 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_242</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_243</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_245</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -689,7 +719,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>37060011230</td>
 </tr>
 <tr>
@@ -775,17 +805,17 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_242</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_243</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_245</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -809,7 +839,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
+	<td>logged in</td>
 	<td></td>
 </tr>
 <tr>
@@ -818,8 +848,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextNotPresent</td>
+	<td>Caller ID:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Source</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td></td>
 </tr>
 <tr>
@@ -884,7 +924,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>#$%^&amp;*</td>
 </tr>
 <tr>
@@ -899,7 +939,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>sdfgvbhjn</td>
 </tr>
 <tr>
@@ -914,7 +954,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>3</td>
 </tr>
 <tr>
@@ -929,7 +969,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>123</td>
 </tr>
 <tr>
@@ -945,12 +985,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_243</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_273</td>
-	<td>37060011233 (37060011233)</td>
+	<td>37060011233 (labas)</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -970,12 +1010,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_237</td>
-	<td>37060011233 (37060011233)</td>
+	<td>37060011233 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=src_243</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1005,7 +1045,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=src_243</td>
-	<td>37060011230 (37060011230)</td>
+	<td>37060011230 (labas)</td>
 </tr>
 <tr>
 	<td>assertText</td>
