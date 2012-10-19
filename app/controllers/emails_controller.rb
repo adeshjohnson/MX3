@@ -161,8 +161,19 @@ class EmailsController < ApplicationController
     @page_title = _('Send_email') + ": " + @email.name
     @page_icon = "email_go.png"
 
-    @users = User.find(:all, :conditions => ["hidden = 0 AND owner_id = ?", session[:user_id]])
+    default = {
+        :shu => 'true',
+        :sbu => 'true'
+    }
 
+    @options = (( !session[:emails_send_user_list_opt]) ? default : session[:emails_send_user_list_opt])
+
+    default.each { |key, value| @options[key] = params[key] if params[key] }
+
+    @users = User.includes(:address).where(["hidden = ? AND blocked = ?  AND owner_id = ? AND addresses.email != '' AND addresses.id > 0 AND addresses.email IS NOT NULL", @options[:shu].to_s == 'true' ? 1 : 0, @options[:sbu].to_s == 'true' ? 1 : 0, session[:user_id]]).all
+
+    session[:emails_send_user_list_opt] = @options
+    @user_id_max = User.find_by_sql("SELECT MAX(id) AS result FROM users")
     # find selected users and send email to them
     @users_list = []
     to_email = params[:to_be_sent]
@@ -181,6 +192,28 @@ class EmailsController < ApplicationController
     if @users_list.size > 0
       redirect_to :action => 'list'
     end
+  end
+
+  def users_for_send_email
+
+
+    default = {
+        :shu => 'true',
+        :sbu => 'true'
+    }
+
+    @options = (( !session[:emails_send_user_list_opt]) ? default : session[:emails_send_user_list_opt])
+
+    default.each { |key, value| @options[key] = params[key] if params[key] }
+
+    @users = User.includes(:address).where(["hidden = ? AND blocked = ?  AND owner_id = ? AND addresses.email != '' AND addresses.id > 0 AND addresses.email IS NOT NULL", @options[:shu].to_s == 'true' ? 1 : 0, @options[:sbu].to_s == 'true' ? 1 : 0, session[:user_id]]).all
+
+
+    logger.fatal @users.size
+    @user_id_max = User.find_by_sql("SELECT MAX(id) AS result FROM users")
+
+    session[:emails_send_user_list_opt] = @options
+    render :layout=>false
   end
 
 =begin

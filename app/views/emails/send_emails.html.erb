@@ -1,69 +1,49 @@
-<HEAD>
-
-  <SCRIPT LANGUAGE="JavaScript">
-
-      function checkAll(n) {
-          for (i = 0; i <= n; i++) {
-              box = eval("document.emails_form.to_be_sent_" + i);
-              if (box && box.checked == false) {
-                  box.checked = true;
-              }
-          }
-      }
-
-      function uncheckAll(n) {
-          for (i = 0; i <= n; i++) {
-              box = eval("document.emails_form.to_be_sent_" + i);
-              if (box && box.checked == true) {
-                  box.checked = false;
-              }
-          }
-      }
-
-  </script>
-</HEAD>
-
+<table>
+  <tr>
+    <td colspan="2"><%= b_info + _('Showing_users_with_email_only') %></td>
+  </tr>
+  <tr>
+    <td><%= _('Show_Block_Users') %></td>
+    <td>
+      <%= radio_button_tag('sbu', 0, (@options[:sbu].to_s == 'false'), :onclick=>'update_users();') %> <%= _('No') %>
+      <%= radio_button_tag('sbu', 1, (@options[:sbu].to_s == 'true'), :onclick=>'update_users();') %> <%= _('Yes') %>
+    </td>
+  </tr>
+  <tr>
+    <td><%= _('Show_Hidden_Users') %></td>
+    <td>
+      <%= radio_button_tag('shu', 0, (@options[:shu].to_s == 'false'), :onclick=>'update_users();') %> <%= _('No') %>
+      <%= radio_button_tag('shu', 1, (@options[:shu].to_s == 'true'), :onclick=>'update_users();') %> <%= _('Yes') %>
+    </td>
+  </tr>
+</table>
+<br />
+<br />
+<br />
 <%= form_tag({:action => 'send_emails', :id => @email.id}, :name => "emails_form") %>
-<% user_id_max = User.find_by_sql("SELECT MAX(id) AS result FROM users") %>
 
-<div align="center">
-  <table width="100%" class="maintable">
-    <tr>
-      <th align="left" width="5%" nowrap>
-        <input type=button value=<%= _('All') %> onClick= <%= "checkAll(" + user_id_max[0]["result"].to_s + ")" %>>
-        <input type=button value=<%= _('None') %> onClick=<%= "uncheckAll(" + user_id_max[0]["result"].to_s + ")" %>>
-        <br/>
-      </th>
-      <th align="left">        <%= _('Username') %>    </th>
-      <th align="left">        <%= _('Usertype') %>    </th>
-      <th align="left">        <%= _('User') %>    </th>
-      <th align="left">        <%= _('Email') %>    </th>
-    </tr>
-
-    <% i = 0 %>
-
-    <% for @user in @users %>
-        <tr class="row<%= (i % 2 + 1).to_s %>">
-          <td id="tobesent_<%= @user.id %>" align="center">
-            <%= check_box("to_be_sent", @user.id, {}, "yes", "no") if @user.address and @user.address.email and @user.address.email.length > 0 %>
-            <%= b_cross if not @user.address or @user.address.email.to_s.length == 0 %>
-          </td>
-          <td id="username_<%= @user.id %>" align="left"> <%= @user.username %>                        </td>
-          <td id="usertype_<%= @user.id %>" align="left"> <%= @user.usertype %>                        </td>
-          <td id="firstname_<%= @user.id %>" align="left"> <%= @user.first_name + " " + @user.last_name %>                      </td>
-          <td id="email_<%= @user.id %>" align="left"> <%= @user.address.email if @user.address %>                        </td>
-        </tr>
-        <% i += 1 %>
-    <% end %>
-
-  </table>
+<div align="center" id='users_list'>
+  <%= render :partial => 'send_emails_users_list' %>
 </div>
 <br/>
-
 <%= submit_tag _('Send'), :disable_with => _('Processing..') %>
-
-
 <br/>
 <br/>
 
+<script type="text/javascript">
+    // <![CDATA[
+    function update_users() {
+        new Ajax.Updater('users_list', '<%=Web_Dir%>/emails/users_for_send_email?sbu=' + $('sbu_1').checked + '&shu=' + $('shu_1').checked, {
+            method:'post',
+            asynchronous:true,
+            evalScripts:true,
+            onComplete:function (request) {
+                Element.hide('spinner');
+               },
+            onLoading:function (request) {
+                Element.show('spinner');
+               }});
+    }
+    // ]]>
+</script>
 
