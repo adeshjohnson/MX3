@@ -19,6 +19,36 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/last_calls_stats/update_callerid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
 	<td>accountant</td>
 </tr>
 <tr>
@@ -34,6 +64,16 @@
 <tr>
 	<td>open</td>
 	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Caller ID:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Source</td>
 	<td></td>
 </tr>
 <tr>
@@ -212,9 +252,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
-	<td>s_device</td>
-	<td>All,IAX2/prov1,IAX2/101,IAX2/1002,IAX2/103,IAX2/104,IAX2/105</td>
+	<td>waitForText</td>
+	<td>id=s_device</td>
+	<td>All IAX2/prov1 IAX2/101 IAX2/1002 IAX2/103 IAX2/104 IAX2/105</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -694,13 +734,13 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td></td>
 </tr>
 <!--Filter is "Like YOUR_DATA" so we can use % _-->
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>370%</td>
 </tr>
 <tr>
@@ -720,7 +760,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>370</td>
 </tr>
 <tr>
@@ -735,7 +775,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>%6362</td>
 </tr>
 <tr>
@@ -755,7 +795,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>362</td>
 </tr>
 <tr>
@@ -768,9 +808,9 @@
 	<td>Total calls: 14</td>
 	<td></td>
 </tr>
-<tr>
+<!--<tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>%T_st%</td>
 </tr>
 <tr>
@@ -792,7 +832,7 @@
 	<td>assertTextPresent</td>
 	<td>37046246362 (Test)</td>
 	<td></td>
-</tr>
+</tr>-->
 <!--Verify that we are getting expected results when callerid filter is combined with other filters-->
 <tr>
 	<td>select</td>
@@ -811,7 +851,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>37046246362 (Test)</td>
+	<td>37046246362 (labas)</td>
 	<td></td>
 </tr>
 <tr>
@@ -856,7 +896,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>37046246362 (Test)</td>
+	<td>37046246362 (labas)</td>
 	<td></td>
 </tr>
 <tr>
@@ -896,7 +936,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=s_caller_id</td>
+	<td>id=s_source</td>
 	<td>370%</td>
 </tr>
 <tr>
