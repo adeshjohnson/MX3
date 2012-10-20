@@ -51,7 +51,30 @@ class LocationsController < ApplicationController
     cond = ["dids.id > 0"]
     var = []
     cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller'
-    @dids = Did.find(:all, :include => [:user, :device, :provider, :dialplan], :conditions => [cond.join(" AND ")].concat(var), :order => "dids.did ASC")
+    @dids = Did.where([cond.join(" AND ")].concat(var)).limit(1).all
+  end
+
+=begin
+Called from views location_rules and location_rule_edit, to update DID list from DB on every input change.
+=end
+  def get_did_map
+    output = []
+    if params[:did_livesearch].to_s != ""
+      @did_str = params[:did_livesearch].to_s
+      cond = ["dids.id > 0"]
+      var = []
+      cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller'
+      if @did_str.to_s != ""
+        cond << "did LIKE ?" and var << @did_str + '%'
+      end
+      output << "<option value='-1'></option>"
+      output << Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC").limit(20).map { |d| ["<option value='"+d.id.to_s+"' style='padding-left:6px;font-weight: normal;'>"+d.did+"</option>"] }
+      @total_dids = Did.where([cond.join(" AND ")].concat(var)).count - Did.where([cond.join(" AND ")].concat(var)).limit(20).count
+      if @total_dids > 0
+        output << "<option value='-2' style='padding-left:6px;font-size:10px;background-color:rgb(187, 187, 187);font-weight: normal;'>"+ _('Found') + " " + @total_dids.to_s + " " + _('more') +"</option>"
+      end
+    end
+    render :text => output.join
   end
 
 =begin
@@ -78,7 +101,8 @@ in before filter : rule (:find_location_rule)
     cond = ["dids.id > 0"]
     var = []
     cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller'
-    @dids = Did.find(:all, :include => [:user, :device, :provider, :dialplan], :conditions => [cond.join(" AND ")].concat(var), :order => "dids.did ASC")
+    @dids = Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC").limit(1).all
+    @did_of_rule = Did.where("id = ?", @rule.did_id).first
   end
 
 =begin
@@ -96,7 +120,8 @@ in before filter : rule (:find_location_rule)
     @rule.maxlen = params[:maxlen] if !params[:maxlen].blank?
     @rule.tariff_id = params[:tariff] if params[:tariff]
     @rule.lcr_id = params[:lcr] if params[:lcr]
-    @rule.did_id = params[:did] if params[:did]
+    @did = Did.where("did LIKE ?", params[:did].to_s).first if params[:did]
+    @rule.did_id = @did ? @did.id : ""
     @rule.device_id = params[:s_device] ? params[:s_device] : (params[:device_id_from_js] if params[:device_id_from_js])
     @rule.save ? flash[:status] = _('Rule_updated') : flash_errors_for(_('Rule_not_updated'), @rule)
     redirect_to :action => 'location_rules', :id => @rule.location_id
@@ -135,7 +160,8 @@ in before filter : rule (:find_location_rule)
     rule.maxlen = params[:maxlen] if !params[:maxlen].blank?
     rule.tariff_id = params[:tariff] if params[:tariff]
     rule.lcr_id = params[:lcr] if params[:lcr]
-    rule.did_id = params[:did] if params[:did]
+    @did = Did.where("did LIKE ?", params[:did].to_s).first if params[:did]
+    rule.did_id = @did.id if @did
     rule.device_id = params[:device_id_from_js] if params[:device_id_from_js] and params[:device_id_from_js].to_i > 0
     if rule.save
       flash[:status] = _('Rule_added')

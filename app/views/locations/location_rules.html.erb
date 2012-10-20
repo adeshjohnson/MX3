@@ -104,12 +104,8 @@
                 </th>
 
                 <th align="left">
-                  <select name="did" <%= "disabled" if @dids.size < 1 %> >
-                    <option value="<%= nil %>"><%= " " %> </option>
-                    <% for did in @dids %>
-                        <option value="<%= did.id %>"><%= nice_did_with_dialplan(did) %> </option>
-                    <% end %>
-                  </select>
+                    <input type="text" size="30" id="did_livesearch" name="did" <%= "disabled" if @dids.size < 1 %> />
+                    <div id="did_list" style='max-height:150px; overflow-y:auto;float:left;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></div>
                 </th>
             <% end %>
             <th align="left">
@@ -289,3 +285,29 @@
 <% end %>
 
 <br/><br/>
+
+<!-- JS code for DID select -->
+<script type="text/javascript">
+    Event.observe(window, 'load',  function() {
+        Event.observe($('did_livesearch'), 'keyup', function(){
+            <%=raw remote_function(:update => 'did_list',:url => {:action => :get_did_map }, :with => "'did_livesearch='+$('did_livesearch').value") %>
+        });
+        Event.observe($('did_list'), 'mouseover', function(){
+            var el = document.getElementById('did_list').getElementsByTagName('option');
+            for(var i=0;i<el.length;i++){
+                el[i].onclick=function(){
+                    if (this.value != -2) {
+                        document.getElementById('did_livesearch').value = this.text
+                    <%=raw remote_function(:update => 'did_list',:url => {:action => :get_did_map }, :with => "'did_livesearch='") %>
+                    }
+                }
+                el[i].onmouseover=function(){
+                    this.style.backgroundColor="#BBBBBB";
+                }
+                el[i].onmouseout=function(){
+                    this.style.backgroundColor="rgb(255, 255, 255)";
+                }
+            }
+        });
+    });
+</script>
