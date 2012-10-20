@@ -740,7 +740,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>[ivr_block1] exten =&gt; s,14,Set(MOR_ACC=2)</td>
+	<td>[ivr_block1] exten =&gt; s,14,Set(MASTER_CHANNEL(MOR_ACC)=2)</td>
 	<td></td>
 </tr>
 <!--...Check if works when values are changed-->
@@ -1061,7 +1061,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>[ivr_block1] exten =&gt; s,14,Set(MOR_ACC=5)</td>
+	<td>[ivr_block1] exten =&gt; s,14,Set(MASTER_CHANNEL(MOR_ACC)=5)</td>
 	<td></td>
 </tr>
 </tbody></table>
