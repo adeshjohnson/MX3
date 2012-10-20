@@ -71,7 +71,7 @@ Called from views location_rules and location_rule_edit, to update DID list from
       output << Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC").limit(20).map { |d| ["<option value='"+d.id.to_s+"' style='padding-left:6px;font-weight: normal;'>"+d.did+"</option>"] }
       @total_dids = Did.where([cond.join(" AND ")].concat(var)).count - Did.where([cond.join(" AND ")].concat(var)).limit(20).count
       if @total_dids > 0
-        output << "<option value='-2' style='padding-left:6px;font-size:10px;background-color:rgb(187, 187, 187);font-weight: normal;'>"+ _('Found') + " " + @total_dids.to_s + " " + _('more') +"</option>"
+        output << "<option value='-2' style='padding-left:6px;font-size:10px;font-weight: normal;'>"+ _('Found') + " " + @total_dids.to_s + " " + _('more') +"</option>"
       end
     end
     render :text => output.join
