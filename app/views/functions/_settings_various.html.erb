@@ -35,6 +35,24 @@
     </td>
   </tr>
   <tr>
+    <td></td>
+    <td><b><%= _('Show_advanced_Device_settings') %>:</b></td>
+    <td>
+      <% device_settings_status = Confline.get_value("Show_advanced_Device_settings", session[:user_id]).to_i %>
+      <%= radio_button_tag('device_settings', '0', (device_settings_status == 0)) %> No
+      <%= radio_button_tag('device_settings', '1', (device_settings_status == 1)) %> Yes
+    </td>
+  </tr>
+ <tr>
+    <td></td>
+    <td><b><%= _('Show_advanced_Provider_settings') %>:</b></td>
+    <td>
+      <% provider_settings_status = Confline.get_value("Show_advanced_Provider_settings", session[:user_id]).to_i %>
+      <%= radio_button_tag('provider_settings', '0', (provider_settings_status == 0)) %> No
+      <%= radio_button_tag('provider_settings', '1', (provider_settings_status == 1)) %> Yes
+    </td>
+  </tr>
+  <tr>
     <td width="30"></td>
     <td><b><%= _('User_Wholesale_Enabled') %>:</b></td>
     <td><%= check_box_tag 'user_wholesale_enabled', "1", Confline.get_value("User_Wholesale_Enabled").to_i == 1 %></td>

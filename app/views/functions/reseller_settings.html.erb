@@ -101,7 +101,27 @@
           <td><b><%= _('CSV_Decimal') %>:</b></td>
           <td><%= text_field_tag('csv_decimal', Confline.get_value("CSV_Decimal", @user_id), "class" => "input", :size => "10", :maxlength => "50") %></td>
         </tr>
+	<tr>
+	  <td></td>
+          <td><b><%= _('Show_advanced_Device_settings') %>:</b></td>
+          <td>
+          <% device_settings_status = Confline.get_value("Show_advanced_Device_settings", session[:user_id]).to_i %>
+          <%= radio_button_tag('device_settings', '0', (device_settings_status == 0)) %> No
+          <%= radio_button_tag('device_settings', '1', (device_settings_status == 1)) %> Yes
+          </td>
+        </tr>
+      <% if current_user.own_providers.to_i == 1  %>
         <tr>
+	    <td></td>
+	    <td><b><%= _('Show_advanced_Provider_settings') %>:</b></td>
+	    <td>
+	      <% provider_settings_status = Confline.get_value("Show_advanced_Provider_settings", session[:user_id]).to_i %>
+	      <%= radio_button_tag('provider_settings', '0', (provider_settings_status == 0)) %> No
+	      <%= radio_button_tag('provider_settings', '1', (provider_settings_status == 1)) %> Yes
+	    </td>
+        </tr>
+      <% end %>
+	<tr>
           <td width="30"></td>
           <td><b><%= _('Show_Rates_without_Tax') %>: </b></td>
           <td><%= check_box_tag 'show_rates_without_tax', "1", Confline.get_value("Show_Rates_Without_Tax", session[:user_id]).to_i == 1 %></td>

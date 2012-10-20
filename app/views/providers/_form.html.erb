@@ -365,7 +365,7 @@
       </td>
     </tr>
 
-    <!--
+    <% if Confline.get_value("Show_advanced_Provider_settings", session[:user_id]).to_i == 1 %>
                     <tr><td height="20"></td></tr>
                     <tr>
                       <td colspan="2" class="bottom_border">
@@ -393,7 +393,7 @@
                       <td>  <%= text_field_tag 'ip3', @ip3, "class" => "input" %>  </td>
                       <td>  <%= text_field_tag 'mask3', @mask3, "class" => "input" %>  </td>
                     </tr>
-          -->
+    <% end %>
 
     <tr>
       <td height="20"></td>

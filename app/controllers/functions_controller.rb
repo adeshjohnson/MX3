@@ -1249,7 +1249,8 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Confline.set_value("Show_rates_for_users", params[:show_rates_for_users].to_i, session[:user_id])
     Confline.set_value("Show_Advanced_Rates_For_Users", params[:show_advanced_rates_for_users].to_i, session[:user_id])
 
-    Confline.set_value("Show_advanced_Device_settings", params[:show_advanced_device_settings].to_i, session[:user_id])
+    Confline.set_value("Show_advanced_Provider_settings", params[:provider_settings].to_i, session[:user_id])
+    Confline.set_value("Show_advanced_Device_settings", params[:device_settings].to_i, session[:user_id])
     Confline.set_value("Hide_payment_options_for_postpaid_users", params[:hide_payment_options_for_postpaid_users].to_i, session[:user_id])
     Confline.set_value("Hide_quick_stats", params[:hide_quick_stats].to_i, session[:user_id])
     Confline.set_value("Hide_HELP_banner", params[:hide_help_banner].to_i, session[:user_id])
@@ -1808,6 +1809,9 @@ Sets default tax values for users or cardgroups
     Confline.set_value("Copyright_Title", params[:reseller_copyright_title], session[:user_id])
     Confline.set_value("Admin_Browser_Title", params[:reseller_admin_browser_title], session[:user_id])
     Confline.set_value2("Frontpage_Text", params[:frontpage_text].to_s, session[:user_id])
+    Confline.set_value("Show_advanced_Provider_settings", params[:provider_settings].to_i, session[:user_id])
+    Confline.set_value("Show_advanced_Device_settings", params[:device_settings].to_i, session[:user_id])
+
     #boolean values
 
     {"Registration_enabled" => :registration_enabled, "Hide_registration_link" => :hide_registration_link, "Show_logo_on_register_page" => :show_logo_on_register_page, "Registration_Enable_VAT_checking" => :enable_vat_checking, "Registration_allow_vat_blank" => :allow_vat_blank}.each { |key, value|
