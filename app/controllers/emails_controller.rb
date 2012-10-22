@@ -170,7 +170,16 @@ class EmailsController < ApplicationController
 
     default.each { |key, value| @options[key] = params[key] if params[key] }
 
-    @users = User.includes(:address).where(["hidden = ? AND blocked = ?  AND owner_id = ? AND addresses.email != '' AND addresses.id > 0 AND addresses.email IS NOT NULL", @options[:shu].to_s == 'true' ? 1 : 0, @options[:sbu].to_s == 'true' ? 1 : 0, session[:user_id]]).all
+    cond = []
+    if @options[:shu].to_s == 'false'
+      cond <<  'hidden = 0'
+    end
+
+    if @options[:shu].to_s == 'false'
+      cond <<  'blocked = 0'
+    end
+
+    @users = User.includes(:address).where(["#{cond.joins(' AND ' )}  AND owner_id = ? AND addresses.email != '' AND addresses.id > 0 AND addresses.email IS NOT NULL", session[:user_id]]).all
 
     session[:emails_send_user_list_opt] = @options
     @user_id_max = User.find_by_sql("SELECT MAX(id) AS result FROM users")
@@ -206,7 +215,17 @@ class EmailsController < ApplicationController
 
     default.each { |key, value| @options[key] = params[key] if params[key] }
 
-    @users = User.includes(:address).where(["hidden = ? AND blocked = ?  AND owner_id = ? AND addresses.email != '' AND addresses.id > 0 AND addresses.email IS NOT NULL", @options[:shu].to_s == 'true' ? 1 : 0, @options[:sbu].to_s == 'true' ? 1 : 0, session[:user_id]]).all
+    cond = []
+    if @options[:shu].to_s == 'false'
+      cond <<  'hidden = 0'
+    end
+
+    if @options[:shu].to_s == 'false'
+      cond <<  'blocked = 0'
+    end
+
+    @users = User.includes(:address).where(["#{cond.joins(' AND ' )}  AND owner_id = ? AND addresses.email != '' AND addresses.id > 0 AND addresses.email IS NOT NULL", session[:user_id]]).all
+
 
 
     logger.fatal @users.size
