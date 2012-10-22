@@ -1593,10 +1593,12 @@ INSERT INTO `lcrs` (`id`, `name`, `order`, `user_id`, `first_provider_percent_li
 (3, 'wrspro_primary_LCR', 'price', 11, 0);
 #Users
 UPDATE `users` SET address_id=1 WHERE id=0;
-UPDATE `users` SET address_id=1 WHERE id=2;
-UPDATE `users` SET address_id=1 WHERE id=7;
-UPDATE `users` SET address_id=1 WHERE id=8;
-UPDATE `users` SET address_id=1 WHERE id=9;
+UPDATE `users` SET address_id=5 WHERE id=2;
+UPDATE `users` SET address_id=7 WHERE id=7;
+UPDATE `users` SET address_id=7 WHERE id=8;
+UPDATE `users` SET address_id=8 WHERE id=9;
+UPDATE `users` SET address_id=8 WHERE id=10;
+UPDATE `users` SET address_id=5 WHERE id=11;
 INSERT INTO `users` (`id`, `username`, `password`, `usertype`, `logged`, `first_name`, `last_name`, `calltime_normative`, `show_in_realtime_stats`, `balance`, `frozen_balance`, `lcr_id`, `postpaid`, `blocked`, `tariff_id`, `month_plan_perc`, `month_plan_updated`, `sales_this_month`, `sales_this_month_planned`, `show_billing_info`, `primary_device_id`, `credit`, `clientid`, `agreement_number`, `agreement_date`, `language`, `taxation_country`, `vat_number`, `vat_percent`, `address_id`, `accounting_number`, `owner_id`, `hidden`, `allow_loss_calls`, `vouchers_disabled_till`, `uniquehash`, `temporary_id`, `send_invoice_types`, `call_limit`,`sms_tariff_id`, `sms_lcr_id`, `sms_service_active`, `cyberplat_active`, `call_center_agent`, `generate_invoice`, `tax_1`, `tax_2`, `tax_3`, `tax_4`, `block_at`, `block_at_conditional`, `block_conditional_use`, `recording_enabled`, `recording_forced_enabled`, `recordings_email`, `recording_hdd_quota`, `warning_email_active`, `warning_email_balance`, `warning_email_sent`, `tax_id`, `invoice_zero_calls`, `acc_group_id`, `hide_destination_end`, `warning_email_hour`, `warning_balance_call`, `warning_balance_sound_file_id`, `own_providers`, `ignore_global_monitorings`, `currency_id`, `quickforwards_rule_id`, `spy_device_id`, `time_zone`, `minimal_charge`, `minimal_charge_start_at`) VALUES
 (6, 'wholesale_accountant', 'b53b9cf265c64f4a8ffce083c0b564e76c470a8e', 'accountant', 0, 'Test', 'Wholesale Accountant', 3, 0, 10, 0, 1, 1, 0, 6, 0, NULL, 0, 0, 1, 9, -1, '876543', '0000000004', '2012-01-20', 'lt', 123, '', 0, 5, '', 0, 0, 0, '2000-01-01 00:00:00', NULL, NULL, 0, 0, NULL, NULL, 0, 0, 0, 1, 0, 0, 0, 0, '2008-01-01', 15, 0, 0, 0, '', 104, 0, 0, 0, 2, 1, 1, -1, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, NULL),
 (7, 'retail_accountant', '0b030d953dd504e78262df95495c65b0f58a980a', 'accountant', 0, 'Test', 'Retail Accountant', 3, 0, 20, 0, 1, 0, 0, 9, 0, NULL, 0, 0, 1, 21, -1, 'rety65432', '0000000005', '2012-01-20', '', 123, '', 0, 6, '', 0, 0, 0, '2000-01-01 00:00:00', NULL, NULL, 0, 0,  NULL, NULL, 0, 0, 0, 1, 0, 0, 0, 0, '2008-01-01', 15, 0, 0, 0, '', 104, 0, 0, 0, 3, 1, 2, -1, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, NULL),
@@ -1696,3 +1698,11 @@ INSERT INTO `voicemail_boxes` (`uniqueid`, `context`, `mailbox`, `password`, `fu
 (38, 'default', '1033', '', 'Test Wholesale wrspro User', '', '', 'central', 'yes', 'yes', '', '', 'no', 'no', 'no', 'no', 1, 'no', 'no', 'yes', 'no', 'no', 'yes', '2012-01-20 19:27:21', 40);
 #tariff to admin
 update users set tariff_id=14 where id=0;
+
+INSERT INTO `addresses` (`id`, `direction_id`, `state`, `county`, `city`, `postcode`, `address`, `phone`, `mob_phone`, `fax`, `email`) VALUES
+(5, 1, '', '', '', '', '', '', '', '', 'test@kolmisoft.com'),
+(6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 1, '', '', '', '', '', '', '', '', 'test@kolmisoft.com'),
+(8, 1, '', '', '', '', '', '', '', '', 'test@kolmisoft.com'),
+(9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
