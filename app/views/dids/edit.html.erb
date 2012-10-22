@@ -307,7 +307,7 @@
           <br/><br/>
 
           <% if calling_cards_active? %>
-              <% if not @ccdps.empty? %>
+              <% if @ccdps and @ccdps.size.to_i > 0 %>
                   <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
                       <b><%= _('Calling_cards_dialplan') %>:</b>
                       <select name="dp_id">
@@ -321,7 +321,7 @@
 
           <% end %>
 
-          <% if not @abpdps.empty? %>
+          <% if @abpdps and @abpdps.size.to_i > 0 %>
               <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
                   <b><%= _('Authorization_by_pin_dialplan') %>:</b>
                   <select name="dp_id">
@@ -334,7 +334,7 @@
           <% end %>
 
 
-          <% if callback_active? and not @cbdps.empty? %>
+          <% if callback_active? and @cbdps and @cbdps.size.to_i > 0 %>
               <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
                   <b><%= _('Callback_dialplan') %>:</b>
                   <select name="dp_id">
@@ -347,7 +347,7 @@
           <% end %>
 
 
-          <% if not @qfddps.empty? %>
+          <% if @qfddps and not @qfddps.empty? %>
               <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
                   <b><%= _('Quick_Forwards_dialplan') %></b>
                   <select name="dp_id">
@@ -361,7 +361,7 @@
           <% end %>
 
 
-          <% if not @pbxfdps.empty? %>
+          <% if @pbxfdps and not @pbxfdps.empty? %>
               <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
                   <b><%= _('PBX_Functions_dialplan') %></b>
                   <select name="dp_id">
@@ -375,7 +375,7 @@
               <br/>
           <% end %>
 
-          <% if @ivrs.size > 0 %>
+          <% if @ivrs and @ivrs.size > 0 %>
               <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
                   <b><%= _('Ivr_Dialplan') %></b>
                   <select name="dp_id">
@@ -388,7 +388,7 @@
               <br/>
           <% end %>
 
-          <% if not @ringdps.empty? %>
+          <% if @ringdps and not @ringdps.empty? %>
               <%= form_tag :action => 'assign_to_dp', :id => @did.id do %>
                   <b><%= _('Ring_Group_dialplan') %></b>
                   <select name="dp_id">

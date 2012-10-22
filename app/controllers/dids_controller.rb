@@ -310,6 +310,8 @@ class DidsController < ApplicationController
     @choice_closed = false
     @choice_terminated = false
 
+    qf_rule_collisions = @did.find_qf_rules.to_i > 0  ? true : false
+
     #DialPlan variables (DID's for dialplan)
     @choice_free_dp = false
     @choice_active_dp = false
@@ -321,7 +323,7 @@ class DidsController < ApplicationController
         @choice_terminated = false
         @choice_free_dp = false
       else
-        @choice_reserved = true
+        @choice_reserved = true    if !qf_rule_collisions
         @choice_terminated = true
         @choice_free_dp = true
       end
@@ -349,11 +351,11 @@ class DidsController < ApplicationController
     end
 
     if @choice_free_dp
-      @ccdps = current_user.dialplans.find(:all, :conditions => "dptype = 'callingcard'", :order => "name ASC")
-      @abpdps = current_user.dialplans.find(:all, :conditions => "dptype = 'authbypin'", :order => "name ASC")
+      @ccdps = current_user.dialplans.find(:all, :conditions => "dptype = 'callingcard'", :order => "name ASC")  if !qf_rule_collisions
+      @abpdps = current_user.dialplans.find(:all, :conditions => "dptype = 'authbypin'", :order => "name ASC")   if !qf_rule_collisions
 
 
-      @cbdps = current_user.dialplans.find(:all, :conditions => "dptype = 'callback' AND data1 != #{@did.id}", :order => "name ASC") if callback_active?
+      @cbdps = current_user.dialplans.find(:all, :conditions => "dptype = 'callback' AND data1 != #{@did.id}", :order => "name ASC") if callback_active?  and !qf_rule_collisions
 
       #if mor_11_extend?
       @qfddps = current_user.dialplans.find(:all, :conditions => "dptype = 'quickforwarddids' AND id != 1", :order => "name ASC")
@@ -361,12 +363,12 @@ class DidsController < ApplicationController
       #  @qfddps = current_user.dialplans.find(:all, :conditions => "dptype = 'quickforwarddids'", :order => "name ASC")
       # end
 
-      @pbxfdps = current_user.dialplans.find(:all, :conditions => "dptype = 'pbxfunction'", :order => "name ASC")
-      @ivrs = current_user.dialplans.find(:all, :conditions => "dptype = 'ivr'", :order => "name ASC")
+      @pbxfdps = current_user.dialplans.find(:all, :conditions => "dptype = 'pbxfunction'", :order => "name ASC") if !qf_rule_collisions
+      @ivrs = current_user.dialplans.find(:all, :conditions => "dptype = 'ivr'", :order => "name ASC")  if !qf_rule_collisions
 
-      @vm_extension = Confline.get_value("VM_Retrieve_Extension", 0)
+      @vm_extension = Confline.get_value("VM_Retrieve_Extension", 0)  if !qf_rule_collisions
 
-      @ringdps = current_user.dialplans.find(:all, :conditions => "dptype = 'ringgroup'", :order => "name ASC")
+      @ringdps = current_user.dialplans.find(:all, :conditions => "dptype = 'ringgroup'", :order => "name ASC") if !qf_rule_collisions
     end
 
     @tone_zones = ['at', 'au', 'be', 'br', 'ch', 'cl', 'cn', 'cz', 'de', 'dk', 'ee', 'es', 'fi', 'fr', 'gr', 'hu', 'it', 'lt', 'mx', 'ml', 'no', 'nz', 'pl', 'pt', 'ru', 'se', 'sg', 'uk', 'us', 'us-old', 'tw', 've', 'za']
@@ -497,10 +499,13 @@ class DidsController < ApplicationController
 
     #check if not assigned to reseller and user not reseller or user is reseller and did assigned to reseller
     if status == "reserved" and ((did.reseller_id == 0 and !reseller?) or (reseller? and did.reseller_id != 0))
-      did.reserve(params[:user_id])
+      if did.reserve(params[:user_id])
       extlines_did_not_active(did.id)
       add_action2(session[:user_id], 'did_reserved', did.id, params[:user_id])
       flash[:status] = _('DID_reserved')
+      else
+        flash_errors_for(_('Did_was_not_updated'), did)
+      end
     end
 
     if status == "terminated"
@@ -538,14 +543,19 @@ class DidsController < ApplicationController
         end
       end
 
-      flash[:status] = _('Did_assigned_to_dp') + ": " + dp.name
+
 
       did.status = "active"
-      did.save
-      add_action2(session[:user_id], 'did_assigned_to_dp', did.id, dp.id)
+      if did.save
+        flash[:status] = _('Did_assigned_to_dp') + ": " + dp.name
+        add_action2(session[:user_id], 'did_assigned_to_dp', did.id, dp.id)
+      else
+        flash_errors_for(_('Did_was_not_updated'), did)
+      end
       redirect_to :action => 'edit', :id => did.id
 
     else
+      bad_num = 0
       find_dids # finds @dids ant sets @opts (additional request params)
       if params[:dp_id].to_i > 0
         dp = Dialplan.find_by_id(params[:dp_id])
@@ -559,9 +569,13 @@ class DidsController < ApplicationController
           di.dialplan_id = dp.id
         end
         di.status = "active"
-        di.save
+         if di.save
         add_action2(session[:user_id], 'did_assigned_to_dp', di.id, dp.id)
+         else
+           bad_num += 1
+        end
       end
+      flash[:notice] = [bad_num.to_s, _('DIDs_were_not_updated')].join(" ") if  bad_num.to_i > 0
       flash[:status]=_('Dids_interval_assigned_to_dialplan')
       redirect_to({:action => 'dids_interval_assign_dialplan'}.merge(@opts)) and return false
     end
@@ -896,16 +910,25 @@ ORDER BY dids.did ASC"
           redirect_to({:action => 'dids_interval_add_to_user'}.merge(@opts)) and return false
         end
       end
+
+      num = ActiveRecord::Base.connection.select_value("select COUNT(dids.id) from dids left join quickforwards_rules on ( did REGEXP(rule_regexp)) where  quickforwards_rules.id is null AND #{ActiveRecord::Base.send(:sanitize_sql_array,[cond.join(' AND '), *var])} ;")
+      bad_num = ActiveRecord::Base.connection.select_value("select COUNT(dids.id) from dids left join quickforwards_rules on ( did REGEXP(rule_regexp)) where  quickforwards_rules.id is NOT null AND #{ActiveRecord::Base.send(:sanitize_sql_array,[cond.join(' AND '), *var])} ;")
       if @s_device
-        num = Did.update_all("user_id = #{@s_user.id}, device_id = #{@s_device.id}, status = 'active'", [cond.join(" AND "), *var])
+
+        ActiveRecord::Base.connection.execute("UPDATE dids, ( select dids.id from dids left join quickforwards_rules on ( did REGEXP(rule_regexp)) where  quickforwards_rules.id is null) as v SET dids.user_id = #{@s_user.id}, device_id = #{@s_device.id}, status = 'active' where dids.id = v.id AND #{ ActiveRecord::Base.send(:sanitize_sql_array,[cond.join(' AND '), *var])} ;")
       else
         if @s_user.usertype=='reseller'
-          num = Did.update_all("reseller_id = #{@s_user.id}, user_id = 0, device_id = 0, status = 'free'", [cond.join(" AND "), *var])
+         # num = ActiveRecord::Base.connection.select_value("select COUNT(dids.id) from dids left join quickforwards_rules on ( did REGEXP(rule_regexp)) where  quickforwards_rules.id is null AND #{ ActiveRecord::Base.sanitize_sql_array([cond.join(' AND '), *var])} ;")
+          ActiveRecord::Base.connection.execute("UPDATE dids, ( select dids.id from dids left join quickforwards_rules on ( did REGEXP(rule_regexp)) where  quickforwards_rules.id is null) as v SET reseller_id = #{@s_user.id}, dids.user_id = 0, device_id = 0, status = 'free' where dids.id = v.id AND #{ ActiveRecord::Base.send(:sanitize_sql_array,[cond.join(' AND '), *var])} ;")
+       #   num = Did.update_all("reseller_id = #{@s_user.id}, user_id = 0, device_id = 0, status = 'free'", [cond.join(" AND "), *var])
         else
-          num = Did.update_all("user_id = #{@s_user.id}, device_id = 0, status = 'reserved'", [cond.join(" AND "), *var])
+         # num = ActiveRecord::Base.connection.select_value("select COUNT(dids.id) from dids left join quickforwards_rules on ( did REGEXP(rule_regexp)) where  quickforwards_rules.id is null AND #{ ActiveRecord::Base.sanitize_sql_array([cond.join(' AND '), *var])} ;")
+          ActiveRecord::Base.connection.execute("UPDATE dids, ( select dids.id from dids left join quickforwards_rules on ( did REGEXP(rule_regexp)) where  quickforwards_rules.id is null) as v SET dids.user_id = #{@s_user.id}, device_id = 0, status = 'reserved' where dids.id = v.id AND #{ ActiveRecord::Base.send(:sanitize_sql_array,[cond.join(' AND '), *var])} ;")
+         # num = Did.update_all("user_id = #{@s_user.id}, device_id = 0, status = 'reserved'", [cond.join(" AND "), *var])
         end
 
       end
+      flash[:notice] = [bad_num.to_s, _('DIDs_were_not_updated')].join(" ")
       flash[:status] = [num.to_s, _('DIDs_were_updated')].join(" ")
       redirect_to({:action => 'list'}) and return false
     else

@@ -15,7 +15,7 @@ class Did < ActiveRecord::Base
   validates_format_of :did, :with => /^\d+$/, :message => _('DID_must_consist_only_of_digits'), :on => :create
 
   before_create :validate_provider
-  before_save :validate_device, :validate_user
+  before_save :validate_device, :validate_user, :check_collisions_with_qf_rules
   before_destroy :find_if_used_in_calls
 
   def validate_provider
@@ -267,6 +267,27 @@ class Did < ActiveRecord::Base
 =end
   def cc_tariff_id=(value)
     write_attribute(:cc_tariff_id, value.to_i)
+  end
+
+  def check_collisions_with_qf_rules
+    if self.find_collisions_with_qf_rules
+      errors.add(:prefix,_('Collisions_with_Quickforwards_Rules'))
+      return false
+    end
+  end
+
+
+  def find_collisions_with_qf_rules
+    dids = self.find_qf_rules
+    if dids.to_i > 0  and (self.dialplan and self.dialplan.dptype != 'quickforwarddids' or self.status == 'reserved')
+      return true
+    else
+      return false
+    end
+  end
+
+  def find_qf_rules
+    QuickforwardsRule.where("#{did} REGEXP(rule_regexp)").all.count
   end
 
 end

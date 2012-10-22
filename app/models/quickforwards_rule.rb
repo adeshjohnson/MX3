@@ -5,9 +5,10 @@ class QuickforwardsRule < ActiveRecord::Base
 
   validates_presence_of :name, :message => _('Name_cannot_be_blank')
   #validates_presence_of :rule_regexp, :message=> _('Regexp_cannot_be_blank')
-  before_save :check_prefix_regexp
 
   before_create :q_before_create
+
+  before_save :check_prefix_regexp , :check_collisions_with_dids
 
   def q_before_create
     self.user_id = User.current.id
@@ -37,6 +38,24 @@ class QuickforwardsRule < ActiveRecord::Base
       errors.add(:prefix,_('Invalid_regexp'))
       return false
     end
+
+    self.q_before_create if self.new_record?
   end
+
+  def check_collisions_with_dids
+    if rule_regexp.blank?
+      regexp = '$'
+    else
+      regexp = rule_regexp.delete('%')
+    end
+
+    dids = Did.includes(:dialplan).where("dids.did REGEXP('^(#{regexp})') AND (dialplans.dptype != 'quickforwarddids' OR dialplans.id IS NULL OR status = 'reserved')")
+    if dids and dids.size.to_i > 0
+      errors.add(:prefix,_('Collisions_with_Dids'))
+      return false
+    end
+
+  end
+
 
 end
