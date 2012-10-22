@@ -500,7 +500,7 @@ class AutodialerController < ApplicationController
     end
 
     if params[:test].to_i == 1
-      render :text => (["Filename: #{filename}"] + csv_string).join("\n")
+      render :text => csv_string.join("\n")
     else
       send_data(csv_string.join("\n"), :type => 'text/csv; charset=utf-8; header=present', :filename => 'Campaign_call_data.csv')
     end
