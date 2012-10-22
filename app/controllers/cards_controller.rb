@@ -308,7 +308,7 @@ class CardsController < ApplicationController
     @card.balance += real_amount
 
     if @card.save 
-      Payment.add_for_card(@card, amount, currency, current_user.id, params[:description])
+      Payment.add_for_card(@card, amount, currency, current_user.get_corrected_owner_id, params[:description])
       flash[:status] = _('Payment_added') 
     else 
       flash_errors_for(_('Payment_was_not_added'), @card) 
@@ -697,7 +697,7 @@ class CardsController < ApplicationController
       flash[:notice] = _("Card_is_already_sold")
       redirect_to(:action => :card_pay, :id => @card.id, :cg => @cg.id) and return false
     end
-    unless @card.sell(session[:default_currency], current_user.id, params[:description])
+    unless @card.sell(session[:default_currency], current_user.get_corrected_owner_id, params[:description])
       flash_errors_for(_('Can_not_sell_invalid_card'), @card) 
       redirect_to :action => 'list', :cg => @cg and return false 
     end 

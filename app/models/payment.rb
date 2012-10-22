@@ -4,7 +4,7 @@ class Payment < ActiveRecord::Base
   belongs_to :provider
   has_many :cc_invoices
 
-  after_create { |record| Action.add_action_hash(User.current, {:action => 'manual_payment_created', :data => record.user_id, :data2 => record.amount, :data3 => record.currency, :target_id => record.id, :target_type => 'Payment'}) if record.paymenttype.to_s == 'manual' }
+  after_create { |record| Action.add_action_hash(User.current, {:action => record.paymenttype.to_s == 'manual' ? 'manual_payment_created' : 'card_payment_created', :data => record.user_id, :data2 => record.amount, :data3 => record.currency, :target_id => record.id, :target_type => 'Payment'}) if record.paymenttype.to_s == 'manual' or record.paymenttype.to_s == 'Card' }
 
   after_destroy { |record| Action.add_action_hash(User.current, {:action=>'manual_payment_deleted', :data=>record.user_id, :data2=>record.amount, :data3=>record.currency, :target_id=>record.id, :target_type=>'Payment'}) if record.paymenttype.to_s == 'manual' }
 
@@ -110,7 +110,7 @@ class Payment < ActiveRecord::Base
   end
 
   def Payment.add_for_card(card, amount, currency = nil, owner_id = nil, description='')
-    logger.fatal description
+    #logger.fatal description
     Payment.add_global({:paymenttype=>'Card', :tax => card.cardgroup.get_tax.count_tax_amount(amount), :currency => currency ? currency : card.cardgroup.tell_balance_in_currency, :user_id=>card.id, :card=>1, :amount=>amount, :owner_id => owner_id ? owner_id : card.cardgroup.owner_id, :description=>description})
   end
 
