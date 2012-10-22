@@ -42,9 +42,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>did</td>
-	<td>37063042438 - free 37093042422 - reserved</td>
+	<td>focus</td>
+	<td>id=did_livesearch</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>id=did_livesearch</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=did_livesearch</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.8</td>
+	<td>3706304243837093042422</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -77,13 +97,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>click</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -97,14 +112,34 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//th[9]</td>
-	<td>Route to DID</td>
+	<td>focus</td>
+	<td>id=did_livesearch</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>id=did_livesearch</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=did_livesearch</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.8</td>
+	<td>3706001234537060012346370600123473706001234837060012349370600123503706304243837093042422</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>did</td>
-	<td>37060012345 - free 37060012346 - free 37060012347 - free 37060012348 - free 37060012349 - free 37060012350 - free 37063042438 - free 37093042422 - reserved</td>
+	<td>//th[9]</td>
+	<td>Route to DID</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -142,9 +177,9 @@
 	<td>label=Primary</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>did</td>
-	<td>label=37060012349 - free</td>
+	<td>type</td>
+	<td>id=did_livesearch</td>
+	<td>37060012349</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -197,14 +232,34 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>did</td>
-	<td>37060012345 - free 37060012346 - free 37060012347 - free 37060012348 - free 37060012349 - free 37060012350 - free 37063042438 - free 37093042422 - reserved</td>
+	<td>focus</td>
+	<td>id=did_livesearch</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>did</td>
-	<td>label=37093042422 - reserved</td>
+	<td>typeKeys</td>
+	<td>id=did_livesearch</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=did_livesearch</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.8</td>
+	<td>3706001234537060012346370600123473706001234837060012349370600123503706304243837093042422</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_livesearch</td>
+	<td>37093042422</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -247,9 +302,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
-	<td>did</td>
-	<td>37093042422 - reserved</td>
+	<td>assertValue</td>
+	<td>id=did_livesearch</td>
+	<td>37093042422</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -307,9 +362,9 @@
 	<td>15</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>did</td>
-	<td>label=37060012348 - free</td>
+	<td>type</td>
+	<td>id=did_livesearch</td>
+	<td>37060012348</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -357,9 +412,9 @@
 	<td>label=Primary</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>did</td>
-	<td>label=37060012349 - free</td>
+	<td>type</td>
+	<td>id=did_livesearch</td>
+	<td>37060012349</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -378,27 +433,27 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>dialplan[name]</td>
+	<td>id=name_1</td>
 	<td>CCDP</td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>dialplan[data7]</td>
+	<td>id=dialplan_data_7</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>dialplan_data_8</td>
+	<td>id=dialplan_data_8</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>dialplan[data3]</td>
+	<td>id=dialplan_data_3</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
-	<td>dialplan[data4]</td>
+	<td>id=dialplan_data_4</td>
 	<td></td>
 </tr>
 <tr>
@@ -423,6 +478,36 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>37060012351</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>37060012380</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/locations/location_rule_edit/1</td>
 	<td></td>
 </tr>
@@ -432,19 +517,174 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
-	<td>did</td>
-	<td>37093042422 - reserved</td>
+	<td>assertValue</td>
+	<td>id=did_livesearch</td>
+	<td>37093042422</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>did</td>
-	<td>label=37060012345 - active - CCDP</td>
+	<td>type</td>
+	<td>id=did_livesearch</td>
+	<td>37060012345</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
-	<td>did</td>
-	<td>37060012345 - active - CCDP</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=did_livesearch</td>
+	<td>37060012345</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>id=did_livesearch</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>id=did_livesearch</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=did_livesearch</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=option[value=&quot;18&quot;]</td>
+	<td>37060012360</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=option[value=&quot;-2&quot;]</td>
+	<td>Found 18 more</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>id=did_livesearch</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>id=did_livesearch</td>
+	<td>3706001238</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=did_livesearch</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=option[value=&quot;38&quot;]</td>
+	<td>37060012380</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Found 13 more</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060012360</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>id=did_livesearch</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_livesearch</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=did_livesearch</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=option[value=&quot;15&quot;]</td>
+	<td>37060012357</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=option[value=&quot;-2&quot;]</td>
+	<td>Found 18 more</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>id=did_livesearch</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>id=did_livesearch</td>
+	<td>3706001238</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=did_livesearch</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=option[value=&quot;38&quot;]</td>
+	<td>37060012380</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Found 13 more</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>37060012360</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
