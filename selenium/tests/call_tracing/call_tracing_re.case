@@ -374,19 +374,9 @@
 	<td>label=Test Reseller (3)</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=user</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>id=user</td>
-	<td>blur</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=user</td>
-	<td>Test Reseller (3)</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -399,27 +389,12 @@
 	<td>label=rspro (6)</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=user</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
-	<td>fireEvent</td>
-	<td>id=user</td>
-	<td>blur</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=user</td>
-	<td>rspro (6)</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=reseller_user</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>id=reseller_user</td>
 	<td>None user_rspro (7)</td>
 </tr>
