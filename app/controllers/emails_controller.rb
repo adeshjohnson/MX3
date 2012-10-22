@@ -179,7 +179,7 @@ class EmailsController < ApplicationController
       cond <<  'blocked = 0'
     end
 
-    @users = User.includes(:address).where(["#{cond.join(' AND ' )}  AND owner_id = ? AND addresses.email != '' AND addresses.id > 0 AND addresses.email IS NOT NULL", session[:user_id]]).all
+    @users = User.includes(:address).where(["owner_id = ? AND addresses.email != '' AND addresses.id > 0 AND addresses.email IS NOT NULL #{cond.size.to_i > 0 ? ' AND ' : ''} #{cond.join(' AND ' )}", session[:user_id]]).all
 
     session[:emails_send_user_list_opt] = @options
     @user_id_max = User.find_by_sql("SELECT MAX(id) AS result FROM users")
@@ -224,7 +224,7 @@ class EmailsController < ApplicationController
       cond <<  'blocked = 0'
     end
 
-    @users = User.includes(:address).where(["#{cond.join(' AND ' )}  AND owner_id = ? AND addresses.email != '' AND addresses.id > 0 AND addresses.email IS NOT NULL", session[:user_id]]).all
+    @users = User.includes(:address).where(["owner_id = ? AND addresses.email != '' AND addresses.id > 0 AND addresses.email IS NOT NULL #{cond.size.to_i > 0 ? ' AND ' : ''} #{cond.join(' AND ' )}", session[:user_id]]).all
 
 
 
