@@ -175,7 +175,7 @@ class EmailsController < ApplicationController
       cond <<  'hidden = 0'
     end
 
-    if @options[:shu].to_s == 'false'
+    if @options[:sbu].to_s == 'false'
       cond <<  'blocked = 0'
     end
 
@@ -220,7 +220,7 @@ class EmailsController < ApplicationController
       cond <<  'hidden = 0'
     end
 
-    if @options[:shu].to_s == 'false'
+    if @options[:sbu].to_s == 'false'
       cond <<  'blocked = 0'
     end
 
