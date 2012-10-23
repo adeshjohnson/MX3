@@ -1267,14 +1267,7 @@ class TariffsController < ApplicationController
   returns first letter of destination group name if it has any rates set, if nothing is set return 'A'
 =end
   def tariff_dstgroups_with_rates(tariff_id)
-    query = "SELECT destinationgroups.name  
-             FROM   destinations 
-             JOIN   destinationgroups ON (destinationgroups.id = destinations.destinationgroup_id) 
-             JOIN   rates ON (rates.destinationgroup_id = destinationgroups.id )
-             JOIN   aratedetails ON (aratedetails.rate_id = rates.id)
-             WHERE  rates.tariff_id = #{tariff_id}
-             GROUP BY destinations.destinationgroup_id 
-             ORDER BY destinationgroups.name, destinationgroups.desttype ASC" 
+    query = "SELECT destinationgroups.name   FROM destinationgroups  JOIN rates ON (rates.destinationgroup_id = destinationgroups.id )  WHERE rates.tariff_id = #{tariff_id}  GROUP BY destinationgroups.id   ORDER BY destinationgroups.name, destinationgroups.desttype ASC;"
     res = ActiveRecord::Base.connection.select_all(query) 
     res.map! { |rate| rate['name'][0..0] } 
     res.uniq
