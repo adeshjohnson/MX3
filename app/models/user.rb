@@ -2569,7 +2569,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
   def warning_email_hour
     b = read_attribute(:warning_email_hour)
-    if b != -1
+    if b.to_i != -1
       c = b.to_d + time_zone.to_d - User.system_time_offset.to_d
       b = c.to_i > 24 ? c - 24 : c
       b = c.to_i < 0 ? c + 24 : b
@@ -2580,7 +2580,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def warning_email_hour= value
-    if value != -1
+    if value.to_i != -1
       b = value.to_d - time_zone.to_d + User.system_time_offset.to_d
       c = b.to_i > 24 ? b - 24 : b
       c = b.to_i < 0 ? b + 24 : c
