@@ -1775,6 +1775,7 @@ class ApiController < ApplicationController
                   if send_email_to_user == 1
                     doc.email(user.address.email)
                   end
+                  doc.user_id(user.id)
                   #if !a
                   if device
                     doc.device_type(device.device_type)
