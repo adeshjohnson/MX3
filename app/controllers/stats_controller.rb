@@ -2645,7 +2645,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       #reseller or user
       if session[:usertype] == "reseller"
         #reseller
-        user_sql = " WHERE activecalls.user_id = #{user_id} OR dst_usr.id = #{user_id} OR  activecalls.owner_id = #{user_id} "
+        user_sql = " WHERE activecalls.user_id = #{user_id} OR dst_usr.id = #{user_id} OR  activecalls.owner_id = #{user_id} OR dst_usr.owner_id = #{user_id}"
       else
         #user
         user_sql = " WHERE activecalls.user_id = #{user_id} OR dst_usr.id = #{user_id} "

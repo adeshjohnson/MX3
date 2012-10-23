@@ -43,7 +43,7 @@ class Activecall < ActiveRecord::Base
       else
         if user.usertype == "reseller"
           #reseller
-          user_sql = " WHERE activecalls.user_id = #{user.id} OR dst_usr.id = #{user.id} OR  activecalls.owner_id = #{user.id} "
+          user_sql = " WHERE activecalls.user_id = #{user.id} OR dst_usr.id = #{user.id} OR  activecalls.owner_id = #{user.id} OR dst_usr.owner_id =  #{user.id} "
         else
           #user
           user_sql = " WHERE activecalls.user_id = #{user.id} OR dst_usr.id = #{user.id} "
