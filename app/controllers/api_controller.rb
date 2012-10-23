@@ -1768,16 +1768,17 @@ class ApiController < ApplicationController
                 doc.status { doc.success(_('Registration_successful')) }
                 a = Thread.new { configure_extensions(device.id, {:api => 1, :current_user => owner}) }
                 doc.user_device_settings {
-                  MorLog.my_debug user.to_yaml
-                  us = User.find(user.id)
-                  MorLog.my_debug "************************************************88"
-                  MorLog.my_debug us.to_yaml if us
+                  #MorLog.my_debug user.to_yaml
+                  #us = User.find(user.id)
+                  #MorLog.my_debug "************************************************88"
+                  #MorLog.my_debug us.to_yaml if us
                   if send_email_to_user == 1
                     doc.email(user.address.email)
                   end
                   #if !a
                   if device
                     doc.device_type(device.device_type)
+                    doc.device_id(device.id)
                     doc.username(device.username)
                     doc.password(device.secret)
                     doc.pin(device.pin)
