@@ -287,7 +287,7 @@ class Did < ActiveRecord::Base
   end
 
   def find_qf_rules
-    QuickforwardsRule.where("#{did} REGEXP(rule_regexp)").all.count
+    QuickforwardsRule.where("#{did} REGEXP(replace(rule_regexp, '%', ''))").all.count
   end
 
 end
