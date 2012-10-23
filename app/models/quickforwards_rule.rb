@@ -49,7 +49,7 @@ class QuickforwardsRule < ActiveRecord::Base
       regexp = rule_regexp.delete('%')
     end
 
-    dids = Did.includes(:dialplan).where("dids.did REGEXP('^(#{regexp})') AND (dialplans.dptype != 'quickforwarddids' OR dialplans.id IS NULL OR status = 'reserved')")
+    dids = Did.includes(:dialplan).where("dids.did REGEXP('^(#{regexp})') AND (dialplans.dptype != 'quickforwarddids' OR (dialplans.id IS NULL AND status = 'reserved'))")
     if dids and dids.size.to_i > 0
       errors.add(:prefix,_('Collisions_with_Dids'))
       return false
