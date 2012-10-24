@@ -4501,7 +4501,7 @@ Localization.define('en') do |l|
   l.store 'Collisions_with_Quickforwards_Rules', 'Collisions with Quickforward Rule, DID can be assigned only to Quickforwards Dial Plan'
   l.store 'Collisions_with_Dids', 'Collisions with DIDs that are not assigned to Quickforwards Dial Plans'
   l.store 'DIDs_were_not_updated', 'DIDs were not updated'
-  #  l.store '', ''
+  l.store 'Did_was_not_updated', 'Did was not updated'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
