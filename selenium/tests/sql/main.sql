@@ -1588,9 +1588,12 @@ INSERT INTO `aratedetails` (`id`, `from`, `duration`, `artype`, `round`, `price`
 (283, 1, -1, 'minute', 1, 0.0472, 616, '00:00:00', '23:59:59', ''),
 (284, 1, -1, 'minute', 1, 0.0472, 617, '00:00:00', '23:59:59', '');
 #LCR
-INSERT INTO `lcrs` (`id`, `name`, `order`, `user_id`, `first_provider_percent_limit`) VALUES
-(2, 'rrspro_primary_LCR', 'price', 10, 0),
-(3, 'wrspro_primary_LCR', 'price', 11, 0);
+INSERT INTO `lcrs` (`id`, `name`, `order`, `user_id`, `first_provider_percent_limit`, `failover_provider_id`, `no_failover`) VALUES
+(2, 'rrspro_primary_LCR', 'price', 10, 0.000000000000000, NULL, 0),
+(3, 'wrspro_primary_LCR', 'price', 11, 0.000000000000000, NULL, 0),
+(4, 'LCR ordered by price', 'price', 0, 0.000000000000000, NULL, 0),
+(5, 'LCR ordered by priority', 'priority', 0, 0.000000000000000, NULL, 0),
+(6, 'LCR ordered by percent', 'percent', 0, 0.000000000000000, NULL, 0);
 #Users
 UPDATE `users` SET address_id=1 WHERE id=0;
 UPDATE `users` SET address_id=5 WHERE id=2;
