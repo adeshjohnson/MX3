@@ -104,8 +104,8 @@
                 </th>
 
                 <th align="left">
-                    <input type="text" size="30" id="did_livesearch" name="did" <%= "disabled" if @dids.size < 1 %> />
-                    <div id="did_list" style='max-height:150px; overflow-y:auto;float:left;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></div>
+                    <input type="text" size="30" id="did_livesearch" name="did" autocomplete="off" <%= "disabled" if @dids.size < 1 %> />
+                    <table id="did_list" style='margin-top:0px;float:left;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>
                 </th>
             <% end %>
             <th align="left">
@@ -293,12 +293,12 @@
             <%=raw remote_function(:update => 'did_list',:url => {:action => :get_did_map }, :with => "'did_livesearch='+$('did_livesearch').value") %>
         });
         Event.observe($('did_list'), 'mouseover', function(){
-            var el = document.getElementById('did_list').getElementsByTagName('option');
+            var el = document.getElementById('did_list').getElementsByTagName('td');
             for(var i=0;i<el.length;i++){
                 el[i].onclick=function(){
-                    if (this.value != -2) {
-                        document.getElementById('did_livesearch').value = this.text
-                    <%=raw remote_function(:update => 'did_list',:url => {:action => :get_did_map }, :with => "'did_livesearch='") %>
+                    if (this.id != -2) {
+                        document.getElementById('did_livesearch').value = this.innerHTML
+                    <%= raw remote_function(:update => 'did_list',:url => {:action => :get_did_map }, :with => "'did_livesearch='") %>
                     }
                 }
                 el[i].onmouseover=function(){
