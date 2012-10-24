@@ -25,7 +25,6 @@ class TariffsController < ApplicationController
   }
 
   def index
-    flash[:notice] = flash[:notice] if !flash[:notice].blank?
     redirect_to :action => :list and return false
   end
 
@@ -389,7 +388,7 @@ class TariffsController < ApplicationController
 
     if @tariff.purpose == 'user'
       flash[:notice] = _('Tariff_type_error')
-      redirect_to :controller => :tariffs, :actions => :list and return false
+      redirect_to :action => :list and return false
     end
 
     @page_title = _('Add_new_rate_to_tariff') # +": " + @tariff.name
@@ -442,7 +441,7 @@ class TariffsController < ApplicationController
 
     if @tariff.purpose == 'user'
       flash[:notice] = _('Tariff_type_error')
-      redirect_to :controller => :tariffs, :actions => :list and return false
+      redirect_to :controller => :tariffs, :action => :list and return false
     end
 
     # st - from which letter starts rate's direction (usualy country)
@@ -1291,7 +1290,7 @@ class TariffsController < ApplicationController
 
     if @tariff.purpose != 'user'
       flash[:notice] = _('Tariff_type_error')
-      redirect_to :controller => :tariffs, :actions => :list and return false
+      redirect_to :controller => :tariffs, :action => :list and return false
     end
 
 
@@ -2676,17 +2675,17 @@ class TariffsController < ApplicationController
     if session[:usertype].to_s == "accountant"
       if tariff.owner_id != 0 or session[:acc_tariff_manage].to_i == 0
         dont_be_so_smart
-        redirect_to :controller => "tariffs", :action => "list" and return false
+        redirect_to :action => :list and return false
       end
     elsif session[:usertype].to_s == "reseller" and tariff.owner_id != session[:user_id] and (params[:action] == 'rate_details' or params[:action] == 'rates_list'or params[:action] == 'user_rates_list'or params[:action] == 'user_arates_full')
       if !CommonUseProvider.find(:first, :conditions => ["reseller_id = ? AND tariff_id = ?", current_user.id, tariff.id])
         dont_be_so_smart
-        redirect_to :controller => "tariffs", :action => "list" and return false
+        redirect_to :action => :list and return false
       end
     else
       if tariff.owner_id != session[:user_id]
         dont_be_so_smart
-        redirect_to :controller => "tariffs", :action => "list" and return false
+        redirect_to :action => :list and return false
       end
     end
     return true
