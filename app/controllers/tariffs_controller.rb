@@ -9,7 +9,7 @@ class TariffsController < ApplicationController
   before_filter :check_post_method, :only => [:destroy, :create, :update, :rate_destroy, :ratedetail_update, :ratedetail_destroy, :ratedetail_create, :artg_destroy, :user_rate_update, :user_rate_delete, :user_rates_update, :user_rate_destroy, :day_destroy, :day_update, :update_tariff_for_users]
   before_filter :check_localization
   before_filter :authorize, :except => [:destinations_csv]
-  before_filter :check_if_can_see_finances, :only => [:new, :create, :list, :list, :edit, :update, :destroy, :rates_list, :import_csv, :delete_all_rates, :make_user_tariff, :make_user_tariff_wholesale]
+  before_filter :check_if_can_see_finances, :only => [:new, :create, :list, :edit, :update, :destroy, :rates_list, :import_csv, :delete_all_rates, :make_user_tariff, :make_user_tariff_wholesale]
   before_filter :find_user_from_session, :only => [:generate_personal_rates_csv, :generate_personal_rates_pdf, :generate_personal_wholesale_rates_pdf, :generate_personal_wholesale_rates_csv, :user_rates, :user_rates_detailed]
   before_filter :find_user_tariff, :only => [:generate_personal_rates_csv, :generate_personal_rates_pdf, :generate_personal_wholesale_rates_pdf, :generate_personal_wholesale_rates_csv, :user_rates, :user_rates_detailed]
   before_filter :find_tariff_whith_currency, :only => [:find_tariff_whith_currency, :generate_providers_rates_csv, :generate_provider_rates_pdf, :generate_user_rates_pdf, :generate_user_rates_csv]
@@ -25,6 +25,7 @@ class TariffsController < ApplicationController
   }
 
   def index
+    flash[:notice] = flash[:notice] if !flash[:notice].blank?
     redirect_to :action => :list and return false
   end
 
