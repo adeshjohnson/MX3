@@ -21,8 +21,7 @@ class PaymentsController < ApplicationController
   }
 
   def index
-    list
-    redirect_to :action => 'list'
+    redirect_to :action => :list and return false
   end
 
   def list

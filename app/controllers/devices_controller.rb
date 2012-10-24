@@ -24,8 +24,7 @@ class DevicesController < ApplicationController
   }
 
   def index
-    user_devices
-    render :action => :user_devices
+    redirect_to :action => :user_devices and return false
   end
 
   def new

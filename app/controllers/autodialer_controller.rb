@@ -13,11 +13,10 @@ class AutodialerController < ApplicationController
 
   def index
     if session[:usertype] == 'admin'
-      campaigns
-      render :action => :campaigns and return false
+      redirect_to :action => :campaigns and return false
     else
       user_campaigns
-      render :action => :user_campaigns and return false
+      redirect_to :action => :user_campaigns and return false
     end
   end
 

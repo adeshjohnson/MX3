@@ -33,8 +33,7 @@ class SmsController < ApplicationController
 
 
   def index
-    sms_list
-    render :action => 'sms_list'
+    redirect_to :action => :sms_list and return false
   end
 
   def users

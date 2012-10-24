@@ -10,8 +10,7 @@ class TerminatorsController < ApplicationController
   before_filter :find_terminator, :only => [:provider_add, :providers, :destroy, :update, :edit]
 
   def index
-    list
-    render :action => 'list'
+    redirect_to :action => :list and return false
   end
 
 =begin rdoc

@@ -12,8 +12,7 @@ class ProvidersController < ApplicationController
   before_filter :find_providerrule, :only => [:provider_rule_change_status, :provider_rule_destroy, :provider_rule_edit, :provider_rule_update]
 
   def index
-    list
-    render :action => 'list'
+    redirect_to :action => :list and return false
   end
 
   def list

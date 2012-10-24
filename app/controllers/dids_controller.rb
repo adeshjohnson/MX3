@@ -24,8 +24,7 @@ class DidsController < ApplicationController
   before_filter :check_did_params, :only => [:update]
 
   def index
-    list
-    render :action => 'list'
+    redirect_to :action => :list and return false
   end
 
 =begin

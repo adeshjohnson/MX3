@@ -16,8 +16,7 @@ class EmailsController < ApplicationController
   before_filter :find_session_user, :only => [:edit, :update, :show_emails, :destroy]
 
   def index
-    list
-    render :action => 'list'
+    redirect_to :action => :list and return false
   end
 
   def new

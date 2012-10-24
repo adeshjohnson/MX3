@@ -19,8 +19,7 @@ class GroupsController < ApplicationController
   }
 
   def index
-    list
-    render :action => 'list'
+    redirect_to :action => :list and return false
   end
 
   def list

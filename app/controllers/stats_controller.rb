@@ -30,8 +30,7 @@ class StatsController < ApplicationController
   }
 
   def index
-    user_stats
-    render :action => "user_stats"
+    redirect_to :action => :user_stats and return false
   end
 
   def show_user_stats

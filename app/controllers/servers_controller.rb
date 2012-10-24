@@ -14,8 +14,7 @@ class ServersController < ApplicationController
       dont_be_so_smart
       redirect_to :controller => "callc", :action => "main" and return false
     else
-      list
-      render :action => 'list'
+      redirect_to :action => :list and return false
     end
 
   end
