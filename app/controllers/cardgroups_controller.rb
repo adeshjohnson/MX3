@@ -22,7 +22,7 @@ class CardgroupsController < ApplicationController
   before_filter :find_card_group , :only=> [:destroy, :show, :edit, :update, :cards_to_csv, :upload_card_image, :gmp_list]
 
   def index
-    redirect_to :action => :list
+    redirect_to :action => :list  and return false
   end
 
 
