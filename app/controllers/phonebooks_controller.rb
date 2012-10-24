@@ -99,7 +99,7 @@ class PhonebooksController < ApplicationController
 
     unless @phonebook
       flash[:notice]=_('Phonebook_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
     if @phonebook.user_id != session[:user_id] and session[:usertype] != "admin"
       dont_be_so_smart
@@ -111,7 +111,7 @@ class PhonebooksController < ApplicationController
     @user = User.find_by_id(session[:user_id])
     unless @user
       flash[:notice]=_('User_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
   end
 
@@ -122,7 +122,7 @@ class PhonebooksController < ApplicationController
 
     unless @user
       flash[:notice] = _('User_was_not_found')
-      redirect_to :action => :index and return false
+      redirect_to :action => :list and return false
     end
 
     @phonebooks = Phonebook.user_phonebooks(@user)
