@@ -39,137 +39,7 @@
 <!--create-->
 <tr>
 	<td>open</td>
-	<td>/billing/dids/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=did_start</td>
-	<td>1234567890</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=did_end</td>
-	<td>1234567893</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>xpath=(//input[@name='commit'])[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>DID interval was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dialplans/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>//input[@id='quickforward_dp_name']</td>
-	<td>test111</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=quickforwards_user</td>
-	<td>label=System Admin (0)</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#quickforwards_user &gt; option[value=&quot;0&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Not used IAX2/103</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=users_device</td>
-	<td>label=IAX2/103</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=cb_add</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dids/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=#edit_link_3 &gt; img[alt=&quot;Edit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=input[type=&quot;image&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dids/edit/4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=user_id</td>
-	<td>label=Test User #1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=device_id</td>
-	<td>label=FAX/102 - Test FAX device</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Assign']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>DID assigned</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dids/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=#edit_link_5 &gt; img[alt=&quot;Edit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=user_id</td>
-	<td>label=Test Reseller</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td>/billing/test/load_delta_sql/sql/various_calls</td>
 	<td></td>
 </tr>
 <tr>
@@ -365,12 +235,12 @@
 <tr>
 	<td>select</td>
 	<td>id=ringgroup[did_id]</td>
-	<td>label=1234567891</td>
+	<td>label=37060011245</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>ringgroup[did_id]</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -479,8 +349,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=did_value3</td>
-	<td>exact:DID: 1234567891</td>
+	<td>id=did_value</td>
+	<td>37060011245</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -569,12 +439,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=dp_dids_3</td>
+	<td>id=dp_not_assign_11</td>
 	<td>Assign DID</td>
 </tr>
 <tr>
 	<td>mouseOver</td>
-	<td>dp_not_assign_3</td>
+	<td>dp_not_assign_11</td>
 	<td></td>
 </tr>
 <tr>
@@ -589,48 +459,48 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=data2_3</td>
+	<td>id=data2_11</td>
 	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>name_3</td>
+	<td>name_11</td>
 	<td>RGname</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>comment_3</td>
+	<td>comment_11</td>
 	<td>Komentaras</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>dev_3</td>
+	<td>dev_11</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>timeout_3</td>
+	<td>timeout_11</td>
 	<td>20</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>options_3</td>
+	<td>options_11</td>
 	<td>Pasirinkimas</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>strategy_3</td>
+	<td>strategy_11</td>
 	<td>ringall</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>cid_prefix_3</td>
+	<td>cid_prefix_11</td>
 	<td>370</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>did_3</td>
-	<td>1234567891</td>
+	<td>id=did_11</td>
+	<td>37060011245</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -746,7 +616,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=did_value</td>
-	<td>1234567891</td>
+	<td>37060011245</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -810,13 +680,13 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>ringgroup[did_id]</td>
-	<td>label=1234567890</td>
+	<td>id=ringgroup[did_id]</td>
+	<td>label=37060011231</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>ringgroup[did_id]</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -861,7 +731,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=did_value</td>
-	<td>1234567890</td>
+	<td>37060011231</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -896,7 +766,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>ringgroup[did_id]</td>
-	<td>1234567890</td>
+	<td>37060011231</td>
 </tr>
 <!--assign did-->
 <tr>
@@ -911,17 +781,12 @@
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
-	<td>xpath=(//select[@name='dp_id'])[2]</td>
+	<td>xpath=(//select[@name='dp_id'])[4]</td>
 	<td>100 - RGname2</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//td/form[2]/input</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>//td/form[2]/input</td>
+	<td>xpath=(//input[@type='image'])[4]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1125,87 +990,17 @@
 <!--dids-->
 <tr>
 	<td>open</td>
-	<td>/billing/dids/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>did_start</td>
-	<td>37060012345</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>did_end</td>
-	<td>37060012350</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[4]</td>
+	<td>/billing/dids/edit/25</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>DID interval was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dids/edit/7</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=user_id</td>
-	<td>label=User Resellers</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=tr.row1 &gt; td &gt; input[name=commit]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>DID reserved</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dids/edit/8</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>xpath=(//input[@type='image'])[2]</td>
+	<td>xpath=(//input[@type='image'])[5]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
 	<td>DID assigned to Dial Plan: RGname2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dids/edit/9</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Terminate']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>DID terminated</td>
 	<td></td>
 </tr>
 <!--assert-->
@@ -1247,22 +1042,27 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>did_id</td>
+	<td>id=did_id</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>did_id</td>
-	<td>label=37060012348</td>
+	<td>assertText</td>
+	<td>id=did_id</td>
+	<td>37060011227 37060011237 37060011241 37093042422</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
-	<td>did_id</td>
-	<td>37060012348</td>
+	<td>select</td>
+	<td>id=ringgroup[did_id]</td>
+	<td>label=37060011233</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>37060012347</td>
+	<td>37060011222</td>
 	<td></td>
 </tr>
 <tr>
@@ -1271,9 +1071,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>link=37060012348</td>
-	<td>37060012348</td>
+	<td>waitForElementPresent</td>
+	<td>link=37060011235</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1282,18 +1082,13 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>did_id</td>
+	<td>id=did_id</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>did_id</td>
-	<td>label=37060012350</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>did_id</td>
-	<td>37060012350</td>
+	<td>id=did_id</td>
+	<td>label=37093042422</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1301,9 +1096,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>link=37060012350</td>
-	<td>37060012350</td>
+	<td>waitForElementPresent</td>
+	<td>link=37093042422</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1392,17 +1187,17 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>37060012348</td>
+	<td>37093042422</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>37060012350</td>
+	<td>37060011227</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>id=dp_dids_3</td>
+	<td>id=dp_dids_11</td>
 	<td></td>
 </tr>
 <tr>
@@ -1422,7 +1217,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>dev_3</td>
+	<td>dev_11</td>
 	<td></td>
 </tr>
 <tr>
@@ -1491,14 +1286,24 @@
 	<td>@#$%^&amp;*^%$#@!1345</td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>ringgroup[did_id]</td>
-	<td>label=37060012350</td>
+	<td>assertText</td>
+	<td>id=ringgroup[did_id]</td>
+	<td>None 37060011221 37060011223 37060011224 37060011225 37060011226 37060011227 37060011230 37060011231 37060011232 37060011233 37060011234 37060011235 37060011238 37060011239 37060011240 37060011242 37060011243 37060011245 37060011246 37060011249 37060011250 37060011251 37060011252 37060011253 37063042438 37093042422</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=ringgroup[did_id]</td>
-	<td>label=37060012346</td>
+	<td>label=37060011252</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=ringgroup[did_id]</td>
+	<td>label=37060011246</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1627,12 +1432,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=dialplan_3</td>
-	<td>test111 (quickforwarddids)</td>
+	<td>id=dialplan_33</td>
+	<td>Quick Forward DIDs DP re (quickforwarddids)</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>link=test111 (quickforwarddids)</td>
+	<td>link=Quick Forward DIDs DP re (quickforwarddids)</td>
 	<td></td>
 </tr>
 <tr>
@@ -1713,7 +1518,7 @@
 <tr>
 	<td>select</td>
 	<td>id=device_id</td>
-	<td>label=Virtual/virtual_8 - Virtual_device</td>
+	<td>label=Virtual/virtual_10 - Virtual_device</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1722,7 +1527,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=item_8</td>
+	<td>id=item_10</td>
 	<td></td>
 </tr>
 <tr>
@@ -1747,7 +1552,387 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>exten =&gt; $5t5tr4,2,Dial(Local/virtual_8@mor_local,0,#$@TYG45tw4) </td>
+	<td>exten =&gt; $5t5tr4,2,Dial(Local/virtual_10@mor_local,0,#$@TYG45tw4) </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='confirm_without_message']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User's settings successfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Ringgroup was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ringgroups/destroy/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 </tbody></table>
