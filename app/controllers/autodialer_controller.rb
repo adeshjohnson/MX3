@@ -365,7 +365,12 @@ class AutodialerController < ApplicationController
     else
       flash[:notice] = _('All_calls_failed_redial_was_not_successful')
     end
-    redirect_to :action => :index and return false
+    if session[:usertype] == 'admin'
+      redirect_to :action => :campaigns and return false
+    else
+      user_campaigns
+      redirect_to :action => :user_campaigns and return false
+    end
   end
 
   def campaign_statistics
@@ -544,7 +549,12 @@ class AutodialerController < ApplicationController
     @number = Adnumber.find(:first, :conditions => {:id => params[:id]}, :include => [:campaign])
     unless @number
       flash[:notice] = _('Number_was_not_found')
-      redirect_to :action => :index and return false
+      if session[:usertype] == 'admin'
+        redirect_to :action => :campaigns and return false
+      else
+        user_campaigns
+        redirect_to :action => :user_campaigns and return false
+      end
     end
     a=check_user_id_with_session(@number.campaign.user_id)
     return false if !a

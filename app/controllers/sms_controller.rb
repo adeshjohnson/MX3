@@ -599,7 +599,7 @@ in before filter : tariff (:find_tariff_from_id)
 
     if @user.sms_service_active == 0
       flash[:notice] = session[:usertype] == "admin" ? _('User_not_subscribed_to_SMS') : dont_be_so_smart
-      redirect_to :action => :index and return false
+      redirect_to :action => :sms_list and return false
     end
 
     @addresses = Phonebook.find(:all, :conditions => ["user_id=?", session[:user_id]])
