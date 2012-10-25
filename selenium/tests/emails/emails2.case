@@ -1258,17 +1258,17 @@
 <tr>
 	<td>type</td>
 	<td>id=email_name</td>
-	<td>callerid_blocked</td>
+	<td>test_template</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=email_subject</td>
-	<td>Callerid blocked </td>
+	<td>test_template_subject</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=email_body</td>
-	<td>At &lt;%= date %&gt; User with ID = &lt;%= user_id %&gt;, with Device ID = &lt;%= device_id %&gt; and CallerID = &lt;%= caller_id %&gt; was blocked because it sent several simultaneous calls in same time. </td>
+	<td>test_template_message</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1281,13 +1281,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>xpath=(//td[@id='name_callerid_blocked'])[2]</td>
+	<td>verifyElementPresent</td>
+	<td>id=name_test_template</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>xpath=(//td[@id='subject_callerid_blocked'])[2]</td>
+	<td>verifyElementPresent</td>
+	<td>id=subject_test_template</td>
 	<td></td>
 </tr>
 <tr>
@@ -1316,14 +1316,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>xpath=(//td[@id='name_callerid_blocked'])[2]</td>
+	<td>verifyElementNotPresent</td>
+	<td>id=name_test_template</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>xpath=(//td[@id='subject_callerid_blocked'])[2]</td>
-	<td>Callerid blocked</td>
+	<td>verifyElementNotPresent</td>
+	<td>id=subject_test_template</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
