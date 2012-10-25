@@ -30,7 +30,7 @@
       <%= _("Destination") %>: <%= text_field_tag 's_destination', @search_destination, "class" => "input", :size => "25", :maxlength => "50" %>
       <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
     </div>
-    <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
+    <div  id="clear_search" style="float: right; <%= "display:none;" if @search.to_s == "0" %>">
       <%= link_to b_cross + _('Clear_search'), :action => params[:action], :clear=>1 if @search.to_i == 1%>
     </div>
     <br>
