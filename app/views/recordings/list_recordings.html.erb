@@ -11,7 +11,7 @@
 <table width="100%" class="simple">
   <tr>
     <td align="right">
-      <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+      <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details');Element.toggle('clear_search');") %>
     </td>
   </tr>
 </table>
@@ -30,7 +30,7 @@
       <%= _("Destination") %>: <%= text_field_tag 's_destination', @search_destination, "class" => "input", :size => "25", :maxlength => "50" %>
       <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
     </div>
-    <div style="float: right;">
+    <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
       <%= link_to b_cross + _('Clear_search'), :action => params[:action], :clear=>1 if @search.to_i == 1%>
     </div>
     <br>

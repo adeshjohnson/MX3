@@ -11,7 +11,7 @@
 <table width="100%" class="simple">
   <tr>
     <td align="right">
-      <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>
+      <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details');Element.toggle('clear_search')") %>
     </td>
   </tr>
 </table>
@@ -46,7 +46,7 @@
         </tr>
         <tr>
           <td align="left"><%= submit_tag _('Search'), :disable_with=>_('Processing..')%></td>
-          <td align="right"><%= link_to b_cross + _('Clear_search'), :action => 'list' %></td>
+          <td align="right"><%= link_to b_cross + _('Clear_search'), :action => :list, :clear=>1  if @search.to_i == 1 %></td>
         </tr>
       </table>
     </div>

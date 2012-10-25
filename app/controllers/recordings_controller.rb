@@ -176,17 +176,21 @@ class RecordingsController < ApplicationController
     if !@search_source.blank?
       conditions_str << "recordings.src LIKE ?"
       conditions_var << @search_source
+      @search = 1
     end
 
     if !@search_destination.blank?
       conditions_str << "recordings.dst LIKE ?"
       conditions_var << @search_destination
+      @search = 1
     end
     if @user
       conditions_str << "recordings.user_id = ?"
       conditions_var << @user.id
+      @search = 1
     end
 
+    @search = 0 if params[:clear].to_i == 1
     @size = Recording.count(:conditions => [conditions_str.join(' AND ')] +conditions_var).to_i
     @items_per_page = Confline.get_value("Items_Per_Page").to_i
     @total_pages = (@size.to_d / @items_per_page.to_d).ceil
@@ -230,18 +234,22 @@ class RecordingsController < ApplicationController
     if @search_source != "" and @search_destination != ""
       conditions_str << "(recordings.src LIKE ? OR recordings.dst LIKE ? )"
       conditions_var += [@search_source, @search_destination]
+      @search = 1
     else
       if !@search_source.blank?
         conditions_str << "recordings.src LIKE ?"
         conditions_var << @search_source
+        @search = 1
       end
 
       if !@search_destination.blank?
         conditions_str << "recordings.dst LIKE ?"
         conditions_var << @search_destination
+        @search = 1
       end
     end
 
+    @search = 0 if params[:clear].to_i == 1
     conditions_str << "((recordings.user_id = ? AND visible_to_user = 1) OR (recordings.dst_user_id = ? AND visible_to_dst_user = 1))"
     conditions_var += [@user.id, @user.id]
 
@@ -440,17 +448,20 @@ class RecordingsController < ApplicationController
     if !@search_source.blank?
       conditions_str << "recordings.src LIKE ?"
       conditions_var << @search_source
+      @search = 1
     end
 
     if !@search_destination.blank?
       conditions_str << "recordings.dst LIKE ?"
       conditions_var << @search_destination
+      @search = 1
     end
 
     if !@user.blank? and @user != "all"
       conditions_str << "recordings.user_id = ?"
       conditions_var << @user.to_i
       @devices = Device.find(:all, :select => "devices.*", :joins => "LEFT JOIN users ON (users.id = devices.user_id)", :conditions => ["users.owner_id = ? AND device_type != 'FAX' AND user_id = ? AND name not like 'mor_server_%'", owner_id, @user])
+      @search = 1
     else
       @devices = Device.find(:all, :select => "devices.*", :joins => "LEFT JOIN users ON (users.id = devices.user_id)", :conditions => ["users.owner_id = ? AND device_type != 'FAX' AND name not like 'mor_server_%'", owner_id])
     end
@@ -458,8 +469,10 @@ class RecordingsController < ApplicationController
     if !@device.blank? and @device != 'all' and @device.to_i != 0
       conditions_str << "(recordings.src_device_id  = ? OR recordings.dst_device_id  = ?)"
       conditions_var += [@device, @device]
+      @search = 1
     end
 
+    @search = 0 if params[:clear].to_i == 1
     @users = User.find_all_for_select(corrected_user_id, {:exclude_owner => true})
 
     @recordings = Recording.find(:all, :select => "recordings.*", :joins => "LEFT JOIN users ON (users.id = recordings.user_id)", :conditions => [conditions_str.join(' AND ')] +conditions_var, :limit => session[:items_per_page], :offset => (@page-1)*session[:items_per_page], :order => "datetime DESC")
