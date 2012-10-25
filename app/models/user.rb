@@ -832,7 +832,10 @@ class User < ActiveRecord::Base
   end
 
   def create_reseller_emails
-    emails = Email.find(:all, :conditions => "owner_id = 0 AND template = 1 AND (name != 'recording_new' and name != 'recording_delete') ")
+    emails = Email.find(:all,
+                       :select => "emails.*",
+                       :joins => "LEFT JOIN (select * from emails where owner_id = #{id} and template =1) as b ON (b.name = emails.name)",
+                       :conditions => "emails.owner_id = 0 AND emails.template = 1 AND b.id IS NULL AND (emails.name != 'recording_new' AND emails.name != 'recording_delete')")
     for email in emails
       em = Email.new()
       em.name = email.name
