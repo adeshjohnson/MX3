@@ -466,7 +466,7 @@ module PdfGen
     pdf.fill_color('DCDCDC')
     pdf.draw_text(_('INVOICE'), {:at => [330, 700], :size => 26})
     pdf.fill_color('000000')
-    pdf.draw_text(_('Date') + ": " + nice_date(invoice.issue_date, 0), {:at => [330, 685], :size => 12})
+    pdf.draw_text(_('Date') + ": " + nice_date(invoice.issue_date), {:at => [330, 685], :size => 12})
     pdf.draw_text(_('Invoice_number') + ": " + invoice.number.to_s, {:at => [330, 675], :size => 12})
 
 
@@ -514,7 +514,7 @@ module PdfGen
     pdf.text(_('Agreement_date') + " : " + user.agreement_date.to_s, {:left => 40, :size => 12})
 
     pdf.move_down 20
-    pdf.text(_('Time_period') + ": " + nice_date(invoice.period_start, 0) + " - " + nice_date(invoice.period_end, 0), {:left => 40, :size => 12})
+    pdf.text(_('Time_period') + ": " + nice_date(invoice.period_start) + " - " + nice_date(invoice.period_end), {:left => 40, :size => 12})
     pdf.move_down 20
     #balance line
     if Confline.get_value("#{prepaid.to_s}Invoice_Show_Balance_Line", user.owner_id).to_i == 1
