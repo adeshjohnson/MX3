@@ -1215,6 +1215,116 @@
 	<td>Reseller Blocked</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_callerid_blocked</td>
+	<td>callerid_blocked</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=subject_callerid_blocked</td>
+	<td>Callerid blocked</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_name</td>
+	<td>callerid_blocked</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_subject</td>
+	<td>Callerid blocked </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_body</td>
+	<td>At &lt;%= date %&gt; User with ID = &lt;%= user_id %&gt;, with Device ID = &lt;%= device_id %&gt; and CallerID = &lt;%= caller_id %&gt; was blocked because it sent several simultaneous calls in same time. </td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Email was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//td[@id='name_callerid_blocked'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//td[@id='subject_callerid_blocked'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>xpath=(//td[@id='name_callerid_blocked'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>xpath=(//td[@id='subject_callerid_blocked'])[2]</td>
+	<td>Callerid blocked</td>
+</tr>
 </tbody></table>
 </body>
 </html>
