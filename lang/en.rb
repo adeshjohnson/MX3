@@ -2707,10 +2707,10 @@ Localization.define('en') do |l|
   l.store 'Callingcard_PIN', 'Calling Card PIN'
   l.store 'Device_Password', 'Device Password'
   l.store 'VoiceMail_Password', 'Voicemail Password'
-  l.store 'User_create', 'User Create'
-  l.store 'Device_create', 'Device Create'
-  l.store 'Callingcard_manage', 'Calling Card manage'
-  l.store 'Tariff_manage', 'Tariff manage'
+  l.store 'User_create', 'Create Users'
+  l.store 'Device_create', 'Create Devices'
+  l.store 'Callingcard_manage', 'Manage Calling Cards'
+  l.store 'Tariff_manage', 'Manage Tariffs'
 
   l.store 'You_have_no_editing_permission', 'You do not have rights to edit this' #----altered by Mindaugas 09 09 11
 
