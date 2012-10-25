@@ -19,7 +19,7 @@
       <%= link_to b_csv +  _('Import_numbers_from_file'), :action => 'import_numbers_from_file', :id => @campaign.id %>
     </td>
     <td align="left" nowrap="true">
-      <%= link_to b_csv +  _('Export_call_data_to_CSV'), :action => 'export_call_data_to_csv', :id => @campaign.id  if @numbers and @numbers.size.to_i > 0 %>
+      <%= link_to b_csv +  _('Export_IVR_poll_results_to_CSV'), :action => 'export_call_data_to_csv', :id => @campaign.id  if @numbers and @numbers.size.to_i > 0 %>
     </td>
     <td align="right" nowrap="true">
       <%= link_to b_cross +  _('Delete_all_numbers'), {:action => 'delete_all_numbers', :id => @campaign.id}, :confirm => _('Are_you_sure'), :method => :post %>

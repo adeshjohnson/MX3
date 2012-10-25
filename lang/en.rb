@@ -4425,6 +4425,7 @@ Localization.define('en') do |l|
   l.store 'Bad_minimal_balance', 'Bad minimal balance'
   l.store 'Tariff_for_cc', 'Tariff for Calling Card'
   l.store 'Export_call_data_to_CSV', 'Export call data to CSV'
+  l.store 'Export_IVR_poll_results_to_CSV', 'Export IVR/poll results to CSV'
   l.store 'SRTP_encryption', 'SRTP Encryption'
   l.store 'Please_enter_wait_time_higher_or_equal_to_10', 'Please enter wait time higher or equal to 10'
   l.store 'Block_callerid_if', 'Block callerid if'
