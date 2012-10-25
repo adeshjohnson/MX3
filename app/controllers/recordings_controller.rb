@@ -249,7 +249,7 @@ class RecordingsController < ApplicationController
       end
     end
 
-    logger.fatal  params[:clear].to_i
+
     @search = 0 if params[:clear].to_i == 1
     conditions_str << "((recordings.user_id = ? AND visible_to_user = 1) OR (recordings.dst_user_id = ? AND visible_to_dst_user = 1))"
     conditions_var += [@user.id, @user.id]
@@ -263,7 +263,7 @@ class RecordingsController < ApplicationController
         :s_source => @search_source,
         :s_destination => @search_destination
     }
-    @search = params[:clear].to_i if params[:clear]
+
     @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend?)
   end
 
