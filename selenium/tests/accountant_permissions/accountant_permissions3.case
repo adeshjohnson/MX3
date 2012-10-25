@@ -258,6 +258,146 @@
 	<td>manual_payment_link_4</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/1?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_manage_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=payments_manage_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/webphone_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/prefix_finder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
