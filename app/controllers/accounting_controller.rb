@@ -1123,7 +1123,7 @@ class AccountingController < ApplicationController
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
 
     csv_string = ["number#{sep}user_id#{sep}period_start#{sep}period_end#{sep}issue_date#{sep}price (#{dc})#{sep}price_with_tax (#{dc})#{sep}accounting_number"]
-    csv_string << "#{invoice.number.to_s}#{sep}#{invoice.user_id}#{sep}#{invoice.period_start}#{sep}#{invoice.period_end}#{sep}#{invoice.issue_date}#{sep}#{nice_invoice_number(invoice.converted_price(ex), invoice.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{nice_invoice_number(invoice.price_with_tax(:ex => ex, :precision => nice_invoice_number_digits(invoice.invoice_type)), invoice.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{user.accounting_number}"
+    csv_string << "#{invoice.number.to_s}#{sep}#{invoice.user_id}#{sep}#{nice_date(invoice.period_start)}#{sep}#{nice_date(invoice.period_end)}#{sep}#{nice_date(invoice.issue_date)}#{sep}#{nice_invoice_number(invoice.converted_price(ex), invoice.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{nice_invoice_number(invoice.price_with_tax(:ex => ex, :precision => nice_invoice_number_digits(invoice.invoice_type)), invoice.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{user.accounting_number}"
     #  my_debug csv_string
     prepaid, prep = invoice_type(invoice, user)
     filename = Invoice.filename(user, prep, "Invoice-#{user.first_name}_#{user.last_name}-#{invoice.user_id}-#{invoice.number}-#{invoice.issue_date}-#{dc}", "csv")
@@ -1296,9 +1296,9 @@ calls.dst,  COUNT(*) as 'count_calls', SUM(#{billsec_cond}) as 'sum_billsec', #{
     csv_string = ["Invoice NO.:#{sep} #{invoice.number.to_s}"]
 
     csv_string << ""
-    csv_string << "Invoice Date:#{sep} #{invoice.period_start.to_s} - #{invoice.period_end.to_s}"
+    csv_string << "Invoice Date:#{sep} #{nice_date(invoice.period_start)} - #{nice_date(invoice.period_end)}"
     csv_string << ""
-    csv_string << "Due Date:#{sep} #{invoice.issue_date.to_s}"
+    csv_string << "Due Date:#{sep} #{nice_date(invoice.issue_date)}"
     csv_string << ""
     csv_string << ""
 
