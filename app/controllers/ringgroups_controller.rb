@@ -58,34 +58,54 @@ class RinggroupsController < ApplicationController
 
     #check if extension entered
     ext = params[:dialplan][:data2]
+
+    @ringgroup = Ringgroup.new(params[:ringgroup].merge({:name=>params[:dialplan][:name]}))
+    @dialplan = Dialplan.new(params[:dialplan].merge({:dptype => "ringgroup"}))
+
+
     if not ext or ext.length == 0
+      @page_title = _('Ring_group_new')
+      @page_icon = "add.png"
+
+      @dids = current_user.dids_for_select('assigned')
       flash[:notice] = _('Enter_extension')
-      redirect_to :action => :index and return false
+      render :action => :new and return false
     end
 
     # check if such extension exist
     extline = Extline.find(:first, :conditions => "exten = '#{ext}'")
 
     if extline
+      @page_title = _('Ring_group_new')
+      @page_icon = "add.png"
+
+      @dids = current_user.dids_for_select('assigned')
       flash[:notice] = _('Such_extension_exists')
-      redirect_to :action => :index and return false
+      render :action => :new and return false
     end
 
     if !params[:dialplan] or params[:dialplan][:name].blank?
+      @page_title = _('Ring_group_new')
+      @page_icon = "add.png"
+
+      @dids = current_user.dids_for_select('assigned')
       flash[:notice] = _('Name_cannot_be_blank')
-      redirect_to :action => :index and return false
+      render :action => :new and return false
     end
 
-    @ringgroup = Ringgroup.new(params[:ringgroup].merge({:name => params[:dialplan][:name]}))
     if @ringgroup.save
-      dialplan = Dialplan.new(params[:dialplan].merge({:dptype => "ringgroup", :data1 => @ringgroup.id}))
-      dialplan.save
+      @dialplan.data1 = @ringgroup.id
+      @dialplan.save
       @ringgroup.update_exline(ext)
       flash[:status] = _('Ring_Group_was_successfully_created')
       redirect_to :action => :edit, :id => @ringgroup.id
     else
+      @page_title = _('Ring_group_new')
+      @page_icon = "add.png"
+
+      @dids = current_user.dids_for_select('assigned')
       flash_errors_for(_('Ring_Group_not_created'), @ringgroup)
-      redirect_to :action => :index
+      render :action => :new and return false
     end
 
   end
@@ -105,20 +125,41 @@ class RinggroupsController < ApplicationController
 
   def update
     if !params[:dialplan] or params[:dialplan][:name].blank?
+      @page_title = _('Ring_group_edit')
+      @page_icon = "edit.png"
+
+      @dids = current_user.dids_for_select('assigned')
+      @free_dids = Did.free_dids_for_select(@ringgroup.did_id)
+      @devices = @ringgroup.devices
+      @dialplan = @ringgroup.dialplan
+      @users = User.find(:all)
+      @extlines = Extline.find(:all, :conditions=>['exten = ? AND app IN ("Set", "Dial", "Goto")', @dialplan.data2], :order=>"priority ASC")
       flash[:notice] = _('Name_cannot_be_blank')
-      redirect_to :action => :index and return false
+      @ringgroup.attributes = params[:ringgroup].reject{|k,v| k == 'user_id'}
+      render :action => :edit and return false
     end
 
-    if @ringgroup.update_attributes(params[:ringgroup].reject { |k, v| k == 'user_id' })
+    if @ringgroup.update_attributes(params[:ringgroup].reject{|k,v| k == 'user_id'})
       @dialplan = @ringgroup.dialplan
       ext = @dialplan.data2.to_s
       @dialplan.update_attributes(params[:dialplan])
       @ringgroup.update_exline(ext)
       flash[:status] = _('Ring_Group_was_successfully_updated')
+      redirect_to :action=>:index
     else
+      @page_title = _('Ring_group_edit')
+      @page_icon = "edit.png"
+
+      @dids = current_user.dids_for_select('assigned')
+      @free_dids = Did.free_dids_for_select(@ringgroup.did_id)
+      @devices = @ringgroup.devices
+      @dialplan = @ringgroup.dialplan
+      @users = User.find(:all)
+      @extlines = Extline.find(:all, :conditions=>['exten = ? AND app IN ("Set", "Dial", "Goto")', @dialplan.data2], :order=>"priority ASC")
       flash_errors_for(_('Ring_Group_not_updated'), @ringgroup)
+      render :action => :edit and return false
     end
-    redirect_to :action => :index
+
   end
 
   def destroy
