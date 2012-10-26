@@ -513,10 +513,10 @@ module PdfGen
     pdf.text(_('Company_Personal_ID') + " : " + user.clientid.to_s, {:left => 40, :size => 12})
     pdf.text(_('VAT_Reg_number') + " : " + user.vat_number.to_s, {:left => 40, :size => 12})
     pdf.text(_('Agreement_number') + " : " + user.agreement_number.to_s, {:left => 40, :size => 12})
-    pdf.text(_('Agreement_date') + " : " + nice_date(user.agreement_date, options), {:left => 40, :size => 12})
+    pdf.text(_('Agreement_date') + " : " + nice_date(user.agreement_date, options).to_s, {:left => 40, :size => 12})
 
     pdf.move_down 20
-    pdf.text(_('Time_period') + ": " + nice_date(invoice.period_start, options) + " - " + nice_date(invoice.period_end, options), {:left => 40, :size => 12})
+    pdf.text(_('Time_period') + ": " + nice_date(invoice.period_start, options).to_s + " - " + nice_date(invoice.period_end, options).to_s, {:left => 40, :size => 12})
     pdf.move_down 20
     #balance line
     if Confline.get_value("#{prepaid.to_s}Invoice_Show_Balance_Line", user.owner_id).to_i == 1
