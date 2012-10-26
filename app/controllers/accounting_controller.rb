@@ -1296,9 +1296,9 @@ calls.dst,  COUNT(*) as 'count_calls', SUM(#{billsec_cond}) as 'sum_billsec', #{
     csv_string = ["Invoice NO.:#{sep} #{invoice.number.to_s}"]
 
     csv_string << ""
-    csv_string << "Invoice Date:#{sep} #{ApplicationController.nice_date(invoice.period_start)} - #{ApplicationController.nice_date(invoice.period_end)}"
+    csv_string << "Invoice Date:#{sep} #{nice_date(invoice.period_start, 0)} - #{nice_date(invoice.period_end, 0)}"
     csv_string << ""
-    csv_string << "Due Date:#{sep} #{ApplicationController.nice_date(invoice.issue_date)}"
+    csv_string << "Due Date:#{sep} #{nice_date(invoice.issue_date, 0)}"
     csv_string << ""
     csv_string << ""
 
