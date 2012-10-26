@@ -770,6 +770,7 @@ class AccountingController < ApplicationController
     dc = session[:show_currency]
     @ex = Currency.count_exchange_rate(session[:default_currency], session[:show_currency])
 
+    @conf = Confline.get_value("Invoice_allow_recalculate_after_send").to_i
 
     if params[:to_csv].to_i == 0
       @tot_in_wat = 0

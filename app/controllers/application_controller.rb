@@ -2689,8 +2689,8 @@ Variables: (Names marked with * are required)
   def nice_date_time(time, ofset=1)
     if time
       format = (session and !session[:date_time_format].to_s.blank?) ? session[:date_time_format].to_s : "%Y-%m-%d %H:%M:%S"
-      logger.fatal time
-      logger.fatal format
+      #logger.fatal time
+      #logger.fatal format
       if time.respond_to?(:strftime)
         t = time
       else

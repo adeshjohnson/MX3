@@ -32,8 +32,8 @@ class Invoice < ActiveRecord::Base
     Action.add_action(User.current, "invoice_deleted", user.id.to_s)
   end
 
-  def invoice_was_send?
-    (sent_email == 1 or sent_manually == 1) and Confline.get_value("Invoice_allow_recalculate_after_send").to_i == 0
+  def invoice_was_send?(conf = Confline.get_value("Invoice_allow_recalculate_after_send").to_i )
+    (sent_email == 1 or sent_manually == 1) and  conf == 0
   end
 
   def price_with_tax(options = {})

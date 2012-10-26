@@ -25,14 +25,10 @@
       <table width="100%" class="simple">
         <tr>
           <td>
-            <%= _('Username') %>
-            : <%= text_field_tag 's_username', @options[:s_username], "class" => "input", :size => "15", :maxlength => "30" %>
-            <%= _('first_name') %>
-            : <%= text_field_tag 's_first_name', @options[:s_first_name], "class" => "input", :size => "15", :maxlength => "30" %>
-            <%= _('last_name') %>
-            : <%= text_field_tag 's_last_name', @options[:s_last_name], "class" => "input", :size => "15", :maxlength => "30" %>
-            <%= _('Number') %>
-            : <%= text_field_tag 's_number', @options[:s_number], "class" => "input", :size => "15", :maxlength => "30" %>
+            <%= _('Username') %>: <%= text_field_tag 's_username', @options[:s_username], "class" => "input", :size => "15", :maxlength => "30" %>
+            <%= _('first_name') %>: <%= text_field_tag 's_first_name', @options[:s_first_name], "class" => "input", :size => "15", :maxlength => "30" %>
+            <%= _('last_name') %>: <%= text_field_tag 's_last_name', @options[:s_last_name], "class" => "input", :size => "15", :maxlength => "30" %>
+            <%= _('Number') %>: <%= text_field_tag 's_number', @options[:s_number], "class" => "input", :size => "15", :maxlength => "30" %>
             <br/>
             <br/>
             <%= _('Period_start') %>:
@@ -96,14 +92,10 @@
       <table width="100%" class="simple">
         <tr>
           <td>
-            <%= _('Username') %>
-            : <%= text_field_tag 's_username', @sent_options[:s_username], "class" => "input", :size => "15", :maxlength => "30" %>
-            <%= _('first_name') %>
-            : <%= text_field_tag 's_first_name', @sent_options[:s_fname], "class" => "input", :size => "15", :maxlength => "30" %>
-            <%= _('last_name') %>
-            : <%= text_field_tag 's_last_name', @sent_options[:s_lname], "class" => "input", :size => "15", :maxlength => "30" %>
-            <%= _('Number') %>
-            : <%= text_field_tag 's_number', @sent_options[:s_number], "class" => "input", :size => "15", :maxlength => "30" %>
+            <%= _('Username') %>: <%= text_field_tag 's_username', @sent_options[:s_username], "class" => "input", :size => "15", :maxlength => "30" %>
+            <%= _('first_name') %>: <%= text_field_tag 's_first_name', @sent_options[:s_fname], "class" => "input", :size => "15", :maxlength => "30" %>
+            <%= _('last_name') %>: <%= text_field_tag 's_last_name', @sent_options[:s_lname], "class" => "input", :size => "15", :maxlength => "30" %>
+            <%= _('Number') %>: <%= text_field_tag 's_number', @sent_options[:s_number], "class" => "input", :size => "15", :maxlength => "30" %>
             <br/>
             <br/>
             <%= _('Period_start') %>:
@@ -214,7 +206,7 @@
             <td id="details_<%= inv.id %>" align="center"><%= link_to b_details, {:action => 'invoice_details', :id => inv.id, :currency =>  user.currency ? user.currency.name : ''}, :id => "details_link_"+inv.id.to_s %></td>
         <% end -%>
         <% if @allow_edit %>
-            <td id="delete_<%= inv.id %>" align="center"><%= link_to b_delete, {:action => 'invoice_delete', :id => inv.id}, :id => "delete_link_"+inv.id.to_s, :confirm => _('Are_you_sure'), :method => :post if !inv.invoice_was_send? %></td>
+            <td id="delete_<%= inv.id %>" align="center"><%= link_to b_delete, {:action => 'invoice_delete', :id => inv.id}, :id => "delete_link_"+inv.id.to_s, :confirm => _('Are_you_sure'), :method => :post if !inv.invoice_was_send?(@conf) %></td>
         <% end %>
       </tr>
   <% } %>
