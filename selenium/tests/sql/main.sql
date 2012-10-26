@@ -1594,14 +1594,18 @@ INSERT INTO `lcrs` (`id`, `name`, `order`, `user_id`, `first_provider_percent_li
 (4, 'LCR ordered by price', 'price', 0, 0.000000000000000, NULL, 0),
 (5, 'LCR ordered by priority', 'priority', 0, 0.000000000000000, NULL, 0),
 (6, 'LCR ordered by percent', 'percent', 0, 0.000000000000000, NULL, 0);
+#LCR providers
+INSERT INTO `lcrproviders` (`id`, `lcr_id`, `provider_id`, `active`, `priority`, `percent`) VALUES
+(2, 5, 3, 1, 1, 0),
+(3, 5, 4, 1, 2, 0),
+(4, 5, 5, 1, 3, 0),
+(5, 4, 3, 1, 1, 0),
+(6, 4, 4, 1, 2, 0),
+(7, 4, 5, 1, 3, 0),
+(8, 6, 3, 1, 1, 3333),
+(9, 6, 4, 1, 1, 3333),
+(10, 6, 5, 1, 1, 3333);
 #Users
-UPDATE `users` SET address_id=1 WHERE id=0;
-UPDATE `users` SET address_id=5 WHERE id=2;
-UPDATE `users` SET address_id=7 WHERE id=7;
-UPDATE `users` SET address_id=7 WHERE id=8;
-UPDATE `users` SET address_id=8 WHERE id=9;
-UPDATE `users` SET address_id=8 WHERE id=10;
-UPDATE `users` SET address_id=5 WHERE id=11;
 INSERT INTO `users` (`id`, `username`, `password`, `usertype`, `logged`, `first_name`, `last_name`, `calltime_normative`, `show_in_realtime_stats`, `balance`, `frozen_balance`, `lcr_id`, `postpaid`, `blocked`, `tariff_id`, `month_plan_perc`, `month_plan_updated`, `sales_this_month`, `sales_this_month_planned`, `show_billing_info`, `primary_device_id`, `credit`, `clientid`, `agreement_number`, `agreement_date`, `language`, `taxation_country`, `vat_number`, `vat_percent`, `address_id`, `accounting_number`, `owner_id`, `hidden`, `allow_loss_calls`, `vouchers_disabled_till`, `uniquehash`, `temporary_id`, `send_invoice_types`, `call_limit`,`sms_tariff_id`, `sms_lcr_id`, `sms_service_active`, `cyberplat_active`, `call_center_agent`, `generate_invoice`, `tax_1`, `tax_2`, `tax_3`, `tax_4`, `block_at`, `block_at_conditional`, `block_conditional_use`, `recording_enabled`, `recording_forced_enabled`, `recordings_email`, `recording_hdd_quota`, `warning_email_active`, `warning_email_balance`, `warning_email_sent`, `tax_id`, `invoice_zero_calls`, `acc_group_id`, `hide_destination_end`, `warning_email_hour`, `warning_balance_call`, `warning_balance_sound_file_id`, `own_providers`, `ignore_global_monitorings`, `currency_id`, `quickforwards_rule_id`, `spy_device_id`, `time_zone`, `minimal_charge`, `minimal_charge_start_at`) VALUES
 (6, 'wholesale_accountant', 'b53b9cf265c64f4a8ffce083c0b564e76c470a8e', 'accountant', 0, 'Test', 'Wholesale Accountant', 3, 0, 10, 0, 1, 1, 0, 6, 0, NULL, 0, 0, 1, 9, -1, '876543', '0000000004', '2012-01-20', 'lt', 123, '', 0, 5, '', 0, 0, 0, '2000-01-01 00:00:00', NULL, NULL, 0, 0, NULL, NULL, 0, 0, 0, 1, 0, 0, 0, 0, '2008-01-01', 15, 0, 0, 0, '', 104, 0, 0, 0, 2, 1, 1, -1, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, NULL),
 (7, 'retail_accountant', '0b030d953dd504e78262df95495c65b0f58a980a', 'accountant', 0, 'Test', 'Retail Accountant', 3, 0, 20, 0, 1, 0, 0, 9, 0, NULL, 0, 0, 1, 21, -1, 'rety65432', '0000000005', '2012-01-20', '', 123, '', 0, 6, '', 0, 0, 0, '2000-01-01 00:00:00', NULL, NULL, 0, 0,  NULL, NULL, 0, 0, 0, 1, 0, 0, 0, 0, '2008-01-01', 15, 0, 0, 0, '', 104, 0, 0, 0, 3, 1, 2, -1, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, NULL),
@@ -1619,6 +1623,18 @@ INSERT INTO `users` (`id`, `username`, `password`, `usertype`, `logged`, `first_
 (19, 'wholesale_wres_user', 'ff1afdd6e3738df117b9596db87865eb88c01676', 'user', 0, 'Test', 'Wholesale wres User', 3, 0, 2, 0, 1, 1, 0, 22, 0, NULL, 0, 0, 1, 36, -1, '', '0000000017', '2012-01-20', '', 123, '', 0, 19, '', 13, 0, 0, '2000-01-01 00:00:00', NULL,NULL, 0, 0,NULL, NULL, 0, 0, 0, 1, 0, 0, 0, 0, '2008-01-01', 15, 0, 0, 0, '', 104, 0, 0, 0, 16, 1, 0, -1, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, NULL),
 (20, 'wholesale_wrspro_user', '39ef97169b804d3d28c49ecd9a2090f4505b4e74', 'user', 0, 'Test', 'Wholesale wrspro User', 3, 0, 56, 0, 3, 0, 0, 24, 0, NULL, 0, 0, 1, 40, -1, '', '0000000018', '2012-01-20', '', 123, '', 0, 20, '', 11, 0, 0, '2000-01-01 00:00:00', NULL, NULL, 0, 0,NULL, NULL, 0, 0, 0, 1, 0, 0, 0, 0, '2008-01-01', 15, 0, 0, 0, '', 104, 0, 0, 0, 17, 1, 0, -1, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, NULL),
 (21, 'retail_wrspro_user', '483d094847b839542b2e94f8957019a64b531b4b', 'user', 0, 'Test', 'Retail wrspro User', 3, 0, 8, 0, 3, 1, 0, 23, 0, NULL, 0, 0, 1, 38, -1, '', '0000000019', '2012-01-20', '', 123, '', 0, 22, '', 11, 0, 0, '2000-01-01 00:00:00', NULL,NULL, 0, 0, NULL, NULL, 0, 0, 0, 1, 0, 0, 0, 0, '2012-01-01', 15, 0, 0, 0, '', 104, 0, 0, 0, 19, 1, 0, -1, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, NULL);
+UPDATE `users` SET address_id=1 WHERE id=0;
+UPDATE `users` SET address_id=5 WHERE id=2;
+UPDATE `users` SET address_id=7 WHERE id=7;
+UPDATE `users` SET address_id=7 WHERE id=8;
+UPDATE `users` SET address_id=8 WHERE id=9;
+UPDATE `users` SET address_id=8 WHERE id=10;
+UPDATE `users` SET address_id=5 WHERE id=11;
+UPDATE `users` SET lcr_id=4 WHERE id in (0,2,8,9);
+UPDATE `users` SET lcr_id=5 WHERE id in (3,10,11,12,13);
+UPDATE `users` SET lcr_id=6 WHERE id in (4,6,7);
+UPDATE `users` SET lcr_id=6 WHERE id in (16,17);
+UPDATE `users` SET lcr_id=6 WHERE id in (20,21);
 #Devices
 INSERT INTO `devices` (`id`, `name`, `host`, `secret`, `context`, `ipaddr`, `port`, `regseconds`, `accountcode`, `callerid`, `extension`, `voicemail_active`, `username`, `device_type`, `user_id`, `primary_did_id`, `works_not_logged`, `forward_to`, `record`, `transfer`, `disallow`, `allow`, `deny`, `permit`, `nat`, `qualify`, `fullcontact`, `canreinvite`, `devicegroup_id`, `dtmfmode`, `callgroup`, `pickupgroup`, `fromuser`, `fromdomain`, `trustrpid`, `sendrpid`, `insecure`, `progressinband`, `videosupport`, `location_id`, `description`, `istrunk`, `cid_from_dids`, `pin`, `tell_balance`, `tell_time`, `tell_rtime_when_left`, `repeat_rtime_every`, `t38pt_udptl`, `regserver`, `ani`, `promiscredir`, `timeout`, `process_sipchaninfo`, `temporary_id`, `allow_duplicate_calls`, `call_limit`, `lastms`, `faststart`, `h245tunneling`, `latency`, `grace_time`, `recording_to_email`, `recording_keep`, `recording_email`, `record_forced`, `fake_ring`, `save_call_log`, `mailbox`, `server_id`, `enable_mwi`, `authuser`, `requirecalltoken`, `language`, `use_ani_for_cli`, `calleridpres`, `change_failed_code_to`, `reg_status`, `max_timeout`, `forward_did_id`) VALUES
 (8, '1001', 'dynamic', 'gdf2vb1p2qhz', 'mor_local', '', 5060, 0, 8, NULL, '1001', 0, '1001', 'SIP', 6, 0, 1, 0, 0, 'no', 'all', 'alaw;g729', '0.0.0.0/0.0.0.0', '0.0.0.0/0.0.0.0', 'yes', '1000', NULL, 'no', 4, 'rfc2833', NULL, NULL, NULL, NULL, 'no', 'no', NULL, 'no', 'no', 1, 'wacc_SIP_device', 0, 0, '460184', 0, 0, 60, 60, 'no', NULL, 0, 'no', 60, 0, NULL, 0, 0, 0, 'yes', 'yes', 0, NULL, 0, 0, '', 0, 0, 0, '', 1, 0, '', 'no', 'en', 0, '', 0, NULL, 0, -1),
