@@ -138,29 +138,39 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=page_title</td>
-	<td>New Ring Group</td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Ring Group name: </td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>This Ring Group will be reached by such local extension: </td>
-	<td></td>
+	<td>type</td>
+	<td>dialplan_name</td>
+	<td>RGname</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=dialplan_name</td>
-	<td>dfsdfsdf</td>
+	<td>ringgroup_comment</td>
+	<td>Komentaras</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[timeout]</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[options]</td>
+	<td>Pasirinkimas</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>ringgroup[strategy]</td>
+	<td>ringall</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ringgroup[cid_prefix]</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=ringgroup[did_id]</td>
+	<td>label=37060011245</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
