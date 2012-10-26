@@ -55,6 +55,10 @@ module ApplicationHelper
         format = session[:date_format].to_s.blank? ? "%Y-%m-%d" : session[:date_format].to_s
       end
       t = date.respond_to?(:strftime) ? date : date.to_time
+      if format.to_s.include?("H")
+        @date = format.to_s.split(" ")
+        format = @date[0] == "00:00:00" ? @date[1].to_s : @date[0].to_s
+      end
       d = t.strftime(format.to_s)
     end
     d
