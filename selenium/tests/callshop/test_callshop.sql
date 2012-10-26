@@ -1,6 +1,5 @@
 INSERT INTO `groups` (`id`, `name`, `grouptype`) VALUES  
-(1, 'All users', 'simple'),
-(2, 'Test_shop', 'callshop'); 
+(1, 'All users', 'simple'); 
 
 INSERT INTO `usergroups` (`id`, `user_id`, `group_id`, `gusertype`) VALUES 
 	 	(1, 0, 1, 'manager'), 
