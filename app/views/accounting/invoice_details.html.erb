@@ -35,19 +35,21 @@
               <td id="issue_date" align="right"> <%= nice_date(@invoice.issue_date, 0) %> </td>
             </tr>
 
-            <tr class="row2">
+            <% if @invoice.paid == 0 %>
+                <tr class="row2">
+                  <th align="left"><%= _('Create_payment_for_completed_invoice') %>:</th>
+                  <td id="create_payment_td" align="right"> <%= check_box_tag 'create_payment', "1", false %> </td>
+                </tr>
+            <% end %>
+
+            <tr class="row1">
               <th align="left"><%= _('Paid') %>:</th>
               <td id="paid" align="right">
                 <%= image_submit_tag 'icons/cross.png', :title => _('Mark_as_paid'), :id => "image_not_paid" if @invoice.paid == 0 %>
                 <%= image_submit_tag 'icons/check.png', :title => _('Mark_as_unpaid'), :id => "image_paid" if @invoice.paid == 1 %>
               </td>
             </tr>
-            <% if @invoice.paid == 0 %>
-                <tr class="row1">
-                  <th align="left"><%= _('Create_payment_for_completed_invoice') %>:</th>
-                  <td id="create_payment_td" align="right"> <%= check_box_tag 'create_payment', "1", false %> </td>
-                </tr>
-            <% end %>
+
             <tr class="row1">
               <th align="left"><%= _('Invoice_sent_manually') %>:</th>
               <td id="manually" align="right">
