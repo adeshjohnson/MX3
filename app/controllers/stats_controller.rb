@@ -1633,7 +1633,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         @a_provider_price2[i]=0
         @_billsec2[i]=0
 
-        sql ="SELECT COUNT(calls.id) as \'calls\',  SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as \'billsec\' FROM calls WHERE ((calls.provider_id = '#{params[:id]}' and calls.callertype = 'Local') OR (calls.did_provider_id = '#{params[:id]}' and calls.callertype = 'Outside'))" +
+        sql ="SELECT COUNT(calls.id) as \'calls\',  SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as \'billsec\' FROM calls WHERE ((calls.provider_id = '#{params[:id].to_i}' and calls.callertype = 'Local') OR (calls.did_provider_id = '#{params[:id].to_i}' and calls.callertype = 'Outside'))" +
             "AND calls.calldate BETWEEN '#{@a_date[i]} 00:00:00' AND '#{@a_date[i]} 23:23:59'" +
             "AND disposition = 'ANSWERED' #{cond}"
         res = ActiveRecord::Base.connection.select_all(sql)
@@ -1651,8 +1651,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
           @calls3 = Call.find(:all,
                               :select => s.join(' , '),
                               :joins => "LEFT JOIN providers ON (providers.id = calls.provider_id)",
-                              :conditions => "((calls.provider_id = '#{params[:id]}' and calls.callertype = 'Local') OR (calls.did_provider_id = '#{params[:id]}' and calls.callertype = 'Outside')) AND disposition = 'ANSWERED' " +
-                                  "AND calldate BETWEEN '#{@a_date[i]} 00:00:00' AND '#{@a_date[i]} 23:23:59' #{cond}",
+                              :conditions => ["((calls.provider_id = ? and calls.callertype = 'Local') OR (calls.did_provider_id = ? and calls.callertype = 'Outside')) AND disposition = 'ANSWERED' AND calldate BETWEEN '#{@a_date[i]} 00:00:00' AND '#{@a_date[i]} 23:23:59' #{cond}", params[:id], params[:id]],
                               :group => "calls.provider_id",
                               :order => "calldate DESC")
           @a_user_price2[i]= nice_number @calls3[0].sel_price
@@ -1666,7 +1665,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         @t_calls += @a_calls[i]
         @t_billsec += @a_billsec[i]
 
-        sqll ="SELECT COUNT(calls.id) as \'calls2\' FROM calls WHERE ((calls.provider_id = '#{params[:id]}' and calls.callertype = 'Local') OR (calls.did_provider_id = '#{params[:id]}' and calls.callertype = 'Outside'))" +
+        sqll ="SELECT COUNT(calls.id) as \'calls2\' FROM calls WHERE ((calls.provider_id = '#{params[:id].to_i}' and calls.callertype = 'Local') OR (calls.did_provider_id = '#{params[:id].to_i}' and calls.callertype = 'Outside'))" +
             "AND calls.calldate BETWEEN '#{@a_date[i]} 00:00:00' AND '#{@a_date[i]} 23:23:59' #{cond}"
         res2 = ActiveRecord::Base.connection.select_all(sqll)
         @a_calls2[i] = res2[0]["calls2"].to_i
@@ -1764,7 +1763,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     if params[:provider_id]
       if params[:provider_id].to_i != -1
         @provider = Provider.find(params[:provider_id])
-        cond +=" ((calls.provider_id = '#{params[:provider_id]}' and calls.callertype = 'Local') OR (calls.did_provider_id = '#{params[:provider_id]}' and calls.callertype = 'Outside')) AND "
+        cond +=" ((calls.provider_id = '#{params[:provider_id].to_i}' and calls.callertype = 'Local') OR (calls.did_provider_id = '#{params[:provider_id].to_i}' and calls.callertype = 'Outside')) AND "
         @prov = @provider.id
         @s_provider = @prov
       end
@@ -1836,7 +1835,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     descond=''
 
     if params[:provider_id].to_i != -1
-      cond +=" ((calls.provider_id = '#{params[:provider_id]}' and calls.callertype = 'Local') OR (calls.did_provider_id = '#{params[:provider_id]}' and calls.callertype = 'Outside')) AND "
+      cond +=" ((calls.provider_id = '#{params[:provider_id].to_i}' and calls.callertype = 'Local') OR (calls.did_provider_id = '#{params[:provider_id].to_i}' and calls.callertype = 'Outside')) AND "
     end
     @user_id = -1
     @user_id = params[:s_user].to_i if params[:s_user]
@@ -2445,9 +2444,9 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     params[:call_type] ? @call_type = params[:call_type] : @call_type = "all"
     @orig_call_type = @call_type
     if @direction == "incoming"
-      disposition = " (calls.did_provider_id = '#{params[:id]}' OR calls.src_device_id = '#{provider.device_id}' )"
+      disposition = " (calls.did_provider_id = '#{params[:id].to_i}' OR calls.src_device_id = '#{provider.device_id}' )"
     else
-      disposition = " calls.provider_id = '#{params[:id]}' "
+      disposition = " calls.provider_id = '#{params[:id].to_i}' "
     end
     disposition += " AND disposition = '#{@call_type}' " if @call_type != "all"
     disposition += " AND calldate BETWEEN '#{date_from}' AND '#{date_till}'"
