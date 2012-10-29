@@ -4465,7 +4465,7 @@ Localization.define('en') do |l|
   l.store 'Device_already_exists', 'Device already exists'
   l.store 'Add_device', 'Add Device'
   l.store 'Server_devices', 'Server Devices'
-  l.store 'Dynamic_Username_Password', 'Dynamic Username Password'
+  l.store 'Dynamic_Username_Password', 'Dynamic (Username/Password)'
   l.store 'Hostname_/_IP', 'Hostname/IP'
   l.store 'Hostname_+_IP', 'Hostname+IP'
   l.store 'Click_here_to_see_bad_numbers', 'Click here to see bad numbers'
