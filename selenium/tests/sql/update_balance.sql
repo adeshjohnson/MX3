@@ -1,3 +1,4 @@
+update users set balance=55;
 update users set balance=60 where id=0;
 update users set currency_id=44 where id=0;
 update users set balance=26 where id=2;
