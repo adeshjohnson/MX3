@@ -33,19 +33,20 @@ class Ringgroup < ActiveRecord::Base
     appdata = ''
     if devices
       devices.each_with_index { |d, i|
-        if d.device_type.to_s == 'Virtual'
+        # all devices will be dialed over Local, not only Virtual for CCL compatibility
+        #if d.device_type.to_s == 'Virtual'
           if i > 0
             appdata += "&Local/#{d.name}@mor_local"
           else
             appdata += "Local/#{d.name}@mor_local"
           end
-        else
-          if i > 0
-            appdata += "&#{d.device_type}/#{d.name}"
-          else
-            appdata += "#{d.device_type}/#{d.name}"
-          end
-        end
+        #else
+          #if i > 0
+          #  appdata += "&#{d.device_type}/#{d.name}"
+          #else
+          #  appdata += "#{d.device_type}/#{d.name}"
+          #end
+        #end
       }
     end
 
