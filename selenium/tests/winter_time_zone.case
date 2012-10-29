@@ -62,16 +62,7 @@
 	<td>//body</td>
 	<td></td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/global_time_zone_plus_two</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/test/load_delta_sql/sql/global_time_zone_plus_two</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>//body</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -94,7 +85,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Succesfully logged in</td>
+	<td>Successfully logged in</td>
 	<td></td>
 </tr>
 <!--ADMIN GMT+00:00-->
@@ -105,7 +96,7 @@
 </tr>
 <tr>
 	<td>verifySelectedLabel</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>(GMT+00:00) Casablanca, Dublin, Edinburgh, Lisbon, London, Monrovia</td>
 </tr>
 <!--BACKUPS-->
@@ -325,7 +316,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT+05:00) Islamabad, Karachi, Tashkent</td>
 </tr>
 <tr>
@@ -486,7 +477,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT-02:00) Mid-Atlantic</td>
 </tr>
 <tr>
@@ -681,7 +672,7 @@
 </tr>
 <tr>
 	<td>verifySelectedLabel</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>(GMT-02:00) Mid-Atlantic</td>
 </tr>
 <!--LAST CALLS STATS-->
@@ -1128,23 +1119,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>period_end: &quot;2009-01-01&quot;</td>
+	<td>assertTextPresent</td>
+	<td>2009-01-01</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>period_start: &quot;2009-01-01&quot;</td>
+	<td>assertTextPresent</td>
+	<td>2011-11-06</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>issue_date: &quot;2011-11-06&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>price: &quot;5&quot;</td>
+	<td>assertTextPresent</td>
+	<td> price: 5.0</td>
 	<td></td>
 </tr>
 <tr>
@@ -1153,17 +1139,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>2009-01-01</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>2011-11-06</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>5.0000</td>
 	<td></td>
 </tr>
@@ -1173,13 +1159,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>2011-11-06</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>price: &quot;4&quot;</td>
+	<td>assertTextPresent</td>
+	<td>4.0000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1188,12 +1174,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>2011-11-06</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>4.0000</td>
 	<td></td>
 </tr>
@@ -1203,12 +1189,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>2009-01-01</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>2011-11-06</td>
 	<td></td>
 </tr>
@@ -1218,12 +1204,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>2011-11-06</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>4.0</td>
 	<td></td>
 </tr>
@@ -1233,22 +1219,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>2011-11-06</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>2009-01-01</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>2009-01-01</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>4.0000</td>
 	<td></td>
 </tr>
@@ -1362,7 +1348,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT+02:00) Athens, Cairo, Helsinki, Istanbul, Kyiv, Minsk, Riga, Tallinn, Vilnius</td>
 </tr>
 <tr>
@@ -1495,12 +1481,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=user[warning_email_balance]</td>
+	<td>id=user_warning_email_balance</td>
 	<td>500.0000</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=user[warning_email_hour]_0</td>
+	<td>id=user_warning_email_hour_0</td>
 	<td></td>
 </tr>
 <tr>
@@ -1515,7 +1501,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>User's settings succesfully changed: Test Accountant</td>
+	<td>User's settings successfully changed: Test Accountant</td>
 	<td></td>
 </tr>
 <tr>
@@ -1530,12 +1516,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=user[warning_email_balance]</td>
+	<td>id=user_warning_email_balance</td>
 	<td>10.0000</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=user[warning_email_hour]_0</td>
+	<td>id=user_warning_email_hour_0</td>
 	<td></td>
 </tr>
 <tr>
@@ -1550,7 +1536,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>User's settings succesfully changed: Test Reseller</td>
+	<td>User's settings successfully changed: Test Reseller</td>
 	<td></td>
 </tr>
 <!--CALLS PER DAY-->
@@ -1667,7 +1653,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT-09:00) Alaska</td>
 </tr>
 <tr>
@@ -1677,7 +1663,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>User's settings succesfully changed: User Resellers</td>
+	<td>User's settings successfully changed: User Resellers</td>
 	<td></td>
 </tr>
 <tr>
@@ -1692,12 +1678,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=user[warning_email_balance]</td>
+	<td>id=user_warning_email_balance</td>
 	<td>110.0000</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=user[warning_email_hour]_0</td>
+	<td>id=user_warning_email_hour_0</td>
 	<td></td>
 </tr>
 <tr>
@@ -1712,7 +1698,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>User's settings succesfully changed: User Resellers</td>
+	<td>User's settings successfully changed: User Resellers</td>
 	<td></td>
 </tr>
 <!--NEW INVOICE-->
@@ -1839,22 +1825,17 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>period_end: &quot;2009-01-01&quot;</td>
+	<td>2009-01-01</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>period_start: &quot;2009-01-01&quot;</td>
+	<td>2011-11-06</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>issue_date: &quot;2011-11-06&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>price: &quot;5&quot;</td>
+	<td>price: 5.0</td>
 	<td></td>
 </tr>
 <tr>
@@ -1889,7 +1870,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>price: &quot;4&quot;</td>
+	<td>4.0000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1999,7 +1980,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>User's settings succesfully changed: Test Reseller</td>
+	<td>User's settings successfully changed: Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
@@ -2009,7 +1990,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=user[time_zone]</td>
+	<td>id=user_time_zone</td>
 	<td>label=(GMT+07:00) Bangkok, Hanoi, Jakarta, Novosibirsk</td>
 </tr>
 <tr>
