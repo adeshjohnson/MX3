@@ -883,7 +883,7 @@ ORDER BY dids.did ASC"
         var << @user.id
         @opts[:user] = @user.id
         if params[:device] and not (params[:device].strip.blank? or params[:device].strip.downcase == 'all')
-          @device = current_user.load_users_devices(:first, :conditions => "devices.id = '#{params[:device]}'")
+          @device = current_user.load_users_devices(:first, :conditions => ["devices.id =  ?", params[:device]] )
           if @device
             cond << "dids.device_id = ?"
             var << @device.id
@@ -903,7 +903,7 @@ ORDER BY dids.did ASC"
     if @s_user and @s_user.owner_id == correct_owner_id
 
       if params[:s_device] and not (params[:s_device].strip.blank? or params[:s_device].strip.downcase == 'all')
-        @s_device = current_user.load_users_devices(:first, :conditions => "devices.id = '#{params[:s_device]}'")
+        @s_device = current_user.load_users_devices(:first, :conditions => ["devices.id = ? ", params[:s_device]])
         unless @s_device
           flash[:notice] = _("Device_not_found")
           redirect_to({:action => 'dids_interval_add_to_user'}.merge(@opts)) and return false
@@ -1370,7 +1370,7 @@ ORDER BY dids.did ASC"
       redirect_to :controller => "callc", :action => 'main' and return false
     end
 
-    if current_user.usertype == 'reseller' and params[:provider] and current_user.own_providers.to_i == 1 and !current_user.providers.find(:first, :conditions => "providers.id = #{params[:provider]}") and params[:provider] != Confline.get_value("DID_default_provider_to_resellers").to_i
+    if current_user.usertype == 'reseller' and params[:provider] and current_user.own_providers.to_i == 1 and !current_user.providers.find(:first, :conditions => ["providers.id = ? ", params[:provider]]) and params[:provider] != Confline.get_value("DID_default_provider_to_resellers").to_i
       dont_be_so_smart
       redirect_to :controller => "callc", :action => 'main' and return false
     end
@@ -1402,7 +1402,7 @@ ORDER BY dids.did ASC"
       end
     end
     if params[:did] and params[:did][:provider_id]
-      if current_user.usertype == 'reseller' and params[:did][:provider_id] and current_user.own_providers.to_i == 1 and !current_user.providers.find(:first, :conditions => "providers.id = #{params[:did][:provider_id]}") and params[:did][:provider_id] != Confline.get_value("DID_default_provider_to_resellers").to_i
+      if current_user.usertype == 'reseller' and params[:did][:provider_id] and current_user.own_providers.to_i == 1 and !current_user.providers.find(:first, :conditions => ["providers.id = ?", params[:did][:provider_id]]) and params[:did][:provider_id] != Confline.get_value("DID_default_provider_to_resellers").to_i
         dont_be_so_smart
         redirect_to :controller => "callc", :action => 'main' and return false
       end

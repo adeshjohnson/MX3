@@ -49,9 +49,9 @@ class CreditNoteController < ApplicationController
 
   def create
     if current_user.is_accountant?
-      condition = ["owner_id = 0 AND id = #{params[:user][:id].to_i}"]
+      condition = ["owner_id = 0 AND id = ?", params[:user][:id].to_i]
     elsif current_user.is_reseller? or current_user.is_admin?
-      condition = ["owner_id = #{current_user.id} AND id = #{params[:user][:id].to_i}"]
+      condition = ["owner_id = #{current_user.id} AND id = ? ", params[:user][:id].to_i]
     end
     user = User.find(:first, :conditions => condition)
     if user

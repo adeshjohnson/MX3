@@ -992,7 +992,7 @@ class AccountingController < ApplicationController
 
   def generate_invoice_detailed_pdf
     #invoice = Invoice.find_by_id(params[:id], :include => [:tax, :user])
-    invoice = Invoice.where("id = #{params[:id]}").includes([:tax, :user]).first
+    invoice = Invoice.where(["id = ? ", params[:id]]).includes([:tax, :user]).first
 
     unless invoice
       if params[:action] == "generate_invoice_detailed_pdf"

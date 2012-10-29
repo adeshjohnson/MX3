@@ -242,7 +242,7 @@ in before filter : lcr (:find_lcr_from_id)
 =end
   def providers_sort_save
     params[:sortable_list].each_index do |i|
-      item = SmsLcrprovider.find(:first, :conditions => "sms_provider_id = #{params[:sortable_list][i]} AND sms_lcr_id = #{params[:id]}")
+      item = SmsLcrprovider.find(:first, :conditions => ["sms_provider_id = ? AND sms_lcr_id = ?", params[:sortable_list][i], params[:id]])
       item.priority = i
       item.save
     end

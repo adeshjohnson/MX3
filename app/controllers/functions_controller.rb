@@ -400,7 +400,7 @@ class FunctionsController < ApplicationController
     #      flash[:notice]=_('Dialplan_was_not_found')
     #      redirect_to :action=>:pbx_functions and return false
     #    end
-    dids = Did.count(:all, :conditions => "dialplan_id = '#{params[:id].to_i}'")
+    dids = Did.count(:all, :conditions => ["dialplan_id =  ?", params[:id].to_i])
     if dids.to_i == 0
       pbx_function_delete_extline(@dialplan)
 

@@ -228,7 +228,7 @@ class LcrsController < ApplicationController
   def update_lcrpartial
     @dest = Destination.find(
         :first,
-        :conditions => "prefix = '#{params[:prefix]}'"
+        :conditions => ["prefix = ? ", params[:prefix]]
     )
     unless @dest
       flash[:notice] = _("Prefix_not_found")
@@ -327,7 +327,7 @@ class LcrsController < ApplicationController
   #in before filter : @lcr
   def providers_sort_save
     params[:sortable_list].each_index do |i|
-      item = Lcrprovider.find(:first, :conditions => "provider_id = #{params[:sortable_list][i]} AND lcr_id = #{@lcr.id}")
+      item = Lcrprovider.find(:first, :conditions => ["provider_id = ? AND lcr_id = ?", params[:sortable_list][i], @lcr.id])
       unless item
         flash[:notice] = _('Lcrprovider_was_not_found')
         redirect_to :action => :list and return false
@@ -431,8 +431,8 @@ class LcrsController < ApplicationController
   def clone_lcrs
     if current_user.is_admin?
       if params[:resellerA].to_i > 0 and params[:resellerB].to_i > 0 and params[:lcr] and params[:lcr].size > 0
-        resellerA = User.find(:all, :conditions => ["id = #{params[:resellerA].to_i} AND usertype = 'reseller'"])
-        resellerB = User.find(:all, :conditions => ["id = #{params[:resellerB].to_i} AND usertype = 'reseller'"])
+        resellerA = User.find(:all, :conditions => ["id = ? AND usertype = 'reseller'", params[:resellerA].to_i])
+        resellerB = User.find(:all, :conditions => ["id = ? AND usertype = 'reseller'", params[:resellerB].to_i ])
         if not resellerA or not resellerB
           flash[:notice] = _('Specify_both_resellers')
           redirect_to :controller => "lcrs", :action => "clone_options" and return false

@@ -207,7 +207,7 @@ class DialplansController < ApplicationController
 
     if @dp.dptype == "quickforwarddids"
       @dp.data10 = (params[:dialplan][:data10].to_i == 1 ? 1 : 0)
-      if params[:users_device].to_i != 0 and not User.find(:first, :joins => "JOIN devices ON devices.user_id = users.id", :conditions => "devices.id = #{params[:users_device].to_i} AND users.owner_id = #{current_user.get_corrected_owner_id}")
+      if params[:users_device].to_i != 0 and not User.find(:first, :joins => "JOIN devices ON devices.user_id = users.id", :conditions => ["devices.id = ? AND users.owner_id = ?", params[:users_device].to_i, current_user.get_corrected_owner_id])
         flash[:notice] = _('Device_was_not_found')
         redirect_to :action => 'edit', :id => @dp.id and return false
       else
@@ -282,7 +282,7 @@ class DialplansController < ApplicationController
     end
 
     if params[:dialplan][:dptype] == "callingcard"
-      @cardgroup = Cardgroup.find(:first, :conditions => "id = #{params[:dialplan_number_pin_length]}")
+      @cardgroup = Cardgroup.find(:first, :conditions => ["id = ?", params[:dialplan_number_pin_length]])
       unless @cardgroup
         flash[:notice]=_('Cardgroup_was_not_found')
         redirect_to :action => :dialplans and return false
@@ -316,7 +316,7 @@ class DialplansController < ApplicationController
 
     if dp.dptype == "quickforwarddids"
       dp.data10 = (params[:dialplan][:data10].to_i == 1 ? 1 : 0)
-      if params[:users_device].to_i != 0 and not User.find(:first, :joins => "JOIN devices ON devices.user_id = users.id", :conditions => "devices.id = #{params[:users_device].to_i} AND users.owner_id = #{current_user.get_corrected_owner_id}")
+      if params[:users_device].to_i != 0 and not User.find(:first, :joins => "JOIN devices ON devices.user_id = users.id", :conditions => ["devices.id = ? AND users.owner_id = ?", params[:users_device].to_i, current_user.get_corrected_owner_id])
         flash[:notice] = _('Device_was_not_found')
         redirect_to :action => 'new' and return false
       else

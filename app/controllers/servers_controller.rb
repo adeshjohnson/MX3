@@ -239,12 +239,12 @@ class ServersController < ApplicationController
   end
 
   def delete_device
-    device = Device.where("id = #{params[:id]}").first
+    device = Device.where(["id = ?", params[:id]]).first
     unless device
       flash[:notice] = _('Device_not_found')
       redirect_to :action => 'server_devices_list' and return false
     end
-    server = Server.where("id = #{params[:serv_id]}").first
+    server = Server.where(["id = ?", params[:serv_id]]).first
     unless server
       flash[:notice] = _('Server_not_found')
       redirect_to :action => 'server_devices_list' and return false
