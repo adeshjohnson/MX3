@@ -1154,8 +1154,8 @@ class TariffsController < ApplicationController
       @rows = session[:bad_lines_array]
       @status = session[:bad_lines_status_array]
     else
-      if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id]}".to_sym])
-        @rows = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session["tariff_name_csv_#{params[:tariff_id]}".to_sym]} WHERE f_error = 1")
+      if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id].to_i}".to_sym])
+        @rows = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session["tariff_name_csv_#{params[:tariff_id].to_i}".to_sym]} WHERE f_error = 1")
       end
     end
     render(:layout => "layouts/mor_min")
@@ -1181,8 +1181,8 @@ class TariffsController < ApplicationController
         redirect_to :controller => "tariffs", :action => "list"
       else
         @csv2=1
-        if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id]}".to_sym])
-          @csv_file = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session["tariff_name_csv_#{params[:tariff_id]}".to_sym]} WHERE not_found_in_db = 1 AND f_error = 0")
+        if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id].to_i}".to_sym])
+          @csv_file = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session["tariff_name_csv_#{params[:tariff_id].to_i}".to_sym]} WHERE not_found_in_db = 1 AND f_error = 0")
         end
         render(:layout => "layouts/mor_min")
       end
@@ -1201,8 +1201,8 @@ class TariffsController < ApplicationController
       @dst = session[:dst_to_update_hash]
     else
       @tariff_id = params[:tariff_id].to_i
-      if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id]}".to_sym])
-        @dst = ActiveRecord::Base.connection.select_all("SELECT destinations.prefix, col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_dst]} as new_name, IFNULL(original_destination_name,destinations.name) as dest_name FROM destinations JOIN #{session["tariff_name_csv_#{params[:tariff_id]}".to_sym]} ON (replace(col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]}, '\\r', '') = prefix)  WHERE ned_update IN (1, 3, 5, 7) ")
+      if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id].to_i}".to_sym])
+        @dst = ActiveRecord::Base.connection.select_all("SELECT destinations.prefix, col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_dst]} as new_name, IFNULL(original_destination_name,destinations.name) as dest_name FROM destinations JOIN #{session["tariff_name_csv_#{params[:tariff_id].to_i}".to_sym]} ON (replace(col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]}, '\\r', '') = prefix)  WHERE ned_update IN (1, 3, 5, 7) ")
       end
     end
     render(:layout => "layouts/mor_min")
@@ -1218,8 +1218,8 @@ class TariffsController < ApplicationController
       @dst = session[:subcodes_to_update_hash]
     else
       @tariff_id = params[:tariff_id].to_i
-      if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id]}".to_sym])
-        @dst = ActiveRecord::Base.connection.select_all("SELECT destinations.prefix, col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_subcode]} as new_sub, destinations.subcode as dest_sub FROM destinations JOIN #{session["tariff_name_csv_#{params[:tariff_id]}".to_sym]} ON (replace(col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]}, '\\r', '') = prefix)  WHERE ned_update IN (2, 3, 6, 7) ")
+      if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id].to_i}".to_sym])
+        @dst = ActiveRecord::Base.connection.select_all("SELECT destinations.prefix, col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_subcode]} as new_sub, destinations.subcode as dest_sub FROM destinations JOIN #{session["tariff_name_csv_#{params[:tariff_id].to_i}".to_sym]} ON (replace(col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]}, '\\r', '') = prefix)  WHERE ned_update IN (2, 3, 6, 7) ")
       end
     end
     render(:layout => "layouts/mor_min")
@@ -1235,9 +1235,9 @@ class TariffsController < ApplicationController
       @dst = session[:dst_to_update_hash]
     else
       @tariff_id = params[:tariff_id].to_i
-      if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id]}".to_sym])
+      if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id].to_i}".to_sym])
         imp_cc = session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_cc]
-        table_name = session["tariff_name_csv_#{params[:tariff_id]}".to_sym]
+        table_name = session["tariff_name_csv_#{params[:tariff_id].to_i}".to_sym]
         imp_prefix = session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]
         @directions = ActiveRecord::Base.connection.select_all("SELECT prefix, destinations.direction_code old_direction_code, replace(col_#{imp_cc}, '\\r', '') new_direction_code from #{table_name} join directions on (replace(col_#{imp_cc}, '\\r', '') = directions.code) join destinations on (replace(col_#{imp_prefix}, '\\r', '') = destinations.prefix) WHERE destinations.direction_code != directions.code;")
       end

@@ -1656,7 +1656,7 @@ class ApiController < ApplicationController
 
   def simple_balance
     if Confline.get_value("Devices_Check_Ballance").to_i == 1
-      @user = User.find(:first, :conditions => "uniquehash = '#{params[:id]}'")
+      @user = User.find(:first, :conditions => ["uniquehash = ?", params[:id])
       if @user
         if params[:currency].to_s.blank? # in case currency was not supplied or is blank return balance in system's currency
           user_balance = @user.balance

@@ -262,8 +262,8 @@ class AutodialerController < ApplicationController
 
   def bad_numbers_from_csv
     @page_title = _('Bad_rows_from_CSV_file')
-    if ActiveRecord::Base.connection.tables.include?(session["atodialer_number_import_#{params[:id]}".to_sym])
-      @rows = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session["atodialer_number_import_#{params[:id]}".to_sym]} WHERE f_error = 1")
+    if ActiveRecord::Base.connection.tables.include?(session["atodialer_number_import_#{params[:id].to_i}".to_sym])
+      @rows = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session["atodialer_number_import_#{params[:id].to_i}".to_sym]} WHERE f_error = 1")
     end
 
     render(:layout => "layouts/mor_min")

@@ -309,8 +309,8 @@ class CdrController < ApplicationController
       redirect_to :layout => false and return false
     end
 
-    MorLog.my_debug "SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 and id = #{params[:id]}"
-    @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 and id = #{params[:id]}")
+    MorLog.my_debug "SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 and id = #{params[:id].to_i}"
+    @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 and id = #{params[:id].to_i}")
 
     unless @cdr and @cdr.size > 0
       @error = _('CDR_not_found')
@@ -321,16 +321,16 @@ class CdrController < ApplicationController
       @error = _('CLI_is_not_number')
       render :layout => false and return false
     else
-      MorLog.my_debug "UPDATE #{session[:temp_cdr_import_csv]} SET col_#{session[:cdr_import_csv2][:imp_clid]} = '#{cli}', col_#{session[:cdr_import_csv2][:imp_calldate]} = '#{calldate}', col_#{session[:cdr_import_csv2][:imp_billsec]} = '#{billsec}', col_#{session[:cdr_import_csv2][:imp_dst]} = '#{dst}', f_error = 0, changed = 1 WHERE f_error = 1 and id = #{params[:id]}"
-      ActiveRecord::Base.connection.execute("UPDATE #{session[:temp_cdr_import_csv]} SET col_#{session[:cdr_import_csv2][:imp_clid]} = '#{cli}', col_#{session[:cdr_import_csv2][:imp_calldate]} = '#{calldate}', col_#{session[:cdr_import_csv2][:imp_billsec]} = '#{billsec}', col_#{session[:cdr_import_csv2][:imp_dst]} = '#{dst}', f_error = 0, changed = 1 #{", col_#{session[:cdr_import_csv2][:imp_provider_id]} = '#{provider_id}'" if session[:cdr_import_csv2][:imp_provider_id].to_i > -1 and provider_id > 0} WHERE f_error = 1 and id = #{params[:id]}")
+      MorLog.my_debug "UPDATE #{session[:temp_cdr_import_csv]} SET col_#{session[:cdr_import_csv2][:imp_clid]} = '#{cli}', col_#{session[:cdr_import_csv2][:imp_calldate]} = '#{calldate}', col_#{session[:cdr_import_csv2][:imp_billsec]} = '#{billsec}', col_#{session[:cdr_import_csv2][:imp_dst]} = '#{dst}', f_error = 0, changed = 1 WHERE f_error = 1 and id = #{params[:id].to_i}"
+      ActiveRecord::Base.connection.execute("UPDATE #{session[:temp_cdr_import_csv]} SET col_#{session[:cdr_import_csv2][:imp_clid]} = '#{cli}', col_#{session[:cdr_import_csv2][:imp_calldate]} = '#{calldate}', col_#{session[:cdr_import_csv2][:imp_billsec]} = '#{billsec}', col_#{session[:cdr_import_csv2][:imp_dst]} = '#{dst}', f_error = 0, changed = 1 #{", col_#{session[:cdr_import_csv2][:imp_provider_id]} = '#{provider_id}'" if session[:cdr_import_csv2][:imp_provider_id].to_i > -1 and provider_id > 0} WHERE f_error = 1 and id = #{params[:id].to_i}")
     end
 
     if Call.find(:first, :conditions => {:calldate => calldate, :billsec => billsec, :dst => dst})
       @error = _('CDR_exist_in_db_match_call_date_dst_src')
       render :layout => false and return false
     else
-      ActiveRecord::Base.connection.execute("UPDATE #{session[:temp_cdr_import_csv]} SET col_#{session[:cdr_import_csv2][:imp_clid]} = '#{cli}', col_#{session[:cdr_import_csv2][:imp_calldate]} = '#{calldate}', col_#{session[:cdr_import_csv2][:imp_billsec]} = '#{billsec}', col_#{session[:cdr_import_csv2][:imp_dst]} = '#{dst}', f_error = 0, changed = 1 #{", col_#{session[:cdr_import_csv2][:imp_provider_id]} = '#{provider_id}'" if session[:cdr_import_csv2][:imp_provider_id].to_i > -1 and provider_id > 0} WHERE f_error = 1 and id = #{params[:id]}")
-      @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 0 and id = #{params[:id]}")
+      ActiveRecord::Base.connection.execute("UPDATE #{session[:temp_cdr_import_csv]} SET col_#{session[:cdr_import_csv2][:imp_clid]} = '#{cli}', col_#{session[:cdr_import_csv2][:imp_calldate]} = '#{calldate}', col_#{session[:cdr_import_csv2][:imp_billsec]} = '#{billsec}', col_#{session[:cdr_import_csv2][:imp_dst]} = '#{dst}', f_error = 0, changed = 1 #{", col_#{session[:cdr_import_csv2][:imp_provider_id]} = '#{provider_id}'" if session[:cdr_import_csv2][:imp_provider_id].to_i > -1 and provider_id > 0} WHERE f_error = 1 and id = #{params[:id].to_i}")
+      @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 0 and id = #{params[:id].to_i}")
       render :layout => false and return false
     end
 
@@ -338,13 +338,13 @@ class CdrController < ApplicationController
   end
 
   def not_import_bad_cdr
-    @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 and id = #{params[:id]}")
+    @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 and id = #{params[:id].to_i}")
 
     unless @cdr
       @error = _('CDR_not_found')
     else
-      ActiveRecord::Base.connection.execute("UPDATE #{session[:temp_cdr_import_csv]} SET do_not_import = 1 WHERE f_error = 1 and id = #{params[:id]}")
-      @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE do_not_import = 1 and id = #{params[:id]}")
+      ActiveRecord::Base.connection.execute("UPDATE #{session[:temp_cdr_import_csv]} SET do_not_import = 1 WHERE f_error = 1 and id = #{params[:id].to_i}")
+      @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE do_not_import = 1 and id = #{params[:id].to_i}")
     end
     render :layout => false and return false
   end
