@@ -38,28 +38,28 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/locations/localization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>locationnew</td>
+	<td>Loc1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@type='image']</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>name_2</td>
-	<td>locationnew</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>Naujas</td>
+	<td>Loc2</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -67,48 +67,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>name_3</td>
-	<td>Naujas</td>
-</tr>
-<tr>
 	<td>assertText</td>
-	<td>rule_1</td>
+	<td>id=rule_1</td>
 	<td>(1)</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>view_1</td>
-	<td>(7)</td>
+	<td>id=view_1</td>
+	<td>(44)</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>rule_2</td>
+	<td>id=rule_2</td>
 	<td>(0)</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>view_2</td>
+	<td>id=view_2</td>
 	<td>(0)</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>rule_3</td>
+	<td>id=rule_3</td>
 	<td>(0)</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>view_3</td>
+	<td>id=view_3</td>
 	<td>(0)</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//img[@alt='Delete']</td>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//a[@id='delete_link_3']/img</td>
+	<td>assertElementPresent</td>
+	<td>css=#delete_link_3 &gt; img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -164,12 +159,12 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>reseller</td>
+	<td>retail_reseller</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>login_psw</td>
-	<td>reseller1</td>
+	<td>retail_reseller1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -189,12 +184,12 @@
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>rulename</td>
+	<td>Rule1</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>tariff</td>
-	<td>label=tariff</td>
+	<td>name=tariff</td>
+	<td>label=Wholesale_rres_user_tariff</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
@@ -253,8 +248,8 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>tariff</td>
-	<td>label=tariff</td>
+	<td>name=tariff</td>
+	<td>label=Wholesale_rres_user_tariff</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -294,7 +289,7 @@
 <tr>
 	<td>assertText</td>
 	<td>view_4</td>
-	<td>(1)</td>
+	<td>(4)</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -314,7 +309,7 @@
 <tr>
 	<td>assertText</td>
 	<td>name_2</td>
-	<td>locationnew</td>
+	<td>Loc1</td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
@@ -329,7 +324,7 @@
 <tr>
 	<td>assertText</td>
 	<td>name_3</td>
-	<td>Naujas</td>
+	<td>Loc2</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -459,12 +454,12 @@
 <tr>
 	<td>assertText</td>
 	<td>view_5</td>
-	<td>(1)</td>
+	<td>(4)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>name_6</td>
-	<td>locationnew</td>
+	<td>Loc1</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -479,7 +474,7 @@
 <tr>
 	<td>assertText</td>
 	<td>name_7</td>
-	<td>Naujas</td>
+	<td>Loc2</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -809,12 +804,12 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>reseller</td>
+	<td>retail_reseller</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>login_psw</td>
-	<td>reseller1</td>
+	<td>retail_reseller1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -850,6 +845,326 @@
 	<td>assertElementNotPresent</td>
 	<td>name=commit</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_IAX2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>goodres</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cut</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=add</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=Test Retail rres User</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id_14</td>
+	<td>label=IAX2/1019</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=s_device</td>
+	<td>IAX2/1019</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_device</td>
+	<td>label=IAX2/1034</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=s_device</td>
+	<td>IAX2/1034</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>wholesale_rspro</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>wholesale_rspro1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
+	<td>label=WRSPRO_provider - SIP/0.0.0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rules/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Rule2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cut</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=add</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=minlen</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=maxlen</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tariff</td>
+	<td>label=Retail_wrspro_user_tariff</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=lcr</td>
+	<td>label=wrspro_primary_LCR</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=Test Retail wrspro User</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=device_id_21</td>
+	<td>label=IAX2/1031</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_location_rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rule added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test Wholesale wrspro User (20)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>860017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price</td>
+	<td>0.047200</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price_6</td>
+	<td>0.199000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=location</td>
+	<td>Default location</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=applied_rule</td>
+	<td>Rule2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cut</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=add</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=localized_destination</td>
+	<td>37060017219</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=direction</td>
+	<td>Lithuania</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=direction_group</td>
+	<td>Lithuania</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>LCR changed from wrspro_primary_LCR to:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lcr_changed_from_to</td>
+	<td>wrspro_primary_LCR</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff changed from Wholesale_wrspro_user_tariff to:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=tariff_changed_from</td>
+	<td>Retail_wrspro_user_tariff</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device changed from SIP/1032 to:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_changed_from</td>
+	<td>IAX2 /1031</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Retail_wrspro_user_tariff</td>
+	<td>Retail_wrspro_user_tariff</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_20</td>
+	<td>USD (1.0000)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prefix_20</td>
+	<td>370600</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=destination_group_20</td>
+	<td>Lithuania MOB</td>
 </tr>
 </tbody></table>
 </body>
