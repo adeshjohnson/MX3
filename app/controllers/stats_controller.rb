@@ -3049,11 +3049,11 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @did_terminated = res[0]["actions"].to_i
 
 
-    @free = Did.find(:all, :conditions => "status = 'free'").size
-    @reserved = Did.find(:all, :conditions => "status = 'reserved'").size
-    @active = Did.find(:all, :conditions => "status = 'active'").size
-    @closed = Did.find(:all, :conditions => "status = 'closed'").size
-    @terminated = Did.find(:all, :conditions => "status = 'terminated'").size
+    @free = Did.free.count
+    @reserved = Did.reserved.count
+    @active = Did.active.count
+    @closed = Did.closed.count
+    @terminated = Did.terminated.count
 
 
   end

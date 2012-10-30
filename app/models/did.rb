@@ -18,6 +18,21 @@ class Did < ActiveRecord::Base
   before_save :validate_device, :validate_user, :check_collisions_with_qf_rules
   before_destroy :find_if_used_in_calls
 
+  # ----- scopes -----------------------------
+  #get all
+  scope :dids_all
+  # get all dids where status = 'closed'
+  scope :closed, where('status = "closed"')
+  # get all dids where status = 'free'
+  scope :free, where('status = "free"')
+  # get all dids where status = 'active'
+  scope :active, where('status = "active"')
+  # get all dids where status = 'reserved'
+  scope :reserved, where('status = "reserved"')
+  # get all dids where status = 'terminated'
+  scope :terminated, where('status = "terminated"')
+
+
   def validate_provider
     if !['admin', 'accountant'].include?(User.current.usertype)
       c_u = User.current

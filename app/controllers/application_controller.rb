@@ -562,7 +562,7 @@ class ApplicationController < ActionController::Base
   def global_check
 
     #did release checking
-    dids = Did.find(:all, :conditions => "status = 'closed'")
+    dids = Did.closed.all
     for did in dids
       if did.closed_till < Time.now
         did.status = "free"
