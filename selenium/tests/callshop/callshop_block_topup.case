@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://trunk" />
+<link rel="selenium.base" href="" />
 <title>callshop_block_topup</title>
 </head>
 <body>
@@ -33,37 +33,12 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/callshop/test_callshop</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/load_delta_sql/callshop/callshop_users</td>
+	<td>/billing/test/load_delta_sql/callshop/callshop</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>Not Found</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/groups/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>group_name</td>
-	<td>test_callshop</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Call Shop was successfully created</td>
 	<td></td>
 </tr>
 <tr>

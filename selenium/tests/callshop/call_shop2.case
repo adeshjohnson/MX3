@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://trunk" />
+<link rel="selenium.base" href="" />
 <title>call_shop2</title>
 </head>
 <body>
@@ -38,7 +38,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/callshop/test_callshop</td>
+	<td>/billing/test/load_delta_sql/callshop/callshop</td>
 	<td></td>
 </tr>
 <!--#tikrinu pavadinimus-->
@@ -83,7 +83,7 @@
 <!--#33. Group was not found -> Call shop was not found-->
 <tr>
 	<td>open</td>
-	<td>/billing/groups/edit/2</td>
+	<td>/billing/groups/edit/7</td>
 	<td></td>
 </tr>
 <tr>
@@ -111,48 +111,13 @@
 <!-------->
 <tr>
 	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>user_username</td>
-	<td>Test_user_1</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password_password</td>
-	<td>Test_user_11</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/groups/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>group_name</td>
-	<td>Test_shop</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/groups/members/2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>new_member</td>
-	<td>label=Test_user_1 -</td>
+	<td>name=new_member</td>
+	<td>label=cs_manager - Callshop manager #1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -183,33 +148,13 @@
 <!-------->
 <tr>
 	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>user_username</td>
-	<td>Test_user_2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password_password</td>
-	<td>Test_user_21</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/groups/members/2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>new_member</td>
-	<td>label=Test_user_2 -</td>
+	<td>name=new_member</td>
+	<td>label=cs_user1 - Callshop user 1 #1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -229,12 +174,12 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>Test_user_1</td>
+	<td>cs_manager</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>login_psw</td>
-	<td>Test_user_11</td>
+	<td>cs_manager</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

@@ -48,7 +48,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/callshop/test_callshop</td>
+	<td>/billing/test/load_delta_sql/callshop/callshop</td>
 	<td></td>
 </tr>
 <tr>
@@ -58,12 +58,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/users/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Add new</td>
+	<td>/billing/users/new</td>
 	<td></td>
 </tr>
 <tr>
@@ -87,8 +82,88 @@
 	<td></td>
 </tr>
 <tr>
+	<td>open</td>
+	<td>/billing/groups/list</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>link=Add new</td>
+	<td>link=Call booths</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>new_member</td>
+	<td>label=Test_user_user -</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Test_user_user</td>
+	<td>Test_user_user</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>gusertype-12</td>
+	<td>phone (call booth)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/change_position/1?direction=up&amp;member_id= 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>firstname-0</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/change_position/1?direction=down&amp;member_id=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>firstname-0</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/groups/members/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//img[@alt='Delete'])[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Call booth was successfully removed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
 	<td></td>
 </tr>
 <tr>
@@ -112,8 +187,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Add new</td>
+	<td>open</td>
+	<td>/billing/users/new</td>
 	<td></td>
 </tr>
 <tr>
@@ -138,26 +213,6 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/groups/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=New Call Shop</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>group_name</td>
-	<td>Test_shop</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/groups/members/2</td>
 	<td></td>
 </tr>
@@ -174,11 +229,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Make this user a manager</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>new_member</td>
 	<td></td>
 </tr>
 <tr>

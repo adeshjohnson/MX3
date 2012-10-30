@@ -38,82 +38,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/callshop/test_callshop</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>user_username</td>
-	<td>Test_user_1</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password_password</td>
-	<td>Test_user_11</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>user_username</td>
-	<td>Test_user_2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password_password</td>
-	<td>Test_user_21</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>user_username</td>
-	<td>Test_user_3</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password_password</td>
-	<td>Test_user_31</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/groups/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>group_name</td>
-	<td>Test_shop</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>/billing/test/load_delta_sql/callshop/callshop</td>
 	<td></td>
 </tr>
 <tr>
@@ -123,8 +48,8 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>new_member</td>
-	<td>label=Test_user_1 -</td>
+	<td>name=new_member</td>
+	<td>label=cs_manager - Callshop manager #1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -138,8 +63,8 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>new_member</td>
-	<td>label=Test_user_3 -</td>
+	<td>name=new_member</td>
+	<td>label=cs_user1 - Callshop user 1 #1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -148,8 +73,8 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>new_member</td>
-	<td>label=Test_user_2 -</td>
+	<td>name=new_member</td>
+	<td>label=cs_user2 - Callshop user 2 #1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -164,12 +89,12 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>Test_user_1</td>
+	<td>cs_manager</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>login_psw</td>
-	<td>Test_user_11</td>
+	<td>cs_manager</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -230,12 +155,12 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>Test_user_1</td>
+	<td>cs_manager</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>login_psw</td>
-	<td>Test_user_11</td>
+	<td>cs_manager</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -245,6 +170,11 @@
 <tr>
 	<td>click</td>
 	<td>css=#booth-7 a.end-session</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.yes</td>
 	<td></td>
 </tr>
 <tr>
@@ -310,12 +240,12 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>Test_user_1</td>
+	<td>cs_manager</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>login_psw</td>
-	<td>Test_user_11</td>
+	<td>cs_manager</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -325,6 +255,11 @@
 <tr>
 	<td>click</td>
 	<td>css=#booth-7 a.end-session</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.yes</td>
 	<td></td>
 </tr>
 <tr>
