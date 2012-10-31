@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>api_login</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">api_login</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_9']/span</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>click</td> 	<td>api_login_redirect_to_main</td> 	<td></td> </tr>-->
+<tr>
+	<td>click</td>
+	<td>api_allow_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>api_secret_key</td>
+	<td>123450</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>123450</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/login?u=admin&amp;p=admin1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=name</td>
+	<td>login</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status_message</td>
+	<td>Successfully logged in</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/login?u=reseller&amp;p=reseller1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=name</td>
+	<td>login</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status_message</td>
+	<td>Successfully logged in</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/login?u=accountant&amp;p=accountant1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=name</td>
+	<td>login</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status_message</td>
+	<td>Successfully logged in</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/login?u=user_reseller&amp;p=user_reseller1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=name</td>
+	<td>login</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status_message</td>
+	<td>Successfully logged in</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/login?u=101&amp;p=1011&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=name</td>
+	<td>login</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status_message</td>
+	<td>Successfully logged in</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/login?u=admin&amp;p=hacker1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=name</td>
+	<td>login</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>failed</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=status_message</td>
+	<td>Login failed</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_version?u=admin&amp;p=admin1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_version?u=reseller&amp;p=reseller1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_version?u=accountant&amp;p=accountant1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_version?u=user_reseller&amp;p=user_reseller1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_version?u=101&amp;p=1011&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_version?u=admin&amp;p=hacker1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--Redirect to home page after login-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_9']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>api_login_redirect_to_main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>api_login_redirect_to_main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>api_login_redirect_to_main</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_9']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>api_login_redirect_to_main</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/login?u=admin&amp;p=admin1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>page_title_icon</td>
+	<td>Start page</td>
+</tr>
+<!--testas VARUOUS SETTINGS API-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_4 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Allow devices to check balance over HTTP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Allow devices to check rate over HTTP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tabTabdhtmlgoodies_tabView1_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Allow devices to check balance over HTTP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Allow devices to check rate over HTTP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=devices_check_ballance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=devices_check_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=devices_check_ballance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=devices_check_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tabTabdhtmlgoodies_tabView1_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=devices_check_ballance</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=devices_check_rate</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=devices_check_ballance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=devices_check_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tabTabdhtmlgoodies_tabView1_7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=devices_check_ballance</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=devices_check_rate</td>
+	<td>off</td>
+</tr>
+</tbody></table>
+</body>
+</html>
