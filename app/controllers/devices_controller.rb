@@ -2006,6 +2006,8 @@ class DevicesController < ApplicationController
     # http://trac.kolmisoft.com/trac/ticket/4236
     # Confline.set_value("Default_device_allow_grandstreams", params[:device][:allow_grandstreams].to_i, session[:user_id])
 
+    Confline.set_value("Default_device_tell_rate", params[:device][:tell_rate].to_s, session[:user_id])
+
     flash[:status]=_("Settings_Saved")
     redirect_to :action => 'default_device' and return false
   end

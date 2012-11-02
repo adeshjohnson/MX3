@@ -4504,7 +4504,7 @@ Localization.define('en') do |l|
   l.store 'DIDs_were_not_updated', 'DIDs were not updated'
   l.store 'Did_was_not_updated', 'Did was not updated'
   l.store 'Disable_hash_checking', 'Disable hash checking'
-  #  l.store '', ''
+  l.store 'Tell_rate_before_call', 'Tell rate before call'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

@@ -1,5 +1,6 @@
 <%
    if @device
+     device_tell_rate = @device.tell_rate
      device_tell_balance = @device.tell_balance
      device_tell_time = @device.tell_time
      device_tell_rtime_when_left = @device.tell_rtime_when_left
@@ -7,6 +8,7 @@
      device_qf_tell_balance = @device.qf_tell_balance
      device_qf_tell_time = @device.qf_tell_time
    else
+     device_tell_rate = Confline.get_value("Default_device_tell_rate", session[:user_id])
      device_tell_balance = Confline.get_value("Default_device_tell_balance", session[:user_id])
      device_tell_time = Confline.get_value("Default_device_tell_time", session[:user_id])
      device_tell_rtime_when_left = Confline.get_value("Default_device_tell_rtime_when_left", session[:user_id])
@@ -24,6 +26,15 @@
 <tr>
   <td colspan="2" height="10"></td>
 </tr>
+<% unless @device.device_type == "FAX" %>
+  <tr>
+    <td> <%= _('Tell_rate_before_call') %>:</td>
+    <td>
+      <%= radio_button_tag('device[tell_rate]', 0, checked = (device_tell_rate.to_i == 0)) %> <%= _('No') %>
+      <%= radio_button_tag('device[tell_rate]', 1, checked = (device_tell_rate.to_i == 1)) %> <%= _('Yes') %>
+    </td>
+  </tr>
+<% end %>
 <tr>
   <td> <%= _('Tell_balance') %>:</td>
   <td>
