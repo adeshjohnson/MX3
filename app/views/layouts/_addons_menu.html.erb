@@ -14,6 +14,11 @@
     <% i += 1 %>
     <% end %>
 
+    <% if callback_active?%>
+    addons_menu.add(<%= i %>, <%= si %>, '<%= _('Callback') %>', '<%= Web_Dir %>/functions/callback_settings');
+    <% i += 1 %>
+    <% end %>
+
     <% if cc_active?%>
     addons_menu.add(<%= i %>, <%= si %>, '<%= _('Calling_cards') %>', '<%= Web_Dir %>/cardgroups/list');
     <% i += 1 %>
@@ -30,12 +35,47 @@
     <% i += 1 %>
     <% end %>
 
+    <% if ccl_active? %>
+    addons_menu.add(<%= i %>, <%= si %>, '<%= _('CCL_Active') %>');
+    <% i += 1 %>
+    <% a = i-1 -%>
+    addons_menu.add(<%= i %>, <%= a %>, '<%= _('Settings') %>', '<%= Web_Dir %>/functions/ccl_settings');
+    <% i += 1 %>
+    <% end %>
+
+    <% if monitoring_enabled_for(current_user) %>
+    addons_menu.add(<%= i %>, <%= si %>, '<%= _('Monitorings') %>', '<%= Web_Dir %>/monitorings');
+    <% i += 1 %>
+    addons_menu.add(<%= i %>, <%= i-1 %>, '<%= _('Settings') %>', '<%= Web_Dir %>/monitorings/settings');
+    <% i += 1 %>
+    <% end %>
+    <% if gateways_enabled_for(current_user) %>
+    addons_menu.add(<%= i %>, <%= si %>, '<%= _('Payment_Gateways') %>', '<%= Web_Dir %>/payment_gateways/configuration');
+    <% i += 1 %>
+    <% end %>
+
+    <% if provider_billing_active? %>
+      addons_menu.add(<%= i %>, <%= si %>, '<%= _('Provider_billing') %>', '<%= Web_Dir %>/providers/billing');
+      <% i += 1 %>
+    <% end %>
+
+    <% if rec_active? %>
+    <% if show_recordings? %>
+    addons_menu.add(<%= i %>, <%= si %>, '<%= _('Recordings') %>', '<%= Web_Dir %>/recordings/recordings', '', '', '<%= Web_Dir %>/assets/dtree/musicfolder.gif', '<%= Web_Dir %>/assets/dtree/musicfolder.gif');
+    <% i += 1 %>
+    addons_menu.add(<%= i %>, <%= i-1 %>, '<%= _('users') %>', '<%= Web_Dir %>/recordings/list_users');
+    <% i += 1 %>
+    addons_menu.add(<%= i %>, <%= i-2 %>, '<%= _('Bulk_management') %>', '<%= Web_Dir %>/recordings/bulk_management');
+    <% i += 1 %>
+    <% end %>
+    <% end %>
+
     <% if reseller_active? %>
     addons_menu.add(<%= i %>, <%= si %>, '<%= _('Resellers') %>', '<%= Web_Dir %>/stats/resellers');
     <% i += 1 %>
     <%if reseller_pro_active?%>
     addons_menu.add(<%= i %>, <%= i-1 %>, '<%= _('Common_use_providers') %>', '<%= Web_Dir %>/common_use_providers');
-    <%end%>
+    <% end %>
     <% i += 1 %>
     addons_menu.add(<%= i %>, <%= i-2 %>, '<%= _('Settings') %>', '<%= Web_Dir %>/resellers/settings');
     <% i += 1 %>
@@ -55,38 +95,16 @@
     <% i += 1 -%>
     <% end %>
 
-    <% if rec_active? %>
-    <% if show_recordings? %>
-    addons_menu.add(<%= i %>, <%= si %>, '<%= _('Recordings') %>', '<%= Web_Dir %>/recordings/recordings', '', '', '<%= Web_Dir %>/assets/dtree/musicfolder.gif', '<%= Web_Dir %>/assets/dtree/musicfolder.gif');
-    <% i += 1 %>
-    addons_menu.add(<%= i %>, <%= i-1 %>, '<%= _('users') %>', '<%= Web_Dir %>/recordings/list_users');
-    <% i += 1 %>
-    addons_menu.add(<%= i %>, <%= i-2 %>, '<%= _('Bulk_management') %>', '<%= Web_Dir %>/recordings/bulk_management');
-    <% i += 1 %>
-    <% end %>
-    <% end %>
 
-    <% if gateways_enabled_for(current_user) %>
-    addons_menu.add(<%= i %>, <%= si %>, '<%= _('Payment_Gateways') %>', '<%= Web_Dir %>/payment_gateways/configuration');
-    <% i += 1 %>
-    <% end %>
-    <% if monitoring_enabled_for(current_user) %>
-    addons_menu.add(<%= i %>, <%= si %>, '<%= _('Monitorings') %>', '<%= Web_Dir %>/monitorings');
-    <% i += 1 %>
-    addons_menu.add(<%= i %>, <%= i-1 %>, '<%= _('Settings') %>', '<%= Web_Dir %>/monitorings/settings');
-    <% i += 1 %>
-    <% end %>
+
+
+
 
     <% if skp_active?%>
     <% if admin? or accountant? %>
     addons_menu.add(<%= i %>, <%= si %>, '<%= _('Skype') %>', '<%= Web_Dir %>/functions/skype');
     <% i += 1 %>
     <% end %>
-    <% end %>
-
-    <% if callback_active?%>
-    addons_menu.add(<%= i %>, <%= si %>, '<%= _('Callback') %>', '<%= Web_Dir %>/functions/callback_settings');
-    <% i += 1 %>
     <% end %>
 
     <% end %>
@@ -98,23 +116,12 @@
     addons_menu.add(<%= i %>, <%= a %>, '<%= _('Settings') %>', '<%= Web_Dir %>/erp/settings');
     <% i += 1 %>
     <% end %>
-    <% if provider_billing_active? %>
-      addons_menu.add(<%= i %>, <%= si %>, '<%= _('Provider_billing') %>', '<%= Web_Dir %>/providers/billing');
-      <% i += 1 %>
-    <% end %>
 
     <% if web_phone_active? %>
     addons_menu.add(<%= i %>, <%= si %>, '<%= _('Webphone') %>', '<%= Web_Dir %>/functions/webphone_settings');
     <% i += 1 %>
     <% end %>
 
-    <% if ccl_active? %>
-    addons_menu.add(<%= i %>, <%= si %>, '<%= _('CCL_Active') %>');
-    <% i += 1 %>
-    <% a = i-1 -%>
-    addons_menu.add(<%= i %>, <%= a %>, '<%= _('Settings') %>', '<%= Web_Dir %>/functions/ccl_settings');
-    <% i += 1 %>
-    <% end %>
 
     $("addons_menu_div").innerHTML = addons_menu.toString();
 </script>
