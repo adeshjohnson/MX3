@@ -76,15 +76,19 @@
         var sip_proxy_server = document.getElementById('add_to_servers_<%= @sip_proxy_server[0].id %>');
         if (dyncheck == null) {
             change_servers(type, false);
+            qualify_change(false);
         } else {
             change_servers(type, dyncheck.checked);
+            qualify_change(dyncheck.checked);
         }
 
         Event.observe(dyncheck, 'click', function () {
             change_servers(type, dyncheck.checked);
+            qualify_change(dyncheck.checked);
         });
         Event.observe(dyn_uncheck, 'click', function () {
             change_servers(type, dyncheck.checked);
+            qualify_change(dyncheck.checked);
         });
         Event.observe(sip_proxy_server, 'click', function () {
             sip_proxy_server.checked = true;

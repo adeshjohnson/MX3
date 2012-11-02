@@ -354,6 +354,27 @@
 </td>
 </tr>
 
+<script type="text/javascript">
+    //<![CDATA[
+    function qualify_change(dyncheck_checked) {
+        var qualify_row1 = document.getElementById('qualify_row1');
+        var qualify_row2 = document.getElementById('qualify_row2');
+        if (dyncheck_checked) {
+            <% if ccl_active? and @device_type == "SIP" and @device.host == "dynamic" %>
+                qualify_row1.hide();
+                qualify_row2.show();
+            <% else %>
+                qualify_row1.show();
+                qualify_row2.hide();
+            <% end %>
+        } else {
+            qualify_row1.show();
+            qualify_row2.hide();
+        }
+    }
+    //]]>
+</script>
+
 <% if ccl_active? and !@sip_proxy_server.blank? and params[:action] == "default_device" %>
     <script type="text/javascript">
 
@@ -393,10 +414,12 @@
                         var list_2 = 2;
                         emptyList(servers);
                         fillList(servers, list_2)
+                        qualify_change(true);
                     } else {                  // for asterisk servers
                         var list_1 = 1;
                         emptyList(servers);
                         fillList(servers, list_1)
+                        qualify_change(false);
                     }
                 }
             }
@@ -412,6 +435,11 @@
             for (var i = 0; i < device_types.length; i++) {
                 type = device_types[i]
                 if (type.checked) {
+                    if (type.value == 'SIP') {
+                      qualify_change(true);
+                    } else {
+                      qualify_change(false);
+                    }
                     change_servers_if_necesary(type.checked, type.value)
                 }
                 Event.observe(type, 'click', function (e) {

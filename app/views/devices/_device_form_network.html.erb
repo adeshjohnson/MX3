@@ -116,11 +116,17 @@
 
       <tr>
         <td colspan=2>
-          <%= _('Qualify') %>:
-          <%= radio_button_tag('qualify', 'no', device_qualify == 'no') %> <%= _('No') %>
-          <%= radio_button_tag('qualify', 'yes', device_qualify != 'no') %> <%= _('Yes') %>
-          &nbsp;<%= text_field_tag 'qualify_time', @qualify_time, "class" => "input", :size => "5", :maxlength => "10", :disabled => device_qualify == 'no' %>
-          ms
+          <div id="qualify_row1">
+            <%= _('Qualify') %>:
+            <%= radio_button_tag('qualify', 'no', device_qualify == 'no') %> <%= _('No') %>
+            <%= radio_button_tag('qualify', 'yes', device_qualify != 'no') %> <%= _('Yes') %>
+            &nbsp;<%= text_field_tag 'qualify_time', @qualify_time, "class" => "input", :size => "5", :maxlength => "10", :disabled => device_qualify == 'no' %>
+            ms
+          </div>
+          <div id="qualify_row2">
+            <%= _('Qualify') %>:
+            <%= _('No') %>
+          </div>
         </td>
       </tr>
 

@@ -446,12 +446,18 @@ class DevicesController < ApplicationController
           params[:port]=params[:port].to_s.strip
 
         end
-        qualify =  params[:qualify_time].to_s.strip.to_i 
- 	if qualify < 500 
- 	  qualify = 2000 
- 	  params[:qualify] = 'no' 
- 	end 
- 	params[:qualify_time] = qualify 
+        if ccl_active? and @device.device_type == "SIP" and @device.host == "dynamic"
+          qualify = 2000
+          params[:qualify] = 'no'
+          params[:qualify_time] = qualify
+        else
+          qualify =  params[:qualify_time].to_s.strip.to_i
+          if qualify < 500
+            qualify = 2000
+            params[:qualify] = 'no'
+          end
+          params[:qualify_time] = qualify
+        end
       end
     end
 
@@ -1894,8 +1900,12 @@ class DevicesController < ApplicationController
     #------ advanced --------
 
     if params[:qualify] == "yes"
-      Confline.set_value("Default_device_qualify", params[:qualify_time], session[:user_id])
-      Confline.set_value("Default_device_qualify", "1000", session[:user_id]) if params[:qualify_time].to_i <= 1000
+      if ccl_active? and params[:device][:device_type] == "SIP" and params[:host] == "dynamic"
+        Confline.set_value("Default_device_qualify", "no", session[:user_id])
+      else
+        Confline.set_value("Default_device_qualify", params[:qualify_time], session[:user_id])
+        Confline.set_value("Default_device_qualify", "1000", session[:user_id]) if params[:qualify_time].to_i <= 1000
+      end
     else
       Confline.set_value("Default_device_qualify", "no", session[:user_id])
     end
