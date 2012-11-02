@@ -39,14 +39,14 @@ class DeviceRulesController < ApplicationController
 
     rule = Devicerule.new({
                               :device_id => @device.id,
-                              :name => params[:name].strip,
+                              :name => params[:name].to_s.strip,
                               :enabled => 1,
-                              :pr_type => params[:pr_type].strip
+                              :pr_type => params[:pr_type].to_s.strip
                           })
-    rule.cut = params[:cut].strip if params[:cut]
-    rule.add = params[:add].strip if params[:add]
-    rule.minlen = params[:minlen].strip if params[:minlen].length > 0
-    rule.maxlen = params[:maxlen].strip if params[:maxlen].length > 0
+    rule.cut = params[:cut].to_s.strip if params[:cut]
+    rule.add = params[:add].to_s.strip if params[:add]
+    rule.minlen = params[:minlen].to_s.strip if params[:minlen].length > 0
+    rule.maxlen = params[:maxlen].to_s.strip if params[:maxlen].length > 0
     if rule.save
       flash[:status] = _('Rule_added')
     else
@@ -77,11 +77,11 @@ class DeviceRulesController < ApplicationController
       redirect_to :action => :list, :id => @devicerule.device_id and return false
     end
 
-    @devicerule.name = params[:name].strip
-    @devicerule.cut = params[:cut].strip if params[:cut]
-    @devicerule.add = params[:add].strip if params[:add]
-    @devicerule.minlen = params[:minlen].strip if params[:minlen].length > 0
-    @devicerule.maxlen = params[:maxlen].strip if params[:maxlen].length > 0
+    @devicerule.name = params[:name].to_s.strip
+    @devicerule.cut = params[:cut].to_s.strip if params[:cut]
+    @devicerule.add = params[:add].to_s.strip if params[:add]
+    @devicerule.minlen = params[:minlen].to_s.strip if params[:minlen].length > 0
+    @devicerule.maxlen = params[:maxlen].to_s.strip if params[:maxlen].length > 0
     if @devicerule.save
       flash[:status] = _('Rule_updated')
     else

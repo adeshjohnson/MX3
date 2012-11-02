@@ -120,7 +120,7 @@ class Email < ActiveRecord::Base
                             :monitoring_amount => variables[:monitoring].amount,
                             :monitoring_block => variables[:monitoring].block,
                             :monitoring_type => variables[:monitoring_type],
-                            :monitoring_users => variables[:monitoring_users_list].collect { |u| [u.id, u.username, u.balance].join(" ") }.join("\n").strip
+                            :monitoring_users => variables[:monitoring_users_list].collect { |u| [u.id, u.username, u.balance].join(" ") }.join("\n").to_s.strip
                         })
     end
     if variables[:payment] && variables[:payment_notification] && variables[:payment_type]
@@ -221,7 +221,7 @@ class Email < ActiveRecord::Base
 
   def must_have_valid_variables
     body.scan(/<%=?(\s*\S+\s*)%>|<%[^=]?[0-9a-zA-Z +=]*%>/).flatten.each do |var|
-      unless !var.blank? and ALLOWED_VARIABLES.include?(var.strip)
+      unless !var.blank? and ALLOWED_VARIABLES.include?(var.to_s.strip)
         errors.add(:body, "invalid variable") # it is not translated because we do not print errors in the form!
         return false
       end

@@ -137,7 +137,7 @@ class DialplansController < ApplicationController
        redirect_to :controller => 'callc', :action => 'main' and return false
     end
 
-    @dp.name = params[:dialplan][:name].strip
+    @dp.name = params[:dialplan][:name].to_s.strip
     if @dp.dptype == "callingcard"
 
       @cardgroup = Cardgroup.find_by_id(params[:dialplan_number_pin_length])
@@ -156,8 +156,8 @@ class DialplansController < ApplicationController
       @dp.data7 = params[:dialplan][:data7] ? 1 : 0
       @dp.data8 = params[:dialplan][:data8] ? 1 : 0
 
-      @dp.data5 = params[:dialplan][:data5].strip if params[:dialplan][:data5].to_i > 0
-      @dp.data6 = params[:dialplan][:data6].strip if params[:dialplan][:data6].to_i > 0
+      @dp.data5 = params[:dialplan][:data5].to_s.strip if params[:dialplan][:data5].to_i > 0
+      @dp.data6 = params[:dialplan][:data6].to_s.strip if params[:dialplan][:data6].to_i > 0
       @dp.data9 = params[:end_ivr].to_i + 1
       @dp.data10 = params[:dialplan][:data10].to_i
       @dp.data11 = params[:dialplan][:data11].to_d
@@ -170,11 +170,11 @@ class DialplansController < ApplicationController
 
     if @dp.dptype == "authbypin"
       if params[:dialplan][:data1].to_i > 0 or (params[:dialplan][:data3].to_i == 1 and params[:dialplan][:data1].to_i >= 0)
-        @dp.data1 = params[:dialplan][:data1].strip
+        @dp.data1 = params[:dialplan][:data1].to_s.strip
       elsif params[:dialplan][:data3].to_i == 0 and params[:dialplan][:data1].to_i == 0
         @dp.data1 = 1
       end
-      @dp.data2 = params[:dialplan][:data2].strip if params[:dialplan][:data2].to_i > 0
+      @dp.data2 = params[:dialplan][:data2].to_s.strip if params[:dialplan][:data2].to_i > 0
 
       @dp.data3 = params[:dialplan][:data3] ? 1 : 0
       @dp.data4 = params[:dialplan][:data4] ? 1 : 0
@@ -193,12 +193,12 @@ class DialplansController < ApplicationController
     end
 
     if callback_active? and @dp.dptype == "callback" and params[:dialplan]
-      @dp.data1 = params[:dialplan][:data1].strip if params[:dialplan][:data1]
-      @dp.data2 = params[:dialplan][:data2].strip
-      @dp.data3 = params[:dialplan][:data3].strip
+      @dp.data1 = params[:dialplan][:data1].to_s.strip if params[:dialplan][:data1]
+      @dp.data2 = params[:dialplan][:data2].to_s.strip
+      @dp.data3 = params[:dialplan][:data3].to_s.strip
       @dp.data4 = params[:dialplan][:data4] ? params[:dialplan][:data4].to_i : 0
-      @dp.data5 = params[:dialplan][:data5].strip
-      @dp.data6 = params[:dialplan][:data6].strip
+      @dp.data5 = params[:dialplan][:data5].to_s.strip
+      @dp.data6 = params[:dialplan][:data6].to_s.strip
     end
 
     if @dp.dptype == "ivr"
@@ -265,7 +265,7 @@ class DialplansController < ApplicationController
       flash[:notice] = _('Please_enter_name')
       redirect_to :action => :new and return false
     end
-    params[:dialplan][:name]=params[:dialplan][:name].strip
+    params[:dialplan][:name]=params[:dialplan][:name].to_s.strip
 
     dp = Dialplan.new(params[:dialplan])
 
@@ -327,7 +327,7 @@ class DialplansController < ApplicationController
 
     if dp.dptype == "authbypin"
       if params[:dialplan][:data1].to_i > 0 or (params[:dialplan][:data3].to_i == 1 and params[:dialplan][:data1].to_i >= 0)
-        dp.data1 = params[:dialplan][:data1].strip
+        dp.data1 = params[:dialplan][:data1].to_s.strip
       elsif params[:dialplan][:data3].to_i == 0 and params[:dialplan][:data1].to_i == 0
         dp.data1 = 3
       end

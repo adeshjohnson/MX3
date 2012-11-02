@@ -217,9 +217,9 @@ class CreditNoteController < ApplicationController
 
     options = search_options
     condition << "status = '#{options[:status]}'" if ['paid', 'unpaid'].include? options[:status]
-    condition << "first_name LIKE '#{options[:first_name].strip}%'" if options[:first_name]
-    condition << "last_name LIKE '#{options[:last_name].strip}%'" if options[:last_name]
-    condition << "username LIKE '#{options[:username].strip}%'" if options[:username]
+    condition << "first_name LIKE '#{options[:first_name].to_s.strip}%'" if options[:first_name]
+    condition << "last_name LIKE '#{options[:last_name].to_s.strip}%'" if options[:last_name]
+    condition << "username LIKE '#{options[:username].to_s.strip}%'" if options[:username]
     condition << "price >= #{current_user.to_system_currency(options[:amount_min].to_d)}" if options[:amount_min]
     condition << "price <= #{current_user.to_system_currency(options[:amount_max].to_d)}" if options[:amount_max]
     if options[:status] == 'paid' and options[:paid_date_from] and options[:paid_date_till]
@@ -287,7 +287,7 @@ class CreditNoteController < ApplicationController
   end
 
 =begin
-  parameter is meaningless if it is nil or if it is string and when striped it is blank
+  parameter is meaningless if it is nil or if it is string and when.to_s.striped it is blank
 
   *Params*
   +param+ at this moment expected to be nil, hash or string
@@ -296,7 +296,7 @@ class CreditNoteController < ApplicationController
   +meaningless+ boolean, true if parameter it is meaningless
 =end
   def meaningless?(param)
-    (param.is_a?(String) and param.strip.blank?)
+    (param.is_a?(String) and param.to_s.strip.blank?)
   end
 
 =begin

@@ -454,7 +454,7 @@ class PaymentsController < ApplicationController
 
           paypal_email = Confline.get_value("PayPal_Email", @user.owner_id).to_s
           # we keep original amount (which he specified in payment form) in custom field so that we could compare
-          if paypal_email.to_s.downcase.strip == notify.business.to_s.downcase.strip and @payment.amount.to_d == notify.custom.to_d
+          if paypal_email.to_s.downcase.to_s.strip == notify.business.to_s.downcase.to_s.strip and @payment.amount.to_d == notify.custom.to_d
             MorLog.my_debug("business email is valid", true)
             if notify.complete?
               @payment.fee = notify.fee.to_d
