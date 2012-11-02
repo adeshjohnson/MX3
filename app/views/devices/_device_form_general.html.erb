@@ -354,26 +354,28 @@
 </td>
 </tr>
 
-<script type="text/javascript">
-    //<![CDATA[
-    function qualify_change(dyncheck_checked) {
-        var qualify_row1 = document.getElementById('qualify_row1');
-        var qualify_row2 = document.getElementById('qualify_row2');
-        if (dyncheck_checked) {
-            <% if ccl_active? and @device_type == "SIP" and @device.host == "dynamic" %>
-                qualify_row1.hide();
-                qualify_row2.show();
-            <% else %>
+<% if ccl_active? %>
+    <script type="text/javascript">
+        //<![CDATA[
+        function qualify_change(dyncheck_checked) {
+            var qualify_row1 = document.getElementById('qualify_row1');
+            var qualify_row2 = document.getElementById('qualify_row2');
+            if (dyncheck_checked) {
+                <% if ccl_active? and @device_type == "SIP" and @device.host == "dynamic" %>
+                    qualify_row1.hide();
+                    qualify_row2.show();
+                <% else %>
+                    qualify_row1.show();
+                    qualify_row2.hide();
+                <% end %>
+            } else {
                 qualify_row1.show();
                 qualify_row2.hide();
-            <% end %>
-        } else {
-            qualify_row1.show();
-            qualify_row2.hide();
+            }
         }
-    }
-    //]]>
-</script>
+        //]]>
+    </script>
+<% end %>
 
 <% if ccl_active? and !@sip_proxy_server.blank? and params[:action] == "default_device" %>
     <script type="text/javascript">
