@@ -1256,6 +1256,7 @@ class User < ActiveRecord::Base
     device.progressinband = Confline.get_value("Default_device_progressinband", owner_id).to_s
     device.videosupport = Confline.get_value("Default_device_videosupport", owner_id).to_s
     device.allow_duplicate_calls = Confline.get_value("Default_device_allow_duplicate_calls", owner_id).to_i
+    device.tell_rate = Confline.get_value("Default_device_tell_rate", owner_id).to_i
     device.tell_balance = Confline.get_value("Default_device_tell_balance", owner_id).to_i
     device.tell_time = Confline.get_value("Default_device_tell_time", owner_id).to_i
     device.tell_rtime_when_left = Confline.get_value("Default_device_tell_rtime_when_left", owner_id).to_i
