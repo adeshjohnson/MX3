@@ -83,10 +83,6 @@
     reseller_menu_addons.config.inOrder = true;
     reseller_menu_addons.add(0, -1, '<%= _('ADDONS') %>');
 
-    <% if payment_gateway %>
-    reseller_menu_addons.add(1, 0, '<%= _('Payment_Gateways') %>', '<%= Web_Dir %>/payment_gateways/configuration');
-    <% end %>
-
     <% if call_shop %>
     reseller_menu_addons.add(2, 0, '<%= _('Callshop') %>', '<%= Web_Dir %>/groups/list');
     <% end %>
@@ -98,11 +94,6 @@
 
     <% end %>
 
-    <% if sms %>
-    reseller_menu_addons.add(11, 0, "<%= _('SMS') %>", "<%= Web_Dir %>/sms/users");
-    reseller_menu_addons.add(12, 11, "<%= _('SMS_Tariffs') %>", "<%= Web_Dir %>/sms/tariffs");
-    <%end%>
-
     <% if erp_active?%>
     reseller_menu_addons.add(13, 0, '<%= _('ERP') %>', '<%= Web_Dir %>/erp/settings');
     <% end %>
@@ -110,11 +101,19 @@
     <% if  monitoring_enabled_for(current_user) %>
     reseller_menu_addons.add(14, 0, '<%= _('Monitorings') %>', '<%= Web_Dir %>/monitorings');
     <% end %>
+
+    <% if payment_gateway %>
+    reseller_menu_addons.add(1, 0, '<%= _('Payment_Gateways') %>', '<%= Web_Dir %>/payment_gateways/configuration');
+    <% end %>
  
     <% if provider_billing_active? and current_user.reseller_allow_providers_tariff? %>
     reseller_menu_addons.add(15, 0, '<%= _('Provider_billing') %>', '<%= Web_Dir %>/providers/billing');
     <% end %>
 
+    <% if sms %>
+    reseller_menu_addons.add(11, 0, "<%= _('SMS') %>", "<%= Web_Dir %>/sms/users");
+    reseller_menu_addons.add(12, 11, "<%= _('SMS_Tariffs') %>", "<%= Web_Dir %>/sms/tariffs");
+    <%end%>
 
     <% if web_phone_active? and current_user.simple_get_acc_res_permission('webphone_res') > 0 %>
     reseller_menu_addons.add(15,0 ,'<%= _('Webphone') %>', '<%= Web_Dir %>/functions/webphone_settings');
