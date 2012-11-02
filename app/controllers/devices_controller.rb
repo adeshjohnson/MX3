@@ -446,7 +446,7 @@ class DevicesController < ApplicationController
           params[:port]=params[:port].to_s.strip
 
         end
-        if ccl_active? and @device.device_type == "SIP" and @device.host == "dynamic"
+        if ccl_active? and @device.device_type == "SIP" and (@device.host == "dynamic" or @device.host.blank?)
           qualify = 2000
           params[:qualify] = 'no'
           params[:qualify_time] = qualify

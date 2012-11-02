@@ -361,7 +361,7 @@
             var qualify_row1 = document.getElementById('qualify_row1');
             var qualify_row2 = document.getElementById('qualify_row2');
             if (dyncheck_checked) {
-                <% if ccl_active? and @device_type == "SIP" and @device.host == "dynamic" %>
+                <% if ccl_active? and @device_type == "SIP" and (@device.host == "dynamic" or @device.host.blank?) %>
                     qualify_row1.hide();
                     qualify_row2.show();
                 <% else %>
