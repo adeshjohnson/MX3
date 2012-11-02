@@ -517,13 +517,16 @@ end
     <b><%= _('Tell_options') %></b>
   </td>
 </tr>
-<% if @device
+<%
+   if @device
+     device_tell_rate = @device.tell_rate
      device_tell_balance = @device.tell_balance
      device_tell_time = @device.tell_time
      device_tell_rtime_when_left = @device.tell_rtime_when_left
      device_repeat_rtime_every = @device.repeat_rtime_every
 
    else
+     device_tell_rate = Confline.get_value("Default_device_tell_rate", session[:user_id])
      device_tell_balance = Confline.get_value("Default_device_tell_balance", session[:user_id])
      device_tell_time = Confline.get_value("Default_device_tell_time", session[:user_id])
      device_tell_rtime_when_left = Confline.get_value("Default_device_tell_rtime_when_left", session[:user_id])
@@ -533,6 +536,13 @@ end
 %>
 <tr>
   <td height="10"></td>
+</tr>
+<tr>
+  <td> <%= _('Tell_rate_before_call') %>:</td>
+  <td>
+    <%= radio_button_tag('device[tell_rate]', 0, checked = (device_tell_rate.to_i == 0)) %> <%= _('No') %>
+    <%= radio_button_tag('device[tell_rate]', 1, checked = (device_tell_rate.to_i == 1)) %> <%= _('Yes') %>
+  </td>
 </tr>
 <tr>
   <td> <%= _('Tell_balance') %>:</td>
