@@ -138,3 +138,23 @@
 </tr>
 
 
+<script type="text/javascript">
+    //<![CDATA[
+    function check(checked) {
+        if ($('qualify_yes').checked) {
+            $('qualify_time').disabled = false;
+        } else {
+            $('qualify_time').disabled = true;
+        }
+    }
+    Event.observe(window, 'load', function () {
+        check($('qualify_yes').checked);
+        Event.observe($('qualify_yes'), 'click', function () {
+            check($('qualify_yes').checked)
+        });
+        Event.observe($('qualify_no'), 'click', function () {
+            check($('qualify_yes').checked)
+        });
+    });
+    //]]>
+</script>
