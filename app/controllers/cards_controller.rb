@@ -165,6 +165,7 @@ class CardsController < ApplicationController
     @end_num = params[:end_number].to_i >= params[:start_number].to_i ? params[:end_number] : params[:start_number]
     @u_id = params[:user_id].to_i
     @min_balance = params[:card][:min_balance].to_d
+    @card_language = params[:card][:language].to_s
 
     if ((@start_num.length != @cg.number_length) or (@end_num.length != @cg.number_length)) or ((@start_num.to_i == 0) or (@end_num.to_i == 0))
       flash[:notice] = _('Bad_number_length_should_be') + ": " + @cg.number_length.to_s
@@ -180,6 +181,7 @@ class CardsController < ApplicationController
     @a_name = _('Change_distributor') if @activate.to_i == 4
     @a_name = _('Delete_and_hide') if @activate.to_i == 5
     @a_name = _('Minimal_balance') if @activate.to_i == 6
+    @a_name = _('Language') if @activate.to_i == 7
 
     if @activate.to_i == 3
       @a_name = _('Buy')
@@ -238,6 +240,12 @@ class CardsController < ApplicationController
           card.min_balance = params[:min_balance].to_d
           card.save
         end
+      when 7
+        cards = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? AND number <= ?  AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id])
+        for card in cards
+          card.language = params[:language].to_s
+          card.save
+        end 
     end
     case (action)
       when 0
@@ -262,6 +270,8 @@ class CardsController < ApplicationController
         flash[:status] = cards_deleted.to_s + ' ' + _('Cards_were_successfully_deleted')  + '<br>' + cards_hidden.to_i.to_s + ' ' + _('Cards_were_hidden')
       when 6
         flash[:status] = _('Minimal_balance_changed')
+      when 7
+        flash[:status] = _('Language_changed')
     end
 
     redirect_to :action => 'list', :cg => @cg and return false

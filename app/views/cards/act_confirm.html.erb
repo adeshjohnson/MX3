@@ -1,5 +1,5 @@
 <b><%= _('Card_group') %></b>: <%= link_to @cg.name, :controller => "cardgroups", :action => "show", :id => @cg %>
-<%= form_tag :action => 'act2', :cg => @cg.id, :start => @start_num, :end => @end_num, :activate_i => @activate, :user => @u_id, :min_balance => @min_balance do %>
+<%= form_tag :action => 'act2', :cg => @cg.id, :start => @start_num, :end => @end_num, :activate_i => @activate, :user => @u_id, :min_balance => @min_balance, :language => @card_language do %>
     <br/>
     <br/>
     <table class="simple" width="70%">

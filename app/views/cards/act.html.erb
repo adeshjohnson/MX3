@@ -47,6 +47,12 @@
           <td><input type="radio" id="minimal_balance" name="activate" value="6"/></td>
           <td><%= text_field 'card', 'min_balance', :size => 10, "class" => "input", :value => 0  %></td>
         </tr>
+        <tr>
+          <td><b><%= _('Language') %>: </b></td>
+          <td><input type="radio" id="language" name="activate" value="7"/></td>
+          <td><%= text_field 'card', 'language', :size => 10, "class" => "input", :value => ""  %></td>
+        </tr>
+
       </table>
     </td>
   </table>
