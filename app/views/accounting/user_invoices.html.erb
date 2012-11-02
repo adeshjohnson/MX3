@@ -25,7 +25,7 @@
         </td>
         <td id="paid_date_<%= inv.id %>" align="center"> <%= nice_date_time inv.paid_date if inv.paid == 1 %> </td>
         <td id="price_<%= inv.id %>" align="right"> <%= nice_invoice_number(inv.price, inv.invoice_type) %> </td>
-        <td id="price_with_vat_<%= inv.id %>" align="right"> <%= nice_invoice_number(inv.price_with_tax(:precision => nice_invoice_number_digits(inv.invoice_type)), inv.invoice_type) %> </td>
+        <td id="price_with_vat_<%= inv.id %>" align="right"> <%= nice_invoice_number(inv.price_with_tax, inv.invoice_type) %> </td>
         <td id="details_<%= inv.id %>" align="center"><%= link_to(b_details, {:action => 'user_invoice_details', :id => inv.id}, :id => "details_link_" + inv.id.to_s) %></td>
       </tr>
   <% } %>

@@ -69,7 +69,7 @@
             </tr>
             <tr class="row2">
               <th align="left"><%= _('Price_with_VAT') %>  (<%= session[:show_currency] %>):</th>
-              <td id="full_price" align="right"> <%= nice_invoice_number(@invoice.price_with_tax(:ex => @ex, :precision => nice_invoice_number_digits(type)), type) %> </td>
+              <td id="full_price" align="right"> <%= nice_invoice_number(@invoice.converted_price_with_vat(@ex), type) %></td>
             </tr>
             <tr class="row2">
               <th align="left"><%= _('Recalculate_invoice') %>:</th>

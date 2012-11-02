@@ -50,7 +50,7 @@ class Payment < ActiveRecord::Base
       return self.amount + self.tax
     else
       if self.paymenttype == "invoice" and self.invoice
-        return self.invoice.price_with_tax(:precision => nice_number_digits)
+        return self.invoice.price_with_tax
       else
         return self.amount
       end

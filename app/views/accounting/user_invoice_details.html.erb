@@ -51,7 +51,7 @@
 
         <tr class="row2">
           <th align="left"><%= _('Price_with_VAT') %></th>
-          <td id="price_with_vat" align="right"><%= nice_invoice_number(@invoice.price_with_tax(:precision => nice_invoice_number_digits(type)), type) %> </td>
+          <td id="price_with_vat" align="right"><%= nice_invoice_number(@invoice.price_with_tax, type) %> </td>
         </tr>
 
       </table>
