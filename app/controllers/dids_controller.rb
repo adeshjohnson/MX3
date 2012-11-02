@@ -350,8 +350,7 @@ class DidsController < ApplicationController
     end
 
     if @choice_free_dp
-      admin_id = User.where('usertype = "admin"').first.id
-      current_user.is_accountant? ? @dialplan_source = Dialplan.where(['user_id = ?', admin_id]) : @dialplan_source = current_user.dialplans
+      current_user.is_accountant? ? @dialplan_source = Dialplan.where('user_id = 0') : @dialplan_source = current_user.dialplans
 
       @ccdps = @dialplan_source.find(:all, :conditions => "dptype = 'callingcard'", :order => "name ASC")  if !qf_rule_collisions
       @abpdps = @dialplan_source.find(:all, :conditions => "dptype = 'authbypin'", :order => "name ASC")   if !qf_rule_collisions
