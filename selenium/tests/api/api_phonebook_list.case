@@ -830,6 +830,167 @@
 	<td>&lt;sd&gt; 5432 32 &lt;test&gt; 5435 67 aaaa 1234 2222 cccc 3456 111 hmmmm 345 12</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=101&amp;p=1011&amp;user_id=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--API commands without hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Disable hash checking:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=reseller&amp;p=reseller1&amp;user_id=3&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>aaaa 1234 2222 cccc 3456 111 rrrr 11 11 tttttt 678 789 www 444 444</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=reseller&amp;p=reseller1&amp;user_id=3&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rrrr 11 11 tttttt 678 789 www 444 444</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Disable hash checking:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=admin&amp;p=admin1&amp;user_id=3&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rrrr 11 11 tttttt 678 789 www 444 444</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/phonebooks?u=accountant&amp;p=accountant1&amp;user_id=4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>aaaa 1234 2222 cccc 3456 111</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>

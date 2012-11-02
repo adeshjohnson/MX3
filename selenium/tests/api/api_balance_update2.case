@@ -705,6 +705,172 @@
 	<td>user_balance_value</td>
 	<td>500.0000 USD</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--API commands without hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Disable hash checking:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=5&amp;u=reseller&amp;p=reseller1&amp;balance=500.0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//status</td>
+	<td>User balance updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Disable hash checking:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=3&amp;u=aegerghrh&amp;p=ahrthqatrhtr&amp;balance=100&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//error</td>
+	<td>Bad login</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=wertynhwbrt&amp;u=admin&amp;p=admin1&amp;balance=1000&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//error</td>
+	<td>Incorrect hash</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=wertynhwbrt&amp;u=admin&amp;p=admin1&amp;balance=1000&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//error</td>
+	<td>User was not found</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_balance_change?user_id=0&amp;u=admin&amp;p=admin1&amp;balance=200.0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//status</td>
+	<td>User balance updated</td>
+</tr>
 </tbody></table>
 </body>
 </html>

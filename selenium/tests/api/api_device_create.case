@@ -1630,6 +1630,234 @@
 	<td>id=name_22</td>
 	<td>1014</td>
 </tr>
+<!--API commands without hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Disable hash checking:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>on</td>
+</tr>
+<!--Send device_create command with correct hash.  invalid device group was specified, because theres still no shuch group. device shouldnt be created-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=5&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device group invalid</td>
+	<td></td>
+</tr>
+<!--Try to create device with  invalid device group. device shouldnt be created-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=invalidine&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device group invalid</td>
+	<td></td>
+</tr>
+<!--Try to create device for reseller's user and specify gevice_group that is Test User's-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=desription1&amp;pin=12345&amp;devicegroup_id=4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device group invalid</td>
+	<td></td>
+</tr>
+<!--Do not specify any device group when creating device for reseller's user. Device can be created without group.-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=desription1&amp;pin=9&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>PIN is already used</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;p=reseller1&amp;user_id=5&amp;description=desription1&amp;pin=10&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device created 23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Disable hash checking:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>on</td>
+</tr>
+<!--Send device_create command with correct hash.  invalid device group was specified, because theres still no shuch group. device shouldnt be created-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=5&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device group invalid</td>
+	<td></td>
+</tr>
+<!--Try to create device with  invalid device group. device shouldnt be created-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;description=kkkkkkk&amp;type=SIP&amp;pin=254585654&amp;devicegroup_id=invalidine&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device group invalid</td>
+	<td></td>
+</tr>
+<!--Do not specify any device group when creating device for user Test User #1. Device can be reated without group.-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;description=desription1&amp;pin=3&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>PIN is already used</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=admin&amp;p=admin1&amp;user_id=2&amp;description=desription1&amp;pin=4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device created 24</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.95" />
+<link rel="selenium.base" href="" />
 <title>api_user_update</title>
 </head>
 <body>
@@ -3700,6 +3700,196 @@
 	<td>assertValue</td>
 	<td>id=warning_email_active</td>
 	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_6 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Disable hash checking:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_6 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=warning_active</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=6&amp;p=aaaaa&amp;warning_email_active=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=6&amp;p=aaaaa&amp;user_id=5&amp;warning_email_active=1&amp;&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=warning_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Disable hash checking:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=warning_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=6&amp;p=aaaaa&amp;warning_email_active=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=6&amp;p=aaaaa&amp;user_id=3&amp;warning_email_active=0&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>User was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=warning_active</td>
+	<td>off</td>
 </tr>
 </tbody></table>
 </body>

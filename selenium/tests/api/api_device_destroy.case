@@ -616,6 +616,199 @@
 	<td>Dont be so smart</td>
 	<td></td>
 </tr>
+<!--API commands without hash-->
+<!--Checking if admin and reseller can user api commands without hash when "disable_hash_checking" is off-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--API commands without hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Disable hash checking:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Disable hash checking:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cannot delete device - it has calls. You can only hide device's user. Why is that and how to do that - please read in manual.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=123&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=6&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Device was deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cannot delete device - it has calls. You can only hide device's user. Why is that and how to do that - please read in manual.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Dont be so smart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>

@@ -2115,6 +2115,286 @@
 	<td>css=total_calls</td>
 	<td>4</td>
 </tr>
+<!--API commands without hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Disable hash checking:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#hash 6 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=total_calls</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=period_start</td>
+	<td>2008-03-07 11:48:18</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=period_end</td>
+	<td>2012-03-07 11:46:01</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_user</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_device</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>2009-01-02 00:00:02</td>
+	<td></td>
+</tr>
+<!--#hash 7 api for 101 find one day calls-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1321228800&amp;period_end=1321315199&amp;s_call_type=all&amp;s_device=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_device</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_user</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_device</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>2011-11-14 16:00:01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=period_start</td>
+	<td>2011-11-14 02:00:00</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=period_end</td>
+	<td>2011-11-15 01:59:59</td>
+</tr>
+<!--#hash 8 without user_id find one day calls-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;period_start=1320364800&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_device</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_user</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_provider</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_did</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=total_calls</td>
+	<td>3</td>
+</tr>
+<!--#hash 9 api for reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=total_calls</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=period_start</td>
+	<td>2011-11-02 01:59:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=period_end</td>
+	<td>2011-12-01 01:59:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
 </tbody></table>
 </body>
 </html>

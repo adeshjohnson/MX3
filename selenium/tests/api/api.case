@@ -1544,6 +1544,194 @@
 	<td>Bad login</td>
 	<td></td>
 </tr>
+<!--API commands without hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Disable hash checking:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=0&amp;period_start=1136073600&amp;period_end=1266537599&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//period_start</td>
+	<td>2006-01-01 02:00:00</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//period_end</td>
+	<td>2010-02-19 01:59:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//total_calls</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//period_start</td>
+	<td>2006-01-01 02:00:00</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//period_end</td>
+	<td>2010-02-19 01:59:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//user</td>
+	<td>System Admin</td>
+</tr>
+<!--admin ->101-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1136073600&amp;period_end=1266537599&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//period_end</td>
+	<td>2010-02-19 01:59:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//total_calls</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//period_start</td>
+	<td>2006-01-01 02:00:00</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//period_end</td>
+	<td>2010-02-19 01:59:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[2]/user</td>
+	<td>Test User #1</td>
+</tr>
+<!--admin ->reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=3&amp;period_start=1136073600&amp;period_end=1266537599&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//total_calls</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//period_start</td>
+	<td>2006-01-01 02:00:00</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//period_end</td>
+	<td>2010-02-19 01:59:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//user</td>
+	<td>Test Reseller</td>
+</tr>
 </tbody></table>
 </body>
 </html>

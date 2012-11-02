@@ -1498,6 +1498,147 @@
 	<td>id=balance</td>
 	<td>20.0000 ALL</td>
 </tr>
+<!--API commands without hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Disable hash checking:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_disable_hash_checking</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=bbbb&amp;password=22222&amp;password2=22222&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please enter first name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=bbbb&amp;password=22222&amp;password2=22222&amp;first_name=asasas&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please enter last name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=bbbb&amp;password=22222&amp;password2=22222&amp;device_type=SIP&amp;first_name=asasas&amp;last_name=sasasa&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please select country</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=bbbb&amp;password=22222&amp;password2=22222&amp;device_type=SIP&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//error</td>
+	<td>Please enter correct email</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=bbbb&amp;password=22222&amp;password2=22222&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=email@email.com&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//error</td>
+	<td>Enter device type</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=bbbb&amp;password=22222&amp;password2=22222&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=test@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//success</td>
+	<td>Registration successful</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=server_ip</td>
+	<td>111.222.333.444</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=user_id</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=device_id</td>
+	<td>13</td>
+</tr>
 </tbody></table>
 </body>
 </html>
