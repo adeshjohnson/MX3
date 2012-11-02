@@ -588,6 +588,456 @@
 	<td>Card was deleted</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=3&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_36</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_37</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_38</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Language: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=card_language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=language</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>1111111028</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>1111111030</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_language</td>
+	<td>lt</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Language have been changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_36</td>
+	<td>lt</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_37</td>
+	<td>lt</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_38</td>
+	<td>lt</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>cc_permission</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/1?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=calling_cards_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>cc_permission2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/2?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callingcard_pin_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callingcard_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Group was updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>new_group</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>1234567890</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>1234567899</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Cards created: 10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_42</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_43</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_44</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Language: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=card_language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=language</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>1234567893</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>1234567895</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_language</td>
+	<td>lt</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Language have been changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_42</td>
+	<td>lt</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_43</td>
+	<td>lt</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_44</td>
+	<td>lt</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=3&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_24</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_25</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_26</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Language: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=card_language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=language</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>0000000003</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>0000000005</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=card_language</td>
+	<td>lt</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Language have been changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_24</td>
+	<td>lt</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_25</td>
+	<td>lt</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=lang_26</td>
+	<td>lt</td>
+</tr>
 </tbody></table>
 </body>
 </html>
