@@ -123,10 +123,12 @@
             &nbsp;<%= text_field_tag 'qualify_time', @qualify_time, "class" => "input", :size => "5", :maxlength => "10", :disabled => device_qualify == 'no' %>
             ms
           </div>
-          <div id="qualify_row2">
-            <%= _('Qualify') %>:
-            <%= _('No') %>
-          </div>
+          <% if ccl_active? %>
+            <div id="qualify_row2">
+              <%= _('Qualify') %>:
+              <%= _('No') %>
+            </div>
+          <% end %>
         </td>
       </tr>
 
