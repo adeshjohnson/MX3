@@ -92,6 +92,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_tell_rate_1</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -120,6 +135,16 @@
 	<td>type</td>
 	<td>id=device_block_callerid</td>
 	<td>5.5</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_1</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -162,6 +187,26 @@
 	<td>5.5</td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Tell rate before call:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_tell_rate_1</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -174,6 +219,16 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=block_callerid_enable_yes</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_1</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -222,6 +277,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_tell_rate_0</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -242,6 +312,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>on</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -260,6 +335,16 @@
 	<td>assertValue</td>
 	<td>id=block_callerid_enable_no</td>
 	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_1</td>
+	<td>off</td>
 </tr>
 <tr>
 	<td>open</td>

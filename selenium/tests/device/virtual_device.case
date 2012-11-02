@@ -126,6 +126,11 @@
 <!--Tell options-->
 <tr>
 	<td>assertTextPresent</td>
+	<td>Tell rate before call:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Tell Options</td>
 	<td></td>
 </tr>
@@ -148,6 +153,16 @@
 	<td>assertTextPresent</td>
 	<td>Repeat remaining time when left:</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_1</td>
+	<td>off</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -262,6 +277,11 @@
 </tr>
 <tr>
 	<td>click</td>
+	<td>id=device_tell_rate_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>id=device_tell_balance_1</td>
 	<td></td>
 </tr>
@@ -306,18 +326,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/8</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -339,6 +349,16 @@
 	<td>assertSelectedLabel</td>
 	<td>id=device_calleridpres</td>
 	<td>Presentation Allowed, Network Number</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_1</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -406,6 +426,11 @@
 	<td>180</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=device_tell_rate_0</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -416,18 +441,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/8</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -439,6 +454,21 @@
 	<td>assertValue</td>
 	<td>id=device_repeat_rtime_every</td>
 	<td>180</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_1</td>
+	<td>off</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -504,6 +534,11 @@
 	<td>assertText</td>
 	<td>id=use_ani_for_cli_value</td>
 	<td>true</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=tell_rate_value</td>
+	<td>0</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -630,6 +665,11 @@
 <!--Tell options-->
 <tr>
 	<td>assertTextPresent</td>
+	<td>Tell rate before call:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Tell Options</td>
 	<td></td>
 </tr>
@@ -652,6 +692,16 @@
 	<td>assertTextPresent</td>
 	<td>Repeat remaining time when left:</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_1</td>
+	<td>off</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -726,6 +776,11 @@
 </tr>
 <tr>
 	<td>click</td>
+	<td>id=device_tell_rate_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>id=device_tell_balance_1</td>
 	<td></td>
 </tr>
@@ -760,18 +815,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/9</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -793,6 +838,16 @@
 	<td>assertSelectedLabel</td>
 	<td>id=device_calleridpres</td>
 	<td>Presentation Allowed, Network Number</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_1</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -835,6 +890,11 @@
 	<td>180</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=device_tell_rate_0</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -845,18 +905,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/9</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -868,6 +918,16 @@
 	<td>assertValue</td>
 	<td>id=device_repeat_rtime_every</td>
 	<td>180</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_tell_rate_1</td>
+	<td>off</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -945,18 +1005,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/users/edit/3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
