@@ -350,24 +350,27 @@ class DidsController < ApplicationController
     end
 
     if @choice_free_dp
-      @ccdps = current_user.dialplans.find(:all, :conditions => "dptype = 'callingcard'", :order => "name ASC")  if !qf_rule_collisions
-      @abpdps = current_user.dialplans.find(:all, :conditions => "dptype = 'authbypin'", :order => "name ASC")   if !qf_rule_collisions
+      admin_id = User.where('usertype = "admin"').first.id
+      current_user.is_accountant? ? @dialplan_source = Dialplan.where(['user_id = ?', admin_id]) : @dialplan_source = current_user.dialplans
+
+      @ccdps = @dialplan_source.find(:all, :conditions => "dptype = 'callingcard'", :order => "name ASC")  if !qf_rule_collisions
+      @abpdps = @dialplan_source.find(:all, :conditions => "dptype = 'authbypin'", :order => "name ASC")   if !qf_rule_collisions
 
 
-      @cbdps = current_user.dialplans.find(:all, :conditions => "dptype = 'callback' AND data1 != #{@did.id}", :order => "name ASC") if callback_active?  and !qf_rule_collisions
+      @cbdps = @dialplan_source.find(:all, :conditions => "dptype = 'callback' AND data1 != #{@did.id}", :order => "name ASC") if callback_active?  and !qf_rule_collisions
 
       #if mor_11_extend?
-      @qfddps = current_user.dialplans.find(:all, :conditions => "dptype = 'quickforwarddids' AND id != 1", :order => "name ASC")
+      @qfddps = @dialplan_source.find(:all, :conditions => "dptype = 'quickforwarddids' AND id != 1", :order => "name ASC")
       #else
       #  @qfddps = current_user.dialplans.find(:all, :conditions => "dptype = 'quickforwarddids'", :order => "name ASC")
       # end
 
-      @pbxfdps = current_user.dialplans.find(:all, :conditions => "dptype = 'pbxfunction'", :order => "name ASC") if !qf_rule_collisions
-      @ivrs = current_user.dialplans.find(:all, :conditions => "dptype = 'ivr'", :order => "name ASC")  if !qf_rule_collisions
+      @pbxfdps = @dialplan_source.find(:all, :conditions => "dptype = 'pbxfunction'", :order => "name ASC") if !qf_rule_collisions
+      @ivrs = @dialplan_source.find(:all, :conditions => "dptype = 'ivr'", :order => "name ASC")  if !qf_rule_collisions
 
       @vm_extension = Confline.get_value("VM_Retrieve_Extension", 0)  if !qf_rule_collisions
 
-      @ringdps = current_user.dialplans.find(:all, :conditions => "dptype = 'ringgroup'", :order => "name ASC") if !qf_rule_collisions
+      @ringdps = @dialplan_source.find(:all, :conditions => "dptype = 'ringgroup'", :order => "name ASC") if !qf_rule_collisions
     end
 
     @tone_zones = ['at', 'au', 'be', 'br', 'ch', 'cl', 'cn', 'cz', 'de', 'dk', 'ee', 'es', 'fi', 'fr', 'gr', 'hu', 'it', 'lt', 'mx', 'ml', 'no', 'nz', 'pl', 'pt', 'ru', 'se', 'sg', 'uk', 'us', 'us-old', 'tw', 've', 'za']
