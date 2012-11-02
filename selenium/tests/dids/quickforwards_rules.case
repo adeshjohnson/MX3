@@ -1863,8 +1863,67 @@
 	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
-<!--atkomentuoti ir papildyti, kai bus sutvarkytas #6643 BUG-->
-<!--<tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name_2</td>
+	<td>auth_by_pin_dp</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=dp_PIN_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=callback_dp_name</td>
+	<td>callback_dp</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cb_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dialplan_name</td>
+	<td>ivr_dip</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=ivr_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dialplan successfully created</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
@@ -1888,9 +1947,9 @@
 	<td>assertTextPresent</td>
 	<td>Successfully logged in</td>
 	<td></td>
-</tr>-->
+</tr>
 <!--Checking if it is possible to assign qf rule did to another dialplan-->
-<!--<tr>
+<tr>
 	<td>open</td>
 	<td>/billing/dids/edit/15</td>
 	<td></td>
@@ -2084,7 +2143,367 @@
 	<td>assertEditable</td>
 	<td>id=did_cc_tariff_id</td>
 	<td></td>
-</tr>-->
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#make_did_free &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID made available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> Reserve DID for user </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Authorization by PIN Dial Plan:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Callback Dial Plan:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>IVR Dial Plan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//select[@name='dp_id'])[2]</td>
+	<td>auth_by_pin_dp</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//select[@name='dp_id'])[3]</td>
+	<td>callback_dp</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//select[@name='dp_id'])[5]</td>
+	<td>ivr_dip</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Calling Cards Dial Plan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=dp_id</td>
+	<td>test_dialplan</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//select[@name='dp_id'])[4]</td>
+	<td>qf_dp</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Quick Forwards Dial Plan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=assign_to_dp_callback</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned to Dial Plan: callback_dp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#make_did_free &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@type='image'])[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned to Dial Plan: ivr_dip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#make_did_free &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned to Dial Plan: test_dialplan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#make_did_free &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=assign_to_dp_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned to Dial Plan: auth_by_pin_dp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dialplan_name</td>
+	<td>auth_by_pin_dp_edited</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dial Plan successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=ap_dp_name_4</td>
+	<td>auth_by_pin_dp_edited</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Assigned to dial plan: auth_by_pin_dp_edited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_did</td>
+	<td>37069912348</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test Accountant</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;4&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=did[provider_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=did_cc_tariff_id</td>
+	<td>label=Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#did_cc_tariff_id &gt; option[value=&quot;2&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Details changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Assigned to dial plan: auth_by_pin_dp_edited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#make_did_free &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@type='image'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> DID assigned to Dial Plan: auth_by_pin_dp_edited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Assign DID to device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Calling Cards Dial Plan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td> Reserve DID for user </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Authorization by PIN Dial Plan:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Callback Dial Plan:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>IVR Dial Plan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td> Reserve DID for user </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/bulk_management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>37060012345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>37261112350</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=did_action_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=callinc_cards_dp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DIDs quantity: 20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>8 DIDs were not updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dial Plan assigned to DIDs interval</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -2172,9 +2591,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>id=quickforward_dp_4</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=quickforward_dp_7</td>
+	<td>qf_dp_res</td>
 </tr>
 <tr>
 	<td>open</td>
