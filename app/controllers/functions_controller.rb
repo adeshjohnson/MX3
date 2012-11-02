@@ -1300,6 +1300,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Confline.set_value('API_Secret_Key', params[:api_secret_key])
     Confline.set_value('API_Login_Redirect_to_Main', params[:api_login_redirect_to_main].to_i)
     Confline.set_value('API_Allow_registration_ower_API', params[:api_allow_registration].to_i)
+    Confline.set_value('API_Disable_hash_checking', params[:api_disable_hash_checking].to_i)
     # /API settings
 
     Confline.set_value("CSV_File_size", params[:csv_file_size].to_i)
@@ -1928,6 +1929,7 @@ Sets default tax values for users or cardgroups
 
     #API
     Confline.set_value('API_Secret_Key', params[:api_secret_key], current_user.id)
+    Confline.set_value('API_Disable_hash_checking', params[:api_disable_hash_checking].to_i, current_user.id)
 
     #DEVICE 
     sip_port = params[:default_sip_device_port].to_i == 0 ? 5060 : params[:default_sip_device_port].to_i                                                                                                            

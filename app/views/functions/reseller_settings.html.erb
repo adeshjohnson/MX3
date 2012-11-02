@@ -323,6 +323,7 @@
               <td><b><%= _('API_Secret_Key')%>:</b></td>
               <td><%= text_field_tag('api_secret_key', Confline.get_value("API_Secret_Key", @user_id) , "class" => "input", :size => "35", :maxlength => "255" )%></td>
             </tr>
+            <%= raw setting_boolean(_('Disable_hash_checking'), 'api_disable_hash_checking', "API_Disable_hash_checking", session[:user_id]) %>
           </table>
         </div>
     <%end%>
