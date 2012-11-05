@@ -806,7 +806,7 @@ class AccountingController < ApplicationController
                               :order => order_by)
       sep, dec = current_user.csv_params
       csv_line = "'#{_('ID')}'#{sep}'#{_('User')}'#{sep}'#{_('Amount')} (#{dc})'#{sep}'#{_('Tax')}'#{sep}'#{_('Amount_with_tax')} (#{dc})'\n"
-      csv_line += invoices.map { |r| "#{r.id}#{sep}#{nice_user(r.user).delete(sep)}#{sep}#{r.nice_invoice_number(r.converted_price(@ex), nice_number_hash).to_s.gsub(".", dec).to_s}#{sep}#{r((r.converted_price_with_vat(@ex) - r.converted_price(@ex)), nice_number_hash).to_s.gsub(".", dec).to_s}#{sep}#{r((r.converted_price_with_vat(@ex)), nice_number_hash).to_s.gsub(".", dec).to_s}" }.join("\n")
+      csv_line += invoices.map { |r| "#{r.id}#{sep}#{nice_user(r.user).delete(sep)}#{sep}#{r.nice_invoice_number(r.converted_price(@ex), nice_number_hash).to_s.gsub(".", dec).to_s}#{sep}#{r.nice_invoice_number((r.converted_price_with_vat(@ex) - r.converted_price(@ex)), nice_number_hash).to_s.gsub(".", dec).to_s}#{sep}#{r.nice_invoice_number((r.converted_price_with_vat(@ex)), nice_number_hash).to_s.gsub(".", dec).to_s}" }.join("\n")
       if params[:test].to_i == 1
         render :text => "Invoices-#{session[:show_currency]}.csv" + csv_line.to_s
       else
