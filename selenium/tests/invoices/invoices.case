@@ -379,11 +379,6 @@
 	<td>label=10</td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>commit</td>
 	<td></td>
@@ -391,11 +386,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -491,11 +481,6 @@
 	<td>label=12</td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -503,11 +488,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -534,11 +514,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>User's settings successfully changed: Test User #1</td>
 	<td></td>
 </tr>
 <!--Invoices for 10 days.-->
@@ -603,11 +578,6 @@
 	<td>label=3</td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -615,11 +585,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -694,11 +659,6 @@
 	<td>label=3</td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -706,11 +666,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -780,11 +735,6 @@
 	<td>label=12</td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -792,11 +742,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <!--Verify invoice-->
@@ -1342,38 +1287,33 @@
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>//invoice[1]/product[1]/price</td>
 	<td>2.0000</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>//invoice[1]/product[2]/price</td>
-	<td>1.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//invoice[1]/product[1]/price</td>
+	<td>assertTextPresent</td>
 	<td>13.0000</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//product[2]/price</td>
+	<td>assertTextPresent</td>
 	<td>11.0000</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//invoice[2]/product/name</td>
+	<td>assertTextPresent</td>
 	<td>Calls</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//invoice[2]/product/quantity</td>
+	<td>assertTextPresent</td>
 	<td>1</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//invoice[2]/product/price</td>
+	<td>assertTextPresent</td>
 	<td>5.0000</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -1540,11 +1480,6 @@
 	<td>label=12</td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -1552,11 +1487,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1628,11 +1558,6 @@
 <tr>
 	<td>open</td>
 	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td>
 	<td></td>
 </tr>
 <tr>
@@ -1857,11 +1782,6 @@
 	<td>label=10</td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -1869,11 +1789,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
