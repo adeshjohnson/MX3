@@ -108,12 +108,16 @@ class Tax < ActiveRecord::Base
   def apply_tax(amount, options = {})
     opts = {}.merge(options)
     amount = amount.to_d
+    logger.fatal "ddddddddddddddddddddddddddddddddd"
+    logger.fatal opts[:precision]
     if self.compound_tax.to_i == 1
       if opts[:precision]
         amount += format("%.#{opts[:precision].to_i}f", (amount* tax1_value/100.0)).to_d if tax1_enabled.to_i == 1
         amount += format("%.#{opts[:precision].to_i}f", (amount* tax2_value/100.0)).to_d if tax2_enabled.to_i == 1
         amount += format("%.#{opts[:precision].to_i}f", (amount* tax3_value/100.0)).to_d if tax3_enabled.to_i == 1
         amount += format("%.#{opts[:precision].to_i}f", (amount* tax4_value/100.0)).to_d if tax4_enabled.to_i == 1
+        logger.fatal "iiiiiiiiiiiiiiiiiii"
+        logger.fatal amount
       else
         amount += (amount* tax1_value/100.0) if tax1_enabled.to_i == 1
         amount += (amount* tax2_value/100.0) if tax2_enabled.to_i == 1
@@ -127,6 +131,8 @@ class Tax < ActiveRecord::Base
         tax += format("%.#{opts[:precision].to_i}f", (amount* tax2_value/100.0)).to_d if tax2_enabled.to_i == 1
         tax += format("%.#{opts[:precision].to_i}f", (amount* tax3_value/100.0)).to_d if tax3_enabled.to_i == 1
         tax += format("%.#{opts[:precision].to_i}f", (amount* tax4_value/100.0)).to_d if tax4_enabled.to_i == 1
+        logger.fatal "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+        logger.fatal tax
       else
         tax += (amount* tax1_value/100.0) if tax1_enabled.to_i == 1
         tax += (amount* tax2_value/100.0) if tax2_enabled.to_i == 1
@@ -135,6 +141,7 @@ class Tax < ActiveRecord::Base
       end
       amount += tax
     end
+    logger.fatal amount
     amount
   end
 

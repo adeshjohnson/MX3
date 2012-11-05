@@ -1,5 +1,6 @@
 <%= render :partial => 'timezone_notice' %>
 <% type = @invoice.invoice_type -%>
+<% nice_number_hash = {:change_decimal => session[:change_decimal], :global_decimal => session[:global_decimal]} %>
 <table width="100%">
   <tr>
     <td>
@@ -65,11 +66,11 @@
             <% end %>
             <tr class="row1">
               <th align="left"><%= _('Price') %>  (<%= session[:show_currency] %>):</th>
-              <td id="price" align="right">        <%= nice_invoice_number(@invoice.converted_price(@ex), type) %> </td>
+              <td id="price" align="right">        <%= @invoice.nice_invoice_number(@invoice.converted_price(@ex), nice_number_hash) %> </td>
             </tr>
             <tr class="row2">
               <th align="left"><%= _('Price_with_VAT') %>  (<%= session[:show_currency] %>):</th>
-              <td id="full_price" align="right"> <%= nice_invoice_number(@invoice.converted_price_with_vat(@ex), type) %></td>
+              <td id="full_price" align="right"> <%= @invoice.nice_invoice_number(@invoice.converted_price_with_vat(@ex), nice_number_hash) %></td>
             </tr>
             <tr class="row2">
               <th align="left"><%= _('Recalculate_invoice') %>:</th>
@@ -187,8 +188,8 @@
               %>
               <td id="id_name_<%= id.id %>" align="left"> <%= id.name %> </td>
               <td id="id_quantity_<%= id.id %>" align="right"> <%= qt %> </td>
-              <td id="id_price_<%= id.id %>" align="right"> <%= nice_number(id.converted_price(@ex)) %> </td>
-              <td id="id_total_price_<%= id.id %>" align="right"> <%= nice_number(tp) %> </td>
+              <td id="id_price_<%= id.id %>" align="right"> <%= @invoice.nice_invoice_number(id.converted_price(@ex), nice_number_hash) %> </td>
+              <td id="id_total_price_<%= id.id %>" align="right"> <%= @invoice.nice_invoice_number(tp, nice_number_hash) %> </td>
             </tr>
         <% } %>
       </table>

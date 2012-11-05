@@ -322,6 +322,7 @@ class AccountingController < ApplicationController
 
     issue_date = Time.mktime(params[:date_issue][:year], params[:date_issue][:month], params[:date_issue][:day])
 
+    nc=nice_invoice_number_digits("postpaid")
     for user in @users
       MorLog.my_debug("******************** For user : #{user.id} ******************************", 1)
       # --- Subscriptions ---
@@ -356,20 +357,20 @@ class AccountingController < ApplicationController
 
         tax = user.get_tax.dup
         tax.save
-        invoice = Invoice.new(:user_id => user.id, :period_start => @period_start, :period_end => @period_end, :issue_date => issue_date, :paid => 0, :number => "", :invoice_type => "postpaid", :tax_id => tax.id)
+        invoice = Invoice.new(:user_id => user.id, :period_start => @period_start, :period_end => @period_end, :issue_date => issue_date, :paid => 0, :number => "", :invoice_type => "postpaid", :tax_id => tax.id, :invoice_precision=>nc)
         invoice.save
         price = 0
 
         # --- add own outgoing calls ---
         if (outgoing_calls_price > 0) or ( user.invoice_zero_calls == 1 and outgoing_calls_price >= 0 and outgoing_calls > 0 )
-          invoice.invoicedetails.create(:name => _('Calls'), :price => outgoing_calls_price.to_d, :quantity => outgoing_calls, :invdet_type => 0)
-          price += outgoing_calls_price.to_d
+          invoice.invoicedetails.create(:name => _('Calls'), :price => invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls, :invdet_type => 0)
+          price += invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
         end
 
         # --- add resellers users outgoing calls ---
         if (outgoing_calls_by_users_price > 0) or ( user.invoice_zero_calls == 1 and outgoing_calls_by_users_price >= 0 and incoming_made_calls_price > 0)
-          invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => outgoing_calls_by_users_price.to_d, :quantity => outgoing_calls_by_users, :invdet_type => 0)
-          price += outgoing_calls_by_users_price.to_d
+          invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => invoice.nice_invoice_number(outgoing_calls_by_users_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls_by_users, :invdet_type => 0)
+          price += invoice.nice_invoice_number(outgoing_calls_by_users_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
         end
 
         if mor_11_extend? and user.postpaid?
@@ -466,15 +467,15 @@ class AccountingController < ApplicationController
 
 
           if count_subscription == 1
-            invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invd_price, :quantity => "1")
-            price += invd_price.to_d
+            invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invoice.nice_invoice_number(invd_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => "1")
+            price += invoice.nice_invoice_number(invd_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
           end
         end
         MorLog.my_debug("end subscriptions sum", 1)
-        invoice.price = price.to_d
+        invoice.price = invoice.nice_invoice_number(price.to_d, {:nc=>nc, :apply_rounding=>true})
         invoice.number_type = invoice_number_type
         invoice.number = generate_invoice_number(invoice_number_start, invoice_number_length, invoice_number_type, invoice.id, period_start)
-        invoice.price_with_vat = invoice.price_with_tax()
+        invoice = invoice.generate_taxes_for_invoice(nice_invoice_number_digits(invoice.invoice_type))
         MorLog.my_debug("    Invoice number: #{invoice.number}", 1)
         invoice.save
         @invoices_generated += 1
@@ -573,6 +574,8 @@ class AccountingController < ApplicationController
 
     issue_date = Time.mktime(params[:date_issue][:year], params[:date_issue][:month], params[:date_issue][:day])
 
+    nc=nice_invoice_number_digits("prepaid")
+
     for user in @users
       MorLog.my_debug("******************** For user : #{user.id} ******************************", 1)
       MorLog.my_debug("incoming calls start", 1)
@@ -595,20 +598,20 @@ class AccountingController < ApplicationController
         # tax for invoice
         tax = user_tax.dup
         tax.save
-        invoice = Invoice.new(:user_id => user.id, :period_start => @period_start, :period_end => @period_end, :issue_date => issue_date, :paid => 1, :number => "", :invoice_type => "prepaid", :tax_id => tax.id)
+        invoice = Invoice.new(:user_id => user.id, :period_start => @period_start, :period_end => @period_end, :issue_date => issue_date, :paid => 1, :number => "", :invoice_type => "prepaid", :tax_id => tax.id, :invoice_precision=>nc)
         invoice.save
 
         price = 0
 
         if (outgoing_calls_price > 0)
-          invoice.invoicedetails.create(:name => _('Calls'), :price => outgoing_calls_price.to_d, :quantity => outgoing_calls, :invdet_type => 0)
-          price += outgoing_calls_price.to_d
+          invoice.invoicedetails.create(:name => _('Calls'), :price => invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls, :invdet_type => 0)
+          price += invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
         end
 
         # --- add resellers users outgoing calls ---
         if (outgoing_calls_by_users_price > 0)
-          invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => outgoing_calls_by_users_price.to_d, :quantity => outgoing_calls_by_users, :invdet_type => 0)
-          price += outgoing_calls_by_users_price.to_d
+          invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => invoice.nice_invoice_number(outgoing_calls_by_users_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls_by_users, :invdet_type => 0)
+          price += invoice.nice_invoice_number(outgoing_calls_by_users_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
         end
 
         #        # --- add own received incoming calls ---
@@ -683,16 +686,16 @@ class AccountingController < ApplicationController
           end
 
           if count_subscription == 1
-            invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invd_price.to_d, :quantity => "1")
-            price += invd_price.to_d
+            invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invoice.nice_invoice_number(invd_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => "1")
+            price += invoice.nice_invoice_number(invd_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
           end
           MorLog.my_debug("end subscriptions periodic_fee", 1)
         end
         MorLog.my_debug("end subscriptions sum", 1)
-        invoice.price = price.to_d
+        invoice.price = invoice.nice_invoice_number(price.to_d, {:nc=>nc, :apply_rounding=>true})
         invoice.number_type = invoice_number_type
         invoice.number = generate_invoice_number(invoice_number_start, invoice_number_length, invoice_number_type, invoice.id, period_start)
-        invoice.price_with_vat = invoice.price_with_tax()
+        invoice = invoice.generate_taxes_for_invoice(nc)
         MorLog.my_debug("    Invoice number: #{invoice.number}", 1)
         invoice.save
         @invoices_generated += 1
@@ -1738,6 +1741,8 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     user = invoice.user
     invoice.invoicedetails.destroy_all # we'll add new details
 
+    nc=nice_invoice_number_digits(invoice.invoice_type)
+
     period_start_with_time, period_end_with_time = invoice.period_start.to_time, invoice.period_end.to_time.change(:hour => 23, :min => 59, :sec => 59, :usec => 999999.999)
     period_start = invoice.period_start.to_time
     period_end = invoice.period_end.to_time.change(:hour => 23, :min => 59, :sec => 59, :usec => 999999.999)
@@ -1781,14 +1786,14 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
       # --- add own outgoing calls ---
       if (outgoing_calls_price > 0)
-        invoice.invoicedetails.create(:name => _('Calls'), :price => outgoing_calls_price.to_d, :quantity => outgoing_calls, :invdet_type => 0)
-        price += outgoing_calls_price.to_d
+        invoice.invoicedetails.create(:name => _('Calls'), :price => invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls, :invdet_type => 0)
+        price += invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
       end
 
       # --- add resellers users outgoing calls ---
       if (outgoing_calls_by_users_price > 0)
-        invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => outgoing_calls_by_users_price.to_d, :quantity => outgoing_calls_by_users, :invdet_type => 0)
-        price += outgoing_calls_by_users_price.to_d
+        invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => invoice.nice_invoice_number(outgoing_calls_by_users_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls_by_users, :invdet_type => 0)
+        price += invoice.nice_invoice_number(outgoing_calls_by_users_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
       end
 
       #      # --- add own received incoming calls ---
@@ -1881,12 +1886,13 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
         #my_debug("    Invoice Subscriptions price: #{invd_price.to_s}")
 
         if count_subscription == 1
-          invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invd_price, :quantity => "1")
-          price += invd_price.to_d
+          invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invoice.nice_invoice_number(invd_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => "1")
+          price += invoice.nice_invoice_number(invd_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
         end
       end
-      invoice.price = price.to_d
-      invoice.price_with_vat = invoice.price_with_tax()
+      invoice.invoice_precision=nc
+      invoice.price = invoice.nice_invoice_number(price.to_d, {:nc=>nc, :apply_rounding=>true})
+      invoice = invoice.generate_taxes_for_invoice(nice_invoice_number_digits(invoice.invoice_type))
       MorLog.my_debug(" Recalculated Invoice number: #{invoice.number}", 1)
       invoice.save
     end

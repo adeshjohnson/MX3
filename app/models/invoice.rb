@@ -538,7 +538,7 @@ class Invoice < ActiveRecord::Base
     if self.tax
       taxes = tax.applied_tax_list(self.converted_price(ex), :precision => nc)
       logger.fatal taxes.to_yaml
-      taxes.each { |tax_hash|
+      taxes.each_with_index { |tax_hash, index|
         if tax.get_tax_count > 0
           up_string += 10
           aa = []
@@ -550,11 +550,11 @@ class Invoice < ActiveRecord::Base
           if show_avg_rate == 1
             aa << nice_cell(' ', font) if type == 2
           end
-          aa << {:text => self.nice_invoice_number(tax_hash[:tax], nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all, :font_size => font}
+          aa << {:text => self.nice_invoice_number(self["tax_#{index+1}_value".to_sym] * ex, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all, :font_size => font}
           aa << {:text => dc} if type == 3
           items << aa
         end
-        tax_amount += self.nice_invoice_number(tax_hash[:tax], nice_number_hash.merge({:no_repl => 1})).to_d
+        tax_amount += self.nice_invoice_number(self.price_with_vat, nice_number_hash.merge({:no_repl => 1})).to_d
 
       }
       price_with_tax = self.nice_invoice_number(self.converted_price(ex), nice_number_hash.merge({:no_repl => 1})).to_d+tax_amount.to_d
@@ -735,7 +735,7 @@ class Invoice < ActiveRecord::Base
 
 
   def nice_invoice_number(number, options = {})
-    nc = options[:nc] ? options[:nc] : 2
+    nc = options[:apply_rounding] ?  (options[:nc] ? options[:nc] : self.invoice_precision) :  self.invoice_precision
     n = sprintf("%0.#{nc}f", number.to_d) if number
     if options[:change_decimal] and options[:no_repl].to_i == 0
       n = n.gsub('.', options[:global_decimal])
@@ -812,6 +812,17 @@ class Invoice < ActiveRecord::Base
       MorLog.my_debug("Balance will not be shown because invoice is not for whole month, invoice id: #{id}")
       return nil
     end
+  end
+
+
+  def generate_taxes_for_invoice(nc)
+    taxes = self.tax.applied_tax_list(self.price, {:precision => nc})
+    self.tax_1_value = self.nice_invoice_number(taxes[0][:tax] , {:nc => nc, :apply_rounding=>true})
+    self.tax_2_value =  self.nice_invoice_number(taxes[1][:tax] , {:nc => nc, :apply_rounding=>true})    if   taxes[1]
+    self.tax_3_value =  self.nice_invoice_number(taxes[2][:tax] , {:nc => nc, :apply_rounding=>true})    if   taxes[2]
+    self.tax_4_value =   self.nice_invoice_number(taxes[3][:tax] , {:nc => nc, :apply_rounding=>true})   if   taxes[3]
+    self.price_with_vat = self.nice_invoice_number(self.price_with_tax({:precision => nc}) , {:nc => nc, :apply_rounding=>true})
+    self
   end
 
   def Invoice.last_day_of_month(year, month)

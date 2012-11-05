@@ -11,6 +11,7 @@
     <th align="right"><%= _('Price_with_VAT') %></th>
     <th align="center"><%= _('Details') %></th>
   </tr>
+  <% nice_number_hash = {:change_decimal => session[:change_decimal], :global_decimal => session[:global_decimal]} %>
   <% @invoices.each_with_index { |inv, i| %>
       <tr class="row<%= (i % 2 + 1).to_s %>">
         <% user = inv.user -%>
@@ -24,8 +25,8 @@
           <%= b_check if inv.paid == 1 %>
         </td>
         <td id="paid_date_<%= inv.id %>" align="center"> <%= nice_date_time inv.paid_date if inv.paid == 1 %> </td>
-        <td id="price_<%= inv.id %>" align="right"> <%= nice_invoice_number(inv.price, inv.invoice_type) %> </td>
-        <td id="price_with_vat_<%= inv.id %>" align="right"> <%= nice_invoice_number(inv.price_with_tax, inv.invoice_type) %> </td>
+        <td id="price_<%= inv.id %>" align="right"> <%= inv.nice_invoice_number(inv.price, nice_number_hash) %> </td>
+        <td id="price_with_vat_<%= inv.id %>" align="right"> <%= inv.nice_invoice_number(inv.price_with_tax, nice_number_hash) %> </td>
         <td id="details_<%= inv.id %>" align="center"><%= link_to(b_details, {:action => 'user_invoice_details', :id => inv.id}, :id => "details_link_" + inv.id.to_s) %></td>
       </tr>
   <% } %>

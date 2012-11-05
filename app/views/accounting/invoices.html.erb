@@ -176,6 +176,7 @@
         <th></th>
     <% end %>
   </tr>
+  <% nice_number_hash = {:change_decimal => session[:change_decimal], :global_decimal => session[:global_decimal]} %>
   <% @invoices.each_with_index { |inv, i| %>
       <tr class="row<%= (i % 2 + 1).to_s %>">
         <% user = inv.user -%>
@@ -201,8 +202,8 @@
             </td>
 
             <td id="inv_paid_date_<%= inv.id %>" align="center"> <%= nice_date_time inv.paid_date if inv.paid == 1 %> </td>
-            <td id="inv_price_<%= inv.id %>" align="right"> <%= nice_invoice_number(inv.converted_price(@ex), inv.invoice_type) %> </td>
-            <td id="inv_full_price_<%= inv.id %>" align="right"> <%= nice_invoice_number(inv.converted_price_with_vat(@ex), inv.invoice_type) %> </td>
+            <td id="inv_price_<%= inv.id %>" align="right"> <%= inv.nice_invoice_number(inv.converted_price(@ex), nice_number_hash) %> </td>
+            <td id="inv_full_price_<%= inv.id %>" align="right"> <%= inv.nice_invoice_number(inv.converted_price_with_vat(@ex), nice_number_hash) %> </td>
             <td id="details_<%= inv.id %>" align="center"><%= link_to b_details, {:action => 'invoice_details', :id => inv.id, :currency =>  user.currency ? user.currency.name : ''}, :id => "details_link_"+inv.id.to_s %></td>
         <% end -%>
         <% if @allow_edit %>

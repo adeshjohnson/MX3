@@ -107,6 +107,26 @@ begin
       end
     end
 
+    def generate_taxes_for_invoice(nc)
+      if tax
+      taxes = self.tax.applied_tax_list(self.price, {:precision => nc})
+      self.tax_1_value = self.nice_invoice_number(taxes[0][:tax] , {:nc => nc, :apply_rounding=>true})
+      self.tax_2_value =  self.nice_invoice_number(taxes[1][:tax] , {:nc => nc, :apply_rounding=>true})    if   taxes[1]
+      self.tax_3_value =  self.nice_invoice_number(taxes[2][:tax] , {:nc => nc, :apply_rounding=>true})    if   taxes[2]
+      self.tax_4_value =   self.nice_invoice_number(taxes[3][:tax] , {:nc => nc, :apply_rounding=>true})   if   taxes[3]
+      end
+      self.price_with_vat = self.nice_invoice_number(self.price_with_tax({:precision => nc}) , {:nc => nc, :apply_rounding=>true})
+      self
+    end
+
+    def nice_invoice_number(number, options = {})
+      nc = options[:apply_rounding] ?  (options[:nc] ? options[:nc] : self.invoice_precision) :  self.invoice_precision
+      n = sprintf("%0.#{nc}f", number.to_d) if number
+      if options[:change_decimal] and options[:no_repl].to_i == 0
+        n = n.gsub('.', options[:global_decimal])
+      end
+      n
+    end
 
   end
 
@@ -166,6 +186,43 @@ Calculates amount with taxes applied.
       amount
     end
 
+
+=begin rdoc
+    Returns list with taxes applied to given amount.
+=end
+
+    def applied_tax_list(amount, options = {})
+      opts = {}.merge(options)
+      amount = amount.to_d
+      list = []
+      if self.compound_tax.to_i == 1
+        if opts[:precision]
+          list << {:name => tax1_name.to_s, :value => tax1_value.to_d, :tax => format("%.#{opts[:precision].to_i}f", (amount*tax1_value).to_d/100.0), :amount => amount += format("%.#{opts[:precision].to_i}f", (amount*tax1_value).to_d/100.0).to_d} if tax1_enabled.to_i == 1
+          list << {:name => tax2_name.to_s, :value => tax2_value.to_d, :tax => format("%.#{opts[:precision].to_i}f", (amount*tax2_value).to_d/100.0), :amount => amount += format("%.#{opts[:precision].to_i}f", (amount*tax2_value).to_d/100.0).to_d} if tax2_enabled.to_i == 1
+          list << {:name => tax3_name.to_s, :value => tax3_value.to_d, :tax => format("%.#{opts[:precision].to_i}f", (amount*tax3_value).to_d/100.0), :amount => amount += format("%.#{opts[:precision].to_i}f", (amount*tax3_value).to_d/100.0).to_d} if tax3_enabled.to_i == 1
+          list << {:name => tax4_name.to_s, :value => tax4_value.to_d, :tax => format("%.#{opts[:precision].to_i}f", (amount*tax4_value).to_d/100.0), :amount => amount += format("%.#{opts[:precision].to_i}f", (amount*tax4_value).to_d/100.0).to_d} if tax4_enabled.to_i == 1
+        else
+          list << {:name => tax1_name.to_s, :value => tax1_value.to_d, :tax => amount*tax1_value/100.0, :amount => amount += amount*tax1_value/100.0} if tax1_enabled.to_i == 1
+          list << {:name => tax2_name.to_s, :value => tax2_value.to_d, :tax => amount*tax2_value/100.0, :amount => amount += amount*tax2_value/100.0} if tax2_enabled.to_i == 1
+          list << {:name => tax3_name.to_s, :value => tax3_value.to_d, :tax => amount*tax3_value/100.0, :amount => amount += amount*tax3_value/100.0} if tax3_enabled.to_i == 1
+          list << {:name => tax4_name.to_s, :value => tax4_value.to_d, :tax => amount*tax4_value/100.0, :amount => amount += amount*tax4_value/100.0} if tax4_enabled.to_i == 1
+        end
+      else
+        if opts[:precision]
+          list << {:name => tax1_name.to_s, :value => tax1_value.to_d, :tax => format("%.#{opts[:precision].to_i}f", (amount*tax1_value).to_d/100.0), :amount => format("%.#{opts[:precision].to_i}f", (amount*tax1_value).to_d/100.0).to_d} if tax1_enabled.to_i == 1
+          list << {:name => tax2_name.to_s, :value => tax2_value.to_d, :tax => format("%.#{opts[:precision].to_i}f", (amount*tax2_value).to_d/100.0), :amount => format("%.#{opts[:precision].to_i}f", (amount*tax2_value).to_d/100.0).to_d} if tax2_enabled.to_i == 1
+          list << {:name => tax3_name.to_s, :value => tax3_value.to_d, :tax => format("%.#{opts[:precision].to_i}f", (amount*tax3_value).to_d/100.0), :amount => format("%.#{opts[:precision].to_i}f", (amount*tax3_value).to_d/100.0).to_d} if tax3_enabled.to_i == 1
+          list << {:name => tax4_name.to_s, :value => tax4_value.to_d, :tax => format("%.#{opts[:precision].to_i}f", (amount*tax4_value).to_d/100.0), :amount => format("%.#{opts[:precision].to_i}f", (amount*tax4_value).to_d/100.0).to_d} if tax4_enabled.to_i == 1
+        else
+          list << {:name => tax1_name.to_s, :value => tax1_value.to_d, :tax => amount*tax1_value/100.0, :amount => amount*tax1_value/100.0} if tax1_enabled.to_i == 1
+          list << {:name => tax2_name.to_s, :value => tax2_value.to_d, :tax => amount*tax2_value/100.0, :amount => amount*tax2_value/100.0} if tax2_enabled.to_i == 1
+          list << {:name => tax3_name.to_s, :value => tax3_value.to_d, :tax => amount*tax3_value/100.0, :amount => amount*tax3_value/100.0} if tax3_enabled.to_i == 1
+          list << {:name => tax4_name.to_s, :value => tax4_value.to_d, :tax => amount*tax4_value/100.0, :amount => amount*tax4_value/100.0} if tax4_enabled.to_i == 1
+        end
+      end
+      list
+    end
+
   end
 
   #------------- Debug model ----------------
@@ -185,9 +242,13 @@ Calculates amount with taxes applied.
   if Confline.get_value('Script_recalculate_invoices_tax').to_i == 0
     invoices = Invoice.all
     if invoices and invoices.size.to_i > 0
+      gl_nc = Confline.get_value("Nice_Number_Digits")
+      prep_nc = Confline.get_value("Prepaid_Round_finals_to_2_decimals").to_i == 1 ? 2 : (gl_nc.to_i > 0 ? gl_nc : 2)
+      post_nc = Confline.get_value("Round_finals_to_2_decimals").to_i == 1 ? 2 : (gl_nc.to_i > 0 ? gl_nc : 2)
       for invoice in invoices
         Debug.debug("#{Time.now().to_s(:db)} B invoice_id:#{invoice.id}; invoice_price:#{invoice.price}; invoice_price_with_vat:#{invoice.price_with_vat} ")
-        invoice.price_with_vat = invoice.price_with_tax()
+        invoice.invoice_precision = invoice.invoice_type.to_s == 'prepaid' ? prep_nc : post_nc
+        invoice = invoice.generate_taxes_for_invoice(invoice.invoice_precision)
         if invoice.save
           Debug.debug("#{Time.now().to_s(:db)} A invoice_id:#{invoice.id}; invoice_price:#{invoice.price}; invoice_price_with_vat:#{invoice.price_with_vat} ")
         else
