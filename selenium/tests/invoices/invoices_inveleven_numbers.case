@@ -267,11 +267,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>User's settings successfully changed: Test User #1</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/users/edit/3</td>
 	<td></td>
@@ -284,11 +279,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//div[@id='confirm_without_message']/input</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>User's settings successfully changed: Test Reseller</td>
 	<td></td>
 </tr>
 <!--Create subscription for user-->
@@ -355,12 +345,7 @@
 <!--Generate Invoice for pospaid user-->
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/invoices</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Generate Invoices</td>
+	<td>/billing/accounting/generate_invoices</td>
 	<td></td>
 </tr>
 <tr>
@@ -404,11 +389,6 @@
 	<td>value=2</td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -416,11 +396,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -496,11 +471,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -508,11 +478,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -604,11 +569,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>User's settings successfully changed: Test User #1</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/users/edit/3</td>
 	<td></td>
@@ -621,11 +581,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//div[@id='confirm_without_message']/input</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>User's settings successfully changed: Test Reseller</td>
 	<td></td>
 </tr>
 <!--Generate invoices for all prepaid users.-->
@@ -670,11 +625,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -682,11 +632,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -713,11 +658,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Manual</td>
 	<td></td>
 </tr>
 <tr>
@@ -772,11 +712,6 @@
 	<td>value=2</td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -784,11 +719,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -815,7 +745,7 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_full_price_7</td>
-	<td>10.0470</td>
+	<td>10.0471</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -879,11 +809,6 @@
 	<td>//div[@id='confirm_without_message']/input</td>
 	<td></td>
 </tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>User's settings successfully changed: User Resellers</td>
-	<td></td>
-</tr>
 <!--Check when  number is 9 and when pases 9-->
 <tr>
 	<td>open</td>
@@ -918,12 +843,7 @@
 <!--Generate Invoice for pospaid user-->
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/invoices</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Generate Invoices</td>
+	<td>/billing/accounting/generate_invoices</td>
 	<td></td>
 </tr>
 <tr>
@@ -967,11 +887,6 @@
 	<td>value=5</td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -979,11 +894,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1059,11 +969,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -1071,11 +976,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1125,11 +1025,6 @@
 	<td>//div[@id='confirm_without_message']/input</td>
 	<td></td>
 </tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>User's settings successfully changed: User Resellers</td>
-	<td></td>
-</tr>
 <!--Generate Invoice for prepaid user-->
 <tr>
 	<td>open</td>
@@ -1172,11 +1067,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -1184,11 +1074,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
