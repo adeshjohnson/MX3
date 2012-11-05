@@ -800,12 +800,13 @@ class AccountingController < ApplicationController
 
       session[:invoice_options] = @options
     else
+      nice_number_hash = {:change_decimal => session[:change_decimal], :global_decimal => session[:global_decimal]}
       invoices = Invoice.find(:all, :include => [:user, :tax],
                               :conditions => [cond.join(" AND ")] + cond_param,
                               :order => order_by)
       sep, dec = current_user.csv_params
       csv_line = "'#{_('ID')}'#{sep}'#{_('User')}'#{sep}'#{_('Amount')} (#{dc})'#{sep}'#{_('Tax')}'#{sep}'#{_('Amount_with_tax')} (#{dc})'\n"
-      csv_line += invoices.map { |r| "#{r.id}#{sep}#{nice_user(r.user).delete(sep)}#{sep}#{nice_invoice_number(r.converted_price(@ex), r.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{nice_invoice_number((r.converted_price_with_vat(@ex) - r.converted_price(@ex)), r.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{nice_invoice_number((r.converted_price_with_vat(@ex)), r.invoice_type).to_s.gsub(".", dec).to_s}" }.join("\n")
+      csv_line += invoices.map { |r| "#{r.id}#{sep}#{nice_user(r.user).delete(sep)}#{sep}#{r.nice_invoice_number(r.converted_price(@ex), nice_number_hash).to_s.gsub(".", dec).to_s}#{sep}#{r((r.converted_price_with_vat(@ex) - r.converted_price(@ex)), nice_number_hash).to_s.gsub(".", dec).to_s}#{sep}#{r((r.converted_price_with_vat(@ex)), nice_number_hash).to_s.gsub(".", dec).to_s}" }.join("\n")
       if params[:test].to_i == 1
         render :text => "Invoices-#{session[:show_currency]}.csv" + csv_line.to_s
       else
@@ -1125,13 +1126,13 @@ class AccountingController < ApplicationController
 
     user = invoice.user
     sep, dec = user.csv_params
-
+    nice_number_hash  = {:change_decimal => session[:change_decimal], :global_decimal => session[:global_decimal]}
 
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
 
     csv_string = ["number#{sep}user_id#{sep}period_start#{sep}period_end#{sep}issue_date#{sep}price (#{dc})#{sep}price_with_tax (#{dc})#{sep}accounting_number"]
-    csv_string << "#{invoice.number.to_s}#{sep}#{invoice.user_id}#{sep}#{nice_date(invoice.period_start, 0)}#{sep}#{nice_date(invoice.period_end, 0)}#{sep}#{nice_date(invoice.issue_date)}#{sep}#{nice_invoice_number(invoice.converted_price(ex), invoice.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{nice_invoice_number(invoice.converted_price_with_vat(ex), invoice.invoice_type).to_s.gsub(".", dec).to_s}#{sep}#{user.accounting_number}"
+    csv_string << "#{invoice.number.to_s}#{sep}#{invoice.user_id}#{sep}#{nice_date(invoice.period_start, 0)}#{sep}#{nice_date(invoice.period_end, 0)}#{sep}#{nice_date(invoice.issue_date)}#{sep}#{invoice.nice_invoice_number(invoice.converted_price(ex), nice_number_hash).to_s.gsub(".", dec).to_s}#{sep}#{invoice.nice_invoice_number(invoice.converted_price_with_vat(ex), nice_number_hash).to_s.gsub(".", dec).to_s}#{sep}#{user.accounting_number}"
     #  my_debug csv_string
     prepaid, prep = invoice_type(invoice, user)
     filename = Invoice.filename(user, prep, "Invoice-#{user.first_name}_#{user.last_name}-#{invoice.user_id}-#{invoice.number}-#{invoice.issue_date}-#{dc}", "csv")
