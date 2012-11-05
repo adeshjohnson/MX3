@@ -54,6 +54,7 @@ class RoleRight < ActiveRecord::Base
       right.action =action.to_s
       right.description = description
       right.saved = 1
+      begin
       if right.save
         roles =Role.find(:all)
         for role in roles do
@@ -68,6 +69,9 @@ class RoleRight < ActiveRecord::Base
           end
           role_right.save
         end
+      end
+      rescue Exception => e
+        MorLog.my_debug e.to_yaml
       end
     end
   end
