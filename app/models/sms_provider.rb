@@ -2,6 +2,7 @@
 class SmsProvider < ActiveRecord::Base
 
   require 'enumerator'
+  require 'net/https'
   require 'uri'
 
   belongs_to :sms_tariff
@@ -87,8 +88,15 @@ class SmsProvider < ActiveRecord::Base
     cli = pr_device ? CGI.escape(pr_device.callerid.to_s) : ''
     first_name = CGI.escape(user.first_name.to_s)
     last_name =  CGI.escape(user.last_name.to_s)
-    message_id = Net::HTTP.get_response(URI.parse(nice_url(options[:to], mtext, 'src', first_name, last_name, cli.to_s)))
-    code = message_id.body.force_encoding("UTF-8")
+    # HTTP/SSL 
+    uri = URI.parse(nice_url(options[:to], mtext, 'src', first_name, last_name, cli.to_s))
+    http = Net::HTTP.new(uri.host, uri.port) 
+    uri.scheme.to_s.downcase == 'https' ? http.use_ssl = true : http.use_ssl = false 
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE 
+    request = Net::HTTP::Get.new(uri.request_uri) 
+    response = http.request(request) 
+    code = response.body.force_encoding("UTF-8") 
+    #
     Action.add_action_hash(user, {:action => "SMS_api_response", :data2=>nice_url(options[:to], mtext, 'src', first_name, last_name, cli.to_s)})
     if code.include?(email_good_keywords)
       sms.status_code = 0
@@ -163,7 +171,13 @@ class SmsProvider < ActiveRecord::Base
 
   def uri_parse_ok
     begin
-      Net::HTTP.get_response(URI.parse(nice_url('dst', 'msg', 'src', 'first_name', 'last_name', 'cli')))
+      uri = URI.parse(nice_url('dst', 'msg', 'src', 'first_name', 'last_name', 'cli')) 
+      http = Net::HTTP.new(uri.host, uri.port) 
+      uri.scheme.to_s.downcase == 'https' ? http.use_ssl = true : http.use_ssl = false 
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE 
+      request = Net::HTTP::Get.new(uri.request_uri) 
+      response = http.request(request) 
+      response.body
     rescue Exception => e
       logger.fatal e.to_yaml
       errors.add(:api, _('invalid_url'))
