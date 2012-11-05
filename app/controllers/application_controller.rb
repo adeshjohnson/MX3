@@ -775,26 +775,35 @@ class ApplicationController < ActionController::Base
 
 
         # normal path
-        #
-        # Trunk support (PRO)
-        trunk = ""
-        if @device.istrunk == 1
 
+        # SIP Proxy support
+        if ccl_active? and @device.device_type.to_s == "SIP" and @device.host.to_s == "dynamic"
+          
+          sip_proxy = Server.where('server_type = "sip_proxy"').first
+          if sip_proxy
+            Extline.mcreate(default_context, i, default_app, "SIP/" + sip_proxy.server_ip.to_s + "/" + @device.name, @device.extension, device_id)
+          end
+        
+        else
 
-          Extline.mcreate(default_context, i, "GotoIf", "$[${LEN(${MOR_DID})} > 0]?" + "#{i+1}:#{i+3}", @device.extension, device_id)
-          i += 1
-          Extline.mcreate(default_context, i, default_app, @device.device_type + "/" + @device.name + "/${MOR_DID}", @device.extension, device_id)
-          i += 1
-          Extline.mcreate(default_context, i, "Goto", "#{i+2}", @device.extension, device_id)
-          i += 1
-          trunk = "/${EXTEN}"
+          # normal call-flow without sip-proxy
+          # Trunk support
+          trunk = ""
+          if @device.istrunk == 1
+            Extline.mcreate(default_context, i, "GotoIf", "$[${LEN(${MOR_DID})} > 0]?" + "#{i+1}:#{i+3}", @device.extension, device_id)
+            i += 1
+            Extline.mcreate(default_context, i, default_app, @device.device_type + "/" + @device.name + "/${MOR_DID}", @device.extension, device_id)
+            i += 1
+            Extline.mcreate(default_context, i, "Goto", "#{i+2}", @device.extension, device_id)
+            i += 1
+            trunk = "/${EXTEN}"
+          end
+          # end trunk support
+          Extline.mcreate(default_context, i, default_app, @device.device_type + "/" + @device.name + trunk + "|#{timeout.to_s}", @device.extension, device_id)
 
-
-        end
-        # end trunk support
-
-
-        Extline.mcreate(default_context, i, default_app, @device.device_type + "/" + @device.name + trunk + "|#{timeout.to_s}", @device.extension, device_id)
+        end # sip proxy support
+        
+        
         busy_ext = 200 + i
         i += 1
         Extline.mcreate(default_context, i, "GotoIf", "$[$[\"${DIALSTATUS}\" = \"CHANUNAVAIL\"]|$[\"${DIALSTATUS}\" = \"CONGESTION\"]]?" + chanunavail_extension.to_s, @device.extension, device_id)
