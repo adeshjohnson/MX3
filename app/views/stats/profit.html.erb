@@ -152,6 +152,11 @@
         <th id="subscription_profit" align="right"> <%= nice_number(@sub_price.to_f) %></th>
         <th colspan="3"></th>
       </tr>
+      <tr>
+        <th align="left"><%= _('Did_owner_cost') %></th>
+        <th id="did_owner_cost" align="right"> <%= nice_number(@did_owner_cost.to_f) %></th>
+        <th colspan="3"></th>
+      </tr>
   <% end %>
   <tr>
     <th align="left" id="test_total_profit"><%= _('Total_profit') %></th>
@@ -189,6 +194,7 @@
     <% if session[:usertype] != 'reseller' %>
         <%= hidden_field_tag 'sub_price', @sub_price %>
         <%= hidden_field_tag 's_total', @s_total_profit %>
+        <%= hidden_field_tag 'did_owner_cost', @did_owner_cost %>
     <% end %>
     <%= image_submit_tag 'icons/pdf.png', :title => _('Export_to_PDF') %>  <%= _('Export_to_PDF') %>
 

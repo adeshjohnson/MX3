@@ -4509,7 +4509,7 @@ Localization.define('en') do |l|
   l.store 'Language_changed', 'Language have been changed'
   l.store 'Which_cards', 'Which cards'
   l.store 'Cards_interval', 'Card interval'
-  #  l.store '', ''
+  l.store 'Did_owner_cost', 'DID Owner Cost'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

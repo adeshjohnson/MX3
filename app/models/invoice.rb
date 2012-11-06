@@ -262,7 +262,7 @@ class Invoice < ActiveRecord::Base
     total_calls = 0
 
     invoicedetails.map do |item|
-      if item.invdet_type > 0 and item.name != 'Calls'
+      if (item.invdet_type > 0 or item.name == _("Did_owner_cost")) and item.name != 'Calls'
         ii = []
         ii << item.nice_inv_name
         ii << ' '
@@ -271,7 +271,11 @@ class Invoice < ActiveRecord::Base
         if options[:show_avg_rate] == 1
           ii << ' '
         end
-        ii << {:text => self.nice_invoice_number((item.quantity * item.converted_price(ex)), nice_number_hash).to_s, :align => :right}
+        if item.invdet_type > 0
+          ii << {:text => self.nice_invoice_number((item.quantity * item.converted_price(ex)), nice_number_hash).to_s, :align => :right}
+        else
+          ii << {:text => self.nice_invoice_number((item.converted_price(ex)), nice_number_hash).to_s, :align => :right}
+        end
         items << ii
       end
     end
@@ -677,9 +681,12 @@ class Invoice < ActiveRecord::Base
 
     if invoicedetails and invoicedetails.size.to_i > 0
       for id in invoicedetails
-        if id.invdet_type > 0 and id.name != 'Calls'
-
-          items << ['', {:text => id.nice_inv_name, :colspan => 3}, self.nice_invoice_number((id.quantity * id.converted_price(ex)), nice_number_hash).to_s, dc.to_s + " (" + _('Without_VAT') + ")"]
+        if (id.invdet_type > 0 or id.name == _("Did_owner_cost")) and id.name != 'Calls'
+          if id.invdet_type > 0
+            items << ['', {:text => id.nice_inv_name, :colspan => 3}, self.nice_invoice_number((id.quantity * id.converted_price(ex)), nice_number_hash).to_s, dc.to_s + " (" + _('Without_VAT') + ")"]
+          else
+            items << ['', {:text => id.nice_inv_name, :colspan => 3}, self.nice_invoice_number((id.converted_price(ex)), nice_number_hash).to_s, dc.to_s + " (" + _('Without_VAT') + ")"]
+          end
           ttp += id.price.to_d
         end
       end

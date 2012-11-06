@@ -382,10 +382,12 @@ class AccountingController < ApplicationController
         end
 
         # --- add own received incoming calls ---
-        #        if (incoming_received_calls_price > 0)
-        #          invoice.invoicedetails.create(:name => _('Incoming_received_calls'), :price => incoming_received_calls_price.to_d, :quantity => incoming_received_calls, :invdet_type => 0)
-        #          price += incoming_received_calls_price.to_d
-        #        end
+        if ["admin", "accountant"].include?(session[:usertype])
+          if (incoming_received_calls_price > 0)
+            invoice.invoicedetails.create(:name => _('Did_owner_cost'), :price => incoming_received_calls_price.to_d, :quantity => incoming_received_calls, :invdet_type => 0)
+            price += incoming_received_calls_price.to_d
+          end
+        end
 
         # --- add own made incoming calls ---
         #        if (incoming_made_calls_price > 0)
@@ -1133,6 +1135,10 @@ class AccountingController < ApplicationController
 
     csv_string = ["number#{sep}user_id#{sep}period_start#{sep}period_end#{sep}issue_date#{sep}price (#{dc})#{sep}price_with_tax (#{dc})#{sep}accounting_number"]
     csv_string << "#{invoice.number.to_s}#{sep}#{invoice.user_id}#{sep}#{nice_date(invoice.period_start, 0)}#{sep}#{nice_date(invoice.period_end, 0)}#{sep}#{nice_date(invoice.issue_date)}#{sep}#{invoice.nice_invoice_number(invoice.converted_price(ex), nice_number_hash).to_s.gsub(".", dec).to_s}#{sep}#{invoice.nice_invoice_number(invoice.converted_price_with_vat(ex), nice_number_hash).to_s.gsub(".", dec).to_s}#{sep}#{user.accounting_number}"
+
+
+
+
     #  my_debug csv_string
     prepaid, prep = invoice_type(invoice, user)
     filename = Invoice.filename(user, prep, "Invoice-#{user.first_name}_#{user.last_name}-#{invoice.user_id}-#{invoice.number}-#{invoice.issue_date}-#{dc}", "csv")
@@ -1193,7 +1199,6 @@ class AccountingController < ApplicationController
       for id in idetails
         #MorLog.my_debug(id.to_yaml)
         @iprice= id.price if id.price
-        if id.invdet_type > 0
           if id.invdet_type > 0
             if id.quantity
               qt = id.quantity
@@ -1203,8 +1208,11 @@ class AccountingController < ApplicationController
               tp = id.converted_price(ex)
             end
             csv_string << "#{nice_inv_name(id.name)}#{sep}#{ nice_number(qt)}#{sep}#{nice_number(tp).to_s.gsub(".", dec).to_s}"
+          elsif id.name == _("Did_owner_cost")
+            qt = id.quantity
+            tp = id.converted_price(ex) if id.price
+            csv_string << "#{nice_inv_name(id.name)}#{sep}#{ nice_number(qt)}#{sep}#{nice_number(tp).to_s.gsub(".", dec).to_s}"
           end
-        end
       end
     end
 
@@ -1337,6 +1345,10 @@ calls.dst,  COUNT(*) as 'count_calls', SUM(#{billsec_cond}) as 'sum_billsec', #{
               qt = ""
               tp = id.converted_price(ex)
             end
+            csv_string << "#{nice_inv_name(id.name)}#{sep}#{qt}#{sep}#{nice_number(tp).to_s.gsub(".", dec).to_s}"
+          elsif id.name == _("Did_owner_cost")
+            qt = id.quantity
+            tp = id.converted_price(ex) if id.converted_price(ex)
             csv_string << "#{nice_inv_name(id.name)}#{sep}#{qt}#{sep}#{nice_number(tp).to_s.gsub(".", dec).to_s}"
           end
         end
@@ -1797,12 +1809,14 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
         price += invoice.nice_invoice_number(outgoing_calls_by_users_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
       end
 
-      #      # --- add own received incoming calls ---
-      #      if (incoming_received_calls_price > 0)
-      #        invoice.invoicedetails.create(:name => _('Incoming_received_calls'), :price => incoming_received_calls_price.to_d, :quantity => incoming_received_calls, :invdet_type => 0)
-      #        price += incoming_received_calls_price.to_d
-      #      end
-      #
+      # --- add own received incoming calls ---
+      if ["admin", "accountant"].include?(session[:usertype])
+        if (incoming_received_calls_price > 0)
+          invoice.invoicedetails.create(:name => _('Did_owner_cost'), :price => incoming_received_calls_price.to_d, :quantity => incoming_received_calls, :invdet_type => 0)
+          price += incoming_received_calls_price.to_d
+        end
+      end
+
       #      # --- add own made incoming calls ---
       #      if (incoming_made_calls_price > 0)
       #        invoice.invoicedetails.create(:name => _('Incoming_made_calls'), :price => incoming_made_calls_price.to_d, :quantity => incoming_made_calls, :invdet_type => 0)

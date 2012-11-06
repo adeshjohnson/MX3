@@ -1969,7 +1969,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @page_icon = "money.png"
     change_date
     @sub_vat = 0
-    @sub_price =0
+    @sub_price = 0
+    @did_owner_cost = 0
     owner = correct_owner_id
     @users = User.find_all_for_select(corrected_user_id)
 
@@ -2047,14 +2048,16 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       select = [""]
       if session[:usertype] == "reseller"
         res = Call.find(:all,
-                        :select => "#{SqlExport.replace_price("SUM(#{up})", {:reference => 'price'})}, SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) AS 'duration', COUNT(DISTINCT(calls.user_id)) AS 'users'",
+                        :select => "#{SqlExport.replace_price("SUM(#{up})", {:reference => 'price'})}, SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) AS 'duration', COUNT(DISTINCT(calls.user_id)) AS 'users', SUM(did_price) AS did_price",
                         :joins => "LEFT JOIN users ON (users.id = calls.user_id) #{ SqlExport.left_join_reseler_providers_to_calls_sql}",
                         :conditions => (conditions + ["calls.disposition = 'ANSWERED'"]).join(" AND "))
+        @did_owner_cost += res[0].did_price.to_d
       else
         res = Call.find(:all,
-                        :select => "#{SqlExport.replace_price("SUM(#{up})", {:reference => 'price'})}, SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) AS 'duration', COUNT(DISTINCT(calls.user_id)) AS 'users'",
+                        :select => "#{SqlExport.replace_price("SUM(#{up})", {:reference => 'price'})}, SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) AS 'duration', COUNT(DISTINCT(calls.user_id)) AS 'users', SUM(did_price) AS did_price",
                         :joins => "LEFT JOIN users ON (users.id = calls.user_id) #{ SqlExport.left_join_reseler_providers_to_calls_sql}",
                         :conditions => (conditions + ["calls.disposition = 'ANSWERED'"]).join(" AND "))
+        @did_owner_cost += res[0].did_price.to_d
       end
 
       if session[:usertype] == "reseller"

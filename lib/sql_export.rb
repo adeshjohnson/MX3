@@ -92,6 +92,10 @@ module SqlExport
     "(calls.user_price + calls.did_inc_price)"
   end
 
+  def SqlExport.user_did_price_sql
+    "(calls.did_price)"
+  end
+
   def SqlExport.user_rate_sql
     "calls.user_rate"
   end

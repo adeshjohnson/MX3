@@ -526,7 +526,7 @@ class Call < ActiveRecord::Base
       select << "(#{SqlExport.reseller_profit_sql} * #{options[:exchange_rate]} ) AS profit"
     else
       if options[:current_user].usertype == 'user'
-        select << "(#{SqlExport.user_price_sql} * #{options[:exchange_rate]} ) AS user_price_exrate"
+        select << "(IF(calls.user_id = #{options[:current_user].id}, #{SqlExport.user_price_sql}, #{SqlExport.user_did_price_sql}) * #{options[:exchange_rate]} ) AS user_price_exrate"
         select << "(#{SqlExport.user_rate_sql} * #{options[:exchange_rate]} ) AS user_rate_exrate"
       else
         select << "(#{SqlExport.admin_user_price_no_dids_sql} * #{options[:exchange_rate]} ) AS user_price_exrate"
@@ -566,7 +566,7 @@ class Call < ActiveRecord::Base
         :select => "
                  COUNT(*) as total_calls,
                  SUM(IF((billsec IS NULL OR billsec = 0), IF(real_billsec IS NULL, 0, real_billsec), billsec)) as total_duration,
-                 SUM(#{SqlExport.user_price_sql}) * #{options[:exchange_rate].to_d} as total_user_price_with_dids,
+                 SUM(IF(calls.user_id = #{options[:current_user].id}, #{SqlExport.user_price_sql}, #{options[:current_user].usertype == "user" ? SqlExport.user_did_price_sql : SqlExport.user_price_sql})) * #{options[:exchange_rate].to_d} as total_user_price_with_dids,
 
                  SUM(#{user_price}) * #{options[:exchange_rate].to_d} as total_user_price,
                  SUM(#{reseller_price}) * #{options[:exchange_rate].to_d} as total_reseller_price,
@@ -1731,8 +1731,8 @@ class Call < ActiveRecord::Base
     var = [options[:from], options[:till]]
 
     if options[:current_user].usertype == "reseller" and !options[:user]
-      cond << "(calls.reseller_id = ? OR calls.user_id = ? OR calls.dst_user_id = ?)"
-      var += [options[:current_user].id, options[:current_user].id, options[:current_user].id]
+      cond << "(calls.reseller_id = ? OR calls.user_id = ?)"
+      var += [options[:current_user].id, options[:current_user].id]
     end
 
     if options[:call_type] != "all"
@@ -1772,8 +1772,8 @@ class Call < ActiveRecord::Base
 
     if options[:user]
       jn << "LEFT JOIN devices AS dst_device ON (dst_device.id = calls.dst_device_id)"
-      cond << "(calls.user_id = ? OR dst_device.user_id = ?)"
-      var += [options[:user].id, options[:user].id]
+      cond << "(calls.user_id = ? OR dst_device.user_id = ? OR calls.dst_user_id = ?)"
+      var += [options[:user].id, options[:user].id, options[:user].id]
     end
 
     if options[:did]
