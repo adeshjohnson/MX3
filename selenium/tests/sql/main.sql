@@ -1729,4 +1729,4 @@ INSERT INTO `addresses` (`id`, `direction_id`, `state`, `county`, `city`, `postc
 (9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
-Update users set time_zone = 'UTC';
+Update users set time_zone = 'Vilnius';

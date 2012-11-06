@@ -34,6 +34,6 @@ INSERT INTO `common_use_providers` (`id`, `provider_id`, `reseller_id`, `tariff_
 (2, 3, 6, 4),
 (3, 4, 6, 4);
 
-Update users set time_zone = 'UTC';
+Update users set time_zone = 'Vilnius';
 
 

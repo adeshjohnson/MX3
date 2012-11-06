@@ -44,4 +44,4 @@ VALUES (104  ,DATE_SUB(NOW(), INTERVAL 10 SECOND),''                    ,'102'  
        (108  ,DATE_SUB(NOW(), INTERVAL 10 SECOND),''                    ,'106'        ,'123123'     ,''         ,''        ,''           ,''        ,''         ,40         ,5        ,'ANSWERED'    ,0          ,'2'           ,'1232113379.3',''          ,2               ,0               ,0           ,0           ,0         ,6             ,7               ,5                  ,20               ,6         ,3           ,1              ,5            ,6             ,3               ,0                  ,4                ,0            ,0              ,0                 ,0               ,'1231'   ,1           ,16            ,'Local'      ,''       ,''       ,''        ,''    ,''          ,''         ,0                ,0               ,0                ,'123123'        ,0                 ,0        ,''              ,''              ,0               ,0              ,0);
 
 
-Update users set time_zone = 'UTC';
+Update users set time_zone = 'Vilnius';
