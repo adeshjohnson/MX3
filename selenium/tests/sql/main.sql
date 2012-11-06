@@ -1728,3 +1728,5 @@ INSERT INTO `addresses` (`id`, `direction_id`, `state`, `county`, `city`, `postc
 (8, 1, '', '', '', '', '', '', '', '', 'test@kolmisoft.com'),
 (9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+Update users set time_zone = 'UTC';
