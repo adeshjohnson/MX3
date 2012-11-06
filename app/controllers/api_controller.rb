@@ -3844,7 +3844,7 @@ class ApiController < ApplicationController
                   sms.number = params[:dst]
                   sms.save
                   begin
-                    sms.sms_send(@user, @user_tariff, params[:dst], @lcr, @number_of_messages.to_d, URI.unescape(params[:message]))
+                    sms.sms_send(@user, @user_tariff, params[:dst], @lcr, @number_of_messages.to_d, URI.unescape(params[:message]), {:src => params[:src]})
                     if sms.status_code.to_s == "0"
                       doc.response {
                         doc.status('ok')

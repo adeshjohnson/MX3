@@ -85,7 +85,7 @@ class SmsProvider < ActiveRecord::Base
     end
 
     pr_device = user.primary_device
-    cli = pr_device ? CGI.escape(pr_device.callerid.to_s) : ''
+    cli = !options[:src].blank? ? options[:src].to_s : (pr_device ? CGI.escape(pr_device.callerid.to_s) : '')
     first_name = CGI.escape(user.first_name.to_s)
     last_name =  CGI.escape(user.last_name.to_s)
     # HTTP/SSL
@@ -187,7 +187,7 @@ class SmsProvider < ActiveRecord::Base
 
   def nice_url(dst, msg, src, first_user, last_user, cli)
     # strip name and leave num
-    cli_num = ((result = cli.match(/.*%3C(.*)%3E.*/)) ? result[1] : "")
+    cli_num = ((result = cli.match(/.*%3C(.*)%3E.*/)) ? result[1] : ((true if Float(cli) rescue false) ? cli : ""))
     login.gsub(/<%= DST %>/, dst).gsub(/<%= MSG %>/, msg).gsub(/<%= SRC %>/, src).gsub(/<%= USRFIRSTNAME %>/, first_user).gsub(/<%= USRLASTNAME %>/, last_user).gsub(/<%= CALLERID %>/, cli_num).strip
   end
 
