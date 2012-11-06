@@ -1263,6 +1263,141 @@
 	<td>2012-10-02</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=nice_number_digits</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_price_5</td>
+	<td>712.3548</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_full_price_5</td>
+	<td>854.8258</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_price_5</td>
+	<td>712.3548</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_full_price_5</td>
+	<td>854.8258</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_price_7</td>
+	<td>422.741936</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_full_price_7</td>
+	<td>507.290323</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/financial_statements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clear search</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>

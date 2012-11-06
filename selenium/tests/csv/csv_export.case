@@ -37,6 +37,32 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
+<!--export rate-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ratedetail_rate</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/generate_providers_rates_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>2.0000</td>
+	<td></td>
+</tr>
 <!--check admin's calls #1-->
 <!--outgoing-->
 <tr>
@@ -122,6 +148,46 @@
 	<td>profit: 3.0</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>real_duration2: 40.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>real_duration2: 30.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>direction: United States USA 231 Michigan FIX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/3?call_type=answered&amp;date_from=2007-01-01+00%3A00%3A00&amp;date_till=2010-01-01+23%3A59%3A59&amp;direction=outgoing&amp;reseller=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>calldate: '2008-01-01 00:00:04'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>calldate: '2008-01-01 00:00:04'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>calldate: '2009-01-01 00:00:03'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>calldate: '2008-01-01 00:00:04'</td>
+	<td></td>
+</tr>
 <!--incoming-->
 <tr>
 	<td>open</td>
@@ -162,7 +228,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>m1: 66.66666666666666</td>
+	<td>m1: 66.666666666666</td>
 	<td></td>
 </tr>
 <tr>
@@ -219,11 +285,26 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2007</td>
+	<td>label=2009</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
 	<td>label=January</td>
 </tr>
 <tr>
@@ -239,6 +320,86 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>&quot;prefix&quot;=&gt;&quot;3706&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>123#123</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1231</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Test Provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>user_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>provider_price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>user_price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>provider_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>reseller_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>provider_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>ANSWERED(16)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>clid:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;src&quot;=&gt;&quot;37046246362&quot;</td>
 	<td></td>
 </tr>
 <!--LOGIN AS RESELLER-->
@@ -561,11 +722,61 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2008</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_hour</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_minute</td>
+	<td>label=02</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=17</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_hour</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_minute</td>
+	<td>label=48</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>101</td>
 	<td></td>
 </tr>
 <tr>
@@ -576,6 +787,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>.csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Lithuania Lithuania mobile MOB</td>
 	<td></td>
 </tr>
 <tr>
@@ -948,7 +1164,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>m1: '66,66666666666666'</td>
+	<td>m1: '66,666666666666</td>
 	<td></td>
 </tr>
 <tr>
@@ -963,7 +1179,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>m1: '66,66666666666666'</td>
+	<td>m1: '66,666666666666</td>
 	<td></td>
 </tr>
 <tr>
@@ -1194,6 +1410,72 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>&quot;profit&quot;=&gt;&quot;11&quot;</td>
+	<td></td>
+</tr>
+<!--check csv name-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link_generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Invoices generated: 3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices?to_csv=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Invoices-USD.csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>MOR_invoices.csv</td>
 	<td></td>
 </tr>
 </tbody></table>
