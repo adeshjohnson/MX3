@@ -4118,6 +4118,7 @@ class ApiController < ApplicationController
       send_xml_data(MorApi.return_error('Bad login'), params[:test].to_i)
       return false
     end
+    Time.zone = @current_user.time_zone if @current_user
   end
 
 
