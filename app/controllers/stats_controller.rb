@@ -1254,7 +1254,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
 
     session[:usertype] == "accountant" ? user_type = "admin" : user_type = session[:usertype]
-    filename = @user.user_calls_to_csv({:tz => current_user.time_zone, :device => @device, :direction => @direction, :call_type => call_type, :date_from => date_from, :date_till => date_till, :default_currency => session[:default_currency], :show_currency => session[:show_currency], :show_full_src => session[:show_full_src], :hgc => @hgc, :usertype => user_type, :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i, :reseller => res.to_i, :hide_finances => !can_see_finances?})
+    filename = @user.user_calls_to_csv({:tz => current_user.time_offset, :device => @device, :direction => @direction, :call_type => call_type, :date_from => date_from, :date_till => date_till, :default_currency => session[:default_currency], :show_currency => session[:show_currency], :show_full_src => session[:show_full_src], :hgc => @hgc, :usertype => user_type, :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i, :reseller => res.to_i, :hide_finances => !can_see_finances?})
     filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
     if filename
       filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
@@ -2492,7 +2492,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     @orig_call_type = @call_type
 
-    filename = provider.provider_calls_csv({:tz => current_user.time_zone, :direction => @direction, :call_type => @call_type, :date_from => date_from, :date_till => date_till, :default_currency => session[:default_currency], :show_currency => session[:show_currency], :show_full_src => session[:show_full_src], :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i})
+    filename = provider.provider_calls_csv({:tz => current_user.time_offset, :direction => @direction, :call_type => @call_type, :date_from => date_from, :date_till => date_till, :default_currency => session[:default_currency], :show_currency => session[:show_currency], :show_full_src => session[:show_full_src], :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i})
     filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
     if params[:test].to_i != 1
       send_file(filename)
@@ -3375,7 +3375,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     #    logger.fatal current_user.time_zone.to_i
     #     logger.fatal  User.system_time_offset.to_i
-    calldate = "(calls.calldate + INTERVAL #{current_user.time_zone.to_i - User.system_time_offset.to_i} HOUR)"
+    calldate = "(calls.calldate + INTERVAL #{Time.zone.now.utc_offset() - Time.zone.utc_offset()} SECOND)"
 
     sql = "SELECT EXTRACT(YEAR FROM #{calldate}) as year, EXTRACT(MONTH FROM #{calldate}) as month, EXTRACT(day FROM #{calldate}) as day, Count(calls.id) as 'calls' , SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'duration', SUM(#{up}) as 'user_price', SUM(#{rp}) as 'resseler_price', SUM(#{pp}) as 'provider_price', SUM(IF(disposition!='ANSWERED',1,0)) as 'fail'  FROM
     #{des3} calls #{des2} #{SqlExport.left_join_reseler_providers_to_calls_sql}

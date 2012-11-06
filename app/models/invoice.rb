@@ -576,7 +576,7 @@ class Invoice < ActiveRecord::Base
     logger.fatal dgid
     dst = options[:email_or_not] ? hide_dst_for_user_sql(options[:user], "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"}) : hide_dst_for_user_sql(current_user, "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"})
 
-    calldate = SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format => options[:format], :tz => current_user.time_zone}), "calldate")
+    calldate = SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format => options[:format], :tz => Time.zone.now.utc_offset()}), "calldate")
 
     if options[:tariff_purpose] == "user"
 
@@ -613,7 +613,7 @@ class Invoice < ActiveRecord::Base
     cids = ActiveRecord::Base.connection.select_all(sql)
     items = []
     dst = options[:email_or_not] ? hide_dst_for_user_sql(options[:user], "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"}) : hide_dst_for_user_sql(current_user, "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"})
-    calldate = SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format => options[:format], :tz => current_user.time_zone}), "calldate")
+    calldate = SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format => options[:format], :tz => current_user.time_offset}), "calldate")
     ttp = 0
     for cid in cids
       src = cid["src"]

@@ -41,7 +41,7 @@
       <%= select_day(valid_from, :prefix => "activation_start") %>
       <%= select_hour(valid_from, :prefix => "activation_start", :prompt => {:minute => false}) %>
       <%= b_info %> <%= _('Value_in_your_time_zone') %>:
-      GMT <%= current_user.time_zone > 0 ? '+' : "" %><%= current_user.time_zone %>
+      <%= ActiveSupport::TimeZone[current_user.time_zone] %>
     </td>
   </tr>
   <tr id="till">
@@ -51,7 +51,7 @@
       <%= select_day(valid_till, :end_year => Date.today.year+10, :prefix => "activation_end", :use_month_numbers => false) %>
       <%= select_hour(valid_till, :end_year => Date.today.year+10, :prefix => "activation_end", :use_month_numbers => false) %>
       <%= b_info %> <%= _('Value_in_your_time_zone') %>:
-      GMT <%= current_user.time_zone > 0 ? '+' : "" %><%= current_user.time_zone %>
+      <%= ActiveSupport::TimeZone[current_user.time_zone] %>
     </td>
   </tr>
   <!---

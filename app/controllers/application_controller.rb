@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
   helper_method :callback_active?, :call_shop_active?, :reseller_active?, :payment_gateway_active?, :calling_cards_active?, :sms_active?, :recordings_addon_active?, :monitorings_addon_active?, :skp_active?
   helper_method :allow_pg_extension, :erp_active?, :admin?, :reseller?, :user?, :accountant?, :reseller_pro_active?, :show_recordings?, :mor_11_extend?, :ast_18?, :provider_billing_active?, :providers_enabled_for_reseller?, :web_phone_active?
   before_filter :log_session_size, :set_charset
-  before_filter :set_current_user
+  before_filter :set_current_user, :set_timezone
   before_filter :redirect_callshop_manager
   # before_filter :set_timezone
 
@@ -155,10 +155,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_timezone
-    if current_user
-      #logger.fatal current_user.user_time(Time.now)
-      #logger.fatal current_user.system_time(current_user.user_time(Time.now))
-    end
+    Time.zone = current_user.time_zone if current_user
   end
 
   def set_charset

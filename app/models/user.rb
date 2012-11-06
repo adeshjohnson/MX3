@@ -1632,7 +1632,7 @@ class User < ActiveRecord::Base
     if options[:csv] == 1
       s =[]
       format = Confline.get_value('Date_format', owner_id).gsub('M', 'i')
-      s << SqlExport.nice_date('calldate', {:reference => 'calldate', :format => format, :tz => time_zone})
+      s << SqlExport.nice_date('calldate', {:reference => 'calldate', :format => format, :tz => time_offset})
       s << "calls.src"
       options[:usertype] == 'user' ? s << hide_dst_for_user_sql(self, "csv", "calls.dst", {:as => "dst"}) : s << "calls.dst"
       s << "IF(calls.billsec = 0, IF(calls.real_billsec = 0, 0, calls.real_billsec) ,calls.billsec)"
@@ -2592,7 +2592,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   def warning_email_hour
     b = read_attribute(:warning_email_hour)
     if b.to_i != -1
-      c = b.to_d + time_zone.to_d - User.system_time_offset.to_d
+      c = b.to_d + (time_offset.to_d/3600).to_d
       b = c.to_i > 24 ? c - 24 : c
       b = c.to_i < 0 ? c + 24 : b
     else
@@ -2603,7 +2603,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
   def warning_email_hour= value
     if value.to_i != -1
-      b = value.to_d - time_zone.to_d + User.system_time_offset.to_d
+      b = value.to_d - (time_offset.to_d/3600).to_d
       c = b.to_i > 24 ? b - 24 : b
       c = b.to_i < 0 ? b + 24 : c
     else
@@ -2801,7 +2801,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   end
 
   def user_time(time)
-    time + time_offset.hour
+    time + time_offset.second
   end
 
   #class << self # Class methods
@@ -2811,28 +2811,28 @@ GROUP BY terminators.id;").map { |t| t.id }
   #  end
   #end
 
-  def time_zone
-    self[:time_zone]
-  end
+ # def time_zone
+ #   self[:time_zone]
+ # end
 
-  def time_zone=(s)
-    self[:time_zone] = s
-  end
+ # def time_zone=(s)
+ #   self[:time_zone] = s
+ # end
 
 =begin
  *Returns*
   integer - difference in hours between user time and system time
 =end
   def time_offset
-    time_zone - User.system_time_offset.to_i
+    Time.zone.now.utc_offset().second - Time.now.utc_offset().second
   end
 
   def system_time(time, only_date = 0)
     t = time.class == 'Time' ? time : time.to_time
     if only_date == 0
-      (t - time_zone.hour + User.system_time_offset.to_i.hour).to_s(:db)
+      (t - Time.zone.now.utc_offset().second + Time.now.utc_offset().second).to_s(:db)
     else
-      (t - time_zone.hour + User.system_time_offset.to_i.hour).to_date.to_s(:db)
+      (t - Time.zone.now.utc_offset().second + Time.now.utc_offset().second).to_date.to_s(:db)
     end
   end
 

@@ -47,7 +47,7 @@
                   </tr>
                   <tr>
                     <td><%= _('Time_zone') %>:</td>
-                    <td id="time_zone"><%= select_tag('user[time_zone]', options_for_select(User.get_zones, @user.try(:time_zone))) %></td>
+                    <td id="time_zone"><%= collection_select(:user, :time_zone, ActiveSupport::TimeZone.all, :name, :to_s)%> </td>
                   </tr>
               <% end %>
               <% if monitorings_addon_active? and current_user.show_active_calls? %>

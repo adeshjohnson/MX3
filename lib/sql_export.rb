@@ -46,7 +46,7 @@ module SqlExport
   end
 
   def SqlExport.nice_date(column, opt={})
-    "DATE_FORMAT(DATE_ADD(#{column}, INTERVAL #{opt[:offset] ? opt[:offset].to_f * 60 : 0 } MINUTE ), '#{opt[:format].blank? ? '%Y-%m-%d %H:%i:%S' : opt[:format]}') #{"AS #{opt[:reference]}" unless opt[:reference].blank?}"
+    "DATE_FORMAT(DATE_ADD(#{column}, INTERVAL #{opt[:offset] ? opt[:offset].to_i : 0 } SECOND ), '#{opt[:format].blank? ? '%Y-%m-%d %H:%i:%S' : opt[:format]}') #{"AS #{opt[:reference]}" unless opt[:reference].blank?}"
   end
 
   def SqlExport.replace_sep(column, replase_from = "", replase_to = "", reference = nil)

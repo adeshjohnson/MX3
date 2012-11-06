@@ -922,7 +922,7 @@ class Call < ActiveRecord::Base
 
     day_calls = Call.find_by_sql(
         "SELECT * FROM (SELECT * FROM (SELECT * FROM (#{date_period.join(" UNION ")}) AS v) AS d) AS u
-        LEFT JOIN (SELECT DATE(calldate) as call_date, #{SqlExport.nice_date('DATE(calldate)', {:reference => 'call_date_formated', :format => format, :tz => options[:current_user].time_zone})}, SUM(IF(calls.hangupcause = '16', 1,0)) as 'calls', SUM(IF(calls.hangupcause != '16', 1,0)) as 'b_calls' FROM calls
+        LEFT JOIN (SELECT DATE(calldate) as call_date, #{SqlExport.nice_date('DATE(calldate)', {:reference => 'call_date_formated', :format => format, :tz => options[:current_user].time_offset})}, SUM(IF(calls.hangupcause = '16', 1,0)) as 'calls', SUM(IF(calls.hangupcause != '16', 1,0)) as 'b_calls' FROM calls
                     LEFT JOIN hangupcausecodes ON (calls.hangupcause = hangupcausecodes.code ) #{des}
                     WHERE #{ ActiveRecord::Base.sanitize_sql_array([(cond+["calls.hangupcause != ''"]).join(' AND '), *var])}
                     GROUP BY call_date ) AS p ON (u.call_date2 = DATE(p.call_date) )")

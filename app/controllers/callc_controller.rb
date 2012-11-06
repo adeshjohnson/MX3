@@ -535,17 +535,9 @@ class CallcController < ApplicationController
 
   def global_set_tz
     if Confline.get_value('System_time_zone_ofset_changed').to_i == 0
-      sql = 'select HOUR(timediff(now(),convert_tz(now(),@@session.time_zone,\'+00:00\'))) as u;'
-      z = ActiveRecord::Base.connection.select_all(sql)[0]['u']
-      t = z.to_s.to_i
-      Confline.set_value('System_time_zone_ofset', t.to_i, 0)
-      Confline.set_value('System_time_zone_ofset_changed', 1, 0)
-      users = User.find(:all)
-      for u in users
-        u.time_zone = t
-        u.save
-      end
-      flash[:status] = _("Time_zone_for_users_set_to") + " #{t} "
+      sql = "UPDATE users SET time_zone = '#{Time.now.zone}';"
+      ActiveRecord::Base.connection.execute(sql)
+      flash[:status] = _("Time_zone_for_users_set_to") + " #{Time.now.zone} "
     else
       flash[:notice] = _("Global_Time_zone_set_replay_is_dont_allow")
     end
@@ -553,8 +545,13 @@ class CallcController < ApplicationController
   end
 
   def set_tz_to_users
-    sql = "UPDATE users SET time_zone = ((time_zone + #{params[:add_time].to_d}) % 24);"
-    ActiveRecord::Base.connection.execute(sql)
+    users = User.find(:all)
+    for u in users
+      Time.zone = u.time_zone
+      u.time_zone = ActiveSupport::TimeZone[Time.zone.now.utc_offset().hour.to_d + params[:add_time].to_d].name
+      u.save
+    end
+
     flash[:status] = _("Time_zone_for_users_add_value") + " + #{params[:add_time].to_d} "
     redirect_to :action => "global_settings" and return false
   end
@@ -685,23 +682,23 @@ class CallcController < ApplicationController
         #======================== Cron actions =====================================
         CronAction.do_jobs
         #======================== System time ofset =====================================
-        sql = 'select HOUR(timediff(now(),convert_tz(now(),@@session.time_zone,\'+00:00\'))) as u;'
-        z = ActiveRecord::Base.connection.select_all(sql)[0]['u']
-        MorLog.my_debug("GET global time => #{z.to_yaml}", 1)
-        t = z.to_s.to_i
-        old_tz= Confline.get_value('System_time_zone_ofset')
-        if t.to_i != old_tz.to_i and Confline.get_value('System_time_zone_daylight_savings').to_i == 1
+        #sql = 'select HOUR(timediff(now(),convert_tz(now(),@@session.time_zone,\'+00:00\'))) as u;'
+        #z = ActiveRecord::Base.connection.select_all(sql)[0]['u']
+        #MorLog.my_debug("GET global time => #{z.to_yaml}", 1)
+        #t = z.to_s.to_i
+        #old_tz= Confline.get_value('System_time_zone_ofset')
+        #if t.to_i != old_tz.to_i and Confline.get_value('System_time_zone_daylight_savings').to_i == 1
           # ========================== System time ofset update users ================================
-          diff = t.to_i - old_tz.to_i
-          logger.fatal diff
-          logger.fatal t
-          logger.fatal old_tz
-          sql = "UPDATE users SET time_zone = ((time_zone + #{diff.to_d}) % 24);;"
-          ActiveRecord::Base.connection.execute(sql)
-          MorLog.my_debug("System time ofset update users", 1)
-        end
-        Confline.set_value('System_time_zone_ofset', t.to_i, 0)
-        MorLog.my_debug("confline => #{Confline.get_value('System_time_zone_ofset')}", 1)
+          #diff = t.to_i - old_tz.to_i
+          #logger.fatal diff
+          #logger.fatal t
+          #logger.fatal old_tz
+          #sql = "UPDATE users SET time_zone = ((time_zone + #{diff.to_d}) % 24);;"
+          #ActiveRecord::Base.connection.execute(sql)
+          #MorLog.my_debug("System time ofset update users", 1)
+        #end
+        #Confline.set_value('System_time_zone_ofset', t.to_i, 0)
+        #MorLog.my_debug("confline => #{Confline.get_value('System_time_zone_ofset')}", 1)
         #======================== Devices  =====================================
         check_devices_for_accountcode
         # ========================== Cleaning session table ================================
