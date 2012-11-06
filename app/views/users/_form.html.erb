@@ -361,11 +361,7 @@
 <tr>
   <td><%= _('Time_zone') %>:</td>
   <td><%#= select_tag('user[time_zone]', options_for_select(User.get_zones, @user.try(:time_zone))) %>
-  <%= collection_select(:user, :time_zone, ActiveSupport::TimeZone.all, :name, :to_s)%>       ||
-    <%= Time.now %> ||
-    <%= Time.zone.now %> ||
-    <%= Time.now.utc_offset()  %>   ||
-    <%= Time.zone.now.utc_offset()  %>
+  <%= collection_select(:user, :time_zone, ActiveSupport::TimeZone.all, :name, :to_s)%>
   </td>
 </tr>
 <% if admin? or reseller? and current_user.quickforwards_rules.size.to_i > 0 %>
