@@ -179,4 +179,6 @@ INSERT INTO `conflines` (name, value, owner_id) VALUES ('System_time_zone_ofset'
 update servers set active=0;
 
 #sync data
-UPDATE calls JOIN devices ON calls.dst_device_id = devices.id SET calls.dst_user_id = devices.user_id; 
+UPDATE calls JOIN devices ON calls.dst_device_id = devices.id SET calls.dst_user_id = devices.user_id;
+
+Update users set time_zone = 'Vilnius';
