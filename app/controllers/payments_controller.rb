@@ -780,9 +780,12 @@ class PaymentsController < ApplicationController
 
       curr_amount =  amount / exchange_rate.to_d
       curr_real_amount =  real_amount / exchange_rate.to_d
-      
+
+      logger.fatal "#{Time.now}  -  Manual Payment TRY TO ADD - User:#{user.id}; balance:#{user.balance}; amount_to_add:#{curr_amount}"
+
       user.balance +=  curr_amount
       if user.save
+        logger.fatal "#{Time.now}  -  Manual Payment User saved - User:#{user.id}; balance:#{user.balance}"
 
         paym = Payment.new
         paym.paymenttype = 'manual'
@@ -796,6 +799,7 @@ class PaymentsController < ApplicationController
         paym.tax = user.get_tax.count_tax_amount(amount)
         paym.description = params[:description].to_s
         paym.save
+        logger.fatal "#{Time.now}  -  Manual Payment Payment created - Payment:#{paym.id}; amount:#{paym.amount}; amount_to_add:#{real_amount}"
 
 
         invoice_amount = (curr_amount/ current_user.current.currency.exchange_rate.to_d).to_d
@@ -838,6 +842,7 @@ class PaymentsController < ApplicationController
         end
         flash[:status] = _('Payment_added')
       else
+        logger.fatal "#{Time.now}  -  Manual Payment User NOT saved - User:#{user.id}; balance:#{user.balance}; amount_to_add:#{curr_amount}"
         flash_errors_for(_('Payment_failed'), user)
       end
     end
