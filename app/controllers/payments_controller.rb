@@ -805,6 +805,7 @@ class PaymentsController < ApplicationController
         invoice_amount = (curr_amount/ current_user.current.currency.exchange_rate.to_d).to_d
         invoice_amount_real = (curr_real_amount/ current_user.current.currency.exchange_rate.to_d).to_d
 
+        nc=nice_invoice_number_digits("prepaid")
         # create invoice for prepaid user's manual payment if such setting activated
         if user.postpaid == 0 and user.generate_invoice == 1
           number_type = Confline.get_value("Prepaid_Invoice_Number_Type").to_i
@@ -816,8 +817,9 @@ class PaymentsController < ApplicationController
           invoice.paid = 1
           invoice.number = ""
           invoice.invoice_type = "prepaid"
-          invoice.price = invoice_amount
-          invoice.price_with_vat = invoice_amount_real
+          invoice.price = invoice.nice_invoice_number(invoice_amount.to_d, {:nc=>nc, :apply_rounding=>true})
+          invoice.price_with_vat = invoice.nice_invoice_number(invoice_amount_real.to_d, {:nc=>nc, :apply_rounding=>true})
+          invoice.invoice_precision=nc
           invoice.save
 
           invoice.number = generate_invoice_number(Confline.get_value("Prepaid_Invoice_Number_Start"), Confline.get_value("Prepaid_Invoice_Number_Length").to_i, number_type, invoice.id, Time.now)
