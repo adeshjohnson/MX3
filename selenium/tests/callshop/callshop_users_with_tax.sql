@@ -18,3 +18,5 @@ INSERT INTO `devices` (`id`, `name`, `host`  , `secret`, `context`  , `ipaddr`, 
 (12,'111','dynamic','110','mor_local','0.0.0.0',0,1175892667,2,'\"111\" <111>','111',0,'110','IAX2',18,0,1,0,0,'no','all','all','0.0.0.0/0.0.0.0','0.0.0.0/0.0.0.0','yes','yes','','no',NULL,'rfc2833',NULL,NULL,NULL,NULL,'no','no','no','never','no',1,'Test Device for cs_user 2',0,0,NULL,0,0,60,60,'no',NULL,0,'no',60,0,NULL,0,0,'yes','yes',0,0,0,0,NULL), 
 (13,'112','dynamic','112','mor_local','0.0.0.0',0,1175892667,2,'\"112\" <112>','112',0,'110','IAX2',19,0,1,0,0,'no','all','all','0.0.0.0/0.0.0.0','0.0.0.0/0.0.0.0','yes','yes','','no',NULL,'rfc2833',NULL,NULL,NULL,NULL,'no','no','no','never','no',1,'Test Device for cs_user 3',0,0,NULL,0,0,60,60,'no',NULL,0,'no',60,0,NULL,0,0,'yes','yes',0,0,0,0,NULL);
 
+Update users set time_zone = 'Vilnius';
+
