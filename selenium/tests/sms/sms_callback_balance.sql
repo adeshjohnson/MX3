@@ -22,3 +22,4 @@ VALUES 	(1, 12, 10, 101),
 	(7, 18, 16, 107),
 	(8, 19, 17, 108),
 	(9, 20, 18, 109);
+Update users set time_zone = 'Vilnius';
