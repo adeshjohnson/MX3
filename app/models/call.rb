@@ -642,7 +642,7 @@ class Call < ActiveRecord::Base
         end
         s << SqlExport.replace_dec("(#{SqlExport.reseller_rate_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'reseller_rate')
         s << SqlExport.replace_dec("(#{SqlExport.reseller_price_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'reseller_price')
-        s << "IF(calls.card_id = 0 ,(#{SqlExport.nice_user_sql}), CONCAT('Card#', IF(cards.number IS NULL, '', cards.number))) as 'user'"
+        s << "IF(calls.card_id = 0 ,(#{SqlExport.nice_user_sql('users', false)}), CONCAT('Card#', IF(cards.number IS NULL, '', cards.number))) as 'user'"
         s << SqlExport.replace_dec("(#{SqlExport.user_rate_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'user_rate')
         s << SqlExport.replace_dec("(IF(#{SqlExport.user_price_sql} != 0 , (#{SqlExport.user_price_sql}), 0) * #{options[:exchange_rate]} ) ", options[:column_dem], 'user_price')
       end
