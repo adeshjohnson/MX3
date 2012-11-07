@@ -3375,7 +3375,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     #    logger.fatal current_user.time_zone.to_i
     #     logger.fatal  User.system_time_offset.to_i
-    calldate = "(calls.calldate + INTERVAL #{Time.zone.now.utc_offset() - Time.zone.utc_offset()} SECOND)"
+    calldate = "(calls.calldate + INTERVAL #{current_user.time_offset} SECOND)"
 
     sql = "SELECT EXTRACT(YEAR FROM #{calldate}) as year, EXTRACT(MONTH FROM #{calldate}) as month, EXTRACT(day FROM #{calldate}) as day, Count(calls.id) as 'calls' , SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'duration', SUM(#{up}) as 'user_price', SUM(#{rp}) as 'resseler_price', SUM(#{pp}) as 'provider_price', SUM(IF(disposition!='ANSWERED',1,0)) as 'fail'  FROM
     #{des3} calls #{des2} #{SqlExport.left_join_reseler_providers_to_calls_sql}
