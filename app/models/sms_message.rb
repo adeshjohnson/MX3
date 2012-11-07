@@ -271,7 +271,11 @@ class SmsMessage < ActiveRecord::Base
       end
     end
     if prov_type.to_s == 'api'
-      provider.send_sms_api(self, user, {:message => message, :sms_numbers => sms_numbers, :to => number, :unicode => options[:sms_unicode].to_i, :src => params[:src]})
+      if params[:src]
+        provider.send_sms_api(self, user, {:message => message, :sms_numbers => sms_numbers, :to => number, :unicode => options[:sms_unicode].to_i, :src => params[:src]})
+      else
+        provider.send_sms_api(self, user, {:message => message, :sms_numbers => sms_numbers, :to => number, :unicode => options[:sms_unicode].to_i})
+      end
     end
 
     self.save
