@@ -97,7 +97,7 @@
 <tr>
 	<td>verifySelectedLabel</td>
 	<td>id=user_time_zone</td>
-	<td>(GMT+00:00) Casablanca, Dublin, Edinburgh, Lisbon, London, Monrovia</td>
+	<td>(GMT+02:00) Vilnius</td>
 </tr>
 <!--BACKUPS-->
 <tr>
@@ -152,8 +152,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>* Value in your time zone: GMT 0.0</td>
+	<td>assertTextPresent</td>
+	<td>Value in your time zone: (GMT+02:00) Vilnius </td>
 	<td></td>
 </tr>
 <tr>
@@ -317,7 +317,7 @@
 <tr>
 	<td>select</td>
 	<td>id=user_time_zone</td>
-	<td>label=(GMT+05:00) Islamabad, Karachi, Tashkent</td>
+	<td>label=(GMT+07:00) Bangkok</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -478,7 +478,7 @@
 <tr>
 	<td>select</td>
 	<td>id=user_time_zone</td>
-	<td>label=(GMT-02:00) Mid-Atlantic</td>
+	<td>label=(GMT+00:00) London</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -492,8 +492,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Value in system time zone: GMT 0</td>
+	<td>assertTextPresent</td>
+	<td>Value in system time zone: (GMT+02:00) EET </td>
 	<td></td>
 </tr>
 <tr>
@@ -548,8 +548,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>* Value in your time zone: GMT +5</td>
+	<td>assertTextPresent</td>
+	<td>Value in your time zone: (GMT+07:00) Bangkok </td>
 	<td></td>
 </tr>
 <tr>
@@ -636,12 +636,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=calls_1</td>
-	<td>3</td>
+	<td>4</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=calls_2</td>
-	<td>5</td>
+	<td>4</td>
 </tr>
 <!--RESELLER GMT-02:00-->
 <tr>
@@ -673,7 +673,7 @@
 <tr>
 	<td>verifySelectedLabel</td>
 	<td>id=user_time_zone</td>
-	<td>(GMT-02:00) Mid-Atlantic</td>
+	<td>(GMT+00:00) London</td>
 </tr>
 <!--LAST CALLS STATS-->
 <tr>
@@ -934,11 +934,6 @@
 <tr>
 	<td>open</td>
 	<td>/billing/functions/reseller_settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_3 &gt; span</td>
 	<td></td>
 </tr>
 <tr>
@@ -1349,7 +1344,7 @@
 <tr>
 	<td>select</td>
 	<td>id=user_time_zone</td>
-	<td>label=(GMT+02:00) Athens, Cairo, Helsinki, Istanbul, Kyiv, Minsk, Riga, Tallinn, Vilnius</td>
+	<td>label=(GMT+04:00) Tbilisi</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1582,42 +1577,42 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=date_0</td>
+	<td>id=date_1</td>
 	<td>2011-11-10</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=date_1</td>
+	<td>id=date_2</td>
 	<td>2011-11-11</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=date_2</td>
+	<td>id=date_3</td>
 	<td>2011-11-12</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=date_3</td>
+	<td>id=date_4</td>
 	<td>2011-11-13</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=calls_0</td>
-	<td>2</td>
-</tr>
-<tr>
-	<td>assertText</td>
 	<td>id=calls_1</td>
-	<td>3</td>
+	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=calls_2</td>
-	<td>5</td>
+	<td>4</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=calls_3</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_4</td>
 	<td>3</td>
 </tr>
 <tr>
@@ -1991,7 +1986,7 @@
 <tr>
 	<td>select</td>
 	<td>id=user_time_zone</td>
-	<td>label=(GMT+07:00) Bangkok, Hanoi, Jakarta, Novosibirsk</td>
+	<td>label=(GMT+07:00) Bangkok</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2086,7 +2081,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>* Value in system time zone: GMT +2</td>
+	<td>* Value in system time zone: GMT 0</td>
 	<td></td>
 </tr>
 <!--CRON_ACTIONS-->
@@ -2106,8 +2101,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>* Value in your time zone: GMT +7</td>
+	<td>assertTextPresent</td>
+	<td>Value in your time zone: (GMT+07:00) Bangkok </td>
 	<td></td>
 </tr>
 <tr>
@@ -2164,42 +2159,42 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=date_0</td>
+	<td>id=date_1</td>
 	<td>2011-11-10</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=date_1</td>
+	<td>id=date_2</td>
 	<td>2011-11-11</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=date_2</td>
+	<td>id=date_3</td>
 	<td>2011-11-12</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=date_3</td>
+	<td>id=date_4</td>
 	<td>2011-11-13</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=calls_0</td>
-	<td>2</td>
+	<td>id=calls_1</td>
+	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=calls_1</td>
-	<td>3</td>
+	<td>id=calls_2</td>
+	<td>4</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=calls_2</td>
-	<td>5</td>
+	<td>id=calls_3</td>
+	<td>4</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=calls_3</td>
+	<td>id=calls_4</td>
 	<td>3</td>
 </tr>
 <tr>
@@ -2208,8 +2203,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>GMT +2</td>
+	<td>assertTextPresent</td>
+	<td> Value in system time zone: (GMT+02:00) EET </td>
 	<td></td>
 </tr>
 <tr>
