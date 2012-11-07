@@ -119,7 +119,7 @@
 <tr>
 	<td>select</td>
 	<td>id=user_time_zone</td>
-	<td>label=(GMT+07:00) Bangkok, Hanoi, Jakarta, Novosibirsk</td>
+	<td>label=(GMT+07:00) Bangkok</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -169,7 +169,12 @@
 <tr>
 	<td>select</td>
 	<td>id=user_time_zone</td>
-	<td>label=(GMT-03:00) Brasilia, Buenos Aires, Greenland</td>
+	<td>label=(GMT-03:00) Brasilia</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_balance_value</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -324,12 +329,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=calldate_5</td>
-	<td>2009-01-02 07:00:04</td>
+	<td>2009-01-02 05:00:04</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=calldate_1</td>
-	<td>2009-01-01 07:00:04</td>
+	<td>2009-01-01 05:00:04</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -379,7 +384,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=calldate_1</td>
-	<td>2009-01-01 07:00:04</td>
+	<td>2009-01-01 05:00:04</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
@@ -549,12 +554,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=rec_date_time_5</td>
-	<td>2009-01-01 15:00:04</td>
+	<td>2009-01-01 13:00:04</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=rec_date_time_1</td>
-	<td>2008-12-31 15:00:04</td>
+	<td>2008-12-31 13:00:04</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -604,12 +609,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=rec_date_time_5</td>
-	<td>2009-01-01 15:00:04</td>
+	<td>2009-01-01 13:00:04</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=rec_date_time_6</td>
-	<td>2009-01-01 15:00:04</td>
+	<td>2009-01-01 13:00:04</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
@@ -788,38 +793,23 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;3.5&quot;]</td>
-	<td>(GMT+03:30) Tehran</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=option[value=&quot;-3.5&quot;]</td>
-	<td>(GMT-03:30) Newfoundland</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=option[value=&quot;-4.5&quot;]</td>
+	<td>css=option[value=&quot;Caracas&quot;]</td>
 	<td>(GMT-04:30) Caracas</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;5.5&quot;]</td>
-	<td>(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi, Sri Jayawardenepura</td>
+	<td>css=option[value=&quot;Newfoundland&quot;]</td>
+	<td>(GMT-03:30) Newfoundland</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;5.75&quot;]</td>
-	<td>(GMT+05:45) Kathmandu</td>
+	<td>css=option[value=&quot;Tehran&quot;]</td>
+	<td>(GMT+03:30) Tehran</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;6.5&quot;]</td>
+	<td>css=option[value=&quot;Rangoon&quot;]</td>
 	<td>(GMT+06:30) Rangoon</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=option[value=&quot;9.5&quot;]</td>
-	<td>(GMT+09:30) Adelaide, Darwin</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -848,43 +838,33 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;3.5&quot;]</td>
-	<td>(GMT+03:30) Tehran</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=option[value=&quot;-3.5&quot;]</td>
-	<td>(GMT-03:30) Newfoundland</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=option[value=&quot;-4.5&quot;]</td>
+	<td>css=option[value=&quot;Caracas&quot;]</td>
 	<td>(GMT-04:30) Caracas</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;5.5&quot;]</td>
-	<td>(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi, Sri Jayawardenepura</td>
+	<td>css=option[value=&quot;Newfoundland&quot;]</td>
+	<td>(GMT-03:30) Newfoundland</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;5.75&quot;]</td>
-	<td>(GMT+05:45) Kathmandu</td>
+	<td>css=option[value=&quot;Tehran&quot;]</td>
+	<td>(GMT+03:30) Tehran</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;6.5&quot;]</td>
+	<td>css=option[value=&quot;Rangoon&quot;]</td>
 	<td>(GMT+06:30) Rangoon</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;9.5&quot;]</td>
-	<td>(GMT+09:30) Adelaide, Darwin</td>
+	<td>css=option[value=&quot;Adelaide&quot;]</td>
+	<td>(GMT+09:30) Adelaide</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=user_time_zone</td>
-	<td>label=(GMT+09:30) Adelaide, Darwin</td>
+	<td>label=(GMT+09:30) Adelaide</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -933,38 +913,28 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;3.5&quot;]</td>
-	<td>(GMT+03:30) Tehran</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=option[value=&quot;-3.5&quot;]</td>
-	<td>(GMT-03:30) Newfoundland</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=option[value=&quot;-4.5&quot;]</td>
+	<td>css=option[value=&quot;Caracas&quot;]</td>
 	<td>(GMT-04:30) Caracas</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;5.5&quot;]</td>
-	<td>(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi, Sri Jayawardenepura</td>
+	<td>css=option[value=&quot;Newfoundland&quot;]</td>
+	<td>(GMT-03:30) Newfoundland</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;5.75&quot;]</td>
-	<td>(GMT+05:45) Kathmandu</td>
+	<td>css=option[value=&quot;Tehran&quot;]</td>
+	<td>(GMT+03:30) Tehran</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;6.5&quot;]</td>
+	<td>css=option[value=&quot;Rangoon&quot;]</td>
 	<td>(GMT+06:30) Rangoon</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;9.5&quot;]</td>
-	<td>(GMT+09:30) Adelaide, Darwin</td>
+	<td>css=option[value=&quot;Adelaide&quot;]</td>
+	<td>(GMT+09:30) Adelaide</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1014,7 +984,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=user_time_zone</td>
-	<td>(GMT+09:30) Adelaide, Darwin</td>
+	<td>(GMT+09:30) Adelaide</td>
 </tr>
 <tr>
 	<td>open</td>

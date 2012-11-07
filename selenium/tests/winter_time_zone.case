@@ -317,7 +317,7 @@
 <tr>
 	<td>select</td>
 	<td>id=user_time_zone</td>
-	<td>label=(GMT+07:00) Bangkok</td>
+	<td>label=(GMT+04:00) Baku</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -428,7 +428,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_hour</td>
-	<td>label=05</td>
+	<td>label=02</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -448,12 +448,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_hour</td>
-	<td>label=05</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_till_minute</td>
-	<td>label=00</td>
+	<td>label=02</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -463,12 +458,12 @@
 <tr>
 	<td>verifyText</td>
 	<td>id=calldate_9</td>
-	<td>2009-01-01 05:00:01</td>
+	<td>2009-01-01 02:00:01</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>id=calldate_12</td>
-	<td>2009-01-01 05:00:04</td>
+	<td>2009-01-01 02:00:04</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -549,7 +544,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Value in your time zone: (GMT+07:00) Bangkok </td>
+	<td>Value in your time zone: (GMT+04:00) Baku </td>
 	<td></td>
 </tr>
 <tr>
@@ -560,7 +555,7 @@
 <tr>
 	<td>verifySelectedLabel</td>
 	<td>id=activation_start_hour</td>
-	<td>20</td>
+	<td>17</td>
 </tr>
 <!--CALLS PER DAY-->
 <tr>
@@ -1613,12 +1608,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=calls_3</td>
-	<td>3</td>
+	<td>4</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_calls</td>
-	<td>13</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1986,7 +1981,7 @@
 <tr>
 	<td>select</td>
 	<td>id=user_time_zone</td>
-	<td>label=(GMT+07:00) Bangkok</td>
+	<td>label=(GMT+04:00) Baku</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2102,7 +2097,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Value in your time zone: (GMT+07:00) Bangkok </td>
+	<td>Value in your time zone: (GMT+04:00) Baku </td>
 	<td></td>
 </tr>
 <tr>
@@ -2114,7 +2109,7 @@
 <tr>
 	<td>verifySelectedLabel</td>
 	<td>id=activation_start_hour</td>
-	<td>20</td>
+	<td>17</td>
 </tr>
 <!--CALLS PER DAY-->
 <tr>
@@ -2195,7 +2190,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=calls_3</td>
-	<td>3</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_calls</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>open</td>
