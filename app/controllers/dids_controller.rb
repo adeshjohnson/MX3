@@ -285,9 +285,7 @@ class DidsController < ApplicationController
     @back_controller = params[:back_controller] if params[:back_controller]
     @back_action = params[:back_action] if params[:back_action]
     #users
-    @free_users = User.find(:all, :order => "users.first_name ASC, users.last_name ASC",
-                            :conditions => (reseller? ? ["hidden = 0 AND owner_id = ?", current_user.id] : "hidden = 0")
-    )
+    @free_users = User.find(:all, :select => "id, username, first_name, last_name, #{SqlExport.nice_user_sql}", :conditions => (reseller? ? ["hidden = 0 AND owner_id = ?", current_user.id] : "hidden = 0"), :order => "nice_user ASC")
 
     #devices
     @free_devices = []
