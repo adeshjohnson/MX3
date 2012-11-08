@@ -1228,7 +1228,7 @@ class AccountingController < ApplicationController
         LEFT JOIN destinations ON (destinations.prefix = calls.prefix)  "+
         "JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}"+
         "WHERE calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
-        " AND devices.user_id = '#{user.id}'  #{zero_calls_sql}" +
+        " AND devices.user_id = '#{user.id}' AND calls.card_id = 0  #{zero_calls_sql}" +
         "GROUP BY destinationgroups.id, calls.user_rate "+
         "ORDER BY destinationgroups.name ASC, destinationgroups.desttype ASC"
 
