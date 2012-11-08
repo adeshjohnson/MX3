@@ -1,7 +1,7 @@
 <%= link_to b_add + _('New_backup'), :action => 'backup_new' %>
 <br/>
 <br/>
-<%= b_info %> <%= _('Value_in_system_time_zone') %>: <%= ActiveSupport::TimeZone[Time.now.zone] %>
+<%= b_info %> <%= _('Value_in_system_time_zone') %>: <%= ActiveSupport::TimeZone[Time.now.zone.utc_offset/3600] %>
 <br/><br/>
 <table width="100%" class="maintable">
   <tr>
