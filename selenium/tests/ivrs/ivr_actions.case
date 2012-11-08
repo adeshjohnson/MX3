@@ -62,9 +62,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>change_action_1</td>
-	<td></td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -92,14 +92,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>action_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForSelectOptions</td>
-	<td>action_1</td>
-	<td>IVR,DID,Device,Block,Extension</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -127,16 +122,6 @@
 	<td>Device</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>action_param_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForSelectedValue</td>
-	<td>action_param_1</td>
-	<td>101</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>action_param_1</td>
 	<td>label=Test User #1 - IAX2 1002</td>
@@ -145,11 +130,6 @@
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>5000</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>last_changed</td>
-	<td>action_param_1:1002</td>
 </tr>
 <tr>
 	<td>open</td>

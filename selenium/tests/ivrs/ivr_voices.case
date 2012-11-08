@@ -404,9 +404,9 @@
 </tr>
 <!--#ajax-->
 <tr>
-	<td>waitForElementPresent</td>
-	<td>id=change_action_1</td>
-	<td></td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -429,16 +429,6 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>id=action_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>id=action_1</td>
-	<td>silence en es ru fr zn vn pt_br it de he test</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>id=action_1</td>
 	<td>label=test</td>
@@ -449,11 +439,6 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=action_1</td>
-	<td>test</td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>link=Add new Action</td>
 	<td></td>
@@ -462,11 +447,6 @@
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>5000</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=change_action_2</td>
-	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -489,23 +469,8 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>id=action_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>silence en es ru fr zn vn pt_br it de he test</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertElementPresent</td>
 	<td>id=action_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=#action_2 &gt; option[value=&quot;test&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -529,24 +494,14 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>1000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>id=action_2</td>
 	<td>label=test</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=option[value=&quot;${cepstralmp}&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>1000</td>
-	<td></td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -572,31 +527,6 @@
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>5000</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=action_sound_files_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=action_sound_files_2</td>
-	<td>${cepstralwav}</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=action_sound_files_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>id=action_sound_files_2</td>
-	<td>${front_left} ${cepstralwav} ${cepstralmp}</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=action_sound_files_2</td>
-	<td>${cepstralwav}</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -674,9 +604,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>IVR Voice deleted</td>
-	<td></td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>

@@ -746,6 +746,11 @@
 </tr>
 <!--delete-->
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/ivr/destroy/1</td>
 	<td></td>
@@ -846,9 +851,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>ivr_name</td>
-	<td>aaaaaaaaaaaaaa</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -861,19 +866,9 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>ivr_name</td>
-	<td>kitas vardas</td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>ivr_name</td>
 	<td>kitas vardas</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>block_name</td>
-	<td>bbbbbbbbbbbbbb</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -891,24 +886,14 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>block_name</td>
-	<td>bloko vardas 1</td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>block_name</td>
 	<td>bloko vardas 1</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>block_name</td>
-	<td>bloko vardas 1</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -921,9 +906,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>block_name</td>
-	<td>bloko vardas 1</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -931,34 +916,9 @@
 	<td>bloko vardas 1</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>id=block_name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=block_name</td>
-	<td>bloko vardas 1</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Back</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=bloko vardas 1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>link=bloko vardas 1</td>
-	<td>bloko vardas 1</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>block_timeout_response</td>
-	<td></td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -971,19 +931,9 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>block_timeout_response</td>
-	<td>100</td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>block_timeout_response</td>
 	<td>100</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>block_timeout_digits</td>
-	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -996,19 +946,9 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>block_timeout_digits</td>
-	<td>30</td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>block_timeout_digits</td>
 	<td>30</td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1019,21 +959,6 @@
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>5000</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=block_timeout_response</td>
-	<td>100</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=block_timeout_digits</td>
-	<td>30</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>link=bloko vardas 1</td>
-	<td>bloko vardas 1</td>
 </tr>
 <!--new block-->
 <tr>
@@ -1047,16 +972,6 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>link=bloko vardas 1</td>
-	<td>bloko vardas 1</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>block_name</td>
-	<td>New Block</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>block_name</td>
 	<td>blokas numeris 2</td>
@@ -1065,11 +980,6 @@
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>5000</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>block_name</td>
-	<td>blokas numeris 2</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -1077,19 +987,9 @@
 	<td>blokas numeris 2</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>block_name</td>
-	<td>blokas numeris 2</td>
-</tr>
-<tr>
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>5000</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>block_name</td>
-	<td>blokas numeris 2</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -1107,24 +1007,9 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>block_timeout_response</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>block_timeout_response</td>
-	<td>1011</td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>block_timeout_response</td>
 	<td>1011</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>block_timeout_digits</td>
-	<td>311</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1137,19 +1022,9 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>block_timeout_digits</td>
-	<td>311</td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>block_timeout_digits</td>
 	<td>311</td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1160,16 +1035,6 @@
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>5000</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=block_name</td>
-	<td>blokas numeris 2</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>link=blokas numeris 2</td>
-	<td>blokas numeris 2</td>
 </tr>
 <!--check-->
 <tr>
@@ -1198,19 +1063,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>ivr_name</td>
-	<td>kitas vardas</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>block_name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>block_name</td>
-	<td>bloko vardas 1</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -1218,14 +1073,9 @@
 	<td>bloko vardas 1</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>block_timeout_response</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>link=bloko vardas 1</td>
-	<td>bloko vardas 1</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -1233,29 +1083,19 @@
 	<td>100</td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>link=blokas numeris 2</td>
-	<td>blokas numeris 2</td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>link=blokas numeris 2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
-	<td>block_name</td>
-	<td>blokas numeris 2</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>ivr_name</td>
 	<td>kitas vardas</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>block_timeout_response</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
