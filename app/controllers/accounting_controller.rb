@@ -381,7 +381,7 @@ class AccountingController < ApplicationController
         end
 
         # --- add own received incoming calls ---
-        if ["admin", "accountant"].include?(session[:usertype])
+        if ["admin", "accountant", "reseller"].include?(session[:usertype])
           if (incoming_received_calls_price > 0)
             invoice.invoicedetails.create(:name => _('Did_owner_cost'), :price => incoming_received_calls_price.to_d, :quantity => incoming_received_calls, :invdet_type => 0)
             price += incoming_received_calls_price.to_d
@@ -1184,7 +1184,7 @@ class AccountingController < ApplicationController
     csv_string = []
 
     for id in idetails
-      if id.invdet_type > 0
+      if id.invdet_type > 0 or id.name == _("Did_owner_cost")
         sub = 1
       end
     end
@@ -1224,7 +1224,7 @@ class AccountingController < ApplicationController
 
     sql = "SELECT #{user_rate}, destinationgroups.id, destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',  COUNT(*) as 'calls', SUM(#{billsec_cond}) as 'billsec', #{selfcost}, SUM(#{user_price}) as 'price'  " +
         "FROM calls "+
-        "JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id)
+        "JOIN devices ON (calls.src_device_id = devices.id)
         LEFT JOIN destinations ON (destinations.prefix = calls.prefix)  "+
         "JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}"+
         "WHERE calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
@@ -1809,7 +1809,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
       end
 
       # --- add own received incoming calls ---
-      if ["admin", "accountant"].include?(session[:usertype])
+      if ["admin", "accountant", "reseller"].include?(session[:usertype])
         if (incoming_received_calls_price > 0)
           invoice.invoicedetails.create(:name => _('Did_owner_cost'), :price => incoming_received_calls_price.to_d, :quantity => incoming_received_calls, :invdet_type => 0)
           price += incoming_received_calls_price.to_d

@@ -275,6 +275,7 @@ class Invoice < ActiveRecord::Base
           ii << {:text => self.nice_invoice_number((item.quantity * item.converted_price(ex)), nice_number_hash).to_s, :align => :right}
         else
           ii << {:text => self.nice_invoice_number((item.converted_price(ex)), nice_number_hash).to_s, :align => :right}
+          total_calls += item.quantity
         end
         items << ii
       end
@@ -418,8 +419,8 @@ class Invoice < ActiveRecord::Base
                   nice_invoice_number(item["user_price"].to_d, nice_number_hash).to_s
               ]
               tprice += item["user_price"].to_d
-              tcalls += calls2.size.to_i
             end
+            tcalls += calls2.size.to_i
           end
         end
         if (user.usertype == "reseller" and rcalls.size > 0)
@@ -436,12 +437,11 @@ class Invoice < ActiveRecord::Base
                   nice_invoice_number(item["reseller_price"].to_d, nice_number_hash).to_s
               ]
               tprice += item["reseller_price"].to_d
-              tcalls += rcalls.size.to_i
             end
-
+            tcalls += rcalls.size.to_i
           end
         end
-        items2 << [_('Total_calls_invoice') + ": " + tcalls.size.to_s + ", " + _('price_invoice') + ": " + nice_invoice_number(tprice).to_s + " (" + nice_invoice_number(user.get_tax.count_tax_amount(tprice)).to_s + ")"]
+        items2 << [_('Total_calls_invoice') + ": " + tcalls.to_s + ", " + _('price_invoice') + ": " + nice_invoice_number(tprice).to_s + " (" + nice_invoice_number(user.get_tax.count_tax_amount(tprice)).to_s + ")"]
         items2 << [' ', '', '', '']
       }
 
@@ -494,7 +494,7 @@ class Invoice < ActiveRecord::Base
       sql = "SELECT destinationgroups.id as 'dgid', destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinations.name as 'dest_name', destinationgroups.desttype as 'dg_type',  COUNT(*) as 'calls', SUM(#{options[:billsec_cond]}) as 'billsec', #{options[:selfcost]}, SUM(#{options[:user_price]}) as 'price', #{options[:user_rate]}, #{options[:did_price]}  " +
           "FROM calls "+
           "LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) "+
-          "JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}
+          "JOIN devices ON (calls.src_device_id = devices.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}
           WHERE calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
           " AND card_id = 0 AND (devices.user_id = '#{options[:user].id}'  ) #{options[:zero_calls_sql]}" +
           "GROUP BY destinationgroups.id , calls.user_rate "+
@@ -512,7 +512,7 @@ class Invoice < ActiveRecord::Base
     else
       #wholesale
 
-      sql = "SELECT calls.user_rate as 'user_rate', destinations.id as 'dgid',  directions.name as 'dg_name', destinations.name as 'dest_name', destinations.prefix, destinations.subcode as 'dg_type',  COUNT(*) as 'calls', SUM(#{options[:billsec_cond]}) as 'billsec', #{options[:selfcost]}, SUM(#{options[:user_price]}) as 'price', #{options[:did_price]}  FROM calls 	JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id) LEFT JOIN destinations ON (destinations.prefix = calls.prefix) 	JOIN directions  ON (destinations.direction_code = directions.code) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED'  AND card_id = 0 AND (devices.user_id =  '#{options[:user].id}' ) #{options[:zero_calls_sql]} GROUP BY destinations.id, calls.user_rate ORDER BY directions.name ASC, destinations.name ASC, destinations.subcode ASC"
+      sql = "SELECT calls.user_rate as 'user_rate', destinations.id as 'dgid',  directions.name as 'dg_name', destinations.name as 'dest_name', destinations.prefix, destinations.subcode as 'dg_type',  COUNT(*) as 'calls', SUM(#{options[:billsec_cond]}) as 'billsec', #{options[:selfcost]}, SUM(#{options[:user_price]}) as 'price', #{options[:did_price]}  FROM calls 	JOIN devices ON (calls.src_device_id = devices.id) LEFT JOIN destinations ON (destinations.prefix = calls.prefix) 	JOIN directions  ON (destinations.direction_code = directions.code) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED'  AND card_id = 0 AND (devices.user_id =  '#{options[:user].id}' ) #{options[:zero_calls_sql]} GROUP BY destinations.id, calls.user_rate ORDER BY directions.name ASC, destinations.name ASC, destinations.subcode ASC"
 
       if options[:user].usertype == "reseller"
         sql2 = "SELECT calls.user_rate as 'user_rate', destinations.id as 'dgid',  directions.name as 'dg_name', destinations.name as 'dest_name', destinations.prefix, destinations.subcode as 'dg_type',  COUNT(*) as 'calls', SUM(#{options[:billsec_cond]}) as 'billsec', #{options[:selfcost]}, SUM(#{options[:reseller_price]}) as 'price', #{options[:did_price]}  FROM calls JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id)  LEFT JOIN destinations ON (destinations.prefix = calls.prefix)  JOIN directions  ON (destinations.direction_code = directions.code) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED'  AND card_id = 0 AND (calls.reseller_id =  '#{options[:user].id}' )  #{options[:zero_calls_sql]} GROUP BY destinations.id, calls.user_rate ORDER BY directions.name ASC, destinations.name ASC, destinations.subcode ASC"
@@ -580,14 +580,14 @@ class Invoice < ActiveRecord::Base
 
     if options[:tariff_purpose] == "user"
 
-      sql = "SELECT destinationgroups.id, destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type', #{calldate}, calls.#{options[:billsec_cond]}, #{options[:user_price]} as user_price, #{options[:reseller_price]} as reseller_price, #{dst}  FROM calls JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id) LEFT JOIN destinations ON (destinations.prefix = calls.prefix)  JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id AND destinationgroups.id = #{dgid}) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE calls.calldate BETWEEN '#{ period_start} 00:00:00' AND '#{ period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' AND card_id = 0  AND (devices.user_id = #{ options[:user].id} AND calls.user_rate = #{user_rate_s}) ORDER BY calls.calldate ASC"
+      sql = "SELECT destinationgroups.id, destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type', #{calldate}, calls.#{options[:billsec_cond]}, #{options[:user_price]} as user_price, #{options[:reseller_price]} as reseller_price, #{dst}  FROM calls JOIN devices ON (calls.src_device_id = devices.id) LEFT JOIN destinations ON (destinations.prefix = calls.prefix)  JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id AND destinationgroups.id = #{dgid}) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE calls.calldate BETWEEN '#{ period_start} 00:00:00' AND '#{ period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' AND card_id = 0  AND (devices.user_id = #{ options[:user].id} AND calls.user_rate = #{user_rate_s}) ORDER BY calls.calldate ASC"
 
       if options[:user].usertype == "reseller"
         sql2 = "SELECT destinationgroups.id, destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type', #{calldate}, calls.#{options[:billsec_cond]}, #{options[:user_price]} as user_price, #{options[:reseller_price]} as reseller_price, #{dst}  FROM calls LEFT JOIN destinations ON (destinations.prefix = calls.prefix)  JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id AND destinationgroups.id = #{dgid}) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE calls.calldate BETWEEN '#{ period_start} 00:00:00' AND '#{ period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' AND card_id = 0  AND (calls.reseller_id = #{ options[:user].id} AND calls.user_rate = #{user_rate_s} ) ORDER BY calls.calldate ASC"
       end
 
     else
-      sql = "SELECT destinations.id, directions.name as 'dg_name', destinations.prefix, destinations.subcode as 'dg_type', #{calldate}, calls.#{options[:billsec_cond]}, #{options[:user_price]} as user_price, #{options[:reseller_price]} as reseller_price, #{dst}  FROM calls 	JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id) LEFT JOIN destinations ON (destinations.prefix = calls.prefix)  	JOIN directions  ON (destinations.direction_code = directions.code AND destinations.id = #{dgid}) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE calls.calldate BETWEEN '#{ period_start} 00:00:00' AND '#{ period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' AND card_id = 0  AND (devices.user_id = #{ options[:user].id} AND calls.user_rate = #{user_rate_s}) ORDER BY calls.calldate ASC"
+      sql = "SELECT destinations.id, directions.name as 'dg_name', destinations.prefix, destinations.subcode as 'dg_type', #{calldate}, calls.#{options[:billsec_cond]}, #{options[:user_price]} as user_price, #{options[:reseller_price]} as reseller_price, #{dst}  FROM calls 	JOIN devices ON (calls.src_device_id = devices.id) LEFT JOIN destinations ON (destinations.prefix = calls.prefix)  	JOIN directions  ON (destinations.direction_code = directions.code AND destinations.id = #{dgid}) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE calls.calldate BETWEEN '#{ period_start} 00:00:00' AND '#{ period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' AND card_id = 0  AND (devices.user_id = #{ options[:user].id} AND calls.user_rate = #{user_rate_s}) ORDER BY calls.calldate ASC"
       if options[:user].usertype == "reseller"
         sql2 = "SELECT destinations.id, directions.name as 'dg_name', destinations.prefix, destinations.subcode as 'dg_type', #{calldate},  calls.#{options[:billsec_cond]}, #{options[:user_price]} as user_price, #{options[:reseller_price]} as reseller_price, #{dst}  FROM calls   LEFT JOIN destinations ON (destinations.prefix = calls.prefix)    JOIN directions  ON (destinations.direction_code = directions.code AND destinations.id = #{dgid}) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE calls.calldate BETWEEN '#{ period_start} 00:00:00' AND '#{ period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' AND card_id = 0  AND (calls.reseller_id = #{ options[:user].id} AND calls.user_rate = #{user_rate_s}) ORDER BY calls.calldate ASC"
       end
