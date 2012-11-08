@@ -1370,7 +1370,7 @@ JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devic
 LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     LEFT JOIN directions as dir ON (destinations.direction_code = dir.code)
 #{SqlExport.left_join_reseler_providers_to_calls_sql}
-    where devices.user_id = '#{user.id}' and calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59' #{zero_calls_sql} AND LENGTH(calls.prefix) > 0
+    where calls.card_id = 0 AND devices.user_id = '#{user.id}' and calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59' #{zero_calls_sql} AND LENGTH(calls.prefix) > 0
     group by destinations.id, calls.user_rate ORDER BY destinations.direction_code ASC, destinations.id ASC"
 
     # my_debug sql
@@ -1445,7 +1445,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     csv_s = []
     #remove cards conditions, calls.did_inc_price conditions
     #sql = "SELECT calls.src, SUM(#{user_price}) as 'price', COUNT(calls.id) AS calls_size FROM calls JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE devices.user_id = #{user.id} AND calls.card_id = 0 AND calls.did_inc_price > 0 AND calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59' AND calls.disposition = 'ANSWERED' AND billsec > 0 #{zero_calls_sql} GROUP BY calls.src;"
-    sql = "SELECT calls.src, SUM(#{user_price}) as 'price', COUNT(calls.id) AS calls_size FROM calls JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE devices.user_id = #{user.id} AND calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59' AND calls.disposition = 'ANSWERED' AND billsec > 0 #{zero_calls_sql} GROUP BY calls.src;"
+    sql = "SELECT calls.src, SUM(#{user_price}) as 'price', COUNT(calls.id) AS calls_size FROM calls JOIN devices ON (calls.src_device_id = devices.id OR calls.dst_device_id = devices.id) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE calls.card_id = 0 AND devices.user_id = #{user.id} AND calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59' AND calls.disposition = 'ANSWERED' AND billsec > 0 #{zero_calls_sql} GROUP BY calls.src;"
 
     cids = Call.find_by_sql(sql)
 
