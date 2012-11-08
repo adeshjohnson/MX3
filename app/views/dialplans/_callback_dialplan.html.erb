@@ -100,8 +100,15 @@
           <p><%= b_call %> <%= _('Call_is_sent_to_number/DID') %>:
              <div>
                   <%
-                    did = Did.where(:id => @dp.data1.to_s).first.did.to_s rescue ""
-                    dialplan_did_value = (did.blank? ? "" : did << " - " << @dp.name.to_s)
+                    did = Did.where(:id => @dp.data1.to_s).first
+                    did_val = did.did.to_s rescue ""
+                    dialplan = Dialplan.where(:id => did.dialplan_id).first rescue ""
+                    dialplan_name = dialplan.name.to_s rescue ""
+                    if !did.blank? and !dialplan_name.blank?
+                      dialplan_did_value = did_val << " - " << dialplan_name
+                    else
+                      dialplan_did_value = ""
+                    end
                   %>
                   <input title="DID live search" type="text" size="30" id="dialplan[data1]" name="dialplan[data1]" autocomplete="off" value="<%=raw dialplan_did_value %>" />
                   <table id="did_list" style='margin-left:2px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>

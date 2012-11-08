@@ -341,7 +341,7 @@ class DialplansController < ApplicationController
 
     if callback_active? and dp.dptype == "callback"
       dp.data2 = 5 if dp.data2.length == 0
-      dp.data1 = Did.where(:did => params[:dialplan][:data1].split("-")[0].to_s.strip).first.id.to_s
+      dp.data1 = Did.where(:did => params[:dialplan][:data1].split("-")[0].to_s.strip).first.id.to_s rescue nil
     end
 
     if dp.save
