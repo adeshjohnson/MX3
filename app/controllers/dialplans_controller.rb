@@ -193,7 +193,7 @@ class DialplansController < ApplicationController
     end
 
     if callback_active? and @dp.dptype == "callback" and params[:dialplan]
-      @dp.data1 = params[:dialplan][:data1].to_s.strip if params[:dialplan][:data1]
+      @dp.data1 = Did.where(:did => params[:dialplan][:data1].split("-")[0].to_s.strip).first.id.to_s if params[:dialplan][:data1]
       @dp.data2 = params[:dialplan][:data2].to_s.strip
       @dp.data3 = params[:dialplan][:data3].to_s.strip
       @dp.data4 = params[:dialplan][:data4] ? params[:dialplan][:data4].to_i : 0
@@ -257,7 +257,6 @@ class DialplansController < ApplicationController
     @users = current_user.find_all_for_select
     @users_used = ""
   end
-
 
   def create
 
@@ -342,6 +341,7 @@ class DialplansController < ApplicationController
 
     if callback_active? and dp.dptype == "callback"
       dp.data2 = 5 if dp.data2.length == 0
+      dp.data1 = Did.where(:did => params[:dialplan][:data1].split("-")[0].to_s.strip).first.id.to_s
     end
 
     if dp.save

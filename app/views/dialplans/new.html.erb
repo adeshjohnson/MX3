@@ -216,12 +216,41 @@
 
                 <td align="left"> <%= text_field_tag 'dialplan[name]', @dp.name, "class" => "input", :size => "30", :maxlength => "50", :id => "callback_dp_name" %></td>
                 <td align="left">
-                  <select name="dialplan[data1]">
-                    <% for did in @cbdids %>
-                        <option value=<%= did.id %> <%= "selected" if @dp.data1.to_i == did.id %>> <%= did.did %>
-                          - <%= did.dialplan.name %> </option>
-                    <% end %>
-                  </select>
+		  <input title="DID live search" type="text" size="30" id="dialplan[data1]" name="dialplan[data1]" autocomplete="off" value="<%=raw @cbdids.first.did.to_s << ' - ' << @cbdids.first.dialplan.name.to_s %>" />
+		  <table id="did_list" style='margin-left:2px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>
+		   <script type='text/javascript'>
+		      Event.observe(window, 'load',  function() {
+			Event.observe($('dialplan[data1]'), 'click', function(){
+			  if ($('dialplan[data1]').value == "") {
+			    $('did_list').innerHTML = "";
+			    <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'empty_click=true'") %>
+			  }
+			    Event.observe($('dialplan[data1]'), 'keyup', function(){
+			      $('did_list').innerHTML = "";
+			      <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'callback=true&did_livesearch='+$('dialplan[data1]').value") %>
+			    });
+
+			    Event.observe($('did_list'), 'mouseover', function(){
+			      var el = document.getElementById('did_list').getElementsByTagName('td');
+			      for(var i=0;i<el.length;i++){
+				  el[i].onclick=function(){
+				      if (this.id != -2) {
+					  document.getElementById('dialplan[data1]').value = this.innerHTML
+					<%= raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='") %>
+				      }
+				  }
+				  el[i].onmouseover=function(){
+				      this.style.backgroundColor="#BBBBBB";
+				  }
+				  el[i].onmouseout=function(){
+				      this.style.backgroundColor="rgb(255, 255, 255)";
+				  }
+			      }
+			    });
+
+			});
+		    });
+		    </script>
                 </td>
                 <td align="left"> <%= render :partial => '/layouts/hgc_end_select', :locals => {:select_field_tag => "dialplan[data6]", :filed_value => @dp.data6.to_i} %> </td>
                 <td align="right"> <%= text_field_tag 'dialplan[data2]', @dp.data2, "class" => "input", :size => "10", :maxlength => "10" %></td>

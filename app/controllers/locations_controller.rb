@@ -59,20 +59,33 @@ Called from views location_rules and location_rule_edit, to update DID list from
 =end
   def get_did_map
     output = []
-    if params[:did_livesearch].to_s != ""
-      @did_str = params[:did_livesearch].to_s
+    style = "width='177px' style='margin-left:20px;padding-left:6px;font-size:10px;font-weight: normal;'"
+    params[:callback].to_s == "true" ? @did_str = params[:did_livesearch].split("-")[0].to_s.strip rescue "" : @did_str = params[:did_livesearch].to_s
+    if !@did_str.blank?
       cond = ["dids.id > 0"]
       var = []
       cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller'
       if @did_str.to_s != ""
         cond << "did LIKE ?" and var << @did_str + '%'
       end
-      output << "<tr><td id='-1' style='height:13px;'></td></tr>"
-      output << Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC").limit(20).map { |d| ["<tr><td id='" << d.id.to_s << "' style='padding-left:6px;font-weight: normal;'>" << d.did << "</td></tr>"] }
-      @total_dids = Did.where([cond.join(" AND ")].concat(var)).count - Did.where([cond.join(" AND ")].concat(var)).limit(20).count
-      if @total_dids > 0
-        output << "<tr><td id='-2' style='padding-left:6px;font-size:10px;font-weight: normal;'>" << _('Found') << " " << @total_dids.to_s << " " << _('more') << "</td></tr>"
+      if params[:callback].to_s == "true"
+        cbsql = Did.find_by_sql(['SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != "callback" AND dids.reseller_id = ? AND dids.did LIKE ? limit 20',current_user.id, @did_str.to_s << '%'])
+#               Did.where([cond.join(" AND ")].concat(var).concat(' AND dialplans.dptype != "callback"')).order("dids.did ASC").limit(20).map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << "</td></tr>"] }
+        seek = cbsql.map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << " - " << d.dialplan.name << "</td></tr>"] }
+        @total_dids = seek.size - 20
+      else
+        seek = Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC").limit(20).map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << "</td></tr>"] }
+        @total_dids = Did.where([cond.join(" AND ")].concat(var)).count - Did.where([cond.join(" AND ")].concat(var)).limit(20).count
       end
+      output << seek
+      if @total_dids > 0 
+        output << "<tr><td id='-2' #{style}>" << _('Found') << " " << @total_dids.to_s << " " << _('more') << "</td></tr>"
+      elsif seek.size == 0
+        output = ["<tr><td id='-2' #{style}>" << _('No_value_found') << "</td></tr>"]
+      end
+    end
+    if params[:empty_click].to_s == "true" 
+        output = ["<tr><td id='-2' #{style}>" << _('Enter_value_here') << "</td></tr>"]
     end
     render :text => output.join
   end

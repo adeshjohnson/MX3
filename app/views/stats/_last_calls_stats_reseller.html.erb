@@ -24,9 +24,43 @@
       <span id="s_device_span"><%= select_tag("s_device", options_for_select(options, @options[:s_device].to_s), :disabled => @devices.empty?) %></span> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _("DID") %>:
-      <% options = @dids.map{|d| [d.did, d.id.to_s]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @dids.size > 0 %> 
-      <%= select_tag("s_did", options_for_select(options, @options[:s_did].to_s), :disabled => @dids.empty?) %> 
+      <span width=100px style="position:absolute;">
+      <input title="DID live search" type="text" size="30" id="s_did_pattern" name="s_did_pattern" autocomplete="off" value="<%=raw params[:s_did_pattern].to_s %>" />
+      <table id="did_list" style='margin-left:2px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>
+      </span>
+   <script type='text/javascript'>
+      Event.observe(window, 'load',  function() {
+        Event.observe($('s_did_pattern'), 'click', function(){
+          if ($('s_did_pattern').value == "") {
+            $('did_list').innerHTML = "";
+            <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'empty_click=true'") %>
+          }
+            Event.observe($('s_did_pattern'), 'keyup', function(){
+              $('did_list').innerHTML = "";
+              <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='+$('s_did_pattern').value") %>
+            });
+
+            Event.observe($('did_list'), 'mouseover', function(){
+              var el = document.getElementById('did_list').getElementsByTagName('td');
+              for(var i=0;i<el.length;i++){
+                  el[i].onclick=function(){
+                      if (this.id != -2) {
+                          document.getElementById('s_did_pattern').value = this.innerHTML
+                        <%= raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='") %>
+                      }
+                  }
+                  el[i].onmouseover=function(){
+                      this.style.backgroundColor="#BBBBBB";
+                  }
+                  el[i].onmouseout=function(){
+                      this.style.backgroundColor="rgb(255, 255, 255)";
+                  }
+              }
+            });
+
+        });
+    });
+    </script>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <br/>
       <br/>
