@@ -332,8 +332,7 @@
                 <% i+=1 -%>
             <% end %>
           </select>
-            <%= b_info %> <%= _('Value_in_system_time_zone') %>:
-            GMT <%= User.system_time_offset > 0 ? '+' : "" %><%= User.system_time_offset %>
+            <%= b_info %> <%= _('Value_in_system_time_zone') %>: <%= nice_system_time_string %>
           </td>
         </tr>
         <tr>

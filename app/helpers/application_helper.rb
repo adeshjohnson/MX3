@@ -47,6 +47,10 @@ module ApplicationHelper
     d
   end
 
+  def nice_system_time_string
+    Time.now.zone.include?('(GMT') ? ActiveSupport::TimeZone[Time.now.zone] : "(GMT#{Time.now.formatted_offset}) #{Time.now.zone}"
+  end
+
   def nice_date(date, options={})
     if date
       if options
