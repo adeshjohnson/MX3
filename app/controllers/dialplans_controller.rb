@@ -193,7 +193,11 @@ class DialplansController < ApplicationController
     end
 
     if callback_active? and @dp.dptype == "callback" and params[:dialplan]
-      @dp.data1 = Did.where(:did => params[:dialplan][:data1].split("-")[0].to_s.strip).first.id.to_s if params[:dialplan][:data1]
+      @dp.data1 = (Did.where(:did => params[:dialplan][:data1].split("-")[0].to_s.strip).first.id.to_s if params[:dialplan][:data1]) rescue nil
+      if @dp.data1.blank?
+        flash[:notice] = _('Could_not_assign_did')
+        redirect_to :action => :dialplans and return false
+      end
       @dp.data2 = params[:dialplan][:data2].to_s.strip
       @dp.data3 = params[:dialplan][:data3].to_s.strip
       @dp.data4 = params[:dialplan][:data4] ? params[:dialplan][:data4].to_i : 0
@@ -342,6 +346,10 @@ class DialplansController < ApplicationController
     if callback_active? and dp.dptype == "callback"
       dp.data2 = 5 if dp.data2.length == 0
       dp.data1 = Did.where(:did => params[:dialplan][:data1].split("-")[0].to_s.strip).first.id.to_s rescue nil
+      if dp.data1.blank?
+        flash[:notice] = _('Could_not_assign_did')
+        redirect_to :action => :new and return false
+      end
     end
 
     if dp.save
