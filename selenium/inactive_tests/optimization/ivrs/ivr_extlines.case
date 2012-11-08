@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>ivr_extlines</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ivr_extlines</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_start</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>did_end</td>
+	<td>123459</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID interval was successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reserve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Assign']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Reserve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Assign']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivrvoices/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ivr[voice]</td>
+	<td>lt</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ivr[description]</td>
+	<td>lithuanian</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>IVR Voice created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ivr_name</td>
+	<td>test_ivr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>block_name</td>
+	<td>first_block</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>IVR created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ivr_name</td>
+	<td>test_ivr_2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>block_name</td>
+	<td>first_block_2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>IVR created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Block</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>block_name</td>
+	<td>New Block</td>
+</tr>
+<!--Test extension lines-->
+<!--...Test default values-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add new Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_1</td>
+	<td>label=Playback</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Playback']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_2</td>
+	<td>label=Change Voice</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='change_action_2']/option[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_4</td>
+	<td>label=Hangup</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='change_action_4']/option[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_5</td>
+	<td>label=Transfer To</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='change_action_5']/option[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_6</td>
+	<td>label=Transfer To</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='change_action_6']/option[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_7</td>
+	<td>label=Transfer To</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='change_action_7']/option[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_8</td>
+	<td>label=Transfer To</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='change_action_8']/option[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_9</td>
+	<td>label=Debug</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='change_action_9']/option[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>change_action_10</td>
+	<td>label=Set Accountcode</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=action_10</td>
+	<td>label=Test User #1 - IAX2/101</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_6</td>
+	<td>label=DID</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='action_6']/option[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_7</td>
+	<td>label=Device</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='action_7']/option[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_8</td>
+	<td>label=Block</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='action_8']/option[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/ivr_extlines?block_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,1,NoOp(IVR_BLOCK_1_REACHED)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,2,Set(TIMEOUT(digit)=3)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,3,Set(TIMEOUT(response)=10)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,4,Answer()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,5,Background(mor/ivr_voices/silence/silence1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,6,Set(CHANNEL(language)=silence)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,7,Waitexten(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,8,Busy(10)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,9,Goto(ivr_block1,s,1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,10,Goto(mor,37063042438,1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,11,Goto(mor_local,101,1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,12,Goto(ivr_block1,s,1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,13,NoOp(first_block_was_reached.)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,14,Set(MASTER_CHANNEL(MOR_ACC)=2)</td>
+	<td></td>
+</tr>
+<!--...Check if works when values are changed-->
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_sound_files_1</td>
+	<td>label=silence10.wav</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='silence10.wav']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_2</td>
+	<td>label=lt</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='action_2']/option[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>action_3</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>action_params_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_4</td>
+	<td>label=Congestion</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='Congestion']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_param_5</td>
+	<td>label=test_ivr_2</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='2']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_param_6</td>
+	<td>label=123457 (active)</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='123457']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_param_7</td>
+	<td>label=Test User #1 - FAX 102</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='102']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_param_8</td>
+	<td>label=New Block</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='2']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>action_9</td>
+	<td>test_debug</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>action_10</td>
+	<td>label=System Admin - IAX2/103</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>action_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/ivr_extlines?block_id=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,1,NoOp(IVR_BLOCK_1_REACHED)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,2,Set(TIMEOUT(digit)=3)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,3,Set(TIMEOUT(response)=10)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,4,Answer()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,5,Background(mor/ivr_voices/silence/silence10)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,6,Set(CHANNEL(language)=lt)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,7,Waitexten(12)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,8,Congestion(4)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,9,Goto(ivr_block2,s,1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,10,Goto(mor,123457,1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,11,Goto(mor_local,102,1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,12,Goto(ivr_block3,s,1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,13,NoOp(test_debug)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,14,Set(MASTER_CHANNEL(MOR_ACC)=5)</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
