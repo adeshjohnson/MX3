@@ -647,7 +647,7 @@ class Call < ActiveRecord::Base
         s << SqlExport.replace_dec("(IF(#{SqlExport.user_price_sql} != 0 , (#{SqlExport.user_price_sql}), 0) * #{options[:exchange_rate]} ) ", options[:column_dem], 'user_price')
       end
       if options[:current_user].usertype == 'user'
-        s << SqlExport.replace_dec("((#{SqlExport.user_price_sql}) * #{options[:exchange_rate]} ) ", options[:column_dem], "user_price")
+        s << SqlExport.replace_dec("((IF(calls.user_id = #{options[:current_user].id},#{SqlExport.user_price_sql},calls.did_price)) * #{options[:exchange_rate]} ) ", options[:column_dem], "user_price")
       end
     end
 
