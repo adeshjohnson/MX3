@@ -422,7 +422,7 @@ class Call < ActiveRecord::Base
 
 
   def Call.calls_order_by(params, options)
-    case options[:order_by].to_s.strip.to_s
+    case options[:order_by].to_s.strip
       when "time" then
         order_by = "calls.calldate"
       when "src" then

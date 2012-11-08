@@ -1976,7 +1976,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
 
   def User.users_order_by(params, options)
-    case options[:order_by].to_s.strip.to_s
+    case options[:order_by].to_s.strip
       when "acc"
         order_by = "users.id"
       when "nice_user"

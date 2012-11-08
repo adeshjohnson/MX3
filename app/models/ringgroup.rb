@@ -77,7 +77,7 @@ class Ringgroup < ActiveRecord::Base
 
 
   def Ringgroup.ringgroups_order_by(params, options)
-    case params[:order_by].to_s.strip.to_s
+    case params[:order_by].to_s.strip
       when "id"
         order_by = " ringgroups.id "
       when "name"

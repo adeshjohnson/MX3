@@ -176,7 +176,7 @@ class Action < ActiveRecord::Base
 
 
   def Action.actions_order_by(options)
-    case options[:order_by].to_s.strip.to_s
+    case options[:order_by].to_s.strip
       when "user" then
         order_by = "users.first_name"
       when "type" then

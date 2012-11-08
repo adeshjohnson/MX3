@@ -16,7 +16,7 @@ class Invoicedetail < ActiveRecord::Base
 
   def nice_inv_name
     id_name=""
-    if  name.to_s.strip.to_s[-1..-1].to_s.strip.to_s == "-"
+    if  name.to_s.strip[-1..-1].to_s.strip == "-"
       name_length = name.strip.length
       name_length = name_length.to_i - 2
       id_name = name.strip

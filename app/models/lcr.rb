@@ -132,7 +132,7 @@ class Lcr < ActiveRecord::Base
   end
 
   def Lcr.lcrs_order_by(params, options)
-    case params[:order_by].to_s.strip.to_s
+    case params[:order_by].to_s.strip
       when "id"
         order_by = " lcrs.id "
       when "name"

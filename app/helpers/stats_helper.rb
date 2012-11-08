@@ -94,7 +94,7 @@ module StatsHelper
   end
 
   def Subscription.subscriptions_stats_order_by(options)
-    case options[:order_by].to_s.strip.to_s
+    case options[:order_by].to_s.strip
       when "user"
         order_by = "nice_user"
       when "service"

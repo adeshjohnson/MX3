@@ -1427,7 +1427,7 @@ class ApplicationController < ActionController::Base
 
   def nice_inv_name(iv_id_name)
     id_name=""
-    if  iv_id_name.to_s.strip.to_s[-1..-1].to_s.strip.to_s == "-"
+    if  iv_id_name.to_s.strip[-1..-1].to_s.strip == "-"
       name_length = iv_id_name.strip.length
       name_length = name_length.to_i - 2
       id_name = iv_id_name.strip

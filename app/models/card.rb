@@ -222,7 +222,7 @@ class Card < ActiveRecord::Base
   end
 
   def Card.get_order_by(params, options)
-    case options[:order_by].to_s.strip.to_s
+    case options[:order_by].to_s.strip
       when "number" then
         order_by = "number"
       when "name" then

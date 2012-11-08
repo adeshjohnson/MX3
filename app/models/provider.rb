@@ -366,7 +366,7 @@ class Provider < ActiveRecord::Base
 
 
   def Provider.providers_order_by(options)
-    case options[:order_by].to_s.strip.to_s
+    case options[:order_by].to_s.strip
       when "name"
         order_by = "providers.name"
       when "id"
