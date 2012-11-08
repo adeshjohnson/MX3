@@ -535,7 +535,7 @@ class CallcController < ApplicationController
 
   def global_set_tz
     if Confline.get_value('System_time_zone_ofset_changed').to_i == 0
-      sql = "UPDATE users SET time_zone = '#{ActiveSupport::TimeZone[Time.now.zone.utc_offset/3600]}';"
+      sql = "UPDATE users SET time_zone = '#{ActiveSupport::TimeZone[Time.now.utc_offset/3600]}';"
       ActiveRecord::Base.connection.execute(sql)
       flash[:status] = _("Time_zone_for_users_set_to") + " #{Time.now.zone} "
     else
