@@ -1236,8 +1236,8 @@
 	<td>callbackplan</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
-	<td>css=select[name=&quot;dialplan[data1]&quot;]</td>
+	<td>assertValue</td>
+	<td>id=dialplan[data1]</td>
 	<td>100000000000 - ccplan</td>
 </tr>
 <tr>
@@ -2408,6 +2408,11 @@
 <tr>
 	<td>open</td>
 	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>No DIDs found. Please check interval</td>
 	<td></td>
 </tr>
 </tbody></table>
