@@ -1,0 +1,994 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>did_owner</title>
+</head> 
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">did_owner</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='quickforward_dp_name']</td>
+	<td>Quick Forward DIDs DP</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=data10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cb_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=quickforward_dp_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DID assigned to Dial Plan: Quick Forward DIDs DP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Owner</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=user_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_id</td>
+	<td>System Admin Test Accountant Test Reseller Test User #1 User Resellers</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Details changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Assigned to user: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=user_id</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Assigned to user: User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>DIDs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dialplan_1</td>
+	<td>Quick Forward DIDs DP (quickforwarddids)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_1</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=user_id</td>
+	<td>User Resellers</td>
+</tr>
+<!--Did billing: owner price -->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/did_billing_current_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/1?currency=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_name_3</td>
+	<td>DID Owner Cost</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_3</td>
+	<td>4.15</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>4.15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_pdf/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>4.15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>4.15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>4.15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_by_cid_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_issue_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/2?currency=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_name_7</td>
+	<td>DID Owner Cost</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_7</td>
+	<td>7.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>7.0000 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_pdf/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>7.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>7.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_csv/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_csv/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>7.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_by_cid_csv/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/callc/logout</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>login_username</td> 	<td>reseller</td> </tr> <tr> 	<td>type</td> 	<td>login_psw</td> 	<td>reseller1</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Successfully logged in</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/functions/reseller_settings</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>id=invoice_number_type_2</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Settings saved</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/accounting/generate_invoices</td> 	<td></td> </tr> <tr> 	<td>select</td> 	<td>id=date_from_year</td> 	<td>label=2012</td> </tr> <tr> 	<td>select</td> 	<td>id=date_from_month</td> 	<td>label=November</td> </tr> <tr> 	<td>select</td> 	<td>id=date_from_day</td> 	<td>label=9</td> </tr> <tr> 	<td>select</td> 	<td>id=date_till_year</td> 	<td>label=2012</td> </tr> <tr> 	<td>select</td> 	<td>id=date_till_month</td> 	<td>label=November</td> </tr> <tr> 	<td>select</td> 	<td>id=date_till_day</td> 	<td>label=9</td> </tr> <tr> 	<td>select</td> 	<td>id=date_issue_year</td> 	<td>label=2012</td> </tr> <tr> 	<td>select</td> 	<td>id=date_issue_month</td> 	<td>label=November</td> </tr> <tr> 	<td>select</td> 	<td>id=date_issue_day</td> 	<td>label=9</td> </tr> <tr> 	<td>click</td> 	<td>id=invoice_type_user</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/accounting/invoice_details/3?currency=USD</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=id_name_10</td> 	<td>DID Owner Cost</td> </tr> <tr> 	<td>assertText</td> 	<td>id=id_price_10</td> 	<td>10.2067</td> </tr> <tr> 	<td>open</td> 	<td>/billing/accounting/generate_invoice_pdf/3?test=1</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>DID Owner Cost</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>10.2067</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/accounting/generate_invoice_detailed_pdf/3?test=1</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>DID Owner Cost</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>10.2067</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/accounting/generate_invoice_by_cid_pdf/3?test=1</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>DID Owner Cost</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>10.2067</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/accounting/generate_invoice_csv/3?test=1</td> 	<td></td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>DID Owner Cost</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/accounting/generate_invoice_detailed_csv/3?test=1</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>DID Owner Cost</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>10.2067</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/accounting/generate_invoice_by_cid_csv/3?test=1</td> 	<td></td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>DID Owner Cost</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/callc/logout</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>login_username</td> 	<td>admin</td> </tr> <tr> 	<td>type</td> 	<td>login_psw</td> 	<td>admin1</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Successfully logged in</td> 	<td></td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Payment added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_balance_value</td>
+	<td>100.0000 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/1?currency=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price</td>
+	<td>460.8908</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create_payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=image_not_paid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=image_paid_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_balance_value</td>
+	<td>560.8908 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/profit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did_owner_cost</td>
+	<td>1.8100</td>
+</tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/callc/logout</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>login_username</td> 	<td>reseller</td> </tr> <tr> 	<td>type</td> 	<td>login_psw</td> 	<td>reseller1</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Successfully logged in</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/stats/profit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Don't be so smart</td> 	<td></td> </tr>-->
+<!--<tr> 	<td>open</td> 	<td>/billing/callc/logout</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>login_username</td> 	<td>admin</td> </tr> <tr> 	<td>type</td> 	<td>login_psw</td> 	<td>admin1</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Successfully logged in</td> 	<td></td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_price_29</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did_price_29</td>
+	<td>0.7750</td>
+</tr>
+<!---->
+<!--NIEKAS NESIKEIČIA-->
+<!---->
+<!--src useris-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rate_29</td>
+	<td>0.5167</td>
+</tr>
+<!---->
+<!--Kokias čia kainas rodo? -->
+<!---->
+<!--Čia bus dst useris-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rate_29</td>
+	<td>0.7750</td>
+</tr>
+<!---->
+<!--Kokias čia kainas rodo? -->
+<!---->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--user_reseller src user-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=profit_30</td>
+	<td>2.3167</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Owner</td>
+	<td></td>
+</tr>
+<!--WHAAAT?? user reseller yra dst user tai reseller mato skambučio kuris neneša jam pelno. -->
+<!--quick stats price-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_did_owner_cost</td>
+	<td>5.9600</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_did_price</td>
+	<td>5.9600</td>
+</tr>
+</tbody></table>
+</body>
+</html>
