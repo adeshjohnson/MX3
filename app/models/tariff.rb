@@ -731,7 +731,6 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     ActiveRecord::Base.connection.update(sql)
       count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM ratedetails, (SELECT rates.id AS nrate_id, #{name}.* FROM rates join destinations ON (destinations.id = rates.destination_id) JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) where rates.tariff_id = #{id} AND f_error = 0 AND not_found_in_db = 0) AS temp
     WHERE ratedetails.rate_id = nrate_id #{type_sql} AND start_time = '#{options[:imp_time_from_type]}' AND end_time = '#{options[:imp_time_till_type]}'")
-    end
 
     sql = "UPDATE ratedetails, (SELECT rates.id AS nrate_id, #{name}.* FROM rates join destinations ON (destinations.id = rates.destination_id) JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) where rates.tariff_id = #{id} AND f_error = 0 AND not_found_in_db = 0) AS temp
             SET ratedetails.rate = replace(replace(replace(col_#{options[:imp_rate]}, '\\r', ''), '#{options[:dec]}', '.'), '$', ''),
