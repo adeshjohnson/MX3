@@ -76,7 +76,7 @@
           <p>
             <b><%= b_cli %> <%= _('System_uses_such_CallerID_on_the_call_to_the_Client') %>:</b><br/>
             <%= text_field_tag 'dialplan[data5]', @dp.data5, "class" => "input", :size => "20", :maxlength => "50" %>&nbsp;&nbsp;<br>
-            <span class="callback_text">(<%= _('If_field_is_left_empty_Callback_Device_CallerID_will_be_used') %>
+            <span class="callback_text">(<%=raw _('If_field_is_left_empty_Callback_Device_CallerID_will_be_used') %>
               )</span>
           </p>
 

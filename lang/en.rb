@@ -3625,7 +3625,7 @@ Localization.define('en') do |l|
   l.store 'If_Calling_Card_is_used_should_system_ask_to_enter_pin', 'If Calling Card is used, should system ask to enter pin'
   l.store 'Client_receives_the_Call_and_answers', 'Client receives the Call and answers'
   l.store 'System_calls_back_to_the_Client', 'System calls back to the Client'
-  l.store 'If_field_is_left_empty_Callback_Device_CallerID_will_be_used', 'If field is left empty - Callback Device\'s CallerID will be used. <br>If you enter * sign here - an original CallerID will be used'
+  l.store 'If_field_is_left_empty_Callback_Device_CallerID_will_be_used', 'If field is left empty - Callback Device\'s CallerID will be used. If you enter * sign here - an original CallerID will be used'
 
   l.store 'Common_Use', 'Common Use'
   l.store 'Common_Use_Explanation', 'Provider can be used by Resellers which are able to create their own Providers.<br>Reseller will be billed using this Provider.'
