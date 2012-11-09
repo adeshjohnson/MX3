@@ -93,11 +93,11 @@ class Tariff < ActiveRecord::Base
     destinations
   end
 
-  def add_new_rate(dest_id, rate_value, increment, min_time, connection_fee, ghost_percent = nil, mor_11_extended = false)
+  def add_new_rate(dest_id, rate_value, increment, min_time, connection_fee, ghost_percent = nil, mor_11_extended = true)
     rate = Rate.new
     rate.tariff_id = self.id
     rate.destination_id = dest_id
-    rate.ghost_min_perc = ghost_percent if mor_11_extended
+    rate.ghost_min_perc = ghost_percent
 
     rate_det = Ratedetail.new
     rate_det.rate = rate_value.to_d
@@ -724,13 +724,11 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM ratedetails, (SELECT rates.id AS nrate_id, #{name}.* FROM rates join destinations ON (destinations.id = rates.destination_id) JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) where rates.tariff_id = #{id} AND f_error = 0 AND not_found_in_db = 0) AS temp
     WHERE ratedetails.rate_id = nrate_id #{type_sql} AND start_time = '#{options[:imp_time_from_type]}' AND end_time = '#{options[:imp_time_till_type]}'")
 
-    if Confline.mor_11_extended?
       count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM rates join destinations ON (destinations.id = rates.destination_id) JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) where rates.tariff_id = #{id} AND f_error = 0 AND not_found_in_db = 0")
       sql = "UPDATE rates, destinations, #{name}
             SET ghost_min_perc = #{ghost_percent}
             WHERE destinations.id = rates.destination_id AND replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix AND rates.tariff_id = #{id} AND f_error = 0 AND not_found_in_db = 0"
-      ActiveRecord::Base.connection.update(sql)
-    else
+    ActiveRecord::Base.connection.update(sql)
       count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM ratedetails, (SELECT rates.id AS nrate_id, #{name}.* FROM rates join destinations ON (destinations.id = rates.destination_id) JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) where rates.tariff_id = #{id} AND f_error = 0 AND not_found_in_db = 0) AS temp
     WHERE ratedetails.rate_id = nrate_id #{type_sql} AND start_time = '#{options[:imp_time_from_type]}' AND end_time = '#{options[:imp_time_till_type]}'")
     end
@@ -763,8 +761,8 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
       ghost_percent = 'NULL'
     end
 
-    sql="INSERT INTO rates (tariff_id, destination_id	#{Confline.mor_11_extended? ? ', ghost_min_perc' : ''})
-    SELECT #{id}, destinations.id #{Confline.mor_11_extended? ? ", #{ghost_percent}" : ''} FROM #{name}
+    sql="INSERT INTO rates (tariff_id, destination_id, ghost_min_perc)
+    SELECT #{id}, destinations.id #{ghost_percent} FROM #{name}
     join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
     LEFT join rates on (destinations.id = rates.destination_id and rates.tariff_id = #{id})
     WHERE rates.id IS NULL AND f_error = 0"

@@ -195,10 +195,6 @@ class Confline < ActiveRecord::Base
     sep
   end
 
-  def Confline.mor_11_extended?
-    1 == self.get_value("MOR_11_extend", 0).to_i
-  end
-
 =begin
   Get information about chann spy functionality, whether it is enabled or not. Only
   admin can enable/disable it, hence no user_id is specified when calling get_value.

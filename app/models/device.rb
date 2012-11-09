@@ -59,9 +59,7 @@ class Device < ActiveRecord::Base
   # MK: subscribemwi is used by Asterisk 1.4, enable_mwi by Asterisk 1.8
 =end
   def update_mwi
-    if Confline.mor_11_extended?
-      self.subscribemwi = ((self.enable_mwi == 1) ? 'yes' : 'no')
-    end
+    self.subscribemwi = ((self.enable_mwi == 1) ? 'yes' : 'no')
   end
 
 =begin

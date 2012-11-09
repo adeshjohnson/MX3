@@ -2375,7 +2375,7 @@ GROUP BY terminators.id;").map { |t| t.id }
         self.credit = 0 if credit < 0
       end
 
-      if postpaid? and Confline.mor_11_extended?
+      if postpaid? 
         #prepaid user cannot have minimal charge enabled
         #if minimal charge is 0 it means it is disabled
         #so if minimal charge is not numeric or was not even supplied we convert

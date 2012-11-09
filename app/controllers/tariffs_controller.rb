@@ -1688,7 +1688,6 @@ class TariffsController < ApplicationController
       else
         @ard.price = params["price_#{@ard.id}".to_sym].to_d
         @ard.round = params["round_#{@ard.id}".to_sym].to_i
-        #@ard.ghost_percent = params["ghost_percent_#{@ard.id}".to_sym].to_d if mor_11_extend?
       end
       @ard.save
       flash[:status] = _('Rate_updated')

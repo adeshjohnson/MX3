@@ -1016,8 +1016,7 @@ class AccountingController < ApplicationController
     type = (user.postpaid.to_i == 1 or invoice.user.owner_id != 0) ? "postpaid" : "prepaid"
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
-    # min_type = (Confline.get_value("#{prepaid}Invoice_Show_Time_in_Minutes", owner).to_i == 1 and mor_11_extend? ) ? 1 : 0
-    show_avg_rate = 1 #(Confline.get_value("#{prepaid}Invoice_Add_Average_rate", owner).to_i == 1 and mor_11_extend? ) ? 1 : 0
+    show_avg_rate = 1 
     pdf, arr_t = invoice.generate_invoice_detailed_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal], show_avg_rate, params[:test].to_i == 1)
 
     if params[:email_or_not]

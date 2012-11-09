@@ -158,11 +158,9 @@
         $('e_wt').style.display = 'none';
         $('e_us').style.display = 'none';
         $('e_sd').style.display = 'none';
-    <%if mor_11_extend?%>
         $('a_api').style.display = 'none';
         $('a_expl').style.display = 'none';
         $('a_egk').style.display = 'none';
-    <%end%>
         if (val == "sms_email") {
             $('e_psr').style.display = '';
             $('e_nkcu').style.display = '';
@@ -181,13 +179,11 @@
             $('c_password').style.display = '';
             $('c_login').style.display = '';
         }
-    <%if mor_11_extend?%>
         if (val == 'api') {
             $('a_api').style.display = '';
             $('a_expl').style.display = '';
             $('a_egk').style.display = '';
         }
-    <%end%>
     }
     Disab('<%= params[:action] == "provider_new" ? "sms_email"  : @provider.provider_type.to_s %>')
 </script>

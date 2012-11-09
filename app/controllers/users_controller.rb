@@ -435,7 +435,7 @@ class UsersController < ApplicationController
       render :action => 'new' and return false
     end
 
-    if @user.postpaid? and Confline.mor_11_extended?
+    if @user.postpaid?
       @user.minimal_charge = params[:minimal_charge_value].to_i
       if params[:minimal_charge_value].to_i != 0 and params[:minimal_charge_date]
         year = params[:minimal_charge_date][:year].to_i
