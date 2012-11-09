@@ -955,6 +955,7 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
     return rate_details, rate_cur
   end
 
+end
 #module ActiveRecord
 #  module ConnectionAdapters
 #    class MysqlAdapter
