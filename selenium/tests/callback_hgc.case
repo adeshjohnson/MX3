@@ -336,9 +336,14 @@
 	<td>label=Test Device for Admin IAX2/103</td>
 </tr>
 <tr>
-	<td>select</td>
+	<td>type</td>
 	<td>dialplan[data1]</td>
-	<td>label=37060012346 - bbbbbbbbbbbb</td>
+	<td>37060012346</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
