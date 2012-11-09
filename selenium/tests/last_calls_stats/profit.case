@@ -43,6 +43,11 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/did_billing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/test/load_delta_sql/last_calls_stats/calls_for_profit</td>
 	<td></td>
 </tr>
@@ -103,6 +108,92 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--assert profit 1.2067-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/calls_per_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_user_price</td>
+	<td>1.2067</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/profit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_calls_profit</td>
+	<td>1.2067</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -135,11 +226,6 @@
 	<td>type</td>
 	<td>tariff_name</td>
 	<td>tariff_pro</td>
-</tr>
-<tr>
-	<td>selectWindow</td>
-	<td>null</td>
-	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -244,12 +330,12 @@
 <tr>
 	<td>assertText</td>
 	<td>profit_232</td>
-	<td>1.0000</td>
+	<td>2.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>profit_231</td>
-	<td>-1.0000</td>
+	<td>-2.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -264,7 +350,7 @@
 <tr>
 	<td>assertText</td>
 	<td>profit_233</td>
-	<td>-2.0000</td>
+	<td>-1.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -293,8 +379,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>total_profit</td>
-	<td>-7.0000</td>
+	<td>id=total_profit</td>
+	<td>-3.5417</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -428,8 +514,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>total_profit</td>
-	<td>3.0000</td>
+	<td>id=total_profit</td>
+	<td>7.6650</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -629,7 +715,7 @@
 <tr>
 	<td>assertText</td>
 	<td>profit_233</td>
-	<td>-2.0000</td>
+	<td>-1.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -654,7 +740,7 @@
 <tr>
 	<td>assertText</td>
 	<td>profit_232</td>
-	<td>1.0000</td>
+	<td>2.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -663,8 +749,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>total_profit</td>
-	<td>-7.0000</td>
+	<td>id=total_profit</td>
+	<td>-3.5417</td>
 </tr>
 </tbody></table>
 </body>
