@@ -2424,7 +2424,7 @@ Variables: (Names marked with * are required)
       user = User.find_by_id(user)
     end
     if cu == nil
-      if session and session[:usertype] == "accountant" and user.usertype == "admin"
+      if session and session[:usertype] == "accountant" and ['accountant', 'admin'].include?(user.usertype)
         dont_be_so_smart
         a = false
         if r.to_i == 1
