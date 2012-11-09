@@ -22,10 +22,8 @@
         acc_menu.add(33,0,'<%= _('Accounting') %>');
         <% if session[:acc_invoices_manage].to_i > 0 %>
         acc_menu.add(34,33,'<%= _('Invoices') %>','<%= Web_Dir %>/accounting/invoices')
-        <% if mor_11_extend? %>
         acc_menu.add(31,33,'<%= _('Credit_notes') %>','<%= Web_Dir %>/credit_note/list');
         acc_menu.add(32,33,'<%= _('Financial_statements') %>','<%= Web_Dir %>/accounting/financial_statements');
-        <% end %>
         <% end %>
         <% if can_see_finances? %>
         acc_menu.add(36,33,'<%= _('Payments') %>','<%= Web_Dir %>/payments/list');

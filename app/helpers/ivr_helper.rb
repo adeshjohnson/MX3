@@ -264,7 +264,7 @@ Generates selector and observer for <b>Transfer To</b> action.
 
   def transfer_to(action)
     transfers = ['IVR', 'DID', 'Device', 'Block']
-    transfers << 'Extension' if mor_11_extend?
+    transfers << 'Extension' 
     code = select_tag action.id, options_for_select(transfers.map { |t| [t, t] }, action.data1.to_s), {:id => "action_#{action.id}"}
     options = []
     case action.data1

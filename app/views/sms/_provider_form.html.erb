@@ -28,9 +28,7 @@
           <td><select id='prov_type' name="provider[provider_type]" onchange="Disab(this.value);" >
             <option value="sms_email" <%= 'selected' if @provider.provider_type.to_s == 'sms_email' %>  ><%= _('sms_email') %></option>
             <option value="clickatell" <%= 'selected' if @provider.provider_type.to_s == 'clickatell' %> ><%= _('clickatell') %></option>
-            <% if mor_11_extend? %>
-                <option value="api" <%= 'selected' if @provider.provider_type.to_s == 'api' %> ><%= _('API') %></option>
-            <% end %>
+            <option value="api" <%= 'selected' if @provider.provider_type.to_s == 'api' %> ><%= _('API') %></option>
           </select>
           </td>
         </tr>
@@ -120,27 +118,25 @@
           <td> <%= _('From') %>:</td>
           <td> <%= text_field 'provider', 'sms_from', "class" => "input" %></td>
         </tr>
-        <% if mor_11_extend? %>
-            <tr id="a_expl">
-              <td> <%= _('Allowed_variables') %>:</td>
-              <td> &lt%= DST %&gt - <%= _('destination') %> <br/> &lt%= MSG %&gt - <%= _('message') %> <br/>
-                &lt%= USRFIRSTNAME %&gt - <%= _('User_first_name') %> <br/> &lt%= USRLASTNAME %&gt
-                - <%= _('User_last_name') %> <br/> &lt%= CALLERID %&gt - <%= _('User_primary_device_caller_id') %> <br/>
-                <%= _('Example') %> : http://url?user=username&password=userpassword&api_id=ID&to=&lt%= DST
-                %&gt&src=&lt%= CALLERID %&gt&text=&lt%= MSG %&gt&from_name=&lt%= USRLASTNAME %&gt
-              </td>
-            </tr>
-            <tr id="a_api">
-              <td> <%= _('API_string') %>:</td>
-              <td> <%= text_field_tag 'api_string', @api_string.to_s, "class" => "input", :size => 150, :maxlenght => 249 %></td>
-            </tr>
-            <tr id="a_egk">
-              <td <%= tooltip(_('Explanation'), _('Checks_SMS_providers_response_for_Good_keywords_If_found_sms_will_be_charged')) %>> <%= _('Good_keywords') %>
-                :
-              </td>
-              <td> <%= text_field_tag 'api_good_keywords', @api_keywords.to_s, "class" => "input" %></td>
-            </tr>
-        <% end %>
+        <tr id="a_expl">
+          <td> <%= _('Allowed_variables') %>:</td>
+          <td> &lt%= DST %&gt - <%= _('destination') %> <br/> &lt%= MSG %&gt - <%= _('message') %> <br/>
+            &lt%= USRFIRSTNAME %&gt - <%= _('User_first_name') %> <br/> &lt%= USRLASTNAME %&gt
+            - <%= _('User_last_name') %> <br/> &lt%= CALLERID %&gt - <%= _('User_primary_device_caller_id') %> <br/>
+            <%= _('Example') %> : http://url?user=username&password=userpassword&api_id=ID&to=&lt%= DST
+            %&gt&src=&lt%= CALLERID %&gt&text=&lt%= MSG %&gt&from_name=&lt%= USRLASTNAME %&gt
+          </td>
+        </tr>
+        <tr id="a_api">
+          <td> <%= _('API_string') %>:</td>
+          <td> <%= text_field_tag 'api_string', @api_string.to_s, "class" => "input", :size => 150, :maxlenght => 249 %></td>
+        </tr>
+        <tr id="a_egk">
+          <td <%= tooltip(_('Explanation'), _('Checks_SMS_providers_response_for_Good_keywords_If_found_sms_will_be_charged')) %>> <%= _('Good_keywords') %>
+            :
+          </td>
+          <td> <%= text_field_tag 'api_good_keywords', @api_keywords.to_s, "class" => "input" %></td>
+        </tr>
       </table>
     </td>
   </tr>

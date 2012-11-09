@@ -14,17 +14,13 @@
         <th align="center" id='cc_dp_pinless_column'><%= _('Pinless') %></th>
         <th align="center" id='cc_dp_tell_time_column'><%= _('Tell_time') %></th>
         <th align="center" id='cc_dp_tell_balance_column'><%= _('Tell_balance') %></th>
-        <% if mor_11_extend? %>
-            <th align="center" id='cc_dp_tell_balance_after_call_column'><%= _('Tell_balance_after_call') %></th>
-        <% end %>
+        <th align="center" id='cc_dp_tell_balance_after_call_column'><%= _('Tell_balance_after_call') %></th>
         <th align="right" id='cc_dp_ask_number_pin_times_column'><%= _('Ask_number_pin_times') %></th>
         <th align="right" id='cc_dp_ask_dst_times_column'><%= _('Ask_dst_times') %></th>
         <th align="left" id='cc_dp_assignes_did_column'><%= _('Assigned_did') %></th>
         <th align="left" id='cc_dp_end_ivr_column'><%= _('End_IVR') %></th>
-        <% if mor_11_extend? %>
-            <th align="right" id='cc_dp_card_balance_lower_than_column'><%= _('If_Card_balance_lower_than') %></th>
-            <th align="center" id='cc_dp_balance_ivr_column'><%= _('Balance_IVR') %></th>
-        <% end %>
+        <th align="right" id='cc_dp_card_balance_lower_than_column'><%= _('If_Card_balance_lower_than') %></th>
+        <th align="center" id='cc_dp_balance_ivr_column'><%= _('Balance_IVR') %></th>
         <th></th>
         <th></th>
       </tr>
@@ -38,17 +34,13 @@
                 <td align="center" id="cc_dp_data8_<%= dp.id %>"> <%= b_check if dp.data8.to_i == 1 %><%= b_cross if dp.data8.to_i == 0 %></td>
                 <td align="center" id="cc_dp_data3_<%= dp.id %>"> <%= b_check if dp.tell_time || dp.tell_sec %><%= b_cross if !dp.tell_time && !dp.tell_sec %></td>
                 <td align="center" id="cc_dp_data4_<%= dp.id %>"> <%= b_check if dp.data4 == "1" %><%= b_cross if dp.data4 == "0" %></td>
-                <% if mor_11_extend? %>
-                    <td align="center" id="cc_dp_data10_<%= dp.id %>"> <%= dp.data10 == "1" ? b_check : b_cross %></td>
-                <% end %>
+                <td align="center" id="cc_dp_data10_<%= dp.id %>"> <%= dp.data10 == "1" ? b_check : b_cross %></td>
                 <td align="right" id="cc_dp_data5_<%= dp.id %>"> <%= h dp.data5 %></td>
                 <td align="right" id="cc_dp_data6_<%= dp.id %>"> <%= h dp.data6 %></td>
                 <%= render :partial => "/dids/dialplan_dids_list", :locals => {:plan => dp, :id => "cc_dp_dids_#{dp.id}"} %>
                 <td align="left" id="cc_dp_data9_<%= dp.id %>" <%= raw(nice_end_ivr_tooltip).html_safe %> >  <%= h @cc_end_ivr[dp.data9.to_i-1] %></td>
-                <% if mor_11_extend? %>
-                    <td align="right" id="cc_dp_data11_<%= dp.id %>"> <%= h dp.data11 %> </td>
-                    <td align="center" id="cc_dp_data12_<%= dp.id %>"> <%= dp.balance_ivr %> </td>
-                <% end %>
+                <td align="right" id="cc_dp_data11_<%= dp.id %>"> <%= h dp.data11 %> </td>
+                <td align="center" id="cc_dp_data12_<%= dp.id %>"> <%= dp.balance_ivr %> </td>
 
                 <td align="center"><%= link_to b_edit, {:action => 'edit', :id => dp.id}, :id => "cc_dp_edit_"+dp.id.to_s %></td>
                 <td align="center"><%= link_to(b_delete, {:action => 'destroy', :id => dp.id}, :id => "cc_dp_delete_"+dp.id.to_s, :confirm => _('Are_you_sure'), :method => :post) %></td>
@@ -69,12 +61,10 @@
     <th align="center" id='ap_dp_use_ani_clolumn'><%= _('Use_ANI') %>?</th>
     <th align="right" id='ap_dp_ask_pin_times_column'><%= _('Ask_pin_times') %></th>
     <th align="right" id='ap_dp_ask_dst_times_column'><%= _('Ask_dst_times') %></th>
-    <% if mor_11_extend? %>
-        <th align="right" id='ap_dp_tell_balance_after_enering_dst_column'><%= _('Tell_balance_after_entering_destination') %></th>
-    <% end %>
+    <th align="right" id='ap_dp_tell_balance_after_enering_dst_column'><%= _('Tell_balance_after_entering_destination') %></th>
     <th align="center" id='ap_dp_save_original_clid_collumn'<%= raw(tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation'))).html_safe %>><%= _('Save_original_CallerID') %></th>
     <th align="left" id='ap_dp_assigned_did_column'><%= _('Assigned_did') %></th>
-    <% if mor_11_extend? and calling_cards_active? %>
+    <% if calling_cards_active? %>
         <th align="center" id='ap_dp_use_cc_column'><%= _('Use_calling_card') %></th>
     <% end %>
     <th align="left" id='ap_dp_default_device_column'<%= raw(tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation'))).html_safe %>><%= _('Default_device') %></th>
@@ -90,12 +80,10 @@
             <td align="center" id="ap_dp_data3_<%= dp.id %>"> <%= b_check if dp.data3 == "1" %><%= b_cross if dp.data3 == "0" %></td>
             <td align="right" id="ap_dp_data1_<%= dp.id %>"> <%= h dp.data1 %> </td>
             <td align="right" id="ap_dp_data2_<%= dp.id %>"> <%= h dp.data2 %></td>
-            <% if mor_11_extend? %>
-                <td align="right" id="ap_dp_data6_<%= dp.id %>"> <%= dp.data6 == "1" ? b_check : b_cross %></td>
-            <% end %>
+            <td align="right" id="ap_dp_data6_<%= dp.id %>"> <%= dp.data6 == "1" ? b_check : b_cross %></td>
             <td align="center" id="ap_dp_data4_<%= dp.id %>" <%= raw(tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation'))).html_safe %>> <%= b_check if dp.data4 == "1" %><%= b_cross if dp.data4 == "0" %></td>
             <%= render :partial => "/dids/dialplan_dids_list", :locals => {:plan => dp, :id => "ap_dp_dids_#{dp.id}"} %>
-            <% if mor_11_extend? and calling_cards_active? %>
+            <% if calling_cards_active? %>
                 <td align="center" id="ap_dp_data7_<%= dp.id %>"> <%= dp.data7 == "0" ? b_cross : b_check %></td>
             <% end %>
             <td align="left" id="ap_dp_data5_<%= dp.id %>"<%= raw tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation')).html_safe %> >
@@ -209,34 +197,32 @@
   <% end %>
 </table>
 
-<% if mor_11_extend? %>
-    <br/>
-    <br/>
-    <br/>
-    <b><%= _('Quickforward') %></b>
-    <br/>
-    <br/>
-    <table class='maintable' width="100%">
-      <tr>
-        <th align="left" id="quickforward_dp_name"><%= _("Name") %></th>
-        <th align="left" id="quickforward_dp_user"><%= _("User") %></th>
-        <th align="left" id="quickforward_dp_device"><%= _("Device") %></th>
-        <th align="left" id="quickforward_dp_diversion"><%= _("Use_diversion_instead_of_callerid") %></th>
-        <th></th>
-        <th></th>
+<br/>
+<br/>
+<br/>
+<b><%= _('Quickforward') %></b>
+<br/>
+<br/>
+<table class='maintable' width="100%">
+<tr>
+<th align="left" id="quickforward_dp_name"><%= _("Name") %></th>
+<th align="left" id="quickforward_dp_user"><%= _("User") %></th>
+<th align="left" id="quickforward_dp_device"><%= _("Device") %></th>
+<th align="left" id="quickforward_dp_diversion"><%= _("Use_diversion_instead_of_callerid") %></th>
+<th></th>
+<th></th>
+</tr>
+<% if @quickforward_dialplans %>
+  <% @quickforward_dialplans.each_with_index { |plan, index| %>
+      <tr class="row<%= index%2 %>">
+	<td align="left" id="quickforward_dp_<%= plan.id %>"><%= plan.name %></td>
+	<td align="left" id="quickforward_dp_user_<%= plan.id %>"><%= plan.user_name %></td>
+	<td align="left" id="quickforward_dp_device_id_<%= plan.id %>"><%= plan.device_type %><%= "/" if not plan.device_name.to_s.blank? %><%= plan.device_name %></td>
+	<td align="left" id="quickforward_dp_data10_<%= plan.id %>"><%= plan.data10 == "0" ? b_cross : b_check %></td>
+	<td align="center" id="ckforward_dp_edit_<%= plan.id %>"><%= link_to b_edit, :action => 'edit', :id => plan.id %></td>
+	<td align="center" id="quickforward_dp_delete_<%= plan.id %>"><%= link_to b_delete, {:action => 'destroy', :id => plan.id}, :confirm => _('are_you_sure'), :method => "post" %></td>
       </tr>
-      <% if @quickforward_dialplans %>
-          <% @quickforward_dialplans.each_with_index { |plan, index| %>
-              <tr class="row<%= index%2 %>">
-                <td align="left" id="quickforward_dp_<%= plan.id %>"><%= plan.name %></td>
-                <td align="left" id="quickforward_dp_user_<%= plan.id %>"><%= plan.user_name %></td>
-                <td align="left" id="quickforward_dp_device_id_<%= plan.id %>"><%= plan.device_type %><%= "/" if not plan.device_name.to_s.blank? %><%= plan.device_name %></td>
-                <td align="left" id="quickforward_dp_data10_<%= plan.id %>"><%= plan.data10 == "0" ? b_cross : b_check %></td>
-                <td align="center" id="ckforward_dp_edit_<%= plan.id %>"><%= link_to b_edit, :action => 'edit', :id => plan.id %></td>
-                <td align="center" id="quickforward_dp_delete_<%= plan.id %>"><%= link_to b_delete, {:action => 'destroy', :id => plan.id}, :confirm => _('are_you_sure'), :method => "post" %></td>
-              </tr>
-          <% } %>
-      <% end %>
-    </table>
+  <% } %>
 <% end %>
+</table>
 

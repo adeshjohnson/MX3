@@ -9,10 +9,8 @@
 <%= form_tag(:action => :ghost_percent_update, :id => @tariff.id, :rate_id => @rate.id) do %>
     <table class="simple">
       <tr>
-        <% if mor_11_extend? %>
-            <td><%= _('Ghost_percent') %> :</td>
-            <td id="ghost_percent"><%= text_field 'rate', 'ghost_min_perc', :size => "7", "class" => "input" %> %</td>
-        <% end %>
+      <td><%= _('Ghost_percent') %> :</td>
+      <td id="ghost_percent"><%= text_field 'rate', 'ghost_min_perc', :size => "7", "class" => "input" %> %</td>
       </tr>
     </table>
     <br/><br/>

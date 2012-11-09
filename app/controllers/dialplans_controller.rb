@@ -70,7 +70,7 @@ class DialplansController < ApplicationController
       end
       @cc_dialplans = Dialplan.find(:all, :conditions => {:dptype => 'callingcard', :user_id => current_user.get_corrected_owner_id})
     end
-    if @dp.dptype == 'callingcard' and mor_11_extend?
+    if @dp.dptype == 'callingcard' 
       @balance_ivrs = current_user.ivrs.find(:all)
     end
 

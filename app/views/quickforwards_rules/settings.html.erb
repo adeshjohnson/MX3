@@ -6,7 +6,6 @@
     <td><b><%= _('Call_via_Quick_forward_DID_will_not_play_Balance_and_Time') %>:</b></td>
     <td></td>
   </tr>
-  <% if mor_11_extend? %>
       <%= form_tag :action => 'update_settings' do %>
         <tr>
           <td width="30"></td>
@@ -29,5 +28,4 @@
           <td><%= submit_tag _('Change'), :disable_with => _('Processing..') %></td>
         </tr>
       <% end %>
-  <% end %>
 </table>

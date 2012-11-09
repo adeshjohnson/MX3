@@ -24,10 +24,8 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= _("Destination") %>:
       <%= text_field_tag("s_destination", h(@options[:s_destination].to_s)) %>
-      <% if mor_11_extend? %>
-          <%= _('Source') %>:
-          <%= text_field_tag("s_source", h(@options[:source].to_s)) %>
-      <% end %>
+      <%= _('Source') %>:
+      <%= text_field_tag("s_source", h(@options[:source].to_s)) %>
 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= submit_tag _('Search'), :disable_with => _('Processing..') %>

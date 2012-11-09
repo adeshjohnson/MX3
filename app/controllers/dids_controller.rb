@@ -356,11 +356,7 @@ class DidsController < ApplicationController
 
       @cbdps = @dialplan_source.find(:all, :conditions => "dptype = 'callback' AND data1 != #{@did.id}", :order => "name ASC") if callback_active?  and !qf_rule_collisions
 
-      #if mor_11_extend?
       @qfddps = @dialplan_source.find(:all, :conditions => "dptype = 'quickforwarddids' AND id != 1", :order => "name ASC")
-      #else
-      #  @qfddps = current_user.dialplans.find(:all, :conditions => "dptype = 'quickforwarddids'", :order => "name ASC")
-      # end
 
       @pbxfdps = @dialplan_source.find(:all, :conditions => "dptype = 'pbxfunction'", :order => "name ASC") if !qf_rule_collisions
       @ivrs = @dialplan_source.find(:all, :conditions => "dptype = 'ivr'", :order => "name ASC")  if !qf_rule_collisions

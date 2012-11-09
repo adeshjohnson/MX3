@@ -383,18 +383,16 @@
           <td><b><%= _('API_allow_Registration') %>:</b></td>
           <td><%= check_box_tag 'api_allow_registration', 1, (Confline.get_value("API_Allow_registration_ower_API").to_i == 1) %> </td>
         </tr>
-        <% if mor_11_extend? %>
-            <tr <%= tooltip(_('API_allow_Payments'), _('API_allow_Payments_Explanation')).html_safe %> >
-              <td></td>
-              <td><b><%= _('API_allow_Payments') %>:</b></td>
-              <td><%= check_box_tag 'api_allow_payments', 1, (Confline.get_value("API_Allow_payments_ower_API").to_i == 1) %> </td>
-            </tr>
-            <tr <%= tooltip(_('API_Payment_Confirmation'), _('API_Payment_Confirmation_Explanation')).html_safe %> >
-              <td></td>
-              <td><b><%= _('API_Payment_Confirmation') %>:</b></td>
-              <td><%= check_box_tag 'api_payment_confirmation', 1, (Confline.get_value("API_payment_confirmation").to_i == 1) %> </td>
-            </tr>
-        <% end %>
+        <tr <%= tooltip(_('API_allow_Payments'), _('API_allow_Payments_Explanation')).html_safe %> >
+          <td></td>
+          <td><b><%= _('API_allow_Payments') %>:</b></td>
+          <td><%= check_box_tag 'api_allow_payments', 1, (Confline.get_value("API_Allow_payments_ower_API").to_i == 1) %> </td>
+        </tr>
+        <tr <%= tooltip(_('API_Payment_Confirmation'), _('API_Payment_Confirmation_Explanation')).html_safe %> >
+          <td></td>
+          <td><b><%= _('API_Payment_Confirmation') %>:</b></td>
+          <td><%= check_box_tag 'api_payment_confirmation', 1, (Confline.get_value("API_payment_confirmation").to_i == 1) %> </td>
+        </tr>
         <%= raw setting_boolean(_('Allow_Devices_To_Check_Ballance'), 'devices_check_ballance', "Devices_Check_Ballance") %>
         <%= raw setting_boolean(_('Allow_Devices_To_Check_Rate'), 'devices_check_rate', "Devices_Check_Rate") %>
         <%= raw setting_boolean(_('Disable_hash_checking'), 'api_disable_hash_checking', "API_Disable_hash_checking") %>

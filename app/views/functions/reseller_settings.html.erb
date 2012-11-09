@@ -80,10 +80,8 @@
             <%= check_box_tag('use_terms_and_conditions', 1, (!@agreement or @agreement.value.empty? or @agreement.value == "0") ? false : true) %>
           </td>
         </tr>
-        <% if mor_11_extend? %>
-            <%= raw setting_boolean(_('Enable_VAT_checking_for_EU_companies'), 'enable_vat_checking', "Registration_Enable_VAT_checking", session[:user_id], {:tip => tooltip(_('VAT_checking_for_EU_companies'), _('VAT_checking_for_EU_companies_explanation'))}) %>
-            <%= raw setting_boolean(_('Allow_VAT_blank_for_EU_companies'), 'allow_vat_blank', "Registration_allow_vat_blank", session[:user_id], {:tip => tooltip(_('VAT_blank_for_EU_companies'), _('VAT_blank_for_EU_companies_explanation'))}) %>
-        <% end %>
+        <%= raw setting_boolean(_('Enable_VAT_checking_for_EU_companies'), 'enable_vat_checking', "Registration_Enable_VAT_checking", session[:user_id], {:tip => tooltip(_('VAT_checking_for_EU_companies'), _('VAT_checking_for_EU_companies_explanation'))}) %>
+        <%= raw setting_boolean(_('Allow_VAT_blank_for_EU_companies'), 'allow_vat_blank', "Registration_allow_vat_blank", session[:user_id], {:tip => tooltip(_('VAT_blank_for_EU_companies'), _('VAT_blank_for_EU_companies_explanation'))}) %>
       </table>
     </div>
 

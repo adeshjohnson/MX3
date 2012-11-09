@@ -92,7 +92,7 @@ class RecordingsController < ApplicationController
     (@total_pages % session[:items_per_page] > 0) ? (@rest = 1) : (@rest = 0)
     @total_pages = @total_pages / session[:items_per_page] + @rest
     @page_select_options = {:action => 'show', :controller => "recordings", :show_rec => @s_dev}
-    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend?)
+    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1)
   end
 
   def play_rec
@@ -199,7 +199,7 @@ class RecordingsController < ApplicationController
         :s_source => @search_source,
         :s_destination => @search_destination
     }
-    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend?)
+    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1)
   end
 
 
@@ -264,7 +264,7 @@ class RecordingsController < ApplicationController
         :s_destination => @search_destination
     }
 
-    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend?)
+    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1)
   end
 
 =begin rdoc
@@ -483,7 +483,7 @@ class RecordingsController < ApplicationController
 
     @server_path = get_server_path(1)
     @remote_server_path = get_server_path(0)
-    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1 && mor_11_extend?)
+    @show_recordings_with_zero_billsec = (Confline.get_value('Show_recordings_with_zero_billsec').to_i == 1)
   end
 
 =begin  rdoc

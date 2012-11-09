@@ -27,9 +27,7 @@
   <%= raw setting_boolean(_('Show_only_main_page'), 'show_only_main_page', "Show_only_main_page") %>
   <%= raw setting_boolean(_('Show_forgot_password'), 'show_forgot_password', "Show_forgot_password") %>
   <%= raw setting_boolean(_('Hide_recordings_for_all_users'), 'hide_recordings_for_all_users', "Hide_recordings_for_all_users") %>
-  <% if mor_11_extend? %>
-      <%= raw setting_boolean(_('Show_recordings_with_zero_billsec'), 'show_recordings_with_zero_billsec', 'Show_recordings_with_zero_billsec') %>
-  <% end %>
+  <%= raw setting_boolean(_('Show_recordings_with_zero_billsec'), 'show_recordings_with_zero_billsec', 'Show_recordings_with_zero_billsec') %>
   <tr>
     <td></td>
     <td><b><%= _('Default_Number_Decimal') %>:</b></td>

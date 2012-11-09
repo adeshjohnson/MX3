@@ -794,7 +794,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
 
       @res_prov << rr
       @not_disabled_prov += 1 if prov.active?(@lcr.id) == 1
-      @active_prov += 1 if rr['rate'] and rr['prefix'] and prov.active?(@lcr.id) == 1 and (prov.device.user_id.to_i != @user.id.to_i or !mor_11_extend?) 
+      @active_prov += 1 if rr['rate'] and rr['prefix'] and prov.active?(@lcr.id) == 1 and (prov.device.user_id.to_i != @user.id.to_i) 
 
     end
 
@@ -1052,11 +1052,9 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     update_confline("Invoice_To_Pay_Line", params[:invoice_to_pay_line], session[:user_id])
     update_confline("Invoice_End_Title", params[:invoice_end_title])
     Confline.set_value("Invoice_Show_Balance_Line", params[:invoice_show_balance_line])
-    if mor_11_extend?
-      Confline.set_value("Invoice_Add_Average_rate", params[:invoice_add_average_rate].to_i)
-      Confline.set_value("Invoice_Show_Time_in_Minutes", params[:invoice_show_time_in_minutes].to_i)
-      Confline.set_value('Show_recordings_with_zero_billsec', params[:show_recordings_with_zero_billsec].to_i)
-    end
+    Confline.set_value("Invoice_Add_Average_rate", params[:invoice_add_average_rate].to_i)
+    Confline.set_value("Invoice_Show_Time_in_Minutes", params[:invoice_show_time_in_minutes].to_i)
+    Confline.set_value('Show_recordings_with_zero_billsec', params[:show_recordings_with_zero_billsec].to_i)
     @invoice = (params[:i1]).to_i + (params[:i2]).to_i + (params[:i3]).to_i + (params[:i4]).to_i + (params[:i5]).to_i + (params[:i6]).to_i
     update_confline("Invoice_default", @invoice)
     Confline.set_value("Round_finals_to_2_decimals", params[:invoice_number_digits].to_i)
@@ -1087,10 +1085,8 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Confline.set_value("Prepaid_Invoice_Balance_Line", params[:prepaid_invoice_balance_line], session[:user_id])
     Confline.set_value("Prepaid_Invoice_To_Pay_Line", params[:prepaid_invoice_to_pay_line], session[:user_id])
     Confline.set_value("Prepaid_Invoice_End_Title", params[:prepaid_invoice_end_title])
-    if mor_11_extend?
-      Confline.set_value("Prepaid_Invoice_Add_Average_rate", params[:prepaid_invoice_add_average_rate].to_i)
-      Confline.set_value("Prepaid_Invoice_Show_Time_in_Minutes", params[:prepaid_invoice_show_time_in_minutes].to_i)
-    end
+    Confline.set_value("Prepaid_Invoice_Add_Average_rate", params[:prepaid_invoice_add_average_rate].to_i)
+    Confline.set_value("Prepaid_Invoice_Show_Time_in_Minutes", params[:prepaid_invoice_show_time_in_minutes].to_i)
     Confline.set_value("Prepaid_Invoice_Show_Balance_Line", params[:prepaid_invoice_show_balance_line])
     @invoice_prepaid = (params[:i1_prepaid]).to_i + (params[:i2_prepaid]).to_i + (params[:i3_prepaid]).to_i + (params[:i4_prepaid]).to_i + (params[:i5_prepaid]).to_i + (params[:i6_prepaid]).to_i
     Confline.set_value("Prepaid_Invoice_default", @invoice_prepaid)

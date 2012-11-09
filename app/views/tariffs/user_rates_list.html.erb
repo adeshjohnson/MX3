@@ -39,9 +39,7 @@
         <th align="left"><%= _('Name') %></th>
         <th align="left"><%= _('Type') %></th>
         <th align="center"><%= _('Destinations') %></th>
-        <% if mor_11_extend? %>
-            <th align="right"><%= _('Ghost_percent') %> %</th>
-        <% end %>
+        <th align="right"><%= _('Ghost_percent') %> %</th>
         <th align="center"><%= _('Rate') %>  (<%= @tariff.currency %>)</th>
         <th align="center"><%= _('Round_by') %></th>
         <th></th>
@@ -82,12 +80,10 @@
                 <td id="directions_<%= rate_id %>" align="center"><%= link_to b_view + _('View'), :controller => :destination_groups, :action => :destinations, :id => res['dg_id'] %>
                   (<%= res['destinations'] %>)
                 </td>
-                <% if mor_11_extend? %>
-                    <% if @can_edit == true %>
-                        <td align="right" id="ghost_percent_<%= rate_id %>"><%= text_field_tag "gch"+res['dg_id'].to_s, res['ghost_min_perc'], "class" => "input", "size" => "9" %></td>
-                    <% else %>
-                        <td align="right" id="ghost_percent_<%= rate.id %>"><%= nice_number rate.ghost_min_perc %></td>
-                    <% end %>
+                <% if @can_edit == true %>
+                    <td align="right" id="ghost_percent_<%= rate_id %>"><%= text_field_tag "gch"+res['dg_id'].to_s, res['ghost_min_perc'], "class" => "input", "size" => "9" %></td>
+                <% else %>
+                    <td align="right" id="ghost_percent_<%= rate.id %>"><%= nice_number rate.ghost_min_perc %></td>
                 <% end %>
                 <% if show_rr %>
                     <% if @can_edit == true %>
@@ -120,7 +116,7 @@
       <% if @can_edit == true %>
           <% if @allow_edit %>
               <tr>
-                <th colspan="<%= mor_11_extend? ? 8 : 7 %>" align="right"><%= submit_tag _('Update'), :disable_with => _('Processing..') %></th>
+                <th colspan="8" align="right"><%= submit_tag _('Update'), :disable_with => _('Processing..') %></th>
               </tr>
           <% end %>
       <% end %>

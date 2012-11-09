@@ -29,7 +29,7 @@
     settings_menu.add(120, 119, '<%= _('Terminators') %>', '<%= Web_Dir %>/terminators/list');
     settings_menu.add(121, 119, '<%= _('Hidden') %>', '<%= Web_Dir %>/providers/list?s_hidden=1');
     settings_menu.add(122, 117, '<%= _('LCR') %>', '<%= Web_Dir %>/lcrs/list');
-    <% if current_user.is_admin? and reseller_pro_active? and mor_11_extend? %>
+    <% if current_user.is_admin? and reseller_pro_active? %>
     settings_menu.add(156, 122, '<%= _('Copy_LCR') %>', '<%= Web_Dir %>/lcrs/clone_options');
     <% end %>
     settings_menu.add(123, 117, '<%= _('Tariffs') %>', '<%= Web_Dir %>/tariffs/list');
@@ -63,10 +63,8 @@
     settings_menu.add(235, 234, '<%= _('Services') %>', '<%= Web_Dir %>/services/list');
     settings_menu.add(236, 235, '<%= _('Subscriptions') %>', '<%= Web_Dir %>/services/subscriptions');
     settings_menu.add(237, 234, '<%= _('Invoices') %>', '<%= Web_Dir %>/accounting/invoices');
-    <%if mor_11_extend? %>
     settings_menu.add(246, 234, '<%= _('Credit_notes') %>', '<%= Web_Dir %>/credit_note/list');
     settings_menu.add(247, 234, '<%= _('Financial_statements') %>', '<%= Web_Dir %>/accounting/financial_statements');
-    <% end %>
     settings_menu.add(238, 234, '<%= _('Payments') %>', '<%= Web_Dir %>/payments/list');
     settings_menu.add(239, 234, '<%= _('Vouchers') %>', '<%= Web_Dir %>/vouchers/vouchers');
 

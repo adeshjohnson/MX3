@@ -197,23 +197,21 @@
         <%= _('Unlimited') %>? <%= check_box_tag 'unlimited', "1", (@user.credit_unlimited?) %>
       </td>
     </tr>
-    <% if mor_11_extend? %>
-        <tr id="minimal_charge_value_row" <%= 'style="display: none;"'.html_safe if @user.prepaid? %>>
-          <td id="minimal_charge_name"><%= _('Minimal Charge for Calls') %>:</td>
-          <td>
-            <% text_field 'user', 'credit', "class" => "input" %>
-            <%= text_field_tag 'minimal_charge_value', @user.minimal_charge, "class" => "input", :min => 0, :size => "10", :maxlength => "10" %>
-            <%= _('Enabled') %>
-            ? <%= check_box_tag 'minimal_charge_enabled', 'minimal_charge_enabled', @user.minimal_charge_enabled? %> </td>
-        </tr>
-        <tr id="minimal_charge_date_row"  <%= 'style="display: none;"' if @user.prepaid? %>>
-          <td> <%= _("Minimal_charge_for_calls_date") %>:</td>
-          <td>
-            <%= select_year((@user.minimal_charge_enabled? ? @user.minimal_charge_start_at : Date.today), :end_year => Date.today.year+1, :prefix => 'minimal_charge_date') %>
-            <%= select_month((@user.minimal_charge_enabled? ? @user.minimal_charge_start_at : Date.today), :use_month_numbers => true, :prefix => 'minimal_charge_date') %>
-          </td>
-        </tr>
-    <% end %>
+    <tr id="minimal_charge_value_row" <%= 'style="display: none;"'.html_safe if @user.prepaid? %>>
+      <td id="minimal_charge_name"><%= _('Minimal Charge for Calls') %>:</td>
+      <td>
+        <% text_field 'user', 'credit', "class" => "input" %>
+        <%= text_field_tag 'minimal_charge_value', @user.minimal_charge, "class" => "input", :min => 0, :size => "10", :maxlength => "10" %>
+        <%= _('Enabled') %>
+       ? <%= check_box_tag 'minimal_charge_enabled', 'minimal_charge_enabled', @user.minimal_charge_enabled? %> </td>
+    </tr>
+    <tr id="minimal_charge_date_row"  <%= 'style="display: none;"' if @user.prepaid? %>>
+      <td> <%= _("Minimal_charge_for_calls_date") %>:</td>
+      <td>
+        <%= select_year((@user.minimal_charge_enabled? ? @user.minimal_charge_start_at : Date.today), :end_year => Date.today.year+1, :prefix => 'minimal_charge_date') %>
+        <%= select_month((@user.minimal_charge_enabled? ? @user.minimal_charge_start_at : Date.today), :use_month_numbers => true, :prefix => 'minimal_charge_date') %>
+      </td>
+    </tr>
 <% else %>
     <% if current_user.is_accountant? and session[:acc_user_create_opt_5] == 1 %>
         <tr>
@@ -253,17 +251,13 @@
     Event.observe(window, 'load', function () {
         Event.observe($('user_postpaid_1'), 'click', function () {
             Element.setStyle('credit-row', {display:'table-row'});
-            <%if mor_11_extend?%>
             Element.setStyle('minimal_charge_value_row', {display:'table-row'});
             Element.setStyle('minimal_charge_date_row', {display:'table-row'});
-            <% end %>
         });
         Event.observe($('user_postpaid_2'), 'click', function () {
             Element.setStyle('credit-row', {display:'none'});
-            <%if mor_11_extend?%>
             Element.setStyle('minimal_charge_value_row', {display:'none'});
             Element.setStyle('minimal_charge_date_row', {display:'none'});
-            <% end %>
         });
 
         if ($('minimal_charge_enabled').checked) {
@@ -271,7 +265,6 @@
         } else {
             set_minimal_charge_controls(true);
         }
-        <%if mor_11_extend?%>
         Event.observe($('minimal_charge_enabled'), 'change', function () {
             if ($('minimal_charge_enabled').checked) {
                 set_minimal_charge_controls(false);
@@ -282,7 +275,6 @@
         });
 
         Event.observe($('minimal_charge_value'), 'onkeypress', isDecimal);
-        <% end %>
     });
     //]]>
 </script>
@@ -375,14 +367,6 @@
       <td><%= _('Responsible_accountant') %>:</td>
       <td><%= select_tag('user[responsible_accountant_id]', options_for_select([[_('Not_selected'), "-1"]] + @responsible_accountants.collect { |accountant| [nice_user(accountant), accountant.id] }, @user.responsible_accountant_id), {:disabled => accountant?}) %></td>
     </tr>
-<% end %>
-<% unless mor_11_extend? %>
-    <% if monitorings_addon_active? and (params[:action] == 'edit' or params[:action] == 'update') and current_user.show_active_calls? and not @chanspy_disabled %>
-        <tr <%= tooltip(_('ChanSpy_Device'), _('ChanSpy_Device_Explanation')) %> >
-          <td><%= _('ChanSpy_Device') %>:</td>
-          <td><%= select_tag('user[spy_device_id]', options_for_select([[_('Not_selected'), "0"]] + @devices.collect { |t| [nice_device(t, {:image => false}), t.id] }, @user.try(:spy_device_id))) %></td>
-        </tr>
-    <% end %>
 <% end %>
 </table>
 </td>

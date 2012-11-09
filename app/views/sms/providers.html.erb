@@ -113,7 +113,7 @@
         </td>
 
         <td id="sms_tariff_name_<%= prov.id %>"><%= h prov.sms_tariff.name if prov.sms_tariff %></td>
-        <td id="provider_type_<%= prov.id %>" <%= tooltip(_('Link'), prov.login) if prov.api? and mor_11_extend? %> >
+        <td id="provider_type_<%= prov.id %>" <%= tooltip(_('Link'), prov.login) if prov.api? %> >
           <% if prov.provider_type.to_s == "clickatell" %>
               <a id="provider_type_link_<%= prov.id %>" target="blank" href="http://www.clickatell.com/login.php"><%= prov.provider_type %></a>
           <% else %>

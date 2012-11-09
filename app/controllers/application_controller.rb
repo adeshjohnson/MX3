@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
 
   # addons
   helper_method :callback_active?, :call_shop_active?, :reseller_active?, :payment_gateway_active?, :calling_cards_active?, :sms_active?, :recordings_addon_active?, :monitorings_addon_active?, :skp_active?
-  helper_method :allow_pg_extension, :erp_active?, :admin?, :reseller?, :user?, :accountant?, :reseller_pro_active?, :show_recordings?, :mor_11_extend?, :ast_18?, :provider_billing_active?, :providers_enabled_for_reseller?, :web_phone_active?
+  helper_method :allow_pg_extension, :erp_active?, :admin?, :reseller?, :user?, :accountant?, :reseller_pro_active?, :show_recordings?, :ast_18?, :provider_billing_active?, :providers_enabled_for_reseller?, :web_phone_active?
   before_filter :log_session_size, :set_charset
   before_filter :set_current_user, :set_timezone
   before_filter :redirect_callshop_manager
@@ -1571,7 +1571,6 @@ class ApplicationController < ActionController::Base
     session[:sms_service_active] = user.sms_service_active
     session[:help_link] = Confline.get_value("Hide_HELP_banner").to_i == 0 ? 1 : 0
     session[:callc_main_stats_options]= nil
-    session[:mor_11_extend] = Confline.get_value("MOR_11_extend", 0).to_i
     if Confline.where('name = "System_time_zone_offset"').first
       session[:time_zone_offset] = Confline.get_value('System_time_zone_ofset').to_i
     else
@@ -3006,11 +3005,6 @@ Variables: (Names marked with * are required)
     (defined?(WP_Active) and WP_Active.to_i == 1)
   end
 
-  def mor_11_extend?
-    # params[:controller].to_s == 'api' ?  1 == Confline.get_value("MOR_11_extend", 0).to_i :  1 == session[:mor_11_extend].to_i
-    true
-  end
-
   def ast_18?
     (defined?(AST_18) and AST_18.to_i == 1)
   end
@@ -3020,8 +3014,9 @@ Variables: (Names marked with * are required)
     (!ccl_active.blank? and ccl_active.to_i == 1)
   end
 
+  # technine_skola :D
   def allow_pg_extension(name)
-    name == 'HSBC' ? mor_11_extend? : true
+    true
   end
 
   def last_day_month(date)

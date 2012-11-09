@@ -17,16 +17,12 @@
                 <th align="center" id='cc_dp_tell_time_column'><%= _('Tell_time') %></th>
                 <th align="center" id='cc_dp_tell_seconds_column'><%= _('Tell_seconds') %></th>
                 <th align="center" id='cc_dp_tell_balance_column'><%= _('Tell_balance') %></th>
-                <% if mor_11_extend? %>
-                    <th align="center" id='cc_dp_tell_balance_after_call_column'><%= _('Tell_balance_after_call') %></th>
-                <% end %>
+                <th align="center" id='cc_dp_tell_balance_after_call_column'><%= _('Tell_balance_after_call') %></th>
                 <th align="right" id='cc_dp_ask_number_pin_times_column'><%= _('Ask_number_pin_times') %></th>
                 <th align="right" id='ask_dst_times_column'><%= _('Ask_dst_times') %></th>
                 <th align="center" id='cc_dp_end_ivr_column' <%= raw(nice_end_ivr_tooltip).html_safe %> ><%= _('End_IVR') %></th>
-                <% if mor_11_extend? %>
-                    <th align="right" id='cc_dp_card_balance_lower_than_column'><%= _('If_Card_balance_lower_than') %></th>
-                    <th id="balance_ivr_value" align="center"><%= _('Balance_IVR') %></th>
-                <% end %>
+                <th align="right" id='cc_dp_card_balance_lower_than_column'><%= _('If_Card_balance_lower_than') %></th>
+                <th id="balance_ivr_value" align="center"><%= _('Balance_IVR') %></th>
                 <th></th>
 
 
@@ -47,9 +43,7 @@
                 <td align="center"> <%= check_box_tag 'dialplan[data3]', 1, (@dp.tell_time || @dp.tell_sec) %></td>
                 <td align="center"> <%= check_box_tag 'tell_seconds', 1, (@dp.data3 == "2") %></td>
                 <td align="center"> <%= check_box_tag 'dialplan[data4]', 1, (@dp.data4 == "1") %></td>
-                <% if mor_11_extend? %>
-                    <td align="center"> <%= check_box_tag 'dialplan[data10]', 1, (@dp.data10 == "1") %></td>
-                <% end %>
+                <td align="center"> <%= check_box_tag 'dialplan[data10]', 1, (@dp.data10 == "1") %></td>
                 <td align="right"> <%= text_field_tag 'dialplan[data5]', @dp.data5, "class" => "input", :size => "10", :maxlength => "10" %></td>
                 <td align="right"> <%= text_field_tag 'dialplan[data6]', @dp.data6, "class" => "input", :size => "10", :maxlength => "10" %></td>
                 <td align="center"><select name="end_ivr">
@@ -58,16 +52,14 @@
                   <% } %>
                 </select>
                 </td>
-                <% if mor_11_extend? %>
-                    <td align="right"><%= text_field_tag 'dialplan[data11]', @dp.data11, "class" => "input", :size => "10", :maxlength => "10", :disabled => (@balance_ivrs.size.to_i == 0) %></td>
-                    <td align="center">
-                      <select name="dialplan[data12]" id="ivr_balance">
-                        <% for ivr in @balance_ivrs %>
-                            <option value=<%= ivr.id %> <%= 'selected' if @dp.data12.to_i == ivr.id and @dp.data11 != '0' %>> <%= ivr.name %> </option>
-                        <% end %>
-                      </select>
-                    </td>
-                <% end %>
+                <td align="right"><%= text_field_tag 'dialplan[data11]', @dp.data11, "class" => "input", :size => "10", :maxlength => "10", :disabled => (@balance_ivrs.size.to_i == 0) %></td>
+                <td align="center">
+                  <select name="dialplan[data12]" id="ivr_balance">
+                    <% for ivr in @balance_ivrs %>
+                        <option value=<%= ivr.id %> <%= 'selected' if @dp.data12.to_i == ivr.id and @dp.data11 != '0' %>> <%= ivr.name %> </option>
+                    <% end %>
+                  </select>
+                </td>
                 <td align="center"><%= image_submit_tag 'icons/edit.png', :title => _('Edit') %></td>
               </tr>
 
@@ -126,11 +118,9 @@
             <th align="center" id='ap_dp_use_ani_column'><%= _('Use_ANI') %>?</th>
             <th align="right" id='ap_dp_ask_number_pin_times_column'><%= _('Ask_number_pin_times') %></th>
             <th align="right" id='ap_dp_ask_dst_times_column'><%= _('Ask_dst_times') %></th>
-            <% if mor_11_extend? %>
-                <th align="right" id='ap_dp_tell_balance_after_entering_dst_column'><%= _('Tell_balance_after_entering_destination') %></th>
-                <% if calling_cards_active? %>
-                    <th align="center" id='ap_dp_use_cc_column'><%= _('Use_calling_card') %></th>
-                <% end %>
+            <th align="right" id='ap_dp_tell_balance_after_entering_dst_column'><%= _('Tell_balance_after_entering_destination') %></th>
+            <% if calling_cards_active? %>
+                <th align="center" id='ap_dp_use_cc_column'><%= _('Use_calling_card') %></th>
             <% end %>
             <th align="center" <%= raw(tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation'))).html_safe %>><%= _('Save_original_CallerID') %></th>
             <th align="center" id='ap_dp_default_device_column' <%= raw(tooltip(_('dialplan_def_device'), _('dialplan_def_device_explanation'))).html_safe %>><%= _('Default_device') %></th>
@@ -143,15 +133,13 @@
             <td align="center"> <%= check_box_tag 'dialplan[data3]', 1, (@dp.data3 == "1"), :id => 'data3' %></td>
             <td align="right"> <%= text_field_tag 'dialplan[data1]', @dp.data1, "class" => "input", :size => "3", :maxlength => "10" %> </td>
             <td align="right"> <%= text_field_tag 'dialplan[data2]', @dp.data2, "class" => "input", :size => "3", :maxlength => "10" %></td>
-            <% if mor_11_extend? %>
-                <td align="right"> <%= check_box_tag 'dialplan[data6]', 1, @dp.data6 == "1" %></td>
-                <% if calling_cards_active? %>
-                    <td align="right">
-              <span id="dialplan_data_7">
-                <%= select_tag("dialplan[data7]", options_for_select([[_('Not_used'), 0]]+ @cc_dialplans.map { |dialplan| [dialplan.name, dialplan.id] }, @dp.data7.to_i)) %>
-              </span>
-                    </td>
-                <% end %>
+            <td align="right"> <%= check_box_tag 'dialplan[data6]', 1, @dp.data6 == "1" %></td>
+            <% if calling_cards_active? %>
+                <td align="right">
+                  <span id="dialplan_data_7">
+                    <%= select_tag("dialplan[data7]", options_for_select([[_('Not_used'), 0]]+ @cc_dialplans.map { |dialplan| [dialplan.name, dialplan.id] }, @dp.data7.to_i)) %>
+                  </span>
+                </td>
             <% end %>
             <td align="center" <%= tooltip(_('Save_original_CallerID'), _('Save_original_CallerID_explanation')) %>> <%= check_box_tag 'dialplan[data4]', 1, (@dp.data4 == "1") %></td>
             <td align="center">
@@ -236,7 +224,7 @@
     </script>
 <% end %>
 
-<% if mor_11_extend? and @dp.dptype == 'quickforwarddids' %>
+<% if @dp.dptype == 'quickforwarddids' %>
     <b><%= _('Quickforward_dialplan') %></b>
     <br/>
     <br/>

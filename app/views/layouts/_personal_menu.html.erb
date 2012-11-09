@@ -17,9 +17,7 @@
 
     personal_menu.add(7, 3, '<%= _('Payments') %>', '<%= Web_Dir %>/payments/personal_payments');
     personal_menu.add(8, 3, '<%= _('Invoices') %>', '<%= Web_Dir %>/accounting/user_invoices');
-    <% if mor_11_extend? %>
     personal_menu.add(11, 3, '<%= _('Financial_statements') %>', '<%= Web_Dir %>/accounting/financial_statements');
-    <% end %>
     personal_menu.add(9, 3, '<%= _('Subscriptions') %>', '<%= Web_Dir %>/services/user_subscriptions');
     <%if !current_user.reseller_allow_providers_tariff?%>
     personal_menu.add(10, 0, '<%= _('Calls') %>', '<%= Web_Dir %>/stats/last_calls_stats');

@@ -340,7 +340,7 @@ class AccountingController < ApplicationController
       # Minimal charge is counted for whole month(s), but only for postpaid users. To get a 
       # better understang of what is a 'whole month' look at month_difference method
       minimal_charge_amount = 0
-      if mor_11_extend? and user.postpaid?
+      if user.postpaid?
         if user.add_on_minimal_charge? period_end
           if user.minimal_charge_start_at < period_start
             month_diff = ApplicationController.month_difference(period_start, period_end)
@@ -372,7 +372,7 @@ class AccountingController < ApplicationController
           price += invoice.nice_invoice_number(outgoing_calls_by_users_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
         end
 
-        if mor_11_extend? and user.postpaid?
+        if user.postpaid?
           #if minimal charge is set for the user. and for this period
           #calculated price is less than minimal charge, then we should recalculate price
           if price < minimal_charge_amount
@@ -1180,7 +1180,7 @@ class AccountingController < ApplicationController
     #did_sql_price = SqlExport.replace_price('calls.did_price', 'did_price')
     selfcost = SqlExport.replace_price(pp, {:ex => ex, :reference => 'selfcost'})
     user_rate = SqlExport.replace_price('calls.user_rate', {:ex => ex, :reference => 'user_rate'})
-    min_type = (Confline.get_value("#{prepaid}Invoice_Show_Time_in_Minutes", owner).to_i == 1 and mor_11_extend?) ? 1 : 0
+    min_type = (Confline.get_value("#{prepaid}Invoice_Show_Time_in_Minutes", owner).to_i == 1) ? 1 : 0
     csv_string = []
 
     for id in idetails
@@ -1530,10 +1530,6 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     @page_title = _('Financial_statements')
     @page_icon = "view.png"
 
-    if not mor_11_extend?
-      dont_be_so_smart
-      redirect_to :controller => :callc, :action => :main and return false
-    end
     @Show_Currency_Selector = 1
     @currency = session[:show_currency]
 
@@ -1778,7 +1774,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     # Minimal charge is counted for whole month(s), but only for postpaid users. To get a
     # better understang of what is a 'whole month' look at month_difference method
     minimal_charge_amount = 0
-    if mor_11_extend? and user.postpaid?
+    if user.postpaid?
       if user.add_on_minimal_charge? period_end
         if user.minimal_charge_start_at < period_start
           month_diff = ApplicationController.month_difference(period_start, period_end)
@@ -1822,7 +1818,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
       #        price += incoming_made_calls_price.to_d
       #      end
 
-      if mor_11_extend? and user.postpaid?
+      if user.postpaid?
         #if minimal charge is set for the user. and for this period
         #calculated price is less than minimal charge, then we should recalculate price
         if price < minimal_charge_amount

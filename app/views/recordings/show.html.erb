@@ -37,9 +37,7 @@
         <th align="left">   <%= _('Date') %>     </th>
         <th align="left">   <%= _('Source') %>     </th>
         <th align="left">   <%= _('Destination') %>     </th>
-        <% if mor_11_extend? %>
-            <th align="left"> <%= _('Provider') %> </th>
-        <% end %>
+        <th align="left"> <%= _('Provider') %> </th>
         <th align="center">   <%= _('Duration') %>     </th>
         <th align="center"></th>
         <th align="center"></th>
@@ -54,9 +52,7 @@
                 <td> <%= nice_date_time(rec.datetime) %></td>
                 <td> <%= rec.src %></td>
                 <td> <%= hide_dst_for_user(current_user, "gui", rec.dst) %></td>
-                <% if mor_11_extend? %>
-                    <td align="left"> <%= rec.provider_name %> </td>
-                <% end %>
+                <td align="left"> <%= rec.provider_name %> </td>
                 <% if call.billsec > 0 or @show_recordings_with_zero_billsec %>
                     <td align="center"><%= nice_time call.billsec %> </td>
                     <td align="center"> <%= link_to b_play, {:action => "play_rec", :rec => rec.id}, :popup => ['new_window', 'height=200,width=310'] %></td>

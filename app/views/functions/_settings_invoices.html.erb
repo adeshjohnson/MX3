@@ -120,10 +120,8 @@
           <td id="inv_end_title"><b><%= _('Invoice_End_Title') %>:</b></td>
           <td id="invoice_end_title"><%= text_field_tag('invoice_end_title', Confline.get_value("Invoice_End_Title"), "class" => "input", :size => "70", :maxlength => "60") %></td>
         </tr>
-        <% if mor_11_extend? %>
-            <%= raw setting_boolean(_('Add_Average_rate_in_detailed_invoice'), 'invoice_add_average_rate', "Invoice_Add_Average_rate") %>
-            <%= raw setting_boolean(_('Show_Time_in_Minutes'), 'invoice_show_time_in_minutes', "Invoice_Show_Time_in_Minutes") %>
-        <% end %>
+        <%= raw setting_boolean(_('Add_Average_rate_in_detailed_invoice'), 'invoice_add_average_rate', "Invoice_Add_Average_rate") %>
+        <%= raw setting_boolean(_('Show_Time_in_Minutes'), 'invoice_show_time_in_minutes', "Invoice_Show_Time_in_Minutes") %>
       </table>
     </div>
     <div class="dhtmlgoodies_aTab">
@@ -267,10 +265,8 @@
           <td id="prepaid_inv_end_title"><b><%= _('Invoice_End_Title') %>:</b></td>
           <td id="prepaid_invoice_end_title"><%= text_field_tag('prepaid_invoice_end_title', Confline.get_value("Prepaid_Invoice_End_Title"), "class" => "input", :size => "70", :maxlength => "70") %></td>
         </tr>
-        <% if mor_11_extend? %>
-            <%= raw setting_boolean(_('Add_Average_rate_in_detailed_invoice'), 'prepaid_invoice_add_average_rate', "Prepaid_Invoice_Add_Average_rate") %>
-            <%= raw setting_boolean(_('Show_Time_in_Minutes'), 'prepaid_invoice_show_time_in_minutes', "Prepaid_Invoice_Show_Time_in_Minutes") %>
-        <% end %>
+        <%= raw setting_boolean(_('Add_Average_rate_in_detailed_invoice'), 'prepaid_invoice_add_average_rate', "Prepaid_Invoice_Add_Average_rate") %>
+        <%= raw setting_boolean(_('Show_Time_in_Minutes'), 'prepaid_invoice_show_time_in_minutes', "Prepaid_Invoice_Show_Time_in_Minutes") %>
       </table>
     </div>
     <div class="dhtmlgoodies_aTab">

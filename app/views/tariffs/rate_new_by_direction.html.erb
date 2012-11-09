@@ -9,9 +9,7 @@
         <th align="left"><%= _('Name') %></th>
         <th align="left"><%= _('Subcode') %></th>
         <th align="right"><%= _('Rate') %></th>
-        <% if mor_11_extend? %>
-            <th align="right"><%= _('Ghost_percent') %> %</th>
-        <% end %>
+        <th align="right"><%= _('Ghost_percent') %> %</th>
       </tr>
       <% @destinations.each_with_index { |dest, i| %>
           <tr class="row<%= (i % 2 + 1).to_s %>">
@@ -20,13 +18,11 @@
             <td align="left"><%= dest.name %></td>
             <td align="left"><%= dest[:dir_code].upcase %></td>
             <td align="right"><%= text_field_tag "dest_"+dest.id.to_s, '', :size => "7", "class" => "input" %></td>
-            <% if mor_11_extend? %>
-                <td align="right" id="ghost_percent_<%= dest.id %>"><%= text_field_tag 'gh_'+dest.id.to_s, '', :size => "7", "class" => "input", :id => "gh_#{dest.id}" %></td>
-            <% end %>
+            <td align="right" id="ghost_percent_<%= dest.id %>"><%= text_field_tag 'gh_'+dest.id.to_s, '', :size => "7", "class" => "input", :id => "gh_#{dest.id}" %></td>
           </tr>
       <% } %>
       <tr>
-        <th colspan="<%= mor_11_extend? ? 6 : 5 %>" align="right"><%= submit_tag(_('Add_rates'), :disable_with => _('Processing..')) %></th>
+        <th colspan="6" align="right"><%= submit_tag(_('Add_rates'), :disable_with => _('Processing..')) %></th>
       </tr>
     </table>
 <% end %>

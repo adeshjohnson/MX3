@@ -40,10 +40,8 @@
     reseller_menu.add(41, 0, '<%= _('Billing') %>', '');
     reseller_menu.add(42, 41, '<%= _('Payments') %>', '<%= Web_Dir %>/payments/list');
     reseller_menu.add(43, 41, '<%= _('Invoices') %>', '<%= Web_Dir %>/accounting/invoices');
-    <% if mor_11_extend? %>
     reseller_menu.add(63, 41, '<%= _('Credit_notes') %>', '<%= Web_Dir %>/credit_note/list');
     reseller_menu.add(64, 41, '<%= _('Financial_statements') %>', '<%= Web_Dir %>/accounting/financial_statements');
-    <% end %>
     reseller_menu.add(44, 41, '<%= _('Profit') %>', '<%= Web_Dir %>/stats/profit');
     reseller_menu.add(45, 41, '<%= _('Services') %>', '<%= Web_Dir %>/services/list');
     reseller_menu.add(46, 45, '<%= _('Subscriptions') %>', '<%= Web_Dir %>/services/subscriptions');

@@ -311,7 +311,7 @@ in before filter : user (:find_user)
 
   def provider_create
     sms_prov = SmsProvider.new(params[:provider].each_value(&:strip!))
-    if sms_prov.api? and mor_11_extend?
+    if sms_prov.api? 
       sms_prov.login = params[:api_string].to_s
       sms_prov.email_good_keywords = params[:api_good_keywords].to_s
     end
@@ -365,7 +365,7 @@ in before filter : provider (:find_provider_from_id)
     else
       @provider.wait_for_bad_email = 0
     end
-    if @provider.api? and mor_11_extend?
+    if @provider.api? 
       @provider.login = params[:api_string].to_s
       @provider.email_good_keywords = params[:api_good_keywords].to_s
     end

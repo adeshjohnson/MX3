@@ -13,7 +13,6 @@ class ApiController < ApplicationController
   before_filter :check_send_method, :except => [:simple_balance, :balance]
   before_filter :log_access
   before_filter :find_current_user_for_api, :only => [:user_subscriptions, :user_invoices, :personal_payments, :user_rates, :callflow_edit, :devices_callflow, :user_devices, :main_page, :logout, :cc_by_cli, :create_payment, :payments_list, :show_calling_card_group, :buy_card_from_callingroup, :financial_statements]
-  before_filter :check_mor_11_extend, :only => [:credit_notes, :credit_note_update, :credit_note_delete, :credit_note_create, :financial_statements, :create_payment, :cc_by_cli, :show_calling_card_group, :buy_card_from_callingroup, :send_sms]
   before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements]
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
   before_filter :check_sms_addon, :only => [:send_sms]
@@ -2356,7 +2355,7 @@ class ApiController < ApplicationController
     doc.page {
     if allow == true
       check_user(params[:u], params[:p])
-      if @user and mor_11_extend? and (@user.is_admin? or @user.is_reseller? or (@user.is_accountant? and @user.accountant_allow_edit('Tariff_manage')))
+      if @user and (@user.is_admin? or @user.is_reseller? or (@user.is_accountant? and @user.accountant_allow_edit('Tariff_manage')))
         tariff_id = params[:id].to_i
         if tariff_id == 0
           tariff = Tariff.new
@@ -3914,7 +3913,7 @@ class ApiController < ApplicationController
     if allow
       check_user(params[:u], params[:p])
       if @user
-        version = (mor_11_extend? ? '12' : '11')
+        version = '12'
         doc.version(version)
       else
         doc.error("Bad login")
@@ -4119,14 +4118,6 @@ class ApiController < ApplicationController
       return false
     end
     Time.zone = @current_user.time_zone if @current_user
-  end
-
-
-  def check_mor_11_extend
-    unless mor_11_extend?
-      send_xml_data(MorApi.return_error('Dont be so smart'), params[:test].to_i)
-      return false
-    end
   end
 
   def check_api_parrams_with_hash

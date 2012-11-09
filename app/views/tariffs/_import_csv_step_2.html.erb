@@ -102,14 +102,12 @@
         <td align="center"><%= text_field_tag 'manual_min_time', "", "class" => "input", :size => "8", :maxlength => "8" %></td>
         <td id="min_time_value" align="center">0</td>
       </tr>
-      <% if mor_11_extend? %>
-          <tr class="row1">
-            <td>   <%= _('Ghost_percent') %>  </td>
-            <%= render :partial => "import_csv_step_2_select", :locals => {:name => "ghost_percent_id", :value => :imp_ghost_percent} %>
-            <td align="center"><%= text_field_tag 'manual_ghost_percent', "", "class" => "input", :size => "8", :maxlength => "8" %></td>
-            <td id="ghost_percent_value" align="center">0</td>
-          </tr>
-      <% end %>
+      <tr class="row1">
+        <td>   <%= _('Ghost_percent') %>  </td>
+        <%= render :partial => "import_csv_step_2_select", :locals => {:name => "ghost_percent_id", :value => :imp_ghost_percent} %>
+        <td align="center"><%= text_field_tag 'manual_ghost_percent', "", "class" => "input", :size => "8", :maxlength => "8" %></td>
+        <td id="ghost_percent_value" align="center">0</td>
+      </tr>
       <tr>
         <td  id='dest_cell' >   <%= _('Destination') %>/<%= _('OCN_Name') %>  </td>
         <%= render :partial => "import_csv_step_2_select", :locals => {:name => "destination_id", :value => :imp_dst} %>

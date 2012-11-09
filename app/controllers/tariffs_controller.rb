@@ -309,9 +309,8 @@ class TariffsController < ApplicationController
       redirect_to(:action => :rates_list, :id => @tariff.id, :st => params[:st], :page => @page) and return false
     end
     @destination = Destination.find(:first, :conditions => ["prefix = ?", @prefix])
-    mr = mor_11_extend?
     if @destination
-      if @tariff.add_new_rate(@destination.id, @price, params[:increment_s], params[:min_time], params[:connection_fee], params[:ghost_percent], mr)
+      if @tariff.add_new_rate(@destination.id, @price, params[:increment_s], params[:min_time], params[:connection_fee], params[:ghost_percent], true)
         flash[:status] = _("Rate_was_added")
       else
         flash[:notice] = _("Rate_was_not_added")
@@ -372,10 +371,9 @@ class TariffsController < ApplicationController
       redirect_to :action => :list and return false
     end
     @destinations = @tariff.free_destinations_by_direction(@direction)
-    mr = mor_11_extend?
     @destinations.each { |dest|
       if params["dest_#{dest.id}"] and params["dest_#{dest.id}"].to_s.length > 0
-        @tariff.add_new_rate(dest.id, params["dest_#{dest.id}"], 1, 0,0, params[('gh_'+dest.id.to_s).intern], mr)
+        @tariff.add_new_rate(dest.id, params["dest_#{dest.id}"], 1, 0,0, params[('gh_'+dest.id.to_s).intern], true)
       end
     }
     flash[:status] = _('Rates_updated')
@@ -447,11 +445,10 @@ class TariffsController < ApplicationController
     # st - from which letter starts rate's direction (usualy country)
     params[:st] ? st = params[:st].upcase : st = "A"
 
-    mr = mor_11_extend?
     for dest in @tariff.free_destinations_by_st(st)
       #add only rates which are entered
       if params[(dest.id.to_s).intern].to_s.length > 0
-        @tariff.add_new_rate(dest.id.to_s, params[(dest.id.to_s).intern], 1, 0,0, params[('gh_'+dest.id.to_s).intern], mr)
+        @tariff.add_new_rate(dest.id.to_s, params[(dest.id.to_s).intern], 1, 0,0, params[('gh_'+dest.id.to_s).intern], true)
       end
     end
 
@@ -1792,7 +1789,7 @@ class TariffsController < ApplicationController
           rate = Rate.new
           rate.tariff_id = @tariff.id
           rate.destinationgroup_id = dg.id
-          rate.ghost_min_perc = params[("gch" + dg.id.to_s).intern].to_i if mor_11_extend?
+          rate.ghost_min_perc = params[("gch" + dg.id.to_s).intern].to_i 
           rate.save
 
           ard = Aratedetail.new
@@ -1833,7 +1830,7 @@ class TariffsController < ApplicationController
         end
       else
         if rrate
-          rrate.ghost_min_perc = params[("gch" + dg.id.to_s).intern].to_i if mor_11_extend?
+          rrate.ghost_min_perc = params[("gch" + dg.id.to_s).intern].to_i 
           rrate.save
         end
       end

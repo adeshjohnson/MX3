@@ -58,10 +58,8 @@
         <th align="left"><%= _('Subcode') %></th>
         <th align="left"><%= _('Name') %></th>
     <% end %>
-    <% if mor_11_extend? %>
-        <th align="right"><%= _('Ghost_percent') %> %</th>
-        <th></th>
-    <% end %>
+    <th align="right"><%= _('Ghost_percent') %> %</th>
+    <th></th>
 
     <th></th>
     <% if @can_edit == true %>
@@ -90,10 +88,8 @@
             <td id="subcode_<%= rate.id %>"><%= rate.destination.subcode %></td>
             <td id="name_<%= rate.id %>"><%= rate.destination.name if rate.destination.name %></td>
         <% end %>
-        <% if mor_11_extend? %>
-            <td align="right" id="ghost_percent_<%= rate.id %>"><%= nice_number rate.ghost_min_perc %></td>
-            <td align="center"><%= link_to b_edit, {:action => :ghost_percent_edit, :rate_id => rate.id, :id => @tariff.id}, :id => "edit_img_"+rate.id.to_s %></td>
-        <% end %>
+        <td align="right" id="ghost_percent_<%= rate.id %>"><%= nice_number rate.ghost_min_perc %></td>
+        <td align="center"><%= link_to b_edit, {:action => :ghost_percent_edit, :rate_id => rate.id, :id => @tariff.id}, :id => "edit_img_"+rate.id.to_s %></td>
         <td align="center"><%= link_to b_details + _('Details'), {:action => 'rate_details', :id => rate}, :id => "details_img_"+rate.id.to_s %></td>
         <% if @can_edit == true %>
             <% if @allow_manage == true %>
@@ -158,13 +154,11 @@
                   <td><%= text_field_tag :min_time, "0", "class" => "input" %> </td>
                   <td>s</td>
                 </tr>
-                <%if mor_11_extend?%>
-                    <tr>
-                      <td><%= _('Ghost_percent') %>: </td>
-                      <td><%= text_field_tag :ghost_percent, "", "class" => "input" %> </td>
-                      <td>%</td>
-                    </tr>
-                <%end%>
+                <tr>
+                  <td><%= _('Ghost_percent') %>: </td>
+                  <td><%= text_field_tag :ghost_percent, "", "class" => "input" %> </td>
+                  <td>%</td>
+                </tr>
                 <tr>
                   <td><%= submit_tag(_("Add_rate"), :disable_with => _('Processing..')) %></td>
                   <td></td>
