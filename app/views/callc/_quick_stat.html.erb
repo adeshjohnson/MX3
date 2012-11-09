@@ -22,10 +22,12 @@
       <td nowrap="true"><%= _('Profit') %>:</td>
       <td id="month_profit" nowrap="true"><%= nice_number(@quick_stats[3].to_f - @quick_stats[2].to_f) %></td>
     </tr>
-    <tr>
-      <td nowrap="true"><%= _('Did_owner_cost') %>:</td>
-      <td id="month_did_owner_cost" nowrap="true"><%= nice_number(@quick_stats[4].to_f) %></td>
-    </tr>
+    <% if current_user.is_admin? %>
+      <tr>
+        <td nowrap="true"><%= _('Did_owner_cost') %>:</td>
+        <td id="month_did_owner_cost" nowrap="true"><%= nice_number(@quick_stats[4].to_f) %></td>
+      </tr>
+    <% end %>
 <% end %>
 <tr>
   <td style="height: 10px"></td>
@@ -54,10 +56,12 @@
       <td nowrap="true"><%= _('Profit') %>:</td>
       <td id="day_profit" nowrap="true"><%= nice_number(@quick_stats[8].to_f - @quick_stats[7].to_f) %></td>
     </tr>
-    <tr>
-      <td nowrap="true"><%= _('Did_owner_cost') %>:</td>
-      <td id="day_did_owner_cost" nowrap="true"><%= nice_number(@quick_stats[9].to_f) %></td>
-    </tr>
+    <% if current_user.is_admin? %>
+      <tr>
+        <td nowrap="true"><%= _('Did_owner_cost') %>:</td>
+        <td id="day_did_owner_cost" nowrap="true"><%= nice_number(@quick_stats[9].to_f) %></td>
+      </tr>
+    <% end %>
 <% end %>
 
 <% if not current_user.is_admin? %>
