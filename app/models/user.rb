@@ -1099,7 +1099,7 @@ class User < ActiveRecord::Base
            LEFT JOIN devices ON (dst_device_id = devices.id)
            LEFT JOIN users ON (devices.user_id = users.id)
            WHERE disposition = 'ANSWERED'
-           and (calls.reseller_id = #{id} or users.owner_id = #{id})
+           and (calls.reseller_id = #{id})
            AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{invoice_zero_calls_sql(SqlExport.reseller_price_sql)}"
     res = ActiveRecord::Base.connection.select_all(sql)
 
@@ -1107,7 +1107,24 @@ class User < ActiveRecord::Base
       total_calls = res[0]["calls"].to_i
       calls_price = res[0]["price"].to_d
     end
-    return total_calls, calls_price
+
+    # DID Owner Cost - when resellers user is dst_user_id
+    sql2 = "SELECT count(calls.id) as calls, SUM(#{SqlExport.admin_reseller_price_sql}) as price
+           FROM calls
+           #{SqlExport.left_join_reseler_providers_to_calls_sql}
+           LEFT JOIN devices ON (dst_device_id = devices.id)
+           LEFT JOIN users ON (devices.user_id = users.id)
+           WHERE disposition = 'ANSWERED'
+           and (users.owner_id = #{id})
+           AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{invoice_zero_calls_sql(SqlExport.reseller_price_sql)}"
+    res2 = ActiveRecord::Base.connection.select_all(sql2)
+
+    if res2[0]
+      total_calls_dst = res2[0]["calls"].to_i
+      calls_price_dst = res2[0]["price"].to_d
+    end
+
+    return total_calls, calls_price, total_calls_dst, calls_price_dst
   end
 
 

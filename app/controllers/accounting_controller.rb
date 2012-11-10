@@ -326,7 +326,7 @@ class AccountingController < ApplicationController
       MorLog.my_debug("******************** For user : #{user.id} ******************************", 1)
       # --- Subscriptions ---
       MorLog.my_debug("start incomming calls", 1)
-      incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users = call_details_for_user(user, period_start_with_time, period_end_with_time, use_index)
+      incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users, incoming_calls_by_users, incoming_calls_by_users_price = call_details_for_user(user, period_start_with_time, period_end_with_time, use_index)
       MorLog.my_debug("end incomming calls", 1)
       # find subscriptions for user in period
       MorLog.my_debug("start subscriptions", 1)
@@ -351,7 +351,7 @@ class AccountingController < ApplicationController
         end
       end
       # check if we should generate invoice
-      if (outgoing_calls_price > 0) or (outgoing_calls_by_users_price > 0) or (incoming_received_calls_price > 0) or (incoming_made_calls_price > 0) or (total_subscriptions > 0) or (minimal_charge_amount > 0) or ( user.invoice_zero_calls == 1 and outgoing_calls_price >= 0 and outgoing_calls > 0 ) or ( user.invoice_zero_calls == 1 and outgoing_calls_by_users_price >= 0 and outgoing_calls_by_users > 0 ) or ( user.invoice_zero_calls == 1 and incoming_received_calls_price >= 0 and incoming_received_calls > 0 ) or ( user.invoice_zero_calls == 1 and incoming_made_calls_price >= 0 and incoming_made_calls > 0 )
+      if (outgoing_calls_price > 0) or (outgoing_calls_by_users_price + incoming_calls_by_users_price > 0) or (incoming_received_calls_price > 0) or (incoming_made_calls_price > 0) or (total_subscriptions > 0) or (minimal_charge_amount > 0) or ( user.invoice_zero_calls == 1 and outgoing_calls_price >= 0 and outgoing_calls > 0 ) or ( user.invoice_zero_calls == 1 and outgoing_calls_by_users_price + incoming_calls_by_users_price >= 0 and outgoing_calls_by_users > 0 ) or ( user.invoice_zero_calls == 1 and incoming_received_calls_price >= 0 and incoming_received_calls > 0 ) or ( user.invoice_zero_calls == 1 and incoming_made_calls_price >= 0 and incoming_made_calls > 0 )
         MorLog.my_debug("    Generating invoice....", 1)
 
         tax = user.get_tax.dup
@@ -385,6 +385,9 @@ class AccountingController < ApplicationController
           if (incoming_received_calls_price > 0)
             invoice.invoicedetails.create(:name => _('Did_owner_cost'), :price => incoming_received_calls_price.to_d, :quantity => incoming_received_calls, :invdet_type => 0)
             price += incoming_received_calls_price.to_d
+          elsif (incoming_calls_by_users_price > 0)
+            invoice.invoicedetails.create(:name => _('Did_owner_cost'), :price => incoming_calls_by_users_price.to_d, :quantity => incoming_calls_by_users, :invdet_type => 0)
+            price += incoming_calls_by_users_price.to_d
           end
         end
 
@@ -580,14 +583,14 @@ class AccountingController < ApplicationController
     for user in @users
       MorLog.my_debug("******************** For user : #{user.id} ******************************", 1)
       MorLog.my_debug("incoming calls start", 1)
-      incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users = call_details_for_user(user, period_start_with_time, period_end_with_time, use_index)
+      incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users, incoming_calls_by_users, incoming_calls_by_users_price = call_details_for_user(user, period_start_with_time, period_end_with_time, use_index)
       MorLog.my_debug("incoming calls end", 1)
       MorLog.my_debug("subscriptions start", 1)
       subscriptions = user.subscriptions_in_period(period_start_with_time, period_end_with_time, 'invoices')
       MorLog.my_debug("subscriptions end", 1)
       total_subscriptions = 0
       total_subscriptions = subscriptions.size if subscriptions
-      if (outgoing_calls_price > 0) or (outgoing_calls_by_users_price > 0) or (incoming_received_calls_price > 0) or (incoming_made_calls_price > 0) or (total_subscriptions > 0)
+      if (outgoing_calls_price > 0) or (outgoing_calls_by_users_price + incoming_calls_by_users_price > 0) or (incoming_received_calls_price > 0) or (incoming_made_calls_price > 0) or (total_subscriptions > 0)
         MorLog.my_debug("    Generating invoice....", 1)
         user_tax = user.tax
         # possible error fix
@@ -1721,11 +1724,14 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
     # find users outgoing (made by this resellers users) calls stats (count and sum price)
     if user.usertype == "reseller"
-      outgoing_calls_by_users, outgoing_calls_by_users_price = user.users_outgoing_calls_stats_in_period(period_start_with_time, period_end_with_time, use_index)
+      outgoing_calls_by_users, outgoing_calls_by_users_price, incoming_calls_by_users, incoming_calls_by_users_price = user.users_outgoing_calls_stats_in_period(period_start_with_time, period_end_with_time, use_index)
       MorLog.my_debug("  Outgoing calls by users: #{outgoing_calls_by_users}, for price: #{outgoing_calls_by_users_price}", 1)
+      MorLog.my_debug("  Incoming calls by users: #{outgoing_calls_by_users}, for price: #{outgoing_calls_by_users_price}", 1)
     else
       outgoing_calls_by_users = 0
       outgoing_calls_by_users_price = 0
+      incoming_calls_by_users = 0
+      incoming_calls_by_users_price = 0
     end
 
     # --- Incoming calls ---
@@ -1736,7 +1742,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     incoming_made_calls, incoming_made_calls_price = user.incoming_made_calls_stats_in_period(period_start_with_time, period_end_with_time, use_index)
     MorLog.my_debug("  Incoming MADE calls: #{incoming_made_calls}, for price: #{incoming_made_calls_price}", 1)
 
-    return incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users
+    return incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users, incoming_calls_by_users, incoming_calls_by_users_price
   end
 
   def calls_to_invoice()
@@ -1760,7 +1766,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     ind_ex.to_yaml
     ind_ex.each { |ie| use_index = 1; use_index if ie[:key_name].to_s == 'calldate' } if ind_ex
 
-    incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users = call_details_for_user(user, period_start_with_time.strftime("%Y-%m-%d %H:%M:%S"), period_end_with_time.strftime("%Y-%m-%d %H:%M:%S"), use_index)
+    incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users, incoming_calls_by_users, incoming_calls_by_users_price = call_details_for_user(user, period_start_with_time.strftime("%Y-%m-%d %H:%M:%S"), period_end_with_time.strftime("%Y-%m-%d %H:%M:%S"), use_index)
 
     # find subscriptions for user in period
     subscriptions = user.subscriptions_in_period(period_start_with_time, period_end_with_time, 'invoices')
@@ -1784,7 +1790,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
       end
     end
     # check if we should generate invoice
-    if (outgoing_calls_price > 0) or (outgoing_calls_by_users_price > 0) or (incoming_received_calls_price > 0) or (incoming_made_calls_price > 0) or (total_subscriptions > 0) or (minimal_charge_amount > 0)
+    if (outgoing_calls_price > 0) or (outgoing_calls_by_users_price + incoming_calls_by_users_price > 0) or (incoming_received_calls_price > 0) or (incoming_made_calls_price > 0) or (total_subscriptions > 0) or (minimal_charge_amount > 0)
       MorLog.my_debug("    Generating invoice....")
 
       tax = user.get_tax.dup
