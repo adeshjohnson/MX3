@@ -58,15 +58,55 @@
       <p class='ringgroup_class' style="margin-top:13px;"><%= _('Dialing_Strategy') %>: <%= select_tag 'ringgroup[strategy]', options_for_select([[_('ringall'), 1]], @ringgroup.strategy.to_s) %></p>
 
       <p class='ringgroup_class' style="margin-top:13px;"><%= _('CallerID_prefix') %>: <%= text_field_tag 'ringgroup[cid_prefix]', @ringgroup.cid_prefix, "class" => "input", :size => "20", :maxlength => "50", :onchange => "Update_extlines();" %></p>
-
-      <p class='ringgroup_class' style="margin-top:13px;"><%= _('Route_to_DID_if_No_Answer') %>:
-        <select name="ringgroup[did_id]" id="ringgroup[did_id]" onchange="Show_did(this.value);Update_extlines();">
+      <br /><br />
+      <span class='ringgroup_class' style="margin-top:13px;"><%= _('Route_to_DID_if_No_Answer') %>:
+      <!--  <select name="ringgroup[did_id]" id="ringgroup[did_id]" onchange="Show_did(this.value);Update_extlines();">
           <option value='0' <%= 'selected' if @ringgroup.did_id.to_i == 0 %> > <%= _('None') %> </option>
           <% for d in @dids %>
               <option value='<%= d.id %>' <%= 'selected' if @ringgroup.did_id.to_i == d.id %>> <%= d.did %> </option>
           <% end %>
-        </select>
-      </p>
+        </select> -->
+      </span>
+      <span class='ringgroup_class' width=100px style="position:absolute;margin-top:-5px;">
+      <% current_did = Ringgroup.find_by_sql(['select dids.did from ringgroups inner join dids on ringgroups.id = ? and ringgroups.did_id = dids.id', params[:id]])[0]['did'].to_s rescue ""  %>
+      <input title="DID live search" type="text" size="30" id="ringgroup[did_id]" name="ringgroup[did_id]" autocomplete="off" value="<%=raw current_did %>" style="margin-top:0px;" />
+      <table id="did_list" style='margin-left:2px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>
+      </span><br/><br/>
+	   <script type='text/javascript'>
+	      Event.observe(window, 'load',  function() {
+		Event.observe($('ringgroup[did_id]'), 'click', function(){
+		  if ($('ringgroup[did_id]').value == "") {
+		    $('did_list').innerHTML = "";
+		    <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'empty_click=true'") %>
+		  }
+		    Event.observe($('ringgroup[did_id]'), 'keyup', function(){
+		      $('did_list').innerHTML = "";
+		      <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'ringgroup=true&did_livesearch='+$('ringgroup[did_id]').value") %>
+		    });
+
+		    Event.observe($('did_list'), 'mouseover', function(){
+		      var el = document.getElementById('did_list').getElementsByTagName('td');
+		      for(var i=0;i<el.length;i++){
+			  el[i].onclick=function(){
+			      if (this.id != -2) {
+				  document.getElementById('ringgroup[did_id]').value = this.innerHTML
+				<%= raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='") %>
+			      }
+			  }
+			  el[i].onmouseover=function(){
+			      this.style.backgroundColor="#BBBBBB";
+			  }
+			  el[i].onmouseout=function(){
+			      this.style.backgroundColor="rgb(255, 255, 255)";
+			  }
+		      }
+		    });
+
+		});
+	    });
+	    </script>
+
+      
       <% if params[:action].to_s != 'new' and params[:action].to_s != 'create' %>
           <p class='ringgroup_class' style="margin-top:18px;"><%= submit_tag _('Update'), :disable_with => _('Processing..') %></p>
       <% end %>

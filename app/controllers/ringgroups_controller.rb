@@ -59,6 +59,8 @@ class RinggroupsController < ApplicationController
     #check if extension entered
     ext = params[:dialplan][:data2]
 
+    params[:ringgroup][:did_id] = Did.where(['did = ?', params[:ringgroup][:did_id]]).first.id rescue 0
+    logger.fatal params[:ringgroup][:did_id].to_yaml + "DERP DERP DERP DERP"
     @ringgroup = Ringgroup.new(params[:ringgroup].merge({:name=>params[:dialplan][:name]}))
     @dialplan = Dialplan.new(params[:dialplan].merge({:dptype => "ringgroup"}))
 
@@ -124,6 +126,7 @@ class RinggroupsController < ApplicationController
   end
 
   def update
+    params[:ringgroup][:did_id] = Did.where(['did = ?', params[:ringgroup][:did_id]]).first.id rescue 0
     if !params[:dialplan] or params[:dialplan][:name].blank?
       @page_title = _('Ring_group_edit')
       @page_icon = "edit.png"

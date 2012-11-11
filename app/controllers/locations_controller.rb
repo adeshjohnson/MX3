@@ -68,11 +68,15 @@ Called from views location_rules and location_rule_edit, to update DID list from
       if @did_str.to_s != ""
         cond << "did LIKE ?" and var << @did_str + '%'
       end
-      if params[:callback].to_s == "true"
-        cbsql = Did.find_by_sql(['SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != "callback" AND dids.reseller_id = ? AND dids.did LIKE ? limit 20',current_user.id, @did_str.to_s << '%'])
-#               Did.where([cond.join(" AND ")].concat(var).concat(' AND dialplans.dptype != "callback"')).order("dids.did ASC").limit(20).map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << "</td></tr>"] }
-        seek = cbsql.map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << " - " << d.dialplan.name << "</td></tr>"] }
-        @total_dids = seek.size - 20
+      if params[:ringgroup].to_s == "true"
+        assigned = current_user.dids_for_select('assigned')
+        seek = assigned.each_with_index.map { |d,i| ["<tr><td id='" << d[:id].to_s << "' #{style}>" << d[:did] << "</td></tr>"] if i < 20 and d[:did].start_with?(@did_str)}.compact
+        @total_dids = assigned.size - 20
+      elsif params[:callback].to_s == "true"
+        sql = 'SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != "callback" AND dids.reseller_id = "' + current_user.id.to_s + '" AND dids.did LIKE "' + @did_str.to_s + '%"'
+        cbsql = Did.find_by_sql(sql)
+        seek = cbsql.each_with_index.map { |d,i| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << " - " << d.dialplan.name << "</td></tr>"] if i < 20 }.compact
+        @total_dids = cbsql.size - 20
       else
         seek = Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC").limit(20).map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << "</td></tr>"] }
         @total_dids = Did.where([cond.join(" AND ")].concat(var)).count - Did.where([cond.join(" AND ")].concat(var)).limit(20).count
