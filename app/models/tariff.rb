@@ -93,7 +93,7 @@ class Tariff < ActiveRecord::Base
     destinations
   end
 
-  def add_new_rate(dest_id, rate_value, increment, min_time, connection_fee, ghost_percent = nil, mor_11_extended = true)
+  def add_new_rate(dest_id, rate_value, increment, min_time, connection_fee, ghost_percent = nil)
     rate = Rate.new
     rate.tariff_id = self.id
     rate.destination_id = dest_id
@@ -759,7 +759,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     end
 
     sql="INSERT INTO rates (tariff_id, destination_id, ghost_min_perc)
-    SELECT #{id}, destinations.id #{ghost_percent} FROM #{name}
+    SELECT #{id}, destinations.id, #{ghost_percent} FROM #{name}
     join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
     LEFT join rates on (destinations.id = rates.destination_id and rates.tariff_id = #{id})
     WHERE rates.id IS NULL AND f_error = 0"

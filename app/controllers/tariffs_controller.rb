@@ -310,7 +310,7 @@ class TariffsController < ApplicationController
     end
     @destination = Destination.find(:first, :conditions => ["prefix = ?", @prefix])
     if @destination
-      if @tariff.add_new_rate(@destination.id, @price, params[:increment_s], params[:min_time], params[:connection_fee], params[:ghost_percent], true)
+      if @tariff.add_new_rate(@destination.id, @price, params[:increment_s], params[:min_time], params[:connection_fee], params[:ghost_percent])
         flash[:status] = _("Rate_was_added")
       else
         flash[:notice] = _("Rate_was_not_added")
@@ -373,7 +373,7 @@ class TariffsController < ApplicationController
     @destinations = @tariff.free_destinations_by_direction(@direction)
     @destinations.each { |dest|
       if params["dest_#{dest.id}"] and params["dest_#{dest.id}"].to_s.length > 0
-        @tariff.add_new_rate(dest.id, params["dest_#{dest.id}"], 1, 0,0, params[('gh_'+dest.id.to_s).intern], true)
+        @tariff.add_new_rate(dest.id, params["dest_#{dest.id}"], 1, 0,0, params[('gh_'+dest.id.to_s).intern])
       end
     }
     flash[:status] = _('Rates_updated')
@@ -448,7 +448,7 @@ class TariffsController < ApplicationController
     for dest in @tariff.free_destinations_by_st(st)
       #add only rates which are entered
       if params[(dest.id.to_s).intern].to_s.length > 0
-        @tariff.add_new_rate(dest.id.to_s, params[(dest.id.to_s).intern], 1, 0,0, params[('gh_'+dest.id.to_s).intern], true)
+        @tariff.add_new_rate(dest.id.to_s, params[(dest.id.to_s).intern], 1, 0,0, params[('gh_'+dest.id.to_s).intern])
       end
     end
 
