@@ -1,22 +1,20 @@
-<div class="nb"><%= b_date + @date_from.to_s + " - " + @date_till.to_s %> <br></div>
+<div class="nb" style="padding-left: 3px;"><%= b_date + @date_from.to_s + " - " + @date_till.to_s %> <br></div>
 
 <% if @search_source.to_s != "" %>
-    <div class="nb"><%= _("Source") + " : " + @search_source.to_s %> <br></div>
+    <div class="nb" style="padding-left: 3px;"><%= _("Source") + " : " + @search_source.to_s %> <br></div>
 <% end %>
 
 <% if @search_destination.to_s != "" %>
-    <div class="nb"><%= _("Destination") + " : " + @search_destination.to_s %> <br></div>
+    <div class="nb" style="padding-left: 3px;"><%= _("Destination") + " : " + @search_destination.to_s %> <br></div>
 <% end %>
 
 <table width="100%" class="simple">
   <tr>
     <td align="left">
-      <%= link_to b_edit + _('Bulk_management'), :action => 'bulk_management' %> &nbsp;&nbsp;
+      <div class="nb"><%= link_to b_edit + _('Bulk_management'), :action => 'bulk_management' %></div>
     </td>
-  </tr>
-  <tr>
     <td align="right">
-      <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details');Element.toggle('clear_search')") %>
+      <div class="nb"><%= link_to_function(b_search + _('Search'), "Element.toggle('search_details');Element.toggle('clear_search')") %></div>
     </td>
   </tr>
 </table>
