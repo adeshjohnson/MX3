@@ -70,7 +70,7 @@
       <span class='ringgroup_class' width=100px style="position:absolute;margin-top:-5px;">
       <% current_did = Ringgroup.find_by_sql(['select dids.did from ringgroups inner join dids on ringgroups.id = ? and ringgroups.did_id = dids.id', params[:id]])[0]['did'].to_s rescue ""  %>
       <input title="DID live search" type="text" size="30" id="ringgroup[did_id]" name="ringgroup[did_id]" autocomplete="off" value="<%=raw current_did %>" style="margin-top:0px;" />
-      <table id="did_list" style='margin-left:2px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>
+      <table id="did_list" style='z-index:1;margin-left:2px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>
       </span><br/><br/>
 	   <script type='text/javascript'>
 	      Event.observe(window, 'load',  function() {
