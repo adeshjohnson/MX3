@@ -70,8 +70,9 @@ Called from views location_rules and location_rule_edit, to update DID list from
       end
       if params[:ringgroup].to_s == "true"
         assigned = current_user.dids_for_select('assigned')
+        assigned_matches = assigned.collect {|row| "0" if row[:did].start_with?(@did_str)}.compact.size
         seek = assigned.each_with_index.map { |d,i| ["<tr><td id='" << d[:id].to_s << "' #{style}>" << d[:did] << "</td></tr>"] if i < 20 and d[:did].start_with?(@did_str)}.compact
-        @total_dids = assigned.size - 20
+        @total_dids = assigned_matches - 20
       elsif params[:callback].to_s == "true"
         sql = 'SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != "callback" AND dids.reseller_id = "' + current_user.id.to_s + '" AND dids.did LIKE "' + @did_str.to_s + '%"'
         cbsql = Did.find_by_sql(sql)

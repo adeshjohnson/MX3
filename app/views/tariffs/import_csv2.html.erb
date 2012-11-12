@@ -1,6 +1,6 @@
 <br/>
 <%= raw link_nice_tariff(@tariff).html_safe %>
-
+<% mor_11_extend = false %>
 
 <% if @step == 0 %>
 
@@ -56,7 +56,9 @@
         <th id="connection_fee_row" align="right"><%= _('Connection_Fee') %></th>
         <th id="increment_row" align="right"><%= _('Increment') %></th>
         <th id="min_time_row" align="right"><%= _('Min_time') %></th>
-        <th id="ghost_percent_row" align="right"><%= _('Ghost_percent') %></th>
+        <% if mor_11_extend %>
+            <th id="ghost_percent_row" align="right"><%= _('Ghost_percent') %></th>
+        <% end %>
         <th id="ocn_name_row"><%= _('Destination') %>/<%= _('OCN_Name') %></th>
         <th id="city_row"><%= _('City') %></th>
         <th id="country_row"><%= _('Country') %>/<%= _('Direction') %></th>
@@ -101,13 +103,15 @@
                   <% end %>
                 </td>
 
-                <td id="imp_ghost_percent_<%= tl %>" align="right">
-                  <% if !@optins[:manual_ghost_percent].blank? %>
-                      <%= @optins[:manual_ghost_percent] %>
-                  <% else %>
-                      <%= arr["col_#{@optins[:imp_ghost_percent]}"] if @optins[:imp_ghost_percent] and @optins[:imp_ghost_percent] >= 0 %>
-                  <% end %>
-                </td>
+                <% if mor_11_extend %>
+                    <td id="imp_ghost_percent_<%= tl %>" align="right">
+                      <% if !@optins[:manual_ghost_percent].blank? %>
+                          <%= @optins[:manual_ghost_percent] %>
+                      <% else %>
+                          <%= arr["col_#{@optins[:imp_ghost_percent]}"] if @optins[:imp_ghost_percent] and @optins[:imp_ghost_percent] >= 0 %>
+                      <% end %>
+                    </td>
+                <% end %>
 
                 <td id="imp_dst_<%= tl %>"> <%= arr["col_#{@optins[:imp_dst]}"] if @optins[:imp_dst] and @optins[:imp_dst] >= 0 %>    </td>
                 <td id="imp_city_<%= tl %>"> <%= arr["col_#{@optins[:imp_city]}"] if @optins[:imp_city] and @optins[:imp_city] >= 0 %>    </td>
