@@ -1109,7 +1109,7 @@ class User < ActiveRecord::Base
     end
 
     # DID Owner Cost - when resellers user is dst_user_id
-    sql2 = "SELECT count(calls.id) as calls, SUM(#{SqlExport.admin_reseller_price_sql}) as price
+    sql2 = "SELECT count(calls.id) as calls, SUM(#{SqlExport.admin_reseller_price_no_dids_sql} + did_price) as price
            FROM calls
            #{SqlExport.left_join_reseler_providers_to_calls_sql}
            LEFT JOIN devices ON (dst_device_id = devices.id)
