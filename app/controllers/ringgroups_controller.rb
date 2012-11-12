@@ -59,8 +59,8 @@ class RinggroupsController < ApplicationController
     #check if extension entered
     ext = params[:dialplan][:data2]
 
+    params[:ringgroup_temp_did] = params[:ringgroup][:did_id]
     params[:ringgroup][:did_id] = Did.where(['did = ?', params[:ringgroup][:did_id]]).first.id rescue 0
-    logger.fatal params[:ringgroup][:did_id].to_yaml + "DERP DERP DERP DERP"
     @ringgroup = Ringgroup.new(params[:ringgroup].merge({:name=>params[:dialplan][:name]}))
     @dialplan = Dialplan.new(params[:dialplan].merge({:dptype => "ringgroup"}))
 

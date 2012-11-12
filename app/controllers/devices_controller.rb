@@ -2291,11 +2291,11 @@ class DevicesController < ApplicationController
   end
 
   def find_device
-    @device = Device.find(:first, :conditions => ['devices.id=?', params[:id]], :include => [:user, :dids])
-
-    unless @device
+    unless (Device.where(:id => params[:id]).count == 1)
       flash[:notice] = _('Device_was_not_found')
       redirect_back_or_default("/callc/main")
+    else
+      @device = Device.where(:id => params[:id]).includes(:user, :dids).first()
     end
   end
 
