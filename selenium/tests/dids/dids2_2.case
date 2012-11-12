@@ -804,29 +804,29 @@
 	<td>15000</td>
 </tr>
 <tr>
-	<td>focus</td>
-	<td>id=s_did_pattern</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>id=s_did_pattern</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>focus</td>
 	<td>id=s_did_pattern</td>
 	<td></td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=s_did_pattern</td>
-	<td>w</td>
 </tr>
 <tr>
 	<td>typeKeys</td>
 	<td>id=s_did_pattern</td>
 	<td>370</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=s_did_pattern</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForCondition</td>
