@@ -1145,7 +1145,7 @@ class User < ActiveRecord::Base
     # no need to include calls.user_price + calls.did_inc_price into Incoming RECEIVED calls
 
     # this sql uses calls.dst_user_id field which allows increase speed a lot
-    sql = "SELECT count(calls.id) as calls, #{SqlExport.replace_price("SUM(#{SqlExport.user_price_sql})", {:reference => 'price'})}
+    sql = "SELECT count(calls.id) as calls, #{SqlExport.replace_price("SUM(#{SqlExport.user_did_price_sql})", {:reference => 'price'})}
                   FROM calls
                   WHERE disposition = 'ANSWERED' AND calldate BETWEEN '#{period_start}' AND '#{period_end}' AND calls.dst_user_id = #{id}> 0;"
 
