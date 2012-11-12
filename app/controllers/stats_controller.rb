@@ -2000,7 +2000,12 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       end
     end
 
-    conditions << "calls.calldate BETWEEN '#{session_from_date} 00:00:00' AND '#{session_till_date} 23:59:59'"
+    session[:hour_from] = "00"
+    session[:minute_from] = "00"
+    session[:hour_till] = "23"
+    session[:minute_till] = "59"
+
+    conditions << "calls.calldate BETWEEN '#{session_from_datetime}' AND '#{session_till_datetime}'"
     select = ["SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) AS 'billsec'"]
     if session[:usertype] == "reseller"
       select += [SqlExport.replace_price("SUM(#{up})", {:reference => 'user_price'}), SqlExport.replace_price("SUM(#{pp})", {:reference => 'provider_price'})]
@@ -2095,8 +2100,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       @avg_profit_day = 0
       @avg_profit_user = 0
     end
-    a1 = session_from_date
-    a2 = session_till_date
+    a1 = session_from_datetime
+    a2 = session_till_datetime
     @sub_price_vat =0
 
     if session[:usertype] != "reseller"
@@ -3377,15 +3382,20 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     #     logger.fatal  User.system_time_offset.to_i
     calldate = "(calls.calldate + INTERVAL #{current_user.time_offset} SECOND)"
 
+    session[:hour_from] = "00"
+    session[:minute_from] = "00"
+    session[:hour_till] = "23"
+    session[:minute_till] = "59"
+
     sql = "SELECT EXTRACT(YEAR FROM #{calldate}) as year, EXTRACT(MONTH FROM #{calldate}) as month, EXTRACT(day FROM #{calldate}) as day, Count(calls.id) as 'calls' , SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'duration', SUM(#{up}) as 'user_price', SUM(#{rp}) as 'resseler_price', SUM(#{pp}) as 'provider_price', SUM(IF(disposition!='ANSWERED',1,0)) as 'fail'  FROM
     #{des3} calls #{des2} #{SqlExport.left_join_reseler_providers_to_calls_sql}
-    WHERE #{cond} calldate BETWEEN '#{Time.parse(session_from_datetime).change(:hour => 0, :min => 0 , :sec => 0).to_s(:db)}' AND '#{Time.parse(session_till_datetime).change(:hour => 23 , :min => 59, :sec => 59).to_s(:db)}' #{des}
+    WHERE #{cond} calldate BETWEEN '#{session_from_datetime}' AND '#{session_till_datetime}' #{des}
     GROUP BY year, month, day"
     @res = ActiveRecord::Base.connection.select_all(sql)
 
     sql_total = "SELECT  Count(calls.id) as 'calls' , SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'duration', SUM(#{up}) as 'user_price', SUM(#{rp}) as 'resseler_price', SUM(#{pp}) as 'provider_price', SUM(IF(disposition!='ANSWERED',1,0)) as 'fail'  FROM
     #{des3} calls #{des2} #{SqlExport.left_join_reseler_providers_to_calls_sql}
-    WHERE #{cond} calldate BETWEEN '#{Time.parse(session_from_datetime).change(:hour => 0, :min => 0 , :sec => 0).to_s(:db)}' AND '#{Time.parse(session_till_datetime).change(:hour => 23 , :min => 59, :sec => 59).to_s(:db)}' #{des}"
+    WHERE #{cond} calldate BETWEEN '#{session_from_datetime}' AND '#{session_till_datetime}' #{des}"
     @res_total = ActiveRecord::Base.connection.select_all(sql_total)
   end
 
