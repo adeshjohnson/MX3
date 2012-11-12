@@ -250,6 +250,11 @@ class ServicesController < ApplicationController
       session[:day_till] = Date.today.day
     end
 
+    session[:hour_from] = "00"
+    session[:minute_from] = "00"
+    session[:hour_till] = "23"
+    session[:minute_till] = "59"
+
     cond=""
 
     if @search_user.to_i != -1
@@ -262,8 +267,8 @@ class ServicesController < ApplicationController
     if @search_service.to_i != -1
       cond += " AND subscriptions.service_id = '#{@search_service}' "
     end
-    period_start = "'#{session_from_date } 00:00:00'"
-    period_end = "'#{session_till_date} 23:59:59'"
+    period_start = "'#{session_from_datetime}'"
+    period_end = "'#{session_till_datetime}'"
     cond += " AND (#{period_start} BETWEEN subscriptions.activation_start AND subscriptions.activation_end OR
 #{period_end} BETWEEN subscriptions.activation_start AND subscriptions.activation_end OR
 (subscriptions.activation_start > #{period_start} AND subscriptions.activation_end < #{period_end}))"
