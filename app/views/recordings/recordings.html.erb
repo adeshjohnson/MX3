@@ -10,6 +10,11 @@
 
 <table width="100%" class="simple">
   <tr>
+    <td align="left">
+      <%= link_to b_edit + _('Bulk_management'), :action => 'bulk_management' %> &nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
     <td align="right">
       <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details');Element.toggle('clear_search')") %>
     </td>
