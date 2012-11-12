@@ -1029,14 +1029,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=s_did_pattern</td>
-	<td></td>
-</tr>
-<tr>
 	<td>typeKeys</td>
 	<td>id=s_did_pattern</td>
 	<td>370</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>keyUp</td>
@@ -1559,14 +1559,14 @@
 	<td>370</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=dialplan[data1]</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>15000</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=dialplan[data1]</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForCondition</td>
@@ -1839,14 +1839,29 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=dialplan[data1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>id=dialplan[data1]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>typeKeys</td>
 	<td>id=dialplan[data1]</td>
 	<td>555</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=dialplan[data1]</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>keyUp</td>
@@ -1949,24 +1964,14 @@
 	<td>15000</td>
 </tr>
 <tr>
-	<td>focus</td>
-	<td>id=dialplan[data1]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>id=dialplan[data1]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>focus</td>
 	<td>id=dialplan[data1]</td>
 	<td></td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=dialplan[data1]</td>
-	<td>w</td>
 </tr>
 <tr>
 	<td>typeKeys</td>
@@ -1976,7 +1981,17 @@
 <tr>
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>30000</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=dialplan[data1]</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>25000</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -2204,12 +2219,12 @@
 	<td>15000</td>
 </tr>
 <tr>
-	<td>focus</td>
+	<td>type</td>
 	<td>id=ringgroup[did_id]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
+	<td>focus</td>
 	<td>id=ringgroup[did_id]</td>
 	<td></td>
 </tr>
@@ -2217,6 +2232,11 @@
 	<td>typeKeys</td>
 	<td>id=ringgroup[did_id]</td>
 	<td>370</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>keyUp</td>
