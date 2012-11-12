@@ -193,9 +193,29 @@
 	<td>1</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>37093042422</td>
+	<td>assertValue</td>
+	<td>id=ringgroup[did_id]</td>
+	<td>37060011245</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dialplan_name</td>
 	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Name can not be blank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=ringgroup[did_id]</td>
+	<td>37060011245</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1318,7 +1338,52 @@
 <tr>
 	<td>assertText</td>
 	<td>id=ringgroup[did_id]</td>
-	<td>None 37060011221 37060011223 37060011224 37060011225 37060011226 37060011227 37060011230 37060011231 37060011232 37060011233 37060011234 37060011235 37060011238 37060011239 37060011240 37060011242 37060011243 37060011245 37060011246 37060011249 37060011250 37060011251 37060011252 37060011253 37063042438 37093042422</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>id=ringgroup[did_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ringgroup[did_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>id=ringgroup[did_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ringgroup[did_id]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>id=ringgroup[did_id]</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=ringgroup[did_id]</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>3706001122137060011223370600112243706001122537060011226370600112273706001123037060011231370600112323706001123337060011234370600112353706001123837060011239370600112403706001124237060011243370600112453706001124637060011249Found 6 more</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
