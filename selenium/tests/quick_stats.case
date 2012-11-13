@@ -402,6 +402,158 @@
 	<td>quick_stats</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/quick_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/show_quick_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_did_owner_cost</td>
+	<td>5.9600</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_did_owner_cost</td>
+	<td>5.9600</td>
+</tr>
+<!--user price + did inc price-->
+<tr>
+	<td>assertText</td>
+	<td>id=day_cost</td>
+	<td>4.8037</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_cost</td>
+	<td>4.8037</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_did_price</td>
+	<td>5.9600</td>
+</tr>
+<!--user price + did inc price-->
+<tr>
+	<td>assertText</td>
+	<td>id=total_user_price</td>
+	<td>0.1387</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_did_inc_price</td>
+	<td>4.6650</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/show_quick_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>DID Owner Cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_cost</td>
+	<td>3.4583</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_cost</td>
+	<td>3.4583</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_profit</td>
+	<td>3.4583</td>
+</tr>
 </tbody></table>
 </body>
 </html>
