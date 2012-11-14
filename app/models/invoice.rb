@@ -493,7 +493,7 @@ class Invoice < ActiveRecord::Base
 
       sql = "SELECT destinationgroups.id as 'dgid', destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinations.name as 'dest_name', destinationgroups.desttype as 'dg_type',  COUNT(*) as 'calls', SUM(#{options[:billsec_cond]}) as 'billsec', #{options[:selfcost]}, SUM(#{options[:user_price]}) as 'price', #{options[:user_rate]}, #{options[:did_price]}  " +
           "FROM calls "+
-          "LEFT JOIN destinations ON (destinations.prefix = IF(calls.prefix != '', calls.prefix, (SELECT prefix FROM  destinations WHERE destinations.prefix=SUBSTRING(calls.dst, 1, LENGTH(destinations.prefix)) LIMIT 1)) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) "+
+          "LEFT JOIN destinations ON (destinations.prefix = IF(calls.prefix != '', calls.prefix, (SELECT prefix FROM  destinations WHERE destinations.prefix=SUBSTRING(calls.dst, 1, LENGTH(destinations.prefix)) LIMIT 1))) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) "+
           "JOIN devices ON (calls.src_device_id = devices.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}
           WHERE calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
           " AND card_id = 0 AND (devices.user_id = '#{options[:user].id}'  ) #{options[:zero_calls_sql]}" +
