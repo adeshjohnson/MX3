@@ -39,7 +39,7 @@
             <td id="temporary_id_<%= @user.id %>" align="left" class="<%= text_class %>"> <%= h @user.temporary_id %>      </td>
             <td id="username_<%= @user.id %>" align="left" class="<%= text_class %>"> <%= h @user.username %>      </td>
             <td id="usertype_<%= @user.id %>" align="left" class="<%= text_class %>"> <%= h @user.usertype %>      </td>
-            <td id="first_name_<%= @user.id %>" align="left" class="<%= text_class %>"> <%= in_place_editor_field :user, :first_name %> <%= in_place_editor_field :user, :last_name %>      </td>
+            <td id="first_name_<%= @user.id %>" align="left" class="<%= text_class %>"> <%= @user.first_name %> <%= @user.last_name %>      </td>
 
             <td id="prepaid_<%= @user.id %>" align="left" class="<%= text_class %>">
               <%= _('Prepaid') if @user.postpaid != 1 %>  <%= _('Postpaid') if @user.postpaid == 1 %>
