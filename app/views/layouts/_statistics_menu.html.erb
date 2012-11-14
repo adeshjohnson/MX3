@@ -18,7 +18,6 @@
     <% end  %>
     statistics_menu.add(14, 0, '<%= _('Various') %>');
     statistics_menu.add(17, 14, '<%= _('Country_Stats') %>', '<%= Web_Dir %>/stats/country_stats');
-    statistics_menu.add(28, 14, '<%= _('Campaign_Stats') %>', '<%= Web_Dir %>/autodialer/campaign_statistics');
     <% unless session[:usertype] == "accountant" and session[:acc_manage_dids_opt_1].to_i == 0 %>
     statistics_menu.add(24, 14, '<%= _('DIDs') %>', '<%= Web_Dir %>/stats/dids');
     statistics_menu.add(26, 24, '<%= _('Usage') %>', '<%= Web_Dir %>/stats/dids_usage');

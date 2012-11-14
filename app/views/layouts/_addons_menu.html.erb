@@ -12,6 +12,8 @@
     <% if ad_active? %>
     addons_menu.add(<%= i %>, <%= si %>, '<%= _('Auto_Dialer') %>', '<%= Web_Dir %>/autodialer/campaigns');
     <% i += 1 %>
+    addons_menu.add(<%= i %>, <%= i-1 %>, '<%= _('Campaign_Stats') %>', '<%= Web_Dir %>/autodialer/campaign_statistics');
+    <% i += 1 %>
     <% end %>
 
     <% if callback_active?%>
