@@ -420,6 +420,10 @@ class Device < ActiveRecord::Base
     Call.find(:all, :conditions => "accountcode = '#{self.id}'")
   end
 
+  def any_calls
+    Call.where(:accountcode => self.id).limit(1)
+  end
+
   def calls(type, date_from, date_till)
     #possible types:
     # all +
@@ -941,7 +945,7 @@ class Device < ActiveRecord::Base
       notice = _('Cant_delete_device_has_forwarded_calls')
     end
 
-    if self.all_calls.size > 0 and notice.blank?
+    if self.any_calls.size > 0 and notice.blank?
       notice = _('Cant_delete_device_has_calls')
     end
 
