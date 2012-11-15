@@ -2989,7 +2989,7 @@ Sets default tax values for users or cardgroups
       redirect_back_or_default('/callc/main') and return false
     else
       file = session[:file]
-      sep = params[:custom].to_i > 0 ? params[:sepn].to_s : params[:sepn2].to_s
+      sep = params[:custom].to_i > 0 ? (!params[:sepn].to_s.blank? ? params[:sepn].to_s : ";") : params[:sepn2].to_s
       arr = file.split("\n")
       @fl = []
       5.times { |num| @fl[num] = arr[num].to_s.split(sep) }
