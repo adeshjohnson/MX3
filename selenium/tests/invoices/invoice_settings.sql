@@ -53,7 +53,7 @@ delete from `conflines` where id=207;
 delete from `conflines` where id=240;
 delete from `conflines` where id=240;
 INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
-(18, 'Invoice_Number_Length', '4', 0, NULL),
+(18, 'Invoice_Number_Length', '11', 0, NULL),
 (19, 'Invoice_Number_Type', '1', 0, NULL),
 (37, 'Tariff_for_registered_users', NULL, 0, NULL),
 (38, 'LCR_for_registered_users', NULL, 0, NULL),
