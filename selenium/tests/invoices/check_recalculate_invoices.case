@@ -54,12 +54,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/invoices</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link_generate_invoices</td>
+	<td>/billing/accounting/generate_invoices</td>
 	<td></td>
 </tr>
 <tr>
@@ -149,12 +144,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/services/subscriptions_list/0</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>add_subscription</td>
+	<td>/billing/services/subscription_new/0</td>
 	<td></td>
 </tr>
 <tr>
@@ -214,12 +204,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/services/subscriptions_list/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>add_subscription</td>
+	<td>/billing/services/subscription_new/2</td>
 	<td></td>
 </tr>
 <tr>
@@ -288,8 +273,8 @@
 	<td>250.5161</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link_invoices_recalculaion</td>
+	<td>open</td>
+	<td>/billing/accounting/invoices_recalculation</td>
 	<td></td>
 </tr>
 <tr>
@@ -356,11 +341,6 @@
 	<td>click</td>
 	<td>id=invoice_allow_recalculate_after_send</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>id=invoice_allow_recalculate_after_send</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
