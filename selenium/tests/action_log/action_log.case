@@ -326,6 +326,41 @@
 	<td>hourly_actions_cooldown_time</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/action_log_first_date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>date_110</td>
+	<td>2009-01-01 00:00:01</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>type_110</td>
+	<td>error</td>
+</tr>
 </tbody></table>
 </body>
 </html>
