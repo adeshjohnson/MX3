@@ -138,6 +138,16 @@
 	<td>1</td>
 </tr>
 <tr>
+	<td>waitForTextPresent</td>
+	<td>Create payment for completed invoice:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=create_payment</td>
+	<td>off</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/accounting/generate_invoice_pdf/1?test=1</td>
 	<td></td>
@@ -300,6 +310,21 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Back to Invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back to Invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=link_generate_invoices</td>
 	<td></td>
 </tr>
 <tr>
