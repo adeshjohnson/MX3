@@ -53,7 +53,7 @@ module PdfGen
 
           headers2 << {:text => _('Number')}
           headers2 << {:text => _('Provider')}
-          headers2 << {:text => _('Incoming')}
+          # headers2 << {:text => _('Incoming')}
           headers2 << {:text => _('Owner')}
           #  headers << headers2
         end
@@ -85,7 +85,7 @@ module PdfGen
         if usertype == "admin"
           if direction == "incoming"
             headers << {:text => _('Provider')}.merge(top_options)
-            headers << {:text => _('Incoming')}.merge(top_options)
+            # headers << {:text => _('Incoming')}.merge(top_options)
             headers << {:text => _('Owner')}.merge(top_options)
             headers << {:text => _('Profit')}.merge(top_options)
           else

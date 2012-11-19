@@ -1724,7 +1724,7 @@ class Call < ActiveRecord::Base
   private
 
   def Call.last_calls_parse_params(options={})
-    jn = ['LEFT JOIN users ON (calls.dst_user_id = users.id)',
+    jn = ['LEFT JOIN users ON (calls.user_id = users.id)',
           'LEFT JOIN users AS resellers ON (calls.reseller_id = resellers.id)',
           'LEFT JOIN dids ON (calls.did_id = dids.id)',
           'LEFT JOIN cards ON (calls.card_id = cards.id)',
