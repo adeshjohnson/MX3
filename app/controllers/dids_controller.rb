@@ -1233,7 +1233,7 @@ ORDER BY dids.did ASC"
     @dids_lines_full.each { |row|
       @total[:calls] += row.total_calls.to_i
       @total[:min] += row.dids_billsec.to_d
-      @total[:inc] += row.inc_price.to_d
+      #@total[:inc] += row.inc_price.to_d
       @total[:own] += row.own_price.to_d
       @total[:prov] += row.d_prov_price.to_d
     }
@@ -1429,8 +1429,8 @@ ORDER BY dids.did ASC"
         order_by = "total_calls"
       when "billed_duration" then
         order_by = "dids_billsec"
-      when "incoming_price" then
-        order_by = "inc_price"
+      # when "incoming_price" then
+      #  order_by = "inc_price"
       when "owner_price" then
         order_by = "own_price"
       when "provider_price" then
