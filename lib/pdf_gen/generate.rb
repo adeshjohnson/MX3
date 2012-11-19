@@ -734,7 +734,7 @@ module PdfGen
         if main_options[:can_see_finances]
 
           item << nice_number(call['did_prov_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
-          item << nice_number(call['did_inc_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
+          # item << nice_number(call['did_inc_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
           item << nice_number(call['did_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         end
       else
@@ -782,7 +782,7 @@ module PdfGen
         item << nice_number(total_calls.total_user_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         item << {:text => ''}
         item << nice_number(total_calls.total_did_prov_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
-        item << nice_number(total_calls.total_did_inc_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
+        # item << nice_number(total_calls.total_did_inc_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         item << nice_number(total_calls.total_did_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
       end
       if usertype == 'reseller'

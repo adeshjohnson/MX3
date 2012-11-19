@@ -89,7 +89,8 @@ module SqlExport
   end
 
   def SqlExport.user_price_sql
-    "(calls.user_price + calls.did_inc_price)"
+    # "(calls.user_price + calls.did_inc_price)"
+    "(calls.user_price)"
   end
 
   def SqlExport.user_did_price_sql
@@ -102,9 +103,11 @@ module SqlExport
 
   def SqlExport.reseller_price_sql
     if (defined?(RSPRO_Active) and RSPRO_Active.to_i == 1)
-      "(IF(providers.user_id > 0, 0, reseller_price) + calls.did_inc_price)"
+      # "(IF(providers.user_id > 0, 0, reseller_price) + calls.did_inc_price)"
+      "(IF(providers.user_id > 0, 0, reseller_price))"
     else
-      "(calls.reseller_price + calls.did_inc_price)"
+      #"(calls.reseller_price + calls.did_inc_price)"
+      "(calls.reseller_price)"
     end
   end
 
@@ -159,9 +162,11 @@ module SqlExport
 
   def SqlExport.admin_reseller_price_sql
     if (defined?(RSPRO_Active) and RSPRO_Active.to_i == 1)
-      "(IF(providers.user_id > 0, 0 , reseller_price) + calls.did_inc_price)"
+      # "(IF(providers.user_id > 0, 0 , reseller_price) + calls.did_inc_price)"
+      "(IF(providers.user_id > 0, 0 , reseller_price))"
     else
-      "(calls.reseller_price + calls.did_inc_price)"
+      # "(calls.reseller_price + calls.did_inc_price)"
+      "(calls.reseller_price)"
     end
   end
 

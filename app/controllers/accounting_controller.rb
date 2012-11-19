@@ -1178,7 +1178,7 @@ class AccountingController < ApplicationController
     user_price = SqlExport.replace_price(up, {:ex => ex})
     reseller_price = SqlExport.replace_price(rp, {:ex => ex})
     did_sql_price = SqlExport.replace_price('calls.did_price', {:ex => ex, :reference => 'did_price'})
-    did_inc_sql_price = SqlExport.replace_price('calls.did_inc_price', {:ex => ex, :reference => 'did_inc_price'})
+    # did_inc_sql_price = SqlExport.replace_price('calls.did_inc_price', {:ex => ex, :reference => 'did_inc_price'})
     #did_sql_price = SqlExport.replace_price('calls.did_price', 'did_price')
     selfcost = SqlExport.replace_price(pp, {:ex => ex, :reference => 'selfcost'})
     user_rate = SqlExport.replace_price('calls.user_rate', {:ex => ex, :reference => 'user_rate'})

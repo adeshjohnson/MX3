@@ -137,7 +137,7 @@
         <% end -%>
         <th align="center" colspan=<%= colspan %>>          <%= _('User') %> </th>
         <% if can_see_finances? %>
-            <th align="center" colspan=4> <%= _('DID_Price') %> </th>
+            <th align="center" colspan=3> <%= _('DID_Price') %> </th>
             <% if admin? %>
                 <th align="left" rowspan=2><%= _('Profit') %></th>
             <% end %>
@@ -167,7 +167,7 @@
         <th align="left"><%= raw nice_list_order('number', _('Number'), @options) %></th>
         <% if can_see_finances? %>
             <th align="left"><%= raw nice_list_order('d_provider', _('Provider'), @options) %></th>
-            <th align="left"><%= raw nice_list_order('d_inc', _('Incoming'), @options) %></th>
+            <!--<th align="left"><%#= raw nice_list_order('d_inc', _('Incoming'), @options) %></th>-->
             <th align="left"><%= raw nice_list_order('d_owner', _('Owner'), @options) %></th>
         <% else %>
             <th></th>
@@ -223,7 +223,7 @@
             <td id="did_<%= call.id %>" class="<%= text_class %>" align="left"><%= did.did if did %></td>
             <% if can_see_finances? %>
                 <td id="did_prov_price_<%= call.id %>" class="<%= text_class %>" align="left"><%= nice_number(call.did_prov_price_exrate) %></td>
-                <td id="did_inc_price_<%= call.id %>" class="<%= text_class %>" align="left"><%= nice_number(call.did_inc_price_exrate) %></td>
+                <!--<td id="did_inc_price_<%#= call.id %>" class="<%#= text_class %>" align="left"><%#= nice_number(call.did_inc_price_exrate) %></td>-->
                 <td id="did_price_<%= call.id %>" class="<%= text_class %>" align="left"><%= nice_number(call.did_price_exrate) %></td>
             <% end %>
             <% if admin? %>
@@ -268,7 +268,7 @@
 
         <% if can_see_finances? %>
             <th id="total_did_prov_price" align="left"><%= nice_number(@total_calls_stats.total_did_prov_price) %></th>
-            <th id="total_did_inc_price" align="left"><%= nice_number(@total_calls_stats.total_did_inc_price) %></th>
+            <!--<th id="total_did_inc_price" align="left"><%#= nice_number(@total_calls_stats.total_did_inc_price) %></th>-->
             <th id="total_did_price" align="left"><%= nice_number(@total_calls_stats.total_did_price) %></th>
         <% end %>
         <% if admin? %>

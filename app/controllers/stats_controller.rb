@@ -1099,7 +1099,7 @@ in before filter : user (:find_user_from_id_or_session)
 
     #incoming
     @total_inc_prov_price = @total_stats.total_did_prov_price.to_d * exchange_rate
-    @total_inc_price = @total_stats.total_did_inc_price.to_d * exchange_rate
+    # @total_inc_price = @total_stats.total_did_inc_price.to_d * exchange_rate
     @total_price2 = @total_stats.total_did_price.to_d * exchange_rate
 
 
@@ -1138,7 +1138,7 @@ in before filter : user (:find_user_from_id_or_session)
 
         @curr_rate2[call.id] = call.did_price * exchange_rate if call.did_price
         @curr_prov_rate2[call.id] = call.did_prov_price * exchange_rate if call.did_prov_price
-        @curr_inc_rate[call.id] = call.did_inc_price * exchange_rate if call.did_inc_price
+        # @curr_inc_rate[call.id] = call.did_inc_price * exchange_rate if call.did_inc_price
       else
         # outgoing calls
 
@@ -1313,7 +1313,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     total_prov_price = 0
     total_prfit = 0
     total_did_provider = 0
-    total_did_inc = 0
+    # total_did_inc = 0
     total_did_own = 0
     total_did_prof = 0
 
@@ -1334,7 +1334,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       end
 
       @rate_did_pr = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_prov_price.to_d]})
-      @rate_did_ic = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_inc_price.to_d]})
+      # @rate_did_ic = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_inc_price.to_d]})
       @rate_did_ow = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_price.to_d]})
 
       item << call.calldate.strftime("%Y-%m-%d %H:%M:%S")
@@ -1353,9 +1353,10 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       if session[:usertype] == "admin"
         if @direction == "incoming"
           item << nice_number(@rate_did_pr)
-          item << nice_number(@rate_did_ic)
+          # item << nice_number(@rate_did_ic)
           item << nice_number(@rate_did_ow)
-          item << nice_number(@rate_did_pr + @rate_did_ic + @rate_did_ow)
+          # item << nice_number(@rate_did_pr + @rate_did_ic + @rate_did_ow)
+          item << nice_number(@rate_did_pr + @rate_did_ow)
         else
           item << nice_number(@rate_cur3)
           item << nice_number(@rate_prov)
@@ -1396,9 +1397,10 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       total_prfit += @rate_cur3.to_d - @rate_prov.to_d
       total_billsec += call.nice_billsec
       total_did_provider += @rate_did_pr
-      total_did_inc += @rate_did_ic
+      # total_did_inc += @rate_did_ic
       total_did_own += @rate_did_ow
-      total_did_prof += @rate_did_pr.to_d + @rate_did_ic.to_d + @rate_did_ow.to_d
+      # total_did_prof += @rate_did_pr.to_d + @rate_did_ic.to_d + @rate_did_ow.to_d
+      total_did_prof += @rate_did_pr.to_d + @rate_did_ow.to_d
 
       items << item
     end
@@ -1410,7 +1412,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     if session[:usertype] == "admin" or session[:usertype] == "reseller"
       if @direction == "incoming"
         item << nice_number(total_did_provider)
-        item << nice_number(total_did_inc)
+        # item << nice_number(total_did_inc)
         item << nice_number(total_did_own)
         item << nice_number(total_did_prof)
       else
@@ -1982,6 +1984,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @responsible_accountant_id = params[:responsible_accountant_id] ? params[:responsible_accountant_id].to_i : -1
 
     conditions = []
+    cond_did_owner_cost = []
     user_sql2 = ""
     if session[:usertype] == "reseller"
       conditions << "calls.reseller_id = #{session[:user_id].to_i}"
@@ -1989,13 +1992,16 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         conditions << "calls.user_id = '#{params[:user_id].to_i}'"
         #user_sql2 = " AND subscriptions.user_id = '#{@user_id}' "
       end
+      cond_did_owner_cost << conditions
     else
       if params[:user_id] and params[:user_id] != "-1"
 
         conditions << "calls.user_id IN (SELECT id FROM users WHERE id = '#{params[:user_id].to_i}' OR owner_id = #{params[:user_id].to_i})"
+        cond_did_owner_cost << "calls.dst_user_id IN (SELECT id FROM users WHERE id = '#{params[:user_id].to_i}' OR owner_id = #{params[:user_id].to_i})"
         user_sql2 = " AND subscriptions.user_id = '#{@user_id}' "
       elsif params[:responsible_accountant_id] and params[:responsible_accountant_id] != "-1"
         conditions << "calls.user_id IN (SELECT id FROM users WHERE id IN (SELECT users.id FROM `users` JOIN users tmp ON(tmp.id = users.responsible_accountant_id) WHERE tmp.id = '#{@responsible_accountant_id}') OR owner_id IN (SELECT users.id FROM `users` JOIN users tmp ON(tmp.id = users.responsible_accountant_id) WHERE tmp.id = '#{@responsible_accountant_id}'))"
+        cond_did_owner_cost << "calls.dst_user_id IN (SELECT id FROM users WHERE id IN (SELECT users.id FROM `users` JOIN users tmp ON(tmp.id = users.responsible_accountant_id) WHERE tmp.id = '#{@responsible_accountant_id}') OR owner_id IN (SELECT users.id FROM `users` JOIN users tmp ON(tmp.id = users.responsible_accountant_id) WHERE tmp.id = '#{@responsible_accountant_id}'))"
         user_sql2 = " AND subscriptions.user_id IN (SELECT users.id FROM `users` JOIN users tmp ON(tmp.id = users.responsible_accountant_id) WHERE tmp.id = '#{@responsible_accountant_id}')"
       end
     end
@@ -2006,12 +2012,12 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     session[:minute_till] = "59"
 
     conditions << "calls.calldate BETWEEN '#{session_from_datetime}' AND '#{session_till_datetime}'"
+    cond_did_owner_cost << "calls.calldate BETWEEN '#{session_from_datetime}' AND '#{session_till_datetime}'"
     select = ["SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) AS 'billsec'"]
+    select += [SqlExport.replace_price("SUM(#{up})", {:reference => 'user_price'}), SqlExport.replace_price("SUM(#{pp})", {:reference => 'provider_price'})]
     if session[:usertype] == "reseller"
-      select += [SqlExport.replace_price("SUM(#{up})", {:reference => 'user_price'}), SqlExport.replace_price("SUM(#{pp})", {:reference => 'provider_price'})]
       conditions << "calls.reseller_id = #{session[:user_id].to_i}"
-    else
-      select += [SqlExport.replace_price("SUM(#{up})", {:reference => 'user_price'}), SqlExport.replace_price("SUM(#{pp})", {:reference => 'provider_price'})]
+      cond_did_owner_cost << "calls.reseller_id = #{session[:user_id].to_i}"
     end
     total = Call.find(:all, :select => select.join(", "), :joins => "LEFT JOIN users ON (users.id = calls.user_id) #{ SqlExport.left_join_reseler_providers_to_calls_sql}", :conditions => (conditions +["disposition = 'ANSWERED'"]).join(" AND "))[0]
     @total_duration = (total["billsec"]).to_i
@@ -2051,31 +2057,21 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     if @total_call_price != 0 && @total_answered_calls != 0
       select = [""]
-      if session[:usertype] == "reseller"
-        res = Call.find(:all,
-                        :select => "#{SqlExport.replace_price("SUM(#{up})", {:reference => 'price'})}, SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) AS 'duration', COUNT(DISTINCT(calls.user_id)) AS 'users', SUM(did_price) AS did_price",
-                        :joins => "LEFT JOIN users ON (users.id = calls.user_id) #{ SqlExport.left_join_reseler_providers_to_calls_sql}",
-                        :conditions => (conditions + ["calls.disposition = 'ANSWERED'"]).join(" AND "))
-        @did_owner_cost += res[0].did_price.to_d
-      else
-        res = Call.find(:all,
-                        :select => "#{SqlExport.replace_price("SUM(#{up})", {:reference => 'price'})}, SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) AS 'duration', COUNT(DISTINCT(calls.user_id)) AS 'users', SUM(did_price) AS did_price",
-                        :joins => "LEFT JOIN users ON (users.id = calls.user_id) #{ SqlExport.left_join_reseler_providers_to_calls_sql}",
-                        :conditions => (conditions + ["calls.disposition = 'ANSWERED'"]).join(" AND "))
-        @did_owner_cost += res[0].did_price.to_d
+      res = Call.find(:all,
+                      :select => "#{SqlExport.replace_price("SUM(#{up})", {:reference => 'price'})}, SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) AS 'duration', COUNT(DISTINCT(calls.user_id)) AS 'users', SUM(did_price) AS did_price",
+                      :joins => "LEFT JOIN users ON (users.id = calls.user_id) #{ SqlExport.left_join_reseler_providers_to_calls_sql}",
+                      :conditions => (conditions + ["calls.disposition = 'ANSWERED'"]).join(" AND "))
+      if session[:usertype] != "reseller"
+        @did_owner_cost = Call.find(:first,
+                      :select => "SUM(did_price) AS did_price",
+                      :joins => "LEFT JOIN users ON (users.id = calls.user_id) #{ SqlExport.left_join_reseler_providers_to_calls_sql}",
+                      :conditions => (cond_did_owner_cost + ["calls.disposition = 'ANSWERED'"]).join(" AND ")).did_price
       end
 
-      if session[:usertype] == "reseller"
-        resu = Call.find(:all,
-                         :select => "COUNT(DISTINCT(calls.user_id)) AS 'users'",
-                         :joins => "LEFT JOIN users ON (users.id = calls.user_id) #{ SqlExport.left_join_reseler_providers_to_calls_sql}",
-                         :conditions => (conditions + ["calls.disposition = 'ANSWERED' and card_id < 1"]).join(" AND "))
-      else
-        resu = Call.find(:all,
-                         :select => "COUNT(DISTINCT(calls.user_id)) AS 'users'",
-                         :joins => "LEFT JOIN users ON (users.id = calls.user_id) #{ SqlExport.left_join_reseler_providers_to_calls_sql}",
-                         :conditions => (conditions + ["calls.disposition = 'ANSWERED' and card_id < 1"]).join(" AND "))
-      end
+      resu = Call.find(:all,
+                       :select => "COUNT(DISTINCT(calls.user_id)) AS 'users'",
+                       :joins => "LEFT JOIN users ON (users.id = calls.user_id) #{ SqlExport.left_join_reseler_providers_to_calls_sql}",
+                       :conditions => (conditions + ["calls.disposition = 'ANSWERED' and card_id < 1"]).join(" AND "))
       @total_users = resu[0]["users"].to_i if resu and resu[0]
 
       @total_percent = 100
@@ -2232,6 +2228,9 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       end
     end
     @s_total_profit = @total_profit
+    if session[:usertype] != "reseller"
+      @s_total_profit += @did_owner_cost
+    end
     @s_total_profit += @sub_price
   end
 
@@ -2815,7 +2814,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     #@direction = params[:direction]
     direction = '' #" AND calls.callertype = '#{dir}'"
     # end
-    sql = "SELECT dids.*, SUM(calls.did_price) as did_price , SUM(calls.did_prov_price) as did_prov_price,  SUM(calls.did_inc_price) as did_inc_price, COUNT(calls.id) as 'calls_size', providers.name, users.username, users.first_name, users.last_name, actions.date FROM dids
+    sql = "SELECT dids.*, SUM(calls.did_price) as did_price , SUM(calls.did_prov_price) as did_prov_price, COUNT(calls.id) as 'calls_size', providers.name, users.username, users.first_name, users.last_name, actions.date FROM dids
     JOIN calls on (calls.did_id = dids.id)
     JOIN providers on (dids.provider_id = providers.id)
     JOIN users on (dids.user_id = users.id)
@@ -2855,8 +2854,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       for r in @res
         @dids_total_price += r['did_price'].to_d
         @dids_total_price_provider += r['did_prov_price'].to_d
-        @dids_total_inc_price += r['did_inc_price'].to_d
-        @dids_total_profit += r['did_price'].to_d + r['did_prov_price'].to_d + r['did_inc_price'].to_d
+        # @dids_total_inc_price += r['did_inc_price'].to_d
+        @dids_total_profit += r['did_price'].to_d + r['did_prov_price'].to_d # + r['did_inc_price'].to_d
         @dids_total_calls += r['calls_size'].to_i
       end
     end

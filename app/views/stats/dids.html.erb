@@ -78,10 +78,11 @@
                 <td id="did_price_<%= r['id'] %>" align="right"> <%= nice_number r['did_price'] %></td>
                 <td id="did_profit_<%= r['id'] %>" align="right"> <%= nice_number(r['did_price'].to_f - r['did_prov_price'].to_f) %></td>
             <% else %>
-                <td id="did_inc_price_<%= r['id'] %>" align="right"> <%= nice_number(r['did_inc_price']) %></td>
+                <!--<td id="did_inc_price_<%#= r['id'] %>" align="right"> <%#= nice_number(r['did_inc_price']) %></td>-->
                 <td id="did_price_<%= r['id'] %>" align="right"> <%= nice_number r['did_price'] %></td>
                 <td id="did_prov_price_<%= r['id'] %>" align="right"> <%= nice_number r['did_prov_price'] %></td>
-                <td id="did_profit_<%= r['id'] %>" align="right"> <%= nice_number(r['did_price'].to_f + r['did_prov_price'].to_f + r['did_inc_price'].to_f) %></td>
+                <!--<td id="did_profit_<%#= r['id'] %>" align="right"> <%#= nice_number(r['did_price'].to_f + r['did_prov_price'].to_f + r['did_inc_price'].to_f) %></td>-->
+                <td id="did_profit_<%= r['id'] %>" align="right"> <%= nice_number(r['did_price'].to_f + r['did_prov_price'].to_f) %></td>
             <% end -%>
         <% end -%>
       </tr>
