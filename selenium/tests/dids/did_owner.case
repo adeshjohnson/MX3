@@ -254,12 +254,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_3</td>
+	<td>id=id_name_2</td>
 	<td>DID Owner Cost</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_3</td>
+	<td>id=id_price_2</td>
 	<td>4.1500</td>
 </tr>
 <tr>
@@ -424,12 +424,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_6</td>
+	<td>id=id_name_4</td>
 	<td>DID Owner Cost</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_6</td>
+	<td>id=id_price_4</td>
 	<td>1.8100</td>
 </tr>
 <tr>
@@ -623,18 +623,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForTextPresent</td>
+	<td><br />Invoices generated: 1 </td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/accounting/invoice_details/3</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_9</td>
+	<td>id=id_name_6</td>
 	<td>DID Owner Cost</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_9</td>
+	<td>id=id_price_6</td>
 	<td>1.8100</td>
 </tr>
 <tr>
@@ -785,7 +790,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=price</td>
-	<td>5.8286</td>
+	<td>4.6220</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -810,7 +815,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=user_balance_value</td>
-	<td>105.8286 USD</td>
+	<td>104.6220 USD</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -987,11 +992,7 @@
 	<td></td>
 </tr>
 <!--did_inc_price - src user-->
-<tr>
-	<td>assertText</td>
-	<td>id=rate_29</td>
-	<td>0.5167</td>
-</tr>
+<!--<tr> 	<td>assertText</td> 	<td>id=rate_29</td> 	<td>0.5167</td> </tr>-->
 <!--did_price - dst user-->
 <tr>
 	<td>assertText</td>
@@ -999,11 +1000,7 @@
 	<td>2.7800</td>
 </tr>
 <!--did_inc_price - src user-->
-<tr>
-	<td>assertText</td>
-	<td>id=rate_31</td>
-	<td>0.6900</td>
-</tr>
+<!--<tr> 	<td>assertText</td> 	<td>id=rate_31</td> 	<td>0.6900</td> </tr>-->
 <!--did_price - dst user-->
 <tr>
 	<td>assertText</td>
@@ -1083,11 +1080,7 @@
 	<td>0.7750</td>
 </tr>
 <!--did_inc_price - src user-->
-<tr>
-	<td>assertText</td>
-	<td>id=rate_30</td>
-	<td>2.3167</td>
-</tr>
+<!--<tr> 	<td>assertText</td> 	<td>id=rate_30</td> 	<td>2.3167</td> </tr>-->
 <!--did_price - dst user-->
 <tr>
 	<td>assertText</td>
@@ -1095,11 +1088,7 @@
 	<td>1.0350</td>
 </tr>
 <!--did_inc_price - src user-->
-<tr>
-	<td>assertText</td>
-	<td>id=rate_32</td>
-	<td>1.1417</td>
-</tr>
+<!--<tr> 	<td>assertText</td> 	<td>id=rate_32</td> 	<td>1.1417</td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -1172,11 +1161,7 @@
 	<td></td>
 </tr>
 <!--did_inc_price - src user-->
-<tr>
-	<td>assertText</td>
-	<td>id=profit_30</td>
-	<td>2.3167</td>
-</tr>
+<!--<tr> 	<td>assertText</td> 	<td>id=profit_30</td> 	<td>2.3167</td> </tr>-->
 <!--did_price - dst user-->
 <tr>
 	<td>assertTextNotPresent</td>
@@ -1184,11 +1169,7 @@
 	<td></td>
 </tr>
 <!--did_inc_price - src user-->
-<tr>
-	<td>assertText</td>
-	<td>id=profit_32</td>
-	<td>1.1417</td>
-</tr>
+<!--<tr> 	<td>assertText</td> 	<td>id=profit_32</td> 	<td>1.1417</td> </tr>-->
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>Owner</td>
