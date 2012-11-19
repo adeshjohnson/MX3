@@ -25,7 +25,7 @@
 <tr>
 	<td>type</td>
 	<td>login_psw</td>
-	<td>admin</td>
+	<td>admin1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -34,7 +34,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Succesfully logged in</td>
+	<td>Successfully logged in</td>
 	<td></td>
 </tr>
 <!--enable billing address for admin users-->
@@ -96,12 +96,12 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>gateways_authorize_net_billing_address_first_name</td>
+	<td>id=gateways_authorize_net_first_name</td>
 	<td>System</td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>gateways_authorize_net_billing_address_last_name</td>
+	<td>id=gateways_authorize_net_last_name</td>
 	<td>Admin</td>
 </tr>
 <tr>
@@ -131,8 +131,8 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>gateways_authorize_net_billing_address_country</td>
-	<td></td>
+	<td>id=gateways_authorize_net_billing_address_country</td>
+	<td>Afghanistan</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -207,13 +207,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>gateways_authorize_net_billing_address_first_name</td>
+	<td>assertElementPresent</td>
+	<td>id=gateways_authorize_net_first_name</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>gateways_authorize_net_billing_address_last_name</td>
+	<td>assertElementPresent</td>
+	<td>id=gateways_authorize_net_last_name</td>
 	<td></td>
 </tr>
 <tr>
