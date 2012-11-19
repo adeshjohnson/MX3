@@ -34,7 +34,7 @@ class CurrenciesController < ApplicationController
   def currencies
     @page_title = _('Currencies')
     @page_icon = "money_dollar.png"
-    @currs = Currency.find(:all, :order => "id ASC")
+    @currs = Currency.find(:all, :order => "name ASC")
   end
 
 
