@@ -1247,6 +1247,21 @@
 </tr>
 <tr>
 	<td>click</td>
+	<td>id=use_suggestion_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Not enough columns - select correct Column Separator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=use_suggestion_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>use_suggestion_2</td>
 	<td></td>
 </tr>
@@ -1254,6 +1269,16 @@
 	<td>assertValue</td>
 	<td>sepn2</td>
 	<td>\</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sepn2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=sepn2</td>
+	<td>;</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1437,7 +1462,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[@id='destinations_to_update']/b</td>
+	<td>id=dest_to_update</td>
 	<td>1</td>
 </tr>
 <tr>
@@ -1481,14 +1506,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>keyDown</td>
+	<td>search</td>
+	<td>w</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>search</td>
 	<td>370</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>results</td>
-	<td></td>
+	<td>keyUp</td>
+	<td>search</td>
+	<td>w</td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
@@ -1517,7 +1547,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Succesfully logged in</td>
+	<td>Successfully logged in</td>
 	<td></td>
 </tr>
 <tr>
@@ -1537,7 +1567,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>tariff[purpose]_user_wholesale</td>
+	<td>id=tariff_purpose_user_wholesale</td>
 	<td></td>
 </tr>
 <tr>
