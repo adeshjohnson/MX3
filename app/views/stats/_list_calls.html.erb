@@ -27,7 +27,7 @@
               <% if @direction == "incoming" %>
                   <% if session[:usertype] == "admin" %>
                       <th align="right"> <%= _('Provider_price') %> </th>
-                      <th align="right"> <%= _('Incoming_price') %> </th>
+                      <!--<th align="right"> <%#= _('Incoming_price') %> </th>-->
                       <th align="right"> <%= _('Owner_price') %> </th>
                       <th align="right"> <%= _('Profit') %> </th>
                   <% end %>
@@ -49,7 +49,7 @@
               <% if @direction == "incoming" %>
                   <% if session[:usertype] == "admin" %>
                       <th align="right"> <%= _('Provider_price') %>  </th>
-                      <th align="right"> <%= _('Incoming_price') %>  </th>
+                      <!--<th align="right"> <%#= _('Incoming_price') %>  </th>-->
                       <th align="right"> <%= _('Owner_price') %>  </th>
                       <th align="right"> <%= _('Profit') %> </th>
                   <% else %>
@@ -146,9 +146,9 @@
               <% if @direction == "incoming" %>
                   <% if session[:usertype] == "admin" %>
                       <td id="prov_date_<%= call.id %>" align="right"><%= nice_number(@curr_prov_rate2[call.id]) %> </td>
-                      <td id="inc_rate_<%= call.id %>" align="right"><%= nice_number(@curr_inc_rate[call.id].to_f) %> </td>
+                      <!--<td id="inc_rate_<%#= call.id %>" align="right"><%#= nice_number(@curr_inc_rate[call.id].to_f) %> </td>-->
                       <td id="rate2_<%= call.id %>" align="right"><%= nice_number(@curr_rate2[call.id].to_f) %>  </td>
-                      <td id="rate_sum_<%= call.id %>" align="right"><%= nice_number(@curr_rate2[call.id].to_f + @curr_prov_rate2[call.id].to_f + @curr_inc_rate[call.id].to_f) %> </td>
+                      <td id="rate_sum_<%= call.id %>" align="right"><%= nice_number(@curr_rate2[call.id].to_f + @curr_prov_rate2[call.id].to_f) %> </td>
                   <% else %>
                       <td id="rate2_<%= call.id %>" align="right"><%= nice_number(@curr_rate2[call.id].to_f) %>  </td>
                   <% end %>
@@ -240,7 +240,7 @@
           <% if @direction == "incoming" %>
               <% if session[:usertype] == "admin" %>
                   <th id="total_prov_price" align="right"><%= nice_number @total_inc_prov_price %></th>
-                  <th id="total_inc_price" align="right"><%= nice_number(@total_inc_price) %> </th>
+                  <!--<th id="total_inc_price" align="right"><%#= nice_number(@total_inc_price) %> </th>-->
                   <th id="total_price2" align="right"><%= nice_number(@total_price2) %>  </th>
                   <th id="total_profit" align="right"><%= nice_number(@total_profit) %> </th>
               <% else %>
