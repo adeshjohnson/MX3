@@ -43,77 +43,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Step: 0</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Test Tariff</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>file</td>
-	<td>/home/mor/selenium/files/pics/big_test_image.jpg</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Please select CSV file</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>file</td>
-	<td>/home/mor/selenium/files/csv/empty_file.csv</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Please select file</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>file</td>
-	<td>/home/mor/selenium/files/csv/invalid_numbers.csv</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/import_csv2/1?step=0</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>file</td>
-	<td>/home/mor/selenium/files/csv/not_exist.csv</td>
-</tr>
-<!--<tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr>-->
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/import_csv2/1?step=0</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>file</td>
 	<td>/home/mor/selenium/files/csv/tariff_import2.csv</td>
@@ -1109,6 +1038,310 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>New rates created: 12</td>
+	<td></td>
+</tr>
+<!--set csv settings-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>csv_separator</td>
+	<td>;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>csv_decimal</td>
+	<td>.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Check that steps cannot be bypassed-->
+<!--...Without file-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1?step=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please upload file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1?step=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please upload file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1?step=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please upload file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1?step=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please upload file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1?step=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please upload file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1?step=6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please upload file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1?step=7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please upload file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/check_separator?min_collum_size=2&amp;sepn=;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please select file</td>
+	<td></td>
+</tr>
+<!--...With file-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/tariff_algeria.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1?step=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1?step=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please select columns</td>
+	<td></td>
+</tr>
+<!--#6817 pataisius, atkomentuoti žemiau esančias eilutes-->
+<!--<tr> 	<td>open</td> 	<td>/billing/tariffs/import_csv2/1?step=4</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Please select columns</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/tariffs/import_csv2/1?step=5</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Please select columns</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/tariffs/import_csv2/1?step=6</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Please select columns</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/tariffs/import_csv2/1?step=7</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Please select columns</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/tariffs/import_csv2/1?step=1</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Please upload file</td> 	<td></td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1?step=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Step: 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Test Tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/pics/big_test_image.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please select CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/empty_file.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please select file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/invalid_numbers.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1?step=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/not_exist.csv</td>
+</tr>
+<!--<tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please upload file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/big.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<!--TARIFF IMPORT rates_unclosed.csv-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>file</td>
+	<td>/home/mor/selenium/files/csv/rates_unclosed.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Security-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/generate_provider_rates_pdf/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/generate_providers_rates_csv/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 </tbody></table>
