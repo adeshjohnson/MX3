@@ -121,8 +121,8 @@ class RinggroupsController < ApplicationController
     @free_dids = Did.free_dids_for_select(@ringgroup.did_id)
     @devices = @ringgroup.devices
     @dialplan = @ringgroup.dialplan
-    @users = User.find(:all)
-    @extlines = Extline.find(:all, :conditions => ['exten = ? AND app IN ("Set", "Dial", "Goto")', @dialplan.data2], :order => "priority ASC")
+    @users = User.all
+    @extlines = Extline.where(['exten = ? AND app IN ("Set", "Dial", "Goto")', @dialplan.data2]).order("priority ASC")
   end
 
   def update

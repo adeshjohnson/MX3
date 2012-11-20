@@ -249,22 +249,22 @@ class Did < ActiveRecord::Base
     end
   end
 
-  def Did.free_dids_for_select(id = nil)
+  def Did.free_dids_for_select(id = 0)
     if User.current.usertype == 'reseller'
       reseller = User.current.id
     else
       reseller = 0
     end
-    find(:all, :select => "id, did", :conditions => "status = 'free' and reseller_id = #{reseller} #{" AND id != #{id} " if id.to_i > 0 }", :order => 'did ASC')
+    select("id, did").where(["status = 'free' and reseller_id = ? AND id != ?", reseller, id]).order('did ASC')
   end
 
-  def Did.forward_dids_for_select(id = nil)
+  def Did.forward_dids_for_select(id = 0)
     if User.current.usertype == 'reseller'
       reseller = User.current.id
     else
       reseller = 0
     end
-    find(:all, :select => "id, did", :conditions => "dialplan_id != 0 and reseller_id = #{reseller} #{" AND id != #{id} " if id.to_i > 0 }", :order => 'did ASC')
+    select("id, did").where(["dialplan_id != 0 and reseller_id = ? AND id != ?", reseller, id]).order('did ASC')
   end
 
 =begin

@@ -687,7 +687,7 @@ class DevicesController < ApplicationController
       @device.insecure = "port" if params[:insecure_port] == "1" and params[:insecure_invite] != "1"
       @device.insecure = "port,invite" if params[:insecure_port] == "1" and params[:insecure_invite] == "1"
       @device.insecure = "invite" if params[:insecure_port] != "1" and params[:insecure_invite] == "1"
-      @device.forward_did_id = params[:forward_did]
+      @device.forward_did_id = Did.select("id").where(["did = ?", params[:forward_did].to_s]).first.id rescue -1
 
       if ccl_active? and params[:device][:device_type] == "SIP" and params[:dynamic_check] == 1
         @device.insecure = 'port,invite'

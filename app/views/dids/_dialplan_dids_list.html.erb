@@ -2,9 +2,13 @@
 <td align="left" id='<%= id %>'
     <% if dids.size.to_i > 0 %>
 >
-<% for did in dids %>
+<% if dids.size > 10 %>
+<%=raw dids.size %> DIDs Total 
+<% else %>
+<% dids.limit(10).map do |did| %>
 <%= link_to did.did, :controller => 'dids', :action => "edit", :id => did.id %>
 <br/>
+<% end %>
 <% end %>
 <% else %>
 class='red' <%= raw tooltip(_('DP_without_DID'), _('DP_without_DID_explanation')).html_safe %> >

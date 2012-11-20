@@ -141,12 +141,43 @@
     <tr>
       <td><%= _('Forward_DID') %>:</td>
       <td>
-        <select name="forward_did" id="forward_did">
-          <option value="-1"><%= _('None') %> </option>
-          <% for d in @all_dids %>
-              <option value=<%= d.id %> <%= "selected" if  d.id == @device.forward_did_id.to_i %>> <%= d.did %> </option>
-          <% end %>
-        </select>
+<% current_forward_did = ( fdid = @device.forward_did_id.to_i and fdid > 0 ? Did.select("did").where(["id = ?", fdid]).first.did.to_s : "" ) rescue "Invalid DID" %>
+      <input title="DID live search" type="text" size="30" id="forward_did" name="forward_did" autocomplete="off" value="<%=raw current_forward_did %>" style="margin-top:0px;" />
+      <table id="did_list" style='z-index:1;margin-left:2px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>
+      </span><br/><br/>
+           <script type='text/javascript'>
+              Event.observe(window, 'load',  function() {
+                Event.observe($('forward_did'), 'click', function(){
+                  if ($('forward_did').value == "") {
+                    $('did_list').innerHTML = "";
+                    <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'empty_click=true'") %>
+                  }
+                    Event.observe($('forward_did'), 'keyup', function(){
+                      $('did_list').innerHTML = "";
+                      <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'filter=forward_dids&did_livesearch='+$('forward_did').value") %>
+                    });
+
+                    Event.observe($('did_list'), 'mouseover', function(){
+                      var el = document.getElementById('did_list').getElementsByTagName('td');
+                      for(var i=0;i<el.length;i++){
+                          el[i].onclick=function(){
+                              if (this.id != -2) {
+                                  document.getElementById('forward_did').value = this.innerHTML
+                                <%= raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='") %>
+                              }
+                          }
+                          el[i].onmouseover=function(){
+                              this.style.backgroundColor="#BBBBBB";
+                          }
+                          el[i].onmouseout=function(){
+                              this.style.backgroundColor="rgb(255, 255, 255)";
+                          }
+                      }
+                    });
+
+                });
+            });
+            </script> 
       </td>
     </tr>
 <% end %>

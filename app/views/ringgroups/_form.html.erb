@@ -60,12 +60,6 @@
       <p class='ringgroup_class' style="margin-top:13px;"><%= _('CallerID_prefix') %>: <%= text_field_tag 'ringgroup[cid_prefix]', @ringgroup.cid_prefix, "class" => "input", :size => "20", :maxlength => "50", :onchange => "Update_extlines();" %></p>
       <br /><br />
       <span class='ringgroup_class' style="margin-top:13px;"><%= _('Route_to_DID_if_No_Answer') %>:
-      <!--  <select name="ringgroup[did_id]" id="ringgroup[did_id]" onchange="Show_did(this.value);Update_extlines();">
-          <option value='0' <%= 'selected' if @ringgroup.did_id.to_i == 0 %> > <%= _('None') %> </option>
-          <% for d in @dids %>
-              <option value='<%= d.id %>' <%= 'selected' if @ringgroup.did_id.to_i == d.id %>> <%= d.did %> </option>
-          <% end %>
-        </select> -->
       </span>
       <span class='ringgroup_class' width=100px style="position:absolute;margin-top:-5px;">
       <%
@@ -87,7 +81,7 @@
 		  }
 		    Event.observe($('ringgroup[did_id]'), 'keyup', function(){
 		      $('did_list').innerHTML = "";
-		      <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'ringgroup=true&did_livesearch='+$('ringgroup[did_id]').value") %>
+		      <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'filter=ringgroup&did_livesearch='+$('ringgroup[did_id]').value") %>
 		    });
 
 		    Event.observe($('did_list'), 'mouseover', function(){

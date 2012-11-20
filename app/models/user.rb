@@ -2804,7 +2804,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     cond << "dids.reseller_id = ?" and var << id if usertype == 'reseller'
     cond << "status = '#{status}' and reseller_id = 0" if !status.blank? and status == 'free'
     cond << "device_id != 0 or dialplan_id != 0" if !status.blank? and status == 'assigned'
-    Did.find(:all, :conditions => [cond.join(" AND ")].concat(var), :order => "dids.did ASC")
+    Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC")
   end
 
   def show_active_calls?

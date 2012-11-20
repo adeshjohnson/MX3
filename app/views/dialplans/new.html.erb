@@ -215,7 +215,7 @@
 			  }
 			    Event.observe($('dialplan[data1]'), 'keyup', function(){
 			      $('did_list').innerHTML = "";
-			      <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'callback=true&did_livesearch='+$('dialplan[data1]').value") %>
+			      <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'filter=callback&did_livesearch='+$('dialplan[data1]').value") %>
 			    });
 
 			    Event.observe($('did_list'), 'mouseover', function(){

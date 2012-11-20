@@ -65,22 +65,30 @@ Called from views location_rules and location_rule_edit, to update DID list from
       cond = ["dids.id > 0"]
       var = []
       cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller'
+      is_reseller = (current_user.usertype == 'reseller' ? " AND dids.reseller_id = " << current_user.id.to_s : false)
       if @did_str.to_s != ""
         cond << "did LIKE ?" and var << @did_str + '%'
       end
-      if params[:ringgroup].to_s == "true"
-        assigned = current_user.dids_for_select('assigned')
-        assigned_matches = assigned.collect {|row| "0" if row[:did].start_with?(@did_str)}.compact.size
-        seek = assigned.each_with_index.map { |d,i| ["<tr><td id='" << d[:id].to_s << "' #{style}>" << d[:did] << "</td></tr>"] if i < 20 and d[:did].start_with?(@did_str)}.compact
-        @total_dids = assigned_matches - 20
-      elsif params[:callback].to_s == "true"
-        sql = 'SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != "callback" AND dids.reseller_id = "' + current_user.id.to_s + '" AND dids.did LIKE "' + @did_str.to_s + '%"'
-        cbsql = Did.find_by_sql(sql)
-        seek = cbsql.each_with_index.map { |d,i| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << " - " << d.dialplan.name << "</td></tr>"] if i < 20 }.compact
-        @total_dids = cbsql.size - 20
+      filter = params[:filter].to_s
+      if filter == "ringgroup"
+        cond << "(device_id != 0 OR dialplan_id != 0)" 
+        @seeker = Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC")
+        seek = @seeker.limit(20).map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << "</td></tr>"] }
+        @total_dids = @seeker.size - 20
+      elsif filter == "callback"
+        cond << 'dialplans.dptype != "callback"'
+        @seeker = Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC").joins('INNER JOIN dialplans ON (dids.dialplan_id = dialplans.id)')
+        seek = @seeker.limit(20).map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << " - " << d.dialplan.name << "</td></tr>"] }
+        @total_dids = @seeker.size - 20
+      elsif filter == "forward_dids"
+        cond << "dialplan_id != 0" 
+        @seeker = Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC")
+        seek = @seeker.limit(20).map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << "</td></tr>"] }
+        @total_dids = @seeker.size - 20
       else
-        seek = Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC").limit(20).map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << "</td></tr>"] }
-        @total_dids = Did.where([cond.join(" AND ")].concat(var)).count - Did.where([cond.join(" AND ")].concat(var)).limit(20).count
+        @seeker = Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC")
+        seek = @seeker.limit(20).map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << "</td></tr>"] }
+        @total_dids = Did.where([cond.join(" AND ")].concat(var)).count - 20
       end
       output << seek
       if @total_dids > 0 

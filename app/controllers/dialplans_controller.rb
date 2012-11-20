@@ -15,9 +15,9 @@ class DialplansController < ApplicationController
     @ccdps = []
     @ccdps = current_user.dialplans.find(:all, :select => 'dialplans.*, ivrs.name AS balance_ivr', :joins => "LEFT JOIN ivrs ON dialplans.data12 = ivrs.id", :conditions => "dptype = 'callingcard'", :order => "name ASC") if cc_active?
 
-    @abpdps = current_user.dialplans.find(:all, :conditions => "dptype = 'authbypin'", :order => "name ASC")
-    @cbdps = current_user.dialplans.find(:all, :conditions => "dptype = 'callback'", :order => "name ASC") if callback_active?
-    @ivr_dialplans = current_user.dialplans.find(:all, :conditions => "dptype = 'ivr'", :order => "name ASC")
+    @abpdps = Dialplan.where(["dptype = 'authbypin' AND user_id = ?", current_user.id]).order("name ASC") #  find(:all, :conditions => "dptype = 'authbypin'", :order => "name ASC")
+    @cbdps = Dialplan.where(["dptype = 'callback' AND user_id = ?", current_user.id]).order("name ASC") if callback_active? #find(:all, :conditions => "dptype = 'callback'", :order => "name ASC") if callback_active?
+    @ivr_dialplans = Dialplan.where(["dptype = 'ivr' AND user_id = ?", current_user.id]).order("name ASC") # find(:all, :conditions => "dptype = 'ivr'", :order => "name ASC")
     @cc_end_ivr = @@CC_End_ivr
     @ani_end_ivr = @@ANI_End_ivr
 
@@ -46,7 +46,8 @@ class DialplansController < ApplicationController
     @page_title = _('Dial_Plan_edit')
     @page_icon = "edit.png"
 
-    @cbdids = Did.find_by_sql("SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != 'callback' AND reseller_id = #{current_user.id}")
+#    @cbdids = Did.find_by_sql("SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != 'callback' AND reseller_id = #{current_user.id}")
+    @cbdids = Did.where(["dialplans.dptype != 'callback' AND reseller_id = ?", current_user.id]).joins("INNER JOIN dialplans ON (dids.dialplan_id = dialplans.id)")
     @cbdevices = Device.find(:all, :conditions => "user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'", :include => [:user], :order => "name ASC")
     @cardgroups = Cardgroup.find_by_sql("SELECT cardgroups.id, cardgroups.number_length, cardgroups.pin_length FROM cardgroups WHERE owner_id = #{current_user.id} group by number_length , pin_length ")
     if @dp.dptype == "ivr"
@@ -241,7 +242,8 @@ class DialplansController < ApplicationController
     @page_icon = "add.png"
     @dp = Dialplan.new({:data2 => 5})
 
-    @cbdids = Did.find_by_sql("SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != 'callback' AND dids.reseller_id = #{current_user.id}")
+#    @cbdids = Did.find_by_sql("SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != 'callback' AND dids.reseller_id = #{current_user.id}")
+    @cbdids = Did.where(["dialplans.dptype != 'callback' AND reseller_id = ?", current_user.id]).joins("INNER JOIN dialplans ON (dids.dialplan_id = dialplans.id)")
     @cardgroups = Cardgroup.find_by_sql("SELECT cardgroups.id, cardgroups.number_length, cardgroups.pin_length FROM cardgroups WHERE owner_id = #{current_user.id} group by number_length , pin_length ")
     @cbdevices = Device.find(:all, :conditions => "user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'", :include => [:user], :order => "name ASC")
     @cc_dialplans = Dialplan.find(:all, :conditions => {:dptype => 'callingcard', :user_id => current_user.get_corrected_owner_id})
