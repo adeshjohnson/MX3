@@ -1018,8 +1018,8 @@ in before filter : user (:find_user)
       @st_arr = []
       @et_arr = []
       for r in res
-        @st_arr << r["start_time"]
-        @et_arr << r["end_time"]
+        @st_arr << r["start_time"].strftime("%H:%M:%S")
+        @et_arr << r["end_time"].strftime("%H:%M:%S")
       end
     else
       @WDFD = false
@@ -1028,8 +1028,8 @@ in before filter : user (:find_user)
       @Wst_arr = []
       @Wet_arr = []
       for r in res
-        @Wst_arr << r["start_time"]
-        @Wet_arr << r["end_time"]
+        @Wst_arr << r["start_time"].strftime("%H:%M:%S")
+        @Wet_arr << r["end_time"].strftime("%H:%M:%S")
       end
 
       sql = "SELECT start_time, end_time FROM acustratedetails WHERE daytype = 'FD' AND customrate_id = #{@custrate.id} GROUP BY start_time ORDER BY start_time ASC"
@@ -1037,8 +1037,8 @@ in before filter : user (:find_user)
       @Fst_arr = []
       @Fet_arr = []
       for r in res
-        @Fst_arr << r["start_time"]
-        @Fet_arr << r["end_time"]
+        @Fst_arr << r["start_time"].strftime("%H:%M:%S")
+        @Fet_arr << r["end_time"].strftime("%H:%M:%S")
       end
     end
   end
