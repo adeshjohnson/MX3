@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://trunk" />
+<link rel="selenium.base" href="" />
 <title>custom_rates</title>
 </head>
 <body>
@@ -232,6 +232,536 @@
 	<td>waitForTextPresent</td>
 	<td>Custom rate deleted</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=img[alt=&quot;Coins&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Coins&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=page_title</td>
+	<td>Custom rates</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User: Test Reseller </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>&lt;/b&gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Custom rate added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=a &gt; img[alt=&quot;Coins&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a &gt; img[alt=&quot;Coins&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=page_title</td>
+	<td>Custom rate details</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>&lt;/b&gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Afghanistan FIX </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_hour</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_minute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_minute</td>
+	<td>59</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_second</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_second</td>
+	<td>59</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=img[alt=&quot;View&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_hour</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_minute</td>
+	<td>label=43</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_second</td>
+	<td>label=43</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rate details updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>15:43:43</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_hour</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_minute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_minute</td>
+	<td>59</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_second</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_second</td>
+	<td>59</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;View&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=page_title</td>
+	<td>Custom rate details</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User: Test Reseller </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Afghanistan FIX </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>&lt;/b&gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=infinity</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=duration</td>
+	<td>∞</td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=duration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=infinity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=artype</td>
+	<td>minute event</td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>name=artype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=round</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertEditable</td>
+	<td>id=price</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=infinity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=artype</td>
+	<td>label=event</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=round</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>5.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Custom rate updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=infinity</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=artype</td>
+	<td>event</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=price</td>
+	<td>5.0</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=round</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=artype</td>
+	<td>label=minute</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=round</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=duration</td>
+	<td>160</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Custom rate updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=round</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=artype</td>
+	<td>minute</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=duration</td>
+	<td>160</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_acustrates/2?dt=&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>&lt;/b&gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Afghanistan FIX </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=round</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=artype</td>
+	<td>minute</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=duration</td>
+	<td>160</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_acustrates_full/3?dg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>&lt;/b&gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Split to Work Days and Free Days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rate details split</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>&lt;/b&gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Afghanistan FIX </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_hour</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_minute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_minute</td>
+	<td>59</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_second</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_second</td>
+	<td>59</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=img[alt=&quot;View&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>15:43:43</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//select[@id='date_hour'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//select[@id='date_minute'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//select[@id='date_second'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//input[@type='image'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>xpath=(//select[@id='date_hour'])[2]</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>xpath=(//select[@id='date_minute'])[2]</td>
+	<td>59</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>xpath=(//select[@id='date_second'])[2]</td>
+	<td>59</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>xpath=(//select[@id='date_second'])[2]</td>
+	<td>label=43</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>xpath=(//select[@id='date_minute'])[2]</td>
+	<td>label=43</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@type='image'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rate details updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.1.1</td>
+	<td>15:43:43</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table[4].2.1</td>
+	<td>23:43:43</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'Combine to Work Days and Free Days')])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rate details combined</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_hour</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_minute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_minute</td>
+	<td>59</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=date_second</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_second</td>
+	<td>59</td>
 </tr>
 </tbody></table>
 </body>
