@@ -1546,9 +1546,10 @@ class User < ActiveRecord::Base
       if options[:direction] == "incoming"
         if options[:usertype] == "admin"
           select2 << SqlExport.replace_price("#{n1}user_price3#{n2}", {:reference => 'user_price3'})
-          select2 << SqlExport.replace_price("#{n1}provider_price3#{n2}", {:reference => 'provider_price3'})
+          # select2 << SqlExport.replace_price("#{n1}provider_price3#{n2}", {:reference => 'provider_price3'})
           select2 << SqlExport.replace_price("#{n1}did_price3#{n2}", {:reference => 'did_price3'})
-          select2 << SqlExport.replace_price("#{n1}(user_price3+provider_price3+did_price3)#{n2}", {:reference => 'profit'})
+          # select2 << SqlExport.replace_price("#{n1}(user_price3+provider_price3+did_price3)#{n2}", {:reference => 'profit'})
+          select2 << SqlExport.replace_price("#{n1}(user_price3+did_price3)#{n2}", {:reference => 'profit'})
           select << "#{n1}calls.did_prov_price#{c1}#{n2} as 'user_price3'"
           # select << "#{n1}calls.did_inc_price#{c1}#{n2} as 'provider_price3'"
           select << "#{n1}calls.did_price#{c1}#{n2} as 'did_price3'"

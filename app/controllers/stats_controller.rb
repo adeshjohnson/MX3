@@ -2229,7 +2229,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     end
     @s_total_profit = @total_profit
     if session[:usertype] != "reseller"
-      @s_total_profit += @did_owner_cost
+      @s_total_profit += @did_owner_cost.to_d
     end
     @s_total_profit += @sub_price
   end
