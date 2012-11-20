@@ -1435,13 +1435,13 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>37063042439 - new_dialplan37060011221 - new_dialplan</td>
+	<td>37060011221 - new_dialplan37063042439 - new_dialplan</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTable</td>
 	<td>id=did_list.0.0</td>
-	<td>37063042439 - new_dialplan</td>
+	<td>37060011221 - new_dialplan</td>
 </tr>
 <tr>
 	<td>focus</td>
@@ -1575,8 +1575,8 @@
 </tr>
 <tr>
 	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>15000</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0 </td>
+	<td>35000</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1590,12 +1590,12 @@
 </tr>
 <tr>
 	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>25000</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0 </td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>37063042439 - new_dialplan37060011221 - new_dialplan</td>
+	<td>37060011221 - new_dialplan37063042439 - new_dialplan</td>
 	<td></td>
 </tr>
 <tr>
@@ -1969,24 +1969,9 @@
 	<td>37060011230 - cc_dp</td>
 </tr>
 <tr>
-	<td>focus</td>
-	<td>id=dialplan[data1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=dialplan[data1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=dialplan[data1]</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>id=dialplan[data1]</td>
-	<td></td>
+	<td>370</td>
 </tr>
 <tr>
 	<td>focus</td>
@@ -1997,6 +1982,11 @@
 	<td>type</td>
 	<td>id=dialplan[data1]</td>
 	<td>370</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0 </td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2135,7 +2125,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>37060011221370600112233706001122437060011225370600112263706001123037060011231370600112323706001123337060011234370600112383706001123937060011240370600112423706001124337060011245370600112463706001124937060011250Found 5 more</td>
+	<td>3706001122137060011223370600112243706001122537060011226370600112303706001123137060011232370600112333706001123437060011238370600112393706001124037060011242370600112433706001124537060011246370600112493706001125037060011251Found 5 more</td>
 	<td></td>
 </tr>
 <tr>
@@ -2280,7 +2270,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>37060011221370600112233706001122437060011225370600112263706001123037060011231370600112323706001123337060011234370600112383706001123937060011240370600112423706001124337060011245370600112463706001124937060011250Found 5 more</td>
+	<td>3706001122137060011223370600112243706001122537060011226370600112303706001123137060011232370600112333706001123437060011238370600112393706001124037060011242370600112433706001124537060011246370600112493706001125037060011251Found 5 more</td>
 	<td></td>
 </tr>
 <tr>
@@ -2308,6 +2298,7 @@
 	<td>id=did_6</td>
 	<td>37063042439</td>
 </tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/dids/bulk_management</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=did_start</td> 	<td>00000000001</td> </tr> <tr> 	<td>type</td> 	<td>id=did_end</td> 	<td>37093042422</td> </tr> <tr> 	<td>click</td> 	<td>id=did_action_6</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>select</td> 	<td>name=dp_id</td> 	<td>label=cc_dp</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>id=callinc_cards_dp</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Dial Plan assigned to DIDs interval</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/dialplans/dialplans</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=cc_dp_dids_142</td> 	<td>10000 DIDs Total</td> </tr> <tr> 	<td>assertText</td> 	<td>id=i_dp_dids_152</td> 	<td>95998 DIDs Total</td> </tr>-->
 </tbody></table>
 </body>
 </html>
