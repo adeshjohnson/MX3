@@ -88,7 +88,7 @@ Called from views location_rules and location_rule_edit, to update DID list from
       else
         @seeker = Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC")
         seek = @seeker.limit(20).map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << "</td></tr>"] }
-        @total_dids = Did.where([cond.join(" AND ")].concat(var)).count - 20
+        @total_dids = @seeker.size - 20
       end
       output << seek
       if @total_dids > 0 
