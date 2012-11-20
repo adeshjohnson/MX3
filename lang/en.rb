@@ -4512,7 +4512,7 @@ Localization.define('en') do |l|
   l.store 'Did_owner_cost', 'DID Owner Cost'
   l.store 'Enter_value_here', 'Enter value here'
   l.store 'No_value_found', 'No value found'
-  #  l.store '', ''
+  l.store 'Did_owner_profit', 'Did Owner Profit'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
