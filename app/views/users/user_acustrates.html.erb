@@ -1,4 +1,4 @@
-<b><%= b_user + _('User') + ":</b> " + @user.first_name + " " + @user.last_name %>
+<b><%= b_user + _('User') %>:</b> <%= @user.first_name + " " + @user.last_name %>
   <br><br>
   <b><%= _('Destination') %>:</b> <%= draw_flag_by_code @dgroup.flag %> <%= @dgroup.name %> <%= @dgroup.desttype %>
   <br><br>

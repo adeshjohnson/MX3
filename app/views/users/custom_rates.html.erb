@@ -1,4 +1,4 @@
-<b><%= b_user + _('User') + ":</b> " + @user.first_name + " " + @user.last_name %>
+<b><%= b_user + _('User') %>:</b> <%= @user.first_name + " " + @user.last_name %>
   <br>
   <b><%= b_view + _('Tariff') %>
     :</b> <%= link_to @tariff.name, :controller => "tariffs", :action => "user_rates_list", :id => @tariff.id %>
