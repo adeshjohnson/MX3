@@ -62,7 +62,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--......Import ALL rates-->
+<!--......Import rates-->
 <tr>
 	<td>open</td>
 	<td>/billing/tariffs/import_csv2/1</td>
@@ -83,16 +83,15 @@
 	<td>File uploaded</td>
 	<td></td>
 </tr>
-<!--Kai įkelta all su tam tikra dienos dalimi, įkėlinėjant vėl tai pačiai dienos daliai ir nuo ir iki laikai vienodi(v1:m1:s1 = v2:m2:s2), gaunamas pranešimas kad įvyksta kolizija. nei refreš, nei pakartotinis select nepadeda.-->
 <tr>
 	<td>select</td>
 	<td>rate_day_type</td>
 	<td>label=All</td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -100,29 +99,9 @@
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_hour</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_hour</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -130,29 +109,9 @@
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_minute</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_minute</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -160,39 +119,9 @@
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_second</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_second</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_second</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -200,44 +129,9 @@
 	<td>label=22</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_hour</td>
-	<td>label=22</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_hour</td>
-	<td>label=22</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_hour</td>
-	<td>22</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -245,44 +139,9 @@
 	<td>label=22</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=22</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=22</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_minute</td>
-	<td>22</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -290,24 +149,9 @@
 	<td>label=42</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_second</td>
-	<td>label=42</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_second</td>
-	<td>42</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -335,39 +179,9 @@
 	<td>label=&quot;Min Time&quot;</td>
 </tr>
 <tr>
-	<td>fireEvent</td>
-	<td>rate_day_type</td>
-	<td>blur</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_hour</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_minute</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_second</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_hour</td>
-	<td>22</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_minute</td>
-	<td>22</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_second</td>
-	<td>42</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -449,7 +263,7 @@
 	<td>connection_fee_503</td>
 	<td>0.0700</td>
 </tr>
-<!--......Update ALL rates-->
+<!--......Update rates-->
 <tr>
 	<td>open</td>
 	<td>/billing/tariffs/import_csv2/1</td>
@@ -535,7 +349,7 @@
 	<td>Time collision</td>
 	<td></td>
 </tr>
-<!--......Update ALL rates-->
+<!--......Update rates-->
 <tr>
 	<td>open</td>
 	<td>/billing/tariffs/import_csv2/1</td>
@@ -597,39 +411,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>id=time_from_hour</td>
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_hour</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_hour</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -637,29 +426,9 @@
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_minute</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_minute</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -667,29 +436,9 @@
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_second</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_second</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -697,29 +446,9 @@
 	<td>label=22</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_hour</td>
-	<td>label=22</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_hour</td>
-	<td>22</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -727,29 +456,9 @@
 	<td>label=22</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=22</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_minute</td>
-	<td>22</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -757,59 +466,9 @@
 	<td>label=42</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_second</td>
-	<td>label=42</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_second</td>
-	<td>42</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>rate_day_type</td>
-	<td>blur</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_hour</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_minute</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_second</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_hour</td>
-	<td>22</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_minute</td>
-	<td>22</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_second</td>
-	<td>42</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>waitForTextNotPresent</td>
@@ -949,39 +608,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>id=time_from_hour</td>
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_hour</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_hour</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -989,29 +623,9 @@
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_minute</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_minute</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1019,29 +633,9 @@
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_second</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_second</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1049,29 +643,9 @@
 	<td>label=14</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_hour</td>
-	<td>label=14</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_hour</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1079,34 +653,9 @@
 	<td>label=14</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=14</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_minute</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=time_till_second</td>
-	<td></td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1114,24 +663,9 @@
 	<td>label=14</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_second</td>
-	<td>label=14</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_second</td>
-	<td>14</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1159,39 +693,9 @@
 	<td>label=&quot;Min Time&quot;</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_hour</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_minute</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_second</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_hour</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_minute</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_second</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>rate_day_type</td>
-	<td>blur</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1396,39 +900,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>id=time_from_hour</td>
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_hour</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_hour</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1436,29 +915,9 @@
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_minute</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_minute</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1466,29 +925,9 @@
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_second</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_second</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1496,29 +935,9 @@
 	<td>label=14</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_hour</td>
-	<td>label=14</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_hour</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1526,29 +945,9 @@
 	<td>label=14</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=14</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_minute</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1556,59 +955,9 @@
 	<td>label=14</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_second</td>
-	<td>label=14</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_second</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_hour</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_minute</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_second</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_hour</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_minute</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_second</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>rate_day_type</td>
-	<td>blur</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>waitForTextNotPresent</td>
@@ -1681,8 +1030,6 @@
 	<td>File uploaded</td>
 	<td></td>
 </tr>
-<!--Kažkas su ajax, tik įėjus į tariff import antrą stepą rodo kad yra kolizija(nors jos neturėtų būti). Atrodo jau buvo pataisyta, bet vėl iškilo ši klaida-->
-<!--tik refreshinus suveikia-->
 <tr>
 	<td>select</td>
 	<td>id=rate_day_type</td>
@@ -1753,7 +1100,6 @@
 	<td>rate_day_type</td>
 	<td>label=Work Days</td>
 </tr>
-<!--Kažkas su ajax, tik įėjus į tariff import antrą stepą rodo kad yra kolizija(nors jos neturėtų būti). Atrodo jau buvo pataisyta, bet vėl iškilo ši klaida-->
 <tr>
 	<td>waitForTextNotPresent</td>
 	<td>Please select period without collisions</td>
@@ -1877,39 +1223,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>id=time_from_hour</td>
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_hour</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_hour</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1917,29 +1238,9 @@
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_minute</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_minute</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1947,29 +1248,9 @@
 	<td>label=01</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_second</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_second</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1977,29 +1258,9 @@
 	<td>label=14</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_hour</td>
-	<td>label=14</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_hour</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2007,29 +1268,9 @@
 	<td>label=14</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=14</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_minute</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2037,24 +1278,9 @@
 	<td>label=14</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_second</td>
-	<td>label=14</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_second</td>
-	<td>14</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2087,39 +1313,9 @@
 	<td>label=&quot;Min Time&quot;</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_hour</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_minute</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_second</td>
-	<td>01</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_hour</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_minute</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_second</td>
-	<td>14</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>rate_day_type</td>
-	<td>blur</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>waitForTextNotPresent</td>
@@ -2182,39 +1378,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>id=time_from_hour</td>
 	<td>label=00</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_hour</td>
-	<td>label=00</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_hour</td>
-	<td>00</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2222,29 +1393,9 @@
 	<td>label=00</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_minute</td>
-	<td>label=00</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_minute</td>
-	<td>00</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2252,29 +1403,9 @@
 	<td>label=00</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_from_second</td>
-	<td>label=00</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_from_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_from_second</td>
-	<td>00</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2282,29 +1413,9 @@
 	<td>label=23</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_hour</td>
-	<td>label=23</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_hour</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_hour</td>
-	<td>23</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2312,29 +1423,9 @@
 	<td>label=59</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_minute</td>
-	<td>label=59</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_minute</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_minute</td>
-	<td>59</td>
-</tr>
-<tr>
-	<td>keyDown</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2342,24 +1433,9 @@
 	<td>label=59</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=time_till_second</td>
-	<td>label=59</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>id=time_till_second</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>waitForSelectedLabel</td>
-	<td>id=time_till_second</td>
-	<td>59</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2392,39 +1468,9 @@
 	<td>label=&quot;Min Time&quot;</td>
 </tr>
 <tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_hour</td>
-	<td>00</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_minute</td>
-	<td>00</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_from_second</td>
-	<td>00</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_hour</td>
-	<td>23</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_minute</td>
-	<td>59</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=time_till_second</td>
-	<td>59</td>
-</tr>
-<tr>
-	<td>fireEvent</td>
-	<td>rate_day_type</td>
-	<td>blur</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>waitForTextNotPresent</td>
