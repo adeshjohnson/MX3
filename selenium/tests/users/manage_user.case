@@ -793,192 +793,7 @@
 <!--#=======Setting accountant permissions================-->
 <tr>
 	<td>open</td>
-	<td>/billing/permissions/list?group_type=accountant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>!!!!</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@type='image']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/permissions/list?group_type=accountant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Edit']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>callingcard_pin_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>callingcard_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_edit_opt_1_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_edit_opt_2_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_edit_opt_3_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_edit_opt_4_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_pin_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_password_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>voicemail_password_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_create_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>manage_dids_opt_1_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>manage_subscriptions_opt_1_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>tariff_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_1_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_2_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_3_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_4_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_5_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_6_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_7_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>see_financial_data_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>see_financial_data_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>invoices_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>payments_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>services_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>vouchers_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Group was updated</td>
+	<td>/billing/test/load_delta_sql/users/users_tests_data</td>
 	<td></td>
 </tr>
 <!--#creating accountant-->
@@ -1039,6 +854,11 @@
 	<td></td>
 </tr>
 <!--#deleting accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>delete_link_7</td>
@@ -1176,15 +996,10 @@
 <!--#waitForPageToLoad-->
 <tr>
 	<td>open</td>
-	<td>/billing/users/list</td>
+	<td>/billing/users/new</td>
 	<td></td>
 </tr>
 <!--creating user as accountant-->
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Add new</td>
-	<td></td>
-</tr>
 <tr>
 	<td>type</td>
 	<td>user_username</td>
@@ -1596,7 +1411,7 @@
 <!--Login as reseller-->
 <!--Changing user settings as reseller-->
 <tr>
-	<td>open</td>
+	<td>clickAndWait</td>
 	<td>/billing/users/edit/13</td>
 	<td></td>
 </tr>
@@ -2495,7 +2310,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>check</td>
 	<td>warning_email_active</td>
 	<td></td>
 </tr>

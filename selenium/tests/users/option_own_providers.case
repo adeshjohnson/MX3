@@ -48,93 +48,18 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/permissions/list?group_type=accountant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>test_g</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@type='image']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Group was created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Edit']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_7_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_6_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_5_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_4_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_3_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_2_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_1_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
+	<td>/billing/test/load_delta_sql/users/users_tests_data</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
 	<td>/billing/users/edit/4</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=accountant_type_select</td>
+	<td>label=Accountant_permissions</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -148,52 +73,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>user_username</td>
-	<td>test_re</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password_password</td>
-	<td>test_re1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>user_usertype</td>
-	<td>label=reseller</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertVisible</td>
-	<td>own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>User successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/edit/6</td>
+	<td>/billing/users/edit/18</td>
 	<td></td>
 </tr>
 <tr>
@@ -273,47 +153,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>user_username</td>
-	<td>test_res</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password_password</td>
-	<td>test_res1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>user_usertype</td>
-	<td>label=reseller</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>User successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/edit/7</td>
+	<td>/billing/users/edit/19</td>
 	<td></td>
 </tr>
 <tr>
