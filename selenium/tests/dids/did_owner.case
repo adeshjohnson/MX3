@@ -624,7 +624,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td><br />Invoices generated: 1 </td>
+	<td>Invoices generated: 1 </td>
 	<td></td>
 </tr>
 <tr>
@@ -824,7 +824,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>DID Owner Cost</td>
+	<td>DID Owner Profit</td>
 	<td></td>
 </tr>
 <tr>
@@ -867,8 +867,11 @@
 	<td>id=did_owner_cost</td>
 	<td>5.9600</td>
 </tr>
-<!--<tr> 	<td>open</td> 	<td>/billing/callc/logout</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>login_username</td> 	<td>reseller</td> </tr> <tr> 	<td>type</td> 	<td>login_psw</td> 	<td>reseller1</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Successfully logged in</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/stats/profit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Don't be so smart</td> 	<td></td> </tr>-->
-<!--<tr> 	<td>open</td> 	<td>/billing/callc/logout</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>login_username</td> 	<td>admin</td> </tr> <tr> 	<td>type</td> 	<td>login_psw</td> 	<td>admin1</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Successfully logged in</td> 	<td></td> </tr>-->
+<tr>
+	<td>assertText</td>
+	<td>id=number_total_profit</td>
+	<td>6.4000</td>
+</tr>
 <!--admin:Nepasirinkus userio mato skambučius su user_price ir did owner_price-->
 <tr>
 	<td>open</td>
@@ -924,6 +927,36 @@
 	<td>assertText</td>
 	<td>id=total_did_price</td>
 	<td>5.9600</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_profit</td>
+	<td>4.2567</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_profit</td>
+	<td>1.8100</td>
 </tr>
 <!--useris: src useris mato Price=user_price-->
 <tr>
@@ -1112,6 +1145,21 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/profit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=page_title</td>
+	<td>Profit</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>DID Owner Profit</td>
 	<td></td>
 </tr>
 <!--user_reseller src user-->
