@@ -192,11 +192,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_9 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>id=show_zero_rates_in_LCR_tariff_export</td>
 	<td>off</td>
@@ -495,6 +490,26 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>name=select_reseller</td>
+	<td>label=Test Wholesale RSPRO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_provider</td>
+	<td>label=Provider common use IAX2/0.0.0.0:4569</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_tariff</td>
+	<td>label=Wholesale - Wholesale_admin_tariff</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=div.nb &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/tariffs/edit/13</td>
 	<td></td>
@@ -612,6 +627,61 @@
 <tr>
 	<td>select</td>
 	<td>name=select_prov</td>
+	<td>label=Provider common use</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=name_4</td>
+	<td>Provider common use</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/make_tariff/3?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_max&quot;=&gt;&quot;0,1230000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0,0615000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_max&quot;=&gt;&quot;0,4900000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0,4900000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_max&quot;=&gt;&quot;0,3330000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0,1060000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
 	<td>label=WRSPRO_provider - SIP/0.0.0.0</td>
 </tr>
 <tr>
@@ -637,6 +707,36 @@
 <tr>
 	<td>open</td>
 	<td>/billing/lcrs/make_tariff/3?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_max&quot;=&gt;&quot;0,1230000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0,0615000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_max&quot;=&gt;&quot;0,4900000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0,4900000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_max&quot;=&gt;&quot;0,3330000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0,1060000000&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -778,6 +878,191 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>rate_max&quot;=&gt;&quot;0,1230000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_max&quot;=&gt;&quot;0,1230000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0,0615000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_max&quot;=&gt;&quot;0,4900000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0,4900000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_max&quot;=&gt;&quot;0,3330000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0,1060000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/12?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_5</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_9</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_6</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_11338</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/13?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_5</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_9</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_6</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_11338</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_11</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_10</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=show_zero_rates_in_LCR_tariff_export</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=show_zero_rates_in_LCR_tariff_export</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/make_tariff/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;0,0000000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;0,0000000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;0,4900000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;0,4900000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;0,1665000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;0,2120000000&quot;</td>
 	<td></td>
 </tr>
 </tbody></table>
