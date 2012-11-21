@@ -54,7 +54,7 @@
               <td align="center"><%= price %></td>
               <td align="center"><%= roundby %></td>
           <% else %>
-              <td colspan="2" align="center"><%= _('Check_advanced_rates') + b_forward %></td>
+              <td colspan="2" align="center"><%=raw _('Check_advanced_rates') + b_forward %></td>
           <% end %>
           <td align="center"><%= link_to b_rates, :action => 'user_acustrates_full', :id => @user.id, :dg => dg.id %> </td>
           <td align="center"><%= link_to b_cross, :action => 'user_delete_custom_rate', :id => cr.id %> </td>
