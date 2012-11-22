@@ -216,7 +216,7 @@ class CallcController < ApplicationController
 
     flash[:notice] = _('logged_off')
     if Confline.get_value("Logout_link", owner_id).to_s.blank?
-      if owner
+      if owner.get_hash()
         redirect_to :action => "login", :id => owner.get_hash()
       else
         redirect_to :action => "login"
