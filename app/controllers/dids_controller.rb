@@ -308,6 +308,7 @@ class DidsController < ApplicationController
     @choice_terminated = false
 
     qf_rule_collisions = @did.find_qf_rules.to_i > 0  ? true : false
+    @belongs_to_qf_rule = @did.find_qf_rules.to_i > 0 ? true : false
 
     #DialPlan variables (DID's for dialplan)
     @choice_free_dp = false

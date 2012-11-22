@@ -295,6 +295,21 @@
     <% end %>
 <% end %>
 
+<% if @belongs_to_qf_rule %>
+  <table class="maintable" width="50%">
+    <tr>
+      <th align="left">    <%= _('DID_matches_quickforward_rule') %>    </th>
+    </tr>
+    <tr class="row1">
+      <td>
+           <br /><%= b_exclamation %><%= _('Collisions_with_Quickforwards_Rules') %>. <br /><br />
+           <br /><%= link_to b_forward + _('Quickforwards_Rules'), :controller => :quickforwards_rules, :action => :list %>. <br /><br /> 
+      </td>
+    </tr>
+  </table>
+  <br />
+<% end %>
+
 <% if @choice_free_dp %>
 
     <table class="maintable" width="50%">
