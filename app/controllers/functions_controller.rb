@@ -3153,7 +3153,7 @@ Sets default tax values for users or cardgroups
 
   def pbx_function_configure_extline(dialplan)
     pbx_function_delete_extline(dialplan)
-    Extline.mcreate("mor_local", 1, "Set", "MOR_DP_ID=\"#{dialplan.id}\"", dialplan.data2, 0)
+    Extline.mcreate("mor_local", 1, "Set", "MOR_DP_ID=#{dialplan.id}", dialplan.data2, 0)
     Extline.mcreate("mor_local", 2, "Goto", dialplan.pbxfunction.context.to_s + "|" + dialplan.pbxfunction.extension.to_s + "|" + dialplan.pbxfunction.priority.to_s, dialplan.data2, 0)
   end
 
