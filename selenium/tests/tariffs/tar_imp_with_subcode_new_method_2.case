@@ -497,6 +497,16 @@
 	<td>7</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>id=subcode_511</td>
+	<td>1DHFDH</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=subcode_508</td>
+	<td>1234</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>destroy_img_503</td>
 	<td></td>
@@ -565,6 +575,291 @@
 	<td>assertTextPresent</td>
 	<td>35544</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/list/225</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[36]/td[2]</td>
+	<td>DGD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[42]/td[2]</td>
+	<td>DFG</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[49]/td[2]</td>
+	<td>USA</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[36]/td[4]</td>
+	<td>Not assigned</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[42]/td[4]</td>
+	<td>Not assigned</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[49]/td[4]</td>
+	<td>Not assigned</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/edit/20052?page=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=destination_subcode_FIX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/edit/20054?page=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=destination_subcode_MOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/edit/20053?page=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=destination_subcode_NGN</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/list/225</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[36]/td[2]</td>
+	<td>FIX</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[42]/td[2]</td>
+	<td>NGN</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[49]/td[2]</td>
+	<td>MOB</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[36]/td[4]</td>
+	<td>Not assigned</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[42]/td[4]</td>
+	<td>Not assigned</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[49]/td[4]</td>
+	<td>Not assigned</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/edit/20052?page=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=destination_destinationgroup_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=option[value=&quot;448&quot;]</td>
+	<td>United States FIX</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=destination_destinationgroup_id</td>
+	<td>label=United States FIX</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=destination_subcode_MOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/edit/20054?page=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=destination_destinationgroup_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=option[value=&quot;449&quot;]</td>
+	<td>United States NGN</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=destination_destinationgroup_id</td>
+	<td>label=United States NGN</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=destination_subcode_FIX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/edit/20053?page=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=destination_destinationgroup_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=option[value=&quot;448&quot;]</td>
+	<td>United States FIX</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=destination_destinationgroup_id</td>
+	<td>label=United States FIX</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=destination_subcode_MOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/list/225</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[36]/td[2]</td>
+	<td>MOB</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[36]/td[4]</td>
+	<td>United States FIX</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[42]/td[2]</td>
+	<td>MOB</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[42]/td[4]</td>
+	<td>United States FIX</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[49]/td[2]</td>
+	<td>FIX</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[49]/td[4]</td>
+	<td>United States NGN</td>
 </tr>
 <!--DO NOT SELECT DESTINATION-->
 <tr>
