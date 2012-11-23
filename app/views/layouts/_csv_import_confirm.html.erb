@@ -67,6 +67,11 @@
     <br/>
     <br/>
 
+    <% if (sep1.to_s == "\\") or (dec1.to_s == "\\") %>
+      <span>
+        <%= link_to b_back + _('Back'), :action => 'import_csv2', :id => params[:id], :step => "0" %>
+      </span>
+    <% end %>
     <span id="sep_results">
     <%= submit_tag(_('Continue_file_import')+" >>", :disable_with => _('Processing..')) if !disable_next %>
       <br/>
@@ -87,3 +92,15 @@
     </table>
   </span>
 <% end %>
+
+<script type='text/javascript'>
+    Event.observe(window, 'load',  function() {
+        <% if (sep1.to_s == "\\") or (dec1.to_s == "\\") %>
+            $('use_suggestion_1').disabled = true;
+            $('use_suggestion_2').disabled = true;
+            $('sepn2').disabled = true;
+            $('decn2').disabled = true;
+            $('sep_results').hidden = true;
+        <% end %>
+    })
+</script>

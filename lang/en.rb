@@ -4514,7 +4514,7 @@ Localization.define('en') do |l|
   l.store 'No_value_found', 'No value found'
   l.store 'Did_owner_profit', 'DID Owner Profit'
   l.store 'DID_matches_quickforward_rule', 'DID matches Quickforward rule'
-  #  l.store '', ''
+  l.store 'Backslash_cannot_be_separator', 'Backslash cannot be separator'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
