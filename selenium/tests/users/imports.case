@@ -1246,113 +1246,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>assertNotEditable</td>
 	<td>id=use_suggestion_1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Not enough columns - select correct Column Separator</td>
+	<td>assertTextPresent</td>
+	<td>Backslash cannot be separator</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=use_suggestion_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
+	<td>assertNotEditable</td>
 	<td>use_suggestion_2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>assertNotEditable</td>
 	<td>sepn2</td>
-	<td>\</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=sepn2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=sepn2</td>
-	<td>;</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>File uploaded</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>prefix_id</td>
-	<td>label=&quot;Prefix&quot;</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>rate_id</td>
-	<td>label=&quot;Rate&quot;</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>connection_fee_id</td>
-	<td>label=&quot;Connection fee&quot;</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>min_time_id</td>
-	<td>label=&quot;Min Time&quot;</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>increment_id</td>
-	<td>label=&quot;Increment&quot;</td>
-</tr>
-<tr>
-	<td>keyUp</td>
-	<td>increment_id</td>
-	<td>w</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Columns assigned</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//input[@name='commit' and @value='Confirm columns']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Analysis completed</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Created destinations</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/import_csv/5</td>
+	<td>link=Back</td>
 	<td></td>
 </tr>
 <tr>
