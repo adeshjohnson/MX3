@@ -62,7 +62,9 @@ INSERT INTO `providers` (`id`, `name`, `tech`, `channel`, `login`, `password`, `
 /*created by admin, dahdi, provider_common_use_1*/
 (16, 'dahdi_provider', 'dahdi', '', 'dahdi_provider', 'please_change', '0.0.0.0', '4569', 1, 1, 1, 0, 0, '', '', 22, 0, 60, 0, 0, 0, 0, '', 0, '', 0, 0, 0, 1, 0.000000000000000),
 /*created by admin, h323, provider_common_use_1*/
-(17, 'commonusepro_h323', 'H323', '', 'commonusepro_h323', 'please_change', '0.0.0.0', '1720', 1, 1, 1, 0, 0, '', '', 23, 0, 60, 0, 0, 0, 0, '', 0, '', 0, 0, 0, 1, 0.000000000000000);
+(17, 'commonusepro_h323', 'H323', '', 'commonusepro_h323', 'please_change', '0.0.0.0', '1720', 1, 1, 1, 0, 0, '', '', 23, 0, 60, 0, 0, 0, 0, '', 0, '', 0, 0, 0, 1, 0.000000000000000),
+/*has no tariff, used for provider_no_tariff test*/
+(18,'no_tariff_provider', 'IAX2', '', 'test123', 'test123', '22.33.44.55 ', '4569', 1, 1, 0, 0, 0, NULL, NULL, 1, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, 0, 0.000000000000000);
 
 INSERT INTO `tariffs` (`id`, `name`, `purpose`, `owner_id`, `currency`) VALUES
 /*created by reseller, tariff_purpose_provider*/
@@ -75,6 +77,9 @@ INSERT INTO `tariffs` (`id`, `name`, `purpose`, `owner_id`, `currency`) VALUES
 (10, 'provider-tariff', 'provider', 0, 'USD');
 
 INSERT INTO `lcrs` (`id`, `name`, `order`, `user_id`, `first_provider_percent_limit`, `failover_provider_id`, `no_failover`) VALUES
-(2, 'newLCR', 'price', 6, 0.000000000000000, NULL, 0);
-
+/*created by reseller2*/
+(2, 'newLCR', 'price', 6, 0.000000000000000, NULL, 0),
+(3, 'testlcr', 'price', 0, 0.000000000000000, NULL, 0),
+(4, 'lcras', 'price', 3, 0.000000000000000, NULL, 0);
+/**/
 
