@@ -524,6 +524,7 @@ class UsersController < ApplicationController
     @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
     @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
 
+    @create_own_providers = Confline.get_value('Create_own_providers', @user.id).to_i
     @chanspy_disabled = Confline.chanspy_disabled?
     @devices = @user.devices(:conditions => "device_type != 'FAX'")
     
@@ -540,6 +541,10 @@ class UsersController < ApplicationController
       @user.webphone_allow_use = params[:user][:webphone_allow_use].to_i
     end
 
+    if @user.own_providers = 1
+      params[:own_providers] = 1
+    end
+
     notice, par = @user.validate_from_update(current_user, params, @allow_edit)
     if !notice.blank?
       flash[:notice] = notice
@@ -553,6 +558,12 @@ class UsersController < ApplicationController
     if @user.save
       if @user.usertype == "reseller"
         @user.check_default_user_conflines
+
+        if params[:own_providers].to_i == 1 and params[:create_own_providers].to_i == 1
+          Confline.set_value('Disallow_to_create_own_providers', 1, @user.id)
+        elsif Confline.get_value('Disallow_to_create_own_providers', @user.id)
+          Confline.set_value('Disallow_to_create_own_providers', 0, @user.id)
+        end
       end
       # @user.address.update_attributes(params[:address])
       @user.address.save

@@ -4515,7 +4515,7 @@ Localization.define('en') do |l|
   l.store 'Did_owner_profit', 'DID Owner Profit'
   l.store 'DID_matches_quickforward_rule', 'DID matches Quickforward rule'
   l.store 'Backslash_cannot_be_separator', 'Backslash cannot be separator'
-  #  l.store '', ''
+  l.store 'Disallow_to_create_own_providers', 'Disallow to create own providers'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

@@ -107,7 +107,7 @@ class VouchersController < ApplicationController
     if params[:csv] and params[:csv].to_i > 0
       sep = Confline.get_value("CSV_Separator", 0).to_s
       dec = Confline.get_value("CSV_Decimal", 0).to_s
-
+      @vouchers = Voucher.find(:all, :include => [:tax, :user], :conditions => [cond.join(" AND ")]+var, :order => "use_date DESC, active_till ASC")
       csv_string = _("Active")+sep+_("Number")+sep+_("Tag")+sep+_("Credit")+sep + _("Credit_with_VAT")+sep + _("Currency")+sep + _("Use_date")+sep + _("Active_till")+sep + _("User")
       csv_string += "\n"
       for v in @vouchers

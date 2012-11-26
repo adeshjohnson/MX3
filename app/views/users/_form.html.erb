@@ -339,6 +339,10 @@
       <td><%= _('Allow_to_have_own_providers') %>:</td>
       <td><%= check_box_tag 'own_providers', "1", (@user.own_providers == 1) %></td>
     </tr>
+    <tr id="reseller_create_providers">
+      <td><%= _('Disallow_to_create_own_providers') %>:</td>
+      <td><%= check_box_tag 'create_own_providers', "1", (@create_own_providers == 1) %></td>
+    </tr>
 <% end %>
 <% if monitoring_enabled_for(current_user) %>
     <tr id="global_monitorings">
@@ -429,6 +433,27 @@
     //<![CDATA[
     Event.observe(window, 'load', function () {
         var wsw = $('warning_active');
+        var have_own_prov = $('own_providers')
+        var create_own_prov_checkbox = $('create_own_providers')
+        var create_own_prov = $('reseller_create_providers')
+
+        if (!have_own_prov.checked) {
+            create_own_prov.hidden = true;
+            create_own_prov_checkbox.disabled = true;
+        } else {
+            have_own_prov.disabled = true;
+        }
+
+        Event.observe(have_own_prov, 'click', function () {
+            if (have_own_prov.checked) {
+                create_own_prov.hidden = false;
+                create_own_prov_checkbox.disabled = false;
+            } else {
+                create_own_prov.hidden = true;
+                create_own_prov_checkbox.disabled = true;
+
+            }
+        });
 
         if (!wsw.checked) {
             $$("#warning select, #warning input").each(function (el) {

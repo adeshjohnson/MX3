@@ -1,9 +1,11 @@
 <table width="100%">
   <tr>
-    <% if @options[:s_hidden].to_i == 0 %>
-        <td nowrap><%= link_to((b_add + _('New_provider')), :action => 'new') %></td>
-        <td nowrap>
-          <% link_to((b_add + _('New_H323_Provider')), :action => 'provider_new') %></td>
+    <% if current_user.usertype != 'reseller' or (current_user.usertype == 'reseller' and Confline.get_value('Create_own_providers', current_user.id).to_i) == 1 %>
+      <% if @options[:s_hidden].to_i == 0 %>
+          <td nowrap><%= link_to((b_add + _('New_provider')), :action => 'new') %></td>
+          <td nowrap>
+            <% link_to((b_add + _('New_H323_Provider')), :action => 'provider_new') %></td>
+      <% end %>
     <% end %>
     <td align="right" width="100%">
       <% if not @providers.empty? %>

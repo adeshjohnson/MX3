@@ -132,6 +132,12 @@ class ProvidersController < ApplicationController
   def new
     @page_title = _('New_provider')
     @page_icon = "add.png"
+
+    if current_user.usertype == 'reseller' and Confline.get_value('Create_own_providers', current_user.id).to_i != 1
+      dont_be_so_smart
+      redirect_to :action => :list and return false
+    end
+
     @provider = Provider.new
     @provider.tech = "SIP"
     @providertypes = Providertype.find(:all)
@@ -159,6 +165,11 @@ class ProvidersController < ApplicationController
 
   def create
     params[:provider][:name]=params[:provider][:name].strip
+
+    if current_user.usertype == 'reseller' and Confline.get_value('Create_own_providers', current_user.id).to_i != 1
+      dont_be_so_smart
+      redirect_to :action => :list and return false
+    end
 
     @provider = Provider.new(params[:provider])
     @provider.user_id = session[:user_id]
